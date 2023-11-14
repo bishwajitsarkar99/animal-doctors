@@ -1,0 +1,512 @@
+@import "sales-page-focus-css/silver.css";
+.sales-tab{
+    font-size: 70.5%;
+}
+th.sales_head{
+    background-image: var(--theme-dashboard-sales-page-navbar-bacground-image);
+}
+.sales-bg-color{
+    background-image: var(--theme-dashboard-sales-page-navbar-bacground-image);
+    border: 1px solid silver;
+    opacity: 1;
+}
+h5.ord_summ {
+    font-family: 'Faster One';
+    color: darkblue;
+}
+.tablinksales{
+    border: none;
+    font-size: small;
+    font-weight: 600;
+    font-family: Work Sans, sans-serif;
+    font-size: 11px;
+    color: darkblue;
+    letter-spacing: 0.7px;
+}
+th.txt {
+    color: darkblue;
+    letter-spacing: 0.5px;
+}
+.tablinksales:hover{
+    color: white;
+    background-image: radial-gradient(farthest-corner at 100px 100px, darkblue,darkblue);
+}
+.sales-seeblue {
+    background-image: radial-gradient(farthest-corner at 100px 100px, darkblue,darkblue);
+    border: none;
+    font-size: small;
+    font-weight: 600;
+    font-family: Work Sans, sans-serif;
+    font-size: 11px;
+    color: white;
+    letter-spacing: 0.5px;
+}
+.sales-seeblue:hover{
+    color: white;
+    background-image: radial-gradient(farthest-corner at 100px 100px, darkblue,darkblue);
+}
+#start_sales_date{
+    cursor: pointer;
+}
+#end_sales_date{
+    cursor: pointer;
+}
+#start_details_date{
+    cursor: pointer;
+}
+#end_details_date{
+    cursor: pointer;
+}
+th.tot_ord_heading {
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    font-size: 13px;
+    text-align: center;
+    font-weight: 700;
+}
+th.tb_heading {
+    border-top: double;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    font-variant: all-petite-caps;
+    color: darkblue;
+    animation: table_title 5s infinite;
+}
+label.select_labelTwo {
+    color: darkblue;
+    letter-spacing: 0.3px;
+}
+span.sym {
+    font-family: -webkit-body;
+}
+table.ord_table, th, td {
+    border-bottom: 1px solid silver;
+    font-size: 12px;
+}
+table.ord_table,td,th {
+    background-image: radial-gradient(farthest-corner at 100px 100px, #ffff, #fff);
+    /* box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001; */
+    opacity: 1;
+    border: 1px solid silver;
+    animation: sales_bg_focus 6s linear infinite;
+}
+tr.tb_heading {
+    color: darkblue;
+}
+th.total_ord_amunt_ {
+    color: darkblue;
+    border-left: 1px solid silver;
+    letter-spacing: 0.5px;
+    font-size: 11px;
+}
+td.ord_sutotal_qty {
+    color: darkblue;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+    border-left: 1px solid silver;
+    animation: font_color 6s linear infinite;
+}
+@keyframes font_color{
+    70%{
+        color: lightblue;
+    }
+    50%{
+        color: blue;
+    }
+    100%{
+        color: darkblue;
+    }
+}
+td.ord_subtotal {
+    color: darkblue;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+    border-left: 1px solid silver;
+    animation: font_color 5s linear infinite;
+    letter-spacing: 0.2px;
+}
+th.od {
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    letter-spacing: 0.5px;
+}
+th.catg {
+    border-left: 1px solid silver;
+    letter-spacing: 0.5px;
+}
+td.tb_body {
+    border-left: 1px solid silver;
+    font-size: 12px;
+}
+tr:hover{
+    color: orangered;
+}
+tr.tb_heading{
+    color: darkblue;
+}
+th.txt:hover{
+    color: darkblue;
+}
+th.total_ord_amunt {
+    border-left: 1px solid silver;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+td.ordcatg_subtotal {
+    border-left: 1px solid silver;
+    text-align: center;
+    font-weight: 600;
+    color: darkblue;
+    font-size: 12px;
+    animation: font_color 6s linear infinite;
+}
+td.recv_color{
+    color: #00b300;
+    font-weight: 700;
+}
+
+td.recevable{
+    font-weight: 600;  
+}
+.card.ord_card {
+    border: none;
+}
+.card-body.order_chart_bg_ {
+    background-color: white;
+    opacity: 1;
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    border: none;
+    height: 329px;
+}
+.order-chart-focus {
+    color: white;
+    box-shadow: none;
+    border-left: 2px solid #0dcaf0;
+    border-bottom: none;
+    border-top: none;
+    border-right: none;
+    transition: 0.5s;
+    border: 0.5px solid lightgray;
+    transition: 0.5s;
+    animation: sales_bg_focus 6s linear infinite;
+    height: 160px;
+    border: none;
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+}
+@keyframes sales_bg_focus{
+    1%{
+        background-image: var(--theme-dashboard-sales-page-background-image3);
+    }
+    100%{
+        background-image: var(--theme-dashboard-sales-page-background-image2);
+    }
+    100%{
+        background-color: var(--theme-dashboard-sales-page-background-color);
+    }
+}
+
+.fig_title {
+    font-size: 12px;
+    font-weight: 600;
+    color: darkblue;
+    text-align: right;
+}
+/* .card-body.sales_details{
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+} */
+.card-body.order_chart_bg {
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    height: 158px;
+    animation: sales_bg_focus 6s linear infinite;
+}
+.sales-chart-focus {
+    color: white;
+    box-shadow: none;
+    border-left: 2px solid #0dcaf0;
+    border-bottom: none;
+    border-top: none;
+    border-right: none;
+    transition: 0.5s;
+    border: 0.5px solid lightgray;
+    transition: 0.5s;
+    animation: sales_bg_focus 6s linear infinite;
+    height: 150px;
+    border: none;
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+}
+select.select_month {
+    cursor: pointer;
+    background-image: radial-gradient(farthest-corner at 100px 100px, lightgray, ghostwhite);
+    outline: none;
+    border: 1px solid silver;
+    animation: drop_font_focus 5s linear infinite;
+    font-weight: 700;
+}
+@keyframes drop_font_focus{
+    50%{
+        color: darkcyan;
+    }
+    80%{
+        color: orangered;
+    }
+    100%{
+        color: darkblue;
+    }
+}
+span.tol_ord {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+th.th_order {
+    text-align: center;
+    border-left: 1px solid silver;
+    border-top: 1px solid silver;
+    color: darkblue;
+    letter-spacing: 0.5px;
+}
+th.tot_ord_head {
+    text-align: center;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    color: darkblue;
+    letter-spacing: 0.5px;
+}
+th.tot_pending_head_ {
+    text-align: center;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    color: darkblue;
+    letter-spacing: 0.5px;
+}
+th.tot_complete_head_ {
+    text-align: center;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    color: darkblue;
+    letter-spacing: 0.5px;
+}
+th.tot_reject_head_ {
+    text-align: center;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    color: darkblue;
+    letter-spacing: 0.5px;
+}
+th.tot_accuracy_head_ {
+    text-align: center;
+    border-top: 1px solid silver;
+    border-right: 1px solid silver;
+    color: darkblue;
+    letter-spacing: 0.5px;
+}
+th.tot_order_ {
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    color: darkblue;
+    letter-spacing: 0.5px;
+}
+th.tot_pending_ {
+    border-right: 1px solid silver;
+    color: darkblue;
+    letter-spacing: 0.5px;
+}
+th.tot_complete_ {
+    border-left: 1px solid silver;
+    color: darkblue;
+    letter-spacing: 0.5px;
+}
+th.tot_reject_ {
+    border-left: 1px solid silver;
+    color: darkblue;
+    letter-spacing: 0.5px;
+}
+td.txt_ {
+    letter-spacing: 0.5px;
+}
+th.sal_tot {
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+th.tot_od {
+    border-left: 1px solid silver;
+    text-align: center;
+    border-right: 1px solid silver;
+    color: darkblue;
+    letter-spacing: 0.5px;
+}
+th.tot_comp {
+    text-align: center;
+    border-right: 1px solid silver;
+    color: darkblue;
+    letter-spacing: 0.5px;
+}
+td.tot_order_ {
+    border-left: 1px solid silver;
+}
+td.tot_pending_ {
+    border-left: 1px solid silver;
+}
+td.tot_complete_ {
+    border-left: 1px solid silver;
+}
+td.tot_reject_ {
+    border-left: 1px solid silver;
+}
+td.tot_od {
+    text-align: center;
+    font-weight: 600;
+    border-left: 1px solid silver;
+    color: darkblue;
+    animation: font_color 6s linear infinite;
+}
+td.tot_comp {
+    text-align: center;
+    font-weight: 600;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    color: darkblue;
+    animation: font_color 6s linear infinite;
+}
+th.sn.border_ord {
+    border-left: 1px solid silver;
+    color: darkblue;
+}
+
+td.sn {
+    text-align: center;
+    border-left: 1px solid silver;
+}
+td.txt {
+    color: darkblue;
+}
+th.amu.mob_font {
+    letter-spacing: 0.5px;
+}
+input.select_date {
+    background-image: var(--theme-dashboard-sales-page-navbar-bacground-image);
+    outline: none;
+    border: 1px solid silver;
+    font-size: 11px;
+    font-weight: 600;
+    animation: font_color 6s linear infinite;
+}
+label.select_label {
+    font-size: 11px;
+    color: darkblue;
+    letter-spacing: 0.3px;
+}
+input.select_dateOne {
+    background-image: radial-gradient(farthest-corner at 100px 100px, lightgray, ghostwhite);
+    outline: none;
+    border: 1px solid silver;
+    animation: font_color 6s linear infinite;
+}
+.search-sales-hidden{
+    display: none;
+}
+.search-sales2-hidden{
+    display: none;
+}
+/* ================== Mobile Responsive ================= */
+@media (min-width: 300px) and (max-width: 480px){
+    th.mob_font {
+        font-size: 9px;
+        text-align: left;
+    }
+    input.select_date {
+        width: 100px;
+    }
+    td.mob_font2 {
+        font-size: 8px;
+        text-align: left;
+    }
+    td.mob_font3 {
+        font-size: 7px;
+        text-align: center;
+    }
+    .card-body.order_chart_bg_ {
+        background-color: white;
+        opacity: 1;
+        box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+        border: none;
+        height: 200px;
+    }
+    .order-chart-focus {
+        color: white;
+        box-shadow: none;
+        border-left: 2px solid #0dcaf0;
+        border-bottom: none;
+        border-top: none;
+        border-right: none;
+        transition: 0.5s;
+        border: 0.5px solid lightgray;
+        transition: 0.5s;
+        animation: sales_bg_focus 6s linear infinite;
+        height: 130px;
+        border: none;
+        box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    }
+    .span.tol_ord  {
+        font-size: 8px;
+        font-weight: 600;
+        color: darkblue;
+        text-align: right;
+    }
+    table.ord_table, th, td {
+        border-bottom: 1px solid darkgray;
+        font-size: 10px;
+    }
+    h5.ord_summ {
+        font-family: 'Faster One';
+        color: darkblue;
+        font-size: 12px;
+    }
+    th.tb_heading{
+        font-size: 12px;
+    }
+    th.total_ord_amunt_ {
+        font-size: 12px;
+        color: darkblue;
+    }
+    td.tb_body {
+        border-left: 1px solid gray;
+        font-size: 8px;
+    }
+    label.select_label{
+        font-size: 10px;
+    }
+    footer.footer_silver{
+        display: none;
+    }
+    .select_labelOne{
+        font-size: 9px;
+    }
+    .select_labelTwo{
+        font-size: 16px;
+    }
+    input.select_dateOne {
+        width: 100px;
+    }
+    td.ord_subtotal.Two{
+        font-size: 5px;
+        text-align: center;
+    }
+    .border_qty.Two{
+        font-size: 6px;
+        text-align: center;
+    }
+    td.tot_od{
+        font-size: 8px;
+    }
+    td.txt_{
+        color: black;
+    }
+    
+}

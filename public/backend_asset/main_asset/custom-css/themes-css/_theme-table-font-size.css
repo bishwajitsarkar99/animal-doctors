@@ -1,0 +1,96 @@
+
+select#loginTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#userTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#contractTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#supplierTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#productTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer; 
+}
+select#categoryTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#subCategoryTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#modelTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#brandTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#productSizeTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#inventoryTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#damageStockTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#bankingTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#paymentTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#empensesTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#invoiceTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#daybookTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#settingTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#empTableFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}

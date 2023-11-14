@@ -1,0 +1,22 @@
+:root{
+    --dashboard-result-background-image:radial-gradient(farthest-corner at 100px 100px, darkorange, lightyellow);
+    --dashboard-result-hover-background-image:radial-gradient(farthest-corner at 100px 100px, darkorange, lightyellow);
+    --dashboard-result-color:darkorange;
+    --dashboard-result-text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    --dashboard-result-font-family: Archivo Black;
+    --dashboard-result-animation: input_text 2s ease-in-out infinite;
+    --dashboard-result-hover-color:lightcyan;
+    --dashboard-result-box-shadow:none;
+    --dashboard-result-border:none;
+    --dashboard-result-transition:0.5s;
+    --dashboard-result-transform:scale(1.2);
+    --dashboard-result-number-color:darkorange;
+    --dashboard-result-animation-border-color-0:darkorange;
+    --dashboard-result-animation-border-color-50:rgb(255, 185, 56);
+    --dashboard-result-animation-border-color-100:rgb(181, 181, 181);
+    --dashboard-result-number-box-backgrooun-image:radial-gradient(farthest-corner at 100px 100px, orange, lightyellow);
+
+    /* =============== Loader-part ====================== */
+
+
+}

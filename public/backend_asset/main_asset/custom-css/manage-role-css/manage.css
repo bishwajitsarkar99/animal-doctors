@@ -1,0 +1,310 @@
+@import "dropdown-apperence/_apperence-bg.css";
+:root{
+    --font-family-heading:'futura';
+    --bs-nav-tabs-form-link-active-color:darkcyan;
+    --bs-nav-tabs-link-active-bg:#fff;
+    --bs-nav-tabs-link-active-border-color:#dee2e6 #dee2e6 #fff;
+    --nav-tab-link-active-font-weight:500;
+    --background-color:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --role-btn-background-color:linear-gradient(to right, darkcyan,transparent, #08A05F 100%);
+
+}
+/**
+* Tab Setting Form
+*/
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: var(--bs-nav-tabs-form-link-active-color);
+    background-color: var(--bs-nav-tabs-link-active-bg);
+    border-color: var(--bs-nav-tabs-link-active-border-color);
+    font-weight: var( --nav-tab-link-active-font-weight);
+}
+
+div.mange_background{
+    opacity: 1;
+    border: none;
+}
+input#searchInput{
+    outline: none;
+    border-top: 1px solid #f1eeee;
+    border-bottom: 1px solid #f1eeee;
+    border-left: 1px solid #f1eeee;
+    border-right: 1px solid #f1eeee;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 500;
+    color: darkcyan;
+}
+.card-body.manage_role_page {
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+}
+select#select_input {
+    font-weight: 700;
+    outline: none;
+    box-shadow: none;
+    color: black;
+    cursor: pointer;
+    height: 27px;
+    font-size: 12px;
+    line-height: 0.8;
+    border-top: 1px solid #f1eeee;
+    border-bottom: 1px solid #f1eeee;
+    border-left: 1px solid #f1eeee;
+    border-right: 1px solid #f1eeee;
+    opacity: 1;
+    background-image: var(--background-color);
+    letter-spacing: 0.8px;
+}
+@keyframes font_color{
+    50%{
+        color: white;
+    }
+    100%{
+        background-image: linear-gradient(120deg, darkcyan, #08a05c 100%);
+    }
+}
+/* select#select_input:hover{
+    background-color: #f3f3f3f3;
+} */
+option{
+    cursor: pointer;
+}
+label.input_label {
+    color: black;
+    font-size: 12px;
+    font-weight: 800;
+    font-family: math;
+    letter-spacing: 0.8px;
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 14%);
+}
+h2.manage_head {
+    color: darkgray;
+    font-weight: 500;
+    opacity: 1;
+    font-family: var(--font-family-heading);
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
+    animation: fon_color 3s infinite;
+    font-size: 22px;
+    text-transform: uppercase;
+}
+@keyframes fon_color{
+    50%{
+        color: #4dbb96;
+    }
+    100%{
+        color: gray;
+    }
+}
+input.manage_button {
+    background-color: #ddd;
+    color: darkcyan;
+    margin-top: 1px;
+    font-weight: 600;
+    height: 25px;
+    line-height: 1;
+    border-color: #f1eeee;
+    outline: none;
+}
+@keyframes tex_color{
+    5%{
+        color: whitesmoke;
+    }
+    50%{
+        color: #f1f1f1;
+    }
+    100%{
+        color: honeydew;
+    }
+}
+input.manage_button:hover{
+    background-color: #f1f1f1;
+    color: darkblue;
+    margin-top: 1px;
+    font-weight: 600;
+    height: 25px;
+    line-height: 1;
+    border-color: bisque;
+}
+label.role_success_message{
+    animation: text 3s 1;
+}
+@keyframes text{
+    0%{
+        color: darkcyan;
+    }
+    30%{
+        letter-spacing: 15px;
+    }
+    85%{
+        letter-spacing: 10px;
+    }
+}
+img.user_img {
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 20px #0001;
+    transition: transform .5s;
+}
+img.user_img:hover{
+    transform: scale(0.5);
+} 
+th.us_td{
+    border-right: 1px solid lightblue;
+}
+td.us_td{
+    border-right: 1px solid lightblue;
+}
+
+.page-link.active, .datatable-pagination a.active, .active > .page-link, .datatable-pagination .active > a {
+    z-index: 3;
+    color: darkcyan;
+    background-color: #575757;
+    border: none;  
+}
+span.page-link {
+    color: white;
+}
+div.pagination{
+    margin-top: 5px;
+    float: right;
+    box-shadow: none;
+}
+a.page-link{
+    box-shadow: none;
+}
+ul.pagination a{
+    box-shadow: none;
+}
+ul.pagination a:hover{
+    background-color:#575757;
+    color: white;
+}
+input#input1 {
+    outline: none;
+    border-top: 1px solid #f1eeee;
+    border-bottom: 1px solid #f1eeee;
+    border-left: 1px solid #f1eeee;
+    border-right: 1px solid #f1eeee;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 500;
+    color: darkcyan;
+    animation: font_color2 3s infinite;
+}
+@keyframes font_color2{
+    50%{
+        color: white;
+    }
+    100%{
+        background-image: linear-gradient(to right, darkcyan, #08A05F 100%);
+    }
+}
+.updated-hidden{
+    display: none;
+}
+button#manage_btn {
+    line-height: 0.5px;
+    font-size: 0.9vw;
+    font-weight: 600;
+    color: white;
+    margin-top: 0.5px;
+    background-image: var(--role-btn-background-color);
+    animation: font_color2 10s infinite;
+    letter-spacing: 0.8px;
+}
+button#manage_btn:hover{
+    background-color: #ddd;
+}
+.role_success_message{
+    color: darkcyan;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    animation: text 3s 1;
+}
+@keyframes text{
+    0%{
+        color: darkcyan;
+    }
+    30%{
+        letter-spacing: 15px;
+    }
+    85%{
+        letter-spacing: 10px;
+    }
+}
+button#manage_button {
+    background-color: #f1f1f1;
+    line-height: 0.5px;
+    font-weight: 600;
+    color: darkcyan;
+    border-color: bisque;
+}
+button#manage_button:hover{
+    background-color: #ddd;
+}
+.light2-focus{
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    border: none;
+    outline: none;
+    animation: color2_focus 1s infinite;
+}
+@keyframes color2_focus{
+    0%{
+        background-color: #f1f1f1;
+    }
+    50%{
+        background-color: azure;
+    }
+    100%{
+        background-color: lightblue;
+    }
+}
+.custom-select{
+    position: relative;
+}
+.custom-role-arrow{
+    display: block;
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 2rem;
+    height: 100%;
+    background-image: var(--apperence-bg);
+    pointer-events: none;
+    border-radius: 3px;
+    opacity: 1;
+}
+.custom-role-arrow::before,.custom-role-arrow::after{
+    --size:0.5em;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%,-50%);
+}
+.custom-role-arrow::before{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-bottom: var(--size) solid rgb(255, 255, 255, 0.5);
+    top: 30%;
+}
+.custom-role-arrow::after{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid rgb(255, 255, 255, 0.5);
+    top: 70%;
+}
+
+select:hover option{
+    background-color: rgb(233, 233, 233);
+    color: purple;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+}
+

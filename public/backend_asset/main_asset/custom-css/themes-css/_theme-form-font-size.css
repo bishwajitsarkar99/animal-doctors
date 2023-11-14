@@ -1,0 +1,96 @@
+
+select#loginFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#userFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#contractFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#supplierFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#productFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer; 
+}
+select#categoryFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#subCategoryFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#modelFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#brandFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#productSizeFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#inventoryFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#damageStockFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#bankingFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#paymentFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#empensesFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#invoiceFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#daybookFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#settingFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#empFormFontSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}

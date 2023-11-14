@@ -1,0 +1,116 @@
+@import "_theme-table-dropdown-space.css";
+
+select#loginTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-equal-8px);
+}
+select#userTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-plus-8px);
+}
+select#contractTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-plus-one-6px);
+}
+select#supplierTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-plus-6px);
+}
+select#productTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-minus-7px);
+    
+}
+select#categoryTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-6px);
+}
+select#subCategoryTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-4px);
+}
+select#modelTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-3px);
+}
+select#brandTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-8px);
+}
+select#productSizeTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-plus-4px);
+}
+select#inventroyTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-plus-5px);
+}
+select#damageStockTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-plus-3px);
+}
+select#banktransactionTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#paymentTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-plus-6px);
+}
+select#expensesTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-2px);
+}
+select#invoiceTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-7px);
+}
+select#dayBookTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-plus-5px);
+}
+select#settingTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-plus-7px);
+}
+select#employeeTableSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-table-dropdown-space-5px);
+}

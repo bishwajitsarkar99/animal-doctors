@@ -1,0 +1,175 @@
+@import "_variables";
+@import "_mixin-supplier";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+.supplier{
+    font-size: 75.5%;
+}
+
+.supplier-seeblue{
+    outline: none;
+    border: none;
+    font-size: map-get($map: $nav-font-size, $key: "desktop");
+    font-weight: $nav-font-wieght;
+}
+.tablinksupplier{
+    outline: none;
+    border: none;
+    font-size: map-get($map: $nav-font-size, $key: "desktop");
+    font-weight: $nav-font-wieght;
+}
+.supp_summ{
+    font-family: $supplier-summary-head-font-family;
+}
+
+table{
+    @include table;
+}
+table.summary_table{
+    background-image: $supplier-summary-table-bg-imge;
+    color: $supplier-summary-table-color;
+    border-top: double;
+    @include table_shadow;
+}
+span.tol_ord {
+    color: $supplier-summary-table-color;
+    font-weight: 600;
+}
+td.tb_body.sn_num{
+    @include table_row;
+    font-size: map-get($map: $nav-font-size, $key: "desktop");
+}
+th.tb_body.sn_num{
+    @include table_row;
+    font-size: map-get($map: $nav-font-size, $key: "desktop");
+}
+th.tb_heading {
+    text-align: left;
+}
+.card.ord_card {
+    border: none;
+}
+.card-body.order_pie_chart_bg{
+    @include card_shadow;
+}
+.supplier_chart_bg{
+    @include chart_shadow;
+}
+select.select_month {
+    cursor: pointer;
+    outline: none;
+    border: 1px solid silver;
+    background-image: radial-gradient(farthest-corner at 100px 100px, $supplier-date-month-bg-image-color-1, $supplier-date-month-bg-image-color-2);
+    animation: drop_font_focus 5s linear infinite;
+}
+
+@keyframes drop_font_focus{
+    50%{
+        color: $supplier-date-month-animation-color-1;
+    }
+    80%{
+        color: $supplier-date-month-animation-color-2;
+    }
+    100%{
+        color: $supplier-date-month-animation-color-3;
+    }
+}
+
+input.select_dateOne{
+    cursor: pointer;
+    outline: none;
+    border: 1px solid silver;
+    background-image: radial-gradient(farthest-corner at 100px 100px, $supplier-date-month-bg-image-color-1, $supplier-date-month-bg-image-color-2);
+    animation: drop_font_focus 5s linear infinite;
+}
+
+table.supplier_table,th,td {
+    background-image: $supplier-summary-table-bg-imge;
+    @include supplier_table;
+    th.sn.border_ord {
+        text-align: center;
+        border: 1px solid silver;
+        letter-spacing: 0.5px;
+        color: $nav-font-color;
+    }
+    th.txt{
+        text-align: left;
+        border: 1px solid silver;
+        letter-spacing: 0.5px;
+        color: $nav-font-color;
+    }
+    th.txt_accuracy{
+        text-align: center;
+        border: 1px solid silver;
+        letter-spacing: 0.5px;
+        color: $nav-font-color;
+    }
+    tr.table-body{
+        border: 1px solid silver;
+        letter-spacing: 0.2px;
+
+        td.table_td{
+            border: 1px solid silver;
+        }
+
+        &:hover{
+            color: $font-hover-color;
+        }
+    }
+    th.total_amunt{
+        color: $nav-font-color;
+        border: 1px solid silver;
+    }
+    td.total_amunt{
+        color: $nav-font-color;
+        border: 1px solid silver;
+        text-align: right;
+        font-weight: 600;
+    }
+    td.tot_supplier_payment{
+        color: $nav-font-color;
+        border: 1px solid silver;
+        text-align: center;
+        font-weight: 600;
+    }
+
+}
+
+@media (max-width:480px) and (min-width:300px){
+    .dropdown-content{
+        font-size: map-get($map: $nav-font-size, $key: "mobile");
+    }
+    .supp_summ{
+        font-size: map-get($map: $nav-font-size, $key: "desktop");
+    }
+    .supplier-seeblue{
+        font-size: map-get($map: $nav-font-size, $key: "mobile");
+    }
+    .tablinksupplier{
+        font-size: map-get($map: $nav-font-size, $key: "mobile");
+    }
+    td.tb_body.sn_num{
+        font-size: map-get($map: $nav-font-size, $key: "mobile");
+    }
+    th.tb_body.sn_num{
+        font-size: map-get($map: $nav-font-size, $key: "mobile");
+    }
+    span.tol_ord{
+        font-size: map-get($map: $nav-font-size, $key: "mobile");
+    }
+    table.supplier_table,th,td{
+        font-size: map-get($map: $nav-font-size, $key: "mobile");
+        td.total_amunt{
+            font-size: 7px;
+        }
+    }
+    footer#admin_footer{
+        display: none;
+    }
+
+    
+}
+

@@ -1,0 +1,4 @@
+:root{
+    --button-hover:linear-gradient(to bottom, lightblue, transparent,lightblue,lightblue);
+    --row-hover-border:1px solid purple;
+}

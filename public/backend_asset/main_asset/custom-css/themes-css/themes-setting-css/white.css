@@ -1,0 +1,23 @@
+:root{
+    --theme-setting-background-image:radial-gradient(farthest-corner at 100px 100px,#fff,#fff);
+    --font-size-setting-modal:12px;
+    --font-family-setting-modal:math;
+    --height-setting-modal:100%;
+    --theme-color-settng-modal:aliceblue;
+    --theme-height-setting-modal-header:2.2em;
+    --theme-box-shadow-setting-modal:0px 2px 20px #0001, 0px 1px 6px #0001; 
+    --theme-setting-box-background:#838383;
+    --theme-setting-box-border-color:#838383;
+    --theme-setting-loader-border: 6px solid #f3f3f;
+    --theme-setting-loader-top-border:6px solid #3498db;
+    --theme-setting-loader-buttom-border:6px solid darkgreen;
+    --theme-labe-color:black;
+    --theme-setting-select-menu-background-hover:radial-gradient(farthest-corner at 100px 100px, #f3f3f3,#c5c3c3);
+    --theme-setting-select-menu-background-hover2:radial-gradient(farthest-corner at 100px 100px,lightgray, #fff);
+    --theme-setting-sidebar-background-image:radial-gradient(farthest-corner at 100px 100px, #ffffff,#c5c3c3);
+    --theme-setting-sidebar-background-image2:radial-gradient(farthest-corner at 100px 100px, #ffffff,#c5c3c3);
+    --theme-setting-sidebar-color:#fff;
+
+
+
+}

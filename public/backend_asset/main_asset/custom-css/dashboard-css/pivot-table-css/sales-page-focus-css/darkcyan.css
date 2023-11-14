@@ -1,0 +1,8 @@
+:root{
+    /* ========= dark color bg focus in pivot table ================== */
+    --theme-dashboard-sales-page-background-image:radial-gradient(farthest-corner at 100px 100px, darkcyan, lightcyan);
+    --theme-dashboard-sales-page-background-image2:radial-gradient(farthest-corner at 100px 100px, lightcyan,darkcyan);
+    --theme-dashboard-sales-page-background-image3:radial-gradient(farthest-corner at 100px 100px, #f0f0f0,darkcyan);
+    --theme-dashboard-sales-page-font-color:#fff;
+    --theme-dashboard-sales-page-background-color:darkcyan;
+}

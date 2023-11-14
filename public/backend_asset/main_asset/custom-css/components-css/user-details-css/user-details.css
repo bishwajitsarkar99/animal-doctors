@@ -1,0 +1,178 @@
+:root{
+    --background-color:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+}
+table,tr,th,td{
+    opacity: 1;
+}
+th.th-bg {
+    background-image: var(--background-color);
+}
+input.user-search{
+    line-height: 1.9;
+}
+span.history {
+    text-transform: uppercase;
+}
+input#exampleDataList {
+    float: right;
+    margin-right: 50px;
+    margin-top: 7px;
+    outline: none;
+    border-left: 1px solid bisque;
+    border-right: 1px solid bisque;
+    border-top: 1px solid bisque;
+    border-bottom: 1px solid bisque;
+}
+span.comon-class {
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+/* form.user-form{
+    text-align: center;
+} */
+h5.form_head {
+    color: black;
+    font-weight: 600;
+    font-family: inherit;
+}
+p.data_field {
+    color: black;
+}
+img.user_image {
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 20px #0001;
+    opacity: 1;
+    transition: transform .5s;
+}
+img.user_image:hover{
+    transform: scale(0.5);
+}
+thead.th_head {
+    border: 1px solid silver;
+}
+th.th_head {
+    border: 1px solid silver;
+}
+td.th_head {
+    border: 1px solid silver;
+}
+th.table_th_color {
+    color: black;
+}
+.page-item:not(:first-child) .page-link, .page-item:not(:first-child) .datatable-pagination a, .datatable-pagination .page-item:not(:first-child) a, .datatable-pagination li:not(:first-child) .page-link, .datatable-pagination li:not(:first-child) a {
+    margin-left: -1px;
+    box-shadow: none;
+}
+.page-item:first-child .page-link, .page-item:first-child .datatable-pagination a, .datatable-pagination .page-item:first-child a, .datatable-pagination li:first-child .page-link, .datatable-pagination li:first-child a {
+    box-shadow: none;
+}
+button#btnFormSearch {
+    --bs-success-rgb:#ddd;
+    --bs-bg-opacity:1;
+    --cyan:silver;
+    --orange-fontawesome:orange;
+    --darkorange:darkorange;
+    background-color: var(--bs-success-rgb);
+    opacity: var(--bs-bg-opacity);
+    height: 1.8em;
+    box-shadow: none;
+    border: none;
+    animation: _focus 5s infinite;
+}
+@keyframes _focus{
+    10% {
+        color: var(--darkorange);
+    }
+    100% {
+        color: var(--orange-fontawesome);
+        background-color: #ddd;
+    }
+}
+button#btnFormSearch:hover{
+    background-color: #f1f1f1;
+}
+button#btnRefresh {
+    --bs-success-rgb:#ddd;
+    --bs-bg-opacity:1;
+    --cyan:silver;
+    --orange-fontawesome:darkcyan;
+    --darkorange:#ddd;
+    background-color: var(--bs-success-rgb);
+    opacity: var(--bs-bg-opacity);
+    height: 1.8em;
+    box-shadow: none;
+    border: none;
+    color: darkcyan;
+    margin-top: -0.1px;
+    line-height: 0.5px;
+    /* animation: _focus 5s infinite; */
+}
+@keyframes _focus{
+    10% {
+        color: var(--darkorange);
+    }
+    100% {
+        color: var(--orange-fontawesome);
+        background-color: #ddd;
+    }
+}
+button#btnRefresh:hover{
+    background-color: #f1f1f1;
+}
+.hidden{
+    display: none;
+}
+.search-hidden{
+    display: none;
+}
+tr.history{
+    font-size: 14px;
+}
+tr.histroy:hover{
+    color: black;
+}
+form.search_form{
+    background-color: #ddd;
+    /* box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001; */
+    box-shadow: none;
+}
+input#date_field {
+    outline: none;
+    /* box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001; */
+    box-shadow: none;
+    border-color: bisque;
+}
+div.heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+    font-family: 'inherit';
+}
+span.total_result {
+    color: black;
+    font-weight: 600;
+}
+div.page {
+    border-radius: 5px;
+}
+table, th, td.ord_table.center {
+    opacity: 1;
+    border-collapse: collapse;
+}
+span.user_record{
+    background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    font-weight: 600;
+    color: black;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
+    opacity: 1;
+    border: 1px solid silver;
+}
+button.btn.btn-sm.btn-success.cgt_btn.btn_focus {
+    line-height: 1.2;
+}
+
+

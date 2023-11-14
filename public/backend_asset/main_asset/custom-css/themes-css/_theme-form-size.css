@@ -1,0 +1,96 @@
+select#loginFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#userFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#contractFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#supplierFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#productFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    
+}
+select#categoryFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#subCategoryFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#modelFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#brandFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#productSizeFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#inventroyFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#damageStockFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#banktransactionFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#paymentFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#expensesFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#invoiceFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#dayBookFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#settingFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#employeeFormSizeSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}

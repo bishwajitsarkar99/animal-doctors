@@ -1,0 +1,4 @@
+:root{
+    --bs-success-rgb: radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
+    --bs-bg-opacity: 1;
+}

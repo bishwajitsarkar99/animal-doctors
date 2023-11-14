@@ -1,0 +1,207 @@
+.w3-bar-block .w3-bar-item {
+    width: 100%;
+    display: block;
+    padding: 5px 14px;
+    text-align: left;
+    border: none;
+    white-space: normal;
+    float: none;
+    outline: 0;
+}
+
+.w3 {
+    font-family: Work Sans, sans-serif;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    color: #000000ab;
+    background-color: #ffae4a;
+    font-size: 11px;
+    font-weight: 700;
+    opacity: 1;
+    letter-spacing: 0.5px;
+}
+
+.w3-sidebar {
+    height: 100%;
+    width: 200px;
+    background-color: #ffae4a;
+    position: fixed !important;
+    z-index: 1;
+    overflow: auto;
+}
+
+.w3-card,
+.w3-card-2 {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+b.ord_head {
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    color: black;
+    font-family: futura;
+    font-size: 0.8vw;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    opacity: 1;
+}
+
+table, th, td {
+    border-bottom:1px solid black;
+    border-top:1px solid black;
+    border-collapse: collapse;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+th.ordsumm {
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    color: black;
+}
+td.orditem{
+    border-bottom: 1px solid lightgray;
+    color: black;
+}
+th,
+td {
+    text-align: left;
+    padding: 0px;
+}
+
+/* Order Part=========Total Order */
+th.tot_order_head {
+    background-color: darkgoldenrod;
+    text-align: center;
+}
+th.tot_order {
+    background-color: darkgoldenrod;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center;
+}
+td.tot_order {
+    background-color: darkgoldenrod;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center;
+}
+
+/* Pending Order */
+th.tot_pending_head {
+    text-align: center;
+    background-color: darkgrey;
+}
+
+th.tot_pending {
+    background-color: darkgrey;
+    border-right: 1px solid;
+    text-align: center;
+}
+td.tot_pending {
+    background-color: darkgrey;
+    border-right: 1px solid;
+    text-align: center;
+}
+
+/* Complete Order */
+th.tot_complete_head {
+    text-align: center;
+    background-color: darkseagreen;
+}
+
+th.tot_complete {
+    background-color: darkseagreen;
+    border-right: 1px solid;
+    text-align: center;
+}
+td.tot_complete {
+    background-color: darkseagreen;
+    border-right: 1px solid;
+    text-align: center;
+}
+
+/* reject Order */
+th.tot_reject_head {
+    text-align: center;
+    background-color: #ff8c62;
+}
+
+th.tot_reject {
+    background-color: #ff8c62;
+    border-right: 1px solid;
+    text-align: center;
+}
+td.tot_reject {
+    background-color: #ff8c62;
+    border-right: 1px solid;
+    text-align: center;
+}
+/* accuracy Order */
+th.tot_accuracy_head {
+    text-align: center;
+}
+th.tot_achive {
+    text-align: center;
+    border-right: 1px solid black;
+}
+th.tot_deduction {
+    text-align: center;
+}
+td.achive {
+    text-align: center;
+    border-right: 1px solid black;
+}
+td.deduct {
+    text-align: center;
+}
+tr.table-body {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+td.sn{
+    text-align: center;
+}
+
+
+/* Order Part=========Total Order */
+th.tot_expenses_head {
+    background-color: darkgoldenrod;
+    text-align: center;
+}
+tr.expenses_head {
+    background-color: darkgoldenrod;
+    text-align: center;
+    border-left: none;
+    border-right: none;
+}
+
+th.total_exp{
+    text-align: center;
+}
+td.exp_tot{
+    border-left: 1px solid lightgray;
+    border-right: none;
+    text-align: center;
+}

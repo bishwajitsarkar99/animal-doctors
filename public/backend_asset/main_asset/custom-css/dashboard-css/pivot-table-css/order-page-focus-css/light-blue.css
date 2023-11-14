@@ -1,0 +1,8 @@
+:root{
+    /* ========= lightblue color bg focus in pivot table ================== */
+    --theme-dashboard-order-page-background-image:radial-gradient(farthest-corner at 100px 100px, lightblue, rgb(207, 243, 255));
+    --theme-dashboard-order-page-background-image2:radial-gradient(farthest-corner at 100px 100px, lightblue, rgb(207, 243, 255));
+    --theme-dashboard-order-page-background-image3:radial-gradient(farthest-corner at 100px 100px, lightblue, rgb(207, 243, 255));
+    --theme-dashboard-order-page-font-color:#fff;
+    --theme-dashboard-order-page-background-color:lightblue;
+}

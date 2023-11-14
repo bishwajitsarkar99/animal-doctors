@@ -1,0 +1,40 @@
+<!-- =============== Sales-Area-Part ====================== -->
+<div class="card form-control form-control-sm skeleton mb-1 mt-1" id="totalsales">
+    <span class="sb-sidenav-collapse-arrow" id="orders_part" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Sales-Area')}}">
+        <p class="form-check form-switch order_area skeleton mt-3">
+            <input class="form-check-input ordrs skeleton" onclick="mySlFunction()" type="checkbox" id="orders_box2" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <label class="form-check-label skeleton" for="collapseExample2"><span class="smy">
+                <span><span class=""></span><span class="of_switch2 pt-1 pb-1 marg color_showup" id="span2">off</span></span>
+            </label>
+        </p>
+        <span class="ps-1 ms-5"><div class="loader_sales_part ms-5" id="loader_sales_part"></div></span>
+    </span>
+</div>
+<!-- =======SALES BODY PART======== -->
+<div class="row collapse" id="collapseExample2">
+    <div class="col">
+        <div class="row" id="dispaySales">
+            @include('backend.layouts.dashboard-area-parts.sales-area-body-parts._sales-body-part')
+        </div>
+    </div>
+    <div class="col-xl-6" id="dispaySalesChart">
+        @include('backend.layouts.dashboard-area-parts.sales-area-body-parts._sales-chart')
+    </div>
+    <div class="col-xl-12">
+        <div class="row" id="displaysalesSummary">
+        @include('backend.layouts.dashboard-area-parts.sales-area-body-parts._sales-summary-body')
+        </div>
+    </div>
+    <div class="col-xl-6 mb-1">
+        <div class="col-md-12 flip-box">
+            <div class="flip-box-inner">
+                <div class="card-body flip-box-front">
+                    <p>{{__('translate.Sales')}} <i class="fa-brands fa-instalod fa-beat-fade" style="color:darkcyan; font-size:small"></i></p>
+                </div>
+                <div class="card-body flip-box-back">
+                    <p><button class="btn btn-btn-sm detls_btn" id="salesDetls_btn">{{__('translate.Click')}}</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

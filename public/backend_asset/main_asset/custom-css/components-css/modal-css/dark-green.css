@@ -1,0 +1,8 @@
+:root{
+    --theme-menu-list-background-image:radial-gradient(farthest-corner at 100px 100px, darkgreen,darkgreen);
+    --theme-menu-list-opacity:1;
+    --theme-font-color:darkgray;
+    --theme-menu-list-font-animation-color1:lightpink;
+    --theme-menu-list-font-animation-color2:lightyellow ;
+    --theme-menu-list-font-animation-color3:#fff;
+}

@@ -1,0 +1,185 @@
+:root{
+    --table-row-hover:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --bg-color:purple;
+    --color:royalblue;
+    --size:1px;
+    --font-weight:500;
+    --apperence-app-setting-bg:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --drop-border-bg-color:darkblue;
+}
+img.animal_img {
+    width: 200px;
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 20px #0001;
+    transition: transform .5s;
+}
+th.head-font {
+    font-family: math;
+    text-transform: uppercase;
+    font-size: 0.9vw;
+    letter-spacing: 0.5px;
+}
+img.animal_img:hover{
+    transform: scale(1.26);
+}
+.custom-select{
+    position: relative;
+}
+.custom-list-item-arrow{
+    display: block;
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 2rem;
+    height: 100%;
+    background-image: var(--apperence-app-setting-bg);
+    pointer-events: none;
+    border-radius: 3px;
+    opacity: 1;
+    cursor: pointer;
+}
+.custom-list-item-arrow::before,.custom-list-item-arrow::after{
+    --size:0.5em;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%,-50%);
+}
+.custom-list-item-arrow::before{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-bottom: var(--size) solid var(--drop-border-bg-color);
+    top: 36%;
+}
+.custom-list-item-arrow::after{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid var(--drop-border-bg-color);
+    top: 70%;
+}
+img#image_view{
+    width: 126px;
+    height: 140px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 20px #0001;
+    transition: transform .5s;
+    border: 1px solid silver;
+}
+img#image_view:hover{
+    transform: scale(0.9);
+}
+.image_label{
+    font-size: 0.8vw;
+    font-weight: 600;
+    text-align: center;
+    font-family: futura;
+    text-transform: uppercase;
+}
+.status_label{
+    font-size: 0.8vw;
+    font-weight: 600;
+    text-align: left;
+    font-family: futura;
+    text-transform: uppercase;
+}
+h6.seo_label {
+    font-size: 1.2vw;
+    font-weight: 600;
+    text-align: left;
+    font-family: futura;
+}
+.post_label{
+    font-size: 0.9vw;
+    text-align: left;
+    font-family: futura;
+    text-transform: uppercase;
+}
+label.stats {
+    font-size: 0.8vw;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: futura;
+}
+input.stat{
+    cursor: pointer;
+}
+.side_card{
+    box-shadow: 0px 2px 20px #0001,0px 2px 6px #0001;
+    border: none;
+    margin-top: 70px;
+}
+input#imgInput {
+    width: 126px;
+    color: black;
+    font-size: 9px;
+    cursor: pointer;
+}
+input#post-category{
+    box-shadow: none;
+    outline: none;
+    color: black;
+    border: 1px solid lightblue;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0px 2px 20px #0001;
+}
+textarea#post-category{
+    box-shadow: none;
+    outline: none;
+    color: black;
+    border: 1px solid lightblue;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0px 2px 20px #0001;
+}
+textarea#my_summernote{
+    box-shadow: none;
+    outline: none;
+    color: black;
+    border: 1px solid lightblue;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0px 2px 20px #0001;
+}
+select#post-category{
+    box-shadow: none;
+    outline: none;
+    color: black;
+    border: 1px solid lightblue;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0px 2px 20px #0001;
+    cursor: pointer;
+}
+button.modal_button{
+    color: white;
+    font-family: math;
+    font-size: 13px;
+    border: none;
+}
+button.modal_button:hover{
+    color: darkcyan;
+}
+button.modal_button.cancel_btn{
+    color: white;
+    font-family: math;
+    font-size: 13px;
+    border: none;
+}
+button.modal_button.cancel_btn:hover{
+    color: orangered;
+}
+button#cancel_btn {
+    line-height: 1.6;
+}
+span.btn-text.addBtn {
+    line-height: 1.6;
+}

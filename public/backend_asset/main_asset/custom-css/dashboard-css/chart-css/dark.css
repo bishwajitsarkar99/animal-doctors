@@ -1,0 +1,19 @@
+:root{
+    --dashboard-chart-box-shadow:none;
+    --dashboard-chart-background-image:radial-gradient(farthest-corner at 100px 100px, black, black);
+    --dashboard-chart-hover-background-image:radial-gradient(farthest-corner at 100px 100px, black, black);
+    --dashboard-chart-transition: 0.5s;
+    --dashboard-chart-color:white;
+    --dashboard-chart-transform:scale(0.9);
+    --dashboard-chart-animation-border-top-color-0:lightblue;
+    --dashboard-chart-animation-border-color-50:#a1d5b5;
+    --dashboard-chart-animation-border-bottom-color-100:lightskyblue;
+    --dashboard-chart-animation-background-color-100:rgb(242, 241, 241);
+    --dashboard-chart-animation-background-color-2:#fff;
+    --dashboard-chart-box-border-top:none;
+    --dashboard-chart-box-border-bottom:none;
+    --dashboard-chart-box-border-left:2px solid #0dcaf0;
+    --dashboard-chart-box-border-right:none;
+    --dashboard-chart-box-border:0.5px solid lightgray;
+    /* =============== Loader-part ====================== */
+}

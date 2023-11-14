@@ -1,0 +1,8 @@
+:root{
+    /* ========= light- green color bg focus in pivot table ================== */
+    --theme-dashboard-expenses-page-background-image:radial-gradient(farthest-corner at 100px 100px, green, lightblue);
+    --theme-dashboard-expenses-page-background-image2:radial-gradient(farthest-corner at 100px 100px, green,lightblue);
+    --theme-dashboard-expenses-page-background-image3:radial-gradient(farthest-corner at 100px 100px, #f0f0f0,green);
+    --theme-dashboard-expenses-page-font-color:#fff;
+    --theme-dashboard-expenses-page-background-color:green;
+}

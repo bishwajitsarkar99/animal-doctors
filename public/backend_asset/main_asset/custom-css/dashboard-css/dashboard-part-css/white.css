@@ -1,0 +1,12 @@
+:root{
+    --dashboard-part-background-image:radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
+    --dashboard-part-hover-background-image:radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
+    --dashboard-part-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    --dashboard-part-transition:0.5s;
+    --dashboard-part-transform:scale(0.9);
+    --dashboard-part-animation-border-top-color-0:white;
+    --dashboard-part-animation-border-color-50:white;
+    --dashboard-part-animation-border-bottom-color-100:white;
+    /* =============== Loader-part ====================== */
+    
+}

@@ -1,0 +1,12 @@
+.sb-nav-fixed #layoutSidenav #layoutSidenav_content {
+  animation: main_background_animation 5s infinite;
+}
+
+@keyframes main_background_animation {
+  0% {
+    background-color: white;
+  }
+  100% {
+    background-color: white;
+  }
+}/*# sourceMappingURL=background-color-animation.css.map */

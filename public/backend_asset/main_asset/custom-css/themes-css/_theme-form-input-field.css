@@ -1,0 +1,96 @@
+select#loginFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#userFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#contractFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#supplierFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#productFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    
+}
+select#categoryFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#subCategoryFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#modelFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#brandFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#productSizeFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#inventroyFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#damageStockFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#banktransactionFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#paymentFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#expensesFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#invoiceFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#dayBookFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#settingFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#employeeFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}

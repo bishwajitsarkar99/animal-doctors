@@ -1,0 +1,174 @@
+:root{
+    --app-setting-tab-background-color:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --apperence-app-setting-bg:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --drop-border-bg-color:royalblue;
+}
+td.parent_moduel1{
+    cursor: pointer;
+}
+td.background {
+    cursor: pointer;
+}
+td.parent_accModuel{
+    cursor: pointer;
+}
+.sidebar-focus {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    border: none;
+    outline: none;
+    animation: color2_focus 1s infinite;
+}
+@keyframes color2_focus{
+    0%{
+        background-color: #f1f1f1;
+        background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    }
+    50%{
+        background-color: lightgray;
+        background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    }
+    100%{
+        background-color: lightgray;
+        background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    }
+}
+.sidebar-light-focus {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    border: none;
+    outline: none;
+    animation: color3_focus 1s infinite;
+}
+@keyframes color3_focus {
+    0% {
+        background-color: limegreen;
+    }
+    
+    50% {
+        background-color: limegreen;
+    }
+    100% {
+        background-color: limegreen;
+    }
+}
+tr.bg-light-gray{
+    background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    opacity: 5;
+    border-left: 1px solid #f1eeee;
+    border-right: 1px solid #f1eeee;
+    border-top: 1px solid #f1eeee;
+    border-bottom: 1px solid #f1eeee;
+    background-color: #fff;
+}
+tr.select-bg{
+    background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    opacity: 5;
+    border-left: 1px solid #f1eeee;
+    border-right: 1px solid #f1eeee;
+    border-top: 1px solid #f1eeee;
+    border-bottom: 1px solid #f1eeee;
+    background-color: #fff;
+}
+ul.nav.tab_bg {
+    background-image: var(--app-setting-tab-background-color);
+    --bs-nav-tabs-border-radius: none;
+}
+.nav-link.setting {
+    display: block;
+    color: forestgreen;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    font-weight: 700;
+    font-family: 'futura';
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+span.social_icon {
+    border-radius: 100%;
+}
+img.social_icon {
+    width: 28px;
+    height: 26px;
+    border-radius: 100%;
+    border: 2px solid silver;
+    transition: 1s;
+    
+}
+img.social_icon:hover{
+    transform: scale(3);
+}
+.custom-select{
+    position: relative;
+}
+.custom-app-setting-arrow{
+    display: block;
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 2rem;
+    height: 100%;
+    background-image: var(--apperence-app-setting-bg);
+    pointer-events: none;
+    border-radius: 3px;
+    opacity: 1;
+}
+.custom-app-setting-arrow::before,.custom-app-setting-arrow::after{
+    --size:0.5em;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%,-50%);
+}
+.custom-app-setting-arrow::before{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-bottom: var(--size) solid var(--drop-border-bg-color);
+    top: 36%;
+}
+.custom-app-setting-arrow::after{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid var(--drop-border-bg-color);
+    top: 70%;
+}
+.custom-media-setting-arrow{
+    display: block;
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 2rem;
+    height: 78%;
+    background-image: var(--apperence-app-setting-bg);
+    pointer-events: none;
+    border-radius: 3px;
+    opacity: 1;
+    margin-right: 12px;
+}
+.custom-media-setting-arrow::before,.custom-media-setting-arrow::after{
+    --size:0.5em;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%,-50%);
+}
+.custom-media-setting-arrow::before{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-bottom: var(--size) solid var(--drop-border-bg-color);
+    top: 30%;
+}
+.custom-media-setting-arrow::after{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid var(--drop-border-bg-color);
+    top: 70%;
+}

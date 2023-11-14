@@ -1,0 +1,262 @@
+:root {
+    --blue: #4e73df;
+    --init-primary: #0d6efd;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --orangered: orangered;
+    --orange-fontawesome: orange;
+    --red: #e74a3b;
+    --orange: #fd7e14;
+    --yellow: #f6c23e;
+    --green: #1cc88a;
+    --teal: #20c9a6;
+    --cyan: #36b9cc;
+    --white: #fff;
+    --gray: #858796;
+    --gray-dark: #5a5c69;
+    --primary: #4e73df;
+    --secondary: #858796;
+    --success: #1cc88a;
+    --info: #36b9cc;
+    --warning: #f6c23e;
+    --danger: #e74a3b;
+    --light: #f8f9fc;
+    --dark: #5a5c69;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-family: Work Sans, sans-serif;
+    --admin-panel-color: #fff;
+}
+
+
+/** Navbar */
+nav.dsh_nav {
+    background-image: var(--dashbord-nav-bar-background-image);
+    box-shadow: var(--dashbord-nav-bar-shadow);
+    font-size: 12px;
+    font-family: var(--font-family);
+    line-height: var(--dashbord-nav-bar-height);
+    opacity: var(--dashbord-nav-bar-opacity);
+    color: black;
+    height: 2.5em;
+}
+
+.fa-beat {
+    display: var(--dashbord-nav-bar-icon-display);
+    color: var(--dashbord-nav-bar-icon-color);
+    font-size: 15px;
+}
+
+
+
+/** Message center dropdown list */
+/* ================= Start ====================== */
+input.search_message {
+    outline: none;
+    height: 1.8em;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    border-right: 1px solid silver;
+    border-left: 1px solid silver;
+}
+
+
+.breadcrumb {
+    --bs-breadcrumb-padding-x: 0;
+    --bs-breadcrumb-padding-y: 0;
+    --bs-breadcrumb-margin-bottom: 0.5rem;
+    --bs-breadcrumb-bg: ;
+    --bs-breadcrumb-border-radius: ;
+    --bs-breadcrumb-divider-color: #6c757d;
+    --bs-breadcrumb-item-padding-x: 0.rem;
+    --bs-breadcrumb-item-active-color: #6c757d;
+    display: flex;
+    flex-wrap: wrap;
+    padding: var(--bs-breadcrumb-padding-y) var(--bs-breadcrumb-padding-x);
+    margin-bottom: var(--bs-breadcrumb-margin-bottom);
+    font-size: var(--bs-breadcrumb-font-size);
+    list-style: none;
+    background-color: var(--bs-breadcrumb-bg);
+    border-radius: var(--bs-breadcrumb-border-radius);
+}
+
+/* ================= End ====================== */
+
+#loader.bg-primary {
+    background-color: cadetblue !important;
+
+}
+
+div#loader {
+    width: 10%;
+    border-radius: 10px;
+    /* margin-top: 0.2em; */
+
+}
+
+.progress_login_header.loadheight {
+    margin-top: 0.7em;
+}
+
+.progress-bar-animated {
+    -webkit-animation: 1s linear infinite progress-bar-stripes;
+    animation: 1s linear infinite progress-bar-stripes;
+}
+
+.progress-bar-striped {
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 1rem 1rem;
+}
+
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #0d6efd;
+    transition: width 0.6s ease;
+}
+
+.progress_login_header {
+    display: flex;
+    height: 1rem;
+    overflow: hidden;
+    font-size: .75rem;
+    /* margin-top: 0.4em; */
+}
+
+
+
+span.das_head {
+    position: absolute;
+    background-image: radial-gradient(farthest-corner at 100px 100px, rgb(229 229 229 / 97%), rgb(237 237 237));
+    color: darkorange;
+    border: 2px solid;
+    border-color: #e5dede;
+    letter-spacing: 1px;
+    font-family: var(--font-family);
+    font-size: 10px;
+    font-weight: bold;
+    animation: text 0.9s 1.05;
+}
+
+.font_color_focus {
+    animation: focus_color 6s infinite;
+}
+
+@keyframes focus_color {
+
+    80% {
+        color: orange;
+    }
+
+    100% {
+        color: darkorange;
+    }
+}
+
+/* span.das_head:hover{filter: brightness(.75); border-style: inset; border-color: orange;} */
+p.small.server {
+    text-align: right;
+    font-size: 11.5px;
+    font-family: math;
+    font-weight: bold;
+    font-variant: all-petite-caps;
+    letter-spacing: 0.7px;
+}
+
+@media(min-width:400px) and (max-width:480px) {
+    .plantform {
+        margin-top: 0.2em;
+        font-size: 10px;
+    }
+    .dropdown-content{
+        width: 160px;
+        font-size: 10px;
+        margin-left: -120px;
+    }
+    .dropdown-content a{
+        padding: none;
+    }
+}
+
+.dropdown-list.dropdown-menu.dropdown-menu-right.show {
+    position: absolute;
+    transform: translate3d(250px, 35px, 0px);
+    top: 0px px;
+    left: 0px;
+    will-change: transform;
+}
+
+
+/* Dropdown Button */
+.dropbtn {
+    /* background-color: #04AA6D; */
+    color: darkcyan;
+    padding: 5px;
+    font-size: 12px;
+    border: none;
+    text-decoration: none;
+}
+.dropbtn:hover{
+    text-decoration: underline;
+    text-decoration-color: darkcyan;
+}
+/* The container <div> - needed to position the dropdown content */
+div.dashboard_menubar{
+    background-image: var(--dashbord-nav-bar-background-image);
+    font-weight: bold;
+    letter-spacing: 0.1px;
+    margin-top: 0.4em;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-image: radial-gradient(farthest-corner at 100px 100px, honeydew, honeydew);
+    opacity: 1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+.dropdown-content:hover{
+    text-decoration: underline;
+    text-decoration-color: darkcyan;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 1px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: white;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-image: radial-gradient(farthest-corner at 100px 100px, honeydew, honeydew);
+    color: darkcyan;
+}

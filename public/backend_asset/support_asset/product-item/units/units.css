@@ -1,0 +1,78 @@
+tbody#units_data_table {
+    color: black;
+    font-weight: 500;
+}
+span#search_off {
+    font-size: 11px;
+    font-weight: 600;
+}
+.units-hidden{
+    display: none;
+}
+input#units_name {
+    outline: none;
+    box-shadow: none;
+    outline: none;
+    box-shadow: none;
+    animation: supfncolor 6s infinite;
+    font-size: 12px;
+    box-shadow: none;
+    font-weight: 500;
+    border-top: 1px solid #f1eeee;
+    border-bottom: 1px solid #f1eeee;
+    border-left: 1px solid #f1eeee;
+    border-right: 1px solid #f1eeee;
+    color: black;
+}
+@keyframes supfncolor{
+    0%{
+        color: gray;
+    }
+    50%{
+        color: darkcyan;
+    }
+    100%{
+        background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    }
+}
+div#units_data_table_paginate {
+    float: right;
+}
+span#total_units_records{
+    font-weight: 700;
+    color: darkcyan;
+}
+input#delete_unit_id {
+    outline: none;
+    border: none;
+    font-weight: 600;
+}
+@media (min-width:300px) and (max-width:480px){
+    label.ser_label{
+        font-size: 10px;
+    }
+    a#showCategory{
+        font-size: 10px;
+    }
+    span#search_off{
+        font-size: 10px;
+    }
+    span#search_on{
+        font-size: 10px;
+    }
+    label.tot-search{
+        font-size: 10px;
+    }
+    input#search{
+        font-size: 10px;
+    }
+    tr.user-table-row{
+        font-size: 10px;
+    }
+    div#brand_data_table_paginate {
+        font-size: 10px;
+    }
+    span#success_message{
+        font-size: 10px;
+    }
+}

@@ -1,0 +1,96 @@
+select#loginTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#userTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#contractTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#supplierTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#productTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    
+}
+select#categoryTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#subCategoryTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#modelTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#brandTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#productSizeTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#inventoryTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#damageStockTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#banktransactionTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#paymentTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#expensesTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#invoiceTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#dayBookTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#settingTableInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#employeeTableHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}

@@ -1,0 +1,187 @@
+:root{
+    --search-background:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --table-head-background:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+}
+table, th, td {
+    border-collapse: collapse;
+    font-size: 12px;
+    letter-spacing: 1px;
+    opacity: 1;
+}
+select#perItemControls {
+    outline: none;
+    box-shadow: none;
+    color: white;
+    border: 1px solid #08a05c;
+    background-color: #08a05c;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 50px;
+}
+input#search_area_ {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    background-color: #08a05c;
+}
+input#prod_search{
+    background-image: var(--search-background);
+    outline: none;
+    border: 1px solid #f1eeee;
+    border-radius: 5px;
+    color: darkcyan;
+    animation: text_color 3s infinite;
+}
+select#perItemControlProd {
+    outline: none;
+    box-shadow: none;
+    background-color: #08a05c;
+    border: 1px solid #08a05c;
+    border-radius: 3px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    width: 50px;
+}
+.produ-search-hidden{
+    display: none;
+}
+span.total_result {
+    font-size: 11px;
+    color: darkcyan;
+    font-weight: 600;
+}
+label.catg_ser_label {
+    color: darkcyan;
+    font-weight: 600;
+    font-size: 13px;
+}
+td.prod_td{
+    border: 1px solid silver;
+}
+label.tot-search {
+    font-size: 11px;
+}
+.model-hidden{
+    display: none;
+}
+.productid-hidden{
+    display: none;
+}
+span#total_model_records{
+    font-weight: 700;
+    color: darkcyan;
+}
+th.back_color{
+    /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
+    background-image: var(--table-head-background);
+    border: 1px solid silver;
+}
+input#model_name{
+    outline: none;
+    box-shadow: none;
+    outline: none;
+    box-shadow: none;
+    animation: supfncolor 6s infinite;
+    font-size: 12px;
+    box-shadow: none;
+    font-weight: 500;
+    border-top: 1px solid #f1eeee;
+    border-bottom: 1px solid #f1eeee;
+    border-left: 1px solid #f1eeee;
+    border-right: 1px solid #f1eeee;
+    color: black;
+}
+input#product_id{
+    outline: none;
+    box-shadow: none;
+    outline: none;
+    box-shadow: none;
+    animation: supfncolor 6s infinite;
+    font-size: 12px;
+    box-shadow: none;
+    font-weight: 500;
+    border-top: 1px solid #f1eeee;
+    border-bottom: 1px solid #f1eeee;
+    border-left: 1px solid #f1eeee;
+    border-right: 1px solid #f1eeee;
+    color: black;
+}
+@keyframes supfncolor{
+    0%{
+        color: gray;
+    }
+    50%{
+        color: darkcyan;
+    }
+    100%{
+        background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    }
+}
+a#showModel{
+    color: darkcyan;
+    font-weight: 500;
+    margin-top: 5px;
+}
+label.model{
+    float: left;
+}
+div#tb_subcatg {
+    border: none;
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
+}
+th.align {
+    text-align: center;
+    border: 1px solid silver;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+td.align {
+    text-align: center;
+    border: 1px solid silver;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+span#updateForm_errorList {
+    text-align: end;
+    font-size: 13px;
+    color: orangered;
+}
+div#model_data_table_paginate {
+    float: right;
+}
+input#delete_model_id {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    font-weight: 600;
+}
+@media (min-width:300px) and (max-width:480px){
+    label.ser_label{
+        font-size: 10px;
+    }
+    a#showCategory{
+        font-size: 10px;
+    }
+    span#search_off{
+        font-size: 10px;
+    }
+    span#search_on{
+        font-size: 10px;
+    }
+    label.tot-search{
+        font-size: 10px;
+    }
+    input#search{
+        font-size: 10px;
+    }
+    tr.user-table-row{
+        font-size: 10px;
+    }
+    div#brand_data_table_paginate {
+        font-size: 10px;
+    }
+    span#success_message{
+        font-size: 10px;
+    }
+}

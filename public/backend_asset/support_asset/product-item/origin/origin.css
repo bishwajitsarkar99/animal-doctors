@@ -1,0 +1,89 @@
+table, th, td {
+    border-collapse: collapse;
+    font-size: 12px;
+    letter-spacing: 1px;
+    opacity: 1;
+}
+label.tot-search {
+    color: darkcyan;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+span#search_off {
+    font-size: 11px;
+    font-weight: 600;
+}
+.pagination a.page-item.active{
+background-color: white;
+}
+input#origin_name {
+    outline: none;
+    box-shadow: none;
+    outline: none;
+    box-shadow: none;
+    animation: supfncolor 6s infinite;
+    font-size: 12px;
+    box-shadow: none;
+    font-weight: 500;
+    border-top: 1px solid #f1eeee;
+    border-bottom: 1px solid #f1eeee;
+    border-left: 1px solid #f1eeee;
+    border-right: 1px solid #f1eeee;
+    color: black;
+}
+@keyframes supfncolor{
+    0%{
+        color: gray;
+    }
+    50%{
+        color: darkcyan;
+    }
+    100%{
+        background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    }
+}
+span#total_origin_records{
+    font-weight: 700;
+    color: darkcyan;
+}
+.origin-hidden{
+    display: none;
+}
+input#delete_origin_id {
+    outline: none;
+    border: none;
+    font-weight: 600;
+}
+div#origin_data_table_paginate {
+    float: right;
+}
+@media (min-width:300px) and (max-width:480px){
+    label.ser_label{
+        font-size: 10px;
+    }
+    a#showOrigin{
+        font-size: 10px;
+    }
+    span#search_off{
+        font-size: 10px;
+    }
+    span#search_on{
+        font-size: 10px;
+    }
+    label.tot-search{
+        font-size: 10px;
+    }
+    input#search{
+        font-size: 10px;
+    }
+    tr.user-table-row{
+        font-size: 10px;
+    }
+    div#brand_data_table_paginate {
+        font-size: 10px;
+    }
+    span#success_message{
+        font-size: 10px;
+    }
+}

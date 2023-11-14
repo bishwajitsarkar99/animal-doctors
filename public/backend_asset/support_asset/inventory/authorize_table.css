@@ -1,0 +1,125 @@
+table, th, td {
+    border-collapse: collapse;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    opacity: 7;
+    font-family: math;
+}
+tr.parent-row {
+    font-weight: 600;
+}
+.form-check-input {
+    width: 2em;
+    height: 1em;
+    margin-top: 0.25em;
+    vertical-align: top;
+    background-color: rgb(13, 202, 240);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    
+}
+input.form-check-input:checked {
+    background-color: #08a05c;
+    border: none;
+}
+.check_permission{
+    cursor: pointer;
+    border: none;
+}
+input.form-check-input.check_permission{
+    outline: none;
+    box-shadow: none;
+}
+.tablinkinventory {
+    outline: none;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 2;
+}
+tr.table-row.user-table-row {
+    background-color: white;
+}
+tr.table-row.user-table-row:hover {
+    color: #08a05c;
+}
+th#th_sort{
+    font-size: 12px;
+}
+tr.table-row {
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+}
+tr.child-row {
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    
+}
+tr.parent-row{
+    background-color: white;
+}
+tr.parent-row:hover{
+    color: #08a05c;
+}
+input.date_field {
+    outline: none;
+    border: 1px solid #dfdfdf;
+    font-size: 12px;
+    color: #08a05c;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 600;
+}
+input.date_field::placeholder{
+    color: #08a05c;
+}
+.search-hidden{
+    display: none;
+}
+button.btn.btn-sm.btn_focus{
+    height: 22px;
+}
+button#multiSelectDropdown {
+    font-size: 0.9vw;
+    line-height: .5;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+    font-family: math;
+}
+.styled-text {
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-family: 'Arial', sans-serif;
+}
+
+.changed-style {
+    font-size: 28px;
+    color: #FF5733;
+    background-image: linear-gradient(to right, #FF5733, #FFD700);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.head_set{
+    float: right;
+}
+button.select_button{
+    background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    border: 1px solid silver;
+    outline: none;
+}
+ul.table_head_set{
+    background-color: #fff;
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    border-radius: 5px;
+
+}

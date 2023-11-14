@@ -1,0 +1,485 @@
+:root{
+    --font-family-heading:'Monoton';
+    --post-main-contain-background:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+}
+#staticpostBackdropLabel {
+    font-size: 24px;
+    font-weight: 600;
+    font-variant: all-petite-caps;
+    color: darkslateblue;
+    margin-top: -0.1em;
+    animation: 2s infinite;
+    font-family: 'Archivo Black';
+}
+.medicine_side_bar{
+    box-shadow: 0px 2px 20px #0001,0px 2px 6px #0001;
+    border: none;
+    margin-top: 10px;
+}
+div.mange_background{
+    opacity: 1;
+    border: none;
+}
+.card-body.manage_role_page {
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+}
+select#select_input {
+    font-weight: 600;
+    outline: none;
+    box-shadow: none;
+    color: darkcyan;
+    animation: font_color 5s infinite;
+    cursor: pointer;
+    height: 27px;
+    font-size: 12px;
+    line-height: 0.8;
+    border-bottom: 1px solid bisque;
+    border-top: 1px solid bisque;
+    border-left: 1px solid bisque;
+    border-right: 1px solid bisque;
+    opacity: 1;
+}
+@keyframes font_color{
+    50%{
+        color: #4dbb96;
+    }
+    100%{
+        color: darkcyan;
+    }
+}
+option{
+    cursor: pointer;
+}
+label.input_label {
+    color: darkcyan;
+    font-size: 12px;
+    font-weight: 600;
+}
+h2.manage_head {
+    color: darkcyan;
+    font-weight: 500;
+    opacity: 1;
+    font-family: var(--font-family-heading);
+    animation: fon_color 3s infinite;
+}
+@keyframes fon_color{
+    50%{
+        color: #4dbb96;
+    }
+    100%{
+        color: darkcyan;
+    }
+}
+input.manage_button {
+    background-color: #ddd;
+    color: darkcyan;
+    margin-top: 1px;
+    font-weight: 600;
+    height: 25px;
+    line-height: 1;
+    border-color: bisque;
+    outline: none;
+}
+@keyframes tex_color{
+    5%{
+        color: whitesmoke;
+    }
+    50%{
+        color: #f1f1f1;
+    }
+    100%{
+        color: honeydew;
+    }
+}
+input.manage_button:hover{
+    background-color: #f1f1f1;
+    color: darkblue;
+    margin-top: 1px;
+    font-weight: 600;
+    height: 25px;
+    line-height: 1;
+    border-color: bisque;
+}
+label.role_success_message{
+    animation: text 3s 1;
+}
+@keyframes text{
+    0%{
+        color: darkcyan;
+    }
+    30%{
+        letter-spacing: 15px;
+    }
+    85%{
+        letter-spacing: 10px;
+    }
+}
+img.user_img {
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 20px #0001;
+    transition: transform .5s;
+}
+img.user_img:hover{
+    transform: scale(0.5);
+} 
+tr.histroy:hover{
+    color: black;
+}
+th.us_td{
+    border-right: 1px solid silver;
+}
+td.us_td{
+    border-right: 1px solid silver;
+}
+
+.page-link.active, .datatable-pagination a.active, .active > .page-link, .datatable-pagination .active > a {
+    z-index: 3;
+    color: darkcyan;
+    background-color: #575757;
+    border: none;  
+}
+span.page-link {
+    color: white;
+}
+div.pagination{
+    margin-top: 5px;
+    float: right;
+    box-shadow: none;
+}
+a.page-link{
+    box-shadow: none;
+}
+ul.pagination a{
+    box-shadow: none;
+}
+ul.pagination a:hover{
+    background-color:#575757;
+    color: white;
+}
+input#input1 {
+    outline: none;
+    border-left: 1px solid lightblue;
+    border-right: 1px solid lightblue;
+    border-bottom: 1px solid lightblue;
+    border-top: 1px solid lightblue;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 500;
+    color: darkcyan;
+    animation: font_color 3s infinite;
+}
+@keyframes font_color{
+    50%{
+        color: darkcyan;
+    }
+    100%{
+        background-color: honeydew;
+    }
+}
+.updated-hidden{
+    display: none;
+}
+button#manage_btn {
+    background-color: darkblue;
+    line-height: 0.5px;
+    font-size: 0.9vw;
+    font-weight: 600;
+    color: darkcyan;
+    border-color: lightblue;
+    margin-top: 0.5px;
+}
+button#manage_btn:hover{
+    background-color: #ddd;
+}
+.role_success_message{
+    color: darkcyan;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    animation: text 3s 1;
+}
+@keyframes text{
+    0%{
+        color: darkcyan;
+    }
+    30%{
+        letter-spacing: 15px;
+    }
+    85%{
+        letter-spacing: 10px;
+    }
+}
+button#manage_button {
+    background-color: #f1f1f1;
+    line-height: 0.5px;
+    font-weight: 600;
+    color: darkcyan;
+    border-color: lightblue;
+}
+button#manage_button:hover{
+    background-color: #ddd;
+}
+span.history {
+    color: darkblue;
+}
+a.crt_btn {
+    height: 20px;
+    line-height: 0.8;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+input.image.mt-2 {
+    font-size: 9px;
+}
+select#category {
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0px 2px 20px #0001;
+    border: 1px solid lightblue;
+    opacity: 1;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: black;
+    width: 525px;
+    border-radius: 3px;
+    height: 30px;
+}
+select#subCategory {
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0px 2px 20px #0001;
+    border: 1px solid lightblue;
+    opacity: 1;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: black;
+    width: 525px;
+    border-radius: 3px;
+    height: 30px;
+}
+select#group {
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0px 2px 20px #0001;
+    border: 1px solid lightblue;
+    opacity: 1;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: black;
+    width: 525px;
+    border-radius: 3px;
+    height: 30px;
+}
+select#medicine_name {
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0px 2px 20px #0001;
+    border: 1px solid lightblue;
+    opacity: 1;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: black;
+    width: 525px;
+    border-radius: 3px;
+    height: 30px;
+}
+select#medicine_dogs {
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0px 2px 20px #0001;
+    border: 1px solid lightblue;
+    opacity: 1;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: black;
+    width: 525px;
+    border-radius: 3px;
+    height: 30px;
+}
+select#origin_name {
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0px 2px 20px #0001;
+    border: 1px solid lightblue;
+    opacity: 1;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: black;
+    width: 525px;
+    border-radius: 3px;
+    height: 30px;
+}
+select#product_size {
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0px 2px 20px #0001;
+    border: 1px solid lightblue;
+    opacity: 1;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: black;
+    width: 525px;
+    border-radius: 3px;
+    height: 30px;
+}
+
+label.label_user_edit {
+    font-size: 0.9vw;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    font-family: math;
+}
+input#category_id {
+    outline: none;
+    border: none;
+    font-weight: 600;
+    width: 81px;
+}
+input#subcategory_id {
+    outline: none;
+    border: none;
+    font-weight: 600;
+}
+.form-group.img_label {
+    text-align: center;
+    margin-left: 169px;
+}
+.form-group.subcatg {
+    text-align: center;
+}
+/* select.size{
+    margin-left: 20px;
+}
+select.dogs{
+    margin-left: 14px;
+} */
+.accordion-item.medicine_object {
+    border: none;
+    line-height: 0.6;
+    box-shadow: 0px 2px 20px #0001;
+}
+.accordion-item.medicine_history {
+    border: none;
+    line-height: 0.6;
+    box-shadow: 0px 2px 20px #0001;
+}
+button.accordion-button.header_button.post_cat_table {
+    background-color: #f1f1f1;
+    font-family: math;
+    font-weight: 600;
+    color: black;
+    font-size: 1vw;
+    text-transform: uppercase;
+    line-height: .5;
+    letter-spacing: 0.3px;
+}
+.accordion-button:not(.collapsed) {
+    --bs-accordion-border-color:lightblue;
+    box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
+    transition: opacity 1;
+}
+.accordion-item.medicine_use {
+    border: none;
+    line-height: 0.6;
+    box-shadow: 0px 2px 20px #0001;
+}
+.accordion-item.dease_symptoms {
+    border: none;
+    line-height: 0.6;
+    box-shadow: 0px 2px 20px #0001;
+}
+.accordion-item.medicine_instruction {
+    border: none;
+    line-height: 0.6;
+    box-shadow: 0px 2px 20px #0001;
+}
+button.header_button {
+    font-family: 'Archivo Black';
+    font-variant: all-petite-caps;
+}
+button.accordion-button.header_button.collapsed {
+    background-color: #fff;
+    box-shadow: 0px 2px 20px #0001;
+    background-image: var(--post-main-contain-background);
+}
+img.medicine_img {
+    width: 200px;
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 20px #0001;
+    transition: transform .5s;
+}
+img.medicine_img:hover{
+    transform: scale(1.26);
+}
+/* Editors */
+button.ck.ck-button.ck-off {
+    box-shadow: none;
+    outline: none;
+}
+input#post_title {
+    /* width: 642px; */
+    border-color: bisque;
+    font-size: 11px;
+    outline: none;
+    box-shadow: 0px 2px 20px #0001;
+    border: 1px solid bisque;
+    opacity: 1;
+    font-weight: 600;
+    color: black;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+}
+textarea#postDescription {
+    box-shadow: 0px 2px 20px #0001;
+    font-size: 13px;
+    letter-spacing: 1px;
+    outline: none;
+    border: 1px solid bisque;
+}
+h5.post-content {
+    color: black;
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: -5px;
+}
+.post-title-hidden{
+    display: none;
+}
+.subcategory-hidden{
+    display: none;
+}
+.category-hidden{
+    display: none;
+}
+.group-hidden{
+    display: none;
+}
+.medicine-name-hidden{
+    display: none;
+}
+.medicine-dogs-hidden{
+    display: none;
+}
+.origin-hidden{
+    display: none;
+}
+.size-hidden{
+    display: none;
+}
+.add-hidden{
+    display: none;
+}
+.update-hidden{
+    display: none;
+}
+.error_val{
+    color: orangered;
+}
+.category-post-table {
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
+    border: none;
+}

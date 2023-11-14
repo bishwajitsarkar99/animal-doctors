@@ -1,0 +1,29 @@
+/* Account Create Form */
+label.acc_label {
+    font-size: 13px;
+    font-weight: 600;
+    font-family: monospace;
+}
+input.form-control.inptfield {
+    box-shadow: none;
+    font-size: 13px;
+    font-family: monospace;
+    line-height: 1;
+}
+select.inptfield {
+    line-height: 1.5;
+    font-size: 13px;
+    font-family: monospace;
+}
+select#selectType {
+    box-shadow: none;
+}
+.rounded-circle {
+    border-radius: 50% !important;
+    inline-size: 30px;
+}
+.user_img.rounded-circle {
+    width: 20px;
+    height: 20px;
+    transition: transform .2s;
+}

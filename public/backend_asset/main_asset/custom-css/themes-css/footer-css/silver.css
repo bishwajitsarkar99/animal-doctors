@@ -1,0 +1,5 @@
+:root{
+    --theme-footer-background-image:radial-gradient(farthest-corner at 100px 100px, #ffffff,#c5c3c3);
+    --bs-bg-opacity: 1;
+
+}

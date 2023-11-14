@@ -1,0 +1,108 @@
+:root{
+    --table-row-hover:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --bg-color:purple;
+    --color:royalblue;
+    --size:1px;
+    --font-weight:500;
+}
+table, th, td {
+    border-collapse: collapse;
+    font-size: 12px;
+    letter-spacing: 1px;
+    opacity: 1;
+}
+tr.table-row.user-table-row{
+    background-color: white;
+}
+tr.table-row.user-table-row:hover{
+    background-image: var(--table-row-hover);
+    color: var(--color);
+    border-left: var(--size) solid var(--bg-color);
+    font-weight: var(--font-weight);
+}
+.group-hidden{
+    display: none;
+}
+input#group_name {
+    outline: none;
+    box-shadow: none;
+    outline: none;
+    box-shadow: none;
+    animation: supfncolor 6s infinite;
+    font-size: 12px;
+    box-shadow: none;
+    font-weight: 500;
+    border-top: 1px solid #f1eeee;
+    border-bottom: 1px solid #f1eeee;
+    border-left: 1px solid #f1eeee;
+    border-right: 1px solid #f1eeee;
+    color: black;
+}
+@keyframes supfncolor{
+    0%{
+        color: gray;
+    }
+    50%{
+        color: darkcyan;
+    }
+    100%{
+        background-image: linear-gradient(to bottom, rgb(14 14 14 / 5%) 0%, rgb(171 165 165 / 5%) 100%);
+    }
+}
+.td-capsule-skeleton{background:linear-gradient(90deg,#f3f3f3,rgba(250, 250, 250, 0.05) 100%);
+    background-size:200% 100%;
+    background-position:100% 0;
+    animation:2s infinite load
+}
+@keyframes load{
+    100%{
+        background-position:-100% 0
+    }
+}
+span#total_group_records {
+    color: darkcyan;
+    font-size: 11px;
+}
+label.tot-search {
+    color: darkcyan;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+div#group_data_table_paginate {
+    float: right;
+}
+input#delete_group_id {
+    border: none;
+    outline: none;
+    font-weight: 600;
+}
+@media (min-width:300px) and (max-width:480px){
+    label.ser_label{
+        font-size: 10px;
+    }
+    a#showGroup{
+        font-size: 10px;
+    }
+    span#search_off{
+        font-size: 10px;
+    }
+    span#search_on{
+        font-size: 10px;
+    }
+    label.tot-search{
+        font-size: 10px;
+    }
+    input#search{
+        font-size: 10px;
+    }
+    tr.user-table-row{
+        font-size: 10px;
+    }
+    div#brand_data_table_paginate {
+        font-size: 10px;
+    }
+    span#success_message{
+        font-size: 10px;
+    }
+}

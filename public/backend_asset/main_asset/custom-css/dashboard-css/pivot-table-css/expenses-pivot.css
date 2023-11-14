@@ -1,0 +1,473 @@
+.expenses-dashboard{
+    font-size: 70.5%;
+}
+table, th, td {
+    border-bottom: 1px solid silver;
+    border-top: 1px solid silver;
+    border-collapse: collapse;
+}
+
+.expenses-bg-color {
+    background-image: var(--theme-dashboard-expenses-page-navbar-bacground-image);
+    border: 1px silver;
+    opacity: 1;
+}
+select.select_month {
+    cursor: pointer;
+    font-weight: 700;
+    outline: none;
+    border: 1px solid silver;
+    background-image: radial-gradient(farthest-corner at 100px 100px, lightgray, ghostwhite);
+    animation: drop_font_focus 5s linear infinite;
+}
+@keyframes drop_font_focus{
+    50%{
+        color: darkcyan;
+    }
+    80%{
+        color: orangered;
+    }
+    100%{
+        color: darkblue;
+    }
+}
+span.tol_ord {
+    text-align: right;
+    font-size: 11px;
+    font-weight: 700;
+    color: black;
+    letter-spacing: 0.2px;
+}
+tr:hover{
+    color: orangered;
+}
+.pie_figuare {
+    text-align: center;
+}
+th.total_ord_amunt_ {
+    border-left: 1px solid silver;
+    border-bottom: 1px solid silver;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    color: black;
+}
+td.tb_body.total_ord_amunt_ {
+    color: black;
+    text-align: right;
+    font-weight: 600;
+    border-left: 1px solid silver;
+    animation: font_color 6s linear infinite;
+}
+@keyframes font_color{
+    70%{
+        color: lightblue;
+    }
+    50%{
+        color: orangered;
+    }
+    100%{
+        color: darkblue;
+    }
+}
+.expenses-chart-focus{
+    background-image: var(--theme-chart-background-image);
+    color: white;
+    box-shadow: none;
+    border-left: 2px solid #0dcaf0;
+    border-bottom: none;
+    border-top: none;
+    border-right: none;
+    transition: 0.5s;
+    border: 0.5px solid lightgray;
+    transition: 0.5s;
+    animation: bg_focus 6s linear infinite;
+}
+@keyframes bg_focus{
+    80% {
+        background-image: var(--theme-dashboard-expenses-pivot-table-background-image2);
+        color: var(--theme-dashboard-expenses-pivot-table-font-color);
+    }
+    
+    100% {
+        background-image: var(--theme-dashboard-expenses-pivot-table-background-image);
+        color: var(--theme-dashboard-expenses-pivot-table-font-color);
+    }
+}
+h5.ex_summ {
+    font-family: 'Faster One';
+    color: darkorange;
+}
+.tablinkexpenses {
+    border: none;
+    font-size: small;
+    font-weight: 600;
+    font-family: Work Sans, sans-serif;
+    font-size: 11px;
+    color: darkorange;
+    letter-spacing: 0.5px;
+}
+th.hd_ac {
+    color: black;
+}
+td.ord_subtotal.border_color {
+    font-family: -webkit-body;
+    border-left: 1px solid silver;
+    border-bottom: 1px solid silver;
+    text-align: right;
+    font-weight: 600;
+    font-size: 12px;
+    animation: font_color 6s linear infinite;
+}
+.expenses-red{
+    background-image: radial-gradient(farthest-corner at 100px 100px, orangered, orange);
+    color: white;
+    font-size: 11px;
+}
+th,td.hd_ac {
+    border-left: 1px solid silver;
+    letter-spacing: 0.2px;
+}
+.tablinkexpenses:hover{
+    color: white;
+    background-image: radial-gradient(farthest-corner at 100px 100px, orangered, orange);
+}
+/* table.exp_table,td,th {
+    background-image: radial-gradient(farthest-corner at 100px 100px, #fff,#fff);
+    animation: expenses_bg_focus 6s linear infinite;
+} */
+@keyframes expenses_bg_focus{
+    1%{
+        background-image: var(--theme-dashboard-expenses-page-background-image3);
+    }
+    100%{
+        background-image: var(--theme-dashboard-expenses-page-background-image2);
+    }
+    100%{
+        background-color: var(--theme-dashboard-expenses-page-background-color);
+    }
+}
+input#start_details_date {
+    background-image: var(--theme-dashboard-expenses-page-navbar-bacground-image);
+    outline: none;
+    border: 1px solid silver;
+    cursor: pointer;
+    font-weight: 700;
+}
+input#end_details_date {
+    background-image: var(--theme-dashboard-expenses-page-navbar-bacground-image);
+    outline: none;
+    border: 1px solid silver;
+    cursor: pointer;
+    font-weight: 700;
+}
+.expenses_summ_head{
+    text-align: center;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    background-image: radial-gradient(farthest-corner at 100px 100px, #fff,#fff);
+}
+.tot_expenses_heading{
+    background-image: var(--theme-dashboard-expenses-page-navbar-bacground-image);
+    font-size: 12px;
+    font-family: Work Sans, sans-serif;
+    text-align: center;
+    color: black;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    /* animation: expenses_bg_focus 6s linear infinite; */
+    letter-spacing: 0.5px;
+    border-top: double orange;
+
+}
+tr.tb_heading{
+    font-size: 11px;
+    font-family: Work Sans, sans-serif;
+    text-align: center;
+    border-left: 1px solid silver;
+}
+th.total_exp_amunt{
+    text-align: center;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-bottom: 1px solid silver;
+    color: orangered;
+}
+td.exp_subtotal{
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-bottom: 1px solid silver;
+    text-align: center;
+    font-weight: 600;
+    font-size: 12px;
+    color: black;
+    animation: font_color 6s linear infinite;
+}
+th.expn {
+    border-left: 1px solid silver;
+}
+td.expn_boder{
+    border-right: 1px solid silver;
+    font-weight: 600;
+    animation: font_color 6s linear infinite;
+}
+td.font{
+    font-weight: 600;
+}
+tr.table-body.font {
+    font-size: 12px;
+}
+td.ord_subtotal.border_ {
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    text-align: right;
+    font-weight: 600;
+    font-size: 12px;
+    animation: font_color 6s linear infinite;
+}
+td.ord_subtotal.borders_ {
+    border-right: 1px solid silver;
+    text-align: right;
+    font-weight: 600;
+    font-size: 12px;
+    animation: font_color 6s linear infinite;
+}
+span.sym {
+    font-weight: bolder;
+    font-family: -webkit-body;
+}
+.expns {
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+}
+td.tb_body {
+    font-size: 12px;
+    border-bottom: 1px solid silver;
+    border-left: 1px solid silver;
+    letter-spacing: 0.2px;
+    
+}
+th.tot_accuracy_head {
+    background-image: var(--theme-dashboard-expenses-page-navbar-bacground-image);
+    color: black;
+    text-align: center;
+    border-bottom: 1px solid silver;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+}
+tr.table-body {
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-bottom: 1px solid silver;
+    border-top: 1px solid silver;
+}
+th.bordder_line{
+    color: black;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-bottom: 1px solid silver;
+    border-top: 1px solid silver;
+    letter-spacing: 0.5px;
+}
+td.sn_num{
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-bottom: 1px solid silver;
+    border-top: 1px solid silver;
+}
+th.tot_achive {
+    color: black;
+    text-align: center;
+    border-right: 1px solid silver;
+    border-bottom: 1px solid silver;
+}
+th.tot_deduction {
+    color: black;
+    text-align: center;
+    border-bottom: 1px solid silver;
+}
+td.achive {
+    text-align: center;
+    border-right: 1px solid silver;
+    animation: font_color 6s linear infinite;
+}
+.expenses_chart_bg{
+    background-color: white;
+    opacity: 1;
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    border: none;
+    height: 150px;
+    animation: expenses_bg_focus 6s linear infinite;
+}
+
+canvas[class^="expenses-chart"]{
+    display: block;
+    height: 150px;
+    width: 528px;
+}
+table.expen_table {
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    font-size: 11px;
+}
+th.tot_expen_head_{
+    background-image: var(--theme-dashboard-expenses-page-navbar-bacground-image);
+    color: black;
+    text-align: left;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    letter-spacing: 0.5px;
+}
+th.tot_expen_head{
+    color: black;
+    text-align: left;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    letter-spacing: 0.5px;
+}
+td.tot_expen_head{
+    text-align: left;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    letter-spacing: 0.5px;
+}
+th.tot_payment_head{
+    color: black;
+    text-align: left;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    letter-spacing: 0.5px;
+}
+th.tot_payment_head_{
+    background-image: var(--theme-dashboard-expenses-page-navbar-bacground-image);
+    color: black;
+    text-align: left;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    letter-spacing: 0.5px;
+}
+td.tot_exs{
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    text-align: left;
+    letter-spacing: 0.5px;
+}
+.expfig {
+    text-align: right;
+}
+th.tot_Payable_head{
+    color: black;
+    text-align: left;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    letter-spacing: 0.5px;
+}
+th.tot_Payable_head_{
+    background-image: var(--theme-dashboard-expenses-page-navbar-bacground-image);
+    color: black;
+    text-align: left;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    letter-spacing: 0.5px;
+}
+
+td.tot_pay{
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    text-align: left;
+    letter-spacing: 0.5px;
+}
+.ep{
+    text-align: left;
+}
+th.des{
+    background-image: var(--theme-dashboard-expenses-page-navbar-bacground-image);
+    text-align: center;
+    border-left: 1px solid silver;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    color: black;
+    letter-spacing: 0.5px;
+}
+input.select_dateOne {
+    background-image: radial-gradient(farthest-corner at 100px 100px, lightgray, ghostwhite);
+    outline: none;
+    border: 1px solid silver;
+    animation: drop_font_focus 5s linear infinite;
+}
+span.tol_ord_ {
+    text-align: right;
+    font-size: 11px;
+    font-weight: 600;
+    color: orangered;
+    letter-spacing: 0.2px;
+}
+.search-expenses-hidden{
+    display: none;
+}
+@media (min-width:300px) and (max-width:480px){
+    table.expen_table{
+        font-size: 8px;
+    }
+    h5.ex_summ{
+        font-size: 12px;
+    }
+    .tot_expenses_heading{
+        font-size: 12px;
+    }
+    td.exp_subtotal{
+        font-size: 8px;
+    }
+    td.tb_body.total_ord_amunt_ {
+        font-size: 8px;
+    }
+    footer#admin_footer{
+        display: none;
+    }
+    .expenses_chart_bg{
+        height: 100px;
+    }
+    table.exp_table{
+        font-size: 8px;
+    }
+    td.ord_subtotal.border_{
+        font-size: 6px;
+    }
+    td.ord_subtotal.border_{
+        font-size: 6px;
+    }
+    td.achive{
+        font-size: 6px;
+    }
+    td.expn_boder{
+        font-size: 6px;
+    }
+    td.ord_subtotal.borders_ {
+        font-size: 6px;
+    }
+    tr.table-body{
+        font-size: 7px;
+    }
+    input.select_dateOne {
+        font-size: 9px;
+        border: 1px solid silver;
+    }
+    label.select_labelOne {
+        font-size: 10px;
+    }
+    span.tol_ord_ {
+        font-size: 14px;
+    }
+}

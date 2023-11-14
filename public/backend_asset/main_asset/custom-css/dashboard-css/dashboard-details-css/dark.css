@@ -1,0 +1,19 @@
+:root{
+    --dashboard-details-box-shadow:none;
+    --dashboard-details-background-image:radial-gradient(farthest-corner at 100px 100px, black, black);
+    --dashboard-details-hover-background-image:radial-gradient(farthest-corner at 100px 100px, black, black);
+    --dashboard-details-transition: opacity 0.5s;
+    --dashboard-details-color:white;
+    --dashboard-details-transform:scale(0.9);
+    --dashboard-details-animation-border-top-color-0:lightblue;
+    --dashboard-details-animation-border-color-50:#a1d5b5;
+    --dashboard-details-animation-border-bottom-color-100:lightskyblue;
+    --dashboard-details-animation-background-color-100:rgb(242, 241, 241);
+    --dashboard-details-animation-background-color-2:#fff;
+    --dashboard-details-box-border-top:none;
+    --dashboard-details-box-border-bottom:none;
+    --dashboard-details-box-border-left:2px solid #0dcaf0;
+    --dashboard-details-box-border-right:none;
+    --dashboard-details-box-border:0.5px solid lightgray;
+    /* =============== Loader-part ====================== */
+}

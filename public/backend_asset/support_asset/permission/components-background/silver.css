@@ -1,0 +1,4 @@
+:root{
+    --add-button-permission:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --permission-card:0px 2px 20px #0001, 0px 2px 6px #0001;
+}

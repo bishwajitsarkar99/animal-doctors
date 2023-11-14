@@ -1,0 +1,116 @@
+@import "_theme-form-dropdown-space.css";
+
+select#loginFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-equal-8px);
+}
+select#userFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-plus-8px);
+}
+select#contractFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-plus-one-6px);
+}
+select#supplierFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-plus-6px);
+}
+select#productFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-minus-7px);
+    
+}
+select#categoryFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-6px);
+}
+select#subCategoryFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-4px);
+}
+select#modelFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-3px);
+}
+select#brandFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-8px);
+}
+select#productSizeFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-plus-4px);
+}
+select#inventroyFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-plus-5px);
+}
+select#damageStockFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-plus-3px);
+}
+select#banktransactionFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#paymentFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-plus-6px);
+}
+select#expensesFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-2px);
+}
+select#invoiceFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-7px);
+}
+select#dayBookFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-plus-5px);
+}
+select#settingFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-plus-7px);
+}
+select#employeeFormSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: var(--theme-form-dropdown-space-5px);
+}

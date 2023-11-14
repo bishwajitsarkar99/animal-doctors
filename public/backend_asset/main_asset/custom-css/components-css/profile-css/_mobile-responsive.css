@@ -1,0 +1,10 @@
+@media (min-width:400px) and (max-width:480px){
+    #staticBackdropLabel{
+        font-size: 15px;
+    }
+    .profile{
+        height: 50px;
+        margin-left: 250px; 
+    }
+    
+}

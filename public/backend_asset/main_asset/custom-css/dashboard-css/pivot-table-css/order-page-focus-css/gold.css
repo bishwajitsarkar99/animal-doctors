@@ -1,0 +1,8 @@
+:root{
+    /* ========= gold color bg focus in pivot table ================== */
+    --theme-dashboard-order-page-background-image:radial-gradient(farthest-corner at 100px 100px, rgb(255, 189, 67), rgb(255, 195, 82));
+    --theme-dashboard-order-page-background-image2:radial-gradient(farthest-corner at 100px 100px, orange,rgb(255, 195, 82));
+    --theme-dashboard-order-page-background-image3:radial-gradient(farthest-corner at 100px 100px, rgb(255, 189, 67),rgb(255, 195, 82));
+    --theme-dashboard-order-page-font-color:#fff;
+    --theme-dashboard-order-page-background-color:rgb(255, 195, 82);
+}

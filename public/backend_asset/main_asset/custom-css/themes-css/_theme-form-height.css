@@ -1,0 +1,96 @@
+select#loginFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#userFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#contractFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#supplierFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#productFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    
+}
+select#categoryFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#subCategoryFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#modelFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#brandFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#productSizeFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#inventoryFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#damageStockFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#banktransactionFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#paymentFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#expensesFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#invoiceFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#dayBookFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#settingFormInputFieldSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+select#employeeFormHeightSelect{
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}

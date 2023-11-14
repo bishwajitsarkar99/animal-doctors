@@ -1,0 +1,91 @@
+:root{
+    --td-border-color:lightblue;
+    --td-bg-color:#f1f1f1;
+}
+
+td.tot_order_.doctors_sl{
+    border-bottom: 1px solid var(--td-border-color);
+    border-top: 1px solid var(--td-border-color);
+}
+td.txt_.doctors_sl{
+    border-bottom: 1px solid var(--td-border-color);
+    border-top: 1px solid var(--td-border-color);
+}
+td.tot_pending_.doctors_sl{
+    border-bottom: 1px solid var(--td-border-color);
+    border-top: 1px solid var(--td-border-color);
+}
+tr.doctors_sl{
+    border-top: 1px solid var(--td-border-color);
+    border-bottom: 1px solid var(--td-border-color);
+}
+th.doctors_sl{
+    background-color: var(--td-bg-color);
+    border-top: 1px solid var(--td-border-color);
+    border-bottom: 1px solid var(--td-border-color);
+}
+img.register_img {
+    height: 150px;
+    width: 150px;
+}
+input.update_doctors{
+    background-color: white;
+    outline: none;
+    border-top: 1px solid bisque;
+    border-style: outset;
+    border-bottom: 1px solid bisque;
+    border-left: 1px solid bisque;
+    border-right: 1px solid bisque;
+    letter-spacing: 1px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 85px;
+    opacity: 1;
+    border-radius: 3px;
+    box-shadow: 0px 2px 20px #0001;
+}
+input.update_doctors_contract{
+    background-color: white;
+    outline: none;
+    border-top: 1px solid bisque;
+    border-style: outset;
+    border-bottom: 1px solid bisque;
+    border-left: 1px solid bisque;
+    border-right: 1px solid bisque;
+    letter-spacing: 1px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 0px;
+    opacity: 1;
+    border-radius: 3px;
+    box-shadow: 0px 2px 20px #0001;
+}
+.form-group.group_button {
+    text-align: center;
+    margin-top: 15px;
+    margin-right: 135px;
+}
+.form-group.mt-3 {
+    margin-left: 202px;
+}
+@media(min-width:400px) and (max-width:480px){
+    input.update_doctors{
+        font-size: 10px;
+        margin-left: 0px;
+    }
+    input.update_doctors_contract{
+        margin-left: 0px;
+        font-size: 10px;
+    }
+    p.users_heading{
+        font-size: 20px;
+    }
+    .form-group.group_button {
+        margin-top: 23px;
+        margin-left: -32px;
+        margin-bottom: 15px;
+    }
+    .form-group.mt-3 {
+        margin-left: 0px;
+    }
+}

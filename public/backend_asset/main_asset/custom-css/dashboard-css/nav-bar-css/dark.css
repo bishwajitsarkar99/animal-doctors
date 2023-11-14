@@ -1,0 +1,8 @@
+:root{
+    --dashbord-nav-bar-background-image:radial-gradient(farthest-corner at 100px 100px, black, black);
+    --dashbord-nav-bar-shadow:0px 2px 20px #0001, 0px 1px 6px #0001;
+    --dashbord-nav-bar-height:1.9;
+    --dashbord-nav-bar-opacity:1;
+    --dashbord-nav-bar-icon-color:white;
+
+}

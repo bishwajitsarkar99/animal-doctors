@@ -1,0 +1,97 @@
+:root{
+    --input-background:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+}
+body.doctors-background-color{
+    animation: background_focus 6s infinite;
+}
+/* @keyframes background_focus{
+    0%{
+        background-color: #f1f1f1;
+    }
+    100%{
+        background-color: #fff;
+    }
+} */
+div.url_link{
+    color: darkblue;
+    font-weight: 500;
+    font-size: 12px;
+    font-variant-caps: all-petite-caps;
+}
+.hero-image {
+    margin-top: -42px;
+}
+.container-background{
+    opacity: 1;
+}
+.skeleton{
+    position: relative;
+}
+.skeleton::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg,#b3b3b3,#f9f9f9,#b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+@keyframes skeleton{
+    0%{
+        background-position: -100% 0;
+    }
+    100%{
+        background-position: 100% 0;
+    }
+}
+
+.card.forget_card {
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
+    font-family: 'FontAwesome';
+    color: darkblue;
+}
+.lb_text {
+    font-weight: 500;
+    color: darkblue;
+}
+input.inpt_pass{
+    background-image: var(--input-background);
+    color: darkblue;
+    font-weight: 700;
+    font-size: 13px;
+}
+input.inpt_pass::placeholder{
+    color: darkblue;
+}
+button.btn.btn-sm.btn.forget_button {
+    background-color: darkblue;
+    color: darkkhaki;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 5px;
+    animation: text_font_color 5s infinite;
+}
+@keyframes text_font_color{
+    0%{
+        color: silver;
+    }
+    100%{
+        color: whitesmoke;
+    }
+}
+
+a.btn_bg {
+    background-color: royalblue;
+    border-radius: 5px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+}
+a.btn_bg:hover{
+    background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    border: none;
+    color: darkblue;
+}

@@ -1,0 +1,82 @@
+:root{
+    --post-nav-bar-background:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+}
+.post-bar-bg-color {
+    background-image: var(--post-nav-bar-background);
+    /* border: 1px solid rgba(0, 0, 0, 0.3); */
+}
+.tablinkcreatepost {
+    border: none;
+    font-size: small;
+    font-weight: 600;
+    font-family: Work Sans, sans-serif;
+    font-size: 11px;
+    color: darkblue;
+}
+.tablinkcreatepost:hover{
+    color: white;
+    background-image: radial-gradient(farthest-corner at 100px 100px, darkblue, darkblue);
+}
+.post-seeblue {
+    background-image: radial-gradient(farthest-corner at 100px 100px, darkblue, darkblue);
+    border: none;
+    font-size: small;
+    font-weight: 600;
+    font-family: Work Sans, sans-serif;
+    font-size: 11px;
+    color: white;
+}
+.post-seeblue:hover{
+    color: white;
+    background-image: radial-gradient(farthest-corner at 100px 100px, darkblue, darkblue);
+}
+h5.medicine_head {
+    color: darkblue;
+    font-weight: 500;
+}
+h5.setting {
+    color: orangered;
+    font-weight: 500;
+}
+a.tablinkcreatepost {
+    font-size: 11px;
+    line-height: 2.5;
+    letter-spacing: 0.5px;
+    font-family: futura;
+    opacity: 1;
+    text-transform: uppercase;
+}
+td.status_td {
+    line-height: .5;
+}
+span.badge.show {
+    line-height: .9;
+}
+th.head-font {
+    font-family: math;
+    text-transform: uppercase;
+    font-size: 0.9vw;
+    letter-spacing: 0.5px;
+}
+p#success_message{
+    animation: paragraph_spacing 1s ease-in-out;
+}
+@keyframes paragraph_spacing{
+    100%{
+        letter-spacing: 10px;
+    }
+}
+span.focus_light{
+    animation: focus 1s infinite;
+}
+@keyframes focus{
+    10%{
+        color: red;
+    }
+    50%{
+        color: orange;
+    }
+    100%{
+        color: orangered;
+    }
+}

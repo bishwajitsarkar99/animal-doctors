@@ -1,0 +1,176 @@
+@import "_button.css";
+@import "components-background/silver.css";
+@import "components-background/light-blue.css";
+@import "components-background/dropdown-apperence.css";
+.permission-card{
+    border: none;
+    border-radius: 5px;
+    box-shadow: var(--permission-card);
+}
+tbody#permission_data_table {
+    opacity: 10;
+    color: black;
+    font-weight: 600;
+    border: 1px solid lightblue;
+}
+tr.table_body{
+    border: 1px solid lightblue;
+}
+td.table_body{
+    border-bottom: 1px solid lightblue;
+    border-left: 1px solid lightblue;
+}
+td.table_body2{
+    border-bottom: 1px solid lightblue;
+}
+td.table_body3{
+    border-bottom: 1px solid lightblue;
+    border-right: 1px solid lightblue;
+}
+.btn-hover{
+    transition: transform .5s;
+}
+.btn-hover:hover{
+    background-image: var(--button-hover);
+    border-left: var(--row-hover-border);
+    transform: scale(1);
+}
+a.add_btn {
+    text-decoration: var(--text-underline);
+    color: var(--color);
+    font-weight:var(--font-weight);
+    background-image: var(--add-button-permission);
+}
+a.add_btn:hover{
+    background-image: var(--button-hover);
+}
+input.subm_btn {
+    text-decoration: var(--text-underline);
+    color: var(--color);
+    font-weight:var(--font-weight);
+    background-image: var(--add-button-permission);
+    border: none;
+    outline: none;
+}
+input.subm_btn:hover{
+    background-image: var(--button-hover);
+}
+.add-hidden{
+    display: none;
+}
+.back-hidden{
+    display: none;
+}
+.submt-hidden{
+    display: none;
+}
+.update-back-hidden{
+    display: none;
+}
+.custom-select{
+    position: relative;
+}
+.custom-role-arrow{
+    display: block;
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 2rem;
+    height: 100%;
+    background-image: var(--apperence-bg);
+    pointer-events: none;
+    border-radius: 3px;
+    opacity: 1;
+}
+.custom-role-arrow::before,.custom-role-arrow::after{
+    --size:0.5em;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%,-50%);
+}
+.custom-role-arrow::before{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-bottom: var(--size) solid rgb(255, 255, 255, 0.5);
+    top: 30%;
+}
+.custom-role-arrow::after{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid rgb(255, 255, 255, 0.5);
+    top: 70%;
+}
+select#select_role{
+    width: 86%;
+    outline: none;
+    border: 1px solid lightblue;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    background-image: var(--add-button-permission);
+}
+select#select_role:hover{
+    background-image: var(--button-hover);
+}
+span.permission_text {
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    font-family: math;
+}
+a.edit_back{
+    text-decoration: var(--text-underline);
+    color: var(--color);
+    font-weight:var(--font-weight);
+    background-image: var(--add-button-permission); 
+}
+a.edit_back:hover{
+    background-image: var(--button-hover);
+}
+.edit-back-hidden{
+    display: none;
+}
+.update-hidden{
+    display: none;
+}
+input.update_btn{
+    text-decoration: var(--text-underline);
+    color: var(--color);
+    font-weight:var(--font-weight);
+    background-image: var(--add-button-permission);
+    border: none;
+    outline: none;
+    letter-spacing: 0.5px;
+    font-family: math;
+    border-radius: 5px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+input.update_btn:hover{
+    color: blue;
+    background-image: var(--button-hover);
+}
+.update_message{
+    color: darkcyan;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    animation: text 3s 1;
+}
+@keyframes text{
+    0% {
+        color: darkcyan;
+    }
+    30% {
+        letter-spacing: 15px;
+    }
+    85% {
+        letter-spacing: 10px;
+    }
+}
+

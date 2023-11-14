@@ -1,0 +1,6 @@
+:root{
+    --theme-footer-menu-background-image:radial-gradient(farthest-corner at 100px 100px, #00e300,#898989);
+    --bs-bg-opacity: 1;
+    --modal-menu-width: 80%;
+
+}

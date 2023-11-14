@@ -1,0 +1,12 @@
+:root{
+    /* --supplier-dashboard-background-image:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
+    --supplier-dashboard-background-image:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --supplier-dashboard-opacity:1;
+    --supplier-navbar-btn-background-image:radial-gradient(farthest-corner at 100px 100px, royalblue, royalblue);
+    --supplier-navbar-btn-background-image-hover:radial-gradient(farthest-corner at 100px 100px, royalblue, royalblue);
+    --supplier-navbar-btn-color: white;
+    --supplier-summary-head-color:royalblue;
+    --supplier-summary-focus-bg-50:radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
+    --supplier-summary-focus-bg-80:radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
+    --supplier-summary-focus-bg-100:radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
+}

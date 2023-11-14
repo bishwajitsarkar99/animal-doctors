@@ -1,0 +1,6 @@
+@import "_color-mixin.scss";
+
+.sb-nav-fixed #layoutSidenav #layoutSidenav_content{
+    @include mixin-background-color;
+}
+
