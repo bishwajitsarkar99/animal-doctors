@@ -9,7 +9,7 @@
         <a type="button" style="text-decoration: none;" href="{{route('create.post')}}" class="tablinkcreatepost skeleton ps-2 pe-3" id="product_inactive">{{__('translate.Add-Post')}}</a>
     </div>
 
-    <div class="card card-body category-post-table skeleton mt-4">
+    <div class="card card-body category-post-table table_scroll skeleton mt-4">
         <table class="view-category-table row-border order-column hover skeleton" id="myDataTable" style="width:100%">
             <thead class="skeleton">
                 <tr class="skeleton">

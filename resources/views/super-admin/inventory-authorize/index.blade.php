@@ -31,7 +31,6 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/inventory/medicine-inventory.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/inventory/authorize_table.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-ui.min.css">
@@ -125,7 +124,7 @@
 
       // Change the icon based on visibility
       var icon = parentRow.find('td:first-child');
-      icon.html(childRows.is(':visible') ? '<i class="fa-solid fa-circle-minus ps-1 mt-1" style="color: hotpink;"></i>' : '<i class="fa-solid fa-circle-plus ps-1 mt-1" style="color: #08a05c;"></i>');
+      icon.html(childRows.is(':visible') ? '▼' : '➤');
     });
   });
 </script>

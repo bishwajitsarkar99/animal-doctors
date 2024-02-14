@@ -1,3 +1,59 @@
+:root{
+    --check-background-image:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --table-row-hover:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --inventory-navbar-btn-background-image:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --inventory-navbar-btn-background-image-hover:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --inventory-navbar-btn-color:black;
+    --inventory-opacity:1;
+    --bg-color:purple;
+    --color:purple;
+    --size:1px;
+    --font-weight:500;
+    --apperence-app-setting-bg:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --drop-border-bg-color:darkblue;
+}
+.inventory-seeblue {
+    background-image: var(--inventory-navbar-btn-background-image);
+    opacity: var(--inventory-opacity);
+    color: var(--inventory-navbar-btn-color);
+    font-family: futura;
+    letter-spacing: 0.5px;
+}
+.tablinkinventory {
+    outline: none;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 2;
+}
+.tablinkinventory:hover {
+    background-image: var(--inventory-navbar-btn-background-image-hover);
+    opacity: var(--inventory-opacity);
+    color: var(--inventory-navbar-btn-color);
+    background-color: whitesmoke;
+}
+label.Authorization {
+    color: black;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+select#perItemControlAuthorization {
+    border: none;
+    background-image: var(--inventory-navbar-btn-background-image);
+    outline: none;
+    color: black;
+    font-weight: 600;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 57px;
+}
+label.tot-inv-auth {
+    color: black;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
 table, th, td {
     border-collapse: collapse;
     font-size: 13px;
@@ -8,12 +64,92 @@ table, th, td {
 tr.parent-row {
     font-weight: 600;
 }
+button.btn.btn-sm.cgt_btn:hover {
+    background-color: #ddd;
+    color: darkcyan;
+}
+button.btn.btn-sm.cgt_btn {
+    background-image: linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    font-weight: 600;
+    color: black;
+    line-height: 0.5px;
+    margin-top: 1px;
+    font-size: 0.9vw;
+}
+button.btn.btn-sm.cgt_btn:hover {
+    color: darkcyan;
+}
+input#search_area {
+    background-color: #08a05c;
+    outline: none;
+    box-shadow: none;
+    margin-top: 6px;
+    border: 1px solid #08a05c;
+}
+.custom-select{
+    position: relative;
+}
+
+.custom-inv-drop-item-arrow{
+    display: block;
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 1rem;
+    height: 100%;
+    background-image: var(--apperence-app-setting-bg);
+    pointer-events: none;
+    border-radius: 3px;
+    opacity: 1;
+    cursor: pointer;
+}
+.custom-inv-drop-item-arrow::before,.custom-inv-drop-item-arrow::after{
+    --size:0.5em;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%,-50%);
+}
+.custom-inv-drop-item-arrow::before{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-bottom: var(--size) solid var(--drop-border-bg-color);
+    top: 30%;
+}
+.custom-inv-drop-item-arrow::after{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid var(--drop-border-bg-color);
+    top: 75%;
+}
+.light3-focus {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    border: none;
+    outline: none;
+    animation: color3_focus 1s infinite;
+}
+@keyframes color3_focus{
+    0% {
+        background-color: white;
+    }
+    50% {
+        background-color: lightblue;
+    }
+    100% {
+        background-color: honeydew;
+    }
+}
 .form-check-input {
     width: 2em;
     height: 1em;
     margin-top: 0.25em;
     vertical-align: top;
-    background-color: rgb(13, 202, 240);
+    background-image: var(--check-background-image);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -37,6 +173,14 @@ input.form-check-input.check_permission{
     outline: none;
     box-shadow: none;
 }
+input.form-check-input.check_permission:hover{
+    border: 1px solid rgb(255, 165, 54);
+}
+.card.card-body.inv_reslt {
+    background-image: linear-gradient(to bottom, #fff, #fff);
+    border: none;
+    box-shadow: 0px 1px 10px #0001;
+}
 .tablinkinventory {
     outline: none;
     border: none;
@@ -49,7 +193,26 @@ tr.table-row.user-table-row {
     background-color: white;
 }
 tr.table-row.user-table-row:hover {
-    color: #08a05c;
+    background-image: var(--table-row-hover);
+    color: var(--color);
+    border-left: var(--size) solid var(--bg-color);
+    font-weight: var(--font-weight);
+    animation:fnt_color 2s linear infinite;
+}
+@keyframes fnt_color{
+    0%{
+        color: lightgray;
+    }
+    10%{
+        color: black;
+    }
+
+    50%{
+        color: royalblue;
+    }
+    100%{
+        color: purple;
+    }
 }
 th#th_sort{
     font-size: 12px;
@@ -71,15 +234,16 @@ tr.parent-row:hover{
 }
 input.date_field {
     outline: none;
-    border: 1px solid #dfdfdf;
+    border: 1px solid lightblue;
     font-size: 12px;
-    color: #08a05c;
+    color: black;
     border-radius: 3px;
     cursor: pointer;
     font-weight: 600;
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
 }
 input.date_field::placeholder{
-    color: #08a05c;
+    color: black;
 }
 .search-hidden{
     display: none;
@@ -121,5 +285,9 @@ ul.table_head_set{
     background-color: #fff;
     box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
     border-radius: 5px;
+    border: none;
 
+}
+input[type="checkbox"]{
+    cursor: pointer;
 }

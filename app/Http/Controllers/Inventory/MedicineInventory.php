@@ -48,7 +48,7 @@ class MedicineInventory extends Controller
         $startOfWeek = Carbon::now()->startOfWeek(); // Start of the current week
         $endOfWeek = Carbon::now()->endOfWeek();     // End of the current week
 
-        $data = Inventory::orderBy('id', 'desc')->latest()->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
+        $data = Inventory::orderBy('medicine_group_id', 'desc')->latest()->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
 
         if ($query = $request->get('query')) {
             $users->where('inv_id', 'LIKE', '%' . $query . '%')
@@ -76,7 +76,7 @@ class MedicineInventory extends Controller
         $startOfWeek = Carbon::now()->startOfWeek(); // Start of the current week
         $endOfWeek = Carbon::now()->endOfWeek();     // End of the current week
 
-        $data = Inventory::orderBy('id', 'desc')->latest()->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
+        $data = Inventory::orderBy('medicine_group_id', 'desc')->latest()->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
 
         if ($query = $request->get('query')) {
             $users->where('inv_id', 'LIKE', '%' . $query . '%')
@@ -174,9 +174,9 @@ class MedicineInventory extends Controller
     }
 
     // Inventory Edit
-    public function editInventory($id)
+    public function editInventory($medicine_group_id)
     {
-        $inventories = Inventory::find($id);
+        $inventories = Inventory::find($medicine_group_id);
         if ($inventories) {
             return response()->json([
                 'status' => 200,
@@ -191,7 +191,7 @@ class MedicineInventory extends Controller
     }
 
     // Inventory Update
-    public function updateInventory(Request $request, $id)
+    public function updateInventory(Request $request, $medicine_group_id)
     {
         $validator = validator::make($request->all(), [
             'inv_id' => 'required',
@@ -214,7 +214,7 @@ class MedicineInventory extends Controller
                 'errors' => $validator->messages(),
             ]);
         } else {
-            $inventories = Inventory::find($id);
+            $inventories = Inventory::find($medicine_group_id);
             if ($inventories) {
                 $inventories->inv_id = $request->input('inv_id');
                 $inventories->manufacture_date = $request->input('manufacture_date');

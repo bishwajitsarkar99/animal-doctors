@@ -80,3 +80,20 @@ span.focus_light{
         color: orangered;
     }
 }
+
+@media only screen and (max-width: 600px){
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+    }
+    .table_scroll{
+        overflow-x:auto;
+    }
+    select option{
+        font-size: 8px;
+    }
+    option{
+        width: 50%;
+    }
+}

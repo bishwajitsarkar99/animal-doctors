@@ -1,5 +1,5 @@
 :root{
-    --inventory-background-image:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    --inventory-background-image:linear-gradient(to bottom, silver, transparent,silver,lightgray);
     --inventory-opacity:1;
     --inventory-navbar-btn-background-image-hover:radial-gradient(farthest-corner at 100px 100px, #08a05c, #08a05c);
     --inventory-navbar-btn-color:white;
@@ -10,8 +10,8 @@
     --color:royalblue;
     --size:1px;
     --font-weight:500;
-    --apperence-app-setting-bg:linear-gradient(to bottom, silver, transparent,silver,lightgray);
-    --drop-border-bg-color:royalblue;
+    --apperence-app-setting-bg:linear-gradient(to bottom, #08a05c,#08a05c);
+    --drop-border-bg-color:white;
 }
 .custom-select{
     position: relative;
@@ -24,7 +24,7 @@
     position: absolute;
     width: 1rem;
     height: 100%;
-    /* background-image: var(--apperence-app-setting-bg); */
+    background-image: var(--apperence-app-setting-bg);
     pointer-events: none;
     border-radius: 3px;
     opacity: 1;
@@ -360,6 +360,7 @@ select#perItemControl,#perItemControlOne,#perItemControlTwo {
     font-weight: 600;
     border-radius: 3px;
     cursor: pointer;
+    width: 50px;
 }
 label.peritem {
     color: darkcyan;
@@ -438,7 +439,7 @@ span.status_bg_unauthorized {
 .inventory-bg-color {
     background-image: var(--inventory-background-image);
     opacity: var(--inventory-opacity);
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid lightblue;
 }
 
 .tablinkinventory {
@@ -468,43 +469,86 @@ span.status_bg_unauthorized {
     box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
 }
 
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+    }
+    .table_scroll{
+        overflow-x:auto;
+    }
+    table th#th_sort{
+        font-size: 10px;
+    }
+    button.accordion-button.collapsed.supplier_data_box{
+        font-size: 10px;
+    }
+    .accordion-button:not(.collapsed){
+        font-size: 10px;
+    }
+    td.error_data{
+        font-size: 7px;
+    }
+    .catg{
+        font-size: 7px;
+    }
     input#inv_id{
         width: 159px;
+        font-size:10px;
     }
     select#supplier_id{
         width: 159px;
+        font-size:10px;
     }
     select#category_id{
         width: 159px;
+        font-size:10px;
     }
     select#group{
         width: 159px;
+        font-size:10px;
     }
     select#medicine_name{
         width: 159px;
+        font-size:10px;
     }
     select#medicine_dogs{
         width: 159px;
+        font-size:10px;
     }
     select#origin_name{
         width: 159px;
+        font-size:10px;
     }
     select#product_size{
         width: 159px;
+        font-size:10px;
     }
-    table th#th_sort{
-        font-size: 1px;
-    }
-    label{
-        font-size: 7px;
+    input.inv_number,input#amount,input#sub_total{
+        font-size: 10px;
+        margin-left: 5px;
+        width: 160px;
     }
 
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
+    label.date_name_label,label.inv_name_label,label.date_name_label,label.inv_name_label.brand,input.date_field {
+        font-size: 10px;
+        float: left;
+    }
+    div.symbole_tk{
+        display: none;
+    }
+    button.btn.btn-sm.cgt_btn,button.btn.btn-sm.cgt_cancel_btn,button.btn.btn-sm.cgt_btn.btn_focus.update_button{
+        font-size: 10px;
+    }
+    p.btn_group{
+        margin-right: 19px;
+    }
+    .custom-drop-item-arrow{
+        right: -55px;
+    }
 
 }
 

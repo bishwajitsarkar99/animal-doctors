@@ -9,30 +9,30 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-searchType">
                         <button class="accordion-button collapsed supplier_data_box" type="button" data-bs-toggle="collapse" data-bs-target="#flush-searchEdit" aria-expanded="false" aria-controls="flush-collapseOne">
-                            <i class="fa-solid fa-database fa-bounce me-2"></i> Medicine Inventory Data Table <span class="ms-3" id="loadHead"><i class="fa-regular fa-thumbs-down fa-fade"></i></span>
+                            <i class="fa-solid fa-database fa-bounce me-2"></i> {{__('translate.Medicine Inventory Data Table')}} <span class="ms-3" id="loadHead"><i class="fa-regular fa-thumbs-down fa-fade"></i></span>
                         </button>
                     </h2>
                     <div id="flush-searchEdit" class="accordion-collapse collapse" aria-labelledby="flush-searchType" data-bs-parent="#seach_type_edit">
                         <div class="accordion-body inventory_form">
                             <div class="card-body focus-color cd cat_form inventory_form">
                                 {{-- start Inventory Edit Table --}}
-                                <p class="catg inventory_one_head table-heading"><span>Inventory</span></p>
-                                <div>
+                                <p class="catg inventory_one_head table-heading"><span>{{__('translate.Inventory')}}</span></p>
+                                <div class="table_scroll">
                                     <table class="ord_table center border-1 mt-2">
                                         <tr class="table-row order_body acc_setting_table">
-                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col ps-1">SL</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ col ps-1">Action</th>
-                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">INV-ID</th>
-                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">SVC-ID</th>
-                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">Category</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Group</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Name</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Dosage</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Unit-Price</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Qty</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1">Amount</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_">Status</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_">Updated By</th>
+                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col ps-1">{{__('translate.SN.')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ col ps-1">{{__('translate.Action')}}</th>
+                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">{{__('translate.INV-ID')}}</th>
+                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">{{__('translate.SVC-ID')}}</th>
+                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">{{__('translate.Category')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">{{__('translate.Group')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">{{__('translate.Name')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">{{__('translate.Dosage')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">{{__('translate.Unit-Price')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">{{__('translate.Qty')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1">{{__('translate.Amount')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_">{{__('translate.Status')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_">{{__('translate.Updated By')}}</th>
                                         </tr>
                                         <tbody class="table-heading bg-transparent" id="invedit_data_table">
 
@@ -40,17 +40,20 @@
                                     </table>
                                 </div>
                                 <div class="row table_last_row">
-                                    <div class="col-4">
-                                        <label class="peritem mt-2">Peritem</label>
-                                        <select id="perItemControl">
-                                            <option selected>10</option>
-                                            <option>20</option>
-                                            <option>50</option>
-                                            <option>100</option>
-                                            <option>200</option>
-                                        </select>
+                                    <div class="col-1">
+                                        <label class="peritem mt-">Peritem</label>
+                                        <div class="custom-select">
+                                            <select class="ps-1" id="perItemControl">
+                                                <option selected>10</option>
+                                                <option>20</option>
+                                                <option>50</option>
+                                                <option>100</option>
+                                                <option>200</option>
+                                            </select>
+                                            <span class="custom-drop-item-arrow me-2"></span>
+                                        </div>
                                     </div>
-                                    <div class="col-8">
+                                    <div class="col-11">
                                         <div class="pagination" id="invedit_data_table_paginate">
 
                                         </div>
@@ -59,21 +62,21 @@
                                 {{-- end Inventory Edit Table --}}
 
                                 {{-- start Inventory Unauthorized Table --}}
-                                <p class="catg inventory_second_head table-heading mt-3">Inventory Authorization</span></p>
-                                <div>
+                                <p class="catg inventory_second_head table-heading mt-3">{{__('translate.Inventory Authorization')}}</span></p>
+                                <div class="table_scroll">
                                     <table class="ord_table center border-1 mt-2">
                                         <tr class="table-row order_body acc_setting_table">
-                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col ps-1">SL</th>
-                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">INV-ID</th>
-                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">SVC-ID</th>
-                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">Category</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Group</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Name</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Dosage</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Unit-Price</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Qty</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1">Amount</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1">Status</th>
+                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col ps-1">{{__('translate.SN.')}}</th>
+                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">{{__('translate.INV-ID')}}</th>
+                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">{{__('translate.SVC-ID')}}</th>
+                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">{{__('translate.Category')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">{{__('translate.Group')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">{{__('translate.Name')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">{{__('translate.Dosage')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">{{__('translate.Unit-Price')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">{{__('translate.Qty')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1">{{__('translate.Amount')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1">{{__('translate.Status')}}</th>
                                         </tr>
                                         <tbody class="table-heading bg-transparent" id="inventory_unauthorized_data_table">
 
@@ -81,17 +84,20 @@
                                     </table>
                                 </div>
                                 <div class="row table_last_row">
-                                    <div class="col-4">
-                                        <label class="peritem mt-2">Peritem</label>
-                                        <select id="perItemControlOne">
-                                            <option selected>10</option>
-                                            <option>20</option>
-                                            <option>50</option>
-                                            <option>100</option>
-                                            <option>200</option>
-                                        </select>
+                                    <div class="col-1">
+                                        <label class="peritem">Peritem</label>
+                                        <div class="custom-select">
+                                            <select class="ps-1" id="perItemControlOne">
+                                                <option selected>10</option>
+                                                <option>20</option>
+                                                <option>50</option>
+                                                <option>100</option>
+                                                <option>200</option>
+                                            </select>
+                                            <span class="custom-drop-item-arrow me-2"></span>
+                                        </div>
                                     </div>
-                                    <div class="col-8">
+                                    <div class="col-11">
                                         <div class="pagination" id="inventory_unauthorized_data_table_paginate">
 
                                         </div>
@@ -162,49 +168,49 @@
                                         <div class="row">
                                             <input type="hidden" id="inventory_id">
                                             <div class="col-3">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="svc">INV - ID :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="svc">{{__('translate.INV - ID')}} :</label>
                                             </div>
                                             <div class="col-1">
                                                 <i class="svc-icon fa fa-spinner fa-spin svc-hidden mt-1"></i>
                                             </div>
                                             <div class="col-7 skeleton" style="text-align: left;">
-                                                <input id="inv_id" type="text" name="inv_id" class="inv_field inv_id mobile ps-2" placeholder="INV-0-00000" readonly />
+                                                <input id="inv_id" type="text" name="inv_id" class="inv_field inv_id mobile ps-2" placeholder="{{__('translate.INV')}}-0-00000" readonly />
                                             </div>
                                         </div>
                                         <div class="row mt-2">
                                             <div class="col-3">
-                                                <label class="date_name_label brand mt-1 skeleton" for="date">Manufacture Date :</label>
+                                                <label class="date_name_label brand mt-1 skeleton" for="date">{{__('translate.Manufacture Date')}} :</label>
                                             </div>
                                             <div class="col-1">
                                                 <i class="manufacture-icon fa fa-spinner fa-spin manufacture-hidden mt-1"></i>
                                             </div>
                                             <div class="col-7 skeleton" style="text-align: left;">
-                                                <input name="manufacture_date" type="text" class="date_field manufacture_date ps-2" id="date_id" placeholder="DD-MM-YYYY" />
+                                                <input name="manufacture_date" type="text" class="date_field manufacture_date ps-2" id="date_id" placeholder="{{__('translate.DD-MM-YYYY')}}" />
                                                 <span style="color:darkcyan"><i class="fa-solid fa-calendar-week"></i></span>
                                             </div>
                                         </div>
                                         <div class="row mt-1">
                                             <div class="col-3">
-                                                <label class="date_name_label brand mt-1 skeleton" for="date">Expiry Date :</label>
+                                                <label class="date_name_label brand mt-1 skeleton" for="date">{{__('translate.Expiry Date')}} :</label>
                                             </div>
                                             <div class="col-1">
                                                 <i class="expiry-icon fa fa-spinner fa-spin expiry-hidden mt-1"></i>
                                             </div>
                                             <div class="col-7 skeleton" style="text-align: left;">
-                                                <input name="expiry_date" type="text" class="date_field expiry_date ps-2" id="date_exid" placeholder="DD-MM-YYYY" />
+                                                <input name="expiry_date" type="text" class="date_field expiry_date ps-2" id="date_exid" placeholder="{{__('translate.DD-MM-YYYY')}}" />
                                                 <span style="color:darkcyan"><i class="fa-solid fa-calendar-week"></i></span>
                                             </div>
                                         </div>
                                         <div class="row mt-1">
                                             <div class="col-3">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="svc">SVC - ID :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="svc">{{__('translate.SVC - ID')}} :</label>
                                             </div>
                                             <div class="col-1">
                                                 <i class="svc-icon fa fa-spinner fa-spin svc-hidden mt-1"></i>
                                             </div>
                                             <div class="col-7 skeleton" style="text-align: left;">
                                                 <select id="supplier_id" class="ps-1 pe-1 update_user firstcategory supplier_id" name="supplier_id" placeholder="Select-Category">
-                                                    <option value="0" selected><span> ▼</span> Selecte SVC ID</option>
+                                                    <option value="0" selected><span> ▼</span> {{__('translate.Select SVC ID')}}</option>
                                                     @foreach($suppliers as $item)
                                                     <option class="sub_name_text" value="{{$item->id}}">{{$item->supplier_id}}</option>
                                                     @endforeach
@@ -213,14 +219,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-3">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="svc">Category :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="svc">{{__('translate.Category')}} :</label>
                                             </div>
                                             <div class="col-1">
                                                 <i class="category-icon fa fa-spinner fa-spin category-hidden mt-1"></i>
                                             </div>
                                             <div class="col-7 skeleton" style="text-align: left;">
                                                 <select id="category_id" class="mt-1 ps-1 update_user firstcategory category_id" name="category_id" placeholder="Select-Category">
-                                                    <option value="0" selected><span> ▼</span> Selecte Category</option>
+                                                    <option value="0" selected><span> ▼</span> {{__('translate.Select Category')}}</option>
                                                     @foreach($cateogries as $row)
                                                     <option class="sub_name_text" value="{{$row->id}}">{{$row->sub_category_name}}</option>
                                                     @endforeach
@@ -229,14 +235,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-3">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="group_name">Medicine-Group :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="group_name">{{__('translate.Medicine-Group')}} :</label>
                                             </div>
                                             <div class="col-1">
                                                 <i class="group-icon fa fa-spinner fa-spin group-hidden mt-1"></i>
                                             </div>
                                             <div class="col-7 skeleton" style="text-align: left;">
                                                 <select id="group" class="mt-1 ps-1 update_user group group_name" name="group_name" placeholder="Select-Group">
-                                                    <option value="0" selected><span> ▼</span> Selecte-Group</option>
+                                                    <option value="0" selected><span> ▼</span> {{__('translate.Select-Group')}}</option>
                                                     @foreach($medicine_groups as $row)
                                                     <option class="sub_name_text" value="{{$row->id}}">{{$row->group_name}}</option>
                                                     @endforeach
@@ -246,40 +252,40 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-3">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="medicine_name">Medicine-Name :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="medicine_name">{{__('translate.Medicine-Name')}} :</label>
                                             </div>
                                             <div class="col-1">
                                                 <i class="medicine-name-icon fa fa-spinner fa-spin medicine-name-hidden mt-1"></i>
                                             </div>
                                             <div class="col-7 skeleton" style="text-align: left;">
                                                 <select id="medicine_name" class="mt-1 ps-1 update_user subcategory medicine_name" name="medicine_name" placeholder="Select-Medicine Name">
-                                                    <option value="0" selected><span> ▼</span> Selected Medicine-Name</option>
+                                                    <option value="0" selected><span> ▼</span> {{__('translate.Select Medicine-Name')}}</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-3">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="medicine_dogs">Medicine-Dosage :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="medicine_dogs">{{__('translate.Medicine-Dosage')}} :</label>
                                             </div>
                                             <div class="col-1">
                                                 <i class="dogs-icon fa fa-spinner fa-spin dogs-hidden mt-1"></i>
                                             </div>
                                             <div class="col-7 skeleton" style="text-align: left;">
                                                 <select id="medicine_dogs" class="mt-1 ps-1 update_user dogs medicine_dogs" name="medicine_dogs" placeholder="Select-Medicine-Dogs">
-                                                    <option value="0" selected><span> ▼</span> Selected Medicine-Dosage</option>
+                                                    <option value="0" selected><span> ▼</span> {{__('translate.Select Medicine-Dosage')}}</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-3">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="current_address">Medicine-Origin :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="current_address">{{__('translate.Medicine-Origin')}} :</label>
                                             </div>
                                             <div class="col-1">
                                                 <i class="origin-icon fa fa-spinner fa-spin origin-hidden mt-1"></i>
                                             </div>
                                             <div class="col-7 skeleton" style="text-align: left;">
                                                 <select id="origin_name" class="mt-1 ps-1 update_user category origin_name" name="origin_name" placeholder="Select-Origin">
-                                                    <option value="0" selected><span> ▼</span> Selecte Origin</option>
+                                                    <option value="0" selected><span> ▼</span> {{__('translate.Select Origin')}}</option>
                                                     @foreach($medicine_origins as $row)
                                                         <option class="sub_name_text" value="{{$row->id}}">{{$row->origin_name}}</option>
                                                     @endforeach
@@ -288,14 +294,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-3">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="contact_number_one">Medicine-Size :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="contact_number_one">{{__('translate.Medicine-Size')}} :</label>
                                             </div>
                                             <div class="col-1">
                                                 <i class="size-icon fa fa-spinner fa-spin size-hidden mt-1"></i>
                                             </div>
                                             <div class="col-7 skeleton" style="text-align: left;">
                                                 <select id="product_size" class="mt-1 ps-1 update_user size medicine_size" name="medicine_size" placeholder="Select-Size">
-                                                    <option value="0" selected><span> ▼</span> Selecte Size</option>
+                                                    <option value="0" selected><span> ▼</span> {{__('translate.Select Medicine Size')}}</option>
                                                     @foreach($units as $row)
                                                     <option class="sub_name_text" value="{{$row->id}}">{{$row->units_name}}</option>
                                                     @endforeach
@@ -306,9 +312,9 @@
                                     <div class="col-xl-4 skeleton">
                                         <div class="row mt-1 me-1 skeleton">
                                             <div class="col-4">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="unit_price">Unit-Price :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="unit_price">{{__('translate.Unit-Price')}} :</label>
                                             </div>
-                                            <div class="col-2 skeleton">
+                                            <div class="symbole_tk col-2 skeleton">
                                                 <i class="fa-solid fa-bangladeshi-taka-sign mt-2" style="color: black;font-size:12px;float:right"></i>
                                             </div>
                                             <div class="col-6 skeleton">
@@ -317,9 +323,9 @@
                                         </div>
                                         <div class="row mt-1 me-1">
                                             <div class="col-4">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="quantity">Quantity :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="quantity">{{__('translate.Quantity')}} :</label>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="symbole_tk col-2">
                                             </div>
                                             <div class="col-6 skeleton">
                                                 <input class="inv_number edit_quantity quantity numberformat ps-2" type="number" name="quantity" id="quantity" placeholder="0.00">
@@ -327,9 +333,9 @@
                                         </div>
                                         <div class="row mt-1 me-1">
                                             <div class="col-4">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="amount">Amount :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="amount">{{__('translate.Amount')}} :</label>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="symbole_tk col-2">
                                                 <i class="fa-solid fa-bangladeshi-taka-sign mt-2" style="color: black;font-size:12px;float:right"></i>
                                             </div>
                                             <div class="col-6 skeleton">
@@ -339,9 +345,9 @@
 
                                         <div class="row mt-1 me-1">
                                             <div class="col-4">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="vat">VAT(%) :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="vat">{{__('translate.VAT(%)')}} :</label>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="symbole_tk col-2">
 
                                             </div>
                                             <div class="col-6 skeleton">
@@ -350,9 +356,9 @@
                                         </div>
                                         <div class="row mt-1 me-1">
                                             <div class="col-4">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="tax">TAX(%) :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="tax">{{__('translate.TAX(%)')}} :</label>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="symbole_tk col-2">
 
                                             </div>
                                             <div class="col-6 skeleton">
@@ -361,9 +367,9 @@
                                         </div>
                                         <div class="row mt-1 me-1">
                                             <div class="col-4">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="tax">Discount(%):</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="tax">{{__('translate.Discount(%)')}}:</label>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="symbole_tk col-2">
 
                                             </div>
                                             <div class="col-6 skeleton">
@@ -372,9 +378,9 @@
                                         </div>
                                         <div class="row mt-1 me-1">
                                             <div class="col-4">
-                                                <label class="inv_name_label brand mt-1 skeleton" for="sub_total">Net Amount :</label>
+                                                <label class="inv_name_label brand mt-1 skeleton" for="sub_total">{{__('translate.Net Amount')}} :</label>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="symbole_tk col-2">
                                                 <i class="fa-solid fa-bangladeshi-taka-sign mt-2" style="color: black;font-size:12px;float:right"></i>
                                             </div>
                                             <div class="col-6 skeleton">
@@ -390,7 +396,7 @@
                                     </div>
 
                                     <div class="col-6">
-                                        <p class="" style="text-align: end;">
+                                        <p class="btn_group" style="text-align: end;">
                                             <button type="submit" class="btn btn-sm cgt_btn btn_focus add_button mt-2 skeleton" id="save">
                                                 <i class="add-inv-icon fa fa-spinner fa-spin add-inv-hidden"></i>
                                                 <span class="btn-text">Save</span>
@@ -417,34 +423,34 @@
                                 <span id="savForm_error"></span><span id="updateForm_errorList2"></span>
                                 <div class="col-5 offset-7">
                                     <span class="form-check form-switch search_ skeleton" style="float: right;">
-                                        <label class="search ser_label" for="search">Total Inventory :</label>
+                                        <label class="search ser_label" for="search">{{__('translate.Total Inventory')}} :</label>
                                         <input type="text" class="inv_number ps-" value="" id="tot_inventory" placeholder="0.00 ৳" readonly>
                                     </span>
                                 </div>
                             </div>
-                            <div>
+                            <div style="overflow-x:auto;">
                                 <table class="ord_table center border-1 skeleton mt-1">
                                     <tr class="table-row order_body acc_setting_table skeleton">
-                                        <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color border_right txt col skeleton">S.L</th>
+                                        <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color border_right txt col skeleton">{{__('translate.SN.')}}</th>
                                         <th id="th_sort" class="table_th_color tot_pending_ border_right col txt skeleton"></th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right col txt skeleton">INV-ID</th>
-                                        <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color border_right txt ps-1 skeleton">Mgf.Date</th>
-                                        <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color border_right txt ps-1 skeleton">Exp.Date</th>
-                                        <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color border_right txt ps-1 skeleton" style="text-align: center;">SVC-ID</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">Category</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">Medicine Group</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">Medicine Name</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: center;">Dogs</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: center;">Orgin</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: center;">Size</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">Price</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">Qty</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">Amount</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">VAT(%)</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">Tax(%)</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">Discount(%)</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">Sub Total</th>
-                                        <th id="th_sort" class="table_th_color tot_pending_ skeleton" style="text-align: center;">Action</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right col txt skeleton">{{__('translate.INV-ID')}}</th>
+                                        <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color border_right txt ps-1 skeleton">{{__('translate.Mgf.Date')}}</th>
+                                        <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color border_right txt ps-1 skeleton">{{__('translate.Exp.Date')}}</th>
+                                        <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color border_right txt ps-1 skeleton" style="text-align: center;">{{__('translate.SVC-ID')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">{{__('translate.Category')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">{{__('translate.Medicine Group')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">{{__('translate.Medicine Name')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: center;">{{__('translate.Dosage')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: center;">{{__('translate.Orgin')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: center;">{{__('translate.Size')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">{{__('translate.Price')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">{{__('translate.Qty')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">{{__('translate.Amount')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">{{__('translate.VAT(%)')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">{{__('translate.Tax(%)')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">{{__('translate.Discount(%)')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ border_right ps-1 skeleton" style="text-align: left;">{{__('translate.Sub Total')}}</th>
+                                        <th id="th_sort" class="table_th_color tot_pending_ skeleton" style="text-align: center;">{{__('translate.Action')}}</th>
 
                                     </tr>
                                     <tbody class="bg-tranparent skeleton" id="medicine_table_form">

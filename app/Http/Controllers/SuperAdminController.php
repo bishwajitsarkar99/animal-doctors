@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\CompanyProfile;
+use App\Models\Product;
 use App\Models\Role;
+use App\Models\SubCategory;
+use App\Models\Supplier\Supplier;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -35,7 +40,24 @@ class SuperAdminController extends Controller
 
         $user = Auth::user();
 
-        return view('super-admin.dashboard', compact('users', 'user', 'usersCount', 'userCountCurentYear'));
+        // Category
+        $categories = Category::orderBy('id', 'desc')->where('status', '=', 1)->get();
+        $category_counts = $categories->count();
+        // Sub Category
+        $subCategories = SubCategory::orderBy('id', 'desc')->where('status', '=', 1)->get();
+        $subCategory_counts = $subCategories->count();
+        // Brand
+        $brands = Brand::orderBy('id', 'desc')->where('status', '=', 1)->get();
+        $brand_counts = $brands->count();
+        // Product
+        $products = Product::orderBy('id', 'desc')->where('status', '=', 1)->get();
+        $product_counts = $products->count();
+        // Supplier
+        $supplier_counts = Supplier::where('type','Supplier')->where('supplier_status',1)->count();
+        $vendor_counts = Supplier::where('type','Vendor')->where('supplier_status',1)->count();
+
+        return view('super-admin.dashboard', compact('users', 'user', 'usersCount', 'userCountCurentYear','category_counts','subCategory_counts','brand_counts','product_counts',
+        'supplier_counts','vendor_counts'));
     }
 
     private function getUserCounts($role)  {

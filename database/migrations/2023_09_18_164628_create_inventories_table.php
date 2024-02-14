@@ -14,7 +14,7 @@ class CreateInventoriesTable extends Migration
     public function up()
     {
         Schema::create('inventories', function (Blueprint $table) {
-            $table->id();
+            $table->id('medicine_group_id');
             $table->string('inv_id');
             $table->string('supplier_id');
             $table->string('category_id');

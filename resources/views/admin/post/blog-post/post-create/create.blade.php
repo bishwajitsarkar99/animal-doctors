@@ -50,9 +50,9 @@
                                 </label>
                                 <div class="custom-select">
                                     <select class="form-control form-control-sm skeleton" name="category_id" id="post-category" aria-placeholder="{{__('translate.Select Category')}}">
-                                        <option value="">{{__('translate.--Select Category--')}}</option>
+                                        <option class="form-control form-control-sm" value="">{{__('translate.--Select Category--')}}</option>
                                         @foreach($category as $item)
-                                        <option value="{{$item->id}}">{{$item->category_name}}</option>
+                                        <option class="form-control form-control-sm" value="{{$item->id}}">{{$item->category_name}}</option>
                                         @endforeach
                                     </select>
                                     <span class="custom-list-item-arrow"></span>

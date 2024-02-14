@@ -114,25 +114,25 @@
 
 </ul>
 
-<!-- ====================== Chart =================== -->
+<!-- ====================== Footer =================== -->
 <a class="nav-link_cgrMenu dropdown-toggle ty" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa-solid fa-folder-open fa-beat"></i> <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="click">Chart</span>
+    <i class="fa-solid fa-folder-open fa-beat"></i> <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="click">Footer</span>
 </a>
 <ul class="dropdown-menu dropdown-menu-end tyg rgs line_menu" aria-labelledby="navbarDropdown">
     <li>
         <div class="collapse" id="components_" aria-labelledby="headingTwo" data-bs-parent="#components_">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Line chart">
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Line chart
+                <a class="nav-link underline" href="{{route('forntend_footer.index')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="Company info">
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Information
                 </a>
-                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Pie Chart">
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Pie Chart
+                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="User Subscribe">
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Subscribe
                 </a>
-                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Bar Chart">
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Bar Chart
+                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Social-media link">
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Social-media
                 </a>
-                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="3D Chart">
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>3D Chart
+                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Footer features">
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Features
                 </a>
             </nav>
         </div>

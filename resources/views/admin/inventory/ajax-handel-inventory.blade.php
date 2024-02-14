@@ -21,7 +21,7 @@
                             <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
                             <ul class="dropdown-menu action ms-4 pe-3">
                                 <li class="upd cgy ps-1">
-                                    <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="edtBtn" value="${row.id}" style="font-size: 10px;" type="button">
+                                    <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="edtBtn" value="${row.medicine_group_id}" style="font-size: 10px;" type="button">
                                     <i class="fa-solid fa-pen-to-square fa-beat" style="color:darkcyan"></i></button>
                                 </li>
                             </ul>

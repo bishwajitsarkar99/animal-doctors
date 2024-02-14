@@ -28,21 +28,30 @@ class InventoryAuthorization extends Controller
         // Weekly Inventory
         $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek = Carbon::now()->endOfWeek(); 
-        $weekly_inventories = Inventory::orderBy('id', 'desc')->latest()->whereBetween('created_at', [$startOfWeek, $endOfWeek])->sum('sub_total');
-        $weekly_quantity = Inventory::orderBy('id', 'desc')->latest()->whereBetween('created_at', [$startOfWeek, $endOfWeek])->sum('quantity');
+        $weekly_inventories = Inventory::orderBy('medicine_group_id', 'desc')->latest()->whereBetween('created_at', [$startOfWeek, $endOfWeek])->sum('sub_total');
+        $weekly_quantity = Inventory::orderBy('medicine_group_id', 'desc')->latest()->whereBetween('created_at', [$startOfWeek, $endOfWeek])->sum('quantity');
         // Monthly Inventory
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth(); 
-        $monthly_inventories = Inventory::orderBy('id', 'desc')->latest()->whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('sub_total');
-        $monthly_quantity = Inventory::orderBy('id', 'desc')->latest()->whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('quantity');
+        $monthly_inventories = Inventory::orderBy('medicine_group_id', 'desc')->latest()->whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('sub_total');
+        $monthly_quantity = Inventory::orderBy('medicine_group_id', 'desc')->latest()->whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('quantity');
 
-        return view('super-admin.inventory-authorize.index', compact('medicine_groups', 'inventories','weekly_inventories', 'weekly_quantity', 'monthly_inventories', 'monthly_quantity'));   
+        return view('super-admin.inventory-authorize.index', compact( 'medicine_groups','inventories','weekly_inventories', 'weekly_quantity', 'monthly_inventories', 'monthly_quantity'));   
+    }
+
+    // Inventory Data Search according to Date Range
+    public function getInventoryData(Request $request){
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $results = Inventory::whereBetween('medicine_group', [$startDate, $endDate])->get();
+    
+        return response()->json(['results' => $results]);
     }
 
     // Get Inventory Data
-    public function getInventoryData(Request $request)
-    {
-    }
+    // public function getInventoryData(Request $request)
+    // {
+    // }
 
     // Get Inventory Data In Delete Table
     public function getInventoryDeleteData(Request $request)

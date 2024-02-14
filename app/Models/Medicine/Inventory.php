@@ -15,13 +15,13 @@ use Illuminate\Database\Eloquent\Model;
 class Inventory extends Model
 {
     use HasFactory;
-
+    protected $primaryKey = 'medicine_group_id';
     protected $fillable = [
         'inv_id',
         'supplier_id',
         'category_id',
-        'medicine_group_id',
-        'medicine_id',
+        'medicine_group',
+        'medicine_name',
         'medicine_dogs',
         'medicine_origin',
         'medicine_size',
@@ -54,7 +54,7 @@ class Inventory extends Model
 
     public function roles()
     {
-        return $this->hasOne(Role::class,'id', 'role',);
+        return $this->hasOne(Role::class,'id', 'role');
     }
 
     public function supplier_id()

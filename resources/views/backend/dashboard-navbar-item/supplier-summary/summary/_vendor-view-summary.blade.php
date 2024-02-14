@@ -8,17 +8,17 @@
         <tr class="tb_heading skeleton">
             <td class="tb_body sn_num skeleton ps-2">1</td>
             <th colspan="3" class="tb_body sn_num skeleton  ps-2">{{__('translate.Total Vendor')}}</th>
-            <td class="tb_body sn_num skeleton capsule-skeleton ps-2">4.00</td>
+            <td class="tb_body sn_num skeleton capsule-skeleton ps-2">{{$total_vendor_counts}}.00</td>
         </tr>
         <tr class="tb_heading skeleton">
             <td class="tb_body sn_num skeleton ps-2">2</td>
             <th colspan="3" class="tb_body sn_num skeleton ps-2">{{__('translate.Total Active Vendor')}}</th>
-            <td class="tb_body sn_num skeleton capsule-skeleton ps-2">3.00</td>
+            <td class="tb_body sn_num skeleton capsule-skeleton ps-2">{{$active_vendor_counts}}.00</td>
         </tr>
         <tr class="tb_heading skeleton">
             <td class="tb_body sn_num skeleton ps-2">3</td>
             <th colspan="3" class="tb_body sn_num skeleton ps-2">{{__('translate.Total Inactive Vendor')}}</th>
-            <td class="tb_body sn_num skeleton capsule-skeleton ps-2">1.00</td>
+            <td class="tb_body sn_num skeleton capsule-skeleton ps-2">{{$inactive_vendor_counts}}.00</td>
         </tr>
     </table>
 </div>    

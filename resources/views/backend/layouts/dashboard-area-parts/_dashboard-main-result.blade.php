@@ -129,7 +129,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-2 col-md-6 ms-5">
+    <div class="col-xl-2 col-md-6">
         <!-- =========== Pending Order ============== -->
         <div class="card border-left-primary mb-4 card_focus skeleton" id="totalPending_box">
             <div class="card-body">
@@ -147,7 +147,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-2 col-md-6 ms-5">
+    <div class="col-xl-2 col-md-6">
         <!-- =========== Complete Order ============== -->
         <div class="card border-left-primary mb-4 card_focus skeleton" id="completeOrder">
             <div class="card-body">
@@ -165,7 +165,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-2 col-md-6 ms-5">
+    <div class="col-xl-2 col-md-6">
         <!-- =========== Reject Order ============== -->
         <div class="card border-left-primary mb-4 card_focus skeleton" id="rejectOrder">
             <div class="card-body">
@@ -205,7 +205,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-2 col-md-6 ms-5">
+    <div class="col-xl-2 col-md-6">
         <!-- =========== Pending Order ============== -->
         <div class="card border-left-primary mb-4 card_focus skeleton" id="totalPending_box">
             <div class="card-body">
@@ -223,7 +223,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-2 col-md-6 ms-5">
+    <div class="col-xl-2 col-md-6">
         <!-- =========== Complete Order ============== -->
         <div class="card border-left-primary mb-4 card_focus skeleton" id="completeOrder">
             <div class="card-body">
@@ -241,7 +241,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-2 col-md-6 ms-5">
+    <div class="col-xl-2 col-md-6">
         <!-- =========== Reject Order ============== -->
         <div class="card border-left-primary mb-4 card_focus skeleton" id="rejectOrder">
             <div class="card-body">

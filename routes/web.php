@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\SubAdminController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Forntend\Footer\FooterInformation;
 use App\Http\Controllers\Inventory\InventoryAuthorization;
 use App\Http\Controllers\Inventory\MedicineInventory;
 use App\Http\Controllers\Language\LanguageController;
@@ -215,7 +216,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('super-admin/get-inventory-delete-data', [InventoryAuthorization::class, 'getInventoryDeleteData'])->name('get_inventory_data.action');
         Route::delete('super-admin/inventory-delete', [InventoryAuthorization::class, 'inventoryDelete'])->name('delete-inventory');
     });
+    // Fornt-End Page(Footer)
+    Route::middleware('isSuperAdmin')->group(function() {
+        // Footer
+        Route::get('super-admin/forntend-footer-information', [FooterInformation::class, 'index'])->name('forntend_footer.index');
+        Route::get('super-admin/forntend-footer-get-information', [FooterInformation::class, 'get_information'])->name('get_information.action');
+        Route::put('super-admin/forntend-footer-update-information', [FooterInformation::class, 'update_information'])->name('update.action');
 
+    });
     // ********** Sub Admin Routes *********
     Route::group(['prefix' => 'sub-admin', 'middleware' => ['web', 'isSubAdmin']], function () {
         Route::get('/dashboard', [SubAdminController::class, 'dashboard'])->name('sub-admin.dashboard');
@@ -268,8 +276,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('admin/inventories', [MedicineInventory::class, 'index'])->name('medicine-inventory.index');
         Route::post('admin/inventories', [MedicineInventory::class, 'store'])->name('medicine-inventory.store');
         Route::get('admin/inventories-edit-get',[MedicineInventory::class, 'getData'])->name('search-inv.action');
-        Route::get('admin/inventories-edit/{id}',[MedicineInventory::class, 'editInventory']);
-        Route::put('admin/inventories-update/{id}', [MedicineInventory::class, 'updateInventory'])->name('update_inventory.action');
+        Route::get('admin/inventories-edit/{medicine_group_id}',[MedicineInventory::class, 'editInventory']);
+        Route::put('admin/inventories-update/{medicine_group_id}', [MedicineInventory::class, 'updateInventory'])->name('update_inventory.action');
         Route::get('admin/inventories-unauthorized-data',[MedicineInventory::class, 'unauthorizedData'])->name('search-unauthorized.action');
         // Stock
         Route::get('admin/stock', [StockController::class, 'index'])->name('stock.index');

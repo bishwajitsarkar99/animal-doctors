@@ -8,7 +8,7 @@
     <div id="components" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body sub_box">
             <a class="nav-link collapsed sals_menu compont Components_btn" id="navbarDropdown" data-bs-toggle="collapse" data-bs-target="#components_" aria-expanded="false" aria-controls="collapsePages">
-                <span class="prod_label" id="components_id" data-bs-toggle="tooltip" data-bs-placement="right" title="click">Components</span>
+                <span class="prod_label" id="components_id" data-bs-toggle="tooltip" data-bs-placement="right" title="click">Fornt-End</span>
                 <div class="sb-sidenav-collapse-arrow ms-1">▼</div>
             </a>
             <span class="lock ps-2 pe-2" id="compont_lock">Lock</span><span class="unlock ps-1 pe-1" id="compont_unlock">Unlock</span><br>

@@ -391,7 +391,11 @@ span.nav_head{
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   /* font-family: 'Arial', sans-serif; */
+  
   animation: text_shadow 8s infinite;
+}
+span.nav_head:hover{
+  transition: all 0.6s;
 }
 @media(min-width:400px) and (max-width:480px){
   span.nav_head{
