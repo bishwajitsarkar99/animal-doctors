@@ -63,7 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/edit-users/{id}', [SuperAdminController::class, 'editUsers']);
         Route::post('/update-users/{id}', [SuperAdminController::class, 'updateUsers'])->name('users.update');
         Route::delete('/delete-users/{id}', [SuperAdminController::class, 'deleteUsers'])->name('users.delete');
-        Route::post('/update-app-setting/{id}', [SuperAdminController::class, 'appSettingUpdate'])->name('updateappSetting');
+        Route::post('/update-app-setting', [SuperAdminController::class, 'appSettingUpdate'])->name('updateappSetting');
     });
     // Permission
     Route::middleware('isSuperAdmin')->group(function(){
@@ -221,7 +221,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Footer
         Route::get('super-admin/forntend-footer-information', [FooterInformation::class, 'index'])->name('forntend_footer.index');
         Route::get('super-admin/forntend-footer-get-information', [FooterInformation::class, 'get_information'])->name('get_information.action');
-        Route::put('super-admin/forntend-footer-update-information', [FooterInformation::class, 'update_information'])->name('update.action');
+        Route::post('super-admin/forntend-footer-update-information', [FooterInformation::class, 'update'])->name('update.action');
 
     });
     // ********** Sub Admin Routes *********

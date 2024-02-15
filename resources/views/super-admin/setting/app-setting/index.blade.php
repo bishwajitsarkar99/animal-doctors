@@ -31,6 +31,7 @@
         </ul>
 
         <form action="#" method="POST">
+            
             <!-- Tab panes -->
             <div class="tab-content">
                 <!-- Company Profile -->
@@ -331,6 +332,9 @@
         $(document).on('click', '#company_btn', function(e) {
             e.preventDefault();
             var company_id = $('#company_id').val();
+
+            
+
             var data = {
                 'name': $('#update_company_name').val(),
                 'address': $('#update_company_address').val(),
@@ -742,7 +746,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/update-app-setting/" + company_id,
+                url: "/update-app-setting/",
                 data: data,
                 dataType: "json",
                 success: function(response) {

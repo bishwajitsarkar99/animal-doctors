@@ -420,6 +420,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // $this->call(DemoSeeder::class);
+        //$this->call(FooterContentSeeder::class);
+
     }
     
 }

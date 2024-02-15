@@ -242,8 +242,9 @@ class SuperAdminController extends Controller
     }
 
     // Company Profile Update--------------
-    public function appSettingUpdate(Request $request, $id)
+    public function appSettingUpdate(Request $request)
     {
+       // return dd($request->all());
         $request->validate([
             'name' => 'required|max:191',
             'address' => 'required|max:191',
@@ -271,7 +272,7 @@ class SuperAdminController extends Controller
             'update_social_media_linkedin'=>'required',
             // Purchases Moduel
             'purches_moduel' => 'required|max:191',
-            'product' => 'required|max:191',
+            //'product' => 'required|max:191',
             'purchases_display' => 'required',
             'product_display' => 'required',
             'categ_title_display' => 'required',
@@ -325,7 +326,7 @@ class SuperAdminController extends Controller
             'brand_link'=>'required',
             'brand_visual'=>'required',
             // Product
-            'product'=>'required',
+            // 'product'=>'required',
             'product_title_display'=>'required',
             'add_Prodcut_title'=>'required',
             'product_link'=>'required',
@@ -664,7 +665,7 @@ class SuperAdminController extends Controller
             
             // Purchases Moduel
             'purches_moduel_title' => $request->input('purches_moduel'),
-            'product_title' => $request->input('product'),
+            'product_title' => $request->input('product', ' '),
             'purchases_visual' => $request->input('purchases_display'),
             'product_visual' => $request->input('product_display'),
             // Category

@@ -5,9 +5,15 @@ namespace App\Models\Forntend;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Fornt_end_footer_informations_page extends Model
+
+class ForntEndFooter extends Model
 {
+    
+
     use HasFactory;
+
+    protected $tabale = "fornt_end_footers";
+
     protected $fillable = [
         'company_name',
         'company_address',
@@ -18,6 +24,11 @@ class Fornt_end_footer_informations_page extends Model
         'whatsapp_number_one',
         'whatsapp_number_two',
         'facebook_address',
-        'linkedin'
+        'linkedin',
+        'youtube_chenel',
+        'facebook_link',
+        'messaner_link',
+        'whatsapp_link',
+        'linkedin_link' 
     ];
 }
