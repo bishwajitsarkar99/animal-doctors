@@ -326,7 +326,7 @@ a.doctors_link{
 }
 /* Admin-Login */
 input.password {
-  background-image: var(--bs-email-background-color);
+  /* background-image: var(--bs-email-background-color); */
   font-family: fontawesome;
   width: 56%;
   word-spacing: normal;
@@ -423,7 +423,7 @@ i.fa-solid.fa-stethoscope.fa-beat-fade {
   border-bottom-right-radius: 33%;
 }
 input.email {
-  background-image: var(--bs-email-background-color);
+  /* background-image: var(--bs-email-background-color); */
   font-family: fontawesome;
   width: 56%;
   word-spacing: normal;
@@ -570,7 +570,7 @@ button:not(:disabled),
 /* Mobile Resonsive */
 @media (min-width:400px) and (max-width:480px) {
   body.background-color{
-    height: 900px;
+    height: 100%;
     width: 466px;
   }
   div.hero-text {
@@ -848,7 +848,7 @@ label {
 }
 
 input#email{
-  background-image: var(--bs-email-background-color);
+  /* background-image: var(--bs-email-background-color); */
   color: darkblue;
   font-size: 13px;
   font-weight: bold;
@@ -9024,4 +9024,127 @@ span.bg-text {
 }
 .src_email-hidden{
   display: none;
+}
+@media(min-width:400px) and (max-width:600px){
+  span.media_text2{
+    font-size: 25px;
+  }
+  span.lgo{
+    font-size: 22px;
+  }
+  span.nav_head{
+    margin-left: 10px;
+  }
+  .d-none {
+    display: block !important; 
+  }
+  h1.company_heading{
+    font-size: 20px;
+  }
+  #carouselExampleIndicators{
+    width: 67%;
+    height: 79%;
+    scale: 0.5;
+    background-color: red;
+    position: relative;
+    animation-name: image_slider;
+    animation-duration: 6s;
+    animation-direction: reverse;  
+    animation-iteration-count: infinite;
+    margin-top: 0px;
+  }
+  @keyframes image_slider{
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; left:120px; top:0px;}
+    50%  {background-color:blue; right:120px; top:0px;}
+    75%  {background-color:green; left:0px; right:90px;}
+    100% {background-color:red; left:0px; top:0px;}
+  }
+  .login_card {
+    margin-top: 140px;
+    margin-bottom: 100px;
+  }
+  h4.heading_admin{
+    display: none;
+  }
+}
+@media(min-width:600px) and (max-width:756px){
+  span.media_text2{
+    font-size: 25px;
+  }
+  .login_card {
+    margin-top: 140px;
+    margin-bottom: 100px;
+  }
+  h4.heading_admin{
+    display: none;
+  }
+  span.lgo{
+    font-size: 22px;
+  }
+  span.nav_head{
+    margin-left: 10px;
+  }
+  .d-none {
+    display: block !important; 
+  }
+  #carouselExampleIndicators{
+    width: 67%;
+    height: 75%;
+    scale: 0.5;
+    background-color: red;
+    position: relative;
+    animation-name: image_slider;
+    animation-duration: 6s;
+    animation-direction: reverse;  
+    animation-iteration-count: infinite;
+    margin-top: 0px;
+  }
+  @keyframes image_slider{
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; left:120px; top:0px;}
+    50%  {background-color:blue; right:120px; top:0px;}
+    75%  {background-color:green; left:0px; right:90px;}
+    100% {background-color:red; left:0px; top:0px;}
+  }
+}
+@media(min-width:1072px) and (max-width:756px){
+  span.media_text2{
+    font-size: 25px;
+  }
+  .login_card {
+    margin-top: 140px;
+    margin-bottom: 100px;
+  }
+  h4.heading_admin{
+    display: none;
+  }
+  span.lgo{
+    font-size: 22px;
+  }
+  span.nav_head{
+    margin-left: 10px;
+  }
+  .d-none {
+    display: block !important; 
+  }
+  #carouselExampleIndicators{
+    width: 67%;
+    height: 79%;
+    scale: 0.5;
+    background-color: red;
+    position: relative;
+    animation-name: image_slider;
+    animation-duration: 6s;
+    animation-direction: reverse;  
+    animation-iteration-count: infinite;
+    margin-top: 0px;
+  }
+  @keyframes image_slider{
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; left:120px; top:0px;}
+    50%  {background-color:blue; right:120px; top:0px;}
+    75%  {background-color:green; left:0px; right:90px;}
+    100% {background-color:red; left:0px; top:0px;}
+  }
 }

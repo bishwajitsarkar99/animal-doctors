@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Forntend\Footer;
+namespace App\Http\Controllers\Api\Forntend\Footer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,13 +10,20 @@ class FooterInformation extends Controller
 {
     public function index(Request $request){
 
-        if($request->ajax()){
-            $data = ForntEndFooter::first()->toArray();
+        $data = ForntEndFooter::first()->toArray();
 
-            return \response()->json($data);
-        }
+        return \response()->json($data);
+    }
 
-        return view('super-admin.forntend.footer.footer_information');
+    public function store(Request $request) {
+        
+        return abort(404);
+    }
+
+
+    public function show($id){
+
+        return abort(404);
     }
 
 
@@ -63,5 +70,7 @@ class FooterInformation extends Controller
         ]);
     }
 
-    
+    public function destry($id) {
+        return \abort(404);
+    }
 }

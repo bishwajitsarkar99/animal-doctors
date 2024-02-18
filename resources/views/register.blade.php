@@ -36,7 +36,7 @@
             <img src="{{asset('/image/loader/load-30.gif')}}" alt="Loading...." />
         </div>
         <div class="hero-image">
-            <div class="hero-text heading">
+            <div class="hero-text heading reg_hidden">
                 <h1 class="company_heading" style="font-size:50px;color:darkblue;text-align:left">
                     <span class="skeleton"><i class="fa-solid fa-stethoscope fa-beat-fade"></i></span>
                     <span class="skeleton">{{setting('company_name')}}</span>

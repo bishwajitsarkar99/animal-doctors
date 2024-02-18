@@ -24,8 +24,8 @@
 <header class="bg sticky-top">
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
         <p class="navbar-brand ps-3 admin_panel text-shadow" style="float: right;">
-            <span class="skeleton"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
-            <span class="skeleton">{{setting('company_name')}}</span>
+            <span class="skeleton media_text1"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
+            <span class="skeleton media_text2">{{setting('company_name')}}</span>
         </p>
         <p class="navbar-brand ps- admin_panel text-shadow d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
             <a class="" href="{{setting('update_social_media_facebook_link')}}">
@@ -37,10 +37,6 @@
             <a class="" href="{{setting('update_social_media_whatsapp_link')}}">
                 <span class="social_icon_whatsapp"><img class="social_icon_whatsapp" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_whatsapp')}}" alt=""></span>
             </a>
-            <!-- <a class="" href="{{setting('update_social_media_linkedin_link')}}">
-                <span class="social_icon_whatsapp "><img class="social_icon_whatsapp {{setting('update_social_media_linkedin')}}" src="#" alt=""></span>
-            </a> -->
-            
         </p>
     </nav>
 </header>
@@ -95,7 +91,7 @@
             </div>
             <div class="col-md-4 mb-5" style="margin-top:px">
                 <h4 class="heading_admin text-shadow skeleton ps-3" style="text-align: center;"><span class="skeleton">{{ setting('login_page_title')}}</span></h4>
-                <div class="card card-form-control skeleton">
+                <div class="card card-form-control login_card skeleton">
                     <form id="loginForm" action="{{ route('login') }}" method="POST" autocomplete="off">
                         <div class="col-md-12">
                             @if(Session::get('fail'))

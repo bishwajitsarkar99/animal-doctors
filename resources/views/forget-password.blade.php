@@ -36,7 +36,7 @@
         <img src="{{asset('/image/loader/load-30.gif')}}" alt="Loading...." />
     </div>
     <div class="hero-image">
-        <div class="hero-text heading">
+        <div class="hero-text heading reg_hidden">
             <h1 class="company_heading" style="font-size:50px;color:darkblue;text-align:left">
                 <i class="fa-solid fa-stethoscope fa-beat-fade"></i>
                 <span class="skeleton">{{setting('company_name')}}</span>
@@ -49,7 +49,7 @@
         <div class="row">
             <div class="col-md-12 mb-5" style="margin-top:px">
                 <h4 class="heading_admin_login text-shadow" style="text-align: center;">
-                    <span class="skeleton">{{setting('forgot_page_title')}}</span>
+                    <span class="skeleton forget_text">{{setting('forgot_page_title')}}</span>
                 </h4>
                 <div class="card card-form-control">
                     <form action="{{ route('password.reset') }}" method="POST">
@@ -104,7 +104,7 @@
                                                             Reset Password
                                                         </button>
                                                     </div>
-                                                    <span class="skeleton">Don't have an account?</span> <a class="btn_bg ps-2 pe-2 pb-1 skeleton" href="/login">sign in</a>
+                                                    <span class="skeleton reset_text">Don't have an account?</span> <a class="btn_bg ps-2 pe-2 pb-1 skeleton" href="/login">sign in</a>
                                                     @endif
                                                 </div>
                                             </div>

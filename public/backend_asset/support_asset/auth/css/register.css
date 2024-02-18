@@ -64,7 +64,7 @@
     color: darkgray;
   }
 input.register{
-    background-image: var(--bs-email-background-color);
+    /* background-image: var(--bs-email-background-color); */
     width: 65%;
     font-family: fontawesome;
     outline: none;
@@ -78,7 +78,7 @@ input.register{
     margin-left: 33px;
 }
 input.contract{
-    background-image: var(--bs-email-background-color);
+    /* background-image: var(--bs-email-background-color); */
     width: 50%;
     font-family: fontawesome;
     outline: none;
@@ -92,7 +92,7 @@ input.contract{
     margin-left: 15px;
 }
 input.reg_email{
-    background-image: var(--bs-email-background-color);
+    /* background-image: var(--bs-email-background-color); */
     width: 59%;
     font-family: fontawesome;
     outline: none;
@@ -106,7 +106,7 @@ input.reg_email{
     margin-left: 10px;
 }
 input.password{
-    background-image: var(--bs-email-background-color);
+    /* background-image: var(--bs-email-background-color); */
     width: 65%;
     font-family: fontawesome;
     outline: none;
@@ -120,7 +120,7 @@ input.password{
     margin-left: 5px;
 }
 input.confrim-password{
-    background-image: var(--bs-email-background-color);
+    /* background-image: var(--bs-email-background-color); */
     width: 50%;
     font-family: fontawesome;
     outline: none;
@@ -134,7 +134,7 @@ input.confrim-password{
     margin-left: 5px;
 }
 input.image{
-    background-image: var(--bs-email-background-color);
+    /* background-image: var(--bs-email-background-color); */
     font-family: fontawesome;
     outline: none;
     outline: none;
@@ -229,7 +229,7 @@ button.btn.btn-sm.btn-primary.button_margin{
 body.register_background-color{
     background-image: url("/image/register.jpg");
     /* background-color: #cccccc; */
-    height: 550px;
+    height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -251,26 +251,41 @@ body.register_background-color{
     }
   }
 
-@media (min-width:400px) and (max-width:480px){
+@media (min-width:400px) and (max-width:580px){
+    .container.bg{
+        width: 600px;
+        padding-bottom: 500px;
+    }
     header.sticky-top {
         position: sticky;
-        width: 615px;
+        width: 674px;
+    }
+    .reg_hidden{
+        display: none;
     }
     input.register {
-        margin-left: 65px;
+        margin-left: 81px;
+        width: 70%;
+    }
+    input.contract {
+        margin-left: 8px;
+        width: 69%;
     }
     input.email{
         margin-left: 95px;
     }
     input.reg_email{
-        width:82%;
+        /* width:82%; */
+        width: 70%;
+        margin-left: 78px;
     }
     input.password{
-        margin-left: 13px;
-        width: 71%; 
+        margin-left: 57px;
+        width: 69%;
     }
     input.confirm{
         margin-left: 3px;
+        width: 69%;
     }
     .img-area{
         margin-top: 50px;
@@ -281,4 +296,105 @@ body.register_background-color{
     button.btn.btn-sm.btn-primary.button_margin{
         margin-left: 118px;
     }
+
+}
+@media (min-width:600px) and (max-width:780px){
+    .container.bg{
+        width: 600px;
+        padding-bottom: 500px;
+    }
+    h4.heading_admin_login{
+        color: white;
+    }
+    .reg_hidden{
+        display: none;
+    }
+    header.sticky-top {
+        position: sticky;
+        width: 800px;
+    }
+    input.register {
+        margin-left: 81px;
+        width: 70%;
+    }
+    input.contract {
+        margin-left: 8px;
+        width: 69%;
+    }
+    input.email{
+        margin-left: 95px;
+    }
+    input.reg_email{
+        /* width:82%; */
+        width: 70%;
+        margin-left: 78px;
+    }
+    input.password{
+        margin-left: 57px;
+        width: 69%;
+    }
+    input.confirm{
+        margin-left: 3px;
+        width: 69%;
+    }
+    .img-area{
+        margin-top: 50px;
+    }
+    input.image {
+        margin-left: 101px;
+    }
+    button.btn.btn-sm.btn-primary.button_margin{
+        margin-left: 118px;
+    }
+
+}
+@media (min-width:780px) and (max-width:1192px){
+    .container.bg{
+        width: 600px;
+        padding-bottom: 500px;
+    }
+    header.sticky-top {
+        position: sticky;
+        width: 1192px;
+    }
+    .reg_hidden{
+        display: none;
+    }
+    .hero-text{
+        display: none;
+    }
+    input.register {
+        margin-left: 81px;
+        width: 70%;
+    }
+    input.contract {
+        margin-left: 8px;
+        width: 69%;
+    }
+    input.email{
+        margin-left: 95px;
+    }
+    input.reg_email{
+        /* width:82%; */
+        width: 70%;
+        margin-left: 78px;
+    }
+    input.password{
+        margin-left: 57px;
+        width: 69%;
+    }
+    input.confirm{
+        margin-left: 3px;
+        width: 69%;
+    }
+    .img-area{
+        margin-top: 50px;
+    }
+    input.image {
+        margin-left: 101px;
+    }
+    button.btn.btn-sm.btn-primary.button_margin{
+        margin-left: 118px;
+    }
+
 }

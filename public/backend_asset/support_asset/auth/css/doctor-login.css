@@ -95,3 +95,45 @@ a.btn_bg:hover{
     border: none;
     color: darkblue;
 }
+@media(min-width:400px) and (max-width:580px){
+    .lb_text {
+        font-size: 38px;
+    }
+    button.btn.btn-sm.btn.forget_button{
+        font-size: 25px;
+    }
+    span.reset_text{
+        font-size: 29px;
+    }
+    span.forget_text{
+        font-size: 40px;
+    }
+    #email{
+        font-size: 30px;
+    }
+    a.btn_bg{
+        font-size: 30px;
+        margin-left: 126px;
+    }
+}
+@media(min-width:600px) and (max-width:776px){
+    .lb_text {
+        font-size: 38px;
+    }
+    button.btn.btn-sm.btn.forget_button{
+        font-size: 25px;
+    }
+    span.reset_text{
+        font-size: 29px;
+    }
+    span.forget_text{
+        font-size: 40px;
+    }
+    #email{
+        font-size: 30px;
+    }
+    a.btn_bg{
+        font-size: 30px;
+        margin-left: 126px;
+    }
+}

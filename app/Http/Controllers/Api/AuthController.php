@@ -11,28 +11,30 @@ use Illuminate\Auth;
 class AuthController extends Controller
 {
     public function register(Request $request){
+
         $request->validate([
             'name'=>'required',
             'email'=>'required|email',
             'password'=>'required|confirmed',
             'status'=>'required',
         ]);
-        if(NormalUser::where('email', $request->email)->first()){
-            return response([
-                'message' => 'Email already exists',
-                'status'=>'failed'
-            ], 200);
-        }
+
+        // if(NormalUser::where('email', $request->email)->first()){
+        //     return response([
+        //         'message' => 'Email already exists',
+        //         'status'=>'failed'
+        //     ], 200);
+        // }
 
         $user = NormalUser::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>Hash::make($request->password),
-            'status'=>json_decode($request->status),
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'password'=> Hash::make($request->password),
+            'status'=> $request->status?true: false,
         ]);
-        $token = $user->createToken($request->email)->plainTextToken;
+       // $token = $user->createToken($request->email)->plainTextToken;
         return response([
-            'token'=>$token,
+      
             'message' => 'Registration Success',
             'status'=>'success'
         ], 201);

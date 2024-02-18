@@ -207,98 +207,90 @@
 @include('super-admin.setting.app-setting.moduel-setting-ajax.nav-bar-setting-ajax.nav-bar-setting')
 
 
-
 <script type="text/javascript">
     // Get Company Profile
     $(document).ready(function() {
 
-            //<----Ajax Form Header Setup for csrf token----------->
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
-                }
-            });
+        //<----Ajax Form Header Setup for csrf token----------->
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+            }
+        });
 
-            $.ajax({
-                type: "get",
-                url: "/super-admin/forntend-footer-information/",
-                success: function(response) {
-                    if (response.status == 400) {
-                        $.each(response.errors, function(key, err_value) {
-                            $('#updateForm_errorList').html("");
-                            $('#updateForm_errorList').append('<span>' + err_value + '</span>');
-                        });
-                    } else if (response.status == 404) {
+        $.ajax({
+            type: "get",
+            url: "/super-admin/forntend-footer-information/",
+            success: function(response) {
+                if (response.status == 400) {
+                    $.each(response.errors, function(key, err_value) {
                         $('#updateForm_errorList').html("");
-                        $('#success_message').text(response.messages);
-                    } else {
-                        $('#updateForm_errorList').html("");
-                        $('#success_message').html("");
-                        $('#success_message').fadeIn();
+                        $('#updateForm_errorList').append('<span>' + err_value + '</span>');
+                    });
+                } else if (response.status == 404) {
+                    $('#updateForm_errorList').html("");
+                    $('#success_message').text(response.messages);
+                } else {
+                    $('#updateForm_errorList').html("");
+                    $('#success_message').html("");
+                    $('#success_message').fadeIn();
 
 
-                        // $('#success_message').text(response.messages);
-                        // inject
-                        // $("#update_company_name").val(response.company_name)
-                        // $("#update_company_address").val(response.company_address)
-                        // $("#update_contract_number_one").val(response.contract_number_one)
-                        // $("#update_contract_number_two").val(response.contract_number_two)
-                        // $("#update_whatapp_number_one").val(response.whatsapp_number_one)
-                        // $("#update_whatapp_number_two").val(response.whatsapp_number_two)
-                        // $("#update_hot_number").val(response.hot_number)
-                        // $("#update_email").val(response.email)
-                        // $("#update_facebook_address").val(response.	facebook_address)
-                        // $("#update_linkedin").val(response.linkedin)
-                        // $("#update_youtube").val(response.youtube_chenel)
+                    // $('#success_message').text(response.messages);
+                    // inject
+                    $("#update_company_name").val(response.company_name)
+                    $("#update_company_address").val(response.company_address)
+                    $("#update_contract_number_one").val(response.contract_number_one)
+                    $("#update_contract_number_two").val(response.contract_number_two)
+                    $("#update_whatapp_number_one").val(response.whatsapp_number_one)
+                    $("#update_whatapp_number_two").val(response.whatsapp_number_two)
+                    $("#update_hot_number").val(response.hot_number)
+                    $("#update_email").val(response.email)
+                    $("#update_facebook_address").val(response.	facebook_address)
+                    $("#update_linkedin").val(response.linkedin)
+                    $("#update_youtube").val(response.youtube_chenel)
 
-                        // $("#update_social_media1").val(response.facebook_link)
-                        // $("#update_social_media2").val(response.messaner_link)
-                        // $("#update_social_media3").val(response.whatsapp_link)
-                        // $("#update_social_media4").val(response.linkedin_link)
+                    $("#update_social_media1").val(response.facebook_link)
+                    $("#update_social_media2").val(response.messaner_link)
+                    $("#update_social_media3").val(response.whatsapp_link)
+                    $("#update_social_media4").val(response.linkedin_link)
 
-
-                        setTimeout(() => {
-                            $('#success_message').fadeOut();
-                        }, 3000);
-                    }
+                    setTimeout(() => {
+                        $('#success_message').fadeOut();
+                    }, 3000);
                 }
-            });
-
-            console.log("I am here??");
+            }
+        });
 
     });
 </script>
-
+ 
 
 <script type="text/javascript">
 
-    $("#jubayedTest").on('click', function(){
-        alert("I am ok");
-    });
+
     // Update Company Profile
     $(document).ready(function() {
         $(document).on('click', '.footer_con_update', function(e) {
             e.preventDefault();
 
-            alert(" ok");
+            var data = {
+                company_name: $("#update_company_name").val(),
+                company_address: $("#update_company_address").val(),
+                contract_number_one: $("#update_contract_number_one").val(),
+                contract_number_two: $("#update_contract_number_two").val(),
+                whatsapp_number_one: $("#update_whatapp_number_one").val(),
+                whatsapp_number_two: $("#update_whatapp_number_two").val(),
+                hot_number: $("#update_hot_number").val(),
+                email: $("#update_email").val(),
+                facebook_address: $("#update_facebook_address").val(),
+                linkedin: $("#update_linkedin").val(),
+                youtube_chenel: $("#update_youtube").val(),
 
-            var data ={
-                company_name: $("#update_company_name").val();
-                company_address: $("#update_company_address").val();
-                contract_number_one: $("#update_contract_number_one").val();
-                contract_number_two: $("#update_contract_number_two").val();
-                whatsapp_number_one: $("#update_whatapp_number_one").val();
-                whatsapp_number_two: $("#update_whatapp_number_two").val();
-                hot_number: $("#update_hot_number").val();
-                email: $("#update_email").val();
-                facebook_address: $("#update_facebook_address").val();
-                linkedin: $("#update_linkedin").val();
-                youtube_chenel: $("#update_youtube").val();
-
-                facebook_link: $("#update_social_media1").val();
-                messaner_link: $("#update_social_media2").val();
-                whatsapp_link: $("#update_social_media3").val();
-                linkedin_link: $("#update_social_media4").val();
+                facebook_link: $("#update_social_media1").val(),
+                messaner_link: $("#update_social_media2").val(),
+                whatsapp_link: $("#update_social_media3").val(),
+                linkedin_link: $("#update_social_media4").val(),
             }
 
             //<----Ajax Form Header Setup for csrf token----------->
@@ -326,7 +318,8 @@
                         $('#updateForm_errorList').html("");
                         $('#success_message').html("");
                         $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
+                        $('#success_message').text(response.message);
+
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
