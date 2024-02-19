@@ -59,7 +59,7 @@
                     <li>
                         <div class="dropdown dashboard_menubar {{setting('navbar_pivot_moduel_display')}}">
                             <a class="dropbtn">{{__('translate.Pivot Table')}}</a>
-                            <div class="dropdown-content">
+                            <div class="dropdown-content pivot">
                                 <div class="row">
                                     <div class="col-12">
                                         <a class="mt-2" href="{{'/order-pivot-table'}}">{{__('translate.Order')}}</a>
@@ -67,7 +67,7 @@
                                         <a href="{{'/expenses-pivot-table'}}">{{__('translate.Expenses')}}</a>
                                     </div>
                                 </div>
-                                <span class="custom-pivot-list-arrow"></span>
+                                <span class="custom-pivot-list-arrow mini"></span>
                             </div>
                         </div>
                     </li>
@@ -156,7 +156,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">{{__('translate.Read More Messages')}}</a>
-                                <span class="custom-order-arrow"></span>
+                                <span class="custom-order-arrow mini"></span>
                             </div>
                         </div>
                     </li>
@@ -188,7 +188,7 @@
     <div class="col-xl-8 col-md-8">
         @if(auth()->user()->role ==1)
         <ol class="breadcrumb">
-            <span class="das_head ps-1 pe-1 mt-1">
+            <span class="das_head ps-1 pe-1 mt-">
                 <li class="breadcrumb-item active font_color_focus">{{__('translate.Dashboard')}}</li>
             </span>
         </ol>

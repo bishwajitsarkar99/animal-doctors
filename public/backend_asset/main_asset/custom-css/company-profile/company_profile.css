@@ -44,7 +44,7 @@ input[type=checkbox].form-switch.form-check-input:checked {
 }
 
 input#update_company_name {
-    background-image: var(--component-input-background);
+    /* background-image: var(--component-input-background); */
     box-shadow: none;
     font-size: 12px;
     font-weight: 600;
@@ -429,7 +429,7 @@ button#company_btn:hover{
     background-color: #ddd;
 }
 textarea#update_company_address {
-    background-image: var(--component-input-background);
+    /* background-image: var(--component-input-background); */
     box-shadow: none;
     border-color: #f1eeee;
     font-size: 12px;
@@ -478,5 +478,5 @@ select#update_social_media1,select#update_social_media2,select#update_social_med
 #update_social_media7,#update_social_media8,#update_comp_logo,#update_silder1,#update_silder2,#update_silder3{
     cursor: pointer;
     box-shadow: none;
-    background-image: var(--component-input-background);
+    /* background-image: var(--component-input-background); */
 }
