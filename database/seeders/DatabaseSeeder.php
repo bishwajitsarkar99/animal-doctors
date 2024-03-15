@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\LogoSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -420,8 +421,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // $this->call(DemoSeeder::class);
-        //$this->call(FooterContentSeeder::class);
+        // $this->call(FooterContentSeeder::class);
+        // $this->call(NewsSeeder::class);
+        // $this->call(LogoSeeder::class);
 
     }
     
 }
+

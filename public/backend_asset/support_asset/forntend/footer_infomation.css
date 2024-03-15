@@ -12,3 +12,6 @@ html,body{
     border: none;
     box-shadow: 0px 20px 6px #0001, 0px 1px 6px #0001;
 }
+input#update_social_media1 {
+    box-shadow: none;
+}

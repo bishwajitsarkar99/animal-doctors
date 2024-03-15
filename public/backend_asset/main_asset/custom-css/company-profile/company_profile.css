@@ -44,7 +44,6 @@ input[type=checkbox].form-switch.form-check-input:checked {
 }
 
 input#update_company_name {
-    /* background-image: var(--component-input-background); */
     box-shadow: none;
     font-size: 12px;
     font-weight: 600;
@@ -71,7 +70,6 @@ input#update_company_address {
 }
 input#update_company_title,#update_purchases_moduel,input#update_register_title,input#update_register_form_label_one,
 input#update_forgot_title,input#update_forgot_form_label_one,input#update_reset_title,input#update_reset_form_label_one {
-    background-image: var(--component-input-background);
     box-shadow: none;
     font-size: 12px;
     font-weight: 600;
@@ -81,6 +79,10 @@ input#update_forgot_title,input#update_forgot_form_label_one,input#update_reset_
     border-right: 1px solid #f1eeee;
     /* animation: textColor 1s infinite; */
     color: black;
+}
+input#update_company_title:hover,#update_purchases_moduel:hover,input#update_register_title:hover,input#update_register_form_label_one:hover,
+input#update_forgot_title:hover,input#update_forgot_form_label_one:hover,input#update_reset_title:hover,input#update_reset_form_label_one:hover{
+    background-color: #f1f1f1;
 }
 input#update_purchases_moduel:hover{
     background-color: #f1f1f1;
@@ -208,7 +210,6 @@ select#update_hrm_moduel2,input#update_hrm_moduel3,select#update_hrm_moduel4,inp
 select#update_auth_moduel4,input#update_layouts_moduel,select#update_layouts_moduel2,input#update_components_moduel,select#update_components_moduel2,
 input#update_footer_moduel,select#update_footer_moduel2,select#update_topbar_moduel2,select#update_topbar_moduel3,select#update_navbar_moduel2,
 select#update_navbar_moduel3,select#update_navbar_moduel4,select#update_navbar_moduel5,select#update_navbar_moduel6,select#update_navbar_moduel7 {
-    background-image: var(--component-input-background);
     box-shadow: none;
     font-size: 12px;
     font-weight: 600;
@@ -329,29 +330,8 @@ select#update_purchases_moduel21{
 td.drop {
     line-height: 1.4;
 }
-tr.parent,tr.child1,tr.children_siblink,tr.children_siblink3,tr.children_link,tr.children_link2,tr.children_siblink4,tr.children_link3,tr.children_siblink5,
-tr.children_link4,tr.children_dosage_link4,tr.children_origin_link4,tr.children_siblink6,tr.children_link5,tr.children_siblink7,tr.children_link6,tr.children_siblink8,
-tr.children_link7,tr.children_siblink9,tr.children_link8,tr.child2,tr.stock_children_link,tr.stock_children_link2,tr.stock_children_link2a,tr.stock_children_link2b,
-tr.stock_children_link2c,tr.stock_children_link2d,tr.stock_children_link3,tr.stock_children_link4,tr.stock_children_link4a,tr.stock_children_link5,
-tr.stock_children_link5a,tr.stock_children_link5b,tr.stock_children_link5c,tr.legerChild,tr.acc_children_siblink2,tr.acc_children_siblink4,tr.acc_children_siblink5,
-tr.acc_children_siblink6,tr.exp_children_siblink,tr.exp_children_siblink3,tr.exp_children_siblink4,tr.exp_children_siblink5,tr.exp_children_siblink6,
-tr.customer_children_siblink,tr.customer_children_siblink3,tr.customer_children_siblink4,tr.customer_children_siblink5,tr.customer_children_siblink6,
-tr.petty_cash_children_siblink,tr.petty_cash_children_siblink3,tr.petty_cash_children_siblink4,tr.petty_cash_children_siblink5,tr.petty_cash_children_siblink6,
-tr.bank_children_siblink,tr.bank_children_siblink3,tr.bank_children_siblink4,tr.bank_children_siblink5,tr.bank_children_siblink6,
-tr.tax_vat_children_siblink,tr.tax_vat_children_siblink3,tr.tax_vat_children_siblink4,tr.tax_vat_children_siblink5,tr.tax_vat_children_siblink6,
-tr.sales_child,tr.sales_children_siblink2,tr.sales_children_siblink4,tr.sales_children_siblink5,tr.sales_children_siblink6,tr.invoice_children_siblink2,
-tr.invoice_children_siblink4,tr.invoice_children_siblink5,tr.sales_region_children_siblink2,tr.sales_region_children_siblink4,tr.sales_region_children_siblink5,
-tr.sales_region_children_siblink6,tr.vaoucher_child,tr.vaoucher_children_siblink2,tr.vaoucher_children_siblink4,tr.vaoucher_children_siblink5,tr.main_vaoucher_children_siblink2,
-tr.main_vaoucher_children_siblink4,tr.main_vaoucher_children_siblink5,tr.main_vaoucher_children_siblink6,tr.asset_children_siblink2,tr.asset_children_siblink3,
-tr.asset_children_siblink5,tr.asset_children_siblink6,tr.asset_details_children_siblink2,tr.asset_details_children_siblink5,tr.asset_details_children_siblink6,
-tr.asset_details_children_siblink7,tr.report_children_siblink2,tr.acc_report_children_siblink2,tr.acc_asset_details_children_siblink3,tr.acc_asset_details_children_siblink4,
-tr.acc_asset_details_children_siblink5,tr.acc_asset_details_children_siblink6,tr.acc_asset_details_children_siblink7,tr.acc_asset_details_children_siblink8,tr.acc_asset_details_children_siblink9,
-tr.acc_asset_details_children_siblink10,tr.acc_asset_details_children_siblink11,tr.acc_asset_details_children_siblink12,tr.monthly_report_children_siblink2,tr.monthly_report_children_siblink3,
-tr.monthly_report_children_siblink4,tr.daily_report_children_siblink2,tr.daily_report_children_siblink3,tr.daily_report_children_siblink4 {
-    background-image: var(--component-input-background);
-}
+
 input#update_login_form_label_one {
-    background-image: var(--component-input-background);
     box-shadow: none;
     font-size: 12px;
     font-weight: 600;
@@ -429,7 +409,6 @@ button#company_btn:hover{
     background-color: #ddd;
 }
 textarea#update_company_address {
-    /* background-image: var(--component-input-background); */
     box-shadow: none;
     border-color: #f1eeee;
     font-size: 12px;
@@ -478,5 +457,17 @@ select#update_social_media1,select#update_social_media2,select#update_social_med
 #update_social_media7,#update_social_media8,#update_comp_logo,#update_silder1,#update_silder2,#update_silder3{
     cursor: pointer;
     box-shadow: none;
-    /* background-image: var(--component-input-background); */
+}
+
+input#update_company_name, input#update_contract_number_one,input#update_contract_number_two , input#update_whatapp_number_one,
+input#update_whatapp_number_two, input#update_hot_number, input#update_email, input#update_facebook_address, input#update_linkedin,
+input#update_youtube{
+    box-shadow: none;
+    font-weight: 600;
+    color: black;
+}
+input#update_company_name:hover , input#update_contract_number_one:hover,input#update_contract_number_two:hover , input#update_whatapp_number_one:hover,
+input#update_whatapp_number_two:hover, input#update_hot_number:hover, input#update_email:hover, input#update_facebook_address:hover, input#update_linkedin:hover,
+input#update_youtube:hover{
+    background-color: #f1f1f1;
 }

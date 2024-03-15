@@ -3,12 +3,12 @@
 @include('backend.layouts.dashboard-components._navbar')
 
 <div class="card form-control form-control-sm" id="category_page">
-    @include('super-admin.setting.post-setting._category-setting')
-    @include('super-admin.setting.post-setting._post-setting')
-    <!-- show-message -->
-    <div class="col-xl-12 action_message">
-        <p class="ps-1"><span id="success_message"></span></p>
-    </div>
+  @include('super-admin.setting.post-setting._category-setting')
+  @include('super-admin.setting.post-setting._post-setting')
+  <!-- show-message -->
+  <div class="col-xl-12 action_message">
+      <p class="ps-1"><span id="success_message"></span></p>
+  </div>
 </div>
 
 {{-- Start Delete Category Modal--}}

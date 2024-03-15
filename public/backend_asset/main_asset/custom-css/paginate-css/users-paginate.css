@@ -382,8 +382,23 @@ input.update_user {
     border-radius: 3px;
     box-shadow: 0px 2px 20px #0001;
     width: 59%;
-    background-image: var(--background-color);
+    /* background-image: var(--background-color); */
     
+}
+input#update_social_media1 ,input#update_social_media3 ,input#update_social_media2, input#update_social_media4{
+    box-shadow: none;
+    border: 1px solid lightblue;
+    background-color: white;
+    margin-left: 0px;
+    font-size: 0.9vw;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    opacity: 1;
+    border-radius: 3px;
+    width: 100%;
+}
+input#update_social_media1:hover ,input#update_social_media3:hover ,input#update_social_media2:hover, input#update_social_media4:hover{
+    background-color: #f1f1f1;
 }
 /* input.focus{
     animation: textColor 1s infinite;
@@ -409,7 +424,7 @@ input.update_email {
     border-radius: 3px;
     box-shadow: 0px 2px 20px #0001;
     width: 59%;
-    background-image: var(--background-color);
+    /* background-image: var(--background-color); */
 }
 input.update_contract {
     background-color: white;
@@ -424,7 +439,7 @@ input.update_contract {
     box-shadow: 0px 2px 20px #0001;
     margin-left: 8px;
     width: 59%;
-    background-image: var(--background-color);
+    /* background-image: var(--background-color); */
 }
 label.label_user_edit {
     font-size: 0.9vw;
@@ -529,7 +544,7 @@ input#view_user_update {
 }
 th#th_sort {
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
-    background-image: var(--table-head-color);
+    /* background-image: var(--table-head-color); */
     color: black;
 }
 .search-hidden{

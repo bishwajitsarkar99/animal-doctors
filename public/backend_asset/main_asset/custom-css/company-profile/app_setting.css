@@ -144,7 +144,7 @@ img.social_icon:hover{
     position: absolute;
     width: 2rem;
     height: 78%;
-    background-image: var(--apperence-app-setting-bg);
+    /* background-image: var(--apperence-app-setting-bg); */
     pointer-events: none;
     border-radius: 3px;
     opacity: 1;

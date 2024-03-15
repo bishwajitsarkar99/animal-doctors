@@ -46,8 +46,8 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div>
-                                    <table class="ord_table center border-1 mt-2" id="post_locker_table5">
+                                <div class="table-responsive">
+                                    <table class="table table-striped ord_table center border-1 mt-2" id="post_locker_table5">
                                         <tr class="table-row order_body acc_setting_table" id="post_locker_table6">
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col ps-1 pt-1" id="post_locker_table7">{{__('translate.ID')}}</th>
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col ps-1 pt-1" id="post_locker_table8">{{__('translate.Category-ID')}}</th>

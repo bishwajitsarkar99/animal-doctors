@@ -125,11 +125,11 @@
                 <a class="nav-link underline" href="{{route('forntend_footer.index')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="Company info">
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Information
                 </a>
-                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="User Subscribe">
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Subscribe
+                <a class="nav-link underline" href="{{route('forntend_footer_newletter.index')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="User Subscribe">
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>News-Letter
                 </a>
-                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Social-media link">
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Social-media
+                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Payment getway link">
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Payment Getway
                 </a>
                 <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Footer features">
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Features

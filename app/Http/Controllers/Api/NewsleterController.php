@@ -12,7 +12,8 @@ class NewsleterController extends Controller
     public function store(Request $request) {
 
         $request->validate([
-            'email' => 'string|min:6|max:255'
+            // 'email' => 'string|min:6|max:255'
+            'email' => 'required|email|unique:newsletters',
         ]);
 
         $data = Newsleter::where('email', $request->email)->first();
@@ -24,7 +25,7 @@ class NewsleterController extends Controller
         }
 
         return \response()->json([
-            'message' => 'Newsleter added',
+            'message' => 'Newsleter has added',
         ]);
         
     }

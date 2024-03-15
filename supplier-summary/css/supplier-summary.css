@@ -131,8 +131,7 @@ table.supplier_table tr.table-body td.table_td, th tr.table-body td.table_td, td
   border: 1px solid silver;
 }
 table.supplier_table tr.table-body:hover, th tr.table-body:hover, td tr.table-body:hover {
-  background-image: linear-gradient(to bottom, lightblue, transparent, lightblue, lightblue);
-  border-left: 1px solid purple;
+  color: orangered;
 }
 table.supplier_table th.total_amunt, th th.total_amunt, td th.total_amunt {
   color: royalblue;

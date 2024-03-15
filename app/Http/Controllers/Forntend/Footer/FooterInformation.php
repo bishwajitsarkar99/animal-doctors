@@ -59,7 +59,7 @@ class FooterInformation extends Controller
         ]);
 
         return \response()->json([
-            'message' => "Footer content update success"
+            'message' => "Footer content has updated successfully."
         ]);
     }
 

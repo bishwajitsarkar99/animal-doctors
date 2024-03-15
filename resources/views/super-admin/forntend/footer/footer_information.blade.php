@@ -23,7 +23,7 @@
                 <div id="home" class="container tab-pane active skeleton"><br>
                     <h6>Company Information</h6>
                     <p class="text-dark font-weight-bold">
-                        <span id="#">would you like to update footer ? Please, click the beside button :</span>
+                        <span id="#">would you like to update forntend footer ? Please, click the beside button :</span>
                         <i class="fa-regular fa-hand-point-right fa-beat-fade ms-3 mt-2" style="color: darkcyan;"></i>
                         <input class="company_name form-switch form-check-input skeleton mt-2" type="checkbox" id="profile_mode">
                         <label id="button_mode" class="input_label profile_yes skeleton mt-1" for="select-user"></label>
@@ -62,8 +62,6 @@
                         <i class="update-icon fa fa-spinner fa-spin update-hidden"></i>
                         <span class="btn-text">Update</span>
                     </button>
-
-                    <button id="jubayedTest" type="button">Test</button>
                 </div>
             </div>
         </form>
@@ -127,7 +125,7 @@
         }
         type();
     }
-    typewriterEffect("media", "Would you like to update app setting ? Please, click the beside button :", 50);
+    typewriterEffect("media", "Would you like to update social-media setting ? Please, click the beside button :", 50);
 </script>
 <!-- Navbar-Writer -->
 <script>
@@ -205,6 +203,7 @@
 @include('super-admin.setting.app-setting.moduel-setting-ajax.footer-setting-ajax.footer-setting')
 @include('super-admin.setting.app-setting.moduel-setting-ajax.top-bar-setting-ajax.top-bar-setting')
 @include('super-admin.setting.app-setting.moduel-setting-ajax.nav-bar-setting-ajax.nav-bar-setting')
+@include('super-admin.forntend.footer.moduel.company-information._forntend_footer_info_moduel')
 
 
 <script type="text/javascript">

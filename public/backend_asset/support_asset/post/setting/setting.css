@@ -332,3 +332,99 @@ span#total_main_post_records {
     color: darkcyan;
     font-weight: 600;
 }
+@media(min-width:400px) and (max-width:580px){
+    .custom-post-setting-arrow {
+        right: -56px;
+    }   
+    label.post_lock_ser_label {
+        color: darkcyan;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 8px;
+        margin-top: 1.6px;
+    }
+    button.accordion-button.header_button.post_cat_table {
+        background-color: #f1f1f1;
+        font-family: math;
+        font-weight: 600;
+        color: darkcyan;
+        font-size: 2vw;
+        text-transform: uppercase;
+        line-height: .5;
+        letter-spacing: 0.3px;
+    }
+    button.accordion-button.header_button.post_cat {
+        background-color: #f1f1f1;
+        font-family: math;
+        font-weight: 600;
+        color: darkcyan;
+        font-size: 2vw;
+        text-transform: uppercase;
+        line-height: .5;
+        letter-spacing: 0.3px;
+    }
+    .checking_lock {
+        display: block;
+        float: left;
+    }
+    label.tot-search {
+        font-size: 10px;
+        margin-left: 33px;
+    }
+    .row.table_last_row {
+        height: 35px;
+        margin-bottom: 53px;
+    }
+    label#iteam_label4 {
+        margin-left: 30px;
+    }
+
+}
+@media(min-width:600px) and (max-width:776px){
+    .custom-post-setting-arrow {
+        right: -56px;
+    }   
+    label.post_lock_ser_label {
+        color: darkcyan;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 8px;
+        margin-top: 1.6px;
+    }
+    button.accordion-button.header_button.post_cat_table {
+        background-color: #f1f1f1;
+        font-family: math;
+        font-weight: 600;
+        color: darkcyan;
+        font-size: 2vw;
+        text-transform: uppercase;
+        line-height: .5;
+        letter-spacing: 0.3px;
+    }
+    button.accordion-button.header_button.post_cat {
+        background-color: #f1f1f1;
+        font-family: math;
+        font-weight: 600;
+        color: darkcyan;
+        font-size: 2vw;
+        text-transform: uppercase;
+        line-height: .5;
+        letter-spacing: 0.3px;
+    }
+    .checking_lock {
+        display: block;
+        float: left;
+    }
+    label.tot-search {
+        font-size: 10px;
+        margin-left: 33px;
+    }
+    .row.table_last_row {
+        height: 35px;
+        margin-bottom: 53px;
+    }
+    label#iteam_label4 {
+        margin-left: 30px;
+    }
+
+}
