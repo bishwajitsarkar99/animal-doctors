@@ -1,6 +1,6 @@
 <!-- =============== Sales-Area-Part ====================== -->
 <div class="card form-control form-control-sm skeleton mb-1 mt-1" id="totalsales">
-    <span class="sb-sidenav-collapse-arrow" id="orders_part" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Sales-Area')}}">
+    <span class="sb-sidenav-collapse-arrow" id="orders_part" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Sales-Area')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         <p class="form-check form-switch order_area skeleton mt-3">
             <input class="form-check-input ordrs skeleton" onclick="mySlFunction()" type="checkbox" id="orders_box2" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
             <label class="form-check-label skeleton" for="collapseExample2"><span class="smy">

@@ -45,8 +45,8 @@ class MedicineInventory extends Controller
         // $data = Inventory::where('created_at', '>=', $twentyFourHoursAgo)->get();
 
 
-        $startOfWeek = Carbon::now()->startOfWeek(); // Start of the current week
-        $endOfWeek = Carbon::now()->endOfWeek();     // End of the current week
+        $startOfWeek = Carbon::now()->startOfWeek();
+        $endOfWeek = Carbon::now()->endOfWeek();
 
         $data = Inventory::orderBy('medicine_group_id', 'desc')->latest()->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
 

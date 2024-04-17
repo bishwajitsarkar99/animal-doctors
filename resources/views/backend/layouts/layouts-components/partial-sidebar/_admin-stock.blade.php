@@ -6,7 +6,7 @@
                 <i class="fa-solid fa-down-long fa-beat" data-bs-toggle="tooltip" data-bs-placement="right" title="Open Prodcut Menu"></i>
             </span>
             <a class="nav-link collapsed sals_menu adminStock_btn" id="navbarDropdown" data-bs-toggle="collapse" data-bs-target="#adminStock" aria-expanded="false" aria-controls="collapsePages">
-                <span class="prod_label" id="admin_stock" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}">{{__('translate.Stock')}}</span>
+                <span class="prod_label" id="admin_stock" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Stock')}}</span>
                 <div class="sb-sidenav-collapse-arrow ms-2">▼</div>
 
             </a>

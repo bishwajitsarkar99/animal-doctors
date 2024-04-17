@@ -22,7 +22,7 @@
                             <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd mainPs pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown" disabled>
                             <ul class="dropdown-menu action ms-4 pe-3">
                                 <li class="upd cgy ps-1">
-                                    <button class="btn-sm edit_registration view_btn cgr_btn ms-4" id="deleteBtnPost" value="${row.id}" style="font-size: 10px;" type="button">
+                                    <button class="btn-sm edit_registration view_btn cgr_btn ms-4" id="deleteBtnPost" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                     <i class="fa-solid fa-trash-can fa-beat" style="color:orangered"></i></button>
                                 </li>
                             </ul>
@@ -75,6 +75,8 @@
                         total
                     }));
                     $("#total_main_post_records").text(total);
+                    // Initialize the tooltip elements
+                    $('[data-bs-toggle="tooltip"]').tooltip();
                 }
 
             });

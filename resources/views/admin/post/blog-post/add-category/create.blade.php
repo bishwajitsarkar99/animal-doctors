@@ -127,7 +127,7 @@
                 <div class="col-xl-2">
                     <div class="card card-body side_card">
                         <label class="image_label skeleton" for="contract_number">{{__('translate.Category-Image')}}</label>
-                        <div class="form-group skeleton">
+                        <!-- <div class="form-group skeleton">
                             <div class="img-area skeleton">
                                 <img class="register_img skeleton " id="image_view" src="{{asset('backend_asset')}}/main_asset/img/thumbinal2.jpg" alt="Image 500X500">
                             </div>
@@ -137,6 +137,24 @@
                                 {{$message}}@enderror
                             </span>
                         </div>
+                        <a type="button" class="btn btn-primary" id="static_nav">Upload Image</a>
+                        <input type="hidden" id="selectedFilePath" name="selectedFilePath"> -->
+                        <div class="form-group skeleton">
+                            <div class="img-area skeleton">
+                                <img class="register_img skeleton" id="image_view" src="{{ asset('backend_asset') }}/main_asset/img/thumbinal2.jpg" alt="Image 500X500">
+                            </div>
+                            <input accept="image/*" type="file" id="imgInput" class="image mt-2" name="image" onchange="loadFile(event)">
+                            <span class="text-danger name_message">@error('image')
+                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: orangered;"></i>
+                                {{$message}}@enderror
+                            </span>
+                        </div>
+                        <a type="button" class="btn btn-primary link_button" id="static_nav" data-bs-toggle="tooltip"data-bs-placement="top"title="Upload Image"data-bs-delay="100"data-bs-html="true"data-bs-boundary="window"data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            Upload Image
+                        </a>
+                        <!-- Hidden input field to store file path -->
+                        <input type="hidden" id="selectedFilePath" name="image">
+
                         <!-- <div class="">
                             <h6 class="status_label">Status-Mode</h6>
                             <label class="stats" for="status_mode">Navbar-Status</label>
@@ -172,18 +190,18 @@
 <script src="{{asset('backend_asset')}}/support_asset/auth/js/product-img.js"></script>
 <script src="{{asset('backend_asset')}}/support_asset/auth/post/js/medicine-post-js/medicine.js"></script>
 <script>
-  // skeleton
-  function fetchData() {
-    const allSkeleton = document.querySelectorAll('.skeleton')
+    // skeleton
+    function fetchData() {
+        const allSkeleton = document.querySelectorAll('.skeleton')
 
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton')
-    });
-  }
+        allSkeleton.forEach(item => {
+            item.classList.remove('skeleton')
+        });
+    }
 
-  setTimeout(() => {
-    fetchData();
-  }, 1000);
+    setTimeout(() => {
+        fetchData();
+    }, 1000);
 </script>
 
 @endsection

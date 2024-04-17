@@ -14,7 +14,7 @@
                                     <label for="expenses" class="text-success skeleton" style="font-weight: 700;">{{__('translate.Start Date')}} :</label>
                                     <input id="start_date" type="text" name="start_date" class="select_dateOne bg-filter" style="font-weight: 700;" placeholder="DD-MM-YYYY" />
                                 </span>
-                                <span class="tol_ord mt-1">
+                                <span class="tol_ord mt-1 date-media">
                                     @error('end_date')
                                         <i class="fa-regular fa-hand-point-right fa-beat" style="color: orangered;"></i>
                                     @enderror
@@ -28,7 +28,7 @@
                                 </button>
                             </form>
                         </div>
-                        <div class="col-4 history_box">
+                        <div class="col-6 history_box mobile-responsive">
                             <!-- History Buttons -->
                             <a type="button" class="btn btn-sm btn-success ord_btn histoy" id="history">
                                 <span class="history-signal"></span>
@@ -69,8 +69,6 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-2 button_box">
                             <!-- Refresh Buttons -->
                             <a href="" type="button" class="btn btn-sm btn-success ord_btn" id="refresh" name="refresh">
                                 <i class="search-refresh-icon fa fa-spinner fa-spin search-refresh-hidden"></i>
@@ -80,11 +78,11 @@
                         </div>
                     </div>
                     <div class="row mt-2 result_box">
-                        <div class="col-6"></div>
-                        <div class="col-3">
+                        
+                        <div class="col-6">
                             <table>
                                 <tbody>
-                                    <tr class="current_filter bg-filter">
+                                    <tr class="current_filter bg-filter table-row-display">
                                         <td class="table-cell">
                                             <label class="total-newsletter-search ms-2" for="data_filter"> Current Data Filtering :</label>
                                         </td>
@@ -95,18 +93,18 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-3">
-                        <table>
-                            <tbody>
-                                <tr class="total_newsletter_records bg-filter">
-                                    <td class="table-cell">
-                                        <label class="total-newsletter-search ms-2" for="tot_subscriber"> Total Subscriber :</label>
-                                    </td>
-                                    <td class="table-cell">
-                                        <span class="total_num ms-1"> {{$allnewsletter_counts_number}} .00</span>
-                                    </td>
-                                </tr>
-                            </tbody>
+                        <div class="col-6">
+                            <table>
+                                <tbody>
+                                    <tr class="total_newsletter_records bg-filter table-row-display">
+                                        <td class="table-cell">
+                                            <label class="total-newsletter-search ms-2" for="tot_subscriber"> Total Subscriber :</label>
+                                        </td>
+                                        <td class="table-cell">
+                                            <span class="total_num ms-1"> {{$allnewsletter_counts_number}} .00</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -138,13 +136,9 @@
                                 @endif
                             </tbody>
                         </table>
-                        
                     </div>
                     <div class="row table_last_row">
-                        <div class="col-4">
-                            
-                        </div>
-                        <div class="col-8" style="text-align: end;">
+                        <div class="col-12" style="text-align: end;">
                             @if(count($allnewsletters) > 0)
                                 <span class="tot_summ post_res">
                                     <label class="total-newsletter-search  mt-3 pt-2" for="tot_cagt" style="font-size: 12px; color:black;"> Data Filtering time : 

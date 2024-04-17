@@ -6,6 +6,7 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\SubAdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Api\NewsleterController;
+use App\Http\Controllers\FileManagerController\FileManagerController;
 use App\Http\Controllers\Forntend\Footer\Newsletter\NewsletterController;
 use App\Http\Controllers\Forntend\Footer\FooterInformation;
 use App\Http\Controllers\Inventory\InventoryAuthorization;
@@ -297,9 +298,19 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('admin/stock-details', [StockController::class, 'getStock'])->name('stock-details.action');
 
     });
-
-    Route::middleware(['role:SuperAdmin|Admin|SubAdmin|User'])->group(function(){
-        
+    // File - Manager System
+    Route::middleware(['role:SuperAdmin|Admin|SubAdmin'])->group(function(){
+        Route::get('file-manager/modal-content', [FileManagerController::class, 'modalContent'])->name('file.modalContent');
+        Route::post('file-manager/upload-file', [FileManagerController::class, 'uploadFile'])->name('upload.file');
+        Route::get('file-manager/get-folders', [FileManagerController::class, 'getFolder'])->name('folder.getFolder');
+        Route::get('file-manager/fetch-folders', [FileManagerController::class, 'fetchFolder'])->name('folder.fetchFolder');
+        Route::post('file-manager/create-folder', [FileManagerController::class, 'createFolder'])->name('file-manager.create-folder');
+        Route::get('/files/{folder}', [FileManagerController::class, 'showFiles'])->name('files.showFiles');
+        Route::delete('file-manager/delete/{folder}/{filename}', [FileManagerController::class, 'delete'])->name('file.delete');
+        Route::get('file-manager/edit-folders/{id}', [FileManagerController::class, 'editFolder']);
+        Route::put('file-manager/update-folders/{id}', [FileManagerController::class, 'updateFolder'])->name('update-folder.action');
+        Route::delete('file-manager/folder-delete/{id}', [FileManagerController::class, 'deleteFolder'])->name('folder-delete.action');
+        Route::get('file-manager/select-file-folder', [FileManagerController::class, 'getFolderSelect'])->name('getFolder.action');
     });
 
     // Setting

@@ -1,6 +1,6 @@
 <!-- =============== Expenses-Area-Part ====================== -->
 <div class="card form-control form-control-sm skeleton" id="totalexpenses">
-    <span class="sb-sidenav-collapse-arrow" id="orders_part" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Expenses-Area')}}">
+    <span class="sb-sidenav-collapse-arrow" id="orders_part" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Expenses-Area')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         <p class="form-check form-switch order_area skeleton mt-3">
             <input class="form-check-input ordrs skeleton" onclick="myExFunction()" type="checkbox" id="orders_box3" data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
             <label class="form-check-label skeleton" for="collapseExample3"><span class="smy">
@@ -12,7 +12,7 @@
 </div>
 <!-- =======EXPENSES BODY PART======== -->
 <div class="row collapse" id="collapseExample3">
-    <div class="col">
+    <div class="col-xl-6">
         <div class="row" id="expensesDisplay">
             @include('backend.layouts.dashboard-area-parts.expenses-area-body-parts._expenses-body-part')
         </div>

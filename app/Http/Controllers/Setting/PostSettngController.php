@@ -9,6 +9,8 @@ use App\Models\Post\PostCategory;
 use App\Models\Post\PostTable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class PostSettngController extends Controller
 {
@@ -18,34 +20,34 @@ class PostSettngController extends Controller
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        $post_categories = DB::table('post_categories')->orderBy('id','ASC')->get();
-        $post_tables = DB::table('post_tables')->orderBy('id','ASC')->get();
-        return view('super-admin.setting.post-setting.index', compact('company_profiles','post_categories','post_tables'));
+        $post_categories = DB::table('post_categories')->orderBy('id', 'ASC')->get();
+        $post_tables = DB::table('post_tables')->orderBy('id', 'ASC')->get();
+        return view('super-admin.setting.post-setting.index', compact('company_profiles', 'post_categories', 'post_tables'));
     }
 
     //get post-category
     public function getPost(Request $request)
     {
-        if($request->ajax() == false){
+        if ($request->ajax() == false) {
             // return abort(404);
         }
 
-        $data = PostCategory::orderBy('id','desc')->latest();
+        $data = PostCategory::orderBy('id', 'desc')->latest();
 
-        if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('post_title','LIKE','%'.$query.'%')
-                ->orWhere('category_name','LIKE','%'.$query.'%')
-                ->orWhere('sub_category_name','LIKE','%'.$query.'%')
-                ->orWhere('status','LIKE','%'.$query.'%');      
+        if ($query = $request->get('query')) {
+            $data->where('id', 'LIKE', '%' . $query . '%')
+                ->orWhere('post_title', 'LIKE', '%' . $query . '%')
+                ->orWhere('category_name', 'LIKE', '%' . $query . '%')
+                ->orWhere('sub_category_name', 'LIKE', '%' . $query . '%')
+                ->orWhere('status', 'LIKE', '%' . $query . '%');
         }
         $perItem = 10;
-        if($request->input('per_item')){
+        if ($request->input('per_item')) {
             $perItem = $request->input('per_item');
-        } 
+        }
         $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
+
+        return response()->json($data, 200);
     }
 
     //post-category-hide status update
@@ -55,7 +57,7 @@ class PostSettngController extends Controller
         $status = (bool)$request->input('status');
         $status = !$status;
 
-        $data = PostCategory::findOrFail( $id);
+        $data = PostCategory::findOrFail($id);
 
         $data->update([
             'status' => (int)$status,
@@ -68,40 +70,55 @@ class PostSettngController extends Controller
     }
 
     //get post-category-delete
-    public function deletePostCategory($id)
+    public function deletePostCategory(Request $request ,$folder ,$filename ,$id)
     {
-        $post_categories = PostCategory::find($id);
-        $post_categories->delete();
+        $post_category = PostCategory::find($id);
 
+        if (!$post_category) {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'Post category not found',
+            ]);
+        }
+        $post_category->delete();
+
+        $filePath = public_path('post'. '/' . $folder) . '/' . $filename;
+
+        if (File::exists($filePath)) {
+            File::delete($filePath);
+            return response()->json([
+                'messages' => 'File deleted successfully'
+            ]);
+        }
         return response()->json([
-            'status'=> 200,
-            'messages'=> 'The post category is deleted successfully',
+            'status' => 200,
+            'messages' => 'The post category is deleted successfully',
         ]);
     }
 
     //get-Post-data
     public function getMainPost(Request $request)
     {
-        if($request->ajax() == false){
+        if ($request->ajax() == false) {
             // return abort(404);
         }
 
-        $data = PostTable::orderBy('id','desc')->latest();
+        $data = PostTable::orderBy('id', 'desc')->latest();
 
-        if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('post_title','LIKE','%'.$query.'%')
-                ->orWhere('category_name','LIKE','%'.$query.'%')
-                ->orWhere('sub_category_name','LIKE','%'.$query.'%')
-                ->orWhere('status','LIKE','%'.$query.'%');      
-        } 
+        if ($query = $request->get('query')) {
+            $data->where('id', 'LIKE', '%' . $query . '%')
+                ->orWhere('post_title', 'LIKE', '%' . $query . '%')
+                ->orWhere('category_name', 'LIKE', '%' . $query . '%')
+                ->orWhere('sub_category_name', 'LIKE', '%' . $query . '%')
+                ->orWhere('status', 'LIKE', '%' . $query . '%');
+        }
         $perItem = 10;
-        if($request->input('per_item')){
+        if ($request->input('per_item')) {
             $perItem = $request->input('per_item');
         }
         $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
+
+        return response()->json($data, 200);
     }
 
     //main-post update status
@@ -111,7 +128,7 @@ class PostSettngController extends Controller
         $navbar_status = (bool)$request->input('navbar_status');
         $navbar_status = !$navbar_status;
 
-        $data = PostTable::findOrFail( $id);
+        $data = PostTable::findOrFail($id);
 
         $data->update([
             'navbar_status' => (int)$navbar_status,
@@ -130,8 +147,8 @@ class PostSettngController extends Controller
         $main_post->delete();
 
         return response()->json([
-            'status'=> 200,
-            'messages'=> 'The main post is deleted successfully',
+            'status' => 200,
+            'messages' => 'The main post is deleted successfully',
         ]);
     }
 }

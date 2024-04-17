@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="small_menu col-2">
                                         <span class="action_button pe-1" id="post_locker_table4">
-                                            <input type="checkbox" id="post_locker_mode" class="form-check-input search_all_data">
+                                            <input type="checkbox" id="post_locker_mode" class="form-check-input search_all_data" data-bs-toggle="tooltip" data-bs-placement="top" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                             <label id="post_lock_label" class="search_action post_lock_ser_label" for="action_mode"><span class="text-success">{{__('translate.Post locker')}}</span></label>
                                         </span>
                                     </div>

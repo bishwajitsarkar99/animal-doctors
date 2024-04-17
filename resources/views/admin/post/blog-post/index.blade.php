@@ -50,7 +50,7 @@
                             @endif
                         </td>
                         <td>
-                            <a class="ms-3 skeleton" href="{{ url('admin/edit-category-post/'.$item->id) }}"><i class="fa-solid fa-pen-fancy"></i></a>
+                            <a class="ms-3 skeleton" href="{{ url('admin/edit-category-post/'.$item->id) }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'><i class="fa-solid fa-pen-fancy"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -106,5 +106,11 @@
   setTimeout(() => {
     fetchData();
   }, 1000);
+</script>
+<script>
+    $(document).ready(function(){
+        // Initialize the tooltip elements
+        $('[data-bs-toggle="tooltip"]').tooltip();
+    });
 </script>
 @endsection

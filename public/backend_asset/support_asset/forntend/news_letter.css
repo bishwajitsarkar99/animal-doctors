@@ -38,7 +38,7 @@ tr.table-row.user-table-row {
     background-color:#fff4df;
 }
 .history_box{
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
     display: flex;
 }
@@ -244,3 +244,105 @@ div.result_box{
     background-color: #fff4df;
 }
 
+/* ========= Modbile responsive ========== */
+/* Extra small 400px and up) */
+@media(min-width:400px) and (max-width:580px){
+    form#searchForm {
+        display: flex;
+    }
+    button#filter {
+        margin-top: 22px;
+    }
+    .mobile-responsive {
+        display: inline-flex;
+        margin-top: 54px;
+        margin-left: -174px;
+        
+    }
+    .row.table_last_row {
+        height: 35px;
+        margin-bottom: 53px;
+    }
+    a#refresh{
+        margin-left: 10px;
+    }
+    button#filter{
+        margin-left: 5px;
+    }
+    .date-media{
+        margin-left: 5px;
+    }
+    .table-row-display {
+        display: flex;
+    }
+    .pagint_display{
+        display: contents;
+    }
+    div#pos_cat_content {
+        padding-bottom: 19px;
+    }
+    .news_tot {
+        width: 250px;
+    }
+}
+/* Extra small devices (phones, 600px and down) */
+@media (min-width:600px) and (max-width:778px){
+    form#searchForm {
+        display: flex;
+    }    
+    button#filter {
+        margin-top: 22px;
+    }
+    .mobile-responsive{
+        margin-top: 22px;
+    }
+    .table-row-display {
+        display: flex;
+    }
+    
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media (min-width:992px) and(max-width:768px){
+    form#searchForm {
+        display: flex;
+    }
+    button#filter {
+        margin-top: 22px;
+    }
+    .mobile-responsive{
+        margin-top: 22px;
+    }
+    .table-row-display {
+        display: flex;
+    }
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media (min-width:1200px) and(max-width:992px){
+    form#searchForm {
+        display: flex;
+    }
+    button#filter {
+        margin-top: 22px;
+    }
+    .mobile-responsive{
+        margin-top: 22px;
+    }
+    .table-row-display {
+        display: flex;
+    }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media (min-width:1400px) and(max-width:1200px){
+    form#searchForm {
+        display: flex;
+    }
+    button#filter {
+        margin-top: 22px;
+    }
+    .mobile-responsive{
+        margin-top: 22px;
+    }
+    .table-row-display {
+        display: flex;
+    }
+}

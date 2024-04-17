@@ -27,7 +27,7 @@
             <div class="detail de">
                 <p class="form-check form-switch ord_detl">
                     <span>
-                        <a type="button" class="form-check-label mt-1 pt-1" for="collapseExample" id="flexSwitchCheckDefault2"><span class=" plantform ords ps-2 pe-2">{{__('translate.Details')}}</span></a>
+                        <a type="button" class="form-check-label mt-1 pt-1" for="collapseExample" id="flexSwitchCheckDefault2" data-bs-toggle="tooltip"  data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><span class=" plantform ords ps-2 pe-2">{{__('translate.Details')}}</span></a>
                     </span>
                 </p>
             </div>
@@ -48,7 +48,7 @@
             <div class="detail de">
                 <p class="form-check form-switch ord_detl">
                     <span>
-                        <a type="button" class="form-check-label mt-1 pt-1" for="collapseExample" id="flexSwitchCheckDefault3"><span class=" plantform ords ps-2 pe-2">{{__('translate.Details')}}</span></a>
+                        <a type="button" class="form-check-label mt-1 pt-1" for="collapseExample" id="flexSwitchCheckDefault3" data-bs-toggle="tooltip"  data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><span class=" plantform ords ps-2 pe-2">{{__('translate.Details')}}</span></a>
                     </span>
                 </p>
             </div>
@@ -69,7 +69,7 @@
             <div class="detail de">
                 <p class="form-check form-switch ord_detl">
                     <span>
-                        <a type="button" class="form-check-label mt-1 pt-1" for="collapseExample" id="flexSwitchCheckDefault4"><span class=" plantform ords ps-2 pe-2">{{__('translate.Details')}}</span></a>
+                        <a type="button" class="form-check-label mt-1 pt-1" for="collapseExample" id="flexSwitchCheckDefault4" data-bs-toggle="tooltip"  data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><span class=" plantform ords ps-2 pe-2">{{__('translate.Details')}}</span></a>
                     </span>
                 </p>
             </div>

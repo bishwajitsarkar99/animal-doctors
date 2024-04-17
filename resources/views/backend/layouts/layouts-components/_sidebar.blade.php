@@ -138,11 +138,15 @@
             @include('backend.layouts.layouts-components.partial-sidebar._stock')
             <div class="sb-sidenav-menu-heading"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> {{__('translate.Stock')}}</div>
             @include('backend.layouts.layouts-components.partial-sidebar._admin-stock')
+                <!-- ================== Layouts ======================= -->
+            @include('backend.layouts.layouts-components.partial-sidebar._layouts')
         @endif
         @if(auth()->user()->role ==2)
         <!-- ==================  Auth Moduel ======================= -->
         <div class="sb-sidenav-menu-heading"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> Auth</div>
         @include('backend.layouts.layouts-components.partial-sidebar._sub-admin')
+        <!-- ================== Layouts ======================= -->
+        @include('backend.layouts.layouts-components.partial-sidebar._layouts')
         @endif
     </div>
 </div>

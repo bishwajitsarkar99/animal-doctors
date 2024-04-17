@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\CompanyProfile;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Category;
+use App\Models\Folder\Folder_entry;
 use Illuminate\Support\Facades\Cache;
 
 class CategoryController extends Controller
@@ -16,8 +17,9 @@ class CategoryController extends Controller
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
+        $allfolders = Folder_entry::all();
         $categories = Category::all();
-        return view('super-admin.medicine-item.category.index', compact('company_profiles','categories'));
+        return view('super-admin.medicine-item.category.index', compact('company_profiles','categories', 'allfolders'));
     }
 
     // Get Category

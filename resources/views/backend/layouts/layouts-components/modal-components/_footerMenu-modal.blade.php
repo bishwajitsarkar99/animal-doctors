@@ -4,7 +4,7 @@
         Menu
     </h5>
 
-    <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-palacement="right" title="Close">
+    <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
     </button>
 </div>
 <div class="modal-body admin_modal_body footer_menubar">
@@ -17,7 +17,7 @@
                     <i class="fa-solid fa-down-long fa-beat" data-bs-toggle="tooltip" data-bs-placement="right" title="Open Prodcut Menu"></i>
                 </span>
                 <a class="nav-link collapsed sals_menu" id="navbarDropdown" data-bs-toggle="collapse" data-bs-target="#product" aria-expanded="false" aria-controls="collapsePages">
-                    <span class="prod_label footer_menu ps-1" id="prodct" data-bs-toggle="tooltip" data-bs-placement="right" title="click"> Product</span>
+                    <span class="prod_label footer_menu ps-1" id="prodct" data-bs-toggle="tooltip" data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'> Product</span>
                 </a>
             </button>
             <div id="product_footerMenu" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -37,7 +37,7 @@
                     <i class="fa-solid fa-down-long fa-beat" data-bs-toggle="tooltip" data-bs-placement="right" title="Open Prodcut Menu"></i>
                 </span>
                 <a class="nav-link collapsed sals_menu" id="stockMenu" data-bs-toggle="collapse" data-bs-target="#stock_" aria-expanded="false" aria-controls="collapsePages">
-                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="click"> Stock</span>
+                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'> Stock</span>
                 </a>
             </button>
             <div id="stock_footerMenu" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -59,7 +59,7 @@
                     <i class="fa-solid fa-down-long fa-beat" data-bs-toggle="tooltip" data-bs-placement="right" title="Open Prodcut Menu"></i>
                 </span>
                 <a class="nav-link collapsed sals_menu" id="legerMenu" data-bs-toggle="collapse" data-bs-target="#leger_id" aria-expanded="false" aria-controls="collapsePages">
-                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="click"> Leger</span>
+                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'> Leger</span>
                 </a>
             </button>
             <div id="leger_footerMenu" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -79,7 +79,7 @@
                     <i class="fa-solid fa-down-long fa-beat" data-bs-toggle="tooltip" data-bs-placement="right" title="Open Prodcut Menu"></i>
                 </span>
                 <a class="nav-link collapsed sals_menu" id="salesMenu" data-bs-toggle="collapse" data-bs-target="#sales_" aria-expanded="false" aria-controls="collapsePages">
-                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="click"> Sales</span>
+                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'> Sales</span>
                 </a>
             </button>
             <div id="sales_footerMenu" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -99,7 +99,7 @@
                     <i class="fa-solid fa-down-long fa-beat" data-bs-toggle="tooltip" data-bs-placement="right" title="Open Prodcut Menu"></i>
                 </span>
                 <a class="nav-link collapsed sals_menu" id="vouchersMenu" data-bs-toggle="collapse" data-bs-target="#voucher_" aria-expanded="false" aria-controls="collapsePages">
-                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="click"> Voucher</span>
+                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'> Voucher</span>
                 </a>
             </button>
             <div id="voucher_footerMenu" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -119,7 +119,7 @@
                     <i class="fa-solid fa-down-long fa-beat" data-bs-toggle="tooltip" data-bs-placement="right" title="Open Prodcut Menu"></i>
                 </span>
                 <a class="nav-link collapsed sals_menu" id="assetMenu" data-bs-toggle="collapse" data-bs-target="#asset_" aria-expanded="false" aria-controls="collapsePages">
-                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="click"> Asset</span>
+                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'> Asset</span>
                 </a>
             </button>
             <div id="asset_footerMenu" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -139,7 +139,7 @@
                     <i class="fa-solid fa-down-long fa-beat" data-bs-toggle="tooltip" data-bs-placement="right" title="Open Prodcut Menu"></i>
                 </span>
                 <a class="nav-link collapsed sals_menu" id="reportMenu" data-bs-toggle="collapse" data-bs-target="#report_" aria-expanded="false" aria-controls="collapsePages">
-                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="click"> Reports</span>
+                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'> Reports</span>
                 </a>
             </button>
             <div id="report_footerMenu" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -161,7 +161,7 @@
                     <i class="fa-solid fa-down-long fa-beat" data-bs-toggle="tooltip" data-bs-placement="right" title="Open Prodcut Menu"></i>
                 </span>
                 <a class="nav-link collapsed sals_menu" id="hrmMenu" data-bs-toggle="collapse" data-bs-target="#hrm_" aria-expanded="false" aria-controls="collapsePages">
-                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="click"> HRM</span>
+                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'> HRM</span>
                 </a>
             </button>
             <div id="hrm_footerMenu" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -183,7 +183,7 @@
                     <i class="fa-solid fa-down-long fa-beat" data-bs-toggle="tooltip" data-bs-placement="right" title="Open Prodcut Menu"></i>
                 </span>
                 <a class="nav-link collapsed sals_menu" id="authMenu" data-bs-toggle="collapse" data-bs-target="#auth_" aria-expanded="false" aria-controls="collapsePages">
-                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="click"> Auth</span>
+                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'> Auth</span>
                 </a>
             </button>
             <div id="auth_footerMenu" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -206,7 +206,7 @@
                     <i class="fa-solid fa-down-long fa-beat" data-bs-toggle="tooltip" data-bs-placement="right" title="Open Prodcut Menu"></i>
                 </span>
                 <a class="nav-link collapsed sals_menu" id="componentsMenu" data-bs-toggle="collapse" data-bs-target="#components_" aria-expanded="false" aria-controls="collapsePages">
-                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="click"> Components</span>
+                    <span class="prod_label footer_menu ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'> Components</span>
                 </a>
             </button>
             <div id="compnents_footerMenu" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">

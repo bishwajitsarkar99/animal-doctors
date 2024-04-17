@@ -1,9 +1,9 @@
 <!-- Navbar Brand-->
 <a class="navbar-brand ps-3 admin_panel" href="#" id="side_bar">
-    <span class="visit_link" onclick="openFullscreen()" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Open Full Screen Mode')}}">
+    <span class="visit_link" onclick="openFullscreen()" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Open Full Screen Mode')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         <span><i class="fa-solid fa-expand" style="color: #ffffff;"></i></span>
     </span>
-    <span class="visit_link" onclick="closeFullscreen()" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close Full Screen Mode')}}">
+    <span class="visit_link" onclick="closeFullscreen()" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close Full Screen Mode')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         <span><i class="fa-regular fa-rectangle-xmark" style="color: #ffffff;"></i></span>
     </span>
     @if(auth()->user()->role ==1)
@@ -23,14 +23,14 @@
     @endif
 </a>
 <!-- Sidebar Toggle-->
-<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 footer_toggle" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 footer_toggle" id="sidebarToggle" href="#!" data-bs-toggle="tooltip"  data-bs-placement="left" title="Close side-bar" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><i class="fas fa-bars"></i></button>
 <span class="admin_email">{{Auth::user()->email}} </span>
 
 <!-- Navbar Search-->
 <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0 {{setting('topbar_moduel_display')}}">
     <div class="input-group">
         <input type="search" list="datalistOptionsTop" class="form-control form-control-sm src_form {{setting('topbar_moduel_display')}}" id="srch_url" placeholder="{{__('translate.Search..')}}" aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-        <button class="btn btn-success btn-btn-sm {{setting('topbar_searchbtn_moduel_display')}}" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
+        <button class="btn btn-success btn-btn-sm {{setting('topbar_searchbtn_moduel_display')}}" id="btnNavbarSearch" type="submit" data-bs-toggle="tooltip"  data-bs-placement="left" title="Search" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><i class="fas fa-search"></i></button>
         <datalist id="datalistOptionsTop">
             <option value="{{setting('category_link')}}">
             <option value="">

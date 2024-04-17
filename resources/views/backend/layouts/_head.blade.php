@@ -7,16 +7,16 @@
 
 <title>
     @if(auth()->user()->role == 1)
-        Super-Admin
+    Super-Admin
     @endif
     @if(auth()->user()->role == 2)
-        Sub-Admin
+    Sub-Admin
     @endif
     @if(auth()->user()->role == 3)
-        Admin
+    Admin
     @endif
     @if(auth()->user()->role == 0)
-        Doctors-Center
+    Doctors-Center
     @endif
 </title>
 <link rel="icon" type="shortcut icon" href="{{asset('backend_asset')}}/main_asset/img/favicon.png">
@@ -128,13 +128,15 @@
 <!-- Data-Table-Css -->
 <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/data-table-css/data-table-min.css">
-
-
-
-
-
-
-
-
-
-
+@if(auth()->user()->role ==1)
+<!-- File-Manager -->
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/file-manager/fileManager.css">
+@endif
+@if(auth()->user()->role ==2)
+<!-- File-Manager -->
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/file-manager/fileManager.css">
+@endif
+@if(auth()->user()->role ==3)
+<!-- File-Manager -->
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/file-manager/fileManager.css">
+@endif

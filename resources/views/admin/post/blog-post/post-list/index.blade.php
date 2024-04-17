@@ -54,7 +54,7 @@
                         @endif
                     </td>
                     <td class="skeleton">
-                        <a class="skeleton ms-3" href="{{ url('admin/edit-post/'.$item->id) }}"><i class="fa-solid fa-pen-fancy"></i></a>
+                        <a class="skeleton ms-3" href="{{ url('admin/edit-post/'.$item->id) }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'><i class="fa-solid fa-pen-fancy"></i></a>
                     </td>
                 </tr>
                 @endforeach

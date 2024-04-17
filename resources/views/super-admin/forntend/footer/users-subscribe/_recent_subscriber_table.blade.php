@@ -59,7 +59,7 @@
                                             <span class="custom-post-setting-arrow me-2"></span>
                                         </div>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-3 news_tot">
                                         <span class="tot_summ cats_res" id="num_plate">
                                             <label class="tot-search mt-3 pt-2" for="tot_cagt"> Total Subscriber :</label>
                                             <label for="total_medic_records" id="iteam_label4"><span class="total_users" style="font-weight: 600;color:darkcyan;font-size:12px;" id="total_news_letter_records">
@@ -67,7 +67,7 @@
                                             </label>
                                         </span>
                                     </div>
-                                    <div class="col-8">
+                                    <div class="col-8 pagint_display">
                                         <div class="pagination" id="newsletter_data_table_paginate">
 
                                         </div>

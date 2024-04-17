@@ -30,7 +30,7 @@
                   @foreach($categories as $category)
                   <option value="{{$category->category_name}}">
                   <option value="{{$category->id}}">
-                    @endforeach
+                  @endforeach
                 </datalist>
               </span>
             </div>
@@ -117,6 +117,7 @@
       <p class="ps-1"><span id="success_message"></span></p>
     </div>
   </div>
+  
 </div>
 
 {{-- Start Delete User Modal--}}
@@ -128,7 +129,7 @@
         <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
           {{__('translate.Delete Category')}}
         </h5>
-        <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-palacement="right" title="{{__('translate.Close')}}"></button>
+        <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
       </div>
 
       <div class="modal-body profile-body pb-1">

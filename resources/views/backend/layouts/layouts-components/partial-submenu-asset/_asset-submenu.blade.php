@@ -1,5 +1,5 @@
 <a class="nav-link_cgrMenu dropdown-toggle ty {{setting('new_asset_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa-solid fa-folder-open fa-beat"></i> <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}">
+    <i class="fa-solid fa-folder-open fa-beat"></i> <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         <span class="{{setting('new_asset_title_display')}}">{{__('translate.New Asset')}}</span>
     </span>
 </a>
@@ -7,11 +7,11 @@
     <li>
         <div class="collapse" id="asset_" aria-labelledby="headingTwo" data-bs-parent="#asset_">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link underline" href="{{setting('add_asset_link')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Asset Add')}}">
+                <a class="nav-link underline" href="{{setting('add_asset_link')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Asset Add')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>
                     <span class="{{setting('add_asset_visual')}}">{{__('translate.Create Asset')}}</span>
                 </a>
-                <a class="nav-link underline" href="{{setting('asset_details_link')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Asset List')}}">
+                <a class="nav-link underline" href="{{setting('asset_details_link')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Asset List')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>
                     <span class="{{setting('asset_details_visual')}}">{{__('translate.Asset List')}}</span>
                 </a>
@@ -21,7 +21,7 @@
 </ul>
 <!-- ================= Asset Details ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty {{setting('details_asset_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa-solid fa-folder-open fa-beat"></i> <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}">
+    <i class="fa-solid fa-folder-open fa-beat"></i> <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         <span class="{{setting('details_asset_title_display')}}">{{__('translate.Details')}}</span>
     </span>
 </a>
@@ -29,19 +29,19 @@
     <li>
         <div class="collapse" id="asset_" aria-labelledby="headingTwo" data-bs-parent="#asset_">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link underline" href="{{setting('previous_asset_link')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Previous Asset')}}">
+                <a class="nav-link underline" href="{{setting('previous_asset_link')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Previous Asset')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>
                     <span class="{{setting('previous_asset_visual')}}">{{__('translate.Previous Asset')}}</span>
                 </a>
-                <a class="nav-link underline" href="{{setting('current_asset_link')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Current Asset')}}">
+                <a class="nav-link underline" href="{{setting('current_asset_link')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Current Asset')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>
                     <span class="{{setting('current_asset_visual')}}">{{__('translate.Current Asset')}}</span>
                 </a>
-                <a class="nav-link underline" href="{{setting('asset_detls_link')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Asset Details Record')}}">
+                <a class="nav-link underline" href="{{setting('asset_detls_link')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Asset Details Record')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>
                     <span class="{{setting('aasset_detls_visual')}}">{{__('translate.Asset Details')}}</span>
                 </a>
-                <a class="nav-link underline" href="{{setting('asset_setting_link')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Asset Setting')}}">
+                <a class="nav-link underline" href="{{setting('asset_setting_link')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Asset Setting')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>
                     <span class="{{setting('asset_setting_visual')}}">{{__('translate.Asset Setting')}}</span>
                 </a>

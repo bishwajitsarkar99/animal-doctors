@@ -50,7 +50,7 @@
     @include('backend.layouts.handler-js.design._side-bar-js')
     @include('backend.layouts.handler-js.footer-js._footer-menu-js')
     @include('backend.layouts.handler-js._footer-js')
-    
+    @include('backend.layouts.layouts-components.file-manager._file_manager')
 
     @yield('script')
     @stack('scripts')
