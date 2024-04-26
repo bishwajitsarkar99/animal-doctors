@@ -54,7 +54,7 @@
                                         </div>
                                     </div>
                                     <div class="col-11">
-                                        <div class="pagination" id="invedit_data_table_paginate">
+                                        <div class="pagination item" id="invedit_data_table_paginate">
 
                                         </div>
                                     </div>
