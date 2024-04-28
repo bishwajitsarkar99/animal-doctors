@@ -24,7 +24,7 @@ class UserAuthentication
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-            // return redirect('/')->with('error', 'Your Account is unauthorized.Please contract Admin!');
+            // return redirect('/')->with('error', 'Your Account is unauthorized.');
         }
         // return redirect('/');
         return abort(403, 'Unauthorized');

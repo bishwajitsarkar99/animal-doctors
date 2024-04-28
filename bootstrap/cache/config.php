@@ -4,13 +4,13 @@
     'name' => 'Laravel',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://multi-user.test',
+    'url' => 'http://localhost',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:9HumsJDWXpJMwzTjH/HXa6nmcbn4tVj6ZjEfjrPbhiA=',
+    'key' => 'base64:ySNvWF782r+e7n+Zvcsu4qrYIBvpgDlbbK5fm6CXKIY=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -186,7 +186,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\storage\\framework/cache/data',
+        'path' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -269,7 +269,7 @@
       array (
         'driver' => 'sqlite',
         'url' => NULL,
-        'database' => 'doctors',
+        'database' => 'medicine',
         'prefix' => '',
         'foreign_key_constraints' => true,
       ),
@@ -279,7 +279,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'doctors',
+        'database' => 'medicine',
         'username' => 'root',
         'password' => '',
         'unix_socket' => '',
@@ -299,7 +299,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'doctors',
+        'database' => 'medicine',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -314,7 +314,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'doctors',
+        'database' => 'medicine',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -357,13 +357,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\storage\\app',
+        'root' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\storage\\app/public',
-        'url' => 'http://multi-user.test/storage',
+        'root' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\storage\\app/public',
+        'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -380,7 +380,7 @@
     ),
     'links' => 
     array (
-      'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\public\\storage' => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\storage\\app/public',
+      'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\public\\storage' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\storage\\app/public',
     ),
   ),
   'hashing' => 
@@ -420,13 +420,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -477,7 +477,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -489,11 +489,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'mail.bishwajitsarker.com',
-        'port' => '465',
+        'host' => 'mailhog',
+        'port' => '1025',
         'encryption' => NULL,
-        'username' => 'doctors@bishwajitsarker.com',
-        'password' => 't.k{W}p~~Qlm',
+        'username' => NULL,
+        'password' => NULL,
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -535,7 +535,7 @@
     ),
     'from' => 
     array (
-      'address' => 'doctors@bishwajitsarker.com',
+      'address' => NULL,
       'name' => 'Laravel',
     ),
     'markdown' => 
@@ -543,7 +543,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\resources\\views/vendor/mail',
+        0 => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -610,7 +610,7 @@
       2 => '127.0.0.1',
       3 => '127.0.0.1:8000',
       4 => '::1',
-      5 => 'multi-user.test',
+      5 => 'localhost',
     ),
     'guard' => 
     array (
@@ -648,7 +648,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\storage\\framework/sessions',
+    'files' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -668,9 +668,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\resources\\views',
+      0 => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\resources\\views',
     ),
-    'compiled' => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\storage\\framework\\views',
+    'compiled' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\storage\\framework\\views',
   ),
   'dompdf' => 
   array (
@@ -679,10 +679,10 @@
     'convert_entities' => true,
     'options' => 
     array (
-      'font_dir' => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\storage\\fonts',
-      'font_cache' => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors\\storage\\fonts',
-      'temp_dir' => 'C:\\Users\\DELL\\AppData\\Local\\Temp',
-      'chroot' => 'C:\\Users\\DELL\\Laravel Project Manager\\Laravel_Project\\animal-doctors',
+      'font_dir' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\storage\\fonts',
+      'font_cache' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\storage\\fonts',
+      'temp_dir' => 'C:\\Users\\HP\\AppData\\Local\\Temp',
+      'chroot' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors',
       'allowed_protocols' => 
       array (
         'file://' => 

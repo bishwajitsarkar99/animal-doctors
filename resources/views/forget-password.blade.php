@@ -104,7 +104,7 @@
                                                             Reset Password
                                                         </button>
                                                     </div>
-                                                    <span class="skeleton reset_text">Don't have an account?</span> <a class="btn_bg ps-2 pe-2 pb-1 skeleton" href="/login">sign in</a>
+                                                    <span class="skeleton reset_text">Don't have an account?</span> <a class="btn_bg ps-2 pe-2 pb-1 skeleton" href="/">sign in</a>
                                                     @endif
                                                 </div>
                                             </div>
