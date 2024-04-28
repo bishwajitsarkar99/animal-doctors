@@ -17,7 +17,7 @@ class CreateMedicineNamesTable extends Migration
             $table->id();
             $table->string('medicine_name',200);
             $table->unsignedBigInteger('group_id');
-            $table->foreign('group_id')->references('id')->on('medicine_names')->onDelete('cascade');
+            $table->foreign('group_id')->references('id')->on('medicine_groups')->onDelete('cascade');
             $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });
