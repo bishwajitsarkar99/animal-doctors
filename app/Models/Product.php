@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\ProductModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,4 +16,9 @@ class Product extends Model
         'updated_at',
         'status',
     ];
+
+    public function product_models()
+    {
+        return $this->hasMany(ProductModel::class);
+    }
 }

@@ -32,7 +32,7 @@ class SupplierController extends Controller
         $data = Supplier::orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('supplier_id','LIKE','%'.$query.'%')
+            $data->where('id_name','LIKE','%'.$query.'%')
                 ->orWhere('name','LIKE','%'.$query.'%')
                 ->orWhere('contact_number_one','LIKE','%'.$query.'%') 
                 ->orWhere('contact_number_two','LIKE','%'.$query.'%') 
@@ -69,10 +69,10 @@ class SupplierController extends Controller
         }    
         else{
 
-            $supplier_id = helper::IDGenerator(new Supplier, 'supplier_id',5, 'SVC');
+            $id_name = helper::IDGenerator(new Supplier, 'id_name',5, 'SVC');
 
             $suppliers = new Supplier;
-            $suppliers->supplier_id = $supplier_id;
+            $suppliers->id_name = $id_name;
             $suppliers->type = $request->input('type');
             $suppliers->bussiness_type = $request->input('bussiness_type');
             $suppliers->name = $request->input('name');

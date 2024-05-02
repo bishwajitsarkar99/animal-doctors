@@ -29,7 +29,7 @@ class MedicineNameController extends Controller
             // return abort(404);
         }
 
-        $data = MedicineName::orderBy('id','desc')->latest();
+        $data = MedicineName::with('medicine_groups')->orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
             $data->where('id','LIKE','%'.$query.'%')

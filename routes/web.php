@@ -286,8 +286,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('admin/inventories', [MedicineInventory::class, 'index'])->name('medicine-inventory.index');
         Route::post('admin/inventories', [MedicineInventory::class, 'store'])->name('medicine-inventory.store');
         Route::get('admin/inventories-edit-get',[MedicineInventory::class, 'getData'])->name('search-inv.action');
-        Route::get('admin/inventories-edit/{medicine_group_id}',[MedicineInventory::class, 'editInventory']);
-        Route::put('admin/inventories-update/{medicine_group_id}', [MedicineInventory::class, 'updateInventory'])->name('update_inventory.action');
+        Route::get('admin/inventories-edit/{inventory_id}',[MedicineInventory::class, 'editInventory']);
+        Route::put('admin/inventories-update/{inventory_id}', [MedicineInventory::class, 'updateInventory'])->name('update_inventory.action');
         Route::get('admin/inventories-unauthorized-data',[MedicineInventory::class, 'unauthorizedData'])->name('search-unauthorized.action');
         // Stock
         Route::get('admin/stock', [StockController::class, 'index'])->name('stock.index');

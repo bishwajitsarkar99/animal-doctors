@@ -212,7 +212,7 @@
                                                 <select id="supplier_id" class="ps-1 pe-1 update_user firstcategory supplier_id" name="supplier_id" placeholder="Select-Category">
                                                     <option value="0" selected><span> ▼</span> {{__('translate.Select SVC ID')}}</option>
                                                     @foreach($suppliers as $item)
-                                                    <option class="sub_name_text" value="{{$item->id}}">{{$item->supplier_id}}</option>
+                                                    <option class="sub_name_text" value="{{$item->id}}">{{$item->id_name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -573,10 +573,8 @@
         var tbodyElement = trElement.parentElement; // Get its parent element
         tbodyElement.removeChild(trElement); // Remove the paragraph from its parent
     });
-</script>
-<script>
     // current edit tr
-    $('#medicine_table_form').delegate('tr .btn-light', 'click', function(e) {
+    $('#medicine_table_form').delegate('tr .edit-btn', 'click', function(e) {
         e.preventDefault();
 
         const setEditForm = function(name, value) {
@@ -688,18 +686,18 @@
     });
 
     // Total Inventory
-    // $(document).ready(function() {
-    //     var sum = 0;
-    //     $('#medicine_table_form tr').each(function() {
-    //         var tdValue = $(this).find('td[name="sub_total"]').attr('value');
-    //         if (!isNaN(tdValue)) {
-    //             sum += parseFloat(tdValue);
-    //         }
-    //     });
-    //     $("#inventory").on('input', function(){
-    //         $(this).val(sum);
-    //     })
-    // });
-    // $("#unit_price").val(res.unit_price)
+    $(document).ready(function() {
+        var sum = 0;
+
+        $('#medicine_table_form tr').each(function() {
+            var tdText = $(this).find('td[name="sub_total"]').text();
+            var tdValue = parseFloat(tdText.replace(/[^\d.-]/g, ''));
+            if (!isNaN(tdValue)) {
+                sum += tdValue;
+            }
+        });
+        $('#tot_inventory').val(sum.toFixed(2) + ' ৳');
+    });
+
 </script>
 @endpush

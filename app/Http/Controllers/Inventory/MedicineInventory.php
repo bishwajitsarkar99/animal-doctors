@@ -36,61 +36,56 @@ class MedicineInventory extends Controller
     // get inventory for edit table
     public function getData(Request $request)
     {
-        if ($request->ajax() == false) {
+        if (!$request->ajax()) {
             // return abort(404);
         }
-
-        // $now = Carbon::now();
-        // $twentyFourHoursAgo = $now->subHours(24);
-        // $data = Inventory::where('created_at', '>=', $twentyFourHoursAgo)->get();
-
-
+    
         $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek = Carbon::now()->endOfWeek();
-
-        $data = Inventory::orderBy('medicine_group_id', 'desc')->latest()->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
-
+    
+        $data = Inventory::with(['suppliers', 'sub_categories', 'medicine_groups', 'medicine_names', 'medicine_origins', 'medicine_dogs', 'units'])
+            ->orderBy('inventory_id', 'desc')
+            ->latest()
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
+    
         if ($query = $request->get('query')) {
-            $users->where('inv_id', 'LIKE', '%' . $query . '%')
+            $data->where('id_name', 'LIKE', '%' . $query . '%')
                 ->orWhere('medicine_name', 'LIKE', '%' . $query . '%')
                 ->orWhere('medicine_group', 'LIKE', '%' . $query . '%');
         }
-
-        $perItem = 10;
-        if ($request->input('per_item')) {
-            $perItem = $request->input('per_item');
-        }
-
+    
+        $perItem = $request->input('per_item', 10);
+    
         $data = $data->paginate($perItem)->toArray();
-
+    
         return response()->json($data, 200);
     }
 
     // get inventory unauthorized data
     public function unauthorizedData(Request $request)
     {
-        if ($request->ajax() == false) {
+        if (!$request->ajax()) {
             // return abort(404);
         }
-
-        $startOfWeek = Carbon::now()->startOfWeek(); // Start of the current week
-        $endOfWeek = Carbon::now()->endOfWeek();     // End of the current week
-
-        $data = Inventory::orderBy('medicine_group_id', 'desc')->latest()->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
-
+    
+        $startOfWeek = Carbon::now()->startOfWeek();
+        $endOfWeek = Carbon::now()->endOfWeek();
+    
+        $data = Inventory::with(['suppliers', 'sub_categories', 'medicine_groups', 'medicine_names', 'medicine_origins', 'medicine_dogs', 'units'])
+            ->orderBy('inventory_id', 'desc')
+            ->latest()
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
+    
         if ($query = $request->get('query')) {
-            $users->where('inv_id', 'LIKE', '%' . $query . '%')
+            $data->where('id_name', 'LIKE', '%' . $query . '%')
                 ->orWhere('medicine_name', 'LIKE', '%' . $query . '%')
                 ->orWhere('medicine_group', 'LIKE', '%' . $query . '%');
         }
-
-        $perItem = 10;
-        if ($request->input('per_item')) {
-            $perItem = $request->input('per_item');
-        }
-
+    
+        $perItem = $request->input('per_item', 10);
+    
         $data = $data->paginate($perItem)->toArray();
-
+    
         return response()->json($data, 200);
     }
 
@@ -174,9 +169,9 @@ class MedicineInventory extends Controller
     }
 
     // Inventory Edit
-    public function editInventory($medicine_group_id)
+    public function editInventory($inventory_id)
     {
-        $inventories = Inventory::find($medicine_group_id);
+        $inventories = Inventory::find($inventory_id);
         if ($inventories) {
             return response()->json([
                 'status' => 200,
@@ -185,13 +180,13 @@ class MedicineInventory extends Controller
         } else {
             return response()->json([
                 'status' => 404,
-                'messages' => 'The brand is not found',
+                'messages' => 'The inventory is not found',
             ]);
         }
     }
 
     // Inventory Update
-    public function updateInventory(Request $request, $medicine_group_id)
+    public function updateInventory(Request $request, $inventory_id)
     {
         $validator = validator::make($request->all(), [
             'inv_id' => 'required',
@@ -214,7 +209,7 @@ class MedicineInventory extends Controller
                 'errors' => $validator->messages(),
             ]);
         } else {
-            $inventories = Inventory::find($medicine_group_id);
+            $inventories = Inventory::find($inventory_id);
             if ($inventories) {
                 $inventories->inv_id = $request->input('inv_id');
                 $inventories->manufacture_date = $request->input('manufacture_date');

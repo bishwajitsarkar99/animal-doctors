@@ -14,15 +14,22 @@ class CreateInventoriesTable extends Migration
     public function up()
     {
         Schema::create('inventories', function (Blueprint $table) {
-            $table->id('medicine_group_id');
+            $table->id('inventory_id');
             $table->string('inv_id');
-            $table->string('supplier_id');
-            $table->string('category_id');
-            $table->string('medicine_group');
-            $table->text('medicine_name');
-            $table->string('medicine_dogs');
-            $table->string('medicine_origin');
-            $table->string('medicine_size');
+            $table->unsignedBigInteger('supplier_id');
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('sub_categories')->onDelete('cascade');
+            $table->unsignedBigInteger('medicine_group');
+            $table->foreign('medicine_group')->references('id')->on('medicine_groups')->onDelete('cascade');
+            $table->unsignedBigInteger('medicine_name');
+            $table->foreign('medicine_name')->references('id')->on('medicine_names')->onDelete('cascade');
+            $table->unsignedBigInteger('medicine_dogs');
+            $table->foreign('medicine_dogs')->references('id')->on('medicine_dogs')->onDelete('cascade');
+            $table->unsignedBigInteger('medicine_origin');
+            $table->foreign('medicine_origin')->references('id')->on('medicine_origins')->onDelete('cascade');
+            $table->unsignedBigInteger('medicine_size');
+            $table->foreign('medicine_size')->references('id')->on('units')->onDelete('cascade');
             $table->decimal('price', 8, 2);
             $table->decimal('quantity',5,2)->default(0.00);
             $table->decimal('amount', 8, 2)->default(0.00); // Added amount field with default value 0.00

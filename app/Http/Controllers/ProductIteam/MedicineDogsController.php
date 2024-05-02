@@ -29,7 +29,7 @@ class MedicineDogsController extends Controller
             // return abort(404);
         }
 
-        $data = MedicineDogs::orderBy('id','desc')->latest();
+        $data = MedicineDogs::with(['medicine_names'])->orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
             $data->where('id','LIKE','%'.$query.'%')

@@ -29,7 +29,7 @@ class SubCategoryController extends Controller
             // return abort(404);
         }
 
-        $data = SubCategory::orderBy('id','desc')->latest();
+        $data = SubCategory::with(['categories'])->orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
             $data->where('id','LIKE','%'.$query.'%')

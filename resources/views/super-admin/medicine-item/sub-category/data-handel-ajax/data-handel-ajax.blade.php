@@ -17,7 +17,6 @@
                 return `
                     <tr class="table-row user-table-row" id="sub_td" key="${key}">
                         <td class="sn border_ord" id="sub_td2">${row.id}</td>
-                        <td class="sn border_ord" id="sub_td3">${row.category_id}</td>
                         <td class="txt_ ps-1 center" id="sub_td4">
                             <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
                             <ul class="dropdown-menu action ms-4 pe-3">
@@ -29,6 +28,7 @@
                                 </li>
                             </ul>
                         </td>
+                        <td class="border_ord ps-1" id="sub_td3">${row.categories ? row.categories.category_name : ''}</td>
                         <td class="txt_ ps-1" id="sub_td5">${row.sub_category_name}</td>
                         <td class="tot_complete_ center ps-1 pt-1" id="sub_td6">
                             <input class="form-switch form-check-input check_permission" type="checkbox" subcategory_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>

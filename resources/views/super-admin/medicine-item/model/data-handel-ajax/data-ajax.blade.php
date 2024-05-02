@@ -17,7 +17,6 @@
                 return `
                     <tr class="table-row user-table-row" key="${key}" id="model_tb">
                         <td class="sn border_ord" id="model_tb2">${row.id}</td>
-                        <td class="sn border_ord" id="model_tb3">${row.product_id}</td>
                         <td class="txt_ ps-1 center" id="model_tb3">
                             <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
                             <ul class="dropdown-menu action ms-4 pe-3">
@@ -29,6 +28,7 @@
                                 </li>
                             </ul>
                         </td>
+                        <td class="ps-1 border_ord" id="model_tb3">${row.products ? row.products.product_name : ''}</td>
                         <td class="txt_ ps-1" id="model_tb4">${row.model_name}</td>
                         <td class="tot_complete_ center ps-1 pt-1" id="model_tb5">
                             <input class="form-switch form-check-input check_permission" type="checkbox" model_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>
@@ -153,7 +153,7 @@
             const url = $(this).attr('href');
 
             if (url !== '#') {
-                fetch_brand_data('', url);
+                fetch_model_data('', url);
             }
 
         });

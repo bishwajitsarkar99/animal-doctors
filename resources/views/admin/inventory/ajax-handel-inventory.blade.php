@@ -21,19 +21,19 @@
                             <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
                             <ul class="dropdown-menu action ms-4 pe-3">
                                 <li class="upd cgy ps-1">
-                                    <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="edtBtn" value="${row.medicine_group_id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                                    <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="edtBtn" value="${row.inventory_id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                     <i class="fa-solid fa-pen-to-square fa-beat" style="color:darkcyan"></i></button>
                                 </li>
                             </ul>
                         </td>
                         <td class="txt_ ps-1">${row.inv_id}</td>
-                        <td class="tot_order_ ps-1">${row.supplier_id.supplier_id}</td>
-                        <td class="tot_pending_ ps-1">${row.category_id.category_id}</td>
-                        <td class="tot_pending_ ps-1">${row.medicine_group.group_name}</td>
-                        <td class="tot_pending_ ps-1">${row.medicine_name.medicine_name}</td>
-                        <td class="tot_pending_ ps-1">${row.medicine_dogs.medicine_dogs}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.medicine_origin.medicine_origin}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.medicine_size.medicine_size}</td>
+                        <td class="tot_order_ ps-1">${row.suppliers ? row.suppliers.id_name : ''}</td>
+                        <td class="tot_pending_ ps-1">${row.sub_categories ? row.sub_categories.sub_category_name : ''}</td>
+                        <td class="tot_pending_ ps-1">${row.medicine_groups ? row.medicine_groups.group_name : ''}</td>
+                        <td class="tot_pending_ ps-1">${row.medicine_names ? row.medicine_names.medicine_name : ''}</td>
+                        <td class="tot_pending_ ps-1">${row.medicine_dogs ? row.medicine_dogs.medicine_dogs : ''}</td>
+                        <td class="tot_pending_ ps-1" hidden>${row.medicine_origins ? row.medicine_origins.origin_name : ''}</td>
+                        <td class="tot_pending_ ps-1" hidden>${row.units ? row.units.units_name : ''}</td>
                         <td class="tot_pending_ ps-1"><span>${row.price}</span> ৳</td>
                         <td class="tot_pending_ ps-1"><span>${row.quantity}</td>
                         <td class="tot_pending_ ps-1" hidden>${row.amount}</td>
@@ -238,8 +238,12 @@
                     } else {
                         $('#inventory_id').val(inventory_id);
                         $('.inv_id').val(response.messages.inv_id);
-                        $('.manufacture_date').val(response.messages.manufacture_date);
-                        $('.expiry_date').val(response.messages.expiry_date);
+                        // Date format
+                        var manufactureDate = formatDate(response.messages.manufacture_date);
+                        $('.manufacture_date').val(manufactureDate);
+                        var expiryDate = formatDate(response.messages.expiry_date);
+                        $('.expiry_date').val(expiryDate);
+
                         $('.supplier_id').val(response.messages.supplier_id);
                         $('.category_id').val(response.messages.category_id);
                         $('.group_name').val(response.messages.medicine_group);
@@ -255,57 +259,47 @@
                         $('.discount_percentage').val(response.messages.discount_percentage);
                         $('.sub_total').val(response.messages.sub_total);
 
-                        // Date Format
-                        // var dateInObj = document.getElementsByClassName('manufacture_date');
-                        // var date = new Date(dateInObj.value);
-                        // dateInObj.innerHtml = date.toDateString();
-
-                        // Option Medicine Name
-                        // var setMedicineNameOptions = function(group_id, value) {
-
-                        //     $("#medicine_name").empty();
-                        //     $("#medicine_name").append('<option value="0" disabled>Processing.......</option>');
-
-                        //     $.ajax({
-                        //         type: "GET",
-                        //         url: "/request-medicine-name/" + group_id,
-                        //         success: function(data) {
-                        //             $("#medicine_name").empty();
-                        //             $("#medicine_name").append('<option value="0" disabled>Processing.......</option>');
-                        //             $.each(data, function(key, item) {
-                        //                 $("#medicine_name").append("<option class='sub_name_text' value =" + item.id + ">" + item.medicine_name + "</option>").fadeIn('slow');
-                        //             });
-                        //             $(`#category_page form select[name="medicine_name"] option[value="${value}"]`).prop('selected', true);
-                        //         }
-                        //     });
-                        // }
-                        // Option Medcine Dosage
-                        // var setMedicineDogsOptions = function(medicine_name, value) {
-
-                        //     $.ajax({
-                        //         type: "GET",
-                        //         url: "/request-medicine-dogs/" + medicine_name,
-                        //         success: function(data) {
-                        //             $("#medicine_dogs").empty();
-                        //             $("#medicine_dogs").append('<option value="0" disabled>Processing.......</option>');
-                        //             $.each(data, function(key, item) {
-                        //                 $("#medicine_dogs").append("<option class='sub_name_text' value =" + item.id + ">" + item.medicine_dogs + "</option>").fadeIn('slow');
-                        //             });
-                        //             $(`#category_page form select[name="medicine_dogs"] option[value="${value}"]`).prop('selected', true);
-                        //         }
-                        //     });
-                        // }
-
-                        // setMedicineNameOptions(data['group_name'], data['medicine_name']);
-                        // setMedicineDogsOptions(data['medicine_name'], data['medicine_dogs']);
-
-                        // $("#medicine_name").html(setMedicineNameOptions);
-                        // $("#medicine_dogs").html(setMedicineDogsOptions);
+                        setMedicineNameOptions(response.messages.medicine_group, response.messages.medicine_name);
+                        setMedicineDogsOptions(response.messages.medicine_name, response.messages.medicine_dogs);
                     }
                 }
             });
         });
+        // Option Medicine Name
+        var setMedicineNameOptions = function(group_id, value) {
 
+            $("#medicine_name").empty();
+            $("#medicine_name").append('<option value="0" disabled>Processing.......</option>');
+
+            $.ajax({
+                type: "GET",
+                url: "/request-medicine-name/" + group_id,
+                success: function(data) {
+                    $("#medicine_name").empty();
+                    $("#medicine_name").append('<option value="0" disabled>Processing.......</option>');
+                    $.each(data, function(key, item) {
+                        $("#medicine_name").append("<option class='sub_name_text' value =" + item.id + ">" + item.medicine_name + "</option>").fadeIn('slow');
+                    });
+                    $(`#category_page form select[name="medicine_name"] option[value="${value}"]`).prop('selected', true);
+                }
+            });
+        }
+        // Option Medcine Dosage
+        var setMedicineDogsOptions = function(medicine_name, value) {
+
+            $.ajax({
+                type: "GET",
+                url: "/request-medicine-dogs/" + medicine_name,
+                success: function(data) {
+                    $("#medicine_dogs").empty();
+                    $("#medicine_dogs").append('<option value="0" disabled>Processing.......</option>');
+                    $.each(data, function(key, item) {
+                        $("#medicine_dogs").append("<option class='sub_name_text' value =" + item.id + ">" + item.medicine_dogs + "</option>").fadeIn('slow');
+                    });
+                    $(`#category_page form select[name="medicine_dogs"] option[value="${value}"]`).prop('selected', true);
+                }
+            });
+        }
         // Update Inventory
         $(document).on('click', '#update_btn', function(e) {
             e.preventDefault();
@@ -424,8 +418,10 @@
             $('.supplier_id').val("");
             $('.category_id').val("");
             $('.group_name').val("");
-            $('.medicine_name').val("");
-            $('.medicine_dogs').val("");
+            $('.medicine_name').empty();
+            // $('.medicine_name option:selected').prop('selected', false);
+            $('.medicine_dogs').empty();
+            // $('.medicine_dogs option:selected').prop('selected', false);
             $('.origin_name').val("");
             $('.medicine_size').val("");
             $('.unit_price').val("");
@@ -464,6 +460,19 @@
             submit.setAttribute('style');
         });
     });
+    // Function to format date as dd-mm-yyyy
+    function formatDate(dateString) {
+        var date = new Date(dateString);
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        // Pad day and month with leading zeros if necessary
+        day = day < 10 ? '0' + day : day;
+        month = month < 10 ? '0' + month : month;
+
+        return day + '-' + month + '-' + year;
+    }
 </script>
 
 <script>
@@ -486,13 +495,13 @@
                     <tr class="table-row user-table-row" key="${key}">
                         <td class="sn border_ord">${key+1}</td>
                         <td class="txt_ ps-1">${row.inv_id}</td>
-                        <td class="tot_order_ ps-1">${row.supplier_id.supplier_id}</td>
-                        <td class="tot_pending_ ps-1">${row.category_id.category_id}</td>
-                        <td class="tot_pending_ ps-1">${row.medicine_group.group_name}</td>
-                        <td class="tot_pending_ ps-1">${row.medicine_name.medicine_name}</td>
-                        <td class="tot_pending_ ps-1">${row.medicine_dogs.medicine_dogs}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.medicine_origin.medicine_origin}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.medicine_size.medicine_size}</td>
+                        <td class="tot_order_ ps-1">${row.suppliers ? row.suppliers.id_name : ''}</td>
+                        <td class="tot_pending_ ps-1">${row.sub_categories ? row.sub_categories.sub_category_name : ''}</td>
+                        <td class="tot_pending_ ps-1">${row.medicine_groups ? row.medicine_groups.group_name : ''}</td>
+                        <td class="tot_pending_ ps-1">${row.medicine_names ? row.medicine_names.medicine_name : ''}</td>
+                        <td class="tot_pending_ ps-1">${row.medicine_dogs ? row.medicine_dogs.medicine_dogs : ''}</td>
+                        <td class="tot_pending_ ps-1" hidden>${row.medicine_origins ? row.medicine_origins.origin_name : ''}</td>
+                        <td class="tot_pending_ ps-1" hidden>${row.units ? row.units.units_name : ''}</td>
                         <td class="tot_pending_ ps-1"><span>${row.price}</span> ৳</td>
                         <td class="tot_pending_ ps-1"><span>${row.quantity}</td>
                         <td class="tot_pending_ ps-1" hidden>${row.amount}</td>
@@ -507,7 +516,7 @@
             }).join("\n");
         }
 
-        // Fetch Users Data ------------------
+        // Fetch Inventory Data ------------------
         function fetch_inventory_unauthorized_data(query = '', url = null, perItem = null) {
 
             if (perItem === null) {
@@ -598,143 +607,6 @@
 
         });
     });
-</script>
-
-<script>
-    // $(document).ready(function() {
-    //     fetch_inventory_permission_data();
-    //     // Data View Table--------------
-    //     const table_rows = (rows) => {
-    //         if (rows.length === 0) {
-    //             return `
-    //                 <tr>
-    //                     <td class="error_data" align="center" text-danger colspan="11">
-    //                         Stock data not exists !
-    //                     </td>
-    //                 </tr>
-    //             `;
-    //         }
-
-    //         return [...rows].map((row, key) => {
-    //             return `
-    //                 <tr class="table-row user-table-row" key="${key}">
-    //                     <td class="sn border_ord">${key+1}</td>
-    //                     <td class="txt_ ps-1 center">
-    //                         <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
-    //                         <ul class="dropdown-menu action ms-4 pe-3">
-    //                             <li class="upd cgy ps-1">
-    //                                 <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="edtBtn" value="${row.id}" style="font-size: 10px;" type="button">
-    //                                 <i class="fa-solid fa-pen-to-square fa-beat" style="color:darkcyan"></i></button>
-    //                             </li>
-    //                         </ul>
-    //                     </td>
-    //                     <td class="txt_ ps-1">${row.inv_id}</td>
-    //                     <td class="tot_order_ ps-1">${row.supplier_id.supplier_id}</td>
-    //                     <td class="tot_pending_ ps-1">${row.category_id.category_id}</td>
-    //                     <td class="tot_pending_ ps-1">${row.medicine_group.group_name}</td>
-    //                     <td class="tot_pending_ ps-1">${row.medicine_name.medicine_name}</td>
-    //                     <td class="tot_pending_ ps-1">${row.medicine_dogs.medicine_dogs}</td>
-    //                     <td class="tot_pending_ ps-1" hidden>${row.medicine_origin.medicine_origin}</td>
-    //                     <td class="tot_pending_ ps-1" hidden>${row.medicine_size.medicine_size}</td>
-    //                     <td class="tot_pending_ ps-1"><span>${row.price}</span> ৳</td>
-    //                     <td class="tot_pending_ ps-1"><span>${row.quantity}</td>
-    //                     <td class="tot_pending_ ps-1" hidden>${row.amount}</td>
-    //                     <td class="tot_pending_ ps-1" hidden>${row.vat_percentage}</td>
-    //                     <td class="tot_pending_ ps-1" hidden>${row.tax_percentage}</td>
-    //                     <td class="tot_pending_ ps-1" hidden>${row.discount_percentage}</td>
-    //                     <td class="tot_pending_ ps-1"><span>${row.sub_total}</span> ৳</td>
-    //                     <td class="tot_pending_ ps-1"><span class="status_bg_inv ps-1 pe-1">${row.status_inv ==0 ? 'New': 'Edit'}</span></td>
-
-    //                 </tr>
-    //             `;
-    //         }).join("\n");
-    //     }
-
-    //     // Fetch Inventory Data ------------------
-    //     function fetch_stock_permission_data(query = '', url = null, perItem = null) {
-
-    //         if (perItem === null) {
-    //             perItem = $("#perItemControlTwo").val();
-    //         }
-
-    //         var current_url = url;
-    //         if (url === null) {
-    //             current_url = `{{ route('search-inv.action')}}?per_item=${perItem}`;
-    //         } else {
-    //             current_url += `&per_item=${perItem}`
-    //         }
-
-    //         $.ajax({
-    //             type: "GET",
-    //             url: current_url,
-    //             dataType: 'json',
-    //             data: {
-    //                 query: query
-    //             },
-    //             success: function({
-    //                 data,
-    //                 links,
-    //                 total
-
-    //             }) {
-    //                 $("#stock_permission_data_table").html(table_rows([...data]));
-    //                 $("#stock_permission_data_table_paginate").html(paginate_html({
-    //                     links,
-    //                     total
-    //                 }));
-    //                 $("#total_stock_records").text(total);
-    //             }
-
-    //         });
-    //     }
-
-    //     // peritem change
-    //     $("#perItemControlTwo").on('change', (e) => {
-    //         const {
-    //             value
-    //         } = e.target;
-
-    //         fetch_stock_permission_data('', null, value);
-    //     });
-
-    //     // Paginate Page-------------------------------
-    //     const paginate_html = ({
-    //         links,
-    //         total
-    //     }) => {
-    //         if (total == 0) {
-    //             return "";
-    //         }
-
-    //         return `
-    //             <nav class="paginate_link" aria-label="Page navigation example">
-    //                 <ul class="pagination">
-    //                     ${links.map((link, key) => {
-    //                         return `
-    //                             <li class="page-item${link.active? ' active': ''}" key=${key}>
-    //                                 <a class="page-link btn_page" href="${link.url? link.url: '#'}">
-    //                                     ${link.label}
-    //                                 </a>
-    //                             </li>
-    //                         `;
-    //                     }).join("\n")}
-    //                 </ul>
-    //             </nav>
-    //         `;
-    //     }
-    //     // change paginate page------------------------
-    //     $("#stock_permission_data_table_paginate").delegate("a", "click", function(e) {
-    //         e.stopImmediatePropagation();
-    //         e.preventDefault();
-
-    //         const url = $(this).attr('href');
-
-    //         if (url !== '#') {
-    //             fetch_stock_permission_data('', url);
-    //         }
-
-    //     });
-    // });
 </script>
 
 <script>

@@ -45,8 +45,8 @@
             <table class="ord_table center border-1 skeleton mt-2">
               <tr class="table-row order_body acc_setting_table skeleton">
                 <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1">{{__('translate.ID')}}</th>
-                <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1">{{__('translate.Product-ID')}}</th>
                 <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1">{{__('translate.Action')}}</th>
+                <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">{{__('translate.Product')}}</th>
                 <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1" style="text-align: left;">{{__('translate.Model-Name')}}</th>
                 <th id="th_sort" class="table_th_color tot_pending_ col skeleton">{{__('translate.Check')}}</th>
                 <th id="th_sort" class="table_th_color tot_pending_ col skeleton">{{__('translate.Status')}}</th>

@@ -29,7 +29,7 @@ class BrandController extends Controller
             // return abort(404);
         }
 
-        $data = Brand::orderBy('id','desc')->latest();
+        $data = Brand::with(['medicine_origins'])->orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
             $data->where('id','LIKE','%'.$query.'%')

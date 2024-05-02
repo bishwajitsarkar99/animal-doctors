@@ -17,7 +17,6 @@
                 return `
                     <tr class="table-row user-table-row" key="${key}" id="brand_tab">
                         <td class="sn border_ord" id="brand_tab2">${row.id}</td>
-                        <td class="sn border_ord" id="brand_tab3">${row.origin_id}</td>
                         <td class="txt_ ps-1 center" id="brand_tab4">
                             <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
                             <ul class="dropdown-menu action ms-4 pe-3">
@@ -29,6 +28,7 @@
                                 </li>
                             </ul>
                         </td>
+                        <td class="ps-1 border_ord" id="brand_tab3">${row.medicine_origins ? row.medicine_origins.origin_name : ''}</td>
                         <td class="txt_ ps-1" id="brand_tab5">${row.brand_name}</td>
                         <td class="tot_complete_ center ps-1 pt-1" id="brand_tab6">
                             <input class="form-switch form-check-input check_permission" type="checkbox" brand_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>

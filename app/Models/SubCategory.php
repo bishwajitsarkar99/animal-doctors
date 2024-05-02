@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Medicine\Inventory;
+use App\Models\Category;
 
 class SubCategory extends Model
 {
@@ -16,4 +18,14 @@ class SubCategory extends Model
         'updated_at',
         'status',
     ];
+
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsTo(Category::class, 'category_id','id');
+    }
 }

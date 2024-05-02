@@ -196,7 +196,7 @@
             <tr class="child-row child-row table-row user-table-row skeleton" data-parent="{{ $group->id }}">
                 <td></td>
                 <td class="line-height-td skeleton">
-                    <a type="button" class="ps-1" href="#">{{$inventory->medicine_group_id}}</a>
+                    <a type="button" class="ps-1" href="#">{{$inventory->inventory_id}}</a>
                     <a class="btn-sm delete_button ms-2 delt_button" value="" type="button" id="dltBtn" style="font-size: 10px;">
                         <i class="fa-solid fa-trash-can" style="color: #fa0000; font-size:small"></i>
                     </a>

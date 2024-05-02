@@ -29,7 +29,7 @@ class ProductModelController extends Controller
             // return abort(404);
         }
 
-        $data = ProductModel::orderBy('id','desc')->latest();
+        $data = ProductModel::with(['products'])->orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
             $data->where('id','LIKE','%'.$query.'%')

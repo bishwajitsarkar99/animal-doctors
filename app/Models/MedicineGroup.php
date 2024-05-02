@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Medicine\Inventory;
+use App\Models\MedicineName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,5 +22,10 @@ class MedicineGroup extends Model
     public function inventories()
     {
         return $this->hasMany(Inventory::class);
+    }
+
+    public function medicine_names()
+    {
+        return $this->hasMany(MedicineName::class);
     }
 }

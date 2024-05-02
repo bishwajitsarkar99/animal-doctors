@@ -17,7 +17,7 @@ class CreateBrandsTable extends Migration
             $table->id();
             $table->string('brand_name',50);
             $table->unsignedBigInteger('origin_id');
-            $table->foreign('origin_id')->references('id')->on('brands')->onDelete('cascade');
+            $table->foreign('origin_id')->references('id')->on('medicine_origins')->onDelete('cascade');
             $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });

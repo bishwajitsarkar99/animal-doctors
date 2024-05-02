@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 class Inventory extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'medicine_group_id';
+    protected $primaryKey = 'inventory_id';
     protected $fillable = [
         'inv_id',
         'supplier_id',
@@ -57,38 +57,38 @@ class Inventory extends Model
         return $this->hasOne(Role::class,'id', 'role');
     }
 
-    public function supplier_id()
+    public function suppliers()
     {
-        return $this->belongsTo(Supplier::class, 'supplier_id');
+        return $this->belongsTo(Supplier::class, 'supplier_id','id');
     }
 
-    public function category_id()
+    public function sub_categories()
     {
-        return $this->belongsTo(SubCategory::class, 'category_id');
+        return $this->belongsTo(SubCategory::class, 'category_id','id');
     }
 
-    public function medicine_group()
+    public function medicine_groups()
     {
-        return $this->belongsTo(MedicineGroup::class, 'medicine_group');
+        return $this->belongsTo(MedicineGroup::class, 'medicine_group','id');
     }
-    public function medicine_name()
+    public function medicine_names()
     {
-        return $this->belongsTo(MedicineName::class, 'medicine_name');
+        return $this->belongsTo(MedicineName::class, 'medicine_name','id');
     }
 
-    public function medicine_origin()
+    public function medicine_origins()
     {
-        return $this->belongsTo(MedicineOrigin::class, 'origin_name');
+        return $this->belongsTo(MedicineOrigin::class, 'origin_name','id');
     }
 
     public function medicine_dogs()
     {
-        return $this->belongsTo(MedicineDogs::class, 'medicine_dogs');
+        return $this->belongsTo(MedicineDogs::class, 'medicine_dogs','id');
     }
     
-    public function medicine_size()
+    public function units()
     {
-        return $this->belongsTo(Unit::class, 'units_name');
+        return $this->belongsTo(Unit::class, 'units_name','id');
     }
 
 }

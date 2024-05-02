@@ -45,7 +45,7 @@
                                         <tr class="table-row order_body acc_setting_table">
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1">ID</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1">Action</th>
-                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Type-ID</th>
+                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">ID-Name</th>
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Type</th>
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Bussiness</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Name</th>

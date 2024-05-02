@@ -28,7 +28,7 @@
                                 </li>
                             </ul>
                         </td>
-                        <td class="border_ord ps-1" id="supp_tab4">${row.supplier_id}</td>
+                        <td class="border_ord ps-1" id="supp_tab4">${row.id_name}</td>
                         <td class="txt_ ps-1" id="supp_tab5">${row.type}</td>
                         <td class="txt_ ps-1" id="supp_tab6">${row.bussiness_type}</td>
                         <td class="txt_ ps-1" id="supp_tab7">${row.name}</td>

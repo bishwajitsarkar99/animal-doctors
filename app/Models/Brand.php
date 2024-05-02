@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\MedicineOrigin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,4 +17,9 @@ class Brand extends Model
         'updated_at',
         'status',
     ];
+    
+    public function medicine_origins()
+    {
+        return $this->belongsTo(MedicineOrigin::class, 'origin_id', 'id');
+    }
 }

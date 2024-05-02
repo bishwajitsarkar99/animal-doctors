@@ -420,10 +420,10 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-        // $this->call(DemoSeeder::class);
-        // $this->call(FooterContentSeeder::class);
-        // $this->call(NewsSeeder::class);
-        // $this->call(LogoSeeder::class);
+        $this->call(DemoSeeder::class);
+        $this->call(FooterContentSeeder::class);
+        $this->call(NewsSeeder::class);
+        $this->call(LogoSeeder::class);
 
     }
     

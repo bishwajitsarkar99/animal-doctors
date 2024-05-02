@@ -17,7 +17,7 @@ class CreateProductModelsTable extends Migration
             $table->id();
             $table->string('model_name',50);
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('product_models')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });

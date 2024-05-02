@@ -29,7 +29,6 @@
                 return `
                     <tr class="table-row user-table-row" id="medic_dosage" key="${key}">
                         <td class="sn border_ord" id="medic_dosage2">${row.id}</td>
-                        <td class="sn border_ord" id="medic_dosage3">${row.medicine_id}</td>
                         <td class="txt_ ps-1 center" id="medic_dosage4">
                             <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
                             <ul class="dropdown-menu action ms-4 pe-3">
@@ -41,6 +40,7 @@
                                 </li>
                             </ul>
                         </td>
+                        <td class="ps-1 border_ord" id="medic_dosage3">${row.medicine_names ? row.medicine_names.medicine_name : ''}</td>
                         <td class="txt_ ps-1" id="medic_dosage5">${row.medicine_dogs}</td>
                         <td class="tot_complete_ center ps-1 pt-1" id="medic_dosage6">
                             <input class="form-switch form-check-input check_permission" type="checkbox" medicinedogs_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>
