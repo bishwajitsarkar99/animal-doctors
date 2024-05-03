@@ -104,7 +104,9 @@ table, th, td {
     letter-spacing: 1px;
     opacity: 1;
 }
-
+td.edit_inventory_table{
+    font-weight: 600;
+}
 /* input_Loader */
 .svc-hidden{
     display: none;

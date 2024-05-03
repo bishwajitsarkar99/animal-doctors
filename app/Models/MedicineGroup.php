@@ -21,7 +21,7 @@ class MedicineGroup extends Model
 
     public function inventories()
     {
-        return $this->hasMany(Inventory::class);
+        return $this->hasMany(Inventory::class,'medicine_group');
     }
 
     public function medicine_names()

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
+use App\Support\Facades\Setting;
 
 class SuperAdminController extends Controller
 {

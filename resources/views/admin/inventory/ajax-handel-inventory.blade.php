@@ -26,7 +26,7 @@
                                 </li>
                             </ul>
                         </td>
-                        <td class="txt_ ps-1">${row.inv_id}</td>
+                        <td class="txt_ ps-1 edit_inventory_table">${row.inv_id}</td>
                         <td class="tot_order_ ps-1">${row.suppliers ? row.suppliers.id_name : ''}</td>
                         <td class="tot_pending_ ps-1">${row.sub_categories ? row.sub_categories.sub_category_name : ''}</td>
                         <td class="tot_pending_ ps-1">${row.medicine_groups ? row.medicine_groups.group_name : ''}</td>
@@ -34,13 +34,13 @@
                         <td class="tot_pending_ ps-1">${row.medicine_dogs ? row.medicine_dogs.medicine_dogs : ''}</td>
                         <td class="tot_pending_ ps-1" hidden>${row.medicine_origins ? row.medicine_origins.origin_name : ''}</td>
                         <td class="tot_pending_ ps-1" hidden>${row.units ? row.units.units_name : ''}</td>
-                        <td class="tot_pending_ ps-1"><span>${row.price}</span> ৳</td>
-                        <td class="tot_pending_ ps-1"><span>${row.quantity}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.amount}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.vat_percentage}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.tax_percentage}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.discount_percentage}</td>
-                        <td class="tot_pending_ ps-1"><span>${row.sub_total}</span> ৳</td>
+                        <td class="tot_pending_ ps-1"><span>${parseFloat(row.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> ৳</td>
+                        <td class="tot_pending_ ps-1"><span>${parseFloat(row.quantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.vat_percentage).toLocaleString('en-Us', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.tax_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.discount_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table"><span>${parseFloat(row.sub_total).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</span> ৳</td>
                         <td class="tot_pending_ ps-1"><span class="status_bg_inv ps-1 pe-1">${row.status_inv ==1 ? 'New': 'Update'}</span></td>
                         <td class="tot_pending_ bold ps-1 ${row.updated_by? ' text-primary': ' text-warning'}" id="user_set8">${row.updated_by ==0 ? 'User': 'Null' && row.updated_by ==2 ? 'SubAdmin': 'Null' && row.updated_by ==1 ? 'SuperAdmin': 'Null' && row.updated_by ==3 ? 'Admin': 'Null'}</td>
                         
@@ -494,7 +494,7 @@
                 return `
                     <tr class="table-row user-table-row" key="${key}">
                         <td class="sn border_ord">${key+1}</td>
-                        <td class="txt_ ps-1">${row.inv_id}</td>
+                        <td class="txt_ ps-1 edit_inventory_table">${row.inv_id}</td>
                         <td class="tot_order_ ps-1">${row.suppliers ? row.suppliers.id_name : ''}</td>
                         <td class="tot_pending_ ps-1">${row.sub_categories ? row.sub_categories.sub_category_name : ''}</td>
                         <td class="tot_pending_ ps-1">${row.medicine_groups ? row.medicine_groups.group_name : ''}</td>
@@ -502,13 +502,13 @@
                         <td class="tot_pending_ ps-1">${row.medicine_dogs ? row.medicine_dogs.medicine_dogs : ''}</td>
                         <td class="tot_pending_ ps-1" hidden>${row.medicine_origins ? row.medicine_origins.origin_name : ''}</td>
                         <td class="tot_pending_ ps-1" hidden>${row.units ? row.units.units_name : ''}</td>
-                        <td class="tot_pending_ ps-1"><span>${row.price}</span> ৳</td>
-                        <td class="tot_pending_ ps-1"><span>${row.quantity}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.amount}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.vat_percentage}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.tax_percentage}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.discount_percentage}</td>
-                        <td class="tot_pending_ ps-1"><span>${row.sub_total}</span> ৳</td>
+                        <td class="tot_pending_ ps-1"><span>${parseFloat(row.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> ৳</td>
+                        <td class="tot_pending_ ps-1"><span>${parseFloat(row.quantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.vat_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.tax_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.discount_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table"><span>${parseFloat(row.sub_total).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</span> ৳</td>
                         <td class="tot_pending_ ps-1"><span class="status_bg_unauthorized ps-1 pe-1">${row.status ==0 ? 'Unauthorized': 'Authorized'}</span></td>
                         
                     </tr>

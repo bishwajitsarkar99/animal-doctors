@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Database\Seeders\LogoSeeder;
 use Illuminate\Database\Seeder;
+use App\Support\Facades\Setting;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-
+        
         setting([
             // Profile---------
             'company_name' => 'GST Medicine Center',

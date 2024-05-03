@@ -158,7 +158,7 @@
                     <div class="category-form">
                         <div class="card form-control cat_form inventory_form">
                             <div class="col-xl-6">
-                                <input id="inv_field" type="text" name="inv_field" value="INV-" hidden />
+                                <input id="inv_field" type="text" name="inv_field" value="INV-SVC-" hidden />
                                 <input id="generate_id" type="text" name="generate_id" placeholder="generate_id" hidden />
                             </div>
                             <form autocomplete="off">
@@ -174,7 +174,7 @@
                                                 <i class="svc-icon fa fa-spinner fa-spin svc-hidden mt-1"></i>
                                             </div>
                                             <div class="col-7 skeleton" style="text-align: left;">
-                                                <input id="inv_id" type="text" name="inv_id" class="inv_field inv_id mobile ps-2" placeholder="{{__('translate.INV')}}-0-00000" readonly />
+                                                <input id="inv_id" type="text" name="inv_id" class="inv_field inv_id mobile ps-2" placeholder="{{__('translate.INV-SVC')}}-0-00000" readonly />
                                             </div>
                                         </div>
                                         <div class="row mt-2">
@@ -661,28 +661,91 @@
         var generate_id = $("#generate_id").val(Math.floor(x));
         var inv_id = $("#inv_field").val() + $("#supplier_id").val() + '-' + $("#generate_id").val();
 
-        $("#inv_id").val(inv_id)
+        $("#inv_id").val(inv_id);
     });
 
     // inventory calculation
-    $("#unit_price, #quantity, #amount, #vat, #tax, #discount_percentage").on('change', function() {
+    $("#unit_price, #quantity").on('change', function() {
         var amount = 0;
         var net_total_amount = 0;
 
-        var price = $("#unit_price").val();
-        var quantity = $("#quantity").val();
-        var vat = $("#vat").val();
-        var tax = $("#tax").val();
-        var discount_percentage = $("#discount_percentage").val();
+        // Get price value
+        var priceInput = $("#unit_price").val();
+        var price = parseFloat(priceInput);
 
+        // Check if price is a valid number
+        if (!isNaN(price)) {
+            // Format price
+            var formattedPrice = price.toFixed(2);
+            $("#unit_price").val(formattedPrice);
+
+            // Get quantity value
+            var quantityInput = $("#quantity").val();
+            var quantity = parseFloat(quantityInput);
+
+            // Check if quantity is a valid number
+            if (!isNaN(quantity)) {
+                // Format quantity
+                var formattedQuantity = quantity.toFixed(2);
+                $("#quantity").val(formattedQuantity);
+
+                // Calculate amounts
+                amount = price * quantity;
+                $("#amount").val(amount.toFixed(2));
+                
+                // Set default value for VAT
+                $("#vat").val("0.00");
+
+                // Set default value for tax
+                $("#tax").val("0.00");
+
+                // Set default value for discount percentage
+                $("#discount_percentage").val("0.00");
+
+                // Calculation
+                var vat = parseFloat($("#vat").val());
+                var tax = parseFloat($("#tax").val());
+                var discount_percentage = parseFloat($("#discount_percentage").val());
+
+                var total_vat = (amount * vat) / 100;
+                var total_tax = (amount * tax) / 100;
+                var total_discount = (amount * discount_percentage) / 100;
+                net_total_amount = amount + total_vat + total_tax - total_discount;
+            }
+        }
+
+        // Update sub_total field
+        $("#sub_total").val(net_total_amount.toFixed(2));
+    });
+    // Listen for change event on VAT, tax, and discount_percentage fields
+    $("#vat, #tax, #discount_percentage").on('change', function() {
+        var vatInput = $("#vat").val();
+        var formattedVat = parseFloat(vatInput).toFixed(2);
+        $("#vat").val(formattedVat);
+
+        var taxInput = $("#tax").val();
+        var formattedTax = parseFloat(taxInput).toFixed(2);
+        $("#tax").val(formattedTax);
+
+        var discountPercentageInput = $("#discount_percentage").val();
+        var formattedDiscountPercentage = parseFloat(discountPercentageInput).toFixed(2);
+        $("#discount_percentage").val(formattedDiscountPercentage);
+
+        // Calculate net total amount
+        var price = parseFloat($("#unit_price").val());
+        var quantity = parseFloat($("#quantity").val());
         var amount = price * quantity;
+        var vat = parseFloat($("#vat").val());
+        var tax = parseFloat($("#tax").val());
+        var discount_percentage = parseFloat($("#discount_percentage").val());
+
         var total_vat = (amount * vat) / 100;
         var total_tax = (amount * tax) / 100;
         var total_discount = (amount * discount_percentage) / 100;
-        //var vat_tax = vat + tax;
-        var net_total_amount = (amount + total_vat + total_tax - total_discount);
-        $("#amount").val(amount);
-        $("#sub_total").val(net_total_amount);
+        var net_total_amount = amount + total_vat + total_tax - total_discount;
+
+        // Update sub_total field
+        $("#sub_total").val(net_total_amount.toFixed(2));
     });
 
     // Total Inventory

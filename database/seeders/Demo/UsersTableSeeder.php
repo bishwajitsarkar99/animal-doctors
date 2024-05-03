@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
     }
 
     public function data() {
-       return array(
+        return array(
             array('name' => 'Super Admin','email' => 'superadmin@gmail.com','role' => '1','email_verified_at' => NULL,'password' => '$2y$10$u2j3MDwcogeYGLyUpmYChuHwqYL.FYtyqmZkly/dFd8s.LR7Gzdlu','contract_number' => '01840336541','image' => '1694003928.jpg','status' => '0'),
             array('name' => 'Sub Admin','email' => 'subadmin@gmail.com','role' => '2','email_verified_at' => NULL,'password' => '$2y$10$7/pn0nV.XjG9tfkq5/lU4.gPrF5IF7VX.bWSiEat/57V0TVErqlYq','contract_number' => '01840336541','image' => '1694003977.jpeg','status' => '0'),
             array('name' => 'Admin','email' => 'admin@gmail.com','role' => '3','email_verified_at' => NULL,'password' => '$2y$10$KaxAm3v8habk2qJ7cn391eAPGm0BA6xwdVtaFcTD36hC19lGDuH..','contract_number' => '01740006589','image' => '1694892693.jpg','status' => '0'),

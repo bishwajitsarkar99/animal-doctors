@@ -755,7 +755,7 @@ return[
     'TAX(%)'=>'TAX(%)',
     'Discount(%)'=>'Discount(%)',
     'Net Amount'=>'Net Amount',
-    'INV'=>'INV',
+    'INV-SVC'=>'INV-SVC',
     'DD-MM-YYYY'=>'DD-MM-YYYY',
     'Select SVC ID'=>'Selecte SVC ID',
     'Select Category'=>'Selecte Category',
