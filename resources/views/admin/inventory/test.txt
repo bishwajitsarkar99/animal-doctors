@@ -171,3 +171,17 @@
         // Update sub_total field
         $("#sub_total").val(net_total_amount.toLocaleString('en-US', { minimumFractionDigits: 2 }));
     });
+
+
+
+    ============================
+    // inventory unique id generator
+    $("#supplier_id, #generate_id, #inv_field").on('change', function() {
+        var x = Math.random();
+        x = x * (100000 - 1) + 1;
+        var inv_field = $("#inv_field").val();
+        var generate_id = $("#generate_id").val(Math.floor(x));
+        var inv_id = $("#inv_field").val() + $("#supplier_id").val() + '-' + $("#generate_id").val();
+
+        $("#inv_id").val(inv_id);
+    });

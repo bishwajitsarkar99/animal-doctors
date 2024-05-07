@@ -32,7 +32,7 @@ class BrandController extends Controller
         $data = Brand::with(['medicine_origins'])->orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
+            $data->where('origin_id','LIKE','%'.$query.'%')
                 ->orWhere('brand_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
@@ -54,8 +54,7 @@ class BrandController extends Controller
         $data = MedicineOrigin::orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('origin_name','LIKE','%'.$query.'%')
+            $data->Where('origin_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;
@@ -71,10 +70,11 @@ class BrandController extends Controller
     public function storeData(Request $request)
     {
         $validators = validator::make($request->all(),[
-            'brand_name'=>'required|max:191',
+            'brand_name'=>'required|max:191|unique:brands',
             'origin_id' =>'required',
         ],[
             'brand_name.required'=>'The brand name is required mandatory.',
+            'brand_name.unique'=>'The brand name is already exits.',
             'origin_id.required'=>'The medicine origin is required mandatory.',
         ]);
         if($validators->fails()){
@@ -116,9 +116,13 @@ class BrandController extends Controller
     // Update Brand Name
     public function updatebrand(Request $request, $id)
     {
-        $validator = validator::make($request->all(),[
-            'brand_name'=>'required|max:191',
-            'origin_id'=>'required',
+        $validators = validator::make($request->all(),[
+            'brand_name'=>'required|max:191|unique:brands',
+            'origin_id' =>'required',
+        ],[
+            'brand_name.required'=>'The brand name is required mandatory.',
+            'brand_name.unique'=>'The brand name is already exits.',
+            'origin_id.required'=>'The medicine origin is required mandatory.',
         ]);
         if($validator->fails()){
             return response()->json([

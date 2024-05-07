@@ -92,12 +92,7 @@ class MedicineInventory extends Controller
     // inventory data store
     public function store(Request $request)
     {
-        // $supplier_id=$request->input('supplier_id');
-        // $inventory_id=$request->input('inventory_id');
-        // $inventory=$supplier_id.'- ' .$inventory_id;
-        // request()->json([
-        //     'result/table-index'=>$inventory,
-        // ]);
+        
         $validators = validator::make($request->all(), [
             "data.*.inv_id" => 'required|max:100|unique:inventories',
             "data.*.manufacture_date" => 'required',
@@ -153,8 +148,8 @@ class MedicineInventory extends Controller
                     "amount" => $item['amount'],
                     "sub_total" => $item['sub_total'],
                     // 'status' => 1,
-                    "vat_percentage" => $item['vat'], // Uncomment if this field is needed
-                    "tax_percentage" => $item['tax'], // Uncomment if this field is needed
+                    "vat_percentage" => $item['vat'],
+                    "tax_percentage" => $item['tax'],
                     'discount_percentage' => isset($item['discount_percentage']) ? $item['discount_percentage'] : 0,
 
                 ]);

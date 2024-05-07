@@ -15,7 +15,7 @@ class CreateMedicineNamesTable extends Migration
     {
         Schema::create('medicine_names', function (Blueprint $table) {
             $table->id();
-            $table->string('medicine_name',200);
+            $table->string('medicine_name',200)->unique();
             $table->unsignedBigInteger('group_id');
             $table->foreign('group_id')->references('id')->on('medicine_groups')->onDelete('cascade');
             $table->tinyInteger('status')->default('1');

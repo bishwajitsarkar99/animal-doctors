@@ -29,8 +29,7 @@
                 <datalist id="datalistOptionsOrigin">
                   @foreach($origins as $origin)
                   <option value="{{$origin->origin_name}}">
-                  <option value="{{$origin->id}}">
-                    @endforeach
+                  @endforeach
                 </datalist>
               </span>
             </div>
@@ -88,7 +87,7 @@
                     <input class="form-control form-control-sm edit_origin_name skeleton" type="text" name="origin_name" id="origin_name" placeholder="{{__('translate.Origin Name')}}" autofocus>
                     <input type="hidden" id="origin_id">
                   </div>
-                  <span id="savForm_error"></span><span id="updateForm_errorList"></span>
+                  <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
                 </div>
                 <p style="text-align: end;">
                   <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" id="save">

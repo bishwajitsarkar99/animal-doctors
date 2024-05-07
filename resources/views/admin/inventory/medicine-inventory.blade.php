@@ -158,7 +158,7 @@
                     <div class="category-form">
                         <div class="card form-control cat_form inventory_form">
                             <div class="col-xl-6">
-                                <input id="inv_field" type="text" name="inv_field" value="INV-SVC-" hidden />
+                                <input id="inv_field" type="text" name="inv_field" value="INV" hidden />
                                 <input id="generate_id" type="text" name="generate_id" placeholder="generate_id" hidden />
                             </div>
                             <form autocomplete="off">
@@ -656,13 +656,24 @@
     // inventory unique id generator
     $("#supplier_id, #generate_id, #inv_field").on('change', function() {
         var x = Math.random();
-        x = x * (100000 - 1) + 1;
+        x = x * (10000 - 1) + 1;
+        var generate_id = Math.floor(x);
+        $("#generate_id").val(generate_id);
         var inv_field = $("#inv_field").val();
-        var generate_id = $("#generate_id").val(Math.floor(x));
-        var inv_id = $("#inv_field").val() + $("#supplier_id").val() + '-' + $("#generate_id").val();
+        //var supplier_id = $("#supplier_id").val();
 
-        $("#inv_id").val(inv_id);
+        var currentDate = new Date();
+        var year = currentDate.getFullYear();
+        var month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
+        var day = ("0" + currentDate.getDate()).slice(-2);
+        var formattedDate = year + '-' + month + '-' + day;
+
+        var inv_id = inv_field + '-' + formattedDate;
+
+        $("#inv_id").val(inv_id + '-' + generate_id);
     });
+
+
 
     // inventory calculation
     $("#unit_price, #quantity").on('change', function() {

@@ -291,3 +291,8 @@ ul.table_head_set{
 input[type="checkbox"]{
     cursor: pointer;
 }
+span#show_jst,#show_deny {
+    letter-spacing: 1px;
+    font-size: 11px;
+    font-weight: 600;
+}

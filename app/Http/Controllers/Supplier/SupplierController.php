@@ -50,16 +50,22 @@ class SupplierController extends Controller
     // Store Supplier
     public function stroeData(Request $request)
     {
-        $validators = validator::make($request->all(),[
-            'type'=>'required |max:191',
-            'bussiness_type' =>'required |max:191',
-            'name' =>'required |max:191',
-            'current_address' =>'required |max:300',
-            'contact_number_one' =>'required |max:191',
-        ],[
-            'type.required'=>'The supplier type is required mandatory.',
-            'name.required'=>'The name is required mandatory.',
-            'contact_number_one.required'=>'The contact number is mandatory.',
+        $validators = Validator::make($request->all(), [
+            'type' => 'required|max:191',
+            'bussiness_type' => 'required|max:191',
+            'name' => 'required|max:191',
+            'current_address' => 'required|max:300',
+            'contact_number_one' => 'required|max:191|unique:suppliers',
+        ], [
+            'type.required' => 'The supplier type is required.',
+            'type.max' => 'The supplier type may not be greater than 191 characters.',
+            'bussiness_type.required' => 'The business type is required.',
+            'bussiness_type.max' => 'The business type may not be greater than 191 characters.',
+            'name.required' => 'The name is required.',
+            'current_address.required' => 'The current address is required.',
+            'contact_number_one.required' => 'The contact number is required.',
+            'contact_number_one.max' => 'The contact number may not be greater than 191 characters.',
+            'contact_number_one.unique' => 'The contact number has already been taken.',
         ]);
         if($validators->fails()){
             return response()->json([

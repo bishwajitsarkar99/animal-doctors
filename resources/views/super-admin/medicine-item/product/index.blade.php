@@ -32,7 +32,6 @@
                 <datalist id="datalistOptionsProduct">
                   @foreach($products as $product)
                   <option value="{{$product->product_name}}">
-                  <option value="{{$product->id}}">
                   @endforeach
                 </datalist>
               </span>

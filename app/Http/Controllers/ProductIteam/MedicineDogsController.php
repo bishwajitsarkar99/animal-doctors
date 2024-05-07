@@ -32,8 +32,7 @@ class MedicineDogsController extends Controller
         $data = MedicineDogs::with(['medicine_names'])->orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('medicine_dogs','LIKE','%'.$query.'%')
+            $data->Where('medicine_dogs','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;
@@ -55,8 +54,7 @@ class MedicineDogsController extends Controller
         $data = MedicineName::orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('medicine_name','LIKE','%'.$query.'%')
+            $data->Where('medicine_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;

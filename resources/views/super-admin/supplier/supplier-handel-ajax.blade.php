@@ -15,7 +15,7 @@
 
             return [...rows].map((row, key) => {
                 return `
-                    <tr class="table-row user-table-row" key="${key}" id="supp_tab">
+                    <tr class="table-row user-table-row supp-table-row" key="${key}" id="supp_tab">
                         <td class="sn border_ord" id="supp_tab2">${row.id}</td>
                         <td class="txt_ ps-1 center" id="supp_tab3">
                             <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
@@ -25,23 +25,25 @@
                                     <i class="fa-solid fa-pen-to-square fa-beat" style="color:darkcyan"></i></button>
                                     <button class="btn-sm edit_registration view_btn cgr_btn ms-4" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                     <i class="fa-solid fa-trash-can fa-beat" style="color:orangered"></i></button>
+                                    <button class="btn-sm edit_registration view_btn cgr_btn ms-4" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                                    <i class="fa-solid fa-eye fa-beat" style="color:royalblue"></i></button>
                                 </li>
                             </ul>
                         </td>
-                        <td class="border_ord ps-1" id="supp_tab4">${row.id_name}</td>
-                        <td class="txt_ ps-1" id="supp_tab5">${row.type}</td>
-                        <td class="txt_ ps-1" id="supp_tab6">${row.bussiness_type}</td>
-                        <td class="txt_ ps-1" id="supp_tab7">${row.name}</td>
-                        <td class="txt_ ps-1" id="supp_tab8" hidden>${row.office_address}</td>
-                        <td class="txt_ ps-1" id="supp_tab9" hidden>${row.current_address}</td>
-                        <td class="txt_ ps-1" id="supp_tab10">${row.contact_number_one}</td>
-                        <td class="txt_ ps-1" id="supp_tab11">${row.contact_number_two}</td>
-                        <td class="txt_ ps-1" id="supp_tab12">${row.whatsapp_number}</td>
-                        <td class="txt_ ps-1" id="supp_tab13">${row.email}</td>
+                        <td class="border_ord ps-1 supp_vew" id="supp_tab4">${row.id_name}</td>
+                        <td class="txt_ ps-1 supp_vew2" id="supp_tab5">${row.type}</td>
+                        <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.bussiness_type}</td>
+                        <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${row.name}</td>
+                        <td class="txt_ ps-1 supp_vew5" id="supp_tab8" hidden>${row.office_address}</td>
+                        <td class="txt_ ps-1 supp_vew6" id="supp_tab9" hidden>${row.current_address}</td>
+                        <td class="txt_ ps-1 supp_vew7" id="supp_tab10">${row.contact_number_one}</td>
+                        <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${row.contact_number_two}</td>
+                        <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${row.whatsapp_number}</td>
+                        <td class="txt_ ps-1 supp_vew10" id="supp_tab13">${row.email}</td>
                         <td class="tot_complete_ ps-1 pt-1 center" id="supp_tab14">
                             <input id="actOne" class="form-switch form-check-input supplier_check_permission me-2" type="checkbox" status_id="${row.id}" value="${row.supplier_status}" ${row.supplier_status? " checked": ''}>
                         </td>
-                        <td class="tot_complete_ pill ${row.supplier_status? ' bg-primary': ' bg-danger'}" id="supp_tab15"><span class="text-light ps-1">${row.supplier_status ? 'Active': 'Inactive'}</span>
+                        <td class="tot_complete_ pill supp_vew11 ${row.supplier_status? ' bg-primary': ' bg-danger'}" id="supp_tab15"><span class="text-light ps-1">${row.supplier_status ? 'Active': 'Inactive'}</span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>
                         </td>
                     </tr>
@@ -82,6 +84,7 @@
                         total
                     }));
                     $("#total_supplier_records").text(total);
+                    $("#total_supplier_records_progressbar").text(total);
                     // Initialize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
                 }
@@ -194,6 +197,37 @@
         // Add Supplier
         $(document).on('click', '#save', function(e) {
             e.preventDefault();
+            // Remove any existing error messages
+            $('.error-message').remove();
+            
+            // Validate form fields
+            var type = $('#type').val();
+            var bussinessType = $('#bussiness_type').val();
+            var name = $('#name').val();
+            var currentAddress = $('#current_address').val();
+            var contactNumberOne = $('#contact_number_one').val();
+            
+            if (type.trim() == '') {
+                $('#type').closest('.row').append('<span><span class="error-message alert_show_errors">The type(supplier or vendor or common) field is required.</span></span>');
+            }
+            if (bussinessType.trim() == '') {
+                $('#bussiness_type').closest('.row').append('<span><span class="error-message alert_show_errors bussiness_erorr">The bussiness type(bussiness name) field is required.</span></span>');
+            }
+            if (name.trim() == '') {
+                $('#name').closest('.row').append('<span><span class="error-message alert_show_errors name_erorr">The supplier name field is required.</span></span>');
+            }
+            if (currentAddress.trim() == '') {
+                $('#current_address').closest('.row').append('<span><span class="error-message alert_show_errors address_erorr">The current address field is required.</span></span>');
+            }
+            if (contactNumberOne.trim() == '') {
+                $('#contact_number_one').closest('.row').append('<span><span class="error-message alert_show_errors address_erorr">The contact number field is required.</span></span>');
+            }
+            
+            // Check if there are any error messages
+            if ($('.error-message').length > 0) {
+                // If there are error messages, stop further execution
+                return;
+            }
             var data = {
                 'type': $('#type').val(),
                 'bussiness_type': $('#bussiness_type').val(),
@@ -286,6 +320,39 @@
         // Update Supplier Contact 
         $(document).on('click', '#update_btn', function(e) {
             e.preventDefault();
+
+            // Remove any existing error messages
+            $('.error-message').remove();
+            
+            // Validate form fields
+            var type = $('#type').val();
+            var bussinessType = $('#bussiness_type').val();
+            var name = $('#name').val();
+            var currentAddress = $('#current_address').val();
+            var contactNumberOne = $('#contact_number_one').val();
+            
+            if (type.trim() == '') {
+                $('#type').closest('.row').append('<span><span class="error-message alert_show_errors">The type(supplier or vendor or common) field is required.</span></span>');
+            }
+            if (bussinessType.trim() == '') {
+                $('#bussiness_type').closest('.row').append('<span><span class="error-message alert_show_errors bussiness_erorr">The bussiness type(bussiness name) field is required.</span></span>');
+            }
+            if (name.trim() == '') {
+                $('#name').closest('.row').append('<span><span class="error-message alert_show_errors name_erorr">The supplier name field is required.</span></span>');
+            }
+            if (currentAddress.trim() == '') {
+                $('#current_address').closest('.row').append('<span><span class="error-message alert_show_errors address_erorr">The current address field is required.</span></span>');
+            }
+            if (contactNumberOne.trim() == '') {
+                $('#contact_number_one').closest('.row').append('<span><span class="error-message alert_show_errors address_erorr">The contact number field is required.</span></span>');
+            }
+            
+            // Check if there are any error messages
+            if ($('.error-message').length > 0) {
+                // If there are error messages, stop further execution
+                return;
+            }
+
             var supp_id = $('#supp_id').val();
             var data = {
                 'type': $('#type').val(),
@@ -368,7 +435,7 @@
                 $("#supp_delt4").removeClass('skeleton');
                 $("#delete_supplier_id").removeClass('skeleton');
                 $("#deleteLoader").removeClass('skeleton');
-            }, 3000);
+            }, 1000);
             
             return ()=>{
                 clearTimeout(time);
@@ -433,7 +500,38 @@
                 }
             });
         });  
+        
+        // Supplier Info View
+        $(document).on('click', '#viewBtn', function(e) {
+            e.preventDefault();
+            var supplier_id = $(this).val();
+            $('#view_supplier_id').val(supplier_id);
+            $('#supplierInfoView').modal('show');
 
+            $.ajax({
+                type: "GET",
+                url: "/edit-supplier/" + supplier_id,
+                success: function(response) {
+                    if (response.status == 404) {
+                        $('#success_message').html("");
+                        $('#success_message').addClass('alert alert-danger');
+                        $('#success_message').text(response.messages);
+                    } else {
+                        $('#view_supplier_id').val(supplier_id);
+                        $('.supp_vew').val(response.messages.id_name);
+                        $('.view_type').val(response.messages.type);
+                        $('.view_bussiness_type').val(response.messages.bussiness_type);
+                        $('.view_name').val(response.messages.name);
+                        $('.view_office_address').val(response.messages.office_address);
+                        $('.view_current_address').val(response.messages.current_address);
+                        $('.view_contact_number_one').val(response.messages.contact_number_one);
+                        $('.view_contact_number_two').val(response.messages.contact_number_two);
+                        $('.view_whatsapp_number').val(response.messages.whatsapp_number);
+                        $('.view_email').val(response.messages.email);
+                    }
+                }
+            });
+        });
         // input type field loader
         $("#type").on('keyup',()=> {
             $('.type-icon').removeClass('type-hidden');
@@ -530,5 +628,22 @@
         $(document).load('click', function(){
             $("#active_loader").addClass('loader_chart');
         });
+
+        // Assume you have a variable totalSupplierRecords that holds the total number of supplier records
+        var totalSupplierRecords = $("#total_supplier_records_progressbar").text(total);
+        updateProgressBarWithErrorHandling(totalSupplierRecords);
+        function updateProgressBarWithErrorHandling(totalSupplierRecords) {
+            var progressBar = $('.progress-bar');
+            var percentage = (totalSupplierRecords / 100) * 100; 
+            if (!isNaN(percentage) && percentage >= 0 && percentage <= 100) {
+                progressBar.css('width', percentage + '%');
+                progressBar.attr('aria-valuenow', percentage);
+                progressBar.text(percentage.toFixed(2) + '%'); 
+            } else {
+                progressBar.css('width', '0%');
+                progressBar.attr('aria-valuenow', '0');
+                progressBar.text('Error');
+            }
+        }
     });
 </script>

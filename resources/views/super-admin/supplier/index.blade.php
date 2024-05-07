@@ -16,12 +16,17 @@
                         <div class="accordion-body">
                             <div class="card-body focus-color cd cat_form">
                                 <p class="catg mb-1">Supplier Or Vendor</span></p>
+                                <!-- <div class="progress-wrapper">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="total_supplier_records_progressbar"></div>
+                                    </div>
+                                </div> -->
                                 <div class="row">
                                     <div class="col-5">
                                         <span class="form-check form-switch search_ skeleton me-2">
                                             <input class="form-check-input skeleton" onclick="mySrcFunction()" type="checkbox" id="search_area" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                             <label class="search ser_labe skeletonl ps-1 pt-1" for="search pe-2">Search Mode :</label>
-                                            <label class="form-check-label skeleton" for="collapseExample"><span class="search_on" id="search_off">OFF</span></label>
+                                            <label class="form-check-label skeleton badge rounded-pill bg-light text-dark" for="collapseExample"><span class="search_on" id="search_off">OFF</span></label>
                                         </span>
                                     </div>
                                     <div class="col-5">
@@ -50,7 +55,7 @@
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Bussiness</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Name</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact1</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact1</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact2</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">WhatsApp</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Email</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton pe-2">Check</th>
@@ -78,7 +83,7 @@
                                     <div class="col-4">
                                         <span class="tot_summ skeleton" id="num_plate">
                                             <label class="tot-search skeleton mt-3" for="tot_cagt"> Total Supplier or Vendor :</label>
-                                            <label for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;" id="total_supplier_records"></span><span id="iteam_label5" style="font-weight: 600;color:darkcyan;">.00</span></label>
+                                            <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;" id="total_supplier_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;">.00</span></label>
                                         </span>
                                     </div>
                                     <div class="col-7">
@@ -241,7 +246,7 @@
     <div class="modal-dialog">
         <div class="modal-content" id="admin_modal_box">
             <div class="modal-header profile_modal_header profilesetting_modal_header">
-                <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
+                <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabels">
                     Delete Supplier Or Vendor
                 </h5>
                 <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
@@ -271,8 +276,47 @@
         </div>
     </div>
 </div>
-{{-- End Delete  Supplier or Vendor Modal---}}
+{{-- End Delete  Supplier or Vendor Modal--}}
 
+{{--Start Supplier or Info View Modal--}}
+<div class="modal fade" id="supplierInfoView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content small_modal" id="admin_modal_box">
+        <div class="modal-header" id="logoutModal_header">
+            <span class="modal-title admin_title scan pt-1" id="staticBackHead">
+                <input class="view_name" type="text" readonly>
+            </span>
+            <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" 
+                data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+            </button>
+        </div>
+        <div class="modal-body" id="logoutModal_body">
+            <label class="label_font" for="supplier_id">Supplier-ID :</label>
+            <input class="supp_vew" type="text" readonly><br>
+            <label class="label_font" for="view_type">Type :</label>
+            <input class="view_type" type="text" readonly><br>
+            <label class="label_font" for="view_bussiness_type">Bussiness Type :</label>
+            <input class="view_bussiness_type" type="text" readonly><br>
+            <label class="label_font address" for="view_office_address">Office-Address :</label><br>
+            <textarea id="view_office_address"  rows="1" cols="36" class="view_office_address" readonly></textarea><br>
+            <label class="label_font address" for="view_current_address">Current-Address :</label><br>
+            <textarea id="view_current_address"  rows="1" cols="36" class="view_current_address" readonly></textarea><br>
+            <label class="label_font" for="view_contact_number_one">Contract Number-1 :</label>
+            <input class="view_contact_number_one" type="text" readonly>
+            <label class="label_font" for="view_contact_number_two">Contract Number-2 :</label>
+            <input class="view_contact_number_two" type="text" readonly><br>
+            <label class="label_font" for="view_whatsapp_number">Whats app Number :</label>
+            <input class="view_whatsapp_number" type="text" readonly><br>
+            <label class="label_font" for="view_email">Email :</label>
+            <input class="view_email" type="text" readonly><br>
+        </div>
+        <div class="modal-footer" id="logoutModal_footer">
+    
+        </div>    
+    </div>
+  </div>
+</div>
+{{--End Supplier or Info View Modal--}}
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">

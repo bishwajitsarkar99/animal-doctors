@@ -28,7 +28,6 @@
                 <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
                 <datalist id="datalistOptions">
                   @foreach($medicines as $medicine)
-                    <option value="{{$medicine->id}}">
                     <option value="{{$medicine->medicine_name}}">
                   @endforeach
                 </datalist>
@@ -92,7 +91,7 @@
                     <input class="form-control form-control-sm edit_medicine_name skeleton" type="text" name="medicine_name" id="medicine_name" placeholder="{{__('translate.Medicine Name')}}" autofocus>
                     <input type="hidden" id="medicine_id">
                   </div>
-                  <span id="savForm_error"></span><span id="updateForm_errorList"></span>
+                  <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
                 </div>
                 <div class="row mt-2">
                   <div class="col-5">
@@ -102,9 +101,15 @@
                     <i class="medicineid-icon fa fa-spinner fa-spin medicineid-hidden mt-2"></i>
                   </div>
                   <div class="col-6">
-                    <input class="form-control form-control-sm edit_group_id skeleton" type="number" name="group_id" id="group_id" placeholder="{{__('translate.Group ID')}}" required>
+                    <input class="form-control form-control-sm edit_group_id skeleton" list="datalistOptions3" type="number" name="group_id" id="group_id" placeholder="{{__('translate.Group ID')}}" required>
+                    <datalist id="datalistOptions3">
+                    @foreach($medicinegroups as $medicinegroup)
+                      <option value="{{$medicinegroup->id}}">
+                      <option value="{{$medicinegroup->group_name}}">
+                    @endforeach
+                  </datalist>
                   </div>
-                  <span id="savForm_error"></span><span id="updateForm_errorList"></span>
+                  <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
                 </div>
                 <p style="text-align: end;">
                   <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" id="save">
@@ -162,7 +167,6 @@
                   <i class="medic-search-icon fa fa-spinner fa-spin medic-search-hidden"></i>
                   <datalist id="datalistOptions2">
                     @foreach($medicinegroups as $medicinegroup)
-                      <option value="{{$medicinegroup->id}}">
                       <option value="{{$medicinegroup->group_name}}">
                     @endforeach
                   </datalist>

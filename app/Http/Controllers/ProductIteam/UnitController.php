@@ -30,8 +30,7 @@ class UnitController extends Controller
         $data = Unit::orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('units_name','LIKE','%'.$query.'%')
+            $data->Where('units_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;

@@ -218,6 +218,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('super-admin/inventory-status', [InventoryAuthorization::class, 'inventoryAuthorize'])->name('inventory-authorize.action');
         Route::get('super-admin/get-inventory-delete-data', [InventoryAuthorization::class, 'getInventoryDeleteData'])->name('get_inventory_data.action');
         Route::delete('super-admin/inventory-delete', [InventoryAuthorization::class, 'inventoryDelete'])->name('delete-inventory');
+        Route::post('super-admin/inventory-permission', [InventoryAuthorization::class, 'inventoryPermission'])->name('action.inventory-permission');
     });
     // Fornt-End Page(Footer)
     Route::middleware('isSuperAdmin')->group(function() {

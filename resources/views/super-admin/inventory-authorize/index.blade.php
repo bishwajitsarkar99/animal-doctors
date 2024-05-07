@@ -4,26 +4,27 @@
 <div class="inventory-bg-color">
   <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_authorize')" id="inventory_active">Inventory-Authorize</button>
   <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_delete')" id="inventory_inactive">Inventory-Details</button>
+  <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_permission')" id="inventory_inactive">Permission</button>
 </div>
 <div id="inventory_authorize" class="supp">
   <div class="card form-control card-body form-control-sm" id="inventory_page">
     @include('super-admin.inventory-authorize._inventory-authorize-table')
-    <!-- show-message -->
-    <div class="col-xl-12 action_message">
-      <p class="ps-1"><span id="success_message"></span></p>
-    </div>
   </div>
 </div>
 <div id="inventory_delete" class="supp" style="display: none;">
   <div class="card form-control form-control-sm" id="category_page">
     @include('super-admin.inventory-authorize._inventory-details-table')
-    <!-- show-message -->
-    <div class="col-xl-12 action_message">
-      <p class="ps-1"><span id="success_message"></span></p>
-    </div>
   </div>
 </div>
-
+<div id="inventory_permission" class="supp" style="display: none;">
+  <div class="card form-control form-control-sm" id="permission_page">
+    @include('super-admin.inventory-authorize._permission')
+  </div>
+</div>
+<!-- show-message -->
+<div class="col-xl-12 action_message">
+  <p class="ps-1"><span id="success_message"></span></p>
+</div>
 {{-- Start Delete Inventory Modal--}}
 @include('super-admin.inventory-authorize._delete-inventory')
 {{-- End Delete Inventory Modal---}}
@@ -34,6 +35,8 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/inventory/medicine-inventory.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/inventory/authorize_table.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-ui.min.css">
+<!-- ================ permission-css ================= -->
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/permission/permission.css">
 @endsection
 
 @section('script')
@@ -63,6 +66,16 @@
       changeYear: true,
     });
     $('#end_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
+    $('#start_get_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
+    $('#end_get_date').datepicker({
       dateFormat: "dd-mm-yy",
       changeMonth: true,
       changeYear: true,

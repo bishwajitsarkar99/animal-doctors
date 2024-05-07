@@ -15,7 +15,7 @@ class CreateFolderEntriesTable extends Migration
     {
         Schema::create('folder_entries', function (Blueprint $table) {
             $table->id();
-            $table->string('folder_name');
+            $table->string('folder_name')->unique();
             $table->timestamps();
         });
     }

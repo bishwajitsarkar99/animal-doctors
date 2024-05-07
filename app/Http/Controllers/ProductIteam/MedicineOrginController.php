@@ -30,8 +30,7 @@ class MedicineOrginController extends Controller
         $data = MedicineOrigin::orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('origin_name','LIKE','%'.$query.'%')
+            $data->Where('origin_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;
@@ -47,9 +46,10 @@ class MedicineOrginController extends Controller
     public function storeData(Request $request)
     {
         $validators = validator::make($request->all(),[
-            'origin_name'=>'required|max:191',
+            'origin_name'=>'required|max:191|unique:medicine_origins',
         ],[
             'origin_name.required'=>'The medicine origin is required mandatory.',
+            'origin_name.unique'=>'The medicine origin has already been taken.',
         ]);
         if($validators->fails()){
             return response()->json([
@@ -90,7 +90,7 @@ class MedicineOrginController extends Controller
     public function updateorigin(Request $request, $id)
     {
         $validator = validator::make($request->all(),[
-            'origin_name'=>'required|max:191',
+            'origin_name'=>'required|max:191|unique:medicine_origins,origin_name,' .$id,
         ]);
         if($validator->fails()){
             return response()->json([

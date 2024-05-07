@@ -30,8 +30,7 @@ class GroupController extends Controller
         $data = MedicineGroup::orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('group_name','LIKE','%'.$query.'%')
+            $data->Where('group_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;
@@ -47,9 +46,10 @@ class GroupController extends Controller
     public function storeData(Request $request)
     {
         $validators = validator::make($request->all(),[
-            'group_name'=>'required|max:191',
+            'group_name'=>'required|max:191|unique:medicine_groups',
         ],[
-            'group.required'=>'The medicine group is required mandatory.',
+            'group_name.required'=>'The medicine group is required mandatory.',
+            'group_name.unique'=>'The medicine group has already been taken.'
         ]);
         if($validators->fails()){
             return response()->json([
@@ -90,7 +90,7 @@ class GroupController extends Controller
     public function updatemedicinegroup(Request $request, $id)
     {
         $validator = validator::make($request->all(),[
-            'group_name'=>'required|max:191',
+            'group_name'=>'required|max:191|unique:medicine_groups,group_name,' .$id,
         ]);
         if($validator->fails()){
             return response()->json([

@@ -18,14 +18,14 @@ class CreateForntEndFooterInformationsPagesTable extends Migration
             $table->string('company_name');
             $table->string('company_address');
             $table->string('email')->unique();
-            $table->string('contract_number_one');
-            $table->string('contract_number_two');
+            $table->string('contract_number_one')->unique();
+            $table->string('contract_number_two')->unique();
             $table->string('hot_number');
-            $table->string('whatsapp_number_one');
-            $table->string('whatsapp_number_two');
-            $table->string('facebook_address');
-            $table->string('linkedin');
-            $table->string('youtube_chenel');
+            $table->string('whatsapp_number_one')->unique();
+            $table->string('whatsapp_number_two')->unique();
+            $table->string('facebook_address')->unique();
+            $table->string('linkedin')->unique();
+            $table->string('youtube_chenel')->unique();
             
             $table->string('facebook_link');
             $table->string('messaner_link');

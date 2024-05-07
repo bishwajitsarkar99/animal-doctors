@@ -32,7 +32,6 @@
                 <datalist id="datamedicinegroup">
                   @foreach($groups as $group)
                   <option value="{{$group->group_name}}">
-                  <option value="{{$group->id}}">
                   @endforeach
                 </datalist>
               </span>
@@ -91,7 +90,7 @@
                     <span class="skeleton"><input class="form-control form-control-sm edit_group_name skeleton" type="text" name="group_name" id="group_name" placeholder="{{__('translate.Group Name')}}" autofocus></span>
                     <input type="hidden" id="group_id">
                   </div>
-                  <span id="savForm_error"></span><span id="updateForm_errorList"></span>
+                  <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
                 </div>
                 <p style="text-align: end;">
                   <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" id="save">

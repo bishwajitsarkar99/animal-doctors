@@ -20,7 +20,7 @@
         <div class="form-group custom-select skeleton">
           <select class="ms-5 ps-2" name="role_id" id="select_role">
             <option value="" id="option_value1">Select Role</option>
-            @foreach(\App\Models\Role::all() as $role)
+            @foreach($roles as $role)
             <option value="{{$role->id}}" id="option_value2">{{$role->name}}</option>
             @endforeach
           </select>
@@ -110,4 +110,9 @@
 @endsection
 @section('script')
 @include('super-admin.user-permission.permission-ajax.ajax')
+<script>
+  $("#example").mSelectDBox({
+      "list": [] // Array of list items
+  });
+</script>
 @endsection

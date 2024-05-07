@@ -15,7 +15,7 @@ class CreateMedicineOriginsTable extends Migration
     {
         Schema::create('medicine_origins', function (Blueprint $table) {
             $table->id();
-            $table->string('origin_name',50);
+            $table->string('origin_name',50)->unique();
             $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });

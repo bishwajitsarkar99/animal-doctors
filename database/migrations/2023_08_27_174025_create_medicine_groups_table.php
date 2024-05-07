@@ -15,7 +15,7 @@ class CreateMedicineGroupsTable extends Migration
     {
         Schema::create('medicine_groups', function (Blueprint $table) {
             $table->id();
-            $table->string('group_name',50);
+            $table->string('group_name',50)->unique();
             $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });

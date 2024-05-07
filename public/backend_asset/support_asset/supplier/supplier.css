@@ -55,7 +55,7 @@ div.item {
 }
 .supp_name_label{
     font-family: math;
-    font-size: 0.9vw;
+    font-size: 0.92vw;
     letter-spacing: 0.9px;
     color: black;
     font-weight: 600;
@@ -65,7 +65,7 @@ input#type {
     outline: none;
     box-shadow: none;
     animation: supfncolor 6s infinite;
-    font-size: 12px;
+    font-size: 13px;
     box-shadow: none;
     font-weight: 500;
     border-top: 1px solid #f1eeee;
@@ -79,7 +79,7 @@ input#bussiness_type {
     outline: none;
     box-shadow: none;
     animation: supfncolor 6s infinite;
-    font-size: 12px;
+    font-size: 13px;
     box-shadow: none;
     font-weight: 500;
     border-top: 1px solid #f1eeee;
@@ -92,7 +92,7 @@ input#name {
     outline: none;
     box-shadow: none;
     animation: supfncolor 6s infinite;
-    font-size: 12px;
+    font-size: 13px;
     box-shadow: none;
     font-weight: 500;
     border-top: 1px solid #f1eeee;
@@ -105,7 +105,7 @@ input#office_address {
     outline: none;
     box-shadow: none;
     animation: supfncolor 6s infinite;
-    font-size: 12px;
+    font-size: 13px;
     box-shadow: none;
     font-weight: 500;
     border-top: 1px solid #f1eeee;
@@ -118,7 +118,7 @@ input#current_address {
     outline: none;
     box-shadow: none;
     animation: supfncolor 6s infinite;
-    font-size: 12px;
+    font-size: 13px;
     box-shadow: none;
     font-weight: 500;
     border-top: 1px solid #f1eeee;
@@ -131,7 +131,7 @@ input#contact_number_one {
     outline: none;
     box-shadow: none;
     animation: supfncolor 6s infinite;
-    font-size: 12px;
+    font-size: 13px;
     box-shadow: none;
     font-weight: 500;
     border-top: 1px solid #f1eeee;
@@ -144,7 +144,7 @@ input#contact_number_two {
     outline: none;
     box-shadow: none;
     animation: supfncolor 6s infinite;
-    font-size: 12px;
+    font-size: 13px;
     box-shadow: none;
     font-weight: 500;
     border-top: 1px solid #f1eeee;
@@ -157,7 +157,7 @@ input#whatsapp_number {
     outline: none;
     box-shadow: none;
     animation: supfncolor 6s infinite;
-    font-size: 12px;
+    font-size: 13px;
     box-shadow: none;
     font-weight: 500;
     border-top: 1px solid #f1eeee;
@@ -170,7 +170,7 @@ input#email {
     outline: none;
     box-shadow: none;
     animation: supfncolor 6s infinite;
-    font-size: 12px;
+    font-size: 13px;
     box-shadow: none;
     font-weight: 500;
     border-top: 1px solid #f1eeee;
@@ -227,6 +227,10 @@ input#delete_supplier_id {
     outline: none;
     font-weight: 600;
     font-size: 12px;
+    width: inherit;
+    background-color: aliceblue;
+    border-radius: 50px;
+    padding-left: 10px;
 }
 label.search.ser_labe {
     color: darkcyan;
@@ -331,4 +335,66 @@ button.btn.btn-sm.btn_focus {
     100%{
         background-image: linear-gradient(to bottom, rgb(14 14 14 / 5%) 0%, rgb(171 165 165 / 5%) 100%);
     }
+}
+span.bussiness_erorr {
+    margin-left: -22px;
+}
+span.name_erorr{
+    margin-left: -113px;
+}
+span.address_erorr{
+    margin-left: -106px;
+}
+tr.supp-table-row{
+    font-size: 0.9vw;
+    font-weight: 500;
+}
+#staticBackHead{
+    font-size: 12px;
+    font-weight: 600;
+    font-variant: all-petite-caps;
+    color: darkslateblue;
+    margin-top: -0.3em;
+    animation: 2s infinite;
+    font-family: 'Archivo Black';
+}
+input.view_name,.supp_vew,.view_type,.view_bussiness_type,.view_office_address,.view_current_address,.view_contact_number_one,
+.view_contact_number_two,.view_whatsapp_number,.view_email{
+    box-shadow: none;
+    border: none;
+    outline: none;
+    font-weight: 600;
+    cursor: alias;
+}
+input.supp_vew {
+    margin-left: 19px;
+    margin-bottom: 2px;
+}
+input.view_type {
+    margin-left: 55px;
+    margin-bottom: 2px;
+}
+input.view_bussiness_type{
+    margin-bottom: 2px;
+}
+label.label_font{
+    font-weight: 600;
+}
+input.view_whatsapp_number {
+    margin-left: -2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+input.view_contact_number_one,.view_contact_number_two {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+#staticBackdropLabels {
+    font-size: 19px;
+    font-weight: 600;
+    font-variant: all-petite-caps;
+    color: darkslateblue;
+    margin-top: -0.3em;
+    animation: 2s infinite;
+    font-family: 'Archivo Black';
 }

@@ -32,8 +32,7 @@ class MedicineNameController extends Controller
         $data = MedicineName::with('medicine_groups')->orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('medicine_name','LIKE','%'.$query.'%')
+            $data->Where('medicine_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;
@@ -45,7 +44,7 @@ class MedicineNameController extends Controller
         return response()->json( $data, 200);
     }
 
-    // Get Medicine Name
+    // Get Medicine Group
     public function getGroup(Request $request)
     {
         if($request->ajax() == false){
@@ -55,8 +54,7 @@ class MedicineNameController extends Controller
         $data = MedicineGroup::orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('group_name','LIKE','%'.$query.'%')
+            $data->Where('group_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;
@@ -72,11 +70,12 @@ class MedicineNameController extends Controller
     public function storeData(Request $request)
     {
         $validators = validator::make($request->all(),[
-            'medicine_name'=>'required|max:191',
+            'medicine_name'=>'required|max:191|unique:medicine_names',
             'group_id'=>'required',
         ],[
             'medicine_name.required'=>'The medicine name is required mandatory.',
-            'group_id.required'=>'The medicine name is required mandatory.',
+            'medicine_name.unique'=>'The medicine name has already been taken.',
+            'group_id.required'=>'The medicine group id is required mandatory.',
         ]);
         if($validators->fails()){
             return response()->json([
@@ -120,7 +119,7 @@ class MedicineNameController extends Controller
     public function updatemedicinename(Request $request, $id)
     {
         $validator = validator::make($request->all(),[
-            'medicine_name'=>'required|max:191',
+            'medicine_name'=>'required|max:191|unique:medicine_names,medicine_name,' .$id,
             'group_id'=>'required',
         ]);
         if($validator->fails()){

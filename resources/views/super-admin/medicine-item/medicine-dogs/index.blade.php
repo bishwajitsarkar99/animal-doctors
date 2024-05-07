@@ -31,9 +31,8 @@
                 <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
                 <datalist id="datalistOptions">
                   @foreach($medicinedogs as $medicinedog)
-                  <option value="{{$medicinedog->id}}">
-                  <option value="{{$medicinedog->medicine_dogs}}">
-                    @endforeach
+                    <option value="{{ $medicinedog->medicine_dogs }}">
+                  @endforeach
                 </datalist>
               </span>
             </div>
@@ -96,7 +95,7 @@
                     <span class="skeleton"><input class="form-control form-control-sm edit_medicine_dogs" type="text" name="medicine_dogs" id="medicine_dogs" placeholder="{{__('translate.Medicine Dosage')}}" autofocus></span>
                     <input type="hidden" id="medicinedogs_id">
                   </div>
-                  <span id="savForm_error"></span><span id="updateForm_errorList"></span>
+                  <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
                 </div>
                 <div class="row mt-2">
                   <div class="col-5">
@@ -106,9 +105,15 @@
                     <i class="medicineid-icon fa fa-spinner fa-spin medicineid-hidden mt-2"></i>
                   </div>
                   <div class="col-6">
-                    <span class="skeleton"><input class="form-control form-control-sm edit_medicine_id skeleton" type="number" name="medicine_id" id="medicine_id" placeholder="{{__('translate.Medicine ID')}}" required></span>
+                    <span class="skeleton"><input class="form-control form-control-sm edit_medicine_id skeleton" list="datalistOptions3" type="number" name="medicine_id" id="medicine_id" placeholder="{{__('translate.Medicine ID')}}" required></span>
+                    <datalist id="datalistOptions3">
+                      @foreach($medicines as $medicine)
+                      <option value="{{$medicine->id}}">
+                        <option value="{{$medicine->medicine_name}}">
+                      @endforeach
+                    </datalist>
                   </div>
-                  <span id="savForm_error"></span><span id="updateForm_errorList"></span>
+                  <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
                 </div>
                 <p style="text-align: end;">
                   <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" id="save">
@@ -162,11 +167,10 @@
               </div>
               <div class="col-6">
                 <span id="search_plate">
-                  <input id="name_search" type="search" name="search" list="datalistOptions" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.Search.........')}}">
+                  <input id="name_search" type="search" name="search" list="datalistOptions2" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.Search.........')}}">
                   <i class="prd-search-icon fa fa-spinner fa-spin prd-search-hidden"></i>
-                  <datalist id="datalistOptions">
+                  <datalist id="datalistOptions2">
                     @foreach($medicines as $medicine)
-                      <option value="{{$medicine->id}}">
                       <option value="{{$medicine->medicine_name}}">
                     @endforeach
                   </datalist>
@@ -177,7 +181,7 @@
               <thead id="medic_nam2">
                 <tr id="medic_nam3" style="color:darkcyan;">
                   <th id="medic_nam4" class="back_color align">{{__('translate.ID')}}</th>
-                  <th id="medic_nam5" class="back_color ps-2">{{__('translate.Medicine Name')}}</th>
+                  <th id="medic_nam5" class="back_color ps-1">{{__('translate.Medicine Name')}}</th>
                 </tr>
               </thead>
               <tbody class="bg-transparnet tbody" id="medic_nam6" style="color:black;font-weight:500;cursor:alias;">

@@ -29,7 +29,6 @@
                 <datalist id="datalistOptions">
                   @foreach($units as $unit)
                   <option value="{{$unit->units_name}}">
-                  <option value="{{$unit->id}}">
                   @endforeach
                 </datalist>
               </span>

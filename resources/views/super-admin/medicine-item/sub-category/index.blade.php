@@ -28,7 +28,6 @@
                 <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
                 <datalist id="datalistOptions3">
                   @foreach($subcategories as $subcategory)
-                  <option value="{{$subcategory->id}}">
                   <option value="{{$subcategory->sub_category_name}}">
                   @endforeach
                 </datalist>
@@ -92,7 +91,7 @@
                     <span class="skeleton"><input class="form-control form-control-sm edit_sub_category_name" type="text" name="sub_category_name" id="sub_category_name" placeholder="{{__('translate.Sub Category')}}" autofocus></span>
                     <input type="hidden" id="sub_category_id">
                   </div>
-                  <span id="savForm_error"></span><span id="updateForm_errorList"></span>
+                  <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
                 </div>
                 <div class="row mt-2">
                   <div class="col-5">
@@ -102,9 +101,15 @@
                     <i class="subcategoryid-icon fa fa-spinner fa-spin subcategoryid-hidden mt-2"></i>
                   </div>
                   <div class="col-6">
-                    <span class="skeleton"><input class="form-control form-control-sm edit_category_id" type="number" name="category_id" id="category_id" placeholder="{{__('translate.Category ID')}}" required></span>
+                    <span class="skeleton"><input class="form-control form-control-sm edit_category_id" list="datalistOptions" type="number" name="category_id" id="category_id" placeholder="{{__('translate.Category ID')}}" required></span>
+                    <datalist id="datalistOptions">
+                      @foreach($categories as $category)
+                      <option value="{{$category->id}}">
+                      <option value="{{$category->category_name}}">
+                      @endforeach
+                    </datalist>
                   </div>
-                  <span id="savForm_error"></span><span id="updateForm_errorList"></span>
+                  <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
                 </div>
                 <p style="text-align: end;">
                   <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" id="save">
@@ -162,7 +167,6 @@
                   <i class="cat-search-icon fa fa-spinner fa-spin cat-search-hidden"></i>
                   <datalist id="datalistOptions2">
                     @foreach($categories as $category)
-                      <option value="{{$category->id}}">
                       <option value="{{$category->category_name}}">
                     @endforeach
                   </datalist>

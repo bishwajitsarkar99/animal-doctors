@@ -15,7 +15,7 @@ class CreateNewsletersTable extends Migration
     {
         Schema::create('newsleters', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
+            $table->string('email')->unique();
             $table->timestamps();
         });
     }

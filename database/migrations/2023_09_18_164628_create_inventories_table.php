@@ -15,7 +15,7 @@ class CreateInventoriesTable extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id('inventory_id');
-            $table->string('inv_id');
+            $table->string('inv_id')->unique();
             $table->unsignedBigInteger('supplier_id');
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
             $table->unsignedBigInteger('category_id');
@@ -32,11 +32,11 @@ class CreateInventoriesTable extends Migration
             $table->foreign('medicine_size')->references('id')->on('units')->onDelete('cascade');
             $table->decimal('price', 8, 2);
             $table->decimal('quantity',5,2)->default(0.00);
-            $table->decimal('amount', 8, 2)->default(0.00); // Added amount field with default value 0.00
+            $table->decimal('amount', 8, 2)->default(0.00);
             $table->decimal('vat_percentage', 5,2)->default(0.00);
-            $table->decimal('tax_percentage', 5, 2)->default(0.00); // Added tax_percentage field with default value 0.00
-            $table->decimal('discount_percentage', 5, 2)->default(0.00); // Added discount_percentage field with default value 0.00
-            $table->decimal('sub_total', 8, 2)->default(0.00); // Added sub_total field with default value 0.00
+            $table->decimal('tax_percentage', 5, 2)->default(0.00);
+            $table->decimal('discount_percentage', 5, 2)->default(0.00);
+            $table->decimal('sub_total', 8, 2)->default(0.00);
             $table->tinyInteger('status')->default(0);
             $table->tinyInteger('status_inv')->default(1);
             $table->integer('status_stock')->nullable();
@@ -44,6 +44,13 @@ class CreateInventoriesTable extends Migration
             $table->date('manufacture_date');
             $table->date('expiry_date');
             $table->integer('updated_by')->nullable();
+            $table->unsignedBigInteger('role_id')->nullable();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->integer('user_id')->nullable();
+            // $table->unsignedBigInteger('user_id')->nullable();
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('permission')->default(0);
+            $table->integer('approved_by')->nullable();
             $table->timestamps();
         });
     }
@@ -54,7 +61,8 @@ class CreateInventoriesTable extends Migration
      * @return void
      */
     public function down()
-    {
+    {      
         Schema::dropIfExists('inventories');
+        
     }
 }

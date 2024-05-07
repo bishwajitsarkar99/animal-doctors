@@ -12,6 +12,7 @@
     --font-weight:500;
     --apperence-app-setting-bg:linear-gradient(to bottom, #08a05c,#08a05c);
     --drop-border-bg-color:white;
+    --add-button-permission:linear-gradient(to bottom, silver, transparent,silver,lightgray);
 }
 .custom-select{
     position: relative;
@@ -159,6 +160,7 @@ select#supplier_id{
     letter-spacing: 0.5px;
     color: black;
     font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
     width: 386px;
     border-radius: 3px;
@@ -171,6 +173,7 @@ select#category_id{
     letter-spacing: 0.5px;
     color: black;
     font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
     width: 386px;
     border-radius: 3px;
@@ -183,6 +186,7 @@ select#group{
     letter-spacing: 0.5px;
     color: black;
     font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
     width: 386px;
     border-radius: 3px;
@@ -195,6 +199,7 @@ select#medicine_name{
     letter-spacing: 0.5px;
     color: black;
     font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
     width: 386px;
     border-radius: 3px;
@@ -207,6 +212,7 @@ select#medicine_dogs{
     letter-spacing: 0.5px;
     color: black;
     font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
     width: 386px;
     border-radius: 3px;
@@ -219,6 +225,7 @@ select#origin_name{
     letter-spacing: 0.5px;
     color: black;
     font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
     width: 386px;
     border-radius: 3px;
@@ -231,6 +238,7 @@ select#product_size{
     letter-spacing: 0.5px;
     color: black;
     font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
     width: 386px;
     border-radius: 3px;
@@ -254,11 +262,13 @@ input.date_field {
     outline: none;
     border: 1px solid lightblue;
     font-size: 13px;
+    font-weight: 600;
     color: black;
 }
 input#inv_id {
     border: 1px solid lightblue;
     font-size: 13px;
+    font-weight: 700;
     color: black;
     outline: none;
     height: 21px;
@@ -268,6 +278,8 @@ input#inv_id {
 input#amount {
     border: 1px solid lightblue;
     font-size: 13px;
+    font-weight: 600;
+    width: 159px;
     color: black;
     outline: none;
     height: 21px;
@@ -276,6 +288,8 @@ input#amount {
 input#sub_total {
     border: 1px solid lightblue;
     font-size: 13px;
+    font-weight: 600;
+    width: 159px;
     color: black;
     outline: none;
     height: 21px;
@@ -295,6 +309,8 @@ input#sub_total {
 input.inv_number {
     border: 1px solid lightblue;
     font-size: 13px;
+    font-weight: 600;
+    width: 159px;
     color: black;
     outline: none;
     height: 21px;
@@ -327,6 +343,16 @@ button.common_btn {
     font-weight: 600;
     letter-spacing: 1px;
     border: 1px solid #c6c7c8;
+}
+select#select_user{
+    width: 86%;
+    outline: none;
+    border: 1px solid lightblue;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    background-image: var(--add-button-permission);
 }
 td.button_box {
     width: 105px;

@@ -55,8 +55,7 @@ class SubCategoryController extends Controller
         $data = Category::orderBy('id','desc')->latest()->where('status', '!=', 0);
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('category_name','LIKE','%'.$query.'%')
+            $data->Where('category_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;
@@ -72,10 +71,11 @@ class SubCategoryController extends Controller
     public function storeData(Request $request)
     {
         $validators = validator::make($request->all(),[
-            'sub_category_name'=>'required|max:191',
+            'sub_category_name'=>'required|max:191|unique:sub_categories',
             'category_id'=>'required',
         ],[
             'sub-category.required'=>'The sub-category is required mandatory.',
+            'sub-category.unique'=>'The sub-category has already been taken.',
             'category_id.required'=>'The category is required mandatory.',
         ]);
         if($validators->fails()){
@@ -118,7 +118,7 @@ class SubCategoryController extends Controller
     public function updateSubCategory(Request $request, $id)
     {
         $validator = validator::make($request->all(),[
-            'sub_category_name'=>'required|max:191',
+            'sub_category_name'=>'required|max:191|unique:sub_categories,sub_category_name,' .$id,
             'category_id'=>'required',
         ]);
         if($validator->fails()){

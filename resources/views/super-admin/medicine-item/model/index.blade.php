@@ -31,9 +31,9 @@
                 <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
                 <datalist id="datalistOptions">
                   @foreach($product_models as $product_model)
-                  <option value="{{$product_model->id}}">
+                  <option value="{{$product_model->product_id}}">{{$product_model->products->product_name}}</option>
                   <option value="{{$product_model->model_name}}">
-                    @endforeach
+                  @endforeach
                 </datalist>
               </span>
             </div>
@@ -105,7 +105,13 @@
                     <i class="productid-icon fa fa-spinner fa-spin productid-hidden mt-2"></i>
                   </div>
                   <div class="col-6">
-                    <input class="form-control form-control-sm skeleton edit_origin_id" type="number" name="product_id" id="product_id" placeholder="{{__('translate.Product ID')}}" required>
+                    <input class="form-control form-control-sm skeleton edit_origin_id" list="datalistOptions3" type="number" name="product_id" id="product_id" placeholder="{{__('translate.Product ID')}}" required>
+                    <datalist id="datalistOptions3">
+                      @foreach($products as $product)
+                        <option value="{{$product->id}}">
+                        <option value="{{$product->product_name}}">
+                      @endforeach
+                    </datalist>
                   </div>
                   <span id="savForm_error"></span><span id="updateForm_errorList"></span>
                 </div>
@@ -165,7 +171,6 @@
                   <i class="produ-search-icon fa fa-spinner fa-spin produ-search-hidden"></i>
                   <datalist id="datalistOptions2">
                     @foreach($products as $product)
-                      <option value="{{$product->id}}">
                       <option value="{{$product->product_name}}">
                     @endforeach
                   </datalist>

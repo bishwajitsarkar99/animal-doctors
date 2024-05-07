@@ -32,8 +32,7 @@ class CategoryController extends Controller
         $data = Category::orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('category_name','LIKE','%'.$query.'%')
+            $data->Where('category_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;
@@ -50,9 +49,10 @@ class CategoryController extends Controller
     public function storeData(Request $request)
     {
         $validators = validator::make($request->all(),[
-            'category_name'=>'required|max:191',
+            'category_name'=>'required|max:191|unique:categories',
         ],[
-            'category.required'=>'The category is required mandatory.',
+            'category_name.required' => 'The category name is required.',
+            'category_name.unique' => 'The category name already exists.',
         ]);
         if($validators->fails()){
             return response()->json([
@@ -93,7 +93,7 @@ class CategoryController extends Controller
     public function updateCategory(Request $request, $id)
     {
         $validator = validator::make($request->all(),[
-            'category_name'=>'required|max:191',
+            'category_name' => 'required|max:191|unique:categories,category_name,' . $id,
         ]);
         if($validator->fails()){
             return response()->json([

@@ -31,58 +31,6 @@
         </div>
     </div>
 </div>
-<!-- <div class="row">
-    <div class="col-xl-12">
-
-        <table border="1" id="myTable">
-            <thead>
-                <tr>
-                    <th>Column 1</th>
-                    <th>Column 2</th>
-                    <th>Column 3</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td id="cell11">Row 1, Column 1</td>
-                    <td id="cell12">Row 1, Column 2</td>
-                    <td id="cell13">Row 1, Column 3</td>
-                </tr>
-                <tr>
-                    <td id="cell21">Row 2, Column 1</td>
-                    <td id="cell22">Row 2, Column 2</td>
-                    <td id="cell23">Row 2, Column 3</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-xl-12">
-        <div class="dropdown">
-            <button class="btn btn-success dropdown-toggle" type="button" id="multiSelectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                Select
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="multiSelectDropdown">
-                <li>
-                    <label><input type="checkbox" id="toggleElement"> Toggle Element</label>
-                </li>
-                <li>
-                    <label><input type="checkbox" id="toggleColumn"> Toggle Column</label>
-                </li>
-                <li>
-                    <label><input type="checkbox" data-column="0"> Column 1</label>
-                </li>
-                <li>
-                    <label><input type="checkbox" data-column="1"> Column 2</label>
-                </li>
-                <li>
-                    <label><input type="checkbox" data-column="2"> Column 3</label>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-</div> -->
-
 <div class="row">
     <div class="col-xl-3">
         <span class="form-check form-switch search_ me-2 skeleton">

@@ -29,7 +29,6 @@
                 <datalist id="datalistOptions">
                   @foreach($categories as $category)
                   <option value="{{$category->category_name}}">
-                  <option value="{{$category->id}}">
                   @endforeach
                 </datalist>
               </span>
@@ -89,7 +88,7 @@
                     <input class="form-control form-control-sm edit_category_name skeleton" type="text" name="category_name" id="category_name" placeholder="{{__('translate.Category Name')}}" autofocus>
                     <input type="hidden" id="category_id">
                   </div>
-                  <span id="savForm_error"></span><span id="updateForm_errorList"></span>
+                  <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
                 </div>
                 <p style="text-align: end;">
                   <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" id="save">

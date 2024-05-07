@@ -28,7 +28,7 @@
                 <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
                 <datalist id="datalistOptions">
                   @foreach($brands as $brand)
-                  <option value="{{$brand->id}}">
+                  <option value="{{$brand->origin_id}}">{{$brand->medicine_origins->origin_name}}</option>
                   <option value="{{$brand->brand_name}}">
                   @endforeach
                 </datalist>
@@ -102,7 +102,13 @@
                     <i class="origin-icon fa fa-spinner fa-spin origin-hidden mt-2"></i>
                   </div>
                   <div class="col-6">
-                    <input class="form-control form-control-sm edit_origin_id skeleton" type="number" name="origin_id" id="origin_id" placeholder="{{__('translate.Origin ID')}}" required>
+                    <input class="form-control form-control-sm edit_origin_id skeleton" list="datalistOptions3" type="number" name="origin_id" id="origin_id" placeholder="{{__('translate.Origin ID')}}" required>
+                    <datalist id="datalistOptions3">
+                      @foreach($origins as $origin)
+                        <option value="{{$origin->id}}">
+                        <option value="{{$origin->origin_name}}">
+                      @endforeach
+                    </datalist>
                   </div>
                   <span id="savForm_error"></span><span id="updateForm_errorList"></span>
                 </div>
@@ -162,7 +168,6 @@
                   <i class="orgn-search-icon fa fa-spinner fa-spin orgn-search-hidden"></i>
                   <datalist id="datalistOptions2">
                     @foreach($origins as $origin)
-                      <option value="{{$origin->id}}">
                       <option value="{{$origin->origin_name}}">
                     @endforeach
                   </datalist>

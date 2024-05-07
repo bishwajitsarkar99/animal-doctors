@@ -17,7 +17,9 @@ class PermissionController extends Controller
 
     // Permission Create
     public function createPermission(){
-        return view('super-admin.user-permission.create-permission.create');
+        //$roles = Role::whereIn('id', [1, 2, 3])->get();
+        $roles = Role::whereIn('id', [2,3,4,5,6,7])->get();
+        return view('super-admin.user-permission.create-permission.create', compact('roles'));
     }
 
     // Permission Store

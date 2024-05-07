@@ -41,7 +41,7 @@
                         <td class="tot_pending_ ps-1" hidden>${parseFloat(row.tax_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
                         <td class="tot_pending_ ps-1" hidden>${parseFloat(row.discount_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
                         <td class="tot_pending_ ps-1 edit_inventory_table"><span>${parseFloat(row.sub_total).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</span> ৳</td>
-                        <td class="tot_pending_ ps-1"><span class="status_bg_inv ps-1 pe-1">${row.status_inv ==1 ? 'New': 'Update'}</span></td>
+                        <td class="tot_pending_ ps-1"><span class="status_bg_inv ps-1 pe-1">${row.status_inv ==1 ? 'Null': 'Updated'}</span></td>
                         <td class="tot_pending_ bold ps-1 ${row.updated_by? ' text-primary': ' text-warning'}" id="user_set8">${row.updated_by ==0 ? 'User': 'Null' && row.updated_by ==2 ? 'SubAdmin': 'Null' && row.updated_by ==1 ? 'SuperAdmin': 'Null' && row.updated_by ==3 ? 'Admin': 'Null'}</td>
                         
                     </tr>

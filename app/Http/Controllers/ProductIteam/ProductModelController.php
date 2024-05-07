@@ -32,7 +32,7 @@ class ProductModelController extends Controller
         $data = ProductModel::with(['products'])->orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
+            $data->Where('product_id', 'LIKE','%'.$query.'%')
                 ->orWhere('model_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
@@ -55,8 +55,7 @@ class ProductModelController extends Controller
         $data = Product::orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('product_name','LIKE','%'.$query.'%')
+            $data->Where('product_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;

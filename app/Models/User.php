@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasOne(Role::class,'id', 'role',);
     }
 
+    public function hasRole($role)
+    {
+        return $this->roles()->where('name', $role)->exists();
+    }
+
     public static function getUserCounts($role = 0, $year = null)
     {
         $query = self::select([
