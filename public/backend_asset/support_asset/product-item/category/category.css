@@ -1,12 +1,13 @@
 :root{
     --input-background-color:linear-gradient(to bottom, lightgray, transparent,lightgray);
-    --table-row-hover:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
     --bg-color:purple;
     --color:purple;
     --size:1px;
     --font-weight:500;
     --apperence-app-setting-bg:linear-gradient(to bottom, #08a05c,#08a05c);
     --drop-border-bg-color:white;
+    /* #e1e1e1 */
 }
 tbody#category_data_table {
     color: black;

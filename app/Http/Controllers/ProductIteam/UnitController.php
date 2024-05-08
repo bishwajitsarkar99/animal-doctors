@@ -16,8 +16,7 @@ class UnitController extends Controller
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        $units = Unit::all();
-        return view('super-admin.medicine-item.units.index', compact('company_profiles','units'));
+        return view('super-admin.medicine-item.units.index', compact('company_profiles'));
     }
 
     // Get Units Name

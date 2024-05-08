@@ -16,8 +16,7 @@ class MedicineOrginController extends Controller
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        $origins = MedicineOrigin::all();
-        return view('super-admin.medicine-item.origin.index', compact('company_profiles','origins'));
+        return view('super-admin.medicine-item.origin.index', compact('company_profiles'));
     }
 
     // Get Origin Name

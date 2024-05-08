@@ -74,6 +74,15 @@
                     $("#total_product_records").text(total);
                     // Initalize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                    // Get suggestions for autocomplete
+                    var suggestions = data.map(function(item) {
+                        return item.product_name;
+                    });
+
+                    // Initialize autocomplete
+                    $("#search").autocomplete({
+                        source: suggestions,
+                    });
                 }
 
             });

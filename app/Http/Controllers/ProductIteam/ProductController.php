@@ -16,8 +16,7 @@ class ProductController extends Controller
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        $products = Product::all();
-        return view('super-admin.medicine-item.product.index', compact('company_profiles','products'));
+        return view('super-admin.medicine-item.product.index', compact('company_profiles'));
     }
 
     // Get Product

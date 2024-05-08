@@ -27,13 +27,8 @@
             </div>
             <div class="col-6">
               <span id="search_plate">
-                <input id="search" type="search" name="search" list="datalistOptionsProduct" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.Search.........')}}">
+                <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.Search.........')}}">
                 <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
-                <datalist id="datalistOptionsProduct">
-                  @foreach($products as $product)
-                  <option value="{{$product->product_name}}">
-                  @endforeach
-                </datalist>
               </span>
             </div>
           </div>

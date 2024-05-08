@@ -1,5 +1,6 @@
 :root{
-    --background-color:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    /* --background-color:linear-gradient(to bottom, silver, transparent,silver,lightgray); */
+    --background-color:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
 }
 table,tr,th,td{
     opacity: 1;

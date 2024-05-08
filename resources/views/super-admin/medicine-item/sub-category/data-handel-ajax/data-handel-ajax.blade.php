@@ -75,6 +75,17 @@
                     $("#total_subcategory_records").text(total);
                     // Initialize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                    // Get suggestions for autocomplete
+                    var suggestions = data.map(function(item) {
+                        return {
+                            label: item.categories.category_name + " - " + item.sub_category_name,
+                            value: item.category_id
+                        };
+                    });
+                    // Initialize autocomplete
+                    $("#search").autocomplete({
+                        source: suggestions
+                    });
                 }
 
             });
@@ -388,7 +399,7 @@
             $("#group_nam4").addClass('skeleton');
             $("#group_nam5").addClass('skeleton');
             $("#per_item").addClass('skeleton');
-            $("#num_plate").addClass('skeleton');
+            // $("#num_plate").addClass('skeleton');
             $("#iteam_label3").addClass('skeleton');
             $("#total_cat_records").addClass('skeleton');
             $("#iteam_label6").addClass('skeleton');
@@ -407,7 +418,7 @@
                 $("#group_nam4").removeClass('skeleton');
                 $("#group_nam5").removeClass('skeleton');
                 $("#per_item").removeClass('skeleton');
-                $("#num_plate").removeClass('skeleton');
+                // $("#num_plate").removeClass('skeleton');
                 $("#iteam_label3").removeClass('skeleton');
                 $("#total_cat_records").removeClass('skeleton');
                 $("#iteam_label6").removeClass('skeleton');

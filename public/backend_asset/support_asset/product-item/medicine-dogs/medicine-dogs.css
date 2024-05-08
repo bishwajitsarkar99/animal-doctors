@@ -1,6 +1,6 @@
 :root{
-    --search-background:linear-gradient(to bottom, silver, transparent,silver,lightgray);
-    --table-head-background:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --search-background:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, #e1e1e1, rgba(0, 0, 0, 0.05) 100%);
+    --table-head-background:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
 }
 .medicinedogs-hidden{
     display: none;

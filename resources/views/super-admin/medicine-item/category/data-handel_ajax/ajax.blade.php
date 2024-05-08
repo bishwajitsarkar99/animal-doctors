@@ -77,6 +77,15 @@
                     $("#total_category_records").text(total);
                     // Initialize tooltips after appending the elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
+
+                    // Get suggestions for autocomplete
+                    var suggestions = data.map(function(item) {
+                        return item.category_name;
+                    });
+                    // Initialize autocomplete
+                    $("#search").autocomplete({
+                        source: suggestions
+                    });
                 }
 
             });
@@ -93,7 +102,6 @@
         $(document).on('keyup', '#search', function() {
             var query = $(this).val();
             fetch_category_data(query);
-
         });
 
         // search-loader

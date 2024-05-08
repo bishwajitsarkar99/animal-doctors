@@ -27,13 +27,8 @@
             </div>
             <div class="col-6">
               <span id="search_plate">
-                <input id="search" type="search" name="search" list="datamedicinegroup" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.All Search.........')}}">
+                <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.All Search.........')}}">
                 <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
-                <datalist id="datamedicinegroup">
-                  @foreach($groups as $group)
-                  <option value="{{$group->group_name}}">
-                  @endforeach
-                </datalist>
               </span>
             </div>
           </div>

@@ -55,6 +55,15 @@
                         total
                     }));
                     $("#total_cat_records").text(total);
+
+                    // Get suggestions for autocomplete
+                    var category = data.map(function(item) {
+                        return item.category_name;
+                    });
+                    // Initialize autocomplete
+                    $("#cat_search").autocomplete({
+                        source: category
+                    });
                 }
 
             });

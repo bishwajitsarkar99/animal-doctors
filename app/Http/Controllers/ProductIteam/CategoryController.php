@@ -18,8 +18,7 @@ class CategoryController extends Controller
             return companyProfile::find(1);
         });
         $allfolders = Folder_entry::all();
-        $categories = Category::all();
-        return view('super-admin.medicine-item.category.index', compact('company_profiles','categories', 'allfolders'));
+        return view('super-admin.medicine-item.category.index', compact('company_profiles', 'allfolders'));
     }
 
     // Get Category

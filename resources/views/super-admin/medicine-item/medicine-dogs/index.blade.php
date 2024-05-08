@@ -27,13 +27,8 @@
             </div>
             <div class="col-5">
               <span id="search_plate">
-                <input id="search" type="search" name="search" list="datalistOptions" id="exampleDataList" class="category-all-search searchform search ps-1" placeholder="{{__('translate.Search.........')}}">
+                <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform search ps-1" placeholder="{{__('translate.Search.........')}}">
                 <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
-                <datalist id="datalistOptions">
-                  @foreach($medicinedogs as $medicinedog)
-                    <option value="{{ $medicinedog->medicine_dogs }}">
-                  @endforeach
-                </datalist>
               </span>
             </div>
 
@@ -109,7 +104,7 @@
                     <datalist id="datalistOptions3">
                       @foreach($medicines as $medicine)
                       <option value="{{$medicine->id}}">
-                        <option value="{{$medicine->medicine_name}}">
+                      <option value="{{$medicine->medicine_name}}">
                       @endforeach
                     </datalist>
                   </div>
@@ -233,7 +228,7 @@
     <div class="modal-content" id="admin_modal_box">
       <div class="modal-header profile_modal_header profilesetting_modal_header">
         <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
-          {{__('translate.Delete Medicine Dogs')}}
+          {{__('translate.Delete Medicine Dosage')}}
         </h5>
         <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
       </div>

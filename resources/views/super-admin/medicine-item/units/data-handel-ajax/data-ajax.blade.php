@@ -74,6 +74,14 @@
                     $("#total_units_records").text(total);
                     // Initialize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                    // Get suggestions for autocomplete
+                    var suggestions = data.map(function(item) {
+                        return item.units_name;
+                    });
+                    // Initialize autocomplete
+                    $("#search").autocomplete({
+                        source: suggestions,
+                    });
                 }
 
             });

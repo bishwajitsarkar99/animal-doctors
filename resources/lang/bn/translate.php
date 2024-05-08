@@ -39,6 +39,7 @@ return[
     'Add Medicine Name'=>'ওষুধের নাম যোগ করুন',
     'ADD Name'=>'নাম যোগ করুন',
     'Add Medicine Dosage'=>'ওষুধের ডোজ যোগ করুন',
+    'Delete Medicine Dosage'=>'ওষুধের ডোজ মুছুন',
     'ADD Dosage'=>'ডোজ যোগ করুন',
     'Add Medicine Origin'=>'মেডিসিন অরিজিন যোগ করুন',
     'ADD Origin'=>'অরিজিন যোগ করুন',

@@ -76,6 +76,17 @@
                     $("#total_medicine_records").text(total);
                     // Initialize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                    // Get suggestions for autocomplete
+                    var suggestions = data.map(function(item) {
+                        return {
+                            label: item.medicine_groups.group_name + " - " + item.medicine_name,
+                            value: item.group_id
+                        };
+                    });
+                    // Initialize autocomplete
+                    $("#search").autocomplete({
+                        source: suggestions
+                    });
                 }
 
             });

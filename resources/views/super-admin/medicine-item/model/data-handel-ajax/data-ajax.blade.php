@@ -75,6 +75,19 @@
                     $("#total_model_records").text(total);
                     // Initialize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                    // Get suggestions for autocomplete
+                    var suggestions = data.map(function(item) {
+                        return {
+                            label: item.products.product_name + " - " + item.model_name,
+                            value: item.product_id
+                        };
+                    });
+
+                    // Initialize autocomplete
+                    $("#search").autocomplete({
+                        source: suggestions,
+                        minLength: 1,
+                    });
                 }
 
             });

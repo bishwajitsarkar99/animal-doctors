@@ -38,6 +38,7 @@ return[
     'Add Medicine Name'=>'Add Medicine Name',
     'ADD Name'=>'ADD Name',
     'Add Medicine Dosage'=>'Add Medicine Dosage',
+    'Delete Medicine Dosage'=>'Delete Medicine Dosage',
     'ADD Dosage'=>'ADD Dosage',
     'Add Medicine Origin'=>'Add Medicine Origin',
     'ADD Origin'=>'ADD Origin',

@@ -17,9 +17,8 @@ class BrandController extends Controller
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        $brands = Brand::all();
         $origins = MedicineOrigin::all();
-        return view('super-admin.medicine-item.brand.index', compact('company_profiles','brands','origins'));
+        return view('super-admin.medicine-item.brand.index', compact('company_profiles','origins'));
     }
 
     // Get Brand Name

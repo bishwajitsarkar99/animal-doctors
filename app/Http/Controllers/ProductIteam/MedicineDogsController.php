@@ -17,9 +17,8 @@ class MedicineDogsController extends Controller
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        $medicines = MedicineName::all();
-        $medicinedogs = MedicineDogs::all();
-        return view('super-admin.medicine-item.medicine-dogs.index', compact('company_profiles', 'medicines' ,'medicinedogs'));
+        $medicines = MedicineName::Where('status','!=', 0)->get();
+        return view('super-admin.medicine-item.medicine-dogs.index', compact('company_profiles', 'medicines'));
     }
 
     // Get Medicine Dogs
@@ -32,7 +31,7 @@ class MedicineDogsController extends Controller
         $data = MedicineDogs::with(['medicine_names'])->orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->Where('medicine_dogs','LIKE','%'.$query.'%')
+            $data->Where('medicine_id','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;

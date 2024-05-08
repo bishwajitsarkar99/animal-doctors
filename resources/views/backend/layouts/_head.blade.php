@@ -29,6 +29,7 @@
 <!-- ================== Jquery Autocomplete Style Link ============================= -->
 <!--============== Jquery Autocomplete ui.css ==================-->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link href="{{asset('backend_asset')}}/main_asset/jquery-ui-css/jquery-ui.css" rel="stylesheet" />
 <!-- Bootstrap5 core main css file -->
 <!-- ================ all-min-Css file ================= -->
 <link href="{{asset('backend_asset')}}/main_asset/css/main-min.css" rel="stylesheet" />

@@ -69,6 +69,15 @@
                         total
                     }));
                     $("#total_medic_records").text(total);
+                    // Get suggestions for autocomplete
+                    var suggestions = data.map(function(item) {
+                        return item.medicine_name;
+                    });
+
+                    // Initialize autocomplete
+                    $("#name_search").autocomplete({
+                        source: suggestions,
+                    });
                 }
 
             });

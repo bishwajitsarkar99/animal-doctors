@@ -88,6 +88,19 @@
                     $("#total_medicinedogs_records").text(total);
                     // Initalise the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                    // Get suggestions for autocomplete
+                    var suggestions = data.map(function(item) {
+                        return {
+                            label: item.medicine_names.medicine_name + " - " + item.medicine_dogs,
+                            value: item.medicine_id
+                        };
+                    });
+
+                    // Initialize autocomplete
+                    $("#search").autocomplete({
+                        source: suggestions,
+                        minLength: 1,
+                    });
                 }
 
             });

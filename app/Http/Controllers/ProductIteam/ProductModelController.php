@@ -18,8 +18,7 @@ class ProductModelController extends Controller
             return companyProfile::find(1);
         });
         $products = Product::all();
-        $product_models = ProductModel::all();
-        return view('super-admin.medicine-item.model.index', compact('company_profiles','products','product_models'));
+        return view('super-admin.medicine-item.model.index', compact('company_profiles','products'));
     }
 
     // Get Model Name

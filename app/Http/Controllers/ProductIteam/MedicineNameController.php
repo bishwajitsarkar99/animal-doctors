@@ -17,9 +17,8 @@ class MedicineNameController extends Controller
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        $medicines = MedicineName::all();
-        $medicinegroups = MedicineGroup::all();
-        return view('super-admin.medicine-item.medicine-name.index', compact('company_profiles','medicines','medicinegroups'));
+        $medicinegroups = MedicineGroup::where('status','!=', 0)->get();
+        return view('super-admin.medicine-item.medicine-name.index', compact('company_profiles','medicinegroups'));
     }
 
     // Get Medicine Name
@@ -33,6 +32,7 @@ class MedicineNameController extends Controller
 
         if( $query = $request->get('query')){
             $data->Where('medicine_name','LIKE','%'.$query.'%')
+                ->orWhere('group_id','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;

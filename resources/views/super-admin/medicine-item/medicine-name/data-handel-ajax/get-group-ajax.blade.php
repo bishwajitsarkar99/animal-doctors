@@ -71,6 +71,14 @@
                         total
                     }));
                     $("#total_groups_records").text(total);
+                    // Get suggestions for autocomplete
+                    var suggestions = data.map(function(item) {
+                        return item.group_name;
+                    });
+                    // Initialize autocomplete
+                    $("#group_search").autocomplete({
+                        source: suggestions
+                    });
                 }
 
             });

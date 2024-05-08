@@ -17,9 +17,9 @@ class SubCategoryController extends Controller
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        $subcategories = SubCategory::all();
-        $categories = Category::all();
-        return view('super-admin.medicine-item.sub-category.index', compact('company_profiles','categories', 'subcategories'));
+        $categories = Category::where('status', '!=', 0)->get();
+
+        return view('super-admin.medicine-item.sub-category.index', compact('company_profiles', 'categories'));
     }
 
     // Get Sub-Category
@@ -32,8 +32,8 @@ class SubCategoryController extends Controller
         $data = SubCategory::with(['categories'])->orderBy('id','desc')->latest();
 
         if( $query = $request->get('query')){
-            $data->where('id','LIKE','%'.$query.'%')
-                ->orWhere('sub_category_name','LIKE','%'.$query.'%')
+            $data->Where('sub_category_name','LIKE','%'.$query.'%')
+                ->orWhere('category_id','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
         $perItem = 10;

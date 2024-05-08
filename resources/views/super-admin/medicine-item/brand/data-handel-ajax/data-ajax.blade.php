@@ -75,6 +75,17 @@
                     $("#total_brand_records").text(total);
                     // Initialze the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                    // Get suggestions for autocomplete
+                    var suggestions = data.map(function(item) {
+                        return {
+                            label: item.medicine_origins.origin_name + " - " + item.brand_name,
+                            value: item.origin_id
+                        };
+                    });
+                    // Initialize autocomplete
+                    $("#search").autocomplete({
+                        source: suggestions,
+                    });
                 }
 
             });

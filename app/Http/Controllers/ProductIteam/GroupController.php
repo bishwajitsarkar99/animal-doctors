@@ -16,8 +16,7 @@ class GroupController extends Controller
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        $groups = MedicineGroup::all();
-        return view('super-admin.medicine-item.medicine-group.index', compact('company_profiles','groups'));
+        return view('super-admin.medicine-item.medicine-group.index', compact('company_profiles'));
     }
 
     // Get Group
