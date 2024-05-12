@@ -11,7 +11,7 @@
             <span>{{__('translate.Units')}}</span>
             <span class="tot_summ skeleton" id="num_plate">
               <label class="tot-search skeleton mt-3" for="tot_cagt"> ➤ {{__('translate.Total Unit')}} :</label>
-              <label for="total_medic_records skeleton" id="iteam_label4"><span class="total_users skeleton" style="font-weight: 600;" id="total_units_records"></span><span id="iteam_label5" style="font-weight: 600;color:darkcyan;">.00</span></label>
+              <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4"><span class="total_users skeleton" style="font-weight: 600;" id="total_units_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;">.00</span></label>
             </span>
           </p>
           <div class="row">

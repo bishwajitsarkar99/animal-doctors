@@ -130,6 +130,25 @@
                     $("#total_user_records").text(total);
                     // Initialize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                   // Get suggestions for autocomplete
+                    var suggestions = data.map(function(item) {
+                        // var userImage = `<img class="user_img rounded-circle user_imgs" src="${item.image.includes('https://') ? item.image : '/image/' + item.image}">`;
+                        return {
+                            label: `${item.id} - ${item.roles.name} - ${item.email}`,
+                            value: item.email
+                        };
+                    });
+
+                    // Initialize autocomplete
+                    $("#search").autocomplete({
+                        source: suggestions,
+                        // open: function(event, ui) {
+                        //     $(".ui-menu-item-wrapper").each(function(index, element) {
+                        //         var html = $(element).html();
+                        //         $(element).html(html.replace(/&lt;img/g, '<img').replace(/&gt;/g, '>'));
+                        //     });
+                        // }
+                    });
                 }
                 
             });

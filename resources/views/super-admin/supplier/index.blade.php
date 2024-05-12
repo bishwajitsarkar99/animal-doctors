@@ -31,17 +31,8 @@
                                     </div>
                                     <div class="col-5">
                                         <span id="search_plate">
-                                            <input id="search" type="search" name="search" list="datalistOptions" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="All Search Heare.........">
+                                            <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="All Search Heare.........">
                                             <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
-                                            <datalist id="datalistOptions">
-                                                @foreach($suppliers as $supplier)
-                                                    <option value="{{$supplier->supplier_id}}">
-                                                    <option value="{{$supplier->bussiness_type}}">
-                                                    <option value="{{$supplier->contact_number_one}}">
-                                                    <option value="{{$supplier->contact_number_two}}">
-                                                    <option value="{{$supplier->whatsapp_number}}">
-                                                @endforeach
-                                            </datalist>
                                         </span>
                                     </div>
                                 </div>

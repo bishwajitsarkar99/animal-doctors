@@ -11,7 +11,7 @@
             <span>{{__('translate.Brand-Name')}}</span>
             <span class="tot_summ skeleton" id="num_plate">
               <label class="tot-search skeleton mt-3 pt-1" for="tot_cagt"> ➤ {{__('translate.Total Brand')}} :</label>
-              <label for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;" id="total_brand_records"></span><span id="iteam_label5" style="font-weight: 600;color:darkcyan;">.00 {{__('translate.items')}}</span></label>
+              <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;" id="total_brand_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;">.00 {{__('translate.items')}}</span></label>
             </span>
           </p>
           <div class="row">
@@ -195,8 +195,8 @@
                 <div class="col-10">
                   <span class="tot_summ" style="float: right;" id="num_plate">
                     <label class="tot-search mt-3" style="font-size: 11px;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Origin Entry')}} :</label>
-                    <label for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_org_records">
-                      </span><span id="iteam_label6" style="font-weight: 600;color:darkcyan;font-size:11px;">.00</span>
+                    <label class="badge rounded-pill bg-primary" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_org_records">
+                      </span><span id="iteam_label6" style="font-weight: 600;color:white;font-size:11px;">.00</span>
                     </label>
                   </span>
                 </div>

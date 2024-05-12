@@ -13,7 +13,7 @@
                     <label class="input_label skeleton mt-1" for="select-user">Select Email :</label>
                 </div>
                 <div class="custom-select col-md-4">
-                    <select name="user_id" required class="form-control ui-select skeleton" id="select_input">
+                    <select name="user_id" required class="form-control ui-select skeleton" id="select_input"> 
                         <option value="">Select Email </option>
                         @foreach ($users as $user)
                         <option class="option_value" value="{{ $user->id }}">{{ $user->email }}</option>

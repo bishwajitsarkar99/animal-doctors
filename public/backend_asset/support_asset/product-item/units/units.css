@@ -40,7 +40,7 @@ div#units_data_table_paginate {
 }
 span#total_units_records{
     font-weight: 700;
-    color: darkcyan;
+    color: white;
 }
 input#delete_unit_id {
     outline: none;

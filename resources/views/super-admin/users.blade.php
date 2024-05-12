@@ -21,17 +21,8 @@
               </div>
               <div class="col-4">
                 <span id="search_plate">
-                  <input id="search" type="search" name="search" list="datalistOptions" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="All Search Heare.........">
+                  <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="All Search Heare.........">
                   <i class="search-icon fa fa-spinner fa-spin search-hidden"></i>
-                  <datalist id="datalistOptions">
-                    @foreach($users as $user)
-                      <option value="{{$user->id}}">
-                      <option value="{{$user->role}}">
-                      <option value="{{$user->name}}">
-                      <option value="{{$user->email}}">
-                      <option value="{{$user->contract_number}}">
-                    @endforeach
-                  </datalist>
                 </span>
               </div>
               <div class="col-1">
@@ -75,11 +66,12 @@
                     <option>100</option>
                     <option>200</option>
                   </select>
+                  <!-- <span class="custom-list-item-arrow me-4"></span> -->
                 </div>
                 <div class="skeleton col-3">
                   <span class="tot_summ skeleton" id="num_plate">
                     <label class="tot-search mt-3 skeleton" for="tot_cagt"> Total Users :</label>
-                    <label for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;" id="total_user_records"></span><span id="iteam_label5" style="font-weight: 600;color:darkcyan;">.00</span></label>
+                    <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;" id="total_user_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;">.00</span></label>
                   </span>
                 </div>
               <div class="col-7">

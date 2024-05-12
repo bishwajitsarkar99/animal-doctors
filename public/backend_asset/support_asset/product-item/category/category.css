@@ -74,7 +74,7 @@ input.form-switch.form-check-input:checked{
     border: none;
 }
 .catg{
-    color: darkcyan;
+    color: black;
     font-size: 12px;
     margin-top: -10px;
     animation: fon_color 3s infinite;
@@ -85,10 +85,10 @@ input.form-switch.form-check-input:checked{
 }
 @keyframes fon_color{
     50%{
-        color: #4dbb96;
+        color: black;
     }
     100%{
-        color: darkcyan;
+        color: black;
     }
 }
 span#total_category_records {
@@ -112,7 +112,7 @@ input.form-control.form-control-sm.catg_name {
 label.catg_name_label {
     font-size: 12px;
     font-weight: 700;
-    color: darkcyan;
+    color: black;
     
 }
 tbody#group_data_table {
@@ -157,7 +157,7 @@ div#category_data_table_paginate {
     float: right;
 }
 label.item_class {
-    color: darkcyan;
+    color: black;
     font-weight: 600;
 }
 select#perItemControl {
@@ -231,10 +231,10 @@ input#category_name {
 }
 @keyframes supfncolor{
     0%{
-        color: gray;
+        color: lightgray;
     }
     50%{
-        color: darkcyan;
+        color: black;
     }
     100%{
         background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);

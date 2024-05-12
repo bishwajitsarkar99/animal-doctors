@@ -80,11 +80,11 @@ input#category_id {
     color: black;
 }
 span#total_subcategory_records {
-    color: darkcyan;
+    color: white;
     font-weight: 700;
 }
 label.tot-search {
-    color: darkcyan;
+    color: black;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.3px;
@@ -96,7 +96,7 @@ input#search_area_ {
     border: none;
 }
 label.catg_ser_label {
-    color: darkcyan;
+    color: black;
     font-weight: 600;
     font-size: 13px;
 }

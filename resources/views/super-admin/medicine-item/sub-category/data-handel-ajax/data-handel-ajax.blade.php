@@ -78,8 +78,8 @@
                     // Get suggestions for autocomplete
                     var suggestions = data.map(function(item) {
                         return {
-                            label: item.categories.category_name + " - " + item.sub_category_name,
-                            value: item.category_id
+                            label: `${item.categories.category_name} - ${item.sub_category_name}`,
+                            value: item.sub_category_name
                         };
                     });
                     // Initialize autocomplete

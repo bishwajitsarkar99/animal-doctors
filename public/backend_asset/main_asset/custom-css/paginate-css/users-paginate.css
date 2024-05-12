@@ -107,7 +107,7 @@ a.page-link.btn_page:hover{
     font-weight: 600;
 }
 label.tot-search {
-    color: darkcyan;
+    color: black;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.3px;
@@ -132,9 +132,40 @@ select#perItemControl {
     background-color: #08a05c;
     border: 1px solid #08a05c;
     border-radius: 3px;
+    width: 50px;
+}
+.custom-list-item-arrow {
+    display: block;
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 1rem;
+    height: 100%;
+    background-image: var(--apperence-app-setting-bg);
+    pointer-events: none;
+    border-radius: 3px;
+    opacity: 1;
+    cursor: pointer;
+}
+.custom-list-item-arrow::before {
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-bottom: var(--size) solid var(--drop-border-bg-color);
+    top: 36%;
+}
+.custom-list-item-arrow::before, .custom-list-item-arrow::after {
+    --size: 0.5em;
+    --drop-border-bg-color:white;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
 }
 label.item_class {
-    color: darkcyan;
+    color: black;
     font-weight: 600;
 }
 input#search_area {
@@ -145,7 +176,7 @@ input#search_area {
     border: 1px solid #08a05c;
 }
 label.ser_label {
-    color: darkcyan;
+    color: black;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 12px;

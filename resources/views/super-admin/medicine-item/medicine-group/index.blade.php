@@ -11,9 +11,9 @@
             <span>{{__('translate.Medicine Group')}}</span>
             <span class="tot_summ skeleton" id="num_plate">
               <label class="tot-search skeleton mt-3 pt-2" for="tot_cagt"> ➤ {{__('translate.Total Group')}} :</label>
-              <label for="total_medic_records" id="iteam_label4">
-                <span class="total_users skeleton" style="font-weight:600;" id="total_group_records"></span>
-                <span id="iteam_label5" style="font-weight: 600;color:darkcyan;font-size:11px;">.00 {{__('translate.items')}}</span>
+              <label class="badge rounded-pill bg-primary" for="total_medic_records" id="iteam_label4">
+                <span class="total_users skeleton" style="font-weight:600;color:white;" id="total_group_records"></span>
+                <span id="iteam_label5" style="font-weight:600;color:white;font-size:11px;">.00 {{__('translate.items')}}</span>
               </label>
             </span>
           </p>

@@ -48,11 +48,11 @@ select#perItemControlProd {
 }
 span.total_result {
     font-size: 11px;
-    color: darkcyan;
+    color: white;
     font-weight: 600;
 }
 label.catg_ser_label {
-    color: darkcyan;
+    color: black;
     font-weight: 600;
     font-size: 13px;
 }
@@ -70,7 +70,7 @@ label.tot-search {
 }
 span#total_model_records{
     font-weight: 700;
-    color: darkcyan;
+    color: white;
 }
 th.back_color{
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */

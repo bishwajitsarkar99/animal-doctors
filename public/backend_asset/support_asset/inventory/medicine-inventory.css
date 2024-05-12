@@ -4,7 +4,7 @@
     --inventory-navbar-btn-background-image-hover:radial-gradient(farthest-corner at 100px 100px, #08a05c, #08a05c);
     --inventory-navbar-btn-color:white;
     --inventory-navbar-btn-background-image:radial-gradient(farthest-corner at 100px 100px, #08a05c, #08a05c);
-    --inventory-navbar:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --inventory-navbar:linear-gradient(to 90deg, silver, transparent,silver,lightgray);
     --table-row-hover:linear-gradient(to bottom, silver, transparent,silver,lightgray);
     --bg-color:purple;
     --color:royalblue;
@@ -465,7 +465,8 @@ span.status_bg_unauthorized {
 }
 
 .inventory-bg-color {
-    background-image: var(--inventory-background-image);
+    /* background-image: var(--inventory-background-image); */
+    background-color: aliceblue;
     opacity: var(--inventory-opacity);
     border: 1px solid lightblue;
 }

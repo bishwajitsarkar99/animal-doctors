@@ -60,11 +60,11 @@ input#group_name {
     }
 }
 span#total_group_records {
-    color: darkcyan;
+    color: black;
     font-size: 11px;
 }
 label.tot-search {
-    color: darkcyan;
+    color: black;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.3px;

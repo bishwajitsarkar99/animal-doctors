@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
-
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -71,6 +70,11 @@ class User extends Authenticatable
         return $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'))
                      ->orderBy('month', 'asc')
                      ->get();
+    }
+
+    public function inventory_permissions()
+    {
+        return $this->hasMany(InventoryPermission::class);
     }
     
 }

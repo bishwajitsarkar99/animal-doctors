@@ -91,15 +91,15 @@
                     // Get suggestions for autocomplete
                     var suggestions = data.map(function(item) {
                         return {
-                            label: item.medicine_names.medicine_name + " - " + item.medicine_dogs,
-                            value: item.medicine_id
+                            label: `${item.id} - ${item.medicine_names.medicine_name} - ${item.medicine_dogs}`,
+                            value: item.id
                         };
                     });
 
                     // Initialize autocomplete
                     $("#search").autocomplete({
                         source: suggestions,
-                        minLength: 1,
+                        
                     });
                 }
 
@@ -419,11 +419,11 @@
             $("#iteam_label").addClass('skeleton');
             $("#iteam_label2").addClass('skeleton');
             $("#iteam_label3").addClass('skeleton');
-            $("#iteam_label4").addClass('skeleton');
+            // $("#iteam_label4").addClass('skeleton');
             $("#iteam_label5").addClass('skeleton');
             $("#total_medic_records").addClass('skeleton');
             $("#med").addClass('skeleton');
-            $(".tot_summ").addClass('skeleton');
+            // $(".tot_summ").addClass('skeleton');
 
             var time = null;
             time = setTimeout(() => {
@@ -443,11 +443,11 @@
                 $("#iteam_label").removeClass('skeleton');
                 $("#iteam_label2").removeClass('skeleton');
                 $("#iteam_label3").removeClass('skeleton');
-                $("#iteam_label4").removeClass('skeleton');
+                // $("#iteam_label4").removeClass('skeleton');
                 $("#iteam_label5").removeClass('skeleton');
                 $("#total_medic_records").removeClass('skeleton');
                 $("#med").removeClass('skeleton');
-                $(".tot_summ").removeClass('skeleton');
+                // $(".tot_summ").removeClass('skeleton');
             }, 1000);
 
             return ()=>{

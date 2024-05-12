@@ -49,13 +49,13 @@
     });
 </script>
 <!-- Data Table Js CDN Link -->
-<script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<!-- <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
         let table = new DataTable('#myDataTable')
 
     });
-</script>
+</script> -->
 <!-- Language -->
 <script>
     $("body").on("change", ".language_switcher", function(event) {

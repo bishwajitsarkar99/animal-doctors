@@ -18,8 +18,7 @@ class SupplierController extends Controller
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        $suppliers = Supplier::all();
-        return view('super-admin.supplier.index', compact('company_profiles','suppliers'));
+        return view('super-admin.supplier.index', compact('company_profiles'));
     }
 
     // Get Supplier

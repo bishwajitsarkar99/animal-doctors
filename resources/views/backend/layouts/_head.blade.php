@@ -127,7 +127,7 @@
 <!-- Summar-Note -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <!-- Data-Table-Css -->
-<link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<!-- <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"> -->
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/data-table-css/data-table-min.css">
 @if(auth()->user()->role ==1)
 <!-- File-Manager -->

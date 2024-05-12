@@ -11,9 +11,9 @@
             <span>{{__('translate.Model-Name')}}</span>
             <span class="tot_summ" id="num_plate">
               <label class="tot-search skeleton mt-3 pt-1" for="tot_cagt"> ➤ {{__('translate.Total Mdoel')}} :</label>
-              <label for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;">
+              <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;">
                 <span class="total_users skeleton" style="font-weight: 600;" id="total_model_records"></span>
-                <span class="skeleton" id="iteam_label5" style="font-weight: 600;color:darkcyan;">.00</span>
+                <span class="skeleton" id="iteam_label5" style="font-weight: 600;color:white;">.00</span>
               </label>
             </span>
           </p>
@@ -198,8 +198,8 @@
                 <div class="col-10">
                   <span class="tot_summ" style="float: right;" id="num_plate">
                     <label class="tot-search mt-3" style="font-size: 11px;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Origin Entry')}} :</label>
-                    <label for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_prod_records">
-                      </span><span id="iteam_label6" style="font-weight: 600;color:darkcyan;font-size:11px;">.00</span>
+                    <label class="badge rounded-pill bg-primary" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_prod_records">
+                      </span><span id="iteam_label6" style="font-weight: 600;color:white;font-size:11px;">.00</span>
                     </label>
                   </span>
                 </div>

@@ -6,19 +6,22 @@
   <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_delete')" id="inventory_inactive">Inventory-Details</button>
   <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_permission')" id="inventory_inactive">Permission</button>
 </div>
-<div id="inventory_authorize" class="supp">
+<div id="inventory_authorize" class="supp mt-">
   <div class="card form-control card-body form-control-sm" id="inventory_page">
     @include('super-admin.inventory-authorize._inventory-authorize-table')
   </div>
 </div>
-<div id="inventory_delete" class="supp" style="display: none;">
+<div id="inventory_delete" class="supp mt-" style="display: none;">
   <div class="card form-control form-control-sm" id="category_page">
     @include('super-admin.inventory-authorize._inventory-details-table')
   </div>
 </div>
-<div id="inventory_permission" class="supp" style="display: none;">
+<div id="inventory_permission" class="supp mt-" style="display: none;">
   <div class="card form-control form-control-sm" id="permission_page">
     @include('super-admin.inventory-authorize._permission')
+  </div>
+  <div class="card form-control form-control-sm mt-" id="permission_access_page">
+    @include('super-admin.inventory-authorize._inventory_permission_table')
   </div>
 </div>
 <!-- show-message -->
@@ -191,7 +194,7 @@
     });
   });
 </script>
-<script>
+<!-- <script>
   document.addEventListener('DOMContentLoaded', function() {
     const styledText = document.getElementById('styledText');
     const changeStyleButton = document.getElementById('changeStyleButton');
@@ -199,7 +202,6 @@
     changeStyleButton.addEventListener('click', function() {
         styledText.classList.toggle('changed-style');
     });
-});
-
-</script>
+  });
+</script> -->
 @endsection

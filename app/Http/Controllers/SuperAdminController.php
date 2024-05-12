@@ -88,7 +88,7 @@ class SuperAdminController extends Controller
     {
 
         $roles = Role::all();
-
+        $data = User::all();
         $search = $request['search'] ?? "";
         if ($search != null) {
             $users = User::where('name', 'LIKE', '%' . $search . '%')
@@ -100,7 +100,7 @@ class SuperAdminController extends Controller
         } else {
             $users = User::latest()->paginate(1);
         }
-        return view('super-admin.account-holders.account-holders_list', compact('roles','users'))
+        return view('super-admin.account-holders.account-holders_list', compact('roles','users','data'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
     // Fetch Users Data-----------

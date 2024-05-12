@@ -8,17 +8,17 @@
       <div class="col-xl-7">
         <div class="card-body focus-color cd cat_form">
           <p class="catg mb-1 skeleton">
-            <span>{{__('translate.Category')}}</span>
+            <span style="color:black;">{{__('translate.Category')}}</span>
             <span class="tot_summ skeleton" id="num_plate">
-              <label class="tot-search mt-3 pt-2" for="tot_cagt"> ➤ {{__('translate.Total Category')}} :</label>
-              <label for="total_medic_records skeleton" id="iteam_label4"><span class="total_users skeleton" style="font-weight: 600;" id="total_category_records"></span><span id="iteam_label5" style="font-weight: 600;color:darkcyan;font-size: 11px;">.00 {{__('translate.items')}}</span></label>
+              <label class="tot-search mt-3 pt-2" style="color:black;" for="tot_cagt"> ➤ {{__('translate.Total Category')}} :</label>
+              <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4"><span class="total_users skeleton" style="font-weight: 600;color:white;" id="total_category_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-size: 11px;">.00 {{__('translate.items')}}</span></label>
             </span>
           </p>
           <div class="row">
             <div class="col-5">
               <span class="form-check form-switch search_ skeleton me-2">
                 <input class="form-check-input" onclick="mySrcFunction()" type="checkbox" id="search_area" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                <label class="search ser_label ps-1 pt-1" for="search pe-2">{{__('translate.Search Mode')}} :</label>
+                <label class="search ser_label ps-1 pt-1" style="color:black;" for="search pe-2">{{__('translate.Search Mode')}} :</label>
                 <label class="form-check-label" for="collapseExample"><span class="search_on" id="search_off">OFF</span></label>
               </span>
             </div>

@@ -1,10 +1,10 @@
 :root{
-    --table-row-hover:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
     --bg-color:purple;
     --color:royalblue;
     --size:1px;
     --font-weight:500;
-    --apperence-app-setting-bg:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    /* --apperence-app-setting-bg:linear-gradient(to bottom, silver, transparent,silver,lightgray); */
     --drop-border-bg-color:royalblue;
 }
 .custom-select{
@@ -233,7 +233,7 @@ input#delete_supplier_id {
     padding-left: 10px;
 }
 label.search.ser_labe {
-    color: darkcyan;
+    color: black;
     font-weight: 600;
 }
 .supplier_check_permission{

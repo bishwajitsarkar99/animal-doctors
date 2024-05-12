@@ -87,6 +87,17 @@
                     $("#total_supplier_records_progressbar").text(total);
                     // Initialize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                    // search autocomplete 
+                    var suggestions = data.map(function(item) {
+                        return {
+                            label: `${item.id_name} - ${item.name} - ${item.contact_number_one}`,
+                            value: item.name,
+                        };
+                    });
+                    // Initialize autocomplete
+                    $("#search").autocomplete({
+                        source: suggestions,
+                    });
                 }
 
             });

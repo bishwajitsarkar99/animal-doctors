@@ -23,12 +23,12 @@ input#orgin_search {
     animation: text_color 3s infinite;
 }
 span.total_result {
-    color: darkcyan;
+    color: white;
     font-weight: 600;
     font-size: 11px;
 }
 label.catg_ser_label {
-    color: darkcyan;
+    color: black;
     font-weight: 600;
     font-size: 13px;
 }
@@ -61,7 +61,7 @@ label.tot-search {
 }
 span#total_brand_records{
     font-weight: 700;
-    color: darkcyan;
+    color: white;
 }
 th.back_color{
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */

@@ -11,9 +11,9 @@
             <span>{{__('translate.Product')}}</span>
             <span class="tot_summ skeleton" id="num_plate">
               <label class="tot-search skeleton mt-3 pt-1" for="tot_cagt"> ➤ {{__('translate.Total Product')}} :</label>
-              <label for="total_medic_records skeleton" id="iteam_label4">
+              <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4">
                 <span class="total_users skeleton" style="font-weight: 600;" id="total_product_records"></span>
-                <span id="iteam_label5" style="font-weight: 600;color:darkcyan;font-size:11px;">.00 {{__('translate.pics')}}</span>
+                <span id="iteam_label5" style="font-weight: 600;color:white;font-size:11px;">.00 {{__('translate.pics')}}</span>
               </label>
             </span>
           </p>

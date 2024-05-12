@@ -20,11 +20,11 @@
         <div class="card card-body inv_reslt">
             <div class="sumary-note ms-3">
                 <span style="border-bottom:double;color:lightblue;">
-                    <label style="color: black; font-size:12px;font-weight:700;font-family:math;" for="start_date">Current-Week : ৳ {{$weekly_inventories}}</label>
+                    <label style="color: black; font-size:12px;font-weight:700;font-family:math;" for="start_date">Current-Week : {{$weekly_inventories}} ৳</label>
                     <label class="ps-1" style="color: black; font-size:12px;font-weight:700;font-family:math;" for="start_date">Qty : {{$weekly_quantity}}</label>
                 </span><br>
                 <span style="border-bottom:double;color:lightblue;">
-                    <label style="color: black; font-size:12px;font-weight:700;font-family:math;" for="start_date">Total-Inventory : ৳ {{$monthly_inventories}}</label>
+                    <label style="color: black; font-size:12px;font-weight:700;font-family:math;" for="start_date">Total-Inventory : {{$monthly_inventories}} ৳</label>
                     <label class="ps-1" style="color:black; font-size:12px;font-weight:700;font-family:math;" for="start_date">Qty : {{$monthly_quantity}}</label>
                 </span>
             </div>
@@ -157,9 +157,9 @@
                 <td class="skeleton">{{ $inventory->medicine_name }}</td>
                 <td class="skeleton">{{ $inventory->medicine_dogs }}</td>
                 <td class="skeleton" hidden></td>
-                <td class="skeleton">৳ {{ $inventory->price }}</td>
+                <td class="skeleton">{{ $inventory->price }} ৳</td>
                 <td class="skeleton">{{ $inventory->quantity }}</td>
-                <td class="skeleton">৳ {{ $inventory->sub_total }}</td>
+                <td class="skeleton">{{ $inventory->sub_total }} ৳</td>
                 <td class="skeleton" hidden>{{ $inventory->updated_by }}</td>
                 <td class="skeleton" hidden>{{ $inventory->status_inv }}</td>
                 <td class="skeleton">

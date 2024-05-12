@@ -92,3 +92,24 @@ class MedicineGroup extends Model
         return $this->hasMany(Inventory::class);
     }
 }
+
+
+
+
+// Define the enableDisableDeleteButton function
+        const enableDisableDeleteButton = () => {
+            $('.enable').each(function() {
+                var permission = $(this).closest('tr').find('.permission').text().trim();
+                if (permission === 'null') {
+                    $(this).find('#deleteBtn').removeAttr('disabled');
+                } else {
+                    $(this).find('#deleteBtn').attr('disabled', 'disabled');
+                }
+            });
+        };
+        // Initial the enableDisableDeleteButton
+        enableDisableDeleteButton();
+        // change function 
+        $(document).load('click', '.permission', function() {
+            enableDisableDeleteButton();
+        });

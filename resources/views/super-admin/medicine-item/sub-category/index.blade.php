@@ -11,7 +11,7 @@
             <span>{{__('translate.Sub-Category')}}</span>
             <span class="tot_summ skeleton" id="num_plate">
               <label class="tot-search skeleton mt-3 pt-2" for="tot_cagt"> ➤ {{__('translate.Total Sub-Category')}} :</label>
-              <label for="total_medic_records skeleton" id="iteam_label4"><span class="total_users skeleton" style="font-weight: 600;" id="total_subcategory_records"></span><span class="skeleton" id="iteam_label5" style="font-weight: 600;color:darkcyan;">.00 {{__('translate.items')}}</span></label>
+              <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" style="font-weight: 600;color:white;" id="iteam_label4"><span class="total_users skeleton" style="font-weight: 600;" id="total_subcategory_records"></span><span class="skeleton" id="iteam_label5" style="font-weight: 600;color:white;">.00 {{__('translate.items')}}</span></label>
             </span>
           </p>
           <div class="row">
@@ -170,7 +170,7 @@
             </div>
             <table class="ord_table center border-1 mt-1" id="medic_nam">
               <thead id="group_nam2">
-                <tr id="group_nam3" style="color:darkcyan;">
+                <tr id="group_nam3" style="color:black;">
                   <th id="group_nam4" class="back_color align">{{__('translate.ID')}}</th>
                   <th id="group_nam5" class="back_color ps-1">{{__('translate.Cateogry Name')}}</th>
                 </tr>
@@ -194,8 +194,8 @@
                 </div>
                 <div class="col-9">
                   <span class="tot_summ" style="float: right;">
-                    <label class="tot-search mt-3" style="font-size: 11px;" for="tot_cagt"> {{__('translate.Total Category')}} :</label>
-                    <label for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_cat_records"></span><span id="iteam_label6" style="font-weight: 600;color:darkcyan;">.00 {{__('translate.items')}}</span></label>
+                    <label class="tot-search mt-3" style="font-size: 11px;color:white;" for="tot_cagt"> {{__('translate.Total Category')}} :</label>
+                    <label class="badge rounded-pill bg-primary" for="total_medic_records" id="iteam_label4" style="font-weight: 600;color:white;"><span class="total_result" id="total_cat_records" style="color:white;"></span><span id="iteam_label6" style="font-weight: 600;color:white;">.00 {{__('translate.items')}}</span></label>
                   </span>
                 </div>
               </div>

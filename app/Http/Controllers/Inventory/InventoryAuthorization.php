@@ -10,6 +10,7 @@ use App\Models\Medicine\Inventory;
 use App\Models\MedicineGroup;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Permission\inventoryPermission;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,9 +20,10 @@ class InventoryAuthorization extends Controller
     // Inventory Authorize Page
     public function index()
     {
-        $roles = Role::whereIn('id', [2,3,4,5,6,7])->get();
+        $Inventory_permissions = InventoryPermission::orderBy('id', 'desc')->latest()->get();
+        $roles = Role::whereIn('id', [2,3,4,5])->get();
         $users = User::whereHas('roles', function($query) {
-            $query->whereIn('id', [2, 3, 4, 5, 6, 7]);
+            $query->whereIn('id', [2, 3, 4, 5]);
         })->get();
         $inventories = Inventory::all();
         $medicine_groups = MedicineGroup::all();
@@ -75,22 +77,19 @@ class InventoryAuthorization extends Controller
     public function inventoryDelete($id)
     {
     }
-
+    // Inventoy Token Or Id Store for Inventory Data
     public function inventoryPermission(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'role_id' => 'required',
-            'user_id' => 'required',
-            'permission' => 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'mail_id' => 'required',
+            'inventory_id' => 'required|unique:inventory_permissions,inventory_id',
+            'issue_name' => 'required',
         ], [
             'role_id.required' => 'The Role id is required.',
-            'user_id.required' => 'The user id is required.',
-            'permission.required' => 'The permission is required.',
-            'start_date.required' => 'The start date is required.',
-            'end_date.required' => 'The end date is required.',
-            'end_date.after_or_equal' => 'The end date must be after or equal to the start date.',
+            'mail_id.required' => 'The user mail is required.',
+            'inventory_id.unique' => 'The inventory id has already taken.',
+            'issue_name.required' => 'The permission issue is required.',
         ]);
 
         if ($validator->fails()) {
@@ -98,92 +97,105 @@ class InventoryAuthorization extends Controller
                 'status' => 400,
                 'errors' => $validator->messages(),
             ]);
+        }else{
+            $inventoryPermissions = new inventoryPermission;
+            $inventoryPermissions->role_id = $request->input('role_id');
+            $inventoryPermissions->mail_id = $request->input('mail_id');
+            $inventoryPermissions->inventory_id = $request->input('inventory_id');
+            $inventoryPermissions->issue_name = $request->input('issue_name');
+            $inventoryPermissions->approved_by = Auth::user()->id;
+            $inventoryPermissions->save();
+            return response()->json([
+                'messages' => 'Inventory permission has been justified',
+                'code' => 200,
+            ]);
         }
+    }
+    // Inventory Token or id Get
+    public function inventoryPermissionGet(Request $request)
+    {
+        // if (!$request->ajax()) {
+        //     return abort(404);
+        // }
+        // $startOfMonth = Carbon::now()->startOfMonth();
+        // $endOfMonth = Carbon::now()->endOfMonth();
+    
+        // $data = inventoryPermission::with(['roles','users'])
+        //     ->orderBy('id', 'desc')
+        //     ->latest()
+        //     ->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+    
+        // if ($query = $request->get('query')) {
+        //     $data->Where('inventory_id', 'LIKE', '%' . $query . '%');
+        // }
+    
+        // $perItem = $request->input('per_item', 10);
+    
+        // $data = $data->paginate($perItem)->toArray();
+    
+        // return response()->json($data, 200);
 
-        // Retrieve inventory data according to date range
-        $start_date = date('Y-m-d', strtotime($request->input('start_date')));
-        $end_date = date('Y-m-d', strtotime($request->input('end_date')));
 
-        $inventories = Inventory::whereBetween('created_at', [$start_date, $end_date])->get();
 
-        // Create new records based on the data provided
-        foreach ($inventories as $inventory) {
-            if (Auth::user()->hasRole($request->input('role_id'))) {
-                Inventory::create([
-                    "role_id" => $request->input('role_id'),
-                    "email" => $request->input('email'),
-                    "permission" => $request->input('permission'),
-                    "approved_by" => Auth::user()->id,
-                ]);
-            }
+
+        if (!$request->ajax()) {
+            //return abort(404);
         }
-
-        return response()->json([
-            'messages' => 'Inventory permissions have been justified',
-            'code' => 200,
-        ]);
+    
+        // Extracting filter criteria from the request
+        $role_id = $request->input('role_id');
+        $inventory_id = $request->input('inventory_id');
+        $permission_status = $request->input('permission_status');
+    
+        // Date range filter
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+    
+        // Query initialization
+        $query = InventoryPermission::with(['roles', 'users'])
+            ->orderBy('id', 'desc')
+            ->latest();
+    
+        // Applying date range filter if provided
+        if ($start_date && $end_date) {
+            $query->whereBetween('created_at', [Carbon::parse($start_date), Carbon::parse($end_date)->endOfDay()]);
+        }
+        // Applying additional filter criteria if provided
+        if ($role_id) {
+            $query->where('role_id', $role_id);
+        }
+        if ($inventory_id) {
+            $query->where('inventory_id', 'LIKE', '%' . $inventory_id . '%');
+        }
+        if ($permission_status !== null) {
+            $query->where('permission_status', $permission_status);
+        }
+        // Paginate the results
+        $perItem = $request->input('per_item', 10);
+        $data = $query->paginate($perItem)->toArray();
+        // $perItem = $request->input('per_item', 10);
+    
+        // $data = $data->paginate($perItem)->toArray();
+    
+        return response()->json($data, 200);
     }
 
+    // Access Permission
+    public function inventoryPermissionStatusUpdate(Request $request){
+        $id = (int)$request->input('id');
+        $permission_status = (bool)$request->input('permission_status');
+        $permission_status = !$permission_status;
 
-    // public function inventoryPermission(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'role_id' => 'required',
-    //         'user_id' => 'required',
-    //         'permission' => 'required',
-    //         'start_date' => 'required|date',
-    //         'end_date' => 'required|date|after_or_equal:start_date',
-    //     ], [
-    //         'role_id.required' => 'The Role id is required.',
-    //         'user_id.required' => 'The user id is required.',
-    //         // 'email.email' => 'The email must be a valid email address.',
-    //         'permission.required' => 'The permission is required.',
-    //         'start_date.required' => 'The start date is required.',
-    //         'end_date.required' => 'The end date is required.',
-    //         'end_date.after_or_equal' => 'The end date must be after or equal to the start date.',
-    //     ]);
+        $data = InventoryPermission::findOrFail( $id);
 
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'status' => 400,
-    //             'errors' => $validator->messages(),
-    //         ]);
-    //     }
+        $data->update([
+            'permission_status' => (int)$permission_status,
+        ]);
 
-    //     // Retrieve inventory data according to date range and filter by certain columns
-    //     $start_date = date('Y-m-d', strtotime($request->input('start_date')));
-    //     $end_date = date('Y-m-d', strtotime($request->input('end_date')));
-
-    //     $inventories = Inventory::whereBetween('created_at', [$start_date, $end_date])
-    //         ->where(function ($query) use ($request) {
-    //             $query->whereIn('role_id', $request->input(['role_id']))
-    //                 ->orWhereIn('user_id', $request->input(['user_id']))
-    //                 ->orWhereIn('permission', $request->input(['permission']))
-    //                 ->orWhereIn('approved_by', $request->input(['approved_by']));
-    //         })
-    //         ->get();
-
-    //     // Create new records based on the data provided
-    //     foreach ($request->data as $item) {
-    //         foreach ($inventories as $inventory) {
-    //             if (Auth::user()->hasRole($item['role_id'])) {
-    //                 Inventory::create([
-    //                     "role_id" => $item['role_id'],
-    //                     "user_id" => $item['user_id'],
-    //                     "permission" => $item['permission'],
-    //                     "approved_by" => Auth::user()->id,
-    //                 ]);
-    //             }
-    //         }
-    //     }
-
-    //     return response()->json([
-    //         'message' => 'Inventory permissions have been successfully justified.',
-    //         'code' => 200,
-    //     ]);
-    // }
-
-
-
+        return response()->json([
+            'messages' => 'The Access Permission has Updated Successfully',
+            'code' => 202,
+        ], 202);
+    }
 
 }

@@ -79,8 +79,8 @@
                     // Get suggestions for autocomplete
                     var suggestions = data.map(function(item) {
                         return {
-                            label: item.medicine_groups.group_name + " - " + item.medicine_name,
-                            value: item.group_id
+                            label: `${item.medicine_groups.group_name} - ${item.medicine_name}`,
+                            value: item.medicine_name
                         };
                     });
                     // Initialize autocomplete

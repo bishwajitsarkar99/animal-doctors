@@ -1,6 +1,7 @@
 :root{
     --background-color:linear-gradient(to bottom, silver, transparent,silver,lightgray);
     --table-head-color:linear-gradient(to bottom, silver, transparent,silver,lightgray);
-    --table-row-hover:linear-gradient(to bottom, lightblue, transparent,lightblue,lightblue);
+    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
     --row-hover-border:1px solid purple;
+    --apperence-app-setting-bg:linear-gradient(to bottom, #08a05c,#08a05c);
 }

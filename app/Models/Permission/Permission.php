@@ -3,7 +3,6 @@
 namespace App\Models\Permission;
 
 use App\Models\Role;
-use App\Models\roles;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,7 +24,7 @@ class Permission extends Model
         'name' => 'json',
     ];
 
-    public function role(){
+    public function roles(){
         return $this->belongsTo(Role::class);
     }
 

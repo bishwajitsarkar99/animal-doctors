@@ -10,10 +10,10 @@
           <p class="catg skeleton  mb-1">
             <span class="">{{__('translate.Medicine-Dosage')}}</span>
             <span class="tot_summ skeleton" id="num_plate">
-              <label class="tot-search medic skeleton mt-3 pt-1" for="tot_cagt"> ➤ {{__('translate.Total')}} :</label>
-              <label for="total_medicinedogs_records" id="iteam_label4">
+              <label class="tot-search medic skeleton mt-3 pt-1" for="tot_cagt" style="color:black;"> ➤ {{__('translate.Total')}} :</label>
+              <label class="badge rounded-pill bg-primary" for="total_medicinedogs_records" id="iteam_label4">
                 <span class="total_result" id="total_medicinedogs_records"></span>
-                <span style="font-weight: 600;color:darkcyan;font-size: 11px;">.00 {{__('translate.dosage')}}</span>
+                <span style="font-weight: 600;color:white;font-size: 11px;">.00 {{__('translate.dosage')}}</span>
               </label>
             </span>
           </p>
@@ -199,8 +199,8 @@
                 <div class="col-10">
                   <span class="tot_summ" style="float: right;" id="num_plate">
                     <label class="tot-search mt-3" style="font-size: 11px;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Medicine Entry')}} :</label>
-                    <label for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_medic_records"></span>
-                      <span id="iteam_label5" style="font-weight: 600;color:darkcyan;font-size:11px;">.00 {{__('translate.pics')}}</span>
+                    <label class="badge rounded-pill bg-primary" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_medic_records"></span>
+                      <span id="iteam_label5" style="font-weight: 600;color:white;font-size:11px;">.00 {{__('translate.pics')}}</span>
                     </label>
                   </span>
                 </div>

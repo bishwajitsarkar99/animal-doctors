@@ -23,7 +23,7 @@
                                     </button>
                                 </span>
                                 <datalist id="datalistOptions">
-                                    @foreach($users as $user)
+                                    @foreach($data as $user)
                                         <option value="{{$user->email}}">
                                     @endforeach
                                 </datalist>
