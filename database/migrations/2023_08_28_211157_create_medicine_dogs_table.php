@@ -15,7 +15,7 @@ class CreateMedicineDogsTable extends Migration
     {
         Schema::create('medicine_dogs', function (Blueprint $table) {
             $table->id();
-            $table->string('medicine_dogs',200);
+            $table->string('dosage',200);
             $table->unsignedBigInteger('medicine_id');
             $table->foreign('medicine_id')->references('id')->on('medicine_dogs')->onDelete('cascade');
             $table->tinyInteger('status')->default('1');

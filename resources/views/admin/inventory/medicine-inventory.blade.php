@@ -21,7 +21,7 @@
                                     <table class="ord_table center border-1 mt-2">
                                         <tr class="table-row order_body acc_setting_table">
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col ps-1">{{__('translate.SN.')}}</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ col ps-1">{{__('translate.Action')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ col ps-1">Act</th>
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">{{__('translate.INV-ID')}}</th>
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">{{__('translate.SVC-ID')}}</th>
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">{{__('translate.Category')}}</th>
@@ -31,7 +31,7 @@
                                             <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">{{__('translate.Unit-Price')}}</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ ps-1" style="text-align: left;">{{__('translate.Qty')}}</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ ps-1">{{__('translate.Amount')}}</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_">{{__('translate.Status')}}</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ ps-1">{{__('translate.Status')}}</th>
                                             <th id="th_sort" class="table_th_color tot_pending_">{{__('translate.Updated By')}}</th>
                                         </tr>
                                         <tbody class="table-heading bg-transparent" id="invedit_data_table">
@@ -271,7 +271,7 @@
                                                 <i class="dogs-icon fa fa-spinner fa-spin dogs-hidden mt-1"></i>
                                             </div>
                                             <div class="col-7 skeleton" style="text-align: left;">
-                                                <select id="medicine_dogs" class="mt-1 ps-1 update_user dogs medicine_dogs" name="medicine_dogs" placeholder="Select-Medicine-Dogs">
+                                                <select id="medicine_dogs" class="mt-1 ps-1 update_user dogs medicine_dogs" name="medicine_dosage" placeholder="Select-Medicine-Dosage">
                                                     <option value="0" selected><span> ▼</span> {{__('translate.Select Medicine-Dosage')}}</option>
                                                 </select>
                                             </div>
@@ -508,12 +508,41 @@
             dateFormat: "dd-mm-yy",
             changeMonth: true,
             changeYear: true,
+            onSelect: function(dateText) {
+                $(this).attr('data-manufacture-date', dateText);
+                updateTableDate(this, 'data-manufacture-date');
+            }
         });
         $('#date_exid').datepicker({
             dateFormat: "dd-mm-yy",
             changeMonth: true,
             changeYear: true,
+            onSelect: function(dateText) {
+                $(this).attr('data-expiry-date', dateText);
+                updateTableDate(this, 'data-expiry-date');
+            }
         });
+        updateTableDate($('#date_id'), 'data-manufacture-date');
+        updateTableDate($('#date_exid'), 'data-expiry-date');
+        function formatDate(dateString) {
+            var date = new Date(dateString.split('-').reverse().join('-'));
+            var day = date.getDate();
+            var month = date.getMonth();
+            var year = date.getFullYear();
+
+            var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            day = day < 10 ? '0' + day : day;
+
+            var monthName = monthNames[month];
+
+            return day + '-' + monthName + '-' + year;
+        }
+        function updateTableDate(element, dataAttribute) {
+            var dateStr = $(element).attr(dataAttribute);
+            var formattedDate = formatDate(dateStr);
+            $(element).val(formattedDate);
+        }
     });
 </script>
 <script>
@@ -625,9 +654,9 @@
                     $("#medicine_dogs").empty();
                     $("#medicine_dogs").append('<option value="0" disabled>Processing.......</option>');
                     $.each(data, function(key, item) {
-                        $("#medicine_dogs").append("<option class='sub_name_text' value =" + item.id + ">" + item.medicine_dogs + "</option>").fadeIn('slow');
+                        $("#medicine_dogs").append("<option class='sub_name_text' value =" + item.id + ">" + item.dosage + "</option>").fadeIn('slow');
                     });
-                    $(`#category_page form select[name="medicine_dogs"] option[value="${value}"]`).prop('selected', true);
+                    $(`#category_page form select[name="dosage"] option[value="${value}"]`).prop('selected', true);
                 }
             });
         }
@@ -647,7 +676,7 @@
         }
 
         setMedicineNameOptions(data['group_name'], data['medicine_name']);
-        setMedicineDogsOptions(data['medicine_name'], data['medicine_dogs']);
+        setMedicineDogsOptions(data['medicine_name'], data['dosage']);
 
         removeItems();
     });

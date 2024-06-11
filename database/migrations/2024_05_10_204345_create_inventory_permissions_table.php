@@ -19,7 +19,9 @@ class CreateInventoryPermissionsTable extends Migration
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->unsignedBigInteger('mail_id');
             $table->foreign('mail_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('inventory_id')->unique();
+            //$table->string('inventory_id')->unique();
+            $table->unsignedBigInteger('inv_permission_id');
+            $table->foreign('inv_permission_id')->references('inventory_id')->on('inventories')->onDelete('cascade');
             $table->longText('issue_name');
             $table->boolean('permission_status')->nullable();
             $table->unsignedBigInteger('approved_by')->default(1);

@@ -2,7 +2,7 @@
     <div class="accordion-item {{setting('asset_title_display')}}">
         <button class="accordion-button collapsed ass_button" data-bs-toggle="collapse" data-bs-target="#asset_documentioin" aria-expanded="false" aria-controls="asset_documentioin">
             <span class="prod_font">
-                <i class="fa-solid fa-down-long fa-beat" data-bs-toggle="tooltip" data-bs-placement="right" title="Open Prodcut Menu"></i>
+                <i class="fa-solid fa-down-long fa-beat" data-bs-toggle="tooltip" data-bs-placement="right" title="Open Asset Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'></i>
             </span>
             <a class="nav-link collapsed sals_menu asset_btn" id="navbarDropdown" data-bs-toggle="collapse" data-bs-target="#asset_" aria-expanded="false" aria-controls="collapsePages">
                 <span class="prod_label" id="Asset_id" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>

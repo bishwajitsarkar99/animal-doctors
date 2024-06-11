@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Permission\Permission;
 use App\Models\User;
 use App\Models\permission\InventoryPermission;
+use App\Models\Medicine\Inventory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,5 +22,9 @@ class Role extends Model
     public function inventory_permissions()
     {
         return $this->hasMany(InventoryPermission::class);
+    }
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
     }
 }

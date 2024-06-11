@@ -15,6 +15,7 @@ class CreateInventoriesTable extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id('inventory_id');
+            $table->integer('user_id');
             $table->string('inv_id')->unique();
             $table->unsignedBigInteger('supplier_id');
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
@@ -24,8 +25,8 @@ class CreateInventoriesTable extends Migration
             $table->foreign('medicine_group')->references('id')->on('medicine_groups')->onDelete('cascade');
             $table->unsignedBigInteger('medicine_name');
             $table->foreign('medicine_name')->references('id')->on('medicine_names')->onDelete('cascade');
-            $table->unsignedBigInteger('medicine_dogs');
-            $table->foreign('medicine_dogs')->references('id')->on('medicine_dogs')->onDelete('cascade');
+            $table->unsignedBigInteger('medicine_dosage');
+            $table->foreign('medicine_dosage')->references('id')->on('medicine_dogs')->onDelete('cascade');
             $table->unsignedBigInteger('medicine_origin');
             $table->foreign('medicine_origin')->references('id')->on('medicine_origins')->onDelete('cascade');
             $table->unsignedBigInteger('medicine_size');
@@ -37,19 +38,12 @@ class CreateInventoriesTable extends Migration
             $table->decimal('tax_percentage', 5, 2)->default(0.00);
             $table->decimal('discount_percentage', 5, 2)->default(0.00);
             $table->decimal('sub_total', 8, 2)->default(0.00);
-            $table->tinyInteger('status')->default(0);
+            $table->boolean('status')->nullable();
             $table->tinyInteger('status_inv')->default(1);
-            $table->integer('status_stock')->nullable();
-            $table->string('stock_id')->nullable();
             $table->date('manufacture_date');
             $table->date('expiry_date');
             $table->integer('updated_by')->nullable();
-            $table->unsignedBigInteger('role_id')->nullable();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->integer('user_id')->nullable();
-            // $table->unsignedBigInteger('user_id')->nullable();
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('permission')->default(0);
+            $table->string('permission_token')->nullable();
             $table->integer('approved_by')->nullable();
             $table->timestamps();
         });

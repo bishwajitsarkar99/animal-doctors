@@ -57,27 +57,29 @@ td.center{
 .page-item:last-child .page-link, .page-item:last-child .datatable-pagination a, .datatable-pagination .page-item:last-child a, 
 .datatable-pagination li:last-child .page-link, .datatable-pagination li:last-child a {
  
-    background-color: #08a05c;
-    color: white;
-    font-size: 10px;
+    background: linear-gradient(to bottom, silver, transparent, silver, lightgray);
+    color: black;
+    font-size: 11px;
+    font-weight: 700;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
 }
 .page-item:first-child .page-link, .page-item:first-child .datatable-pagination a, .datatable-pagination .page-item:first-child a, 
 .datatable-pagination li:first-child .page-link, .datatable-pagination li:first-child a {
- 
-    background-color: #08a05c;
-    color: white;
-    font-size: 10px;
+    background: linear-gradient(to bottom, silver, transparent, silver, lightgray);
+    color: black;
+    font-size: 11px;
+    font-weight: 700;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
 }
 
 li.page-item:active.page-link.btn_page{
+    background:lightseagreen;
     color: white;
-    background-color: #08a05c;
     border: 1px solid white;
     font-size: 10px;
 }
 a.page-link.btn_page:hover{
-    background-color: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
-    background-color: lightseagreen;
+    background:lightseagreen;
     color: white;
 }
 .pagination, .datatable-pagination ul {
@@ -169,11 +171,11 @@ label.item_class {
     font-weight: 600;
 }
 input#search_area {
-    background-color: #08a05c;
+    background-color: lightgray;
     outline: none;
     box-shadow: none;
     margin-top: 6px;
-    border: 1px solid #08a05c;
+    border: 1px solid lightgray;
 }
 label.ser_label {
     color: black;
@@ -252,22 +254,22 @@ p.input.form-check-input {
     print-color-adjust: exact;
 }
 input#orders_box {
-    background-color: #08a05c;
+    background-color: lightgray;
     outline: none;
     box-shadow: none;
-    border: 1px solid #08a05c;
+    border: 1px solid lightgray;
 }
 input#orders_box2 {
-    background-color: #08a05c;
+    background-color: lightgray;
     outline: none;
     box-shadow: none;
-    border: 1px solid #08a05c;
+    border: 1px solid lightgray;
 }
 input#orders_box3 {
-    background-color: #08a05c;
+    background-color: lightgray;
     outline: none;
     box-shadow: none;
-    border: 1px solid #08a05c;
+    border: 1px solid lightgray;
 }
 input.form-switch.form-check-input {
     box-shadow: none;

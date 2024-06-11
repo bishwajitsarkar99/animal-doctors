@@ -49,8 +49,8 @@
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact2</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">WhatsApp</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Email</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ skeleton pe-2">Check</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton">Status</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ skeleton pe-2">Check</th>
                                         </tr>
                                         <tbody class="bg-transparent skeleton" id="supplier_data_table">
 

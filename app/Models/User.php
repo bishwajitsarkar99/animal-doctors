@@ -72,6 +72,11 @@ class User extends Authenticatable
                      ->get();
     }
 
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
+    }
+
     public function inventory_permissions()
     {
         return $this->hasMany(InventoryPermission::class);

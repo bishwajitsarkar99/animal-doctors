@@ -40,7 +40,7 @@ class MedicinePostController extends Controller
     // Medicine-Dogs-Data Fetch For Depenable Dropdown---------------------
     public function requestMedicineDogs($id)
     {
-        $medicine_dogs = DB::table('medicine_dogs')->where('medicine_id', $id)->orderBy('medicine_dogs','ASC')->get();
+        $medicine_dogs = DB::table('medicine_dogs')->where('medicine_id', $id)->orderBy('dosage','ASC')->get();
         return response()->json($medicine_dogs);
     }
     public function createDoctorPost()

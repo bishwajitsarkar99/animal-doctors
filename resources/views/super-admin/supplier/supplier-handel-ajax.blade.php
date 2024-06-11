@@ -40,11 +40,12 @@
                         <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${row.contact_number_two}</td>
                         <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${row.whatsapp_number}</td>
                         <td class="txt_ ps-1 supp_vew10" id="supp_tab13">${row.email}</td>
+                        <td class="tot_complete_ pe-2 ${row.supplier_status ? 'bg-primary' : 'bg-danger'}" id="cat_td6">
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.supplier_status ? 'text-primary' : 'text-danger'}">${row.supplier_status ? '✅ Active' : '❌ Deny'}</span>
+                            <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
+                        </td>
                         <td class="tot_complete_ ps-1 pt-1 center" id="supp_tab14">
                             <input id="actOne" class="form-switch form-check-input supplier_check_permission me-2" type="checkbox" status_id="${row.id}" value="${row.supplier_status}" ${row.supplier_status? " checked": ''}>
-                        </td>
-                        <td class="tot_complete_ pill supp_vew11 ${row.supplier_status? ' bg-primary': ' bg-danger'}" id="supp_tab15"><span class="text-light ps-1">${row.supplier_status ? 'Active': 'Inactive'}</span>
-                            <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>
                         </td>
                     </tr>
                 `;

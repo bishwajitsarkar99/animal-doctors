@@ -14,35 +14,62 @@
             }
 
             return [...rows].map((row, key) => {
+                let statusClass, statusColor, statusText, statusBg;
+                if(row.status == null){
+                    statusClass = 'text-dark';
+                    statusText = 'Pending';
+                    statusColor = 'color:gray;background-color: white;';
+                    statusBg = 'badge rounded-pill bg-gray';
+                }
+                else if(row.status == 0){
+                    statusClass = 'text-danger';
+                    statusText = '❌ Unauthorize';
+                    statusColor = 'color:darkgoldenrod;background-color: #ffedd8;';
+                    statusBg = 'badge rounded-pill bg-warn';
+                }
+                else if(row.status == 1){
+                    statusClass = 'text-dark';
+                    statusText = '✅ Authorize';
+                    statusColor = 'color:black;background-color: #ecfffd;';
+                    statusBg = 'badge rounded-pill bg-azure';
+                }
                 return `
-                    <tr class="table-row user-table-row" key="${key}">
-                        <td class="sn border_ord">${key+1}</td>
+                    <tr class="table-row user-table-row" key="${key}" style="${statusColor}">
+                        <td class="sn border_ord edit_inventory_table">${key+1}</td>
                         <td class="txt_ ps-1 center">
                             <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
                             <ul class="dropdown-menu action ms-4 pe-3">
                                 <li class="upd cgy ps-1">
                                     <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="edtBtn" value="${row.inventory_id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                     <i class="fa-solid fa-pen-to-square fa-beat" style="color:darkcyan"></i></button>
+                                    <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="deltBtn" value="${row.inventory_id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                                    <i class="fa-solid fa-trash-can fa-beat" style="color:orangered"></i></button>
                                 </li>
                             </ul>
                         </td>
                         <td class="txt_ ps-1 edit_inventory_table">${row.inv_id}</td>
-                        <td class="tot_order_ ps-1">${row.suppliers ? row.suppliers.id_name : ''}</td>
-                        <td class="tot_pending_ ps-1">${row.sub_categories ? row.sub_categories.sub_category_name : ''}</td>
-                        <td class="tot_pending_ ps-1">${row.medicine_groups ? row.medicine_groups.group_name : ''}</td>
-                        <td class="tot_pending_ ps-1">${row.medicine_names ? row.medicine_names.medicine_name : ''}</td>
-                        <td class="tot_pending_ ps-1">${row.medicine_dogs ? row.medicine_dogs.medicine_dogs : ''}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.medicine_origins ? row.medicine_origins.origin_name : ''}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.units ? row.units.units_name : ''}</td>
-                        <td class="tot_pending_ ps-1"><span>${parseFloat(row.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> ৳</td>
-                        <td class="tot_pending_ ps-1"><span>${parseFloat(row.quantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_order_ ps-1 edit_inventory_table">${row.suppliers ? row.suppliers.id_name : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table">${row.sub_categories ? row.sub_categories.sub_category_name : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table">${row.medicine_groups ? row.medicine_groups.group_name : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table">${row.medicine_names ? row.medicine_names.medicine_name : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table">${row.medicine_dogs ? row.medicine_dogs.dosage : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table" hidden>${row.medicine_origins ? row.medicine_origins.origin_name : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table" hidden>${row.units ? row.units.units_name : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table"><span>${parseFloat(row.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> ৳</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table"><span>${parseFloat(row.quantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table" hidden>${parseFloat(row.amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
                         <td class="tot_pending_ ps-1" hidden>${parseFloat(row.vat_percentage).toLocaleString('en-Us', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.tax_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.discount_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table" hidden>${parseFloat(row.tax_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table" hidden>${parseFloat(row.discount_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
                         <td class="tot_pending_ ps-1 edit_inventory_table"><span>${parseFloat(row.sub_total).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</span> ৳</td>
-                        <td class="tot_pending_ ps-1"><span class="status_bg_inv ps-1 pe-1">${row.status_inv ==1 ? 'Null': 'Updated'}</span></td>
-                        <td class="tot_pending_ bold ps-1 ${row.updated_by? ' text-primary': ' text-warning'}" id="user_set8">${row.updated_by ==0 ? 'User': 'Null' && row.updated_by ==2 ? 'SubAdmin': 'Null' && row.updated_by ==1 ? 'SuperAdmin': 'Null' && row.updated_by ==3 ? 'Admin': 'Null'}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table" hidden><span class="status_bg_inv ps-1 pe-1">${row.status_inv ==1 ? 'Null': 'Updated'}</span></td>
+                        <td class="edit_inventory_table ms-1 ${statusClass}" id="supp_tab15">
+                            <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:11px;">
+                                ${statusText}
+                            </span>
+                            <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                        </td>
+                        <td class="tot_pending_ bold ps-1 ${row.updated_by? ' text-primary': ' text-warning'}" id="user_set8" style="text-align:center;">${row.updated_by ==0 ? 'User': 'Null' && row.updated_by ==2 ? 'SubAdmin': 'Null' && row.updated_by ==1 ? 'SuperAdmin': 'Null' && row.updated_by ==3 ? 'Admin': 'Null'}</td>
                         
                     </tr>
                 `;
@@ -205,7 +232,7 @@
                             $('#success_message').html("");
                             $('#success_message').addClass('alert_show ps-1 pe-1');
                             $('#success_message').fadeIn();
-                            $('#success_message').text(response.message);
+                            $('#success_message').text(response.messages);
                             var time = null;
                             time = setTimeout(() => {
                                 $('#success_message').fadeOut();
@@ -229,7 +256,7 @@
             var inventory_id = $(this).val();
             $.ajax({
                 type: "GET",
-                url: "/admin/inventories-edit/" + inventory_id,
+                url: "/inventories-edit/" + inventory_id,
                 success: function(response) {
                     if (response.status == 404) {
                         $('#success_message').html("");
@@ -248,7 +275,7 @@
                         $('.category_id').val(response.messages.category_id);
                         $('.group_name').val(response.messages.medicine_group);
                         $('.medicine_name').val(response.messages.medicine_name);
-                        $('.medicine_dogs').val(response.messages.medicine_dogs);
+                        $('.medicine_dogs').val(response.messages.medicine_dosage);
                         $('.origin_name').val(response.messages.medicine_origin);
                         $('.medicine_size').val(response.messages.medicine_size);
                         $('.unit_price').val(response.messages.price);
@@ -260,7 +287,7 @@
                         $('.sub_total').val(response.messages.sub_total);
 
                         setMedicineNameOptions(response.messages.medicine_group, response.messages.medicine_name);
-                        setMedicineDogsOptions(response.messages.medicine_name, response.messages.medicine_dogs);
+                        setMedicineDogsOptions(response.messages.medicine_name, response.messages.medicine_dosage);
                     }
                 }
             });
@@ -294,9 +321,9 @@
                     $("#medicine_dogs").empty();
                     $("#medicine_dogs").append('<option value="0" disabled>Processing.......</option>');
                     $.each(data, function(key, item) {
-                        $("#medicine_dogs").append("<option class='sub_name_text' value =" + item.id + ">" + item.medicine_dogs + "</option>").fadeIn('slow');
+                        $("#medicine_dogs").append("<option class='sub_name_text' value =" + item.id + ">" + item.dosage + "</option>").fadeIn('slow');
                     });
-                    $(`#category_page form select[name="medicine_dogs"] option[value="${value}"]`).prop('selected', true);
+                    $(`#category_page form select[name="dosage"] option[value="${value}"]`).prop('selected', true);
                 }
             });
         }
@@ -313,7 +340,7 @@
                 'category_id': $('.category_id').val(),
                 'medicine_group': $('.group_name').val(),
                 'medicine_name': $('.medicine_name').val(),
-                'medicine_dogs': $('.medicine_dogs').val(),
+                'medicine_dosage': $('.medicine_dogs').val(),
                 'medicine_origin': $('.origin_name').val(),
                 'medicine_size': $('.medicine_size').val(),
                 'price': $('.unit_price').val(),
@@ -333,7 +360,7 @@
 
             $.ajax({
                 type: "PUT",
-                url: "/admin/inventories-update/" + inventory_id,
+                url: "/inventories-update/" + inventory_id,
                 data: data,
                 dataType: "json",
                 success: function(response) {
@@ -464,14 +491,13 @@
     function formatDate(dateString) {
         var date = new Date(dateString);
         var day = date.getDate();
-        var month = date.getMonth() + 1;
+        var month = date.getMonth();
         var year = date.getFullYear();
-
-        // Pad day and month with leading zeros if necessary
+        var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         day = day < 10 ? '0' + day : day;
-        month = month < 10 ? '0' + month : month;
+        var monthName = monthNames[month];
 
-        return day + '-' + month + '-' + year;
+        return day + '-' + monthName + '-' + year;
     }
 </script>
 
@@ -491,32 +517,57 @@
             }
 
             return [...rows].map((row, key) => {
+                let statusClass, statusColor, statusText, statusBg;
+                if(row.status == null){
+                    statusClass = 'text-dark';
+                    statusText = 'Pending';
+                    statusColor = 'color:gray;background-color: white;';
+                    statusBg = 'badge rounded-pill bg-gray';
+                }
+                else if(row.status == 0){
+                    statusClass = 'text-danger';
+                    statusText = '❌ Unauthorize';
+                    statusColor = 'color:darkgoldenrod;background-color: #ffedd8;';
+                    statusBg = 'badge rounded-pill bg-warn';
+                }
+                else if(row.status == 1){
+                    statusClass = 'text-dark';
+                    statusText = '✅ Authorize';
+                    statusColor = 'color:black;background-color: #ecfffd;';
+                    statusBg = 'badge rounded-pill bg-azure';
+                }
+
                 return `
-                    <tr class="table-row user-table-row" key="${key}">
-                        <td class="sn border_ord">${key+1}</td>
+                    <tr class="table-row user-table-row" key="${key}" style="${statusColor}">
+                        <td class="sn border_ord edit_inventory_table">${key+1}</td>
                         <td class="txt_ ps-1 edit_inventory_table">${row.inv_id}</td>
-                        <td class="tot_order_ ps-1">${row.suppliers ? row.suppliers.id_name : ''}</td>
-                        <td class="tot_pending_ ps-1">${row.sub_categories ? row.sub_categories.sub_category_name : ''}</td>
-                        <td class="tot_pending_ ps-1">${row.medicine_groups ? row.medicine_groups.group_name : ''}</td>
-                        <td class="tot_pending_ ps-1">${row.medicine_names ? row.medicine_names.medicine_name : ''}</td>
-                        <td class="tot_pending_ ps-1">${row.medicine_dogs ? row.medicine_dogs.medicine_dogs : ''}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.medicine_origins ? row.medicine_origins.origin_name : ''}</td>
-                        <td class="tot_pending_ ps-1" hidden>${row.units ? row.units.units_name : ''}</td>
-                        <td class="tot_pending_ ps-1"><span>${parseFloat(row.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> ৳</td>
-                        <td class="tot_pending_ ps-1"><span>${parseFloat(row.quantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.vat_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.tax_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-                        <td class="tot_pending_ ps-1" hidden>${parseFloat(row.discount_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_order_ ps-1 edit_inventory_table">${row.suppliers ? row.suppliers.id_name : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table">${row.sub_categories ? row.sub_categories.sub_category_name : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table">${row.medicine_groups ? row.medicine_groups.group_name : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table">${row.medicine_names ? row.medicine_names.medicine_name : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table">${row.medicine_dogs ? row.medicine_dogs.dosage : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table" hidden>${row.medicine_origins ? row.medicine_origins.origin_name : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table" hidden>${row.units ? row.units.units_name : ''}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table"><span>${parseFloat(row.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> ৳</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table"><span>${parseFloat(row.quantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table" hidden>${parseFloat(row.amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table" hidden>${parseFloat(row.vat_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table" hidden>${parseFloat(row.tax_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td class="tot_pending_ ps-1 edit_inventory_table" hidden>${parseFloat(row.discount_percentage).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
                         <td class="tot_pending_ ps-1 edit_inventory_table"><span>${parseFloat(row.sub_total).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2})}</span> ৳</td>
-                        <td class="tot_pending_ ps-1"><span class="status_bg_unauthorized ps-1 pe-1">${row.status ==0 ? 'Unauthorized': 'Authorized'}</span></td>
+                        <td class="edit_inventory_table ms-1 ${statusClass}" id="supp_tab15">
+                            <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:11px;">
+                                ${statusText}
+                            </span>
+                            <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                        </td>
                         
                     </tr>
                 `;
             }).join("\n");
         }
 
-        // Fetch Inventory Data ------------------
+        // Fetch Inventory Unauthorize Data ------------------
         function fetch_inventory_unauthorized_data(query = '', url = null, perItem = null) {
 
             if (perItem === null) {

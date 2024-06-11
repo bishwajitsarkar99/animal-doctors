@@ -5,7 +5,7 @@
     --inventory-navbar-btn-color:white;
     --inventory-navbar-btn-background-image:radial-gradient(farthest-corner at 100px 100px, #08a05c, #08a05c);
     --inventory-navbar:linear-gradient(to 90deg, silver, transparent,silver,lightgray);
-    --table-row-hover:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
     --bg-color:purple;
     --color:royalblue;
     --size:1px;
@@ -13,6 +13,21 @@
     --apperence-app-setting-bg:linear-gradient(to bottom, #08a05c,#08a05c);
     --drop-border-bg-color:white;
     --add-button-permission:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+}
+.bg-warn{
+    background-image: linear-gradient(to bottom, #e8c7a1, transparent,#ecdbc7,#e8c7a1);
+}
+.bg-gray{
+    background-image: linear-gradient(to bottom, silver, transparent,silver,lightgray);
+}
+.bg-azure{
+    background-image: linear-gradient(to bottom, #a2eae3, transparent,#a2eae3,#a2eae3);
+}
+#deltBtn {
+    box-shadow: none;
+    outline: none;
+    background-color: white;
+    border: none;
 }
 .custom-select{
     position: relative;
@@ -98,12 +113,14 @@ th#th_sort {
     text-transform: uppercase;
     font-size: 11px;
     line-height: 2;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
 }
 table, th, td {
     border-collapse: collapse;
     font-size: 13px;
     letter-spacing: 1px;
     opacity: 1;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
 }
 td.edit_inventory_table{
     font-weight: 600;
@@ -345,7 +362,7 @@ button.common_btn {
     border: 1px solid #c6c7c8;
 }
 select#select_user{
-    width: 86%;
+    width: 100%;
     outline: none;
     border: 1px solid lightblue;
     font-size: 13px;
@@ -353,6 +370,8 @@ select#select_user{
     border-radius: 5px;
     cursor: pointer;
     background-image: var(--add-button-permission);
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    font-family: math;
 }
 td.button_box {
     width: 105px;
@@ -466,9 +485,9 @@ span.status_bg_unauthorized {
 
 .inventory-bg-color {
     /* background-image: var(--inventory-background-image); */
-    background-color: aliceblue;
+    background-color: whitesmoke;
     opacity: var(--inventory-opacity);
-    border: 1px solid lightblue;
+    border: none;
 }
 
 .tablinkinventory {

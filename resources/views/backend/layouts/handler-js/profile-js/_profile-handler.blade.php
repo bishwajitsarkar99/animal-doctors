@@ -28,7 +28,28 @@
             }
         });
 
-        
+        $(document).on('click', '.dropdown-toggle', ()=>{
+            var time = null;
+            $("#profileSkel").addClass('profile-skeletone');
+            $("#logoutSkel").addClass('log-skeletone');
+            $(".show-profile").attr('hidden', true);
+            $(".show-prof").removeClass('display-skeletone');
+            $(".show-logout").attr('hidden', true);
+            $(".show-log").removeClass('display-skeletone');
+            time = setTimeout(() => {
+                $("#profileSkel").removeClass('profile-skeletone');
+                $("#logoutSkel").removeClass('log-skeletone');
+                $(".show-profile").removeAttr('hidden');
+                $(".show-logout").removeAttr('hidden');
+                $(".show-log").addClass('display-skeletone');
+                $(".show-prof").addClass('display-skeletone');
+
+            }, 1000);
+
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
     });
 
 </script>

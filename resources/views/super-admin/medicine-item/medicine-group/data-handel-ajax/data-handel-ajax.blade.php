@@ -29,11 +29,12 @@
                             </ul>
                         </td>
                         <td class="txt_ ps-1" id="group_td4">${row.group_name}</td>
+                        <td class="tot_complete_ pe-2 ${row.status ? 'bg-primary' : 'bg-danger'}" id="cat_td6">
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '✅ Active' : '❌ Deny'}</span>
+                            <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
+                        </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="group_td5">
                             <input class="form-switch form-check-input check_permission" type="checkbox" group_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>
-                        </td>
-                        <td class="tot_complete_ pill pe-2 ${row.status? ' bg-primary': ' bg-danger'}"><span class="text-light ps-1 pe-1" id="group_td6">${row.status ? 'Active': 'Inactive'}</span>
-                            <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>
                         </td>
                     </tr>
                 `;

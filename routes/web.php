@@ -214,10 +214,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('super-admin/delete-main-post/{id}', [PostSettngController::class, 'deleteMainPost'])->name('delete_main_post.action');
         // inventory authorize
         Route::get('super-admin/inventory-authorize', [InventoryAuthorization::class, 'index'])->name('inventory-auth');
+        Route::get('super-admin/inventory-authorize-user/{selectedRole}', [InventoryAuthorization::class, 'getSelectRole'])->name('auth-role.action');
+        Route::get('super-admin/inventory-data-request', [InventoryAuthorization::class, 'searchInventory'])->name('inventory-search.action');
         Route::get('super-admin/inventory-get', [InventoryAuthorization::class, 'getInventoryData'])->name('search-inventory.action');
         Route::post('super-admin/inventory-status', [InventoryAuthorization::class, 'inventoryAuthorize'])->name('inventory-authorize.action');
         Route::get('super-admin/get-inventory-delete-data', [InventoryAuthorization::class, 'getInventoryDeleteData'])->name('get_inventory_data.action');
-        Route::delete('super-admin/inventory-delete', [InventoryAuthorization::class, 'inventoryDelete'])->name('delete-inventory'); 
+        Route::get('super-admin/inventory-authorize-data-get', [InventoryAuthorization::class, 'inventoryAuthorizeData'])->name('inventory_authorize.action');
         // inventory permission
         Route::post('super-admin/inventory-permission-update', [InventoryAuthorization::class, 'inventoryPermissionStatusUpdate'])->name('inventory_permission_status.action');
         Route::delete('super-admin/delete-inventory-permission/{id}', [InventoryAuthorization::class, 'inventoryPermissionDelete'])->name('inventory_permission_delete.action');
@@ -226,6 +228,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::middleware(['role:SuperAdmin|Admin'])->group(function(){
         Route::post('super-admin/inventory-permission', [InventoryAuthorization::class, 'inventoryPermission'])->name('action.inventory-permission');
         Route::get('super-admin/get-inventory-permission', [InventoryAuthorization::class, 'inventoryPermissionGet'])->name('search-inventory-permission.action');
+        Route::put('super-admin/token-inventory-permission/{inventory_id}', [InventoryAuthorization::class, 'inventoryToken'])->name('inventory-token.action');
     });
     // Fornt-End Page(Footer)
     Route::middleware('isSuperAdmin')->group(function() {
@@ -294,9 +297,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('admin/inventories', [MedicineInventory::class, 'index'])->name('medicine-inventory.index');
         Route::post('admin/inventories', [MedicineInventory::class, 'store'])->name('medicine-inventory.store');
         Route::get('admin/inventories-edit-get',[MedicineInventory::class, 'getData'])->name('search-inv.action');
-        Route::get('admin/inventories-edit/{inventory_id}',[MedicineInventory::class, 'editInventory']);
-        Route::put('admin/inventories-update/{inventory_id}', [MedicineInventory::class, 'updateInventory'])->name('update_inventory.action');
+        Route::get('/inventories-edit/{inventory_id}',[MedicineInventory::class, 'editInventory']);
+        Route::put('/inventories-update/{inventory_id}', [MedicineInventory::class, 'updateInventory'])->name('update_inventory.action');
         Route::get('admin/inventories-unauthorized-data',[MedicineInventory::class, 'unauthorizedData'])->name('search-unauthorized.action');
+        
         // Stock
         Route::get('admin/stock', [StockController::class, 'index'])->name('stock.index');
         Route::post('admin/stock', [StockController::class, 'storeStock'])->name('stock.store');

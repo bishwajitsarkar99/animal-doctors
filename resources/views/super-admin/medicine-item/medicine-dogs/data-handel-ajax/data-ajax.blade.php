@@ -41,12 +41,13 @@
                             </ul>
                         </td>
                         <td class="ps-1 border_ord" id="medic_dosage3">${row.medicine_names ? row.medicine_names.medicine_name : ''}</td>
-                        <td class="txt_ ps-1" id="medic_dosage5">${row.medicine_dogs}</td>
+                        <td class="txt_ ps-1" id="medic_dosage5">${row.dosage}</td>
+                        <td class="tot_complete_ pe-2 ${row.status ? 'bg-primary' : 'bg-danger'}" id="cat_td6">
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '✅ Active' : '❌ Deny'}</span>
+                            <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
+                        </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="medic_dosage6">
                             <input class="form-switch form-check-input check_permission" type="checkbox" medicinedogs_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>
-                        </td>
-                        <td class="tot_complete_ pill pe-2 ${row.status? ' bg-primary': ' bg-danger'}" id="medic_dosage7"><span class="text-light ps-1 pe-1">${row.status ? 'Active': 'Inactive'}</span>
-                            <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>
                         </td>
                     </tr>
                 `;
@@ -91,7 +92,7 @@
                     // Get suggestions for autocomplete
                     var suggestions = data.map(function(item) {
                         return {
-                            label: `${item.id} - ${item.medicine_names.medicine_name} - ${item.medicine_dogs}`,
+                            label: `${item.id} - ${item.medicine_names.medicine_name} - ${item.dosage}`,
                             value: item.id
                         };
                     });
@@ -196,7 +197,7 @@
         $(document).on('click', '#save', function(e) {
             e.preventDefault();
             var data = {
-                'medicine_dogs': $('#medicine_dogs').val(),
+                'dosage': $('#medicine_dogs').val(),
                 'medicine_id': $('#medicine_id').val(),
             }
 
@@ -256,7 +257,7 @@
                         $('#success_message').text(response.messages);
                     } else {
                         $('#medicinedogs_id').val(medicinedogs_id);
-                        $('.edit_medicine_dogs').val(response.messages.medicine_dogs);
+                        $('.edit_medicine_dogs').val(response.messages.dosage);
                         $('.edit_medicine_id').val(response.messages.medicine_id);
                     }
                 }
@@ -268,7 +269,7 @@
             e.preventDefault();
             var medicinedogs_id = $('#medicinedogs_id').val();
             var data = {
-                'medicine_dogs': $('.edit_medicine_dogs').val(),
+                'name': $('.edit_medicine_dogs').val(),
                 'medicine_id': $('.edit_medicine_id').val(),
             }
 

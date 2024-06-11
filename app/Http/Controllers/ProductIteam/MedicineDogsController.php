@@ -72,10 +72,10 @@ class MedicineDogsController extends Controller
     public function storeData(Request $request)
     {
         $validators = validator::make($request->all(),[
-            'medicine_dogs'=>'required|max:191',
+            'dosage'=>'required|max:191',
             'medicine_id'=>'required',
         ],[
-            'medicine_dogs.required'=>'The medicine dogs is required mandatory.',
+            'dosage.required'=>'The medicine dosage is required mandatory.',
             'medicine_id.required'=>'The medicine id is required mandatory.',
         ]);
         if($validators->fails()){
@@ -86,7 +86,7 @@ class MedicineDogsController extends Controller
         }    
         else{
             $medicinedogs = new MedicineDogs;
-            $medicinedogs->medicine_dogs = $request->input('medicine_dogs');
+            $medicinedogs->dosage = $request->input('dosage');
             $medicinedogs->medicine_id = $request->input('medicine_id');
             $medicinedogs->save();
             return response()->json([
@@ -118,7 +118,7 @@ class MedicineDogsController extends Controller
     public function updatemedicinedogs(Request $request, $id)
     {
         $validator = validator::make($request->all(),[
-            'medicine_dogs'=>'required|max:191',
+            'dosage'=>'required|max:191',
             'medicine_id'=>'required',
         ]);
         if($validator->fails()){
@@ -130,7 +130,7 @@ class MedicineDogsController extends Controller
         else{
             $medicinedogs = MedicineDogs::find($id);
             if($medicinedogs){
-                $medicinedogs->medicine_dogs = $request->input('medicine_dogs');
+                $medicinedogs->dosage = $request->input('dosage');
                 $medicinedogs->medicine_id = $request->input('medicine_id');
                 $medicinedogs->update();
                 return response()->json([
@@ -155,7 +155,7 @@ class MedicineDogsController extends Controller
 
         return response()->json([
             'status'=> 200,
-            'messages'=> 'Medicine Dogs is deleted successfully',
+            'messages'=> 'Medicine Dosage is deleted successfully',
         ]);
     }
 
@@ -172,7 +172,7 @@ class MedicineDogsController extends Controller
         ]);
 
         return response()->json([
-            'messages' => 'Medicine Dogs Permission has Updated Successfully',
+            'messages' => 'Medicine Dosage Permission has Updated Successfully',
             'code' => 202,
         ], 202);
     }

@@ -2,6 +2,35 @@
 @import "components-background/silver.css";
 @import "components-background/light-blue.css";
 @import "components-background/dropdown-apperence.css";
+
+.capsule-sm-skeleton {
+    background: linear-gradient(120deg, lightgray, transparent, #fff, lightgray);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    animation: 2s infinite load;
+    background-color: transparent;
+}
+@keyframes load{
+    100% {
+        background-position: -100% 0;
+    }
+}
+.capsule-sm-skeleton-focus {
+    border: 1px solid #ddd;
+}
+.server-loader {
+    width: 15px;
+    height: 15px;
+    transition: transform .5s;
+    transform: scale(3);
+}
+.loader-position {
+    text-align: center;
+    margin-top: 10px;
+}
+.error-hidden{
+    display: none;
+}
 .permission-card{
     border: none;
     border-radius: 5px;
@@ -70,26 +99,191 @@ input.subm_btn:hover{
 .custom-select{
     position: relative;
 }
+.alert_show_errors {
+    line-height: 1;
+    font-size: 12px;
+    font-weight: 600;
+    color: orangered;
+    letter-spacing: 1px;
+    animation-name: letterFocus;
+    animation-duration: 5000ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-delay: 1ms;
+    animation-timing-function: ease;
+    animation-play-state: running;
+    animation-fill-mode: forwards;
+}
+
+@keyframes letterFocus {
+    0% {
+        color: white;
+    }
+    30% {
+        color:lightgray;
+    }
+    70%{
+        color: orange;
+    }
+    100% {
+        color: orangered;
+    }
+}
+.select-box-animation{
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+    letter-spacing: 1px;
+    animation-name: focusLight;
+    animation-duration: 5000ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-delay: 1ms;
+    animation-timing-function: ease;
+    animation-play-state: running;
+    animation-fill-mode: forwards;
+}
+@keyframes focusLight {
+    0% {
+        color: lightgray;
+    }
+    70%{
+        color: darkblue;
+    }
+    100% {
+        color: black;
+    }
+}
+.select-box-animation2{
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+    letter-spacing: 1px;
+    animation-name: focusLight;
+    animation-duration: 5000ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-delay: 1ms;
+    animation-timing-function: ease;
+    animation-play-state: running;
+    animation-fill-mode: forwards;
+}
+.mid-topbar {
+    margin-left: 12px;
+    background-color: whitesmoke;
+    width: 98%;
+    background-image: repeating-linear-gradient(90deg, #e3e3e3, transparent 178px);
+    border-radius: 5px;
+}
+.mid-topbar-auth {
+    margin-left: 0px;
+    background-color: whitesmoke;
+    width: 100%;
+    background-image: repeating-linear-gradient(90deg, #e3e3e3, transparent 430px);
+    border-radius: 5px;
+}
+table.outline {
+    border-radius: 5px;
+}
+tr.table-head {
+    border-radius: 5px;
+}
+.select-field-hidden{
+    display: none;
+}
+.select-user-skeletone{
+    position: relative;
+}
+.select-user-skeletone::before{
+    content: "";
+    position: absolute;
+    left: 16px;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #eee, #f9f9f9, #eee);
+    background-size: 200%;
+    animation: usersSkeleton 1s infinite reverse;
+}
+@keyframes usersSkeleton{
+    0% {
+        background-position: -100% 0;
+    }
+    
+    100% {
+        background-position: 100% 0;
+    }
+}
 .custom-role-arrow{
     display: block;
     top: 0;
-    right: -1px;
+    right: -16px;
     position: absolute;
     width: 2rem;
     height: 100%;
-    background-image: var(--apperence-bg);
+    background-image: linear-gradient(to bottom, silver, transparent,silver,lightgray);
     pointer-events: none;
     border-radius: 3px;
     opacity: 1;
 }
+span#viewCard{
+    width: 100%;
+    height: 85%;
+    border-radius: 3px;
+    margin-left: 0px;
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    border: none;
+}
+.loarder-card {
+    width: 100%;
+    height: 125px;
+    border-radius: 3px;
+    margin-left: 0px;
+    margin-top: -126px;
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    border: none;
+    text-align: center;
+    position: relative;
+    animation: bgColor 1s infinite reverse;
+}
+@keyframes bgColor{
+    10%{
+        background-color: white;
+    }
+    70%{
+        background-color: rgb(247, 247, 247);
+    }
+    100%{
+        background-color: whitesmoke;
+    }
+}
+.label_hidden{
+    display: none;
+}
+.display_none{
+    display: none;
+}
+span.iconBx {
+    margin-top: 40px;
+}
+.mg_display{
+    display: none; 
+}
+.perm-hidden{
+    display: none;
+}
+.in_search-hidden{
+    display: none;
+}
 .custom-role-arrow2{
     display: block;
     top: 0;
-    right: -13px;
+    right: -7px;
     position: absolute;
     width: 2rem;
     height: 100%;
-    background-image: var(--apperence-bg);
+    background-image: linear-gradient(to bottom, silver, transparent,silver,lightgray);
     pointer-events: none;
     border-radius: 3px;
     opacity: 1;
@@ -105,19 +299,23 @@ input.subm_btn:hover{
     transform: translate(-50%,-50%);
 }
 .custom-role-arrow::before,.custom-role-arrow2::before{
-    border-left: var(--size) solid transparent;
-    border-right: var(--size) solid transparent;
+    /* border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent; */
+    border-left: var(--size) solid darkgray;
+    border-right: var(--size) solid darkgray;
     border-bottom: var(--size) solid rgb(255, 255, 255, 0.5);
     top: 30%;
 }
 .custom-role-arrow::after,.custom-role-arrow2::after{
-    border-left: var(--size) solid transparent;
-    border-right: var(--size) solid transparent;
+    /* border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent; */
+    border-left: var(--size) solid darkgray;
+    border-right: var(--size) solid darkgray;
     border-top: var(--size) solid rgb(255, 255, 255, 0.5);
     top: 70%;
 }
-select#select_role{
-    width: 86%;
+select#select_role,select#filter_select_role,select#filter_select_role_id,select#role_permission_status{
+    width: 100%;
     outline: none;
     border: 1px solid lightblue;
     font-size: 13px;
@@ -125,15 +323,90 @@ select#select_role{
     border-radius: 5px;
     cursor: pointer;
     background-image: var(--add-button-permission);
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    font-family: math;
 }
-select#select_role:hover{
+select#select_role,select#filter_select_role,select#filter_select_role_id,select#role_permission_status:hover{
     background-image: var(--button-hover);
+}
+.filter_select_role_id,.filter_select_role_istatus{
+    position: relative;
+}
+.filter_select_role_id::before,.filter_select_role_istatus::before{
+    content: "";
+    position: absolute;
+    box-sizing: border-box;
+    justify-content: space-between;
+    z-index: 2;
+    margin-left: 3px;
+    margin-top: 15px;
+    min-height: 12px;
+    width: 130px;
+    border-radius: 5px;
+    background: var(--dot-skeletone-bg);
+    background-size: 400% 100%;
+    animation-name: css-skeleton-loading;
+    animation-duration: 1.4s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+}
+@keyframes css-skeleton-loading{
+    0% {
+        background-position: var(--animation-background-position-0);
+    }
+    
+    100% {
+        background-position: var(--animation-background-position-100);
+    }
+}
+.filter_select_role_id::after,.filter_select_role_istatus::after{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    display: block;
+    transform: translate(-50%, -50%);
+    transition: all 200ms;
+}
+.select-display{
+    display: none;
+}
+span#num_plate {
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+}
+label.label_margin{
+    margin-top: 3px;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+}
+span#strDate span#enDate{
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
 }
 span.permission_text {
     font-weight: 700;
     font-size: 14px;
     letter-spacing: 0.5px;
     font-family: math;
+}
+.role_nme {
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+}
+input#input_permission_inventory_id {
+    width: 100%;
+    outline: none;
+    border: 1px solid lightblue;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 5px;
+    /* background-image: var(--add-button-permission); */
+    color: black;
+    letter-spacing: 1px;
+    animation-name: focusLight;
+    animation-duration: 5000ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-delay: 1ms;
+    animation-timing-function: ease;
+    animation-play-state: running;
+    animation-fill-mode: forwards;
 }
 a.edit_back{
     text-decoration: var(--text-underline);
@@ -183,6 +456,45 @@ input.update_btn:hover{
     }
     85% {
         letter-spacing: 10px;
+    }
+}
+
+/* Mobile-Responsive */
+@media (min-width:300px) and (max-width:480px){
+    a#side_bar {
+        display: none;
+    }
+    span.admin_email {
+        font-size: 12px;
+        margin-left: 10px;
+    }
+    nav.dsh_nav {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        width: auto;
+        font-size: 10px;
+    }
+    button#inventory_active,button#inventory_inactive {
+        font-size: 10px;
+    }
+    span.plantform{
+        font-size: 10px;
+    }
+    p.small.server {
+        margin-top: 12px;
+    }
+    select#select_role {
+        width: 86%;
+    }
+    span.custom-role-arrow2 {
+        right: 25px;
+    }
+    option {
+        cursor: pointer;
+        font-size: 10px;
+        width: 100px;
+        height: 2em;
     }
 }
 

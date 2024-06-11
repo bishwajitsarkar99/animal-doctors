@@ -34,56 +34,67 @@ class MedicineInventory extends Controller
     }
 
     // get inventory for edit table
-    public function getData(Request $request)
-    {
+    public function getData(Request $request){
         if (!$request->ajax()) {
-            // return abort(404);
+            return abort(404);
         }
     
-        $startOfWeek = Carbon::now()->startOfWeek();
-        $endOfWeek = Carbon::now()->endOfWeek();
-    
-        $data = Inventory::with(['suppliers', 'sub_categories', 'medicine_groups', 'medicine_names', 'medicine_origins', 'medicine_dogs', 'units'])
-            ->orderBy('inventory_id', 'desc')
-            ->latest()
-            ->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
+        $fiveMinutesAgo = Carbon::now()->subMinutes(5);
+        $now = Carbon::now();
+        $data = Inventory::with([
+                'suppliers', 
+                'sub_categories', 
+                'medicine_groups', 
+                'medicine_names', 
+                'medicine_origins', 
+                'medicine_dogs', 
+                'units',
+            ])
+            ->whereBetween('updated_at', [$fiveMinutesAgo, $now])
+            ->orderBy('inventory_id', 'desc');
     
         if ($query = $request->get('query')) {
-            $data->where('id_name', 'LIKE', '%' . $query . '%')
-                ->orWhere('medicine_name', 'LIKE', '%' . $query . '%')
-                ->orWhere('medicine_group', 'LIKE', '%' . $query . '%');
+            $data->where(function($q) use ($query) {
+                $q->where('id_name', 'LIKE', '%' . $query . '%')
+                  ->orWhere('medicine_name', 'LIKE', '%' . $query . '%')
+                  ->orWhere('medicine_group', 'LIKE', '%' . $query . '%');
+            });
         }
-    
         $perItem = $request->input('per_item', 10);
-    
         $data = $data->paginate($perItem)->toArray();
     
         return response()->json($data, 200);
     }
-
+    
     // get inventory unauthorized data
     public function unauthorizedData(Request $request)
     {
         if (!$request->ajax()) {
-            // return abort(404);
+            return abort(404);
         }
     
-        $startOfWeek = Carbon::now()->startOfWeek();
-        $endOfWeek = Carbon::now()->endOfWeek();
-    
-        $data = Inventory::with(['suppliers', 'sub_categories', 'medicine_groups', 'medicine_names', 'medicine_origins', 'medicine_dogs', 'units'])
-            ->orderBy('inventory_id', 'desc')
-            ->latest()
-            ->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+        $data = Inventory::with([
+                'suppliers', 
+                'sub_categories', 
+                'medicine_groups', 
+                'medicine_names', 
+                'medicine_origins', 
+                'medicine_dogs', 
+                'units'
+            ])
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+            ->orderBy('inventory_id', 'desc');
     
         if ($query = $request->get('query')) {
-            $data->where('id_name', 'LIKE', '%' . $query . '%')
-                ->orWhere('medicine_name', 'LIKE', '%' . $query . '%')
-                ->orWhere('medicine_group', 'LIKE', '%' . $query . '%');
+            $data->where(function($q) use ($query) {
+                $q->where('id_name', 'LIKE', '%' . $query . '%')
+                  ->orWhere('medicine_name', 'LIKE', '%' . $query . '%')
+                  ->orWhere('medicine_group', 'LIKE', '%' . $query . '%');
+            });
         }
-    
         $perItem = $request->input('per_item', 10);
-    
         $data = $data->paginate($perItem)->toArray();
     
         return response()->json($data, 200);
@@ -101,7 +112,7 @@ class MedicineInventory extends Controller
             "data.*.category_id" => "required",
             "data.*.group_name" => "required",
             "data.*.medicine_name" => "required",
-            "data.*.medicine_dogs" => 'required',
+            "data.*.medicine_dosage" => 'required',
             "data.*.origin_name" => "required",
             "data.*.medicine_size" => "required",
             "data.*.unit_price" => 'required',
@@ -109,7 +120,7 @@ class MedicineInventory extends Controller
             "data.*.amount" => 'required',
             "data.*.sub_total" => 'required',
         ], [
-            'data.*.medicine_dogs.required' => 'Medicine Dosage is required.',
+            'data.*.medicine_dosage.required' => 'Medicine Dosage is required.',
             'data.*.sub_total.required' => 'Net amount is required.',
             'data.*.quantity.required' => 'Medicine quantity is required.',
             'data.*.unit_price.required' => 'Medicine unit price is required.',
@@ -140,7 +151,7 @@ class MedicineInventory extends Controller
                     "category_id" => $item['category_id'],
                     "medicine_group" => $item['group_name'],
                     "medicine_name" => $item['medicine_name'],
-                    "medicine_dogs" => $item['medicine_dogs'],
+                    "medicine_dosage" => $item['medicine_dosage'],
                     "medicine_origin" => $item['origin_name'],
                     "medicine_size" => $item['medicine_size'],
                     "price" => $item['unit_price'],
@@ -151,18 +162,19 @@ class MedicineInventory extends Controller
                     "vat_percentage" => $item['vat'],
                     "tax_percentage" => $item['tax'],
                     'discount_percentage' => isset($item['discount_percentage']) ? $item['discount_percentage'] : 0,
-
+                    "user_id" => Auth::user()->id,
                 ]);
+                
             }
         }
 
         //$request->created_by = Auth::user()->id;
         return response()->json([
-            'message' => 'Inventory has created successfully.',
+            'messages' => 'Inventory has created successfully.',
             'code' => 200,
         ]);
     }
-
+    
     // Inventory Edit
     public function editInventory($inventory_id)
     {
@@ -191,12 +203,12 @@ class MedicineInventory extends Controller
             'category_id' => 'required',
             'medicine_group' => 'required',
             'medicine_name' => 'required|max:191',
-            'medicine_dogs' => 'required|max:191',
+            'medicine_dosage' => 'required|max:191',
             'medicine_size' => 'required|max:191',
             'quantity' => 'required',
             'amount' => 'required',
         ], [
-            'medicine_dogs.required' => 'Medicine Dosage is required.',
+            'medicine_dosage.required' => 'Medicine Dosage is required.',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -213,7 +225,7 @@ class MedicineInventory extends Controller
                 $inventories->category_id = $request->input('category_id');
                 $inventories->medicine_group = $request->input('medicine_group');
                 $inventories->medicine_name = $request->input('medicine_name');
-                $inventories->medicine_dogs = $request->input('medicine_dogs');
+                $inventories->medicine_dosage = $request->input('medicine_dosage');
                 $inventories->medicine_origin = $request->input('medicine_origin');
                 $inventories->medicine_size = $request->input('medicine_size');
                 $inventories->price = $request->input('price');

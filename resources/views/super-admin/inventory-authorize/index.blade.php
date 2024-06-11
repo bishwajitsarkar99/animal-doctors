@@ -2,12 +2,12 @@
 @section('content')
 @include('backend.layouts.dashboard-components._navbar')
 <div class="inventory-bg-color">
-  <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_authorize')" id="inventory_active">Inventory-Authorize</button>
+  <button class="tablinkinventory ms-1 ps-2 pe-2 mb-1 mt-1" onclick="openinventoryLink(event,'inventory_authorize')" id="inventory_active">Inventory-Authorize</button>
   <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_delete')" id="inventory_inactive">Inventory-Details</button>
   <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_permission')" id="inventory_inactive">Permission</button>
 </div>
-<div id="inventory_authorize" class="supp mt-">
-  <div class="card form-control card-body form-control-sm" id="inventory_page">
+<div id="inventory_authorize" class="supp">
+  <div class="card form-control card-body form-control-sm pb-4" id="inventory_page">
     @include('super-admin.inventory-authorize._inventory-authorize-table')
   </div>
 </div>
@@ -17,10 +17,11 @@
   </div>
 </div>
 <div id="inventory_permission" class="supp mt-" style="display: none;">
-  <div class="card form-control form-control-sm" id="permission_page">
-    @include('super-admin.inventory-authorize._permission')
-  </div>
+  <!-- <div class="card form-control form-control-sm" id="permission_page">
+    
+  </div> -->
   <div class="card form-control form-control-sm mt-" id="permission_access_page">
+    @include('super-admin.inventory-authorize._permission')
     @include('super-admin.inventory-authorize._inventory_permission_table')
   </div>
 </div>
@@ -30,6 +31,7 @@
 </div>
 {{-- Start Delete Inventory Modal--}}
 @include('super-admin.inventory-authorize._delete-inventory')
+@include('super-admin.inventory-authorize.data-handel-ajax._delete_permission')
 {{-- End Delete Inventory Modal---}}
 
 @endsection
@@ -37,7 +39,7 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/inventory/medicine-inventory.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/inventory/authorize_table.css">
-<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-ui.min.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-date-ui.min.css">
 <!-- ================ permission-css ================= -->
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/permission/permission.css">
 @endsection
@@ -45,7 +47,11 @@
 @section('script')
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
 <script src="{{asset('backend_asset')}}/support_asset/scrollbar-table-js/jquery-scrollbar-table-1.00.js"></script>
+<script src="{{asset('backend_asset')}}/main_asset/js/inventory-counter.js"></script>
+<script src="{{asset('backend_asset')}}/main_asset/js/date-formate.js"></script>
 @include('super-admin.inventory-authorize.data-handel-ajax._inventory-authorize-table')
+@include('super-admin.inventory-authorize.data-handel-ajax._filter-permission-data-ajax')
+@include('super-admin.inventory-authorize._get-all-inventory')
 <script>
   // skeleton
   function fetchData() {
@@ -83,6 +89,16 @@
       changeMonth: true,
       changeYear: true,
     });
+    $('#start_of_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
+    $('#end_of_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
   });
 </script>
 <script>
@@ -107,7 +123,7 @@
   $(document).ready(function() {
     $("#inventory_active").addClass('inventory-seeblue');
   });
-  // Supplier summary =======
+  // Tabl Link =======
   function openinventoryLink(evt, animName) {
     var i, x, tablinkinventory;
     x = document.getElementsByClassName("supp");
@@ -144,64 +160,5 @@
     });
   });
 </script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const toggleElementCheckbox = document.getElementById('toggleElement');
-    const toggleColumnCheckbox = document.getElementById('toggleColumn');
-    const myTable = document.getElementById('myTable');
 
-    // Check if a value is saved in localStorage, if so, apply it
-    if (localStorage.getItem('elementVisibility')) {
-      const visibility = JSON.parse(localStorage.getItem('elementVisibility'));
-      const cell11 = document.getElementById('cell11');
-      const cell21 = document.getElementById('cell21');
-      cell11.style.display = visibility ? 'table-cell' : 'none';
-      cell21.style.display = visibility ? 'table-cell' : 'none';
-      toggleElementCheckbox.checked = visibility;
-    }
-
-    if (localStorage.getItem('columnVisibility')) {
-      const visibility = JSON.parse(localStorage.getItem('columnVisibility'));
-      myTable.rows[0].cells[1].style.display = visibility ? 'table-cell' : 'none';
-      myTable.rows[1].cells[1].style.display = visibility ? 'table-cell' : 'none';
-      myTable.rows[0].cells[2].style.display = visibility ? 'table-cell' : 'none';
-      myTable.rows[1].cells[2].style.display = visibility ? 'table-cell' : 'none';
-      toggleColumnCheckbox.checked = visibility;
-    }
-
-    // Event listener for toggle element checkbox change
-    toggleElementCheckbox.addEventListener('change', function() {
-      const isChecked = this.checked;
-      const cell11 = document.getElementById('cell11');
-      const cell21 = document.getElementById('cell21');
-      cell11.style.display = isChecked ? 'table-cell' : 'none';
-      cell21.style.display = isChecked ? 'table-cell' : 'none';
-
-      // Save the visibility state to localStorage
-      localStorage.setItem('elementVisibility', isChecked);
-    });
-
-    // Event listener for toggle column checkbox change
-    toggleColumnCheckbox.addEventListener('change', function() {
-      const isChecked = this.checked;
-      myTable.rows[0].cells[1].style.display = isChecked ? 'table-cell' : 'none';
-      myTable.rows[1].cells[1].style.display = isChecked ? 'table-cell' : 'none';
-      myTable.rows[0].cells[2].style.display = isChecked ? 'table-cell' : 'none';
-      myTable.rows[1].cells[2].style.display = isChecked ? 'table-cell' : 'none';
-
-      // Save the visibility state to localStorage
-      localStorage.setItem('columnVisibility', isChecked);
-    });
-  });
-</script>
-<!-- <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const styledText = document.getElementById('styledText');
-    const changeStyleButton = document.getElementById('changeStyleButton');
-
-    changeStyleButton.addEventListener('click', function() {
-        styledText.classList.toggle('changed-style');
-    });
-  });
-</script> -->
 @endsection

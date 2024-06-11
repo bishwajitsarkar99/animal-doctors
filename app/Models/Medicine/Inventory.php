@@ -8,7 +8,10 @@ use App\Models\MedicineGroup;
 use App\Models\MedicineName;
 use App\Models\MedicineOrigin;
 use App\Models\Unit;
+use App\Models\User;
+use App\Models\Role;
 use App\Models\Supplier\Supplier;
+use App\Models\Permission\InventoryPermission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,12 +20,13 @@ class Inventory extends Model
     use HasFactory;
     protected $primaryKey = 'inventory_id';
     protected $fillable = [
+        'user_id',
         'inv_id',
         'supplier_id',
         'category_id',
         'medicine_group',
         'medicine_name',
-        'medicine_dogs',
+        'medicine_dosage',
         'medicine_origin',
         'medicine_size',
         'price',
@@ -37,8 +41,8 @@ class Inventory extends Model
         'manufacture_date',
         'expiry_date',
         'updated_by',
-        'status_stock',
-        'stock_id',
+        'permission_token',
+        'approved_by',
     ];
 
     protected $casts = [
@@ -55,6 +59,10 @@ class Inventory extends Model
     public function roles()
     {
         return $this->hasOne(Role::class,'id', 'role');
+    }
+
+    public function users() {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function suppliers()
@@ -78,17 +86,22 @@ class Inventory extends Model
 
     public function medicine_origins()
     {
-        return $this->belongsTo(MedicineOrigin::class, 'origin_name','id');
+        return $this->belongsTo(MedicineOrigin::class, 'medicine_origin','id');
     }
 
     public function medicine_dogs()
     {
-        return $this->belongsTo(MedicineDogs::class, 'medicine_dogs','id');
+        return $this->belongsTo(MedicineDogs::class, 'medicine_dosage','id');
     }
     
     public function units()
     {
-        return $this->belongsTo(Unit::class, 'units_name','id');
+        return $this->belongsTo(Unit::class, 'medicine_size','id');
+    }
+
+    public function inventory_permissions()
+    {
+        return $this->hasMany(InventoryPermission::class, 'inv_inventory_id', 'inventory_id');
     }
 
 }

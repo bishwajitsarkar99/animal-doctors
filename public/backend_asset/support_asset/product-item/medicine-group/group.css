@@ -1,5 +1,5 @@
 :root{
-    --table-row-hover:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
     --bg-color:purple;
     --color:royalblue;
     --size:1px;

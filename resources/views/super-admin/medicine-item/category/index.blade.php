@@ -25,7 +25,8 @@
             <div class="col-5">
               <span id="search_plate">
                 <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.Category Search.........')}}">
-                <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
+                <!-- <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="color:rgb(13, 110, 253);opacity:1;"></i> -->
+                <i class="catg_search-icon fa fa-solid fa-bahai fa-spin catg_search-hidden" style="color:rgb(13, 110, 253);opacity:1;"></i>
               </span>
             </div>
           </div>
@@ -35,8 +36,8 @@
                 <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="table_th_color skeleton txt col ps-1 pt-1" style="cursor: move;">{{__('translate.ID')}}</th>
                 <th id="th_sort" draggable="true" class="table_th_color tot_pending_ skeleton col ps-1 pt-1" style="cursor: move;">{{__('translate.Action')}}</th>
                 <th id="th_sort" draggable="true" class="table_th_color tot_pending_ skeleton col ps-1 pt-1" style="text-align: left;cursor: move;">{{__('translate.Category-Name')}}</th>
-                <th id="th_sort" draggable="true" class="table_th_color tot_pending_ check_border skeleton col pt-1" style="cursor: move;">{{__('translate.Check')}}</th>
                 <th id="th_sort" class="table_th_color tot_pending_ skeleton col ps-1 pt-1">{{__('translate.Status')}}</th>
+                <th id="th_sort" draggable="true" class="table_th_color tot_pending_ check_border skeleton col pt-1" style="cursor: move;">{{__('translate.Check')}}</th>
               </tr>
               <tbody class="bg-transparent" id="category_data_table">
 
@@ -87,11 +88,11 @@
                 </div>
                 <p style="text-align: end;">
                   <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" id="save">
-                    <i class="add-icon fa fa-spinner fa-spin add-hidden"></i>
+                    <i class="add-icon fa fa-solid fa-asterisk fa-spin add-hidden"></i>
                     <span class="btn-text">ADD</span>
                   </button>
                   <button id="update_btn" class="btn btn-sm cgt_btn btn_focus skeleton mt-2">
-                    <i class="update-icon fa fa-spinner fa-spin update-hidden"></i>
+                    <i class="update-icon fa fa-solid fa-asterisk fa-spin update-hidden"></i>
                     <span class="btn-text">Update</span>
                   </button>
                   <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton mt-2">Cancel</button>

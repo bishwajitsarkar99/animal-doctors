@@ -39,8 +39,8 @@
                 <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1 pt-1">{{__('translate.Action')}}</th>
                 <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1 pt-1">{{__('translate.Category')}}</th>
                 <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1 pt-1" style="text-align: left;">{{__('translate.sub-Category-Name')}}</th>
-                <th id="th_sort" class="table_th_color tot_pending_ col skeleton check_border pt-1">{{__('translate.Check')}}</th>
                 <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1 pt-1">{{__('translate.Status')}}</th>
+                <th id="th_sort" class="table_th_color tot_pending_ col skeleton check_border pt-1">{{__('translate.Check')}}</th>
               </tr>
               <tbody class="bg-transparent" id="subcategory_data_table">
 

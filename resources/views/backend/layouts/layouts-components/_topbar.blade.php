@@ -54,20 +54,33 @@
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="themeMenuListBackground">
             @if(auth()->user()->role ==0)
             <li>
-                <a class="dropdown-item pro_link" id="profile_urllinks"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</a>
+                <a class="dropdown-item pro_link" id="profile_urllinks">
+                    <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
+                </a>
+                <span class="ms-2" id="profileSkel"></span>
+                
             </li>
             @elseif(auth()->user()->role ==2)
             <li>
-                <a class="dropdown-item pro_link" id="profile_urllinks"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</a>
+                <a class="dropdown-item pro_link" id="profile_urllinks">
+                    <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
+                </a>
+                <span class="ms-2" id="profileSkel"></span>
             </li>
             @elseif(auth()->user()->role ==3)
             <li>
-                <a class="dropdown-item pro_link" id="profile_urllinks"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</a>
+                <a class="dropdown-item pro_link" id="profile_urllinks">
+                    <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
+                </a>
+                <span class="ms-2" id="profileSkel"></span>
             </li>
             <li>
-                @elseif(auth()->user()->role ==1)
+            @elseif(auth()->user()->role ==1)
             <li>
-                <a class="dropdown-item pro_link" id="profile_urllinks"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</a>
+                <a class="dropdown-item pro_link" id="profile_urllinks">
+                    <span class="show-profile badge rounded-pill bg-green text-white" hidden><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
+                </a>
+                <span class="show-prof ms-2" id="profileSkel"></span>
             </li>
             <!-- <li>
                 <a class="dropdown-item pro_link" id="themsetting_click"><i class="fa-solid fa-gear"></i> Theme Setting</a>
@@ -78,7 +91,10 @@
             </li> -->
             @endif
             <li>
-                <a class="dropdown-item pro_link mt-2" id="logout_click"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Logout')}}</a>
+                <a class="dropdown-item pro_link" id="logout_click">
+                    <span class="show-logout badge rounded-pill bg-danger text-white" hidden><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Logout')}}</span>
+                    <span class="show-log ms-2" id="logoutSkel"></span>
+                </a>
             </li>
         </ul>
     </li>

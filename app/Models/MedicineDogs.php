@@ -10,7 +10,7 @@ class MedicineDogs extends Model
     use HasFactory;
     protected $tabl='medicine_dogs';
     protected $fillable =[
-        'medicine_dogs',
+        'name',
         'created_at',
         'updated_at',
         'status',
