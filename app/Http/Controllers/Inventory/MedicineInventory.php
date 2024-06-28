@@ -39,18 +39,20 @@ class MedicineInventory extends Controller
             return abort(404);
         }
     
-        $fiveMinutesAgo = Carbon::now()->subMinutes(5);
+        // $fiveMinutesAgo = Carbon::now()->subMinutes(5);
+        $oneDayAgo = Carbon::now()->subDay();
         $now = Carbon::now();
         $data = Inventory::with([
-                'suppliers', 
-                'sub_categories', 
-                'medicine_groups', 
-                'medicine_names', 
-                'medicine_origins', 
-                'medicine_dogs', 
-                'units',
-            ])
-            ->whereBetween('updated_at', [$fiveMinutesAgo, $now])
+            'suppliers', 
+            'sub_categories', 
+            'medicine_groups', 
+            'medicine_names', 
+            'medicine_origins', 
+            'medicine_dogs', 
+            'units',
+        ])
+            ->where('status_inv', '=', 0)
+            ->whereBetween('updated_at', [$oneDayAgo, $now])
             ->orderBy('inventory_id', 'desc');
     
         if ($query = $request->get('query')) {
@@ -207,6 +209,7 @@ class MedicineInventory extends Controller
             'medicine_size' => 'required|max:191',
             'quantity' => 'required',
             'amount' => 'required',
+            'status_inv' => 'required',
         ], [
             'medicine_dosage.required' => 'Medicine Dosage is required.',
         ]);
@@ -235,7 +238,7 @@ class MedicineInventory extends Controller
                 $inventories->tax_percentage = $request->input('tax_percentage');
                 $inventories->vat_percentage = $request->input('vat_percentage');
                 $inventories->sub_total = $request->input('sub_total');
-                $inventories->status_inv = $request->status_inv == true ? '1' : '0';
+                $inventories->status_inv = $request->input('status_inv');
                 $inventories->updated_by = Auth::user()->id;
                 $inventories->update();
                 return response()->json([

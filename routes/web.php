@@ -39,7 +39,7 @@ use App\Http\Controllers\Supplier\SupplierController;
 use App\Http\Controllers\UserController;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Permission\InventoryAccessPermission;
 
 Route::get('/', function () {
     return view('welcome');
@@ -71,11 +71,11 @@ Route::group(['middleware' => 'auth'], function () {
     // Permission
     Route::middleware('isSuperAdmin')->group(function(){
         Route::get('/all-permission',[PermissionController::class, 'index'])->name('permission.show');
-        Route::get('/create-permission',[PermissionController::class, 'createPermission'])->name('permission.create');
+        Route::get('/get-email/{selectedRole}',[PermissionController::class, 'getEmail'])->name('permission.email');
         Route::post('/store-permission',[PermissionController::class, 'storePermission'])->name('permission.store');
         Route::get('/edit-permission/{id}',[PermissionController::class, 'editPermission'])->name('permission.edit');
-        Route::post('/update-permission/{id}',[PermissionController::class, 'updatePermission'])->name('permission.update');
-        Route::get('/delete-permission/{id}',[PermissionController::class, 'deletePermission'])->name('permission.delete');
+        Route::put('/update-permission/{id}',[PermissionController::class, 'updatePermission'])->name('permission.update');
+        Route::delete('/delete-permission/{id}',[PermissionController::class, 'deletePermission'])->name('permission.delete');
         Route::post('/permission-status-update',[PermissionController::class, 'permissionStatusUpdate'])->name('permission.status_update');
     });
     //Admin-Panel partial-part(dashboard-pivot table)
@@ -218,8 +218,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('super-admin/inventory-data-request', [InventoryAuthorization::class, 'searchInventory'])->name('inventory-search.action');
         Route::get('super-admin/inventory-get', [InventoryAuthorization::class, 'getInventoryData'])->name('search-inventory.action');
         Route::post('super-admin/inventory-status', [InventoryAuthorization::class, 'inventoryAuthorize'])->name('inventory-authorize.action');
-        Route::get('super-admin/get-inventory-delete-data', [InventoryAuthorization::class, 'getInventoryDeleteData'])->name('get_inventory_data.action');
-        Route::get('super-admin/inventory-authorize-data-get', [InventoryAuthorization::class, 'inventoryAuthorizeData'])->name('inventory_authorize.action');
         // inventory permission
         Route::post('super-admin/inventory-permission-update', [InventoryAuthorization::class, 'inventoryPermissionStatusUpdate'])->name('inventory_permission_status.action');
         Route::delete('super-admin/delete-inventory-permission/{id}', [InventoryAuthorization::class, 'inventoryPermissionDelete'])->name('inventory_permission_delete.action');
@@ -287,29 +285,50 @@ Route::group(['middleware' => 'auth'], function () {
     });
     
     // ************Common URL for Super-admin & Admin (Inventory and Stock)******************
-    Route::middleware(['role:SuperAdmin|Admin'])->group( function(){
+    // Route::middleware(['role:SuperAdmin|Admin'])->group( function(){
 
-        // ********** (Common-data)Post for admin and superadmin *********
+
+    //     Route::get('/request-data/{id}', [MedicinePostController::class, 'requestSubcategory']);
+    //     Route::get('/request-medicine-name/{id}', [MedicinePostController::class, 'requestMedicineName']);
+    //     Route::get('/request-medicine-dogs/{id}', [MedicinePostController::class, 'requestMedicineDogs']);
+
+    //     Route::get('admin/inventories', [MedicineInventory::class, 'index'])->name('medicine-inventory.index');
+    //     Route::post('admin/inventories', [MedicineInventory::class, 'store'])->name('medicine-inventory.store');
+    //     Route::get('admin/inventories-edit-get',[MedicineInventory::class, 'getData'])->name('search-inv.action');
+    //     Route::get('/inventories-edit/{inventory_id}',[MedicineInventory::class, 'editInventory']);
+    //     Route::put('/inventories-update/{inventory_id}', [MedicineInventory::class, 'updateInventory'])->name('update_inventory.action');
+    //     Route::get('admin/inventories-unauthorized-data',[MedicineInventory::class, 'unauthorizedData'])->name('search-unauthorized.action');
+        
+
+    //     Route::get('admin/stock', [StockController::class, 'index'])->name('stock.index');
+    //     Route::post('admin/stock', [StockController::class, 'storeStock'])->name('stock.store');
+    //     Route::get('admin/stock-edit-get', [StockController::class, 'getData'])->name('seach-stock.action');
+    //     Route::get('admin/stock-edit/{id}', [StockController::class, 'editStock']);
+    //     Route::put('admin/stock-update/{id}', [StockController::class, 'updateStock'])->name('update_stock.action');
+    //     Route::get('admin/stock-details', [StockController::class, 'getStock'])->name('stock-details.action');
+
+    // });
+
+
+    Route::middleware(['inventoryPermission'])->group(function () {
         Route::get('/request-data/{id}', [MedicinePostController::class, 'requestSubcategory']);
         Route::get('/request-medicine-name/{id}', [MedicinePostController::class, 'requestMedicineName']);
         Route::get('/request-medicine-dogs/{id}', [MedicinePostController::class, 'requestMedicineDogs']);
-        // Medicine-Inventory
-        Route::get('admin/inventories', [MedicineInventory::class, 'index'])->name('medicine-inventory.index');
-        Route::post('admin/inventories', [MedicineInventory::class, 'store'])->name('medicine-inventory.store');
-        Route::get('admin/inventories-edit-get',[MedicineInventory::class, 'getData'])->name('search-inv.action');
-        Route::get('/inventories-edit/{inventory_id}',[MedicineInventory::class, 'editInventory']);
-        Route::put('/inventories-update/{inventory_id}', [MedicineInventory::class, 'updateInventory'])->name('update_inventory.action');
-        Route::get('admin/inventories-unauthorized-data',[MedicineInventory::class, 'unauthorizedData'])->name('search-unauthorized.action');
         
-        // Stock
-        Route::get('admin/stock', [StockController::class, 'index'])->name('stock.index');
-        Route::post('admin/stock', [StockController::class, 'storeStock'])->name('stock.store');
-        Route::get('admin/stock-edit-get', [StockController::class, 'getData'])->name('seach-stock.action');
-        Route::get('admin/stock-edit/{id}', [StockController::class, 'editStock']);
-        Route::put('admin/stock-update/{id}', [StockController::class, 'updateStock'])->name('update_stock.action');
-        Route::get('admin/stock-details', [StockController::class, 'getStock'])->name('stock-details.action');
-
+        // Medicine-Inventory
+        Route::prefix('medicine')->group(function () {
+            Route::get('/inventories', [MedicineInventory::class, 'index'])->name('medicine-inventory.index');
+            Route::post('/inventories', [MedicineInventory::class, 'store'])->name('medicine-inventory.store');
+            Route::get('/inventories-edit-get', [MedicineInventory::class, 'getData'])->name('search-inv.action');
+            Route::get('/inventories-edit/{inventory_id}', [MedicineInventory::class, 'editInventory']);
+            Route::put('/inventories-update/{inventory_id}', [MedicineInventory::class, 'updateInventory'])->name('update_inventory.action');
+            Route::get('/inventories-unauthorized-data', [MedicineInventory::class, 'unauthorizedData'])->name('search-unauthorized.action');
+        });
+        
     });
+
+
+
     // File - Manager System
     Route::middleware(['role:SuperAdmin|Admin|SubAdmin'])->group(function(){
         Route::get('file-manager/modal-content', [FileManagerController::class, 'modalContent'])->name('file.modalContent');

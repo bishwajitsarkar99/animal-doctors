@@ -27,7 +27,7 @@ class RoleMiddleware
         }
 
         if($status == false){
-            abort(403, 'Unauthorized'); // Throw an UnauthorizedException
+            abort(403, 'Unauthorized');
         }
 
         return $next($request);
@@ -41,7 +41,7 @@ class RoleMiddleware
      */
     private function hasRole(string $roleName) {
 
-        $roles = ['SuperAdmin', 'SubAdmin', 'Admin', 'User'];
+        $roles = ['SuperAdmin', 'SubAdmin', 'Admin', 'User', 'Accounts', 'Marketing', 'Delivery Team'];
 
         return \in_array($roleName, $roles);
     }

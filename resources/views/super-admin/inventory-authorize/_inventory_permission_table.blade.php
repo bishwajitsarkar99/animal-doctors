@@ -38,7 +38,7 @@
             </label>
         </div>
         <div class="col-xl-2">
-            <div class="form-group custom-select skeleton mt-1 mb-1">
+            <div class="form-group custom-select skeleton ms-2 mt-1 mb-1">
                 <input class="input_permission_inventory_id ps-2" type="search" name="inv_permission_id" id="input_permission_inventory_id" placeholder="search......" style="color:black;font-weight:600;"/>
             </div>
         </div>
@@ -115,7 +115,7 @@
                     <option class="skeleton" style="color:black;">100</option>
                     <option class="skeleton" style="color:black;">200</option>
                 </select>
-                <span class="custom-list-items-arrow me-2"></span>
+                <span class="custom-list-items-arrow-two me-2"></span>
             </div>
         </div>
         <div class="col-xl-2">

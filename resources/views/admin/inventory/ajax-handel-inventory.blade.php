@@ -285,6 +285,7 @@
                         $('.tax').val(response.messages.tax_percentage);
                         $('.discount_percentage').val(response.messages.discount_percentage);
                         $('.sub_total').val(response.messages.sub_total);
+                        $('.status_inv').val(response.messages.status_inv);
 
                         setMedicineNameOptions(response.messages.medicine_group, response.messages.medicine_name);
                         setMedicineDogsOptions(response.messages.medicine_name, response.messages.medicine_dosage);
@@ -327,8 +328,15 @@
                 }
             });
         }
+        // update button modal
+        $(document).on('click', '#update_btn', function(e){
+            e.preventDefault();
+            var statusInvValue = 1;
+            $('.status_inv').val(statusInvValue);
+            $("#updateModal").modal('show');
+        });
         // Update Inventory
-        $(document).on('click', '#update_btn', function(e) {
+        $(document).on('click', '.update_btn', function(e) {
             e.preventDefault();
 
             var inventory_id = $('#inventory_id').val();
@@ -350,6 +358,7 @@
                 'tax_percentage': $('.tax').val(),
                 'discount_percentage': $('.discount_percentage').val(),
                 'sub_total': $('.sub_total').val(),
+                'status_inv': $('.status_inv').val(),
             }
 
             $.ajaxSetup({
@@ -407,7 +416,10 @@
                         $('.tax').val("");
                         $('.discount_percentage').val("");
                         $('.sub_total').val("");
-
+                        $('.status_inv').val("");
+                        $("#updateModal").modal('hide');
+                        $("#update_btn").hide();
+                        $("#save").show();
                         setTimeout(() => {
                             $('#success_message').fadeOut(3000);
                         }, 3000);

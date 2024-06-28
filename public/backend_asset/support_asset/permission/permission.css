@@ -2,7 +2,51 @@
 @import "components-background/silver.css";
 @import "components-background/light-blue.css";
 @import "components-background/dropdown-apperence.css";
-
+:root{
+    --apperence-app-setting-bg:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --background-color:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, white, rgba(0, 0, 0, 0.05) 100%);
+    --animation-background-position-0:100% 50%;
+    --animation-background-position-100:0 50%;
+    --dot-skeletone-bg:linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%);
+}
+.search-skeletone{
+    position: relative;
+}
+.search-skeletone::before{
+    content: "";
+    position: absolute;
+    box-sizing: border-box;
+    justify-content: space-between;
+    z-index: 2;
+    margin-left: -167px;
+    margin-top: -10px;
+    min-height: 14px;
+    width: 166px;
+    border-radius: 5px;
+    background: var(--dot-skeletone-bg);
+    background-size: 400% 100%;
+    animation-name: css-skeleton-loading;
+    animation-duration: 1.4s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+}
+@keyframes css-skeleton-loading{
+    0% {
+        background-position: var(--animation-background-position-0);
+    }
+    
+    100% {
+        background-position: var(--animation-background-position-100);
+    }
+}
+.search-skeletone::after{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    display: block;
+    transform: translate(-50%, -50%);
+    transition: all 200ms;
+}
 .capsule-sm-skeleton {
     background: linear-gradient(120deg, lightgray, transparent, #fff, lightgray);
     background-size: 200% 100%;
@@ -14,6 +58,170 @@
     100% {
         background-position: -100% 0;
     }
+}
+.bg-green {
+    background-color: #198754;
+}
+.custom-select{
+    position: relative;
+}
+select#perItemControls {
+    border: none;
+    background-image: linear-gradient(to top, silver, transparent, silver, lightgray);
+    outline: none;
+    color: black;
+    font-weight: 700;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 57px;
+    font-size: 12px;
+}
+.custom-list-items-arrow-two {
+    display: block;
+    top: 4px;
+    right: -3px;
+    position: absolute;
+    width: 1rem;
+    height: 77%;
+    background-image: var(--apperence-app-setting-bg);
+    pointer-events: none;
+    border-radius: 3px;
+    opacity: 1;
+    cursor: pointer;
+}
+.custom-list-items-arrow {
+    display: block;
+    top: 4px;
+    right: 15px;
+    position: absolute;
+    width: 1rem;
+    height: 77%;
+    background-image: var(--apperence-app-setting-bg);
+    pointer-events: none;
+    border-radius: 3px;
+    opacity: 1;
+    cursor: pointer;
+}
+.custom-list-items-arrow::before,.custom-list-items-arrow-two::before {
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-bottom: var(--size) solid darkgray;
+    top: 23%;
+}
+.custom-list-items-arrow::after,.custom-list-items-arrow-two::after {
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid darkgray;
+    top: 70%;
+}
+.custom-list-items-arrow::before, .custom-list-items-arrow::after ,.custom-list-items-arrow-two::before,.custom-list-items-arrow-two::after{
+    --size: 0.5em;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+}
+select> option {
+    font-weight: 600;
+    color: white;
+    /* background: #08a05c; */
+    background: #97ffe8;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 10px;
+}
+input#searchID {
+    outline: none;
+    box-shadow: 0px 2px 20px #0001;
+    background-image: var(--background-color);
+    border-radius: 5px;
+    border-top: 1px solid #f1eeee;
+    border-bottom: 1px solid #f1eeee;
+    border-left: 1px solid #f1eeee;
+    border-right: 1px solid #f1eeee;
+    animation: text_color 3s infinite;
+    opacity: 1;
+    font-size: 12px;
+    font-weight: 700;
+    font-style: italic;
+}
+.search-box {
+    text-align: right;
+}
+td.font{
+    font-weight: 700;
+    font-size: 12px;
+    color: black;
+}
+label.item_class {
+    color: black;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    font-size: 12px;
+}
+label.tot-search {
+    color: black;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+button#permissionDeleteBtn {
+    outline: none;
+    border: none;
+    background: none;
+}
+button#PermissionSubmit,button#PermissionUpdate,button#confirm_btn,button#confirm_delete_btn {
+    height: 20px;
+    background-image: linear-gradient(to top, #198754, #198754, #198754);
+    border: none;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    line-height: .5;
+}
+.updt-hidden,.cancel-hidden{
+    display: none;
+}
+button#PermissionCancel{
+    height: 20px;
+    background-image: linear-gradient(to top, orangered, orangered, orangered);
+    border: none;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    line-height: .5;
+}
+a.canl_button{
+    height: 21px;
+    background-image: linear-gradient(to top, orangered, orangered, orangered);
+    border: none;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+}
+button#PermissionSubmit:hover,button#PermissionUpdate:hover,button#confirm_btn:hover,button#confirm_delete_btn:hover{
+    color: #97ffe8;
+}
+a.canl_button:hover,button#PermissionCancel:hover{
+    color: lightpink;
+}
+input#delete_access_permission_id,input#update_access_permission_id {
+    outline: none;
+    border: none;
+    width: 40px;
+    text-align: center;
+    color: darkgreen;
 }
 .capsule-sm-skeleton-focus {
     border: 1px solid #ddd;
@@ -54,7 +262,6 @@ td.table_body2{
 }
 td.table_body3{
     border-bottom: 1px solid lightblue;
-    border-right: 1px solid lightblue;
 }
 .btn-hover{
     transition: transform .5s;
@@ -217,12 +424,24 @@ tr.table-head {
 }
 .custom-role-arrow{
     display: block;
-    top: 0;
+    top: 0px;
+    right: 0px;
+    position: absolute;
+    width: 2rem;
+    height: 100%;
+    background-image: linear-gradient(to bottom, silver, transparent, silver, lightgray);
+    pointer-events: none;
+    border-radius: 3px;
+    opacity: 1;
+}
+.custom-role-arrow3{
+    display: block;
+    top: 0px;
     right: -16px;
     position: absolute;
     width: 2rem;
     height: 100%;
-    background-image: linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    background-image: linear-gradient(to bottom, silver, transparent, silver, lightgray);
     pointer-events: none;
     border-radius: 3px;
     opacity: 1;
@@ -314,7 +533,7 @@ span.iconBx {
     border-top: var(--size) solid rgb(255, 255, 255, 0.5);
     top: 70%;
 }
-select#select_role,select#filter_select_role,select#filter_select_role_id,select#role_permission_status{
+select#select_roles,select#select_email,#select_users,select#filter_select_role,select#filter_select_role_id,select#role_permission_status{
     width: 100%;
     outline: none;
     border: 1px solid lightblue;
@@ -326,7 +545,7 @@ select#select_role,select#filter_select_role,select#filter_select_role_id,select
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
     font-family: math;
 }
-select#select_role,select#filter_select_role,select#filter_select_role_id,select#role_permission_status:hover{
+select#select_roles,select#select_email,#select_users,select#filter_select_role,select#filter_select_role_id,select#role_permission_status:hover{
     background-image: var(--button-hover);
 }
 .filter_select_role_id,.filter_select_role_istatus{

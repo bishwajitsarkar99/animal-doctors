@@ -32,10 +32,10 @@
 
         <div class="collapse" id="auth_" aria-labelledby="headingTwo" data-bs-parent="#auth_">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link underline" href="{{route('permission.show')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Permission List')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Permission List')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.User Permission List')}}
                 </a>
-                <a class="nav-link underline" href="{{route('permission.create')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.ADD Permission')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.ADD Permission')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.ADD Permission')}}
                 </a>
                 <!-- <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Permission Setting">

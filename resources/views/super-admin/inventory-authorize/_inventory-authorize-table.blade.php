@@ -1,45 +1,6 @@
 {{-- start Inventory Authorize Table --}}
 <div class="row">
     <div class="col-xl-7 select-group">
-        <div class="card card-body inv_reslt user_info" id="user_permissions" hidden>
-            <div class="row">
-                <div class="col-xl-3">
-                    <label for="user_image"><span id="user_image"></span></label>
-                </div>
-                <div class="col-xl-9">
-                    <label class="mt-1" for="user_name" style="color:black;font-weight:700;font-size:13px;">User :</label>
-                    <input class="mt-1" type="text" id="role_name" readonly>
-                    <label class="mt-1" for="user_name" style="color:black;font-weight:700;font-size:13px;">Email :</label>
-                    <input class="mt-1" type="text" id="user_email" readonly>
-                </div>
-            </div>
-            <div class="row user_info_bg pb-1">
-                <div class="col-xl-12">
-                    <label class="" for="user_name" style="color:black;font-weight:700;font-size:12px;">Permission-Date :</label>
-                    <input class="mt-1" type="text" id="permission_date" readonly>
-                    <label class="" for="user_name" style="color:black;font-weight:700;font-size:12px;">Inventory-ID :</label>
-                    <input class="mt-1" type="text" id="inven_id" readonly>
-                    <label class="" for="user_name" style="color:black;font-weight:700;font-size:12px;">Permission :</label>
-                    <input class="mt-1" type="text" id="permission" readonly><br>
-                    <label class="" for="user_name" style="color:black;font-weight:700;font-size:12px;">Issue :</label>
-                    <input class="mt-1" type="text" id="issue" readonly><br>
-                    <label class="" for="user_name" style="color:black;font-weight:700;font-size:12px;">Approved-By :</label>
-                    <input class="mt-1" type="text" id="approv_by" readonly>
-                </div>
-            </div>
-            <div class="row pb-1 mt-1">
-                <div class="col-xl-12">
-                    @csrf
-                    <label class="" for="user_name" style="color:black;font-weight:700;font-size:12px;" hidden>Permission-Date :</label>
-                    <input class="inv_id ps-2" type="text" name="inv_id" id="input_inventory_id" placeholder="Inventory ID" style="color:black;font-weight:600;" readonly hidden>
-                    <input type="text" name="inventory_id" id="inventory_id" hidden>
-                    <label class="" for="user_name" style="color:black;font-weight:800;font-size:12px;">Token :</label>
-                    <input class="generate_id permission_token ps-2" type="text" name="permission_token" id="input_token" placeholder="Token" style="color:black;font-weight:600;" readonly hidden>
-                    <input id="generate_id" type="text" name="generate_id" hidden />
-                    <input id="token_field" type="text" name="token_field" value="Token" hidden />
-                </div>
-            </div>
-        </div>
         <div class="form-group custom-select skeleton">
             <select class="inventory-id ps-2" name="inv_permission_id" id="select_inventory_id">
                 <option value="" id="option_value1" style="color:darkgreen;font-weight:600;">Select Inventory ID</option>
@@ -56,6 +17,37 @@
             </select>
             <span class="custom-role-arrow5"></span>
         </div>
+        <div class="card card-body inv_reslt user_info mt-2" id="user_permissions" hidden>
+            <div class="row row_divider">
+                <div class="col-xl-2">
+                    <label for="user_image"><span id="user_image"></span></label>
+                </div>
+                <div class="col-xl-10">
+                    <label class="mt-1" for="user_name" style="color:black;font-weight:700;font-size:13px;">User :</label>
+                    <input class="mt-1" type="text" id="role_name" readonly><br>
+                    <label class="mt-1" for="user_name" style="color:black;font-weight:700;font-size:13px;">Email :</label>
+                    <input class="mt-1" type="text" id="user_email" readonly>
+                </div>
+            </div>
+            <div class="row pb-1 mt-1">
+                <div class="col-xl-12">
+                    @csrf
+                    <input class="inv_id ps-2" type="text" name="inv_id" id="input_inventory_id" placeholder="Inventory ID" style="color:black;font-weight:600;" readonly hidden>
+                    <input type="text" name="inventory_id" id="inventory_id" hidden>
+                    <label class="" for="user_name" style="color:black;font-weight:800;font-size:12px;" hidden>Token :</label>
+                    <input class="generate_id permission_token ps-2 mt-1" type="text" name="permission_token" id="input_token" placeholder="Token" style="color:black;font-weight:600;" readonly hidden>
+                    <input id="generate_id" type="text" name="generate_id" hidden />
+                    <input id="token_field" type="text" name="token_field" value="Token" hidden />
+                    <button type="button" class="btn btn-sm cgt_btn btn_token add_button" id="create_token" hidden>Create</button>
+                    <button type="button" class="btn btn-sm cgt_btn btn_token add_button" id="token_send" hidden>
+                        <i class="update-icon fa fa-spinner fa-spin update-hidden"></i>
+                        Send
+                    </button>
+                    <span id="updateForm_errorList"></span>
+                    <input type="number" name="status_inv" id="input_status_inv" hidden>
+                </div>
+            </div>
+        </div>
     </div>
     
     <div class="col-xl-5">
@@ -66,13 +58,11 @@
                 </label>
             </div>
             <div class="col-xl-7">
-                <div class="form-group custom-select skeleton mt- mb-">
+                <div class="form-group custom-select skeleton">
                     <input class="input_inventory_id ps-2" type="search" name="inv_id" id="input_permission_inventory_id" placeholder="INV search......" style="color:black;font-weight:600;"/>
                 </div>
             </div>
         </div> 
-        <!-- <div class="card card-body inv_reslt skeleton">
-        </div> -->
     </div>
 </div>
 <div class="row mid-topbar-auth mt-2">
@@ -84,15 +74,16 @@
             </span>
         </label>
     </div>
-    <div class="col-xl-3 mt-">
-        <label class="label_margin" for="total_qty" style="font-weight:700;color:black;padding-top:1px;" id="justifyAmount">Quantity : 
+    <div class="col-xl-2 mt-">
+        <label class="label_margin" for="total_qty" style="font-weight:700;color:black;padding-top:1px;" id="justifyAmount">Qty : 
             <span class="badge rounded-pill bg-white total_users capsule-sm-skeleton capsule-sm-skeleton-focus" style="font-weight:800;font-size:12px;color:rgb(13, 110, 253);">
                 <span data-val="" id="total_qty_inventory_records"></span>
+                <span>.00</span>
             </span>
         </label>
     </div>
-    <div class="col-xl-2 mt-">
-        <label class="label_margin" for="total_justify" style="color: black; font-size:12px;font-weight:700;font-family:math;" id="denyAmount">Justify : 
+    <div class="col-xl-3 mt-">
+        <label class="label_margin" for="total_justify" style="color: black; font-size:12px;font-weight:700;font-family:math;" id="denyAmount">Authorize : 
             <span class="badge rounded-pill bg-white total_users capsule-sm-skeleton capsule-sm-skeleton-focus" style="font-weight:800;color:darkcyan;opacity:1;font-size:12px;">
                 <span data-val="" id="total_justify_inventory_records"></span>
                 <span>৳</span>
@@ -154,7 +145,7 @@
             <select class="role_status select-box-animation ps-2" name="status" id="role_permission_status">
                 <option value="" id="option_value_select_status" style="color:darkgreen;font-weight:600;">Select Status</option>
                 <option value="" id="option_value_pending" style="color:black;font-weight:600;" hidden>Pending</option>
-                <option value="" id="option_value_jsustify" style="color:black;font-weight:600;" hidden>Justify</option>
+                <option value="" id="option_value_jsustify" style="color:black;font-weight:600;" hidden>Authorize</option>
                 <option value="" id="option_value_deny" style="color:black;font-weight:600;" hidden>Deny</option>
             </select>
             <span class="custom-role-arrow6"></span>
@@ -219,7 +210,7 @@
         <label class="Authorization">Peritem</label>
         <div class="custom-select skeleton">
             <select class="ps-2" name="per_page" id="perItemControlAuthorization">
-                <option value="10" style="color:black;">10</option>
+                <option value="2" style="color:black;">10</option>
                 <option value="25" style="color:black;">25</option>
                 <option value="50" style="color:black;">50</option>
                 <option value="100" style="color:black;">100</option>
@@ -234,6 +225,7 @@
             <label for="total_medic_records skeleton" id="iteam_label4" style="font-size: 14px;line-height: 1;">
                 <span class="badge rounded-pill bg-primary skeleton">
                     <span data-val="" style="font-weight: 700;color:white;" id="total_inventory_quatity"></span>
+                    <span>.00</span>
                 </span>
                 
             </label>
@@ -245,3 +237,48 @@
 </div>
 
 {{-- end Inventory Authorize Table --}}
+
+{{-- start Token Send Modal --}}
+<div class="modal fade" id="tokenModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" id="admin_modal_box">
+        <div class="modal-header" id="logoutModal_header">
+            <span class="pro_image"><img class="img-profile rounded-circle" id="output" src="/image/{{auth()->user()->image}}"></span>
+            <h6 class="modal-title admin_title scan ms-3 pt-1" id="staticBackdropLabel">
+                @if(auth()->user()->role ==1)
+                    Super Admin
+                @endif
+                @if(auth()->user()->role ==2)
+                    Sub Admin
+                @endif
+                @if(auth()->user()->role ==3)
+                    Admin
+                @endif
+                @if(auth()->user()->role ==0)
+                    Doctors
+                @endif
+            </h6>
+            <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" 
+                data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+            </button>
+            </div>
+            <div class="modal-body" id="logoutModal_body">
+                <p class="admin_paragraph" id="text_message" style="font-weight:600;font-size:13px;">
+                    Do you want to send the token number ?
+                </p> 
+                <p class="admin_paragraph" id="text_message" style="text-align:center;"> 
+                    <button id="confirm_btn" class="btn btn-sm cgt_btn btn_focus confirm_btn confirm_btn">
+                        <span class="btn-text">Confirm</span>
+                    </button>
+
+                    <span style="font-weight:600;font-size:13px;">Or</span>
+
+                    <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal">no</a>
+                </p>
+            </div>
+            <div class="modal-footer" id="logoutModal_footer"></div>    
+        </div>
+    </div>
+  </div>
+</div>
+{{-- end Token Send Modal --}}

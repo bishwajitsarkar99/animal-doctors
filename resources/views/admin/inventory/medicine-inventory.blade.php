@@ -386,6 +386,7 @@
                                             <div class="col-6 skeleton">
                                                 <input class="inv_field edit_sub_total sub_total numberformat ps-2" type="text" name="sub_total" id="sub_total" placeholder="0.00" readonly>
                                             </div>
+                                            <input class="status_inv" type="number" name="status_inv" hidden>
                                         </div>
                                     </div>
                                 </div>
@@ -469,6 +470,51 @@
         <p class="ms-3"><span id="success_message"></span></p>
     </div>
 </div>
+
+{{-- start Update Modal --}}
+<div class="modal fade" id="updateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" id="admin_modal_box">
+        <div class="modal-header" id="logoutModal_header">
+            <span class="pro_image"><img class="img-profile rounded-circle" id="output" src="/image/{{auth()->user()->image}}"></span>
+            <h6 class="modal-title admin_title scan ms-3 pt-1" id="staticBackdropLabel">
+                @if(auth()->user()->role ==1)
+                    Super Admin
+                @endif
+                @if(auth()->user()->role ==2)
+                    Sub Admin
+                @endif
+                @if(auth()->user()->role ==3)
+                    Admin
+                @endif
+                @if(auth()->user()->role ==0)
+                    Doctors
+                @endif
+            </h6>
+            <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" 
+                data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+            </button>
+            </div>
+            <div class="modal-body" id="logoutModal_body">
+                <p class="admin_paragraph" id="text_message" style="font-weight:600;font-size:13px;">
+                    Do you want to update the inventory ?
+                </p> 
+                <p class="admin_paragraph" id="text_message" style="text-align:center;"> 
+                    <button id="update_btn" class="btn btn-sm cgt_btn btn_focus update_button update_btn">
+                        <span class="btn-text">Yes</span>
+                    </button>
+
+                    <span style="font-weight:600;font-size:13px;">Or</span>
+
+                    <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal">no</a>
+                </p>
+            </div>
+            <div class="modal-footer" id="logoutModal_footer"></div>    
+        </div>
+    </div>
+  </div>
+</div>
+{{-- end Update Modal --}}
 @endsection
 
 @section('css')

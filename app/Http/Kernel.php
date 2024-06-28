@@ -72,6 +72,7 @@ class Kernel extends HttpKernel
         'isUser' => \App\Http\Middleware\UserAuthentication::class,
         'prevent_back_histroy' => \App\Http\Middleware\preventBackHistory::class,
         'role' => \App\Http\Middleware\RoleMiddleware::class,
-
+        'rolePermission' => \App\Http\Middleware\RolePermission::class,
+        'inventoryPermission' => \App\Http\Middleware\InventoryPermission::class,
     ];
 }

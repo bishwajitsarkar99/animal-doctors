@@ -178,16 +178,16 @@
             // Input Field Validation
             $('.error-message').remove();
 
-            var roleName = $("#select_role").val();
-            var userEmail = $("#select_user").val();
+            var roleName = $("#select_roles").val();
+            var userEmail = $("#select_users").val();
             var inventoryID = $("#inventoryID").val();
             var inventoryIDIssue = $("#inventoryIDIssue").val();
 
             if(roleName.trim() == ''){
-                $("#select_role").closest('.role_nme').append('<span class="error-message alert_show_errors ms-2 ps-2">Select the role name.</span>');
+                $("#select_roles").closest('.role_nme').append('<span class="error-message alert_show_errors ms-2 ps-2">Select the role name.</span>');
             }
             if(userEmail.trim() == ''){
-                $("#select_user").closest('.role_nme').append('<span class="error-message alert_show_errors ms-3 ps-2">Select the user email.</span>');
+                $("#select_users").closest('.role_nme').append('<span class="error-message alert_show_errors ms-3 ps-2">Select the user email.</span>');
             }
             if(inventoryID.trim() == ''){
                 $("#inventoryID").closest('.role_nme').append('<span class="error-message alert_show_errors ms-1">Inventory Table ID is required.</span>');
@@ -203,8 +203,8 @@
             }
 
             var data = {
-                'role_id': $('#select_role').val(),
-                'mail_id': $('#select_user').val(),
+                'role_id': $('#select_roles').val(),
+                'mail_id': $('#select_users').val(),
                 'inv_permission_id': $('#inventoryID').val(),
                 'issue_name': $('#inventoryIDIssue').val(),
             }
@@ -223,22 +223,22 @@
                 success: function(response) {
                     if (response.status == 400) {
                         $.each(response.errors, function(key, err_value) {
-                            $('#savForm_error').html("");
-                            $('#savForm_error').addClass('alert_show_errors');
-                            $('#savForm_error').append('<span class="error_val">' + err_value + '</span>');
-                            $('#savForm_error').fadeIn();
+                            $('#savForm_errors').html("");
+                            $('#savForm_errors').addClass('alert_show_errors');
+                            $('#savForm_errors').append('<span class="error_val">' + err_value + '</span>');
+                            $('#savForm_errors').fadeIn();
                             setTimeout(() => {
-                                $('#savForm_error').fadeOut();
+                                $('#savForm_errors').fadeOut();
                             }, 2500);
                         });
                     } else {
-                        $('#savForm_error').html("");
+                        $('#savForm_errors').html("");
                         $('#success_message').html("");
                         $('#success_message').addClass('alert_show ps-1 pe-1');
                         $('#success_message').fadeIn();
                         $('#success_message').text(response.messages);
-                        $('#select_role').val("");
-                        $('#select_user').val("");
+                        $('#select_roles').val("");
+                        $('#select_users').val("");
                         $('#inventoryID').val("");
                         $('#inventoryIDIssue').val("");
                         $("#show_jst").hide();
@@ -535,6 +535,7 @@
                 dataType: 'json',
                 data: { query: query },
                 success: function(response) {
+                    //console.log(response); 
                     var data = response.inventories;
 
                     // Initialize the tooltip elements
@@ -553,10 +554,12 @@
                         source: suggestions
                     });
 
+                    // Handle the case when data is returned
                     if (data.length > 0 && query !== '') {
                         var inventoryItem = data[0];
+                        //console.log(inventoryItem);
                         const userImage = inventoryItem.users.image.includes('https://') ? inventoryItem.users.image : `/image/${inventoryItem.users.image}`;
-                        
+
                         $("#usrImage").html(`<img class="user_img rounded-square users_image position" src="${userImage}">`);
                         $("#invent_id").val(inventoryItem.inv_id);
                         $("#created_date").val(formatDate(inventoryItem.created_at));
@@ -598,6 +601,9 @@
                     } else {
                         clearFields();
                     }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
                 }
             });
         }
@@ -636,15 +642,14 @@
                     
                 }, 800);
                 fetch_inventory_inv_id(query);
-            }
-            else {
+            } else {
                 $(".pageData, .pageData2, .pageData3, .pageData4, .pageData5, .pageData6, .pageData7, .issue_box, .button_box").attr('hidden', true).fadeOut(200);
                 $("#recordSide").removeAttr('hidden');
                 $("#viewCard").addClass('display_none');
                 clearFields();
                 return;
             }
-            if(query === '0' || query < '0'){
+            if (query === '0' || query < '0') {
                 $("#lable1").addClass('label_hidden');
                 $("#lable2").addClass('label_hidden');
                 $("#lable3").addClass('label_hidden');
@@ -652,7 +657,7 @@
                 $("#lable5").addClass('label_hidden');
                 $("#lable6").addClass('label_hidden');
                 $("#serErorr").append('<span class="error-message alert_show_errors">The id is no matching on server !</span>');
-            }else{
+            } else {
                 $("#lable1").removeClass('label_hidden');
                 $("#lable2").removeClass('label_hidden');
                 $("#lable3").removeClass('label_hidden');
@@ -853,12 +858,12 @@
         $(document).load('click', function(){
             $("#active_loader").addClass('loader_chart');
         });
-        // select table id
+        // select table id permission icon
         $(document).on('click', '#invtr_id', function(e){
             e.preventDefault();
             var searchField = $(".inventory-id").val();
             if (searchField !== null && searchField !== "") {
-                $("#create_token").removeAttr('style');
+                $("#create_token").removeAttr('hidden');
                 $(".error-message").remove();
             } else {
                 $(".inventory-id").closest('.select-group').find('.error-message').remove();
@@ -866,7 +871,7 @@
             }
             $("#input_inventory_id").removeAttr('hidden');
             $("#input_token").removeAttr('hidden');
-            $("#create_token").removeAttr('disabled');
+            $("#create_token").removeAttr('hidden');
 
             $(this).find('#permissionLink').toggleClass('link-display');
             $(this).find('#showLink').toggleClass('link-display');
@@ -884,6 +889,7 @@
                     } else {
                         $('#inventory_id').val(inventory_id);
                         $('.inv_id').val(response.messages.inv_id);
+                        $('#input_status_inv').val(response.messages.status_inv);
                     }
                 }
             });
@@ -891,7 +897,7 @@
         });
         // create token button
         $(document).on('click', '#create_token', function(){
-            $("#token_confirm").removeAttr('hidden');
+            $("#token_send").removeAttr('hidden');
             $("#create_token").css('display', 'none');
 
             var x = Math.random();
@@ -900,15 +906,28 @@
             var token_field = $("#token_field").val();
             $("#generate_id").val(generate_id);
             $("#input_token").val(token_field + '-' + generate_id);
+            var statusVlaue = 0;
+            $('#input_status_inv').val(statusVlaue);
+        });
+        // Token Modal
+        $(document).on('click', '#token_send', function(e){
+            e.preventDefault();
+            $("#tokenModal").modal('show');
+            $(".update-icon").removeClass('update-hidden');
+            setTimeout(() => {
+                $(".update-icon").addClass('update-hidden'); 
+            }, 1000);
+
         });
         // Token Send
-        $(document).on('click', '#token_confirm', function(e) {
+        $(document).on('click', '.confirm_btn', function(e) {
             e.preventDefault();
 
             var inventory_id = $('#inventory_id').val();
             var data = {
                 'inv_id': $('.inv_id').val(),
                 'permission_token': $('.permission_token').val(),
+                'status_inv': $('#input_status_inv').val(),
             }
 
             $.ajaxSetup({
@@ -940,22 +959,23 @@
                         });
                     } else if (response.status == 404) {
                         $('#updateForm_errorList').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').text(response.messages);
+                        $('#success_messages').addClass('alert_show ps-1 pe-1');
+                        $('#success_messages').text(response.messages);
                     } else {
                         $('#updateForm_errorList').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
+                        $('#success_messages').html("");
+                        $('#success_messages').addClass('alert_show ps-1 pe-1');
+                        $('#success_messages').fadeIn();
+                        $('#success_messages').text(response.messages);
                         $('#inventory_id').val("");
                         $('.inv_id').val("");
                         $('.permission_token').val("");
+                        $('#input_status_inv').val("");
+                        $("#tokenModal").modal('hide');
 
                         setTimeout(() => {
-                            $('#success_message').fadeOut(3000);
+                            $('#success_messages').fadeOut(3000);
                         }, 3000);
-                        //fetch_inventory_edit_data();
                     }
                 }
             });
@@ -998,8 +1018,10 @@
                     <tr class="table-row user-table-row" style="${statusColor}" key="${key}">
                         <td class="sn border_ord edit_inventory_table">${key + 1}</td>
                         <td class="line-height-td">
-                            <a type="button" class="ps-1" data-id="${row.inventory_id}" id="invtr_id" style="color: blue;font-weight:600;">${row.inventory_id}</a>
-                            <input class="form-check-input check_permission ms-2 mt-1" type="checkbox" style="font-size: 10px;" data-bs-toggle="tooltip" data-bs-placement="right" title="Authorize" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <a type="button" class="ps-1" data-id="${row.inventory_id}" id="invtr_id" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Permission" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                                <span class="" id="permissionLink"><i class="fa-solid fa-paperclip">‌</i></span>
+                                <span class="link-display" id="showLink"><i class="fa-solid fa-turn-up">‌</i></span>
+                            </a>
                         </td>
                         <td class="txt_ ps-1 edit_inventory_table">${row.inv_id}</td>
                         <td class="edit_inventory_table">${formatDate(row.manufacture_date)}</td>
@@ -1026,7 +1048,6 @@
         };
         // Filter Inventory ID
         $(document).on('change', '#select_inventory_id', function() {
-
             var selectValue = $(this).val();
             if(selectValue !== null && selectValue !== ''){
                 $("#user_permissions").removeAttr('hidden');
@@ -1044,49 +1065,68 @@
             $(".remove_hidden").removeAttr('hidden');
             $(".add_hidden").removeAttr('hidden');
             $(".replace_hidden").attr('hidden', true);
-            // Ajax Request
-            var inventoriesID = $(this).val();
+
+            var query = $(this).val();
+            filterInventory(query);
+        });
+        function filterInventory(query = '') {
             $.ajax({
                 url: "{{ route('inventory-auth') }}",
                 type: "GET",
-                data: {
-                    'inventoriesID': inventoriesID
-                },
+                data: { query: query },
                 success: function(data) {
                     var inventories = data.inventories || [];
                     var permissions = data.Inventory_id_permissions || [];
+
+                    clearFields();
+                    
                     $("#inventory_authorize_data_table").html(tableRows(inventories));
-                    // Initialize the tooltip elements
+
                     $('[data-bs-toggle="tooltip"]').tooltip();
+
 
                     if (inventories.length > 0 && inventories[0].users) {
                         var userImage = inventories[0].users.image;
+                        var userName = inventories[0].users.name;
                         var userEmail = inventories[0].users.email;
                         var userImageUrl = userImage.includes('https://') ? userImage : '/image/' + userImage;
                         var userImageHtml = `<img class="user_img rounded-circle users_image" src="${userImageUrl}">`;
                         $("#user_image").html(userImageHtml);
                         $("#user_email").val(userEmail);
+                        $("#role_name").val(userName);
                     }
-                    if (permissions.length > 0 && permissions[0].roles) {
-                        var roleName = permissions[0].roles.name;
-                        var permissionDate = permissions[0].created_at;
-                        var inventoryID = permissions[0].inventories.inv_id;
-                        var issueName = permissions[0].issue_name;
-                        var permission = permissions[0].permission_status;
-                        var approvedBy = permissions[0].approved_by;
-                        $("#role_name").val(roleName);
-                        $("#permission_date").val(formatPermissionDate(permissionDate));
-                        $("#inven_id").val(inventoryID);
-                        $("#permission").val(permission ? '✅ Justify' : (row.permission === null ? 'Pending' : '❌ Deny'));
-                        $("#issue").val(issueName);
-                        $("#approv_by").val(approvedBy == 1 ? 'SuperAdmin' : (approvedBy == 3 ? 'Admin' : 'Null'));
-                    }
+                    // if (permissions.length > 0 && permissions[0].roles) {
+                    //     var roleName = permissions[0].roles.name;
+                    //     var permissionDate = permissions[0].created_at;
+                    //     var inventoryID = permissions[0].inventories.inv_id;
+                    //     var issueName = permissions[0].issue_name;
+                    //     var permission = permissions[0].permission_status;
+                    //     var approvedBy = permissions[0].approved_by;
+                    //     $("#role_name").val(roleName);
+                    //     $("#permission_date").val(formatDate(permissionDate));
+                    //     $("#inven_id").val(inventoryID);
+                    //     $("#permission").val(permission ? '✅ Justify' : (permission === null ? 'Pending' : '❌ Deny'));
+                    //     $("#issue").val(issueName);
+                    //     $("#approv_by").val(approvedBy == 1 ? 'SuperAdmin' : (approvedBy == 3 ? 'Admin' : 'Null'));
+                    // }
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
                 }
             });
-        });
+        }
+        // clear the fields
+        function clearFields(){
+            // Clear previous data
+            $("#user_image").html('');
+            $("#user_email").val('');
+            $("#role_name").val('');
+            $("#permission_date").val('');
+            $("#inven_id").val('');
+            $("#permission").val('');
+            $("#issue").val('');
+            $("#approv_by").val('');
+        }
 
     });
 

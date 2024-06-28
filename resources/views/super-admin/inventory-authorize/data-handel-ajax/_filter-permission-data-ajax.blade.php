@@ -1,10 +1,10 @@
 <script>
     $(document).ready(function(){
         // Get Roles For Fetch
-        fetch_role_names();
+        fetch_roles();
 
         // Function to fetch roles
-        function fetch_role_names() {
+        function fetch_roles() {
             const currentUrl = "{{ route('inventory-auth') }}";
 
             $.ajaxSetup({
@@ -19,21 +19,21 @@
                 dataType: 'json',
                 success: function(response) {
                     const roles = response.roles;
-                    $("#select_role").empty();
-                    $("#select_role").append('<option value="" style="color:darkgreen;font-weight:600;">Select Role</option>');
+                    $("#select_roles").empty();
+                    $("#select_roles").append('<option value="" style="color:darkgreen;font-weight:600;">Select Role</option>');
                     $.each(roles, function(key, item) {
-                        $("#select_role").append(`<option style="color:black;font-weight:600;" value="${item.id}">${item.name}</option>`);
+                        $("#select_roles").append(`<option style="color:black;font-weight:600;" value="${item.id}">${item.name}</option>`);
                     });
                 },
                 error: function() {
-                    $("#select_role").empty();
-                    $("#select_role").append('<option style="color:black;font-weight:600;" value="" disabled>Error loading data</option>');
+                    $("#select_roles").empty();
+                    $("#select_roles").append('<option style="color:black;font-weight:600;" value="" disabled>Error loading data</option>');
                 }
             });
         }
 
         // Event listener for role dropdown
-        $(document).on('change', '#select_role', function() {
+        $(document).on('change', '#select_roles', function() {
             const selectedRole = $(this).val();
             if(selectedRole !=''){
                 $("#select_user").addClass('select-box-animation');
@@ -67,11 +67,11 @@
                 $('.error-message').remove();
                 
             }
-            fetch_users_email(selectedRole);
+            fetch_user_email(selectedRole);
         });
 
         // Function to fetch users based on selected role
-        function fetch_users_email(selectedRole) {
+        function fetch_user_email(selectedRole) {
             const currentUrl = "{{ route('auth-role.action', ':selectedRole') }}".replace(':selectedRole', selectedRole);
 
             $.ajaxSetup({
@@ -86,14 +86,14 @@
                 dataType: 'json',
                 success: function(response) {
                     const users = response.users;
-                    $("#select_user").empty();
+                    $("#select_users").empty();
                     $.each(users, function(key, item) {
-                        $("#select_user").append(`<option style="color:black;font-weight:600;" value="${item.id}">${item.email}</option>`);
+                        $("#select_users").append(`<option style="color:black;font-weight:600;" value="${item.id}">${item.email}</option>`);
                     });
                 },
                 error: function() {
-                    $("#select_user").empty();
-                    $("#select_user").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select the role</option>');
+                    $("#select_users").empty();
+                    $("#select_users").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select the role</option>');
                 }
             });
         }

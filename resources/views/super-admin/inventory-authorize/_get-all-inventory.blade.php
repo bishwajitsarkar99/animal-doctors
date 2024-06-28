@@ -73,8 +73,10 @@
                 success: function(response) {
                     const {
                         data, 
+                        //grouped_inventories,
                         links, 
                         total, 
+                        totalQty,
                         months, 
                         years, 
                         medicine_groups,
@@ -88,16 +90,17 @@
                     var $container = $('#inventory_authorize_data_table');
                     $container.empty();
 
-                    // if (data.length === 0) {
-                    //     $container.append(`
-                    //         <tr>
-                    //             <td class="error_data text-danger" align="center" colspan="11">
-                    //                 Inventory Data Not Exists On Server!
-                    //             </td>
-                    //         </tr>
-                    //     `);
-                    //     return;
-                    // }
+                    if (data.length === 0) {
+                        $container.append(`
+                            <tr>
+                                <td class="error_data text-danger" align="center" colspan="11">
+                                    Inventory Data Not Exists On Server!
+                                </td>
+                            </tr>
+                        `);
+                        return;
+                    }
+                    // {{-- Start Authorize Table --}}
                     medicine_groups.forEach(function(group, key) {
                         var groupRow = `
                         <tr class="tree parent-row table-row" data-parent="${group.id}">
@@ -106,7 +109,7 @@
                             <summary><td style="cursor: pointer;"></td></summary>
                             <summary><td style="cursor: pointer;"></td></summary>
                             <summary><td style="cursor: pointer;"></td></summary>
-                            <summary><td style="cursor: pointer;"><img class="server-loader-sm error-hidden loader-show" id="loaderShow" src="{{asset('/image/loader/loading.gif')}}" alt="Loading...." /></td></summary>
+                            <summary><td style="cursor: pointer;"><img class="server-loader-sm error-hidden loader-show mini-loader" id="miniLoaderShow" src="{{asset('/image/loader/loading.gif')}}" alt="Loading...." /></td></summary>
                             <summary><td style="cursor: pointer;" colspan="3"></td></summary>
                             <summary><td style="cursor: pointer;" class="">
                                 ${group.totalGroup > 0 ? `<span>${formatCurrency(group.totalGroup)}</span>` : `<span></span>`}
@@ -130,7 +133,7 @@
                             } else if (inventory.status == 0) {
                                 statusClass = 'text-danger';
                                 statusText = '❌ Unauthorize';
-                                statusColor = 'color:darkgoldenrod;background-color: white;';
+                                statusColor = 'color:orangered;background-color: white;';
                                 statusBg = 'badge rounded-pill bg-warn';
                             } else if (inventory.status == 1) {
                                 statusClass = 'text-dark';
@@ -190,11 +193,7 @@
                                         </button>
                                     </td>
                                     <td class="line-height-td child-td">
-                                        <a type="button" class="ps-1" data-id="${inventory.inventory_id}" id="invtr_id" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Permission" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                                           <span class="" id="permissionLink"><i class="fa-solid fa-paperclip">‌</i></span>
-                                           <span class="link-display" id="showLink"><i class="fa-solid fa-turn-up">‌</i></span>
-                                        </a>
-                                        <input class="form-check-input check_permission ms-2 mt-1" type="checkbox" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Authorize" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                                        <input class="form-check-input check_permission check_authorize ms-2 mt-1" inventory_id="${inventory.inventory_id}" value="${inventory.status}" ${inventory.status ? 'checked' : ''} type="checkbox" >
                                     </td>
                                     <td class="child-td1">${inventory.inv_id}</td>
                                     <td class=" child-td2">${formatDate(inventory.manufacture_date)}</td>
@@ -221,7 +220,7 @@
                                             <p hidden>ID: ${inventory.inventory_id}</p>
                                             <div class="row mt-1">
                                                 <div class="col-xl-1">
-                                                    <label class="" for="" id="">
+                                                    <label class="" for="" id="userPicture">
                                                         <img class="user_img inv_usr_img user_imgs" src="${inventory.users.image.includes('https://')?inventory.users.image: '/image/'+ inventory.users.image}">
                                                     </label>
                                                 </div>
@@ -266,7 +265,7 @@
                                                     <div class="heading2">
                                                         <div class="heading2-child">Inventory Details</div>
                                                     </div>
-                                                    <div class="card card-form-controll-sm me-1 mb-1">
+                                                    <div class="card card-form-controll-sm inven me-1 mb-1">
                                                         <div class="row">
                                                             <div class="col-xl-6">
                                                                 <label class="card-row-label" for="" id="">Manufacture-Date : ${formatDate(inventory.manufacture_date)}</label>
@@ -284,7 +283,7 @@
                                                                 <label class="card-row-label" for="" id="">VAT :</label>
                                                                 <label class="card-row-label" for="" id="">Tax :</label>
                                                                 <label class="card-row-label" for="" id="">Discount :</label>
-                                                                <label class="card-row-label mt-2" for="" id="" style="font-weight:600;">Sub Total :</label>
+                                                                <label class="card-row-label mt-1" for="" id="" style="font-weight:600;">Sub Total :</label>
                                                             </div>
                                                             <div class="col-xl-3">
                                                                 <div class="amount-bg" style="border:1px solid 1px solid #97ffe8;border-radius:2px;">
@@ -312,42 +311,48 @@
                             $container.append(inventoryRow);
                         });
                     });
+                    // {{-- End Authorize Table --}}
 
                     // Handle pagination and other UI updates if necessary
-                    $("#inventory_authorize_data_table_paginate").html(paginate_html({ links, total }));
-                    $("#total_inventory_quatity").text(formatCurrency(total));
-                    $("#total_inventory_records").text(formatCurrency(totalInv));
+                    $("#inventory_authorize_data_table_paginate").html(paginate_html({ 
+                        data, 
+                        links, 
+                        total,
+                        months, 
+                        years, 
+                        medicine_groups,
+                        totalInv,
+                        totalInvQty,
+                        totalInvPending,
+                        totalInvDeny,
+                        totalInvJustify,
+                        role_permissions 
+                    }));
+                    $("#total_inventory_quatity").text(total);
+                    $("#total_inventory_records").text(totalInv);
                     $("#total_qty_inventory_records").text(formatCurrency(totalInvQty));
                     $("#total_pending_inventory_records").text(formatCurrency(totalInvPending));
                     $("#total_deny_inventory_records").text(formatCurrency(totalInvDeny));
                     $("#total_justify_inventory_records").text(formatCurrency(totalInvJustify));
 
                     // Total Inventory Quantity
-                    // const totalInventoryEntry = $("#total_inventory_quatity");
-                    // totalInventoryEntry.attr("data-val", total);
-                    // animateNumberCounter(totalInventoryEntry, total);
+                    const totalInventoryEntry = $("#total_inventory_quatity");
+                    totalInventoryEntry.attr("data-val", total);
+                    animateNumberCounter(totalInventoryEntry, total);
                     // Total Inventory Quantity
-                    // const totalInventoryQty = $("#total_qty_inventory_records");
-                    // totalInventoryQty.attr("data-val", totalInvQty);
-                    // animateNumberCounter(totalInventoryQty, totalInvQty);
+                    const totalInventoryQty = $("#total_qty_inventory_records");
+                    totalInventoryQty.attr("data-val", totalInvQty);
+                    animateNumberCounter(totalInventoryQty, totalInvQty);
 
                     // Update current month element with the new data
                     $("#inventory_month").text(months.length > 0 ? months.join(', ') : 'No months found');
 
                     $('[data-bs-toggle="tooltip"]').tooltip();
 
-                    const suggestions = data.map(item => ({
-                        label: `${item.inventory_id} - ${item.role_id} - ${item.mail_id}`,
+                    const inventoryID = data.map(item => ({
+                        label: `${item.inventory_id} - ${item.users.name} - ${item.inv_id}`,
                         value: item.inventory_id,
                     }));
-
-                    $("#search").autocomplete({ source: suggestions });
-
-                    const inventoryID = data.map(item => ({
-                        label: `${item.inv_permission_id} - ${item.inventories.inv_id}`,
-                        value: item.inv_permission_id,
-                    }));
-
                     $("#input_permission_inventory_id").autocomplete({ source: inventoryID });
                 },
                 error: function(error) {
@@ -359,7 +364,7 @@
         $(document).on('click', '.parent-row', function(){
             var parentId = $(this).data('parent');
             $(`.child-row[data-parent='${parentId}']`).toggleClass('row-hidden');
-            $("#loaderShow").removeClass('error-hidden');
+            $("#miniLoaderShow").removeClass('error-hidden');
             // Child Row
             $(".child-td").addClass('skeleton').fadeIn(200);
             $(".child-td0").addClass('skeleton').fadeIn(200);
@@ -380,7 +385,7 @@
             
             
             setTimeout(() => {
-                $("#loaderShow").addClass('error-hidden');
+                $("#miniLoaderShow").addClass('error-hidden');
                 // Child Row
                 $(".child-td").removeClass('skeleton');
                 $(".child-td0").removeClass('skeleton');
@@ -457,6 +462,14 @@
             $('.background-status').removeClass('badge rounded-pill bg-primary text-white');
             $("#strDateOf").attr('hidden', true);
             $("#enDateOf").attr('hidden', true);
+            $("#create_token").show();
+            $("#token_send").attr('hidden', true);
+            $("#input_inventory_id").val("");
+            $("#input_token").val("");
+
+            $(".remove_hidden").attr('hidden', true);
+            $(".add_hidden").attr('hidden', true);
+            $(".replace_hidden").removeAttr('hidden');
             
             setTimeout(() => {
                 $(".refresh-icon").addClass('perm-hidden');
@@ -616,6 +629,37 @@
         $(document).on('keyup', '.input_inventory_id', function(){
             var query = $(this).val();
             fetch_all_inventories_authorize(query); 
+        });
+
+        // Authorize Check Permission
+        $("#inventory_authorize_data_table").delegate(".check_authorize", "click", function(e) {
+            const current_url = "{{route('inventory-authorize.action')}}";
+            const pagination_url = $("#inventory_authorize_data_table_paginate .active").attr('href');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: current_url,
+                dataType: 'json',
+                data: {
+                    inventory_id: $(this).attr('inventory_id'),
+                    status: $(this).val(),
+                },
+                success: function(response) {
+                    console.log('response', response);
+                    $("#success_message").text(response.messages);
+                    fetch_all_inventories_authorize('', pagination_url);
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr.responseText);
+                    $("#success_message").text('An error occurred.');
+                }
+            });
         });
         
     });

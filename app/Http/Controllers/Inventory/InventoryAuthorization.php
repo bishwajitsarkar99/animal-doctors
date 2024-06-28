@@ -21,25 +21,47 @@ class InventoryAuthorization extends Controller
     // Inventory Authorize Page
     public function index(Request $request)
     {
-        // $Inventory_id_permissions = InventoryPermission::with('roles', 'inventories')
-        // ->orderBy('id', 'desc')
-        // ->whereNotNull('permission_status')
-        // ->latest()
-        // ->get();
 
-        $roles = Role::whereIn('id', [2,3,4,5])->get(); 
+        $Inventory_id_permissions = InventoryPermission::with('roles', 'inventories')
+        ->where('permission_status', '=', 1)
+        ->orderBy('id', 'asc')
+        ->get();
 
-        if ($request->expectsJson()) {
-            return response()->json([
-                'roles' => $roles
-            ]);
+        $roles = Role::whereIn('id', [2, 3, 4, 5])->get(); 
+
+        $inventoriesQuery = Inventory::with(
+            'roles', 
+            'users',
+            'suppliers', 
+            'sub_categories', 
+            'medicine_groups', 
+            'medicine_names', 
+            'medicine_origins', 
+            'medicine_dogs', 
+            'units',
+        )
+        ->orderBy('inventory_id', 'desc')
+        ->latest();
+
+        if ($query = $request->get('query')) {
+            $inventoriesQuery->where('inventory_id', 'LIKE', '%' . $query . '%');
         }
 
-        // $Inventory_permissions = InventoryPermission::orderBy('id', 'desc')->whereNotNull('permission_status')->latest()->get();
-        $Inventory_permission_references = InventoryPermission::where('permission_status', '=', 1)->orderBy('id', 'desc')->get();
-        $roles = Role::whereIn('id', [2,3,4,5])->get(); 
+        $inventories = $inventoriesQuery->get();
 
-        return view('super-admin.inventory-authorize.index', compact('roles','Inventory_permission_references'));   
+        if ($request->expectsJson()) {
+
+            return response()->json([
+                'roles' => $roles,
+                'Inventory_id_permissions' => $Inventory_id_permissions,
+                'inventories' => $inventories
+            ]);
+        }
+        
+        $Inventory_permissions = InventoryPermission::orderBy('id', 'desc')->whereNotNull('permission_status')->latest()->get();
+        $Inventory_permission_references = InventoryPermission::where('permission_status', '=', 1)->orderBy('id', 'desc')->get();
+         
+        return view('super-admin.inventory-authorize.index', compact('roles','Inventory_permission_references','Inventory_permissions'));   
     }
     // Get user for role dropdown
     public function getSelectRole(Request $request ,$selectedRole){
@@ -59,21 +81,18 @@ class InventoryAuthorization extends Controller
         $endOfMonth = Carbon::now()->endOfMonth();
 
         $query = $request->query('query');
-        // Initialize the $inventories variable
         $inventories = collect();
 
         if ($query) {
             $query = trim($query);
             $inventories = Inventory::with('users')
-                                    ->where('inventory_id', $query)
-                                    ->orWhere(function($q) use ($query) {
-                                        $q->where('inv_id', 'LIKE', "%{$query}%")
-                                        ->orWhere('user_id', 'LIKE', "%{$query}%");
-                                    })
-                                    ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
-                                    ->orderBy('inventory_id', 'desc')
-                                    ->latest()
-                                    ->get();
+                            ->where('inventory_id', $query)
+                            ->orWhere(function($q) use ($query) {
+                                $q->where('inv_id', 'LIKE', "%{$query}%")
+                                ->orWhere('user_id', 'LIKE', "%{$query}%");
+                            })
+                            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                            ->get();
 
             if ($inventories->isEmpty()) {
                 return response()->json(['error' => 'No matching inventories found'], 404);
@@ -92,7 +111,7 @@ class InventoryAuthorization extends Controller
         $status = $request->input('status');
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
-    
+        
         // Initialize month and year arrays
         $months = [];
         $years = [];
@@ -143,9 +162,17 @@ class InventoryAuthorization extends Controller
     
         // Fetch all inventory data
         $inventoryData = $query->get();
+    
+        // Determine which medicine group IDs exist in the inventory data
+        $existingMedicineGroupIds = $inventoryData->pluck('medicine_group')->unique()->filter()->all();
+    
+        // Filter medicine groups to only include those that exist in the inventory data
+        $medicine_groups = MedicineGroup::where('status', '1')
+        ->whereIn('id', $existingMedicineGroupIds)
+        ->orderBy('id', 'desc')
+        ->get();
         
         // Calculate total items and sub_total for each group
-        $medicine_groups = MedicineGroup::where('status', '1')->orderBy('id', 'desc')->get();
         foreach ($medicine_groups as $group) {
             $groupItems = $inventoryData->where('medicine_group', $group->id);
             $group->totalGroup = $groupItems->sum('quantity');
@@ -169,10 +196,10 @@ class InventoryAuthorization extends Controller
     
         // Get role permissions
         $role_permissions = InventoryPermission::with('roles')
-            ->orderBy('id', 'desc')
-            ->whereNotNull('permission_status')
-            ->latest()
-            ->get();
+        ->orderBy('id', 'desc')
+        ->whereNotNull('permission_status')
+        ->latest()
+        ->get();
     
         $perItem = $request->input('per_item', 10);
         $data = $query->paginate($perItem)->toArray();
@@ -192,20 +219,23 @@ class InventoryAuthorization extends Controller
             'years' => array_values($years)
         ], 200);
     }
-    
-
-    // Get Inventory Data In Delete Table
-    public function getInventoryDeleteData(Request $request)
-    {
-    }
 
     // Inventory Authorization 
     public function inventoryAuthorize(Request $request)
     {
-    }
-    // Delete Inventory
-    public function inventoryDelete($id)
-    {
+        $inventory_id = (int)$request->input('inventory_id');
+        $status = (bool)$request->input('status');
+        $status = !$status;
+
+        $data = Inventory::findOrFail($inventory_id);
+        $data->update([
+            'status' => (int)$status,
+        ]);
+
+        return response()->json([
+            'messages' => 'The Inventory has Authorized Successfully',
+            'code' => 202,
+        ], 202);
     }
     // Inventoy Token Or Id Store for Inventory Data
     public function inventoryPermission(Request $request)
@@ -326,7 +356,7 @@ class InventoryAuthorization extends Controller
         ], 200);
     }
 
-    // Access Permission
+    // Access Permission for inventory
     public function inventoryPermissionStatusUpdate(Request $request){
         $id = (int)$request->input('id');
         $permission_status = (bool)$request->input('permission_status');
@@ -369,15 +399,17 @@ class InventoryAuthorization extends Controller
         }
     }
 
-    // Token pass for data update
+    // Token send for data update
     public function inventoryToken(Request $request, $inventory_id)
     {
         $validator = validator::make($request->all(), [
             'inv_id' => 'required',
             'permission_token' => 'required',
+            'status_inv' => 'required',
         ], [
             'inv_id.required' => 'Inventory ID is required.',
             'permission_token.required' => 'Token is required.',
+            'status_inv.required' => 'Number is required.',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -389,6 +421,7 @@ class InventoryAuthorization extends Controller
             if ($inventories) {
                 $inventories->inv_id = $request->input('inv_id');
                 $inventories->permission_token = $request->input('permission_token');
+                $inventories->status_inv = $request->input('status_inv');
                 $inventories->approved_by = Auth::user()->id;
                 $inventories->update();
                 return response()->json([
