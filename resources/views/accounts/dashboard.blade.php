@@ -34,7 +34,7 @@
                     <div class="col-xl-4 accounts__list">
                         <ul>
                             <li><a class="title__label" type="button" href="#">Supplier</a></li>
-                            <li><a class="title__label" type="button" href="#">Inventory</a></li>
+                            <li><a class="title__label" type="button" href="{{ route('medicine-inventory.index') }}">Inventory</a></li>
                             <li><a class="title__label" type="button" href="#">Stock</a></li>
                             <li><a class="title__label" type="button" href="#">Delivery</a></li>
                             <li><a class="title__label" type="button" href="#">Employee</a></li>

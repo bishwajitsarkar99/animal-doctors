@@ -23,6 +23,18 @@
                             <i class="fa-solid fa-hourglass-half fa-bounce" style="color: darkgray;"></i>
                             <a class="dropbtn" href="{{route ('admin.dashboard') }}">{{__('translate.Admin')}}</a>
                             @endif
+                            @if(auth()->user()->role ==5)
+                            <i class="fa-solid fa-hourglass-half fa-bounce" style="color: darkgray;"></i>
+                            <a class="dropbtn" href="{{route ('accounts.dashboard') }}">Accounts-Menu</a>
+                            @endif
+                            @if(auth()->user()->role ==6)
+                            <i class="fa-solid fa-hourglass-half fa-bounce" style="color: darkgray;"></i>
+                            <a class="dropbtn" href="{{route ('marketing.dashboard') }}">Marketing-Menu</a>
+                            @endif
+                            @if(auth()->user()->role ==7)
+                            <i class="fa-solid fa-hourglass-half fa-bounce" style="color: darkgray;"></i>
+                            <a class="dropbtn" href="{{route ('delivery-team.dashboard') }}">Delivery-Menu</a>
+                            @endif
                             @if(auth()->user()->role ==0)
                             <i class="fa-solid fa-hourglass-half fa-bounce" style="color: darkgray;"></i>
                             <a class="dropbtn" href="{{route ('doctors.dashboard') }}">{{__('translate.Doctors')}}</a>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Forbidden</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card{
+            box-shadow:0px 2px 20px #0001, 0px 1px 6px #0001;
+            border:none;
+        }
+        h4.text-bold {
+            font-size: 2vw;
+            color: purple;
+            font-family: futura;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
+        }
+        .tracking-wider {
+            letter-spacing: .05em;
+        }
+        .tracking-wider.error-message {
+            font-family: futura;
+            font-size: 3vw;
+            color: purple;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
+        }
+        .tracking-wider.error-code {
+            background-image: linear-gradient(120deg,purple,gray 100%);
+            background-size: 200% 100%;
+            background-position: 100% 0;
+            font-family: futura;
+            font-size: 6vw;
+            color: lightgray;
+            border-radius: 50%;
+            background-color: white;
+            border-color: white;
+            box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+            animation: focus 3s linear infinite;
+            text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
+        }
+        @keyframes focus {
+            100% {
+                background-position: -100% 0;
+            }
+        }
+        #output{
+            width: 150px;
+            height: 150px;
+            margin-top: 3px;
+        }
+        img.img-profile{
+            width: 300px;
+            height: 300px;
+        }
+        span.user{
+            font-family: futura;
+            color:purple;
+        }
+    </style>
+  </head>
+  <body class="bg-dark d-flex align-items-center justify-content-center min-vh-100">
+        <div class="container">
+            <div class="p-5 m-5 text-center">
+                <div class="card p-5 rounded-4">
+                    <div class="row">
+                        @auth
+                            <h4 class="display-6 text-bold">You are not able to access the page !</h4>
+                        @else
+                            <h4 class="display-6 text-bold">User permission access unauthorize is !</h4>
+                        @endauth
+                        <div class="col-xl-3">
+                            @auth
+                                <img class="img-profile rounded-circle" id="output" src="/image/{{auth()->user()->image}}" alt="error-image"><br>
+                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 user">User</span>
+                            @else
+                                <img class="img-profile rounded-circle" id="output" src="/image/828.jpg" alt="user-image"><br>
+                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 user">User</span>
+                            @endauth
+                        </div>
+                        <div class="col-xl-6">
+                            <img class="img-profile" src="/image/403 Error Forbidden.gif" alt="error-image">
+                        </div>
+                        <div class="col-xl-3">
+                            <h1 class="mt-2  display-1 fw-6 px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider error-code">403</h1>
+                        </div>
+                        <div class="ml-4 text-lg text-gray-500 uppercase tracking-wider error-message">
+                            @auth
+                                Permission Block
+                            @else
+                                Unauthorized                    
+                            @endauth   
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <a class="btn btn-primary rounded-5 px-5" type="button" href="{{ url('/') }}"> Go Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
