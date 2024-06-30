@@ -514,7 +514,7 @@ span.label_user_edit {
     animation-delay: 2s;
 }
 p.users_heading{
-    color: darkcyan;
+    color: darkgray;
     font-family: 'Archivo Black';
     font-size: 20px;
     margin-top: -10px;
@@ -523,10 +523,10 @@ p.users_heading{
 }
 @keyframes fon_color{
     50%{
-        color: #4dbb96;
+        color:black;
     }
     100%{
-        color: darkcyan;
+        color:black;
     }
 }
 .row.table_last_row {

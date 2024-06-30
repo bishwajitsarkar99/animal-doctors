@@ -18,12 +18,44 @@
     {{Auth::user()->name}}
     @endif
 
+    @if(auth()->user()->role ==5)
+    {{Auth::user()->name}}
+    @endif
+
+    @if(auth()->user()->role ==6)
+    {{Auth::user()->name}}
+    @endif
+
+    @if(auth()->user()->role ==7)
+    {{Auth::user()->name}}
+    @endif
+
     @if(auth()->user()->role ==0)
     Dr.{{Auth::user()->name}}
     @endif
 </a>
 <!-- Sidebar Toggle-->
+@if(auth()->user()->role ==1)
 <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 footer_toggle" id="sidebarToggle" href="#!" data-bs-toggle="tooltip"  data-bs-placement="left" title="Close side-bar" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><i class="fas fa-bars"></i></button>
+@endif
+@if(auth()->user()->role ==2)
+<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 footer_toggle" id="sidebarToggle" href="#!" data-bs-toggle="tooltip"  data-bs-placement="left" title="Close side-bar" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><i class="fas fa-bars"></i></button>
+@endif
+@if(auth()->user()->role ==3)
+<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 footer_toggle" id="sidebarToggle" href="#!" data-bs-toggle="tooltip"  data-bs-placement="left" title="Close side-bar" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><i class="fas fa-bars"></i></button>
+@endif
+@if(auth()->user()->role ==5)
+<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 footer_toggle" id="sidebarToggle" href="#!" style="font-size:10px;" data-bs-toggle="tooltip" data-bs-placement="left" title="side-bar Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'><i class="fas fa-bars"></i></button>
+@endif
+@if(auth()->user()->role ==6)
+<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 footer_toggle" id="sidebarToggle" href="#!" data-bs-toggle="tooltip"  data-bs-placement="left" title="side-bar Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><i class="fas fa-bars"></i></button>
+@endif
+@if(auth()->user()->role ==7)
+<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 footer_toggle" id="sidebarToggle" href="#!" data-bs-toggle="tooltip"  data-bs-placement="left" title="side-bar Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><i class="fas fa-bars"></i></button>
+@endif
+@if(auth()->user()->role ==0)
+<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 footer_toggle" id="sidebarToggle" href="#!" data-bs-toggle="tooltip"  data-bs-placement="left" title="side-bar Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><i class="fas fa-bars"></i></button>
+@endif
 <span class="admin_email">{{Auth::user()->email}} </span>
 
 <!-- Navbar Search-->
@@ -57,7 +89,7 @@
                 <a class="dropdown-item pro_link" id="profile_urllinks">
                     <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
                 </a>
-                <span class="ms-2" id="profileSkel"></span>
+                <!-- <span class="ms-2" id="profileSkel"></span> -->
                 
             </li>
             @elseif(auth()->user()->role ==2)
@@ -65,16 +97,36 @@
                 <a class="dropdown-item pro_link" id="profile_urllinks">
                     <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
                 </a>
-                <span class="ms-2" id="profileSkel"></span>
+                <!-- <span class="ms-2" id="profileSkel"></span> -->
             </li>
             @elseif(auth()->user()->role ==3)
             <li>
                 <a class="dropdown-item pro_link" id="profile_urllinks">
                     <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
                 </a>
-                <span class="ms-2" id="profileSkel"></span>
+                <!-- <span class="ms-2" id="profileSkel"></span> -->
             </li>
+            @elseif(auth()->user()->role ==5)
             <li>
+                <a class="dropdown-item pro_link" id="profile_urllinks">
+                    <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
+                </a>
+                <!-- <span class="ms-2" id="profileSkel"></span> -->
+            </li>
+            @elseif(auth()->user()->role ==6)
+            <li>
+                <a class="dropdown-item pro_link" id="profile_urllinks">
+                    <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
+                </a>
+                <!-- <span class="ms-2" id="profileSkel"></span> -->
+            </li>
+            @elseif(auth()->user()->role ==7)
+            <li>
+                <a class="dropdown-item pro_link" id="profile_urllinks">
+                    <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
+                </a>
+                <!-- <span class="ms-2" id="profileSkel"></span> -->
+            </li>
             @elseif(auth()->user()->role ==1)
             <li>
                 <a class="dropdown-item pro_link" id="profile_urllinks">

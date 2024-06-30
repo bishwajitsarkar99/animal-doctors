@@ -10,6 +10,15 @@
         @if(auth()->user()->role ==3)
             Admin
         @endif
+        @if(auth()->user()->role ==5)
+            Accounts
+        @endif
+        @if(auth()->user()->role ==6)
+            Marketing
+        @endif
+        @if(auth()->user()->role ==7)
+            Delivery Team
+        @endif
         @if(auth()->user()->role ==0)
             Doctors
         @endif

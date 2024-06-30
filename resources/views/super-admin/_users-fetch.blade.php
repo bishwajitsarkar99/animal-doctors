@@ -82,7 +82,7 @@
                         <td class="txt_ ps-1" id="user_set5">${row.name}</td>
                         <td class="tot_order_ ps-1" id="user_set6">${row.email}</td>
                         <td class="tot_pending_ ps-1" id="user_set7">${row.contract_number}</td>
-                        <td class="tot_pending_ bold ps-1 ${row.role? ' text-primary': ' text-secondary'}" id="user_set8">${row.role ==0 ? 'User': 'Superadmin' && row.role ==2 ? 'SubAdmin': 'User' && row.role ==1 ? 'SuperAdmin': 'User' && row.role ==3 ? 'Admin': 'User'}</td>
+                        <td class="tot_pending_ bold ps-1 ${row.role? ' text-primary': ' text-cyan'}" id="user_set8">${row.role ==0 ? 'User': 'Superadmin' && row.role ==2 ? 'SubAdmin': 'User' && row.role ==1 ? 'SuperAdmin': 'User' && row.role ==3 ? 'Admin': 'User' && row.role ==5 ? 'Accounts': 'User' && row.role ==6 ? 'Marketing': 'User' && row.role ==7 ? 'Delivery Team': 'User'}</td>
                         <td class="tot_complete_ center ps-1" id="user_set9">
                             <input class="form-switch form-check-input check_permission" type="checkbox" user_id="${row.id}" value="${row.status}" ${row.status? " checked": ''} disabled>
                         </td>

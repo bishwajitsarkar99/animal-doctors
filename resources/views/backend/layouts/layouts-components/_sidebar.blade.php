@@ -1,21 +1,48 @@
 <div class="sb-sidenav-menu">
     <!-- defult background focus for sidebar/ = class / side_nav_background for id = menu_background -->
     <div class="nav" id="menu_background">
+        @if(auth()->user()->role ==1)
         <a class="nav-link" href="{{ route('super-admin.dashboard') }}" id="side_nav">
             <div class="sb-nav-link-icon das_hdname pt-1"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
-            @if(auth()->user()->role ==1)
             <span class="dashboard_text">{{__('translate.Dashboard')}}</span>
-            @endif
-            @if(auth()->user()->role ==2)
-            <span class="dashboard_text">{{__('translate.Dashboard')}}</span>
-            @endif
-            @if(auth()->user()->role ==3)
-            <span class="dashboard_text">{{__('translate.Dashboard')}}</span>
-            @endif
-            @if(auth()->user()->role ==0)
-            <span class="dashboard_text">{{__('translate.Dashboard')}}</span>
-            @endif
         </a>
+        @endif
+        @if(auth()->user()->role ==2)
+        <a class="nav-link" href="{{ route('sub-admin.dashboard') }}" id="side_nav">
+            <div class="sb-nav-link-icon das_hdname pt-1"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
+            <span class="dashboard_text">{{__('translate.Dashboard')}}</span>
+        </a>
+        @endif
+        @if(auth()->user()->role ==3)
+        <a class="nav-link" href="{{ route('admin.dashboard') }}" id="side_nav">
+            <div class="sb-nav-link-icon das_hdname pt-1"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
+            <span class="dashboard_text">{{__('translate.Dashboard')}}</span>
+        </a>
+        @endif
+        @if(auth()->user()->role ==5)
+        <a class="nav-link" href="{{ route('accounts.dashboard') }}" id="side_nav">
+            <div class="sb-nav-link-icon das_hdname pt-1" style="color:#ab7800ab;"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
+            <span class="dashboard_text">Side-Menu</span>
+        </a>  
+        @endif
+        @if(auth()->user()->role ==6)
+        <a class="nav-link" href="#" id="side_nav">
+            <div class="sb-nav-link-icon das_hdname pt-1" style="color:#ab7800ab;"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
+            <span class="dashboard_text">Side-Menu</span>
+        </a>
+        @endif
+        @if(auth()->user()->role ==7)
+        <a class="nav-link" href="#" id="side_nav">
+            <div class="sb-nav-link-icon das_hdname pt-1" style="color:#ab7800ab;"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
+            <span class="dashboard_text">Side-Menu</span>
+        </a> 
+        @endif
+        @if(auth()->user()->role ==0)
+        <a class="nav-link" href="{{ route('doctors.dashboard') }}" id="side_nav">
+            <div class="sb-nav-link-icon das_hdname pt-1" style="color:#ab7800ab;"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
+            <span class="dashboard_text">Side-Menu</span>
+        </a>   
+        @endif
         @if(auth()->user()->role ==1)
             <span class="text-warning ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;">
                 {{setting('company_name')}}
@@ -31,8 +58,23 @@
                 {{setting('company_name')}}
             </span>
         @endif
+        @if(auth()->user()->role ==5)
+            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;">
+                {{setting('company_name')}}
+            </span>
+        @endif
+        @if(auth()->user()->role ==6)
+            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;">
+                {{setting('company_name')}}
+            </span>
+        @endif
+        @if(auth()->user()->role ==7)
+            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;">
+                {{setting('company_name')}}
+            </span>
+        @endif
         @if(auth()->user()->role ==0)
-            <span class="text-warning ms-4 ps-2 mb-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;">
+            <span class="ms-4 ps-2 mb-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;">
                 {{setting('company_name')}}
             </span>
         @endif
@@ -59,6 +101,33 @@
             <span class="animation-examples three ps-1 pe-1">
                 <i class="fa-solid fa-dice-d6 fa-flip"></i>
                 <span class="lar_pro plantform1">{{__('translate.Admin')}} </span>
+            </span>
+        </div>
+        @endif
+        @if(auth()->user()->role ==5)
+        <div class="sb-sidenav-menu-heading platform_name trapezoid" style="width: 205px;height:150px;">
+            <span class="animation-examples three ps-1 pe-1">
+                <i class="fa-solid fa-dice-d6 fa-flip"></i>
+                <span class="lar_pro plantform1">{{__('Accounts')}} </span>
+                <img class="profile" style="width: 100px;height:100px; border-radius:3px;" src="/image/{{auth()->user()->image}}" alt="profile-image">
+            </span>
+        </div>
+        @endif
+        @if(auth()->user()->role ==6)
+        <div class="sb-sidenav-menu-heading platform_name trapezoid" style="width: 205px;height:150px;">
+            <span class="animation-examples three ps-1 pe-1">
+                <i class="fa-solid fa-dice-d6 fa-flip"></i>
+                <span class="lar_pro plantform1">{{__('Marketing')}} </span>
+                <img class="profile" style="width: 100px;height:100px; border-radius:3px;" src="/image/{{auth()->user()->image}}" alt="profile-image">
+            </span>
+        </div>
+        @endif
+        @if(auth()->user()->role ==7)
+        <div class="sb-sidenav-menu-heading platform_name trapezoid" style="width: 205px;height:150px;">
+            <span class="animation-examples three ps-1 pe-1">
+                <i class="fa-solid fa-dice-d6 fa-flip"></i>
+                <span class="lar_pro plantform1">{{__('Delivery Team')}} </span>
+                <img class="profile" style="width: 100px;height:100px; border-radius:3px;" src="/image/{{auth()->user()->image}}" alt="profile-image">
             </span>
         </div>
         @endif

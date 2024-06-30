@@ -15,6 +15,15 @@
     @if(auth()->user()->role == 3)
     Admin
     @endif
+    @if(auth()->user()->role == 5)
+    Accounts
+    @endif
+    @if(auth()->user()->role == 6)
+    Marketing
+    @endif
+    @if(auth()->user()->role == 7)
+    Delivery Team
+    @endif
     @if(auth()->user()->role == 0)
     Doctors-Center
     @endif
@@ -63,6 +72,18 @@
 @if(auth()->user()->role ==3)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/dark.css" id="themeSilverlink">
 @endif
+@if(auth()->user()->role ==3)
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/dark.css" id="themeSilverlink">
+@endif
+@if(auth()->user()->role ==5)
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/silver.css" id="themeSilverlink">
+@endif
+@if(auth()->user()->role ==6)
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/silver.css" id="themeSilverlink">
+@endif
+@if(auth()->user()->role ==7)
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/silver.css" id="themeSilverlink">
+@endif
 @if(auth()->user()->role ==0)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/silver.css" id="themeSilverlink">
 @endif
@@ -76,6 +97,15 @@
 @if(auth()->user()->role ==3)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark.css" id="topbarGreenlink">
 @endif
+@if(auth()->user()->role ==5)
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark-green.css" id="topbarGreenlink">
+@endif
+@if(auth()->user()->role ==6)
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark-green.css" id="topbarGreenlink">
+@endif
+@if(auth()->user()->role ==7)
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark-green.css" id="topbarGreenlink">
+@endif
 @if(auth()->user()->role ==0)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark-green.css" id="topbarGreenlink">
 @endif
@@ -88,6 +118,15 @@
 @endif
 @if(auth()->user()->role ==3)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/dark.css" id="footerGreenlink">
+@endif
+@if(auth()->user()->role ==5)
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/dark-green.css" id="footerGreenlink">
+@endif
+@if(auth()->user()->role ==6)
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/dark-green.css" id="footerGreenlink">
+@endif
+@if(auth()->user()->role ==7)
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/dark-green.css" id="footerGreenlink">
 @endif
 @if(auth()->user()->role ==0)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/silver.css" id="footerGreenlink">
@@ -111,6 +150,15 @@
 @endif
 @if(auth()->user()->role ==3)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/trapezoid-css/gray.css" id="sidebarTrapezoidlink">
+@endif
+@if(auth()->user()->role ==5)
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/trapezoid-css/silver.css" id="sidebarTrapezoidlink">
+@endif
+@if(auth()->user()->role ==6)
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/trapezoid-css/silver.css" id="sidebarTrapezoidlink">
+@endif
+@if(auth()->user()->role ==7)
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/trapezoid-css/silver.css" id="sidebarTrapezoidlink">
 @endif
 @if(auth()->user()->role ==0)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/trapezoid-css/silver.css" id="sidebarTrapezoidlink">

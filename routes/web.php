@@ -46,6 +46,9 @@ Route::get('/', function () {
 });
 
 require __DIR__ . DIRECTORY_SEPARATOR .'auth.php';
+require __DIR__ . DIRECTORY_SEPARATOR .'accounts.php';
+require __DIR__ . DIRECTORY_SEPARATOR .'marketing.php';
+require __DIR__ . DIRECTORY_SEPARATOR .'delivery-team.php';
 
 Route::group(['middleware' => 'auth'], function () {
 

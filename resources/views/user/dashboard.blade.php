@@ -1,4 +1,4 @@
-@extends('backend.layouts.dashboard')
+@extends('backend.layouts.home-page')
 @section('content')
 @include('backend.layouts.dashboard-components._navbar')
 <div class="row">

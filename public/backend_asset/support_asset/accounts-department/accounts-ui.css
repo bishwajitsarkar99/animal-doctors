@@ -1,0 +1,12 @@
+:root{
+
+}
+.accounts__menu {
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+}
+a.title__label {
+    font-family: math;
+    font-size: 12px;
+    font-weight: 700;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+}

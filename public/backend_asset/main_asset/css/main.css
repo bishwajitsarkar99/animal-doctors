@@ -5694,7 +5694,6 @@ textarea.form-control-lg {
   background-color: var(--bs-tooltip-bg);
   border-radius: var(--bs-tooltip-border-radius);
 }
-
 .popover {
   --bs-popover-zindex: 1070;
   --bs-popover-max-width: 276px;
