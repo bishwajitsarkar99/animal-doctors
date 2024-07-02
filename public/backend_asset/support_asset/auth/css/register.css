@@ -117,7 +117,7 @@ input.password{
     border-top: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
     border-radius: 2px;
-    margin-left: 5px;
+    margin-left: 9px;
 }
 input.confrim-password{
     /* background-image: var(--bs-email-background-color); */
@@ -131,7 +131,7 @@ input.confrim-password{
     border-top: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
     border-radius: 2px;
-    margin-left: 5px;
+    margin-left: 9px;
 }
 input.image{
     /* background-image: var(--bs-email-background-color); */

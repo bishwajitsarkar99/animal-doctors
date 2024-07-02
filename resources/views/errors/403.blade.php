@@ -58,23 +58,32 @@
         span.user{
             font-family: futura;
             color:purple;
+            font-size: 2vw;
+        }
+        span.auth_user{
+            font-family: futura;
+            color:purple;
+            font-size: 1vw; 
+            text-align:left;
         }
     </style>
   </head>
-  <body class="bg-dark d-flex align-items-center justify-content-center min-vh-100">
+    <body class="bg-dark d-flex align-items-center justify-content-center min-vh-100">
         <div class="container">
-            <div class="p-5 m-5 text-center">
-                <div class="card p-5 rounded-4">
+            <div class="p-3 m-3 text-center">
+                <div class="card p-4 rounded-4">
                     <div class="row">
                         @auth
                             <h4 class="display-6 text-bold">You are not able to access the page !</h4>
                         @else
-                            <h4 class="display-6 text-bold">User permission access unauthorize is !</h4>
+                            <h4 class="display-6 text-bold">User access permission abort(403) is !</h4>
                         @endauth
                         <div class="col-xl-3">
                             @auth
                                 <img class="img-profile rounded-circle" id="output" src="/image/{{auth()->user()->image}}" alt="error-image"><br>
-                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 user">User</span>
+                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 user">User</span><br>
+                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 auth_user">Name : {{ auth()->user()->name}}</span><br>
+                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 auth_user">Email : {{ auth()->user()->email}}</span>
                             @else
                                 <img class="img-profile rounded-circle" id="output" src="/image/828.jpg" alt="user-image"><br>
                                 <span class="display-6 text-bold fw-6 text-lg text-gray-500 user">User</span>
@@ -88,7 +97,7 @@
                         </div>
                         <div class="ml-4 text-lg text-gray-500 uppercase tracking-wider error-message">
                             @auth
-                                Permission Block
+                                Inventory Permission Block
                             @else
                                 Unauthorized                    
                             @endauth   
@@ -101,6 +110,6 @@
                 </div>
             </div>
         </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 </html>

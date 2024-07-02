@@ -1,9 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Faker\Guesser\Name;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Accounts\AccountsController;
 
-// ********** Accounts Department Routes *********
-Route::group(['prefix' => 'accounts', 'middleware' => ['web', 'isAccounts']], function () {
-    Route::get('/dashboard', [AccountsController::class, 'dashboard'])->name('accounts.dashboard');
+Route::group(['middleware' => 'auth'], function (){
+    
+    // ********** Accounts Department Routes *********
+    Route::group(['prefix' => 'accounts', 'middleware' => ['web', 'isAccounts']], function () {
+        Route::get('/dashboard', [AccountsController::class, 'dashboard'])->name('accounts.dashboard');
+    });
 });

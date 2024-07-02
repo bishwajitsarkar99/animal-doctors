@@ -25,7 +25,7 @@
         <label class="input_label skeleton mt-1" for="select-user">Product </label>
     </td>
     <td>
-        <input id="update_purchases_moduel2" class="purchases_moduel ps-2 skeleton" type="text" name="product" value="{{setting('product_title')}}" placeholder="Product" disabled>
+        <input id="update_purchases_moduel2" class="purchases_moduel ps-2 skeleton" type="text" name="product_title" value="{{setting('purches_product_title')}}" placeholder="Product" disabled>
     </td>
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
@@ -417,7 +417,7 @@
         <label class="input_label skeleton mt-1" for="select-user">Product </label>
     </td>
     <td>
-        <input id="update_purchases_moduel40" class="purchases_moduel ps-2 skeleton" type="text" name="product" value="{{setting('product')}}" placeholder="Product" disabled>
+        <input id="update_purchases_moduel40" class="purchases_moduel ps-2 skeleton" type="text" name="product_head" value="{{setting('product_menu')}}" placeholder="Product" disabled>
     </td>
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">

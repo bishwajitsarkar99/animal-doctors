@@ -47,15 +47,15 @@
     </div>
     <div class="hero-image">
         <div class="hero-text heading" id="page_head">
-            <h1 class="company_heading ms-5">
-                <span class="skeleton"><img class="company_logo skeleton" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
-                <span class="skeleton">{{setting('company_name')}}</span>
+            <h1 class="company_heading ms-5 mt-5">
+                <!-- <span class="skeleton"><img class="company_logo skeleton" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span> -->
+                <span class="skeleton">{{setting('page_sub_title')}}</span>
             </h1>
             <p class="address skeleton ms-5">{{setting('company_address')}}</p>
         </div>
     </div>
 
-    <h2 class="para mt-5"><span class="skeleton nav_head"><span class="skeleton lgo ms-3">{{setting('login_page_title')}}</span> <span class="skeleton lgn ms-3"></span></span></h2>
+    <h2 class="para mt-5"><span class="nav_head"><span class="lgo ms-3"></span> <span class="lgn ms-3"></span></span></h2>
     <div class="container bg" style="margin-top: 45px;">
         <div class="row">
             <div class="col-md-8">

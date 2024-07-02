@@ -37,10 +37,11 @@
       20 => 'Illuminate\\Validation\\ValidationServiceProvider',
       21 => 'Illuminate\\View\\ViewServiceProvider',
       22 => 'Barryvdh\\DomPDF\\ServiceProvider',
-      23 => 'App\\Providers\\AppServiceProvider',
-      24 => 'App\\Providers\\AuthServiceProvider',
-      25 => 'App\\Providers\\EventServiceProvider',
-      26 => 'App\\Providers\\RouteServiceProvider',
+      23 => 'Stevebauman\\Location\\LocationServiceProvider',
+      24 => 'App\\Providers\\AppServiceProvider',
+      25 => 'App\\Providers\\AuthServiceProvider',
+      26 => 'App\\Providers\\EventServiceProvider',
+      27 => 'App\\Providers\\RouteServiceProvider',
     ),
     'aliases' => 
     array (
@@ -83,6 +84,7 @@
       'Validator' => 'Illuminate\\Support\\Facades\\Validator',
       'View' => 'Illuminate\\Support\\Facades\\View',
       'PDF' => 'Barryvdh\\DomPDF\\Facade',
+      'Location' => 'Stevebauman\\Location\\Facades\\Location',
     ),
   ),
   'auth' => 
@@ -401,6 +403,67 @@
   array (
     'en' => 'English',
     'bn' => 'Bangla',
+  ),
+  'location' => 
+  array (
+    'driver' => 'Stevebauman\\Location\\Drivers\\IpApi',
+    'fallbacks' => 
+    array (
+      0 => 'Stevebauman\\Location\\Drivers\\Ip2locationio',
+      1 => 'Stevebauman\\Location\\Drivers\\IpInfo',
+      2 => 'Stevebauman\\Location\\Drivers\\GeoPlugin',
+      3 => 'Stevebauman\\Location\\Drivers\\MaxMind',
+    ),
+    'position' => 'Stevebauman\\Location\\Position',
+    'http' => 
+    array (
+      'timeout' => 3,
+      'connect_timeout' => 3,
+    ),
+    'testing' => 
+    array (
+      'ip' => '66.102.0.0',
+      'enabled' => true,
+    ),
+    'maxmind' => 
+    array (
+      'license_key' => NULL,
+      'web' => 
+      array (
+        'enabled' => false,
+        'user_id' => NULL,
+        'options' => 
+        array (
+          'host' => 'geoip.maxmind.com',
+        ),
+      ),
+      'local' => 
+      array (
+        'type' => 'city',
+        'path' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\database\\maxmind/GeoLite2-City.mmdb',
+        'url' => 'https://download.maxmind.com/app/geoip_download_by_token?edition_id=GeoLite2-City&license_key=&suffix=tar.gz',
+      ),
+    ),
+    'ip_api' => 
+    array (
+      'token' => NULL,
+    ),
+    'ipinfo' => 
+    array (
+      'token' => NULL,
+    ),
+    'ipdata' => 
+    array (
+      'token' => NULL,
+    ),
+    'ip2locationio' => 
+    array (
+      'token' => NULL,
+    ),
+    'kloudend' => 
+    array (
+      'token' => NULL,
+    ),
   ),
   'logging' => 
   array (

@@ -666,7 +666,7 @@ class SuperAdminController extends Controller
             
             // Purchases Moduel
             'purches_moduel_title' => $request->input('purches_moduel'),
-            'product_title' => $request->input('product', ' '),
+            'purches_product_title' => $request->input('product_title'),
             'purchases_visual' => $request->input('purchases_display'),
             'product_visual' => $request->input('product_display'),
             // Category
@@ -720,7 +720,7 @@ class SuperAdminController extends Controller
             'brand_link' => $request->input('brand_link'),
             'brand_visual' => $request->input('brand_visual'),
             // Product
-            'product' => $request->input('product_title'),
+            'product_menu' => $request->input('product_head'),
             'product_title_display' => $request->input('product_title_display'),
             'add_Prodcut_title' => $request->input('add_Prodcut_title'),
             'product_link' => $request->input('product_link'),

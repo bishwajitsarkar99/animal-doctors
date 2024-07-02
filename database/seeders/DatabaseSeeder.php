@@ -45,13 +45,12 @@ class DatabaseSeeder extends Seeder
             'update_social_media_linkedin'=>'#',
             // Purchases Moduel
             'purches_moduel_title' => 'Purchases Dept.',
-            'product_title' => 'Product',
+            'purches_product_title' => 'Product',
             'purchases_visual' => 'purchases_block',
             'product_visual' => 'product_block',
             // Category
             'categ_title_visual' => 'categ_title_block',
             'category_title' => 'Category',
-            'add_category_title' => 'ADD Category',
             'add_category_title' => 'ADD Category',
             'category_link' => 'http://127.0.0.1:8000/category',
             'category_visual' => 'category_url_block',
@@ -100,7 +99,7 @@ class DatabaseSeeder extends Seeder
             'brand_link'=>'http://127.0.0.1:8000/brand',
             'brand_visual'=>'brand_url_block',
             // Product
-            'product'=>'Product',
+            'product_menu'=>'Product List',
             'product_title_display'=>'products_block',
             'add_Prodcut_title'=>'ADD Product',
             'product_link'=>'http://127.0.0.1:8000/product',
@@ -421,10 +420,10 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-        $this->call(DemoSeeder::class);
-        $this->call(FooterContentSeeder::class);
-        $this->call(NewsSeeder::class);
-        $this->call(LogoSeeder::class);
+        // $this->call(DemoSeeder::class);
+        // $this->call(FooterContentSeeder::class);
+        // $this->call(NewsSeeder::class);
+        // $this->call(LogoSeeder::class);
 
     }
     

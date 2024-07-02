@@ -332,9 +332,6 @@
         $(document).on('click', '#company_btn', function(e) {
             e.preventDefault();
             var company_id = $('#company_id').val();
-
-            
-
             var data = {
                 'name': $('#update_company_name').val(),
                 'address': $('#update_company_address').val(),
@@ -363,7 +360,7 @@
 
                 // PUrchases Moduel
                 'purches_moduel': $('#update_purchases_moduel').val(),
-                'product': $('#update_purchases_moduel2').val(),
+                'product_title': $('#update_purchases_moduel2').val(),
                 'purchases_display': $('#update_purchases_moduel7').val(),
                 'product_display': $('#update_purchases_moduel8').val(),
                 'categ_title_display': $('#update_purchases_moduel9').val(),
@@ -417,7 +414,7 @@
                 'brand_link': $('#update_purchases_moduel38').val(),
                 'brand_visual': $('#update_purchases_moduel39').val(),
                 // Product
-                'product': $('#update_purchases_moduel40').val(),
+                'product_head': $('#update_purchases_moduel40').val(),
                 'product_title_display': $('#update_purchases_moduel41').val(),
                 'add_Prodcut_title': $('#update_purchases_moduel42').val(),
                 'product_link': $('#update_purchases_moduel43').val(),

@@ -7,7 +7,7 @@
         <div class="col-xl-3"></div>
         <div class="col-xl-6">
             <div class="accounts__menu">
-                <p class="smy tp text-shadow" style="text-align:center;background-color: aliceblue;">Accounts Menu</p>
+                <p class="smy tp text-shadow" style="text-align:center;text-decoration: underline cornflowerblue;">Accounts Menu</p>
                 <div class="row">
                     <div class="col-xl-4 accounts__list">
                         <ul>

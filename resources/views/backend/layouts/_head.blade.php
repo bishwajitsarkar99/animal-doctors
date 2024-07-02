@@ -76,7 +76,7 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/dark.css" id="themeSilverlink">
 @endif
 @if(auth()->user()->role ==5)
-<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/silver.css" id="themeSilverlink">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/cornflower-blue.css" id="themeSilverlink">
 @endif
 @if(auth()->user()->role ==6)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/silver.css" id="themeSilverlink">
@@ -98,7 +98,7 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark.css" id="topbarGreenlink">
 @endif
 @if(auth()->user()->role ==5)
-<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark-green.css" id="topbarGreenlink">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/cornflower-blue.css" id="topbarGreenlink">
 @endif
 @if(auth()->user()->role ==6)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark-green.css" id="topbarGreenlink">
@@ -120,7 +120,7 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/dark.css" id="footerGreenlink">
 @endif
 @if(auth()->user()->role ==5)
-<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/dark-green.css" id="footerGreenlink">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/cornflower-blue.css" id="footerGreenlink">
 @endif
 @if(auth()->user()->role ==6)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/dark-green.css" id="footerGreenlink">

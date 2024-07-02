@@ -1,0 +1,7 @@
+:root{
+    --theme-background-image:radial-gradient(farthest-corner at 100px 100px, #ffffff,cornflowerblue);
+    --theme-color:darkgreen;
+    --theme-transition:1s;
+    --theme-transform:scale(0.9);
+
+}

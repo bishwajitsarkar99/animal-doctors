@@ -204,10 +204,11 @@ body.register_background_color {
 h1.company_heading{
   /* font-family: 'Monoton'; */
   font-family:"monoton";
-  font-size: 4vw;
+  font-size: 2vw;
   color: white;
   text-align: justify;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  animation: text_shadow 8s infinite;
 }
 input.forgot_input{
   width: 196px;
