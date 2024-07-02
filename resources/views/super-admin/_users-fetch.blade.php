@@ -60,6 +60,19 @@
             }
 
             return [...rows].map((row, key) => {
+                let statusClass, statusColor, statusText, statusBg;
+                if(row.status == 1){
+                    statusClass = 'text-danger';
+                    statusText = '❌ Unauthorize';
+                    statusColor = 'color:darkgoldenrod;background-color: #ffedd8;';
+                    statusBg = 'badge rounded-pill bg-warn';
+                }
+                else if(row.status == 0){
+                    statusClass = 'text-cyan';
+                    statusText = '✅ Authorize';
+                    statusColor = 'color:black;background-color: #ecfffd;';
+                    statusBg = 'badge rounded-pill bg-azure';
+                }
                 return `
                     <tr class="table-row user-table-row user_setting" key="${key}" id="user_set">
                         <td class="sn border_ord" id="user_set2">${row.id}</td>
@@ -86,7 +99,10 @@
                         <td class="tot_complete_ center ps-1" id="user_set9">
                             <input class="form-switch form-check-input check_permission" type="checkbox" user_id="${row.id}" value="${row.status}" ${row.status? " checked": ''} disabled>
                         </td>
-                        <td class="tot_complete_ pill ps-1 ${row.status? ' bg-danger': ' bg-primary'}"><span class="user_setting_bg ps-1 pe-1" id="user_set10">${row.status ? 'Lock': 'Unlock'}</span>
+                        <td class="tot_complete_ pill ps-1 ${statusClass}">
+                            <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:12px;">
+                                ${statusText}
+                            </span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>
                         </td>
                         

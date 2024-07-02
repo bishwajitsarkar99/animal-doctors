@@ -7,6 +7,7 @@ use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Setting\PostSettngController;
 use App\Http\Controllers\Inventory\InventoryAuthorization;
 use App\Models\Permission\InventoryAccessPermission;
+use App\Http\Controllers\Inventory\InventoryDetailsRecord;
 
 Route::group(['middleware' => 'auth'], function (){
     
@@ -58,6 +59,8 @@ Route::group(['middleware' => 'auth'], function (){
         // inventory permission
         Route::post('super-admin/inventory-permission-update', [InventoryAuthorization::class, 'inventoryPermissionStatusUpdate'])->name('inventory_permission_status.action');
         Route::delete('super-admin/delete-inventory-permission/{id}', [InventoryAuthorization::class, 'inventoryPermissionDelete'])->name('inventory_permission_delete.action');
+        // inventory Details Record
+        Route::get('super-admin/inventory-details-record', [InventoryDetailsRecord::class, 'index'])->name('inventory_details.action');
     });
     // Invntory Token Permission
     Route::middleware(['role:SuperAdmin|Admin'])->group(function(){

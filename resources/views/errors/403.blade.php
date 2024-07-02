@@ -90,14 +90,22 @@
                             @endauth
                         </div>
                         <div class="col-xl-6">
-                            <img class="img-profile" src="/image/403 Error Forbidden.gif" alt="error-image">
+                            @auth
+                                <img class="img-profile" src="/image/inventory.png" alt="error-image">
+                            @else
+                                <img class="img-profile" src="/image/403 Error Forbidden.gif" alt="error-image">
+                            @endauth
                         </div>
                         <div class="col-xl-3">
-                            <h1 class="mt-2  display-1 fw-6 px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider error-code">403</h1>
+                            @auth
+                                <h1 class="mt-2  display-1 fw-6 px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider error-code">404</h1>
+                            @else
+                                <h1 class="mt-2  display-1 fw-6 px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider error-code">403</h1>
+                            @endauth
                         </div>
                         <div class="ml-4 text-lg text-gray-500 uppercase tracking-wider error-message">
                             @auth
-                                Inventory Permission Block
+                                Product Inventory Permission Block
                             @else
                                 Unauthorized                    
                             @endauth   
@@ -105,7 +113,7 @@
                     </div>
                     <hr>
                     <div>
-                        <a class="btn btn-primary rounded-5 px-5" type="button" href="{{ url('/') }}"> Go Back</a>
+                        <a class="btn btn-success rounded-5 px-5" type="button" href="{{ url('/') }}"> Go Back</a>
                     </div>
                 </div>
             </div>

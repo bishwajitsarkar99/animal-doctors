@@ -1,10 +1,18 @@
 <!-- Navbar Brand-->
 <a class="navbar-brand ps-3 admin_panel" href="#" id="side_bar">
     <span class="visit_link" onclick="openFullscreen()" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Open Full Screen Mode')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-        <span><i class="fa-solid fa-expand" style="color: #ffffff;"></i></span>
+        @if(auth()->user()->role ==0)
+            <span><i class="fa-solid fa-expand" style="color: darkblue;"></i></span>
+        @else
+            <span><i class="fa-solid fa-expand" style="color: #ffffff;"></i></span>  
+        @endif  
     </span>
     <span class="visit_link" onclick="closeFullscreen()" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close Full Screen Mode')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-        <span><i class="fa-regular fa-rectangle-xmark" style="color: #ffffff;"></i></span>
+        @if(auth()->user()->role ==0)
+            <span><i class="fa-regular fa-rectangle-xmark" style="color: darkblue;"></i></span>
+        @else
+            <span><i class="fa-regular fa-rectangle-xmark" style="color: #ffffff;"></i></span>
+        @endif
     </span>
     @if(auth()->user()->role ==1)
     {{Auth::user()->name}}
@@ -54,9 +62,13 @@
 <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 footer_toggle" id="sidebarToggle" href="#!" data-bs-toggle="tooltip"  data-bs-placement="left" title="side-bar Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><i class="fas fa-bars"></i></button>
 @endif
 @if(auth()->user()->role ==0)
-<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 footer_toggle" id="sidebarToggle" href="#!" data-bs-toggle="tooltip"  data-bs-placement="left" title="side-bar Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><i class="fas fa-bars"></i></button>
+<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 footer_toggle top__btn" style="color:darkblue;animation: none;" id="sidebarToggle" href="#!" data-bs-toggle="tooltip"  data-bs-placement="left" title="side-bar Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><i class="fas fa-bars"></i></button>
 @endif
-<span class="admin_email">{{Auth::user()->email}} </span>
+@if(auth()->user()->role ==0)
+    <span style="color:darkblue;font-weight:700;font-size: .9rem;">{{Auth::user()->email}} </span>
+@else
+    <span class="admin_email">{{Auth::user()->email}} </span>
+@endif
 
 <!-- Navbar Search-->
 <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0 {{setting('topbar_moduel_display')}}">
@@ -65,15 +77,6 @@
         <button class="btn btn-success btn-btn-sm {{setting('topbar_searchbtn_moduel_display')}}" id="btnNavbarSearch" type="submit" data-bs-toggle="tooltip"  data-bs-placement="left" title="Search" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><i class="fas fa-search"></i></button>
         <datalist id="datalistOptionsTop">
             <option value="{{setting('category_link')}}">
-            <option value="">
-            <option value="">
-            <option value="">
-            <option value="">
-            <option value="">
-            <option value="">
-            <option value="">
-            <option value="">
-            <option value="">
         </datalist>
     </div>
 </form>
@@ -84,64 +87,12 @@
             <img class="img-profile rounded-circle" id="output" src="/image/{{auth()->user()->image}}">
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="themeMenuListBackground">
-            @if(auth()->user()->role ==0)
-            <li>
-                <a class="dropdown-item pro_link" id="profile_urllinks">
-                    <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
-                </a>
-                <!-- <span class="ms-2" id="profileSkel"></span> -->
-                
-            </li>
-            @elseif(auth()->user()->role ==2)
-            <li>
-                <a class="dropdown-item pro_link" id="profile_urllinks">
-                    <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
-                </a>
-                <!-- <span class="ms-2" id="profileSkel"></span> -->
-            </li>
-            @elseif(auth()->user()->role ==3)
-            <li>
-                <a class="dropdown-item pro_link" id="profile_urllinks">
-                    <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
-                </a>
-                <!-- <span class="ms-2" id="profileSkel"></span> -->
-            </li>
-            @elseif(auth()->user()->role ==5)
-            <li>
-                <a class="dropdown-item pro_link" id="profile_urllinks">
-                    <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
-                </a>
-                <!-- <span class="ms-2" id="profileSkel"></span> -->
-            </li>
-            @elseif(auth()->user()->role ==6)
-            <li>
-                <a class="dropdown-item pro_link" id="profile_urllinks">
-                    <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
-                </a>
-                <!-- <span class="ms-2" id="profileSkel"></span> -->
-            </li>
-            @elseif(auth()->user()->role ==7)
-            <li>
-                <a class="dropdown-item pro_link" id="profile_urllinks">
-                    <span class="badge rounded-pill bg-green text-white"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
-                </a>
-                <!-- <span class="ms-2" id="profileSkel"></span> -->
-            </li>
-            @elseif(auth()->user()->role ==1)
             <li>
                 <a class="dropdown-item pro_link" id="profile_urllinks">
                     <span class="show-profile badge rounded-pill bg-green text-white" hidden><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>
                 </a>
                 <span class="show-prof ms-2" id="profileSkel"></span>
             </li>
-            <!-- <li>
-                <a class="dropdown-item pro_link" id="themsetting_click"><i class="fa-solid fa-gear"></i> Theme Setting</a>
-            </li>
-            <hr class="dropdown-divider" /> -->
-            <!-- <li>
-                <a class="dropdown-item pro_link" id="activity_log_url"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> Activity Log</a>
-            </li> -->
-            @endif
             <li>
                 <a class="dropdown-item pro_link" id="logout_click">
                     <span class="show-logout badge rounded-pill bg-danger text-white" hidden><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Logout')}}</span>

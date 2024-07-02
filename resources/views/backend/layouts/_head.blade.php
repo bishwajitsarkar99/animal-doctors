@@ -79,10 +79,10 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/cornflower-blue.css" id="themeSilverlink">
 @endif
 @if(auth()->user()->role ==6)
-<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/silver.css" id="themeSilverlink">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/dark-blue.css" id="themeSilverlink">
 @endif
 @if(auth()->user()->role ==7)
-<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/silver.css" id="themeSilverlink">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/dark-green.css" id="themeSilverlink">
 @endif
 @if(auth()->user()->role ==0)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/silver.css" id="themeSilverlink">
@@ -101,13 +101,13 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/cornflower-blue.css" id="topbarGreenlink">
 @endif
 @if(auth()->user()->role ==6)
-<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark-green.css" id="topbarGreenlink">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark-blue.css" id="topbarGreenlink">
 @endif
 @if(auth()->user()->role ==7)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark-green.css" id="topbarGreenlink">
 @endif
 @if(auth()->user()->role ==0)
-<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark-green.css" id="topbarGreenlink">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/silver.css" id="topbarGreenlink">
 @endif
 <!-- ================ Admin Panel Footer ================= -->
 @if(auth()->user()->role ==1)
@@ -123,7 +123,7 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/cornflower-blue.css" id="footerGreenlink">
 @endif
 @if(auth()->user()->role ==6)
-<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/dark-green.css" id="footerGreenlink">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/dark-blue.css" id="footerGreenlink">
 @endif
 @if(auth()->user()->role ==7)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/dark-green.css" id="footerGreenlink">

@@ -275,7 +275,8 @@ input.form-switch.form-check-input {
     box-shadow: none;
     border: none;
     outline: none;
-    background-color: #0d6efd;
+    /* background-color: #0d6efd; */
+    background-color: #08a05c;
 }
 input.form-switch.form-check-input:checked{
     background-color: orangered;
@@ -287,7 +288,7 @@ input#action_mode {
     height: 1em;
     margin-top: 0.25em;
     vertical-align: top;
-    background-color: #08a05c;
+    background-color: slateblue;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -299,7 +300,7 @@ input#action_mode {
     print-color-adjust: exact;
     outline: none;
     box-shadow: none;
-    border: 1px solid #08a05c;
+    border: 1px solid slateblue;
 }
 span.user_setting_bg {
     border-radius: 5px;

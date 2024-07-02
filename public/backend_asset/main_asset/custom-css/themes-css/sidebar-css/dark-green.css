@@ -1,6 +1,6 @@
 :root{
     --bs-bg-opacity: 1;
-    --theme-background-image:radial-gradient(farthest-corner at 100px 100px, #ffffff,darkblue);
+    --theme-background-image:radial-gradient(farthest-corner at 100px 100px, #ffffff,darkgreen);
     --theme-color:darkblue;
     --theme-transition:1s;
     --theme-transform:scale(0.9);

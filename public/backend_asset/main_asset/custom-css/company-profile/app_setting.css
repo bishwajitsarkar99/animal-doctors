@@ -1,5 +1,5 @@
 :root{
-    --app-setting-tab-background-color:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --app-setting-tab-background-color:linear-gradient(5deg, lightgray, transparent,lightgray,lightgray 160%);
     --apperence-app-setting-bg:linear-gradient(to bottom, silver, transparent,silver,lightgray);
     --drop-border-bg-color:royalblue;
 }
@@ -78,7 +78,7 @@ ul.nav.tab_bg {
 }
 .nav-link.setting {
     display: block;
-    color: forestgreen;
+    color: black;
     text-decoration: none;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
     font-weight: 700;

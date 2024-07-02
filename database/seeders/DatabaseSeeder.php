@@ -134,7 +134,7 @@ class DatabaseSeeder extends Seeder
             'inventory_title'=>'Inventory',
             'invnetory_title_display'=>'inventory_block',
             'invnetory_details_title'=>'Inventory Details',
-            'inventory_details_link'=>'#',
+            'inventory_details_link'=>'http://127.0.0.1:8000/super-admin/inventory-details-record',
             'inventory_details_visual'=>'inventory_url_block',
 
             'authorization_title'=>'Authorize',
