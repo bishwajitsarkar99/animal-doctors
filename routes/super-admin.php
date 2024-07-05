@@ -61,6 +61,7 @@ Route::group(['middleware' => 'auth'], function (){
         Route::delete('super-admin/delete-inventory-permission/{id}', [InventoryAuthorization::class, 'inventoryPermissionDelete'])->name('inventory_permission_delete.action');
         // inventory Details Record
         Route::get('super-admin/inventory-details-record', [InventoryDetailsRecord::class, 'index'])->name('inventory_details.action');
+        Route::get('super-admin/get-inventory-details-record', [InventoryDetailsRecord::class, 'getInventoryDetailsRecord'])->name('get_inventory_details.action');
     });
     // Invntory Token Permission
     Route::middleware(['role:SuperAdmin|Admin'])->group(function(){

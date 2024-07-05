@@ -1,0 +1,104 @@
+:root{
+    --app-setting-tab-background-color: linear-gradient(5deg, lightgray, transparent,lightgray,lightgray 160%);
+    --bs-nav-tabs-link-hover-border-color: #e9ecef #e9ecef #dee2e6;
+    --bs-nav-tabs-form-link-active-color: darkcyan;
+    --bs-nav-tabs-link-active-bg: #fff;
+    --nav-tab-link-active-font-weight: 700;
+    --add-button-permission:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+}
+.inventory-details-record-card{
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    border: none;
+}
+ul.nav.tab_bg {
+    --bs-nav-tabs-border-radius: none;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: var(--bs-nav-tabs-form-link-active-color);
+    background-color: var(--bs-nav-tabs-link-active-bg);
+    border-color: var(--bs-nav-tabs-link-active-border-color);
+    font-weight: var(--nav-tab-link-active-font-weight);
+}
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+    isolation: isolate;
+}
+.nav-tabs .nav-link:hover{
+    color: darkcyan;
+}
+.nav-link.setting {
+    display: block;
+    color: black;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    font-weight: 700;
+    font-family: 'futura';
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+input#input_inventory_search {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    box-shadow: none;
+    border: 1px solid lightblue;
+    border-radius: 4px;
+}
+.mid-topbar-auth {
+    margin-left: 0px;
+    background-color: whitesmoke;
+    width: 100%;
+    background-image: repeating-linear-gradient(90deg, #e3e3e3, transparent 430px);
+    border-radius: 5px;
+}
+.capsule-sm-skeleton-focus {
+    border: 1px solid #ddd;
+}
+.capsule-sm-skeleton {
+    background: linear-gradient(120deg, lightgray, transparent, #fff, lightgray);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    animation: 2s infinite load;
+    background-color: transparent;
+}
+@keyframes load {
+    100% {
+        background-position: -100% 0;
+    }
+}
+select#perItemControlGet {
+    border: none;
+    background-image: linear-gradient(to top, silver, transparent, silver, lightgray);
+    outline: none;
+    color: black;
+    font-weight: 700;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 57px;
+}
+.refrsh-hidden{
+    display: none;
+}
+
+/* Select-Dropdown */
+select#select_supplier_id, #select_user_id, #select_status, #select_medicine_group, #select_medicine_dosage, #select_medicine_origin, #select_medicine_name {
+    width: 100%;
+    outline: none;
+    border: 1px solid lightblue;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    background-image: var(--add-button-permission);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 10px;
+    font-family: math;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+}
+div#inventory_get_data_table_paginate {
+    float: right;
+}

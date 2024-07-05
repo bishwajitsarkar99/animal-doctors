@@ -2,34 +2,37 @@
 @section('content')
 @include('backend.layouts.dashboard-components._navbar')
 
-<div class="card form-control form-control-sm">
-    <div class="card-body">
-        <ul class="nav nav-tabs tab_bg skeleton" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link setting active skeleton" data-bs-toggle="tab" href="#home">Inventory Details</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link setting skeleton" data-bs-toggle="tab" href="#menu1">Inventory Data Export</a>
-            </li>
-        </ul>
-        <div class="tab-content">
-            <div id="home" class="container tab-pane active skeleton"><br>
-                <h6>Inventory Details</h6>
-
-            </div>
-            <div id="menu1" class="container tab-pane fade"><br>
-                <h6>Inventory Data Export</h6>
-    
-            </div>
-        </div>
+<div class="card form-control form-control-sm inventory-details-record-card">
+  <div class="card-body">
+    <ul class="nav nav-tabs tab_bg skeleton" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link setting active skeleton" data-bs-toggle="tab" href="#home">Inventory Details</a>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-sm cgt_btn btn_focus add_button skeleton  mt-1 ms-2" id="refresh">
+          <i class="refresh-icon fa fa-solid fa-asterisk fa-spin refrsh-hidden" style="color:white;opacity:1;"></i>
+          <span class="btn-text ms-1">Refresh</span>
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div id="home" class="container tab-pane active skeleton"><br>
+        @include('super-admin.inventory-details._inventory-data-get-ajax')
+      </div>
     </div>
+  </div>
 </div>
 @endsection
 
 @section('css')
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/inventory/medicine-inventory.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/inventory/authorize_table.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-date-ui.min.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/inventory/inventory-details.css">
 @endsection
 @section('script')
+@include('super-admin.inventory-details.data-handel-ajax.get-inventory-ajax')
+@include('super-admin.inventory-details.data-handel-ajax.get-dropdown-ajax')
 <script src="{{asset('backend_asset')}}/main_asset/js/date-formate.js"></script>
 <script>
   // skeleton

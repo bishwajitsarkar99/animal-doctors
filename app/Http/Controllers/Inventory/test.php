@@ -1,55 +1,7 @@
-<?php
-
-namespace App\Http\Controllers\Inventory;
-
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
-use App\Models\Medicine\Inventory;
-use App\Models\MedicineGroup;
-use App\Models\MedicineDogs;
-use App\Models\MedicineOrigin;
-use App\Models\MedicineName;
-use App\Models\Role;
-use App\Models\User;
-use App\Models\Supplier\Supplier;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-
-class InventoryDetailsRecord extends Controller
-{
-    public function index(Request $request)
-    {
-        $suppliers = Supplier::where('supplier_status', 1)->orderBy('id', 'desc')->get();
-        $roles = Role::whereIn('id', [2, 3, 4, 5])->get(); 
-        $medicine_groups = MedicineGroup::where('status', 1)->orderBy('id', 'desc')->get();
-        $medicine_dosages = MedicineDogs::with('medicine_names')->where('status', 1)->orderBy('id', 'desc')->get();
-        $medicine_origins = MedicineOrigin::where('status', 1)->orderBy('id', 'desc')->get();
-        $medicine_names = MedicineName::where('status', 1)->orderBy('id', 'desc')->get();
-
-        if ($request->expectsJson()) {
-
-            return response()->json([
-                'suppliers' => $suppliers,
-                'roles' => $roles,
-                'medicine_groups' => $medicine_groups,
-                'medicine_dosages' => $medicine_dosages,
-                'medicine_origins' => $medicine_origins,
-                'medicine_names' => $medicine_names,
-            ]);
-        }
-        return view('super-admin.inventory-details.index');
-    }
-    
-    // Inventory Details Record View
-    public function getInventoryDetailsRecord(Request $request)
-    {
-        if (!$request->ajax()) {
+if (!$request->ajax()) {
             return abort(404);
         }
-
+    
         $user_id = $request->input('user_id');
         $supplier_id = $request->input('supplier_id');
         $inv_id = $request->input('inv_id');
@@ -78,12 +30,12 @@ class InventoryDetailsRecord extends Controller
             }, $months));
         }
     
+        // Initialize the query builder
         $query = Inventory::with([
-            'medicine_names', 'medicine_groups', 'units',
-            'users', 'roles', 'suppliers', 'sub_categories', 
-            'medicine_origins', 'medicine_dogs'
-        ])->orderBy('inventory_id', 'desc');
-
+            'medicine_names', 'medicine_groups', 'medicine_dosages', 'units',
+            'users', 'roles', 'suppliers', 'sub_categories', 'medicine_origins'
+        ])->orderBy('inventory_id', 'desc')-get();
+        
         // Apply date filter
         if ($start_date && $end_date) {
             $query->whereBetween('created_at', [
@@ -91,24 +43,21 @@ class InventoryDetailsRecord extends Controller
                 Carbon::parse($end_date)->endOfDay()
             ]);
         }
-
+    
         // Apply additional filters
         if ($user_id) {
-            $query->where('user_id', 'LIKE', '%' . $user_id . '%');
+            $query->where('user_id', $user_id);
         }
-        
-        if ($supplier_id) {
-            $query->where('supplier_id', 'LIKE', '%' . $supplier_id . '%');
-        }
+    
         if ($inv_id) {
-            $query->where('inv_id', $inv_id);
+            $query->where('inv_id', 'LIKE', '%' . $inv_id . '%');
         }
     
         if ($medicine_group) {
             $query->where('medicine_group', 'LIKE', '%' . $medicine_group . '%');
         }
         if ($medicine_dosage) {
-            $query->where('medicine_dosage', $medicine_dosage);
+            $query->where('medicine_dosage', 'LIKE', '%' . $medicine_dosage . '%');
         }
         if ($medicine_origin) {
             $query->where('medicine_origin', 'LIKE', '%' . $medicine_origin . '%');
@@ -124,7 +73,7 @@ class InventoryDetailsRecord extends Controller
                 $query->where('status', $status);
             }
         }
-
+    
         // Clone the query for calculating totals
         $totalPendingQuery = clone $query;
         $totalInvPending = $totalPendingQuery->whereNull('status')->sum('sub_total');
@@ -139,9 +88,10 @@ class InventoryDetailsRecord extends Controller
         $totalInvQty = $totalQuantityQuery->sum('quantity');
     
         $totalInv = $query->sum('sub_total');
-        
-        $perItem = $request->input('per_item', 5);
+    
+        $perItem = $request->input('per_item', 10);
         $data = $query->paginate($perItem)->toArray();
+    
         return response()->json([
             'data' => $data['data'],
             'links' => $data['links'],
@@ -153,11 +103,4 @@ class InventoryDetailsRecord extends Controller
             'totalInvJustify' => $totalInvJustify,
             'months' => $months,
             'years' => array_values($years)
-
         ], 200);
-    }
-
-
-    
-
-}

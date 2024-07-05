@@ -3,8 +3,8 @@
 @include('backend.layouts.dashboard-components._navbar')
 <div class="inventory-bg-color">
   <button class="tablinkinventory ms-1 ps-2 pe-2 mb-1 mt-1" onclick="openinventoryLink(event,'inventory_authorize')" id="inventory_active">Inventory-Authorize</button>
-  <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_permission')" id="inventory_inactive">Permission</button>
-  <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_delete')" id="inventory_inactive">Access & Export</button>
+  <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_permission')" id="inventory_inactive">Update Permission</button>
+  <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_delete')" id="inventory_inactive">Create & Data Export Permission</button>
 </div>
 <div id="inventory_authorize" class="supp">
   <div class="card form-control card-body form-control-sm pb-4" id="inventory_page">
@@ -12,12 +12,12 @@
   </div>
 </div>
 <div id="inventory_delete" class="container-fluid bg-transparent px-4 supp" style="display: none;">
-  @include('super-admin.inventory-authorize._inventory-details-table')
+  @include('super-admin.inventory-authorize._inventory-create-permission')
 </div>
 <div id="inventory_permission" class="container-fluid bg-transparent px-4 supp" style="display: none;">
   <div class="card form-control card-body form-control-sm" id="permission_access_page">
-    @include('super-admin.inventory-authorize._permission')
-    @include('super-admin.inventory-authorize._inventory_permission_table')
+    @include('super-admin.inventory-authorize._update_permission_form')
+    @include('super-admin.inventory-authorize._inventory_update_permission_table')
   </div>
 </div>
 

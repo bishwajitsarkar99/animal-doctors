@@ -126,7 +126,7 @@ select#perItemControls {
 }
 select> option {
     font-weight: 600;
-    color: white;
+    color: black;
     /* background: #08a05c; */
     background: #97ffe8;
     padding: 10px;

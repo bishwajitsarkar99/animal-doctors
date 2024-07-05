@@ -3,7 +3,7 @@
     --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
     --inventory-navbar-btn-background-image:linear-gradient(to right, silver, transparent,lightgray);
     --inventory-navbar-btn-background-image-hover:linear-gradient(to bottom, silver, transparent, silver, lightgray);
-    --inventory-navbar-btn-color:black;
+    --inventory-navbar-btn-color:darkcyan;
     --inventory-opacity:1;
     --bg-color:purple;
     --color:purple;
@@ -210,7 +210,7 @@ input.form-switch.form-check-input {
     background-color: orangered;
 }
 .inventory-seeblue {
-    background-image: var(--inventory-navbar-btn-background-image);
+    background: white;
     opacity: var(--inventory-opacity);
     color: var(--inventory-navbar-btn-color);
     font-family: futura;
@@ -456,15 +456,14 @@ span.months {
     color: royalblue;
 }
 .tablinkinventory {
-    background-color: aliceblue;
     outline: none;
     border: none;
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
-    /* line-height: 2; */
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
     font-family: math;
+    isolation: isolate;
 }
 
 .bg-silver {
@@ -946,7 +945,7 @@ div.amount-bg{
 /* Style individual options */
 select> option {
     font-weight: 600;
-    color: white;
+    color: black;
     /* background: #08a05c; */
     background: #97ffe8;
     padding: 10px;
@@ -959,6 +958,7 @@ select> option {
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 10px 10px;
+    font-size: 12px;
 }
 .role-skeletone{
     position: relative;
