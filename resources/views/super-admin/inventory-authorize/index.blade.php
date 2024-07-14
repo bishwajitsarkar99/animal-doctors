@@ -2,9 +2,9 @@
 @section('content')
 @include('backend.layouts.dashboard-components._navbar')
 <div class="inventory-bg-color">
-  <button class="tablinkinventory ms-1 ps-2 pe-2 mb-1 mt-1" onclick="openinventoryLink(event,'inventory_authorize')" id="inventory_active">Inventory-Authorize</button>
-  <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_permission')" id="inventory_inactive">Update Permission</button>
-  <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_delete')" id="inventory_inactive">Create & Data Export Permission</button>
+  <button class="tablinkinventory ms-1 ps-2 pe-2 mb-1 mt-1" onclick="openinventoryLink(event,'inventory_authorize')" id="inventory_active">Authorize</button>
+  <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_permission')" id="inventory_inactive">Permission</button>
+  <button class="tablinkinventory ps-2 pe-2" onclick="openinventoryLink(event,'inventory_delete')" id="inventory_inactive">Create & My Sql Database Permission</button>
 </div>
 <div id="inventory_authorize" class="supp">
   <div class="card form-control card-body form-control-sm pb-4" id="inventory_page">
@@ -23,8 +23,9 @@
 
 <!-- show-message -->
 <div class="col-xl-12 action_message">
-  <p class="ps-1"><span id="success_message"></span></p>
+  <p class="ps-1"><span class="ms-4" style="color:green;font-weight:600;font-size: 14px;" id="success_message"></span></p>
   <p class="ps-1"><span id="success_messages"></span></p>
+  <!-- <p class="ps-1"><span id="success_message"></span></p> -->
   <p class="ps-1 ms-2"><span id="success_messages_permission"></span></p>
 </div>
 

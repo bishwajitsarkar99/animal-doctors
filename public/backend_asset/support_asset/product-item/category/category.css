@@ -40,6 +40,7 @@ table, th, td {
 }
 tr.table-row.user-table-row{
     background-color: white;
+    color: black;
 }
 tr.table-row.user-table-row:hover{
     background-image: var(--table-row-hover);
@@ -90,7 +91,7 @@ input.form-switch.form-check-input {
     
 }
 input.form-switch.form-check-input:checked{
-    background-color: #0d6efd;
+    background-color: #08a05c;
     border: none;
 }
 .catg{

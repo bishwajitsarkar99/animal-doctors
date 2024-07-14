@@ -35,7 +35,7 @@ a.btn.btn-sm.btn-success.ord_btn {
     height: 25px;
 }
 tr.table-row.user-table-row {
-    background-color:#fff4df;
+    background-color:white;
 }
 .history_box{
     justify-content: space-between;
@@ -109,18 +109,22 @@ a#export:hover,a#exportExcel:hover,a#exportCsv:hover,a#printBtn:hover {
 .pdf-title::after{
     content: 'PDF Download';
     display: inline;
+    font-weight:700;
 }
 .excel-title::after{
     content: 'Excel';
     display: inline;
+    font-weight:700;
 }
 .cvs-title::after{
     content: 'CVS';
     display: inline;
+    font-weight:700;
 }
 .print-title::after{
     content: 'Print Screen';
     display: inline;
+    font-weight:700;
 }
 .export-button-classic-hidden{
     display: none;
@@ -241,7 +245,7 @@ div.result_box{
     border: 1px solid lightgray;
 }
 .bg-filter {
-    background-color: #fff4df;
+    background-color: white;
 }
 
 /* ========= Modbile responsive ========== */

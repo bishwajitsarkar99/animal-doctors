@@ -77,10 +77,14 @@ return[
     'Inventory Details'=>'ইনভেন্টরি বিবরণ',
     'Inventory-Authorization'=>'ইনভেন্টরি-অনুমোদন',
     'Authorization'=>'অনুমোদন',
+    'Inventory Setting'=>'ইনভেন্টরি সেটিং',
+
     // Supplier
     'Supplier'=>'সরবরাহকারী',
     'Supplier-Setting'=>'সরবরাহকারী-সেটিং',
     'Supplier-Setup'=>'সরবরাহকারী-সেটআপ',
+    'Supplier-Create'=>'সরবরাহকারী-তৈরি করুন',
+    'Supplier Record'=>'সরবরাহকারী রেকর্ড',
     'Supplier-Record'=>'সরবরাহকারী-রেকর্ড',
     'Details Record'=>'বিস্তারিত রেকর্ড',
     'Supplier-Requisition'=>'সরবরাহকারী-রিকুইজিশন',

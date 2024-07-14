@@ -129,13 +129,13 @@
                     <td class="ps-1 font table_body3">${row.users && row.users.email ? row.users.email : 'No Email'}</td>
                     <td class="ps-1 font table_body4 ${row.permission_status}" id="supp_tab15">
                         <span class="permission-plates permission ps-1 ${row.permission_status ? 'text-dark' : 'text-danger'}">
-                            ${row.permission_status ? '✅ Justify' : '❌ Deny'}
+                            ${row.permission_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span> Justify' : '❌ Deny'}
                         </span>
                         <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
                     </td>
                     <td class="ps-1 font table_body4 ${row.data_export_status}" id="supp_tab15">
                         <span class="permission-plates permission ps-1 ${row.data_export_status ? 'text-dark' : 'text-danger'}">
-                            ${row.data_export_status ? '✅ Data Export' : '❌ Deny'}
+                            ${row.data_export_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span> Data Export' : '❌ Deny'}
                         </span>
                         <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
                     </td>

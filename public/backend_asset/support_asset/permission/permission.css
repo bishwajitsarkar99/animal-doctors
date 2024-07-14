@@ -160,7 +160,7 @@ input#searchID {
 }
 td.font{
     font-weight: 700;
-    font-size: 12px;
+    font-size: 13px;
     color: black;
 }
 label.item_class {
@@ -437,7 +437,7 @@ tr.table-head {
 .custom-role-arrow3{
     display: block;
     top: 0px;
-    right: -16px;
+    right: 1px;
     position: absolute;
     width: 2rem;
     height: 100%;

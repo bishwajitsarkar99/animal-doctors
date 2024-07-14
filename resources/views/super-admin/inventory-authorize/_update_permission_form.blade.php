@@ -84,7 +84,6 @@
                 <span class="btn-text">Permission</span>
             </button>
         </div>
-        <p class="ps-1"><span id="success_message"></span></p>
     </div>
 </form>
 

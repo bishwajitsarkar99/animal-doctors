@@ -455,6 +455,7 @@
         // Refresh
         $(document).on('click', '#refresh', function(){
             $(".error-message").remove();
+            $("#success_message").remove();
             $('.role-select').addClass('select-display');
             $('.select_status').addClass('select-display');
             $(".refresh-icon").removeClass('perm-hidden');
@@ -651,8 +652,8 @@
                     status: $(this).val(),
                 },
                 success: function(response) {
-                    console.log('response', response);
-                    $("#success_message").text(response.messages);
+                    //console.log('response', response);
+                    $("#success_message").text(response.message);
                     fetch_all_inventories_authorize('', pagination_url);
                 },
                 error: function(xhr) {

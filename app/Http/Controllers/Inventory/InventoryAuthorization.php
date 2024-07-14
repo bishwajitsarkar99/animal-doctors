@@ -232,8 +232,10 @@ class InventoryAuthorization extends Controller
             'status' => (int)$status,
         ]);
 
+        $message = $data->status ? 'The Inventory has been Authorized Successfully.' : 'The Inventory has been Unauthorized.';
+
         return response()->json([
-            'messages' => 'The Inventory has Authorized Successfully',
+            'message' => $message,
             'code' => 202,
         ], 202);
     }

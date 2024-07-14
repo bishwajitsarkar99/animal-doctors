@@ -79,9 +79,12 @@ return[
     'Inventory Details'=>'Inventory Details',
     'Inventory-Authorization'=>'Inventory-Authorization',
     'Authorization'=>'Authorization',
+    'Inventory Setting'=>'Inventory Setting',
     // Supplier
     'Supplier'=>'Supplier',
     'Supplier-Setting'=>'Supplier-Setting',
+    'Supplier-Create'=>'Supplier-Create',
+    'Supplier Record'=>'Supplier Record',
     'Supplier-Setup'=>'Supplier-Setup',
     'Supplier-Record'=>'Supplier-Record',
     'Details Record'=>'Details Record',

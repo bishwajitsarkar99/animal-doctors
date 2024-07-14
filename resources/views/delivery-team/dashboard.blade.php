@@ -5,10 +5,53 @@
     @include('backend.layouts.dashboard-area-parts._dashboard-main-result')
 </div>
 <!-- =========== SUMMARY HEAD ============= -->
-<h1>Delivery Team</h1>
+<div class="row">
+        <div class="col-xl-2"></div>
+        <div class="col-xl-8">
+            <div class="accounts__menu">
+                <p class="smy tp text-shadow" style="text-align:center;text-decoration: underline cornflowerblue;">Marketing Menu</p>
+                <div class="row">
+                    <div class="col-xl-4 accounts__list">
+                        <ul>
+                            <li><a class="title__label" type="button" href="#">Accounting Leger</a></li>
+                            <li><a class="title__label" type="button" href="#">Customer Book</a></li>
+                            <li><a class="title__label" type="button" href="#">Sales</a></li>
+                            <li><a class="title__label" type="button" href="#">Day Book</a></li>
+                            <li><a class="title__label" type="button" href="#">Expenses Book</a></li>
+                            <li><a class="title__label" type="button" href="#">Bank Book</a></li>
+                            <li><a class="title__label" type="button" href="#">Petty Cash</a></li>
+                            <li><a class="title__label" type="button" href="#">Vaoucher</a></li>
+                            <li><a class="title__label" type="button" href="#">Asset</a></li>
+                            <li><a class="title__label" type="button" href="#">Report</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-4 accounts__list">
+                        <ul>
+                            <li><a class="title__label" type="button" href="#">Financial Statement</a></li>
+                            <li><a class="title__label" type="button" href="#">Income Statement</a></li>
+                            <li><a class="title__label" type="button" href="#">P/L Statement</a></li>
+                            <li><a class="title__label" type="button" href="#">Balance Sheet</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-4 accounts__list">
+                        <ul>
+                            <li><a class="title__label" type="button" href="#">Supplier</a></li>
+                            <li><a class="title__label" type="button" href="{{ route('medicine-inventory.index') }}">Inventory - Create</a></li>
+                            <li><a class="title__label" type="button" href="{{ route('inventory_details.action') }}">Inventory - Download</a></li>
+                            <li><a class="title__label" type="button" href="#">Stock</a></li>
+                            <li><a class="title__label" type="button" href="#">Delivery</a></li>
+                            <li><a class="title__label" type="button" href="#">Employee</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2"></div>
+    </div>
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-ui.min.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/accounts-department/accounts-ui.css">
 @endsection
 @section('script')
 <script>

@@ -4,8 +4,8 @@
 <!-- =========== ACCOUNTS MENU PAGE ============= -->
 <section>
     <div class="row">
-        <div class="col-xl-3"></div>
-        <div class="col-xl-6">
+        <div class="col-xl-2"></div>
+        <div class="col-xl-8">
             <div class="accounts__menu">
                 <p class="smy tp text-shadow" style="text-align:center;text-decoration: underline cornflowerblue;">Accounts Menu</p>
                 <div class="row">
@@ -34,7 +34,8 @@
                     <div class="col-xl-4 accounts__list">
                         <ul>
                             <li><a class="title__label" type="button" href="#">Supplier</a></li>
-                            <li><a class="title__label" type="button" href="{{ route('medicine-inventory.index') }}">Inventory</a></li>
+                            <li><a class="title__label" type="button" href="{{ route('medicine-inventory.index') }}">Inventory - Create</a></li>
+                            <li><a class="title__label" type="button" href="{{ route('inventory_details.action') }}">Inventory - Download</a></li>
                             <li><a class="title__label" type="button" href="#">Stock</a></li>
                             <li><a class="title__label" type="button" href="#">Delivery</a></li>
                             <li><a class="title__label" type="button" href="#">Employee</a></li>
@@ -43,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3"></div>
+        <div class="col-xl-2"></div>
     </div>
 </section>
 <div class="row">

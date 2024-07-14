@@ -46,16 +46,16 @@
                 <!-- <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Create-Inventory">
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Add Inventory
                 </a> -->
-                <a class="nav-link underline" href="{{setting('inventory_details_link')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Inventory-Details')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a class="nav-link underline" href="{{ route('inventory_details.action') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Inventory-Details')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>
                     <span class="{{setting('inventory_details_visual')}}">{{__('translate.Inventory Details')}}</span>
                 </a>
                 <!-- <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Inventory-Setting">
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Inventory Setting
                 </a> -->
-                <a class="nav-link underline" href="{{setting('authorization_link')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Inventory-Authorization')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a class="nav-link underline" href="{{setting('authorization_link')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Inventory Setting')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>
-                    <span class="{{setting('inventory_visual')}}">{{__('translate.Authorization')}}</span>
+                    <span class="{{setting('inventory_visual')}}">{{__('translate.Inventory Setting')}}</span>
                 </a>
             </nav>
         </div>
@@ -71,17 +71,21 @@
 
         <div class="collapse" id="stock_" aria-labelledby="headingTwo" data-bs-parent="#stock_">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link underline" href="{{setting('supplier_setup_link')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Supplier-Setting')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a class="nav-link underline" href="{{setting('supplier_setup_link')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Supplier-Create')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>
-                    <span class="{{setting('supplier_setup_display')}}">{{__('translate.Supplier-Setup')}}</span>
+                    <span class="{{setting('supplier_setup_display')}}">{{__('translate.Supplier-Create')}}</span>
                 </a>
                 <a class="nav-link underline" href="{{setting('supplier_details_setup_link')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Supplier-Record')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>
-                    <span class="{{setting('supplier_details_display')}}">{{__('translate.Details Record')}}</span>
+                    <span class="{{setting('supplier_details_display')}}">{{__('translate.Supplier Record')}}</span>
                 </a>
                 <a class="nav-link underline" href="{{setting('supplier_requisition_link')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Supplier-Requisition')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>
                     <span class="{{setting('supplier_requisition_display')}}">{{__('translate.Supplier Requisition')}}</span>
+                </a>
+                <a class="nav-link underline" href="{{route('access-permission.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Supplier-Setting')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>
+                    <span class="{{setting('supplier_requisition_display')}}">{{__('translate.Supplier-Setting')}}</span>
                 </a>
             </nav>
         </div>
@@ -100,6 +104,9 @@
             <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link underline" href="{{ route('medicine-inventory.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Create-Inventory')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.Add Inventory')}}
+                </a>
+                <a class="nav-link underline" href="{{ route('inventory_details.action') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="Inventory Data Export" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Inventory Download
                 </a>
             </nav>
         </div>

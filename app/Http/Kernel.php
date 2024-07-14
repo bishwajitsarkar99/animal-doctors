@@ -77,5 +77,6 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\RoleMiddleware::class,
         'rolePermission' => \App\Http\Middleware\RolePermission::class,
         'inventoryPermission' => \App\Http\Middleware\InventoryPermission::class,
+        'inventoryDataExport' => \App\Http\Middleware\InventoryDataExport::class,
     ];
 }

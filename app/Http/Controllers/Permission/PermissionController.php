@@ -11,9 +11,10 @@ use Illuminate\Support\Facades\Validator;
 
 class PermissionController extends Controller
 {
+    // Inventory Permission Home Page
     public function index(Request $request){
 
-        $roles = Role::whereIn('id', [2, 3, 4, 5, 6, 7])->get();
+        $roles = Role::whereIn('id', [1, 2, 3, 4, 5, 6, 7])->get();
         $dataQuery = InventoryAccessPermission::with('roles', 'users')->orderBy('id', 'desc');
     
         if ($query = $request->get('query')) {
@@ -35,7 +36,7 @@ class PermissionController extends Controller
         return view('super-admin.user-permission.index');
     }
 
-    // Get Email in Dropdown
+    // Get Email in Dropdown iteam
     public function getEmail(Request $request ,$selectedRole){
         $users = User::whereHas('roles', function($query) use ($selectedRole) {
             $query->where('id', $selectedRole);

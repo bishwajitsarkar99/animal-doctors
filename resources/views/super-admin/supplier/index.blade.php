@@ -13,14 +13,9 @@
                         </button>
                     </h2>
                     <div id="flush-searchEdit" class="accordion-collapse collapse" aria-labelledby="flush-searchType" data-bs-parent="#seach_type_edit">
-                        <div class="accordion-body">
+                        <div class="content-body">
                             <div class="card-body focus-color cd cat_form">
                                 <p class="catg mb-1">Supplier Or Vendor</span></p>
-                                <!-- <div class="progress-wrapper">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="total_supplier_records_progressbar"></div>
-                                    </div>
-                                </div> -->
                                 <div class="row">
                                     <div class="col-5">
                                         <span class="form-check form-switch search_ skeleton me-2">
@@ -49,7 +44,7 @@
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact2</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">WhatsApp</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Email</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ skeleton">Status</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ skeleton">Permission</th>
                                             <th id="th_sort" class="table_th_color tot_pending_ skeleton pe-2">Check</th>
                                         </tr>
                                         <tbody class="bg-transparent skeleton" id="supplier_data_table">
@@ -308,6 +303,7 @@
   </div>
 </div>
 {{--End Supplier or Info View Modal--}}
+
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">

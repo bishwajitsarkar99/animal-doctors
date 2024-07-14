@@ -30,7 +30,7 @@
                         </td>
                         <td class="ps-1 border_ord" id="medic_name3">${row.medicine_groups ? row.medicine_groups.group_name : ''}</td>
                         <td class="txt_ ps-1" id="medic_name5">${row.medicine_name}</td>
-                        <td class="tot_complete_ pe-2 ${row.status ? 'bg-primary' : 'bg-danger'}" id="cat_td6">
+                        <td class="tot_complete_ pe-2 ${row.status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
                             <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '✅ Active' : '❌ Deny'}</span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
                         </td>

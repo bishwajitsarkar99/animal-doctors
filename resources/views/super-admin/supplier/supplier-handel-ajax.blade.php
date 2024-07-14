@@ -40,8 +40,8 @@
                         <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${row.contact_number_two}</td>
                         <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${row.whatsapp_number}</td>
                         <td class="txt_ ps-1 supp_vew10" id="supp_tab13">${row.email}</td>
-                        <td class="tot_complete_ pe-2 ${row.supplier_status ? 'bg-primary' : 'bg-danger'}" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.supplier_status ? 'text-primary' : 'text-danger'}">${row.supplier_status ? '✅ Active' : '❌ Deny'}</span>
+                        <td class="tot_complete_ pe-2 ${row.supplier_status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.supplier_status ? 'text-primary' : 'text-danger'}">${row.supplier_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
                         </td>
                         <td class="tot_complete_ ps-1 pt-1 center" id="supp_tab14">

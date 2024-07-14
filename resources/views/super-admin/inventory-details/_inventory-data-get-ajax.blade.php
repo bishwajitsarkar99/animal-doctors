@@ -103,7 +103,7 @@
     </div>
     <div class="col-xl-3">
         <label class="label_margin" for="total_justify" style="color: black; font-size:12px;font-weight:700;font-family:math;" id="denyAmount">Authorize : 
-            <span class="badge rounded-pill bg-white total_users capsule-sm-skeleton capsule-sm-skeleton-focus" style="font-weight:800;color:darkcyan;opacity:1;font-size:12px;">
+            <span class="badge rounded-pill bg-white total_users capsule-sm-skeleton capsule-sm-skeleton-focus" style="font-weight:800;color:green;opacity:1;font-size:12px;">
                 <span data-val="" id="total_justify_inventory_records"></span>
                 <span>৳</span>
             </span>
@@ -111,7 +111,7 @@
     </div>
     <div class="col-xl-2">
         <label class="label_margin" for="total_deny" style="color: black; font-size:12px;font-weight:700;font-family:math;" id="pendingAmount">Deny : 
-            <span class="badge rounded-pill bg-white total_users capsule-sm-skeleton capsule-sm-skeleton-focus" style="font-weight:800;color:rgb(209 157 0);opacity:1;font-size:12px;">
+            <span class="badge rounded-pill bg-white total_users capsule-sm-skeleton capsule-sm-skeleton-focus" style="font-weight:800;color:orangered;opacity:1;font-size:12px;">
                 <span data-val="" id="total_deny_inventory_records"></span>
                 <span>৳</span>
             </span>
@@ -119,7 +119,7 @@
     </div>
     <div class="col-xl-2">
         <label class="label_margin" for="total_pending" style="color: black; font-size:12px;font-weight:700;font-family:math;" id="pendingAmount">Pending : 
-            <span class="badge rounded-pill bg-white total_users capsule-sm-skeleton capsule-sm-skeleton-focus" style="font-weight:800;color:gray;opacity:1;font-size:12px;">
+            <span class="badge rounded-pill bg-white total_users capsule-sm-skeleton capsule-sm-skeleton-focus" style="font-weight:800;color:black;opacity:1;font-size:12px;">
                 <span data-val="" id="total_pending_inventory_records"></span>
                 <span>৳</span>
             </span>
@@ -130,7 +130,7 @@
 <span class="skeleton">
     <table class="ord_table center border-1 skeleton mt-2" id="inventoryAuthorizeTable">
         <tr class="table-row order_body acc_setting_table skeleton ">
-            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton  ps-1">ID</th>
+            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton  ps-1">SN.</th>
             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">INV-ID</th>
             <th id="th_sort" class="table_th_color tot_pending_ skeleton ">Mfg.Date</th>
             <th id="th_sort" class="table_th_color tot_pending_ skeleton ">Exp.Date</th>
@@ -176,5 +176,8 @@
     <div class="col-8">
         <div class="pagination" id="inventory_get_data_table_paginate"></div>
     </div>
+</div>
+<div class="loader-position">
+    <img class="server-loader error-hidden loader-show" id="loaderShow" src="{{asset('/image/loader/loading.gif')}}" alt="Loading...." />
 </div>
 {{-- end Inventory Details Table --}}

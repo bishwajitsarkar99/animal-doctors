@@ -5,6 +5,16 @@
     --bs-nav-tabs-link-active-bg: #fff;
     --nav-tab-link-active-font-weight: 700;
     --add-button-permission:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    --export-data-dropdown-menu-bg:radial-gradient(farthest-corner at 100px 100px, #fff, #fff); 
+    --export-data-dropdown-menu-shadow:0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    --export-data-dropdown-menu-opacity:1;
+    --export-data-dropdown-menu-z-index:1;
+    --dot-skeletone-bg:linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%);
+    --font-family-features:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
+    --animation-transform-1245:translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+    --animation-transform-1246:translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+    --animation-transform-1256:translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+    --animation-transform-1257:translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
 }
 .inventory-details-record-card{
     box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
@@ -102,3 +112,119 @@ select#select_supplier_id, #select_user_id, #select_status, #select_medicine_gro
 div#inventory_get_data_table_paginate {
     float: right;
 }
+.error-hidden{
+    display: none;
+}
+img#loaderShow {
+    height: 40px;
+    width: 40px;
+}
+.loader-position {
+    text-align: center;
+}
+label#userPicture {
+    margin-left: 8px;
+}
+.card.detail-content {
+    margin-left: 0px;
+    box-shadow: 0px 1px 10px #0001;
+    border-radius: 4px;
+    border: none;
+}
+.card-row-label {
+    display: block;
+    width: 100%;
+    padding: 0.3rem 0.65rem;
+    font-size: 0.74rem;
+    font-family: math;
+    font-weight: 600;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    line-height: 1;
+    color: #212529;
+    background-color: white;
+    /* background-color: #f8f8f8; */
+    background-clip: padding-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+label#Supplier{
+    writing-mode: vertical-lr;
+    transform: rotate(-180deg);
+    transition: all;
+    /* text-orientation: upright;  transform:translate(10px, 10px)*/
+}
+.refrsh-show{
+    display: block;
+}
+
+ul.export-dropdown-menu{
+    position: absolute;
+    background-image: var(--export-data-dropdown-menu-bg);
+    opacity: var(--export-data-dropdown-menu-opacity);
+    border: none;
+    box-shadow: var(--export-data-dropdown-menu-shadow);
+    z-index: var(--export-data-dropdown-menu-z-index);
+}
+a#export:hover,a#exportExcel:hover,a#exportCsv:hover,a#printBtn:hover {
+    color: white;
+    background-color: rgb(1, 145, 1);
+}
+.pdf-skeletone,.excel-skeletone,.cvs-skeletone,.print-skeletone{
+    position: relative;
+    background-color: rgb(0,0,0,0.06);  
+}
+.pdf-skeletone::before,.cvs-skeletone::before,.print-skeletone::before{
+    content: "";
+    position: absolute;
+    box-sizing: border-box;
+    justify-content: space-between;
+    z-index: 2;
+    margin-left: -2px;
+    margin-top: 5px;
+    min-height: 10px;
+    width: 130px;
+    border-radius: 5px;
+    background: var(--dot-skeletone-bg);
+    background-size: 400% 100%;
+    animation-name: css-skeleton-loading;
+    animation-duration: 1.4s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+}
+
+.pdf-title::after{
+    content: 'PDF Download';
+    display: inline;
+    font-weight:700;
+}
+.excel-title::after{
+    content: 'Excel';
+    display: inline;
+    font-weight:700;
+}
+.cvs-title::after{
+    content: 'CVS';
+    display: inline;
+    font-weight:700;
+}
+.print-title::after{
+    content: 'Screen Print';
+    display: inline;
+    font-weight:700;
+}
+.export-button-classic-hidden{
+    display: none;
+}
+a.btn.btn-sm.btn-success.ord_btn {
+    height: 25px;
+}
+table, th, td {
+    border-collapse: collapse;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    opacity: 7;
+    font-family: math;
+}
+

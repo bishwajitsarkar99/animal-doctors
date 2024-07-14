@@ -28,7 +28,7 @@
                                 <th id="th_sort" class="table_th_color skeleton txt col ps-2" style="text-align:left;">Access</th>
                                 <th id="th_sort" class="table_th_color tot_pending_ skeleton col ps-1" style="text-align:center;">
                                     Status
-                                    <span style="color:darkgreen;" id="statusJustify" hidden>[Justify] ✅</span> 
+                                    <span style="color:darkgreen;" id="statusJustify" hidden>[Justify] <span style="color:green;font-weight:800;font-size: 12px;"><i class="fa-solid fa-check"></i></span></span> 
                                     <span style="color:orangered;" id="statusDeny" hidden>[Deny] ❌</span>
                                 </th>
                             </tr>
@@ -40,7 +40,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="table_body2 skeleton ps-2">Data Export</td>
+                                    <td class="table_body2 skeleton ps-2">My Sql Database</td>
                                     <td class="table_body2 skeleton role_nme" style="text-align: center;line-height: .9;">
                                         <input type="checkbox" name="data_export_status" value="1" class="dataStatusChecking data_export_status skeleton mt-1" id="dataStatusChecking" style="cursor: pointer;">
                                     </td>
@@ -79,7 +79,7 @@
                     <th id="th_sort" class="table_th_color tot_pending_ skeleton col ps-1" style="text-align: left;">Role</th>
                     <th id="th_sort" class="table_th_color tot_pending_ skeleton col ps-1" style="text-align: left;">Email</th>
                     <th id="th_sort" class="table_th_color tot_pending_ skeleton col ps-1" style="text-align: left;">Permission</th>
-                    <th id="th_sort" class="table_th_color tot_pending_ skeleton col ps-1" style="text-align: left;">Data Export</th>
+                    <th id="th_sort" class="table_th_color tot_pending_ skeleton col ps-1" style="text-align: left;">My Sql Database</th>
                     <th id="th_sort" class="table_th_color tot_pending_ skeleton col ps-1" style="text-align: left;">Action</th>
                 </tr>
                 <tbody class="bg-transparent" id="access_permission_data_table">
