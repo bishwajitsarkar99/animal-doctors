@@ -509,7 +509,7 @@ span.label_user_edit {
 }
 .alert_show{
     font-size: 15px;
-    color: darkcyan;
+    color: black;
     font-weight: 500;
     animation: text 0.9s 1.05;
     animation-delay: 2s;

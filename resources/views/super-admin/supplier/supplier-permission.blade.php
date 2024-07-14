@@ -4,7 +4,7 @@
 
 <div class="card form-control form-control-sm inventory-details-record-card">
   <div class="card-body">
-    <ul class="nav nav-tabs tab_bg" role="tablist">
+    <ul class="nav nav-tabs tab_bg" role="tablist" style="background:aliceblue;">
       <li class="nav-item">
         <a class="nav-link setting active home-text" data-bs-toggle="tab" href="#home" id="tabHome" hidden> Supplier Access</a>
         <span class="tab-skeletone ms-1"></span>
@@ -25,7 +25,7 @@
         <span class="tab2-skeletone ms-1"></span>
       </li>
     </ul>
-    <div class="tab-content" id="showCard" hidden>
+    <div class="tab-content" id="showCard" style="background:aliceblue;padding-bottom:15px;" hidden>
       <div id="home" class="container tab-pane active"><br>
         @include('super-admin.supplier._permission_home')
       </div>

@@ -33,7 +33,7 @@
                     </div>
                     <div class="col-xl-4 accounts__list">
                         <ul>
-                            <li><a class="title__label" type="button" href="#">Supplier</a></li>
+                            <li><a class="title__label" type="button" href="{{ route('supplier.index') }}">Supplier</a></li>
                             <li><a class="title__label" type="button" href="{{ route('medicine-inventory.index') }}">Inventory - Create</a></li>
                             <li><a class="title__label" type="button" href="{{ route('inventory_details.action') }}">Inventory - Download</a></li>
                             <li><a class="title__label" type="button" href="#">Stock</a></li>

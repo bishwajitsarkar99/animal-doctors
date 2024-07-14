@@ -106,11 +106,6 @@
                     <td class="ps-1 font table_body2">${row.roles && row.roles.name ? row.roles.name : 'No Role'}</td>
                     <td class="ps-1 font table_body3">${row.users && row.users.email ? row.users.email : 'No Email'}</td>
                     <td class="ps-1 font table_body4" id="supp_tab15">
-                        <span class="permission-plates permission ps-1 ${row.view_status ? 'text-dark' : 'text-danger'}">
-                            ${row.view_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
-                        </span>
-                    </td>
-                    <td class="ps-1 font table_body4" id="supp_tab15">
                         <span class="permission-plates permission ps-1 ${row.create_status ? 'text-dark' : 'text-danger'}">
                             ${row.create_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
                         </span>
@@ -118,6 +113,11 @@
                     <td class="ps-1 font table_body4" id="supp_tab15">
                         <span class="permission-plates permission ps-1 ${row.update_status ? 'text-dark' : 'text-danger'}">
                             ${row.update_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.view_status ? 'text-dark' : 'text-danger'}">
+                            ${row.view_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
                         </span>
                     </td>
                     <td class="ps-1 font table_body4" id="supp_tab15">
@@ -692,6 +692,78 @@
             var query = $(this).val();
             fetch_supplier_data(query);
 
+        });
+
+        // Paginate Page-------------------------------
+        const paginate_html = ({
+            links,
+            total
+        }) => {
+            if (total == 0) {
+                return "";
+            }
+
+            return `
+                <nav class="paginate_link" aria-label="Page navigation example">
+                    <ul class="pagination">
+                        ${links.map((link, key) => {
+                            return `
+                                <li class="page-item${link.active? ' active': ''}" key=${key}>
+                                    <a class="page-link btn_page" href="${link.url? link.url: '#'}">
+                                        ${link.label}
+                                    </a>
+                                </li>
+                            `;
+                        }).join("\n")}
+                    </ul>
+                </nav>
+            `;
+        }
+        // change paginate page------------------------
+        $("#supplier_data_table_paginate").delegate("a", "click", function(e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+
+            const url = $(this).attr('href');
+
+            if (url !== '#') {
+                fetch_supplier_data('', url);
+            }
+
+        });
+        // Update- Supplier Status ------------------
+        $("#supplier_data_table").delegate(".supplier_check_permission", "click", function(e) {
+            e.preventDefault();
+
+            const current_url = "{{route('supplier_update_status.action')}}";
+            const pagination_url = $("#supplier_data_table_paginate .active").attr('href');
+            const status_id = $(this).attr('status_id');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: current_url,
+                dataType: 'json',
+                data: {
+                    id: status_id,
+                    supplier_status: $(this).val(),
+                },
+                success: function(response) {
+                    console.log('messages', response.messages);
+                    $("#success_message").text(response.messages);
+                    fetch_supplier_data('', pagination_url);
+                },
+                error: function(xhr) {
+                    if (xhr.status === 423) {
+                        window.location.href = '/suppliers/permission-status-update/${status_id}';
+                    }
+                }
+            });
         });
     });
 </script>

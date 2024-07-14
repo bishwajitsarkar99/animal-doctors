@@ -78,5 +78,10 @@ class Kernel extends HttpKernel
         'rolePermission' => \App\Http\Middleware\RolePermission::class,
         'inventoryPermission' => \App\Http\Middleware\InventoryPermission::class,
         'inventoryDataExport' => \App\Http\Middleware\InventoryDataExport::class,
+        'supplierCreate' => \App\Http\Middleware\Supplier\SupplierCreate::class,
+        'supplierUpdate' => \App\Http\Middleware\Supplier\supplierUpdate::class,
+        'supplierDelete' => \App\Http\Middleware\Supplier\supplierDelete::class,
+        'supplierView' => \App\Http\Middleware\Supplier\supplierView::class,
+        'supplierMySqlData' => \App\Http\Middleware\Supplier\supplierMySqlData::class,
     ];
 }

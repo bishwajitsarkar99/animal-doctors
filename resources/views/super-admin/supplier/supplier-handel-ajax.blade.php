@@ -325,6 +325,11 @@
                         $('.edit_whatsapp_number').val(response.messages.whatsapp_number);
                         $('.edit_email').val(response.messages.email);
                     }
+                },
+                error: function(xhr) {
+                    if (xhr.status === 417) {
+                        window.location.href = '/edit-supplier/{id}';
+                    }
                 }
             });
         });
@@ -420,6 +425,11 @@
                         }, 3000);
                         fetch_supplier_data();
                     }
+                },
+                error: function(xhr) {
+                    if (xhr.status === 417) {
+                        window.location.href = '/update-supplier/{id}';
+                    }
                 }
             });
 
@@ -477,41 +487,50 @@
                     $('#deletesupplier').modal('hide');
 
                     fetch_supplier_data();
+                },
+                error: function(xhr) {
+                    if (xhr.status === 404) {
+                        window.location.href = '/errors/404';
+                    }
                 }
 
             });
-        });
+        }); 
 
         // Update- Supplier Status ------------------
         $("#supplier_data_table").delegate(".supplier_check_permission", "click", function(e) {
+            e.preventDefault();
 
             const current_url = "{{route('supplier_update_status.action')}}";
-
             const pagination_url = $("#supplier_data_table_paginate .active").attr('href');
+            const status_id = $(this).attr('status_id');
 
             $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            
+
             $.ajax({
                 type: "POST",
                 url: current_url,
                 dataType: 'json',
                 data: {
-                    id: $(this).attr('status_id'),
+                    id: status_id,
                     supplier_status: $(this).val(),
                 },
-                success: function({
-                    messages
-                }) {
-                    console.log('messages', messages);
-                    $("#success_message").text(messages.messages);
+                success: function(response) {
+                    console.log('messages', response.messages);
+                    $("#success_message").text(response.messages);
                     fetch_supplier_data('', pagination_url);
+                },
+                error: function(xhr) {
+                    if (xhr.status === 405) {
+                        window.location.href = '/errors/405';
+                    }
                 }
             });
-        });  
+        });
         
         // Supplier Info View
         $(document).on('click', '#viewBtn', function(e) {
@@ -522,7 +541,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "/edit-supplier/" + supplier_id,
+                url: "/view-supplier/" + supplier_id,
                 success: function(response) {
                     if (response.status == 404) {
                         $('#success_message').html("");
@@ -540,6 +559,11 @@
                         $('.view_contact_number_two').val(response.messages.contact_number_two);
                         $('.view_whatsapp_number').val(response.messages.whatsapp_number);
                         $('.view_email').val(response.messages.email);
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.status === 418) {
+                        window.location.href = '/view-supplier/{supplier_id}';
                     }
                 }
             });

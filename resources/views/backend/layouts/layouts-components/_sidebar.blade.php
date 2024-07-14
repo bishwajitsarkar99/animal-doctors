@@ -212,7 +212,7 @@
         @endif
         @if(auth()->user()->role ==2)
         <!-- ==================  Auth Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> Auth</div>
+        <div class="sb-sidenav-menu-heading"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> Purchases Dept.</div>
         @include('backend.layouts.layouts-components.partial-sidebar._sub-admin')
         <!-- ================== Layouts ======================= -->
         @include('backend.layouts.layouts-components.partial-sidebar._layouts')

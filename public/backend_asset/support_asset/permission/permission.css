@@ -59,6 +59,7 @@
         background-position: -100% 0;
     }
 }
+
 .bg-green {
     background-color: #198754;
 }
@@ -215,6 +216,18 @@ button#PermissionSubmit:hover,button#PermissionUpdate:hover,button#confirm_btn:h
 }
 a.canl_button:hover,button#PermissionCancel:hover{
     color: lightpink;
+}
+.custom-list-item-arrows {
+    display: block;
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 1rem;
+    height: 100%;
+    pointer-events: none;
+    border-radius: 3px;
+    opacity: 1;
+    cursor: pointer;
 }
 input#delete_access_permission_id,input#update_access_permission_id {
     outline: none;

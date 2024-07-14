@@ -1,17 +1,17 @@
 <div>
     <table class="bg-transparent ord_table center border-1 skeleton mt-2">
         <tr class="table-row order_body acc_setting_table">
-            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1">ID</th>
-            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">ID-Name</th>
-            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Type</th>
-            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Bussiness</th>
-            <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Name</th>
-            <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact1</th>
-            <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact2</th>
-            <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">WhatsApp</th>
-            <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Email</th>
-            <th id="th_sort" class="table_th_color tot_pending_ skeleton">Permission</th>
-            <th id="th_sort" class="table_th_color tot_pending_ skeleton pe-2">Check</th>
+            <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1">ID</th>
+            <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">ID-Name</th>
+            <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Type</th>
+            <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Bussiness</th>
+            <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Name</th>
+            <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact1</th>
+            <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact2</th>
+            <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">WhatsApp</th>
+            <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Email</th>
+            <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton">Permission</th>
+            <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton pe-2">Check</th>
         </tr>
         <tbody class="bg-transparent skeleton" id="supplier_data_table">
 
@@ -22,14 +22,14 @@
     <div class="skeleton col-1">
         <label class="item_class skeleton">Peritem</label>
         <div class="custom-select skeleton">
-            <select class="ps-1 skeleton" id="perItemControl">
+            <select class="ps-1 skeleton" id="perItemControl" style="background-color: rgb(59, 59, 247);">
                 <option class="skeleton" selected>10</option>
                 <option class="skeleton">20</option>
                 <option class="skeleton">50</option>
                 <option class="skeleton">100</option>
                 <option class="skeleton">200</option>
             </select>
-            <span class="custom-list-item-arrow me-2"></span>
+            <span class="custom-list-item-arrow-mini me-2"></span>
         </div>
     </div>
     <div class="col-4">
@@ -39,7 +39,7 @@
         </span>
     </div>
     <div class="col-7">
-        <div class="pagination skeleton mt-1" id="supplier_data_table_paginate">
+        <div class="pagination skeleton mt-1" id="supplier_data_table_paginate" style="float: right;padding-top:3px;">
 
         </div>
     </div>

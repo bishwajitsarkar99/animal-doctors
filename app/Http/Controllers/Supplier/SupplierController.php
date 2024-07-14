@@ -274,11 +274,27 @@ class SupplierController extends Controller
         else{
             return response()->json([
                 'status'=> 404,
-                'messages'=> 'The brand is not found',
+                'messages'=> 'The supplier is not found',
             ]);
         }
     }
-
+    // View Supplier
+    public function viewSupplier($id)
+    {
+        $suppliers = Supplier::find($id);
+        if($suppliers){
+            return response()->json([
+                'status'=> 200,
+                'messages'=> $suppliers,
+            ]);
+        }
+        else{
+            return response()->json([
+                'status'=> 404,
+                'messages'=> 'The supplier view is not found',
+            ]);
+        }
+    }
     // Update Supplier
     public function updateSupplier(Request $request, $id)
     {
@@ -353,7 +369,7 @@ class SupplierController extends Controller
         ]);
 
         return response()->json([
-            'messages' => 'The contact Permission has Updated Successfully',
+            'messages' => 'My Sql Data Permission has Updated Successfully',
             'code' => 202,
         ], 202);
     }

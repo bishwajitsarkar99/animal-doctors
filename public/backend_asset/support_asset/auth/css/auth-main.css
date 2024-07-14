@@ -443,7 +443,7 @@ input.email {
 }
 @keyframes inputColor{
   0%{
-    color: darkorange;
+    color: darkblue;
   }
   100%{
     color: darkblue;

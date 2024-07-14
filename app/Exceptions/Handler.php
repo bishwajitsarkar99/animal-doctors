@@ -38,4 +38,27 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        // Check if the exception is an instance of NotFoundHttpException (404)
+        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+            return response()->view('errors.404', [], 404);
+        }
+        // Check if the exception is an instance of MethodNotAllowedHttpException (405)
+        elseif ($exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException) {
+            return response()->view('errors.405', [], 405);
+        }
+        // Check if the exception is an instance of HttpException (other HTTP errors)
+        elseif ($exception instanceof \Symfony\Component\HttpKernel\Exception\HttpException) {
+            // Handle 500 Internal Server Error specifically if needed
+            if ($exception->getStatusCode() == 403) {
+                return response()->view('errors.403', [], 403);
+            }
+            // Handle other HttpException errors
+            return response()->view("errors.{$exception->getStatusCode()}", [], $exception->getStatusCode());
+        }
+
+        return parent::render($request, $exception);
+    }
 }
