@@ -25,7 +25,14 @@ class CreateSupplierPermissionsTable extends Migration
             $table->tinyInteger('delete_status')->default('0');
             $table->tinyInteger('view_status')->default('0');
             $table->tinyInteger('data_export_status')->default('0');
+            $table->tinyInteger('data_table_status')->default('0');
+            $table->tinyInteger('supplier_requisition_status')->default('0');
+            $table->tinyInteger('supplier_payment_status')->default('0');
+            $table->tinyInteger('supplier_setting_status')->default('0');
+            $table->tinyInteger('supplier_summary_status')->default('0');
+            $table->tinyInteger('supplier_searching_status')->default('0');
             $table->unsignedBigInteger('approved_by')->default(1);
+            $table->unsignedBigInteger('update_by')->nullable();
             $table->timestamps();
         });
     }

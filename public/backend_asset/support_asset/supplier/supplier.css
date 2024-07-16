@@ -1,16 +1,40 @@
 :root{
-    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
+    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue,transparent 80%, rgba(0, 0, 0, 0.05) 100%);
     --bg-color:purple;
     --color:royalblue;
     --size:1px;
-    --font-weight:500;
+    --font-weight:600;
     /* --apperence-app-setting-bg:linear-gradient(to bottom, silver, transparent,silver,lightgray); */
     --drop-border-bg-color:royalblue;
 }
 .custom-select{
     position: relative;
 }
-
+a#suppSetting {
+    font-size: 13px;
+    font-weight: 700;
+    margin-left: 8px;
+}
+.alert_show {
+    font-size: 13px;
+    color: black;
+    font-weight: 500;
+    animation: text 0.9s 1.05;
+    animation-delay: 2s;
+}
+#category_page {
+    border: none;
+    background-color: aliceblue;
+    border-radius: 5px;
+    opacity: 1;
+}
+.card.form-control.cat_form {
+    border: none;
+    box-shadow: none;
+}
+.card-body.cat_form {
+    box-shadow: none;
+}
 .custom-drop-item-arrow{
     display: block;
     top: 0;
@@ -54,12 +78,20 @@ div.item {
     line-height: 3.5;
 }
 .supp_name_label{
-    font-family: math;
     font-size: 0.92vw;
     letter-spacing: 0.9px;
     color: black;
-    font-weight: 600;
-    text-transform: uppercase;
+    font-weight: 610;
+    text-transform: capitalize;
+}
+catg {
+    color: black;
+    font-size: 12px;
+    margin-top: -10px;
+    animation: fon_color 3s infinite;
+    font-weight: 700;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
 }
 input#type {
     outline: none;
@@ -67,7 +99,7 @@ input#type {
     animation: supfncolor 6s infinite;
     font-size: 13px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
@@ -81,7 +113,7 @@ input#bussiness_type {
     animation: supfncolor 6s infinite;
     font-size: 13px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
@@ -94,7 +126,7 @@ input#name {
     animation: supfncolor 6s infinite;
     font-size: 13px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
@@ -107,7 +139,7 @@ input#office_address {
     animation: supfncolor 6s infinite;
     font-size: 13px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
@@ -120,7 +152,7 @@ input#current_address {
     animation: supfncolor 6s infinite;
     font-size: 13px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
@@ -133,7 +165,7 @@ input#contact_number_one {
     animation: supfncolor 6s infinite;
     font-size: 13px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
@@ -146,7 +178,7 @@ input#contact_number_two {
     animation: supfncolor 6s infinite;
     font-size: 13px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
@@ -159,7 +191,7 @@ input#whatsapp_number {
     animation: supfncolor 6s infinite;
     font-size: 13px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
@@ -172,7 +204,7 @@ input#email {
     animation: supfncolor 6s infinite;
     font-size: 13px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
@@ -207,12 +239,11 @@ input#email {
 }
 button.supplier_data_box {
     color: black;
-    font-weight: 600;
+    font-weight: 700;
     background-color: #f1f1f1;
-    font-family: math;
-    font-size: 0.9vw;
+    font-size: 1vw;
     letter-spacing: 0.8px;
-    text-transform: uppercase;
+    text-transform: capitalize;
     line-height: 0.5px;
 }
 div#supplier_data_table_paginate {
@@ -347,7 +378,7 @@ span.address_erorr{
 }
 tr.supp-table-row{
     font-size: 0.9vw;
-    font-weight: 500;
+    font-weight: 600;
 }
 #staticBackHead{
     font-size: 12px;
@@ -378,7 +409,7 @@ input.view_bussiness_type{
     margin-bottom: 2px;
 }
 label.label_font{
-    font-weight: 600;
+    font-weight: 650;
 }
 input.view_whatsapp_number {
     margin-left: -2px;
@@ -388,6 +419,67 @@ input.view_whatsapp_number {
 input.view_contact_number_one,.view_contact_number_two {
     margin-top: 2px;
     margin-bottom: 2px;
+}
+input#supplier_search {
+    outline: none;
+    box-shadow: 0px 2px 20px #0001;
+    border-radius: 5px;
+    border-top: 1px solid #f1eeee;
+    border-bottom: 1px solid #f1eeee;
+    border-left: 1px solid #f1eeee;
+    border-right: 1px solid #f1eeee;
+    opacity: 1;
+    background-color: white;
+    animation: text_color 3s infinite;
+}
+@keyframes text_color {
+    50% {
+        color: darkcyan;
+        background-color: #fff;
+    }
+    
+    100% {
+        color: orangered;
+    }
+}
+.display-hidden{
+    display: none;
+}
+.supp_search-hidden{
+    display: none;
+}
+select#perItemControl {
+    outline: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid rgb(5, 5, 248);
+    border-radius: 3px;
+    width: 49px;
+    background: linear-gradient(to bottom, rgb(5, 5, 248), transparent 3%, rgb(5, 5, 248), rgb(5, 5, 248));
+}
+span#success_message {
+    color: green;
+}
+select> option {
+    font-weight: 600;
+    color: white;
+    background: rgb(0 0 235);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 10px;
+    font-size: 12px;
+}
+select> option:hover{
+    background: wheat;
+    color: #fff;
 }
 #staticBackdropLabels {
     font-size: 19px;

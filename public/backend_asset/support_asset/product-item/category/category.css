@@ -1,6 +1,6 @@
 :root{
     --input-background-color:linear-gradient(to bottom, lightgray, transparent,lightgray);
-    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
+    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue,transparent 80%, rgba(0, 0, 0, 0.05) 100%);
     --bg-color:purple;
     --color:purple;
     --size:1px;

@@ -32,11 +32,11 @@ input#profile_mode {
     cursor: pointer;
 }
 input[type=checkbox].form-switch.form-check-input{
-    background-color: #03c500;
+    background-color: orangered;
 
 }
 input[type=checkbox].form-switch.form-check-input:checked {
-    background-color: limegreen;
+    background-color: rgb(5, 5, 248);
     color: white;
 }
 .indicate_light {
@@ -356,7 +356,7 @@ label#login_enable,#login_enable3,#login_enable4,#login_enable3a,#login_enable_s
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     background-color: #f1f1f1;
-    color: darkcyan;
+    color: rgb(5, 5, 248);
 }
 label#login_disable,#login_disable3,#login_disable4,#login_disable3a,#login_disable_social,#login_disable4f,#login_disable4t,#login_disable4n {
     background-image: var(--comment-box-background);
@@ -397,16 +397,19 @@ img#image_view:hover{
     transform: scale(5);
 }
 button#company_btn {
-    background-color: #08a05c;
+    background-color: rgb(5, 5, 248);
     background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     font-weight: 600;
     color: white;
     font-size: 0.9vw;
     line-height: .1;
     font-family: math;
+    text-transform: capitalize;
+    border: none;
 }
 button#company_btn:hover{
     background-color: #ddd;
+    color: rgb(5, 5, 248);
 }
 textarea#update_company_address {
     box-shadow: none;
@@ -429,15 +432,15 @@ textarea#update_company_address:hover{
     background-color: #f1f1f1;
 }
 .Profile_success_message{
-    color: darkcyan;
-    font-size: 14px;
+    color: cornflowerblue;
+    font-size: 13px;
     font-weight: 500;
     letter-spacing: 1px;
     animation: text 3s 1;
 }
 @keyframes text{
     0%{
-        color: darkcyan;
+        color: cornflowerblue;
     }
     30%{
         letter-spacing: 15px;

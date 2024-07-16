@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-xl-5">
+    <div class="col-xl-4">
         <div class="card card-body permission-card">
             <form class="form-control form-control-sm gx-2" style="border:none;">
                 @csrf
@@ -26,41 +26,77 @@
                         <table class="ord_table center border-1" id="myTable">
                             <tr class="table-row order_body acc_setting_table long-skeleton">
                                 <th id="th_sort" class="table_th_color long-skeleton txt col ps-2" style="text-align:left;">Access</th>
-                                <th id="th_sort" class="table_th_color tot_pending_ long-skeleton col ps-1" style="text-align:center;">
+                                <th id="th_sort" class="table_th_color tot_pending_ long-skeleton col ps-1" style="text-align:center;height:40px;width:150px;">
                                     Permission
-                                    <span style="color:darkgreen;" id="statusJustify" hidden>[Justify] <span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span></span> 
-                                    <span style="color:orangered;" id="statusDeny" hidden>[Deny] ❌</span>
+                                    <span style="color:darkgreen;" id="statusJustify" hidden>[<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>]</span> 
+                                    <span style="color:orangered; font-size:12px;" id="statusDeny" hidden>[❌]</span>
                                 </th>
                             </tr>
                             <tbody class="bg-transparent" id="permission_data_table">
-                                <tr class="btn-hover table_body long-skeleton">
+                                <tr class="btn-hover table_body table-row user-table-row long-skeleton">
                                     <td class="table_body2 ps-2">Create</td>
                                     <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
                                         <input type="checkbox" name="create_status" value="1" class="create_status create_status skeleton mt-1" id="create_status" style="cursor: pointer;">
                                     </td>
                                 </tr>
-                                <tr class="btn-hover table_body long-skeleton">
+                                <tr class="btn-hover table_body table-row user-table-row long-skeleton">
                                     <td class="table_body2 ps-2">Update</td>
                                     <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
                                         <input type="checkbox" name="update_status" value="1" class="statusChecking update_status skeleton mt-1" id="update_status" style="cursor: pointer;">
                                     </td>
                                 </tr>
-                                <tr class="btn-hover table_body long-skeleton">
+                                <tr class="btn-hover table_body table-row user-table-row long-skeleton">
                                     <td class="table_body2 ps-2">Delete</td>
                                     <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
                                         <input type="checkbox" name="delete_status" value="1" class="statusChecking delete_status skeleton mt-1" id="delete_status" style="cursor: pointer;">
                                     </td>
                                 </tr>
-                                <tr class="btn-hover table_body long-skeleton">
+                                <tr class="btn-hover table_body table-row user-table-row long-skeleton">
                                     <td class="table_body2 ps-2">View</td>
                                     <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
                                         <input type="checkbox" name="view_status" value="1" class="statusChecking view_status skeleton mt-1" id="view_status" style="cursor: pointer;">
                                     </td>
                                 </tr>
-                                <tr class="btn-hover table_body long-skeleton">
+                                <tr class="btn-hover table_body table-row user-table-row long-skeleton">
                                     <td class="table_body2 ps-2">My Sql Database</td>
                                     <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
                                         <input type="checkbox" name="data_export_status" value="1" class="dataStatusChecking data_export_status skeleton mt-1" id="data_export_status" style="cursor: pointer;">
+                                    </td>
+                                </tr>
+                                <tr class="btn-hover table_body table-row user-table-row long-skeleton">
+                                    <td class="table_body2 ps-2">Supplier Table</td>
+                                    <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
+                                        <input type="checkbox" name="data_table_status" value="1" class="dataTableStatus data_table_status skeleton mt-1" id="data_table_status" style="cursor: pointer;">
+                                    </td>
+                                </tr>
+                                <tr class="btn-hover table_body table-row user-table-row long-skeleton">
+                                    <td class="table_body2 ps-2">Requisition</td>
+                                    <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
+                                        <input type="checkbox" name="supplier_requisition_status" value="1" class="dataRequistionStatus supplier_requisition_status skeleton mt-1" id="supplier_requisition_status" style="cursor: pointer;">
+                                    </td>
+                                </tr>
+                                <tr class="btn-hover table_body table-row user-table-row long-skeleton">
+                                    <td class="table_body2 ps-2">Payment</td>
+                                    <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
+                                        <input type="checkbox" name="supplier_payment_status" value="1" class="dataPaymentStatus supplier_payment_status skeleton mt-1" id="supplier_payment_status" style="cursor: pointer;">
+                                    </td>
+                                </tr>
+                                <tr class="btn-hover table_body table-row user-table-row long-skeleton">
+                                    <td class="table_body2 ps-2">Supplier Setting</td>
+                                    <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
+                                        <input type="checkbox" name="supplier_setting_status" value="1" class="dataSettingStatus supplier_setting_status skeleton mt-1" id="supplier_setting_status" style="cursor: pointer;">
+                                    </td>
+                                </tr>
+                                <tr class="btn-hover table_body table-row user-table-row long-skeleton">
+                                    <td class="table_body2 ps-2">Summary</td>
+                                    <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
+                                        <input type="checkbox" name="supplier_summary_status" value="1" class="dataSummaryStatus supplier_summary_status skeleton mt-1" id="supplier_summary_status" style="cursor: pointer;">
+                                    </td>
+                                </tr>
+                                <tr class="btn-hover table_body table-row user-table-row long-skeleton">
+                                    <td class="table_body2 ps-2">Searching Data</td>
+                                    <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
+                                        <input type="checkbox" name="supplier_searching_status" value="1" class="dataSearchingStatus supplier_searching_status skeleton mt-1" id="supplier_searching_status" style="cursor: pointer;">
                                     </td>
                                 </tr>
                             </tbody>
@@ -85,17 +121,18 @@
             </form>
         </div>
     </div>
-    <div class="col-xl-7">
-        <div class="card card-body permission-card">
+    <div class="col-xl-8">
+        <div class="card card-body " style="border:none;margin-right:-5px;">
+            <span id="permission_success_message"></span>
             <div class="search-box mb-2">
                 <input class="ps-2" type="search" name="search" placeholder="search id" id="searchID" hidden>
                 <span class="search-skeletone"></span>
             </div>
-            <table class="ord_table center border-1 long-skeleton" id="myTable">
+            <table class="ord_table center border-1 long-skeleton" id="SupplierSettingTable">
                 <tr class="table-row order_body acc_setting_table ">
-                    <th id="th_sort_head" class="table_th_color  txt col ps-1" style="text-align: left;padding-top: 62px;">ID</th>
-                    <th id="th_sort_head" class="table_th_color tot_pending_  col ps-1" style="text-align: left;padding-top: 62px;">Role</th>
-                    <th id="th_sort_head" class="table_th_color tot_pending_  col ps-1" style="text-align: left;padding-top: 62px;">Email</th>
+                    <th id="th_sort_head" class="table_th_color  txt col ps-1" style="text-align: left;padding-top: 100px;">ID</th>
+                    <th id="th_sort_head" class="table_th_color tot_pending_  col ps-1" style="text-align: left;padding-top: 100px;">Role</th>
+                    <th id="th_sort_head" class="table_th_color tot_pending_  col ps-1" style="text-align: left;padding-top: 100px;">Email</th>
                     <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
                         Create
                         <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
@@ -116,7 +153,34 @@
                         My Sql Database
                         <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
                     </th>
-                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1" style="text-align:center;padding-top: 62px;">Action</th>
+                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                        Supplier Table
+                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                    </th>
+                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                        Requisition
+                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                    </th>
+                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                        Setting
+                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                    </th>
+                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                        Payment
+                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                    </th>
+                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                        Summary
+                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                    </th>
+                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                        Searching
+                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                    </th>
+                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                        Action
+                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                    </th>
                 </tr>
                 <tbody class="bg-transparent" id="access_permission_data_table">
 
@@ -127,13 +191,12 @@
                     <label class="item_class text-place mt-1" id="item_class" hidden></label>
                     <div class="custom-select peritem-skeleton">
                         <select class="ps-1 peritem-skeleton" id="perItemControls" hidden>
-                            <option class="peritem-skeleton" style="color:black;" selected>10</option>
-                            <option class="peritem-skeleton" style="color:black;">20</option>
-                            <option class="peritem-skeleton" style="color:black;">50</option>
-                            <option class="peritem-skeleton" style="color:black;">100</option>
-                            <option class="peritem-skeleton" style="color:black;">200</option>
+                            <option class="peritem-skeleton" selected>10</option>
+                            <option class="peritem-skeleton">20</option>
+                            <option class="peritem-skeleton">50</option>
+                            <option class="peritem-skeleton">100</option>
+                            <option class="peritem-skeleton">200</option>
                         </select>
-                        <span class="custom-list-items-arrow me-2"></span>
                     </div>
                 </div>
                 <div class="col-xl-7">

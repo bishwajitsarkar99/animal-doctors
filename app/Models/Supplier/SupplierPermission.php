@@ -20,6 +20,12 @@ class SupplierPermission extends Model
         'delete_status',
         'view_status',
         'data_export_status',
+        'data_table_status',
+        'supplier_requisition_status',
+        'supplier_payment_status',
+        'supplier_setting_status',
+        'supplier_summary_status',
+        'supplier_searching_status',
         'created_at',
         'updated_at',
     ];

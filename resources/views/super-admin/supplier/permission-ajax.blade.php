@@ -22,14 +22,14 @@
                 success: function(response) {
                     const roles = response.roles;
                     $("#select_supplier_role").empty();
-                    $("#select_supplier_role").append('<option value="" style="color:darkgreen;font-weight:600;">Select Role</option>');
+                    $("#select_supplier_role").append('<option value="" style="font-weight:600;">Select Role</option>');
                     $.each(roles, function(key, item) {
-                        $("#select_supplier_role").append(`<option style="color:black;font-weight:600;" value="${item.id}">${item.name}</option>`);
+                        $("#select_supplier_role").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.name}</option>`);
                     });
                 },
                 error: function() {
                     $("#select_supplier_role").empty();
-                    $("#select_supplier_role").append('<option style="color:black;font-weight:600;" value="" disabled>Error loading data</option>');
+                    $("#select_supplier_role").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
                 }
             });
         }
@@ -39,7 +39,7 @@
             var changeValue = $(this).val();
             if (changeValue === '') {
                 $("#select_supplier_email").empty();
-                $("#select_supplier_email").append('<option style="color:black;font-weight:600;" value="" disabled>Select the role</option>');
+                $("#select_supplier_email").append('<option style="color:white;font-weight:600;" value="" disabled>Select the role</option>');
             }
         });
 
@@ -71,7 +71,7 @@
                     const users = response.users;
                     $("#select_supplier_email").empty();
                     $.each(users, function(key, item) {
-                        $("#select_supplier_email").append(`<option style="color:black;font-weight:600;" value="${item.id}">${item.email}</option>`);
+                        $("#select_supplier_email").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.email}</option>`);
                     });
                 },
                 error: function() {
@@ -86,6 +86,12 @@
             $('#select_email').val("");
             $("input[name='permission_status']").prop('checked', false);
             $("input[name='data_export_status']").prop('checked', false);
+            $("input[name='data_table_status']").prop('checked', false);
+            $("input[name='supplier_requisition_status']").prop('checked', false);
+            $("input[name='supplier_payment_status']").prop('checked', false);
+            $("input[name='supplier_setting_status']").prop('checked', false);
+            $("input[name='supplier_summary_status']").prop('checked', false);
+            $("input[name='supplier_searching_status']").prop('checked', false);
         }
         fetch_supplier_access_permission();
         // Data View Table--------------
@@ -101,10 +107,10 @@
             }
 
             return rows.map((row, key) => `
-                <tr class="btn-hover table_body" key="${key}" id="supp_tab">
+                <tr class="btn-hover table_body table-row user-table-row " key="${key}" id="supp_tab">
                     <td class="ps-1 font table_body">${row.id}</td>
-                    <td class="ps-1 font table_body2">${row.roles && row.roles.name ? row.roles.name : 'No Role'}</td>
-                    <td class="ps-1 font table_body3">${row.users && row.users.email ? row.users.email : 'No Email'}</td>
+                    <td class="ps-1 font table_body2 eml">${row.roles && row.roles.name ? row.roles.name : 'No Role'}</td>
+                    <td class="ps-1 font table_body3 eml">${row.users && row.users.email ? row.users.email : 'No Email'}</td>
                     <td class="ps-1 font table_body4" id="supp_tab15">
                         <span class="permission-plates permission ps-1 ${row.create_status ? 'text-dark' : 'text-danger'}">
                             ${row.create_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
@@ -130,11 +136,41 @@
                             ${row.data_export_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
                         </span>
                     </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.data_table_status ? 'text-dark' : 'text-danger'}">
+                            ${row.data_table_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.supplier_requisition_status ? 'text-dark' : 'text-danger'}">
+                            ${row.supplier_requisition_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.supplier_setting_status ? 'text-dark' : 'text-danger'}">
+                            ${row.supplier_setting_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.supplier_payment_status ? 'text-dark' : 'text-danger'}">
+                            ${row.supplier_payment_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.supplier_summary_status ? 'text-dark' : 'text-danger'}">
+                            ${row.supplier_summary_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.supplier_searching_status ? 'text-dark' : 'text-danger'}">
+                            ${row.supplier_searching_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
                     <td class="ps-1 font table_body5" id="supp_tab15">
                         <button type="button" class="editBtn" id="edtBtn" value="${row.id}" style="font-size: 10px; cursor: pointer; height:15px;" data-bs-toggle="tooltip" data-bs-placement="right" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                             <i class="fa-solid fa-pen-to-square" style="color: blue;"></i>
                         </button>
-                        <button type="button" class="deleteBtn ms-1" id="permissionDeleteBtn" value="${row.id}" style="font-size: 10px; cursor: pointer; height:15px;" data-bs-toggle="tooltip" data-bs-placement="right" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                        <button type="button" class="deleteBtn ms-1" id="permissionDeleteBtn" value="${row.id}" style="font-size: 10px;float: left; cursor: pointer; height:15px;" data-bs-toggle="tooltip" data-bs-placement="right" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                             <i class="fa-solid fa-trash-can" style="color: orangered;"></i>
                         </button>
                     </td>
@@ -242,6 +278,12 @@
             var updateStatus = $("input[name='update_status']:checked").val();
             var deleteStatus = $("input[name='delete_status']:checked").val();
             var dataExportStatus = $("input[name='data_export_status']:checked").val();
+            var dataTableStatus = $("input[name='data_table_status']:checked").val();
+            var dataRequistionStatus = $("input[name='supplier_requisition_status']:checked").val();
+            var dataPaymentStatus = $("input[name='supplier_payment_status']:checked").val();
+            var dataSettingStatus = $("input[name='supplier_setting_status']:checked").val();
+            var dataSummaryStatus = $("input[name='supplier_summary_status']:checked").val();
+            var dataSearchingStatus = $("input[name='supplier_searching_status']:checked").val();
             
             if (!roleName) {
                 $("#select_supplier_role").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the role name.</span>');
@@ -250,7 +292,7 @@
                 $("#select_supplier_email").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the user email.</span>');
             }
             if (!permissionStatus) {
-                $("#view_status").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Permission status is required.</span>');
+                $("#view_status").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">View is required.</span>');
             }
 
             // Check if there are any error messages
@@ -267,6 +309,12 @@
                 'update_status': updateStatus ? 1 : 0,
                 'delete_status': deleteStatus ? 1 : 0,
                 'data_export_status': dataExportStatus ? 1 : 0,
+                'data_table_status': dataTableStatus ? 1 : 0,
+                'supplier_requisition_status': dataRequistionStatus ? 1 : 0,
+                'supplier_payment_status': dataPaymentStatus ? 1 : 0,
+                'supplier_setting_status': dataSettingStatus ? 1 : 0,
+                'supplier_summary_status': dataSummaryStatus ? 1 : 0,
+                'supplier_searching_status': dataSearchingStatus ? 1 : 0,
             };
 
             $.ajaxSetup({
@@ -294,18 +342,12 @@
                     } else {
                         $('#savForm_error').html("");
                         $('#permission_success_message').html("");
-                        $('#permission_success_message').addClass('alert_show ps-1 pe-1');
+                        $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
                         $('#permission_success_message').fadeIn();
                         $('#permission_success_message').text(response.messages);
                         $('#select_supplier_role').val("");
                         $('#select_supplier_email').val("");
-
-                        $("input[name='view_status']").prop('checked', false);
-                        $("input[name='create_status']").prop('checked', false);
-                        $("input[name='update_status']").prop('checked', false);
-                        $("input[name='delete_status']").prop('checked', false);
-                        $("input[name='data_export_status']").prop('checked', false);
-
+                        clearFields();
                         $("#statusJustify").attr('hidden', true);
                         $("#statusDeny").attr('hidden', true);
                         setTimeout(() => {
@@ -376,6 +418,12 @@
                         $('#delete_status').prop('checked', response.messages.delete_status == 1);
                         $('#view_status').prop('checked', response.messages.view_status == 1);
                         $('#data_export_status').prop('checked', response.messages.data_export_status == 1);
+                        $('#data_table_status').prop('checked', response.messages.data_table_status == 1);
+                        $('#supplier_requisition_status').prop('checked', response.messages.supplier_requisition_status == 1);
+                        $('#supplier_payment_status').prop('checked', response.messages.supplier_payment_status == 1);
+                        $('#supplier_setting_status').prop('checked', response.messages.supplier_setting_status == 1);
+                        $('#supplier_summary_status').prop('checked', response.messages.supplier_summary_status == 1);
+                        $('#supplier_searching_status').prop('checked', response.messages.supplier_searching_status == 1);
                         
                         if ($('#create_status').is(':checked')) {
                             $("#statusJustify").removeAttr('hidden');
@@ -414,6 +462,12 @@
             var updateStatus = $("input[name='update_status']:checked").val();
             var deleteStatus = $("input[name='delete_status']:checked").val();
             var dataExportStatus = $("input[name='data_export_status']:checked").val();
+            var dataTableStatus = $("input[name='data_table_status']:checked").val();
+            var dataRequistionStatus = $("input[name='supplier_requisition_status']:checked").val();
+            var dataPaymentStatus = $("input[name='supplier_payment_status']:checked").val();
+            var dataSettingStatus = $("input[name='supplier_setting_status']:checked").val();
+            var dataSummaryStatus = $("input[name='supplier_summary_status']:checked").val();
+            var dataSearchingStatus = $("input[name='supplier_searching_status']:checked").val();
 
             if (!roleName) {
                 $("#select_supplier_role").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the role name.</span>');
@@ -439,6 +493,12 @@
                 'update_status': updateStatus ? 1 : 0,
                 'delete_status': deleteStatus ? 1 : 0,
                 'data_export_status': dataExportStatus ? 1 : 0,
+                'data_table_status': dataTableStatus ? 1 : 0,
+                'supplier_requisition_status': dataRequistionStatus ? 1 : 0,
+                'supplier_payment_status': dataPaymentStatus ? 1 : 0,
+                'supplier_setting_status': dataSettingStatus ? 1 : 0,
+                'supplier_summary_status': dataSummaryStatus ? 1 : 0,
+                'supplier_searching_status': dataSearchingStatus ? 1 : 0,
             }
 
             $.ajaxSetup({
@@ -470,12 +530,12 @@
                         });
                     } else if (response.status == 404) {
                         $('#updateForm_errorList').html("");
-                        $('#permission_success_message').addClass('alert_show ps-1 pe-1');
+                        $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
                         $('#permission_success_message').text(response.messages);
                     } else {
                         $('#updateForm_errorList').html("");
                         $('#permission_success_message').html("");
-                        $('#permission_success_message').addClass('alert_show ps-1 pe-1');
+                        $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
                         $('#permission_success_message').fadeIn();
                         $('#permission_success_message').text(response.messages);
                         $('#permission_id').val("");
@@ -520,7 +580,7 @@
                 type: "DELETE",
                 url: "/super-admin/delete-permission/" + id,
                 success: function(response) {
-                    $('#permission_success_message').addClass('alert_show ps-1 pe-1');
+                    $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
                     $('#permission_success_message').fadeIn();
                     $('#permission_success_message').text(response.messages);
                     setTimeout(() => {
@@ -547,7 +607,7 @@
             $("#statusJustify").attr('hidden', true);
             $("#statusDeny").attr('hidden', true);
 
-            if (create || update_status || delete_status || view_status || data_export_status) {
+            if (create || update_status || delete_status || view_status || data_export_status || dataTableStatus || dataRequistionStatus || dataPaymentStatus || dataSettingStatus || dataSummaryStatus || dataSearchingStatus) {
                 $("#statusJustify").removeAttr('hidden');
             } else {
                 $("#statusDeny").removeAttr('hidden');
@@ -584,6 +644,12 @@
             $("input[name='delete_status']").prop('checked', false);
             $("input[name='view_status']").prop('checked', false);
             $("input[name='data_export_status']").prop('checked', false);
+            $("input[name='data_table_status']").prop('checked', false);
+            $("input[name='supplier_requisition_status']").prop('checked', false);
+            $("input[name='supplier_payment_status']").prop('checked', false);
+            $("input[name='supplier_setting_status']").prop('checked', false);
+            $("input[name='supplier_summary_status']").prop('checked', false);
+            $("input[name='supplier_searching_status']").prop('checked', false);
         }
 
     });
@@ -765,5 +831,57 @@
                 }
             });
         });
+
+
+        // Change url create supplier from supplier setting
+        $(document).on('click', '#tabCreateSupplier', function(e) {
+            e.preventDefault();
+            var changeURL = '/supplier';
+            window.location.href = changeURL;
+            $("#loaderShow").removeClass('loader-show');
+            setTimeout(() => {
+                $("#loaderShow").addClass('loader-show');
+            }, 1800);
+        }); 
+        
+        // Change url with page reload
+        // $(document).on('click', '#tabCreateSupplier', function(e) {
+        //     e.preventDefault();
+        //     var changeURL = '/supplier';
+        //     console.log('Requesting URL:', changeURL);
+
+        //     $.ajax({
+        //         url: changeURL,
+        //         method: 'GET',
+        //         success: function(response) {
+        //             console.log('Response received:', response);
+        //             $('#myscreen').html(response);
+        //             history.pushState(null, '', changeURL);
+        //         },
+        //         error: function(xhr, status, error) {
+        //             console.error('Error loading supplier content:', error);
+        //         }
+        //     });
+        // });
+
+        // $(document).on('click', '#suppSetting', function(e) {
+        //     e.preventDefault();
+        //     var changeURL = '/super-admin/supplier/access-permission';
+        //     console.log('Requesting URL:', changeURL);
+
+        //     $.ajax({
+        //         url: changeURL,
+        //         method: 'GET',
+        //         success: function(response) {
+        //             console.log('Response received:', response);
+        //             $('#myscreen').html(response);
+        //             history.pushState(null, '', changeURL);
+        //         },
+        //         error: function(xhr, status, error) {
+        //             console.error('Error loading supplier content:', error);
+        //         }
+        //     });
+        // });
+
     });
 </script>

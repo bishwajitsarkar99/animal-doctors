@@ -93,10 +93,16 @@ class SupplierController extends Controller
             $SupplierPermissions->update_status = $request->input('update_status');
             $SupplierPermissions->delete_status = $request->input('delete_status');
             $SupplierPermissions->data_export_status = $request->input('data_export_status');
+            $SupplierPermissions->data_table_status = $request->input('data_table_status');
+            $SupplierPermissions->supplier_requisition_status = $request->input('supplier_requisition_status');
+            $SupplierPermissions->supplier_payment_status = $request->input('supplier_payment_status');
+            $SupplierPermissions->supplier_setting_status = $request->input('supplier_setting_status');
+            $SupplierPermissions->supplier_summary_status = $request->input('supplier_summary_status');
+            $SupplierPermissions->supplier_searching_status = $request->input('supplier_searching_status');
             $SupplierPermissions->approved_by = Auth::user()->id;
             $SupplierPermissions->save();
             return response()->json([
-                'messages' => 'Supplier access permission has been created.',
+                'messages' => 'permission has been created.',
                 'code' => 200,
             ]);
         }
@@ -114,7 +120,7 @@ class SupplierController extends Controller
         } else {
             return response()->json([
                 'status' => 404,
-                'messages' => 'Supplier permission is not found',
+                'messages' => 'permission is not found',
             ]);
         }
     }
@@ -153,16 +159,23 @@ class SupplierController extends Controller
                 $SupplierPermissions->update_status = $request->input('update_status');
                 $SupplierPermissions->delete_status = $request->input('delete_status');
                 $SupplierPermissions->data_export_status = $request->input('data_export_status');
+                $SupplierPermissions->data_table_status = $request->input('data_table_status');
+                $SupplierPermissions->supplier_requisition_status = $request->input('supplier_requisition_status');
+                $SupplierPermissions->supplier_payment_status = $request->input('supplier_payment_status');
+                $SupplierPermissions->supplier_setting_status = $request->input('supplier_setting_status');
+                $SupplierPermissions->supplier_summary_status = $request->input('supplier_summary_status');
+                $SupplierPermissions->supplier_searching_status = $request->input('supplier_searching_status');
+                $SupplierPermissions->update_by = Auth::user()->id;
                 $SupplierPermissions->save();
     
                 return response()->json([
                     'status' => 200,
-                    'messages' => 'Supplier access permission has been updated.',
+                    'messages' => 'permission has been updated.',
                 ]);
             } else {
                 return response()->json([
                     'status' => 404,
-                    'messages' => 'Supplier access permission not found.',
+                    'messages' => 'permission not found.',
                 ]);
             }
         }
@@ -176,7 +189,7 @@ class SupplierController extends Controller
 
         return response()->json([
             'status'=> 200,
-            'messages'=> 'Supplier access permission is deleted.',
+            'messages'=> 'Permission has deleted.',
         ]);
     }
 
@@ -274,7 +287,7 @@ class SupplierController extends Controller
         else{
             return response()->json([
                 'status'=> 404,
-                'messages'=> 'The supplier is not found',
+                'messages'=> 'Would yout like to change permission ?',
             ]);
         }
     }
@@ -369,7 +382,7 @@ class SupplierController extends Controller
         ]);
 
         return response()->json([
-            'messages' => 'My Sql Data Permission has Updated Successfully',
+            'messages' => 'My Sql Data Permission has Updated',
             'code' => 202,
         ], 202);
     }

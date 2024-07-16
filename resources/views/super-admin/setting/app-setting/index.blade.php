@@ -190,7 +190,7 @@
             </div>
         </form>
     </div>
-    <p class="mt-3 mb-5">
+    <p class="mt-3 mb-3">
         <span class="Profile_success_message" id="success_message"></span>
     </p>
 </div>

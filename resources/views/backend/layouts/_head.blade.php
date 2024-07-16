@@ -64,7 +64,7 @@
 <!-- ================ Admin Panel Side-bar ================= -->
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/theme-setting-mode-min.css">
 @if(auth()->user()->role ==1)
-<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/dark.css" id="themeSilverlink">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/darkblue.css" id="themeSilverlink">
 @endif
 @if(auth()->user()->role ==2)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/sidebar-css/dark.css" id="themeSilverlink">
@@ -89,7 +89,7 @@
 @endif
 <!-- ================ Admin Panel top-bar ================= -->
 @if(auth()->user()->role ==1)
-<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark.css" id="topbarGreenlink">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/darkblue.css" id="topbarGreenlink">
 @endif
 @if(auth()->user()->role ==2)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/css/topbar-css/dark.css" id="topbarGreenlink">
@@ -111,7 +111,7 @@
 @endif
 <!-- ================ Admin Panel Footer ================= -->
 @if(auth()->user()->role ==1)
-<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/dark.css" id="footerGreenlink">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/darkblue.css" id="footerGreenlink">
 @endif
 @if(auth()->user()->role ==2)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/dark.css" id="footerGreenlink">

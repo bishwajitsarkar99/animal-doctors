@@ -1,7 +1,7 @@
 @import "dropdown-apperence/_apperence-bg.css";
 :root{
     --font-family-heading:'Archivo Black';
-    --bs-nav-tabs-form-link-active-color:darkcyan;
+    --bs-nav-tabs-form-link-active-color:rgb(5, 5, 248);
     --bs-nav-tabs-link-active-bg:#fff;
     --bs-nav-tabs-link-active-border-color:#dee2e6 #dee2e6 #fff;
     --nav-tab-link-active-font-weight:500;
@@ -22,6 +22,8 @@
 div.mange_background{
     opacity: 1;
     border: none;
+    background-color: aliceblue;
+    padding-top: 7px;
 }
 input#searchInput{
     outline: none;
@@ -36,6 +38,7 @@ input#searchInput{
 }
 .card-body.manage_role_page {
     box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    background-color: white;
 }
 select#select_input {
     font-weight: 700;
@@ -83,10 +86,10 @@ h2.manage_head {
 }
 @keyframes fon_color{
     50%{
-        color: black;
+        color: cornflowerblue;
     }
     100%{
-        color: black;
+        color: cornflowerblue;
     }
 }
 input.manage_button {

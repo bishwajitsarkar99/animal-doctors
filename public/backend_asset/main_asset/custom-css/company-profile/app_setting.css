@@ -26,11 +26,11 @@ td.parent_accModuel{
         background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     }
     50%{
-        background-color: lightgray;
+        background-color: orangered;
         background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     }
     100%{
-        background-color: lightgray;
+        background-color: orangered;
         background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     }
 }
@@ -44,14 +44,14 @@ td.parent_accModuel{
 }
 @keyframes color3_focus {
     0% {
-        background-color: limegreen;
+        background-color: #f1f1f1;
     }
     
     50% {
-        background-color: limegreen;
+        background-color: rgb(5, 5, 248);
     }
     100% {
-        background-color: limegreen;
+        background-color: rgb(5, 5, 248);
     }
 }
 tr.bg-light-gray{

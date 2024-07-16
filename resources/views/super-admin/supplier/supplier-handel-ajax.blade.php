@@ -96,7 +96,7 @@
                         };
                     });
                     // Initialize autocomplete
-                    $("#search").autocomplete({
+                    $("#supplier_search").autocomplete({
                         source: suggestions,
                     });
                 }
@@ -112,10 +112,19 @@
             fetch_supplier_data('', null, value);
         });
         // Live-Search-----------------------------
-        $(document).on('keyup', '#search', function() {
+        $(document).on('keyup', '#supplier_search', function() {
             var query = $(this).val();
             fetch_supplier_data(query);
 
+            $('.supp_search-icon').removeClass('supp_search-hidden');
+            setTimeout(() => {
+                $('.supp_search-icon').addClass('supp_search-hidden');
+            }, 1000);
+
+        });
+        $(document).on('click', '#search_area', function() {
+            $("#search_plate").toggleClass('display-block', 'slow');
+            $("#search_plate").toggleClass('display-hidden', 'slow');
         });
 
         // Search- loader
@@ -521,8 +530,13 @@
                 },
                 success: function(response) {
                     console.log('messages', response.messages);
-                    $("#success_message").text(response.messages);
                     fetch_supplier_data('', pagination_url);
+                    $('#success_message').text(response.messages);
+                    $('#success_message').addClass('alert_show ps-1 pe-1');
+                    $('#success_message').fadeIn();
+                    setTimeout(() => {
+                        $('#success_message').fadeOut();
+                    }, 3000);
                 },
                 error: function(xhr) {
                     if (xhr.status === 405) {

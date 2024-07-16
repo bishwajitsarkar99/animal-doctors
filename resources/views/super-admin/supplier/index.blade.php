@@ -3,7 +3,15 @@
 @include('backend.layouts.dashboard-components._navbar')
 
 <div class="card form-control form-control-sm" id="category_page">
-    <div class="card-body skeleton" id="table_card_body">
+    <div class="card-body" id="table_card_body">
+        <div class="row">
+            <div class="col-xl-2">
+                <a class="setbtn" href="{{route('access-permission.index')}}" id="suppSetting">Supplier Setting</a>
+            </div>
+            <p class="col-xl-10 action_message" style="text-align:left;font-size:12px;">
+                <span class="ps-1"><span id="success_message"></span></span>
+            </p>
+        </div>
         <div class="row">
             <div class="accordion accordion-flush" id="seach_type_edit">
                 <div class="accordion-item">
@@ -12,6 +20,7 @@
                             Supplier Contact Information Data Table <span class="ms-3" id="loadHead"><i class="fa-solid fa-arrows-rotate fa-spin"></i></span>
                         </button>
                     </h2>
+                    
                     <div id="flush-searchEdit" class="accordion-collapse collapse" aria-labelledby="flush-searchType" data-bs-parent="#seach_type_edit">
                         <div class="content-body">
                             <div class="card-body focus-color cd cat_form">
@@ -25,9 +34,9 @@
                                         </span>
                                     </div>
                                     <div class="col-5">
-                                        <span id="search_plate">
-                                            <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="All Search Heare.........">
-                                            <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
+                                        <span id="search_plate" class="display-hidden">
+                                            <input id="supplier_search" type="search" name="search" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="All Search Heare.........">
+                                            <i class="supp_search-icon fa fa-spinner fa-spin supp_search-hidden"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -35,7 +44,7 @@
                                     <table class="bg-transparent ord_table center border-1 skeleton mt-2">
                                         <tr class="table-row order_body acc_setting_table">
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1">ID</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1">Action</th>
+                                            <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1">Act</th>
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">ID-Name</th>
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Type</th>
                                             <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Bussiness</th>
@@ -63,7 +72,6 @@
                                                 <option class="skeleton">100</option>
                                                 <option class="skeleton">200</option>
                                             </select>
-                                            <span class="custom-list-item-arrow me-2"></span>
                                         </div>
                                     </div>
                                     <div class="col-4">
@@ -87,9 +95,10 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="row">
-                    <div class="category-form skeleton">
+                    <div class="category-form">
                         <div class="card form-control cat_form">
-                            <form autocomplete="off">
+                            
+                            <form class="skeleton" autocomplete="off">
                                 @csrf
                                 <div class="row mt-3">
                                     <div class="col-3 offset-1">
@@ -98,6 +107,7 @@
                                     
                                     <div class="col-7">
                                         <input class="form-control form-control-sm edit_type skeleton" type="text" name="type" id="type" placeholder="Source Type" autofocus>
+                                        <span class="skeleton"></span>
                                         <input type="hidden" id="supp_id">
                                     </div>
                                     <div class="col-1" style="text-align: left;">
@@ -219,9 +229,6 @@
             <div class="alert-info brand_message ">
 
             </div>
-        </div>
-        <div class="col-xl-12 action_message">
-            <p class="ps-1"><span id="success_message"></span></p>
         </div>
     </div>
 </div>

@@ -6,15 +6,8 @@
   <div class="card-body">
     <ul class="nav nav-tabs tab_bg" role="tablist" style="background:aliceblue;">
       <li class="nav-item">
-        <a class="nav-link setting active home-text" data-bs-toggle="tab" href="#home" id="tabHome" hidden> Supplier Access</a>
+        <a class="nav-link setting active home-text" data-bs-toggle="tab" href="#home" id="tabHome" hidden> Supplier Setting</a>
         <span class="tab-skeletone ms-1"></span>
-      </li>
-      <li class="nav-item">
-        <button type="button" class="btn btn-sm supplier_tab btn_focus add_button  mt-2 ms-2" id="refresh" hidden>
-          <i class="refresh-icon fa fa-solid fa-asterisk fa-spin refrsh-hidden" style="color:white;opacity:1;"></i>
-          <span class="btn-text ms-1">Refresh</span>
-        </button>
-        <span class="tab_btn_skeletone ms-1"></span>
       </li>
       <li class="nav-item">
         <input class="form-control from-control-sm" type="search" name="role_id" placeholder="Search-role-id" id="roleSearch" hidden>
@@ -24,6 +17,17 @@
         <a class="nav-link setting home-text" data-bs-toggle="tab" href="#supplierSetting" id="tabSetting" hidden>Supplier Permission</a>
         <span class="tab2-skeletone ms-1"></span>
       </li>
+      <li class="nav-item">
+        <a class="nav-link setting home-text" data-bs-toggle="tab" href="#createSupplier" id="tabCreateSupplier" hidden> Create Supplier</a>
+        <span class="tab3-skeletone ms-1"></span>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-sm supplier_tab btn_focus add_button  mt-2 ms-2" id="refresh" hidden>
+          <i class="refresh-icon fa fa-solid fa-asterisk fa-spin refrsh-hidden" style="color:white;opacity:1;"></i>
+          <span class="btn-text ms-1">Refresh</span>
+        </button>
+        <span class="tab_btn_skeletone ms-1"></span>
+      </li>
     </ul>
     <div class="tab-content" id="showCard" style="background:aliceblue;padding-bottom:15px;" hidden>
       <div id="home" class="container tab-pane active"><br>
@@ -32,16 +36,17 @@
       <div id="supplierSetting" class="container tab-pane" hidden><br>
         @include('super-admin.supplier._supplier-status-table')
       </div>
+      <div id="createSupplier" class="container tab-pane" ><br>
+        <!-- @include('super-admin.supplier._supplier-status-table') -->
+      </div>
+      <div class="col-xl-12 action_message">
+        <p class="ps-1 ms-4 mt-3 alert_show" style= "color:green;font-weight:700;font-size:13px;"><span id="success_message"></span></p>
+      </div>
     </div>
-
   </div>
 </div>
 <div class="loader-position">
   <img class="server-loader loader-show" id="loaderShow" src="{{asset('/image/loader/loading.gif')}}" alt="Loading...."/>
-</div>
-
-<div class="col-xl-12 action_message">
-  <p class="ps-1"><span id="permission_success_message"></span></p>
 </div>
 
 
@@ -79,6 +84,7 @@
                 <p class="admin_paragraph" id="text_message" style="font-weight:600;font-size:13px;">
                     Do you want to update the access permission ?
                 </p> 
+                <span id="updateForm_errorList"></span>
                 <p class="admin_paragraph" id="text_message" style="text-align:center;"> 
                     <button id="confirm_btn" class="btn btn-sm cgt_btn btn_focus permission_confirm_btn">
                         <span class="btn-text">Yes</span>
@@ -160,7 +166,7 @@
 @section('script')
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
 @include('super-admin.supplier.permission-ajax')
-
+@include('super-admin.supplier.supplier-handel-ajax')
 <script>
     function removeSkeletons(selector) {
         const allSkeletons = document.querySelectorAll(selector);
@@ -177,8 +183,9 @@
     $("#item_class").attr('hidden', true);
     $("#perItemControls").attr('hidden', true);
     $("#tabSetting").attr('hidden', true);
+    $("#tabCreateSupplier").attr('hidden', true);
     $("#showCard").attr('hidden', true);
-    // $("#loaderShow").removeClass('loader-show');
+    $("#loaderShow").removeClass('loader-show');
     setTimeout(() => {
       removeSkeletons('.skeleton');
       removeSkeletons('.tab-skeletone');
@@ -188,13 +195,15 @@
       removeSkeletons('.inp_ser_skeletone');
       removeSkeletons('.peritem-skeleton');
       removeSkeletons('.tab2-skeletone');
+      removeSkeletons('.tab3-skeletone');
       $("#tabHome").removeAttr('hidden');
       $("#refresh").removeAttr('hidden');
       $("#roleSearch").removeAttr('hidden');
       $("#item_class").removeAttr('hidden');
       $("#perItemControls").removeAttr('hidden');
       $("#tabSetting").removeAttr('hidden');
-      // $("#loaderShow").addClass('loader-show');
+      $("#tabCreateSupplier").removeAttr('hidden');
+      $("#loaderShow").addClass('loader-show');
       
     }, 1800);
     setTimeout(() => {
