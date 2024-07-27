@@ -70,13 +70,16 @@
                     }));
                     $("#total_medic_records").text(total);
                     // Get suggestions for autocomplete
-                    var suggestions = data.map(function(item) {
-                        return item.medicine_name;
+                    var suggestion = data.map(function(item) {
+                        return {
+                            label: `${item.id} - ${item.medicine_name}`,
+                            value: item.id
+                        };
                     });
 
                     // Initialize autocomplete
-                    $("#name_search").autocomplete({
-                        source: suggestions,
+                    $(".medicine_ID").autocomplete({
+                        source: suggestion,
                     });
                 }
 

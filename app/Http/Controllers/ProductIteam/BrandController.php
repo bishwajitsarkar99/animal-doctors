@@ -116,17 +116,17 @@ class BrandController extends Controller
     public function updatebrand(Request $request, $id)
     {
         $validators = validator::make($request->all(),[
-            'brand_name'=>'required|max:191|unique:brands',
+            'brand_name' => 'required|max:191|unique:brands,brand_name,' . $id,
             'origin_id' =>'required',
         ],[
             'brand_name.required'=>'The brand name is required mandatory.',
             'brand_name.unique'=>'The brand name is already exits.',
             'origin_id.required'=>'The medicine origin is required mandatory.',
         ]);
-        if($validator->fails()){
+        if($validators->fails()){
             return response()->json([
                 'status'=> 400,
-                'errors'=> $validator->messages(),
+                'errors'=> $validators->messages(),
             ]);
         }    
         else{

@@ -6,7 +6,7 @@
   <div class="card-body">
     <ul class="nav nav-tabs tab_bg" role="tablist" style="background:aliceblue;">
       <li class="nav-item">
-        <a class="nav-link setting active home-text" data-bs-toggle="tab" href="#home" id="tabHome" hidden> Supplier Setting</a>
+        <a class="nav-link setting active home-text" data-bs-toggle="tab" href="#home" id="tabHome" hidden> Supplier Role</a>
         <span class="tab-skeletone ms-1"></span>
       </li>
       <li class="nav-item">
@@ -16,6 +16,10 @@
       <li class="nav-item">
         <a class="nav-link setting home-text" data-bs-toggle="tab" href="#supplierSetting" id="tabSetting" hidden>Supplier Permission</a>
         <span class="tab2-skeletone ms-1"></span>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link setting" data-bs-toggle="tab" href="#moduleSetting" id="moduSetting" hidden>Module Permission</a>
+        <span class="tab4-skeletone ms-1"></span>
       </li>
       <li class="nav-item">
         <a class="nav-link setting home-text" data-bs-toggle="tab" href="#createSupplier" id="tabCreateSupplier" hidden> Create Supplier</a>
@@ -36,11 +40,16 @@
       <div id="supplierSetting" class="container tab-pane" hidden><br>
         @include('super-admin.supplier._supplier-status-table')
       </div>
+      <div id="moduleSetting" class="container tab-pane"><br>
+        @include('super-admin.supplier.module.module-permission')
+      </div>
       <div id="createSupplier" class="container tab-pane" ><br>
-        <!-- @include('super-admin.supplier._supplier-status-table') -->
+
       </div>
       <div class="col-xl-12 action_message">
-        <p class="ps-1 ms-4 mt-3 alert_show" style= "color:green;font-weight:700;font-size:13px;"><span id="success_message"></span></p>
+        <p class="ps-1 ms-4 mt-3 alert_show" style= "color:green;font-weight:700;font-size:13px;">
+          <span id="success_message"></span>
+        </p>
       </div>
     </div>
   </div>
@@ -167,6 +176,7 @@
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
 @include('super-admin.supplier.permission-ajax')
 @include('super-admin.supplier.supplier-handel-ajax')
+@include('super-admin.supplier.module.module-permission-ajax')
 <script>
     function removeSkeletons(selector) {
         const allSkeletons = document.querySelectorAll(selector);
@@ -185,6 +195,7 @@
     $("#tabSetting").attr('hidden', true);
     $("#tabCreateSupplier").attr('hidden', true);
     $("#showCard").attr('hidden', true);
+    $("#moduSetting").attr('hidden', true);
     $("#loaderShow").removeClass('loader-show');
     setTimeout(() => {
       removeSkeletons('.skeleton');
@@ -196,6 +207,7 @@
       removeSkeletons('.peritem-skeleton');
       removeSkeletons('.tab2-skeletone');
       removeSkeletons('.tab3-skeletone');
+      removeSkeletons('.tab4-skeletone');
       $("#tabHome").removeAttr('hidden');
       $("#refresh").removeAttr('hidden');
       $("#roleSearch").removeAttr('hidden');
@@ -203,6 +215,7 @@
       $("#perItemControls").removeAttr('hidden');
       $("#tabSetting").removeAttr('hidden');
       $("#tabCreateSupplier").removeAttr('hidden');
+      $("#moduSetting").removeAttr('hidden');
       $("#loaderShow").addClass('loader-show');
       
     }, 1800);
@@ -233,7 +246,26 @@
 
   });
 
+  // Tab Loading Module Permission
+  $(doucment).on('click', '#moduSetting', function(){
 
-    
+    $("#loaderShow").removeClass('loader-show');
+    setTimeout(() => {
+      $("#moduleSetting").removeAttr('hidden');
+      $("#loaderShow").addClass('loader-show');
+    }, 800);
+      
+  });
+
+  // Change url create supplier from supplier setting
+  $(document).on('click', '#tabCreateSupplier', function(e) {
+    e.preventDefault();
+    var changeURL = '/supplier';
+    window.location.href = changeURL;
+    $("#loaderShow").removeClass('loader-show');
+    setTimeout(() => {
+        $("#loaderShow").addClass('loader-show');
+    }, 1800);
+  });  
 </script>
 @endsection

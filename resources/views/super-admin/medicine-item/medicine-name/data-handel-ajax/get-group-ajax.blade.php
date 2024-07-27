@@ -72,12 +72,15 @@
                     }));
                     $("#total_groups_records").text(total);
                     // Get suggestions for autocomplete
-                    var suggestions = data.map(function(item) {
-                        return item.group_name;
+                    var suggestion = data.map(function(item) {
+                        return {
+                            label: `${item.id} - ${item.group_name}`,
+                            value: item.id
+                        };
                     });
                     // Initialize autocomplete
-                    $("#group_search").autocomplete({
-                        source: suggestions
+                    $(".group_id").autocomplete({
+                        source: suggestion
                     });
                 }
 

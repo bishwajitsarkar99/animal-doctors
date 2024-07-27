@@ -31,7 +31,7 @@
                         <td class="ps-1 border_ord" id="model_tb3">${row.products ? row.products.product_name : ''}</td>
                         <td class="txt_ ps-1" id="model_tb4">${row.model_name}</td>
                         <td class="tot_complete_ pe-2 ${row.status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '✅ Active' : '❌ Deny'}</span>
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '<span style="font-size:15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="model_tb5">
@@ -80,7 +80,7 @@
                     var suggestions = data.map(function(item) {
                         return {
                             label: item.products.product_name + " - " + item.model_name,
-                            value: item.product_id
+                            value: item.model_name
                         };
                     });
 
@@ -249,9 +249,32 @@
                 }
             });
         });
+        // Confirm Update Model Modal
+        $(document).on('click', '#update_btn', function(e){
+            e.preventDefault();
+            $("#updateconfirmmodel").modal('show');
+            $(".update_title").addClass('skeleton');
+            $(".head_btn3").addClass('skeleton');
+            $("#cate_confirm_update").addClass('skeleton');
+            $(".update_confirm").addClass('skeleton');
+            $(".delete_cancel").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
+                $(".update_title").removeClass('skeleton');
+                $(".head_btn3").removeClass('skeleton');
+                $("#cate_confirm_update").removeClass('skeleton');
+                $(".update_confirm").removeClass('skeleton');
+                $(".delete_cancel").removeClass('skeleton');
+            }, 1000);
+
+            return ()=>{
+                clearTimeout(time);
+            }
+
+        });
 
         // Update Model
-        $(document).on('click', '#update_btn', function(e) {
+        $(document).on('click', '.update_confirm', function(e) {
             e.preventDefault();
             var model_id = $('#model_id').val();
             var data = {
@@ -292,6 +315,7 @@
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
+                        $("#updateconfirmmodel").modal('hide');
                         fetch_model_data();
                     }
                 }
@@ -299,7 +323,7 @@
 
         });
 
-        // Delete Model
+        // Delete Model Modal
         $(document).on('click', '#deleteBtn', function(e) {
             e.preventDefault();
             var brand_id = $(this).val();
@@ -307,22 +331,26 @@
             $('#deletemodel').modal('show');
 
             var time = null;
+            $(".head_title_delt").addClass('skeleton');
+            $(".cols_can").addClass('skeleton');
             $("#model_delt").addClass('skeleton');
             $("#model_delt2").addClass('skeleton');
             $("#model_delt3").addClass('skeleton');
             $("#model_delt4").addClass('skeleton');
-            $("#model_delt5").addClass('skeleton');
             $("#delete_model_id").addClass('skeleton');
-            $("#deleteLoader").addClass('skeleton');
+            $("#yesButton").addClass('min-skeleton');
+            $("#noButton").addClass('min-skeleton');
 
             time = setTimeout(() => {
+                $(".head_title_delt").removeClass('skeleton');
+                $(".cols_can").removeClass('skeleton');
                 $("#model_delt").removeClass('skeleton');
                 $("#model_delt2").removeClass('skeleton');
                 $("#model_delt3").removeClass('skeleton');
                 $("#model_delt4").removeClass('skeleton');
-                $("#model_delt5").removeClass('skeleton');
                 $("#delete_model_id").removeClass('skeleton');
-                $("#deleteLoader").removeClass('skeleton'); 
+                $("#yesButton").removeClass('min-skeleton');
+                $("#noButton").removeClass('min-skeleton'); 
             }, 1000);
 
             return ()=>{
@@ -330,6 +358,28 @@
             }
 
 
+        });
+        // Confirm Delete Modal
+        $(document).on('click', '.yes_button', function(e){
+            e.preventDefault();
+            $("#deleteconfirmmodel").modal('show');
+            $('.confirm_title').addClass('skeleton');
+            $('.head_btn_confirm').addClass('skeleton');
+            $('#cate_confirm').addClass('skeleton');
+            $("#model_delt4").addClass('skeleton');
+            $("#deleteLoader").addClass('skeleton');
+
+            var time = null;
+            time = setTimeout(() => {
+                $('.confirm_title').removeClass('skeleton');
+                $('.head_btn_confirm').removeClass('skeleton');
+                $('#cate_confirm').removeClass('skeleton');
+                $("#model_delt4").removeClass('skeleton');
+                $("#deleteLoader").removeClass('skeleton'); 
+            }, 1000);
+            return ()=>{
+                clearTimeout(time);
+            }
         });
 
         $(document).on('click', '.delet_btn_user', function(e) {
@@ -353,7 +403,7 @@
                         $('#success_message').fadeOut();
                     }, 3000);
                     $('#deletemodel').modal('hide');
-
+                    $("#deleteconfirmmodel").modal('hide');
                     fetch_model_data();
                 }
 
@@ -391,11 +441,13 @@
             });
         });
 
-        // Show-Model Modal---------------
+        // Show-Product Modal---------------
         $("#showModel").on('click', function(){
             $("#model").modal('show');
 
             var time = null;
+            $(".head_title").addClass('skeleton');
+            $(".cols_title").addClass('skeleton');
             $("#tb_orgin").addClass('skeleton');
             $("#search_area_").addClass('skeleton');
             $("#tb_orgin2").addClass('skeleton');
@@ -406,12 +458,17 @@
             $("#origin_nam4").addClass('skeleton');
             $("#origin_nam5").addClass('skeleton');
             $("#prod_table").addClass('skeleton');
-            $("#num_plate").addClass('skeleton');
             $("#iteam_label3").addClass('skeleton');
             $("#total_prod_records").addClass('skeleton');
             $("#iteam_label6").addClass('skeleton');
+            $(".per_page").addClass('skeleton');
+            $(".select_item").addClass('select-skeleton');
+            $(".totProduct").addClass('skeleton');
+            $("#prod_get_table_paginate").addClass('paginate-skeleton');
 
             time = setTimeout(() => {
+                $(".head_title").removeClass('skeleton');
+                $(".cols_title").removeClass('skeleton');
                 $("#tb_orgin").removeClass('skeleton');
                 $("#search_area_").removeClass('skeleton');
                 $("#tb_orgin2").removeClass('skeleton');
@@ -422,10 +479,13 @@
                 $("#origin_nam4").removeClass('skeleton');
                 $("#origin_nam5").removeClass('skeleton');
                 $("#prod_table").removeClass('skeleton');
-                $("#num_plate").removeClass('skeleton');
                 $("#iteam_label3").removeClass('skeleton');
                 $("#total_prod_records").removeClass('skeleton');
                 $("#iteam_label6").removeClass('skeleton');
+                $(".per_page").removeClass('skeleton');
+                $(".select_item").removeClass('select-skeleton');
+                $(".totProduct").removeClass('skeleton');
+                $("#prod_get_table_paginate").removeClass('paginate-skeleton');
             }, 1000);
 
             return ()=>{

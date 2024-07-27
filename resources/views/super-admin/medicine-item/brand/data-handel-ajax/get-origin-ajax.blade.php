@@ -55,6 +55,17 @@
                         total
                     }));
                     $("#total_org_records").text(total);
+                    // Get suggestions for autocomplete
+                    var suggestion = data.map(function(item) {
+                        return {
+                            label: `${item.id} - ${item.origin_name}`,
+                            value: item.id
+                        };
+                    });
+                    // Initialize autocomplete
+                    $(".orgn_id").autocomplete({
+                        source: suggestion,
+                    });
                 }
 
             });

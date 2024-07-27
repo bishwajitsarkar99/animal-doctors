@@ -110,7 +110,7 @@
                     </button>
                     <button type="button" class="btn btn-sm updt_btn permission_update" id="PermissionUpdate" hidden>
                         <i class="updt-icon fa fa-spinner fa-spin updt-hidden"></i>
-                        Update
+                        Setting Update
                     </button>
                     <button type="button" class="btn btn-sm cancel_btn skeleton permission_calncel" id="PermissionCancel">
                         <i class="cancel-icon fa fa-spinner fa-spin cancel-hidden"></i>
@@ -122,70 +122,74 @@
         </div>
     </div>
     <div class="col-xl-8">
-        <div class="card card-body " style="border:none;margin-right:-5px;">
+        <div class="card card-body " style="border:none;">
             <span id="permission_success_message"></span>
             <div class="search-box mb-2">
                 <input class="ps-2" type="search" name="search" placeholder="search id" id="searchID" hidden>
                 <span class="search-skeletone"></span>
             </div>
-            <table class="ord_table center border-1 long-skeleton" id="SupplierSettingTable">
-                <tr class="table-row order_body acc_setting_table ">
-                    <th id="th_sort_head" class="table_th_color  txt col ps-1" style="text-align: left;padding-top: 100px;">ID</th>
-                    <th id="th_sort_head" class="table_th_color tot_pending_  col ps-1" style="text-align: left;padding-top: 100px;">Role</th>
-                    <th id="th_sort_head" class="table_th_color tot_pending_  col ps-1" style="text-align: left;padding-top: 100px;">Email</th>
-                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                        Create
-                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
-                    </th>
-                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                        Update
-                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
-                    </th>
-                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                        View
-                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
-                    </th>
-                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                        Delete
-                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
-                    </th>
-                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                        My Sql Database
-                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
-                    </th>
-                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                        Supplier Table
-                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
-                    </th>
-                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                        Requisition
-                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
-                    </th>
-                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                        Setting
-                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
-                    </th>
-                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                        Payment
-                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
-                    </th>
-                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                        Summary
-                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
-                    </th>
-                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                        Searching
-                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
-                    </th>
-                    <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                        Action
-                        <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
-                    </th>
-                </tr>
-                <tbody class="bg-transparent" id="access_permission_data_table">
-
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-sm ord_table center border-1 long-skeleton" id="SupplierSettingTable">
+                    <thead class="table-light">
+                        <tr class="table-row order_body acc_setting_table ">
+                            <th id="th_sort_head" class="table_th_color  txt col ps-1" style="text-align: left;padding-top: 100px;">ID</th>
+                            <th id="th_sort_head" class="table_th_color tot_pending_  col ps-1" style="text-align: left;padding-top: 100px;">Role</th>
+                            <th id="th_sort_head" class="table_th_color tot_pending_  col ps-1" style="text-align: left;padding-top: 100px;">Email</th>
+                            <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                Create
+                                <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                            </th>
+                            <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                Update
+                                <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                            </th>
+                            <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                View
+                                <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                            </th>
+                            <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                Delete
+                                <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                            </th>
+                            <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                My Sql Database
+                                <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                            </th>
+                            <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                Supplier Table
+                                <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                            </th>
+                            <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                Requisition
+                                <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                            </th>
+                            <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                Setting
+                                <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                            </th>
+                            <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                Payment
+                                <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                            </th>
+                            <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                Summary
+                                <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                            </th>
+                            <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                Searching
+                                <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                            </th>
+                            <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                Action
+                                <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-transparent" id="access_permission_data_table">
+    
+                    </tbody>
+                </table>
+            </div>
             <div class="row table_last_row mb-1">
                 <div class="col-xl-2">
                     <label class="item_class text-place mt-1" id="item_class" hidden></label>

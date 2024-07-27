@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Supplier\SupplierController;
+use App\Http\Controllers\Setting\SupplierSetting;
 
 Route::group(['middleware' => 'auth'], function (){
     
@@ -16,7 +17,7 @@ Route::group(['middleware' => 'auth'], function (){
         Route::put('/super-admin/update-permission/{id}',[SupplierController::class, 'updateUserPermission'])->name('user-permission.update');
         Route::delete('/super-admin/delete-permission/{id}',[SupplierController::class, 'deleteUserPermission'])->name('user-permission.delete');
         Route::post('/super-admin/permission-status-update',[SupplierController::class, 'permissionUserStatusUpdate'])->name('user-permission.status_update');
-        
+        Route::post('/super-admin/supplier-module-permission',[SupplierSetting::class, 'supplierSettingUpdate'])->name('module.action');
     });
     // Supplier Create
     Route::middleware('supplierCreate')->group(function () {
@@ -24,6 +25,7 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('/get-supplier', [SupplierController::class, 'getSupplier'])->name('search-supplier.action');
         Route::post('/add-supplier', [SupplierController::class, 'stroeData'])->name('add_supplier.action');
     });
+    
     // Supplier Update
     Route::middleware('supplierUpdate')->group(function () {
         Route::get('/edit-supplier/{id}', [SupplierController::class, 'editSupplier']);

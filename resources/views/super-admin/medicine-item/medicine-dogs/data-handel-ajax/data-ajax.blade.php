@@ -43,7 +43,7 @@
                         <td class="ps-1 border_ord" id="medic_dosage3">${row.medicine_names ? row.medicine_names.medicine_name : ''}</td>
                         <td class="txt_ ps-1" id="medic_dosage5">${row.dosage}</td>
                         <td class="tot_complete_ pe-2 ${row.status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '✅ Active' : '❌ Deny'}</span>
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '<span style="font-size:15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="medic_dosage6">
@@ -263,13 +263,34 @@
                 }
             });
         });
+        // Confirm Update Medicine Dogs Modal
+        $(document).on('click', '#update_btn', function(e){
+            e.preventDefault();
+            $("#updateconfirmmedicinedogs").modal('show');
+            $(".update_title").addClass('skeleton');
+            $(".head_btn3").addClass('skeleton');
+            $("#cate_confirm_update").addClass('skeleton');
+            $(".update_confirm").addClass('skeleton');
+            $(".delete_cancel").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
+                $(".update_title").removeClass('skeleton');
+                $(".head_btn3").removeClass('skeleton');
+                $("#cate_confirm_update").removeClass('skeleton');
+                $(".update_confirm").removeClass('skeleton');
+                $(".delete_cancel").removeClass('skeleton');
+            }, 1000);
 
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
         // Update Medicine Dogs
-        $(document).on('click', '#update_btn', function(e) {
+        $(document).on('click', '.update_confirm', function(e) {
             e.preventDefault();
             var medicinedogs_id = $('#medicinedogs_id').val();
             var data = {
-                'name': $('.edit_medicine_dogs').val(),
+                'dosage': $('.edit_medicine_dogs').val(),
                 'medicine_id': $('.edit_medicine_id').val(),
             }
 
@@ -306,6 +327,7 @@
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
+                        $("#updateconfirmmedicinedogs").modal('hide');
                         fetch_medicineDogs_data();
                     }
                 }
@@ -313,27 +335,31 @@
 
         });
 
-        // Delete Medicine Dogs
+        // Delete Medicine Dogs Modal
         $(document).on('click', '#deleteBtn', function(e) {
             e.preventDefault();
             var medicine_id = $(this).val();
             $('#delete_medicine_dogs_id').val(medicine_id);
             $('#deletemedicinedogs').modal('show');
+            $(".dogs_title").addClass('skeleton');
+            $(".cols_dogs").addClass('skeleton');
             $("#dosage").addClass('skeleton');
             $("#dosage2").addClass('skeleton');
             $("#dosage3").addClass('skeleton');
-            $("#dosage4").addClass('skeleton');
             $("#delete_medicine_dogs_id").addClass('skeleton');
-            $("#deleteLoader").addClass('skeleton');
+            $("#yesButton").addClass('min-skeleton');
+            $("#noButton").addClass('min-skeleton');
 
             var time = null;
             time = setTimeout(() => {
+                $(".dogs_title").removeClass('skeleton');
+                $(".cols_dogs").removeClass('skeleton');
                 $("#dosage").removeClass('skeleton');
                 $("#dosage2").removeClass('skeleton');
                 $("#dosage3").removeClass('skeleton');
-                $("#dosage4").removeClass('skeleton');
                 $("#delete_medicine_dogs_id").removeClass('skeleton');
-                $("#deleteLoader").removeClass('skeleton');
+                $("#yesButton").removeClass('min-skeleton');
+                $("#noButton").removeClass('min-skeleton');
             }, 1000);
 
             return ()=>{
@@ -341,7 +367,28 @@
             }
 
         });
+        // Confirm Delete Medicine Dogs Modal
+        $(document).on('click', '.yes_button', function(e){
+            e.preventDefault();
+            $("#deleteconfirmmedicinedogs").modal('show');
+            $('.confirm_title').addClass('skeleton');
+            $('.head_btn_confirm').addClass('skeleton');
+            $('#cate_confirm').addClass('skeleton');
+            $("#dosage4").addClass('skeleton');
+            $("#deleteLoader").addClass('skeleton');
 
+            var time = null;
+            time = setTimeout(() => {
+                $('.confirm_title').removeClass('skeleton');
+                $('.head_btn_confirm').removeClass('skeleton');
+                $('#cate_confirm').removeClass('skeleton');
+                $('#dosage4').removeClass('skeleton');
+                $('#deleteLoader').removeClass('skeleton');
+            }, 1000);
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
         $(document).on('click', '.delet_btn_user', function(e) {
             e.preventDefault();
             var medicinedogs_id = $('#delete_medicine_dogs_id').val();
@@ -363,6 +410,7 @@
                         $('#success_message').fadeOut();
                     }, 3000);
                     $('#deletemedicinedogs').modal('hide');
+                    $("#deleteconfirmmedicinedogs").modal('hide');
 
                     fetch_medicineDogs_data();
                 }
@@ -404,6 +452,10 @@
         // Show-Medicine Modal---------------
         $("#showMedicine").on('click', function() {
             $("#MedicineName").modal('show');
+            $(".head_title").addClass('skeleton');
+            $(".clos_title").addClass('skeleton');
+            $(".per_page").addClass('skeleton');
+            $(".selec_item").addClass('select-skeleton');
             $("#medic_nam").addClass('skeleton');
             $("#medic_nam2").addClass('skeleton');
             $("#medic_nam3").addClass('skeleton');
@@ -420,14 +472,18 @@
             $("#iteam_label").addClass('skeleton');
             $("#iteam_label2").addClass('skeleton');
             $("#iteam_label3").addClass('skeleton');
-            // $("#iteam_label4").addClass('skeleton');
             $("#iteam_label5").addClass('skeleton');
             $("#total_medic_records").addClass('skeleton');
             $("#med").addClass('skeleton');
-            // $(".tot_summ").addClass('skeleton');
+            $("#medicine_table_paginate").addClass('paginate-skeleton');
+            $(".iteam_label4").addClass('skeleton');
 
             var time = null;
             time = setTimeout(() => {
+                $(".head_title").removeClass('skeleton');
+                $(".clos_title").removeClass('skeleton');
+                $(".per_page").removeClass('skeleton');
+                $(".selec_item").removeClass('select-skeleton');
                 $("#medic_nam").removeClass('skeleton');
                 $("#medic_nam2").removeClass('skeleton');
                 $("#medic_nam3").removeClass('skeleton');
@@ -444,11 +500,11 @@
                 $("#iteam_label").removeClass('skeleton');
                 $("#iteam_label2").removeClass('skeleton');
                 $("#iteam_label3").removeClass('skeleton');
-                // $("#iteam_label4").removeClass('skeleton');
                 $("#iteam_label5").removeClass('skeleton');
                 $("#total_medic_records").removeClass('skeleton');
                 $("#med").removeClass('skeleton');
-                // $(".tot_summ").removeClass('skeleton');
+                $("#medicine_table_paginate").removeClass('paginate-skeleton');
+                $(".iteam_label4").removeClass('skeleton');
             }, 1000);
 
             return ()=>{

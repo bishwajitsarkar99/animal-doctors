@@ -40,22 +40,24 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div>
-                                    <table class="bg-transparent ord_table center border-1 skeleton mt-2">
-                                        <tr class="table-row order_body acc_setting_table">
-                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1">ID</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1">Act</th>
-                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">ID-Name</th>
-                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Type</th>
-                                            <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Bussiness</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Name</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact1</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact2</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">WhatsApp</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Email</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ skeleton">Permission</th>
-                                            <th id="th_sort" class="table_th_color tot_pending_ skeleton pe-2">Check</th>
-                                        </tr>
+                                <div class="table-responsive">
+                                    <table class="table align-middle bg-transparent ord_table center border-1 skeleton mt-2">
+                                        <thead class="table-light">
+                                            <tr class="table-row order_body acc_setting_table">
+                                                <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1">ID</th>
+                                                <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1">Act</th>
+                                                <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">ID-Name</th>
+                                                <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Type</th>
+                                                <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Bussiness</th>
+                                                <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Name</th>
+                                                <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact1</th>
+                                                <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact2</th>
+                                                <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">WhatsApp</th>
+                                                <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Email</th>
+                                                <th id="th_sort" class="table_th_color tot_pending_ skeleton">Permission</th>
+                                                <th id="th_sort" class="table_th_color tot_pending_ skeleton pe-2">Check</th>
+                                            </tr>
+                                        </thead>
                                         <tbody class="bg-transparent skeleton" id="supplier_data_table">
 
                                         </tbody>
@@ -239,7 +241,7 @@
     <div class="modal-dialog">
         <div class="modal-content" id="admin_modal_box">
             <div class="modal-header profile_modal_header profilesetting_modal_header">
-                <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabels">
+                <h5 class="modal-title ps-1 pe-1" id="staticBackdropLabels">
                     Delete Supplier Or Vendor
                 </h5>
                 <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
@@ -275,7 +277,7 @@
 <div class="modal fade" id="supplierInfoView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content small_modal" id="admin_modal_box">
-        <div class="modal-header" id="logoutModal_header">
+        <div class="modal-header" id="viewModal_header">
             <span class="modal-title admin_title scan pt-1" id="staticBackHead">
                 <input class="view_name" type="text" readonly>
             </span>
@@ -283,25 +285,47 @@
                 data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
             </button>
         </div>
-        <div class="modal-body" id="logoutModal_body">
-            <label class="label_font" for="supplier_id">Supplier-ID :</label>
-            <input class="supp_vew" type="text" readonly><br>
-            <label class="label_font" for="view_type">Type :</label>
-            <input class="view_type" type="text" readonly><br>
-            <label class="label_font" for="view_bussiness_type">Bussiness Type :</label>
-            <input class="view_bussiness_type" type="text" readonly><br>
-            <label class="label_font address" for="view_office_address">Office-Address :</label><br>
-            <textarea id="view_office_address"  rows="1" cols="36" class="view_office_address" readonly></textarea><br>
-            <label class="label_font address" for="view_current_address">Current-Address :</label><br>
-            <textarea id="view_current_address"  rows="1" cols="36" class="view_current_address" readonly></textarea><br>
-            <label class="label_font" for="view_contact_number_one">Contract Number-1 :</label>
-            <input class="view_contact_number_one" type="text" readonly>
-            <label class="label_font" for="view_contact_number_two">Contract Number-2 :</label>
-            <input class="view_contact_number_two" type="text" readonly><br>
-            <label class="label_font" for="view_whatsapp_number">Whats app Number :</label>
-            <input class="view_whatsapp_number" type="text" readonly><br>
-            <label class="label_font" for="view_email">Email :</label>
-            <input class="view_email" type="text" readonly><br>
+        <div class="modal-body" style="padding:0.5rem 0.5rem;" id="logoutModal_body">
+            <table class="table-responsive">
+                <tbody class="table_body">
+                    <tr class="table=light">
+                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1" for="supplier_id">Supplier : </label></td>
+                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;background:seashell;" class="supp_vew" type="text" readonly></td>
+                    </tr>
+                    <tr class="table=light">
+                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_type">Type : </label></td>
+                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;background:seashell;" class="view_type" type="text" readonly></td>
+                    </tr>
+                    <tr class="table=light">
+                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_bussiness_type">Bussiness : </label></td>
+                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;background:seashell;" class="view_bussiness_type" type="text" readonly></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1 address" for="view_office_address">Office-Address : </label></td>
+                        <td class="lable_value"><textarea style="font-size:11px;width:200px;font-weight:700;background:seashell;" id="view_office_address"  rows="1" cols="35" class="view_office_address" readonly></textarea></td>
+                    </tr>
+                    <tr class="table=light">
+                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1 address" for="view_current_address">Current-Address : </label></td>
+                        <td class="lable_value"><textarea style="font-size:11px;width:200px;font-weight:700;background:seashell;" id="view_current_address"  rows="1" cols="35" class="view_current_address" readonly></textarea></td>
+                    </tr>
+                    <tr class="table=light">
+                        <td class="lable_class" style="font-size:11px;width:150px;background:seashell;text-align:left;"><label class="label_font ps-1" for="view_contact_number_one">Contract-1 : </label></td>
+                        <td class="lable_value" ><input style="font-size:11px;width:200px;font-weight:700;background:seashell;" class="view_contact_number_one" type="text" readonly></td>
+                    </tr>
+                    <tr class="table=light">
+                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_contact_number_two">Contract-2 : </label></td>
+                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;background:seashell;"  class="view_contact_number_two" type="text" readonly></td>
+                    </tr>
+                    <tr class="table=light">
+                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_whatsapp_number">Whats app : </label></td>
+                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;background:seashell;" class="view_whatsapp_number" type="text" readonly></td>
+                    </tr>
+                    <tr class="table=light">
+                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_email">Email : </label></td>
+                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;background:seashell;" class="view_email" type="text" readonly></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="modal-footer" id="logoutModal_footer">
     

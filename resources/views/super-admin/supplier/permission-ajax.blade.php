@@ -721,7 +721,7 @@
                     total
 
                 }) {
-                    $("#supplier_data_table").html(table_rows([...data]));
+                    $("#supplier_data_table_permission").html(table_rows([...data]));
                     $("#supplier_data_table_paginate").html(paginate_html({
                         links,
                         total
@@ -832,18 +832,23 @@
             });
         });
 
+        // $(document).on('click', '#tabCreateSupplier', function(e) {
+        //     e.preventDefault();
+        //     var changeURL = '/supplier';
 
-        // Change url create supplier from supplier setting
-        $(document).on('click', '#tabCreateSupplier', function(e) {
-            e.preventDefault();
-            var changeURL = '/supplier';
-            window.location.href = changeURL;
-            $("#loaderShow").removeClass('loader-show');
-            setTimeout(() => {
-                $("#loaderShow").addClass('loader-show');
-            }, 1800);
-        }); 
-        
+        //     $.ajax({
+        //         url: changeURL,
+        //         method: 'GET',
+        //         success: function(response) {
+        //             $('#myscreen').html(response);
+        //             history.pushState(null, '', changeURL);
+        //         },
+        //         error: function(xhr, status, error) {
+        //             console.error('Error loading supplier content:', error);
+        //         }
+        //     });
+        // });
+
         // Change url with page reload
         // $(document).on('click', '#tabCreateSupplier', function(e) {
         //     e.preventDefault();
@@ -882,6 +887,9 @@
         //         }
         //     });
         // });
+
+
+        
 
     });
 </script>

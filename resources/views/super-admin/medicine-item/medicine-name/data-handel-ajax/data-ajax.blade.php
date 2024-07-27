@@ -31,7 +31,7 @@
                         <td class="ps-1 border_ord" id="medic_name3">${row.medicine_groups ? row.medicine_groups.group_name : ''}</td>
                         <td class="txt_ ps-1" id="medic_name5">${row.medicine_name}</td>
                         <td class="tot_complete_ pe-2 ${row.status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '✅ Active' : '❌ Deny'}</span>
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '<span style="font-size:15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="medic_name6">
@@ -250,9 +250,31 @@
                 }
             });
         });
+        // Confirm Update Medicine Name Modal
+        $(document).on('click', '#update_btn', function(e){
+            e.preventDefault();
+            $("#updateconfirmmedicine").modal('show');
+            $(".update_title").addClass('skeleton');
+            $(".head_btn3").addClass('skeleton');
+            $("#cate_confirm_update").addClass('skeleton');
+            $(".update_confirm").addClass('skeleton');
+            $(".delete_cancel").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
+                $(".update_title").removeClass('skeleton');
+                $(".head_btn3").removeClass('skeleton');
+                $("#cate_confirm_update").removeClass('skeleton');
+                $(".update_confirm").removeClass('skeleton');
+                $(".delete_cancel").removeClass('skeleton');
+            }, 1000);
 
+            return ()=>{
+                clearTimeout(time);
+            }
+
+        });
         // Update Medicine Name
-        $(document).on('click', '#update_btn', function(e) {
+        $(document).on('click', '.update_confirm', function(e) {
             e.preventDefault();
             var medicine_id = $('#medicine_id').val();
             var data = {
@@ -293,6 +315,7 @@
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
+                        $("#updateconfirmmedicine").modal('hide');
                         fetch_medicineName_data();
                     }
                 }
@@ -300,26 +323,30 @@
 
         });
 
-        // Delete Medicine Name
+        // Delete Medicine Name Modal
         $(document).on('click', '#deleteBtn', function(e) {
             e.preventDefault();
             var medicine_id = $(this).val();
             $('#delete_medicine_id').val(medicine_id);
             $('#deletemedicine').modal('show');
+            $(".head_title").addClass('skeleton');
+            $(".cols_title").addClass('skeleton');
             $("#medi_delt").addClass('skeleton');
             $("#medi_delt2").addClass('skeleton');
             $("#medi_delt3").addClass('skeleton');
-            $("#medi_delt4").addClass('skeleton');
-            $("#deleteLoader").addClass('skeleton');
+            $("#yesButton").addClass('min-skeleton');
+            $("#noButton").addClass('min-skeleton');
             $("#delete_medicine_id").addClass('skeleton');
 
             var time = null;
             time = setTimeout(() => {
+                $(".head_title").removeClass('skeleton');
+                $(".cols_title").removeClass('skeleton');
                 $("#medi_delt").removeClass('skeleton');
                 $("#medi_delt2").removeClass('skeleton');
                 $("#medi_delt3").removeClass('skeleton');
-                $("#medi_delt4").removeClass('skeleton');
-                $("#deleteLoader").removeClass('skeleton');
+                $("#yesButton").removeClass('min-skeleton');
+                $("#noButton").removeClass('min-skeleton');
                 $("#delete_medicine_id").removeClass('skeleton');
             }, 1000);
 
@@ -327,7 +354,28 @@
                 clearTimeout(time);
             }
         });
+        // Confirm Delete Medicine Name Modal
+        $(document).on('click', '.yes_button', function(e){
+            e.preventDefault();
+            $("#deleteconfirmmedicine").modal('show');
+            $('.confirm_title').addClass('skeleton');
+            $('.head_btn_confirm').addClass('skeleton');
+            $('#cate_confirm').addClass('skeleton');
+            $("#medi_delt4").addClass('skeleton');
+            $("#deleteLoader").addClass('skeleton');
 
+            var time = null;
+            time = setTimeout(() => {
+                $('.confirm_title').removeClass('skeleton');
+                $('.head_btn_confirm').removeClass('skeleton');
+                $('#cate_confirm').removeClass('skeleton');
+                $('#medi_delt4').removeClass('skeleton');
+                $('#deleteLoader').removeClass('skeleton');
+            }, 1000);
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
         $(document).on('click', '.delet_btn_user', function(e) {
             e.preventDefault();
             var medicine_id = $('#delete_medicine_id').val();
@@ -349,7 +397,7 @@
                         $('#success_message').fadeOut();
                     }, 3000);
                     $('#deletemedicine').modal('hide');
-
+                    $("#deleteconfirmmedicine").modal('hide');
                     fetch_medicineName_data();
                 }
 
@@ -390,6 +438,10 @@
         // Show-Group Modal---------------
         $("#showGroup").on('click', function(){
             $("#group").modal('show');
+            $(".head_title").addClass('skeleton');
+            $(".clos_title").addClass('skeleton');
+            $(".per_page").addClass('skeleton');
+            $(".item_select").addClass('select-skeleton');
             $("#tb_group").addClass('skeleton');
             $("#search_area_").addClass('skeleton');
             $("#tb_group2").addClass('skeleton');
@@ -402,9 +454,15 @@
             $("#iteam_label").addClass('skeleton');
             $("#iteam_label3").addClass('skeleton');
             $("#iteam_label4").addClass('skeleton');
+            $("#groups_table_paginate").addClass('paginate-skeleton');
 
             var time = null;
             time = setTimeout(() => {
+                $(".head_title").removeClass('skeleton');
+                $(".clos_title").removeClass('skeleton');
+                $(".per_page").removeClass('skeleton');
+                $(".item_select").removeClass('select-skeleton');
+                $("#groups_table_paginate").removeClass('paginate-skeleton');
                 $("#tb_group").removeClass('skeleton');
                 $("#search_area_").removeClass('skeleton');
                 $("#tb_group2").removeClass('skeleton');

@@ -17,6 +17,9 @@ span#search_off {
 .pagination a.page-item.active{
 background-color: white;
 }
+tr>th.tableHead {
+    font-weight: 800;
+}
 input#origin_name {
     outline: none;
     box-shadow: none;
@@ -25,12 +28,13 @@ input#origin_name {
     animation: supfncolor 6s infinite;
     font-size: 12px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family: sans-serif;
 }
 @keyframes supfncolor{
     0%{
@@ -42,6 +46,16 @@ input#origin_name {
     100%{
         background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     }
+}
+button#origin_delt4 {
+    background: orangered;
+    color: white;
+    font-family: sans-serif;
+}
+button#origin_delt4:hover {
+    background: #e9e9e9;
+    color: orangered;
+    font-family: sans-serif;
 }
 span#total_origin_records{
     font-weight: 700;

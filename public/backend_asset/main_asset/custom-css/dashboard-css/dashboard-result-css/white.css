@@ -3,7 +3,7 @@
     --dashboard-result-hover-background-image:radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
     --dashboard-result-color:#adadadab;
     --dashboard-result-text-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
-    --dashboard-result-font-family: futura;
+    --dashboard-result-font-family: sans-serif;
     --dashboard-result-animation: input_text 2s ease-in-out infinite;
     --dashboard-result-hover-color:lightcyan;
     --dashboard-result-box-shadow:none;

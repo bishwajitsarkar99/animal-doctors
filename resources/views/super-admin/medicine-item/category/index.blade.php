@@ -25,19 +25,18 @@
             <div class="col-5">
               <span id="search_plate">
                 <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.Category Search.........')}}">
-                <!-- <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="color:rgb(13, 110, 253);opacity:1;"></i> -->
-                <i class="catg_search-icon fa fa-solid fa-bahai fa-spin catg_search-hidden" style="color:rgb(13, 110, 253);opacity:1;"></i>
+                <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="color:rgb(13, 110, 253);opacity:1;"></i>
               </span>
             </div>
           </div>
           <div>
             <table class="ord_table center border-1 skeleton mt-2" id="myTable">
               <tr class="table-row order_body acc_setting_table skeleton">
-                <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="table_th_color skeleton txt col ps-1 pt-1" style="cursor: move;">{{__('translate.ID')}}</th>
-                <th id="th_sort" draggable="true" class="table_th_color tot_pending_ skeleton col ps-1 pt-1" style="cursor: move;">{{__('translate.Action')}}</th>
-                <th id="th_sort" draggable="true" class="table_th_color tot_pending_ skeleton col ps-1 pt-1" style="text-align: left;cursor: move;">{{__('translate.Category-Name')}}</th>
-                <th id="th_sort" class="table_th_color tot_pending_ skeleton col ps-1 pt-1">{{__('translate.Status')}}</th>
-                <th id="th_sort" draggable="true" class="table_th_color tot_pending_ check_border skeleton col pt-1" style="cursor: move;">{{__('translate.Check')}}</th>
+                <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="tableHead table_th_color skeleton txt col ps-1 pt-1" style="cursor: move;">{{__('translate.ID')}}</th>
+                <th id="th_sort" draggable="true" class="tableHead table_th_color tot_pending_ skeleton col ps-1 pt-1" style="cursor: move;">{{__('translate.Action')}}</th>
+                <th id="th_sort" draggable="true" class="tableHead table_th_color tot_pending_ skeleton col ps-1 pt-1" style="text-align: left;cursor: move;">{{__('translate.Category-Name')}}</th>
+                <th id="th_sort" class="tableHead table_th_color tot_pending_ skeleton ps-1 pt-1">{{__('translate.Status')}}</th>
+                <th id="th_sort" draggable="true" class="tableHead table_th_color tot_pending_ check_border skeleton col pt-1" style="cursor: move;">{{__('translate.Check')}}</th>
               </tr>
               <tbody class="bg-transparent" id="category_data_table">
 
@@ -47,8 +46,8 @@
           </div>
           <div class="row table_last_row">
             <div class=" col-2">
-              <label class="item_class ">Peritem</label>
-              <div class="custom-select">
+              <label class="item_class skeleton">Peritem</label>
+              <div class="custom-select skeleton">
                 <select class="ps-1" id="perItemControl">
                   <option class="" selected>10</option>
                   <option class="">20</option>
@@ -115,26 +114,25 @@
   
 </div>
 
-{{-- Start Delete User Modal--}}
+{{-- Start Delete Category Modal--}}
 <!-- Modal -->
 <div class="modal fade" id="deletecategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" id="admin_modal_box">
       <div class="modal-header profile_modal_header profilesetting_modal_header">
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
+        <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
           {{__('translate.Delete Category')}}
         </h5>
-        <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+        <button type="button" class="btn-close btn-btn-sm head_btn" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
       </div>
 
       <div class="modal-body profile-body pb-1">
-
         <div class="row profile-heading pb-3">
           <div class="col-xl-122">
             <div class="form-group delete_content" id="load_id">
               <span><div id="active_loader" class="loader_chart mt-1"></div></span>
               <label class="label_user_edit" id="cate_delete" for="id">{{__('translate.Category-ID')}} : </label>
-             <span id="cat_id"> <input type="text" class="mt-3 update_id id" id="delete_category_id" readonly><br></span>
+              <span id="cat_id"> <input type="text" class="mt-3 update_id id" id="delete_category_id" readonly><br></span>
               <span class="label_user_edit" id="cate_delete2">{{__('translate.Are you sure, Would you like to delete this category, permanently?')}}</span>
               <input type="hidden" id="delete_category_id" name="category_id">
             </div>
@@ -142,17 +140,81 @@
         </div>
       </div>
       <div class="modal-footer profile_modal_footer">
-        <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user btn_focus" id="deleteLoader">
-          <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
-          <span class="btn-text">Delete</span>
-        </button>
-        <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete3" data-bs-dismiss="modal">Cancel</button>
+        <p id="btn_group2">
+          <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
+            <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
+            <span class="btn-text">{{__('translate.Yes')}}</span>
+          </a>
+        </p>
+        <p id="btn_group">
+          <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal" id="noButton">No</a>
+        </p>
       </div>
     </div>
   </div>
 </div>
-{{-- End EDelete User Modal---}}
+{{-- End Delete Category Modal---}}
 
+{{-- Start Confirm Delete Category Modal--}}
+<!-- Modal -->
+<div class="modal fade" id="deleteconfirmcategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+      <div class="modal-header" id="logoutModal_header">
+        <h6 class="modal-title admin_title scan confirm_title pt-1" id="staticBackdropLabel">
+          Confirm Delete
+        </h6>
+        <button type="button" class="btn-close btn-btn-sm head_btn2" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+        </div>
+        <div class="modal-body" id="logoutModal_body">
+          <p class="admin_paragraph" style="text-align:center;" id="text_message">
+            <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, delete or cancel ? </label>
+          </p>
+        </div>
+        <div class="modal-footer" id="logoutModal_footer">
+          <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user btn_focus" id="deleteLoader">
+            <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
+            <span class="btn-text">Delete</span>
+          </button>
+          <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete3" data-bs-dismiss="modal">Cancel</button>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
+{{-- Start Confirm Delete Category Modal--}}
+
+{{-- Start Update Category Modal--}}
+<!-- Modal -->
+<div class="modal fade" id="updateconfirmcategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+      <div class="modal-header" id="logoutModal_header">
+        <h6 class="modal-title admin_title scan update_title pt-1" id="staticBackdropLabel">
+          Update Category
+        </h6>
+        <button type="button" class="btn-close btn-btn-sm head_btn3" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+        </div>
+        <div class="modal-body" id="logoutModal_body">
+          <p class="admin_paragraph" style="text-align:center;" id="text_message">
+            <label class="label_user_edit" id="cate_confirm_update" for="id">Are you confirm or cancel ? </label>
+          </p>
+        </div>
+        <div class="modal-footer" id="logoutModal_footer">
+          <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus">
+            <span class="btn-text">Confirm</span>
+          </button>
+          <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
+{{-- End Update Category Modal--}}
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">

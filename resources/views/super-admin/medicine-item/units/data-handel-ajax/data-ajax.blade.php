@@ -30,7 +30,7 @@
                         </td>
                         <td class="txt_ ps-1" id="unit_tab4">${row.units_name}</td>
                         <td class="tot_complete_ pe-2 ${row.status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '✅ Active' : '❌ Deny'}</span>
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '<span style="font-size:15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="unit_tab5">
@@ -241,9 +241,31 @@
                 }
             });
         });
+        // Confirm Update Unit Modal
+        $(document).on('click', '#update_btn', function(e){
+            e.preventDefault();
+            $("#updateconfirmunits").modal('show');
+            $(".update_title").addClass('skeleton');
+            $(".head_btn3").addClass('skeleton');
+            $("#cate_confirm_update").addClass('skeleton');
+            $(".update_confirm").addClass('skeleton');
+            $(".delete_cancel").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
+                $(".update_title").removeClass('skeleton');
+                $(".head_btn3").removeClass('skeleton');
+                $("#cate_confirm_update").removeClass('skeleton');
+                $(".update_confirm").removeClass('skeleton');
+                $(".delete_cancel").removeClass('skeleton');
+            }, 1000);
 
+            return ()=>{
+                clearTimeout(time);
+            }
+
+        });
         // Update Unit
-        $(document).on('click', '#update_btn', function(e) {
+        $(document).on('click', '.update_confirm', function(e) {
             e.preventDefault();
             var units_id = $('#units_id').val();
             var data = {
@@ -282,6 +304,7 @@
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
+                        $("#updateconfirmunits").modal('hide');
                         fetch_units_data();
                     }
                 }
@@ -289,7 +312,7 @@
 
         });
 
-        // Delete Unit
+        // Delete Unit Modal
         $(document).on('click', '#deleteBtn', function(e) {
             e.preventDefault();
             var units_id = $(this).val();
@@ -297,27 +320,53 @@
             $('#deleteunits').modal('show');
 
             var time = null;
+            $(".head_title").addClass('skeleton');
+            $(".cols_title").addClass('skeleton');
             $("#unit_delt").addClass('skeleton');
             $("#unit_delt2").addClass('skeleton');
             $("#unit_delt3").addClass('skeleton');
-            $("#unit_delt4").addClass('skeleton');
             $("#delete_unit_id").addClass('skeleton');
-            $("#deleteLoader").addClass('skeleton');
+            $("#yesButton").addClass('min-skeleton');
+            $("#noButton").addClass('min-skeleton');
 
             time = setTimeout(() => {
+                $(".head_title").removeClass('skeleton');
+                $(".cols_title").removeClass('skeleton');
                 $("#unit_delt").removeClass('skeleton');
                 $("#unit_delt2").removeClass('skeleton');
                 $("#unit_delt3").removeClass('skeleton');
-                $("#unit_delt4").removeClass('skeleton');
                 $("#delete_unit_id").removeClass('skeleton');
-                $("#deleteLoader").removeClass('skeleton');
+                $("#yesButton").removeClass('min-skeleton');
+                $("#noButton").removeClass('min-skeleton');
             }, 1000);
 
             return ()=>{
                 clearTimeout(time);
             }
         });
+        // Confirm Delete Unit Modal
+        $(document).on('click', '.yes_button', function(e){
+            e.preventDefault();
+            $("#deleteconfirmunits").modal('show');
+            $('.confirm_title').addClass('skeleton');
+            $('.head_btn_confirm').addClass('skeleton');
+            $('#cate_confirm').addClass('skeleton');
+            $("#unit_delt4").addClass('skeleton');
+            $("#deleteLoader").addClass('skeleton');
 
+            var time = null;
+            time = setTimeout(() => {
+                $('.confirm_title').removeClass('skeleton');
+                $('.head_btn_confirm').removeClass('skeleton');
+                $('#cate_confirm').removeClass('skeleton');
+                $("#unit_delt4").removeClass('skeleton');
+                $("#deleteLoader").removeClass('skeleton');
+            }, 1000);
+            return ()=>{
+                clearTimeout(time);
+            }
+
+        });
         $(document).on('click', '.delet_btn_user', function(e) {
             e.preventDefault();
             var units_id = $('#delete_unit_id').val();
@@ -339,7 +388,7 @@
                         $('#success_message').fadeOut();
                     }, 3000);
                     $('#deleteunits').modal('hide');
-
+                    $("#deleteconfirmunits").modal('hide');
                     fetch_units_data();
                 }
 

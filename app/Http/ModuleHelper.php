@@ -1,8 +1,8 @@
 <?php
 
-use App\Support\Facades\Setting;
+use App\Support\Facades\Supplier;
 
-if(!function_exists('setting')){
+if(!function_exists('supplier')){
 
     /**
      * @param string|array $key
@@ -10,19 +10,20 @@ if(!function_exists('setting')){
      * 
      * @return mixed
      */
-    function setting($key, $default = null) {
+    function supplier($key, $default = null) {
         
         if(is_string($key)){
-            return Setting::get($key, $default);
+            return Supplier::get($key, $default);
         }
 
         if(is_array($key) && !empty($key)){
             foreach ($key as $k => $value) {
-                Setting::set($k, $value);
+                Supplier::set($k, $value);
             }
             return true;
         }
         return $default;
     }
 }
+
 ?>

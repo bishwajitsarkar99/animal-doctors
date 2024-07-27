@@ -32,11 +32,11 @@
           <div>
             <table class="ord_table center border-1 skeleton mt-2">
               <tr class="table-row order_body acc_setting_table skeleton">
-                <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1">{{__('translate.ID')}}</th>
-                <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1">{{__('translate.Action')}}</th>
-                <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1" style="text-align: left;">{{__('translate.Origin-Name')}}</th>
-                <th id="th_sort" class="table_th_color tot_pending_ col skeleton">{{__('translate.Status')}}</th>
-                <th id="th_sort" class="table_th_color tot_pending_ col skeleton">{{__('translate.Check')}}</th>
+                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col skeleton ps-1">{{__('translate.ID')}}</th>
+                <th id="th_sort" class="tableHead table_th_color tot_pending_ col skeleton ps-1">{{__('translate.Action')}}</th>
+                <th id="th_sort" class="tableHead table_th_color tot_pending_ col skeleton ps-1" style="text-align: left;">{{__('translate.Origin-Name')}}</th>
+                <th id="th_sort" class="tableHead table_th_color tot_pending_ ps-2 skeleton">{{__('translate.Status')}}</th>
+                <th id="th_sort" class="tableHead table_th_color tot_pending_ col skeleton">{{__('translate.Check')}}</th>
               </tr>
               <tbody class="bg-transparent skeleton" id="origin_data_table">
 
@@ -45,8 +45,8 @@
           </div>
           <div class="row table_last_row">
             <div class=" col-2">
-              <label class="item_class ">Peritem</label>
-              <div class="custom-select">
+              <label class="item_class skeleton">Peritem</label>
+              <div class="custom-select skeleton">
                 <select class="ps-1" id="perItemControl">
                   <option class="" selected>10</option>
                   <option class="">20</option>
@@ -118,10 +118,10 @@
   <div class="modal-dialog">
     <div class="modal-content" id="admin_modal_box">
       <div class="modal-header profile_modal_header profilesetting_modal_header">
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
+        <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
           {{__('translate.Delete Origin')}}
         </h5>
-        <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+        <button type="button" class="btn-close btn-btn-sm cols_title" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
       </div>
 
       <div class="modal-body profile-body pb-1">
@@ -139,16 +139,81 @@
         </div>
       </div>
       <div class="modal-footer profile_modal_footer">
-        <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user btn_focus" id="deleteLoader">
-          <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
-          <span class="btn-text">Delete</span>
-        </button>
-        <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="origin_delt4" data-bs-dismiss="modal">Cancel</button>
+        <p id="btn_group2">
+          <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
+            <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
+            <span class="btn-text">{{__('translate.Yes')}}</span>
+          </a>
+        </p>
+        <p id="btn_group">
+          <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal" id="noButton">No</a>
+        </p>
       </div>
     </div>
   </div>
 </div>
 {{-- End Delete Origin Modal---}}
+
+{{-- Start Confirm Delete Units Modal--}}
+<!-- Modal -->
+<div class="modal fade" id="deleteconfirmorigin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+      <div class="modal-header" id="logoutModal_header">
+        <h6 class="modal-title admin_title scan confirm_title pt-1" id="staticBackdropLabel">
+          Confirm Delete
+        </h6>
+        <button type="button" class="btn-close btn-btn-sm head_btn_confirm" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+        </div>
+        <div class="modal-body" id="logoutModal_body">
+          <p class="admin_paragraph" style="text-align:center;" id="text_message">
+            <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, delete or cancel ? </label>
+          </p>
+        </div>
+        <div class="modal-footer" id="logoutModal_footer">
+          <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user btn_focus" id="deleteLoader">
+            <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
+            <span class="btn-text">Delete</span>
+          </button>
+          <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="origin_delt4" data-bs-dismiss="modal">Cancel</button>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
+{{-- End Confirm Delete Units Modal--}}
+
+{{-- Start Confirm Update units Modal--}}
+<!-- Modal -->
+<div class="modal fade" id="updateconfirmorigin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+      <div class="modal-header" id="logoutModal_header">
+        <h6 class="modal-title admin_title scan update_title pt-1" id="staticBackdropLabel">
+          Update Units
+        </h6>
+        <button type="button" class="btn-close btn-btn-sm head_btn3" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+        </div>
+        <div class="modal-body" id="logoutModal_body">
+          <p class="admin_paragraph" style="text-align:center;" id="text_message">
+            <label class="label_user_edit" id="cate_confirm_update" for="id">Are you confirm or cancel ? </label>
+          </p>
+        </div>
+        <div class="modal-footer" id="logoutModal_footer">
+          <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus">
+            <span class="btn-text">Confirm</span>
+          </button>
+          <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
+{{-- End Confirm Update units Modal--}}
 
 @endsection
 @section('css')

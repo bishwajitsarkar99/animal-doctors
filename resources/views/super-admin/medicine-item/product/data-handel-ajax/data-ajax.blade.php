@@ -30,7 +30,7 @@
                         </td>
                         <td class="txt_ ps-1" id="prod4">${row.product_name}</td>
                         <td class="tot_complete_ pe-2 ${row.status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '✅ Active' : '❌ Deny'}</span>
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '<span style="font-size:15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="prod5">
@@ -243,9 +243,30 @@
                 }
             });
         });
+        // Confirm Update Product Modal
+        $(document).on('click', '#update_btn', function(e){
+            e.preventDefault();
+            $("#updateconfirmproduct").modal('show');
+            $(".update_title").addClass('skeleton');
+            $(".head_btn3").addClass('skeleton');
+            $("#cate_confirm_update").addClass('skeleton');
+            $(".update_confirm").addClass('skeleton');
+            $(".delete_cancel").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
+                $(".update_title").removeClass('skeleton');
+                $(".head_btn3").removeClass('skeleton');
+                $("#cate_confirm_update").removeClass('skeleton');
+                $(".update_confirm").removeClass('skeleton');
+                $(".delete_cancel").removeClass('skeleton');
+            }, 1000);
 
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
         // Update Product
-        $(document).on('click', '#update_btn', function(e) {
+        $(document).on('click', '.update_confirm', function(e) {
             e.preventDefault();
             var product_id = $('#product_id').val();
             var data = {
@@ -284,6 +305,7 @@
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
+                        $("#updateconfirmproduct").modal('hide');
                         fetch_product_data();
                     }
                 }
@@ -291,7 +313,7 @@
 
         });
 
-        // Delete Product
+        // Delete Product Modal
         $(document).on('click', '#deleteBtn', function(e) {
             e.preventDefault();
             var product_id = $(this).val();
@@ -299,28 +321,52 @@
             $('#deleteProduct').modal('show');
 
             var time = null;
-
+            $(".head_title").addClass('skeleton');
+            $(".clos_title").addClass('skeleton');
             $("#pro_delt").addClass('skeleton');
             $("#pro_delt2").addClass('skeleton');
             $("#pro_delt3").addClass('skeleton');
-            $("#pro_delt4").addClass('skeleton');
             $("#delete_product_id").addClass('skeleton');
-            $("#deleteLoader").addClass('skeleton');
+            $("#yesButton").addClass('min-skeleton');
+            $("#noButton").addClass('min-skeleton');
 
             time = setTimeout(() => {
+                $(".head_title").removeClass('skeleton');
+                $(".clos_title").removeClass('skeleton');
                 $("#pro_delt").removeClass('skeleton');
                 $("#pro_delt2").removeClass('skeleton');
                 $("#pro_delt3").removeClass('skeleton');
-                $("#pro_delt4").removeClass('skeleton');
                 $("#delete_product_id").removeClass('skeleton');
-                $("#deleteLoader").removeClass('skeleton');
+                $("#yesButton").removeClass('min-skeleton');
+                $("#noButton").removeClass('min-skeleton');
             }, 1000);
 
             return ()=>{
                 clearTimeout(time);
             }
         });
+        // Confirm Delete Product Modal
+        $(document).on('click', '.yes_button', function(e){
+            e.preventDefault();
+            $("#deleteconfirmproduct").modal('show');
+            $('.confirm_title').addClass('skeleton');
+            $('.head_btn_confirm').addClass('skeleton');
+            $('#cate_confirm').addClass('skeleton');
+            $("#pro_delt4").addClass('skeleton');
+            $("#deleteLoader").addClass('skeleton');
 
+            var time = null;
+            time = setTimeout(() => {
+                $('.confirm_title').removeClass('skeleton');
+                $('.head_btn_confirm').removeClass('skeleton');
+                $('#cate_confirm').removeClass('skeleton');
+                $("#pro_delt4").removeClass('skeleton');
+                $("#deleteLoader").removeClass('skeleton');
+            }, 1000);
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
         $(document).on('click', '.delet_btn_user', function(e) {
             e.preventDefault();
             var product_id = $('#delete_product_id').val();
@@ -342,7 +388,7 @@
                         $('#success_message').fadeOut();
                     }, 3000);
                     $('#deleteProduct').modal('hide');
-
+                    $("#deleteconfirmproduct").modal('hide');
                     fetch_product_data();
                 }
 

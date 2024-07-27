@@ -1,8 +1,7 @@
 <div>
     <table class="bg-transparent ord_table center border-1 skeleton mt-2">
         <tr class="table-row order_body acc_setting_table">
-            <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1">ID</th>
-            <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Act</th>
+            <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1 pe-1">ID</th>
             <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">ID-Name</th>
             <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Type</th>
             <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1">Bussiness</th>
@@ -11,10 +10,10 @@
             <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Contact2</th>
             <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">WhatsApp</th>
             <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Email</th>
-            <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton">Permission</th>
-            <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton pe-2">Check</th>
+            <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton ps-1">Permission</th>
+            <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ skeleton pe-2 ps-1">Access</th>
         </tr>
-        <tbody class="bg-transparent skeleton" id="supplier_data_table">
+        <tbody class="bg-transparent skeleton" id="supplier_data_table_permission">
 
         </tbody>
     </table>

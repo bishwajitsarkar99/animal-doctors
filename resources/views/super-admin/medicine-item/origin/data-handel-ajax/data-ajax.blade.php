@@ -30,7 +30,7 @@
                         </td>
                         <td class="txt_ ps-1" id="origin_tab4">${row.origin_name}</td>
                         <td class="tot_complete_ pe-2 ${row.status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '✅ Active' : '❌ Deny'}</span>
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '<span style="font-size:15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="origin_tab5">
@@ -242,9 +242,31 @@
                 }
             });
         });
+        // Confirm Update Origin Modal
+        $(document).on('click', '#update_btn', function(e){
+            e.preventDefault();
+            $("#updateconfirmorigin").modal('show');
+            $(".update_title").addClass('skeleton');
+            $(".head_btn3").addClass('skeleton');
+            $("#cate_confirm_update").addClass('skeleton');
+            $(".update_confirm").addClass('skeleton');
+            $(".delete_cancel").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
+                $(".update_title").removeClass('skeleton');
+                $(".head_btn3").removeClass('skeleton');
+                $("#cate_confirm_update").removeClass('skeleton');
+                $(".update_confirm").removeClass('skeleton');
+                $(".delete_cancel").removeClass('skeleton');
+            }, 1000);
 
+            return ()=>{
+                clearTimeout(time);
+            }
+
+        });
         // Update Origin
-        $(document).on('click', '#update_btn', function(e) {
+        $(document).on('click', '.update_confirm', function(e) {
             e.preventDefault();
             var origin_id = $('#origin_id').val();
             var data = {
@@ -283,6 +305,7 @@
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
+                        $("#updateconfirmorigin").modal('hide');
                         fetch_origin_data();
                     }
                 }
@@ -290,7 +313,7 @@
 
         });
 
-        // Delete Origin
+        // Delete Origin Modal
         $(document).on('click', '#deleteBtn', function(e) {
             e.preventDefault();
             var origin_id = $(this).val();
@@ -298,27 +321,52 @@
             $('#deleteorigin').modal('show');
 
             var time = null;
+            $(".head_title").addClass('skeleton');
+            $(".cols_title").addClass('skeleton');
             $("#origin_delt").addClass('skeleton');
             $("#origin_delt2").addClass('skeleton');
             $("#origin_delt3").addClass('skeleton');
-            $("#origin_delt4").addClass('skeleton');
             $("#delete_origin_id").addClass('skeleton');
-            $("#deleteLoader").addClass('skeleton');
+            $("#yesButton").addClass('min-skeleton');
+            $("#noButton").addClass('min-skeleton');
 
             time = setTimeout(() => {
+                $(".head_title").removeClass('skeleton');
+                $(".cols_title").removeClass('skeleton');
                 $("#origin_delt").removeClass('skeleton');
                 $("#origin_delt2").removeClass('skeleton');
                 $("#origin_delt3").removeClass('skeleton');
-                $("#origin_delt4").removeClass('skeleton');
                 $("#delete_origin_id").removeClass('skeleton');
-                $("#deleteLoader").removeClass('skeleton');
+                $("#yesButton").removeClass('min-skeleton');
+                $("#noButton").removeClass('min-skeleton');
             }, 1000);
 
             return ()=>{
                 clearTimeout(time);
             }
         });
+        // Confirm Delete Origin Modal
+        $(document).on('click', '.yes_button', function(e){
+            e.preventDefault();
+            $("#deleteconfirmorigin").modal('show');
+            $('.confirm_title').addClass('skeleton');
+            $('.head_btn_confirm').addClass('skeleton');
+            $('#cate_confirm').addClass('skeleton');
+            $("#origin_delt4").addClass('skeleton');
+            $("#deleteLoader").addClass('skeleton');
 
+            var time = null;
+            time = setTimeout(() => {
+                $('.confirm_title').removeClass('skeleton');
+                $('.head_btn_confirm').removeClass('skeleton');
+                $('#cate_confirm').removeClass('skeleton');
+                $("#origin_delt4").removeClass('skeleton');
+                $("#deleteLoader").removeClass('skeleton');
+            }, 1000);
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
         $(document).on('click', '.delet_btn_user', function(e) {
             e.preventDefault();
             var origin_id = $('#delete_origin_id').val();
@@ -340,7 +388,7 @@
                         $('#success_message').fadeOut();
                     }, 3000);
                     $('#deleteorigin').modal('hide');
-
+                    $("#deleteconfirmorigin").modal('hide');
                     fetch_origin_data();
                 }
 

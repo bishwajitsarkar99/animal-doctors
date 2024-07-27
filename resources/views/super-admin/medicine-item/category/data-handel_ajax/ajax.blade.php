@@ -32,7 +32,7 @@
                         </td>
                         <td class="txt_ ps-1" id="cat_td4">${row.category_name}</td>
                         <td class="tot_complete_ pe-2 ${row.status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '✅ Active' : '❌ Deny'}</span>
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '<span style="font-size:15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="cat_td5">
@@ -245,8 +245,31 @@
             });
         });
 
-        // Update Category
-        $(document).on('click', '#update_btn', function(e) {
+        // Update Show Modal
+        $(document).on('click', '#update_btn', function(e){
+            e.preventDefault();
+            $("#updateconfirmcategory").modal('show');
+            
+            $("#update_btn_confirm").addClass('skeleton');
+            $("#cate_delete5").addClass('skeleton');
+            $("#cate_confirm_update").addClass('skeleton');
+            $(".update_title").addClass('skeleton');
+            $(".head_btn3").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
+                $(".update_title").removeClass('skeleton');
+                $(".head_btn3").removeClass('skeleton');
+                $("#update_btn_confirm").removeClass('skeleton');
+                $("#cate_delete5").removeClass('skeleton');
+                $("#cate_confirm_update").removeClass('skeleton');
+            }, 1000);
+
+            return () => {
+                clearTimeout(time);
+            }
+        });
+        // Confirm Update Category
+        $(document).on('click', '#update_btn_confirm', function(e) {
             e.preventDefault();
             var category_id = $('#category_id').val();
             var data = {
@@ -285,6 +308,7 @@
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
+                        $("#updateconfirmcategory").modal('hide');
                         fetch_category_data();
                     }
                 }
@@ -292,34 +316,62 @@
 
         });
 
-        // Delete Category
+        // Delete Modal
         $(document).on('click', '#deleteBtn', function(e) {
             e.preventDefault();
             var category_id = $(this).val();
             $('#delete_category_id').val(category_id);
             $('#deletecategory').modal('show');
+            $(".head_title").addClass('skeleton');
+            $(".head_btn").addClass('skeleton');
             $("#cate_delete").addClass('skeleton');
             $("#cat_id").addClass('skeleton');
             $("#cate_delete2").addClass('skeleton');
-            $("#deleteLoader").addClass('skeleton');
-            $("#cate_delete3").addClass('skeleton');
             $("#load_id").addClass('skeleton');
+            $("#yesButton").addClass('min-skeleton');
+            $("#noButton").addClass('min-skeleton');
 
             var time = null;
             time = setTimeout(() => {
+                $(".head_title").removeClass('skeleton');
+                $(".head_btn").removeClass('skeleton');
                 $("#cate_delete").removeClass('skeleton');
                 $("#cat_id").removeClass('skeleton');
                 $("#cate_delete2").removeClass('skeleton');
                 $("#deleteLoader").removeClass('skeleton');
                 $("#cate_delete3").removeClass('skeleton');
                 $("#load_id").removeClass('skeleton');
+                $("#yesButton").removeClass('min-skeleton');
+                $("#noButton").removeClass('min-skeleton');
             }, 1000);
 
             return () => {
                 clearTimeout(time);
             }
         });
+        // Delete Category confirm modal
+        $(document).on('click', '.yes_button', function(e){
+            e.preventDefault();
+            $('#deleteconfirmcategory').modal('show');
+            $("#deleteLoader").addClass('skeleton');
+            $("#cate_delete3").addClass('skeleton');
+            $("#cate_confirm").addClass('skeleton');
+            $(".confirm_title").addClass('skeleton');
+            $(".head_btn2").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
+                $(".confirm_title").removeClass('skeleton');
+                $(".head_btn2").removeClass('skeleton');
+                $("#deleteLoader").removeClass('skeleton');
+                $("#cate_delete3").removeClass('skeleton');
+                $("#cate_confirm").removeClass('skeleton');
+            }, 1000);
 
+            return () => {
+                clearTimeout(time);
+            }
+        });
+        // Confirm Delete Category
         $(document).on('click', '.delet_btn_user', function(e) {
             e.preventDefault();
             var category_id = $('#delete_category_id').val();
@@ -341,6 +393,7 @@
                         $('#success_message').fadeOut();
                     }, 3000);
                     $('#deletecategory').modal('hide');
+                    $('#deleteconfirmcategory').modal('hide');
 
                     fetch_category_data();
                 }

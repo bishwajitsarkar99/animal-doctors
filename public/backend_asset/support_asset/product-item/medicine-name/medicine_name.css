@@ -1,11 +1,20 @@
 :root{
     --search-box-background-color:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, #e1e1e1, rgba(0, 0, 0, 0.05) 100%);
     --table-head-background:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
-    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
-    --bg-color:purple;
+    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, transparent 80%, rgba(0, 0, 0, 0.05) 100%);
+    --bg-color:darkgoldenrod;
     --color:royalblue;
     --size:1px;
     --font-weight:500;
+}
+button#medi_delt4 {
+    background: orangered;
+    font-family: sans-serif;
+}
+button#medi_delt4:hover {
+    background: #e9e9e9;
+    color: orangered;
+    font-family: sans-serif;
 }
 table, th, td {
     border-collapse: collapse;
@@ -67,22 +76,26 @@ input#group_search {
     border: 1px solid #f1eeee;
     border-radius: 5px;
     animation: text_color 3s infinite;
+    font-family: sans-serif;
 }
 input#search_area_ {
     outline: none;
     box-shadow: none;
     cursor: pointer;
-    background-color: #08a05c;
+    background-color:lightgray;
     border: none;
 }
 label.catg_ser_label {
     color: black;
     font-weight: 600;
     font-size: 13px;
+    font-family: sans-serif;
 }
 span.total_result {
     color: white;
     font-weight: 600;
+    font-size: 12px;
+    font-family: sans-serif;
 }
 select#perItemControl3 {
     outline: none;
@@ -92,6 +105,9 @@ select#perItemControl3 {
     background-color: #08a05c;
     border-radius: 3px;
     width: 50px;
+}
+a.page-link.btn_page {
+    height: 22px;
 }
 tbody#medicine_data_table {
     background-origin: revert;
@@ -109,12 +125,13 @@ input#medicine_name {
     animation: supfncolor 6s infinite;
     font-size: 12px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family: sans-serif;
 }
 @keyframes supfncolor{
     0%{
@@ -140,15 +157,43 @@ input#group_id {
     animation: supfncolor 6s infinite;
     font-size: 12px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family: sans-serif;
 }
 .medicine_name{
     float: left;
+}
+.paginate-skeleton,.select-skeleton{
+    position: relative;
+}
+.paginate-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 100%;
+    height: 50%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+.select-skeleton::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 121%;
+    height: 101%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
 }
 span#total_medicine_records {
     color: white;
@@ -177,6 +222,11 @@ input#delete_medicine_id {
     outline: none;
     border: none;
     font-weight: 600;
+    font-family: sans-serif;
+    color: darkcyan;
+}
+tr>th.tableHead {
+    font-weight: 800;
 }
 div.link{
     float: right;

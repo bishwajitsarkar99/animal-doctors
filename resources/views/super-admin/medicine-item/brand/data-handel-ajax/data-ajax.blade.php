@@ -31,7 +31,7 @@
                         <td class="ps-1 border_ord" id="brand_tab3">${row.medicine_origins ? row.medicine_origins.origin_name : ''}</td>
                         <td class="txt_ ps-1" id="brand_tab5">${row.brand_name}</td>
                         <td class="tot_complete_ pe-2 ${row.status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '✅ Active' : '❌ Deny'}</span>
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '<span style="font-size:15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="brand_tab6">
@@ -250,9 +250,31 @@
                 }
             });
         });
+        // Confirm Update Brand Modal
+        $(document).on('click', '#update_btn', function(e){
+            e.preventDefault();
+            $("#updateconfirmbrand").modal('show');
+            $(".update_title").addClass('skeleton');
+            $(".head_btn3").addClass('skeleton');
+            $("#cate_confirm_update").addClass('skeleton');
+            $(".update_confirm").addClass('skeleton');
+            $(".delete_cancel").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
+                $(".update_title").removeClass('skeleton');
+                $(".head_btn3").removeClass('skeleton');
+                $("#cate_confirm_update").removeClass('skeleton');
+                $(".update_confirm").removeClass('skeleton');
+                $(".delete_cancel").removeClass('skeleton');
+            }, 1000);
 
+            return ()=>{
+                clearTimeout(time);
+            }
+
+        });
         // Update Brand
-        $(document).on('click', '#update_btn', function(e) {
+        $(document).on('click', '.update_confirm', function(e) {
             e.preventDefault();
             var brand_id = $('#brand_id').val();
             var data = {
@@ -293,6 +315,7 @@
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
+                        $("#updateconfirmbrand").modal('hide');
                         fetch_brand_data();
                     }
                 }
@@ -300,7 +323,7 @@
 
         });
 
-        // Delete Brand
+        // Delete Brand Modal
         $(document).on('click', '#deleteBtn', function(e) {
             e.preventDefault();
             var brand_id = $(this).val();
@@ -308,27 +331,52 @@
             $('#deletebrand').modal('show');
 
             var time = null;
+            $(".head_title").addClass('skeleton');
+            $(".cols_title").addClass('skeleton');
             $("#brnad_delt").addClass('skeleton');
             $("#brnad_delt2").addClass('skeleton');
             $("#brnad_delt3").addClass('skeleton');
-            $("#brnad_delt4").addClass('skeleton');
             $("#delete_brand_id").addClass('skeleton');
-            $("#deleteLoader").addClass('skeleton');
+            $("#yesButton").addClass('min-skeleton');
+            $("#noButton").addClass('min-skeleton');
 
             time = setTimeout(() => {
+                $(".head_title").removeClass('skeleton');
+                $(".cols_title").removeClass('skeleton');
                 $("#brnad_delt").removeClass('skeleton');
                 $("#brnad_delt2").removeClass('skeleton');
                 $("#brnad_delt3").removeClass('skeleton');
-                $("#brnad_delt4").removeClass('skeleton');
                 $("#delete_brand_id").removeClass('skeleton');
-                $("#deleteLoader").removeClass('skeleton');
+                $("#yesButton").removeClass('min-skeleton');
+                $("#noButton").removeClass('min-skeleton');
             }, 1000);
 
             return ()=>{
                 clearTimeout(time);
             }
         });
+        // Confirm Delete Brand Modal
+        $(document).on('click', '.yes_button', function(e){
+            e.preventDefault();
+            $("#deleteconfirmbrand").modal('show');
+            $('.confirm_title').addClass('skeleton');
+            $('.head_btn_confirm').addClass('skeleton');
+            $('#cate_confirm').addClass('skeleton');
+            $("#brnad_delt4").addClass('skeleton');
+            $("#deleteLoader").addClass('skeleton');
 
+            var time = null;
+            time = setTimeout(() => {
+                $('.confirm_title').removeClass('skeleton');
+                $('.head_btn_confirm').removeClass('skeleton');
+                $('#cate_confirm').removeClass('skeleton');
+                $("#brnad_delt4").removeClass('skeleton');
+                $("#deleteLoader").removeClass('skeleton');
+            }, 1000);
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
         $(document).on('click', '.delet_btn_user', function(e) {
             e.preventDefault();
             var brand_id = $('#delete_brand_id').val();
@@ -350,7 +398,7 @@
                         $('#success_message').fadeOut();
                     }, 3000);
                     $('#deletebrand').modal('hide');
-
+                    $("#deleteconfirmbrand").modal('hide');
                     fetch_brand_data();
                 }
 
@@ -389,8 +437,29 @@
         });
 
         // Show-Origin Modal---------------
-        $("#showOrigin").on('click', function(){
+        $("#showOrigin").on('click', function(e){
+            e.preventDefault();
             $("#origin").modal('show');
+            var time = null;
+            $(".head_title2").addClass('skeleton');
+            $(".cols_title2").addClass('skeleton');
+            $(".per_page").addClass('skeleton');
+            $(".select_item").addClass('select-skeleton');
+            $(".item_lab").addClass('skeleton');
+            $("#origin_get_table_paginate").addClass('paginate-skeleton');
+            time = setTimeout(() => {
+                $(".head_title2").removeClass('skeleton');
+                $(".cols_title2").removeClass('skeleton');
+                $(".per_page").removeClass('skeleton');
+                $(".select_item").removeClass('select-skeleton');
+                $(".item_lab").removeClass('skeleton');
+                $("#origin_get_table_paginate").removeClass('paginate-skeleton');
+            }, 1000);
+
+            return ()=>{
+                clearTimeout(time);
+            }
+
         });
 
         $(document).load('click', function(){

@@ -149,26 +149,64 @@
                             <a type="button" onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-envelope-circle-check fa-beat" style="color: darkgray; font-size:15px;"></i></a>
                             <div id="myDropdown" class="dropdown-content">
                                 <input class="search_message ms-3 mt-3 mb-2" type="text" placeholder="&#xf002; {{__('translate.Search..')}}" id="myInput" onkeyup="filterFunction()">
-                                <a href="#about">About</a>
-                                <a href="#base">Base</a>
-                                <a href="#blog">Blog</a>
-                                <a href="#contact">Contact</a>
-                                <a href="#custom">Custom</a>
-                                <a href="#support">Support</a>
-                                <a href="#tools">Tools</a>
-                                <a href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <!-- <img class="rounded-circle" src="" alt="..."> -->
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">{{__('translate.Read More Messages')}}</a>
-                                <span class="custom-order-arrow mini"></span>
+                                <div class="table table-responsive" style="padding-left:5px;padding-right:5px;">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr class="table-row order_body acc_setting_table">
+                                                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">S.N</th>
+                                                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Customer ID</th>
+                                                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Order ID</th>
+                                                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Order Location</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-transparent">
+                                            <tr class="table-row user-table-row supp-table-row">
+                                                <td class="border_ord ps-1 supp_vew">1</td>
+                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0000</a></td>
+                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0000</a></td>
+                                                <td class="txt_ ps-1 supp_vew2">Dhaka</td>
+                                            </tr>
+                                            <tr class="table-row user-table-row supp-table-row">
+                                                <td class="border_ord ps-1 supp_vew">2</td>
+                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0001</a></td>
+                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0001</a></td>
+                                                <td class="txt_ ps-1 supp_vew2">Dhaka</td>
+                                            </tr>
+                                            <tr class="table-row user-table-row supp-table-row">
+                                                <td class="border_ord ps-1 supp_vew">3</td>
+                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0003</a></td>
+                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0003</a></td>
+                                                <td class="txt_ ps-1 supp_vew2">Natore</td>
+                                            </tr>
+                                            <tr class="table-row user-table-row supp-table-row">
+                                                <td class="border_ord ps-1 supp_vew">4</td>
+                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0004</a></td>
+                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0004</a></td>
+                                                <td class="txt_ ps-1 supp_vew2">Rangpur</td>
+                                            </tr>
+                                            <tr class="table-row user-table-row supp-table-row">
+                                                <td class="border_ord ps-1 supp_vew">5</td>
+                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0005</a></td>
+                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0005</a></td>
+                                                <td class="txt_ ps-1 supp_vew2">Dinajput</td>
+                                            </tr>
+                                            <tr class="table-row user-table-row supp-table-row">
+                                                <td class="border_ord ps-1 supp_vew">6</td>
+                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0006</a></td>
+                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0006</a></td>
+                                                <td class="txt_ ps-1 supp_vew2">Gazipur</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td>
+                                                    <a class="dropdown-item text-center small text-gray-500" href="#">{{__('translate.Read More Messages')}}</a>
+                                                    <span class="custom-order-arrow mini"></span>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </li>

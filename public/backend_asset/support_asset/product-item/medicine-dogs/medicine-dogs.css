@@ -2,6 +2,33 @@
     --search-background:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, #e1e1e1, rgba(0, 0, 0, 0.05) 100%);
     --table-head-background:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
 }
+.paginate-skeleton,.select-skeleton{
+    position: relative;
+}
+.paginate-skeleton::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 14px;
+    width: 105%;
+    height: 50%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+.select-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 120%;
+    height: 97%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
 .medicinedogs-hidden{
     display: none;
 }
@@ -14,21 +41,36 @@ button#deleteLoader {
 button#dosage4 {
     line-height: .9;
 }
+button#dosage4 {
+    background: orangered;
+    color: white;
+    font-family: sans-serif;
+}
+button#dosage4:hover {
+    background: #e9e9e9;
+    color: orangered;
+    font-family: sans-serif;
+}
+tr>th.tableHead {
+    font-weight: 800;
+}
 input#search_area_ {
     outline: none;
     box-shadow: none;
-    background-color: #08a05c;
+    background-color: lightgray;
     border: none;
 }
 span#search_off_ {
     color: darkcyan;
     font-size: 11px;
     font-weight: 600;
+    font-family: sans-serif;
 }
 span#search_on_ {
     color: darkcyan;
     font-size: 11px;
     font-weight: 600;
+    font-family: sans-serif;
 }
 .prd-search-hidden{
     display: none;
@@ -36,12 +78,14 @@ span#search_on_ {
 span.total_result {
     font-weight: 600;
     color: darkcyan;
-    font-size: 11px;
+    font-size: 12px;
+    font-family: sans-serif;
 }
 label.catg_ser_label {
     color: black;
     font-weight: 600;
     font-size: 13px;
+    font-family: sans-serif;
 }
 select#perItemControl2 {
     outline: none;
@@ -53,6 +97,7 @@ select#perItemControl2 {
     background-color: #08a05c;
     border-radius: 3px;
     width: 50px;
+    font-family: sans-serif;
 }
 .pagination, .datatable-pagination ul {
     --bs-pagination-padding-x: 0.75rem;
@@ -95,6 +140,7 @@ input#name_search {
     border-radius: 5px;
     box-shadow: 0px 2px 20px #0001;
     animation: text_color 3s infinite;
+    font-family: sans-serif;
 }
 input#medicine_dogs {
     outline: none;
@@ -104,12 +150,13 @@ input#medicine_dogs {
     animation: supfncolor 6s infinite;
     font-size: 12px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family: sans-serif;
 }
 input#medicine_id {
     outline: none;
@@ -119,12 +166,13 @@ input#medicine_id {
     animation: supfncolor 6s infinite;
     font-size: 12px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family: sans-serif;
 }
 @keyframes supfncolor{
     0%{
@@ -136,6 +184,9 @@ input#medicine_id {
     100%{
         background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     }
+}
+a.page-link.btn_page {
+    height: 22px;
 }
 input#medicine_id {
     outline: none;
@@ -151,7 +202,7 @@ span.total_result{
 th.back_color{
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
     background-image: var(--table-head-background);
-    border: 1px solid silver;
+    border: 1px solid lightblue;
 }
 a#showMedicine {
     color: darkcyan;
@@ -165,13 +216,13 @@ div#tb_subcatg {
 }
 th.align {
     text-align: center;
-    border: 1px solid silver;
+    border: 1px solid lightblue;
     font-size: 12px;
     letter-spacing: 0.5px;
 }
 td.align {
     text-align: center;
-    border: 1px solid silver;
+    border: 1px solid lightblue;
     font-size: 12px;
     letter-spacing: 0.5px;
 }

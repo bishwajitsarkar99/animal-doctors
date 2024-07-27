@@ -31,7 +31,7 @@
                         <td class="border_ord ps-1" id="sub_td3">${row.categories ? row.categories.category_name : ''}</td>
                         <td class="txt_ ps-1" id="sub_td5">${row.sub_category_name}</td>
                         <td class="tot_complete_ pe-2 ${row.status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '✅ Active' : '❌ Deny'}</span>
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '<span style="font-size:15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="sub_td6">
@@ -249,9 +249,31 @@
                 }
             });
         });
+        // Show Update Sub Category Modal
+        $(document).on('click', '#update_btn', function(e){
+            e.preventDefault();
+            $("#updateconfirmsubcategory").modal('show');
+            $(".update_title").addClass('skeleton');
+            $(".head_btn3").addClass('skeleton');
+            $("#cate_confirm_update").addClass('skeleton');
+            $(".update_confirm").addClass('skeleton');
+            $(".delete_cancel").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
+            
+                $(".update_title").removeClass('skeleton');
+                $(".head_btn3").removeClass('skeleton');
+                $("#cate_confirm_update").removeClass('skeleton');
+                $(".update_confirm").removeClass('skeleton');
+                $(".delete_cancel").removeClass('skeleton');
+            }, 1000);
 
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
         // Update Sub Category
-        $(document).on('click', '#update_btn', function(e) {
+        $(document).on('click', '.update_confirm', function(e) {
             e.preventDefault();
             var sub_category_id = $('#sub_category_id').val();
             var data = {
@@ -292,6 +314,7 @@
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
+                        $("#updateconfirmsubcategory").modal('hide');
                         fetch_subcategory_data();
                     }
                 }
@@ -299,34 +322,59 @@
 
         });
 
-        // Delete Sub Category
+        // Delete Sub Category Modal
         $(document).on('click', '#deleteBtn', function(e) {
             e.preventDefault();
             var sub_category_id = $(this).val();
             $('#delete_sub_category_id').val(sub_category_id);
             $('#deletesubcategory').modal('show');
             $("#delt_content").addClass('skeleton');
+            $(".head_title").addClass('skeleton');
+            $(".cols_btn").addClass('skeleton');
             $("#sub_id").addClass('skeleton');
             $("#sub_id2").addClass('skeleton');
             $("#sub_id3").addClass('skeleton');
-            $("#sub_id4").addClass('skeleton');
-            $("#deleteLoader").addClass('skeleton');
+            $("#yesButton").addClass('min-skeleton');
+            $("#noButton").addClass('min-skeleton');
 
             var time = null;
             time = setTimeout(() => {
                 $("#delt_content").removeClass('skeleton');
+                $(".head_title").removeClass('skeleton');
+                $(".cols_btn").removeClass('skeleton');
                 $("#sub_id").removeClass('skeleton');
                 $("#sub_id2").removeClass('skeleton');
                 $("#sub_id3").removeClass('skeleton');
-                $("#sub_id4").removeClass('skeleton');
+                $("#yesButton").removeClass('min-skeleton');
+                $("#noButton").removeClass('min-skeleton');
+            }, 1000);
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
+        // Delete Sub Category Confirm Modal
+        $(document).on('click', '.yes_button', function(e){
+            e.preventDefault();
+            $('#deleteconfirmsubcategory').modal('show');
+            $("#deleteLoader").addClass('skeleton');
+            $("#sub_id4").addClass('skeleton');
+            $("#cate_confirm").addClass('skeleton');
+            $(".confirm_title").addClass('skeleton');
+            $(".head_btn_confirm").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
                 $("#deleteLoader").removeClass('skeleton');
+                $("#sub_id4").removeClass('skeleton');
+                $("#cate_confirm").removeClass('skeleton');
+                $(".confirm_title").removeClass('skeleton');
+                $(".head_btn_confirm").removeClass('skeleton');
             }, 1000);
             return ()=>{
                 clearTimeout(time);
             }
         });
 
-        $(document).on('click', '.delet_btn_user', function(e) {
+        $(document).on('click', '.delete_confirm', function(e) {
             e.preventDefault();
             var sub_category_id = $('#delete_sub_category_id').val();
 
@@ -347,7 +395,7 @@
                         $('#success_message').fadeOut();
                     }, 3000);
                     $('#deletesubcategory').modal('hide');
-
+                    $('#deleteconfirmsubcategory').modal('hide');
                     fetch_subcategory_data();
                 }
 
@@ -388,41 +436,44 @@
         // Show Category Data----------
         $("#showCategory").on('click', function(){
             $("#category").modal('show');
-            $("#cat_table").addClass('skeleton');
-            $("#medic_nam").addClass('skeleton');
-            $("#iteam_label").addClass('skeleton');
-            $("#tb_group").addClass('skeleton');
+            $(".head_title").addClass('skeleton');
             $("#search_area_").addClass('skeleton');
             $("#tb_group2").addClass('skeleton');
             $("#search_off_").addClass('skeleton');
+            $("#total_cat_records").addClass('skeleton');
+            $("#iteam_label6").addClass('skeleton');
             $("#group_nam2").addClass('skeleton');
             $("#group_nam3").addClass('skeleton');
             $("#group_nam4").addClass('skeleton');
             $("#group_nam5").addClass('skeleton');
-            $("#per_item").addClass('skeleton');
-            // $("#num_plate").addClass('skeleton');
-            $("#iteam_label3").addClass('skeleton');
-            $("#total_cat_records").addClass('skeleton');
-            $("#iteam_label6").addClass('skeleton');
+            $("#cat_table").addClass('skeleton');
+            $("#perPage").addClass('skeleton');
+            $("#pagesBox").addClass('skeleton');
+            $("#cat_table_paginate").addClass('paginate-skeleton');
+            $(".tot_record").addClass('skeleton');
+            $(".badge_label").addClass('skeleton');
+            $(".head_btn").addClass('skeleton');
 
             var time = null;
             time = setTimeout(() => {
-                $("#cat_table").removeClass('skeleton');
-                $("#medic_nam").removeClass('skeleton');
-                $("#iteam_label").removeClass('skeleton');
-                $("#tb_group").removeClass('skeleton');
+                $(".head_title").removeClass('skeleton');
+                $(".head_btn").removeClass('skeleton');
                 $("#search_area_").removeClass('skeleton');
                 $("#tb_group2").removeClass('skeleton');
                 $("#search_off_").removeClass('skeleton');
+                $("#total_cat_records").removeClass('skeleton');
+                $("#iteam_label6").removeClass('skeleton');
                 $("#group_nam2").removeClass('skeleton');
                 $("#group_nam3").removeClass('skeleton');
                 $("#group_nam4").removeClass('skeleton');
                 $("#group_nam5").removeClass('skeleton');
-                $("#per_item").removeClass('skeleton');
-                // $("#num_plate").removeClass('skeleton');
-                $("#iteam_label3").removeClass('skeleton');
-                $("#total_cat_records").removeClass('skeleton');
-                $("#iteam_label6").removeClass('skeleton');
+                $("#cat_table").removeClass('skeleton');
+
+                $(".badge_label").removeClass('skeleton');
+                $("#perPage").removeClass('skeleton');
+                $("#pagesBox").removeClass('skeleton');
+                $("#cat_table_paginate").removeClass('paginate-skeleton');
+                $(".tot_record").removeClass('skeleton');
             }, 1000);
 
             return ()=>{

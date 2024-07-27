@@ -55,6 +55,17 @@
                         total
                     }));
                     $("#total_prod_records").text(total);
+                    // Get suggestions for autocomplete
+                    var suggestion = data.map(function(item) {
+                        return {
+                            label: `${item.id} - ${item.product_name}`,
+                            value: item.id
+                        };
+                    });
+                    // Initialize autocomplete
+                    $(".prod_id").autocomplete({
+                        source: suggestion,
+                    });
                 }
 
             });

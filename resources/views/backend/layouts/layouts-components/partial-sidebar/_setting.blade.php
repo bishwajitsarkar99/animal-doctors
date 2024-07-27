@@ -9,12 +9,12 @@
 <div id="addons" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushExample">
     <div class="accordion-body sub_box">
         <span class="prod_label underline">
-            <a data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Post-Setting')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' class="underline nav-link collapsed sals_menu compont" href="{{ route('post_setting.index') }}">
+            <a style="font-family: sans-serif;color:white;font-size:11px;" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Post-Setting')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' class="underline nav-link collapsed sals_menu compont" href="{{ route('post_setting.index') }}">
                 <i class="fa-regular fa-hand-point-right fa-beat me-1"></i> {{__('translate.Post-Setting')}}
             </a>
         </span>
         <span class="prod_label underline">
-            <a class="nav-link underline" href="{{route('appSetting')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.App-Setting')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a style="font-family: sans-serif;color:white;font-size:11px;" class="nav-link underline" href="{{route('appSetting')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.App-Setting')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-regular fa-hand-point-right fa-beat me-1"></i> {{__('translate.App-Setting')}}
             </a>
         </span>

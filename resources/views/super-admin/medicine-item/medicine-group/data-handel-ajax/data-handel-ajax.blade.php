@@ -30,7 +30,7 @@
                         </td>
                         <td class="txt_ ps-1" id="group_td4">${row.group_name}</td>
                         <td class="tot_complete_ pe-2 ${row.status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '✅ Active' : '❌ Deny'}</span>
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '<span style="font-size:15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
                             <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="group_td5">
@@ -243,8 +243,30 @@
             });
         });
 
+        // Update Medicine Group Modal
+        $(document).on('click', '#update_btn', function(e){
+            e.preventDefault();
+            $("#updateconfirmsubgroup").modal('show');
+            $(".update_title").addClass('skeleton');
+            $(".head_btn3").addClass('skeleton');
+            $("#cate_confirm_update").addClass('skeleton');
+            $(".update_confirm").addClass('skeleton');
+            $(".delete_cancel").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
+                $(".update_title").removeClass('skeleton');
+                $(".head_btn3").removeClass('skeleton');
+                $("#cate_confirm_update").removeClass('skeleton');
+                $(".update_confirm").removeClass('skeleton');
+                $(".delete_cancel").removeClass('skeleton');
+            }, 1000);
+
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
         // Update Medicine Group
-        $(document).on('click', '#update_btn', function(e) {
+        $(document).on('click', '.update_confirm', function(e) {
             e.preventDefault();
             var group_id = $('#group_id').val();
             var data = {
@@ -283,6 +305,7 @@
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
+                        $("#updateconfirmsubgroup").modal('hide');
                         fetch_group_data();
                     }
                 }
@@ -290,34 +313,65 @@
 
         });
 
-        // Delete Medicine Group
+        // Delete Medicine Group Modal
         $(document).on('click', '#deleteBtn', function(e) {
             e.preventDefault();
             var group_id = $(this).val();
             $('#delete_group_id').val(group_id);
             $('#deletegroup').modal('show');
             $('#group_delete_modal').addClass('skeleton');
+            $('.head_title').addClass('skeleton');
+            $('.clos_title').addClass('skeleton');
             $('#delete_group').addClass('skeleton');
             $('#delete_group2').addClass('skeleton');
             $('#delete_group3').addClass('skeleton');
             $('#delete_group4').addClass('skeleton');
             $('#deleteLoader').addClass('skeleton');
+            $('#yesButton').addClass('min-skeleton');
+            $('#noButton').addClass('min-skeleton');
 
             var time = null;
             time = setTimeout(() => {
+                $('.head_title').removeClass('skeleton');
+                $('.clos_title').removeClass('skeleton');
                 $('#group_delete_modal').removeClass('skeleton');
                 $('#delete_group').removeClass('skeleton');
                 $('#delete_group2').removeClass('skeleton');
                 $('#delete_group3').removeClass('skeleton');
                 $('#delete_group4').removeClass('skeleton');
                 $('#deleteLoader').removeClass('skeleton');
+                $('#yesButton').removeClass('min-skeleton');
+                $('#noButton').removeClass('min-skeleton');
             }, 1000);
             return ()=>{
                 clearTimeout(time);
             }
         });
+        // Delete Medicine Group Confirm Modal
+        $(document).on('click', '.yes_button', function(e){
+            e.preventDefault();
+            $("#deleteconfirmgroup").modal('show');
+            $('.confirm_title').addClass('skeleton');
+            $('.head_btn_confirm').addClass('skeleton');
+            $('#cate_confirm').addClass('skeleton');
+            $('#sub_id4').addClass('skeleton');
+            $('#deleteLoader').addClass('skeleton');
 
-        $(document).on('click', '.delet_btn_user', function(e) {
+            var time = null;
+            time = setTimeout(() => {
+                $('.confirm_title').removeClass('skeleton');
+                $('.head_btn_confirm').removeClass('skeleton');
+                $('#cate_confirm').removeClass('skeleton');
+                $('#sub_id4').removeClass('skeleton');
+                $('#deleteLoader').removeClass('skeleton');
+            }, 1000);
+            return ()=>{
+                clearTimeout(time);
+            }
+
+        });
+
+        $(document).on('click', '.delete_confirm', function(e) {
             e.preventDefault();
             var group_id = $('#delete_group_id').val();
 
@@ -338,7 +392,7 @@
                         $('#success_message').fadeOut();
                     }, 3000);
                     $('#deletegroup').modal('hide');
-
+                    $("#deleteconfirmgroup").modal('hide');
                     fetch_group_data();
                 }
 

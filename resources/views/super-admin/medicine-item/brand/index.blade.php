@@ -29,18 +29,18 @@
               </span>
             </div>
             <div class="col-2 link">
-              <button class="btn btn-sm cgt_btn btn_focus ms-3" type="button" id="showOrigin">{{__('translate.Origin')}}</button>
+              <button class="btn btn-sm cgt_btn btn_focus min-skeleton ms-3" type="button" id="showOrigin">{{__('translate.Origin')}}</button>
             </div>
           </div>
           <div>
             <table class="ord_table center border-1 skeleton mt-2">
               <tr class="table-row order_body acc_setting_table skeleton">
-                <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1 pt-1">{{__('translate.ID')}}</th>
-                <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1 pt-1">{{__('translate.Action')}}</th>
-                <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt skeleton ps-1 pt-1">{{__('translate.Origin')}}</th>
-                <th id="th_sort" class="table_th_color tot_pending_ col skeleton ps-1 pt-1" style="text-align: left;">{{__('translate.Brand-Name')}}</th>
-                <th id="th_sort" class="table_th_color tot_pending_ col skeleton pt-1">{{__('translate.Status')}}</th>
-                <th id="th_sort" class="table_th_color tot_pending_ col skeleton pt-1">{{__('translate.Check')}}</th>
+                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col skeleton ps-1 pt-1">{{__('translate.ID')}}</th>
+                <th id="th_sort" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1">{{__('translate.Action')}}</th>
+                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt skeleton ps-1 pt-1">{{__('translate.Origin')}}</th>
+                <th id="th_sort" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1" style="text-align: left;">{{__('translate.Brand-Name')}}</th>
+                <th id="th_sort" class="tableHead table_th_color tot_pending_ skeleton ps-1 pt-1">{{__('translate.Status')}}</th>
+                <th id="th_sort" class="tableHead table_th_color tot_pending_ col skeleton pt-1">{{__('translate.Check')}}</th>
               </tr>
               <tbody class="bg-transparent skeleton" id="brand_data_table">
 
@@ -49,8 +49,8 @@
           </div>
           <div class="row table_last_row">
             <div class=" col-2">
-              <label class="item_class ">Peritem</label>
-              <div class="custom-select">
+              <label class="item_class skeleton">Peritem</label>
+              <div class="custom-select skeleton">
                 <select class="ps-1" id="perItemControl">
                   <option class="" selected>10</option>
                   <option class="">20</option>
@@ -96,13 +96,7 @@
                     <i class="origin-icon fa fa-spinner fa-spin origin-hidden mt-2"></i>
                   </div>
                   <div class="col-6">
-                    <input class="form-control form-control-sm edit_origin_id skeleton" list="datalistOptions3" type="number" name="origin_id" id="origin_id" placeholder="{{__('translate.Origin ID')}}" required>
-                    <datalist id="datalistOptions3">
-                      @foreach($origins as $origin)
-                        <option value="{{$origin->id}}">
-                        <option value="{{$origin->origin_name}}">
-                      @endforeach
-                    </datalist>
+                    <input class="form-control form-control-sm orgn_id edit_origin_id skeleton" type="number" name="origin_id" id="origin_id" placeholder="{{__('translate.Origin ID')}}" required>
                   </div>
                   <span id="savForm_error"></span><span id="updateForm_errorList"></span>
                 </div>
@@ -139,10 +133,10 @@
   <div class="modal-dialog">
     <div class="modal-content" id="admin_modal_box">
       <div class="modal-header profile_modal_header profilesetting_modal_header">
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
+        <h5 class="modal-title admin_title head_title2 ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
           {{__('translate.Origin-List')}}
         </h5>
-        <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+        <button type="button" class="btn-close btn-btn-sm cols_title2" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
       </div>
 
       <div class="modal-body profile-body pb-3">
@@ -153,7 +147,7 @@
                 <span class="form-check form-switch search_ me-2" id="tb_orgin">
                   <input class="form-check-input mt-2 skeleton" type="checkbox" id="search_area_" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                   <label class="search catg_ser_label ps-1 pt-1" id="med_label" for="search pe-2" id="tb_orgin2">{{__('translate.Search Mode')}} :</label>
-                  <label class="form-check-label skeleton" id="med_label2" for="collapseExample"><span class="search_on skeleton" id="search_off_" style="color: darkcyan;font-weight:600;font-size: 11px;">OFF</span><span class="search_on skeleton" id="search_on_" style="color: darkcyan;font-weight:600;font-size: 11px;">ON</span></label>
+                  <label class="form-check-label skeleton" id="med_label2" for="collapseExample"><span class="search_on skeleton" id="search_off_" style="color: darkcyan;font-weight:600;font-size: 11px;font-family:sans-serif;">OFF</span><span class="search_on skeleton" id="search_on_" style="color: darkcyan;font-weight:600;font-size: 11px;font-family:sans serif;">ON</span></label>
                 </span>
               </div>
               <div class="col-6">
@@ -170,9 +164,9 @@
             </div>
             <table class="ord_table center border-1 mt-1" id="orgin_nam">
               <thead id="origin_nam2">
-                <tr id="origin_nam3" style="color:darkcyan;">
-                  <th id="origin_nam4" class="back_color align">{{__('translate.ID')}}</th>
-                  <th id="origin_nam5" class="back_color ps-1">{{__('translate.Origin Name')}}</th>
+                <tr id="origin_nam3" style="color:black;">
+                  <th id="origin_nam4" class="tableHead back_color align">{{__('translate.ID')}}</th>
+                  <th id="origin_nam5" class="tableHead back_color ps-1">{{__('translate.Origin Name')}}</th>
                 </tr>
               </thead>
               <tbody class="bg-transparent" id="orgin_table" style="color:black;font-weight:500;cursor:alias;">
@@ -180,8 +174,8 @@
               </tbody>
               <div class="row table_last_row">
                 <div class="item_box col-2" id="per_item">
-                  <label class="item_class" id="iteam_label">Peritem</label>
-                  <div class="custom-select" id="iteam_label2">
+                  <label class="item_class per_page" id="iteam_label">Peritem</label>
+                  <div class="custom-select select_item" id="iteam_label2">
                     <select class="ps-1" id="perItemControls">
                       <option selected>10</option>
                       <option>20</option>
@@ -194,9 +188,9 @@
                 </div>
                 <div class="col-10">
                   <span class="tot_summ" style="float: right;" id="num_plate">
-                    <label class="tot-search mt-3" style="font-size: 11px;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Origin Entry')}} :</label>
-                    <label class="badge rounded-pill bg-primary" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_org_records">
-                      </span><span id="iteam_label6" style="font-weight: 600;color:white;font-size:11px;">.00</span>
+                    <label class="tot-search mt-3" style="font-size: 12px;font-family:sans-serif;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Origin Entry')}} :</label>
+                    <label class="badge rounded-pill bg-primary item_lab" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_org_records">
+                      </span><span id="iteam_label6" style="font-weight: 600;color:white;font-size:12px;font-family:sans-serif;">.00</span>
                     </label>
                   </span>
                 </div>
@@ -223,10 +217,10 @@
   <div class="modal-dialog">
     <div class="modal-content" id="admin_modal_box">
       <div class="modal-header profile_modal_header profilesetting_modal_header">
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
+        <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
           {{__('translate.Delete Brand Name')}}
         </h5>
-        <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+        <button type="button" class="btn-close btn-btn-sm cols_title" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
       </div>
 
       <div class="modal-body profile-body pb-1">
@@ -243,16 +237,81 @@
         </div>
       </div>
       <div class="modal-footer profile_modal_footer">
-        <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user btn_focus" id="deleteLoader">
-          <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
-          <span class="btn-text">Delete</span>
-        </button>
-        <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="brnad_delt4" data-bs-dismiss="modal">Cancel</button>
+        <p id="btn_group2">
+          <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
+            <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
+            <span class="btn-text">{{__('translate.Yes')}}</span>
+          </a>
+        </p>
+        <p id="btn_group">
+          <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal" id="noButton">No</a>
+        </p>
       </div>
     </div>
   </div>
 </div>
 {{-- End Delete  Brand Modal---}}
+
+{{-- Start Confirm Delete Brand Modal--}}
+<!-- Modal -->
+<div class="modal fade" id="deleteconfirmbrand" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+      <div class="modal-header" id="logoutModal_header">
+        <h6 class="modal-title admin_title scan confirm_title pt-1" id="staticBackdropLabel">
+          Confirm Delete
+        </h6>
+        <button type="button" class="btn-close btn-btn-sm head_btn_confirm" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+        </div>
+        <div class="modal-body" id="logoutModal_body">
+          <p class="admin_paragraph" style="text-align:center;" id="text_message">
+            <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, delete or cancel ? </label>
+          </p>
+        </div>
+        <div class="modal-footer" id="logoutModal_footer">
+          <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user btn_focus" id="deleteLoader">
+            <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
+            <span class="btn-text">Delete</span>
+          </button>
+          <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="brnad_delt4" data-bs-dismiss="modal">Cancel</button>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
+{{-- End Confirm Delete Brand Modal--}}
+
+{{-- Start Confirm Update Brand Modal--}}
+<!-- Modal -->
+<div class="modal fade" id="updateconfirmbrand" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+      <div class="modal-header" id="logoutModal_header">
+        <h6 class="modal-title admin_title scan update_title pt-1" id="staticBackdropLabel">
+          Update Brand
+        </h6>
+        <button type="button" class="btn-close btn-btn-sm head_btn3" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+        </div>
+        <div class="modal-body" id="logoutModal_body">
+          <p class="admin_paragraph" style="text-align:center;" id="text_message">
+            <label class="label_user_edit" id="cate_confirm_update" for="id">Are you confirm or cancel ? </label>
+          </p>
+        </div>
+        <div class="modal-footer" id="logoutModal_footer">
+          <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus">
+            <span class="btn-text">Confirm</span>
+          </button>
+          <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
+{{-- End Confirm Update Brand Modal--}}
 
 @endsection
 @section('css')
@@ -273,9 +332,17 @@
       item.classList.remove('skeleton')
     });
   }
+  function originData() {
+    const allSkeleton = document.querySelectorAll('.min-skeleton')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('min-skeleton')
+    });
+  }
 
   setTimeout(() => {
     fetchData();
+    originData();
   }, 1000);
 </script>
 @endsection

@@ -2,17 +2,62 @@
     --search-background:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, #e1e1e1, rgba(0, 0, 0, 0.05) 100%);
     --table-head-background:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
 }
+.paginate-skeleton,.select-skeleton{
+    position: relative;
+}
+.paginate-skeleton::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 14px;
+    width: 105%;
+    height: 50%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+.select-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 120%;
+    height: 97%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+.min-skeleton{
+    position: relative;
+}
+.min-skeleton::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 105%;
+    height: 108%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
 table, th, td {
     border-collapse: collapse;
     font-size: 12px;
     letter-spacing: 1px;
     opacity: 1;
 }
+tr>th.tableHead {
+    font-weight: 800;
+}
 input#search_area_ {
     outline: none;
     box-shadow: none;
     border: none;
-    background-color: #08a05c;
+    background-color:lightgray;
 }
 input#orgin_search {
     background-image: var(--search-background);
@@ -21,16 +66,19 @@ input#orgin_search {
     border: 1px solid #f1eeee;
     border-radius: 5px;
     animation: text_color 3s infinite;
+    font-family: sans-serif;
 }
 span.total_result {
     color: white;
     font-weight: 600;
-    font-size: 11px;
+    font-size: 12px;
+    font-family: sans-serif;
 }
 label.catg_ser_label {
     color: black;
     font-weight: 600;
     font-size: 13px;
+    font-family: sans-serif;
 }
 select#perItemControls {
     outline: none;
@@ -62,11 +110,15 @@ label.tot-search {
 span#total_brand_records{
     font-weight: 700;
     color: white;
+    font-family: sans-serif;
+}
+a.page-link.btn_page {
+    height: 22px;
 }
 th.back_color{
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
     background-image: var(--table-head-background);
-    border: 1px solid silver;
+    border: 1px solid lightblue;
 }
 .origin-hidden{
     display: none;
@@ -79,12 +131,13 @@ input#brand_name{
     animation: supfncolor 6s infinite;
     font-size: 12px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family: sans-serif;
 }
 @keyframes supfncolor{
     0%{
@@ -105,12 +158,23 @@ input#origin_id{
     animation: supfncolor 6s infinite;
     font-size: 12px;
     box-shadow: none;
-    font-weight: 500;
+    font-weight: 700;
     border-top: 1px solid #f1eeee;
     border-bottom: 1px solid #f1eeee;
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family: sans-serif;
+}
+button#brnad_delt4 {
+    background: orangered;
+    color: white;
+    font-family: sans-serif;
+}
+button#brnad_delt4:hover {
+    background: #e9e9e9;
+    color: orangered;
+    font-family: sans-serif;
 }
 .brand{
     float: left;
@@ -128,7 +192,7 @@ th.align {
     text-align: center;
     background-image: var(--table-head-background);
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
-    border: 1px solid silver;
+    border: 1px solid lightblue;
     font-size: 12px;
     letter-spacing: 0.5px;
 }

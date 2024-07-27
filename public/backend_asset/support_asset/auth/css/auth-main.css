@@ -341,6 +341,7 @@ input.password {
   border-right: 1px solid bisque;
   border-radius: 4px;
   text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
+  font-weight: 600;
 }
 .hidden{
   display: none;
@@ -439,6 +440,7 @@ input.email {
   border-radius: 4px;
   margin-left: 42px;
   text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
+  font-weight: 600;
   
 }
 @keyframes inputColor{

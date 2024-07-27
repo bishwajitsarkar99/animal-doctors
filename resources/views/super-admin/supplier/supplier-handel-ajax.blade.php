@@ -42,7 +42,6 @@
                         <td class="txt_ ps-1 supp_vew10" id="supp_tab13">${row.email}</td>
                         <td class="tot_complete_ pe-2 ${row.supplier_status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
                             <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.supplier_status ? 'text-primary' : 'text-danger'}">${row.supplier_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
-                            <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
                         </td>
                         <td class="tot_complete_ ps-1 pt-1 center" id="supp_tab14">
                             <input id="actOne" class="form-switch form-check-input supplier_check_permission me-2" type="checkbox" status_id="${row.id}" value="${row.supplier_status}" ${row.supplier_status? " checked": ''}>
@@ -455,17 +454,17 @@
             $("#supp_delt").addClass('skeleton');
             $("#supp_delt2").addClass('skeleton');
             $("#supp_delt3").addClass('skeleton');
-            $("#supp_delt4").addClass('skeleton');
+            $("#supp_delt4").addClass('sup-btn-skeleton');
             $("#delete_supplier_id").addClass('skeleton');
-            $("#deleteLoader").addClass('skeleton');
+            $("#deleteLoader").addClass('sup-btn-skeleton-two');
 
             time = setTimeout(() => {
                 $("#supp_delt").removeClass('skeleton');
                 $("#supp_delt2").removeClass('skeleton');
                 $("#supp_delt3").removeClass('skeleton');
-                $("#supp_delt4").removeClass('skeleton');
                 $("#delete_supplier_id").removeClass('skeleton');
-                $("#deleteLoader").removeClass('skeleton');
+                $("#supp_delt4").removeClass('sup-btn-skeleton');
+                $("#deleteLoader").removeClass('sup-btn-skeleton-two');
             }, 1000);
             
             return ()=>{

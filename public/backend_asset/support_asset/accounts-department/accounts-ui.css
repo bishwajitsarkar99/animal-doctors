@@ -1,24 +1,241 @@
 :root{
+    --bacground-template:radial-gradient(farthest-corner at 100px 100px, #003a91, #003a91);
+    --bacground-template-mini:radial-gradient(farthest-corner at 100px 100px, #003a91, transparent 100% ,#003a91);
+    --bs-accordion-active-color: #0c63e4;
+    --bs-accordion-active-bg: radial-gradient(farthest-corner at 100px 100px, #003a91, #003a91);
+    --dashboard-head-font-family:'Faster One';
+    --bs-accordion-body-padding-x: 1.05rem;
+    --bs-accordion-body-padding-y: 1.04rem;
+}
+span.dashboard_text {
+    font-variant: all-petite-caps;
+    letter-spacing: 0.5px;
+    opacity: 1;
+    font-size: 27px;
+    font-weight: 500;
+    color: #003a91;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    font-family: var(--dashboard-head-font-family);
+    margin-top: -0.3em;
+}
+.sb-sidenav .sb-sidenav-menu .nav .sb-sidenav-menu-heading {
+    margin-top: -0.1em;
+    padding: 0.3rem;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-variant: all-petite-caps;
+    cursor: alias;
+    color: #003a91;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    font-family: Work Sans, sans-serif;
+}
+a.lay_nav {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    font-family: math;
+    font-variant: all-small-caps;
+    cursor: pointer;
+    animation: 5s font_hover infinite;
+    color: #003a91;
+}
+@keyframes font_hover {
+    30% {
+        color: #003a91;
+    }
+    
+    20% {
+        color: rgb(60, 60, 255);
+    }
+    100% {
+        color: #003a91;
+    }
+}
+span.acc_rep {
+    font-size: 14px;
+}
+span.admin_email {
+    color: white;
+    animation: none;
+}
+.sb-sidenav .sb-sidenav-menu .nav .nav-link {
+    display: flex;
+    align-items: center;
+    padding-top: 0.2rem;
+    padding-bottom: 0.1rem;
+    position: relative;
+    font-size: 12px;
+}
+.menu__icon {
+    display: inline-block;
+    transition: transform 0.5s ease;
+}
 
+.menu__icon.rotated {
+    transform: rotate(-120deg);
+}
+span.parent_group_three {
+    font-weight: 600;
+    font-family: auto;
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
+}
+.accordion-body {
+    padding: var(--bs-accordion-body-padding-y) var(--bs-accordion-body-padding-x);
+}
+.sub_box {
+    animation: none;
+}
+.sb-topnav.navbar-dark #sidebarToggle {
+    color: white;
+    animation: none;
+}
+@keyframes admin_name {
+    70% {
+        color: darkblue;
+    }
+    
+    50% {
+        color: white;
+    }
+    100% {
+        color: white;
+    }
+}
+span.link_menus {
+    font-size: small;
+    color: rgb(60, 60, 255);
+}
+.fa-beat {
+    color: rgb(60, 60, 255);
+    font-size: 15px;
+}
+a.sals_menu {
+    color: rgb(60, 60, 255);
+}
+span.categ_title_block,.subcateg_url_block,.group_url_block,.entry_day_book_url_block,.categ_title_block {
+    font-family: math;
+}
+.sub__box{
+    animation: backgrouncolormove 5s infinite;
+} 
+@keyframes backgrouncolormove {
+    10% {
+        background-color: #ffc107;
+    }
+    15% {
+        background-color: lightgoldenrodyellow;
+    }
+    75% {
+        background-color: #f2f7ff;
+    }
+    100% {
+        background-color: #f2f7ff;
+    }
+}
+a.nav-link_cgrMenu.dropdown-toggle.ty {
+    font-size: 14px;
+    letter-spacing: 0.2px;
+}
+.accordion {
+    --bs-accordion-color: #212529;
+    --bs-accordion-bg: #fff;
+    --bs-accordion-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
+    --bs-accordion-border-color: var(--bs-border-color);
+    --bs-accordion-border-width: 1px;
+    --bs-accordion-border-radius: 0.375rem;
+    --bs-accordion-inner-border-radius: calc(0.375rem - 1px);
+    --bs-accordion-btn-padding-x: 0.5rem;
+    --bs-accordion-btn-padding-y: 0.5rem;
+    --bs-accordion-btn-color: #212529;
+    --bs-accordion-btn-bg: cornflowerblue;
+    --bs-accordion-btn-icon-width: 1.25rem;
+    --bs-accordion-btn-icon-transform: rotate(-180deg);
+    --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
+    --bs-accordion-btn-focus-border-color: #2727;
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    --bs-accordion-body-padding-x: 1.25rem;
+    --bs-accordion-body-padding-y: 1.25rem;
+    --bs-accordion-active-color: white;
+    --bs-accordion-active-bg: #0c63e4;
+    --animation-background-position-0: -100% 0;
+    --animation-background-position-100: 100% 0;
+}
+.accordion-button:not(.collapsed) {
+    color: var(--bs-accordion-active-color);
+    background-image: var(--bs-accordion-active-bg);
+    box-shadow: inset 0 calc(-1* var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
+    transition: opacity 1;
+    font-family: math;
+}
+button.accordion-button.accounts__template__name.collapsed {
+    font-weight: 600;
+    background-image: var(--bacground-template-mini);
+    color: white;
+}
+span.prod_label {
+    font-size: 14px;
+    font-weight: 700;
+    font-family: math;
+    letter-spacing: 0.5px;
+    font-variant: all-small-caps;
+    color: darkblue;
+    transition: all;
+    transition-duration: 5s;
+    animation-name: fonColor;
+    animation-delay: all;
+    animation-iteration-count: infinite;
+    animation-direction: reverse;
+    animation-play-state: running;
+}
+@keyframes fonColor {
+    50%{
+        color: white;
+    }
+    80%{
+        color: orange;
+    }
+    100%{
+        color: darkblue;
+    }
+}
+.product-menu-btn {
+    background-color: darkgray;
+    border-radius: 3px;
+    color: white;
+    margin-left: 7px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+p.backgroun_place{
+    font-weight: 600;
+    background-image: var(--bacground-template);
+    color: white;
 }
 .accounts__menu {
     box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
-    background-image: radial-gradient(farthest-corner at 100px 100px, #ffffff,cornflowerblue);
+    /* background-image: radial-gradient(farthest-corner at 100px 100px, #ffffff,cornflowerblue); */
+    background-image: radial-gradient(farthest-corner at 100px 100px, #ffffff,white);
     border-radius: 5px;
 }
 a.title__label {
     font-family: math;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
     text-decoration: none;
 }
 a.title__label:hover{
     color: white;
-    background-image: radial-gradient(farthest-corner at 100px 100px, darkblue,darkblue);
+    background-image: radial-gradient(farthest-corner at 20px 20px, rgb(0, 0, 223),rgb(33, 33, 255),transparent);
     font-weight: 600;
     padding-left: 5px;
     padding-right: 5px;
     border-radius: 3px;
     text-decoration: none;
+    transition-duration: 0.2s;
+    text-decoration: none;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
 }

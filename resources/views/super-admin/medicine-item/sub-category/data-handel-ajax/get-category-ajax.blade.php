@@ -57,12 +57,15 @@
                     $("#total_cat_records").text(total);
 
                     // Get suggestions for autocomplete
-                    var category = data.map(function(item) {
-                        return item.category_name;
+                    var suggestion = data.map(function(item) {
+                        return {
+                            label: `${item.id} - ${item.category_name}`,
+                            value: item.id
+                        };
                     });
                     // Initialize autocomplete
-                    $("#cat_search").autocomplete({
-                        source: category
+                    $(".categ_id").autocomplete({
+                        source: suggestion
                     });
                 }
 
