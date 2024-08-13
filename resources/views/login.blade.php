@@ -24,30 +24,70 @@
 <header class="bg sticky-top">
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
         <p class="navbar-brand ps-3 admin_panel text-shadow" style="float: right;">
-            <span class="skeleton media_text1"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
-            <span class="skeleton media_text2">{{setting('company_name')}}</span>
+            <span class="logo-skeleton media_text1"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
+            <span class="headings-skeleton media_text2">{{setting('company_name')}}</span>
         </p>
         <p class="navbar-brand ps- admin_panel text-shadow d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
             <a class="" href="{{setting('update_social_media_facebook_link')}}">
-                <span class="social_icon"><img class="social_icon" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_facebook')}}" alt=""></span>
+                <span class="social_icon facebook-skeleton"><img class="social_icon" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_facebook')}}" alt=""></span>
             </a>
             <a class="" href="{{setting('update_social_media_messanger_link')}}">
-                <span class="social_icon_mess ms-2"><img class="social_icon_mess" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_messanger')}}" alt=""></span>
+                <span class="social_icon_mess messenger-skeleton ms-2"><img class="social_icon_mess" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_messanger')}}" alt=""></span>
             </a>
             <a class="" href="{{setting('update_social_media_whatsapp_link')}}">
-                <span class="social_icon_whatsapp"><img class="social_icon_whatsapp" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_whatsapp')}}" alt=""></span>
+                <span class="social_icon_whatsapp whatsapp-skeleton"><img class="social_icon_whatsapp" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_whatsapp')}}" alt=""></span>
             </a>
+            <a class="menu_btn" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <span class="menu_icon menu-skeleton"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
+            </a>
+            <div class="offcanvas offcanvas-end" data-bs-backdrop="true" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h6 class="head_auth" id="offcanvasRightLabel">Auth-Menu</h6>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-toggle="tooltip"  data-bs-placement="left" title="Close" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="modal fade" id="loader_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                            <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+                                <div class="modal-body" id="loader_modalBody"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group__button">
+                        <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
+                            <span class="btn-text forg_page"> Forget-Password</span>
+                        </a>
+                        <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
+                            <span class="btn-text reg_page"> User-Register</span>
+                        </a>
+                        <a type="submit" href="/" class="btn btn-sm" id="logn_page">
+                            <span class="btn-text logn_page"> User-Login</span>
+                        </a>
+                    </div>
+                    <div class="side_canvas_animation" hidden>
+                        <img src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                    </div>
+                </div>
+            </div>
         </p>
     </nav>
 </header>
 
 <body class="background-color">
-    <div class="loader-login log_close">
-        <img src="{{asset('/image/loader/load-30.gif')}}" alt="Loading...." />
+    <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+                <div class="modal-body" id="loaderModal_body">
+                    <div class="loader-login">
+                        <img src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                    </div> 
+                </div>
+            </div>
+        </div>
     </div>
     <div class="hero-image">
         <div class="hero-text heading" id="page_head">
-            <h1 class="company_heading ms-5 mt-5">
+            <h1 class="body_heading ms-5 mt-5">
                 <!-- <span class="skeleton"><img class="company_logo skeleton" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span> -->
                 <span class="skeleton">{{setting('page_sub_title')}}</span>
             </h1>
@@ -59,7 +99,7 @@
     <div class="container bg" style="margin-top: 45px;">
         <div class="row">
             <div class="col-md-8">
-                <div id="carouselExampleIndicators" class="carousel slide mt-5" data-bs-ride="carousel">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -90,8 +130,8 @@
                 </div>
             </div>
             <div class="col-md-4 mb-5" style="margin-top:px">
-                <h4 class="heading_admin text-shadow skeleton ps-3" style="text-align: center;"><span class="skeleton">{{ setting('login_page_title')}}</span></h4>
-                <div class="card card-form-control login_card skeleton">
+                <h4 class="heading_admin text-shadow ps-3" style="text-align: center;"><span class="skeleton">{{ setting('login_page_title')}}</span></h4>
+                <div class="card card-form-control login_card">
                     <form id="loginForm" action="{{ route('login') }}" method="POST" autocomplete="off">
                         <div class="col-md-12">
                             @if(Session::get('fail'))
@@ -103,8 +143,8 @@
                             @csrf
                             <div class="row">
                                 <div class="form-group ms-4">
-                                    <label class="label_email skeleton" for="email">Email :</label>
-                                    <span class="skeleton"><input class="email_src email ps-1 mt-5" type="text" name="email" placeholder="&#xf0e0; Enter Email Address" value="{{old('email')}}" autofocus></span>
+                                    <label class="email email-label-skeleton" for="email">Email :</label>
+                                    <span class="input-email-skeleton"><input class="email_src email ps-1 mt-5" type="text" name="email" placeholder="&#xf0e0; Enter Email Address" value="{{old('email')}}" autofocus></span>
                                     <i class="src_email fa fa-spinner fa-spin src_email-hidden"></i>
                                     <span class="text-danger input_message">@error('email')
                                         <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
@@ -112,8 +152,8 @@
                                     </span><br>
                                 </div>
                                 <div class="form-group ms-4">
-                                    <label class="lable_password skeleton" for="password">Password :</label>
-                                    <span class="skeleton"><input class="password_src password ps-1" type="password" name="password" placeholder="&#xf13e; Enter Password" value="{{old('password')}}"></span>
+                                    <label class="password skeleton" for="password">Password :</label>
+                                    <span class="input-password-skeleton"><input class="password_src password ps-1" type="password" name="password" placeholder="&#xf13e; Enter Password" value="{{old('password')}}"></span>
                                     <i class="src_password fa fa-spinner fa-spin src_password-hidden"></i>
                                     <span class="text-danger input_message">@error('password')
                                         <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
@@ -122,7 +162,7 @@
                                 </div>
                                 <div class="col-md-9 offset-md-3">
                                     <div class="form-group ms-3">
-                                        <button id="submit" type="submit" class="btn btn-sm btn-primary login_button skeleton">
+                                        <button id="submit" type="submit" class="btn btn-sm btn-primary login_button button-skeleton">
                                             <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
                                             <span class="btn-text">Login</span>
                                         </button>
@@ -152,6 +192,34 @@
 
     <script>
         // skeleton
+        function headSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.headings-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('headings-skeleton')
+            });
+        }
+        function inputEmailSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.input-email-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('input-email-skeleton')
+            });
+        }
+        function inputPasswordSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.input-password-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('input-password-skeleton')
+            });
+        }
+        function buttonSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.button-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('button-skeleton')
+            });
+        }
         function fetchData(){
             const  allSkeleton = document.querySelectorAll('.skeleton')
         
@@ -159,12 +227,67 @@
                 item.classList.remove('skeleton')
             });
         }
-
+        function emailLabel(){
+            const  allSkeleton = document.querySelectorAll('.email-label-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('email-label-skeleton')
+            });
+        }
+        function logo(){
+            const  allSkeleton = document.querySelectorAll('.logo-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('logo-skeleton')
+            });
+        }
+        function menuSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.menu-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('menu-skeleton')
+            });
+        }
+        function whatsAppSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.whatsapp-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('whatsapp-skeleton')
+            });
+        }
+        function messengerSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.messenger-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('messenger-skeleton')
+            });
+        }
+        function facebookSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.facebook-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('facebook-skeleton')
+            });
+        }
         setTimeout(() => {
-            fetchData();
-        }, 1000);
+            // headSkeleton();
+            // logo();
+            // fetchData();
+            // emailLabel();
+            // menuSkeleton();
+            // whatsAppSkeleton();
+            // messengerSkeleton();
+            // facebookSkeleton();
+            // inputEmailSkeleton();
+            // inputPasswordSkeleton();
+            // buttonSkeleton();
+        }, 2000);
     </script>
     <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
         $(document).ready(function(){
             $("#loginForm").addClass('loginForm');
         });
@@ -177,6 +300,42 @@
             duration:0.9,
             stagger:0.2
         })
+    </script>
+    <script>
+        window.addEventListener('load', function() {
+            const loader = document.querySelector(".loader-login");
+            const loaderModal = new bootstrap.Modal(document.getElementById('loaderModalForm'));
+
+            loaderModal.show();
+            loader.className += " log_close";
+            setTimeout(function() {
+                //loaderModal.hide();
+            }, 2000);
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $(document).on('click', '.menu_btn', function(e){
+                e.preventDefault();
+                $("#loader_modal").modal('show');
+                $(".side_canvas_animation").removeAttr('hidden');
+                $(".head_auth").addClass('auth-skeleton');
+                $(".btn-close").addClass('auth-skeleton');
+                $(".forg_page").addClass('auth-skeleton');
+                $(".reg_page").addClass('auth-skeleton');
+                $(".logn_page").addClass('auth-skeleton');
+
+                setTimeout(() => {
+                    $("#loader_modal").modal('hide');
+                    $(".side_canvas_animation").attr('hidden', true);
+                    $(".head_auth").removeClass('auth-skeleton');
+                    $(".btn-close").removeClass('auth-skeleton');
+                    $(".forg_page").removeClass('auth-skeleton');
+                    $(".reg_page").removeClass('auth-skeleton');
+                    $(".logn_page").removeClass('auth-skeleton');
+                }, 2000);
+            });
+        });
     </script>
 </body>
 

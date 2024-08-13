@@ -55,7 +55,7 @@
                                                 <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">WhatsApp</th>
                                                 <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Email</th>
                                                 <th id="th_sort" class="table_th_color tot_pending_ skeleton">Permission</th>
-                                                <th id="th_sort" class="table_th_color tot_pending_ skeleton pe-2">Check</th>
+                                                <th id="th_sort" class="table_th_color tot_pending_ skeleton pe-2" style="text-align: center;">Check</th>
                                             </tr>
                                         </thead>
                                         <tbody class="bg-transparent skeleton" id="supplier_data_table">
@@ -79,7 +79,7 @@
                                     <div class="col-4">
                                         <span class="tot_summ skeleton" id="num_plate">
                                             <label class="tot-search skeleton mt-3" for="tot_cagt"> Total Supplier or Vendor :</label>
-                                            <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;" id="total_supplier_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;">.00</span></label>
+                                            <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_supplier_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
                                         </span>
                                     </div>
                                     <div class="col-7">
@@ -241,10 +241,10 @@
     <div class="modal-dialog">
         <div class="modal-content" id="admin_modal_box">
             <div class="modal-header profile_modal_header profilesetting_modal_header">
-                <h5 class="modal-title ps-1 pe-1" id="staticBackdropLabels">
+                <h5 class="modal-title head_title ps-1 pe-1" id="staticBackdropLabels">
                     Delete Supplier Or Vendor
                 </h5>
-                <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+                <button type="button" class="btn-close btn-btn-sm cols_title" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
             </div>
 
             <div class="modal-body profile-body pb-1">
@@ -262,16 +262,81 @@
                 </div>
             </div>
             <div class="modal-footer profile_modal_footer">
-                <button href="#" type="button" class="btn btn-sm cgt_btn delet_btn_user btn_focus" id="deleteLoader">
-                    <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
-                    <span class="btn-text">Delete</span>
-                </button>
-                <button type="button" class="btn btn-sm cgt_btn delete_cancel btn_focus" id="supp_delt4" data-bs-dismiss="modal">Cancel</button>
+                <p id="btn_group2">
+                    <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
+                        <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
+                        <span class="btn-text">{{__('translate.Yes')}}</span>
+                    </a>
+                </p>
+                <p id="btn_group">
+                    <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal" id="noButton">No</a>
+                </p>
             </div>
         </div>
     </div>
 </div>
 {{-- End Delete  Supplier or Vendor Modal--}}
+
+{{-- Start Confirm Delete Supplier Modal--}}
+<!-- Modal -->
+<div class="modal fade" id="deleteconfirmsupplier" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+      <div class="modal-header" id="logoutModal_header">
+        <h6 class="modal-title admin_title scan confirm_title pt-1" id="staticBackdropLabel">
+          Confirm Delete
+        </h6>
+        <button type="button" class="btn-close btn-btn-sm head_btn2" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+        </div>
+        <div class="modal-body" id="logoutModal_body">
+          <p class="admin_paragraph" style="text-align:center;" id="text_message">
+            <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, delete or cancel ? </label>
+          </p>
+        </div>
+        <div class="modal-footer" id="logoutModal_footer">
+            <button href="#" type="button" class="btn btn-sm cgt_btn delet_btn_user btn_focus" id="deleteLoader">
+                <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
+                <span class="btn-text">Delete</span>
+            </button>
+            <button type="button" class="btn btn-sm cgt_btn delete_cancel btn_focus" id="supp_delt4" data-bs-dismiss="modal">Cancel</button>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
+{{-- Start Confirm Delete Supplier Modal--}}
+
+{{-- Start Update Supplier Modal--}}
+<!-- Modal -->
+<div class="modal fade" id="updateconfirmsupplier" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+      <div class="modal-header" id="logoutModal_header">
+        <h6 class="modal-title admin_title scan update_title pt-1" id="staticBackdropLabel">
+          Update Supplier
+        </h6>
+        <button type="button" class="btn-close btn-btn-sm head_btn3" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+        </div>
+        <div class="modal-body" id="logoutModal_body">
+          <p class="admin_paragraph" style="text-align:center;" id="text_message">
+            <label class="label_user_edit" id="cate_confirm_update" for="id">Are you confirm or cancel ? </label>
+          </p>
+        </div>
+        <div class="modal-footer" id="logoutModal_footer">
+          <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus">
+            <span class="btn-text">Confirm</span>
+          </button>
+          <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
+{{-- End Update Supplier Modal--}}
 
 {{--Start Supplier or Info View Modal--}}
 <div class="modal fade" id="supplierInfoView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

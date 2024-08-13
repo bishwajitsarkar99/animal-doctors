@@ -22,7 +22,7 @@
     <div class="skeleton col-1">
         <label class="item_class skeleton">Peritem</label>
         <div class="custom-select skeleton">
-            <select class="ps-1 skeleton" id="perItemControl" style="background: linear-gradient(to bottom, rgb(5, 5, 248), transparent 3%, rgb(5, 5, 248), rgb(5, 5, 248));">
+            <select class="ps-1 skeleton" id="perItemControl" style="background: linear-gradient(to bottom, rgb(5, 5, 248), transparent 3%, rgb(5, 5, 248), rgb(5, 5, 248));border:1px solid darkblue;">
                 <option class="skeleton" selected>10</option>
                 <option class="skeleton">20</option>
                 <option class="skeleton">50</option>

@@ -25,23 +25,64 @@
 <header class="bg sticky-top">
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
         <p class="navbar-brand ps-3 admin_panel text-shadow" style="float: right;">
-            <span class="skeleton"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
-            <span class="skeleton">{{setting('company_name')}}</span>
+            <span class="logo-skeleton"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
+            <span class="heading-skeleton">{{setting('company_name')}}</span>
+        </p>
+        <p class="address skeleton">{{setting('company_address')}}</p>
+        <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
+            <a class="menu_btn" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <span class="menu_icon menus-skeleton"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
+            </a>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h6 class="head_auth" id="offcanvasRightLabel">Auth-Menu</h6>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-toggle="tooltip"  data-bs-placement="left" title="Close" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="modal fade" id="loader_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                            <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+                                <div class="modal-body" id="loader_modalBody"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group__button">
+                        <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
+                            <span class="btn-text forg_page"> Forget-Password</span>
+                        </a>
+                        <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
+                            <span class="btn-text reg_page"> User-Register</span>
+                        </a>
+                        <a type="submit" href="/" class="btn btn-sm" id="logn_page">
+                            <span class="btn-text logn_page"> User-Login</span>
+                        </a>
+                    </div>
+                    <div class="side_canvas_animation" hidden>
+                        <img src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                    </div>
+                </div>
+            </div>
         </p>
     </nav>
 </header>
 
 <body class="register_background-color">
-    <div class="loader hidden">
-        <img src="{{asset('/image/loader/load-30.gif')}}" alt="Loading...." />
+    <div class="modal fade" id="loaderRegisterForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+                <div class="modal-body" id="loaderRegisterModal_body">
+                    <div class="loader-register">
+                        <img src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                    </div> 
+                </div>
+            </div>
+        </div>
     </div>
     <div class="hero-image">
         <div class="hero-text heading reg_hidden">
-            <h1 class="company_heading" style="font-size:50px;color:darkblue;text-align:left">
-                <i class="fa-solid fa-stethoscope fa-beat-fade"></i>
-                <span class="skeleton">{{setting('company_name')}}</span>
+            <h1 class="company_heading" style="font-size:25px;color:darkblue;text-align:left">
+                <span class="skeleton">{{setting('forgot_page_sub_title')}}</span>
             </h1>
-            <p class="address skeleton ps-2">{{setting('company_address')}}</p>
         </div>
     </div>
 
@@ -51,7 +92,7 @@
                 <h4 class="heading_admin_login text-shadow" style="text-align: center;">
                     <span class="skeleton forget_text">{{setting('forgot_page_title')}}</span>
                 </h4>
-                <div class="card card-form-control">
+                <div class="">
                     <form action="{{ route('password.reset') }}" method="POST">
                         @csrf
                         <div class="col-md-12">
@@ -97,14 +138,15 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="email" class="form-label skeleton lb_text">Email :</label>
-                                                        <input type="email" id="email" style="border: 1px solid #f1f1f1;" class="form-control form-control-sm" name="email" placeholder="&#xf0e0; Enter Email Address" required="">
+                                                        <input type="email" id="email" style="border: 1px solid lightgray;" class="" name="email" placeholder="&#xf0e0; Enter Email Address" required="" autocomplete="off" autofocus />
+                                                        <span class="email-input-skeleton"></span>
                                                     </div>
                                                     <div class="mb-3 d-grid">
                                                         <button type="submit" class="btn btn-sm btn-primary forget_button register_btn">
                                                             Reset Password
                                                         </button>
                                                     </div>
-                                                    <span class="skeleton reset_text">Don't have an account?</span> <a class="btn_bg ps-2 pe-2 pb-1 skeleton" href="/">sign in</a>
+                                                    <span class="skeleton reset_text">Don't have an account?</span> <a class="btn_bg ps-2 pe-2 pb-1 mini-skeleton" href="/">sign in</a>
                                                     @endif
                                                 </div>
                                             </div>
@@ -138,6 +180,13 @@
 
     <script>
         // skeleton
+        function headingSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.heading-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('heading-skeleton')
+            });
+        }
         function fetchData(){
             const  allSkeleton = document.querySelectorAll('.skeleton')
         
@@ -145,10 +194,124 @@
                 item.classList.remove('skeleton')
             });
         }
-
+        function logo(){
+            const  allSkeleton = document.querySelectorAll('.logo-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('logo-skeleton')
+            });
+        }
+        function inputSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.input-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('input-skeleton')
+            });
+        }
+        function inputEamilSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.input-email-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('input-email-skeleton')
+            });
+        }
+        function capSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.cap-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('cap-skeleton')
+            });
+        }
+        function fileSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.file-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('file-skeleton')
+            });
+        }
+        function imageSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.menus-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('menus-skeleton')
+            });
+        }
+        function miniSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.mini-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('mini-skeleton')
+            });
+        }
+        function emailInputSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.email-input-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('email-input-skeleton')
+            });
+        }
         setTimeout(() => {
+            headingSkeleton();
+            logo();
             fetchData();
-        }, 1000);
+            inputSkeleton();
+            inputEamilSkeleton();
+            capSkeleton();
+            fileSkeleton();
+            imageSkeleton();
+            miniSkeleton();
+            emailInputSkeleton();
+        }, 2000);
+        
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+    </script>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+        $(document).ready(function(){
+            $("#registerAnimation").addClass('loginForm');
+        });
+    </script>
+    <script>
+        window.addEventListener('load', function() {
+            const loader = document.querySelector(".loader-register");
+            const loaderModal = new bootstrap.Modal(document.getElementById('loaderRegisterForm'));
+
+            loaderModal.show();
+            loader.className += " log_close";
+            setTimeout(function() {
+                loaderModal.hide();
+            }, 2000);
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $(document).on('click', '.menu_btn', function(e){
+                e.preventDefault();
+                $("#loader_modal").modal('show');
+                $(".side_canvas_animation").removeAttr('hidden');
+                $(".head_auth").addClass('auth-skeleton');
+                $(".btn-close").addClass('auth-skeleton');
+                $(".forg_page").addClass('auth-skeleton');
+                $(".reg_page").addClass('auth-skeleton');
+                $(".logn_page").addClass('auth-skeleton');
+
+                setTimeout(() => {
+                    $("#loader_modal").modal('hide');
+                    $(".side_canvas_animation").attr('hidden', true);
+                    $(".head_auth").removeClass('auth-skeleton');
+                    $(".btn-close").removeClass('auth-skeleton');
+                    $(".forg_page").removeClass('auth-skeleton');
+                    $(".reg_page").removeClass('auth-skeleton');
+                    $(".logn_page").removeClass('auth-skeleton');
+                }, 2000);
+            });
+        });
     </script>
 </body>
 

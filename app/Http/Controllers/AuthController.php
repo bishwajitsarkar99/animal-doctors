@@ -30,7 +30,7 @@ class AuthController extends Controller
             'name' => 'string|required|max:120',
             'contract_number' => 'string|required|min:11',
             'email' => 'string|email|required|max:100|unique:users',
-            'password' => 'string|required|confirmed|min:6',
+            'password' => 'string|required|confirmed|min:6|max:30',
             'image' => 'required|image|mimes:jpeg,png,jpg,giv,svg|max:2048',
         ]);
 
@@ -68,7 +68,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'email' => 'string|email|required|max:100|exists:users',
-            'password' => 'required|min:5|max:30',
+            'password' => 'required|min:6|max:30',
         ], [
             'email.exists' => 'This email is not exists on users table',
         ]);

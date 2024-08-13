@@ -115,7 +115,7 @@ a.sals_menu {
     color: rgb(60, 60, 255);
 }
 span.categ_title_block,.subcateg_url_block,.group_url_block,.entry_day_book_url_block,.categ_title_block {
-    font-family: math;
+    font-family: sans-serif;
 }
 .sub__box{
     animation: backgrouncolormove 5s infinite;

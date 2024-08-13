@@ -798,7 +798,7 @@
 
         });
         // Update- Supplier Status ------------------
-        $("#supplier_data_table").delegate(".supplier_check_permission", "click", function(e) {
+        $("#supplier_data_table_permission").delegate(".supplier_check_permission", "click", function(e) {
             e.preventDefault();
 
             const current_url = "{{route('supplier_update_status.action')}}";
@@ -823,6 +823,11 @@
                     console.log('messages', response.messages);
                     $("#success_message").text(response.messages);
                     fetch_supplier_data('', pagination_url);
+                    $('#success_message').addClass('alert_show ps-1 pe-1');
+                    $('#success_message').fadeIn();
+                    setTimeout(() => {
+                        $('#success_message').fadeOut();
+                    }, 3000);
                 },
                 error: function(xhr) {
                     if (xhr.status === 423) {
@@ -831,65 +836,6 @@
                 }
             });
         });
-
-        // $(document).on('click', '#tabCreateSupplier', function(e) {
-        //     e.preventDefault();
-        //     var changeURL = '/supplier';
-
-        //     $.ajax({
-        //         url: changeURL,
-        //         method: 'GET',
-        //         success: function(response) {
-        //             $('#myscreen').html(response);
-        //             history.pushState(null, '', changeURL);
-        //         },
-        //         error: function(xhr, status, error) {
-        //             console.error('Error loading supplier content:', error);
-        //         }
-        //     });
-        // });
-
-        // Change url with page reload
-        // $(document).on('click', '#tabCreateSupplier', function(e) {
-        //     e.preventDefault();
-        //     var changeURL = '/supplier';
-        //     console.log('Requesting URL:', changeURL);
-
-        //     $.ajax({
-        //         url: changeURL,
-        //         method: 'GET',
-        //         success: function(response) {
-        //             console.log('Response received:', response);
-        //             $('#myscreen').html(response);
-        //             history.pushState(null, '', changeURL);
-        //         },
-        //         error: function(xhr, status, error) {
-        //             console.error('Error loading supplier content:', error);
-        //         }
-        //     });
-        // });
-
-        // $(document).on('click', '#suppSetting', function(e) {
-        //     e.preventDefault();
-        //     var changeURL = '/super-admin/supplier/access-permission';
-        //     console.log('Requesting URL:', changeURL);
-
-        //     $.ajax({
-        //         url: changeURL,
-        //         method: 'GET',
-        //         success: function(response) {
-        //             console.log('Response received:', response);
-        //             $('#myscreen').html(response);
-        //             history.pushState(null, '', changeURL);
-        //         },
-        //         error: function(xhr, status, error) {
-        //             console.error('Error loading supplier content:', error);
-        //         }
-        //     });
-        // });
-
-
-        
 
     });
 </script>

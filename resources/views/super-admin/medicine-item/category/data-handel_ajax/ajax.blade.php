@@ -371,7 +371,7 @@
                 clearTimeout(time);
             }
         });
-        // Confirm Delete Category
+        // Delete Category
         $(document).on('click', '.delet_btn_user', function(e) {
             e.preventDefault();
             var category_id = $('#delete_category_id').val();

@@ -34,7 +34,7 @@
                             </tr>
                             <tbody class="bg-transparent" id="permission_data_table">
                                 <tr class="btn-hover table_body table-row user-table-row long-skeleton">
-                                    <td class="table_body2 ps-2">Create</td>
+                                    <td class="table_body2 ps-2">My Sql Database</td>
                                     <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
                                         <input type="checkbox" name="create_status" value="1" class="create_status create_status skeleton mt-1" id="create_status" style="cursor: pointer;">
                                     </td>
@@ -58,7 +58,7 @@
                                     </td>
                                 </tr>
                                 <tr class="btn-hover table_body table-row user-table-row long-skeleton">
-                                    <td class="table_body2 ps-2">My Sql Database</td>
+                                    <td class="table_body2 ps-2">Check Status</td>
                                     <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
                                         <input type="checkbox" name="data_export_status" value="1" class="dataStatusChecking data_export_status skeleton mt-1" id="data_export_status" style="cursor: pointer;">
                                     </td>
@@ -136,7 +136,7 @@
                             <th id="th_sort_head" class="table_th_color tot_pending_  col ps-1" style="text-align: left;padding-top: 100px;">Role</th>
                             <th id="th_sort_head" class="table_th_color tot_pending_  col ps-1" style="text-align: left;padding-top: 100px;">Email</th>
                             <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                                Create
+                                My Sql Database
                                 <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
                             </th>
                             <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
@@ -152,7 +152,7 @@
                                 <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
                             </th>
                             <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                                My Sql Database
+                                Check Status
                                 <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
                             </th>
                             <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">

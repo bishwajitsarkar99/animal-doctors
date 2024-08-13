@@ -22,7 +22,7 @@
         <span class="tab4-skeletone ms-1"></span>
       </li>
       <li class="nav-item">
-        <a class="nav-link setting home-text" data-bs-toggle="tab" href="#createSupplier" id="tabCreateSupplier" hidden> Create Supplier</a>
+        <a class="nav-link setting home-text" href="/supplier" id="tabCreateSupplier" hidden> Create Supplier</a>
         <span class="tab3-skeletone ms-1"></span>
       </li>
       <li class="nav-item">
@@ -43,12 +43,12 @@
       <div id="moduleSetting" class="container tab-pane"><br>
         @include('super-admin.supplier.module.module-permission')
       </div>
-      <div id="createSupplier" class="container tab-pane" ><br>
+      <div id="createSupplier" class="container tab-pane" hidden><br>
 
       </div>
       <div class="col-xl-12 action_message">
         <p class="ps-1 ms-4 mt-3 alert_show" style= "color:green;font-weight:700;font-size:13px;">
-          <span id="success_message"></span>
+          <span id="success_message" style= "color:green;font-weight:700;font-size:13px;"></span>
         </p>
       </div>
     </div>
@@ -142,17 +142,17 @@
             </button>
             </div>
             <div class="modal-body" id="logoutModal_body">
-                <p class="admin_paragraph" id="text_message" style="font-weight:600;font-size:13px;">
-                    Do you want to delete the inventory access permission [ ID : <input type="text" id="delete_access_permission_id">] ?
+                <p class="admin_paragraph" id="text_message" style="font-weight:600;font-size:12px;">
+                  Do you want to delete the inventory access permission [ ID : <input type="text" id="delete_access_permission_id">] ?
                 </p> 
                 <p class="admin_paragraph" id="text_message" style="text-align:center;"> 
-                    <button id="confirm_delete_btn" class="btn btn-sm cgt_btn btn_focus permission_confirm_btn">
-                        <span class="btn-text">Yes</span>
-                    </button>
+                  <button id="confirm_delete_btn" class="btn btn-sm cgt_btn btn_focus permission_confirm_btn">
+                      <span class="btn-text">Yes</span>
+                  </button>
 
-                    <span style="font-weight:600;font-size:13px;">Or</span>
+                  <span style="font-weight:600;font-size:13px;">Or</span>
 
-                    <a type="button" class="btn btn-sm canl_button" data-bs-dismiss="modal">No</a>
+                  <a type="button" class="btn btn-sm canl_button" data-bs-dismiss="modal">No</a>
                 </p>
             </div>
             <div class="modal-footer" id="logoutModal_footer"></div>    
@@ -224,48 +224,54 @@
     }, 500);
 </script>
 <script>
-  $(document).on('click', '#tabHome', function() {
-    
-    $("#showCard").attr('hidden', true);
+  $(document).ready(function(){
+
+    $(document).on('click', '#tabHome', function() {
+      
+      $("#showCard").attr('hidden', true);
       $("#loaderShow").removeClass('loader-show');
       setTimeout(() => {
         $("#showCard").removeAttr('hidden');
         $("#loaderShow").addClass('loader-show');
       }, 800);
-
-  });
-
-  $(document).on('click', '#tabSetting', function() {
-    
-    $("#supplierSetting").attr('hidden', true);
+  
+    });
+  
+    $(document).on('click', '#tabSetting', function() {
+      
+      $("#supplierSetting").attr('hidden', true);
       $("#loaderShow").removeClass('loader-show');
       setTimeout(() => {
         $("#supplierSetting").removeAttr('hidden');
         $("#loaderShow").addClass('loader-show');
       }, 800);
-
-  });
-
-  // Tab Loading Module Permission
-  $(doucment).on('click', '#moduSetting', function(){
-
-    $("#loaderShow").removeClass('loader-show');
-    setTimeout(() => {
-      $("#moduleSetting").removeAttr('hidden');
-      $("#loaderShow").addClass('loader-show');
-    }, 800);
-      
-  });
-
-  // Change url create supplier from supplier setting
-  $(document).on('click', '#tabCreateSupplier', function(e) {
-    e.preventDefault();
-    var changeURL = '/supplier';
-    window.location.href = changeURL;
-    $("#loaderShow").removeClass('loader-show');
-    setTimeout(() => {
+  
+    });
+  
+    // Tab Loading Module Permission
+    $(document).on('click', '#moduSetting', function(){
+  
+      $("#moduleSetting").attr('hidden', true);
+      $("#loaderShow").removeClass('loader-show');
+      setTimeout(() => {
+        $("#moduleSetting").removeAttr('hidden');
         $("#loaderShow").addClass('loader-show');
-    }, 1800);
-  });  
+      }, 800);
+        
+    });
+  
+    // Change url create supplier from supplier setting
+    $(document).on('click', '#tabCreateSupplier', function(e) {
+      e.preventDefault();
+      var changeURL = '/supplier';
+      window.location.href = changeURL;
+      $("#loaderShow").removeClass('loader-show');
+      $("#createSupplier").attr('hidden', true);
+        setTimeout(() => {
+        $("#loaderShow").addClass('loader-show');
+        $("#createSupplier").removeAttr('hidden');
+      }, 800);
+    });  
+  });
 </script>
 @endsection

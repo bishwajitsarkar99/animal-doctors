@@ -20,8 +20,9 @@
                                     <label class="label-three ms-2" for="supplier-label">Module Name Display</label>
                                     <select id="urlDisplayID" class="ps-1 form-control form-control-sm" name="supplier_title_visual" style="color:black;cursor: pointer;">
                                         <option class="sub_name_text" value="" disabled>Select Display</option>
-                                        <option class="sub_name_text" value="{{setting('supplier_title_visual')}}">Show</option>
-                                        <option class="sub_name_text" value="hidden">Hidden</option>
+                                        <option class="sub_name_text" value="{{setting('supplier_title_visual')}}">Display : {{setting('supplier_title_visual')}}</option>
+                                        <option class="sub_name_text" value="block">block</option>
+                                        <option class="sub_name_text" value="hidden">hidden</option>
                                     </select>
                                 </div>
                             </div>
@@ -39,8 +40,9 @@
                                     <label class="label-three ms-2" for="supplier-label">Module Display</label>
                                     <select id="urlmouleDisplayID" class="ps-1 form-control form-control-sm" name="supplier_setup_display" style="color:black;cursor: pointer;">
                                         <option class="sub_name_text" value="" disabled>Select Display</option>
-                                        <option class="sub_name_text" value="{{setting('supplier_setup_display')}}">Show</option>
-                                        <option class="sub_name_text" value="hidden">Hidden</option>
+                                        <option class="sub_name_text" value="{{setting('supplier_setup_display')}}">Display-Supplier : {{setting('supplier_setup_display')}}</option>
+                                        <option class="sub_name_text" value="block">block</option>
+                                        <option class="sub_name_text" value="hidden">hidden</option>
                                     </select>
                                 </div>
                             </div>

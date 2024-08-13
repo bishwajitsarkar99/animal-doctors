@@ -38,6 +38,8 @@
                         $('#success_message').html("");
                         $('#success_message').fadeIn();
                         $('#success_message').text(response.messages);
+                        $('#success_message').addClass('alert_show ps-1 pe-1');
+                        $('#success_message').fadeIn();
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);

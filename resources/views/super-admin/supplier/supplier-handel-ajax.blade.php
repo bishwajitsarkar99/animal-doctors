@@ -342,8 +342,32 @@
             });
         });
 
+        // Confirm Update Supplier Contact Modal
+        $(document).on('click', '#update_btn', function(e){
+            e.preventDefault();
+            $("#updateconfirmsupplier").modal('show');
+            
+            $("#update_btn_confirm").addClass('skeleton');
+            $("#cate_delete5").addClass('skeleton');
+            $("#cate_confirm_update").addClass('skeleton');
+            $(".update_title").addClass('skeleton');
+            $(".head_btn3").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
+                $(".update_title").removeClass('skeleton');
+                $(".head_btn3").removeClass('skeleton');
+                $("#update_btn_confirm").removeClass('skeleton');
+                $("#cate_delete5").removeClass('skeleton');
+                $("#cate_confirm_update").removeClass('skeleton');
+            }, 1000);
+
+            return () => {
+                clearTimeout(time);
+            }
+        }); 
+
         // Update Supplier Contact 
-        $(document).on('click', '#update_btn', function(e) {
+        $(document).on('click', '.update_confirm', function(e) {
             e.preventDefault();
 
             // Remove any existing error messages
@@ -431,6 +455,7 @@
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
+                        $("#updateconfirmsupplier").modal('hide');
                         fetch_supplier_data();
                     }
                 },
@@ -443,7 +468,7 @@
 
         });
 
-        // Delete Supplier Contact
+        // Delete Supplier Contact Modal
         $(document).on('click', '#deleteBtn', function(e) {
             e.preventDefault();
             var supplier_id = $(this).val();
@@ -451,23 +476,53 @@
             $('#deletesupplier').modal('show');
 
             var time = null;
+            $(".head_title").addClass('skeleton');
+            $(".cols_title").addClass('skeleton');
             $("#supp_delt").addClass('skeleton');
             $("#supp_delt2").addClass('skeleton');
             $("#supp_delt3").addClass('skeleton');
-            $("#supp_delt4").addClass('sup-btn-skeleton');
             $("#delete_supplier_id").addClass('skeleton');
-            $("#deleteLoader").addClass('sup-btn-skeleton-two');
+            $("#yesButton").addClass('sup-btn-skeleton');
+            $("#noButton").addClass('sup-btn-skeleton-two');
 
             time = setTimeout(() => {
+                $(".head_title").removeClass('skeleton');
+                $(".cols_title").removeClass('skeleton');
                 $("#supp_delt").removeClass('skeleton');
                 $("#supp_delt2").removeClass('skeleton');
                 $("#supp_delt3").removeClass('skeleton');
                 $("#delete_supplier_id").removeClass('skeleton');
-                $("#supp_delt4").removeClass('sup-btn-skeleton');
-                $("#deleteLoader").removeClass('sup-btn-skeleton-two');
+                $("#yesButton").removeClass('sup-btn-skeleton');
+                $("#noButton").removeClass('sup-btn-skeleton-two');
             }, 1000);
             
             return ()=>{
+                clearTimeout(time);
+            }
+        });
+        // Confirm Delete Supplier Contact Modal
+        $(document).on('click', '.yes_button', function(e){
+            e.preventDefault();
+            $('#deleteconfirmsupplier').modal('show');
+            $("#deleteLoader").addClass('skeleton');
+            $("#cate_delete3").addClass('skeleton');
+            $("#cate_confirm").addClass('skeleton');
+            $(".confirm_title").addClass('skeleton');
+            $(".head_btn2").addClass('skeleton');
+            $("#supp_delt4").addClass('sup-btn-skeleton');
+            $("#deleteLoader").addClass('sup-btn-skeleton-two');
+            var time = null;
+            time = setTimeout(() => {
+                $(".confirm_title").removeClass('skeleton');
+                $(".head_btn2").removeClass('skeleton');
+                $("#deleteLoader").removeClass('skeleton');
+                $("#cate_delete3").removeClass('skeleton');
+                $("#cate_confirm").removeClass('skeleton');
+                $("#supp_delt4").removeClass('sup-btn-skeleton');
+                $("#deleteLoader").removeClass('sup-btn-skeleton-two');
+            }, 1000);
+
+            return () => {
                 clearTimeout(time);
             }
         });
@@ -493,12 +548,12 @@
                         $('#success_message').fadeOut();
                     }, 3000);
                     $('#deletesupplier').modal('hide');
-
+                    $('#deleteconfirmsupplier').modal('hide');
                     fetch_supplier_data();
                 },
                 error: function(xhr) {
                     if (xhr.status === 404) {
-                        window.location.href = '/errors/404';
+                        window.location.href = '/delete-supplier/{id}';
                     }
                 }
 
@@ -539,7 +594,7 @@
                 },
                 error: function(xhr) {
                     if (xhr.status === 405) {
-                        window.location.href = '/errors/405';
+                        window.location.href = '/data-connection/{id}';
                     }
                 }
             });
@@ -677,8 +732,10 @@
         $(document).load('click', function(){
             $("#active_loader").addClass('loader_chart');
         });
-
-        // Assume you have a variable totalSupplierRecords that holds the total number of supplier records
+    });
+</script>
+<!-- <script>
+    $(doucment).read(function(){
         var totalSupplierRecords = $("#total_supplier_records_progressbar").text(total);
         updateProgressBarWithErrorHandling(totalSupplierRecords);
         function updateProgressBarWithErrorHandling(totalSupplierRecords) {
@@ -695,4 +752,4 @@
             }
         }
     });
-</script>
+</script> -->

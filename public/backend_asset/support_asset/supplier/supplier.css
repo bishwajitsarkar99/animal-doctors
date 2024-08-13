@@ -1,11 +1,12 @@
 :root{
-    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue,transparent 80%, rgba(0, 0, 0, 0.05) 100%);
-    --bg-color:purple;
+    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, transparent 80%, rgba(0, 0, 0, 0.05) 100%);
+    --bg-color:darkgoldenrod;
     --color:royalblue;
     --size:1px;
     --font-weight:600;
     /* --apperence-app-setting-bg:linear-gradient(to bottom, silver, transparent,silver,lightgray); */
     --drop-border-bg-color:royalblue;
+    --font-family-sans-serif:sans-serif;
 }
 .sup-btn-skeleton,.sup-btn-skeleton-two{
     position: relative;
@@ -57,6 +58,7 @@
     position: relative;
 }
 a#suppSetting {
+    font-family: var(--font-family-sans-serif);
     font-size: 13px;
     font-weight: 700;
     margin-left: 8px;
@@ -150,6 +152,7 @@ a#suppSetting {
 label.tot-search {
     font-size: 11px;
     letter-spacing: 0.9px;
+    font-family: var(--font-family-sans-serif);
 }
 div.item {
     line-height: 3.5;
@@ -160,8 +163,9 @@ div.item {
     color: black;
     font-weight: 610;
     text-transform: capitalize;
+    font-family: var(--font-family-sans-serif);
 }
-catg {
+.catg {
     color: black;
     font-size: 12px;
     margin-top: -10px;
@@ -183,6 +187,7 @@ input#type {
     border-right: 1px solid #f1eeee;
     color: black;
     /* animation: textColor 1s infinite; */
+    font-family:var(--font-family-sans-serif);
 }
 input#bussiness_type {
     outline: none;
@@ -196,6 +201,7 @@ input#bussiness_type {
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family:var(--font-family-sans-serif);
 }
 input#name {
     outline: none;
@@ -209,6 +215,7 @@ input#name {
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family:var(--font-family-sans-serif);
 }
 input#office_address {
     outline: none;
@@ -222,6 +229,7 @@ input#office_address {
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family:var(--font-family-sans-serif);
 }
 input#current_address {
     outline: none;
@@ -235,6 +243,7 @@ input#current_address {
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family:var(--font-family-sans-serif);
 }
 input#contact_number_one {
     outline: none;
@@ -248,6 +257,7 @@ input#contact_number_one {
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family:var(--font-family-sans-serif);
 }
 input#contact_number_two {
     outline: none;
@@ -261,6 +271,7 @@ input#contact_number_two {
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family:var(--font-family-sans-serif);
 }
 input#whatsapp_number {
     outline: none;
@@ -274,6 +285,7 @@ input#whatsapp_number {
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family:var(--font-family-sans-serif);
 }
 input#email {
     outline: none;
@@ -287,6 +299,7 @@ input#email {
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
+    font-family:var(--font-family-sans-serif);
 }
 .delete_content{
     animation: fncolor 6s infinite;
@@ -315,6 +328,7 @@ input#email {
     }
 }
 button.supplier_data_box {
+    font-family: var(--font-family-sans-serif);
     color: black;
     font-weight: 700;
     background-color: #f1f1f1;
@@ -342,6 +356,7 @@ input#delete_supplier_id {
     font-family: sans-serif;
 }
 label.search.ser_labe {
+    font-family: var(--font-family-sans-serif);
     color: black;
     font-weight: 600;
 }
@@ -464,6 +479,8 @@ td#supp_tab4 {
 th#th_sort {
     background-color: aliceblue;
     opacity: 10;
+    font-weight: 700;
+    font-family: var(--font-family-sans-serif);
 }
 #staticBackHead{
     font-size: 12px;
@@ -536,6 +553,7 @@ input#supplier_search {
     background: linear-gradient(to top, rgb(5, 5, 248), transparent 3%, rgb(5, 5, 248), rgb(5, 5, 248));
     color: white;
     animation: text_color 3s infinite;
+    font-family: var(--font-family-sans-serif);
 }
 @keyframes text_color {
     50% {
@@ -601,7 +619,7 @@ select> option:hover{
     font-size: 19px;
     font-weight: 600;
     font-variant: all-petite-caps;
-    color: black;
+    color: darkgoldenrod;
     margin-top: -0.3em;
     font-family: sans-serif;
 }

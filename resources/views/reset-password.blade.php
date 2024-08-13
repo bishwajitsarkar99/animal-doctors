@@ -28,6 +28,37 @@
             <span class="skeleton"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
             <span class="skeleton">{{setting('company_name')}}</span>
         </p>
+        <p class="address skeleton">{{setting('company_address')}}</p>
+        <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
+            <a class="menu_btn" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <span class="menu_icon"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
+            </a>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h6 id="offcanvasRightLabel">Auth-Menu</h6>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-toggle="tooltip"  data-bs-placement="left" title="Close" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="group__button">
+                        <li class="mt-2">
+                            <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
+                                <span class="btn-text"> Forget-Password</span>
+                            </a>
+                        </li>
+                        <li class="mt-2">
+                            <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
+                                <span class="btn-text"> User-Register</span>
+                            </a>
+                        </li>
+                        <li class="mt-2">
+                            <a type="submit" href="/" class="btn btn-sm" id="logn_page">
+                                <span class="btn-text"> User-Login</span>
+                            </a>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </p>
     </nav>
 </header>
 
@@ -37,11 +68,9 @@
     </div>
     <div class="hero-image">
         <div class="hero-text heading">
-            <h1 class="company_heading" style="font-size:50px;color:darkblue;text-align:left">
-                <i class="fa-solid fa-stethoscope fa-beat-fade"></i>
-                <span class="skeleton">{{setting('company_name')}}</span>
+            <h1 class="company_heading" style="font-size:25px;color:darkblue;text-align:left">
+                <span class="skeleton">{{setting('reset_page_sub_title')}}</span>
             </h1>
-            <p class="address skeleton ps-2">{{setting('company_address')}}</p>
         </div>
     </div>
 
@@ -51,7 +80,7 @@
                 <h4 class="heading_admin_login text-shadow" style="text-align: center;">
                     <span class="skeleton">{{setting('reset_page_title')}}</span>
                 </h4>
-                <div class="card card-form-control">
+                <div class="">
                     <form action="{{ route('password.reset') }}" method="POST">
                         @csrf
                         @method("PUT")
@@ -76,15 +105,15 @@
                                                     <input type="hidden" name="token" value="{{request()->input('token')}}" />
                                                     <div class="mb-2">
                                                         <label for="email" class="form-label skeleton lb_text">Email</label>
-                                                        <input type="email" id="email" style="border: 1px solid rgba(0, 0, 0, 0.2);" class="form-control form-control-sm" name="email" placeholder="Enter Your Email" required="" value="{{request()->input('email')}}" readonly="" />
+                                                        <input type="email" id="email" style="border: 1px solid rgba(0, 0, 0, 0.2);" class="" name="email" placeholder="Enter Your Email" required="" value="{{request()->input('email')}}" readonly="" />
                                                     </div>
                                                     <div class="mb-2">
                                                         <label for="email" class="form-label skeleton lb_text">Password</label>
-                                                        <input type="password" style="border: 1px solid rgba(0, 0, 0, 0.2);" class="form-control form-control-sm inpt_pass" name="password" placeholder="Enter Password" required="">
+                                                        <input type="password" style="border: 1px solid rgba(0, 0, 0, 0.2);" class="inpt_pass" name="password" placeholder="Enter Password" required="" autofocus>
                                                     </div>
                                                     <div class="mb-2">
                                                         <label for="email" class="form-label skeleton lb_text">Conform Password</label>
-                                                        <input type="password" style="border: 1px solid rgba(0, 0, 0, 0.2);" class="form-control form-control-sm inpt_pass" name="password_confirmation" placeholder="Enter Confirm Password" required="">
+                                                        <input type="password" style="border: 1px solid rgba(0, 0, 0, 0.2);" class="inpt_pass" name="password_confirmation" placeholder="Enter Confirm Password" required="">
                                                     </div>
                                                     <div class="mb-2 d-grid">
                                                         <button type="submit" class="btn btn-sm btn-primary forget_button register_btn">
@@ -135,6 +164,11 @@
         setTimeout(() => {
             fetchData();
         }, 1000);
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
     </script>
 </body>
 

@@ -1,14 +1,4 @@
 (function($){
-    // Register page loader----------
-    window.addEventListener('load',function(){
-        const loader = document.querySelector(".loader");
-        loader.className += " hidden";
-    });
-    // Login page loader----------
-    window.addEventListener('load',function(){
-        const loader = document.querySelector(".loader-login");
-        loader.className += " log_close";
-    });
     // Login page src-loader input field----------
     $(".email_src").on('keyup', () =>{
         $('.src_email').removeClass('src_email-hidden');

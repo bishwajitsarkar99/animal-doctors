@@ -24,8 +24,21 @@ div.url_link{
 .container-background{
     opacity: 1;
 }
-.skeleton{
+.skeleton,.menus-skeleton,.mini-skeleton,.email-input-skeleton,.heading-skeleton{
     position: relative;
+}
+.heading-skeleton::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 100%;
+    height: 50px;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg,#b3b3b3,#f9f9f9,#b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
 }
 .skeleton::before{
     content: "";
@@ -34,6 +47,46 @@ div.url_link{
     top: 0;
     width: 100%;
     height: 100%;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg,#b3b3b3,#f9f9f9,#b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.menus-skeleton::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -16px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.mini-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: -2px;
+    width: 55px;
+    height: 20px;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg,#b3b3b3,#f9f9f9,#b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.email-input-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -305px;
+    top: -8px;
+    width: 305px;
+    height: 30px;
+    border-radius: 3px;
     z-index: 10;
     background: linear-gradient(90deg,#b3b3b3,#f9f9f9,#b3b3b3);
     background-size: 200%;
@@ -58,19 +111,30 @@ div.url_link{
     color: darkblue;
 }
 input.inpt_pass{
-    background-image: var(--input-background);
+    font-size: 14px;
     color: darkblue;
-    font-weight: 700;
-    font-size: 13px;
+    min-height: calc(.8em + 0.5rem + .8px);
+    padding: 0.10rem 0.5rem;
+    border-radius: 0.25rem;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    opacity: 1;
+    width: 100%;
+}
+input.inpt_pass:focus{
+    border: 1px solid rgb(5, 5, 248);
+    opacity: 1;
 }
 input.inpt_pass::placeholder{
-    color: darkblue;
+    color: gray;
 }
 button.btn.btn-sm.btn.forget_button {
-    background-color: darkblue;
+    background: linear-gradient(to bottom, rgb(5, 5, 248), transparent 3%, rgb(5, 5, 248), rgb(5, 5, 248));
     color: darkkhaki;
+    border-color: rgb(5, 5, 248);
     font-weight: 600;
     letter-spacing: 0.5px;
+    width: 100%;
     border-radius: 5px;
     animation: text_font_color 5s infinite;
 }
@@ -79,21 +143,22 @@ button.btn.btn-sm.btn.forget_button {
         color: silver;
     }
     100%{
-        color: whitesmoke;
+        color: white;
     }
 }
 
 a.btn_bg {
-    background-color: royalblue;
+    background: linear-gradient(to bottom, rgb(5, 5, 248), transparent 3%, rgb(5, 5, 248), rgb(5, 5, 248));
+    border: 1px solid rgb(5, 5, 248);
     border-radius: 5px;
     font-weight: 600;
     color: white;
     text-decoration: none;
 }
 a.btn_bg:hover{
-    background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
-    border: none;
-    color: darkblue;
+    background: linear-gradient(to bottom, rgb(5, 5, 248), transparent 3%, rgb(5, 5, 248), rgb(5, 5, 248));
+    border: 1px solid rgb(5, 5, 248);
+    color: white;
 }
 @media(min-width:400px) and (max-width:580px){
     .lb_text {

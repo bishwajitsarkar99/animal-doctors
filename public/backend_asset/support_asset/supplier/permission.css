@@ -1,7 +1,7 @@
 :root{
-    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue,transparent 80%,rgba(0, 0, 0, 0.05) 100%);
+    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, transparent 80%,rgba(0, 0, 0, 0.05) 100%);
     /* --table-row-hover:linear-gradient(to right, rgb(5, 5, 248),rgb(5, 5, 248), rgb(5, 5, 248)); */
-    --bg-color:purple;
+    --bg-color:darkgoldenrod;
     --color:white;
     --size:1px;
     --font-weight:500;
@@ -355,8 +355,18 @@ a.canl_button:hover, button#PermissionCancel:hover {
 button#PermissionSubmit:hover, button#refresh:hover, button#supplierModule:hover {
     color: lightblue;
 }
-button#PermissionSubmit, button#PermissionUpdate, button#confirm_btn, button#confirm_delete_btn, button#supplierModule {
+button#PermissionSubmit, button#PermissionUpdate, button#supplierModule {
     min-height: 24px;
+    background-image: linear-gradient(to top, darkblue, rgb(5, 5, 248), rgb(5, 5, 248));
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    line-height: .6;
+    font-family: sans-serif;
+}
+button#confirm_delete_btn, button#confirm_btn{
+    min-height: 20px;
     background-image: linear-gradient(to top, darkblue, rgb(5, 5, 248), rgb(5, 5, 248));
     border: none;
     font-size: 14px;
@@ -414,7 +424,7 @@ select#perItemControls {
     font-weight: 600;
     cursor: pointer;
     border-radius: 3px;
-    border: none;
+    border: 1px solid darkblue;
     width: 49px;
     background: linear-gradient(to bottom, rgb(5, 5, 248), transparent 3%, rgb(5, 5, 248), rgb(5, 5, 248));
 }

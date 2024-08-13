@@ -29,12 +29,12 @@
             text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
         }
         .tracking-wider.error-code-darkgreen{
-            background-image: linear-gradient(120deg,darkslategray,gray 100%);
+            background-image: linear-gradient(90deg,white,#eecd18 100%);
             background-size: 200% 100%;
             background-position: 100% 0;
             font-family: futura;
             font-size: 6vw;
-            color: lightgray;
+            color: darkslategray;
             border-radius: 50%;
             background-color: white;
             border-color: white;
@@ -89,22 +89,22 @@
                 <div class="card p-4 rounded-4">
                     <div class="row">
                         @auth
-                            <h4 class="display-6 text-bold" style="color:darkslategray;font-size: 1.5vw;font-weight: 700;">You are not able to access the page !</h4>
+                            <h4 class="display-6 text-bold" style="color:black;font-size: 1.5vw;font-weight: 700;">You are not able to access the page !</h4>
                         @endauth
                         <div class="col-xl-3">
                             @auth
                                 <img class="img-profile rounded-circle" id="output" src="/image/{{auth()->user()->image}}" alt="error-image"><br>
                                 <span class="display-6 text-bold fw-6 text-lg text-gray-500 user" style="color:darkslategray;font-weight: 700;">User</span><br>
-                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 auth_user" style="color:darkslategray;font-weight: 700;">Name : {{ auth()->user()->name}}</span><br>
-                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 auth_user" style="color:darkslategray;font-weight: 700;">Email : {{ auth()->user()->email}}</span>
+                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 auth_user" style="color:black;font-weight: 700;">Name : {{ auth()->user()->name}}</span><br>
+                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 auth_user" style="color:black;font-weight: 700;">Email : {{ auth()->user()->email}}</span>
                             @else
                                 <img class="img-profile rounded-circle" id="output" src="/image/828.jpg" alt="user-image"><br>
-                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 user" style="color:darkslategray;">User</span>
+                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 user" style="color:black;">User</span>
                             @endauth
                         </div>
                         <div class="col-xl-6">
                             @auth
-                                <img class="img-profile" style="width:200px;height:200px;" src="/image/supplier/box-truck-supplier.png" alt="error-image">
+                                <img class="img-profile" style="width:200px;height:200px;" src="/image/418.jpg" alt="error-image">
                             @endauth
                         </div>
                         <div class="col-xl-3">
@@ -112,9 +112,9 @@
                                 <h1 class="mt-2  display-1 fw-6 px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider error-code-darkgreen">418</h1>
                             @endauth
                         </div>
-                        <div class="ml-4 text-lg text-gray-500 uppercase tracking-wider error-message" style="color:darkslategray;">
+                        <div class="ml-4 text-lg text-gray-500 uppercase tracking-wider error-message" style="color:black;">
                             @auth
-                                <span style="color:#eecd18;font-size: 3vw;"><strong>Supplier</strong></span> information permission is blocked.</span>                 
+                                <span style="color:orange;font-size: 3vw;"><strong>Data View</strong></span> information is blocked.</span>                 
                             @endauth   
                         </div>
                     </div>

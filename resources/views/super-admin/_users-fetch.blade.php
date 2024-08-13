@@ -69,7 +69,7 @@
                 }
                 else if(row.status == 0){
                     statusClass = 'text-cyan';
-                    statusText = '✅ Authorize';
+                    statusText = '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span> Authorize';
                     statusColor = 'color:black;background-color: #ecfffd;';
                     statusBg = 'badge rounded-pill bg-azure';
                 }
@@ -262,7 +262,6 @@
             var user_id = $(this).val();
             $('#edit_user_form').modal('show');
 
-
             $.ajax({
                 type: "GET",
                 url: "/edit-users/" + user_id,
@@ -289,33 +288,29 @@
         $(document).on('click', '.edit_btn', function(){
 
             var time = null;
+            $(".head_title").addClass('skeleton');
+            $(".cols_btn").addClass('skeleton');
             $("#edit_user_id").addClass('skeleton');
             $(".dvsecond").addClass('skeleton');
             $("#imgInput").addClass('skeleton');
-            $("#userUpdate").addClass('skeleton');
-            $("#editusr").addClass('skeleton');
-            $("#editusr2").addClass('skeleton');
-            $("#editusr3").addClass('skeleton');
-            $("#editusr4").addClass('skeleton');
-            $("#editusr5").addClass('skeleton');
-            $("#editusr6").addClass('skeleton');
-            $("#editusr7").addClass('skeleton');
-            $("#editusr8").addClass('skeleton');
-            $("#editusr9").addClass('skeleton');
+            $("#userUpdate").addClass('edit-skeleton');
+            $("#editusr").addClass('capsule-skeletone');
+            $("#editusr6").addClass('capsule-skeletone');
+            $("#editusr7").addClass('capsule-skeletone');
+            $("#editusr8").addClass('capsule-skeletone');
+            $("#editusr9").addClass('edit-skeleton');
             time = setTimeout(() => {
+                $(".head_title").removeClass('skeleton');
+                $(".cols_btn").removeClass('skeleton');
                 $("#edit_user_id").removeClass('skeleton');
                 $(".dvsecond").removeClass('skeleton');
                 $("#imgInput").removeClass('skeleton');
-                $("#userUpdate").removeClass('skeleton');
-                $("#editusr").removeClass('skeleton');
-                $("#editusr2").removeClass('skeleton');
-                $("#editusr3").removeClass('skeleton');
-                $("#editusr4").removeClass('skeleton');
-                $("#editusr5").removeClass('skeleton');
-                $("#editusr6").removeClass('skeleton');
-                $("#editusr7").removeClass('skeleton');
-                $("#editusr8").removeClass('skeleton');
-                $("#editusr9").removeClass('skeleton');
+                $("#userUpdate").removeClass('edit-skeleton');
+                $("#editusr").removeClass('capsule-skeletone');
+                $("#editusr6").removeClass('capsule-skeletone');
+                $("#editusr7").removeClass('capsule-skeletone');
+                $("#editusr8").removeClass('capsule-skeletone');
+                $("#editusr9").removeClass('edit-skeleton');
             }, 1000);
             return ()=>{
                 clearTimeout(time);
@@ -346,7 +341,54 @@
 
             });
         });
+        $(document).on('click', '#viewBtn', function(e){
+            e.preventDefault();
+            var time = null;
+            $(".head_modal").addClass('skeletone'); 
+            $(".cols_btn").addClass('skeletone');
+            $(".field_skeletone_one").addClass('capsule-skeletone');
+            $(".field_skeletone_two").addClass('capsule-skeletone');
+            $(".field_skeletone_three").addClass('capsule-skeletone');
+            $(".field_skeletone_four").addClass('capsule-skeletone');
+            $(".image_skeletone").addClass('image-skeletone');
 
+            time = setTimeout(() => {
+                $(".head_modal").removeClass('skeletone'); 
+                $(".cols_btn").removeClass('skeletone');
+                $(".field_skeletone_one").removeClass('capsule-skeletone');
+                $(".field_skeletone_two").removeClass('capsule-skeletone');
+                $(".field_skeletone_three").removeClass('capsule-skeletone');
+                $(".field_skeletone_four").removeClass('capsule-skeletone');
+                $(".image_skeletone").removeClass('image-skeletone');
+            }, 1000);
+            
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
+        // Update Users Confirm Modal-------------------------
+        $(document).on('click', '.update_btn_confrm', function(e){
+            e.preventDefault();
+            $('#updateconfirmuser').modal('show');
+
+            $("#update_btn_confirm").addClass('edit-skeleton');
+            $("#cate_delete5").addClass('edit-skeleton');
+            $("#cate_confirm_update").addClass('edit-skeleton');
+            $(".update_title").addClass('skeleton');
+            $(".head_btn3").addClass('skeleton');
+            var time = null;
+            time = setTimeout(() => {
+                $(".update_title").removeClass('skeleton');
+                $(".head_btn3").removeClass('skeleton');
+                $("#update_btn_confirm").removeClass('edit-skeleton');
+                $("#cate_delete5").removeClass('edit-skeleton');
+                $("#cate_confirm_update").removeClass('edit-skeleton');
+            }, 1000);
+
+            return () => {
+                clearTimeout(time);
+            }
+        });
         // Update Users-------------------------
         $('.update_btn').on('click', function(e) {
             e.preventDefault();
@@ -384,22 +426,21 @@
                         console.log(response);
                         $('#updateForm_errorList').html("");
                         $('#success_message').html("");
-                        $('#edit_user_form').modal('hide');
                         $('#success_message').fadeIn();
                         $('#success_message').addClass('account_Update_message');
                         $('#success_message').text(response.messages);
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
-                        if(fetch_users_setting_data()){
-
-                        }
+                        fetch_users_setting_data();
+                        $('#edit_user_form').modal('hide');
+                        $('#updateconfirmuser').modal('hide');
                     }
                 }
             });
 
         });
-        // Delete Users-------------------------
+        // Delete Users Modal-------------------------
         $(document).on('click', '.delete_button', function(e) {
             e.preventDefault();
             var user_id = $(this).val();
@@ -407,23 +448,51 @@
             $('#deletecategory').modal('show');
 
             var time = null;
+            $(".head_title").addClass('skeleton');
+            $(".clos_btn").addClass('skeleton');
             $("#usrdelt").addClass('skeleton');
             $("#usrdelt2").addClass('skeleton');
             $("#usrdelt3").addClass('skeleton');
-            $("#usrdelt4").addClass('skeleton');
             $("#usrdelt5").addClass('skeleton');
-            $("#deleteLoader").addClass('skeleton');
+            $("#yesButton").addClass('delete-skeletone');
+            $("#noButton").addClass('delete-skeletone');
 
             time = setTimeout(() => {
+                $(".head_title").removeClass('skeleton');
+                $(".clos_btn").removeClass('skeleton');
                 $("#usrdelt").removeClass('skeleton');
                 $("#usrdelt2").removeClass('skeleton');
                 $("#usrdelt3").removeClass('skeleton');
                 $("#usrdelt4").removeClass('skeleton');
-                $("#usrdelt4").removeClass('skeleton');
                 $("#usrdelt5").removeClass('skeleton');
-                $("#deleteLoader").removeClass('skeleton');
+                $("#yesButton").removeClass('delete-skeletone');
+                $("#noButton").removeClass('delete-skeletone');
 
             }, 1000);
+        });
+        // Confirm Delete Modal
+        $(document).on('click', '.yes_button', function(e){
+            e.preventDefault();
+            $('#deleteuser').modal('show');
+            $("#supp_delt3").addClass('skeleton');
+            $("#cate_confirm").addClass('skeleton');
+            $(".clos_btn2").addClass('skeleton');
+            $(".head_btn2").addClass('skeleton');
+            $("#usrdelt4").addClass('edit-skeleton');
+            $("#deleteLoader").addClass('edit-skeleton');
+            var time = null;
+            time = setTimeout(() => {
+                $(".clos_btn2").removeClass('skeleton');
+                $(".head_btn2").removeClass('skeleton');
+                $("#supp_delt3").removeClass('skeleton');
+                $("#cate_confirm").removeClass('skeleton');
+                $("#usrdelt4").removeClass('edit-skeleton');
+                $("#deleteLoader").removeClass('edit-skeleton');
+            }, 1000);
+
+            return () => {
+                clearTimeout(time);
+            }
         });
         $(document).on('click', '.delet_btn_user', function(e) {
             e.preventDefault();
@@ -446,7 +515,7 @@
                         $('#success_message').fadeOut();
                     }, 3000);
                     $('#deletecategory').modal('hide');
-
+                    $('#deleteuser').modal('hide');
                     fetch_users_setting_data();
                 }
 
