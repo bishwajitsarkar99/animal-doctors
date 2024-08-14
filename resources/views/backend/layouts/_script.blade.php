@@ -22,6 +22,18 @@
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
 </script>
+<script>
+    window.addEventListener('load', function() {
+        const loader = document.querySelector(".loader-login");
+        const loaderModal = new bootstrap.Modal(document.getElementById('loaderModalForm'));
+
+        loaderModal.show();
+        loader.className += " log_close";
+        setTimeout(function() {
+            loaderModal.hide();
+        }, 1000);
+    });
+</script>
 <!-- Dashboard page loader -->
 <script src="{{asset('backend_asset')}}/main_asset/js/loader-js/loader.min.js"></script>
 

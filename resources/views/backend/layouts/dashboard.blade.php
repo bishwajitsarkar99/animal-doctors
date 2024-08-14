@@ -23,8 +23,16 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid bg-transparent px-4" id="main_content">
-                    <div class="loader close">
-                        <img src="{{asset('/image/loader/load-30.gif')}}" alt="Loading...." />
+                    <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                            <div class="modal-content small_modal loader_modal" style="border:none;" id="admin_modal_box">
+                                <div class="modal-body" id="loaderModal_body">
+                                    <div class="loader-login">
+                                        <img class="modal-loader" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     @yield('content')
                 </div>

@@ -1,26 +1,27 @@
 <script>
     $(document).ready(function(){
-        $(document).on('click', '#profile_urllinks', function(){
+        $(document).on('click', '#profile_urllinks', function(e){
+            e.preventDefault();
+            $("#loader_profile_modal").modal('show');
             $("#profile_form").modal('show');
             $("#pro_image").addClass('image-skeleton');
-            $("#pro_para").addClass('image-skeleton');
             $("#pro_com_name").addClass('image-skeleton');
-            $("#com_address").addClass('image-skeleton');
+            $("#com_address").addClass('address-skeleton');
             $("#info").addClass('image-skeleton');
             $("#info2").addClass('image-skeleton');
-            $("#info3").addClass('image-skeleton');
-            $("#info4").addClass('image-skeleton');
+            $(".btn-close").addClass('image-skeleton');
+            $(".admin_title").addClass('heding-skeleton');
 
             var time = null;
             time = setTimeout(() => {
+                $("#loader_profile_modal").modal('hide');
                 $("#pro_image").removeClass('image-skeleton');
-                $("#pro_para").removeClass('image-skeleton');
                 $("#pro_com_name").removeClass('image-skeleton');
-                $("#com_address").removeClass('image-skeleton');
+                $("#com_address").removeClass('address-skeleton');
                 $("#info").removeClass('image-skeleton');
                 $("#info2").removeClass('image-skeleton');
-                $("#info3").removeClass('image-skeleton');
-                $("#info4").removeClass('image-skeleton');
+                $(".btn-close").removeClass('image-skeleton');
+                $(".admin_title").removeClass('heding-skeleton');
             }, 1000);
 
             return ()=>{

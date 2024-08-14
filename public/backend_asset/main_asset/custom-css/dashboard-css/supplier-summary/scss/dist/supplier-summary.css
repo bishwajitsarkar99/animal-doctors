@@ -102,10 +102,16 @@ input.select_dateOne {
   outline: none;
   border: 1px solid silver;
   font-weight: 600;
-  background-image: var(--supplier-dashboard-background-image);
+  border-radius: 3px;
   animation: drop_font_focus 5s linear infinite;
 }
-
+button.btn.btn-sm.btn-success.ser_btn {
+  background: royalblue;
+  font-size: 12px;
+  font-family: sans-serif;
+  font-weight: 700;
+  margin-top: -6px;
+}
 table.supplier_table, th, td {
   background-image: radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
   /* box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001; */

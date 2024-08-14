@@ -1,6 +1,6 @@
-<div class="modal-header" id="logoutModal_header">
+<div class="modal-header" id="logoutModal_header" style="background: transparent;background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);border-bottom: double white;">
     <span class="pro_image"><img class="img-profile rounded-circle" id="output" src="/image/{{auth()->user()->image}}"></span>
-    <h6 class="modal-title admin_title scan ms-3 pt-1" id="staticBackdropLabel">
+    <h6 class="modal-title admin_title scan ms-3 pt-1" id="staticBackdropLabel" style="color:black;">
         @if(auth()->user()->role ==1)
             Super Admin
         @endif
@@ -27,10 +27,21 @@
         data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
     </button>
     </div>
-    <div class="modal-body" id="logoutModal_body">
-        <p class="admin_paragraph" id="text_message">{{auth()->user()->name}}, {{__('translate.do you want to logout')}} ?</p>
+    <div class="modal-body" id="logoutModal_body" style="background: transparent;background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);border-bottom: double white;">
+        <p class="admin_paragraph" id="text_message" style="color:black;font-weight:700;">{{auth()->user()->name}}, {{__('translate.do you want to logout')}} ?</p>
+        <div class="modal fade" id="loader_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content small_modal loader_modal" style="border:none;" id="admin_modal_box">
+                    <div class="modal-body" id="loader_modalBody">
+                        <div class="loader-login close_loader_modal">
+                            <img class="modal-loader" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="modal-footer" id="logoutModal_footer">
+    <div class="modal-footer" id="logoutModal_footer" style="background: transparent;background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);">
         <p id="btn_group">
             <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal">{{__('translate.Cancel')}}</a>
         </p>
@@ -40,6 +51,6 @@
                 <span class="btn-text">{{__('translate.Yes')}}</span>
             </a>
         </p>
-    </div>    
+    </div>   
 </div>
 
