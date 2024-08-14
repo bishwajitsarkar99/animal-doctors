@@ -270,17 +270,17 @@
             });
         }
         setTimeout(() => {
-            // headSkeleton();
-            // logo();
-            // fetchData();
-            // emailLabel();
-            // menuSkeleton();
-            // whatsAppSkeleton();
-            // messengerSkeleton();
-            // facebookSkeleton();
-            // inputEmailSkeleton();
-            // inputPasswordSkeleton();
-            // buttonSkeleton();
+            headSkeleton();
+            logo();
+            fetchData();
+            emailLabel();
+            menuSkeleton();
+            whatsAppSkeleton();
+            messengerSkeleton();
+            facebookSkeleton();
+            inputEmailSkeleton();
+            inputPasswordSkeleton();
+            buttonSkeleton();
         }, 2000);
     </script>
     <script>
@@ -309,7 +309,7 @@
             loaderModal.show();
             loader.className += " log_close";
             setTimeout(function() {
-                //loaderModal.hide();
+                loaderModal.hide();
             }, 2000);
         });
     </script>

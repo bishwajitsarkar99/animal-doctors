@@ -1,6 +1,6 @@
 :root{
     /* ========= silver color bg focus in pivot table ================== */
-    --theme-dashboard-expenses-page-navbar-bacground-image:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --theme-dashboard-expenses-page-navbar-bacground-image:linear-gradient(0.5deg, silver, transparent,silver,lightgray);
     --theme-dashboard-expenses-page-background-image:radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
     --theme-dashboard-expenses-page-background-image2:radial-gradient(farthest-corner at 100px 100px, #fff,#fff);
     --theme-dashboard-expenses-page-background-image3:radial-gradient(farthest-corner at 100px 100px, #fff,#fff);

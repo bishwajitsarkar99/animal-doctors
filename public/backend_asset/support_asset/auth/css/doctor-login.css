@@ -24,7 +24,8 @@ div.url_link{
 .container-background{
     opacity: 1;
 }
-.skeleton,.menus-skeleton,.mini-skeleton,.email-input-skeleton,.heading-skeleton{
+.skeleton,.menus-skeleton,.mini-skeleton,.email-input-skeleton,.heading-skeleton,.menu-rest-skeleton,.heading-rest-skeleton,
+.rest-email-skeleton,.rest-password-skeleton,.rest-confirm-password-skeleton{
     position: relative;
 }
 .heading-skeleton::before{
@@ -66,6 +67,19 @@ div.url_link{
     background-size: 200%;
     animation: skeleton 1s infinite reverse;
 }
+.menu-rest-skeleton::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -12px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
 .mini-skeleton::before{
     content: "";
     position: absolute;
@@ -92,6 +106,55 @@ div.url_link{
     background-size: 200%;
     animation: skeleton 1s infinite reverse;
 }
+.heading-rest-skeleton::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 100%;
+    height: 50px;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg,#b3b3b3,#f9f9f9,#b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.rest-email-skeleton::before {
+    content: "";
+    position: absolute;
+    left: -34px;
+    top: 26px;
+    width: 305px;
+    height: 30px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.rest-password-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -54px;
+    top: 26px;
+    width: 305px;
+    height: 30px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.rest-confirm-password-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -108px;
+    top: 27px;
+    width: 305px;
+    height: 30px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
 @keyframes skeleton{
     0%{
         background-position: -100% 0;
@@ -100,7 +163,9 @@ div.url_link{
         background-position: 100% 0;
     }
 }
-
+h6.head_auth {
+    margin-left: 16px;
+}
 .card.forget_card {
     box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
     font-family: 'FontAwesome';

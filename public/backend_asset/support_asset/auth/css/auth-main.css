@@ -9441,7 +9441,14 @@ span.bg-text {
 .src_email-hidden{
   display: none;
 }
+/* @media(min-width:300px) and (max-width:400px){
+
+} */
 @media(min-width:400px) and (max-width:600px){
+  header.sticky-top {
+    position: sticky;
+    width: 100%;
+  }
   .headings-skeleton::before {
     top: -6px;
   }
