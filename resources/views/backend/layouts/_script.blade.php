@@ -43,7 +43,7 @@
 <!-- <script src="{{asset('backend_asset')}}/main_asset/demo/order-chart-line.js"></script> -->
 <script src="{{asset('backend_asset')}}/main_asset/demo/expenses-chart-line.js"></script>
 <script src="{{asset('backend_asset')}}/main_asset/demo/chart-bar-demo.js"></script>
-<script src="{{asset('backend_asset')}}/main_asset/demo/product-chart-area-demo.js"></script>
+<!-- <script src="{{asset('backend_asset')}}/main_asset/demo/product-chart-area-demo.js"></script> -->
 <script src="{{asset('backend_asset')}}/main_asset/demo/table-chart-demo.js"></script>
 <!-- Summar-Note -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>

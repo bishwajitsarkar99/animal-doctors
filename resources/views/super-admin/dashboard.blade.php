@@ -37,6 +37,32 @@
 @include('backend.layouts.dashboard-area-parts.order-area-body-parts.handler-ajax._order-handler')
 @include('backend.layouts.dashboard-area-parts.sales-area-body-parts.handler-ajax._sales-handler')
 @include('backend.layouts.dashboard-area-parts.expenses-area-body-parts.handler-ajax._expenses-handler')
+<script type="text/javascript">
+    // Plugin Result PieChart in Ajax ================== -->
+    google.charts.load("current", {
+        packages: ["corechart"]
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Count'],
+            ['Products', {{ $product_counts }}],
+            ['Categories', {{ $category_counts }}],
+            ['Sub-Categories', {{ $subCategory_counts }}],
+            ['Brands', {{ $brand_counts }}]
+        ]);
+
+        var options = {
+            title: 'Product Position is given below - ',
+            is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+    }
+</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
     // skeleton
     function fetchData(){

@@ -1,6 +1,6 @@
 <div class="modal-header" id="logoutModal_header" style="background: transparent;background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);border-bottom: double white;">
     <span class="pro_image"><img class="img-profile rounded-circle" id="output" src="/image/{{auth()->user()->image}}"></span>
-    <h6 class="modal-title admin_title scan ms-3 pt-1" id="staticBackdropLabel" style="color:black;">
+    <h6 class="modal-title admin_title logout-modal-title ms-3 pt-1" id="staticBackdropLabel" style="color:black;">
         @if(auth()->user()->role ==1)
             Super Admin
         @endif
@@ -24,11 +24,11 @@
         @endif
     </h6>
     <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" 
-        data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="logoutCancel">
     </button>
     </div>
     <div class="modal-body" id="logoutModal_body" style="background: transparent;background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);border-bottom: double white;">
-        <p class="admin_paragraph" id="text_message" style="color:black;font-weight:700;">{{auth()->user()->name}}, {{__('translate.do you want to logout')}} ?</p>
+        <p class="admin_paragraph" id="logout_text_message" style="color:black;font-weight:700;">{{auth()->user()->name}}, {{__('translate.do you want to logout')}} ?</p>
         <div class="modal fade" id="loader_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content small_modal loader_modal" style="border:none;" id="admin_modal_box">
@@ -42,10 +42,10 @@
         </div>
     </div>
     <div class="modal-footer" id="logoutModal_footer" style="background: transparent;background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);">
-        <p id="btn_group">
+        <p id="logout_btn_group">
             <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal">{{__('translate.Cancel')}}</a>
         </p>
-        <p id="btn_group2">
+        <p id="logout_btn_group2">
             <a href="/logout" type="button" class="btn btn-success modal_button logout_button" id="submitbtn">
                 <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
                 <span class="btn-text">{{__('translate.Yes')}}</span>

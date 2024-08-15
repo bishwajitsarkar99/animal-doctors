@@ -247,7 +247,7 @@
                 <button type="button" class="btn-close btn-btn-sm cols_title" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
             </div>
 
-            <div class="modal-body profile-body pb-1">
+            <div class="modal-body profile-body pb-1" style="background-color:seashell;">
 
                 <div class="row profile-heading pb-3">
                     <div class="col-xl-12">
