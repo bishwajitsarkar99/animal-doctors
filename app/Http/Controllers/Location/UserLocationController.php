@@ -4,18 +4,36 @@ namespace App\Http\Controllers\Location;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Stevebauman\Location\Facades\Location;
+use App\Models\SessionModel;
 
 class UserLocationController extends Controller
 {
-    // User Loaction
-    public function location(Request $request)
+    // User Activity Loaction
+    public function activity()
     {
-        
-        $serverReport = $request->ip();
-        $userLocation = Location::get($serverReport);
-        dd($userLocation);
+        return view('super-admin.user-activity.activity');
+    }
 
-        return view('super-admin.user-location.location', compact('userLocation'));
+    // Get User Activity
+    public function getActivity(Request $request)
+    {
+        $user_activities = SessionModel::whereNotNull('role')->orderBy('id', 'desc')->with('roles')->get();
+
+        if ($query = $request->get('query')) {
+            $users->where('name', 'LIKE', '%' . $query . '%')
+                ->orWhere('email', 'LIKE', '%' . $query . '%')
+                ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
+                ->orWhere('role', 'LIKE', '%' . $query . '%')
+                ->orWhere('id', 'LIKE', '%' . $query . '%');
+        }
+
+        $perItem = 10;
+        if($request->input('per_item')){
+            $perItem = $request->input('per_item');
+        }
+
+        $users = $users->paginate($perItem)->toArray();
+
+        return response()->json($users, 200);
     }
 }

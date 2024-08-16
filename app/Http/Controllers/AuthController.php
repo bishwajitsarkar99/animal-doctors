@@ -83,30 +83,22 @@ class AuthController extends Controller
             
             // Get the authenticated user's details
             $user = Auth::user();
-            $name = $user->name;
-            $email = $user->email;
-            $role = $user->role ?? '-';
-            $email_verified_at = $user->email_verified_at;
-            $contract_number = $user->contract_number ?? '-';
-            $created_at = $user->created_at;
-            $updated_at = $user->updated_at;
 
             DB::table('sessions')->insert([
                 'id' => $sessionId,
-                'user_id' => Auth::id(),
+                'user_id' => $user->id,
                 'ip_address' => $request->ip(),
+                'name' => $user->name,
+                'email' => $user->email,
+                'role' => $user->role ?? '-',
+                'email_verified_at' => $user->email_verified_at,
+                'contract_number' => $user->contract_number ?? '-',
+                'image' => $user->image ?? '-',
+                'status' => $user->status ?? '-',
+                'account_create' => $user->created_at,
+                'account_last_update' => $user->updated_at,
                 'user_agent' => $request->userAgent(),
-                'payload' => json_encode([
-                    'users' => [
-                        'name' => $name,
-                        'email' => $email,
-                        'role' => $role,
-                        'email_verified_at' => $email_verified_at,
-                        'contract_number' => $contract_number,
-                        'created_at' => $created_at->toDateTimeString(),
-                        'updated_at' => $updated_at->toDateTimeString(),
-                    ]
-                ]),
+                'payload' => 'user login',
                 'last_activity' => now()->timestamp,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -220,7 +212,10 @@ class AuthController extends Controller
         DB::table('sessions')
         // ->where('user_id', Auth::id())
         ->where('id', $sessionId)
-        ->update(['updated_at' => now()]);
+        ->update([
+            'payload' => 'user logout',
+            'updated_at' => now()
+        ]);
 
         $request->session()->flush();
 
