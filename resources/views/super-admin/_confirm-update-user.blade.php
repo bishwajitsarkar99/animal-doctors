@@ -11,7 +11,7 @@
           data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
         </button>
         </div>
-        <div class="modal-body" id="logoutModal_body">
+        <div class="modal-body" id="logoutModal_body" style="background:aliceblue;">
           <p class="admin_paragraph" style="text-align:center;" id="text_message">
             <label class="label_user_edit" id="cate_confirm_update" for="id">Are you confirm or cancel ? </label>
           </p>

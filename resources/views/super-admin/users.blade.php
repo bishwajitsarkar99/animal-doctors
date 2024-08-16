@@ -51,7 +51,7 @@
                   <th id="th_sort" class="table_th_color tot_pending_ col skeleton">Check</th>
                   <th id="th_sort" class="table_th_color tot_pending_ ps-2  skeleton">Status</th>
                 </tr>
-                <tbody class="bg-transparent skeleton" id="user_data_table">
+                <tbody class="bg-transparent skeleton tab" id="user_data_table">
 
                 </tbody>
               </table>
@@ -106,14 +106,14 @@
         <button type="button" class="btn-close btn-btn-sm clos_btn" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
       </div>
 
-      <div class="modal-body profile-body pb-1">
+      <div class="modal-body profile-body pb-1" style="background:aliceblue;">
 
         <div class="row profile-heading pb-3">
           <div class="col-xl-12" id="usrdelt5">
             <div id="loader_userdelete" class="mt-1"></div>
             <div class="form-group delete_content" id="usrdelt">
               <label class="label_user_edit" for="id" id="usrdelt2">User-ID : </label>
-              <input type="text" class="mt-3 update_id id" id="user_id" readonly><br>
+              <input type="text" class="mt-3 update_id id" id="user_id" style="background:aliceblue;" readonly><br>
               <span class="label_user_edit" id="usrdelt3">Are you sure? Would you like to delete this user account, permanently?</span>
               <input type="hidden" id="user_id" name="user_id">
             </div>
@@ -148,7 +148,7 @@
               <button type="button" class="btn-close btn-btn-sm clos_btn2" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
           </div>
 
-          <div class="modal-body profile-body pb-1">
+          <div class="modal-body profile-body pb-1" style="background:aliceblue;">
             <div class="row profile-heading pb-3">
               <div class="col-xl-12">
                 <div class="form-group delete_content" id="supp_delt">

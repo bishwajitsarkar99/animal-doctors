@@ -11,7 +11,7 @@
             </div>
 
             <form id="userUpdateForm">
-                <div class="modal-body profile-body pb-1">
+                <div class="modal-body profile-body pb-1" style="background:aliceblue;">
                     <div class="row profile-heading pb-3">
                         <div class="col-xl-8">
                             <div class="form-group">

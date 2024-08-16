@@ -79,6 +79,10 @@ tr.user_setting:hover{
         color: darkblue;
     }
 }
+tr.clicked{
+    background-color: rgb(210, 255, 210);
+    opacity: 1;
+}
 .bg-transparent {
     opacity: 1;
     background-color: transparent !important;

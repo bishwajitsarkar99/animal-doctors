@@ -18,6 +18,10 @@
         }
     }
     $(document).ready(function() {
+        // ACtive table row background
+        $(document).on('click', 'tr.table-row', function(){
+            $(this).addClass("clicked").siblings().removeClass("clicked");
+        });
         // switch on/off----- users table search
         $("#search").hide();
         $(document).on('click', '#search_area', function() {

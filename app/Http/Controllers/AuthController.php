@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use App\Models\CompanyProfile;
 use Illuminate\Support\Facades\Password;
 
@@ -75,8 +77,43 @@ class AuthController extends Controller
 
         $userCredential = $request->only('email', 'password');
         if (Auth::attempt($userCredential)) {
-
             $route = $this->redirectDash();
+
+            $sessionId = Str::random(40);
+            
+            // Get the authenticated user's details
+            $user = Auth::user();
+            $name = $user->name;
+            $email = $user->email;
+            $role = $user->role ?? '-';
+            $email_verified_at = $user->email_verified_at;
+            $contract_number = $user->contract_number ?? '-';
+            $created_at = $user->created_at;
+            $updated_at = $user->updated_at;
+
+            DB::table('sessions')->insert([
+                'id' => $sessionId,
+                'user_id' => Auth::id(),
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'payload' => json_encode([
+                    'users' => [
+                        'name' => $name,
+                        'email' => $email,
+                        'role' => $role,
+                        'email_verified_at' => $email_verified_at,
+                        'contract_number' => $contract_number,
+                        'created_at' => $created_at->toDateTimeString(),
+                        'updated_at' => $updated_at->toDateTimeString(),
+                    ]
+                ]),
+                'last_activity' => now()->timestamp,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            session(['session_id' => $sessionId]);
+               
             return redirect($route);
         } else {
             return back()->with('error', 'Username & Password is incorrect');
@@ -179,7 +216,14 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        $sessionId = session('session_id');
+        DB::table('sessions')
+        // ->where('user_id', Auth::id())
+        ->where('id', $sessionId)
+        ->update(['updated_at' => now()]);
+
         $request->session()->flush();
+
         Auth::logout();
         return redirect('/');
     }
