@@ -14,10 +14,24 @@
     --inventory-navbar: linear-gradient(to 90deg, silver, transparent,silver,lightgray);
 
 }
+.nav {
+    --bs-nav-link-padding-x: 1rem;
+    --bs-nav-link-padding-y: 0.2rem;
+    --bs-nav-link-font-weight: ;
+    --bs-nav-link-color: var(--bs-link-color);
+    --bs-nav-link-hover-color: var(--bs-link-hover-color);
+    --bs-nav-link-disabled-color: #6c757d;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
 .nav-tabs {
     --bs-nav-tabs-border-width: 1px;
     --bs-nav-tabs-border-color:lightblue;
-    --bs-nav-tabs-border-radius: 0.375rem;
+    /* --bs-nav-tabs-border-radius: 0.375rem; */
+    --bs-nav-tabs-border-radius: 0.1rem;
     --bs-nav-tabs-link-hover-border-color: #e9ecef #e9ecef #dee2e6;
     --bs-nav-tabs-link-active-color: #495057;
     --bs-nav-tabs-link-active-bg: #fff;
@@ -174,8 +188,11 @@ span.permission-plate {
 td.eml {
     padding: 2px;
 }
-ul.nav.nav-tabs.tab_bg {
+/* ul.nav.nav-tabs.tab_bg {
     height: 36px;
+} */
+li.nav-item {
+    height: 25px;
 }
 .nav-link.setting.active{
     color: white;
@@ -437,9 +454,9 @@ select#perItemControls {
     box-sizing: border-box;
     justify-content: space-between;
     z-index: 2;
-    margin-left: 29px;
-    margin-top: 9px;
-    min-height: 22px;
+    margin-left: 8px;
+    margin-top: 3px;
+    min-height: 20px;
     width: 133px;
     border-radius: 5px;
     background: var(--dot-skeletone-bg);
@@ -480,8 +497,8 @@ select#perItemControls {
     justify-content: space-between;
     z-index: 2;
     margin-left: 348px;
-    margin-top: 9px;
-    min-height: 22px;
+    margin-top: 3px;
+    min-height: 20px;
     width: 133px;
     border-radius: 5px;
     background: var(--dot-skeletone-bg);
@@ -500,8 +517,8 @@ select#perItemControls {
     justify-content: space-between;
     z-index: 2;
     margin-left: 648px;
-    margin-top: 9px;
-    min-height: 22px;
+    margin-top: 3px;
+    min-height: 20px;
     width: 133px;
     border-radius: 5px;
     background: var(--dot-skeletone-bg);
@@ -532,9 +549,9 @@ select#perItemControls {
     box-sizing: border-box;
     justify-content: space-between;
     z-index: 2;
-    margin-left: 806px;
-    margin-top: 9px;
-    min-height: 23px;
+    margin-left: 794px;
+    margin-top: 3px;
+    min-height: 20px;
     width: 65px;
     border-radius: 5px;
     background: var(--dot-skeletone-bg);
@@ -651,9 +668,9 @@ td#supp_tab15 {
 }
 input#roleSearch {
     padding: 0.10rem 0.55rem;
-    margin-top: 7px;
+    margin-top: 1px;
     margin-left: 5px;
-    border-radius: 4px;
+    border-radius: 2px;
     border-color: lightblue;
     box-shadow: none;
     outline: none;
@@ -664,6 +681,11 @@ input#roleSearch {
     width: 222px;
     margin-right: 5px;
     font-family: sans-serif;
+}
+input#roleSearch:focus{
+    border-color: royalblue;
+    opacity: 1;
+    transition: 1s;
 }
 input#roleSearch::-webkit-input-placeholder{
     color: blue;
@@ -698,8 +720,8 @@ select> option:hover{
     justify-content: space-between;
     z-index: 2;
     margin-left: 173px;
-    margin-top: 9px;
-    min-height: 22px;
+    margin-top: 3px;
+    min-height: 20px;
     width: 140px;
     border-radius: 5px;
     background: var(--dot-skeletone-bg);
@@ -726,8 +748,8 @@ select> option:hover{
     justify-content: space-between;
     z-index: 2;
     margin-left: 495px;
-    margin-top: 9px;
-    min-height: 22px;
+    margin-top: 3px;
+    min-height: 20px;
     width: 140px;
     border-radius: 5px;
     background: var(--dot-skeletone-bg);

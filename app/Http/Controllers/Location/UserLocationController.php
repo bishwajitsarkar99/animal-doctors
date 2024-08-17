@@ -9,9 +9,9 @@ use App\Models\SessionModel;
 class UserLocationController extends Controller
 {
     // User Activity Loaction
-    public function activity()
+    public function details()
     {
-        return view('super-admin.user-activity.activity');
+        return view('super-admin.user-details.details');
     }
 
     // Get User Activity

@@ -26,7 +26,7 @@ require __DIR__ . DIRECTORY_SEPARATOR .'user.php';
 require __DIR__ . DIRECTORY_SEPARATOR .'accounts.php';
 require __DIR__ . DIRECTORY_SEPARATOR .'marketing.php';
 require __DIR__ . DIRECTORY_SEPARATOR .'delivery-team.php';
-require __DIR__ . DIRECTORY_SEPARATOR .'user-activity.php';
+require __DIR__ . DIRECTORY_SEPARATOR .'user-details.php';
 require __DIR__ . DIRECTORY_SEPARATOR .'forntend.php';
 require __DIR__ . DIRECTORY_SEPARATOR .'supplier.php';
 require __DIR__ . DIRECTORY_SEPARATOR .'product-iteam.php';

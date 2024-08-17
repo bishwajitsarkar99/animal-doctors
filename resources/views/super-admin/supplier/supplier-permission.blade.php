@@ -26,7 +26,7 @@
         <span class="tab3-skeletone ms-1"></span>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-sm supplier_tab btn_focus add_button  mt-2 ms-2" id="refresh" hidden>
+        <button type="button" class="btn btn-sm supplier_tab btn_focus add_button" id="refresh" hidden>
           <i class="refresh-icon fa fa-solid fa-asterisk fa-spin refrsh-hidden" style="color:white;opacity:1;"></i>
           <span class="btn-text ms-1">Refresh</span>
         </button>
@@ -178,50 +178,50 @@
 @include('super-admin.supplier.supplier-handel-ajax')
 @include('super-admin.supplier.module.module-permission-ajax')
 <script>
-    function removeSkeletons(selector) {
-        const allSkeletons = document.querySelectorAll(selector);
+  function removeSkeletons(selector) {
+    const allSkeletons = document.querySelectorAll(selector);
 
-        allSkeletons.forEach(item => {
-            item.classList.remove(selector.substring(1));
-        });
-    }
+    allSkeletons.forEach(item => {
+        item.classList.remove(selector.substring(1));
+    });
+  }
 
-    // Usage
-    $("#tabHome").attr('hidden', true);
-    $("#refresh").attr('hidden', true);
-    $("#roleSearch").attr('hidden', true);
-    $("#item_class").attr('hidden', true);
-    $("#perItemControls").attr('hidden', true);
-    $("#tabSetting").attr('hidden', true);
-    $("#tabCreateSupplier").attr('hidden', true);
-    $("#showCard").attr('hidden', true);
-    $("#moduSetting").attr('hidden', true);
-    $("#loaderShow").removeClass('loader-show');
-    setTimeout(() => {
-      removeSkeletons('.skeleton');
-      removeSkeletons('.tab-skeletone');
-      removeSkeletons('.tab_btn_skeletone');
-      removeSkeletons('.long-skeleton');
-      removeSkeletons('.capsule-skeleton');
-      removeSkeletons('.inp_ser_skeletone');
-      removeSkeletons('.peritem-skeleton');
-      removeSkeletons('.tab2-skeletone');
-      removeSkeletons('.tab3-skeletone');
-      removeSkeletons('.tab4-skeletone');
-      $("#tabHome").removeAttr('hidden');
-      $("#refresh").removeAttr('hidden');
-      $("#roleSearch").removeAttr('hidden');
-      $("#item_class").removeAttr('hidden');
-      $("#perItemControls").removeAttr('hidden');
-      $("#tabSetting").removeAttr('hidden');
-      $("#tabCreateSupplier").removeAttr('hidden');
-      $("#moduSetting").removeAttr('hidden');
-      $("#loaderShow").addClass('loader-show');
-      
-    }, 1800);
-    setTimeout(() => {
-      $("#showCard").removeAttr('hidden');
-    }, 500);
+  // Usage
+  $("#tabHome").attr('hidden', true);
+  $("#refresh").attr('hidden', true);
+  $("#roleSearch").attr('hidden', true);
+  $("#item_class").attr('hidden', true);
+  $("#perItemControls").attr('hidden', true);
+  $("#tabSetting").attr('hidden', true);
+  $("#tabCreateSupplier").attr('hidden', true);
+  $("#showCard").attr('hidden', true);
+  $("#moduSetting").attr('hidden', true);
+  $("#loaderShow").removeClass('loader-show');
+  setTimeout(() => {
+    removeSkeletons('.skeleton');
+    removeSkeletons('.tab-skeletone');
+    removeSkeletons('.tab_btn_skeletone');
+    removeSkeletons('.long-skeleton');
+    removeSkeletons('.capsule-skeleton');
+    removeSkeletons('.inp_ser_skeletone');
+    removeSkeletons('.peritem-skeleton');
+    removeSkeletons('.tab2-skeletone');
+    removeSkeletons('.tab3-skeletone');
+    removeSkeletons('.tab4-skeletone');
+    $("#tabHome").removeAttr('hidden');
+    $("#refresh").removeAttr('hidden');
+    $("#roleSearch").removeAttr('hidden');
+    $("#item_class").removeAttr('hidden');
+    $("#perItemControls").removeAttr('hidden');
+    $("#tabSetting").removeAttr('hidden');
+    $("#tabCreateSupplier").removeAttr('hidden');
+    $("#moduSetting").removeAttr('hidden');
+    $("#loaderShow").addClass('loader-show');
+    
+  }, 1800);
+  setTimeout(() => {
+    $("#showCard").removeAttr('hidden');
+  }, 500);
 </script>
 <script>
   $(document).ready(function(){
