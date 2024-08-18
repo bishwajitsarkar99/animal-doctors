@@ -40,7 +40,7 @@
         <span>page1</span>
       </div>
       <div id="userActivity" class="container tab-pane"><br>
-        <span>page2</span>
+        @include('super-admin.user-details.user-activites')
       </div>
       <div id="userPermission" class="container tab-pane"><br>
 
@@ -58,6 +58,7 @@
 
 @push('scripts')
 @include('super-admin.user-details.ajax.user-details-ajax')
+@include('super-admin.user-details.ajax.user-activities-ajax')
 <script>
   // skeleton
   function removeSkeletons(selector) {
@@ -106,27 +107,3 @@
   }, 500);
 </script>
 @endpush
-
-<!-- <div class="user-loaction">
-    <div class="loaction-table">
-        <table class="ord_table center border-1">
-          <tr class="table-row order_body acc_setting_table">
-            <th>S.N</th>
-            <th>IP Address</th>
-            <th>Country Name</th>
-            <th>Country Code</th>
-            <th>Region Name</th>
-            <th>Region Code</th>
-            <th>City Name</th>
-            <th>Zip Code</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-            <th>Area Code</th>
-            <th>TimeZone</th>
-          </tr>
-            <tbody class="bg-transparent" id="userLocationTable">
-
-            </tbody>
-        </table>
-    </div>
-</div> -->

@@ -39,11 +39,14 @@ class UserLocationController extends Controller
             $percentageRoles[$role] = $total_users > 0 ? ($count / $total_users) * 100 : 0;
         }
 
+        // activity users
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
+        $intime_or_outtime_activity_users = SessionModel::whereNotNull('id')->count();
+        $intime_activity_users = SessionModel::where('status', 0)->count();
         $activity_users = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
         // Calculate the percentage of total activity users
-        $activity_users_percentage = $activity_users > 0 ? ($activity_users / $activity_users) * 100 : 0;
+        $activity_users_percentage = $intime_or_outtime_activity_users > 0 ? ($intime_activity_users / $intime_or_outtime_activity_users) * 100 : 0;
 
         if ($request->expectsJson()) {
             return response()->json([
@@ -68,10 +71,10 @@ class UserLocationController extends Controller
     // Get User Activity
     public function getActivity(Request $request)
     {
-        $user_activities = SessionModel::whereNotNull('role')->orderBy('id', 'desc')->with('roles')->get();
+        $user_activities = SessionModel::whereNotNull('role')->orderBy('id', 'desc');
 
         if ($query = $request->get('query')) {
-            $users->where('name', 'LIKE', '%' . $query . '%')
+            $user_activities->where('name', 'LIKE', '%' . $query . '%')
                 ->orWhere('email', 'LIKE', '%' . $query . '%')
                 ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
                 ->orWhere('role', 'LIKE', '%' . $query . '%')
@@ -83,8 +86,8 @@ class UserLocationController extends Controller
             $perItem = $request->input('per_item');
         }
 
-        $users = $users->paginate($perItem)->toArray();
+        $data = $user_activities->paginate($perItem)->toArray();
 
-        return response()->json($users, 200);
+        return response()->json($data, 200);
     }
 }

@@ -12,7 +12,7 @@
                 </div>
             </span>
             <div class="progress" style="height:0.8rem;">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ $total_users_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $total_users_percentage }}%">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ $total_users_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $total_users_percentage }}%;">
                     {{ round($total_users_percentage, 2) }}%
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 </div>
             </span>
             <div class="progress" style="height:0.8rem;">
-                <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="{{ $authentic_users_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $authentic_users_percentage }}%">
+                <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="{{ $authentic_users_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $authentic_users_percentage }}%;">
                     {{ round($authentic_users_percentage, 2) }}%
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 </div>
             </span>
             <div class="progress" style="height:0.8rem;">
-                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" aria-valuenow="{{ $inactive_users_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $inactive_users_percentage }}%">
+                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" aria-valuenow="{{ $inactive_users_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $inactive_users_percentage }}%;">
                     {{ round($inactive_users_percentage, 2) }}%
                 </div>
             </div>
@@ -66,7 +66,9 @@
                 </div>
             </span>
             <div class="progress" style="height:0.8rem;">
-                <div class="progress-bar progress-bar-striped bg-blueviolet progress-bar-animated" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">55%</div>
+                <div class="progress-bar progress-bar-striped bg-blueviolet progress-bar-animated" role="progressbar" aria-valuenow="{{ $activity_users_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($activity_users_percentage, 2) }}%;">
+                    {{ round($activity_users_percentage, 2) }}%
+                </div>
             </div>
         </div>
     </div>
@@ -78,32 +80,6 @@
                 <i class="fa-solid fa-layer-group"></i>
                 Users Summary
             </span>
-            <!-- <div class="row">
-                <div class="col-xl-4">
-                    <span class="login-user-title">Login Users</span>
-                </div>
-                <div class="col-xl-6">
-                    <div class="progress mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-login progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%</div>
-                    </div>
-                </div>
-                <div class="col-xl-2">
-                    <span class="login-user-title pt-1">50</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4">
-                    <span class="login-user-title">Logout Users</span>
-                </div>
-                <div class="col-xl-6">
-                    <div class="progress mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-alert progress-bar-animated" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">70%</div>
-                    </div>
-                </div>
-                <div class="col-xl-2">
-                    <span class="login-user-title pt-1">70</span>
-                </div>
-            </div> -->
             <div class="row">
                 <div class="col-xl-4">
                     <span class="login-user-title">Super-Admin Users</span>
@@ -224,7 +200,7 @@
             <div class="card-header staticrept ps-2" style="text-align:center;">
                 <span class="card-head-title">
                     <i class="fa-solid fa-layer-group"></i> 
-                    Users-Graphp
+                    Total Users Bar Chart
                 </span>
                 <div id="loader_orderChart"></div>
             </div>
@@ -239,12 +215,15 @@
 const xValues = ["Super admin", "Admin", "Sub admin", "Accounts", "Marketing", "Delivery", "General user"];
 const barColors = ["royalblue","royalblue","royalblue","royalblue","royalblue","royalblue","royalblue"];
 
+// Pass the PHP array to JavaScript
+const userCounts = @json(array_values($usersCount));
+
 new Chart("userChart", {
   type: "bar",
   data: {
     labels: xValues,
     datasets: [{
-    data: [860,310,260,350,400,500,1100],
+    data: userCounts,
       borderColor: "red",
       backgroundColor: barColors,
       fill: false
