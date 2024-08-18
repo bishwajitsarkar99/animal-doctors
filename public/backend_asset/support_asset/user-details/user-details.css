@@ -106,9 +106,11 @@ img#loaderShow {
 .loader-show{
     display: none;
 }
-.first-card, .second-card, .third-card, .four-card {
+.first-card, .second-card, .third-card, .four-card, .five-card {
     border: none;
-    /* box-shadow: 0px 1px 10px #0001, 0px 0px 2px #0001; */
+    box-shadow: 0px 1px 10px #0001, 0px 0px 2px #0001;
+    background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
+    opacity: 1;
 }
 .bg-success {
     opacity: 1 !important;
@@ -153,7 +155,7 @@ img#loaderShow {
 .ring-div {
     width: 100px;
     height: 86px;
-    margin-left: 60px;
+    margin-left: 58px;
 }
 .activity-loader {
     border-right: 10px solid blueviolet;
@@ -204,7 +206,7 @@ img#loaderShow {
     margin: 3% 3%;
     border-top: 10px solid #f5f5f5;
     border-bottom: 10px solid #0d6efd;
-    width: 82px;
+    width: 90px;
     height: 82px;
     padding: 1.4rem 1rem;
     animation: ring_hover;
@@ -317,14 +319,22 @@ img#loaderShow {
         color: black;
     }
 }
-
-
+div.card.order_line_chart:hover{
+    transform: none;
+}
+.sub_total_user{
+    text-decoration: underline double;
+    margin-left: 10px;
+    color: royalblue;
+}
 
     
 /* ======Reponsive-page======== */
-/* @media (min-width: 1200px) {
-     
-} */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1300px;
+    }    
+}
 /* @media (min-width: 992px) {
     
 } */

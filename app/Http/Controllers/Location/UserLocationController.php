@@ -5,13 +5,64 @@ namespace App\Http\Controllers\Location;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SessionModel;
+use App\Models\User;
+use Carbon\Carbon;
 
 class UserLocationController extends Controller
 {
     // User Activity Loaction
-    public function details()
+    public function details(Request $request)
     {
-        return view('super-admin.user-details.details');
+        $usersCount = [
+            'super_admin' => User::where('role', 1)->count(),
+            'admin' => User::where('role', 3)->count(),
+            'sub_admin' => User::where('role', 2)->count(),
+            'accounts' => User::where('role', 5)->count(),
+            'marketing' => User::where('role', 6)->count(),
+            'delivery_team' => User::where('role', 7)->count(),
+            'users' => User::where('role', 0)->count(),
+        ];
+
+        $total_users = User::count();
+        $authentic_users = User::where('status', 0)->count();
+        $inactive_users = User::where('status', 1)->count();
+
+        // Calculate the percentage of total users
+        $total_users_percentage = $total_users > 0 ? ($total_users / $total_users) * 100 : 0;
+        // Calculate the percentage of total authentic_users
+        $authentic_users_percentage = $total_users > 0 ? ($authentic_users / $total_users) * 100 : 0;
+        // Calculate the percentage of total inactive_users
+        $inactive_users_percentage = $total_users > 0 ? ($inactive_users / $total_users) * 100 : 0;
+        // Calculate the percentage for each role
+        $percentageRoles = [];
+        foreach ($usersCount as $role => $count) {
+            $percentageRoles[$role] = $total_users > 0 ? ($count / $total_users) * 100 : 0;
+        }
+
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+        $activity_users = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
+        // Calculate the percentage of total activity users
+        $activity_users_percentage = $activity_users > 0 ? ($activity_users / $activity_users) * 100 : 0;
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'total_users' => $total_users,
+                'authentic_users' => $authentic_users,
+                'inactive_users' => $inactive_users,
+                'activity_users' => $activity_users,
+                'usersCount' => $usersCount,
+                'total_users_percentage' => $total_users_percentage,
+                'authentic_users_percentage' => $authentic_users_percentage,
+                'inactive_users_percentage' => $inactive_users_percentage,
+                'activity_users_percentage' => $activity_users_percentage,
+                'percentageRoles' => $percentageRoles,
+            ]);
+        }
+        
+        return view('super-admin.user-details.details', compact('usersCount','total_users','authentic_users','inactive_users','activity_users',
+            'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage')
+        );
     }
 
     // Get User Activity

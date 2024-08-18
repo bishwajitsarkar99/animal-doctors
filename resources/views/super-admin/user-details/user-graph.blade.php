@@ -3,55 +3,65 @@
     <div class="col-xl-3">
         <div class="card card-body first-card">
             <span class="card-head-title">
+                <i class="fa-solid fa-layer-group"></i>
                 Total-Users
                 <div class="ring-div">
                     <div class="total-user-loader">
-                        <span class="total-number">500</span>
+                        <span class="total-number">{{ $total_users }}</span>
                     </div>
                 </div>
             </span>
             <div class="progress" style="height:0.8rem;">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">75%</div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ $total_users_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $total_users_percentage }}%">
+                    {{ round($total_users_percentage, 2) }}%
+                </div>
             </div>
         </div>
     </div>
     <div class="col-xl-3">
         <div class="card card-body second-card">
             <span class="card-head-title">
+                <i class="fa-solid fa-layer-group"></i>
                 Authentic Users
                 <div class="ring-div">
                     <div class="authentic-loader">
-                        <span class="total-number">500</span>
+                        <span class="total-number">{{ $authentic_users }}</span>
                     </div>
                 </div>
             </span>
             <div class="progress" style="height:0.8rem;">
-                <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 45%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">45%</div>
+                <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="{{ $authentic_users_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $authentic_users_percentage }}%">
+                    {{ round($authentic_users_percentage, 2) }}%
+                </div>
             </div>
         </div>
     </div>
     <div class="col-xl-3">
         <div class="card card-body third-card">
             <span class="card-head-title">
+                <i class="fa-solid fa-layer-group"></i>
                 Inactive Users
                 <div class="ring-div">
                     <div class="inactive-loader">
-                        <span class="total-number">500</span>
+                        <span class="total-number">{{ $inactive_users }}</span>
                     </div>
                 </div>
             </span>
             <div class="progress" style="height:0.8rem;">
-                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">55%</div>
+                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" aria-valuenow="{{ $inactive_users_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $inactive_users_percentage }}%">
+                    {{ round($inactive_users_percentage, 2) }}%
+                </div>
             </div>
         </div>
     </div>
     <div class="col-xl-3">
         <div class="card card-body four-card">
             <span class="card-head-title">
+                <i class="fa-solid fa-layer-group"></i>
                 Activity Users
                 <div class="ring-div">
                     <div class="activity-loader">
-                        <span class="total-number">500</span>
+                        <span class="total-number">{{ $activity_users }}</span>
                     </div>
                 </div>
             </span>
@@ -63,9 +73,12 @@
 </div>
 <div class="row mt-3">
     <div class="col-xl-6">
-        <div class="card card-body third-card">
-            <span class="card-head-title">Users Summary</span>
-            <div class="row">
+        <div class="card card-body five-card">
+            <span class="card-head-title" style="border-bottom: 1px solid rgba(0, 0, 0, 0.175);">
+                <i class="fa-solid fa-layer-group"></i>
+                Users Summary
+            </span>
+            <!-- <div class="row">
                 <div class="col-xl-4">
                     <span class="login-user-title">Login Users</span>
                 </div>
@@ -90,18 +103,20 @@
                 <div class="col-xl-2">
                     <span class="login-user-title pt-1">70</span>
                 </div>
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col-xl-4">
                     <span class="login-user-title">Super-Admin Users</span>
                 </div>
                 <div class="col-xl-6">
                     <div class="progress mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">70%</div>
+                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" aria-valuenow="{{ round($percentageRoles['super_admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['super_admin'], 2) }}%;">
+                            {{ round($percentageRoles['super_admin'], 2) }}%
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="login-user-title pt-1">70</span>
+                    <span class="login-user-title pt-1">{{ $usersCount['super_admin']}}</span>
                 </div>
             </div>
             <div class="row">
@@ -110,11 +125,13 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">70%</div>
+                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" aria-valuenow="{{ round($percentageRoles['admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['admin'], 2) }}%;">
+                            {{ round($percentageRoles['admin'], 2) }}%
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="login-user-title pt-1">70</span>
+                    <span class="login-user-title pt-1">{{ $usersCount['admin']}}</span>
                 </div>
             </div>
             <div class="row">
@@ -123,11 +140,13 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">70%</div>
+                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" aria-valuenow="{{ round($percentageRoles['sub_admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['sub_admin'], 2) }}%;">
+                            {{ round($percentageRoles['sub_admin'], 2) }}%
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="login-user-title pt-1">70</span>
+                    <span class="login-user-title pt-1">{{ $usersCount['sub_admin']}}</span>
                 </div>
             </div>
             <div class="row">
@@ -136,11 +155,43 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">70%</div>
+                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width:20%" aria-valuenow="{{ round($percentageRoles['accounts'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['accounts'], 2) }}%;">
+                            {{ round($percentageRoles['accounts'], 2) }}%
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="login-user-title pt-1">70</span>
+                    <span class="login-user-title pt-1">{{ $usersCount['accounts']}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4">
+                    <span class="login-user-title">Marketing Users</span>
+                </div>
+                <div class="col-xl-6">
+                    <div class="progress mt-2" style="height:0.8rem;">
+                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width:20%" aria-valuenow="{{ round($percentageRoles['marketing'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['marketing'], 2) }}%;">
+                            {{ round($percentageRoles['marketing'], 2) }}%
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2">
+                    <span class="login-user-title pt-1">{{ $usersCount['marketing']}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4">
+                    <span class="login-user-title">Delivery Users</span>
+                </div>
+                <div class="col-xl-6">
+                    <div class="progress mt-2" style="height:0.8rem;">
+                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width:20%" aria-valuenow="{{ round($percentageRoles['delivery_team'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['delivery_team'], 2) }}%;">
+                            {{ round($percentageRoles['delivery_team'], 2) }}%
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2">
+                    <span class="login-user-title pt-1">{{ $usersCount['delivery_team']}}</span>
                 </div>
             </div>
             <div class="row">
@@ -149,21 +200,31 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">70%</div>
+                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" aria-valuenow="{{ round($percentageRoles['users'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['users'], 2) }}%;">
+                            {{ round($percentageRoles['users'], 2) }}%
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="login-user-title pt-1">70</span>
+                    <span class="login-user-title pt-1">{{ $usersCount['users']}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-9">
+                    <span class="login-user-title" style="color: royalblue;">Total Users</span>
+                </div>
+                <div class="col-xl-3" style="text-align:center;">
+                    <span class="login-user-title sub_total_user pt-1">{{ $total_users }}</span>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-xl-6">
         <div class="card order_line_chart" id="orderChart">
-            <div class="card-header staticrept ch ps-2 mt-">
+            <div class="card-header staticrept ps-2" style="text-align:center;">
                 <span class="card-head-title">
                     <i class="fa-solid fa-layer-group"></i> 
-                    User-Graphp
+                    Users-Graphp
                 </span>
                 <div id="loader_orderChart"></div>
             </div>
@@ -175,23 +236,17 @@
 </div>
 @push('scripts')
 <script>
-const xValues = [100,200,300,400,500,600,700,800,900,1000];
+const xValues = ["Super admin", "Admin", "Sub admin", "Accounts", "Marketing", "Delivery", "General user"];
+const barColors = ["royalblue","royalblue","royalblue","royalblue","royalblue","royalblue","royalblue"];
 
 new Chart("userChart", {
-  type: "line",
+  type: "bar",
   data: {
     labels: xValues,
     datasets: [{
-      data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
+    data: [860,310,260,350,400,500,1100],
       borderColor: "red",
-      fill: false
-    },{
-      data: [1600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
-      borderColor: "green",
-      fill: false
-    },{
-      data: [300,700,2000,5000,6000,4000,2000,1000,200,100],
-      borderColor: "blue",
+      backgroundColor: barColors,
       fill: false
     }]
   },
