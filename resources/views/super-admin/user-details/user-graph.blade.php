@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="login-user-title pt-1">{{ $usersCount['super_admin']}}</span>
+                    <span class="user-amount badge rounded-pill bg-primary pt-1">{{ $usersCount['super_admin']}}</span>
                 </div>
             </div>
             <div class="row">
@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="login-user-title pt-1">{{ $usersCount['admin']}}</span>
+                    <span class="user-amount badge rounded-pill bg-primary pt-1">{{ $usersCount['admin']}}</span>
                 </div>
             </div>
             <div class="row">
@@ -122,7 +122,7 @@
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="login-user-title pt-1">{{ $usersCount['sub_admin']}}</span>
+                    <span class="user-amount badge rounded-pill bg-primary pt-1">{{ $usersCount['sub_admin']}}</span>
                 </div>
             </div>
             <div class="row">
@@ -137,7 +137,7 @@
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="login-user-title pt-1">{{ $usersCount['accounts']}}</span>
+                    <span class="user-amount badge rounded-pill bg-primary pt-1">{{ $usersCount['accounts']}}</span>
                 </div>
             </div>
             <div class="row">
@@ -152,7 +152,7 @@
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="login-user-title pt-1">{{ $usersCount['marketing']}}</span>
+                    <span class="user-amount badge rounded-pill bg-primary pt-1">{{ $usersCount['marketing']}}</span>
                 </div>
             </div>
             <div class="row">
@@ -167,7 +167,7 @@
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="login-user-title pt-1">{{ $usersCount['delivery_team']}}</span>
+                    <span class="user-amount badge rounded-pill bg-primary pt-1">{{ $usersCount['delivery_team']}}</span>
                 </div>
             </div>
             <div class="row">
@@ -182,7 +182,7 @@
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="login-user-title pt-1">{{ $usersCount['users']}}</span>
+                    <span class="user-amount badge rounded-pill bg-primary pt-1">{{ $usersCount['users']}}</span>
                 </div>
             </div>
             <div class="row">

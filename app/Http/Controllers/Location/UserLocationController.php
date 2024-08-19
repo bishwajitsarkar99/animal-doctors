@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SessionModel;
 use App\Models\User;
+use App\Models\Role;
 use Carbon\Carbon;
 
 class UserLocationController extends Controller
@@ -71,7 +72,7 @@ class UserLocationController extends Controller
     // Get User Activity
     public function getActivity(Request $request)
     {
-        $user_activities = SessionModel::whereNotNull('role')->orderBy('id', 'desc');
+        $user_activities = SessionModel::whereNotNull('role')->orderBy('id', 'desc')->with(['roles']);
 
         if ($query = $request->get('query')) {
             $user_activities->where('name', 'LIKE', '%' . $query . '%')

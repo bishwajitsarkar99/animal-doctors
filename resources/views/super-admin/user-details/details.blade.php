@@ -13,12 +13,12 @@
         <span class="inp_ser_skeletone ms-1"></span>
       </li> -->
       <li class="nav-item">
-        <a class="nav-link setting home-text" data-bs-toggle="tab" href="#userDetails" id="tabDetails">User Details</a>
-        <span class="tab2-skeletone ms-1"></span>
-      </li>
-      <li class="nav-item">
         <a class="nav-link setting" data-bs-toggle="tab" href="#userActivity" id="tabActivity">User Activity</a>
         <span class="tab4-skeletone ms-1"></span>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link setting home-text" data-bs-toggle="tab" href="#userDetails" id="tabDetails">Activity Graph</a>
+        <span class="tab2-skeletone ms-1"></span>
       </li>
       <li class="nav-item">
         <a class="nav-link setting home-text" href="#" id="tabUserPermission"> User Permission</a>
@@ -36,15 +36,15 @@
       <div id="home" class="container tab-pane active"><br>
         @include('super-admin.user-details.user-graph')
       </div>
-      <div id="userDetails" class="container tab-pane"><br>
-        <span>page1</span>
-      </div>
       <div id="userActivity" class="container tab-pane"><br>
-        @include('super-admin.user-details.user-activites')
-      </div>
-      <div id="userPermission" class="container tab-pane"><br>
+      @include('super-admin.user-details.user-activites')
+    </div>
+    <div id="userDetails" class="container tab-pane"><br>
+      @include('super-admin.user-details.activities-graph')
+    </div>
+    <div id="userPermission" class="container tab-pane"><br>
 
-      </div>
+    </div>
     </div>
   </div>
   <div class="loader-position">

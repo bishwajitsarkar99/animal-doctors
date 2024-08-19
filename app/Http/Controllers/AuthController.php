@@ -98,7 +98,7 @@ class AuthController extends Controller
                 'account_create' => $user->created_at,
                 'account_last_update' => $user->updated_at,
                 'user_agent' => $request->userAgent(),
-                'payload' => 'user login',
+                'payload' => 'login',
                 'last_activity' => now()->timestamp,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -213,7 +213,7 @@ class AuthController extends Controller
         // ->where('user_id', Auth::id())
         ->where('id', $sessionId)
         ->update([
-            'payload' => 'user logout',
+            'payload' => 'logout',
             'updated_at' => now()
         ]);
 

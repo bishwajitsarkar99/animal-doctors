@@ -1,5 +1,30 @@
 <script>
     $(document).ready(function(){
+        const formatDate = (dateString) => {
+            const date = new Date(dateString);
+
+            // Format date
+            const options = {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                hour12: true
+            };
+
+            return date.toLocaleString('en-US', options);
+        };
+        // ACtive table row background
+        $(document).on('click', 'tr.table-row', function(){
+            $(this).addClass("clicked").siblings().removeClass("clicked");
+        });
+        // ACtive table td user-id background
+        $(document).on('click', 'td.user-details-links', function() {
+            $('td.user-details-links').removeClass("background");
+            $(this).addClass("background");
+        });
         // User Activities Data Fetch
         fetch_activities_users_data();
         // Data View Table--------------
@@ -8,7 +33,7 @@
                 return `
                     <tr>
                         <td class="error_data" align="center" text-danger colspan="11">
-                            Conatat Information Data Not Exists On Server !
+                            User Logged Data Not Exists On Server !
                         </td>
                     </tr>
                 `;
@@ -18,16 +43,18 @@
                 return `
                     <tr class="table-row user-table-row supp-table-row" key="${key}" id="supp_tab">
                         <td class="sn border_ord" id="supp_tab2" hidden>${row.id}</td>
-                        <td class="txt_ ps-1 center" id="supp_tab3">${row.user_id}</td>
-                        <td class="border_ord ps-1 supp_vew" id="supp_tab4">${row.name}</td>
+                        <td class="txt_ user-details-links view_btn ps-2" id="supp_tab3" style="cursor: pointer;text-decoration:underline;" value="${row.user_id}" style="font-size: 10px;" data-bs-toggle="tooltip" data-bs-placement="right" title="Details" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            ${row.user_id}
+                        </td>
+                        <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.roles.name}</td>
+                        <td class="border_ord ps-1 supp_vew" id="supp_tab4" hidden>${row.name}</td>
                         <td class="txt_ ps-1 supp_vew2" id="supp_tab5">${row.email}</td>
-                        <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.role}</td>
                         <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${row.ip_address}</td>
-                        <td class="txt_ ps-1 supp_vew5" id="supp_tab8">${row.user_agent}</td>
+                        <td class="txt_ ps-1 supp_vew5" id="supp_tab8" hidden>${row.user_agent}</td>
                         <td class="txt_ ps-1 supp_vew6" id="supp_tab9">${row.payload}</td>
-                        <td class="txt_ ps-1 supp_vew7" id="supp_tab10">${row.last_activity}</td>
-                        <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${row.created_at}</td>
-                        <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${row.updated_at}</td>
+                        <td class="txt_ ps-1 supp_vew7" id="supp_tab10" hidden>${row.last_activity}</td>
+                        <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${formatDate(row.created_at)}</td>
+                        <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${formatDate(row.updated_at)}</td>
                     </tr>
                 `;
             }).join("\n");
@@ -66,6 +93,8 @@
                         total
                     }));
                     $("#total_activites_records").text(total);
+                    // Initialize the tooltip elements
+                    $('[data-bs-toggle="tooltip"]').tooltip();
                 }
 
             });
@@ -114,6 +143,31 @@
                 fetch_activities_users_data('', url);
             }
 
+        });
+        // User Details View
+        $(document).on('click', '.view_btn', function(e) {
+            e.preventDefault();
+            var user_id = $(this).val();
+            $('#view_user_form').modal('show');
+
+            // $.ajax({
+            //     type: "GET",
+            //     url: "/show-users/" + user_id,
+            //     success: function(response) {
+            //         if (response.status == 404) {
+            //             $('#success_message').html("");
+            //             $('#success_message').addClass('alert alert-danger');
+            //             $('#success_message').text(response.messages);
+            //         } else {
+            //             $('#view_user_id').val(user_id);
+            //             $('#view_user_name').val(response.data.name);
+            //             $('#view_user_email').val(response.data.email);
+            //             $('#view_user_contract').val(response.data.contract_number);
+            //             $("#image_show").attr('src', `/image/${response.data.image}`);
+            //         }
+            //     }
+
+            // });
         });
     });
 </script>
