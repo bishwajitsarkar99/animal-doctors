@@ -25,7 +25,7 @@
         <span class="tab3-skeletone ms-1"></span>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-sm refresh-btn" id="refresh">
+        <button type="button" class="btn btn-sm refresh-btn ripple-surface " id="refresh">
           <i class="refresh-icon fa fa-solid fa-asterisk fa-spin refrsh-hidden" style="color:white;opacity:1;"></i>
           <span class="btn-text ms-1">Refresh</span>
         </button>

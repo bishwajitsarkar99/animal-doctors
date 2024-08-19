@@ -44,17 +44,17 @@
         </a>   
         @endif
         @if(auth()->user()->role ==1)
-            <span class="text-warning ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;">
+            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;">
                 {{setting('company_name')}}
             </span>
         @endif
         @if(auth()->user()->role ==2)
-            <span class="text-warning ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;">
+            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;">
                 {{setting('company_name')}}
             </span>
         @endif
         @if(auth()->user()->role ==3)
-            <span class="text-warning ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;">
+            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;">
                 {{setting('company_name')}}
             </span>
         @endif
@@ -139,7 +139,7 @@
         @if(auth()->user()->role == 1)
         <!-- ================== Purchases Moduel ======================= -->
         <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('purchases_visual')}}"><i class="fa-solid fa-link fa-beat-fade"></i></span> 
-            <span class="{{setting('purchases_visual')}}">{{__('translate.Purchases Dept.')}}</span>
+            <span class="{{setting('purchases_visual')}}" style="color:white;">{{__('translate.Purchases Dept.')}}</span>
         </div>
         <!-- ================== Product ======================= -->
         @include('backend.layouts.layouts-components.partial-sidebar._product')
@@ -149,7 +149,7 @@
 
         <!-- ================== Accounts Moduel ======================= -->
         <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('accounts_moduel_display')}}"><i class="fa-solid fa-link fa-beat-fade"></i></span> 
-            <span class="{{setting('accounts_moduel_display')}}">{{__('translate.Accounts Dept.')}}</span>
+            <span class="{{setting('accounts_moduel_display')}}" style="color:white;">{{__('translate.Accounts Dept.')}}</span>
         </div>
 
         <!-- ================== Leger ======================= -->
@@ -170,7 +170,7 @@
 
 
         <!-- ==================  HRM Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading {{setting('hrm_moduel_display')}}"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> 
+        <div class="sb-sidenav-menu-heading {{setting('hrm_moduel_display')}}" style="color:white;"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> 
             <span class="{{setting('hrm_moduel_display')}}">{{__('translate.HRM Dept.')}}</span>
         </div>
 
@@ -179,7 +179,7 @@
 
         <!-- ==================  Auth Moduel ======================= -->
         <div class="sb-sidenav-menu-heading {{setting('auth_moduel_display')}}"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> 
-            <span class="{{setting('auth_moduel_display')}}">{{__('translate.Authentication')}}</span>
+            <span class="{{setting('auth_moduel_display')}}" style="color:white;">{{__('translate.Authentication')}}</span>
         </div>
 
         @include('backend.layouts.layouts-components.partial-sidebar._auth')

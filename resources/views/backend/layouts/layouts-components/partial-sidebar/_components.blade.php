@@ -1,6 +1,6 @@
 <span class="{{setting('components_moduel_display')}}">
     <a class="nav-link collapsed lay_nav font_size com_button {{setting('components_moduel_display')}}" data-bs-toggle="collapse" data-bs-target="#components" aria-expanded="false" aria-controls="components">
-        <div class="sb-nav-link-icon {{setting('components_moduel_display')}}"><i class="fa-solid fa-folder-open fa-beat" style="font-size: 12px;color:darkgoldenrod;"></i></div>
+        <div class="sb-nav-link-icon {{setting('components_moduel_display')}}"><i class="fa-solid fa-folder-open fa-beat" style="font-size: 12px;color:white;"></i></div>
         <span class="{{setting('components_moduel_display')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{setting('components_moduel_title')}}</span>
         <div class="sb-sidenav-collapse-arrow {{setting('components_moduel_display')}}">▼</div>
     </a>

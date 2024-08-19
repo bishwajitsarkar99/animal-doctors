@@ -1,5 +1,5 @@
 :root{
-    --theme-background-image:radial-gradient(farthest-corner at 100px 100px, #003a91, #003a91);
+    --theme-background-image:linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);
     --theme-color:darkgreen;
     --theme-transition:1s;
     --theme-transform:scale(0.9);

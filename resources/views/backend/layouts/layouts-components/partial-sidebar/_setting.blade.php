@@ -1,7 +1,7 @@
 <a class="nav-link collapsed lay_nav font_size" data-bs-toggle="collapse" data-bs-target="#addons" aria-expanded="false" aria-controls="addons">
     <div class="sb-nav-link-icon">
-        <i class="fa-solid fa-gear fa-spin-pulse" style="font-size: 13px;color:darkgoldenrod;"></i>
-        <span style="font-size: 13px;color:darkgoldenrod;" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.SETTING')}}</span>
+        <i class="fa-solid fa-gear fa-spin-pulse" style="font-size: 13px;color:white;"></i>
+        <span style="font-size: 13px;color:white;" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.SETTING')}}</span>
     </div>
     <div class="sb-sidenav-collapse-arrow">▼</div>
     <!-- <span>▶</span> -->
