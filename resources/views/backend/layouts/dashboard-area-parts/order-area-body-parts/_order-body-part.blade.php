@@ -11,8 +11,8 @@
                 </p>
             </div>
         </div>
-        <div class="progress_login_header">
-            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary ps-5 ms-3" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress_login_header" style="height:0.8rem;">
+            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-order ps-5 ms-3" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
             </div>
         </div>
     </div>
@@ -27,13 +27,13 @@
             <div class="detail de">
                 <p class="form-check form-switch ord_detl">
                     <span>
-                        <a type="button" class="form-check-label mt-1 pt-1" for="collapseExample" id="flexSwitchCheckDefault2" data-bs-toggle="tooltip"  data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><span class=" plantform ords ps-2 pe-2">{{__('translate.Details')}}</span></a>
+                        <a type="button" class="form-check-label mt-1 pt-1" for="collapseExample" id="flexSwitchCheckDefault2" data-bs-toggle="tooltip"  data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><span class="ords ps-2 pe-2">{{__('translate.Details')}}</span></a>
                     </span>
                 </p>
             </div>
         </div>
-        <div class="progress_login_header">
-            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary ps-5 ms-3" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress_login_header" style="height:0.8rem;">
+            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-order ps-5 ms-3" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
             </div>
         </div>
     </div>
@@ -48,13 +48,13 @@
             <div class="detail de">
                 <p class="form-check form-switch ord_detl">
                     <span>
-                        <a type="button" class="form-check-label mt-1 pt-1" for="collapseExample" id="flexSwitchCheckDefault3" data-bs-toggle="tooltip"  data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><span class=" plantform ords ps-2 pe-2">{{__('translate.Details')}}</span></a>
+                        <a type="button" class="form-check-label mt-1 pt-1" for="collapseExample" id="flexSwitchCheckDefault3" data-bs-toggle="tooltip"  data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><span class="ords ps-2 pe-2">{{__('translate.Details')}}</span></a>
                     </span>
                 </p>
             </div>
         </div>
-        <div class="progress_login_header">
-            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary ps-5 ms-3 pb-1 pt-2" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress_login_header" style="height:0.8rem;">
+            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-order ps-5 ms-3 pb-1 pt-2" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
             </div>
         </div>
     </div>
@@ -69,13 +69,13 @@
             <div class="detail de">
                 <p class="form-check form-switch ord_detl">
                     <span>
-                        <a type="button" class="form-check-label mt-1 pt-1" for="collapseExample" id="flexSwitchCheckDefault4" data-bs-toggle="tooltip"  data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><span class=" plantform ords ps-2 pe-2">{{__('translate.Details')}}</span></a>
+                        <a type="button" class="form-check-label mt-1 pt-1" for="collapseExample" id="flexSwitchCheckDefault4" data-bs-toggle="tooltip"  data-bs-placement="right" title="Click" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><span class="ords ps-2 pe-2">{{__('translate.Details')}}</span></a>
                     </span>
                 </p>
             </div>
         </div>
-        <div class="progress_login_header pb-2">
-            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary ps-5 ms-3 pb-2 pt-2" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress_login_header pb-2" style="height:0.8rem;">
+            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-order ps-5 ms-3 pb-1 pt-2" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
             </div>
         </div>
     </div>

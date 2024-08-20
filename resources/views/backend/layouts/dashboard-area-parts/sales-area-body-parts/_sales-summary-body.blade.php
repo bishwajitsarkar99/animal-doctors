@@ -9,10 +9,10 @@
                             <div class="col-md-12">
                                 <table class="skeleton-children" style="width:100%">
                                     <tr>
-                                        <th class="ordsumm ord_headLine ps-2">{{__('translate.S.N')}}</th>
-                                        <th class="ordsumm ord_headLine ps-2">{{__('translate.Category')}}</th>
-                                        <th class="ordsumm ord_headLine ps-2">{{__('translate.Qty')}}</th>
-                                        <th class="ordsumm ord_headLine ps-2">{{__('translate.Sales-Amount')}} (৳)</th>
+                                        <th class="ordsumm ps-2">{{__('translate.S.N')}}</th>
+                                        <th class="ordsumm ps-2">{{__('translate.Category')}}</th>
+                                        <th class="ordsumm ps-2">{{__('translate.Qty')}}</th>
+                                        <th class="ordsumm ps-2">{{__('translate.Sales-Amount')}} (৳)</th>
                                     </tr>
                                     <tr>
                                         <td class="orditem ps-2">1</td>

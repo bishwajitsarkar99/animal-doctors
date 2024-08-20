@@ -4,18 +4,18 @@
     <div class="card card-body border-left-primary mb-1 card_focus" id="totalOrder_box">
         <div class="card card-head-title align-items-center justify-content-center">
             <span class="align-items-left justify-content-left skeleton">
-                <i class="fa-solid fa-layer-group"></i>
+            <span class="text-order"><i class="fa-solid fa-layer-group"></i></span>
                 Total-Orders
             </span>
             <div class="ring-div skeleton">
-                <div class="total-user-loader skeleton">
+                <div class="total-order-loader skeleton">
                     <span class="total-number">70% </span>
                 </div>
             </div>
         </div>
         <span class="card-head-title skeleton">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
         <div class="progress skeleton" style="height:0.3rem;">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+            <div class="progress-bar progress-bar-striped bg-order progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
                 
             </div>
         </div>
@@ -26,18 +26,18 @@
     <div class="card card-body border-left-primary mb-1 card_focus" id="totalPending_box">
         <div class="card card-head-title align-items-center justify-content-center">
             <span class="align-items-left justify-content-left skeleton">
-                <i class="fa-solid fa-layer-group"></i>
+                <span class="text-pending"><i class="fa-solid fa-layer-group"></i></span>
                 Pending
             </span>
             <div class="ring-div skeleton">
-                <div class="total-user-loader skeleton">
+                <div class="total-pending-loader skeleton">
                     <span class="total-number">50% </span>
                 </div>
             </div>
         </div>
         <span class="card-head-title skeleton">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
         <div class="progress skeleton" style="height:0.3rem;">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+            <div class="progress-bar progress-bar-striped bg-pending progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
                 
             </div>
         </div>
@@ -48,18 +48,18 @@
     <div class="card card-body border-left-primary mb-1 card_focus" id="completeOrder">
         <div class="card card-head-title align-items-center justify-content-center">
             <span class="align-items-left justify-content-left skeleton">
-                <i class="fa-solid fa-layer-group"></i>
+                <span class="text-success"><i class="fa-solid fa-layer-group"></i></span>
                 Complete
             </span>
             <div class="ring-div skeleton">
-                <div class="total-user-loader skeleton">
+                <div class="total-complete-loader skeleton">
                     <span class="total-number">50% </span>
                 </div>
             </div>
         </div>
         <span class="card-head-title skeleton">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
         <div class="progress skeleton" style="height:0.3rem;">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
                 
             </div>
         </div>
@@ -70,11 +70,11 @@
     <div class="card card-body border-left-primary mb-1 card_focus" id="rejectOrder">
         <div class="card card-head-title align-items-center justify-content-center">
             <span class="align-items-left justify-content-left skeleton">
-                <span style="color:orangered;"><i class="fa-solid fa-layer-group"></i></span>
+                <span class="text-danger"><i class="fa-solid fa-layer-group"></i></span>
                 Reject
             </span>
             <div class="ring-div skeleton">
-                <div class="total-user-loader skeleton">
+                <div class="total-reject-loader skeleton">
                     <span class="total-number">50% </span>
                 </div>
             </div>
@@ -92,11 +92,11 @@
     <div class="card card-body border-left-primary mb-1 card_focus" id="totalSales">
         <div class="card card-head-title align-items-center justify-content-center">
             <span class="align-items-left justify-content-left skeleton">
-                <i class="fa-solid fa-layer-group"></i>
+                <span class="text-primary"><i class="fa-solid fa-layer-group"></i></span>
                 Total Sales
             </span>
             <div class="ring-div skeleton">
-                <div class="total-user-loader skeleton">
+                <div class="total-sales-loader skeleton">
                     <span class="total-number">50% </span>
                 </div>
             </div>
@@ -111,21 +111,21 @@
 </div>
 <div class="col-xl-2 col-md-6">
     <!-- =========== Total Expenses ============== -->
-    <div class="card card-body border-left-primary mb-1 card_focus skeleton" id="totalExpenses">
+    <div class="card card-body border-left-primary mb-1 card_focus" id="totalExpenses">
         <div class="card card-head-title align-items-center justify-content-center">
             <span class="align-items-left justify-content-left skeleton">
-                <i class="fa-solid fa-layer-group"></i>
+                <span class="text-expenses"><i class="fa-solid fa-layer-group"></i></span>
                 Expenses
             </span>
             <div class="ring-div skeleton">
-                <div class="total-user-loader skeleton">
+                <div class="total-expenses-loader skeleton">
                     <span class="total-number">50% </span>
                 </div>
             </div>
         </div>
         <span class="card-head-title skeleton">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
         <div class="progress skeleton" style="height:0.3rem;">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+            <div class="progress-bar progress-bar-striped bg-expenses progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
                 
             </div>
         </div>
