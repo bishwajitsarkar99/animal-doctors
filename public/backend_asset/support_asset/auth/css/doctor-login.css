@@ -1,5 +1,9 @@
 :root{
     --input-background:linear-gradient(to bottom, silver, transparent,silver,lightgray);
+    --nav-button-background:linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);
+    --mdb-btn-border-color:#3b71ca;
+    --nav-font-family:sans-serif;
+    --nav-button-color:white;
 }
 body.doctors-background-color{
     animation: background_focus 6s infinite;
@@ -122,8 +126,8 @@ div.url_link{
 .rest-email-skeleton::before {
     content: "";
     position: absolute;
-    left: -34px;
-    top: 26px;
+    left: -35px;
+    top: 27px;
     width: 305px;
     height: 30px;
     z-index: 10;
@@ -134,8 +138,8 @@ div.url_link{
 .rest-password-skeleton::before{
     content: "";
     position: absolute;
-    left: -54px;
-    top: 26px;
+    left: -62px;
+    top: 28px;
     width: 305px;
     height: 30px;
     z-index: 10;
@@ -146,8 +150,8 @@ div.url_link{
 .rest-confirm-password-skeleton::before{
     content: "";
     position: absolute;
-    left: -108px;
-    top: 27px;
+    left: -120px;
+    top: 28px;
     width: 305px;
     height: 30px;
     z-index: 10;
@@ -167,8 +171,9 @@ h6.head_auth {
     margin-left: 16px;
 }
 .card.forget_card {
-    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
-    font-family: 'FontAwesome';
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    font-family: sans-serif;
     color: darkblue;
 }
 .lb_text {
@@ -194,13 +199,26 @@ input.inpt_pass::placeholder{
     color: gray;
 }
 button.btn.btn-sm.btn.forget_button {
-    background: linear-gradient(to bottom, rgb(5, 5, 248), transparent 3%, rgb(5, 5, 248), rgb(5, 5, 248));
-    color: darkkhaki;
-    border-color: rgb(5, 5, 248);
-    font-weight: 600;
-    letter-spacing: 0.5px;
     width: 100%;
-    border-radius: 5px;
+    height: 25px;
+    background-image: var(--nav-button-background);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    color: var(--nav-button-color);
+    font-family: var(--nav-font-family);
+    border-color: var(--mdb-btn-border-color);
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    font-variant: all-petite-caps;
+    font-size: 12px;
+    line-height: .2;
+    opacity: 1;
+    text-align: center;
+    font-weight: 700;
+    outline: none;
+    letter-spacing: 0.5px;
+    margin-left: -2px;
+    border-radius: 3px;
+    transition: .5s ease;
     animation: text_font_color 5s infinite;
 }
 @keyframes text_font_color{
@@ -213,17 +231,36 @@ button.btn.btn-sm.btn.forget_button {
 }
 
 a.btn_bg {
-    background: linear-gradient(to bottom, rgb(5, 5, 248), transparent 3%, rgb(5, 5, 248), rgb(5, 5, 248));
-    border: 1px solid rgb(5, 5, 248);
-    border-radius: 5px;
-    font-weight: 600;
-    color: white;
-    text-decoration: none;
+    width: 100px;
+    height: 25px;
+    background-image: var(--nav-button-background);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    color: var(--nav-button-color);
+    font-family: var(--nav-font-family);
+    border-color: var(--mdb-btn-border-color);
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    font-variant: all-petite-caps;
+    font-size: 12px;
+    line-height: .2;
+    opacity: 1;
+    text-align: center;
+    font-weight: 700;
+    outline: none;
+    letter-spacing: 0.5px;
+    margin-left: -2px;
+    border-radius: 3px;
+    transition: .5s ease;
+    animation: text_font_color 5s infinite;
 }
 a.btn_bg:hover{
-    background: linear-gradient(to bottom, rgb(5, 5, 248), transparent 3%, rgb(5, 5, 248), rgb(5, 5, 248));
-    border: 1px solid rgb(5, 5, 248);
-    color: white;
+    background-image: var(--nav-button-background);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    color: var(--nav-button-color);
+    font-family: var(--nav-font-family);
+    border-color: var(--mdb-btn-border-color);
+    transition: .5s ease;
 }
 @media(min-width:400px) and (max-width:580px){
     .lb_text {

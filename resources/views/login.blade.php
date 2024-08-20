@@ -165,7 +165,9 @@
                                         <button id="submit" type="submit" class="btn btn-sm btn-primary login_button button-skeleton">
                                             <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
                                             <span class="btn-text">Login</span>
+                                            <!-- <span class="button-focus-classic"></span> -->
                                         </button>
+
                                     </div>
                                 </div>
                             </div>

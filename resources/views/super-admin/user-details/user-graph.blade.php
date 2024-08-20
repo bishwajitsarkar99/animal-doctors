@@ -2,15 +2,17 @@
 <div class="row">
     <div class="col-xl-3">
         <div class="card card-body first-card">
-            <span class="card-head-title">
-                <i class="fa-solid fa-layer-group"></i>
-                Total-Users
+            <div class="card card-head-title align-items-center justify-content-center">
+                <span class="align-items-left justify-content-left">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Total-Users
+                </span>
                 <div class="ring-div">
                     <div class="total-user-loader">
                         <span class="total-number">{{ $total_users }}</span>
                     </div>
                 </div>
-            </span>
+            </div>
             <div class="progress" style="height:0.8rem;">
                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ $total_users_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $total_users_percentage }}%;">
                     {{ round($total_users_percentage, 2) }}%
@@ -20,9 +22,11 @@
     </div>
     <div class="col-xl-3">
         <div class="card card-body second-card">
-            <span class="card-head-title">
-                <i class="fa-solid fa-layer-group"></i>
-                Authentic Users
+            <span class="card card-head-title align-items-center justify-content-center">
+                <span class="align-items-left justify-content-left">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Authentic Users
+                </span>
                 <div class="ring-div">
                     <div class="authentic-loader">
                         <span class="total-number">{{ $authentic_users }}</span>
@@ -38,9 +42,11 @@
     </div>
     <div class="col-xl-3">
         <div class="card card-body third-card">
-            <span class="card-head-title">
-                <i class="fa-solid fa-layer-group"></i>
-                Inactive Users
+            <span class="card card-head-title align-items-center justify-content-center">
+                <span class="align-items-left justify-content-left">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Inactive Users
+                </span>
                 <div class="ring-div">
                     <div class="inactive-loader">
                         <span class="total-number">{{ $inactive_users }}</span>
@@ -56,9 +62,11 @@
     </div>
     <div class="col-xl-3">
         <div class="card card-body four-card">
-            <span class="card-head-title">
-                <i class="fa-solid fa-layer-group"></i>
-                Activity Users
+            <span class="card card-head-title align-items-center justify-content-center">
+                <span class="align-items-left justify-content-left">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Activity Users
+                </span>
                 <div class="ring-div">
                     <div class="activity-loader">
                         <span class="total-number">{{ $activity_users }}</span>
@@ -186,10 +194,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-9">
+                <div class="col-xl-4">
                     <span class="login-user-title" style="color: royalblue;">Total Users</span>
                 </div>
-                <div class="col-xl-3" style="text-align:center;">
+                <div class="col-xl-6"></div>
+                <div class="col-xl-2">
                     <span class="login-user-title sub_total_user pt-1">{{ $total_users }}</span>
                 </div>
             </div>

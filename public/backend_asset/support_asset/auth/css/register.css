@@ -155,6 +155,8 @@ input.register{
     letter-spacing: 0.5px;
     font-weight: 600;
     opacity: 1;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 input.register:focus,input.contract:focus,input.reg_email:focus,input.password:focus,input.confrim-password:focus{
     border-color: #2f89fc;
@@ -179,6 +181,8 @@ input.contract{
     letter-spacing: 0.5px;
     font-weight: 600;
     opacity: 1;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 input.reg_email{
     /* background-image: var(--bs-email-background-color); */
@@ -198,6 +202,8 @@ input.reg_email{
     letter-spacing: 0.5px;
     font-weight: 600;
     opacity: 1;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 input.password{
     /* background-image: var(--bs-email-background-color); */
@@ -217,6 +223,8 @@ input.password{
     letter-spacing: 0.5px;
     font-weight: 600;
     opacity: 1;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 input.confrim-password{
     /* background-image: var(--bs-email-background-color); */
@@ -236,6 +244,8 @@ input.confrim-password{
     letter-spacing: 0.5px;
     font-weight: 600;
     opacity: 1;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 input.image{
     /* background-image: var(--bs-email-background-color); */
@@ -252,6 +262,8 @@ input.image{
     font-size: 10px;
     width: 161px;
     opacity: 1;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 .input-skeleton,.input-email-skeleton,.cap-skeleton,.file-skeleton,.menu-skeleton{
     position: relative;
@@ -386,6 +398,8 @@ button.btn.btn-sm.btn-primary.button_margin{
     text-align: center;
     color: #89868687;
     border: 1px solid silver;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 .register_img:hover{
     transform: scale(0.8);
@@ -402,6 +416,8 @@ button.btn.btn-sm.btn-primary.button_margin{
     transform: scale(1);
     transition: 0.5s;
     border-radius: 3px;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 body.register_background-color{
     background-image: url("/image/register.jpg");

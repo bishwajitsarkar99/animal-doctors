@@ -215,6 +215,7 @@ img#loaderShow {
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
     font-variant: all-petite-caps;
     text-align: center;
+    border: none;
 }
 .login-user-title{
     font-family: var(--nav-font-family);
@@ -227,6 +228,8 @@ img#loaderShow {
     text-align: center;
 }
 .user-amount{
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     font-family: var(--nav-font-family);
     font-size: 11px;
     font-weight: 700;
@@ -239,7 +242,7 @@ img#loaderShow {
 .ring-div {
     width: 100px;
     height: 86px;
-    margin-left: 58px;
+    /* margin-left: 58px; */
 }
 .activity-loader {
     border-right: 10px solid blueviolet;
@@ -408,7 +411,6 @@ div.card.order_line_chart:hover{
 }
 .sub_total_user{
     text-decoration: underline double;
-    margin-left: 10px;
     color: royalblue;
 }
 label.item_class {

@@ -9,7 +9,7 @@
 </div>
 <div class="modal-body admin_modal_body footer_menubar">
     <!-- ============= Purchases-Moduel ===================== -->
-    <span class="purchases_moduel"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> <span class="moduel_label ps-1 pe-1"> Purchases</span></span>
+    <span class="purchases_moduel"><span class="moduel_label ps-1 pe-1"><i class="fa-solid fa-layer-group"></i> Purchases</span></span>
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
             <button class="accordion-button collapsed footer_menu" data-bs-toggle="collapse" data-bs-target="#product_footerMenu" aria-expanded="false" aria-controls="product_footerMenu">
@@ -51,7 +51,7 @@
         </div>
     </div>
     <!-- ============= Accounts-Moduel ===================== -->
-    <span class="purchases_moduel"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> <span class="moduel_label ps-1 pe-1"> Accounts</span></span>
+    <span class="purchases_moduel"><span class="moduel_label ps-1 pe-1"><i class="fa-solid fa-layer-group"></i> Accounts</span></span>
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
             <button class="accordion-button collapsed footer_menu" data-bs-toggle="collapse" data-bs-target="#leger_footerMenu" aria-expanded="false" aria-controls="leger_footerMenu">
@@ -153,7 +153,7 @@
         </div>
     </div>
     <!-- ============= HRM-Moduel ===================== -->
-    <span class="purchases_moduel"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> <span class="moduel_label ps-1 pe-1"> HRM Management</span></span>
+    <span class="purchases_moduel"><span class="moduel_label ps-1 pe-1"><i class="fa-solid fa-layer-group"></i> HRM Management</span></span>
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
             <button class="accordion-button collapsed footer_menu" data-bs-toggle="collapse" data-bs-target="#hrm_footerMenu" aria-expanded="false" aria-controls="hrm_footerMenu">
@@ -175,7 +175,7 @@
         </div>
     </div>
     <!-- ============= AUTH-Moduel ===================== -->
-    <span class="purchases_moduel"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> <span class="moduel_label ps-1 pe-1"> Auth</span></span>
+    <span class="purchases_moduel"><span class="moduel_label ps-1 pe-1"><i class="fa-solid fa-layer-group"></i> Auth</span></span>
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
             <button class="accordion-button collapsed footer_menu" data-bs-toggle="collapse" data-bs-target="#auth_footerMenu" aria-expanded="false" aria-controls="auth_footerMenu">
@@ -198,7 +198,7 @@
     </div>
     
     <!-- ============= Components-Moduel ===================== -->
-    <span class="purchases_moduel"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> <span class="moduel_label ps-1 pe-1"> Components</span></span>
+    <span class="purchases_moduel"><span class="moduel_label ps-1 pe-1"><i class="fa-solid fa-layer-group"></i> Components</span></span>
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
             <button class="accordion-button collapsed footer_menu" data-bs-toggle="collapse" data-bs-target="#compnents_footerMenu" aria-expanded="false" aria-controls="compnents_footerMenu">
@@ -222,5 +222,5 @@
     
 </div>
 <div class="modal-footer menu_footer">
-    <a type="button" class="btn btn-sm text-danger modal_button menu_btn" data-bs-dismiss="modal">Cancel</a>
+    <a type="button" class="btn btn-sm modal_button menu_btn" data-bs-dismiss="modal">Cancel</a>
 </div>

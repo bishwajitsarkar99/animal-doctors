@@ -131,7 +131,7 @@
 @if(auth()->user()->role ==0)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/footer-css/silver.css" id="footerGreenlink">
 @endif
-<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/menu-css/gold.css" id="footerMenuGreenlink">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/menu-css/silver.css" id="footerMenuGreenlink">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/themes-setting-css/orange.css" id="settingGreenlink">
 <!-- <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/minilist-css/gold.css" id="miniMenuGreenlink"> -->
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/components-css/modal-css/gold.css" id="smallModalGreenlink">

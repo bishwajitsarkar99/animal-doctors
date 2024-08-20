@@ -1,0 +1,6 @@
+:root{
+    --theme-footer-menu-background-image:linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);
+    --bs-bg-opacity: 1;
+    --modal-menu-width: 80%;
+
+}
