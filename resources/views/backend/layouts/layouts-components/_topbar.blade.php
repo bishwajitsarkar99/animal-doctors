@@ -1,13 +1,13 @@
 <!-- Navbar Brand-->
-<a class="navbar-brand ps-3 admin_panel" href="#" id="side_bar">
-    <span class="visit_link" onclick="openFullscreen()" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Open Full Screen Mode')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+<a class="navbar-brand ps-1 admin_panel" href="#" id="side_bar">
+    <span class="visit_link mini-btn-one" onclick="openFullscreen()" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Open Full Screen Mode')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         @if(auth()->user()->role ==0)
             <span><i class="fa-solid fa-expand" style="color: darkblue;"></i></span>
         @else
             <span><i class="fa-solid fa-expand" style="color: #ffffff;"></i></span>  
         @endif  
     </span>
-    <span class="visit_link" onclick="closeFullscreen()" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close Full Screen Mode')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+    <span class="visit_link mini-btn-two" onclick="closeFullscreen()" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close Full Screen Mode')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         @if(auth()->user()->role ==0)
             <span><i class="fa-regular fa-rectangle-xmark" style="color: darkblue;"></i></span>
         @else

@@ -186,6 +186,18 @@ img#loaderShow {
     background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
     opacity: 1;
 }
+.first-card:hover, .second-card:hover, .third-card:hover, .four-card:hover, .five-card:hover,.log-panel-card:hover {
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    opacity: 1;
+}
+div.card.order_line_chart {
+    transition: 0.5s;
+    border: none;
+    box-shadow: 0px 1px 10px #0001, 0px 0px 2px #0001;
+    background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
+    opacity: 1;
+}
 .bg-success {
     opacity: 1 !important;
     background-color: #198754 !important;

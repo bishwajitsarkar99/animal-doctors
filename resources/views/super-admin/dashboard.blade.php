@@ -64,7 +64,39 @@
 </script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
-    // skeleton
+    // init skeleton
+    function initSkeleton(){
+        const  allSkeleton = document.querySelectorAll('.init-skeleton')
+    
+        allSkeleton.forEach(item=>{
+            item.classList.remove('init-skeleton')
+        });
+    }
+    // cricale skeleton
+    function cricaleSkeleton(){
+        const  allSkeleton = document.querySelectorAll('.cricale-skeleton')
+    
+        allSkeleton.forEach(item=>{
+            item.classList.remove('cricale-skeleton')
+        });
+    }
+    // amount skeleton
+    function amountSkeleton(){
+        const  allSkeleton = document.querySelectorAll('.amount-skeleton')
+    
+        allSkeleton.forEach(item=>{
+            item.classList.remove('amount-skeleton')
+        });
+    }
+    // progress bar skeleton
+    function progressBarSkeleton(){
+        const  allSkeleton = document.querySelectorAll('.progress-bar-skeleton')
+    
+        allSkeleton.forEach(item=>{
+            item.classList.remove('progress-bar-skeleton')
+        });
+    }
+    // skeleton 
     function fetchData(){
         const  allSkeleton = document.querySelectorAll('.skeleton')
     
@@ -75,6 +107,10 @@
 
     setTimeout(() => {
         fetchData();
+        initSkeleton();
+        cricaleSkeleton();
+        amountSkeleton();
+        progressBarSkeleton();
     }, 1000);
 </script>
 <script> 

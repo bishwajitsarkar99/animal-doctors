@@ -11,7 +11,6 @@
                         <span class="plantform produ skeleton ps-4">{{__('translate.Total Products')}} <span class="pro_">:</span></span>
                         <span class='counter_first plantform skeleton ms-2  iu pe-1' data-val='$row.00'>{{$product_counts}}.00 Pics</span>
                     </div>
-                    <!-- <div id="loader_product"></div> -->
                 </div>
                 <div class="total_product skeleton ps-2 mt-1">
                     <div class="progress_login_header loadheight skeleton skeleton-children">
@@ -38,7 +37,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card form-control form-control-sm mt-3 ps-2 pb-2 pe-2 mb-3 prod_reslt skeleton">
+            <div class="card form-control form-control-sm mt-2 ps-2 pb-2 pe-2 mb-3 prod_reslt skeleton">
                 <div class="total_product skeleton ps-2">
                     <div class="progress_login_header loadheight skeleton skeleton-children">
                         <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary skeleton" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">

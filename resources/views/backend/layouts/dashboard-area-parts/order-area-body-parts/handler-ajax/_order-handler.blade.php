@@ -20,4 +20,8 @@
             $("#orderDetailsTableThree").addClass('skeleton-children');
         });
     });
+    // ACtive table row background
+    $(document).on('click', 'tr.table-row', function(){
+        $(this).addClass("clicked").siblings().removeClass("clicked");
+    });
 </script>

@@ -24,22 +24,22 @@
                                 </span> -->
                                 <div style="overflow-x:auto;">
                                     <table class="ord_table center border-1 skeleton-children mt-2">
-                                        <tr class="table-row order_body">
-                                            <th class="sn ord_headLine border_ord ps-1">{{__('translate.S.N')}}</th>
-                                            <th class="txt ord_headLine ps-1">{{__('translate.Date')}}</th>
-                                            <th class="txt ord_headLine ps-1">{{__('translate.Invoice-ID')}}</th>
-                                            <th class="tot_order_ ord_headLine ps-1">{{__('translate.Customer Name')}}</th>
-                                            <th class="tot_order_ ord_headLine ps-1">{{__('translate.Category')}}</th>
-                                            <th class="tot_order_ ord_headLine ps-1">{{__('translate.Sub-Category')}}</th>
-                                            <th class="tot_order_ ord_headLine ps-1">{{__('translate.Product-ID')}}</th>
-                                            <th class="tot_pending_ ord_headLine ps-1">{{__('translate.Product Name')}}</th>
-                                            <th class="tot_pending_ ord_headLine ps-1">{{__('translate.Brand')}}</th>
-                                            <th class="tot_complete_ ord_headLine ps-1">{{__('translate.Model')}}</th>
-                                            <th class="tot_complete_ ord_headLine ps-1">{{__('translate.Unit')}}</th>
-                                            <th class="tot_complete_ ord_headLine ps-1">{{__('translate.Qty')}}</th>
-                                            <th class="tot_complete_ ord_headLine ps-1">{{__('translate.Unit Price')}}</th>
-                                            <th class="tot_reject_ ord_headLine ps-1">{{__('translate.Amounts')}} (৳)</th>
-                                            <th class="tot_reject_ ord_headLine ps-1">{{__('translate.Comment')}}</th>
+                                        <tr class="order_body">
+                                            <th class="sn border_ord ps-1">{{__('translate.S.N')}}</th>
+                                            <th class="txt ps-1">{{__('translate.Date')}}</th>
+                                            <th class="txt ps-1">{{__('translate.Invoice-ID')}}</th>
+                                            <th class="tot_order_ ps-1">{{__('translate.Customer Name')}}</th>
+                                            <th class="tot_order_ ps-1">{{__('translate.Category')}}</th>
+                                            <th class="tot_order_ ps-1">{{__('translate.Sub-Category')}}</th>
+                                            <th class="tot_order_ ps-1">{{__('translate.Product-ID')}}</th>
+                                            <th class="tot_pending_ ps-1">{{__('translate.Product Name')}}</th>
+                                            <th class="tot_pending_ ps-1">{{__('translate.Brand')}}</th>
+                                            <th class="tot_complete_ ps-1">{{__('translate.Model')}}</th>
+                                            <th class="tot_complete_ ps-1">{{__('translate.Unit')}}</th>
+                                            <th class="tot_complete_ ps-1">{{__('translate.Qty')}}</th>
+                                            <th class="tot_complete_ ps-1">{{__('translate.Unit Price')}}</th>
+                                            <th class="tot_reject_ ps-1">{{__('translate.Amounts')}} (৳)</th>
+                                            <th class="tot_reject_ ps-1">{{__('translate.Comment')}}</th>
                                         </tr>
                                         <tr class="table-row hover">
                                             <td class="sn border_ord">1</td>
@@ -94,7 +94,7 @@
                                         </tr>
                                         <tr class="subtotal_heading">
                                             <th colspan="13" class="total_ord_amunt_ ps-2">{{__('translate.Sub-Total')}}</th>
-                                            <td class="ord_subtotal border_ pe-1">1,96,000.00 <span>৳</span></td>
+                                            <td class="ord_subtotal border_ pe-1 ps-1">1,96,000.00 <span>৳</span></td>
                                         </tr>
                                     </table>
                                 </div>

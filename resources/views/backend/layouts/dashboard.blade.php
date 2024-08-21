@@ -7,7 +7,7 @@
     @stack('css')
 </head>
 
-<body class="sb-nav-fixed" id="myscreen" dir="{{setting('app_dir', 'ltr')}}">
+<body oncontextmenu="return flase;" class="sb-nav-fixed" id="myscreen" dir="{{setting('app_dir', 'ltr')}}">
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
         @include('backend.layouts.layouts-components._topbar')

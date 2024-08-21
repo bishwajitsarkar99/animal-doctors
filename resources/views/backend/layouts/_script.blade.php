@@ -11,8 +11,29 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!--========== Ajax-Chart-Js 2.8.0 CDN Link ==========-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<!--========== NPM DATA TABLE CDN Link ==========-->
-
+<!--========== Disable Right-Click Context Menu ==========-->
+<!-- <script>
+    $(document).ready(function(){
+        $(document).on("contextmenu", function(e) {
+            return false;
+        });
+        // Disable specific keyboard shortcuts
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123) { // F12 key
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { // Ctrl+Shift+I
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { // Ctrl+Shift+J
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { // Ctrl+U
+                return false;
+            }
+        };
+    });
+</script> -->
 <!--============= Chart-Pie Js 3D CDN Link =============-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!--============ Admin page Tooltip ============-->

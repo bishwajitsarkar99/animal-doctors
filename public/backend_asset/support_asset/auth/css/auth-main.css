@@ -70,6 +70,10 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 ,.input-email-skeleton,.input-password-skeleton,.button-skeleton,.email-label-skeleton{
   position: relative;
 }
+.login_card {
+  --mdb-box-shadow-color-rgb: 0, 0, 0;
+  box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+}
 .email-label-skeleton::before{
   content: "";
   position: absolute;
