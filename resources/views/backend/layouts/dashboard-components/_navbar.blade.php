@@ -105,7 +105,7 @@
                                         <a href="/model">{{__('translate.Model')}}</a>
                                     </div>
                                 </div>
-                                <span class="custom-list-arrow"></span>
+                                <span class="custom-list-arrow mini"></span>
                             </div>
                         </div>
                     </li>
@@ -148,15 +148,23 @@
                         <div class="dropdown {{setting('navbar_order_box_moduel_display')}}">
                             <a type="button" onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-envelope-circle-check fa-beat" style="color: darkgray; font-size:15px;"></i></a>
                             <div id="myDropdown" class="dropdown-content">
-                                <input class="search_message ms-3 mt-3 mb-2" type="text" placeholder="&#xf002; {{__('translate.Search..')}}" id="myInput" onkeyup="filterFunction()">
+                                <div class="row">
+                                    <div class="col-xl-5">
+                                        <span class="text-success ms-1"><i class="fa-solid fa-layer-group"></i> Order-List</span>
+                                    </div>
+                                    <div class="col-xl-7">
+                                        <input class="search_message ms-3 mb-2" type="text" placeholder="{{__('translate.Search..')}}" id="myInput" onkeyup="filterFunction()">
+                                    </div>
+                                </div>
                                 <div class="table table-responsive" style="padding-left:5px;padding-right:5px;">
                                     <table class="table table-sm">
                                         <thead>
                                             <tr class="table-row order_body acc_setting_table">
                                                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">S.N</th>
-                                                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Customer ID</th>
+                                                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Customer</th>
                                                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Order ID</th>
-                                                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Order Location</th>
+                                                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Location</th>
+                                                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Justify</th>
                                             </tr>
                                         </thead>
                                         <tbody class="bg-transparent">
@@ -165,47 +173,53 @@
                                                 <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0000</a></td>
                                                 <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0000</a></td>
                                                 <td class="txt_ ps-1 supp_vew2">Dhaka</td>
+                                                <td class="txt_ ps-1 supp_vew2">Pending</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
                                                 <td class="border_ord ps-1 supp_vew">2</td>
                                                 <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0001</a></td>
                                                 <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0001</a></td>
                                                 <td class="txt_ ps-1 supp_vew2">Dhaka</td>
+                                                <td class="txt_ ps-1 supp_vew2">Pending</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
                                                 <td class="border_ord ps-1 supp_vew">3</td>
                                                 <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0003</a></td>
                                                 <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0003</a></td>
                                                 <td class="txt_ ps-1 supp_vew2">Natore</td>
+                                                <td class="txt_ ps-1 supp_vew2">Justified</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
                                                 <td class="border_ord ps-1 supp_vew">4</td>
                                                 <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0004</a></td>
                                                 <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0004</a></td>
                                                 <td class="txt_ ps-1 supp_vew2">Rangpur</td>
+                                                <td class="txt_ ps-1 supp_vew2">Justified</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
                                                 <td class="border_ord ps-1 supp_vew">5</td>
                                                 <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0005</a></td>
                                                 <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0005</a></td>
                                                 <td class="txt_ ps-1 supp_vew2">Dinajput</td>
+                                                <td class="txt_ ps-1 supp_vew2">Justified</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
                                                 <td class="border_ord ps-1 supp_vew">6</td>
                                                 <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0006</a></td>
                                                 <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0006</a></td>
                                                 <td class="txt_ ps-1 supp_vew2">Gazipur</td>
+                                                <td class="txt_ ps-1 supp_vew2">Justified</td>
                                             </tr>
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td>
-                                                    <a class="dropdown-item text-center small text-gray-500" href="#">{{__('translate.Read More Messages')}}</a>
-                                                    <span class="custom-order-arrow mini"></span>
-                                                </td>
-                                            </tr>
-                                        </tfoot>
                                     </table>
+                                    <tfoot>
+                                        <tr>
+                                            <td>
+                                                <a class="dropdown-item text-center small text-gray-500" href="#">{{__('translate.Read More Messages')}}</a>
+                                                <span class="custom-order-arrow mini"></span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
                                 </div>
                             </div>
                         </div>
@@ -214,16 +228,21 @@
                     <li>
                         <div class="dropdown dashboard_menubar">
                             <a class="dropbtn">{{__('translate.Language')}}</a>
-                            <div class="dropdown-content custom-select">
-                                <select name="" class="language_switcher" id="language-dropdown">
-                                    <option>{{ Config::get('languages')[App::getLocale()] }}</option>
-                                    @foreach (Config::get('languages') as $lang => $language)
-                                        @if ($lang != App::getLocale())
-                                            <option value="{{ $lang }}"> <a class="dropdown-item" href="#"> {{$language}}</a> </option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                                <span class="custom-arrow"></span>
+                            <div class="dropdown-content">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <select name="" class="language_switcher" id="language-dropdown">
+                                            <option>{{ Config::get('languages')[App::getLocale()] }}</option>
+                                            @foreach (Config::get('languages') as $lang => $language)
+                                                @if ($lang != App::getLocale())
+                                                    <option value="{{ $lang }}"> <a class="dropdown-item" href="#"> {{$language}}</a> </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                        <span class="custom-arrow"></span>
+                                    </div>
+                                </div>
+                                <span class="custom-summary-arrow"></span>
                             </div>
                         </div>
                     </li>

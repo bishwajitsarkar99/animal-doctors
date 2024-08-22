@@ -4,54 +4,84 @@
         <div class="col-xl-8">
             <div class="card form-control form-control-sm mt-1 ps-2 pb-2 pe-2 pt-2 prod_reslt skeleton">
                 <!-- =============== Number of total product ============== -->
-                <div class="total_product skeleton ps-2">
-                    <div class="progress_login_header loadheight skeleton-children">
-                        <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary skeleton" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <span class="plantform produ skeleton ps-4">{{__('translate.Total Products')}} <span class="pro_"></span></span>
+                    </div>
+                    <div class="col-xl-5">
+                        <div class="progress_login_header loadheight skeleton-children" style="height:1em;">
+                            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary skeleton" role="progressbar" aria-valuenow="100" aria-valuemin="25" aria-valuemax="100" style="width: 75%;"></div>
                         </div>
-                        <span class="plantform produ skeleton ps-4">{{__('translate.Total Products')}} <span class="pro_">:</span></span>
-                        <span class='counter_first plantform skeleton ms-2  iu pe-1' data-val='$row.00'>{{$product_counts}}.00 Pics</span>
+                    </div>
+                    <div class="col-xl-3 amount-pill">
+                        <span class='counter_first badge rounded-pill bg-primary skeleton ms-2  iu pe-1' data-val='$row.00'>{{$product_counts}}.00</span>
                     </div>
                 </div>
-                <div class="total_product skeleton ps-2 mt-1">
-                    <div class="progress_login_header loadheight skeleton skeleton-children">
-                        <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary skeleton" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <span class="plantform produ skeleton ps-4">{{__('translate.Total Category')}} <span class="pro_"></span></span>
+                    </div>
+                    <div class="col-xl-5">
+                        <div class="progress_login_header loadheight skeleton skeleton-children" style="height:1em;">
+                            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary skeleton" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:50%;"></div>
                         </div>
-                        <span class="plantform produ skeleton ps-4">{{__('translate.Total Category')}} <span class="pro_">:</span></span>
-                        <span class='counter_first plantform skeleton ms-2  iu pe-1' data-val='$row.00'>{{$category_counts}}.00</span>
+                    </div>
+                    <div class="col-xl-3 amount-pill">
+                        <span class='counter_first badge rounded-pill bg-primary skeleton ms-2  iu pe-1' data-val='$row.00'>{{$category_counts}}.00</span>
                     </div>
                 </div>
-                <div class="total_product skeleton ps-2 mt-1">
-                    <div class="progress_login_header loadheight skeleton skeleton-children">
-                        <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary skeleton" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <span class="plantform produ skeleton ps-4">{{__('translate.Total Sub-Cateogry')}} <span class="pro_"></span></span>
+                    </div>
+                    <div class="col-xl-5">
+                        <div class="progress_login_header loadheight skeleton skeleton-children" style="height:1em;">
+                            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary skeleton" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:30%;"></div>
                         </div>
-                        <span class="plantform produ skeleton ps-4">{{__('translate.Total Sub-Cateogry')}} <span class="pro_">:</span></span>
-                        <span class='counter_first plantform skeleton ms-2  iu pe-1' data-val='$row.00'>{{$subCategory_counts}}.00</span>
+                    </div>
+                    <div class="col-xl-3 amount-pill">
+                        <span class='counter_first badge rounded-pill bg-primary skeleton ms-2  iu pe-1' data-val='$row.00'>{{$subCategory_counts}}.00</span>
                     </div>
                 </div>
-                <div class="total_product skeleton ps-2 mt-1">
-                    <div class="progress_login_header loadheight skeleton skeleton-children">
-                        <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary skeleton" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <span class="plantform produ skeleton ps-4">{{__('translate.Total Brand')}} <span class="pro_"></span></span>
+                    </div>
+                    <div class="col-xl-5">
+                        <div class="progress_login_header loadheight skeleton skeleton-children" style="height:1em;">
+                            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary skeleton" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:60%;"></div>
                         </div>
-                        <span class="plantform produ skeleton ps-4">{{__('translate.Total Brand')}} <span class="pro_">:</span></span>
-                        <span class='counter_first plantform skeleton ms-2  iu pe-1' data-val='$row.00'>{{$brand_counts}}.00</span>
+                    </div>
+                    <div class="col-xl-3 amount-pill">
+                        <span class='counter_first badge rounded-pill bg-primary skeleton ms-2  iu pe-1' data-val='$row.00'>{{$brand_counts}}.00</span>
                     </div>
                 </div>
             </div>
-            <div class="card form-control form-control-sm mt-2 ps-2 pb-2 pe-2 mb-3 prod_reslt skeleton">
-                <div class="total_product skeleton ps-2">
-                    <div class="progress_login_header loadheight skeleton skeleton-children">
-                        <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary skeleton" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            <div class="card form-control form-control-sm mt-3 ps-2 pb-2 pe-2 mb-3 prod_reslt skeleton">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <span class="plantform produ skeleton ps-4">{{__('translate.Total Supplier')}} <span class="pro_"></span></span>
+                    </div>
+                    <div class="col-xl-5">
+                        <div class="progress_login_header loadheight skeleton skeleton-children" style="height:1em;">
+                            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary skeleton" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:20%;"></div>
                         </div>
-                        <span class="plantform produ skeleton ps-4">{{__('translate.Total Supplier')}} <span class="pro_">:</span></span>
-                        <span class='counter_first plantform skeleton ms-2  iu pe-1' data-val='$row.00'>{{$supplier_counts}}.00</span>
+                    </div>
+                    <div class="col-xl-3 amount-pill">
+                        <span class='counter_first badge rounded-pill bg-primary skeleton ms-2  iu pe-1' data-val='$row.00'>{{$supplier_counts}}.00</span>
                     </div>
                 </div>
-                <div class="total_product skeleton ps-2 mt-1">
-                    <div class="progress_login_header loadheight skeleton skeleton-children">
-                        <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary skeleton" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <span class="plantform produ skeleton ps-4">{{__('translate.Total Vendor')}} <span class="pro_"></span></span>
+                    </div>
+                    <div class="col-xl-5">
+                        <div class="progress_login_header loadheight skeleton skeleton-children" style="height:1em;">
+                            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary skeleton" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:10%;"></div>
                         </div>
-                        <span class="plantform produ skeleton ps-4">{{__('translate.Total Vendor')}} <span class="pro_">:</span></span>
-                        <span class='counter_first plantform skeleton ms-2  iu pe-1' data-val='$row.00'>{{$vendor_counts}}.00</span>
+                    </div>
+                    <div class="col-xl-3 amount-pill">
+                        <span class='counter_first badge rounded-pill bg-primary skeleton ms-2  iu pe-1' data-val='$row.00'>{{$vendor_counts}}.00</span>
                     </div>
                 </div>
             </div>
