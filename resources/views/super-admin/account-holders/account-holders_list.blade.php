@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-xl-2">
                             <div class="heading">
-                                <span class="history skeleton">User History</span>
+                                <span class="history page-heading-skeleton">User History</span>
                             </div>
                         </div>
                         <div class="col-xl-10">
@@ -27,7 +27,7 @@
                                         <option value="{{$user->email}}">
                                     @endforeach
                                 </datalist>
-                                <button type="submit" class="btn btn-success btn-btn-sm" id="btnRefresh">
+                                <button type="submit" class="btn btn-success btn-btn-sm btn-refresh" id="btn_refresh">
                                     <i class="loading-icon fa-solid fa-rotate fa-spin hidden"></i>
                                     <span class="text-btn">Refresh</span>
                                 </button>
@@ -97,7 +97,7 @@
                             </tbody>
                         </table>
                         <div class="pagination">
-                            <span class="user_record skeleton ps-2 pe-2">Current User : {{$users->count()}}</span>
+                            <span class="user_record page-heading-skeleton ps-2 pe-2">Current User : {{$users->count()}}</span>
                         </div>
                     </div>
                 </div>
@@ -155,6 +155,13 @@
 </script>
 <script>
   // skeleton
+  function pageSkeleton() {
+    const allSkeleton = document.querySelectorAll('.page-heading-skeleton')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('page-heading-skeleton')
+    });
+  }
   function fetchData() {
     const allSkeleton = document.querySelectorAll('.skeleton')
 
@@ -162,9 +169,9 @@
       item.classList.remove('skeleton')
     });
   }
-
   setTimeout(() => {
     fetchData();
+    pageSkeleton();
   }, 1000);
 </script>
 @endsection

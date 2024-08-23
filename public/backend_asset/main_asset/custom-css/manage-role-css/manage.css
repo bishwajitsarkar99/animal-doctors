@@ -7,6 +7,10 @@
     --nav-tab-link-active-font-weight:500;
     --background-color:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
     --role-btn-background-color:linear-gradient(to right, darkcyan,transparent, #08A05F 100%);
+    --nav-button-background: linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);
+    --nav-button-color: white;
+    --nav-font-family: sans-serif;
+    --mdb-btn-border-color: #3b71ca;
 
 }
 /**
@@ -25,16 +29,31 @@ div.mange_background{
     background-color: aliceblue;
     padding-top: 7px;
 }
+div.heading {
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+    font-family: sans-serif;
+    text-transform: capitalize;
+}
+span.history {
+    text-transform: capitalize;
+}
 input#searchInput{
     outline: none;
-    border-top: 1px solid #f1eeee;
-    border-bottom: 1px solid #f1eeee;
-    border-left: 1px solid #f1eeee;
-    border-right: 1px solid #f1eeee;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
     letter-spacing: 1px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
-    color: darkcyan;
+    color: black;
+    font-family: sans-serif;
+    width: 220px;
+}
+input#searchInput:focus{
+    border-color: #3b71ca;
 }
 .card-body.manage_role_page {
     box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
@@ -65,7 +84,9 @@ select#select_input {
         background-image: linear-gradient(120deg, darkcyan, #08a05c 100%);
     }
 }
-
+select#select_input:focus{
+    border-color: #3b71ca;
+}
 label.input_label {
     color: black;
     font-size: 12px;
@@ -201,20 +222,29 @@ input#input1 {
     display: none;
 }
 button#manage_btn {
-    line-height: 0.5px;
-    font-size: 0.9vw;
-    font-weight: 600;
-    color: white;
-    margin-top: 0.5px;
-    background-color: #08a05c;
-    background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
+    background-image: var(--nav-button-background);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    color: var(--nav-button-color);
+    font-family: var(--nav-font-family);
+    font-size: 12px;
+    line-height: .2;
+    opacity: 1;
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    font-variant: all-petite-caps;
+    text-align: center;
+    font-weight: 700;
+    border-color: var(--mdb-btn-border-color);
+    outline: none;
 }
 button#manage_btn:hover{
-    background-color: #ddd;
-    color: darkgreen;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 8px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.15), 0 4px 18px 0 rgba(var(--mdb-box-shadow-color-rgb), 0.1);
+    color: white;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    opacity: 1;
+    border-color: var(--mdb-btn-border-color);
+    outline: none;
 }
 .role_success_message{
     color: darkcyan;
@@ -301,7 +331,7 @@ button#manage_button:hover{
     top: 70%;
 }
 select option {
-    background-color: rgb(40, 40, 197);
+    background-color: #3b71ca;
     color: white;
     font-weight: 600;
     cursor: pointer;
@@ -315,4 +345,104 @@ select:hover option{
     cursor: pointer;
     border: none;
 }
-
+.page-heading-skeleton,.cricale-skeleton,.button-skeleton{
+    position: relative;
+}
+.page-heading-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+@keyframes skeleton {
+    0% {
+        background-position: -100% 0;
+    }
+    
+    100% {
+        background-position: 100% 0;
+    }
+}
+.cricale-skeleton::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 87%;
+    border-radius: 50%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+.button-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    width: 94px;
+    height: 28px;
+    border-radius: 5px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+tr.user-table-row {
+    font-size: 14px;
+    font-family: sans-serif;
+    background-color: white;
+}
+form.search_form {
+    background-color: white;
+    /* box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001; */
+    box-shadow: none;
+}
+button#btn_refresh {
+    --bs-bg-opacity: 1;
+    background-image: var(--nav-button-background);
+    opacity: var(--bs-bg-opacity);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    height: 2em;
+    box-shadow: none;
+    border: none;
+    margin-top: -0.1px;
+    line-height: 0.5px;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+button#btn_refresh:hover{
+    --bs-bg-opacity: 1;
+    background-image: var(--nav-button-background);
+    opacity: var(--bs-bg-opacity);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+}
+button#btnFormSearch {
+    --orange-fontawesome: orange;
+    --darkorange: darkorange;
+    --bs-bg-opacity: 1;
+    background-image: var(--nav-button-background);
+    opacity: var(--bs-bg-opacity);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    height: 1.8em;
+    box-shadow: none;
+    border: none;
+}
+button#btnFormSearch:hover {
+    --bs-bg-opacity: 1;
+    background-image: var(--nav-button-background);
+    opacity: var(--bs-bg-opacity);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+}

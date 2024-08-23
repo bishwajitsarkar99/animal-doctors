@@ -52,7 +52,7 @@
         // User Permission Tab
         $(document).on('click', '#tabUserPermission', function(e) {
             e.preventDefault();
-            var changeURL = '#';
+            var changeURL = '/users';
             window.location.href = changeURL;
             $("#loaderShow").removeClass('loader-show');
             $("#createSupplier").attr('hidden', true);

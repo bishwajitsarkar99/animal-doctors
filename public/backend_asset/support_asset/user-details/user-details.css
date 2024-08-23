@@ -167,6 +167,27 @@ button.refresh-btn:focus {
     color: var(--mdb-btn-focus-color);
     outline: none;
 }
+button.btn-refresh {
+    --bs-bg-opacity: 1;
+    background-color: var(--nav-button-background);
+    opacity: var(--bs-bg-opacity);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    height: 1.8em;
+    box-shadow: none;
+    border: none;
+    margin-top: -0.1px;
+    line-height: 0.5px;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+button.btn-refresh:hover{
+    --bs-bg-opacity: 1;
+    background-color: var(--nav-button-background);
+    opacity: var(--bs-bg-opacity);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+}
 th{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
