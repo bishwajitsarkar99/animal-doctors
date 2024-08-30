@@ -553,11 +553,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'mailhog',
-        'port' => '1025',
+        'host' => 'sandbox.smtp.mailtrap.io',
+        'port' => '2525',
         'encryption' => NULL,
-        'username' => NULL,
-        'password' => NULL,
+        'username' => '884ee30aada631',
+        'password' => '6f73437f14a609',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -599,7 +599,7 @@
     ),
     'from' => 
     array (
-      'address' => NULL,
+      'address' => 'superadmin@gmail.com',
       'name' => 'Laravel',
     ),
     'markdown' => 
@@ -709,7 +709,7 @@
   'session' => 
   array (
     'driver' => 'database',
-    'lifetime' => '120',
+    'lifetime' => '525600',
     'expire_on_close' => false,
     'encrypt' => false,
     'files' => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\storage\\framework/sessions',

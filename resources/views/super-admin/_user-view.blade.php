@@ -22,6 +22,12 @@
                                 </span>
                             </div>
                             <div class="form-group">
+                                <span class="field_skeletone_four">
+                                    <label class="label_user_edit" for="role">Role :</label>
+                                    <input id="view_user_role" class="" type="text" name="role" readonly>
+                                </span>
+                            </div>
+                            <div class="form-group">
                                 <span class="field_skeletone_two">
                                     <label class="label_user_edit" for="name">Name :</label>
                                     <input id="view_user_name" class="" type="text" name="name" readonly>
@@ -37,6 +43,30 @@
                                 <span class="field_skeletone_four">
                                     <label class="label_user_edit" for="contract_number">Contract-Number :</label>
                                     <input id="view_user_contract" class="" type="text" name="contract_number" readonly>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <span class="field_skeletone_four">
+                                    <label class="label_user_edit" for="email_verified_at">Email-Verified :</label>
+                                    <span id="view_user_email_verified_at"></span>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <span class="field_skeletone_four">
+                                    <label class="label_user_edit" for="created_at">Created :</label>
+                                    <span id="view_user_created_at"></span>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <span class="field_skeletone_four">
+                                    <label class="label_user_edit" for="updated_at">Last-Updated :</label>
+                                    <span id="view_user_updated_at"></span>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <span class="field_skeletone_four">
+                                    <label class="label_user_edit" for="status">Status :</label>
+                                    <span id="view_user_status"></span>
                                 </span>
                             </div>
                         </div>

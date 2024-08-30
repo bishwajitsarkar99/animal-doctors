@@ -28,10 +28,10 @@
         // User Details Tab
         $(document).on('click', '#tabDetails', function() {
         
-            $("#supplierSetting").attr('hidden', true);
+            $("#userDetails").attr('hidden', true);
             $("#loaderShow").removeClass('loader-show');
             setTimeout(() => {
-                $("#supplierSetting").removeAttr('hidden');
+                $("#userDetails").removeAttr('hidden');
                 $("#loaderShow").addClass('loader-show');
             }, 800);
     
@@ -40,26 +40,26 @@
         // User Activity Tab
         $(document).on('click', '#tabActivity', function(){
     
-            $("#moduleSetting").attr('hidden', true);
+            $("#userActivity").attr('hidden', true);
             $("#loaderShow").removeClass('loader-show');
             setTimeout(() => {
-                $("#moduleSetting").removeAttr('hidden');
+                $("#userActivity").removeAttr('hidden');
                 $("#loaderShow").addClass('loader-show');
             }, 800);
             
         });
     
         // User Permission Tab
-        $(document).on('click', '#tabUserPermission', function(e) {
-            e.preventDefault();
-            var changeURL = '/users';
-            window.location.href = changeURL;
-            $("#loaderShow").removeClass('loader-show');
-            $("#createSupplier").attr('hidden', true);
-                setTimeout(() => {
-                $("#loaderShow").addClass('loader-show');
-                $("#createSupplier").removeAttr('hidden');
-            }, 800);
-        });  
+        // $(document).on('click', '#tabUserPermission', function(e) {
+        //     e.preventDefault();
+        //     var changeURL = '#';
+        //     window.location.href = changeURL;
+        //     $("#loaderShow").removeClass('loader-show');
+        //     $("#createSupplier").attr('hidden', true);
+        //         setTimeout(() => {
+        //         $("#loaderShow").addClass('loader-show');
+        //         $("#createSupplier").removeAttr('hidden');
+        //     }, 800);
+        // });  
     });
 </script>

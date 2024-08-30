@@ -46,11 +46,11 @@
                     </div>
                 </div>
                 <div class="modal-footer profile_modal_footer">
-                    <button href="#" type="button" class="btn btn-sm modal_button update_btn_confrm btn_focus" id="userUpdate">
+                    <button href="#" type="button" class="btn btn-sm modal_button update_btn_confrm" id="userUpdate">
                         <i class="updated-icon fa fa-spinner fa-spin updated-hidden"></i>
                         <span class="btn-text">Update</span>
                     </button>
-                    <button type="button" class="btn btn-sm text-warning modal_button cancel_btn btn_focus" id="editusr9" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-sm text-warning modal_button cancel_btn" id="editusr9" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>

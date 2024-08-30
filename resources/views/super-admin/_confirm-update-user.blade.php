@@ -17,10 +17,10 @@
           </p>
         </div>
         <div class="modal-footer" id="logoutModal_footer">
-          <button id="update_btn_confirm" class="btn btn-sm modal_button update_btn btn_focus">
+          <button id="update_btn_confirm" class="btn btn-sm modal_button update_btn">
             <span class="btn-text">Confirm</span>
           </button>
-          <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-sm modal_button text-warning delete_cancel" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
         </div>    
       </div>
     </div>

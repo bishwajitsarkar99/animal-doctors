@@ -4,42 +4,37 @@
 
   <div class="container">
     <ul class="nav nav-tabs tab_bg" role="tablist" style="background:aliceblue;">
-      <li class="nav-item">
+      <li class="nav-item tab-skeletone">
         <a class="nav-link setting active home-text" data-bs-toggle="tab" href="#home" id="tabHome"> User Analysis</a>
-        <span class="tab-skeletone ms-1"></span>
       </li>
       <!-- <li class="nav-item">
         <input class="form-control from-control-sm" type="search" name="role_id" placeholder="Search-role-id" id="roleSearch">
         <span class="inp_ser_skeletone ms-1"></span>
       </li> -->
-      <li class="nav-item">
+      <li class="nav-item tab-skeletone">
         <a class="nav-link setting" data-bs-toggle="tab" href="#userActivity" id="tabActivity">User Activity</a>
-        <span class="tab4-skeletone ms-1"></span>
       </li>
-      <li class="nav-item">
+      <li class="nav-item tab-skeletone">
         <a class="nav-link setting home-text" data-bs-toggle="tab" href="#userDetails" id="tabDetails">Activity Graph</a>
-        <span class="tab2-skeletone ms-1"></span>
       </li>
-      <li class="nav-item">
+      <li class="nav-item tab-skeletone">
         <a class="nav-link setting home-text" href="#" id="tabUserPermission"> User Permission</a>
-        <span class="tab3-skeletone ms-1"></span>
       </li>
-      <li class="nav-item">
+      <li class="nav-item tab-skeletone">
         <button type="button" class="btn btn-sm refresh-btn ripple-surface " id="refresh">
           <i class="refresh-icon fa fa-solid fa-asterisk fa-spin refrsh-hidden" style="color:white;opacity:1;"></i>
           <span class="btn-text ms-1">Refresh</span>
         </button>
-        <span class="tab_btn_skeletone ms-1"></span>
       </li>
     </ul>
     <div class="tab-content" id="showCard" style="background:aliceblue;padding-bottom:15px;" hidden>
       <div id="home" class="container tab-pane active"><br>
         @include('super-admin.user-details.user-graph')
       </div>
-      <div id="userActivity" class="container tab-pane"><br>
+      <div id="userActivity" class="container tab-pane" hidden><br>
       @include('super-admin.user-details.user-activites')
     </div>
-    <div id="userDetails" class="container tab-pane"><br>
+    <div id="userDetails" class="container tab-pane" hidden><br>
       @include('super-admin.user-details.activities-graph')
     </div>
     <div id="userPermission" class="container tab-pane"><br>
@@ -78,6 +73,7 @@
   // $("#tabSetting").attr('hidden', true);
   // $("#tabCreateSupplier").attr('hidden', true);
   // $("#moduSetting").attr('hidden', true);
+  // $("#tabOne").addClass('tab-skeletone');
   $("#showCard").attr('hidden', true);
   $("#loaderShow").removeClass('loader-show');
   setTimeout(() => {
@@ -99,6 +95,15 @@
     // $("#tabSetting").removeAttr('hidden');
     // $("#tabCreateSupplier").removeAttr('hidden');
     // $("#moduSetting").removeAttr('hidden');
+    
+    removeSkeletons('.head-skeletone');
+    removeSkeletons('.body-skeletone');
+    removeSkeletons('.cricale-number-skeleton');
+    removeSkeletons('.loader_skeleton');
+    removeSkeletons('.percentage-skeletone');
+    removeSkeletons('.result-skeletone');
+    removeSkeletons('.total-number-skeletone');
+    removeSkeletons('.tab-skeletone');
     $("#loaderShow").addClass('loader-show');
     
   }, 1800);

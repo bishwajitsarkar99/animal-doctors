@@ -41,10 +41,12 @@
 
             return [...rows].map((row, key) => {
                 return `
-                    <tr class="table-row user-table-row supp-table-row" key="${key}" id="supp_tab">
+                    <tr class="table-row user-table-row supp-table-row" key="${key}" data-user-id="${row.user_id}" id="supp_tab">
                         <td class="sn border_ord" id="supp_tab2" hidden>${row.id}</td>
-                        <td class="txt_ user-details-links view_btn ps-2" id="supp_tab3" style="cursor: pointer;text-decoration:underline;" value="${row.user_id}" style="font-size: 10px;" data-bs-toggle="tooltip" data-bs-placement="right" title="Details" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                            ${row.user_id}
+                        <td class="txt_ user-details-links ps-2" id="supp_tab3">
+                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-2" id="viewBtn" value="${row.user_id}" style="font-size: 10px;height: 17px;" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="User Agent" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                                ${row.user_id}
+                            </button>
                         </td>
                         <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.roles.name}</td>
                         <td class="border_ord ps-1 supp_vew" id="supp_tab4" hidden>${row.name}</td>
@@ -55,6 +57,13 @@
                         <td class="txt_ ps-1 supp_vew7" id="supp_tab10" hidden>${row.last_activity}</td>
                         <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${formatDate(row.created_at)}</td>
                         <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${formatDate(row.updated_at)}</td>
+                        <td class="txt_ ps-1 supp_vew7" id="supp_tab10">${row.last_activity}</td>
+                    </tr>
+                    <tr class="table-row user-table-row supp-table-row hidden child-row" data-user-id="${row.user_id}">
+                        <td class="txt_ supp_vew9" id="supp_tab12">
+                            <img class="user_img rounded-circle user_imgs ms-3" src="${row.image.includes('https://')?row.image: '/image/'+ row.image}">
+                        </td>
+                        <td class="txt_ ps-1 supp_vew5" id="supp_tab8" colspan="7" style="color:blue;"><span style="font-weight:600;">User-Agent :</span> ${row.user_agent}</td>
                     </tr>
                 `;
             }).join("\n");
@@ -148,26 +157,7 @@
         $(document).on('click', '.view_btn', function(e) {
             e.preventDefault();
             var user_id = $(this).val();
-            $('#view_user_form').modal('show');
-
-            // $.ajax({
-            //     type: "GET",
-            //     url: "/show-users/" + user_id,
-            //     success: function(response) {
-            //         if (response.status == 404) {
-            //             $('#success_message').html("");
-            //             $('#success_message').addClass('alert alert-danger');
-            //             $('#success_message').text(response.messages);
-            //         } else {
-            //             $('#view_user_id').val(user_id);
-            //             $('#view_user_name').val(response.data.name);
-            //             $('#view_user_email').val(response.data.email);
-            //             $('#view_user_contract').val(response.data.contract_number);
-            //             $("#image_show").attr('src', `/image/${response.data.image}`);
-            //         }
-            //     }
-
-            // });
+            $('tr.child-row[data-user-id="' + user_id + '"]').toggleClass('hidden');
         });
     });
 </script>

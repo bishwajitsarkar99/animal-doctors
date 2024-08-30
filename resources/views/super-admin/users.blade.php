@@ -9,7 +9,7 @@
     <div class="col-xl-12">
       <div class="row">
         <div class="col-md-12 ps-2">
-          <div class="card-body focus-color user_details cd">
+          <div class="card-body focus-color user_details cd pb-3">
             <p class="users_heading skeleton mb-1">Users <span class="ms-1 skeleton">Update and Permission</span></p>
             <div class="row">
               <div class="col-5">
@@ -160,11 +160,11 @@
             </div>
           </div>
           <div class="modal-footer profile_modal_footer">
-            <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user btn_focus" id="deleteLoader">
+            <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user" id="deleteLoader">
               <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
               <span class="btn-text">Delete</span>
             </button>
-            <button type="button" class="btn btn-sm text-warning modal_button delete_cancel btn_focus" id="usrdelt4" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-sm text-warning modal_button delete_cancel" id="usrdelt4" data-bs-dismiss="modal">Cancel</button>
           </div>
       </div>
   </div>

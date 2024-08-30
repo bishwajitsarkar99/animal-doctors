@@ -660,11 +660,12 @@ span.label_user_edit {
 }
 p.users_heading{
     color: darkgray;
-    font-family: 'Archivo Black';
+    font-family: sans-serif;
     font-size: 20px;
-    margin-top: -10px;
+    margin-top: 0;
     animation: fon_color 3s infinite;
     text-transform: uppercase;
+    font-weight: 800;
 }
 @keyframes fon_color{
     50%{
@@ -703,6 +704,38 @@ input#view_user_email {
     font-weight: 600;
 }
 input#view_user_contract {
+    outline: none;
+    border: none;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    background: aliceblue;
+    font-weight: 600;
+}
+input#view_user_role {
+    outline: none;
+    border: none;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    background: aliceblue;
+    font-weight: 600;
+}
+span#view_user_created_at {
+    outline: none;
+    border: none;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    background: aliceblue;
+    font-weight: 600;
+}
+span#view_user_updated_at {
+    outline: none;
+    border: none;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    background: aliceblue;
+    font-weight: 600;
+}
+span#view_user_email_verified_at {
     outline: none;
     border: none;
     font-size: 13px;

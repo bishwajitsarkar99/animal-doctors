@@ -1,4 +1,20 @@
 <script type="text/javascript">
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+
+        // Format date
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+        };
+
+        return date.toLocaleString('en-US', options);
+    };
     // switch on/off----- users table search
     function mySrcFunction() {
         var x = document.getElementById("search_off");
@@ -320,6 +336,27 @@
                 clearTimeout(time);
             }
         });
+        // Function to get role name
+        function getRoleName(role) {
+            switch (role) {
+                case 0:
+                    return 'User';
+                case 1:
+                    return 'SuperAdmin';
+                case 2:
+                    return 'SubAdmin';
+                case 3:
+                    return 'Admin';
+                case 5:
+                    return 'Accounts';
+                case 6:
+                    return 'Marketing';
+                case 7:
+                    return 'Delivery Team';
+                default:
+                    return 'User';
+            }
+        }
         // View Users-------------------------
         $(document).on('click', '.view_btn', function(e) {
             e.preventDefault();
@@ -336,10 +373,32 @@
                         $('#success_message').text(response.messages);
                     } else {
                         $('#view_user_id').val(user_id);
+                        $('#view_user_role').val(getRoleName(response.data.role)); 
                         $('#view_user_name').val(response.data.name);
                         $('#view_user_email').val(response.data.email);
                         $('#view_user_contract').val(response.data.contract_number);
+                        $('#view_user_email_verified_at').text(formatDate(response.data.email_verified_at));
+                        $('#view_user_created_at').text(formatDate(response.data.created_at));
+                        $('#view_user_updated_at').text(formatDate(response.data.updated_at));
                         $("#image_show").attr('src', `/image/${response.data.image}`);
+
+                        // Determine status properties
+                        let statusClass, statusColor, statusText, statusBg;
+                        if (response.data.status == 1) {
+                            statusClass = 'text-danger';
+                            statusText = '❌ Unauthorize';
+                            statusColor = 'color:darkgoldenrod;font-weight:600;';
+                            statusBg = 'badge rounded-pill';
+                        } else if (response.data.status == 0) {
+                            statusClass = 'text-cyan';
+                            statusText = '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span> Authorize';
+                            statusColor = 'color:black;font-weight:600;';
+                            statusBg = 'badge rounded-pill';
+                        }
+                        $('#view_user_status')
+                            .attr('class', statusClass)
+                            .attr('style', statusColor)
+                            .html(statusText);
                     }
                 }
 

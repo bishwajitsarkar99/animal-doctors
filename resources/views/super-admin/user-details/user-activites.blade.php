@@ -22,6 +22,7 @@
             <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;" hidden>Last_activity</th>
             <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Login</th>
             <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Logout</th>
+            <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Last-Activity</th>
         </tr>
         <tbody class="bg-transparent " id="user_activites_data_table">
 

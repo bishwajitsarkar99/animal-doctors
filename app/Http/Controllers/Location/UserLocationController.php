@@ -8,6 +8,7 @@ use App\Models\SessionModel;
 use App\Models\User;
 use App\Models\Role;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class UserLocationController extends Controller
 {
@@ -72,7 +73,10 @@ class UserLocationController extends Controller
     // Get User Activity
     public function getActivity(Request $request)
     {
-        $user_activities = SessionModel::whereNotNull('role')->orderBy('id', 'desc')->with(['roles']);
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+
+        $user_activities = SessionModel::whereNotNull('role')->orderBy('id', 'desc')->with(['roles'])->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
 
         if ($query = $request->get('query')) {
             $user_activities->where('name', 'LIKE', '%' . $query . '%')
@@ -90,5 +94,26 @@ class UserLocationController extends Controller
         $data = $user_activities->paginate($perItem)->toArray();
 
         return response()->json($data, 200);
+    }
+
+    // Show User Log Details
+    public function activity($user_id)
+    {
+        
+        $users_session = SessionModel::with('roles')->find($user_id);
+        //dd($users_session);
+
+        if ($users_session) {
+            return response()->json([
+                'status' => 200,
+                'messages' => $users_session,
+                'data' => $users_session
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'User is not found!',
+            ]);
+        }
     }
 }
