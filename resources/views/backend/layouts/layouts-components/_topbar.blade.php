@@ -4,14 +4,14 @@
         @if(auth()->user()->role ==0)
             <span><i class="fa-solid fa-expand" style="color: darkblue;"></i></span>
         @else
-            <span><i class="fa-solid fa-expand" style="color: #ffffff;"></i></span>  
+            <span><i class="fa-solid fa-expand" style="color: darkgoldenrod;"></i></span>  
         @endif  
     </span>
     <span class="visit_link mini-btn-two" onclick="closeFullscreen()" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close Full Screen Mode')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         @if(auth()->user()->role ==0)
             <span><i class="fa-regular fa-rectangle-xmark" style="color: darkblue;"></i></span>
         @else
-            <span><i class="fa-regular fa-rectangle-xmark" style="color: #ffffff;"></i></span>
+            <span><i class="fa-regular fa-rectangle-xmark" style="color: orangered;"></i></span>
         @endif
     </span>
     @if(auth()->user()->role ==1)

@@ -162,12 +162,12 @@ class AuthController extends Controller
 
 
         if ($response == Password::RESET_LINK_SENT) {
-            return back()->with('success', "Check you meail for reset password");
+            return back()->with('success', "Check you email for reset password");
         }
 
         return back()
             ->withInput($request->only('email'))
-            ->withErrors(['email' => 'Fail to send meail. try agine latter']);
+            ->withErrors(['email' => 'Fail to send email, try agine latter']);
     }
 
     public function resetPassword(Request $request)

@@ -498,14 +498,14 @@ td.user-details-links{
     color: blue;
 }
 td.user-details-links:hover{
-    background-image: var(--nav-button-background);
+    background-color: rgb(195 221 195);
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     color: white;
     opacity: 1;
 }
 td.background{
-    background-image: var(--nav-button-background);
+    background-color: rgb(195 221 195);
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     color: white;
@@ -640,7 +640,11 @@ a.page-link.btn_page {
     display: none;
 }
 button#viewBtn:hover{
-    color: blue;
+    background-image: var(--nav-button-background);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    color: white;
+    opacity: 1;
 }
 
 

@@ -936,7 +936,7 @@ a.forgot_link{
   transition: all 200ms;
 } */
 h4.heading_admin_login{
-  font-family:'FontAwesome';
+  font-family:sans-serif;
   word-spacing: 1px;
   margin-top: 15px;
   letter-spacing: 1.5px;
