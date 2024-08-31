@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Mail\SampleFile;
 
 Route::get('/register', [AuthController::class, 'loadRegister']);
 
@@ -17,3 +18,7 @@ Route::get('forget-password', [AuthController::class, 'forgetPassword'])->name('
 Route::post('reset-password', [AuthController::class, 'sendResetLinkEmail'])->name('passwords.sent');
 Route::get('reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
 Route::put('reset-password', [AuthController::class, 'setPassword']);
+
+Route::get('/email', function(){
+    return new SampleFile();
+});

@@ -76,7 +76,7 @@ class UserLocationController extends Controller
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
 
-        $user_activities = SessionModel::whereNotNull('role')->orderBy('id', 'desc')->with(['roles'])->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+        $user_activities = SessionModel::whereNotNull('role')->orderBy('id', 'desc')->latest()->with(['roles'])->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
 
         if ($query = $request->get('query')) {
             $user_activities->where('name', 'LIKE', '%' . $query . '%')
