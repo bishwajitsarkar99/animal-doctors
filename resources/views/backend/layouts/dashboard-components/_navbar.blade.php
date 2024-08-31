@@ -89,7 +89,7 @@
                             <div class="dropdown-content iteam_list">
                                 <div class="row ">
                                     <div class="col-6 medicine mt-1">
-                                        <span class="medicinepart ms-3">{{__('translate.Medicine-Part')}}</span>
+                                        <span class="medicinepart ms-2">{{__('translate.Medicine-Part')}}</span>
                                         <a class="mt-2" href="/category">{{__('translate.Category')}}</a>
                                         <a href="/sub-category">{{__('translate.Sub-Category')}}</a>
                                         <a href="/medicine-group">{{__('translate.Medicine Group')}}</a>
@@ -97,7 +97,7 @@
                                         <a href="/medicine-dosage">{{__('translate.Medicine Dosage')}}</a>
                                     </div>
                                     <div class="col-6 mt-1">
-                                        <span class="medicinepart ms-3">{{__('translate.Farm-Product')}}</span>
+                                        <span class="medicinepart ms-2">{{__('translate.Farm-Product')}}</span>
                                         <a class="mt-2" href="/product">{{__('translate.Product')}}</a>
                                         <a href="/units">{{__('translate.Units')}}</a>
                                         <a href="/origin">{{__('translate.Origin')}}</a>
@@ -153,7 +153,7 @@
                                         <span class="text-success ms-1"><i class="fa-solid fa-layer-group"></i> Order-List</span>
                                     </div>
                                     <div class="col-xl-7">
-                                        <input class="search_message ms-3 mb-2" type="text" placeholder="{{__('translate.Search..')}}" id="myInput" onkeyup="filterFunction()">
+                                        <input class="search_message ms-2 mb-2" type="text" placeholder="{{__('translate.Search..')}}" id="myInput" onkeyup="filterFunction()">
                                     </div>
                                 </div>
                                 <div class="table table-responsive" style="padding-left:5px;padding-right:5px;">
@@ -162,51 +162,51 @@
                                             <tr class="table-row order_body acc_setting_table">
                                                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">S.N</th>
                                                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Customer</th>
-                                                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Order ID</th>
+                                                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Order</th>
                                                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Location</th>
                                                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Justify</th>
                                             </tr>
                                         </thead>
                                         <tbody class="bg-transparent">
                                             <tr class="table-row user-table-row supp-table-row">
-                                                <td class="border_ord ps-1 supp_vew">1</td>
-                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0000</a></td>
-                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0000</a></td>
+                                                <td class="border_ord ps-1 supp_vew"><a href="#about">1</a></td>
+                                                <td class="txt_ ps-1 supp_vew2">CU-0000</td>
+                                                <td class="txt_ ps-1 supp_vew2">OR-0000</td>
                                                 <td class="txt_ ps-1 supp_vew2">Dhaka</td>
                                                 <td class="txt_ ps-1 supp_vew2">Pending</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
-                                                <td class="border_ord ps-1 supp_vew">2</td>
-                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0001</a></td>
-                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0001</a></td>
+                                                <td class="border_ord ps-1 supp_vew"><a href="#about">2</a></td>
+                                                <td class="txt_ ps-1 supp_vew2">CU-0001</td>
+                                                <td class="txt_ ps-1 supp_vew2">OR-0001</td>
                                                 <td class="txt_ ps-1 supp_vew2">Dhaka</td>
                                                 <td class="txt_ ps-1 supp_vew2">Pending</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
-                                                <td class="border_ord ps-1 supp_vew">3</td>
-                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0003</a></td>
-                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0003</a></td>
+                                                <td class="border_ord ps-1 supp_vew"><a href="#about">3</a></td>
+                                                <td class="txt_ ps-1 supp_vew2">CU-0003</td>
+                                                <td class="txt_ ps-1 supp_vew2">OR-0003</td>
                                                 <td class="txt_ ps-1 supp_vew2">Natore</td>
                                                 <td class="txt_ ps-1 supp_vew2">Justified</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
-                                                <td class="border_ord ps-1 supp_vew">4</td>
-                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0004</a></td>
-                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0004</a></td>
+                                                <td class="border_ord ps-1 supp_vew"><a href="#about">4</a></td>
+                                                <td class="txt_ ps-1 supp_vew2">CU-0004</td>
+                                                <td class="txt_ ps-1 supp_vew2">OR-0004</td>
                                                 <td class="txt_ ps-1 supp_vew2">Rangpur</td>
                                                 <td class="txt_ ps-1 supp_vew2">Justified</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
-                                                <td class="border_ord ps-1 supp_vew">5</td>
-                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0005</a></td>
-                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0005</a></td>
+                                                <td class="border_ord ps-1 supp_vew"><a href="#about">5</a></td>
+                                                <td class="txt_ ps-1 supp_vew2">CU-0005</td>
+                                                <td class="txt_ ps-1 supp_vew2">OR-0005</td>
                                                 <td class="txt_ ps-1 supp_vew2">Dinajput</td>
                                                 <td class="txt_ ps-1 supp_vew2">Justified</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
-                                                <td class="border_ord ps-1 supp_vew">6</td>
-                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">CU-0006</a></td>
-                                                <td class="txt_ ps-1 supp_vew2"><a href="#about">OR-0006</a></td>
+                                                <td class="border_ord ps-1 supp_vew"><a href="#about">6</a></td>
+                                                <td class="txt_ ps-1 supp_vew2">CU-0006</td>
+                                                <td class="txt_ ps-1 supp_vew2">OR-0006</td>
                                                 <td class="txt_ ps-1 supp_vew2">Gazipur</td>
                                                 <td class="txt_ ps-1 supp_vew2">Justified</td>
                                             </tr>

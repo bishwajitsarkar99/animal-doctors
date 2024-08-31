@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\CompanyProfile;
 use Illuminate\Support\Facades\Password;
-
+use App\Mail\AdminEmail;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -198,7 +199,7 @@ class AuthController extends Controller
         );
 
         if($response == Password::PASSWORD_RESET){
-            return redirect()->route('login')->with('success', 'ho passwoed chnage hioiceh');
+            return redirect()->route('login')->with('success', 'Password has changed successfully');
         }
 
         return back()->withInput($request->only('email'))
@@ -221,5 +222,20 @@ class AuthController extends Controller
 
         Auth::logout();
         return redirect('/');
+    }
+
+    public function loadLink()
+    {
+        $company_profiles = companyProfile::where('id', '=', 1)->get();
+        return view('email-verirication', compact('company_profiles'));
+    }
+
+    public function loginLink()
+    {
+        // $users = User::where('role', 0)->orderBy('id', 'desc')->get();
+        // $url = "http://127.0.0.1:8000/";
+        //dd($url);
+        // Mail::to('bishwajitsarkar99@gmail.com')->send(new SampleFile($url));
+        Mail::to('bishwajitsarkar99@gmail.com')->send(new AdminEmail());
     }
 }

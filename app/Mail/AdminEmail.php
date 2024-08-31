@@ -7,21 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SampleFile extends Mailable
+class AdminEmail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $users;
-    public $url;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($users, $url)
+    public function __construct()
     {
-        $this->$users = $users;
-        $this->$url = $url;
+        //
     }
 
     /**
@@ -31,6 +28,6 @@ class SampleFile extends Mailable
      */
     public function build()
     {
-        return $this->from('superadmin@gmail.com')->markdown('emails.SampleMail')->with('url', $this->url);
+        return $this->from('superadmin@gmail.com')->markdown('emails.AdminMail');
     }
 }

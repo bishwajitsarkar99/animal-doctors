@@ -29,7 +29,7 @@
                 <span class="skeleton">{{setting('company_name')}}</span>
             </p>
             <p class="address skeleton">{{setting('company_address')}}</p>
-            <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
+            <!-- <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
                 <a class="menu_btn" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <span class="menu_icon menu-skeleton"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
                 </a>
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-            </p>
+            </p> -->
         </nav>
     </header>
 
@@ -106,7 +106,7 @@
                                         <div class="form-group">
                                             <label class="lable_name skeleton" for="name">Name <span style="padding-right: 22px;"></span> :</label>
                                             <span class="input-skeleton"></span>
-                                            <input class="mt-3 register filed_src" type="text" name="name" placeholder="&#xf007; name" value="{{old('name')}}" autofocus>
+                                            <input class="mt-3 register filed_src" type="text" name="name" placeholder="Name" value="{{old('name')}}" autofocus>
                                             <span><i class="search-icon fa fa-spinner fa-spin search-hidden"></i></span>
                                             <span class="text-danger name_message">@error('name')
                                                 <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
@@ -118,7 +118,7 @@
                                         <div class="form-group">
                                             <label class="lable_contract skeleton" for="contract_number">Contract-Number <span style="padding-right: 4px;"></span> :</label>
                                             <span class="input-skeleton"></span>
-                                            <input class="mt-3 contract" type="text" name="contract_number" placeholder="&#xf10b; contract number" value="{{old('contract_number')}}">
+                                            <input class="mt-3 contract" type="text" name="contract_number" placeholder="Contract Number" value="{{old('contract_number')}}">
                                             <i class="contract-icon fa fa-spinner fa-spin contract-hidden"></i>
                                             <span class="text-danger contact_message">@error('contract_number')
                                                 <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
@@ -131,7 +131,7 @@
                                         <div class="form-group">
                                             <label class="label_email skeleton" for="email">Email :</label>
                                             <span class="input-email-skeleton"></span>
-                                            <input class="mt-3 reg_email" type="text" name="email" placeholder="&#xf0e0; Email Address" value="{{old('email')}}">
+                                            <input class="mt-3 reg_email" type="text" name="email" placeholder="Email Address" value="{{old('email')}}">
                                             <i class="email-icon fa fa-spinner fa-spin email-hidden"></i>
                                             <span class="text-danger email_message">@error('email')
                                                 <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
@@ -143,7 +143,7 @@
                                         <div class="form-group">
                                             <label class="lable_password skeleton" for="password">Password :</label>
                                             <span class="input-skeleton"></span>
-                                            <input class="password" type="password" name="password" placeholder="&#xf13e; Password" value="{{old('password')}}">
+                                            <input class="password" type="password" name="password" placeholder="Password" value="{{old('password')}}">
                                             <i class="password-icon fa fa-spinner fa-spin password-hidden"></i>
                                             <span class="text-danger input_message">@error('password')
                                                 <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
@@ -155,7 +155,7 @@
                                         <div class="form-group">
                                             <label class="lable_password skeleton" for="password">Confirm-Password :</label>
                                             <span class="input-skeleton"></span>
-                                            <input class="confirm confrim-password" type="password" name="password_confirmation" placeholder="&#xf13e; Password">
+                                            <input class="confirm confrim-password" type="password" name="password_confirmation" placeholder="Password">
                                             <i class="confrim-password-icon fa fa-spinner fa-spin confrim-password-hidden"></i>
                                             <span class="text-danger contact_message">@error('password')
                                                 <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>

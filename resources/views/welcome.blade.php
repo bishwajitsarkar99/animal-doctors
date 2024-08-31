@@ -129,4 +129,11 @@
             </div>
         </div>
     </body>
+    <!-- @component('mail::table')
+| Name       | Email         | Contract-Number  |
+| ------------- |:-------------:| --------:|
+@foreach($users as $user)
+| {{$user['name']}}      | {{$user['email']}}      | {{$user['contract_number']}}      |
+@endforeach
+@endcomponent -->
 </html>

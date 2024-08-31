@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/doctor-login.css">
     <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/register.css">
     <link rel="icon" type="shortcut icon" href="{{asset('backend_asset')}}/main_asset/img/com-black-favicon.png">
-    <title>Forget Password</title>
+    <title>Email Verification</title>
 </head>
 <header class="bg sticky-top">
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
@@ -29,40 +29,6 @@
             <span class="heading-skeleton">{{setting('company_name')}}</span>
         </p>
         <p class="address skeleton">{{setting('company_address')}}</p>
-        <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
-            <a class="menu_btn" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                <span class="menu_icon menus-skeleton"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
-            </a>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <h6 class="head_auth" id="offcanvasRightLabel">Auth-Menu</h6>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-toggle="tooltip"  data-bs-placement="left" title="Close" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div class="modal fade" id="loader_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-sm modal-dialog-centered">
-                            <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
-                                <div class="modal-body" id="loader_modalBody"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="group__button">
-                        <!-- <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
-                            <span class="btn-text forg_page"> Forget-Password</span>
-                        </a>
-                        <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
-                            <span class="btn-text reg_page"> User-Register</span>
-                        </a> -->
-                        <a type="submit" href="/" class="btn btn-sm" id="logn_page">
-                            <span class="btn-text logn_page"> User-Login</span>
-                        </a>
-                    </div>
-                    <div class="side_canvas_animation" hidden>
-                        <img src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
-                    </div>
-                </div>
-            </div>
-        </p>
     </nav>
 </header>
 
@@ -90,10 +56,10 @@
         <div class="row">
             <div class="col-md-12 mb-5" style="margin-top:px">
                 <h4 class="heading_admin_login text-shadow" style="text-align: center;">
-                    <span class="skeleton forget_text">{{setting('forgot_page_title')}}</span>
+                    <span class="skeleton forget_text">Email-Verification</span>
                 </h4>
                 <div class="">
-                    <form action="{{ route('password.reset') }}" method="POST">
+                    <form action="{{ route('send.link') }}" method="POST">
                         @csrf
                         <div class="col-md-12">
                             @error('email')
@@ -101,53 +67,30 @@
                                 {{ $message }}
                             </div>
                             @enderror
-
                             <div class="row">
                                 <div class="container d-flex flex-column">
                                     <div class="row align-items-center justify-content-center mb-3 mt-3">
                                         <div class="col-12 col-md-8 col-lg-4">
                                             <div class="card forget_card">
                                                 <div class="card-body">
-                                                    @if(request()->input('token'))
                                                     <div class="mb-4">
-                                                        <h5 class="skeleton"><span class="skeleton lb_text">Change Password?</span></h5>
-                                                        <p class="skeleton mb-2"><span class="skeleton lb_text">Enter your registered email ID to reset the password</span></p>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="email" class="form-label skeleton">Email</label>
-                                                        <input type="email" id="email" style="border: 1px solid #f1f1f1;" class="form-control form-control-sm" name="email" placeholder="Enter Your Email" required="" value="{{request()->input('email')}}" readonly="" />
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="email" class="form-label skeleton">Password</label>
-                                                        <input type="email" id="email" style="border: 1px solid #f1f1f1;" class="form-control form-control-sm" name="email" placeholder="Enter Your Email" required="">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="email" class="form-label skeleton">Conform Password</label>
-                                                        <input type="email" id="email" style="border: 1px solid #f1f1f1;" class="form-control form-control-sm" name="email" placeholder="Enter Your Email" required="">
-                                                    </div>
-                                                    <div class="mb-3 d-grid">
-                                                        <button type="submit" class="btn btn-primary">
-                                                            Change Password
-                                                        </button>
-                                                    </div>
-                                                    @else
-                                                    <div class="mb-4">
-                                                        <h5 class="skeleton lb_text">Forgot Password?</h5>
-                                                        <p class="skeleton lb_text mb-2">Enter your registered email ID to reset the password.
+                                                        <h5 class="skeleton lb_text">Verification</h5>
+                                                        <p class="skeleton lb_text mb-2">Your registered email to verify for your account verification.
                                                         </p>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="email" class="form-label skeleton lb_text">Email :</label>
-                                                        <input type="email" id="email" style="border: 1px solid lightgray;" class="" name="email" placeholder="&#xf0e0; Enter Email Address" required="" autocomplete="off" autofocus />
+                                                        <input type="email" id="email" style="border: 1px solid lightgray;" class="" name="email" placeholder="Enter Email Address" required="" autocomplete="off" autofocus />
                                                         <span class="email-input-skeleton"></span>
                                                     </div>
                                                     <div class="mb-3 d-grid">
                                                         <button type="submit" class="btn btn-sm btn-primary forget_button register_btn">
-                                                            Reset Password
+                                                            Send Email
                                                         </button>
                                                     </div>
-                                                    <span class="skeleton reset_text">Don't have an account?</span> <a class="btn_bg ps-2 pe-2 pb-1 mini-skeleton" href="/">sign in</a>
-                                                    @endif
+                                                    <div class="mb-3 d-grid">
+                                                        <a type="button" class="btn_back ps-2 pe-2 pb-1" href="/register">Back</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -287,30 +230,6 @@
             setTimeout(function() {
                 loaderModal.hide();
             }, 2000);
-        });
-    </script>
-    <script>
-        $(document).ready(function(){
-            $(document).on('click', '.menu_btn', function(e){
-                e.preventDefault();
-                $("#loader_modal").modal('show');
-                $(".side_canvas_animation").removeAttr('hidden');
-                $(".head_auth").addClass('auth-skeleton');
-                $(".btn-close").addClass('auth-skeleton');
-                $(".forg_page").addClass('auth-skeleton');
-                $(".reg_page").addClass('auth-skeleton');
-                $(".logn_page").addClass('auth-skeleton');
-
-                setTimeout(() => {
-                    $("#loader_modal").modal('hide');
-                    $(".side_canvas_animation").attr('hidden', true);
-                    $(".head_auth").removeClass('auth-skeleton');
-                    $(".btn-close").removeClass('auth-skeleton');
-                    $(".forg_page").removeClass('auth-skeleton');
-                    $(".reg_page").removeClass('auth-skeleton');
-                    $(".logn_page").removeClass('auth-skeleton');
-                }, 2000);
-            });
         });
     </script>
 </body>

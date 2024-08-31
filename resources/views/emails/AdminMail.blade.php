@@ -1,14 +1,14 @@
 @component('mail::message')
 # Dear User!
-You are receiving this email because we received a password reset request for your account.
+You are receiving this email because we received a request to verify your account.
 
 @component('mail::panel')
-This password reset link will expire in 60 minutes.
-If you did not request a password reset, no further action is required.
+This email verification link will expire in 60 minutes. 
+If you did not request this, no further action is required.
 @endcomponent
 
 @component('mail::button', ['url' => 'http://127.0.0.1:8000/', 'color' => 'success'])
-User Login
+Email Verified
 @endcomponent
 
 ### With best regards,<br>
