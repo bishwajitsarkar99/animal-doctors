@@ -88,7 +88,7 @@
 
         <div class="container bg" style="margin-top: 65px;">
             <div class="row">
-                <div class="col-md-12 mb-1" style="margin-top:-8px;">
+                <!-- <div class="col-md-12 mb-1" style="margin-top:-8px;">
                     <h4 class="heading_admin_login text-shadow  ps-5" style="text-align: center;">
                         <span class="skeleton">{{setting('register_page_title')}}</span>
                     </h4>
@@ -183,6 +183,102 @@
                                                 <i class="register-icon fa fa-spinner fa-spin register-hidden"></i>
                                                 <span class="btn-text">Register</span>
                                             </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div> -->
+                <div class="col-md-12 mb-4" style="margin-top:px">
+                    <h4 class="heading_register text-shadow font_size  ps-2" style="text-align: center;">
+                        <span class="skeleton">{{setting('register_page_title')}}</span>
+                    </h4>
+                    <div class="">
+                        <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+                            @csrf
+                            <div class="col-md-12">
+                                @if(Session::get('fail'))
+                                <div class="alert alert-danger error_message">
+                                    {{Session::get('fail')}}
+                                </div>
+                                @endif
+                                <div class="row">
+                                    <div class="container d-flex flex-column">
+                                        <div class="row align-items-center justify-content-center">
+                                            <div class="col-md-8 col-lg-4">
+                                                <div class="card forget_card">
+                                                    <div class="card-body">
+                                                        <div class="mb-2">
+                                                            <span class="input-skeleton"></span>
+                                                            <input class="register filed_src" type="text" name="name" placeholder="User Name" value="{{old('name')}}" autofocus>
+                                                            <span><i class="search-icon fa fa-spinner fa-spin search-hidden"></i></span>
+                                                            <span class="text-danger name_message">@error('name')
+                                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
+                                                                {{$message}}@enderror
+                                                            </span>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <span class="input-skeleton"></span>
+                                                            <input class="contract" type="text" name="contract_number" placeholder="Contract Number" value="{{old('contract_number')}}">
+                                                            <i class="contract-icon fa fa-spinner fa-spin contract-hidden"></i>
+                                                            <span class="text-danger contact_message">@error('contract_number')
+                                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
+                                                                {{$message}}@enderror
+                                                            </span>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <span class="input-email-skeleton"></span>
+                                                            <input class="reg_email" type="text" name="email" placeholder="Email Address" value="{{old('email')}}">
+                                                            <i class="email-icon fa fa-spinner fa-spin email-hidden"></i>
+                                                            <span class="text-danger email_message">@error('email')
+                                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
+                                                                {{$message}}@enderror
+                                                            </span>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <span class="input-skeleton"></span>
+                                                            <input class="password" type="password" name="password" placeholder="Password" value="{{old('password')}}">
+                                                            <i class="password-icon fa fa-spinner fa-spin password-hidden"></i>
+                                                            <span class="text-danger input_message">@error('password')
+                                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
+                                                                {{$message}}@enderror
+                                                            </span>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <span class="input-skeleton"></span>
+                                                            <input class="confirm confrim-password" type="password" name="password_confirmation" placeholder="Confirm Password">
+                                                            <i class="confrim-password-icon fa fa-spinner fa-spin confrim-password-hidden"></i>
+                                                            <span class="text-danger contact_message">@error('password')
+                                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
+                                                                {{$message}}@enderror
+                                                            </span>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <span class="image_size cap-skeleton" style="text-transform: uppercase;">150 x 150 (px)</span>
+                                                            <div class="img-area" id="registerAnimation">
+                                                                <span class="skeleton"><img class="register_img" id="output" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500"></span>
+                                                            </div>
+                                                            <span class="file-skeleton"></span>
+                                                            <input accept="image/*" type='file' id="imgInput" class="image mt-1" name="image" onchange="loadFile(event)">
+                                                            <span class="text-danger photo_message">@error('image')
+                                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
+                                                                {{$message}}@enderror
+                                                            </span>
+                                                        </div>
+                                                        <div class="mb-1 d-grid">
+                                                            <button type="submit" class="btn btn-sm btn-primary forget_button register_btn" id="reg_submit">
+                                                                <i class="register-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                                <span class="btn-text">Register</span>
+                                                            </button>
+                                                            <!-- <button type="submit" class="btn btn-sm btn-primary login_button button_margin register_btn" id="reg_submit">
+                                                                <i class="register-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                                <span class="btn-text">Register</span>
+                                                            </button> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

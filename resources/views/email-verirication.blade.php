@@ -13,7 +13,7 @@
     <link href='https://fonts.googleapis.com/css?family=Archivo Black' rel='stylesheet'>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
-
+    <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/auth-main.css">
@@ -79,9 +79,21 @@
                                                         </p>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="email" class="form-label skeleton lb_text">Email :</label>
-                                                        <input type="email" id="email" style="border: 1px solid lightgray;" class="" name="email" placeholder="Enter Email Address" required="" autocomplete="off" autofocus />
+                                                        <form class="col-md-4">
+                                                            <label for="email" class="form-label skeleton lb_text">Email :</label>
+                                                            <select type="email" class="form-control select2" name="email" id="email">
+                                                                <option>Car</option>
+                                                                <option>Bike</option>
+                                                                <option>Scooter</option>
+                                                                <option>Cycle</option>
+                                                            </select>
+                                                        </form>
                                                         <span class="email-input-skeleton"></span>
+                                                    </div>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            
+                                                        </div>
                                                     </div>
                                                     <div class="mb-3 d-grid">
                                                         <button type="submit" class="btn btn-sm btn-primary forget_button register_btn">
@@ -116,6 +128,10 @@
 
     <!-- JQUERY CDN LINK -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script>
+        $('.select2').select2();
+    </script>
     <!-- Sweet Alert CDN LINK -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
     <script src="{{asset('backend_asset')}}/support_asset/auth/js/loader.min.js"></script>

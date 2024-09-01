@@ -125,7 +125,7 @@ div#loaderRegisterModal_body {
     display: none;
 }
 .image_size {
-    margin-left: 123px;
+    margin-left: 100px;
     color: darkblue;
     font-weight: 600;
     background: white;
@@ -139,9 +139,25 @@ a.menu_btn {
     font-family: sans-serif;
     font-weight: 700;
 }
+.card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1rem;
+}
+h4.heading_register {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    word-spacing: 1px;
+    margin-top: -1px;
+    letter-spacing: 1.5px;
+    animation: fontColor 8s infinite;
+}
+.font_size{
+    font-size: 20px;
+}
 input.register{
     /* background-image: var(--bs-email-background-color); */
-    width: 65%;
+    width: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     outline: none;
     animation: inputColor 2s infinite;
@@ -149,24 +165,25 @@ input.register{
     border-bottom: 1px solid lightgrey;
     border-top: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
-    margin-left: 9px;
+    margin-left: 0;
     min-height: calc(.8em + 0.5rem + .8px);
     padding: 0.10rem 0.5rem;
     border-radius: 0.25rem;
     letter-spacing: 0.5px;
     font-weight: 600;
     opacity: 1;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    height: 26px;
+    /* --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35); */
 }
 input.register:focus,input.contract:focus,input.reg_email:focus,input.password:focus,input.confrim-password:focus{
-    border-color: #2f89fc;
+    border-color:#2f89fc;
     opacity: 1;
     color: #2f89fc;
 }
 input.contract{
     /* background-image: var(--bs-email-background-color); */
-    width: 56%;
+    width: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     outline: none;
     outline: none;
@@ -175,19 +192,20 @@ input.contract{
     border-bottom: 1px solid lightgrey;
     border-top: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
-    margin-left: 10px;
+    margin-left: 0;
     min-height: calc(.8em + 0.5rem + .8px);
     padding: 0.10rem 0.5rem;
     border-radius: 0.25rem;
     letter-spacing: 0.5px;
     font-weight: 600;
     opacity: 1;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    height: 26px;
+    /* --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35); */
 }
 input.reg_email{
     /* background-image: var(--bs-email-background-color); */
-    width: 75%;
+    width: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     outline: none;
     outline: none;
@@ -196,19 +214,20 @@ input.reg_email{
     border-bottom: 1px solid lightgrey;
     border-top: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
-    margin-left: 10px;
+    margin-left: 0;
     min-height: calc(.8em + 0.5rem + .8px);
     padding: 0.10rem 0.5rem;
     border-radius: 0.25rem;
     letter-spacing: 0.5px;
     font-weight: 600;
     opacity: 1;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    height: 26px;
+    /* --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35); */
 }
 input.password{
     /* background-image: var(--bs-email-background-color); */
-    width: 65%;
+    width: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     outline: none;
     outline: none;
@@ -217,19 +236,20 @@ input.password{
     border-bottom: 1px solid lightgrey;
     border-top: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
-    margin-left: 9px;
+    margin-left: 0;
     min-height: calc(.8em + 0.5rem + .8px);
     padding: 0.10rem 0.5rem;
     border-radius: 0.25rem;
     letter-spacing: 0.5px;
     font-weight: 600;
     opacity: 1;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    height: 26px;
+    /* --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35); */
 }
 input.confrim-password{
     /* background-image: var(--bs-email-background-color); */
-    width: 56%;
+    width: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     outline: none;
     outline: none;
@@ -238,15 +258,16 @@ input.confrim-password{
     border-bottom: 1px solid lightgrey;
     border-top: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
-    margin-left: 9px;
+    margin-left: 0;
     min-height: calc(.8em + 0.5rem + .8px);
     padding: 0.10rem 0.5rem;
     border-radius: 0.25rem;
     letter-spacing: 0.5px;
     font-weight: 600;
     opacity: 1;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    height: 26px;
+    /* --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35); */
 }
 input.image{
     /* background-image: var(--bs-email-background-color); */
@@ -259,7 +280,7 @@ input.image{
     border-top: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
     border-radius: 2px;
-    margin-left: 100px;
+    margin-left: 72px;
     font-size: 10px;
     width: 161px;
     opacity: 1;
@@ -392,7 +413,7 @@ button.btn.btn-sm.btn-primary.button_margin{
 }
 .register_img {
     width: 160px;
-    height: 200px;
+    height: 160px;
     display: block;
     transition: transform .2s; 
     font-size: 16px;
@@ -406,14 +427,14 @@ button.btn.btn-sm.btn-primary.button_margin{
     transform: scale(0.8);
 }
 .img-area {
-    width: 161px;
-    height: 200px;
+    width: 160px;
+    height: 160px;
     background-color: rgb(255, 255, 255);
     overflow: hidden;
     border-color: inherit;
     border-image: initial;
     border-radius: 2px;
-    margin-left: 100px;
+    margin-left: 72px;
     transform: scale(1);
     transition: 0.5s;
     border-radius: 3px;

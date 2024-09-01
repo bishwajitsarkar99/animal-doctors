@@ -286,6 +286,14 @@ a.btn_bg:hover{
     border-color: var(--mdb-btn-border-color);
     transition: .5s ease;
 }
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 4px !important;
+    --mdb-box-shadow-color-rgb: 0, 0, 0 !important;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35) !important;
+}
+
 @media(min-width:400px) and (max-width:580px){
     .lb_text {
         font-size: 38px;
