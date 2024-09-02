@@ -26,7 +26,7 @@
         <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
             <p class="navbar-brand ps-3 admin_panel text-shadow" style="float: right;">
                 <span class="logo-skeleton"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
-                <span class="skeleton">{{setting('company_name')}}</span>
+                <span class="nav-head-skeleton">{{setting('company_name')}}</span>
             </p>
             <p class="address skeleton">{{setting('company_address')}}</p>
             <!-- <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
@@ -192,7 +192,7 @@
                 </div> -->
                 <div class="col-md-12 mb-4" style="margin-top:px">
                     <h4 class="heading_register text-shadow font_size  ps-2" style="text-align: center;">
-                        <span class="skeleton">{{setting('register_page_title')}}</span>
+                        <span class="form-head-skeleton">{{setting('register_page_title')}}</span>
                     </h4>
                     <div class="">
                         <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
@@ -210,67 +210,99 @@
                                                 <div class="card forget_card">
                                                     <div class="card-body">
                                                         <div class="mb-2">
-                                                            <span class="input-skeleton"></span>
-                                                            <input class="register filed_src" type="text" name="name" placeholder="User Name" value="{{old('name')}}" autofocus>
-                                                            <span><i class="search-icon fa fa-spinner fa-spin search-hidden"></i></span>
-                                                            <span class="text-danger name_message">@error('name')
-                                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
-                                                                {{$message}}@enderror
-                                                            </span>
+                                                            <div class="row">
+                                                                <div class="col-xl-10">
+                                                                    <span class="input-skeleton"></span>
+                                                                    <input class="register filed_src show-current-border" id="border_action" type="text" name="name" placeholder="User Name" value="{{old('name')}}" autofocus>
+                                                                    <span class="text-danger name_message show-error">@error('name')
+                                                                        {{$message}}@enderror
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-xl-2">
+                                                                    <span style="color:green;font-weight:800;font-size: 15px;"><i class="first-check fa fa-check check-hidden"></i></span>
+                                                                    <span id="firstFillUp" class="fillup-block mini-capsule-skeleton" style="color:gray;font-weight:500;font-size: 10px;padding-top:5px;">Fill up</span> 
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="mb-2">
-                                                            <span class="input-skeleton"></span>
-                                                            <input class="contract" type="text" name="contract_number" placeholder="Contract Number" value="{{old('contract_number')}}">
-                                                            <i class="contract-icon fa fa-spinner fa-spin contract-hidden"></i>
-                                                            <span class="text-danger contact_message">@error('contract_number')
-                                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
-                                                                {{$message}}@enderror
-                                                            </span>
+                                                            <div class="row">
+                                                                <div class="col-xl-10">
+                                                                    <span class="input-two-skeleton"></span>
+                                                                    <input class="contract show-current-border" type="text" name="contract_number" id="border_action2" placeholder="Contract Number" value="{{old('contract_number')}}">
+                                                                    <span class="text-danger contact_message show-error">@error('contract_number')
+                                                                        {{$message}}@enderror
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-xl-2">
+                                                                    <span style="color:green;font-weight:800;font-size: 15px;"><i class="second-check fa fa-check check-hidden"></i></span>
+                                                                    <span id="secondFillUp" class="fillup-block mini-capsule-skeleton" style="color:gray;font-weight:500;font-size: 10px;padding-top:5px;">Fill up</span> 
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="mb-2">
-                                                            <span class="input-email-skeleton"></span>
-                                                            <input class="reg_email" type="text" name="email" placeholder="Email Address" value="{{old('email')}}">
-                                                            <i class="email-icon fa fa-spinner fa-spin email-hidden"></i>
-                                                            <span class="text-danger email_message">@error('email')
-                                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
-                                                                {{$message}}@enderror
-                                                            </span>
+                                                            <div class="row">
+                                                                <div class="col-xl-10">
+                                                                    <span class="input-email-skeleton"></span>
+                                                                    <input class="reg_email show-current-border" type="text" name="email" id="border_action3" placeholder="Email Address" value="{{old('email')}}">
+                                                                    <span class="text-danger email_message show-error">@error('email')
+                                                                        {{$message}}@enderror
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-xl-2">
+                                                                    <span style="color:green;font-weight:800;font-size: 15px;"><i class="third-check fa fa-check check-hidden"></i></span>
+                                                                    <span id="thirdFillUp" class="fillup-block mini-capsule-skeleton" style="color:gray;font-weight:500;font-size: 10px;padding-top:5px;">Fill up</span> 
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="mb-2">
-                                                            <span class="input-skeleton"></span>
-                                                            <input class="password" type="password" name="password" placeholder="Password" value="{{old('password')}}">
-                                                            <i class="password-icon fa fa-spinner fa-spin password-hidden"></i>
-                                                            <span class="text-danger input_message">@error('password')
-                                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
-                                                                {{$message}}@enderror
-                                                            </span>
+                                                            <div class="row">
+                                                                <div class="col-xl-10">
+                                                                    <span class="input-skeleton"></span>
+                                                                    <input class="user_password show-current-border" type="password" name="password" id="border_action4" placeholder="Password" value="{{old('password')}}">
+                                                                    <span class="text-danger input_message show-error">@error('password')
+                                                                        {{$message}}@enderror
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-xl-2">
+                                                                    <span style="color:green;font-weight:800;font-size: 15px;"><i class="four-check fa fa-check check-hidden"></i></span>
+                                                                    <span id="fourFillUp" class="fillup-block mini-capsule-skeleton" style="color:gray;font-weight:500;font-size: 10px;padding-top:5px;">Fill up</span> 
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="mb-2">
-                                                            <span class="input-skeleton"></span>
-                                                            <input class="confirm confrim-password" type="password" name="password_confirmation" placeholder="Confirm Password">
-                                                            <i class="confrim-password-icon fa fa-spinner fa-spin confrim-password-hidden"></i>
-                                                            <span class="text-danger contact_message">@error('password')
-                                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
-                                                                {{$message}}@enderror
-                                                            </span>
+                                                            <div class="row">
+                                                                <div class="col-xl-10">
+                                                                    <span class="input-three-skeleton"></span>
+                                                                    <input class="confirm confrim-password show-current-border" type="password" name="password_confirmation" id="border_action5" placeholder="Confirm Password">
+                                                                    <span class="text-danger contact_message show-error">@error('password')
+                                                                        {{$message}}@enderror
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-xl-2">
+                                                                    <span style="color:green;font-weight:800;font-size: 15px;"><i class="five-check fa fa-check check-hidden"></i></span>
+                                                                    <span id="fiveFillUp" class="fillup-block mini-capsule-skeleton" style="color:gray;font-weight:500;font-size: 10px;padding-top:5px;">Fill up</span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="mb-2">
-                                                            <span class="image_size cap-skeleton" style="text-transform: uppercase;">150 x 150 (px)</span>
+                                                            <span class="image_size cap-skeleton" style="text-transform: uppercase;">150 x 150 (px) 
+                                                                <span style="color:green;font-weight:800;font-size: 15px;"><i class="six-check fa fa-check check-hidden"></i></span>
+                                                            </span>
                                                             <div class="img-area" id="registerAnimation">
-                                                                <span class="skeleton"><img class="register_img" id="output" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500"></span>
+                                                                <span class="skeleton"><img class="register_img image-current-border imge-border" id="output" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500"></span>
                                                             </div>
                                                             <span class="file-skeleton"></span>
                                                             <input accept="image/*" type='file' id="imgInput" class="image mt-1" name="image" onchange="loadFile(event)">
-                                                            <span class="text-danger photo_message">@error('image')
-                                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
+                                                            <span class="text-danger photo_message show-error">@error('image')
                                                                 {{$message}}@enderror
                                                             </span>
                                                         </div>
                                                         <div class="mb-1 d-grid">
-                                                            <button type="submit" class="btn btn-sm btn-primary forget_button register_btn" id="reg_submit">
-                                                                <i class="register-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                            <button type="submit" class="btn btn-sm btn-primary forget_button register_btn register_action" id="reg_submit">
                                                                 <span class="btn-text">Register</span>
+                                                                <i class="register-icon fa fa-spinner fa-spin register-hidden"></i>
                                                             </button>
+                                                            <span class="button-skeleton"></span>
                                                             <!-- <button type="submit" class="btn btn-sm btn-primary login_button button_margin register_btn" id="reg_submit">
                                                                 <i class="register-icon fa fa-spinner fa-spin register-hidden"></i>
                                                                 <span class="btn-text">Register</span>
@@ -321,6 +353,20 @@
                     item.classList.remove('logo-skeleton')
                 });
             }
+            function navHeadSkeleton(){
+                const  allSkeleton = document.querySelectorAll('.nav-head-skeleton')
+            
+                allSkeleton.forEach(item=>{
+                    item.classList.remove('nav-head-skeleton')
+                });
+            }
+            function formHeadSkeleton(){
+                const  allSkeleton = document.querySelectorAll('.form-head-skeleton')
+            
+                allSkeleton.forEach(item=>{
+                    item.classList.remove('form-head-skeleton')
+                });
+            }
             function inputSkeleton(){
                 const  allSkeleton = document.querySelectorAll('.input-skeleton')
             
@@ -328,11 +374,32 @@
                     item.classList.remove('input-skeleton')
                 });
             }
+            function inputThreeSkeleton(){
+                const  allSkeleton = document.querySelectorAll('.input-three-skeleton')
+            
+                allSkeleton.forEach(item=>{
+                    item.classList.remove('input-three-skeleton')
+                });
+            }
+            function inputTwoSkeleton(){
+                const  allSkeleton = document.querySelectorAll('.input-two-skeleton')
+            
+                allSkeleton.forEach(item=>{
+                    item.classList.remove('input-two-skeleton')
+                });
+            }
             function inputEamilSkeleton(){
                 const  allSkeleton = document.querySelectorAll('.input-email-skeleton')
             
                 allSkeleton.forEach(item=>{
                     item.classList.remove('input-email-skeleton')
+                });
+            }
+            function miniCapSkeleton(){
+                const  allSkeleton = document.querySelectorAll('.mini-capsule-skeleton')
+            
+                allSkeleton.forEach(item=>{
+                    item.classList.remove('mini-capsule-skeleton')
                 });
             }
             function capSkeleton(){
@@ -356,14 +423,27 @@
                     item.classList.remove('menu-skeleton')
                 });
             }
+            function buttonSkeleton(){
+                const  allSkeleton = document.querySelectorAll('.button-skeleton')
+            
+                allSkeleton.forEach(item=>{
+                    item.classList.remove('button-skeleton')
+                });
+            }
             setTimeout(() => {
                 logo();
                 fetchData();
+                navHeadSkeleton();
+                formHeadSkeleton();
                 inputSkeleton();
+                inputTwoSkeleton();
+                inputThreeSkeleton();
                 inputEamilSkeleton();
+                miniCapSkeleton();
                 capSkeleton();
                 fileSkeleton();
                 imageSkeleton();
+                buttonSkeleton();
             }, 2000);
         </script>
         <script>
@@ -409,6 +489,151 @@
                         $(".logn_page").removeClass('auth-skeleton');
                     }, 2000);
                 });
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+                // input name field border color changer when will show error
+                $(document).on('keyup', '#border_action',function() {
+                    var inputVal = $(this).val();
+                    if(inputVal !== ''){
+                        $(this).removeClass('show-current-border');
+                        $(this).addClass('show-success-border');
+                        $(".first-check").removeClass('check-hidden');
+                        $("#firstFillUp").removeClass('fillup-block');
+                        $("#firstFillUp").addClass('fillup-hidden');
+                    }
+                    else{
+                        $(this).addClass('show-current-border');
+                        $(this).removeClass('show-success-border');
+                        $(".first-check").addClass('check-hidden');
+                        $("#firstFillUp").addClass('fillup-block');
+                        $("#firstFillUp").removeClass('fillup-hidden');
+                    }
+                });
+                // input contract-number field border color changer when will show error
+                $(document).on('keyup', '#border_action2',function() {
+                    var inputVal = $(this).val();
+                    if(inputVal !== ''){
+                        $(this).removeClass('show-current-border');
+                        $(this).addClass('show-success-border');
+                        $(".second-check").removeClass('check-hidden');
+                        $("#secondFillUp").removeClass('fillup-block');
+                        $("#secondFillUp").addClass('fillup-hidden');
+                    }
+                    else{
+                        $(this).addClass('show-current-border');
+                        $(this).removeClass('show-success-border');
+                        $(".second-check").addClass('check-hidden');
+                        $("#secondFillUp").addClass('fillup-block');
+                        $("#secondFillUp").removeClass('fillup-hidden');
+                    }
+                });
+                // input email field border color changer when will show error
+                $(document).on('keyup', '#border_action3',function() {
+                    var inputVal = $(this).val();
+                    if(inputVal !== ''){
+                        $(this).removeClass('show-current-border');
+                        $(this).addClass('show-success-border');
+                        $(".third-check").removeClass('check-hidden');
+                        $("#thirdFillUp").removeClass('fillup-block');
+                        $("#thirdFillUp").addClass('fillup-hidden');
+                    }
+                    else{
+                        $(this).addClass('show-current-border');
+                        $(this).removeClass('show-success-border');
+                        $(".third-check").addClass('check-hidden');
+                        $("#thirdFillUp").addClass('fillup-block');
+                        $("#thirdFillUp").removeClass('fillup-hidden');
+                    }
+                    
+                });
+                // input password field border color changer when will show error
+                $(document).on('keyup', '#border_action4',function() {
+                    var inputVal = $(this).val();
+                    if(inputVal !== ''){
+                        $(this).removeClass('show-current-border');
+                        $(this).addClass('show-success-border');
+                        $(".four-check").removeClass('check-hidden');
+                        $("#fourFillUp").removeClass('fillup-block');
+                        $("#fourFillUp").addClass('fillup-hidden');
+                    }
+                    else{
+                        $(this).addClass('show-current-border');
+                        $(this).removeClass('show-success-border');
+                        $(".four-check").addClass('check-hidden');
+                        $("#fourFillUp").addClass('fillup-block');
+                        $("#fourFillUp").removeClass('fillup-hidden');
+                    }
+                });
+                // input confirm-password field border color changer when will show error
+                $(document).on('keyup', '#border_action5',function() {
+                    var inputVal = $(this).val();
+                    if(inputVal !== ''){
+                        $(this).removeClass('show-current-border');
+                        $(this).addClass('show-success-border');
+                        $(".five-check").removeClass('check-hidden');
+                        $("#fiveFillUp").removeClass('fillup-block');
+                        $("#fiveFillUp").addClass('fillup-hidden');
+                    }
+                    else{
+                        $(this).addClass('show-current-border');
+                        $(this).removeClass('show-success-border');
+                        $(".five-check").addClass('check-hidden');
+                        $("#fiveFillUp").addClass('fillup-block');
+                        $("#fiveFillUp").removeClass('fillup-hidden');
+                    }
+                });
+                // input image field border color changer when will show error
+                $(document).on('click', '.image',function() {
+                    var inputVal = $(this).val();
+                    if(inputVal !== ''){
+                        $(".six-check").removeClass('check-hidden');
+                        $(".imge-border").removeClass('image-current-border');
+                        $(".imge-border").addClass('image-success-border');
+                    }
+                    else{
+                        $(".six-check").addClass('check-hidden');
+                        $(".imge-border").addClass('image-current-border');
+                        $(".imge-border").removeClass('image-success-border');
+                    }
+                });
+
+                // input field error show border
+                $(document).ready(function() {
+                    var errorMessage = $(".show-error").text().trim();
+                    $(".show-error").attr("data-error", errorMessage);
+                    
+                    if(errorMessage !==''){
+                        $("#border_action").removeClass('show-current-border');
+                        $("#border_action").addClass('show-error-border');
+                        $("#border_action2").removeClass('show-current-border');
+                        $("#border_action2").addClass('show-error-border');
+                        $("#border_action3").removeClass('show-current-border');
+                        $("#border_action3").addClass('show-error-border');
+                        $("#border_action4").removeClass('show-current-border');
+                        $("#border_action4").addClass('show-error-border');
+                        $("#border_action5").removeClass('show-current-border');
+                        $("#border_action5").addClass('show-error-border');
+                        $(".imge-border").removeClass('image-current-border');
+                        $(".imge-border").addClass('image-error-border');
+                    }
+                    else{
+                        $("#border_action").addClass('show-current-border');
+                        $("#border_action").removeClass('show-error-border');
+                        $("#border_action2").addClass('show-current-border');
+                        $("#border_action2").removeClass('show-error-border');
+                        $("#border_action3").addClass('show-current-border');
+                        $("#border_action3").removeClass('show-error-border');
+                        $("#border_action4").addClass('show-current-border');
+                        $("#border_action4").removeClass('show-error-border');
+                        $("#border_action5").addClass('show-current-border');
+                        $("#border_action5").removeClass('show-error-border');
+                        $(".imge-border").addClass('image-current-border');
+                        $(".imge-border").removeClass('image-error-border');
+                    }
+                });
+                
             });
         </script>
     </body>

@@ -94,7 +94,7 @@ div#loaderRegisterModal_body {
     box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
 }
 .loader-register>img{
-    width: 150px;
+    width: 90px;
 }
 .log_close{
     animation: faidout 3s;
@@ -126,7 +126,7 @@ div#loaderRegisterModal_body {
 }
 .image_size {
     margin-left: 100px;
-    color: darkblue;
+    color: gray;
     font-weight: 600;
     background: white;
     padding-left: 5px;
@@ -149,8 +149,16 @@ h4.heading_register {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     word-spacing: 1px;
     margin-top: -1px;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     animation: fontColor 8s infinite;
+}
+@keyframes fontColor {
+    0%{
+        color: black;
+    }
+    100%{
+        color: black;
+    }
 }
 .font_size{
     font-size: 20px;
@@ -161,10 +169,6 @@ input.register{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     outline: none;
     animation: inputColor 2s infinite;
-    border-left: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
-    border-top: 1px solid lightgrey;
-    border-right: 1px solid lightgrey;
     margin-left: 0;
     min-height: calc(.8em + 0.5rem + .8px);
     padding: 0.10rem 0.5rem;
@@ -176,7 +180,40 @@ input.register{
     /* --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35); */
 }
-input.register:focus,input.contract:focus,input.reg_email:focus,input.password:focus,input.confrim-password:focus{
+.show-current-border{
+    border-left: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+}
+.show-error-border{
+    border-left: 1px solid #f19a7a;
+    border-bottom: 1px solid #f19a7a;
+    border-top: 1px solid #f19a7a;
+    border-right: 1px solid #f19a7a;
+}
+.show-success-border{
+    border-left: 1px solid green;
+    border-bottom: 1px solid green;
+    border-top: 1px solid green;
+    border-right: 1px solid green;
+}
+.image-current-border{
+    border: 1px solid silver;
+}
+.image-error-border{
+    border: 1px solid #f19a7a;
+}
+.image-success-border{
+    border: 1px solid green;
+}
+.check-hidden,.fillup-hidden{
+    display: none;
+}
+.fillup-block{
+    display: block;
+}
+input.register:focus,input.contract:focus,input.reg_email:focus,input.password:focus,input.confrim-password:focus,input.user_password:focus,.register_img:focus{
     border-color:#2f89fc;
     opacity: 1;
     color: #2f89fc;
@@ -188,10 +225,6 @@ input.contract{
     outline: none;
     outline: none;
     animation: inputColor 2s infinite;
-    border-left: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
-    border-top: 1px solid lightgrey;
-    border-right: 1px solid lightgrey;
     margin-left: 0;
     min-height: calc(.8em + 0.5rem + .8px);
     padding: 0.10rem 0.5rem;
@@ -210,10 +243,6 @@ input.reg_email{
     outline: none;
     outline: none;
     animation: inputColor 2s infinite;
-    border-left: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
-    border-top: 1px solid lightgrey;
-    border-right: 1px solid lightgrey;
     margin-left: 0;
     min-height: calc(.8em + 0.5rem + .8px);
     padding: 0.10rem 0.5rem;
@@ -225,17 +254,13 @@ input.reg_email{
     /* --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35); */
 }
-input.password{
+input.user_password{
     /* background-image: var(--bs-email-background-color); */
     width: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     outline: none;
     outline: none;
     animation: inputColor 2s infinite;
-    border-left: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
-    border-top: 1px solid lightgrey;
-    border-right: 1px solid lightgrey;
     margin-left: 0;
     min-height: calc(.8em + 0.5rem + .8px);
     padding: 0.10rem 0.5rem;
@@ -254,10 +279,6 @@ input.confrim-password{
     outline: none;
     outline: none;
     animation: inputColor 2s infinite;
-    border-left: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
-    border-top: 1px solid lightgrey;
-    border-right: 1px solid lightgrey;
     margin-left: 0;
     min-height: calc(.8em + 0.5rem + .8px);
     padding: 0.10rem 0.5rem;
@@ -287,52 +308,134 @@ input.image{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
-.input-skeleton,.input-email-skeleton,.cap-skeleton,.file-skeleton,.menu-skeleton{
+.input-skeleton,.input-email-skeleton,.cap-skeleton,.file-skeleton,.menu-skeleton,.input-two-skeleton,.input-three-skeleton,
+.mini-capsule-skeleton,.form-head-skeleton,.nav-head-skeleton,.button-skeleton{
     position: relative;
 }
 .input-skeleton::before{
     content: "";
     position: absolute;
-    left: 9px;
+    left: -2px;
     top: -5px;
-    width: 222px;
-    height: 30px;
+    width: 258px;
+    height: 26px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
     animation: skeleton 1s infinite reverse;
+    border-radius: 5px;
+}
+.input-two-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -6px;
+    width: 258px;
+    height: 26px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+    border-radius: 5px;
+}
+.input-three-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -6px;
+    width: 258px;
+    height: 26px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+    border-radius: 5px;
 }
 .input-email-skeleton::before{
     content: "";
     position: absolute;
-    left: 11px;
+    left: -2px;
     top: -5px;
-    width: 255px;
-    height: 30px;
+    width: 258px;
+    height: 26px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
     animation: skeleton 1s infinite reverse;
+    border-radius: 5px;
 }
 .cap-skeleton::before{
     content: "";
     position: absolute;
     left: 0;
     top: 0;
-    width: 109px;
+    width: 103px;
     height: 20px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
     animation: skeleton 1s infinite reverse;
+    border-radius: 5px;
+}
+.mini-capsule-skeleton::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 29px;
+    height: 17px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+    border-radius: 10px;
 }
 .file-skeleton::before{
     content: "";
     position: absolute;
-    left: 100px;
-    top: -2px;
+    left: 71px;
+    top: -4px;
     width: 162px;
     height: 25px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.nav-head-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 100%;
+    height: 50px;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.form-head-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.button-skeleton::before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -25px;
+    width: 100%;
+    height: 26px;
+    border-radius: 3px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
@@ -376,27 +479,27 @@ input.image{
     }
 }
 span.text-danger.contact_message {
-    margin-left: 147px;
+    margin-left: 0;
     font-size: 9px;
     letter-spacing: 0.3px;
 }
 span.text-danger.input_message {
-    margin-left: 91px;
+    margin-left: 0;
     font-size: 9px;
     letter-spacing: 0.3px;
 }
 span.text-danger.name_message {
-    margin-left: 91px;
+    margin-left: 0;
     font-size: 9px;
     letter-spacing: 0.3px;
 }
 span.text-danger.photo_message {
-    margin-left: 102px;
+    margin-left: 73px;
     font-size: 9px;
     letter-spacing: 0.3px;
 }
 span.text-danger.email_message {
-    margin-left: 68px;
+    margin-left: 0;
     font-size: 9px;
     letter-spacing: 0.3px;
 }
@@ -419,7 +522,6 @@ button.btn.btn-sm.btn-primary.button_margin{
     font-size: 16px;
     text-align: center;
     color: #89868687;
-    border: 1px solid silver;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
