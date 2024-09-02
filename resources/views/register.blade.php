@@ -24,7 +24,7 @@
     </head>
     <header class="bg sticky-top">
         <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
-            <p class="navbar-brand ps-3 admin_panel text-shadow" style="float: right;">
+            <p class="navbar-brand admin_panel text-shadow" style="float: right;">
                 <span class="logo-skeleton"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
                 <span class="nav-head-skeleton">{{setting('company_name')}}</span>
             </p>
@@ -214,7 +214,7 @@
                                                                 <div class="col-xl-10">
                                                                     <span class="input-skeleton"></span>
                                                                     <input class="register filed_src show-current-border" id="border_action" type="text" name="name" placeholder="User Name" value="{{old('name')}}" autofocus>
-                                                                    <span class="text-danger name_message show-error">@error('name')
+                                                                    <span class="input-error-skeleton text-danger name_message show-error remove-error-one">@error('name')
                                                                         {{$message}}@enderror
                                                                     </span>
                                                                 </div>
@@ -229,7 +229,7 @@
                                                                 <div class="col-xl-10">
                                                                     <span class="input-two-skeleton"></span>
                                                                     <input class="contract show-current-border" type="text" name="contract_number" id="border_action2" placeholder="Contract Number" value="{{old('contract_number')}}">
-                                                                    <span class="text-danger contact_message show-error">@error('contract_number')
+                                                                    <span class="input-error-skeleton text-danger contact_message show-error remove-error-two">@error('contract_number')
                                                                         {{$message}}@enderror
                                                                     </span>
                                                                 </div>
@@ -244,7 +244,7 @@
                                                                 <div class="col-xl-10">
                                                                     <span class="input-email-skeleton"></span>
                                                                     <input class="reg_email show-current-border" type="text" name="email" id="border_action3" placeholder="Email Address" value="{{old('email')}}">
-                                                                    <span class="text-danger email_message show-error">@error('email')
+                                                                    <span class="input-error-skeleton text-danger email_message show-error remove-error-three">@error('email')
                                                                         {{$message}}@enderror
                                                                     </span>
                                                                 </div>
@@ -257,9 +257,9 @@
                                                         <div class="mb-2">
                                                             <div class="row">
                                                                 <div class="col-xl-10">
-                                                                    <span class="input-skeleton"></span>
+                                                                    <span class="input-three-skeleton"></span>
                                                                     <input class="user_password show-current-border" type="password" name="password" id="border_action4" placeholder="Password" value="{{old('password')}}">
-                                                                    <span class="text-danger input_message show-error">@error('password')
+                                                                    <span class="input-error-skeleton text-danger input_message show-error remove-error-four">@error('password')
                                                                         {{$message}}@enderror
                                                                     </span>
                                                                 </div>
@@ -272,9 +272,9 @@
                                                         <div class="mb-2">
                                                             <div class="row">
                                                                 <div class="col-xl-10">
-                                                                    <span class="input-three-skeleton"></span>
+                                                                    <span class="input-four-skeleton"></span>
                                                                     <input class="confirm confrim-password show-current-border" type="password" name="password_confirmation" id="border_action5" placeholder="Confirm Password">
-                                                                    <span class="text-danger contact_message show-error">@error('password')
+                                                                    <span class="input-error-skeleton text-danger contact_message show-error remove-error-five">@error('password')
                                                                         {{$message}}@enderror
                                                                     </span>
                                                                 </div>
@@ -293,7 +293,7 @@
                                                             </div>
                                                             <span class="file-skeleton"></span>
                                                             <input accept="image/*" type='file' id="imgInput" class="image mt-1" name="image" onchange="loadFile(event)">
-                                                            <span class="text-danger photo_message show-error">@error('image')
+                                                            <span class="file-error-skeleton text-danger photo_message show-error remove-error-six">@error('image')
                                                                 {{$message}}@enderror
                                                             </span>
                                                         </div>
@@ -381,6 +381,13 @@
                     item.classList.remove('input-three-skeleton')
                 });
             }
+            function inputFourSkeleton(){
+                const  allSkeleton = document.querySelectorAll('.input-four-skeleton')
+            
+                allSkeleton.forEach(item=>{
+                    item.classList.remove('input-four-skeleton')
+                });
+            }
             function inputTwoSkeleton(){
                 const  allSkeleton = document.querySelectorAll('.input-two-skeleton')
             
@@ -430,6 +437,20 @@
                     item.classList.remove('button-skeleton')
                 });
             }
+            function inputErrorSkeleton(){
+                const  allSkeleton = document.querySelectorAll('.input-error-skeleton')
+            
+                allSkeleton.forEach(item=>{
+                    item.classList.remove('input-error-skeleton')
+                });
+            }
+            function fileErrorSkeleton(){
+                const  allSkeleton = document.querySelectorAll('.file-error-skeleton')
+            
+                allSkeleton.forEach(item=>{
+                    item.classList.remove('file-error-skeleton')
+                });
+            }
             setTimeout(() => {
                 logo();
                 fetchData();
@@ -438,12 +459,15 @@
                 inputSkeleton();
                 inputTwoSkeleton();
                 inputThreeSkeleton();
+                inputFourSkeleton();
                 inputEamilSkeleton();
                 miniCapSkeleton();
                 capSkeleton();
                 fileSkeleton();
                 imageSkeleton();
                 buttonSkeleton();
+                inputErrorSkeleton();
+                fileErrorSkeleton();
             }, 2000);
         </script>
         <script>
@@ -492,10 +516,16 @@
             });
         </script>
         <script>
+            // change input field border-color
             $(document).ready(function(){
                 // input name field border color changer when will show error
                 $(document).on('keyup', '#border_action',function() {
+
                     var inputVal = $(this).val();
+                    // error message remove
+                    $(".remove-error-one").text('');
+                    $("#border_action").removeClass('show-error-border');
+
                     if(inputVal !== ''){
                         $(this).removeClass('show-current-border');
                         $(this).addClass('show-success-border');
@@ -514,6 +544,10 @@
                 // input contract-number field border color changer when will show error
                 $(document).on('keyup', '#border_action2',function() {
                     var inputVal = $(this).val();
+                    // error message remove
+                    $(".remove-error-two").text('');
+                    $("#border_action2").removeClass('show-error-border');
+
                     if(inputVal !== ''){
                         $(this).removeClass('show-current-border');
                         $(this).addClass('show-success-border');
@@ -532,6 +566,10 @@
                 // input email field border color changer when will show error
                 $(document).on('keyup', '#border_action3',function() {
                     var inputVal = $(this).val();
+                    // error message remove
+                    $(".remove-error-three").text('');
+                    $("#border_action3").removeClass('show-error-border');
+
                     if(inputVal !== ''){
                         $(this).removeClass('show-current-border');
                         $(this).addClass('show-success-border');
@@ -551,6 +589,10 @@
                 // input password field border color changer when will show error
                 $(document).on('keyup', '#border_action4',function() {
                     var inputVal = $(this).val();
+                    // error message remove
+                    $(".remove-error-four").text('');
+                    $("#border_action4").removeClass('show-error-border');
+
                     if(inputVal !== ''){
                         $(this).removeClass('show-current-border');
                         $(this).addClass('show-success-border');
@@ -569,6 +611,10 @@
                 // input confirm-password field border color changer when will show error
                 $(document).on('keyup', '#border_action5',function() {
                     var inputVal = $(this).val();
+                    // error message remove
+                    $(".remove-error-five").text('');
+                    $("#border_action5").removeClass('show-error-border');
+
                     if(inputVal !== ''){
                         $(this).removeClass('show-current-border');
                         $(this).addClass('show-success-border');
@@ -587,6 +633,10 @@
                 // input image field border color changer when will show error
                 $(document).on('click', '.image',function() {
                     var inputVal = $(this).val();
+                    // error message remove
+                    $(".remove-error-six").text('');
+                    $(".image").removeClass('show-error-border');
+
                     if(inputVal !== ''){
                         $(".six-check").removeClass('check-hidden');
                         $(".imge-border").removeClass('image-current-border');
@@ -598,42 +648,40 @@
                         $(".imge-border").removeClass('image-success-border');
                     }
                 });
-
-                // input field error show border
-                $(document).ready(function() {
-                    var errorMessage = $(".show-error").text().trim();
-                    $(".show-error").attr("data-error", errorMessage);
-                    
-                    if(errorMessage !==''){
-                        $("#border_action").removeClass('show-current-border');
-                        $("#border_action").addClass('show-error-border');
-                        $("#border_action2").removeClass('show-current-border');
-                        $("#border_action2").addClass('show-error-border');
-                        $("#border_action3").removeClass('show-current-border');
-                        $("#border_action3").addClass('show-error-border');
-                        $("#border_action4").removeClass('show-current-border');
-                        $("#border_action4").addClass('show-error-border');
-                        $("#border_action5").removeClass('show-current-border');
-                        $("#border_action5").addClass('show-error-border');
-                        $(".imge-border").removeClass('image-current-border');
-                        $(".imge-border").addClass('image-error-border');
-                    }
-                    else{
-                        $("#border_action").addClass('show-current-border');
-                        $("#border_action").removeClass('show-error-border');
-                        $("#border_action2").addClass('show-current-border');
-                        $("#border_action2").removeClass('show-error-border');
-                        $("#border_action3").addClass('show-current-border');
-                        $("#border_action3").removeClass('show-error-border');
-                        $("#border_action4").addClass('show-current-border');
-                        $("#border_action4").removeClass('show-error-border');
-                        $("#border_action5").addClass('show-current-border');
-                        $("#border_action5").removeClass('show-error-border');
-                        $(".imge-border").addClass('image-current-border');
-                        $(".imge-border").removeClass('image-error-border');
-                    }
-                });
+            });
+            // input field error show border
+            $(document).ready(function() {
+                var errorMessage = $(".show-error").text().trim();
+                $(".show-error").attr("data-error", errorMessage);
                 
+                if(errorMessage !==''){
+                    $("#border_action").removeClass('show-current-border');
+                    $("#border_action").addClass('show-error-border');
+                    $("#border_action2").removeClass('show-current-border');
+                    $("#border_action2").addClass('show-error-border');
+                    $("#border_action3").removeClass('show-current-border');
+                    $("#border_action3").addClass('show-error-border');
+                    $("#border_action4").removeClass('show-current-border');
+                    $("#border_action4").addClass('show-error-border');
+                    $("#border_action5").removeClass('show-current-border');
+                    $("#border_action5").addClass('show-error-border');
+                    $(".imge-border").removeClass('image-current-border');
+                    $(".imge-border").addClass('image-error-border');
+                }
+                else{
+                    $("#border_action").addClass('show-current-border');
+                    $("#border_action").removeClass('show-error-border');
+                    $("#border_action2").addClass('show-current-border');
+                    $("#border_action2").removeClass('show-error-border');
+                    $("#border_action3").addClass('show-current-border');
+                    $("#border_action3").removeClass('show-error-border');
+                    $("#border_action4").addClass('show-current-border');
+                    $("#border_action4").removeClass('show-error-border');
+                    $("#border_action5").addClass('show-current-border');
+                    $("#border_action5").removeClass('show-error-border');
+                    $(".imge-border").addClass('image-current-border');
+                    $(".imge-border").removeClass('image-error-border');
+                }
             });
         </script>
     </body>

@@ -193,10 +193,10 @@ input.register{
     border-right: 1px solid #f19a7a;
 }
 .show-success-border{
-    border-left: 1px solid green;
-    border-bottom: 1px solid green;
-    border-top: 1px solid green;
-    border-right: 1px solid green;
+    border-left: 1px solid #00c300db;
+    border-bottom: 1px solid #00c300db;
+    border-top: 1px solid #00c300db;
+    border-right: 1px solid #00c300db;
 }
 .image-current-border{
     border: 1px solid silver;
@@ -205,7 +205,7 @@ input.register{
     border: 1px solid #f19a7a;
 }
 .image-success-border{
-    border: 1px solid green;
+    border: 1px solid #00c300db;
 }
 .check-hidden,.fillup-hidden{
     display: none;
@@ -309,7 +309,7 @@ input.image{
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 .input-skeleton,.input-email-skeleton,.cap-skeleton,.file-skeleton,.menu-skeleton,.input-two-skeleton,.input-three-skeleton,
-.mini-capsule-skeleton,.form-head-skeleton,.nav-head-skeleton,.button-skeleton{
+.mini-capsule-skeleton,.form-head-skeleton,.nav-head-skeleton,.button-skeleton,.input-four-skeleton,.input-error-skeleton,.file-error-skeleton{
     position: relative;
 }
 .input-skeleton::before{
@@ -343,6 +343,19 @@ input.image{
     position: absolute;
     left: -2px;
     top: -6px;
+    width: 258px;
+    height: 26px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+    border-radius: 5px;
+}
+.input-four-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -5px;
     width: 258px;
     height: 26px;
     z-index: 10;
@@ -441,6 +454,32 @@ input.image{
     background-size: 200%;
     animation: skeleton 1s infinite reverse;
 }
+.input-error-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: -2px;
+    width: 100%;
+    height: 12px;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.file-error-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 0;
+    width: 100%;
+    height: 12px;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
 .menu-skeleton::before{
     content: "";
     position: absolute;
@@ -494,7 +533,7 @@ span.text-danger.name_message {
     letter-spacing: 0.3px;
 }
 span.text-danger.photo_message {
-    margin-left: 73px;
+    margin-left: 75px;
     font-size: 9px;
     letter-spacing: 0.3px;
 }
@@ -570,50 +609,68 @@ body.register_background-color{
 
 @media (min-width:400px) and (max-width:580px){
     .container.bg{
-        width: 600px;
+        width: 100%;
         padding-bottom: 500px;
     }
     header.sticky-top {
         position: sticky;
-        width: 674px;
+        width: 100%;
+        display: list-item;
+    }
+    p.navbar-brand.admin_panel.text-shadow {
+        font-size: 20px;
+        margin-top: -4px;
+    }
+    p.address {
+        font-size: 8px;
+        color: floralwhite;
+        font-variant: none;
+        font-weight: 100;
+        margin-top: -20px;
+    }
+    img.company_logo{
+        height: 40px;
     }
     .reg_hidden{
         display: none;
     }
     input.register {
-        margin-left: 81px;
-        width: 70%;
+        margin-left: 0;
+        width: 100%;
     }
     input.contract {
-        margin-left: 8px;
-        width: 69%;
+        margin-left: 0;
+        width: 100%;
     }
     input.email{
-        margin-left: 95px;
+        margin-left: 0;
+        width: 100%;
     }
     input.reg_email{
         /* width:82%; */
-        width: 70%;
-        margin-left: 78px;
+        margin-left: 0;
+        width: 100%;
     }
     input.password{
-        margin-left: 57px;
-        width: 69%;
+        margin-left: 0;
+        width: 100%;
     }
     input.confirm{
-        margin-left: 3px;
-        width: 69%;
+        margin-left: 0;
+        width: 100%;
     }
     .img-area{
         margin-top: 50px;
     }
     input.image {
-        margin-left: 101px;
+        margin-left: 71px;
     }
     button.btn.btn-sm.btn-primary.button_margin{
         margin-left: 118px;
     }
-
+    button.btn.btn-sm.btn.forget_button {
+        font-size: 19px;
+    }
 }
 @media (min-width:600px) and (max-width:780px){
     .container.bg{
