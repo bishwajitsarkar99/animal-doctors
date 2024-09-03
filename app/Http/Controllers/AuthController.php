@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Email\EmailVerification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -52,7 +53,17 @@ class AuthController extends Controller
         }
         $user->save();
 
-        return back()->with('success', 'Your Registration has been completed successfully');
+        // Insert into email_verifications table
+        DB::table('email_verifications')->insert([
+            'user_id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'role' => $request->role ?? 0,
+            'account_create_session' => now(),
+            'created_at' => now(),
+        ]);
+
+        return redirect(url('/email-verification'))->with('success', 'Your Registration has been completed successfully');
     }
 
     public function loadLogin()
@@ -227,15 +238,30 @@ class AuthController extends Controller
     public function loadLink()
     {
         $company_profiles = companyProfile::where('id', '=', 1)->get();
-        return view('email-verirication', compact('company_profiles'));
+        $email_verifications = EmailVerification::where('status', '=', 1)->get();
+        return view('email-verirication', compact('company_profiles','email_verifications'));
     }
 
-    public function loginLink()
+    public function loginLink(Request $request)
     {
         // $users = User::where('role', 0)->orderBy('id', 'desc')->get();
         // $url = "http://127.0.0.1:8000/";
         //dd($url);
         // Mail::to('bishwajitsarkar99@gmail.com')->send(new SampleFile($url));
-        Mail::to('bishwajitsarkar99@gmail.com')->send(new AdminEmail());
+
+        // Mail::to('bishwajitsarkar99@gmail.com')->send(new AdminEmail());
+
+        // Validate the email input
+        $request->validate([
+            'email' => 'required|email|exists:email_verifications,email',
+        ]);
+        try {
+            $userEmail = $request->email;
+            Mail::to($userEmail)->send(new AdminEmail());
+
+            return back()->with('success', 'Verification link has been sent to your email.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to send verification email. Please try again.');
+        }
     }
 }

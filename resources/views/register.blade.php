@@ -310,7 +310,7 @@
                                                         </div>
                                                         <a type="button" class="btn_back skeleton ps-2 pe-2 pb-1" href="/">
                                                             <span class="btn-text">Back</span>
-                                                            <i class="register-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                            <!-- <i class="register-icon fa fa-spinner fa-spin register-hidden"></i> -->
                                                         </a>
                                                         <span class="button-skeleton"></span>
                                                     </div>

@@ -45,8 +45,8 @@
         </div>
     </div>
     <div class="hero-image">
-        <div class="hero-text heading reg_hidden">
-            <h1 class="company_heading" style="font-size:25px;color:darkblue;text-align:left">
+        <div class="hero-text heading reg_hidden company-name-classic">
+            <h1 class="company" style="font-size:25px;color:darkblue;text-align:left">
                 <span class="skeleton">{{setting('forgot_page_sub_title')}}</span>
             </h1>
         </div>
@@ -55,8 +55,8 @@
     <div class="container bg" style="margin-top: 62px;">
         <div class="row">
             <div class="col-md-12 mb-5" style="margin-top:px">
-                <h4 class="heading_admin_login text-shadow" style="text-align: center;">
-                    <span class="skeleton forget_text">Email-Verification</span>
+                <h4 class="heading_register text-shadow font_size" style="text-align: center;">
+                    <span class="skeleton head-animaion">Email-Verification</span>
                 </h4>
                 <div class="">
                     <form action="{{ route('send.link') }}" method="POST">
@@ -75,25 +75,18 @@
                                                 <div class="card-body">
                                                     <div class="mb-4">
                                                         <h5 class="skeleton lb_text">Verification</h5>
-                                                        <p class="skeleton lb_text mb-2">Your registered email to verify for your account verification.
-                                                        </p>
+                                                        <p class="panel-skeleton lb_text panel mb-2">Your registered email to verify for your account verification.</p>
                                                     </div>
                                                     <div class="mb-3">
                                                         <form class="col-md-4">
-                                                            <label for="email" class="form-label skeleton lb_text">Email :</label>
+                                                            <label for="email" class="form-label select-skeleton lb_text">Email :</label>
                                                             <select type="email" class="form-control select2" name="email" id="email">
-                                                                <option>Car</option>
-                                                                <option>Bike</option>
-                                                                <option>Scooter</option>
-                                                                <option>Cycle</option>
+                                                                @foreach($email_verifications as $item)
+                                                                    <option value="{{ $item->email }}">{{ $item->email }}</option>
+                                                                @endforeach
                                                             </select>
                                                         </form>
                                                         <span class="email-input-skeleton"></span>
-                                                    </div>
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            
-                                                        </div>
                                                     </div>
                                                     <div class="mb-3 d-grid">
                                                         <button type="submit" class="btn btn-sm btn-primary forget_button register_btn">
@@ -151,6 +144,20 @@
         
             allSkeleton.forEach(item=>{
                 item.classList.remove('skeleton')
+            });
+        }
+        function panelSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.panel-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('panel-skeleton')
+            });
+        }
+        function selectSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.select-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('select-skeleton')
             });
         }
         function logo(){
@@ -213,6 +220,8 @@
             headingSkeleton();
             logo();
             fetchData();
+            panelSkeleton();
+            selectSkeleton();
             inputSkeleton();
             inputEamilSkeleton();
             capSkeleton();

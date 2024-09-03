@@ -28,8 +28,59 @@ div.url_link{
 .container-background{
     opacity: 1;
 }
+.comp-text {
+    text-align: center;
+    left: 22%;
+}
+.company-name-classic {
+    position: fixed;
+    z-index: 99;
+    top: 50.7%;
+    border-radius: 5px;
+    transform: translateY(-50%);
+    display: flex;
+    color: gray;
+    font-size: 18px;
+}
+.company-name-classic::before {
+    --animation-transform-1245:translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+   --animation-transform-1246:translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+   --animation-transform-1256:translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+   --animation-transform-1257:translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+    content: "";
+    position: absolute;
+    background: whitesmoke;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    animation: com_animation 1500ms ease-out infinite;
+    z-index: -1;
+    display: block;
+    left: 90px;
+    width: 200px;
+    height: 200px;
+}
+@keyframes com_animation {
+    0% {
+        -webkit-transform: var(--animation-transform-1245);
+        transform: var(--animation-transform-1256);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: var(--animation-transform-1246);
+        transform: var(--animation-transform-1257);
+        opacity: 0;
+    }
+}
+.company-name-classic::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    display: block;
+    transform: translate(-50%, -50%);
+    transition: all 200ms;
+}
 .skeleton,.menus-skeleton,.mini-skeleton,.email-input-skeleton,.heading-skeleton,.menu-rest-skeleton,.heading-rest-skeleton,
-.rest-email-skeleton,.rest-password-skeleton,.rest-confirm-password-skeleton{
+.rest-email-skeleton,.rest-password-skeleton,.rest-confirm-password-skeleton,.panel-skeleton,.select-skeleton{
     position: relative;
 }
 .heading-skeleton::before{
@@ -51,6 +102,32 @@ div.url_link{
     left: 0;
     top: 0;
     width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg,#b3b3b3,#f9f9f9,#b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.panel-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 0;
+    width: 102%;
+    height: 100%;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg,#b3b3b3,#f9f9f9,#b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.select-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 0;
+    width: 112%;
     height: 100%;
     border-radius: 3px;
     z-index: 10;
@@ -100,10 +177,10 @@ div.url_link{
 .email-input-skeleton::before{
     content: "";
     position: absolute;
-    left: -305px;
-    top: -8px;
-    width: 305px;
-    height: 30px;
+    left: -315px;
+    top: -4px;
+    width: 315px;
+    height: 28px;
     border-radius: 3px;
     z-index: 10;
     background: linear-gradient(90deg,#b3b3b3,#f9f9f9,#b3b3b3);
@@ -180,6 +257,13 @@ h6.head_auth {
     font-weight: 500;
     color: darkblue;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+.panel {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    border-left: #2d3748 solid 4px;
+    color: #718096;
+    background-color: #edf2f7;
+    padding: 5px 10px;
 }
 input.inpt_pass{
     font-size: 14px;
@@ -293,7 +377,9 @@ a.btn_bg:hover{
     --mdb-box-shadow-color-rgb: 0, 0, 0 !important;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35) !important;
 }
-
+@media (min-width:300px) and (max-width:400px){
+    
+}
 @media(min-width:400px) and (max-width:580px){
     .lb_text {
         font-size: 38px;
