@@ -79,9 +79,9 @@
             </div>
         </div>
         <div class="hero-image">
-            <div class="hero-text heading reg_hidden">
-                <h1 class="company_heading" style="font-size:25px;color:darkblue;text-align:left">
-                    <span class="skeleton">{{setting('register_page_sub_title')}}</span>
+            <div class="hero-text heading reg_hidden company-name-classic">
+                <h1 class="company">
+                    <span class="sub-title-skeleton">{{setting('register_page_sub_title')}}</span>
                 </h1>
             </div>
         </div>
@@ -192,7 +192,7 @@
                 </div> -->
                 <div class="col-md-12 mb-4" style="margin-top:px">
                     <h4 class="heading_register text-shadow font_size  ps-2" style="text-align: center;">
-                        <span class="form-head-skeleton">{{setting('register_page_title')}}</span>
+                        <span class="head-animaion form-head-skeleton">{{setting('register_page_title')}}</span>
                     </h4>
                     <div class="">
                         <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
@@ -213,7 +213,7 @@
                                                             <div class="row">
                                                                 <div class="col-xl-10">
                                                                     <span class="input-skeleton"></span>
-                                                                    <input class="register filed_src show-current-border" id="border_action" type="text" name="name" placeholder="User Name" value="{{old('name')}}" autofocus>
+                                                                    <input class="register filed_src show-current-border input_hidden" id="border_action" type="text" name="name" placeholder="User Name" value="{{old('name')}}" autofocus>
                                                                     <span class="input-error-skeleton text-danger name_message show-error remove-error-one">@error('name')
                                                                         {{$message}}@enderror
                                                                     </span>
@@ -228,7 +228,7 @@
                                                             <div class="row">
                                                                 <div class="col-xl-10">
                                                                     <span class="input-two-skeleton"></span>
-                                                                    <input class="contract show-current-border" type="text" name="contract_number" id="border_action2" placeholder="Contract Number" value="{{old('contract_number')}}">
+                                                                    <input class="contract show-current-border input_hidden" type="text" name="contract_number" id="border_action2" placeholder="Contract Number" value="{{old('contract_number')}}">
                                                                     <span class="input-error-skeleton text-danger contact_message show-error remove-error-two">@error('contract_number')
                                                                         {{$message}}@enderror
                                                                     </span>
@@ -243,7 +243,7 @@
                                                             <div class="row">
                                                                 <div class="col-xl-10">
                                                                     <span class="input-email-skeleton"></span>
-                                                                    <input class="reg_email show-current-border" type="text" name="email" id="border_action3" placeholder="Email Address" value="{{old('email')}}">
+                                                                    <input class="reg_email show-current-border input_hidden" type="text" name="email" id="border_action3" placeholder="Email Address" value="{{old('email')}}">
                                                                     <span class="input-error-skeleton text-danger email_message show-error remove-error-three">@error('email')
                                                                         {{$message}}@enderror
                                                                     </span>
@@ -258,7 +258,7 @@
                                                             <div class="row">
                                                                 <div class="col-xl-10">
                                                                     <span class="input-three-skeleton"></span>
-                                                                    <input class="user_password show-current-border" type="password" name="password" id="border_action4" placeholder="Password" value="{{old('password')}}">
+                                                                    <input class="user_password show-current-border input_hidden" type="password" name="password" id="border_action4" placeholder="Password" value="{{old('password')}}">
                                                                     <span class="input-error-skeleton text-danger input_message show-error remove-error-four">@error('password')
                                                                         {{$message}}@enderror
                                                                     </span>
@@ -273,7 +273,7 @@
                                                             <div class="row">
                                                                 <div class="col-xl-10">
                                                                     <span class="input-four-skeleton"></span>
-                                                                    <input class="confirm confrim-password show-current-border" type="password" name="password_confirmation" id="border_action5" placeholder="Confirm Password">
+                                                                    <input class="confirm confrim-password show-current-border input_hidden" type="password" name="password_confirmation" id="border_action5" placeholder="Confirm Password">
                                                                     <span class="input-error-skeleton text-danger contact_message show-error remove-error-five">@error('password')
                                                                         {{$message}}@enderror
                                                                     </span>
@@ -308,6 +308,11 @@
                                                                 <span class="btn-text">Register</span>
                                                             </button> -->
                                                         </div>
+                                                        <a type="button" class="btn_back skeleton ps-2 pe-2 pb-1" href="/">
+                                                            <span class="btn-text">Back</span>
+                                                            <i class="register-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                        </a>
+                                                        <span class="button-skeleton"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -358,6 +363,13 @@
             
                 allSkeleton.forEach(item=>{
                     item.classList.remove('nav-head-skeleton')
+                });
+            }
+            function subTitleSkeleton(){
+                const  allSkeleton = document.querySelectorAll('.sub-title-skeleton')
+            
+                allSkeleton.forEach(item=>{
+                    item.classList.remove('sub-title-skeleton')
                 });
             }
             function formHeadSkeleton(){
@@ -455,6 +467,7 @@
                 logo();
                 fetchData();
                 navHeadSkeleton();
+                subTitleSkeleton();
                 formHeadSkeleton();
                 inputSkeleton();
                 inputTwoSkeleton();
@@ -468,6 +481,7 @@
                 buttonSkeleton();
                 inputErrorSkeleton();
                 fileErrorSkeleton();
+                $('input').removeClass('input_hidden');
             }, 2000);
         </script>
         <script>

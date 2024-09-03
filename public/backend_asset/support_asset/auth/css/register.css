@@ -309,16 +309,29 @@ input.image{
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 .input-skeleton,.input-email-skeleton,.cap-skeleton,.file-skeleton,.menu-skeleton,.input-two-skeleton,.input-three-skeleton,
-.mini-capsule-skeleton,.form-head-skeleton,.nav-head-skeleton,.button-skeleton,.input-four-skeleton,.input-error-skeleton,.file-error-skeleton{
+.mini-capsule-skeleton,.form-head-skeleton,.nav-head-skeleton,.button-skeleton,.input-four-skeleton,.input-error-skeleton,.file-error-skeleton,.sub-title-skeleton{
     position: relative;
+}
+.sub-title-skeleton::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 102%;
+    height: 100%;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
 }
 .input-skeleton::before{
     content: "";
     position: absolute;
     left: -2px;
-    top: -5px;
+    top: 3px;
     width: 258px;
-    height: 26px;
+    height: 19px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
@@ -329,9 +342,9 @@ input.image{
     content: "";
     position: absolute;
     left: -2px;
-    top: -6px;
+    top: 3px;
     width: 258px;
-    height: 26px;
+    height: 19px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
@@ -342,9 +355,9 @@ input.image{
     content: "";
     position: absolute;
     left: -2px;
-    top: -6px;
+    top: 3px;
     width: 258px;
-    height: 26px;
+    height: 19px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
@@ -355,9 +368,9 @@ input.image{
     content: "";
     position: absolute;
     left: -2px;
-    top: -5px;
+    top: 3px;
     width: 258px;
-    height: 26px;
+    height: 19px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
@@ -368,9 +381,9 @@ input.image{
     content: "";
     position: absolute;
     left: -2px;
-    top: -5px;
+    top: 3px;
     width: 258px;
-    height: 26px;
+    height: 19px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
@@ -409,7 +422,7 @@ input.image{
     left: 71px;
     top: -4px;
     width: 162px;
-    height: 25px;
+    height: 26px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
@@ -594,8 +607,8 @@ body.register_background-color{
     background-color: #fff;
     opacity: 1;
     animation: bg_color 2s infinite;
-  }
-  @keyframes bg_color{
+}
+@keyframes bg_color{
     0%{
       background-color: honeydew;
     }
@@ -605,9 +618,218 @@ body.register_background-color{
     100%{
       background-color: white;
     }
-  }
+}
+.input_hidden{
+    display: none;
+}
+.hero-text {
+    text-align: center;
+    left: 15%;
+}
+h1.company {
+    font-family: 'Monoton';
+    font-size: 2vw;
+    color: black;
+    text-align: justify;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+.company-name-classic {
+    position: fixed;
+    z-index: 99;
+    top: 50.7%;
+    border-radius: 5px;
+    transform: translateY(-50%);
+    display: flex;
+    color: gray;
+    font-size: 18px;
+}
+.company-name-classic::before {
+    --animation-transform-1245:translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+   --animation-transform-1246:translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+   --animation-transform-1256:translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+   --animation-transform-1257:translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+    content: "";
+    position: absolute;
+    background: whitesmoke;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    animation: com_animation 1500ms ease-out infinite;
+    z-index: -1;
+    display: block;
+    left: 90px;
+    width: 200px;
+    height: 200px;
+}
+@keyframes com_animation {
+    0% {
+        -webkit-transform: var(--animation-transform-1245);
+        transform: var(--animation-transform-1256);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: var(--animation-transform-1246);
+        transform: var(--animation-transform-1257);
+        opacity: 0;
+    }
+}
+.company-name-classic::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    display: block;
+    transform: translate(-50%, -50%);
+    transition: all 200ms;
+}
+.head-animaion{
+    --card-name-100-transform:translateX(10px);
+    --card-name-0-transition: all 0.5s;
+    --card-name-50-letter-spacing: 0.5px;
+    --card-name-common-transition: all 0.6s;
+    --card-name-50-transform: translateY(0px);
+    --card-name-100-letter-spacing: 1px;
 
+    animation: textDesign 2s linear infinite alternate;
+    display: block;
+    /* font-size: 14px;
+    margin-left: 21px;
+    margin-top: -8px; */
+    transform: translateY(100px);
+}
+@keyframes textDesign {
+    0% {
+        color: #add8e6;
+        transition: all .5s;
+        transition: var(--card-name-0-transition);
+    }
+    
+    50% {
+        letter-spacing: .5px;
+        letter-spacing: var(--card-name-50-letter-spacing);
+        transform: translateY(0);
+        transform: var(--card-name-50-transform);
+        transition: all .6s;
+        transition: var(--card-name-common-transition);
+    }
+    100% {
+        letter-spacing: 1px;
+        letter-spacing: var(--card-name-100-letter-spacing);
+        transform: translateX(10px);
+        transform: var(--card-name-100-transform);
+        transition: all .6s;
+        transition: var(--card-name-common-transition);
+    }
+}
+@media (min-width:300px) and (max-width:400px){
+    .company-name-classic{
+        display: none;
+    }
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+        position: relative;
+        width: 100%;
+        padding-right: 13px;
+        padding-left: 13px;
+    }
+    .nav-head-skeleton,.logo-skeleton,.input-skeleton,.input-two-skeleton,.input-three-skeleton,.input-four-skeleton
+    ,.input-five-skeleton,.input-six-skeleton,.input-email-skeleton,.button-skeleton,.mini-capsule-skeleton{
+        position: relative;
+    }
+    .input-skeleton::before,.input-two-skeleton::before,.input-three-skeleton::before,.input-four-skeleton::before
+    ,.input-five-skeleton::before,.input-six-skeleton::before,.input-email-skeleton::before,.file-skeleton{
+        content: '';
+        position: absolute;
+        width: 230px;
+    }
+    .mini-capsule-skeleton::before{
+        content: '';
+        position: absolute;
+        top: 3px;
+    }
+    .nav-head-skeleton::before{
+        position: absolute;
+        top: -7px;
+    }
+    .logo-skeleton::before{
+        position: absolute;
+        left: -13px;
+        top: -7px;
+    }
+    .button-skeleton::before{
+        position: absolute;
+        top: -26px;
+    }
+    .file-skeleton::before{
+        position: absolute;
+        left: 26px;
+        top: 5px;
+    }
+    .container.bg{
+        width: 100%;
+        padding-bottom: 500px;
+    }
+    .loader-register{
+        left: -45px;
+    }
+    header.sticky-top {
+        position: sticky;
+        width: 100%;
+        display: list-item;
+    }
+    p.navbar-brand.admin_panel.text-shadow {
+        font-size: 12px;
+        margin-top: -12px;
+    }
+    p.address {
+        font-size: 8px;
+        color: floralwhite;
+        font-variant: none;
+        font-weight: 100;
+        margin-top: 0px;
+    }
+    img.company_logo{
+        height: 40px;
+    }
+    .image_size{
+        margin-left: 54px;
+    }
+    .img-area{
+        margin-left: 27px;
+    }
+    input.image{
+        margin-left: 26px;
+    }
+    span.text-danger.photo_message {
+        margin-left: 33px;
+    }
+}
 @media (min-width:400px) and (max-width:580px){
+    .company-name-classic{
+        display: none;
+    }
+    .loader-register {
+        left: 0px;
+    }
+    .nav-head-skeleton,.logo-skeleton,.input-skeleton,.input-two-skeleton,.input-three-skeleton,.input-four-skeleton
+    ,.input-five-skeleton,.input-six-skeleton,.input-email-skeleton,.button-skeleton{
+        position: relative;
+    }
+    .nav-head-skeleton::before{
+        position: absolute;
+        top: -7px;
+    }
+    .logo-skeleton::before{
+        position: absolute;
+        left: -13px;
+        top: -7px;
+    }
+    .input-skeleton::before,.input-two-skeleton::before,.input-three-skeleton::before,.input-four-skeleton::before
+    ,.input-five-skeleton::before,.input-six-skeleton::before,.input-email-skeleton::before{
+        position: absolute;
+        width: 330px;
+    }
+    .button-skeleton::before{
+        position: absolute;
+        top: -25px;
+    }
     .container.bg{
         width: 100%;
         padding-bottom: 500px;
@@ -647,7 +869,6 @@ body.register_background-color{
         width: 100%;
     }
     input.reg_email{
-        /* width:82%; */
         margin-left: 0;
         width: 100%;
     }
@@ -660,7 +881,7 @@ body.register_background-color{
         width: 100%;
     }
     .img-area{
-        margin-top: 50px;
+        margin-top: 5px;
     }
     input.image {
         margin-left: 71px;
@@ -671,10 +892,36 @@ body.register_background-color{
     button.btn.btn-sm.btn.forget_button {
         font-size: 19px;
     }
+    span.text-danger.photo_message {
+        margin-left: 0;
+    }
 }
 @media (min-width:600px) and (max-width:780px){
+    .input-skeleton,.input-two-skeleton,.input-three-skeleton,.input-four-skeleton
+    ,.input-five-skeleton,.input-six-skeleton,.input-email-skeleton,.button-skeleton,.file-skeleton{
+        position: relative;
+    }
+    .input-skeleton::before,.input-two-skeleton::before,.input-three-skeleton::before,.input-four-skeleton::before
+    ,.input-five-skeleton::before,.input-six-skeleton::before,.input-email-skeleton::before{
+        width: 452px;
+    }
+    .file-skeleton::before{
+        position: absolute;
+        width: 191px;
+    }
+    .button-skeleton::before{
+        position: absolute;
+        top: -25px;
+    }
+    p.address {
+        font-size: 8px;
+        color: floralwhite;
+        font-variant: none;
+        font-weight: 100;
+        margin-top: -35px;
+    }
     .container.bg{
-        width: 600px;
+        width: 100%;
         padding-bottom: 500px;
     }
     h4.heading_admin_login{
@@ -685,37 +932,38 @@ body.register_background-color{
     }
     header.sticky-top {
         position: sticky;
-        width: 800px;
+        width: 100%;
+        display: list-item;
     }
     input.register {
-        margin-left: 81px;
-        width: 70%;
+        margin-left: 0;
+        width: 100%;
     }
     input.contract {
-        margin-left: 8px;
-        width: 69%;
+        margin-left: 0;
+        width: 100%;
     }
     input.email{
         margin-left: 95px;
     }
     input.reg_email{
         /* width:82%; */
-        width: 70%;
-        margin-left: 78px;
+        width: 100%;
+        margin-left: 0;
     }
     input.password{
-        margin-left: 57px;
-        width: 69%;
+        margin-left: 0;
+        width: 109%;
     }
     input.confirm{
-        margin-left: 3px;
-        width: 69%;
+        margin-left: 0;
+        width: 100%;
     }
     .img-area{
-        margin-top: 50px;
+        margin-top: 5px;
     }
     input.image {
-        margin-left: 101px;
+        margin-left: 71px;
     }
     button.btn.btn-sm.btn-primary.button_margin{
         margin-left: 118px;
@@ -723,8 +971,31 @@ body.register_background-color{
 
 }
 @media (min-width:780px) and (max-width:1192px){
+    .input-skeleton,.input-two-skeleton,.input-three-skeleton,.input-four-skeleton
+    ,.input-five-skeleton,.input-six-skeleton,.input-email-skeleton,.button-skeleton,.file-skeleton{
+        position: relative;
+    }
+    .input-skeleton::before,.input-two-skeleton::before,.input-three-skeleton::before,.input-four-skeleton::before
+    ,.input-five-skeleton::before,.input-six-skeleton::before,.input-email-skeleton::before{
+        width: 400px;
+    }
+    .file-skeleton::before{
+        position: absolute;
+        width: 191px;
+    }
+    .button-skeleton::before{
+        position: absolute;
+        top: -25px;
+    }
+    p.address {
+        font-size: 8px;
+        color: floralwhite;
+        font-variant: none;
+        font-weight: 100;
+        margin-top: -35px;
+    }
     .container.bg{
-        width: 600px;
+        width: 100%;
         padding-bottom: 500px;
     }
     header.sticky-top {
@@ -738,28 +1009,27 @@ body.register_background-color{
         display: none;
     }
     input.register {
-        margin-left: 81px;
-        width: 70%;
+        margin-left: 0;
+        width: 100%;
     }
     input.contract {
-        margin-left: 8px;
-        width: 69%;
+        margin-left:0;
+        width: 100%;
     }
     input.email{
         margin-left: 95px;
     }
     input.reg_email{
-        /* width:82%; */
-        width: 70%;
-        margin-left: 78px;
+        width: 100%;
+        margin-left: 0;
     }
     input.password{
-        margin-left: 57px;
-        width: 69%;
+        margin-left: 0;
+        width: 100%;
     }
     input.confirm{
-        margin-left: 3px;
-        width: 69%;
+        margin-left: 0;
+        width: 100%;
     }
     .img-area{
         margin-top: 50px;
