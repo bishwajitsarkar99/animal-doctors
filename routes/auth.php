@@ -18,4 +18,4 @@ Route::post('reset-password', [AuthController::class, 'sendResetLinkEmail'])->na
 Route::get('reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
 Route::put('reset-password', [AuthController::class, 'setPassword']);
 Route::get('email-verification', [AuthController::class, 'loadLink'])->name('email.verification');
-Route::get('send-link', [AuthController::class, 'sendLink'])->name('send.link');
+Route::post('send-link', [AuthController::class, 'sendLink'])->name('send.link');

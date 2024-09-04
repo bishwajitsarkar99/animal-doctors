@@ -60,7 +60,6 @@ class AuthController extends Controller
             'email' => $user->email,
             'role' => $request->role ?? 0,
             'account_create_session' => now(),
-            'created_at' => now(),
         ]);
 
         return redirect(url('/email-verification'))->with('success', 'Your Registration has been completed successfully');
@@ -234,30 +233,33 @@ class AuthController extends Controller
         Auth::logout();
         return redirect('/');
     }
-
+    // Email Verification page load
     public function loadLink()
     {
         $company_profiles = companyProfile::where('id', '=', 1)->get();
-        $email_verifications = EmailVerification::where('status', '=', 1)->get();
+        $email_verifications = EmailVerification::where('status', '=', 1)->orderBy('id', 'desc')->get();
         return view('email-verirication', compact('company_profiles','email_verifications'));
     }
 
-    public function loginLink(Request $request)
+    // Send Email Verification
+    public function sendLink(Request $request)
     {
-        // $users = User::where('role', 0)->orderBy('id', 'desc')->get();
-        // $url = "http://127.0.0.1:8000/";
-        //dd($url);
-        // Mail::to('bishwajitsarkar99@gmail.com')->send(new SampleFile($url));
-
-        // Mail::to('bishwajitsarkar99@gmail.com')->send(new AdminEmail());
-
-        // Validate the email input
+        //$url = "http://127.0.0.1:8000/";
+        // Validate the email input     
         $request->validate([
             'email' => 'required|email|exists:email_verifications,email',
         ]);
+        
         try {
             $userEmail = $request->email;
             Mail::to($userEmail)->send(new AdminEmail());
+
+            $emailVerification = EmailVerification::where('email', $userEmail)->firstOrFail();
+            $emailVerification->update([
+                'email_verified_session' => now(),
+                //'created_at' => now(),
+                'status' => !$emailVerification->status,
+            ]);
 
             return back()->with('success', 'Verification link has been sent to your email.');
         } catch (\Exception $e) {

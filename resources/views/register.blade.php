@@ -88,108 +88,6 @@
 
         <div class="container bg" style="margin-top: 65px;">
             <div class="row">
-                <!-- <div class="col-md-12 mb-1" style="margin-top:-8px;">
-                    <h4 class="heading_admin_login text-shadow  ps-5" style="text-align: center;">
-                        <span class="skeleton">{{setting('register_page_title')}}</span>
-                    </h4>
-                    <div class="">
-                        <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
-                            @csrf
-                            <div class="col-md-12">
-                                @if(Session::get('fail'))
-                                <div class="alert alert-danger error_message">
-                                    {{Session::get('fail')}}
-                                </div>
-                                @endif
-                                <div class="row">
-                                    <div class="col-xl-4">
-                                        <div class="form-group">
-                                            <label class="lable_name skeleton" for="name">Name <span style="padding-right: 22px;"></span> :</label>
-                                            <span class="input-skeleton"></span>
-                                            <input class="mt-3 register filed_src" type="text" name="name" placeholder="Name" value="{{old('name')}}" autofocus>
-                                            <span><i class="search-icon fa fa-spinner fa-spin search-hidden"></i></span>
-                                            <span class="text-danger name_message">@error('name')
-                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
-                                                {{$message}}@enderror
-                                            </span><br>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <div class="form-group">
-                                            <label class="lable_contract skeleton" for="contract_number">Contract-Number <span style="padding-right: 4px;"></span> :</label>
-                                            <span class="input-skeleton"></span>
-                                            <input class="mt-3 contract" type="text" name="contract_number" placeholder="Contract Number" value="{{old('contract_number')}}">
-                                            <i class="contract-icon fa fa-spinner fa-spin contract-hidden"></i>
-                                            <span class="text-danger contact_message">@error('contract_number')
-                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
-                                                {{$message}}@enderror
-                                            </span><br>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xl-4">
-                                        <div class="form-group">
-                                            <label class="label_email skeleton" for="email">Email :</label>
-                                            <span class="input-email-skeleton"></span>
-                                            <input class="mt-3 reg_email" type="text" name="email" placeholder="Email Address" value="{{old('email')}}">
-                                            <i class="email-icon fa fa-spinner fa-spin email-hidden"></i>
-                                            <span class="text-danger email_message">@error('email')
-                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
-                                                {{$message}}@enderror
-                                            </span><br>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <div class="form-group">
-                                            <label class="lable_password skeleton" for="password">Password :</label>
-                                            <span class="input-skeleton"></span>
-                                            <input class="password" type="password" name="password" placeholder="Password" value="{{old('password')}}">
-                                            <i class="password-icon fa fa-spinner fa-spin password-hidden"></i>
-                                            <span class="text-danger input_message">@error('password')
-                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
-                                                {{$message}}@enderror
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <div class="form-group">
-                                            <label class="lable_password skeleton" for="password">Confirm-Password :</label>
-                                            <span class="input-skeleton"></span>
-                                            <input class="confirm confrim-password" type="password" name="password_confirmation" placeholder="Password">
-                                            <i class="confrim-password-icon fa fa-spinner fa-spin confrim-password-hidden"></i>
-                                            <span class="text-danger contact_message">@error('password')
-                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
-                                                {{$message}}@enderror
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <div class="form-group pt-3">
-                                            <span class="image_size cap-skeleton" style="text-transform: uppercase;">150 x 150 (px)</span>
-                                            <div class="img-area" id="registerAnimation">
-                                                <span class="skeleton"><img class="register_img" id="output" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500"></span>
-                                            </div>
-                                            <span class="file-skeleton"></span>
-                                            <input accept="image/*" type='file' id="imgInput" class="image mt-2" name="image" onchange="loadFile(event)">
-                                            <span class="text-danger photo_message">@error('image')
-                                                <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
-                                                {{$message}}@enderror
-                                            </span><br>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 offset-md-9">
-                                        <div class="form-group ms-4">
-                                            <button type="submit" class="btn btn-sm btn-primary login_button button_margin register_btn" id="reg_submit">
-                                                <i class="register-icon fa fa-spinner fa-spin register-hidden"></i>
-                                                <span class="btn-text">Register</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div> -->
                 <div class="col-md-12 mb-4" style="margin-top:px">
                     <h4 class="heading_register text-shadow font_size  ps-2" style="text-align: center;">
                         <span class="head-animaion form-head-skeleton">{{setting('register_page_title')}}</span>
@@ -303,14 +201,10 @@
                                                                 <i class="register-icon fa fa-spinner fa-spin register-hidden"></i>
                                                             </button>
                                                             <span class="button-skeleton"></span>
-                                                            <!-- <button type="submit" class="btn btn-sm btn-primary login_button button_margin register_btn" id="reg_submit">
-                                                                <i class="register-icon fa fa-spinner fa-spin register-hidden"></i>
-                                                                <span class="btn-text">Register</span>
-                                                            </button> -->
                                                         </div>
-                                                        <a type="button" class="btn_back skeleton ps-2 pe-2 pb-1" href="/">
-                                                            <span class="btn-text">Back</span>
-                                                            <!-- <i class="register-icon fa fa-spinner fa-spin register-hidden"></i> -->
+                                                        <a type="button" class="btn_back skeleton ps-2 pe-2 pb-1" href="/" id="back_login">
+                                                            <span class="btn-back-text">Back</span>
+                                                            <i class="back-icon fa fa-spinner fa-spin register-hidden"></i>
                                                         </a>
                                                         <span class="button-skeleton"></span>
                                                     </div>
@@ -323,14 +217,8 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-xl-12">
-                    @if(Session::has('success'))
-                        <p id="success_message" class="background_success" style="color:green;">{{ Session::get('success') }}</p>
-                    @endif
-                </div>
             </div>
         </div>
-        @include('auth-js.register-ajax')
         <!-- Boostrap5 JS Table Filter -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
         </script>

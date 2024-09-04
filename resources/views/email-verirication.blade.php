@@ -24,7 +24,7 @@
 </head>
 <header class="bg sticky-top">
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
-        <p class="navbar-brand ps-3 admin_panel text-shadow" style="float: right;">
+        <p class="navbar-brand admin_panel text-shadow" style="float: right;">
             <span class="logo-skeleton"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
             <span class="heading-skeleton">{{setting('company_name')}}</span>
         </p>
@@ -62,11 +62,6 @@
                     <form action="{{ route('send.link') }}" method="POST">
                         @csrf
                         <div class="col-md-12">
-                            @error('email')
-                            <div class="alert alert-danger error_message">
-                                {{ $message }}
-                            </div>
-                            @enderror
                             <div class="row">
                                 <div class="container d-flex flex-column">
                                     <div class="row align-items-center justify-content-center mb-3 mt-3">
@@ -79,22 +74,30 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <form class="col-md-4">
-                                                            <label for="email" class="form-label select-skeleton lb_text">Email :</label>
+                                                            <label for="email" class="form-label select-skeleton lb_text">Email :
+                                                                <span class="text-danger verify_email_message">@error('email')
+                                                                    {{$message}}@enderror
+                                                                </span>
+                                                            </label>
                                                             <select type="email" class="form-control select2" name="email" id="email">
                                                                 @foreach($email_verifications as $item)
                                                                     <option value="{{ $item->email }}">{{ $item->email }}</option>
                                                                 @endforeach
                                                             </select>
+                                                            <span class="email-input-skeleton"></span>
                                                         </form>
-                                                        <span class="email-input-skeleton"></span>
                                                     </div>
                                                     <div class="mb-3 d-grid">
-                                                        <button type="submit" class="btn btn-sm btn-primary forget_button register_btn">
-                                                            Send Email
+                                                        <button type="submit" class="btn btn-sm btn-primary forget_button register_btn" id="email_submit">
+                                                            <span class="btn-email-text">Email Verification</span>
+                                                            <i class="verification-icon fa fa-spinner fa-spin register-hidden"></i>
                                                         </button>
                                                     </div>
                                                     <div class="mb-3 d-grid">
-                                                        <a type="button" class="btn_back ps-2 pe-2 pb-1" href="/register">Back</a>
+                                                        <a type="button" class="btn_back ps-2 pe-2 pb-1" href="/register" id="regist_back">
+                                                            <span class="btn-regst-text">Back</span>
+                                                            <i class="regst-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -106,14 +109,15 @@
                     </form>
                 </div>
             </div>
-            <div class="col-xl-12">
-                @if(Session::has('success'))
-                <p id="success_message" class="background_success" style="color:green;">{{ Session::get('success') }}</p>
-                @endif
+            <div class="row d-flex flex-column align-items-center justify-content-center">
+                <div class="col-12">
+                    @if(Session::has('success'))
+                    <p id="success_message" class="background_success" style="color:green;">{{ Session::get('success') }}</p>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
-    @include('auth-js.register-ajax')
     <!-- Boostrap5 JS Table Filter -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>

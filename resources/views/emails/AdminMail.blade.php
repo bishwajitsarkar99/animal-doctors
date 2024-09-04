@@ -1,4 +1,5 @@
 @component('mail::message')
+
 # Dear User!
 You are receiving this email because we received a request to verify your account.
 

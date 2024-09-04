@@ -91,7 +91,18 @@
             $('.btn-text').text('Register');
         }, 3000);
     });
-    
+    // Register Back Button---------
+    $("#regist_back").on('click', () =>{
+        $('.regst-icon').removeClass('register-hidden');
+        $(this).attr('disabled', true);
+        $('.btn-regst-text').text('Back...');
+
+        setTimeout(() =>{
+            $('.regst-icon').addClass('register-hidden');
+            $(this).attr('disabled', false);
+            $('.btn-regst-text').text('Back');
+        }, 3000);
+    });
     // Login Button---------
     $("#submit").on('click', () =>{
         $('.loading-icon').removeClass('hidden');
@@ -103,5 +114,29 @@
             $(this).attr('disabled', false);
             $('.btn-text').text('Login');
         }, 6000);
+    });
+    // Login Back Button---------
+    $("#back_login").on('click', () =>{
+        $('.back-icon').removeClass('register-hidden');
+        $(this).attr('disabled', true);
+        $('.btn-back-text').text('Back...');
+
+        setTimeout(() =>{
+            $('.back-icon').addClass('register-hidden');
+            $(this).attr('disabled', false);
+            $('.btn-back-text').text('Back');
+        }, 3000);
+    });
+    // Email Verification Button---------
+    $("#email_submit").on('click', () =>{
+        $('.verification-icon').removeClass('register-hidden');
+        $(this).attr('disabled', true);
+        $('.btn-email-text').text('Email Verification...');
+
+        setTimeout(() =>{
+            $('.verification-icon').addClass('register-hidden');
+            $(this).attr('disabled', false);
+            $('.btn-email-text').text('Email Verification');
+        }, 3000);
     });
 })(jQuery);

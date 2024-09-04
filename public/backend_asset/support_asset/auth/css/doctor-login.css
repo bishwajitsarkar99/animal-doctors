@@ -377,15 +377,60 @@ a.btn_bg:hover{
     --mdb-box-shadow-color-rgb: 0, 0, 0 !important;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35) !important;
 }
+span.text-danger.verify_email_message {
+    margin-left: 0;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+}
 @media (min-width:300px) and (max-width:400px){
-    
+    .heading-skeleton,.email-input-skeleton,.select-skeleton{
+        position: relative;
+    }
+    .heading-skeleton::before{
+        content: '';
+        position: absolute;
+        top: -7px;
+    }
+    .email-input-skeleton::before{
+        content: '';
+        position: absolute;
+        left: -228px;
+        top: -4px;
+        width: 228px;
+    }
+    .select-skeleton::before{
+        content: '';
+        position: absolute;
+        left: 0;
+    }
 }
 @media(min-width:400px) and (max-width:580px){
-    .lb_text {
-        font-size: 38px;
+    .heading-skeleton::before{
+        content: '';
+        position: absolute;
+        top: -7px;
     }
-    button.btn.btn-sm.btn.forget_button{
-        font-size: 25px;
+    .email-input-skeleton{
+        position: relative;
+    }
+    .email-input-skeleton::before {
+        content: '';
+        position: absolute;
+        left: -324px;
+        top: -4px;
+        width: 323px;
+    }
+    .lb_text {
+        font-size: 16px;
+    }
+    .panel{
+        font-size: 12px;
+    }
+    button#email_submit{
+        font-size: 13px;
+    }
+    a#regist_back {
+        font-size: 13px;
     }
     span.reset_text{
         font-size: 29px;
@@ -401,12 +446,21 @@ a.btn_bg:hover{
         margin-left: 126px;
     }
 }
-@media(min-width:600px) and (max-width:776px){
-    .lb_text {
-        font-size: 38px;
+@media(min-width:600px) and (max-width:780px){
+    p.navbar-brand.admin_panel.text-shadow {
+        font-size: 20px;
     }
-    button.btn.btn-sm.btn.forget_button{
-        font-size: 25px;
+    .lb_text {
+        font-size: 18px;
+    }
+    .panel{
+        font-size: 15px;
+    }
+    button#email_submit{
+        font-size: 13px;
+    }
+    a#regist_back {
+        font-size: 13px;
     }
     span.reset_text{
         font-size: 29px;
@@ -420,5 +474,15 @@ a.btn_bg:hover{
     a.btn_bg{
         font-size: 30px;
         margin-left: 126px;
+    }
+}
+@media (min-width:780px) and (max-width:1192px){
+    .container.bg{
+        width: 100%;
+        padding-bottom: 500px;
+    }
+    header.sticky-top {
+        position: sticky;
+        width: 1192px;
     }
 }
