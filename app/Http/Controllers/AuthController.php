@@ -258,7 +258,7 @@ class AuthController extends Controller
             $emailVerification->update([
                 'email_verified_session' => now(),
                 //'created_at' => now(),
-                'status' => !$emailVerification->status,
+                // 'status' => !$emailVerification->status,
             ]);
 
             return back()->with('success', 'Verification link has been sent to your email.');

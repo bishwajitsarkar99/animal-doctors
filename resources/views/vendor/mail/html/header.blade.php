@@ -1,8 +1,7 @@
 <tr>
 <td class="header">
-<p>{{setting('company_name')}}</p>
 <!-- href="{{$url}}" -->
-<a href="#" style="display: inline-block;">
+<a class="image-area" href="#" style="display: inline-block;">
 @if (trim($slot) === 'Laravel')
 <img src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" class="logo" alt="Laravel Logo">
 @else

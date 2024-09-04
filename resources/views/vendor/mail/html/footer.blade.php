@@ -3,7 +3,7 @@
 <table class="footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
 <tr>
 <td class="content-cell" align="center">
-<p>{{setting('company_address')}}</p>
+<span>{{setting('company_address')}}</span>
 </td>
 </tr>
 </table>

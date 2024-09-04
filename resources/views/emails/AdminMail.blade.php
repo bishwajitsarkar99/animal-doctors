@@ -8,11 +8,11 @@ This email verification link will expire in 60 minutes.
 If you did not request this, no further action is required.
 @endcomponent
 
-@component('mail::button', ['url' => 'http://127.0.0.1:8000/', 'color' => 'success'])
+@component('mail::button', ['url' => 'http://127.0.0.1:8000/', 'color' => 'seeblue'])
 Email Verified
 @endcomponent
 
 ### With best regards,<br>
-### Admin
-<!-- {{ config('app.name') }} -->
+#### Admin
+### {{setting('company_name')}}
 @endcomponent
