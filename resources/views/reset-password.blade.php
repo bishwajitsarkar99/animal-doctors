@@ -79,8 +79,8 @@
         </div>
     </div>
     <div class="hero-image">
-        <div class="hero-text heading">
-            <h1 class="company_heading" style="font-size:25px;color:darkblue;text-align:left">
+        <div class="hero-text heading reg_hidden company-name-classic">
+            <h1 class="company" style="font-size:25px;color:darkblue;text-align:left">
                 <span class="skeleton">{{setting('reset_page_sub_title')}}</span>
             </h1>
         </div>
@@ -89,8 +89,8 @@
     <div class="container bg" style="margin-top: 62px;">
         <div class="row">
             <div class="col-md-12 mb-5">
-                <h4 class="heading_admin_login text-shadow" style="text-align: center;">
-                    <span class="skeleton">{{setting('reset_page_title')}}</span>
+                <h4 class="heading_register text-shadow font_size" style="text-align: center;">
+                    <span class="skeleton head-animaion">{{setting('reset_page_title')}}</span>
                 </h4>
                 <div class="">
                     <form action="{{ route('password.reset') }}" method="POST">
@@ -111,7 +111,7 @@
                                                 <div class="card-body">
                                                     <div class="mb-4">
                                                         <h5 class="skeleton lb_text">Change Password?</h5>
-                                                        <p class="skeleton lb_text mb-1">Enter your registered email ID to reset the password
+                                                        <p class="panel-skeleton lb_text panel mb-1">Enter your registered email ID to reset the password
                                                         </p>
                                                     </div>
                                                     <input type="hidden" name="token" value="{{request()->input('token')}}" />
@@ -231,7 +231,13 @@
                 item.classList.remove('menu-rest-skeleton')
             });
         }
-
+        function panelSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.panel-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('panel-skeleton')
+            });
+        }
         setTimeout(() => {
             headSkeleton();
             logo();
@@ -241,6 +247,7 @@
             inputEmailSkeleton();
             inputPasswordSkeleton();
             inputConfirmPasswordSkeleton();
+            panelSkeleton();
         }, 2000);
 
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

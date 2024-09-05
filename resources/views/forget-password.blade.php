@@ -28,7 +28,7 @@
             <span class="logo-skeleton"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
             <span class="heading-skeleton">{{setting('company_name')}}</span>
         </p>
-        <p class="address skeleton">{{setting('company_address')}}</p>
+        <p class="address media-address skeleton">{{setting('company_address')}}</p>
         <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
             <a class="menu_btn" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <span class="menu_icon menus-skeleton"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
@@ -47,12 +47,6 @@
                         </div>
                     </div>
                     <div class="group__button">
-                        <!-- <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
-                            <span class="btn-text forg_page"> Forget-Password</span>
-                        </a>
-                        <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
-                            <span class="btn-text reg_page"> User-Register</span>
-                        </a> -->
                         <a type="submit" href="/" class="btn btn-sm" id="logn_page">
                             <span class="btn-text logn_page"> User-Login</span>
                         </a>
@@ -79,8 +73,8 @@
         </div>
     </div>
     <div class="hero-image">
-        <div class="hero-text heading reg_hidden">
-            <h1 class="company_heading" style="font-size:25px;color:darkblue;text-align:left">
+        <div class="hero-text heading reg_hidden company-name-classic">
+            <h1 class="company" style="font-size:25px;color:darkblue;text-align:left">
                 <span class="skeleton">{{setting('forgot_page_sub_title')}}</span>
             </h1>
         </div>
@@ -89,8 +83,8 @@
     <div class="container bg" style="margin-top: 62px;">
         <div class="row">
             <div class="col-md-12 mb-5" style="margin-top:px">
-                <h4 class="heading_admin_login text-shadow" style="text-align: center;">
-                    <span class="skeleton forget_text">{{setting('forgot_page_title')}}</span>
+                <h4 class="heading_register text-shadow font_size" style="text-align: center;">
+                    <span class="skeleton head-animaion">{{setting('forgot_page_title')}}</span>
                 </h4>
                 <div class="">
                     <form action="{{ route('password.reset') }}" method="POST">
@@ -110,8 +104,8 @@
                                                 <div class="card-body">
                                                     @if(request()->input('token'))
                                                     <div class="mb-4">
-                                                        <h5 class="skeleton"><span class="skeleton lb_text">Change Password?</span></h5>
-                                                        <p class="skeleton mb-2"><span class="skeleton lb_text">Enter your registered email ID to reset the password</span></p>
+                                                        <h5 class="skeleton lb_text">Change Password?</h5>
+                                                        <p class="panel-skeleton lb_text panel mb-2">Change your register email password.</p>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="email" class="form-label skeleton">Email</label>
@@ -133,20 +127,24 @@
                                                     @else
                                                     <div class="mb-4">
                                                         <h5 class="skeleton lb_text">Forgot Password?</h5>
-                                                        <p class="skeleton lb_text mb-2">Enter your registered email ID to reset the password.
-                                                        </p>
+                                                        <p class="panel-skeleton lb_text panel mb-2">Enter your registered email ID to reset the password.</p>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="email" class="form-label skeleton lb_text">Email :</label>
                                                         <input type="email" id="email" style="border: 1px solid lightgray;" class="" name="email" placeholder="&#xf0e0; Enter Email Address" required="" autocomplete="off" autofocus />
-                                                        <span class="email-input-skeleton"></span>
+                                                        <span class="email-input2-skeleton"></span>
                                                     </div>
                                                     <div class="mb-3 d-grid">
                                                         <button type="submit" class="btn btn-sm btn-primary forget_button register_btn">
                                                             Reset Password
                                                         </button>
                                                     </div>
-                                                    <span class="skeleton reset_text">Don't have an account?</span> <a class="btn_bg ps-2 pe-2 pb-1 mini-skeleton" href="/">sign in</a>
+                                                    <div class="mb-2 d-grid">
+                                                        <span class="panel-skeleton reset_text panel media-panel">Don't have an account?</span>
+                                                        <span class="mt-3">
+                                                            <a class="btn btn-sm btn-primary forget_button ps-2 pe-2 pb-1" href="/">sign in</a>
+                                                        </span>
+                                                    </div>
                                                     @endif
                                                 </div>
                                             </div>
@@ -187,11 +185,11 @@
                 item.classList.remove('heading-skeleton')
             });
         }
-        function fetchData(){
-            const  allSkeleton = document.querySelectorAll('.skeleton')
+        function panelSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.panel-skeleton')
         
             allSkeleton.forEach(item=>{
-                item.classList.remove('skeleton')
+                item.classList.remove('panel-skeleton')
             });
         }
         function logo(){
@@ -199,6 +197,13 @@
         
             allSkeleton.forEach(item=>{
                 item.classList.remove('logo-skeleton')
+            });
+        }
+        function fetchData(){
+            const  allSkeleton = document.querySelectorAll('.skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('skeleton')
             });
         }
         function inputSkeleton(){
@@ -244,22 +249,23 @@
             });
         }
         function emailInputSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.email-input-skeleton')
+            const  allSkeleton = document.querySelectorAll('.email-input2-skeleton')
         
             allSkeleton.forEach(item=>{
-                item.classList.remove('email-input-skeleton')
+                item.classList.remove('email-input2-skeleton')
             });
         }
         setTimeout(() => {
             headingSkeleton();
             logo();
             fetchData();
+            panelSkeleton();
             inputSkeleton();
             inputEamilSkeleton();
             capSkeleton();
             fileSkeleton();
             imageSkeleton();
-            miniSkeleton();
+            //miniSkeleton();
             emailInputSkeleton();
         }, 2000);
         
@@ -297,8 +303,6 @@
                 $(".side_canvas_animation").removeAttr('hidden');
                 $(".head_auth").addClass('auth-skeleton');
                 $(".btn-close").addClass('auth-skeleton');
-                $(".forg_page").addClass('auth-skeleton');
-                $(".reg_page").addClass('auth-skeleton');
                 $(".logn_page").addClass('auth-skeleton');
 
                 setTimeout(() => {
@@ -306,8 +310,6 @@
                     $(".side_canvas_animation").attr('hidden', true);
                     $(".head_auth").removeClass('auth-skeleton');
                     $(".btn-close").removeClass('auth-skeleton');
-                    $(".forg_page").removeClass('auth-skeleton');
-                    $(".reg_page").removeClass('auth-skeleton');
                     $(".logn_page").removeClass('auth-skeleton');
                 }, 2000);
             });

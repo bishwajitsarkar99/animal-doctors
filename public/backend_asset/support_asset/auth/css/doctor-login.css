@@ -168,9 +168,9 @@ div.url_link{
 .mini-skeleton::before{
     content: "";
     position: absolute;
-    left: -1px;
-    top: -2px;
-    width: 55px;
+    left: -2px;
+    top: 0;
+    width: 60px;
     height: 20px;
     border-radius: 3px;
     z-index: 10;
@@ -385,8 +385,47 @@ span.text-danger.verify_email_message {
     font-size: 12px;
     letter-spacing: 0.3px;
 }
+.email-input2-skeleton{
+    position: relative;
+}
+.email-input2-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -313px;
+    top: -7px;
+    width: 315px;
+    height: 30px;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+a.btn.btn-sm.btn.forget_button{
+    width: 100%;
+    height: 25px;
+    background-image: var(--nav-button-background);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    color: var(--nav-button-color);
+    font-family: var(--nav-font-family);
+    border-color: var(--mdb-btn-border-color);
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    font-size: 12px;
+    line-height: 1.3;
+    opacity: 1;
+    text-align: center;
+    font-weight: 700;
+    outline: none;
+    letter-spacing: 0.5px;
+    margin-left: -2px;
+    border-radius: 3px;
+    transition: .5s ease;
+    animation: text_font_color 5s infinite;
+}
+
 @media (min-width:300px) and (max-width:400px){
-    .heading-skeleton,.email-input-skeleton,.select-skeleton{
+    .heading-skeleton,.email-input-skeleton,.select-skeleton,.email-input2-skeleton{
         position: relative;
     }
     .heading-skeleton::before{
@@ -395,16 +434,15 @@ span.text-danger.verify_email_message {
         top: -7px;
     }
     .email-input-skeleton::before{
-        content: '';
-        position: absolute;
-        left: -228px;
-        top: -4px;
-        width: 228px;
+        display: none;
     }
     .select-skeleton::before{
         content: '';
         position: absolute;
         left: 0;
+    }
+    .email-input2-skeleton::before{
+        display: none;
     }
 }
 @media(min-width:400px) and (max-width:580px){
@@ -413,7 +451,7 @@ span.text-danger.verify_email_message {
         position: absolute;
         top: -7px;
     }
-    .email-input-skeleton{
+    .email-input-skeleton,.email-input2-skeleton{
         position: relative;
     }
     .email-input-skeleton::before {
@@ -422,6 +460,12 @@ span.text-danger.verify_email_message {
         left: -324px;
         top: -4px;
         width: 323px;
+    }
+    .email-input2-skeleton::before {
+        content: '';
+        position: absolute;
+        left: -326px;
+        width: 325px;
     }
     .lb_text {
         font-size: 16px;
@@ -438,6 +482,9 @@ span.text-danger.verify_email_message {
     span.reset_text{
         font-size: 29px;
     }
+    span.media-panel{
+        font-size: 12px;
+    }
     span.forget_text{
         font-size: 40px;
     }
@@ -450,6 +497,12 @@ span.text-danger.verify_email_message {
     }
 }
 @media(min-width:600px) and (max-width:780px){
+    .email-input2-skeleton{
+        position: relative;
+    }
+    .email-input2-skeleton::before {
+       display: none;
+    }
     p.navbar-brand.admin_panel.text-shadow {
         font-size: 20px;
     }
@@ -477,6 +530,13 @@ span.text-danger.verify_email_message {
     a.btn_bg{
         font-size: 30px;
         margin-left: 126px;
+    }
+    span.media-panel{
+        font-size: 12px;
+    }
+    p.address.media-address {
+        font-size: 10px;
+        margin-top: -12px;
     }
 }
 @media (min-width:780px) and (max-width:1192px){

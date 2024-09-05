@@ -28,7 +28,7 @@
             <span class="logo-skeleton"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
             <span class="heading-skeleton">{{setting('company_name')}}</span>
         </p>
-        <p class="address skeleton">{{setting('company_address')}}</p>
+        <p class="address media-address skeleton">{{setting('company_address')}}</p>
     </nav>
 </header>
 

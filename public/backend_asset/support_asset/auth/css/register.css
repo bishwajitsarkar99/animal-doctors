@@ -899,6 +899,10 @@ h1.company {
     button.btn.btn-sm.btn.forget_button {
         font-size: 19px;
     }
+    a.btn.btn-sm.btn.forget_button {
+        font-size: 19px;
+        line-height: .8;
+    }
     span.text-danger.photo_message {
         margin-left: 0;
     }
