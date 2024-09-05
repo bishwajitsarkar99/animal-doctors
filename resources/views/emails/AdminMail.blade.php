@@ -1,6 +1,6 @@
 @component('mail::message')
 
-# Dear User!
+# Hello User!
 You are receiving this email because we received a request to verify your account.
 
 @component('mail::panel')
@@ -12,7 +12,7 @@ If you did not request this, no further action is required.
 Email Verified
 @endcomponent
 
-### With best regards,<br>
+### Thank you and best regards,<br>
 #### Admin
 ### {{setting('company_name')}}
 @endcomponent

@@ -86,6 +86,15 @@ class AuthController extends Controller
             'email.exists' => 'This email is not exists on users table',
         ]);
 
+        // Check if the email of the user attempting to log in is verified
+        $user_email_verification = EmailVerification::where('email', $request->email)
+        ->where('status', 0)
+        ->first();
+
+        if (!$user_email_verification) {
+            return back()->with('error', 'Email verification is required.');
+        }
+
         $userCredential = $request->only('email', 'password');
         if (Auth::attempt($userCredential)) {
             $route = $this->redirectDash();
@@ -243,9 +252,7 @@ class AuthController extends Controller
 
     // Send Email Verification
     public function sendLink(Request $request)
-    {
-        //$url = "http://127.0.0.1:8000/";
-        // Validate the email input     
+    {     
         $request->validate([
             'email' => 'required|email|exists:email_verifications,email',
         ]);
@@ -257,7 +264,6 @@ class AuthController extends Controller
             $emailVerification = EmailVerification::where('email', $userEmail)->firstOrFail();
             $emailVerification->update([
                 'email_verified_session' => now(),
-                //'created_at' => now(),
                 // 'status' => !$emailVerification->status,
             ]);
 

@@ -137,6 +137,6 @@
             $('.verification-icon').addClass('register-hidden');
             $(this).attr('disabled', false);
             $('.btn-email-text').text('Email Verification');
-        }, 3000);
+        }, 6000);
     });
 })(jQuery);

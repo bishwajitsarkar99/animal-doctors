@@ -428,4 +428,6 @@ class DatabaseSeeder extends Seeder
     }
     
 }
-
+// making seeder [php artisan make:seeder EmailVerificationSeeder]
+// user command for all seeding[php artisan db:seed]
+// single table for seeding [php artisan db:seed --class=EmailVerificationSeeder]

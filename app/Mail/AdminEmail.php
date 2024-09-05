@@ -28,6 +28,8 @@ class AdminEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('superadmin@gmail.com')->markdown('emails.AdminMail');
+        return $this->from('superadmin@gmail.com', 'GST-Medicine-Center')
+                    ->subject('Email Verification')
+                    ->markdown('emails.AdminMail');
     }
 }

@@ -88,7 +88,6 @@
     <div class="hero-image">
         <div class="hero-text heading" id="page_head">
             <h1 class="body_heading ms-5 mt-5">
-                <!-- <span class="skeleton"><img class="company_logo skeleton" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span> -->
                 <span class="skeleton">{{setting('page_sub_title')}}</span>
             </h1>
             <p class="address skeleton ms-5">{{setting('company_address')}}</p>
@@ -165,9 +164,7 @@
                                         <button id="submit" type="submit" class="btn btn-sm btn-primary login_button button-skeleton">
                                             <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
                                             <span class="btn-text">Login</span>
-                                            <!-- <span class="button-focus-classic"></span> -->
                                         </button>
-
                                     </div>
                                 </div>
                             </div>

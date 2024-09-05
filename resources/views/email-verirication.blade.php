@@ -88,7 +88,7 @@
                                                         </form>
                                                     </div>
                                                     <div class="mb-3 d-grid">
-                                                        <button type="submit" class="btn btn-sm btn-primary forget_button register_btn" id="email_submit">
+                                                        <button type="submit" class="email_submit btn btn-sm btn-primary forget_button register_btn email_submit" id="email_submit">
                                                             <span class="btn-email-text">Email Verification</span>
                                                             <i class="verification-icon fa fa-spinner fa-spin register-hidden"></i>
                                                         </button>
@@ -259,6 +259,23 @@
             setTimeout(function() {
                 loaderModal.hide();
             }, 2000);
+        });
+    </script>
+    <script>
+        // Success Message Show
+        $(document).ready(function () {
+            var successMessage = $('#success_message').text().trim();
+            if (successMessage) {
+                $('#success_message').fadeIn();
+                var time = null;
+                time = setTimeout(() => {
+                    $('#success_message').fadeOut();
+                    $('#success_message').delay(6000);
+                }, 6000);
+                return ()=>{
+                    clearTimeout(time);
+                }
+            }
         });
     </script>
 </body>

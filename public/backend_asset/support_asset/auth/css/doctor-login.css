@@ -16,6 +16,10 @@ body.doctors-background-color{
         background-color: #fff;
     }
 } */
+
+.display-hidden{
+    display: none;
+}
 div.url_link{
     color: darkblue;
     font-weight: 500;
@@ -316,7 +320,6 @@ button.btn.btn-sm.btn.forget_button {
     font-family: var(--nav-font-family);
     border-color: var(--mdb-btn-border-color);
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
-    font-variant: all-petite-caps;
     font-size: 12px;
     line-height: .2;
     opacity: 1;

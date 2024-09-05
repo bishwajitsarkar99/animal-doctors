@@ -28,7 +28,7 @@
     Doctors-Center
     @endif
 </title>
-<link rel="icon" type="shortcut icon" href="{{asset('backend_asset')}}/main_asset/img/favicon.png">
+<link rel="icon" type="shortcut icon" href="{{asset('backend_asset')}}/main_asset/img/com-black-favicon.png">
 <!-- Bootstrap5-Data table min.css CDN link -->
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <!-- Font-Awesome min.css CDN link -->
