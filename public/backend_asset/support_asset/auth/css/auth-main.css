@@ -197,7 +197,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   content: "";
   position: absolute;
   left: 0px;
-  top: -4px;
+  top: -5px;
   width: 213px;
   height: 30px;
   border-radius: 3px;
@@ -416,8 +416,48 @@ img.social_icon_whatsapp{
 div.address_top {
   height: 26px;
 }
+.show-current-border{
+  border-left: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
+}
+.show-error-border{
+  border-left: 1px solid #f19a7a;
+  border-bottom: 1px solid #f19a7a;
+  border-top: 1px solid #f19a7a;
+  border-right: 1px solid #f19a7a;
+}
+.show-success-border{
+  border-left: 1px solid #00c300db;
+  border-bottom: 1px solid #00c300db;
+  border-top: 1px solid #00c300db;
+  border-right: 1px solid #00c300db;
+}
+.background_error{
+  background-color: #f2f6;
+  animation: text 3s 1;
+  position: absolute;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 3px;
+  --mdb-box-shadow-color-rgb: 0, 0, 0 !important;
+  box-shadow: 0 4px 9px -4px rgba(0, 0, 0, 0.35) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 700;
+}
+@keyframes text{
+  0%{
+    color: white;
+  }
+  30%{
+    letter-spacing: 15px;
+  }
+  85%{
+    letter-spacing: 10px;
+  }
+}
 .container.bg {
-  /* background-image: url("/image/doctors.jpg"); */
   background-color: whitesmoke;
   box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
   opacity: 1;
@@ -706,10 +746,6 @@ input.password {
   margin-left: 0;
   outline: none;
   animation: inputColor 2s infinite;
-  border-left: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
-  border-top: 1px solid lightgray;
-  border-right: 1px solid lightgray;
   border-radius: 4px;
   text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
   font-weight: 600;
@@ -853,10 +889,6 @@ input.email {
   outline: none;
   outline: none;
   animation: inputColor 2s infinite;
-  border-left: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
-  border-top: 1px solid lightgray;
-  border-right: 1px solid lightgray;
   border-radius: 4px;
   margin-left: 23px;
   text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);

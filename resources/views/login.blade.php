@@ -146,19 +146,21 @@
                             <div class="row">
                                 <div class="form-group ms-4">
                                     <label class="email email-label-skeleton" for="email">Email :</label>
-                                    <span class="input-email-skeleton"><input class="email_src email ps-1 mt-5" type="text" name="email" placeholder="Enter Email Address" value="{{old('email')}}" autofocus></span>
-                                    <i class="src_email fa fa-spinner fa-spin src_email-hidden"></i>
-                                    <span class="text-danger input_message">@error('email')
-                                        <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
+                                    <span class="input-email-skeleton"><input class="email_src email show-current-border ps-1 mt-5" type="text" name="email" placeholder="Enter Email Address" value="{{old('email')}}" autofocus></span>
+                                    <span style="color:green;font-weight:800;font-size: 15px;">
+                                        <i class="src_email fa fa-check src_email-hidden"></i>
+                                    </span>
+                                    <span class="text-danger input_message show-error remove-error-one">@error('email')
                                         {{$message}}@enderror
                                     </span><br>
                                 </div>
                                 <div class="form-group ms-4">
                                     <label class="password skeleton" for="password">Password :</label>
-                                    <span class="input-password-skeleton"><input class="password_src password ps-1" type="password" name="password" placeholder="Enter Password" value="{{old('password')}}"></span>
-                                    <i class="src_password fa fa-spinner fa-spin src_password-hidden"></i>
-                                    <span class="text-danger input_message">@error('password')
-                                        <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
+                                    <span class="input-password-skeleton"><input class="password_src password show-current-border ps-1" type="password" name="password" placeholder="Enter Password" value="{{old('password')}}"></span>
+                                    <span style="color:green;font-weight:800;font-size: 15px;">
+                                        <i class="src_password fa fa-check src_password-hidden"></i>
+                                    </span>
+                                    <span class="text-danger input_message show-error2 remove-error-two">@error('password')
                                         {{$message}}@enderror
                                     </span><br>
                                 </div>
@@ -175,10 +177,10 @@
                     </form>
                 </div>
             </div>
-            @if(session('error'))
-                <span class="bg-text mb-4" style="text-align: center;">{{session('error')}}</span>
-            @endif
         </div>
+        @if(session('error'))
+            <p id="success_message" class="background_error mb-4" style="text-align: center;color:white;">{{session('error')}}</p>
+        @endif
     </div>
 
     <!-- Boostrap5 JS Table Filter -->
@@ -345,9 +347,9 @@
                 $('#success_message').fadeIn();
                 var time = null;
                 time = setTimeout(() => {
-                    $('#success_message').fadeOut();
+                    $('#success_message').fadeOut(6000);
                     $('#success_message').delay(6000);
-                }, 6000);
+                }, 3000);
                 return ()=>{
                     clearTimeout(time);
                 }

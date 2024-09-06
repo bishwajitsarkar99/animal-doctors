@@ -271,7 +271,7 @@
                 $('#success_message').fadeIn();
                 var time = null;
                 time = setTimeout(() => {
-                    $('#success_message').fadeOut();
+                    $('#success_message').fadeOut(6000);
                     $('#success_message').delay(6000);
                 }, 6000);
                 return ()=>{
