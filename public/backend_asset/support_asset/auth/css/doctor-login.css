@@ -425,7 +425,7 @@ a.btn.btn-sm.btn.forget_button{
 }
 
 @media (min-width:300px) and (max-width:400px){
-    .heading-skeleton,.email-input-skeleton,.select-skeleton,.email-input2-skeleton{
+    .heading-skeleton,.email-input-skeleton,.select-skeleton,.email-input2-skeleton,.heading-rest-skeleton{
         position: relative;
     }
     .heading-skeleton::before{
@@ -444,14 +444,24 @@ a.btn.btn-sm.btn.forget_button{
     .email-input2-skeleton::before{
         display: none;
     }
+    .heading-rest-skeleton::before{
+        content: '';
+        position: absolute;
+        top: -7px;
+    }
 }
 @media(min-width:400px) and (max-width:580px){
+    .heading-rest-skeleton::before{
+        content: '';
+        position: absolute;
+        top: -8px;
+    }
     .heading-skeleton::before{
         content: '';
         position: absolute;
         top: -7px;
     }
-    .email-input-skeleton,.email-input2-skeleton{
+    .email-input-skeleton,.email-input2-skeleton,.heading-rest-skeleton{
         position: relative;
     }
     .email-input-skeleton::before {

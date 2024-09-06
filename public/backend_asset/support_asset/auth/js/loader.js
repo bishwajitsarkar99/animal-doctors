@@ -139,4 +139,40 @@
             $('.btn-email-text').text('Email Verification');
         }, 6000);
     });
+    // Reset Password Button---------
+    $("#reset_password").on('click', () =>{
+        $('.reset-icon').removeClass('register-hidden');
+        $(this).attr('disabled', true);
+        $('.btn-reset-text').text('Reset Password...');
+
+        setTimeout(() =>{
+            $('.reset-icon').addClass('register-hidden');
+            $(this).attr('disabled', false);
+            $('.btn-reset-text').text('Reset Password');
+        }, 6000);
+    });
+    // Reset page Back Button---------
+    $("#user__login").on('click', () =>{
+        $('.acc-icon').removeClass('register-hidden');
+        $(this).attr('disabled', true);
+        $('.btn-acc-text').text('sign in...');
+
+        setTimeout(() =>{
+            $('.acc-icon').addClass('register-hidden');
+            $(this).attr('disabled', false);
+            $('.btn-acc-text').text('sign in');
+        }, 3000);
+    });
+    // Change Password Button---------
+    $("#change_Password").on('click', () =>{
+        $('.change-icon').removeClass('register-hidden');
+        $(this).attr('disabled', true);
+        $('.btn-change-text').text('Change Password...');
+
+        setTimeout(() =>{
+            $('.change-icon').addClass('register-hidden');
+            $(this).attr('disabled', false);
+            $('.btn-change-text').text('Change Password');
+        }, 6000);
+    });
 })(jQuery);

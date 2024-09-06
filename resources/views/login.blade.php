@@ -86,16 +86,19 @@
         </div>
     </div>
     <div class="hero-image">
-        <div class="hero-text heading" id="page_head">
-            <h1 class="body_heading ms-5 mt-5">
+        <div class="hero-text heading reg_hidden company-name-classic" id="page_head">
+            <h1 class="body_heading" style="font-size:25px;color:darkblue;">
                 <span class="skeleton">{{setting('page_sub_title')}}</span>
             </h1>
-            <p class="address skeleton ms-5">{{setting('company_address')}}</p>
         </div>
     </div>
 
-    <h2 class="para mt-5"><span class="nav_head"><span class="lgo ms-3"></span> <span class="lgn ms-3"></span></span></h2>
-    <div class="container bg" style="margin-top: 45px;">
+    <h2 class="para">
+        <span class="nav_head">
+            <p class="login-address skeleton ms-5">{{setting('company_address')}}</p>
+        </span>
+    </h2>
+    <div class="container bg" style="margin-top: 100px;">
         <div class="row">
             <div class="col-md-8">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -129,7 +132,7 @@
                 </div>
             </div>
             <div class="col-md-4 mb-5" style="margin-top:px">
-                <h4 class="heading_admin text-shadow ps-3" style="text-align: center;"><span class="skeleton">{{ setting('login_page_title')}}</span></h4>
+                <h4 class="heading_admin text-shadow" style="text-align: center;"><span class="skeleton head-animation">{{ setting('login_page_title')}}</span></h4>
                 <div class="card card-form-control login_card">
                     <form id="loginForm" action="{{ route('login') }}" method="POST" autocomplete="off">
                         <div class="col-md-12">
@@ -143,7 +146,7 @@
                             <div class="row">
                                 <div class="form-group ms-4">
                                     <label class="email email-label-skeleton" for="email">Email :</label>
-                                    <span class="input-email-skeleton"><input class="email_src email ps-1 mt-5" type="text" name="email" placeholder="&#xf0e0; Enter Email Address" value="{{old('email')}}" autofocus></span>
+                                    <span class="input-email-skeleton"><input class="email_src email ps-1 mt-5" type="text" name="email" placeholder="Enter Email Address" value="{{old('email')}}" autofocus></span>
                                     <i class="src_email fa fa-spinner fa-spin src_email-hidden"></i>
                                     <span class="text-danger input_message">@error('email')
                                         <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
@@ -152,7 +155,7 @@
                                 </div>
                                 <div class="form-group ms-4">
                                     <label class="password skeleton" for="password">Password :</label>
-                                    <span class="input-password-skeleton"><input class="password_src password ps-1" type="password" name="password" placeholder="&#xf13e; Enter Password" value="{{old('password')}}"></span>
+                                    <span class="input-password-skeleton"><input class="password_src password ps-1" type="password" name="password" placeholder="Enter Password" value="{{old('password')}}"></span>
                                     <i class="src_password fa fa-spinner fa-spin src_password-hidden"></i>
                                     <span class="text-danger input_message">@error('password')
                                         <i class="fa-regular fa-hand-point-right fa-beat" style="color: #003ea8;"></i>
@@ -179,16 +182,14 @@
     </div>
 
     <!-- Boostrap5 JS Table Filter -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- JQUERY CDN LINK -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script src="{{asset('backend_asset')}}/support_asset/auth/js/loader.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
         // skeleton
         function headSkeleton(){
@@ -334,6 +335,23 @@
                     $(".logn_page").removeClass('auth-skeleton');
                 }, 2000);
             });
+        });
+    </script>
+    <script>
+        // Success Message Show
+        $(document).ready(function () {
+            var successMessage = $('#success_message').text().trim();
+            if (successMessage) {
+                $('#success_message').fadeIn();
+                var time = null;
+                time = setTimeout(() => {
+                    $('#success_message').fadeOut();
+                    $('#success_message').delay(6000);
+                }, 6000);
+                return ()=>{
+                    clearTimeout(time);
+                }
+            }
         });
     </script>
 </body>

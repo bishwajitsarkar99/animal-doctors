@@ -74,7 +74,7 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <form class="col-md-4">
-                                                            <label for="email" class="form-label select-skeleton lb_text">Email :
+                                                            <label for="email" class="form-label select-skeleton lb_text">Email
                                                                 <span class="text-danger verify_email_message">@error('email')
                                                                     {{$message}}@enderror
                                                                 </span>

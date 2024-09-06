@@ -125,7 +125,7 @@ div#loaderRegisterModal_body {
     display: none;
 }
 .image_size {
-    margin-left: 100px;
+    /* margin-left: 100px; */
     color: gray;
     font-weight: 600;
     background: white;
@@ -209,6 +209,45 @@ input.register{
 }
 .check-hidden,.fillup-hidden{
     display: none;
+}
+.upload-group {
+    padding-top: 100px;
+}
+.progress{
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+}
+.bar{
+    background-color: #3ab521;
+    width: 0%;
+    height: 20px;
+}
+.percent{
+    position: absolute;
+    display: inline-block;
+    left: 50%;
+    color: #040608;
+}
+.upload_btn {
+    /* background-image: linear-gradient(45deg,#1e1e1ed9,#1e1e1ed9); */
+    background-image:  linear-gradient(180deg, silver, #0000, silver, #d3d3d3);
+    border: 1px solid silver;
+    border-radius: 200px;
+    color: black;
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    text-decoration: none;
+    transition: background-color .2s, border .2s, color .2;
+}
+.upload_btn:hover {
+    background-image:  linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);
+    border: 1px solid #3b71ca;
+    color: white;
 }
 .fillup-block{
     display: block;
@@ -301,7 +340,7 @@ input.image{
     border-top: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
     border-radius: 2px;
-    margin-left: 72px;
+    /* margin-left: 72px; */
     font-size: 10px;
     width: 161px;
     opacity: 1;
@@ -595,7 +634,7 @@ button.btn.btn-sm.btn-primary.button_margin{
     border-color: inherit;
     border-image: initial;
     border-radius: 2px;
-    margin-left: 72px;
+    /* margin-left: 72px; */
     transform: scale(1);
     transition: 0.5s;
     border-radius: 3px;

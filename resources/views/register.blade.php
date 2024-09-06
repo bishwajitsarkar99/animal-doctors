@@ -183,17 +183,30 @@
                                                             </div>
                                                         </div>
                                                         <div class="mb-2">
-                                                            <span class="image_size cap-skeleton" style="text-transform: uppercase;">150 x 150 (px) 
-                                                                <span style="color:green;font-weight:800;font-size: 15px;"><i class="six-check fa fa-check check-hidden"></i></span>
-                                                            </span>
-                                                            <div class="img-area" id="registerAnimation">
-                                                                <span class="skeleton"><img class="register_img image-current-border imge-border" id="output" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500"></span>
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <span class="image_size cap-skeleton" style="text-transform: uppercase;">150 x 150 (px) 
+                                                                        <span style="color:green;font-weight:800;font-size: 15px;"><i class="six-check fa fa-check check-hidden"></i></span>
+                                                                    </span>
+                                                                    <div class="img-area" id="registerAnimation">
+                                                                        <span class="skeleton"><img class="register_img image-current-border imge-border" id="output" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500"></span>
+                                                                    </div>
+                                                                    <span class="file-skeleton"></span>
+                                                                    <input accept="image/*" type='file' id="imgInput" class="image mt-1" name="image" onchange="loadFile(event)" required>
+                                                                    <span class="file-error-skeleton text-danger photo_message show-error remove-error-six">@error('image')
+                                                                        {{$message}}@enderror
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="upload-group align-items-center justify-content-center">
+                                                                        <div class="progress">
+                                                                            <div class="bar"></div>
+                                                                            <div class="percent">0%</div>
+                                                                        </div>
+                                                                        <button type="submit" class="btn btn-group-sm upload_btn" id="uploadButton">Upload</button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <span class="file-skeleton"></span>
-                                                            <input accept="image/*" type='file' id="imgInput" class="image mt-1" name="image" onchange="loadFile(event)">
-                                                            <span class="file-error-skeleton text-danger photo_message show-error remove-error-six">@error('image')
-                                                                {{$message}}@enderror
-                                                            </span>
                                                         </div>
                                                         <div class="mb-1 d-grid">
                                                             <button type="submit" class="btn btn-sm btn-primary forget_button register_btn register_action" id="reg_submit">
@@ -584,6 +597,48 @@
                     $(".imge-border").addClass('image-current-border');
                     $(".imge-border").removeClass('image-error-border');
                 }
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var bar = document.querySelector('.bar');
+                var percent = document.querySelector('.percent');
+                var uploadButton = document.getElementById('uploadButton');
+                var imgInput = document.getElementById('imgInput');
+
+                uploadButton.addEventListener('click', function (event) {
+                    event.preventDefault();
+
+                    if (imgInput.files.length === 0) {
+                        alert('Please select an image file.');
+                        return;
+                    }
+
+                    var formData = new FormData(document.querySelector('form'));
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', '{{ route('register') }}', true);
+                    xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+
+                    xhr.upload.addEventListener('progress', function (e) {
+                        if (e.lengthComputable) {
+                            var percentComplete = (e.loaded / e.total) * 100;
+                            bar.style.width = percentComplete + '%';
+                            percent.innerHTML = Math.round(percentComplete) + '%';
+                        }
+                    });
+
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            alert('File has been uploaded.');
+                            console.log(xhr.responseText);
+                        } else {
+                            alert('An error occurred while uploading the file.');
+                        }
+                    };
+
+                    xhr.send(formData);
+                });
             });
         </script>
     </body>

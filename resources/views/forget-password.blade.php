@@ -130,19 +130,23 @@
                                                         <p class="panel-skeleton lb_text panel mb-2">Enter your registered email ID to reset the password.</p>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="email" class="form-label skeleton lb_text">Email :</label>
+                                                        <label for="email" class="form-label skeleton lb_text">Email</label>
                                                         <input type="email" id="email" style="border: 1px solid lightgray;" class="" name="email" placeholder="&#xf0e0; Enter Email Address" required="" autocomplete="off" autofocus />
                                                         <span class="email-input2-skeleton"></span>
                                                     </div>
                                                     <div class="mb-3 d-grid">
-                                                        <button type="submit" class="btn btn-sm btn-primary forget_button register_btn">
-                                                            Reset Password
+                                                        <button type="submit" class="btn btn-sm btn-primary forget_button register_btn" id="reset_password">
+                                                            <span class="btn-reset-text">Reset Password</span>
+                                                            <i class="reset-icon fa fa-spinner fa-spin register-hidden"></i>
                                                         </button>
                                                     </div>
                                                     <div class="mb-2 d-grid">
                                                         <span class="panel-skeleton reset_text panel media-panel">Don't have an account?</span>
                                                         <span class="mt-3">
-                                                            <a class="btn btn-sm btn-primary forget_button ps-2 pe-2 pb-1" href="/">sign in</a>
+                                                            <a class="btn btn-sm btn-primary forget_button ps-2 pe-2 pb-1" href="/" id="user__login">
+                                                                <span class="btn-acc-text">sign in</span>
+                                                                <i class="acc-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                            </a>
                                                         </span>
                                                     </div>
                                                     @endif
@@ -156,10 +160,12 @@
                     </form>
                 </div>
             </div>
-            <div class="col-xl-12">
-                @if(Session::has('success'))
-                <p id="success_message" class="background_success" style="color:green;">{{ Session::get('success') }}</p>
-                @endif
+            <div class="row d-flex flex-column align-items-center justify-content-center">
+                <div class="col-12">
+                    @if(Session::has('success'))
+                    <p id="success_message" class="background_success" style="color:green;">{{ Session::get('success') }}</p>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
@@ -313,6 +319,23 @@
                     $(".logn_page").removeClass('auth-skeleton');
                 }, 2000);
             });
+        });
+    </script>
+    <script>
+        // Success Message Show
+        $(document).ready(function () {
+            var successMessage = $('#success_message').text().trim();
+            if (successMessage) {
+                $('#success_message').fadeIn();
+                var time = null;
+                time = setTimeout(() => {
+                    $('#success_message').fadeOut();
+                    $('#success_message').delay(6000);
+                }, 6000);
+                return ()=>{
+                    clearTimeout(time);
+                }
+            }
         });
     </script>
 </body>

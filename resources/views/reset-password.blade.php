@@ -24,12 +24,12 @@
 </head>
 <header class="bg sticky-top">
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
-        <p class="navbar-brand ps-3 admin_panel text-shadow" style="float: right;">
-            <span class="logo-skeleton"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
+        <p class="navbar-brand ps-2 admin_panel text-shadow" style="float: right;">
+            <span class="logo-skeleton me-1"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
             <span class="heading-rest-skeleton">{{setting('company_name')}}</span>
         </p>
-        <p class="address skeleton">{{setting('company_address')}}</p>
-        <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
+        <p class="address skeleton media-address mt-1 me-2">{{setting('company_address')}}</p>
+        <p class="d-none d-md-inline-block form-inline ms-auto me-2 mt-2 me-md-0 my-0 my-md-0">
             <a class="menu_btn menu-rest-skeleton" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <span class="menu_icon"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
             </a>
@@ -50,9 +50,6 @@
                         <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
                             <span class="btn-text forg_page"> Forget-Password</span>
                         </a>
-                        <!-- <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
-                            <span class="btn-text reg_page"> User-Register</span>
-                        </a> -->
                         <a type="submit" href="/" class="btn btn-sm" id="logn_page">
                             <span class="btn-text logn_page"> User-Login</span>
                         </a>
@@ -117,25 +114,22 @@
                                                     <input type="hidden" name="token" value="{{request()->input('token')}}" />
                                                     <div class="mb-2">
                                                         <label for="email" class="form-label skeleton lb_text">Email</label>
-                                                        <span class="rest-email-skeleton"></span>
                                                         <input type="email" id="email" style="border: 1px solid rgba(0, 0, 0, 0.2);" class="" name="email" placeholder="Enter Your Email" required="" value="{{request()->input('email')}}" readonly="" />
                                                     </div>
                                                     <div class="mb-2">
                                                         <label for="email" class="form-label skeleton lb_text">Password</label>
-                                                        <span class="rest-password-skeleton"></span>
-                                                        <input type="password" style="border: 1px solid rgba(0, 0, 0, 0.2);" class="inpt_pass" name="password" placeholder="Enter Password" required="" autofocus>
+                                                        <input type="password" style="border: 1px solid rgba(0, 0, 0, 0.2);" class="inpt_pass" name="password" placeholder="Enter Password" required="">
                                                     </div>
                                                     <div class="mb-2">
                                                         <label for="email" class="form-label skeleton lb_text">Conform Password</label>
-                                                        <span class="rest-confirm-password-skeleton"></span>
                                                         <input type="password" style="border: 1px solid rgba(0, 0, 0, 0.2);" class="inpt_pass" name="password_confirmation" placeholder="Enter Confirm Password" required="">
                                                     </div>
                                                     <div class="mb-2 d-grid">
-                                                        <button type="submit" class="btn btn-sm btn-primary forget_button register_btn">
-                                                            Change Password
+                                                        <button type="submit" class="btn btn-sm btn-primary forget_button register_btn" id="change_Password">
+                                                            <span class="btn-change-text">Change Password</span>
+                                                            <i class="change-icon fa fa-spinner fa-spin register-hidden"></i>
                                                         </button>
                                                     </div>
-                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -146,10 +140,12 @@
                     </form>
                 </div>
             </div>
-            <div class="col-xl-12">
-                @if(Session::has('success'))
-                <p id="success_message" class="background_success" style="color:green;">{{ Session::get('success') }}</p>
-                @endif
+            <div class="row d-flex flex-column align-items-center justify-content-center">
+                <div class="col-12">
+                    @if(Session::has('success'))
+                    <p id="success_message" class="background_success" style="color:green;">{{ Session::get('success') }}</p>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
@@ -180,27 +176,6 @@
         
             allSkeleton.forEach(item=>{
                 item.classList.remove('skeleton')
-            });
-        }
-        function inputEmailSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.rest-email-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('rest-email-skeleton')
-            });
-        }
-        function inputPasswordSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.rest-password-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('rest-password-skeleton')
-            });
-        }
-        function inputConfirmPasswordSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.rest-confirm-password-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('rest-confirm-password-skeleton')
             });
         }
         function fetchData(){
@@ -244,9 +219,6 @@
             fetchData();
             emailLabel();
             menuSkeleton();
-            inputEmailSkeleton();
-            inputPasswordSkeleton();
-            inputConfirmPasswordSkeleton();
             panelSkeleton();
         }, 2000);
 
@@ -289,6 +261,23 @@
                     $(".logn_page").removeClass('auth-skeleton');
                 }, 2000);
             });
+        });
+    </script>
+    <script>
+        // Success Message Show
+        $(document).ready(function () {
+            var successMessage = $('#success_message').text().trim();
+            if (successMessage) {
+                $('#success_message').fadeIn();
+                var time = null;
+                time = setTimeout(() => {
+                    $('#success_message').fadeOut();
+                    $('#success_message').delay(6000);
+                }, 6000);
+                return ()=>{
+                    clearTimeout(time);
+                }
+            }
         });
     </script>
 </body>

@@ -44,13 +44,31 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->contract_number = $request->contract_number;
 
-        if ($request->hasfile('image')) {
+        // if ($request->hasfile('image')) {
+        //     $file = $request->file('image');
+        //     $extension = $file->getClientOriginalExtension();
+        //     $filename = time() . '.' . $extension;
+        //     $file->move('image/', $filename);
+        //     $user->image = $filename;
+        // }
+
+
+
+        // Handle image upload directly to the public/images directory
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('image/', $filename);
-            $user->image = $filename;
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $filePath = public_path('images'); // Define the public path
+
+            // Ensure the images directory exists
+            if (!file_exists($filePath)) {
+                mkdir($filePath, 0777, true); // Create the directory if it doesn't exist
+            }
+
+            $file->move($filePath, $filename); // Move the file to the public/images directory
+            $user->image = 'images/' . $filename; // Save the relative path to the database
         }
+
         $user->save();
 
         // Insert into email_verifications table
