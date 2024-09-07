@@ -189,10 +189,10 @@
                                                                         <span style="color:green;font-weight:800;font-size: 15px;"><i class="six-check fa fa-check check-hidden"></i></span>
                                                                     </span>
                                                                     <div class="img-area" id="registerAnimation">
-                                                                        <span class="skeleton"><img class="register_img image-current-border imge-border" id="output" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500"></span>
+                                                                        <span class="skeleton"><img class="register_img image-current-border imge-border img-hidden" id="output" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500"></span>
                                                                     </div>
                                                                     <span class="file-skeleton"></span>
-                                                                    <input accept="image/*" type='file' id="imgInput" class="image mt-1" name="image" onchange="loadFile(event)" required>
+                                                                    <input accept="image/*" type='file' id="imgInput" class="image click-img mt-1" name="image" onchange="loadFile(event)" required>
                                                                     <span class="file-error-skeleton text-danger photo_message show-error remove-error-six">@error('image')
                                                                         {{$message}}@enderror
                                                                     </span>
@@ -203,7 +203,7 @@
                                                                             <div class="bar"></div>
                                                                             <div class="percent">0%</div>
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-group-sm upload_btn" id="uploadButton">Upload</button>
+                                                                        <a class="btn btn-group-sm upload_btn" id="uploadButton">Upload</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -431,213 +431,121 @@
             });
         </script>
         <script>
-            // change input field border-color
-            $(document).ready(function(){
-                // input name field border color changer when will show error
-                $(document).on('keyup', '#border_action',function() {
-
-                    var inputVal = $(this).val();
-                    // error message remove
-                    $(".remove-error-one").text('');
-                    $("#border_action").removeClass('show-error-border');
-
-                    if(inputVal !== ''){
-                        $(this).removeClass('show-current-border');
-                        $(this).addClass('show-success-border');
-                        $(".first-check").removeClass('check-hidden');
-                        $("#firstFillUp").removeClass('fillup-block');
-                        $("#firstFillUp").addClass('fillup-hidden');
-                    }
-                    else{
-                        $(this).addClass('show-current-border');
-                        $(this).removeClass('show-success-border');
-                        $(".first-check").addClass('check-hidden');
-                        $("#firstFillUp").addClass('fillup-block');
-                        $("#firstFillUp").removeClass('fillup-hidden');
-                    }
-                });
-                // input contract-number field border color changer when will show error
-                $(document).on('keyup', '#border_action2',function() {
-                    var inputVal = $(this).val();
-                    // error message remove
-                    $(".remove-error-two").text('');
-                    $("#border_action2").removeClass('show-error-border');
-
-                    if(inputVal !== ''){
-                        $(this).removeClass('show-current-border');
-                        $(this).addClass('show-success-border');
-                        $(".second-check").removeClass('check-hidden');
-                        $("#secondFillUp").removeClass('fillup-block');
-                        $("#secondFillUp").addClass('fillup-hidden');
-                    }
-                    else{
-                        $(this).addClass('show-current-border');
-                        $(this).removeClass('show-success-border');
-                        $(".second-check").addClass('check-hidden');
-                        $("#secondFillUp").addClass('fillup-block');
-                        $("#secondFillUp").removeClass('fillup-hidden');
-                    }
-                });
-                // input email field border color changer when will show error
-                $(document).on('keyup', '#border_action3',function() {
-                    var inputVal = $(this).val();
-                    // error message remove
-                    $(".remove-error-three").text('');
-                    $("#border_action3").removeClass('show-error-border');
-
-                    if(inputVal !== ''){
-                        $(this).removeClass('show-current-border');
-                        $(this).addClass('show-success-border');
-                        $(".third-check").removeClass('check-hidden');
-                        $("#thirdFillUp").removeClass('fillup-block');
-                        $("#thirdFillUp").addClass('fillup-hidden');
-                    }
-                    else{
-                        $(this).addClass('show-current-border');
-                        $(this).removeClass('show-success-border');
-                        $(".third-check").addClass('check-hidden');
-                        $("#thirdFillUp").addClass('fillup-block');
-                        $("#thirdFillUp").removeClass('fillup-hidden');
-                    }
+            $(document).ready(function () {
+                // Function to handle input validation on keyup
+                function handleInputValidation(inputSelector, errorSelector, checkSelector, fillupSelector) {
+                    var inputVal = $(inputSelector).val().trim();
                     
-                });
-                // input password field border color changer when will show error
-                $(document).on('keyup', '#border_action4',function() {
-                    var inputVal = $(this).val();
-                    // error message remove
-                    $(".remove-error-four").text('');
-                    $("#border_action4").removeClass('show-error-border');
+                    // Display or hide error message and border styles
+                    if (inputVal !== '') {
+                        $(inputSelector).removeClass('show-error-border show-current-border').addClass('show-success-border');
+                        $(checkSelector).removeClass('check-hidden');
+                        $(fillupSelector).removeClass('fillup-block').addClass('fillup-hidden');
+                    } else {
+                        $(inputSelector).addClass('show-current-border').removeClass('show-success-border show-error-border');
+                        $(checkSelector).addClass('check-hidden');
+                        $(fillupSelector).addClass('fillup-block').removeClass('fillup-hidden');
+                    }
+                }
 
-                    if(inputVal !== ''){
-                        $(this).removeClass('show-current-border');
-                        $(this).addClass('show-success-border');
-                        $(".four-check").removeClass('check-hidden');
-                        $("#fourFillUp").removeClass('fillup-block');
-                        $("#fourFillUp").addClass('fillup-hidden');
-                    }
-                    else{
-                        $(this).addClass('show-current-border');
-                        $(this).removeClass('show-success-border');
-                        $(".four-check").addClass('check-hidden');
-                        $("#fourFillUp").addClass('fillup-block');
-                        $("#fourFillUp").removeClass('fillup-hidden');
-                    }
-                });
-                // input confirm-password field border color changer when will show error
-                $(document).on('keyup', '#border_action5',function() {
-                    var inputVal = $(this).val();
-                    // error message remove
-                    $(".remove-error-five").text('');
-                    $("#border_action5").removeClass('show-error-border');
+                // Check input values and errors on page load
+                function checkInitialInputStates() {
+                    // Apply styles based on the existing input values
+                    handleInputValidation('#border_action', '.remove-error-one', '.first-check', '#firstFillUp');
+                    handleInputValidation('#border_action2', '.remove-error-two', '.second-check', '#secondFillUp');
+                    handleInputValidation('#border_action3', '.remove-error-three', '.third-check', '#thirdFillUp');
+                    handleInputValidation('#border_action4', '.remove-error-four', '.four-check', '#fourFillUp');
+                    handleInputValidation('#border_action5', '.remove-error-five', '.five-check', '#fiveFillUp');
 
-                    if(inputVal !== ''){
-                        $(this).removeClass('show-current-border');
-                        $(this).addClass('show-success-border');
-                        $(".five-check").removeClass('check-hidden');
-                        $("#fiveFillUp").removeClass('fillup-block');
-                        $("#fiveFillUp").addClass('fillup-hidden');
-                    }
-                    else{
-                        $(this).addClass('show-current-border');
-                        $(this).removeClass('show-success-border');
-                        $(".five-check").addClass('check-hidden');
-                        $("#fiveFillUp").addClass('fillup-block');
-                        $("#fiveFillUp").removeClass('fillup-hidden');
-                    }
-                });
-                // input image field border color changer when will show error
-                $(document).on('click', '.image',function() {
-                    var inputVal = $(this).val();
-                    // error message remove
-                    $(".remove-error-six").text('');
-                    $(".image").removeClass('show-error-border');
-
-                    if(inputVal !== ''){
+                    // Image upload field validation
+                    var inputVal = $(".image").val().trim();
+                    if (inputVal !== '') {
                         $(".six-check").removeClass('check-hidden');
-                        $(".imge-border").removeClass('image-current-border');
-                        $(".imge-border").addClass('image-success-border');
-                    }
-                    else{
+                        $(".imge-border").removeClass('image-current-border image-error-border').addClass('image-success-border');
+                    } else {
                         $(".six-check").addClass('check-hidden');
-                        $(".imge-border").addClass('image-current-border');
-                        $(".imge-border").removeClass('image-success-border');
+                        $(".imge-border").addClass('image-current-border').removeClass('image-success-border image-error-border');
                     }
-                });
-            });
-            // input field error show border
-            $(document).ready(function() {
-                var errorMessage = $(".show-error").text().trim();
-                $(".show-error").attr("data-error", errorMessage);
-                
-                if(errorMessage !==''){
-                    $("#border_action").removeClass('show-current-border');
-                    $("#border_action").addClass('show-error-border');
-                    $("#border_action2").removeClass('show-current-border');
-                    $("#border_action2").addClass('show-error-border');
-                    $("#border_action3").removeClass('show-current-border');
-                    $("#border_action3").addClass('show-error-border');
-                    $("#border_action4").removeClass('show-current-border');
-                    $("#border_action4").addClass('show-error-border');
-                    $("#border_action5").removeClass('show-current-border');
-                    $("#border_action5").addClass('show-error-border');
-                    $(".imge-border").removeClass('image-current-border');
-                    $(".imge-border").addClass('image-error-border');
                 }
-                else{
-                    $("#border_action").addClass('show-current-border');
-                    $("#border_action").removeClass('show-error-border');
-                    $("#border_action2").addClass('show-current-border');
-                    $("#border_action2").removeClass('show-error-border');
-                    $("#border_action3").addClass('show-current-border');
-                    $("#border_action3").removeClass('show-error-border');
-                    $("#border_action4").addClass('show-current-border');
-                    $("#border_action4").removeClass('show-error-border');
-                    $("#border_action5").addClass('show-current-border');
-                    $("#border_action5").removeClass('show-error-border');
-                    $(".imge-border").addClass('image-current-border');
-                    $(".imge-border").removeClass('image-error-border');
-                }
-            });
-        </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                var bar = document.querySelector('.bar');
-                var percent = document.querySelector('.percent');
-                var uploadButton = document.getElementById('uploadButton');
-                var imgInput = document.getElementById('imgInput');
 
-                uploadButton.addEventListener('click', function (event) {
-                    event.preventDefault();
-
-                    if (imgInput.files.length === 0) {
-                        alert('Please select an image file.');
-                        return;
-                    }
-
-                    var formData = new FormData(document.querySelector('form'));
-
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', '{{ route('register') }}', true);
-                    xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
-
-                    xhr.upload.addEventListener('progress', function (e) {
-                        if (e.lengthComputable) {
-                            var percentComplete = (e.loaded / e.total) * 100;
-                            bar.style.width = percentComplete + '%';
-                            percent.innerHTML = Math.round(percentComplete) + '%';
+                // Initial error handling
+                function checkForErrors() {
+                    // Error handling for input fields
+                    $(".show-error").each(function () {
+                        var errorMessage = $(this).text().trim();
+                        if (errorMessage !== '') {
+                            var errorInput = $(this).closest('.row').find('input');
+                            errorInput.addClass('show-error-border').removeClass('show-current-border show-success-border');
                         }
                     });
 
-                    xhr.onload = function () {
-                        if (xhr.status === 200) {
-                            alert('File has been uploaded.');
-                            console.log(xhr.responseText);
-                        } else {
-                            alert('An error occurred while uploading the file.');
-                        }
-                    };
+                    // Error handling for image input
+                    var imageErrorMessage = $(".photo_message").text().trim();
+                    if (imageErrorMessage !== '') {
+                        $(".imge-border").removeClass('image-current-border image-success-border').addClass('image-error-border');
+                    }
+                }
 
-                    xhr.send(formData);
+                // Run initial checks
+                checkInitialInputStates();
+                checkForErrors();
+
+                // Add event listeners for input changes
+                $('#border_action').on('keyup', function () {
+                    $(".remove-error-one").text('');
+                    handleInputValidation('#border_action', '.remove-error-one', '.first-check', '#firstFillUp');
+                });
+                $('#border_action2').on('keyup', function () {
+                    $(".remove-error-two").text('');
+                    handleInputValidation('#border_action2', '.remove-error-two', '.second-check', '#secondFillUp');
+                });
+                $('#border_action3').on('keyup', function () {
+                    $(".remove-error-three").text('');
+                    handleInputValidation('#border_action3', '.remove-error-three', '.third-check', '#thirdFillUp');
+                });
+                $('#border_action4').on('keyup', function () {
+                    $(".remove-error-four").text('');
+                    handleInputValidation('#border_action4', '.remove-error-four', '.four-check', '#fourFillUp');
+                });
+                $('#border_action5').on('keyup', function () {
+                    $(".remove-error-five").text('');
+                    handleInputValidation('#border_action5', '.remove-error-five', '.five-check', '#fiveFillUp');
+                });
+                // Image upload field validation
+                $(".image").on('change', function () {
+                    var inputVal = $(this).val().trim();
+                    $(".photo_message").text('');  // Remove error message
+                    $(".image").removeClass('image-error-border');
+
+                    if (inputVal !== '') {
+                        $(".six-check").removeClass('check-hidden');
+                        $(".imge-border").removeClass('image-current-border').addClass('image-success-border');
+                    } else {
+                        $(".six-check").addClass('check-hidden');
+                        $(".imge-border").addClass('image-current-border').removeClass('image-success-border');
+                    }
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                // Handle file upload click and progress bar display
+                $(document).on('click', '#uploadButton', function () {
+                    var bar = document.querySelector('.bar');
+                    var percent = document.querySelector('.percent');
+                    var simulatedProgress = 0;
+
+                    var uploadInterval = setInterval(function () {
+                        simulatedProgress += 10;
+
+                        if (simulatedProgress <= 100) {
+                            bar.style.width = simulatedProgress + '%';
+                            percent.innerHTML = simulatedProgress + '%';
+                        } else {
+                            clearInterval(uploadInterval);
+                            $(".register_img").removeClass('img-hidden');
+                        }
+                    }, 200);
                 });
             });
         </script>

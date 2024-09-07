@@ -23,11 +23,11 @@
 </head>
 <header class="bg sticky-top">
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
-        <p class="navbar-brand ps-3 admin_panel text-shadow" style="float: right;">
+        <p class="navbar-brand admin_panel text-shadow" style="float: right;">
             <span class="logo-skeleton media_text1"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
             <span class="headings-skeleton media_text2">{{setting('company_name')}}</span>
         </p>
-        <p class="navbar-brand ps- admin_panel text-shadow d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
+        <p class="navbar-brand admin_panel text-shadow d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
             <a class="" href="{{setting('update_social_media_facebook_link')}}">
                 <span class="social_icon facebook-skeleton"><img class="social_icon" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_facebook')}}" alt=""></span>
             </a>
@@ -95,7 +95,7 @@
 
     <h2 class="para">
         <span class="nav_head">
-            <p class="login-address skeleton ms-5">{{setting('company_address')}}</p>
+            <p class="login-address skeleton login-head-address-animation ms-5">{{setting('company_address')}}</p>
         </span>
     </h2>
     <div class="container bg" style="margin-top: 100px;">
@@ -354,6 +354,68 @@
                     clearTimeout(time);
                 }
             }
+
+            // Check and set the border style for email input on page load
+            var emailErrorMessage = $(".show-error").text().trim();
+            $(".show-error").attr("data-error", emailErrorMessage);
+
+            if (emailErrorMessage !== '') {
+                $(".email_src").removeClass('show-current-border').addClass('show-error-border');
+            } else {
+                var emailVal = $(".email_src").val().trim();
+                if (emailVal !== '') {
+                    $(".email_src").removeClass('show-current-border').addClass('show-success-border');
+                    $(".src_email").removeClass('src_email-hidden');
+                } else {
+                    $(".email_src").addClass('show-current-border').removeClass('show-error-border');
+                }
+            }
+
+            // Check and set the border style for password input on page load
+            var passwordErrorMessage = $(".show-error2").text().trim();
+            $(".show-error2").attr("data-error", passwordErrorMessage);
+
+            if (passwordErrorMessage !== '') {
+                $(".password_src").removeClass('show-current-border').addClass('show-error-border');
+            } else {
+                var passwordVal = $(".password_src").val().trim();
+                if (passwordVal !== '') {
+                    $(".password_src").removeClass('show-current-border').addClass('show-success-border');
+                    $(".src_password").removeClass('src_password-hidden');
+                } else {
+                    $(".password_src").addClass('show-current-border').removeClass('show-error-border');
+                }
+            }
+
+            // Handle input changes for email
+            $(document).on('keyup', '.email_src', function() {
+                var inputVal = $(this).val();
+                $(".remove-error-one").text('');
+                $(".email_src").removeClass('show-error-border');
+
+                if (inputVal !== '') {
+                    $(this).removeClass('show-current-border').addClass('show-success-border');
+                    $(".src_email").removeClass('src_email-hidden');
+                } else {
+                    $(this).addClass('show-current-border').removeClass('show-success-border');
+                    $(".src_email").addClass('src_email-hidden');
+                }
+            });
+
+            // Handle input changes for password
+            $(document).on('keyup', '.password_src', function() {
+                var inputVal = $(this).val();
+                $(".remove-error-two").text('');
+                $(".password_src").removeClass('show-error-border');
+
+                if (inputVal !== '') {
+                    $(this).removeClass('show-current-border').addClass('show-success-border');
+                    $(".src_password").removeClass('src_password-hidden');
+                } else {
+                    $(this).addClass('show-current-border').removeClass('show-success-border');
+                    $(".src_password").addClass('src_password-hidden');
+                }
+            });
         });
     </script>
 </body>

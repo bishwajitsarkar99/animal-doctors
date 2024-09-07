@@ -592,7 +592,7 @@ span.text-danger.name_message {
     letter-spacing: 0.3px;
 }
 span.text-danger.photo_message {
-    margin-left: 75px;
+    margin-left: 0;
     font-size: 9px;
     letter-spacing: 0.3px;
 }
@@ -612,10 +612,12 @@ button.btn.btn-sm.btn-primary.button_margin{
         letter-spacing: 5px;
     }
 }
+.img-hidden{
+    display: none;
+}
 .register_img {
     width: 160px;
     height: 160px;
-    display: block;
     transition: transform .2s; 
     font-size: 16px;
     text-align: center;

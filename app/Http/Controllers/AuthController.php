@@ -32,7 +32,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'string|required|max:120',
-            'contract_number' => 'string|required|min:11',
+            'contract_number' => 'required|numeric|digits:11',
             'email' => 'string|email|required|max:100|unique:users',
             'password' => 'string|required|confirmed|min:6|max:30',
             'image' => 'required|image|mimes:jpeg,png,jpg,giv,svg|max:2048',
