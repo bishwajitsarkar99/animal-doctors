@@ -235,14 +235,33 @@ class SuperAdminController extends Controller
         ]);
         return redirect()->back()->with('success', 'User role and permission is updated');
     }
+    // Auth Manage -----------------
+    public function getAuthManage(Request $request)
+    {
+        // Get the IP address of the server
+        $serverIp = request()->server('SERVER_ADDR');
+        
+        // Construct URLs with the server IP
+        $loginUrl = 'http://' . $serverIp . '/';
+        $registerUrl = 'http://' . $serverIp . '/register';
+        $forgetUrl = 'http://' . $serverIp . '/forget-password';
+        $emailVerificationUrl = 'http://' . $serverIp . '/email-verification';
 
+        // Return the constructed URLs as a JSON response
+        return response()->json([
+            'loginUrl' => $loginUrl,
+            'registerUrl' => $registerUrl,
+            'forgetUrl' => $forgetUrl,
+            'emailVerificationUrl' => $emailVerificationUrl,
+        ]);
+    }
     // Company Profile--------------
     public function appSetting()
     {
         return view('super-admin.setting.app-setting.index');
     }
 
-    // Company Profile Update--------------
+    // Company Profile Setting Update--------------
     public function appSettingUpdate(Request $request)
     {
        // return dd($request->all());
