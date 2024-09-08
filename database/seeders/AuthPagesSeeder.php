@@ -21,12 +21,14 @@ class AuthPagesSeeder extends Seeder
         $loginRoute = '/';
         $registerRoute = '/register';
         $forgetRoute = '/forget-password';
+        $resetPasswordRoute = '/reset-password';
         $emailVerificationRoute = '/email-verification';
 
         // Construct Page Name
         $loginPage = 'Login Page';
         $registerPage = 'Register Page';
         $forgetPage = 'Forget Password Page';
+        $resetPage = 'Reset Password Page';
         $emailVerificationPage = 'Email Verification Page';
 
         // Array of pages to insert
@@ -34,6 +36,7 @@ class AuthPagesSeeder extends Seeder
             ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $loginPage, 'page_route' => $loginRoute,'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $registerPage, 'page_route' => $registerRoute, 'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $forgetPage, 'page_route' => $forgetRoute, 'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $resetPage, 'page_route' => $resetPasswordRoute, 'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $emailVerificationPage, 'page_route' => $emailVerificationRoute, 'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ];
         

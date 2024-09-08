@@ -14,13 +14,24 @@ Route::group(['middleware' => 'auth'], function (){
     // ********** Super Admin Routes *********
     // User and Role Permission
     Route::group(['prefix' => 'super-admin', 'middleware' => ['web', 'isSuperAdmin']], function () {
+        // Dashboard Route
         Route::get('/dashboard', [SuperAdminController::class, 'dashboard'])->name('super-admin.dashboard');
+        // User Management Routes
         Route::get('/users', [SuperAdminController::class, 'users'])->name('superAdminUsers');
         Route::get('/get-users', [SuperAdminController::class, 'getusers'])->name('search_users.action');
         Route::post('/status-users', [SuperAdminController::class, 'update_status'])->name('update_status.action');
+        // Role Management Routes
         Route::get('/manage-role', [SuperAdminController::class, 'manageRole'])->name('manageRole');
         Route::post('/update-role', [SuperAdminController::class, 'updateRole'])->name('updateRole');
+        // Application Settings Routes
         Route::get('/app-setting', [SuperAdminController::class, 'appSetting'])->name('appSetting');
+         // Email Verification Routes
+        Route::get('/email-verification', [SuperAdminController::class, 'loadEmailVerification'])->name('emailVerification');
+        Route::post('/email-verification-status', [SuperAdminController::class, 'updateEmailStatus'])->name('email_update_status.action');
+        // Authentication Page Management Routes
+        Route::get('/auth-page', [SuperAdminController::class, 'loadAuthPage'])->name('authPageLoad');
+        Route::get('/auth-page-filter/{page_id}', [SuperAdminController::class, 'pageItemFilter'])->name('filter.action');
+        Route::post('/update-auth-page/{page_id}', [SuperAdminController::class, 'authManagePage'])->name('update_auth_page.action');
     });
     // User and company profile update 
     Route::middleware('isSuperAdmin')->group(function () {

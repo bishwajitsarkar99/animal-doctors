@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
 use App\Support\Facades\Setting;
+use App\Models\AuthPages;
 
 class SuperAdminController extends Controller
 {
@@ -235,8 +236,50 @@ class SuperAdminController extends Controller
         ]);
         return redirect()->back()->with('success', 'User role and permission is updated');
     }
+    // Email Verification Page Load
+    public function loadEmailVerification()
+    {
+        return view('super-admin.email-verification.index');
+    }
+    // Email Verification Update Manage
+    public function updateEmailStatus()
+    {
+       //
+    }
+    // Auth Page Load -----------------
+    public function loadAuthPage(Request $request)
+    {   
+        $auth_lists = AuthPages::all();
+
+        $pages = AuthPages::all();
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'pages' => $pages,
+            ]);
+        }
+        return view('super-admin.auth-page.index', compact('auth_lists'));
+    }
+    // filter page item
+    public function pageItemFilter(Request $request, $page_id)
+    {
+        $auth_lists = AuthPages::findOrFail($page_id);
+
+        if ($auth_lists) {
+            return response()->json([
+                'status' => 200,
+                'messages' => 'Page data found.',
+                'data' => $auth_lists
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'Page is not found!',
+            ]);
+        }
+    }
     // Auth Manage -----------------
-    public function getAuthManage(Request $request)
+    public function authManagePage(Request $request, $page_id)
     {
         // Get the IP address of the server
         $serverIp = request()->server('SERVER_ADDR');
