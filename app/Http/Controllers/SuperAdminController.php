@@ -279,23 +279,31 @@ class SuperAdminController extends Controller
         }
     }
     // Auth Manage -----------------
-    public function authManagePage(Request $request, $page_id)
+    public function authManagePage(Request $request, $id)
     {
-        // Get the IP address of the server
-        $serverIp = request()->server('SERVER_ADDR');
-        
-        // Construct URLs with the server IP
-        $loginUrl = 'http://' . $serverIp . '/';
-        $registerUrl = 'http://' . $serverIp . '/register';
-        $forgetUrl = 'http://' . $serverIp . '/forget-password';
-        $emailVerificationUrl = 'http://' . $serverIp . '/email-verification';
+        $authPages = AuthPages::findOrFail($id);
 
-        // Return the constructed URLs as a JSON response
+        // Validate request data
+        $validatedData = $request->validate([
+            'domain_name' => 'required|string',
+            'ip_name' => 'required|string',
+            'status' => 'required|boolean',
+        ]);
+
+        // Update fields from the validated data
+        $authPages->domain_name = $validatedData['domain_name'];
+        $authPages->ip_name = $validatedData['ip_name'];
+        $authPages->status = $validatedData['status'];
+
+        // Use the already retrieved $authPages to access page_route
+        $authPages->local_host_page_url = $validatedData['ip_name'] . $authPages->page_route;
+        $authPages->domain_page_url = $validatedData['domain_name'] . $authPages->page_route;
+
+        $authPages->save(); // Save the changes
+
         return response()->json([
-            'loginUrl' => $loginUrl,
-            'registerUrl' => $registerUrl,
-            'forgetUrl' => $forgetUrl,
-            'emailVerificationUrl' => $emailVerificationUrl,
+            'status' => 200,
+            'messages' => 'Page Permission is updated successfully',
         ]);
     }
     // Company Profile--------------

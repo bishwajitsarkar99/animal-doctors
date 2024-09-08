@@ -63,6 +63,7 @@
         // Page item filter
         $(document).on('change', '#pageSelect', function() {
             var page_id = $(this).val();
+            $('#edit_page_id').val($(this).val());
 
             if (page_id === '') {
                 $('#edit_page_id').val('');
@@ -97,7 +98,7 @@
                             statusText = '<span style="color:green;font-weight:600;font-size: 14px;">Authorize <i class="fa-solid fa-check"></i></span>';
                         }else {
                             statusClass = 'text-dark';
-                            statusText = '<span></span>';
+                            statusText = '<span>Permission</span>';
                         }
 
                         $('#statusValue').html(statusText).addClass(statusClass);
@@ -122,6 +123,52 @@
             }
             $('#statusValue').html(statusText).removeClass().addClass('form-check-label form-label ' + statusClass);
         });
+        // update page item permission
+        $(document).on('click', '.submt_button', function(e){
+            e.preventDefault();
+            var id = $('#edit_page_id').val();
 
+            var data = {
+                'domain_name': $('.update_domain').val(),
+                'ip_name': $('.update_ip').val(),
+                'status': $('#permissionCheck').is(':checked') ? 1 : 0,
+            };
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "/super-admin/update-auth-page/" + id,
+                data: data,
+                dataType: "json",
+                success: function(response) {
+                    $('#updateForm_errorList').html("");
+                    $('#success_message').html("");
+
+                    if (response.status == 400) {
+                        $.each(response.errors, function(key, err_value) {
+                            $('#updateForm_errorList').append('<span>' + err_value + '</span>');
+                        });
+                    } else if (response.status == 404) {
+                        $('#success_message').text(response.messages);
+                    } else if (response.status == 200) {
+                        $('#success_message').addClass('background_error ps-1 pe-1').fadeIn().text(response.messages);
+                        $('.update_domain').val("");
+                        $('.update_ip').val("");
+                        $('#permissionCheck').prop('checked', false);
+                        $('#success_message').fadeIn();
+                        setTimeout(() => {
+                            $('#success_message').fadeOut(6000);
+                            $('#success_message').delay(6000);
+                        }, 3000);
+                        fetch_auth_page_data();
+                    }
+                }
+            });
+        });
     });
 </script>

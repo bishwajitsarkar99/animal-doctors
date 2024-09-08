@@ -29,39 +29,41 @@
             </div>
             <div class="col-md-3">
                 <div class="card card-body" id="form_card">
+                  <form>
                     @csrf
                     <input type="text" name="page_id" id="edit_page_id" hidden>
                     <div class="mb-2">
-                        <select class="form-select form-select-sm select-dropdown show-current-border" name="page_name" aria-label=".form-select-sm example" id="pageSelect">
-                            <option value="" selected>Select Page Item</option>
-                            @foreach($auth_lists as $item)
-                                <option value="{{$item->id}}">{{$item->page_name}}</option>
-                            @endforeach
-                        </select>
+                      <select class="form-select form-select-sm select-dropdown show-current-border" name="page_name" aria-label=".form-select-sm example" id="pageSelect">
+                        <option value="" selected>Select Page Item</option>
+                        @foreach($auth_lists as $item)
+                          <option value="{{$item->id}}">{{$item->page_name}}</option>
+                        @endforeach
+                      </select>
                     </div>
                     <div class="mb-2">
-                        <label class="form-label" for="domain">Domain</label>
-                        <input class="form-control form-control-sm show-current-border" type="text" name="domain_name" placeholder="Domain" id="input-field-one">
+                      <label class="form-label" for="domain">Domain</label>
+                      <input class="form-control form-control-sm show-current-border update_domain" type="text" name="domain_name" placeholder="Domain" id="input-field-one">
                     </div>
                     <div class="mb-2">
-                        <label class="form-label" for="ip-address">IP Address</label>
-                        <input class="form-control form-control-sm show-current-border" type="text" name="ip_name" placeholder="IP address" id="input-field-two">
+                      <label class="form-label" for="ip-address">IP Address</label>
+                      <input class="form-control form-control-sm show-current-border update_ip" type="text" name="ip_name" placeholder="IP address" id="input-field-two">
                     </div>
                     <div class="mb-2">
-                        <label class="form-check-label form-label" for="permission">Page</label>
-                        <div class="form-check form-switch ms-1">
-                            <input class="form-check-input form-label" type="checkbox" name="status" value="0" id="permissionCheck">
-                            <label class="form-check-label form-label" for="check" id="statusValue">Pending</label>
-                        </div>
+                      <label class="form-check-label form-label" for="permission">Page</label>
+                      <div class="form-check form-switch ms-1">
+                        <input class="form-check-input form-label update_status" type="checkbox" name="status" value="0" id="permissionCheck">
+                        <label class="form-check-label form-label" style="color:gray;" for="check" id="statusValue">Permission</label>
+                      </div>
                     </div>
                     <div class="mb-2">
-                        <div class="button-box mb-1 mt-1">
-                            <button id="page_submit" type="submit" class="btn btn-sm submt_button button-skeleton">
-                                <span class="btn-text">Permission</span>
-                                <i class="auth-icon fa fa-spinner fa-spin hidden"></i>
-                            </button>
-                        </div>
+                      <div class="button-box mb-1 mt-1">
+                        <button id="page_submit" type="submit" class="btn btn-sm submt_button button-skeleton">
+                          <span class="btn-text">Permission</span>
+                          <i class="auth-icon fa fa-spinner fa-spin hidden"></i>
+                        </button>
+                      </div>
                     </div>
+                  </form>
                 </div>
             </div>
         </div>

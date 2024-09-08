@@ -31,7 +31,7 @@ Route::group(['middleware' => 'auth'], function (){
         // Authentication Page Management Routes
         Route::get('/auth-page', [SuperAdminController::class, 'loadAuthPage'])->name('authPageLoad');
         Route::get('/auth-page-filter/{page_id}', [SuperAdminController::class, 'pageItemFilter'])->name('filter.action');
-        Route::post('/update-auth-page/{page_id}', [SuperAdminController::class, 'authManagePage'])->name('update_auth_page.action');
+        Route::post('/update-auth-page/{id}', [SuperAdminController::class, 'authManagePage'])->name('update_auth_page.action');
     });
     // User and company profile update 
     Route::middleware('isSuperAdmin')->group(function () {
