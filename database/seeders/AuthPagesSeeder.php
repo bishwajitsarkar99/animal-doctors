@@ -15,7 +15,7 @@ class AuthPagesSeeder extends Seeder
     {
         // Get the domain name from the .env file or fallback to the server IP address
         $domain = config('app.url'); // This gets the app URL from the environment configuration
-        $serverIp = $_SERVER['SERVER_ADDR'] ?? '127.0.0.1'; // Fallback IP for CLI
+        $serverIp = $_SERVER['SERVER_ADDR'] ?? '127.0.0.1:8000'; // Fallback IP for CLI
         
         // Construct URLs with the server IP
         $loginRoute = '/';

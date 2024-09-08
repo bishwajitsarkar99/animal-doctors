@@ -47,12 +47,18 @@
                         </div>
                     </div>
                     <div class="group__button">
+                        <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
+                            <span class="btn-text reg_page"> User-Register</span>
+                        </a>
+                        <a type="submit" href="/email-verification" class="btn btn-sm" id="logn_page">
+                            <span class="btn-text logn_page"> Email-Verification</span>
+                        </a>
                         <a type="submit" href="/" class="btn btn-sm" id="logn_page">
                             <span class="btn-text logn_page"> User-Login</span>
                         </a>
                     </div>
                     <div class="side_canvas_animation" hidden>
-                        <img src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                        <img class="sidebar-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
                     </div>
                 </div>
             </div>
@@ -310,6 +316,7 @@
                 $(".head_auth").addClass('auth-skeleton');
                 $(".btn-close").addClass('auth-skeleton');
                 $(".logn_page").addClass('auth-skeleton');
+                $(".reg_page").addClass('auth-skeleton');
 
                 setTimeout(() => {
                     $("#loader_modal").modal('hide');
@@ -317,6 +324,7 @@
                     $(".head_auth").removeClass('auth-skeleton');
                     $(".btn-close").removeClass('auth-skeleton');
                     $(".logn_page").removeClass('auth-skeleton');
+                    $(".reg_page").removeClass('auth-skeleton');
                 }, 2000);
             });
         });

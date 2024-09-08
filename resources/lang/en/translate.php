@@ -277,6 +277,7 @@ return[
     'Account-History'=>'Account-History',
     'Manage Role'=>'Manage Role',
     'Users Setting'=>'Users Setting',
+    'Users Access'=>'Users Access',
     'Users Permission'=>'Users Permission',
     'Permission'=>'Permission',
     'Auth Pages'=>'Auth Pages',

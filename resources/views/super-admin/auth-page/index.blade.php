@@ -33,7 +33,7 @@
                     @csrf
                     <input type="text" name="page_id" id="edit_page_id" hidden>
                     <div class="mb-2">
-                      <select class="form-select form-select-sm select-dropdown show-current-border" name="page_name" aria-label=".form-select-sm example" id="pageSelect">
+                      <select class="form-select form-select-sm select-dropdown" name="page_name" aria-label=".form-select-sm example" id="pageSelect">
                         <option value="" selected>Select Page Item</option>
                         @foreach($auth_lists as $item)
                           <option value="{{$item->id}}">{{$item->page_name}}</option>
@@ -41,18 +41,18 @@
                       </select>
                     </div>
                     <div class="mb-2">
-                      <label class="form-label" for="domain">Domain</label>
-                      <input class="form-control form-control-sm show-current-border update_domain" type="text" name="domain_name" placeholder="Domain" id="input-field-one">
+                      <label class="form-label skeleton" for="domain">Domain</label>
+                      <input class="form-control form-control-sm update_domain" type="text" name="domain_name" placeholder="Domain" id="input-field-one">
                     </div>
                     <div class="mb-2">
-                      <label class="form-label" for="ip-address">IP Address</label>
-                      <input class="form-control form-control-sm show-current-border update_ip" type="text" name="ip_name" placeholder="IP address" id="input-field-two">
+                      <label class="form-label skeleton" for="ip-address">IP Address</label>
+                      <input class="form-control form-control-sm update_ip" type="text" name="ip_name" placeholder="IP address" id="input-field-two">
                     </div>
                     <div class="mb-2">
-                      <label class="form-check-label form-label" for="permission">Page</label>
+                      <label class="form-check-label form-label skeleton" for="permission">Page</label>
                       <div class="form-check form-switch ms-1">
-                        <input class="form-check-input form-label update_status" type="checkbox" name="status" value="0" id="permissionCheck">
-                        <label class="form-check-label form-label" style="color:gray;" for="check" id="statusValue">Permission</label>
+                        <input class="form-check-input form-label update_status check-skeleton" type="checkbox" name="status" value="0" id="permissionCheck">
+                        <label class="form-check-label form-label skeleton" style="color:gray;" for="check" id="statusValue">Permission</label>
                       </div>
                     </div>
                     <div class="mb-2">
@@ -143,9 +143,26 @@
       item.classList.remove('skeleton')
     });
   }
+  // button skeleton
+  function buttonSkeleton() {
+    const allSkeleton = document.querySelectorAll('.button-skeleton')
 
+    allSkeleton.forEach(item => {
+      item.classList.remove('button-skeleton')
+    });
+  }
+  // checkbox skeleton
+  function checkBoxSkeleton() {
+    const allSkeleton = document.querySelectorAll('.check-skeleton')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('check-skeleton')
+    });
+  }
   setTimeout(() => {
     fetchData();
+    buttonSkeleton();
+    checkBoxSkeleton();
   }, 1000);
 </script>
 @endpush

@@ -29,7 +29,7 @@
                 <span class="nav-head-skeleton">{{setting('company_name')}}</span>
             </p>
             <p class="address skeleton">{{setting('company_address')}}</p>
-            <!-- <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
+            <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
                 <a class="menu_btn" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <span class="menu_icon menu-skeleton"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
                 </a>
@@ -50,19 +50,19 @@
                             <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
                                 <span class="btn-text forg_page"> Forget-Password</span>
                             </a>
-                            <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
-                                <span class="btn-text reg_page"> User-Register</span>
+                            <a type="submit" href="/email-verification" class="btn btn-sm" id="logn_page">
+                                <span class="btn-text logn_page"> Email-Verification</span>
                             </a>
                             <a type="submit" href="/" class="btn btn-sm" id="logn_page">
                                 <span class="btn-text logn_page"> User-Login</span>
                             </a>
                         </div>
                         <div class="side_canvas_animation" hidden>
-                            <img src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                            <img class="sidebar-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
                         </div>
                     </div>
                 </div>
-            </p> -->
+            </p>
         </nav>
     </header>
 
@@ -203,7 +203,7 @@
                                                                             <div class="bar"></div>
                                                                             <div class="percent">0%</div>
                                                                         </div>
-                                                                        <a class="btn btn-group-sm upload_btn" id="uploadButton">Upload</a>
+                                                                        <a class="btn btn-group-sm upload_btn upload-button-skeleton" id="uploadButton">Upload</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -350,6 +350,13 @@
                     item.classList.remove('button-skeleton')
                 });
             }
+            function uploadButtonSkeleton(){
+                const  allSkeleton = document.querySelectorAll('.upload-button-skeleton')
+            
+                allSkeleton.forEach(item=>{
+                    item.classList.remove('upload-button-skeleton')
+                });
+            }
             function inputErrorSkeleton(){
                 const  allSkeleton = document.querySelectorAll('.input-error-skeleton')
             
@@ -379,6 +386,7 @@
                 capSkeleton();
                 fileSkeleton();
                 imageSkeleton();
+                uploadButtonSkeleton();
                 buttonSkeleton();
                 inputErrorSkeleton();
                 fileErrorSkeleton();
@@ -438,11 +446,11 @@
                     
                     // Display or hide error message and border styles
                     if (inputVal !== '') {
-                        $(inputSelector).removeClass('show-error-border show-current-border').addClass('show-success-border');
+                        $(inputSelector).removeClass('show-current-border').removeClass('is-invalid').addClass('show-success-border');
                         $(checkSelector).removeClass('check-hidden');
                         $(fillupSelector).removeClass('fillup-block').addClass('fillup-hidden');
                     } else {
-                        $(inputSelector).addClass('show-current-border').removeClass('show-success-border show-error-border');
+                        $(inputSelector).addClass('show-current-border').removeClass('show-success-border').removeClass('is-invalid');
                         $(checkSelector).addClass('check-hidden');
                         $(fillupSelector).addClass('fillup-block').removeClass('fillup-hidden');
                     }
@@ -475,7 +483,7 @@
                         var errorMessage = $(this).text().trim();
                         if (errorMessage !== '') {
                             var errorInput = $(this).closest('.row').find('input');
-                            errorInput.addClass('show-error-border').removeClass('show-current-border show-success-border');
+                            errorInput.addClass('is-invalid').removeClass('show-current-border show-success-border');
                         }
                     });
 
@@ -515,7 +523,7 @@
                 $(".image").on('change', function () {
                     var inputVal = $(this).val().trim();
                     $(".photo_message").text('');  // Remove error message
-                    $(".image").removeClass('image-error-border');
+                    $(".image").removeClass('is-invalid');
 
                     if (inputVal !== '') {
                         $(".six-check").removeClass('check-hidden');

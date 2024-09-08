@@ -4,6 +4,25 @@
     --nav-button-background:linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);
     --mdb-btn-border-color:#3b71ca;
 }
+select> option {
+    font-weight: 600;
+    color: white;
+    background: darkblue;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 10px;
+    font-size: 12px;
+}
+tr#user_set {
+    font-weight: 600;
+}
 #form_card {
     background-color: white;
     border: none;
@@ -72,6 +91,9 @@ input#input-field-two{
     font-family: var(--text-font-family);
     color: black;
     opacity: 1;
+}
+.text-gray{
+    color: gray;
 }
 .show-current-border{
     border-left: 1px solid lightgrey;
@@ -152,5 +174,47 @@ button.btn.btn-sm.submt_button {
     }
     85%{
       letter-spacing: 10px;
+    }
+}
+tr.clicked {
+    background-color: rgb(210, 255, 210);
+    opacity: 1;
+}
+.button-skeleton,.check-skeleton{
+    position: relative;
+}
+.check-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 107%;
+    border-radius: 10px;
+    height: 123%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+.button-skeleton::before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    width: 102%;
+    border-radius: 3px;
+    height: 26px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+@keyframes skeleton {
+    0% {
+        background-position: -100% 0;
+    }
+    
+    100% {
+        background-position: 100% 0;
     }
 }

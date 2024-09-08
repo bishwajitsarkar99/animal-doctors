@@ -1,5 +1,9 @@
 <script type="text/javascript">
     $(document).ready(function(){
+        // ACtive table row background
+        $(document).on('click', 'tr.table-row', function(){
+            $(this).addClass("clicked").siblings().removeClass("clicked");
+        });
         // Fetch auth pages data
         fetch_auth_page_data();
         // Data View Table--------------
@@ -24,7 +28,7 @@
                 }
                 else if(row.status == 1){
                     statusClass = 'text-dark';
-                    statusText = '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span> Authorize';
+                    statusText = '<span style="color:green;font-weight:800;font-size: 12px;"><i class="fa-solid fa-check"></i></span> Authorize';
                     statusColor = 'color:black;background-color: #ecfffd;';
                     statusBg = 'badge rounded-pill bg-azure';
                 }
@@ -64,12 +68,18 @@
         $(document).on('change', '#pageSelect', function() {
             var page_id = $(this).val();
             $('#edit_page_id').val($(this).val());
-
+            var statusText = '<span class="text-gray">Permission</span>';
+            var statusClass = 'text-gray';
             if (page_id === '') {
                 $('#edit_page_id').val('');
                 $("#input-field-one").val('');
                 $("#input-field-two").val('');
                 $("#permissionCheck").prop('checked', false);
+                $('#pageSelect').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
+                $('#input-field-one').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
+                $('#input-field-two').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
+                $('#permissionCheck').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
+                $('#statusValue').html(statusText).addClass(statusClass);
                 return;
             }
 
@@ -93,12 +103,20 @@
                         if (response.data.status == 0) {
                             statusClass = 'text-danger';
                             statusText = '❌ Not Allowed';
+                            $('#pageSelect').removeClass('show-success-border').addClass('is-invalid');
+                            $('#input-field-one').removeClass('show-success-border').addClass('is-invalid');
+                            $('#input-field-two').removeClass('show-success-border').addClass('is-invalid');
+                            $('#permissionCheck').removeClass('show-success-border').addClass('is-invalid');
                         } else if (response.data.status == 1) {
                             statusClass = 'text-dark';
                             statusText = '<span style="color:green;font-weight:600;font-size: 14px;">Authorize <i class="fa-solid fa-check"></i></span>';
+                            $('#pageSelect').addClass('show-success-border').removeClass('is-invalid');
+                            $('#input-field-one').addClass('show-success-border').removeClass('is-invalid');
+                            $('#input-field-two').addClass('show-success-border').removeClass('is-invalid');
+                            $('#permissionCheck').addClass('show-success-border').removeClass('is-invalid');
                         }else {
                             statusClass = 'text-dark';
-                            statusText = '<span>Permission</span>';
+                            statusText = 'Permission';
                         }
 
                         $('#statusValue').html(statusText).addClass(statusClass);
@@ -108,20 +126,48 @@
         });
         // check button
         $(document).on('click', '#permissionCheck', function () {
+            var selectValue = $("#pageSelect").val();
             var checkValue = $(this).is(':checked') ? 1 : 0;
             let statusClass, statusText;
 
-            if (checkValue == 0) {
-                statusClass = 'text-danger';
-                statusText = 'Not Allowed ❌';
-            } else if (checkValue == 1) {
-                statusClass = 'text-dark';
-                statusText = '<span style="color:green;font-weight:600;font-size: 14px;">Authorize <i class="fa-solid fa-check"></i></span>';
+            // Check if selectValue is empty or not
+            if (!selectValue) {
+                // If no page item is selected, display an error or show required fields
+                $("#pageSelect").addClass('is-invalid');
+                $('#statusValue').html('Please select a page item.').addClass('text-danger').show();  // Show an error message
             } else {
-                statusClass = 'text-dark';
-                statusText = '<span></span>';
+                $("#pageSelect").removeClass('is-invalid');
+
+                // Check the value of the checkbox and update styles accordingly
+                if (checkValue === 0) {
+                    statusClass = 'text-danger';
+                    statusText = 'Not Allowed ❌';
+                    
+                    $('#pageSelect').removeClass('show-success-border').addClass('is-invalid');
+                    $('#input-field-one').removeClass('show-success-border').addClass('is-invalid');
+                    $('#input-field-two').removeClass('show-success-border').addClass('is-invalid');
+                    $('#permissionCheck').removeClass('show-success-border').addClass('is-invalid');
+                } else if (checkValue === 1) {
+                    statusClass = 'text-dark';
+                    statusText = '<span style="color:green;font-weight:600;font-size: 14px;">Authorize <i class="fa-solid fa-check"></i></span>';
+                    
+                    $('#pageSelect').removeClass('is-invalid').addClass('show-success-border');
+                    $('#input-field-one').removeClass('is-invalid').addClass('show-success-border');
+                    $('#input-field-two').removeClass('is-invalid').addClass('show-success-border');
+                    $('#permissionCheck').removeClass('is-invalid').addClass('show-success-border');
+                } else {
+                    statusClass = 'text-dark';
+                    statusText = 'Permission';
+                    
+                    $('#pageSelect').removeClass('show-success-border').removeClass('is-invalid').addClass('show-current-border');
+                    $('#input-field-one').removeClass('show-success-border').removeClass('is-invalid').addClass('show-current-border');
+                    $('#input-field-two').removeClass('show-success-border').removeClass('is-invalid').addClass('show-current-border');
+                    $('#permissionCheck').removeClass('show-success-border').removeClass('is-invalid').addClass('show-current-border');
+                }
+
+                // Update the statusValue element with the appropriate text and class
+                $('#statusValue').html(statusText).removeClass().addClass('form-check-label form-label ' + statusClass).show();
             }
-            $('#statusValue').html(statusText).removeClass().addClass('form-check-label form-label ' + statusClass);
         });
         // update page item permission
         $(document).on('click', '.submt_button', function(e){
@@ -157,10 +203,20 @@
                         $('#success_message').text(response.messages);
                     } else if (response.status == 200) {
                         $('#success_message').addClass('background_error ps-1 pe-1').fadeIn().text(response.messages);
+                        $('#pageSelect').val("");
                         $('.update_domain').val("");
                         $('.update_ip').val("");
                         $('#permissionCheck').prop('checked', false);
+
+                        var statusText = '<span class="text-gray">Permission</span>';
+                        var statusClass = 'text-gray';
+                        $('#statusValue').html(statusText).addClass(statusClass);
+                        
                         $('#success_message').fadeIn();
+                        $('#pageSelect').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
+                        $('#input-field-one').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
+                        $('#input-field-two').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
+                        $('#permissionCheck').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
                         setTimeout(() => {
                             $('#success_message').fadeOut(6000);
                             $('#success_message').delay(6000);

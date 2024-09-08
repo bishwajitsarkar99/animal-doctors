@@ -11,11 +11,11 @@
                 <a class="nav-link underline" href="{{route('emailVerification')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Email-Verification')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Email-Verification
                 </a>
-                <a class="nav-link underline" href="{{route('manageRole')}}" data-bs-toggle="tooltip" data-bs-placement="right" ttitle="{{__('translate.Manage Role')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a class="nav-link underline" href="{{route('manageRole')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Manage Role')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.Manage Role')}}
                 </a>
-                <a class="nav-link underline" href="{{route('superAdminUsers')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Users Setting')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.Users Permission')}}
+                <a class="nav-link underline" href="{{route('superAdminUsers')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Users Access')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.Users Access')}}
                 </a>
             </nav>
         </div>

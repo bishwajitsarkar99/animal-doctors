@@ -7,7 +7,7 @@
 /* Layout helpers
 ----------------------------------*/
 :root{
-	--background:linear-gradient(to right, rgba(230, 230, 230, 0.05) 50%, aliceblue, rgba(0, 0, 0, 0.04) 100%);
+	--background:linear-gradient(to right, honeydew, honeydew, honeydew 100%);
 }
 .ui-helper-hidden {
 	display: none;
@@ -996,7 +996,8 @@ a.ui-button:active,
 	/* background: #08a05c; */
 	background-image: var(--background);
 	font-weight: normal;
-	color: #ffffff;
+	color: darkblue;
+	font-weight: 600;
 }
 .ui-icon-background,
 .ui-state-active .ui-icon-background {

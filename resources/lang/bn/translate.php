@@ -277,6 +277,7 @@ return[
     'Account-History'=>'অ্যাকাউন্ট-ইতিহাস',
     'Manage Role'=>'ভূমিকা পরিচালনা করুন',
     'Users Setting'=>'ব্যবহারকারীদের সেটিং',
+    'Users Access'=>'ব্যবহারকারীর অ্যাক্সেস',
     'Users Permission'=>'ব্যবহারকারীদের অনুমতি',
     'Permission'=>'অনুমতি',
     'Auth Pages'=>'প্রমাণীকরণ পৃষ্ঠাগুলি',

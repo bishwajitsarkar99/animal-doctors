@@ -46,25 +46,25 @@
             $("#search").focus();
         });
         // Table header Action Mode
-        $(document).on('click', '#action_mode', function() {
+        // $(document).on('click', '#action_mode', function() {
 
-            if ($("#action_mode:checked").length > 0) {
-                $(".check_permission").removeAttr('disabled');
-                $(".dropdown-toggle-split").removeAttr('disabled');
+        //     if ($("#action_mode:checked").length > 0) {
+        //         $(".check_permission").removeAttr('disabled');
+        //         $(".dropdown-toggle-split").removeAttr('disabled');
 
-            } else {
-                $(".check_permission").attr('disabled', true);
-                $(".dropdown-toggle-split").attr('disabled', true);
-            }
+        //     } else {
+        //         $(".check_permission").attr('disabled', true);
+        //         $(".dropdown-toggle-split").attr('disabled', true);
+        //     }
 
-            $('#locker').toggle().removeClass('checking_lock');
-            $(this).attr('disabled', true);
+        //     $('#locker').toggle().removeClass('checking_lock');
+        //     $(this).attr('disabled', true);
 
-            setTimeout(() => {
-                $('#locker').toggle().addClass('checking_lock');
-                $(this).attr('disabled', false);
-            }, 1000);
-        });
+        //     setTimeout(() => {
+        //         $('#locker').toggle().addClass('checking_lock');
+        //         $(this).attr('disabled', false);
+        //     }, 1000);
+        // });
 
         fetch_users_setting_data();
         // Data View Table--------------
@@ -82,25 +82,25 @@
             return [...rows].map((row, key) => {
                 let statusClass, statusColor, statusText, statusBg;
                 if(row.status == 1){
-                    statusClass = 'text-danger';
+                    statusClass = 'text-dark';
                     statusText = '❌ Unauthorize';
-                    statusColor = 'color:darkgoldenrod;background-color: #ffedd8;';
+                    statusColor = 'color:black;background-color: #fff;';
                     statusBg = 'badge rounded-pill bg-warn';
                 }
                 else if(row.status == 0){
-                    statusClass = 'text-cyan';
-                    statusText = '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span> Authorize';
-                    statusColor = 'color:black;background-color: #ecfffd;';
+                    statusClass = 'text-dark';
+                    statusText = '<span style="color:black;font-weight:800;font-size: 12px;"><i class="fa-solid fa-check"></i></span> Authorize';
+                    statusColor = 'color:black;background-color: #fff;';
                     statusBg = 'badge rounded-pill bg-azure';
                 }
                 return `
                     <tr class="table-row user-table-row user_setting" key="${key}" id="user_set">
-                        <td class="sn border_ord" id="user_set2">${row.id}</td>
+                        <td class="sn border_ord bold" id="user_set2">${row.id}</td>
                         <td class="tot_order_ center ps-1" id="user_set3">
                             <img class="user_img rounded-circle user_imgs" src="${row.image.includes('https://')?row.image: '/image/'+ row.image}">
                         </td>
                         <td class="txt_ ps-1 center" id="user_set4">
-                            <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown" disabled>
+                            <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
                             <ul class="dropdown-menu action ms-4 pe-3">
                                 <li class="upd cgy ps-1">
                                     <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-4" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
@@ -112,12 +112,12 @@
                                 </li>
                             </ul>
                         </td>
-                        <td class="txt_ ps-1" id="user_set5">${row.name}</td>
-                        <td class="tot_order_ ps-1" id="user_set6">${row.email}</td>
-                        <td class="tot_pending_ ps-1" id="user_set7">${row.contract_number}</td>
+                        <td class="txt_ bold ps-1" id="user_set5">${row.name}</td>
+                        <td class="tot_order_ bold ps-1" id="user_set6">${row.email}</td>
+                        <td class="tot_pending_ bold ps-1" id="user_set7">${row.contract_number}</td>
                         <td class="tot_pending_ bold ps-1 ${row.role? ' text-primary': ' text-cyan'}" id="user_set8">${row.role ==0 ? 'User': 'Superadmin' && row.role ==2 ? 'SubAdmin': 'User' && row.role ==1 ? 'SuperAdmin': 'User' && row.role ==3 ? 'Admin': 'User' && row.role ==5 ? 'Accounts': 'User' && row.role ==6 ? 'Marketing': 'User' && row.role ==7 ? 'Delivery Team': 'User'}</td>
                         <td class="tot_complete_ center ps-1" id="user_set9">
-                            <input class="form-switch form-check-input check_permission" type="checkbox" user_id="${row.id}" value="${row.status}" ${row.status? " checked": ''} disabled>
+                            <input class="form-switch form-check-input check_permission" type="checkbox" user_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>
                         </td>
                         <td class="tot_complete_ pill ps-1 ${statusClass}">
                             <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:12px;">

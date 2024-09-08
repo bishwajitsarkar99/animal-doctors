@@ -57,15 +57,15 @@
                         <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
                             <span class="btn-text forg_page"> Forget-Password</span>
                         </a>
-                        <!-- <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
+                        <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
                             <span class="btn-text reg_page"> User-Register</span>
-                        </a> -->
-                        <!-- <a type="submit" href="/" class="btn btn-sm" id="logn_page">
-                            <span class="btn-text logn_page"> User-Login</span>
-                        </a> -->
+                        </a>
+                        <a type="submit" href="/email-verification" class="btn btn-sm" id="logn_page">
+                            <span class="btn-text logn_page"> Email-Verification</span>
+                        </a>
                     </div>
                     <div class="side_canvas_animation" hidden>
-                        <img src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                        <img class="sidebar-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@
                                     <span style="color:green;font-weight:800;font-size: 15px;">
                                         <i class="src_email fa fa-check src_email-hidden"></i>
                                     </span>
-                                    <span class="text-danger input_message show-error remove-error-one">@error('email')
+                                    <span class="text-danger input_message show-error remove-error-one skeleton">@error('email')
                                         {{$message}}@enderror
                                     </span><br>
                                 </div>
@@ -160,7 +160,7 @@
                                     <span style="color:green;font-weight:800;font-size: 15px;">
                                         <i class="src_password fa fa-check src_password-hidden"></i>
                                     </span>
-                                    <span class="text-danger input_message show-error2 remove-error-two">@error('password')
+                                    <span class="text-danger input_message show-error2 remove-error-two skeleton">@error('password')
                                         {{$message}}@enderror
                                     </span><br>
                                 </div>
@@ -360,14 +360,14 @@
             $(".show-error").attr("data-error", emailErrorMessage);
 
             if (emailErrorMessage !== '') {
-                $(".email_src").removeClass('show-current-border').addClass('show-error-border');
+                $(".email_src").removeClass('show-current-border').addClass('is-invalid');
             } else {
                 var emailVal = $(".email_src").val().trim();
                 if (emailVal !== '') {
                     $(".email_src").removeClass('show-current-border').addClass('show-success-border');
                     $(".src_email").removeClass('src_email-hidden');
                 } else {
-                    $(".email_src").addClass('show-current-border').removeClass('show-error-border');
+                    $(".email_src").addClass('show-current-border').removeClass('is-invalid');
                 }
             }
 
@@ -376,14 +376,14 @@
             $(".show-error2").attr("data-error", passwordErrorMessage);
 
             if (passwordErrorMessage !== '') {
-                $(".password_src").removeClass('show-current-border').addClass('show-error-border');
+                $(".password_src").removeClass('show-current-border').addClass('is-invalid');
             } else {
                 var passwordVal = $(".password_src").val().trim();
                 if (passwordVal !== '') {
                     $(".password_src").removeClass('show-current-border').addClass('show-success-border');
                     $(".src_password").removeClass('src_password-hidden');
                 } else {
-                    $(".password_src").addClass('show-current-border').removeClass('show-error-border');
+                    $(".password_src").addClass('show-current-border').removeClass('is-invalid');
                 }
             }
 
@@ -394,7 +394,7 @@
                 $(".email_src").removeClass('show-error-border');
 
                 if (inputVal !== '') {
-                    $(this).removeClass('show-current-border').addClass('show-success-border');
+                    $(this).removeClass('show-current-border').addClass('show-success-border').removeClass('is-invalid');
                     $(".src_email").removeClass('src_email-hidden');
                 } else {
                     $(this).addClass('show-current-border').removeClass('show-success-border');
@@ -409,7 +409,7 @@
                 $(".password_src").removeClass('show-error-border');
 
                 if (inputVal !== '') {
-                    $(this).removeClass('show-current-border').addClass('show-success-border');
+                    $(this).removeClass('show-current-border').addClass('show-success-border').removeClass('is-invalid');
                     $(".src_password").removeClass('src_password-hidden');
                 } else {
                     $(this).addClass('show-current-border').removeClass('show-success-border');
