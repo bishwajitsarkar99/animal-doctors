@@ -13,13 +13,12 @@
                     <label class="input_label page-heading-skeleton mt-1" for="select-user">Select Email :</label>
                 </div>
                 <div class="custom-select col-md-4 page-heading-skeleton">
-                    <select name="user_id" required class="form-control ui-select" id="select_input"> 
-                        <option value="">Select Email </option>
-                        @foreach ($users as $user)
-                        <option class="option_value" value="{{ $user->id }}">{{ $user->email }}</option>
+                    <select type="text" class="form-control form-control-sm select2" name="user_id" id="select_user">
+                        <option value="">Select Email</option>
+                        @foreach($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->email }}</option>
                         @endforeach
                     </select>
-                    <span class="custom-role-arrow me-2"></span>
                 </div>
                 <div class="col-md-1 pt-1">
                     <span class="fbox cricale-skeleton"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>
@@ -30,13 +29,12 @@
                     <label class="input_label page-heading-skeleton mt-1" for="select-role">Select Role :</label>
                 </div>
                 <div class="custom-select col-md-4 page-heading-skeleton">
-                    <select name="role_id" required class="form-control ui-select" id="select_input">
-                        <option class="option_value" value="">Select Role</option>
-                        @foreach ($roles as $role)
-                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    <select type="text" class="form-control form-control-sm select2" name="role_id" id="select_role">
+                        <option value="">Select Role</option>
+                        @foreach($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
                         @endforeach
                     </select>
-                    <span class="custom-role-arrow me-2"></span>
                 </div>
                 <div class="col-md-1 pt-1">
                     <span class="fbox cricale-skeleton"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>
@@ -64,8 +62,31 @@
 @section('css')
 <!-- ================ manage-role-css ================= -->
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/manage-role-css/manage.css">
+<link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 @endsection
 @section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Initialize Select2 for all elements with the 'select2' class
+        //$('.select2').select2();
+        $('.select2').each(function() {
+            // Check the ID or name to set specific options
+            if ($(this).attr('id') === 'select_user') {
+                $(this).select2({
+                    placeholder: 'Select Email',
+                    allowClear: true
+                });
+            } else if ($(this).attr('id') === 'select_role') {
+                $(this).select2({
+                    placeholder: 'Select Role',
+                    allowClear: true
+                });
+            }
+        });
+    });
+</script>
 <script>
     $(document).ready(() => {
         // Button Loader

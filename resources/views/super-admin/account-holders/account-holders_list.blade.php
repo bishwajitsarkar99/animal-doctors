@@ -8,31 +8,30 @@
             <div class="col-md-12 ps-2 page">
                 <div class="card-body focus-color cd pt-2">
                     <div class="row">
-                        <div class="col-xl-2">
-                            <div class="heading">
-                                <span class="history page-heading-skeleton">User History</span>
-                            </div>
+                        <div class="heading">
+                            <span class="history page-heading-skeleton">User History</span>
                         </div>
-                        <div class="col-xl-10">
-                            <form class="search_form" action="" style="float: right;">
-                                <span>
-                                    <span><i class="search-loader fa fa-spinner fa-spin search-hidden"></i></span>
-                                    <input class="form-control-sm search user-search" id="searchInput" name="search" type="search" list="datalistOptions" id="exampleDataList" placeholder="Search User Eamil">
+                        <form class="search_form" action="" style="float: right;">
+                            <div class="row">
+                                <div class="col-xl-8">
+                                    <select type="email" class="form-control form-control-sm select2" name="search" id="email">
+                                        <option value="">Select Email</option>
+                                        @foreach($data as $user)
+                                            <option value="{{ $user->email }}">{{ $user->email }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xl-4" style="background-color:aliceblue;">
                                     <button class="btn btn-success btn-btn-sm" id="btnFormSearch">
                                         <span class="search-btn"><i class="fas fa-search"></i></span>
                                     </button>
-                                </span>
-                                <datalist id="datalistOptions">
-                                    @foreach($data as $user)
-                                        <option value="{{$user->email}}">
-                                    @endforeach
-                                </datalist>
-                                <button type="submit" class="btn btn-success btn-btn-sm btn-refresh" id="btn_refresh">
-                                    <i class="loading-icon fa-solid fa-rotate fa-spin hidden"></i>
-                                    <span class="text-btn">Refresh</span>
-                                </button>
-                            </form>
-                        </div>
+                                    <button type="submit" class="btn btn-success btn-btn-sm btn-refresh" id="btn_refresh">
+                                        <i class="loading-icon fa-solid fa-rotate fa-spin hidden"></i>
+                                        <span class="text-btn">Refresh</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div style="overflow-x:auto;">
                         <table class="bg-transparent ord_table center border-1 skeleton mt-2">
@@ -44,7 +43,7 @@
                                     <th class="table_th_color th-bg us_td txt skeleton ps-1 pe-1">User Information</th>
                                     <th class="table_th_color th-bg us_td tot_pending_ skeleton" style="text-align: center;">Role</th>
                                     <th class="table_th_color th-bg us_td tot_pending_ skeleton" style="text-align: center;">Access Permission</th>
-                                    <th class="table_th_color th-bg tot_pending_ skeleton" style="text-align: center;">Authorization</th>
+                                    <th class="table_th_color th-bg us_td tot_pending_ skeleton" style="text-align: center;">Authorization</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-transparent skeleton" id="user_data_table">
@@ -110,10 +109,22 @@
 
 @section('css')
 <!-- ================ manage-role-css ================= -->
+<link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/manage-role-css/manage.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 @endsection
 @section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        //$('.select2').select2();
+        $('.select2').select2({
+            placeholder: 'Select Email',
+            allowClear: true
+        });
+    });
+</script>
 <script>
     //Filter
     $(function() {

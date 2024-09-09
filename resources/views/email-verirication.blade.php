@@ -80,6 +80,7 @@
                                                                 </span>
                                                             </label>
                                                             <select type="email" class="form-control select2" name="email" id="email">
+                                                                    <option value="">Select Email</option>
                                                                 @foreach($email_verifications as $item)
                                                                     <option value="{{ $item->email }}">{{ $item->email }}</option>
                                                                 @endforeach
@@ -127,7 +128,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
-        $('.select2').select2();
+        //$('.select2').select2();
+        $('.select2').select2({
+            placeholder: 'Select Email',
+            allowClear: true
+        });
     </script>
     <!-- Sweet Alert CDN LINK -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
