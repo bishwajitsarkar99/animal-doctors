@@ -14,6 +14,11 @@
                 <div class="modal-body profile-body pb-1" style="background:aliceblue;">
                     <div class="row profile-heading pb-3">
                         <div class="col-xl-8">
+                            <div class="form-group field_skeletone_five">
+                                <span class="">
+                                    <label class="label_user_edit" for="">Email-Verification : <span id="view_user_email_verified"></span></label>
+                                </span>
+                            </div>
                             <div class="form-group">
                                 <span class="field_skeletone_one">
                                     <label class="label_user_edit" for="id">User-ID :</label>
@@ -47,7 +52,7 @@
                             </div>
                             <div class="form-group">
                                 <span class="field_skeletone_four">
-                                    <label class="label_user_edit" for="email_verified_at">Email-Verified :</label>
+                                    <label class="label_user_edit" for="email_verified_at">Verified-Date :</label>
                                     <span id="view_user_email_verified_at"></span>
                                 </span>
                             </div>

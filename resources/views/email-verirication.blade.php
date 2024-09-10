@@ -133,6 +133,10 @@
             placeholder: 'Select Email',
             allowClear: true
         });
+        // Set custom placeholder for the search input inside Select2 dropdowns
+        $('#email').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search emails...');
+        });
     </script>
     <!-- Sweet Alert CDN LINK -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>

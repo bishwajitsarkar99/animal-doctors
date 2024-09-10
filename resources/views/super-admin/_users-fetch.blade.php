@@ -376,8 +376,19 @@
                         $('#view_user_role').val(getRoleName(response.data.role)); 
                         $('#view_user_name').val(response.data.name);
                         $('#view_user_email').val(response.data.email);
+                        // email verification result
+                        if (response.data.email_verified_at === null) {
+                            $('#view_user_email_verified').html('<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">No verified</span>');
+                        } else {
+                            $('#view_user_email_verified').html('<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">Verified</span>');
+                        }
                         $('#view_user_contract').val(response.data.contract_number);
-                        $('#view_user_email_verified_at').text(formatDate(response.data.email_verified_at));
+                        // email verification date if it exists
+                        if (response.data.email_verified_at) {
+                            $('#view_user_email_verified_at').text(formatDate(response.data.email_verified_at));
+                        } else {
+                            $('#view_user_email_verified_at').text('No Verification Date');
+                        }
                         $('#view_user_created_at').text(formatDate(response.data.created_at));
                         $('#view_user_updated_at').text(formatDate(response.data.updated_at));
                         $("#image_show").attr('src', `/image/${response.data.image}`);
@@ -413,6 +424,7 @@
             $(".field_skeletone_two").addClass('capsule-skeletone');
             $(".field_skeletone_three").addClass('capsule-skeletone');
             $(".field_skeletone_four").addClass('capsule-skeletone');
+            $(".field_skeletone_five").addClass('sub-skeletone');
             $(".image_skeletone").addClass('image-skeletone');
 
             time = setTimeout(() => {
@@ -423,6 +435,7 @@
                 $(".field_skeletone_three").removeClass('capsule-skeletone');
                 $(".field_skeletone_four").removeClass('capsule-skeletone');
                 $(".image_skeletone").removeClass('image-skeletone');
+                $(".field_skeletone_five").removeClass('sub-skeletone');
             }, 1000);
             
             return ()=>{

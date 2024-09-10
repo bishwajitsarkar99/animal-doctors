@@ -57,9 +57,33 @@
                                         </td>
                                         <td class="txt_  us_td skeleton ps-1">
                                             <label for="name">Name : <span style="font-size:small;letter-spacing:0.5px;">{{$user->name}}</span></label><br>
-                                            <label for="email">Email : <span style="font-size:small;letter-spacing:0.5px;">{{$user->email}}</span><br></label><br>
+                                            <label for="email">Email : 
+                                                <span style="font-size:small;letter-spacing:0.5px;">{{$user->email}}</span>
+                                                <span style="font-size:small;letter-spacing:0.5px;">
+                                                    @if ($user->emailVerification)
+                                                        @php
+                                                            $verificationStatus = $user->emailVerification->first()->status == 0 ? 'Verified' : 'Not Verified';
+                                                            $badgeClass = $user->emailVerification->first()->status == 0 ? 'bg-success' : 'bg-danger';
+                                                        @endphp
+                                                        <span class="badge text-white {{ $badgeClass }}" style="letter-spacing: 1px;">
+                                                            {{ $verificationStatus }}
+                                                        </span>
+                                                    @else
+                                                        <span class="badge text-white bg-warning" style="letter-spacing: 1px;">No Verification Data</span>
+                                                    @endif
+                                                </span>
+                                            </label><br>
                                             <label for="contact">Contract Number : <span style="font-size:small;letter-spacing:0.5px;">{{$user->contract_number}}</span><br></label><br>
                                             <label for="create">Account Created : <span style="font-size:small;letter-spacing:0.5px;">{{ date('d l M Y h:i:sA', strtotime($user->created_at)) }}</span><br></label><br>
+                                            <label for="create">Email Verification : 
+                                                <span style="font-size:small;letter-spacing:0.5px;">
+                                                    @if ($user->emailVerification)
+                                                        {{ date('d l M Y h:i:s A', strtotime($user->emailVerification->first()->email_verified_session)) }}
+                                                    @else
+                                                        Not Available
+                                                    @endif
+                                                </span>
+                                            </label><br>
                                             <label for="update">Account Last Updated : <span style="font-size:small;letter-spacing:0.5px;">{{ date('d l M Y h:i:sA', strtotime($user->updated_at)) }}</span><br></label>
                                         </td>
                                         <td class="sn border_ord us_td skeleton">
@@ -73,14 +97,14 @@
                                             @if($user->status ==1)
                                             <span class="badge text-white bg-danger" style="letter-spacing: 1px;">No</span>
                                             @else
-                                            <span class="badge text-white" style="background-color: darkgreen; letter-spacing: 1px;">Yes</span>
+                                            <span class="badge text-white bg-success" style="letter-spacing: 1px;">Yes</span>
                                             @endif
                                         </td>
                                         <td class="tot_complete_ skeleton" style="text-align:center">
                                             @if($user->status ==1)
-                                            <span class="badge text-white" style="letter-spacing: 1px; font-weight:600;background-color: purple;">Unauthorized</span>
+                                            <span class="badge text-white bg-danger" style="letter-spacing: 1px; font-weight:600;">Unauthorized</span>
                                             @else
-                                            <span class="badge text-white bg-primary" style="letter-spacing: 1px;">Authorized</span>
+                                            <span class="badge text-white bg-success" style="letter-spacing: 1px;">Authorized</span>
                                             @endif
                                         </td>
                                     </tr>
@@ -123,23 +147,16 @@
             placeholder: 'Select Email',
             allowClear: true
         });
+        // Set custom placeholder for the search input inside Select2 dropdowns
+        $('#email').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search emails...');
+        });
     });
 </script>
 <script>
-    //Filter
-    $(function() {
-        $(document).ready(()=> {
-            $("#input1").on("keyup", ()=> {
-                var value = $(this).val().toLowerCase();
-                $("#user_data_table tr").filter(()=> {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-    });
     //refresh loader
     $(document).ready(() =>{
-        $("#btnRefresh").on('click', ()=>{
+        $("#btn_refresh").on('click', ()=>{
             $('.loading-icon').removeClass('hidden');
             $(this).attr('disabled', true);
             $('text-btn').text('Refresh...');

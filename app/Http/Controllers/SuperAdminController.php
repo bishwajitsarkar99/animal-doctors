@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
 use App\Support\Facades\Setting;
 use App\Models\AuthPages;
+use App\Models\Email\EmailVerification;
 
 class SuperAdminController extends Controller
 {
@@ -89,7 +90,8 @@ class SuperAdminController extends Controller
     {
 
         $roles = Role::all();
-        $data = User::all();
+        $data = EmailVerification::all();
+
         $search = $request['search'] ?? "";
         if ($search != null) {
             $users = User::where('name', 'LIKE', '%' . $search . '%')
@@ -97,11 +99,17 @@ class SuperAdminController extends Controller
                 ->orWhere('contract_number', 'LIKE', '%' . $search . '%')
                 ->orWhere('role', 'LIKE', '%' . $search . '%')
                 ->orWhere('id', 'LIKE', '%' . $search . '%')
+                ->with('emailVerification')
                 ->get();
         } else {
-            $users = User::latest()->paginate(1);
+            $users = User::with('emailVerification')
+            ->latest()
+            ->paginate(1);
         }
-        return view('super-admin.account-holders.account-holders_list', compact('roles','users','data'))
+
+        $email_verifications = EmailVerification::where('status', '=', 0)->orderBy('id', 'desc')->get();
+
+        return view('super-admin.account-holders.account-holders_list', compact('data','roles','users','email_verifications'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
     // Fetch Users Data-----------
@@ -158,7 +166,7 @@ class SuperAdminController extends Controller
     // View Users Data-----------
     public function showUsers($id)
     {
-        $users = User::findOrFail($id);
+        $users = User::with('emailVerification')->findOrFail($id);
 
         if ($users) {
             return response()->json([
@@ -223,14 +231,22 @@ class SuperAdminController extends Controller
     // Manage Role-----------
     public function manageRole()
     {
-        $users = User::all();
+        $users = User::where('status', '=', 0)->orderBy('id', 'desc')->get();
         $company_profiles = companyProfile::where('id', '=', 1)->get();
         $roles = Role::all();
-        return view('super-admin.manage-role', compact('users', 'roles'), compact('company_profiles', 'users', 'roles'));
+        return view('super-admin.manage-role',compact('company_profiles', 'users', 'roles'));
     }
     // Update Manage Role-----------
     public function updateRole(Request $request)
     {
+        // Validate request data
+        $validatedData = $request->validate([
+            'user_id' => 'required|string',
+            'role_id' => 'required|string',
+        ],[
+            'user_id.required' => 'User email is required.',
+            'role_id.required' => 'User role is required.',
+        ]);
         User::where('id', $request->user_id)->update([
             'role' => $request->role_id
         ]);

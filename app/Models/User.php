@@ -82,4 +82,8 @@ class User extends Authenticatable
         return $this->hasMany(InventoryPermission::class);
     }
     
+    public function emailVerification()
+    {
+        return $this->hasMany(\App\Models\Email\EmailVerification::class, 'user_id');
+    }
 }

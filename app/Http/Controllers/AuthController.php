@@ -268,6 +268,11 @@ class AuthController extends Controller
                 // 'status' => !$emailVerification->status,
             ]);
 
+            $userVerification = User::where('email', $userEmail)->firstOrFail();
+            $userVerification->update([
+                '	email_verified_at' => now(),
+            ]);
+
             return back()->with('success', 'Verification link has been sent to your email.');
         } catch (\Exception $e) {
             return back()->with('error', 'Failed to send verification email. Please try again.');

@@ -58,8 +58,8 @@
                     <div class="mb-2">
                       <div class="button-box mb-1 mt-1">
                         <button id="page_submit" type="submit" class="btn btn-sm submt_button button-skeleton">
-                          <span class="btn-text">Permission</span>
                           <i class="auth-icon fa fa-spinner fa-spin hidden"></i>
+                          <span class="btn-text">Permission</span>
                         </button>
                       </div>
                     </div>
@@ -97,7 +97,7 @@
         $('btn-text').text('Permission');
       }, 3000);
     })
-});
+  });
 </script>
 <script>
   // User Edit Form(Modal)
