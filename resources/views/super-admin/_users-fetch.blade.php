@@ -80,7 +80,7 @@
             }
 
             return [...rows].map((row, key) => {
-                let statusClass, statusColor, statusText, statusBg;
+                let statusClass, statusColor, statusText, statusBg, verifyText;
                 if(row.status == 1){
                     statusClass = 'text-dark';
                     statusText = '❌ Unauthorize';
@@ -92,6 +92,12 @@
                     statusText = '<span style="color:black;font-weight:800;font-size: 12px;"><i class="fa-solid fa-check"></i></span> Authorize';
                     statusColor = 'color:black;background-color: #fff;';
                     statusBg = 'badge rounded-pill bg-azure';
+                }
+
+                if(row.email_verified_at == null){
+                    verifyText = '<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">No verified</span>';
+                }else{
+                    verifyText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">Verified</span>';
                 }
                 return `
                     <tr class="table-row user-table-row user_setting" key="${key}" id="user_set">
@@ -116,8 +122,13 @@
                         <td class="tot_order_ bold ps-1" id="user_set6">${row.email}</td>
                         <td class="tot_pending_ bold ps-1" id="user_set7">${row.contract_number}</td>
                         <td class="tot_pending_ bold ps-1 ${row.role? ' text-primary': ' text-cyan'}" id="user_set8">${row.role ==0 ? 'User': 'Superadmin' && row.role ==2 ? 'SubAdmin': 'User' && row.role ==1 ? 'SuperAdmin': 'User' && row.role ==3 ? 'Admin': 'User' && row.role ==5 ? 'Accounts': 'User' && row.role ==6 ? 'Marketing': 'User' && row.role ==7 ? 'Delivery Team': 'User'}</td>
+                        <td class="tot_complete_ pill ps-1">
+                            <span class="permission edit_inventory_table" style="font-size:12px;">
+                                ${verifyText}
+                            </span>
+                        </td>
                         <td class="tot_complete_ center ps-1" id="user_set9">
-                            <input class="form-switch form-check-input check_permission" type="checkbox" user_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>
+                            <input class="form-switch form-check-input check_permission" type="checkbox" user_id="${row.id}" value="${row.status}" ${row.status? " checked": ''} ${row.email_verified_at === null ? 'disabled' : ''}>
                         </td>
                         <td class="tot_complete_ pill ps-1 ${statusClass}">
                             <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:12px;">
@@ -319,6 +330,8 @@
             $("#editusr7").addClass('capsule-skeletone');
             $("#editusr8").addClass('capsule-skeletone');
             $("#editusr9").addClass('edit-skeleton');
+            $("#editusr10").addClass('capsule-skeletone');
+            $("#uploadButton").addClass('edit-skeleton');
             time = setTimeout(() => {
                 $(".head_title").removeClass('skeleton');
                 $(".cols_btn").removeClass('skeleton');
@@ -331,6 +344,8 @@
                 $("#editusr7").removeClass('capsule-skeletone');
                 $("#editusr8").removeClass('capsule-skeletone');
                 $("#editusr9").removeClass('edit-skeleton');
+                $("#editusr10").removeClass('capsule-skeletone');
+                $("#uploadButton").removeClass('edit-skeleton');
             }, 1000);
             return ()=>{
                 clearTimeout(time);
@@ -503,10 +518,11 @@
                         $('#updateForm_errorList').html("");
                         $('#success_message').html("");
                         $('#success_message').fadeIn();
-                        $('#success_message').addClass('account_Update_message');
+                        $('#success_message').addClass('background_error');
                         $('#success_message').text(response.messages);
                         setTimeout(() => {
-                            $('#success_message').fadeOut();
+                            $('#success_message').fadeOut(6000);
+                            $('#success_message').delay(6000);
                         }, 3000);
                         fetch_users_setting_data();
                         $('#edit_user_form').modal('hide');

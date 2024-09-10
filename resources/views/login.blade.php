@@ -365,7 +365,7 @@
                 var emailVal = $(".email_src").val().trim();
                 if (emailVal !== '') {
                     $(".email_src").removeClass('show-current-border').addClass('show-success-border');
-                    $(".src_email").removeClass('src_email-hidden');
+                    $(".src_email").removeClass('src_email-hidden').fadeIn(200).delay(200);
                 } else {
                     $(".email_src").addClass('show-current-border').removeClass('is-invalid');
                 }
@@ -381,7 +381,7 @@
                 var passwordVal = $(".password_src").val().trim();
                 if (passwordVal !== '') {
                     $(".password_src").removeClass('show-current-border').addClass('show-success-border');
-                    $(".src_password").removeClass('src_password-hidden');
+                    $(".src_password").removeClass('src_password-hidden').fadeOut(200).delay(200);
                 } else {
                     $(".password_src").addClass('show-current-border').removeClass('is-invalid');
                 }
@@ -395,10 +395,10 @@
 
                 if (inputVal !== '') {
                     $(this).removeClass('show-current-border').addClass('show-success-border').removeClass('is-invalid');
-                    $(".src_email").removeClass('src_email-hidden');
+                    $(".src_email").removeClass('src_email-hidden').fadeIn(200).delay(200);
                 } else {
                     $(this).addClass('show-current-border').removeClass('show-success-border');
-                    $(".src_email").addClass('src_email-hidden');
+                    $(".src_email").addClass('src_email-hidden').fadeOut(200).delay(200);
                 }
             });
 
@@ -410,10 +410,10 @@
 
                 if (inputVal !== '') {
                     $(this).removeClass('show-current-border').addClass('show-success-border').removeClass('is-invalid');
-                    $(".src_password").removeClass('src_password-hidden');
+                    $(".src_password").removeClass('src_password-hidden').fadeIn(200).delay(200);
                 } else {
                     $(this).addClass('show-current-border').removeClass('show-success-border');
-                    $(".src_password").addClass('src_password-hidden');
+                    $(".src_password").addClass('src_password-hidden').fadeOut(200).delay(200);
                 }
             });
         });

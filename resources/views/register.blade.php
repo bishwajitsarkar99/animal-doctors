@@ -525,6 +525,11 @@
                     $(".photo_message").text('');  // Remove error message
                     $(".image").removeClass('is-invalid');
 
+                    // Reset progress bar
+                    $('.bar').css('width', '0%');
+                    $('.percent').text('0%');
+                    $(".register_img").addClass('img-hidden');
+
                     if (inputVal !== '') {
                         $(".six-check").removeClass('check-hidden');
                         $(".imge-border").removeClass('image-current-border').addClass('image-success-border');

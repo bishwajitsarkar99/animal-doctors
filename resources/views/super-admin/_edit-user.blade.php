@@ -34,6 +34,15 @@
                                 <input id="edit_user_contract" class="update_contract contract_number usercontractsearch" type="text" name="contract_number" placeholder="Enter contract number">
                                 <i class="ucontract-icon fa fa-spinner fa-spin ucontract-hidden"></i>
                             </div>
+                            <div class="form-group">
+                                <div class="upload-group align-items-center justify-content-center">
+                                    <div class="progress" id="editusr10">
+                                        <div class="bar"></div>
+                                        <div class="percent">0%</div>
+                                    </div>
+                                    <a class="btn btn-group-sm upload_btn upload-button-skeleton" id="uploadButton">Upload</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-xl-4 dvsecond">
                             <div class="form-group">
@@ -41,7 +50,7 @@
                                     <img class="register_img " id="image_view" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500">
                                 </div>
                                 <input type='file' id="imgInput" class="update_image edit_image focus mt-2" name="image" value=""  />
-                            </div>
+                            </div> 
                         </div>
                     </div>
                 </div>

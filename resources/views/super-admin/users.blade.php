@@ -40,42 +40,45 @@
                 </span>
               </div> -->
             </div>
-            <div class="mt-2">
-              <table class="ord_table center border-1 mt-1 skeleton">
-                <tr class="table-row order_body acc_setting_table skeleton">
-                  <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1">ID</th>
-                  <th id="th_sort" data-coloumn="image" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1">Image</th>
-                  <th id="th_sort" class="table_th_color tot_pending_ col font_sid skeleton ps-1">Action</th>
-                  <th id="th_sort" data-coloumn="name" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1">Name</th>
-                  <th id="th_sort" data-coloumn="email" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1">Email</th>
-                  <th id="th_sort" data-coloumn="contract_number" data-order="desc" class="table_th_color font_sid skeleton tot_order_ ps-1">Contract</th>
-                  <th id="th_sort" data-coloumn="role" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1">Role</th>
-                  <th id="th_sort" class="table_th_color tot_pending_ col font_sid skeleton">Check</th>
-                  <th id="th_sort" class="table_th_color tot_pending_ font_sid ps-2  skeleton">Status</th>
-                </tr>
-                <tbody class="bg-transparent skeleton tab" id="user_data_table">
-
-                </tbody>
-              </table>
+            <div class="">
+              <div class="table-responsive">
+                <table class="ord_table center border-1 mt-1 skeleton">
+                  <tr class="table-row order_body acc_setting_table skeleton">
+                    <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1">ID</th>
+                    <th id="th_sort" data-coloumn="image" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1">Image</th>
+                    <th id="th_sort" class="table_th_color tot_pending_ col font_sid skeleton ps-1">Action</th>
+                    <th id="th_sort" data-coloumn="name" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1">Name</th>
+                    <th id="th_sort" data-coloumn="email" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1">Email</th>
+                    <th id="th_sort" data-coloumn="contract_number" data-order="desc" class="table_th_color font_sid skeleton tot_order_ ps-1">Contract</th>
+                    <th id="th_sort" data-coloumn="role" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1">Role</th>
+                    <th id="th_sort" data-coloumn="role" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1">Verification</th>
+                    <th id="th_sort" class="table_th_color tot_pending_ col font_sid skeleton">Check</th>
+                    <th id="th_sort" class="table_th_color tot_pending_ font_sid ps-2  skeleton">Status</th>
+                  </tr>
+                  <tbody class="bg-transparent skeleton tab" id="user_data_table">
+  
+                  </tbody>
+                </table>
+              </div>
             </div>
             <div class="row table_last_row">
-                <div class="col-2">
-                  <label class="item_class skeleton">Peritem</label>
-                  <select class="ps-1 mt-3" id="perItemControl">
-                    <option selected>10</option>
-                    <option>20</option>
-                    <option>50</option>
-                    <option>100</option>
-                    <option>200</option>
-                  </select>
-                  <!-- <span class="custom-list-item-arrow me-4"></span> -->
-                </div>
-                <div class="skeleton col-3">
-                  <span class="tot_summ skeleton" id="num_plate">
-                    <label class="tot-search mt-3 skeleton" for="tot_cagt"> Total Users :</label>
-                    <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_user_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
-                  </span>
-                </div>
+              <div class="col-2">
+                <label class="item_class skeleton">Peritem</label>
+                <select class="ps-1 mt-3" id="perItemControl">
+                  <option selected>10</option>
+                  <option>20</option>
+                  <option>50</option>
+                  <option>100</option>
+                  <option>200</option>
+                </select>
+                <!-- <span class="custom-list-item-arrow me-4"></span> -->
+              </div>
+              <div class="skeleton col-3">
+                <span class="tot_summ skeleton" id="num_plate">
+                  <label class="tot-search mt-3 skeleton" for="tot_cagt"> Total Users :</label>
+                  <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_user_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
+                </span>
+              </div>
               <div class="col-7">
                 <div class="pagination skeleton mt-1" id="user_data_table_paginate">
 
