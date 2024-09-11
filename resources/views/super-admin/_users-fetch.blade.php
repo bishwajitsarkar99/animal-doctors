@@ -179,9 +179,9 @@
                     $('[data-bs-toggle="tooltip"]').tooltip();
                    // Get suggestions for autocomplete
                     var suggestions = data.map(function(item) {
-                        // var userImage = `<img class="user_img rounded-circle user_imgs" src="${item.image.includes('https://') ? item.image : '/image/' + item.image}">`;
+                        var userImage = `<img class="user_img rounded-circle user_imgs" src="${item.image.includes('https://') ? item.image : '/image/' + item.image}">`;
                         return {
-                            label: `${item.id} - ${item.roles.name} - ${item.email}`,
+                            label: `ID : ${item.id} - ${userImage} - ${item.roles.name} - ${item.email}`,
                             value: item.email
                         };
                     });
@@ -189,12 +189,12 @@
                     // Initialize autocomplete
                     $("#search").autocomplete({
                         source: suggestions,
-                        // open: function(event, ui) {
-                        //     $(".ui-menu-item-wrapper").each(function(index, element) {
-                        //         var html = $(element).html();
-                        //         $(element).html(html.replace(/&lt;img/g, '<img').replace(/&gt;/g, '>'));
-                        //     });
-                        // }
+                        open: function(event, ui) {
+                            $(".ui-menu-item-wrapper").each(function(index, element) {
+                                var html = $(element).html();
+                                $(element).html(html.replace(/&lt;img/g, '<img').replace(/&gt;/g, '>'));
+                            });
+                        }
                     });
                 }
                 
@@ -735,12 +735,12 @@
         // update avatar
         $("#image_view").on('click', function(e){
             e.preventDefault();
-            // $(".edit_image").click();
-            $("#fileModal").modal('show').fadeIn(600).delay(600);
+            //$(".edit_image").click();
+            //$("#fileModal").modal('show').fadeIn(600).delay(600);
         });
         // put and upload avatar/image
         $(".edit_image").on('change', function(event){
-            $("#fileModal").modal('show').fadeIn(300).delay(300);
+            //$("#fileModal").modal('show').fadeIn(300).delay(300);
             if (event.target.files && event.target.files[0]) {
                 const tempurl = URL.createObjectURL(event.target.files[0]);
 
@@ -753,38 +753,6 @@
                 $("#uploadMess").html("");
             }
         });
-        // Function to handle file selection or URL selection and display it
-        function handleImageSelection(imageUrl) {
-            $("#fileModal").modal('show').fadeIn(300).delay(300);
-
-            // If imageUrl is defined, use it; otherwise, fallback to file input handling
-            if (imageUrl) {
-                $("#image_view").attr('src', imageUrl);
-            } else {
-                console.error('Image URL is not defined.');
-            }
-
-            // Reset progress bar
-            $('.bar').css('width', '0%');
-            $('.percent').text('0%');
-            $(".register_img").addClass('img-hidden');
-            // Remove alert message
-            $("#uploadMess").html("");
-        }
-        // Add click event listener to dynamically generated "Select" button for images
-        $('.link_button').on('click', function(event) {
-            event.preventDefault();
-            var imageUrl = $(this).attr('data-image-url'); // Get image URL from data attribute
-            
-            if (imageUrl) {
-                // Handle the selected image
-                handleImageSelection(imageUrl);
-                console.log('Selected image URL:', imageUrl); // Debugging output
-            } else {
-                console.error('Image URL not found. Please check the data-image-url attribute.');
-            }
-        });
-
         // Handle file upload click and progress bar display
         $(document).on('click', '#uploadButton', function () {
             var imageValue = $("#imgInput").val();
@@ -828,8 +796,6 @@
                 $('.percent').text('0%');
             }
         });
-
-
         $(document).load('click', function(){
             $("#loader_userdelete").addClass('loader_chart');
         });

@@ -15,9 +15,9 @@
                     <table class="ord_table center border-1 mt-1 skeleton">
                         <tr class="table-row order_body acc_setting_table skeleton">
                         <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1">ID</th>
-                        <th id="th_sort" data-coloumn="image" data-order="desc" class="table_th_color txt skeleton ps-1">Page</th>
-                        <th id="th_sort" data-coloumn="name" data-order="desc" class="table_th_color tot_order_ skeleton ps-1">Local Host Page Url</th>
-                        <th id="th_sort" data-coloumn="email" data-order="desc" class="table_th_color tot_order_ skeleton ps-1">Domain Page Url</th>
+                        <th id="th_sort" data-coloumn="image" data-order="desc" class="table_th_color txt skeleton ps-1">Auth Page</th>
+                        <th id="th_sort" data-coloumn="name" data-order="desc" class="table_th_color tot_order_ skeleton ps-1">Local Host Auth Url</th>
+                        <th id="th_sort" data-coloumn="email" data-order="desc" class="table_th_color tot_order_ skeleton ps-1">Domain Auth Url</th>
                         <th id="th_sort" class="table_th_color tot_pending_ ps-2  skeleton">Status</th>
                         </tr>
                         <tbody class="bg-transparent skeleton tab" id="auth_page_data_table">

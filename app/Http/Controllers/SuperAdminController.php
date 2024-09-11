@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Support\Facades\Setting;
 use App\Models\AuthPages;
 use App\Models\Email\EmailVerification;
+use Carbon\Carbon;
 
 class SuperAdminController extends Controller
 {
@@ -115,7 +116,10 @@ class SuperAdminController extends Controller
     // Fetch Users Data-----------
     public function getusers(Request $request)
     {
-        $users = User::orderBy('id', 'desc')->latest()->where('role', '!=', 1)->with(['roles']);
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+
+        $users = User::orderBy('id', 'desc')->latest()->where('role', '!=', 1)->with(['roles'])->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
 
         if ($query = $request->get('query')) {
             $users->where('name', 'LIKE', '%' . $query . '%')
@@ -264,6 +268,33 @@ class SuperAdminController extends Controller
     // Email Verification Page Load
     public function loadEmailVerification()
     {
+        // $startOfMonth = Carbon::now()->startOfMonth();
+        // $endOfMonth = Carbon::now()->endOfMonth();
+
+        // $email_verifications = EmailVerification::orderBy('id', 'desc')->latest()->where('role', '!=', 1)->with(['roles'])->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+
+        // if ($query = $request->get('query')) {
+        //     $email_verifications->where('name', 'LIKE', '%' . $query . '%')
+        //         ->orWhere('email', 'LIKE', '%' . $query . '%')
+        //         ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
+        //         ->orWhere('role', 'LIKE', '%' . $query . '%')
+        //         ->orWhere('id', 'LIKE', '%' . $query . '%');
+        // }
+
+        // $perItem = 10;
+        // if($request->input('per_item')){
+        //     $perItem = $request->input('per_item');
+        // }
+
+        // $email_verifications = $email_verifications->paginate($perItem)->toArray();
+
+        // if ($request->expectsJson()) {
+
+        //     return response()->json([
+        //         'email_verifications' => $email_verifications,
+        //     ]);
+        // }
+
         return view('super-admin.email-verification.index');
     }
     // Email Verification Update Manage

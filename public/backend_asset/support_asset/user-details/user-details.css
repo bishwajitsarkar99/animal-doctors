@@ -639,7 +639,7 @@ a.page-link.btn_page {
 .hidden{
     display: none;
 }
-button#viewBtn:hover{
+button#viewBtn{
     background-image: var(--nav-button-background);
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);

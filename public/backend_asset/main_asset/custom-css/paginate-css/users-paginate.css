@@ -2,6 +2,49 @@
 table,th,tr,td{
     opacity: 1;
 }
+/* Adjust the width of the autocomplete input search able dropdown */
+.ui-menu {
+    width: 400px;
+    max-width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 2px 0;
+    z-index: 1000;
+    background-color: white;
+}
+
+/* Customize each item in the autocomplete dropdown */
+.ui-menu .ui-menu-item {
+    padding: 1px 1px;
+    cursor: pointer;
+}
+
+/* Style for the image inside each item */
+.ui-menu .ui-menu-item img.user_img {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Style for the hovered item */
+.ui-menu .ui-state-hover {
+    background-color: #f0f0f0;
+    border-left: 4px solid #007bff;
+}
+
+/* Make sure the image is properly aligned in autocomplete suggestions */
+.ui-menu .ui-menu-item .ui-menu-item-wrapper {
+    display: flex;
+    align-items: center; /
+}
+
+/* Fix the alignment of labels */
+.ui-menu-item-wrapper span {
+    margin-left: 10px;
+}
+
 .img-hidden,.image-hidden{
     display: none;
 }
@@ -116,7 +159,7 @@ table,th,tr,td{
     position: relative;
     width: 94%;
     border-radius: 5px;
-    margin-top: 30px;
+    margin-top: 0;
 }
 .bar {
     background-color: #c6ebbf;

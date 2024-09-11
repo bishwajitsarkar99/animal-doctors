@@ -25,7 +25,9 @@
                 </span>
               </div>
               <div class="col-1">
-                <i class="search-icon fa fa-spinner fa-spin search-hidden"></i>
+                <div class="search-icon spinner-border spinner-border-sm text-primary search-hidden" role="status">
+                  <span class="visually-hidden">Searching...</span>
+                </div>
               </div>
               <!-- <div class="col-1">
                 <span class="me-1">

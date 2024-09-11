@@ -106,9 +106,9 @@
 <!-- Start File-Manager -->
 <script>
     $(document).ready(function() {
-        $('#static_nav, #image_view, .edit_image').click(function(event) {
+        $('#static_nav').click(function(event) {
             event.preventDefault();
-            $('#fileModal').modal('show');
+            $('#fileModal').modal('show').fadeIn(300).delay(300);
             fetchFolders();
             fetch_get_folder();
 
@@ -607,11 +607,19 @@
             }, 3000);
             fetchFiles();
         });
-        // Attach click event to "Select" button
-        $(document).on("click", ".link_button", function() {
-            var selectedFile = $(this).data('href');
+        // Declare a global variable to store the image URL
+        var selectedImageUrl = "";
+
+        // Attach click event to "Select" button in the file manager
+        $(document).on("click", ".link_button", function () {
+            selectedImageUrl = $(this).attr('data-image-url');
             
-            $("#selectedFilePath").val(selectedFile);
+            // Set the image view source using the globally stored URL
+            $("#image_view").attr('src', selectedImageUrl);
+            $("#fileModal").modal('hide');
+            
+            // Update the hidden input with the selected image URL to be sent to the backend
+            $('#imgInput').val(selectedImageUrl); // Set the input value to the image URL
         });
         // Fetch Folder Name and Files
         function fetchFiles() {
@@ -630,7 +638,7 @@
                     }
 
                     $.each(response.files, function(index, file) {
-                        var fileLink = file;
+                        var fileLink = baseUrl + selectedFolder + '/' + file;
                         var imageSrc = baseUrl + selectedFolder + '/' + file;
 
                         $('#uploadedFilesList').append(`
@@ -675,28 +683,6 @@
                     });
                     // Initialize tooltips after appending the elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
-                    // Add click event listener for dynamically generated "Select" button
-                    $('.link_button').on('click', function(event) {
-                        event.preventDefault();
-                        // Correctly access data-image-url attribute
-                        var imageUrl = $(this).attr('data-image-url');
-                        
-                        if (imageUrl) {
-                            // Inject selected image URL into the avatar upload script
-                            $("#fileModal").modal('hide');
-                            $("#image_view").attr('src', imageUrl);
-
-                            // Reset progress bar and hide any alert messages
-                            $('.bar').css('width', '0%');
-                            $('.percent').text('0%');
-                            $(".register_img").addClass('img-hidden');
-                            $("#uploadMess").html("");
-
-                            console.log('Selected image URL:', imageUrl);
-                        } else {
-                            console.error('Image URL not found. Please check the data-image-url attribute.');
-                        }
-                    });
                 },
                 error: function(xhr) {
                     console.error(xhr);
