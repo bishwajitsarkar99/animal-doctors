@@ -9,7 +9,7 @@
     --animation-background-position-100:0 50%;
     --searchbar-background-image:linear-gradient(90deg, transparent, #aaeaff, transparent);
     --font-family-features:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    --modal-backgorund-image:linear-gradient(120deg, aliceblue, transparent,aliceblue);
+    --modal-backgorund-image:repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);
     --animation-transform-1245:translateX(-50%) translateY(-50%) translateZ(0) scale(1);
     --animation-transform-1246:translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
     --animation-transform-1256:translateX(-50%) translateY(-50%) translateZ(0) scale(1);
@@ -23,9 +23,14 @@ h5#fileModalLabel{
     font-family: var(--font-family-features);
 }
 .file-manager-body {
+    background: transparent;
     background-image: var(--modal-backgorund-image);
     transition: inherit;
     font-family: var(--font-family-features);
+}
+.file-manager-footer{
+    background: transparent;
+    background-image: var(--modal-backgorund-image);
 }
 .file-manager-label {
     font-size: 14px;
@@ -33,71 +38,107 @@ h5#fileModalLabel{
     font-family: var(--font-family-features);
     color: black;
 }
+.file-manager-card {
+    border: none;
+    --mdb-box-shadow-color-rgb: 0, 0, 0 !important;
+    box-shadow: 0 4px 9px -4px rgba(0, 0, 0, 0.35) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 .src-bg{
-    background-color: aliceblue;
+    background: transparent;
+    background-image: var(--modal-backgorund-image);
 }
 .image_size{
     width: 60px;
     height: auto;
 }
 .file_manager_modal_header {
-    background-color: white;
+    background: transparent;
+    background-image: var(--modal-backgorund-image);
     box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
-    border-bottom: double silver;
+    border-bottom: double transparent;
+    font-family: var(--font-family-features);
 }
 input#file {
     box-shadow: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: black; 
     cursor: pointer;
     border: 1px solid #e9e9e9;
+    font-family: var(--font-family-features);
+    min-height: calc(1em + 0.5rem + 1px);
+    padding: 0.20rem 0.5rem;
+    border-radius: 0.25rem;
 }
 input#folderName {
     box-shadow: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: black;
     border: 1px solid #e9e9e9;
+    font-family: var(--font-family-features);
+    min-height: calc(1em + 0.5rem + 1px);
+    padding: 0.20rem 0.5rem;
+    border-radius: 0.25rem;
 }
 input#folder {
     box-shadow: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: black;
     border: 1px solid #e9e9e9;
+    font-family: var(--font-family-features);
+    min-height: calc(1em + 0.5rem + 1px);
+    padding: 0.20rem 0.5rem;
+    border-radius: 0.25rem;
 }
 select#folder{
     box-shadow: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: black; 
     cursor: pointer;
     border: 1px solid #e9e9e9;
+    font-family: var(--font-family-features);
+    min-height: calc(1em + 0.5rem + 1px);
+    padding: 0.20rem 0.5rem;
+    border-radius: 0.25rem;
 }
 select#folderSelect {
     box-shadow: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: black; 
     cursor: pointer;
     border: 1px solid #e9e9e9;
     margin-top: 16px;
+    font-family: var(--font-family-features);
+    min-height: calc(1em + 0.5rem + 1px);
+    padding: 0.20rem 0.5rem;
+    border-radius: 0.25rem;
+}
+input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,select#folderSelect:focus{
+    border-color: #007bff;
 }
 .file-card{
-    border: 1px solid #c9f2ff;
+    border: none;
     width: 84px;
     height: 81px;
     align-items: center;
     justify-content: space-between;
     margin: 11px;
+    box-shadow: 0px 1px 10px #0001, 0px 0px 2px #0001;
+    background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
 }
 .file-card:hover{
     transition: all 0.3s;
     box-shadow: var(--card-shadow);
     transform: var(--card-transform);
     opacity: 1;
-    border: 1px solid #e2e5ec !important;
+    border: none;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 .file-card-skeletone,.folder_name_skeletone,.filemanager-skeletone,.input_search_bar_skeletone,.input_field_one_skeletone,
 .input_label_skeletone,.new_btn_skeletone,.folder-lb-skeletone,.input_field_two_skeletone,.input_field_three_skeletone,
@@ -307,7 +348,7 @@ select#folderSelect {
     font-size: 14px;
     font-weight: 600;
     font-variant: petite-caps;
-    color: lightseagreen;
+    color: #b1b1b1;
 }
 .select_lb_display::after{
     content: 'Folder-Name :';
@@ -378,8 +419,8 @@ select#folderSelect {
 .srch_name{
     width: 361px;
     font-weight: 600;
-    margin-left: 70px;
-    border-radius: 15px;
+    margin-left: 80px;
+    border-radius: 10px;
     text-align: center;
     background-color: #fff;
     border-color: #bbbbbb;
@@ -443,11 +484,31 @@ input#delete_folder_id {
     outline: none;
     box-shadow: none;
 }
-button#uploadBtn,button#createFolderBtn,button#updateFolderBtn {
-    border-radius: 15px;
-    border-color: #b2e3e5;
-    background-image: linear-gradient(90deg, #b2e3e5, transparent);
-    color: firebrick;
+button#uploadBtn,button#createFolderBtn,button#updateFolderBtn,button#searchFile {
+    border: 1px solid #007bff;
+    background-color: #0056b3;
+    color: white !important;
+    padding: 3px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 0;
+    text-decoration: none;
+    font-variant: all-petite-caps;
+}
+button#uploadBtn:hover,button#createFolderBtn:hover,button#updateFolderBtn:hover,button#searchFile:hover{
+    background-image:  linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);
+    border: 1px solid #3b71ca;
+    color: white !important;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 button#cancelFolderBtn{
     border-radius: 15px;
@@ -456,11 +517,7 @@ button#cancelFolderBtn{
     color: white;
 }
 button#searchFile{
-    border-radius: 15px;
-    margin-top: 20px;
-    border-color: #b2e3e5;
-    background-image: linear-gradient(90deg, #b2e3e5, transparent);
-    color: firebrick;
+    margin-top: 18px;
 }
 .search-order-hidden,.upload-hidden,.create-hidden{
     display: none;
@@ -468,7 +525,7 @@ button#searchFile{
 .upload-classic{
     position: fixed;
     z-index: 99;
-    top: 24.3%;
+    top: 25.3%;
     border-radius: 5px;
     transform: translateY(-50%);
     display: flex;
@@ -478,7 +535,7 @@ button#searchFile{
 .create-classic{
     position: fixed;
     z-index: 99;
-    top: 15.3%;
+    top: 16.5%;
     border-radius: 5px;
     transform: translateY(-50%);
     display: flex;
@@ -520,13 +577,13 @@ button#searchFile{
     position: absolute;
     background: whitesmoke;
     transform: translate(-50%, -50%);
-    border-radius: 50%;
+    border-radius: 5px;
     animation: offer-button 1500ms ease-out infinite;
     z-index: -1;
     display: block;
-    left: 25px;
-    width: 50px;
-    height: 18px;
+    left: 76px;
+    width: 150px;
+    height: 20px;
 }
 .table-classic::before{
     content: "";
@@ -577,6 +634,7 @@ button#searchFile{
     color: black;
     font-family: var(--font-family-features);
     font-size: small;
+    font-weight: 800;
 }
 button#deleteBtnFolder,button#edtBtnFolder {
     border: none;

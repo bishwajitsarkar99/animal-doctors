@@ -19,7 +19,7 @@
             </div>
             <!-- Modal Body -->
             <div class="modal-body file-manager-body">
-                <div class="card card-body form-control-sm">
+                <div class="card card-body form-control-sm file-manager-card">
                     <!-- Create Folder Form -->
                     <form id="createFolderForm">
                         @csrf
@@ -113,7 +113,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row card card-form-control mt-2">
+                    <div class="row mt-2">
                         <span id="folderNm"></span>
                         <div class="folder_icon mt-2 mb-2">
                             <div class="card form-control form-control-sm mini-card">
@@ -130,7 +130,7 @@
                                         </div>
                                         <div class="icon_group ms-2 mt-1" id="showFolderIcon">
                                             <span class="folder_icon" style="width:6em;height:3em;">
-                                                <i class="fa-solid fa-folder-open" style="font-size: 30px;color:lightseagreen;"></i>
+                                                <i class="fa-solid fa-folder-open" style="font-size: 30px;color:#dbdbdb;"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -149,7 +149,7 @@
                 </div>
             </div>
             <!-- Modal Footer -->
-            <div class="modal-footer profile_modal_footer">
+            <div class="modal-footer profile_modal_footer file-manager-footer">
                 <p class="ps-1"><span id="successMessage"></span></p>
             </div>
         </div>

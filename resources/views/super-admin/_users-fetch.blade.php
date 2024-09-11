@@ -753,6 +753,37 @@
                 $("#uploadMess").html("");
             }
         });
+        // Function to handle file selection or URL selection and display it
+        function handleImageSelection(imageUrl) {
+            $("#fileModal").modal('show').fadeIn(300).delay(300);
+
+            // If imageUrl is defined, use it; otherwise, fallback to file input handling
+            if (imageUrl) {
+                $("#image_view").attr('src', imageUrl);
+            } else {
+                console.error('Image URL is not defined.');
+            }
+
+            // Reset progress bar
+            $('.bar').css('width', '0%');
+            $('.percent').text('0%');
+            $(".register_img").addClass('img-hidden');
+            // Remove alert message
+            $("#uploadMess").html("");
+        }
+        // Add click event listener to dynamically generated "Select" button for images
+        $('.link_button').on('click', function(event) {
+            event.preventDefault();
+            var imageUrl = $(this).attr('data-image-url'); // Get image URL from data attribute
+            
+            if (imageUrl) {
+                // Handle the selected image
+                handleImageSelection(imageUrl);
+                console.log('Selected image URL:', imageUrl); // Debugging output
+            } else {
+                console.error('Image URL not found. Please check the data-image-url attribute.');
+            }
+        });
 
         // Handle file upload click and progress bar display
         $(document).on('click', '#uploadButton', function () {

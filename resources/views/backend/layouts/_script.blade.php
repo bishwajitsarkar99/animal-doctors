@@ -106,7 +106,7 @@
 <!-- Start File-Manager -->
 <script>
     $(document).ready(function() {
-        $('#static_nav').click(function(event) {
+        $('#static_nav, #image_view, .edit_image').click(function(event) {
             event.preventDefault();
             $('#fileModal').modal('show');
             fetchFolders();
@@ -630,7 +630,7 @@
                     }
 
                     $.each(response.files, function(index, file) {
-                        var fileLink = baseUrl + selectedFolder + '/' + file;
+                        var fileLink = file;
                         var imageSrc = baseUrl + selectedFolder + '/' + file;
 
                         $('#uploadedFilesList').append(`
@@ -660,7 +660,7 @@
                                                 <img src="${imageSrc}" alt="${file}" id="image_hover">
                                             </p>
                                             <div class="btn__icon img__btn__icon">
-                                                <a type="button" class="btn btn-success btn-sm link_button" href="${fileLink}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                                                <a type="button" class="btn btn-success btn-sm link_button" data-image-url="${fileLink}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                                     <i class="fa-solid fa-link" style="font-size:10px;"></i>
                                                 </a>
                                                 <button type="button" class="btn btn-danger btn-sm delete-file" data-file="${file}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
@@ -675,6 +675,28 @@
                     });
                     // Initialize tooltips after appending the elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                    // Add click event listener for dynamically generated "Select" button
+                    $('.link_button').on('click', function(event) {
+                        event.preventDefault();
+                        // Correctly access data-image-url attribute
+                        var imageUrl = $(this).attr('data-image-url');
+                        
+                        if (imageUrl) {
+                            // Inject selected image URL into the avatar upload script
+                            $("#fileModal").modal('hide');
+                            $("#image_view").attr('src', imageUrl);
+
+                            // Reset progress bar and hide any alert messages
+                            $('.bar').css('width', '0%');
+                            $('.percent').text('0%');
+                            $(".register_img").addClass('img-hidden');
+                            $("#uploadMess").html("");
+
+                            console.log('Selected image URL:', imageUrl);
+                        } else {
+                            console.error('Image URL not found. Please check the data-image-url attribute.');
+                        }
+                    });
                 },
                 error: function(xhr) {
                     console.error(xhr);
@@ -682,7 +704,6 @@
                 }
             });
         }
-        
         // Event handler for file deletion
         $(document).on('click', '.delete-file', function() {
             var fileName = $(this).data('file');
