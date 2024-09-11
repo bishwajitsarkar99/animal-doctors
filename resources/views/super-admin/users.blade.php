@@ -200,6 +200,21 @@
     })
   });
 
+  // Image Upload Button Loader
+  $(document).ready(() => {
+    $("#uploadButton").on('click', () => {
+      $('.image-icon').removeClass('image-hidden');
+      $(this).attr('disabled', true);
+      $('btn-text').text('Upload...');
+
+      setTimeout(() => {
+        $('.image-icon').addClass('image-hidden');
+        $(this).attr('disabled', false);
+        $('btn-text').text('Upload');
+      }, 3000);
+    })
+  });
+
   // Search Button Loader
   $(document).ready(() => {
     $(".searchform").on('keyup', () => {
@@ -226,41 +241,6 @@
         $('btn-text').text('Delete');
       }, 3000);
     })
-  });
-</script>
-<script>
-  // User Edit Form(Modal)
-  $(document).ready(() => {
-    // User update input field
-    $(".usersearch").on('keyup', () => {
-      $('.uname-icon').removeClass('uname-hidden');
-      $(this).attr('disabled', true);
-
-      setTimeout(() => {
-        $('.uname-icon').addClass('uname-hidden');
-        $(this).attr('disabled', false);
-      }, 3000);
-    });
-    // User update email input field
-    $(".useremailsearch").on('keyup', () => {
-      $('.uemail-icon').removeClass('uemail-hidden');
-      $(this).attr('disabled', true);
-
-      setTimeout(() => {
-        $('.uemail-icon').addClass('uemail-hidden');
-        $(this).attr('disabled', false);
-      }, 3000);
-    });
-    // User update contract input field
-    $(".usercontractsearch").on('keyup', () => {
-      $('.ucontract-icon').removeClass('ucontract-hidden');
-      $(this).attr('disabled', true);
-
-      setTimeout(() => {
-        $('.ucontract-icon').addClass('ucontract-hidden');
-        $(this).attr('disabled', false);
-      }, 3000);
-    });
   });
 </script>
 <script>

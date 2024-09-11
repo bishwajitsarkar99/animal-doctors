@@ -291,7 +291,11 @@
         $(document).on('click', '.edit_btn', function(e) {
             e.preventDefault();
             var user_id = $(this).val();
-            $('#edit_user_form').modal('show');
+            $('#edit_user_form').modal('show').fadeIn(300).delay(300);
+            // Reset progress bar and image
+            $(".register_img").removeClass('img-hidden');
+            $('.bar').css('width', '0%');
+            $('.percent').text('0%');
 
             $.ajax({
                 type: "GET",
@@ -307,6 +311,31 @@
                         $('#edit_user_email').val(response.data.email);
                         $('#edit_user_contract').val(response.data.contract_number);
                         $("#image_view").attr('src', `/image/${response.data.image}` );
+
+                        // Remove Error
+                        $('#updateForm_errorList').html("");
+                        $('#updateForm_errorList2').html("");
+                        $('#updateForm_errorList3').html("");
+
+                        if(response.data.name !== '' && response.data.email !== '' && response.data.contract_number !== '' && response.data.image !== ''){
+                            // add input border
+                            $('.update_user').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
+                            $('.update_email').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
+                            $('.update_contract').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
+                            $('#usrName').html('<i class="fa-solid fa-check"></i>');
+                            $('#usrEmail').html('<i class="fa-solid fa-check"></i>');
+                            $('#usrContract').html('<i class="fa-solid fa-check"></i>');
+                            $('#usrImage').html('<i class="fa-solid fa-check"></i>');
+                        }else{
+                            // add input border
+                            $('.update_user').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
+                            $('.update_email').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
+                            $('.update_contract').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
+                            $('#usrName').html("");
+                            $('#usrEmail').html("");
+                            $('#usrContract').html("");
+                            $('#usrImage').html("");
+                        }
                         
                     }
 
@@ -317,7 +346,6 @@
 
         // Edit Users Page Loader
         $(document).on('click', '.edit_btn', function(){
-
             var time = null;
             $(".head_title").addClass('skeleton');
             $(".cols_btn").addClass('skeleton');
@@ -376,7 +404,7 @@
         $(document).on('click', '.view_btn', function(e) {
             e.preventDefault();
             var user_id = $(this).val();
-            $('#view_user_form').modal('show');
+            $('#view_user_form').modal('show').fadeIn(300).delay(300);
 
             $.ajax({
                 type: "GET",
@@ -460,7 +488,7 @@
         // Update Users Confirm Modal-------------------------
         $(document).on('click', '.update_btn_confrm', function(e){
             e.preventDefault();
-            $('#updateconfirmuser').modal('show');
+            $('#updateconfirmuser').modal('show').fadeIn(300).delay(300);
 
             $("#update_btn_confirm").addClass('edit-skeleton');
             $("#cate_delete5").addClass('edit-skeleton');
@@ -505,17 +533,35 @@
                 contentType: false, 
                 success: function(response) {
                     if (response.status == 400) {
+                        $('#updateForm_errorList').html("");
+                        $('#updateForm_errorList2').html("");
+                        $('#updateForm_errorList3').html("");
+
                         $.each(response.errors, function(key, err_value) {
-                            $('#updateForm_errorList').html("");
-                            $('#updateForm_errorList').append('<span>' + err_value + '</span>');
+                            if (key === 'name') {
+                                $('#updateForm_errorList').html('<span class="text-danger" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $('.update_user').removeClass('show-success-border show-current-light-blue-border').addClass('is-invalid');
+                                $('#usrName').html("");
+                            } else if (key === 'email') {
+                                $('#updateForm_errorList2').html('<span class="text-danger" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $('.update_email').removeClass('show-success-border show-current-light-blue-border').addClass('is-invalid');
+                                $('#usrEmail').html("");
+                            } else if (key === 'contract_number') {
+                                $('#updateForm_errorList3').html('<span class="text-danger" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $('.update_contract').removeClass('show-success-border show-current-light-blue-border').addClass('is-invalid');
+                                $('#usrContract').html("");
+                            }
                         });
+                        
+                        $('#updateconfirmuser').modal('hide').fadeOut(300).delay(300);
                     } else if (response.status == 404) {
                         $('#updateForm_errorList').html("");
                         $('#success_message').text(response.messages);
+                        $('#updateconfirmuser').modal('hide');
                     } else if(response.status == 200){
-
-                        console.log(response);
                         $('#updateForm_errorList').html("");
+                        $('#updateForm_errorList2').html("");
+                        $('#updateForm_errorList3').html("");
                         $('#success_message').html("");
                         $('#success_message').fadeIn();
                         $('#success_message').addClass('background_error');
@@ -525,8 +571,8 @@
                             $('#success_message').delay(6000);
                         }, 3000);
                         fetch_users_setting_data();
-                        $('#edit_user_form').modal('hide');
-                        $('#updateconfirmuser').modal('hide');
+                        $('#edit_user_form').modal('hide').fadeOut(300).delay(300);
+                        $('#updateconfirmuser').modal('hide').fadeOut(300).delay(300);
                     }
                 }
             });
@@ -537,7 +583,7 @@
             e.preventDefault();
             var user_id = $(this).val();
             $('#user_id').val(user_id);
-            $('#deletecategory').modal('show');
+            $('#deletecategory').modal('show').fadeIn(300).delay(300);
 
             var time = null;
             $(".head_title").addClass('skeleton');
@@ -565,7 +611,7 @@
         // Confirm Delete Modal
         $(document).on('click', '.yes_button', function(e){
             e.preventDefault();
-            $('#deleteuser').modal('show');
+            $('#deleteuser').modal('show').fadeIn(300).delay(300);
             $("#supp_delt3").addClass('skeleton');
             $("#cate_confirm").addClass('skeleton');
             $(".clos_btn2").addClass('skeleton');
@@ -606,8 +652,8 @@
                     setTimeout(() => {
                         $('#success_message').fadeOut();
                     }, 3000);
-                    $('#deletecategory').modal('hide');
-                    $('#deleteuser').modal('hide');
+                    $('#deletecategory').modal('hide').fadeOut(300).delay(300);
+                    $('#deleteuser').modal('hide').fadeOut(300).delay(300);
                     fetch_users_setting_data();
                 }
 
@@ -644,17 +690,111 @@
             });
         });
 
+        // User name input field handle
+        $(document).on('keyup', '#edit_user_name', function(){
+            var nameField = $(this).val();
+            $('#updateForm_errorList').html("");
+            // $('#updateForm_errorList2').html("");
+            // $('#updateForm_errorList3').html("");
+            if(nameField !== ''){
+                $('.update_user').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
+                $('#usrName').html('<i class="fa-solid fa-check"></i>').fadeIn(300).delay(300);
+            }else{
+                $('.update_user').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
+                $('#usrName').html("").fadeOut(300).delay(300);
+            }
+            
+        });
+        // User email input field handle
+        $(document).on('keyup', '#edit_user_email', function(){
+            var emailField = $(this).val();
+            $('#updateForm_errorList2').html("");
+            if(emailField !== ''){
+                $('.update_email').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
+                $('#usrEmail').html('<i class="fa-solid fa-check"></i>').fadeIn(300).delay(300);
+            }else{
+                $('.update_email').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
+                $('#usrEmail').html("").fadeOut(300).delay(300);
+            }
+            
+        });
+        // User contract input field handle
+        $(document).on('keyup', '#edit_user_contract', function(){
+            var contractField = $(this).val();
+            $('#updateForm_errorList3').html("");
+            if(contractField !== ''){
+                $('.update_contract').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
+                $('#usrContract').html('<i class="fa-solid fa-check"></i>').fadeIn(300).delay(300);
+            }else{
+                $('.update_contract').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
+                $('#usrContract').html("").fadeOut(300).delay(300);
+            }
+            
+        });
+
         // update avatar
         $("#image_view").on('click', function(e){
             e.preventDefault();
-            $(".edit_image").click();
+            // $(".edit_image").click();
+            $("#fileModal").modal('show').fadeIn(600).delay(600);
         });
         // put and upload avatar/image
         $(".edit_image").on('change', function(event){
+            $("#fileModal").modal('show').fadeIn(300).delay(300);
             if (event.target.files && event.target.files[0]) {
                 const tempurl = URL.createObjectURL(event.target.files[0]);
 
                 $("#image_view").attr('src', tempurl);
+                // Reset progress bar
+                $('.bar').css('width', '0%');
+                $('.percent').text('0%');
+                $(".register_img").addClass('img-hidden');
+                // Remove alert mesg
+                $("#uploadMess").html("");
+            }
+        });
+
+        // Handle file upload click and progress bar display
+        $(document).on('click', '#uploadButton', function () {
+            var imageValue = $("#imgInput").val();
+            var bar = document.querySelector('.bar');
+            var percent = document.querySelector('.percent');
+            var simulatedProgress = parseInt(percent.innerHTML);
+
+            // Check if progress is already 100% and show a message
+            if (simulatedProgress === 100) {
+                $("#uploadMess").html('<span class="upload-mesg">Select an image to upload.</span>');
+                return; // Exit to prevent further actions
+            }
+
+            if (imageValue !== '') {
+                // Check if progress bar is already in progress to avoid multiple intervals
+                if ($('.bar').width() !== 0 && simulatedProgress < 100) {
+                    return; // Prevent starting a new progress simulation if one is already running
+                }
+
+                var simulatedProgress = 0; // Reset simulated progress to start from 0
+
+                // Simulate progress bar
+                var uploadInterval = setInterval(function () {
+                    simulatedProgress += 10;
+
+                    if (simulatedProgress <= 100) {
+                        bar.style.width = simulatedProgress + '%';
+                        percent.innerHTML = simulatedProgress + '%';
+                    } else {
+                        clearInterval(uploadInterval);
+                        $(".register_img").removeClass('img-hidden');
+                    }
+                }, 200);
+
+            } else {
+                // Handle case when no image is selected
+                $("#uploadMess").html('<span class="upload-mesg">Please select an image to upload.</span>'); // Show error message
+
+                // Reset progress bar if no image is selected
+                $('.bar').css('width', '0%');
+                $('.percent').text('0%');
             }
         });
 
@@ -662,7 +802,5 @@
         $(document).load('click', function(){
             $("#loader_userdelete").addClass('loader_chart');
         });
-
-        
     });
 </script>

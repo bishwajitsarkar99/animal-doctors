@@ -8,7 +8,7 @@
     --animation-background-position-0:100% 50%;
     --animation-background-position-100:0 50%;
     --searchbar-background-image:linear-gradient(90deg, transparent, #aaeaff, transparent);
-    --font-family-features:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
+    --font-family-features:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     --modal-backgorund-image:linear-gradient(120deg, aliceblue, transparent,aliceblue);
     --animation-transform-1245:translateX(-50%) translateY(-50%) translateZ(0) scale(1);
     --animation-transform-1246:translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
@@ -18,13 +18,23 @@
     --btn-icon-transform:translateX(calc(100% + 7px));
     --btn-icon-webkit-transform:translateX(calc(100% + 7px));
 }
+h5#fileModalLabel{
+    color: black;
+    font-family: var(--font-family-features);
+}
 .file-manager-body {
     background-image: var(--modal-backgorund-image);
     transition: inherit;
     font-family: var(--font-family-features);
 }
+.file-manager-label {
+    font-size: 14px;
+    font-weight: 700;
+    font-family: var(--font-family-features);
+    color: black;
+}
 .src-bg{
-    background-image: var(--searchbar-background-image);
+    background-color: aliceblue;
 }
 .image_size{
     width: 60px;
@@ -368,10 +378,12 @@ select#folderSelect {
 .srch_name{
     width: 361px;
     font-weight: 600;
-    margin-left: 80px;
+    margin-left: 70px;
     border-radius: 15px;
     text-align: center;
-    background-image: var(--searchbar-background-image);
+    background-color: #fff;
+    border-color: #bbbbbb;
+    font-family: var(--font-family-features);
 }
 .srch_bg{
     animation-name: fontColor;
@@ -562,7 +574,8 @@ button#searchFile{
     color: orangered;
 }
 .color-mode{
-    color: darkgreen;
+    color: black;
+    font-family: var(--font-family-features);
     font-size: small;
 }
 button#deleteBtnFolder,button#edtBtnFolder {

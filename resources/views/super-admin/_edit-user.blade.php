@@ -10,7 +10,7 @@
                 <button type="button" class="btn-close btn-btn-sm cols_btn" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
             </div>
 
-            <form id="userUpdateForm" method="POST" enctype="multipart/form-data">
+            <form id="userUpdateForm" method="POST" enctype="multipart/form-data" autocomplete="off">
                 @csrf
                 <div class="modal-body profile-body pb-1" style="background:aliceblue;">
                     <div class="row profile-heading pb-3">
@@ -22,17 +22,20 @@
                             <div class="form-group mt-2" id="editusr6">
                                 <label class="label_user_edit" for="name" id="editusr3">Name :</label>
                                 <input id="edit_user_name" class="update_user usersearch name" type="text" name="name" placeholder="Enter name" autofocus />
-                                <i class="uname-icon fa fa-spinner fa-spin uname-hidden"></i>
+                                <span class="text-danger font-weight-800" id="updateForm_errorList"></span>
+                                <span style="font-size:12px;color:green;font-weight:900;" id="usrName"></span>
                             </div>
                             <div class="form-group mt-2" id="editusr7">
                                 <label class="label_user_edit" for="email" id="editusr4">Email :</label>
                                 <input id="edit_user_email" class="update_email email useremailsearch" type="text" name="email" placeholder="Enter Email Address">
-                                <i class="uemail-icon fa fa-spinner fa-spin uemail-hidden"></i>
+                                <span class="text-danger font-weight-800" id="updateForm_errorList2"></span>
+                                <span style="font-size:12px;color:green;font-weight:900;" id="usrEmail"></span>
                             </div>
                             <div class="form-group mt-2" id="editusr8">
                                 <label class="label_user_edit" for="contract_number" id="editusr5">Contract-Number : </label>
                                 <input id="edit_user_contract" class="update_contract contract_number usercontractsearch" type="text" name="contract_number" placeholder="Enter contract number">
-                                <i class="ucontract-icon fa fa-spinner fa-spin ucontract-hidden"></i>
+                                <span class="text-danger font-weight-800" id="updateForm_errorList3"></span>
+                                <span style="font-size:12px;color:green;font-weight:900;" id="usrContract"></span>
                             </div>
                             <div class="form-group">
                                 <div class="upload-group align-items-center justify-content-center">
@@ -40,16 +43,21 @@
                                         <div class="bar"></div>
                                         <div class="percent">0%</div>
                                     </div>
-                                    <a class="btn btn-group-sm upload_btn upload-button-skeleton" id="uploadButton">Upload</a>
+                                    <a class="btn btn-group-sm upload_btn upload-button-skeleton" id="uploadButton">
+                                        <span class="btn-text">Upload</span>
+                                        <i class="image-icon fa fa-spinner fa-spin image-hidden"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-4 dvsecond">
                             <div class="form-group">
                                 <div class="img-area">
-                                    <img class="register_img " id="image_view" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500">
+                                    <p style="text-align:center;margin-bottom: 0rem;"><span style="font-size:12px;color:green;font-weight:900;" id="usrImage"></span></p>
+                                    <img class="register_img  img-hidden" id="image_view" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500">
                                 </div>
                                 <input type='file' id="imgInput" class="update_image edit_image focus mt-2" name="image" value=""  />
+                                <span id="uploadMess"></span>
                             </div> 
                         </div>
                     </div>

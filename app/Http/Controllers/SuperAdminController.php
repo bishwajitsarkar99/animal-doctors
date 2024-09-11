@@ -186,11 +186,20 @@ class SuperAdminController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $request->validate([
-            'name' => 'required|max:120',
-            'contract_number' => 'required|min:11',
-            'email' => 'email|required|max:100',
+        // Validation
+        $validator = Validator::make($request->all(), [
+            'name' => 'string|required|max:120',
+            'contract_number' => 'required|numeric|digits:11',
+            'email' => 'string|email|required|max:100',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
