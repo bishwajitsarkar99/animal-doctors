@@ -5,20 +5,18 @@
   <div class="container">
     <ul class="nav nav-tabs tab_bg" role="tablist" style="background:aliceblue;">
       <li class="nav-item tab-skeletone">
-        <a class="nav-link setting active home-text" data-bs-toggle="tab" href="#home" id="tabHome"> User Analysis</a>
+        <a class="nav-link setting active home-text" data-bs-toggle="tab" href="#userActivity" id="tabActivity"> User Email Verification</a>
       </li>
-      <!-- <li class="nav-item">
-        <input class="form-control from-control-sm" type="search" name="role_id" placeholder="Search-role-id" id="roleSearch">
+      <li class="nav-item">
+        <!-- <input class="form-control from-control-sm" type="search" name="role_id" placeholder="Search-role-id" id="roleSearch">
+        <span class="inp_ser_skeletone ms-1"></span> -->
+        <select type="text" class="form-control form-control-sm select2" name="role_id" id="select_role">
+          <option value="">Select Role</option>
+          @foreach($roles as $role)
+              <option value="{{ $role->id }}">{{ $role->name }}</option>
+          @endforeach
+        </select>
         <span class="inp_ser_skeletone ms-1"></span>
-      </li> -->
-      <li class="nav-item tab-skeletone">
-        <a class="nav-link setting" data-bs-toggle="tab" href="#userActivity" id="tabActivity">User Activity</a>
-      </li>
-      <li class="nav-item tab-skeletone">
-        <a class="nav-link setting home-text" data-bs-toggle="tab" href="#userDetails" id="tabDetails">Activity Graph</a>
-      </li>
-      <li class="nav-item tab-skeletone">
-        <a class="nav-link setting home-text" href="#" id="tabUserPermission"> User Permission</a>
       </li>
       <li class="nav-item tab-skeletone">
         <button type="button" class="btn btn-sm refresh-btn ripple-surface " id="refresh">
@@ -28,18 +26,9 @@
       </li>
     </ul>
     <div class="tab-content" id="showCard" style="background:aliceblue;padding-bottom:15px;" hidden>
-      <div id="home" class="container tab-pane active"><br>
-        
+      <div id="userActivity" class="container tab-pane active"><br>
+        @include('super-admin.email-verification._email-verification-home-page')
       </div>
-      <div id="userActivity" class="container tab-pane" hidden><br>
-      @include('super-admin.user-details.user-activites')
-    </div>
-    <div id="userDetails" class="container tab-pane" hidden><br>
-      
-    </div>
-    <div id="userPermission" class="container tab-pane"><br>
-
-    </div>
     </div>
   </div>
   <div class="loader-position">
@@ -49,11 +38,43 @@
 
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/user-details/user-details.css">
+<link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @push('scripts')
 @include('super-admin.user-details.ajax.user-details-ajax')
-@include('super-admin.user-details.ajax.user-activities-ajax')
+@include('super-admin.email-verification.ajax.email_verification_ajax')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // Initialize Select2 for all elements with the 'select2' class
+    //$('.select2').select2();
+    $('.select2').each(function() {
+      // Check the ID or name to set specific options
+      if ($(this).attr('id') === 'select_role') {
+        $(this).select2({
+          placeholder: 'Select Role',
+          allowClear: true
+        });
+      } 
+      // else if ($(this).attr('id') === 'select_role') {
+      //   $(this).select2({
+      //     placeholder: 'Select Role',
+      //     allowClear: true
+      //   });
+      // }
+    });
+    // Set custom placeholder for the search input inside Select2 dropdowns
+    // $('#select_user').on('select2:open', function() {
+    //   $('.select2-search__field').attr('placeholder', 'Search emails...');
+    // });
+
+    $('#select_role').on('select2:open', function() {
+      $('.select2-search__field').attr('placeholder', 'Search roles...');
+    });
+  });
+</script>
 <script>
   // skeleton
   function removeSkeletons(selector) {

@@ -26,7 +26,7 @@
             $(this).addClass("background");
         });
         // User Activities Data Fetch
-        fetch_activities_users_data();
+        fetch_users_email_verification_data();
         // Data View Table--------------
         const table_rows = (rows) => {
             if (rows.length === 0) {
@@ -44,34 +44,34 @@
                     <tr class="table-row user-table-row supp-table-row" key="${key}" id="supp_tab">
                         <td class="sn border_ord" id="supp_tab2" hidden>${row.id}</td>
                         <td class="txt_ user-details-links ps-2" id="supp_tab3">
-                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-2" id="viewBtn" value="${row.user_id}" style="font-size: 10px;height: 17px;" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="User Agent" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs" id="viewBtn" value="${row.user_id}" style="font-size: 10px;height: 17px;" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="User Agent" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 ${row.user_id}
                             </button>
                         </td>
-                        <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.roles.name}</td>
-                        <td class="border_ord ps-1 supp_vew" id="supp_tab4" hidden>${row.name}</td>
+                        <td class="border_ord ps-1 supp_vew" id="supp_tab4">${row.name}</td>
                         <td class="txt_ ps-1 supp_vew2" id="supp_tab5">${row.email}</td>
-                        <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${row.role}</td>
+                        <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.roles.name}</td>
                         <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${formatDate(row.email_verified_session)}</td>
                         <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${formatDate(row.account_create_session)}</td>
-                        <td class="txt_ ps-1 supp_vew7" id="supp_tab10">${row.created_at}</td>
+                        <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${row.status}</td>
+                        <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${formatDate(row.created_at)}</td>
                     </tr>
                 `;
             }).join("\n");
         }
 
         // Fetch User Activities Data ------------------
-        function fetch_activities_users_data(query = '', url = null, perItem = null) {
+        function fetch_users_email_verification_data(query = '', url = null, perItem = null) {
 
             if (perItem === null) {
                 perItem = $("#perItemControl").val();
             }
-            
+
             var current_url = url;
-            if (url === null) {
-                current_url = `{{ route('user.get_activity')}}?per_item=${perItem}`;
-            }else {
-                current_url += `&per_item=${perItem}`
+            if (current_url === null) {
+                current_url = `{{ route('emailVerification') }}?per_item=${perItem}`;
+            } else {
+                current_url += `&per_item=${perItem}`;
             }
 
             $.ajax({
@@ -79,33 +79,29 @@
                 url: current_url,
                 dataType: 'json',
                 data: {
-                    query: query
+                    query: query,
                 },
-                success: function({
-                    data,
-                    links,
-                    total
+                success: function({ email_verifications, links, total }) {
+                    $("#user_email_verification_data_table").html(table_rows(email_verifications));
+                    
+                    $("#email_verification_users_data_table_paginate").html(paginate_html({ links, total }));
 
-                }) {
-                    $("#user_activites_data_table").html(table_rows([...data]));
-                    $("#activities_users_data_table_paginate").html(paginate_html({
-                        links,
-                        total
-                    }));
-                    $("#total_activites_records").text(total);
-                    // Initialize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                },
+                error: function(xhr, status, error) {
+                    console.error('Failed to fetch data:', error);
+                    alert('An error occurred while fetching the data. Please try again.');
                 }
-
             });
         }
+
         // peritem change
         $("#perItemControl").on('change', (e) => {
             const {
                 value
             } = e.target;
 
-            fetch_activities_users_data('', null, value);
+            fetch_users_email_verification_data('', null, value);
         });
         // Paginate Page-------------------------------
         const paginate_html = ({
@@ -133,14 +129,14 @@
             `;
         }
         // change paginate page------------------------
-        $("#activities_users_data_table_paginate").delegate("a", "click", function(e) {
+        $("#email_verification_users_data_table_paginate").delegate("a", "click", function(e) {
             e.stopImmediatePropagation();
             e.preventDefault();
 
             const url = $(this).attr('href');
 
             if (url !== '#') {
-                fetch_activities_users_data('', url);
+                fetch_users_email_verification_data('', url);
             }
 
         });

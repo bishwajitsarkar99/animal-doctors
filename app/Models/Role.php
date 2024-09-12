@@ -6,6 +6,7 @@ use App\Models\Permission\Permission;
 use App\Models\User;
 use App\Models\permission\InventoryPermission;
 use App\Models\Medicine\Inventory;
+use App\Models\Email\EmailVerification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,5 +27,9 @@ class Role extends Model
     public function inventories()
     {
         return $this->hasMany(Inventory::class);
+    }
+    public function emailVerification()
+    {
+        return $this->hasMany(EmailVerification::class);
     }
 }

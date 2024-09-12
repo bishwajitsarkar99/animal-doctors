@@ -266,37 +266,47 @@ class SuperAdminController extends Controller
         return redirect()->back()->with('success', 'User role and permission is updated');
     }
     // Email Verification Page Load
-    public function loadEmailVerification()
+    public function loadEmailVerification(Request $request)
     {
-        // $startOfMonth = Carbon::now()->startOfMonth();
-        // $endOfMonth = Carbon::now()->endOfMonth();
+        $roles = Role::all();
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
 
-        // $email_verifications = EmailVerification::orderBy('id', 'desc')->latest()->where('role', '!=', 1)->with(['roles'])->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+        // Initialize query for email verifications
+        $email_verifications = EmailVerification::with(['roles'])
+            ->where('role', '!=', 1)
+            ->whereBetween('updated_at', [$startOfMonth, $endOfMonth])
+            ->orderBy('id', 'desc');
 
-        // if ($query = $request->get('query')) {
-        //     $email_verifications->where('name', 'LIKE', '%' . $query . '%')
-        //         ->orWhere('email', 'LIKE', '%' . $query . '%')
-        //         ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
-        //         ->orWhere('role', 'LIKE', '%' . $query . '%')
-        //         ->orWhere('id', 'LIKE', '%' . $query . '%');
-        // }
+        // Apply search query filters
+        if ($query = $request->get('query')) {
+            $email_verifications->where(function ($q) use ($query) {
+                $q->where('name', 'LIKE', '%' . $query . '%')
+                    ->orWhere('email', 'LIKE', '%' . $query . '%')
+                    ->orWhere('role', 'LIKE', '%' . $query . '%')
+                    ->orWhere('id', 'LIKE', '%' . $query . '%');
+            });
+        }
 
-        // $perItem = 10;
-        // if($request->input('per_item')){
-        //     $perItem = $request->input('per_item');
-        // }
+        // Set pagination items per page
+        $perItem = $request->input('per_item', 10);
 
-        // $email_verifications = $email_verifications->paginate($perItem)->toArray();
+        // Paginate results
+        $email_verifications = $email_verifications->paginate($perItem);
 
-        // if ($request->expectsJson()) {
+        // Check if the request expects a JSON response
+        if ($request->expectsJson()) {
+            return response()->json([
+                'email_verifications' => $email_verifications->items(),
+                'links' => $email_verifications->links()->render(),
+                'total' => $email_verifications->total(),
+            ]);
+        }
 
-        //     return response()->json([
-        //         'email_verifications' => $email_verifications,
-        //     ]);
-        // }
-
-        return view('super-admin.email-verification.index');
+        // Return view with roles if not an AJAX request
+        return view('super-admin.email-verification.index', compact('roles'));
     }
+
     // Email Verification Update Manage
     public function updateEmailStatus()
     {
