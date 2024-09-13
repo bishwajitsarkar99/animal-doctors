@@ -100,17 +100,14 @@ class SuperAdminController extends Controller
                 ->orWhere('contract_number', 'LIKE', '%' . $search . '%')
                 ->orWhere('role', 'LIKE', '%' . $search . '%')
                 ->orWhere('id', 'LIKE', '%' . $search . '%')
-                ->with('emailVerification')
                 ->get();
         } else {
-            $users = User::with('emailVerification')
+            $users = User::orderBy('id', 'desc')
             ->latest()
             ->paginate(1);
         }
 
-        $email_verifications = EmailVerification::where('status', '=', 0)->orderBy('id', 'desc')->get();
-
-        return view('super-admin.account-holders.account-holders_list', compact('data','roles','users','email_verifications'))
+        return view('super-admin.account-holders.account-holders_list', compact('data','roles','users'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
     // Fetch Users Data-----------
@@ -268,13 +265,14 @@ class SuperAdminController extends Controller
     // Email Verification Page Load
     public function loadEmailVerification(Request $request)
     {
-        $roles = Role::all();
+        $emails = EmailVerification::orderBy('id', 'desc')->get();
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
 
+        $role = $request->input('role');
+
         // Initialize query for email verifications
         $email_verifications = EmailVerification::with(['roles'])
-            ->where('role', '!=', 1)
             ->whereBetween('updated_at', [$startOfMonth, $endOfMonth])
             ->orderBy('id', 'desc');
 
@@ -283,9 +281,13 @@ class SuperAdminController extends Controller
             $email_verifications->where(function ($q) use ($query) {
                 $q->where('name', 'LIKE', '%' . $query . '%')
                     ->orWhere('email', 'LIKE', '%' . $query . '%')
-                    ->orWhere('role', 'LIKE', '%' . $query . '%')
                     ->orWhere('id', 'LIKE', '%' . $query . '%');
             });
+        }
+
+        // Filter
+        if ($role) {
+            $query->where('role', 'LIKE', '%' . $query . '%');
         }
 
         // Set pagination items per page
@@ -304,7 +306,7 @@ class SuperAdminController extends Controller
         }
 
         // Return view with roles if not an AJAX request
-        return view('super-admin.email-verification.index', compact('roles'));
+        return view('super-admin.email-verification.index', compact('emails'));
     }
 
     // Email Verification Update Manage

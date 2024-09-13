@@ -21,7 +21,7 @@ class CreateEmailVerificationsTable extends Migration
             $table->integer('role')->nullable();
             $table->timestamp('email_verified_session')->nullable();
             $table->timestamp('account_create_session')->nullable();
-            $table->tinyInteger('status')->default('1');
+            $table->tinyInteger('status')->default('0');
             $table->timestamps();
         });
     }

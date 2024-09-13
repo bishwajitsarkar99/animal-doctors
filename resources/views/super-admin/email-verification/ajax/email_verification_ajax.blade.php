@@ -33,27 +33,44 @@
                 return `
                     <tr>
                         <td class="error_data" align="center" text-danger colspan="11">
-                            User Email Verification Data Not Exists On Server !
+                            Current User Email Verification Not Exists On Server !
                         </td>
                     </tr>
                 `;
             }
 
             return [...rows].map((row, key) => {
+                let statusColor, statusBg, verifyText;
+                if(row.status == 0){
+                    verifyText = '<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">No verified</span>';
+                    statusColor = 'color:black;background-color: #fff;';
+                    statusBg = 'badge rounded-pill bg-warn';
+                }
+                else if(row.status == 1){
+                    verifyText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">Verified</span>';
+                    statusColor = 'color:black;background-color: #fff;';
+                    statusBg = 'badge rounded-pill bg-azure';
+                }
                 return `
                     <tr class="table-row user-table-row supp-table-row" key="${key}" id="supp_tab">
                         <td class="sn border_ord" id="supp_tab2" hidden>${row.id}</td>
-                        <td class="txt_ user-details-links ps-2" id="supp_tab3">
-                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs" id="viewBtn" value="${row.user_id}" style="font-size: 10px;height: 17px;" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="User Agent" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                                ${row.user_id}
-                            </button>
+                        <td class="txt_ user_id ps-2" id="supp_tab3">
+                            ${row.user_id}
                         </td>
                         <td class="border_ord ps-1 supp_vew" id="supp_tab4">${row.name}</td>
-                        <td class="txt_ ps-1 supp_vew2" id="supp_tab5">${row.email}</td>
+                        <td class="txt_ ps-1 supp_vew2" id="supp_tab5">${row.email} 
+                            <span class="${statusBg} permission edit_inventory_table" style="font-size:12px; ${statusColor}">
+                                ${verifyText}
+                            </span>
+                        </td>
                         <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.roles.name}</td>
                         <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${formatDate(row.email_verified_session)}</td>
                         <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${formatDate(row.account_create_session)}</td>
-                        <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${row.status}</td>
+                        <td class="tot_complete_ center ps-1" id="user_set9">
+                            <span class="form-check form-switch pt-1">
+                                <input class="form-check-input form-label check_permission" type="checkbox" user_id="${row.id}" value="${row.status}" ${row.status? " checked": ''} id="checkStatus">
+                            </span>
+                        </td>
                         <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${formatDate(row.created_at)}</td>
                     </tr>
                 `;
@@ -87,10 +104,6 @@
                     $("#email_verification_users_data_table_paginate").html(paginate_html({ links, total }));
 
                     $('[data-bs-toggle="tooltip"]').tooltip();
-                },
-                error: function(xhr, status, error) {
-                    console.error('Failed to fetch data:', error);
-                    alert('An error occurred while fetching the data. Please try again.');
                 }
             });
         }
@@ -140,11 +153,15 @@
             }
 
         });
-        // User Details View
-        $(document).on('click', '.view_btn', function(e) {
-            e.preventDefault();
-            var user_id = $(this).val();
-            $('tr.child-row[data-user-id="' + user_id + '"]').toggleClass('hidden');
+        // Role Filter
+        $(document).on('change', '#verification_select_role', function(){
+            var query = $(this).val();
+            fetch_users_email_verification_data(query); 
+        });
+         // Role Filter
+         $(document).on('keyup', '#search', function(){
+            var query = $(this).val();
+            fetch_users_email_verification_data(query); 
         });
     });
 </script>

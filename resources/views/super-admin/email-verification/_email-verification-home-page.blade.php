@@ -1,13 +1,16 @@
 <!-- ==== User-Email-Verification-Page ======= -->
 <div class="container">
-    <div class="card card-body log-panel-card">
-        <div class="row">
-            <div class="col-xl-6">
-
-            </div>
-            <div class="col-xl-6">
-
-            </div>
+    <div class="row">
+        <div class="col-xl-3">
+            <select type="text" class="form-control form-control-sm select2" name="role" id="verification_select_role">
+                <option value="">Select Role</option>
+                @foreach($emails as $item)
+                    <option value="{{ $item->id }}">{{ $item->roles->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-xl-9">
+            <input class="form-control from-control-sm" type="search" name="search" placeholder="Search........" id="search">
         </div>
     </div>
     <div class="table-responsive">

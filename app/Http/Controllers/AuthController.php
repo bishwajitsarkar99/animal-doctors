@@ -247,7 +247,7 @@ class AuthController extends Controller
     public function loadLink()
     {
         $company_profiles = companyProfile::where('id', '=', 1)->get();
-        $email_verifications = EmailVerification::where('status', '=', 1)->orderBy('id', 'desc')->get();
+        $email_verifications = EmailVerification::where('status', '=', 0)->orderBy('id', 'desc')->get();
         return view('email-verirication', compact('company_profiles','email_verifications'));
     }
 

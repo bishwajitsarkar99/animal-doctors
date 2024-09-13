@@ -430,7 +430,7 @@
                         if (response.data.email_verified_at) {
                             $('#view_user_email_verified_at').text(formatDate(response.data.email_verified_at));
                         } else {
-                            $('#view_user_email_verified_at').text('No Verification Date');
+                            $('#view_user_email_verified_at').text('- - - - - Null - - - - -');
                         }
                         $('#view_user_created_at').text(formatDate(response.data.created_at));
                         $('#view_user_updated_at').text(formatDate(response.data.updated_at));

@@ -7,17 +7,6 @@
       <li class="nav-item tab-skeletone">
         <a class="nav-link setting active home-text" data-bs-toggle="tab" href="#userActivity" id="tabActivity"> User Email Verification</a>
       </li>
-      <li class="nav-item">
-        <!-- <input class="form-control from-control-sm" type="search" name="role_id" placeholder="Search-role-id" id="roleSearch">
-        <span class="inp_ser_skeletone ms-1"></span> -->
-        <select type="text" class="form-control form-control-sm select2" name="role_id" id="select_role">
-          <option value="">Select Role</option>
-          @foreach($roles as $role)
-              <option value="{{ $role->id }}">{{ $role->name }}</option>
-          @endforeach
-        </select>
-        <span class="inp_ser_skeletone ms-1"></span>
-      </li>
       <li class="nav-item tab-skeletone">
         <button type="button" class="btn btn-sm refresh-btn ripple-surface " id="refresh">
           <i class="refresh-icon fa fa-solid fa-asterisk fa-spin refrsh-hidden" style="color:white;opacity:1;"></i>
@@ -38,6 +27,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/user-details/user-details.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/user-details/email-verification.css">
 <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 @endsection
 
@@ -52,25 +42,25 @@
     //$('.select2').select2();
     $('.select2').each(function() {
       // Check the ID or name to set specific options
-      if ($(this).attr('id') === 'select_role') {
+      if ($(this).attr('id') === 'verification_select_email') {
+        $(this).select2({
+          placeholder: 'Select Email',
+          allowClear: true
+        });
+      } 
+      else if ($(this).attr('id') === 'verification_select_role') {
         $(this).select2({
           placeholder: 'Select Role',
           allowClear: true
         });
-      } 
-      // else if ($(this).attr('id') === 'select_role') {
-      //   $(this).select2({
-      //     placeholder: 'Select Role',
-      //     allowClear: true
-      //   });
-      // }
+      }
     });
     // Set custom placeholder for the search input inside Select2 dropdowns
-    // $('#select_user').on('select2:open', function() {
-    //   $('.select2-search__field').attr('placeholder', 'Search emails...');
-    // });
+    $('#verification_select_email').on('select2:open', function() {
+      $('.select2-search__field').attr('placeholder', 'Search emails...');
+    });
 
-    $('#select_role').on('select2:open', function() {
+    $('#verification_select_role').on('select2:open', function() {
       $('.select2-search__field').attr('placeholder', 'Search roles...');
     });
   });

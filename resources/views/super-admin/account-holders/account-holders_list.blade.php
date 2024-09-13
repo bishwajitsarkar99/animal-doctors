@@ -22,7 +22,7 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-4" style="background-color:aliceblue;">
-                                    <button class="btn btn-success btn-btn-sm" id="btnFormSearch">
+                                    <button class="btn btn-success btn-btn-sm" id="btnFormSearch" disabled>
                                         <span class="search-btn"><i class="fas fa-search"></i></span>
                                     </button>
                                     <button type="submit" class="btn btn-success btn-btn-sm btn-refresh" id="btn_refresh">
@@ -60,29 +60,23 @@
                                             <label for="email">Email : 
                                                 <span style="font-size:small;letter-spacing:0.5px;">{{$user->email}}</span>
                                                 <span style="font-size:small;letter-spacing:0.5px;">
-                                                    @if ($user->emailVerification)
-                                                        @php
-                                                            $verificationStatus = $user->emailVerification->first()->status == 0 ? 'Verified' : 'Not Verified';
-                                                            $badgeClass = $user->emailVerification->first()->status == 0 ? 'bg-success' : 'bg-danger';
-                                                        @endphp
-                                                        <span class="badge text-white {{ $badgeClass }}" style="letter-spacing: 1px;">
-                                                            {{ $verificationStatus }}
-                                                        </span>
+                                                    @if ($user->email_verified_at != null)
+                                                        <span class="badge text-white bg-success" style="letter-spacing: 1px;">Verified</span>
                                                     @else
-                                                        <span class="badge text-white bg-warning" style="letter-spacing: 1px;">No Verification Data</span>
+                                                        <span class="badge text-white bg-danger" style="letter-spacing: 1px;">Not Verified</span>
                                                     @endif
                                                 </span>
                                             </label><br>
                                             <label for="contact">Contract Number : <span style="font-size:small;letter-spacing:0.5px;">{{$user->contract_number}}</span><br></label><br>
                                             <label for="create">Account Created : <span style="font-size:small;letter-spacing:0.5px;">{{ date('d l M Y h:i:sA', strtotime($user->created_at)) }}</span><br></label><br>
                                             <label for="create">Email Verification : 
-                                                <span style="font-size:small;letter-spacing:0.5px;">
-                                                    @if ($user->emailVerification)
-                                                        {{ date('d l M Y h:i:s A', strtotime($user->emailVerification->first()->email_verified_session)) }}
-                                                    @else
-                                                        Not Available
-                                                    @endif
-                                                </span>
+                                                @if ($user->email_verified_at == null)
+                                                    <span class="badge text-danger" style="letter-spacing: 1px;">- - - - - - - - - - Null Date - - - - - - - - - - - </span>
+                                                @else
+                                                    <span style="font-size:small;letter-spacing:0.5px;">
+                                                        {{ date('d l M Y h:i:sA', strtotime($user->email_verified_at)) }}
+                                                    </span>
+                                                @endif
                                             </label><br>
                                             <label for="update">Account Last Updated : <span style="font-size:small;letter-spacing:0.5px;">{{ date('d l M Y h:i:sA', strtotime($user->updated_at)) }}</span><br></label>
                                         </td>
@@ -154,6 +148,17 @@
     });
 </script>
 <script>
+    //email dropdown
+    $(document).ready(() =>{
+        $('#email').on('change', function() {
+            var email = $(this).val();
+            if (email !== '') {
+                $("#btnFormSearch").attr('disabled', false);
+            } else {
+                $("#btnFormSearch").attr('disabled', true);
+            }
+        });
+    });
     //refresh loader
     $(document).ready(() =>{
         $("#btn_refresh").on('click', ()=>{

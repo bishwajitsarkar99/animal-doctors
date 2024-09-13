@@ -155,6 +155,9 @@ table,th,tr,td{
     color: #0056b3 !important;
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
+.upload-group {
+    margin-top: 29px;
+}
 .progress {
     position: relative;
     width: 94%;
@@ -635,6 +638,9 @@ input#flexSwitchCheckDefault {
 }
 input#flexSwitchCheckDefault:hover{
     transform: scale(2);
+}
+td.user_id{
+    opacity: 1;
 }
 button#edtBtn {
     height: 22px;
