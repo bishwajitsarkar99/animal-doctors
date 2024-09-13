@@ -40,16 +40,25 @@
             }
 
             return [...rows].map((row, key) => {
-                let statusColor, statusBg, verifyText;
+                let statusColor, statusBg, verifyText, statusText, statusOnColor, statusOffColor;
                 if(row.status == 0){
                     verifyText = '<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">No verified</span>';
                     statusColor = 'color:black;background-color: #fff;';
                     statusBg = 'badge rounded-pill bg-warn';
                 }
                 else if(row.status == 1){
-                    verifyText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">Verified</span>';
+                    verifyText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">verified</span>';
                     statusColor = 'color:black;background-color: #fff;';
                     statusBg = 'badge rounded-pill bg-azure';
+                }
+
+                if(row.status == 0){
+                    statusText = '<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 8px;">OFF</span>';
+                    statusOffColor = 'color:black;background-color: #fff;';
+                }
+                else if(row.status == 1){
+                    statusText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 8px;">ON</span>';
+                    statusOffColor = 'color:black;background-color: #fff;';
                 }
                 return `
                     <tr class="table-row user-table-row supp-table-row" key="${key}" id="supp_tab">
@@ -69,6 +78,9 @@
                         <td class="tot_complete_ center ps-1" id="user_set9">
                             <span class="form-check form-switch pt-1">
                                 <input class="form-check-input form-label check_permission" type="checkbox" user_id="${row.id}" value="${row.status}" ${row.status? " checked": ''} id="checkStatus">
+                                <span class="permission edit_inventory_table" style="font-size:12px; ${statusOffColor}">
+                                    ${statusText}
+                                </span>
                             </span>
                         </td>
                         <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${formatDate(row.created_at)}</td>
@@ -97,13 +109,32 @@
                 dataType: 'json',
                 data: {
                     query: query,
+                    per_item: perItem
                 },
                 success: function({ email_verifications, links, total }) {
                     $("#user_email_verification_data_table").html(table_rows(email_verifications));
                     
-                    $("#email_verification_users_data_table_paginate").html(paginate_html({ links, total }));
+                    $("#email_verification_users_data_table_paginate").html(paginate_html({ links, total, email_verifications }));
 
                     $('[data-bs-toggle="tooltip"]').tooltip();
+
+                    // Get suggestions for autocomplete
+                    var suggestions = email_verifications.map(function(item) {
+                        return {
+                            label: `ID : ${item.user_id} - Role : ${item.roles.name} - Email : ${item.email}`,
+                            value: item.email,
+                        };
+                    });
+
+                    // Initialize autocomplete
+                    $("#search").autocomplete({
+                        source: suggestions,
+                        classes: {
+                            "ui-autocomplete": "custom-autocomplete",
+                            "ui-menu-item": "custom-menu-item",
+                            "ui-state-active": "custom-state-active"
+                        }
+                    });
                 }
             });
         }
@@ -158,10 +189,45 @@
             var query = $(this).val();
             fetch_users_email_verification_data(query); 
         });
-         // Role Filter
-         $(document).on('keyup', '#search', function(){
+        // Role Filter
+        $(document).on('keyup', '#search', function(){
             var query = $(this).val();
             fetch_users_email_verification_data(query); 
         });
+        // Status Update
+        $("#user_email_verification_data_table").delegate(".check_permission", "click", function(e) {
+
+            const current_url = "{{route('email_update_status.action')}}";
+
+            const pagination_url = $("#email_verification_users_data_table_paginate .active").attr('href');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: current_url,
+                dataType: 'json',
+                data: {
+                    id: $(this).attr('user_id'),
+                    status: $(this).val(),
+                },
+                success: function({
+                    messages
+                }) {
+                    //console.log('messages', messages);
+                    $("#success_message").text(messages.messages);
+                    fetch_users_email_verification_data('', pagination_url);
+                }
+            });
+        });
+        // Refresh
+        $(document).on('click', '#refresh', function(){
+            fetch_users_email_verification_data(); 
+        });
+
     });
 </script>

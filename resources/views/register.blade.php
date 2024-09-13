@@ -211,13 +211,13 @@
                                                         <div class="mb-1 d-grid">
                                                             <button type="submit" class="btn btn-sm btn-primary forget_button register_btn register_action" id="reg_submit">
                                                                 <span class="btn-text">Register</span>
-                                                                <i class="register-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                                <span class="register-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                                             </button>
                                                             <span class="button-skeleton"></span>
                                                         </div>
                                                         <a type="button" class="btn_back skeleton ps-2 pe-2 pb-1" href="/" id="back_login">
                                                             <span class="btn-back-text">Back</span>
-                                                            <i class="back-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                            <span class="back-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                                         </a>
                                                         <span class="button-skeleton"></span>
                                                     </div>

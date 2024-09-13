@@ -91,13 +91,13 @@
                                                     <div class="mb-3 d-grid">
                                                         <button type="submit" class="email_submit btn btn-sm btn-primary forget_button register_btn email_submit" id="email_submit">
                                                             <span class="btn-email-text">Email Verification</span>
-                                                            <i class="verification-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                            <span class="verification-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                                         </button>
                                                     </div>
                                                     <div class="mb-3 d-grid">
                                                         <a type="button" class="btn_back ps-2 pe-2 pb-1" href="/register" id="regist_back">
                                                             <span class="btn-regst-text">Back</span>
-                                                            <i class="regst-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                            <span class="regst-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                                         </a>
                                                     </div>
                                                 </div>

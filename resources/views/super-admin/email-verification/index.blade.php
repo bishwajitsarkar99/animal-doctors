@@ -9,7 +9,7 @@
       </li>
       <li class="nav-item tab-skeletone">
         <button type="button" class="btn btn-sm refresh-btn ripple-surface " id="refresh">
-          <i class="refresh-icon fa fa-solid fa-asterisk fa-spin refrsh-hidden" style="color:white;opacity:1;"></i>
+          <span class="refresh-icon spinner-border spinner-border-sm text-white refrsh-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
           <span class="btn-text ms-1">Refresh</span>
         </button>
       </li>
@@ -22,6 +22,9 @@
   </div>
   <div class="loader-position">
     <img class="server-loader loader-show" id="loaderShow" src="{{asset('/image/loader/loading.gif')}}" alt="Loading...."/>
+  </div>
+  <div class="col-xl-12 action_message">
+    <p class="ps-1"><span id="success_message"></span></p>
   </div>
 @endsection
 
@@ -36,30 +39,20 @@
 @include('super-admin.email-verification.ajax.email_verification_ajax')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<!-- jQuery UI Auto-Complete or Date Picker -->
+<script src="{{asset('backend_asset')}}/support_asset/date-picker/jquery/jquery-ui.min.js"></script>
 <script>
   $(document).ready(function() {
     // Initialize Select2 for all elements with the 'select2' class
     //$('.select2').select2();
     $('.select2').each(function() {
-      // Check the ID or name to set specific options
-      if ($(this).attr('id') === 'verification_select_email') {
-        $(this).select2({
-          placeholder: 'Select Email',
-          allowClear: true
-        });
-      } 
-      else if ($(this).attr('id') === 'verification_select_role') {
+      if ($(this).attr('id') === 'verification_select_role') {
         $(this).select2({
           placeholder: 'Select Role',
           allowClear: true
         });
       }
     });
-    // Set custom placeholder for the search input inside Select2 dropdowns
-    $('#verification_select_email').on('select2:open', function() {
-      $('.select2-search__field').attr('placeholder', 'Search emails...');
-    });
-
     $('#verification_select_role').on('select2:open', function() {
       $('.select2-search__field').attr('placeholder', 'Search roles...');
     });

@@ -89,7 +89,7 @@ class AuthController extends Controller
 
         // Check if the email of the user attempting to log in is verified
         $user_email_verification = EmailVerification::where('email', $request->email)
-        ->where('status', 0)
+        ->where('status', 1)
         ->first();
 
         if (!$user_email_verification) {

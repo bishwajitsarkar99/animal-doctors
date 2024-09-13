@@ -22,7 +22,7 @@
                 <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">Role</th>
                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Email-Verified</th>
                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Account-Create</th>
-                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Status</th>
+                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ col ps-1" style="text-align: left;">Status</th>
                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Update-Email-Verified</th>
             </tr>
             <tbody class="bg-transparent " id="user_email_verification_data_table">

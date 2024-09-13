@@ -167,7 +167,8 @@
                                 <div class="col-md-9 offset-md-3">
                                     <div class="form-group ms-3">
                                         <button id="submit" type="submit" class="btn btn-sm btn-primary login_button button-skeleton">
-                                            <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
+                                            <!-- <i class="loading-icon fa fa-spinner fa-spin hidden"></i> -->
+                                            <span class="loading-icon spinner-border spinner-border-sm text-white hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                             <span class="btn-text">Login</span>
                                         </button>
                                     </div>

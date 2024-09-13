@@ -22,7 +22,7 @@
       </li>
       <li class="nav-item tab-skeletone">
         <button type="button" class="btn btn-sm refresh-btn ripple-surface " id="refresh">
-          <i class="refresh-icon fa fa-solid fa-asterisk fa-spin refrsh-hidden" style="color:white;opacity:1;"></i>
+          <span class="refresh-icon spinner-border spinner-border-sm text-white refrsh-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
           <span class="btn-text ms-1">Refresh</span>
         </button>
       </li>

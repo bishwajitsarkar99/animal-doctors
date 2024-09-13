@@ -58,7 +58,7 @@
                     <div class="mb-2">
                       <div class="button-box mb-1 mt-1">
                         <button id="page_submit" type="submit" class="btn btn-sm submt_button button-skeleton">
-                          <i class="auth-icon fa fa-spinner fa-spin hidden"></i>
+                          <span class="auth-icon spinner-border spinner-border-sm text-white hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                           <span class="btn-text">Permission</span>
                         </button>
                       </div>
@@ -69,7 +69,7 @@
         </div>
     </div>
     <div class="col-xl-12 action_message">
-        <p class="ps-1"><span id="success_message"></span></p>
+      <p class="ps-1"><span id="success_message"></span></p>
     </div>
   </div>
 </div>

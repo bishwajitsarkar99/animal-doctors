@@ -143,7 +143,7 @@
                                                     <div class="mb-3 d-grid">
                                                         <button type="submit" class="btn btn-sm btn-primary forget_button register_btn" id="reset_password">
                                                             <span class="btn-reset-text">Reset Password</span>
-                                                            <i class="reset-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                            <span class="reset-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                                         </button>
                                                     </div>
                                                     <div class="mb-2 d-grid">
@@ -151,7 +151,7 @@
                                                         <span class="mt-3">
                                                             <a class="btn btn-sm btn-primary forget_button ps-2 pe-2 pb-1" href="/" id="user__login">
                                                                 <span class="btn-acc-text">sign in</span>
-                                                                <i class="acc-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                                <span class="acc-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                                             </a>
                                                         </span>
                                                     </div>

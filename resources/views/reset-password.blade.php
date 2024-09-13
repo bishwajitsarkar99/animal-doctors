@@ -133,7 +133,7 @@
                                                     <div class="mb-2 d-grid">
                                                         <button type="submit" class="btn btn-sm btn-primary forget_button register_btn" id="change_Password">
                                                             <span class="btn-change-text">Change Password</span>
-                                                            <i class="change-icon fa fa-spinner fa-spin register-hidden"></i>
+                                                            <span class="change-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                                         </button>
                                                     </div>
                                                 </div>

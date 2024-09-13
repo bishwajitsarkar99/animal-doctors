@@ -287,12 +287,15 @@ class SuperAdminController extends Controller
 
         // Filter
         if ($role) {
-            $query->where('role', 'LIKE', '%' . $query . '%');
+            // $query->where('role', 'LIKE', '%' . $query . '%');
+            $email_verifications->where('role', 'LIKE', '%' . $role . '%');
         }
 
         // Set pagination items per page
-        $perItem = $request->input('per_item', 10);
-
+        $perItem = 10;
+        if($request->input('per_item')){
+            $perItem = $request->input('per_item');
+        }
         // Paginate results
         $email_verifications = $email_verifications->paginate($perItem);
 
@@ -300,7 +303,7 @@ class SuperAdminController extends Controller
         if ($request->expectsJson()) {
             return response()->json([
                 'email_verifications' => $email_verifications->items(),
-                'links' => $email_verifications->links()->render(),
+                'links' => $email_verifications->toArray()['links'],
                 'total' => $email_verifications->total(),
             ]);
         }
@@ -310,9 +313,22 @@ class SuperAdminController extends Controller
     }
 
     // Email Verification Update Manage
-    public function updateEmailStatus()
+    public function updateEmailStatus(Request $request)
     {
-       //
+        $id = (int)$request->input('id');
+        $status = (bool)$request->input('status');
+        $status = !$status;
+
+        $data = EmailVerification::findOrFail($id);
+
+        $data->update([
+            'status' => (int)$status,
+        ]);
+
+        return response()->json([
+            'messages' => 'User Email Verification Status Update Successfully',
+            'code' => 202,
+        ], 202);
     }
     // Auth Page Load -----------------
     public function loadAuthPage(Request $request)
