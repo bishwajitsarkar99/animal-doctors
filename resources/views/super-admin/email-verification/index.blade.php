@@ -48,7 +48,7 @@
     $('.select2').each(function() {
       if ($(this).attr('id') === 'verification_select_role') {
         $(this).select2({
-          placeholder: 'Select Role',
+          placeholder: 'Select User Role.............................',
           allowClear: true
         });
       }

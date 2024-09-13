@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-md-2">
                     <button id="manage_btn" type="submit" class="btn btn-sm manage_button button-skeleton">
-                        <i class="updated-icon fa fa-spinner fa-spin updated-hidden"></i>
+                        <span class="updated-icon spinner-border spinner-border-sm text-white updated-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                         <span class="btn-text">Update Role</span>
                     </button>
                 </div>

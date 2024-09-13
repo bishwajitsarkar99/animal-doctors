@@ -67,7 +67,9 @@
                             ${row.user_id}
                         </td>
                         <td class="border_ord ps-1 supp_vew" id="supp_tab4">${row.name}</td>
-                        <td class="txt_ ps-1 supp_vew2" id="supp_tab5">${row.email} 
+                        <td class="txt_ ps-1 supp_vew2" id="supp_tab5">
+                            <span style="color:gray"><i class="fa fa-envelope"></i></span>
+                            ${row.email} 
                             <span class="${statusBg} permission edit_inventory_table" style="font-size:12px; ${statusColor}">
                                 ${verifyText}
                             </span>

@@ -180,7 +180,8 @@
 
 .select2-container--default .select2-selection--single {
     background-color: #fff;
-    border: 1px solid #aaa;
+    /* border: 1px solid #aaa; */
+    border: 1px solid lightblue;
     border-radius: 4px;
     /* --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35); */

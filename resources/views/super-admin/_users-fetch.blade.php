@@ -119,7 +119,10 @@
                             </ul>
                         </td>
                         <td class="txt_ bold ps-1" id="user_set5">${row.name}</td>
-                        <td class="tot_order_ bold ps-1" id="user_set6">${row.email}</td>
+                        <td class="tot_order_ bold ps-1" id="user_set6">
+                            <span style="color:gray"><i class="fa fa-envelope"></i></span>
+                            ${row.email}
+                        </td>
                         <td class="tot_pending_ bold ps-1" id="user_set7">${row.contract_number}</td>
                         <td class="tot_pending_ bold ps-1 ${row.role? ' text-primary': ' text-cyan'}" id="user_set8">${row.role ==0 ? 'User': 'Superadmin' && row.role ==2 ? 'SubAdmin': 'User' && row.role ==1 ? 'SuperAdmin': 'User' && row.role ==3 ? 'Admin': 'User' && row.role ==5 ? 'Accounts': 'User' && row.role ==6 ? 'Marketing': 'User' && row.role ==7 ? 'Delivery Team': 'User'}</td>
                         <td class="tot_complete_ pill ps-1">

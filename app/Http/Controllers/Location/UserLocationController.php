@@ -15,6 +15,11 @@ class UserLocationController extends Controller
     // User Activity Loaction
     public function details(Request $request)
     {
+        // Get Role
+        $roles = Role::orderBy('id', 'desc')->get();
+        // Get Email
+        $emails = User::orderBy('id', 'desc')->get();
+
         $usersCount = [
             'super_admin' => User::where('role', 1)->count(),
             'admin' => User::where('role', 3)->count(),
@@ -66,7 +71,7 @@ class UserLocationController extends Controller
         }
         
         return view('super-admin.user-details.details', compact('usersCount','total_users','authentic_users','inactive_users','activity_users',
-            'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage')
+            'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage','roles', 'emails')
         );
     }
 
@@ -76,23 +81,52 @@ class UserLocationController extends Controller
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
 
-        $user_activities = SessionModel::whereNotNull('role')->orderBy('id', 'desc')->latest()->with(['roles'])->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+        // Date Request
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        $role = $request->input('role');
+        $email = $request->input('email');
 
+        // Start the query for user activities
+        $user_activities = SessionModel::whereNotNull('role')
+            ->orderBy('id', 'desc')
+            ->with(['roles'])
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+
+        // Apply search query
         if ($query = $request->get('query')) {
-            $user_activities->where('name', 'LIKE', '%' . $query . '%')
+            $user_activities->where(function ($q) use ($query) {
+                $q->where('name', 'LIKE', '%' . $query . '%')
                 ->orWhere('email', 'LIKE', '%' . $query . '%')
                 ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
                 ->orWhere('role', 'LIKE', '%' . $query . '%')
                 ->orWhere('id', 'LIKE', '%' . $query . '%');
+            });
         }
 
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
+        // Apply date range filter
+        if ($start_date && $end_date) {
+            $start = Carbon::parse($start_date)->startOfDay();
+            $end = Carbon::parse($end_date)->endOfDay();
+
+            $user_activities->whereBetween('created_at', [$start, $end]);
         }
+
+        // Apply role filter
+        if ($role) {
+            $user_activities->where('role', $role);
+            // $query->where('user_id', $user_id);
+        }
+
+        // Apply email filter
+        if ($email) {
+            $user_activities->where('email', $email);
+        }
+
+        // Set pagination limit
+        $perItem = $request->input('per_item', 10);
 
         $data = $user_activities->paginate($perItem)->toArray();
-
         return response()->json($data, 200);
     }
 

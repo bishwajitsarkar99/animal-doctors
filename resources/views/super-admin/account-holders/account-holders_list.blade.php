@@ -58,7 +58,7 @@
                                         <td class="txt_  us_td skeleton ps-1">
                                             <label for="name">Name : <span style="font-size:small;letter-spacing:0.5px;">{{$user->name}}</span></label><br>
                                             <label for="email">Email : 
-                                                <span style="font-size:small;letter-spacing:0.5px;">{{$user->email}}</span>
+                                                <span style="font-size:small;letter-spacing:0.5px;"><span style="color:gray"><i class="fa fa-envelope"></i></span> {{$user->email}}</span>
                                                 <span style="font-size:small;letter-spacing:0.5px;">
                                                     @if ($user->email_verified_at != null)
                                                         <span class="badge text-white bg-success" style="letter-spacing: 1px;">Verified</span>

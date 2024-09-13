@@ -64,7 +64,7 @@
                 </div>
                 <div class="modal-footer profile_modal_footer">
                     <button href="#" type="button" class="btn btn-sm modal_button update_btn_confrm" id="userUpdate">
-                        <i class="updated-icon fa fa-spinner fa-spin updated-hidden"></i>
+                        <span class="updated-icon spinner-border spinner-border-sm text-white updated-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                         <span class="btn-text">Update</span>
                     </button>
                     <button type="button" class="btn btn-sm text-warning modal_button cancel_btn" id="editusr9" data-bs-dismiss="modal">Cancel</button>

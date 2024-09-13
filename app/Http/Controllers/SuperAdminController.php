@@ -287,7 +287,6 @@ class SuperAdminController extends Controller
 
         // Filter
         if ($role) {
-            // $query->where('role', 'LIKE', '%' . $query . '%');
             $email_verifications->where('role', 'LIKE', '%' . $role . '%');
         }
 

@@ -85,14 +85,12 @@
         }, 3000);
     });
     // Login Button---------
-    $("#submit").on('click', () =>{
-        $('.loading-icon').removeClass('hidden');
-        $(this).attr('disabled', true);
+    $(".login_button").on('click', () =>{
+        $('.loading-icon').removeAttr('hidden');
         $('.btn-text').text('Login...');
 
         setTimeout(() =>{
-            $('.loading-icon').addClass('hidden');
-            $(this).attr('disabled', false);
+            $('.loading-icon').attr('hidden', true);
             $('.btn-text').text('Login');
         }, 6000);
     });

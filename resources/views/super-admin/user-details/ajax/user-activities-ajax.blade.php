@@ -40,20 +40,36 @@
             }
 
             return [...rows].map((row, key) => {
+                let statusText, statusOffColor;
+                if(row.payload == 'logout'){
+                    statusText = '<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;line-height: .8;letter-spacing: 1px;">logout</span>';
+                    statusOffColor = 'color:black;background-color: #fff;';
+                }
+                else if(row.payload == 'login'){
+                    statusText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;line-height: .8;letter-spacing: 1px;">login</span>';
+                    statusOffColor = 'color:black;background-color: #fff;';
+                }
                 return `
                     <tr class="table-row user-table-row supp-table-row" key="${key}" data-user-id="${row.user_id}" id="supp_tab">
                         <td class="sn border_ord" id="supp_tab2" hidden>${row.id}</td>
-                        <td class="txt_ user-details-links ps-2" id="supp_tab3">
+                        <td class="txt_ user-details-links ps-1" id="supp_tab3">
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-2" id="viewBtn" value="${row.user_id}" style="font-size: 10px;height: 17px;" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="User Agent" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                                ${row.user_id}
+                                ${row.user_id} <span class="toggle-icon">➤</span>
                             </button>
                         </td>
                         <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.roles.name}</td>
                         <td class="border_ord ps-1 supp_vew" id="supp_tab4" hidden>${row.name}</td>
-                        <td class="txt_ ps-1 supp_vew2" id="supp_tab5">${row.email}</td>
+                        <td class="txt_ ps-1 supp_vew2" id="supp_tab5">
+                            <span style="color:gray"><i class="fa fa-envelope"></i></span>
+                            ${row.email}
+                        </td>
                         <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${row.ip_address}</td>
                         <td class="txt_ ps-1 supp_vew5" id="supp_tab8" hidden>${row.user_agent}</td>
-                        <td class="txt_ ps-1 supp_vew6" id="supp_tab9">${row.payload}</td>
+                        <td class="txt_ ps-1 supp_vew6" id="supp_tab9">
+                            <span class="permission edit_inventory_table" style="font-size:12px; ${statusOffColor}">
+                                ${statusText}
+                            </span>
+                        </td>
                         <td class="txt_ ps-1 supp_vew7" id="supp_tab10" hidden>${row.last_activity}</td>
                         <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${formatDate(row.created_at)}</td>
                         <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${formatDate(row.updated_at)}</td>
@@ -63,7 +79,7 @@
                         <td class="txt_ supp_vew9" id="supp_tab12">
                             <img class="user_img rounded-circle user_imgs ms-3" src="${row.image.includes('https://')?row.image: '/image/'+ row.image}">
                         </td>
-                        <td class="txt_ ps-1 supp_vew5" id="supp_tab8" colspan="7" style="color:blue;"><span style="font-weight:600;">User-Agent :</span> ${row.user_agent}</td>
+                        <td class="txt_ ps-1 supp_vew5" id="supp_tab8" colspan="7" style="color:darkgoldenrod;"><span style="font-weight:600;">User-Agent :</span> ${row.user_agent}</td>
                     </tr>
                 `;
             }).join("\n");
@@ -83,12 +99,21 @@
                 current_url += `&per_item=${perItem}`
             }
 
+            var startDate = $('#date_start').val();
+            var endDate = $('#date_end').val();
+            var role = $('#select_role').val();
+            var email = $('#select_email').val();
+
             $.ajax({
                 type: "GET",
                 url: current_url,
                 dataType: 'json',
                 data: {
-                    query: query
+                    query: query,
+                    start_date: startDate,
+                    end_date: endDate,
+                    role: role,
+                    email: email
                 },
                 success: function({
                     data,
@@ -153,11 +178,28 @@
             }
 
         });
+        // Filter
+        $(document).on('change', '#date_start, #date_end, #select_role, #select_email', function () {
+            fetch_activities_users_data('');
+        });
         // User Details View
-        $(document).on('click', '.view_btn', function(e) {
+        $(document).on('click', '.view_btn', function (e) {
             e.preventDefault();
-            var user_id = $(this).val();
-            $('tr.child-row[data-user-id="' + user_id + '"]').toggleClass('hidden');
+            
+            var button = $(this);
+            var user_id = button.val();
+
+            // Toggle the child row visibility
+            var childRows = $('tr.child-row[data-user-id="' + user_id + '"]');
+            childRows.toggleClass('hidden');
+
+            // Change the icon based on visibility
+            var icon = button.find('.toggle-icon');
+            if (childRows.is(':visible')) {
+                icon.html('▼');
+            } else {
+                icon.html('➤');
+            }
         });
     });
 </script>
