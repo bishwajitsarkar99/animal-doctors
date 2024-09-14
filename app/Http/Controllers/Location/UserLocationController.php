@@ -17,8 +17,6 @@ class UserLocationController extends Controller
     {
         // Get Role
         $roles = Role::orderBy('id', 'desc')->get();
-        // Get Email
-        $emails = User::orderBy('id', 'desc')->get();
 
         $usersCount = [
             'super_admin' => User::where('role', 1)->count(),
@@ -71,13 +69,14 @@ class UserLocationController extends Controller
         }
         
         return view('super-admin.user-details.details', compact('usersCount','total_users','authentic_users','inactive_users','activity_users',
-            'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage','roles', 'emails')
+            'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage','roles')
         );
     }
 
     // Get User Activity
     public function getActivity(Request $request)
     {
+        // Default to current month
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
 
@@ -85,13 +84,23 @@ class UserLocationController extends Controller
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
         $role = $request->input('role');
-        $email = $request->input('email');
 
         // Start the query for user activities
         $user_activities = SessionModel::whereNotNull('role')
-            ->orderBy('id', 'desc')
-            ->with(['roles'])
-            ->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+            ->orderBy('user_id', 'desc')
+            ->with(['roles']);
+            
+        // Apply default current month filter if no custom date range provided
+        if (!$start_date || !$end_date) {
+            $user_activities->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+        }
+
+        // Apply date range filter
+        if ($start_date && $end_date) {
+            $start = Carbon::parse($start_date)->startOfDay();
+            $end = Carbon::parse($end_date)->endOfDay();
+            $user_activities->whereBetween('created_at', [$start, $end]);
+        }
 
         // Apply search query
         if ($query = $request->get('query')) {
@@ -100,35 +109,25 @@ class UserLocationController extends Controller
                 ->orWhere('email', 'LIKE', '%' . $query . '%')
                 ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
                 ->orWhere('role', 'LIKE', '%' . $query . '%')
-                ->orWhere('id', 'LIKE', '%' . $query . '%');
+                ->orWhere('user_id', 'LIKE', '%' . $query . '%');
             });
         }
 
-        // Apply date range filter
-        if ($start_date && $end_date) {
-            $start = Carbon::parse($start_date)->startOfDay();
-            $end = Carbon::parse($end_date)->endOfDay();
-
-            $user_activities->whereBetween('created_at', [$start, $end]);
-        }
-
         // Apply role filter
-        if ($role) {
+        if (isset($role)) {
             $user_activities->where('role', $role);
-            // $query->where('user_id', $user_id);
-        }
-
-        // Apply email filter
-        if ($email) {
-            $user_activities->where('email', $email);
         }
 
         // Set pagination limit
         $perItem = $request->input('per_item', 10);
 
+        // Get the final paginated data
         $data = $user_activities->paginate($perItem)->toArray();
+        
         return response()->json($data, 200);
     }
+
+
 
     // Show User Log Details
     public function activity($user_id)

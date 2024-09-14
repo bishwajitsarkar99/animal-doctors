@@ -16,12 +16,7 @@
             </select>
         </div>
         <div class="col-xl-3">
-            <select type="text" class="form-control form-control-sm select2" name="email" id="select_email">
-                <option value="">Select Email</option>
-                @foreach($emails as $item)
-                    <option value="{{$item->id}}">{{ $item->email}}</option>
-                @endforeach
-            </select>
+            <input class="form-control form-control-sm" type="search" name="search" value="" placeholder="search.........." id="search" />
         </div>
     </div>
     <div class="table-responsive">
@@ -33,7 +28,7 @@
                 <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">Email</th>
                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;">IP-Address</th>
                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;" hidden>User Agent</th>
-                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;">User-Mode</th>
+                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Payload</th>
                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;" hidden>Last_activity</th>
                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Login</th>
                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">Logout</th>

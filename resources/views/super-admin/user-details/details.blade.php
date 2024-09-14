@@ -80,18 +80,10 @@
           placeholder: 'Select User Role.............................',
           allowClear: true
         });
-      }else if(($(this).attr('id') === 'select_email')){
-        $(this).select2({
-          placeholder: 'Select User Email.............................',
-          allowClear: true
-        });
       }
     });
     $('#select_role').on('select2:open', function() {
       $('.select2-search__field').attr('placeholder', 'Search roles...');
-    });
-    $('#select_email').on('select2:open', function() {
-      $('.select2-search__field').attr('placeholder', 'Search email...');
     });
   });
 </script>

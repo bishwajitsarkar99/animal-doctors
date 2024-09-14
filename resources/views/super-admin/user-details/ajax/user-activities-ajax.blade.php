@@ -40,14 +40,26 @@
             }
 
             return [...rows].map((row, key) => {
-                let statusText, statusOffColor;
-                if(row.payload == 'logout'){
+                let current_date = new Date();
+                let statusText, statusOffColor, currentLogText, activeTime;
+
+                // Helper function to calculate time difference
+                const getTimeDifference = (startDate) => {
+                    const diffMs = current_date - new Date(startDate);
+                    const diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
+                    const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+                    return `${diffHrs} hrs ${diffMins} mins`;
+                };
+
+                if (row.payload == 'logout') {
                     statusText = '<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;line-height: .8;letter-spacing: 1px;">logout</span>';
                     statusOffColor = 'color:black;background-color: #fff;';
-                }
-                else if(row.payload == 'login'){
+                } else if (row.payload == 'login') {
                     statusText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;line-height: .8;letter-spacing: 1px;">login</span>';
                     statusOffColor = 'color:black;background-color: #fff;';
+                    
+                    // Calculate active time based on login time
+                    activeTime = `<span style="color:blue;font-size:12px;">${getTimeDifference(row.created_at)}<input id="light_focus" type="text" class="light2-focus" readonly></input></span>`;
                 }
                 return `
                     <tr class="table-row user-table-row supp-table-row" key="${key}" data-user-id="${row.user_id}" id="supp_tab">
@@ -61,7 +73,7 @@
                         <td class="border_ord ps-1 supp_vew" id="supp_tab4" hidden>${row.name}</td>
                         <td class="txt_ ps-1 supp_vew2" id="supp_tab5">
                             <span style="color:gray"><i class="fa fa-envelope"></i></span>
-                            ${row.email}
+                            ${row.email} ${activeTime ? activeTime : ''}
                         </td>
                         <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${row.ip_address}</td>
                         <td class="txt_ ps-1 supp_vew5" id="supp_tab8" hidden>${row.user_agent}</td>
@@ -129,6 +141,23 @@
                     $("#total_activites_records").text(total);
                     // Initialize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                    // Get suggestions for autocomplete
+                    var suggestions = data.map(function(item) {
+                        return {
+                            label: `${item.email}`,
+                            value: item.email
+                        };
+                    });
+
+                    // Initialize autocomplete
+                    $("#search").autocomplete({
+                        source: suggestions,
+                        classes: {
+                            "ui-autocomplete": "custom-autocomplete",
+                            "ui-menu-item": "custom-menu-item",
+                            "ui-state-active": "custom-state-active"
+                        }
+                    });
                 }
 
             });
@@ -181,6 +210,10 @@
         // Filter
         $(document).on('change', '#date_start, #date_end, #select_role, #select_email', function () {
             fetch_activities_users_data('');
+        });
+        $(document).on('keyup', '#search', function () {
+            var query = $(this).val();
+            fetch_activities_users_data(query);
         });
         // User Details View
         $(document).on('click', '.view_btn', function (e) {
