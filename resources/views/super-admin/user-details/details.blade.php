@@ -14,9 +14,6 @@
         <a class="nav-link setting home-text" data-bs-toggle="tab" href="#userDetails" id="tabDetails">Activity Graph</a>
       </li>
       <li class="nav-item tab-skeletone">
-        <a class="nav-link setting home-text" href="#" id="tabUserPermission"> User Permission</a>
-      </li>
-      <li class="nav-item tab-skeletone">
         <button type="button" class="btn btn-sm refresh-btn ripple-surface " id="refresh">
           <span class="refresh-icon spinner-border spinner-border-sm text-white refrsh-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
           <span class="btn-text ms-1">Refresh</span>

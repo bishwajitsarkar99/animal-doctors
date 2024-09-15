@@ -76,23 +76,26 @@ class UserLocationController extends Controller
     // Get User Activity
     public function getActivity(Request $request)
     {
-        // Default to current month
-        $startOfMonth = Carbon::now()->startOfMonth();
-        $endOfMonth = Carbon::now()->endOfMonth();
+        // Start of the week on Sunday
+        $startOfWeek = Carbon::now()->startOfWeek(Carbon::SUNDAY);
+        // End of the week on Saturday
+        $endOfWeek = Carbon::now()->endOfWeek(Carbon::SATURDAY);
+
 
         // Date Request
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
-        $role = $request->input('role');
+
+        // Sort field and direction
+        $sort_field = $request->input('sort_field', 'id');
+        $sort_direction = $request->input('sort_direction', 'asc');
 
         // Start the query for user activities
-        $user_activities = SessionModel::whereNotNull('role')
-            ->orderBy('user_id', 'desc')
-            ->with(['roles']);
-            
+        $user_activities = SessionModel::whereNotNull('role')->with(['roles']);
+
         // Apply default current month filter if no custom date range provided
         if (!$start_date || !$end_date) {
-            $user_activities->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+            $user_activities->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
         }
 
         // Apply date range filter
@@ -114,39 +117,40 @@ class UserLocationController extends Controller
         }
 
         // Apply role filter
-        if (isset($role)) {
+        if ($role = $request->input('role')) {
             $user_activities->where('role', $role);
         }
+
+        // Apply sorting based on requested field and direction
+        $user_activities->orderBy($sort_field, $sort_direction);
 
         // Set pagination limit
         $perItem = $request->input('per_item', 10);
 
         // Get the final paginated data
         $data = $user_activities->paginate($perItem)->toArray();
-        
+
         return response()->json($data, 200);
     }
 
-
-
     // Show User Log Details
-    public function activity($user_id)
+    public function activity(Request $request)
     {
-        
-        $users_session = SessionModel::with('roles')->find($user_id);
-        //dd($users_session);
+        // Current User Activities
+        $startOfDay = Carbon::now()->startOfDay();
+        $endOfDay = Carbon::now()->endOfDay();
+        $current_users = SessionModel::whereBetween('created_at', [$startOfDay, $endOfDay])->count();
+        $current_login_users = SessionModel::where('payload', 'login')->OrwhereBetween('created_at', [$startOfDay, $endOfDay])->count();
+        $current_logout_users = SessionModel::where('payload', 'logout')->OrwhereBetween('created_at', [$startOfDay, $endOfDay])->count();
+        $total_current_activity_users = SessionModel::whereNotNull('user_id')->count();
+        $intime_activity_users = $current_login_users + $current_logout_users;
+        // Calculate the percentage of total activity users
+        $activity_users_percentage = $total_current_activity_users > 0 ? ($intime_activity_users / $total_current_activity_users) * 100 : 0;
 
-        if ($users_session) {
-            return response()->json([
-                'status' => 200,
-                'messages' => $users_session,
-                'data' => $users_session
-            ]);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'messages' => 'User is not found!',
-            ]);
-        }
+        return response()->json([
+            'current_users' => $current_users,
+            'current_login_users' => $current_login_users,
+            'current_logout_users' => $current_logout_users,
+        ]);
     }
 }

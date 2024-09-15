@@ -8,6 +8,6 @@ use App\Http\Controllers\Location\UserLocationController;
 // ********** User Activity Loaction Routes *********
 Route::group(['prefix' => 'super-admin', 'middleware' => ['web', 'isSuperAdmin']], function () {
     Route::get('/show-user-details', [UserLocationController::class, 'details'])->name('user.details');
-    Route::get('/show-user-activity/{user_id}', [UserLocationController::class, 'activity'])->name('user.activity');
+    Route::get('/show-user-activity', [UserLocationController::class, 'activity'])->name('user.activity');
     Route::get('/get-user-activity', [UserLocationController::class, 'getActivity'])->name('user.get_activity');
 });

@@ -572,14 +572,14 @@ td.user-details-links{
     color: blue;
 }
 td.user-details-links:hover{
-    background-color: rgb(195 221 195);
+    background-color: rgb(223 255 223);
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     color: white;
     opacity: 1;
 }
 td.background{
-    background-color: rgb(195 221 195);
+    background-color: rgb(223 255 223);
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     color: white;
@@ -730,6 +730,41 @@ input#date_start,input#date_end {
 }
 input#date_start:focus,input#date_end:focus,#search:focus{
     border: 2px solid #3b71ca;
+}
+.light2-focus {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    border: none;
+    outline: none;
+    animation: color2_focus 1s infinite;
+}
+@keyframes color2_focus {
+    0% {
+        background-color: #f1f1f1;
+    }
+    
+    50% {
+        background-color: green;
+    }
+    100% {
+        background-color: lightblue;
+    }
+}
+input::placeholder{
+    color: rgb(194, 194, 194);
+    font-weight: 800;
+}
+select::placeholder{
+    color: rgb(194, 194, 194);
+    font-weight: 800;
+}
+th#th_sort {
+    /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
+    background-image: var(--table-head-color);
+    color: black;
+    font-size: 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 /* ======Reponsive-page======== */
 @media (min-width: 1200px) {

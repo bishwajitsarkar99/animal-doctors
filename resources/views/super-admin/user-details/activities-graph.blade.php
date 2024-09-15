@@ -8,7 +8,7 @@
             <div class="col-xl-6">
                 <div class="row">
                     <div class="col-xl-4">
-                        <span class="login-user-title">Login Users</span>
+                        <span class="login-user-title">Current Login Users</span>
                     </div>
                     <div class="col-xl-6">
                         <div class="progress mt-2" style="height:0.8rem;">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-4">
-                        <span class="login-user-title">Logout Users</span>
+                        <span class="login-user-title">Current Logout Users</span>
                     </div>
                     <div class="col-xl-6">
                         <div class="progress mt-2" style="height:0.8rem;">

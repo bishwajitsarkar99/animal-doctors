@@ -100,30 +100,31 @@ class AuthController extends Controller
         if (Auth::attempt($userCredential)) {
             $route = $this->redirectDash();
 
-            $sessionId = Str::random(40);
-            
             // Get the authenticated user's details
             $user = Auth::user();
 
-            DB::table('sessions')->insert([
-                'id' => $sessionId,
-                'user_id' => $user->id,
-                'ip_address' => $request->ip(),
-                'name' => $user->name,
-                'email' => $user->email,
-                'role' => $user->role ?? '-',
-                'email_verified_at' => $user->email_verified_at,
-                'contract_number' => $user->contract_number ?? '-',
-                'image' => $user->image ?? '-',
-                'status' => $user->status ?? '-',
-                'account_create' => $user->created_at,
-                'account_last_update' => $user->updated_at,
-                'user_agent' => $request->userAgent(),
-                'payload' => 'login',
-                'last_activity' => now()->timestamp,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            if($user){
+                $sessionId = Str::random(40);
+                DB::table('sessions')->insert([
+                    'id' => $sessionId,
+                    'user_id' => $user->id,
+                    'ip_address' => $request->ip(),
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'role' => $user->role ?? '-',
+                    'email_verified_at' => $user->email_verified_at,
+                    'contract_number' => $user->contract_number ?? '-',
+                    'image' => $user->image ?? '-',
+                    'status' => $user->status ?? '-',
+                    'account_create' => $user->created_at,
+                    'account_last_update' => $user->updated_at,
+                    'user_agent' => $request->userAgent(),
+                    'payload' => 'login',
+                    'last_activity' => now()->timestamp,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             session(['session_id' => $sessionId]);
                
