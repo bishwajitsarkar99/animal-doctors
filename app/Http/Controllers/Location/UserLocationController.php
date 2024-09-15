@@ -139,18 +139,49 @@ class UserLocationController extends Controller
         // Current User Activities
         $startOfDay = Carbon::now()->startOfDay();
         $endOfDay = Carbon::now()->endOfDay();
+        
         $current_users = SessionModel::whereBetween('created_at', [$startOfDay, $endOfDay])->count();
-        $current_login_users = SessionModel::where('payload', 'login')->OrwhereBetween('created_at', [$startOfDay, $endOfDay])->count();
-        $current_logout_users = SessionModel::where('payload', 'logout')->OrwhereBetween('created_at', [$startOfDay, $endOfDay])->count();
-        $total_current_activity_users = SessionModel::whereNotNull('user_id')->count();
+        $current_login_users = SessionModel::where('payload', 'login')
+            ->whereBetween('created_at', [$startOfDay, $endOfDay])
+            ->count();
+        $current_logout_users = SessionModel::where('payload', 'logout')
+            ->whereBetween('created_at', [$startOfDay, $endOfDay])
+            ->count();
+        $total_current_activity_users = SessionModel::whereNotNull('user_id')->orWhereBetween('created_at', [$startOfDay, $endOfDay])->count();
+
         $intime_activity_users = $current_login_users + $current_logout_users;
-        // Calculate the percentage of total activity users
-        $activity_users_percentage = $total_current_activity_users > 0 ? ($intime_activity_users / $total_current_activity_users) * 100 : 0;
+        
+        // Calculate the percentage of current total activity users
+        $total_current_users_activities_percentage = $total_current_activity_users > 0 
+            ? ($intime_activity_users / $total_current_activity_users) * 100 
+            : 0;
+        // Calculate the percentage of current login activity users
+        $login_current_users_activities_percentage = $total_current_activity_users > 0 
+            ? ($current_login_users / $total_current_activity_users) * 100 
+            : 0;
+        // Calculate the percentage of current logout activity users
+        $logout_current_users_activities_percentage = $total_current_activity_users > 0 
+            ? ($current_logout_users / $total_current_activity_users) * 100 
+            : 0;
+
+        // Current User per day line chart
+        $current_user_count_per_day = [
+            'login_counts' => SessionModel::whereNotNull('user_id')->orWhere('role', 1)->orWhereBetween('created_at', [$startOfDay, $endOfDay])->count(),
+            'logout_counts' => SessionModel::whereNotNull('user_id')->orWhere('role', 1)->orWhereBetween('created_at', [$startOfDay, $endOfDay])->count(),
+            'current_user_counts' => SessionModel::whereNotNull('user_id')->orWhereBetween('created_at', [$startOfDay, $endOfDay])->count(),
+        ];
 
         return response()->json([
             'current_users' => $current_users,
             'current_login_users' => $current_login_users,
             'current_logout_users' => $current_logout_users,
+            'total_current_users_activities_percentage' => $total_current_users_activities_percentage,
+            'login_current_users_activities_percentage' => $login_current_users_activities_percentage,
+            'logout_current_users_activities_percentage' => $logout_current_users_activities_percentage,
+            // 'current_user_count_per_day' => $current_user_count_per_day,
+            // 'login_counts' => $login_counts,
+            // 'logout_counts' => $logout_counts,
+            // 'current_user_counts' => $current_user_counts,
         ]);
     }
 }
