@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Role;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use DB;
 
 class UserLocationController extends Controller
 {
@@ -136,40 +137,85 @@ class UserLocationController extends Controller
     // Show User Log Details
     public function activity(Request $request)
     {
-        // Current User Activities
+        // Current Month User Activities
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+
+        // Current Week User Activities (last 7 days)
+        $startOfWeek = Carbon::now()->subDays(6)->startOfDay();
+        $endOfWeek = Carbon::now()->endOfDay();
+
+        // Current Day User Activities
         $startOfDay = Carbon::now()->startOfDay();
         $endOfDay = Carbon::now()->endOfDay();
-        
-        $current_users = SessionModel::whereBetween('created_at', [$startOfDay, $endOfDay])->count();
+
+        // Count current users, logins, and logouts
+        $current_users = SessionModel::whereBetween('created_at', [$startOfDay, $endOfDay])
+            ->whereNotNull('user_id')->distinct('user_id')->count('user_id');
+
         $current_login_users = SessionModel::where('payload', 'login')
             ->whereBetween('created_at', [$startOfDay, $endOfDay])
-            ->count();
+            ->whereNotNull('user_id')->distinct('user_id')->count('user_id');
+
         $current_logout_users = SessionModel::where('payload', 'logout')
             ->whereBetween('created_at', [$startOfDay, $endOfDay])
-            ->count();
-        $total_current_activity_users = SessionModel::whereNotNull('user_id')->orWhereBetween('created_at', [$startOfDay, $endOfDay])->count();
+            ->whereNotNull('user_id')->distinct('user_id')->count('user_id');
 
-        $intime_activity_users = $current_login_users + $current_logout_users;
-        
-        // Calculate the percentage of current total activity users
-        $total_current_users_activities_percentage = $total_current_activity_users > 0 
-            ? ($intime_activity_users / $total_current_activity_users) * 100 
-            : 0;
-        // Calculate the percentage of current login activity users
-        $login_current_users_activities_percentage = $total_current_activity_users > 0 
-            ? ($current_login_users / $total_current_activity_users) * 100 
-            : 0;
-        // Calculate the percentage of current logout activity users
-        $logout_current_users_activities_percentage = $total_current_activity_users > 0 
-            ? ($current_logout_users / $total_current_activity_users) * 100 
+        // Authentic users
+        $authentic_users = User::where('status', 0)->count();
+
+        // Calculate percentage values for current activities
+        $total_current_users_activities_percentage = $authentic_users > 0 
+            ? ($current_users / $authentic_users) * 100 
             : 0;
 
-        // Current User per day line chart
-        $current_user_count_per_day = [
-            'login_counts' => SessionModel::whereNotNull('user_id')->orWhere('role', 1)->orWhereBetween('created_at', [$startOfDay, $endOfDay])->count(),
-            'logout_counts' => SessionModel::whereNotNull('user_id')->orWhere('role', 1)->orWhereBetween('created_at', [$startOfDay, $endOfDay])->count(),
-            'current_user_counts' => SessionModel::whereNotNull('user_id')->orWhereBetween('created_at', [$startOfDay, $endOfDay])->count(),
-        ];
+        $login_current_users_activities_percentage = $authentic_users > 0 
+            ? ($current_login_users / $authentic_users) * 100 
+            : 0;
+
+        $logout_current_users_activities_percentage = $authentic_users > 0 
+            ? ($current_logout_users / $authentic_users) * 100 
+            : 0;
+
+        // Group by day for login, logout, and current user counts (weekly data)
+        $login_counts = SessionModel::select(DB::raw('DATE(created_at) as day'), DB::raw('count(*) as count'))
+            ->where('payload', 'login')
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+            ->groupBy('day')
+            ->pluck('count', 'day')
+            ->toArray();
+
+        $logout_counts = SessionModel::select(DB::raw('DATE(created_at) as day'), DB::raw('count(*) as count'))
+            ->where('payload', 'logout')
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+            ->groupBy('day')
+            ->pluck('count', 'day')
+            ->toArray();
+
+        $current_user_counts = SessionModel::whereNotNull('user_id')
+            ->select(DB::raw('DATE(created_at) as day'), DB::raw('COUNT(DISTINCT user_id) as count'))
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+            ->groupBy('day')
+            ->pluck('count', 'day')
+            ->toArray();
+
+        // Prepare array with the last 7 days (Saturday to Friday)
+        $daysOfWeek = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $day = Carbon::now()->subDays($i)->format('Y-m-d');
+            $daysOfWeek[] = $day;
+        }
+
+        // Fill in missing days with 0 counts
+        $login_counts_filled = [];
+        $logout_counts_filled = [];
+        $current_user_counts_filled = [];
+
+        foreach ($daysOfWeek as $day) {
+            $login_counts_filled[] = isset($login_counts[$day]) ? $login_counts[$day] : 0;
+            $logout_counts_filled[] = isset($logout_counts[$day]) ? $logout_counts[$day] : 0;
+            $current_user_counts_filled[] = isset($current_user_counts[$day]) ? $current_user_counts[$day] : 0;
+        }
 
         return response()->json([
             'current_users' => $current_users,
@@ -178,10 +224,15 @@ class UserLocationController extends Controller
             'total_current_users_activities_percentage' => $total_current_users_activities_percentage,
             'login_current_users_activities_percentage' => $login_current_users_activities_percentage,
             'logout_current_users_activities_percentage' => $logout_current_users_activities_percentage,
-            // 'current_user_count_per_day' => $current_user_count_per_day,
-            // 'login_counts' => $login_counts,
-            // 'logout_counts' => $logout_counts,
-            // 'current_user_counts' => $current_user_counts,
+            // Daily user activity data
+            'current_user_count_per_day' => [
+                'login_counts' => $login_counts_filled,
+                'logout_counts' => $logout_counts_filled,
+                'current_user_counts' => $current_user_counts_filled,
+            ],
+            'labels' => $daysOfWeek,  // Return labels as all days of the week
+            'data' => $current_user_counts_filled, // Return the filled counts for current users
         ]);
     }
+
 }

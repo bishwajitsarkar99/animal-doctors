@@ -6,7 +6,7 @@
                 <div class="card-header staticrept ps-2" style="text-align:center;">
                     <span class="card-head-title head-skeletone">
                         <i class="fa-solid fa-layer-group"></i> 
-                        Total Current Users Activities ( Per Day )
+                        Total Current Users Activities ( Per Week )
                     </span>
                     <div class="loader_skeleton" id="loader_orderChart"></div>
                 </div>
@@ -88,120 +88,114 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        // Define x-axis values (labels) for the chart
-        const xValues = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-
         // Initialize the chart
         var ctx = document.getElementById("userDayLogChart").getContext('2d');
-        var userDayLogChart = new Chart(ctx, {
-            type: 'line',  // Line chart
+        
+        userDayLogChart = new Chart(ctx, {
+            type: 'line',
             data: {
-                labels: xValues,
+                labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
                 datasets: [{
                     label: "Login",
-                    data: [], // Initially empty, will be updated with data from server
+                    data: [], // Placeholder for login data
                     borderColor: "darkgreen",
                     borderWidth: 2,
                     fill: false
                 }, {
                     label: "Logout",
-                    data: [],
+                    data: [], // Placeholder for logout data
                     borderColor: "orange",
                     borderWidth: 2,
                     fill: false
                 }, {
-                    label: "Current User",
-                    data: [],
+                    label: "Total Activity Users",
+                    data: [], // Placeholder for current user data
                     borderColor: "blue",
                     borderWidth: 2,
                     fill: false
                 }]
             },
             options: {
-                responsive: true, // Make the chart responsive
+                responsive: true,
                 plugins: {
                     legend: {
-                        display: true, // Show legend
+                        display: true,
                         position: 'top'
                     }
                 },
                 scales: {
                     x: {
                         grid: {
-                            display: true // Show gridlines on the x-axis
+                            display: true
                         }
                     },
                     y: {
                         grid: {
-                            display: true // Show gridlines on the y-axis
+                            display: true
                         },
-                        beginAtZero: true // Start y-axis at 0
+                        beginAtZero: true
                     }
                 }
             }
         });
     });
-
+</script>
+<script>
     // $(document).ready(function() {
-    //     // Define x-axis values (labels) for the chart
-    //     const xValues = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-
     //     // Initialize the chart
-    //     var ctx = document.getElementById("userDayLogChart").getContext('2d');
-    //     new Chart(ctx, {
-    //         type: 'line',  // Line chart
+    //     var ctx = document.getElementById("userMonthLogChart").getContext('2d');
+        
+    //     userMonthLogChart = new Chart(ctx, {
+    //         type: 'line',
     //         data: {
-    //             labels: xValues,
+    //             labels: ['Jan', 'Fub', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     //             datasets: [{
     //                 label: "Login",
-    //                 data: [500, 8000, 2000, 3000, 8000, 4000, 12000],
+    //                 data: [], // Placeholder for login data
     //                 borderColor: "darkgreen",
-    //                 borderWidth: 2,  // Adjust border width for visibility
-    //                 fill: false      // Disable fill to only show lines
+    //                 borderWidth: 2,
+    //                 fill: false
     //             }, {
     //                 label: "Logout",
-    //                 data: [300, 700, 2000, 5000, 6000, 4000, 2000],
+    //                 data: [], // Placeholder for logout data
     //                 borderColor: "orange",
     //                 borderWidth: 2,
     //                 fill: false
     //             }, {
-    //                 label: "Current User",
-    //                 data: [1600, 1700, 1700, 1900, 2000, 2700, 4000],
+    //                 label: "Total Activity Users",
+    //                 data: [], // Placeholder for current user data
     //                 borderColor: "blue",
     //                 borderWidth: 2,
     //                 fill: false
     //             }]
     //         },
     //         options: {
-    //             responsive: true, // Make the chart responsive
+    //             responsive: true,
     //             plugins: {
     //                 legend: {
-    //                     display: true, // Show legend
+    //                     display: true,
     //                     position: 'top'
     //                 }
     //             },
     //             scales: {
     //                 x: {
     //                     grid: {
-    //                         display: true // Show gridlines on the x-axis
+    //                         display: true
     //                     }
     //                 },
     //                 y: {
     //                     grid: {
-    //                         display: true // Show gridlines on the y-axis
+    //                         display: true
     //                     },
-    //                     beginAtZero: true // Start y-axis at 0
+    //                     beginAtZero: true
     //                 }
     //             }
     //         }
     //     });
     // });
-</script>
-<script>
     $(document).ready(function() {
         // Define x-axis values (labels) for the chart
         const xValues = ['Jan', 'Fub', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
         // Initialize the chart
         var ctx = document.getElementById("userMonthLogChart").getContext('2d');
         new Chart(ctx, {
@@ -221,7 +215,7 @@
                     borderWidth: 2,
                     fill: false
                 }, {
-                    label: "Current User",
+                    label: "Total Activity Users",
                     data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 500, 8000, 2000, 3000, 8000],
                     borderColor: "blue",
                     borderWidth: 2,

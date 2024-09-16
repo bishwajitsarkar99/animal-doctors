@@ -65,7 +65,7 @@
             <span class="card card-head-title align-items-center justify-content-center">
                 <span class="align-items-left justify-content-left head-skeletone">
                     <i class="fa-solid fa-layer-group"></i>
-                    Activity Users
+                    Log Activity Of Users
                 </span>
                 <div class="ring-div">
                     <div class="activity-loader cricale-number-skeleton">

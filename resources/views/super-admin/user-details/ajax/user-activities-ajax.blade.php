@@ -164,18 +164,20 @@
                 type: "GET",
                 url: "{{ route('user.activity')}}",
                 dataType: 'json',
-                success: function({
-                    current_users, 
-                    current_login_users, 
-                    current_logout_users, 
-                    total_current_users_activities_percentage,
-                    login_current_users_activities_percentage,
-                    // logout_current_users_activities_percentage,
-                    // current_user_count_per_day,
-                    // login_counts,
-                    // logout_counts,
-                    // current_user_counts,
-                }) {
+                success: function(response){
+                    
+                    const {
+                        current_users, 
+                        current_login_users, 
+                        current_logout_users, 
+                        total_current_users_activities_percentage,
+                        login_current_users_activities_percentage,
+                        logout_current_users_activities_percentage,
+                        current_user_count_per_day,
+                        labels,
+                        data
+                    } = response;
+
                     $("#total_current_activites_records").text(current_users);
                     $("#current_login_activites_records").text(current_login_users);
                     $("#current_logout_activites_records").text(current_logout_users);
@@ -188,13 +190,18 @@
                     // Get the percentage value total current logout activities users
                     var percentage = logout_current_users_activities_percentage.toFixed(2);
                     $("#current_logout_activites_percentage_records").attr("aria-valuenow", percentage).text(percentage + "%");
-                    // Update the chart data
-                    userDayLogChart.data.datasets[0].data = login_counts; // Update Login dataset
-                    userDayLogChart.data.datasets[1].data = logout_counts; // Update Logout dataset
-                    userDayLogChart.data.datasets[2].data = current_user_counts; // Update Current User dataset
+                    // chart with dynamic dat from server
+                    userDayLogChart.data.labels = response.labels; // Set the labels dynamically from the server response
+                    userDayLogChart.data.datasets[0].data = response.data; // Set the data dynamically
+                    // Check if current_user_count_per_day exists and is an object
+                    if (userDayLogChart) {
+                        
+                        userDayLogChart.data.datasets[0].data = current_user_count_per_day.login_counts || [];
+                        userDayLogChart.data.datasets[1].data = current_user_count_per_day.logout_counts || [];
+                        userDayLogChart.data.datasets[2].data = current_user_count_per_day.current_user_counts || [];
 
-                    // Redraw the chart
-                    userDayLogChart.update();
+                        userDayLogChart.update();
+                    }
                     // Initialize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
                 }
