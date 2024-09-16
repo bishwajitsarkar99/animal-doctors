@@ -96,7 +96,7 @@
             data: {
                 labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
                 datasets: [{
-                    label: "Login",
+                    label: "Current Login",
                     data: [], // Placeholder for login data
                     borderColor: "darkgreen",
                     borderWidth: 2,
@@ -141,110 +141,110 @@
     });
 </script>
 <script>
-    // $(document).ready(function() {
-    //     // Initialize the chart
-    //     var ctx = document.getElementById("userMonthLogChart").getContext('2d');
-        
-    //     userMonthLogChart = new Chart(ctx, {
-    //         type: 'line',
-    //         data: {
-    //             labels: ['Jan', 'Fub', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    //             datasets: [{
-    //                 label: "Login",
-    //                 data: [], // Placeholder for login data
-    //                 borderColor: "darkgreen",
-    //                 borderWidth: 2,
-    //                 fill: false
-    //             }, {
-    //                 label: "Logout",
-    //                 data: [], // Placeholder for logout data
-    //                 borderColor: "orange",
-    //                 borderWidth: 2,
-    //                 fill: false
-    //             }, {
-    //                 label: "Total Activity Users",
-    //                 data: [], // Placeholder for current user data
-    //                 borderColor: "blue",
-    //                 borderWidth: 2,
-    //                 fill: false
-    //             }]
-    //         },
-    //         options: {
-    //             responsive: true,
-    //             plugins: {
-    //                 legend: {
-    //                     display: true,
-    //                     position: 'top'
-    //                 }
-    //             },
-    //             scales: {
-    //                 x: {
-    //                     grid: {
-    //                         display: true
-    //                     }
-    //                 },
-    //                 y: {
-    //                     grid: {
-    //                         display: true
-    //                     },
-    //                     beginAtZero: true
-    //                 }
-    //             }
-    //         }
-    //     });
-    // });
     $(document).ready(function() {
-        // Define x-axis values (labels) for the chart
-        const xValues = ['Jan', 'Fub', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         // Initialize the chart
         var ctx = document.getElementById("userMonthLogChart").getContext('2d');
-        new Chart(ctx, {
-            type: 'line',  // Line chart
+        
+        userMonthLogChart = new Chart(ctx, {
+            type: 'line',
             data: {
-                labels: xValues,
+                labels: ['Jan', 'Fub', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
-                    label: "Login",
-                    data: [500, 8000, 2000, 3000, 8000, 4000, 12000, 500, 8000, 2000, 3000, 8000],
+                    label: "Current Login",
+                    data: [], // Placeholder for login data
                     borderColor: "darkgreen",
-                    borderWidth: 2,  // Adjust border width for visibility
-                    fill: false      // Disable fill to only show lines
+                    borderWidth: 2,
+                    fill: false
                 }, {
                     label: "Logout",
-                    data: [300, 700, 2000, 5000, 6000, 4000, 2000, 500, 8000, 2000, 3000, 8000],
+                    data: [], // Placeholder for logout data
                     borderColor: "orange",
                     borderWidth: 2,
                     fill: false
                 }, {
                     label: "Total Activity Users",
-                    data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 500, 8000, 2000, 3000, 8000],
+                    data: [], // Placeholder for current user data
                     borderColor: "blue",
                     borderWidth: 2,
                     fill: false
                 }]
             },
             options: {
-                responsive: true, // Make the chart responsive
+                responsive: true,
                 plugins: {
                     legend: {
-                        display: true, // Show legend
+                        display: true,
                         position: 'top'
                     }
                 },
                 scales: {
                     x: {
                         grid: {
-                            display: true // Show gridlines on the x-axis
+                            display: true
                         }
                     },
                     y: {
                         grid: {
-                            display: true // Show gridlines on the y-axis
+                            display: true
                         },
-                        beginAtZero: true // Start y-axis at 0
+                        beginAtZero: true
                     }
                 }
             }
         });
     });
+    // $(document).ready(function() {
+    //     // Define x-axis values (labels) for the chart
+    //     const xValues = ['Jan', 'Fub', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    //     // Initialize the chart
+    //     var ctx = document.getElementById("userMonthLogChart").getContext('2d');
+    //     new Chart(ctx, {
+    //         type: 'line',  // Line chart
+    //         data: {
+    //             labels: xValues,
+    //             datasets: [{
+    //                 label: "Login",
+    //                 data: [500, 8000, 2000, 3000, 8000, 4000, 12000, 500, 8000, 2000, 3000, 8000],
+    //                 borderColor: "darkgreen",
+    //                 borderWidth: 2,  // Adjust border width for visibility
+    //                 fill: false      // Disable fill to only show lines
+    //             }, {
+    //                 label: "Logout",
+    //                 data: [300, 700, 2000, 5000, 6000, 4000, 2000, 500, 8000, 2000, 3000, 8000],
+    //                 borderColor: "orange",
+    //                 borderWidth: 2,
+    //                 fill: false
+    //             }, {
+    //                 label: "Total Activity Users",
+    //                 data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 500, 8000, 2000, 3000, 8000],
+    //                 borderColor: "blue",
+    //                 borderWidth: 2,
+    //                 fill: false
+    //             }]
+    //         },
+    //         options: {
+    //             responsive: true, // Make the chart responsive
+    //             plugins: {
+    //                 legend: {
+    //                     display: true, // Show legend
+    //                     position: 'top'
+    //                 }
+    //             },
+    //             scales: {
+    //                 x: {
+    //                     grid: {
+    //                         display: true // Show gridlines on the x-axis
+    //                     }
+    //                 },
+    //                 y: {
+    //                     grid: {
+    //                         display: true // Show gridlines on the y-axis
+    //                     },
+    //                     beginAtZero: true // Start y-axis at 0
+    //                 }
+    //             }
+    //         }
+    //     });
+    // });
 </script>
 @endPush

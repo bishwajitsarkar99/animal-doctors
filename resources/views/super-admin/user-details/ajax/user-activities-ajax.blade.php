@@ -175,7 +175,10 @@
                         logout_current_users_activities_percentage,
                         current_user_count_per_day,
                         labels,
-                        data
+                        data,
+                        monthly_user_count_per_day,
+                        labels_monthly,
+                        data_monthly,
                     } = response;
 
                     $("#total_current_activites_records").text(current_users);
@@ -201,6 +204,18 @@
                         userDayLogChart.data.datasets[2].data = current_user_count_per_day.current_user_counts || [];
 
                         userDayLogChart.update();
+                    }
+                    // chart with dynamic dat from server
+                    userMonthLogChart.data.labels_monthly = response.labels_monthly; // Set the labels dynamically from the server response
+                    userMonthLogChart.data.datasets[0].data_monthly = response.data_monthly; // Set the data dynamically
+                    // Check if current_user_count_per_day exists and is an object
+                    if (userMonthLogChart) {
+                        
+                        userMonthLogChart.data.datasets[0].data = monthly_user_count_per_day.login_counts || [];
+                        userMonthLogChart.data.datasets[1].data = monthly_user_count_per_day.logout_counts || [];
+                        userMonthLogChart.data.datasets[2].data = monthly_user_count_per_day.current_user_counts || [];
+
+                        userMonthLogChart.update();
                     }
                     // Initialize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();

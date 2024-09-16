@@ -8,6 +8,7 @@ use App\Models\SessionModel;
 use App\Models\User;
 use App\Models\Role;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Log;
 use DB;
 
@@ -217,6 +218,53 @@ class UserLocationController extends Controller
             $current_user_counts_filled[] = isset($current_user_counts[$day]) ? $current_user_counts[$day] : 0;
         }
 
+        // Monthly user activity data (group by month)
+        $login_counts_monthly = SessionModel::select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
+        ->where('payload', 'login')
+        ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+        ->groupBy('month')
+        ->pluck('count', 'month')
+        ->toArray();
+
+        $logout_counts_monthly = SessionModel::select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
+        ->where('payload', 'logout')
+        ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+        ->groupBy('month')
+        ->pluck('count', 'month')
+        ->toArray();
+
+        $current_user_counts_monthly = SessionModel::whereNotNull('user_id')
+        ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('COUNT(DISTINCT user_id) as count'))
+        ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+        ->groupBy('month')
+        ->pluck('count', 'month')
+        ->toArray();
+
+        // Generate the months for August and September
+        $daysOfMonth = []; // Initialize the array
+
+        $startOfLastMonth = Carbon::now()->subMonth()->startOfMonth(); // Start of August
+        $endOfThisMonth = Carbon::now()->endOfMonth(); // End of September
+
+        // Generate the days for August and September
+        $period = CarbonPeriod::create($startOfLastMonth, '1 day', $endOfThisMonth);
+
+        foreach ($period as $date) {
+            $daysOfMonth[] = $date->format('Y-m-d'); // Fill $daysOfMonth with dates from August and September
+        }
+
+        // Now you can safely use $daysOfMonth in your loops
+
+        $login_counts_monthly_filled = [];
+        $logout_counts_monthly_filled = [];
+        $current_user_counts_monthly_filled = [];
+
+        foreach ($daysOfMonth as $day) {
+            $login_counts_monthly_filled[] = isset($login_counts_monthly[$day]) ? $login_counts_monthly[$day] : 0;
+            $logout_counts_monthly_filled[] = isset($logout_counts_monthly[$day]) ? $logout_counts_monthly[$day] : 0;
+            $current_user_counts_monthly_filled[] = isset($current_user_counts_monthly[$day]) ? $current_user_counts_monthly[$day] : 0;
+        }
+
         return response()->json([
             'current_users' => $current_users,
             'current_login_users' => $current_login_users,
@@ -230,9 +278,31 @@ class UserLocationController extends Controller
                 'logout_counts' => $logout_counts_filled,
                 'current_user_counts' => $current_user_counts_filled,
             ],
-            'labels' => $daysOfWeek,  // Return labels as all days of the week
-            'data' => $current_user_counts_filled, // Return the filled counts for current users
+            'labels' => $daysOfWeek,
+            'data' => $current_user_counts_filled,
+             // Monthly user activity data
+            'monthly_user_count_per_day' => [
+                'login_counts' => $login_counts_monthly_filled,
+                'logout_counts' => $logout_counts_monthly_filled,
+                'current_user_counts' => $current_user_counts_monthly_filled,
+            ],
+            'labels_monthly' => $daysOfMonth,
+            'data_monthly' => $current_user_counts_monthly_filled,
         ]);
     }
+    // private function getUserCounts($role)  {
+        
+    //     $data = [];
+    //     for ($i = 1; $i <= 12; $i++) {
+    //         $data[$i] = $i;
+    //     }
+    //     $year = date("Y"); 
+
+    //     foreach (User::getUserCounts($role) as $key => $user) {
+    //         $month = (int)\str_replace("{$year}-", '', $user->month);
+    //         $data[$month] = $user->user_count;
+    //     }
+    //     return  $data ;
+    // }
 
 }
