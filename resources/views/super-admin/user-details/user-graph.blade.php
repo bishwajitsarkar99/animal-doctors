@@ -223,26 +223,99 @@
 </div>
 @push('scripts')
 <script>
-const xValues = ["Super admin", "Admin", "Sub admin", "Accounts", "Marketing", "Delivery", "General user"];
-const barColors = ["royalblue","royalblue","royalblue","royalblue","royalblue","royalblue","royalblue"];
+    const xValues = ["Super admin", "Admin", "Sub admin", "Accounts", "Marketing", "Delivery", "General user"];
+    const barColors = ["royalblue", "royalblue", "royalblue", "royalblue", "royalblue", "royalblue", "royalblue"];
 
-// Pass the PHP array to JavaScript
-const userCounts = @json(array_values($usersCount));
+    // Pass the PHP array to JavaScript
+    const userCounts = @json(array_values($usersCount));
 
-new Chart("userChart", {
-  type: "bar",
-  data: {
-    labels: xValues,
-    datasets: [{
-    data: userCounts,
-      borderColor: "red",
-      backgroundColor: barColors,
-      fill: false
-    }]
-  },
-  options: {
-    legend: {display: false}
-  }
-});
+    const userChart = new Chart("userChart", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+            data: userCounts,
+            backgroundColor: barColors,    // Set initial bar color
+            borderColor: "rgba(0, 0, 0, 0.1)",  // Border around bars
+            borderWidth: 1,                // Border width
+            hoverBackgroundColor: "orange",  // Change color on hover
+            hoverBorderColor: "red",         // Change border color on hover
+            hoverBorderWidth: 3              // Increase border width on hover
+            }]
+        },
+        options: {
+            responsive: true,
+            legend: { display: false },  // Hide legend (since we only have one dataset)
+            scales: {
+            y: {
+                beginAtZero: true,       // Start Y-axis from zero
+                grid: {
+                color: 'rgba(0, 0, 0, 0.1)',  // Customize grid line color
+                },
+                ticks: {
+                color: '#333',          // Customize tick color
+                font: {
+                    size: 12,
+                    weight: 'bold'
+                }
+                }
+            },
+            x: {
+                grid: {
+                display: false          // Hide grid lines on X-axis
+                },
+                ticks: {
+                color: '#333',          // Customize X-axis labels
+                font: {
+                    size: 12,
+                    weight: 'bold'
+                }
+                }
+            }
+            },
+            animation: {
+            duration: 2000,            // Set animation duration (2 seconds)
+            easing: 'easeInOutBounce', // Use easing function for smooth animation
+            }
+        }
+    });
+
+    // Set initial state for each dataset
+    let datasetGrowthStates = userChart.data.datasets.map(() => ({
+        growing: Math.random() > 0.5, // Randomize initial growth direction
+        borderWidth: 1 // Initial border width for each dataset
+    }));
+
+    let step = 0.2; // How much the border width changes per frame
+    let minWidth = 1; // Minimum border width
+    let maxWidth = 5; // Maximum border width
+
+    function animateBorder() {
+        userChart.data.datasets.forEach((dataset, index) => {
+            let growthState = datasetGrowthStates[index]; // Get the state for this dataset
+
+            if (growthState.growing) {
+                growthState.borderWidth += step; // Increase border width
+                if (growthState.borderWidth >= maxWidth) {
+                    growthState.growing = false; // Switch to shrinking when max width is reached
+                }
+            } else {
+                growthState.borderWidth -= step; // Decrease border width
+                if (growthState.borderWidth <= minWidth) {
+                    growthState.growing = true; // Switch to growing when min width is reached
+                }
+            }
+
+            dataset.borderWidth = growthState.borderWidth; // Apply the updated border width
+        });
+
+        userChart.update('none'); // Update the chart without triggering a full re-render
+
+        requestAnimationFrame(animateBorder); // Recursively call the function for infinite animation
+    }
+
+    // Start the border animation loop
+    animateBorder();
+
 </script>
 @endPush

@@ -156,11 +156,11 @@ class UserLocationController extends Controller
 
         $current_login_users = SessionModel::where('payload', 'login')
             ->whereBetween('created_at', [$startOfDay, $endOfDay])
-            ->whereNotNull('user_id')->distinct('user_id')->count('user_id');
+            ->whereNotNull('user_id')->count();
 
         $current_logout_users = SessionModel::where('payload', 'logout')
             ->whereBetween('created_at', [$startOfDay, $endOfDay])
-            ->whereNotNull('user_id')->distinct('user_id')->count('user_id');
+            ->whereNotNull('user_id')->count();
 
         // Authentic users
         $authentic_users = User::where('status', 0)->count();
@@ -199,7 +199,7 @@ class UserLocationController extends Controller
             ->groupBy('day')
             ->pluck('count', 'day')
             ->toArray();
-
+        
         // Prepare array with the last 7 days (Saturday to Friday)
         $daysOfWeek = [];
         for ($i = 6; $i >= 0; $i--) {
@@ -219,52 +219,42 @@ class UserLocationController extends Controller
         }
 
         // Monthly user activity data (group by month)
-        $login_counts_monthly = SessionModel::select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
+        $login_counts_monthly = SessionModel::whereNotNull('user_id')
+        ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
         ->where('payload', 'login')
-        ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
         ->groupBy('month')
         ->pluck('count', 'month')
         ->toArray();
-
-        $logout_counts_monthly = SessionModel::select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
+        
+        $logout_counts_monthly = SessionModel::whereNotNull('user_id')
+        ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
         ->where('payload', 'logout')
-        ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
         ->groupBy('month')
         ->pluck('count', 'month')
         ->toArray();
-
+        
         $current_user_counts_monthly = SessionModel::whereNotNull('user_id')
         ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('COUNT(DISTINCT user_id) as count'))
-        ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
         ->groupBy('month')
         ->pluck('count', 'month')
         ->toArray();
 
-        // Generate the months for August and September
-        $daysOfMonth = []; // Initialize the array
-
-        $startOfLastMonth = Carbon::now()->subMonth()->startOfMonth(); // Start of August
-        $endOfThisMonth = Carbon::now()->endOfMonth(); // End of September
-
-        // Generate the days for August and September
-        $period = CarbonPeriod::create($startOfLastMonth, '1 day', $endOfThisMonth);
-
-        foreach ($period as $date) {
-            $daysOfMonth[] = $date->format('Y-m-d'); // Fill $daysOfMonth with dates from August and September
-        }
-
-        // Now you can safely use $daysOfMonth in your loops
-
+        // Initialize an array for 12 months (Jan to Dec) with zeros
+        $data = array_fill(1, 12, 0);
+        $year = date("Y");
+        // Fill monthly data with login, logout, and user counts
         $login_counts_monthly_filled = [];
         $logout_counts_monthly_filled = [];
         $current_user_counts_monthly_filled = [];
 
-        foreach ($daysOfMonth as $day) {
-            $login_counts_monthly_filled[] = isset($login_counts_monthly[$day]) ? $login_counts_monthly[$day] : 0;
-            $logout_counts_monthly_filled[] = isset($logout_counts_monthly[$day]) ? $logout_counts_monthly[$day] : 0;
-            $current_user_counts_monthly_filled[] = isset($current_user_counts_monthly[$day]) ? $current_user_counts_monthly[$day] : 0;
-        }
+        for ($month = 1; $month <= 12; $month++) {
+            $formattedMonth = sprintf('%s-%02d', $year, $month); // Format as 'YYYY-MM'
 
+            $login_counts_monthly_filled[] = isset($login_counts_monthly[$formattedMonth]) ? $login_counts_monthly[$formattedMonth] : 0;
+            $logout_counts_monthly_filled[] = isset($logout_counts_monthly[$formattedMonth]) ? $logout_counts_monthly[$formattedMonth] : 0;
+            $current_user_counts_monthly_filled[] = isset($current_user_counts_monthly[$formattedMonth]) ? $current_user_counts_monthly[$formattedMonth] : 0;
+        }
+        //dd($current_user_counts_monthly_filled, $login_counts_monthly_filled, $logout_counts_monthly_filled);
         return response()->json([
             'current_users' => $current_users,
             'current_login_users' => $current_login_users,
@@ -280,29 +270,26 @@ class UserLocationController extends Controller
             ],
             'labels' => $daysOfWeek,
             'data' => $current_user_counts_filled,
-             // Monthly user activity data
+            // Monthly user activity data
             'monthly_user_count_per_day' => [
                 'login_counts' => $login_counts_monthly_filled,
                 'logout_counts' => $logout_counts_monthly_filled,
                 'current_user_counts' => $current_user_counts_monthly_filled,
             ],
-            'labels_monthly' => $daysOfMonth,
-            'data_monthly' => $current_user_counts_monthly_filled,
         ]);
     }
-    // private function getUserCounts($role)  {
+    private function getUserCounts($role)  {
         
-    //     $data = [];
-    //     for ($i = 1; $i <= 12; $i++) {
-    //         $data[$i] = $i;
-    //     }
-    //     $year = date("Y"); 
+        $data = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $data[$i] = $i;
+        }
+        $year = date("Y"); 
 
-    //     foreach (User::getUserCounts($role) as $key => $user) {
-    //         $month = (int)\str_replace("{$year}-", '', $user->month);
-    //         $data[$month] = $user->user_count;
-    //     }
-    //     return  $data ;
-    // }
-
+        foreach (User::getUserCounts($role) as $key => $user) {
+            $month = (int)\str_replace("{$year}-", '', $user->month);
+            $data[$month] = $user->user_count;
+        }
+        return  $data ;
+    }
 }

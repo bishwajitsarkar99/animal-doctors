@@ -177,13 +177,12 @@
                         labels,
                         data,
                         monthly_user_count_per_day,
-                        labels_monthly,
-                        data_monthly,
                     } = response;
 
                     $("#total_current_activites_records").text(current_users);
                     $("#current_login_activites_records").text(current_login_users);
                     $("#current_logout_activites_records").text(current_logout_users);
+                    
                     // Get the percentage value total current activities users
                     var percentage = total_current_users_activities_percentage.toFixed(2);
                     $("#current_total_activites_percentage_records").attr("aria-valuenow", percentage).text(percentage + "%"); 
@@ -205,9 +204,6 @@
 
                         userDayLogChart.update();
                     }
-                    // chart with dynamic dat from server
-                    userMonthLogChart.data.labels_monthly = response.labels_monthly; // Set the labels dynamically from the server response
-                    userMonthLogChart.data.datasets[0].data_monthly = response.data_monthly; // Set the data dynamically
                     // Check if current_user_count_per_day exists and is an object
                     if (userMonthLogChart) {
                         

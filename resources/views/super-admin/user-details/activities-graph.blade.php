@@ -27,7 +27,7 @@
             <div class="col-xl-12">
                 <div class="row">
                     <div class="col-xl-4">
-                        <span class="login-user-title">Current Login Users</span>
+                        <span class="login-user-title ps-4">Total Current Login Users</span>
                     </div>
                     <div class="col-xl-6">
                         <div class="progress mt-2" style="height:0.8rem;">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-4">
-                        <span class="login-user-title">Current Logout Users</span>
+                        <span class="login-user-title ps-4">Total Current Logout Activity</span>
                     </div>
                     <div class="col-xl-6">
                         <div class="progress mt-2" style="height:0.8rem;">
@@ -64,7 +64,7 @@
                 <div class="row">
                     <div class="col-xl-4">
                         <span class="tot_summ" id="num_plate">
-                            <label class="login-user-title" for="tot_cagt"> Total Activity Users</label>
+                            <label class="login-user-title ps-4" for="tot_cagt"> Total Current Activity Users</label>
                         </span>
                     </div>
                     <div class="col-xl-6">
@@ -83,6 +83,15 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <p>
+                    <div class="users-activities">
+                        <span id="current_user_activites_records"></span>
+                    </div>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 @push('scripts')
@@ -90,29 +99,60 @@
     $(document).ready(function() {
         // Initialize the chart
         var ctx = document.getElementById("userDayLogChart").getContext('2d');
-        
+
+        // Create gradient for each dataset line
+        var gradientLogin = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientLogin.addColorStop(0, 'rgba(34, 139, 34, 0.5)');  // darkgreen at top
+        gradientLogin.addColorStop(1, 'rgba(34, 139, 34, 0)');    // transparent at bottom
+
+        var gradientLogout = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientLogout.addColorStop(0, 'rgba(255, 165, 0, 0.5)');  // orange at top
+        gradientLogout.addColorStop(1, 'rgba(255, 165, 0, 0)');    // transparent at bottom
+
+        var gradientUsers = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientUsers.addColorStop(0, 'rgba(0, 0, 255, 0.5)');  // blue at top
+        gradientUsers.addColorStop(1, 'rgba(0, 0, 255, 0)');    // transparent at bottom
+
         userDayLogChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
                 datasets: [{
                     label: "Current Login",
-                    data: [], // Placeholder for login data
+                    data: [], // Placeholder for Current login data
                     borderColor: "darkgreen",
-                    borderWidth: 2,
-                    fill: false
+                    backgroundColor: gradientLogin,  // Apply gradient
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointStyle: 'rectRounded',
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: "darkgreen",
                 }, {
-                    label: "Logout",
-                    data: [], // Placeholder for logout data
+                    label: "Current Logout Activity",
+                    data: [], // Placeholder for Current Logout Activity data
                     borderColor: "orange",
-                    borderWidth: 2,
-                    fill: false
+                    backgroundColor: gradientLogout,  // Apply gradient
+                    borderWidth: 3,
+                    fill: true, 
+                    tension: 0.4,
+                    pointStyle: 'triangle',
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: "orange",
                 }, {
-                    label: "Total Activity Users",
-                    data: [], // Placeholder for current user data
+                    label: "Current Activity Users",
+                    data: [], // Placeholder for Current Activity Users data
                     borderColor: "blue",
-                    borderWidth: 2,
-                    fill: false
+                    backgroundColor: gradientUsers,  // Apply gradient
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointStyle: 'circle',
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: "blue",
                 }]
             },
             options: {
@@ -120,53 +160,158 @@
                 plugins: {
                     legend: {
                         display: true,
-                        position: 'top'
+                        position: 'top',
+                        labels: {
+                            color: '#333',
+                            font: {
+                                size: 14,
+                            }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        titleFont: { size: 16 },
+                        bodyFont: { size: 14 },
                     }
                 },
                 scales: {
                     x: {
                         grid: {
-                            display: true
+                            display: true,
+                            color: 'rgba(0, 0, 0, 0.1)',
+                        },
+                        ticks: {
+                            color: '#333',
+                            font: {
+                                size: 12, 
+                                family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                                weight: 'bold',
+                            }
                         }
                     },
                     y: {
                         grid: {
-                            display: true
+                            display: true,
+                            color: 'rgba(0, 0, 0, 0.1)',
                         },
-                        beginAtZero: true
+                        ticks: {
+                            beginAtZero: true,
+                            color: '#333',
+                            font: {
+                                size: 12, 
+                                family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                                weight: 'bold',
+                            }
+                        }
                     }
+                },
+                animation: {
+                    duration: 1500, // Animation duration
+                    easing: 'easeInOutBounce' // Type of animation easing
                 }
             }
         });
+
+        // Set initial state for each dataset
+        let datasetGrowthStates = userDayLogChart.data.datasets.map(() => ({
+            growing: Math.random() > 0.5,  // Randomize initial growth direction
+            borderWidth: 1                // Initial border width for each dataset
+        }));
+
+        let step = 0.2;   // How much the border width changes per frame
+        let minWidth = 1; // Minimum border width
+        let maxWidth = 5; // Maximum border width
+
+        function animateBorder() {
+            userDayLogChart.data.datasets.forEach((dataset, index) => {
+                let growthState = datasetGrowthStates[index];  // Get the state for this dataset
+
+                if (growthState.growing) {
+                    growthState.borderWidth += step;  // Increase border width
+                    if (growthState.borderWidth >= maxWidth) {
+                        growthState.growing = false;  // Switch to shrinking when max width is reached
+                    }
+                } else {
+                    growthState.borderWidth -= step;  // Decrease border width
+                    if (growthState.borderWidth <= minWidth) {
+                        growthState.growing = true;   // Switch to growing when min width is reached
+                    }
+                }
+
+                dataset.borderWidth = growthState.borderWidth;  // Apply the updated border width
+            });
+
+            userDayLogChart.update('none');  // Update the chart without triggering a full re-render
+
+            requestAnimationFrame(animateBorder);  // Recursively call the function for infinite animation
+        }
+
+        // Start the border animation loop
+        animateBorder();
+
     });
 </script>
 <script>
     $(document).ready(function() {
         // Initialize the chart
         var ctx = document.getElementById("userMonthLogChart").getContext('2d');
-        
+
+        // Create gradient for each dataset line
+        var gradientLogin = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientLogin.addColorStop(0, 'rgba(34, 139, 34, 0.5)');  // darkgreen at top
+        gradientLogin.addColorStop(1, 'rgba(34, 139, 34, 0)');    // transparent at bottom
+
+        var gradientLogout = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientLogout.addColorStop(0, 'rgba(255, 165, 0, 0.5)');  // orange at top
+        gradientLogout.addColorStop(1, 'rgba(255, 165, 0, 0)');    // transparent at bottom
+
+        var gradientUsers = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientUsers.addColorStop(0, 'rgba(0, 0, 255, 0.5)');  // blue at top
+        gradientUsers.addColorStop(1, 'rgba(0, 0, 255, 0)');    // transparent at bottom
+
         userMonthLogChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Jan', 'Fub', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
                     label: "Current Login",
-                    data: [], // Placeholder for login data
+                    data: [], // Placeholder for Current login data
                     borderColor: "darkgreen",
-                    borderWidth: 2,
-                    fill: false
+                    backgroundColor: gradientLogin,  // Apply gradient background
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointStyle: 'rectRounded',
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: "darkgreen",
                 }, {
-                    label: "Logout",
-                    data: [], // Placeholder for logout data
+                    label: "Current Logout Activity",
+                    data: [], // Placeholder for Current Logout Activity data
                     borderColor: "orange",
-                    borderWidth: 2,
-                    fill: false
+                    backgroundColor: gradientLogout,  // Apply gradient background
+                    borderWidth: 3,
+                    fill: true, 
+                    tension: 0.4,
+                    pointStyle: 'triangle',
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: "orange",
                 }, {
-                    label: "Total Activity Users",
+                    label: "Current Activity Users",
                     data: [], // Placeholder for current user data
                     borderColor: "blue",
-                    borderWidth: 2,
-                    fill: false
+                    backgroundColor: gradientUsers,  // Apply gradient background
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointStyle: 'circle',
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: "blue",
                 }]
             },
             options: {
@@ -174,77 +319,61 @@
                 plugins: {
                     legend: {
                         display: true,
-                        position: 'top'
+                        position: 'top',
+                        labels: {
+                            color: '#333',
+                            font: {
+                                size: 14,
+                            }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        titleFont: { size: 16 },
+                        bodyFont: { size: 14 },
                     }
                 },
                 scales: {
                     x: {
                         grid: {
-                            display: true
+                            display: true,
+                            color: 'rgba(0, 0, 0, 0.1)', // Grid color
+                        },
+                        ticks: {
+                            color: '#333',  // X-axis label color
+                            font: {
+                                size: 12, 
+                                family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                                weight: 'bold',
+                            }
                         }
                     },
                     y: {
                         grid: {
-                            display: true
+                            display: true,
+                            color: 'rgba(0, 0, 0, 0.1)', // Grid color
                         },
-                        beginAtZero: true
+                        ticks: {
+                            beginAtZero: true,
+                            color: '#333',  // Y-axis label color
+                            font: {
+                                size: 12, 
+                                family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                                weight: 'bold',
+                            }
+                        }
                     }
+                },
+                animation: {
+                    duration: 1500, // Animation duration
+                    easing: 'easeInOutBounce', // Type of animation easing
                 }
             }
         });
+
     });
-    // $(document).ready(function() {
-    //     // Define x-axis values (labels) for the chart
-    //     const xValues = ['Jan', 'Fub', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    //     // Initialize the chart
-    //     var ctx = document.getElementById("userMonthLogChart").getContext('2d');
-    //     new Chart(ctx, {
-    //         type: 'line',  // Line chart
-    //         data: {
-    //             labels: xValues,
-    //             datasets: [{
-    //                 label: "Login",
-    //                 data: [500, 8000, 2000, 3000, 8000, 4000, 12000, 500, 8000, 2000, 3000, 8000],
-    //                 borderColor: "darkgreen",
-    //                 borderWidth: 2,  // Adjust border width for visibility
-    //                 fill: false      // Disable fill to only show lines
-    //             }, {
-    //                 label: "Logout",
-    //                 data: [300, 700, 2000, 5000, 6000, 4000, 2000, 500, 8000, 2000, 3000, 8000],
-    //                 borderColor: "orange",
-    //                 borderWidth: 2,
-    //                 fill: false
-    //             }, {
-    //                 label: "Total Activity Users",
-    //                 data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 500, 8000, 2000, 3000, 8000],
-    //                 borderColor: "blue",
-    //                 borderWidth: 2,
-    //                 fill: false
-    //             }]
-    //         },
-    //         options: {
-    //             responsive: true, // Make the chart responsive
-    //             plugins: {
-    //                 legend: {
-    //                     display: true, // Show legend
-    //                     position: 'top'
-    //                 }
-    //             },
-    //             scales: {
-    //                 x: {
-    //                     grid: {
-    //                         display: true // Show gridlines on the x-axis
-    //                     }
-    //                 },
-    //                 y: {
-    //                     grid: {
-    //                         display: true // Show gridlines on the y-axis
-    //                     },
-    //                     beginAtZero: true // Start y-axis at 0
-    //                 }
-    //             }
-    //         }
-    //     });
-    // });
 </script>
 @endPush
