@@ -217,41 +217,39 @@
 
         // Set initial state for each dataset
         let datasetGrowthStates = userDayLogChart.data.datasets.map(() => ({
-            growing: Math.random() > 0.5,  // Randomize initial growth direction
-            borderWidth: 1                // Initial border width for each dataset
+            growing: Math.random() > 0.5,
+            borderWidth: 2
         }));
 
-        let step = 0.2;   // How much the border width changes per frame
-        let minWidth = 1; // Minimum border width
-        let maxWidth = 5; // Maximum border width
+        let step = 0.1;
+        let minWidth = 1;
+        let maxWidth = 4;
 
         function animateBorder() {
             userDayLogChart.data.datasets.forEach((dataset, index) => {
-                let growthState = datasetGrowthStates[index];  // Get the state for this dataset
+                let growthState = datasetGrowthStates[index];
 
                 if (growthState.growing) {
-                    growthState.borderWidth += step;  // Increase border width
+                    growthState.borderWidth += step;
                     if (growthState.borderWidth >= maxWidth) {
-                        growthState.growing = false;  // Switch to shrinking when max width is reached
+                        growthState.growing = false;
                     }
                 } else {
-                    growthState.borderWidth -= step;  // Decrease border width
+                    growthState.borderWidth -= step;
                     if (growthState.borderWidth <= minWidth) {
-                        growthState.growing = true;   // Switch to growing when min width is reached
+                        growthState.growing = true;
                     }
                 }
 
-                dataset.borderWidth = growthState.borderWidth;  // Apply the updated border width
+                dataset.borderWidth = growthState.borderWidth;
             });
 
-            userDayLogChart.update('none');  // Update the chart without triggering a full re-render
+            userDayLogChart.update('none');
 
-            requestAnimationFrame(animateBorder);  // Recursively call the function for infinite animation
+            requestAnimationFrame(animateBorder);
         }
-
         // Start the border animation loop
         animateBorder();
-
     });
 </script>
 <script>
@@ -280,7 +278,7 @@
                     label: "Current Login",
                     data: [], // Placeholder for Current login data
                     borderColor: "darkgreen",
-                    backgroundColor: gradientLogin,  // Apply gradient background
+                    backgroundColor: gradientLogin,
                     borderWidth: 3,
                     fill: true,
                     tension: 0.4,
@@ -292,7 +290,7 @@
                     label: "Current Logout Activity",
                     data: [], // Placeholder for Current Logout Activity data
                     borderColor: "orange",
-                    backgroundColor: gradientLogout,  // Apply gradient background
+                    backgroundColor: gradientLogout,
                     borderWidth: 3,
                     fill: true, 
                     tension: 0.4,
@@ -304,7 +302,7 @@
                     label: "Current Activity Users",
                     data: [], // Placeholder for current user data
                     borderColor: "blue",
-                    backgroundColor: gradientUsers,  // Apply gradient background
+                    backgroundColor: gradientUsers,
                     borderWidth: 3,
                     fill: true,
                     tension: 0.4,
@@ -368,8 +366,8 @@
                     }
                 },
                 animation: {
-                    duration: 1500, // Animation duration
-                    easing: 'easeInOutBounce', // Type of animation easing
+                    duration: 1500,
+                    easing: 'easeInOutBounce',
                 }
             }
         });

@@ -20,6 +20,9 @@ class UserLocationController extends Controller
         // Get Role
         $roles = Role::orderBy('id', 'desc')->get();
 
+        // Define the start and end of the current month
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
         $usersCount = [
             'super_admin' => User::where('role', 1)->count(),
             'admin' => User::where('role', 3)->count(),
@@ -28,6 +31,10 @@ class UserLocationController extends Controller
             'marketing' => User::where('role', 6)->count(),
             'delivery_team' => User::where('role', 7)->count(),
             'users' => User::where('role', 0)->count(),
+            'inactive_users' => User::where('status', 1)->count(),
+            'active_users' => User::where('status', 0)->count(),
+            'total_users' => User::count(),
+            'users_log_activity' => SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count(),
         ];
 
         $total_users = User::count();
@@ -277,19 +284,5 @@ class UserLocationController extends Controller
                 'current_user_counts' => $current_user_counts_monthly_filled,
             ],
         ]);
-    }
-    private function getUserCounts($role)  {
-        
-        $data = [];
-        for ($i = 1; $i <= 12; $i++) {
-            $data[$i] = $i;
-        }
-        $year = date("Y"); 
-
-        foreach (User::getUserCounts($role) as $key => $user) {
-            $month = (int)\str_replace("{$year}-", '', $user->month);
-            $data[$month] = $user->user_count;
-        }
-        return  $data ;
     }
 }
