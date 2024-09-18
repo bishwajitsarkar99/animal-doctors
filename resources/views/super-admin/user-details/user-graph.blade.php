@@ -215,7 +215,7 @@
                 </span>
                 <div class="loader_skeleton" id="loader_orderChart"></div>
             </div>
-            <div class="card card-body third-card body-skeletone">
+            <div class="card card-body third-card body-skeletone user-activities--month-chart">
                 <canvas id="userChart" width="100%" height="35"></canvas>
             </div>
         </div>

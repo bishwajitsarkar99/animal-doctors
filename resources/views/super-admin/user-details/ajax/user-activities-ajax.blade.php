@@ -89,15 +89,19 @@
                     lastActivity = `<span>${row.last_activity}</span>`;
                     tdPadding = ` style="padding-top:2px;padding-bottom:2px;" `;
                     // Calculate active time based on logout time
-                    activeTime = `<span style="color:orangered;font-size:12px;">${getTimeDifference(row.updated_at)}</span>`;
+                    activeTime = `<span style="color:#686868;font-size:10px;">${getTimeDifference(row.updated_at)} ago</span>`;
                 } else if (row.payload == 'login') {
                     statusText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 11px;letter-spacing: 1px;">login</span>';
                     statusOffColor = 'color:black;background-color: #fff;';
-                    updateDate = `<span style="text-align:center;font-weight:800;padding-left:30px;"> - </span>`;
-                    lastActivity = `<span style="text-align:center;font-weight:800;padding-left:30px;"> - </span>`;
+                    updateDate = `<span style="text-align:center;font-weight:800;padding-left:70px;"> - </span>`;
+                    lastActivity = `<span class="animated" style="color:blue;">Running
+                        <input id="light_focus" type="text" class="lightA-focus" readonly></input>
+                        <input id="light_focus" type="text" class="lightB-focus" readonly></input>
+                        <input id="light_focus" type="text" class="lightC-focus" readonly></input>
+                    </span>`;
                     tdPadding = ` style="padding-top:2px;padding-bottom:2px;" `;
                     // Calculate active time based on login time
-                    activeTime = `<span style="color:blue;font-size:12px;">${getTimeDifference(row.created_at)}<input id="light_focus" type="text" class="light2-focus ms-1" readonly></input></span>`;
+                    activeTime = `<span style="color:blue;font-size:10px;">${getTimeDifference(row.created_at)} <input id="light_focus" type="text" class="light2-focus ms-1" readonly></input></span>`;
                 }
                 return `
                     <tr class="table-row user-table-row supp-table-row" key="${key}" data-user-id="${row.last_activity}" id="supp_tab">
@@ -115,9 +119,9 @@
                             <span style="color:gray"><i class="fa fa-envelope"></i></span>
                             ${row.email} ${activeTime ? activeTime : ''}
                         </td>
-                        <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${row.ip_address}</td>
+                        <td class="txt_ ps-1 supp_vew4 table-td-align" id="supp_tab7">${row.ip_address}</td>
                         <td class="txt_ ps-1 supp_vew5" id="supp_tab8" hidden>${row.user_agent}</td>
-                        <td class="txt_ ps-1 supp_vew6" ${tdPadding} id="supp_tab9">
+                        <td class="txt_ ps-1 supp_vew6 table-td-align" ${tdPadding} id="supp_tab9">
                             <span class="permission edit_inventory_table" style="font-size:12px; ${statusOffColor}">
                                 ${statusText}
                             </span>
@@ -125,7 +129,7 @@
                         <td class="txt_ ps-1 supp_vew7" id="supp_tab10" hidden>${row.last_activity}</td>
                         <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${formatDate(row.created_at)}</td>
                         <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${updateDate}</td>
-                        <td class="txt_ ps-1 supp_vew7" id="supp_tab10">${lastActivity}</td>
+                        <td class="txt_ ps-1 supp_vew7 table-td-align" id="supp_tab10">${lastActivity}</td>
                     </tr>
                     <tr class="table-row user-table-row supp-table-row hidden child-row" data-user-id="${row.last_activity}">
                         <td class="txt_ supp_vew9" id="supp_tab12">
@@ -348,8 +352,11 @@
             }
         });
         // Refresh Button
-        $(document).on('click', '#refresh', function(){
-
+        $(document).on('click', '#refresh', function(e){
+            e.preventDefault();
+            var changeURL = '/super-admin/show-user-details';
+            window.location.href = changeURL;
+            
             $(".refresh-icon").removeClass('refrsh-hidden');
             var time = null;
             time = setTimeout(() => {

@@ -20,7 +20,7 @@
         </button>
       </li>
     </ul>
-    <div class="tab-content" id="showCard" style="background:aliceblue;padding-bottom:15px;" hidden>
+    <div class="tab-content" id="showCard" style="background:white;padding-bottom:15px;" hidden>
       <div id="home" class="container tab-pane active"><br>
         @include('super-admin.user-details.user-graph')
       </div>
@@ -93,39 +93,9 @@
       item.classList.remove(selector.substring(1));
     });
   }
-
-  // Usage
-  // $("#tabHome").attr('hidden', true);
-  // $("#refresh").attr('hidden', true);
-  // $("#roleSearch").attr('hidden', true);
-  // $("#item_class").attr('hidden', true);
-  // $("#perItemControls").attr('hidden', true);
-  // $("#tabSetting").attr('hidden', true);
-  // $("#tabCreateSupplier").attr('hidden', true);
-  // $("#moduSetting").attr('hidden', true);
-  // $("#tabOne").addClass('tab-skeletone');
   $("#showCard").attr('hidden', true);
   $("#loaderShow").removeClass('loader-show');
   setTimeout(() => {
-    // removeSkeletons('.skeleton');
-    // removeSkeletons('.tab-skeletone');
-    // removeSkeletons('.tab_btn_skeletone');
-    // removeSkeletons('.long-skeleton');
-    // removeSkeletons('.capsule-skeleton');
-    // removeSkeletons('.inp_ser_skeletone');
-    // removeSkeletons('.peritem-skeleton');
-    // removeSkeletons('.tab2-skeletone');
-    // removeSkeletons('.tab3-skeletone');
-    // removeSkeletons('.tab4-skeletone');
-    // $("#tabHome").removeAttr('hidden');
-    // $("#refresh").removeAttr('hidden');
-    // $("#roleSearch").removeAttr('hidden');
-    // $("#item_class").removeAttr('hidden');
-    // $("#perItemControls").removeAttr('hidden');
-    // $("#tabSetting").removeAttr('hidden');
-    // $("#tabCreateSupplier").removeAttr('hidden');
-    // $("#moduSetting").removeAttr('hidden');
-    
     removeSkeletons('.head-skeletone');
     removeSkeletons('.body-skeletone');
     removeSkeletons('.cricale-number-skeleton');

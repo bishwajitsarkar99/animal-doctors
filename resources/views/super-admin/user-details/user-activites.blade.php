@@ -54,9 +54,7 @@
             </div>
         </div>
         <div class="col-9">
-            <div class="pagination  mt-1" id="activities_users_data_table_paginate" style="float: right;padding-top:3px;">
-
-            </div>
+            <div class="pagination  mt-1" id="activities_users_data_table_paginate" style="float: right;padding-top:3px;"> </div>
         </div>
     </div>
 </div>

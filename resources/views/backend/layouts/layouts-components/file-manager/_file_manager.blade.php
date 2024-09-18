@@ -35,7 +35,7 @@
                                     <p class="input_field_one_skeletone" id="inputFieldOne"></p>
                                     <span id="savForm_validation"></span><span id="updateForm_validation"></span>
                                     <!-- ========== Folder-Data-Table =========== -->
-                                    <table class="ord_table center border-1 skeleton table-display-hidden mt-2" id="myFolderTable">
+                                    <table class="ord_table center border-1 table-display-hidden mt-2" id="myFolderTable">
                                         <tbody class="bg-transparent" id="folder_data_table"></tbody>
                                     </table>
                                 </div>

@@ -37,9 +37,9 @@
     
         // User Permission Tab
         // $(document).on('click', '#tabUserPermission', function(e) {
-        //     e.preventDefault();
-        //     var changeURL = '#';
-        //     window.location.href = changeURL;
+            // e.preventDefault();
+            // var changeURL = '#';
+            // window.location.href = changeURL;
         //     $("#loaderShow").removeClass('loader-show');
         //     $("#createSupplier").attr('hidden', true);
         //         setTimeout(() => {

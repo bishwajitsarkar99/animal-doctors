@@ -3,24 +3,32 @@
     <div class="log-card">
         <div class="row">
             <div class="col-xl-6">
-                <div class="card-header staticrept ps-2" style="text-align:center;">
-                    <span class="card-head-title head-skeletone">
-                        <i class="fa-solid fa-layer-group"></i> 
-                        Total Current Users Activities ( Per Week )
-                    </span>
-                    <div class="loader_skeleton" id="loader_orderChart"></div>
+                <div class="card card-body chart-card">
+                    <div class="card-header staticrept ps-2" style="text-align:center;">
+                        <span class="card-head-title head-skeletone">
+                            <i class="fa-solid fa-layer-group"></i> 
+                            Total Current Users Activities ( Per Week )
+                        </span>
+                        <div class="loader_chart loader_skeleton" id="loader_userChart"></div>
+                    </div>
+                    <div class="user-activities--week-chart">
+                        <canvas id="userDayLogChart" width="100%" height="35"></canvas>
+                    </div>
                 </div>
-                <canvas id="userDayLogChart" width="100%" height="35"></canvas>
             </div>
             <div class="col-xl-6">
-                <div class="card-header staticrept ps-2" style="text-align:center;">
-                    <span class="card-head-title head-skeletone">
-                        <i class="fa-solid fa-layer-group"></i> 
-                        Total Current Users Activities ( Per Month )
-                    </span>
-                    <div class="loader_skeleton" id="loader_orderChart"></div>
+                <div class="card card-body chart-card">
+                    <div class="card-header staticrept ps-2" style="text-align:center;">
+                        <span class="card-head-title head-skeletone">
+                            <i class="fa-solid fa-layer-group"></i> 
+                            Total Current Users Activities ( Per Month )
+                        </span>
+                        <div class="loader_chart loader_skeleton" id="loader_userLogChart"></div>
+                    </div>
+                    <div class="user-activities--month-chart">
+                        <canvas id="userMonthLogChart" width="100%" height="35"></canvas>
+                    </div>
                 </div>
-                <canvas id="userMonthLogChart" width="100%" height="35"></canvas>
             </div>
         </div>
         <div class="row">
@@ -118,10 +126,10 @@
             data: {
                 labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
                 datasets: [{
-                    label: "Current Login",
+                    label: "Login",
                     data: [], // Placeholder for Current login data
                     borderColor: "darkgreen",
-                    backgroundColor: gradientLogin,  // Apply gradient
+                    backgroundColor: gradientLogin,
                     borderWidth: 3,
                     fill: true,
                     tension: 0.4,
@@ -130,10 +138,10 @@
                     pointHoverRadius: 8,
                     pointBackgroundColor: "darkgreen",
                 }, {
-                    label: "Current Logout Activity",
+                    label: "Logout",
                     data: [], // Placeholder for Current Logout Activity data
-                    borderColor: "orange",
-                    backgroundColor: gradientLogout,  // Apply gradient
+                    borderColor: "#b98527",
+                    backgroundColor: gradientLogout,
                     borderWidth: 3,
                     fill: true, 
                     tension: 0.4,
@@ -142,10 +150,10 @@
                     pointHoverRadius: 8,
                     pointBackgroundColor: "orange",
                 }, {
-                    label: "Current Activity Users",
+                    label: "Users Activity",
                     data: [], // Placeholder for Current Activity Users data
                     borderColor: "blue",
-                    backgroundColor: gradientUsers,  // Apply gradient
+                    backgroundColor: gradientUsers,
                     borderWidth: 3,
                     fill: true,
                     tension: 0.4,
@@ -209,47 +217,11 @@
                     }
                 },
                 animation: {
-                    duration: 1500, // Animation duration
-                    easing: 'easeInOutBounce' // Type of animation easing
+                    duration: 1500,
+                    easing: 'easeInOutBounce'
                 }
             }
         });
-
-        // Set initial state for each dataset
-        let datasetGrowthStates = userDayLogChart.data.datasets.map(() => ({
-            growing: Math.random() > 0.5,
-            borderWidth: 2
-        }));
-
-        let step = 0.1;
-        let minWidth = 1;
-        let maxWidth = 4;
-
-        function animateBorder() {
-            userDayLogChart.data.datasets.forEach((dataset, index) => {
-                let growthState = datasetGrowthStates[index];
-
-                if (growthState.growing) {
-                    growthState.borderWidth += step;
-                    if (growthState.borderWidth >= maxWidth) {
-                        growthState.growing = false;
-                    }
-                } else {
-                    growthState.borderWidth -= step;
-                    if (growthState.borderWidth <= minWidth) {
-                        growthState.growing = true;
-                    }
-                }
-
-                dataset.borderWidth = growthState.borderWidth;
-            });
-
-            userDayLogChart.update('none');
-
-            requestAnimationFrame(animateBorder);
-        }
-        // Start the border animation loop
-        animateBorder();
     });
 </script>
 <script>
@@ -275,7 +247,7 @@
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
-                    label: "Current Login",
+                    label: "Login",
                     data: [], // Placeholder for Current login data
                     borderColor: "darkgreen",
                     backgroundColor: gradientLogin,
@@ -287,9 +259,9 @@
                     pointHoverRadius: 8,
                     pointBackgroundColor: "darkgreen",
                 }, {
-                    label: "Current Logout Activity",
+                    label: "Logout",
                     data: [], // Placeholder for Current Logout Activity data
-                    borderColor: "orange",
+                    borderColor: "#b98527",
                     backgroundColor: gradientLogout,
                     borderWidth: 3,
                     fill: true, 
@@ -299,7 +271,7 @@
                     pointHoverRadius: 8,
                     pointBackgroundColor: "orange",
                 }, {
-                    label: "Current Activity Users",
+                    label: "Users Activity",
                     data: [], // Placeholder for current user data
                     borderColor: "blue",
                     backgroundColor: gradientUsers,
@@ -338,10 +310,10 @@
                     x: {
                         grid: {
                             display: true,
-                            color: 'rgba(0, 0, 0, 0.1)', // Grid color
+                            color: 'rgba(0, 0, 0, 0.1)',
                         },
                         ticks: {
-                            color: '#333',  // X-axis label color
+                            color: '#333',
                             font: {
                                 size: 12, 
                                 family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
@@ -352,11 +324,11 @@
                     y: {
                         grid: {
                             display: true,
-                            color: 'rgba(0, 0, 0, 0.1)', // Grid color
+                            color: 'rgba(0, 0, 0, 0.1)',
                         },
                         ticks: {
                             beginAtZero: true,
-                            color: '#333',  // Y-axis label color
+                            color: '#333',
                             font: {
                                 size: 12, 
                                 family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",

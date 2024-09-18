@@ -510,11 +510,36 @@ button#uploadBtn:hover,button#createFolderBtn:hover,button#updateFolderBtn:hover
     color: white !important;
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
+button.modal_button.btn_focus {
+    border: none;
+    /* animation: btnFocus 1s infinite; */
+}
 button#cancelFolderBtn{
-    border-radius: 15px;
     border-color: orangered;
-    background-image: linear-gradient(90deg, orangered, transparent);
-    color: white;
+    background-color: orangered;
+    color: white !important;
+    margin-top: 5px !important;
+    padding: 3px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 0;
+    text-decoration: none;
+    font-variant: all-petite-caps;
+}
+button#cancelFolderBtn:hover{
+    background-image: linear-gradient(90deg, red, transparent);
+    border: 1px solid orangered;
+    color: white !important;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 button#searchFile{
     margin-top: 18px;
