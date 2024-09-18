@@ -1,5 +1,5 @@
 <!-- ==== User-Activities ======= -->
-<div class="container">
+<div class="container table-container-card">
     <div class="row">
         <div class="col-xl-3">
             <input type="text" class="date form-control form-control-sm" name="start_date" placeholder="Start Date : DD-MM-YYY" id="date_start" autocomplete="off">

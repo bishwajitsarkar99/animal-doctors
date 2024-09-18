@@ -1,5 +1,5 @@
 <!-- ==== User-Email-Verification-Page ======= -->
-<div class="container">
+<div class="container email-container">
     <div class="row">
         <div class="col-xl-3">
             <select type="text" class="form-control form-control-sm select2" name="role" id="verification_select_role">
@@ -10,7 +10,9 @@
             </select>
         </div>
         <div class="col-xl-9">
-            <input class="form-control from-control-sm" type="search" name="search" placeholder="Search........" id="search">
+            <span>
+                <input class="form-control from-control-sm" type="search" name="search" placeholder="Search........" id="search">
+            </span>
         </div>
     </div>
     <div class="table-responsive">

@@ -181,10 +181,16 @@
 .select2-container--default .select2-selection--single {
     background-color: #fff;
     /* border: 1px solid #aaa; */
-    border: 1px solid lightblue;
+    /* border: 1px solid lightblue; */
     border-radius: 4px;
-    /* --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35); */
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    border-top: 1px solid #f1eeee;
+    border-bottom: 1px solid #f1eeee;
+    border-left: 1px solid #f1eeee;
+    border-right: 1px solid #f1eeee;
+    box-shadow: 0px 2px 20px #0001;
+    background-image: linear-gradient(to bottom, white 0%, white, white 100%);
 }
 .select2-container--default .select2-selection--single:focus{
     border: 2px solid #3b71ca;

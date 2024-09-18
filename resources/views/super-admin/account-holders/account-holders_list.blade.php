@@ -21,7 +21,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-xl-4" style="background-color:aliceblue;">
+                                <div class="col-xl-4">
                                     <button class="btn btn-success btn-btn-sm" id="btnFormSearch" disabled>
                                         <span class="search-btn"><i class="fas fa-search"></i></span>
                                     </button>

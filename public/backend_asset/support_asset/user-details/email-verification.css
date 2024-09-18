@@ -1,3 +1,15 @@
+.email-container {
+    box-shadow: 0px 1px 10px #0001, 0px 0px 2px #0001;
+    opacity: 1;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    border-radius: 4px;
+}
+.email-container:hover{
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    opacity: 1;
+}
 .form-switch .form-check-input {
     width: 2em;
     margin-left: -1.5em;
@@ -15,5 +27,5 @@ input.form-check-input:checked {
     border-color: #198754;
 }
 input#search{
-    padding: 4px 15px;
+    padding: 2.6px 15px;
 }

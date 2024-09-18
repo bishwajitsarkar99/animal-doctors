@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-xl-6">
                 <div class="card card-body chart-card">
-                    <div class="card-header staticrept ps-2" style="text-align:center;">
+                    <div class="card-header mini-bar-header ps-2" style="text-align:center;">
                         <span class="card-head-title head-skeletone">
                             <i class="fa-solid fa-layer-group"></i> 
                             Total Current Users Activities ( Per Week )
@@ -18,7 +18,7 @@
             </div>
             <div class="col-xl-6">
                 <div class="card card-body chart-card">
-                    <div class="card-header staticrept ps-2" style="text-align:center;">
+                    <div class="card-header mini-bar-header ps-2" style="text-align:center;">
                         <span class="card-head-title head-skeletone">
                             <i class="fa-solid fa-layer-group"></i> 
                             Total Current Users Activities ( Per Month )
@@ -31,62 +31,64 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-xl-12">
-                <div class="row">
-                    <div class="col-xl-4">
-                        <span class="login-user-title ps-4">Total Current Login Users</span>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="progress mt-2" style="height:0.8rem;">
-                            <div id="current_login_activites_percentage_records" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                0%
+                <div class="card card-body chart-card card-background">
+                    <div class="row">
+                        <div class="col-xl-4">
+                            <span class="login-user-title ps-4">Total Current Login Users</span>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="progress mt-2" style="height:0.8rem;">
+                                <div id="current_login_activites_percentage_records" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    0%
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-2">
-                        <label class="badge rounded-pill bg-success" for="total_medic_records " id="iteam_label4" style="font-size: 11px;">
-                            <span class="total_users " style="font-weight: 600;color:white;" id="current_login_activites_records"></span>
-                            <span id="iteam_label5" style="font-weight: 600;color:white;">.00</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-4">
-                        <span class="login-user-title ps-4">Total Current Logout Activity</span>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="progress mt-2" style="height:0.8rem;">
-                            <div id="current_logout_activites_percentage_records" class="progress-bar progress-bar-striped bg-alert progress-bar-animated" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                0%
-                            </div>
+                        <div class="col-xl-2">
+                            <label class="badge rounded-pill bg-success" for="total_medic_records " id="iteam_label4" style="font-size: 11px;">
+                                <span class="total_users " style="font-weight: 600;color:white;" id="current_login_activites_records"></span>
+                                <span id="iteam_label5" style="font-weight: 600;color:white;">.00</span>
+                            </label>
                         </div>
                     </div>
-                    <div class="col-xl-2">
-                        <label class="badge rounded-pill bg-logout" for="total_medic_records " id="iteam_label4" style="font-size: 11px;">
-                            <span class="total_users " style="font-weight: 600;color:white;" id="current_logout_activites_records"></span>
-                            <span id="iteam_label5" style="font-weight: 600;color:white;">.00</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-4">
-                        <span class="tot_summ" id="num_plate">
-                            <label class="login-user-title ps-4" for="tot_cagt"> Total Current Activity Users</label>
-                        </span>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="progress mt-2" style="height:0.8rem;">
-                            <div id="current_total_activites_percentage_records" class="progress-bar progress-bar-striped bg-login progress-bar-animated" role="progressbar" style="width: 20%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                0%
+                    <div class="row">
+                        <div class="col-xl-4">
+                            <span class="login-user-title ps-4">Total Current Logout Activity</span>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="progress mt-2" style="height:0.8rem;">
+                                <div id="current_logout_activites_percentage_records" class="progress-bar progress-bar-striped bg-alert progress-bar-animated" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    0%
+                                </div>
                             </div>
                         </div>
+                        <div class="col-xl-2">
+                            <label class="badge rounded-pill bg-logout" for="total_medic_records " id="iteam_label4" style="font-size: 11px;">
+                                <span class="total_users " style="font-weight: 600;color:white;" id="current_logout_activites_records"></span>
+                                <span id="iteam_label5" style="font-weight: 600;color:white;">.00</span>
+                            </label>
+                        </div>
                     </div>
-                    <div class="col-xl-2">
-                        <label class="badge rounded-pill bg-primary" for="total_medic_records " id="iteam_label4" style="font-size: 11px;">
-                            <span class="total_users " style="font-weight: 600;color:white;" id="total_current_activites_records"></span>
-                            <span id="iteam_label5" style="font-weight: 600;color:white;">.00</span>
-                        </label>
+                    <div class="row">
+                        <div class="col-xl-4">
+                            <span class="tot_summ" id="num_plate">
+                                <label class="login-user-title ps-4" for="tot_cagt"> Total Current Activity Users</label>
+                            </span>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="progress mt-2" style="height:0.8rem;">
+                                <div id="current_total_activites_percentage_records" class="progress-bar progress-bar-striped bg-login progress-bar-animated" role="progressbar" style="width: 20%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    0%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2">
+                            <label class="badge rounded-pill bg-primary" for="total_medic_records " id="iteam_label4" style="font-size: 11px;">
+                                <span class="total_users " style="font-weight: 600;color:white;" id="total_current_activites_records"></span>
+                                <span id="iteam_label5" style="font-weight: 600;color:white;">.00</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>

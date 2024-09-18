@@ -14,7 +14,7 @@
         </button>
       </li>
     </ul>
-    <div class="tab-content" id="showCard" style="background:aliceblue;padding-bottom:15px;" hidden>
+    <div class="tab-content" id="showCard" style="padding-bottom:15px;" hidden>
       <div id="userActivity" class="container tab-pane active"><br>
         @include('super-admin.email-verification._email-verification-home-page')
       </div>

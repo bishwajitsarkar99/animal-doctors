@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-xl-3">
         <div class="card card-body first-card">
-            <div class="card card-head-title align-items-center justify-content-center">
+            <div class="card card-head-title mini-card-title align-items-center justify-content-center">
                 <span class="align-items-left justify-content-left head-skeletone">
                     <i class="fa-solid fa-layer-group"></i>
                     Total-Users
@@ -22,7 +22,7 @@
     </div>
     <div class="col-xl-3">
         <div class="card card-body second-card">
-            <span class="card card-head-title align-items-center justify-content-center">
+            <span class="card card-head-title mini-card-title align-items-center justify-content-center">
                 <span class="align-items-left justify-content-left head-skeletone">
                     <i class="fa-solid fa-layer-group"></i>
                     Authentic Users
@@ -42,7 +42,7 @@
     </div>
     <div class="col-xl-3">
         <div class="card card-body third-card">
-            <span class="card card-head-title align-items-center justify-content-center">
+            <span class="card card-head-title mini-card-title align-items-center justify-content-center">
                 <span class="align-items-left justify-content-left head-skeletone">
                     <i class="fa-solid fa-layer-group"></i>
                     Inactive Users
@@ -62,7 +62,7 @@
     </div>
     <div class="col-xl-3">
         <div class="card card-body four-card">
-            <span class="card card-head-title align-items-center justify-content-center">
+            <span class="card card-head-title mini-card-title align-items-center justify-content-center">
                 <span class="align-items-left justify-content-left head-skeletone">
                     <i class="fa-solid fa-layer-group"></i>
                     Log Activity Of Users
@@ -197,7 +197,7 @@
             </div>
             <div class="row">
                 <div class="col-xl-4">
-                    <span class="login-user-title percentage-skeletone" style="color: royalblue;">Total Users</span>
+                    <span class="login-user-title percentage-skeletone">Total Users</span>
                 </div>
                 <div class="col-xl-6"></div>
                 <div class="col-xl-2">
@@ -208,14 +208,14 @@
     </div>
     <div class="col-xl-6">
         <div class="card order_line_chart" id="orderChart">
-            <div class="card-header staticrept ps-2" style="text-align:center;">
+            <div class="card-header bar-header ps-2" style="text-align:center;">
                 <span class="card-head-title head-skeletone">
                     <i class="fa-solid fa-layer-group"></i> 
                     Total Users Bar Chart
                 </span>
                 <div class="loader_skeleton" id="loader_orderChart"></div>
             </div>
-            <div class="card card-body third-card body-skeletone user-activities--month-chart">
+            <div class="card card-body third-card body-skeletone user-activities--month-bar-chart">
                 <canvas id="userChart" width="100%" height="35"></canvas>
             </div>
         </div>
