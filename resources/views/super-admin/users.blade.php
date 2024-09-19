@@ -29,39 +29,26 @@
                   <span class="visually-hidden">Searching...</span>
                 </div>
               </div>
-              <!-- <div class="col-1">
-                <span class="me-1">
-                  <img id="locker" class="checking_lock skeleton pt-1" src="{{ asset('image/lock/lock.png')}}" alt="lock">
-                </span>
-              </div> -->
-              <!-- <div class="small_menu col-2">
-                <i class="fa-regular fa-hand-point-right" style="color: darkcyan;"></i>
-                <span class="action_button pe-1">
-                  <input type="checkbox" id="action_mode" class="form-switch form-check-input search_all_data skeleton" onclick="myLockFunction()" data-bs-toggle="tooltip" data-bs-placement="top" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                  <label id="lock_label" class="search_action ser_label skeleton pt-1" for="action_mode"><span class="text-danger">Lock</span></label>
-                </span>
-              </div> -->
+              <!-- <img id="locker" class="checking_lock skeleton pt-1" src="{{ asset('image/lock/lock.png')}}" alt="lock"> -->
             </div>
-            <div class="">
-              <div class="table-responsive">
-                <table class="ord_table center border-1 mt-1 skeleton">
-                  <tr class="table-row order_body acc_setting_table skeleton">
-                    <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1">ID</th>
-                    <th id="th_sort" data-coloumn="image" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1">Image</th>
-                    <th id="th_sort" class="table_th_color tot_pending_ col font_sid skeleton ps-1">Action</th>
-                    <th id="th_sort" data-coloumn="name" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1">Name</th>
-                    <th id="th_sort" data-coloumn="email" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1">Email</th>
-                    <th id="th_sort" data-coloumn="contract_number" data-order="desc" class="table_th_color font_sid skeleton tot_order_ ps-1">Contract</th>
-                    <th id="th_sort" data-coloumn="role" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1">Role</th>
-                    <th id="th_sort" data-coloumn="role" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1">Verification</th>
-                    <th id="th_sort" class="table_th_color tot_pending_ col font_sid skeleton">Check</th>
-                    <th id="th_sort" class="table_th_color tot_pending_ font_sid ps-2  skeleton">Status</th>
-                  </tr>
-                  <tbody class="bg-transparent skeleton tab" id="user_data_table">
-  
-                  </tbody>
-                </table>
-              </div>
+            <div class="table-responsive">
+              <table class="ord_table center border-1 mt-1 skeleton">
+                <tr class="table-row order_body acc_setting_table skeleton">
+                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="id" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> ID</th>
+                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="image" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Image</th>
+                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Action</th>
+                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="name" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Name</th>
+                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="email" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Email</th>
+                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="contract_number" data-order="desc" class="table_th_color font_sid skeleton tot_order_ ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Contract</th>
+                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="role" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Role</th>
+                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="email_verified_at" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Verification</th>
+                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col font_sid skeleton"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Check</th>
+                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="status" data-order="desc" class="table_th_color tot_pending_ font_sid ps-2  skeleton"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Status</th>
+                </tr>
+                <tbody class="bg-transparent skeleton tab" id="user_data_table">
+
+                </tbody>
+              </table>
             </div>
             <div class="row table_last_row">
               <div class="col-2">
@@ -185,7 +172,11 @@
 
 @push('scripts')
 @include('super-admin._users-fetch')
-<script src="{{ asset('backend_asset/main_asset/js/image-js/user-image.min.js') }}"></script>
+<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
+<script type="module" src="{{asset('/module/module-min-js/helper-image-upload-function-min.js')}}"></script>
+<script type="module">
+  import { imageUpload } from "/module/module-min-js/helper-image-upload-function-min.js";
+</script>
 <script>
   // Update Button Loader
   $(document).ready(() => {

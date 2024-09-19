@@ -53,7 +53,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- jQuery UI Auto-Complete or Date Picker -->
 <script src="{{asset('backend_asset')}}/support_asset/date-picker/jquery/jquery-ui.min.js"></script>
-<script type="module" src="{{asset('/helper-functions/helper-function.js')}}"></script>
+<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
 <script>
   $(document).ready(function(){
     $('#date_start').datepicker({

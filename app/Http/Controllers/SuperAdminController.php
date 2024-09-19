@@ -79,7 +79,6 @@ class SuperAdminController extends Controller
         return  $data ;
     }
     //  Show Super Admin Get User Page
-
     public function users()
     {
         $users = User::latest()->paginate(1);
@@ -116,7 +115,19 @@ class SuperAdminController extends Controller
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
 
-        $users = User::orderBy('id', 'desc')->latest()->where('role', '!=', 1)->with(['roles'])->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+        // sort-field
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_field_image = $request->input('sort_field_image', 'image');
+        $sort_field_name = $request->input('sort_field_name', 'name');
+        $sort_field_email = $request->input('sort_field_email', 'email');
+        $sort_field_contract_number = $request->input('sort_field_contract_number', 'contract_number');
+        $sort_field_role = $request->input('sort_field_role', 'role');
+        $sort_field_email_verified_at = $request->input('sort_field_email_verified_at', 'email_verified_at');
+        $sort_field_status = $request->input('sort_field_status', 'status');
+
+        $sort_field_direction = $request->input('sort_field_direction', 'desc');
+
+        $users = User::where('role', '!=', 1)->with(['roles'])->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
 
         if ($query = $request->get('query')) {
             $users->where('name', 'LIKE', '%' . $query . '%')
@@ -130,6 +141,15 @@ class SuperAdminController extends Controller
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+        // sorting field
+        $users = $users->orderBy($sort_field_id, $sort_field_direction)
+                        ->orderBy($sort_field_image, $sort_field_direction)
+                        ->orderBy($sort_field_name, $sort_field_direction)
+                        ->orderBy($sort_field_email, $sort_field_direction)
+                        ->orderBy($sort_field_contract_number, $sort_field_direction)
+                        ->orderBy($sort_field_role, $sort_field_direction)
+                        ->orderBy($sort_field_email_verified_at, $sort_field_direction)
+                        ->orderBy($sort_field_status, $sort_field_direction);
 
         $users = $users->paginate($perItem)->toArray();
 

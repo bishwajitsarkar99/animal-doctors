@@ -1,70 +1,21 @@
-<script type="text/javascript">
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-
-        // Format date
-        const options = {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            second: 'numeric',
-            hour12: true
-        };
-
-        return date.toLocaleString('en-US', options);
-    };
-    // switch on/off----- users table search
-    function mySrcFunction() {
-        var x = document.getElementById("search_off");
-        if (x.innerHTML === "OFF") {
-            x.innerHTML = "ON";
-        } else {
-            x.innerHTML = "OFF";
-        }
-    }
-    // switch Lock/Unlock----- users table action
-    function myLockFunction() {
-        var x = document.getElementById("lock_label");
-        if (x.innerHTML === "Unlock") {
-            x.innerHTML = "Lock";
-        } else {
-            x.innerHTML = "Unlock";
-        }
-    }
+<script type="module">
+    import { formatDate } from "/module/module-min-js/helper-function-min.js";
+    import { mySrcFunction } from "/module/module-min-js/helper-function-min.js";
+    import { activeTableRow } from "/module/module-min-js/helper-function-min.js";
     $(document).ready(function() {
         // ACtive table row background
         $(document).on('click', 'tr.table-row', function(){
-            $(this).addClass("clicked").siblings().removeClass("clicked");
+            activeTableRow(this);
         });
-        // switch on/off----- users table search
+        // show or hide users table search bar
         $("#search").hide();
         $(document).on('click', '#search_area', function() {
             $("#search_on").toggle('slow');
             $("#search").toggle('slid');
             $("#search").focus();
+            // switch on/off----- off/on label show
+            mySrcFunction();
         });
-        // Table header Action Mode
-        // $(document).on('click', '#action_mode', function() {
-
-        //     if ($("#action_mode:checked").length > 0) {
-        //         $(".check_permission").removeAttr('disabled');
-        //         $(".dropdown-toggle-split").removeAttr('disabled');
-
-        //     } else {
-        //         $(".check_permission").attr('disabled', true);
-        //         $(".dropdown-toggle-split").attr('disabled', true);
-        //     }
-
-        //     $('#locker').toggle().removeClass('checking_lock');
-        //     $(this).attr('disabled', true);
-
-        //     setTimeout(() => {
-        //         $('#locker').toggle().addClass('checking_lock');
-        //         $(this).attr('disabled', false);
-        //     }, 1000);
-        // });
 
         fetch_users_setting_data();
         // Data View Table--------------
@@ -80,18 +31,20 @@
             }
 
             return [...rows].map((row, key) => {
-                let statusClass, statusColor, statusText, statusBg, verifyText;
+                let statusClass, statusColor, statusText, statusBg, verifyText, statusSignal;
                 if(row.status == 1){
                     statusClass = 'text-dark';
                     statusText = '❌ Unauthorize';
                     statusColor = 'color:black;background-color: #fff;';
                     statusBg = 'badge rounded-pill bg-warn';
+                    statusSignal = `<span class="fbox"><input id="light_focus" type="text" class="light5-focus" readonly></input></span>`;
                 }
                 else if(row.status == 0){
                     statusClass = 'text-dark';
                     statusText = '<span style="color:black;font-weight:800;font-size: 12px;"><i class="fa-solid fa-check"></i></span> Authorize';
                     statusColor = 'color:black;background-color: #fff;';
                     statusBg = 'badge rounded-pill bg-azure';
+                    statusSignal = `<span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>`;
                 }
 
                 if(row.email_verified_at == null){
@@ -137,7 +90,7 @@
                             <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:12px;">
                                 ${statusText}
                             </span>
-                            <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>
+                            ${statusSignal}
                         </td>
                         
                     </tr>
@@ -146,7 +99,21 @@
         }
 
         // Fetch Users Data ------------------
-        function fetch_users_setting_data(query = '', url = null, perItem = null) {
+        function fetch_users_setting_data(
+            query = '', 
+            url = null, 
+            perItem = null,
+            sortFieldID = 'id',
+            sortFieldImage = 'image',
+            sortFieldName = 'name',
+            sortFieldEmail = 'email',
+            sortFieldContractNumber = 'contract_number',
+            sortFieldRole = 'role',
+            sortFieldEmailVerifiedAt = 'email_verified_at',
+            sortFieldStatus = 'status',
+            sortFieldDirection = 'desc',
+
+        ){
 
             if(perItem === null){
                 perItem = $("#perItemControl").val();
@@ -164,7 +131,16 @@
                 url: current_url,
                 dataType: 'json',
                 data: {
-                    query: query
+                    query: query,
+                    sort_field_id : sortFieldID,
+                    sort_field_image : sortFieldImage,
+                    sort_field_name : sortFieldName,
+                    sort_field_email : sortFieldEmail,
+                    sort_field_contract_number : sortFieldContractNumber,
+                    sort_field_role : sortFieldRole,
+                    sort_field_email_verified_at : sortFieldEmailVerifiedAt,
+                    sort_field_status : sortFieldStatus,
+                    sort_field_direction : sortFieldDirection,
                 },
                 success: function({
                     data,
@@ -203,6 +179,40 @@
                 
             });
         }
+
+        // Event Listener for sorting columns
+        $(document).on('click', '#th_sort', function(){
+            var button = $(this);
+            // Get the column and current order
+            var column = button.data('column');
+            var order = button.data('order');
+            // Toggle the order (asc/desc)
+            order = order === 'desc' ? 'asc' : 'desc';
+            button.data('order', order);
+            fetch_users_setting_data(
+                '', null, null,
+                column === 'id' ? column : 'id',
+                column === 'image' ? column : 'image',
+                column === 'name' ? column : 'name',
+                column === 'email' ? column : 'email',
+                column === 'contract_number' ? column : 'contract_number',
+                column === 'role' ? column : 'role',
+                column === 'email_verified_at' ? column : 'email_verified_at',
+                column === 'status' ? column : 'status',
+                order
+            );
+            // Reset all icons in the table headers first - icon part
+            $("#th_sort").find('.toggle-icon').html('<i class="fa-solid fa-arrow-down-long"></i>');
+            var icon = button.find('.toggle-icon');
+            if(order === 'desc'){
+                icon.html('<i class="fa-solid fa-arrow-up-long"></i>');
+                $(".toggle-icon").fadeIn(300);
+            }else{
+                icon.html('<i class="fa-solid fa-arrow-down-long"></i>');
+                $(".toggle-icon").fadeIn(300);
+            }
+
+        });
 
         // peritem change
         $("#perItemControl").on('change', (e) => {

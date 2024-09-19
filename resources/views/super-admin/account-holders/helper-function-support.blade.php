@@ -1,5 +1,5 @@
 <script type="module">
-    import { getTimeDifference } from '/helper-functions/helper-function.js';
+    import { getTimeDifference } from '/module/module-min-js/helper-function-min.js';
     // Function to update verification time for each user
     const updateVerificationTimes = () => {
         @foreach($users as $user)

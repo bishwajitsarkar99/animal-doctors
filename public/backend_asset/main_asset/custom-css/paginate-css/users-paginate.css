@@ -545,7 +545,7 @@ span#search_off{
         color: #ddd;
     }
     100%{
-        color: darkcyan;
+        color: orangered;
     }
 }
 p.input.form-check-input {
@@ -965,9 +965,14 @@ input#view_user_update {
     border-radius: 5px;
     opacity: 1;
 }
+.user_details:hover{
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    opacity: 1;
+}
 th#th_sort {
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
-    /* background-image: var(--table-head-color); */
+    background-image: var(--table-head-color);
     color: black;
     font-size: 15px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -1029,10 +1034,10 @@ span.status_bg {
         background-color: #f1f1f1;
     }
     50%{
-        background-color: burlywood;
+        background-color: green;
     }
     100%{
-        background-color: lightblue;
+        background-color: darkcyan;
     }
 }
 .light3-focus{
@@ -1071,6 +1076,25 @@ span.status_bg {
     }
     100%{
         background-color: limegreen;
+    }
+}
+.light5-focus{
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    border: none;
+    outline: none;
+    animation: color5_focus 1s infinite;
+}
+@keyframes color5_focus{
+    0%{
+        background-color: #f1f1f1;
+    }
+    50%{
+        background-color: #d73636;
+    }
+    100%{
+        background-color: orangered;
     }
 }
 button.modal_button.btn_focus{

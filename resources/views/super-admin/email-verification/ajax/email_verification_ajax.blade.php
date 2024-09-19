@@ -1,5 +1,5 @@
 <script type="module">
-    import { getTimeDifference } from "/helper-functions/helper-function.js";
+    import { getTimeDifference } from "/module/module-min-js/helper-function-min.js";
     $(document).ready(function(){
         const formatDate = (dateString) => {
             const date = new Date(dateString);
@@ -174,7 +174,6 @@
         }
         // Event Listener for sorting columns
         $(document).on('click', '#th_sort', function () {
-
             var button = $(this);
             // Get the column and current order
             var column = button.data('column');
@@ -193,7 +192,6 @@
                 column === 'created_at' ? column : 'created_at', 
                 order
             );
-
             // Reset all icons in the table headers first - icon part
             $('#th_sort').find('.toggle-icon').html('<i class="fa-solid fa-arrow-down-long"></i>');
             var icon = button.find('.toggle-icon');

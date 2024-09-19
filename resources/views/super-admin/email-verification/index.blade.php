@@ -37,7 +37,7 @@
 @push('scripts')
 @include('super-admin.user-details.ajax.user-details-ajax')
 @include('super-admin.email-verification.ajax.email_verification_ajax')
-<script type="module" src="{{asset('/helper-functions/helper-function.js')}}"></script>
+<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- jQuery UI Auto-Complete or Date Picker -->

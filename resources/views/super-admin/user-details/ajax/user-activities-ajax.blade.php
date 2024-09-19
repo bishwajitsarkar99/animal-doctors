@@ -1,6 +1,6 @@
 <script type="module">
-    import { getTimeDifference } from "/helper-functions/helper-function.js";
-    import { formatDate } from "/helper-functions/helper-function.js";
+    import { getTimeDifference } from "/module/module-min-js/helper-function-min.js";
+    import { formatDate } from "/module/module-min-js/helper-function-min.js";
     $(document).ready(function(){
         // ACtive table row background
         $(document).on('click', 'tr.table-row', function(){

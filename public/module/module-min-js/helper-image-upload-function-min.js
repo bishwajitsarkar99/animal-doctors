@@ -1,0 +1,1 @@
+export function imageUpload(e){var t,a;t=e,(a=new FileReader).onload=function(){var e=document.getElementById("image_view");e&&(e.src=a.result)},t.target.files&&t.target.files[0]&&a.readAsDataURL(t.target.files[0])}
