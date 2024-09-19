@@ -55,7 +55,8 @@ div.mange_background{
     border: none;
     padding-top: 7px;
     background-image: linear-gradient(to bottom, white 0%, white, white 100%);
-    box-shadow: 0px 1px 10px #0001, 0px 0px 2px #0001;
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
+    background-color: white;
 }
 div.mange_background:hover{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
@@ -494,10 +495,10 @@ button#btn_refresh {
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     opacity: var(--bs-bg-opacity);
-    height: 2em;
+    height: 1.8em;
     box-shadow: none;
     margin-top: -0.1px;
-    line-height: 0.5px;
+    line-height: 0.9px;
     font-family: var(--nav-font-family);
     font-size: 14px;
     font-weight: 700;
@@ -519,7 +520,8 @@ button#btnFormSearch {
     opacity: var(--bs-bg-opacity);
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-    height: 1.8em;
+    height: 1.6em;
+    line-height: 0.5;
     box-shadow: none;
     border-color: #007bff;
     transition: border-color 0.3s ease, background-color 0.3s ease;

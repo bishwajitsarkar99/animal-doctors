@@ -97,7 +97,7 @@ class UserLocationController extends Controller
 
         // Sort field and direction
         $sort_field = $request->input('sort_field', 'id');
-        $sort_direction = $request->input('sort_direction', 'asc');
+        $sort_direction = $request->input('sort_direction', 'desc');
 
         // Start the query for user activities
         $user_activities = SessionModel::whereNotNull('role')->with(['roles']);

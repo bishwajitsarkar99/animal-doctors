@@ -3,7 +3,7 @@
 @include('backend.layouts.dashboard-components._navbar')
 
 <div class="card form-control form-control-sm mange_background">
-    <div class="card-body manage_role_page">
+    <div class="card-body">
         <h2 class=" manage_head mb-4"><span class="page-heading-skeleton">Manage</span> <span class="ps-2 page-heading-skeleton">Role</span></h2>
 
         <form action="{{ route('updateRole') }}" method="POST">

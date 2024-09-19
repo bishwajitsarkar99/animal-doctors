@@ -18,14 +18,13 @@
     <div class="table-responsive">
         <table class="bg-transparent ord_table center border-1 mt-2">
             <tr class="table-row order_body acc_setting_table">
-                <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color col txt ps-2 pe-1">ID</th>
-                <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">Name</th>
-                <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">Email</th>
-                <th id="th_sort" style="background-color: white;" data-coloumn="id" data-order="desc" class="table_th_color txt ps-1">Role</th>
-                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Email-Verified</th>
-                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Account-Create</th>
-                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ col ps-1" style="text-align: left;">Status</th>
-                <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1" style="text-align: left;">Update-Email-Verified</th>
+                <th id="th_sort" style="background-color: honeydew; cursor: pointer;" data-coloumn="id" data-order="desc" class="table_th_color col txt ps-2 pe-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> ID</th>
+                <th id="th_sort" style="background-color: honeydew; cursor: pointer;" data-coloumn="role" data-order="desc" class="table_th_color txt ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Role</th>
+                <th id="th_sort" style="background-color: honeydew; cursor: pointer;" data-coloumn="email" data-order="desc" class="table_th_color txt ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Email</th>
+                <th id="th_sort" style="background-color: honeydew; cursor: pointer;" data-coloumn="email_verified_session" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: left;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Email-Verified</th>
+                <th id="th_sort" style="background-color: honeydew; cursor: pointer;" data-coloumn="account_create_session" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: left;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Account-Create</th>
+                <th id="th_sort" style="background-color: honeydew; cursor: pointer;" data-coloumn="status" data-order="desc" class="table_th_color tot_pending_ col ps-1" style="text-align: left;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Status</th>
+                <th id="th_sort" style="background-color: honeydew; cursor: pointer;" data-coloumn="created_at" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: left;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Update-Email-Verified</th>
             </tr>
             <tbody class="bg-transparent " id="user_email_verification_data_table">
     

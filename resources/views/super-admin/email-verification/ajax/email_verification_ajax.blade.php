@@ -1,4 +1,5 @@
-<script>
+<script type="module">
+    import { getTimeDifference } from "/helper-functions/helper-function.js";
     $(document).ready(function(){
         const formatDate = (dateString) => {
             const date = new Date(dateString);
@@ -40,18 +41,22 @@
             }
 
             return [...rows].map((row, key) => {
-                let statusColor, statusBg, verifyText, statusText, statusOnColor, statusOffColor;
+                let statusColor, statusBg, verifyText, statusText, statusOnColor, statusOffColor, activeTime, emailVerifiedDate, emailVerifiedUpdateDate;
                 if(row.status == 0){
-                    verifyText = '<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">No verified</span>';
+                    verifyText = '<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;line-height: .7;">No verified</span>';
                     statusColor = 'color:black;background-color: #fff;';
                     statusBg = 'badge rounded-pill bg-warn';
+                    emailVerifiedDate = `<span style="color:#646464;font-size:15px;font-weight:800;padding-left:60px;"> - </span>`;
+                    activeTime = `<span style="color:#646464;font-size:15px;font-weight:800;padding-left:30px;"> - </span>`;
                 }
                 else if(row.status == 1){
-                    verifyText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">verified</span>';
+                    verifyText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;line-height: .7;">verified</span>';
                     statusColor = 'color:black;background-color: #fff;';
                     statusBg = 'badge rounded-pill bg-azure';
+                    emailVerifiedDate = `<span>${formatDate(row.email_verified_session)}</span>`;
+                    activeTime = `<span style="color:blue;font-size:10px;">${getTimeDifference(row.email_verified_session)} ago</span>`;
                 }
-
+                // status on/off
                 if(row.status == 0){
                     statusText = '<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 8px;">OFF</span>';
                     statusOffColor = 'color:black;background-color: #fff;';
@@ -60,22 +65,30 @@
                     statusText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 8px;">ON</span>';
                     statusOffColor = 'color:black;background-color: #fff;';
                 }
+                // email verified update date
+                if(row.status == 0 || row.created_at == null){
+                    emailVerifiedUpdateDate = `<span style="color:#646464;font-size:15px;font-weight:800;padding-left:70px;"> - </span>`;
+                }
+                else if(row.status == 1){
+                    emailVerifiedUpdateDate = `<span>${formatDate(row.created_at)}</span>`;
+                }
+
                 return `
                     <tr class="table-row user-table-row supp-table-row" key="${key}" id="supp_tab">
                         <td class="sn border_ord" id="supp_tab2" hidden>${row.id}</td>
                         <td class="txt_ user_id ps-2" id="supp_tab3">
                             ${row.user_id}
                         </td>
-                        <td class="border_ord ps-1 supp_vew" id="supp_tab4">${row.name}</td>
+                        <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.roles.name}</td>
                         <td class="txt_ ps-1 supp_vew2" id="supp_tab5">
                             <span style="color:gray"><i class="fa fa-envelope"></i></span>
-                            ${row.email} 
+                            ${row.email}
                             <span class="${statusBg} permission edit_inventory_table" style="font-size:12px; ${statusColor}">
                                 ${verifyText}
                             </span>
+                            ${activeTime ? activeTime : ''}
                         </td>
-                        <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.roles.name}</td>
-                        <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${formatDate(row.email_verified_session)}</td>
+                        <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${emailVerifiedDate}</td>
                         <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${formatDate(row.account_create_session)}</td>
                         <td class="tot_complete_ center ps-1" id="user_set9">
                             <span class="form-check form-switch pt-1">
@@ -85,14 +98,25 @@
                                 </span>
                             </span>
                         </td>
-                        <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${formatDate(row.created_at)}</td>
+                        <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${emailVerifiedUpdateDate}</td>
                     </tr>
                 `;
             }).join("\n");
         }
-
         // Fetch User Activities Data ------------------
-        function fetch_users_email_verification_data(query = '', url = null, perItem = null) {
+        function fetch_users_email_verification_data(
+            query = '', 
+            url = null, 
+            perItem = null, 
+            sortFieldId = 'id', 
+            sortFieldRole = 'role', 
+            sortFieldEmail = 'email', 
+            sortFieldEmailVerified = 'email_verified_session', 
+            sortFieldAccountCreate = 'account_create_session', 
+            sortFieldStatus = 'status', 
+            sortFieldUpdateEmailVerified = 'created_at', 
+            sortDirection = 'desc'
+        ){
 
             if (perItem === null) {
                 perItem = $("#perItemControl").val();
@@ -111,7 +135,15 @@
                 dataType: 'json',
                 data: {
                     query: query,
-                    per_item: perItem
+                    per_item: perItem,
+                    sort_field_id: sortFieldId,
+                    sort_field_role: sortFieldRole,
+                    sort_field_email: sortFieldEmail,
+                    sort_field_email_verified: sortFieldEmailVerified,
+                    sort_field_account_create: sortFieldAccountCreate,
+                    sort_field_status: sortFieldStatus,
+                    sort_field_update_email_verified: sortFieldUpdateEmailVerified,
+                    sort_direction: sortDirection
                 },
                 success: function({ email_verifications, links, total }) {
                     $("#user_email_verification_data_table").html(table_rows(email_verifications));
@@ -140,7 +172,39 @@
                 }
             });
         }
+        // Event Listener for sorting columns
+        $(document).on('click', '#th_sort', function () {
 
+            var button = $(this);
+            // Get the column and current order
+            var column = button.data('column');
+            var order = button.data('order');
+            // Toggle the order (asc/desc)
+            order = order === 'desc' ? 'asc' : 'desc';
+            button.data('order', order);
+            fetch_users_email_verification_data(
+                '', null, null, 
+                column === 'id' ? column : 'id', 
+                column === 'role' ? column : 'role', 
+                column === 'email' ? column : 'email', 
+                column === 'email_verified_session' ? column : 'email_verified_session', 
+                column === 'account_create_session' ? column : 'account_create_session', 
+                column === 'status' ? column : 'status', 
+                column === 'created_at' ? column : 'created_at', 
+                order
+            );
+
+            // Reset all icons in the table headers first - icon part
+            $('#th_sort').find('.toggle-icon').html('<i class="fa-solid fa-arrow-down-long"></i>');
+            var icon = button.find('.toggle-icon');
+            if (order === 'desc') {
+                icon.html('<i class="fa-solid fa-arrow-up-long"></i>');
+                $(".toggle-icon").fadeIn(300);
+            } else {
+                icon.html('<i class="fa-solid fa-arrow-down-long"></i>');
+                $(".toggle-icon").fadeIn(300);
+            }
+        });
         // peritem change
         $("#perItemControl").on('change', (e) => {
             const {
@@ -229,6 +293,16 @@
         // Refresh
         $(document).on('click', '#refresh', function(){
             fetch_users_email_verification_data(); 
+            
+            $(".refresh-icon").removeClass('refrsh-hidden');
+            var time = null;
+            time = setTimeout(() => {
+                $(".refresh-icon").addClass('refrsh-hidden');
+            }, 1000);
+
+            return()=>{
+                clearTimeout(time);
+            }
         });
 
     });

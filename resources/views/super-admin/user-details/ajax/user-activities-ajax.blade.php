@@ -1,21 +1,7 @@
-<script>
+<script type="module">
+    import { getTimeDifference } from "/helper-functions/helper-function.js";
+    import { formatDate } from "/helper-functions/helper-function.js";
     $(document).ready(function(){
-        const formatDate = (dateString) => {
-            const date = new Date(dateString);
-
-            // Format date
-            const options = {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric',
-                hour12: true
-            };
-
-            return date.toLocaleString('en-US', options);
-        };
         // ACtive table row background
         $(document).on('click', 'tr.table-row', function(){
             $(this).addClass("clicked").siblings().removeClass("clicked");
@@ -40,48 +26,7 @@
             }
 
             return [...rows].map((row, key) => {
-                let current_date = new Date();
                 let statusText, statusOffColor, currentLogText, activeTime, updateDate, lastActivity, tdPadding;
-
-                // Helper function to calculate time difference
-                const getTimeDifference = (startDate) => {
-                    const currentDate = new Date();
-                    const start = new Date(startDate);
-
-                    // Total difference in milliseconds
-                    const diffMs = currentDate - start;
-
-                    // Calculate the difference in months
-                    let months = currentDate.getMonth() - start.getMonth() +
-                    (12 * (currentDate.getFullYear() - start.getFullYear()));
-
-                    // Adjust for days when the start date is later in the month than the current date
-                    if (currentDate.getDate() < start.getDate()) {
-                        months -= 1;
-                    }
-
-                    // Calculate the difference in days
-                    let days = currentDate.getDate() - start.getDate();
-                    if (days < 0) {
-                        // Get the number of days in the previous month
-                        const previousMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
-                        days += previousMonth.getDate();
-                    }
-
-                    // Calculate the difference in hours and minutes
-                    const diffHrs = Math.floor((diffMs % 86400000) / 3600000);  // hours
-                    const diffMins = Math.floor(((diffMs % 86400000) % 3600000) / 60000);  // minutes
-
-                    // Construct the final output string
-                    let result = '';
-                    if (months > 0) result += `${months} months `;
-                    if (days > 0) result += `${days} days `;
-                    if (diffHrs > 0) result += `${diffHrs} hrs `;
-                    result += `${diffMins} mins`;
-
-                    return result.trim();  // Trim to remove any extra spaces
-                };
-
                 if (row.payload == 'logout') {
                     statusText = '<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 11px;letter-spacing: 1px;">logout</span>';
                     statusOffColor = 'color:black;background-color: #fff;';
@@ -141,7 +86,7 @@
             }).join("\n");
         }
         // Fetch User Activities Data ------------------
-        function fetch_activities_users_data(query = '', url = null, perItem = null, sortField = 'id', sortDirection = 'asc') {
+        function fetch_activities_users_data(query = '', url = null, perItem = null, sortField = 'id', sortDirection = 'desc') {
             if (perItem === null) {
                 perItem = $("#perItemControl").val();
             }
@@ -192,7 +137,6 @@
                 }
             });
         }
-
         fetch_current_users_activities_data();
         // Fetch Current User Activities Data ------------------
         function fetch_current_users_activities_data() {
@@ -263,7 +207,7 @@
             var column = button.data('column');
             var order = button.data('order');
             // Toggle the order (asc/desc)
-            order = order === 'asc' ? 'desc' : 'asc';
+            order = order === 'desc' ? 'asc' : 'desc';
             button.data('order', order);
             fetch_activities_users_data('', null, null, column, order);
 

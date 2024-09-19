@@ -1,19 +1,5 @@
 <script>
     $(document).ready(function(){
-        // Refresh Button
-        $(document).on('click', '#refresh', function(){
-
-            $(".refresh-icon").removeClass('refrsh-hidden');
-
-            var time = null;
-            time = setTimeout(() => {
-                $(".refresh-icon").addClass('refrsh-hidden');
-            }, 1000);
-
-            return()=>{
-                clearTimeout(time);
-            }
-        });
         // Home Tab
         $(document).on('click', '#tabHome', function() {
       

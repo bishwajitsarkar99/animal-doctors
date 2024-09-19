@@ -266,7 +266,7 @@ class AuthController extends Controller
             $emailVerification = EmailVerification::where('email', $userEmail)->firstOrFail();
             $emailVerification->update([
                 'email_verified_session' => now(),
-                // 'status' => !$emailVerification->status,
+                'status' => !$emailVerification->status,
             ]);
 
             $userVerification = User::where('email', $userEmail)->firstOrFail();

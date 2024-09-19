@@ -62,8 +62,13 @@
                                                 <span style="font-size:small;letter-spacing:0.5px;">
                                                     @if ($user->email_verified_at != null)
                                                         <span class="badge text-white bg-success" style="letter-spacing: 1px;">Verified</span>
+                                                        <span style="color:blue;font-size:11px;font-weight:700;">
+                                                            <span style="color:blue;font-size:11px;font-weight:700;" id="verificationTime_{{ $user->id }}"></span> 
+                                                            ago
+                                                        </span>
                                                     @else
                                                         <span class="badge text-white bg-danger" style="letter-spacing: 1px;">Not Verified</span>
+                                                        <span style="color:orangered;font-size:14px;font-weight:700;" id="verificationTime_{{ $user->id }}"> - </span>
                                                     @endif
                                                 </span>
                                             </label><br>
@@ -71,14 +76,20 @@
                                             <label for="create">Account Created : <span style="font-size:small;letter-spacing:0.5px;">{{ date('d l M Y h:i:sA', strtotime($user->created_at)) }}</span><br></label><br>
                                             <label for="create">Email Verification : 
                                                 @if ($user->email_verified_at == null)
-                                                    <span class="badge text-danger" style="letter-spacing: 1px;">- - - - - - - - - - Null Date - - - - - - - - - - - </span>
+                                                    <span class="badge text-danger" style="letter-spacing: 1px;">- - - - - - - - - - Null - - - - - - - - - - - </span>
                                                 @else
                                                     <span style="font-size:small;letter-spacing:0.5px;">
                                                         {{ date('d l M Y h:i:sA', strtotime($user->email_verified_at)) }}
                                                     </span>
                                                 @endif
                                             </label><br>
-                                            <label for="update">Account Last Updated : <span style="font-size:small;letter-spacing:0.5px;">{{ date('d l M Y h:i:sA', strtotime($user->updated_at)) }}</span><br></label>
+                                            <label for="update">Account Last Updated : 
+                                                @if($user->remember_token == null)
+                                                    <span class="badge text-danger" style="letter-spacing: 1px;">- - - - - - - Null - - - - - - - - - - - </span>
+                                                @else
+                                                    <span style="font-size:small;letter-spacing:0.5px;">{{ date('d l M Y h:i:sA', strtotime($user->updated_at)) }}</span><br>
+                                                @endif
+                                            </label>
                                         </td>
                                         <td class="sn border_ord us_td skeleton">
                                             @if ($user->roles == null)
@@ -132,6 +143,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 @endsection
 @section('script')
+<script type="module" src="{{asset('/helper-functions/helper-function.js')}}"></script>
+@include('super-admin.account-holders.helper-function-support')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>

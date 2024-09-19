@@ -282,14 +282,14 @@ img#loaderShow {
 }
 .first-card, .second-card, .third-card, .four-card,.log-panel-card {
     border: none;
-    box-shadow: 0px 1px 10px #0001, 0px 0px 2px #0001;
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
     /* background-image: radial-gradient(farthest-corner at 100px 100px, white, white); */
     background-image: repeating-linear-gradient(55deg, #e39a3b, transparent 1px);
     opacity: 1;
 }
 .five-card{
     border: none;
-    box-shadow: 0px 1px 10px #0001, 0px 0px 2px #0001;
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
     background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
     opacity: 1;
 }
@@ -301,7 +301,7 @@ img#loaderShow {
 div.card.order_line_chart {
     transition: 0.5s;
     border: none;
-    box-shadow: 0px 1px 10px #0001, 0px 0px 2px #0001;
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
     background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
     opacity: 1;
 }
@@ -356,6 +356,7 @@ div.card.order_line_chart {
     border: none;
 }
 .login-user-title{
+    padding-left: 10px;
     font-family: var(--nav-font-family);
     font-size: 15px;
     font-weight: 800;
@@ -752,9 +753,10 @@ a.page-link.btn_page {
 }
 .table-container-card{
     border: none;
-    box-shadow: 0px 1px 10px #0001, 0px 0px 2px #0001;
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
     padding-top: 10px;
     padding-bottom: 15px;
+    border-radius: 5px;
 }
 .table-container-card:hover{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
@@ -763,7 +765,7 @@ a.page-link.btn_page {
 }
 .chart-card{
     border: none;
-    box-shadow: 0px 1px 10px #0001, 0px 0px 2px #0001;
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
 }
 .chart-card:hover{
     --mdb-box-shadow-color-rgb: 0, 0, 0;

@@ -269,12 +269,21 @@ class SuperAdminController extends Controller
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
 
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_field_role = $request->input('sort_field_role', 'role');
+        $sort_field_email = $request->input('sort_field_email', 'email');
+        $sort_field_email_verified = $request->input('sort_field_email_verified', 'email_verified_session');
+        $sort_field_account_create = $request->input('sort_field_account_create', 'account_create_session');
+        $sort_field_status = $request->input('sort_field_status', 'status');
+        $sort_field_update_email_verified = $request->input('sort_field_update_email_verified', 'created_at');
+        $sort_direction = $request->input('sort_direction', 'desc');
+        //Filter
         $role = $request->input('role');
 
         // Initialize query for email verifications
         $email_verifications = EmailVerification::with(['roles'])
-            ->whereBetween('updated_at', [$startOfMonth, $endOfMonth])
-            ->orderBy('id', 'desc');
+            ->whereBetween('updated_at', [$startOfMonth, $endOfMonth]);
 
         // Apply search query filters
         if ($query = $request->get('query')) {
@@ -287,14 +296,21 @@ class SuperAdminController extends Controller
 
         // Filter
         if ($role) {
-            $email_verifications->where('role', 'LIKE', '%' . $role . '%');
+            $email_verifications->whereHas('roles', function ($q) use ($role) {
+                $q->where('name', 'LIKE', '%' . $role . '%');
+            });
         }
 
         // Set pagination items per page
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
-        }
+        $perItem = $request->input('per_item', 10);
+        // Apply sorting
+        $email_verifications->orderBy($sort_field_id, $sort_direction)
+                            ->orderBy($sort_field_role, $sort_direction)
+                            ->orderBy($sort_field_email, $sort_direction)
+                            ->orderBy($sort_field_email_verified, $sort_direction)
+                            ->orderBy($sort_field_account_create, $sort_direction)
+                            ->orderBy($sort_field_status, $sort_direction)
+                            ->orderBy($sort_field_update_email_verified, $sort_direction);
         // Paginate results
         $email_verifications = $email_verifications->paginate($perItem);
 
@@ -318,10 +334,13 @@ class SuperAdminController extends Controller
         $status = (bool)$request->input('status');
         $status = !$status;
 
+        // $created_at = $status ? Carbon::now() : null;
+
         $data = EmailVerification::findOrFail($id);
 
         $data->update([
             'status' => (int)$status,
+            'created_at' => now(), 
         ]);
 
         return response()->json([
