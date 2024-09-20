@@ -43,11 +43,13 @@
     </div>
     <div class="modal-footer" id="logoutModal_footer" style="background: transparent;background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);">
         <p id="logout_btn_group">
-            <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal">{{__('translate.Cancel')}}</a>
+            <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal">
+                {{__('translate.Cancel')}}
+            </a>
         </p>
         <p id="logout_btn_group2">
-            <a href="/logout" type="button" class="btn btn-success modal_button logout_button" id="submitbtn">
-                <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
+            <a href="/logout" type="button" class="btn btn-success modal_button logout_button logout" id="submitbtn">
+                <span class="yes-icon spinner-border spinner-border-sm text-white yes-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                 <span class="btn-text">{{__('translate.Yes')}}</span>
             </a>
         </p>

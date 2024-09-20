@@ -13,6 +13,7 @@
             $('#logout_btn_group').addClass('logout-btn-skeleton');
             $('#logout_btn_group2').addClass('logout-btn-skeleton');
             $(".loader-login").removeClass('close_loader_modal');
+            $('.yes-icon').removeClass('yes-hidden');
 
             var time = null;
             time = setTimeout(() => {
@@ -24,6 +25,18 @@
                 $('#logout_btn_group').removeClass('logout-btn-skeleton');
                 $('#logout_btn_group2').removeClass('logout-btn-skeleton');
                 $(".loader-login").addClass('close_loader_modal');
+                $('.yes-icon').addClass('yes-hidden');
+            }, 1000);
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
+        $(document).on('click', '.logout', function(e) {
+            $('.yes-icon').removeClass('yes-hidden');
+
+            var time = null;
+            time = setTimeout(() => {
+                $('.yes-icon').addClass('yes-hidden');
             }, 1000);
             return ()=>{
                 clearTimeout(time);

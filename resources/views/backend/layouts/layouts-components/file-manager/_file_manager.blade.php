@@ -10,7 +10,7 @@
                 <input type="search" class="form-control form-control-sm srch_name" name="folder_name" placeholder="Search Folder Name" id="srch_name">
                 <span class="show__table">
                     <input type="checkbox" class="ms-2 table-btn" id="tableCheck" data-bs-toggle="tooltip" data-bs-placement="right" title="Folder-Table" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                    <span class="ms-4 table-label color-mode regular-color">Table </span>
+                    <span class="ms-4 table-label" style="color:black;font-weight:800;">Table </span>
                 </span>
                 <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" 
                     data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" 
@@ -42,18 +42,15 @@
                                 <div class="col-3">
                                     <div class="new_btn_skeletone" id="newBtnMode"></div>
                                     <button type="button" class="btn btn-sm btn-success new_display" id="createFolderBtn" style="line-height: 1px;">
-                                        <i class="create-icon fa fa-spinner fa-spin create-hidden"></i>
+                                        <span class="create-icon spinner-border spinner-border-sm text-white create-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                         <span class="btn-text">Create</span>
-                                        <span class="create-btn"></span>
                                     </button>
                                     <button type="button" class="btn btn-sm btn-success new_display" id="updateFolderBtn" style="line-height: 1px;">
-                                        <i class="update-folder-icon fa fa-spinner fa-spin update-folder-hidden"></i>
+                                        <span class="update-folder-icon spinner-border spinner-border-sm text-white update-folder-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                         <span class="btn-text">Update</span>
-                                        <span class="update-btn"></span>
                                     </button>
                                     <button type="button" class="btn btn-sm btn-danger new_display" id="cancelFolderBtn" style="line-height: 1px;">
                                         <span class="btn-text">Cancel</span>
-                                        <span class="cancel-btn"></span>
                                     </button>
                                 </div>
                             </div>
@@ -80,9 +77,8 @@
                             <div class="col-3">
                                 <div class="upload_btn_skeletone" id="uploadBtnMode"></div>
                                 <button type="button" class="btn btn-sm btn-success" style="line-height: 1px;" id="uploadBtn">
-                                    <i class="upload-icon fa fa-spinner fa-spin upload-hidden"></i>
+                                    <span class="upload-icon spinner-border spinner-border-sm text-white upload-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                     <span class="btn-text">Upload</span>
-                                    <span class="upload-btn"></span>
                                 </button>
                             </div>
                         </div>
@@ -106,9 +102,8 @@
                                 <!-- Button to trigger fetching files -->
                                 <div class="searh_btn_skeletone" id="srchBtnMode"></div>
                                 <button type="button" class="btn btn-sm btn-success" style="line-height: 1px;" id="searchFile">
-                                    <i class="search-icon fa fa-spinner fa-spin search-hidden"></i>
+                                    <span class="search-icon spinner-border spinner-border-sm text-white search-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                     <span class="btn-text">Search</span>
-                                    <span class="search-fold"></span>
                                 </button>
                             </div>
                         </div>
@@ -188,7 +183,7 @@
             </div>
             <div class="modal-footer profile_modal_footer">
                 <button type="button" class="btn btn-sm modal_button delet_btn_folder btn_focus" id="deleteLoader">
-                    <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
+                    <span class="delete-icon spinner-border spinner-border-sm text-white delete-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                     <span class="btn-text">Delete</span>
                 </button>
                 <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete3" data-bs-dismiss="modal">Cancel</button>
@@ -199,10 +194,9 @@
 {{-- End EDelete User Modal---}}
 
 {{-- start tooltip script --}}
-<script>
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    });
+<script type="module" src="/module/module-min-js/tooltip-helper-function-min.js"></script>
+<script type="module">
+    import { toolTip } from "/module/module-min-js/tooltip-helper-function-min.js";
+    toolTip();
 </script>
 {{-- end tooltip script --}}
