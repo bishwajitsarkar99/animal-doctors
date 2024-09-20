@@ -204,12 +204,25 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: none;
 }
 .menu-skeleton,.whatsapp-skeleton,.messenger-skeleton,.facebook-skeleton,.logo-skeleton,.headings-skeleton
-,.input-email-skeleton,.input-password-skeleton,.button-skeleton,.email-label-skeleton{
+,.input-email-skeleton,.input-password-skeleton,.button-skeleton,.email-label-skeleton,.error-skeleton{
   position: relative;
 }
 .login_card {
   --mdb-box-shadow-color-rgb: 0, 0, 0;
   box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+}
+.error-skeleton::before{
+  content: "";
+  position: absolute;
+  left: -314px;
+  top: 31px;
+  width: 300px;
+  height: 33%;
+  border-radius: 3px;
+  z-index: 10;
+  background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+  background-size: 200%;
+  animation: skeleton 1s infinite reverse;
 }
 .email-label-skeleton::before{
   content: "";
@@ -229,7 +242,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   position: absolute;
   left: 23px;
   top: -6px;
-  width: 213px;
+  width: 217px;
   height: 31px;
   border-radius: 3px;
   z-index: 10;
@@ -240,9 +253,9 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 .input-password-skeleton::before{
   content: "";
   position: absolute;
-  left: 0px;
+  left: -2px;
   top: -5px;
-  width: 214px;
+  width: 217px;
   height: 30px;
   border-radius: 3px;
   z-index: 10;
@@ -786,10 +799,10 @@ a.doctors_link{
 input.password {
   /* background-image: var(--bs-email-background-color); */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  width: 65%;
+  width: 66%;
   word-spacing: normal;
   letter-spacing: 0.5px;
-  margin-left: 0;
+  margin-left: -2px;
   outline: none;
   animation: inputColor 2s infinite;
   border-radius: 4px;
@@ -929,7 +942,7 @@ i.fa-solid.fa-stethoscope.fa-beat-fade {
 input.email {
   /* background-image: var(--bs-email-background-color); */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  width: 65%;
+  width: 66%;
   word-spacing: normal;
   letter-spacing: 0.5px;
   outline: none;
@@ -955,7 +968,7 @@ input.email:focus{
   color: dodgerblue;
 }
 span.text-danger.input_message {
-  margin-left: 82px;
+  margin-left: 10px;
   font-size: 10px;
   letter-spacing: 0.3px;
 }
@@ -1033,7 +1046,7 @@ button.btn.btn-sm.btn.login_button {
   font-weight: 700;
   outline: none;
   letter-spacing: 1px;
-  margin-left: -2px;
+  margin-left: -4px;
   border-radius: 3px;
   transition: border-color 0.3s ease, background-color 0.3s ease;
   animation: text_font_color 5s infinite;

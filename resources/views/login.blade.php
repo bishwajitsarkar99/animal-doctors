@@ -131,7 +131,7 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-4 mb-5" style="margin-top:px">
+            <div class="col-md-4 mb-5 mt-3" style="margin-top:px">
                 <h4 class="heading_admin text-shadow" style="text-align: center;"><span class="skeleton head-animation">{{ setting('login_page_title')}}</span></h4>
                 <div class="card card-form-control login_card">
                     <form id="loginForm" action="{{ route('login') }}" method="POST" autocomplete="off">
@@ -146,12 +146,14 @@
                             <div class="row">
                                 <div class="form-group ms-4">
                                     <label class="email email-label-skeleton" for="email">Email :</label>
-                                    <span class="input-email-skeleton"><input class="email_src email show-current-border ps-1 mt-5" type="text" name="email" placeholder="Enter Email Address" value="{{old('email')}}" autofocus></span>
+                                    <span class="input-email-skeleton">
+                                        <input class="email_src email show-current-border ps-1 mt-5" type="text" name="email" placeholder="Enter Email Address" value="{{old('email')}}" autofocus>
+                                    </span>
                                     <span style="color:green;font-weight:800;font-size: 15px;">
                                         <i class="src_email fa fa-check src_email-hidden"></i>
                                     </span>
-                                    <span class="text-danger input_message show-error remove-error-one skeleton">@error('email')
-                                        {{$message}}@enderror
+                                    <span class="text-danger input_message show-error remove-error-one">@error('email')
+                                        Error Messages : {{$message}}@enderror
                                     </span><br>
                                 </div>
                                 <div class="form-group ms-4">
@@ -160,8 +162,8 @@
                                     <span style="color:green;font-weight:800;font-size: 15px;">
                                         <i class="src_password fa fa-check src_password-hidden"></i>
                                     </span>
-                                    <span class="text-danger input_message show-error2 remove-error-two skeleton">@error('password')
-                                        {{$message}}@enderror
+                                    <span class="text-danger input_message show-error2 remove-error-two">@error('password')
+                                    Error Messages : {{$message}}@enderror
                                     </span><br>
                                 </div>
                                 <div class="col-md-9 offset-md-3">
@@ -189,8 +191,53 @@
 
     <!-- JQUERY CDN LINK -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-function.js"></script>
+    <script type="module">
+        import { buttonLoader, pageLoader, handleSuccessMessage, toolTip, browserInpect, rightSideBar, handleInputValidation } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-function.js";
+        buttonLoader();
+        pageLoader();
+        toolTip();
+        //browserInpect();
 
-    <script src="{{asset('backend_asset')}}/support_asset/auth/js/loader.min.js"></script>
+        $(document).ready(function () {
+            // Initialize the message
+            handleSuccessMessage('#success_message');
+            // Initialize the button loader for the login button
+            buttonLoader('.login_button', '.loading-icon', '.btn-text', 'Login...', 'Login', 6000);
+            // Initialize right sidebar canvas the loader modal with skeleton loading effect
+            rightSideBar(
+                '.menu_btn',                   // Button selector to attach the click event
+                '#loader_modal',               // Modal selector
+                '.side_canvas_animation',       // Loader selector
+                [                               // Array of elements to apply skeleton effect
+                    '.head_auth', 
+                    '.btn-close', 
+                    '.forg_page', 
+                    '.reg_page', 
+                    '.logn_page'
+                ],
+                2000
+            );
+            // Handle email validation
+            handleInputValidation(
+                '.email_src',              // Input selector
+                '.show-error',             // Error message selector
+                'show-success-border',     // Success class
+                'is-invalid',              // Error class
+                'show-current-border',     // Default border class
+                '.src_email'               // Success message selector
+            );
+            // Handle password validation
+            handleInputValidation(
+                '.password_src',           // Input selector
+                '.show-error2',            // Error message selector
+                'show-success-border',     // Success class
+                'is-invalid',              // Error class
+                'show-current-border',     // Default border class
+                '.src_password'            // Success message selector
+            );
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
         // skeleton
@@ -271,6 +318,13 @@
                 item.classList.remove('facebook-skeleton')
             });
         }
+        function errorSkeleton(){
+            const  allSkeleton = document.querySelectorAll('.error-skeleton')
+        
+            allSkeleton.forEach(item=>{
+                item.classList.remove('error-skeleton')
+            });
+        }
         setTimeout(() => {
             headSkeleton();
             logo();
@@ -286,15 +340,6 @@
         }, 2000);
     </script>
     <script>
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        });
-        $(document).ready(function(){
-            $("#loginForm").addClass('loginForm');
-        });
-    </script>
-    <script>
         gsap.from("#page_head h1",{
             y:100,
             opacity:0,
@@ -304,118 +349,19 @@
         })
     </script>
     <script>
-        window.addEventListener('load', function() {
-            const loader = document.querySelector(".loader-login");
-            const loaderModal = new bootstrap.Modal(document.getElementById('loaderModalForm'));
-
-            loaderModal.show();
-            loader.className += " log_close";
-            setTimeout(function() {
-                loaderModal.hide();
-            }, 2000);
-        });
-    </script>
-    <script>
         $(document).ready(function(){
-            $(document).on('click', '.menu_btn', function(e){
-                e.preventDefault();
-                $("#loader_modal").modal('show');
-                $(".side_canvas_animation").removeAttr('hidden');
-                $(".head_auth").addClass('auth-skeleton');
-                $(".btn-close").addClass('auth-skeleton');
-                $(".forg_page").addClass('auth-skeleton');
-                $(".reg_page").addClass('auth-skeleton');
-                $(".logn_page").addClass('auth-skeleton');
-
-                setTimeout(() => {
-                    $("#loader_modal").modal('hide');
-                    $(".side_canvas_animation").attr('hidden', true);
-                    $(".head_auth").removeClass('auth-skeleton');
-                    $(".btn-close").removeClass('auth-skeleton');
-                    $(".forg_page").removeClass('auth-skeleton');
-                    $(".reg_page").removeClass('auth-skeleton');
-                    $(".logn_page").removeClass('auth-skeleton');
-                }, 2000);
-            });
-            
-        });
-    </script>
-    <script>
-        // Success Message Show
-        $(document).ready(function () {
-            var successMessage = $('#success_message').text().trim();
-            if (successMessage) {
-                $('#success_message').fadeIn();
-                var time = null;
-                time = setTimeout(() => {
-                    $('#success_message').fadeOut(6000);
-                    $('#success_message').delay(6000);
-                }, 3000);
-                return ()=>{
-                    clearTimeout(time);
-                }
-            }
-
-            // Check and set the border style for email input on page load
-            var emailErrorMessage = $(".show-error").text().trim();
-            $(".show-error").attr("data-error", emailErrorMessage);
-
-            if (emailErrorMessage !== '') {
-                $(".email_src").removeClass('show-current-border').addClass('is-invalid');
-            } else {
-                var emailVal = $(".email_src").val().trim();
-                if (emailVal !== '') {
-                    $(".email_src").removeClass('show-current-border').addClass('show-success-border');
-                    $(".src_email").removeClass('src_email-hidden').fadeIn(200).delay(200);
-                } else {
-                    $(".email_src").addClass('show-current-border').removeClass('is-invalid');
-                }
-            }
-
-            // Check and set the border style for password input on page load
-            var passwordErrorMessage = $(".show-error2").text().trim();
-            $(".show-error2").attr("data-error", passwordErrorMessage);
-
-            if (passwordErrorMessage !== '') {
-                $(".password_src").removeClass('show-current-border').addClass('is-invalid');
-            } else {
-                var passwordVal = $(".password_src").val().trim();
-                if (passwordVal !== '') {
-                    $(".password_src").removeClass('show-current-border').addClass('show-success-border');
-                    $(".src_password").removeClass('src_password-hidden').fadeOut(200).delay(200);
-                } else {
-                    $(".password_src").addClass('show-current-border').removeClass('is-invalid');
-                }
-            }
-
-            // Handle input changes for email
-            $(document).on('keyup', '.email_src', function() {
-                var inputVal = $(this).val();
-                $(".remove-error-one").text('');
-                $(".email_src").removeClass('show-error-border');
-
-                if (inputVal !== '') {
-                    $(this).removeClass('show-current-border').addClass('show-success-border').removeClass('is-invalid');
-                    $(".src_email").removeClass('src_email-hidden').fadeIn(200).delay(200);
-                } else {
-                    $(this).addClass('show-current-border').removeClass('show-success-border');
-                    $(".src_email").addClass('src_email-hidden').fadeOut(200).delay(200);
-                }
-            });
-
-            // Handle input changes for password
-            $(document).on('keyup', '.password_src', function() {
-                var inputVal = $(this).val();
-                $(".remove-error-two").text('');
-                $(".password_src").removeClass('show-error-border');
-
-                if (inputVal !== '') {
-                    $(this).removeClass('show-current-border').addClass('show-success-border').removeClass('is-invalid');
-                    $(".src_password").removeClass('src_password-hidden').fadeIn(200).delay(200);
-                } else {
-                    $(this).addClass('show-current-border').removeClass('show-success-border');
-                    $(".src_password").addClass('src_password-hidden').fadeOut(200).delay(200);
-                }
+            // Errors Skeleton
+            $(document).on('click', '#submit', function(){
+                var errorMessageOne = $('.remove-error-one').text().trim();
+                var errorMessageTwo = $('.remove-error-two').text().trim();
+                if(errorMessageOne !== '' && errorMessageTwo !== '')[
+                    $('.remove-error-one').addClass('error-skeleton');
+                    $('.remove-error-two').addClass('error-skeleton');
+                    setTimeout(() => {
+                        //$('.remove-error-one').removeClass('error-skeleton');
+                        //$('.remove-error-two').removeClass('error-skeleton');
+                    }, 2000);
+                ]
             });
         });
     </script>

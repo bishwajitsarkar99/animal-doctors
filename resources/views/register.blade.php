@@ -67,11 +67,11 @@
     </header>
 
     <body class="register_background-color">
-        <div class="modal fade" id="loaderRegisterForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered">
                 <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
                     <div class="modal-body" id="loaderRegisterModal_body">
-                        <div class="loader-register">
+                        <div class="loader-login">
                             <img src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
                         </div> 
                     </div>
@@ -188,7 +188,7 @@
                                                                     <span class="image_size cap-skeleton" style="text-transform: uppercase;">150 x 150 (px) 
                                                                         <span style="color:green;font-weight:800;font-size: 15px;"><i class="six-check fa fa-check check-hidden"></i></span>
                                                                     </span>
-                                                                    <div class="img-area" id="registerAnimation">
+                                                                    <div class="img-area skeleton" id="registerAnimation">
                                                                         <span class="skeleton"><img class="register_img image-current-border imge-border img-hidden" id="output" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500"></span>
                                                                     </div>
                                                                     <span class="file-skeleton"></span>
@@ -199,11 +199,14 @@
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <div class="upload-group align-items-center justify-content-center">
-                                                                        <div class="progress">
+                                                                        <div class="progress skeleton">
                                                                             <div class="bar"></div>
                                                                             <div class="percent">0%</div>
                                                                         </div>
-                                                                        <a class="btn btn-group-sm upload_btn upload-button-skeleton" id="uploadButton">Upload</a>
+                                                                        <a class="btn btn-group-sm upload_btn upload-button-skeleton" id="uploadButton">
+                                                                            <span class="upload-btn-text">Upload</span>
+                                                                            <span class="img-upload-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -211,13 +214,13 @@
                                                         <div class="mb-1 d-grid">
                                                             <button type="submit" class="btn btn-sm btn-primary forget_button register_btn register_action" id="reg_submit">
                                                                 <span class="btn-text">Register</span>
-                                                                <span class="register-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                                                                <span class="register-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                             </button>
                                                             <span class="button-skeleton"></span>
                                                         </div>
                                                         <a type="button" class="btn_back skeleton ps-2 pe-2 pb-1" href="/" id="back_login">
                                                             <span class="btn-back-text">Back</span>
-                                                            <span class="back-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                                                            <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                         </a>
                                                         <span class="button-skeleton"></span>
                                                     </div>
@@ -233,16 +236,48 @@
             </div>
         </div>
         <!-- Boostrap5 JS Table Filter -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js">
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
         <!-- JQUERY CDN LINK -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <!-- Sweet Alert CDN LINK -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
-        <script src="{{asset('backend_asset')}}/support_asset/auth/js/loader.min.js"></script>
-        <script src="{{asset('backend_asset')}}/support_asset/auth/js/img.js"></script>
+        <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js"></script>
+        <script type="module">
+            import { 
+                buttonLoader,
+                imageUploadBtnLoader,
+                pageLoader, 
+                handleSuccessMessage,
+                loadFile,
+                handleImageUpload,
+                toolTip,
+                browserInpect
+            } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
+            buttonLoader();
+            imageUploadBtnLoader();
+            pageLoader();
+            toolTip();
+            //browserInpect();
+
+            $(document).ready(function () {
+                // image uplaod
+                // Bind the image preview
+                const imageInput = document.getElementById('imgInput');
+                if (imageInput) {
+                    imageInput.addEventListener('change', loadFile);
+                }
+                // Initialize the message
+                handleSuccessMessage('#success_message');
+                // Initialize the image upload with progress bar simulation
+                handleImageUpload('#uploadButton');
+                // Initialize the button loader for the login button
+                buttonLoader('#reg_submit', '.register-icon', '.btn-text', 'Register...', 'Register', 3000);
+                buttonLoader('#back_login', '.back-icon', '.btn-back-text', 'Back...', 'Back', 3000);
+            });
+        </script>
         <script>
             // skeleton
             function fetchData(){
@@ -394,27 +429,6 @@
             }, 2000);
         </script>
         <script>
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });
-            $(document).ready(function(){
-                $("#registerAnimation").addClass('loginForm');
-            });
-        </script>
-        <script>
-            window.addEventListener('load', function() {
-                const loader = document.querySelector(".loader-register");
-                const loaderModal = new bootstrap.Modal(document.getElementById('loaderRegisterForm'));
-
-                loaderModal.show();
-                loader.className += " log_close";
-                setTimeout(function() {
-                    loaderModal.hide();
-                }, 2000);
-            });
-        </script>
-        <script>
             $(document).ready(function(){
                 $(document).on('click', '.menu_btn', function(e){
                     e.preventDefault();
@@ -537,28 +551,6 @@
                         $(".six-check").addClass('check-hidden');
                         $(".imge-border").addClass('image-current-border').removeClass('image-success-border');
                     }
-                });
-            });
-        </script>
-        <script>
-            $(document).ready(function () {
-                // Handle file upload click and progress bar display
-                $(document).on('click', '#uploadButton', function () {
-                    var bar = document.querySelector('.bar');
-                    var percent = document.querySelector('.percent');
-                    var simulatedProgress = 0;
-
-                    var uploadInterval = setInterval(function () {
-                        simulatedProgress += 10;
-
-                        if (simulatedProgress <= 100) {
-                            bar.style.width = simulatedProgress + '%';
-                            percent.innerHTML = simulatedProgress + '%';
-                        } else {
-                            clearInterval(uploadInterval);
-                            $(".register_img").removeClass('img-hidden');
-                        }
-                    }, 200);
                 });
             });
         </script>
