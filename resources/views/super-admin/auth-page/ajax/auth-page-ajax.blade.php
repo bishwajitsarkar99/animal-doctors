@@ -1,8 +1,9 @@
-<script type="text/javascript">
+<script type="module">
+    import { activeTableRow } from "/module/module-min-js/helper-function-min.js";
     $(document).ready(function(){
         // ACtive table row background
         $(document).on('click', 'tr.table-row', function(){
-            $(this).addClass("clicked").siblings().removeClass("clicked");
+            activeTableRow(this);
         });
         // Fetch auth pages data
         fetch_auth_page_data();
@@ -101,8 +102,8 @@
                         // Update the status text and styling based on the status value
                         let statusClass, statusText;
                         if (response.data.status == 0) {
-                            statusClass = 'text-danger';
-                            statusText = '❌ Not Allowed';
+                            statusClass = ' text-danger';
+                            statusText = ' Not Allowed ❌';
                             $('#pageSelect').removeClass('show-success-border').addClass('is-invalid');
                             $('#input-field-one').removeClass('show-success-border').addClass('is-invalid');
                             $('#input-field-two').removeClass('show-success-border').addClass('is-invalid');
@@ -166,7 +167,7 @@
                 }
 
                 // Update the statusValue element with the appropriate text and class
-                $('#statusValue').html(statusText).removeClass().addClass('form-check-label form-label ' + statusClass).show();
+                $('#statusValue').html(statusText).removeClass().addClass('form-check-label form-label ms-1 ' + statusClass).show();
             }
         });
         // update page item permission

@@ -11,50 +11,21 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!--========== Ajax-Chart-Js 2.8.0 CDN Link ==========-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<!--========== Disable Right-Click Context Menu ==========-->
-<!-- <script>
-    $(document).ready(function(){
-        $(document).on("contextmenu", function(e) {
-            return false;
-        });
-        // Disable specific keyboard shortcuts
-        document.onkeydown = function(e) {
-            if (e.keyCode == 123) { // F12 key
-                return false;
-            }
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { // Ctrl+Shift+I
-                return false;
-            }
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { // Ctrl+Shift+J
-                return false;
-            }
-            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { // Ctrl+U
-                return false;
-            }
-        };
-    });
-</script> -->
+<!--========== Module - Helper Function Links ==========-->
+<script type="module" src="/module/module-min-js/browser-inspect-function-min.js"></script>
+<script type="module" src="/module/module-min-js/page-loader-function-min.js"></script>
+<script type="module" src="/module/module-min-js/tooltip-helper-function-min.js"></script>
+<script type="module">
+    import { browserInpect } from "/module/module-min-js/browser-inspect-function-min.js";
+    import { pageLoader } from "/module/module-min-js/page-loader-function-min.js";
+    //<!--============ Admin page Tooltip ============-->
+    import { toolTip } from "/module/module-min-js/tooltip-helper-function-min.js";
+    //browserInpect();
+    pageLoader();
+    toolTip();
+</script>
 <!--============= Chart-Pie Js 3D CDN Link =============-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<!--============ Admin page Tooltip ============-->
-<script>
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-</script>
-<script>
-    window.addEventListener('load', function() {
-        const loader = document.querySelector(".loader-login");
-        const loaderModal = new bootstrap.Modal(document.getElementById('loaderModalForm'));
-
-        loaderModal.show();
-        loader.className += " log_close";
-        setTimeout(function() {
-            loaderModal.hide();
-        }, 1000);
-    });
-</script>
 <!-- Dashboard page loader -->
 <script src="{{asset('backend_asset')}}/main_asset/js/loader-js/loader.min.js"></script>
 

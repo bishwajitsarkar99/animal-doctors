@@ -45,7 +45,7 @@
                                     </div>
                                     <a class="btn btn-group-sm upload_btn upload-button-skeleton" id="uploadButton">
                                         <span class="btn-text">Upload</span>
-                                        <i class="image-icon fa fa-spinner fa-spin image-hidden"></i>
+                                        <span class="image-icon spinner-border spinner-border-sm text-white image-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                     </a>
                                 </div>
                             </div>

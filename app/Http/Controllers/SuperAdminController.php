@@ -122,7 +122,6 @@ class SuperAdminController extends Controller
         $sort_field_email = $request->input('sort_field_email', 'email');
         $sort_field_contract_number = $request->input('sort_field_contract_number', 'contract_number');
         $sort_field_role = $request->input('sort_field_role', 'role');
-        $sort_field_email_verified_at = $request->input('sort_field_email_verified_at', 'email_verified_at');
         $sort_field_status = $request->input('sort_field_status', 'status');
 
         $sort_field_direction = $request->input('sort_field_direction', 'desc');
@@ -148,7 +147,6 @@ class SuperAdminController extends Controller
                         ->orderBy($sort_field_email, $sort_field_direction)
                         ->orderBy($sort_field_contract_number, $sort_field_direction)
                         ->orderBy($sort_field_role, $sort_field_direction)
-                        ->orderBy($sort_field_email_verified_at, $sort_field_direction)
                         ->orderBy($sort_field_status, $sort_field_direction);
 
         $users = $users->paginate($perItem)->toArray();

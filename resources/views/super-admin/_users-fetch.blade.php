@@ -1,7 +1,6 @@
 <script type="module">
-    import { formatDate } from "/module/module-min-js/helper-function-min.js";
-    import { mySrcFunction } from "/module/module-min-js/helper-function-min.js";
-    import { activeTableRow } from "/module/module-min-js/helper-function-min.js";
+    import { getTimeDifference, formatDate , mySrcFunction, activeTableRow} from "/module/module-min-js/helper-function-min.js";
+    import { handleImageUpload } from "/module/module-min-js/helper-image-upload-function-min.js";
     $(document).ready(function() {
         // ACtive table row background
         $(document).on('click', 'tr.table-row', function(){
@@ -46,19 +45,13 @@
                     statusBg = 'badge rounded-pill bg-azure';
                     statusSignal = `<span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>`;
                 }
-
-                if(row.email_verified_at == null){
-                    verifyText = '<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">No verified</span>';
-                }else{
-                    verifyText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">Verified</span>';
-                }
                 return `
-                    <tr class="table-row user-table-row user_setting" key="${key}" id="user_set">
-                        <td class="sn border_ord bold" id="user_set2">${row.id}</td>
-                        <td class="tot_order_ center ps-1" id="user_set3">
+                    <tr class="table-row user-table-row user_setting" key="${key}">
+                        <td class="sn border_ord bold">${row.id}</td>
+                        <td class="tot_order_ center ps-1">
                             <img class="user_img rounded-circle user_imgs" src="${row.image.includes('https://')?row.image: '/image/'+ row.image}">
                         </td>
-                        <td class="txt_ ps-1 center" id="user_set4">
+                        <td class="txt_ ps-1 center">
                             <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
                             <ul class="dropdown-menu action ms-4 pe-3">
                                 <li class="upd cgy ps-1">
@@ -71,19 +64,14 @@
                                 </li>
                             </ul>
                         </td>
-                        <td class="txt_ bold ps-1" id="user_set5">${row.name}</td>
-                        <td class="tot_order_ bold ps-1" id="user_set6">
+                        <td class="txt_ bold ps-1">${row.name}</td>
+                        <td class="tot_order_ bold ps-1">
                             <span style="color:gray"><i class="fa fa-envelope"></i></span>
                             ${row.email}
                         </td>
-                        <td class="tot_pending_ bold ps-1" id="user_set7">${row.contract_number}</td>
-                        <td class="tot_pending_ bold ps-1 ${row.role? ' text-primary': ' text-cyan'}" id="user_set8">${row.role ==0 ? 'User': 'Superadmin' && row.role ==2 ? 'SubAdmin': 'User' && row.role ==1 ? 'SuperAdmin': 'User' && row.role ==3 ? 'Admin': 'User' && row.role ==5 ? 'Accounts': 'User' && row.role ==6 ? 'Marketing': 'User' && row.role ==7 ? 'Delivery Team': 'User'}</td>
-                        <td class="tot_complete_ pill ps-1">
-                            <span class="permission edit_inventory_table" style="font-size:12px;">
-                                ${verifyText}
-                            </span>
-                        </td>
-                        <td class="tot_complete_ center ps-1" id="user_set9">
+                        <td class="tot_pending_ bold ps-1">${row.contract_number}</td>
+                        <td class="tot_pending_ bold ps-1 ${row.role? ' text-primary': ' text-cyan'}">${row.role ==0 ? 'User': 'Superadmin' && row.role ==2 ? 'SubAdmin': 'User' && row.role ==1 ? 'SuperAdmin': 'User' && row.role ==3 ? 'Admin': 'User' && row.role ==5 ? 'Accounts': 'User' && row.role ==6 ? 'Marketing': 'User' && row.role ==7 ? 'Delivery Team': 'User'}</td>
+                        <td class="tot_complete_ center ps-1">
                             <input class="form-switch form-check-input check_permission" type="checkbox" user_id="${row.id}" value="${row.status}" ${row.status? " checked": ''} ${row.email_verified_at === null ? 'disabled' : ''}>
                         </td>
                         <td class="tot_complete_ pill ps-1 ${statusClass}">
@@ -109,7 +97,6 @@
             sortFieldEmail = 'email',
             sortFieldContractNumber = 'contract_number',
             sortFieldRole = 'role',
-            sortFieldEmailVerifiedAt = 'email_verified_at',
             sortFieldStatus = 'status',
             sortFieldDirection = 'desc',
 
@@ -138,7 +125,6 @@
                     sort_field_email : sortFieldEmail,
                     sort_field_contract_number : sortFieldContractNumber,
                     sort_field_role : sortFieldRole,
-                    sort_field_email_verified_at : sortFieldEmailVerifiedAt,
                     sort_field_status : sortFieldStatus,
                     sort_field_direction : sortFieldDirection,
                 },
@@ -197,7 +183,6 @@
                 column === 'email' ? column : 'email',
                 column === 'contract_number' ? column : 'contract_number',
                 column === 'role' ? column : 'role',
-                column === 'email_verified_at' ? column : 'email_verified_at',
                 column === 'status' ? column : 'status',
                 order
             );
@@ -229,32 +214,11 @@
 
         // Search-loader
         $(document).on('keyup', '.searchform', function(){
-
             var time = null;
             $("#user_data_table").addClass('skeleton');
-            $("#user_set").addClass('skeleton');
-            $("#user_set2").addClass('skeleton');
-            $("#user_set3").addClass('skeleton');
-            $("#user_set4").addClass('skeleton');
-            $("#user_set5").addClass('skeleton');
-            $("#user_set6").addClass('skeleton');
-            $("#user_set7").addClass('skeleton');
-            $("#user_set8").addClass('skeleton');
-            $("#user_set9").addClass('skeleton');
-            $("#user_set10").addClass('skeleton');
 
             time = setTimeout(() => {
                 $("#user_data_table").removeClass('skeleton');
-                $("#user_set").removeClass('skeleton');
-                $("#user_set2").removeClass('skeleton');
-                $("#user_set3").removeClass('skeleton');
-                $("#user_set4").removeClass('skeleton');
-                $("#user_set5").removeClass('skeleton');
-                $("#user_set6").removeClass('skeleton');
-                $("#user_set7").removeClass('skeleton');
-                $("#user_set8").removeClass('skeleton');
-                $("#user_set9").removeClass('skeleton');
-                $("#user_set10").removeClass('skeleton');
             }, 1000);
 
             return ()=>{
@@ -435,8 +399,12 @@
                         // email verification result
                         if (response.data.email_verified_at === null) {
                             $('#view_user_email_verified').html('<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">No verified</span>');
+                            $('#user_email_verified_session').html('<span style="color:orangered;font-size:14px;font-weight:700;"> - </span>');
                         } else {
                             $('#view_user_email_verified').html('<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">Verified</span>');
+                            // Displaying the calculated time difference
+                            const emailVerifiedSession = getTimeDifference(response.data.email_verified_at);
+                            $('#user_email_verified_session').html('<span style="color:blue;font-size:10px;font-weight:700;">'+ emailVerifiedSession +'</span>');
                         }
                         $('#view_user_contract').val(response.data.contract_number);
                         // email verification date if it exists
@@ -481,6 +449,8 @@
             $(".field_skeletone_three").addClass('capsule-skeletone');
             $(".field_skeletone_four").addClass('capsule-skeletone');
             $(".field_skeletone_five").addClass('sub-skeletone');
+            $(".email__verification").addClass('small-capsule-skeletone');
+            $("#user_email_verified_session").attr('hidden', true);
             $(".image_skeletone").addClass('image-skeletone');
 
             time = setTimeout(() => {
@@ -492,6 +462,8 @@
                 $(".field_skeletone_four").removeClass('capsule-skeletone');
                 $(".image_skeletone").removeClass('image-skeletone');
                 $(".field_skeletone_five").removeClass('sub-skeletone');
+                $(".email__verification").removeClass('small-capsule-skeletone');
+                $("#user_email_verified_session").removeAttr('hidden');
             }, 1000);
             
             return ()=>{
@@ -768,46 +740,7 @@
         });
         // Handle file upload click and progress bar display
         $(document).on('click', '#uploadButton', function () {
-            var imageValue = $("#imgInput").val();
-            var bar = document.querySelector('.bar');
-            var percent = document.querySelector('.percent');
-            var simulatedProgress = parseInt(percent.innerHTML);
-
-            // Check if progress is already 100% and show a message
-            if (simulatedProgress === 100) {
-                $("#uploadMess").html('<span class="upload-mesg">Select an image to upload.</span>');
-                return; // Exit to prevent further actions
-            }
-
-            if (imageValue !== '') {
-                // Check if progress bar is already in progress to avoid multiple intervals
-                if ($('.bar').width() !== 0 && simulatedProgress < 100) {
-                    return; // Prevent starting a new progress simulation if one is already running
-                }
-
-                var simulatedProgress = 0; // Reset simulated progress to start from 0
-
-                // Simulate progress bar
-                var uploadInterval = setInterval(function () {
-                    simulatedProgress += 10;
-
-                    if (simulatedProgress <= 100) {
-                        bar.style.width = simulatedProgress + '%';
-                        percent.innerHTML = simulatedProgress + '%';
-                    } else {
-                        clearInterval(uploadInterval);
-                        $(".register_img").removeClass('img-hidden');
-                    }
-                }, 200);
-
-            } else {
-                // Handle case when no image is selected
-                $("#uploadMess").html('<span class="upload-mesg">Please select an image to upload.</span>'); // Show error message
-
-                // Reset progress bar if no image is selected
-                $('.bar').css('width', '0%');
-                $('.percent').text('0%');
-            }
+            handleImageUpload();
         });
         $(document).load('click', function(){
             $("#loader_userdelete").addClass('loader_chart');

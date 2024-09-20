@@ -32,7 +32,7 @@
               <!-- <img id="locker" class="checking_lock skeleton pt-1" src="{{ asset('image/lock/lock.png')}}" alt="lock"> -->
             </div>
             <div class="table-responsive">
-              <table class="ord_table center border-1 mt-1 skeleton">
+              <table class="bg-transparent ord_table center border-1 skeleton">
                 <tr class="table-row order_body acc_setting_table skeleton">
                   <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="id" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> ID</th>
                   <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="image" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Image</th>
@@ -41,7 +41,6 @@
                   <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="email" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Email</th>
                   <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="contract_number" data-order="desc" class="table_th_color font_sid skeleton tot_order_ ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Contract</th>
                   <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="role" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Role</th>
-                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="email_verified_at" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Verification</th>
                   <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col font_sid skeleton"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Check</th>
                   <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="status" data-order="desc" class="table_th_color tot_pending_ font_sid ps-2  skeleton"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Status</th>
                 </tr>
@@ -49,28 +48,28 @@
 
                 </tbody>
               </table>
-            </div>
-            <div class="row table_last_row">
-              <div class="col-2">
-                <label class="item_class skeleton">Peritem</label>
-                <select class="ps-1 mt-3" id="perItemControl">
-                  <option selected>10</option>
-                  <option>20</option>
-                  <option>50</option>
-                  <option>100</option>
-                  <option>200</option>
-                </select>
-                <!-- <span class="custom-list-item-arrow me-4"></span> -->
-              </div>
-              <div class="skeleton col-3">
-                <span class="tot_summ skeleton" id="num_plate">
-                  <label class="tot-search mt-3 skeleton" for="tot_cagt"> Total Users :</label>
-                  <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_user_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
-                </span>
-              </div>
-              <div class="col-7">
-                <div class="pagination skeleton mt-1" id="user_data_table_paginate">
-
+              <div class="row table_last_row mb-4">
+                <div class="col-2">
+                  <label class="item_class skeleton">Peritem</label>
+                  <select class="ps-1 mt-3" id="perItemControl">
+                    <option selected>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                    <option>100</option>
+                    <option>200</option>
+                  </select>
+                  <!-- <span class="custom-list-item-arrow me-4"></span> -->
+                </div>
+                <div class="skeleton col-3">
+                  <span class="tot_summ skeleton" id="num_plate">
+                    <label class="tot-search mt-3 skeleton" for="tot_cagt"> Total Users :</label>
+                    <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_user_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
+                  </span>
+                </div>
+                <div class="col-7">
+                  <div class="pagination skeleton mt-1" id="user_data_table_paginate">
+  
+                  </div>
                 </div>
               </div>
             </div>
@@ -117,12 +116,12 @@
       <div class="modal-footer profile_modal_footer">
         <p id="btn_group2">
           <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
-            <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
             <span class="btn-text">{{__('translate.Yes')}}</span>
+            <span class="delete-icon spinner-border spinner-border-sm text-white image-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
           </a>
         </p>
         <p id="btn_group">
-            <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal" id="noButton">No</a>
+          <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal" id="noButton">No</a>
         </p>
       </div>
     </div>
@@ -155,8 +154,8 @@
           </div>
           <div class="modal-footer profile_modal_footer">
             <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user" id="deleteLoader">
-              <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
               <span class="btn-text">Delete</span>
+              <span class="delete-confirm-icon spinner-border spinner-border-sm text-white image-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
             </button>
             <button type="button" class="btn btn-sm text-warning modal_button delete_cancel" id="usrdelt4" data-bs-dismiss="modal">Cancel</button>
           </div>
@@ -204,7 +203,37 @@
         $('.image-icon').addClass('image-hidden');
         $(this).attr('disabled', false);
         $('btn-text').text('Upload');
-      }, 3000);
+      }, 2000);
+    })
+  });
+
+  // confirm Update Button Loader
+  $(document).ready(() => {
+    $("#update_btn_confirm").on('click', () => {
+      $('.confirm-update-icon').removeClass('image-hidden');
+      $(this).attr('disabled', true);
+      $('btn-text').text('Upload...');
+
+      setTimeout(() => {
+        $('.confirm-update-icon').addClass('image-hidden');
+        $(this).attr('disabled', false);
+        $('btn-text').text('Upload');
+      }, 2000);
+    })
+  });
+
+  // delete Button Loader
+  $(document).ready(() => {
+    $("#yesButton").on('click', () => {
+      $('.delete-icon').removeClass('image-hidden');
+      $(this).attr('disabled', true);
+      $('btn-text').text('Upload...');
+
+      setTimeout(() => {
+        $('.delete-icon').addClass('image-hidden');
+        $(this).attr('disabled', false);
+        $('btn-text').text('Upload');
+      }, 500);
     })
   });
 
@@ -221,15 +250,15 @@
     })
   });
 
-  // Delete Button Loader
+  // Delete confirm Button Loader
   $(document).ready(() => {
     $("#deleteLoader").on('click', () => {
-      $('.delete-icon').removeClass('delete-hidden');
+      $('.delete-confirm-icon').removeClass('delete-hidden');
       $(this).attr('disabled', true);
       $('btn-text').text('Delete...');
 
       setTimeout(() => {
-        $('.delete-icon').addClass('delete-hidden');
+        $('.delete-confirm-icon').addClass('delete-hidden');
         $(this).attr('disabled', false);
         $('btn-text').text('Delete');
       }, 3000);

@@ -9,62 +9,62 @@
     <div class="col-xl-12">
         <div class="row">
             <div class="col-md-9 ps-2">
-            <div class="card-body focus-color auth-page-table-card cd pb-3">
+              <div class="card-body focus-color auth-page-table-card cd pb-3">
                 <p class="users_heading skeleton mb-1"><span class="ms-1 skeleton">Auth Page Permission List</span></p>
                 <div class="table-responsive mt-2">
-                    <table class="ord_table center border-1 mt-1 skeleton">
-                        <tr class="table-row order_body acc_setting_table skeleton">
-                        <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1">ID</th>
-                        <th id="th_sort" data-coloumn="image" data-order="desc" class="table_th_color txt skeleton ps-1">Auth Page</th>
-                        <th id="th_sort" data-coloumn="name" data-order="desc" class="table_th_color tot_order_ skeleton ps-1">Local Host Auth Url</th>
-                        <th id="th_sort" data-coloumn="email" data-order="desc" class="table_th_color tot_order_ skeleton ps-1">Domain Auth Url</th>
-                        <th id="th_sort" class="table_th_color tot_pending_ ps-2  skeleton">Status</th>
-                        </tr>
-                        <tbody class="bg-transparent skeleton tab" id="auth_page_data_table">
+                  <table class="bg-transparent ord_table center border-1 mt-1 skeleton">
+                    <tr class="table-row order_body acc_setting_table skeleton">
+                      <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1">ID</th>
+                      <th id="th_sort" data-coloumn="image" data-order="desc" class="table_th_color txt skeleton ps-1">Auth Page</th>
+                      <th id="th_sort" data-coloumn="name" data-order="desc" class="table_th_color tot_order_ skeleton ps-1">Local Host Auth Url</th>
+                      <th id="th_sort" data-coloumn="email" data-order="desc" class="table_th_color tot_order_ skeleton ps-1">Domain Auth Url</th>
+                      <th id="th_sort" class="table_th_color tot_pending_ ps-2  skeleton">Status</th>
+                    </tr>
+                    <tbody class="bg-transparent skeleton tab" id="auth_page_data_table">
 
-                        </tbody>
-                    </table>
+                    </tbody>
+                  </table>
                 </div>
-            </div>
+              </div>
             </div>
             <div class="col-md-3">
-                <div class="card card-body" id="form_card">
-                  <form>
-                    @csrf
-                    <input type="text" name="page_id" id="edit_page_id" hidden>
-                    <div class="mb-2">
-                      <select class="form-select form-select-sm select-dropdown" name="page_name" aria-label=".form-select-sm example" id="pageSelect">
-                        <option value="" selected>Select Page Item</option>
-                        @foreach($auth_lists as $item)
-                          <option value="{{$item->id}}">{{$item->page_name}}</option>
-                        @endforeach
-                      </select>
+              <div class="card card-body" id="form_card">
+                <form>
+                  @csrf
+                  <input type="text" name="page_id" id="edit_page_id" hidden>
+                  <div class="mb-2">
+                    <select class="form-select form-select-sm select-dropdown" name="page_name" aria-label=".form-select-sm example" id="pageSelect">
+                      <option value="" selected>Select Page Item</option>
+                      @foreach($auth_lists as $item)
+                        <option value="{{$item->id}}">{{$item->page_name}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label skeleton" for="domain">Domain</label>
+                    <input class="form-control form-control-sm update_domain" type="text" name="domain_name" placeholder="Domain" id="input-field-one">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label skeleton" for="ip-address">IP Address</label>
+                    <input class="form-control form-control-sm update_ip" type="text" name="ip_name" placeholder="IP address" id="input-field-two">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-check-label form-label skeleton" for="permission">Page</label>
+                    <div class="form-check form-switch ms-1">
+                      <input class="form-check-input form-label update_status check-skeleton" type="checkbox" name="status" value="0" id="permissionCheck">
+                      <label class="form-check-label form-label skeleton" style="color:gray;" for="check" id="statusValue">Permission</label>
                     </div>
-                    <div class="mb-2">
-                      <label class="form-label skeleton" for="domain">Domain</label>
-                      <input class="form-control form-control-sm update_domain" type="text" name="domain_name" placeholder="Domain" id="input-field-one">
+                  </div>
+                  <div class="mb-2">
+                    <div class="button-box mb-1 mt-1">
+                      <button id="page_submit" type="submit" class="btn btn-sm submt_button button-skeleton">
+                        <span class="auth-icon spinner-border spinner-border-sm text-white hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                        <span class="btn-text">Permission</span>
+                      </button>
                     </div>
-                    <div class="mb-2">
-                      <label class="form-label skeleton" for="ip-address">IP Address</label>
-                      <input class="form-control form-control-sm update_ip" type="text" name="ip_name" placeholder="IP address" id="input-field-two">
-                    </div>
-                    <div class="mb-2">
-                      <label class="form-check-label form-label skeleton" for="permission">Page</label>
-                      <div class="form-check form-switch ms-1">
-                        <input class="form-check-input form-label update_status check-skeleton" type="checkbox" name="status" value="0" id="permissionCheck">
-                        <label class="form-check-label form-label skeleton" style="color:gray;" for="check" id="statusValue">Permission</label>
-                      </div>
-                    </div>
-                    <div class="mb-2">
-                      <div class="button-box mb-1 mt-1">
-                        <button id="page_submit" type="submit" class="btn btn-sm submt_button button-skeleton">
-                          <span class="auth-icon spinner-border spinner-border-sm text-white hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
-                          <span class="btn-text">Permission</span>
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+                  </div>
+                </form>
+              </div>
             </div>
         </div>
     </div>
@@ -83,6 +83,7 @@
 
 @push('scripts')
 @include('super-admin.auth-page.ajax.auth-page-ajax')
+<script type="module" src="/module/module-min-js/helper-function-min.js"></script>
 <script>
   // Update Button Loader
   $(document).ready(() => {

@@ -16,9 +16,13 @@
                         <div class="col-xl-8">
                             <div class="form-group field_skeletone_five">
                                 <span class="">
-                                    <label class="label_user_edit" for="">Email-Verification : <span id="view_user_email_verified"></span></label>
+                                    <label class="label_user_edit" for="">Email-Verification : 
+                                        <span id="view_user_email_verified"></span>
+                                    </label>
                                 </span>
                             </div>
+                            <span id="user_email_verified_session" hidden></span>
+                            <span class="email__verification"></span>
                             <div class="form-group">
                                 <span class="field_skeletone_one">
                                     <label class="label_user_edit" for="id">User-ID :</label>
