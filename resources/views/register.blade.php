@@ -254,6 +254,8 @@
                 loadFile,
                 handleImageUpload,
                 toolTip,
+                rightSideBar,
+                removeSkeletonClass,
                 browserInpect
             } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
             buttonLoader();
@@ -276,180 +278,46 @@
                 // Initialize the button loader for the login button
                 buttonLoader('#reg_submit', '.register-icon', '.btn-text', 'Register...', 'Register', 3000);
                 buttonLoader('#back_login', '.back-icon', '.btn-back-text', 'Back...', 'Back', 3000);
-            });
-        </script>
-        <script>
-            // skeleton
-            function fetchData(){
-                const  allSkeleton = document.querySelectorAll('.skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('skeleton')
-                });
-            }
-            function logo(){
-                const  allSkeleton = document.querySelectorAll('.logo-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('logo-skeleton')
-                });
-            }
-            function navHeadSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.nav-head-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('nav-head-skeleton')
-                });
-            }
-            function subTitleSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.sub-title-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('sub-title-skeleton')
-                });
-            }
-            function formHeadSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.form-head-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('form-head-skeleton')
-                });
-            }
-            function inputSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.input-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('input-skeleton')
-                });
-            }
-            function inputThreeSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.input-three-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('input-three-skeleton')
-                });
-            }
-            function inputFourSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.input-four-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('input-four-skeleton')
-                });
-            }
-            function inputTwoSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.input-two-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('input-two-skeleton')
-                });
-            }
-            function inputEamilSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.input-email-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('input-email-skeleton')
-                });
-            }
-            function miniCapSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.mini-capsule-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('mini-capsule-skeleton')
-                });
-            }
-            function capSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.cap-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('cap-skeleton')
-                });
-            }
-            function fileSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.file-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('file-skeleton')
-                });
-            }
-            function imageSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.menu-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('menu-skeleton')
-                });
-            }
-            function buttonSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.button-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('button-skeleton')
-                });
-            }
-            function uploadButtonSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.upload-button-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('upload-button-skeleton')
-                });
-            }
-            function inputErrorSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.input-error-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('input-error-skeleton')
-                });
-            }
-            function fileErrorSkeleton(){
-                const  allSkeleton = document.querySelectorAll('.file-error-skeleton')
-            
-                allSkeleton.forEach(item=>{
-                    item.classList.remove('file-error-skeleton')
-                });
-            }
-            setTimeout(() => {
-                logo();
-                fetchData();
-                navHeadSkeleton();
-                subTitleSkeleton();
-                formHeadSkeleton();
-                inputSkeleton();
-                inputTwoSkeleton();
-                inputThreeSkeleton();
-                inputFourSkeleton();
-                inputEamilSkeleton();
-                miniCapSkeleton();
-                capSkeleton();
-                fileSkeleton();
-                imageSkeleton();
-                uploadButtonSkeleton();
-                buttonSkeleton();
-                inputErrorSkeleton();
-                fileErrorSkeleton();
-                $('input').removeClass('input_hidden');
-            }, 2000);
-        </script>
-        <script>
-            $(document).ready(function(){
-                $(document).on('click', '.menu_btn', function(e){
-                    e.preventDefault();
-                    $("#loader_modal").modal('show');
-                    $(".side_canvas_animation").removeAttr('hidden');
-                    $(".head_auth").addClass('auth-skeleton');
-                    $(".btn-close").addClass('auth-skeleton');
-                    $(".forg_page").addClass('auth-skeleton');
-                    $(".reg_page").addClass('auth-skeleton');
-                    $(".logn_page").addClass('auth-skeleton');
-
-                    setTimeout(() => {
-                        $("#loader_modal").modal('hide');
-                        $(".side_canvas_animation").attr('hidden', true);
-                        $(".head_auth").removeClass('auth-skeleton');
-                        $(".btn-close").removeClass('auth-skeleton');
-                        $(".forg_page").removeClass('auth-skeleton');
-                        $(".reg_page").removeClass('auth-skeleton');
-                        $(".logn_page").removeClass('auth-skeleton');
-                    }, 2000);
-                });
+                // Initialize right sidebar canvas the loader modal with skeleton loading effect
+                rightSideBar(
+                    '.menu_btn',                   // Button selector to attach the click event
+                    '#loader_modal',               // Modal selector
+                    '.side_canvas_animation',       // Loader selector
+                    [                               // Array of elements to apply skeleton effect
+                        '.head_auth', 
+                        '.btn-close', 
+                        '.forg_page', 
+                        '.reg_page', 
+                        '.logn_page'
+                    ],
+                    2000
+                );
+                // Array of skeleton class names
+                const skeletonClasses = [
+                    'skeleton', // General skeleton
+                    'logo-skeleton',
+                    'nav-head-skeleton',
+                    'sub-title-skeleton',
+                    'form-head-skeleton',
+                    'input-skeleton',
+                    'input-three-skeleton',
+                    'input-four-skeleton',
+                    'input-two-skeleton',
+                    'input-email-skeleton',
+                    'mini-capsule-skeleton',
+                    'cap-skeleton',
+                    'file-skeleton',
+                    'menu-skeleton',
+                    'button-skeleton',
+                    'upload-button-skeleton',
+                    'input-error-skeleton',
+                    'file-error-skeleton',
+                ];
+                // Remove skeleton
+                setTimeout(() => {
+                    removeSkeletonClass(skeletonClasses);
+                    $('input').removeClass('input_hidden');
+                }, 2000);
             });
         </script>
         <script>
@@ -489,7 +357,7 @@
                         $(".imge-border").addClass('image-current-border').removeClass('image-success-border image-error-border');
                     }
                 }
-
+                
                 // Initial error handling
                 function checkForErrors() {
                     // Error handling for input fields

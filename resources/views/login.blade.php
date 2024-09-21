@@ -152,7 +152,7 @@
                                     <span style="color:green;font-weight:800;font-size: 15px;">
                                         <i class="src_email fa fa-check src_email-hidden"></i>
                                     </span>
-                                    <span class="text-danger input_message show-error remove-error-one">@error('email')
+                                    <span class="text-danger input_message show-error remove-error">@error('email')
                                         Error Messages : {{$message}}@enderror
                                     </span><br>
                                 </div>
@@ -162,7 +162,7 @@
                                     <span style="color:green;font-weight:800;font-size: 15px;">
                                         <i class="src_password fa fa-check src_password-hidden"></i>
                                     </span>
-                                    <span class="text-danger input_message show-error2 remove-error-two">@error('password')
+                                    <span class="text-danger input_message show-error2 remove-error2">@error('password')
                                     Error Messages : {{$message}}@enderror
                                     </span><br>
                                 </div>
@@ -191,9 +191,18 @@
 
     <!-- JQUERY CDN LINK -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-function.js"></script>
+    <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js"></script>
     <script type="module">
-        import { buttonLoader, pageLoader, handleSuccessMessage, toolTip, browserInpect, rightSideBar, handleInputValidation } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-function.js";
+        import { 
+            buttonLoader, 
+            pageLoader, 
+            handleSuccessMessage, 
+            toolTip, 
+            browserInpect, 
+            rightSideBar, 
+            handleInputValidation, 
+            removeSkeletonClass 
+        } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
         buttonLoader();
         pageLoader();
         toolTip();
@@ -236,109 +245,27 @@
                 'show-current-border',     // Default border class
                 '.src_password'            // Success message selector
             );
+            // Array of skeleton class names
+            const skeletonClasses = [
+                'headings-skeleton',
+                'input-email-skeleton',
+                'input-password-skeleton',
+                'button-skeleton',
+                'skeleton', // General skeleton
+                'email-label-skeleton',
+                'logo-skeleton',
+                'menu-skeleton',
+                'whatsapp-skeleton',
+                'messenger-skeleton',
+                'facebook-skeleton'
+            ];
+            // Remove skeleton
+            setTimeout(() => {
+                removeSkeletonClass(skeletonClasses);
+            }, 2000);
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script>
-        // skeleton
-        function headSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.headings-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('headings-skeleton')
-            });
-        }
-        function inputEmailSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.input-email-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('input-email-skeleton')
-            });
-        }
-        function inputPasswordSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.input-password-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('input-password-skeleton')
-            });
-        }
-        function buttonSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.button-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('button-skeleton')
-            });
-        }
-        function fetchData(){
-            const  allSkeleton = document.querySelectorAll('.skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('skeleton')
-            });
-        }
-        function emailLabel(){
-            const  allSkeleton = document.querySelectorAll('.email-label-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('email-label-skeleton')
-            });
-        }
-        function logo(){
-            const  allSkeleton = document.querySelectorAll('.logo-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('logo-skeleton')
-            });
-        }
-        function menuSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.menu-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('menu-skeleton')
-            });
-        }
-        function whatsAppSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.whatsapp-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('whatsapp-skeleton')
-            });
-        }
-        function messengerSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.messenger-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('messenger-skeleton')
-            });
-        }
-        function facebookSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.facebook-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('facebook-skeleton')
-            });
-        }
-        function errorSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.error-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('error-skeleton')
-            });
-        }
-        setTimeout(() => {
-            headSkeleton();
-            logo();
-            fetchData();
-            emailLabel();
-            menuSkeleton();
-            whatsAppSkeleton();
-            messengerSkeleton();
-            facebookSkeleton();
-            inputEmailSkeleton();
-            inputPasswordSkeleton();
-            buttonSkeleton();
-        }, 2000);
-    </script>
     <script>
         gsap.from("#page_head h1",{
             y:100,
@@ -350,18 +277,18 @@
     </script>
     <script>
         $(document).ready(function(){
-            // Errors Skeleton
-            $(document).on('click', '#submit', function(){
-                var errorMessageOne = $('.remove-error-one').text().trim();
-                var errorMessageTwo = $('.remove-error-two').text().trim();
-                if(errorMessageOne !== '' && errorMessageTwo !== '')[
-                    $('.remove-error-one').addClass('error-skeleton');
-                    $('.remove-error-two').addClass('error-skeleton');
-                    setTimeout(() => {
-                        //$('.remove-error-one').removeClass('error-skeleton');
-                        //$('.remove-error-two').removeClass('error-skeleton');
+            // error skeleton
+            $(document).on('click', '#submit', function() {
+                var errorMessage = $(this).text().trim();
+                $(this).attr("data-error", errorMessage);
+                if (errorMessage !== '') {
+                    $('.remove-error').addClass('error-skeleton');
+                    $('.remove-error2').addClass('error-skeleton');
+                    setTimeout(function() {
+                        $('.remove-error').removeClass('error-skeleton');
+                        $('.remove-error2').removeClass('error-skeleton');
                     }, 2000);
-                ]
+                }
             });
         });
     </script>

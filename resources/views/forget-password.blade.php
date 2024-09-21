@@ -67,11 +67,11 @@
 </header>
 
 <body class="register_background-color">
-    <div class="modal fade" id="loaderRegisterForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
                 <div class="modal-body" id="loaderRegisterModal_body">
-                    <div class="loader-register">
+                    <div class="loader-login">
                         <img src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
                     </div> 
                 </div>
@@ -143,7 +143,7 @@
                                                     <div class="mb-3 d-grid">
                                                         <button type="submit" class="btn btn-sm btn-primary forget_button register_btn" id="reset_password">
                                                             <span class="btn-reset-text">Reset Password</span>
-                                                            <span class="reset-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                                                            <span class="reset-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                         </button>
                                                     </div>
                                                     <div class="mb-2 d-grid">
@@ -151,7 +151,7 @@
                                                         <span class="mt-3">
                                                             <a class="btn btn-sm btn-primary forget_button ps-2 pe-2 pb-1" href="/" id="user__login">
                                                                 <span class="btn-acc-text">sign in</span>
-                                                                <span class="acc-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                                                                <span class="acc-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                             </a>
                                                         </span>
                                                     </div>
@@ -185,166 +185,62 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Sweet Alert CDN LINK -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
-    <script src="{{asset('backend_asset')}}/support_asset/auth/js/loader.min.js"></script>
-    <script src="{{asset('backend_asset')}}/support_asset/auth/js/img.js"></script>
+    <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js"></script>
+    <script type="module">
+        import { 
+            pageLoader, 
+            toolTip, 
+            browserInpect, 
+            removeSkeletonClass, 
+            handleSuccessMessage, 
+            buttonLoader,
+            rightSideBar
+        } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
 
-    <script>
-        // skeleton
-        function headingSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.heading-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('heading-skeleton')
-            });
-        }
-        function panelSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.panel-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('panel-skeleton')
-            });
-        }
-        function logo(){
-            const  allSkeleton = document.querySelectorAll('.logo-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('logo-skeleton')
-            });
-        }
-        function fetchData(){
-            const  allSkeleton = document.querySelectorAll('.skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('skeleton')
-            });
-        }
-        function inputSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.input-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('input-skeleton')
-            });
-        }
-        function inputEamilSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.input-email-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('input-email-skeleton')
-            });
-        }
-        function capSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.cap-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('cap-skeleton')
-            });
-        }
-        function fileSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.file-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('file-skeleton')
-            });
-        }
-        function imageSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.menus-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('menus-skeleton')
-            });
-        }
-        function miniSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.mini-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('mini-skeleton')
-            });
-        }
-        function emailInputSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.email-input2-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('email-input2-skeleton')
-            });
-        }
-        setTimeout(() => {
-            headingSkeleton();
-            logo();
-            fetchData();
-            panelSkeleton();
-            inputSkeleton();
-            inputEamilSkeleton();
-            capSkeleton();
-            fileSkeleton();
-            imageSkeleton();
-            //miniSkeleton();
-            emailInputSkeleton();
-        }, 2000);
-        
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        });
-    </script>
-    <script>
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        });
+        buttonLoader();
+        pageLoader();
+        toolTip();
+        //browserInpect();
+
         $(document).ready(function(){
-            $("#registerAnimation").addClass('loginForm');
-        });
-    </script>
-    <script>
-        window.addEventListener('load', function() {
-            const loader = document.querySelector(".loader-register");
-            const loaderModal = new bootstrap.Modal(document.getElementById('loaderRegisterForm'));
-
-            loaderModal.show();
-            loader.className += " log_close";
-            setTimeout(function() {
-                loaderModal.hide();
+            // Initialize the message
+            handleSuccessMessage('#success_message');
+            // Initialize right sidebar canvas the loader modal with skeleton loading effect
+            rightSideBar(
+                '.menu_btn',                   // Button selector to attach the click event
+                '#loader_modal',               // Modal selector
+                '.side_canvas_animation',       // Loader selector
+                [                               // Array of elements to apply skeleton effect
+                    '.head_auth', 
+                    '.btn-close', 
+                    '.forg_page', 
+                    '.reg_page', 
+                    '.logn_page'
+                ],
+                2000
+            );
+            // Initialize the button loader for the login button
+            buttonLoader('#reset_password', '.reset-icon', '.btn-reset-text', 'Reset Password...', 'Reset Password', 3000);
+            buttonLoader('#user__login', '.acc-icon', '.btn-acc-text', 'sign in...', 'sign in', 3000);
+            // Array of skeleton class names
+            const skeletonClasses = [
+                'skeleton', // General skeleton
+                'heading-skeleton',
+                'panel-skeleton',
+                'logo-skeleton',
+                'input-skeleton',
+                'input-email-skeleton',
+                'cap-skeleton',
+                'file-skeleton',
+                'menus-skeleton',
+                'email-input2-skeleton',
+            ];
+            // Remove skeleton
+            setTimeout(() => {
+                removeSkeletonClass(skeletonClasses);
             }, 2000);
         });
-    </script>
-    <script>
-        $(document).ready(function(){
-            $(document).on('click', '.menu_btn', function(e){
-                e.preventDefault();
-                $("#loader_modal").modal('show');
-                $(".side_canvas_animation").removeAttr('hidden');
-                $(".head_auth").addClass('auth-skeleton');
-                $(".btn-close").addClass('auth-skeleton');
-                $(".logn_page").addClass('auth-skeleton');
-                $(".reg_page").addClass('auth-skeleton');
 
-                setTimeout(() => {
-                    $("#loader_modal").modal('hide');
-                    $(".side_canvas_animation").attr('hidden', true);
-                    $(".head_auth").removeClass('auth-skeleton');
-                    $(".btn-close").removeClass('auth-skeleton');
-                    $(".logn_page").removeClass('auth-skeleton');
-                    $(".reg_page").removeClass('auth-skeleton');
-                }, 2000);
-            });
-        });
-    </script>
-    <script>
-        // Success Message Show
-        $(document).ready(function () {
-            var successMessage = $('#success_message').text().trim();
-            if (successMessage) {
-                $('#success_message').fadeIn();
-                var time = null;
-                time = setTimeout(() => {
-                    $('#success_message').fadeOut(6000);
-                    $('#success_message').delay(6000);
-                }, 6000);
-                return ()=>{
-                    clearTimeout(time);
-                }
-            }
-        });
     </script>
 </body>
 

@@ -133,7 +133,7 @@
                                                     <div class="mb-2 d-grid">
                                                         <button type="submit" class="btn btn-sm btn-primary forget_button register_btn" id="change_Password">
                                                             <span class="btn-change-text">Change Password</span>
-                                                            <span class="change-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                                                            <span class="change-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -157,133 +157,61 @@
     </div>
     @include('auth-js.register-ajax')
     <!-- Boostrap5 JS Table Filter -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JQUERY CDN LINK -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Sweet Alert CDN LINK -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
-    <script src="{{asset('backend_asset')}}/support_asset/auth/js/loader.min.js"></script>
-    <script src="{{asset('backend_asset')}}/support_asset/auth/js/img.js"></script>
+    <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js"></script>
+    <script type="module">
+        import { 
+            pageLoader, 
+            toolTip, 
+            browserInpect, 
+            removeSkeletonClass, 
+            handleSuccessMessage, 
+            buttonLoader,
+            rightSideBar
+        } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
 
-    <script>
-        // skeleton
-        function headSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.heading-rest-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('heading-rest-skeleton')
-            });
-        }
-        function fetchData(){
-            const  allSkeleton = document.querySelectorAll('.skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('skeleton')
-            });
-        }
-        function fetchData(){
-            const  allSkeleton = document.querySelectorAll('.skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('skeleton')
-            });
-        }
-        function emailLabel(){
-            const  allSkeleton = document.querySelectorAll('.email-label-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('email-label-skeleton')
-            });
-        }
-        function logo(){
-            const  allSkeleton = document.querySelectorAll('.logo-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('logo-skeleton')
-            });
-        }
-        function menuSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.menu-rest-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('menu-rest-skeleton')
-            });
-        }
-        function panelSkeleton(){
-            const  allSkeleton = document.querySelectorAll('.panel-skeleton')
-        
-            allSkeleton.forEach(item=>{
-                item.classList.remove('panel-skeleton')
-            });
-        }
-        setTimeout(() => {
-            headSkeleton();
-            logo();
-            fetchData();
-            emailLabel();
-            menuSkeleton();
-            panelSkeleton();
-        }, 2000);
+        buttonLoader();
+        pageLoader();
+        toolTip();
+        //browserInpect();
 
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        });
-    </script>
-    <script>
-        window.addEventListener('load', function() {
-            const loader = document.querySelector(".loader-login");
-            const loaderModal = new bootstrap.Modal(document.getElementById('loaderModalForm'));
-
-            loaderModal.show();
-            loader.className += " log_close";
-            setTimeout(function() {
-                loaderModal.hide();
-            }, 2000);
-        });
-    </script>
-    <script>
         $(document).ready(function(){
-            $(document).on('click', '.menu_btn', function(e){
-                e.preventDefault();
-                $("#loader_modal").modal('show');
-                $(".side_canvas_animation").removeAttr('hidden');
-                $(".head_auth").addClass('auth-skeleton');
-                $(".btn-close").addClass('auth-skeleton');
-                $(".forg_page").addClass('auth-skeleton');
-                $(".reg_page").addClass('auth-skeleton');
-                $(".logn_page").addClass('auth-skeleton');
-
-                setTimeout(() => {
-                    $("#loader_modal").modal('hide');
-                    $(".side_canvas_animation").attr('hidden', true);
-                    $(".head_auth").removeClass('auth-skeleton');
-                    $(".btn-close").removeClass('auth-skeleton');
-                    $(".forg_page").removeClass('auth-skeleton');
-                    $(".reg_page").removeClass('auth-skeleton');
-                    $(".logn_page").removeClass('auth-skeleton');
-                }, 2000);
-            });
-        });
-    </script>
-    <script>
-        // Success Message Show
-        $(document).ready(function () {
-            var successMessage = $('#success_message').text().trim();
-            if (successMessage) {
-                $('#success_message').fadeIn();
-                var time = null;
-                time = setTimeout(() => {
-                    $('#success_message').fadeOut(6000);
-                    $('#success_message').delay(6000);
-                }, 6000);
-                return ()=>{
-                    clearTimeout(time);
-                }
-            }
+            // Initialize the message
+            handleSuccessMessage('#success_message');
+            // Initialize right sidebar canvas the loader modal with skeleton loading effect
+            rightSideBar(
+                '.menu_btn',                   // Button selector to attach the click event
+                '#loader_modal',               // Modal selector
+                '.side_canvas_animation',       // Loader selector
+                [                               // Array of elements to apply skeleton effect
+                    '.head_auth', 
+                    '.btn-close', 
+                    '.forg_page', 
+                    '.reg_page', 
+                    '.logn_page'
+                ],
+                2000
+            );
+            // Initialize the button loader for the login button
+            buttonLoader('#change_Password', '.change-icon', '.btn-change-text', 'Change Password...', 'Change Password', 3000);
+            // Array of skeleton class names
+            const skeletonClasses = [
+                'skeleton', // General skeleton
+                'heading-rest-skeleton',
+                'email-label-skeleton',
+                'logo-skeleton',
+                'menu-rest-skeleton',
+                'panel-skeleton',
+            ];
+            // Remove skeleton
+            setTimeout(() => {
+                removeSkeletonClass(skeletonClasses);
+            }, 2000);
         });
     </script>
 </body>
