@@ -26,7 +26,7 @@
                                         <span class="search-btn"><i class="fas fa-search"></i></span>
                                     </button>
                                     <button type="submit" class="btn btn-success btn-btn-sm btn-refresh" id="btn_refresh">
-                                        <i class="loading-icon fa-solid fa-rotate fa-spin hidden"></i>
+                                        <i class="loading-icon fa-solid fa-rotate fa-spin" hidden></i>
                                         <span class="text-btn">Refresh</span>
                                     </button>
                                 </div>
@@ -143,12 +143,33 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 @endsection
 @section('script')
-<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
-@include('super-admin.account-holders.helper-function-support')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+@include('super-admin.account-holders.helper-function-support')
+<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
+<script type="module" src="/module/module-min-js/design-helper-function-min.js"></script>
+<script type="module">
+    import { buttonLoader, removeSkeletonClass } from "/module/module-min-js/design-helper-function-min.js";
+    buttonLoader();
+
+    // initialize the document
+    $(document).ready(() =>{
+        // Initialize the refresh button loader for the login button
+        buttonLoader('#btn_refresh', '.loading-icon', '.text-btn', 'Refresh...', 'Refresh', 3000);
+        // Array of skeleton class names
+        const skeletonClasses = [
+            'skeleton', // General skeleton
+            'page-heading-skeleton'
+        ];
+        // Remove skeleton
+        setTimeout(() => {
+            removeSkeletonClass(skeletonClasses);
+        }, 1000);
+    });
+</script>
 <script>
-    $(document).ready(function() {
+    // select dropdown initialize
+    $(document).ready(function(){
         //$('.select2').select2();
         $('.select2').select2({
             placeholder: 'Select Email',
@@ -158,11 +179,7 @@
         $('#email').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search emails...');
         });
-    });
-</script>
-<script>
-    //email dropdown
-    $(document).ready(() =>{
+        // when email dropdown selected then search button will be disabled or enabled
         $('#email').on('change', function() {
             var email = $(this).val();
             if (email !== '') {
@@ -172,52 +189,5 @@
             }
         });
     });
-    //refresh loader
-    $(document).ready(() =>{
-        $("#btn_refresh").on('click', ()=>{
-            $('.loading-icon').removeClass('hidden');
-            $(this).attr('disabled', true);
-            $('text-btn').text('Refresh...');
-
-            setTimeout(() => {
-                $('.loading-icon').addClass('hidden');
-                $(this).attr('disabled', false);
-                $('text-btn').text('Refresh');
-            }, 3000);
-        });
-    });
-    // search-loader
-    $(document).ready(() =>{
-        $("#btnFormSearch").on('click', ()=>{
-            $('.search-loader').removeClass('search-hidden');
-            $(this).attr('disabled', true);
-
-            setTimeout(() => {
-                $('.search-loader').addClass('search-hidden');
-                $(this).attr('disabled', false);
-            }, 3000);
-        });
-    });
-</script>
-<script>
-  // skeleton
-  function pageSkeleton() {
-    const allSkeleton = document.querySelectorAll('.page-heading-skeleton')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('page-heading-skeleton')
-    });
-  }
-  function fetchData() {
-    const allSkeleton = document.querySelectorAll('.skeleton')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton')
-    });
-  }
-  setTimeout(() => {
-    fetchData();
-    pageSkeleton();
-  }, 1000);
 </script>
 @endsection

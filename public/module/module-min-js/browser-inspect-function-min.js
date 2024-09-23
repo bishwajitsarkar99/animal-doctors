@@ -1,1 +1,0 @@
-export function browserInpect(){document.addEventListener("DOMContentLoaded",function(){document.addEventListener("contextmenu",function(e){e.preventDefault()}),document.onkeydown=function(e){if(123==e.keyCode||e.ctrlKey&&e.shiftKey&&73===e.keyCode||e.ctrlKey&&e.shiftKey&&74===e.keyCode||e.ctrlKey&&85===e.keyCode)return!1}})}

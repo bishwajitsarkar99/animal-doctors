@@ -1,6 +1,6 @@
 <script type="module">
     import { getTimeDifference, formatDate , mySrcFunction, activeTableRow} from "/module/module-min-js/helper-function-min.js";
-    import { handleImageUpload } from "/module/module-min-js/helper-image-upload-function-min.js";
+    import { handleImageUpload, addAttributeOrClass, removeAttributeOrClass, handleSuccessMessage } from "/module/module-min-js/design-helper-function-min.js";
     $(document).ready(function() {
         // ACtive table row background
         $(document).on('click', 'tr.table-row', function(){
@@ -211,19 +211,22 @@
             fetch_users_setting_data(query); 
 
         });
-
         // Search-loader
         $(document).on('keyup', '.searchform', function(){
             var time = null;
-            $("#user_data_table").addClass('skeleton');
-
-            time = setTimeout(() => {
-                $("#user_data_table").removeClass('skeleton');
+            addAttributeOrClass([
+               {selector: '#user_data_table', type: 'class', name: 'skeleton'} 
+            ]);
+            // Remove skeleton
+            var timeOut = setTimeout(() => {
+                removeAttributeOrClass([
+                    {selector: '#user_data_table', type: 'class', name: 'skeleton'} 
+                ]);
             }, 1000);
 
-            return ()=>{
-                clearTimeout(time);
-            }
+            return () => {
+                clearTimeout(timeOut);
+            };
         });
         
         // Paginate Page-------------------------------
@@ -295,7 +298,7 @@
                         $('#updateForm_errorList3').html("");
 
                         if(response.data.name !== '' && response.data.email !== '' && response.data.contract_number !== '' && response.data.image !== ''){
-                            // add input border
+                            // Handle name validation
                             $('.update_user').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
                             $('.update_email').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
                             $('.update_contract').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
@@ -304,7 +307,7 @@
                             $('#usrContract').html('<i class="fa-solid fa-check"></i>');
                             $('#usrImage').html('<i class="fa-solid fa-check"></i>');
                         }else{
-                            // add input border
+                            // Handle name validation
                             $('.update_user').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
                             $('.update_email').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
                             $('.update_contract').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
@@ -321,36 +324,20 @@
             });
         });
 
-        // Edit Users Page Loader
+        // Edit Users Page skeleton
         $(document).on('click', '.edit_btn', function(){
             var time = null;
-            $(".head_title").addClass('skeleton');
-            $(".cols_btn").addClass('skeleton');
-            $("#edit_user_id").addClass('skeleton');
-            $(".dvsecond").addClass('skeleton');
-            $("#imgInput").addClass('skeleton');
-            $("#userUpdate").addClass('edit-skeleton');
-            $("#editusr").addClass('capsule-skeletone');
-            $("#editusr6").addClass('capsule-skeletone');
-            $("#editusr7").addClass('capsule-skeletone');
-            $("#editusr8").addClass('capsule-skeletone');
-            $("#editusr9").addClass('edit-skeleton');
-            $("#editusr10").addClass('capsule-skeletone');
-            $("#uploadButton").addClass('edit-skeleton');
+            addAttributeOrClass([
+                {selector: '.head_title, .cols_btn, #edit_user_id, .dvsecond, #imgInput', type: 'class', name: 'skeleton'},
+                {selector: '#userUpdate, #editusr9, #uploadButton', type: 'class', name: 'edit-skeleton'},
+                {selector: '#editusr, #editusr6, #editusr7, #editusr8, #editusr10', type: 'class', name: 'capsule-skeletone'}
+            ]);
             time = setTimeout(() => {
-                $(".head_title").removeClass('skeleton');
-                $(".cols_btn").removeClass('skeleton');
-                $("#edit_user_id").removeClass('skeleton');
-                $(".dvsecond").removeClass('skeleton');
-                $("#imgInput").removeClass('skeleton');
-                $("#userUpdate").removeClass('edit-skeleton');
-                $("#editusr").removeClass('capsule-skeletone');
-                $("#editusr6").removeClass('capsule-skeletone');
-                $("#editusr7").removeClass('capsule-skeletone');
-                $("#editusr8").removeClass('capsule-skeletone');
-                $("#editusr9").removeClass('edit-skeleton');
-                $("#editusr10").removeClass('capsule-skeletone');
-                $("#uploadButton").removeClass('edit-skeleton');
+                removeAttributeOrClass([
+                    {selector: '.head_title, .cols_btn, #edit_user_id, .dvsecond, #imgInput', type: 'class', name: 'skeleton'},
+                    {selector: '#userUpdate, #editusr9, #uploadButton', type: 'class', name: 'edit-skeleton'},
+                    {selector: '#editusr, #editusr6, #editusr7, #editusr8, #editusr10', type: 'class', name: 'capsule-skeletone'}
+                ]);
             }, 1000);
             return ()=>{
                 clearTimeout(time);
@@ -442,28 +429,24 @@
         $(document).on('click', '#viewBtn', function(e){
             e.preventDefault();
             var time = null;
-            $(".head_modal").addClass('skeletone'); 
-            $(".cols_btn").addClass('skeletone');
-            $(".field_skeletone_one").addClass('capsule-skeletone');
-            $(".field_skeletone_two").addClass('capsule-skeletone');
-            $(".field_skeletone_three").addClass('capsule-skeletone');
-            $(".field_skeletone_four").addClass('capsule-skeletone');
-            $(".field_skeletone_five").addClass('sub-skeletone');
-            $(".email__verification").addClass('small-capsule-skeletone');
-            $("#user_email_verified_session").attr('hidden', true);
-            $(".image_skeletone").addClass('image-skeletone');
+            addAttributeOrClass([
+                {selector: '.head_modal, .cols_btn', type: 'class', name: 'skeletone'},
+                {selector: '.field_skeletone_one, .field_skeletone_two, .field_skeletone_three, .field_skeletone_four', type: 'class', name: 'capsule-skeletone'},
+                {selector: '.field_skeletone_five', type: 'class', name: 'sub-skeletone'},
+                {selector: '.email__verification', type: 'class', name: 'small-capsule-skeletone'},
+                {selector: '.image_skeletone', type: 'class', name: 'image-skeletone'},
+                {selector: '#user_email_verified_session', type: 'attribute', name: 'hidden', value: true}
+            ]);
 
             time = setTimeout(() => {
-                $(".head_modal").removeClass('skeletone'); 
-                $(".cols_btn").removeClass('skeletone');
-                $(".field_skeletone_one").removeClass('capsule-skeletone');
-                $(".field_skeletone_two").removeClass('capsule-skeletone');
-                $(".field_skeletone_three").removeClass('capsule-skeletone');
-                $(".field_skeletone_four").removeClass('capsule-skeletone');
-                $(".image_skeletone").removeClass('image-skeletone');
-                $(".field_skeletone_five").removeClass('sub-skeletone');
-                $(".email__verification").removeClass('small-capsule-skeletone');
-                $("#user_email_verified_session").removeAttr('hidden');
+                removeAttributeOrClass([
+                    {selector: '.head_modal, .cols_btn', type: 'class', name: 'skeletone'},
+                    {selector: '.field_skeletone_one, .field_skeletone_two, .field_skeletone_three, .field_skeletone_four', type: 'class', name: 'capsule-skeletone'},
+                    {selector: '.field_skeletone_five', type: 'class', name: 'sub-skeletone'},
+                    {selector: '.email__verification', type: 'class', name: 'small-capsule-skeletone'},
+                    {selector: '.image_skeletone', type: 'class', name: 'image-skeletone'},
+                    {selector: '#user_email_verified_session', type: 'attribute', name: 'hidden'}
+                ]);
             }, 1000);
             
             return ()=>{
@@ -475,18 +458,16 @@
             e.preventDefault();
             $('#updateconfirmuser').modal('show').fadeIn(300).delay(300);
 
-            $("#update_btn_confirm").addClass('edit-skeleton');
-            $("#cate_delete5").addClass('edit-skeleton');
-            $("#cate_confirm_update").addClass('edit-skeleton');
-            $(".update_title").addClass('skeleton');
-            $(".head_btn3").addClass('skeleton');
             var time = null;
+            addAttributeOrClass([
+                {selector: '.update_title, .head_btn3, #cate_confirm_update', type: 'class', name: 'skeleton'},
+                {selector: '#update_btn_confirm, #cate_delete5, #cate_confirm_updat', type: 'class', name: 'edit-skeleton'}
+            ]);
             time = setTimeout(() => {
-                $(".update_title").removeClass('skeleton');
-                $(".head_btn3").removeClass('skeleton');
-                $("#update_btn_confirm").removeClass('edit-skeleton');
-                $("#cate_delete5").removeClass('edit-skeleton');
-                $("#cate_confirm_update").removeClass('edit-skeleton');
+                removeAttributeOrClass([
+                    {selector: '.update_title, .head_btn3, #cate_confirm_update', type: 'class', name: 'skeleton'},
+                    {selector: '#update_btn_confirm, #cate_delete5, #cate_confirm_updat', type: 'class', name: 'edit-skeleton'}
+                ]);
             }, 1000);
 
             return () => {
@@ -542,19 +523,15 @@
                     } else if (response.status == 404) {
                         $('#updateForm_errorList').html("");
                         $('#success_message').text(response.messages);
+                        handleSuccessMessage('#success_message');
                         $('#updateconfirmuser').modal('hide');
                     } else if(response.status == 200){
                         $('#updateForm_errorList').html("");
                         $('#updateForm_errorList2').html("");
                         $('#updateForm_errorList3').html("");
-                        $('#success_message').html("");
-                        $('#success_message').fadeIn();
                         $('#success_message').addClass('background_error');
                         $('#success_message').text(response.messages);
-                        setTimeout(() => {
-                            $('#success_message').fadeOut(6000);
-                            $('#success_message').delay(6000);
-                        }, 3000);
+                        handleSuccessMessage('#success_message');
                         fetch_users_setting_data();
                         $('#edit_user_form').modal('hide').fadeOut(300).delay(300);
                         $('#updateconfirmuser').modal('hide').fadeOut(300).delay(300);
@@ -571,25 +548,15 @@
             $('#deletecategory').modal('show').fadeIn(300).delay(300);
 
             var time = null;
-            $(".head_title").addClass('skeleton');
-            $(".clos_btn").addClass('skeleton');
-            $("#usrdelt").addClass('skeleton');
-            $("#usrdelt2").addClass('skeleton');
-            $("#usrdelt3").addClass('skeleton');
-            $("#usrdelt5").addClass('skeleton');
-            $("#yesButton").addClass('delete-skeletone');
-            $("#noButton").addClass('delete-skeletone');
-
+            addAttributeOrClass([
+                {selector: '.head_title, .clos_btn,#usrdelt, #usrdelt2, #usrdelt3, #usrdelt5', type: 'class', name: 'skeleton'},
+                {selector: '#yesButton, #noButton', type: 'class', name: 'delete-skeletone'}
+            ]);
             time = setTimeout(() => {
-                $(".head_title").removeClass('skeleton');
-                $(".clos_btn").removeClass('skeleton');
-                $("#usrdelt").removeClass('skeleton');
-                $("#usrdelt2").removeClass('skeleton');
-                $("#usrdelt3").removeClass('skeleton');
-                $("#usrdelt4").removeClass('skeleton');
-                $("#usrdelt5").removeClass('skeleton');
-                $("#yesButton").removeClass('delete-skeletone');
-                $("#noButton").removeClass('delete-skeletone');
+                removeAttributeOrClass([
+                    {selector: '.head_title, .clos_btn,#usrdelt, #usrdelt2, #usrdelt3, #usrdelt5', type: 'class', name: 'skeleton'},
+                    {selector: '#yesButton, #noButton', type: 'class', name: 'delete-skeletone'}
+                ]);
 
             }, 1000);
         });
@@ -597,20 +564,16 @@
         $(document).on('click', '.yes_button', function(e){
             e.preventDefault();
             $('#deleteuser').modal('show').fadeIn(300).delay(300);
-            $("#supp_delt3").addClass('skeleton');
-            $("#cate_confirm").addClass('skeleton');
-            $(".clos_btn2").addClass('skeleton');
-            $(".head_btn2").addClass('skeleton');
-            $("#usrdelt4").addClass('edit-skeleton');
-            $("#deleteLoader").addClass('edit-skeleton');
+            addAttributeOrClass([
+                {selector: '#supp_delt3, #cate_confirm, .clos_btn2, .head_btn2', type: 'class', name: 'skeleton'},
+                {selector: '#usrdelt4, #deleteLoader', type: 'class', name: 'edit-skeleton'}
+            ]);
             var time = null;
             time = setTimeout(() => {
-                $(".clos_btn2").removeClass('skeleton');
-                $(".head_btn2").removeClass('skeleton');
-                $("#supp_delt3").removeClass('skeleton');
-                $("#cate_confirm").removeClass('skeleton');
-                $("#usrdelt4").removeClass('edit-skeleton');
-                $("#deleteLoader").removeClass('edit-skeleton');
+                removeAttributeOrClass([
+                    {selector: '#supp_delt3, #cate_confirm, .clos_btn2, .head_btn2', type: 'class', name: 'skeleton'},
+                    {selector: '#usrdelt4, #deleteLoader', type: 'class', name: 'edit-skeleton'}
+                ]);
             }, 1000);
 
             return () => {
@@ -631,12 +594,10 @@
                 type: "DELETE",
                 url: "/delete-users/" + user_id,
                 success: function(response) {
-                    $('#success_message').addClass('alert_show ps-1 pe-1');
-                    $('#success_message').fadeIn();
+                    //$('#success_message').addClass('alert_show ps-1 pe-1');
+                    $('#success_message').addClass('background_error');
                     $('#success_message').text(response.messages);
-                    setTimeout(() => {
-                        $('#success_message').fadeOut();
-                    }, 3000);
+                    handleSuccessMessage('#success_message');
                     $('#deletecategory').modal('hide').fadeOut(300).delay(300);
                     $('#deleteuser').modal('hide').fadeOut(300).delay(300);
                     fetch_users_setting_data();
@@ -670,6 +631,8 @@
                 }) {
                     //console.log('messages', messages);
                     $("#success_message").text(messages.messages);
+                    $('#success_message').addClass('background_error');
+                    handleSuccessMessage('#success_message');
                     fetch_users_setting_data('', pagination_url);
                 }
             });

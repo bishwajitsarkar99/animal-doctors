@@ -25,11 +25,8 @@
                 </span>
               </div>
               <div class="col-1">
-                <div class="search-icon spinner-border spinner-border-sm text-primary search-hidden" role="status">
-                  <span class="visually-hidden">Searching...</span>
-                </div>
+                <span class="search-icon spinner-border spinner-border-sm text-primary" role="status" aria-hidden="true" hidden></span>
               </div>
-              <!-- <img id="locker" class="checking_lock skeleton pt-1" src="{{ asset('image/lock/lock.png')}}" alt="lock"> -->
             </div>
             <div class="table-responsive">
               <table class="bg-transparent ord_table center border-1 skeleton">
@@ -117,7 +114,7 @@
         <p id="btn_group2">
           <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
             <span class="btn-text">{{__('translate.Yes')}}</span>
-            <span class="delete-icon spinner-border spinner-border-sm text-white image-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+            <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
           </a>
         </p>
         <p id="btn_group">
@@ -155,7 +152,7 @@
           <div class="modal-footer profile_modal_footer">
             <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user" id="deleteLoader">
               <span class="btn-text">Delete</span>
-              <span class="delete-confirm-icon spinner-border spinner-border-sm text-white image-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+              <span class="delete-confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
             </button>
             <button type="button" class="btn btn-sm text-warning modal_button delete_cancel" id="usrdelt4" data-bs-dismiss="modal">Cancel</button>
           </div>
@@ -172,111 +169,44 @@
 @push('scripts')
 @include('super-admin._users-fetch')
 <script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
-<script type="module" src="{{asset('/module/module-min-js/helper-image-upload-function-min.js')}}"></script>
+<script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 <script type="module">
-  import { imageUpload } from "/module/module-min-js/helper-image-upload-function-min.js";
-</script>
-<script>
-  // Update Button Loader
-  $(document).ready(() => {
-    $("#userUpdate").on('click', () => {
-      $('.updated-icon').removeClass('updated-hidden');
-      $(this).attr('disabled', true);
-      $('btn-text').text('Update...');
-
-      setTimeout(() => {
-        $('.updated-icon').addClass('updated-hidden');
-        $(this).attr('disabled', false);
-        $('btn-text').text('Update');
-      }, 3000);
-    })
-  });
-
-  // Image Upload Button Loader
-  $(document).ready(() => {
-    $("#uploadButton").on('click', () => {
-      $('.image-icon').removeClass('image-hidden');
-      $(this).attr('disabled', true);
-      $('btn-text').text('Upload...');
-
-      setTimeout(() => {
-        $('.image-icon').addClass('image-hidden');
-        $(this).attr('disabled', false);
-        $('btn-text').text('Upload');
+  import { buttonLoader, removeSkeletonClass } from "/module/module-min-js/design-helper-function-min.js";
+  // initialize
+  buttonLoader();
+  $(document).ready(function(){
+    // Update Button Loader
+    buttonLoader('#userUpdate','.updated-icon','btn-text','Update...','Update',3000);
+    // confirm Update Button Loader
+    buttonLoader('#update_btn_confirm','.confirm-update-icon','btn-text','Confirm...','Confirm',2000);
+    // delete Button Loader
+    buttonLoader('#yesButton','.delete-icon','btn-text','Yes...','Yes',500);
+    // Delete confirm Button Loader
+    buttonLoader('#deleteLoader','.delete-confirm-icon','btn-text','Delete...','Delete',3000);
+    // Image Upload Button Loader
+    buttonLoader('#uploadButton','.image-icon','btn-text','Upload...','Upload',2000);
+    // Search Button Loader
+    $(".searchform").on('keyup', ()=>{
+      $(".search-icon").removeAttr('hidden');
+      var timeOut = setTimeout(() => {
+        $(".search-icon").attr('hidden', true);
       }, 2000);
-    })
-  });
-
-  // confirm Update Button Loader
-  $(document).ready(() => {
-    $("#update_btn_confirm").on('click', () => {
-      $('.confirm-update-icon').removeClass('image-hidden');
-      $(this).attr('disabled', true);
-      $('btn-text').text('Upload...');
-
-      setTimeout(() => {
-        $('.confirm-update-icon').addClass('image-hidden');
-        $(this).attr('disabled', false);
-        $('btn-text').text('Upload');
-      }, 2000);
-    })
-  });
-
-  // delete Button Loader
-  $(document).ready(() => {
-    $("#yesButton").on('click', () => {
-      $('.delete-icon').removeClass('image-hidden');
-      $(this).attr('disabled', true);
-      $('btn-text').text('Upload...');
-
-      setTimeout(() => {
-        $('.delete-icon').addClass('image-hidden');
-        $(this).attr('disabled', false);
-        $('btn-text').text('Upload');
-      }, 500);
-    })
-  });
-
-  // Search Button Loader
-  $(document).ready(() => {
-    $(".searchform").on('keyup', () => {
-      $('.search-icon').removeClass('search-hidden');
-      $(this).attr('disabled', true);
-
-      setTimeout(() => {
-        $('.search-icon').addClass('search-hidden');
-        $(this).attr('disabled', false);
-      }, 3000);
-    })
-  });
-
-  // Delete confirm Button Loader
-  $(document).ready(() => {
-    $("#deleteLoader").on('click', () => {
-      $('.delete-confirm-icon').removeClass('delete-hidden');
-      $(this).attr('disabled', true);
-      $('btn-text').text('Delete...');
-
-      setTimeout(() => {
-        $('.delete-confirm-icon').addClass('delete-hidden');
-        $(this).attr('disabled', false);
-        $('btn-text').text('Delete');
-      }, 3000);
-    })
-  });
-</script>
-<script>
-  // skeleton
-  function fetchData() {
-    const allSkeleton = document.querySelectorAll('.skeleton')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton')
+      return ()=>{
+        clearTimeout(timeOut);
+      }
     });
-  }
+    // Array of skeleton class names
+    const skeletonClasses = [
+      'skeleton'
+    ];
+    // Remove skeleton
+    var timeOut = setTimeout(() => {
+      removeSkeletonClass(skeletonClasses);
+    }, 1000);
+    return ()=>{
+      clearTimeout(timeOut);
+    }
 
-  setTimeout(() => {
-    fetchData();
-  }, 1000);
+  });
 </script>
 @endpush

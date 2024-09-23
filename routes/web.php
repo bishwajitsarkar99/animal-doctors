@@ -10,6 +10,7 @@ use App\Http\Controllers\PivotTable\PivotTableController;
 use App\Http\Controllers\PivotTable\SalesPivotTableController;
 use App\Http\Controllers\PivotTable\SupplierRecordController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Email\EmailController;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Permission\InventoryAccessPermission;
@@ -69,5 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
     // ->withoutMiddleware('auth')
     // Language
     Route::get('lang/{lang}', [LanguageController::class, 'switchLang'])->name('lang.switch');
+    // Send Email
+    Route::get('/email', [EmailController::class, 'index'])->name('email.index');
 });
 

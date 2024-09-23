@@ -1,1 +1,0 @@
-export function pageLoader(){window.addEventListener("load",function(){let e=document.querySelector(".loader-login"),o=document.getElementById("loaderModalForm");if(e&&o){let l=new bootstrap.Modal(o);l.show(),e.classList.add("log_close"),setTimeout(function(){l.hide()},1e3)}})}

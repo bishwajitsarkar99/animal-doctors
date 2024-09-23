@@ -94,6 +94,12 @@
                 <span class="show-prof ms-2" id="profileSkel"></span>
             </li>
             <li>
+                <a class="dropdown-item pro_link" href="{{route('email.index')}}">
+                    <span class="show-email badge rounded-pill bg-green text-white" hidden><i class="fa-solid fa-envelope-circle-check fa-beat" style="color: white; font-size:10px;"></i> Send-Email</span>
+                </a>
+                <span class="show-prof ms-2" id="emailSkel"></span>
+            </li>
+            <li>
                 <a class="dropdown-item pro_link" id="logout_click">
                     <span class="show-logout badge rounded-pill bg-danger text-white" hidden><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Logout')}}</span>
                     <span class="show-log ms-2" id="logoutSkel"></span>

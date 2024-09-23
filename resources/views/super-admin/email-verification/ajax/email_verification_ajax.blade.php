@@ -1,30 +1,10 @@
 <script type="module">
-    import { getTimeDifference } from "/module/module-min-js/helper-function-min.js";
+    import { getTimeDifference, formatDate, activeTableRow } from "/module/module-min-js/helper-function-min.js";
+    import { addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     $(document).ready(function(){
-        const formatDate = (dateString) => {
-            const date = new Date(dateString);
-
-            // Format date
-            const options = {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric',
-                hour12: true
-            };
-
-            return date.toLocaleString('en-US', options);
-        };
         // ACtive table row background
         $(document).on('click', 'tr.table-row', function(){
-            $(this).addClass("clicked").siblings().removeClass("clicked");
-        });
-        // ACtive table td user-id background
-        $(document).on('click', 'td.user-details-links', function() {
-            $('td.user-details-links').removeClass("background");
-            $(this).addClass("background");
+            activeTableRow(this);
         });
         // User Activities Data Fetch
         fetch_users_email_verification_data();
@@ -253,10 +233,24 @@
             var query = $(this).val();
             fetch_users_email_verification_data(query); 
         });
-        // Role Filter
+        // live search
         $(document).on('keyup', '#search', function(){
             var query = $(this).val();
             fetch_users_email_verification_data(query); 
+
+            addAttributeOrClass([
+               {selector: '#user_email_verification_data_table', type: 'class', name: 'skeleton'} 
+            ]);
+            // Remove skeleton
+            var timeOut = setTimeout(() => {
+                removeAttributeOrClass([
+                    {selector: '#user_email_verification_data_table', type: 'class', name: 'skeleton'} 
+                ]);
+            }, 1000);
+
+            return () => {
+                clearTimeout(timeOut);
+            };
         });
         // Status Update
         $("#user_email_verification_data_table").delegate(".check_permission", "click", function(e) {
@@ -291,17 +285,6 @@
         // Refresh
         $(document).on('click', '#refresh', function(){
             fetch_users_email_verification_data(); 
-            
-            $(".refresh-icon").removeClass('refrsh-hidden');
-            var time = null;
-            time = setTimeout(() => {
-                $(".refresh-icon").addClass('refrsh-hidden');
-            }, 1000);
-
-            return()=>{
-                clearTimeout(time);
-            }
         });
-
     });
 </script>

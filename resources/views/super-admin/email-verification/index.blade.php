@@ -9,7 +9,7 @@
       </li>
       <li class="nav-item tab-skeletone">
         <button type="button" class="btn btn-sm refresh-btn ripple-surface " id="refresh">
-          <span class="refresh-icon spinner-border spinner-border-sm text-white refrsh-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+          <span class="refresh-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
           <span class="btn-text ms-1">Refresh</span>
         </button>
       </li>
@@ -37,11 +37,22 @@
 @push('scripts')
 @include('super-admin.user-details.ajax.user-details-ajax')
 @include('super-admin.email-verification.ajax.email_verification_ajax')
-<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- jQuery UI Auto-Complete or Date Picker -->
 <script src="{{asset('backend_asset')}}/support_asset/date-picker/jquery/jquery-ui.min.js"></script>
+<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
+<script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
+<script type="module">
+  import { buttonLoader, removeSkeletonClass } from "{{asset('/module/module-min-js/design-helper-function-min.js')}}";
+  // initialize
+  buttonLoader();
+
+  $(document).ready(function(){
+    // Initialize the refresh button loader for the login button
+    buttonLoader('#refresh', '.refresh-icon', '.btn-text', 'Refresh...', 'Refresh', 1000);
+  });
+</script>
 <script>
   $(document).ready(function() {
     // Initialize Select2 for all elements with the 'select2' class
@@ -68,39 +79,9 @@
       item.classList.remove(selector.substring(1));
     });
   }
-
-  // Usage
-  // $("#tabHome").attr('hidden', true);
-  // $("#refresh").attr('hidden', true);
-  // $("#roleSearch").attr('hidden', true);
-  // $("#item_class").attr('hidden', true);
-  // $("#perItemControls").attr('hidden', true);
-  // $("#tabSetting").attr('hidden', true);
-  // $("#tabCreateSupplier").attr('hidden', true);
-  // $("#moduSetting").attr('hidden', true);
-  // $("#tabOne").addClass('tab-skeletone');
   $("#showCard").attr('hidden', true);
   $("#loaderShow").removeClass('loader-show');
   setTimeout(() => {
-    // removeSkeletons('.skeleton');
-    // removeSkeletons('.tab-skeletone');
-    // removeSkeletons('.tab_btn_skeletone');
-    // removeSkeletons('.long-skeleton');
-    // removeSkeletons('.capsule-skeleton');
-    // removeSkeletons('.inp_ser_skeletone');
-    // removeSkeletons('.peritem-skeleton');
-    // removeSkeletons('.tab2-skeletone');
-    // removeSkeletons('.tab3-skeletone');
-    // removeSkeletons('.tab4-skeletone');
-    // $("#tabHome").removeAttr('hidden');
-    // $("#refresh").removeAttr('hidden');
-    // $("#roleSearch").removeAttr('hidden');
-    // $("#item_class").removeAttr('hidden');
-    // $("#perItemControls").removeAttr('hidden');
-    // $("#tabSetting").removeAttr('hidden');
-    // $("#tabCreateSupplier").removeAttr('hidden');
-    // $("#moduSetting").removeAttr('hidden');
-    
     removeSkeletons('.head-skeletone');
     removeSkeletons('.body-skeletone');
     removeSkeletons('.cricale-number-skeleton');
@@ -110,10 +91,9 @@
     removeSkeletons('.total-number-skeletone');
     removeSkeletons('.tab-skeletone');
     $("#loaderShow").addClass('loader-show');
-    
-  }, 1800);
+  }, 1000);
   setTimeout(() => {
     $("#showCard").removeAttr('hidden');
-  }, 500);
+  }, 50);
 </script>
 @endpush

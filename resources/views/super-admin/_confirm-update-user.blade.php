@@ -19,7 +19,7 @@
         <div class="modal-footer" id="logoutModal_footer">
           <button id="update_btn_confirm" class="btn btn-sm modal_button update_btn">
             <span class="btn-text">Confirm</span>
-            <span class="confirm-update-icon spinner-border spinner-border-sm text-white image-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+            <span class="confirm-update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
           </button>
           <button type="button" class="btn btn-sm modal_button text-warning delete_cancel" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
         </div>    

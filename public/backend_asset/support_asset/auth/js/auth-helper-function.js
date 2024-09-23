@@ -1,4 +1,4 @@
-// Login Button Loader ---------
+// Button Loader Helper Function ---------
 export function buttonLoader(buttonSelector, loaderIconSelector, buttonTextSelector, loadingText = '', defaultText = '', timeoutDuration = '') {
 
     $(buttonSelector).on('click', () => {

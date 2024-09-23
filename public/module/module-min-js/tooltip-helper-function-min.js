@@ -1,1 +1,0 @@
-export function toolTip(){let o=Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'));"undefined"!=typeof bootstrap&&bootstrap.Tooltip&&o.map(function(o){return new bootstrap.Tooltip(o)})}

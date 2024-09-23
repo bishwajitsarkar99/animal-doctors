@@ -12,17 +12,12 @@
 <!--========== Ajax-Chart-Js 2.8.0 CDN Link ==========-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <!--========== Module - Helper Function Links ==========-->
-<script type="module" src="/module/module-min-js/browser-inspect-function-min.js"></script>
-<script type="module" src="/module/module-min-js/page-loader-function-min.js"></script>
-<script type="module" src="/module/module-min-js/tooltip-helper-function-min.js"></script>
+<script type="module" src="/module/module-min-js/application-helper-function-min.js"></script>
 <script type="module">
-    import { browserInpect } from "/module/module-min-js/browser-inspect-function-min.js";
-    import { pageLoader } from "/module/module-min-js/page-loader-function-min.js";
-    //<!--============ Admin page Tooltip ============-->
-    import { toolTip } from "/module/module-min-js/tooltip-helper-function-min.js";
-    //browserInpect();
+    import { browserInpect, pageLoader, toolTip } from "/module/module-min-js/application-helper-function-min.js";
     pageLoader();
     toolTip();
+    //browserInpect();
 </script>
 <!--============= Chart-Pie Js 3D CDN Link =============-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

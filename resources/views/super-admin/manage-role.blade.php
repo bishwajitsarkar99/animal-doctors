@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-md-2">
                     <button id="manage_btn" type="submit" class="btn btn-sm manage_button button-skeleton">
-                        <span class="updated-icon spinner-border spinner-border-sm text-white updated-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                        <span class="updated-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="btn-text">Update Role</span>
                     </button>
                 </div>
@@ -73,8 +73,77 @@
 @section('script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
+<script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
+<script type="module">
+    import { buttonLoader, handleSuccessMessage, removeSkeletonClass, handleInputOrSelectValidation} from "/module/module-min-js/design-helper-function-min.js";
+    buttonLoader();
+    $(document).ready(function(){
+
+        // Initialize the refresh button loader for the login button
+        buttonLoader('.manage_button', '.updated-icon', '.btn-text', 'Update Role...', 'Update Role', 3000);
+
+        // Initialize the message
+        handleSuccessMessage('#update_message');
+
+        
+        // Select email validation
+        $(document).on('change', '#select_user', function() {
+            handleInputOrSelectValidation(
+                '#select_user',        // Select element
+                '.remove-error-one',   // Error message selector
+                'show-success-border', // Success class
+                'is-invalid',          // Error class
+                'show-current-border', // Current border class
+                '#light_focus'         // Success message selector (you can remove if not needed)
+            );
+        });
+        // Select role validation
+        $(document).on('change', '#select_role', function() {
+            handleInputOrSelectValidation(
+                '#select_role',        // Select element
+                '.remove-error-two',   // Error message selector
+                'show-success-border', // Success class
+                'is-invalid',          // Error class
+                'show-current-border', // Current border class
+                '#light_focus2'        // Success message selector (you can remove if not needed)
+            );
+        });
+        // Error handle function refactored to handle input/select validation
+        function checkForErrors() {
+            handleInputOrSelectValidation(
+                '#select_user',        // Select element
+                '.remove-error-one',   // Error message selector
+                'show-success-border', // Success class
+                'is-invalid',          // Error class
+                'show-current-border', // Current border class
+                '#light_focus'         // Success message selector
+            );
+
+            handleInputOrSelectValidation(
+                '#select_role',        // Select element
+                '.remove-error-two',   // Error message selector
+                'show-success-border', // Success class
+                'is-invalid',          // Error class
+                'show-current-border', // Current border class
+                '#light_focus2'        // Success message selector
+            );
+        }
+        // Call the function to handle errors when needed
+        checkForErrors();
+
+
+        // Array of skeleton class names
+        const skeletonClasses = [
+            'page-heading-skeleton',
+            'cricale-skeleton',
+            'button-skeleton'
+        ];
+        // Remove skeleton
+        setTimeout(() => {
+            removeSkeletonClass(skeletonClasses);
+        }, 1000);
+
+
         // Initialize Select2 for all elements with the 'select2' class
         //$('.select2').select2();
         $('.select2').each(function() {
@@ -95,100 +164,9 @@
         $('#select_user').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search emails...');
         });
-
         $('#select_role').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search roles...');
         });
-    });
-</script>
-<script>
-    $(document).ready(() => {
-        // Button Loader
-        $(".manage_button").on('click', () => {
-            $('.updated-icon').removeClass('updated-hidden');
-            $(this).attr('disabled', true);
-            $('.btn-text').text('Update Role...');
-            setTimeout(() => {
-                $('.updated-icon').addClass('updated-hidden');
-                $(this).attr('disabled', false);
-                $('.btn-text').text('Update Role');
-            }, 3000);
-        });
-        // Success Message
-        var successMessage = $('#update_message').text().trim();
-        if (successMessage) {
-            $('#update_message').fadeIn();
-            var time = null;
-            time = setTimeout(() => {
-                $('#update_message').fadeOut(6000);
-                $('#update_message').delay(6000);
-            }, 3000);
-            return ()=>{
-                clearTimeout(time);
-            }
-        }
-    });
-</script>
-<script>
-    // page-skeleton
-    function headSkeletone() {
-      const allSkeleton = document.querySelectorAll('.page-heading-skeleton')
-  
-      allSkeleton.forEach(item => {
-        item.classList.remove('page-heading-skeleton')
-      });
-    }
-  // cricale-skeleton
-  function cricaleSkeleton() {
-    const allSkeleton = document.querySelectorAll('.cricale-skeleton')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('cricale-skeleton')
-    });
-  }
-  // button-skeleton
-  function buttonSkeleton() {
-    const allSkeleton = document.querySelectorAll('.button-skeleton')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('button-skeleton')
-    });
-  }
-
-  setTimeout(() => {
-    cricaleSkeleton();
-    headSkeletone();
-    buttonSkeleton();
-  }, 1000);
-</script>
-<script>
-    $(document).ready(function(){
-        // select email
-        $(document).on('change', '#select_user', function(){
-            var email_id = $(this).val();
-            $(".remove-error-one").text('');
-            $(this).addClass('show-current-border').removeClass('show-success-border');
-            $("#light_focus").removeClass('is-invalid');
-        });
-        // select role
-        $(document).on('change', '#select_role', function(){
-            var email_id = $(this).val();
-            $(".remove-error-two").text('');
-            $(this).addClass('show-current-border').removeClass('show-success-border');
-            $("#light_focus2").removeClass('is-invalid');
-        });
-        // error handle
-        function checkForErrors() {
-            // Error handling for input fields
-            $(".show-error").each(function () {
-                var errorMessage = $(this).text().trim();
-                if (errorMessage !== '') {
-                    var errorInput = $(this).closest('.row').find('input');
-                    errorInput.addClass('is-invalid').removeClass('show-current-border show-success-border');
-                }
-            });
-        }
-        checkForErrors();
     });
 </script>
 @endsection
