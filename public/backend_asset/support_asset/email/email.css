@@ -1,0 +1,12 @@
+.note-editor {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+  
+.note-editable {
+font-family: Arial, sans-serif;
+font-size: 14px;
+padding: 10px;
+color: #333;
+}
