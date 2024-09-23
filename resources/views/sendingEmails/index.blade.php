@@ -5,17 +5,25 @@
 @include('backend.layouts.dashboard-components._navbar')
 <div id="viewer"></div>
 <div class="card form-control form-control-sm" id="set_table">
-  <div class="card-body skeleton" id="table_card_body">
+  <div class="card-body" id="table_card_body">
     <div class="col-xl-12">
       <div class="row">
-        <div class="col-md-12 ps-2">
-          <div class="card-body focus-color user_details cd pb-3">
+        <div class="col-md-4">
+          <div class="card-body focus-color user_details cd skeleton">
+            <p>List</p>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body focus-color user_details cd skeleton">
             <!-- <p class="users_heading skeleton mb-1">Users <span class="ms-1 skeleton">Update and Permission</span></p> -->
             <div class="form-group mb-1">
               <input class="form-control form-control-sm" type="text" name="user_to" placeholder="To :"/>
             </div>
             <div class="form-group mb-1">
-              <input class="form-control form-control-sm" type="text" name="more_than_user" placeholder="CC :"/>
+              <input class="form-control form-control-sm" type="text" name="user_cc" placeholder="CC :"/>
+            </div>
+            <div class="form-group mb-1">
+              <input class="form-control form-control-sm" type="text" name="user_bcc" placeholder="BCC :"/>
             </div>
             <div class="form-group mb-1">
               <input class="form-control form-control-sm" type="text" name="subject" placeholder="Subject :"/>
@@ -68,7 +76,7 @@
     $("#email_summernote").summernote({
       placeholder: 'Email content',
       tabsize: 2,
-      height: 200,
+      height: 190,
       minHeight: null,
       maxHeight: null,
       
