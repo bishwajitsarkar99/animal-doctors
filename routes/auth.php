@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Email\EmailController;
 
 Route::get('/login', function () {
     return redirect('/');
@@ -31,5 +32,9 @@ Route::middleware('emailVerificationPage')->group(function () {
 });
 // Email Link Sending Route
 Route::post('send-link', [AuthController::class, 'sendLink'])->name('send.link');
+// Send Email
+Route::get('/email', [EmailController::class, 'index'])->name('email.index');
+Route::post('/email/send', [EmailController::class, 'sendEmail'])->name('email.send');
+
 // Logout Route (POST is more secure for state-changing operations)
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

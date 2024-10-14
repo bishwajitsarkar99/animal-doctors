@@ -553,11 +553,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'sandbox.smtp.mailtrap.io',
-        'port' => '2525',
-        'encryption' => NULL,
-        'username' => '884ee30aada631',
-        'password' => '6f73437f14a609',
+        'host' => 'smtp.gmail.com',
+        'port' => '587',
+        'encryption' => 'tls',
+        'username' => 'bishwajitsarkar99@gmail.com',
+        'password' => 'ugqkatbjsgtowpfx',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -599,7 +599,7 @@
     ),
     'from' => 
     array (
-      'address' => 'superadmin@gmail.com',
+      'address' => 'bishwajitsarkar99@gmail.com',
       'name' => 'GST-Medicine-Center',
     ),
     'markdown' => 
