@@ -630,7 +630,7 @@
                     messages
                 }) {
                     //console.log('messages', messages);
-                    $("#success_message").text(messages.messages);
+                    $("#success_message").text(messages);
                     $('#success_message').addClass('background_error');
                     handleSuccessMessage('#success_message');
                     fetch_users_setting_data('', pagination_url);

@@ -6,7 +6,6 @@ use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\CompanyProfile;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\SubCategory;
@@ -20,9 +19,17 @@ use App\Support\Facades\Setting;
 use App\Models\AuthPages;
 use App\Models\Email\EmailVerification;
 use Carbon\Carbon;
+use App\LogicBild\SuperAdmin\SuperAdminService;
 
 class SuperAdminController extends Controller
 {
+    protected $superAdminService;
+
+    // Inject the SuperAdminService
+    public function __construct(SuperAdminService $superAdminService)
+    {
+        $this->superAdminService = $superAdminService;
+    }
     //  Show Super Admin Dashboard Page
     public function dashboard()
     {
@@ -81,204 +88,56 @@ class SuperAdminController extends Controller
     //  Show Super Admin Get User Page
     public function users()
     {
-        $users = User::latest()->paginate(1);
-
-        return view('super-admin.users', compact('users'));
+        // $users = User::latest()->paginate(1);
+        return view('super-admin.users');
     }
-    // Account-Holders Data----------
+    // Search Account-Holders Data----------
     public function accounts_holders(Request $request)
     {
-
-        $roles = Role::all();
-        $data = EmailVerification::all();
-
-        $search = $request['search'] ?? "";
-        if ($search != null) {
-            $users = User::where('name', 'LIKE', '%' . $search . '%')
-                ->orWhere('email', 'LIKE', '%' . $search . '%')
-                ->orWhere('contract_number', 'LIKE', '%' . $search . '%')
-                ->orWhere('role', 'LIKE', '%' . $search . '%')
-                ->orWhere('id', 'LIKE', '%' . $search . '%')
-                ->get();
-        } else {
-            $users = User::orderBy('id', 'desc')
-            ->latest()
-            ->paginate(1);
-        }
-
-        return view('super-admin.account-holders.account-holders_list', compact('data','roles','users'))
-            ->with('i', (request()->input('page', 1) - 1) * 10);
+        return $this->superAdminService->accounts_holder($request);
     }
     // Fetch Users Data-----------
     public function getusers(Request $request)
     {
-        $startOfMonth = Carbon::now()->startOfMonth();
-        $endOfMonth = Carbon::now()->endOfMonth();
-
-        // sort-field
-        $sort_field_id = $request->input('sort_field_id', 'id');
-        $sort_field_image = $request->input('sort_field_image', 'image');
-        $sort_field_name = $request->input('sort_field_name', 'name');
-        $sort_field_email = $request->input('sort_field_email', 'email');
-        $sort_field_contract_number = $request->input('sort_field_contract_number', 'contract_number');
-        $sort_field_role = $request->input('sort_field_role', 'role');
-        $sort_field_status = $request->input('sort_field_status', 'status');
-
-        $sort_field_direction = $request->input('sort_field_direction', 'desc');
-
-        $users = User::where('role', '!=', 1)->with(['roles'])->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
-
-        if ($query = $request->get('query')) {
-            $users->where('name', 'LIKE', '%' . $query . '%')
-                ->orWhere('email', 'LIKE', '%' . $query . '%')
-                ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
-                ->orWhere('role', 'LIKE', '%' . $query . '%')
-                ->orWhere('id', 'LIKE', '%' . $query . '%');
-        }
-
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
-        }
-        // sorting field
-        $users = $users->orderBy($sort_field_id, $sort_field_direction)
-                        ->orderBy($sort_field_image, $sort_field_direction)
-                        ->orderBy($sort_field_name, $sort_field_direction)
-                        ->orderBy($sort_field_email, $sort_field_direction)
-                        ->orderBy($sort_field_contract_number, $sort_field_direction)
-                        ->orderBy($sort_field_role, $sort_field_direction)
-                        ->orderBy($sort_field_status, $sort_field_direction);
-
-        $users = $users->paginate($perItem)->toArray();
-
-        return response()->json($users, 200);
+        return $this->superAdminService->getuser($request);
     }
-    // Update User Status---------
+    // User Status Update---------
     public function update_status(Request $request)
     {
-        $id = (int)$request->input('id');
-        $status = (bool)$request->input('status');
-        $status = !$status;
-
-        $data = User::findOrFail($id);
-
-        $data->update([
-            'status' => (int)$status,
-        ]);
-
-        return response()->json([
-            'messages' => 'User Status Update Successfully',
-            'code' => 202,
-        ], 202);
+        return $this->superAdminService->update_statu($request);
     }
-    // Edit Users Data-----------
+    // Edit Users -----------
     public function editUsers($id)
     {
-        $users = User::findOrFail($id);
-
-        return response()->json([
-            'status' => 200,
-            'messages' => $users,
-            'data' => $users
-        ]);
+        return $this->superAdminService->editUser($id);
     }
-    // View Users Data-----------
+    // View Users -----------
     public function showUsers($id)
     {
-        $users = User::with('emailVerification')->findOrFail($id);
-
-        if ($users) {
-            return response()->json([
-                'status' => 200,
-                'messages' => $users,
-                'data' => $users
-            ]);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'messages' => 'User is not found!',
-            ]);
-        }
+        return $this->superAdminService->showUser($id);
     }
-    // Update Users Data------------
+    // Update Users ------------
     public function updateUsers(Request $request, $id)
     {
         $user = User::findOrFail($id);
-
-        // Validation
-        $validator = Validator::make($request->all(), [
-            'name' => 'string|required|max:120',
-            'contract_number' => 'required|numeric|digits:11',
-            'email' => 'string|email|required|max:100',
-        ]);
-
-        // Check if validation fails
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'errors' => $validator->messages(),
-            ]);
-        }
-
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->contract_number = $request->input('contract_number');
-
-        if ($request->hasFile('image')) {
-            $path = 'image/' . $user->image;
-            if (File::exists($path)) {
-                File::delete($path);
-            }
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('image/', $filename);
-            $user->image = $filename;
-        }
-        $user->save();
-
-        return response()->json([
-            'status' => 200,
-            'messages' => 'User account is updated successfully',
-            // 'data' => $user->toArray(),
-        ]);
+        return $this->superAdminService->updateUser($request, $user);
     }
 
     // Delete Users Data-----------
     public function deleteUsers($id)
     {
-        $users = User::find($id);
-        $users->delete();
-
-        return response()->json([
-            'status' => 200,
-            'messages' => 'User account is deleted successfully',
-        ]);
+        return $this->superAdminService->deleteUser($id);
     }
 
     // Manage Role-----------
     public function manageRole()
     {
-        $users = User::where('status', '=', 0)->orderBy('id', 'desc')->get();
-        $company_profiles = companyProfile::where('id', '=', 1)->get();
-        $roles = Role::all();
-        return view('super-admin.manage-role',compact('company_profiles', 'users', 'roles'));
+        return $this->superAdminService->manageRoles();
     }
     // Update Manage Role-----------
     public function updateRole(Request $request)
     {
-        // Validate request data
-        $validatedData = $request->validate([
-            'user_id' => 'required|string',
-            'role_id' => 'required|string',
-        ],[
-            'user_id.required' => 'User email is required.',
-            'role_id.required' => 'User role is required.',
-        ]);
-        User::where('id', $request->user_id)->update([
-            'role' => $request->role_id
-        ]);
-        return redirect()->back()->with('success', 'User role and permission is updated');
+        return $this->superAdminService->updateRoles($request);
     }
     // Email Verification Page Load
     public function loadEmailVerification(Request $request)
