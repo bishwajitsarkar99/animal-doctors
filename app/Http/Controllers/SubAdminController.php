@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\CompanyProfile;
-use Illuminate\Support\Facades\Cache;
+use App\LogicBild\SubAdmin\SubAdminService;
+
 class SubAdminController extends Controller
 {
-    //
+    protected $subAdminService;
+
+    // inject SubAdminService
+    public function __construct(SubAdminService $subAdminService)
+    {
+        $this->subAdminService = $subAdminService;
+    }
+    
+    // view sub admin dashboard
     public function dashboard()
-    {   
-        $company_profiles = Cache::rememberForever('company_profiles', function () {
-            return companyProfile::find(1);
-        });
-        return view('sub-admin.dashboard',compact('company_profiles'));
-        
+    {    
+        return $this->subAdminService->viewDashboard();
     }
 }

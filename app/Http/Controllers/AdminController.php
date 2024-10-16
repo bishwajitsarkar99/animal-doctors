@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\CompanyProfile;
-use Illuminate\Support\Facades\Cache;
+use App\LogicBild\Admin\AdminService;
 
 class AdminController extends Controller
 {
-    //
+    protected $adminService;
+    // inject AdminService
+    public function __construct(AdminService $adminService)
+    {
+        $this->adminService = $adminService;
+    }
+
+    // view admin dashboard
     public function dashboard()
     {
-        $company_profiles = Cache::rememberForever('company_profiles', function () {
-            return companyProfile::find(1);
-        });
-        return view('admin.dashboard',compact('company_profiles'));
+        return $this->adminService->viewDashboard();
     }
 }

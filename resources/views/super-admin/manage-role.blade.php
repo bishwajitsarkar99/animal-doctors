@@ -10,7 +10,7 @@
             @csrf
             <div class="row">
                 <div class="col-md-2">
-                    <label class="input_label page-heading-skeleton mt-1" for="select-user">Select Email :</label>
+                    <label class="input_manage_label page-heading-skeleton mt-1" for="select-user">Select Email :</label>
                 </div>
                 <div class="custom-select col-md-4 page-heading-skeleton">
                     <select type="text" class="form-control form-control-sm select2" name="user_id" id="select_user">
@@ -29,7 +29,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-md-2">
-                    <label class="input_label page-heading-skeleton mt-1" for="select-role">Select Role :</label>
+                    <label class="input_manage_label page-heading-skeleton mt-1" for="select-role">Select Role :</label>
                 </div>
                 <div class="custom-select col-md-4 page-heading-skeleton">
                     <select type="text" class="form-control form-control-sm select2" name="role_id" id="select_role">

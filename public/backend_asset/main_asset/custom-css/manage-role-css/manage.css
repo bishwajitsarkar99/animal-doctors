@@ -148,9 +148,17 @@ select#select_input {
 select#select_input:focus{
     border-color: #3b71ca;
 }
-label.input_label {
+label.input_manage_label{
     color: black;
     font-size: 14px;
+    font-weight: 800;
+    font-family: var(--nav-font-family);
+    letter-spacing: 0.8px;
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 14%);
+}
+label.input_label {
+    color: black;
+    font-size: 12px;
     font-weight: 800;
     font-family: var(--nav-font-family);
     letter-spacing: 0.8px;

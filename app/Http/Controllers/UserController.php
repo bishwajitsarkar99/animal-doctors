@@ -3,29 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\CompanyProfile;
-use App\Models\User;
-use Illuminate\Support\Facades\Cache;
+use App\LogicBild\CommonUser\CommonUserService;
+
 class UserController extends Controller
 {
+    protected $commonUserService;
+    // inject Common User Service
+    public function __construct(CommonUserService $commonUserService)
+    {
+        return $this->commonUserService = $commonUserService;
+    }
+    
     // User Home Page
     public function dashboard()
     {   
-        $company_profiles = Cache::rememberForever('company_profiles', function () {
-            return companyProfile::find(1);
-        });
-        return view('user.dashboard',compact('company_profiles'));
+        return $this->commonUserService->viewDashboard();
     }
 
     // User Auth Account
     public function users()
     {
-        $company_profiles = Cache::rememberForever('company_profiles', function () {
-            return companyProfile::find(1);
-        });
-        return view('user.update-account.index',compact('company_profiles'));
+        return $this->commonUserService->user();
     }
+    
     // Get User
     // public function getusers()
     // {
