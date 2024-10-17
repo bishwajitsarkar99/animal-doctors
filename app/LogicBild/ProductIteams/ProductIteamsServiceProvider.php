@@ -12,6 +12,7 @@ use App\Models\MedicineName;
 use App\Models\MedicineDogs;
 use App\Models\Product;
 use App\Models\Unit;
+use App\Models\ProductModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
 
@@ -1356,6 +1357,319 @@ class ProductIteamsServiceProvider
         });
         return view('super-admin.medicine-item.origin.index', compact('company_profiles'));
     }
+    /**
+     * Handle Origin Name Fetch Data
+    */
+    public function getOrigin(Request $request)
+    {
+        if($request->ajax() == false){
+            // return abort(404);
+        }
 
+        $data = MedicineOrigin::orderBy('id','desc')->latest();
+
+        if( $query = $request->get('query')){
+            $data->Where('origin_name','LIKE','%'.$query.'%')
+                ->orWhere('status','LIKE','%'.$query.'%');      
+        } 
+        $perItem = 10;
+        if($request->input('per_item')){
+            $perItem = $request->input('per_item');
+        }
+        $data = $data->paginate($perItem)->toArray();
+        
+        return response()->json( $data, 200);
+    }
+    /**
+     * Handle Create Origin Event
+    */
+    public function createOrigins(Request $request)
+    {
+        // validation
+        $validators = validator::make($request->all(),[
+            'origin_name'=>'required|max:191|unique:medicine_origins',
+        ],[
+            'origin_name.required'=>'The medicine origin is required mandatory.',
+            'origin_name.unique'=>'The medicine origin has already been taken.',
+        ]);
+        if($validators->fails()){
+            return response()->json([
+                'status'=> 400,
+                'errors' =>$validators->messages(),
+            ]);
+        }    
+        else{
+            $origins = new MedicineOrigin;
+            $origins->origin_name = $request->input('origin_name');
+            $origins->save();
+            return response()->json([
+                'status'=> 200,
+                'messages'=> 'The Medicine Origin has added successfully',
+            ]);
+        }
+    }
+    /**
+     * Handle Edit Origin Event
+    */
+    public function editOrigins($id)
+    {
+        $origins = MedicineOrigin::find($id);
+        if($origins){
+            return response()->json([
+                'status'=> 200,
+                'messages'=> $origins,
+            ]);
+        }
+        else{
+            return response()->json([
+                'status'=> 404,
+                'messages'=> 'The medicine origin is not found',
+            ]);
+        }
+    }
+    /**
+     * Handle Update Origin Event
+    */
+    public function updateOrigins(Request $request, $id)
+    {
+        // validation
+        $validator = validator::make($request->all(),[
+            'origin_name'=>'required|max:191|unique:medicine_origins,origin_name,' .$id,
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status'=> 400,
+                'errors'=> $validator->messages(),
+            ]);
+        }    
+        else{
+            $origins = MedicineOrigin::find($id);
+            if($origins){
+                $origins->origin_name = $request->input('origin_name');
+                $origins->update();
+                return response()->json([
+                    'status'=> 200,
+                    'messages'=> 'The medicine origin has updated successfully',
+                ]);
+            }
+            else{
+                return response()->json([
+                    'status'=> 404,
+                    'messages'=> 'The medicine origin is not found',
+                ]);
+            } 
+        }
+    }
+    /**
+     * Handle Delete Origin Event
+    */
+    public function deleteOrigins($id)
+    {
+        $origins = MedicineOrigin::find($id);
+        $origins->delete();
+
+        return response()->json([
+            'status'=> 200,
+            'messages'=> 'The medicine origin is deleted successfully',
+        ]);
+    }
+    /**
+     * Handle Origin Status Update
+    */
+    public function originStatusUpdate(Request $request)
+    {
+        $id = (int)$request->input('id');
+        $status = (bool)$request->input('status');
+        $status = !$status;
+
+        $data = MedicineOrigin::findOrFail( $id);
+
+        $data->update([
+            'status' => (int)$status,
+        ]);
+
+        return response()->json([
+            'messages' => 'The medicine origin Permission has Updated Successfully',
+            'code' => 202,
+        ], 202);
+    }
+
+
+    // ========================= Product Model =================================
+    // =========================================================================
+    /**
+     * Handle Product Model View
+    */
+    public function viewProductModel()
+    {
+        $company_profiles = Cache::rememberForever('company_profiles', function () {
+            return companyProfile::find(1);
+        });
+        $products = Product::all();
+        return view('super-admin.medicine-item.model.index', compact('company_profiles','products'));
+    }
+    /**
+     * Handle Product Model Fetch Data
+    */
+    public function getProductModels(Request $request)
+    {
+        if($request->ajax() == false){
+            // return abort(404);
+        }
+
+        $data = ProductModel::with(['products'])->orderBy('id','desc')->latest();
+
+        if( $query = $request->get('query')){
+            $data->Where('product_id', 'LIKE','%'.$query.'%')
+                ->orWhere('model_name','LIKE','%'.$query.'%')
+                ->orWhere('status','LIKE','%'.$query.'%');      
+        } 
+        $perItem = 10;
+        if($request->input('per_item')){
+            $perItem = $request->input('per_item');
+        }
+        $data = $data->paginate($perItem)->toArray();
+        
+        return response()->json( $data, 200);
+    }
+    /**
+     * Handle Product Data Get
+    */
+    public function getDataProducts(Request $request)
+    {
+        if($request->ajax() == false){
+            // return abort(404);
+        }
+
+        $data = Product::orderBy('id','desc')->latest();
+
+        if( $query = $request->get('query')){
+            $data->Where('product_name','LIKE','%'.$query.'%')
+                ->orWhere('status','LIKE','%'.$query.'%');      
+        } 
+        $perItem = 10;
+        if($request->input('per_item')){
+            $perItem = $request->input('per_item');
+        }
+        $data = $data->paginate($perItem)->toArray();
+        
+        return response()->json( $data, 200);
+    }
+    /**
+     * Handle Create Product Model Event
+    */
+    public function createProductModels(Requset $request)
+    {
+        // validation
+        $validators = validator::make($request->all(),[
+            'model_name'=>'required|max:191',
+            'product_id' =>'required',
+        ],[
+            'model_name.required'=>'The model name is required mandatory.',
+            'product_id.required'=>'The product id is required mandatory.',
+        ]);
+        if($validators->fails()){
+            return response()->json([
+                'status'=> 400,
+                'errors' =>$validators->messages(),
+            ]);
+        }    
+        else{
+            $product_models = new ProductModel;
+            $product_models->model_name = $request->input('model_name');
+            $product_models->product_id = $request->input('product_id');
+            $product_models->save();
+            return response()->json([
+                'status'=> 200,
+                'messages'=> 'The Product Model has added successfully',
+            ]);
+        }
+    }
+    /**
+     * Handle Edit Product Model Event
+    */
+    public function editProductModels($id)
+    {
+        $product_models = ProductModel::find($id);
+        if($product_models){
+            return response()->json([
+                'status'=> 200,
+                'messages'=> $product_models,
+            ]);
+        }
+        else{
+            return response()->json([
+                'status'=> 404,
+                'messages'=> 'The product model is not found',
+            ]);
+        }
+    }
+    /**
+     * Handle Update Product Model Event
+    */
+    public function updateProductModels(Request $request, $id)
+    {
+        $validator = validator::make($request->all(),[
+            'model_name'=>'required|max:191',
+            'product_id'=>'required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status'=> 400,
+                'errors'=> $validator->messages(),
+            ]);
+        }    
+        else{
+            $product_models = ProductModel::find($id);
+            if($product_models){
+                $product_models->model_name = $request->input('model_name');
+                $product_models->product_id = $request->input('product_id');
+                $product_models->update();
+                return response()->json([
+                    'status'=> 200,
+                    'messages'=> 'The product model has updated successfully',
+                ]);
+            }
+            else{
+                return response()->json([
+                    'status'=> 404,
+                    'messages'=> 'The product model is not found',
+                ]);
+            } 
+        }
+    }
+    /**
+     * Handle Delete Product Model Event
+    */
+    public function deleteProductModels($id)
+    {
+        $product_models = ProductModel::find($id);
+        $product_models->delete();
+
+        return response()->json([
+            'status'=> 200,
+            'messages'=> 'The product model is deleted successfully',
+        ]);
+    }
+    /**
+     * Handle Product Model Status Update
+    */
+    public function ProductModelStatusUpdate(Request $request)
+    {
+        $id = (int)$request->input('id');
+        $status = (bool)$request->input('status');
+        $status = !$status;
+
+        $data = ProductModel::findOrFail( $id);
+
+        $data->update([
+            'status' => (int)$status,
+        ]);
+
+        return response()->json([
+            'messages' => 'The product model Permission has Updated Successfully',
+            'code' => 202,
+        ], 202);
+    }
 
 }

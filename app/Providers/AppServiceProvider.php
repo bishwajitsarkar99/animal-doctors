@@ -15,6 +15,12 @@ use App\LogicBild\Accounts\AccountsServiceProvider;
 use App\LogicBild\DeliveryTeam\DeliveryTeamServiceProvider;
 use App\LogicBild\Marketing\MarketingServiceProvider;
 use App\LogicBild\ProductIteams\ProductIteamsServiceProvider;
+use App\LogicBild\PivotTable\PivotTableServiceProvider;
+use App\LogicBild\Post\PostServiceProvider;
+use App\LogicBild\SettingService\SupplierSettingServiceProvider;
+use App\LogicBild\SettingService\PostSettingServiceProvider;
+use App\LogicBild\Supplier\SupplierServiceProvider;
+use App\LogicBild\Stock\StockServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 
@@ -74,6 +80,30 @@ class AppServiceProvider extends ServiceProvider
         // singleton for ProductIteamsServiceProvider
         $this->app->singleton(ProductIteamsServiceProvider::class, function($app){
             return new ProductIteamsServiceProvider();
+        });
+        // singleton for PivotTableServiceProvider
+        $this->app->singleton(PivotTableServiceProvider::class, function($app){
+            return new PivotTableServiceProvider();
+        });
+        // singleton for PostServiceProvider
+        $this->app->singleton(PostServiceProvider::class, function($app){
+            return new PostServiceProvider();
+        });
+        // singleton for SupplierSettingServiceProvider
+        $this->app->singleton(SupplierSettingServiceProvider::class, function($app){
+            return new SupplierSettingServiceProvider();
+        });
+        // singleton for PostSettingServiceProvider
+        $this->app->singleton(PostSettingServiceProvider::class, function($app){
+            return new PostSettingServiceProvider();
+        });
+        // singleton for SupplierServiceProvider
+        $this->app->singleton(SupplierServiceProvider::class, function($app){
+            return new SupplierServiceProvider();
+        });
+        // singleton for StockServiceProvider
+        $this->app->singleton(StockServiceProvider::class, function($app){
+            return new StockServiceProvider();
         });
     }
 

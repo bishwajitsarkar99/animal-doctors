@@ -4,15 +4,20 @@ namespace App\Http\Controllers\PivotTable;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\CompanyProfile;
-use Illuminate\Support\Facades\Cache;
+use App\LogicBild\PivotTable\PivotTableServiceProvider;
 
 class PivotTableController extends Controller
 {
+    protected $pivotTableServiceProvider;
+
+    // inject PivotTableServiceProvider
+    public function __construct(PivotTableServiceProvider $pivotTableServiceProvider)
+    {
+        return $this->pivotTableServiceProvider = $pivotTableServiceProvider;
+    }
+
+    // Expenses Pivot Table View
     public function index(){
-        $company_profiles = Cache::rememberForever('company_profiles', function () {
-            return companyProfile::find(1);
-        });
-        return view('backend.dashboard-navbar-item.expenses-povit-table.index', compact('company_profiles'));
+        return $this->pivotTableServiceProvider->viewExpensesPivotTable();
     }
 }
