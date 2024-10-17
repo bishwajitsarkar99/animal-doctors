@@ -8,15 +8,22 @@ use App\Models\CompanyProfile;
 use App\Models\MedicineOrigin;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
+use App\LogicBild\ProductIteams\ProductIteamsServiceProvider;
 
 class MedicineOrginController extends Controller
 {
+    protected $productIteamsServiceProvider;
+
+    // inject ProductIteamsServiceProvider
+    public function __construct(ProductIteamsServiceProvider $productIteamsServiceProvider)
+    {
+        return $this->productIteamsServiceProvider = $productIteamsServiceProvider;
+    }
+
+    // Origin View
     public function index()
     {
-        $company_profiles = Cache::rememberForever('company_profiles', function () {
-            return companyProfile::find(1);
-        });
-        return view('super-admin.medicine-item.origin.index', compact('company_profiles'));
+        return $this->productIteamsServiceProvider->viewOrigin();
     }
 
     // Get Origin Name

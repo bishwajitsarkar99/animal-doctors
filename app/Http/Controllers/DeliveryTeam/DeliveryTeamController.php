@@ -4,18 +4,21 @@ namespace App\Http\Controllers\DeliveryTeam;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\CompanyProfile;
-use Illuminate\Support\Facades\Cache;
+use App\LogicBild\DeliveryTeam\DeliveryTeamServiceProvider;
 
 class DeliveryTeamController extends Controller
 {
+    protected $deliverTeamServiceProvider;
+
+    // inject DeliveryTeamServiceProvider
+    public function __construct(DeliveryTeamServiceProvider $deliverTeamServiceProvider)
+    {
+        return $this->deliverTeamServiceProvider = $deliverTeamServiceProvider;
+    }
+
     //Delivery Team Home Page View
     public function dashboard()
     {   
-        $company_profiles = Cache::rememberForever('company_profiles', function () {
-            return companyProfile::find(1);
-        });
-        return view('delivery-team.dashboard',compact('company_profiles'));
-        
+        return $this->deliverTeamServiceProvider->viewDashboard();
     }
 }

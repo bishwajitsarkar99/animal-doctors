@@ -16,7 +16,7 @@ class FileManagerController extends Controller
     // show folder name
     public function modalContent()
     {
-        return view('backend.layouts.layouts-components.file-manager._file_manager', compact('allfolders'));
+        return view('backend.layouts.layouts-components.file-manager._file_manager');
     }
 
     // Get Folders

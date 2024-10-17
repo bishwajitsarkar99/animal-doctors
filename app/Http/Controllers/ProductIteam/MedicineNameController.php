@@ -4,177 +4,62 @@ namespace App\Http\Controllers\ProductIteam;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\CompanyProfile;
-use App\Models\MedicineName;
-use App\Models\MedicineGroup;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Cache;
+use App\LogicBild\ProductIteams\ProductIteamsServiceProvider;
 
 class MedicineNameController extends Controller
 {
+    protected $productIteamsServiceProvider;
+
+    // inject ProductIteamsServiceProvider
+    public function __construct(ProductIteamsServiceProvider $productIteamsServiceProvider)
+    {
+        return $this->productIteamsServiceProvider = $productIteamsServiceProvider;
+    }
+
+    // Medicine Name View
     public function index()
     {
-        $company_profiles = Cache::rememberForever('company_profiles', function () {
-            return companyProfile::find(1);
-        });
-        $medicinegroups = MedicineGroup::where('status','!=', 0)->get();
-        return view('super-admin.medicine-item.medicine-name.index', compact('company_profiles','medicinegroups'));
+        return $this->productIteamsServiceProvider->viewMedicineName();
     }
 
     // Get Medicine Name
     public function getmedicinename(Request $request)
     {
-        if($request->ajax() == false){
-            // return abort(404);
-        }
-
-        $data = MedicineName::with('medicine_groups')->orderBy('id','desc')->latest();
-
-        if( $query = $request->get('query')){
-            $data->Where('medicine_name','LIKE','%'.$query.'%')
-                ->orWhere('group_id','LIKE','%'.$query.'%')
-                ->orWhere('status','LIKE','%'.$query.'%');      
-        } 
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
-        }
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
+        return $this->productIteamsServiceProvider->getMedicineNames($request);
     }
 
     // Get Medicine Group
     public function getGroup(Request $request)
     {
-        if($request->ajax() == false){
-            // return abort(404);
-        }
-
-        $data = MedicineGroup::orderBy('id','desc')->latest();
-
-        if( $query = $request->get('query')){
-            $data->Where('group_name','LIKE','%'.$query.'%')
-                ->orWhere('status','LIKE','%'.$query.'%');      
-        } 
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
-        }
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
+        return $this->productIteamsServiceProvider->getGroups($request);
     }
 
     // Add Medicine Name
     public function storeData(Request $request)
     {
-        $validators = validator::make($request->all(),[
-            'medicine_name'=>'required|max:191|unique:medicine_names',
-            'group_id'=>'required',
-        ],[
-            'medicine_name.required'=>'The medicine name is required mandatory.',
-            'medicine_name.unique'=>'The medicine name has already been taken.',
-            'group_id.required'=>'The medicine group id is required mandatory.',
-        ]);
-        if($validators->fails()){
-            return response()->json([
-                'status'=> 400,
-                'errors' =>$validators->messages(),
-            ]);
-        }    
-        else{
-            $medicinenames = new MedicineName;
-            $medicinenames->medicine_name = $request->input('medicine_name');
-            $medicinenames->group_id = $request->input('group_id');
-            $medicinenames->save();
-            return response()->json([
-                'status'=> 200,
-                'messages'=> 'Medicine Name has added successfully',
-            ]);
-        }
+        return $this->productIteamsServiceProvider->createMedicineNames($request);
     }
 
     // Edit Medicine Name
     public function editmedicinename($id)
     {
-        $medicines = MedicineName::find($id);
-
-        if($medicines){
-            return response()->json([
-                'status' =>200,
-                'messages'=>$medicines,
-            ]);
-        }
-        else
-        {
-            return response()->json([
-                'status'=>404,
-                'messages'=>'Medicine Name is not found',
-            ]);
-        }
-        
+        return $this->productIteamsServiceProvider->editMedicineNames($id);
     }
     // Update Medicine Name
     public function updatemedicinename(Request $request, $id)
     {
-        $validator = validator::make($request->all(),[
-            'medicine_name'=>'required|max:191|unique:medicine_names,medicine_name,' .$id,
-            'group_id'=>'required',
-        ]);
-        if($validator->fails()){
-            return response()->json([
-                'status'=> 400,
-                'errors'=> $validator->messages(),
-            ]);
-        }    
-        else{
-            $medicinenames = MedicineName::find($id);
-            if($medicinenames){
-                $medicinenames->medicine_name = $request->input('medicine_name');
-                $medicinenames->group_id = $request->input('group_id');
-                $medicinenames->update();
-                return response()->json([
-                    'status'=> 200,
-                    'messages'=> 'Medicine Name has updated successfully',
-                ]);
-            }
-            else{
-                return response()->json([
-                    'status'=> 404,
-                    'messages'=> 'Medicine Name is not found',
-                ]);
-            } 
-        }
+        return $this->productIteamsServiceProvider->updateMedicineNames($request, $id);
     }
 
     // Delete Medicine Name
     public function deletemedicinename($id)
     {
-        $medicinenames = MedicineName::find($id);
-        $medicinenames->delete();
-
-        return response()->json([
-            'status'=> 200,
-            'messages'=> 'Medicine Name is deleted successfully',
-        ]);
+        return $this->productIteamsServiceProvider->deleteMedicineNames($id);
     }
 
-    // Status-Update
-    public function updatemedicinenameStatus(Request $request){
-        $id = (int)$request->input('id');
-        $status = (bool)$request->input('status');
-        $status = !$status;
-
-        $data = MedicineName::findOrFail( $id);
-
-        $data->update([
-            'status' => (int)$status,
-        ]);
-
-        return response()->json([
-            'messages' => 'Medicine Name Permission has Updated Successfully',
-            'code' => 202,
-        ], 202);
+    // MedicineName-Status-Update
+    public function updatemedicinenameStatus(Request $request)
+    {
+        return $this->productIteamsServiceProvider->MedicineNameStatusUpdate($request);
     }
 }
