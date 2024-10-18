@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-
 use Illuminate\Support\ServiceProvider;
 use App\LogicBild\SuperAdmin\SuperAdminService;
 use App\LogicBild\SettingService\AppSettingService;
@@ -21,6 +20,8 @@ use App\LogicBild\SettingService\SupplierSettingServiceProvider;
 use App\LogicBild\SettingService\PostSettingServiceProvider;
 use App\LogicBild\Supplier\SupplierServiceProvider;
 use App\LogicBild\Stock\StockServiceProvider;
+use App\LogicBild\Permission\InventoryPermissionServiceProvider;
+use App\LogicBild\UserActivity\UserActivityServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 
@@ -104,6 +105,14 @@ class AppServiceProvider extends ServiceProvider
         // singleton for StockServiceProvider
         $this->app->singleton(StockServiceProvider::class, function($app){
             return new StockServiceProvider();
+        });
+        // singleton for InventoryPermissionServiceProvider
+        $this->app->singleton(InventoryPermissionServiceProvider::class, function($app){
+            return new InventoryPermissionServiceProvider();
+        });
+        // singleton for UserActivityServiceProvider
+        $this->app->singleton(UserActivityServiceProvider::class, function($app){
+            return new UserActivityServiceProvider();
         });
     }
 
