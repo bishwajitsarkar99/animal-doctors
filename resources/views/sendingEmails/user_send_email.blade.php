@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>GST Center</title>
 </head>
 <style>
@@ -14,6 +15,6 @@
     <p>{{$details['main_content']}}</p>
 
     <h4>Thanks Regard</h4>
-    <h5>{{Auth::user()->name}}</h5>
+    <h4>{{Auth::user()->name}}</h4>
 </body>
 </html>

@@ -22,6 +22,8 @@ use App\LogicBild\Supplier\SupplierServiceProvider;
 use App\LogicBild\Stock\StockServiceProvider;
 use App\LogicBild\Permission\InventoryPermissionServiceProvider;
 use App\LogicBild\UserActivity\UserActivityServiceProvider;
+use App\LogicBild\Forntend\Footer\FooterServiceProvider;
+use App\LogicBild\Email\EmailServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 
@@ -113,6 +115,14 @@ class AppServiceProvider extends ServiceProvider
         // singleton for UserActivityServiceProvider
         $this->app->singleton(UserActivityServiceProvider::class, function($app){
             return new UserActivityServiceProvider();
+        });
+        // singleton for FooterServiceProvider
+        $this->app->singleton(FooterServiceProvider::class, function($app){
+            return new FooterServiceProvider();
+        });
+        // singleton for EmailServiceProvider
+        $this->app->singleton(EmailServiceProvider::class, function($app){
+            return new EmailServiceProvider();
         });
     }
 
