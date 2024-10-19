@@ -60,6 +60,12 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
 }
+.select2-container--default .select2-selection--single {
+  background-color: #fff;
+  border: 1px solid lightgray !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
 .is-invalid {
   border: 1px solid #dc3545;
   padding-right: calc(1.5em + 0.75rem);
@@ -497,8 +503,8 @@ div.address_top {
   position: absolute;
   padding-left: 5px;
   padding-right: 5px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border-radius: 3px;
   --mdb-box-shadow-color-rgb: 0, 0, 0 !important;
   box-shadow: 0 4px 9px -4px rgba(0, 0, 0, 0.35) !important;

@@ -2,6 +2,7 @@
 namespace App\LogicBild\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use App\Models\Email\EmailVerification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -100,13 +101,14 @@ class AuthService
     public function loginPage()
     {
         $company_profiles = companyProfile::where('id', '=', 1)->get();
+        $roles = Role::all();
 
         if (Auth::user()) {
             $route = $this->redirectDashboard();
             return redirect($route);
         }
 
-        return view('login', compact('company_profiles'));
+        return view('login', compact('company_profiles', 'roles'));
     }
     /**
      * Handle user login event.
@@ -115,6 +117,7 @@ class AuthService
     {
         // Validation
         $request->validate([
+            'role' => 'string|required',
             'email' => 'string|email|required|max:100|exists:users',
             'password' => 'required|min:6|max:30',
         ], [
@@ -130,7 +133,7 @@ class AuthService
             return back()->with('error', 'Email verification is required.');
         }
 
-        $userCredential = $request->only('email', 'password');
+        $userCredential = $request->only('role', 'email', 'password');
         if (Auth::attempt($userCredential)) {
             $route = $this->redirectDashboard();
 
@@ -164,7 +167,7 @@ class AuthService
                
             return redirect($route);
         } else {
-            return back()->with('error', 'Username & Password is incorrect');
+            return back()->with('error', 'User, Email & Password is incorrect');
         }
     }
     /**

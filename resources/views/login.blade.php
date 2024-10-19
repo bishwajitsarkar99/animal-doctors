@@ -17,7 +17,8 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/auth-main.css">
-    <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/doctor-login.css">
+    <!-- <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/doctor-login.css"> -->
+    <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
     <link rel="icon" type="shortcut icon" href="{{asset('backend_asset')}}/main_asset/img/com-black-favicon.png">
     <title>GST Medicine Login</title>
 </head>
@@ -144,10 +145,22 @@
 
                             @csrf
                             <div class="row">
+                                <div class="form-group mt-3">
+                                    <span class="input-email-skeleton"></span>
+                                    <select type="text" class="form-control form-control-sm select2" name="role" value="{{old('role')}}" id="select_user">
+                                        <option value="">Select Email</option>
+                                        @foreach($roles as $item)
+                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger input_message show-error remove-error">@error('role')
+                                        Error Messages : {{$message}}@enderror
+                                    </span><br>
+                                </div>
                                 <div class="form-group ms-4">
                                     <label class="email email-label-skeleton" for="email">Email :</label>
                                     <span class="input-email-skeleton">
-                                        <input class="email_src email show-current-border ps-1 mt-5" type="text" name="email" placeholder="Enter Email Address" value="{{old('email')}}" autofocus>
+                                        <input class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{old('email')}}" autofocus>
                                     </span>
                                     <span style="color:green;font-weight:800;font-size: 15px;">
                                         <i class="src_email fa fa-check src_email-hidden"></i>
@@ -188,9 +201,9 @@
     <!-- Boostrap5 JS Table Filter -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <!-- JQUERY CDN LINK -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js"></script>
     <script type="module">
         import { 
@@ -290,6 +303,17 @@
                     }, 2000);
                 }
             });
+        });
+    </script>
+    <script>
+        //$('.select2').select2();
+        $('.select2').select2({
+            placeholder: 'Select User',
+            allowClear: true
+        });
+        // Set custom placeholder for the search input inside Select2 dropdowns
+        $('#select_user').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search user...');
         });
     </script>
 </body>

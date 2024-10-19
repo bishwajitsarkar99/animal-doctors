@@ -32,24 +32,30 @@
               <textarea class="form-control form-control-sm main_content" id="email_summernote" name="main_content" cols="30" rows="10" placeholder="Email Content"></textarea>
             </div>
             <div class="row">
-              <div class="col-xl-4">
+              <div class="col-xl-12">
                 <label class="label-attach" for="email_attachment">Attach File</label>
-                <input type="file" class="form-control form-control-sm attachment" name="email_attachment" id="email_attachment" />
-                <div class="upload-box align-items-center justify-content-center">
-                  <div class="progress skeleton">
-                    <div class="bar"></div>
-                    <div class="percent">0%</div>
-                  </div>
-                  <a class="btn btn-group-sm upload_btn upload-button-skeleton" id="uploadButton">
-                    <span class="upload-btn-text">Upload</span>
-                    <span class="img-upload-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
-                  </a>
-                </div>
-              </div>
-              <div class="col-xl-8">
-                <div class="attach-area" id="attachArea">
-                  <span class=""><img class="attachfile" id="output" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500"></span>
-                </div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="file-head">File-Name</th>
+                      <th class="file-head">Add</th>
+                    </tr>
+                  </thead>
+                  <tbody id="fileTable">
+                    <tr class="file-row">
+                      <td class="file-column">
+                        <input type="file" class="form-control form-control-sm attachment" name="email_attachments[]" id="email_attachment" multiple />
+                      </td>
+                      <td class="file-column">
+                        <span class="more__button">
+                          <a class="btn btn-group-sm" href="#" id="moreBtn">
+                            <span style="font-size:20px;color:#0056b3;"><i class="fa-solid fa-circle-plus"></i></span>
+                          </a>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
             <div class="row">
@@ -90,10 +96,8 @@
     removeSkeletonClass, 
     buttonLoader, 
     handleSuccessMessage, 
-    imageUploadBtnLoader 
   } from "{{asset('/module/module-min-js/design-helper-function-min.js')}}";
   buttonLoader();
-  imageUploadBtnLoader();
   $(document).ready(function(){
     // skeletone
     const skeletonClasses = [
@@ -109,6 +113,21 @@
     // Initialize the message
     handleSuccessMessage('#success_message');
 
+
+    // Table row increment
+    document.getElementById('moreBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+
+      var tableBody = document.querySelector('#fileTable');
+      
+      var firstRow = document.querySelector('#fileTable tr:first-child');
+      // Clone the last row
+      var newRow = firstRow.cloneNode(true);
+
+      newRow.querySelector('.attachment').value = '';
+
+      tableBody.appendChild(newRow);
+    });
   });
 </script>
 <!-- Summary Note Initialize -->

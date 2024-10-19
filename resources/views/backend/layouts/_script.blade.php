@@ -30,7 +30,7 @@
 <!-- Summar-Note -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <!-- Summary Note Initialize -->
-<script>
+<!-- <script>
     $(document).ready(function() {
         $("#my_summernote").summernote({
             placeholder: 'Post main content',
@@ -41,7 +41,7 @@
         });
         $('.dropdown-toggle').dropdown();
     });
-</script>
+</script> -->
 <!-- Language -->
 <script>
     $("body").on("change", ".language_switcher", function(event) {

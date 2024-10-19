@@ -55,6 +55,16 @@ class EmailServiceProvider
             }
         }
 
+        $attachments = [];
+
+        if ($request->hasFile('email_attachments')) {
+            foreach ($request->file('email_attachments') as $file) {
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('email_attachments', $filename, 'public');
+                $attachments[] = $filePath;  // Store the file path for email attachment later
+            }
+        }
+
         $content = preg_replace('/<p[^>]*>(.*?)<\/p>/i', '$1', $request->main_content);
         // Prepare email content
         $details = [
@@ -73,6 +83,11 @@ class EmailServiceProvider
 
             if (!empty($bcc_emails)) {
                 $mail->bcc($bcc_emails);
+            }
+
+            // Attach files if available
+            foreach ($attachments as $attachment) {
+                $mail->attach(storage_path('app/public/' . $attachment));
             }
 
             $mail->send(new UserMail($details));
