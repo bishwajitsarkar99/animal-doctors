@@ -56,9 +56,6 @@
                         <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
                             <span class="btn-text forg_page"> Forget-Password</span>
                         </a>
-                        <a type="submit" href="/" class="btn btn-sm" id="logn_page">
-                            <span class="btn-text logn_page"> User-Login</span>
-                        </a>
                     </div>
                     <div class="side_canvas_animation" hidden>
                         <img class="sidebar-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />

@@ -10,7 +10,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc2" class="ps-1 update_user firstcategory purchases_moduel supplier_id" name="accounts_moduel_display" disabled>
-            <option class="sub_name_text " value="{{setting('accounts_moduel_display')}}">Display-Accounts-Moduel : {{setting('accounts_moduel_display')}}</option>
+            <option class="sub_name_text " value="{{setting('accounts_moduel_display')}}">Display : {{setting('accounts_moduel_display')}}</option>
             <option class="sub_name_text text-primary" value="block">block</option>
             <option class="sub_name_text text-danger" value="hidden">hidden</option>
         </select>
@@ -30,7 +30,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc4" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="lager_display0" disabled>
-            <option class="sub_name_text" value="{{setting('lager_display')}}">Display-Lager : {{setting('lager_display')}}</option>
+            <option class="sub_name_text" value="{{setting('lager_display')}}">Display : {{setting('lager_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -50,7 +50,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc6" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="day_book_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('day_book_title_display')}}">Display Day-Book : {{setting('day_book_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('day_book_title_display')}}">Display : {{setting('day_book_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -76,7 +76,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc9" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="day_book_entry_visual" disabled>
-            <option class="sub_name_text" value="{{setting('day_book_entry_visual')}}">Display Day-Book Entry : {{setting('day_book_entry_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('day_book_entry_visual')}}">Display : {{setting('day_book_entry_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -102,7 +102,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc12" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="day_book_view_visual" disabled>
-            <option class="sub_name_text" value="{{setting('day_book_view_visual')}}">Display View Day-Book : {{setting('day_book_view_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('day_book_view_visual')}}">Display : {{setting('day_book_view_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -127,7 +127,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc15" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="day_book_setting_visual" disabled>
-            <option class="sub_name_text" value="{{setting('day_book_setting_visual')}}">Display Day-Book Setting : {{setting('day_book_setting_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('day_book_setting_visual')}}">Display : {{setting('day_book_setting_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -147,7 +147,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc17" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="expenses_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('expenses_title_display')}}">Display Expenses : {{setting('expenses_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('expenses_title_display')}}">Display : {{setting('expenses_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -173,7 +173,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc20" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="type_of_expenses_visual" disabled>
-            <option class="sub_name_text" value="{{setting('type_of_expenses_visual')}}">Display Type Of Expenses : {{setting('type_of_expenses_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('type_of_expenses_visual')}}">Display : {{setting('type_of_expenses_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -198,7 +198,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc23" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="add_expenses_visual" disabled>
-            <option class="sub_name_text" value="{{setting('add_expenses_visual')}}">Display ADD Expenses : {{setting('add_expenses_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('add_expenses_visual')}}">Display : {{setting('add_expenses_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -223,7 +223,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc26" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="list_expenses_visual" disabled>
-            <option class="sub_name_text" value="{{setting('list_expenses_visual')}}">Display List Of Expenses : {{setting('list_expenses_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('list_expenses_visual')}}">Display : {{setting('list_expenses_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -248,7 +248,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc29" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="setting_expenses_visual" disabled>
-            <option class="sub_name_text" value="{{setting('setting_expenses_visual')}}">Display Expenses Setting : {{setting('setting_expenses_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('setting_expenses_visual')}}">Display : {{setting('setting_expenses_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -268,7 +268,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc31" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="customer_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('customer_title_display')}}">Display Customer : {{setting('customer_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('customer_title_display')}}">Display : {{setting('customer_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -294,7 +294,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc34" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="customer_visual" disabled>
-            <option class="sub_name_text" value="{{setting('customer_visual')}}">Display Customer : {{setting('customer_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('customer_visual')}}">Display : {{setting('customer_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -319,7 +319,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc37" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="customer_due_visual" disabled>
-            <option class="sub_name_text" value="{{setting('customer_due_visual')}}">Display Customer-Due-List : {{setting('customer_due_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('customer_due_visual')}}">Display : {{setting('customer_due_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -344,7 +344,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc40" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="customer_details_visual" disabled>
-            <option class="sub_name_text" value="{{setting('customer_details_visual')}}">Display Customer-Details-Record : {{setting('customer_details_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('customer_details_visual')}}">Display : {{setting('customer_details_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -369,7 +369,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc43" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="customer_setting_visual" disabled>
-            <option class="sub_name_text" value="{{setting('customer_setting_visual')}}">Display Customer-Setting : {{setting('customer_setting_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('customer_setting_visual')}}">Display : {{setting('customer_setting_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -389,7 +389,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc45" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="petty_cash_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('petty_cash_title_display')}}">Display Petty-Cash : {{setting('petty_cash_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('petty_cash_title_display')}}">Display : {{setting('petty_cash_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -415,7 +415,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc48" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="petty_cash_visual" disabled>
-            <option class="sub_name_text" value="{{setting('petty_cash_visual')}}">Display Petty-Cash Url : {{setting('petty_cash_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('petty_cash_visual')}}">Display : {{setting('petty_cash_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -440,7 +440,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc51" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="all_transaction_visual" disabled>
-            <option class="sub_name_text" value="{{setting('all_transaction_visual')}}">Display All Transaction : {{setting('all_transaction_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('all_transaction_visual')}}">Display : {{setting('all_transaction_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -465,7 +465,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc54" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="petty_cash_details_visual" disabled>
-            <option class="sub_name_text" value="{{setting('petty_cash_details_visual')}}">Display Petty-Cash Details : {{setting('petty_cash_details_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('petty_cash_details_visual')}}">Display : {{setting('petty_cash_details_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -490,7 +490,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc57" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="petty_cash_setting_visual" disabled>
-            <option class="sub_name_text" value="{{setting('petty_cash_setting_visual')}}">Display Petty-Cash Setting : {{setting('petty_cash_setting_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('petty_cash_setting_visual')}}">Display : {{setting('petty_cash_setting_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -510,7 +510,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc59" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="bank_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('bank_title_display')}}">Display Bank : {{setting('bank_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('bank_title_display')}}">Display : {{setting('bank_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -536,7 +536,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc62" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="list_visual" disabled>
-            <option class="sub_name_text" value="{{setting('list_visual')}}">Display Bank : {{setting('list_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('list_visual')}}">Display : {{setting('list_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -561,7 +561,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc65" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="bank_transaction_visual" disabled>
-            <option class="sub_name_text" value="{{setting('bank_transaction_visual')}}">Display Bank-Transaction : {{setting('bank_transaction_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('bank_transaction_visual')}}">Display : {{setting('bank_transaction_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -586,7 +586,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc68" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="details_record_visual" disabled>
-            <option class="sub_name_text" value="{{setting('details_record_visual')}}">Display Bank-Details-Record : {{setting('details_record_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('details_record_visual')}}">Display : {{setting('details_record_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -611,7 +611,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc71" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="bank_setting_visual" disabled>
-            <option class="sub_name_text" value="{{setting('bank_setting_visual')}}">Display Setting : {{setting('bank_setting_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('bank_setting_visual')}}">Display : {{setting('bank_setting_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -631,7 +631,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc73" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="tax_vat_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('tax_vat_title_display')}}">Display Tax/Vat : {{setting('tax_vat_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('tax_vat_title_display')}}">Display : {{setting('tax_vat_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -657,7 +657,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc76" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="tax_vat_visual" disabled>
-            <option class="sub_name_text" value="{{setting('tax_vat_visual')}}">Display Tax/Vat Url : {{setting('tax_vat_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('tax_vat_visual')}}">Display : {{setting('tax_vat_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -682,7 +682,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc79" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="list_vat_tax_visual" disabled>
-            <option class="sub_name_text" value="{{setting('list_vat_tax_visual')}}">Display List Of Vat/Tax Url : {{setting('list_vat_tax_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('list_vat_tax_visual')}}">Display : {{setting('list_vat_tax_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -707,7 +707,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc82" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="details_records_visual" disabled>
-            <option class="sub_name_text" value="{{setting('details_records_visual')}}">Display Bank-Details-Record : {{setting('details_records_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('details_records_visual')}}">Display : {{setting('details_records_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -732,7 +732,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc85" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="vat_tax_setting_visual" disabled>
-            <option class="sub_name_text" value="{{setting('vat_tax_setting_visual')}}">Display Setting : {{setting('vat_tax_setting_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('vat_tax_setting_visual')}}">Display : {{setting('vat_tax_setting_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -752,7 +752,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc87" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="sales_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('sales_title_display')}}">Display Sales : {{setting('sales_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('sales_title_display')}}">Display : {{setting('sales_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -772,7 +772,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc89" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="order_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('order_title_display')}}">Display Order : {{setting('order_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('order_title_display')}}">Display : {{setting('order_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -798,7 +798,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc92" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="order_visual" disabled>
-            <option class="sub_name_text" value="{{setting('order_visual')}}">Display Order Url : {{setting('order_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('order_visual')}}">Display : {{setting('order_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -823,7 +823,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc95" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="order_list_visual" disabled>
-            <option class="sub_name_text" value="{{setting('order_list_visual')}}">Display Order List : {{setting('order_list_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('order_list_visual')}}">Display : {{setting('order_list_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -848,7 +848,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc98" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="order_setting_visual" disabled>
-            <option class="sub_name_text" value="{{setting('order_setting_visual')}}">Display Setting-Order: {{setting('order_setting_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('order_setting_visual')}}">Display : {{setting('order_setting_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -868,7 +868,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc100" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="invoice_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('invoice_title_display')}}">Display Invoice : {{setting('invoice_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('invoice_title_display')}}">Display : {{setting('invoice_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -894,7 +894,7 @@
     </td>
     <td class="ps-1 custom-select" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc103" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="invoice_visual" disabled>
-            <option class="sub_name_text" value="{{setting('invoice_visual')}}">Display Invoice Url : {{setting('invoice_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('invoice_visual')}}">Display : {{setting('invoice_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -919,7 +919,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc106" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="invoice_setting_visual" disabled>
-            <option class="sub_name_text" value="{{setting('invoice_setting_visual')}}">Display Invoice Setting : {{setting('invoice_setting_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('invoice_setting_visual')}}">Display : {{setting('invoice_setting_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -939,7 +939,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc108" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="sales_region_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('sales_region_title_display')}}">Display Sales : {{setting('sales_region_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('sales_region_title_display')}}">Display : {{setting('sales_region_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -965,7 +965,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc111" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="sales_region_list_visual" disabled>
-            <option class="sub_name_text" value="{{setting('sales_region_list_visual')}}">Display Sales-Region-List Url : {{setting('sales_region_list_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('sales_region_list_visual')}}">Display : {{setting('sales_region_list_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -990,7 +990,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc114" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="region_base_sales_visual" disabled>
-            <option class="sub_name_text" value="{{setting('region_base_sales_visual')}}">Display Region Base Sales : {{setting('region_base_sales_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('region_base_sales_visual')}}">Display : {{setting('region_base_sales_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1015,7 +1015,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc117" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="region_sales_setting_visual" disabled>
-            <option class="sub_name_text" value="{{setting('region_sales_setting_visual')}}">Display Invoice Setting : {{setting('region_sales_setting_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('region_sales_setting_visual')}}">Display : {{setting('region_sales_setting_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1035,7 +1035,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc119" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="vaoucher_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('vaoucher_title_display')}}">Display Vaoucher : {{setting('vaoucher_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('vaoucher_title_display')}}">Display : {{setting('vaoucher_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1055,7 +1055,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc121" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="vaoucher_category_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('vaoucher_category_title_display')}}">Display Category : {{setting('vaoucher_category_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('vaoucher_category_title_display')}}">Display : {{setting('vaoucher_category_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1081,7 +1081,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc124" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="vaoucherCategy_visual" disabled>
-            <option class="sub_name_text" value="{{setting('vaoucherCategy_visual')}}">Display Vaoucher-Category-List Url : {{setting('vaoucherCategy_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('vaoucherCategy_visual')}}">Display : {{setting('vaoucherCategy_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1106,7 +1106,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc127" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="vaoucher_list_visual" disabled>
-            <option class="sub_name_text" value="{{setting('vaoucher_list_visual')}}">Display Vaoucher-List Url : {{setting('vaoucher_list_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('vaoucher_list_visual')}}">Display : {{setting('vaoucher_list_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1126,7 +1126,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc129" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="main_vaoucher_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('main_vaoucher_title_display')}}">Display Vaoucher : {{setting('main_vaoucher_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('main_vaoucher_title_display')}}">Display : {{setting('main_vaoucher_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1152,7 +1152,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc132" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="add_vaoucher_visual" disabled>
-            <option class="sub_name_text" value="{{setting('add_vaoucher_visual')}}">Display Add Vaoucher Url : {{setting('add_vaoucher_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('add_vaoucher_visual')}}">Display : {{setting('add_vaoucher_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1177,7 +1177,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc135" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="vaoucher_details_visual" disabled>
-            <option class="sub_name_text" value="{{setting('vaoucher_details_visual')}}">Display Vaoucher-Details Url : {{setting('vaoucher_details_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('vaoucher_details_visual')}}">Display : {{setting('vaoucher_details_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1202,7 +1202,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc138" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="vaoucher_setting_visual" disabled>
-            <option class="sub_name_text" value="{{setting('vaoucher_setting_visual')}}">Display Vaoucher-Setting Url : {{setting('vaoucher_setting_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('vaoucher_setting_visual')}}">Display : {{setting('vaoucher_setting_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1222,7 +1222,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc140" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="asset_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('asset_title_display')}}">Display Asset : {{setting('asset_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('asset_title_display')}}">Display : {{setting('asset_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1242,7 +1242,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc142" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="new_asset_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('new_asset_title_display')}}">Display New Asset : {{setting('new_asset_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('new_asset_title_display')}}">Display : {{setting('new_asset_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1268,7 +1268,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc145" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="add_asset_visual" disabled>
-            <option class="sub_name_text" value="{{setting('add_asset_visual')}}">Display Add Asset Url : {{setting('add_asset_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('add_asset_visual')}}">Display : {{setting('add_asset_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1293,7 +1293,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc148" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="asset_details_visual" disabled>
-            <option class="sub_name_text" value="{{setting('asset_details_visual')}}">Display Asset-Details Url : {{setting('asset_details_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('asset_details_visual')}}">Display : {{setting('asset_details_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1313,7 +1313,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc150" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="details_asset_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('details_asset_title_display')}}">Display Details : {{setting('details_asset_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('details_asset_title_display')}}">Display : {{setting('details_asset_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1339,7 +1339,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc153" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="previous_asset_visual" disabled>
-            <option class="sub_name_text" value="{{setting('previous_asset_visual')}}">Display Details Asset Url : {{setting('previous_asset_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('previous_asset_visual')}}">Display : {{setting('previous_asset_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1364,7 +1364,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc156" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="current_asset_visual" disabled>
-            <option class="sub_name_text" value="{{setting('current_asset_visual')}}">Display Current-Asset Url : {{setting('current_asset_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('current_asset_visual')}}">Display : {{setting('current_asset_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1388,8 +1388,8 @@
         <span class="custom-app-setting-arrow"></span>
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
-        <select id="update_purchases_moduel_Acc159" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="asset_detls_visual" disabled>
-            <option class="sub_name_text" value="{{setting('aasset_detls_visual')}}">Display Asset-Details Url : {{setting('asset_detls_visual')}}</option>
+        <select id="update_purchases_moduel_Acc159" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="aasset_detls_visual" disabled>
+            <option class="sub_name_text" value="{{setting('aasset_detls_visual')}}">Display : {{setting('aasset_detls_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1414,7 +1414,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc162" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="asset_setting_visual" disabled>
-            <option class="sub_name_text" value="{{setting('asset_setting_visual')}}">Display Asset-Setting Url : {{setting('asset_setting_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('asset_setting_visual')}}">Display : {{setting('asset_setting_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1434,7 +1434,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc164" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="report_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('report_title_display')}}">Display Report : {{setting('report_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('report_title_display')}}">Display : {{setting('report_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1454,7 +1454,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc166" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="acc_report_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('acc_report_title_display')}}">Display Accounting Report : {{setting('acc_report_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('acc_report_title_display')}}">Display : {{setting('acc_report_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1480,7 +1480,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc169" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="blance_sheet_visual" disabled>
-            <option class="sub_name_text" value="{{setting('blance_sheet_visual')}}">Display Blance Sheet Url : {{setting('blance_sheet_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('blance_sheet_visual')}}">Display : {{setting('blance_sheet_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1505,7 +1505,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc172" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="trial_blance_sheet_visual" disabled>
-            <option class="sub_name_text" value="{{setting('trial_blance_sheet_visual')}}">Display Trial-Blance Sheet Url : {{setting('trial_blance_sheet_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('trial_blance_sheet_visual')}}">Display : {{setting('trial_blance_sheet_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1530,7 +1530,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc175" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="financial_statementt_visual" disabled>
-            <option class="sub_name_text" value="{{setting('financial_statement_visual')}}">Display Financial Statement Url : {{setting('financial_statement_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('financial_statement_visual')}}">Display : {{setting('financial_statement_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1555,7 +1555,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc178" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="income_statement_visual" disabled>
-            <option class="sub_name_text" value="{{setting('income_statement_visual')}}">Display Income Statement Url : {{setting('income_statement_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('income_statement_visual')}}">Display : {{setting('income_statement_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1580,7 +1580,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc181" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="cash_flow_statement_visual" disabled>
-            <option class="sub_name_text" value="{{setting('cash_flow_statement_visual')}}">Display Cash Flow Statement Url : {{setting('cash_flow_statement_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('cash_flow_statement_visual')}}">Display : {{setting('cash_flow_statement_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1605,7 +1605,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc184" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="petty_cash_statement_visual" disabled>
-            <option class="sub_name_text" value="{{setting('petty_cash_statement_visual')}}">Display Petty Cash Statement Url : {{setting('petty_cash_statement_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('petty_cash_statement_visual')}}">Display : {{setting('petty_cash_statement_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1630,7 +1630,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc187" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="p_l_statement_visual" disabled>
-            <option class="sub_name_text" value="{{setting('p_l_statement_visual')}}">Display P/L Statement Url : {{setting('p_l_statement_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('p_l_statement_visual')}}">Display : {{setting('p_l_statement_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1655,7 +1655,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc190" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="tabular_analycis_visual" disabled>
-            <option class="sub_name_text" value="{{setting('tabular_analycis_visual')}}">Display Tabular-Analycis Url : {{setting('tabular_analycis_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('tabular_analycis_visual')}}">Display : {{setting('tabular_analycis_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1680,7 +1680,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc193" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="table_blance_sheet_visual" disabled>
-            <option class="sub_name_text" value="{{setting('table_blance_sheet_visual')}}">Display Table Blance Sheet Url : {{setting('table_blance_sheet_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('table_blance_sheet_visual')}}">Display : {{setting('table_blance_sheet_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1705,7 +1705,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc196" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="report_setting_visual" disabled>
-            <option class="sub_name_text" value="{{setting('report_setting_visual')}}">Display Setting Url : {{setting('report_setting_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('report_setting_visual')}}">Display : {{setting('report_setting_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1725,7 +1725,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc198" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="acc_monthly_report_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('acc_monthly_report_title_display')}}">Display Accounting Report : {{setting('acc_monthly_report_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('acc_monthly_report_title_display')}}">Display : {{setting('acc_monthly_report_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1751,7 +1751,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc201" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="monthly_report_view_visual" disabled>
-            <option class="sub_name_text" value="{{setting('monthly_report_view_visual')}}">Display Mothly Report View Url : {{setting('monthly_report_view_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('monthly_report_view_visual')}}">Display : {{setting('monthly_report_view_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1776,7 +1776,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc204" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="monthly_report_setting_visual" disabled>
-            <option class="sub_name_text" value="{{setting('monthly_report_setting_visual')}}">Display Mothly Report Setting Url : {{setting('monthly_report_setting_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('monthly_report_setting_visual')}}">Display : {{setting('monthly_report_setting_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1796,7 +1796,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc206" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="daily_report_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('daily_report_title_display')}}">Display Accounting Report : {{setting('daily_report_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('daily_report_title_display')}}">Display : {{setting('daily_report_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1822,7 +1822,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc209" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="daily_report_view_visual" disabled>
-            <option class="sub_name_text" value="{{setting('daily_report_view_visual')}}">Display Daily Report View Url : {{setting('daily_report_view_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('daily_report_view_visual')}}">Display : {{setting('daily_report_view_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -1847,7 +1847,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_Acc212" class="mt- ps-1 update_user firstcategory purchases_moduel supplier_id" name="daily_report_setting_visual" disabled>
-            <option class="sub_name_text" value="{{setting('daily_report_setting_visual')}}">Display Daily Report Setting Url : {{setting('daily_report_setting_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('daily_report_setting_visual')}}">Display : {{setting('daily_report_setting_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>

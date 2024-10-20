@@ -210,7 +210,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: none;
 }
 .menu-skeleton,.whatsapp-skeleton,.messenger-skeleton,.facebook-skeleton,.logo-skeleton,.headings-skeleton
-,.input-email-skeleton,.input-password-skeleton,.button-skeleton,.email-label-skeleton,.error-skeleton{
+,.input-email-skeleton,.input-password-skeleton,.button-skeleton,.email-label-skeleton,.input-user-skeleton,.error-skeleton,
+.user-error-skeleton{
   position: relative;
 }
 .login_card {
@@ -224,6 +225,33 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   top: 31px;
   width: 300px;
   height: 33%;
+  border-radius: 3px;
+  z-index: 10;
+  background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+  background-size: 200%;
+  animation: skeleton 1s infinite reverse;
+}
+.user-error-skeleton::before{
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 1px;
+  width: 300px;
+  height: 80%;
+  border-radius: 3px;
+  z-index: 10;
+  background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+  background-size: 200%;
+  animation: skeleton 1s infinite reverse;
+}
+.input-user-skeleton::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 330px;
+  height: 27px;
+  margin-top: -3px;
   border-radius: 3px;
   z-index: 10;
   background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
@@ -441,8 +469,16 @@ h6#offcanvasRightLabel {
     background-position: 100% 0;
   }
 }
-header.bg {
+header.admin-bg{
   background-color: darkblue;
+  --mdb-box-shadow-color-rgb: 0, 0, 0;
+  box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+  opacity: 1;
+  transition: .5s ease;
+  height: 60px;
+}
+header.bg {
+  background-image: linear-gradient(45deg,#1e1e1ed9,#1e1e1ed9);
   --mdb-box-shadow-color-rgb: 0, 0, 0;
   box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
   opacity: 1;
@@ -1260,9 +1296,47 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff; }
+  background-color: #fff; 
+}
 
 .background-color{
+  background-image: url("/image/login-background/admin-login-background.jpg");
+  /* background-color: #cccccc; */
+  height: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  background-color: #fff;
+  opacity: 1;
+  /* animation: bg_color 2s infinite; */
+}
+.admin-background-color{
+  background-image: url("/image/login-background/admin-background.jpg");
+  /* background-color: #cccccc; */
+  height: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  background-color: #fff;
+  /* background-image: linear-gradient(45deg,#1e1e1ed9,#1e1e1ed9); */
+  opacity: 1;
+  /* animation: bg_color 2s infinite; */
+}
+.accounts-background-color{
+  background-image: url("/image/login-background/accounts-login-background.jpg");
+  /* background-color: #cccccc; */
+  height: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  background-color: #fff;
+  opacity: 1;
+  /* animation: bg_color 2s infinite; */
+}
+.users-background-color{
   background-image: url("/image/report.jpg");
   /* background-color: #cccccc; */
   height: auto;

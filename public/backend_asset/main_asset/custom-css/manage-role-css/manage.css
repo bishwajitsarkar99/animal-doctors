@@ -49,7 +49,13 @@ span.remove-error-two {
     border-color: var(--bs-nav-tabs-link-active-border-color);
     font-weight: var( --nav-tab-link-active-font-weight);
 }
-
+div.app_setting_background{
+    opacity: 1;
+    border: none;
+    padding-top: 7px;
+    background-image: linear-gradient(to bottom, white 0%, white, white 100%);
+    background-color: white;  
+}
 div.mange_background{
     opacity: 1;
     border: none;

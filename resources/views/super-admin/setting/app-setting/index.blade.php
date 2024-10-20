@@ -2,7 +2,7 @@
 @section('content')
 @include('backend.layouts.dashboard-components._navbar')
 
-<div class="card form-control form-control-sm mange_background">
+<div class="card form-control form-control-sm app_setting_background">
     <div class="card-body manage_role_page">
         <h2 class=" manage_head mb-4">App <span class="">Setting</span></h2>
 

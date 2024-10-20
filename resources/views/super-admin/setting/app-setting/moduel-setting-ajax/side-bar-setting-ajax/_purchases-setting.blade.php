@@ -551,3 +551,67 @@
         fetchData();
     }, 1000);
 </script>
+<script>
+    $(document).ready(function(){
+        // Category URL setup
+        var URL = "{{ route('category.index') }}";
+        $('.linkCategory').attr('value', URL);
+        // Sub Category URL setup
+        var URL = "{{ route('sub-category.index') }}";
+        $('.linkSubCategory').attr('value', URL);
+        // Product Group URL setup
+        var URL = "{{ route('medicine-group.index') }}";
+        $('.linkGroup').attr('value', URL);
+        // Medicine URL setup
+        var URL = "{{ route('medicine-name.index') }}";
+        $('.linkMedicine').attr('value', URL);
+        // Medicine Dosage URL setup
+        var URL = "{{ route('medicine-dogs.index') }}";
+        $('.linkDosage').attr('value', URL);
+        // Medicine Origin URL setup
+        var URL = "{{ route('origin.index') }}";
+        $('.linkOrigin').attr('value', URL);
+        // Product Model URL setup
+        var URL = "{{ route('model.index') }}";
+        $('.linkModel').attr('value', URL);
+        // Units URL setup
+        var URL = "{{ route('units.index') }}";
+        $('.linkUnits').attr('value', URL);
+        // Brand URL setup
+        var URL = "{{ route('brand.index') }}";
+        $('.linkBrand').attr('value', URL);
+        // Product URL setup
+        var URL = "{{ route('product.index') }}";
+        $('.linkProduct').attr('value', URL);
+        // Stock Book URL setup
+        var URL = "";
+        $('.linkStockBook').attr('value', URL);
+        // Stock Adjust URL setup
+        var URL = "";
+        $('.linkStockAdjust').attr('value', URL);
+        // Damage Stock URL setup
+        var URL = "";
+        $('.linkDamageStock').attr('value', URL);
+        // Stock Summary URL setup
+        var URL = "";
+        $('.linkStockSummary').attr('value', URL);
+        // Stock Report URL setup
+        var URL = "";
+        $('.linkStockReport').attr('value', URL);
+        // Inventory Details URL setup
+        var URL = "{{ route('inventory_details.action') }}";
+        $('.linkInventoryDetails').attr('value', URL);
+        // Inventory Authorize URL setup
+        var URL = "{{ route('inventory-auth') }}";
+        $('.linkInventoryAuthorize').attr('value', URL);
+        // Supplier URL setup
+        var URL = "{{ route('supplier.index') }}";
+        $('.linkSupplier').attr('value', URL);
+        // Supplier Details URL setup
+        var URL = "";
+        $('.linkSupplierDetails').attr('value', URL);
+        // Supplier Requestion URL setup
+        var URL = "";
+        $('.linkSupplierRequestion').attr('value', URL);
+    });
+</script>

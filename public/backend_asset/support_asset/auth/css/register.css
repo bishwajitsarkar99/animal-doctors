@@ -700,7 +700,7 @@ button.btn.btn-sm.btn-primary.button_margin{
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 body.register_background-color{
-    background-image: url("/image/register.jpg");
+    background-image: url("/image/login-background/user-login-background.jpg");
     /* background-color: #cccccc; */
     height: 100%;
     background-position: center;

@@ -53,9 +53,6 @@
                             <a type="submit" href="/email-verification" class="btn btn-sm" id="logn_page">
                                 <span class="btn-text logn_page"> Email-Verification</span>
                             </a>
-                            <a type="submit" href="/" class="btn btn-sm" id="logn_page">
-                                <span class="btn-text logn_page"> User-Login</span>
-                            </a>
                         </div>
                         <div class="side_canvas_animation" hidden>
                             <img class="sidebar-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
@@ -218,11 +215,6 @@
                                                             </button>
                                                             <span class="button-skeleton"></span>
                                                         </div>
-                                                        <a type="button" class="btn_back skeleton ps-2 pe-2 pb-1" href="/" id="back_login">
-                                                            <span class="btn-back-text">Back</span>
-                                                            <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                                                        </a>
-                                                        <span class="button-skeleton"></span>
                                                     </div>
                                                 </div>
                                             </div>

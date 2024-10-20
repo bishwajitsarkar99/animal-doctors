@@ -74,7 +74,7 @@
     </nav>
 </header>
 
-<body class="background-color">
+<body class="users-background-color">
     <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
@@ -146,14 +146,14 @@
                             @csrf
                             <div class="row">
                                 <div class="form-group mt-3">
-                                    <span class="input-email-skeleton"></span>
+                                    <span class="input-user-skeleton"></span>
                                     <select type="text" class="form-control form-control-sm select2" name="role" value="{{old('role')}}" id="select_user">
                                         <option value="">Select Email</option>
                                         @foreach($roles as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                         @endforeach
                                     </select>
-                                    <span class="text-danger input_message show-error remove-error">@error('role')
+                                    <span class="text-danger input_message show-error remove-user-error">@error('role')
                                         Error Messages : {{$message}}@enderror
                                     </span><br>
                                 </div>
@@ -170,7 +170,7 @@
                                     </span><br>
                                 </div>
                                 <div class="form-group ms-4">
-                                    <label class="password skeleton" for="password">Password :</label>
+                                    <label class="password email-label-skeleton" for="password">Password :</label>
                                     <span class="input-password-skeleton"><input class="password_src password show-current-border ps-1" type="password" name="password" placeholder="Enter Password" value="{{old('password')}}"></span>
                                     <span style="color:green;font-weight:800;font-size: 15px;">
                                         <i class="src_password fa fa-check src_password-hidden"></i>
@@ -261,6 +261,7 @@
             // Array of skeleton class names
             const skeletonClasses = [
                 'headings-skeleton',
+                'input-user-skeleton',
                 'input-email-skeleton',
                 'input-password-skeleton',
                 'button-skeleton',
@@ -297,9 +298,11 @@
                 if (errorMessage !== '') {
                     $('.remove-error').addClass('error-skeleton');
                     $('.remove-error2').addClass('error-skeleton');
+                    $('.remove-user-error').addClass('user-error-skeleton');
                     setTimeout(function() {
                         $('.remove-error').removeClass('error-skeleton');
                         $('.remove-error2').removeClass('error-skeleton');
+                        $('.remove-user-error').removeClass('user-error-skeleton');
                     }, 2000);
                 }
             });

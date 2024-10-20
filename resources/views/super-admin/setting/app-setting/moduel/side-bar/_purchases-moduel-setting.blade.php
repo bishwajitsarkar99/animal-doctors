@@ -10,7 +10,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel7" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="purchases_display" disabled>
-            <option class="sub_name_text" value="{{setting('purchases_visual')}}">Display-Purchases-Moduel : {{setting('purchases_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('purchases_visual')}}">Display : {{setting('purchases_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -30,7 +30,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel8" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="product_display" disabled>
-            <option class="sub_name_text" value="{{setting('product_visual')}}">Display-Product : {{setting('product_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('product_visual')}}">Display : {{setting('product_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -50,7 +50,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel9" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="categ_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('categ_title_visual')}}">Display-Category : {{setting('categ_title_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('categ_title_visual')}}">Display : {{setting('categ_title_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -69,7 +69,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel5" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="category_url" disabled>
             <option class="sub_name_text" value="{{setting('category_link')}}">URL : {{setting('category_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/category">Public</option>
+            <option class="sub_name_text linkCategory" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -96,7 +96,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_subcatg2" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="sub_categ_title_visual" disabled>
-            <option class="sub_name_text" value="{{setting('sub_categ_title_visual')}}">Display-Sub-Cagtegory : {{setting('sub_categ_title_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('sub_categ_title_visual')}}">Display : {{setting('sub_categ_title_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -115,7 +115,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel_subcatg4" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="subcategory_link" disabled>
             <option class="sub_name_text" value="{{setting('subcategory_link')}}">URL : {{setting('subcategory_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/sub-category">Public</option>
+            <option class="sub_name_text linkSubCategory" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -142,7 +142,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel10" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="group_title_visual" disabled>
-            <option class="sub_name_text" value="{{setting('group_title_visual')}}">Display-Group : {{setting('group_title_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('group_title_visual')}}">Display : {{setting('group_title_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -161,7 +161,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_group_moduel2" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="product_group_link" disabled>
             <option class="sub_name_text" value="{{setting('product_group_link')}}">URL : {{setting('product_group_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/medicine-group">Public</option>
+            <option class="sub_name_text linkGroup" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -188,7 +188,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel15" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="medicine_title_visual" disabled>
-            <option class="sub_name_text" value="{{setting('medicine_title_visual')}}">Display-Medicine : {{setting('medicine_title_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('medicine_title_visual')}}">Display : {{setting('medicine_title_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -207,7 +207,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel17" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="medicine_group_link" disabled>
             <option class="sub_name_text" value="{{setting('medicine_group_link')}}">URL : {{setting('medicine_group_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/medicine-name">Public</option>
+            <option class="sub_name_text linkMedicine" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -232,7 +232,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel20" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="medicine_dosage_link" disabled>
             <option class="sub_name_text" value="{{setting('medicine_dosage_link')}}">URL : {{setting('medicine_dosage_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/medicine-dosage">Public</option>
+            <option class="sub_name_text linkDosage" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -257,7 +257,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel23" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="medicine_oriign_link" disabled>
             <option class="sub_name_text" value="{{setting('medicine_oriign_link')}}">URL : {{setting('medicine_oriign_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/origin">Public</option>
+            <option class="sub_name_text linkOrigin" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -284,7 +284,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel26" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="product_model_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('product_model_title_display')}}">Display-Model : {{setting('product_model_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('product_model_title_display')}}">Display : {{setting('product_model_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -303,7 +303,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel28" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="model_link" disabled>
             <option class="sub_name_text" value="{{setting('model_link')}}">URL : {{setting('model_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/model">Public</option>
+            <option class="sub_name_text linkModel" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -330,7 +330,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel31" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="unit_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('unit_title_display')}}">Display-Unit : {{setting('unit_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('unit_title_display')}}">Display : {{setting('unit_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -349,7 +349,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel33" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="unit_link" disabled>
             <option class="sub_name_text" value="{{setting('unit_link')}}">URL : {{setting('unit_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/units">Public</option>
+            <option class="sub_name_text linkUnits" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -376,7 +376,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel36" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="brand_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('brand_title_display')}}">Display-Brand : {{setting('brand_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('brand_title_display')}}">Display : {{setting('brand_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -395,7 +395,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel38" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="brand_link" disabled>
             <option class="sub_name_text" value="{{setting('brand_link')}}">URL : {{setting('brand_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/brand">Public</option>
+            <option class="sub_name_text linkBrand" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -422,7 +422,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel41" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="product_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('product_title_display')}}">Display-Product : {{setting('product_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('product_title_display')}}">Display : {{setting('product_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -441,7 +441,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel43" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="product_link" disabled>
             <option class="sub_name_text" value="{{setting('product_link')}}">URL : {{setting('product_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/product">Public</option>
+            <option class="sub_name_text linkProduct" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -468,7 +468,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel46" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="stock_head_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('stock_head_title_display')}}">Display-Stock : {{setting('stock_head_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('stock_head_title_display')}}">Display : {{setting('stock_head_title_display')}}</option>
             <option class="sub_name_text text-primary" value="block">block</option>
             <option class="sub_name_text text-danger" value="hidden">hidden</option>
         </select>
@@ -488,7 +488,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel48" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="stock_title_display" disabled>
-            <option class="sub_name_text" value="{{setting('stock_title_display')}}">Display-Add-Stock : {{setting('stock_title_display')}}</option>
+            <option class="sub_name_text" value="{{setting('stock_title_display')}}">Display : {{setting('stock_title_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -507,7 +507,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_modue50" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="stock_book_link" disabled>
             <option class="sub_name_text" value="{{setting('stock_book_link')}}">URL : {{setting('stock_book_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/stock-book">Public</option>
+            <option class="sub_name_text linkStockBook" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -532,7 +532,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel53" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="adjustment_link" disabled>
             <option class="sub_name_text" value="{{setting('adjustment_link')}}">URL : {{setting('adjustment_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/stock-adjustment">Public</option>
+            <option class="sub_name_text linkStockAdjust" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -557,7 +557,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel56" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="damage_stock_link" disabled>
             <option class="sub_name_text" value="{{setting('damage_stock_link')}}">URL : {{setting('damage_stock_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/damge-stock">Public</option>
+            <option class="sub_name_text linkDamageStock" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -582,7 +582,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel59" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="stock_summary_link" disabled>
             <option class="sub_name_text" value="{{setting('stock_summary_link')}}">URL : {{setting('stock_summary_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/stock-summary">Public</option>
+            <option class="sub_name_text linkStockSummary" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -607,7 +607,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel62" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="stock_report_link" disabled>
             <option class="sub_name_text" value="{{setting('stock_report_link')}}">URL : {{setting('stock_report_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/stock-report">Public</option>
+            <option class="sub_name_text linkStockReport" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -653,7 +653,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel67" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="inventory_details_link" disabled>
             <option class="sub_name_text" value="{{setting('inventory_details_link')}}">URL : {{setting('inventory_details_link')}}</option>
-            <option class="sub_name_text" value="http://#">Public</option>
+            <option class="sub_name_text linkInventoryDetails" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -678,7 +678,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel70" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="authorization_link" disabled>
             <option class="sub_name_text" value="{{setting('authorization_link')}}">URL : {{setting('authorization_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/super-admin/inventory-authorize">Public</option>
+            <option class="sub_name_text linkInventoryAuthorize" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -724,7 +724,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel75" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="supplier_setup_link" disabled>
             <option class="sub_name_text" value="{{setting('supplier_setup_link')}}">URL : {{setting('supplier_setup_link')}}</option>
-            <option class="sub_name_text" value="http://127.0.0.1:8000/supplier">Public</option>
+            <option class="sub_name_text linkSupplier" value="">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -750,7 +750,7 @@
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel78" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="supplier_details_setup_link" disabled>
             <option class="sub_name_text" value="{{setting('supplier_details_setup_link')}}">URL : {{setting('supplier_details_setup_link')}}</option>
-            <option class="sub_name_text" value="#">Public</option>
+            <option class="sub_name_text linkSupplierDetails" value="#">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
@@ -775,7 +775,7 @@
     </td>
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel81" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="supplier_requisition_link">
-            <option class="sub_name_text" value="{{setting('supplier_requisition_link')}}">URL : {{setting('supplier_requisition_link')}}</option>
+            <option class="sub_name_text linkSupplierRequestion" value="{{setting('supplier_requisition_link')}}">URL : {{setting('supplier_requisition_link')}}</option>
             <option class="sub_name_text" value="#">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>

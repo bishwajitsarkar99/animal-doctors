@@ -101,7 +101,7 @@ class AuthService
     public function loginPage()
     {
         $company_profiles = companyProfile::where('id', '=', 1)->get();
-        $roles = Role::all();
+        $roles = Role::whereIn('name', ['Super Admin'])->get();
 
         if (Auth::user()) {
             $route = $this->redirectDashboard();

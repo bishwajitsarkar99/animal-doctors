@@ -383,8 +383,9 @@ a.btn_bg:hover{
     background-color: #fff;
     border: 1px solid #aaa;
     border-radius: 4px !important;
-    --mdb-box-shadow-color-rgb: 0, 0, 0 !important;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35) !important;
+    box-shadow: none !important;
+    /* --mdb-box-shadow-color-rgb: 0, 0, 0 !important;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35) !important; */
 }
 span.text-danger.verify_email_message {
     margin-left: 0;

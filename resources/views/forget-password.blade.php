@@ -53,9 +53,6 @@
                         <a type="submit" href="/email-verification" class="btn btn-sm" id="logn_page">
                             <span class="btn-text logn_page"> Email-Verification</span>
                         </a>
-                        <a type="submit" href="/" class="btn btn-sm" id="logn_page">
-                            <span class="btn-text logn_page"> User-Login</span>
-                        </a>
                     </div>
                     <div class="side_canvas_animation" hidden>
                         <img class="sidebar-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
@@ -145,15 +142,6 @@
                                                             <span class="btn-reset-text">Reset Password</span>
                                                             <span class="reset-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                         </button>
-                                                    </div>
-                                                    <div class="mb-2 d-grid">
-                                                        <span class="panel-skeleton reset_text panel media-panel">Don't have an account?</span>
-                                                        <span class="mt-3">
-                                                            <a class="btn btn-sm btn-primary forget_button ps-2 pe-2 pb-1" href="/" id="user__login">
-                                                                <span class="btn-acc-text">sign in</span>
-                                                                <span class="acc-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                                                            </a>
-                                                        </span>
                                                     </div>
                                                     @endif
                                                 </div>
