@@ -48,10 +48,48 @@
             </a>
         </p>
         <p id="logout_btn_group2">
-            <a href="/logout" type="button" class="btn btn-success modal_button logout_button logout" id="submitbtn">
-                <span class="yes-icon spinner-border spinner-border-sm text-white yes-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
-                <span class="btn-text">{{__('translate.Yes')}}</span>
-            </a>
+            @if(auth()->user()->role ==1)
+                <a href="/logout" type="button" class="btn btn-success modal_button logout_button logout" id="submitbtn">
+                    <span class="yes-icon spinner-border spinner-border-sm text-white yes-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                    <span class="btn-text">{{__('translate.Yes')}}</span>
+                </a>
+            @endif
+            @if(auth()->user()->role ==2)
+                <a href="/admin-logout" type="button" class="btn btn-success modal_button logout_button logout" id="submitbtn">
+                    <span class="yes-icon spinner-border spinner-border-sm text-white yes-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                    <span class="btn-text">{{__('translate.Yes')}}</span>
+                </a>
+            @endif
+            @if(auth()->user()->role ==3)
+                <a href="/admin-logout" type="button" class="btn btn-success modal_button logout_button logout" id="submitbtn">
+                    <span class="yes-icon spinner-border spinner-border-sm text-white yes-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                    <span class="btn-text">{{__('translate.Yes')}}</span>
+                </a>
+            @endif
+            @if(auth()->user()->role ==5)
+                <a href="/accounts-logout" type="button" class="btn btn-success modal_button logout_button logout" id="submitbtn">
+                    <span class="yes-icon spinner-border spinner-border-sm text-white yes-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                    <span class="btn-text">{{__('translate.Yes')}}</span>
+                </a>
+            @endif
+            @if(auth()->user()->role ==6)
+                <a href="/common-user-logout" type="button" class="btn btn-success modal_button logout_button logout" id="submitbtn">
+                    <span class="yes-icon spinner-border spinner-border-sm text-white yes-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                    <span class="btn-text">{{__('translate.Yes')}}</span>
+                </a>
+            @endif
+            @if(auth()->user()->role ==7)
+                <a href="/common-user-logout" type="button" class="btn btn-success modal_button logout_button logout" id="submitbtn">
+                    <span class="yes-icon spinner-border spinner-border-sm text-white yes-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                    <span class="btn-text">{{__('translate.Yes')}}</span>
+                </a>
+            @endif
+            @if(auth()->user()->role ==0)
+                <a href="/common-user-logout" type="button" class="btn btn-success modal_button logout_button logout" id="submitbtn">
+                    <span class="yes-icon spinner-border spinner-border-sm text-white yes-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                    <span class="btn-text">{{__('translate.Yes')}}</span>
+                </a>
+            @endif
         </p>
     </div>   
 </div>

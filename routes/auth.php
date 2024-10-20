@@ -7,9 +7,21 @@ use App\Http\Controllers\Email\EmailController;
 Route::get('/login', function () {
     return redirect('/');
 });
-// Authentication Routes with Middleware
+// Super Admin Login Routes with Middleware
 Route::middleware('loginPage')->group(function () {
     Route::get('/', [AuthController::class, 'loadLogin']);
+});
+// Admin Login Routes with Middleware
+Route::middleware('adminLoginPage')->group(function () {
+    Route::get('/admin-login', [AuthController::class, 'loadAdminLogin']);
+});
+// Accounts Login Routes with Middleware
+Route::middleware('accountsLoginPage')->group(function () {
+    Route::get('/accounts-login', [AuthController::class, 'loadAccountsLogin']);
+});
+// Common User Login Routes with Middleware
+Route::middleware('commonUserLoginPage')->group(function () {
+    Route::get('/common-user-login', [AuthController::class, 'loadCommonUserLogin']);
 });
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 // Registration Routes with Middleware
@@ -36,5 +48,11 @@ Route::post('send-link', [AuthController::class, 'sendLink'])->name('send.link')
 Route::get('/email', [EmailController::class, 'index'])->name('email.index');
 Route::post('/email/send', [EmailController::class, 'sendEmail'])->name('email.send');
 
-// Logout Route (POST is more secure for state-changing operations)
+// Super Admin Logout Route (POST is more secure for state-changing operations)
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+// Admin Logout Route (POST is more secure for state-changing operations)
+Route::get('/admin-logout', [AuthController::class, 'adminLogout'])->name('adminLogout');
+// Accounts Logout Route (POST is more secure for state-changing operations)
+Route::get('/accounts-logout', [AuthController::class, 'accountsLogout'])->name('accountsLogout');
+// Common User Logout Route (POST is more secure for state-changing operations)
+Route::get('/common-user-logout', [AuthController::class, 'commonUserLogout'])->name('commonUserLogout');

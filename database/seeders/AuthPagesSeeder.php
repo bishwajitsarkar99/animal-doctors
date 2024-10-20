@@ -19,6 +19,9 @@ class AuthPagesSeeder extends Seeder
         
         // Construct URLs with the server IP
         $loginRoute = '/';
+        $adminLoginRoute = '/admin-login';
+        $accountsLoginRoute = '/accounts-login';
+        $commonLoginRoute = '/common-user-login';
         $registerRoute = '/register';
         $forgetRoute = '/forget-password';
         $resetPasswordRoute = '/reset-password';
@@ -26,6 +29,9 @@ class AuthPagesSeeder extends Seeder
 
         // Construct Page Name
         $loginPage = 'Login Page';
+        $adminLoginPage = 'Admin Login Page';
+        $accountsloginPage = 'Accounts Login Page';
+        $commonLoginPage = 'Common Login Page';
         $registerPage = 'Register Page';
         $forgetPage = 'Forget Password Page';
         $resetPage = 'Reset Password Page';
@@ -34,6 +40,9 @@ class AuthPagesSeeder extends Seeder
         // Array of pages to insert
         $pages = [
             ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $loginPage, 'page_route' => $loginRoute,'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $adminLoginPage, 'page_route' => $adminLoginRoute,'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $accountsloginPage, 'page_route' => $accountsLoginRoute,'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $commonLoginPage, 'page_route' => $commonLoginRoute,'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $registerPage, 'page_route' => $registerRoute, 'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $forgetPage, 'page_route' => $forgetRoute, 'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $resetPage, 'page_route' => $resetPasswordRoute, 'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],

@@ -96,7 +96,7 @@ class AuthService
         return redirect(url('/email-verification'))->with('success', 'Your Registration has been completed successfully');
     }
     /**
-     * Handle login page.
+     * Handle Super Admin Login View page.
     */
     public function loginPage()
     {
@@ -109,6 +109,51 @@ class AuthService
         }
 
         return view('login', compact('company_profiles', 'roles'));
+    }
+    /**
+     * Handle Admin Login View page.
+    */
+    public function viewAdminLoginPage()
+    {
+        $company_profiles = companyProfile::where('id', '=', 1)->get();
+        $roles = Role::whereIn('name', ['Admin', 'Sub Admin'])->get();
+
+        if (Auth::user()) {
+            $route = $this->redirectDashboard();
+            return redirect($route);
+        }
+
+        return view('admin-login', compact('company_profiles', 'roles'));
+    }
+    /**
+     * Handle Accounts Login View page.
+    */
+    public function viewAccountsLoginPage()
+    {
+        $company_profiles = companyProfile::where('id', '=', 1)->get();
+        $roles = Role::whereIn('name', ['Accounts'])->get();
+
+        if (Auth::user()) {
+            $route = $this->redirectDashboard();
+            return redirect($route);
+        }
+
+        return view('accounts-login', compact('company_profiles', 'roles'));
+    }
+    /**
+     * Handle Common-User Login View page.
+    */
+    public function viewCommonUserLoginPage()
+    {
+        $company_profiles = companyProfile::where('id', '=', 1)->get();
+        $roles = Role::whereIn('name', ['User','Marketing','Delivery Team'])->get();
+
+        if (Auth::user()) {
+            $route = $this->redirectDashboard();
+            return redirect($route);
+        }
+
+        return view('common-user-login', compact('company_profiles', 'roles'));
     }
     /**
      * Handle user login event.
@@ -236,7 +281,7 @@ class AuthService
         return back()->withInput($request->only('email'))->withErrors(['email' => trans($response)]);
     }
     /**
-     * Handle user logout.
+     * Handle super admin logout.
     */
     public function userLogOut(Request $request)
     {
@@ -253,6 +298,63 @@ class AuthService
 
         Auth::logout();
         return redirect('/');
+    }
+    /**
+     * Handle admin logout.
+    */
+    public function adminLogOuts(Request $request)
+    {
+        $sessionId = session('session_id');
+        DB::table('sessions')
+        // ->where('user_id', Auth::id())
+        ->where('id', $sessionId)
+        ->update([
+            'payload' => 'logout',
+            'updated_at' => now()
+        ]);
+
+        $request->session()->flush();
+
+        Auth::logout();
+        return redirect('/admin-login');
+    }
+    /**
+     * Handle accounts logout.
+    */
+    public function accountsLogouts(Request $request)
+    {
+        $sessionId = session('session_id');
+        DB::table('sessions')
+        // ->where('user_id', Auth::id())
+        ->where('id', $sessionId)
+        ->update([
+            'payload' => 'logout',
+            'updated_at' => now()
+        ]);
+
+        $request->session()->flush();
+
+        Auth::logout();
+        return redirect('/accounts-login');
+    }
+    /**
+     * Handle common user logout.
+    */
+    public function commonUserLogouts(Request $request)
+    {
+        $sessionId = session('session_id');
+        DB::table('sessions')
+        // ->where('user_id', Auth::id())
+        ->where('id', $sessionId)
+        ->update([
+            'payload' => 'logout',
+            'updated_at' => now()
+        ]);
+
+        $request->session()->flush();
+
+        Auth::logout();
+        return redirect('/common-user-login');
     }
     /**
      * Handle email verification page load.

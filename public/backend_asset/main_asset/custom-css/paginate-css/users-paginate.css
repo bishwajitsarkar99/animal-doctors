@@ -1045,8 +1045,8 @@ span.status_bg {
 }
 .light2-focus{
     border-radius: 50%;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border: none;
     outline: none;
     animation: color2_focus 1s infinite;
@@ -1104,6 +1104,25 @@ span.status_bg {
     border-radius: 50%;
     width: 10px;
     height: 10px;
+    border: none;
+    outline: none;
+    animation: color5_focus 1s infinite;
+}
+@keyframes color5_focus{
+    0%{
+        background-color: #f1f1f1;
+    }
+    50%{
+        background-color: #d73636;
+    }
+    100%{
+        background-color: orangered;
+    }
+}
+.light6-focus{
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
     border: none;
     outline: none;
     animation: color5_focus 1s infinite;

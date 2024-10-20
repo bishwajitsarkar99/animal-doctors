@@ -26,10 +26,25 @@ class AuthController extends Controller
         return $this->authService->create($request);
     }
 
-    // Load Login Page
+    // Load Super Admin Login Page View
     public function loadLogin()
     {
         return $this->authService->loginPage();
+    }
+    // Load Admin Login Page View
+    public function loadAdminLogin()
+    {
+        return $this->authService->viewAdminLoginPage();
+    }
+    // Load Accounts Login Page View
+    public function loadAccountsLogin()
+    {
+        return $this->authService->viewAccountsLoginPage();
+    }
+    // Load Common User Login Page View
+    public function loadCommonUserLogin()
+    {
+        return $this->authService->viewCommonUserLoginPage();
     }
     // User Login
     public function login(Request $request)
@@ -73,10 +88,28 @@ class AuthController extends Controller
         return $this->authService->setPassword($request);
     }
 
-    // User Logout
+    // Super Admin Logout
     public function logout(Request $request)
     {
         return $this->authService->userLogOut($request);
+    }
+
+    // Admin Logout
+    public function adminLogout(Request $request)
+    {
+        return $this->authService->adminLogOuts($request);
+    }
+
+    // Accounts Logout
+    public function accountsLogout(Request $request)
+    {
+        return $this->authService->accountsLogouts($request);
+    }
+
+    // Common User Logout
+    public function commonUserLogout(Request $request)
+    {
+        return $this->authService->commonUserLogouts($request);
     }
 
     // Email Verification page load

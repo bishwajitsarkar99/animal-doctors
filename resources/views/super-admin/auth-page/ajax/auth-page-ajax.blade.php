@@ -20,30 +20,34 @@
             }
 
             return [...rows].map((row, key) => {
-                let statusClass, statusColor, statusText, statusBg;
+                let statusClass, statusColor, statusText, statusBg, statusSignal;
                 if(row.status == 0){
                     statusClass = 'text-danger';
                     statusText = '❌ Not Allowed';
+                    statusSignal = '<span class="fbox"><input id="light_focus" type="text" class="light6-focus" readonly></input></span>';
                     statusColor = 'color:darkgoldenrod;background-color: #ffedd8;';
                     statusBg = 'badge rounded-pill bg-warn';
                 }
                 else if(row.status == 1){
                     statusClass = 'text-dark';
                     statusText = '<span style="color:green;font-weight:800;font-size: 12px;"><i class="fa-solid fa-check"></i></span> Authorize';
+                    statusSignal = '<span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>';
                     statusColor = 'color:black;background-color: #ecfffd;';
                     statusBg = 'badge rounded-pill bg-azure';
                 }
                 return `
                     <tr class="table-row user-table-row user_setting" key="${key}" id="user_set">
                         <td class="sn border_ord" id="user_set2">${row.id}</td>
-                        <td class="txt_ ps-1" id="user_set5">${row.page_name}</td>
+                        <td class="txt_ ps-1" id="user_set5">
+                            ${row.page_name}
+                            ${statusSignal}
+                        </td>
                         <td class="tot_order_ ps-1" id="user_set6">${row.local_host_page_url}</td>
                         <td class="tot_pending_ ps-1" id="user_set7">${row.domain_page_url}</td>
                         <td class="tot_complete_ pill ps-1 ${statusClass}">
                             <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:12px;">
                                 ${statusText}
                             </span>
-                            <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>
                         </td>
                         
                     </tr>
