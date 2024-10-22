@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/auth-main.css">
-    <!-- <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/doctor-login.css"> -->
+    <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/doctor-login.css">
     <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
     <link rel="icon" type="shortcut icon" href="{{asset('backend_asset')}}/main_asset/img/com-black-favicon.png">
     <title>GST Medicine Login</title>
@@ -89,7 +89,8 @@
     <div class="hero-image">
         <div class="hero-text heading reg_hidden company-name-classic" id="page_head">
             <h1 class="body_heading" style="font-size:25px;color:darkblue;">
-                <span class="skeleton">{{setting('page_sub_title')}}</span>
+                <!-- Common User-Page Title -->
+                <span class="skeleton">{{setting('reset_page_sub_title')}}</span>
             </h1>
         </div>
     </div>
@@ -99,7 +100,7 @@
             <p class="login-address skeleton login-head-address-animation ms-5">{{setting('company_address')}}</p>
         </span>
     </h2>
-    <div class="container bg" style="margin-top: 100px;">
+    <div class="container bg" style="margin-top: 170px;">
         <div class="row">
             <div class="col-md-8">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">

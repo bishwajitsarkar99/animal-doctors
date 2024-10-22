@@ -78,7 +78,8 @@
     <div class="hero-image">
         <div class="hero-text heading reg_hidden company-name-classic">
             <h1 class="company" style="font-size:25px;color:darkblue;text-align:left">
-                <span class="skeleton">{{setting('forgot_page_sub_title')}}</span>
+                <!-- Forget-Password-Page Title -->
+                <span class="skeleton">Password</span>
             </h1>
         </div>
     </div>

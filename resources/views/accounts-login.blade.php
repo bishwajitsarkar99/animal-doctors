@@ -89,7 +89,8 @@
     <div class="hero-image">
         <div class="hero-text heading reg_hidden company-name-classic" id="page_head">
             <h1 class="body_heading" style="font-size:25px;color:darkblue;">
-                <span class="skeleton">{{setting('page_sub_title')}}</span>
+                <!-- Accounts-Page Title -->
+                <span class="skeleton">{{setting('forgot_page_sub_title')}}</span>
             </h1>
         </div>
     </div>

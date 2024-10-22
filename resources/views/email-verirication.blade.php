@@ -47,7 +47,8 @@
     <div class="hero-image">
         <div class="hero-text heading reg_hidden company-name-classic">
             <h1 class="company" style="font-size:25px;color:darkblue;text-align:left">
-                <span class="skeleton">{{setting('forgot_page_sub_title')}}</span>
+                <!-- Email verification Page Title -->
+                <span class="skeleton">Verification</span>
             </h1>
         </div>
     </div>
@@ -56,6 +57,7 @@
         <div class="row">
             <div class="col-md-12 mb-5" style="margin-top:px">
                 <h4 class="heading_register text-shadow font_size" style="text-align: center;">
+                    <!-- Email verification Form Title -->
                     <span class="skeleton head-animaion">Email-Verification</span>
                 </h4>
                 <div class="">

@@ -3,6 +3,7 @@ namespace App\LogicBild\Email;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use App\Mail\UserMail;
 use App\Models\User;
 
@@ -57,11 +58,17 @@ class EmailServiceProvider
 
         $attachments = [];
 
+        // Ensure the directory exists before storing files
+        if (!Storage::exists('email_attachments/attachments')) {
+            Storage::makeDirectory('email_attachments/attachments');
+        }
+
+        // Handle file attachments
         if ($request->hasFile('email_attachments')) {
             foreach ($request->file('email_attachments') as $file) {
                 $filename = time() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('email_attachments', $filename, 'public');
-                $attachments[] = $filePath;  // Store the file path for email attachment later
+                $filePath = $file->storeAs('email_attachments/attachments', $filename, 'public'); // Store file
+                $attachments[] = storage_path('app/public/' . $filePath); // Full path for attachment
             }
         }
 
@@ -86,7 +93,7 @@ class EmailServiceProvider
 
             // Attach files if available
             foreach ($attachments as $attachment) {
-                $mail->attach(storage_path('app/public/' . $attachment));
+                $mail->attach($attachment);
             }
 
             $mail->send(new UserMail($details));

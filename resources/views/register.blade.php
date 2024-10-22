@@ -78,7 +78,8 @@
         <div class="hero-image">
             <div class="hero-text heading reg_hidden company-name-classic">
                 <h1 class="company">
-                    <span class="sub-title-skeleton">{{setting('register_page_sub_title')}}</span>
+                    <!-- User Register-Page Title -->
+                    <span class="sub-title-skeleton">Register</span>
                 </h1>
             </div>
         </div>

@@ -152,6 +152,7 @@ td.file-column {
 th.file-head {
     text-align: center;
     font-size: 15px;
+    box-shadow: none;
 }
 a#moreBtn,a#decrementBtn {
     padding: 3px 5px;
