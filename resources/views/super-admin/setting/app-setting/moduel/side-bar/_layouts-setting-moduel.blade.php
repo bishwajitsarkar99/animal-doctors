@@ -10,7 +10,7 @@
     <td class="ps-1"></td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_layouts_moduel2" class="ps-1 update_user firstcategory purchases_moduel supplier_id" name="layouts_moduel_display" disabled>
-            <option class="sub_name_text " value="{{setting('layouts_moduel_display')}}">Display-Layouts-Moduel : {{setting('layouts_moduel_display')}}</option>
+            <option class="sub_name_text " value="{{setting('layouts_moduel_display')}}">Display : {{setting('layouts_moduel_display')}}</option>
             <option class="sub_name_text text-primary" value="block">block</option>
             <option class="sub_name_text text-danger" value="hidden">hidden</option>
         </select>

@@ -28,17 +28,30 @@
             <div class="form-group mb-1">
               <input class="form-control form-control-sm" type="text" name="subject" id="inputSubject" placeholder="Subject"/>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-1">
               <textarea class="form-control form-control-sm main_content" id="email_summernote" name="main_content" cols="30" rows="10" placeholder="Email Content"></textarea>
             </div>
             <div class="row">
               <div class="col-xl-12">
-                <label class="label-attach" for="email_attachment">Attach File</label>
                 <table>
                   <thead>
                     <tr>
-                      <th class="file-head">File-Name</th>
-                      <th class="file-head">Add</th>
+                      <th class="file-head">
+                        Add Attach File
+                        <span class="more__button">
+                          <a class="btn btn-group-sm" href="#" id="moreBtn">
+                            <span style="font-size:20px;color:#0056b3;"><i class="fa-solid fa-circle-plus"></i></span>
+                          </a>
+                        </span>
+                      </th>
+                      <th class="file-head">
+                        Remove Attach File
+                        <span class="more__button">
+                          <a class="btn btn-group-sm" href="#" id="decrementBtn">
+                            <span style="font-size:20px;color:orangered;"><i class="fa-solid fa-circle-minus"></i></span>
+                          </a>
+                        </span>
+                      </th>
                     </tr>
                   </thead>
                   <tbody id="fileTable">
@@ -46,13 +59,7 @@
                       <td class="file-column">
                         <input type="file" class="form-control form-control-sm attachment" name="email_attachments[]" id="email_attachment" multiple />
                       </td>
-                      <td class="file-column">
-                        <span class="more__button">
-                          <a class="btn btn-group-sm" href="#" id="moreBtn">
-                            <span style="font-size:20px;color:#0056b3;"><i class="fa-solid fa-circle-plus"></i></span>
-                          </a>
-                        </span>
-                      </td>
+                      <td class="file-column"></td>
                     </tr>
                   </tbody>
                 </table>
@@ -127,6 +134,16 @@
       newRow.querySelector('.attachment').value = '';
 
       tableBody.appendChild(newRow);
+    });
+    // Table row decrement
+    document.getElementById('decrementBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      var tableBody = document.querySelector('#fileTable');
+
+      if (tableBody.rows.length > 1) {
+          tableBody.deleteRow(-1);
+      }
     });
   });
 </script>

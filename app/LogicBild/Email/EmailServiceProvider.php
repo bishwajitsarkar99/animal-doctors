@@ -69,7 +69,6 @@ class EmailServiceProvider
         // Prepare email content
         $details = [
             'subject' => $request->subject ?? 'No Subject',
-            'title' => 'GST Medicine Center',
             'main_content' => $content ?? 'No Content',
         ];
 

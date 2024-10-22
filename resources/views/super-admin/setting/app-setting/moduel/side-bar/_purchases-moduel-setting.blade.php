@@ -76,7 +76,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel6" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="category_display" disabled>
-            <option class="sub_name_text" value="{{setting('category_visual')}}">Display-Add-Category : {{setting('category_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('category_visual')}}">Display : {{setting('category_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -122,7 +122,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel_subcatg5" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="subcategory_visual" disabled>
-            <option class="sub_name_text" value="{{setting('subcategory_visual')}}">Display-Add-Sub-Category : {{setting('subcategory_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('subcategory_visual')}}">Display : {{setting('subcategory_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -168,7 +168,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_group_moduel3" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="group_visual" disabled>
-            <option class="sub_name_text" value="{{setting('group_visual')}}">Display-Add-Group : {{setting('group_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('group_visual')}}">Display : {{setting('group_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -214,7 +214,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel18" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="medicine_visual" disabled>
-            <option class="sub_name_text" value="{{setting('medicine_visual')}}">Display-Add-name : {{setting('medicine_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('medicine_visual')}}">Display : {{setting('medicine_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -239,7 +239,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel21" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="medicine_visual" disabled>
-            <option class="sub_name_text" value="{{setting('medicine_visual')}}">Display-Add-Dosage : {{setting('medicine_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('medicine_visual')}}">Display : {{setting('medicine_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -264,7 +264,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel24" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="medicine_visual" disabled>
-            <option class="sub_name_text" value="{{setting('medicine_visual')}}">Display-Add-Origin : {{setting('medicine_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('medicine_visual')}}">Display : {{setting('medicine_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -310,7 +310,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel29" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="model_visual" disabled>
-            <option class="sub_name_text" value="{{setting('model_visual')}}">Display-Add : {{setting('model_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('model_visual')}}">Display : {{setting('model_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -356,7 +356,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel34" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="unit_visual" disabled>
-            <option class="sub_name_text" value="{{setting('unit_visual')}}">Display-Add-Unit : {{setting('unit_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('unit_visual')}}">Display : {{setting('unit_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -402,7 +402,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel39" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="brand_visual" disabled>
-            <option class="sub_name_text" value="{{setting('brand_visual')}}">Display-Add-Brand : {{setting('brand_visual')}}</option>
+            <option class="sub_name_text" value="{{setting('brand_visual')}}">Display : {{setting('brand_visual')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -448,7 +448,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel44" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="product_visual_" disabled>
-            <option class="sub_name_text" value="{{setting('product_visual_')}}">Display-Add-Product : {{setting('product_visual_')}}</option>
+            <option class="sub_name_text" value="{{setting('product_visual_')}}">Display : {{setting('product_visual_')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -731,7 +731,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel76" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="supplier_setup_display" disabled>
-            <option class="sub_name_text" value="{{setting('supplier_setup_display')}}">Display-Supplier : {{setting('supplier_setup_display')}}</option>
+            <option class="sub_name_text" value="{{setting('supplier_setup_display')}}">Display : {{setting('supplier_setup_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -757,7 +757,7 @@
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel79" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="supplier_details_display" disabled>
-            <option class="sub_name_text" value="{{setting('supplier_details_display')}}">Display-Supplier-Details : {{setting('supplier_details_display')}}</option>
+            <option class="sub_name_text" value="{{setting('supplier_details_display')}}">Display : {{setting('supplier_details_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>
@@ -775,15 +775,15 @@
     </td>
     <td class="drop custom-select ps-1">
         <select id="update_purchases_moduel81" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="supplier_requisition_link">
-            <option class="sub_name_text linkSupplierRequestion" value="{{setting('supplier_requisition_link')}}">URL : {{setting('supplier_requisition_link')}}</option>
-            <option class="sub_name_text" value="#">Public</option>
+            <option class="sub_name_text" value="{{setting('supplier_requisition_link')}}">URL : {{setting('supplier_requisition_link')}}</option>
+            <option class="sub_name_text linkSupplierRequestion" value="#">Public</option>
             <option class="sub_name_text" value="#">Private : #</option>
         </select>
         <span class="custom-app-setting-arrow"></span>
     </td>
     <td class="drop custom-select ps-1" style="color: black;font-weight:500">
         <select id="update_purchases_moduel82" class="purchases_moduel ps-1 update_user firstcategory supplier_id" name="supplier_requisition_display">
-            <option class="sub_name_text" value="{{setting('supplier_requisition_display')}}">Display-Supplier-Requisition : {{setting('supplier_requisition_display')}}</option>
+            <option class="sub_name_text" value="{{setting('supplier_requisition_display')}}">Display : {{setting('supplier_requisition_display')}}</option>
             <option class="sub_name_text" value="block">block</option>
             <option class="sub_name_text" value="hidden">hidden</option>
         </select>

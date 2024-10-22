@@ -9,19 +9,19 @@ Route::get('/login', function () {
 });
 // Super Admin Login Routes with Middleware
 Route::middleware('loginPage')->group(function () {
-    Route::get('/', [AuthController::class, 'loadLogin']);
+    Route::get('/', [AuthController::class, 'loadLogin'])->name('superadmin.login');
 });
 // Admin Login Routes with Middleware
 Route::middleware('adminLoginPage')->group(function () {
-    Route::get('/admin-login', [AuthController::class, 'loadAdminLogin']);
+    Route::get('/admin-login', [AuthController::class, 'loadAdminLogin'])->name('admin.login');
 });
 // Accounts Login Routes with Middleware
 Route::middleware('accountsLoginPage')->group(function () {
-    Route::get('/accounts-login', [AuthController::class, 'loadAccountsLogin']);
+    Route::get('/accounts-login', [AuthController::class, 'loadAccountsLogin'])->name('accounts.login');
 });
 // Common User Login Routes with Middleware
 Route::middleware('commonUserLoginPage')->group(function () {
-    Route::get('/common-user-login', [AuthController::class, 'loadCommonUserLogin']);
+    Route::get('/common-user-login', [AuthController::class, 'loadCommonUserLogin'])->name('user.login');
 });
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 // Registration Routes with Middleware

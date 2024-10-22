@@ -153,9 +153,10 @@ th.file-head {
     text-align: center;
     font-size: 15px;
 }
-a#moreBtn {
+a#moreBtn,a#decrementBtn {
     padding: 3px 5px;
     box-shadow: none;
     border: none;
     height: 35px;
 }
+

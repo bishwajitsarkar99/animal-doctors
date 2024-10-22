@@ -28,8 +28,12 @@ class AdminEmail extends Mailable
      */
     public function build()
     {
+        $loginLink = setting('login_link');
         return $this->from('superadmin@gmail.com', 'GST-Medicine-Center')
                     ->subject('Email Verification')
-                    ->markdown('emails.AdminMail');
+                    ->markdown('emails.AdminMail')
+                    ->with([
+                        'loginLink' => $loginLink,
+                    ]);
     }
 }

@@ -28,6 +28,9 @@
             <li class="nav-item">
                 <a class="nav-link setting skeleton" data-bs-toggle="tab" href="#menu5" onclick="typewritingFocus()">Footer</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link setting skeleton" data-bs-toggle="tab" href="#menu7" onclick="typewritingEmailFocus()">Email-Setting</a>
+            </li>
         </ul>
 
         <form action="#" method="POST">
@@ -129,7 +132,7 @@
                 </div>
                 <!-- Sidebar -->
                 <div id="menu6" class="container tab-pane fade"><br>
-                    <h6>Moduel-Setting</h6>
+                    <h6>Sidebar-Moduel-Setting</h6>
                     <p class="text-dark font-weight-bold">
                         <span id="demo"></span>
                         <i class="fa-regular fa-hand-point-right fa-beat-fade ms-3 mt-2" style="color: darkcyan;"></i>
@@ -172,6 +175,28 @@
                         <div id="treeTable" class="">
                             <table class="bg-transparent">
                                 @include('super-admin.setting.app-setting.moduel.footer._footer-moduel-setting')
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Email-Setting -->
+                <div id="menu7" class="container tab-pane fade"><br>
+                    <h6>Email Verification Login page-Setting</h6>
+                    <p class="text-dark font-weight-bold">
+                        <span id="email"></span>
+                        <i class="fa-regular fa-hand-point-right fa-beat-fade ms-3 mt-2" style="color: darkcyan;"></i>
+                        <input class="company_name form-switch form-check-input skeleton mt-2" type="checkbox" id="email_mode">
+                        <label id="sidebar_button_mode" class="input_label profile_yes skeleton mt-1" for="select-user"></label>
+                    </p>
+                    <p>
+                        Setting Update Mode :
+                        <label id="login_enable4g" class="input_label profile_yes enable skeleton mt-1 ps-2 pe-2" for="select-user">Enable</label>
+                        <label id="login_disable4g" class="input_label profile_yes disable skeleton mt-1 ps-2 pe-2" for="select-user">Disable</label>
+                    </p>
+                    <div class="row">
+                        <div id="treeTable" class="">
+                            <table class="bg-transparent">
+                                @include('super-admin.setting.app-setting.moduel.email.email-setting')
                             </table>
                         </div>
                     </div>
@@ -298,6 +323,22 @@
     }
     typewritingFocus("footermenu", "Would you like to update app setting ? Please, click the beside button :", 50);
 </script>
+<!-- Email-Writer -->
+<script>
+    function typewritingEmailFocus(elementId, text, speed) {
+        var i = 0;
+
+        function type() {
+            if (i < text.length) {
+                document.getElementById(elementId).innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            }
+        }
+        type();
+    }
+    typewritingFocus("email", "Would you like to update app setting ? Please, click the beside button :", 50);
+</script>
 
 <!-- Avatara -->
 <script>
@@ -326,6 +367,7 @@
 @include('super-admin.setting.app-setting.moduel-setting-ajax.footer-setting-ajax.footer-setting')
 @include('super-admin.setting.app-setting.moduel-setting-ajax.top-bar-setting-ajax.top-bar-setting')
 @include('super-admin.setting.app-setting.moduel-setting-ajax.nav-bar-setting-ajax.nav-bar-setting')
+@include('super-admin.setting.app-setting.moduel-setting-ajax.email-setting-ajax.email-setting')
 <script type="text/javascript">
     // Update Company Profile
     $(document).ready(function() {
@@ -732,8 +774,10 @@
                 'navbar_item_list_moduel_display': $('#update_navbar_moduel5').val(),
                 'navbar_order_box_moduel_display': $('#update_navbar_moduel6').val(),
                 'navbar_all_moduel_display': $('#update_navbar_moduel7').val(),
+                // Email Setting
+                'user_login_link': $('#update_email_moduel').val(),
             }
-
+            // console.log(data);
             //<----Ajax Form Header Setup for csrf token----------->
             $.ajaxSetup({
                 headers: {
@@ -747,24 +791,20 @@
                 data: data,
                 dataType: "json",
                 success: function(response) {
-                    if (response.status == 400) {
-                        $.each(response.errors, function(key, err_value) {
-                            $('#updateForm_errorList').html("");
-                            $('#updateForm_errorList').append('<span>' + err_value + '</span>');
-                        });
-                    } else if (response.status == 404) {
-                        $('#updateForm_errorList').html("");
-                        $('#success_message').text(response.messages);
-                    } else {
-                        $('#updateForm_errorList').html("");
-                        $('#success_message').html("");
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
-                        setTimeout(() => {
-                            $('#success_message').fadeOut();
-                        }, 3000);
-                    }
-                }
+            if (response.status == 200) {
+                $('#success_message').text(response.messages).fadeIn().delay(3000).fadeOut();
+            } else if (response.status == 400) {
+                $('#updateForm_errorList').html("");
+                $.each(response.errors, function(key, err_value) {
+                    $('#updateForm_errorList').append('<span>' + err_value.join(', ') + '</span>');
+                });
+            } else if (response.status == 404) {
+                $('#success_message').text(response.messages);
+            }
+        },
+        error: function(xhr) {
+            console.log(xhr.responseJSON); // This will give you more insight into the error
+        }
             });
 
         });

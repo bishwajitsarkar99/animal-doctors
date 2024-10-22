@@ -418,6 +418,8 @@ class DatabaseSeeder extends Seeder
         //     'navbar_item_list_moduel_display'=>'nav_item_list_blcok',
         //     'navbar_order_box_moduel_display'=>'nav_order_blcok',
         //     'navbar_all_moduel_display'=>'nav_all_block',
+        //     // Email Setting
+        //     'login_link'=>'http://127.0.0.1:8000/common-user-login',
 
         // ]);
 

@@ -129,7 +129,8 @@ select#update_purchases_moduel_Acc201,select#update_purchases_moduel_Acc203,sele
 select#update_purchases_moduel_Acc209,select#update_purchases_moduel_Acc211,select#update_purchases_moduel_Acc212,.parent_hrmModuel,select#update_hrm_moduel2,.hrmChild,.parent_authModuel,
 select#update_auth_moduel2,select#update_auth_moduel4,select#update_layouts_moduel2,select#update_components_moduel2,.parent_componentsModuel,.parent_layoutsModuel,select#update_footer_moduel2,
 .parent_footerModuel,#footer_mode,select#update_topbar_moduel2,select#update_topbar_moduel3,#topbar_mode,.parent_topbarModuel,select#update_navbar_moduel2,
-select#update_navbar_moduel3,select#update_navbar_moduel4,select#update_navbar_moduel5,#navbar_mode,.parent_navbarModuel,select#update_navbar_moduel6,select#update_navbar_moduel7,select#update_hrm_moduel4  {
+select#update_navbar_moduel3,select#update_navbar_moduel4,select#update_navbar_moduel5,#navbar_mode,.parent_navbarModuel,select#update_navbar_moduel6,select#update_navbar_moduel7,select#update_hrm_moduel4,
+#update_email_moduel  {
     cursor: pointer;
 }
 input#update_purchases_moduel,#update_purchases_moduel2,#update_purchases_moduel3,#update_purchases_moduel4,#update_purchases_moduel5,
@@ -209,7 +210,8 @@ input#update_purchases_moduel_Acc210,select#update_purchases_moduel_Acc211,selec
 select#update_hrm_moduel2,input#update_hrm_moduel3,select#update_hrm_moduel4,input#update_auth_moduel,select#update_auth_moduel2,input#update_auth_moduel3,
 select#update_auth_moduel4,input#update_layouts_moduel,select#update_layouts_moduel2,input#update_components_moduel,select#update_components_moduel2,
 input#update_footer_moduel,select#update_footer_moduel2,select#update_topbar_moduel2,select#update_topbar_moduel3,select#update_navbar_moduel2,
-select#update_navbar_moduel3,select#update_navbar_moduel4,select#update_navbar_moduel5,select#update_navbar_moduel6,select#update_navbar_moduel7 {
+select#update_navbar_moduel3,select#update_navbar_moduel4,select#update_navbar_moduel5,select#update_navbar_moduel6,select#update_navbar_moduel7,
+#update_email_moduel {
     box-shadow: none;
     font-size: 12px;
     font-weight: 600;
@@ -298,7 +300,7 @@ input#update_purchases_moduel_Acc194,select#update_purchases_moduel_Acc195,selec
 select#update_purchases_moduel_Acc198,input#update_purchases_moduel_Acc199,select#update_purchases_moduel_Acc200,select#update_purchases_moduel_Acc201,
 input#update_purchases_moduel_Acc202,select#update_purchases_moduel_Acc203,select#update_purchases_moduel_Acc204,input#update_purchases_moduel_Acc205,
 select#update_purchases_moduel_Acc206,input#update_purchases_moduel_Acc207,select#update_purchases_moduel_Acc208,select#update_purchases_moduel_Acc209,
-input#update_purchases_moduel_Acc210,select#update_purchases_moduel_Acc211,select#update_purchases_moduel_Acc212  {
+input#update_purchases_moduel_Acc210,select#update_purchases_moduel_Acc211,select#update_purchases_moduel_Acc212,#update_email_moduel  {
     background-color: #fff;
 }
 select#update_purchases_moduel5,#update_purchases_moduel_subcatg4,select#update_purchases_group_moduel2,
@@ -320,7 +322,7 @@ select#update_purchases_moduel_Acc161,select#update_purchases_moduel_Acc168,sele
 select#update_purchases_moduel_Acc177,select#update_purchases_moduel_Acc180,select#update_purchases_moduel_Acc183,select#update_purchases_moduel_Acc186,
 select#update_purchases_moduel_Acc189,select#update_purchases_moduel_Acc192,select#update_purchases_moduel_Acc195,select#update_purchases_moduel_Acc200,
 select#update_purchases_moduel_Acc203,select#update_purchases_moduel_Acc208,select#update_purchases_moduel_Acc211,select#update_purchases_moduel_Acc110,
-select#update_purchases_moduel_Acc113,select#update_purchases_moduel_Acc116  {
+select#update_purchases_moduel_Acc113,select#update_purchases_moduel_Acc116,#update_email_moduel  {
     text-decoration: underline;
     color: royalblue;
 }
@@ -330,7 +332,9 @@ select#update_purchases_moduel21{
 td.drop {
     line-height: 1.4;
 }
-
+input#email_mode{
+    cursor: pointer;
+}
 input#update_login_form_label_one {
     box-shadow: none;
     font-size: 12px;
@@ -348,7 +352,7 @@ input#update_login_form_label_one:hover{
 a.categ_title_block{
     display: none;
 }
-label#login_enable,#login_enable3,#login_enable4,#login_enable3a,#login_enable_social,#login_enable4f,#login_enable4t,#login_enable4n {
+label#login_enable,#login_enable3,#login_enable4,#login_enable3a,#login_enable_social,#login_enable4f,#login_enable4t,#login_enable4n,#login_enable4g {
     background-image: var(--comment-box-background);
     border-radius: 50px;
     border-left: 1px solid #f1eeee;
@@ -358,7 +362,7 @@ label#login_enable,#login_enable3,#login_enable4,#login_enable3a,#login_enable_s
     background-color: #f1f1f1;
     color: rgb(5, 5, 248);
 }
-label#login_disable,#login_disable3,#login_disable4,#login_disable3a,#login_disable_social,#login_disable4f,#login_disable4t,#login_disable4n {
+label#login_disable,#login_disable3,#login_disable4,#login_disable3a,#login_disable_social,#login_disable4f,#login_disable4t,#login_disable4n,#login_disable4g {
     background-image: var(--comment-box-background);
     border-radius: 50px;
     border-left: 1px solid #f1eeee;

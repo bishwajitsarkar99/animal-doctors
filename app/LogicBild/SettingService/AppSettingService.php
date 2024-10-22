@@ -7,7 +7,7 @@ use App\Support\Facades\Setting;
 class AppSettingService
 {
     /**
-     * Handle app setting service .
+     * Handle app setting service . http://127.0.0.1:8000/common-user-login
     */
     public function appSettings(Request $request)
     {
@@ -410,7 +410,8 @@ class AppSettingService
             'navbar_item_list_moduel_display'=>'required',
             'navbar_order_box_moduel_display'=>'required',
             'navbar_all_moduel_display'=>'required',
-            
+            // Email Setting
+            'user_login_link'=>'required',
         ]);
         //update 
         setting([
@@ -808,6 +809,8 @@ class AppSettingService
             'navbar_item_list_moduel_display' => $request->input('navbar_item_list_moduel_display'),
             'navbar_order_box_moduel_display' => $request->input('navbar_order_box_moduel_display'),
             'navbar_all_moduel_display' => $request->input('navbar_all_moduel_display'),
+            // Email Setting
+            'login_link' => $request->input('user_login_link'),
             
         ]);
 

@@ -10,7 +10,10 @@
 
 </style>
 <body>
-    <h3>{{$details['title']}}</h3>
+    <span style="background-color:darkblue;">
+        <img src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt="logo">
+        <h3>{{setting('company_name')}}</h3>
+    </span>
     <h4>{{$details['subject']}}</h4>
     <p>{{$details['main_content']}}</p>
 

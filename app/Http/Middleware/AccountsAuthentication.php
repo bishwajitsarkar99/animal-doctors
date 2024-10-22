@@ -25,6 +25,6 @@ class AccountsAuthentication
             $request->session()->invalidate();
             $request->session()->regenerateToken();
         }
-        return abort(403, 'Unauthorized');
+        return abort(444, 'Unauthorized');
     }
 }
