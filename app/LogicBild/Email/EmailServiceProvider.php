@@ -4,10 +4,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 use App\Mail\UserMail;
 use App\Models\User;
+use App\Models\UserEmail;
 
 class EmailServiceProvider
 {
@@ -38,7 +41,7 @@ class EmailServiceProvider
             'user_bcc' => 'nullable|string',
             'subject' => 'required|string',
             'main_content' => 'nullable|string',
-            'select_attachment_type' => 'nullable|string',
+            'attachment_type' => 'nullable|string',
             'email_attachments.*' => 'nullable|file',
         ]);
 
@@ -69,7 +72,7 @@ class EmailServiceProvider
         
         // Handle file attachments
         if ($request->hasFile('email_attachments')) {
-            $attachmentFolder = $request->select_attachment_type == 'attachments' ? 'attachments' : 'user_message';
+            $attachmentFolder = $request->attachment_type == 'attachments' ? 'attachments' : 'user_message';
     
             foreach ($request->file('email_attachments') as $file) {
                 $filename = time() . '_' . $file->getClientOriginalName();
@@ -95,6 +98,21 @@ class EmailServiceProvider
             'subject' => $request->subject ?? 'No Subject',
             'main_content' => $content ?? 'No Content',
         ];
+
+        // Store Email Data in DB
+        DB::table('user_emails')->insert([
+            'user_to' => $request->user_to,
+            'user_cc' => $request->user_cc,
+            'user_bcc' => $request->user_bcc,
+            'subject' => $request->subject,
+            'main_content' => $content,
+            'email_attachments' => json_encode($attachments),
+            'attachment_type' => $request->attachment_type,
+            'sender_email' => Auth::user()->email,
+            'sender_user' => Auth::user()->id,
+            'status' => $request->status ? '1' : '0',
+            'created_at' => now(),
+        ]);
 
         try {
             // Send the email with attachments using the UserMail class

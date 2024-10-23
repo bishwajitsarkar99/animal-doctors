@@ -10,6 +10,26 @@
       <div class="col-md-4">
         <div class="card-body focus-color user_details cd skeleton">
           <p class="email_list">Email Send List</p>
+          <p style="text-align:center;">
+            <span><img class="img-profile rounded-circle" style="margin-top: 0px;" id="output" src="/image/{{auth()->user()->image}}"></span>
+            <span class="user_eml" style="color:gray;font-weight:700;font-size: .9rem;">{{Auth::user()->email}} </span>
+          </p>
+          <div class="email-send-box-list">
+            @if(auth()->user()->role == 1)
+              <a type="button" href="#" class="btn btn-sm" id="email_search_page">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span class="btn-text email_search_page"> Email-Search</span>
+              </a><br>
+              <a type="button" href="#" class="btn btn-sm" id="file_directory_page">
+                <i class="fa-solid fa-folder-open"></i>
+                <span class="btn-text file_directory_page"> File-Directory</span>
+              </a><br>
+            @endif
+            <a type="button" href="#" class="btn btn-sm" id="email_send_page">
+              <i class="fa-solid fa-share"></i>
+              <span class="btn-text email_send_page"> Send Email-List</span>
+            </a>
+          </div>
         </div>
       </div>
       <div class="col-md-8">
@@ -44,7 +64,7 @@
                     <tr>
                       <th class="file-head">
                         <span class="more__button">
-                          <select type="text" class="form-control form-control-sm" name="select_attachment_type" id="selectAttachFile">
+                          <select type="text" class="form-control form-control-sm" name="attachment_type" id="selectAttachFile">
                             <option value="" >Select Attachment Type</option>
                             <option value="attachments">Management Report</option>
                             <option value="user_message">User Message</option>
@@ -99,7 +119,9 @@
     </div>
   </div>
 </div>
-
+@include('sendingEmails.search_email_list')
+@include('sendingEmails.send_email_list')
+@include('sendingEmails.file-directory')
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/email/email.css">
@@ -107,6 +129,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
 @endsection
 @push('scripts')
+@include('sendingEmails.ajax.email-ajax')
 <!-- Summar-Note -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
@@ -179,21 +202,21 @@
 <script>
   $(document).ready(function () {
     // Initialize Bloodhound for typeahead with email suggestions
-    var useremails = new Bloodhound({
-      datumTokenizer: Bloodhound.tokenizers.whitespace,
-      queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch: {
-        url: '/email', // Ensure this endpoint returns the expected array of email strings
-        cache: false,
-        filter: function(emails) {
-          return $.map(emails, function(email) {
-            return { name: email };
-          });
-        }
-      }
-    });
+    // var useremails = new Bloodhound({
+    //   datumTokenizer: Bloodhound.tokenizers.whitespace,
+    //   queryTokenizer: Bloodhound.tokenizers.whitespace,
+    //   prefetch: {
+    //     url: '/email', // Ensure this endpoint returns the expected array of email strings
+    //     cache: false,
+    //     filter: function(emails) {
+    //       return $.map(emails, function(email) {
+    //         return { name: email };
+    //       });
+    //     }
+    //   }
+    // });
 
-    useremails.initialize();
+    // useremails.initialize();
 
     // Initialize Tagsinput with Typeahead.js
     $('input[data-role="tagsinput"]').tagsinput({
@@ -202,12 +225,13 @@
         highlight: true,
         minLength: 1
       },
-      {
-        name: 'useremails',
-        displayKey: 'name',
-        valueKey: 'name',
-        source: useremails.ttAdapter()
-      }]
+      // {
+      //   name: 'useremails',
+      //   displayKey: 'name',
+      //   valueKey: 'name',
+      //   source: useremails.ttAdapter()
+      // }
+      ]
     });
 
     // Check if items are being added correctly

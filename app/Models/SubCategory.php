@@ -10,7 +10,7 @@ use App\Models\Category;
 class SubCategory extends Model
 {
     use HasFactory;
-    protected $tabl='sub_categories';
+    protected $table='sub_categories';
     protected $fillable =[
         'category_id',
         'subcategory_name',

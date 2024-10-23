@@ -2,21 +2,20 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="color-scheme" content="light">
-        <meta name="supported-color-schemes" content="light">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="csrf-token" content="{{csrf_token()}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
         <title>GST Center</title>
     </head>
-    <style>
-    
-    </style>
     <body>
         <div style="width: 99%;height: 100%;margin-right: auto;margin-left: auto;background-color: white;box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;border: 1px solid lightgray;border-radius: 5px;opacity: 1;">
-            <table style="width: 100%;height: 100%;margin-right: auto;margin-left: auto;background-color: white;box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;border-bottom: 1px solid lightgray;opacity: 1;border-top-right-radius: 5px;border-top-left-radius: 5px;">
+            <table style="width: 100%;height: 100%;margin-right: auto;margin-left: auto;background-color: white;box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;opacity: 1;border-top-right-radius: 5px;border-top-left-radius: 5px;">
                 <thead>
-                    <tr>
+                    <tr style="background-color:#f5f5f5;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;">
                         <th style="text-align:left;">
                             <span style="background-color:darkblue;margin-left: 10px;">
                                 <img src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt="logo">
@@ -30,7 +29,7 @@
             </table>
             <tr>
                 <div style="margin-left: 10px;">
-                    <h4 class="sending-date" style="margin-bottom:0px;">
+                    <h4 class="sending-date" style="margin-bottom:0px;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;">
                         <span class="serv">
                             <?php
                             $timezone = date_default_timezone_get();
@@ -43,21 +42,33 @@
                         echo date("h:i:sA");
                         ?>
                     </h4>
-                    <h4 style="margin-bottom:0px;margin-top:0px;">To : {{$details['user_to']}}</h4>
-                    <h4 style="margin-bottom:0px;margin-top:0px;">Cc : {{ $details['user_cc'] ?? 'No Carbon Copy' }} </h4>
-                    <h4 style="margin-top:0px;">Bcc : {{ $details['user_bcc'] ?? 'No Block Carbon Copy' }}</h4>
+                    <h4 style="margin-bottom:0px;margin-top:0px;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;">
+                        To : {{$details['user_to']}}
+                    </h4>
+                    <h4 style="margin-bottom:0px;margin-top:0px;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;">
+                        Cc : {{ $details['user_cc'] ?? 'No Carbon Copy' }} 
+                    </h4>
+                    <h4 style="margin-top:0px;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;">
+                        Bcc : {{ $details['user_bcc'] ?? 'No Block Carbon Copy' }}
+                    </h4>
                 </div>
                 <div style="margin-left: 10px;">
-                    <h4 style="background-color: #efebeb;border-left: 3px solid cadetblue;width: 950px;">Subject : {{$details['subject']}}</h4>
+                    <h4 style="background-color: #efebeb;border-left: 3px solid cadetblue;width: 950px;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;">
+                        Subject : {{$details['subject']}}
+                    </h4>
                 </div>
-                <div style="margin-left: 10px;">
+                <div style="margin-left: 10px;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;">
                     <p>{!! $details['main_content'] !!}</p>
                 </div>
-                <div style="margin-left: 10px;">
+                <div style="margin-left: 10px;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;">
                     <h4 style="margin-bottom:0px;">Thanks with best regard,</h4>
                     <h4 style="margin-top:0px;">{{Auth::user()->name}}</h4> 
                 </div>
             </tr>
         </div>
     </body>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <!-- JQUERY CDN LINK -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </html>
