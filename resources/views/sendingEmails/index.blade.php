@@ -14,10 +14,13 @@
       </div>
       <div class="col-md-8">
         <div class="card-body focus-color user_details cd skeleton">
-          <form id="emailForm" action="{{route('email.send')}}" method="POST">
+          <form id="emailForm" action="{{route('email.send')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group mb-1">
               <input class="form-control form-control-sm" type="text" name="user_to" id="inputTo" placeholder="To" value="" data-role="tagsinput"/>
+              <span class="text-danger input_message show-error remove-user-error ms-2">@error('user_to')
+                {{$message}}@enderror
+              </span>
             </div>
             <div class="form-group mb-1">
               <input class="form-control form-control-sm" type="text" name="user_cc" id="inputCC" placeholder="CC" value="" data-role="tagsinput"/>
@@ -27,6 +30,9 @@
             </div>
             <div class="form-group mb-1">
               <input class="form-control form-control-sm" type="text" name="subject" id="inputSubject" placeholder="Subject"/>
+              <span class="text-danger input_message show-error remove-user-error ms-2">@error('subject')
+                {{$message}}@enderror
+              </span>
             </div>
             <div class="form-group mb-1">
               <textarea class="form-control form-control-sm main_content" id="email_summernote" name="main_content" cols="30" rows="10" placeholder="Email Content"></textarea>
@@ -37,27 +43,36 @@
                   <thead>
                     <tr>
                       <th class="file-head">
+                        <span class="more__button">
+                          <select type="text" class="form-control form-control-sm" name="select_attachment_type" id="selectAttachFile">
+                            <option value="" >Select Attachment Type</option>
+                            <option value="attachments">Management Report</option>
+                            <option value="user_message">User Message</option>
+                          </select>
+                        </span>
+                      </th>
+                      <th class="file-head">
                         Add Attach File
                         <span class="more__button">
-                          <a class="btn btn-group-sm" href="#" id="moreBtn">
+                          <button class="btn btn-group-sm" href="#" id="moreBtn" disabled>
                             <span style="font-size:20px;color:#0056b3;"><i class="fa-solid fa-circle-plus"></i></span>
-                          </a>
+                          </button>
                         </span>
                       </th>
                       <th class="file-head">
                         Remove Attach File
                         <span class="more__button">
-                          <a class="btn btn-group-sm" href="#" id="decrementBtn">
+                          <button class="btn btn-group-sm" href="#" id="decrementBtn" disabled>
                             <span style="font-size:20px;color:orangered;"><i class="fa-solid fa-circle-minus"></i></span>
-                          </a>
+                          </button>
                         </span>
                       </th>
                     </tr>
                   </thead>
                   <tbody id="fileTable">
                     <tr class="file-row">
-                      <td class="file-column">
-                        <input type="file" class="form-control form-control-sm attachment" name="email_attachments[]" id="email_attachment" multiple />
+                      <td class="file-column" colspan="2">
+                        <input type="file" class="form-control form-control-sm attachment hidden" name="email_attachments[]" id="email_attachment" multiple />
                       </td>
                       <td class="file-column"></td>
                     </tr>
@@ -199,6 +214,23 @@
     $('input[data-role="tagsinput"]').on('itemAdded', function(event) {
       //console.log('Item added:', event.item); // Log the added item to ensure it's captured
       $(this).tagsinput('refresh');  // Refresh tagsinput to ensure the items are properly displayed
+    });
+  });
+</script>
+<script>
+  // select item
+  $(document).ready(function(){
+    $(document).on('change', '#selectAttachFile', function(){
+      var selectAttachment = $(this).val();
+      if(selectAttachment){
+        $("#moreBtn").removeAttr('disabled');
+        $("#decrementBtn").removeAttr('disabled');
+        $("#email_attachment").removeClass('hidden');
+      } else {
+        $("#moreBtn").attr('disabled', true);
+        $("#decrementBtn").attr('disabled', true);
+        $("#email_attachment").addClass('hidden');
+      }
     });
   });
 </script>

@@ -10,62 +10,52 @@
         <title>GST Center</title>
     </head>
     <style>
-        /* Custom-Class */
-        .container{
-            width: 100%;
-            height: 100%;
-            margin-right: auto;
-            margin-left: auto;
-            background-color: white;
-            box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
-            border-radius: 5px;
-            opacity: 1;
-        }
-        .email_table{
-            background:white;
-        }
+    
     </style>
     <body>
-        <div>
-            <table style="width: 100%;height: 100%;margin-right: auto;margin-left: auto;background-color: white;box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;border: 1px solid lightgray;border-radius: 5px;opacity: 1;">
+        <div style="width: 99%;height: 100%;margin-right: auto;margin-left: auto;background-color: white;box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;border: 1px solid lightgray;border-radius: 5px;opacity: 1;">
+            <table style="width: 100%;height: 100%;margin-right: auto;margin-left: auto;background-color: white;box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;border-bottom: 1px solid lightgray;opacity: 1;border-top-right-radius: 5px;border-top-left-radius: 5px;">
                 <thead>
                     <tr>
-                        <th>
-                            <span style="background-color:darkblue;margin-left: -68px;">
+                        <th style="text-align:left;">
+                            <span style="background-color:darkblue;margin-left: 10px;">
                                 <img src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt="logo">
                             </span>
                         </th>
-                        <th>
-                            <h3 style="margin-left: 0px;">{{setting('company_name')}}</h3>
+                        <th style="text-align:left;">
+                            <h2 style="margin-left: 0px;">{{setting('company_name')}}</h2>
                         </th>  
-                        <th>
-                            <h4 class="sending-date" style="margin-left: 300px;">
-                                <span class="serv">
-                                    <?php
-                                    $timezone = date_default_timezone_get();
-                                    echo "Date :";
-                                    ?>
-                                </span>
-                                <?php
-                                date_default_timezone_set('Asia/Dhaka');
-                                echo date('d l M Y') . " ; ";
-                                echo date("h:i:sA");
-                                ?>
-                            </h4>
-                        </th>
                     </tr>
                 </thead>
             </table>
             <tr>
                 <div style="margin-left: 10px;">
-                    <h4 style="background-color: #efebeb;border-left: 3px solid cadetblue;width: 500px;">Subject : {{$details['subject']}}</h4>
+                    <h4 class="sending-date" style="margin-bottom:0px;">
+                        <span class="serv">
+                            <?php
+                            $timezone = date_default_timezone_get();
+                            echo "Date :";
+                            ?>
+                        </span>
+                        <?php
+                        date_default_timezone_set('Asia/Dhaka');
+                        echo date('d l M Y') . " ; ";
+                        echo date("h:i:sA");
+                        ?>
+                    </h4>
+                    <h4 style="margin-bottom:0px;margin-top:0px;">To : {{$details['user_to']}}</h4>
+                    <h4 style="margin-bottom:0px;margin-top:0px;">Cc : {{ $details['user_cc'] ?? 'No Carbon Copy' }} </h4>
+                    <h4 style="margin-top:0px;">Bcc : {{ $details['user_bcc'] ?? 'No Block Carbon Copy' }}</h4>
                 </div>
                 <div style="margin-left: 10px;">
-                    <p>{{$details['main_content']}}</p>
+                    <h4 style="background-color: #efebeb;border-left: 3px solid cadetblue;width: 950px;">Subject : {{$details['subject']}}</h4>
                 </div>
                 <div style="margin-left: 10px;">
-                    <h4>Thanks Regard</h4>
-                    <h4>{{Auth::user()->name}}</h4> 
+                    <p>{!! $details['main_content'] !!}</p>
+                </div>
+                <div style="margin-left: 10px;">
+                    <h4 style="margin-bottom:0px;">Thanks with best regard,</h4>
+                    <h4 style="margin-top:0px;">{{Auth::user()->name}}</h4> 
                 </div>
             </tr>
         </div>

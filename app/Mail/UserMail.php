@@ -11,14 +11,16 @@ class UserMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $details;
+    public $attachments;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($details, $attachments = [])
     {
         $this->details = $details;
+        $this->attachments = is_array($attachments) ? $attachments : [];
     }
 
     /**
@@ -28,8 +30,19 @@ class UserMail extends Mailable
      */
     public function build()
     {
-        return $this->subject($this->details['subject'])
-                    ->view('sendingEmails.user_send_email')
-                    ->with('details', $this->details);
+        $email = $this->subject($this->details['subject'])
+                  ->view('sendingEmails.user_send_email')
+                  ->with('content', $this->details['main_content']);
+
+        // Attach files if any
+        if (is_array($this->attachments)) {
+            foreach ($this->attachments as $attachment) {
+                if (isset($attachment['file']) && is_string($attachment['file'])) {
+                    // Attach the file with its options
+                    $email->attach($attachment['file'], $attachment['options']);
+                }
+            }
+        }
+        return $email;
     }
 }

@@ -154,10 +154,21 @@ th.file-head {
     font-size: 15px;
     box-shadow: none;
 }
-a#moreBtn,a#decrementBtn {
+button#moreBtn,button#decrementBtn {
     padding: 3px 5px;
     box-shadow: none;
     border: none;
     height: 35px;
+}
+select#selectAttachFile{
+    cursor: pointer;
+    box-shadow: none;
+    margin-left: 5px;
+    color: black;
+    font-size: 12px;
+    font-weight: 800;
+}
+.hidden{
+    display: none;
 }
 

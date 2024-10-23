@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use HTMLPurifier;
+use HTMLPurifier_Config;
 use App\Mail\UserMail;
 use App\Models\User;
 
@@ -32,6 +34,12 @@ class EmailServiceProvider
     {
         $request->validate([
             'user_to' => 'required|string',
+            'user_cc' => 'nullable|string',
+            'user_bcc' => 'nullable|string',
+            'subject' => 'required|string',
+            'main_content' => 'nullable|string',
+            'select_attachment_type' => 'nullable|string',
+            'email_attachments.*' => 'nullable|file',
         ]);
 
         // Custom validation for multiple emails in To, CC, and BCC
@@ -58,45 +66,42 @@ class EmailServiceProvider
 
         $attachments = [];
 
-        // Ensure the directory exists before storing files
-        if (!Storage::exists('email_attachments/attachments')) {
-            Storage::makeDirectory('email_attachments/attachments');
-        }
-
+        
         // Handle file attachments
         if ($request->hasFile('email_attachments')) {
+            $attachmentFolder = $request->select_attachment_type == 'attachments' ? 'attachments' : 'user_message';
+    
             foreach ($request->file('email_attachments') as $file) {
                 $filename = time() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('email_attachments/attachments', $filename, 'public'); // Store file
-                $attachments[] = storage_path('app/public/' . $filePath); // Full path for attachment
+                $filePath = $file->storeAs($attachmentFolder, $filename, 'public');
+                $attachments[] = [
+                    'file' => storage_path('app/public/' . $filePath),
+                    'options' => [],
+                ];
             }
         }
 
-        $content = preg_replace('/<p[^>]*>(.*?)<\/p>/i', '$1', $request->main_content);
+        // [composer require ezyang/htmlpurifier] install for content clear from summary note
+        $purifierConfig = HTMLPurifier_Config::createDefault();
+        $purifier = new HTMLPurifier($purifierConfig);
+
+        // Sanitize the main_content to remove unwanted HTML
+        $content = $purifier->purify($request->main_content);
         // Prepare email content
         $details = [
+            'user_to' => $request->user_to ?? 'No Email',
+            'user_cc' => $request->user_cc ?? 'No CC',
+            'user_bcc' => $request->user_bcc ?? 'No BCC',
             'subject' => $request->subject ?? 'No Subject',
             'main_content' => $content ?? 'No Content',
         ];
 
         try {
-            // Send email
-            $mail = Mail::to($to_emails);
-
-            if (!empty($cc_emails)) {
-                $mail->cc($cc_emails);
-            }
-
-            if (!empty($bcc_emails)) {
-                $mail->bcc($bcc_emails);
-            }
-
-            // Attach files if available
-            foreach ($attachments as $attachment) {
-                $mail->attach($attachment);
-            }
-
-            $mail->send(new UserMail($details));
+            // Send the email with attachments using the UserMail class
+            Mail::to($to_emails)
+            ->cc($cc_emails)
+            ->bcc($bcc_emails)
+            ->send(new UserMail($details, $attachments));
 
             return back()->with('success', 'Email has been sent successfully.');
         } catch (\Exception $e) {
