@@ -35,6 +35,10 @@
                 <i class="fa-regular fa-trash-can"></i>
               </button>
             </div>
+            <div class="col-xl-8"></div>
+            <div class="col-xl-2">
+              <span class="current_month pe-2" id="email_month"></span>
+            </div>
           </div>
         </div>
         <div class="email-box-body">
@@ -46,20 +50,21 @@
               <input type="text" class="form-control form-control-sm end_date ps-1" name="end_date" placeholder="End Date" autocomplete="off" id="end_date">
             </div>
             <div class="col-3">
-              <select type="text" class="form-control form-control-sm select2" name="attachment_type" id="select_attachment">
+              <select type="text" class="form-control form-control-sm" name="attachment_type" id="select_attachment">
                 <option value="">Select Attach File</option>
                 <option value="attachments">Management Report</option>
                 <option value="user_message">User Message</option>
               </select>
             </div>
-            <div class="col-2">
-              <button id="search_btn" class="btn btn-sm modal_button search_btn">
-                <span class="btn-text">Search</span>
-                <span class="search-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-              </button>
+            <div class="col-xl-2">
+              <select type="text" class="form-control form-control-sm" name="status" id="select_status">
+                <option value="">Select Email</option>
+                <option value="0">New</option>
+                <option value="1">Old</option>
+              </select>
             </div>
             <div class="col-3">
-              <input type="search" class="form-control form-control-sm email_search ps-1" name="search" placeholder="Email Search" id="email_search">
+              <input type="search" class="form-control form-control-sm email_search ps-1" name="user_to" placeholder="Email Search" id="email_search">
             </div>
           </div>
         <div class="table-responsive">
@@ -81,13 +86,18 @@
               </select>
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-3">
             <span class="tot_summ skeleton" id="num_plate">
               <label class="tot-search skeleton" for="tot_cagt">Current Email :</label>
               <label class="badge rounded-pill bg-primary" for="total_user_email skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_user_email"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
             </span>
+            <div class="progress " style="height:0.3rem;"> <!-- progress-bar-skeleton -->
+              <div class="progress-bar progress-bar-striped bg-email progress-bar-animated" role="progressbar" aria-valuenow="{{ $user_email_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $user_email_percentage }}%;">
+                {{ round($user_email_percentage, 2) }}%
+              </div>
+            </div>
           </div>
-          <div class="col-7">
+          <div class="col-8">
               <div class="pagination skeleton" id="user_email_get_data_table_paginate">
 
               </div>

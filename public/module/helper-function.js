@@ -51,6 +51,18 @@ export const formatDate = (dateString) => {
     };
     return date.toLocaleString('en-US', options);
 };
+// Helper Current Date
+export function currentDate() {
+    // Get current date
+    var today = new Date();
+    var day = String(today.getDate()).padStart(2, '0');
+    var month = today.getMonth();
+    var yyyy = today.getFullYear();
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var monthName = monthNames[month];
+
+    return `${day}-${monthName}-${yyyy}`;
+}
 // Helper function for date formate(with month name) without time
 export function newFormatDate(newDateString) {
     var date = new Date(newDateString);

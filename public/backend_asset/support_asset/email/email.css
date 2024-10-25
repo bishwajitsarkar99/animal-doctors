@@ -305,7 +305,7 @@ button.search_btn:hover{
     font-size: 12px;
     font-weight: 700;
 }
-select#select_attachment{
+select#select_attachment,select#select_status{
     font-family: var(--nav-font-family);
     box-shadow: none;
     cursor: pointer;
@@ -315,7 +315,7 @@ select#select_attachment{
     font-size: 12px;
     font-weight: 700; 
 }
-input#start_date:focus,input#end_date:focus,input#email_search:focus,select#select_attachment:focus{
+input#start_date:focus,input#end_date:focus,input#email_search:focus,select#select_attachment:focus,select#select_status:focus{
     /* border-color: dodgerblue; */
     border: 2px solid dodgerblue;
 }
@@ -342,7 +342,8 @@ label.tot-search {
     font-weight: 600;
     letter-spacing: 0.3px;
     font-family: var(--nav-font-family);
-    margin-top: 12px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 table, th, td {
     border-bottom: 1px solid #ebe9e9;
@@ -419,5 +420,33 @@ tr.user-table-row:hover{
     font-size: 14px;
 }
 button#dropdownButton {
-    line-height: 1px;
+    font-family: var(--nav-font-family);
+    font-weight: 600;
+    font-size: 13px;
+}
+.month_box {
+    text-align: right;
+}
+span#email_month {
+    font-family: var(--nav-font-family);
+    font-size: 13px;
+    font-weight: 600;
+}
+.progress {
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 0;
+}
+.bg-email {
+    opacity: 1 !important;
+    background-color: #6697ffdb !important;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+}
+.bg-status{
+    background-color: #007bff;
+}
+.row-hidden{
+    display: none;
 }

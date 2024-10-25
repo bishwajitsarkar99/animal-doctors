@@ -23,13 +23,17 @@ class EmailServiceProvider
     public function viewEmailTemplate(Request $request)
     {
         $emails = User::where('status', 0)->pluck('email');
-        //$users_emails = User::where('status', 0)->get(['id', 'email']);
+        $userEmails = User::count();
+        $total_emails = UserEmail::count();
+        // Calculate the percentage of total users
+        $user_email_percentage = $total_emails > 0 ? ($total_emails / $userEmails) * 100 : 0;
+
         if ($request->expectsJson()){
             return response()->json([
                 'emails' => $emails
             ]);
         }
-        return view('sendingEmails.index');
+        return view('sendingEmails.index', compact('user_email_percentage'));
     }
     /**
      * Handle Send Email
@@ -137,9 +141,11 @@ class EmailServiceProvider
             return abort(404);
         }
         $attachment_type = $request->input('attachment_type');
+        $status = $request->input('status');
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
-    
+        $user_to = $request->input('user_to');
+
         // Initialize month and year arrays
         $months = [];
         $years = [];
@@ -172,6 +178,12 @@ class EmailServiceProvider
             $query->where('attachment_type', 'LIKE', '%' . $attachment_type . '%');
         }
 
+        if ($user_to) {
+            $query->where('user_to', 'LIKE', '%' . $user_to . '%');
+        }
+        if ($status !== null) {
+            $query->where('status', $status);
+        }
         // Clone the query for calculating totals
         // $totalUnreadQuery = clone $query;
         // $totalInvQty = $totalUnreadQuery->sum('quantity');
