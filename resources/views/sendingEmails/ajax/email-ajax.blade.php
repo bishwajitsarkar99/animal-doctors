@@ -1,6 +1,9 @@
 <script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
 <script type="module">
-    import { currentDate, getTimeDifference, activeTableRow } from "/module/module-min-js/helper-function-min.js";
+    import { currentDate, getTimeDifference, activeTableRow, formatDate } from "/module/module-min-js/helper-function-min.js";
+    const companyName = @json(setting('company_name'));
+    const companyLogo = "{{ asset('backend_asset/main_asset/img/' . setting('update_company_logo')) }}";
+    
     $(document).ready(function(){
         // Get Current Date start date field
         document.getElementById('start_date').value = currentDate();
@@ -33,47 +36,66 @@
                     statusColor = '';
                     statusBg = '';
                 }
-
-                var statusTitle, approveColor;
-                if(row.approved_by == null){
-                    statusTitle = 'No Approve';
-                    approveColor = 'color:orangered;';
-                } else if(row.approved_by == 1){
-                    statusTitle = 'Super Admin'
-                } else if(row.approved_by == 3){
-                    statusTitle = 'Admin'
-                } else if(row.approved_by == 2){
-                    statusTitle = 'Sub Admin'
-                }
-
-                var updatedDataby = 'No Update';
-                if (row.updated_by != null) {
-                    switch (row.updated_by) {
+                var created_by = 'Unknown';
+                if (row.sender_user != null) {
+                    switch (row.sender_user) {
                         case 1:
-                            updatedDataby = 'SuperAdmin';
+                            created_by = 'SuperAdmin';
                             break;
                         case 2:
-                            updatedDataby = 'Sub-Admin';
+                            created_by = 'Sub-Admin';
                             break;
                         case 3:
-                            updatedDataby = 'Admin';
+                            created_by = 'Admin';
                             break;
                         case 0:
-                            updatedDataby = 'User';
+                            created_by = 'User';
                             break;
                         case 5:
-                            updatedDataby = 'Accounts';
+                            created_by = 'Accounts';
                             break;
                         case 6:
-                            updatedDataby = 'Marketing';
+                            created_by = 'Marketing';
                             break;
                         case 7:
-                            updatedDataby = 'Delivery Team';
+                            created_by = 'Delivery Team';
                             break;
                         default:
-                            updatedDataby = 'Unknown';
+                            created_by = 'Unknown';
                     }
                 }
+                var attachmentType, attachmentText;
+                if(row.attachment_type === 'attachments'){
+                    attachmentType = 'attachments';
+                    attachmentText = 'Report File';
+                }else if(row.attachment_type === 'user_message'){
+                    attachmentType = 'user_message';
+                    attachmentText = 'User Message File';
+                }
+                
+                const attachments = JSON.parse(row.email_attachments || '[]');
+                const attachmentElements = attachments.map(att => {
+                    const fileName = att.file;
+                    const fileType = fileName.split('.').pop().toLowerCase();
+                    const relativePath = fileName.includes('https://') ? fileName : `storage/${attachmentType}/${fileName.split('/').pop()}`;
+
+                    if (['png', 'jpg', 'jpeg'].includes(fileType)) {
+                        // Display image files
+                        return `<span data-bs-toggle="tooltip"  data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                            <img class="attachment_file" src="${relativePath}" onclick="openImageModal('${relativePath}')" alt="Attachment Image" />
+                        </span>`;
+                    } else if (['pdf', 'xls', 'csv', 'docx'].includes(fileType)) {
+                        // Display links for PDF, XLS, and CSV files   target="_blank"
+                        return `<span><a href="javascript:void(0);" onclick="openFileModal('${relativePath}')" class="attachment_file_link"
+                            data-bs-toggle="tooltip"  data-bs-placement="top" title="Download" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                            <i class="fa-solid fa-file-export" style="font-size:15px;"></i> ${fileName.split('/').pop()}
+                            </a></span> `;
+                    } else {
+                        // Display other file types as a download link
+                        return `<a href="${relativePath}" download class="attachment_file_link"
+                        data-bs-toggle="tooltip"  data-bs-placement="top" title="Download" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>${fileName.split('/').pop()}</a>`;
+                    }
+                }).join('');
 
                 return `
                     <tr class="table-row user-table-row parent-row" data-parent="${row.id}" key="${key}" style="${statusColor}">
@@ -91,6 +113,7 @@
                             <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:12px;">
                                 ${statusText}
                             </span>
+                            <span class="child-td1 ps-1">${formatDate(row.created_at)}</span>
                         </td>
                         <td class="child-td1 ps-1" id="lastTd" hidden>${row.user_to}</td>
                         <td class="child-td1 ps-1" id="lastTd">
@@ -100,56 +123,48 @@
                     </tr>
                     <tr class="child-row detail-row table-row user-table-row row-hidden" data-child="${row.id}">
                         <td colspan="14">
-                            <div class="card detail-content mt-1 mb-1 me-1" style="background-color:white;">
+                            <div class="card detail-content" style="background-color:white;">
                                 <div class="row mt-1">
-                                    <div class="col-xl-4" style="margin-bottom: 5px;">
-                                        <label class="" for="" id="userPicture">
-
-                                        </label>
-                                        <label class="card-row-label" for="" id="">Role-Name : </label>
-                                        <label class="card-row-label" for="" id="">User-Email : </label>
-                                        <label class="card-row-label" for="" id="">Inventory-Date : </label>
-                                        <label class="card-row-label" for="approved_by" id="approved_by">Approved_by :  </label>
-                                        <label class="card-row-label" for="" id="">Created_by : </label>
-                                        <label class="card-row-label" for="updated_by" id="updated_by">Updated_by : </label>
-                                    </div>
-                                    <div class="col-xl-8">
-                                        <div class="card me-1" style="border:none;background-color:white;">
-                                            <div class="row">
-                                                <div class="col-xl-1">
-                                                    <label class="card-row-label" for="supplier_name" id="Supplier">Supplier : </label>
-                                                </div>
-                                                <div class="col-xl-1">
-                                                    <label class="card-row-label" for="supplier_id" id="SupplierID">ID : </label>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <label class="card-row-label" for="" id="">Manufacture-Date : </label>
-                                                    <label class="card-row-label" for="" id="">Expiry-Date : </label>
-                                                    <label class="card-row-label" for="" id="">Inventory-ID : </label>
-                                                    <label class="card-row-label" for="" id="">Category : </label>
-                                                    <label class="card-row-label" for="" id="">Group : </label>
-                                                    <label class="card-row-label" for="" id="">Medicine-Name : </label>
-                                                    <label class="card-row-label" for="" id="">Medicine-Dosage : </label>
-                                                    <label class="card-row-label" for="" id="">Medicine-Units : </label>
-                                                    <label class="card-row-label" for="" id="">Medicine-Origin : </label>
-                                                </div>
-                                                <div class="col-xl-4">
-                                                    <div class="amount-bg" style="border:1px solid 1px solid #97ffe8;border-radius:2px; ">
-                                                        <label class="card-row-label" for="" id="">MRP : </label>
-                                                        <label class="card-row-label" for="" id="">Quantity : </label>
-                                                        <label class="card-row-label" for="" id=""> 
-                                                            <label>Amount : <span style="border-bottom:3px double #b5b5b5;"></span></label>
-                                                        </label>
-                                                        <label class="card-row-label" for="" id="">VAT : </label>
-                                                        <label class="card-row-label" for="" id="">Tax : </label>
-                                                        <label class="card-row-label" for="" id="">Discount : </label>
-                                                        <label class="card-row-label" for="" id="" style="font-weight:600;"> 
-                                                            <label>Sub Total : <span style="border-bottom:3px double #b5b5b5;"></span></label>
-                                                        </label>
-                                                    </div>
-                                                </div>
+                                    <div class="email_header" id="emailHeader">
+                                        <div class="row">
+                                            <div class="col-xl-2">
+                                                <label class="logo_area" for="logo_area" id="logo_area">
+                                                    <img class="company_logo" src="${companyLogo}">
+                                                </label>
+                                            </div>
+                                            <div class="col-xl-10">
+                                                <p class="company_name_area">
+                                                    <label class="company_name" for="company_name" id="companyName">${companyName}</label>
+                                                </p>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col-xl-12">
+                                        <label class="card_row_first_part mt-2" for="user_to" id="user_to">Date : ${formatDate(row.created_at)}</label><br>
+                                        <label class="card_row_first_part" for="user_to" id="user_to">From : ${row.sender_email}</label><br>
+                                        <label class="card_row_first_part mt-1" for="user_to" id="user_to">To : ${row.user_to}</label><br>
+                                        <label class="card_row_first_part" for="user_cc" id="user_cc">Cc : ${row.user_cc}</label><br>
+                                        <label class="card_row_first_part" for="user_bcc" id="user_bcc">Bcc : ${row.user_bcc}</label><br>
+                                        <label class="card_row_first_part subject mt-2 ps-1" for="subject" id="subject">Subject :  ${row.subject}</label><br>
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col-xl-12" style="margin-bottom: 2px;">
+                                        <p>${row.main_content}</p><br>
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <span class="attachment_files">Attachment-Type : ${attachmentText}</span>
+                                    <div class="col-xl-12">
+                                        ${attachmentElements}
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col-xl-12">
+                                        <p class="email_footer">Thanks with best regard,</p>
+                                        <p class="email_footer">${created_by}</p><br>
                                     </div>
                                 </div>
                             </div>
@@ -158,6 +173,33 @@
                 `;
             }).join("\n");
         }
+        // Function to open image modal and set image source
+        window.openImageModal = function(imageSrc) {
+            document.getElementById('modalImage').src = imageSrc;
+            const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+            imageModal.show();
+        };
+        window.openFileModal = function(fileSrc) {
+            // Attempt to locate the modal content element
+            const modalContent = document.getElementById('modalContent');
+
+            // Verify that modalContent exists
+            if (!modalContent) {
+                console.error("Modal content element with ID 'modalContent' was not found.");
+                return;
+            }
+            
+            // Set iframe for documents or image for images
+            if (['pdf', 'xls', 'csv', 'docx'].some(ext => fileSrc.toLowerCase().endsWith(ext))) {
+                modalContent.innerHTML = `<iframe src="${fileSrc}" style="width:100%; height:80vh;" frameborder="0"></iframe>`;
+            } else {
+                modalContent.innerHTML = `<img src="${fileSrc}" alt="Attachment" style="width:100%; height:auto;">`;
+            }
+
+            // Show the modal
+            const fileModal = new bootstrap.Modal(document.getElementById('fileModal'));
+            fileModal.show();
+        };
         // Function to fetch all user email
         function fetch_all_user_email(query = '', url = null, perItem = null) {
             if (perItem === null) {

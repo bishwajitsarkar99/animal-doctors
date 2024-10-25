@@ -122,6 +122,7 @@
 @include('sendingEmails.search_email_list')
 @include('sendingEmails.send_email_list')
 @include('sendingEmails.file-directory')
+@include('sendingEmails.image_show')
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/email/email.css">

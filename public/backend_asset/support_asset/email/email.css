@@ -450,3 +450,90 @@ span#email_month {
 .row-hidden{
     display: none;
 }
+.table-responsive, .datatable-wrapper .datatable-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.card.detail-content {
+    padding: 5px 13px;
+    margin: 5px 5px;
+    border: 1px solid #dfdfdf;
+}
+div#emailHeader {
+    border-bottom: 1px solid lightgray;
+}
+.card_row_first_part{
+    font-family: var(--nav-font-family);
+    font-weight: 600;
+    font-size: 13px;
+}
+.subject{
+    background-color: #efebeb;
+    border-left: 3px solid cadetblue;
+    width: 100%;
+}
+p.company_name_area {
+    font-family: var(--nav-font-family);
+    padding-top: 10px;
+    padding-bottom: 0px;
+    font-size: 20px;
+    font-weight: 600;
+}
+img.company_logo {
+    width: 50px;
+    height: 50px;
+    background-color: darkblue;
+    border-radius: 10%;
+}
+.attachment_file {
+    width: 100px;
+    height: 100px;
+    margin: 15px 10px;
+    border: 2px solid rgb(252, 252, 252);
+    padding: 5px 5px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
+    cursor: pointer;
+}
+.attachment_file:hover{
+    background: transparent;
+    border: 2px dotted lightgray;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    opacity: 1;
+}
+.attachment_file_link{
+    margin-left: 10px;
+    border: 2px solid rgb(252, 252, 252);
+    padding: 5px 5px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
+    cursor: pointer;
+}
+.attachment_file_link:hover{
+    background: transparent;
+    border: 2px dotted lightgray;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    opacity: 1;
+}
+span.attachment_files {
+    background: aliceblue;
+    font-weight: 600;
+}
+.email_footer{
+    font-family: var(--nav-font-family);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+.modal-content.image_preview {
+    border: none;
+    background-color: white;
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
+    opacity: 1;
+}
