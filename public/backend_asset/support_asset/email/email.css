@@ -3,6 +3,8 @@
     --mdb-btn-border-color:#007bff;
     --nav-font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --nav-button-color:white;
+    --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, transparent 50%, rgba(0, 0, 0, 0.05) 100%);
+    --row-hover-border:dodgerblue;
 }
 .note-editor {
     background-color: #f9f9f9;
@@ -207,4 +209,215 @@ a#email_search_page:hover,a#email_send_page:hover,a#file_directory_page:hover{
     border-radius: 3px;
     transition: .5s ease;
     opacity: 1;
+}
+.email_modal_header,.email_modal_footer {
+    background-color: white;
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    height: 2.2em;
+    /* border-bottom: double silver; */
+}
+.email-box-header{
+    background-color: white;
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+}
+.form-check-input:checked {
+    background-color: #0d6efd !important;
+    border-color: #0d6efd !important;
+}
+input#allSelectBtn,input#selectBtn{
+    box-shadow: none;
+    cursor: pointer;
+}
+button.modal_button {
+    background-color: #0056b3;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: white;
+    height: 2.1em;
+    font-size: 12px;
+    line-height: 1.3;
+    font-variant: all-petite-caps;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-top: -6px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    border-color: #007bff;
+}
+button.modal_button:hover{
+    background-image: linear-gradient(to top, orangered, orangered, orangered);
+    color: white; 
+    transition: border-color 0.3s ease, background-color 0.3s ease;--mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    border-color: orangered;
+    opacity: 1;
+}
+button.search_btn {
+    background-color: #0056b3;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: white;
+    height: 2.1em;
+    font-size: 12px;
+    line-height: 1.3;
+    font-variant: all-petite-caps;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-top: 0px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    border-color: #007bff;
+}
+button.search_btn:hover{
+    background-image: linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);
+    color: white; 
+    transition: border-color 0.3s ease, background-color 0.3s ease;--mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    border-color: #007bff;
+    opacity: 1;
+}
+#start_date{
+    font-family: var(--nav-font-family);
+    box-shadow: none;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    height: 1.3em;
+    color: #606060;
+    font-size: 12px;
+    font-weight: 700;
+}
+#end_date{
+    font-family: var(--nav-font-family);
+    box-shadow: none;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    height: 1.3em;
+    color: #606060;
+    font-size: 12px;
+    font-weight: 700;
+}
+#email_search{
+    font-family: var(--nav-font-family);
+    box-shadow: none;
+    border: 1px solid #ebebeb;
+    height: 1.3em;
+    color: #606060;
+    font-size: 12px;
+    font-weight: 700;
+}
+select#select_attachment{
+    font-family: var(--nav-font-family);
+    box-shadow: none;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    height: 1.3em;
+    color: #606060;
+    font-size: 12px;
+    font-weight: 700; 
+}
+input#start_date:focus,input#end_date:focus,input#email_search:focus,select#select_attachment:focus{
+    /* border-color: dodgerblue; */
+    border: 2px solid dodgerblue;
+}
+::placeholder{
+    color: lightgray;
+    font-weight: 700;
+}
+select#perItemControl {
+    outline: none;
+    color: #606060;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: transparent;
+    background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);
+    border: 1px solid #b7c9e5;
+    border-radius: 3px;
+    width: 50px;
+    height: 22px;
+    font-size: 14px;
+}
+label.tot-search {
+    color: #606060;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    font-family: var(--nav-font-family);
+    margin-top: 12px;
+}
+table, th, td {
+    border-bottom: 1px solid #ebe9e9;
+    border-top: 0.5px solid #ebe9e9;
+    border-collapse: collapse;
+    font-size: 12px;
+    color: #000000;
+}
+td#treeRow{
+    border-left: 1px solid #ebe9e9;
+}
+td#lastTd{
+    border-right: 1px solid #ebe9e9;
+}
+button#checkBtn {
+    border: none;
+    background-color: white;
+    line-height: 1.2;
+}
+button#viewBtn {
+    border: none;
+    background-color: #fff;
+}
+button#checkBtn:hover,button#viewBtn:hover,button#deleteBtn:hover{
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    border-radius: 50%;
+    background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    color: black;
+}
+tr.user-table-row{
+    background-color: white;
+    opacity: 1;
+}
+tr.user-table-row:hover{
+    border: 1px solid var(--row-hover-border);
+    font-weight: 500;
+    background-image: var(--table-row-hover);
+    animation-name: fonColor;
+    animation-duration: 1s;
+    animation-direction: alternate-reverse;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+}
+@keyframes fonColor {
+    0%{
+        color: #0d6efd;
+    }
+    50%{
+        color: blue;
+    }
+    100%{
+        color: darkblue;
+    }
+}
+#user_email_get_data_table_paginate {
+    float: right;
+}
+.dropdown-item {
+    --bs-dropdown-link-color: #212529;
+    font-family: var(--nav-font-family);
+    display: block;
+    width: 100%;
+    padding: 0.0rem 1rem;
+    clear: both;
+    font-weight: 500;
+    color: var(--bs-dropdown-link-color);
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    font-size: 14px;
+}
+button#dropdownButton {
+    line-height: 1px;
 }

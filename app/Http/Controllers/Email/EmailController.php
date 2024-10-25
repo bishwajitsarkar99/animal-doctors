@@ -27,4 +27,22 @@ class EmailController extends Controller
     {
         return $this->emailServiceProvider->sending($request);
     }
+
+    // Fetch Mail
+    public function fetchEmail(Request $request)
+    {
+        return $this->emailServiceProvider->fetchUserEmail($request);
+    }
+
+    // View Mail
+    public function viewEmail(Request $request)
+    {
+        return $this->emailServiceProvider->viewUserEmail($request);
+    }
+
+    // Delete Mail
+    public function deleteEmail(Request $request)
+    {
+        return $this->emailServiceProvider->deleteUserEmail($request);
+    }
 }

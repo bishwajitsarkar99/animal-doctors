@@ -8,6 +8,7 @@ use App\Http\Controllers\Setting\PostSettngController;
 use App\Http\Controllers\Inventory\InventoryAuthorization;
 use App\Models\Permission\InventoryAccessPermission;
 use App\Http\Controllers\Inventory\InventoryDetailsRecord;
+use App\Http\Controllers\Email\EmailController;
 
 Route::group(['middleware' => 'auth'], function (){
     
@@ -77,5 +78,11 @@ Route::group(['middleware' => 'auth'], function (){
         Route::post('super-admin/inventory-permission', [InventoryAuthorization::class, 'inventoryPermission'])->name('action.inventory-permission');
         Route::get('super-admin/get-inventory-permission', [InventoryAuthorization::class, 'inventoryPermissionGet'])->name('search-inventory-permission.action');
         Route::put('super-admin/token-inventory-permission/{inventory_id}', [InventoryAuthorization::class, 'inventoryToken'])->name('inventory-token.action');
+    });
+    // Email
+    Route::middleware(['isSuperAdmin'])->group(function(){
+        Route::get('/email/fetch', [EmailController::class, 'fetchEmail'])->name('email.fetch');
+        Route::get('/email/view', [EmailController::class, 'viewEmail'])->name('email.view');
+        Route::delete('/email/delete', [EmailController::class, 'deleteEmail'])->name('email.delete');
     });
 });

@@ -127,6 +127,7 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/email/email.css">
 <link href=" https://cdn.jsdelivr.net/npm/@iconscout/unicons@4.0.8/css/line.min.css " rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-date-ui.min.css">
 @endsection
 @push('scripts')
 @include('sendingEmails.ajax.email-ajax')
@@ -134,6 +135,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+<script src="{{asset('backend_asset')}}/main_asset/js/date-formate.js"></script>
 
 <script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 <script type="module">
@@ -141,8 +143,10 @@
     removeSkeletonClass, 
     buttonLoader, 
     handleSuccessMessage, 
+    toolTip,
   } from "{{asset('/module/module-min-js/design-helper-function-min.js')}}";
   buttonLoader();
+  toolTip();
   $(document).ready(function(){
     // skeletone
     const skeletonClasses = [
@@ -157,7 +161,6 @@
     buttonLoader('#submit', '.loading-icon', '.btn-text', 'Send...', 'Send', 6000);
     // Initialize the message
     handleSuccessMessage('#success_message');
-
 
     // Table row increment
     document.getElementById('moreBtn').addEventListener('click', function(e) {
@@ -182,6 +185,18 @@
       if (tableBody.rows.length > 1) {
           tableBody.deleteRow(-1);
       }
+    });
+
+    // Date Picker
+    $('#start_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
+    $('#end_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
     });
   });
 </script>

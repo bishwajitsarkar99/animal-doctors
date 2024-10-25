@@ -11,6 +11,7 @@ use HTMLPurifier_Config;
 use App\Mail\UserMail;
 use App\Models\User;
 use App\Models\UserEmail;
+use Carbon\Carbon;
 
 class EmailServiceProvider
 {
@@ -126,6 +127,83 @@ class EmailServiceProvider
             \Log::error('Email sending failed: ' . $e->getMessage());
             return back()->with('error', 'Failed to send email. Please try again.');
         }
+    }
+    /**
+     * Handle Fetch Email
+    */
+    public function fetchUserEmail(Request $request)
+    {
+        if (!$request->ajax()) {
+            return abort(404);
+        }
+        $attachment_type = $request->input('attachment_type');
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+    
+        // Initialize month and year arrays
+        $months = [];
+        $years = [];
+    
+        if ($start_date && $end_date) {
+            $start = Carbon::parse($start_date)->startOfMonth();
+            $end = Carbon::parse($end_date)->endOfMonth();
+    
+            while ($start->lte($end)) {
+                $months[] = $start->format('F Y');
+                $start->addMonth();
+            }
+            $years = array_unique(array_map(function($month) {
+                return Carbon::parse($month)->format('Y');
+            }, $months));
+        }
+    
+        $query = UserEmail::with(['roles'])->orderBy('id', 'desc');
+
+        // Apply date filter
+        if ($start_date && $end_date) {
+            $query->whereBetween('created_at', [
+                Carbon::parse($start_date), 
+                Carbon::parse($end_date)->endOfDay()
+            ]);
+        }
+
+        // Apply additional filters
+        if ($attachment_type) {
+            $query->where('attachment_type', 'LIKE', '%' . $attachment_type . '%');
+        }
+
+        // Clone the query for calculating totals
+        // $totalUnreadQuery = clone $query;
+        // $totalInvQty = $totalUnreadQuery->sum('quantity');
+    
+        // $totalInv = $query->sum('sub_total');
+        
+        $perItem = $request->input('per_item', 10);
+        $data = $query->paginate($perItem)->toArray();
+        return response()->json([
+            'data' => $data['data'],
+            'links' => $data['links'],
+            'total' => $data['total'],
+            // 'totalInv' => $totalInv,
+            // 'totalInvQty' => $totalInvQty,
+            'months' => $months,
+            'years' => array_values($years)
+
+        ], 200);
+    }
+    /**
+     * Handle View Email
+    */
+    public function viewUserEmail(Request $request)
+    {
+        
+    }
+    /**
+     * Handle Delete Email
+    */
+    public function deleteUserEmail(Request $request)
+    {
+        
     }
     
 }
