@@ -450,6 +450,9 @@ span#email_month {
 .row-hidden{
     display: none;
 }
+.loader-show,.hidden{
+    display: none;
+}
 .table-responsive, .datatable-wrapper .datatable-container {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -502,10 +505,10 @@ img.company_logo {
     cursor: pointer;
 }
 .attachment_file:hover{
+    background-image: var(--table-row-hover);
     background: transparent;
     border: 2px dotted lightgray;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    box-shadow: none;
     transition: border-color 0.3s ease, background-color 0.3s ease;
     opacity: 1;
 }
@@ -517,14 +520,22 @@ img.company_logo {
     background-color: white;
     box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
     cursor: pointer;
+    text-decoration: none;
 }
 .attachment_file_link:hover{
+    background-image: var(--table-row-hover);
     background: transparent;
     border: 2px dotted lightgray;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    box-shadow: none;
     transition: border-color 0.3s ease, background-color 0.3s ease;
     opacity: 1;
+}
+.attach_header{
+    font-family: var(--nav-font-family);
+}
+.logo_attachment_file {
+    margin-left: 10px;
+    background-color: white;
 }
 span.attachment_files {
     background: aliceblue;
@@ -544,4 +555,47 @@ span.attachment_files {
 }
 img#logoFile {
     width: 70px;
+}
+.div_close_btn {
+    padding: 20px 10px;
+}
+.modal_text{
+    font-family: var(--nav-font-family);
+    font-size: 13px;
+    font-weight: 600;
+    color: black;
+}
+a.downloadBtn {
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    outline: none;
+    color: #606060;
+    height: 2.1em;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    background-color: transparent;
+    background: linear-gradient(5deg, #cdcdcd61, transparent 3%, #e1e1e1, #e3e3e399);
+    border: 2px solid #dfdfdf;
+    border-radius: 15px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+a.downloadBtn:hover{
+    background-image: var(--table-row-hover);
+    color: blue;
+    background: transparent;
+    border: 2px dotted lightgray;
+    box-shadow: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    opacity: 1;
+}
+.delete-btn-display{
+    display: none;
+}
+.table-row-select-bg{
+    background: linear-gradient(5deg, #cdcdcd61, transparent 3%, #e1e1e1, #e3e3e399);
 }

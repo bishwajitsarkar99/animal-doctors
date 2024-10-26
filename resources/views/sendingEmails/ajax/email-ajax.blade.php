@@ -1,9 +1,11 @@
 <script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
 <script type="module">
     import { currentDate, getTimeDifference, activeTableRow, formatDate } from "/module/module-min-js/helper-function-min.js";
+    import { addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     const companyName = @json(setting('company_name'));
     const companyAddress = @json(setting('company_address'));
     const companyLogo = "{{ asset('backend_asset/main_asset/img/' . setting('update_company_logo')) }}";
+    const pageLoader = "{{asset('image/loader/loading.gif')}}";
     
     $(document).ready(function(){
         // Get Current Date start date field
@@ -87,7 +89,7 @@
                         </span>`;
                     } else if (['pdf', 'xls', 'csv', 'docx'].includes(fileType)) {
                         // Display links for PDF, XLS, and CSV files   target="_blank"
-                        return `<span><a href="javascript:void(0);" onclick="openFileModal('${relativePath}')" class="attachment_file_link"
+                        return `<span><a href="javascript:void(0);" onclick="openFileModal('${relativePath}')" class="attachment_file_link" data-file-src="${relativePath}"
                             data-bs-toggle="tooltip"  data-bs-placement="top" title="Export" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                             <i class="fa-solid fa-file-export" style="font-size:15px;"></i> ${fileName.split('/').pop()}
                             </a></span> `;
@@ -99,12 +101,12 @@
                 }).join('');
 
                 return `
-                    <tr class="table-row user-table-row parent-row" data-parent="${row.id}" key="${key}" style="${statusColor}">
+                    <tr class="table-row user-table-row parent-row select-row-background" key="${key}" style="${statusColor}">
                         <td class="line-height-td child-td" style="text-align:left;color:#000000;" id="treeRow">
-                            <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="checkBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                                <input class="form-check-input" type="checkbox" value="" id="selectBtn" style="font-size:13px;margin-top: -1px;">
+                            <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="checkBtn" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                                <input class="form-check-input selectBtn" type="checkbox" value="${row.id}" id="selectBtn" style="font-size:13px;margin-top: -1px;">
                             </button>
-                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-regular fa-eye fa-beat" style="margin-top: 1px;"></i>
                             </button>
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
@@ -124,7 +126,7 @@
                     </tr>
                     <tr class="child-row detail-row table-row row-hidden" data-child="${row.id}">
                         <td colspan="14">
-                            <div class="card detail-content" style="background-color:white;">
+                            <div class="card detail-content" id="showCard" style="background-color:white;">
                                 <div class="row mt-1">
                                     <div class="email_header" id="emailHeader">
                                         <div class="row">
@@ -133,11 +135,18 @@
                                                     <img class="company_logo" src="${companyLogo}">
                                                 </label>
                                             </div>
-                                            <div class="col-xl-10">
+                                            <div class="col-xl-9">
                                                 <p class="company_name_area">
                                                     <label class="company_name" for="company_name" id="companyName">${companyName}</label><br>
                                                     <label class="company_address" for="company_address" id="companyAddress">${companyAddress}</label>
                                                 </p>
+                                            </div>
+                                            <div class="col-xl-1">
+                                                <div class="div_close_btn">
+                                                    <button type="button" class="btn-close btn-btn-sm clos_btn2" data-parent="${row.id}" id="viewBtn" value="${row.id}"
+                                                        data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -170,6 +179,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <img class="server-loader loader-show" id="tableLoaderShow" src="${pageLoader}" alt="Loading...."/>
                         </td>
                     </tr>
                 `;
@@ -282,7 +292,7 @@
 
         });
 
-        // Filter
+        // Attach File and Email Filter
         $("#start_date, #end_date, #select_attachment,#select_status").on('change', ()=>{
             
             $("#loaderShow").removeClass('error-hidden');
@@ -299,10 +309,125 @@
             fetch_all_user_email(query); 
         });
 
-        // Parent Row Click Handler
-        $(document).on('click', '.parent-row', function(){
+        // view button Click and Parent Row Handle
+        $(document).on('click', '#viewBtn', function(){
             var parentId = $(this).data('parent');
-            $(`.child-row[data-child='${parentId}']`).toggleClass('row-hidden');
+            $(`.child-row[data-child='${parentId}']`).toggle('slow').slide(600);
+            
+            $("#showCard").addClass('hidden');
+            $("#tableLoaderShow").removeClass('loader-show');
+            var time = null;
+            var timeOut = setTimeout(() => {
+                $("#showCard").removeClass('hidden');
+                $("#tableLoaderShow").addClass('loader-show');
+            }, 5000);
+            return () => {
+                clearTimeout(timeOut);
+            };
+        });
+        // Show Pdf,Excle,Csv logo in modal
+        $(document).on('click', '.attachment_file_link', function(e) {
+            e.preventDefault();
+
+            // Get the file source from a data attribute or an actual source
+            const fileSrc = $(this).data('file-src'); // Ensure this attribute is set on the element
+
+            if (!fileSrc) {
+                console.error("File source is undefined. Make sure 'data-file-src' attribute is set on the element.");
+                return; // Exit if fileSrc is undefined to avoid errors
+            }
+
+            const logoID = document.getElementById('logoFile');
+            const fileNameElement = document.getElementById('fileNam'); // Ensure this element exists in your HTML
+
+            // Check file extension and handle accordingly
+            const fileExtension = fileSrc.split('.').pop().toLowerCase();
+
+            // Set logo and file name based on file type
+            let logoPath = '';
+            let fileName = '';
+            if (fileExtension === 'pdf') {
+                logoPath = "{{ asset('backend_asset/main_asset/attachment-logo/pdf_logo.png') }}";
+                fileName = "PDF";
+            } else if (['xls', 'xlsx'].includes(fileExtension)) {
+                logoPath = "{{ asset('backend_asset/main_asset/attachment-logo/excel_logo.png') }}";
+                fileName = "Excel";
+            } else if (fileExtension === 'csv') {
+                logoPath = "{{ asset('backend_asset/main_asset/attachment-logo/csv_logo.jpg') }}";
+                fileName = "CSV";
+            } else if (fileExtension === 'docx') {
+                logoPath = "{{ asset('backend_asset/main_asset/attachment-logo/docx_logo.png') }}";
+                fileName = "Docx";
+            }
+
+            // Set logo source and file name if they are defined
+            if (logoPath && fileName) {
+                logoID.src = logoPath;
+                logoID.style.display = 'block';
+                
+                // Set file name if element exists
+                if (fileNameElement) {
+                    fileNameElement.innerText = fileName;
+                }
+            } else {
+                logoID.style.display = 'none';
+            }
+
+            // Show the modal
+            $('#fileModal').modal('show');
+        });
+        // Refresh Button
+        $(document).on('click', '#refreshIconBtn', function(){
+            $("#select_attachment").val("");
+            $("#select_status").val("");
+            $("#email_search").val("");
+            $("#allSelectBtn").prop('checked', false);
+            $('.show-btn').addClass('delete-btn-display');
+            fetch_all_user_email();
+            var time = null;
+            addAttributeOrClass([
+               {selector: '.refresh_rotate_icon', type: 'class', name: 'fa-spin'} 
+            ]);
+            // Remove fa-spin
+            var timeOut = setTimeout(() => {
+                removeAttributeOrClass([
+                    {selector: '.refresh_rotate_icon', type: 'class', name: 'fa-spin'} 
+                ]);
+            }, 1000);
+
+            return () => {
+                clearTimeout(timeOut);
+            };
+        });
+        // Select All Table Rows and Checkboxes
+        $(document).on('click', '#allSelectBtn', function() {
+            const isChecked = $(this).is(':checked');
+            $('.selectBtn').prop('checked', isChecked);
+            // Toggle background for all rows based on "Select All" checkbox state
+            if (isChecked) {
+                $('.select-row-background').addClass('table-row-select-bg');
+                // Show delete button
+                $('.show-btn').removeClass('delete-btn-display');
+            } else {
+                $('.select-row-background').removeClass('table-row-select-bg');
+                // Hide delete button
+                $('.show-btn').addClass('delete-btn-display');
+            }
+        });
+        // Update "Select All" checkbox based on individual selections
+        $(document).on('click', '#selectBtn', function() {
+            const isChecked = $(this).is(':checked');
+            
+            // Toggle row background based on checkbox state
+            if (isChecked) {
+                $(this).closest('.table-row').addClass('table-row-select-bg');
+                $('.delete_show_btn').closest('.show-btn').removeClass('delete-btn-display');
+            } else {
+                $(this).closest('.table-row').removeClass('table-row-select-bg');
+            }
+            // Update the "Select All" checkbox based on individual selections
+            const allChecked = $('.form-check-input[id="selectBtn"]').length === $('.form-check-input[id="selectBtn"]:checked').length;
+            $('#allSelectBtn').prop('checked', allChecked);
         });
     });
 </script>

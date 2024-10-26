@@ -14,7 +14,7 @@
             <div class="col-xl-1">
               <div class="btn-group">
                 <button type="button" class="btn btn-light btn-sm" data-bs-toggle="tooltip"  data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                  <input class="form-check-input" type="checkbox" value="" id="allSelectBtn">
+                  <input class="form-check-input" type="checkbox" id="allSelectBtn">
                 </button>
                 <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownButton">Select</button>
                 <ul class="dropdown-menu" id="themeMenuListBackground">
@@ -28,9 +28,9 @@
             <div class="col-xl-1">
               <button class="btn btn-light btn-sm" type="button" id="refreshIconBtn"
                 data-bs-toggle="tooltip"  data-bs-placement="top" title="Refresh" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                <i class="fa-solid fa-arrow-rotate-right"></i>
+                <i class="refresh_rotate_icon fa-solid fa-arrow-rotate-right"></i>
               </button>
-              <button class="btn btn-light btn-sm" type="button" id="deleteIconBtn"
+              <button class="btn btn-light btn-sm show-btn delete_show_btn delete-btn-display" type="button" id="deleteIconBtn"
                 data-bs-toggle="tooltip"  data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
                 <i class="fa-regular fa-trash-can"></i>
               </button>
