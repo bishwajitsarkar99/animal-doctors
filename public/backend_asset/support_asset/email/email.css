@@ -474,10 +474,15 @@ div#emailHeader {
 }
 p.company_name_area {
     font-family: var(--nav-font-family);
-    padding-top: 10px;
-    padding-bottom: 0px;
     font-size: 20px;
     font-weight: 600;
+    margin-bottom: 0px;
+}
+label#companyAddress {
+    font-size: 13px;
+}
+label#logo_area {
+    margin-top: 2px;
 }
 img.company_logo {
     width: 50px;
@@ -536,4 +541,7 @@ span.attachment_files {
     background-color: white;
     box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
     opacity: 1;
+}
+img#logoFile {
+    width: 70px;
 }

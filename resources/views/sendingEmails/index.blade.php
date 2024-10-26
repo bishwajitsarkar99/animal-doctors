@@ -123,6 +123,21 @@
 @include('sendingEmails.send_email_list')
 @include('sendingEmails.file-directory')
 @include('sendingEmails.image_show')
+<!-- Modal HTML Structure (place near the bottom of your page) -->
+<div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="fileModalLabel">View Attachment</h5>
+        <img class="attachment_file" src="{{ asset('backend_asset/main_asset/attachment-logo/pdf_logo.png') }}" alt="Attachment Image" id="logoFile" />
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalContent">
+        <!-- Content (image or iframe) will be dynamically inserted here -->
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/email/email.css">
@@ -273,5 +288,36 @@
       }
     });
   });
+</script>
+<script>
+  window.openFileModal = function(fileSrc) {
+    const modalContent = document.getElementById('modalContent');
+    const fileModal = new bootstrap.Modal(document.getElementById('fileModal'));
+
+    if (!modalContent) {
+      console.error("Modal content element with ID 'modalContent' was not found.");
+      return;
+    }
+
+    // Check file extension and handle accordingly
+    const fileExtension = fileSrc.split('.').pop().toLowerCase();
+    
+    if (fileExtension === 'pdf') {
+      // Inline display for PDF files
+      modalContent.innerHTML = `<iframe src="${fileSrc}" style="width:100%; height:80vh;" frameborder="0"></iframe>`;
+    } else if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
+      // Inline display for image files
+      modalContent.innerHTML = `<img src="${fileSrc}" alt="Attachment" style="width:100%; height:auto;">`;
+    } else if (['xls', 'xlsx', 'csv'].includes(fileExtension)) {
+      // Download link for Excel and CSV files
+      modalContent.innerHTML = `<p>This file type cannot be previewed. <a href="${fileSrc}" download>Click here to download ${fileSrc.split('/').pop()}</a></p>`;
+    } else {
+      // Fallback for unsupported file types
+      modalContent.innerHTML = `<p>Unsupported file type.</p>`;
+    }
+
+    // Show the modal
+    fileModal.show();
+  };
 </script>
 @endpush

@@ -2,6 +2,7 @@
 <script type="module">
     import { currentDate, getTimeDifference, activeTableRow, formatDate } from "/module/module-min-js/helper-function-min.js";
     const companyName = @json(setting('company_name'));
+    const companyAddress = @json(setting('company_address'));
     const companyLogo = "{{ asset('backend_asset/main_asset/img/' . setting('update_company_logo')) }}";
     
     $(document).ready(function(){
@@ -87,7 +88,7 @@
                     } else if (['pdf', 'xls', 'csv', 'docx'].includes(fileType)) {
                         // Display links for PDF, XLS, and CSV files   target="_blank"
                         return `<span><a href="javascript:void(0);" onclick="openFileModal('${relativePath}')" class="attachment_file_link"
-                            data-bs-toggle="tooltip"  data-bs-placement="top" title="Download" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                            data-bs-toggle="tooltip"  data-bs-placement="top" title="Export" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                             <i class="fa-solid fa-file-export" style="font-size:15px;"></i> ${fileName.split('/').pop()}
                             </a></span> `;
                     } else {
@@ -121,7 +122,7 @@
                             <span style="color:#007bff;font-size:10px;font-weight: 600;">${getTimeDifference(row.created_at)} ago</span>
                         </td>
                     </tr>
-                    <tr class="child-row detail-row table-row user-table-row row-hidden" data-child="${row.id}">
+                    <tr class="child-row detail-row table-row row-hidden" data-child="${row.id}">
                         <td colspan="14">
                             <div class="card detail-content" style="background-color:white;">
                                 <div class="row mt-1">
@@ -134,7 +135,8 @@
                                             </div>
                                             <div class="col-xl-10">
                                                 <p class="company_name_area">
-                                                    <label class="company_name" for="company_name" id="companyName">${companyName}</label>
+                                                    <label class="company_name" for="company_name" id="companyName">${companyName}</label><br>
+                                                    <label class="company_address" for="company_address" id="companyAddress">${companyAddress}</label>
                                                 </p>
                                             </div>
                                         </div>
@@ -179,27 +181,7 @@
             const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
             imageModal.show();
         };
-        window.openFileModal = function(fileSrc) {
-            // Attempt to locate the modal content element
-            const modalContent = document.getElementById('modalContent');
-
-            // Verify that modalContent exists
-            if (!modalContent) {
-                console.error("Modal content element with ID 'modalContent' was not found.");
-                return;
-            }
-            
-            // Set iframe for documents or image for images
-            if (['pdf', 'xls', 'csv', 'docx'].some(ext => fileSrc.toLowerCase().endsWith(ext))) {
-                modalContent.innerHTML = `<iframe src="${fileSrc}" style="width:100%; height:80vh;" frameborder="0"></iframe>`;
-            } else {
-                modalContent.innerHTML = `<img src="${fileSrc}" alt="Attachment" style="width:100%; height:auto;">`;
-            }
-
-            // Show the modal
-            const fileModal = new bootstrap.Modal(document.getElementById('fileModal'));
-            fileModal.show();
-        };
+        
         // Function to fetch all user email
         function fetch_all_user_email(query = '', url = null, perItem = null) {
             if (perItem === null) {
