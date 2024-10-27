@@ -3,16 +3,27 @@
   <div class="modal-dialog modal-dialog-scrollable modal-xl">
     <div class="modal-content">
       <div class="modal-header email_modal_header">
-        <h5 class="modal-title" id="staticBackdropLabel" style="color: #606060;"><i class="fa-regular fa-envelope"></i> Email List</h5>
+        <h5 class="modal-title" id="staticBackdropLabel" style="color: black;"><i class="fa-regular fa-envelope"></i> Email List</h5>
         <button type="button" class="btn-close btn-btn-sm clos_btn2" data-bs-dismiss="modal" aria-label="Close"
           data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body body_area">
+        <div class="modal fade" id="loader_email_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content small_modal loader_modal" style="border:none;" id="admin_modal_box">
+              <div class="modal-body" id="loader_modalBody">
+                <div class="">
+                  <img class="modal-loader" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="email-box-header">
           <div class="row">
             <div class="col-xl-1">
-              <div class="btn-group">
+              <div class="btn-group group_btn">
                 <button type="button" class="btn btn-light btn-sm" data-bs-toggle="tooltip"  data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                   <input class="form-check-input" type="checkbox" id="allSelectBtn">
                 </button>
@@ -26,14 +37,16 @@
               </div>
             </div>
             <div class="col-xl-1">
-              <button class="btn btn-light btn-sm" type="button" id="refreshIconBtn"
-                data-bs-toggle="tooltip"  data-bs-placement="top" title="Refresh" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                <i class="refresh_rotate_icon fa-solid fa-arrow-rotate-right"></i>
-              </button>
-              <button class="btn btn-light btn-sm show-btn delete_show_btn delete-btn-display" type="button" id="deleteIconBtn"
-                data-bs-toggle="tooltip"  data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
-                <i class="fa-regular fa-trash-can"></i>
-              </button>
+              <div class="group_btn">
+                <button class="btn btn-light btn-sm" type="button" id="refreshIconBtn"
+                  data-bs-toggle="tooltip"  data-bs-placement="top" title="Refresh" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                  <i class="refresh_rotate_icon fa-solid fa-arrow-rotate-right"></i>
+                </button>
+                <button class="btn btn-light btn-sm show-btn delete_show_btn delete-btn-display" type="button" id="deleteIconBtn"
+                  data-bs-toggle="tooltip"  data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
             </div>
             <div class="col-xl-8"></div>
             <div class="col-xl-2">
@@ -63,7 +76,7 @@
                 <option value="1">Old</option>
               </select>
             </div>
-            <div class="col-3">
+            <div class="col-3 margin_search">
               <input type="search" class="form-control form-control-sm email_search ps-1" name="user_to" placeholder="Email Search" id="email_search">
             </div>
           </div>

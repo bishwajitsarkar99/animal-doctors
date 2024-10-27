@@ -124,7 +124,7 @@
 @include('sendingEmails.file-directory')
 @include('sendingEmails.image_show')
 <!-- Modal HTML Structure (place near the bottom of your page) -->
-<div class="modal fade" id="fileModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="attachmentFileModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content image_preview">
       <div class="modal-header">
@@ -293,9 +293,9 @@
 </script>
 <script>
   // show modal for pdf,excle,csv,docx 
-  window.openFileModal = function(fileSrc) {
+  window.openAttachmentModal = function(fileSrc) {
     const modalContent = document.getElementById('modalContent');
-    const fileModal = new bootstrap.Modal(document.getElementById('fileModal'));
+    const attachmentFileModal = new bootstrap.Modal(document.getElementById('attachmentFileModal'));
 
     if (!modalContent) {
       console.error("Modal content element with ID 'modalContent' was not found.");
@@ -320,7 +320,7 @@
     }
 
     // Show the modal
-    fileModal.show();
+    attachmentFileModal.show().fadeIn(300).delay(300);
   };
 </script>
 @endpush

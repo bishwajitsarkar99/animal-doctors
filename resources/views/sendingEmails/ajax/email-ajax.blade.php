@@ -89,13 +89,13 @@
                         </span>`;
                     } else if (['pdf', 'xls', 'csv', 'docx'].includes(fileType)) {
                         // Display links for PDF, XLS, and CSV files   target="_blank"
-                        return `<span><a href="javascript:void(0);" onclick="openFileModal('${relativePath}')" class="attachment_file_link" data-file-src="${relativePath}"
+                        return `<span><a href="javascript:void(0);" onclick="openAttachmentModal('${relativePath}')" class="attachment_file_link_btn" data-file-src="${relativePath}"
                             data-bs-toggle="tooltip"  data-bs-placement="top" title="Export" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                             <i class="fa-solid fa-file-export" style="font-size:15px;"></i> ${fileName.split('/').pop()}
                             </a></span> `;
                     } else {
                         // Display other file types as a download link
-                        return `<a href="${relativePath}" download class="attachment_file_link"
+                        return `<a href="${relativePath}" download class="attachment_file_link_btn"
                         data-bs-toggle="tooltip"  data-bs-placement="top" title="Download" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>${fileName.split('/').pop()}</a>`;
                     }
                 }).join('');
@@ -326,7 +326,7 @@
             };
         });
         // Show Pdf,Excle,Csv logo in modal
-        $(document).on('click', '.attachment_file_link', function(e) {
+        $(document).on('click', '.attachment_file_link_btn', function(e) {
             e.preventDefault();
 
             // Get the file source from a data attribute or an actual source
@@ -374,7 +374,7 @@
             }
 
             // Show the modal
-            $('#fileModal').modal('show');
+            $('#attachmentFileModal').modal('show');
         });
         // Refresh Button
         $(document).on('click', '#refreshIconBtn', function(){
@@ -433,20 +433,41 @@
 </script>
 <script>
     $(document).ready(function(){
-        // Search modal
+        // Email Search modal
         $(document).on('click', '#email_search_page', function(e){
             e.preventDefault();
-            $("#emailSearchModal").modal('show');
+            $("#loader_email_modal").modal('show').fadeIn(300).delay(300);
+            $("#emailSearchModal").modal('show').fadeIn(300).delay(300);
+
+            // addAttributeOrClass([
+            //     {selector: '#pro_image, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
+            //     {selector: '#com_address', type: 'class', name: 'address-skeleton'},
+            //     {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
+            // ]);
+
+            var time = null;
+            time = setTimeout(() => {
+                $("#loader_email_modal").modal('hide');
+                // removeAttributeOrClass([
+                //     {selector: '#pro_image, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
+                //     {selector: '#com_address', type: 'class', name: 'address-skeleton'},
+                //     {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
+                // ]);
+            }, 1000);
+
+            return ()=>{
+                clearTimeout(time);
+            }
         });
-        // Send modal
+        // Send Email List modal
         $(document).on('click', '#email_send_page', function(e){
             e.preventDefault();
-            $("#emailSendModal").modal('show');
+            $("#emailSendModal").modal('show').fadeIn(300).delay(300);
         });
-        // Directory modal
+        // File Directory modal
         $(document).on('click', '#file_directory_page', function(e){
             e.preventDefault();
-            $("#fileDirectoryModal").modal('show');
+            $("#fileDirectoryModal").modal('show').fadeIn(300).delay(300);
         });
         // Manually initialize the tooltip for the dropdown button
         // var dropdownButton = document.getElementById('dropdownButton');

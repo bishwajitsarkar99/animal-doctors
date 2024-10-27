@@ -211,10 +211,16 @@ a#email_search_page:hover,a#email_send_page:hover,a#file_directory_page:hover{
     opacity: 1;
 }
 .email_modal_header,.email_modal_footer {
-    background-color: white;
+    background: transparent;
+    background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);
     box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
     height: 2.2em;
     /* border-bottom: double silver; */
+}
+.body_area{
+    background: transparent;
+    background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
 }
 .email-box-header{
     background-color: white;
@@ -224,7 +230,12 @@ a#email_search_page:hover,a#email_send_page:hover,a#file_directory_page:hover{
     background-color: #0d6efd !important;
     border-color: #0d6efd !important;
 }
-input#allSelectBtn,input#selectBtn{
+input#allSelectBtn{
+    box-shadow: none;
+    cursor: pointer;
+    margin-top: 1px;
+}
+input#selectBtn{
     box-shadow: none;
     cursor: pointer;
 }
@@ -325,19 +336,28 @@ input#start_date:focus,input#end_date:focus,input#email_search:focus,select#sele
 }
 select#perItemControl {
     outline: none;
-    color: #606060;
+    color: black;
     font-weight: 600;
     cursor: pointer;
     background-color: transparent;
     background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);
-    border: 1px solid #b7c9e5;
-    border-radius: 3px;
+    /* background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver); */
+    /* border: 1px solid #b7c9e5; */
+    border-radius: 5px;
     width: 50px;
     height: 22px;
     font-size: 14px;
+    background-color: transparent;
+    border: 1px solid lightcyan;
+}
+.margin_search{
+    margin-left: 22px;
+}
+.group_btn {
+    margin-top: -3px;
 }
 label.tot-search {
-    color: #606060;
+    color: black;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.3px;
@@ -440,7 +460,7 @@ span#email_month {
 }
 .bg-email {
     opacity: 1 !important;
-    background-color: #6697ffdb !important;
+    background-color: #0056b3 !important;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
@@ -512,7 +532,7 @@ img.company_logo {
     transition: border-color 0.3s ease, background-color 0.3s ease;
     opacity: 1;
 }
-.attachment_file_link{
+.attachment_file_link_btn{
     margin-left: 10px;
     border: 2px solid rgb(252, 252, 252);
     padding: 5px 5px;
@@ -522,7 +542,7 @@ img.company_logo {
     cursor: pointer;
     text-decoration: none;
 }
-.attachment_file_link:hover{
+.attachment_file_link_btn:hover{
     background-image: var(--table-row-hover);
     background: transparent;
     border: 2px dotted lightgray;
