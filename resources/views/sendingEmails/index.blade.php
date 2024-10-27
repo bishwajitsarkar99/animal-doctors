@@ -16,7 +16,7 @@
           </p>
           <div class="email-send-box-list">
             @if(auth()->user()->role == 1)
-              <a type="button" href="#" class="btn btn-sm" id="email_search_page">
+              <a type="button" href="#" class="btn btn-sm email_search_page" id="email_search_page">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <span class="btn-text email_search_page"> Email-Search</span>
               </a><br>
@@ -123,19 +123,33 @@
 @include('sendingEmails.send_email_list')
 @include('sendingEmails.file-directory')
 @include('sendingEmails.image_show')
-<!-- Modal HTML Structure (place near the bottom of your page) -->
+<!-- Attachment File Modal Show (pdf,excle,csv) -->
 <div class="modal fade" id="attachmentFileModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content image_preview">
       <div class="modal-header">
         <h5 class="modal-title attach_header" id="fileModalLabel"><span id="fileNam"></span> Attachment File</h5>
-        <img class="logo_attachment_file" src="" alt="Attachment Image" id="logoFile" />
-        <button type="button" class="btn-close btn-btn-sm clos_btn2" data-bs-dismiss="modal" aria-label="Close"
+        <span class="logo_skeletone">
+          <img class="logo_attachment_file" src="" alt="Attachment Image" id="logoFile" />
+        </span>
+        <button type="button" class="btn-close btn-btn-sm clos_btn2 atth_close" data-bs-dismiss="modal" aria-label="Close"
           data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
         </button>
       </div>
       <div class="modal-body" id="modalContent">
         <!-- Content (image or iframe) will be dynamically inserted here -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Loader -->
+<div class="modal fade" id="loader_email_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content small_modal loader_modal" style="border:none;" id="admin_modal_box">
+      <div class="modal-body" id="loader_modalBody">
+        <div class="">
+          <img class="modal-loader" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+        </div> 
       </div>
     </div>
   </div>
@@ -307,20 +321,20 @@
     
     if (fileExtension === 'pdf') {
       // Inline display for PDF files
-      modalContent.innerHTML = `<iframe src="${fileSrc}" style="width:100%; height:80vh;" frameborder="0"></iframe>`;
+      modalContent.innerHTML = `<iframe class="atth_fl" src="${fileSrc}" style="width:100%; height:80vh;" frameborder="0"></iframe>`;
     } else if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
       // Inline display for image files
-      modalContent.innerHTML = `<img src="${fileSrc}" alt="Attachment" style="width:100%; height:auto;">`;
+      modalContent.innerHTML = `<img class="atth_fl2" src="${fileSrc}" alt="Attachment" style="width:100%; height:auto;">`;
     } else if (['xls', 'xlsx', 'csv', 'docx'].includes(fileExtension)) {
       // Download link for Excel and CSV files
-      modalContent.innerHTML = `<p class="modal_text">This file cannot be previewed : <a class="downloadBtn" href="${fileSrc}" download>Click here to download - ${fileSrc.split('/').pop()}</a></p>`;
+      modalContent.innerHTML = `<p class="modal_text"><span class="attch_text">This file cannot be previewed :</span> <a class="downloadBtn" href="${fileSrc}" download>Click here to download - ${fileSrc.split('/').pop()}</a></p>`;
     } else {
       // Fallback for unsupported file types
       modalContent.innerHTML = `<p>Unsupported file type.</p>`;
     }
 
     // Show the modal
-    attachmentFileModal.show().fadeIn(300).delay(300);
+    attachmentFileModal.show();
   };
 </script>
 @endpush

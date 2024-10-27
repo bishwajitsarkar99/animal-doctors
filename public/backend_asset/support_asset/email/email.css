@@ -5,6 +5,12 @@
     --nav-button-color:white;
     --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, transparent 50%, rgba(0, 0, 0, 0.05) 100%);
     --row-hover-border:dodgerblue;
+    --dot-skeletone-bg:linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%);
+    --animation: css-skeleton-loading;
+    --animation-duration:1.4s;
+    --animation-background-size:400% 100%;
+    --animation-background-position-0:100% 50%;
+    --animation-background-position-100:0 50%;
 }
 .note-editor {
     background-color: #f9f9f9;
@@ -473,9 +479,12 @@ span#email_month {
 .loader-show,.hidden{
     display: none;
 }
-.table-responsive, .datatable-wrapper .datatable-container {
+.table-responsive{
     overflow-x: auto;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    max-height: 400px;
+
 }
 .card.detail-content {
     padding: 5px 13px;
@@ -618,4 +627,156 @@ a.downloadBtn:hover{
 }
 .table-row-select-bg{
     background: linear-gradient(5deg, #cdcdcd61, transparent 3%, #e1e1e1, #e3e3e399);
+}
+img#tableLoaderShow {
+    width: 40px;
+}
+.loader__box {
+    text-align: center;
+}
+.text-skeletone,.tabskeletone,.skeletone,.email-skeletone,.btn-skeletone,.svg_skeletone,.link-btn-skeletone,.logo-skeletone{
+    position: relative;
+    background-color: rgb(0, 0, 0, 0.06);
+}
+.text-skeletone::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 5px;
+}
+@keyframes skeleton {
+    0% {
+        background-position: -100% 0;
+    }
+    
+    100% {
+        background-position: 100% 0;
+    }
+}
+.tabskeletone::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100.4%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 3px;
+    margin-top: -1px;
+    margin-left: -2px;
+}
+.skeletone::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 5px;
+    margin-top: 2px;
+    margin-left: 2px;
+}
+.email-skeletone::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 5px;
+    margin-top: 2px;
+    margin-left: 0px;
+}
+.btn-skeletone::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 105%;
+    height: 115%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 5px;
+    margin-top: -2px;
+    margin-left: -2px;
+}
+.link-btn-skeletone::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 105%;
+    height: 115%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 15px;
+    margin-top: -2px;
+    margin-left: -2px;
+}
+.logo-skeletone::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 105%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 5px;
+    margin-top: -2px;
+    margin-left: 0px;
+}
+.svg_skeletone::before {
+    content: "";
+    position: absolute;
+    box-sizing: border-box;
+    justify-content: space-between;
+    left: 1;
+    z-index: 2;
+    min-height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    background: var(--dot-skeletone-bg);
+    background-size: var(--animation-background-size);
+    animation-name: var(--animation);
+    animation-duration: var(--animation-duration);
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+}
+@keyframes css-skeleton-loading {
+    0% {
+        background-position: var(--animation-background-position-0);
+    }
+
+    100% {
+        background-position: var(--animation-background-position-100);
+    }
+}
+img#modalImage {
+    width: 100%;
+    height: 100%;
 }

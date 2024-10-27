@@ -3,23 +3,12 @@
   <div class="modal-dialog modal-dialog-scrollable modal-xl">
     <div class="modal-content">
       <div class="modal-header email_modal_header">
-        <h5 class="modal-title" id="staticBackdropLabel" style="color: black;"><i class="fa-regular fa-envelope"></i> Email List</h5>
+        <h5 class="modal-title selection" id="staticBackdropLabel" style="color: black;"><i class="fa-regular fa-envelope"></i> Email List</h5>
         <button type="button" class="btn-close btn-btn-sm clos_btn2" data-bs-dismiss="modal" aria-label="Close"
           data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
         </button>
       </div>
       <div class="modal-body body_area">
-        <div class="modal fade" id="loader_email_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-sm">
-            <div class="modal-content small_modal loader_modal" style="border:none;" id="admin_modal_box">
-              <div class="modal-body" id="loader_modalBody">
-                <div class="">
-                  <img class="modal-loader" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
-                </div> 
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="email-box-header">
           <div class="row">
             <div class="col-xl-1">
@@ -37,7 +26,7 @@
               </div>
             </div>
             <div class="col-xl-1">
-              <div class="group_btn">
+              <div class="group_btn next_btn">
                 <button class="btn btn-light btn-sm" type="button" id="refreshIconBtn"
                   data-bs-toggle="tooltip"  data-bs-placement="top" title="Refresh" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                   <i class="refresh_rotate_icon fa-solid fa-arrow-rotate-right"></i>
@@ -57,39 +46,49 @@
         <div class="email-box-body">
           <div class="row mt-2">
             <div class="col-2">
-              <input type="text" class="form-control form-control-sm start_date ps-1" name="start_date" placeholder="Start Date" autocomplete="off" id="start_date">
+              <span class="input1">
+                <input type="text" class="form-control form-control-sm start_date ps-1" name="start_date" placeholder="Start Date" autocomplete="off" id="start_date">
+              </span>
             </div>
             <div class="col-2">
-              <input type="text" class="form-control form-control-sm end_date ps-1" name="end_date" placeholder="End Date" autocomplete="off" id="end_date">
+              <span class="input2">
+                <input type="text" class="form-control form-control-sm end_date ps-1" name="end_date" placeholder="End Date" autocomplete="off" id="end_date">
+              </span>
             </div>
             <div class="col-3">
-              <select type="text" class="form-control form-control-sm" name="attachment_type" id="select_attachment">
-                <option value="">Select Attach File</option>
-                <option value="attachments">Management Report</option>
-                <option value="user_message">User Message</option>
-              </select>
+              <span class="input3">
+                <select type="text" class="form-control form-control-sm" name="attachment_type" id="select_attachment">
+                  <option value="">Select Attach File</option>
+                  <option value="attachments">Management Report</option>
+                  <option value="user_message">User Message</option>
+                </select>
+              </span>
             </div>
             <div class="col-xl-2">
-              <select type="text" class="form-control form-control-sm" name="status" id="select_status">
-                <option value="">Select Email</option>
-                <option value="0">New</option>
-                <option value="1">Old</option>
-              </select>
+              <span class="input4">
+                <select type="text" class="form-control form-control-sm" name="status" id="select_status">
+                  <option value="">Select Email</option>
+                  <option value="0">New</option>
+                  <option value="1">Old</option>
+                </select>
+              </span>
             </div>
             <div class="col-3 margin_search">
-              <input type="search" class="form-control form-control-sm email_search ps-1" name="user_to" placeholder="Email Search" id="email_search">
+              <span class="input5">
+                <input type="search" class="form-control form-control-sm email_search ps-1" name="user_to" placeholder="Email Search" id="email_search">
+              </span>
             </div>
           </div>
         <div class="table-responsive">
-          <table class="table align-middle bg-transparent ord_table center border-1 skeleton mt-2">
-            <tbody class="bg-transparent skeleton" id="email_data_table">
+          <table class="table align-middle bg-transparent ord_table center border-1 mt-2">
+            <tbody class="bg-transparent" id="email_data_table">
 
             </tbody>
           </table>
         </div>
         <div class="row table_last_row">
-          <div class="skeleton col-1 pt-2">
-            <div class="custom-select skeleton">
+          <div class="col-1 pt-2">
+            <div class="custom-select">
               <select class="ps-1 skeleton" id="perItemControl" data-bs-toggle="tooltip"  data-bs-placement="top" title="Per-Item" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <option class="skeleton" selected>10</option>
                 <option class="skeleton">20</option>
@@ -100,20 +99,20 @@
             </div>
           </div>
           <div class="col-3">
-            <span class="tot_summ skeleton" id="num_plate">
+            <span class="tot_summ" id="num_plate">
               <label class="tot-search skeleton" for="tot_cagt">Current Email :</label>
               <label class="badge rounded-pill bg-primary" for="total_user_email skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_user_email"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
             </span>
-            <div class="progress " style="height:0.3rem;"> <!-- progress-bar-skeleton -->
+            <div class="progress" style="height:0.3rem;"> <!-- progress-bar-skeleton -->
               <div class="progress-bar progress-bar-striped bg-email progress-bar-animated" role="progressbar" aria-valuenow="{{ $user_email_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $user_email_percentage }}%;">
                 {{ round($user_email_percentage, 2) }}%
               </div>
             </div>
           </div>
           <div class="col-8">
-              <div class="pagination skeleton" id="user_email_get_data_table_paginate">
+            <div class="pagination" id="user_email_get_data_table_paginate">
 
-              </div>
+            </div>
           </div>
         </div>
         </div>

@@ -1,7 +1,6 @@
 <script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
 <script type="module">
     import { currentDate, getTimeDifference, activeTableRow, formatDate } from "/module/module-min-js/helper-function-min.js";
-    import { addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     const companyName = @json(setting('company_name'));
     const companyAddress = @json(setting('company_address'));
     const companyLogo = "{{ asset('backend_asset/main_asset/img/' . setting('update_company_logo')) }}";
@@ -89,7 +88,7 @@
                         </span>`;
                     } else if (['pdf', 'xls', 'csv', 'docx'].includes(fileType)) {
                         // Display links for PDF, XLS, and CSV files   target="_blank"
-                        return `<span><a href="javascript:void(0);" onclick="openAttachmentModal('${relativePath}')" class="attachment_file_link_btn" data-file-src="${relativePath}"
+                        return `<span><a href="javascript:void(0);" onclick="openAttachmentModal('${relativePath}')" class="attachment_file_link_btn" id="attfile_link_btn" data-file-src="${relativePath}"
                             data-bs-toggle="tooltip"  data-bs-placement="top" title="Export" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                             <i class="fa-solid fa-file-export" style="font-size:15px;"></i> ${fileName.split('/').pop()}
                             </a></span> `;
@@ -126,7 +125,7 @@
                     </tr>
                     <tr class="child-row detail-row table-row row-hidden" data-child="${row.id}">
                         <td colspan="14">
-                            <div class="card detail-content" id="showCard" style="background-color:white;">
+                            <div class="card detail-content" style="background-color:white;">
                                 <div class="row mt-1">
                                     <div class="email_header" id="emailHeader">
                                         <div class="row">
@@ -179,7 +178,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <img class="server-loader loader-show" id="tableLoaderShow" src="${pageLoader}" alt="Loading...."/>
                         </td>
                     </tr>
                 `;
@@ -312,18 +310,7 @@
         // view button Click and Parent Row Handle
         $(document).on('click', '#viewBtn', function(){
             var parentId = $(this).data('parent');
-            $(`.child-row[data-child='${parentId}']`).toggle('slow').slide(600);
-            
-            $("#showCard").addClass('hidden');
-            $("#tableLoaderShow").removeClass('loader-show');
-            var time = null;
-            var timeOut = setTimeout(() => {
-                $("#showCard").removeClass('hidden');
-                $("#tableLoaderShow").addClass('loader-show');
-            }, 5000);
-            return () => {
-                clearTimeout(timeOut);
-            };
+            $(`.child-row[data-child='${parentId}']`).toggle('slow').delay(300);
         });
         // Show Pdf,Excle,Csv logo in modal
         $(document).on('click', '.attachment_file_link_btn', function(e) {
@@ -431,28 +418,82 @@
         });
     });
 </script>
-<script>
+<script type="module">
+    import { addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     $(document).ready(function(){
         // Email Search modal
         $(document).on('click', '#email_search_page', function(e){
             e.preventDefault();
-            $("#loader_email_modal").modal('show').fadeIn(300).delay(300);
             $("#emailSearchModal").modal('show').fadeIn(300).delay(300);
+            $("#loader_email_modal").modal('show').fadeIn(300).delay(300);
 
-            // addAttributeOrClass([
-            //     {selector: '#pro_image, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
-            //     {selector: '#com_address', type: 'class', name: 'address-skeleton'},
-            //     {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
-            // ]);
+            addAttributeOrClass([
+                {selector: '.selection,.clos_btn2 ,.group_btn,.current_month,.input1,.input2,.input3,.input4,.input5,.custom-select,#user_email_get_data_table_paginate', type: 'class', name: 'text-skeletone'},
+                {selector: '.next_btn', type: 'class', name: 'skeletone'},
+                {selector: '#email_data_table', type: 'class', name: 'tabskeletone'},
+                {selector: '.tot_summ', type: 'class', name: 'email-skeletone'},
+                {selector: '#cate_delete5', type: 'class', name: 'btn-skeletone'},
+            ]);
 
             var time = null;
             time = setTimeout(() => {
                 $("#loader_email_modal").modal('hide');
-                // removeAttributeOrClass([
-                //     {selector: '#pro_image, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
-                //     {selector: '#com_address', type: 'class', name: 'address-skeleton'},
-                //     {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
-                // ]);
+                removeAttributeOrClass([
+                    {selector: '.selection,.clos_btn2 ,.group_btn,.current_month,.input1,.input2,.input3,.input4,.input5,.custom-select,#user_email_get_data_table_paginate', type: 'class', name: 'text-skeletone'},
+                    {selector: '.next_btn', type: 'class', name: 'skeletone'},
+                    {selector: '#email_data_table', type: 'class', name: 'tabskeletone'},
+                    {selector: '.tot_summ', type: 'class', name: 'email-skeletone'},
+                    {selector: '#cate_delete5', type: 'class', name: 'btn-skeletone'},
+                ]);
+            }, 1000);
+
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
+        // image modal skeletone
+        $(document).on('click', '.attachment_file', function(){
+            addAttributeOrClass([
+                {selector: '.svg__doted', type: 'class', name: 'svg_skeletone'},
+                {selector: '#showAttImage', type: 'class', name: 'hidden'},
+                {selector: '.img_title, .img_close', type: 'class', name: 'text-skeletone'},
+            ]);
+            removeAttributeOrClass([
+                {selector: '#imgSkeltone', type: 'class', name: 'hidden'},
+            ]);
+            var time = null;
+            time = setTimeout(() => {
+                removeAttributeOrClass([
+                    {selector: '.svg__doted', type: 'class', name: 'svg_skeletone'},
+                    {selector: '#showAttImage', type: 'class', name: 'hidden'},
+                    {selector: '.img_title, .img_close', type: 'class', name: 'text-skeletone'},
+                ]);
+                addAttributeOrClass([
+                    {selector: '#imgSkeltone', type: 'class', name: 'hidden'},
+                ]);
+            }, 1000);
+
+            return ()=>{
+                clearTimeout(time);
+            }
+
+        });
+        // file modal skeletone
+        $(document).on('click', '#attfile_link_btn', function(){
+            addAttributeOrClass([
+                {selector: '.attach_header', type: 'class', name: 'text-skeletone'},
+                {selector: '.atth_close, .attch_text,.atth_fl,.atth_fl2', type: 'class', name: 'text-skeletone'},
+                {selector: '.logo_skeletone', type: 'class', name: 'logo-skeletone'},
+                {selector: '.downloadBtn', type: 'class', name: 'link-btn-skeletone'},
+            ]);
+            var time = null;
+            time = setTimeout(() => {
+                removeAttributeOrClass([
+                    {selector: '.attach_header', type: 'class', name: 'text-skeletone'},
+                    {selector: '.atth_close, .attch_text,.atth_fl,.atth_fl2', type: 'class', name: 'text-skeletone'},
+                    {selector: '.logo_skeletone', type: 'class', name: 'logo-skeletone'},
+                    {selector: '.downloadBtn', type: 'class', name: 'link-btn-skeletone'},
+                ]);
             }, 1000);
 
             return ()=>{
@@ -469,15 +510,5 @@
             e.preventDefault();
             $("#fileDirectoryModal").modal('show').fadeIn(300).delay(300);
         });
-        // Manually initialize the tooltip for the dropdown button
-        // var dropdownButton = document.getElementById('dropdownButton');
-        // var dropdownTooltip = new bootstrap.Tooltip(dropdownButton, {
-        //     title: "Select",
-        //     placement: "top",
-        //     delay: { show: 100, hide: 100 },
-        //     html: true,
-        //     boundary: "window",
-        //     template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'
-        // });
     });
 </script>
