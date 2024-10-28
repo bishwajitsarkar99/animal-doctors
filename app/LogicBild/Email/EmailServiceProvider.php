@@ -145,7 +145,6 @@ class EmailServiceProvider
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
         $user_to = $request->input('user_to');
-
         // Initialize month and year arrays
         $months = [];
         $years = [];
@@ -181,6 +180,7 @@ class EmailServiceProvider
         if ($user_to) {
             $query->where('user_to', 'LIKE', '%' . $user_to . '%');
         }
+        
         if ($status !== null) {
             $query->where('status', $status);
         }

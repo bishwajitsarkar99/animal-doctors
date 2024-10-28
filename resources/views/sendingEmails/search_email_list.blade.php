@@ -18,10 +18,10 @@
                 </button>
                 <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownButton">Select</button>
                 <ul class="dropdown-menu" id="themeMenuListBackground">
-                  <li><a class="dropdown-item" href="#">All</a></li>
-                  <li><a class="dropdown-item" href="#">None</a></li>
-                  <li><a class="dropdown-item" href="#">Read</a></li>
-                  <li><a class="dropdown-item" href="#">Unread</a></li>
+                  <li><a type="button" class="dropdown-item" href="#" id="selectButton">All</a></li>
+                  <li><a type="button" class="dropdown-item" href="#" id="noneButton">None</a></li>
+                  <li><a type="button" class="dropdown-item" href="#" data-status="1" id="readButton">Read</a></li>
+                  <li><a type="button" class="dropdown-item" href="#" id="unreadButton">Unread</a></li>
                 </ul>
               </div>
             </div>

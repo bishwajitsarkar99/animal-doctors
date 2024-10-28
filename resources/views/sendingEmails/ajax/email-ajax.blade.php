@@ -1,6 +1,7 @@
 <script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
 <script type="module">
     import { currentDate, getTimeDifference, activeTableRow, formatDate } from "/module/module-min-js/helper-function-min.js";
+    import { addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     const companyName = @json(setting('company_name'));
     const companyAddress = @json(setting('company_address'));
     const companyLogo = "{{ asset('backend_asset/main_asset/img/' . setting('update_company_logo')) }}";
@@ -293,15 +294,20 @@
         // Attach File and Email Filter
         $("#start_date, #end_date, #select_attachment,#select_status").on('change', ()=>{
             
-            $("#loaderShow").removeClass('error-hidden');
-            $(".inventory_permission_data_table").addClass('error-hidden'); 
+            // $("#loaderShow").removeClass('error-hidden');
+            // $(".inventory_permission_data_table").addClass('error-hidden'); 
             
-            setTimeout(() => {
-                $(".inventory_permission_data_table").removeClass('error-hidden'); 
-                $("#loaderShow").addClass('error-hidden');
-            }, 500);
+            // setTimeout(() => {
+            //     $(".inventory_permission_data_table").removeClass('error-hidden'); 
+            //     $("#loaderShow").addClass('error-hidden');
+            // }, 500);
             fetch_all_user_email(); 
         });
+        // Read Mail Filter
+        // $(document).on('click', '#readButton', function(){
+        //     var readMail = $(this).val();
+        //     fetch_all_user_email(); 
+        // });
         $("#email_search").on('keyup', function(){
             var query = $(this).val();
             fetch_all_user_email(query); 
@@ -400,6 +406,30 @@
                 // Hide delete button
                 $('.show-btn').addClass('delete-btn-display');
             }
+        });
+        // From Dropdown Table All Rows Select selectButton 
+        $(document).on('click', '#selectButton', function(event){
+             // Set all checkboxes to checked
+            $('.selectBtn').prop('checked', true);
+            // Add background to all selected rows
+            $('.select-row-background').addClass('table-row-select-bg');
+            // Show delete button
+            $('.show-btn').removeClass('delete-btn-display');
+            // Prevent default link behavior
+            event.preventDefault();
+
+        });
+        // From Dropdown Table All Rows Unselect noneButton 
+        $(document).on('click', '#noneButton', function(event){
+             // Set all checkboxes to checked
+            $('.selectBtn').prop('checked', false);
+            // Add background to all selected rows
+            $('.select-row-background').removeClass('table-row-select-bg');
+            // Show delete button
+            $('.show-btn').addClass('delete-btn-display');
+            // Prevent default link behavior
+            event.preventDefault();
+
         });
         // Update "Select All" checkbox based on individual selections
         $(document).on('click', '#selectBtn', function() {
