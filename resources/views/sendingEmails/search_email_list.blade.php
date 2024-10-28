@@ -21,7 +21,7 @@
                   <li><a type="button" class="dropdown-item" href="#" id="selectButton">All</a></li>
                   <li><a type="button" class="dropdown-item" href="#" id="noneButton">None</a></li>
                   <li><a type="button" class="dropdown-item" href="#" data-status="1" id="readButton">Read</a></li>
-                  <li><a type="button" class="dropdown-item" href="#" id="unreadButton">Unread</a></li>
+                  <li><a type="button" class="dropdown-item" href="#" data-status="0" id="unreadButton">Unread</a></li>
                 </ul>
               </div>
             </div>
@@ -58,9 +58,10 @@
             <div class="col-3">
               <span class="input3">
                 <select type="text" class="form-control form-control-sm" name="attachment_type" id="select_attachment">
-                  <option value="">Select Attach File</option>
+                  <option value="">Select Category</option>
                   <option value="attachments">Management Report</option>
                   <option value="user_message">User Message</option>
+                  <option value="other">Others</option>
                 </select>
               </span>
             </div>

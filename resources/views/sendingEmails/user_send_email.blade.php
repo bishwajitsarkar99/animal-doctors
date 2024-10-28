@@ -22,8 +22,8 @@
                             </span>
                         </th>
                         <th style="text-align:left;">
-                            <h2 style="margin-left: 0px;margin-bottom: 0px;">{{setting('company_name')}}</h2><br>
-                            <p>{{setting('company_address')}}</p>
+                            <h2 style="margin-left: 0px;margin-bottom: 0px;margin-top: 5px;">{{setting('company_name')}}</h2><br>
+                            <p style="margin-top:-10px;">{{setting('company_address')}}</p>
                         </th>  
                     </tr>
                 </thead>

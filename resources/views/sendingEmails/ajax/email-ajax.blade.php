@@ -74,6 +74,8 @@
                 }else if(row.attachment_type === 'user_message'){
                     attachmentType = 'user_message';
                     attachmentText = 'User Message File';
+                }else{
+                    attachmentText = 'N/A';
                 }
                 
                 const attachments = JSON.parse(row.email_attachments || '[]');
@@ -202,7 +204,7 @@
             const attachment_type = $("#select_attachment").val();
             const status = $("#select_status").val();
             const user_to = $("#email_search").val();
-            
+
             let current_url = url ? url : `{{ route('email.fetch') }}?per_item=${perItem}`;
 
             $.ajax({
@@ -304,10 +306,16 @@
             fetch_all_user_email(); 
         });
         // Read Mail Filter
-        // $(document).on('click', '#readButton', function(){
-        //     var readMail = $(this).val();
-        //     fetch_all_user_email(); 
-        // });
+        $(document).on("click", "#readButton", function() {
+            const status = $(this).data("status");
+            fetch_all_user_email('',status);
+        });
+        // Unread Mail Filter
+        $(document).on("click", "#unreadButton", function() {
+            const status = $(this).data("status");
+            fetch_all_user_email('',status);
+        });
+        // Live Search
         $("#email_search").on('keyup', function(){
             var query = $(this).val();
             fetch_all_user_email(query); 

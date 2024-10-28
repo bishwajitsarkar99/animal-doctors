@@ -21,10 +21,12 @@ class CreateUserEmailsTable extends Migration
             $table->string('subject');
             $table->longText('main_content')->nullable();
             $table->longText('email_attachments')->nullable();
-            $table->string('attachment_type')->nullable();
+            $table->string('attachment_type')->default('other');
             $table->string('sender_email');
             $table->integer('sender_user');
-            $table->tinyInteger('status')->default('0');
+            $table->tinyInteger('status')->nullable();
+            $table->tinyInteger('read_mail')->default('0');
+            $table->tinyInteger('unread_mail')->default('1');
             $table->timestamps();
         });
     }

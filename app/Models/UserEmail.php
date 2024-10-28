@@ -21,6 +21,8 @@ class UserEmail extends Model
         'sender_email',
         'sender_user',
         'status',
+        'read_mail',
+        'unread_mail',
     ];
 
     public function roles()

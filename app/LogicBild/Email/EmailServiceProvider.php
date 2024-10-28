@@ -22,18 +22,21 @@ class EmailServiceProvider
     */ 
     public function viewEmailTemplate(Request $request)
     {
-        $emails = User::where('status', 0)->pluck('email');
+        // Total User
         $userEmails = User::count();
+        // Toal User Email
         $total_emails = UserEmail::count();
         // Calculate the percentage of total users
         $user_email_percentage = $total_emails > 0 ? ($total_emails / $userEmails) * 100 : 0;
 
-        if ($request->expectsJson()){
-            return response()->json([
-                'emails' => $emails
-            ]);
-        }
-        return view('sendingEmails.index', compact('user_email_percentage'));
+        // $emails = User::where('status', 0)->pluck('email');
+
+        // if ($request->expectsJson()){
+        //     return response()->json([
+        //         'emails' => $emails
+        //     ]);
+        // }
+        return view('sendingEmails.index', compact('user_email_percentage', 'total_emails'));
     }
     /**
      * Handle Send Email
@@ -46,7 +49,6 @@ class EmailServiceProvider
             'user_bcc' => 'nullable|string',
             'subject' => 'required|string',
             'main_content' => 'nullable|string',
-            'attachment_type' => 'nullable|string',
             'email_attachments.*' => 'nullable|file',
         ]);
 
@@ -78,14 +80,27 @@ class EmailServiceProvider
         // Handle file attachments
         if ($request->hasFile('email_attachments')) {
             $attachmentFolder = $request->attachment_type == 'attachments' ? 'attachments' : 'user_message';
-    
+        
             foreach ($request->file('email_attachments') as $file) {
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs($attachmentFolder, $filename, 'public');
-                $attachments[] = [
-                    'file' => storage_path('app/public/' . $filePath),
-                    'options' => [],
-                ];
+                $originalFilename = $file->getClientOriginalName();
+                $filename = $originalFilename;
+                $filePath = $attachmentFolder . '/' . $filename;
+        
+                // Check if the file already exists
+                if (Storage::disk('public')->exists($filePath)) {
+                    // If file exists, add it to attachments without re-uploading
+                    $attachments[] = [
+                        'file' => storage_path('app/public/' . $filePath),
+                        'options' => [],
+                    ];
+                } else {
+                    // Store the file with the final unique filename if it doesn't already exist
+                    $storedFilePath = $file->storeAs($attachmentFolder, $filename, 'public');
+                    $attachments[] = [
+                        'file' => storage_path('app/public/' . $storedFilePath),
+                        'options' => [],
+                    ];
+                }
             }
         }
 
@@ -112,7 +127,7 @@ class EmailServiceProvider
             'subject' => $request->subject,
             'main_content' => $content,
             'email_attachments' => json_encode($attachments),
-            'attachment_type' => $request->attachment_type,
+            'attachment_type' => $request->attachment_type ?? 'other',
             'sender_email' => Auth::user()->email,
             'sender_user' => Auth::user()->id,
             'status' => $request->status ? '1' : '0',
@@ -133,7 +148,7 @@ class EmailServiceProvider
         }
     }
     /**
-     * Handle Fetch Email
+     * Handle Super Admin Fetch Email
     */
     public function fetchUserEmail(Request $request)
     {

@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-md-4">
         <div class="card-body focus-color user_details cd skeleton">
-          <p class="email_list">Email Send List</p>
+          <p class="email_list"><span style="font-size:20px;"><i class="fa-regular fa-envelope"></i></span> Email</p>
           <p style="text-align:center;">
             <span><img class="img-profile rounded-circle" style="margin-top: 0px;" id="output" src="/image/{{auth()->user()->image}}"></span>
             <span class="user_eml" style="color:gray;font-weight:700;font-size: .9rem;">{{Auth::user()->email}} </span>
@@ -17,17 +17,21 @@
           <div class="email-send-box-list">
             @if(auth()->user()->role == 1)
               <a type="button" href="#" class="btn btn-sm email_search_page" id="email_search_page">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <span class="btn-text email_search_page"> Email-Search</span>
+                <i class="fa-solid fa-globe"></i>
+                <span class="btn-text email_search_page"> All-Mail (<span class="ms-1 me-1">{{ number_format($total_emails) }}</span>)</span>
               </a><br>
               <a type="button" href="#" class="btn btn-sm" id="file_directory_page">
                 <i class="fa-solid fa-folder-open"></i>
                 <span class="btn-text file_directory_page"> File-Directory</span>
               </a><br>
             @endif
+            <a type="button" href="#" class="btn btn-sm email_search_page" id="email_inbox_page">
+              <i class="fa-solid fa-inbox"></i>
+              <span class="btn-text email_search_page"> Inbox (<span id="emailInbox"></span>)</span>
+            </a><br>
             <a type="button" href="#" class="btn btn-sm" id="email_send_page">
               <i class="fa-solid fa-share"></i>
-              <span class="btn-text email_send_page"> Send Email-List</span>
+              <span class="btn-text email_send_page"> Send (<span id="emailSend"></span>)</span>
             </a>
           </div>
         </div>

@@ -118,7 +118,7 @@ button.send_button:hover{
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
     animation: fon_color 3s infinite;
-    font-size: 15px;
+    font-size: 18px;
     text-transform: uppercase;
     letter-spacing: 1px;
     text-align: center;
@@ -193,7 +193,7 @@ select#selectAttachFile{
 .email-send-box-list {
     padding: 5px 60px;
 }
-a#email_search_page,a#email_send_page,a#file_directory_page {
+a#email_search_page,a#email_send_page,a#file_directory_page,a#email_inbox_page {
     outline: none;
     box-shadow: none;
     font-family: var(--nav-font-family);
@@ -202,7 +202,7 @@ a#email_search_page,a#email_send_page,a#file_directory_page {
     text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
     padding: 1px 5px;
 }
-a#email_search_page:hover,a#email_send_page:hover,a#file_directory_page:hover{
+a#email_search_page:hover,a#email_send_page:hover,a#file_directory_page:hover,a#email_inbox_page:hover{
     background-image: var(--nav-button-background);
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
@@ -464,6 +464,17 @@ span#email_month {
     border-radius: 5px;
     margin-top: 0;
 }
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: #0d6efd;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #0d6efd;
+    transition: width 0.6s ease;
+}
 .bg-email {
     opacity: 1 !important;
     background-color: #0056b3 !important;
@@ -542,7 +553,7 @@ img.company_logo {
     opacity: 1;
 }
 .attachment_file_link_btn{
-    margin-left: 10px;
+    margin: 0px 5px;
     border: 2px solid rgb(252, 252, 252);
     padding: 5px 5px;
     border-radius: 10px;
@@ -569,6 +580,7 @@ img.company_logo {
 span.attachment_files {
     background: aliceblue;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 .email_footer{
     font-family: var(--nav-font-family);
