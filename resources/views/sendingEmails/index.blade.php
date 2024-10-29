@@ -9,30 +9,56 @@
     <div class="row">
       <div class="col-md-4">
         <div class="card-body focus-color user_details cd skeleton">
-          <p class="email_list"><span style="font-size:20px;"><i class="fa-regular fa-envelope"></i></span> Email</p>
+          <p class="email_list"><span style="font-size:20px;"><i class="fa-regular fa-envelope"></i></span> mail</p>
           <p style="text-align:center;">
             <span><img class="img-profile rounded-circle" style="margin-top: 0px;" id="output" src="/image/{{auth()->user()->image}}"></span>
             <span class="user_eml" style="color:gray;font-weight:700;font-size: .9rem;">{{Auth::user()->email}} </span>
           </p>
           <div class="email-send-box-list">
             @if(auth()->user()->role == 1)
+              <span class="new_box">
+                <i class="fa-regular fa-envelope"></i>
+                <span class="btn-text new_email_bage pe-2"><span class="ms-1" id="total_new_emails"></span> new</span>
+              </span><br>
               <a type="button" href="#" class="btn btn-sm email_search_page" id="email_search_page">
-                <i class="fa-solid fa-globe"></i>
-                <span class="btn-text email_search_page"> All-Mail (<span class="ms-1 me-1">{{ number_format($total_emails) }}</span>)</span>
+                <i class="fa-solid fa-inbox"></i>
+                <span class="btn-text email_search_page"> Inbox (<span class="ms-1 me-1" id="total_emails"></span>)</span>
+              </a><br>
+              <a type="button" href="#" class="btn btn-sm" id="email_send_page">
+                <i class="fa-solid fa-share"></i>
+                <span class="btn-text email_send_page"> Send (<span class="ms-1 me-1" id="emailSend"></span>)</span>
+              </a><br>
+              <a type="button" href="#" class="btn btn-sm" id="email_draft_page">
+                <i class="fa-solid fa-file"></i>
+                <span class="btn-text email_draft_page"> Drafts (<span class="ms-1 me-1" id="emailDrafts"></span>)</span>
               </a><br>
               <a type="button" href="#" class="btn btn-sm" id="file_directory_page">
                 <i class="fa-solid fa-folder-open"></i>
-                <span class="btn-text file_directory_page"> File-Directory</span>
+                <span class="btn-text file_directory_page"> Attachment Folder</span>
+              </a><br>
+              <a type="button" href="#" class="btn btn-sm" id="email_setting">
+                <i class="fa-solid fa-gear"></i>
+                <span class="btn-text email_setting"> Setting</span>
               </a><br>
             @endif
-            <a type="button" href="#" class="btn btn-sm email_search_page" id="email_inbox_page">
-              <i class="fa-solid fa-inbox"></i>
-              <span class="btn-text email_search_page"> Inbox (<span id="emailInbox"></span>)</span>
-            </a><br>
-            <a type="button" href="#" class="btn btn-sm" id="email_send_page">
-              <i class="fa-solid fa-share"></i>
-              <span class="btn-text email_send_page"> Send (<span id="emailSend"></span>)</span>
-            </a>
+            @if(auth()->user()->role == 2 || auth()->user()->role == 3 || auth()->user()->role == 5 || auth()->user()->role == 6 || auth()->user()->role == 7 || auth()->user()->role == 0)
+              <span class="new_box">
+                <i class="fa-regular fa-envelope"></i>
+                <span class="btn-text new_email_bage pe-2"><span class="ms-1" id="total_new_emails"></span> new</span>
+              </span><br>
+              <a type="button" href="#" class="btn btn-sm email_search_page" id="email_search_page">
+                <i class="fa-solid fa-inbox"></i>
+                <span class="btn-text email_search_page"> Inbox (<span class="ms-1 me-1" id="total_emails"></span>)</span>
+              </a><br>
+              <a type="button" href="#" class="btn btn-sm" id="email_send_page">
+                <i class="fa-solid fa-share"></i>
+                <span class="btn-text email_send_page"> Send (<span class="ms-1 me-1" id="emailSend"></span>)</span>
+              </a><br>
+              <a type="button" href="#" class="btn btn-sm" id="email_draft_page">
+                <i class="fa-solid fa-file"></i>
+                <span class="btn-text email_draft_page"> Drafts (<span class="ms-1 me-1" id="emailDrafts"></span>)</span>
+              </a><br>
+            @endif
           </div>
         </div>
       </div>
@@ -42,9 +68,6 @@
             @csrf
             <div class="form-group mb-1">
               <input class="form-control form-control-sm" type="text" name="user_to" id="inputTo" placeholder="To" value="" data-role="tagsinput"/>
-              <span class="text-danger input_message show-error remove-user-error ms-2">@error('user_to')
-                {{$message}}@enderror
-              </span>
             </div>
             <div class="form-group mb-1">
               <input class="form-control form-control-sm" type="text" name="user_cc" id="inputCC" placeholder="CC" value="" data-role="tagsinput"/>
@@ -54,9 +77,6 @@
             </div>
             <div class="form-group mb-1">
               <input class="form-control form-control-sm" type="text" name="subject" id="inputSubject" placeholder="Subject"/>
-              <span class="text-danger input_message show-error remove-user-error ms-2">@error('subject')
-                {{$message}}@enderror
-              </span>
             </div>
             <div class="form-group mb-1">
               <textarea class="form-control form-control-sm main_content" id="email_summernote" name="main_content" cols="30" rows="10" placeholder="Email Content"></textarea>

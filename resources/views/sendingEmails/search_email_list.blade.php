@@ -1,9 +1,9 @@
 <!-- Search Email Modal -->
-<div class="modal fade" id="emailSearchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="emailSearchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelHeader" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-xl">
     <div class="modal-content">
       <div class="modal-header email_modal_header">
-        <h5 class="modal-title selection" id="staticBackdropLabel" style="color: black;"><i class="fa-regular fa-envelope"></i> Email List</h5>
+        <h5 class="modal-title selection" id="staticBackdropLabelHeader" style="color: black;"><i class="fa-solid fa-inbox"></i> Inbox (<span id="inbox_emails"></span>)</h5>
         <button type="button" class="btn-close btn-btn-sm clos_btn2" data-bs-dismiss="modal" aria-label="Close"
           data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
         </button>
@@ -19,6 +19,8 @@
                 <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownButton">Select</button>
                 <ul class="dropdown-menu" id="themeMenuListBackground">
                   <li><a type="button" class="dropdown-item" href="#" id="selectButton">All</a></li>
+                  <li><a type="button" class="dropdown-item" href="#" data-status="1" id="readButton">Read</a></li>
+                  <li><a type="button" class="dropdown-item" href="#" data-status ="1" id="unReadButton">Un Read</a></li>
                   <li><a type="button" class="dropdown-item" href="#" id="noneButton">None</a></li>
                 </ul>
               </div>
@@ -27,8 +29,8 @@
               <span class="input4">
                 <select type="text" class="email_select" name="read_mail" id="select_read_email">
                   <option value="">Email</option>
-                  <option value="1">Read</option>
-                  <option value="0">Un read</option>
+                  <option value="0">Next</option>
+                  <option value="1">Previous</option>
                 </select>
               </span>
             </div>
@@ -111,7 +113,7 @@
               <label class="tot-search skeleton" for="tot_cagt">Current Email :</label>
               <label class="badge rounded-pill bg-primary" for="total_user_email skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_user_email"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
             </span>
-            <div class="progress" style="height:0.3rem;"> <!-- progress-bar-skeleton -->
+            <div class="progress progress-bar-skeleton" style="height:0.3rem;">
               <div class="progress-bar progress-bar-striped bg-email progress-bar-animated" role="progressbar" aria-valuenow="{{ $user_email_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $user_email_percentage }}%;">
                 {{ round($user_email_percentage, 2) }}%
               </div>

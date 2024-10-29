@@ -75,6 +75,10 @@ export function newFormatDate(newDateString) {
 
     return day + '-' + monthName + '-' + year;
 }
+// Helper function for general number format
+export function formatNumber(value) {
+    return parseInt(value).toLocaleString('en-IN');
+}
 // Helper function for number counter
 export function numberCounter(){
     let interval = 4000;

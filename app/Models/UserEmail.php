@@ -22,7 +22,7 @@ class UserEmail extends Model
         'sender_user',
         'status',
         'read_mail',
-        'unread_mail',
+        'draft_mail',
     ];
 
     public function roles()

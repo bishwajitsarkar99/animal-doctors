@@ -193,7 +193,7 @@ select#selectAttachFile{
 .email-send-box-list {
     padding: 5px 60px;
 }
-a#email_search_page,a#email_send_page,a#file_directory_page,a#email_inbox_page {
+a#email_search_page,a#email_send_page,a#file_directory_page,a#email_inbox_page,a#email_draft_page,a#email_setting {
     outline: none;
     box-shadow: none;
     font-family: var(--nav-font-family);
@@ -202,7 +202,8 @@ a#email_search_page,a#email_send_page,a#file_directory_page,a#email_inbox_page {
     text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
     padding: 1px 5px;
 }
-a#email_search_page:hover,a#email_send_page:hover,a#file_directory_page:hover,a#email_inbox_page:hover{
+a#email_search_page:hover,a#email_send_page:hover,a#file_directory_page:hover,a#email_inbox_page:hover,a#email_draft_page:hover,
+a#email_setting:hover{
     background-image: var(--nav-button-background);
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
@@ -215,6 +216,25 @@ a#email_search_page:hover,a#email_send_page:hover,a#file_directory_page:hover,a#
     border-radius: 3px;
     transition: .5s ease;
     opacity: 1;
+}
+.new_box {
+    padding: 6px;
+}
+.new_email_bage {
+    background-color: #007400;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: white;
+    padding: 1px 3px;
+    border-radius: 15px;
+    padding-bottom: 2px;
+}
+#staticBackdropLabelHeader {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: black;
+    margin-top: -0.3em;
+    animation: 2s infinite;
 }
 .email_modal_header,.email_modal_footer {
     background: transparent;

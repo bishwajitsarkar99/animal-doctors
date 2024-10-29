@@ -1,6 +1,6 @@
-<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
+<script type="module" src="{{asset('/module/helper-function-min.js')}}"></script>
 <script type="module">
-    import { currentDate, getTimeDifference, activeTableRow, formatDate } from "/module/module-min-js/helper-function-min.js";
+    import { currentDate, getTimeDifference, activeTableRow, formatDate, formatNumber } from "/module/module-min-js/helper-function-min.js";
     import { addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     const companyName = @json(setting('company_name'));
     const companyAddress = @json(setting('company_address'));
@@ -77,7 +77,12 @@
                 }else{
                     attachmentText = 'N/A';
                 }
-                
+
+                var fromEmail;
+                if(row.sender_email === row.user_to){
+                    fromEmail = 'me';
+                }
+
                 const attachments = JSON.parse(row.email_attachments || '[]');
                 const attachmentElements = attachments.map(att => {
                     const fileName = att.file;
@@ -114,17 +119,17 @@
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                                 <i class="fa-solid fa-trash-can fa-beat"></i>
                             </button>
-                            <span class="child-td1 ps-1">To : ${row.user_to}</span>
+                            <span class="child-td1 ps-1">${fromEmail ? fromEmail : row.sender_email}</span>
                             <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:12px;">
                                 ${statusText}
                             </span>
                             <span class="child-td1 ps-1">${formatDate(row.created_at)}</span>
                         </td>
-                        <td class="child-td1 ps-1" id="lastTd" hidden>${row.user_to}</td>
                         <td class="child-td1 ps-1" id="lastTd">
                             <span style="font-weight:700;">Subject :</span> ${row.subject}
                             <span style="color:#007bff;font-size:10px;font-weight: 600;">${getTimeDifference(row.created_at)} ago</span>
                         </td>
+                        <td class="child-td1 ps-1" id="readMal" value="${row.read_mail}" hidden>${row.read_mail}</td>
                     </tr>
                     <tr class="child-row detail-row table-row row-hidden" data-child="${row.id}">
                         <td colspan="14">
@@ -228,6 +233,10 @@
                         total, 
                         months, 
                         years, 
+                        total_emails,
+                        total_draft_emails,
+                        total_send_emails,
+                        total_new_emails,
                     } = response;
 
                     $("#email_data_table").html(table_rows(data));
@@ -239,6 +248,14 @@
                         years, 
                     }));
                     $("#total_user_email").text(total);
+                    // Total Emails
+                    $("#total_emails").text(formatNumber(total_emails));
+                    // Total Send Emails
+                    $("#emailSend").text(formatNumber(total_send_emails));
+                    // Total Draft Emails
+                    $("#emailDrafts").text(formatNumber(total_draft_emails));
+                    // Total New Emails
+                    $("#total_new_emails").text(formatNumber(total_new_emails));
                     // Update current month element with the new data
                     $("#email_month").text(months.length > 0 ? months.join(', ') : '');
 
@@ -307,7 +324,7 @@
             // }, 500);
             fetch_all_user_email(); 
         });
-        // Read Mail Filter
+        // Next or Previous Mail Filter
         $(document).on("change", "#select_read_email", function() {
             const read_mail = $(this).val();
             fetch_all_user_email(read_mail);
@@ -321,6 +338,34 @@
                     $(this).removeClass('table-row-select-bg');
                 });
             }
+        });
+        // Read Mail Filter
+        $(document).on("click", "#readButton", function() {
+            var read_mail = $(this).data('status');
+
+            $('.table-row').each(function() {
+                var readMailValue = $(this).find('#readMal').text();
+
+                if (read_mail && readMailValue === '0') {
+                    $(this).addClass('table-row-select-bg');
+                } else {
+                    $(this).removeClass('table-row-select-bg');
+                }
+            });
+        });
+        // Un Read Mail Filter
+        $(document).on("click", "#unReadButton", function() {
+            var read_mail = $(this).data('status');
+
+            $('.table-row').each(function() {
+                var readMailValue = $(this).find('#readMal').text();
+
+                if (read_mail && readMailValue === '1') {
+                    $(this).addClass('table-row-select-bg');
+                } else {
+                    $(this).removeClass('table-row-select-bg');
+                }
+            });
         });
         // Live Search
         $("#email_search").on('keyup', function(){
@@ -466,7 +511,7 @@
 <script type="module">
     import { addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     $(document).ready(function(){
-        // Email Search modal
+        // Email Inbox modal
         $(document).on('click', '#email_search_page', function(e){
             e.preventDefault();
             $("#emailSearchModal").modal('show').fadeIn(300).delay(300);
@@ -478,6 +523,7 @@
                 {selector: '#email_data_table', type: 'class', name: 'tabskeletone'},
                 {selector: '.tot_summ', type: 'class', name: 'email-skeletone'},
                 {selector: '#cate_delete5', type: 'class', name: 'btn-skeletone'},
+                {selector: '.progress', type: 'class', name: 'progress-bar-skeleton'},
             ]);
 
             var time = null;
@@ -489,6 +535,7 @@
                     {selector: '#email_data_table', type: 'class', name: 'tabskeletone'},
                     {selector: '.tot_summ', type: 'class', name: 'email-skeletone'},
                     {selector: '#cate_delete5', type: 'class', name: 'btn-skeletone'},
+                    {selector: '.progress', type: 'class', name: 'progress-bar-skeleton'},
                 ]);
             }, 1000);
 

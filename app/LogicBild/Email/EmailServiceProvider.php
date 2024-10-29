@@ -24,19 +24,12 @@ class EmailServiceProvider
     {
         // Total User
         $userEmails = User::count();
-        // Toal User Email
-        $total_emails = UserEmail::count();
+        // Total User Email
+        $total_emails = UserEmail::whereNotNull('user_to')->count();
         // Calculate the percentage of total users
         $user_email_percentage = $total_emails > 0 ? ($total_emails / $userEmails) * 100 : 0;
 
-        // $emails = User::where('status', 0)->pluck('email');
-
-        // if ($request->expectsJson()){
-        //     return response()->json([
-        //         'emails' => $emails
-        //     ]);
-        // }
-        return view('sendingEmails.index', compact('user_email_percentage', 'total_emails'));
+        return view('sendingEmails.index', compact('user_email_percentage'));
     }
     /**
      * Handle Send Email
@@ -44,19 +37,19 @@ class EmailServiceProvider
     public function sending(Request $request)
     {
         $request->validate([
-            'user_to' => 'required|string',
+            'user_to' => 'nullable|string',
             'user_cc' => 'nullable|string',
             'user_bcc' => 'nullable|string',
-            'subject' => 'required|string',
+            'subject' => 'nullable|string',
             'main_content' => 'nullable|string',
             'email_attachments.*' => 'nullable|file',
         ]);
 
         // Custom validation for multiple emails in To, CC, and BCC
-        $to_emails = explode(',', $request->user_to);
+        $to_emails = $request->user_to ? explode(',', $request->user_to) : [];
         foreach ($to_emails as $email) {
-            if (!filter_var(trim($email), FILTER_VALIDATE_EMAIL)) {
-                return back()->withErrors(['user_to' => 'Invalid email format in To field.']);
+            if ($email && !filter_var(trim($email), FILTER_VALIDATE_EMAIL)) {
+                return back()->withErrors(['user_to' => 'Invalid email format in CC field.']);
             }
         }
 
@@ -112,25 +105,29 @@ class EmailServiceProvider
         $content = $purifier->purify($request->main_content);
         // Prepare email content
         $details = [
-            'user_to' => $request->user_to ?? 'No Email',
-            'user_cc' => $request->user_cc ?? 'No CC',
-            'user_bcc' => $request->user_bcc ?? 'No BCC',
+            'user_to' => $request->user_to,
+            'user_cc' => $request->user_cc ?? 'N/A',
+            'user_bcc' => $request->user_bcc ?? 'N/A',
             'subject' => $request->subject ?? 'No Subject',
             'main_content' => $content ?? 'No Content',
         ];
 
+        // Determine draft_mail status
+        $draftMailStatus = $request->user_to ? ($request->draft_mail ? '1' : '0') : '1';
         // Store Email Data in DB
         DB::table('user_emails')->insert([
             'user_to' => $request->user_to,
-            'user_cc' => $request->user_cc,
-            'user_bcc' => $request->user_bcc,
-            'subject' => $request->subject,
-            'main_content' => $content,
+            'user_cc' => $request->user_cc ?? 'N/A',
+            'user_bcc' => $request->user_bcc ?? 'N/A',
+            'subject' => $request->subject ?? 'No Subject',
+            'main_content' => $content ?? 'No Content',
             'email_attachments' => json_encode($attachments),
             'attachment_type' => $request->attachment_type ?? 'other',
             'sender_email' => Auth::user()->email,
             'sender_user' => Auth::user()->id,
             'status' => $request->status ? '1' : '0',
+            'read_mail' => $request->status ? '1' : '0',
+            'draft_mail' => $draftMailStatus,
             'created_at' => now(),
         ]);
 
@@ -177,8 +174,9 @@ class EmailServiceProvider
                 return Carbon::parse($month)->format('Y');
             }, $months));
         }
-    
-        $query = UserEmail::with(['roles'])->orderBy('id', 'desc');
+        // Users
+        $authID = Auth::user()->id;
+        $query = UserEmail::whereNotNull('user_to')->where('sender_user', '=', $authID)->with(['roles'])->orderBy('id', 'desc');
 
         // Apply date filter
         if ($start_date && $end_date) {
@@ -188,28 +186,35 @@ class EmailServiceProvider
             ]);
         }
 
-        // Apply additional filters
+        // Apply attachment_type filters
         if ($attachment_type) {
             $query->where('attachment_type', 'LIKE', '%' . $attachment_type . '%');
         }
-
+        // Apply user email filters
         if ($user_to) {
             $query->where('user_to', 'LIKE', '%' . $user_to . '%');
         }
-        
+        // Apply email status filters
         if ($status !== null) {
             $query->where('status', $status);
         }
-
+        // Apply read or unread email filters
         if ($read_mail !== null) {
             $query->where('read_mail', $read_mail);
         }
-
-        // Clone the query for calculating totals
-        // $totalUnreadQuery = clone $query;
-        // $totalInvQty = $totalUnreadQuery->sum('quantity');
-    
-        // $totalInv = $query->sum('sub_total');
+        
+        // Users
+        $userId = Auth::user()->id;
+        // Total User Email / Inbox
+        $total_emails = UserEmail::whereNotNull('user_to')->where('sender_user', '=', $userId)->count();
+        // Total Draft User Email
+        $total_draft_emails = UserEmail::whereNull('user_to')->where('sender_user', '=', $userId)->count();
+        // Total New Email
+        $total_new_emails = UserEmail::whereNotNull('user_to')->where('status','=', 0)->where('sender_user', '=', $userId)->count();
+        // Total Send User Email According to Month
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+        $total_send_emails = UserEmail::whereNotNull('user_to')->whereBetween('created_at', [$startOfMonth, $endOfMonth])->where('sender_user', '=', $userId)->count();
         
         $perItem = $request->input('per_item', 10);
         $data = $query->paginate($perItem)->toArray();
@@ -217,26 +222,35 @@ class EmailServiceProvider
             'data' => $data['data'],
             'links' => $data['links'],
             'total' => $data['total'],
-            // 'totalInv' => $totalInv,
-            // 'totalInvQty' => $totalInvQty,
+            'total_emails' => $total_emails,
+            'total_draft_emails' => $total_draft_emails,
+            'total_send_emails' => $total_send_emails,
+            'total_new_emails' => $total_new_emails,
             'months' => $months,
             'years' => array_values($years)
 
         ], 200);
     }
     /**
-     * Handle View Email
+     * Handle Fetch Email For Sub Admin,Admin,Accounts,Marketing,Delivery Team and Other Common Users
     */
-    public function viewUserEmail(Request $request)
+    public function fetchEmail(Request $request)
     {
-        
+        //
+    }
+    /**
+     * Handle Draft Mail Fetch
+    */
+    public function darftUserEmail(Request $request)
+    {
+        //
     }
     /**
      * Handle Delete Email
     */
     public function deleteUserEmail(Request $request)
     {
-        
+        //
     }
     
 }
