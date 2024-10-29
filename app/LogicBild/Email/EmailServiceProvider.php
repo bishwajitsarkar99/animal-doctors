@@ -157,6 +157,7 @@ class EmailServiceProvider
         }
         $attachment_type = $request->input('attachment_type');
         $status = $request->input('status');
+        $read_mail = $request->input('read_mail');
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
         $user_to = $request->input('user_to');
@@ -199,6 +200,11 @@ class EmailServiceProvider
         if ($status !== null) {
             $query->where('status', $status);
         }
+
+        if ($read_mail !== null) {
+            $query->where('read_mail', $read_mail);
+        }
+
         // Clone the query for calculating totals
         // $totalUnreadQuery = clone $query;
         // $totalInvQty = $totalUnreadQuery->sum('quantity');

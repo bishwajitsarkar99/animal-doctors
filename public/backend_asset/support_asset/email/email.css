@@ -340,6 +340,27 @@ input#start_date:focus,input#end_date:focus,input#email_search:focus,select#sele
     color: lightgray;
     font-weight: 700;
 }
+select#select_read_email {
+    font-family: var(--nav-font-family);
+    box-shadow: none;
+    cursor: pointer;
+    border: 1px solid lightgray;
+    height: 2em;
+    color: #606060;
+    font-size: 12px;
+    font-weight: 700;
+    outline: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 1px;
+    border-radius: 3px;
+}
+select#select_read_email:hover{
+    background-color: lightgrey;
+}
+select#select_read_email:focus{
+    border: 2px solid dodgerblue;
+}
 select#perItemControl {
     outline: none;
     color: black;

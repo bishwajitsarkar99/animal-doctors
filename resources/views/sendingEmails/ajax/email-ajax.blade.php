@@ -203,6 +203,7 @@
             const end_date = $("#end_date").val();
             const attachment_type = $("#select_attachment").val();
             const status = $("#select_status").val();
+            const read_mail = $("#select_read_email").val();
             const user_to = $("#email_search").val();
 
             let current_url = url ? url : `{{ route('email.fetch') }}?per_item=${perItem}`;
@@ -218,6 +219,7 @@
                     attachment_type: attachment_type,
                     user_to : user_to,
                     status : status,
+                    read_mail : read_mail,
                 },
                 success: function(response) {
                     const {
@@ -306,14 +308,19 @@
             fetch_all_user_email(); 
         });
         // Read Mail Filter
-        $(document).on("click", "#readButton", function() {
-            const status = $(this).data("status");
-            fetch_all_user_email('',status);
-        });
-        // Unread Mail Filter
-        $(document).on("click", "#unreadButton", function() {
-            const status = $(this).data("status");
-            fetch_all_user_email('',status);
+        $(document).on("change", "#select_read_email", function() {
+            const read_mail = $(this).val();
+            fetch_all_user_email(read_mail);
+            
+            if (read_mail) {
+                $('.table-row').each(function() {
+                    $(this).addClass('table-row-select-bg');
+                });
+            } else {
+                $('.table-row').each(function() {
+                    $(this).removeClass('table-row-select-bg');
+                });
+            }
         });
         // Live Search
         $("#email_search").on('keyup', function(){

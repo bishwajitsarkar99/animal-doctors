@@ -20,10 +20,17 @@
                 <ul class="dropdown-menu" id="themeMenuListBackground">
                   <li><a type="button" class="dropdown-item" href="#" id="selectButton">All</a></li>
                   <li><a type="button" class="dropdown-item" href="#" id="noneButton">None</a></li>
-                  <li><a type="button" class="dropdown-item" href="#" data-status="1" id="readButton">Read</a></li>
-                  <li><a type="button" class="dropdown-item" href="#" data-status="0" id="unreadButton">Unread</a></li>
                 </ul>
               </div>
+            </div>
+            <div class="col-xl-1">
+              <span class="input4">
+                <select type="text" class="email_select" name="read_mail" id="select_read_email">
+                  <option value="">Email</option>
+                  <option value="1">Read</option>
+                  <option value="0">Un read</option>
+                </select>
+              </span>
             </div>
             <div class="col-xl-1">
               <div class="group_btn next_btn">
@@ -37,7 +44,7 @@
                 </button>
               </div>
             </div>
-            <div class="col-xl-8"></div>
+            <div class="col-xl-7"></div>
             <div class="col-xl-2">
               <span class="current_month pe-2" id="email_month"></span>
             </div>
