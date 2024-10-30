@@ -175,8 +175,15 @@ class EmailServiceProvider
             }, $months));
         }
         // Users
-        $authID = Auth::user()->id;
-        $query = UserEmail::whereNotNull('user_to')->where('sender_user', '=', $authID)->with(['roles'])->orderBy('id', 'desc');
+        $authEmail = Auth::user()->email;
+        $query = UserEmail::whereNotNull('user_to')
+            ->where(function($q) use ($authEmail) {
+                $q->where('user_to', 'LIKE', "%$authEmail")
+                  ->orWhere('user_cc', 'LIKE', "%$authEmail")
+                  ->orWhere('user_bcc', 'LIKE', "%$authEmail");
+            })
+            ->with(['roles'])
+            ->orderBy('id', 'desc');
 
         // Apply date filter
         if ($start_date && $end_date) {

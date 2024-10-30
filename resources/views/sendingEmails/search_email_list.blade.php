@@ -54,17 +54,17 @@
         </div>
         <div class="email-box-body">
           <div class="row mt-2">
-            <div class="col-2">
+            <div class="col-xl-2">
               <span class="input1">
                 <input type="text" class="form-control form-control-sm start_date ps-1" name="start_date" placeholder="Start Date" autocomplete="off" id="start_date">
               </span>
             </div>
-            <div class="col-2">
+            <div class="col-xl-2">
               <span class="input2">
                 <input type="text" class="form-control form-control-sm end_date ps-1" name="end_date" placeholder="End Date" autocomplete="off" id="end_date">
               </span>
             </div>
-            <div class="col-3">
+            <div class="col-xl-2">
               <span class="input3">
                 <select type="text" class="form-control form-control-sm" name="attachment_type" id="select_attachment">
                   <option value="">Select Category</option>
@@ -83,11 +83,12 @@
                 </select>
               </span>
             </div>
-            <div class="col-3 margin_search">
+            <div class="col-3">
               <span class="input5">
                 <input type="search" class="form-control form-control-sm email_search ps-1" name="user_to" placeholder="Email Search" id="email_search">
               </span>
             </div>
+            <div class="col-xl-1"></div>
           </div>
         <div class="table-responsive">
           <table class="table align-middle bg-transparent ord_table center border-1 mt-2">

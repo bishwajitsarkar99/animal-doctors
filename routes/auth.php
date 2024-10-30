@@ -45,9 +45,16 @@ Route::middleware('emailVerificationPage')->group(function () {
 // Email Link Sending Route
 Route::post('send-link', [AuthController::class, 'sendLink'])->name('send.link');
 // Send Email
-Route::get('/email', [EmailController::class, 'index'])->name('email.index');
-Route::post('/email/send', [EmailController::class, 'sendEmail'])->name('email.send');
-
+Route::middleware(['role:SuperAdmin|Admin|SubAdmin|Accounts|Marketing|DeliveryTeam|User'])->group(function(){
+    Route::get('/email', [EmailController::class, 'index'])->name('email.index');
+    Route::post('/email/send', [EmailController::class, 'sendEmail'])->name('email.send');
+    Route::get('/email/send/list', [EmailController::class, 'emailSendList'])->name('email.send_list');
+    Route::get('/email/fetch', [EmailController::class, 'fetchEmail'])->name('email.fetch');
+    Route::get('/email/fetch/drafts', [EmailController::class, 'draftEmail'])->name('email.draft');
+    Route::get('/email/edit/drafts/{id}', [EmailController::class, 'draftEmail'])->name('email.edit_draft');
+    Route::put('/email/update/drafts/{id}', [EmailController::class, 'draftEmail'])->name('email.update_draft');
+    Route::delete('/email/delete/{id}', [EmailController::class, 'deleteEmail'])->name('email.delete');
+});
 // Super Admin Logout Route (POST is more secure for state-changing operations)
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // Admin Logout Route (POST is more secure for state-changing operations)
