@@ -210,14 +210,25 @@ class EmailServiceProvider
             $query->where('read_mail', $read_mail);
         }
         
-        // Users
+        // Auth Users id
         $userId = Auth::user()->id;
+        // Auth User Email
+        $user_email = Auth::user()->email;
         // Total User Email / Inbox
-        $total_emails = UserEmail::whereNotNull('user_to')->where('sender_user', '=', $userId)->count();
+        $total_emails = UserEmail::whereNotNull('user_to')
+                                ->where('user_to', 'LIKE', "%$user_email")
+                                ->orWhere('user_cc', 'LIKE', "%$user_email")
+                                ->orWhere('user_bcc', 'LIKE', "%$user_email")
+                                ->count();
         // Total Draft User Email
         $total_draft_emails = UserEmail::whereNull('user_to')->where('sender_user', '=', $userId)->count();
         // Total New Email
-        $total_new_emails = UserEmail::whereNotNull('user_to')->where('status','=', 0)->where('sender_user', '=', $userId)->count();
+        $total_new_emails = UserEmail::whereNotNull('user_to')
+                                        ->where('user_to', 'LIKE', "%$user_email")
+                                        ->orWhere('user_cc', 'LIKE', "%$user_email")
+                                        ->orWhere('user_bcc', 'LIKE', "%$user_email")
+                                        ->where('status','=', 0)
+                                        ->count();
         // Total Send User Email According to Month
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
@@ -239,11 +250,22 @@ class EmailServiceProvider
         ], 200);
     }
     /**
-     * Handle Fetch Email For Sub Admin,Admin,Accounts,Marketing,Delivery Team and Other Common Users
+     * Handle Forward Email 
     */
-    public function fetchEmail(Request $request)
+    public function userForwardEmail(Request $request, $id)
     {
-        //
+        $forward_email = UserEmail::find($id);
+        if($forward_email){
+            return response()->json([
+                'status' => 200,
+                'messages' => $forward_email
+            ]);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'messages' => 'The email not found.'
+            ]);
+        }
     }
     /**
      * Handle Draft Mail Fetch

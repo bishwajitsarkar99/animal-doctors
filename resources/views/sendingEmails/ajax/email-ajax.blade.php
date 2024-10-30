@@ -116,6 +116,9 @@
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-regular fa-eye fa-beat" style="margin-top: 1px;"></i>
                             </button>
+                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="forwardBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                                <i class="fa-solid fa-share-nodes fa-beat" style="margin-top: 1px;"></i>
+                            </button>
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                                 <i class="fa-solid fa-trash-can fa-beat"></i>
                             </button>
@@ -256,6 +259,8 @@
                     $("#emailDrafts").text(formatNumber(total_draft_emails));
                     // Total New Emails
                     $("#total_new_emails").text(formatNumber(total_new_emails));
+                    // Modal Header Inbox
+                    $("#inbox_emails").text(formatNumber(total_emails));
                     // Update current month element with the new data
                     $("#email_month").text(months.length > 0 ? months.join(', ') : '');
 
@@ -377,6 +382,60 @@
         $(document).on('click', '#viewBtn', function(){
             var parentId = $(this).data('parent');
             $(`.child-row[data-child='${parentId}']`).toggle('slow').delay(300);
+        });
+
+        // email forward
+        $(document).on('click', '#forwardBtn', function(e){
+            e.preventDefault();
+            var id = $(this).val();
+
+            $.ajax({
+                type: 'GET',
+                url: "/email/forward/" + id,
+                success: function(response){
+                    $('#success_message').html("").removeClass('alert alert-danger');
+                    if(response.status == 404){
+                        $('#success_message').addClass('alert alert-danger').text(response.messages);
+                    }else{
+                        $("#emailForwardID").text(id);
+                        // Set value for To field and refresh tagsinput
+                        $("#inputTo").tagsinput('removeAll');
+                        $("#inputTo").tagsinput('add', response.messages.user_to);
+
+                        // Set value for CC field and refresh tagsinput
+                        $("#inputCC").tagsinput('removeAll');
+                        $("#inputCC").tagsinput('add', response.messages.user_cc);
+
+                        // Set value for BCC field and refresh tagsinput
+                        $("#inputBCC").tagsinput('removeAll');
+                        $("#inputBCC").tagsinput('add', response.messages.user_bcc);
+
+                        // Set other fields
+                        $("#inputSubject").val(response.messages.subject);
+                        $("#email_summernote").summernote('code', response.messages.main_content);
+                        $("#selectAttachFile").val(response.messages.attachment_type);
+
+                        // Display attachment names in a separate div
+                        let previousAttachments = $("#previousAttachments");
+                        previousAttachments.empty();
+
+                        try {
+                            let attachments = JSON.parse(response.messages.email_attachments);
+
+                            attachments.forEach(function(attachment) {
+                                // Display only the file name by splitting the path
+                                let fileName = attachment.file.split('/').pop();
+                                previousAttachments.append(`
+                                    <input type="file" class="form-control form-control-sm attachment" name="email_attachments[]" value="${fileName}" id="email_attachment" multiple />
+                                `);
+                            });
+                        } catch (error) {
+                            console.error("Failed to parse attachments:", error);
+                        }
+                        $("#emailSearchModal").modal('hide').fadeIn(300).delay(300);
+                    }
+                }
+            });
         });
         // Show Pdf,Excle,Csv logo in modal
         $(document).on('click', '.attachment_file_link_btn', function(e) {

@@ -88,7 +88,20 @@
                 <input type="search" class="form-control form-control-sm email_search ps-1" name="user_to" placeholder="Email Search" id="email_search">
               </span>
             </div>
-            <div class="col-xl-1"></div>
+            <div class="col-xl-1">
+              <span class="timezone">
+                <span>
+                  <?php
+                    $timezone = date_default_timezone_get();
+                    echo " ";
+                  ?>
+                </span>
+                <?php
+                  date_default_timezone_set('Asia/Dhaka');
+                  echo date("h:i:sA");
+                ?>
+              </span>
+            </div>
           </div>
         <div class="table-responsive">
           <table class="table align-middle bg-transparent ord_table center border-1 mt-2">

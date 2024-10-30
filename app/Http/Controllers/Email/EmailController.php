@@ -34,6 +34,12 @@ class EmailController extends Controller
         return $this->emailServiceProvider->fetchUserEmail($request);
     }
 
+    // Forward Mail
+    public function forwardEmail(Request $request, $id)
+    {
+        return $this->emailServiceProvider->userForwardEmail($request, $id);
+    }
+
     // View Mail
     public function viewEmail(Request $request)
     {

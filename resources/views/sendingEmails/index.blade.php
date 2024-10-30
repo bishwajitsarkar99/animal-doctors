@@ -66,6 +66,7 @@
         <div class="card-body focus-color user_details cd skeleton">
           <form id="emailForm" action="{{route('email.send')}}" method="POST" enctype="multipart/form-data">
             @csrf
+            <span id="emailForwardID" hidden></span>
             <div class="form-group mb-1">
               <input class="form-control form-control-sm" type="text" name="user_to" id="inputTo" placeholder="To" value="" data-role="tagsinput"/>
             </div>
@@ -117,6 +118,7 @@
                     <tr class="file-row">
                       <td class="file-column" colspan="2">
                         <input type="file" class="form-control form-control-sm attachment hidden" name="email_attachments[]" id="email_attachment" multiple />
+                        <!-- <div id="previousAttachments" class="mt-2"></div> -->
                       </td>
                       <td class="file-column"></td>
                     </tr>
