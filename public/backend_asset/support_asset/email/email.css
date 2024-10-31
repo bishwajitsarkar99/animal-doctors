@@ -852,3 +852,15 @@ button#deleteBtn {
     border-radius: 5px;
     border: 1px solid #dee2e6;
 }
+button#clearBtn{
+    border: none;
+}
+.attach_group {
+    border: 2px dotted burlywood;
+}
+.file_name {
+    margin-left: 5px;
+    background-color: #e1e1e1;
+    border-radius: 5px;
+    padding-right: 5px;
+}

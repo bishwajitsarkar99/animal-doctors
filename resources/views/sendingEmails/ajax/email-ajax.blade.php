@@ -384,10 +384,27 @@
             $(`.child-row[data-child='${parentId}']`).toggle('slow').delay(300);
         });
 
+        // clear email form
+        $(document).on('click', '#clearBtn', function(){
+            $("#inputTo").tagsinput('removeAll');
+            $("#inputCC").tagsinput('removeAll');
+            $("#inputBCC").tagsinput('removeAll');
+            $("#inputSubject").val("");
+            $("#email_summernote").summernote('code', '');
+            $("#selectAttachFile").val("");
+            $("#email_attachment").val("");
+        });
+
         // email forward
         $(document).on('click', '#forwardBtn', function(e){
             e.preventDefault();
             var id = $(this).val();
+
+            if(id){
+                $("#moreBtn").removeAttr('disabled');
+                $("#decrementBtn").removeAttr('disabled');
+                $("#email_attachment").removeClass('hidden');
+            }
 
             $.ajax({
                 type: 'GET',
@@ -416,21 +433,40 @@
                         $("#selectAttachFile").val(response.messages.attachment_type);
 
                         // Display attachment names in a separate div
-                        let previousAttachments = $("#previousAttachments");
-                        previousAttachments.empty();
+                        let attachmentPreview = $("#attachmentPreview");
+                        attachmentPreview.empty();
 
                         try {
                             let attachments = JSON.parse(response.messages.email_attachments);
+                            let file_image = response.messages.attachment_type;
 
-                            attachments.forEach(function(attachment) {
-                                // Display only the file name by splitting the path
-                                let fileName = attachment.file.split('/').pop();
-                                previousAttachments.append(`
-                                    <input type="file" class="form-control form-control-sm attachment" name="email_attachments[]" value="${fileName}" id="email_attachment" multiple />
-                                `);
-                            });
+                            if (attachments && attachments.length > 0) {
+                                attachments.forEach(function(attachment) {
+                                    let fileName = attachment.file.split('/').pop();
+
+                                    // Determine file path based on `attachment_type`
+                                    let filePath = "";
+                                    if (file_image === 'attachments') {
+                                        filePath = `/storage/app/public/attachments/${fileName}`;
+                                    } else if (file_image === 'user_message') {
+                                        filePath = `/storage/app/public/user_message/${fileName}`;
+                                    }
+
+                                    // Append file name and display image for each attachment
+                                    attachmentPreview.append(`
+                                        <div class="attach_group mb-1">
+                                            <span class="file_name">${fileName}</span>
+                                            <img class="register_img" src="${filePath}" alt="Attachment Image" style="width: 10px; height: 10px; margin-top: 5px;" />
+                                            <input type="file" class="form-control form-control-sm attachment hidden" name="email_attachments[]" vlaue="${fileName}" id="email_attachment" multiple />
+                                        </div>
+                                    `);
+                                });
+                            } else {
+                                attachmentPreview.append(`<div class="col-xl-4">No attachments added.</div>`);
+                            }
                         } catch (error) {
                             console.error("Failed to parse attachments:", error);
+                            attachmentPreview.append(`<div class="col-xl-4">Error loading attachments.</div>`);
                         }
                         $("#emailSearchModal").modal('hide').fadeIn(300).delay(300);
                     }

@@ -97,6 +97,13 @@
                         </span>
                       </th>
                       <th class="file-head">
+                        <span class="more__button">
+                          <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="clearBtn" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Clear Form" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
+                            <i class="fa-solid fa-ban fa-beat" style="color:orangered;"></i>
+                          </button>
+                        </span>
+                      </th>
+                      <th class="file-head">
                         Add Attach File
                         <span class="more__button">
                           <button class="btn btn-group-sm" href="#" id="moreBtn" disabled>
@@ -116,14 +123,17 @@
                   </thead>
                   <tbody id="fileTable">
                     <tr class="file-row">
-                      <td class="file-column" colspan="2">
+                      <td class="file-column" colspan="3">
                         <input type="file" class="form-control form-control-sm attachment hidden" name="email_attachments[]" id="email_attachment" multiple />
-                        <!-- <div id="previousAttachments" class="mt-2"></div> -->
                       </td>
                       <td class="file-column"></td>
                     </tr>
                   </tbody>
                 </table>
+                <!-- Attachments loaded via AJAX will be displayed here -->
+                <div class="row mt-1">
+                  <div id="attachmentPreview"></div>
+                </div>
               </div>
             </div>
             <div class="row">
