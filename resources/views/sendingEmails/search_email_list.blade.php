@@ -3,8 +3,8 @@
   <div class="modal-dialog modal-dialog-scrollable modal-xl">
     <div class="modal-content">
       <div class="modal-header email_modal_header">
-        <h5 class="modal-title selection" id="staticBackdropLabelHeader" style="color: black;"><i class="fa-solid fa-inbox"></i> Inbox (<span id="inbox_emails"></span>)</h5>
-        <button type="button" class="btn-close btn-btn-sm clos_btn2" data-bs-dismiss="modal" aria-label="Close"
+        <h5 class="modal-title selection text-skeletone" id="staticBackdropLabelHeader" style="color: black;"><i class="fa-solid fa-inbox"></i> Inbox (<span id="inbox_emails"></span>)</h5>
+        <button type="button" class="btn-close btn-btn-sm inbox_clos_btn text-skeletone" data-bs-dismiss="modal" aria-label="Close"
           data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
         </button>
       </div>
@@ -12,7 +12,7 @@
         <div class="email-box-header">
           <div class="row">
             <div class="col-xl-1">
-              <div class="btn-group group_btn">
+              <div class="btn-group group_btn text-skeletone">
                 <button type="button" class="btn btn-light btn-sm" data-bs-toggle="tooltip"  data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                   <input class="form-check-input" type="checkbox" id="allSelectBtn">
                 </button>
@@ -26,7 +26,7 @@
               </div>
             </div>
             <div class="col-xl-1">
-              <span class="input4">
+              <span class="email__select min-dropdown-skeletone">
                 <select type="text" class="email_select" name="read_mail" id="select_read_email">
                   <option value="">Email</option>
                   <option value="0">Next</option>
@@ -35,7 +35,7 @@
               </span>
             </div>
             <div class="col-xl-1">
-              <div class="group_btn next_btn">
+              <div class="group_btn next_btn skeletone">
                 <button class="btn btn-light btn-sm" type="button" id="refreshIconBtn"
                   data-bs-toggle="tooltip"  data-bs-placement="top" title="Refresh" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                   <i class="refresh_rotate_icon fa-solid fa-arrow-rotate-right"></i>
@@ -46,26 +46,25 @@
                 </button>
               </div>
             </div>
-            <div class="col-xl-7"></div>
-            <div class="col-xl-2">
-              <span class="current_month pe-2" id="email_month"></span>
+            <div class="col-xl-9" style="text-align:right;">
+              <span class="current_month text-skeletone pe-2" id="email_month"></span>
             </div>
           </div>
         </div>
         <div class="email-box-body">
           <div class="row mt-2">
             <div class="col-xl-2">
-              <span class="input1">
+              <span class="input1 text-skeletone">
                 <input type="text" class="form-control form-control-sm start_date ps-1" name="start_date" placeholder="Start Date" autocomplete="off" id="start_date">
               </span>
             </div>
             <div class="col-xl-2">
-              <span class="input2">
+              <span class="input2 text-skeletone">
                 <input type="text" class="form-control form-control-sm end_date ps-1" name="end_date" placeholder="End Date" autocomplete="off" id="end_date">
               </span>
             </div>
             <div class="col-xl-2">
-              <span class="input3">
+              <span class="input3 text-skeletone">
                 <select type="text" class="form-control form-control-sm" name="attachment_type" id="select_attachment">
                   <option value="">Select Category</option>
                   <option value="attachments">Management Report</option>
@@ -75,7 +74,7 @@
               </span>
             </div>
             <div class="col-xl-2">
-              <span class="input4">
+              <span class="input4 text-skeletone">
                 <select type="text" class="form-control form-control-sm" name="status" id="select_status">
                   <option value="">Select Email</option>
                   <option value="0">New</option>
@@ -84,12 +83,12 @@
               </span>
             </div>
             <div class="col-3">
-              <span class="input5">
+              <span class="input5 text-skeletone">
                 <input type="search" class="form-control form-control-sm email_search ps-1" name="user_to" placeholder="Email Search" id="email_search">
               </span>
             </div>
             <div class="col-xl-1">
-              <span class="timezone">
+              <span class="timezone text-skeletone">
                 <span>
                   <?php
                     $timezone = date_default_timezone_get();
@@ -112,7 +111,7 @@
         </div>
         <div class="row table_last_row">
           <div class="col-1 pt-2">
-            <div class="custom-select">
+            <div class="custom-select text-skeletone">
               <select class="ps-1 skeleton" id="perItemControl" data-bs-toggle="tooltip"  data-bs-placement="top" title="Per-Item" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <option class="skeleton" selected>10</option>
                 <option class="skeleton">20</option>
@@ -123,7 +122,7 @@
             </div>
           </div>
           <div class="col-3">
-            <span class="tot_summ" id="num_plate">
+            <span class="tot_summ email-skeletone" id="num_plate">
               <label class="tot-search skeleton" for="tot_cagt">Current Email :</label>
               <label class="badge rounded-pill bg-primary" for="total_user_email skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_user_email"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
             </span>
@@ -134,7 +133,7 @@
             </div>
           </div>
           <div class="col-8">
-            <div class="pagination" id="user_email_get_data_table_paginate">
+            <div class="pagination text-skeletone" id="user_email_get_data_table_paginate">
 
             </div>
           </div>
@@ -142,7 +141,7 @@
         </div>
       </div>
       <div class="modal-footer email_modal_footer">
-        <button type="button" class="btn btn-sm modal_button delete_cancel" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-sm modal_button delete_cancel btn-skeletone" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>

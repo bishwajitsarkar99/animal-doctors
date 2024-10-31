@@ -106,7 +106,7 @@
                       <th class="file-head">
                         Add Attach File
                         <span class="more__button">
-                          <button class="btn btn-group-sm" href="#" id="moreBtn" disabled>
+                          <button class="btn btn-group-sm" id="moreBtn" disabled type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Row" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                             <span style="font-size:20px;color:#0056b3;"><i class="fa-solid fa-circle-plus"></i></span>
                           </button>
                         </span>
@@ -114,7 +114,7 @@
                       <th class="file-head">
                         Remove Attach File
                         <span class="more__button">
-                          <button class="btn btn-group-sm" href="#" id="decrementBtn" disabled>
+                          <button class="btn btn-group-sm" id="decrementBtn" disabled type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove Row" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                             <span style="font-size:20px;color:orangered;"><i class="fa-solid fa-circle-minus"></i></span>
                           </button>
                         </span>
@@ -164,11 +164,11 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content image_preview">
       <div class="modal-header">
-        <h5 class="modal-title attach_header" id="fileModalLabel"><span id="fileNam"></span> Attachment File</h5>
-        <span class="logo_skeletone">
+        <h5 class="modal-title attach_header text-skeletone" id="fileModalLabel"><span id="fileNam"></span> Attachment File</h5>
+        <span class="logo_skeletone logo-skeletone">
           <img class="logo_attachment_file" src="" alt="Attachment Image" id="logoFile" />
         </span>
-        <button type="button" class="btn-close btn-btn-sm clos_btn2 atth_close" data-bs-dismiss="modal" aria-label="Close"
+        <button type="button" class="btn-close btn-btn-sm atth_close text-skeletone" data-bs-dismiss="modal" aria-label="Close"
           data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
         </button>
       </div>
@@ -247,11 +247,11 @@
     // Table row decrement
     document.getElementById('decrementBtn').addEventListener('click', function(e) {
       e.preventDefault();
-      
+      $("#email_attachment").val("");
       var tableBody = document.querySelector('#fileTable');
 
       if (tableBody.rows.length > 1) {
-          tableBody.deleteRow(-1);
+        tableBody.deleteRow(-1);
       }
     });
 
@@ -357,13 +357,13 @@
     
     if (fileExtension === 'pdf') {
       // Inline display for PDF files
-      modalContent.innerHTML = `<iframe class="atth_fl" src="${fileSrc}" style="width:100%; height:80vh;" frameborder="0"></iframe>`;
+      modalContent.innerHTML = `<iframe class="atth_fl text-skeletone" src="${fileSrc}" style="width:100%; height:80vh;" frameborder="0"></iframe>`;
     } else if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
       // Inline display for image files
-      modalContent.innerHTML = `<img class="atth_fl2" src="${fileSrc}" alt="Attachment" style="width:100%; height:auto;">`;
+      modalContent.innerHTML = `<img class="atth_fl2 text-skeletone" src="${fileSrc}" alt="Attachment" style="width:100%; height:auto;">`;
     } else if (['xls', 'xlsx', 'csv', 'docx'].includes(fileExtension)) {
       // Download link for Excel and CSV files
-      modalContent.innerHTML = `<p class="modal_text"><span class="attch_text">This file cannot be previewed :</span> <a class="downloadBtn" href="${fileSrc}" download>Click here to download - ${fileSrc.split('/').pop()}</a></p>`;
+      modalContent.innerHTML = `<p class="modal_text"><span class="attch_text text-skeletone">This file cannot be previewed :</span> <a class="link-btn-skeletone downloadBtn" href="${fileSrc}" download>Click here to download - ${fileSrc.split('/').pop()}</a></p>`;
     } else {
       // Fallback for unsupported file types
       modalContent.innerHTML = `<p>Unsupported file type.</p>`;

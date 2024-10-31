@@ -692,7 +692,8 @@ img#tableLoaderShow {
 .loader__box {
     text-align: center;
 }
-.text-skeletone,.tabskeletone,.skeletone,.email-skeletone,.btn-skeletone,.svg_skeletone,.link-btn-skeletone,.logo-skeletone{
+.text-skeletone,.tabskeletone,.skeletone,.email-skeletone,.btn-skeletone,.svg_skeletone,.link-btn-skeletone,.logo-skeletone,
+.min-dropdown-skeletone{
     position: relative;
     background-color: rgb(0, 0, 0, 0.06);
 }
@@ -717,6 +718,21 @@ img#tableLoaderShow {
     100% {
         background-position: 100% 0;
     }
+}
+.min-dropdown-skeletone::before{
+    content: "";
+    position: absolute;
+    left: 1px;
+    top: 0;
+    width: 101%;
+    height: 120%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 3px;
+    margin-top: -1px;
+    margin-left: -2px;
 }
 .tabskeletone::before{
     content: "";
@@ -854,13 +870,25 @@ button#deleteBtn {
 }
 button#clearBtn{
     border: none;
+    background-color: white;
+}
+button#rowDeleteBtn{
+    border: none;
+    background-color: white;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
 }
 .attach_group {
     border: 2px dotted burlywood;
 }
 .file_name {
     margin-left: 5px;
-    background-color: #e1e1e1;
-    border-radius: 5px;
+    background-color: #bd8205;
+    border-radius: 4px;
     padding-right: 5px;
+    padding-left: 5px;
+    color: white;
+}
+.file_logo{
+    width: 50px;
+    height: 25px;
 }

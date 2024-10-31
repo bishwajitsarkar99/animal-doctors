@@ -381,6 +381,7 @@
         // view button Click and Parent Row Handle
         $(document).on('click', '#viewBtn', function(){
             var parentId = $(this).data('parent');
+            $(this).tooltip('hide');
             $(`.child-row[data-child='${parentId}']`).toggle('slow').delay(300);
         });
 
@@ -393,13 +394,23 @@
             $("#email_summernote").summernote('code', '');
             $("#selectAttachFile").val("");
             $("#email_attachment").val("");
+            $(".email_attachment").val("");
+            $(".attach_group").addClass("hidden");
+        });
+
+        // email forward input[type="file"] row remove
+        $(document).on('click', '#rowDeleteBtn', function(e){
+            e.preventDefault();
+            $(this).tooltip('hide');
+            $(this).closest('.attach_group').remove();
+            $(".email_attachment").val("");
         });
 
         // email forward
         $(document).on('click', '#forwardBtn', function(e){
             e.preventDefault();
+            $(this).tooltip('hide');
             var id = $(this).val();
-
             if(id){
                 $("#moreBtn").removeAttr('disabled');
                 $("#decrementBtn").removeAttr('disabled');
@@ -443,23 +454,57 @@
                             if (attachments && attachments.length > 0) {
                                 attachments.forEach(function(attachment) {
                                     let fileName = attachment.file.split('/').pop();
+                                    let fileExtension = fileName.split('.').pop().toLowerCase();
+                                    // Define logos for various file types
+                                    let pdfLogo = "{{ asset('backend_asset/main_asset/attachment-logo/pdf_logo.png') }}";
+                                    let xlsLogo = "{{ asset('backend_asset/main_asset/attachment-logo/excel-logo.png') }}";
+                                    let csvLogo = "{{ asset('backend_asset/main_asset/attachment-logo/csv_logo.jpg') }}";
+                                    let docxLogo = "{{ asset('backend_asset/main_asset/attachment-logo/docx_logo.png') }}";
+                                    // Base paths for attachments and user messages
+                                    let attachImagePath = `{{ asset('storage/attachments') }}/${fileName}`;
+                                    let userMessageImagePath = `{{ asset('storage/user_message') }}/${fileName}`;
 
                                     // Determine file path based on `attachment_type`
                                     let filePath = "";
+
                                     if (file_image === 'attachments') {
-                                        filePath = `/storage/app/public/attachments/${fileName}`;
-                                    } else if (file_image === 'user_message') {
-                                        filePath = `/storage/app/public/user_message/${fileName}`;
+                                        if (fileExtension === 'pdf') {
+                                            filePath = pdfLogo;
+                                        } else if (['xls', 'xlsx'].includes(fileExtension)) {
+                                            filePath = xlsLogo;
+                                        } else if (fileExtension === 'csv') {
+                                            filePath = csvLogo;
+                                        } else if (fileExtension === 'docx') {
+                                            filePath = docxLogo;
+                                        } else if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
+                                            filePath = attachImagePath;
+                                        }
+                                    } else if(file_image === 'user_message') {
+                                        if (fileExtension === 'pdf') {
+                                            filePath = pdfLogo;
+                                        } else if (['xls', 'xlsx'].includes(fileExtension)) {
+                                            filePath = xlsLogo;
+                                        } else if (fileExtension === 'csv') {
+                                            filePath = csvLogo;
+                                        } else if (fileExtension === 'docx') {
+                                            filePath = docxLogo;
+                                        } else if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
+                                            filePath = userMessageImagePath;
+                                        }
                                     }
 
                                     // Append file name and display image for each attachment
                                     attachmentPreview.append(`
                                         <div class="attach_group mb-1">
                                             <span class="file_name">${fileName}</span>
-                                            <img class="register_img" src="${filePath}" alt="Attachment Image" style="width: 10px; height: 10px; margin-top: 5px;" />
-                                            <input type="file" class="form-control form-control-sm attachment hidden" name="email_attachments[]" vlaue="${fileName}" id="email_attachment" multiple />
+                                            <img class="file_logo" src="${filePath}" alt="Attachment Image" />
+                                            <button type="button" class="btn-close btn-btn-sm" id="rowDeleteBtn" data-bs-dismiss="modal" aria-label="Close"
+                                                data-bs-toggle="tooltip"  data-bs-placement="right" title="Remove" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
+                                            </button>
+                                            <input type="hidden" class="form-control form-control-sm attachment email_attachment" name="email_attachments[]" value="${fileName}" id="email_attachment" />
                                         </div>
                                     `);
+                                    $('[data-bs-toggle="tooltip"]').tooltip();
                                 });
                             } else {
                                 attachmentPreview.append(`<div class="col-xl-4">No attachments added.</div>`);
@@ -473,6 +518,7 @@
                 }
             });
         });
+        
         // Show Pdf,Excle,Csv logo in modal
         $(document).on('click', '.attachment_file_link_btn', function(e) {
             e.preventDefault();
@@ -526,6 +572,7 @@
         });
         // Refresh Button
         $(document).on('click', '#refreshIconBtn', function(){
+            $(this).tooltip('hide');
             $("#select_attachment").val("");
             $("#select_status").val("");
             $("#email_search").val("");
@@ -549,6 +596,7 @@
         });
         // Select All Table Rows and Checkboxes
         $(document).on('click', '#allSelectBtn', function() {
+            $(this).tooltip('hide');
             const isChecked = $(this).is(':checked');
             $('.selectBtn').prop('checked', isChecked);
             // Toggle background for all rows based on "Select All" checkbox state
@@ -589,6 +637,7 @@
         // Update "Select All" checkbox based on individual selections
         $(document).on('click', '#selectBtn', function() {
             const isChecked = $(this).is(':checked');
+            $(this).tooltip('hide');
             
             // Toggle row background based on checkbox state
             if (isChecked) {
@@ -609,30 +658,27 @@
         // Email Inbox modal
         $(document).on('click', '#email_search_page', function(e){
             e.preventDefault();
+
             $("#emailSearchModal").modal('show').fadeIn(300).delay(300);
             $("#loader_email_modal").modal('show').fadeIn(300).delay(300);
 
             addAttributeOrClass([
-                {selector: '.selection,.clos_btn2 ,.group_btn,.current_month,.input1,.input2,.input3,.input4,.input5,.custom-select,#user_email_get_data_table_paginate', type: 'class', name: 'text-skeletone'},
-                {selector: '.next_btn', type: 'class', name: 'skeletone'},
                 {selector: '#email_data_table', type: 'class', name: 'tabskeletone'},
-                {selector: '.tot_summ', type: 'class', name: 'email-skeletone'},
-                {selector: '#cate_delete5', type: 'class', name: 'btn-skeletone'},
-                {selector: '.progress', type: 'class', name: 'progress-bar-skeleton'},
             ]);
 
             var time = null;
             time = setTimeout(() => {
                 $("#loader_email_modal").modal('hide');
                 removeAttributeOrClass([
-                    {selector: '.selection,.clos_btn2 ,.group_btn,.current_month,.input1,.input2,.input3,.input4,.input5,.custom-select,#user_email_get_data_table_paginate', type: 'class', name: 'text-skeletone'},
+                    {selector: '.selection,.inbox_clos_btn ,.group_btn,.current_month,.input1,.input2,.input3,.input4,.input5,.custom-select,#user_email_get_data_table_paginate,.timezone', type: 'class', name: 'text-skeletone'},
+                    {selector: '.email__select', type: 'class', name: 'min-dropdown-skeletone'},
                     {selector: '.next_btn', type: 'class', name: 'skeletone'},
                     {selector: '#email_data_table', type: 'class', name: 'tabskeletone'},
                     {selector: '.tot_summ', type: 'class', name: 'email-skeletone'},
                     {selector: '#cate_delete5', type: 'class', name: 'btn-skeletone'},
                     {selector: '.progress', type: 'class', name: 'progress-bar-skeleton'},
                 ]);
-            }, 1000);
+            }, 3000);
 
             return ()=>{
                 clearTimeout(time);
@@ -640,14 +686,6 @@
         });
         // image modal skeletone
         $(document).on('click', '.attachment_file', function(){
-            addAttributeOrClass([
-                {selector: '.svg__doted', type: 'class', name: 'svg_skeletone'},
-                {selector: '#showAttImage', type: 'class', name: 'hidden'},
-                {selector: '.img_title, .img_close', type: 'class', name: 'text-skeletone'},
-            ]);
-            removeAttributeOrClass([
-                {selector: '#imgSkeltone', type: 'class', name: 'hidden'},
-            ]);
             var time = null;
             time = setTimeout(() => {
                 removeAttributeOrClass([
@@ -658,7 +696,7 @@
                 addAttributeOrClass([
                     {selector: '#imgSkeltone', type: 'class', name: 'hidden'},
                 ]);
-            }, 1000);
+            }, 3000);
 
             return ()=>{
                 clearTimeout(time);
@@ -667,17 +705,11 @@
         });
         // file modal skeletone
         $(document).on('click', '#attfile_link_btn', function(){
-            addAttributeOrClass([
-                {selector: '.attach_header', type: 'class', name: 'text-skeletone'},
-                {selector: '.atth_close, .attch_text,.atth_fl,.atth_fl2', type: 'class', name: 'text-skeletone'},
-                {selector: '.logo_skeletone', type: 'class', name: 'logo-skeletone'},
-                {selector: '.downloadBtn', type: 'class', name: 'link-btn-skeletone'},
-            ]);
             var time = null;
             time = setTimeout(() => {
                 removeAttributeOrClass([
-                    {selector: '.attach_header', type: 'class', name: 'text-skeletone'},
-                    {selector: '.atth_close, .attch_text,.atth_fl,.atth_fl2', type: 'class', name: 'text-skeletone'},
+                    {selector: '.atth_close,.attach_header', type: 'class', name: 'text-skeletone'},
+                    {selector: '.attch_text,.atth_fl,.atth_fl2', type: 'class', name: 'text-skeletone'},
                     {selector: '.logo_skeletone', type: 'class', name: 'logo-skeletone'},
                     {selector: '.downloadBtn', type: 'class', name: 'link-btn-skeletone'},
                 ]);
