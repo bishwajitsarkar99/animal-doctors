@@ -145,9 +145,96 @@ class EmailServiceProvider
         }
     }
     /**
-     * Handle Super Admin Fetch Email
+     * Handle Send Email Fetch 
     */
-    public function fetchUserEmail(Request $request)
+    public function sendFetchUserEmail(Request $request)
+    {
+        if (!$request->ajax()) {
+            return abort(404);
+        }
+        $attachment_type = $request->input('attachment_type');
+        $status = $request->input('status');
+        $read_mail = $request->input('read_mail');
+        $send_start_date = $request->input('send_start_date');
+        $send_end_date = $request->input('send_end_date');
+        $user_to = $request->input('user_to');
+        // Initialize month and year arrays
+        $months = [];
+        $years = [];
+    
+        if ($send_start_date && $send_end_date) {
+            $start = Carbon::parse($send_start_date)->startOfMonth();
+            $end = Carbon::parse($send_end_date)->endOfMonth();
+    
+            while ($start->lte($end)) {
+                $months[] = $start->format('F Y');
+                $start->addMonth();
+            }
+            $years = array_unique(array_map(function($month) {
+                return Carbon::parse($month)->format('Y');
+            }, $months));
+        }
+        // Users
+        $authID = Auth::user()->id;
+        $query = UserEmail::whereNotNull('user_to')
+            ->where('sender_user', '=', $authID)
+            ->with(['roles'])
+            ->orderBy('id', 'desc');
+
+        // Apply date filter
+        if ($send_start_date && $send_end_date) {
+            $query->whereBetween('created_at', [
+                Carbon::parse($send_start_date), 
+                Carbon::parse($send_end_date)->endOfDay()
+            ]);
+        }
+
+        // Apply attachment_type filters
+        if ($attachment_type) {
+            $query->where('attachment_type', 'LIKE', '%' . $attachment_type . '%');
+        }
+        // Apply user email filters
+        if ($user_to) {
+            $query->where('user_to', 'LIKE', '%' . $user_to . '%');
+        }
+        // Apply email status filters
+        if ($status !== null) {
+            $query->where('status', $status);
+        }
+        // Apply read or unread email filters
+        if ($read_mail !== null) {
+            $query->where('read_mail', $read_mail);
+        }
+        
+        // Auth Users id
+        $userId = Auth::user()->id;
+        // Total Send User Email According to Month
+        $total_send_emails = UserEmail::whereNotNull('user_to')->where('sender_user', '=', $userId)->count();
+        
+        $perItem = $request->input('per_item', 10);
+        $data = $query->paginate($perItem)->toArray();
+        dd($data);
+        return response()->json([
+            'data' => $data['data'],
+            'links' => $data['links'],
+            'total' => $data['total'],
+            'total_send_emails' => $total_send_emails,
+            'months' => $months,
+            'years' => array_values($years)
+
+        ], 200);
+    }
+    /**
+     * Handle Send Forward Email 
+    */
+    public function sendForwardUserEmail(Request $request, $id)
+    {
+        //
+    }
+    /**
+     * Handle Inbox Fetch Email
+    */
+    public function inboxFetchUserEmail(Request $request)
     {
         if (!$request->ajax()) {
             return abort(404);
@@ -248,9 +335,9 @@ class EmailServiceProvider
         ], 200);
     }
     /**
-     * Handle Forward Email 
+     * Handle Inbox Forward Email 
     */
-    public function userForwardEmail(Request $request, $id)
+    public function inboxForwardUserEmail(Request $request, $id)
     {
         $forward_email = UserEmail::find($id);
         if($forward_email){
@@ -266,9 +353,23 @@ class EmailServiceProvider
         }
     }
     /**
-     * Handle Draft Mail Fetch
+     * Handle Draft List Fetch
     */
-    public function darftUserEmail(Request $request)
+    public function getDraftFetchUserEmail(Request $request)
+    {
+        //
+    }
+    /**
+     * Handle Draft Forward Mail
+    */
+    public function draftForwardUserEmail(Request $request, $id)
+    {
+        //
+    }
+    /**
+     * Handle Draft Update Mail
+    */
+    public function draftUpdateUserEmail(Request $request, $id)
     {
         //
     }

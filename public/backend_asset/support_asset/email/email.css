@@ -244,6 +244,12 @@ a#email_setting:hover{
     height: 2.2em;
     /* border-bottom: double silver; */
 }
+.send_email_modal_footer{
+    background: transparent;
+    background-image: repeating-linear-gradient(55deg, #cfb189, transparent 1px);
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    height: 2.2em;
+}
 .body_area{
     background: transparent;
     background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);
@@ -314,7 +320,7 @@ button.search_btn:hover{
     border-color: #007bff;
     opacity: 1;
 }
-#start_date{
+#start_date,#send_start_date{
     font-family: var(--nav-font-family);
     box-shadow: none;
     cursor: pointer;
@@ -324,7 +330,7 @@ button.search_btn:hover{
     font-size: 12px;
     font-weight: 700;
 }
-#end_date{
+#end_date,#send_end_date{
     font-family: var(--nav-font-family);
     box-shadow: none;
     cursor: pointer;
@@ -343,7 +349,7 @@ button.search_btn:hover{
     font-size: 12px;
     font-weight: 700;
 }
-select#select_attachment,select#select_status{
+select#select_attachment,select#select_status,select#select_attachment_email,select#select_status_email{
     font-family: var(--nav-font-family);
     box-shadow: none;
     cursor: pointer;
@@ -353,7 +359,9 @@ select#select_attachment,select#select_status{
     font-size: 12px;
     font-weight: 700; 
 }
-input#start_date:focus,input#end_date:focus,input#email_search:focus,select#select_attachment:focus,select#select_status:focus{
+input#start_date:focus,input#end_date:focus,input#email_search:focus,input#send_email_search:focus,select#select_attachment:focus,select#select_status:focus
+,select#select_attachment_email:focus,select#select_status_email:focus,input#send_start_date:focus
+,input#send_end_date:focus{
     /* border-color: dodgerblue; */
     border: 2px solid dodgerblue;
 }
@@ -361,7 +369,7 @@ input#start_date:focus,input#end_date:focus,input#email_search:focus,select#sele
     color: lightgray;
     font-weight: 700;
 }
-select#select_read_email {
+select#select_read_email,select#select_send_read_email {
     font-family: var(--nav-font-family);
     box-shadow: none;
     cursor: pointer;
@@ -376,13 +384,13 @@ select#select_read_email {
     margin-bottom: 1px;
     border-radius: 3px;
 }
-select#select_read_email:hover{
+select#select_read_email:hover,select#select_send_read_email:hover{
     background-color: lightgrey;
 }
-select#select_read_email:focus{
+select#select_read_email:focus,select#select_send_read_email:focus{
     border: 2px solid dodgerblue;
 }
-select#perItemControl {
+select#perItemControl,select#perItemSendEmail {
     outline: none;
     color: black;
     font-weight: 600;
@@ -401,7 +409,7 @@ select#perItemControl {
 .margin_search{
     margin-left: 22px;
 }
-.group_btn {
+.group_btn,.send_group_btn {
     margin-top: -3px;
 }
 label.tot-search {
@@ -472,7 +480,7 @@ tr.user-table-row:hover{
         color: darkblue;
     }
 }
-#user_email_get_data_table_paginate {
+#user_email_get_data_table_paginate,#user_send_email_get_data_table_paginate {
     float: right;
 }
 .dropdown-item {
@@ -499,7 +507,7 @@ button#dropdownButton {
 .month_box {
     text-align: right;
 }
-span#email_month {
+span#email_month,span#send_email_month {
     font-family: var(--nav-font-family);
     font-size: 13px;
     font-weight: 600;
@@ -858,7 +866,7 @@ button#deleteBtn {
     background-color: white;
     border: none;
 }
-.timezone {
+.timezone,.send_timezone {
     font-size: 12px;
     font-weight: 700;
     padding-top: 5px;

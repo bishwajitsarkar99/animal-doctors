@@ -267,6 +267,17 @@
       changeMonth: true,
       changeYear: true,
     });
+    // Send Email Date Picker
+    $('#send_start_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
+    $('#send_end_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
   });
 </script>
 <!-- Summary Note Initialize -->
