@@ -233,7 +233,7 @@
     // Table row increment
     document.getElementById('moreBtn').addEventListener('click', function(e) {
       e.preventDefault();
-
+      $(this).tooltip('hide');
       var tableBody = document.querySelector('#fileTable');
       
       var firstRow = document.querySelector('#fileTable tr:first-child');
@@ -247,6 +247,7 @@
     // Table row decrement
     document.getElementById('decrementBtn').addEventListener('click', function(e) {
       e.preventDefault();
+      $(this).tooltip('hide');
       $("#email_attachment").val("");
       var tableBody = document.querySelector('#fileTable');
 

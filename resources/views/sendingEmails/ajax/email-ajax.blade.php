@@ -387,6 +387,7 @@
 
         // clear email form
         $(document).on('click', '#clearBtn', function(){
+            $(this).tooltip('hide');
             $("#inputTo").tagsinput('removeAll');
             $("#inputCC").tagsinput('removeAll');
             $("#inputBCC").tagsinput('removeAll');

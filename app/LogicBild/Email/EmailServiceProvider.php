@@ -230,9 +230,7 @@ class EmailServiceProvider
                                         ->where('status','=', 0)
                                         ->count();
         // Total Send User Email According to Month
-        $startOfMonth = Carbon::now()->startOfMonth();
-        $endOfMonth = Carbon::now()->endOfMonth();
-        $total_send_emails = UserEmail::whereNotNull('user_to')->whereBetween('created_at', [$startOfMonth, $endOfMonth])->where('sender_user', '=', $userId)->count();
+        $total_send_emails = UserEmail::whereNotNull('user_to')->where('sender_user', '=', $userId)->count();
         
         $perItem = $request->input('per_item', 10);
         $data = $query->paginate($perItem)->toArray();
