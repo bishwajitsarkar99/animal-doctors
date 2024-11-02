@@ -340,7 +340,7 @@ button.search_btn:hover{
     font-size: 12px;
     font-weight: 700;
 }
-#email_search{
+#email_search,#send_email_search{
     font-family: var(--nav-font-family);
     box-shadow: none;
     border: 1px solid #ebebeb;
@@ -390,6 +390,12 @@ select#select_read_email:hover,select#select_send_read_email:hover{
 select#select_read_email:focus,select#select_send_read_email:focus{
     border: 2px solid dodgerblue;
 }
+.custom-select {
+    position: relative;
+}
+.send_data_item {
+    position: relative;
+}
 select#perItemControl,select#perItemSendEmail {
     outline: none;
     color: black;
@@ -405,6 +411,22 @@ select#perItemControl,select#perItemSendEmail {
     font-size: 14px;
     background-color: transparent;
     border: 1px solid lightcyan;
+}
+.email-progress-bar-skeleton{
+    position: relative;
+}
+.email-progress-bar-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
 }
 .margin_search{
     margin-left: 22px;
@@ -480,7 +502,7 @@ tr.user-table-row:hover{
         color: darkblue;
     }
 }
-#user_email_get_data_table_paginate,#user_send_email_get_data_table_paginate {
+#user_email_get_data_table_paginate,#send_email_data_table_paginate {
     float: right;
 }
 .dropdown-item {

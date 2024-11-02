@@ -678,18 +678,6 @@
             }
 
             return rows.map((row, key) => {
-                var statusClass, statusText, statusColor, statusBg;
-                if (row.status == 0) {
-                    statusClass = 'text-white';
-                    statusText = 'New';
-                    statusColor = '';
-                    statusBg = 'badge rounded-pill bg-status';
-                } else if (row.status == 1) {
-                    statusClass = '';
-                    statusText = '';
-                    statusColor = '';
-                    statusBg = '';
-                }
                 var created_by = 'Unknown';
                 if (row.sender_user != null) {
                     switch (row.sender_user) {
@@ -759,7 +747,7 @@
                 }).join('');
 
                 return `
-                    <tr class="table-row user-table-row parent-row select-row-background" key="${key}" style="${statusColor}">
+                    <tr class="table-row user-table-row parent-row select-row-background" key="${key}">
                         <td class="line-height-td child-td" style="text-align:left;color:#000000;" id="treeRow">
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="checkBtn" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <input class="form-check-input selectBtn" type="checkbox" value="${row.id}" id="selectBtn" style="font-size:13px;margin-top: -1px;">
@@ -773,10 +761,7 @@
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                                 <i class="fa-solid fa-trash-can fa-beat"></i>
                             </button>
-                            <span class="child-td1 ps-1">${fromEmail ? fromEmail : row.sender_email}</span>
-                            <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:12px;">
-                                ${statusText}
-                            </span>
+                            <span class="child-td1 ps-1">To : ${fromEmail ? fromEmail : row.sender_email}</span>
                             <span class="child-td1 ps-1">${formatDate(row.created_at)}</span>
                         </td>
                         <td class="child-td1 ps-1" id="lastTd">
@@ -851,13 +836,14 @@
                 perItem = $("#perItemSendEmail").val();
             }
 
+            // Get filter values
             const send_start_date = $("#send_start_date").val();
             const send_end_date = $("#send_end_date").val();
             const attachment_type = $("#select_attachment_email").val();
             const status = $("#select_status_email").val();
-            const read_mail = $("#select_send_read_email").val();
             const user_to = $("#send_email_search").val();
 
+            // Set URL for AJAX request
             let current_url = url ? url : `{{ route('email.send_list') }}?per_item=${perItem}`;
 
             $.ajax({
@@ -865,13 +851,12 @@
                 url: current_url,
                 dataType: 'json',
                 data: { 
-                    query: query, 
+                    query: query,
                     send_start_date: send_start_date,
                     send_end_date: send_end_date,
                     attachment_type: attachment_type,
-                    user_to : user_to,
-                    status : status,
-                    read_mail : read_mail,
+                    user_to: user_to,
+                    status: status,
                 },
                 success: function(response) {
                     const {
@@ -885,7 +870,7 @@
 
                     $("#send_data_table").html(table_rows(data));
                     // Handle pagination and other UI updates if necessary
-                    $("#user_send_email_get_data_table_paginate").html(paginate_html({ 
+                    $("#send_email_data_table_paginate").html(paginate_html({ 
                         links, 
                         total,
                         months, 
@@ -939,7 +924,7 @@
         };
 
         // change paginate page------------------------
-        $("#user_send_email_get_data_table_paginate").delegate("a", "click", function(e) {
+        $("#send_email_data_table_paginate").delegate("a", "click", function(e) {
             e.stopImmediatePropagation();
             e.preventDefault();
 
@@ -950,6 +935,18 @@
             }
 
         });
+
+        // Live Search
+        $("#send_email_search").on('keyup', function(){
+            var query = $(this).val();
+            fetch_send_email(query); 
+        });
+
+        // Attach File and Email Filter
+        $("#send_start_date, #send_end_date, #select_attachment_email,#select_status_email").on('change', ()=>{
+            fetch_send_email(); 
+        });
+        
     });
 
     // Draft
@@ -1044,13 +1041,13 @@
             time = setTimeout(() => {
                 $("#loader_email_modal").modal('hide');
                 removeAttributeOrClass([
-                    {selector: '.send_selection,.send_clos_btn,.send_group_btn,.send_current_month,.send_input1,.send_input2,.send_input3,.send_input4,.send_input5,.send_timezone,.send_data_item,#user_send_email_get_data_table_paginate', type: 'class', name: 'text-skeletone'},
+                    {selector: '.send_selection,.send_clos_btn,.send_group_btn,.send_current_month,.send_input1,.send_input2,.send_input3,.send_input4,.send_input5,.send_timezone,.send_data_item,#send_email_data_table_paginate', type: 'class', name: 'text-skeletone'},
                     {selector: '.send__email__select', type: 'class', name: 'min-dropdown-skeletone'},
                     {selector: '.send_next_btn', type: 'class', name: 'skeletone'},
                     {selector: '#send_data_table', type: 'class', name: 'tabskeletone'},
                     {selector: '.send_email_sum', type: 'class', name: 'email-skeletone'},
                     {selector: '#send_list_cancel', type: 'class', name: 'btn-skeletone'},
-                    {selector: '.send_email_progress', type: 'class', name: 'progress-bar-skeleton'},
+                    {selector: '.send_email_progress', type: 'class', name: 'email-progress-bar-skeleton'},
                 ]);
             }, 3000);
 

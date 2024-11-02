@@ -127,8 +127,8 @@
               <label class="badge rounded-pill bg-primary" for="total_user_email skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_user_email"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
             </span>
             <div class="progress progress-bar-skeleton" style="height:0.3rem;">
-              <div class="progress-bar progress-bar-striped bg-email progress-bar-animated" role="progressbar" aria-valuenow="{{ $user_email_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $user_email_percentage }}%;">
-                {{ round($user_email_percentage, 2) }}%
+              <div class="progress-bar progress-bar-striped bg-email progress-bar-animated" role="progressbar" aria-valuenow="{{ $inbox_email_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $inbox_email_percentage }}%;">
+                {{ round($inbox_email_percentage, 2) }}%
               </div>
             </div>
           </div>

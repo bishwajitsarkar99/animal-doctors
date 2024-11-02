@@ -22,14 +22,26 @@ class EmailServiceProvider
     */ 
     public function viewEmailTemplate(Request $request)
     {
-        // Total User
+        $user_email = Auth::user()->email;
+        $user_id = Auth::user()->id;
+        // Total Email
         $userEmails = User::count();
-        // Total User Email
-        $total_emails = UserEmail::whereNotNull('user_to')->count();
-        // Calculate the percentage of total users
-        $user_email_percentage = $total_emails > 0 ? ($total_emails / $userEmails) * 100 : 0;
+        // Total inbox Email
+        $total_emails = UserEmail::whereNotNull('user_to')
+                                    ->where('user_to', 'LIKE', "%$user_email")
+                                    ->orWhere('user_cc', 'LIKE', "%$user_email")
+                                    ->orWhere('user_bcc', 'LIKE', "%$user_email")
+                                    ->count();
 
-        return view('sendingEmails.index', compact('user_email_percentage'));
+        // Total Send User Email According to Month
+        $total_send_emails = UserEmail::whereNotNull('user_to')->where('sender_user', '=', $user_id)->count();
+
+        // Calculate the percentage of total inbox email
+        $inbox_email_percentage = $total_emails > 0 ? ($total_emails / $userEmails) * 100 : 0;
+        // Calculate the percentage of total send email
+        $send_email_percentage = $total_send_emails > 0 ? ($total_send_emails / $userEmails) * 100 : 0;
+
+        return view('sendingEmails.index', compact('inbox_email_percentage', 'send_email_percentage'));
     }
     /**
      * Handle Send Email
@@ -152,16 +164,19 @@ class EmailServiceProvider
         if (!$request->ajax()) {
             return abort(404);
         }
+    
+        // Input filters
         $attachment_type = $request->input('attachment_type');
         $status = $request->input('status');
-        $read_mail = $request->input('read_mail');
         $send_start_date = $request->input('send_start_date');
         $send_end_date = $request->input('send_end_date');
         $user_to = $request->input('user_to');
+    
         // Initialize month and year arrays
         $months = [];
         $years = [];
     
+        // Generate month and year filters if date range is provided
         if ($send_start_date && $send_end_date) {
             $start = Carbon::parse($send_start_date)->startOfMonth();
             $end = Carbon::parse($send_end_date)->endOfMonth();
@@ -170,58 +185,52 @@ class EmailServiceProvider
                 $months[] = $start->format('F Y');
                 $start->addMonth();
             }
-            $years = array_unique(array_map(function($month) {
+    
+            $years = array_unique(array_map(function ($month) {
                 return Carbon::parse($month)->format('Y');
             }, $months));
         }
-        // Users
+    
+        // Query setup
         $authID = Auth::user()->id;
         $query = UserEmail::whereNotNull('user_to')
             ->where('sender_user', '=', $authID)
             ->with(['roles'])
             ->orderBy('id', 'desc');
-
-        // Apply date filter
+    
+        // Apply filters
         if ($send_start_date && $send_end_date) {
             $query->whereBetween('created_at', [
                 Carbon::parse($send_start_date), 
                 Carbon::parse($send_end_date)->endOfDay()
             ]);
         }
-
-        // Apply attachment_type filters
         if ($attachment_type) {
             $query->where('attachment_type', 'LIKE', '%' . $attachment_type . '%');
         }
-        // Apply user email filters
         if ($user_to) {
             $query->where('user_to', 'LIKE', '%' . $user_to . '%');
         }
-        // Apply email status filters
         if ($status !== null) {
             $query->where('status', $status);
         }
-        // Apply read or unread email filters
-        if ($read_mail !== null) {
-            $query->where('read_mail', $read_mail);
-        }
-        
-        // Auth Users id
-        $userId = Auth::user()->id;
-        // Total Send User Email According to Month
-        $total_send_emails = UserEmail::whereNotNull('user_to')->where('sender_user', '=', $userId)->count();
-        
+    
+        // Count total emails sent by the authenticated user
+        $total_send_emails = UserEmail::whereNotNull('user_to')
+            ->where('sender_user', '=', $authID)
+            ->count();
+    
+        // Paginate results
         $perItem = $request->input('per_item', 10);
         $data = $query->paginate($perItem)->toArray();
-        dd($data);
+        // Return response
         return response()->json([
             'data' => $data['data'],
             'links' => $data['links'],
             'total' => $data['total'],
             'total_send_emails' => $total_send_emails,
             'months' => $months,
-            'years' => array_values($years)
-
+            'years' => array_values($years),
         ], 200);
     }
     /**
