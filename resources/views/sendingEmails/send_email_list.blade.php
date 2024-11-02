@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-xl">
     <div class="modal-content">
       <div class="modal-header email_modal_header">
-        <h5 class="modal-title send_selection text-skeletone" id="staticBackdropLabelHeader" style="color: black;"><i class="fa-solid fa-inbox"></i> Send (<span id="send_emails"></span>)</h5>
+        <h5 class="modal-title send_selection text-skeletone" id="staticBackdropLabelHeader" style="color: black;"><i class="fa-solid fa-share"></i> Send (<span id="send_emails"></span>)</h5>
         <button type="button" class="btn-close btn-btn-sm send_clos_btn text-skeletone" data-bs-dismiss="modal" aria-label="Close"
           data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
         </button>
@@ -14,7 +14,7 @@
             <div class="col-xl-1">
               <div class="btn-group send_group_btn text-skeletone">
                 <button type="button" class="btn btn-light btn-sm" data-bs-toggle="tooltip"  data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                  <input class="form-check-input" type="checkbox" id="allSelectBtn">
+                  <input class="form-check-input" type="checkbox" id="allSelection">
                 </button>
                 <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownButton">Select</button>
                 <ul class="dropdown-menu" id="themeMenuListBackground">
@@ -25,7 +25,7 @@
             </div>
             <div class="col-xl-1">
               <div class="group_btn send_next_btn skeletone">
-                <button class="btn btn-light btn-sm" type="button" id="refreshIconBtn"
+                <button class="btn btn-light btn-sm" type="button" id="refreshDataBtn"
                   data-bs-toggle="tooltip"  data-bs-placement="top" title="Refresh" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                   <i class="refresh_rotate_icon fa-solid fa-arrow-rotate-right"></i>
                 </button>
@@ -120,7 +120,7 @@
                 {{ round($send_email_percentage, 2) }}%
               </div>
             </div>
-            (<span id="send_emails"></span>)
+            <span class="temp_storage storg_send text-skeletone">Storage send email (<span id="send_emails_progress"></span>) Of <span >{{$totalEmails}}</span></span>
           </div>
           <div class="col-8">
             <div class="pagination text-skeletone" id="send_email_data_table_paginate">

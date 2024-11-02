@@ -164,11 +164,11 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content image_preview">
       <div class="modal-header">
-        <h5 class="modal-title attach_header text-skeletone" id="fileModalLabel"><span id="fileNam"></span> Attachment File</h5>
-        <span class="logo_skeletone logo-skeletone">
+        <h5 class="modal-title attach_header" id="fileModalLabel"><span id="fileNam"></span> Attachment File</h5>
+        <span class="logo_skeletone">
           <img class="logo_attachment_file" src="" alt="Attachment Image" id="logoFile" />
         </span>
-        <button type="button" class="btn-close btn-btn-sm atth_close text-skeletone" data-bs-dismiss="modal" aria-label="Close"
+        <button type="button" class="btn-close btn-btn-sm atth_close" data-bs-dismiss="modal" aria-label="Close"
           data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
         </button>
       </div>

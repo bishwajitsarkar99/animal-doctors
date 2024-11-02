@@ -25,6 +25,8 @@ class EmailServiceProvider
         $user_email = Auth::user()->email;
         $user_id = Auth::user()->id;
         // Total Email
+        $totalEmails = UserEmail::whereNotNull('user_to')->count();
+        // Total User
         $userEmails = User::count();
         // Total inbox Email
         $total_emails = UserEmail::whereNotNull('user_to')
@@ -41,7 +43,7 @@ class EmailServiceProvider
         // Calculate the percentage of total send email
         $send_email_percentage = $total_send_emails > 0 ? ($total_send_emails / $userEmails) * 100 : 0;
 
-        return view('sendingEmails.index', compact('inbox_email_percentage', 'send_email_percentage'));
+        return view('sendingEmails.index', compact('inbox_email_percentage', 'send_email_percentage', 'totalEmails'));
     }
     /**
      * Handle Send Email

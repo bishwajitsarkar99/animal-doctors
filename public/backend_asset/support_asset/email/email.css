@@ -263,7 +263,7 @@ a#email_setting:hover{
     background-color: #0d6efd !important;
     border-color: #0d6efd !important;
 }
-input#allSelectBtn{
+input#allSelectBtn,input#allSelection{
     box-shadow: none;
     cursor: pointer;
     margin-top: 1px;
@@ -465,11 +465,11 @@ button#viewBtn {
     border: none;
     background-color: #fff;
 }
-button#forwardBtn{
+button#forwardBtn,button#sendForwardBtn{
     border: none;
     background-color: #fff;
 }
-button#checkBtn:hover,button#viewBtn:hover,button#deleteBtn:hover,button#forwardBtn:hover{
+button#checkBtn:hover,button#viewBtn:hover,button#deleteBtn:hover,button#forwardBtn:hover,button#sendForwardBtn:hover{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     border-radius: 50%;
     background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);
@@ -921,4 +921,9 @@ button#rowDeleteBtn{
 .file_logo{
     width: 50px;
     height: 25px;
+}
+.temp_storage {
+    font-size: 12px;
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }

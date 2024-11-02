@@ -600,7 +600,7 @@
             };
         });
         // Select All Table Rows and Checkboxes
-        $(document).on('click', '#allSelectBtn', function() {
+        $(document).on('click', '#allSelectBtn, #allSelection', function() {
             $(this).tooltip('hide');
             const isChecked = $(this).is(':checked');
             $('.selectBtn').prop('checked', isChecked);
@@ -755,13 +755,13 @@
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-regular fa-eye fa-beat" style="margin-top: 1px;"></i>
                             </button>
-                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="forwardBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="sendForwardBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-solid fa-share-nodes fa-beat" style="margin-top: 1px;"></i>
                             </button>
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                                 <i class="fa-solid fa-trash-can fa-beat"></i>
                             </button>
-                            <span class="child-td1 ps-1">To : ${fromEmail ? fromEmail : row.sender_email}</span>
+                            <span class="child-td1 ps-1">To : ${fromEmail ? fromEmail : row.user_to}</span>
                             <span class="child-td1 ps-1">${formatDate(row.created_at)}</span>
                         </td>
                         <td class="child-td1 ps-1" id="lastTd">
@@ -880,16 +880,17 @@
                     $("#total_user_send_email").text(total);
                     // Modal Header Send
                     $("#send_emails").text(formatNumber(total_send_emails));
+                    $("#send_emails_progress").text(formatNumber(total_send_emails));
                     // Update current month element with the new data
                     $("#send_email_month").text(months.length > 0 ? months.join(', ') : '');
 
                     $('[data-bs-toggle="tooltip"]').tooltip();
 
-                    const userID = data.map(item => ({
+                    const userMail = data.map(item => ({
                         label: `${item.user_to}`,
                         value: item.id,
                     }));
-                    $("#send_email_search").autocomplete({ source: userID });
+                    $("#send_email_search").autocomplete({ source: userMail });
                 },
                 error: function(error) {
                     console.log('Error fetching data:', error);
@@ -946,6 +947,144 @@
         $("#send_start_date, #send_end_date, #select_attachment_email,#select_status_email").on('change', ()=>{
             fetch_send_email(); 
         });
+
+        // Refresh Button
+        $(document).on('click', '#refreshDataBtn', function(){
+            $(this).tooltip('hide');
+            $("#select_attachment_email").val("");
+            $("#select_status_email").val("");
+            $("#send_email_search").val("");
+            $("#allSelection").prop('checked', false);
+            $('.show-btn').addClass('delete-btn-display');
+            fetch_send_email();
+            var time = null;
+            addAttributeOrClass([
+               {selector: '.refresh_rotate_icon', type: 'class', name: 'fa-spin'} 
+            ]);
+            // Remove fa-spin
+            var timeOut = setTimeout(() => {
+                removeAttributeOrClass([
+                    {selector: '.refresh_rotate_icon', type: 'class', name: 'fa-spin'} 
+                ]);
+            }, 1000);
+
+            return () => {
+                clearTimeout(timeOut);
+            };
+        });
+
+        // send email forward
+        $(document).on('click', '#sendForwardBtn', function(e){
+            e.preventDefault();
+            $(this).tooltip('hide');
+            var id = $(this).val();
+            if(id){
+                $("#moreBtn").removeAttr('disabled');
+                $("#decrementBtn").removeAttr('disabled');
+                $("#email_attachment").removeClass('hidden');
+            }
+
+            $.ajax({
+                type: 'GET',
+                url: "/email/forward/" + id,
+                success: function(response){
+                    $('#success_message').html("").removeClass('alert alert-danger');
+                    if(response.status == 404){
+                        $('#success_message').addClass('alert alert-danger').text(response.messages);
+                    }else{
+                        $("#emailForwardID").text(id);
+                        // Set value for To field and refresh tagsinput
+                        $("#inputTo").tagsinput('removeAll');
+                        $("#inputTo").tagsinput('add', response.messages.user_to);
+
+                        // Set value for CC field and refresh tagsinput
+                        $("#inputCC").tagsinput('removeAll');
+                        $("#inputCC").tagsinput('add', response.messages.user_cc);
+
+                        // Set value for BCC field and refresh tagsinput
+                        $("#inputBCC").tagsinput('removeAll');
+                        $("#inputBCC").tagsinput('add', response.messages.user_bcc);
+
+                        // Set other fields
+                        $("#inputSubject").val(response.messages.subject);
+                        $("#email_summernote").summernote('code', response.messages.main_content);
+                        $("#selectAttachFile").val(response.messages.attachment_type);
+
+                        // Display attachment names in a separate div
+                        let attachmentPreview = $("#attachmentPreview");
+                        attachmentPreview.empty();
+
+                        try {
+                            let attachments = JSON.parse(response.messages.email_attachments);
+                            let file_image = response.messages.attachment_type;
+
+                            if (attachments && attachments.length > 0) {
+                                attachments.forEach(function(attachment) {
+                                    let fileName = attachment.file.split('/').pop();
+                                    let fileExtension = fileName.split('.').pop().toLowerCase();
+                                    // Define logos for various file types
+                                    let pdfLogo = "{{ asset('backend_asset/main_asset/attachment-logo/pdf_logo.png') }}";
+                                    let xlsLogo = "{{ asset('backend_asset/main_asset/attachment-logo/excel-logo.png') }}";
+                                    let csvLogo = "{{ asset('backend_asset/main_asset/attachment-logo/csv_logo.jpg') }}";
+                                    let docxLogo = "{{ asset('backend_asset/main_asset/attachment-logo/docx_logo.png') }}";
+                                    // Base paths for attachments and user messages
+                                    let attachImagePath = `{{ asset('storage/attachments') }}/${fileName}`;
+                                    let userMessageImagePath = `{{ asset('storage/user_message') }}/${fileName}`;
+
+                                    // Determine file path based on `attachment_type`
+                                    let filePath = "";
+
+                                    if (file_image === 'attachments') {
+                                        if (fileExtension === 'pdf') {
+                                            filePath = pdfLogo;
+                                        } else if (['xls', 'xlsx'].includes(fileExtension)) {
+                                            filePath = xlsLogo;
+                                        } else if (fileExtension === 'csv') {
+                                            filePath = csvLogo;
+                                        } else if (fileExtension === 'docx') {
+                                            filePath = docxLogo;
+                                        } else if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
+                                            filePath = attachImagePath;
+                                        }
+                                    } else if(file_image === 'user_message') {
+                                        if (fileExtension === 'pdf') {
+                                            filePath = pdfLogo;
+                                        } else if (['xls', 'xlsx'].includes(fileExtension)) {
+                                            filePath = xlsLogo;
+                                        } else if (fileExtension === 'csv') {
+                                            filePath = csvLogo;
+                                        } else if (fileExtension === 'docx') {
+                                            filePath = docxLogo;
+                                        } else if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
+                                            filePath = userMessageImagePath;
+                                        }
+                                    }
+
+                                    // Append file name and display image for each attachment
+                                    attachmentPreview.append(`
+                                        <div class="attach_group mb-1">
+                                            <span class="file_name">${fileName}</span>
+                                            <img class="file_logo" src="${filePath}" alt="Attachment Image" />
+                                            <button type="button" class="btn-close btn-btn-sm" id="rowDeleteBtn" data-bs-dismiss="modal" aria-label="Close"
+                                                data-bs-toggle="tooltip"  data-bs-placement="right" title="Remove" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
+                                            </button>
+                                            <input type="hidden" class="form-control form-control-sm attachment email_attachment" name="email_attachments[]" value="${fileName}" id="email_attachment" />
+                                        </div>
+                                    `);
+                                    $('[data-bs-toggle="tooltip"]').tooltip();
+                                });
+                            } else {
+                                attachmentPreview.append(`<div class="col-xl-4">No attachments added.</div>`);
+                            }
+                        } catch (error) {
+                            console.error("Failed to parse attachments:", error);
+                            attachmentPreview.append(`<div class="col-xl-4">Error loading attachments.</div>`);
+                        }
+                        $("#emailSendModal").modal('hide').fadeIn(300).delay(300);
+                    }
+                }
+            });
+        });
         
     });
 
@@ -992,6 +1131,14 @@
         // image modal skeletone
         $(document).on('click', '.attachment_file', function(){
             var time = null;
+            addAttributeOrClass([
+                {selector: '.svg__doted', type: 'class', name: 'svg_skeletone'},
+                {selector: '#showAttImage', type: 'class', name: 'hidden'},
+                {selector: '.img_title, .img_close', type: 'class', name: 'text-skeletone'},
+            ]);
+            removeAttributeOrClass([
+                {selector: '#imgSkeltone', type: 'class', name: 'hidden'},
+            ]);
             time = setTimeout(() => {
                 removeAttributeOrClass([
                     {selector: '.svg__doted', type: 'class', name: 'svg_skeletone'},
@@ -1001,7 +1148,7 @@
                 addAttributeOrClass([
                     {selector: '#imgSkeltone', type: 'class', name: 'hidden'},
                 ]);
-            }, 3000);
+            }, 1000);
 
             return ()=>{
                 clearTimeout(time);
@@ -1011,6 +1158,12 @@
         // file modal skeletone
         $(document).on('click', '#attfile_link_btn', function(){
             var time = null;
+            addAttributeOrClass([
+                {selector: '.atth_close,.attach_header', type: 'class', name: 'text-skeletone'},
+                {selector: '.attch_text,.atth_fl,.atth_fl2', type: 'class', name: 'text-skeletone'},
+                {selector: '.logo_skeletone', type: 'class', name: 'logo-skeletone'},
+                {selector: '.downloadBtn', type: 'class', name: 'link-btn-skeletone'},
+            ]);
             time = setTimeout(() => {
                 removeAttributeOrClass([
                     {selector: '.atth_close,.attach_header', type: 'class', name: 'text-skeletone'},
@@ -1041,7 +1194,7 @@
             time = setTimeout(() => {
                 $("#loader_email_modal").modal('hide');
                 removeAttributeOrClass([
-                    {selector: '.send_selection,.send_clos_btn,.send_group_btn,.send_current_month,.send_input1,.send_input2,.send_input3,.send_input4,.send_input5,.send_timezone,.send_data_item,#send_email_data_table_paginate', type: 'class', name: 'text-skeletone'},
+                    {selector: '.send_selection,.send_clos_btn,.send_group_btn,.send_current_month,.send_input1,.send_input2,.send_input3,.send_input4,.send_input5,.send_timezone,.send_data_item,#send_email_data_table_paginate,.storg_send', type: 'class', name: 'text-skeletone'},
                     {selector: '.send__email__select', type: 'class', name: 'min-dropdown-skeletone'},
                     {selector: '.send_next_btn', type: 'class', name: 'skeletone'},
                     {selector: '#send_data_table', type: 'class', name: 'tabskeletone'},
