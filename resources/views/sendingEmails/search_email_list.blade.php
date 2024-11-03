@@ -87,8 +87,8 @@
                 <input type="search" class="form-control form-control-sm email_search ps-1" name="user_to" placeholder="Email Search" id="email_search">
               </span>
             </div>
-            <div class="col-xl-1">
-              <span class="timezone text-skeletone">
+            <div class="col-xl-1 time_area timzon-skeletone">
+              <span class="timezone">
                 <span>
                   <?php
                     $timezone = date_default_timezone_get();
@@ -131,6 +131,7 @@
                 {{ round($inbox_email_percentage, 2) }}%
               </div>
             </div>
+            <span class="temp_storage storg_inbox text-skeletone">Storage inbox email (<span id="inbox_emails_progress"></span>) Of <span >{{$totalEmails}}</span></span>
           </div>
           <div class="col-8">
             <div class="pagination text-skeletone" id="user_email_get_data_table_paginate">

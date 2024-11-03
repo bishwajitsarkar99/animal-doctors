@@ -29,19 +29,7 @@
 <script src="{{asset('backend_asset')}}/main_asset/demo/table-chart-demo.js"></script>
 <!-- Summar-Note -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<!-- Summary Note Initialize -->
-<!-- <script>
-    $(document).ready(function() {
-        $("#my_summernote").summernote({
-            placeholder: 'Post main content',
-            tabsize: 2,
-            height: 500,
-            minHeight: null,
-            maxHeight: null,
-        });
-        $('.dropdown-toggle').dropdown();
-    });
-</script> -->
+
 <!-- Language -->
 <script>
     $("body").on("change", ".language_switcher", function(event) {

@@ -157,8 +157,59 @@
 </div>
 @include('sendingEmails.search_email_list')
 @include('sendingEmails.send_email_list')
-@include('sendingEmails.file-directory')
-@include('sendingEmails.image_show')
+<!-- Image Modal Structure -->
+<div class="modal fade" id="imageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content image_preview">
+            <div class="modal-header email_modal_header">
+                <h5 class="modal-title img_title" id="imageModalLabel">Image Preview</h5>
+                <button type="button" class="btn-close btn-btn-sm img_close" data-bs-dismiss="modal" aria-label="Close"
+                    data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="svg__doted" id="imgSkeltone">
+                    <svg id="svg_mode" style="width:100%;height:200px;" viewBox="0 0 1024 1024" class="icon popular-svg" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M878.3 192.9H145.7c-16.5 0-30 13.5-30 30V706c0 16.5 13.5 30 30 30h732.6c16.5 0 30-13.5 30-30V222.9c0-16.5-13.5-30-30-30z" fill="#FFFFFF" />
+                        <path d="M145.7 736h732.6c16.5 0 30-13.5 30-30v-22.1H115.7V706c0 16.6 13.5 30 30 30z" fill="#f3f3f3" />
+                        <path d="M878.3 152.9H145.7c-38.6 0-70 31.4-70 70V706c0 38.6 31.4 70 70 70h732.6c38.6 0 70-31.4 70-70V222.9c0-38.6-31.4-70-70-70z m30 531V706c0 16.5-13.5 30-30 30H145.7c-16.5 0-30-13.5-30-30V222.9c0-16.5 13.5-30 30-30h732.6c16.5 0 30 13.5 30 30v461zM678 871.1H346c-11 0-20-9-20-20s9-20 20-20h332c11 0 20 9 20 20s-9 20-20 20z" fill="lightgray" />
+                        <path d="M127.1 662.7c-2.7 0-5.4-1.1-7.3-3.2-3.7-4.1-3.5-10.4 0.6-14.1l236.5-219.6L463 541.9l258.9-290.7 183.7 196.3c3.8 4 3.6 10.4-0.4 14.1-4 3.8-10.3 3.6-14.1-0.4L722.3 280.8l-259 290.9L355.7 454 133.9 660c-2 1.8-4.4 2.7-6.8 2.7z" fill="lightgray" />
+                        <path d="M156.4 541.9a82.7 82.8 0 1 0 165.4 0 82.7 82.8 0 1 0-165.4 0Z" fill="#f3f3f3" />
+                        <path d="M179.8 541.9a59.3 59.3 0 1 0 118.6 0 59.3 59.3 0 1 0-118.6 0Z" fill="lightgray" />
+                        <path d="M208.9 541.9a30.2 30.3 0 1 0 60.4 0 30.2 30.3 0 1 0-60.4 0Z" fill="#f3f3f3" />
+                        <path d="M580.9 329.9a82.7 82.8 0 1 0 165.4 0 82.7 82.8 0 1 0-165.4 0Z" fill="#f1f1f1" />
+                        <path d="M604.3 329.9a59.3 59.3 0 1 0 118.6 0 59.3 59.3 0 1 0-118.6 0Z" fill="lightgray" />
+                        <path d="M633.4 329.9a30.2 30.3 0 1 0 60.4 0 30.2 30.3 0 1 0-60.4 0Z" fill="white" />
+                        <path d="M719.3 539.6a46.3 46.4 0 1 0 92.6 0 46.3 46.4 0 1 0-92.6 0Z" fill="lightgray" />
+                        <path d="M732.4 539.6a33.2 33.2 0 1 0 66.4 0 33.2 33.2 0 1 0-66.4 0Z" fill="lightgray" />
+                        <path d="M748.7 539.6a16.9 17 0 1 0 33.8 0 16.9 17 0 1 0-33.8 0Z" fill="white" />
+                        <path d="M436.8 720.1H275.2c-5 0-9-4-9-9s4-9 9-9h161.6c5 0 9 4 9 9 0 4.9-4.1 9-9 9zM220.6 720.1h-26.5c-5 0-9-4-9-9s4-9 9-9h26.5c5 0 9 4 9 9 0 4.9-4.1 9-9 9z" fill="#FFFFFF" />
+                    </svg>
+                </div>
+                <div class="att_image" id="showAttImage">
+                    <img class="img-fluid" id="modalImage" src="" alt="Attachment Image" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- File Directory Modal -->
+<div class="modal fade" id="fileDirectoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">User Attachment List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Attachment File Modal Show (pdf,excle,csv) -->
 <div class="modal fade" id="attachmentFileModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -192,19 +243,22 @@
 </div>
 @endsection
 @section('css')
-<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/email/email.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/email/email-min.css">
 <link href=" https://cdn.jsdelivr.net/npm/@iconscout/unicons@4.0.8/css/line.min.css " rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-date-ui.min.css">
 @endsection
 @push('scripts')
 @include('sendingEmails.ajax.email-ajax')
+@include('sendingEmails.ajax.show-modal-page-minify')
+@include('sendingEmails.ajax.send-email-ajax')
+<!-- @include('sendingEmails.ajax.show-modal-page-ajax') -->
 <!-- Summar-Note -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
 <script src="{{asset('backend_asset')}}/main_asset/js/date-formate.js"></script>
-
+<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
 <script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 <script type="module">
   import { 
@@ -221,9 +275,13 @@
       'skeleton',
     ];
     
-    setTimeout(() => {
+    let time = requestAnimationFrame(() => {
       removeSkeletonClass(skeletonClasses);
     }, 1000);
+
+    return ()=>{
+      cancelAnimationFrame(time);
+    }
 
     // Initialize the button loader for the login button
     buttonLoader('#submit', '.loading-icon', '.btn-text', 'Send...', 'Send', 6000);
@@ -243,7 +301,7 @@
       newRow.querySelector('.attachment').value = '';
 
       tableBody.appendChild(newRow);
-    });
+    }, { passive: true });
     // Table row decrement
     document.getElementById('decrementBtn').addEventListener('click', function(e) {
       e.preventDefault();
@@ -254,8 +312,11 @@
       if (tableBody.rows.length > 1) {
         tableBody.deleteRow(-1);
       }
-    });
-
+    }, { passive: true });
+  });
+</script>
+<script>
+  $(document).ready(function(){
     // Date Picker
     $('#start_date').datepicker({
       dateFormat: "dd-mm-yy",
@@ -296,36 +357,13 @@
 </script>
 <script>
   $(document).ready(function () {
-    // Initialize Bloodhound for typeahead with email suggestions
-    // var useremails = new Bloodhound({
-    //   datumTokenizer: Bloodhound.tokenizers.whitespace,
-    //   queryTokenizer: Bloodhound.tokenizers.whitespace,
-    //   prefetch: {
-    //     url: '/email', // Ensure this endpoint returns the expected array of email strings
-    //     cache: false,
-    //     filter: function(emails) {
-    //       return $.map(emails, function(email) {
-    //         return { name: email };
-    //       });
-    //     }
-    //   }
-    // });
-
-    // useremails.initialize();
-
     // Initialize Tagsinput with Typeahead.js
     $('input[data-role="tagsinput"]').tagsinput({
       typeaheadjs: [{
         hint: true,
         highlight: true,
         minLength: 1
-      },
-      // {
-      //   name: 'useremails',
-      //   displayKey: 'name',
-      //   valueKey: 'name',
-      //   source: useremails.ttAdapter()
-      // }
+      }
       ]
     });
 
@@ -337,8 +375,8 @@
   });
 </script>
 <script>
-  // Select Attachment Type
   $(document).ready(function(){
+    // Select Attachment Type
     $(document).on('change', '#selectAttachFile', function(){
       var selectAttachment = $(this).val();
       if(selectAttachment){

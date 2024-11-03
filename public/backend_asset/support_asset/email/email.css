@@ -723,9 +723,22 @@ img#tableLoaderShow {
     text-align: center;
 }
 .text-skeletone,.tabskeletone,.skeletone,.email-skeletone,.btn-skeletone,.svg_skeletone,.link-btn-skeletone,.logo-skeletone,
-.min-dropdown-skeletone{
+.min-dropdown-skeletone,.timzon-skeletone{
     position: relative;
     background-color: rgb(0, 0, 0, 0.06);
+}
+.timzon-skeletone::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 88%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 5px; 
 }
 .text-skeletone::before{
     content: "";

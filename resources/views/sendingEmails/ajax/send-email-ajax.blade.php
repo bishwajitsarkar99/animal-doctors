@@ -1,3 +1,4 @@
+<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
 <script type="module">
     import { currentDate, getTimeDifference, activeTableRow, formatDate, formatNumber } from "/module/module-min-js/helper-function-min.js";
     import { addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
@@ -5,16 +6,14 @@
     const companyAddress = @json(setting('company_address'));
     const companyLogo = "{{ asset('backend_asset/main_asset/img/' . setting('update_company_logo')) }}";
     const pageLoader = "{{asset('image/loader/loading.gif')}}";
-    
-    // Inbox
+    // Send List
     $(document).ready(function(){
         // Get Current Date start date field
-        document.getElementById('start_date').value = currentDate();
+        document.getElementById('send_start_date').value = currentDate();
         // Get Current Date end date field
-        document.getElementById('end_date').value = currentDate();
-        
+        document.getElementById('send_end_date').value = currentDate();
         // Fetch data when the document is ready
-        fetch_all_user_email(); 
+        fetch_send_email(); 
         // Data View Table--------------
         const table_rows = (rows) => {
             if (rows.length === 0) {
@@ -28,18 +27,6 @@
             }
 
             return rows.map((row, key) => {
-                var statusClass, statusText, statusColor, statusBg;
-                if (row.status == 0) {
-                    statusClass = 'text-white';
-                    statusText = 'New';
-                    statusColor = '';
-                    statusBg = 'badge rounded-pill bg-status';
-                } else if (row.status == 1) {
-                    statusClass = '';
-                    statusText = '';
-                    statusColor = '';
-                    statusBg = '';
-                }
                 var created_by = 'Unknown';
                 if (row.sender_user != null) {
                     switch (row.sender_user) {
@@ -109,7 +96,7 @@
                 }).join('');
 
                 return `
-                    <tr class="table-row user-table-row parent-row select-row-background" key="${key}" style="${statusColor}">
+                    <tr class="table-row user-table-row parent-row select-row-background" key="${key}">
                         <td class="line-height-td child-td" style="text-align:left;color:#000000;" id="treeRow">
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="checkBtn" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <input class="form-check-input selectBtn" type="checkbox" value="${row.id}" id="selectBtn" style="font-size:13px;margin-top: -1px;">
@@ -117,16 +104,13 @@
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-regular fa-eye fa-beat" style="margin-top: 1px;"></i>
                             </button>
-                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="forwardBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="sendForwardBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-solid fa-share-nodes fa-beat" style="margin-top: 1px;"></i>
                             </button>
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                                 <i class="fa-solid fa-trash-can fa-beat"></i>
                             </button>
-                            <span class="child-td1 ps-1">${fromEmail ? fromEmail : row.sender_email}</span>
-                            <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:12px;">
-                                ${statusText}
-                            </span>
+                            <span class="child-td1 ps-1">To : ${fromEmail ? fromEmail : row.user_to}</span>
                             <span class="child-td1 ps-1">${formatDate(row.created_at)}</span>
                         </td>
                         <td class="child-td1 ps-1" id="lastTd">
@@ -201,34 +185,33 @@
             const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
             imageModal.show();
         };
-        
         // Function to fetch all user email
-        function fetch_all_user_email(query = '', url = null, perItem = null) {
+        function fetch_send_email(query = '', url = null, perItem = null) {
             if (perItem === null) {
-                perItem = $("#perItemControl").val();
+                perItem = $("#perItemSendEmail").val();
             }
 
-            const start_date = $("#start_date").val();
-            const end_date = $("#end_date").val();
-            const attachment_type = $("#select_attachment").val();
-            const status = $("#select_status").val();
-            const read_mail = $("#select_read_email").val();
-            const user_to = $("#email_search").val();
+            // Get filter values
+            const send_start_date = $("#send_start_date").val();
+            const send_end_date = $("#send_end_date").val();
+            const attachment_type = $("#select_attachment_email").val();
+            const status = $("#select_status_email").val();
+            const user_to = $("#send_email_search").val();
 
-            let current_url = url ? url : `{{ route('email.fetch') }}?per_item=${perItem}`;
+            // Set URL for AJAX request
+            let current_url = url ? url : `{{ route('email.send_list') }}?per_item=${perItem}`;
 
             $.ajax({
                 type: "GET",
                 url: current_url,
                 dataType: 'json',
                 data: { 
-                    query: query, 
-                    start_date: start_date,
-                    end_date: end_date,
+                    query: query,
+                    send_start_date: send_start_date,
+                    send_end_date: send_end_date,
                     attachment_type: attachment_type,
-                    user_to : user_to,
-                    status : status,
-                    read_mail : read_mail,
+                    user_to: user_to,
+                    status: status,
                 },
                 success: function(response) {
                     const {
@@ -237,57 +220,43 @@
                         total, 
                         months, 
                         years, 
-                        total_emails,
-                        total_draft_emails,
                         total_send_emails,
-                        total_new_emails,
                     } = response;
 
-                    $("#email_data_table").html(table_rows(data));
+                    $("#send_data_table").html(table_rows(data));
                     // Handle pagination and other UI updates if necessary
-                    $("#user_email_get_data_table_paginate").html(paginate_html({ 
+                    $("#send_email_data_table_paginate").html(paginate_html({ 
                         links, 
                         total,
                         months, 
                         years, 
                     }));
-                    $("#total_user_email").text(total);
-                    // Total Emails
-                    $("#total_emails").text(formatNumber(total_emails));
                     // Total Send Emails
-                    $("#emailSend").text(formatNumber(total_send_emails));
-                    // Total Draft Emails
-                    $("#emailDrafts").text(formatNumber(total_draft_emails));
-                    // Total New Emails
-                    $("#total_new_emails").text(formatNumber(total_new_emails));
-                    // Modal Header Inbox
-                    $("#inbox_emails").text(formatNumber(total_emails));
-                    // Modal Footer Inbox
-                    $("#inbox_emails_progress").text(formatNumber(total_emails));
+                    $("#total_user_send_email").text(total);
                     // Modal Header Send
                     $("#send_emails").text(formatNumber(total_send_emails));
+                    $("#send_emails_progress").text(formatNumber(total_send_emails));
                     // Update current month element with the new data
-                    $("#email_month").text(months.length > 0 ? months.join(', ') : '');
+                    $("#send_email_month").text(months.length > 0 ? months.join(', ') : '');
 
                     $('[data-bs-toggle="tooltip"]').tooltip();
 
-                    const userID = data.map(item => ({
+                    const userMail = data.map(item => ({
                         label: `${item.user_to}`,
                         value: item.id,
                     }));
-                    $("#email_search").autocomplete({ source: userID });
+                    $("#send_email_search").autocomplete({ source: userMail });
                 },
                 error: function(error) {
                     console.log('Error fetching data:', error);
                 }
             });
         }
-
         // Per item change
-        $("#perItemControl").on('change', (e) => {
+        $("#perItemSendEmail").on('change', (e) => {
             $(this).tooltip('hide');
             const { value } = e.target;
-            fetch_all_user_email('', null, value);
+            fetch_send_email('', null, value);
         });
 
         // Paginate Page
@@ -311,102 +280,55 @@
         };
 
         // change paginate page------------------------
-        $("#user_email_get_data_table_paginate").delegate("a", "click", function(e) {
+        $("#send_email_data_table_paginate").delegate("a", "click", function(e) {
             e.stopImmediatePropagation();
             e.preventDefault();
 
             const url = $(this).attr('href');
 
             if (url !== '#') {
-                fetch_all_user_email('', url);
+                fetch_send_email('', url);
             }
 
+        });
+
+        // Live Search
+        $("#send_email_search").on('keyup', function(){
+            var query = $(this).val();
+            fetch_send_email(query); 
         });
 
         // Attach File and Email Filter
-        $("#start_date, #end_date, #select_attachment,#select_status").on('change', ()=>{
-            fetch_all_user_email(); 
-        });
-        // Next or Previous Mail Filter
-        $(document).on("change", "#select_read_email", function() {
-            const read_mail = $(this).val();
-            fetch_all_user_email(read_mail);
-            
-            if (read_mail) {
-                $('.table-row').each(function() {
-                    $(this).addClass('table-row-select-bg');
-                });
-            } else {
-                $('.table-row').each(function() {
-                    $(this).removeClass('table-row-select-bg');
-                });
-            }
-        });
-        // Read Mail Filter
-        $(document).on("click", "#readButton", function() {
-            var read_mail = $(this).data('status');
-
-            $('.table-row').each(function() {
-                var readMailValue = $(this).find('#readMal').text();
-
-                if (read_mail && readMailValue === '0') {
-                    $(this).addClass('table-row-select-bg');
-                } else {
-                    $(this).removeClass('table-row-select-bg');
-                }
-            });
-        });
-        // Un Read Mail Filter
-        $(document).on("click", "#unReadButton", function() {
-            var read_mail = $(this).data('status');
-
-            $('.table-row').each(function() {
-                var readMailValue = $(this).find('#readMal').text();
-
-                if (read_mail && readMailValue === '1') {
-                    $(this).addClass('table-row-select-bg');
-                } else {
-                    $(this).removeClass('table-row-select-bg');
-                }
-            });
-        });
-        // Live Search
-        $("#email_search").on('keyup', function(){
-            var query = $(this).val();
-            fetch_all_user_email(query); 
+        $("#send_start_date, #send_end_date, #select_attachment_email,#select_status_email").on('change', ()=>{
+            fetch_send_email(); 
         });
 
-        // view button Click and Parent Row Handle
-        $(document).on('click', '#viewBtn', function(){
-            var parentId = $(this).data('parent');
+        // Refresh Button
+        $(document).on('click', '#refreshDataBtn', function(){
             $(this).tooltip('hide');
-            $(`.child-row[data-child='${parentId}']`).toggle('slow').delay(300);
+            $("#select_attachment_email").val("");
+            $("#select_status_email").val("");
+            $("#send_email_search").val("");
+            $("#allSelection").prop('checked', false);
+            $('.show-btn').addClass('delete-btn-display');
+            fetch_send_email();
+            addAttributeOrClass([
+               {selector: '.refresh_rotate_icon', type: 'class', name: 'fa-spin'} 
+            ]);
+            // Remove fa-spin
+            let timeOut = setTimeout(() => {
+                removeAttributeOrClass([
+                    {selector: '.refresh_rotate_icon', type: 'class', name: 'fa-spin'} 
+                ]);
+            }, 1000);
+
+            return () => {
+                clearTimeout(timeOut);
+            };
         });
 
-        // clear email form
-        $(document).on('click', '#clearBtn', function(){
-            $(this).tooltip('hide');
-            $("#inputTo").tagsinput('removeAll');
-            $("#inputCC").tagsinput('removeAll');
-            $("#inputBCC").tagsinput('removeAll');
-            $("#inputSubject").val("");
-            $("#email_summernote").summernote('code', '');
-            $("#selectAttachFile").val("");
-            $("#email_attachment").val("");
-            $(".email_attachment").val("");
-            $(".attach_group").addClass("hidden");
-        });
-
-        // email forward input[type="file"] row remove
-        $(document).on('click', '#rowDeleteBtn', function(e){
-            e.preventDefault();
-            $(this).tooltip('hide');
-            $(this).closest('.attach_group').remove();
-            $(".email_attachment").val("");
-        });
-
-        // email forward
-        $(document).on('click', '#forwardBtn', function(e){
+        // send email forward
+        $(document).on('click', '#sendForwardBtn', function(e){
             e.preventDefault();
             $(this).tooltip('hide');
             var id = $(this).val();
@@ -512,142 +434,11 @@
                             console.error("Failed to parse attachments:", error);
                             attachmentPreview.append(`<div class="col-xl-4">Error loading attachments.</div>`);
                         }
-                        $("#emailSearchModal").modal('hide').fadeIn(300).delay(300);
+                        $("#emailSendModal").modal('hide').fadeIn(300);
                     }
                 }
             });
         });
         
-        // Show Pdf,Excle,Csv logo in modal
-        $(document).on('click', '.attachment_file_link_btn', function(e) {
-            e.preventDefault();
-
-            // Get the file source from a data attribute or an actual source
-            const fileSrc = $(this).data('file-src'); // Ensure this attribute is set on the element
-
-            if (!fileSrc) {
-                console.error("File source is undefined. Make sure 'data-file-src' attribute is set on the element.");
-                return; // Exit if fileSrc is undefined to avoid errors
-            }
-
-            const logoID = document.getElementById('logoFile');
-            const fileNameElement = document.getElementById('fileNam'); // Ensure this element exists in your HTML
-
-            // Check file extension and handle accordingly
-            const fileExtension = fileSrc.split('.').pop().toLowerCase();
-
-            // Set logo and file name based on file type
-            let logoPath = '';
-            let fileName = '';
-            if (fileExtension === 'pdf') {
-                logoPath = "{{ asset('backend_asset/main_asset/attachment-logo/pdf_logo.png') }}";
-                fileName = "PDF";
-            } else if (['xls', 'xlsx'].includes(fileExtension)) {
-                logoPath = "{{ asset('backend_asset/main_asset/attachment-logo/excel_logo.png') }}";
-                fileName = "Excel";
-            } else if (fileExtension === 'csv') {
-                logoPath = "{{ asset('backend_asset/main_asset/attachment-logo/csv_logo.jpg') }}";
-                fileName = "CSV";
-            } else if (fileExtension === 'docx') {
-                logoPath = "{{ asset('backend_asset/main_asset/attachment-logo/docx_logo.png') }}";
-                fileName = "Docx";
-            }
-
-            // Set logo source and file name if they are defined
-            if (logoPath && fileName) {
-                logoID.src = logoPath;
-                logoID.style.display = 'block';
-                
-                // Set file name if element exists
-                if (fileNameElement) {
-                    fileNameElement.innerText = fileName;
-                }
-            } else {
-                logoID.style.display = 'none';
-            }
-
-            // Show the modal
-            $('#attachmentFileModal').modal('show');
-        });
-        // Refresh Button
-        $(document).on('click', '#refreshIconBtn', function(){
-            $(this).tooltip('hide');
-            $("#select_attachment").val("");
-            $("#select_status").val("");
-            $("#email_search").val("");
-            $("#allSelectBtn").prop('checked', false);
-            $('.show-btn').addClass('delete-btn-display');
-            fetch_all_user_email();
-            var time = null;
-            addAttributeOrClass([
-               {selector: '.refresh_rotate_icon', type: 'class', name: 'fa-spin'} 
-            ]);
-            // Remove fa-spin
-            var timeOut = setTimeout(() => {
-                removeAttributeOrClass([
-                    {selector: '.refresh_rotate_icon', type: 'class', name: 'fa-spin'} 
-                ]);
-            }, 1000);
-
-            return () => {
-                clearTimeout(timeOut);
-            };
-        });
-        // Select All Table Rows and Checkboxes
-        $(document).on('click', '#allSelectBtn, #allSelection', function() {
-            $(this).tooltip('hide');
-            const isChecked = $(this).is(':checked');
-            $('.selectBtn').prop('checked', isChecked);
-            // Toggle background for all rows based on "Select All" checkbox state
-            if (isChecked) {
-                $('.select-row-background').addClass('table-row-select-bg');
-                // Show delete button
-                $('.show-btn').removeClass('delete-btn-display');
-            } else {
-                $('.select-row-background').removeClass('table-row-select-bg');
-                // Hide delete button
-                $('.show-btn').addClass('delete-btn-display');
-            }
-        });
-        // From Dropdown Table All Rows Select selectButton 
-        $(document).on('click', '#selectButton', function(event){
-             // Set all checkboxes to checked
-            $('.selectBtn').prop('checked', true);
-            // Add background to all selected rows
-            $('.select-row-background').addClass('table-row-select-bg');
-            // Show delete button
-            $('.show-btn').removeClass('delete-btn-display');
-            // Prevent default link behavior
-            event.preventDefault();
-
-        });
-        // From Dropdown Table All Rows Unselect noneButton 
-        $(document).on('click', '#noneButton', function(event){
-             // Set all checkboxes to checked
-            $('.selectBtn').prop('checked', false);
-            // Add background to all selected rows
-            $('.select-row-background').removeClass('table-row-select-bg');
-            // Show delete button
-            $('.show-btn').addClass('delete-btn-display');
-            // Prevent default link behavior
-            event.preventDefault();
-
-        });
-        // Update "Select All" checkbox based on individual selections
-        $(document).on('click', '#selectBtn', function() {
-            const isChecked = $(this).is(':checked');
-            $(this).tooltip('hide');
-            
-            // Toggle row background based on checkbox state
-            if (isChecked) {
-                $(this).closest('.table-row').addClass('table-row-select-bg');
-                $('.delete_show_btn').closest('.show-btn').removeClass('delete-btn-display');
-            } else {
-                $(this).closest('.table-row').removeClass('table-row-select-bg');
-            }
-            // Update the "Select All" checkbox based on individual selections
-            const allChecked = $('.form-check-input[id="selectBtn"]').length === $('.form-check-input[id="selectBtn"]:checked').length;
-            $('#allSelectBtn').prop('checked', allChecked);
-        });
     });
 </script>
