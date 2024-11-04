@@ -2,13 +2,8 @@
     import { addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     $(document).ready(function(){
         // Email Inbox modal
-        $(document).on('click', '#email_search_page', function(e) {
+        $(document).on('click', '#v-pills-inbox-tab', function(e) {
             e.preventDefault();
-
-            // Show the modal and loader immediately
-            $("#emailSearchModal").modal('show').fadeIn(300);
-            $("#loader_email_modal").modal('show').fadeIn(300);
-
             // Hide tooltip
             $(this).tooltip('hide');
 
@@ -17,11 +12,9 @@
                 { selector: '#email_data_table', type: 'class', name: 'tabskeletone' },
             ]);
 
+            var time = null;
             // Clear any existing timeout to prevent multiple executions
-            let time = setTimeout(() => {
-                // Hide loader modal after 3 seconds
-                $("#loader_email_modal").modal('hide');
-                
+            var time = setTimeout(() => {
                 // Remove skeleton classes
                 removeAttributeOrClass([
                     { selector: '.selection, .inbox_clos_btn, .group_btn, .current_month, .input1, .input2, .input3, .input4, .input5, .custom-select, #user_email_get_data_table_paginate, .storg_inbox', type: 'class', name: 'text-skeletone' },
@@ -52,7 +45,8 @@
             removeAttributeOrClass([
                 {selector: '#imgSkeltone', type: 'class', name: 'hidden'},
             ]);
-            let = time = setTimeout(() => {
+            var time = null;
+            var time = setTimeout(() => {
                 removeAttributeOrClass([
                     {selector: '.svg__doted', type: 'class', name: 'svg_skeletone'},
                     {selector: '#showAttImage', type: 'class', name: 'hidden'},
@@ -77,7 +71,8 @@
                 {selector: '.logo_skeletone', type: 'class', name: 'logo-skeletone'},
                 {selector: '.downloadBtn', type: 'class', name: 'link-btn-skeletone'},
             ]);
-            let time = setTimeout(() => {
+            var time = null;
+            var time = setTimeout(() => {
                 removeAttributeOrClass([
                     {selector: '.atth_close,.attach_header', type: 'class', name: 'text-skeletone'},
                     {selector: '.attch_text,.atth_fl,.atth_fl2', type: 'class', name: 'text-skeletone'},
@@ -102,8 +97,8 @@
             addAttributeOrClass([
                 {selector: '#send_data_table', type: 'class', name: 'tabskeletone'},
             ]);
-
-            let time = setTimeout(() => {
+            var time = null;
+            var time = setTimeout(() => {
                 $("#loader_email_modal").modal('hide');
                 removeAttributeOrClass([
                     {selector: '.send_selection,.send_clos_btn,.send_group_btn,.send_current_month,.send_input1,.send_input2,.send_input3,.send_input4,.send_input5,.send_timezone,.send_data_item,#send_email_data_table_paginate,.storg_send', type: 'class', name: 'text-skeletone'},

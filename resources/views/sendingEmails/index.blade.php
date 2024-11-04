@@ -4,159 +4,90 @@
 
 @include('backend.layouts.dashboard-components._navbar')
 <div id="viewer"></div>
-<div class="card form-control form-control-sm" id="set_table">
-  <div class="card-body" id="table_card_body">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card-body focus-color user_details cd skeleton">
-          <p class="email_list"><span style="font-size:20px;"><i class="fa-regular fa-envelope"></i></span> mail</p>
-          <p style="text-align:center;">
-            <span><img class="img-profile rounded-circle" style="margin-top: 0px;" id="output" src="/image/{{auth()->user()->image}}"></span>
-            <span class="user_eml" style="color:gray;font-weight:700;font-size: .9rem;">{{Auth::user()->email}} </span>
-          </p>
-          <div class="email-send-box-list">
-            @if(auth()->user()->role == 1)
-              <span class="new_box">
-                <i class="fa-regular fa-envelope"></i>
-                <span class="btn-text new_email_bage pe-2"><span class="ms-1" id="total_new_emails"></span> new</span>
-              </span><br>
-              <a type="button" href="#" class="btn btn-sm email_search_page" id="email_search_page">
-                <i class="fa-solid fa-inbox"></i>
-                <span class="btn-text email_search_page"> Inbox (<span class="ms-1 me-1" id="total_emails"></span>)</span>
-              </a><br>
-              <a type="button" href="#" class="btn btn-sm" id="email_send_page">
-                <i class="fa-solid fa-share"></i>
-                <span class="btn-text email_send_page"> Send (<span class="ms-1 me-1" id="emailSend"></span>)</span>
-              </a><br>
-              <a type="button" href="#" class="btn btn-sm" id="email_draft_page">
-                <i class="fa-solid fa-file"></i>
-                <span class="btn-text email_draft_page"> Drafts (<span class="ms-1 me-1" id="emailDrafts"></span>)</span>
-              </a><br>
-              <a type="button" href="#" class="btn btn-sm" id="file_directory_page">
-                <i class="fa-solid fa-folder-open"></i>
-                <span class="btn-text file_directory_page"> Attachment Folder</span>
-              </a><br>
-              <a type="button" href="#" class="btn btn-sm" id="email_setting">
-                <i class="fa-solid fa-gear"></i>
-                <span class="btn-text email_setting"> Setting</span>
-              </a><br>
-            @endif
-            @if(auth()->user()->role == 2 || auth()->user()->role == 3 || auth()->user()->role == 5 || auth()->user()->role == 6 || auth()->user()->role == 7 || auth()->user()->role == 0)
-              <span class="new_box">
-                <i class="fa-regular fa-envelope"></i>
-                <span class="btn-text new_email_bage pe-2"><span class="ms-1" id="total_new_emails"></span> new</span>
-              </span><br>
-              <a type="button" href="#" class="btn btn-sm email_search_page" id="email_search_page">
-                <i class="fa-solid fa-inbox"></i>
-                <span class="btn-text email_search_page"> Inbox (<span class="ms-1 me-1" id="total_emails"></span>)</span>
-              </a><br>
-              <a type="button" href="#" class="btn btn-sm" id="email_send_page">
-                <i class="fa-solid fa-share"></i>
-                <span class="btn-text email_send_page"> Send (<span class="ms-1 me-1" id="emailSend"></span>)</span>
-              </a><br>
-              <a type="button" href="#" class="btn btn-sm" id="email_draft_page">
-                <i class="fa-solid fa-file"></i>
-                <span class="btn-text email_draft_page"> Drafts (<span class="ms-1 me-1" id="emailDrafts"></span>)</span>
-              </a><br>
-            @endif
+  <div class="card form-control form-control-sm" id="set_table">
+    <div class="card-body focus-color email_card cd" id="table_card_body">
+      <p class="email-home-header" style="text-align:left;">
+        <span class="email_list" style="font-size:15px;"><i class="fa-regular fa-envelope"></i> Mail</span>
+        <span class="new_box">
+          <span class="btn-text new_email_bage pe-2"><span class="ms-1" id="total_new_emails"></span> new</span>
+        </span><br>
+        <span><img class="img-profile rounded-circle" style="margin-top: 0px;" id="output" src="/image/{{auth()->user()->image}}"></span>
+        <span class="user_eml" style="color:gray;font-weight:700;font-size: .9rem;">{{Auth::user()->email}} </span><br>
+      </p>
+      <div class="d-flex align-items-start">
+        @if(auth()->user()->role == 1)
+        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <button class="nav-link active" id="v-pills-email-tab" data-bs-toggle="pill" data-bs-target="#v-pills-email" type="button" role="tab" aria-controls="v-pills-email" aria-selected="true">
+            <i class="fa-solid fa-marker"></i>
+            <span class="btn-text email_search_page"> Compose</span>
+          </button>
+          <button class="nav-link" id="v-pills-inbox-tab" data-bs-toggle="pill" data-bs-target="#v-pills-inbox" type="button" role="tab" aria-controls="v-pills-inbox" aria-selected="false">
+            <i class="fa-solid fa-inbox"></i>
+            <span class="btn-text email_send_page"> Inbox (<span class="ms-1 me-1" id="total_emails"></span>)</span>
+          </button>
+          <button class="nav-link" id="v-pills-send-tab" data-bs-toggle="pill" data-bs-target="#v-pills-send" type="button" role="tab" aria-controls="v-pills-send" aria-selected="false">
+            <i class="fa-solid fa-share"></i>
+            <span class="btn-text email_send_page"> Send (<span class="ms-1 me-1" id="emailSend"></span>)</span>
+          </button>
+          <button class="nav-link" id="v-pills-draft-tab" data-bs-toggle="pill" data-bs-target="#v-pills-draft" type="button" role="tab" aria-controls="v-pills-draft" aria-selected="false">
+            <i class="fa-solid fa-file"></i>
+            <span class="btn-text email_draft_page"> Drafts (<span class="ms-1 me-1" id="emailDrafts"></span>)</span>
+          </button>
+          <button class="nav-link" id="v-pills-file-tab" data-bs-toggle="pill" data-bs-target="#v-pills-file" type="button" role="tab" aria-controls="v-pills-file" aria-selected="false">
+            <i class="fa-solid fa-folder-open"></i>
+            <span class="btn-text file_directory_page"> Attachment Folder</span>
+          </button>
+          <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+            <i class="fa-solid fa-gear"></i>
+            <span class="btn-text email_setting"> Setting</span>
+          </button>
+        </div>
+
+        <div class="tab-content flex-row" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-email" role="tabpanel" aria-labelledby="v-pills-email-tab">
+            @include('sendingEmails.compose')
           </div>
+          <div class="tab-pane fade" id="v-pills-inbox" role="tabpanel" aria-labelledby="v-pills-inbox-tab">
+            @include('sendingEmails.inbox')
+          </div>
+          <div class="tab-pane fade" id="v-pills-send" role="tabpanel" aria-labelledby="v-pills-send-tab">Send</div>
+          <div class="tab-pane fade" id="v-pills-draft" role="tabpanel" aria-labelledby="v-pills-draft-tab">Draft</div>
+          <div class="tab-pane fade" id="v-pills-file" role="tabpanel" aria-labelledby="v-pills-file-tab">Attachment Folder</div>
+          <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">Setting</div>
         </div>
-      </div>
-      <div class="col-md-8">
-        <div class="card-body focus-color user_details cd skeleton">
-          <form id="emailForm" action="{{route('email.send')}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <span id="emailForwardID" hidden></span>
-            <div class="form-group mb-1">
-              <input class="form-control form-control-sm" type="text" name="user_to" id="inputTo" placeholder="To" value="" data-role="tagsinput"/>
-            </div>
-            <div class="form-group mb-1">
-              <input class="form-control form-control-sm" type="text" name="user_cc" id="inputCC" placeholder="CC" value="" data-role="tagsinput"/>
-            </div>
-            <div class="form-group mb-1">
-              <input class="form-control form-control-sm" type="text" name="user_bcc" id="inputBCC" placeholder="BCC" value="" data-role="tagsinput"/>
-            </div>
-            <div class="form-group mb-1">
-              <input class="form-control form-control-sm" type="text" name="subject" id="inputSubject" placeholder="Subject"/>
-            </div>
-            <div class="form-group mb-1">
-              <textarea class="form-control form-control-sm main_content" id="email_summernote" name="main_content" cols="30" rows="10" placeholder="Email Content"></textarea>
-            </div>
-            <div class="row">
-              <div class="col-xl-12">
-                <table>
-                  <thead>
-                    <tr>
-                      <th class="file-head">
-                        <span class="more__button">
-                          <select type="text" class="form-control form-control-sm" name="attachment_type" id="selectAttachFile">
-                            <option value="" >Select Attachment Type</option>
-                            <option value="attachments">Management Report</option>
-                            <option value="user_message">User Message</option>
-                          </select>
-                        </span>
-                      </th>
-                      <th class="file-head">
-                        <span class="more__button">
-                          <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="clearBtn" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Clear Form" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
-                            <i class="fa-solid fa-ban fa-beat" style="color:orangered;"></i>
-                          </button>
-                        </span>
-                      </th>
-                      <th class="file-head">
-                        Add Attach File
-                        <span class="more__button">
-                          <button class="btn btn-group-sm" id="moreBtn" disabled type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Row" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                            <span style="font-size:20px;color:#0056b3;"><i class="fa-solid fa-circle-plus"></i></span>
-                          </button>
-                        </span>
-                      </th>
-                      <th class="file-head">
-                        Remove Attach File
-                        <span class="more__button">
-                          <button class="btn btn-group-sm" id="decrementBtn" disabled type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove Row" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
-                            <span style="font-size:20px;color:orangered;"><i class="fa-solid fa-circle-minus"></i></span>
-                          </button>
-                        </span>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody id="fileTable">
-                    <tr class="file-row">
-                      <td class="file-column" colspan="3">
-                        <input type="file" class="form-control form-control-sm attachment hidden" name="email_attachments[]" id="email_attachment" multiple />
-                      </td>
-                      <td class="file-column"></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <!-- Attachments loaded via AJAX will be displayed here -->
-                <div class="row mt-1">
-                  <div id="attachmentPreview"></div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xl-10 action_message">
-                @if(session('success'))
-                  <p class="background_success mt-2 ps-1" id="success_message">{{session('success')}}</p>
-                @endif
-              </div>
-              <div class="col-xl-2" style="text-align:right;">
-                <button id="submit" type="submit" class="btn btn-sm btn-primary send_button button-skeleton mt-2">
-                  <span class="loading-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                  <span class="btn-text">Send</span>
-                </button>
-              </div>
-            </div>
-          </form>
+        @endif
+        @if(auth()->user()->role == 2 || auth()->user()->role == 3 || auth()->user()->role == 5 || auth()->user()->role == 6 || auth()->user()->role == 7 || auth()->user()->role == 0)
+        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <button class="nav-link active" id="v-pills-email-tab" data-bs-toggle="pill" data-bs-target="#v-pills-email" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
+            <i class="fa-solid fa-marker"></i>
+            <span class="btn-text email_search_page"> Compose</span>
+          </button>
+          <button class="nav-link" id="v-pills-inbox-tab" data-bs-toggle="pill" data-bs-target="#v-pills-inbox" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+            <i class="fa-solid fa-inbox"></i>
+            <span class="btn-text email_send_page"> Inbox (<span class="ms-1 me-1" id="total_emails"></span>)</span>
+          </button>
+          <button class="nav-link" id="v-pills-send-tab" data-bs-toggle="pill" data-bs-target="#v-pills-send" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+            <i class="fa-solid fa-share"></i>
+            <span class="btn-text email_send_page"> Send (<span class="ms-1 me-1" id="emailSend"></span>)</span>
+          </button>
+          <button class="nav-link" id="v-pills-draft-tab" data-bs-toggle="pill" data-bs-target="#v-pills-draft" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+            <i class="fa-solid fa-file"></i>
+            <span class="btn-text email_draft_page"> Drafts (<span class="ms-1 me-1" id="emailDrafts"></span>)</span>
+          </button>
         </div>
+        
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-email" role="tabpanel" aria-labelledby="v-pills-email-tab">Email</div>
+          <div class="tab-pane fade" id="v-pills-inbox" role="tabpanel" aria-labelledby="v-pills-inbox-tab">inbox</div>
+          <div class="tab-pane fade" id="v-pills-send" role="tabpanel" aria-labelledby="v-pills-send-tab">Send</div>
+          <div class="tab-pane fade" id="v-pills-draft" role="tabpanel" aria-labelledby="v-pills-draft-tab">Draft</div>
+        </div>
+        @endif
       </div>
     </div>
   </div>
 </div>
-@include('sendingEmails.search_email_list')
-@include('sendingEmails.send_email_list')
+<!-- @include('sendingEmails.send_email_list') -->
 <!-- Image Modal Structure -->
 <div class="modal fade" id="imageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -243,16 +174,15 @@
 </div>
 @endsection
 @section('css')
-<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/email/email-min.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/email/email.css">
 <link href=" https://cdn.jsdelivr.net/npm/@iconscout/unicons@4.0.8/css/line.min.css " rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-date-ui.min.css">
 @endsection
 @push('scripts')
-@include('sendingEmails.ajax.email-ajax')
-@include('sendingEmails.ajax.show-modal-page-minify')
+@include('sendingEmails.ajax.inbox-ajax')
+@include('sendingEmails.ajax.show-modal-page-ajax')
 @include('sendingEmails.ajax.send-email-ajax')
-<!-- @include('sendingEmails.ajax.show-modal-page-ajax') -->
 <!-- Summar-Note -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
