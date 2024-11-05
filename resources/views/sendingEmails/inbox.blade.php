@@ -2,7 +2,7 @@
     <div class="email-box-header">
         <div class="row">
             <div class="col-xl-2">
-                <div class="btn-group group_btn text-skeletone">
+                <div class="btn-group group_btn select-skeletone">
                     <button type="button" class="btn btn-light btn-sm chck" data-bs-toggle="tooltip"  data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                         <input class="form-check-input" type="checkbox" id="allSelectBtn">
                     </button>

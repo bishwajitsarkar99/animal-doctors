@@ -13,12 +13,13 @@
             ]);
 
             var time = null;
-            // Clear any existing timeout to prevent multiple executions
+
             var time = setTimeout(() => {
                 // Remove skeleton classes
                 removeAttributeOrClass([
                     { selector: '.selection, .inbox_clos_btn, .group_btn, .current_month, .input1, .input2, .input3, .input4, .input5, .custom-select, #user_email_get_data_table_paginate, .storg_inbox', type: 'class', name: 'text-skeletone' },
                     { selector: '.time_area', type: 'class', name: 'timzon-skeletone' },
+                    { selector: '.group_btn', type: 'class', name: 'select-skeletone' },
                     { selector: '.email__select', type: 'class', name: 'min-dropdown-skeletone' },
                     { selector: '.next_btn', type: 'class', name: 'skeletone' },
                     { selector: '#email_data_table', type: 'class', name: 'tabskeletone' },

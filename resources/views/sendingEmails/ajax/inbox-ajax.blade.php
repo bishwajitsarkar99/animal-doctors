@@ -8,10 +8,16 @@
     
     // Inbox
     $(document).ready(function(){
-        // Get Current Date start date field
-        document.getElementById('start_date').value = currentDate();
-        // Get Current Date end date field
-        document.getElementById('end_date').value = currentDate();
+        // Get Current Date and set it for start_date and end_date fields
+        const startDateField = document.getElementById('start_date');
+        const endDateField = document.getElementById('end_date');
+
+        if (startDateField) {
+            startDateField.value = currentDate();
+        }
+        if (endDateField) {
+            endDateField.value = currentDate();
+        }
         
         // Fetch data when the document is ready
         fetch_all_user_email(); 
@@ -213,7 +219,7 @@
             const attachment_type = $("#select_attachment").val();
             const status = $("#select_status").val();
             const read_mail = $("#select_read_email").val();
-            const user_to = $("#email_search").val();
+            const sender_email = $("#email_search").val();
 
             let current_url = url ? url : `{{ route('email.fetch') }}?per_item=${perItem}`;
 
@@ -226,7 +232,7 @@
                     start_date: start_date,
                     end_date: end_date,
                     attachment_type: attachment_type,
-                    user_to : user_to,
+                    sender_email : sender_email,
                     status : status,
                     read_mail : read_mail,
                 },
@@ -272,8 +278,8 @@
                     $('[data-bs-toggle="tooltip"]').tooltip();
 
                     const userID = data.map(item => ({
-                        label: `${item.user_to}`,
-                        value: item.id,
+                        label: `${item.sender_email}`,
+                        value: item.sender_email,
                     }));
                     $("#email_search").autocomplete({ source: userID });
                 },
@@ -405,6 +411,31 @@
             $(".email_attachment").val("");
         });
 
+        // Table row increment
+        document.getElementById('moreBtn').addEventListener('click', function() {
+            $(this).tooltip('hide');
+            
+            var tableBody = document.querySelector('#fileTable');
+            
+            var firstRow = document.querySelector('#fileTable tr:first-child');
+            // Clone the last row
+            var newRow = firstRow.cloneNode(true);
+
+            newRow.querySelector('.attachment').value = '';
+
+            tableBody.appendChild(newRow);
+        }, { passive: true });
+        // Table row decrement
+        document.getElementById('decrementBtn').addEventListener('click', function() {
+            $(this).tooltip('hide');
+            $("#email_attachment").val("");
+            var tableBody = document.querySelector('#fileTable');
+
+            if (tableBody.rows.length > 1) {
+                tableBody.deleteRow(-1);
+            }
+        }, { passive: true });
+
         // email forward
         $(document).on('click', '#forwardBtn', function(e){
             e.preventDefault();
@@ -512,7 +543,7 @@
                             console.error("Failed to parse attachments:", error);
                             attachmentPreview.append(`<div class="col-xl-4">Error loading attachments.</div>`);
                         }
-                        $("#emailSearchModal").modal('hide').fadeIn(300).delay(300);
+                        $('#v-pills-email-tab').tab('show');
                     }
                 }
             });
@@ -649,5 +680,6 @@
             const allChecked = $('.form-check-input[id="selectBtn"]').length === $('.form-check-input[id="selectBtn"]:checked').length;
             $('#allSelectBtn').prop('checked', allChecked);
         });
+
     });
 </script>

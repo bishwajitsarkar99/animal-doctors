@@ -85,7 +85,7 @@ button.send_button:hover{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
     margin-right: 2px !important;
     color: white !important;
-    background-color: #bd8205 !important;
+    background-color: #008b00 !important;
     padding-left: 5px !important;
     padding-right: 5px !important;
     border-radius: 4px !important;
@@ -264,8 +264,12 @@ div#v-pills-tab {
 }
 .email-home-header{
     padding: 3px 5px;
-    background-image: linear-gradient(45deg, linear-gradient(45deg,#cdf3ff 25%, rgb(0 0 0 / 8%) 45%, rgb(0 0 0 / 3%) 30%, #0000000d) 25%, rgb(0 0 0 / 8%) 45%, rgb(0 0 0 / 3%) 30%, #0000000d);
+    background-image: linear-gradient(45deg, #cdf3ff 50%, #e5e5e5 5%, transparent);
     border-radius: 4px;
+    background-color: #cdf3ff;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    margin-bottom: 10px;
 }
 .new_box {
     padding: 6px;
@@ -301,7 +305,7 @@ div#v-pills-tab {
 }
 .body_area{
     background: transparent;
-    background-image: repeating-linear-gradient(55deg, #f9e5ca, transparent 1px);
+    background-image: repeating-linear-gradient(55deg, aliceblue, transparent 1px);
     box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
     padding: 5px;
     border-radius: 4px;
@@ -800,7 +804,7 @@ img#tableLoaderShow {
     text-align: center;
 }
 .text-skeletone,.tabskeletone,.skeletone,.email-skeletone,.btn-skeletone,.svg_skeletone,.link-btn-skeletone,.logo-skeletone,
-.min-dropdown-skeletone,.timzon-skeletone{
+.min-dropdown-skeletone,.timzon-skeletone,.select-skeletone{
     position: relative;
     background-color: rgb(0, 0, 0, 0.06);
 }
@@ -816,6 +820,20 @@ img#tableLoaderShow {
     background-size: 200%;
     animation: 1s infinite reverse skeleton;
     border-radius: 5px; 
+}
+.select-skeletone::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 5px;
+    margin-top: 2px;
 }
 .text-skeletone::before{
     content: "";
@@ -845,13 +863,13 @@ img#tableLoaderShow {
     left: 1px;
     top: 0;
     width: 101%;
-    height: 120%;
+    height: 24px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
     animation: 1s infinite reverse skeleton;
     border-radius: 3px;
-    margin-top: -1px;
+    margin-top: -5px;
     margin-left: -2px;
 }
 .tabskeletone::before{
@@ -890,13 +908,13 @@ img#tableLoaderShow {
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
+    height: 20px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
     animation: 1s infinite reverse skeleton;
     border-radius: 5px;
-    margin-top: 2px;
+    margin-top: -1px;
     margin-left: 0px;
 }
 .btn-skeletone::before{
@@ -1002,7 +1020,7 @@ button#rowDeleteBtn{
 }
 .file_name {
     margin-left: 5px;
-    background-color: #bd8205;
+    background-color: #3272f9;
     border-radius: 4px;
     padding-right: 5px;
     padding-left: 5px;
@@ -1016,4 +1034,20 @@ button#rowDeleteBtn{
     font-size: 12px;
     font-weight: 700;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+td.error_data {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: orangered;
+    animation: alerttxtColor 3s infinite;
+    border: 1px solid lightgray;
+}
+@keyframes alerttxtColor {
+    0% {
+        color: #ddd;
+    }
+    100% {
+        color: orangered;
+    }
 }

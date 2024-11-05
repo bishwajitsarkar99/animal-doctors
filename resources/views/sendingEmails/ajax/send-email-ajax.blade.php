@@ -8,10 +8,17 @@
     const pageLoader = "{{asset('image/loader/loading.gif')}}";
     // Send List
     $(document).ready(function(){
-        // Get Current Date start date field
-        document.getElementById('send_start_date').value = currentDate();
-        // Get Current Date end date field
-        document.getElementById('send_end_date').value = currentDate();
+        // Get Current Date and set it for start_date and end_date fields
+        const startDateField = document.getElementById('send_start_date');
+        const endDateField = document.getElementById('send_end_date');
+
+        if (startDateField) {
+            startDateField.value = currentDate();
+        }
+        if (endDateField) {
+            endDateField.value = currentDate();
+        }
+
         // Fetch data when the document is ready
         fetch_send_email(); 
         // Data View Table--------------

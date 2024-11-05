@@ -41,21 +41,8 @@
             <i class="fa-solid fa-gear"></i>
             <span class="btn-text email_setting"> Setting</span>
           </button>
+          @endif
         </div>
-
-        <div class="tab-content flex-row" id="v-pills-tabContent">
-          <div class="tab-pane fade show active" id="v-pills-email" role="tabpanel" aria-labelledby="v-pills-email-tab">
-            @include('sendingEmails.compose')
-          </div>
-          <div class="tab-pane fade" id="v-pills-inbox" role="tabpanel" aria-labelledby="v-pills-inbox-tab">
-            @include('sendingEmails.inbox')
-          </div>
-          <div class="tab-pane fade" id="v-pills-send" role="tabpanel" aria-labelledby="v-pills-send-tab">Send</div>
-          <div class="tab-pane fade" id="v-pills-draft" role="tabpanel" aria-labelledby="v-pills-draft-tab">Draft</div>
-          <div class="tab-pane fade" id="v-pills-file" role="tabpanel" aria-labelledby="v-pills-file-tab">Attachment Folder</div>
-          <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">Setting</div>
-        </div>
-        @endif
         @if(auth()->user()->role == 2 || auth()->user()->role == 3 || auth()->user()->role == 5 || auth()->user()->role == 6 || auth()->user()->role == 7 || auth()->user()->role == 0)
         <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <button class="nav-link active" id="v-pills-email-tab" data-bs-toggle="pill" data-bs-target="#v-pills-email" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
@@ -75,19 +62,27 @@
             <span class="btn-text email_draft_page"> Drafts (<span class="ms-1 me-1" id="emailDrafts"></span>)</span>
           </button>
         </div>
-        
-        <div class="tab-content" id="v-pills-tabContent">
-          <div class="tab-pane fade show active" id="v-pills-email" role="tabpanel" aria-labelledby="v-pills-email-tab">Email</div>
-          <div class="tab-pane fade" id="v-pills-inbox" role="tabpanel" aria-labelledby="v-pills-inbox-tab">inbox</div>
-          <div class="tab-pane fade" id="v-pills-send" role="tabpanel" aria-labelledby="v-pills-send-tab">Send</div>
-          <div class="tab-pane fade" id="v-pills-draft" role="tabpanel" aria-labelledby="v-pills-draft-tab">Draft</div>
-        </div>
         @endif
+        <div class="tab-content flex-row" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-email" role="tabpanel" aria-labelledby="v-pills-email-tab">
+            @include('sendingEmails.compose')
+          </div>
+          <div class="tab-pane fade" id="v-pills-inbox" role="tabpanel" aria-labelledby="v-pills-inbox-tab">
+            @include('sendingEmails.inbox')
+          </div>
+          <div class="tab-pane fade" id="v-pills-send" role="tabpanel" aria-labelledby="v-pills-send-tab">
+            @include('sendingEmails.sendbox')
+          </div>
+          <div class="tab-pane fade" id="v-pills-draft" role="tabpanel" aria-labelledby="v-pills-draft-tab">Draft</div>
+          @if(auth()->user()->role == 1)
+          <div class="tab-pane fade" id="v-pills-file" role="tabpanel" aria-labelledby="v-pills-file-tab">Attachment Folder</div>
+          <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">Setting</div>
+          @endif
+        </div>
       </div>
     </div>
   </div>
 </div>
-<!-- @include('sendingEmails.send_email_list') -->
 <!-- Image Modal Structure -->
 <div class="modal fade" id="imageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -182,7 +177,7 @@
 @push('scripts')
 @include('sendingEmails.ajax.inbox-ajax')
 @include('sendingEmails.ajax.show-modal-page-ajax')
-@include('sendingEmails.ajax.send-email-ajax')
+<!-- @include('sendingEmails.ajax.send-email-ajax') -->
 <!-- Summar-Note -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
@@ -217,32 +212,6 @@
     buttonLoader('#submit', '.loading-icon', '.btn-text', 'Send...', 'Send', 6000);
     // Initialize the message
     handleSuccessMessage('#success_message');
-
-    // Table row increment
-    document.getElementById('moreBtn').addEventListener('click', function(e) {
-      e.preventDefault();
-      $(this).tooltip('hide');
-      var tableBody = document.querySelector('#fileTable');
-      
-      var firstRow = document.querySelector('#fileTable tr:first-child');
-      // Clone the last row
-      var newRow = firstRow.cloneNode(true);
-
-      newRow.querySelector('.attachment').value = '';
-
-      tableBody.appendChild(newRow);
-    }, { passive: true });
-    // Table row decrement
-    document.getElementById('decrementBtn').addEventListener('click', function(e) {
-      e.preventDefault();
-      $(this).tooltip('hide');
-      $("#email_attachment").val("");
-      var tableBody = document.querySelector('#fileTable');
-
-      if (tableBody.rows.length > 1) {
-        tableBody.deleteRow(-1);
-      }
-    }, { passive: true });
   });
 </script>
 <script>

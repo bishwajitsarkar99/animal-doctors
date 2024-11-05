@@ -1,4 +1,4 @@
-<div class="card-body focus-color cd skeleton" style="border:1px solid lightgray;border-radius: 5px;">
+<div class="card-body focus-color cd skeleton" style="border:1px solid lightgray;border-radius: 5px;margin-bottom: 10px;">
     <form id="emailForm" action="{{route('email.send')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <span id="emailForwardID" hidden></span>

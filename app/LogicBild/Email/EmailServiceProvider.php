@@ -255,7 +255,7 @@ class EmailServiceProvider
         $read_mail = $request->input('read_mail');
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
-        $user_to = $request->input('user_to');
+        $sender_email = $request->input('sender_email');
         // Initialize month and year arrays
         $months = [];
         $years = [];
@@ -296,8 +296,8 @@ class EmailServiceProvider
             $query->where('attachment_type', 'LIKE', '%' . $attachment_type . '%');
         }
         // Apply user email filters
-        if ($user_to) {
-            $query->where('user_to', 'LIKE', '%' . $user_to . '%');
+        if ($sender_email) {
+            $query->where('sender_email', 'LIKE', '%' . $sender_email . '%');
         }
         // Apply email status filters
         if ($status !== null) {
