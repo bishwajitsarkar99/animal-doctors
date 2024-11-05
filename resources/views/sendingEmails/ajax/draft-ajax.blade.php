@@ -9,8 +9,8 @@
     // Send List
     $(document).ready(function(){
         // Get Current Date and set it for start_date and end_date fields
-        const startDateField = document.getElementById('send_start_date');
-        const endDateField = document.getElementById('send_end_date');
+        const startDateField = document.getElementById('draft_start_date');
+        const endDateField = document.getElementById('draft_end_date');
 
         if (startDateField) {
             startDateField.value = currentDate();
@@ -20,7 +20,7 @@
         }
 
         // Fetch data when the document is ready
-        fetch_send_email(); 
+        fetch_draft_email(); 
         // Data View Table--------------
         const table_rows = (rows) => {
             if (rows.length === 0) {
@@ -63,9 +63,9 @@
                     }
                 }
                 var attachmentType, attachmentText;
-                if(row.attachment_type === 'attachments'){
-                    attachmentType = 'attachments';
-                    attachmentText = 'Report File';
+                if(row.attachment_type === 'others'){
+                    attachmentType = 'user_message';
+                    attachmentText = 'Others File';
                 }else if(row.attachment_type === 'user_message'){
                     attachmentType = 'user_message';
                     attachmentText = 'User Message File';
@@ -76,6 +76,8 @@
                 var fromEmail;
                 if(row.sender_email === row.user_to){
                     fromEmail = 'me';
+                }else if(row.user_to === null){
+                    fromEmail = 'Draft';
                 }
 
                 const attachments = JSON.parse(row.email_attachments || '[]');
@@ -117,7 +119,7 @@
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                                 <i class="fa-solid fa-trash-can fa-beat"></i>
                             </button>
-                            <span class="child-td1 ps-1">To : ${fromEmail ? fromEmail : row.user_to}</span>
+                            <span class="child-td1 ps-1" style="color:orangered;">${fromEmail ? fromEmail : row.user_to}</span>
                             <span class="child-td1 ps-1">${formatDate(row.created_at)}</span>
                         </td>
                         <td class="child-td1 ps-1" id="lastTd">
@@ -193,20 +195,19 @@
             imageModal.show();
         };
         // Function to fetch all user email
-        function fetch_send_email(query = '', url = null, perItem = null) {
+        function fetch_draft_email(query = '', url = null, perItem = null) {
             if (perItem === null) {
-                perItem = $("#perItemSendEmail").val();
+                perItem = $("#perItemDraftEmail").val();
             }
 
             // Get filter values
-            const send_start_date = $("#send_start_date").val();
-            const send_end_date = $("#send_end_date").val();
-            const attachment_type = $("#select_attachment_email").val();
-            const status = $("#select_status_email").val();
-            const user_to = $("#send_email_search").val();
+            const draft_start_date = $("#draft_start_date").val();
+            const draft_end_date = $("#draft_end_date").val();
+            const attachment_type = $("#select_attachment_draft").val();
+            const subject = $("#draft_email_search").val();
 
             // Set URL for AJAX request
-            let current_url = url ? url : `{{ route('email.send_list') }}?per_item=${perItem}`;
+            let current_url = url ? url : `{{ route('email.draft') }}?per_item=${perItem}`;
 
             $.ajax({
                 type: "GET",
@@ -214,11 +215,10 @@
                 dataType: 'json',
                 data: { 
                     query: query,
-                    send_start_date: send_start_date,
-                    send_end_date: send_end_date,
+                    draft_start_date: draft_start_date,
+                    draft_end_date: draft_end_date,
                     attachment_type: attachment_type,
-                    user_to: user_to,
-                    status: status,
+                    subject: subject,
                 },
                 success: function(response) {
                     const {
@@ -227,32 +227,31 @@
                         total, 
                         months, 
                         years, 
-                        total_send_emails,
+                        total_draft_emails,
                     } = response;
 
-                    $("#send_data_table").html(table_rows(data));
+                    $("#draft_data_table").html(table_rows(data));
                     // Handle pagination and other UI updates if necessary
-                    $("#send_email_data_table_paginate").html(paginate_html({ 
+                    $("#draft_email_data_table_paginate").html(paginate_html({ 
                         links, 
                         total,
                         months, 
                         years, 
                     }));
-                    // Total Send Emails
-                    $("#total_user_send_email").text(total);
-                    // Modal Header Send
-                    $("#send_emails").text(formatNumber(total_send_emails));
-                    $("#send_emails_progress").text(formatNumber(total_send_emails));
+                    // Total Draft Emails
+                    $("#total_draft_email").text(total);
+                    // Draft Progress
+                    $("#draft_emails_progress").text(formatNumber(total_draft_emails));
                     // Update current month element with the new data
-                    $("#send_email_month").text(months.length > 0 ? months.join(', ') : '');
+                    $("#draft_email_month").text(months.length > 0 ? months.join(', ') : '');
 
                     $('[data-bs-toggle="tooltip"]').tooltip();
 
                     const userMail = data.map(item => ({
-                        label: `${item.user_to}`,
-                        value: item.id,
+                        label: `${item.subject}`,
+                        value: item.subject,
                     }));
-                    $("#send_email_search").autocomplete({ source: userMail });
+                    $("#draft_email_search").autocomplete({ source: userMail });
                 },
                 error: function(error) {
                     console.log('Error fetching data:', error);
@@ -260,10 +259,10 @@
             });
         }
         // Per item change
-        $("#perItemSendEmail").on('change', (e) => {
+        $("#perItemDraftEmail").on('change', (e) => {
             $(this).tooltip('hide');
             const { value } = e.target;
-            fetch_send_email('', null, value);
+            fetch_draft_email('', null, value);
         });
 
         // Paginate Page
@@ -287,38 +286,37 @@
         };
 
         // change paginate page------------------------
-        $("#send_email_data_table_paginate").delegate("a", "click", function(e) {
+        $("#draft_email_data_table_paginate").delegate("a", "click", function(e) {
             e.stopImmediatePropagation();
             e.preventDefault();
 
             const url = $(this).attr('href');
 
             if (url !== '#') {
-                fetch_send_email('', url);
+                fetch_draft_email('', url);
             }
 
         });
 
         // Live Search
-        $("#send_email_search").on('keyup', function(){
+        $("#draft_email_search").on('keyup', function(){
             var query = $(this).val();
-            fetch_send_email(query); 
+            fetch_draft_email(query); 
         });
 
         // Attach File and Email Filter
-        $("#send_start_date, #send_end_date, #select_attachment_email,#select_status_email").on('change', ()=>{
-            fetch_send_email(); 
+        $("#draft_start_date, #draft_end_date, #select_attachment_draft").on('change', ()=>{
+            fetch_draft_email(); 
         });
 
         // Refresh Button
-        $(document).on('click', '#refreshDataBtn', function(){
+        $(document).on('click', '#refreshDraftBtn', function(){
             $(this).tooltip('hide');
-            $("#select_attachment_email").val("");
-            $("#select_status_email").val("");
-            $("#send_email_search").val("");
-            $("#allSelection").prop('checked', false);
+            $("#select_attachment_draft").val("");
+            $("#draft_email_search").val("");
+            $("#allSelectionDraft").prop('checked', false);
             $('.show-btn').addClass('delete-btn-display');
-            fetch_send_email();
+            fetch_draft_email();
             addAttributeOrClass([
                {selector: '.refresh_rotate_icon', type: 'class', name: 'fa-spin'} 
             ]);
@@ -335,7 +333,7 @@
         });
 
         // send email forward
-        $(document).on('click', '#sendForwardBtn', function(e){
+        $(document).on('click', '#draftForwardBtn', function(e){
             e.preventDefault();
             $(this).tooltip('hide');
             var id = $(this).val();
@@ -441,7 +439,7 @@
                             console.error("Failed to parse attachments:", error);
                             attachmentPreview.append(`<div class="col-xl-4">Error loading attachments.</div>`);
                         }
-                        $("#emailSendModal").modal('hide').fadeIn(300);
+                        $('#v-pills-email-tab').tab('show');
                     }
                 }
             });

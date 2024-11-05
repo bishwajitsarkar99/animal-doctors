@@ -48,12 +48,10 @@ Route::post('send-link', [AuthController::class, 'sendLink'])->name('send.link')
 Route::middleware(['role:SuperAdmin|Admin|SubAdmin|Accounts|Marketing|DeliveryTeam|User'])->group(function(){
     Route::get('/email', [EmailController::class, 'index'])->name('email.index');
     Route::post('/email/send', [EmailController::class, 'sendEmail'])->name('email.send');
-    Route::get('/email/send/list', [EmailController::class, 'getSendEmail'])->name('email.send_list');
+    Route::get('/email/send/list', [EmailController::class, 'sendFetchEmail'])->name('email.send_list');
     Route::get('/email/fetch', [EmailController::class, 'inboxFetchEmail'])->name('email.fetch');
-    Route::get('/email/forward/{id}', [EmailController::class, 'inboxForwardEmail'])->name('email.forward');
-    Route::get('/email/send-list/forward/{id}', [EmailController::class, 'sendForwardEmail'])->name('email.send_forward');
+    Route::get('/email/forward/{id}', [EmailController::class, 'forwardEmail'])->name('email.forward');
     Route::get('/email/fetch/drafts', [EmailController::class, 'getDraftFetchEmail'])->name('email.draft');
-    Route::get('/email/edit/drafts/{id}', [EmailController::class, 'draftEmailForward'])->name('email.edit_draft');
     Route::put('/email/update/drafts/{id}', [EmailController::class, 'draftEmailUpdate'])->name('email.update_draft');
     Route::delete('/email/delete/{id}', [EmailController::class, 'deleteEmail'])->name('email.delete');
 });

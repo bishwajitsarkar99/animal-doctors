@@ -15,8 +15,8 @@
         <span class="user_eml" style="color:gray;font-weight:700;font-size: .9rem;">{{Auth::user()->email}} </span><br>
       </p>
       <div class="d-flex align-items-start">
-        @if(auth()->user()->role == 1)
         <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 3 || auth()->user()->role == 5 || auth()->user()->role == 6 || auth()->user()->role == 7 || auth()->user()->role == 0)
           <button class="nav-link active" id="v-pills-email-tab" data-bs-toggle="pill" data-bs-target="#v-pills-email" type="button" role="tab" aria-controls="v-pills-email" aria-selected="true">
             <i class="fa-solid fa-marker"></i>
             <span class="btn-text email_search_page"> Compose</span>
@@ -33,6 +33,8 @@
             <i class="fa-solid fa-file"></i>
             <span class="btn-text email_draft_page"> Drafts (<span class="ms-1 me-1" id="emailDrafts"></span>)</span>
           </button>
+          @endif
+          @if(auth()->user()->role == 1)
           <button class="nav-link" id="v-pills-file-tab" data-bs-toggle="pill" data-bs-target="#v-pills-file" type="button" role="tab" aria-controls="v-pills-file" aria-selected="false">
             <i class="fa-solid fa-folder-open"></i>
             <span class="btn-text file_directory_page"> Attachment Folder</span>
@@ -43,26 +45,6 @@
           </button>
           @endif
         </div>
-        @if(auth()->user()->role == 2 || auth()->user()->role == 3 || auth()->user()->role == 5 || auth()->user()->role == 6 || auth()->user()->role == 7 || auth()->user()->role == 0)
-        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <button class="nav-link active" id="v-pills-email-tab" data-bs-toggle="pill" data-bs-target="#v-pills-email" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
-            <i class="fa-solid fa-marker"></i>
-            <span class="btn-text email_search_page"> Compose</span>
-          </button>
-          <button class="nav-link" id="v-pills-inbox-tab" data-bs-toggle="pill" data-bs-target="#v-pills-inbox" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-            <i class="fa-solid fa-inbox"></i>
-            <span class="btn-text email_send_page"> Inbox (<span class="ms-1 me-1" id="total_emails"></span>)</span>
-          </button>
-          <button class="nav-link" id="v-pills-send-tab" data-bs-toggle="pill" data-bs-target="#v-pills-send" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-            <i class="fa-solid fa-share"></i>
-            <span class="btn-text email_send_page"> Send (<span class="ms-1 me-1" id="emailSend"></span>)</span>
-          </button>
-          <button class="nav-link" id="v-pills-draft-tab" data-bs-toggle="pill" data-bs-target="#v-pills-draft" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-            <i class="fa-solid fa-file"></i>
-            <span class="btn-text email_draft_page"> Drafts (<span class="ms-1 me-1" id="emailDrafts"></span>)</span>
-          </button>
-        </div>
-        @endif
         <div class="tab-content flex-row" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="v-pills-email" role="tabpanel" aria-labelledby="v-pills-email-tab">
             @include('sendingEmails.compose')
@@ -73,7 +55,9 @@
           <div class="tab-pane fade" id="v-pills-send" role="tabpanel" aria-labelledby="v-pills-send-tab">
             @include('sendingEmails.sendbox')
           </div>
-          <div class="tab-pane fade" id="v-pills-draft" role="tabpanel" aria-labelledby="v-pills-draft-tab">Draft</div>
+          <div class="tab-pane fade" id="v-pills-draft" role="tabpanel" aria-labelledby="v-pills-draft-tab">
+            @include('sendingEmails.draft')
+          </div>
           @if(auth()->user()->role == 1)
           <div class="tab-pane fade" id="v-pills-file" role="tabpanel" aria-labelledby="v-pills-file-tab">Attachment Folder</div>
           <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">Setting</div>
@@ -176,8 +160,9 @@
 @endsection
 @push('scripts')
 @include('sendingEmails.ajax.inbox-ajax')
+@include('sendingEmails.ajax.sendbox-ajax')
+@include('sendingEmails.ajax.draft-ajax')
 @include('sendingEmails.ajax.show-modal-page-ajax')
-<!-- @include('sendingEmails.ajax.send-email-ajax') -->
 <!-- Summar-Note -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
@@ -238,6 +223,47 @@
       changeMonth: true,
       changeYear: true,
     });
+    // Draft Email Date Picker
+    $('#draft_start_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
+    $('#draft_end_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const tabs = document.querySelectorAll('.nav-link[data-bs-toggle="pill"]');
+
+    tabs.forEach(tab => {
+      // Check if a Bootstrap instance already exists
+      const existingInstance = bootstrap.Tab.getInstance(tab);
+      if (!existingInstance) {
+        new bootstrap.Tab(tab);  // Initialize the tab
+      }
+    });
+
+    // Observer for dynamically added tabs
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        mutation.addedNodes.forEach(node => {
+          if (node.matches && node.matches('.nav-link[data-bs-toggle="pill"]')) {
+            // Only initialize if there's no existing instance
+            const existingInstance = bootstrap.Tab.getInstance(node);
+            if (!existingInstance) {
+              new bootstrap.Tab(node);
+            }
+          }
+        });
+      });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
   });
 </script>
 <!-- Summary Note Initialize -->

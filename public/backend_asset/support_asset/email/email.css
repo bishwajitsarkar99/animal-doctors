@@ -391,7 +391,7 @@ button.search_btn:hover{
     border-color: #007bff;
     opacity: 1;
 }
-#start_date,#send_start_date{
+#start_date,#send_start_date,#draft_start_date{
     font-family: var(--nav-font-family);
     box-shadow: none;
     cursor: pointer;
@@ -401,7 +401,7 @@ button.search_btn:hover{
     font-size: 12px;
     font-weight: 700;
 }
-#end_date,#send_end_date{
+#end_date,#send_end_date,#draft_end_date{
     font-family: var(--nav-font-family);
     box-shadow: none;
     cursor: pointer;
@@ -411,7 +411,7 @@ button.search_btn:hover{
     font-size: 12px;
     font-weight: 700;
 }
-#email_search,#send_email_search{
+#email_search,#send_email_search,#draft_email_search{
     font-family: var(--nav-font-family);
     box-shadow: none;
     border: 1px solid #ebebeb;
@@ -420,7 +420,7 @@ button.search_btn:hover{
     font-size: 12px;
     font-weight: 700;
 }
-select#select_attachment,select#select_status,select#select_attachment_email,select#select_status_email{
+select#select_attachment,select#select_status,select#select_attachment_email,select#select_status_email,select#select_attachment_draft{
     font-family: var(--nav-font-family);
     box-shadow: none;
     cursor: pointer;
@@ -431,8 +431,8 @@ select#select_attachment,select#select_status,select#select_attachment_email,sel
     font-weight: 700; 
 }
 input#start_date:focus,input#end_date:focus,input#email_search:focus,input#send_email_search:focus,select#select_attachment:focus,select#select_status:focus
-,select#select_attachment_email:focus,select#select_status_email:focus,input#send_start_date:focus
-,input#send_end_date:focus{
+,select#select_attachment_email:focus,select#select_status_email:focus,input#send_start_date:focus,input#send_end_date:focus,input#draft_email_search:focus
+,input#draft_start_date:focus,input#draft_end_date:focus,select#select_attachment_draft:focus{
     /* border-color: dodgerblue; */
     border: 2px solid dodgerblue;
 }
@@ -468,7 +468,7 @@ select#select_read_email:focus,select#select_send_read_email:focus{
 .send_data_item {
     position: relative;
 }
-select#perItemControl,select#perItemSendEmail {
+select#perItemControl,select#perItemSendEmail,select#perItemDraftEmail {
     outline: none;
     color: black;
     font-weight: 600;
@@ -503,8 +503,11 @@ select#perItemControl,select#perItemSendEmail {
 .margin_search{
     margin-left: 22px;
 }
-.group_btn,.send_group_btn {
+.group_btn {
     margin-top: -3px;
+}
+.send_group_btn {
+    margin-top: 1px;
 }
 label.tot-search {
     color: black;
@@ -574,7 +577,7 @@ tr.user-table-row:hover{
         color: darkblue;
     }
 }
-#user_email_get_data_table_paginate,#send_email_data_table_paginate {
+#user_email_get_data_table_paginate,#send_email_data_table_paginate,#draft_email_data_table_paginate {
     float: right;
 }
 .dropdown-item {
@@ -598,9 +601,20 @@ button#dropdownButton {
     font-weight: 600;
     font-size: 13px;
     margin-top: 4px;
+    padding-top: 2px;
+}
+button#selectDropdownButton{
+    font-family: var(--nav-font-family);
+    font-weight: 600;
+    font-size: 13px;
+    margin-top: 2px;
+    padding-top: 0px;
 }
 .chck {
     margin-top: 4px;
+}
+.btn-top{
+    margin-top: 1px;
 }
 .month_box {
     text-align: right;

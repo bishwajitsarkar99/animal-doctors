@@ -28,46 +28,36 @@ class EmailController extends Controller
         return $this->emailServiceProvider->sending($request);
     }
 
-    // Send List Fetch Mail
-    public function getSendEmail(Request $request)
+    // Send Fetch Mail
+    public function sendFetchEmail(Request $request)
     {
         return $this->emailServiceProvider->sendFetchUserEmail($request);
     }
 
-    // Send Forward Mail
-    public function sendForwardEmail(Request $request, $id)
-    {
-        return $this->emailServiceProvider->sendForwardUserEmail($request, $id);
-    }
-
-    // Inbox List Fetch Mail
+    // Inbox Fetch Mail
     public function inboxFetchEmail(Request $request)
     {
         return $this->emailServiceProvider->inboxFetchUserEmail($request);
     }
 
-    // Inbox Forward Mail
-    public function inboxForwardEmail(Request $request, $id)
+    // Forward Mail
+    public function forwardEmail(Request $request, $id)
     {
-        return $this->emailServiceProvider->inboxForwardUserEmail($request, $id);
+        return $this->emailServiceProvider->forwardUserEmail($request, $id);
     }
  
-    // Draft List Fetch Mail
+    // Draft Fetch Mail
     public function getDraftFetchEmail(Request $request)
     {
         return $this->emailServiceProvider->getDraftFetchUserEmail($request);
     }
-    
-    // Draft Forward Mail
-    public function draftEmailForward(Request $request, $id)
-    {
-        return $this->emailServiceProvider->draftForwardUserEmail($request, $id);
-    }
+
     // Draft Update Mail
     public function draftEmailUpdate(Request $request, $id)
     {
         return $this->emailServiceProvider->draftUpdateUserEmail($request, $id);
     }
+
     // Delete Mail
     public function deleteEmail(Request $request)
     {

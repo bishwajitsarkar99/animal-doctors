@@ -1,7 +1,8 @@
 <script type="module">
     import { addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
+    
     $(document).ready(function(){
-        // Email Inbox modal
+        // Email Inbox Tab
         $(document).on('click', '#v-pills-inbox-tab', function(e) {
             e.preventDefault();
             // Hide tooltip
@@ -33,6 +34,59 @@
             return () => {
                 clearTimeout(time);
             };
+        });
+
+        // Email Sendbox Tab
+        $(document).on('click', '#v-pills-send-tab', function(e){
+            e.preventDefault();
+
+            $(this).tooltip('hide');
+
+            addAttributeOrClass([
+                {selector: '#send_data_table', type: 'class', name: 'tabskeletone'},
+            ]);
+            var time = null;
+            var time = setTimeout(() => {
+                removeAttributeOrClass([
+                    {selector: '.send_selection,.send_clos_btn,.send_group_btn,.send_current_month,.send_input1,.send_input2,.send_input3,.send_input4,.send_input5,.send_timezone,.send_data_item,#send_email_data_table_paginate,.storg_send', type: 'class', name: 'text-skeletone'},
+                    {selector: '.send__email__select', type: 'class', name: 'min-dropdown-skeletone'},
+                    {selector: '.send_next_btn', type: 'class', name: 'skeletone'},
+                    {selector: '#send_data_table', type: 'class', name: 'tabskeletone'},
+                    {selector: '.send_email_sum', type: 'class', name: 'email-skeletone'},
+                    {selector: '#send_list_cancel', type: 'class', name: 'btn-skeletone'},
+                    {selector: '.send_email_progress', type: 'class', name: 'email-progress-bar-skeleton'},
+                ]);
+            }, 3000);
+
+            return ()=>{
+                clearTimeout(time);
+            }
+        });
+
+        // Email Draft Tab
+        $(document).on('click', '#v-pills-draft-tab', function(e){
+            e.preventDefault();
+
+            $(this).tooltip('hide');
+
+            addAttributeOrClass([
+                {selector: '#draft_data_table', type: 'class', name: 'tabskeletone'},
+            ]);
+            var time = null;
+            var time = setTimeout(() => {
+                removeAttributeOrClass([
+                    {selector: '.send_selection,.send_clos_btn,.send_group_btn,.send_current_month,.send_input1,.send_input2,.send_input3,.send_input4,.send_input5,.send_timezone,.send_data_item,#draft_email_data_table_paginate,.storg_send', type: 'class', name: 'text-skeletone'},
+                    {selector: '.send__email__select', type: 'class', name: 'min-dropdown-skeletone'},
+                    {selector: '.send_next_btn', type: 'class', name: 'skeletone'},
+                    {selector: '#draft_data_table', type: 'class', name: 'tabskeletone'},
+                    {selector: '.send_email_sum', type: 'class', name: 'email-skeletone'},
+                    {selector: '.send_email_progress', type: 'class', name: 'email-progress-bar-skeleton'},
+                ]);
+            }, 3000);
+
+            return ()=>{
+                clearTimeout(time);
+            }
         });
 
         // image modal skeletone
@@ -86,40 +140,11 @@
                 clearTimeout(time);
             }
         });
-        // Send Email List modal
-        $(document).on('click', '#email_send_page', function(e){
-            e.preventDefault();
-
-            $("#emailSendModal").modal('show').fadeIn(300).delay(300);
-            $("#loader_email_modal").modal('show').fadeIn(300).delay(300);
-
-            $(this).tooltip('hide');
-
-            addAttributeOrClass([
-                {selector: '#send_data_table', type: 'class', name: 'tabskeletone'},
-            ]);
-            var time = null;
-            var time = setTimeout(() => {
-                $("#loader_email_modal").modal('hide');
-                removeAttributeOrClass([
-                    {selector: '.send_selection,.send_clos_btn,.send_group_btn,.send_current_month,.send_input1,.send_input2,.send_input3,.send_input4,.send_input5,.send_timezone,.send_data_item,#send_email_data_table_paginate,.storg_send', type: 'class', name: 'text-skeletone'},
-                    {selector: '.send__email__select', type: 'class', name: 'min-dropdown-skeletone'},
-                    {selector: '.send_next_btn', type: 'class', name: 'skeletone'},
-                    {selector: '#send_data_table', type: 'class', name: 'tabskeletone'},
-                    {selector: '.send_email_sum', type: 'class', name: 'email-skeletone'},
-                    {selector: '#send_list_cancel', type: 'class', name: 'btn-skeletone'},
-                    {selector: '.send_email_progress', type: 'class', name: 'email-progress-bar-skeleton'},
-                ]);
-            }, 3000);
-
-            return ()=>{
-                clearTimeout(time);
-            }
-        });
         // File Directory modal
         $(document).on('click', '#file_directory_page', function(e){
             e.preventDefault();
             $("#fileDirectoryModal").modal('show');
         });
+
     });
 </script>

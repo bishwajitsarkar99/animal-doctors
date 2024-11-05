@@ -26,6 +26,7 @@ class EmailServiceProvider
         $user_id = Auth::user()->id;
         // Total Email
         $totalEmails = UserEmail::whereNotNull('user_to')->count();
+        $totalDrafts = UserEmail::count();
         // Total User
         $userEmails = User::count();
         // Total inbox Email
@@ -37,13 +38,17 @@ class EmailServiceProvider
 
         // Total Send User Email According to Month
         $total_send_emails = UserEmail::whereNotNull('user_to')->where('sender_user', '=', $user_id)->count();
+        // Total Draft Email According to Month
+        $total_draft_emails = UserEmail::whereNotIn('attachment_type', ['attachments', 'user_message'])->orWhere('sender_user', '=', $user_id)->count();
 
         // Calculate the percentage of total inbox email
         $inbox_email_percentage = $total_emails > 0 ? ($total_emails / $userEmails) * 100 : 0;
         // Calculate the percentage of total send email
         $send_email_percentage = $total_send_emails > 0 ? ($total_send_emails / $userEmails) * 100 : 0;
+        // Calculate the percentage of total send email
+        $draft_email_percentage = $total_draft_emails > 0 ? ($total_draft_emails / $userEmails) * 100 : 0;
 
-        return view('sendingEmails.index', compact('inbox_email_percentage', 'send_email_percentage', 'totalEmails'));
+        return view('sendingEmails.index', compact('inbox_email_percentage', 'send_email_percentage', 'totalEmails', 'totalDrafts', 'draft_email_percentage'));
     }
     /**
      * Handle Send Email
@@ -236,13 +241,6 @@ class EmailServiceProvider
         ], 200);
     }
     /**
-     * Handle Send Forward Email 
-    */
-    public function sendForwardUserEmail(Request $request, $id)
-    {
-        //
-    }
-    /**
      * Handle Inbox Fetch Email
     */
     public function inboxFetchUserEmail(Request $request)
@@ -346,9 +344,9 @@ class EmailServiceProvider
         ], 200);
     }
     /**
-     * Handle Inbox Forward Email 
+     * Handle Forward Email 
     */
-    public function inboxForwardUserEmail(Request $request, $id)
+    public function forwardUserEmail(Request $request, $id)
     {
         $forward_email = UserEmail::find($id);
         if($forward_email){
@@ -364,18 +362,77 @@ class EmailServiceProvider
         }
     }
     /**
-     * Handle Draft List Fetch
+     * Handle Draft Fetch
     */
     public function getDraftFetchUserEmail(Request $request)
     {
-        //
-    }
-    /**
-     * Handle Draft Forward Mail
-    */
-    public function draftForwardUserEmail(Request $request, $id)
-    {
-        //
+        if (!$request->ajax()) {
+            return abort(404);
+        }
+    
+        // Input filters
+        $draft_start_date = $request->input('draft_start_date');
+        $draft_end_date = $request->input('draft_end_date');
+        $attachment_type = $request->input('attachment_type');
+        $subject = $request->input('subject');
+    
+        // Initialize month and year arrays
+        $months = [];
+        $years = [];
+    
+        // Generate month and year filters if date range is provided
+        if ($draft_start_date && $draft_end_date) {
+            $start = Carbon::parse($draft_start_date)->startOfMonth();
+            $end = Carbon::parse($draft_end_date)->endOfMonth();
+    
+            while ($start->lte($end)) {
+                $months[] = $start->format('F Y');
+                $start->addMonth();
+            }
+    
+            $years = array_unique(array_map(function ($month) {
+                return Carbon::parse($month)->format('Y');
+            }, $months));
+        }
+    
+        // Query setup
+        $authID = Auth::user()->id;
+        $query = UserEmail::whereNotIn('attachment_type', ['attachments', 'user_message'])
+            ->where('sender_user', '=', $authID)
+            ->with(['roles'])
+            ->orderBy('id', 'desc');
+    
+        // Apply filters
+        if ($draft_start_date && $draft_end_date) {
+            $query->whereBetween('created_at', [
+                Carbon::parse($draft_start_date), 
+                Carbon::parse($draft_end_date)->endOfDay()
+            ]);
+        }
+        if ($attachment_type) {
+            $query->where('attachment_type', 'LIKE', '%' . $attachment_type . '%');
+        }
+        if ($subject) {
+            $query->where('subject', 'LIKE', '%' . $subject . '%');
+        }
+    
+        // Count total emails sent by the authenticated user
+        $total_draft_emails = UserEmail::whereNotIn('attachment_type', ['attachments', 'user_message'])
+                                        ->where('sender_user', '=', $authID)
+                                        ->count();
+    
+        // Paginate results
+        $perItem = $request->input('per_item', 10);
+        $data = $query->paginate($perItem)->toArray();
+        // Return response
+        return response()->json([
+            'data' => $data['data'],
+            'links' => $data['links'],
+            'total' => $data['total'],
+            'total_draft_emails' => $total_draft_emails,
+            'months' => $months,
+            'years' => array_values($years),
+        ], 200);
     }
     /**
      * Handle Draft Update Mail
