@@ -236,36 +236,6 @@
     });
   });
 </script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const tabs = document.querySelectorAll('.nav-link[data-bs-toggle="pill"]');
-
-    tabs.forEach(tab => {
-      // Check if a Bootstrap instance already exists
-      const existingInstance = bootstrap.Tab.getInstance(tab);
-      if (!existingInstance) {
-        new bootstrap.Tab(tab);  // Initialize the tab
-      }
-    });
-
-    // Observer for dynamically added tabs
-    const observer = new MutationObserver(mutations => {
-      mutations.forEach(mutation => {
-        mutation.addedNodes.forEach(node => {
-          if (node.matches && node.matches('.nav-link[data-bs-toggle="pill"]')) {
-            // Only initialize if there's no existing instance
-            const existingInstance = bootstrap.Tab.getInstance(node);
-            if (!existingInstance) {
-              new bootstrap.Tab(node);
-            }
-          }
-        });
-      });
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-</script>
 <!-- Summary Note Initialize -->
 <script>
   $(document).ready(function() {

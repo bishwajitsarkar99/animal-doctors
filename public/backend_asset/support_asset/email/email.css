@@ -1065,3 +1065,19 @@ td.error_data {
         color: orangered;
     }
 }
+/* mobile responsive */
+@media (max-width: 767.98px) {
+    .nav-pills {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    .tab-content {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    .tab-pane {
+      width: 100%;
+    }
+}

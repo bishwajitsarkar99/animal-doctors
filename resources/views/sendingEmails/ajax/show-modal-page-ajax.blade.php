@@ -5,9 +5,6 @@
         // Email Inbox Tab
         $(document).on('click', '#v-pills-inbox-tab', function(e) {
             e.preventDefault();
-            // Hide tooltip
-            $(this).tooltip('hide');
-
             // Add skeleton classes
             addAttributeOrClass([
                 { selector: '#email_data_table', type: 'class', name: 'tabskeletone' },
@@ -28,7 +25,7 @@
                     { selector: '#cate_delete5', type: 'class', name: 'btn-skeletone' },
                     { selector: '.progress', type: 'class', name: 'progress-bar-skeleton' },
                 ]);
-            }, 3000);
+            }, 1000);
 
             // Optional cleanup if this code runs in a specific context
             return () => {
@@ -39,8 +36,6 @@
         // Email Sendbox Tab
         $(document).on('click', '#v-pills-send-tab', function(e){
             e.preventDefault();
-
-            $(this).tooltip('hide');
 
             addAttributeOrClass([
                 {selector: '#send_data_table', type: 'class', name: 'tabskeletone'},
@@ -56,7 +51,7 @@
                     {selector: '#send_list_cancel', type: 'class', name: 'btn-skeletone'},
                     {selector: '.send_email_progress', type: 'class', name: 'email-progress-bar-skeleton'},
                 ]);
-            }, 3000);
+            }, 1000);
 
             return ()=>{
                 clearTimeout(time);
@@ -66,8 +61,6 @@
         // Email Draft Tab
         $(document).on('click', '#v-pills-draft-tab', function(e){
             e.preventDefault();
-
-            $(this).tooltip('hide');
 
             addAttributeOrClass([
                 {selector: '#draft_data_table', type: 'class', name: 'tabskeletone'},
@@ -82,7 +75,7 @@
                     {selector: '.send_email_sum', type: 'class', name: 'email-skeletone'},
                     {selector: '.send_email_progress', type: 'class', name: 'email-progress-bar-skeleton'},
                 ]);
-            }, 3000);
+            }, 1000);
 
             return ()=>{
                 clearTimeout(time);
