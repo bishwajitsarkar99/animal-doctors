@@ -26,9 +26,9 @@
                     <span class="more__button">
                         <select type="text" class="form-control form-control-sm" name="attachment_type" id="selectAttachFile">
                             <option value="" >Select Attachment Type</option>
-                            <option value="attachments">Management Report</option>
-                            <option value="user_message">User Message</option>
-                            <option value="other">Others</option>
+                            <option value="report">Report</option>
+                            <option value="message">Message</option>
+                            <option value="draft">Draft</option>
                         </select>
                     </span>
                     </th>

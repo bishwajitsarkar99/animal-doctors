@@ -39,7 +39,7 @@ class EmailServiceProvider
         // Total Send User Email According to Month
         $total_send_emails = UserEmail::whereNotNull('user_to')->where('sender_user', '=', $user_id)->count();
         // Total Draft Email According to Month
-        $total_draft_emails = UserEmail::whereNotIn('attachment_type', ['attachments', 'user_message'])->orWhere('sender_user', '=', $user_id)->count();
+        $total_draft_emails = UserEmail::whereNotIn('attachment_type', ['report', 'message'])->orWhere('sender_user', '=', $user_id)->count();
 
         // Calculate the percentage of total inbox email
         $inbox_email_percentage = $total_emails > 0 ? ($total_emails / $userEmails) * 100 : 0;
@@ -91,7 +91,7 @@ class EmailServiceProvider
         
         // Handle file attachments
         if ($request->hasFile('email_attachments')) {
-            $attachmentFolder = $request->attachment_type == 'attachments' ? 'attachments' : 'user_message';
+            $attachmentFolder = $request->attachment_type == 'report' ? 'report' : ($request->attachment_type == 'message' ? 'message' : 'draft');
         
             foreach ($request->file('email_attachments') as $file) {
                 $originalFilename = $file->getClientOriginalName();
@@ -397,7 +397,7 @@ class EmailServiceProvider
     
         // Query setup
         $authID = Auth::user()->id;
-        $query = UserEmail::whereNotIn('attachment_type', ['attachments', 'user_message'])
+        $query = UserEmail::whereNotIn('attachment_type', ['report', 'message'])
             ->where('sender_user', '=', $authID)
             ->with(['roles'])
             ->orderBy('id', 'desc');
@@ -417,7 +417,7 @@ class EmailServiceProvider
         }
     
         // Count total emails sent by the authenticated user
-        $total_draft_emails = UserEmail::whereNotIn('attachment_type', ['attachments', 'user_message'])
+        $total_draft_emails = UserEmail::whereNotIn('attachment_type', ['report', 'message'])
                                         ->where('sender_user', '=', $authID)
                                         ->count();
     

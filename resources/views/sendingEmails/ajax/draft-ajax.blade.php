@@ -63,12 +63,15 @@
                     }
                 }
                 var attachmentType, attachmentText;
-                if(row.attachment_type === 'others'){
-                    attachmentType = 'user_message';
-                    attachmentText = 'Others File';
-                }else if(row.attachment_type === 'user_message'){
-                    attachmentType = 'user_message';
-                    attachmentText = 'User Message File';
+                if(row.attachment_type === 'draft'){
+                    attachmentType = 'draft';
+                    attachmentText = 'Draft Attachment File';
+                }else if(row.attachment_type === 'message'){
+                    attachmentType = 'message';
+                    attachmentText = 'Message Attachment File';
+                }else if(row.attachment_type === 'report'){
+                    attachmentType = 'report';
+                    attachmentText = 'Report Attachment File';
                 }else{
                     attachmentText = 'N/A';
                 }
@@ -113,7 +116,7 @@
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-regular fa-eye fa-beat" style="margin-top: 1px;"></i>
                             </button>
-                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="sendForwardBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="draftForwardBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-solid fa-share-nodes fa-beat" style="margin-top: 1px;"></i>
                             </button>
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
@@ -387,13 +390,14 @@
                                     let csvLogo = "{{ asset('backend_asset/main_asset/attachment-logo/csv_logo.jpg') }}";
                                     let docxLogo = "{{ asset('backend_asset/main_asset/attachment-logo/docx_logo.png') }}";
                                     // Base paths for attachments and user messages
-                                    let attachImagePath = `{{ asset('storage/attachments') }}/${fileName}`;
-                                    let userMessageImagePath = `{{ asset('storage/user_message') }}/${fileName}`;
+                                    let attachImagePath = `{{ asset('storage/report') }}/${fileName}`;
+                                    let userMessageImagePath = `{{ asset('storage/message') }}/${fileName}`;
+                                    let draftImagePath = `{{ asset('storage/draft') }}/${fileName}`;
 
                                     // Determine file path based on `attachment_type`
                                     let filePath = "";
 
-                                    if (file_image === 'attachments') {
+                                    if (file_image === 'report') {
                                         if (fileExtension === 'pdf') {
                                             filePath = pdfLogo;
                                         } else if (['xls', 'xlsx'].includes(fileExtension)) {
@@ -405,7 +409,7 @@
                                         } else if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
                                             filePath = attachImagePath;
                                         }
-                                    } else if(file_image === 'user_message') {
+                                    } else if(file_image === 'message') {
                                         if (fileExtension === 'pdf') {
                                             filePath = pdfLogo;
                                         } else if (['xls', 'xlsx'].includes(fileExtension)) {
@@ -416,6 +420,18 @@
                                             filePath = docxLogo;
                                         } else if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
                                             filePath = userMessageImagePath;
+                                        }
+                                    }else if(file_image === 'draft') {
+                                        if (fileExtension === 'pdf') {
+                                            filePath = pdfLogo;
+                                        } else if (['xls', 'xlsx'].includes(fileExtension)) {
+                                            filePath = xlsLogo;
+                                        } else if (fileExtension === 'csv') {
+                                            filePath = csvLogo;
+                                        } else if (fileExtension === 'docx') {
+                                            filePath = docxLogo;
+                                        } else if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
+                                            filePath = draftImagePath;
                                         }
                                     }
 

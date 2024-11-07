@@ -75,12 +75,15 @@
                     }
                 }
                 var attachmentType, attachmentText;
-                if(row.attachment_type === 'attachments'){
-                    attachmentType = 'attachments';
-                    attachmentText = 'Report File';
-                }else if(row.attachment_type === 'user_message'){
-                    attachmentType = 'user_message';
-                    attachmentText = 'User Message File';
+                if(row.attachment_type === 'report'){
+                    attachmentType = 'report';
+                    attachmentText = 'Report Attachment File';
+                }else if(row.attachment_type === 'message'){
+                    attachmentType = 'message';
+                    attachmentText = 'Message Attachment File';
+                }else if(row.attachment_type === 'draft'){
+                    attachmentType = 'draft';
+                    attachmentText = 'Draft Attachment File';
                 }else{
                     attachmentText = 'N/A';
                 }
@@ -491,13 +494,14 @@
                                     let csvLogo = "{{ asset('backend_asset/main_asset/attachment-logo/csv_logo.jpg') }}";
                                     let docxLogo = "{{ asset('backend_asset/main_asset/attachment-logo/docx_logo.png') }}";
                                     // Base paths for attachments and user messages
-                                    let attachImagePath = `{{ asset('storage/attachments') }}/${fileName}`;
-                                    let userMessageImagePath = `{{ asset('storage/user_message') }}/${fileName}`;
+                                    let attachImagePath = `{{ asset('storage/report') }}/${fileName}`;
+                                    let userMessageImagePath = `{{ asset('storage/message') }}/${fileName}`;
+                                    let draftImagePath = `{{ asset('storage/draft') }}/${fileName}`;
 
                                     // Determine file path based on `attachment_type`
                                     let filePath = "";
 
-                                    if (file_image === 'attachments') {
+                                    if (file_image === 'report') {
                                         if (fileExtension === 'pdf') {
                                             filePath = pdfLogo;
                                         } else if (['xls', 'xlsx'].includes(fileExtension)) {
@@ -509,7 +513,7 @@
                                         } else if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
                                             filePath = attachImagePath;
                                         }
-                                    } else if(file_image === 'user_message') {
+                                    } else if(file_image === 'message') {
                                         if (fileExtension === 'pdf') {
                                             filePath = pdfLogo;
                                         } else if (['xls', 'xlsx'].includes(fileExtension)) {
@@ -520,6 +524,18 @@
                                             filePath = docxLogo;
                                         } else if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
                                             filePath = userMessageImagePath;
+                                        }
+                                    }else if(file_image === 'draft') {
+                                        if (fileExtension === 'pdf') {
+                                            filePath = pdfLogo;
+                                        } else if (['xls', 'xlsx'].includes(fileExtension)) {
+                                            filePath = xlsLogo;
+                                        } else if (fileExtension === 'csv') {
+                                            filePath = csvLogo;
+                                        } else if (fileExtension === 'docx') {
+                                            filePath = docxLogo;
+                                        } else if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
+                                            filePath = draftImagePath;
                                         }
                                     }
 

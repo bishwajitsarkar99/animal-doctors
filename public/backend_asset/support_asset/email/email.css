@@ -540,11 +540,11 @@ button#viewBtn {
     border: none;
     background-color: #fff;
 }
-button#forwardBtn,button#sendForwardBtn{
+button#forwardBtn,button#sendForwardBtn,button#draftForwardBtn{
     border: none;
     background-color: #fff;
 }
-button#checkBtn:hover,button#viewBtn:hover,button#deleteBtn:hover,button#forwardBtn:hover,button#sendForwardBtn:hover{
+button#checkBtn:hover,button#viewBtn:hover,button#deleteBtn:hover,button#forwardBtn:hover,button#sendForwardBtn:hover,button#draftForwardBtn:hover{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     border-radius: 50%;
     background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);
@@ -1034,11 +1034,11 @@ button#rowDeleteBtn{
 }
 .file_name {
     margin-left: 5px;
-    background-color: #3272f9;
+    background-color: #e5e5e5;
     border-radius: 4px;
     padding-right: 5px;
     padding-left: 5px;
-    color: white;
+    color: #0453f9;
 }
 .file_logo{
     width: 50px;
