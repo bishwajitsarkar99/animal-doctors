@@ -52,7 +52,7 @@ Route::middleware(['role:SuperAdmin|Admin|SubAdmin|Accounts|Marketing|DeliveryTe
     Route::get('/email/fetch', [EmailController::class, 'inboxFetchEmail'])->name('email.fetch');
     Route::get('/email/forward/{id}', [EmailController::class, 'forwardEmail'])->name('email.forward');
     Route::get('/email/fetch/drafts', [EmailController::class, 'getDraftFetchEmail'])->name('email.draft');
-    Route::put('/email/update/drafts/{id}', [EmailController::class, 'draftEmailUpdate'])->name('email.update_draft');
+    Route::post('/email/view/status', [EmailController::class, 'emailView'])->name('email.view_draft');
     Route::delete('/email/delete/{id}', [EmailController::class, 'deleteEmail'])->name('email.delete');
 });
 // Super Admin Logout Route (POST is more secure for state-changing operations)

@@ -123,7 +123,7 @@
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="checkBtn" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <input class="form-check-input selectBtn" type="checkbox" value="${row.id}" id="selectBtn" style="font-size:13px;margin-top: -1px;">
                             </button>
-                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewBtn" email_id="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-regular fa-eye fa-beat" style="margin-top: 1px;"></i>
                             </button>
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="forwardBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
@@ -269,11 +269,9 @@
                     $("#emailDrafts").text(formatNumber(total_draft_emails));
                     // Total New Emails
                     $("#total_new_emails").text(formatNumber(total_new_emails));
-                    // Modal Header Inbox
-                    $("#inbox_emails").text(formatNumber(total_emails));
-                    // Modal Footer Inbox
+                    // Email Table Progress bar
                     $("#inbox_emails_progress").text(formatNumber(total_emails));
-                    // Modal Header Send
+                    // Header Send
                     $("#send_emails").text(formatNumber(total_send_emails));
                     // Update current month element with the new data
                     $("#email_month").text(months.length > 0 ? months.join(', ') : '');
@@ -390,6 +388,37 @@
             var parentId = $(this).data('parent');
             $(this).tooltip('hide');
             $(`.child-row[data-child='${parentId}']`).toggle('slow').delay(300);
+
+            const current_url = "{{route('email.view_draft')}}";
+
+            const pagination_url = $("#user_email_get_data_table_paginate .active").attr('href');
+
+            const email_id = $(this).data('email_id');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: current_url,
+                dataType: 'json',
+                data: {
+                    id: $(this).attr('email_id'),
+                    status: $(this).val(),
+                },
+                success: function({
+                    messages
+                }) {
+                    console.log('messages', messages);
+                    // $("#success_message").text(messages);
+                    // $('#success_message').addClass('background_error');
+                    // handleSuccessMessage('#success_message');
+                    // fetch_all_user_email('', pagination_url);
+                }
+            });
         });
 
         // clear email form

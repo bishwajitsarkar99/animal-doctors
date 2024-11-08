@@ -52,10 +52,10 @@ class EmailController extends Controller
         return $this->emailServiceProvider->getDraftFetchUserEmail($request);
     }
 
-    // Draft Update Mail
-    public function draftEmailUpdate(Request $request, $id)
+    // Mail View Status
+    public function emailView(Request $request)
     {
-        return $this->emailServiceProvider->draftUpdateUserEmail($request, $id);
+        return $this->emailServiceProvider->viewStatusUserEmail($request);
     }
 
     // Delete Mail

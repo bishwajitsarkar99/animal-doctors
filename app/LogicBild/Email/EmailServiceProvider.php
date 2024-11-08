@@ -437,9 +437,22 @@ class EmailServiceProvider
     /**
      * Handle Draft Update Mail
     */
-    public function draftUpdateUserEmail(Request $request, $id)
+    public function viewStatusUserEmail(Request $request)
     {
-        //
+        $id = (int)$request->input('id');
+        $status = (bool)$request->input('status');
+        $status = !$status;
+
+        $data = UserEmail::findOrFail( $id);
+
+        $data->update([
+            'status' => (int)$status,
+        ]);
+
+        return response()->json([
+            'messages' => 'The email has been view Successfully',
+            'code' => 202,
+        ], 202);
     }
     /**
      * Handle Delete Email
