@@ -274,9 +274,9 @@ class EmailServiceProvider
         $authEmail = Auth::user()->email;
         $query = UserEmail::whereNotNull('user_to')
             ->where(function($q) use ($authEmail) {
-                $q->where('user_to', 'LIKE', "%$authEmail")
-                  ->orWhere('user_cc', 'LIKE', "%$authEmail")
-                  ->orWhere('user_bcc', 'LIKE', "%$authEmail");
+                $q->where('user_to', 'LIKE', "%$authEmail%")
+                  ->orWhere('user_cc', 'LIKE', "%$authEmail%")
+                  ->orWhere('user_bcc', 'LIKE', "%$authEmail%");
             })
             ->with(['roles'])
             ->orderBy('id', 'desc');
@@ -312,18 +312,20 @@ class EmailServiceProvider
         $user_email = Auth::user()->email;
         // Total User Email / Inbox
         $total_emails = UserEmail::whereNotNull('user_to')
-                                ->where('user_to', 'LIKE', "%$user_email")
-                                ->orWhere('user_cc', 'LIKE', "%$user_email")
-                                ->orWhere('user_bcc', 'LIKE', "%$user_email")
+                                ->where('user_to', 'LIKE', "%$user_email%")
+                                ->orWhere('user_cc', 'LIKE', "%$user_email%")
+                                ->orWhere('user_bcc', 'LIKE', "%$user_email%")
                                 ->count();
         // Total Draft User Email
         $total_draft_emails = UserEmail::whereNull('user_to')->where('sender_user', '=', $userId)->count();
         // Total New Email
         $total_new_emails = UserEmail::whereNotNull('user_to')
-                                        ->where('user_to', 'LIKE', "%$user_email")
-                                        ->orWhere('user_cc', 'LIKE', "%$user_email")
-                                        ->orWhere('user_bcc', 'LIKE', "%$user_email")
-                                        ->where('status','=', 0)
+                                        ->where(function($q) use ($user_email) {
+                                            $q->where('user_to', 'LIKE', "%$user_email%")
+                                            ->orWhere('user_cc', 'LIKE', "%$user_email%")
+                                            ->orWhere('user_bcc', 'LIKE', "%$user_email%");
+                                        })
+                                        ->where('status', '=', 0)
                                         ->count();
         // Total Send User Email According to Month
         $total_send_emails = UserEmail::whereNotNull('user_to')->where('sender_user', '=', $userId)->count();
