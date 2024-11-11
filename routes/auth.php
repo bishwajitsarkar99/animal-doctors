@@ -51,6 +51,7 @@ Route::middleware(['role:SuperAdmin|Admin|SubAdmin|Accounts|Marketing|DeliveryTe
     Route::get('/email/send/list', [EmailController::class, 'sendFetchEmail'])->name('email.send_list');
     Route::get('/email/fetch', [EmailController::class, 'inboxFetchEmail'])->name('email.fetch');
     Route::get('/email/forward/{id}', [EmailController::class, 'forwardEmail'])->name('email.forward');
+    Route::post('/email/forward/send', [EmailController::class, 'sendForwardedEmail'])->name('email.forward.send');
     Route::get('/email/fetch/drafts', [EmailController::class, 'getDraftFetchEmail'])->name('email.draft');
     Route::post('/email/view/status', [EmailController::class, 'emailView'])->name('email.view_draft');
     Route::delete('/email/delete/{id}', [EmailController::class, 'deleteEmail'])->name('email.delete');

@@ -173,11 +173,9 @@
 <script type="module">
   import { 
     removeSkeletonClass, 
-    buttonLoader, 
     handleSuccessMessage, 
     toolTip,
   } from "{{asset('/module/module-min-js/design-helper-function-min.js')}}";
-  buttonLoader();
   toolTip();
   $(document).ready(function(){
     // skeletone
@@ -192,9 +190,6 @@
     return ()=>{
       cancelAnimationFrame(time);
     }
-
-    // Initialize the button loader for the login button
-    buttonLoader('#submit', '.loading-icon', '.btn-text', 'Send...', 'Send', 6000);
     // Initialize the message
     handleSuccessMessage('#success_message');
   });

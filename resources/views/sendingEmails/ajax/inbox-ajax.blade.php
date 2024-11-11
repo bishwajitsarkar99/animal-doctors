@@ -1,6 +1,7 @@
 <script type="module">
     import { currentDate, getTimeDifference, activeTableRow, formatDate, formatNumber } from "/module/module-min-js/helper-function-min.js";
-    import { addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
+    import { buttonLoader, addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
+    buttonLoader();
     const companyName = @json(setting('company_name'));
     const companyAddress = @json(setting('company_address'));
     const companyLogo = "{{ asset('backend_asset/main_asset/img/' . setting('update_company_logo')) }}";
@@ -8,6 +9,9 @@
     
     // Inbox
     $(document).ready(function(){
+        // Initialize the button loader for the login button
+        buttonLoader('#submit', '.loading-icon', '.btn-text', 'Send...', 'Send', 6000);
+        buttonLoader('#forwardSubmit', '.loading-icon-two', '.forward-btn-text', 'Send...', 'Send', 6000);
         // Get Current Date and set it for start_date and end_date fields
         const startDateField = document.getElementById('start_date');
         const endDateField = document.getElementById('end_date');
@@ -129,7 +133,7 @@
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="forwardBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-solid fa-share-nodes fa-beat" style="margin-top: 1px;"></i>
                             </button>
-                            <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${row.id}" data-email-id="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                                 <i class="fa-solid fa-trash-can fa-beat"></i>
                             </button>
                             <span class="child-td1 ps-1">${fromEmail ? fromEmail : row.sender_email}</span>
@@ -433,6 +437,8 @@
             $("#email_attachment").val("");
             $(".email_attachment").val("");
             $(".attach_group").addClass("hidden");
+            $("#forwardSubmit").addClass('hidden');
+            $("#submit").removeClass('hidden');
         });
 
         // email forward input[type="file"] row remove
@@ -477,6 +483,8 @@
                 $("#moreBtn").removeAttr('disabled');
                 $("#decrementBtn").removeAttr('disabled');
                 $("#email_attachment").removeClass('hidden');
+                $("#forwardSubmit").removeClass('hidden');
+                $("#submit").addClass('hidden');
             }
 
             $.ajax({
@@ -593,7 +601,90 @@
                 }
             });
         });
+
+        // forward email sending
+        $(document).on('click', '#forwardSubmit', function(e){
+            e.preventDefault();
+
+            // Get form data
+            let formData = new FormData($('#emailForm')[0]);
+            formData.append('email_id', $('#emailForwardID').text());
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('email.forward.send') }}",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#success_message').addClass('background_success').text(response.messages);
+                    handleSuccessMessage('#success_message');
+
+                    // Optionally, reset the form if needed
+                    $('#emailForm')[0].reset();
+                    $("#attachmentPreview").empty();
+                },
+                error: function(error) {
+                    if (error.status === 422) {
+                        let errors = error.responseJSON.errors;
+                        let errorMessage = "Failed to forward email. \n";
+                        $.each(errors, function(field, messages) {
+                            errorMessage += messages.join(", ") + "\n";
+                        });
+                        $('#success_message').addClass('background_error').text(errorMessage);
+                    } else {
+                        console.log('Error:', error);
+                        $('#success_message').addClass('background_error').text("An error occurred. Please try again.");
+                    }
+                }
+            });
+
+        });
         
+        // email delete
+        $(document).on('click', '#deleteBtn', function(e){
+            e.preventDefault();
+
+            // Check if any checkboxes are selected
+            let selectedEmails = [];
+            $("#selectBtn:checked").each(function() {
+                selectedEmails.push($(this).val());
+            });
+
+            if (selectedEmails.length === 0) {
+                let emailId = $(this).data('email-id');
+
+                if (!emailId) {
+                    alert('No email selected for deleting.');
+                    return;
+                }
+                selectedEmails.push(emailId);
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type:'DELETE',
+                url:'/email/delete',
+                data: { ids: selectedEmails },
+                success:function(response){
+                    $('#success_message').addClass('background_error');
+                    $('#success_message').text(response.messages);
+                    handleSuccessMessage('#success_message');
+                    fetch_all_user_email();
+                }
+            });
+        });
         // Show Pdf,Excle,Csv logo in modal
         $(document).on('click', '.attachment_file_link_btn', function(e) {
             e.preventDefault();

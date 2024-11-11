@@ -364,6 +364,119 @@ class EmailServiceProvider
         }
     }
     /**
+     * Handle Forward Email Again Send
+    */
+    public function sendForwardedUserEmail(Request $request)
+    {
+        $request->validate([
+            'user_to' => 'nullable|string',
+            'user_cc' => 'nullable|string',
+            'user_bcc' => 'nullable|string',
+            'subject' => 'nullable|string',
+            'main_content' => 'nullable|string',
+            'email_attachments.*' => 'nullable|file',
+        ]);
+
+        // Custom validation for multiple emails in To, CC, and BCC
+        $to_emails = $request->user_to ? explode(',', $request->user_to) : [];
+        foreach ($to_emails as $email) {
+            if ($email && !filter_var(trim($email), FILTER_VALIDATE_EMAIL)) {
+                return back()->withErrors(['user_to' => 'Invalid email format in CC field.']);
+            }
+        }
+
+        $cc_emails = $request->user_cc ? explode(',', $request->user_cc) : [];
+        foreach ($cc_emails as $email) {
+            if ($email && !filter_var(trim($email), FILTER_VALIDATE_EMAIL)) {
+                return back()->withErrors(['user_cc' => 'Invalid email format in CC field.']);
+            }
+        }
+
+        $bcc_emails = $request->user_bcc ? explode(',', $request->user_bcc) : [];
+        foreach ($bcc_emails as $email) {
+            if ($email && !filter_var(trim($email), FILTER_VALIDATE_EMAIL)) {
+                return back()->withErrors(['user_bcc' => 'Invalid email format in BCC field.']);
+            }
+        }
+
+        $attachments = [];
+
+        
+        // Handle file attachments
+        if ($request->hasFile('email_attachments')) {
+            $attachmentFolder = $request->attachment_type == 'report' ? 'report' : ($request->attachment_type == 'message' ? 'message' : 'draft');
+        
+            foreach ($request->file('email_attachments') as $file) {
+                $originalFilename = $file->getClientOriginalName();
+                $filename = $originalFilename;
+                $filePath = $attachmentFolder . '/' . $filename;
+        
+                // Check if the file already exists
+                if (Storage::disk('public')->exists($filePath)) {
+                    // If file exists, add it to attachments without re-uploading
+                    $attachments[] = [
+                        'file' => storage_path('app/public/' . $filePath),
+                        'options' => [],
+                    ];
+                } else {
+                    // Store the file with the final unique filename if it doesn't already exist
+                    $storedFilePath = $file->storeAs($attachmentFolder, $filename, 'public');
+                    $attachments[] = [
+                        'file' => storage_path('app/public/' . $storedFilePath),
+                        'options' => [],
+                    ];
+                }
+            }
+        }
+
+        // [composer require ezyang/htmlpurifier] install for content clear from summary note
+        $purifierConfig = HTMLPurifier_Config::createDefault();
+        $purifier = new HTMLPurifier($purifierConfig);
+
+        // Sanitize the main_content to remove unwanted HTML
+        $content = $purifier->purify($request->main_content);
+        // Prepare email content
+        $details = [
+            'user_to' => $request->user_to,
+            'user_cc' => $request->user_cc ?? 'N/A',
+            'user_bcc' => $request->user_bcc ?? 'N/A',
+            'subject' => $request->subject ?? 'No Subject',
+            'main_content' => $content ?? 'No Content',
+        ];
+
+        // Determine draft_mail status
+        $draftMailStatus = $request->user_to ? ($request->draft_mail ? '1' : '0') : '1';
+        // Store Email Data in DB
+        DB::table('user_emails')->insert([
+            'user_to' => $request->user_to,
+            'user_cc' => $request->user_cc ?? 'N/A',
+            'user_bcc' => $request->user_bcc ?? 'N/A',
+            'subject' => $request->subject ?? 'No Subject',
+            'main_content' => $content ?? 'No Content',
+            'email_attachments' => json_encode($attachments),
+            'attachment_type' => $request->attachment_type ?? 'other',
+            'sender_email' => Auth::user()->email,
+            'sender_user' => Auth::user()->id,
+            'status' => $request->status ? '1' : '0',
+            'read_mail' => $request->status ? '1' : '0',
+            'draft_mail' => $draftMailStatus,
+            'created_at' => now(),
+        ]);
+
+        try {
+            // Send the email with attachments using the UserMail class
+            Mail::to($to_emails)
+            ->cc($cc_emails)
+            ->bcc($bcc_emails)
+            ->send(new UserMail($details, $attachments));
+
+            return back()->with('success', 'Email has been sent successfully.');
+        } catch (\Exception $e) {
+            \Log::error('Email sending failed: ' . $e->getMessage());
+            return back()->with('error', 'Failed to send email. Please try again.');
+        }
+    }
+    /**
      * Handle Draft Fetch
     */
     public function getDraftFetchUserEmail(Request $request)
@@ -461,7 +574,18 @@ class EmailServiceProvider
     */
     public function deleteUserEmail(Request $request)
     {
-        //
+        $email_ids = $request->input('ids');
+
+        if (is_array($email_ids)) {
+            UserEmail::whereIn('id', $email_ids)->delete();
+        } else {
+            UserEmail::find($email_ids)->delete();
+        }
+
+        return response()->json([
+            'status' => 200,
+            'messages' => 'The inbox email has deleted successfully.'
+        ]);
     }
     
 }

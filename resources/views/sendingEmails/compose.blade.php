@@ -79,10 +79,14 @@
             @endif
             </div>
             <div class="col-xl-2" style="text-align:right;">
-            <button id="submit" type="submit" class="btn btn-sm btn-primary send_button button-skeleton mt-2">
-                <span class="loading-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                <span class="btn-text">Send</span>
-            </button>
+                <button id="forwardSubmit" type="submit" class="btn btn-sm btn-primary send_button button-skeleton hidden mt-2">
+                    <span class="loading-icon-two spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                    <span class="forward-btn-text">Send</span>
+                </button>
+                <button id="submit" type="submit" class="btn btn-sm btn-primary send_button button-skeleton mt-2">
+                    <span class="loading-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                    <span class="btn-text">Send</span>
+                </button>
             </div>
         </div>
     </form>
