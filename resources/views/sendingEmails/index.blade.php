@@ -173,7 +173,6 @@
 <script type="module">
   import { 
     removeSkeletonClass, 
-    handleSuccessMessage, 
     toolTip,
   } from "{{asset('/module/module-min-js/design-helper-function-min.js')}}";
   toolTip();
@@ -190,8 +189,6 @@
     return ()=>{
       cancelAnimationFrame(time);
     }
-    // Initialize the message
-    handleSuccessMessage('#success_message');
   });
 </script>
 <script>

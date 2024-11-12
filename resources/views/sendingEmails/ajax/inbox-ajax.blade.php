@@ -1,6 +1,6 @@
 <script type="module">
     import { currentDate, getTimeDifference, activeTableRow, formatDate, formatNumber } from "/module/module-min-js/helper-function-min.js";
-    import { buttonLoader, addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
+    import { handleSuccessMessage, buttonLoader, addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     buttonLoader();
     const companyName = @json(setting('company_name'));
     const companyAddress = @json(setting('company_address'));
@@ -12,6 +12,8 @@
         // Initialize the button loader for the login button
         buttonLoader('#submit', '.loading-icon', '.btn-text', 'Send...', 'Send', 6000);
         buttonLoader('#forwardSubmit', '.loading-icon-two', '.forward-btn-text', 'Send...', 'Send', 6000);
+        // Initialize the message
+        handleSuccessMessage('#success_message');
         // Get Current Date and set it for start_date and end_date fields
         const startDateField = document.getElementById('start_date');
         const endDateField = document.getElementById('end_date');
@@ -584,7 +586,7 @@
                                             <button type="button" class="btn-close btn-btn-sm" id="rowDeleteBtn" data-bs-dismiss="modal" aria-label="Close"
                                                 data-bs-toggle="tooltip"  data-bs-placement="right" title="Remove" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
                                             </button>
-                                            <input type="hidden" class="form-control form-control-sm attachment email_attachment" name="email_attachments[]" value="${fileName}" id="email_attachment" />
+                                            <input type="file" class="form-control form-control-sm attachment email_attachment" name="email_attachments[]" value="${fileName}" id="email_attachment" hidden />
                                         </div>
                                     `);
                                     $('[data-bs-toggle="tooltip"]').tooltip();
@@ -603,12 +605,21 @@
         });
 
         // forward email sending
-        $(document).on('click', '#forwardSubmit', function(e){
+        $(document).on('click', '#forwardSubmit', function(e) {
             e.preventDefault();
 
             // Get form data
             let formData = new FormData($('#emailForm')[0]);
-            formData.append('email_id', $('#emailForwardID').text());
+            formData.append('email_id', $('#emailForwardID').val());
+
+            // Collect files
+            let filesInput = $('input[type="file"][name="email_attachments[]"]');
+            filesInput.each(function() {
+                let files = $(this)[0].files;
+                for (let i = 0; i < files.length; i++) {
+                    formData.append('email_attachments[]', files[i]);
+                }
+            });
 
             $.ajaxSetup({
                 headers: {
@@ -644,7 +655,6 @@
                     }
                 }
             });
-
         });
         
         // email delete
