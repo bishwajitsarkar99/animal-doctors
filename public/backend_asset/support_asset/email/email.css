@@ -1034,11 +1034,23 @@ button#rowDeleteBtn{
 }
 .file_name {
     margin-left: 5px;
-    background-color: #e5e5e5;
     border-radius: 4px;
     padding-right: 5px;
     padding-left: 5px;
-    color: #0453f9;
+    color: gray;
+}
+span.file_messg {
+    margin-left: 12px;
+    color: royalblue;
+}
+span.uplod_button {
+    background: blue;
+    color: white;
+    border-radius: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 .file_logo{
     width: 50px;

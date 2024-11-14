@@ -469,8 +469,10 @@ class EmailServiceProvider
             ->cc($cc_emails)
             ->bcc($bcc_emails)
             ->send(new UserMail($details, $attachments));
-
-            return back()->with('success', 'Email has been sent successfully.');
+            return response()->json([
+                'status' => 200,
+                'messages' => 'Email has been sent successfully.'
+            ]);
         } catch (\Exception $e) {
             \Log::error('Email sending failed: ' . $e->getMessage());
             return back()->with('error', 'Failed to send email. Please try again.');

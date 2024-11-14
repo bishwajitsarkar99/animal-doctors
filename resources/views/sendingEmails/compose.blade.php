@@ -68,6 +68,7 @@
             </table>
             <!-- Attachments loaded via AJAX will be displayed here -->
             <div class="row mt-1">
+                <div id="attachmentText"></div>
                 <div id="attachmentPreview"></div>
             </div>
             </div>
@@ -77,6 +78,7 @@
             @if(session('success'))
                 <p class="background_success mt-2 ps-1" id="success_message">{{session('success')}}</p>
             @endif
+            <p class="mt-2 ps-1" id="success_messages"></p>
             </div>
             <div class="col-xl-2" style="text-align:right;">
                 <button id="forwardSubmit" type="submit" class="btn btn-sm btn-primary send_button button-skeleton hidden mt-2">

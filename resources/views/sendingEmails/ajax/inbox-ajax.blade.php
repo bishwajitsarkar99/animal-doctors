@@ -439,6 +439,7 @@
             $("#email_attachment").val("");
             $(".email_attachment").val("");
             $(".attach_group").addClass("hidden");
+            $(".select_message").addClass("hidden");
             $("#forwardSubmit").addClass('hidden');
             $("#submit").removeClass('hidden');
         });
@@ -518,6 +519,8 @@
                         // Display attachment names in a separate div
                         let attachmentPreview = $("#attachmentPreview");
                         attachmentPreview.empty();
+                        let attachmentText = $("#attachmentText");
+                        attachmentText.empty();
 
                         try {
                             let attachments = JSON.parse(response.messages.email_attachments);
@@ -586,7 +589,12 @@
                                             <button type="button" class="btn-close btn-btn-sm" id="rowDeleteBtn" data-bs-dismiss="modal" aria-label="Close"
                                                 data-bs-toggle="tooltip"  data-bs-placement="right" title="Remove" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
                                             </button>
-                                            <input type="file" class="form-control form-control-sm attachment email_attachment" name="email_attachments[]" value="${fileName}" id="email_attachment" hidden />
+                                            <input type="file" class="form-control form-control-sm attachment email_attachment" name="email_attachments[]" data-filename="${fileName}" id="email_attachment" hidden />
+                                        </div>
+                                    `);
+                                    attachmentText.append(`
+                                        <div class="select_message mb-1">
+                                            <span class="file_messg">Again File Choose, (otherwise attachment files will be not send.) <span class="uplod_button"><i class="fa-solid fa-upload"></i> ${fileName}</span></span>
                                         </div>
                                     `);
                                     $('[data-bs-toggle="tooltip"]').tooltip();
@@ -611,9 +619,9 @@
             // Get form data
             let formData = new FormData($('#emailForm')[0]);
             formData.append('email_id', $('#emailForwardID').val());
+            
+            let filesInput = $('input[type="file"].email_attachment');
 
-            // Collect files
-            let filesInput = $('input[type="file"][name="email_attachments[]"]');
             filesInput.each(function() {
                 let files = $(this)[0].files;
                 for (let i = 0; i < files.length; i++) {
@@ -634,12 +642,24 @@
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    $('#success_message').addClass('background_success').text(response.messages);
-                    handleSuccessMessage('#success_message');
-
                     // Optionally, reset the form if needed
                     $('#emailForm')[0].reset();
+                    $("#inputTo").tagsinput('removeAll');
+                    $("#inputCC").tagsinput('removeAll');
+                    $("#inputBCC").tagsinput('removeAll');
+                    $("#email_summernote").summernote('code', '');
                     $("#attachmentPreview").empty();
+
+                    var tableBody = document.querySelector('#fileTable');
+                    if (tableBody.rows.length > 1) {
+                        tableBody.deleteRow(-1);
+                    }
+                    $("#email_attachment").val("");
+
+                    $('#success_messages').addClass('background_success').text(response.messages).fadeIn();
+                    setTimeout(function() {
+                        $('#success_messages').fadeOut().removeClass('background_success').text('');
+                    }, 6000);
                 },
                 error: function(error) {
                     if (error.status === 422) {
