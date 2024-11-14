@@ -67,7 +67,7 @@
         </div>
         <div class="row table_last_row">
             <div class="col-1 pt-2">
-                <div class="send_data_item text-skeletone">
+                <div class="draft_data_item text-skeletone">
                     <select class="ps-1 skeleton" id="perItemDraftEmail" data-bs-toggle="tooltip"  data-bs-placement="top" title="Per-Item" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                         <option class="skeleton" selected>10</option>
                         <option class="skeleton">20</option>
@@ -78,16 +78,16 @@
                 </div>
             </div>
             <div class="col-3">
-                <span class="send_email_sum email-skeletone" id="num_plate">
+                <span class="draft_email_sum email-skeletone" id="num_plate">
                 <label class="tot-search skeleton" for="tot_cagt">Current Draft :</label>
                 <label class="badge rounded-pill bg-primary" for="total_user_email skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_draft_email"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
                 </span>
-                <div class="progress send_email_progress email-progress-bar-skeleton" style="height:0.3rem;">
+                <div class="progress draft_email_progress email-progress-bar-skeleton" style="height:0.55rem;">
                 <div class="progress-bar progress-bar-striped bg-email progress-bar-animated" role="progressbar" aria-valuenow="{{ $draft_email_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $draft_email_percentage }}%;">
                     {{ round($draft_email_percentage, 2) }}%
                 </div>
                 </div>
-                <span class="temp_storage storg_send text-skeletone">Storage draft email (<span id="draft_emails_progress"></span>) Of <span >{{$totalDrafts}}</span></span>
+                <span class="temp_storage storg_draft text-skeletone">Draft (<span id="draft_emails_progress"></span>) Out Of <span >{{$userEmails}}</span></span>
             </div>
             <div class="col-8">
                 <div class="pagination text-skeletone" id="draft_email_data_table_paginate">

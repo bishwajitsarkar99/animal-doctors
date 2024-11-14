@@ -4,7 +4,7 @@
 
 @include('backend.layouts.dashboard-components._navbar')
 <div id="viewer"></div>
-  <div class="card form-control form-control-sm" id="set_table">
+  <div class="card form-control form-control-sm static-heads" id="set_table">
     <div class="card-body focus-color email_card cd" id="table_card_body">
       <p class="email-home-header" style="text-align:left;">
         <span class="email_list" style="font-size:15px;"><i class="fa-regular fa-envelope"></i> Mail</span>
@@ -45,7 +45,7 @@
           </button>
           @endif
         </div>
-        <div class="tab-content flex-row" id="v-pills-tabContent">
+        <div class="tab-content flex-row static-head" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="v-pills-email" role="tabpanel" aria-labelledby="v-pills-email-tab">
             @include('sendingEmails.compose')
           </div>

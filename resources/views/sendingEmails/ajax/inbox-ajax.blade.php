@@ -298,7 +298,6 @@
 
         // Per item change
         $("#perItemControl").on('change', (e) => {
-            $(this).tooltip('hide');
             const { value } = e.target;
             fetch_all_user_email('', null, value);
         });
@@ -439,7 +438,7 @@
             $("#email_attachment").val("");
             $(".email_attachment").val("");
             $(".attach_group").addClass("hidden");
-            $(".select_message").addClass("hidden");
+            $("#attachmentText").addClass("hidden");
             $("#forwardSubmit").addClass('hidden');
             $("#submit").removeClass('hidden');
         });
@@ -593,8 +592,8 @@
                                         </div>
                                     `);
                                     attachmentText.append(`
-                                        <div class="select_message mb-1">
-                                            <span class="file_messg">Again File Choose, (otherwise attachment files will be not send.) <span class="uplod_button"><i class="fa-solid fa-upload"></i> ${fileName}</span></span>
+                                        <div class="select_message attachment-file-animation mb-1">
+                                            <span class="file_messg"><input class="uplod_focus"></input> Again File Choose, (otherwise attachment files will be not send.) <span class="uplod_button"><i class="fa-solid fa-upload"></i> ${fileName}</span></span>
                                         </div>
                                     `);
                                     $('[data-bs-toggle="tooltip"]').tooltip();

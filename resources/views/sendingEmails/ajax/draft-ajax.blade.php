@@ -263,7 +263,6 @@
         }
         // Per item change
         $("#perItemDraftEmail").on('change', (e) => {
-            $(this).tooltip('hide');
             const { value } = e.target;
             fetch_draft_email('', null, value);
         });

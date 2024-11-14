@@ -68,12 +68,12 @@
             var time = null;
             var time = setTimeout(() => {
                 removeAttributeOrClass([
-                    {selector: '.send_selection,.send_clos_btn,.send_group_btn,.send_current_month,.send_input1,.send_input2,.send_input3,.send_input4,.send_input5,.send_timezone,.send_data_item,#draft_email_data_table_paginate,.storg_send', type: 'class', name: 'text-skeletone'},
+                    {selector: '.send_selection,.send_clos_btn,.send_group_btn,.send_current_month,.send_input1,.send_input2,.send_input3,.send_input4,.send_input5,.send_timezone,.draft_data_item,#draft_email_data_table_paginate,.storg_draft', type: 'class', name: 'text-skeletone'},
                     {selector: '.send__email__select', type: 'class', name: 'min-dropdown-skeletone'},
                     {selector: '.send_next_btn', type: 'class', name: 'skeletone'},
                     {selector: '#draft_data_table', type: 'class', name: 'tabskeletone'},
-                    {selector: '.send_email_sum', type: 'class', name: 'email-skeletone'},
-                    {selector: '.send_email_progress', type: 'class', name: 'email-progress-bar-skeleton'},
+                    {selector: '.draft_email_sum', type: 'class', name: 'email-skeletone'},
+                    {selector: '.draft_email_progress', type: 'class', name: 'email-progress-bar-skeleton'},
                 ]);
             }, 1000);
 

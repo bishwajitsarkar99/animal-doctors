@@ -25,13 +25,10 @@ class EmailServiceProvider
         $user_email = Auth::user()->email;
         $user_id = Auth::user()->id;
         // Total Email
-        $totalEmails = UserEmail::whereNotNull('user_to')->count();
-        $totalDrafts = UserEmail::count();
-        // Total User
-        $userEmails = User::count();
+        $userEmails = UserEmail::count();
         // Total inbox Email
         $total_emails = UserEmail::whereNotNull('user_to')
-                                    ->where('user_to', 'LIKE', "%$user_email")
+                                    ->orWhere('user_to', 'LIKE', "%$user_email")
                                     ->orWhere('user_cc', 'LIKE', "%$user_email")
                                     ->orWhere('user_bcc', 'LIKE', "%$user_email")
                                     ->count();
@@ -48,7 +45,7 @@ class EmailServiceProvider
         // Calculate the percentage of total send email
         $draft_email_percentage = $total_draft_emails > 0 ? ($total_draft_emails / $userEmails) * 100 : 0;
 
-        return view('sendingEmails.index', compact('inbox_email_percentage', 'send_email_percentage', 'totalEmails', 'totalDrafts', 'draft_email_percentage'));
+        return view('sendingEmails.index', compact('inbox_email_percentage', 'send_email_percentage', 'userEmails', 'draft_email_percentage'));
     }
     /**
      * Handle Send Email

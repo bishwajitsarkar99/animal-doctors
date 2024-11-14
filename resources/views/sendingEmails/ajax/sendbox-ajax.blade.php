@@ -264,7 +264,6 @@
         }
         // Per item change
         $("#perItemSendEmail").on('change', (e) => {
-            $(this).tooltip('hide');
             const { value } = e.target;
             fetch_send_email('', null, value);
         });

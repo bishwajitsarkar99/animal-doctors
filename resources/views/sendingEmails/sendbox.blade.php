@@ -91,12 +91,12 @@
                 <label class="tot-search skeleton" for="tot_cagt">Current Email :</label>
                 <label class="badge rounded-pill bg-primary" for="total_user_email skeleton" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_user_send_email"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
                 </span>
-                <div class="progress send_email_progress email-progress-bar-skeleton" style="height:0.3rem;">
+                <div class="progress send_email_progress email-progress-bar-skeleton" style="height:0.55rem;">
                 <div class="progress-bar progress-bar-striped bg-email progress-bar-animated" role="progressbar" aria-valuenow="{{ $send_email_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $send_email_percentage }}%;">
                     {{ round($send_email_percentage, 2) }}%
                 </div>
                 </div>
-                <span class="temp_storage storg_send text-skeletone">Storage send email (<span id="send_emails_progress"></span>) Of <span >{{$totalEmails}}</span></span>
+                <span class="temp_storage storg_send text-skeletone">Send (<span id="send_emails_progress"></span>) Out Of <span >{{$userEmails}}</span></span>
             </div>
             <div class="col-8">
                 <div class="pagination text-skeletone" id="send_email_data_table_paginate">
