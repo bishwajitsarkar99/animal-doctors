@@ -1,0 +1,550 @@
+<script type="module">
+    import { buttonLoader } from "/module/module-min-js/design-helper-function-min.js";
+
+
+    $(document).ready(function(){
+        // Initialize the button loader for the login button
+        buttonLoader('#PermissionSubmit', '.submt-icon', '.btn-text', 'Submit...', 'Submit', 1000);
+        buttonLoader('#PermissionUpdate', '.updt-icon', '.setting-update-btn-text', 'Setting Update...', 'Setting Update', 1000);
+        buttonLoader('#PermissionCancel', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
+        // Initialize Select2 for all elements with the 'select2' class
+        $('.select2').each(function() {
+            // Check the ID or name to set specific options
+            if ($(this).attr('id') === 'select_user_role') {
+                $(this).select2({
+                    placeholder: 'Select User Role',
+                    allowClear: true
+                });
+            } else if ($(this).attr('id') === 'select_user_email') {
+                $(this).select2({
+                    placeholder: 'Select User Email',
+                    allowClear: true
+                });
+            }
+        });
+        // Set custom placeholder for the search input inside Select2 dropdowns
+        $('#select_user_role').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search roles...');
+        });
+        $('#select_user_email').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search emails...');
+        });
+
+        // Fetch User Role
+        fetch_roles();
+        fetch_user_permission_email();
+        function fetch_roles() {
+            const currentUrl = "{{ route('email.index') }}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const roles = response.roles;
+                    $("#select_user_role").empty();
+                    $("#select_user_role").append('<option value="" style="font-weight:600;">Select User Role</option>');
+                    $.each(roles, function(key, item) {
+                        $("#select_user_role").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.name}</option>`);
+                    });
+                },
+                error: function() {
+                    $("#select_user_role").empty();
+                    $("#select_user_role").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
+                }
+            });
+        }
+
+        // User email handle
+        $(document).on('change', '#select_user_role', function() {
+            var changeValue = $(this).val();
+            if (changeValue === '') {
+                $("#select_user_email").empty();
+                $("#select_user_email").append('<option style="color:white;font-weight:600;" value="" disabled>Select the role</option>');
+            }
+        });
+
+        // Event listener for role dropdown
+        $(document).on('change', '#select_user_role', function() {
+            const selectedRole = $(this).val();
+            fetch_user_permission_email(selectedRole);
+        });
+
+        // Function to fetch users based on selected role
+        function fetch_user_permission_email(selectedRole) {
+            if (!selectedRole) {
+                return;
+            }
+
+            const currentUrl = "{{ route('user.email', ':selectedRole') }}".replace(':selectedRole', selectedRole);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const users = response.users;
+                    $("#select_user_email").empty();
+                    $.each(users, function(key, item) {
+                        $("#select_user_email").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.email}</option>`);
+                    });
+                },
+                error: function() {
+                    $("#select_user_email").empty();
+                    $("#select_user_email").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select the role</option>');
+                }
+            });
+        }
+
+        // Checkbox checking
+        $("#report_status, #message_status, #darft_status, #other_status").on('change', () => {
+            var report_status = $("#report_status").is(':checked');
+            var message_status = $("#message_status").is(':checked');
+            var darft_status = $("#darft_status").is(':checked');
+            var other_status = $("#other_status").is(':checked');
+
+            $("#statusJustify").attr('hidden', true);
+            $("#statusDeny").attr('hidden', true);
+
+            if (report_status || message_status || darft_status || other_status) {
+                $("#statusJustify").removeAttr('hidden');
+            } else {
+                $("#statusDeny").removeAttr('hidden');
+            }
+
+        });
+
+        // Cancel Button
+        $(document).on('click', '.permission_calncel', function(){
+            
+            $(".updt_btn").hide('slow');
+            $(".subm_btn").show('slow');
+            $("#statusJustify").attr('hidden', true);
+            $("#statusDeny").attr('hidden', true);
+
+            clearFields();
+        });
+        // Clear Fields
+        function clearFields(){
+            fetch_roles("");
+            $("#select_user_email").empty();
+            $("input[name='report_status']").prop('checked', false);
+            $("input[name='message_status']").prop('checked', false);
+            $("input[name='darft_status']").prop('checked', false);
+            $("input[name='other_status']").prop('checked', false);
+        }
+
+        fetch_user_email_delete_permission();
+        // Data View Table--------------
+        const table_rows = (rows) => {
+            if (rows.length === 0) {
+                return `
+                    <tr>
+                        <td class="error_data text-danger" align="center" colspan="11">
+                            User Email Delete Permission Data Not Exists On Server!
+                        </td>
+                    </tr>
+                `;
+            }
+
+            return rows.map((row, key) => `
+                <tr class="btn-hover table_body table-row user-table-row " key="${key}" id="supp_tab">
+                    <td class="ps-1 font table_body">${row.id}</td>
+                    <td class="ps-1 font table_body2 eml">${row.roles && row.roles.name ? row.roles.name : 'No Role'}</td>
+                    <td class="ps-1 font table_body3 eml">${row.users && row.users.email ? row.users.email : 'No Email'}</td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.report_status ? 'text-dark' : 'text-danger'}">
+                            ${row.report_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.message_status ? 'text-dark' : 'text-danger'}">
+                            ${row.message_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.darft_status ? 'text-dark' : 'text-danger'}">
+                            ${row.darft_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.other_status ? 'text-dark' : 'text-danger'}">
+                            ${row.other_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body5" id="supp_tab15">
+                        <button type="button" class="editBtn" id="edtBtn" value="${row.id}" style="font-size: 10px; cursor: pointer; height:15px;" data-bs-toggle="tooltip" data-bs-placement="right" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <i class="fa-solid fa-pen-to-square" style="color: blue;"></i>
+                        </button>
+                        <button type="button" class="deleteBtn ms-1" id="permissionDeleteBtn" value="${row.id}" style="font-size: 10px;float: left; cursor: pointer; height:15px;" data-bs-toggle="tooltip" data-bs-placement="right" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <i class="fa-solid fa-trash-can" style="color: orangered;"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join("");
+        };
+
+        // Get Inventory Permission Access Data
+        function fetch_user_email_delete_permission(query = '', url = null, perItem = null) {
+            if (perItem === null) {
+                perItem = $("#perItemControls").val();
+            }
+
+            let current_url = url ? url : `{{ route('email.index') }}?per_item=${perItem}`;
+
+            $.ajax({
+                type: "GET",
+                url: current_url,
+                dataType: 'json',
+                data: {
+                    query: query
+                },
+                success: function({
+                    data,
+                    links,
+                    total
+                    
+                }) {
+                    $("#delete_permission_data_table").html(table_rows([...data]));
+                    $("#delete_permission_data_table_paginate").html(paginate_html({ links, total }));
+                    $("#total_user_permission_records").text(total);
+                    $('[data-bs-toggle="tooltip"]').tooltip();
+
+                    const permissionID = data.map(item => ({
+                        label: `${item.id} - ${item.users.email}`,
+                        value: item.id,
+                    }));
+                    $("#roleSearch").autocomplete({ source: permissionID });
+                }
+
+            });
+        }
+        // peritem change
+        $("#perItemControls").on('change', (e) => {
+            const {
+                value
+            } = e.target;
+
+            fetch_user_email_delete_permission('', null, value);
+        });
+
+        // Live-Search-----------------------------
+        $(document).on('keyup', '#roleSearch', function() {
+            var query = $(this).val();
+            fetch_user_email_delete_permission(query);
+        });
+
+        // Paginate Page-------------------------------
+        const paginate_html = ({ links, total }) => {
+            if (total === 0 || !Array.isArray(links)) {
+                return "";
+            }
+
+            const paginationLinks = links.map(link => {
+                return `
+                    <li class="page-item ${link.active ? 'active' : ''}">
+                        <a class="page-link" href="${link.url ? link.url : '#'}" ${link.url ? '' : 'tabindex="-1" aria-disabled="true"'}>${link.label}</a>
+                    </li>
+                `;
+            }).join('');
+
+            return `
+                <nav class="paginate_link" aria-label="Page navigation example">
+                    <ul class="pagination">
+                        ${paginationLinks}
+                    </ul>
+                </nav>
+            `;
+        };
+
+        // change paginate page------------------------
+        $("#delete_permission_data_table_paginate").delegate("a", "click", function(e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+
+            const url = $(this).attr('href');
+
+            if (url !== '#') {
+                fetch_user_email_delete_permission('', url);
+            }
+
+        });
+
+        // Email Delete Access Permission Store
+        $(document).on('click', '.permission_submit', function(e) {
+            e.preventDefault();
+            
+            // Input Field Validation
+            $('.error-message').remove();
+
+            var roleName = $("#select_user_role").val();
+            var userEmail = $("#select_user_email").val();
+            var reportStatus = $("input[name='report_status']:checked").val();
+            var messageStatus = $("input[name='message_status']:checked").val();
+            var darftStatus = $("input[name='darft_status']:checked").val();
+            var otherStatus = $("input[name='other_status']:checked").val();
+            
+            if (!roleName) {
+                $("#select_user_role").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the role name.</span>');
+            }
+            if (!userEmail) {
+                $("#select_user_email").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the user email.</span>');
+            }
+            if (!otherStatus) {
+                $("#other_status").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">View is required.</span>');
+            }
+
+            // Check if there are any error messages
+            if ($('.error-message').length > 0) {
+                // If there are error messages, stop further execution
+                return;
+            }
+
+            var data = {
+                'user_roles_id': $('#select_user_role').val(),
+                'user_emails_id': $('#select_user_email').val(),
+                'report_status': reportStatus ? 1 : 0,
+                'message_status': messageStatus ? 1 : 0,
+                'darft_status': darftStatus ? 1 : 0,
+                'other_status': otherStatus ? 1 : 0,
+            };
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "{{ route('email.store') }}",
+                data: data,
+                dataType: "json",
+                success: function(response) {
+                    if (response.status == 400) {
+                        $('#savForm_error').html("");
+                        $('#savForm_error').addClass('alert_show_errors');
+                        $.each(response.errors, function(key, err_value) {
+                            $('#savForm_error').append('<span class="error_val">' + err_value + '</span>');
+                        });
+                        $('#savForm_error').fadeIn();
+                        setTimeout(() => {
+                            $('#savForm_error').fadeOut();
+                        }, 3000);
+                    } else {
+                        $('#savForm_error').html("");
+                        $('#permission_success_message').html("");
+                        $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
+                        $('#permission_success_message').fadeIn();
+                        $('#permission_success_message').text(response.messages);
+                        $('#select_user_role').val("");
+                        $('#select_user_email').val("");
+                        clearFields();
+                        $("#statusJustify").attr('hidden', true);
+                        $("#statusDeny").attr('hidden', true);
+                        setTimeout(() => {
+                            $('#permission_success_message').fadeOut();
+                        }, 3000);
+                    }
+                    fetch_user_email_delete_permission();
+                }
+            });
+        });
+
+        // Email Delete Access Permission Edit
+        $(document).on('click', '#edtBtn', function(e) {
+            e.preventDefault();
+            $("#PermissionSubmit").hide('slow');
+            $("#PermissionUpdate").removeAttr('hidden');
+            $(".updt_btn").show('slow');
+            var id = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "/email-delete-permission/edit/" + id,
+                success: function(response) {
+                    if (response.status == 404) {
+                        $('#permission_success_message').html("");
+                        $('#permission_success_message').addClass('alert alert-danger');
+                        $('#permission_success_message').text(response.messages);
+                    } else {
+                        $('#permission_id').val(id);
+                        $('.select_user_role').val(response.messages.user_roles_id);
+                        fetch_user_permission_email(response.messages.user_roles_id);
+                        setTimeout(() => {
+                            $('.select_user_email').val(response.messages.user_emails_id);
+                        }, 500);
+                        $('#report_status').prop('checked', response.messages.report_status == 1);
+                        $('#message_status').prop('checked', response.messages.message_status == 1);
+                        $('#darft_status').prop('checked', response.messages.darft_status == 1);
+                        $('#other_status').prop('checked', response.messages.other_status == 1);
+                        
+                        if ($('#other_status').is(':checked')) {
+                            $("#statusJustify").removeAttr('hidden');
+                            $("#statusDeny").attr('hidden', true);
+                        } else {
+                            $("#statusJustify").attr('hidden', true);
+                            $("#statusDeny").removeAttr('hidden');
+                        }
+                    }
+                }
+            });
+        });
+
+        // Update Modal Show
+        $(document).on('click', '#PermissionUpdate', function(e){
+            e.preventDefault(); 
+            $("#accessPermissionModal").modal('show');
+            $('.updt-icon').removeClass('updt-hidden');
+
+            setTimeout(() => {
+                $('.updt-icon').addClass('updt-hidden');
+            }, 1000);
+        });
+
+        // Update Email Delete Permission
+        $(document).on('click', '.permission_confirm_btn', function(e){
+            e.preventDefault();
+
+            // Input Field Validation
+            $('.error-message').remove();
+
+            var roleName = $("#select_user_role").val();
+            var userEmail = $("#select_user_email").val();
+            var reportStatus = $("input[name='report_status']:checked").val();
+            var messageStatus = $("input[name='message_status']:checked").val();
+            var darftStatus = $("input[name='darft_status']:checked").val();
+            var otherStatus = $("input[name='other_status']:checked").val();
+
+            if (!roleName) {
+                $("#select_supplier_role").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the role name.</span>');
+            }
+            if (!userEmail) {
+                $("#select_supplier_email").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the user email.</span>');
+            }
+            if (!otherStatus) {
+                $("#permission_status").closest('.role_nme').append('<span class="error-message alert_show_errors">Permission status is required.</span>');
+            }
+
+            if ($('.error-message').length > 0) {
+                // If there are error messages, stop further execution
+                return;
+            }
+
+            var id = $('#permission_id').val();
+            var data = {
+                'user_roles_id': $('#select_user_role').val(),
+                'user_emails_id': $('#select_user_email').val(),
+                'report_status': reportStatus ? 1 : 0,
+                'message_status': messageStatus ? 1 : 0,
+                'darft_status': darftStatus ? 1 : 0,
+                'other_status': otherStatus ? 1 : 0,
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "PUT",
+                url: "/email-delete-permission/update/" + id,
+                data: data,
+                dataType: "json",
+                success: function(response) {
+                    if (response.status == 400) {
+                        $.each(response.errors, function(key, err_value) {
+                            $('#updateForm_errorList').html("");
+                            $('#updateForm_errorList').addClass('alert_show_errors skeleton ps-1 pe-1');
+                            $('#updateForm_errorList').append('<span>' + err_value + '</span>');
+                            $("#updateForm_errorList").fadeOut(40000);
+
+                            var time = null;
+                            time = setTimeout(() => {
+                                $("#updateForm_errorList").removeClass('skeleton');
+                            }, 3000);
+                            return ()=>{
+                                clearTimeout(time);
+                            }
+                        });
+                    } else if (response.status == 404) {
+                        $('#updateForm_errorList').html("");
+                        $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
+                        $('#permission_success_message').text(response.messages);
+                    } else {
+                        $('#updateForm_errorList').html("");
+                        $('#permission_success_message').html("");
+                        $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
+                        $('#permission_success_message').fadeIn();
+                        $('#permission_success_message').text(response.messages);
+                        $('#permission_id').val("");
+                        clearFields();
+                        $("#accessPermissionModal").modal('hide');
+                        $("#PermissionUpdate").hide();
+                        $("#PermissionSubmit").show();
+                        $("#statusJustify").attr('hidden', true);
+                        $("#statusDeny").attr('hidden', true);
+                        setTimeout(() => {
+                            $('#permission_success_message').fadeOut(3000);
+                        }, 3000);
+                        fetch_user_email_delete_permission();
+                    }
+                }
+            });
+
+        });
+
+        // Delete Email Modal Show
+        $(document).on('click', '#permissionDeleteBtn', function(e){
+            e.preventDefault();
+            var id = $(this).val();
+            $('#delete_access_permission_id').val(id); 
+            $("#accessPermissionDeleteModal").modal('show');
+
+        });
+
+        // Delete Email Permission
+        $(document).on('click', '#confirm_delete_btn', function(e){
+            e.preventDefault();
+            $('.error-message').remove();
+            var id = $('#delete_access_permission_id').val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "DELETE",
+                url: "/email-delete-permission/delete/" + id,
+                success: function(response) {
+                    $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
+                    $('#permission_success_message').fadeIn();
+                    $('#permission_success_message').text(response.messages);
+                    setTimeout(() => {
+                        $('#permission_success_message').fadeOut(3000);
+                    }, 3000);
+                    $('#accessPermissionDeleteModal').modal('hide');
+
+                    fetch_user_email_delete_permission();
+                }
+
+            });
+
+        });
+
+    });
+</script>

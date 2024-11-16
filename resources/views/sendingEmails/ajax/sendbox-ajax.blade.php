@@ -345,6 +345,7 @@
                 $("#moreBtn").removeAttr('disabled');
                 $("#decrementBtn").removeAttr('disabled');
                 $("#email_attachment").removeClass('hidden');
+                $("#attachmentText").removeClass("hidden");
             }
 
             $.ajax({
@@ -376,6 +377,8 @@
                         // Display attachment names in a separate div
                         let attachmentPreview = $("#attachmentPreview");
                         attachmentPreview.empty();
+                        let attachmentText = $("#attachmentText");
+                        attachmentText.empty();
 
                         try {
                             let attachments = JSON.parse(response.messages.email_attachments);
@@ -445,6 +448,11 @@
                                                 data-bs-toggle="tooltip"  data-bs-placement="right" title="Remove" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
                                             </button>
                                             <input type="hidden" class="form-control form-control-sm attachment email_attachment" name="email_attachments[]" value="${fileName}" id="email_attachment" />
+                                        </div>
+                                    `);
+                                    attachmentText.append(`
+                                        <div class="select_message attachment-file-animation mb-1">
+                                            <span class="file_messg"><input class="uplod_focus"></input> Again File Choose, (otherwise attachment files will be not send.) <span class="uplod_button"><i class="fa-solid fa-upload"></i> ${fileName}</span></span>
                                         </div>
                                     `);
                                     $('[data-bs-toggle="tooltip"]').tooltip();

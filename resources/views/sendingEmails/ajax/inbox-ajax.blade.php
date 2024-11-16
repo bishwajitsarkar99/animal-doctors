@@ -487,6 +487,7 @@
                 $("#email_attachment").removeClass('hidden');
                 $("#forwardSubmit").removeClass('hidden');
                 $("#submit").addClass('hidden');
+                $("#attachmentText").removeClass("hidden");
             }
 
             $.ajax({

@@ -10,7 +10,9 @@ use HTMLPurifier;
 use HTMLPurifier_Config;
 use App\Mail\UserMail;
 use App\Models\User;
+use App\Models\Role;
 use App\Models\UserEmail;
+use App\Models\UserEmailDeletePermission;
 use Carbon\Carbon;
 
 class EmailServiceProvider
@@ -22,6 +24,25 @@ class EmailServiceProvider
     */ 
     public function viewEmailTemplate(Request $request)
     {
+        $roles = Role::whereIn('id', [0, 1, 2, 3, 4, 5, 6, 7])->get();
+        $dataQuery = UserEmailDeletePermission::with('roles', 'users')->orderBy('id', 'desc');
+    
+        if ($query = $request->get('query')) {
+            $dataQuery->where(function($queryBuilder) use ($query) {
+                $queryBuilder->where('id', 'LIKE', '%' . $query . '%');
+            });
+        }
+        $perItem = $request->input('per_item', 10);
+        $data = $dataQuery->paginate($perItem);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'roles' => $roles,
+                'data' => $data->items(),
+                'links' => $data->links(),
+                'total' => $data->total(),
+            ]);
+        }
         $user_email = Auth::user()->email;
         $user_id = Auth::user()->id;
         // Total Email
@@ -46,6 +67,19 @@ class EmailServiceProvider
         $draft_email_percentage = $total_draft_emails > 0 ? ($total_draft_emails / $userEmails) * 100 : 0;
 
         return view('sendingEmails.index', compact('inbox_email_percentage', 'send_email_percentage', 'userEmails', 'draft_email_percentage'));
+    }
+    /**
+     * Handle Fetch User Email
+    */ 
+    public function fetchUserEmail(Request $request, $selectedRole)
+    {
+        $users = User::whereHas('roles', function($query) use ($selectedRole) {
+            $query->where('id', $selectedRole);
+        })->get(['id', 'email']);
+    
+        return response()->json([
+            'users' => $users
+        ]);
     }
     /**
      * Handle Send Email

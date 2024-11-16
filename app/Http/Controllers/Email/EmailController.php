@@ -22,6 +22,11 @@ class EmailController extends Controller
         return $this->emailServiceProvider->viewEmailTemplate($request);
     }
     
+    // Fetch User Email
+    public function getUserEmail(Request $request, $selectedRole)
+    {
+        return $this->emailServiceProvider->fetchUserEmail($request, $selectedRole);
+    }
     // Sending Mail
     public function sendEmail(Request $request)
     {
