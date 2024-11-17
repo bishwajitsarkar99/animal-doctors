@@ -82,11 +82,11 @@
                     </div>
                 </form>
             </div>
-            <span id="permission_success_message"></span>
+            <span class="mt-3" id="permission_success_message"></span>
         </div>
         <div class="col-xl-8">
             <div class="card card-body permission-data-card">
-                <div class="search-box mb-2">
+                <div class="search-box">
                     <input class="ps-2" type="search" name="search" placeholder="search email" id="searchEamil" hidden>
                     <span class="search-skeletone"></span>
                 </div>
@@ -124,7 +124,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="row table_last_row mb-1">
+                <div class="row table_last_row mb-3">
                     <div class="col-xl-2">
                         <label class="item_class text-place mt-1" id="item_class">PerItem</label>
                         <div class="custom-select peritem-skeleton">

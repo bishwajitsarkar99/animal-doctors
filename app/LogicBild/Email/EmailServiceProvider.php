@@ -281,6 +281,10 @@ class EmailServiceProvider
         if (!$request->ajax()) {
             return abort(404);
         }
+        $authUser = Auth::user();
+        $authID = $authUser->id;
+        $authEmail = $authUser->email;
+
         $attachment_type = $request->input('attachment_type');
         $status = $request->input('status');
         $read_mail = $request->input('read_mail');
@@ -304,7 +308,6 @@ class EmailServiceProvider
             }, $months));
         }
         // Users
-        $authEmail = Auth::user()->email;
         $query = UserEmail::whereNotNull('user_to')
             ->where(function($q) use ($authEmail) {
                 $q->where('user_to', 'LIKE', "%$authEmail%")
@@ -339,29 +342,30 @@ class EmailServiceProvider
             $query->where('read_mail', $read_mail);
         }
         
-        // Auth Users id
-        $userId = Auth::user()->id;
-        // Auth User Email
-        $user_email = Auth::user()->email;
+        // Get Permission For Delete
+        $user_email_delete_permissions = UserEmailDeletePermission::where('user_roles_id', $authID)
+                                                                ->orWhere('user_emails_id', $authEmail)
+                                                                ->orderByDesc('id')
+                                                                ->get();
         // Total User Email / Inbox
         $total_emails = UserEmail::whereNotNull('user_to')
-                                ->where('user_to', 'LIKE', "%$user_email%")
-                                ->orWhere('user_cc', 'LIKE', "%$user_email%")
-                                ->orWhere('user_bcc', 'LIKE', "%$user_email%")
+                                ->where('user_to', 'LIKE', "%$authEmail%")
+                                ->orWhere('user_cc', 'LIKE', "%$authEmail%")
+                                ->orWhere('user_bcc', 'LIKE', "%$authEmail%")
                                 ->count();
         // Total Draft User Email
-        $total_draft_emails = UserEmail::whereNull('user_to')->where('sender_user', '=', $userId)->count();
+        $total_draft_emails = UserEmail::whereNull('user_to')->where('sender_user', '=', $authID)->count();
         // Total New Email
         $total_new_emails = UserEmail::whereNotNull('user_to')
-                                        ->where(function($q) use ($user_email) {
-                                            $q->where('user_to', 'LIKE', "%$user_email%")
-                                            ->orWhere('user_cc', 'LIKE', "%$user_email%")
-                                            ->orWhere('user_bcc', 'LIKE', "%$user_email%");
+                                        ->where(function($q) use ($authEmail) {
+                                            $q->where('user_to', 'LIKE', "%$authEmail%")
+                                            ->orWhere('user_cc', 'LIKE', "%$authEmail%")
+                                            ->orWhere('user_bcc', 'LIKE', "%$authEmail%");
                                         })
                                         ->where('status', '=', 0)
                                         ->count();
         // Total Send User Email According to Month
-        $total_send_emails = UserEmail::whereNotNull('user_to')->where('sender_user', '=', $userId)->count();
+        $total_send_emails = UserEmail::whereNotNull('user_to')->where('sender_user', '=', $authID)->count();
         
         $perItem = $request->input('per_item', 10);
         $data = $query->paginate($perItem)->toArray();
@@ -373,6 +377,7 @@ class EmailServiceProvider
             'total_draft_emails' => $total_draft_emails,
             'total_send_emails' => $total_send_emails,
             'total_new_emails' => $total_new_emails,
+            'user_email_delete_permissions' => $user_email_delete_permissions,
             'months' => $months,
             'years' => array_values($years)
 
