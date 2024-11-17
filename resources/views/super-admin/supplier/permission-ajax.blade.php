@@ -171,7 +171,7 @@
                             <i class="fa-solid fa-pen-to-square" style="color: blue;"></i>
                         </button>
                         <button type="button" class="deleteBtn ms-1" id="permissionDeleteBtn" value="${row.id}" style="font-size: 10px;float: left; cursor: pointer; height:15px;" data-bs-toggle="tooltip" data-bs-placement="right" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                            <i class="fa-solid fa-trash-can" style="color: orangered;"></i>
+                            <i class="fa-solid fa-trash-can" style="color: orangered;margin-left: -3px;"></i>
                         </button>
                     </td>
                 </tr>

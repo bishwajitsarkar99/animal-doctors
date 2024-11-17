@@ -74,4 +74,28 @@ class EmailController extends Controller
     {
         return $this->emailServiceProvider->deleteUserEmail($request);
     }
+
+    // Delete Email Permission Store
+    public function store(Request $request)
+    {
+        return $this->emailServiceProvider->deleteUserEmailPermissionStore($request);
+    }
+
+    // Delete Email Permission Edit
+    public function permissionEdit($id)
+    {
+        return $this->emailServiceProvider->deleteUserEmailPermissionEdit($id);
+    }
+
+    // Delete Email Permission Update
+    public function permissionUpdate(Request $request, $id)
+    {
+        return $this->emailServiceProvider->deleteUserEmailPermissionUpdate($request, $id);
+    }
+
+    // Delete Email Permission Delete
+    public function deletePermissionEmail($id)
+    {
+        return $this->emailServiceProvider->deleteUserEmailPermissionDelete($id);
+    }
 }

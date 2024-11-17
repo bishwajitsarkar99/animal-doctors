@@ -86,4 +86,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\Email\EmailVerification::class, 'user_id');
     }
+
+    public function user_email_delete_permissions()
+    {
+        return $this->hasMany(UserEmailDeletePermission::class);
+    }
 }

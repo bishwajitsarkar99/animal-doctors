@@ -153,6 +153,64 @@
     </div>
   </div>
 </div>
+<!-- Update Confirm Modal -->
+<div class="modal fade" id="updateconfirmpermission" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+      <div class="modal-header" id="logoutModal_header">
+        <h6 class="modal-title admin_title scan update_title pt-1" id="staticBackdropLabel">
+          Update Permission
+        </h6>
+        <button type="button" class="btn-close btn-btn-sm head_btn3" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+        </div>
+        <div class="modal-body" id="logoutModal_body">
+          <p class="admin_paragraph" style="text-align:center;" id="text_message">
+            <label class="label_user_edit" id="cate_confirm_update" for="id">Are you confirm or cancel ? </label>
+          </p>
+        </div>
+        <div class="modal-footer" id="logoutModal_footer">
+          <button id="update_btn_confirm" class="btn btn-sm update_confirm btn_focus">
+            <span class="update-confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="update-confirm-btn-text">Confirm</span>
+          </button>
+          <button type="button" class="btn btn-sm confirm_cancel_button delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Confirm Permission Modal -->
+<div class="modal fade" id="deleteconfirmpermission" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+      <div class="modal-header" id="logoutModal_header">
+        <h6 class="modal-title admin_title scan confirm_title pt-1" id="staticBackdropLabel">
+          Confirm Delete
+        </h6>
+        <button type="button" class="btn-close btn-btn-sm head_btn2" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+        </div>
+        <div class="modal-body" id="logoutModal_body">
+          <input type="text" id="#delete_access_permission_id" hidden>
+          <input type="hidden" id="delete_access_permission_id" name="delete_access_permission_id">
+          <p class="admin_paragraph" style="text-align:center;" id="text_message">
+            <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, delete or cancel ? </label>
+          </p>
+        </div>
+        <div class="modal-footer" id="logoutModal_footer">
+          <button href="#" type="button" class="btn btn-sm cgt_btn delet_btn_user btn_focus" id="confirm_delete_btn">
+            <span class="delete-confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="delete-confirm-btn-text">Delete</span>
+          </button>
+          <button type="button" class="btn btn-sm cgt_btn confirm_cancel_button btn_focus" id="supp_delt4" data-bs-dismiss="modal">Cancel</button>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/email/email.css">

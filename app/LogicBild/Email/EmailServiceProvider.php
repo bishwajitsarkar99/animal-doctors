@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 use App\Mail\UserMail;
@@ -13,6 +14,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\UserEmail;
 use App\Models\UserEmailDeletePermission;
+use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 
 class EmailServiceProvider
@@ -620,5 +622,123 @@ class EmailServiceProvider
             'messages' => 'The inbox email has deleted successfully.'
         ]);
     }
+    /**
+     * Handle Delete Email Permission Store
+    */
+    public function deleteUserEmailPermissionStore(Request $request)
+    {
+        // validation
+        $validator = Validator::make($request->all(), [
+            'user_roles_id' => 'required|exists:roles,id',
+            'user_emails_id' => 'required|unique:user_email_delete_permissions,user_emails_id',
+            'other_status' => 'required|in:0,1',
+        ], [
+            'user_roles_id.required' => 'Role is required',
+            'user_roles_id.exists' => 'The selected role does not exist',
+            'user_emails_id.unique' => 'This email has already taken.',
+            'other_status.required' => 'other status field is required',
+            'other_status.in' => 'other status must be true (1) or false (0)',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }else{
+            $userEmailDeletePermissions = new UserEmailDeletePermission;
+            $userEmailDeletePermissions->user_roles_id = $request->input('user_roles_id');
+            $userEmailDeletePermissions->user_emails_id = $request->input('user_emails_id');
+            $userEmailDeletePermissions->report_status = $request->input('report_status');
+            $userEmailDeletePermissions->message_status = $request->input('message_status');
+            $userEmailDeletePermissions->darft_status = $request->input('darft_status');
+            $userEmailDeletePermissions->other_status = $request->input('other_status');
+            $userEmailDeletePermissions->save();
+            return response()->json([
+                'messages' => 'permission has been created.',
+                'code' => 200,
+            ]);
+        }
+    }
+    /**
+     * Handle Delete Email Permission Edit
+    */
+    public function deleteUserEmailPermissionEdit($id)
+    {
+        $userEmailDeletePermissions = UserEmailDeletePermission::find($id);
+        if($userEmailDeletePermissions){
+            return response()->json([
+                'status'=> 200,
+                'messages'=> $userEmailDeletePermissions,
+            ]);
+        }
+        else{
+            return response()->json([
+                'status'=> 404,
+                'messages'=> 'Would yout like to change permission ?',
+            ]);
+        }
+    }
+    /**
+     * Handle Delete Email Permission Update
+    */
+    public function deleteUserEmailPermissionUpdate(Request $request, $id)
+    {
+        // validation
+        $validator = Validator::make($request->all(), [
+            'user_roles_id' => 'required|exists:roles,id',
+            'user_emails_id' => [
+                'required',
+                Rule::unique('user_email_delete_permissions', 'user_emails_id')->ignore($id),
+            ],
+            'other_status' => 'required|in:0,1',
+        ], [
+            'user_roles_id.required' => 'Role is required',
+            'user_roles_id.exists' => 'The selected role does not exist',
+            'user_emails_id.required' => 'Email field is required',
+            'user_emails_id.unique' => 'This email has already been taken.',
+            'other_status.required' => 'Other status field is required',
+            'other_status.in' => 'Other status must be true (1) or false (0)',
+        ]);
     
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        } else {
+            $userEmailDeletePermissions = UserEmailDeletePermission::find($id);
+            if ($userEmailDeletePermissions) {
+                $userEmailDeletePermissions->user_roles_id = $request->input('user_roles_id');
+                $userEmailDeletePermissions->user_emails_id = $request->input('user_emails_id');
+                $userEmailDeletePermissions->report_status = $request->input('report_status');
+                $userEmailDeletePermissions->message_status = $request->input('message_status');
+                $userEmailDeletePermissions->darft_status = $request->input('darft_status');
+                $userEmailDeletePermissions->other_status = $request->input('other_status');
+                $userEmailDeletePermissions->save();
+    
+                return response()->json([
+                    'status' => 200,
+                    'messages' => 'permission has been updated.',
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'messages' => 'permission not found.',
+                ]);
+            }
+        }
+    }
+    /**
+     * Handle Delete Email Permission Delete
+    */
+    public function deleteUserEmailPermissionDelete($id)
+    {
+        $userEmailDeletePermissions = UserEmailDeletePermission::find($id);
+        $userEmailDeletePermissions->delete();
+
+        return response()->json([
+            'status'=> 200,
+            'messages'=> 'Permission has deleted.',
+        ]);
+    }
 }

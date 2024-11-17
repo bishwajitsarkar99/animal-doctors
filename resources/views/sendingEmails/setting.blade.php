@@ -22,6 +22,7 @@
                                 </select>
                             </div>
                             <span id="savForm_error"></span>
+                            <span id="updateForm_errorList"></span>
                         </div>
                     </div>
                     <div class="row mt-2">
@@ -71,7 +72,7 @@
                         </button>
                         <button type="button" class="btn btn-sm subm_btn skeleton permission_submit" id="PermissionSubmit">
                             <span class="submt-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                            <span class="btn-text">Submit</span>
+                            <span class="submt-btn-text">Submit</span>
                         </button>
                         <button type="button" class="btn btn-sm updt_btn permission_update" id="PermissionUpdate" hidden>
                             <span class="updt-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
@@ -81,10 +82,10 @@
                     </div>
                 </form>
             </div>
+            <span id="permission_success_message"></span>
         </div>
         <div class="col-xl-8">
             <div class="card card-body permission-data-card">
-                <span id="permission_success_message"></span>
                 <div class="search-box mb-2">
                     <input class="ps-2" type="search" name="search" placeholder="search email" id="searchEamil" hidden>
                     <span class="search-skeletone"></span>
@@ -125,9 +126,9 @@
                 </div>
                 <div class="row table_last_row mb-1">
                     <div class="col-xl-2">
-                        <label class="item_class text-place mt-1" id="item_class" hidden></label>
+                        <label class="item_class text-place mt-1" id="item_class">PerItem</label>
                         <div class="custom-select peritem-skeleton">
-                            <select class="ps-1 peritem-skeleton" id="perItemControls" hidden>
+                            <select class="ps-1 peritem-skeleton" id="perItemControls">
                                 <option class="peritem-skeleton" selected>10</option>
                                 <option class="peritem-skeleton">20</option>
                                 <option class="peritem-skeleton">50</option>
@@ -137,7 +138,7 @@
                         </div>
                     </div>
                     <div class="col-xl-7">
-                        <div class="pagination pb-1" id="delete_permission_data_table_paginate">
+                        <div class="pagination pb-1" id="delete_email_data_table_paginate">
 
                         </div>
                     </div>

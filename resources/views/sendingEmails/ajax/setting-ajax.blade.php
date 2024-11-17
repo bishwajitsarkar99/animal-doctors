@@ -4,9 +4,11 @@
 
     $(document).ready(function(){
         // Initialize the button loader for the login button
-        buttonLoader('#PermissionSubmit', '.submt-icon', '.btn-text', 'Submit...', 'Submit', 1000);
+        buttonLoader('#PermissionSubmit', '.submt-icon', '.submt-btn-text', 'Submit...', 'Submit', 1000);
         buttonLoader('#PermissionUpdate', '.updt-icon', '.setting-update-btn-text', 'Setting Update...', 'Setting Update', 1000);
         buttonLoader('#PermissionCancel', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
+        buttonLoader('#update_btn_confirm', '.update-confirm-icon', '.update-confirm-btn-text', 'Confirm...', 'Confirm', 1000);
+        buttonLoader('#confirm_delete_btn', '.elete-confirm-icon', '.delete-confirm-btn-text', 'Delete...', 'Delete', 1000);
         // Initialize Select2 for all elements with the 'select2' class
         $('.select2').each(function() {
             // Check the ID or name to set specific options
@@ -133,6 +135,10 @@
             $(".subm_btn").show('slow');
             $("#statusJustify").attr('hidden', true);
             $("#statusDeny").attr('hidden', true);
+            $("#savForm_error").empty();
+            $("#updateForm_errorList").empty();
+            $("#other_status").empty();
+            $('.error-message').remove();
 
             clearFields();
         });
@@ -189,7 +195,7 @@
                             <i class="fa-solid fa-pen-to-square" style="color: blue;"></i>
                         </button>
                         <button type="button" class="deleteBtn ms-1" id="permissionDeleteBtn" value="${row.id}" style="font-size: 10px;float: left; cursor: pointer; height:15px;" data-bs-toggle="tooltip" data-bs-placement="right" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                            <i class="fa-solid fa-trash-can" style="color: orangered;"></i>
+                            <i class="fa-solid fa-trash-can" style="color: orangered;margin-left: -3px;"></i>
                         </button>
                     </td>
                 </tr>
@@ -218,7 +224,7 @@
                     
                 }) {
                     $("#delete_permission_data_table").html(table_rows([...data]));
-                    $("#delete_permission_data_table_paginate").html(paginate_html({ links, total }));
+                    $("#delete_email_data_table_paginate").html(paginate_html({ links, total }));
                     $("#total_user_permission_records").text(total);
                     $('[data-bs-toggle="tooltip"]').tooltip();
 
@@ -246,31 +252,28 @@
             fetch_user_email_delete_permission(query);
         });
 
-        // Paginate Page-------------------------------
-        const paginate_html = ({ links, total }) => {
-            if (total === 0 || !Array.isArray(links)) {
+        // Paginate Page
+        const paginate_html = ({ links = [], total = 0 }) => {
+            if (total == 0 || !Array.isArray(links)) {
                 return "";
             }
-
-            const paginationLinks = links.map(link => {
-                return `
-                    <li class="page-item ${link.active ? 'active' : ''}">
-                        <a class="page-link" href="${link.url ? link.url : '#'}" ${link.url ? '' : 'tabindex="-1" aria-disabled="true"'}>${link.label}</a>
-                    </li>
-                `;
-            }).join('');
-
             return `
                 <nav class="paginate_link" aria-label="Page navigation example">
                     <ul class="pagination">
-                        ${paginationLinks}
+                        ${links.map((link, key) => `
+                            <li class="page-item${link.active ? ' active' : ''}" key="${key}">
+                                <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
+                                    ${link.label}
+                                </a>
+                            </li>
+                        `).join("\n")}
                     </ul>
                 </nav>
             `;
         };
 
         // change paginate page------------------------
-        $("#delete_permission_data_table_paginate").delegate("a", "click", function(e) {
+        $("#delete_email_data_table_paginate").delegate("a", "click", function(e) {
             e.stopImmediatePropagation();
             e.preventDefault();
 
@@ -303,7 +306,7 @@
                 $("#select_user_email").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the user email.</span>');
             }
             if (!otherStatus) {
-                $("#other_status").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">View is required.</span>');
+                $("#other_status").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Other is required.</span>');
             }
 
             // Check if there are any error messages
@@ -380,10 +383,10 @@
                         $('#permission_success_message').text(response.messages);
                     } else {
                         $('#permission_id').val(id);
-                        $('.select_user_role').val(response.messages.user_roles_id);
+                        $('.select_user_role').val(response.messages.user_roles_id).trigger('change.select2');
                         fetch_user_permission_email(response.messages.user_roles_id);
                         setTimeout(() => {
-                            $('.select_user_email').val(response.messages.user_emails_id);
+                            $('.select_user_email').val(response.messages.user_emails_id).trigger('change.select2');
                         }, 500);
                         $('#report_status').prop('checked', response.messages.report_status == 1);
                         $('#message_status').prop('checked', response.messages.message_status == 1);
@@ -405,16 +408,12 @@
         // Update Modal Show
         $(document).on('click', '#PermissionUpdate', function(e){
             e.preventDefault(); 
-            $("#accessPermissionModal").modal('show');
-            $('.updt-icon').removeClass('updt-hidden');
-
-            setTimeout(() => {
-                $('.updt-icon').addClass('updt-hidden');
-            }, 1000);
+            $("#updateconfirmpermission").modal('show');
+            $("#permission_success_message").empty();
         });
 
         // Update Email Delete Permission
-        $(document).on('click', '.permission_confirm_btn', function(e){
+        $(document).on('click', '#update_btn_confirm', function(e){
             e.preventDefault();
 
             // Input Field Validation
@@ -428,13 +427,13 @@
             var otherStatus = $("input[name='other_status']:checked").val();
 
             if (!roleName) {
-                $("#select_supplier_role").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the role name.</span>');
+                $("#select_user_role").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the role name.</span>');
             }
             if (!userEmail) {
-                $("#select_supplier_email").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the user email.</span>');
+                $("#select_user_email").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the user email.</span>');
             }
             if (!otherStatus) {
-                $("#permission_status").closest('.role_nme').append('<span class="error-message alert_show_errors">Permission status is required.</span>');
+                $("#other_status").closest('.role_nme').append('<span class="error-message alert_show_errors">Permission status is required.</span>');
             }
 
             if ($('.error-message').length > 0) {
@@ -468,17 +467,19 @@
                         $.each(response.errors, function(key, err_value) {
                             $('#updateForm_errorList').html("");
                             $('#updateForm_errorList').addClass('alert_show_errors skeleton ps-1 pe-1');
-                            $('#updateForm_errorList').append('<span>' + err_value + '</span>');
-                            $("#updateForm_errorList").fadeOut(40000);
+                            $('#updateForm_errorList').append('<span id="error_mess">' + err_value + '</span>');
+                            $("#updateForm_errorList").fadeIn();
 
                             var time = null;
                             time = setTimeout(() => {
                                 $("#updateForm_errorList").removeClass('skeleton');
-                            }, 3000);
+                                $("#updateForm_errorList").fadeOut(9000);
+                            }, 1000);
                             return ()=>{
                                 clearTimeout(time);
                             }
                         });
+                        $("#updateconfirmpermission").modal('hide');
                     } else if (response.status == 404) {
                         $('#updateForm_errorList').html("");
                         $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
@@ -491,11 +492,12 @@
                         $('#permission_success_message').text(response.messages);
                         $('#permission_id').val("");
                         clearFields();
-                        $("#accessPermissionModal").modal('hide');
+                        $("#updateconfirmpermission").modal('hide');
                         $("#PermissionUpdate").hide();
                         $("#PermissionSubmit").show();
                         $("#statusJustify").attr('hidden', true);
                         $("#statusDeny").attr('hidden', true);
+                        $("#permission_success_message").addClass('background_success_sm');
                         setTimeout(() => {
                             $('#permission_success_message').fadeOut(3000);
                         }, 3000);
@@ -511,7 +513,8 @@
             e.preventDefault();
             var id = $(this).val();
             $('#delete_access_permission_id').val(id); 
-            $("#accessPermissionDeleteModal").modal('show');
+            $("#deleteconfirmpermission").modal('show');
+            $("#permission_success_message").empty();
 
         });
 
@@ -534,10 +537,11 @@
                     $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
                     $('#permission_success_message').fadeIn();
                     $('#permission_success_message').text(response.messages);
+                    $("#permission_success_message").addClass('background_success_sm');
                     setTimeout(() => {
                         $('#permission_success_message').fadeOut(3000);
                     }, 3000);
-                    $('#accessPermissionDeleteModal').modal('hide');
+                    $('#deleteconfirmpermission').modal('hide');
 
                     fetch_user_email_delete_permission();
                 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Role;
+use App\Models\User;
 
 class UserEmailDeletePermission extends Model
 {
@@ -21,6 +22,10 @@ class UserEmailDeletePermission extends Model
 
     public function roles()
     {
-        return $this->hasOne(Role::class,'id', 'role',);
+        return $this->hasOne(Role::class,'id', 'user_roles_id');
+    }
+
+    public function users(){
+        return $this->belongsTo(User::class, 'user_emails_id', 'id');
     }
 }

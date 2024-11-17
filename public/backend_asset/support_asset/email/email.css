@@ -37,7 +37,7 @@ color: #333;
 #inputTo:focus, #inputCC:focus, #inputBCC:focus, #inputSubject:focus{
     border-color: dodgerblue;
 }
-button.send_button,.permission_submit,.permission_update{
+button.send_button,.permission_submit,.permission_update,#update_btn_confirm,#confirm_delete_btn{
     background-color: #0056b3;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
@@ -53,15 +53,15 @@ button.send_button,.permission_submit,.permission_update{
     transition: border-color 0.3s ease, background-color 0.3s ease;
     border-color: #007bff;
 }
-button.send_button:hover,.permission_submit:hover,.permission_update:hover{
+button.send_button:hover,.permission_submit:hover,.permission_update:hover,#update_btn_confirm:hover,#confirm_delete_btn:hover{
     background-image: linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);color: lightblue; 
     transition: border-color 0.3s ease, background-color 0.3s ease;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     opacity: 1;
 }
-button.permission_calncel{
-    background-color: orangered;
+button.permission_calncel,button.confirm_cancel_button{
+    background-color: #0056b3;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -74,15 +74,42 @@ button.permission_calncel{
     font-weight: 600;
     margin-top: -0.3em;
     transition: border-color 0.3s ease, background-color 0.3s ease;
-    border-color: orangered; 
+    border-color: #007bff; 
 }
-button.permission_calncel:hover{
+button.permission_calncel:hover,button.confirm_cancel_button:hover{
     background-image: linear-gradient(to top, rgb(247, 88, 31), orangered, rgb(247, 88, 31));
     color: rgb(250, 193, 89); 
     transition: border-color 0.3s ease, background-color 0.3s ease;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     opacity: 1;
+}
+.background_success_sm {
+    background-color: rgb(4, 168, 4);
+    color: white;
+    font-size: 12px;
+    animation: text 3s 1;
+    position: absolute;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 2px;
+    border-radius: 3px;
+    --mdb-box-shadow-color-rgb: 0, 0, 0 !important;
+    box-shadow: 0 4px 9px -4px rgba(0, 0, 0, 0.35) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+}
+@keyframes text {
+    0% {
+        color: darkcyan;
+    }
+    
+    30% {
+        letter-spacing: 8px;
+    }
+    85% {
+        letter-spacing: 5px;
+    }
 }
 .permission-card,.permission-data-card {
     border: none;
@@ -510,7 +537,7 @@ select#select_read_email:focus,select#select_send_read_email:focus{
 .send_data_item,.draft_data_item {
     position: relative;
 }
-select#perItemControl,select#perItemSendEmail,select#perItemDraftEmail {
+select#perItemControl,select#perItemSendEmail,select#perItemDraftEmail,select#perItemControls {
     outline: none;
     color: black;
     font-weight: 600;
@@ -1168,6 +1195,15 @@ th#th_sort {
     color: black;
     font-size: 15px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+td#supp_tab15 {
+    text-align: center;
+    border-left: 1px solid lightblue;
+}
+button#permissionDeleteBtn {
+    outline: none;
+    border: none;
+    background: no-repeat;
 }
 td.error_data {
     text-align: center;
