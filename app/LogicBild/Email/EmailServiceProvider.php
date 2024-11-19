@@ -13,6 +13,7 @@ use App\Mail\UserMail;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\UserEmail;
+use App\Models\UserInboxEmail;
 use App\Models\UserEmailDeletePermission;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
@@ -50,7 +51,7 @@ class EmailServiceProvider
         // Total Email
         $userEmails = UserEmail::count();
         // Total inbox Email
-        $total_emails = UserEmail::whereNotNull('user_to')
+        $total_emails = UserInboxEmail::whereNotNull('user_to')
                                     ->orWhere('user_to', 'LIKE', "%$user_email")
                                     ->orWhere('user_cc', 'LIKE', "%$user_email")
                                     ->orWhere('user_bcc', 'LIKE', "%$user_email")
@@ -168,6 +169,23 @@ class EmailServiceProvider
         $draftMailStatus = $request->user_to ? ($request->draft_mail ? '1' : '0') : '1';
         // Store Email Data in DB
         DB::table('user_emails')->insert([
+            'user_to' => $request->user_to,
+            'user_cc' => $request->user_cc ?? 'N/A',
+            'user_bcc' => $request->user_bcc ?? 'N/A',
+            'subject' => $request->subject ?? 'No Subject',
+            'main_content' => $content ?? 'No Content',
+            'email_attachments' => json_encode($attachments),
+            'attachment_type' => $request->attachment_type ?? 'other',
+            'sender_email' => Auth::user()->email,
+            'sender_user' => Auth::user()->id,
+            'status' => $request->status ? '1' : '0',
+            'read_mail' => $request->status ? '1' : '0',
+            'draft_mail' => $draftMailStatus,
+            'created_at' => now(),
+        ]);
+
+        // inbox Email Store
+        DB::table('user_inbox_emails')->insert([
             'user_to' => $request->user_to,
             'user_cc' => $request->user_cc ?? 'N/A',
             'user_bcc' => $request->user_bcc ?? 'N/A',
@@ -318,7 +336,7 @@ class EmailServiceProvider
             }, $months));
         }
         // Users
-        $query = UserEmail::whereNotNull('user_to')
+        $query = UserInboxEmail::whereNotNull('user_to')
             ->where(function($q) use ($authEmail) {
                 $q->where('user_to', 'LIKE', "%$authEmail%")
                   ->orWhere('user_cc', 'LIKE', "%$authEmail%")
@@ -358,7 +376,7 @@ class EmailServiceProvider
                                                                 ->orderByDesc('id')
                                                                 ->get();
         // Total User Email / Inbox
-        $total_emails = UserEmail::whereNotNull('user_to')
+        $total_emails = UserInboxEmail::whereNotNull('user_to')
                                 ->where('user_to', 'LIKE', "%$authEmail%")
                                 ->orWhere('user_cc', 'LIKE', "%$authEmail%")
                                 ->orWhere('user_bcc', 'LIKE', "%$authEmail%")
@@ -366,7 +384,7 @@ class EmailServiceProvider
         // Total Draft User Email
         $total_draft_emails = UserEmail::whereNull('user_to')->where('sender_user', '=', $authID)->count();
         // Total New Email
-        $total_new_emails = UserEmail::whereNotNull('user_to')
+        $total_new_emails = UserInboxEmail::whereNotNull('user_to')
                                         ->where(function($q) use ($authEmail) {
                                             $q->where('user_to', 'LIKE', "%$authEmail%")
                                             ->orWhere('user_cc', 'LIKE', "%$authEmail%")
@@ -608,7 +626,7 @@ class EmailServiceProvider
         $status = (bool)$request->input('status');
         $status = !$status;
 
-        $data = UserEmail::findOrFail( $id);
+        $data = UserInboxEmail::findOrFail( $id);
 
         $data->update([
             'status' => (int)$status,

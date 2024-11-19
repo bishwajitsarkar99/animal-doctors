@@ -34,19 +34,49 @@
             }
 
             return rows.map((row, key) => {
-                // Handle user permissions
-                const disableButton = Array.isArray(user_email_delete_permissions) && 
-                user_email_delete_permissions.some(permission =>
-                    parseInt(permission.report_status) === 1 || 
-                    parseInt(permission.message_status) === 1
-                ) ? '' : 'disabled';
+                // Handle user delete report or message email permissions
+                let disableButton = '';
+                let disableForwardButton = '';
+                if (Array.isArray(user_email_delete_permissions) && user_email_delete_permissions.length > 0) {
+                    const rowItem = user_email_delete_permissions[0];
 
-                const disableForwardButton = Array.isArray(user_email_delete_permissions) && 
-                user_email_delete_permissions.some(permission =>
-                    parseInt(permission.report_status) === 1
-                ) ? '' : 'disabled';
+                    if (row.attachment_type === 'report') {
+                        if (rowItem?.report_status === 0) {
+                            disableButton = 'disabled';
+                        } else {
+                            disableButton = '';
+                        }
+                    } else if (row.attachment_type === 'message') {
+                        if (rowItem?.message_status === 0) {
+                            disableButton = 'disabled';
+                        } else {
+                            disableButton = '';
+                        }
+                    }
+                } else {
+                    console.log('user_email_delete_permissions is empty or not an array');
+                }
+                // Handle user report or message forward email permissions
+                if (Array.isArray(user_email_delete_permissions) && user_email_delete_permissions.length > 0) {
+                    const rowItem = user_email_delete_permissions[0];
 
-                // Set value dynamically based on button state
+                    if (row.attachment_type === 'report') {
+                        if (rowItem?.report_email_forward === 0) {
+                            disableForwardButton = 'disabled';
+                        } else {
+                            disableForwardButton = '';
+                        }
+                    } else if (row.attachment_type === 'message') {
+                        if (rowItem?.message_email_forward === 0) {
+                            disableForwardButton = 'disabled';
+                        } else {
+                            disableForwardButton = '';
+                        }
+                    }
+                } else {
+                    console.log('user_email_delete_permissions is empty or not an array');
+                }
+                
                 const value = disableButton === '' ? row.id : '';
                 const forwardValue = disableForwardButton === '' ? row.id : '';
 
