@@ -204,6 +204,10 @@ class EmailServiceProvider
         if (!$request->ajax()) {
             return abort(404);
         }
+
+        $authUser = Auth::user();
+        $authID = $authUser->id;
+        $authEmail = $authUser->email;
     
         // Input filters
         $attachment_type = $request->input('attachment_type');
@@ -232,7 +236,6 @@ class EmailServiceProvider
         }
     
         // Query setup
-        $authID = Auth::user()->id;
         $query = UserEmail::whereNotNull('user_to')
             ->where('sender_user', '=', $authID)
             ->with(['roles'])
@@ -254,6 +257,12 @@ class EmailServiceProvider
         if ($status !== null) {
             $query->where('status', $status);
         }
+
+        // Get Permission For Delete
+        $user_email_delete_permissions = UserEmailDeletePermission::where('user_roles_id', $authID)
+                                                                ->orWhere('user_emails_id', $authEmail)
+                                                                ->orderByDesc('id')
+                                                                ->get();
     
         // Count total emails sent by the authenticated user
         $total_send_emails = UserEmail::whereNotNull('user_to')
@@ -269,6 +278,7 @@ class EmailServiceProvider
             'links' => $data['links'],
             'total' => $data['total'],
             'total_send_emails' => $total_send_emails,
+            'user_email_delete_permissions' => $user_email_delete_permissions,
             'months' => $months,
             'years' => array_values($years),
         ], 200);
@@ -657,6 +667,9 @@ class EmailServiceProvider
             $userEmailDeletePermissions->message_status = $request->input('message_status');
             $userEmailDeletePermissions->darft_status = $request->input('darft_status');
             $userEmailDeletePermissions->other_status = $request->input('other_status');
+            $userEmailDeletePermissions->email_service = $request->input('email_service');
+            $userEmailDeletePermissions->report_email_forward = $request->input('report_email_forward');
+            $userEmailDeletePermissions->message_email_forward = $request->input('message_email_forward');
             $userEmailDeletePermissions->save();
             return response()->json([
                 'messages' => 'permission has been created.',
@@ -719,6 +732,9 @@ class EmailServiceProvider
                 $userEmailDeletePermissions->message_status = $request->input('message_status');
                 $userEmailDeletePermissions->darft_status = $request->input('darft_status');
                 $userEmailDeletePermissions->other_status = $request->input('other_status');
+                $userEmailDeletePermissions->email_service = $request->input('email_service');
+                $userEmailDeletePermissions->report_email_forward = $request->input('report_email_forward');
+                $userEmailDeletePermissions->message_email_forward = $request->input('message_email_forward');
                 $userEmailDeletePermissions->save();
     
                 return response()->json([

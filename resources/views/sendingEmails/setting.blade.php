@@ -29,8 +29,8 @@
                         <div class="col-xl-12">
                             <table class="ord_table center border-1" id="myTable">
                                 <tr class="table-row order_body acc_setting_table long-skeleton">
-                                    <th id="th_sort" class="table_th_color long-skeleton txt col ps-2" style="text-align:left;">Access</th>
-                                    <th id="th_sort" class="table_th_color tot_pending_ long-skeleton col ps-1" style="text-align:center;height:40px;width:150px;">
+                                    <th id="th_sort" class="table_th_color long-skeleton txt col ps-2" style="text-align:left;">Access -Email</th>
+                                    <th id="th_sort" class="table_th_color tot_pending_ long-skeleton col ps-1" style="text-align:center;height:25px;width:120px;">
                                         Permission
                                         <span style="color:darkgreen;" id="statusJustify" hidden>[<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>]</span> 
                                         <span style="color:orangered; font-size:12px;" id="statusDeny" hidden></span>
@@ -38,27 +38,52 @@
                                 </tr>
                                 <tbody class="bg-transparent" id="permission_data_table">
                                     <tr class="btn-hover table_body table-row user-table-row long-skeleton">
-                                        <td class="table_body2 ps-2">Report</td>
-                                        <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
-                                            <input type="checkbox" name="report_status" value="1" class="report_status report_status skeleton mt-1" id="report_status" style="cursor: pointer;">
+                                        <td class="table_body2 email_row ps-2">Email Service</td>
+                                        <td class="table_body2 email_row role_nme" style="text-align: left;line-height: 1.5;">
+                                            <input type="checkbox" name="email_service" value="1" class="email_service skeleton mt-1" id="email_service" style="cursor: pointer;">
+                                            Block
                                         </td>
                                     </tr>
                                     <tr class="btn-hover table_body table-row user-table-row long-skeleton">
-                                        <td class="table_body2 ps-2">Message</td>
-                                        <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
+                                        <td class="table_body2 email_row ps-2">Report Email</td>
+                                        <td class="table_body2 email_row role_nme" style="text-align: left;line-height: 1.5;">
+                                            <input type="checkbox" name="report_status" value="1" class="report_status skeleton mt-1" id="report_status" style="cursor: pointer;">
+                                            Delete
+                                        </td>
+                                    </tr>
+                                    <tr class="btn-hover table_body table-row user-table-row long-skeleton">
+                                        <td class="table_body2 email_row ps-2">Message Email</td>
+                                        <td class="table_body2 email_row role_nme" style="text-align: left;line-height: 1.5;">
                                             <input type="checkbox" name="message_status" value="1" class="statusChecking message_status skeleton mt-1" id="message_status" style="cursor: pointer;">
+                                            Delete
                                         </td>
                                     </tr>
                                     <tr class="btn-hover table_body table-row user-table-row long-skeleton">
-                                        <td class="table_body2 ps-2">Draft</td>
-                                        <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
+                                        <td class="table_body2 email_row ps-2">Draft Email</td>
+                                        <td class="table_body2 email_row role_nme" style="text-align: left;line-height: 1.5;">
                                             <input type="checkbox" name="darft_status" value="1" class="statusChecking darft_status skeleton mt-1" id="darft_status" style="cursor: pointer;">
+                                            Delete
                                         </td>
                                     </tr>
                                     <tr class="btn-hover table_body table-row user-table-row long-skeleton">
-                                        <td class="table_body2 ps-2">Other</td>
-                                        <td class="table_body2 role_nme" style="text-align: center;line-height: .9;">
+                                        <td class="table_body2 email_row ps-2">Other Email</td>
+                                        <td class="table_body2 email_row role_nme" style="text-align: left;line-height: 1.5;">
                                             <input type="checkbox" name="other_status" value="1" class="statusChecking other_status skeleton mt-1" id="other_status" style="cursor: pointer;">
+                                            Delete
+                                        </td>
+                                    </tr>
+                                    <tr class="btn-hover table_body table-row user-table-row long-skeleton">
+                                        <td class="table_body2 email_row ps-2">Report Email</td>
+                                        <td class="table_body2 email_row role_nme" style="text-align: left;line-height: 1.5;">
+                                            <input type="checkbox" name="report_email_forward" value="1" class="statusChecking report_email_forward skeleton mt-1" id="report_email_forward" style="cursor: pointer;">
+                                            Forward
+                                        </td>
+                                    </tr>
+                                    <tr class="btn-hover table_body table-row user-table-row long-skeleton">
+                                        <td class="table_body2 email_row ps-2">Message Email</td>
+                                        <td class="table_body2 email_row role_nme" style="text-align: left;line-height: 1.5;">
+                                            <input type="checkbox" name="message_email_forward" value="1" class="statusChecking message_email_forward skeleton mt-1" id="message_email_forward" style="cursor: pointer;">
+                                            Forward
                                         </td>
                                     </tr>
                                 </tbody>
@@ -98,19 +123,31 @@
                                 <th id="th_sort_head" class="table_th_color tot_pending_  col ps-1" style="text-align: left;padding-top: 100px;">Role</th>
                                 <th id="th_sort_head" class="table_th_color tot_pending_  col ps-1" style="text-align: left;padding-top: 100px;">Email</th>
                                 <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                                    Report
+                                    Report Email Delete
                                     <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
                                 </th>
                                 <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                                    Message
+                                    Message Email Delete
                                     <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
                                 </th>
                                 <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                                    Draft
+                                    Draft Email Delete
                                     <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
                                 </th>
                                 <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
-                                    Other
+                                    Other Email Delete
+                                    <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                                </th>
+                                <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                    Report Email Forward
+                                    <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                                </th>
+                                <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                    Message Email Forward
+                                    <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
+                                </th>
+                                <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">
+                                    Email Access
                                     <span class="fbox"><input id="light_focus" type="text" class="light2-focus"></span>
                                 </th>
                                 <th id="th_sorts" class="table_th_color tot_pending_  col ps-1 vertical-line" style="text-align:left;">

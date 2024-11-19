@@ -18,8 +18,10 @@ class UserEmailDeletePermission extends Model
         'message_status',
         'darft_status',
         'other_status',
+        'report_email_forward',
+        'message_email_forward',
+        'email_service',
     ];
-
     public function roles()
     {
         return $this->hasOne(Role::class,'id', 'user_roles_id');

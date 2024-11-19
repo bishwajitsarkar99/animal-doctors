@@ -59,9 +59,8 @@
                 <span class="input3 text-skeletone">
                     <select type="text" class="form-control form-control-sm" name="attachment_type" id="select_attachment">
                         <option value="">Select Category</option>
-                        <option value="attachments">Management Report</option>
-                        <option value="user_message">User Message</option>
-                        <option value="other">Others</option>
+                        <option value="report">Management Report</option>
+                        <option value="message">User Message</option>
                     </select>
                 </span>
             </div>

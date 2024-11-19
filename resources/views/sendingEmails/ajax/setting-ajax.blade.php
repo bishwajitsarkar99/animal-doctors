@@ -111,16 +111,19 @@
         }
 
         // Checkbox checking
-        $("#report_status, #message_status, #darft_status, #other_status").on('change', () => {
+        $("#report_status, #message_status, #darft_status, #other_status, #report_email_forward, #message_email_forward, #email_service").on('change', () => {
+            var email_service = $("#email_service").is(':checked');
             var report_status = $("#report_status").is(':checked');
             var message_status = $("#message_status").is(':checked');
             var darft_status = $("#darft_status").is(':checked');
             var other_status = $("#other_status").is(':checked');
+            var report_email_forward = $("#report_email_forward").is(':checked');
+            var message_email_forward = $("#message_email_forward").is(':checked');
 
             $("#statusJustify").attr('hidden', true);
             $("#statusDeny").attr('hidden', true);
 
-            if (report_status || message_status || darft_status || other_status) {
+            if (report_status || message_status || darft_status || other_status || report_email_forward || message_email_forward || email_service) {
                 $("#statusJustify").removeAttr('hidden');
             } else {
                 $("#statusDeny").removeAttr('hidden');
@@ -150,6 +153,9 @@
             $("input[name='message_status']").prop('checked', false);
             $("input[name='darft_status']").prop('checked', false);
             $("input[name='other_status']").prop('checked', false);
+            $("input[name='email_service']").prop('checked', false);
+            $("input[name='report_email_forward']").prop('checked', false);
+            $("input[name='message_email_forward']").prop('checked', false);
         }
 
         fetch_user_email_delete_permission();
@@ -188,6 +194,21 @@
                     <td class="ps-1 font table_body4" id="supp_tab15">
                         <span class="permission-plates permission ps-1 ${row.other_status ? 'text-dark' : 'text-danger'}">
                             ${row.other_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.report_email_forward ? 'text-dark' : 'text-danger'}">
+                            ${row.report_email_forward ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.message_email_forward ? 'text-dark' : 'text-danger'}">
+                            ${row.message_email_forward ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.email_service ? 'text-dark' : 'text-danger'}">
+                            ${row.email_service ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
                         </span>
                     </td>
                     <td class="ps-1 font table_body5" id="supp_tab15">
@@ -298,6 +319,9 @@
             var messageStatus = $("input[name='message_status']:checked").val();
             var darftStatus = $("input[name='darft_status']:checked").val();
             var otherStatus = $("input[name='other_status']:checked").val();
+            var emailAccess = $("input[name='email_service']:checked").val();
+            var reportEmailForward = $("input[name='report_email_forward']:checked").val();
+            var messageEmailForward = $("input[name='message_email_forward']:checked").val();
             
             if (!roleName) {
                 $("#select_user_role").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the role name.</span>');
@@ -322,6 +346,9 @@
                 'message_status': messageStatus ? 1 : 0,
                 'darft_status': darftStatus ? 1 : 0,
                 'other_status': otherStatus ? 1 : 0,
+                'email_service': emailAccess ? 1 : 0,
+                'report_email_forward': reportEmailForward ? 1 : 0,
+                'message_email_forward': messageEmailForward ? 1 : 0,
             };
 
             $.ajaxSetup({
@@ -357,6 +384,7 @@
                         clearFields();
                         $("#statusJustify").attr('hidden', true);
                         $("#statusDeny").attr('hidden', true);
+                        $("#permission_success_message").addClass('background_success_sm');
                         setTimeout(() => {
                             $('#permission_success_message').fadeOut();
                         }, 3000);
@@ -392,6 +420,9 @@
                         $('#message_status').prop('checked', response.messages.message_status == 1);
                         $('#darft_status').prop('checked', response.messages.darft_status == 1);
                         $('#other_status').prop('checked', response.messages.other_status == 1);
+                        $('#email_service').prop('checked', response.messages.email_service == 1);
+                        $('#report_email_forward').prop('checked', response.messages.report_email_forward == 1);
+                        $('#message_email_forward').prop('checked', response.messages.message_email_forward == 1);
                         
                         if ($('#other_status').is(':checked')) {
                             $("#statusJustify").removeAttr('hidden');
@@ -425,6 +456,9 @@
             var messageStatus = $("input[name='message_status']:checked").val();
             var darftStatus = $("input[name='darft_status']:checked").val();
             var otherStatus = $("input[name='other_status']:checked").val();
+            var emailAccess = $("input[name='email_service']:checked").val();
+            var reportEmailForward = $("input[name='report_email_forward']:checked").val();
+            var messageEmailForward = $("input[name='message_email_forward']:checked").val();
 
             if (!roleName) {
                 $("#select_user_role").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the role name.</span>');
@@ -449,6 +483,9 @@
                 'message_status': messageStatus ? 1 : 0,
                 'darft_status': darftStatus ? 1 : 0,
                 'other_status': otherStatus ? 1 : 0,
+                'email_service': emailAccess ? 1 : 0,
+                'report_email_forward': reportEmailForward ? 1 : 0,
+                'message_email_forward': messageEmailForward ? 1 : 0,
             }
 
             $.ajaxSetup({

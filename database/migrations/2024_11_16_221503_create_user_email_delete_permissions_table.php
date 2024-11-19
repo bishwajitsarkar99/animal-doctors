@@ -24,6 +24,9 @@ class CreateUserEmailDeletePermissionsTable extends Migration
             $table->tinyInteger('message_status')->default('0');
             $table->tinyInteger('darft_status')->default('0');
             $table->tinyInteger('other_status')->default('0');
+            $table->tinyInteger('report_email_forward')->default('0');
+            $table->tinyInteger('message_email_forward')->default('0');
+            $table->tinyInteger('email_service')->default('0');
             $table->timestamps();
         });
     }

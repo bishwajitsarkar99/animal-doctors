@@ -125,9 +125,11 @@ th.vertical-line {
     border-left: 2px solid lightblue;
     border-top: 2px solid lightblue;
     border-right: 2px solid lightblue;
+    font-variant: none;
 }
 th#th_sort_head {
     background-color: white;
+    font-variant: none;
 }
 .bootstrap-tagsinput {
     width: 100% !important;
@@ -1199,6 +1201,12 @@ th#th_sort {
 td#supp_tab15 {
     text-align: center;
     border-left: 1px solid lightblue;
+}
+td.role_nme {
+    padding-left: 23px;
+}
+td.email_row {
+    border-bottom: 1px solid lightblue;
 }
 button#permissionDeleteBtn {
     outline: none;
