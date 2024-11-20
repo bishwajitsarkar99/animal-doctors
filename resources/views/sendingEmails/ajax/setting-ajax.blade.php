@@ -47,6 +47,25 @@
                     allowClear: true
                 });
             }
+
+            // Email Record
+            if ($(this).attr('id') === 'user_roles') {
+                $(this).select2({
+                    placeholder: 'Select User Role',
+                    allowClear: true
+                });
+            } else if ($(this).attr('id') === 'user_emails') {
+                $(this).select2({
+                    placeholder: 'Select User Email',
+                    allowClear: true
+                });
+            }
+            if ($(this).attr('id') === 'selectAttachment') {
+                $(this).select2({
+                    placeholder: 'Select Email Category',
+                    allowClear: true
+                });
+            }
         });
         // Set custom placeholder for the search input inside Select2 dropdowns
         $('#select_user_role').on('select2:open', function() {
@@ -61,10 +80,23 @@
         $('#select_emails').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search emails...');
         });
+        $('#user_roles').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search roles...');
+        });
+        $('#user_emails').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search emails...');
+        });
+        $('#selectAttachment').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search Category...');
+        });
 
         // Fetch User Role
         fetch_roles();
+        fetch_role();
         fetch_user_permission_email();
+        fetch_permission_email();
+        fetch_search_email();
+        
         function fetch_roles() {
             const currentUrl = "{{ route('email.index') }}";
 
@@ -80,15 +112,43 @@
                 dataType: 'json',
                 success: function(response) {
                     const roles = response.roles;
-                    $("#select_user_role, #select_roles").empty();
-                    $("#select_user_role, #select_roles").append('<option value="" style="font-weight:600;">Select User Role</option>');
+                    $("#select_user_role").empty();
+                    $("#select_user_role").append('<option value="" style="font-weight:600;">Select User Role</option>');
                     $.each(roles, function(key, item) {
-                        $("#select_user_role, #select_roles").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.name}</option>`);
+                        $("#select_user_role").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.name}</option>`);
                     });
                 },
                 error: function() {
-                    $("#select_user_role, #select_roles").empty();
-                    $("#select_user_role, #select_roles").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
+                    $("#select_user_role").empty();
+                    $("#select_user_role").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
+                }
+            });
+        }
+
+        function fetch_role() {
+            const currentUrl = "{{ route('email.index') }}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const roles = response.roles;
+                    $("#select_roles, #user_roles").empty();
+                    $("#select_roles, #user_roles").append('<option value="" style="font-weight:600;">Select User Role</option>');
+                    $.each(roles, function(key, item) {
+                        $("#select_roles, #user_roles").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.name}</option>`);
+                    });
+                },
+                error: function() {
+                    $("#select_roles, #user_roles").empty();
+                    $("#select_roles, #user_roles").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
                 }
             });
         }
@@ -109,6 +169,14 @@
                 $("#select_emails").append('<option style="color:white;font-weight:600;" value="" disabled>Select the role</option>');
             }
         });
+        // User Email Record for search 
+        $(document).on('change', '#user_roles', function() {
+            var changeValue = $(this).val();
+            if (changeValue === '') {
+                $("#user_emails").empty();
+                $("#user_emails").append('<option style="color:white;font-weight:600;" value="" disabled>Select the role</option>');
+            }
+        });
 
         // Event listener for role dropdown
         $(document).on('change', '#select_user_role', function() {
@@ -119,6 +187,11 @@
         $(document).on('change', '#select_roles', function() {
             const selectedRole = $(this).val();
             fetch_permission_email(selectedRole);
+        });
+        // Event listener for role dropdown for search email record
+        $(document).on('change', '#user_roles', function() {
+            const selectedRole = $(this).val();
+            fetch_search_email(selectedRole);
         });
 
         // Function to fetch users based on selected role
@@ -180,6 +253,37 @@
                 error: function() {
                     $("#select_emails").empty();
                     $("#select_emails").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select the role</option>');
+                }
+            });
+        }
+        // Function to fetch users based on selected role for search email record
+        function fetch_search_email(selectedRole) {
+            if (!selectedRole) {
+                return;
+            }
+
+            const currentUrl = "{{ route('user.email', ':selectedRole') }}".replace(':selectedRole', selectedRole);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const users = response.users;
+                    $("#user_emails").empty();
+                    $.each(users, function(key, item) {
+                        $("#user_emails").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.email}</option>`);
+                    });
+                },
+                error: function() {
+                    $("#user_emails").empty();
+                    $("#user_emails").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select the role</option>');
                 }
             });
         }
@@ -332,7 +436,8 @@
                 success: function({
                     data,
                     links,
-                    total
+                    total,
+                    user_email_delete_permissions
                     
                 }) {
                     $("#delete_permission_data_table").html(table_rows([...data]));
@@ -340,11 +445,39 @@
                     $("#total_user_permission_records").text(total);
                     $('[data-bs-toggle="tooltip"]').tooltip();
 
-                    const permissionID = data.map(item => ({
-                        label: `${item.user_roles_id} - ${item.users.email}`,
-                        value: item.user_emails_id,
-                    }));
-                    $("#userSearch").autocomplete({ source: permissionID });
+                    // Handle user email send access
+                    let disableButton = '';
+                    let changeButtonDelete = '';
+
+                    // Check if permissions array is valid
+                    if (Array.isArray(user_email_delete_permissions) && user_email_delete_permissions.length > 0) {
+                        const rowItem = user_email_delete_permissions[0];
+
+                        // Update button state based on email_service value
+                        if (rowItem?.email_service === 0) {
+                            disableButton = 'disabled';
+                            changeButtonDelete = '';
+                        } else {
+                            disableButton = '';
+                            changeButtonDelete = 'background-color: gainsboro; border-radius: 50%;';
+                        }
+                    } else {
+                        console.log('No permissions available or invalid permissions data.');
+                    }
+
+                    // Apply values and attributes to buttons
+                    const value = disableButton === '' ? rowItem?.id || '' : '';
+
+                    $("#forwardSubmit")
+                        .val(value)
+                        .attr('disabled', disableButton === 'disabled');
+
+                    $("#submit")
+                        .val(value)
+                        .attr('disabled', disableButton === 'disabled');
+
+                    // Optionally, apply styles if needed
+                    $("#forwardSubmit, #submit").attr('style', changeButtonDelete);
                 }
 
             });
@@ -540,7 +673,7 @@
             $("#permission_success_message").empty();
         });
 
-        // Update Email Delete Permission
+        // Confirm Update Email Delete Permission
         $(document).on('click', '#update_btn_confirm', function(e){
             e.preventDefault();
 

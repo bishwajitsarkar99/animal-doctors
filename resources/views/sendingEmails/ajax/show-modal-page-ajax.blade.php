@@ -138,11 +138,22 @@
             e.preventDefault();
             $("#fileDirectoryModal").modal('show');
         });
-
         // Setting Data get according to month
         $("#DataGet").on('click', function(e){
             e.preventDefault();
             $("#settingDataGetDateRange").modal('show');
+
+            var time = null;
+            var time = setTimeout(() => {
+                removeAttributeOrClass([
+                    {selector: '.input_date,.input_date_two,.setting_title,.setting_close', type: 'class', name: 'text-skeletone'},
+                    {selector: '#settingCancel', type: 'class', name: 'setting-cancel-btn-skeletone'},
+                ]);
+            }, 1000);
+
+            return ()=>{
+                clearTimeout(time);
+            }
         });
 
     });

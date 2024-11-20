@@ -302,7 +302,7 @@ a#email_setting:hover{
     background-color: #3b71ca;
 }
 button#v-pills-email-tab,button#v-pills-inbox-tab,button#v-pills-send-tab,button#v-pills-draft-tab,
-button#v-pills-file-tab,button#v-pills-settings-tab{
+button#v-pills-file-tab,button#v-pills-settings-tab,button#v-pills-record-tab{
     outline: none;
     box-shadow: none;
     font-family: var(--nav-font-family);
@@ -314,7 +314,7 @@ button#v-pills-file-tab,button#v-pills-settings-tab{
     text-align: left;
 }
 button#v-pills-email-tab:hover,button#v-pills-inbox-tab:hover,button#v-pills-send-tab:hover
-,button#v-pills-draft-tab:hover,button#v-pills-file-tab:hover,button#v-pills-settings-tab:hover{
+,button#v-pills-draft-tab:hover,button#v-pills-file-tab:hover,button#v-pills-settings-tab:hover,button#v-pills-record-tab:hover{
     background-image: var(--nav-button-background);
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
@@ -465,7 +465,7 @@ button.search_btn:hover{
     border-color: #007bff;
     opacity: 1;
 }
-#start_date,#send_start_date,#draft_start_date,#start_setting_date{
+#start_date,#send_start_date,#draft_start_date,#start_setting_date,#record_start_date,#record_end_date{
     font-family: var(--nav-font-family);
     box-shadow: none;
     cursor: pointer;
@@ -516,7 +516,7 @@ select#select_attachment,select#select_status,select#select_attachment_email,sel
 input#start_date:focus,input#end_date:focus,input#email_search:focus,input#send_email_search:focus,select#select_attachment:focus,select#select_status:focus
 ,select#select_attachment_email:focus,select#select_status_email:focus,input#send_start_date:focus,input#send_end_date:focus,input#draft_email_search:focus
 ,input#draft_start_date:focus,input#draft_end_date:focus,select#select_attachment_draft:focus,input#userSearch:focus,input#start_setting_date:focus,
-input#end_setting_date:focus{
+input#end_setting_date:focus,input#record_start_date:focus,input#record_end_date:focus{
     /* border-color: dodgerblue; */
     border: 2px solid dodgerblue;
 }
@@ -628,12 +628,20 @@ button#forwardBtn,button#sendForwardBtn,button#draftForwardBtn{
     border: none;
     background-color: #fff;
 }
-button#checkBtn:hover,button#viewBtn:hover,button#deleteBtn:hover,button#forwardBtn:hover,button#sendForwardBtn:hover,button#draftForwardBtn:hover{
+button#viewBtn:hover,button#deleteBtn:hover,button#forwardBtn:hover,button#sendForwardBtn:hover,button#draftForwardBtn:hover{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     border-radius: 50%;
     background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     color: black;
+}
+button#checkBtn:hover{
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    border-radius: 50%;
+    background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    color: black;
+    margin-top: -5px;
 }
 tr.user-table-row{
     background-color: white;
@@ -906,7 +914,7 @@ img#tableLoaderShow {
     text-align: center;
 }
 .text-skeletone,.tabskeletone,.skeletone,.email-skeletone,.btn-skeletone,.svg_skeletone,.link-btn-skeletone,.logo-skeletone,
-.min-dropdown-skeletone,.timzon-skeletone,.select-skeletone{
+.min-dropdown-skeletone,.timzon-skeletone,.select-skeletone,.setting-cancel-btn-skeletone{
     position: relative;
     background-color: rgb(0, 0, 0, 0.06);
 }
@@ -1031,6 +1039,21 @@ img#tableLoaderShow {
     background-size: 200%;
     animation: 1s infinite reverse skeleton;
     border-radius: 5px;
+    margin-top: -2px;
+    margin-left: -2px;
+}
+.setting-cancel-btn-skeletone::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 105%;
+    height: 115%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 2px;
     margin-top: -2px;
     margin-left: -2px;
 }

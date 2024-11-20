@@ -27,6 +27,15 @@ class EmailServiceProvider
     */ 
     public function viewEmailTemplate(Request $request)
     {
+        $authUser = Auth::user();
+        $authID = $authUser->id;
+        $authEmail = $authUser->email;
+        // Get Permission For User Email Access
+        $user_email_delete_permissions = UserEmailDeletePermission::where('user_roles_id', $authID)
+                                                                ->orWhere('user_emails_id', $authEmail)
+                                                                ->orderByDesc('id')
+                                                                ->get();
+
         $startDay = Carbon::now()->startOfDay();
         $endDay = Carbon::now()->endOfDay();
 
@@ -38,7 +47,7 @@ class EmailServiceProvider
     
         $roles = Role::whereIn('id', [0, 1, 2, 3, 4, 5, 6, 7])->get();
     
-        $query = UserEmailDeletePermission::with('roles', 'users');
+        $query = UserEmailDeletePermission::with('roles', 'users')->orderBy('id', 'desc');
     
         // Apply Filters
         if (!empty($user_roles_id)) {
@@ -67,6 +76,7 @@ class EmailServiceProvider
                 'data' => $data->items(),
                 'links' => $data->toArray()['links'],
                 'total' => $data->total(),
+                'user_email_delete_permissions' => $user_email_delete_permissions,
             ], 200);
         }
 
@@ -593,6 +603,10 @@ class EmailServiceProvider
         if (!$request->ajax()) {
             return abort(404);
         }
+
+        $authUser = Auth::user();
+        $authID = $authUser->id;
+        $authEmail = $authUser->email;
     
         // Input filters
         $draft_start_date = $request->input('draft_start_date');
@@ -620,7 +634,6 @@ class EmailServiceProvider
         }
     
         // Query setup
-        $authID = Auth::user()->id;
         $query = UserEmail::whereNotIn('attachment_type', ['report', 'message'])
             ->where('sender_user', '=', $authID)
             ->with(['roles'])
@@ -639,6 +652,12 @@ class EmailServiceProvider
         if ($subject) {
             $query->where('subject', 'LIKE', '%' . $subject . '%');
         }
+
+        // Get Permission For Delete
+        $user_email_delete_permissions = UserEmailDeletePermission::where('user_roles_id', $authID)
+                                                                ->orWhere('user_emails_id', $authEmail)
+                                                                ->orderByDesc('id')
+                                                                ->get();
     
         // Count total emails sent by the authenticated user
         $total_draft_emails = UserEmail::whereNotIn('attachment_type', ['report', 'message'])
@@ -654,6 +673,7 @@ class EmailServiceProvider
             'links' => $data['links'],
             'total' => $data['total'],
             'total_draft_emails' => $total_draft_emails,
+            'user_email_delete_permissions' => $user_email_delete_permissions,
             'months' => $months,
             'years' => array_values($years),
         ], 200);

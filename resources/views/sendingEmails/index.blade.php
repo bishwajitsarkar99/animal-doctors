@@ -39,6 +39,10 @@
             <i class="fa-solid fa-folder-open"></i>
             <span class="btn-text file_directory_page"> Attachment Folder</span>
           </button>
+          <button class="nav-link" id="v-pills-record-tab" data-bs-toggle="pill" data-bs-target="#v-pills-record" type="button" role="tab" aria-controls="v-pills-record" aria-selected="false">
+            <i class="fa-solid fa-wifi"></i>
+            <span class="btn-text email_record_page"> Email Record</span>
+          </button>
           <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">
             <i class="fa-solid fa-gear"></i>
             <span class="btn-text email_setting"> Setting</span>
@@ -60,6 +64,9 @@
           </div>
           @if(auth()->user()->role == 1)
           <div class="tab-pane fade" id="v-pills-file" role="tabpanel" aria-labelledby="v-pills-file-tab">Attachment Folder</div>
+          <div class="tab-pane fade" id="v-pills-record" role="tabpanel" aria-labelledby="v-pills-record-tab">
+            @include('sendingEmails.email_record')
+          </div>
           <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
             @include('sendingEmails.setting')
           </div>
@@ -216,29 +223,29 @@
   <div class="modal-dialog modal-sm modal-dialog-centered">
     <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
       <div class="modal-header" id="logoutModal_header">
-        <h6 class="modal-title admin_title scan confirm_title pt-1" id="staticBackdropLabel">
+        <h6 class="modal-title admin_title scan setting_title text-skeletone pt-1" id="staticBackdropLabel">
           Setting Data Pull
         </h6>
-        <button type="button" class="btn-close btn-btn-sm head_btn2" data-bs-dismiss="modal" aria-label="Close" 
+        <button type="button" class="btn-close btn-btn-sm head_btn2 setting_close text-skeletone" data-bs-dismiss="modal" aria-label="Close" 
           data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
         </button>
         </div>
         <div class="modal-body" id="logoutModal_body">
           <div class="row">
             <div class="col-xl-6">
-              <span class="input_date">
+              <span class="input_date text-skeletone">
                 <input type="text" class="form-control form-control-sm start_setting_date ps-1" name="start_setting_date" placeholder="Start Date" autocomplete="off" id="start_setting_date">
               </span>
             </div>
             <div class="col-xl-6">
-              <span class="input_date">
+              <span class="input_date_two text-skeletone">
                 <input type="text" class="form-control form-control-sm end_setting_date ps-1" name="end_setting_date" placeholder="End Date" autocomplete="off" id="end_setting_date">
               </span>
             </div>
           </div>
         </div>
         <div class="modal-footer" id="logoutModal_footer">
-          <button type="button" class="btn btn-sm cgt_btn confirm_cancel_button btn_focus" id="supp_delt4" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-sm cgt_btn confirm_cancel_button btn_focus setting-cancel-btn-skeletone" id="settingCancel" data-bs-dismiss="modal">Cancel</button>
         </div>    
       </div>
     </div>
@@ -329,6 +336,17 @@
       changeYear: true,
     });
     $('#end_setting_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
+    // Email Record Date Picker
+    $('#record_start_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
+    $('#record_end_date').datepicker({
       dateFormat: "dd-mm-yy",
       changeMonth: true,
       changeYear: true,
