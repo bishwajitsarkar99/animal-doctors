@@ -111,19 +111,20 @@
         }
 
         // Checkbox checking
-        $("#report_status, #message_status, #darft_status, #other_status, #report_email_forward, #message_email_forward, #email_service").on('change', () => {
+        $("#report_status, #message_status, #darft_status, #report_email_forward_sendbox, #report_status_sendbox,#report_email_forward, #message_email_forward, #email_service").on('change', () => {
             var email_service = $("#email_service").is(':checked');
             var report_status = $("#report_status").is(':checked');
             var message_status = $("#message_status").is(':checked');
             var darft_status = $("#darft_status").is(':checked');
-            var other_status = $("#other_status").is(':checked');
+            var report_email_forward_sendbox = $("#report_email_forward_sendbox").is(':checked');
+            var report_status_sendbox = $("#report_status_sendbox").is(':checked');
             var report_email_forward = $("#report_email_forward").is(':checked');
             var message_email_forward = $("#message_email_forward").is(':checked');
 
             $("#statusJustify").attr('hidden', true);
             $("#statusDeny").attr('hidden', true);
 
-            if (report_status || message_status || darft_status || other_status || report_email_forward || message_email_forward || email_service) {
+            if (report_status || message_status || darft_status || report_email_forward || message_email_forward || email_service || report_email_forward_sendbox || report_status_sendbox) {
                 $("#statusJustify").removeAttr('hidden');
             } else {
                 $("#statusDeny").removeAttr('hidden');
@@ -156,6 +157,8 @@
             $("input[name='email_service']").prop('checked', false);
             $("input[name='report_email_forward']").prop('checked', false);
             $("input[name='message_email_forward']").prop('checked', false);
+            $("input[name='report_email_forward_sendbox']").prop('checked', false);
+            $("input[name='report_status_sendbox']").prop('checked', false);
         }
 
         fetch_user_email_delete_permission();
@@ -164,7 +167,7 @@
             if (rows.length === 0) {
                 return `
                     <tr>
-                        <td class="error_data text-danger" align="center" colspan="11">
+                        <td class="error_data text-danger" align="center" colspan="12">
                             User Email Delete Permission Data Not Exists On Server!
                         </td>
                     </tr>
@@ -177,23 +180,13 @@
                     <td class="ps-1 font table_body2 eml">${row.roles && row.roles.name ? row.roles.name : 'No Role'}</td>
                     <td class="ps-1 font table_body3 eml">${row.users && row.users.email ? row.users.email : 'No Email'}</td>
                     <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.email_service ? 'text-dark' : 'text-danger'}">
+                            ${row.email_service ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
                         <span class="permission-plates permission ps-1 ${row.report_status ? 'text-dark' : 'text-danger'}">
                             ${row.report_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
-                        </span>
-                    </td>
-                    <td class="ps-1 font table_body4" id="supp_tab15">
-                        <span class="permission-plates permission ps-1 ${row.message_status ? 'text-dark' : 'text-danger'}">
-                            ${row.message_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
-                        </span>
-                    </td>
-                    <td class="ps-1 font table_body4" id="supp_tab15">
-                        <span class="permission-plates permission ps-1 ${row.darft_status ? 'text-dark' : 'text-danger'}">
-                            ${row.darft_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
-                        </span>
-                    </td>
-                    <td class="ps-1 font table_body4" id="supp_tab15">
-                        <span class="permission-plates permission ps-1 ${row.other_status ? 'text-dark' : 'text-danger'}">
-                            ${row.other_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
                         </span>
                     </td>
                     <td class="ps-1 font table_body4" id="supp_tab15">
@@ -202,13 +195,28 @@
                         </span>
                     </td>
                     <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.message_status ? 'text-dark' : 'text-danger'}">
+                            ${row.message_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
                         <span class="permission-plates permission ps-1 ${row.message_email_forward ? 'text-dark' : 'text-danger'}">
                             ${row.message_email_forward ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
                         </span>
                     </td>
                     <td class="ps-1 font table_body4" id="supp_tab15">
-                        <span class="permission-plates permission ps-1 ${row.email_service ? 'text-dark' : 'text-danger'}">
-                            ${row.email_service ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        <span class="permission-plates permission ps-1 ${row.report_status_sendbox ? 'text-dark' : 'text-danger'}">
+                            ${row.report_status_sendbox ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.report_email_forward_sendbox ? 'text-dark' : 'text-danger'}">
+                            ${row.report_email_forward_sendbox ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
+                        </span>
+                    </td>
+                    <td class="ps-1 font table_body4" id="supp_tab15">
+                        <span class="permission-plates permission ps-1 ${row.darft_status ? 'text-dark' : 'text-danger'}">
+                            ${row.darft_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span>' : '❌'}
                         </span>
                     </td>
                     <td class="ps-1 font table_body5" id="supp_tab15">
@@ -250,10 +258,10 @@
                     $('[data-bs-toggle="tooltip"]').tooltip();
 
                     const permissionID = data.map(item => ({
-                        label: `${item.id} - ${item.users.email}`,
-                        value: item.id,
+                        label: `${item.user_roles_id} - ${item.users.email}`,
+                        value: item.user_emails_id,
                     }));
-                    $("#roleSearch").autocomplete({ source: permissionID });
+                    $("#userSearch").autocomplete({ source: permissionID });
                 }
 
             });
@@ -268,7 +276,7 @@
         });
 
         // Live-Search-----------------------------
-        $(document).on('keyup', '#roleSearch', function() {
+        $(document).on('keyup', '#userSearch', function() {
             var query = $(this).val();
             fetch_user_email_delete_permission(query);
         });
@@ -318,8 +326,9 @@
             var reportStatus = $("input[name='report_status']:checked").val();
             var messageStatus = $("input[name='message_status']:checked").val();
             var darftStatus = $("input[name='darft_status']:checked").val();
-            var otherStatus = $("input[name='other_status']:checked").val();
-            var emailAccess = $("input[name='email_service']:checked").val();
+            var reportEmailForwardSendbox = $("input[name='report_email_forward_sendbox']:checked").val();
+            var reportStatusSendbox = $("input[name='report_status_sendbox']:checked").val();
+            var emailService = $("input[name='email_service']:checked").val();
             var reportEmailForward = $("input[name='report_email_forward']:checked").val();
             var messageEmailForward = $("input[name='message_email_forward']:checked").val();
             
@@ -328,9 +337,6 @@
             }
             if (!userEmail) {
                 $("#select_user_email").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the user email.</span>');
-            }
-            if (!otherStatus) {
-                $("#other_status").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Other is required.</span>');
             }
 
             // Check if there are any error messages
@@ -344,11 +350,12 @@
                 'user_emails_id': $('#select_user_email').val(),
                 'report_status': reportStatus ? 1 : 0,
                 'message_status': messageStatus ? 1 : 0,
-                'darft_status': darftStatus ? 1 : 0,
-                'other_status': otherStatus ? 1 : 0,
-                'email_service': emailAccess ? 1 : 0,
+                'darft_status': darftStatus ? 0 : 1,
+                'email_service': emailService ? 0 : 1,
                 'report_email_forward': reportEmailForward ? 1 : 0,
-                'message_email_forward': messageEmailForward ? 1 : 0,
+                'message_email_forward': messageEmailForward ? 0 : 1,
+                'report_email_forward_sendbox': reportEmailForwardSendbox ? 1 : 0,
+                'report_status_sendbox': reportStatusSendbox ? 0 : 1,
             };
 
             $.ajaxSetup({
@@ -419,12 +426,13 @@
                         $('#report_status').prop('checked', response.messages.report_status == 1);
                         $('#message_status').prop('checked', response.messages.message_status == 1);
                         $('#darft_status').prop('checked', response.messages.darft_status == 1);
-                        $('#other_status').prop('checked', response.messages.other_status == 1);
                         $('#email_service').prop('checked', response.messages.email_service == 1);
                         $('#report_email_forward').prop('checked', response.messages.report_email_forward == 1);
                         $('#message_email_forward').prop('checked', response.messages.message_email_forward == 1);
+                        $('#report_email_forward_sendbox').prop('checked', response.messages.report_email_forward_sendbox == 1);
+                        $('#report_status_sendbox').prop('checked', response.messages.report_status_sendbox == 1);
                         
-                        if ($('#other_status').is(':checked')) {
+                        if ($('#email_service').is(':checked')) {
                             $("#statusJustify").removeAttr('hidden');
                             $("#statusDeny").attr('hidden', true);
                         } else {
@@ -455,19 +463,17 @@
             var reportStatus = $("input[name='report_status']:checked").val();
             var messageStatus = $("input[name='message_status']:checked").val();
             var darftStatus = $("input[name='darft_status']:checked").val();
-            var otherStatus = $("input[name='other_status']:checked").val();
-            var emailAccess = $("input[name='email_service']:checked").val();
+            var emailService = $("input[name='email_service']:checked").val();
             var reportEmailForward = $("input[name='report_email_forward']:checked").val();
             var messageEmailForward = $("input[name='message_email_forward']:checked").val();
+            var reportEmailForwardSendbox = $("input[name='report_email_forward_sendbox']:checked").val();
+            var reportStatusSendbox = $("input[name='report_status_sendbox']:checked").val();
 
             if (!roleName) {
                 $("#select_user_role").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the role name.</span>');
             }
             if (!userEmail) {
                 $("#select_user_email").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the user email.</span>');
-            }
-            if (!otherStatus) {
-                $("#other_status").closest('.role_nme').append('<span class="error-message alert_show_errors">Permission status is required.</span>');
             }
 
             if ($('.error-message').length > 0) {
@@ -482,10 +488,12 @@
                 'report_status': reportStatus ? 1 : 0,
                 'message_status': messageStatus ? 1 : 0,
                 'darft_status': darftStatus ? 1 : 0,
-                'other_status': otherStatus ? 1 : 0,
-                'email_service': emailAccess ? 1 : 0,
+
+                'email_service': emailService ? 1 : 0,
                 'report_email_forward': reportEmailForward ? 1 : 0,
                 'message_email_forward': messageEmailForward ? 1 : 0,
+                'report_email_forward_sendbox': reportEmailForwardSendbox ? 1 : 0,
+                'report_status_sendbox': reportStatusSendbox ? 1 : 0,
             }
 
             $.ajaxSetup({

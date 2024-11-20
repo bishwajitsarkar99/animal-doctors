@@ -27,25 +27,36 @@ class EmailServiceProvider
     */ 
     public function viewEmailTemplate(Request $request)
     {
-        $roles = Role::whereIn('id', [0, 1, 2, 3, 4, 5, 6, 7])->get();
-        $dataQuery = UserEmailDeletePermission::with('roles', 'users')->orderBy('id', 'desc');
     
-        if ($query = $request->get('query')) {
-            $dataQuery->where(function($queryBuilder) use ($query) {
-                $queryBuilder->where('id', 'LIKE', '%' . $query . '%');
+        $startDay = Carbon::now()->startOfDay();
+        $endDay = Carbon::now()->endOfDay();
+    
+        $roles = Role::whereIn('id', [0, 1, 2, 3, 4, 5, 6, 7])->get();
+    
+        $query = UserEmailDeletePermission::with('roles', 'users')
+            ->orderBy('id', 'desc')
+            ->whereBetween('created_at', [$startDay, $endDay]);
+    
+        if ($searchQuery = $request->get('query')) {
+            $query->where(function ($q) use ($searchQuery) {
+                $q->where('user_emails_id', 'LIKE', $searchQuery)
+                  ->orWhere('user_roles_id', 'LIKE', $searchQuery)
+                  ->orWhere('id', 'LIKE', $searchQuery);
             });
         }
+    
         $perItem = $request->input('per_item', 10);
-        $data = $dataQuery->paginate($perItem);
-
+        $data = $query->paginate($perItem);
+    
         if ($request->expectsJson()) {
             return response()->json([
                 'roles' => $roles,
                 'data' => $data->items(),
-                'links' => $data->links(),
+                'links' => $data->toArray()['links'],
                 'total' => $data->total(),
-            ]);
+            ], 200);
         }
+
         $user_email = Auth::user()->email;
         $user_id = Auth::user()->id;
         // Total Email
@@ -186,6 +197,23 @@ class EmailServiceProvider
 
         // inbox Email Store
         DB::table('user_inbox_emails')->insert([
+            'user_to' => $request->user_to,
+            'user_cc' => $request->user_cc ?? 'N/A',
+            'user_bcc' => $request->user_bcc ?? 'N/A',
+            'subject' => $request->subject ?? 'No Subject',
+            'main_content' => $content ?? 'No Content',
+            'email_attachments' => json_encode($attachments),
+            'attachment_type' => $request->attachment_type ?? 'other',
+            'sender_email' => Auth::user()->email,
+            'sender_user' => Auth::user()->id,
+            'status' => $request->status ? '1' : '0',
+            'read_mail' => $request->status ? '1' : '0',
+            'draft_mail' => $draftMailStatus,
+            'created_at' => now(),
+        ]);
+
+        // inbox Email Store
+        DB::table('email_records')->insert([
             'user_to' => $request->user_to,
             'user_cc' => $request->user_cc ?? 'N/A',
             'user_bcc' => $request->user_bcc ?? 'N/A',
@@ -664,13 +692,10 @@ class EmailServiceProvider
         $validator = Validator::make($request->all(), [
             'user_roles_id' => 'required|exists:roles,id',
             'user_emails_id' => 'required|unique:user_email_delete_permissions,user_emails_id',
-            'other_status' => 'required|in:0,1',
         ], [
             'user_roles_id.required' => 'Role is required',
             'user_roles_id.exists' => 'The selected role does not exist',
             'user_emails_id.unique' => 'This email has already taken.',
-            'other_status.required' => 'other status field is required',
-            'other_status.in' => 'other status must be true (1) or false (0)',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -684,10 +709,11 @@ class EmailServiceProvider
             $userEmailDeletePermissions->report_status = $request->input('report_status');
             $userEmailDeletePermissions->message_status = $request->input('message_status');
             $userEmailDeletePermissions->darft_status = $request->input('darft_status');
-            $userEmailDeletePermissions->other_status = $request->input('other_status');
             $userEmailDeletePermissions->email_service = $request->input('email_service');
             $userEmailDeletePermissions->report_email_forward = $request->input('report_email_forward');
             $userEmailDeletePermissions->message_email_forward = $request->input('message_email_forward');
+            $userEmailDeletePermissions->report_email_forward_sendbox = $request->input('report_email_forward_sendbox');
+            $userEmailDeletePermissions->report_status_sendbox = $request->input('report_status_sendbox');
             $userEmailDeletePermissions->save();
             return response()->json([
                 'messages' => 'permission has been created.',
@@ -726,14 +752,11 @@ class EmailServiceProvider
                 'required',
                 Rule::unique('user_email_delete_permissions', 'user_emails_id')->ignore($id),
             ],
-            'other_status' => 'required|in:0,1',
         ], [
             'user_roles_id.required' => 'Role is required',
             'user_roles_id.exists' => 'The selected role does not exist',
             'user_emails_id.required' => 'Email field is required',
             'user_emails_id.unique' => 'This email has already been taken.',
-            'other_status.required' => 'Other status field is required',
-            'other_status.in' => 'Other status must be true (1) or false (0)',
         ]);
     
         if ($validator->fails()) {
@@ -749,10 +772,11 @@ class EmailServiceProvider
                 $userEmailDeletePermissions->report_status = $request->input('report_status');
                 $userEmailDeletePermissions->message_status = $request->input('message_status');
                 $userEmailDeletePermissions->darft_status = $request->input('darft_status');
-                $userEmailDeletePermissions->other_status = $request->input('other_status');
                 $userEmailDeletePermissions->email_service = $request->input('email_service');
                 $userEmailDeletePermissions->report_email_forward = $request->input('report_email_forward');
                 $userEmailDeletePermissions->message_email_forward = $request->input('message_email_forward');
+                $userEmailDeletePermissions->report_email_forward_sendbox = $request->input('report_email_forward_sendbox');
+                $userEmailDeletePermissions->report_status_sendbox = $request->input('report_status_sendbox');
                 $userEmailDeletePermissions->save();
     
                 return response()->json([

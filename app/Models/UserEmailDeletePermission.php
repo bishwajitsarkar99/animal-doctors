@@ -20,6 +20,8 @@ class UserEmailDeletePermission extends Model
         'other_status',
         'report_email_forward',
         'message_email_forward',
+        'report_email_forward_sendbox',
+        'report_status_sendbox',
         'email_service',
     ];
     public function roles()

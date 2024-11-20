@@ -491,6 +491,15 @@ button.search_btn:hover{
     font-size: 12px;
     font-weight: 700;
 }
+#userSearch{
+    font-family: var(--nav-font-family);
+    box-shadow: 0px 2px 20px #0001;
+    border: 1px solid #ebebeb;
+    height: 1.3em;
+    color: #606060;
+    font-size: 12px;
+    font-weight: 700;
+}
 select#select_attachment,select#select_status,select#select_attachment_email,select#select_status_email,select#select_attachment_draft{
     font-family: var(--nav-font-family);
     box-shadow: none;
@@ -503,7 +512,7 @@ select#select_attachment,select#select_status,select#select_attachment_email,sel
 }
 input#start_date:focus,input#end_date:focus,input#email_search:focus,input#send_email_search:focus,select#select_attachment:focus,select#select_status:focus
 ,select#select_attachment_email:focus,select#select_status_email:focus,input#send_start_date:focus,input#send_end_date:focus,input#draft_email_search:focus
-,input#draft_start_date:focus,input#draft_end_date:focus,select#select_attachment_draft:focus{
+,input#draft_start_date:focus,input#draft_end_date:focus,select#select_attachment_draft:focus,input#userSearch:focus{
     /* border-color: dodgerblue; */
     border: 2px solid dodgerblue;
 }
@@ -1203,10 +1212,11 @@ td#supp_tab15 {
     border-left: 1px solid lightblue;
 }
 td.role_nme {
-    padding-left: 23px;
+    padding-left: 3px;
 }
 td.email_row {
     border-bottom: 1px solid lightblue;
+    font-weight: 600;
 }
 button#permissionDeleteBtn {
     outline: none;

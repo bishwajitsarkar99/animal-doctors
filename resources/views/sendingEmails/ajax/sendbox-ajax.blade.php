@@ -37,20 +37,27 @@
                 // Handle user delete report or message email permissions
                 let disableButton = '';
                 let disableForwardButton = '';
+                let changeButton = '';
+                let changeButtonDelete = '';
+
                 if (Array.isArray(user_email_delete_permissions) && user_email_delete_permissions.length > 0) {
                     const rowItem = user_email_delete_permissions[0];
 
                     if (row.attachment_type === 'report') {
-                        if (rowItem?.report_status === 0) {
+                        if (rowItem?.report_status === 1) {
                             disableButton = 'disabled';
+                            changeButtonDelete = '';
                         } else {
                             disableButton = '';
+                            changeButtonDelete = 'background-color: gainsboro;border-radius: 50%;';
                         }
                     } else if (row.attachment_type === 'message') {
-                        if (rowItem?.message_status === 0) {
+                        if (rowItem?.message_status === 1) {
                             disableButton = 'disabled';
+                            changeButtonDelete = '';
                         } else {
                             disableButton = '';
+                            changeButtonDelete = 'background-color: gainsboro;border-radius: 50%;';
                         }
                     }
                 } else {
@@ -63,14 +70,18 @@
                     if (row.attachment_type === 'report') {
                         if (rowItem?.report_email_forward === 0) {
                             disableForwardButton = 'disabled';
+                            changeButton = '';
                         } else {
                             disableForwardButton = '';
+                            changeButton = 'background-color: gainsboro;border-radius: 50%;';
                         }
                     } else if (row.attachment_type === 'message') {
                         if (rowItem?.message_email_forward === 0) {
                             disableForwardButton = 'disabled';
+                            changeButton = '';
                         } else {
                             disableForwardButton = '';
+                            changeButton = 'background-color: gainsboro;border-radius: 50%;';
                         }
                     }
                 } else {
@@ -160,10 +171,10 @@
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-regular fa-eye fa-beat" style="margin-top: 1px;"></i>
                             </button>
-                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="sendForwardBtn" value="${forwardValue}" style="font-size: 10px;" ${disableForwardButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="sendForwardBtn" value="${forwardValue}" style="font-size: 10px; ${changeButton}" ${disableForwardButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-solid fa-share-nodes fa-beat" style="margin-top: 1px;"></i>
                             </button>
-                            <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${value}" style="font-size: 10px;" ${disableButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${value}" style="font-size: 10px; ${changeButtonDelete}" ${disableButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                                 <i class="fa-solid fa-trash-can fa-beat"></i>
                             </button>
                             <span class="child-td1 ps-1">To : ${fromEmail ? fromEmail : row.user_to}</span>
