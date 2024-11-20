@@ -139,5 +139,11 @@
             $("#fileDirectoryModal").modal('show');
         });
 
+        // Setting Data get according to month
+        $("#DataGet").on('click', function(e){
+            e.preventDefault();
+            $("#settingDataGetDateRange").modal('show');
+        });
+
     });
 </script>

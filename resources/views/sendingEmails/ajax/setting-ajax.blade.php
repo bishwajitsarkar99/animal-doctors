@@ -1,14 +1,26 @@
 <script type="module">
+    import { currentDate } from "/module/module-min-js/helper-function-min.js";
     import { buttonLoader } from "/module/module-min-js/design-helper-function-min.js";
 
 
     $(document).ready(function(){
+        // Get Current Date and set it for start_date and end_date fields
+        const startDateField = document.getElementById('start_setting_date');
+        const endDateField = document.getElementById('end_setting_date');
+
+        if (startDateField) {
+            startDateField.value = currentDate();
+        }
+        if (endDateField) {
+            endDateField.value = currentDate();
+        }
         // Initialize the button loader for the login button
         buttonLoader('#PermissionSubmit', '.submt-icon', '.submt-btn-text', 'Submit...', 'Submit', 1000);
         buttonLoader('#PermissionUpdate', '.updt-icon', '.setting-update-btn-text', 'Setting Update...', 'Setting Update', 1000);
         buttonLoader('#PermissionCancel', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
         buttonLoader('#update_btn_confirm', '.update-confirm-icon', '.update-confirm-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#confirm_delete_btn', '.elete-confirm-icon', '.delete-confirm-btn-text', 'Delete...', 'Delete', 1000);
+        buttonLoader('#DataGet', '.data-get-icon', '.data-get-btn-text', 'Data...', 'Data Get', 1000);
         // Initialize Select2 for all elements with the 'select2' class
         $('.select2').each(function() {
             // Check the ID or name to set specific options
@@ -23,12 +35,30 @@
                     allowClear: true
                 });
             }
+
+            if ($(this).attr('id') === 'select_roles') {
+                $(this).select2({
+                    placeholder: 'Select User Role',
+                    allowClear: true
+                });
+            } else if ($(this).attr('id') === 'select_emails') {
+                $(this).select2({
+                    placeholder: 'Select User Email',
+                    allowClear: true
+                });
+            }
         });
         // Set custom placeholder for the search input inside Select2 dropdowns
         $('#select_user_role').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search roles...');
         });
         $('#select_user_email').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search emails...');
+        });
+        $('#select_roles').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search roles...');
+        });
+        $('#select_emails').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search emails...');
         });
 
@@ -50,15 +80,15 @@
                 dataType: 'json',
                 success: function(response) {
                     const roles = response.roles;
-                    $("#select_user_role").empty();
-                    $("#select_user_role").append('<option value="" style="font-weight:600;">Select User Role</option>');
+                    $("#select_user_role, #select_roles").empty();
+                    $("#select_user_role, #select_roles").append('<option value="" style="font-weight:600;">Select User Role</option>');
                     $.each(roles, function(key, item) {
-                        $("#select_user_role").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.name}</option>`);
+                        $("#select_user_role, #select_roles").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.name}</option>`);
                     });
                 },
                 error: function() {
-                    $("#select_user_role").empty();
-                    $("#select_user_role").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
+                    $("#select_user_role, #select_roles").empty();
+                    $("#select_user_role, #select_roles").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
                 }
             });
         }
@@ -71,11 +101,24 @@
                 $("#select_user_email").append('<option style="color:white;font-weight:600;" value="" disabled>Select the role</option>');
             }
         });
+        // User email handle for search email---Setting Data
+        $(document).on('change', '#select_roles', function() {
+            var changeValue = $(this).val();
+            if (changeValue === '') {
+                $("#select_emails").empty();
+                $("#select_emails").append('<option style="color:white;font-weight:600;" value="" disabled>Select the role</option>');
+            }
+        });
 
         // Event listener for role dropdown
         $(document).on('change', '#select_user_role', function() {
             const selectedRole = $(this).val();
             fetch_user_permission_email(selectedRole);
+        });
+        // Event listener for role dropdown for search email---Setting Data
+        $(document).on('change', '#select_roles', function() {
+            const selectedRole = $(this).val();
+            fetch_permission_email(selectedRole);
         });
 
         // Function to fetch users based on selected role
@@ -106,6 +149,37 @@
                 error: function() {
                     $("#select_user_email").empty();
                     $("#select_user_email").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select the role</option>');
+                }
+            });
+        }
+        // Function to fetch users based on selected role for search email---Setting Data
+        function fetch_permission_email(selectedRole) {
+            if (!selectedRole) {
+                return;
+            }
+
+            const currentUrl = "{{ route('user.email', ':selectedRole') }}".replace(':selectedRole', selectedRole);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const users = response.users;
+                    $("#select_emails").empty();
+                    $.each(users, function(key, item) {
+                        $("#select_emails").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.email}</option>`);
+                    });
+                },
+                error: function() {
+                    $("#select_emails").empty();
+                    $("#select_emails").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select the role</option>');
                 }
             });
         }
@@ -168,7 +242,7 @@
                 return `
                     <tr>
                         <td class="error_data text-danger" align="center" colspan="12">
-                            User Email Delete Permission Data Not Exists On Server!
+                            User Email Setting Permission Not Exists On Server!
                         </td>
                     </tr>
                 `;
@@ -231,11 +305,16 @@
             `).join("");
         };
 
-        // Get Inventory Permission Access Data
+        // Get Setting Permission Access Data
         function fetch_user_email_delete_permission(query = '', url = null, perItem = null) {
             if (perItem === null) {
                 perItem = $("#perItemControls").val();
             }
+
+            const user_roles_id = $(".select_roles").val();
+            const user_emails_id = $(".select_emails").val();
+            const start_setting_date = $("#start_setting_date").val();
+            const end_setting_date = $("#end_setting_date").val();
 
             let current_url = url ? url : `{{ route('email.index') }}?per_item=${perItem}`;
 
@@ -244,7 +323,11 @@
                 url: current_url,
                 dataType: 'json',
                 data: {
-                    query: query
+                    query: query,
+                    user_roles_id: user_roles_id,
+                    user_emails_id: user_emails_id,
+                    start_setting_date: start_setting_date,
+                    end_setting_date: end_setting_date,
                 },
                 success: function({
                     data,
@@ -274,11 +357,17 @@
 
             fetch_user_email_delete_permission('', null, value);
         });
-
-        // Live-Search-----------------------------
-        $(document).on('keyup', '#userSearch', function() {
-            var query = $(this).val();
-            fetch_user_email_delete_permission(query);
+        // Filter Role
+        $(".select_roles").on("change", function(){
+            fetch_user_email_delete_permission();
+        });
+        // Filter Email
+        $(".select_emails").on("change", function(){
+            fetch_user_email_delete_permission();
+        });
+        // Setting Data get according to date range
+        $("#start_setting_date, #end_setting_date").on('change', ()=>{
+            fetch_user_email_delete_permission(); 
         });
 
         // Paginate Page

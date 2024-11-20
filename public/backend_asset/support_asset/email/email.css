@@ -37,7 +37,7 @@ color: #333;
 #inputTo:focus, #inputCC:focus, #inputBCC:focus, #inputSubject:focus{
     border-color: dodgerblue;
 }
-button.send_button,.permission_submit,.permission_update,#update_btn_confirm,#confirm_delete_btn{
+button.send_button,.permission_submit,.permission_update,#update_btn_confirm,#confirm_delete_btn,.data_get{
     background-color: #0056b3;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
@@ -53,7 +53,10 @@ button.send_button,.permission_submit,.permission_update,#update_btn_confirm,#co
     transition: border-color 0.3s ease, background-color 0.3s ease;
     border-color: #007bff;
 }
-button.send_button:hover,.permission_submit:hover,.permission_update:hover,#update_btn_confirm:hover,#confirm_delete_btn:hover{
+button#DataGet{
+    margin-top: 0px;
+}
+button.send_button:hover,.permission_submit:hover,.permission_update:hover,#update_btn_confirm:hover,#confirm_delete_btn:hover,.data_get:hover{
     background-image: linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);color: lightblue; 
     transition: border-color 0.3s ease, background-color 0.3s ease;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
@@ -462,7 +465,7 @@ button.search_btn:hover{
     border-color: #007bff;
     opacity: 1;
 }
-#start_date,#send_start_date,#draft_start_date{
+#start_date,#send_start_date,#draft_start_date,#start_setting_date{
     font-family: var(--nav-font-family);
     box-shadow: none;
     cursor: pointer;
@@ -472,7 +475,7 @@ button.search_btn:hover{
     font-size: 12px;
     font-weight: 700;
 }
-#end_date,#send_end_date,#draft_end_date{
+#end_date,#send_end_date,#draft_end_date,#end_setting_date{
     font-family: var(--nav-font-family);
     box-shadow: none;
     cursor: pointer;
@@ -512,7 +515,8 @@ select#select_attachment,select#select_status,select#select_attachment_email,sel
 }
 input#start_date:focus,input#end_date:focus,input#email_search:focus,input#send_email_search:focus,select#select_attachment:focus,select#select_status:focus
 ,select#select_attachment_email:focus,select#select_status_email:focus,input#send_start_date:focus,input#send_end_date:focus,input#draft_email_search:focus
-,input#draft_start_date:focus,input#draft_end_date:focus,select#select_attachment_draft:focus,input#userSearch:focus{
+,input#draft_start_date:focus,input#draft_end_date:focus,select#select_attachment_draft:focus,input#userSearch:focus,input#start_setting_date:focus,
+input#end_setting_date:focus{
     /* border-color: dodgerblue; */
     border: 2px solid dodgerblue;
 }

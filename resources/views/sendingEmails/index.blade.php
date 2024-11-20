@@ -211,6 +211,39 @@
     </div>
   </div>
 </div>
+<!--  Setting Data get Date Range Modal -->
+<div class="modal fade" id="settingDataGetDateRange" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+      <div class="modal-header" id="logoutModal_header">
+        <h6 class="modal-title admin_title scan confirm_title pt-1" id="staticBackdropLabel">
+          Setting Data Pull
+        </h6>
+        <button type="button" class="btn-close btn-btn-sm head_btn2" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+        </div>
+        <div class="modal-body" id="logoutModal_body">
+          <div class="row">
+            <div class="col-xl-6">
+              <span class="input_date">
+                <input type="text" class="form-control form-control-sm start_setting_date ps-1" name="start_setting_date" placeholder="Start Date" autocomplete="off" id="start_setting_date">
+              </span>
+            </div>
+            <div class="col-xl-6">
+              <span class="input_date">
+                <input type="text" class="form-control form-control-sm end_setting_date ps-1" name="end_setting_date" placeholder="End Date" autocomplete="off" id="end_setting_date">
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" id="logoutModal_footer">
+          <button type="button" class="btn btn-sm cgt_btn confirm_cancel_button btn_focus" id="supp_delt4" data-bs-dismiss="modal">Cancel</button>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/email/email.css">
@@ -285,6 +318,17 @@
       changeYear: true,
     });
     $('#draft_end_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
+    // Setting Data Date Picker
+    $('#start_setting_date').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
+    $('#end_setting_date').datepicker({
       dateFormat: "dd-mm-yy",
       changeMonth: true,
       changeYear: true,

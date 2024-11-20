@@ -27,26 +27,39 @@ class EmailServiceProvider
     */ 
     public function viewEmailTemplate(Request $request)
     {
-    
         $startDay = Carbon::now()->startOfDay();
         $endDay = Carbon::now()->endOfDay();
+
+        // Filter
+        $user_roles_id = $request->input('user_roles_id');
+        $user_emails_id = $request->input('user_emails_id');
+        $start_setting_date = $request->input('start_setting_date');
+        $end_setting_date = $request->input('end_setting_date');
     
         $roles = Role::whereIn('id', [0, 1, 2, 3, 4, 5, 6, 7])->get();
     
-        $query = UserEmailDeletePermission::with('roles', 'users')
-            ->orderBy('id', 'desc')
-            ->whereBetween('created_at', [$startDay, $endDay]);
+        $query = UserEmailDeletePermission::with('roles', 'users');
     
-        if ($searchQuery = $request->get('query')) {
-            $query->where(function ($q) use ($searchQuery) {
-                $q->where('user_emails_id', 'LIKE', $searchQuery)
-                  ->orWhere('user_roles_id', 'LIKE', $searchQuery)
-                  ->orWhere('id', 'LIKE', $searchQuery);
-            });
+        // Apply Filters
+        if (!empty($user_roles_id)) {
+            $query->where('user_roles_id', $user_roles_id);
         }
-    
+
+        if (!empty($user_emails_id)) {
+            $query->where('user_emails_id', $user_emails_id);
+        }
+
+        // Apply date filter
+        if ($start_setting_date && $end_setting_date) {
+            $query->whereBetween('created_at', [
+                Carbon::parse($start_setting_date)->startOfDay(),
+                Carbon::parse($end_setting_date)->endOfDay(),
+            ]);
+        }
+
         $perItem = $request->input('per_item', 10);
         $data = $query->paginate($perItem);
+    
     
         if ($request->expectsJson()) {
             return response()->json([

@@ -118,8 +118,27 @@
         </div>
         <div class="col-xl-8">
             <div class="card card-body permission-data-card">
-                <div class="search-box">
-                    <input class="form-control form-control-sm email_search ps-2" type="search" name="search" placeholder="search......" id="userSearch">
+                <div class="row">
+                    <div class="col-xl-2">
+                        <button type="button" class="btn btn-sm data_get skeleton" style="text-align:left;letter-spacing: 0px;" id="DataGet">
+                            <span class="data-get-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                            <span class="data-get-btn-text">Data Get</span>
+                        </button>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="form-group custom-select skeleton">
+                            <select type="text" class="form-control form-control-sm select_roles select2" name="user_roles_id" id="select_roles">
+                                <option value="">Select User Role</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group custom-select skeleton">
+                            <select type="text" class="form-control form-control-sm select_emails select2" name="user_emails_id" id="select_emails">
+                                <option value="">Select User Email</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="table-responsive mt-1">
                     <table class="table table-sm ord_table center border-1 long-skeleton" id="SupplierSettingTable">
