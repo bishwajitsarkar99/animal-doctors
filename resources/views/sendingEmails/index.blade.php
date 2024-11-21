@@ -264,6 +264,7 @@
 @include('sendingEmails.ajax.sendbox-ajax')
 @include('sendingEmails.ajax.draft-ajax')
 @include('sendingEmails.ajax.setting-ajax')
+@include('sendingEmails.ajax.email-record-ajax')
 @include('sendingEmails.ajax.show-modal-page-ajax')
 <!-- Summar-Note -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>

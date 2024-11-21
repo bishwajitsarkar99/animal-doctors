@@ -69,6 +69,12 @@ class EmailController extends Controller
         return $this->emailServiceProvider->viewStatusUserEmail($request);
     }
 
+    // Mail Record Fetch
+    public function emailRecord(Request $request)
+    {
+        return $this->emailServiceProvider->fetchEmailRecord($request);
+    }
+
     // Delete Mail
     public function deleteEmail(Request $request)
     {

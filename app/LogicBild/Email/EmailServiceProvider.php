@@ -15,6 +15,7 @@ use App\Models\Role;
 use App\Models\UserEmail;
 use App\Models\UserInboxEmail;
 use App\Models\UserEmailDeletePermission;
+use App\Models\EmailRecord;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 
@@ -44,9 +45,10 @@ class EmailServiceProvider
         $user_emails_id = $request->input('user_emails_id');
         $start_setting_date = $request->input('start_setting_date');
         $end_setting_date = $request->input('end_setting_date');
-    
+        
+        // Role
         $roles = Role::whereIn('id', [0, 1, 2, 3, 4, 5, 6, 7])->get();
-    
+        // Email Permission
         $query = UserEmailDeletePermission::with('roles', 'users')->orderBy('id', 'desc');
     
         // Apply Filters
@@ -66,6 +68,12 @@ class EmailServiceProvider
             ]);
         }
 
+        // Email Record (get sender email)
+        $usersEmail = EmailRecord::select('id', 'sender_email')
+                                    ->whereRaw('id IN (SELECT MAX(id) FROM email_records GROUP BY sender_email)')
+                                    ->orderBy('id', 'desc')
+                                    ->get();
+
         $perItem = $request->input('per_item', 10);
         $data = $query->paginate($perItem);
     
@@ -77,6 +85,7 @@ class EmailServiceProvider
                 'links' => $data->toArray()['links'],
                 'total' => $data->total(),
                 'user_email_delete_permissions' => $user_email_delete_permissions,
+                'usersEmail' => $usersEmail,
             ], 200);
         }
 
@@ -579,6 +588,39 @@ class EmailServiceProvider
             'draft_mail' => $draftMailStatus,
             'created_at' => now(),
         ]);
+        // inbox Email Store
+        DB::table('user_inbox_emails')->insert([
+            'user_to' => $request->user_to,
+            'user_cc' => $request->user_cc ?? 'N/A',
+            'user_bcc' => $request->user_bcc ?? 'N/A',
+            'subject' => $request->subject ?? 'No Subject',
+            'main_content' => $content ?? 'No Content',
+            'email_attachments' => json_encode($attachments),
+            'attachment_type' => $request->attachment_type ?? 'other',
+            'sender_email' => Auth::user()->email,
+            'sender_user' => Auth::user()->id,
+            'status' => $request->status ? '1' : '0',
+            'read_mail' => $request->status ? '1' : '0',
+            'draft_mail' => $draftMailStatus,
+            'created_at' => now(),
+        ]);
+
+        // inbox Email Store
+        DB::table('email_records')->insert([
+            'user_to' => $request->user_to,
+            'user_cc' => $request->user_cc ?? 'N/A',
+            'user_bcc' => $request->user_bcc ?? 'N/A',
+            'subject' => $request->subject ?? 'No Subject',
+            'main_content' => $content ?? 'No Content',
+            'email_attachments' => json_encode($attachments),
+            'attachment_type' => $request->attachment_type ?? 'other',
+            'sender_email' => Auth::user()->email,
+            'sender_user' => Auth::user()->id,
+            'status' => $request->status ? '1' : '0',
+            'read_mail' => $request->status ? '1' : '0',
+            'draft_mail' => $draftMailStatus,
+            'created_at' => now(),
+        ]);
 
         try {
             // Send the email with attachments using the UserMail class
@@ -697,6 +739,88 @@ class EmailServiceProvider
             'messages' => 'The email has been view Successfully',
             'code' => 202,
         ], 202);
+    }
+    /**
+     * Handle Fetch Email Record
+    */
+    public function fetchEmailRecord(Request $request)
+    {
+        if (!$request->ajax()) {
+            return abort(404);
+        }
+        $authUser = Auth::user();
+        $authID = $authUser->id;
+        $authEmail = $authUser->email;
+
+        $attachment_type = $request->input('attachment_type');
+        $sender_email = $request->input('sender_email');
+        $sender_user = $request->input('sender_user');
+        $record_start_date = $request->input('record_start_date');
+        $record_end_date = $request->input('record_end_date');
+        // Initialize month and year arrays
+        $months = [];
+        $years = [];
+    
+        if ($record_start_date && $record_end_date) {
+            $start = Carbon::parse($record_start_date)->startOfMonth();
+            $end = Carbon::parse($record_end_date)->endOfMonth();
+    
+            while ($start->lte($end)) {
+                $months[] = $start->format('F Y');
+                $start->addMonth();
+            }
+            $years = array_unique(array_map(function($month) {
+                return Carbon::parse($month)->format('Y');
+            }, $months));
+        }
+        // Users
+        $query = EmailRecord::with(['roles'])->orderBy('id', 'desc');
+
+        // Apply date filter
+        if ($record_start_date && $record_end_date) {
+            $query->whereBetween('created_at', [
+                Carbon::parse($record_start_date), 
+                Carbon::parse($record_end_date)->endOfDay()
+            ]);
+        }
+
+        // Apply attachment_type filters
+        if ($attachment_type) {
+            $query->where('attachment_type', 'LIKE', '%' . $attachment_type . '%');
+        }
+        // Apply user email filters
+        if ($sender_email) {
+            $query->where('sender_email', 'LIKE', '%' . $sender_email . '%');
+        }
+        // Apply user role filters
+        if ($sender_user) {
+            $query->where('sender_user', $status);
+        }
+        
+        // Total User Email / Inbox
+        $total_emails = EmailRecord::whereNotNull('user_to')
+                                ->where('user_to', 'LIKE', "%$authEmail%")
+                                ->orWhere('user_cc', 'LIKE', "%$authEmail%")
+                                ->orWhere('user_bcc', 'LIKE', "%$authEmail%")
+                                ->count();
+        // Total Draft User Email
+        $total_draft_emails = EmailRecord::whereNull('user_to')->where('sender_user', '=', $authID)->count();
+        // Total Send User Email According to Month
+        $total_send_emails = EmailRecord::whereNotNull('user_to')->where('sender_user', '=', $authID)->count();
+        
+        $perItem = $request->input('per_item', 10);
+        $data = $query->paginate($perItem)->toArray();
+        return response()->json([
+            'data' => $data['data'],
+            'links' => $data['links'],
+            'total' => $data['total'],
+            'total_emails' => $total_emails,
+            'total_draft_emails' => $total_draft_emails,
+            'total_send_emails' => $total_send_emails,
+            'months' => $months,
+            'years' => array_values($years)
+
+        ], 200);
     }
     /**
      * Handle Delete Email

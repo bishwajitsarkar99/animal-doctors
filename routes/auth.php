@@ -63,6 +63,7 @@ Route::middleware(['isSuperAdmin'])->group(function(){
     Route::get('/email-delete-permission/edit/{id}', [EmailController::class, 'permissionEdit'])->name('email.permission_edit');
     Route::put('/email-delete-permission/update/{id}', [EmailController::class, 'permissionUpdate'])->name('email.permission_update');
     Route::delete('/email-delete-permission/delete/{id}', [EmailController::class, 'deletePermissionEmail'])->name('email.permission_delete');
+    Route::get('/email-record/fetch', [EmailController::class, 'emailRecord'])->name('email.record');
 });
 // Super Admin Logout Route (POST is more secure for state-changing operations)
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

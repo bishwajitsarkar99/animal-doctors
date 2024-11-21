@@ -54,7 +54,7 @@
         </div>
         <div class="table-responsive">
             <table class="table align-middle bg-transparent ord_table center border-1 mt-2">
-                <tbody class="bg-transparent" id="email_data_table">
+                <tbody class="bg-transparent" id="email_record_table">
 
                 </tbody>
             </table>
@@ -84,7 +84,7 @@
                 <span class="temp_storage storg_inbox">Inbox (<span id="inbox_emails_progress"></span>) Out Of <span >{{$userEmails}}</span></span>
             </div>
             <div class="col-8">
-                <div class="pagination" id="user_email_get_data_table_paginate">
+                <div class="pagination" id="user_email_record_table_paginate">
 
                 </div>
             </div>
