@@ -165,7 +165,6 @@ class EmailServiceProvider
 
         $attachments = [];
 
-        
         // Handle file attachments
         if ($request->hasFile('email_attachments')) {
             $attachmentFolder = $request->attachment_type == 'report' ? 'report' : ($request->attachment_type == 'message' ? 'message' : 'draft');
@@ -192,7 +191,7 @@ class EmailServiceProvider
                 }
             }
         }
-
+        
         // [composer require ezyang/htmlpurifier] install for content clear from summary note
         $purifierConfig = HTMLPurifier_Config::createDefault();
         $purifier = new HTMLPurifier($purifierConfig);

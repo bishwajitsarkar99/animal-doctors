@@ -387,7 +387,7 @@
                             changeButtonDelete = '';
                         } else {
                             disableButton = '';
-                            changeButtonDelete = 'background-color: gainsboro; border-radius: 50%;';
+                            changeButtonDelete = '';
                         }
                     } else {
                         console.log('No permissions available or invalid permissions data.');

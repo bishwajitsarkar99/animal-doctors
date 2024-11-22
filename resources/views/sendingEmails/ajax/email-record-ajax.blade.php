@@ -143,7 +143,7 @@
                     statusBg = 'badge rounded-pill bg-status';
                 } else if (row.status == 1) {
                     statusClass = '';
-                    statusText = '';
+                    statusText = 'Inbox';
                     statusColor = '';
                     statusBg = '';
                 }
@@ -333,7 +333,6 @@
                         total_draft_emails,
                         total_send_emails,
                     } = response;
-                    //console.log(data);
                     
                     $("#email_record_table").html(table_rows(data));
                     // Handle pagination and other UI updates if necessary
