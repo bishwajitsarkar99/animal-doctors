@@ -552,7 +552,7 @@ select#select_read_email:focus,select#select_send_read_email:focus{
 .send_data_item,.draft_data_item {
     position: relative;
 }
-select#perItemControl,select#perItemSendEmail,select#perItemDraftEmail,select#perItemControls {
+select#perItemControl,select#perItemSendEmail,select#perItemDraftEmail,select#perItemControls,select#perItemEmailControl {
     outline: none;
     color: black;
     font-weight: 600;
@@ -711,7 +711,7 @@ button#selectDropdownButton{
 .month_box {
     text-align: right;
 }
-span#email_month,span#send_email_month {
+span#email_month,span#send_email_month,span#email_record_month {
     font-family: var(--nav-font-family);
     font-size: 13px;
     font-weight: 600;
@@ -1265,6 +1265,9 @@ td.error_data {
     100% {
         color: orangered;
     }
+}
+#user_email_record_table_paginate {
+    float: right;
 }
 /* mobile responsive */
 @media (max-width: 767.98px) {

@@ -108,12 +108,10 @@
                 dataType: 'json',
                 success: function(response) {
                     const senders_email = response.usersEmail;
-                    
-                    // const usersEmail = usersEmail;
                     $("#user_emails").empty();
                     $("#user_emails").append('<option value="" style="font-weight:600;">Select User Email</option>');
                     $.each(senders_email, function(key, item) {
-                        $("#user_emails").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.sender_email}</option>`);
+                        $("#user_emails").append(`<option style="color:white;font-weight:600;" value="${item.sender_email}">${item.sender_email}</option>`);
                     });
                 },
                 error: function() {
@@ -140,7 +138,7 @@
                 var statusClass, statusText, statusColor, statusBg;
                 if (row.status == 0) {
                     statusClass = 'text-white';
-                    statusText = 'New';
+                    statusText = 'Send';
                     statusColor = '';
                     statusBg = 'badge rounded-pill bg-status';
                 } else if (row.status == 1) {
@@ -306,11 +304,11 @@
 
             const record_start_date = $("#record_start_date").val();
             const record_end_date = $("#record_end_date").val();
-            const attachment_type = $("#attachment_type").val();
-            const sender_user = $("#sender_user").val();
-            const sender_email = $("#sender_email").val();
+            const attachment_type = $("#selectAttachment").val();
+            const sender_user = $("#user_roles").val();
+            const sender_email = $("#user_emails").val();
 
-            let current_url = url ? url : `{{ route('email.fetch') }}?per_item=${perItem}`;
+            let current_url = url ? url : `{{ route('email.record') }}?per_item=${perItem}`;
 
             $.ajax({
                 type: "GET",
@@ -335,7 +333,8 @@
                         total_draft_emails,
                         total_send_emails,
                     } = response;
-
+                    //console.log(data);
+                    
                     $("#email_record_table").html(table_rows(data));
                     // Handle pagination and other UI updates if necessary
                     $("#user_email_record_table_paginate").html(paginate_html({ 
@@ -344,17 +343,17 @@
                         months, 
                         years, 
                     }));
-                    $("#total_user_email").text(total);
+                    $("#total_emails_record").text(total);
                     // Total Emails
-                    $("#total_emails").text(formatNumber(total_emails));
+                    $("#total_emails_progress").text(formatNumber(total_emails));
                     // Total Send Emails
-                    $("#emailSend").text(formatNumber(total_send_emails));
+                    //$("#emailSend").text(formatNumber(total_send_emails));
                     // Total Draft Emails
-                    $("#emailDrafts").text(formatNumber(total_draft_emails));
+                    //$("#emailDrafts").text(formatNumber(total_draft_emails));
                     // Header Send
-                    $("#send_emails").text(formatNumber(total_send_emails));
+                    //$("#send_emails").text(formatNumber(total_send_emails));
                     // Update current month element with the new data
-                    $("#email_month").text(months.length > 0 ? months.join(', ') : '');
+                    $("#email_record_month").text(months.length > 0 ? months.join(', ') : '');
 
                     $('[data-bs-toggle="tooltip"]').tooltip();
 
@@ -365,7 +364,7 @@
             });
         }
         // Per item change
-        $("#perItemControl").on('change', (e) => {
+        $("#perItemEmailControl").on('change', (e) => {
             const { value } = e.target;
             fetch_emal_records('', null, value);
         });
@@ -401,6 +400,34 @@
                 fetch_emal_records('', url);
             }
 
+        });
+
+        // Attach File and Email Filter
+        $("#record_start_date, #record_end_date, #selectAttachment, #user_roles, #user_emails").on('change', ()=>{
+            fetch_emal_records(); 
+        });
+
+        // Refresh Button
+        $(document).on('click', '#refreshIconBtn', function(){
+            $(this).tooltip('hide');
+            $("#selectAttachment").val("");
+            $("#user_roles").val("");
+            $("#user_emails").val("");
+            fetch_emal_records();
+            var time = null;
+            addAttributeOrClass([
+               {selector: '.refresh_rotate_icon', type: 'class', name: 'fa-spin'} 
+            ]);
+            // Remove fa-spin
+            var timeOut = setTimeout(() => {
+                removeAttributeOrClass([
+                    {selector: '.refresh_rotate_icon', type: 'class', name: 'fa-spin'} 
+                ]);
+            }, 1000);
+
+            return () => {
+                clearTimeout(timeOut);
+            };
         });
 
     });

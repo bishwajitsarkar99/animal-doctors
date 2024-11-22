@@ -20,7 +20,7 @@
                 </span>
             </div>
             <div class="col-7" style="text-align:right;">
-                <span class="current_month pe-2" id="email_month"></span>
+                <span class="current_month pe-2" id="email_record_month"></span>
             </div>
         </div>
     </div>
@@ -28,14 +28,14 @@
         <div class="row mt-2">
             <div class="col-xl-3">
                 <div class="form-group custom-select skeleton">
-                    <select type="text" class="form-control form-control-sm user_roles select2" name="user_roles_id" id="user_roles">
+                    <select type="text" class="form-control form-control-sm user_roles select2" name="sender_user" id="user_roles">
                         <option value="">Select User Role</option>
                     </select>
                 </div>
             </div>
             <div class="col-xl-6">
                 <div class="form-group custom-select skeleton">
-                    <select type="text" class="form-control form-control-sm user_emails select2" name="user_emails_id" id="user_emails">
+                    <select type="text" class="form-control form-control-sm user_emails select2" name="sender_email" id="user_emails">
                         <option value="">Select User Email</option>
                     </select>
                 </div>
@@ -62,7 +62,7 @@
         <div class="row table_last_row">
             <div class="col-1 pt-2">
                 <div class="custom-select">
-                    <select class="ps-1 skeleton" id="perItemControl" data-bs-toggle="tooltip"  data-bs-placement="top" title="Per-Item" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                    <select class="ps-1 skeleton" id="perItemEmailControl" data-bs-toggle="tooltip"  data-bs-placement="top" title="Per-Item" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <option class="skeleton" selected>10</option>
                     <option class="skeleton">20</option>
                     <option class="skeleton">50</option>
@@ -74,14 +74,14 @@
             <div class="col-3">
                 <span class="tot_summ" id="num_plate">
                     <label class="tot-search" for="tot_cagt">Current Email :</label>
-                    <label class="badge rounded-pill bg-primary" for="total_user_email" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_user_email"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
+                    <label class="badge rounded-pill bg-primary" for="total_user_email" id="iteam_label4" style="font-size: 11px;"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family:sans-serif;" id="total_emails_record"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family:sans-serif;">.00</span></label>
                 </span>
                 <div class="progress " style="height:0.55rem;">
                     <div class="progress-bar progress-bar-striped bg-email progress-bar-animated" role="progressbar" aria-valuenow="{{ $inbox_email_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $inbox_email_percentage }}%;">
                     {{ round($inbox_email_percentage, 2) }}%
                     </div>
                 </div>
-                <span class="temp_storage storg_inbox">Inbox (<span id="inbox_emails_progress"></span>) Out Of <span >{{$userEmails}}</span></span>
+                <span class="temp_storage storg_inbox">Email (<span id="total_emails_progress"></span>) Out Of <span >{{$userEmails}}</span></span>
             </div>
             <div class="col-8">
                 <div class="pagination" id="user_email_record_table_paginate">

@@ -244,7 +244,7 @@ class EmailServiceProvider
             'created_at' => now(),
         ]);
 
-        // inbox Email Store
+        // Email Record
         DB::table('email_records')->insert([
             'user_to' => $request->user_to,
             'user_cc' => $request->user_cc ?? 'N/A',
@@ -775,8 +775,8 @@ class EmailServiceProvider
         }
         // Users
         $query = EmailRecord::with(['roles'])->orderBy('id', 'desc');
-
-        // Apply date filter
+        
+        // // Apply date filter
         if ($record_start_date && $record_end_date) {
             $query->whereBetween('created_at', [
                 Carbon::parse($record_start_date), 
@@ -794,15 +794,11 @@ class EmailServiceProvider
         }
         // Apply user role filters
         if ($sender_user) {
-            $query->where('sender_user', $status);
+            $query->where('sender_user', $sender_user);
         }
         
         // Total User Email / Inbox
-        $total_emails = EmailRecord::whereNotNull('user_to')
-                                ->where('user_to', 'LIKE', "%$authEmail%")
-                                ->orWhere('user_cc', 'LIKE', "%$authEmail%")
-                                ->orWhere('user_bcc', 'LIKE', "%$authEmail%")
-                                ->count();
+        $total_emails = EmailRecord::count();
         // Total Draft User Email
         $total_draft_emails = EmailRecord::whereNull('user_to')->where('sender_user', '=', $authID)->count();
         // Total Send User Email According to Month
