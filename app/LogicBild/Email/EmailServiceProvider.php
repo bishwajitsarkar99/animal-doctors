@@ -789,7 +789,10 @@ class EmailServiceProvider
         }
         // Apply user email filters
         if ($sender_email) {
-            $query->where('sender_email', 'LIKE', '%' . $sender_email . '%');
+            $query->where('sender_email',$sender_email)
+                    ->orWhere('user_to', $sender_email)
+                    ->orWhere('user_cc', $sender_email)
+                    ->orWhere('user_bcc', $sender_email);
         }
         // Apply user role filters
         if ($sender_user) {

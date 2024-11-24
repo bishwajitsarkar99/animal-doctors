@@ -299,56 +299,56 @@
   $(document).ready(function(){
     // Date Picker
     $('#start_date').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "d-M-yy",
       changeMonth: true,
       changeYear: true,
     });
     $('#end_date').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "d-M-yy",
       changeMonth: true,
       changeYear: true,
     });
     // Send Email Date Picker
     $('#send_start_date').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "d-M-yy",
       changeMonth: true,
       changeYear: true,
     });
     $('#send_end_date').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "d-M-yy",
       changeMonth: true,
       changeYear: true,
     });
     // Draft Email Date Picker
     $('#draft_start_date').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "d-M-yy",
       changeMonth: true,
       changeYear: true,
     });
     $('#draft_end_date').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "d-M-yy",
       changeMonth: true,
       changeYear: true,
     });
     // Setting Data Date Picker
     $('#start_setting_date').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "d-M-yy",
       changeMonth: true,
       changeYear: true,
     });
     $('#end_setting_date').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "d-M-yy",
       changeMonth: true,
       changeYear: true,
     });
     // Email Record Date Picker
     $('#record_start_date').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "d-M-yy",
       changeMonth: true,
       changeYear: true,
     });
     $('#record_end_date').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "d-M-yy",
       changeMonth: true,
       changeYear: true,
     });

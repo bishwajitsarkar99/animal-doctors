@@ -135,18 +135,6 @@
             }
 
             return rows.map((row, key) => {
-                var statusClass, statusText, statusColor, statusBg;
-                if (row.status == 0) {
-                    statusClass = 'text-white';
-                    statusText = 'Send';
-                    statusColor = '';
-                    statusBg = 'badge rounded-pill bg-status';
-                } else if (row.status == 1) {
-                    statusClass = '';
-                    statusText = 'Inbox';
-                    statusColor = '';
-                    statusBg = '';
-                }
                 var created_by = 'Unknown';
                 if (row.sender_user != null) {
                     switch (row.sender_user) {
@@ -189,9 +177,35 @@
                     attachmentText = 'N/A';
                 }
 
-                var fromEmail;
-                if(row.sender_email === row.user_to){
+                var fromEmail, toEmail;
+                if(row.sender_email === row.user_to || row.user_to === null || row.user_cc === null || row.user_bcc === null){
                     fromEmail = 'me';
+                    toEmail = '';
+                }else if(row.sender_email !== row.user_to){
+                    toEmail = 'To :';
+                }
+
+                var emailType, emailTypeBg, emailTypClass;
+                if(row.attachment_type === 'draft'){
+                    emailType = 'Draft';
+                    emailTypeBg = 'badge rounded-pill bg-draft';
+                    emailTypClass = 'text-white';
+                }else if(row.attachment_type === 'other'){
+                    emailType = 'Other';
+                    emailTypeBg = 'badge rounded-pill bg-other';
+                    emailTypClass = 'text-white';
+                }else if(row.sender_email === row.user_to || row.sender_email === row.user_cc || row.sender_email === row.user_bcc){
+                    emailType = 'Inbox';
+                    emailTypeBg = 'badge rounded-pill bg-inbox';
+                    emailTypClass = 'text-white';
+                }else if(row.sender_email && row.user_to !== row.sender_email && row.user_cc !== row.sender_email && row.user_bcc !== row.sender_email){
+                    emailType = 'Send';
+                    emailTypeBg = 'badge rounded-pill bg-send';
+                    emailTypClass = 'text-white';
+                } else {
+                    emailType = 'Unknown';
+                    emailTypeBg = '';
+                    emailTypClass = '';
                 }
 
                 const attachments = JSON.parse(row.email_attachments || '[]');
@@ -219,14 +233,14 @@
                 }).join('');
 
                 return `
-                    <tr class="table-row user-table-row parent-row select-row-background" key="${key}" style="${statusColor}">
+                    <tr class="table-row user-table-row parent-row select-row-background" key="${key}">
                         <td class="line-height-td child-td" style="text-align:left;color:#000000;" id="treeRow">
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewBtn" email_id="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-regular fa-eye fa-beat"></i>
                             </button>
-                            <span class="child-td1 ps-1">${fromEmail ? fromEmail : row.sender_email}</span>
-                            <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:12px;">
-                                ${statusText}
+                            <span class="child-td1 ps-1">${toEmail} ${fromEmail ? fromEmail : (row.user_to)}</span>
+                            <span class="${emailTypeBg} permission edit_inventory_table ps-1 ${emailTypClass}" style="font-size:12px;">
+                                ${emailType}
                             </span>
                             <span class="child-td1 ps-1">${formatDate(row.created_at)}</span>
                         </td>
