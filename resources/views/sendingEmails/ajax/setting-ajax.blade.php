@@ -273,7 +273,7 @@
             if (rows.length === 0) {
                 return `
                     <tr>
-                        <td class="error_data text-danger" align="center" colspan="12">
+                        <td class="error_data" align="center" colspan="12" style="border: 2px solid #e9e9e9;">
                             User Email Setting Permission Not Exists On Server!
                         </td>
                     </tr>
@@ -281,7 +281,7 @@
             }
 
             return rows.map((row, key) => `
-                <tr class="btn-hover table_body table-row user-table-row " key="${key}" id="supp_tab">
+                <tr class="btn-hover table_body table-row user-table-row setting-table-row-border" key="${key}" id="supp_tab">
                     <td class="ps-1 font table_body">${row.id}</td>
                     <td class="ps-1 font table_body2 eml">${row.roles && row.roles.name ? row.roles.name : 'No Role'}</td>
                     <td class="ps-1 font table_body3 eml">${row.users && row.users.email ? row.users.email : 'No Email'}</td>

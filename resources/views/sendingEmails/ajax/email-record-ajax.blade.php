@@ -127,7 +127,7 @@
             if (rows.length === 0) {
                 return `
                     <tr>
-                        <td class="error_data" align="center" text-danger colspan="11">
+                        <td class="error_data" align="center" text-danger colspan="11" style="border: 2px solid #e9e9e9;">
                             User Email Record Not Exists On Server !
                         </td>
                     </tr>

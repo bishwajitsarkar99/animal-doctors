@@ -1,13 +1,26 @@
 <script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
 <script type="module">
     import { currentDate, getTimeDifference, activeTableRow, formatDate, formatNumber } from "/module/module-min-js/helper-function-min.js";
-    import { addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
+    import { handleSuccessMessage, addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     const companyName = @json(setting('company_name'));
     const companyAddress = @json(setting('company_address'));
     const companyLogo = "{{ asset('backend_asset/main_asset/img/' . setting('update_company_logo')) }}";
     const pageLoader = "{{asset('image/loader/loading.gif')}}";
     // Send List
     $(document).ready(function(){
+        // Initialize Select2 for all elements with the 'select2' class
+        $('.select2').each(function() {
+            // Email Record
+            if ($(this).attr('id') === 'select_attachment_draft') {
+                $(this).select2({
+                    placeholder: 'Select Category',
+                    allowClear: true
+                });
+            }
+        });
+        $('#select_attachment_draft').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search...');
+        });
         // Get Current Date and set it for start_date and end_date fields
         const startDateField = document.getElementById('draft_start_date');
         const endDateField = document.getElementById('draft_end_date');
@@ -26,7 +39,7 @@
             if (rows.length === 0) {
                 return `
                     <tr>
-                        <td class="error_data" align="center" text-danger colspan="11">
+                        <td class="error_data" align="center" text-danger colspan="11" style="border: 2px solid #e9e9e9;">
                             User Draft Email Not Exists On Server !
                         </td>
                     </tr>
@@ -150,7 +163,7 @@
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="draftForwardBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-solid fa-share-nodes fa-beat"></i>
                             </button>
-                            <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${value}" style="font-size: 10px; ${changeButtonDelete}" ${disableButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn draft_delete_btn cgr_btn ms-1" id="deleteBtn" email-id="${value}" value="${value}" style="font-size: 10px; ${changeButtonDelete}" ${disableButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                                 <i class="fa-solid fa-trash-can fa-beat"></i>
                             </button>
                             <span class="child-td1 ps-1" style="color:orangered;">${fromEmail ? fromEmail : row.user_to}</span>
@@ -263,6 +276,7 @@
                         years, 
                         total_draft_emails,
                         user_email_delete_permissions,
+                        total_draft,
                     } = response;
 
                     $("#draft_data_table").html(table_rows(data, user_email_delete_permissions));
@@ -277,6 +291,8 @@
                     $("#total_draft_email").text(total);
                     // Draft Progress
                     $("#draft_emails_progress").text(formatNumber(total_draft_emails));
+                    // Total Draft Emails
+                    $("#emailDrafts").text(formatNumber(total_draft));
                     // Update current month element with the new data
                     $("#draft_email_month").text(months.length > 0 ? months.join(', ') : '');
 
@@ -402,7 +418,7 @@
                         // Set other fields
                         $("#inputSubject").val(response.messages.subject);
                         $("#email_summernote").summernote('code', response.messages.main_content);
-                        $("#selectAttachFile").val(response.messages.attachment_type);
+                        $("#selectAttachFile").val(response.messages.attachment_type).trigger('change.select2');
 
                         // Display attachment names in a separate div
                         let attachmentPreview = $("#attachmentPreview");
@@ -496,6 +512,45 @@
                         }
                         $('#v-pills-email-tab').tab('show');
                     }
+                }
+            });
+        });
+
+        // email delete
+        $(document).on('click', '.draft_delete_btn, .delete_drft_btn', function(e){
+            e.preventDefault();
+
+            // Check if any checkboxes are selected
+            let selectedEmails = [];
+            $("#selectBtn:checked").each(function() {
+                selectedEmails.push($(this).val());
+            });
+
+            if (selectedEmails.length === 0) {
+                let emailId = $(this).data('email-id');
+
+                if (!emailId) {
+                    alert('No email selected for deleting.');
+                    return;
+                }
+                selectedEmails.push(emailId);
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type:'DELETE',
+                url:'/email/delete',
+                data: { ids: selectedEmails },
+                success:function(response){
+                    $('#success_message').addClass('background_error');
+                    $('#success_message').text(response.messages);
+                    handleSuccessMessage('#success_message');
+                    fetch_draft_email();
                 }
             });
         });

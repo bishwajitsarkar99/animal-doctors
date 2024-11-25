@@ -8,6 +8,27 @@
     const pageLoader = "{{asset('image/loader/loading.gif')}}";
     // Send List
     $(document).ready(function(){
+        // Initialize Select2 for all elements with the 'select2' class
+        $('.select2').each(function() {
+            // Email Record
+            if ($(this).attr('id') === 'select_attachment_email') {
+                $(this).select2({
+                    placeholder: 'Select Category',
+                    allowClear: true
+                });
+            }else if($(this).attr('id') === 'select_status_email'){
+                $(this).select2({
+                    placeholder: 'Select Email',
+                    allowClear: true
+                });
+            }
+        });
+        $('#select_attachment_email').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search...');
+        });
+        $('#select_status_email').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search...');
+        });
         // Get Current Date and set it for start_date and end_date fields
         const startDateField = document.getElementById('send_start_date');
         const endDateField = document.getElementById('send_end_date');
@@ -26,7 +47,7 @@
             if (rows.length === 0) {
                 return `
                     <tr>
-                        <td class="error_data" align="center" text-danger colspan="11">
+                        <td class="error_data" align="center" text-danger colspan="11" style="border: 2px solid #e9e9e9;">
                             User Send Email Not Exists On Server !
                         </td>
                     </tr>
@@ -59,6 +80,14 @@
                             disableButton = '';
                             changeButtonDelete = 'background-color: gainsboro;border-radius: 50%;';
                         }
+                    }else if (row.attachment_type === 'draft' || row.attachment_type === 'other') {
+                        if (rowItem?.message_status === 1) {
+                            disableButton = 'disabled';
+                            changeButtonDelete = '';
+                        } else {
+                            disableButton = '';
+                            changeButtonDelete = 'background-color: gainsboro;border-radius: 50%;';
+                        }
                     }
                 } else {
                     console.log('user_email_delete_permissions is empty or not an array');
@@ -83,6 +112,9 @@
                             disableForwardButton = '';
                             changeButton = 'background-color: gainsboro;border-radius: 50%;';
                         }
+                    } else if (row.attachment_type === 'draft' || row.attachment_type === 'other') {
+                        disableForwardButton = '';
+                        changeButton = 'background-color: gainsboro;border-radius: 50%;';
                     }
                 } else {
                     console.log('user_email_delete_permissions is empty or not an array');
@@ -430,7 +462,7 @@
                         // Set other fields
                         $("#inputSubject").val(response.messages.subject);
                         $("#email_summernote").summernote('code', response.messages.main_content);
-                        $("#selectAttachFile").val(response.messages.attachment_type);
+                        $("#selectAttachFile").val(response.messages.attachment_type).trigger('change.select2');
 
                         // Display attachment names in a separate div
                         let attachmentPreview = $("#attachmentPreview");

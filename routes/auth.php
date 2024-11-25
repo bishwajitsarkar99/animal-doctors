@@ -54,7 +54,7 @@ Route::middleware(['role:SuperAdmin|Admin|SubAdmin|Accounts|Marketing|DeliveryTe
     Route::post('/email/forward/send', [EmailController::class, 'sendForwardedEmail'])->name('email.forward.send');
     Route::get('/email/fetch/drafts', [EmailController::class, 'getDraftFetchEmail'])->name('email.draft');
     Route::post('/email/view/status', [EmailController::class, 'emailView'])->name('email.view_draft');
-    Route::delete('/email/delete/{id}', [EmailController::class, 'deleteEmail'])->name('email.delete');
+    Route::delete('/email/delete', [EmailController::class, 'deleteEmail'])->name('email.delete');
     Route::get('/user-email/{selectedRole}', [EmailController::class, 'getUserEmail'])->name('user.email');
 });
 // Delete Email Setting

@@ -440,8 +440,6 @@ class EmailServiceProvider
                                 ->orWhere('user_cc', 'LIKE', "%$authEmail%")
                                 ->orWhere('user_bcc', 'LIKE', "%$authEmail%")
                                 ->count();
-        // Total Draft User Email
-        $total_draft_emails = UserEmail::whereNull('user_to')->where('sender_user', '=', $authID)->count();
         // Total New Email
         $total_new_emails = UserInboxEmail::whereNotNull('user_to')
                                         ->where(function($q) use ($authEmail) {
@@ -461,7 +459,6 @@ class EmailServiceProvider
             'links' => $data['links'],
             'total' => $data['total'],
             'total_emails' => $total_emails,
-            'total_draft_emails' => $total_draft_emails,
             'total_send_emails' => $total_send_emails,
             'total_new_emails' => $total_new_emails,
             'user_email_delete_permissions' => $user_email_delete_permissions,
@@ -693,7 +690,8 @@ class EmailServiceProvider
         if ($subject) {
             $query->where('subject', 'LIKE', '%' . $subject . '%');
         }
-
+        // Total Draft User Email
+        $total_draft = UserEmail::whereNull('user_to')->where('sender_user', '=', $authID)->count();
         // Get Permission For Delete
         $user_email_delete_permissions = UserEmailDeletePermission::where('user_roles_id', $authID)
                                                                 ->orWhere('user_emails_id', $authEmail)
@@ -715,6 +713,7 @@ class EmailServiceProvider
             'total' => $data['total'],
             'total_draft_emails' => $total_draft_emails,
             'user_email_delete_permissions' => $user_email_delete_permissions,
+            'total_draft' => $total_draft,
             'months' => $months,
             'years' => array_values($years),
         ], 200);

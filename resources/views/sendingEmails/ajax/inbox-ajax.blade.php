@@ -9,6 +9,43 @@
     
     // Inbox
     $(document).ready(function(){
+        // Initialize Select2 for all elements with the 'select2' class
+        $('.select2').each(function() {
+            // Email Record
+            if ($(this).attr('id') === 'selectAttachFile') {
+                $(this).select2({
+                    placeholder: 'Select Attachment Type',
+                    allowClear: true
+                });
+            }else if($(this).attr('id') === 'select_attachment'){
+                $(this).select2({
+                    placeholder: 'Select Category',
+                    allowClear: true
+                });
+            }else if($(this).attr('id') === 'select_status'){
+                $(this).select2({
+                    placeholder: 'Select Email',
+                    allowClear: true
+                });
+            }else if($(this).attr('id') === 'select_read_email'){
+                $(this).select2({
+                    placeholder: 'Email Filter',
+                    allowClear: true
+                });
+            }
+        });
+        $('#selectAttachFile').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search attachment...');
+        });
+        $('#select_attachment').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search...');
+        });
+        $('#select_status').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search...');
+        });
+        $('#select_read_email').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search...');
+        });
         // Initialize the button loader for the login button
         buttonLoader('#submit', '.loading-icon', '.btn-text', 'Send...', 'Send', 6000);
         buttonLoader('#forwardSubmit', '.loading-icon-two', '.forward-btn-text', 'Send...', 'Send', 6000);
@@ -32,7 +69,7 @@
             if (rows.length === 0) {
                 return `
                     <tr>
-                        <td class="error_data" align="center" text-danger colspan="11">
+                        <td class="error_data" align="center" text-danger colspan="11" style="border: 2px solid #e9e9e9;">
                             User Email Not Exists On Server !
                         </td>
                     </tr>
@@ -331,8 +368,6 @@
                     $("#total_emails").text(formatNumber(total_emails));
                     // Total Send Emails
                     $("#emailSend").text(formatNumber(total_send_emails));
-                    // Total Draft Emails
-                    $("#emailDrafts").text(formatNumber(total_draft_emails));
                     // Total New Emails
                     $("#total_new_emails").text(formatNumber(total_new_emails));
                     // Email Table Progress bar
@@ -574,7 +609,7 @@
                         // Set other fields
                         $("#inputSubject").val(response.messages.subject);
                         $("#email_summernote").summernote('code', response.messages.main_content);
-                        $("#selectAttachFile").val(response.messages.attachment_type);
+                        $("#selectAttachFile").val(response.messages.attachment_type).trigger('change.select2');
 
                         // Display attachment names in a separate div
                         let attachmentPreview = $("#attachmentPreview");

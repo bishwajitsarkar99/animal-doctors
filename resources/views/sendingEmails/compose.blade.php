@@ -21,41 +21,41 @@
             <div class="col-xl-12">
             <table>
                 <thead>
-                <tr>
-                    <th class="file-head">
-                    <span class="more__button">
-                        <select type="text" class="form-control form-control-sm" name="attachment_type" id="selectAttachFile">
-                            <option value="" >Select Attachment Type</option>
-                            <option value="report">Report</option>
-                            <option value="message">Message</option>
-                            <option value="draft">Draft</option>
-                        </select>
-                    </span>
-                    </th>
-                    <th class="file-head">
-                    <span class="more__button">
-                        <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="clearBtn" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Clear Form" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
-                        <i class="fa-solid fa-ban fa-beat" style="color:orangered;"></i>
-                        </button>
-                    </span>
-                    </th>
-                    <th class="file-head">
-                    Add Attach File
-                    <span class="more__button">
-                        <button class="btn btn-group-sm" id="moreBtn" disabled type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Row" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                        <span style="font-size:20px;color:#0056b3;"><i class="fa-solid fa-circle-plus"></i></span>
-                        </button>
-                    </span>
-                    </th>
-                    <th class="file-head">
-                    Remove Attach File
-                    <span class="more__button">
-                        <button class="btn btn-group-sm" id="decrementBtn" disabled type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove Row" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
-                        <span style="font-size:20px;color:orangered;"><i class="fa-solid fa-circle-minus"></i></span>
-                        </button>
-                    </span>
-                    </th>
-                </tr>
+                    <tr>
+                        <th class="attachment-dropdown">
+                            <span class="more__button">
+                                <select type="text" class="form-control form-control-sm select2" name="attachment_type" id="selectAttachFile">
+                                    <option value="" >Select Attachment Type</option>
+                                    <option value="report">Report</option>
+                                    <option value="message">Message</option>
+                                    <option value="draft">Draft</option>
+                                </select>
+                            </span>
+                        </th>
+                        <th class="file-head">
+                            <span class="more__button">
+                                <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="clearBtn" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Clear Form" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
+                                <i class="fa-solid fa-ban fa-beat" style="color:orangered;"></i>
+                                </button>
+                            </span>
+                        </th>
+                        <th class="file-head">
+                            Add Attach File
+                            <span class="more__button">
+                                <button class="btn btn-group-sm" id="moreBtn" disabled type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Row" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                                <span style="font-size:20px;color:#0056b3;"><i class="fa-solid fa-circle-plus"></i></span>
+                                </button>
+                            </span>
+                        </th>
+                        <th class="file-head">
+                            Remove Attach File
+                            <span class="more__button">
+                                <button class="btn btn-group-sm" id="decrementBtn" disabled type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove Row" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
+                                <span style="font-size:20px;color:orangered;"><i class="fa-solid fa-circle-minus"></i></span>
+                                </button>
+                            </span>
+                        </th>
+                    </tr>
                 </thead>
                 <tbody id="fileTable">
                 <tr class="file-row">

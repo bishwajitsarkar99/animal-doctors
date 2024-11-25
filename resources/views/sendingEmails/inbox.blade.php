@@ -15,18 +15,18 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-xl-1">
+            <div class="col-xl-2">
                 <span class="email__select min-dropdown-skeletone">
-                    <select type="text" class="email_select" name="read_mail" id="select_read_email">
-                        <option value="">Email</option>
-                        <option value="0">Next</option>
-                        <option value="1">Previous</option>
+                    <select type="text" class="email_select select2" name="read_mail" id="select_read_email">
+                        <option value="">Email Filter</option>
+                        <option value="1">Current</option>
+                        <option value="0">Previous</option>
                     </select>
                 </span>
             </div>
             <div class="col-xl-2">
-                <div class="group_btn next_btn skeletone">
-                    <button class="btn btn-light btn-sm chck" type="button" id="refreshIconBtn"
+                <div class="group_btn">
+                    <button class="btn btn-light btn-sm chck next_btn refrsh-skeletone" type="button" id="refreshIconBtn"
                         data-bs-toggle="tooltip"  data-bs-placement="top" title="Refresh" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                         <i class="refresh_rotate_icon fa-solid fa-arrow-rotate-right"></i>
                     </button>
@@ -36,7 +36,7 @@
                     </button>
                 </div>
             </div>
-            <div class="col-xl-7">
+            <div class="col-xl-6">
                 <span class="input5 text-skeletone">
                     <input type="search" class="form-control form-control-sm email_search ps-1" name="user_to" placeholder="Email Search......." id="email_search">
                 </span>
@@ -56,17 +56,17 @@
                 </span>
             </div>
             <div class="col-xl-2">
-                <span class="input3 text-skeletone">
-                    <select type="text" class="form-control form-control-sm" name="attachment_type" id="select_attachment">
+                <span class="input3 select-catg-skeletone">
+                    <select type="text" class="form-control form-control-sm select2" name="attachment_type" id="select_attachment">
                         <option value="">Select Category</option>
-                        <option value="report">Management Report</option>
+                        <option value="report">User Report</option>
                         <option value="message">User Message</option>
                     </select>
                 </span>
             </div>
             <div class="col-xl-2">
-                <span class="input4 text-skeletone">
-                    <select type="text" class="form-control form-control-sm" name="status" id="select_status">
+                <span class="input4 select-catg-skeletone">
+                    <select type="text" class="form-control form-control-sm select2" name="status" id="select_status">
                         <option value="">Select Email</option>
                         <option value="0">New</option>
                         <option value="1">Old</option>
@@ -78,15 +78,15 @@
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table align-middle bg-transparent ord_table center border-1 mt-2">
-                <tbody class="bg-transparent" id="email_data_table">
+            <table class="table align-middle bg-transparent ord_table center mt-2">
+                <tbody class="bg-transparent permission-head-border" id="email_data_table">
 
                 </tbody>
             </table>
         </div>
         <div class="row table_last_row">
             <div class="col-1 pt-2">
-                <div class="custom-select text-skeletone">
+                <div class="custom-select item-skeletone">
                     <select class="ps-1 skeleton" id="perItemControl" data-bs-toggle="tooltip"  data-bs-placement="top" title="Per-Item" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <option class="skeleton" selected>10</option>
                     <option class="skeleton">20</option>

@@ -14,8 +14,8 @@
                 </div>
             </div>
             <div class="col-xl-2">
-                <div class="send_next_btn skeletone">
-                    <button class="btn btn-light btn-sm btn-top" type="button" id="refreshDataBtn"
+                <div class="">
+                    <button class="btn btn-light btn-sm btn-top send_next_btn refrsh-skeletone" type="button" id="refreshDataBtn"
                     data-bs-toggle="tooltip"  data-bs-placement="top" title="Refresh" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="refresh_rotate_icon fa-solid fa-arrow-rotate-right"></i>
                     </button>
@@ -45,17 +45,17 @@
                 </span>
             </div>
             <div class="col-xl-2">
-                <span class="send_input3 text-skeletone">
-                    <select type="text" class="form-control form-control-sm" name="attachment_type" id="select_attachment_email">
+                <span class="send_input3 select-catg-skeletone">
+                    <select type="text" class="form-control form-control-sm select2" name="attachment_type" id="select_attachment_email">
                         <option value="">Select Category</option>
-                        <option value="report">Management Report</option>
+                        <option value="report">User Report</option>
                         <option value="message">User Message</option>
                     </select>
                 </span>
             </div>
             <div class="col-xl-2">
-                <span class="send_input4 text-skeletone">
-                    <select type="text" class="form-control form-control-sm" name="status" id="select_status_email">
+                <span class="send_input4 select-catg-skeletone">
+                    <select type="text" class="form-control form-control-sm select2" name="status" id="select_status_email">
                         <option value="">Select Email</option>
                         <option value="0">Next</option>
                         <option value="1">Previous</option>
@@ -68,14 +68,14 @@
         </div>
         <div class="table-responsive">
             <table class="table align-middle bg-transparent ord_table center border-1 mt-2">
-                <tbody class="bg-transparent" id="send_data_table">
+                <tbody class="bg-transparent permission-head-border" id="send_data_table">
 
                 </tbody>
             </table>
         </div>
         <div class="row table_last_row">
             <div class="col-1 pt-2">
-                <div class="send_data_item text-skeletone">
+                <div class="send_data_item item-skeletone">
                     <select class="ps-1 skeleton" id="perItemSendEmail" data-bs-toggle="tooltip"  data-bs-placement="top" title="Per-Item" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                         <option class="skeleton" selected>10</option>
                         <option class="skeleton">20</option>
