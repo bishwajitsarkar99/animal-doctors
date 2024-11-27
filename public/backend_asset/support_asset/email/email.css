@@ -38,7 +38,7 @@ color: #333;
 #inputTo:focus, #inputCC:focus, #inputBCC:focus, #inputSubject:focus{
     border-color: dodgerblue;
 }
-button.send_button,.permission_submit,.permission_update,#update_btn_confirm,#confirm_delete_btn,.data_get{
+button.send_button,.permission_submit,.permission_update,#update_btn_confirm,#confirm_delete_btn,.data_get,#mailSettingUpdate{
     background-color: #0056b3;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
@@ -57,7 +57,8 @@ button.send_button,.permission_submit,.permission_update,#update_btn_confirm,#co
 button#DataGet{
     margin-top: 0px;
 }
-button.send_button:hover,.permission_submit:hover,.permission_update:hover,#update_btn_confirm:hover,#confirm_delete_btn:hover,.data_get:hover{
+button.send_button:hover,.permission_submit:hover,.permission_update:hover,#update_btn_confirm:hover,#confirm_delete_btn:hover,.data_get:hover
+,#mailSettingUpdate:hover{
     background-image: linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);color: lightblue; 
     transition: border-color 0.3s ease, background-color 0.3s ease;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
@@ -1432,11 +1433,12 @@ td.error_data {
     font-weight: 700;
     font-size: 14px;
     font-family: var(--nav-font-family);
+    margin-left: 8px;
 }
 .mail_input{
     color: black;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     font-family: var(--nav-font-family);
 }
 .mail_input:focus{

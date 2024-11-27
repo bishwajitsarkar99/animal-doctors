@@ -979,6 +979,54 @@ class EmailServiceProvider
     */
     public function mailSettingUpdate(Request $request, $id)
     {
-        // 
+        $validators = Validator::make($request->all(),[
+            'mail_transport' => 'required|string',
+            'mail_host' => 'required|string',
+            'mail_port' => 'required|string',
+            'mail_username' => 'required|string',
+            'mail_password' => 'required|string',
+            'mail_encryption' => 'required|string',
+            'mail_from' => 'required|string',
+        ],[
+            'mail_transport.required' => 'Mail Transport Required',
+            'mail_host.required' => 'Mail Host Required',
+            'mail_port.required' => 'Mail Port Required',
+            'mail_username.required' => 'Mail User Name Required',
+            'mail_password.required' => 'Mail Password Required',
+            'mail_encryption.required' => 'Mail Encryption Required',
+            'mail_from.required' => 'Mail From Required',
+        ]);
+
+        if($validators->fails()){
+            return response()->json([
+                'status' => 400,
+                'errors' => $validators->messages()
+            ]);
+        }else{
+
+            $mail_setting = MailSetting::find($id);
+            if($mail_setting){
+                $mail_setting->mail_transport = $request->input('mail_transport');
+                $mail_setting->mail_host = $request->input('mail_host');
+                $mail_setting->mail_port = $request->input('mail_port');
+                $mail_setting->mail_username = $request->input('mail_username');
+                $mail_setting->mail_password = $request->input('mail_password');
+                $mail_setting->mail_encryption = $request->input('mail_encryption');
+                $mail_setting->mail_from = $request->input('mail_from');
+
+                $mail_setting->save();
+
+                return response()->json([
+                    'status' => 200,
+                    'messages' => 'Mail setting has updated successfully.'
+                ]);
+
+            }else{
+                return response()->json([
+                    'status' => 404,
+                    'messages' => 'Mail setting no found.'
+                ]);
+            }
+        }
     }
 }
