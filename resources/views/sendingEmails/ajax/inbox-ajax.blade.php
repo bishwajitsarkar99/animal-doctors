@@ -79,9 +79,10 @@
             return rows.map((row, key) => {
                 // Handle user delete report or message email permissions
                 let disableButton = '';
+                let changeButtonDelete = '';
+                let checboxkClass = '';
                 let disableForwardButton = '';
                 let changeButton = '';
-                let changeButtonDelete = '';
 
                 if (Array.isArray(user_email_delete_permissions) && user_email_delete_permissions.length > 0) {
                     const rowItem = user_email_delete_permissions[0];
@@ -90,17 +91,21 @@
                         if (rowItem?.report_status === 0) {
                             disableButton = 'disabled';
                             changeButtonDelete = '';
+                            checboxkClass = '';
                         } else {
                             disableButton = '';
                             changeButtonDelete = 'background-color: gainsboro;border-radius: 50%;';
+                            checboxkClass = 'selectBtn';
                         }
                     } else if (row.attachment_type === 'message') {
                         if (rowItem?.message_status === 0) {
                             disableButton = 'disabled';
                             changeButtonDelete = '';
+                            checboxkClass = '';
                         } else {
                             disableButton = '';
                             changeButtonDelete = 'background-color: gainsboro;border-radius: 50%;';
+                            checboxkClass = 'selectBtn';
                         }
                     }
                 } else {
@@ -222,7 +227,7 @@
                     <tr class="table-row user-table-row parent-row select-row-background" key="${key}" style="${statusColor}">
                         <td class="line-height-td child-td" style="text-align:left;color:#000000;" id="treeRow">
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="checkBtn" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                                <input class="form-check-input selectBtn" type="checkbox" value="${row.id}" id="selectBtn" style="font-size:13px;margin-top: -2px;">
+                                <input class="form-check-input ${checboxkClass}" type="checkbox" value="${value}" id="selectBtn" ${disableButton} style="font-size:13px;margin-top: -2px;">
                             </button>
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewBtn" email_id="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-regular fa-eye fa-beat"></i>
@@ -230,7 +235,7 @@
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="forwardBtn" value="${forwardValue}" style="font-size: 10px;margin-top: 2px; ${changeButton}" ${disableForwardButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-solid fa-share-nodes fa-beat"></i>
                             </button>
-                            <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${value}" data-email-id="${row.id}" style="font-size: 10px; ${changeButtonDelete}" ${disableButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${value}" email-id="${value}" style="font-size: 10px; ${changeButtonDelete}" ${disableButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                                 <i class="fa-solid fa-trash-can fa-beat"></i>
                             </button>
                             <span class="child-td1 ps-1">${fromEmail ? fromEmail : row.sender_email}</span>
@@ -513,10 +518,6 @@
                     messages
                 }) {
                     console.log('messages', messages);
-                    // $("#success_message").text(messages);
-                    // $('#success_message').addClass('background_error');
-                    // handleSuccessMessage('#success_message');
-                    // fetch_all_user_email('', pagination_url);
                 }
             });
         });
@@ -773,7 +774,7 @@
         });
         
         // email delete
-        $(document).on('click', '#deleteBtn', function(e){
+        $(document).on('click', '#deleteBtn, .delete_inbox_btn', function(e){
             e.preventDefault();
 
             // Check if any checkboxes are selected
@@ -786,8 +787,13 @@
                 let emailId = $(this).data('email-id');
 
                 if (!emailId) {
-                    alert('No email selected for deleting.');
-                    return;
+                    $("#errorEmailDelete").modal('show');
+                    setTimeout(() => {
+                        removeAttributeOrClass([
+                            {selector: '.error-messg_title, .err_close, .error_messg', type: 'class', name: 'text-skeletone'},
+                            {selector: '.err_cancel_button', type: 'class', name: 'setting-cancel-btn-skeletone'},
+                        ]);
+                    }, 1000);
                 }
                 selectedEmails.push(emailId);
             }
@@ -803,9 +809,11 @@
                 url:'/email/delete',
                 data: { ids: selectedEmails },
                 success:function(response){
-                    $('#success_message').addClass('background_error');
                     $('#success_message').text(response.messages);
-                    handleSuccessMessage('#success_message');
+                    $("#success_message").addClass('background_success_sm');
+                    setTimeout(() => {
+                        $('#success_message').fadeOut();
+                    }, 3000);
                     fetch_all_user_email();
                 }
             });
@@ -886,7 +894,7 @@
             };
         });
         // Select All Table Rows and Checkboxes
-        $(document).on('click', '#allSelectBtn, #allSelection, #allSelectionDraft', function() {
+        $(document).on('click', '#allSelectBtn', function() {
             $(this).tooltip('hide');
             const isChecked = $(this).is(':checked');
             $('.selectBtn').prop('checked', isChecked);

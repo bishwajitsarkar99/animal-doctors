@@ -233,9 +233,9 @@
                 }).join('');
 
                 return `
-                    <tr class="table-row user-table-row parent-row select-row-background" key="${key}">
+                    <tr class="table-row user-table-row parent-row" key="${key}">
                         <td class="line-height-td child-td" style="text-align:left;color:#000000;" id="treeRow">
-                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewBtn" email_id="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <button class="btn-sm edit_registration view_record_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewRecordBtn" email_id="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-regular fa-eye fa-beat"></i>
                             </button>
                             <span class="child-td1 ps-1">${toEmail} ${fromEmail ? fromEmail : (row.user_to)}</span>
@@ -250,7 +250,7 @@
                         </td>
                         <td class="child-td1 ps-1" id="readMal" hidden>${row.attachment_type}</td>
                     </tr>
-                    <tr class="child-row detail-row table-row row-hidden" data-child="${row.id}">
+                    <tr class="child-record-row detail-row table-row row-hidden" data-child="${row.id}">
                         <td colspan="14">
                             <div class="card detail-content" style="background-color:white;">
                                 <div class="row mt-1">
@@ -344,8 +344,6 @@
                         months, 
                         years, 
                         total_emails,
-                        total_draft_emails,
-                        total_send_emails,
                     } = response;
                     
                     $("#email_record_table").html(table_rows(data));
@@ -360,11 +358,7 @@
                     // Total Emails
                     $("#total_emails_progress").text(formatNumber(total_emails));
                     // Total Send Emails
-                    //$("#emailSend").text(formatNumber(total_send_emails));
-                    // Total Draft Emails
-                    //$("#emailDrafts").text(formatNumber(total_draft_emails));
-                    // Header Send
-                    //$("#send_emails").text(formatNumber(total_send_emails));
+                    $("#emailRecord").text(formatNumber(total_emails));
                     // Update current month element with the new data
                     $("#email_record_month").text(months.length > 0 ? months.join(', ') : '');
 
@@ -441,6 +435,14 @@
             return () => {
                 clearTimeout(timeOut);
             };
+        });
+
+        // view button Click and Parent Row Handle
+        $(document).on('click', '.view_record_btn', function(){
+            var parentId = $(this).data('parent');
+            $(this).tooltip('hide');
+            $(`.child-record-row[data-child='${parentId}']`).toggle('slow').delay(300);
+
         });
 
     });

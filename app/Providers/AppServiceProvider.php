@@ -26,6 +26,8 @@ use App\LogicBild\Forntend\Footer\FooterServiceProvider;
 use App\LogicBild\Email\EmailServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
+use App\Models\MailSetting;
+use Illuminate\Support\Facades\Config;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -135,5 +137,24 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         Schema::defaultStringLength(191);
+
+        $mailsetting = MailSetting::first();
+        if($mailsetting){
+            $data = [
+                'driver' => $mailsetting->	mail_transport,
+                'host' => $mailsetting->mail_host,
+                'port' => $mailsetting->mail_port,
+                'encryption' => $mailsetting->mail_encryption,
+                'username' => $mailsetting->mail_username,
+                'password' => $mailsetting->mail_password,
+                'from' => [
+                    'address' => $mailsetting->mail_from,
+                    'name' => env('APP_NAME'),
+                ]
+            ];
+
+            config::set('mail',$data);
+        }
+
     }
 }

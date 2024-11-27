@@ -66,6 +66,9 @@ html {
   border-radius: 4px !important;
   box-shadow: none !important;
 }
+.select2-container--default .select2-selection--single:focus{
+  border: 1px solid dodgerblue !important;
+}
 .is-invalid {
   border: 1px solid #dc3545;
   padding-right: calc(1.5em + 0.75rem);

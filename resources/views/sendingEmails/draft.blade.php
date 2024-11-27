@@ -8,8 +8,8 @@
                     </button>
                     <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="selectDropdownButton">Select</button>
                     <ul class="dropdown-menu" id="themeMenuListBackground">
-                        <li><a type="button" class="dropdown-item" href="#" id="selectButton">All</a></li>
-                        <li><a type="button" class="dropdown-item" href="#" id="noneButton">None</a></li>
+                        <li><a type="button" class="dropdown-item" href="#" id="selectDraftButton">All</a></li>
+                        <li><a type="button" class="dropdown-item" href="#" id="noneBtn">None</a></li>
                     </ul>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                     data-bs-toggle="tooltip"  data-bs-placement="top" title="Refresh" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="refresh_rotate_icon fa-solid fa-arrow-rotate-right"></i>
                     </button>
-                    <button class="btn btn-light btn-sm show-btn btn-top delete_drft_btn delete_show_btn delete-btn-display" type="button" id="deleteIconBtn"
+                    <button class="btn btn-light btn-sm show-delete-btn btn-top delete_drft_btn delete_show_button delete-btn-display" type="button" id="deleteIconBtn"
                     data-bs-toggle="tooltip"  data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
                     <i class="fa-regular fa-trash-can"></i>
                     </button>
@@ -64,7 +64,7 @@
                 </tbody>
             </table>
         </div>
-        <p class="mt-2 ps-1" id="success_message"></p>
+        <p class="delete_success ps-1" id="success_message"></p>
         <div class="row table_last_row">
             <div class="col-1 pt-2">
                 <div class="draft_data_item item-skeletone">

@@ -64,7 +64,7 @@ button.send_button:hover,.permission_submit:hover,.permission_update:hover,#upda
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     opacity: 1;
 }
-button.permission_calncel,button.confirm_cancel_button{
+button.permission_calncel,button.confirm_cancel_button,button.err_cancel_button{
     background-color: #0056b3;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
@@ -80,7 +80,7 @@ button.permission_calncel,button.confirm_cancel_button{
     transition: border-color 0.3s ease, background-color 0.3s ease;
     border-color: #007bff; 
 }
-button.permission_calncel:hover,button.confirm_cancel_button:hover{
+button.permission_calncel:hover,button.confirm_cancel_button:hover,button.err_cancel_button:hover{
     background-image: linear-gradient(to top, rgb(247, 88, 31), orangered, rgb(247, 88, 31));
     color: rgb(250, 193, 89); 
     transition: border-color 0.3s ease, background-color 0.3s ease;
@@ -329,7 +329,7 @@ a#email_setting:hover{
     background-color: #3b71ca;
 }
 button#v-pills-email-tab,button#v-pills-inbox-tab,button#v-pills-send-tab,button#v-pills-draft-tab,
-button#v-pills-file-tab,button#v-pills-settings-tab,button#v-pills-record-tab{
+button#v-pills-file-tab,button#v-pills-settings-tab,button#v-pills-record-tab,button#v-pills-permissions-tab{
     outline: none;
     box-shadow: none;
     font-family: var(--nav-font-family);
@@ -341,7 +341,8 @@ button#v-pills-file-tab,button#v-pills-settings-tab,button#v-pills-record-tab{
     text-align: left;
 }
 button#v-pills-email-tab:hover,button#v-pills-inbox-tab:hover,button#v-pills-send-tab:hover
-,button#v-pills-draft-tab:hover,button#v-pills-file-tab:hover,button#v-pills-settings-tab:hover,button#v-pills-record-tab:hover{
+,button#v-pills-draft-tab:hover,button#v-pills-file-tab:hover,button#v-pills-settings-tab:hover,button#v-pills-record-tab:hover,
+button#v-pills-permissions-tab:hover{
     background-image: var(--nav-button-background);
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
@@ -648,7 +649,7 @@ button#checkBtn {
     background-color: white;
     line-height: 1.2;
 }
-button#viewBtn {
+button#viewBtn,button.draft_view,button.send_email_view,button.view_record_btn {
     border: none;
     background-color: #fff;
 }
@@ -656,7 +657,8 @@ button#forwardBtn,button#sendForwardBtn,button#draftForwardBtn{
     border: none;
     background-color: #fff;
 }
-button#viewBtn:hover,button#deleteBtn:hover,button#forwardBtn:hover,button#sendForwardBtn:hover,button#draftForwardBtn:hover{
+button#viewBtn:hover,button#deleteBtn:hover,button#forwardBtn:hover,button#sendForwardBtn:hover,button#draftForwardBtn:hover
+,button.draft_view:hover,button.send_email_view:hover,button.view_record_btn:hover{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     border-radius: 50%;
     background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);
@@ -1261,7 +1263,11 @@ img#modalImage {
     width: 100%;
     height: 100%;
 }
-button#deleteBtn {
+input#allSelectionDraft,input#selectCheckBtn,input#allEmailSelect,input#select_email_btn{
+    box-shadow: none;
+    cursor: pointer;
+}
+button#deleteBtn,button#draftBtn,button#sendDeleteBtn {
     background-color: white;
     border: none;
 }
@@ -1407,8 +1413,40 @@ td.error_data {
         color: #ddd;
     }
     100% {
-        color: #d7a694;
+        color: #a99c97;
     }
+}
+.email-setting-card{
+    background-color: white;
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    opacity: 1;
+    border:1px solid #e1e1e1;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.mail-setting-form {
+    padding: 10px;
+}
+.mail_label{
+    color: black;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: var(--nav-font-family);
+}
+.mail_input{
+    color: black;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: var(--nav-font-family);
+}
+.mail_input:focus{
+    border: 1px solid dodgerblue;
+}
+input#emailTransport,input#emailHost,input#emailPort,input#emailUserName,input#emailPassword,input#emailEncryption,input#fromEmail{
+    box-shadow: none;
+}
+.delete_success{
+    margin-top: -16px;
 }
 a.page-link.btn_page {
     height: 22px;

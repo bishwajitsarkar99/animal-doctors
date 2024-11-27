@@ -35,17 +35,17 @@
           </button>
           @endif
           @if(auth()->user()->role == 1)
-          <button class="nav-link" id="v-pills-file-tab" data-bs-toggle="pill" data-bs-target="#v-pills-file" type="button" role="tab" aria-controls="v-pills-file" aria-selected="false">
-            <i class="fa-solid fa-folder-open"></i>
-            <span class="btn-text file_directory_page"> Attachment Folder</span>
-          </button>
           <button class="nav-link" id="v-pills-record-tab" data-bs-toggle="pill" data-bs-target="#v-pills-record" type="button" role="tab" aria-controls="v-pills-record" aria-selected="false">
             <i class="fa-solid fa-wifi"></i>
-            <span class="btn-text email_record_page"> Email Record</span>
+            <span class="btn-text email_record_page"> Record (<span class="ms-1 me-1" id="emailRecord"></span>)</span>
           </button>
-          <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+          <button class="nav-link" id="v-pills-file-tab" data-bs-toggle="pill" data-bs-target="#v-pills-file" type="button" role="tab" aria-controls="v-pills-file" aria-selected="false">
             <i class="fa-solid fa-gear"></i>
-            <span class="btn-text email_setting"> Setting</span>
+            <span class="btn-text email_setting">Email Setting</span>
+          </button>
+          <button class="nav-link" id="v-pills-permissions-tab" data-bs-toggle="pill" data-bs-target="#v-pills-permissions" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+            <i class="fa-solid fa-timeline"></i>
+            <span class="btn-text email_permission"> Permission</span>
           </button>
           @endif
         </div>
@@ -63,12 +63,14 @@
             @include('sendingEmails.draft')
           </div>
           @if(auth()->user()->role == 1)
-          <div class="tab-pane fade" id="v-pills-file" role="tabpanel" aria-labelledby="v-pills-file-tab">Attachment Folder</div>
+          <div class="tab-pane fade" id="v-pills-file" role="tabpanel" aria-labelledby="v-pills-file-tab">
+            @include('sendingEmails.email_setting')
+          </div>
           <div class="tab-pane fade" id="v-pills-record" role="tabpanel" aria-labelledby="v-pills-record-tab">
             @include('sendingEmails.email_record')
           </div>
-          <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-            @include('sendingEmails.setting')
+          <div class="tab-pane fade" id="v-pills-permissions" role="tabpanel" aria-labelledby="v-pills-permissions-tab">
+            @include('sendingEmails.permission')
           </div>
           @endif
         </div>
@@ -251,6 +253,34 @@
     </div>
   </div>
 </div>
+<!--  Error Message Modal for Email Delete -->
+<div class="modal fade" id="errorEmailDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+      <div class="modal-header" id="logoutModal_header">
+        <h6 class="modal-title admin_title scan error-messg_title text-skeletone pt-1" id="staticBackdropLabel">
+          Delete Error Message
+        </h6>
+        <button type="button" class="btn-close btn-btn-sm head_btn2 err_close text-skeletone" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+        </div>
+        <div class="modal-body" id="logoutModal_body">
+          <div class="row">
+            <div class="col-xl-12">
+              <p class="admin_paragraph error_messg text-skeletone" style="text-align:center;" id="text_message">
+                <label class="label_user_edit" id="cate_confirm_update" for="id">Select the row checkbox. </label>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" id="logoutModal_footer">
+          <button type="button" class="btn btn-sm cgt_btn err_cancel_button setting-cancel-btn-skeletone" id="errorCancel" data-bs-dismiss="modal">Cancel</button>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/email/email.css">
@@ -263,9 +293,10 @@
 @include('sendingEmails.ajax.inbox-ajax')
 @include('sendingEmails.ajax.sendbox-ajax')
 @include('sendingEmails.ajax.draft-ajax')
-@include('sendingEmails.ajax.setting-ajax')
+@include('sendingEmails.ajax.permission-ajax')
 @include('sendingEmails.ajax.email-record-ajax')
 @include('sendingEmails.ajax.show-modal-page-ajax')
+@include('sendingEmails.ajax.mail-setting-ajax')
 <!-- Summar-Note -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>

@@ -16,6 +16,7 @@ use App\Models\UserEmail;
 use App\Models\UserInboxEmail;
 use App\Models\UserEmailDeletePermission;
 use App\Models\EmailRecord;
+use App\Models\MailSetting;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 
@@ -227,21 +228,23 @@ class EmailServiceProvider
         ]);
 
         // inbox Email Store
-        DB::table('user_inbox_emails')->insert([
-            'user_to' => $request->user_to,
-            'user_cc' => $request->user_cc ?? 'N/A',
-            'user_bcc' => $request->user_bcc ?? 'N/A',
-            'subject' => $request->subject ?? 'No Subject',
-            'main_content' => $content ?? 'No Content',
-            'email_attachments' => json_encode($attachments),
-            'attachment_type' => $request->attachment_type ?? 'other',
-            'sender_email' => Auth::user()->email,
-            'sender_user' => Auth::user()->id,
-            'status' => $request->status ? '1' : '0',
-            'read_mail' => $request->status ? '1' : '0',
-            'draft_mail' => $draftMailStatus,
-            'created_at' => now(),
-        ]);
+        if(in_array($request->attachment_type, ['report', 'message'])){
+            DB::table('user_inbox_emails')->insert([
+                'user_to' => $request->user_to,
+                'user_cc' => $request->user_cc ?? 'N/A',
+                'user_bcc' => $request->user_bcc ?? 'N/A',
+                'subject' => $request->subject ?? 'No Subject',
+                'main_content' => $content ?? 'No Content',
+                'email_attachments' => json_encode($attachments),
+                'attachment_type' => $request->attachment_type ?? 'other',
+                'sender_email' => Auth::user()->email,
+                'sender_user' => Auth::user()->id,
+                'status' => $request->status ? '1' : '0',
+                'read_mail' => $request->status ? '1' : '0',
+                'draft_mail' => $draftMailStatus,
+                'created_at' => now(),
+            ]);
+        }
 
         // Email Record
         DB::table('email_records')->insert([
@@ -585,23 +588,25 @@ class EmailServiceProvider
             'created_at' => now(),
         ]);
         // inbox Email Store
-        DB::table('user_inbox_emails')->insert([
-            'user_to' => $request->user_to,
-            'user_cc' => $request->user_cc ?? 'N/A',
-            'user_bcc' => $request->user_bcc ?? 'N/A',
-            'subject' => $request->subject ?? 'No Subject',
-            'main_content' => $content ?? 'No Content',
-            'email_attachments' => json_encode($attachments),
-            'attachment_type' => $request->attachment_type ?? 'other',
-            'sender_email' => Auth::user()->email,
-            'sender_user' => Auth::user()->id,
-            'status' => $request->status ? '1' : '0',
-            'read_mail' => $request->status ? '1' : '0',
-            'draft_mail' => $draftMailStatus,
-            'created_at' => now(),
-        ]);
+        if(in_array($request->attachment_type, ['report', 'message'])){
+            DB::table('user_inbox_emails')->insert([
+                'user_to' => $request->user_to,
+                'user_cc' => $request->user_cc ?? 'N/A',
+                'user_bcc' => $request->user_bcc ?? 'N/A',
+                'subject' => $request->subject ?? 'No Subject',
+                'main_content' => $content ?? 'No Content',
+                'email_attachments' => json_encode($attachments),
+                'attachment_type' => $request->attachment_type ?? 'other',
+                'sender_email' => Auth::user()->email,
+                'sender_user' => Auth::user()->id,
+                'status' => $request->status ? '1' : '0',
+                'read_mail' => $request->status ? '1' : '0',
+                'draft_mail' => $draftMailStatus,
+                'created_at' => now(),
+            ]);
+        }
 
-        // inbox Email Store
+        // Email Record Store
         DB::table('email_records')->insert([
             'user_to' => $request->user_to,
             'user_cc' => $request->user_cc ?? 'N/A',
@@ -800,10 +805,6 @@ class EmailServiceProvider
         
         // Total User Email / Inbox
         $total_emails = EmailRecord::count();
-        // Total Draft User Email
-        $total_draft_emails = EmailRecord::whereNull('user_to')->where('sender_user', '=', $authID)->count();
-        // Total Send User Email According to Month
-        $total_send_emails = EmailRecord::whereNotNull('user_to')->where('sender_user', '=', $authID)->count();
         
         $perItem = $request->input('per_item', 10);
         $data = $query->paginate($perItem)->toArray();
@@ -812,8 +813,6 @@ class EmailServiceProvider
             'links' => $data['links'],
             'total' => $data['total'],
             'total_emails' => $total_emails,
-            'total_draft_emails' => $total_draft_emails,
-            'total_send_emails' => $total_send_emails,
             'months' => $months,
             'years' => array_values($years)
 
@@ -957,5 +956,29 @@ class EmailServiceProvider
             'status'=> 200,
             'messages'=> 'Permission has deleted.',
         ]);
+    }
+    /**
+     * Handle Mail Setting Get
+    */
+    public function mailSetting(Request $request)
+    {
+        $mail_settings = MailSetting::first();
+
+        if (!$mail_settings) {
+            return response()->json([
+                'message' => 'No mail settings found.',
+            ], 404);
+        }
+
+        return response()->json([
+            'mail_settings' => $mail_settings,
+        ], 200);
+    }
+    /**
+     * Handle Mail Setting Update
+    */
+    public function mailSettingUpdate(Request $request, $id)
+    {
+        // 
     }
 }

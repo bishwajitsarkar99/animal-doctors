@@ -115,7 +115,7 @@
         });
 
         // Email Setting Tab
-        $(document).on('click', '#v-pills-settings-tab', function(e){
+        $(document).on('click', '#v-pills-permissions-tab', function(e){
             e.preventDefault();
 
             addAttributeOrClass([

@@ -104,4 +104,16 @@ class EmailController extends Controller
     {
         return $this->emailServiceProvider->deleteUserEmailPermissionDelete($id);
     }
+
+    // Email Setting Data Get
+    public function emailSetting(Request $request)
+    {
+        return $this->emailServiceProvider->mailSetting($request);
+    }
+
+    // Email Setting Data Get
+    public function emailSettingUpdate(Request $request, $id)
+    {
+        return $this->emailServiceProvider->mailSettingUpdate($request, $id);
+    }
 }

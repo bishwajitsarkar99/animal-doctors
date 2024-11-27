@@ -146,13 +146,14 @@
                             @csrf
                             <div class="row">
                                 <div class="form-group mt-3">
-                                    <span class="input-user-skeleton"></span>
-                                    <select type="text" class="form-control form-control-sm select2" name="role" value="{{old('role')}}" id="select_user">
-                                        <option value="">Select Email</option>
-                                        @foreach($roles as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <span class="input-user-skeleton" style="text-align:center;">
+                                        <select type="text" class="form-control form-control-sm select2" name="role" value="{{old('role')}}" id="select_user">
+                                            <option value="" style="text-align:center;">Select Email</option>
+                                            @foreach($roles as $item)
+                                            <option value="{{$item->id}}" style="text-align:center;">{{$item->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </span>
                                     <span class="text-danger input_message show-error remove-user-error">@error('role')
                                         Error Messages : {{$message}}@enderror
                                     </span><br>

@@ -30,7 +30,7 @@
                         data-bs-toggle="tooltip"  data-bs-placement="top" title="Refresh" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                         <i class="refresh_rotate_icon fa-solid fa-arrow-rotate-right"></i>
                     </button>
-                    <button class="btn btn-light btn-sm chck show-btn delete_show_btn delete-btn-display" type="button" id="deleteIconBtn"
+                    <button class="btn btn-light btn-sm chck show-btn delete_inbox_btn delete_show_btn delete-btn-display" type="button" id="deleteIconBtn"
                         data-bs-toggle="tooltip"  data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
                         <i class="fa-regular fa-trash-can"></i>
                     </button>
@@ -84,6 +84,7 @@
                 </tbody>
             </table>
         </div>
+        <p class="delete_success ps-1" id="success_message"></p>
         <div class="row table_last_row">
             <div class="col-1 pt-2">
                 <div class="custom-select item-skeletone">

@@ -195,18 +195,18 @@
                 }).join('');
 
                 return `
-                    <tr class="table-row user-table-row parent-row select-row-background" key="${key}">
+                    <tr class="table-row user-table-row parent-row select-send-row-background" key="${key}">
                         <td class="line-height-td child-td" style="text-align:left;color:#000000;" id="treeRow">
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="checkBtn" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Select" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                                <input class="form-check-input selectBtn" type="checkbox" value="${row.id}" id="selectBtn" style="font-size:13px;margin-top: -2px;">
+                                <input class="form-check-input select_email_btn" type="checkbox" value="${row.id}" id="select_email_btn" style="font-size:13px;margin-top: -2px;">
                             </button>
-                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn send_email_view viewurs ms-1" data-parent="${row.id}" id="viewSendBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-regular fa-eye fa-beat"></i>
                             </button>
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="sendForwardBtn" value="${forwardValue}" style="font-size: 10px; margin-top: 2px; ${changeButton}" ${disableForwardButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-solid fa-share-nodes fa-beat"></i>
                             </button>
-                            <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${value}" style="font-size: 10px; ${changeButtonDelete}" ${disableButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="sendDeleteBtn" value="${value}" style="font-size: 10px; ${changeButtonDelete}" ${disableButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                                 <i class="fa-solid fa-trash-can fa-beat"></i>
                             </button>
                             <span class="child-td1 ps-1">To : ${fromEmail ? fromEmail : row.user_to}</span>
@@ -218,7 +218,7 @@
                         </td>
                         <td class="child-td1 ps-1" id="readMal" value="${row.read_mail}" hidden>${row.read_mail}</td>
                     </tr>
-                    <tr class="child-row detail-row table-row row-hidden" data-child="${row.id}">
+                    <tr class="child-send-row detail-row table-row row-hidden" data-child="${row.id}">
                         <td colspan="14">
                             <div class="card detail-content" style="background-color:white;">
                                 <div class="row mt-1">
@@ -408,8 +408,8 @@
             $("#select_attachment_email").val("");
             $("#select_status_email").val("");
             $("#send_email_search").val("");
-            $("#allSelection").prop('checked', false);
-            $('.show-btn').addClass('delete-btn-display');
+            $("#allEmailSelect").prop('checked', false);
+            $('.show-send-delete-btn').addClass('delete-btn-display');
             fetch_send_email();
             addAttributeOrClass([
                {selector: '.refresh_rotate_icon', type: 'class', name: 'fa-spin'} 
@@ -424,6 +424,14 @@
             return () => {
                 clearTimeout(timeOut);
             };
+        });
+
+        // view button Click and Parent Row Handle
+        $(document).on('click', '.send_email_view', function(){
+            var parentId = $(this).data('parent');
+            $(this).tooltip('hide');
+            $(`.child-send-row[data-child='${parentId}']`).toggle('slow').delay(300);
+
         });
 
         // send email forward
@@ -558,6 +566,112 @@
                     }
                 }
             });
+        });
+
+        // email delete
+        $(document).on('click', '#sendDeleteBtn, .delete_send_btn', function(e){
+            e.preventDefault();
+
+            // Check if any checkboxes are selected
+            let selectedEmails = [];
+            $("#select_email_btn:checked").each(function() {
+                selectedEmails.push($(this).val());
+            });
+
+            if (selectedEmails.length === 0) {
+                let emailId = $(this).data('email-id');
+
+                if (!emailId) {
+                    $("#errorEmailDelete").modal('show');
+                    setTimeout(() => {
+                        removeAttributeOrClass([
+                            {selector: '.error-messg_title, .err_close, .error_messg', type: 'class', name: 'text-skeletone'},
+                            {selector: '.err_cancel_button', type: 'class', name: 'setting-cancel-btn-skeletone'},
+                        ]);
+                    }, 1000);
+                }
+                selectedEmails.push(emailId);
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type:'DELETE',
+                url:'/email/delete',
+                data: { ids: selectedEmails },
+                success:function(response){
+                    $('#success_message').text(response.messages);
+                    $("#success_message").addClass('background_success_sm');
+                    setTimeout(() => {
+                        $('#success_message').fadeOut();
+                    }, 3000);
+                    fetch_all_user_email();
+                }
+            });
+        });
+
+        // Update "Select All" checkbox based on individual selections
+        $(document).on('click', '#select_email_btn', function() {
+            const isChecked = $(this).is(':checked');
+            $(this).tooltip('hide');
+            
+            // Toggle row background based on checkbox state
+            if (isChecked) {
+                $(this).closest('.table-row').addClass('table-row-select-bg');
+                $('.delete_send_show_btn').closest('.show-send-delete-btn').removeClass('delete-btn-display');
+            } else {
+                $(this).closest('.table-row').removeClass('table-row-select-bg');
+            }
+            // Update the "Select All" checkbox based on individual selections
+            const allChecked = $('.form-check-input[id="select_email_btn"]').length === $('.form-check-input[id="select_email_btn"]:checked').length;
+            $('#allEmailSelect').prop('checked', allChecked);
+        });
+
+        // Select All Table Rows and Checkboxes
+        $(document).on('click', '#allEmailSelect', function() {
+            $(this).tooltip('hide');
+            const isChecked = $(this).is(':checked');
+            $('.select_email_btn').prop('checked', isChecked);
+            // Toggle background for all rows based on "Select All" checkbox state
+            if (isChecked) {
+                $('.select-send-row-background').addClass('table-row-select-bg');
+                // Show delete button
+                $('.delete_send_show_btn').removeClass('delete-btn-display');
+            } else {
+                $('.select-send-row-background').removeClass('table-row-select-bg');
+                // Hide delete button
+                $('.delete_send_show_btn').addClass('delete-btn-display');
+            }
+        });
+
+        // From Dropdown Table All Rows Select selectButton 
+        $(document).on('click', '#selectEmail', function(event){
+            // Set all checkboxes to checked
+            $('.select_email_btn').prop('checked', true);
+            // Add background to all selected rows
+            $('.select-send-row-background').addClass('table-row-select-bg');
+            // Show delete button
+            $('.show-send-delete-btn').removeClass('delete-btn-display');
+            // Prevent default link behavior
+            event.preventDefault();
+
+        });
+
+        // From Dropdown Table All Rows Unselect noneButton 
+        $(document).on('click', '#noneEmailBtn', function(event){
+            // Set all checkboxes to checked
+            $('.select_email_btn').prop('checked', false);
+            // Add background to all selected rows
+            $('.select-send-row-background').removeClass('table-row-select-bg');
+            // Show delete button
+            $('.show-send-delete-btn').addClass('delete-btn-display');
+            // Prevent default link behavior
+            event.preventDefault();
+
         });
         
     });
