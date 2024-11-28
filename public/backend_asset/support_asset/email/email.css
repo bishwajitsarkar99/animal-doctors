@@ -120,6 +120,9 @@ button.permission_calncel:hover,button.confirm_cancel_button:hover,button.err_ca
     border: none;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    background-image: linear-gradient(to bottom, rgb(243 241 241 / 5%) 0%, white 100%);
+    opacity: 1;
+    background-color: white;
 }
 .note-editor.note-frame .note-editing-area .note-editable {
     padding: 10px;
@@ -1417,6 +1420,14 @@ td.error_data {
         color: #a99c97;
     }
 }
+.email-card{
+    background-color: white;
+    box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    opacity: 1;
+    border:1px solid #e1e1e1;
+    border-radius: 5px;
+    background-image: linear-gradient(to bottom, rgb(243 241 241 / 5%) 0%, white 100%); 
+}
 .email-setting-card{
     background-color: white;
     box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
@@ -1424,6 +1435,7 @@ td.error_data {
     border:1px solid #e1e1e1;
     border-radius: 5px;
     margin-bottom: 10px;
+    background-image: linear-gradient(to bottom, rgb(243 241 241 / 5%) 0%, white 100%);
 }
 .mail-setting-form {
     padding: 10px;
@@ -1440,9 +1452,17 @@ td.error_data {
     font-weight: 600;
     font-size: 13px;
     font-family: var(--nav-font-family);
+    border: 1px solid #dfdfdf;
 }
 .mail_input:focus{
     border: 1px solid dodgerblue;
+}
+.alert_show_errors {
+    color: orangered;
+    font-size: 12px;
+    font-family: var(--nav-font-family);
+    padding-left: 2px;
+    font-weight: 700;
 }
 input#emailTransport,input#emailHost,input#emailPort,input#emailUserName,input#emailPassword,input#emailEncryption,input#fromEmail{
     box-shadow: none;

@@ -54,7 +54,7 @@
                 </span>
             </div>
             <div class="col-6" style="text-align:right;">
-                <span class="draft_current_month text-skeletone pe-2" id="draft_email_month"></span>
+                <span class="draft_email_current_month text-skeletone pe-2" id="draft_email_month"></span>
             </div>
         </div>
         <div class="table-responsive">

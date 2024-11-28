@@ -17,7 +17,7 @@
                 removeAttributeOrClass([
                     { selector: '.selection, .inbox_clos_btn, .current_month, .input1, .input2, .input5, #user_email_get_data_table_paginate, .storg_inbox', type: 'class', name: 'text-skeletone' },
                     { selector: '.time_area', type: 'class', name: 'timzon-skeletone' },
-                    { selector: ' .input3, .input4', type: 'class', name: 'select-catg-skeletone' },
+                    { selector: ' .input3, .input_4', type: 'class', name: 'select-catg-skeletone' },
                     { selector: '.group_btn', type: 'class', name: 'select-skeletone' },
                     { selector: '.email__select', type: 'class', name: 'min-dropdown-skeletone' },
                     { selector: '.next_btn', type: 'class', name: 'refrsh-skeletone' },
@@ -72,7 +72,7 @@
             var time = null;
             var time = setTimeout(() => {
                 removeAttributeOrClass([
-                    {selector: '.send_clos_btn,.draft_group_btn,.draft_current_month,.draft_input1,.draft_input2,.draft_input5,.send_timezone,#draft_email_data_table_paginate,.storg_draft', type: 'class', name: 'text-skeletone'},
+                    {selector: '.send_clos_btn,.draft_group_btn,.draft_email_current_month,.draft_input1,.draft_input2,.draft_input5,.send_timezone,#draft_email_data_table_paginate,.storg_draft', type: 'class', name: 'text-skeletone'},
                     {selector: '.draft__email__select', type: 'class', name: 'min-dropdown-skeletone'},
                     { selector: ' .draft_input3, .input4', type: 'class', name: 'select-catg-skeletone' },
                     {selector: '.draft_next_btn', type: 'class', name: 'refrsh-skeletone'},
@@ -98,8 +98,8 @@
             var time = null;
             var time = setTimeout(() => {
                 removeAttributeOrClass([
-                    {selector: '.draft_current_month,.record_input1,.record_input2,.record_current_month,#user_email_record_table_paginate,.storg_record', type: 'class', name: 'text-skeletone'},
-                    { selector: ' .record_input3, .record_input4, .record_input5', type: 'class', name: 'select-catg-skeletone' },
+                    {selector: '.draft_current_month,.record_input_one,.record_input_two,.email_record_month,#user_email_record_table_paginate,.email_storg_record', type: 'class', name: 'text-skeletone'},
+                    {selector: ' .record_input3, .record_input4, .record_input5', type: 'class', name: 'select-catg-skeletone' },
                     {selector: '.record_next_btn', type: 'class', name: 'refrsh-skeletone'},
                     {selector: '.record_data_item', type: 'class', name: 'item-skeletone'},
                     {selector: '#email_record_table', type: 'class', name: 'tabskeletone'},

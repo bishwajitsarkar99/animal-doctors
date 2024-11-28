@@ -65,7 +65,7 @@
                 </span>
             </div>
             <div class="col-xl-2">
-                <span class="input4 select-catg-skeletone">
+                <span class="input_4 select-catg-skeletone">
                     <select type="text" class="form-control form-control-sm select2" name="status" id="select_status">
                         <option value="">Select Email</option>
                         <option value="0">New</option>

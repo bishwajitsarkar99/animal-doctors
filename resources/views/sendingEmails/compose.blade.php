@@ -1,4 +1,4 @@
-<div class="card-body focus-color cd skeleton" style="border:1px solid lightgray;border-radius: 5px;margin-bottom: 10px;">
+<div class="card-body focus-color cd email-card skeleton" style="border:1px solid lightgray;border-radius: 5px;margin-bottom: 10px;">
     <form id="emailForm" action="{{route('email.send')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <span id="emailForwardID" hidden></span>
@@ -77,6 +77,8 @@
             <div class="col-xl-10 action_message">
             @if(session('success'))
                 <p class="background_success mt-2 ps-1" id="success_message">{{session('success')}}</p>
+            @elseif(session('error'))
+                <p class="background_success mt-2 ps-1" id="error_message">{{session('error')}}</p>
             @endif
             <p class="mt-2 ps-1" id="success_messages"></p>
             </div>

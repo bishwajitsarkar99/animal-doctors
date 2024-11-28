@@ -50,7 +50,7 @@
         buttonLoader('#submit', '.loading-icon', '.btn-text', 'Send...', 'Send', 6000);
         buttonLoader('#forwardSubmit', '.loading-icon-two', '.forward-btn-text', 'Send...', 'Send', 6000);
         // Initialize the message
-        handleSuccessMessage('#success_message');
+        handleSuccessMessage('#success_message, #error_message');
         // Get Current Date and set it for start_date and end_date fields
         const startDateField = document.getElementById('start_date');
         const endDateField = document.getElementById('end_date');

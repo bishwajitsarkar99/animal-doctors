@@ -208,6 +208,10 @@ class EmailServiceProvider
             'main_content' => $content ?? 'No Content',
         ];
 
+         // Check email settings
+        if (!$this->validateMailSettings()) {
+            return back()->with('error', 'Email settings are required.');
+        }
         // Determine draft_mail status
         $draftMailStatus = $request->user_to ? ($request->draft_mail ? '1' : '0') : '1';
         // Store Email Data in DB
@@ -275,6 +279,14 @@ class EmailServiceProvider
             \Log::error('Email sending failed: ' . $e->getMessage());
             return back()->with('error', 'Failed to send email. Please try again.');
         }
+    }
+    private function validateMailSettings()
+    {
+        $mail_setting = MailSetting::first();
+        return $mail_setting && $mail_setting->mail_transport && $mail_setting->mail_host &&
+            $mail_setting->mail_port && $mail_setting->mail_username &&
+            $mail_setting->mail_password && $mail_setting->mail_encryption &&
+            $mail_setting->mail_from;
     }
     /**
      * Handle Send Email Fetch 

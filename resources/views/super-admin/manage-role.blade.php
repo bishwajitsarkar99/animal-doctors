@@ -19,7 +19,7 @@
                             <option value="{{ $user->id }}">{{ $user->email }}</option>
                         @endforeach
                     </select>
-                    <span class="input-error-skeleton text-danger contact_message show-error remove-error-one">@error('user_id')
+                    <span class="input-error-skeleton text-danger contact_message show-error remove-error-one ps-2">@error('user_id')
                         {{$message}}@enderror
                     </span>
                 </div>
@@ -38,7 +38,7 @@
                             <option value="{{ $role->id }}">{{ $role->name }}</option>
                         @endforeach
                     </select>
-                    <span class="input-error-skeleton text-danger contact_message show-error remove-error-two">@error('role_id')
+                    <span class="input-error-skeleton text-danger contact_message show-error remove-error-two ps-2">@error('role_id')
                         {{$message}}@enderror
                     </span>
                 </div>

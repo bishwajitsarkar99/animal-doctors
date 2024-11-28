@@ -612,11 +612,13 @@
             var reportEmailForwardSendbox = $("input[name='report_email_forward_sendbox']:checked").val();
             var reportStatusSendbox = $("input[name='report_status_sendbox']:checked").val();
 
-            if (!roleName) {
-                $("#select_user_role").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the role name.</span>');
+            if (roleName.trim() == '') {
+                $("#select_user_role").closest('.role_nme').append('<span class="error_role alert_show_errors error_role ps-2">Select the role name.</span>');
+                $("#select_user_role").addClass('is-invalid');
             }
-            if (!userEmail) {
-                $("#select_user_email").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the user email.</span>');
+            if (userEmail.trim() == '') {
+                $("#select_user_email").closest('.role_nme').append('<span class="error-message alert_show_errors error_email ps-2">Select the user email.</span>');
+                $("#select_user_email").addClass('is-invalid');
             }
 
             if ($('.error-message').length > 0) {
@@ -693,6 +695,30 @@
                     }
                 }
             });
+
+        });
+
+        // Role and Email Validation
+        $(document).on('change', '.select_user_role, .select_user_email', function() {
+            // Get and trim values
+            var mailRoleVal = $("#select_user_role").val().trim();
+            var mailVal = $("#select_user_email").val().trim();
+
+            // Validate role
+            if (mailRoleVal === '') {
+                $(".error_role").removeAttr('hidden');
+            } else {
+                $("#select_user_role").removeClass('is-invalid');
+                $(".error_role").attr('hidden', true);
+            }
+
+            // Validate email
+            if (mailVal === '') {
+                $(".error_email").removeAttr('hidden');
+            } else {
+                $("#select_user_email").removeClass('is-invalid');
+                $(".error_email").attr('hidden', true);
+            }
 
         });
 

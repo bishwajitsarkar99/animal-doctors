@@ -40,7 +40,7 @@
             e.preventDefault();
 
             // Input Field Validation
-            $('.error-message').remove();
+            $('.error-setting-message').remove();
 
             var mailTransport = $("#emailTransport").val();
             var mailHost = $("#emailHost").val();
@@ -50,29 +50,36 @@
             var mailEncryption = $("#emailEncryption").val();
             var mailFrom = $("#fromEmail").val();
 
-            if (!mailTransport) {
-                $("#emailTransport").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Required Mail Transport.</span>');
+            if (mailTransport.trim() == '') {
+                $("#emailTransport").closest('.role_nme').append('<span class="error-setting-message alert_show_errors error_one ps-2">Required Mail Transport.</span>');
+                $("#emailTransport").addClass('is-invalid');
             }
-            if (!mailHost) {
-                $("#emailHost").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Required Mail Host.</span>');
+            if (mailHost.trim() == '') {
+                $("#emailHost").closest('.role_nme').append('<span class="error-setting-message alert_show_errors error_two ps-2">Required Mail Host.</span>');
+                $("#emailHost").addClass('is-invalid');
             }
-            if (!mailPort) {
-                $("#emailPort").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Required Mail Port.</span>');
+            if (mailPort.trim() == '') {
+                $("#emailPort").closest('.role_nme').append('<span class="error-setting-message alert_show_errors error_three ps-2">Required Mail Port.</span>');
+                $("#emailPort").addClass('is-invalid');
             }
-            if (!mailUsername) {
-                $("#emailUserName").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Required User Name.</span>');
+            if (mailUsername.trim() == '') {
+                $("#emailUserName").closest('.role_nme').append('<span class="error-setting-message alert_show_errors error_four ps-2">Required User Name.</span>');
+                $("#emailUserName").addClass('is-invalid');
             }
-            if (!mailPassword) {
-                $("#emailPassword").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Required Password.</span>');
+            if (mailPassword.trim() == '') {
+                $("#emailPassword").closest('.role_nme').append('<span class="error-setting-message alert_show_errors error_five ps-2">Required Password.</span>');
+                $("#emailPassword").addClass('is-invalid');
             }
-            if (!mailEncryption) {
-                $("#emailEncryption").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Required Mail Encryption.</span>');
+            if (mailEncryption.trim() == '') {
+                $("#emailEncryption").closest('.role_nme').append('<span class="error-setting-message alert_show_errors error_six ps-2">Required Mail Encryption.</span>');
+                $("#emailEncryption").addClass('is-invalid');
             }
-            if (!mailFrom) {
-                $("#fromEmail").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Required From Mail.</span>');
+            if (mailFrom.trim() == '') {
+                $("#fromEmail").closest('.role_nme').append('<span class="error-setting-message alert_show_errors error_seven ps-2">Required From Mail.</span>');
+                $("#fromEmail").addClass('is-invalid');
             }
 
-            if ($('.error-message').length > 0) {
+            if ($('.error-setting-message').length > 0) {
                 // If there are error messages, stop further execution
                 return;
             }
@@ -135,6 +142,74 @@
                 }
             });
             
+        });
+
+        // Mail Setting Validation
+        $(document).on('keyup', '#emailTransport, #emailHost, #emailPort, #emailUserName, #emailPassword, #emailEncryption, #fromEmail', function() {
+            // Get and trim values
+            var mailTransportVal = $("#emailTransport").val().trim();
+            var mailHostVal = $("#emailHost").val().trim();
+            var mailPortVal = $("#emailPort").val().trim();
+            var mailUserNameVal = $("#emailUserName").val().trim();
+            var mailPasswordVal = $("#emailPassword").val().trim();
+            var mailMailEncryptionVal = $("#emailEncryption").val().trim();
+            var mailFromEmailVal = $("#fromEmail").val().trim();
+
+            // Validate emailTransport
+            if (mailTransportVal === '') {
+                $(".error_one").removeAttr('hidden');
+            } else {
+                $("#emailTransport").removeClass('is-invalid');
+                $(".error_one").attr('hidden', true);
+            }
+
+            // Validate emailHost
+            if (mailHostVal === '') {
+                $(".error_two").removeAttr('hidden');
+            } else {
+                $("#emailHost").removeClass('is-invalid');
+                $(".error_two").attr('hidden', true);
+            }
+
+            // Validate emailPort
+            if (mailPortVal === '') {
+                $(".error_three").removeAttr('hidden');
+            } else {
+                $("#emailPort").removeClass('is-invalid');
+                $(".error_three").attr('hidden', true);
+            }
+
+            // Validate user name
+            if (mailUserNameVal === '') {
+                $(".error_four").removeAttr('hidden');
+            } else {
+                $("#emailUserName").removeClass('is-invalid');
+                $(".error_four").attr('hidden', true);
+            }
+
+            // Validate password
+            if (mailPasswordVal === '') {
+                $(".error_five").removeAttr('hidden');
+            } else {
+                $("#emailPassword").removeClass('is-invalid');
+                $(".error_five").attr('hidden', true);
+            }
+
+            // Validate Mail Encryption
+            if (mailMailEncryptionVal === '') {
+                $(".error_six").removeAttr('hidden');
+            } else {
+                $("#emailEncryption").removeClass('is-invalid');
+                $(".error_six").attr('hidden', true);
+            }
+
+            // Validate From Mail
+            if (mailFromEmailVal === '') {
+                $(".error_seven").removeAttr('hidden');
+            } else {
+                $("#fromEmail").removeClass('is-invalid');
+                $(".error_seven").attr('hidden', true);
+            }
         });
     });
 </script>

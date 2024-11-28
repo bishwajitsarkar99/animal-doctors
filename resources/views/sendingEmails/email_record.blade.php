@@ -10,17 +10,17 @@
                 </div>
             </div>
             <div class="col-xl-2">
-                <span class="record_input1 text-skeletone">
+                <span class="record_input_one text-skeletone">
                     <input type="text" class="form-control form-control-sm record_start_date ps-1" name="record_start_date" placeholder="Start Date" autocomplete="off" id="record_start_date">
                 </span>
             </div>
             <div class="col-xl-2">
-                <span class="record_input2 text-skeletone">
+                <span class="record_input_two text-skeletone">
                     <input type="text" class="form-control form-control-sm record_end_date ps-1" name="record_end_date" placeholder="End Date" autocomplete="off" id="record_end_date">
                 </span>
             </div>
             <div class="col-7" style="text-align:right;">
-                <span class="record_current_month text-skeletone pe-2" id="email_record_month"></span>
+                <span class="email_record_month text-skeletone pe-2" id="email_record_month"></span>
             </div>
         </div>
     </div>
@@ -81,7 +81,7 @@
                     {{ round($inbox_email_percentage, 2) }}%
                     </div>
                 </div>
-                <span class="temp_storage storg_record text-skeletone">Email (<span id="total_emails_progress"></span>) Out Of <span >{{$userEmails}}</span></span>
+                <span class="email_storg_record text-skeletone">Email (<span id="total_emails_progress"></span>) Out Of <span >{{$userEmails}}</span></span>
             </div>
             <div class="col-8">
                 <div class="pagination" id="user_email_record_table_paginate">
