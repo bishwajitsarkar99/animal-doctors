@@ -415,7 +415,7 @@
         });
 
         // Refresh Button
-        $(document).on('click', '#refreshIconBtn', function(){
+        $(document).on('click', '#refreshrecordBtn', function(){
             $(this).tooltip('hide');
             $("#selectAttachment").val("");
             $("#user_roles").val("");

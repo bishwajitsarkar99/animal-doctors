@@ -475,11 +475,13 @@
             var reportEmailForward = $("input[name='report_email_forward']:checked").val();
             var messageEmailForward = $("input[name='message_email_forward']:checked").val();
             
-            if (!roleName) {
-                $("#select_user_role").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the role name.</span>');
+            if (roleName.trim() == '') {
+                $("#select_user_role").closest('.role_nme').append('<span class="error-message alert_show_errors error_one ps-2">Select the role name.</span>');
+                $("#select_user_role").addClass('is-invalid');
             }
-            if (!userEmail) {
-                $("#select_user_email").closest('.role_nme').append('<span class="error-message alert_show_errors ps-2">Select the user email.</span>');
+            if (userEmail.trim() == '') {
+                $("#select_user_email").closest('.role_nme').append('<span class="error-message alert_show_errors error_two ps-2">Select the user email.</span>');
+                $("#select_user_email").addClass('is-invalid');
             }
 
             // Check if there are any error messages
@@ -542,6 +544,30 @@
                     fetch_user_email_delete_permission();
                 }
             });
+        });
+
+        // Mail Permission Validation
+        $(document).on('change', '#select_user_role, #select_user_email', function() {
+            // Get and trim values
+            var mailRoleVal = $("#select_user_role").val().trim();
+            var mailVal = $("#select_user_email").val().trim();
+
+            // Validate emailTransport
+            if (mailRoleVal === '') {
+                $(".error_one").removeAttr('hidden');
+            } else {
+                $("#select_user_role").removeClass('is-invalid');
+                $(".error_one").attr('hidden', true);
+            }
+
+            // Validate emailHost
+            if (mailVal === '') {
+                $(".error_two").removeAttr('hidden');
+            } else {
+                $("#select_user_email").removeClass('is-invalid');
+                $(".error_two").attr('hidden', true);
+            }
+
         });
 
         // Email Delete Access Permission Edit

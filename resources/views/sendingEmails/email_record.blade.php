@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-xl-1">
                 <div class="group_btn next_btn">
-                    <button class="btn btn-light btn-sm chck record_next_btn refrsh-skeletone" type="button" id="refreshIconBtn"
+                    <button class="btn btn-light btn-sm chck record_next_btn refrsh-skeletone" type="button" id="refreshrecordBtn"
                         data-bs-toggle="tooltip"  data-bs-placement="top" title="Refresh" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                         <i class="refresh_rotate_icon fa-solid fa-arrow-rotate-right"></i>
                     </button>

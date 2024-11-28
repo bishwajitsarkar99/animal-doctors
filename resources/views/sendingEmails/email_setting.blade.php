@@ -5,36 +5,38 @@
             <input type="hidden" id="emailSettingID" />
             <div class="row">
                 <div class="col-xl-6">
-                    <div class="form-group role_nme mb-3">
+                    <div class="form-group role_nme mb-1">
                         <span class="input-label"><label class="mail_label" for="mail-transport">Mail Transport</label></span>
                         <input class="form-control form-control-sm mail_input" type="text" name="mail_transport" id="emailTransport" placeholder="Email Transport" value="" />
                     </div>
-                    <div class="form-group role_nme mb-3">
+                    <div class="form-group role_nme mb-1">
                         <label class="mail_label" for="mail-transport">Mail Host</label>
                         <input class="form-control form-control-sm mail_input" type="text" name="mail_host" id="emailHost" placeholder="Email Host" value=""/>
                     </div>
-                    <div class="form-group role_nme mb-3">
+                    <div class="form-group role_nme mb-1">
                         <label class="mail_label" for="mail-transport">Mail Port</label>
                         <input class="form-control form-control-sm mail_input" type="text" name="mail_port" id="emailPort" placeholder="Email Port" value=""/>
                     </div>
                 </div>
                 <div class="col-xl-6">
-                    <div class="form-group role_nme mb-3">
+                    <div class="form-group role_nme mb-1">
                         <label class="mail_label" for="mail-transport">User Name</label>
                         <input class="form-control form-control-sm mail_input" type="text" name="mail_username" id="emailUserName" placeholder="Email User Name" value="" />
                     </div>
-                    <div class="form-group role_nme mb-3">
+                    <div class="form-group role_nme mb-1">
                         <label class="mail_label" for="mail-transport">Password</label>
                         <input class="form-control form-control-sm mail_input" type="text" name="mail_password" id="emailPassword" placeholder="Email Password" value=""/>
                     </div>
-                    <div class="form-group role_nme mb-3">
+                    <div class="form-group role_nme mb-1">
                         <label class="mail_label" for="mail-transport">Mail Encryption</label>
                         <input class="form-control form-control-sm mail_input" type="text" name="mail_encryption" id="emailEncryption" placeholder="Email Encryption" value=""/>
                     </div>
                 </div>
-                <div class="form-group role_nme mb-2">
-                    <label class="mail_label" for="mail-transport">Mail From</label>
-                    <input class="form-control form-control-sm mail_input" type="text" name="mail_from" id="fromEmail" placeholder="From Email" value=""/>
+                <div class="col-xl-12">
+                    <div class="form-group role_nme mb-2">
+                        <label class="mail_label" for="mail-transport">Mail From</label>
+                        <input class="form-control form-control-sm mail_input" type="text" name="mail_from" id="fromEmail" placeholder="From Email" value=""/>
+                    </div>
                 </div>
             </div>
             <div class="row">
