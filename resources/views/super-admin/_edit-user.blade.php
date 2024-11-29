@@ -12,7 +12,7 @@
 
             <form id="userUpdateForm" method="POST" enctype="multipart/form-data" autocomplete="off">
                 @csrf
-                <div class="modal-body profile-body pb-1" style="background:aliceblue;">
+                <div class="modal-body profile-body pb-1" style="background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);">
                     <div class="row profile-heading pb-3">
                         <div class="col-xl-8">
                             <div class="form-group" id="editusr">

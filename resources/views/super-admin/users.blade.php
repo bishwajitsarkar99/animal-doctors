@@ -31,15 +31,15 @@
             <div class="table-responsive">
               <table class="bg-transparent ord_table center border-1 skeleton">
                 <tr class="table-row order_body acc_setting_table skeleton">
-                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="id" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> ID</th>
-                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="image" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Image</th>
-                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Action</th>
-                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="name" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Name</th>
-                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="email" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Email</th>
-                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="contract_number" data-order="desc" class="table_th_color font_sid skeleton tot_order_ ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Contract</th>
-                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="role" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Role</th>
-                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col font_sid skeleton"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Check</th>
-                  <th id="th_sort" style="background-color: honeydew;cursor: pointer;" data-coloumn="status" data-order="desc" class="table_th_color tot_pending_ font_sid ps-2  skeleton"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Status</th>
+                  <th id="th_sort" style="cursor:pointer;" data-coloumn="id" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> ID</th>
+                  <th id="th_sort" style="cursor:pointer;" data-coloumn="image" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Image</th>
+                  <th id="th_sort" style="cursor:pointer;" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Action</th>
+                  <th id="th_sort" style="cursor:pointer;" data-coloumn="name" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Name</th>
+                  <th id="th_sort" style="cursor:pointer;" data-coloumn="email" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Email</th>
+                  <th id="th_sort" style="cursor:pointer;" data-coloumn="contract_number" data-order="desc" class="table_th_color font_sid skeleton tot_order_ ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Contract</th>
+                  <th id="th_sort" style="cursor:pointer;" data-coloumn="role" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Role</th>
+                  <th id="th_sort" style="cursor:pointer;" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col font_sid skeleton"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Check</th>
+                  <th id="th_sort" style="cursor:pointer;" data-coloumn="status" data-order="desc" class="table_th_color tot_pending_ font_sid ps-2  skeleton"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Status</th>
                 </tr>
                 <tbody class="bg-transparent skeleton tab" id="user_data_table">
 

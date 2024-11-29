@@ -26,15 +26,15 @@
     </div>
     <div class="email-box-body">
         <div class="row mt-2">
-            <div class="col-xl-3">
+            <div class="col-xl-4">
                 <div class="form-group record_input3 select-catg-skeletone">
                     <select type="text" class="form-control form-control-sm user_roles select2" name="sender_user" id="user_roles">
                         <option value="">Select Authentic User Email</option>
                     </select>
                 </div>
             </div>
-            <div class="col-xl-3">
-                <div class="form-group record_input5 select-catg-skeletone">
+            <div class="col-xl-4">
+                <div class="form-group record_input5 select-catg-skeletone" style="text-align: center;">
                     <select type="text" class="form-control form-control-sm user_emails select2" name="attachment_type" id="selectAttachment">
                         <option value="">Select Email Category</option>
                         <option value="report">Management Report</option>
@@ -44,8 +44,8 @@
                     </select>
                 </div>
             </div>
-            <div class="col-xl-6">
-                <div class="form-group record_input4 select-catg-skeletone">
+            <div class="col-xl-4">
+                <div class="form-group record_input4 select-catg-skeletone" style="float: right;">
                     <select type="text" class="form-control form-control-sm user_emails select2" name="sender_email" id="user_emails">
                         <option value="">Select Authentic Sender Email</option>
                     </select>
