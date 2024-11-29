@@ -26,12 +26,12 @@
             // Email Record
             if ($(this).attr('id') === 'user_roles') {
                 $(this).select2({
-                    placeholder: 'Select User Role',
+                    placeholder: 'Select Authentic User Email',
                     allowClear: true
                 });
             } else if ($(this).attr('id') === 'user_emails') {
                 $(this).select2({
-                    placeholder: 'Select User Email',
+                    placeholder: 'Select Authentic Sender Email',
                     allowClear: true
                 });
             }
@@ -66,11 +66,11 @@
                 url: currentUrl,
                 dataType: 'json',
                 success: function(response) {
-                    const roles = response.roles;
+                    const user_roles = response.user_roles;
                     $("#user_roles").empty();
                     $("#user_roles").append('<option value="" style="font-weight:600;">Select User Role</option>');
-                    $.each(roles, function(key, item) {
-                        $("#user_roles").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.name}</option>`);
+                    $.each(user_roles, function(key, item) {
+                        $("#user_roles").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.email}</option>`);
                     });
                 },
                 error: function() {

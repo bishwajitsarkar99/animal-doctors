@@ -27,7 +27,7 @@
           </button>
           <button class="nav-link" id="v-pills-send-tab" data-bs-toggle="pill" data-bs-target="#v-pills-send" type="button" role="tab" aria-controls="v-pills-send" aria-selected="false">
             <i class="fa-solid fa-share"></i>
-            <span class="btn-text email_send_page"> Send (<span class="ms-1 me-1" id="emailSend"></span>)</span>
+            <span class="btn-text email_send_page"> Send (<span class="ms-1 me-1" id="send_emails"></span>)</span>
           </button>
           <button class="nav-link" id="v-pills-draft-tab" data-bs-toggle="pill" data-bs-target="#v-pills-draft" type="button" role="tab" aria-controls="v-pills-draft" aria-selected="false">
             <i class="fa-solid fa-file"></i>

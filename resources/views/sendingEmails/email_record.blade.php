@@ -29,14 +29,7 @@
             <div class="col-xl-3">
                 <div class="form-group record_input3 select-catg-skeletone">
                     <select type="text" class="form-control form-control-sm user_roles select2" name="sender_user" id="user_roles">
-                        <option value="">Select User Role</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-xl-6">
-                <div class="form-group record_input4 select-catg-skeletone">
-                    <select type="text" class="form-control form-control-sm user_emails select2" name="sender_email" id="user_emails">
-                        <option value="">Select User Email</option>
+                        <option value="">Select Authentic User Email</option>
                     </select>
                 </div>
             </div>
@@ -48,6 +41,13 @@
                         <option value="message">User Message</option>
                         <option value="draft">Draft</option>
                         <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="form-group record_input4 select-catg-skeletone">
+                    <select type="text" class="form-control form-control-sm user_emails select2" name="sender_email" id="user_emails">
+                        <option value="">Select Authentic Sender Email</option>
                     </select>
                 </div>
             </div>

@@ -232,7 +232,7 @@
                             <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="viewBtn" email_id="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-regular fa-eye fa-beat"></i>
                             </button>
-                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${row.id}" id="forwardBtn" value="${forwardValue}" style="font-size: 10px;margin-top: 2px; ${changeButton}" ${disableForwardButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" data-parent="${forwardValue}" id="forwardBtn" value="${forwardValue}" style="font-size: 10px;margin-top: 2px; ${changeButton}" ${disableForwardButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Forward" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                 <i class="fa-solid fa-share-nodes fa-beat"></i>
                             </button>
                             <button class="btn-sm edit_registration view_btn cgr_btn ms-1" id="deleteBtn" value="${value}" email-id="${value}" style="font-size: 10px; ${changeButtonDelete}" ${disableButton} type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
@@ -371,8 +371,6 @@
                     $("#total_user_email").text(total);
                     // Total Emails
                     $("#total_emails").text(formatNumber(total_emails));
-                    // Total Send Emails
-                    $("#emailSend").text(formatNumber(total_send_emails));
                     // Total New Emails
                     $("#total_new_emails").text(formatNumber(total_new_emails));
                     // Email Table Progress bar
@@ -530,7 +528,7 @@
             $("#inputBCC").tagsinput('removeAll');
             $("#inputSubject").val("");
             $("#email_summernote").summernote('code', '');
-            $("#selectAttachFile").val("");
+            $("#selectAttachFile").empty();
             $("#email_attachment").val("");
             $(".email_attachment").val("");
             $(".attach_group").addClass("hidden");
