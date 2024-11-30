@@ -7,16 +7,16 @@
     <div class="row">
       <div class="col-xl-7">
         <div class="card-body focus-color cd cat_form">
-          <p class="catg mb-1 skeleton">
-            <span style="color:black;">{{__('translate.Category')}}</span>
-            <span class="tot_summ skeleton" id="num_plate">
-              <label class="tot-search mt-3 pt-2" style="color:black;" for="tot_cagt"> ➤ {{__('translate.Total Category')}} :</label>
-              <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4"><span class="total_users skeleton" style="font-weight: 600;color:white;" id="total_category_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-size: 11px;">.00 {{__('translate.items')}}</span></label>
+          <p class="catg mb-1">
+            <span class="skeleton-card-head" style="color:black;">{{__('translate.Category')}}</span>
+            <span class="tot_summ" id="num_plate">
+              <label class="tot-search skeleton-card-head-label mt-3 pt-2" style="color:black;" for="tot_cagt"> ➤ {{__('translate.Total Category')}} :</label>
+              <label class="badge rounded-pill bg-primary skeleton-card-head-capsule" for="total_medic_records" id="iteam_label4"><span class="total_users" style="font-weight: 600;color:white;" id="total_category_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-size: 11px;">.00 {{__('translate.items')}}</span></label>
             </span>
           </p>
           <div class="row">
             <div class="col-5">
-              <span class="form-check form-switch search_ skeleton me-2">
+              <span class="form-check form-switch search_ skeleton-card-head-label me-2">
                 <input class="form-check-input" onclick="mySrcFunction()" type="checkbox" id="search_area" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 <label class="search ser_label ps-1 pt-1" style="color:black;" for="search pe-2">{{__('translate.Search Mode')}} :</label>
                 <label class="form-check-label" for="collapseExample"><span class="search_on" id="search_off">OFF</span></label>
@@ -24,19 +24,19 @@
             </div>
             <div class="col-5">
               <span id="search_plate">
-                <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.Category Search.........')}}">
+                <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform display_hidden ps-1" placeholder="{{__('translate.Category Search.........')}}">
                 <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="color:rgb(13, 110, 253);opacity:1;"></i>
               </span>
             </div>
           </div>
           <div>
-            <table class="ord_table center border-1 skeleton mt-2" id="myTable">
+            <table class="ord_table center border-1 skeleton-table mt-2" id="myTable">
               <tr class="table-row order_body acc_setting_table skeleton">
-                <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="tableHead table_th_color skeleton txt col ps-1 pt-1" style="cursor: move;">{{__('translate.ID')}}</th>
-                <th id="th_sort" draggable="true" class="tableHead table_th_color tot_pending_ skeleton col ps-1 pt-1" style="cursor: move;">{{__('translate.Action')}}</th>
-                <th id="th_sort" draggable="true" class="tableHead table_th_color tot_pending_ skeleton col ps-1 pt-1" style="text-align: left;cursor: move;">{{__('translate.Category-Name')}}</th>
-                <th id="th_sort" class="tableHead table_th_color tot_pending_ skeleton ps-1 pt-1">{{__('translate.Status')}}</th>
-                <th id="th_sort" draggable="true" class="tableHead table_th_color tot_pending_ check_border skeleton col pt-1" style="cursor: move;">{{__('translate.Check')}}</th>
+                <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col ps-1 pt-1" style="cursor: move;">{{__('translate.ID')}}</th>
+                <th id="th_sort" draggable="true" class="tableHead table_th_color tot_pending_ col ps-1 pt-1" style="cursor: move;">{{__('translate.Action')}}</th>
+                <th id="th_sort" draggable="true" class="tableHead table_th_color tot_pending_ col ps-1 pt-1" style="text-align: left;cursor: move;">{{__('translate.Category-Name')}}</th>
+                <th id="th_sort" class="tableHead table_th_color tot_pending_ ps-1 pt-1">{{__('translate.Status')}}</th>
+                <th id="th_sort" draggable="true" class="tableHead table_th_color tot_pending_ check_border col pt-1" style="cursor: move;">{{__('translate.Check')}}</th>
               </tr>
               <tbody class="bg-transparent" id="category_data_table">
 
@@ -46,8 +46,8 @@
           </div>
           <div class="row table_last_row">
             <div class=" col-2">
-              <label class="item_class skeleton">Peritem</label>
-              <div class="custom-select skeleton">
+              <label class="item_class peritem-label-skeleton">Peritem</label>
+              <div class="custom-select peritem-skeleton">
                 <select class="ps-1" id="perItemControl">
                   <option class="" selected>10</option>
                   <option class="">20</option>
@@ -58,7 +58,7 @@
               </div>
             </div>
             <div class="col-10">
-              <div class="pagination skeleton mt-1" id="category_data_table_paginate">
+              <div class="pagination pagination-skeleton mt-1" id="category_data_table_paginate">
 
               </div>
             </div>
@@ -67,33 +67,38 @@
       </div>
       <div class="col-xl-5">
         <div class="row">
-          <div class="category-form skeleton">
+          <div class="category-form">
             <div class="card form-control cat_form">
               <form autocomplete="off">
                 @csrf
                 <div class="row mt-3">
                   <div class="col-5">
-                    <label class="catg_name_label skeleton mt-1" for="category-name">{{__('translate.Category-Name')}} :</label>
+                    <label class="catg_name_label skeleton-input-label mt-1" for="category-name">{{__('translate.Category-Name')}} :</label>
                   </div>
                   <div class="col-1">
                     <i class="category-icon fa fa-spinner fa-spin category-hidden mt-2"></i>
                   </div>
                   <div class="col-6">
-                    <input class="form-control form-control-sm edit_category_name skeleton" type="text" name="category_name" id="category_name" placeholder="{{__('translate.Category Name')}}" autofocus>
+                    <span class="skeleton-input">
+                      <input class="form-control form-control-sm edit_category_name skeleton" type="text" name="category_name" id="category_name" placeholder="{{__('translate.Category Name')}}" autofocus>
+                    </span>
                     <input type="hidden" id="category_id">
                   </div>
                   <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
                 </div>
                 <p style="text-align: end;">
-                  <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" id="save">
-                    <i class="add-icon fa fa-solid fa-asterisk fa-spin add-hidden"></i>
-                    <span class="btn-text">ADD</span>
+                  <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" id="save">
+                    <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                    <span class="category-btn-text">ADD</span>
                   </button>
-                  <button id="update_btn" class="btn btn-sm cgt_btn btn_focus skeleton mt-2">
-                    <i class="update-icon fa fa-solid fa-asterisk fa-spin update-hidden"></i>
-                    <span class="btn-text">Update</span>
+                  <button id="update_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden>
+                    <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                    <span class="update-btn-text">Update</span>
                   </button>
-                  <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton mt-2">Cancel</button>
+                  <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton-button mt-2">
+                    <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                    <span class="cancel-btn-text">Cancel</span>
+                  </button>
                 </p>
               </form>
             </div>
@@ -141,7 +146,7 @@
       <div class="modal-footer profile_modal_footer">
         <p id="btn_group2">
           <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
-            <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
+            <span class="loading-yes-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
             <span class="btn-text">{{__('translate.Yes')}}</span>
           </a>
         </p>
@@ -173,9 +178,9 @@
           </p>
         </div>
         <div class="modal-footer" id="logoutModal_footer">
-          <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user btn_focus" id="deleteLoader">
-            <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
-            <span class="btn-text">Delete</span>
+          <button type="button" class="btn btn-sm modal_button delet_btn_user btn_focus" id="deleteLoader">
+            <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="delete-btn-text">Delete</span>
           </button>
           <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete3" data-bs-dismiss="modal">Cancel</button>
         </div>    
@@ -205,7 +210,8 @@
         </div>
         <div class="modal-footer" id="logoutModal_footer">
           <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus">
-            <span class="btn-text">Confirm</span>
+            <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="confirm-btn-text">Confirm</span>
           </button>
           <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
         </div>    
@@ -219,7 +225,8 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
 @endsection
 @section('script')
-<script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
+<script src="{{asset('backend_asset')}}/support_asset/product-item/js/category-iteam.js"></script>
+<script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 @include('super-admin.medicine-item.category.data-handel_ajax.ajax')
 <script>
   // skeleton
@@ -231,8 +238,97 @@
     });
   }
 
+  function focuCardHead() {
+    const allSkeleton = document.querySelectorAll('.skeleton-card-head')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-card-head')
+    });
+  }
+
+  function focuCardHeadLabel() {
+    const allSkeleton = document.querySelectorAll('.skeleton-card-head-label')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-card-head-label')
+    });
+  }
+
+  function focuCardHeadCapsule() {
+    const allSkeleton = document.querySelectorAll('.skeleton-card-head-capsule')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-card-head-capsule')
+    });
+  }
+
+  function focuCardTable() {
+    const allSkeleton = document.querySelectorAll('.skeleton-table')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-table')
+    });
+  }
+
+  function focuCardTablePeritemLabel() {
+    const allSkeleton = document.querySelectorAll('.peritem-label-skeleton')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('peritem-label-skeleton')
+    });
+  }
+
+  function focuCardTablePeritem() {
+    const allSkeleton = document.querySelectorAll('.peritem-skeleton')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('peritem-skeleton')
+    });
+  }
+
+  function focuCardTablePagination() {
+    const allSkeleton = document.querySelectorAll('.pagination-skeleton')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('pagination-skeleton')
+    });
+  }
+
+  function focuInputLabel() {
+    const allSkeleton = document.querySelectorAll('.skeleton-input-label')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-input-label')
+    });
+  }
+  function focuButton() {
+    const allSkeleton = document.querySelectorAll('.skeleton-button')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-button')
+    });
+  }
+
+  function focuInput() {
+    const allSkeleton = document.querySelectorAll('.skeleton-input')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-input')
+    });
+  }
+
   setTimeout(() => {
     fetchData();
+    focuCardHead();
+    focuCardHeadLabel();
+    focuCardHeadCapsule();
+    focuCardTable();
+    focuCardTablePeritemLabel();
+    focuCardTablePeritem();
+    focuCardTablePagination();
+    focuInputLabel();
+    focuButton();
+    focuInput();
   }, 1000);
 </script>
 @endsection

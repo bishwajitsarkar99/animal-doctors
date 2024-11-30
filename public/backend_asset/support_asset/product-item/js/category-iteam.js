@@ -1,7 +1,8 @@
 (function($){
-    $("#search").hide();
     $("#update_btn").hide();
     $(document).on('click', '#search_area', () =>{
+        $("#search").removeClass('display_hidden');
+        $("#search").addClass('display_hidden');
         $("#search").toggle('slide');
         $("#search").focus();
     });

@@ -1,5 +1,14 @@
-<script>
+<script type="module">
+    import { handleSuccessMessage, buttonLoader } from "/module/module-min-js/design-helper-function-min.js";
+    buttonLoader();
     $(document).ready(() => {
+        // Initialize the button loader for the login button
+        buttonLoader('#save', '.add-icon', '.category-btn-text', 'ADD...', 'ADD', 3000);
+        buttonLoader('#update_btn', '.update-icon', '.update-btn-text', 'Update...', 'Update', 1000);
+        buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm...', 'Confirm', 1000);
+        buttonLoader('#deleteLoader', '.delete-icon', '.delete-btn-text', 'Delete...', 'Delete', 1000);
+        buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
+
         fetch_category_data();
         // Data View Table--------------
         const table_rows = (rows) => {
@@ -191,7 +200,21 @@
         $(document).on('click', '#cancel_btn', () => {
             $("#save").show('slow');
             $("#update_btn").hide('slow');
+            $("#update_btn").attr('hidden',true);
             $("#category_name").focus();
+            $("#category_name").removeClass('is-invalid');
+            $('#updateForm_errorList').addClass('display-none');
+            $('#savForm_error').addClass('display-none');
+        });
+
+        // Category Name Filed
+        $(document).on('keyup', "#category_name", function(){
+            var categoryName = $(this).val();
+            if (categoryName !== '') {
+                $("#category_name").removeClass('is-invalid');
+                $('#updateForm_errorList').addClass('display-none');
+                $('#savForm_error').addClass('display-none');
+            }
         });
 
         // Add Category
@@ -216,12 +239,11 @@
                     if (response.status == 400) {
                         $.each(response.errors, function(key, err_value) {
                             $('#savForm_error').html("");
+                            $('#savForm_error').removeClass('display-none');
+                            $("#category_name").addClass('is-invalid');
                             $('#savForm_error').addClass('alert_show_errors');
                             $('#savForm_error').append('<span class="error_val">' + err_value + '</span>');
                             $('#savForm_error').fadeIn();
-                            setTimeout(() => {
-                                $('#savForm_error').fadeOut();
-                            }, 2500);
                         });
                     } else {
                         $('#savForm_error').html("");
@@ -231,8 +253,8 @@
                         $('#success_message').text(response.messages);
                         $('#category_name').val("");
                         setTimeout(() => {
-                            $('#success_message').fadeOut();
-                        }, 3000);
+                            $('#success_message').fadeOut(3000);
+                        }, 5000);
                         fetch_category_data();
                     }
 
@@ -245,6 +267,7 @@
             e.preventDefault();
             $("#save").hide('slow');
             $("#update_btn").show('slow');
+            $("#update_btn").removeAttr('hidden');
             var cateogory_id = $(this).val();
             $.ajax({
                 type: "GET",
@@ -308,8 +331,11 @@
                     if (response.status == 400) {
                         $.each(response.errors, function(key, err_value) {
                             $('#updateForm_errorList').html("");
-                            $('#updateForm_errorList').addClass('alert_show_errors ps-1 pe-1');
+                            $("#category_name").addClass('is-invalid');
+                            $('#updateForm_errorList').removeClass('display-none');
+                            $('#updateForm_errorList').addClass('alert_show_errors ps-1 pe-2');
                             $('#updateForm_errorList').append('<span>' + err_value + '</span>');
+                            $("#updateconfirmcategory").modal('hide');
                         });
                     } else if (response.status == 404) {
                         $('#updateForm_errorList').html("");
@@ -324,7 +350,7 @@
                         $('.edit_category_name').val("");
                         setTimeout(() => {
                             $('#success_message').fadeOut();
-                        }, 3000);
+                        }, 5000);
                         $("#updateconfirmcategory").modal('hide');
                         fetch_category_data();
                     }
@@ -375,6 +401,7 @@
             $("#cate_confirm").addClass('skeleton');
             $(".confirm_title").addClass('skeleton');
             $(".head_btn2").addClass('skeleton');
+            $(".loading-yes-icon").removeAttr('hidden');
             var time = null;
             time = setTimeout(() => {
                 $(".confirm_title").removeClass('skeleton');
@@ -382,6 +409,7 @@
                 $("#deleteLoader").removeClass('skeleton');
                 $("#cate_delete3").removeClass('skeleton');
                 $("#cate_confirm").removeClass('skeleton');
+                $(".loading-yes-icon").attr('hidden',true);
             }, 1000);
 
             return () => {
@@ -408,7 +436,7 @@
                     $('#success_message').text(response.messages);
                     setTimeout(() => {
                         $('#success_message').fadeOut();
-                    }, 3000);
+                    }, 5000);
                     $('#deletecategory').modal('hide');
                     $('#deleteconfirmcategory').modal('hide');
 
