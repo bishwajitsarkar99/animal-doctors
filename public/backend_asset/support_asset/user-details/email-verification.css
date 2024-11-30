@@ -1,5 +1,5 @@
 :root{
-    --table-head-color:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    --table-head-color:linear-gradient(1deg, #dfdfdf, transparent 3%, lightgray, #d7d7d7);
 }
 th#th_sort {
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */

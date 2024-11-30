@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
-class PostSettingServiceProvicer
+class PostSettingServiceProvider
 {
     // ========================= Post Category Setting =========================
     // =========================================================================

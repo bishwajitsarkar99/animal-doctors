@@ -14,6 +14,22 @@
             }
 
             return [...rows].map((row, key) => {
+                var statusClass, statusText, statusSignal, statusBg, statusTextColor, permissionSignal;
+                if (row.status == 1) {
+                    statusClass = 'text-white';
+                    statusText = 'Active';
+                    statusTextColor = 'text-primary';
+                    statusSignal = '<i class="fa-solid fa-check"></i>';
+                    statusBg = 'badge rounded-pill bg-success';
+                    permissionSignal = 'light2-focus';
+                } else if (row.status == 0) {
+                    statusClass = 'text-white';
+                    statusText = 'Deny';
+                    statusTextColor = 'text-danger';
+                    statusSignal = '<i class="fa-solid fa-xmark"></i>';
+                    statusBg = 'badge rounded-pill bg-danger';
+                    permissionSignal = 'danger-focus';
+                }
                 return `
                     <tr class="table-row user-table-row" id="cat_td" key="${key}">
                         <td class="sn border_ord" id="cat_td2">${row.id}</td>
@@ -31,9 +47,10 @@
                             </ul>
                         </td>
                         <td class="txt_ ps-1" id="cat_td4">${row.category_name}</td>
-                        <td class="tot_complete_ pe-2 ${row.status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.status ? 'text-primary' : 'text-danger'}">${row.status ? '<span style="font-size:15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
-                            <span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></span>
+                        <td class="tot_complete_ pe-2" id="cat_td6">
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${statusBg} ${statusClass}">${statusSignal}</span>
+                            <span class="${statusTextColor}">${statusText}</span>
+                            <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="cat_td5">
                             <input class="form-switch form-check-input check_permission" type="checkbox" category_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>

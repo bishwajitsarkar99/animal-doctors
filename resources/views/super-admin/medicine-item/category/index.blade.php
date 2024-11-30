@@ -55,7 +55,6 @@
                   <option class="">100</option>
                   <option class="">200</option>
                 </select>
-                <span class="custom-list-item-arrow me-4"></span>
               </div>
             </div>
             <div class="col-10">

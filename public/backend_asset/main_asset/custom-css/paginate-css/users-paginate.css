@@ -1044,6 +1044,25 @@ span.status_bg {
     display: block;
     float: right;
 }
+.danger-focus{
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    border: none;
+    outline: none;
+    animation: danger_focus 1s infinite;
+}
+@keyframes danger_focus{
+    0%{
+        background-color: #f1f1f1;
+    }
+    50%{
+        background-color: red;
+    }
+    100%{
+        background-color: orangered;
+    }
+}
 .light2-focus{
     border-radius: 50%;
     width: 8px;

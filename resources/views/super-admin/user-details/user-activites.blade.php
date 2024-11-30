@@ -43,7 +43,7 @@
         <div class="col-3">
             <label class="item_class">Peritem</label>
             <div class="custom-select ">
-                <select class="ps-1" id="perItemControl" style="background: linear-gradient(to bottom, #3b71ca, transparent 3%, #3b71ca, #3b71ca);border:1px solid darkblue;">
+                <select class="ps-1" id="perItemControl" style="background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);border:1px solid lightgray;">
                     <option class="" selected>10</option>
                     <option class="">20</option>
                     <option class="">50</option>
