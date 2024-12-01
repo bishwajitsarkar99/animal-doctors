@@ -426,7 +426,11 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = Category::orderBy('id','desc')->latest()->where('status', '!=', 0);
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = Category::where('status', '!=', 0);
 
         if( $query = $request->get('query')){
             $data->Where('category_name','LIKE','%'.$query.'%')
@@ -436,6 +440,11 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction);
+;
+
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);

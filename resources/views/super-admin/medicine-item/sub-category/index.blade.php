@@ -182,7 +182,7 @@
               <thead id="group_nam2">
                 <tr id="group_nam3" style="color:black;">
                   <th id="group_nam4" class="tableHead back_color align">{{__('translate.ID')}}</th>
-                  <th id="group_nam5" class="tableHead back_color ps-1">{{__('translate.Cateogry Name')}}</th>
+                  <th id="group_nam5" data-coloumn="id" data-order="desc" class="sortable-header tableHead back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Cateogry Name')}}</th>
                 </tr>
               </thead>
               <tbody class="bg-transparent" id="cat_table" style="color:black;font-weight:500;cursor:alias;">
@@ -203,8 +203,8 @@
                 </div>
                 <div class="col-9">
                   <span class="tot_summ" style="float: right;">
-                    <label class="tot-search tot_record mt-3" style="font-size: 12px;font-family: sans-serif;" for="tot_cagt"> {{__('translate.Total Category')}} :</label>
-                    <label class="badge rounded-pill bg-primary badge_label" for="total_medic_records" id="iteam_label4" style="font-weight: 600;color:white;font-size:12px;font-family: sans-serif;"><span class="total_result" id="total_cat_records" style="color:white;font-size:12px;font-family: sans-serif;"></span><span id="iteam_label6" style="font-weight: 600;color:white;">.00 {{__('translate.items')}}</span></label>
+                    <label class="tot-search tot_record mt-3" for="tot_cagt"> {{__('translate.Total Category')}} :</label>
+                    <label class="badge rounded-pill bg-primary badge_label badg" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_cat_records" style="color:white;font-size:12px;font-family: sans-serif;"></span><span id="iteam_label6" style="font-weight: 600;color:white;">.00 {{__('translate.items')}}</span></label>
                   </span>
                 </div>
               </div>

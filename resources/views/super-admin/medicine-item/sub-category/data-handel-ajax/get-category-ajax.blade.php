@@ -6,7 +6,7 @@
             if (rows.length === 0) {
                 return `
                     <tr>
-                        <td class="error_data" align="center" text-danger colspan="11">
+                        <td class="error_data" align="center" text-danger colspan="2">
                             Category Data Not Exists On Server !
                         </td>
                     </tr>
@@ -24,7 +24,7 @@
         }
 
         // Fetch Sub Category ------------------
-        function fetch_cate_data(query = '', url = null, perItem = null) {
+        function fetch_cate_data(query = '', url = null, perItem = null, sortFieldID = 'id', sortFieldDirection = 'desc',) {
             if (perItem === null) {
                 perItem = $("#perItemControls").val();
             }
@@ -41,7 +41,9 @@
                 url: current_url,
                 dataType: 'json',
                 data: {
-                    query: query
+                    query: query,
+                    sort_field_id : sortFieldID,
+                    sort_direction : sortFieldDirection,
                 },
                 success: function({
                     data,
@@ -157,6 +159,30 @@
                 fetch_cate_data('', url);
             }
 
+        });
+
+        // Event Listener for sorting columns
+        $(document).on('click', '.sortable-header', function() {
+            var button = $(this);
+            var column = button.data('column');
+            var order = button.data('order');
+
+            order = (order === 'desc') ? 'asc' : 'desc';
+            button.data('order', order);
+
+            fetch_cate_data('', null, null, column, order);
+
+            $('.sortable-header .toggle-icon').html('<i class="fa-solid fa-arrow-down-long"></i>');
+            $('.sortable-header').not(button).data('order', 'desc');
+
+            var icon = button.find('.toggle-icon');
+            if (order === 'desc') {
+                icon.html('<i class="fa-solid fa-arrow-up-long"></i>');
+            } else {
+                icon.html('<i class="fa-solid fa-arrow-down-long"></i>');
+            }
+
+            $(".toggle-icon").fadeIn(300);
         });
     });
 </script>
