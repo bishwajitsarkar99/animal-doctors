@@ -224,7 +224,13 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = Category::orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_field_category_name = $request->input('sort_field_category_name', 'category_name');
+        $sort_field_status = $request->input('sort_field_status', 'status');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = Category::query();
 
         if( $query = $request->get('query')){
             $data->Where('category_name','LIKE','%'.$query.'%')
@@ -234,6 +240,11 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction)
+                        ->orderBy($sort_field_category_name, $sort_direction)
+                        ->orderBy($sort_field_status, $sort_direction);
 
         $data = $data->paginate($perItem)->toArray();
         
@@ -377,7 +388,14 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = SubCategory::with(['categories'])->orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_field_category_name = $request->input('sort_field_category_name', 'category_id');
+        $sort_field_sub_category_name = $request->input('sort_field_sub_category_name', 'sub_category_name');
+        $sort_field_status = $request->input('sort_field_status', 'status');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = SubCategory::with(['categories']);
 
         if( $query = $request->get('query')){
             $data->Where('sub_category_name','LIKE','%'.$query.'%')
@@ -388,6 +406,13 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction)
+                        ->orderBy($sort_field_category_name, $sort_direction)
+                        ->orderBy($sort_field_sub_category_name, $sort_direction)
+                        ->orderBy($sort_field_status, $sort_direction);
+
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);
@@ -423,11 +448,9 @@ class ProductIteamsServiceProvider
         // validation
         $validators = validator::make($request->all(),[
             'sub_category_name'=>'required|max:191|unique:sub_categories',
-            'category_id'=>'required',
         ],[
             'sub-category.required'=>'The sub-category is required mandatory.',
             'sub-category.unique'=>'The sub-category has already been taken.',
-            'category_id.required'=>'The category is required mandatory.',
         ]);
         if($validators->fails()){
             return response()->json([
@@ -473,7 +496,6 @@ class ProductIteamsServiceProvider
         // validation
         $validator = validator::make($request->all(),[
             'sub_category_name'=>'required|max:191|unique:sub_categories,sub_category_name,' .$id,
-            'category_id'=>'required',
         ]);
         if($validator->fails()){
             return response()->json([

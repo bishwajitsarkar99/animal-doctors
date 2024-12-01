@@ -1,11 +1,12 @@
 :root{
     --search-box-background-color:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, #e1e1e1, rgba(0, 0, 0, 0.05) 100%);
-    --table-head-color:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
+    --table-head-color:linear-gradient(1deg, #dbd8d8db, transparent 3%, #d3d3d3c4, #d7d7d7db);
     --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, transparent 80%, rgba(0, 0, 0, 0.05) 100%);
     --bg-color:darkgoldenrod;
     --color:royalblue;
     --size:1px;
     --font-weight:500;
+    --sub-category-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 table, th, td {
     border-collapse: collapse;
@@ -15,6 +16,80 @@ table, th, td {
     font-family: sans-serif;
 }
 
+th#th_sort {
+    background-image: var(--table-head-color);
+    color: black;
+    font-size: 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    background-color: white;
+}
+.cat_nme{
+    text-align: left;
+}
+.skeleton-card-head-capsule-two,.skeleton-card-head-labl-two,.skeleton-card-head-two,.min-skeleton{
+    position: relative;
+}
+.min-skeleton::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px;
+}
+.skeleton-card-head-two::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -8px;
+    width: 100%;
+    height: 25px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px;
+}
+.skeleton-card-head-labl-two::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px;
+}
+.skeleton-card-head-capsule-two::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px;
+}
+@keyframes focus_skeleton {
+    0% {
+        background-position: -100% 0;
+    }
+    
+    100% {
+        background-position: 100% 0;
+    }
+}
 tr.table-row.user-table-row{
     background-color: white;
 }
@@ -146,14 +221,14 @@ input#cat_search{
 }
 select#perItemControls {
     outline: none;
-    box-shadow: none;
-    border: 1px solid #08a05c;
-    color: white;
+    color: black;
     font-weight: 600;
     cursor: pointer;
-    background-color: #08a05c;
-    border-radius: 2px;
-    width: 63px;
+    background-image: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);
+    border-radius: 3px;
+    width: 50px;
+    font-family: var(--sub-category-font-family);
+    border: 1px solid lightgray;
 }
 .form-check-input[type=checkbox] {
     border-radius: 0.25em;
@@ -278,7 +353,10 @@ a#showCategory {
 }
 div.link{
     text-align: right;
-    margin-top: 3px;
+    margin-top: 5px;
+}
+.display_hidden{
+    display: none;
 }
 @media (min-width:300px) and (max-width:480px){
     label.ser_label{

@@ -57,16 +57,16 @@
                     $("#total_cat_records").text(total);
 
                     // Get suggestions for autocomplete
-                    var suggestion = data.map(function(item) {
-                        return {
-                            label: `${item.id} - ${item.category_name}`,
-                            value: item.id
-                        };
-                    });
-                    // Initialize autocomplete
-                    $(".categ_id").autocomplete({
-                        source: suggestion
-                    });
+                    // var suggestion = data.map(function(item) {
+                    //     return {
+                    //         label: `${item.id} - ${item.category_name}`,
+                    //         value: item.id
+                    //     };
+                    // });
+                    // // Initialize autocomplete
+                    // $(".categ_id").autocomplete({
+                    //     source: suggestion
+                    // });
                 }
 
             });

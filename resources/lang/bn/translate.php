@@ -501,7 +501,7 @@ return[
     'Total Others Cost'=>'মোট অন্যান্য খরচ',
     // Item-List============
     // Category
-    'Search Mode'=>'অনুসন্ধান মোড',
+    'Search'=>'অনুসন্ধান মোড',
     'Category Search.........'=>'ক্যাটাগরি অনুসন্ধান করুন........',
     'Action'=>'কার্যকলাপ',
     'Category-Name'=>'ক্যাটাগরি-নাম',

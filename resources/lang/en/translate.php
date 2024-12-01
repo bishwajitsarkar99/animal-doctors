@@ -520,7 +520,7 @@ return[
     'Total Others Cost'=>'Total Others Cost',
     // Item-List============
     // Category
-    'Search Mode'=>'Search Mode',
+    'Search'=>'Search',
     'Category Search.........'=>'Category Search.........',
     'Action'=>'Action',
     'Category-Name'=>'Category-Name',

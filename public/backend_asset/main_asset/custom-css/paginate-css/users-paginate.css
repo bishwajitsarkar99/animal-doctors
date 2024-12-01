@@ -399,7 +399,7 @@ label.tot-search {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.3px;
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 select> option {
     font-weight: 600;
@@ -698,9 +698,9 @@ button#dltBtn{
     height: 25px;
     border: none;
     color: darkcyan; 
-    animation: alerttxtColor 3s infinite;
+    animation: alertbuttontxtColor 3s infinite;
 }
-@keyframes alerttxtColor{
+@keyframes alertbuttontxtColor{
     0%{
        color: #ddd;
     }   
@@ -710,11 +710,19 @@ button#dltBtn{
 }
 td.error_data {
     text-align: center;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 600;
-    color: orangered;
+    color: #ffe7de;
     border-bottom: 1px solid silver;
     animation: alerttxtColor 3s infinite;
+}
+@keyframes alerttxtColor{
+    0%{
+       color: #ddd;
+    }   
+    100%{
+       color: #cfa697;
+    }
 }
 ::placeholder {
     color: #6c757d;
@@ -1005,7 +1013,7 @@ th#th_sort {
     color: black;
     font-size: 15px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    background-color: #f1f1f1fc;
+    background-color: white;
 }
 .search-hidden{
     display: none;

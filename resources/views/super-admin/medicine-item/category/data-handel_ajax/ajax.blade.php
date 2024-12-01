@@ -1,5 +1,5 @@
 <script type="module">
-    import { handleSuccessMessage, buttonLoader } from "/module/module-min-js/design-helper-function-min.js";
+    import { buttonLoader } from "/module/module-min-js/design-helper-function-min.js";
     buttonLoader();
     $(document).ready(() => {
         // Initialize the button loader for the login button
@@ -70,7 +70,15 @@
         }
 
         // Fetch Users Data ------------------
-        function fetch_category_data(query = '', url = null, perItem = null) {
+        function fetch_category_data(
+            query = '', 
+            url = null, 
+            perItem = null,
+            sortFieldID = 'id', 
+            sortFieldCategoryName = 'category_name', 
+            sortFieldStatus = 'status', 
+            sortFieldDirection = 'desc',
+        ) {
 
             if (perItem === null) {
                 perItem = $("#perItemControl").val();
@@ -88,7 +96,11 @@
                 url: current_url,
                 dataType: 'json',
                 data: {
-                    query: query
+                    query: query,
+                    sort_field_id : sortFieldID,
+                    sort_field_category_name : sortFieldCategoryName,
+                    sort_field_status : sortFieldStatus,
+                    sort_direction : sortFieldDirection,
                 },
                 success: function({
                     data,
@@ -482,9 +494,38 @@
             $("#active_loader").addClass('loader_chart');
         });
 
+        // Event Listener for sorting columns
+        $(document).on('click', '#th_sort', function(){
+            var button = $(this);
+            // Get the column and current order
+            var column = button.data('column');
+            var order = button.data('order');
+            // Toggle the order (asc/desc)
+            order = order === 'desc' ? 'asc' : 'desc';
+            button.data('order', order);
+            fetch_category_data(
+                '', null, null,
+                column === 'id' ? column : 'id',
+                column === 'category_name' ? column : 'category_name',
+                column === 'status' ? column : 'status',
+                order
+            );
+            // Reset all icons in the table headers first - icon part
+            $("#th_sort").find('.toggle-icon').html('<i class="fa-solid fa-arrow-down-long"></i>');
+            var icon = button.find('.toggle-icon');
+            if(order === 'desc'){
+                icon.html('<i class="fa-solid fa-arrow-up-long"></i>');
+                $(".toggle-icon").fadeIn(300);
+            }else{
+                icon.html('<i class="fa-solid fa-arrow-down-long"></i>');
+                $(".toggle-icon").fadeIn(300);
+            }
+
+        });
+
     });
 </script>
-<script>
+<!-- <script>
     var dragCol = null;
 
     function handelDragStart(e) {
@@ -529,4 +570,4 @@
         col.addEventListener('dragover', handelDragOver, false);
         col.addEventListener('drop', handelDrop, false);
     });
-</script>
+</script> -->

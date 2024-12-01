@@ -10,33 +10,33 @@
           <p class="catg mb-1">
             <span class="skeleton-card-head" style="color:black;">{{__('translate.Category')}}</span>
             <span class="tot_summ" id="num_plate">
-              <label class="tot-search skeleton-card-head-label mt-3 pt-2" style="color:black;" for="tot_cagt"> ➤ {{__('translate.Total Category')}} :</label>
+              <label class="tot-search skeleton-card-head-labl mt-3 pt-2" style="color:black;" for="tot_cagt"> ➤ {{__('translate.Total Category')}} :</label>
               <label class="badge rounded-pill bg-primary skeleton-card-head-capsule" for="total_medic_records" id="iteam_label4"><span class="total_users" style="font-weight: 600;color:white;" id="total_category_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-size: 11px;">.00 {{__('translate.items')}}</span></label>
             </span>
+            <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="color:rgb(13, 110, 253);opacity:1;"></i>
           </p>
           <div class="row">
-            <div class="col-5">
-              <span class="form-check form-switch search_ skeleton-card-head-label me-2">
+            <div class="col-3 skeleton-card-head-label">
+              <span class="form-check form-switch search_ me-2">
                 <input class="form-check-input" onclick="mySrcFunction()" type="checkbox" id="search_area" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                <label class="search ser_label ps-1 pt-1" style="color:black;" for="search pe-2">{{__('translate.Search Mode')}} :</label>
+                <label class="search ser_label ps-1 pt-1" style="color:black;" for="search pe-2">{{__('translate.Search')}} :</label>
                 <label class="form-check-label" for="collapseExample"><span class="search_on" id="search_off">OFF</span></label>
               </span>
             </div>
-            <div class="col-5">
+            <div class="col-9">
               <span id="search_plate">
                 <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform display_hidden ps-1" placeholder="{{__('translate.Category Search.........')}}">
-                <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="color:rgb(13, 110, 253);opacity:1;"></i>
               </span>
             </div>
           </div>
           <div>
             <table class="ord_table center border-1 skeleton-table mt-2" id="myTable">
               <tr class="table-row order_body acc_setting_table skeleton">
-                <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col ps-1 pt-1" style="cursor: move;">{{__('translate.ID')}}</th>
-                <th id="th_sort" draggable="true" class="tableHead table_th_color tot_pending_ col ps-1 pt-1" style="cursor: move;">{{__('translate.Action')}}</th>
-                <th id="th_sort" draggable="true" class="tableHead table_th_color tot_pending_ col ps-1 pt-1" style="text-align: left;cursor: move;">{{__('translate.Category-Name')}}</th>
-                <th id="th_sort" class="tableHead table_th_color tot_pending_ ps-1 pt-1">{{__('translate.Status')}}</th>
-                <th id="th_sort" draggable="true" class="tableHead table_th_color tot_pending_ check_border col pt-1" style="cursor: move;">{{__('translate.Check')}}</th>
+                <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.ID')}}</th>
+                <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Action')}}</th>
+                <th id="th_sort" draggable="true" data-coloumn="category_name" data-order="desc" class="tableHead table_th_color tot_pending_ col ps-1 pt-1" style="text-align: left;cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Category-Name')}}</th>
+                <th id="th_sort" draggable="true" data-coloumn="status" data-order="desc" class="tableHead table_th_color tot_pending_ ps-1 pt-1" style="text-align: left;cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Status')}}</th>
+                <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ check_border col pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Check')}}</th>
               </tr>
               <tbody class="bg-transparent" id="category_data_table">
 
@@ -72,16 +72,14 @@
               <form autocomplete="off">
                 @csrf
                 <div class="row mt-3">
-                  <div class="col-5">
-                    <label class="catg_name_label skeleton-input-label mt-1" for="category-name">{{__('translate.Category-Name')}} :</label>
+                  <div class="col-5 skeleton-input-label">
+                    <label class="catg_name_label mt-1" for="category-name">{{__('translate.Category-Name')}} :</label>
                   </div>
                   <div class="col-1">
                     <i class="category-icon fa fa-spinner fa-spin category-hidden mt-2"></i>
                   </div>
-                  <div class="col-6">
-                    <span class="skeleton-input">
-                      <input class="form-control form-control-sm edit_category_name skeleton" type="text" name="category_name" id="category_name" placeholder="{{__('translate.Category Name')}}" autofocus>
-                    </span>
+                  <div class="col-6 skeleton-input">
+                    <input class="form-control form-control-sm edit_category_name skeleton" type="text" name="category_name" id="category_name" placeholder="{{__('translate.Category Name')}}" autofocus>
                     <input type="hidden" id="category_id">
                   </div>
                   <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
@@ -225,7 +223,7 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
 @endsection
 @section('script')
-<script src="{{asset('backend_asset')}}/support_asset/product-item/js/category-iteam.js"></script>
+<script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
 <script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 @include('super-admin.medicine-item.category.data-handel_ajax.ajax')
 <script>
@@ -244,13 +242,21 @@
     allSkeleton.forEach(item => {
       item.classList.remove('skeleton-card-head')
     });
-  }
+  } 
 
   function focuCardHeadLabel() {
     const allSkeleton = document.querySelectorAll('.skeleton-card-head-label')
 
     allSkeleton.forEach(item => {
       item.classList.remove('skeleton-card-head-label')
+    });
+  }
+
+  function focuCardHeadLabl() {
+    const allSkeleton = document.querySelectorAll('.skeleton-card-head-labl')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-card-head-labl')
     });
   }
 
@@ -321,6 +327,7 @@
     fetchData();
     focuCardHead();
     focuCardHeadLabel();
+    focuCardHeadLabl();
     focuCardHeadCapsule();
     focuCardTable();
     focuCardTablePeritemLabel();
