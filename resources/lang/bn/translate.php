@@ -528,12 +528,12 @@ return[
     'Sub-Category-Name'=>'সাব-ক্যাটাগরি-নাম',
     'Cateogry Name'=>'ক্যাটাগরি নাম',
     // Medicine Group
-    'Medicine Group'=>'মেডিসিন গ্রুপ',
+    'Product Group'=>'পণ্য গ্রুপ',
     'All Search.........'=>'সমস্ত অনুসন্ধান.........',
     'Group-Name'=>'গ্রুপ-নাম',
     'Total Group'=>'মোট গ্রুপ',
     'Group Name'=>'গ্রুপ নাম',
-    'Delete Medicine Group'=>'মেডিসিন গ্রুপ মুছুন',
+    'Delete Product Group'=>'পণ্য গ্রুপ মুছুন',
     'Group-ID'=>'গ্রুপ-আইডি',
     'Are you sure, Would you like to delete this group, permanently?'=>'আপনি কি নিশ্চিত, আপনি কি স্থায়ীভাবে এই গ্রুপটি মুছে দিতে চান?',
     // Medicine Name

@@ -7,40 +7,48 @@
     <div class="row">
       <div class="col-xl-7">
         <div class="card-body focus-color cd cat_form">
-          <p class="catg skeleton mb-1">
-            <span>{{__('translate.Medicine-Name')}}</span>
-            <span class="tot_summ skeleton" id="num_plate">
-              <label class="tot-search skeleton mt-3 pt-1" for="tot_cagt"> ➤ {{__('translate.Total Medicine')}} :</label>
-              <label class="badge rounded-pill bg-primary tot-search"><span class="total_users skeleton" style="font-weight: 600;color:white;font-family: sans-serif;" id="total_medicine_records"></span><span style="font-weight: 600;font-size:11px;color:white;font-family: sans-serif;">.00 {{__('translate.pics')}}</span></label>
-            </span>
-          </p>
           <div class="row">
-            <div class="col-5">
+            <div class="col-xl-8">
+              <p class="catg mb-1">
+                <span class="skeleton-card-head-two">{{__('translate.Medicine-Name')}}</span>
+                <span class="tot_summ" id="num_plate">
+                  <label class="tot-search skeleton-card-head-labl-two mt-3 pt-1" for="tot_cagt"> ➤ {{__('translate.Total Medicine')}} :</label>
+                  <label class="badge rounded-pill bg-primary tot-search skeleton-card-head-capsule-two"><span class="total_users" style="font-weight: 600;color:white;" id="total_medicine_records"></span><span style="font-weight: 600;font-size:11px;color:white;">.00 {{__('translate.pics')}}</span></label>
+                </span>
+              </p>
+            </div>
+            <div class="col-xl-1"><i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="margin-top:11px;"></i></div>
+            <div class="col-xl-3 link">
+              <button class="btn btn-sm cgt_btn btn_focus min-skeleton ms-3 mt-1" href="#" type="button" id="showGroup">
+                <span class="get-group-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                <span class="get-group-btn-text">{{__('translate.Group')}}</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-3">
               <span class="form-check form-switch search_ skeleton me-2">
                 <input class="form-check-input" onclick="mySrcFunction()" type="checkbox" id="search_area" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                <label class="search ser_label ps-1 pt-1" for="search pe-2">{{__('translate.Search Mode')}} :</label>
+                <label class="search ser_label ps-1 pt-1" for="search pe-2">{{__('translate.Search')}} :</label>
                 <label class="form-check-label" for="collapseExample"><span class="search_on" id="search_off">OFF</span></label>
               </span>
             </div>
-            <div class="col-5">
+            <div class="col-9">
               <span id="search_plate">
-                <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search search searchform ps-1" placeholder="{{__('translate.Search.........')}}">
-                <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
+                <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search search searchform display_hidden ps-1" placeholder="{{__('translate.Search.........')}}">
               </span>
-            </div>
-            <div class="col-2 link">
-              <button class="btn btn-sm cgt_btn btn_focus min-skeleton ms-3" href="#" type="button" id="showGroup">{{__('translate.Group')}}</button>
             </div>
           </div>
           <div>
             <table class="ord_table center border-1 skeleton mt-2">
               <tr class="table-row order_body acc_setting_table">
-                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col skeleton ps-1 pt-1">{{__('translate.ID')}}</th>
-                <th id="th_sort" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1">{{__('translate.Action')}}</th>
-                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt skeleton ps-1 pt-1">{{__('translate.Group')}}</th>
-                <th id="th_sort" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1" style="text-align: left;">{{__('translate.Medicine-Name')}}</th>
-                <th id="th_sort" class="tableHead table_th_color tot_pending_ skeleton ps-1 pt-1">{{__('translate.Status')}}</th>
-                <th id="th_sort" class="tableHead table_th_color tot_pending_ col skeleton pt-1">{{__('translate.Check')}}</th>
+                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.ID')}}</th>
+                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Action')}}</th>
+                <th id="th_sort" data-coloumn="group_id data-order="desc" class="tableHead table_th_color txt skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Group')}}</th>
+                <th id="th_sort" data-coloumn="medicine_name" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1" style="text-align: left;cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Medicine-Name')}}</th>
+                <th id="th_sort" data-coloumn="statis" data-order="desc" class="tableHead table_th_color tot_pending_ skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Status')}}</th>
+                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Check')}}</th>
               </tr>
               <tbody class="bg-transparent" id="medicine_data_table" style="color: black;font-weight:500;">
 
@@ -58,11 +66,10 @@
                   <option class="">100</option>
                   <option class="">200</option>
                 </select>
-                <span class="custom-list-item-arrow me-4"></span>
               </div>
             </div>
             <div class="col-10">
-              <div class="pagination skeleton mt-1 pt-1" id="medicine_data_table_paginate">
+              <div class="pagination pagination-skeleton mt-1 pt-1" id="medicine_data_table_paginate">
 
               </div>
             </div>
@@ -72,44 +79,51 @@
       <div class="col-xl-5">
         <div class="row">
           <div class="category-form">
-            <div class="card form-control cat_form skeleton">
+            <div class="card form-control cat_form">
               <form autocomplete="off">
                 @csrf
                 <div class="row mt-3">
-                  <div class="col-5">
-                    <label class="catg_name_label medicine_name skeleton mt-1" for="medicine-name">{{__('translate.Medicine-Name')}} :</label>
+                  <div class="col-5 skeleton-input-label">
+                    <label class="catg_name_label medicine_name mt-1" for="medicine-name">{{__('translate.Medicine-Name')}} :</label>
                   </div>
                   <div class="col-1">
                     <i class="medicine-icon fa fa-spinner fa-spin medicine-hidden mt-2"></i>
                   </div>
-                  <div class="col-6">
-                    <input class="form-control form-control-sm edit_medicine_name skeleton" type="text" name="medicine_name" id="medicine_name" placeholder="{{__('translate.Medicine Name')}}" autofocus>
+                  <div class="col-6 skeleton-input">
+                    <input class="form-control form-control-sm edit_medicine_name" type="text" name="medicine_name" id="medicine_name" placeholder="{{__('translate.Medicine Name')}}" autofocus>
                     <input type="hidden" id="medicine_id">
                   </div>
                   <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
                 </div>
                 <div class="row mt-2">
-                  <div class="col-5">
-                    <label class="catg_name_label medicine_name skeleton mt-1" for="group-id">{{__('translate.Group-ID')}} :</label>
+                  <div class="col-5 skeleton-input-label">
+                    <label class="catg_name_label medicine_name mt-1" for="group-id">{{__('translate.Group-ID')}} :</label>
                   </div>
                   <div class="col-1">
                     <i class="medicineid-icon fa fa-spinner fa-spin medicineid-hidden mt-2"></i>
                   </div>
-                  <div class="col-6">
-                    <input class="form-control form-control-sm group_id edit_group_id skeleton" type="number" name="group_id" id="group_id" placeholder="{{__('translate.Group ID')}}" required>
+                  <div class="col-6 skeleton-input group_nme">
+                    <input class="form-control form-control-sm group_id edit_group_id" list="datalistOptions2" type="number" name="group_id" id="group_id" placeholder="{{__('translate.Group ID')}}" required>
+                    <datalist id="datalistOptions2">
+                      @foreach($medicinegroups as $medicinegroup)
+                        <option value="{{$medicinegroup->id}}">{{$medicinegroup->group_name}}</option>
+                      @endforeach
+                    </datalist>
                   </div>
-                  <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
                 </div>
                 <p style="text-align: end;">
                   <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" id="save">
-                    <i class="add-icon fa fa-spinner fa-spin add-hidden"></i>
-                    <span class="btn-text">ADD</span>
+                    <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                    <span class="category-btn-text">ADD</span>
                   </button>
-                  <button id="update_btn" class="btn btn-sm cgt_btn btn_focus skeleton mt-2">
-                    <i class="update-icon fa fa-spinner fa-spin update-hidden"></i>
-                    <span class="btn-text">Update</span>
+                  <button id="update_btn" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" hidden>
+                    <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                    <span class="update-btn-text">Update</span>
                   </button>
-                  <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton mt-2">Cancel</button>
+                  <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton mt-2">
+                    <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                    <span class="cancel-btn-text">Cancel</span>
+                  </button>
                 </p>
               </form>
             </div>
@@ -146,15 +160,15 @@
               <div class="col-6">
                 <span class="form-check form-switch search_ me-2" id="tb_group">
                   <input class="form-check-input mt-2 skeleton" type="checkbox" id="search_area_" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  <label class="search catg_ser_label ps-1 pt-1" id="med_label" for="search pe-2" id="tb_group2">{{__('translate.Search Mode')}} :</label>
+                  <label class="search catg_ser_label ps-1 pt-1" id="med_label" for="search pe-2" id="tb_group2">{{__('translate.Search')}} :</label>
                   <label class="form-check-label skeleton" id="med_label2" for="collapseExample"><span class="search_on skeleton" id="search_off_" style="color: darkcyan;font-weight:500;font-size:11px;font-family: sans-serif;">OFF</span><span class="search_on skeleton" id="search_on_" style="color: darkcyan;font-weight:600;font-family: sans-serif;">ON</span></label>
                 </span>
               </div>
               <div class="col-6">
                 <span id="search_plate">
-                  <input id="group_search" type="search" name="search" list="datalistOptions2" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.Search.........')}}">
+                  <input id="group_search" type="search" name="search" list="datalistOptions3" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.Search.........')}}">
                   <i class="medic-search-icon fa fa-spinner fa-spin medic-search-hidden"></i>
-                  <datalist id="datalistOptions2">
+                  <datalist id="datalistOptions3">
                     @foreach($medicinegroups as $medicinegroup)
                       <option value="{{$medicinegroup->group_name}}">
                     @endforeach
@@ -162,11 +176,11 @@
                 </span>
               </div>
             </div>
-            <table class="ord_table center border-1 mt-1" id="medic_nam">
+            <table class="ord_table center border-1 mt-2" id="medic_nam">
               <thead id="group_nam2">
                 <tr id="group_nam3" style="color:black;">
                   <th id="group_nam4" class="tableHead back_color align">{{__('translate.ID')}}</th>
-                  <th id="group_nam5" class="tableHead back_color ps-1">{{__('translate.Group Name')}}</th>
+                  <th id="group_nam5" data-coloumn="id" data-order="desc" class="tableHead sortable-header back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Group Name')}}</th>
                 </tr>
               </thead>
               <tbody class="bg-trnasparent" id="group_table" style="color:black;font-weight:500;cursor:alias;">
@@ -183,13 +197,12 @@
                       <option>100</option>
                       <option>200</option>
                     </select>
-                    <span class="custom-list-item-arrow"></span>
                   </div>
                 </div>
                 <div class="col-10">
                   <span class="tot_summ" style="float: right;" id="num_plate">
                     <label class="tot-search mt-3" style="font-size: 12px;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Group Entry')}} :</label>
-                    <label class="badge rounded-pill bg-primary" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_groups_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;font-family: sans-serif;font-size:12px;">.00 {{__('translate.items')}}</span></label>
+                    <label class="badge rounded-pill bg-primary" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_groups_records"></span><span id="iteam_label5">.00 {{__('translate.items')}}</span></label>
                   </span>
                 </div>
               </div>
@@ -238,8 +251,8 @@
       <div class="modal-footer profile_modal_footer">
         <p id="btn_group2">
           <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
-            <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
-            <span class="btn-text">{{__('translate.Yes')}}</span>
+            <span class="delete-yes-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="delete-yes-btn-text">{{__('translate.Yes')}}</span>
           </a>
         </p>
         <p id="btn_group">
@@ -271,8 +284,8 @@
         </div>
         <div class="modal-footer" id="logoutModal_footer">
           <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user btn_focus" id="deleteLoader">
-            <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
-            <span class="btn-text">Delete</span>
+            <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="delete-btn-text">Delete</span>
           </button>
           <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="medi_delt4" data-bs-dismiss="modal">Cancel</button>
         </div>    
@@ -302,7 +315,8 @@
         </div>
         <div class="modal-footer" id="logoutModal_footer">
           <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus">
-            <span class="btn-text">Confirm</span>
+            <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="confirm-btn-text">Confirm</span>
           </button>
           <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
         </div>    
@@ -319,6 +333,7 @@
 @endsection
 @section('script')
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
+<script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 @include('super-admin.medicine-item.medicine-name.data-handel-ajax.data-ajax')
 @include('super-admin.medicine-item.medicine-name.data-handel-ajax.get-group-ajax')
 <script>
@@ -330,6 +345,28 @@
       item.classList.remove('skeleton')
     });
   }
+  function focuCardHead() {
+    const allSkeleton = document.querySelectorAll('.skeleton-card-head-two')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-card-head-two')
+    });
+  }
+  function focuCardHeadLabl() {
+    const allSkeleton = document.querySelectorAll('.skeleton-card-head-labl-two')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-card-head-labl-two')
+    });
+  }
+
+  function focuCardHeadCapsule() {
+    const allSkeleton = document.querySelectorAll('.skeleton-card-head-capsule-two')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-card-head-capsule-two')
+    });
+  }
   function medicineData() {
     const allSkeleton = document.querySelectorAll('.min-skeleton')
 
@@ -337,10 +374,37 @@
       item.classList.remove('min-skeleton')
     });
   }
+  function focuCardTablePagination() {
+    const allSkeleton = document.querySelectorAll('.pagination-skeleton')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('pagination-skeleton')
+    });
+  }
+  function focuInputLabel() {
+    const allSkeleton = document.querySelectorAll('.skeleton-input-label')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-input-label')
+    });
+  }
+  function focuInput() {
+    const allSkeleton = document.querySelectorAll('.skeleton-input')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-input')
+    });
+  }
 
   setTimeout(() => {
     fetchData();
     medicineData();
+    focuCardHead();
+    focuCardHeadLabl();
+    focuCardHeadCapsule();
+    focuCardTablePagination();
+    focuInputLabel();
+    focuInput();
   }, 1000);
 </script>
 @endsection

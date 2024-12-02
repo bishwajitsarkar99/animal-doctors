@@ -476,22 +476,22 @@ input#category_name {
 button#cate_delete5 {
     background: orangered;
     color: white;
-    font-family: sans-serif;
+    font-family: var(--category-font-family);
 }
 button#cate_delete5:hover {
     background: #e9e9e9;
     color: orangered;
-    font-family: sans-serif;
+    font-family: var(--category-font-family);
 }
 button#update_btn_confirm {
     background: #08a05c;
     color: white;
-    font-family: sans-serif;
+    font-family: var(--category-font-family);
 }
 button#update_btn_confirm:hover {
     background: #e9e9e9;
     color: #08a05c;
-    font-family: sans-serif;
+    font-family: var(--category-font-family);
 }
 span.error_val {
     font-size: 12px;

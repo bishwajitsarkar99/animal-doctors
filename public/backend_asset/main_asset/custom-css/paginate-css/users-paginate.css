@@ -557,7 +557,7 @@ div#deleteuser {
 }
 span#search_off{
     font-size: 11px;
-    color: orangered;
+    color: #4a4848;
     animation: colr 6s infinite;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-weight: 700;
@@ -567,7 +567,7 @@ span#search_off{
         color: #ddd;
     }
     100%{
-        color: orangered;
+        color: #4a4848;
     }
 }
 p.input.form-check-input {

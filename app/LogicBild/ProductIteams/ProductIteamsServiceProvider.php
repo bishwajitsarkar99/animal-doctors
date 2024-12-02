@@ -587,7 +587,13 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = MedicineGroup::orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_field_group_name = $request->input('sort_field_group_name', 'group_name');
+        $sort_field_status = $request->input('sort_field_status', 'status');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = MedicineGroup::query();
 
         if( $query = $request->get('query')){
             $data->Where('group_name','LIKE','%'.$query.'%')
@@ -597,6 +603,12 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction)
+                        ->orderBy($sort_field_group_name, $sort_direction)
+                        ->orderBy($sort_field_status, $sort_direction);
+
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);
@@ -738,7 +750,14 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = MedicineName::with('medicine_groups')->orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_field_group_id = $request->input('sort_field_group_id', 'group_id');
+        $sort_field_medicine_name = $request->input('sort_field_medicine_name', 'medicine_name');
+        $sort_field_status = $request->input('sort_field_status', 'status');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = MedicineName::with('medicine_groups');
 
         if( $query = $request->get('query')){
             $data->Where('medicine_name','LIKE','%'.$query.'%')
@@ -749,6 +768,12 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction)
+                        ->orderBy($sort_field_group_id, $sort_direction)
+                        ->orderBy($sort_field_medicine_name, $sort_direction)
+                        ->orderBy($sort_field_status, $sort_direction);
+
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);
@@ -762,7 +787,11 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = MedicineGroup::orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = MedicineGroup::query();
 
         if( $query = $request->get('query')){
             $data->Where('group_name','LIKE','%'.$query.'%')
@@ -772,6 +801,9 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction);
+                        
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);
@@ -784,11 +816,9 @@ class ProductIteamsServiceProvider
         // validation
         $validators = validator::make($request->all(),[
             'medicine_name'=>'required|max:191|unique:medicine_names',
-            'group_id'=>'required',
         ],[
             'medicine_name.required'=>'The medicine name is required mandatory.',
             'medicine_name.unique'=>'The medicine name has already been taken.',
-            'group_id.required'=>'The medicine group id is required mandatory.',
         ]);
         if($validators->fails()){
             return response()->json([
@@ -836,7 +866,6 @@ class ProductIteamsServiceProvider
         // validation
         $validator = validator::make($request->all(),[
             'medicine_name'=>'required|max:191|unique:medicine_names,medicine_name,' .$id,
-            'group_id'=>'required',
         ]);
         if($validator->fails()){
             return response()->json([
@@ -921,7 +950,14 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = MedicineDogs::with(['medicine_names'])->orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_field_medicine_id = $request->input('sort_field_medicine_id', 'medicine_id');
+        $sort_field_medicine_dosage = $request->input('sort_field_medicine_dogs', 'dosage');
+        $sort_field_status = $request->input('sort_field_status', 'status');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = MedicineDogs::with(['medicine_names']);
 
         if( $query = $request->get('query')){
             $data->orWhere('id','LIKE','%'.$query.'%')
@@ -933,6 +969,12 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction)
+                        ->orderBy($sort_field_medicine_id, $sort_direction)
+                        ->orderBy($sort_field_medicine_dosage, $sort_direction)
+                        ->orderBy($sort_field_status, $sort_direction);
+
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);
@@ -968,10 +1010,8 @@ class ProductIteamsServiceProvider
         // validation
         $validators = validator::make($request->all(),[
             'dosage'=>'required|max:191',
-            'medicine_id'=>'required',
         ],[
-            'dosage.required'=>'The medicine dosage is required mandatory.',
-            'medicine_id.required'=>'The medicine id is required mandatory.',
+            'dosage.required'=>'The medicine dosage is required.',
         ]);
         if($validators->fails()){
             return response()->json([
@@ -1017,7 +1057,8 @@ class ProductIteamsServiceProvider
         // validation
         $validator = validator::make($request->all(),[
             'dosage'=>'required|max:191',
-            'medicine_id'=>'required',
+        ],[
+            'dosage.required'=>'The medicine dosage is required.',
         ]);
         if($validator->fails()){
             return response()->json([

@@ -4,6 +4,76 @@
     --color:royalblue;
     --size:1px;
     --font-weight:500;
+    --sub-product-group-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+.skeleton-card-head-capsule-two,.skeleton-card-head-labl-two,.skeleton-card-head-two,.min-skeleton{
+    position: relative;
+}
+.min-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 107%;
+    height: 107%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px;
+}
+.skeleton-card-head-two::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -8px;
+    width: 100%;
+    height: 25px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px;
+}
+.skeleton-card-head-labl-two::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px;
+}
+.skeleton-card-head-capsule-two::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px;
+}
+@keyframes focus_skeleton {
+    0% {
+        background-position: -100% 0;
+    }
+    
+    100% {
+        background-position: 100% 0;
+    }
+}
+.item_amount{
+    font-size: 11px;
+    font-weight: 600;
+    font-family: var(--sub-product-group-font-family);
 }
 button#delete_group4 {
     background: orangered;

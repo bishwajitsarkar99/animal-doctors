@@ -552,12 +552,12 @@ return[
     'Category-List'=>'Category-List',
     'Category-List'=>'Category-List',
     // Medicine Group
-    'Medicine Group'=>'Medicine Group',
+    'Product Group'=>'Product Group',
     'All Search.........'=>'All Search.........',
     'Group-Name'=>'Group-Name',
     'Total Group'=>'Total Group',
     'Group Name'=>'Group Name',
-    'Delete Medicine Group'=>'Delete Medicine Group',
+    'Delete Product Group'=>'Delete Product Group',
     'Group-ID'=>'Group-ID',
     'Are you sure, Would you like to delete this group, permanently?'=>'Are you sure, Would you like to delete this group, permanently?',
     // Medicine Name
