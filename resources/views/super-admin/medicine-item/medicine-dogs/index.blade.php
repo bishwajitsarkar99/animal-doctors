@@ -158,7 +158,7 @@
               <div class="col-6">
                 <span class="form-check form-switch search_ me-2" id="med">
                   <input class="form-check-input mt-2 skeleton" type="checkbox" id="search_area_" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  <label class="search catg_ser_label ps-1 pt-1" id="med_label" for="search pe-2">{{__('translate.Search Mode')}} :</label>
+                  <label class="search catg_ser_label ps-1 pt-1" id="med_label" for="search pe-2">{{__('translate.Search')}} :</label>
                   <label class="form-check-label skeleton" id="med_label2" for="collapseExample"><span class="search_on skeleton" id="search_off_">OFF</span><span class="search_on skeleton" id="search_on_">ON</span></label>
                 </span>
               </div>
@@ -178,7 +178,7 @@
               <thead id="medic_nam2">
                 <tr id="medic_nam3" style="color:black;">
                   <th id="medic_nam4" class="tableHead back_color align">{{__('translate.ID')}}</th>
-                  <th id="medic_nam5" class="tableHead back_color ps-1">{{__('translate.Medicine Name')}}</th>
+                  <th id="medic_nam5" data-coloumn="id" data-order="desc" class="tableHead sortable-header back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Medicine Name')}}</th>
                 </tr>
               </thead>
               <tbody class="bg-transparnet tbody" id="medic_nam6" style="color:black;font-weight:500;cursor:alias;">
@@ -195,7 +195,6 @@
                       <option>100</option>
                       <option>200</option>
                     </select>
-                    <span class="custom-list-item-arrow"></span>
                   </div>
                 </div>
                 <div class="col-10">
@@ -251,8 +250,8 @@
       <div class="modal-footer profile_modal_footer">
         <p id="btn_group2">
           <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
-            <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
-            <span class="btn-text">{{__('translate.Yes')}}</span>
+            <span class="delete-yes-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="delete-yes-btn-text">{{__('translate.Yes')}}</span>
           </a>
         </p>
         <p id="btn_group">
@@ -284,8 +283,8 @@
         </div>
         <div class="modal-footer" id="logoutModal_footer">
           <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user btn_focus" id="deleteLoader">
-            <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
-            <span class="btn-text">Delete</span>
+            <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="delete-btn-text">Delete</span>
           </button>
           <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="dosage4" data-bs-dismiss="modal">Cancel</button>
         </div>    
@@ -315,7 +314,8 @@
         </div>
         <div class="modal-footer" id="logoutModal_footer">
           <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus">
-            <span class="btn-text">Confirm</span>
+            <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="confirm-btn-text">Confirm</span>
           </button>
           <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
         </div>    

@@ -7,39 +7,41 @@
     <div class="row">
       <div class="col-xl-7">
         <div class="card-body focus-color cd cat_form">
-          <p class="catg skeleton mb-1">
-            <span>{{__('translate.Product')}}</span>
-            <span class="tot_summ skeleton" id="num_plate">
-              <label class="tot-search skeleton mt-3 pt-1" for="tot_cagt"> ➤ {{__('translate.Total Product')}} :</label>
-              <label class="badge rounded-pill bg-primary" for="total_medic_records skeleton" id="iteam_label4">
-                <span class="total_users skeleton" style="font-weight: 600;" id="total_product_records"></span>
-                <span id="iteam_label5" style="font-weight: 600;color:white;font-size:11px;font-family: sans-serif;">.00 {{__('translate.pics')}}</span>
-              </label>
-            </span>
-          </p>
           <div class="row">
-            <div class="col-5">
+            <p class="catg mb-1">
+              <span class="skeleton-card-head-two">{{__('translate.Product')}}</span>
+              <span class="tot_summ" id="num_plate">
+                <label class="tot-search skeleton-card-head-labl-two mt-3 pt-1" for="tot_cagt"> ➤ {{__('translate.Total Product')}} :</label>
+                <label class="badge rounded-pill bg-primary skeleton-card-head-capsule-two" for="total_medic_records" id="iteam_label4">
+                  <span class="total_users" style="font-weight: 600;" id="total_product_records"></span>
+                  <span id="iteam_label5" style="font-weight: 600;color:white;font-size:11px;">.00 {{__('translate.pics')}}</span>
+                </label>
+              </span>
+              <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
+            </p>
+          </div>
+          <div class="row">
+            <div class="col-3">
               <span class="form-check form-switch search_ skeleton me-2">
                 <input class="form-check-input" onclick="mySrcFunction()" type="checkbox" id="search_area" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                <label class="search ser_label ps-1 pt-1" for="search pe-2">{{__('translate.Search Mode')}} :</label>
+                <label class="search ser_label ps-1 pt-1" for="search pe-2">{{__('translate.Search')}} :</label>
                 <label class="form-check-label" for="collapseExample"><span class="search_on" id="search_off">OFF</span></label>
               </span>
             </div>
-            <div class="col-6">
+            <div class="col-9">
               <span id="search_plate">
-                <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.Search.........')}}">
-                <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
+                <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform display_hidden ps-1" placeholder="{{__('translate.Search.........')}}">
               </span>
             </div>
           </div>
           <div>
             <table class="ord_table center border-1 skeleton mt-2">
               <tr class="table-row order_body acc_setting_table skeleton">
-                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col skeleton ps-1 pt-1">{{__('translate.ID')}}</th>
-                <th id="th_sort" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1">{{__('translate.Action')}}</th>
-                <th id="th_sort" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1" style="text-align: left;">{{__('translate.Product-Name')}}</th>
-                <th id="th_sort" class="tableHead table_th_color tot_pending_ ps-1 skeleton pt-1">{{__('translate.Status')}}</th>
-                <th id="th_sort" class="tableHead table_th_color tot_pending_ col skeleton pt-1">{{__('translate.Check')}}</th>
+                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.ID')}}</th>
+                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Action')}}</th>
+                <th id="th_sort" data-coloumn="product_name" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1" style="text-align: left;cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Product-Name')}}</th>
+                <th id="th_sort" data-coloumn="status" data-order="desc" class="tableHead table_th_color tot_pending_ ps-1 skeleton pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Status')}}</th>
+                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Check')}}</th>
               </tr>
               <tbody class="bg-transparent skeleton" id="product_data_table">
 
@@ -57,11 +59,10 @@
                   <option class="">100</option>
                   <option class="">200</option>
                 </select>
-                <span class="custom-list-item-arrow me-4"></span>
               </div>
             </div>
             <div class="col-10">
-              <div class="pagination skeleton mt-1" id="product_data_table_paginate">
+              <div class="pagination pagination-skeleton mt-1" id="product_data_table_paginate">
 
               </div>
             </div>
@@ -71,18 +72,18 @@
       <div class="col-xl-5">
         <div class="row">
           <div class="category-form">
-            <div class="card form-control cat_form skeleton">
+            <div class="card form-control cat_form">
               <form autocomplete="off">
                 @csrf
                 <div class="row mt-3">
-                  <div class="col-5">
-                    <label class="catg_name_label skeleton mt-1" for="category-name">{{__('translate.Product-Name')}} :</label>
+                  <div class="col-5 skeleton-input-label">
+                    <label class="catg_name_label mt-1" for="category-name">{{__('translate.Product-Name')}} :</label>
                   </div>
                   <div class="col-1">
                     <i class="product-icon fa fa-spinner fa-spin product-hidden mt-2"></i>
                   </div>
-                  <div class="col-6">
-                    <input class="form-control form-control-sm edit_product_name skeleton" type="text" name="product_name" id="product_name" placeholder="{{__('translate.Product Name')}}" autofocus>
+                  <div class="col-6 skeleton-input">
+                    <input class="form-control form-control-sm edit_product_name" type="text" name="product_name" id="product_name" placeholder="{{__('translate.Product Name')}}" autofocus>
                     <input type="hidden" id="product_id">
                   </div>
                   <span id="savForm_error"></span><span id="updateForm_errorList"></span>
@@ -225,6 +226,7 @@
 @endsection
 @section('script')
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
+<script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 @include('super-admin.medicine-item.product.data-handel-ajax.data-ajax')
 
 <script>
@@ -236,9 +238,66 @@
       item.classList.remove('skeleton')
     });
   }
+  function fetchButton() {
+    const allSkeleton = document.querySelectorAll('.min-skeleton')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('min-skeleton')
+    });
+  }
+  function focuCardHead() {
+    const allSkeleton = document.querySelectorAll('.skeleton-card-head-two')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-card-head-two')
+    });
+  }
+  function focuCardHeadLabl() {
+    const allSkeleton = document.querySelectorAll('.skeleton-card-head-labl-two')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-card-head-labl-two')
+    });
+  }
+
+  function focuCardHeadCapsule() {
+    const allSkeleton = document.querySelectorAll('.skeleton-card-head-capsule-two')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-card-head-capsule-two')
+    });
+  }
+  function focuCardTablePagination() {
+    const allSkeleton = document.querySelectorAll('.pagination-skeleton')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('pagination-skeleton')
+    });
+  }
+  function focuInputLabel() {
+    const allSkeleton = document.querySelectorAll('.skeleton-input-label')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-input-label')
+    });
+  }
+  function focuInput() {
+    const allSkeleton = document.querySelectorAll('.skeleton-input')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-input')
+    });
+  }
 
   setTimeout(() => {
     fetchData();
+    fetchButton();
+    focuCardHead();
+    focuCardHeadLabl();
+    focuCardHeadCapsule();
+    focuCardTablePagination();
+    focuInputLabel();
+    focuInput();
   }, 1000);
 </script>
 @endsection

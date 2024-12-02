@@ -988,7 +988,11 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = MedicineName::orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = MedicineName::query();
 
         if( $query = $request->get('query')){
             $data->Where('medicine_name','LIKE','%'.$query.'%')
@@ -998,6 +1002,9 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction);
+
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);
@@ -1141,7 +1148,13 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = Product::orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_field_product_name = $request->input('sort_field_product_name', 'product_name');
+        $sort_field_status = $request->input('sort_field_status', 'status');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = Product::query();
 
         if( $query = $request->get('query')){
             $data->Where('product_name','LIKE','%'.$query.'%')
@@ -1151,6 +1164,11 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction)
+                        ->orderBy($sort_field_product_name, $sort_direction)
+                        ->orderBy($sort_field_status, $sort_direction);
 
         $data = $data->paginate($perItem)->toArray();
         
