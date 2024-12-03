@@ -214,7 +214,22 @@
         $(document).on('click', '#cancel_btn', () => {
             $("#save").show('slow');
             $("#update_btn").hide('slow');
-            $("#category_name").focus();
+            $("#product_name").focus();
+            $("#update_btn").attr('hidden',true);
+            $("#product_name").removeClass('is-invalid');
+            $('#savForm_error').addClass('display-none');
+            $('#updateForm_errorList').addClass('display-none');
+        });
+
+        // Product Name Filed
+        $(document).on('keyup', "#product_name", function(){
+            
+            var productName = $("#product_name").val();
+            if (productName !== '') {
+                $("#product_name").removeClass('is-invalid');
+                $('#savForm_error').addClass('display-none');
+                $('#updateForm_errorList').addClass('display-none');
+            }
         });
 
         // Add Product
@@ -239,12 +254,12 @@
                     if (response.status == 400) {
                         $.each(response.errors, function(key, err_value) {
                             $('#savForm_error').html("");
+                            $('#savForm_error').removeClass('display-none');
+                            $('#product_name').removeClass('display-none');
+                            $("#product_name").addClass('is-invalid');
                             $('#savForm_error').addClass('alert_show_errors');
                             $('#savForm_error').append('<span class="error_val">' + err_value + '</span>');
                             $('#savForm_error').fadeIn();
-                            setTimeout(() => {
-                                $('#savForm_error').fadeOut();
-                            }, 2500);
                         });
                     } else {
                         $('#savForm_error').html("");
@@ -254,8 +269,8 @@
                         $('#success_message').text(response.messages);
                         $('#product_name').val("");
                         setTimeout(() => {
-                            $('#success_message').fadeOut();
-                        }, 3000);
+                            $('#success_message').fadeOut(3000);
+                        }, 5000);
                         fetch_product_data();
                     }
 
@@ -268,6 +283,10 @@
             e.preventDefault();
             $("#save").hide('slow');
             $("#update_btn").show('slow');
+            $("#update_btn").removeAttr('hidden');
+            $("#product_name").removeClass('is-invalid');
+            $('#savForm_error').addClass('display-none');
+            $('#updateForm_errorList').addClass('display-none');
             var product_id = $(this).val();
             $.ajax({
                 type: "GET",
@@ -329,8 +348,12 @@
                     if (response.status == 400) {
                         $.each(response.errors, function(key, err_value) {
                             $('#updateForm_errorList').html("");
-                            $('#updateForm_errorList').addClass('alert_show_errors ps-1 pe-1');
+                            $('#updateForm_errorList').removeClass('display-none');
+                            $('#product_name').removeClass('display-none');
+                            $("#product_name").addClass('is-invalid');
+                            $('#updateForm_errorList').addClass('alert_show_errors ps-1 pe-2');
                             $('#updateForm_errorList').append('<span>' + err_value + '</span>');
+                            $("#updateconfirmproduct").modal('hide');
                         });
                     } else if (response.status == 404) {
                         $('#updateForm_errorList').html("");
@@ -344,8 +367,8 @@
                         $('#success_message').text(response.messages);
                         $('.edit_product_name').val("");
                         setTimeout(() => {
-                            $('#success_message').fadeOut();
-                        }, 3000);
+                            $('#success_message').fadeOut(3000);
+                        }, 5000);
                         $("#updateconfirmproduct").modal('hide');
                         fetch_product_data();
                     }

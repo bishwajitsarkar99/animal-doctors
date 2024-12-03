@@ -1,6 +1,84 @@
 :root{
     --search-background:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, #e1e1e1, rgba(0, 0, 0, 0.05) 100%);
-    --table-head-background:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
+    --table-head-background:linear-gradient(1deg, #dbd8d8db, transparent 3%, #d3d3d3c4, #d7d7d7db);
+    --model-font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+.model_nme {
+    text-align: right;
+}
+span#updateForm_errorList{
+    text-align: right;
+}
+label.tot-search {
+    color: black;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1px;
+    font-family: var(--model-font-family);
+}
+.skeleton-card-head-capsule-two,.skeleton-card-head-labl-two,.skeleton-card-head-two,.skeleton-card-head-labl{
+    position: relative;
+}
+.skeleton-card-head-labl::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -4px;
+    width: 100%;
+    height: 25px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px; 
+}
+.skeleton-card-head-two::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -8px;
+    width: 100%;
+    height: 25px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px;
+}
+.skeleton-card-head-labl-two::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px;
+}
+.skeleton-card-head-capsule-two::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px;
+}
+@keyframes focus_skeleton {
+    0% {
+        background-position: -100% 0;
+    }
+    
+    100% {
+        background-position: 100% 0;
+    }
 }
 .paginate-skeleton,.select-skeleton{
     position: relative;
@@ -37,13 +115,14 @@ table, th, td {
 }
 select#perItemControls {
     outline: none;
-    box-shadow: none;
-    color: white;
-    border: 1px solid #08a05c;
-    background-color: #08a05c;
-    border-radius: 3px;
+    color: black;
+    font-weight: 600;
     cursor: pointer;
+    background-image: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);
+    border-radius: 3px;
     width: 50px;
+    font-family: var(--model-font-family);
+    border: 1px solid lightgray;
 }
 a.page-link.btn_page {
     height: 22px;
@@ -64,18 +143,18 @@ input#prod_search{
     border-radius: 5px;
     color: darkcyan;
     animation: text_color 3s infinite;
-    font-family: sans-serif;
+    font-family: var(--model-font-family);
 }
 select#perItemControlProd {
     outline: none;
-    box-shadow: none;
-    background-color: #08a05c;
-    border: 1px solid #08a05c;
-    border-radius: 3px;
-    color: white;
+    color: black;
     font-weight: 600;
     cursor: pointer;
+    background-image: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);
+    border-radius: 3px;
     width: 50px;
+    font-family: var(--model-font-family);
+    border: 1px solid lightgray;
 }
 .produ-search-hidden{
     display: none;
@@ -84,16 +163,16 @@ span.total_result {
     font-size: 11px;
     color: white;
     font-weight: 600;
-    font-family: sans-serif;
+    font-family: var(--model-font-family);
 }
 label.catg_ser_label {
     color: black;
     font-weight: 600;
     font-size: 13px;
-    font-family: sans-serif;
+    font-family: var(--model-font-family);
 }
 td.prod_td{
-    border: 1px solid lightblue;
+    border: 1px solid #dfdfdf;
 }
 label.tot-search {
     font-size: 11px;
@@ -107,23 +186,25 @@ label.tot-search {
 button#model_delt4 {
     background: orangered;
     color: white;
-    font-family: sans-serif;
+    font-family: var(--model-font-family);
 }
 button#model_delt4:hover {
     background: #e9e9e9;
     color: orangered;
-    font-family: sans-serif;
+    font-family: var(--model-font-family);
 }
 span#total_model_records{
     font-weight: 700;
     color: white;
-    font-family: sans-serif;
+    font-family: var(--model-font-family);
     font-size: 12px;
 }
 th.back_color{
-    /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
     background-image: var(--table-head-background);
-    border: 1px solid lightblue;
+    border: 1px solid lightgray;
+    font-family: var(--model-font-family);
+    font-size: 14px;
+    font-weight: 600;
 }
 input#model_name{
     outline: none;
@@ -139,7 +220,7 @@ input#model_name{
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
-    font-family: sans-serif;
+    font-family: var(--model-font-family);
 }
 input#product_id{
     outline: none;
@@ -155,7 +236,7 @@ input#product_id{
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
-    font-family: sans-serif;
+    font-family: var(--model-font-family);
 }
 @keyframes supfncolor{
     0%{
@@ -165,7 +246,7 @@ input#product_id{
         color: darkcyan;
     }
     100%{
-        backgrou7d-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+        background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     }
 }
 a#showModel{
@@ -181,14 +262,16 @@ div#tb_subcatg {
     box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
 }
 th.align {
+    background-image: var(--table-head-background);
+    border: 1px solid lightgray;
+    font-family: var(--model-font-family);
+    font-size: 14px;
+    font-weight: 600;
     text-align: center;
-    border: 1px solid lightblue;
-    font-size: 12px;
-    letter-spacing: 0.5px;
 }
 td.align {
     text-align: center;
-    border: 1px solid lightblue;
+    border: 1px solid #dfdfdf;
     font-size: 12px;
     letter-spacing: 0.5px;
 }

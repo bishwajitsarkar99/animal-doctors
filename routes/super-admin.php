@@ -6,7 +6,6 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Setting\PostSettngController;
 use App\Http\Controllers\Inventory\InventoryAuthorization;
-use App\Models\Permission\InventoryAccessPermission;
 use App\Http\Controllers\Inventory\InventoryDetailsRecord;
 
 Route::group(['middleware' => 'auth'], function (){

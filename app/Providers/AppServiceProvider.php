@@ -24,6 +24,7 @@ use App\LogicBild\Permission\InventoryPermissionServiceProvider;
 use App\LogicBild\UserActivity\UserActivityServiceProvider;
 use App\LogicBild\Forntend\Footer\FooterServiceProvider;
 use App\LogicBild\Email\EmailServiceProvider;
+use App\LogicBild\Branch\BranchServiceProvicer;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use App\Models\MailSetting;
@@ -125,6 +126,10 @@ class AppServiceProvider extends ServiceProvider
         // singleton for EmailServiceProvider
         $this->app->singleton(EmailServiceProvider::class, function($app){
             return new EmailServiceProvider();
+        });
+        // singleton for BranchServiceProvicer
+        $this->app->singleton(BranchServiceProvicer::class, function($app){
+            return new BranchServiceProvicer();
         });
     }
 

@@ -40,7 +40,14 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = Brand::with(['medicine_origins'])->orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_field_origin_id = $request->input('sort_field_origin_id', 'origin_id');
+        $sort_field_brand_name = $request->input('sort_field_brand_name', 'brand_name');
+        $sort_field_status = $request->input('sort_field_status', 'status');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = Brand::with(['medicine_origins']);
 
         if( $query = $request->get('query')){
             $data->where('origin_id','LIKE','%'.$query.'%')
@@ -51,6 +58,13 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction)
+                        ->orderBy($sort_field_origin_id, $sort_direction)
+                        ->orderBy($sort_field_brand_name, $sort_direction)
+                        ->orderBy($sort_field_status, $sort_direction);
+
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);
@@ -64,7 +78,11 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = MedicineOrigin::orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = MedicineOrigin::query();
 
         if( $query = $request->get('query')){
             $data->Where('origin_name','LIKE','%'.$query.'%')
@@ -74,6 +92,9 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction);
+
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);
@@ -86,11 +107,9 @@ class ProductIteamsServiceProvider
         // validation
         $validators = validator::make($request->all(),[
             'brand_name'=>'required|max:191|unique:brands',
-            'origin_id' =>'required',
         ],[
-            'brand_name.required'=>'The brand name is required mandatory.',
+            'brand_name.required'=>'The brand name is required.',
             'brand_name.unique'=>'The brand name is already exits.',
-            'origin_id.required'=>'The medicine origin is required mandatory.',
         ]);
         if($validators->fails()){
             return response()->json([
@@ -136,11 +155,9 @@ class ProductIteamsServiceProvider
         // validation
         $validators = validator::make($request->all(),[
             'brand_name' => 'required|max:191|unique:brands,brand_name,' . $id,
-            'origin_id' =>'required',
         ],[
-            'brand_name.required'=>'The brand name is required mandatory.',
+            'brand_name.required'=>'The brand name is required.',
             'brand_name.unique'=>'The brand name is already exits.',
-            'origin_id.required'=>'The medicine origin is required mandatory.',
         ]);
         if($validators->fails()){
             return response()->json([
@@ -1308,7 +1325,13 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = Unit::orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_field_units_name = $request->input('sort_field_units_name', 'units_name');
+        $sort_field_status = $request->input('sort_field_status', 'status');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = Unit::query();
 
         if( $query = $request->get('query')){
             $data->Where('units_name','LIKE','%'.$query.'%')
@@ -1318,6 +1341,11 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction)
+                        ->orderBy($sort_field_units_name, $sort_direction)
+                        ->orderBy($sort_field_status, $sort_direction);
+
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);
@@ -1330,7 +1358,7 @@ class ProductIteamsServiceProvider
         $validators = validator::make($request->all(),[
             'units_name'=>'required|max:191',
         ],[
-            'units_name.required'=>'The medicine dogs is required mandatory.',
+            'units_name.required'=>'The medicine dogs is required.',
         ]);
         if($validators->fails()){
             return response()->json([
@@ -1456,7 +1484,13 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = MedicineOrigin::orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_field_origin_name = $request->input('sort_field_origin_name', 'origin_name');
+        $sort_field_status = $request->input('sort_field_status', 'status');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = MedicineOrigin::query();
 
         if( $query = $request->get('query')){
             $data->Where('origin_name','LIKE','%'.$query.'%')
@@ -1466,6 +1500,11 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction)
+                        ->orderBy($sort_field_origin_name, $sort_direction)
+                        ->orderBy($sort_field_status, $sort_direction);
+
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);
@@ -1607,7 +1646,14 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = ProductModel::with(['products'])->orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_field_model_name = $request->input('sort_field_model_name', 'model_name');
+        $sort_field_product_id = $request->input('sort_field_product_id', 'product_id');
+        $sort_field_status = $request->input('sort_field_status', 'status');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = ProductModel::with(['products']);
 
         if( $query = $request->get('query')){
             $data->Where('product_id', 'LIKE','%'.$query.'%')
@@ -1618,6 +1664,13 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction)
+                        ->orderBy($sort_field_model_name, $sort_direction)
+                        ->orderBy($sort_field_product_id, $sort_direction)
+                        ->orderBy($sort_field_status, $sort_direction);
+
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);
@@ -1631,7 +1684,11 @@ class ProductIteamsServiceProvider
             // return abort(404);
         }
 
-        $data = Product::orderBy('id','desc')->latest();
+        // Sort field and direction
+        $sort_field_id = $request->input('sort_field_id', 'id');
+        $sort_direction = $request->input('sort_direction', 'desc');
+
+        $data = Product::query();
 
         if( $query = $request->get('query')){
             $data->Where('product_name','LIKE','%'.$query.'%')
@@ -1641,6 +1698,9 @@ class ProductIteamsServiceProvider
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
+        // Apply sorting
+        $data = $data->orderBy($sort_field_id, $sort_direction);
+
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);
@@ -1648,15 +1708,13 @@ class ProductIteamsServiceProvider
     /**
      * Handle Create Product Model Event
     */
-    public function createProductModels(Requset $request)
+    public function createProductModels(Request $request)
     {
         // validation
-        $validators = validator::make($request->all(),[
+        $validators = Validator::make($request->all(),[
             'model_name'=>'required|max:191',
-            'product_id' =>'required',
         ],[
-            'model_name.required'=>'The model name is required mandatory.',
-            'product_id.required'=>'The product id is required mandatory.',
+            'model_name.required'=>'The model name is required.',
         ]);
         if($validators->fails()){
             return response()->json([
@@ -1701,7 +1759,6 @@ class ProductIteamsServiceProvider
     {
         $validator = validator::make($request->all(),[
             'model_name'=>'required|max:191',
-            'product_id'=>'required',
         ]);
         if($validator->fails()){
             return response()->json([

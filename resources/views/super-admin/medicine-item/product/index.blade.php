@@ -90,14 +90,17 @@
                 </div>
                 <p style="text-align: end;">
                   <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" id="save">
-                    <i class="add-icon fa fa-spinner fa-spin add-hidden"></i>
-                    <span class="btn-text">ADD</span>
+                    <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                    <span class="category-btn-text">ADD</span>
                   </button>
-                  <button id="update_btn" class="btn btn-sm cgt_btn btn_focus skeleton mt-2">
-                    <i class="update-icon fa fa-spinner fa-spin update-hidden"></i>
-                    <span class="btn-text">Update</span>
+                  <button id="update_btn" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" hidden>
+                    <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                    <span class="update-btn-text">Update</span>
                   </button>
-                  <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton mt-2">Cancel</button>
+                  <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton mt-2">
+                    <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                    <span class="cancel-btn-text">Cancel</span>
+                  </button>
                 </p>
               </form>
             </div>
@@ -145,8 +148,8 @@
       <div class="modal-footer profile_modal_footer">
         <p id="btn_group2">
           <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
-            <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
-            <span class="btn-text">{{__('translate.Yes')}}</span>
+            <span class="delete-yes-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="delete-yes-btn-text">{{__('translate.Yes')}}</span>
           </a>
         </p>
         <p id="btn_group">
@@ -178,8 +181,8 @@
         </div>
         <div class="modal-footer" id="logoutModal_footer">
           <button href="#" type="button" class="btn btn-sm modal_button delet_btn_user btn_focus" id="deleteLoader">
-            <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
-            <span class="btn-tex">Delete</span>
+            <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="delete-btn-text">Delete</span>
           </button>
           <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="pro_delt4" data-bs-dismiss="modal">Cancel</button>
         </div>    
@@ -209,7 +212,8 @@
         </div>
         <div class="modal-footer" id="logoutModal_footer">
           <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus">
-            <span class="btn-text">Confirm</span>
+            <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="confirm-btn-text">Confirm</span>
           </button>
           <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
         </div>    

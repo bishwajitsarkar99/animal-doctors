@@ -168,6 +168,9 @@ label.tot-search {
     letter-spacing: 0.1px;
     font-family: var(--product-font-family);
 }
+span#updateForm_errorList {
+    text-align: right;
+}
 tbody#product_data_table {
     color: black;
     font-weight: 500;

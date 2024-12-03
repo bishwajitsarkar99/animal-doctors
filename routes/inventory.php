@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Inventory\MedicineInventory;
 use App\Http\Controllers\Post\MedicinePostController;
 use App\Http\Controllers\Inventory\InventoryDetailsRecord;
-use App\Models\Permission\InventoryAccessPermission;
 
 Route::group(['middleware' => 'auth'], function (){
     
