@@ -23,6 +23,15 @@ class BranchServiceProvicer
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
+
+        // Get Branch Data
+        $allBranch = Branch::orderBy('id', 'desc')->get();
+
+        if($request->expectsJson()){
+            return response()->json([
+                'allBranch' => $allBranch,
+            ], 200);
+        }
         return view('super-admin.branch.index', compact('company_profiles'));
     }
 
@@ -43,10 +52,7 @@ class BranchServiceProvicer
     */
     public function fetchDistrict(Request $request, $selectedDivision)
     {
-        $district_range = District::where(function($query) use ($selectedDivision) {
-            $query->where('division_name', $selectedDivision);
-        })->get(['division_name', 'district_name']);
-    
+        $district_range = District::where('division_id', $selectedDivision)->with('division')->get(['id', 'division_id', 'district_name']);
         return response()->json([
             'district_range' => $district_range
         ]);
@@ -57,9 +63,7 @@ class BranchServiceProvicer
     */
     public function fetchUpazila(Request $request, $selectedDistrict)
     {
-        $upazila_range = ThanaOrUpazila::where(function($query) use ($selectedDistrict) {
-            $query->where('district_name', $selectedDistrict);
-        })->get(['district_name', 'thana_or_upazila_name']);
+        $upazila_range = ThanaOrUpazila::where('district_id', $selectedDistrict)->with('district')->get(['id', 'district_id', 'thana_or_upazila_name']);
         
         return response()->json([
             'upazila_range' => $upazila_range
@@ -71,25 +75,11 @@ class BranchServiceProvicer
     */
     public function createBranch(Request $request)
     {
-        $validators = Validator::make($request->all(),[
-            'branch_id' => 'string|required',
+        $validators = validator::make($request->all(),[
             'branch_name' => 'string|required|unique:branches',
-            'branch_type' => 'string|required',
-            'division_name' => 'string|required',
-            'district_name' => 'string|required',
-            'upazila_name' => 'string|required',
-            'town_name' => 'string|required',
-            'location' => 'string|required',
         ],[
-            'branch_id.required' => 'Branch id is required.',
             'branch_name.required' => 'Branch name is reqired.',
             'branch_name.unique' => 'The branch name has already taken.',
-            'branch_type.required' => 'Branch type is required.',
-            'division_name.required' => 'Division name is required.',
-            'district_name.required' => 'District name is required.',
-            'upazila_name.required' => 'Upazila is required.',
-            'town_name.required' => 'Town name is required.',
-            'location.required' => 'Loaction is required.',
         ]);
 
         if($validators->fails()){
@@ -106,9 +96,9 @@ class BranchServiceProvicer
             $branch->branch_id = $request->input('branch_id');
             $branch->branch_name = $request->input('branch_name');
             $branch->branch_type = $request->input('branch_type');
-            $branch->division_name = $request->input('division_name');
-            $branch->district_name = $request->input('district_name');
-            $branch->upazila_name = $request->input('upazila_name');
+            $branch->division_id = $request->input('division_id');
+            $branch->district_id = $request->input('district_id');
+            $branch->upazila_id = $request->input('upazila_id');
             $branch->town_name = $request->input('town_name');
             $branch->location = $request->input('location');
             $branch->created_by = $auth->id;
@@ -127,7 +117,7 @@ class BranchServiceProvicer
     */
     public function searchBranchs(Request $request)
     {
-        //
+        
     }
 
     /**

@@ -18,9 +18,9 @@ class CreateBranchesTable extends Migration
             $table->string('branch_id');
             $table->string('branch_type');
             $table->string('branch_name')->unique();
-            $table->string('division_name');
-            $table->string('district_name');
-            $table->string('upazila_name');
+            $table->string('division_id');
+            $table->string('district_id');
+            $table->string('upazila_id');
             $table->string('town_name');
             $table->string('location');
             $table->unsignedBigInteger('roles_id')->nullable();

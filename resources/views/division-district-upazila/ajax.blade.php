@@ -31,11 +31,7 @@
             $('.select2-search__field').attr('placeholder', 'Search upazila...');
         });
 
-        fetch_division();
-        fetch_district();
-        fetch_upazila();
-
-        function fetch_division() {
+        window.fetch_division = function() {
             const currentUrl = "{{ route('division.get') }}";
 
             $.ajaxSetup({
@@ -53,7 +49,7 @@
                     $("#select_division").empty();
                     $("#select_division").append('<option value="" style="font-weight:600;">Select User Role</option>');
                     $.each(division, function(key, item) {
-                        $("#select_division").append(`<option style="color:white;font-weight:600;" value="${item.division_name}">${item.division_name}</option>`);
+                        $("#select_division").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.division_name}</option>`);
                     });
                 },
                 error: function() {
@@ -96,7 +92,7 @@
         });
 
         // Function to fetch district based on district name
-        function fetch_district(selectedDivision) {
+        window.fetch_district = function(selectedDivision) {
             if (!selectedDivision) {
                 return;
             }
@@ -117,7 +113,7 @@
                     const districts = response.district_range;
                     $("#select_district").empty();
                     $.each(districts, function(key, item) {
-                        $("#select_district").append(`<option style="color:white;font-weight:600;" value="${item.district_name}">${item.district_name}</option>`);
+                        $("#select_district").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.district_name ? item.district_name : 'No Role'}</option>`);
                     });
                 },
                 error: function() {
@@ -128,7 +124,7 @@
         }
 
         // Function to fetch upazila based on upazila name
-        function fetch_upazila(selectedDistrict) {
+        window.fetch_upazila = function(selectedDistrict) {
             if (!selectedDistrict) {
                 return;
             }
@@ -149,7 +145,7 @@
                     const upazilas = response.upazila_range;
                     $("#select_upazila").empty();
                     $.each(upazilas, function(key, item) {
-                        $("#select_upazila").append(`<option style="color:white;font-weight:600;" value="${item.district_name}">${item.thana_or_upazila_name}</option>`);
+                        $("#select_upazila").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.thana_or_upazila_name ? item.thana_or_upazila_name : 'No Role'}</option>`);
                     });
                 },
                 error: function() {
@@ -158,6 +154,10 @@
                 }
             });
         }
+
+        fetch_division();
+        fetch_district();
+        fetch_upazila();
 
     });
 </script>

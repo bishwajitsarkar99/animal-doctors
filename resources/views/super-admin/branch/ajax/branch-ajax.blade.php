@@ -3,6 +3,13 @@
     buttonLoader();
 
     $(document).ready(function(){
+        // the fetch function call from the "division-district-upazila" script for Initialize...
+        fetch_division();
+        fetch_district();
+        fetch_upazila();
+
+        allBranch();
+
         // Initialize the button loader for the login button
         buttonLoader('#save', '.add-icon', '.add-btn-text', 'ADD...', 'ADD', 3000);
         buttonLoader('#update_btn', '.update-icon', '.update-btn-text', 'Update...', 'Update', 1000);
@@ -61,19 +68,93 @@
             $("#branch_id").val(branch_id + '-' + generate_id);
         });
 
-        //fetch_branch_search_data();
+        // Search Select Dropdown
+        $(document).on('change', '#select_branch', function(){
+            // var selectValue = $(this).val();
+            // if(selectValue != null){
+            //     allBranch();
+            // }
+        });
+
+        // fetch branch for dropdown
+        function allBranch(){
+            const currentUrl = "{{ route('branch.index') }}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const all_branchs = response.allBranch;
+                    $("#select_branch").empty();
+                    $("#select_branch").append('<option value="" style="font-weight:600;">Select User Role</option>');
+                    $.each(all_branchs, function(key, item) {
+                        $("#select_branch").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.branch_name}</option>`);
+                    });
+                },
+                error: function() {
+                    $("#select_branch").empty();
+                    $("#select_branch").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
+                }
+            });
+        }
+
 
         // Create Branch
         $(document).on('click', '#save', function(e){
             e.preventDefault();
 
+            var branc_type = $("#branch_type").val();
+            var division = $("#select_division").val();
+            var district = $("#select_district").val();
+            var upazila = $("#select_upazila").val();
+            var city = $("#townName").val();
+            var loaction = $("#location").val();
+
+            if(branc_type.trim() == ''){
+                $("#branch_type").next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                $("#branch_type").closest('.branch').append('<span class="edit_branch_type_error alert_show_errors ps-2"> Branch type is required.</span>');
+                $("#branch_type").fadeIn(300);
+            }
+            if(division.trim() == ''){
+                $("#select_division").next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                $("#select_division").closest('.branch').append('<span class="edit_division_error alert_show_errors ps-2"> Division is required.</span>');
+                $("#select_division").fadeIn(300);
+            }
+            if(district.trim() == ''){
+                $("#select_district").next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                $("#select_district").closest('.branch').append('<span class="edit_district_error alert_show_errors ps-2"> District is required.</span>');
+                $("#select_district").fadeIn(300);
+            }
+            if(upazila.trim() == ''){
+                $("#select_upazila").next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                $("#select_upazila").closest('.branch').append('<span class="edit_upazila_error alert_show_errors ps-2"> Upazila is required.</span>');
+                $("#select_upazila").fadeIn(300);
+            }
+            if(city.trim() == ''){
+                $("#townName").addClass("is-invalid");
+                $("#townName").closest('.branch').append('<span class="edit_city_error alert_show_errors ps-2"> City name is required.</span>');
+                $("#townName").fadeIn(300);
+            }
+            if(loaction.trim() == ''){
+                $("#location").addClass("is-invalid");
+                $("#location").closest('.branch').append('<span class="edit_branch_loaction_error alert_show_errors ps-2"> Branch loaction is required.</span>');
+                $("#location").fadeIn(300);
+            }
+
             var data = {
                 'branch_id' : $("#branch_id").val(),
                 'branch_name' : $("#branchName").val(),
                 'branch_type' : $("#branch_type").val(),
-                'division_name' : $("#select_division").val(),
-                'district_name' : $("#select_district").val(),
-                'upazila_name' : $("#select_upazila").val(),
+                'division_id' : $("#select_division").val(),
+                'district_id' : $("#select_district").val(),
+                'upazila_id' : $("#select_upazila").val(),
                 'town_name' : $("#townName").val(),
                 'location' : $("#location").val(),
             }
@@ -95,14 +176,8 @@
                             $("#savForm_error").html("");
                             $("#savForm_error").removeClass('display-none');
                             $("#branchName").addClass("is-invalid");
-                            $("#branch_type").addClass("is-invalid");
-                            $("#select_division").addClass("is-invalid");
-                            $("#select_district").addClass("is-invalid");
-                            $("#select_upazila").addClass("is-invalid");
-                            $("#townName").addClass("is-invalid");
-                            $("#location").addClass("is-invalid");
                             $("#savForm_error").addClass("alert_show_errors");
-                            $("#savForm_error").apend('<span class="error_val">' + err_value + '</span>');
+                            $("#savForm_error").append('<span class="error_val">' + err_value + '</span>');
                             $("#savForm_error").fadeIn();
                         });
                     }else{
@@ -111,11 +186,14 @@
                         $('#success_message').addClass('alert_show ps-1 pe-1');
                         $('#success_message').fadeIn();
                         $('#success_message').text(response.messages);
+                        setTimeout(() => {
+                            $('#success_message').fadeOut(3000);
+                        }, 5000);
+                        
                         clearFields();
-                        // setTimeout(() => {
-                        //     $('#success_message').fadeOut(3000);
-                        // }, 5000);
-                        //fetch_branch_search_data();
+                        fetch_division();
+                        fetch_district();
+                        fetch_upazila();
                     }
                 }
             })
@@ -125,7 +203,7 @@
         function clearFields(){
             $("#branch_id").val("");
             $("#branchName").val("");
-            $("#branch_type").empty();
+            $("#branch_type").val("").trigger('change');
             $("#select_division").empty();
             $("#select_district").empty();
             $("#select_upazila").empty();

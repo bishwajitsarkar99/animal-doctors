@@ -16,7 +16,8 @@ class CreateThanaOrUpazilasTable extends Migration
         Schema::create('thana_or_upazilas', function (Blueprint $table) {
             $table->id();
             $table->string('thana_or_upazila_name');
-            $table->string('district_name');
+            $table->unsignedBigInteger('district_id')->nullable();
+            $table->foreign('district_id')->on('districts')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
     }
