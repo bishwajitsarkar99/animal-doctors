@@ -20,33 +20,44 @@
                     </div>
                     <div class="form-group role_nme mb-1">
                       <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Branch Name</label></span>
-                      <input class="form-control form-control-sm branch_input" type="text" name="mail_transport" id="branchName" placeholder="Branch Name" value="" />
+                      <input class="form-control form-control-sm branch_input branch_name" type="text" name="branch_name" id="branchName" placeholder="Branch Name" value="" />
                     </div>
                     <div class="form-group role_nme mb-1">
-                      <label class="catg_name_label label_position" for="mail-transport">Branch Code</label>
-                      <input class="form-control form-control-sm branch_input" type="text" name="mail_host" id="branchCode" placeholder="Branch Code" value=""/>
+                      <label class="catg_name_label label_position" for="mail-transport">Branch Type</label>
+                      <select type="text" class="form-control form-control-sm branch_type select2" name="branch_type" id="branch_type">
+                        <option value="">Select Branch Type</option>
+                        <option value="Main Branch">Main Branch</option>
+                        <option value="Corporate Branch">Corporate Branch</option>
+                        <option value="Local Branch">Local Branch</option>
+                      </select>
                     </div>
                     <div class="form-group role_nme mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">Division Name</label>
-                      <input class="form-control form-control-sm branch_input" type="text" name="mail_port" id="divisionName" placeholder="Division Name" value=""/>
+                      <select type="text" class="form-control form-control-sm division_name select2" name="division_name" id="select_division">
+                        <option value="">Select Division</option>
+                      </select>
                     </div>
                   </div>
                   <div class="col-xl-6">
                     <div class="form-group role_nme mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">District Name</label>
-                      <input class="form-control form-control-sm branch_input" type="text" name="" id="districtName" placeholder="District Name" value="" />
+                      <select type="text" class="form-control form-control-sm district_name select2" name="district_name" id="select_district">
+                        <option value="">Select District</option>
+                      </select>
                     </div>
                     <div class="form-group role_nme mb-1">
-                      <label class="catg_name_label label_position" for="mail-transport">Thana Name</label>
-                      <input class="form-control form-control-sm branch_input" type="text" name="" id="thanaName" placeholder="Thana Name" value=""/>
+                      <label class="catg_name_label label_position" for="mail-transport">Upazila Name</label>
+                      <select type="text" class="form-control form-control-sm thana_or_upazila_name select2" name="upazila_name" id="select_upazila">
+                        <option value="">Select Upazila</option>
+                      </select>
                     </div>
                     <div class="form-group role_nme mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">Town Name</label>
-                      <input class="form-control form-control-sm branch_input" type="text" name="" id="townName" placeholder="Town Name" value=""/>
+                      <input class="form-control form-control-sm branch_input town_name" type="text" name="town_name" id="townName" placeholder="Town Name" value=""/>
                     </div>
                     <div class="form-group role_nme mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">Location</label>
-                      <input class="form-control form-control-sm branch_input" type="text" name="" id="location" placeholder="Location" value=""/>
+                      <input class="form-control form-control-sm branch_input location" type="text" name="location" id="location" placeholder="Location" value=""/>
                     </div>
                   </div>
                 </div>
@@ -89,6 +100,7 @@
 @endsection
 
 @push('scripts')
+@include('division-district-upazila.ajax')
 @include('super-admin.branch.ajax.branch-ajax')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>

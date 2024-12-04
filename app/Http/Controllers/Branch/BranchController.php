@@ -20,4 +20,64 @@ class BranchController extends Controller
     {
         return $this->branchServiceProvider->viewBranchTemplate($request);
     }
+
+    // Get Division Name
+    public function getDivision(Request $request)
+    {
+        return $this->branchServiceProvider->fetchDivision($request);
+    }
+
+    // Get District Name
+    public function getDistrict(Request $request, $selectedDivision)
+    {
+        return $this->branchServiceProvider->fetchDistrict($request, $selectedDivision);
+    }
+
+    // Get Upazila Name
+    public function getUpazila(Request $request, $selectedDistrict)
+    {
+        return $this->branchServiceProvider->fetchUpazila($request, $selectedDistrict);
+    }
+
+    // Create Branch
+    public function store(Request $request)
+    {
+        return $this->branchServiceProvider->createBranch($request);
+    }
+
+    // Search Branch
+    public function searchBranch(Request $request)
+    {
+        return $this->branchServiceProvider->searchBranchs($request);
+    }
+
+    // Edit Branch
+    public function editBranch(Request $request, $id)
+    {
+        return $this->branchServiceProvider->editBranchs($request, $id);
+    }
+
+    // Update Branch
+    public function updateBranch(Request $request, $id)
+    {
+        return $this->branchServiceProvider->updateBranchs($request, $id);
+    }
+
+    // Update Branch
+    public function deleteBranch(Request $request, $id)
+    {
+        return $this->branchServiceProvider->deleteBranchs($request, $id);
+    }
+
+    // Branch Access
+    public function statusBranch(Request $request)
+    {
+        return $this->branchServiceProvider->statusBranchs($request);
+    }
+
+    // Branch Access Permission
+    public function accessBranch(Request $request)
+    {
+        return $this->branchServiceProvider->accessBranchs($request);
+    }
 }
