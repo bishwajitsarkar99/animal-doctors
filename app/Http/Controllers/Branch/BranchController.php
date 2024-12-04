@@ -63,21 +63,21 @@ class BranchController extends Controller
         return $this->branchServiceProvider->updateBranchs($request, $id);
     }
 
-    // Update Branch
+    // Delete Branch
     public function deleteBranch(Request $request, $id)
     {
         return $this->branchServiceProvider->deleteBranchs($request, $id);
     }
 
     // Branch Access
-    public function statusBranch(Request $request)
-    {
-        return $this->branchServiceProvider->statusBranchs($request);
-    }
-
-    // Branch Access Permission
     public function accessBranch(Request $request)
     {
         return $this->branchServiceProvider->accessBranchs($request);
+    }
+
+    // Branch Access Permission
+    public function permissionBranch(Request $request)
+    {
+        return $this->branchServiceProvider->permissionBranchs($request);
     }
 }

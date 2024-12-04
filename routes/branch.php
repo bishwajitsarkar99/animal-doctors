@@ -11,14 +11,14 @@ Route::group(['middleware' => 'auth'], function (){
     // Branch
     Route::middleware(['role:SuperAdmin|Admin|SubAdmin'])->group(function(){
         Route::prefix('company')->group(function () {
-            Route::get('/branch', [BranchController::class, 'index'])->name('branch.index');
+            Route::get('/branch-activity', [BranchController::class, 'index'])->name('branch.index');
             Route::post('/branch-create', [BranchController::class, 'store'])->name('branch.store');
             Route::get('/branch-search', [BranchController::class, 'searchBranch'])->name('search-branch.action');
             Route::get('/branch-edit/{id}', [BranchController::class, 'editBranch'])->name('edit-branch.action');
             Route::put('/branch-update/{id}', [BranchController::class, 'updateBranch'])->name('update_branch.action');
             Route::delete('/branch-delete/{id}', [EmailController::class, 'deleteBranch'])->name('branch.delete');
-            Route::post('/branch-status', [EmailController::class, 'statusBranch'])->name('status.action');
-            Route::post('/branch-user-access', [EmailController::class, 'accessBranch'])->name('branch.access');
+            Route::post('/branch-access-status', [EmailController::class, 'accessBranch'])->name('access_status.action');
+            Route::post('/branch-user-permission', [EmailController::class, 'permissionBranch'])->name('permission_status.action');
         });
     });
 });

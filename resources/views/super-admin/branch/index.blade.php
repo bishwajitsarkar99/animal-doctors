@@ -8,6 +8,9 @@
         <div class="row">
           <div class="col-xl-12">
             <div class="card-body focus-color cd branch_form">
+              <input id="branch_id_field" type="text" name="branch_id_field" value="" hidden />
+              <input id="generate_id" type="text" name="generate_id" hidden />
+              <input id="branch_id" type="text" name="branch_id" class="branch_id_field branch_id" hidden />
               <form autocomplete="off">
                 @csrf
                 <div class="row">
@@ -46,13 +49,13 @@
                       </select>
                     </div>
                     <div class="form-group role_nme mb-1">
-                      <label class="catg_name_label label_position" for="mail-transport">Upazila Name</label>
-                      <select type="text" class="form-control form-control-sm thana_or_upazila_name select2" name="upazila_name" id="select_upazila">
+                      <label class="catg_name_label label_position" for="mail-transport">Upazila/Thana Name</label>
+                      <select type="text" class="form-control form-control-sm upazila_name select2" name="upazila_name" id="select_upazila">
                         <option value="">Select Upazila</option>
                       </select>
                     </div>
                     <div class="form-group role_nme mb-1">
-                      <label class="catg_name_label label_position" for="mail-transport">Town Name</label>
+                      <label class="catg_name_label label_position" for="mail-transport">City Name</label>
                       <input class="form-control form-control-sm branch_input town_name" type="text" name="town_name" id="townName" placeholder="Town Name" value=""/>
                     </div>
                     <div class="form-group role_nme mb-1">
@@ -62,12 +65,14 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-xl-9"></div>
+                  <div class="col-xl-9">
+                    <p class="ps-1"><span id="success_message"></span></p>
+                  </div>
                   <div class="col-xl-3">
                     <p style="text-align: end;">
-                      <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" id="save">
+                      <button type="button" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" id="save">
                         <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                        <span class="category-btn-text">ADD</span>
+                        <span class="add-btn-text">ADD</span>
                       </button>
                       <button id="update_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden>
                         <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>

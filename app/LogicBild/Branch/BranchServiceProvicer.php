@@ -6,7 +6,9 @@ use App\Models\CompanyProfile;
 use App\Models\Branch\Division;
 use App\Models\Branch\District;
 use App\Models\Branch\ThanaOrUpazila;
+use App\Models\Branch\Branch;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Validator;
 
 class BranchServiceProvicer
 {
@@ -69,7 +71,55 @@ class BranchServiceProvicer
     */
     public function createBranch(Request $request)
     {
-        //
+        $validators = Validator::make($request->all(),[
+            'branch_id' => 'string|required',
+            'branch_name' => 'string|required|unique:branches',
+            'branch_type' => 'string|required',
+            'division_name' => 'string|required',
+            'district_name' => 'string|required',
+            'upazila_name' => 'string|required',
+            'town_name' => 'string|required',
+            'location' => 'string|required',
+        ],[
+            'branch_id.required' => 'Branch id is required.',
+            'branch_name.required' => 'Branch name is reqired.',
+            'branch_name.unique' => 'The branch name has already taken.',
+            'branch_type.required' => 'Branch type is required.',
+            'division_name.required' => 'Division name is required.',
+            'district_name.required' => 'District name is required.',
+            'upazila_name.required' => 'Upazila is required.',
+            'town_name.required' => 'Town name is required.',
+            'location.required' => 'Loaction is required.',
+        ]);
+
+        if($validators->fails()){
+            return response()->json([
+                'status' => 400,
+                'errors' => $validators->messages(),
+            ]);
+        }else{
+            // Retrieve authenticated user
+            $auth = Auth::user();
+
+            // Create a new branch
+            $branch = new Branch;
+            $branch->branch_id = $request->input('branch_id');
+            $branch->branch_name = $request->input('branch_name');
+            $branch->branch_type = $request->input('branch_type');
+            $branch->division_name = $request->input('division_name');
+            $branch->district_name = $request->input('district_name');
+            $branch->upazila_name = $request->input('upazila_name');
+            $branch->town_name = $request->input('town_name');
+            $branch->location = $request->input('location');
+            $branch->created_by = $auth->id;
+
+
+            $branch->save();
+            return response()->json([
+                'status' => 200,
+                'messages' => 'Branch name has created successfully.'
+            ]);
+        }
     }
 
     /**
@@ -107,7 +157,7 @@ class BranchServiceProvicer
     /**
      * Handle branch access.
     */
-    public function statusBranchs(Request $request)
+    public function accessBranchs(Request $request)
     {
         //
     }
@@ -115,7 +165,7 @@ class BranchServiceProvicer
     /**
      * Handle branch access permission.
     */
-    public function accessBranchs(Request $request)
+    public function permissionBranchs(Request $request)
     {
         //
     }

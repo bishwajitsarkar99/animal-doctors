@@ -82,15 +82,15 @@
 
         <div class="collapse" id="auth_" aria-labelledby="headingTwo" data-bs-parent="#auth_">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link underline" href="{{ route('branch.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Branch" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Branch
+                <a class="nav-link underline" href="{{ route('branch.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Activity" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Activity
                 </a>
-                <!-- <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.404 Page')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.404 Page')}}
+                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Access" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Access
                 </a>
-                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.500 Page')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.500 Page')}}
-                </a> -->
+                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Permission" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Permission
+                </a>
             </nav>
         </div>
 
