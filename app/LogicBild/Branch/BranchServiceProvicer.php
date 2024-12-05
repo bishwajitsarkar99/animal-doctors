@@ -23,15 +23,6 @@ class BranchServiceProvicer
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-
-        // Get Branch Data
-        $allBranch = Branch::orderBy('id', 'desc')->get();
-
-        if($request->expectsJson()){
-            return response()->json([
-                'allBranch' => $allBranch,
-            ], 200);
-        }
         return view('super-admin.branch.index', compact('company_profiles'));
     }
 
@@ -117,15 +108,33 @@ class BranchServiceProvicer
     */
     public function searchBranchs(Request $request)
     {
-        
+        // Get Branch Data
+        $allBranch = Branch::orderBy('id', 'desc')->get();
+
+        return response()->json([
+            'allBranch' => $allBranch,
+        ], 200);
+
     }
 
     /**
      * Handle edit branch.
     */
-    public function editBranchs(Request $request , $id)
+    public function editBranchs($id)
     {
-        //
+        $branch = Branch::find($id);
+        if($branch){
+            return response()->json([
+                'status' => 200,
+                'messages' => $branch,
+            ]);
+        }else{
+
+            return response()->json([
+                'status' => 404,
+                'messages' => 'The branch is no found.',
+            ]);
+        }
     }
 
     /**

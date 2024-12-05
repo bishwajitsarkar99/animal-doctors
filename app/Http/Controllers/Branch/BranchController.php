@@ -52,9 +52,9 @@ class BranchController extends Controller
     }
 
     // Edit Branch
-    public function editBranch(Request $request, $id)
+    public function editBranch($id)
     {
-        return $this->branchServiceProvider->editBranchs($request, $id);
+        return $this->branchServiceProvider->editBranchs($id);
     }
 
     // Update Branch

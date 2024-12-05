@@ -20,15 +20,16 @@
                       <select type="text" class="form-control form-control-sm select_branch select2" name="branch_name" id="select_branch">
                         <option value="">Select Company Branch Name</option>
                       </select>
+                      <input type="hidden" id="branches_id">
                     </div>
                     <div class="form-group role_nme mb-1">
                       <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Branch Name</label></span>
-                      <input class="form-control form-control-sm branch_input branch_name" type="text" name="branch_name" id="branchName" placeholder="Branch Name" value="" />
+                      <input class="form-control form-control-sm branch_input edit_branch_name" type="text" name="branch_name" id="branchName" placeholder="Branch Name" value="" />
                       <span id="savForm_error"></span>
                     </div>
                     <div class="form-group role_nme branch mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">Branch Type</label>
-                      <select type="text" class="form-control form-control-sm branch_type select2" name="branch_type" id="branch_type">
+                      <select type="text" class="form-control form-control-sm edit_branch_type select2" name="branch_type" id="branch_type">
                         <option value="">Select Branch Type</option>
                         <option value="Main Branch">Main Branch</option>
                         <option value="Corporate Branch">Corporate Branch</option>
@@ -37,7 +38,7 @@
                     </div>
                     <div class="form-group role_nme branch mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">Division Name</label>
-                      <select type="text" class="form-control form-control-sm division_id select2" name="division_id" id="select_division">
+                      <select type="text" class="form-control form-control-sm edit_division_id select2" name="division_id" id="select_division">
                         <option value="">Select Division</option>
                       </select>
                     </div>
@@ -45,23 +46,23 @@
                   <div class="col-xl-6">
                     <div class="form-group role_nme branch mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">District Name</label>
-                      <select type="text" class="form-control form-control-sm district_id select2" name="district_id" id="select_district">
+                      <select type="text" class="form-control form-control-sm edit_district_id select2" name="district_id" id="select_district">
                         <option value="">Select District</option>
                       </select>
                     </div>
                     <div class="form-group role_nme branch mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">Upazila/Thana Name</label>
-                      <select type="text" class="form-control form-control-sm upazila_id select2" name="upazila_id" id="select_upazila">
+                      <select type="text" class="form-control form-control-sm edit_upazila_id select2" name="upazila_id" id="select_upazila">
                         <option value="">Select Upazila</option>
                       </select>
                     </div>
                     <div class="form-group role_nme branch mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">City Name</label>
-                      <input class="form-control form-control-sm branch_input town_name" type="text" name="town_name" id="townName" placeholder="Town Name" value=""/>
+                      <input class="form-control form-control-sm branch_input edit_town_name" type="text" name="town_name" id="townName" placeholder="Town Name" value=""/>
                     </div>
                     <div class="form-group role_nme branch mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">Location</label>
-                      <input class="form-control form-control-sm branch_input location" type="text" name="location" id="location" placeholder="Location" value=""/>
+                      <input class="form-control form-control-sm branch_input edit_location" type="text" name="location" id="location" placeholder="Location" value=""/>
                     </div>
                   </div>
                 </div>

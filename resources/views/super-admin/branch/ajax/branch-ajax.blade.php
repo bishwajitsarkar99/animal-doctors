@@ -8,7 +8,7 @@
         fetch_district();
         fetch_upazila();
 
-        allBranch();
+        searchBranch();
 
         // Initialize the button loader for the login button
         buttonLoader('#save', '.add-icon', '.add-btn-text', 'ADD...', 'ADD', 3000);
@@ -69,16 +69,40 @@
         });
 
         // Search Select Dropdown
-        $(document).on('change', '#select_branch', function(){
-            // var selectValue = $(this).val();
-            // if(selectValue != null){
-            //     allBranch();
-            // }
+        $(document).on('change', '#select_branch', function(e){
+            e.preventDefault();
+
+            var id = $(this).val();
+            
+            $.ajax({
+                type: "GET",
+                url: "/company/branch-edit/" + id,
+                success: function(response){
+                    if(response.status == 404){
+                        $('#success_message').html("");
+                        $('#success_message').addClass('alert alert-danger');
+                        $('#success_message').text(response.messages);
+                    }else{
+                        $('#branches_id').val(id);
+                        $('.edit_branch_name').val(response.messages.branch_name);
+                        $('.edit_branch_type').val(response.messages.branch_type).trigger('change.select2');
+                        $('.edit_division_id').val(response.messages.division_id).trigger('change.select2');
+                        fetch_district(response.messages.division_id);
+                        fetch_upazila(response.messages.district_id);
+                        setTimeout(() => {
+                            $('.edit_district_id').val(response.messages.district_id).trigger('change.select2');
+                            $('.edit_upazila_id').val(response.messages.upazila_id).trigger('change.select2');
+                        }, 500);
+                        $('.edit_town_name').val(response.messages.town_name);
+                        $('.edit_location').val(response.messages.location);
+                    }
+                }
+            });
         });
 
         // fetch branch for dropdown
-        function allBranch(){
-            const currentUrl = "{{ route('branch.index') }}";
+        function searchBranch(){
+            const currentUrl = "{{ route('search-branch.action') }}";
 
             $.ajaxSetup({
                 headers: {
@@ -104,7 +128,6 @@
                 }
             });
         }
-
 
         // Create Branch
         $(document).on('click', '#save', function(e){
@@ -194,6 +217,7 @@
                         fetch_division();
                         fetch_district();
                         fetch_upazila();
+                        searchBranch();
                     }
                 }
             })

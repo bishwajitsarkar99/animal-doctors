@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Branch\Division;
 use App\Models\Branch\ThanaOrUpazila;
-use App\Models\Branch\Branch;
 
 class District extends Model
 {

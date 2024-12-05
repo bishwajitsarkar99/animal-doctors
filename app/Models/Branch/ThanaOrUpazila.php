@@ -5,7 +5,6 @@ namespace App\Models\Branch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Branch\District;
-use App\Models\Branch\Branch;
 
 class ThanaOrUpazila extends Model
 {
