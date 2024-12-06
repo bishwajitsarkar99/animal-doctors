@@ -23,16 +23,12 @@ class CreateBranchesTable extends Migration
             $table->string('upazila_id');
             $table->string('town_name');
             $table->string('location');
-            $table->unsignedBigInteger('roles_id')->nullable();
-            $table->foreign('roles_id')->on('roles')->references('id')->onDelete('cascade');
-            $table->unsignedBigInteger('emails_id')->unique()->nullable();
-            $table->foreign('emails_id')->on('users')->references('id')->onDelete('cascade');
-            $table->string('user_name')->nullable();
-            $table->tinyInteger('access_status')->default('0');
-            $table->tinyInteger('permission_status')->default('0');
             $table->integer('created_by');
-            $table->integer('approved_by')->nullable();
             $table->integer('updated_by')->nullable();
+            $table->tinyInteger('approval_status')->default('0');
+            $table->integer('approver_by')->nullable();
+            $table->string('approver_date')->nullable();
+            
             $table->timestamps();
         });
     }

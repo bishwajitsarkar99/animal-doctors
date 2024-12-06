@@ -1,4 +1,5 @@
 <script type="module">
+    import { currentDate } from "/module/module-min-js/helper-function-min.js";
     import { buttonLoader } from "/module/module-min-js/design-helper-function-min.js";
     buttonLoader();
 
@@ -14,6 +15,7 @@
         buttonLoader('#save', '.add-icon', '.add-btn-text', 'ADD...', 'ADD', 3000);
         buttonLoader('#update_btn', '.update-icon', '.update-btn-text', 'Update...', 'Update', 1000);
         buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm...', 'Confirm', 1000);
+        buttonLoader('#access_btn', '.access-icon', '.access-btn-text', 'Access...', 'Access', 1000);
         buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
         buttonLoader('#deleteLoader', '.delete-icon', '.delete-btn-text', 'Delete...', 'Delete', 1000);
 
@@ -30,6 +32,11 @@
                     placeholder: 'Select Branch Type',
                     allowClear: true
                 });
+            }else if ($(this).attr('id') === 'select_action') {
+                $(this).select2({
+                    placeholder: 'Select Action',
+                    allowClear: true
+                });
             }
         });
         // Set custom placeholder for the search input inside Select2 dropdowns
@@ -38,6 +45,9 @@
         });
         $('#branch_type').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search branch type...');
+        });
+        $('#select_action').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search action...');
         });
 
         // Branch unique id generator according to branch
@@ -68,11 +78,59 @@
             $("#branch_id").val(branch_id + '-' + generate_id);
         });
 
+        // Select Action Mode
+        $(document).on('change', '#select_action', function(){
+            // Button Show Or Hide
+            var select_val = $(this).val();
+
+            if(select_val == 'Update'){
+                $("#save").hide();
+                $("#update_btn").removeAttr('hidden');
+                $("#update_btn").fadeIn();
+                $("#access_btn").attr('hidden', true);
+                $("#deleteLoader").attr('hidden', true);
+            }
+            if(select_val == 'Access'){
+                $("#save").hide();
+                $("#access_btn").removeAttr('hidden');
+                $("#access_btn").fadeIn();
+                $("#update_btn").attr('hidden', true);
+                $("#deleteLoader").attr('hidden', true);
+            }
+            if(select_val == 'Delete'){
+                $("#save").hide();
+                $("#deleteLoader").removeAttr('hidden');
+                $("#deleteLoader").fadeIn();
+                $("#update_btn").attr('hidden', true);
+                $("#access_btn").attr('hidden', true);
+            }
+            if(select_val == ''){
+                $("#save").show();
+                $("#save").fadeIn();
+                $("#update_btn").attr('hidden', true);
+                $("#access_btn").attr('hidden', true);
+                $("#deleteLoader").attr('hidden', true);
+            }
+        });
+
         // Search Select Dropdown
         $(document).on('change', '#select_branch', function(e){
             e.preventDefault();
+            fetch_division();
+            var select = $(this).val();
+            // Search ID
+            var id = select;
 
-            var id = $(this).val();
+            if(select !== ''){
+                $('.edit_branch_id').removeAttr('hidden');
+                $('#documents').removeAttr('hidden');
+                
+            }
+            if(select == ''){
+                $('.edit_branch_id').attr('hidden', true);
+                $('#documents').attr('hidden', true);
+                clearFields();
+            }
             
             $.ajax({
                 type: "GET",
@@ -82,8 +140,140 @@
                         $('#success_message').html("");
                         $('#success_message').addClass('alert alert-danger');
                         $('#success_message').text(response.messages);
-                    }else{
+                    }else if(response.status == 200){
+
+                        const messages = response.messages;
+                        
+                        if(messages.created_by !== ''){
+                            const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/image/${messages.created_users.image}`;
+                            let createdByRole;
+                            switch (messages.created_by) {
+                                case 1:
+                                    createdByRole = 'SuperAdmin';
+                                    break;
+                                case 2:
+                                    createdByRole = 'Sub-Admin';
+                                    break;
+                                case 3:
+                                    createdByRole = 'Admin';
+                                    break;
+                                case 0:
+                                    createdByRole = 'User';
+                                    break;
+                                case 5:
+                                    createdByRole = 'Accounts';
+                                    break;
+                                case 6:
+                                    createdByRole = 'Marketing';
+                                    break;
+                                case 7:
+                                    createdByRole = 'Delivery Team';
+                                    break;
+                                default:
+                                    createdByRole = 'Unknown';
+                            }
+                            $("#firstUserImage").html(`<img class="user_img rounded-square users_image position" src="${firstUserImage}">`);
+
+                            $("#firstUserEmail").val(messages.created_users.email);
+                            $("#firstCreatedBy").val(createdByRole);
+                            if(messages.created_at !== ''){
+                                $("#firstCreatedAt").val(currentDate(messages.created_at));
+                            }else{
+                                $("#firstCreatedAt").val('-');
+                            }
+                        } 
+                        if(messages.updated_by !== null){
+                            $("#secondContent").removeAttr('hidden');
+                            const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/image/${messages.updated_users.image}`;
+                            let updatedByRole;
+                            switch (messages.updated_by) {
+                                case 1:
+                                    updatedByRole = 'SuperAdmin';
+                                    break;
+                                case 2:
+                                    updatedByRole = 'Sub-Admin';
+                                    break;
+                                case 3:
+                                    updatedByRole = 'Admin';
+                                    break;
+                                case 0:
+                                    updatedByRole = 'User';
+                                    break;
+                                case 5:
+                                    updatedByRole = 'Accounts';
+                                    break;
+                                case 6:
+                                    updatedByRole = 'Marketing';
+                                    break;
+                                case 7:
+                                    updatedByRole = 'Delivery Team';
+                                    break;
+                                default:
+                                    updatedByRole = 'Unknown';
+                            }
+                            $("#secondUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
+
+                            $("#secondUserEmail").val((messages.updated_users.email));
+                            $("#secondUpdateBy").val(updatedByRole);
+                            if(messages.created_at !== messages.updated_at){
+                                $("#secondUpdateAt").val(currentDate(messages.updated_at));
+                                $('#secondHead').removeAttr('hidden');
+                            }else{
+                                $("#secondUpdateAt").val('-');
+                                $('#secondHead').removeAttr('hidden');
+                            }
+                        }else{
+                            $("#secondContent").attr('hidden', true);
+                            $('#secondHead').removeAttr('hidden', true);
+                        }
+                        if(messages.approver_by !== null){
+                            $("#thirdContent").removeAttr('hidden');
+                            $('#thirdHead').removeAttr('hidden');
+                            const secondUserImage = messages.approver_users.image.includes('https://') ? messages.approver_users.image : `${window.location.origin}/image/${messages.approver_users.image}`;
+                            let approverByRole;
+                            switch (messages.approver_by) {
+                                case 1:
+                                    approverByRole = 'SuperAdmin';
+                                    break;
+                                case 2:
+                                    approverByRole = 'Sub-Admin';
+                                    break;
+                                case 3:
+                                    approverByRole = 'Admin';
+                                    break;
+                                case 0:
+                                    approverByRole = 'User';
+                                    break;
+                                case 5:
+                                    approverByRole = 'Accounts';
+                                    break;
+                                case 6:
+                                    approverByRole = 'Marketing';
+                                    break;
+                                case 7:
+                                    approverByRole = 'Delivery Team';
+                                    break;
+                                default:
+                                    approverByRole = 'Unknown';
+                            }
+                            $("#thirdUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
+
+                            $("#thirdUserEmail").val(messages.approver_users.email);
+                            $("#thirdApprover").val(approverByRole);
+                            if(messages.approver_date !== null){
+                                $("#thirdUpdateAt").val(currentDate(messages.approver_date));
+                                $('#thirdHead').removeAttr('hidden');
+                            }else if(messages.approver_date == null){
+                                $("#thirdUpdateAt").val('-');
+                                $('#thirdHead').removeAttr('hidden');
+                            }
+                        }else{
+                            $("#thirdContent").attr('hidden', true);
+                            $('#thirdHead').removeAttr('hidden', true);
+                        }
+
                         $('#branches_id').val(id);
+                        $('#edit_branch_id').val(response.messages.branch_id);
                         $('.edit_branch_name').val(response.messages.branch_name);
                         $('.edit_branch_type').val(response.messages.branch_type).trigger('change.select2');
                         $('.edit_division_id').val(response.messages.division_id).trigger('change.select2');
@@ -95,7 +285,9 @@
                         }, 500);
                         $('.edit_town_name').val(response.messages.town_name);
                         $('.edit_location').val(response.messages.location);
+                        
                     }
+                    
                 }
             });
         });
@@ -117,7 +309,7 @@
                 success: function(response) {
                     const all_branchs = response.allBranch;
                     $("#select_branch").empty();
-                    $("#select_branch").append('<option value="" style="font-weight:600;">Select User Role</option>');
+                    $("#select_branch").append('<option value="">Select Company Branch Name</option>');
                     $.each(all_branchs, function(key, item) {
                         $("#select_branch").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.branch_name}</option>`);
                     });

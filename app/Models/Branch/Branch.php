@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Branch\Division;
 use App\Models\Branch\District;
 use App\Models\Branch\ThanaOrUpazila;
+use App\Models\User;
 
 class Branch extends Model
 {
@@ -21,13 +22,12 @@ class Branch extends Model
         'upazila_id',
         'town_name',
         'location',
-        'roles_id',
-        'emails_id',
-        'user_name',
-        'access_status',
-        'permission_status',
+        'creator_email',
         'created_by',
-        'approved_by',
+        'approval_status',
+        'approver_email',
+        'approver_by',
+        'updator_email',
         'updated_by',
     ];
 
@@ -44,5 +44,17 @@ class Branch extends Model
     public function thana_or_upazilas()
     {
         return $this->belongsTo(ThanaOrUpazila::class, 'upazila_id', 'id');
+    }
+
+    public function created_users() {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+    public function updated_users() {
+        return $this->belongsTo(User::class, 'updated_by', 'id');
+    }
+
+    public function approver_users() {
+        return $this->belongsTo(User::class, 'approver_by', 'id');
     }
 }

@@ -91,4 +91,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserEmailDeletePermission::class);
     }
+
+    public function branchs()
+    {
+        return $this->hasMany(Branch::class);
+    }
 }
