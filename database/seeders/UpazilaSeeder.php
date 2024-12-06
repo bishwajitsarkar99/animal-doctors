@@ -439,6 +439,7 @@ class UpazilaSeeder extends Seeder
             ['district_id' => '51', 'thana_or_upazila_name' => 'Bagmara', 'created_at' => now(), 'updated_at' => now()],
             ['district_id' => '51', 'thana_or_upazila_name' => 'Charghat', 'created_at' => now(), 'updated_at' => now()],
             ['district_id' => '51', 'thana_or_upazila_name' => 'Durgapur', 'created_at' => now(), 'updated_at' => now()],
+            ['district_id' => '51', 'thana_or_upazila_name' => 'Rajshahi-S', 'created_at' => now(), 'updated_at' => now()],
             ['district_id' => '51', 'thana_or_upazila_name' => 'Godagari', 'created_at' => now(), 'updated_at' => now()],
             ['district_id' => '51', 'thana_or_upazila_name' => 'Mohanpur', 'created_at' => now(), 'updated_at' => now()],
             ['district_id' => '51', 'thana_or_upazila_name' => 'Paba', 'created_at' => now(), 'updated_at' => now()],

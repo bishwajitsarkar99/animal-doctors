@@ -184,6 +184,7 @@
                         } 
                         if(messages.updated_by !== null){
                             $("#secondContent").removeAttr('hidden');
+                            $('#secondHead').removeAttr('hidden');
                             const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/image/${messages.updated_users.image}`;
                             let updatedByRole;
                             switch (messages.updated_by) {
@@ -217,14 +218,12 @@
                             $("#secondUpdateBy").val(updatedByRole);
                             if(messages.created_at !== messages.updated_at){
                                 $("#secondUpdateAt").val(currentDate(messages.updated_at));
-                                $('#secondHead').removeAttr('hidden');
                             }else{
                                 $("#secondUpdateAt").val('-');
-                                $('#secondHead').removeAttr('hidden');
                             }
                         }else{
                             $("#secondContent").attr('hidden', true);
-                            $('#secondHead').removeAttr('hidden', true);
+                            $('#secondHead').attr('hidden', true);
                         }
                         if(messages.approver_by !== null){
                             $("#thirdContent").removeAttr('hidden');
@@ -262,14 +261,12 @@
                             $("#thirdApprover").val(approverByRole);
                             if(messages.approver_date !== null){
                                 $("#thirdUpdateAt").val(currentDate(messages.approver_date));
-                                $('#thirdHead').removeAttr('hidden');
                             }else if(messages.approver_date == null){
                                 $("#thirdUpdateAt").val('-');
-                                $('#thirdHead').removeAttr('hidden');
                             }
                         }else{
                             $("#thirdContent").attr('hidden', true);
-                            $('#thirdHead').removeAttr('hidden', true);
+                            $('#thirdHead').attr('hidden', true);
                         }
 
                         $('#branches_id').val(id);
@@ -278,11 +275,11 @@
                         $('.edit_branch_type').val(response.messages.branch_type).trigger('change.select2');
                         $('.edit_division_id').val(response.messages.division_id).trigger('change.select2');
                         fetch_district(response.messages.division_id);
-                        fetch_upazila(response.messages.district_id);
-                        setTimeout(() => {
-                            $('.edit_district_id').val(response.messages.district_id).trigger('change.select2');
+                        fetch_upazila(response.messages.district_id, function (){
+                            // Set the value once options are available
                             $('.edit_upazila_id').val(response.messages.upazila_id).trigger('change.select2');
-                        }, 500);
+                        });
+                        $('.edit_district_id').val(response.messages.district_id).trigger('change.select2');
                         $('.edit_town_name').val(response.messages.town_name);
                         $('.edit_location').val(response.messages.location);
                         
