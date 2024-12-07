@@ -1,6 +1,6 @@
 <script type="module">
     import { currentDate } from "/module/module-min-js/helper-function-min.js";
-    import { buttonLoader } from "/module/module-min-js/design-helper-function-min.js";
+    import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     buttonLoader();
 
     $(document).ready(function(){
@@ -16,8 +16,11 @@
         buttonLoader('#update_btn', '.update-icon', '.update-btn-text', 'Update...', 'Update', 1000);
         buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#access_btn', '.access-icon', '.access-btn-text', 'Access...', 'Access', 1000);
+        buttonLoader('#access_btn_confirm', '.access-confirm-icon', '.access-confirm-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
         buttonLoader('#deleteLoader', '.delete-icon', '.delete-btn-text', 'Delete...', 'Delete', 1000);
+        buttonLoader('.yes_button', '.loading-yes-icon', '.btn-text', 'Yes...', 'Yes', 1000);
+        buttonLoader('.delete_branch', '.delete-confrm-icon', '.delete-confrm-btn-text', 'Delete...', 'Delete', 1000);
 
         // Initialize Select2 for all elements with the 'select2' class
         $('.select2').each(function() {
@@ -322,6 +325,16 @@
         $(document).on('click', '#save', function(e){
             e.preventDefault();
 
+            // Clear Error Field
+            $("#savForm_error").removeClass('display-none');
+            $("#updateForm_error").removeClass('display-none');
+            $(".edit_branch_type_error").empty();
+            $(".edit_division_error").empty();
+            $(".edit_district_error").empty();
+            $(".edit_upazila_error").empty();
+            $(".edit_city_error").removeClass('display-none');
+            $(".edit_branch_loaction_error").removeClass('display-none');
+            
             var branc_type = $("#branch_type").val();
             var division = $("#select_division").val();
             var district = $("#select_district").val();
@@ -423,5 +436,254 @@
             $("#townName").val("");
             $("#location").val("");
         }
+
+        // Cancell Field
+        function removeField(){
+            $("#branchName").val("");
+            $("#branchName").removeClass('is-invalid');
+            $("#savForm_error").addClass('display-none');
+            $("#updateForm_error").addClass('display-none');
+            $("#branch_type").val("").trigger('change');
+            $("#branch_type").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            $(".edit_branch_type_error").addClass('display-none');
+            $("#select_division").val("").trigger('change');
+            $("#select_division").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            $(".edit_division_error").addClass('display-none');
+            $("#select_district").val("").trigger('change');
+            $("#select_district").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            $(".edit_district_error").addClass('display-none');
+            $("#select_upazila").val("").trigger('change');
+            $("#select_upazila").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            $(".edit_upazila_error").addClass('display-none');
+            $("#townName").val("");
+            $("#townName").removeClass('is-invalid');
+            $(".edit_city_error").addClass('display-none');
+            $("#location").val("");
+            $("#location").removeClass('is-invalid');
+            $(".edit_branch_loaction_error").addClass('display-none');
+        }
+
+        // Cancell Button
+        $(document).on('click', '#cancel_btn', function(){
+            removeField();
+        });
+
+        // On keyup action for error remove
+        $(document).on('keyup', '#branchName, #townName, #location', function(){
+
+            var branch_name = $("#branchName").val();
+            var town_name = $("#townName").val();
+            var loaction_name = $("#location").val();
+
+            if(branch_name !== ''){
+                $("#savForm_error").addClass('display-none');
+                $("#savForm_error").addClass("display-none");
+                $("#branchName").removeClass("is-invalid");
+            }
+            if(town_name !== ''){
+                $("#townName").removeClass("is-invalid");
+                $(".edit_city_error").addClass("display-none");
+                $(".edit_city_error").addClass("display-none");
+            }
+            if(loaction_name !== ''){
+                $("#location").removeClass("is-invalid");
+                $(".edit_branch_loaction_error").addClass("display-none");
+                $(".edit_branch_loaction_error").addClass("display-none");
+            }
+
+        });
+
+        // On Change action for error remove
+        $(document).on('change', '#branch_type, #select_division, #select_district, #select_upazila', function(){
+
+            var branch_type = $("#branch_type").val();
+            var select_division = $("#select_division").val();
+            var select_district = $("#select_district").val();
+            var select_upazila = $("#select_upazila").val();
+
+            if(branch_type !== ''){
+                $("#branch_type").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                $(".edit_branch_type_error").addClass('display-none');
+                $(".edit_branch_type_error").empty();
+            }
+            if(select_division !== ''){
+                $("#select_division").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                $(".edit_division_error").addClass('display-none');
+                $(".edit_division_error").empty();
+            }
+            if(select_district !== ''){
+                $("#select_district").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                $(".edit_district_error").addClass('display-none');
+                $(".edit_district_error").empty();
+            }
+            if(select_upazila !== ''){
+                $("#select_upazila").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                $(".edit_upazila_error").addClass('display-none');
+                $(".edit_upazila_error").empty();
+            }
+
+        });
+
+        // Branch Update Modal Show
+        $(document).on('click', '#update_btn', function(e){
+            e.preventDefault();
+            $("#updateconfirmbranch").modal('show').fadeIn();
+
+            var time = null;
+
+            var time = setTimeout(() => {
+                // Remove skeleton classes
+                removeAttributeOrClass([
+                    { selector: '.update_title, .head_btn3, #text_message', type: 'class', name: 'branch-skeleton' },
+                    { selector: '#update_btn_confirm, #cate_delete5', type: 'class', name: 'branch-skeleton' },
+                ]);
+            }, 1000);
+
+            // Optional cleanup if this code runs in a specific context
+            return () => {
+                clearTimeout(time);
+            };
+
+        });
+
+        // Confirm Update Branch
+        $(document).on('click', '#update_btn_confirm', function(e){
+            e.preventDefault();
+
+            var id = $("#branches_id").val();
+            var data = {
+                'branch_id' : $(".update_branch_id").val(),
+                'branch_name' : $(".edit_branch_name").val(),
+                'branch_type' : $(".edit_branch_type").val(),
+                'division_id' : $(".edit_division_id").val(),
+                'district_id' : $(".edit_district_id").val(),
+                'upazila_id' : $(".edit_upazila_id").val(),
+                'town_name' : $(".edit_town_name").val(),
+                'location' : $(".edit_location").val(),
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN' : $('meta[ name ="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "PUT",
+                url: "/company/branch-update/" + id,
+                data: data,
+                dataType: "json",
+                success : function(response){
+                    if(response.status == 400){
+                        $.each(response.errors, function(key, err_value){
+                            $("#updateForm_error").html("");
+                            $("#updateForm_error").removeClass('display-none');
+                            $(".edit_branch_name").addClass("is-invalid");
+                            $("#updateForm_error").addClass("alert_show_errors");
+                            $("#updateForm_error").append('<span class="error_val">' + err_value + '</span>');
+                            $("#updateForm_error").fadeIn();
+                            $("#updateconfirmbranch").modal('hide').fadeOut();
+
+
+                            // if (key === 'name') {
+                            //     $('#updateForm_errorList').html('<span class="text-danger" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                            //     $('.update_user').removeClass('show-success-border show-current-light-blue-border').addClass('is-invalid');
+                            //     $('#usrName').html("");
+                            // } else if (key === 'email') {
+                            //     $('#updateForm_errorList2').html('<span class="text-danger" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                            //     $('.update_email').removeClass('show-success-border show-current-light-blue-border').addClass('is-invalid');
+                            //     $('#usrEmail').html("");
+                            // } else if (key === 'contract_number') {
+                            //     $('#updateForm_errorList3').html('<span class="text-danger" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                            //     $('.update_contract').removeClass('show-success-border show-current-light-blue-border').addClass('is-invalid');
+                            //     $('#usrContract').html("");
+                            // }
+                        });
+                    }else{
+                        $('#updateForm_error').html("");
+                        $('#success_message').html("");
+                        $('#success_message').addClass('alert_show ps-1 pe-1');
+                        $('#success_message').fadeIn();
+                        $('#success_message').text(response.messages);
+                        $("#updateconfirmbranch").modal('hide').fadeOut();
+                        setTimeout(() => {
+                            $('#success_message').fadeOut(3000);
+                        }, 5000);
+                        
+                        clearFields();
+                        fetch_division();
+                        fetch_district();
+                        fetch_upazila();
+                        searchBranch();
+                    }
+                }
+            })
+        });
+
+        // Branch Delete Modal Show
+        $(document).on('click', '#deleteLoader', function(e){
+            e.preventDefault();
+            $("#deletebranch").modal('show').fadeIn();
+
+            var time = null;
+
+            var time = setTimeout(() => {
+                // Remove skeleton classes
+                removeAttributeOrClass([
+                    { selector: '.head_title, .head_btn, .delete_content', type: 'class', name: 'branch-skeleton' },
+                    { selector: '#yesButton, #noButton', type: 'class', name: 'branch-delete-skeleton' },
+                ]);
+            }, 1000);
+
+            // Optional cleanup if this code runs in a specific context
+            return () => {
+                clearTimeout(time);
+            };
+
+        });
+
+        // Branch Confirm Delete Modal Show
+        $(document).on('click', '#yesButton', function(e){
+            e.preventDefault();
+            $("#deleteconfirmcategory").modal('show').fadeIn();
+
+            var time = null;
+
+            var time = setTimeout(() => {
+                // Remove skeleton classes
+                removeAttributeOrClass([
+                    { selector: '.confirm_title, .head_btn2, #delete_text_message', type: 'class', name: 'branch-skeleton' },
+                    { selector: '.delete_branch, #cate_delete3', type: 'class', name: 'branch-skeleton' },
+                ]);
+            }, 1000);
+
+            // Optional cleanup if this code runs in a specific context
+            return () => {
+                clearTimeout(time);
+            };
+
+        });
+
+        // Branch Access Modal Show
+        $(document).on('click', '#access_btn', function(e){
+            e.preventDefault();
+            $("#accessconfirmbranch").modal('show').fadeIn();
+
+            var time = null;
+
+            var time = setTimeout(() => {
+                // Remove skeleton classes
+                removeAttributeOrClass([
+                    { selector: '.access_title, .head_btn_access_close, #access_text_message', type: 'class', name: 'branch-skeleton' },
+                    { selector: '#access_btn_confirm, #acces_delete', type: 'class', name: 'branch-skeleton' },
+                ]);
+            }, 1000);
+
+            // Optional cleanup if this code runs in a specific context
+            return () => {
+                clearTimeout(time);
+            };
+
+        });
     });
 </script>

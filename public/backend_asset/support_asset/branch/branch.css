@@ -94,3 +94,63 @@ input#secondUpdateBy,input#secondUpdateAt,input#secondApprover,input#thirdUserEm
     font-family: var(--nav-font-family);
     text-align: center;
 }
+.branch-skeleton,.branch-delete-skeleton{
+    position: relative;
+}
+.branch-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+@keyframes skeleton {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+.branch-delete-skeleton::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 107%;
+    height: 107%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+button#update_btn_confirm, button#cate_delete5{
+    font-size: 13px;
+}
+button#access_btn_confirm {
+    background: #08a05c;
+    color: white;
+    font-family: var(--nav-font-family);
+    font-size: 13px;
+}
+button#access_btn_confirm:hover {
+    background: #e9e9e9;
+    color: #08a05c;
+    font-family: var(--nav-font-family);
+}
+button#acces_delete {
+    background: orangered;
+    color: white;
+    font-family: var(--nav-font-family);
+    font-size: 13px;
+}
+button#acces_delete:hover {
+    background: #e9e9e9;
+    color: orangered;
+    font-family: var(--nav-font-family);
+}

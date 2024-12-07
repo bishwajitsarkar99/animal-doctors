@@ -142,7 +142,47 @@ class BranchServiceProvicer
     */
     public function updateBranchs(Request $request , $id)
     {
-        //
+        $validators = validator::make($request->all(),[
+            'branch_name' => 'string|required',
+        ],[
+            'branch_name.required' => 'Branch name is reqired.',
+        ]);
+
+        if($validators->fails()){
+            return response()->json([
+                'status' => 400,
+                'errors' => $validators->messages(),
+            ]);
+        }else{
+            // Retrieve authenticated user
+            $auth = Auth::user();
+
+            // Create a new branch
+            $branch = Branch::find($id);
+            if($branch){
+                $branch->branch_id = $request->input('branch_id');
+                $branch->branch_name = $request->input('branch_name');
+                $branch->branch_type = $request->input('branch_type');
+                $branch->division_id = $request->input('division_id');
+                $branch->district_id = $request->input('district_id');
+                $branch->upazila_id = $request->input('upazila_id');
+                $branch->town_name = $request->input('town_name');
+                $branch->location = $request->input('location');
+                $branch->updated_by = $auth->id;
+    
+    
+                $branch->save();
+                return response()->json([
+                    'status' => 200,
+                    'messages' => 'Branch name has updated successfully.'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => 404,
+                    'messages' => 'Branch name is no found.'
+                ]);
+            }
+        }
     }
 
     /**
