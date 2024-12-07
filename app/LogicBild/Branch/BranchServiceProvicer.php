@@ -68,9 +68,21 @@ class BranchServiceProvicer
     {
         $validators = validator::make($request->all(),[
             'branch_name' => 'string|required|unique:branches',
+            'branch_type' => 'string|required',
+            'division_id' => 'string|required',
+            'district_id' => 'string|required',
+            'upazila_id' => 'string|required',
+            'town_name' => 'string|required',
+            'location' => 'string|required',
         ],[
             'branch_name.required' => 'Branch name is reqired.',
             'branch_name.unique' => 'The branch name has already taken.',
+            'branch_type.required' => 'The branch type is required.',
+            'division_id.required' => 'The branch Division is required.',
+            'district_id.required' => 'The branch District is required.',
+            'upazila_id.required' => 'The branch Upazila is required.',
+            'town_name.required' => 'The branch city is required.',
+            'location.required' => 'The branch loaction is required.',
         ]);
 
         if($validators->fails()){
@@ -144,8 +156,20 @@ class BranchServiceProvicer
     {
         $validators = validator::make($request->all(),[
             'branch_name' => 'string|required',
+            'branch_type' => 'string|required',
+            'division_id' => 'string|required',
+            'district_id' => 'string|required',
+            'upazila_id' => 'string|required',
+            'town_name' => 'string|required',
+            'location' => 'string|required',
         ],[
             'branch_name.required' => 'Branch name is reqired.',
+            'branch_type.required' => 'The branch type is required.',
+            'division_id.required' => 'The branch Division is required.',
+            'district_id.required' => 'The branch District is required.',
+            'upazila_id.required' => 'The branch Upazila is required.',
+            'town_name.required' => 'The branch city is required.',
+            'location.required' => 'The branch loaction is required.',
         ]);
 
         if($validators->fails()){

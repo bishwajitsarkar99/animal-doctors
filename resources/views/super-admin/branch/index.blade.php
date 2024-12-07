@@ -16,9 +16,9 @@
                 <div class="row">
                   <div class="col-xl-6">
                     <div class="form-group mb-1 role_nme">
-                      <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Select Action</label></span>
+                      <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Select Another Action</label></span>
                       <select type="text" class="form-control form-control-sm select_action select2" name="select_action" id="select_action">
-                        <option value="">Select Action</option>
+                        <option value="">Select Another Action</option>
                         <option value="Update">Update</option>
                         <option value="Access">Access</option>
                         <option value="Delete">Delete</option>
@@ -35,7 +35,7 @@
                       <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Branch Name</label></span>
                       <input class="form-control form-control-sm branch_input edit_branch_name" type="text" name="branch_name" id="branchName" placeholder="Branch Name" value="" />
                       <span class="input-label edit_branch_id" hidden><label class="id_label label_position" for="mail-transport">Branch ID : <input class="update_branch_id" name="branch_id" id="edit_branch_id" disabled></label></span>
-                      <span id="savForm_error"></span><span id="updateForm_error"></span>
+                      <span id="savForm_error" hidden></span><span id="updateForm_error" hidden></span>
                     </div>
                     <div class="form-group role_nme branch mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">Branch Type</label>
@@ -45,12 +45,14 @@
                         <option value="Corporate Branch">Corporate Branch</option>
                         <option value="Local Branch">Local Branch</option>
                       </select>
+                      <span id="savForm_error2"></span><span id="updateForm_error2"></span>
                     </div>
                     <div class="form-group role_nme branch mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">Division Name</label>
                       <select type="text" class="form-control form-control-sm edit_division_id select2" name="division_id" id="select_division">
                         <option value="">Select Division</option>
                       </select>
+                      <span id="savForm_error3"></span><span id="updateForm_error3"></span>
                     </div>
                   </div>
                   <div class="col-xl-6">
@@ -59,20 +61,24 @@
                       <select type="text" class="form-control form-control-sm edit_district_id select2" name="district_id" id="select_district">
                         <option value="">Select District</option>
                       </select>
+                      <span id="savForm_error4"></span><span id="updateForm_error4"></span>
                     </div>
                     <div class="form-group role_nme branch mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">Upazila/Thana Name</label>
                       <select type="text" class="form-control form-control-sm edit_upazila_id select2" name="upazila_id" id="select_upazila">
                         <option value="">Select Upazila</option>
                       </select>
+                      <span id="savForm_error5"></span><span id="updateForm_error5"></span>
                     </div>
                     <div class="form-group role_nme branch mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">City Name</label>
                       <input class="form-control form-control-sm branch_input edit_town_name" type="text" name="town_name" id="townName" placeholder="Town Name" value=""/>
+                      <span id="savForm_error6" hidden></span><span id="updateForm_error6" hidden></span>
                     </div>
                     <div class="form-group role_nme branch mb-1">
                       <label class="catg_name_label label_position" for="mail-transport">Location</label>
                       <input class="form-control form-control-sm branch_input edit_location" type="text" name="location" id="location" placeholder="Location" value=""/>
+                      <span id="savForm_error7" hidden></span><span id="updateForm_error7" hidden></span>
                     </div>
                     <div class="form-group role_nme branch mb-1" id="documents" hidden>
                       <table>

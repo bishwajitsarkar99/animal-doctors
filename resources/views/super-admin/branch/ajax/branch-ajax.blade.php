@@ -37,7 +37,7 @@
                 });
             }else if ($(this).attr('id') === 'select_action') {
                 $(this).select2({
-                    placeholder: 'Select Action',
+                    placeholder: 'Select Another Action',
                     allowClear: true
                 });
             }
@@ -324,55 +324,9 @@
         // Create Branch
         $(document).on('click', '#save', function(e){
             e.preventDefault();
-
-            // Clear Error Field
-            $("#savForm_error").removeClass('display-none');
-            $("#updateForm_error").removeClass('display-none');
-            $(".edit_branch_type_error").empty();
-            $(".edit_division_error").empty();
-            $(".edit_district_error").empty();
-            $(".edit_upazila_error").empty();
-            $(".edit_city_error").removeClass('display-none');
-            $(".edit_branch_loaction_error").removeClass('display-none');
-            
-            var branc_type = $("#branch_type").val();
-            var division = $("#select_division").val();
-            var district = $("#select_district").val();
-            var upazila = $("#select_upazila").val();
-            var city = $("#townName").val();
-            var loaction = $("#location").val();
-
-            if(branc_type.trim() == ''){
-                $("#branch_type").next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                $("#branch_type").closest('.branch').append('<span class="edit_branch_type_error alert_show_errors ps-2"> Branch type is required.</span>');
-                $("#branch_type").fadeIn(300);
-            }
-            if(division.trim() == ''){
-                $("#select_division").next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                $("#select_division").closest('.branch').append('<span class="edit_division_error alert_show_errors ps-2"> Division is required.</span>');
-                $("#select_division").fadeIn(300);
-            }
-            if(district.trim() == ''){
-                $("#select_district").next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                $("#select_district").closest('.branch').append('<span class="edit_district_error alert_show_errors ps-2"> District is required.</span>');
-                $("#select_district").fadeIn(300);
-            }
-            if(upazila.trim() == ''){
-                $("#select_upazila").next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                $("#select_upazila").closest('.branch').append('<span class="edit_upazila_error alert_show_errors ps-2"> Upazila is required.</span>');
-                $("#select_upazila").fadeIn(300);
-            }
-            if(city.trim() == ''){
-                $("#townName").addClass("is-invalid");
-                $("#townName").closest('.branch').append('<span class="edit_city_error alert_show_errors ps-2"> City name is required.</span>');
-                $("#townName").fadeIn(300);
-            }
-            if(loaction.trim() == ''){
-                $("#location").addClass("is-invalid");
-                $("#location").closest('.branch').append('<span class="edit_branch_loaction_error alert_show_errors ps-2"> Branch loaction is required.</span>');
-                $("#location").fadeIn(300);
-            }
-
+            $("#savForm_error").removeAttr('hidden');
+            $("#savForm_error6").removeAttr('hidden');
+            $("#savForm_error7").removeAttr('hidden');
             var data = {
                 'branch_id' : $("#branch_id").val(),
                 'branch_name' : $("#branchName").val(),
@@ -398,12 +352,49 @@
                 success : function(response){
                     if(response.status == 400){
                         $.each(response.errors, function(key, err_value){
-                            $("#savForm_error").html("");
-                            $("#savForm_error").removeClass('display-none');
-                            $("#branchName").addClass("is-invalid");
-                            $("#savForm_error").addClass("alert_show_errors");
-                            $("#savForm_error").append('<span class="error_val">' + err_value + '</span>');
-                            $("#savForm_error").fadeIn();
+                            if (key === 'branch_name') {
+                                $("#savForm_error").fadeIn();
+                                $('#savForm_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_error").addClass("alert_show_errors");
+                                $('#branchName').addClass('is-invalid');
+                                $('#branchName').html("");
+                            } else if (key === 'branch_type') {
+                                $("#savForm_error2").fadeIn();
+                                $('#savForm_error2').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_error2").addClass("alert_show_errors");
+                                $('#branch_type').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                                $('#branch_type').html("");
+                            } else if (key === 'division_id') {
+                                $("#savForm_error3").fadeIn();
+                                $('#savForm_error3').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_error3").addClass("alert_show_errors");
+                                $('#select_division').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                                $('#select_division').html("");
+                            } else if (key === 'district_id') {
+                                $("#savForm_error4").fadeIn();
+                                $('#savForm_error4').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_error4").addClass("alert_show_errors");
+                                $('#select_district').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                                $('#select_district').html("");
+                            } else if (key === 'upazila_id') {
+                                $("#savForm_error5").fadeIn();
+                                $('#savForm_error5').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_error5").addClass("alert_show_errors");
+                                $('#select_upazila').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                                $('#select_upazila').html("");
+                            } else if (key === 'town_name') {
+                                $("#savForm_error6").fadeIn();
+                                $('#savForm_error6').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_error6").addClass("alert_show_errors");
+                                $('#townName').addClass('is-invalid');
+                                $('#townName').html("");
+                            } else if (key === 'location') {
+                                $("#savForm_error7").fadeIn();
+                                $('#savForm_error7').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_error7").addClass("alert_show_errors");
+                                $('#location').addClass('is-invalid');
+                                $('#location').html("");
+                            }
                         });
                     }else{
                         $('#savForm_error').html("");
@@ -439,10 +430,29 @@
 
         // Cancell Field
         function removeField(){
+            $("#savForm_error").addClass('display-none');
+            $("#savForm_error").empty();
+            $("#savForm_error").attr('hidden', true);
+            $("#savForm_error6").addClass('display-none');
+            $("#savForm_error6").empty();
+            $("#savForm_error6").attr('hidden', true);
+            $("#savForm_error7").addClass('display-none');
+            $("#savForm_error7").empty();
+            $("#savForm_error7").attr('hidden', true);
+
+            $("#updateForm_error").addClass('display-none');
+            $("#updateForm_error").empty();
+            $("#updateForm_error").attr('hidden', true);
+            $("#updateForm_error6").addClass('display-none');
+            $("#updateForm_error6").empty();
+            $("#updateForm_error6").attr('hidden', true);
+            $("#updateForm_error7").addClass('display-none');
+            $("#updateForm_error7").empty();
+            $("#updateForm_error7").attr('hidden', true);
+
             $("#branchName").val("");
             $("#branchName").removeClass('is-invalid');
-            $("#savForm_error").addClass('display-none');
-            $("#updateForm_error").addClass('display-none');
+            $(".error_val").addClass('display-none');
             $("#branch_type").val("").trigger('change');
             $("#branch_type").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
             $(".edit_branch_type_error").addClass('display-none');
@@ -550,6 +560,10 @@
         $(document).on('click', '#update_btn_confirm', function(e){
             e.preventDefault();
 
+            $("#updateForm_error").removeAttr('hidden');
+            $("#updateForm_error6").removeAttr('hidden');
+            $("#updateForm_error7").removeAttr('hidden');
+
             var id = $("#branches_id").val();
             var data = {
                 'branch_id' : $(".update_branch_id").val(),
@@ -576,28 +590,50 @@
                 success : function(response){
                     if(response.status == 400){
                         $.each(response.errors, function(key, err_value){
-                            $("#updateForm_error").html("");
-                            $("#updateForm_error").removeClass('display-none');
-                            $(".edit_branch_name").addClass("is-invalid");
-                            $("#updateForm_error").addClass("alert_show_errors");
-                            $("#updateForm_error").append('<span class="error_val">' + err_value + '</span>');
-                            $("#updateForm_error").fadeIn();
+                            if (key === 'branch_name') {
+                                $("#updateForm_error").fadeIn();
+                                $('#updateForm_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#updateForm_error").addClass("alert_show_errors");
+                                $('#branchName').addClass('is-invalid');
+                                $('#branchName').html("");
+                            } else if (key === 'branch_type') {
+                                $("#updateForm_error2").fadeIn();
+                                $('#updateForm_error2').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#updateForm_error2").addClass("alert_show_errors");
+                                $('#branch_type').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                                $('#branch_type').html("");
+                            } else if (key === 'division_id') {
+                                $("#updateForm_error3").fadeIn();
+                                $('#updateForm_error3').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#updateForm_error3").addClass("alert_show_errors");
+                                $('#select_division').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                                $('#select_division').html("");
+                            } else if (key === 'district_id') {
+                                $("#savForm_error4").fadeIn();
+                                $('#savForm_error4').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_error4").addClass("alert_show_errors");
+                                $('#select_district').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                                $('#select_district').html("");
+                            } else if (key === 'upazila_id') {
+                                $("#updateForm_error5").fadeIn();
+                                $('#updateForm_error5').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#updateForm_error5").addClass("alert_show_errors");
+                                $('#select_upazila').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                                $('#select_upazila').html("");
+                            } else if (key === 'town_name') {
+                                $("#updateForm_error6").fadeIn();
+                                $('#updateForm_error6').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#updateForm_error6").addClass("alert_show_errors");
+                                $('#townName').addClass('is-invalid');
+                                $('#townName').html("");
+                            } else if (key === 'location') {
+                                $("#updateForm_error7").fadeIn();
+                                $('#updateForm_error7').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#updateForm_error7").addClass("alert_show_errors");
+                                $('#location').addClass('is-invalid');
+                                $('#location').html("");
+                            }
                             $("#updateconfirmbranch").modal('hide').fadeOut();
-
-
-                            // if (key === 'name') {
-                            //     $('#updateForm_errorList').html('<span class="text-danger" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
-                            //     $('.update_user').removeClass('show-success-border show-current-light-blue-border').addClass('is-invalid');
-                            //     $('#usrName').html("");
-                            // } else if (key === 'email') {
-                            //     $('#updateForm_errorList2').html('<span class="text-danger" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
-                            //     $('.update_email').removeClass('show-success-border show-current-light-blue-border').addClass('is-invalid');
-                            //     $('#usrEmail').html("");
-                            // } else if (key === 'contract_number') {
-                            //     $('#updateForm_errorList3').html('<span class="text-danger" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
-                            //     $('.update_contract').removeClass('show-success-border show-current-light-blue-border').addClass('is-invalid');
-                            //     $('#usrContract').html("");
-                            // }
                         });
                     }else{
                         $('#updateForm_error').html("");
@@ -610,7 +646,6 @@
                             $('#success_message').fadeOut(3000);
                         }, 5000);
                         
-                        clearFields();
                         fetch_division();
                         fetch_district();
                         fetch_upazila();
