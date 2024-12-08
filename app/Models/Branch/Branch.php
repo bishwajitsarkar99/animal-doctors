@@ -8,6 +8,7 @@ use App\Models\Branch\Division;
 use App\Models\Branch\District;
 use App\Models\Branch\ThanaOrUpazila;
 use App\Models\User;
+use App\Models\Role;
 
 class Branch extends Model
 {
@@ -22,13 +23,17 @@ class Branch extends Model
         'upazila_id',
         'town_name',
         'location',
-        'creator_email',
         'created_by',
-        'approval_status',
-        'approver_email',
-        'approver_by',
-        'updator_email',
         'updated_by',
+        'admin_role_id',
+        'sub_admin_role_id',
+        'admin_email_id',
+        'sub_admin_email_id',
+        'admin_approval_status',
+        'sub_admin_approval_status',
+        'approver_by',
+        'admin_approver_date',
+        'sub_admin_approver_date',
     ];
 
     public function divisions()
@@ -56,5 +61,21 @@ class Branch extends Model
 
     public function approver_users() {
         return $this->belongsTo(User::class, 'approver_by', 'id');
+    }
+
+    public function admin_email_users() {
+        return $this->belongsTo(User::class, 'admin_email_id', 'id');
+    }
+
+    public function sub_admin_email_users() {
+        return $this->belongsTo(User::class, 'sub_admin_email_id', 'id');
+    }
+
+    public function admin_roles() {
+        return $this->belongsTo(Role::class, 'admin_role_id', 'id');
+    }
+
+    public function sub_admin_roles() {
+        return $this->belongsTo(Role::class, 'sub_admin_role_id', 'id');
     }
 }

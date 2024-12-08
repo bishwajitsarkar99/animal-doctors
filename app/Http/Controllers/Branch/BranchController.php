@@ -64,9 +64,9 @@ class BranchController extends Controller
     }
 
     // Delete Branch
-    public function deleteBranch(Request $request, $id)
+    public function deleteBranch($id)
     {
-        return $this->branchServiceProvider->deleteBranchs($request, $id);
+        return $this->branchServiceProvider->deleteBranchs($id);
     }
 
     // Branch Access

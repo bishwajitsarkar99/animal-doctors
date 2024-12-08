@@ -15,29 +15,20 @@
                 @csrf
                 <div class="row">
                   <div class="col-xl-6">
-                    <div class="form-group mb-1 role_nme">
-                      <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Select Another Action</label></span>
-                      <select type="text" class="form-control form-control-sm select_action select2" name="select_action" id="select_action">
-                        <option value="">Select Another Action</option>
-                        <option value="Update">Update</option>
-                        <option value="Access">Access</option>
-                        <option value="Delete">Delete</option>
-                      </select>
-                    </div>
-                    <div class="form-group mb-1 role_nme">
+                    <div class="form-group mb-1 role_nme skeleton">
                       <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Searching...</label></span>
                       <select type="text" class="form-control form-control-sm select_branch select2" name="branch_name" id="select_branch">
                         <option value="">Select Company Branch Name</option>
                       </select>
                       <input type="hidden" id="branches_id">
                     </div>
-                    <div class="form-group role_nme mb-1">
+                    <div class="form-group role_nme mb-1 skeleton">
                       <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Branch Name</label></span>
                       <input class="form-control form-control-sm branch_input edit_branch_name" type="text" name="branch_name" id="branchName" placeholder="Branch Name" value="" />
                       <span class="input-label edit_branch_id" hidden><label class="id_label label_position" for="mail-transport">Branch ID : <input class="update_branch_id" name="branch_id" id="edit_branch_id" disabled></label></span>
                       <span id="savForm_error" hidden></span><span id="updateForm_error" hidden></span>
                     </div>
-                    <div class="form-group role_nme branch mb-1">
+                    <div class="form-group role_nme branch mb-1 skeleton">
                       <label class="catg_name_label label_position" for="mail-transport">Branch Type</label>
                       <select type="text" class="form-control form-control-sm edit_branch_type select2" name="branch_type" id="branch_type">
                         <option value="">Select Branch Type</option>
@@ -47,7 +38,7 @@
                       </select>
                       <span id="savForm_error2"></span><span id="updateForm_error2"></span>
                     </div>
-                    <div class="form-group role_nme branch mb-1">
+                    <div class="form-group role_nme branch mb-1 skeleton">
                       <label class="catg_name_label label_position" for="mail-transport">Division Name</label>
                       <select type="text" class="form-control form-control-sm edit_division_id select2" name="division_id" id="select_division">
                         <option value="">Select Division</option>
@@ -56,32 +47,32 @@
                     </div>
                   </div>
                   <div class="col-xl-6">
-                    <div class="form-group role_nme branch mb-1">
+                    <div class="form-group role_nme branch mb-1 skeleton">
                       <label class="catg_name_label label_position" for="mail-transport">District Name</label>
                       <select type="text" class="form-control form-control-sm edit_district_id select2" name="district_id" id="select_district">
                         <option value="">Select District</option>
                       </select>
                       <span id="savForm_error4"></span><span id="updateForm_error4"></span>
                     </div>
-                    <div class="form-group role_nme branch mb-1">
+                    <div class="form-group role_nme branch mb-1 skeleton">
                       <label class="catg_name_label label_position" for="mail-transport">Upazila/Thana Name</label>
                       <select type="text" class="form-control form-control-sm edit_upazila_id select2" name="upazila_id" id="select_upazila">
                         <option value="">Select Upazila</option>
                       </select>
                       <span id="savForm_error5"></span><span id="updateForm_error5"></span>
                     </div>
-                    <div class="form-group role_nme branch mb-1">
+                    <div class="form-group role_nme branch mb-1 skeleton">
                       <label class="catg_name_label label_position" for="mail-transport">City Name</label>
                       <input class="form-control form-control-sm branch_input edit_town_name" type="text" name="town_name" id="townName" placeholder="Town Name" value=""/>
                       <span id="savForm_error6" hidden></span><span id="updateForm_error6" hidden></span>
                     </div>
-                    <div class="form-group role_nme branch mb-1">
+                    <div class="form-group role_nme branch mb-1 skeleton">
                       <label class="catg_name_label label_position" for="mail-transport">Location</label>
                       <input class="form-control form-control-sm branch_input edit_location" type="text" name="location" id="location" placeholder="Location" value=""/>
                       <span id="savForm_error7" hidden></span><span id="updateForm_error7" hidden></span>
                     </div>
                     <div class="form-group role_nme branch mb-1" id="documents" hidden>
-                      <table>
+                      <table class="info_table">
                         <thead>
                           <tr>
                             <th class="branch_font label_position">Creator</th>
@@ -170,9 +161,9 @@
               <div class="form-group delete_content branch-skeleton" id="load_id">
                 <span><div id="active_loader" class="loader_chart mt-1"></div></span>
                 <label class="label_user_edit" id="cate_delete" for="id">Branch-ID : </label>
-                <span id="cat_id"> <input type="text" class="mt-3 update_id id" id="delete_category_id" readonly><br></span>
+                <span id="cat_id"> <input type="text" class="mt-3 update_id id" id="delete_branch_id" readonly><br></span>
                 <span class="label_user_edit" id="cate_delete2">{{__('translate.Are you sure, Would you like to delete this category, permanently?')}}</span>
-                <input type="hidden" id="delete_category_id" name="branch_id">
+                <input type="hidden" id="delete_branch_id" name="branches_id">
               </div>
             </div>
           </div>
@@ -194,7 +185,7 @@
   {{-- end delete modal --}}
 
   {{-- start delete confirm modal --}}
-  <div class="modal fade" id="deleteconfirmcategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="deleteconfirmbranch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
       <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
         <div class="modal-header" id="logoutModal_header">
@@ -211,7 +202,7 @@
             </p>
           </div>
           <div class="modal-footer" id="logoutModal_footer">
-            <button type="button" class="btn btn-sm modal_button delet_btn_user btn_focus branch-skeleton delete_branch" id="deleteLoader">
+            <button type="button" class="btn btn-sm modal_button delet_btn_user btn_focus branch-skeleton delete_branch" id="delete_branch">
               <span class="delete-confrm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               <span class="delete-confrm-btn-text">Delete</span>
             </button>
@@ -309,78 +300,6 @@
       item.classList.remove('skeleton')
     });
   }
-
-  function focuCardHead() {
-    const allSkeleton = document.querySelectorAll('.skeleton-card-head')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-card-head')
-    });
-  } 
-
-  function focuCardHeadLabel() {
-    const allSkeleton = document.querySelectorAll('.skeleton-card-head-label')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-card-head-label')
-    });
-  }
-
-  function focuCardHeadLabl() {
-    const allSkeleton = document.querySelectorAll('.skeleton-card-head-labl')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-card-head-labl')
-    });
-  }
-
-  function focuCardHeadCapsule() {
-    const allSkeleton = document.querySelectorAll('.skeleton-card-head-capsule')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-card-head-capsule')
-    });
-  }
-
-  function focuCardTable() {
-    const allSkeleton = document.querySelectorAll('.skeleton-table')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-table')
-    });
-  }
-
-  function focuCardTablePeritemLabel() {
-    const allSkeleton = document.querySelectorAll('.peritem-label-skeleton')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('peritem-label-skeleton')
-    });
-  }
-
-  function focuCardTablePeritem() {
-    const allSkeleton = document.querySelectorAll('.peritem-skeleton')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('peritem-skeleton')
-    });
-  }
-
-  function focuCardTablePagination() {
-    const allSkeleton = document.querySelectorAll('.pagination-skeleton')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('pagination-skeleton')
-    });
-  }
-
-  function focuInputLabel() {
-    const allSkeleton = document.querySelectorAll('.skeleton-input-label')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-input-label')
-    });
-  }
   function focuButton() {
     const allSkeleton = document.querySelectorAll('.skeleton-button')
 
@@ -389,27 +308,9 @@
     });
   }
 
-  function focuInput() {
-    const allSkeleton = document.querySelectorAll('.skeleton-input')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-input')
-    });
-  }
-
   setTimeout(() => {
     fetchData();
-    focuCardHead();
-    focuCardHeadLabel();
-    focuCardHeadLabl();
-    focuCardHeadCapsule();
-    focuCardTable();
-    focuCardTablePeritemLabel();
-    focuCardTablePeritem();
-    focuCardTablePagination();
-    focuInputLabel();
     focuButton();
-    focuInput();
   }, 1000);
 </script>
 @endpush('scripts')

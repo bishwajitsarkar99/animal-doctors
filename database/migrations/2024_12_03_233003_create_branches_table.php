@@ -18,17 +18,34 @@ class CreateBranchesTable extends Migration
             $table->string('branch_id');
             $table->string('branch_type');
             $table->string('branch_name')->unique();
-            $table->string('division_id');
-            $table->string('district_id');
-            $table->string('upazila_id');
+            $table->unsignedBigInteger('division_id');
+            $table->unsignedBigInteger('district_id');
+            $table->unsignedBigInteger('upazila_id');
             $table->string('town_name');
             $table->string('location');
             $table->integer('created_by');
             $table->integer('updated_by')->nullable();
-            $table->tinyInteger('approval_status')->default('0');
+
+            // Foreign Keys for Roles
+            $table->unsignedBigInteger('admin_role_id')->nullable();
+            $table->foreign('admin_role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->unsignedBigInteger('sub_admin_role_id')->nullable();
+            $table->foreign('sub_admin_role_id')->references('id')->on('roles')->onDelete('cascade');
+
+            // Foreign Keys for Users
+            $table->unsignedBigInteger('admin_email_id')->nullable();
+            $table->foreign('admin_email_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('sub_admin_email_id')->nullable();
+            $table->foreign('sub_admin_email_id')->references('id')->on('users')->onDelete('cascade');
+
+            // Approval Status
+            $table->tinyInteger('admin_approval_status')->default(0);
+            $table->tinyInteger('sub_admin_approval_status')->default(0);
+
+            // Approval Metadata
             $table->integer('approver_by')->nullable();
-            $table->string('approver_date')->nullable();
-            
+            $table->date('admin_approver_date')->nullable();
+            $table->date('sub_admin_approver_date')->nullable();
             $table->timestamps();
         });
     }

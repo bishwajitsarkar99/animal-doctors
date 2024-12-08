@@ -67,13 +67,13 @@ class BranchServiceProvicer
     public function createBranch(Request $request)
     {
         $validators = validator::make($request->all(),[
-            'branch_name' => 'string|required|unique:branches',
-            'branch_type' => 'string|required',
-            'division_id' => 'string|required',
-            'district_id' => 'string|required',
-            'upazila_id' => 'string|required',
-            'town_name' => 'string|required',
-            'location' => 'string|required',
+            'branch_name' => 'required|unique:branches',
+            'branch_type' => 'required',
+            'division_id' => 'required',
+            'district_id' => 'required',
+            'upazila_id' => 'required',
+            'town_name' => 'required',
+            'location' => 'required',
         ],[
             'branch_name.required' => 'Branch name is reqired.',
             'branch_name.unique' => 'The branch name has already taken.',
@@ -155,13 +155,13 @@ class BranchServiceProvicer
     public function updateBranchs(Request $request , $id)
     {
         $validators = validator::make($request->all(),[
-            'branch_name' => 'string|required',
-            'branch_type' => 'string|required',
-            'division_id' => 'string|required',
-            'district_id' => 'string|required',
-            'upazila_id' => 'string|required',
-            'town_name' => 'string|required',
-            'location' => 'string|required',
+            'branch_name' => 'required',
+            'branch_type' => 'required',
+            'division_id' => 'required',
+            'district_id' => 'required',
+            'upazila_id' => 'required',
+            'town_name' => 'required',
+            'location' => 'required',
         ],[
             'branch_name.required' => 'Branch name is reqired.',
             'branch_type.required' => 'The branch type is required.',
@@ -212,9 +212,14 @@ class BranchServiceProvicer
     /**
      * Handle delete branch.
     */
-    public function deleteBranchs(Request $request , $id)
+    public function deleteBranchs($id)
     {
-        //
+        $branchs = Branch::find($id);
+        $branchs->delete();
+        return response()->json([
+            'status' => 200,
+            'messages' => 'The branch has deleted successfully.'
+        ]);
     }
 
     /**

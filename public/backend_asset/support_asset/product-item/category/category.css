@@ -576,26 +576,26 @@ input#delete_category_id {
     outline: none;
     border: none;
     font-weight: 600;
-    font-family: sans-serif;
+    font-family: var(--category-font-family);
     color: darkcyan;
 }
 button#deleteLoader {
     background: orange;
-    font-family: sans-serif;
+    font-family: var(--category-font-family);
 }
 button#deleteLoader:hover {
     background: #e9e9e9;
     color: orange;
-    font-family: sans-serif;
+    font-family: var(--category-font-family);
 }
 button#cate_delete3 {
     background: orangered;
-    font-family: sans-serif;
+    font-family: var(--category-font-family);
 }
 button#cate_delete3:hover {
     background: #e9e9e9;
     color: orangered;
-    font-family: sans-serif;
+    font-family: var(--category-font-family);
 }
 tr>th.tableHead {
     font-weight: 800;

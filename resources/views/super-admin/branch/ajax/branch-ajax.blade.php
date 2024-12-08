@@ -20,7 +20,7 @@
         buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
         buttonLoader('#deleteLoader', '.delete-icon', '.delete-btn-text', 'Delete...', 'Delete', 1000);
         buttonLoader('.yes_button', '.loading-yes-icon', '.btn-text', 'Yes...', 'Yes', 1000);
-        buttonLoader('.delete_branch', '.delete-confrm-icon', '.delete-confrm-btn-text', 'Delete...', 'Delete', 1000);
+        buttonLoader('#delete_branch', '.delete-confrm-icon', '.delete-confrm-btn-text', 'Delete...', 'Delete', 1000);
 
         // Initialize Select2 for all elements with the 'select2' class
         $('.select2').each(function() {
@@ -35,11 +35,6 @@
                     placeholder: 'Select Branch Type',
                     allowClear: true
                 });
-            }else if ($(this).attr('id') === 'select_action') {
-                $(this).select2({
-                    placeholder: 'Select Another Action',
-                    allowClear: true
-                });
             }
         });
         // Set custom placeholder for the search input inside Select2 dropdowns
@@ -48,9 +43,6 @@
         });
         $('#branch_type').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search branch type...');
-        });
-        $('#select_action').on('select2:open', function() {
-            $('.select2-search__field').attr('placeholder', 'Search action...');
         });
 
         // Branch unique id generator according to branch
@@ -81,46 +73,34 @@
             $("#branch_id").val(branch_id + '-' + generate_id);
         });
 
-        // Select Action Mode
-        $(document).on('change', '#select_action', function(){
-            // Button Show Or Hide
-            var select_val = $(this).val();
-
-            if(select_val == 'Update'){
-                $("#save").hide();
-                $("#update_btn").removeAttr('hidden');
-                $("#update_btn").fadeIn();
-                $("#access_btn").attr('hidden', true);
-                $("#deleteLoader").attr('hidden', true);
-            }
-            if(select_val == 'Access'){
-                $("#save").hide();
-                $("#access_btn").removeAttr('hidden');
-                $("#access_btn").fadeIn();
-                $("#update_btn").attr('hidden', true);
-                $("#deleteLoader").attr('hidden', true);
-            }
-            if(select_val == 'Delete'){
-                $("#save").hide();
-                $("#deleteLoader").removeAttr('hidden');
-                $("#deleteLoader").fadeIn();
-                $("#update_btn").attr('hidden', true);
-                $("#access_btn").attr('hidden', true);
-            }
-            if(select_val == ''){
-                $("#save").show();
-                $("#save").fadeIn();
-                $("#update_btn").attr('hidden', true);
-                $("#access_btn").attr('hidden', true);
-                $("#deleteLoader").attr('hidden', true);
-            }
-        });
-
         // Search Select Dropdown
         $(document).on('change', '#select_branch', function(e){
             e.preventDefault();
+
             fetch_division();
             var select = $(this).val();
+
+            // Button Show Or Hide
+            if(select !== ''){
+                $("#save").hide();
+                $("#save").fadeOut();
+                $("#update_btn").removeAttr('hidden');
+                $("#update_btn").fadeIn();
+                $("#deleteLoader").removeAttr('hidden');
+                $("#deleteLoader").fadeIn();
+                $("#cancel_btn").hide();
+                $("#cancel_btn").fadeOut();
+            }else if(select == ''){
+                $("#save").show();
+                $("#save").fadeIn();
+                $("#update_btn").attr('hidden', true);
+                $("#update_btn").fadeOut();
+                $("#deleteLoader").attr('hidden', true);
+                $("#deleteLoader").fadeOut();
+                $("#cancel_btn").show();
+                $("#cancel_btn").fadeIn();
+            }
+
             // Search ID
             var id = select;
 
@@ -277,12 +257,14 @@
                         $('.edit_branch_name').val(response.messages.branch_name);
                         $('.edit_branch_type').val(response.messages.branch_type).trigger('change.select2');
                         $('.edit_division_id').val(response.messages.division_id).trigger('change.select2');
-                        fetch_district(response.messages.division_id);
+                        fetch_district(response.messages.division_id, function(){
+                            // Set the value once options are available
+                            $('.edit_district_id').val(response.messages.district_id).trigger('change.select2');
+                        });
                         fetch_upazila(response.messages.district_id, function (){
                             // Set the value once options are available
                             $('.edit_upazila_id').val(response.messages.upazila_id).trigger('change.select2');
                         });
-                        $('.edit_district_id').val(response.messages.district_id).trigger('change.select2');
                         $('.edit_town_name').val(response.messages.town_name);
                         $('.edit_location').val(response.messages.location);
                         
@@ -363,25 +345,21 @@
                                 $('#savForm_error2').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
                                 $("#savForm_error2").addClass("alert_show_errors");
                                 $('#branch_type').next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                                $('#branch_type').html("");
                             } else if (key === 'division_id') {
                                 $("#savForm_error3").fadeIn();
                                 $('#savForm_error3').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
                                 $("#savForm_error3").addClass("alert_show_errors");
                                 $('#select_division').next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                                $('#select_division').html("");
                             } else if (key === 'district_id') {
                                 $("#savForm_error4").fadeIn();
                                 $('#savForm_error4').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
                                 $("#savForm_error4").addClass("alert_show_errors");
                                 $('#select_district').next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                                $('#select_district').html("");
                             } else if (key === 'upazila_id') {
                                 $("#savForm_error5").fadeIn();
                                 $('#savForm_error5').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
                                 $("#savForm_error5").addClass("alert_show_errors");
                                 $('#select_upazila').next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                                $('#select_upazila').html("");
                             } else if (key === 'town_name') {
                                 $("#savForm_error6").fadeIn();
                                 $('#savForm_error6').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
@@ -486,19 +464,34 @@
             var loaction_name = $("#location").val();
 
             if(branch_name !== ''){
+                $("#savForm_error").empty();
+                $("#savForm_error").fadeOut();
                 $("#savForm_error").addClass('display-none');
-                $("#savForm_error").addClass("display-none");
                 $("#branchName").removeClass("is-invalid");
+                $("#updateForm_error").empty();
+                $("#updateForm_error").fadeOut();
+                $("#updateForm_error").addClass('display-none');
+                $(".edit_branch_name").removeClass("is-invalid");
             }
             if(town_name !== ''){
+                $("#savForm_error6").empty();
+                $("#savForm_error6").fadeOut();
+                $("#savForm_error6").addClass("display-none");
                 $("#townName").removeClass("is-invalid");
-                $(".edit_city_error").addClass("display-none");
-                $(".edit_city_error").addClass("display-none");
+                $("#updateForm_error6").empty();
+                $("#updateForm_error6").fadeOut();
+                $("#updateForm_error6").addClass("display-none");
+                $(".edit_town_name").removeClass("is-invalid");
             }
             if(loaction_name !== ''){
+                $("#savForm_error7").empty();
+                $("#savForm_error7").fadeOut();
+                $("#savForm_error7").addClass("display-none");
                 $("#location").removeClass("is-invalid");
-                $(".edit_branch_loaction_error").addClass("display-none");
-                $(".edit_branch_loaction_error").addClass("display-none");
+                $("#updateForm_error7").empty();
+                $("#updateForm_error7").fadeOut();
+                $("#updateForm_error7").addClass("display-none");
+                $(".edit_location").removeClass("is-invalid");
             }
 
         });
@@ -512,24 +505,36 @@
             var select_upazila = $("#select_upazila").val();
 
             if(branch_type !== ''){
+                $("#savForm_error2").fadeOut();
+                $("#savForm_error2").addClass('display-none');
                 $("#branch_type").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
-                $(".edit_branch_type_error").addClass('display-none');
-                $(".edit_branch_type_error").empty();
+                $("#updateForm_error2").fadeOut();
+                $("#updateForm_error2").addClass('display-none');
+                $(".edit_branch_type").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
             }
             if(select_division !== ''){
+                $("#savForm_error3").fadeOut();
+                $("#savForm_error3").addClass('display-none');
                 $("#select_division").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
-                $(".edit_division_error").addClass('display-none');
-                $(".edit_division_error").empty();
+                $("#updateForm_error3").fadeOut();
+                $("#updateForm_error3").addClass('display-none');
+                $(".edit_division_id").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
             }
             if(select_district !== ''){
+                $("#savForm_error4").fadeOut();
+                $("#savForm_error4").addClass('display-none');
                 $("#select_district").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
-                $(".edit_district_error").addClass('display-none');
-                $(".edit_district_error").empty();
+                $("#updateForm_error4").fadeOut();
+                $("#updateForm_error4").addClass('display-none');
+                $(".edit_district_id").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
             }
             if(select_upazila !== ''){
+                $("#savForm_error5").fadeOut();
+                $("#savForm_error5").addClass('display-none');
                 $("#select_upazila").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
-                $(".edit_upazila_error").addClass('display-none');
-                $(".edit_upazila_error").empty();
+                $("#updateForm_error5").fadeOut();
+                $("#updateForm_error5").addClass('display-none');
+                $(".edit_upazila_id").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
             }
 
         });
@@ -537,7 +542,7 @@
         // Branch Update Modal Show
         $(document).on('click', '#update_btn', function(e){
             e.preventDefault();
-            $("#updateconfirmbranch").modal('show').fadeIn();
+            $("#updateconfirmbranch").modal('show');
 
             var time = null;
 
@@ -601,25 +606,21 @@
                                 $('#updateForm_error2').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
                                 $("#updateForm_error2").addClass("alert_show_errors");
                                 $('#branch_type').next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                                $('#branch_type').html("");
                             } else if (key === 'division_id') {
                                 $("#updateForm_error3").fadeIn();
                                 $('#updateForm_error3').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
                                 $("#updateForm_error3").addClass("alert_show_errors");
                                 $('#select_division').next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                                $('#select_division').html("");
                             } else if (key === 'district_id') {
                                 $("#savForm_error4").fadeIn();
                                 $('#savForm_error4').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
                                 $("#savForm_error4").addClass("alert_show_errors");
                                 $('#select_district').next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                                $('#select_district').html("");
                             } else if (key === 'upazila_id') {
                                 $("#updateForm_error5").fadeIn();
                                 $('#updateForm_error5').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
                                 $("#updateForm_error5").addClass("alert_show_errors");
                                 $('#select_upazila').next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                                $('#select_upazila').html("");
                             } else if (key === 'town_name') {
                                 $("#updateForm_error6").fadeIn();
                                 $('#updateForm_error6').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
@@ -645,10 +646,6 @@
                         setTimeout(() => {
                             $('#success_message').fadeOut(3000);
                         }, 5000);
-                        
-                        fetch_division();
-                        fetch_district();
-                        fetch_upazila();
                         searchBranch();
                     }
                 }
@@ -658,7 +655,10 @@
         // Branch Delete Modal Show
         $(document).on('click', '#deleteLoader', function(e){
             e.preventDefault();
-            $("#deletebranch").modal('show').fadeIn();
+            var branch_id = $("#branches_id").val();
+            $('#delete_branch_id').val(branch_id);
+
+            $("#deletebranch").modal('show');
 
             var time = null;
 
@@ -680,7 +680,7 @@
         // Branch Confirm Delete Modal Show
         $(document).on('click', '#yesButton', function(e){
             e.preventDefault();
-            $("#deleteconfirmcategory").modal('show').fadeIn();
+            $("#deleteconfirmbranch").modal('show');
 
             var time = null;
 
@@ -699,10 +699,41 @@
 
         });
 
+        // Confirm Delete Branch
+        $(document).on('click', '.delete_branch', function(e){
+            e.preventDefault();
+
+            var id = $("#delete_branch_id").val();
+
+            $.ajaxSetup({
+                headrs:{
+                    'X-CSRF-TOKEN': $('meta[name ="csrf_token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "DELETE",
+                url: "/company/branch-delete/" + id,
+                success: function(response){
+                    $('#success_message').addClass('alert_show ps-1 pe-1');
+                    $('#success_message').fadeIn();
+                    $('#success_message').text(response.messages);
+                    $("#select_branch").val("").trigger('change');
+                    clearFields();
+                    setTimeout(() => {
+                        $('#success_message').fadeOut();
+                    }, 5000);
+                    $("#deletebranch").modal('hide').fadeOut();
+                    $("#deleteconfirmbranch").modal('hide').fadeOut();
+                    searchBranch();
+                }
+            });
+        });
+
         // Branch Access Modal Show
         $(document).on('click', '#access_btn', function(e){
             e.preventDefault();
-            $("#accessconfirmbranch").modal('show').fadeIn();
+            $("#accessconfirmbranch").modal('show');
 
             var time = null;
 

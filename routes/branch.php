@@ -16,9 +16,9 @@ Route::group(['middleware' => 'auth'], function (){
             Route::get('/branch-search', [BranchController::class, 'searchBranch'])->name('search-branch.action');
             Route::get('/branch-edit/{id}', [BranchController::class, 'editBranch'])->name('edit-branch.action');
             Route::put('/branch-update/{id}', [BranchController::class, 'updateBranch'])->name('update_branch.action');
-            Route::delete('/branch-delete/{id}', [EmailController::class, 'deleteBranch'])->name('branch.delete');
-            Route::post('/branch-access-status', [EmailController::class, 'accessBranch'])->name('access_status.action');
-            Route::post('/branch-user-permission', [EmailController::class, 'permissionBranch'])->name('permission_status.action');
+            Route::delete('/branch-delete/{id}', [BranchController::class, 'deleteBranch'])->name('branch.delete');
+            Route::post('/branch-access-status', [BranchController::class, 'accessBranch'])->name('access_status.action');
+            Route::post('/branch-user-permission', [BranchController::class, 'permissionBranch'])->name('permission_status.action');
         });
     });
 });

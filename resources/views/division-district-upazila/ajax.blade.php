@@ -92,7 +92,7 @@
         });
 
         // Function to fetch district based on district name
-        window.fetch_district = function(selectedDivision) {
+        window.fetch_district = function(selectedDivision, callback) {
             if (!selectedDivision) {
                 return;
             }
@@ -115,6 +115,9 @@
                     $.each(districts, function(key, item) {
                         $("#select_district").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.district_name ? item.district_name : 'No Role'}</option>`);
                     });
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
                 },
                 error: function() {
                     $("#select_district").empty();

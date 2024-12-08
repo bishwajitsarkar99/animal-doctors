@@ -72,10 +72,17 @@ td.label_position{
     font-family: var(--nav-font-family); 
     text-align: center;
 }
-img.user_img {
+.user_img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    transition: transform .5s;
+}
+.user_img:hover{
+    transform: scale(5);
+}
+#updateconfirmbranch,#deletebranch,#deleteconfirmbranch,#accessconfirmbranch{
+    transition: transform .5s;
 }
 td.branch_font {
     text-align: center;
@@ -120,9 +127,9 @@ input#secondUpdateBy,input#secondUpdateAt,input#secondApprover,input#thirdUserEm
 .branch-delete-skeleton::before {
     content: "";
     position: absolute;
-    left: -1px;
+    left: -2px;
     top: -1px;
-    width: 107%;
+    width: 109%;
     height: 107%;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
@@ -153,4 +160,23 @@ button#acces_delete:hover {
     background: #e9e9e9;
     color: orangered;
     font-family: var(--nav-font-family);
+}
+button#delete_branch {
+    background: orange;
+    font-family: var(--nav-font-family);
+}
+button#delete_branch:hover {
+    background: #e9e9e9;
+    color: orange;
+    font-family: var(--nav-font-family);
+}
+input#delete_branch_id {
+    outline: none;
+    border: none;
+    font-weight: 600;
+    font-family: var(--nav-font-family);
+    color: darkcyan;
+}
+table.info_table {
+    background: white;
 }
