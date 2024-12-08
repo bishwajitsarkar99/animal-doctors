@@ -223,17 +223,65 @@ class BranchServiceProvicer
     }
 
     /**
-     * Handle branch access.
+     * Handle admin branch access view.
     */
-    public function accessBranchs(Request $request)
+    public function branchAdminAccessView(Request $request)
+    {
+        return view('super-admin.branch.admin-access-view');
+    }
+
+    /**
+     * Handle admin branch access.
+    */
+    public function accessBranchAdmin(Request $request)
     {
         //
     }
 
     /**
-     * Handle branch access permission.
+     * Handle user branch permission view.
     */
-    public function permissionBranchs(Request $request)
+    public function branchAccessUserPermissionView(Request $request)
+    {
+        return view('super-admin.branch.user-permission-view');
+    }
+
+    /**
+     * Handle user branch permission create.
+    */
+    public function userBranchPermissionCreate(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Handle user branch permission edit.
+    */
+    public function userBranchPermissionEdit($id)
+    {
+        //
+    }
+
+    /**
+     * Handle user branch permission update.
+    */
+    public function userBranchPermissionUpdate(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Handle user branch permission delete.
+    */
+    public function userBranchPermissionDelete($id)
+    {
+        //
+    }
+
+    /**
+     * Handle user branch permission delete.
+    */
+    public function userBranchAccessPermission(Request $request)
     {
         //
     }

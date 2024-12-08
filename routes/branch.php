@@ -11,13 +11,22 @@ Route::group(['middleware' => 'auth'], function (){
     // Branch
     Route::middleware(['role:SuperAdmin|Admin|SubAdmin'])->group(function(){
         Route::prefix('company')->group(function () {
+            // Branch Create
             Route::get('/branch-activity', [BranchController::class, 'index'])->name('branch.index');
             Route::post('/branch-create', [BranchController::class, 'store'])->name('branch.store');
             Route::get('/branch-search', [BranchController::class, 'searchBranch'])->name('search-branch.action');
             Route::get('/branch-edit/{id}', [BranchController::class, 'editBranch'])->name('edit-branch.action');
             Route::put('/branch-update/{id}', [BranchController::class, 'updateBranch'])->name('update_branch.action');
             Route::delete('/branch-delete/{id}', [BranchController::class, 'deleteBranch'])->name('branch.delete');
-            Route::post('/branch-access-status', [BranchController::class, 'accessBranch'])->name('access_status.action');
+            // Branch Admin Access
+            Route::get('/branch-admin-access', [BranchController::class, 'branchAccessView'])->name('branch_access.view');
+            Route::post('/branch-admin-permission', [BranchController::class, 'accessBranch'])->name('access_status.action');
+            // Brach User Access Permission
+            Route::get('/branch-user-access', [BranchController::class, 'branchAccessUserPermission'])->name('branch_access_permission.view');
+            Route::post('/branch-user-permission-create', [BranchController::class, 'permissionCreate'])->name('permission_create.action');
+            Route::get('/branch-user-permission-edit/{id}', [BranchController::class, 'permissionEdit'])->name('permission_edit.action');
+            Route::put('/branch-user-permission-update/{id}', [BranchController::class, 'permissionUpdate'])->name('permission_update.action');
+            Route::delete('/branch-user-permission-delete/{id}', [BranchController::class, 'permissionDelete'])->name('permission_delete.action');
             Route::post('/branch-user-permission', [BranchController::class, 'permissionBranch'])->name('permission_status.action');
         });
     });

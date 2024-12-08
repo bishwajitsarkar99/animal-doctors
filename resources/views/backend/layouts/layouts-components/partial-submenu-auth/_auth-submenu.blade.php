@@ -85,11 +85,11 @@
                 <a class="nav-link underline" href="{{ route('branch.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Activity" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Activity
                 </a>
-                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Access" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Access
+                <a class="nav-link underline" href="{{ route('branch_access.view') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Admin Access" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Admin Access
                 </a>
-                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Permission" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Permission
+                <a class="nav-link underline" href="{{ route('branch_access_permission.view') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="User Permission" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>User Permission
                 </a>
             </nav>
         </div>

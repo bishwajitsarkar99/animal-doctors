@@ -69,15 +69,53 @@ class BranchController extends Controller
         return $this->branchServiceProvider->deleteBranchs($id);
     }
 
-    // Branch Access
-    public function accessBranch(Request $request)
+    // Branch Admin Access View
+    public function branchAccessView(Request $request)
     {
-        return $this->branchServiceProvider->accessBranchs($request);
+        return $this->branchServiceProvider->branchAdminAccessView($request);
     }
 
-    // Branch Access Permission
+    // Branch Admin Access
+    public function accessBranch(Request $request)
+    {
+        return $this->branchServiceProvider->accessBranchAdmin($request);
+    }
+
+    // Branch User Access Permission View
+    public function branchAccessUserPermission(Request $request)
+    {
+        return $this->branchServiceProvider->branchAccessUserPermissionView($request);
+    }
+
+    // Branch User Access Permission Create
+    public function permissionCreate(Request $request)
+    {
+        return $this->branchServiceProvider->userBranchPermissionCreate($request);
+    }
+
+    // Branch User Access Permission Edit
+    public function permissionEdit($id)
+    {
+        return $this->branchServiceProvider->userBranchPermissionEdit($id);
+    }
+
+    // Branch User Access Permission Update
+    public function perpermissionUpdatemissionEdit(Request $request, $id)
+    {
+        return $this->branchServiceProvider->userBranchPermissionUpdate($request, $id);
+    }
+
+    // Branch User Access Permission Delete
+    public function permissionDelete($id)
+    {
+        return $this->branchServiceProvider->userBranchPermissionDelete($id);
+    }
+
+    // Branch User Access Permission
     public function permissionBranch(Request $request)
     {
-        return $this->branchServiceProvider->permissionBranchs($request);
+        return $this->branchServiceProvider->userBranchAccessPermission($request);
     }
+
+
 }
