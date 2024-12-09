@@ -5,6 +5,7 @@ namespace App\Models\Branch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Branch\District;
+use App\Models\Branch\Branch;
 
 class Division extends Model
 {
@@ -19,5 +20,8 @@ class Division extends Model
         return $this->hasMany(District::class, 'division_id');
     }
 
-    
+    public function branches()
+    {
+        return $this->hasMany(Branch::class, 'division_id');
+    }
 }

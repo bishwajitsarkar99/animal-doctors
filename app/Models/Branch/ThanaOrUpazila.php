@@ -5,6 +5,7 @@ namespace App\Models\Branch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Branch\District;
+use App\Models\Branch\Branch;
 
 class ThanaOrUpazila extends Model
 {
@@ -18,5 +19,10 @@ class ThanaOrUpazila extends Model
     public function district()
     {
         return $this->belongsTo(District::class, 'district_id', 'id');
+    }
+
+    public function branches()
+    {
+        return $this->hasMany(Branch::class, 'upazila_id');
     }
 }

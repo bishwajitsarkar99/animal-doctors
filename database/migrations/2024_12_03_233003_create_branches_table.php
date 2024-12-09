@@ -18,9 +18,15 @@ class CreateBranchesTable extends Migration
             $table->string('branch_id');
             $table->string('branch_type');
             $table->string('branch_name')->unique();
+            // Foreign Keys for Divisions
             $table->unsignedBigInteger('division_id');
+            $table->foreign('division_id')->references('id')->on('divisions')->onDelete('cascade');
+            // Foreign Keys for District
             $table->unsignedBigInteger('district_id');
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
+            // Foreign Keys for Upazila
             $table->unsignedBigInteger('upazila_id');
+            $table->foreign('upazila_id')->references('id')->on('thana_or_upazilas')->onDelete('cascade');
             $table->string('town_name');
             $table->string('location');
             $table->integer('created_by');

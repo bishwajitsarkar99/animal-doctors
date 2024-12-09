@@ -70,9 +70,21 @@ class BranchController extends Controller
     }
 
     // Branch Admin Access View
-    public function branchAccessView(Request $request)
+    public function branchAccessView()
     {
-        return $this->branchServiceProvider->branchAdminAccessView($request);
+        return $this->branchServiceProvider->branchAdminAccessView();
+    }
+
+    // Branch Data Fetch
+    public function branchDataFetch(Request $request)
+    {
+        return $this->branchServiceProvider->branchDataFetchs($request);
+    }
+
+    // Branch Name Query/Search
+    public function branchSearchName(Request $request, $id)
+    {
+        return $this->branchServiceProvider->branchSearchNames($request, $id); 
     }
 
     // Branch Admin Access

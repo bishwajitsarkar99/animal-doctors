@@ -225,9 +225,56 @@ class BranchServiceProvicer
     /**
      * Handle admin branch access view.
     */
-    public function branchAdminAccessView(Request $request)
+    public function branchAdminAccessView()
     {
         return view('super-admin.branch.admin-access-view');
+    }
+
+    /**
+     * Handle admin branch access view.
+    */
+    public function branchDataFetchs(Request $request)
+    {
+        $branch_names = Branch::orderBy('id', 'desc')->where('branch_name', '!=', null)->get();
+
+        if($branch_names){
+            return response()->json([
+                'branch_names' => $branch_names,
+            ], 200);
+        };
+    }
+
+    /**
+     * Handle branch name query or search for admin access.
+    */
+    public function branchSearchNames(Request $request, $id)
+    {
+        $branch = Branch::with(
+            [
+                'created_users', 
+                'updated_users', 
+                'approver_users', 
+                'divisions', 
+                'districts', 
+                'thana_or_upazilas',
+                'admin_email_users',
+                'sub_admin_email_users',
+                'admin_roles',
+                'sub_admin_roles',
+            ]
+        )->find($id);
+        if($branch){
+            return response()->json([
+                'status' => 200,
+                'messages' => $branch,
+            ]);
+        }else{
+
+            return response()->json([
+                'status' => 404,
+                'messages' => 'The branch is no found.',
+            ]);
+        }
     }
 
     /**

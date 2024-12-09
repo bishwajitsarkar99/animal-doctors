@@ -23,6 +23,8 @@ Route::group(['middleware' => 'auth'], function (){
             Route::post('/branch-admin-permission', [BranchController::class, 'accessBranch'])->name('access_status.action');
             // Brach User Access Permission
             Route::get('/branch-user-access', [BranchController::class, 'branchAccessUserPermission'])->name('branch_access_permission.view');
+            Route::get('/branch-data-fetch', [BranchController::class, 'branchDataFetch'])->name('branch_fetch.action');
+            Route::get('/branch-name-query/{id}', [BranchController::class, 'branchSearchName'])->name('branch_name_search.action');
             Route::post('/branch-user-permission-create', [BranchController::class, 'permissionCreate'])->name('permission_create.action');
             Route::get('/branch-user-permission-edit/{id}', [BranchController::class, 'permissionEdit'])->name('permission_edit.action');
             Route::put('/branch-user-permission-update/{id}', [BranchController::class, 'permissionUpdate'])->name('permission_update.action');

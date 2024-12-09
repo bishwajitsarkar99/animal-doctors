@@ -43,7 +43,7 @@ class Branch extends Model
 
     public function districts()
     {
-        return $this->belongsTo(Division::class, 'district_id', 'id');
+        return $this->belongsTo(District::class, 'district_id', 'id');
     }
 
     public function thana_or_upazilas()

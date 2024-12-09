@@ -4,9 +4,6 @@
     buttonLoader();
 
     $(document).ready(function(){
-        // the fetch function call from the "division-district-upazila" script for Initialize...
-        fetch_division();
-
         // Initialize the button loader for the login button
         buttonLoader('#access_btn', '.access-icon', '.access-btn-text', 'Access...', 'Access', 1000);
         buttonLoader('#access_btn_confirm', '.access-confirm-icon', '.access-confirm-btn-text', 'Confirm...', 'Confirm', 1000);
@@ -22,7 +19,7 @@
                 });
             }else if ($(this).attr('id') === 'role_type') {
                 $(this).select2({
-                    placeholder: 'Select Role Type',
+                    placeholder: 'Select Role Play',
                     allowClear: true
                 });
             }else if ($(this).attr('id') === 'admin_role_id') {
@@ -52,7 +49,7 @@
             $('.select2-search__field').attr('placeholder', 'Search branch...');
         });
         $('#role_type').on('select2:open', function() {
-            $('.select2-search__field').attr('placeholder', 'Search role...');
+            $('.select2-search__field').attr('placeholder', 'Search role play...');
         });
         $('#admin_role_id').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search role...');
@@ -75,53 +72,78 @@
             if(roleValue == 'Admin Role'){
                 $("#adminRole").removeAttr('hidden');
                 $("#adminEmail").removeAttr('hidden');
+                $("#adminstatus").removeAttr('hidden');
             }else{
                 $("#adminRole").attr('hidden', true);
                 $("#adminEmail").attr('hidden', true);
+                $("#adminstatus").attr('hidden', true);
             }
             if(roleValue == 'Sub Admin Role'){
                 $("#subAdminRole").removeAttr('hidden');
                 $("#subAdminEmail").removeAttr('hidden');
+                $("#subAdminstatus").removeAttr('hidden');
             }else{
                 $("#subAdminRole").attr('hidden', true);
                 $("#subAdminEmail").attr('hidden', true);
+                $("#subAdminstatus").attr('hidden', true);
             }
         });
+
+        $(document).on('click', '#admin_approval_status', function() {
+
+            var isChecked = $(this).prop('checked'); 
+
+            if (isChecked) {
+                $("#adminSt").removeAttr('hidden').slideDown();
+                $("#adminStTwo").attr('hidden', true);
+            } else {
+                $("#adminSt").attr('hidden', true);
+                $("#adminStTwo").removeAttr('hidden').slideDown();
+            }
+        });
+
+        // Fetch Branch
+        fetch_branch();
+
+        function fetch_branch(){
+            const currentUrl = "{{ route('branch_fetch.action') }}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const branch_name = response.branch_names;
+                    $("#select_branch_search").empty();
+                    $("#select_branch_search").append('<option value="" style="font-weight:600;">Select Company Branch Name</option>');
+                    $.each(branch_name, function(key, item) {
+                        $("#select_branch_search").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.branch_name}</option>`);
+                    });
+                },
+                error: function() {
+                    $("#select_branch_search").empty();
+                    $("#select_branch_search").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
+                }
+            });
+        }
 
         // Search Select Dropdown
         $(document).on('change', '#select_branch_search', function(e){
             e.preventDefault();
 
-            fetch_division();
             var select = $(this).val();
-
-            // Button Show Or Hide
-            if(select !== ''){
-                $("#save").hide();
-                $("#save").fadeOut();
-                $("#update_btn").removeAttr('hidden');
-                $("#update_btn").fadeIn();
-                $("#deleteLoader").removeAttr('hidden');
-                $("#deleteLoader").fadeIn();
-                $("#cancel_btn").hide();
-                $("#cancel_btn").fadeOut();
-            }else if(select == ''){
-                $("#save").show();
-                $("#save").fadeIn();
-                $("#update_btn").attr('hidden', true);
-                $("#update_btn").fadeOut();
-                $("#deleteLoader").attr('hidden', true);
-                $("#deleteLoader").fadeOut();
-                $("#cancel_btn").show();
-                $("#cancel_btn").fadeIn();
-            }
 
             // Search ID
             var id = select;
 
             if(select !== ''){
                 $('#documents').removeAttr('hidden');
-                
             }
             if(select == ''){
                 $('#documents').attr('hidden', true);
@@ -129,7 +151,7 @@
             
             $.ajax({
                 type: "GET",
-                url: "/company/branch-edit/" + id,
+                url: "/company/branch-name-query/" + id,
                 success: function(response){
                     if(response.status == 404){
                         $('#success_message').html("");
@@ -167,19 +189,19 @@
                                 default:
                                     createdByRole = 'Unknown';
                             }
-                            $("#firstUserImage").html(`<img class="user_img rounded-square users_image position" src="${firstUserImage}">`);
+                            $("#creatorUserImage").html(`<img class="user_img rounded-square users_image position" src="${firstUserImage}">`);
 
-                            $("#firstUserEmail").val(messages.created_users.email);
-                            $("#firstCreatedBy").val(createdByRole);
+                            $("#creatorUserEmail").val(messages.created_users.email);
+                            $("#creatorCreatedBy").val(createdByRole);
                             if(messages.created_at !== ''){
-                                $("#firstCreatedAt").val(currentDate(messages.created_at));
+                                $("#creatorCreatedAt").val(currentDate(messages.created_at));
                             }else{
-                                $("#firstCreatedAt").val('-');
+                                $("#creatorCreatedAt").val('-');
                             }
-                        } 
+                        }
                         if(messages.updated_by !== null){
-                            $("#secondContent").removeAttr('hidden');
-                            $('#secondHead').removeAttr('hidden');
+                            $("#updatorContent").removeAttr('hidden');
+                            $('#updatorHead').removeAttr('hidden');
                             const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/image/${messages.updated_users.image}`;
                             let updatedByRole;
                             switch (messages.updated_by) {
@@ -207,22 +229,22 @@
                                 default:
                                     updatedByRole = 'Unknown';
                             }
-                            $("#secondUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
+                            $("#updatorUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
 
-                            $("#secondUserEmail").val((messages.updated_users.email));
-                            $("#secondUpdateBy").val(updatedByRole);
+                            $("#updatorUserEmail").val((messages.updated_users.email));
+                            $("#updatorUpdateBy").val(updatedByRole);
                             if(messages.created_at !== messages.updated_at){
-                                $("#secondUpdateAt").val(currentDate(messages.updated_at));
+                                $("#updatorUpdateAt").val(currentDate(messages.updated_at));
                             }else{
-                                $("#secondUpdateAt").val('-');
+                                $("#updatorUpdateAt").val('-');
                             }
                         }else{
-                            $("#secondContent").attr('hidden', true);
-                            $('#secondHead').attr('hidden', true);
+                            $("#updatorContent").attr('hidden', true);
+                            $('#updatorHead').attr('hidden', true);
                         }
                         if(messages.approver_by !== null){
-                            $("#thirdContent").removeAttr('hidden');
-                            $('#thirdHead').removeAttr('hidden');
+                            $("#approverContent").removeAttr('hidden');
+                            $('#approverHead').removeAttr('hidden');
                             const secondUserImage = messages.approver_users.image.includes('https://') ? messages.approver_users.image : `${window.location.origin}/image/${messages.approver_users.image}`;
                             let approverByRole;
                             switch (messages.approver_by) {
@@ -250,29 +272,29 @@
                                 default:
                                     approverByRole = 'Unknown';
                             }
-                            $("#thirdUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
+                            $("#approverUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
 
-                            $("#thirdUserEmail").val(messages.approver_users.email);
-                            $("#thirdApprover").val(approverByRole);
+                            $("#approverUserEmail").val(messages.approver_users.email);
+                            $("#approverApprover").val(approverByRole);
                             if(messages.approver_date !== null){
-                                $("#thirdUpdateAt").val(currentDate(messages.approver_date));
+                                $("#approverUpdateAt").val(currentDate(messages.approver_date));
                             }else if(messages.approver_date == null){
-                                $("#thirdUpdateAt").val('-');
+                                $("#approverUpdateAt").val('-');
                             }
                         }else{
-                            $("#thirdContent").attr('hidden', true);
-                            $('#thirdHead').attr('hidden', true);
+                            $("#approverContent").attr('hidden', true);
+                            $('#approverHead').attr('hidden', true);
                         }
 
                         $('#branches_id').val(id);
-                        $('#edit_branch_id').val(response.messages.branch_id);
-                        $('.edit_branch_name').val(response.messages.branch_name);
-                        $('.edit_branch_type').val(response.messages.branch_type);
-                        $('.edit_division_id').val(response.messages.division_id);
-                        $('.edit_district_id').val(response.messages.district_id);
-                        $('.edit_upazila_id').val(response.messages.upazila_id);
-                        $('.edit_town_name').val(response.messages.town_name);
-                        $('.edit_location').val(response.messages.location);
+                        $('#brnch_id').val(response.messages.branch_id);
+                        $('#branch_name').val(response.messages.branch_name);
+                        $('#branch_type').val(response.messages.branch_type);
+                        $('#division_id').val(response.messages.divisions.division_name);
+                        $('#district_id').val(response.messages.districts.district_name);
+                        $('#upazila_id').val(response.messages.thana_or_upazilas.thana_or_upazila_name);
+                        $('#town_name').val(response.messages.town_name);
+                        $('#location').val(response.messages.location);
                         
                     }
                     
@@ -280,34 +302,6 @@
             });
         });
 
-        // fetch branch for dropdown
-        function searchBranch(){
-            const currentUrl = "{{ route('search-branch.action') }}";
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $.ajax({
-                type: "GET",
-                url: currentUrl,
-                dataType: 'json',
-                success: function(response) {
-                    const all_branchs = response.allBranch;
-                    $("#select_branch").empty();
-                    $("#select_branch").append('<option value="">Select Company Branch Name</option>');
-                    $.each(all_branchs, function(key, item) {
-                        $("#select_branch").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.branch_name}</option>`);
-                    });
-                },
-                error: function() {
-                    $("#select_branch").empty();
-                    $("#select_branch").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
-                }
-            });
-        }
 
     });
 </script>

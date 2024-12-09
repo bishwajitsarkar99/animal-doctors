@@ -13,18 +13,18 @@
                 <div class="row">
                   <div class="col-xl-4">
                     <div class="form-group mb-1 role_nme skeleton">
-                      <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Searching...</label></span>
+                      <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Select Branch</label></span>
                       <select type="text" class="form-control form-control-sm select_branch_search select2" name="branch_name" id="select_branch_search">
                         <option value="">Select Company Branch Name</option>
                       </select>
                       <input type="hidden" id="branches_id">
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton">
-                      <label class="catg_name_label label_position" for="mail-transport">Select Role</label>
+                      <label class="catg_name_label label_position" for="mail-transport">Select Role Play</label>
                       <select type="text" class="form-control form-control-sm role_type select2" name="role_type" id="role_type">
-                        <option value="">Select Role Type</option>
-                        <option value="Admin Role">Admin Role</option>
-                        <option value="Sub Admin Role">Sub Admin Role</option>
+                        <option value="">Select Role Play</option>
+                        <option value="Admin Role">Coordinator</option>
+                        <option value="Sub Admin Role">Subordinator</option>
                       </select>
                       <span id="savForm_error2"></span><span id="updateForm_error2"></span>
                     </div>
@@ -56,52 +56,92 @@
                       </select>
                       <span id="savForm_error4"></span><span id="updateForm_error4"></span>
                     </div>
+                    <div class="form-group role_nme branch mb-1 skeleton" id="adminstatus" hidden>
+                      <label class="catg_name_label label_position" for="status">Sataus</label>
+                      <input type="checkbox" class="admin_approval_status" name="admin_approval_status" id="admin_approval_status" value="1" />
+                      <span class="catg_name_label label_position" for="status" id="adminSt" hidden>Justify</span>
+                      <span class="catg_name_label label_position" for="status" id="adminStTwo" hidden>Deny</span>
+                      <span id="savForm_error4"></span><span id="updateForm_error4"></span>
+                    </div>
+                    <div class="form-group role_nme branch mb-1 skeleton" id="subAdminstatus" hidden>
+                      <label class="catg_name_label label_position" for="status">Sataus</label>
+                      <input type="checkbox" class="sub_admin_approval_status" name="sub_admin_approval_status" id="sub_admin_approval_status" />
+                      <label class="catg_name_label label_position" for="status" id="subAdminSt"></label>
+                      <span id="savForm_error4"></span><span id="updateForm_error4"></span>
+                    </div>
                   </div>
                   <div class="col-xl-8">
                     <div class="card card-body branch_info_card" id="documents" hidden>
-                        <div class="row">
-                            <div class="col-xl-6">
-
-                            </div>
-                            <div class="col-xl-6">
-
-                            </div>
+                      <div class="row">
+                        <div class="col-xl-12">
+                          <table class="info_table">
+                            <thead>
+                              <tr>
+                                <th class="branch_search_font label_position lab_padding">Creator</th>
+                                <th class="branch_search_font label_position lab_padding" id="updatorHead" hidden>Updator</th>
+                                <th class="branch_search_font label_position lab_padding" id="approverHead" hidden>Approver</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td id="creatorContent">
+                                  <label class="image_position" for="user_image"><span id="creatorUserImage"></span></label>
+                                  <input id="creatorUserEmail" disabled>
+                                  <input id="creatorCreatedBy" disabled>
+                                  <input id="creatorCreatedAt" disabled>
+                                </td>
+                                <td id="updatorContent" hidden>
+                                  <label for="user_image"><span id="updatorUserImage"></span></label>
+                                  <input id="updatorUserEmail" disabled>
+                                  <input id="updatorUpdateBy" disabled>
+                                  <input id="updatorUpdateAt" disabled>
+                                </td>
+                                <td id="approverContent" hidden>
+                                  <label for="user_image"><span id="approverUserImage"></span></label>
+                                  <input id="approverUserEmail" disabled>
+                                  <input id="approverApprover" disabled>
+                                  <input id="approverUpdateAt" disabled>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <table class="info_table">
-                                  <thead>
-                                    <tr>
-                                      <th class="branch_font label_position">Creator</th>
-                                      <th class="branch_font label_position" id="secondHead" hidden>Updator</th>
-                                      <th class="branch_font label_position" id="thirdHead" hidden>Approver</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td class="branch_font" id="firstContent">
-                                        <label class="image_position" for="user_image"><span id="firstUserImage"></span></label>
-                                        <input id="firstUserEmail" disabled>
-                                        <input id="firstCreatedBy" disabled>
-                                        <input id="firstCreatedAt" disabled>
-                                      </td>
-                                      <td class="branch_font" id="secondContent" hidden>
-                                        <label for="user_image"><span id="secondUserImage"></span></label>
-                                        <input id="secondUserEmail" disabled>
-                                        <input id="secondUpdateBy" disabled>
-                                        <input id="secondUpdateAt" disabled>
-                                      </td>
-                                      <td class="branch_font" id="thirdContent" hidden>
-                                        <label for="user_image"><span id="thirdUserImage"></span></label>
-                                        <input id="thirdUserEmail" disabled>
-                                        <input id="thirdApprover" disabled>
-                                        <input id="thirdUpdateAt" disabled>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                            </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xl-12">
+                          <table class="branch_table">
+                            <thead>
+                              <tr>
+                                <th class="branch_search_font label_position"></th>
+                                <th class="branch_search_font label_position"></th>
+                                <th class="branch_search_font label_position"></th>
+                                <th class="branch_search_font label_position"></th>
+                              </tr>
+                              <tr>
+                                <th colspan="2" class="branch_info_head"> Branch Information</th>
+                              </tr>
+                            </thead>
+                            <tbody class="branch_table_body">
+                              <tr class="fist_row">
+                                <td class="first_column">Branch-ID<input type="text" id="brnch_id" disabled></td>
+                                <td class="second_column">District<input type="text" id="district_id" disabled></td>
+                              </tr>
+                              <tr>
+                                <td class="first_column">Branch-Name<input type="text" id="branch_name" disabled></td>
+                                <td class="second_column">Upazila<input type="text" id="upazila_id" disabled></td>
+                              </tr>
+                              <tr>
+                                <td class="first_column">Branch-Type<input type="text" id="branch_type" disabled></td>
+                                <td class="second_column">City-Name<input type="text" id="town_name" disabled></td>
+                              </tr>
+                              <tr>
+                                <td class="first_column">Division<input type="text" id="division_id" disabled></td>
+                                <td colspan="2" class="second_column">Loaction<input type="text" id="location" disabled></td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
+                      </div>
                     </div>
                   </div>
                 </div>

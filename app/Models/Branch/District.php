@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Branch\Division;
 use App\Models\Branch\ThanaOrUpazila;
+use App\Models\Branch\Branch;
 
 class District extends Model
 {
@@ -24,5 +25,10 @@ class District extends Model
     public function upazilas()
     {
         return $this->hasMany(ThanaOrUpazila::class, 'district_id');
+    }
+
+    public function branches()
+    {
+        return $this->hasMany(Branch::class, 'district_id', 'id');
     }
 }
