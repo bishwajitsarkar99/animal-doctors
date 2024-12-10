@@ -4,7 +4,7 @@ div#access_modal_box{
     background: none;
     border: none;
 }
-div#processModal_body {
+.body_area {
     width: 400px;
 }
 .progress-bar-processing {
