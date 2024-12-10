@@ -4,6 +4,11 @@
     buttonLoader();
 
     $(document).ready(function(){
+        // Initialize role fetch
+        fetch_role_one();
+        fetch_role_two();
+        fetch_user_email_one();
+        fetch_user_email_two();
         // Initialize the button loader for the login button
         buttonLoader('#access_btn', '.access-icon', '.access-btn-text', 'Access...', 'Access', 1000);
         buttonLoader('#access_btn_confirm', '.access-confirm-icon', '.access-confirm-btn-text', 'Confirm...', 'Confirm', 1000);
@@ -22,22 +27,22 @@
                     placeholder: 'Select Role Play',
                     allowClear: true
                 });
-            }else if ($(this).attr('id') === 'admin_role_id') {
+            }else if ($(this).attr('id') === 'select_role_one') {
                 $(this).select2({
                     placeholder: 'Select Admin Role Name...................................',
                     allowClear: true
                 });
-            }else if ($(this).attr('id') === 'sub_admin_role_id') {
+            }else if ($(this).attr('id') === 'select_role_two') {
                 $(this).select2({
                     placeholder: 'Select Sub Role Name........................................',
                     allowClear: true
                 });
-            }else if ($(this).attr('id') === 'admin_email_id') {
+            }else if ($(this).attr('id') === 'select_email_one') {
                 $(this).select2({
                     placeholder: 'Select Admin Email Address.............................',
                     allowClear: true
                 });
-            }else if ($(this).attr('id') === 'sub_admin_email_id') {
+            }else if ($(this).attr('id') === 'select_email_two') {
                 $(this).select2({
                     placeholder: 'Select Sub Admin Email Address....................',
                     allowClear: true
@@ -51,16 +56,16 @@
         $('#role_type').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search role play...');
         });
-        $('#admin_role_id').on('select2:open', function() {
+        $('#select_role_one').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search role...');
         });
-        $('#sub_admin_role_id').on('select2:open', function() {
+        $('#select_role_two').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search role...');
         });
-        $('#admin_email_id').on('select2:open', function() {
+        $('#select_email_one').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search email...');
         });
-        $('#sub_admin_email_id').on('select2:open', function() {
+        $('#select_email_two').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search email...');
         });
 
@@ -73,6 +78,7 @@
                 $("#adminRole").removeAttr('hidden');
                 $("#adminEmail").removeAttr('hidden');
                 $("#adminstatus").removeAttr('hidden');
+                $("#adminStTwo").attr('hidden', true);  
             }else{
                 $("#adminRole").attr('hidden', true);
                 $("#adminEmail").attr('hidden', true);
@@ -82,15 +88,23 @@
                 $("#subAdminRole").removeAttr('hidden');
                 $("#subAdminEmail").removeAttr('hidden');
                 $("#subAdminstatus").removeAttr('hidden');
+                $("#subAdminStTwo").attr('hidden', true);
             }else{
                 $("#subAdminRole").attr('hidden', true);
                 $("#subAdminEmail").attr('hidden', true);
                 $("#subAdminstatus").attr('hidden', true);
             }
+            // if value empty
+            if(roleValue == ''){
+                $("#adminSt").attr('hidden', true); 
+                $("#subAdminSt").attr('hidden', true);
+                $("#admin_approval_status").prop('checked', false);
+                $("#sub_admin_approval_status").prop('checked', false);
+            }
         });
 
+        // Checkbox for Admin
         $(document).on('click', '#admin_approval_status', function() {
-
             var isChecked = $(this).prop('checked'); 
 
             if (isChecked) {
@@ -99,6 +113,19 @@
             } else {
                 $("#adminSt").attr('hidden', true);
                 $("#adminStTwo").removeAttr('hidden').slideDown();
+            }
+        });
+
+        // Checkbox for Sub Admin
+        $(document).on('click', '#sub_admin_approval_status', function() {
+            var isChecked = $(this).prop('checked'); 
+
+            if (isChecked) {
+                $("#subAdminSt").removeAttr('hidden').slideDown();
+                $("#subAdminStTwo").attr('hidden', true);
+            } else {
+                $("#subAdminSt").attr('hidden', true);
+                $("#subAdminStTwo").removeAttr('hidden').slideDown();
             }
         });
 
@@ -147,6 +174,7 @@
             }
             if(select == ''){
                 $('#documents').attr('hidden', true);
+                $('#branches_id').val("");
             }
             
             $.ajax({
@@ -287,6 +315,7 @@
                         }
 
                         $('#branches_id').val(id);
+                        $('#get_branch_id').val(response.messages.branch_id);
                         $('#brnch_id').val(response.messages.branch_id);
                         $('#branch_name').val(response.messages.branch_name);
                         $('#branch_type').val(response.messages.branch_type);
@@ -295,6 +324,34 @@
                         $('#upazila_id').val(response.messages.thana_or_upazilas.thana_or_upazila_name);
                         $('#town_name').val(response.messages.town_name);
                         $('#location').val(response.messages.location);
+
+                        $('.admin_role_id').val(response.messages.admin_role_id).trigger('change.select2');
+                        $('.sub_admin_role_id').val(response.messages.sub_admin_role_id).trigger('change.select2');
+                        fetch_user_email_one(response.messages.admin_role_id);
+                        fetch_user_email_two(response.messages.sub_admin_role_id);
+                        setTimeout(() => {
+                            $('.admin_email_id').val(response.messages.admin_email_id).trigger('change.select2');
+                            $('.sub_admin_email_id').val(response.messages.sub_admin_email_id).trigger('change.select2');
+                        }, 500);
+                        if(response.messages.admin_approval_status == 1){
+                            $("#adminSt").removeAttr('hidden').slideDown();
+                            $("#adminStTwo").attr('hidden', true);
+                            $('#admin_approval_status').prop('checked', response.messages.admin_approval_status == 1);
+                        }
+                        else{
+                            $("#adminSt").attr('hidden', true);
+                            $("#adminStTwo").attr('hidden', true);
+                            $('#admin_approval_status').prop('checked', false);
+                        }
+                        if(response.messages.sub_admin_approval_status == 1){
+                            $("#subAdminSt").removeAttr('hidden').slideDown();
+                            $("#subAdminStTwo").attr('hidden', true);
+                            $('#sub_admin_approval_status').prop('checked', response.messages.sub_admin_approval_status == 1);
+                        }else{
+                            $("#subAdminSt").attr('hidden', true);
+                            $("#subAdminStTwo").attr('hidden', true);
+                            $('#sub_admin_approval_status').prop('checked', false);
+                        }
                         
                     }
                     
@@ -302,6 +359,113 @@
             });
         });
 
+        // Admin Branch Access
+        $(document).on('click', '#access_btn', function(e){
+            e.preventDefault();
 
+            var id = $("#branches_id").val();
+
+            var branchID = $("#get_branch_id").val();
+            var adminRole = $("#select_role_one").val();
+            var subAdminRole = $("#select_role_two").val();
+            var adminEmail = $("#select_email_one").val();
+            var subAdminEmail = $("#select_email_two").val();
+            var adminApprovalStatus = $("input[name='admin_approval_status']:checked").val();
+            var subAdminApprovalStatus = $("input[name='sub_admin_approval_status']:checked").val();
+
+            const current_url = "{{route('access_status.action')}}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: current_url,
+                dataType: 'json',
+                data: {
+                    id: id,
+                    branch_id: branchID,
+                    admin_role_id: adminRole,
+                    sub_admin_role_id: subAdminRole,
+                    admin_email_id: adminEmail,
+                    sub_admin_email_id: subAdminEmail,
+                    admin_approval_status: adminApprovalStatus ? 1 : 0,
+                    sub_admin_approval_status: subAdminApprovalStatus ? 1 : 0,
+                },
+                success: function(response) {
+                    $("#accessconfirmbranch").modal('show');
+                    $("#processingProgress").removeAttr('hidden');
+                    
+                    if (response.status === 202) {
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#processingProgress").attr('hidden', true);
+                            $('#updateForm_error').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $("#success_message").text(response.messages).show();
+                            $("#select_branch_search").val("").trigger('change');
+                            $("#role_type").val("").trigger('change');
+                            $("#select_role_one").val("").trigger('change');
+                            $("#select_role_two").val("").trigger('change');
+                            $("#select_email_one").val("").trigger('change');
+                            $("#select_email_two").val("").trigger('change');
+
+                            $("#admin_approval_status").prop("checked", false);
+                            $("#sub_admin_approval_status").prop("checked", false);
+                            $("#adminSt").attr('hidden', true);
+                            $("#adminStTwo").attr('hidden', true);
+                            $("#subAdminSt").attr('hidden', true);
+                            $("#subAdminStTwo").attr('hidden', true);
+
+                            setTimeout(() => {
+                                $("#success_message").fadeOut();
+                                fetch_branch();
+                            }, 3000);
+                        }, 5000);
+                    } 
+                },
+                error: function(xhr) {
+                    $("#updateForm_error").removeClass('display-none');
+                    $("#select_branch_search").next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                    if (xhr.status === 400) {
+                        const errors = xhr.responseJSON.errors;
+                        console.error(errors);
+                        $.each(errors, function(key, err_value) {
+                            if (key === 'branch_id') {
+                                $("#updateForm_error").fadeIn();
+                                $('#updateForm_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#updateForm_error").addClass("alert_show_errors");
+                                $('#select_branch_search').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                            }
+                        });
+                    } else {
+                        console.error('Error:', xhr.responseText);
+                        //alert('An unexpected error occurred.');
+                    }
+                }
+            });
+
+        });
+
+        // Validation Error Handle
+        $(document).on('change', '#select_branch_search', function(){
+
+            var selectedValue = $(this).val();
+
+            if(selectedValue !== '' ){
+                $("#select_branch_search").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                $("#role_type").removeAttr('disabled');
+                $("#updateForm_error").addClass('display-none');
+            }
+            if(selectedValue == ''){
+                $("#role_type").attr('disabled', true);
+            }
+
+        });
     });
 </script>

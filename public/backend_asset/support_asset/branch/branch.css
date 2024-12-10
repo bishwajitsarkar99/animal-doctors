@@ -260,3 +260,21 @@ table.info_table {
 input#admin_approval_status,input#sub_admin_approval_status {
     cursor: pointer;
 }
+span#adminSt {
+    color: green;
+    font-weight: 600;
+}
+span#adminStTwo {
+    color: orangered;
+    font-weight: 600;
+}
+label#subAdminSt {
+    color: green;
+    font-weight: 600;
+}
+label#subAdminStTwo {
+    color: orangered;
+    font-weight: 600;
+}
+
+

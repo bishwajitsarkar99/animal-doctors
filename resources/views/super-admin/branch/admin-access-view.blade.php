@@ -17,57 +17,53 @@
                       <select type="text" class="form-control form-control-sm select_branch_search select2" name="branch_name" id="select_branch_search">
                         <option value="">Select Company Branch Name</option>
                       </select>
+                      <span id="updateForm_error"></span>
                       <input type="hidden" id="branches_id">
+                      <input type="hidden" name="branch_id" id="get_branch_id">
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton">
                       <label class="catg_name_label label_position" for="mail-transport">Select Role Play</label>
-                      <select type="text" class="form-control form-control-sm role_type select2" name="role_type" id="role_type">
+                      <select type="text" class="form-control form-control-sm role_type select2" name="role_type" id="role_type" disabled>
                         <option value="">Select Role Play</option>
                         <option value="Admin Role">Coordinator</option>
                         <option value="Sub Admin Role">Subordinator</option>
                       </select>
-                      <span id="savForm_error2"></span><span id="updateForm_error2"></span>
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton" id="adminRole" hidden>
                       <label class="catg_name_label label_position" for="mail-transport">Role Name</label><br>
-                      <select type="text" class="form-control form-control-sm admin_role_id select2" name="admin_role_id" id="admin_role_id">
+                      <select type="text" class="form-control form-control-sm admin_role_id select2" name="admin_role_id" id="select_role_one">
                         <option value="">Select Admin Role Name...................................</option>
                       </select>
-                      <span id="savForm_error3"></span><span id="updateForm_error3"></span>
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton" id="subAdminRole" hidden>
                       <label class="catg_name_label label_position" for="mail-transport">Role Name</label><br>
-                      <select type="text" class="form-control form-control-sm sub_admin_role_id select2" name="sub_admin_role_id" id="sub_admin_role_id">
+                      <select type="text" class="form-control form-control-sm sub_admin_role_id select2" name="sub_admin_role_id" id="select_role_two">
                         <option value="">Select Sub Role Name........................................</option>
                       </select>
-                      <span id="savForm_error3"></span><span id="updateForm_error3"></span>
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton" id="adminEmail" hidden>
                       <label class="catg_name_label label_position" for="mail-transport">Email Address</label><br>
-                      <select type="text" class="form-control form-control-sm admin_email_id select2" name="admin_email_id" id="admin_email_id">
+                      <select type="text" class="form-control form-control-sm admin_email_id select2" name="admin_email_id" id="select_email_one">
                         <option value="">Select Admin Email Address.............................</option>
                       </select>
-                      <span id="savForm_error4"></span><span id="updateForm_error4"></span>
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton" id="subAdminEmail" hidden>
                       <label class="catg_name_label label_position" for="mail-transport">Email Address</label><br>
-                      <select type="text" class="form-control form-control-sm sub_admin_email_id select2" name="sub_admin_email_id" id="sub_admin_email_id">
+                      <select type="text" class="form-control form-control-sm sub_admin_email_id select2" name="sub_admin_email_id" id="select_email_two">
                         <option value="">Select Sub Admin Email Address....................</option>
                       </select>
-                      <span id="savForm_error4"></span><span id="updateForm_error4"></span>
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton" id="adminstatus" hidden>
                       <label class="catg_name_label label_position" for="status">Sataus</label>
                       <input type="checkbox" class="admin_approval_status" name="admin_approval_status" id="admin_approval_status" value="1" />
                       <span class="catg_name_label label_position" for="status" id="adminSt" hidden>Justify</span>
                       <span class="catg_name_label label_position" for="status" id="adminStTwo" hidden>Deny</span>
-                      <span id="savForm_error4"></span><span id="updateForm_error4"></span>
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton" id="subAdminstatus" hidden>
                       <label class="catg_name_label label_position" for="status">Sataus</label>
-                      <input type="checkbox" class="sub_admin_approval_status" name="sub_admin_approval_status" id="sub_admin_approval_status" />
-                      <label class="catg_name_label label_position" for="status" id="subAdminSt"></label>
-                      <span id="savForm_error4"></span><span id="updateForm_error4"></span>
+                      <input type="checkbox" class="sub_admin_approval_status" name="sub_admin_approval_status" id="sub_admin_approval_status" value="1" />
+                      <label class="catg_name_label label_position" for="status" id="subAdminSt" hidden>Justify</label>
+                      <label class="catg_name_label label_position" for="status" id="subAdminStTwo" hidden>Deny</label>
                     </div>
                   </div>
                   <div class="col-xl-8">
@@ -170,46 +166,18 @@
       
     </div>
   </div>
-
-  {{-- start confirm access modal --}}
-  <div class="modal fade" id="accessconfirmbranch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-      <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
-        <div class="modal-header" id="logoutModal_header">
-          <h6 class="modal-title admin_title scan access_title branch-skeleton pt-1" id="staticBackdropLabel">
-            Branch Access
-          </h6>
-          <button type="button" class="btn-close btn-btn-sm head_btn_access_close head_btn3 branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
-            data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
-          </button>
-          </div>
-          <div class="modal-body" id="logoutModal_body">
-            <p class="admin_paragraph branch-skeleton" style="text-align:center;" id="access_text_message">
-              <label class="label_user_edit" id="cate_confirm_update" for="id">Are you confirm or cancel ? </label>
-            </p>
-          </div>
-          <div class="modal-footer" id="logoutModal_footer">
-            <button id="access_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus branch-skeleton">
-              <span class="access-confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-              <span class="access-confirm-btn-text">Confirm</span>
-            </button>
-            <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus branch-skeleton" id="acces_delete" data-bs-dismiss="modal">Cancel</button>
-          </div>    
-        </div>
-      </div>
-    </div>
-  </div>
-  {{-- end confirm access modal --}}
+@include('loader.action-loader')
 @endsection
 
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/branch/branch.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @push('scripts')
-@include('division-district-upazila.ajax')
+@include('fetch-api.branch.branch-role-user-fetch.ajax')
 @include('super-admin.branch.ajax.admin-access-ajax')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>

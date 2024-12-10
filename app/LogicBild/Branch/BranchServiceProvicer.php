@@ -282,7 +282,62 @@ class BranchServiceProvicer
     */
     public function accessBranchAdmin(Request $request)
     {
-        //
+        // Validation
+        $validator = Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'admin_role_id' => 'nullable|exists:roles,id',
+            'sub_admin_role_id' => 'nullable|exists:roles,id',
+            'admin_email_id' => 'nullable|exists:users,id',
+            'sub_admin_email_id' => 'nullable|exists:users,id',
+        ], [
+            'branch_id.required' => 'Branch name is required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ], 400);
+        }
+
+        $auth = Auth::user();
+        $approvalDate = now();
+
+        $branch = Branch::find($request->id);
+        if (!$branch) {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'Branch not found.',
+            ], 404);
+        }
+
+        $branch->branch_id = $request->branch_id;
+        $branch->admin_role_id = $request->admin_role_id;
+        $branch->sub_admin_role_id = $request->sub_admin_role_id;
+        $branch->admin_email_id = $request->admin_email_id;
+        $branch->sub_admin_email_id = $request->sub_admin_email_id;
+        $branch->admin_approval_status = $request->admin_approval_status;
+        $branch->sub_admin_approval_status = $request->sub_admin_approval_status;
+        $branch->approver_by = $auth->id;
+
+        if ($branch->admin_approval_status == 1) {
+            $branch->admin_approver_date = $approvalDate;
+        } else {
+            $branch->admin_approver_date = null;
+        }
+
+        if ($branch->sub_admin_approval_status == 1) {
+            $branch->sub_admin_approver_date = $approvalDate;
+        } else {
+            $branch->sub_admin_approver_date = null;
+        }
+
+        $branch->save();
+
+        return response()->json([
+            'status' => 202,
+            'messages' => 'The branch access has been done.',
+        ], 202);
     }
 
     /**

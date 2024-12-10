@@ -395,4 +395,56 @@ class AuthService
             return back()->with('error', 'Failed to send verification email. Please try again.');
         }
     }
+    /**
+     * Handle User Role Fetch.
+    */
+    public function fetchRoles(Request $request)
+    {
+        $roles = Role::all();
+
+        return response()->json([
+            'roles' => $roles,
+        ], 200);
+    }
+    /**
+     * Handle User Email Fetch.
+    */
+    public function fetchEmails(Request $request, $id)
+    {
+        $users = User::whereHas('roles', function ($query) use ($id) {
+            $query->where('id', $id);
+        })->get();
+
+        return response()->json([
+            'users' => $users,
+        ], 200);
+    }
+
+    /**
+     * Handle User Email Fetch.
+    */
+    public function fetchEmailOnes(Request $request, $id)
+    {
+        $users = User::whereHas('roles', function ($query) use ($id) {
+            $query->where('id', $id);
+        })->get();
+
+        return response()->json([
+            'users' => $users,
+        ], 200);
+    }
+
+    /**
+     * Handle User Email Fetch.
+    */
+    public function fetchEmailTwos(Request $request, $id)
+    {
+        $users = User::whereHas('roles', function ($query) use ($id) {
+            $query->where('id', $id);
+        })->get();
+
+        return response()->json([
+            'users' => $users,
+        ], 200);
+    }
 }

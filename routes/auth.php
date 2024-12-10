@@ -75,3 +75,12 @@ Route::get('/admin-logout', [AuthController::class, 'adminLogout'])->name('admin
 Route::get('/accounts-logout', [AuthController::class, 'accountsLogout'])->name('accountsLogout');
 // Common User Logout Route (POST is more secure for state-changing operations)
 Route::get('/common-user-logout', [AuthController::class, 'commonUserLogout'])->name('commonUserLogout');
+// Fetch Role and User Email
+Route::group(['middleware' => 'auth'], function (){
+    Route::prefix('users')->group(function (){
+        Route::get('/fetch-role', [AuthController::class, 'fetchRole'])->name('fetch_role.action');
+        Route::get('/fetch-email/{id}', [AuthController::class, 'fetchEmail'])->name('fetch_email.action');
+        Route::get('/fetch-email-one/{id}', [AuthController::class, 'fetchEmailOne'])->name('fetch_email_one.action');
+        Route::get('/fetch-email-two/{id}', [AuthController::class, 'fetchEmailTwo'])->name('fetch_email_two.action');
+    });
+});

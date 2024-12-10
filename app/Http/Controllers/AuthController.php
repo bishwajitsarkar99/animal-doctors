@@ -14,6 +14,31 @@ class AuthController extends Controller
     {
         $this->authService = $authService;
     }
+
+    // Fetch Role
+    public function fetchRole(Request $request)
+    {
+        return $this->authService->fetchRoles($request);
+    }
+
+    // Fetch Role
+    public function fetchEmail(Request $request, $id)
+    {
+        return $this->authService->fetchEmails($request, $id);
+    }
+
+    // Fetch Role One
+    public function fetchEmailOne(Request $request, $id)
+    {
+        return $this->authService->fetchEmailOnes($request, $id);
+    }
+
+    // Fetch Role Two
+    public function fetchEmailTwo(Request $request, $id)
+    {
+        return $this->authService->fetchEmailTwos($request, $id);
+    }
+
     // load register page
     public function loadRegister()
     {
