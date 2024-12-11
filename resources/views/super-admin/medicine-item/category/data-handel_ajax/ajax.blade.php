@@ -258,16 +258,28 @@
                             $('#savForm_error').fadeIn();
                         });
                     } else {
-                        $('#savForm_error').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
-                        $('#category_name').val("");
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+
                         setTimeout(() => {
-                            $('#success_message').fadeOut(3000);
-                        }, 5000);
-                        fetch_category_data();
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            $('#savForm_error').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $('#success_message').text(response.messages);
+                            $('#category_name').val("");
+                            setTimeout(() => {
+                                $('#success_message').fadeOut(3000);
+                            }, 5000);
+                            fetch_category_data();
+                            
+                        }, 1500);
                     }
 
                 }
@@ -354,17 +366,28 @@
                         $('#success_message').addClass('alert_show ps-1 pe-1');
                         $('#success_message').text(response.messages);
                     } else {
-                        $('#updateForm_errorList').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
-                        $('.edit_category_name').val("");
-                        setTimeout(() => {
-                            $('#success_message').fadeOut();
-                        }, 5000);
+                        $("#accessconfirmbranch").modal('show');
                         $("#updateconfirmcategory").modal('hide');
-                        fetch_category_data();
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            $('#updateForm_errorList').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $('#success_message').text(response.messages);
+                            $('.edit_category_name').val("");
+                            setTimeout(() => {
+                                $('#success_message').fadeOut();
+                            }, 5000);
+                            fetch_category_data();
+                            
+                        }, 1500);
                     }
                 }
             });
@@ -443,16 +466,28 @@
                 type: "DELETE",
                 url: "/delete-category/" + category_id,
                 success: function(response) {
-                    $('#success_message').addClass('alert_show ps-1 pe-1');
-                    $('#success_message').fadeIn();
-                    $('#success_message').text(response.messages);
-                    setTimeout(() => {
-                        $('#success_message').fadeOut();
-                    }, 5000);
+                    $("#accessconfirmbranch").modal('show');
                     $('#deletecategory').modal('hide');
                     $('#deleteconfirmcategory').modal('hide');
+                    $("#pageLoader").removeAttr('hidden');
+                    $("#access_modal_box").addClass('loader_area');
+                    $("#processModal_body").removeClass('loading_body_area');
 
-                    fetch_category_data();
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#pageLoader").attr('hidden', true);
+                        $("#access_modal_box").removeClass('loader_area');
+                        $("#processModal_body").addClass('loading_body_area');
+                        $('#success_message').addClass('alert_show ps-1 pe-1');
+                        $('#success_message').fadeIn();
+                        $('#success_message').text(response.messages);
+                        setTimeout(() => {
+                            $('#success_message').fadeOut();
+                        }, 5000);
+    
+                        fetch_category_data();
+                        
+                    }, 1500);
                 }
 
             });

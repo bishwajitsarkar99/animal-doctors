@@ -318,18 +318,21 @@ class BranchServiceProvicer
         $branch->sub_admin_email_id = $request->sub_admin_email_id;
         $branch->admin_approval_status = $request->admin_approval_status;
         $branch->sub_admin_approval_status = $request->sub_admin_approval_status;
-        $branch->approver_by = $auth->id;
 
         if ($branch->admin_approval_status == 1) {
             $branch->admin_approver_date = $approvalDate;
+            $branch->approver_by = $auth->id;
         } else {
             $branch->admin_approver_date = null;
+            $branch->approver_by = null;
         }
 
         if ($branch->sub_admin_approval_status == 1) {
             $branch->sub_admin_approver_date = $approvalDate;
+            $branch->approver_by = $auth->id;
         } else {
             $branch->sub_admin_approver_date = null;
+            $branch->approver_by = null;
         }
 
         $branch->save();

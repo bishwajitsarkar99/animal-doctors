@@ -104,11 +104,6 @@
             // Search ID
             var id = select;
 
-            if(select !== ''){
-                $('.edit_branch_id').removeAttr('hidden');
-                $('#documents').removeAttr('hidden');
-                
-            }
             if(select == ''){
                 $('.edit_branch_id').attr('hidden', true);
                 $('#documents').attr('hidden', true);
@@ -124,149 +119,164 @@
                         $('#success_message').addClass('alert alert-danger');
                         $('#success_message').text(response.messages);
                     }else if(response.status == 200){
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        $('#documents').attr('hidden', true);
+                        $('.edit_branch_id').attr('hidden', true);
 
-                        const messages = response.messages;
-                        
-                        if(messages.created_by !== ''){
-                            const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/image/${messages.created_users.image}`;
-                            let createdByRole;
-                            switch (messages.created_by) {
-                                case 1:
-                                    createdByRole = 'SuperAdmin';
-                                    break;
-                                case 2:
-                                    createdByRole = 'Sub-Admin';
-                                    break;
-                                case 3:
-                                    createdByRole = 'Admin';
-                                    break;
-                                case 0:
-                                    createdByRole = 'User';
-                                    break;
-                                case 5:
-                                    createdByRole = 'Accounts';
-                                    break;
-                                case 6:
-                                    createdByRole = 'Marketing';
-                                    break;
-                                case 7:
-                                    createdByRole = 'Delivery Team';
-                                    break;
-                                default:
-                                    createdByRole = 'Unknown';
-                            }
-                            $("#firstUserImage").html(`<img class="user_img rounded-square users_image position" src="${firstUserImage}">`);
-
-                            $("#firstUserEmail").val(messages.created_users.email);
-                            $("#firstCreatedBy").val(createdByRole);
-                            if(messages.created_at !== ''){
-                                $("#firstCreatedAt").val(currentDate(messages.created_at));
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            $('#documents').removeAttr('hidden');
+                            $('.edit_branch_id').removeAttr('hidden');
+                            
+                            const messages = response.messages;
+                            
+                            if(messages.created_by !== ''){
+                                const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/image/${messages.created_users.image}`;
+                                let createdByRole;
+                                switch (messages.created_by) {
+                                    case 1:
+                                        createdByRole = 'SuperAdmin';
+                                        break;
+                                    case 2:
+                                        createdByRole = 'Sub-Admin';
+                                        break;
+                                    case 3:
+                                        createdByRole = 'Admin';
+                                        break;
+                                    case 0:
+                                        createdByRole = 'User';
+                                        break;
+                                    case 5:
+                                        createdByRole = 'Accounts';
+                                        break;
+                                    case 6:
+                                        createdByRole = 'Marketing';
+                                        break;
+                                    case 7:
+                                        createdByRole = 'Delivery Team';
+                                        break;
+                                    default:
+                                        createdByRole = 'Unknown';
+                                }
+                                $("#firstUserImage").html(`<img class="user_img rounded-square users_image position" src="${firstUserImage}">`);
+    
+                                $("#firstUserEmail").val(messages.created_users.email);
+                                $("#firstCreatedBy").val(createdByRole);
+                                if(messages.created_at !== ''){
+                                    $("#firstCreatedAt").val(currentDate(messages.created_at));
+                                }else{
+                                    $("#firstCreatedAt").val('-');
+                                }
+                            } 
+                            if(messages.updated_by !== null){
+                                $("#secondContent").removeAttr('hidden');
+                                $('#secondHead').removeAttr('hidden');
+                                const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/image/${messages.updated_users.image}`;
+                                let updatedByRole;
+                                switch (messages.updated_by) {
+                                    case 1:
+                                        updatedByRole = 'SuperAdmin';
+                                        break;
+                                    case 2:
+                                        updatedByRole = 'Sub-Admin';
+                                        break;
+                                    case 3:
+                                        updatedByRole = 'Admin';
+                                        break;
+                                    case 0:
+                                        updatedByRole = 'User';
+                                        break;
+                                    case 5:
+                                        updatedByRole = 'Accounts';
+                                        break;
+                                    case 6:
+                                        updatedByRole = 'Marketing';
+                                        break;
+                                    case 7:
+                                        updatedByRole = 'Delivery Team';
+                                        break;
+                                    default:
+                                        updatedByRole = 'Unknown';
+                                }
+                                $("#secondUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
+    
+                                $("#secondUserEmail").val((messages.updated_users.email));
+                                $("#secondUpdateBy").val(updatedByRole);
+                                if(messages.created_at !== messages.updated_at){
+                                    $("#secondUpdateAt").val(currentDate(messages.updated_at));
+                                }else{
+                                    $("#secondUpdateAt").val('-');
+                                }
                             }else{
-                                $("#firstCreatedAt").val('-');
+                                $("#secondContent").attr('hidden', true);
+                                $('#secondHead').attr('hidden', true);
                             }
-                        } 
-                        if(messages.updated_by !== null){
-                            $("#secondContent").removeAttr('hidden');
-                            $('#secondHead').removeAttr('hidden');
-                            const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/image/${messages.updated_users.image}`;
-                            let updatedByRole;
-                            switch (messages.updated_by) {
-                                case 1:
-                                    updatedByRole = 'SuperAdmin';
-                                    break;
-                                case 2:
-                                    updatedByRole = 'Sub-Admin';
-                                    break;
-                                case 3:
-                                    updatedByRole = 'Admin';
-                                    break;
-                                case 0:
-                                    updatedByRole = 'User';
-                                    break;
-                                case 5:
-                                    updatedByRole = 'Accounts';
-                                    break;
-                                case 6:
-                                    updatedByRole = 'Marketing';
-                                    break;
-                                case 7:
-                                    updatedByRole = 'Delivery Team';
-                                    break;
-                                default:
-                                    updatedByRole = 'Unknown';
-                            }
-                            $("#secondUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
-
-                            $("#secondUserEmail").val((messages.updated_users.email));
-                            $("#secondUpdateBy").val(updatedByRole);
-                            if(messages.created_at !== messages.updated_at){
-                                $("#secondUpdateAt").val(currentDate(messages.updated_at));
+                            if(messages.approver_by !== null){
+                                $("#thirdContent").removeAttr('hidden');
+                                $('#thirdHead').removeAttr('hidden');
+                                const secondUserImage = messages.approver_users.image.includes('https://') ? messages.approver_users.image : `${window.location.origin}/image/${messages.approver_users.image}`;
+                                let approverByRole;
+                                switch (messages.approver_by) {
+                                    case 1:
+                                        approverByRole = 'SuperAdmin';
+                                        break;
+                                    case 2:
+                                        approverByRole = 'Sub-Admin';
+                                        break;
+                                    case 3:
+                                        approverByRole = 'Admin';
+                                        break;
+                                    case 0:
+                                        approverByRole = 'User';
+                                        break;
+                                    case 5:
+                                        approverByRole = 'Accounts';
+                                        break;
+                                    case 6:
+                                        approverByRole = 'Marketing';
+                                        break;
+                                    case 7:
+                                        approverByRole = 'Delivery Team';
+                                        break;
+                                    default:
+                                        approverByRole = 'Unknown';
+                                }
+                                $("#thirdUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
+    
+                                $("#thirdUserEmail").val(messages.approver_users.email);
+                                $("#thirdApprover").val(approverByRole);
+                                if(messages.approver_date !== null){
+                                    $("#thirdUpdateAt").val(currentDate(messages.approver_date));
+                                }else if(messages.approver_date == null){
+                                    $("#thirdUpdateAt").val('-');
+                                }
                             }else{
-                                $("#secondUpdateAt").val('-');
+                                $("#thirdContent").attr('hidden', true);
+                                $('#thirdHead').attr('hidden', true);
                             }
-                        }else{
-                            $("#secondContent").attr('hidden', true);
-                            $('#secondHead').attr('hidden', true);
-                        }
-                        if(messages.approver_by !== null){
-                            $("#thirdContent").removeAttr('hidden');
-                            $('#thirdHead').removeAttr('hidden');
-                            const secondUserImage = messages.approver_users.image.includes('https://') ? messages.approver_users.image : `${window.location.origin}/image/${messages.approver_users.image}`;
-                            let approverByRole;
-                            switch (messages.approver_by) {
-                                case 1:
-                                    approverByRole = 'SuperAdmin';
-                                    break;
-                                case 2:
-                                    approverByRole = 'Sub-Admin';
-                                    break;
-                                case 3:
-                                    approverByRole = 'Admin';
-                                    break;
-                                case 0:
-                                    approverByRole = 'User';
-                                    break;
-                                case 5:
-                                    approverByRole = 'Accounts';
-                                    break;
-                                case 6:
-                                    approverByRole = 'Marketing';
-                                    break;
-                                case 7:
-                                    approverByRole = 'Delivery Team';
-                                    break;
-                                default:
-                                    approverByRole = 'Unknown';
-                            }
-                            $("#thirdUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
-
-                            $("#thirdUserEmail").val(messages.approver_users.email);
-                            $("#thirdApprover").val(approverByRole);
-                            if(messages.approver_date !== null){
-                                $("#thirdUpdateAt").val(currentDate(messages.approver_date));
-                            }else if(messages.approver_date == null){
-                                $("#thirdUpdateAt").val('-');
-                            }
-                        }else{
-                            $("#thirdContent").attr('hidden', true);
-                            $('#thirdHead').attr('hidden', true);
-                        }
-
-                        $('#branches_id').val(id);
-                        $('#edit_branch_id').val(response.messages.branch_id);
-                        $('.edit_branch_name').val(response.messages.branch_name);
-                        $('.edit_branch_type').val(response.messages.branch_type).trigger('change.select2');
-                        $('.edit_division_id').val(response.messages.division_id).trigger('change.select2');
-                        fetch_district(response.messages.division_id, function(){
-                            // Set the value once options are available
-                            $('.edit_district_id').val(response.messages.district_id).trigger('change.select2');
-                        });
-                        fetch_upazila(response.messages.district_id, function (){
-                            // Set the value once options are available
-                            $('.edit_upazila_id').val(response.messages.upazila_id).trigger('change.select2');
-                        });
-                        $('.edit_town_name').val(response.messages.town_name);
-                        $('.edit_location').val(response.messages.location);
+    
+                            $('#branches_id').val(id);
+                            $('#edit_branch_id').val(response.messages.branch_id);
+                            $('.edit_branch_name').val(response.messages.branch_name);
+                            $('.edit_branch_type').val(response.messages.branch_type).trigger('change.select2');
+                            $('.edit_division_id').val(response.messages.division_id).trigger('change.select2');
+                            fetch_district(response.messages.division_id, function(){
+                                // Set the value once options are available
+                                $('.edit_district_id').val(response.messages.district_id).trigger('change.select2');
+                            });
+                            fetch_upazila(response.messages.district_id, function (){
+                                // Set the value once options are available
+                                $('.edit_upazila_id').val(response.messages.upazila_id).trigger('change.select2');
+                            });
+                            $('.edit_town_name').val(response.messages.town_name);
+                            $('.edit_location').val(response.messages.location);
+                        }, 1500);
                         
                     }
                     
@@ -375,20 +385,32 @@
                             }
                         });
                     }else{
-                        $('#savForm_error').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+
                         setTimeout(() => {
-                            $('#success_message').fadeOut(3000);
-                        }, 5000);
-                        
-                        clearFields();
-                        fetch_division();
-                        fetch_district();
-                        fetch_upazila();
-                        searchBranch();
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+
+                            $('#savForm_error').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $('#success_message').text(response.messages);
+                            setTimeout(() => {
+                                $('#success_message').fadeOut(3000);
+                            }, 3000);
+                            
+                            clearFields();
+                            fetch_division();
+                            fetch_district();
+                            fetch_upazila();
+                            searchBranch();
+                        }, 1500);
                     }
                 }
             })
@@ -637,16 +659,29 @@
                             $("#updateconfirmbranch").modal('hide').fadeOut();
                         });
                     }else{
-                        $('#updateForm_error').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
-                        $("#updateconfirmbranch").modal('hide').fadeOut();
+                        $("#accessconfirmbranch").modal('show');
+                        $("#updateconfirmbranch").modal('hide');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+
                         setTimeout(() => {
-                            $('#success_message').fadeOut(3000);
-                        }, 5000);
-                        searchBranch();
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            
+                            $('#updateForm_error').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $('#success_message').text(response.messages);
+                            
+                            setTimeout(() => {
+                                $('#success_message').fadeOut(3000);
+                            }, 3000);
+                            searchBranch();
+                        }, 1500);
                     }
                 }
             })
@@ -715,41 +750,35 @@
                 type: "DELETE",
                 url: "/company/branch-delete/" + id,
                 success: function(response){
-                    $('#success_message').addClass('alert_show ps-1 pe-1');
-                    $('#success_message').fadeIn();
-                    $('#success_message').text(response.messages);
-                    $("#select_branch").val("").trigger('change');
-                    clearFields();
-                    setTimeout(() => {
-                        $('#success_message').fadeOut();
-                    }, 5000);
+                    $("#accessconfirmbranch").modal('show');
+                    $("#updateconfirmbranch").modal('hide');
                     $("#deletebranch").modal('hide').fadeOut();
                     $("#deleteconfirmbranch").modal('hide').fadeOut();
-                    searchBranch();
+                    $("#pageLoader").removeAttr('hidden');
+                    $("#access_modal_box").addClass('loader_area');
+                    $("#processModal_body").removeClass('loading_body_area');
+
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#pageLoader").attr('hidden', true);
+                        $("#access_modal_box").removeClass('loader_area');
+                        $("#processModal_body").addClass('loading_body_area');
+
+                        $('#success_message').addClass('alert_show ps-1 pe-1');
+                        $('#success_message').fadeIn();
+                        $('#success_message').text(response.messages);
+                        $("#select_branch").val("").trigger('change');
+                        clearFields();
+                        setTimeout(() => {
+                            $('#success_message').fadeOut();
+                        }, 3000);
+                        
+                        searchBranch();
+                        
+                    }, 1500);
                 }
             });
         });
 
-        // Branch Access Modal Show
-        $(document).on('click', '#access_btn', function(e){
-            e.preventDefault();
-            $("#accessconfirmbranch").modal('show');
-
-            var time = null;
-
-            var time = setTimeout(() => {
-                // Remove skeleton classes
-                removeAttributeOrClass([
-                    { selector: '.access_title, .head_btn_access_close, #access_text_message', type: 'class', name: 'branch-skeleton' },
-                    { selector: '#access_btn_confirm, #acces_delete', type: 'class', name: 'branch-skeleton' },
-                ]);
-            }, 1000);
-
-            // Optional cleanup if this code runs in a specific context
-            return () => {
-                clearTimeout(time);
-            };
-
-        });
     });
 </script>

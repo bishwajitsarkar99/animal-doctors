@@ -4,28 +4,38 @@
         $(document).on('click', '#profile_urllinks', function(e){
 
             e.preventDefault();
-            $("#loader_profile_modal").modal('show').fadeIn(300).delay(300);
-            $("#profile_form").modal('show').fadeIn(300).delay(300);
-
-            addAttributeOrClass([
-                {selector: '#pro_image, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
-                {selector: '#com_address', type: 'class', name: 'address-skeleton'},
-                {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
-            ]);
-
-            var time = null;
-            time = setTimeout(() => {
-                $("#loader_profile_modal").modal('hide');
-                removeAttributeOrClass([
+            $("#accessconfirmbranch").modal('show');
+            $("#pageLoader").removeAttr('hidden');
+            $("#access_modal_box").addClass('loader_area');
+            $("#processModal_body").removeClass('loading_body_area');
+            
+            setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#pageLoader").attr('hidden', true);
+                $("#access_modal_box").removeClass('loader_area');
+                $("#processModal_body").addClass('loading_body_area');
+                
+                $("#profile_form").modal('show').fadeIn(300).delay(300);
+                addAttributeOrClass([
                     {selector: '#pro_image, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
                     {selector: '#com_address', type: 'class', name: 'address-skeleton'},
                     {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
                 ]);
-            }, 1000);
+    
+                var time = null;
+                time = setTimeout(() => {
+                    removeAttributeOrClass([
+                        {selector: '#pro_image, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
+                        {selector: '#com_address', type: 'class', name: 'address-skeleton'},
+                        {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
+                    ]);
+                }, 1000);
+    
+                return ()=>{
+                    clearTimeout(time);
+                }
+            }, 1500);
 
-            return ()=>{
-                clearTimeout(time);
-            }
         });
 
         $(document).on('click', '.dropdown-toggle', ()=>{

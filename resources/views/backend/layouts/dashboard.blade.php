@@ -44,6 +44,7 @@
     @include('backend.layouts.layouts-components._themesetting-modal')
     @include('backend.layouts.layouts-components._logout-modal')
     @include('backend.layouts.layouts-components._profile')
+    @include('loader.action-loader')
     @include('backend.layouts.layouts-components._account-holders')
     @include('backend.layouts.layouts-components._activity-log')
 

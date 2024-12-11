@@ -113,14 +113,18 @@
 
         // search-mode-btn
         $("#search_off_").show();
-        $("#search_on_").hide();
-        $("#orgin_search").hide();
 
-        $("#search_area_").on('click', function(){
-            $("#orgin_search").toggle('slide');
-            $("#orgin_search").focus();
-            $("#search_off_").toggle('slow');
-            $("#search_on_").toggle('slow');
+        $(document).on('click', '#search_area_', function() {
+
+            if ($(this).prop('checked')) {
+                $("#orgin_search").removeAttr('hidden').focus();
+                $("#search_on_").removeAttr('hidden');
+                $("#search_off_").hide();
+            } else {
+                $("#orgin_search").attr('hidden', true);
+                $("#search_on_").attr('hidden', true);
+                $("#search_off_").show();
+            }
         });
 
         // Paginate Page-------------------------------
@@ -163,42 +167,62 @@
 
         // Show-Origin Modal---------------
         $("#showOrigin").on('click', function(){
-            $("#origin").modal('show');
+            $("#accessconfirmbranch").modal('show');
+            $("#pageLoader").removeAttr('hidden');
+            $("#access_modal_box").addClass('loader_area');
+            $("#processModal_body").removeClass('loading_body_area');
+            
+            setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#pageLoader").attr('hidden', true);
+                $("#access_modal_box").removeClass('loader_area');
+                $("#processModal_body").addClass('loading_body_area');
+                $("#origin").modal('show');
+                
+                $("#tb_orgin").addClass('skeleton');
+                $("#search_area_").addClass('skeleton');
+                $("#tb_orgin2").addClass('skeleton');
+                $("#search_off_").addClass('skeleton');
+                $("#orgin_nam").addClass('skeleton');
+                $("#origin_nam2").addClass('skeleton');
+                $("#origin_nam3").addClass('skeleton');
+                $("#origin_nam4").addClass('skeleton');
+                $("#origin_nam5").addClass('skeleton');
+                $("#orgin_table").addClass('skeleton');
+                $("#iteam_label3").addClass('result-skeleton');
+                $("#total_org_records").addClass('skeleton');
+                $("#iteam_label6").addClass('skeleton');
+                $("#iteam_label").addClass('skeleton');
+                $("#iteam_label2").addClass('peritm-skeleton');
+                $("#med_label").addClass('skeleton');
+                $("#origin_get_table_paginate").addClass('paginate-skeleton');
+                $(".head_title2").addClass('skeleton');
+                $(".cols_title2").addClass('skeleton');
+    
+                setTimeout(() => {
+                    $(".head_title2").removeClass('skeleton');
+                    $(".cols_title2").removeClass('skeleton');
+                    $("#tb_orgin").removeClass('skeleton');
+                    $("#search_area_").removeClass('skeleton');
+                    $("#tb_orgin2").removeClass('skeleton');
+                    $("#search_off_").removeClass('skeleton');
+                    $("#orgin_nam").removeClass('skeleton');
+                    $("#origin_nam2").removeClass('skeleton');
+                    $("#origin_nam3").removeClass('skeleton');
+                    $("#origin_nam4").removeClass('skeleton');
+                    $("#origin_nam5").removeClass('skeleton');
+                    $("#orgin_table").removeClass('skeleton');
+                    $("#iteam_label3").removeClass('result-skeleton');
+                    $("#total_org_records").removeClass('skeleton');
+                    $("#iteam_label6").removeClass('skeleton');
+                    $("#iteam_label").removeClass('skeleton');
+                    $("#med_label").removeClass('skeleton');
+                    $("#iteam_label2").removeClass('peritm-skeleton');
+                    $("#origin_get_table_paginate").removeClass('paginate-skeleton');
+                }, 1000);
+    
 
-            var time = null;
-            $("#tb_orgin").addClass('skeleton');
-            $("#search_area_").addClass('skeleton');
-            $("#tb_orgin2").addClass('skeleton');
-            $("#search_off_").addClass('skeleton');
-            $("#orgin_nam").addClass('skeleton');
-            $("#origin_nam2").addClass('skeleton');
-            $("#origin_nam3").addClass('skeleton');
-            $("#origin_nam4").addClass('skeleton');
-            $("#origin_nam5").addClass('skeleton');
-            $("#orgin_table").addClass('skeleton');
-            $("#iteam_label3").addClass('skeleton');
-            $("#total_org_records").addClass('skeleton');
-            $("#iteam_label6").addClass('skeleton');
-
-            time = setTimeout(() => {
-                $("#tb_orgin").removeClass('skeleton');
-                $("#search_area_").removeClass('skeleton');
-                $("#tb_orgin2").removeClass('skeleton');
-                $("#search_off_").removeClass('skeleton');
-                $("#orgin_nam").removeClass('skeleton');
-                $("#origin_nam2").removeClass('skeleton');
-                $("#origin_nam3").removeClass('skeleton');
-                $("#origin_nam4").removeClass('skeleton');
-                $("#origin_nam5").removeClass('skeleton');
-                $("#orgin_table").removeClass('skeleton');
-                $("#iteam_label3").removeClass('skeleton');
-                $("#total_org_records").removeClass('skeleton');
-                $("#iteam_label6").removeClass('skeleton');
-            }, 1000);
-
-            return ()=>{
-                clearTimeout(time);
-            }
+            }, 1500);
         });
 
         // Event Listener for sorting columns

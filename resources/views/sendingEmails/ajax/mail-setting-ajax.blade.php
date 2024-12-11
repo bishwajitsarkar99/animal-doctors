@@ -128,16 +128,27 @@
                         $('#mail_setting_success_messages').addClass('permission_alert_show ps-1 pe-1');
                         $('#mail_setting_success_messages').text(response.messages);
                     } else {
-                        $('#updateForm_errorList').html("");
-                        $('#mail_setting_success_messages').html("");
-                        $('#mail_setting_success_messages').addClass('permission_alert_show ps-1 pe-1');
-                        $('#mail_setting_success_messages').fadeIn();
-                        $('#mail_setting_success_messages').text(response.messages);
-                        $("#mail_setting_success_messages").addClass('background_success_sm');
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
                         setTimeout(() => {
-                            $('#mail_setting_success_messages').fadeOut(3000);
-                        }, 3000);
-                        fetch_mail_setting_data();
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            $('#updateForm_errorList').html("");
+                            $('#mail_setting_success_messages').html("");
+                            $('#mail_setting_success_messages').addClass('permission_alert_show ps-1 pe-1');
+                            $('#mail_setting_success_messages').fadeIn();
+                            $('#mail_setting_success_messages').text(response.messages);
+                            $("#mail_setting_success_messages").addClass('background_success_sm');
+                            setTimeout(() => {
+                                $('#mail_setting_success_messages').fadeOut(3000);
+                            }, 3000);
+                            fetch_mail_setting_data();
+                            
+                        }, 1500);
                     }
                 }
             });

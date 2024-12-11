@@ -2,8 +2,8 @@
   <div class="modal fade" id="accessconfirmbranch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content" id="access_modal_box">
-        <div class="modal-body body_area" id="processModal_body">
-          <div class="loader-login" id="pageLoader" hidden>
+        <div class="modal-body" id="processModal_body">
+          <div class="" id="pageLoader" hidden>
             <img class="modal-loader" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
           </div> 
           <div class="progress ms-2" id="creatingProgress" hidden>

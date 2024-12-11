@@ -36,17 +36,6 @@
       </div>
 
       <div class="modal-body profile-body pb-3" style="background: transparent;background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);">
-        <div class="modal fade" id="loader_profile_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-sm">
-            <div class="modal-content small_modal loader_modal" style="border:none;" id="admin_modal_box">
-              <div class="modal-body" id="loader_modalBody">
-                <div class="">
-                  <img class="modal-loader" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
-                </div> 
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="row profile-heading pb-3">
           <div class="col-xl-4">
             <div class="card-body thumbial-image" id="pro_image">

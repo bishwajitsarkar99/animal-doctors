@@ -143,7 +143,8 @@
       
     </div>
   </div>
-
+  @include('loader.action-loader')
+  
   {{-- start delete modal --}}
   <div class="modal fade" id="deletebranch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -278,6 +279,7 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/branch/branch.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 @endsection
 

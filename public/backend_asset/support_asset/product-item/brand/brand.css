@@ -3,11 +3,20 @@
     --table-head-background:linear-gradient(1deg, #dbd8d8db, transparent 3%, #d3d3d3c4, #d7d7d7db);
     --brand-font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
+.table-responsive {
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: 500px;
+}
 .brand_nme {
     text-align: right;
 }
 span#updateForm_errorList{
     text-align: right;
+}
+label#med_label2 {
+    margin-top: 5px;
 }
 label.tot-search {
     color: black;
@@ -16,7 +25,8 @@ label.tot-search {
     letter-spacing: 0.1px;
     font-family: var(--brand-font-family);
 }
-.skeleton-card-head-capsule-two,.skeleton-card-head-labl-two,.skeleton-card-head-two,.skeleton-card-head-labl{
+.skeleton-card-head-capsule-two,.skeleton-card-head-labl-two,.skeleton-card-head-two,.skeleton-card-head-labl,.result-skeleton,
+.peritm-skeleton{
     position: relative;
 }
 .skeleton-card-head-labl::before{
@@ -79,6 +89,30 @@ label.tot-search {
     100% {
         background-position: 100% 0;
     }
+}
+.result-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 32px;
+    top: 0;
+    width: 80%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+}
+.peritm-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
 }
 .paginate-skeleton,.select-skeleton{
     position: relative;
@@ -165,7 +199,7 @@ select#perItemControls {
     cursor: pointer;
     background-image: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);
     border-radius: 3px;
-    width: 56px;
+    width: 50px;
     font-family: var(--brand-font-family);
     border: 1px solid lightgray;
 }

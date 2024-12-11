@@ -186,14 +186,14 @@
                         $("#accessconfirmbranch").modal('show');
                         $("#pageLoader").removeAttr('hidden');
                         $("#access_modal_box").addClass('loader_area');
-                        $("#processModal_body").removeClass('body_area');
+                        $("#processModal_body").removeClass('loading_body_area');
                         $('#documents').attr('hidden', true);
 
                         setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
                             $("#pageLoader").attr('hidden', true);
                             $("#access_modal_box").removeClass('loader_area');
-                            $("#processModal_body").addClass('body_area');
+                            $("#processModal_body").addClass('loading_body_area');
                             $('#documents').removeAttr('hidden');
 
                             const messages = response.messages;
@@ -362,7 +362,7 @@
                                 $('#sub_admin_approval_status').prop('checked', false);
                             }
                             
-                        }, 3000);
+                        }, 1500);
 
                         
                     }
@@ -440,7 +440,7 @@
                                 $("#success_message").fadeOut();
                                 fetch_branch();
                             }, 3000);
-                        }, 5000);
+                        }, 3000);
                     } 
                 },
                 error: function(xhr) {

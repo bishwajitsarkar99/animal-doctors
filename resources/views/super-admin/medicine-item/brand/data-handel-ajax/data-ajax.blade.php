@@ -288,17 +288,28 @@
                             $('#savForm_error').fadeIn();
                         });
                     } else {
-                        $('#savForm_error').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
-                        $('#brand_name').val("");
-                        $('#origin_id').val("");
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
                         setTimeout(() => {
-                            $('#success_message').fadeOut(3000);
-                        }, 5000);
-                        fetch_brand_data();
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            $('#savForm_error').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $('#success_message').text(response.messages);
+                            $('#brand_name').val("");
+                            $('#origin_id').val("");
+                            setTimeout(() => {
+                                $('#success_message').fadeOut(3000);
+                            }, 5000);
+                            fetch_brand_data();
+                            
+                        }, 1500);
                     }
 
                 }
@@ -404,18 +415,28 @@
                         $('#success_message').addClass('alert_show ps-1 pe-1');
                         $('#success_message').text(response.messages);
                     } else {
-                        $('#updateForm_errorList').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
-                        $('.edit_brand_name').val("");
-                        $('#origin_id').val("");
-                        setTimeout(() => {
-                            $('#success_message').fadeOut(3000);
-                        }, 5000);
+                        $("#accessconfirmbranch").modal('show');
                         $("#updateconfirmbrand").modal('hide');
-                        fetch_brand_data();
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            $('#updateForm_errorList').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $('#success_message').text(response.messages);
+                            $('.edit_brand_name').val("");
+                            $('#origin_id').val("");
+                            setTimeout(() => {
+                                $('#success_message').fadeOut(3000);
+                            }, 5000);
+                            fetch_brand_data();
+                        }, 1500);
                     }
                 }
             });
@@ -490,15 +511,26 @@
                 type: "DELETE",
                 url: "/delete-brand/" + brand_id,
                 success: function(response) {
-                    $('#success_message').addClass('alert_show ps-1 pe-1');
-                    $('#success_message').fadeIn();
-                    $('#success_message').text(response.messages);
-                    setTimeout(() => {
-                        $('#success_message').fadeOut();
-                    }, 3000);
+                    $("#accessconfirmbranch").modal('show');
                     $('#deletebrand').modal('hide');
                     $("#deleteconfirmbrand").modal('hide');
-                    fetch_brand_data();
+                    $("#pageLoader").removeAttr('hidden');
+                    $("#access_modal_box").addClass('loader_area');
+                    $("#processModal_body").removeClass('loading_body_area');
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#pageLoader").attr('hidden', true);
+                        $("#access_modal_box").removeClass('loader_area');
+                        $("#processModal_body").addClass('loading_body_area');
+                        $('#success_message').addClass('alert_show ps-1 pe-1');
+                        $('#success_message').addClass('alert_show ps-1 pe-1');
+                        $('#success_message').fadeIn();
+                        $('#success_message').text(response.messages);
+                        setTimeout(() => {
+                            $('#success_message').fadeOut();
+                        }, 3000);
+                        fetch_brand_data();
+                    }, 1500);
                 }
 
             });
@@ -533,32 +565,6 @@
                     fetch_brand_data('', pagination_url);
                 }
             });
-        });
-
-        // Show-Origin Modal---------------
-        $("#showOrigin").on('click', function(e){
-            e.preventDefault();
-            $("#origin").modal('show');
-            var time = null;
-            $(".head_title2").addClass('skeleton');
-            $(".cols_title2").addClass('skeleton');
-            $(".per_page").addClass('skeleton');
-            $(".select_item").addClass('select-skeleton');
-            $(".item_lab").addClass('skeleton');
-            $("#origin_get_table_paginate").addClass('paginate-skeleton');
-            time = setTimeout(() => {
-                $(".head_title2").removeClass('skeleton');
-                $(".cols_title2").removeClass('skeleton');
-                $(".per_page").removeClass('skeleton');
-                $(".select_item").removeClass('select-skeleton');
-                $(".item_lab").removeClass('skeleton');
-                $("#origin_get_table_paginate").removeClass('paginate-skeleton');
-            }, 1000);
-
-            return ()=>{
-                clearTimeout(time);
-            }
-
         });
 
         $(document).load('click', function(){

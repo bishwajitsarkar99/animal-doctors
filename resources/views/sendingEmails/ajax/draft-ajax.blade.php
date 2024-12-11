@@ -199,7 +199,7 @@
                                             </div>
                                             <div class="col-xl-1">
                                                 <div class="div_close_btn">
-                                                    <button type="button" class="btn-close btn-btn-sm clos_btn2" data-parent="${row.id}" id="viewBtn" value="${row.id}"
+                                                    <button type="button" class="btn-close btn-btn-sm clos_btn2 close_darft_view" data-parent="${row.id}" id="viewBtn" value="${row.id}"
                                                         data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
                                                     </button>
                                                 </div>
@@ -393,6 +393,12 @@
             $(this).tooltip('hide');
             $(`.child-draft-row[data-child='${parentId}']`).toggle('slow').delay(300);
 
+        });
+        // Close View Card
+        $(document).on('click', '.close_darft_view', function(){
+            var parentId = $(this).data('parent');
+            $(this).tooltip('hide');
+            $(`.child-draft-row[data-child='${parentId}']`).toggle('slow').delay(300);
         });
 
         // send email forward

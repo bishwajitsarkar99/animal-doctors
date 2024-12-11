@@ -29,7 +29,7 @@
               </span>
             </div>
           </div>
-          <div>
+          <div class="table-responsive">
             <table class="ord_table center border-1 skeleton-table mt-2" id="myTable">
               <tr class="table-row order_body acc_setting_table skeleton">
                 <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.ID')}}</th>
@@ -155,6 +155,8 @@
     </div>
   </div>
 </div>
+@include('loader.action-loader')
+
 {{-- End Delete Category Modal---}}
 
 {{-- Start Confirm Delete Category Modal--}}
@@ -221,6 +223,7 @@
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 @endsection
 @section('script')
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
