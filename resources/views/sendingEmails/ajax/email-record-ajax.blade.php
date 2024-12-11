@@ -410,8 +410,23 @@
         });
 
         // Attach File and Email Filter
-        $("#record_start_date, #record_end_date, #selectAttachment, #user_roles, #user_emails").on('change', ()=>{
+        $("#selectAttachment, #user_roles, #user_emails").on('change', ()=>{
             fetch_emal_records(); 
+        });
+
+        // Data Get According to Date Range
+        $("#record_start_date, #record_end_date").on('change', ()=>{
+            $("#accessconfirmbranch").modal('show');
+            $("#dataPullingProgress").removeAttr('hidden');
+            $("#processModal_body").addClass('loading_body_area');
+            $("#access_modal_box").addClass('progress_body');
+            setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#dataPullingProgress").attr('hidden', true);
+                $("#access_modal_box").removeClass('progress_body');
+                $("#processModal_body").addClass('loading_body_area');
+                fetch_emal_records();    
+            }, 1500);
         });
 
         // Refresh Button

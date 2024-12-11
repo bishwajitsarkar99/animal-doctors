@@ -421,7 +421,16 @@
         });
         // Setting Data get according to date range
         $("#start_setting_date, #end_setting_date").on('change', ()=>{
-            fetch_user_email_delete_permission(); 
+            $("#settingDataGetDateRange").modal('hide');
+            $("#accessconfirmbranch").modal('show');
+            $("#dataPullingProgress").removeAttr('hidden');
+            $("#access_modal_box").addClass('progress_body');
+            setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#dataPullingProgress").attr('hidden', true);
+                $("#access_modal_box").removeClass('progress_body');
+                fetch_user_email_delete_permission(); 
+            }, 2000);
         });
 
         // Paginate Page
@@ -526,22 +535,35 @@
                             $('#savForm_error').fadeOut();
                         }, 3000);
                     } else {
-                        $('#savForm_error').html("");
-                        $('#permission_success_message').html("");
-                        $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
-                        $('#permission_success_message').fadeIn();
-                        $('#permission_success_message').text(response.messages);
-                        $('#select_user_role').val("");
-                        $('#select_user_email').val("");
-                        clearFields();
-                        $("#statusJustify").attr('hidden', true);
-                        $("#statusDeny").attr('hidden', true);
-                        $("#permission_success_message").addClass('background_success_sm');
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+
                         setTimeout(() => {
-                            $('#permission_success_message').fadeOut();
-                        }, 3000);
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+
+                            $('#savForm_error').html("");
+                            $('#permission_success_message').html("");
+                            $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
+                            $('#permission_success_message').fadeIn();
+                            $('#permission_success_message').text(response.messages);
+                            $('#select_user_role').val("");
+                            $('#select_user_email').val("");
+                            clearFields();
+                            $("#statusJustify").attr('hidden', true);
+                            $("#statusDeny").attr('hidden', true);
+                            $("#permission_success_message").addClass('background_success_sm');
+                            setTimeout(() => {
+                                $('#permission_success_message').fadeOut();
+                            }, 3000);
+                            
+                            fetch_user_email_delete_permission();
+                        }, 1500);
                     }
-                    fetch_user_email_delete_permission();
                 }
             });
         });
@@ -701,23 +723,34 @@
                         $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
                         $('#permission_success_message').text(response.messages);
                     } else {
-                        $('#updateForm_errorList').html("");
-                        $('#permission_success_message').html("");
-                        $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
-                        $('#permission_success_message').fadeIn();
-                        $('#permission_success_message').text(response.messages);
-                        $('#permission_id').val("");
-                        clearFields();
                         $("#updateconfirmpermission").modal('hide');
-                        $("#PermissionUpdate").hide();
-                        $("#PermissionSubmit").show();
-                        $("#statusJustify").attr('hidden', true);
-                        $("#statusDeny").attr('hidden', true);
-                        $("#permission_success_message").addClass('background_success_sm');
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
                         setTimeout(() => {
-                            $('#permission_success_message').fadeOut(3000);
-                        }, 3000);
-                        fetch_user_email_delete_permission();
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            
+                            $('#updateForm_errorList').html("");
+                            $('#permission_success_message').html("");
+                            $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
+                            $('#permission_success_message').fadeIn();
+                            $('#permission_success_message').text(response.messages);
+                            $('#permission_id').val("");
+                            clearFields();
+                            $("#PermissionUpdate").hide();
+                            $("#PermissionSubmit").show();
+                            $("#statusJustify").attr('hidden', true);
+                            $("#statusDeny").attr('hidden', true);
+                            $("#permission_success_message").addClass('background_success_sm');
+                            setTimeout(() => {
+                                $('#permission_success_message').fadeOut(3000);
+                            }, 3000);
+                            fetch_user_email_delete_permission();
+                        }, 1500);
                     }
                 }
             });
@@ -774,16 +807,28 @@
                 type: "DELETE",
                 url: "/email-delete-permission/delete/" + id,
                 success: function(response) {
-                    $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
-                    $('#permission_success_message').fadeIn();
-                    $('#permission_success_message').text(response.messages);
-                    $("#permission_success_message").addClass('background_success_sm');
-                    setTimeout(() => {
-                        $('#permission_success_message').fadeOut(3000);
-                    }, 3000);
                     $('#deleteconfirmpermission').modal('hide');
+                    $("#accessconfirmbranch").modal('show');
+                    $("#pageLoader").removeAttr('hidden');
+                    $("#access_modal_box").addClass('loader_area');
+                    $("#processModal_body").removeClass('loading_body_area');
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#pageLoader").attr('hidden', true);
+                        $("#access_modal_box").removeClass('loader_area');
+                        $("#processModal_body").addClass('loading_body_area');
 
-                    fetch_user_email_delete_permission();
+                        $('#permission_success_message').addClass('permission_alert_show ps-1 pe-1');
+                        $('#permission_success_message').fadeIn();
+                        $('#permission_success_message').text(response.messages);
+                        $("#permission_success_message").addClass('background_success_sm');
+                        setTimeout(() => {
+                            $('#permission_success_message').fadeOut(3000);
+                        }, 3000);
+    
+                        fetch_user_email_delete_permission();
+                    }, 1500);
+
                 }
 
             });

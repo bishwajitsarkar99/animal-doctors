@@ -398,8 +398,23 @@
         });
 
         // Attach File and Email Filter
-        $("#send_start_date, #send_end_date, #select_attachment_email,#select_status_email").on('change', ()=>{
+        $("#select_attachment_email,#select_status_email").on('change', ()=>{
             fetch_send_email(); 
+        });
+
+        // Email Data Get According to Date
+        $("#send_start_date, #send_end_date").on('change', ()=>{
+            $("#accessconfirmbranch").modal('show');
+            $("#dataPullingProgress").removeAttr('hidden');
+            $("#processModal_body").addClass('loading_body_area');
+            $("#access_modal_box").addClass('progress_body');
+            setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#dataPullingProgress").attr('hidden', true);
+                $("#access_modal_box").removeClass('progress_body');
+                $("#processModal_body").addClass('loading_body_area');
+                fetch_send_email();  
+            }, 1500);
         });
 
         // Refresh Button

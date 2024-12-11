@@ -433,8 +433,23 @@
 
         });
 
+        // Email Data Get According to Date
+        $("#start_date, #end_date").on('change', ()=>{
+            $("#accessconfirmbranch").modal('show');
+            $("#dataPullingProgress").removeAttr('hidden');
+            $("#processModal_body").addClass('loading_body_area');
+            $("#access_modal_box").addClass('progress_body');
+            setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#dataPullingProgress").attr('hidden', true);
+                $("#access_modal_box").removeClass('progress_body');
+                $("#processModal_body").addClass('loading_body_area');
+                fetch_all_user_email();  
+            }, 1500);
+        });
+
         // Attach File and Email Filter
-        $("#start_date, #end_date, #select_attachment,#select_status").on('change', ()=>{
+        $("#select_attachment,#select_status").on('change', ()=>{
             fetch_all_user_email(); 
         });
         // Next or Previous Mail Filter

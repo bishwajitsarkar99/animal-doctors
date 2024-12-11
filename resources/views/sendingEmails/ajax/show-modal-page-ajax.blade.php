@@ -198,19 +198,30 @@
         // Setting Data get according to month
         $("#DataGet").on('click', function(e){
             e.preventDefault();
-            $("#settingDataGetDateRange").modal('show');
+            $("#accessconfirmbranch").modal('show');
+            $("#pageLoader").removeAttr('hidden');
+            $("#access_modal_box").addClass('loader_area');
+            $("#processModal_body").removeClass('loading_body_area');
 
-            var time = null;
-            var time = setTimeout(() => {
-                removeAttributeOrClass([
-                    {selector: '.input_date,.input_date_two,.setting_title,.setting_close', type: 'class', name: 'text-skeletone'},
-                    {selector: '#settingCancel', type: 'class', name: 'setting-cancel-btn-skeletone'},
-                ]);
-            }, 1000);
-
-            return ()=>{
-                clearTimeout(time);
-            }
+            setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#pageLoader").attr('hidden', true);
+                $("#access_modal_box").removeClass('loader_area');
+                $("#processModal_body").addClass('loading_body_area');
+                $("#settingDataGetDateRange").modal('show');
+    
+                var time = null;
+                var time = setTimeout(() => {
+                    removeAttributeOrClass([
+                        {selector: '.input_date,.input_date_two,.setting_title,.setting_close', type: 'class', name: 'text-skeletone'},
+                        {selector: '#settingCancel', type: 'class', name: 'setting-cancel-btn-skeletone'},
+                    ]);
+                }, 1000);
+    
+                return ()=>{
+                    clearTimeout(time);
+                }
+            }, 1500);
         });
         
 
