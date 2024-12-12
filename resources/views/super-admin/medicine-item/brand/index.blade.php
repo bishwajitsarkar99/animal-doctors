@@ -210,7 +210,7 @@
               </div>
               <div class="col-10">
                 <span class="tot_summ" style="float: right;" id="num_plate">
-                  <label class="tot-search mt-3" style="font-size: 12px;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Origin Entry')}} :</label>
+                  <label class="tot-search mt-3" style="font-size: 11px;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Origin Entry')}} :</label>
                   <span class="badge rounded-pill bg-primary item_lab" for="total_medic_records" id="iteam_lab">
                     <span class="total_result" id="total_org_records"></span>
                     <span id="iteam_label6" style="font-weight: 600;color:white;font-size:11px;">.00</span>

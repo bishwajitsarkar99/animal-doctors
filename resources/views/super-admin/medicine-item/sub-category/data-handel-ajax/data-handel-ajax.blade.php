@@ -56,11 +56,13 @@
                             </ul>
                         </td>
                         <td class="border_ord ps-1" id="sub_td3">${row.categories ? row.categories.category_name : ''}</td>
-                        <td class="txt_ ps-1" id="sub_td5">${row.sub_category_name}</td>
+                        <td class="txt_ ps-1" id="sub_td5">
+                            <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" readonly></span>
+                            ${row.sub_category_name}
+                        </td>
                         <td class="tot_complete_ pe-2 id="cat_td6">
                             <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${statusBg} ${statusClass}">${statusSignal}</span>
                             <span class="${statusTextColor}">${statusText}</span>
-                            <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="sub_td6">
                             <input class="form-switch form-check-input check_permission" type="checkbox" subcategory_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>
@@ -153,7 +155,6 @@
             var time = null;
 
             $("#subcategory_data_table").addClass('skeleton');
-            $("#sub_td").addClass('skeleton');
             $("#sub_td2").addClass('skeleton');
             $("#sub_td3").addClass('skeleton');
             $("#sub_td4").addClass('skeleton');
@@ -163,7 +164,6 @@
 
             time = setTimeout(() => {
                 $("#subcategory_data_table").removeClass('skeleton');
-                $("#sub_td").removeClass('skeleton');
                 $("#sub_td2").removeClass('skeleton');
                 $("#sub_td3").removeClass('skeleton');
                 $("#sub_td4").removeClass('skeleton');

@@ -58,11 +58,13 @@
                             </ul>
                         </td>
                         <td class="ps-1 border_ord" id="medic_name3">${row.medicine_groups ? row.medicine_groups.group_name : ''}</td>
-                        <td class="txt_ ps-1" id="medic_name5">${row.medicine_name}</td>
+                        <td class="txt_ ps-1" id="medic_name5">
+                            <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" readonly></span>
+                            ${row.medicine_name}
+                        </td>
                         <td class="tot_complete_ pe-2" id="medic_name7">
                             <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${statusBg} ${statusClass}">${statusSignal}</span>
                             <span class="${statusTextColor}">${statusText}</span>
-                            <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="medic_name6">
                             <input class="form-switch form-check-input check_permission" type="checkbox" medicine_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>

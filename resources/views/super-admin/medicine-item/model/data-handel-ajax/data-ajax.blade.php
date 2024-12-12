@@ -56,12 +56,14 @@
                                 </li>
                             </ul>
                         </td>
-                        <td class="ps-1 border_ord" id="model_tb3">${row.products ? row.products.product_name : ''}</td>
-                        <td class="txt_ ps-1" id="model_tb4">${row.model_name}</td>
+                        <td class="ps-1 border_ord" id="model_tb7">${row.products ? row.products.product_name : ''}</td>
+                        <td class="txt_ ps-1" id="model_tb4">
+                            <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" readonly></span>
+                            ${row.model_name}
+                        </td>
                         <td class="tot_complete_ pe-2" id="cat_td6">
                             <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${statusBg} ${statusClass}">${statusSignal}</span>
                             <span class="${statusTextColor}">${statusText}</span>
-                            <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="model_tb5">
                             <input class="form-switch form-check-input check_permission" type="checkbox" model_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>
@@ -156,21 +158,23 @@
 
             var time = null;
             $("#model_data_table").addClass('skeleton');
-            $("#model_tb").addClass('skeleton');
+            $("#cat_td6").addClass('skeleton');
             $("#model_tb2").addClass('skeleton');
             $("#model_tb3").addClass('skeleton');
             $("#model_tb4").addClass('skeleton');
             $("#model_tb5").addClass('skeleton');
             $("#model_tb6").addClass('skeleton');
+            $("#model_tb7").addClass('skeleton');
 
             time = setTimeout(() => {
                 $("#model_data_table").removeClass('skeleton');
-                $("#model_tb").removeClass('skeleton');
+                $("#cat_td6").removeClass('skeleton');
                 $("#model_tb2").removeClass('skeleton');
                 $("#model_tb3").removeClass('skeleton');
                 $("#model_tb4").removeClass('skeleton');
                 $("#model_tb5").removeClass('skeleton');
                 $("#model_tb6").removeClass('skeleton');
+                $("#model_tb7").removeClass('skeleton');
             }, 1000);
 
             return ()=>{
@@ -287,17 +291,27 @@
                             $('#savForm_error').fadeIn();
                         });
                     } else {
-                        $('#savForm_error').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
-                        $('#model_name').val("");
-                        $('#product_id').val("");
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
                         setTimeout(() => {
-                            $('#success_message').fadeOut(3000);
-                        }, 5000);
-                        fetch_model_data();
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            $('#savForm_error').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $('#success_message').text(response.messages);
+                            $('#model_name').val("");
+                            $('#product_id').val("");
+                            setTimeout(() => {
+                                $('#success_message').fadeOut(3000);
+                            }, 5000);
+                            fetch_model_data();
+                        }, 1500);
                     }
 
                 }
@@ -404,18 +418,28 @@
                         $('#success_message').addClass('alert_show ps-1 pe-1');
                         $('#success_message').text(response.messages);
                     } else {
-                        $('#updateForm_errorList').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
-                        $('.edit_model_name').val("");
-                        $('#product_id').val("");
-                        setTimeout(() => {
-                            $('#success_message').fadeOut(3000);
-                        }, 5000);
                         $("#updateconfirmmodel").modal('hide');
-                        fetch_model_data();
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            $('#updateForm_errorList').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $('#success_message').text(response.messages);
+                            $('.edit_model_name').val("");
+                            $('#product_id').val("");
+                            setTimeout(() => {
+                                $('#success_message').fadeOut(3000);
+                            }, 5000);
+                            fetch_model_data();
+                        }, 1500);
                     }
                 }
             });
@@ -495,15 +519,25 @@
                 type: "DELETE",
                 url: "/delete-model/" + model_id,
                 success: function(response) {
-                    $('#success_message').addClass('alert_show ps-1 pe-1');
-                    $('#success_message').fadeIn();
-                    $('#success_message').text(response.messages);
-                    setTimeout(() => {
-                        $('#success_message').fadeOut();
-                    }, 3000);
                     $('#deletemodel').modal('hide');
                     $("#deleteconfirmmodel").modal('hide');
-                    fetch_model_data();
+                    $("#accessconfirmbranch").modal('show');
+                    $("#pageLoader").removeAttr('hidden');
+                    $("#access_modal_box").addClass('loader_area');
+                    $("#processModal_body").removeClass('loading_body_area');
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#pageLoader").attr('hidden', true);
+                        $("#access_modal_box").removeClass('loader_area');
+                        $("#processModal_body").addClass('loading_body_area'); 
+                        $('#success_message').addClass('alert_show ps-1 pe-1');
+                        $('#success_message').fadeIn();
+                        $('#success_message').text(response.messages);
+                        setTimeout(() => {
+                            $('#success_message').fadeOut();
+                        }, 3000);
+                        fetch_model_data();
+                    }, 1500);
                 }
 
             });
@@ -533,63 +567,83 @@
                 success: function({
                     messages
                 }) {
-                    console.log('messages', messages);
-                    $("#success_message").text(messages.messages);
-                    fetch_model_data('', pagination_url);
+                    $("#accessconfirmbranch").modal('show');
+                    $("#dataCheckingProgress").removeAttr('hidden');
+                    $("#access_modal_box").addClass('progress_body');
+                    $("#processModal_body").addClass('loading_body_area');
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#dataCheckingProgress").attr('hidden', true);
+                        $("#access_modal_box").removeClass('progress_body');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        console.log('messages', messages);
+                        $("#success_message").text(messages.messages);
+                        fetch_model_data('', pagination_url);
+                    }, 1500);
                 }
             });
         });
 
         // Show-Product Modal---------------
         $("#showModel").on('click', function(){
-            $("#model").modal('show');
-
-            var time = null;
-            $(".head_title").addClass('skeleton');
-            $(".cols_title").addClass('skeleton');
-            $("#tb_orgin").addClass('skeleton');
-            $("#search_area_").addClass('skeleton');
-            $("#tb_orgin2").addClass('skeleton');
-            $("#med_label2").addClass('skeleton');
-            $("#orgin_nam").addClass('skeleton');
-            $("#origin_nam2").addClass('skeleton');
-            $("#origin_nam3").addClass('skeleton');
-            $("#origin_nam4").addClass('skeleton');
-            $("#origin_nam5").addClass('skeleton');
-            $("#prod_table").addClass('skeleton');
-            $("#iteam_label3").addClass('skeleton');
-            $("#total_prod_records").addClass('skeleton');
-            $("#iteam_label6").addClass('skeleton');
-            $(".per_page").addClass('skeleton');
-            $(".select_item").addClass('select-skeleton');
-            $(".totProduct").addClass('skeleton');
-            $("#prod_get_table_paginate").addClass('paginate-skeleton');
-
-            time = setTimeout(() => {
-                $(".head_title").removeClass('skeleton');
-                $(".cols_title").removeClass('skeleton');
-                $("#tb_orgin").removeClass('skeleton');
-                $("#search_area_").removeClass('skeleton');
-                $("#tb_orgin2").removeClass('skeleton');
-                $("#med_label2").removeClass('skeleton');
-                $("#orgin_nam").removeClass('skeleton');
-                $("#origin_nam2").removeClass('skeleton');
-                $("#origin_nam3").removeClass('skeleton');
-                $("#origin_nam4").removeClass('skeleton');
-                $("#origin_nam5").removeClass('skeleton');
-                $("#prod_table").removeClass('skeleton');
-                $("#iteam_label3").removeClass('skeleton');
-                $("#total_prod_records").removeClass('skeleton');
-                $("#iteam_label6").removeClass('skeleton');
-                $(".per_page").removeClass('skeleton');
-                $(".select_item").removeClass('select-skeleton');
-                $(".totProduct").removeClass('skeleton');
-                $("#prod_get_table_paginate").removeClass('paginate-skeleton');
-            }, 1000);
-
-            return ()=>{
-                clearTimeout(time);
-            }
+            $("#accessconfirmbranch").modal('show');
+            $("#pageLoader").removeAttr('hidden');
+            $("#access_modal_box").addClass('loader_area');
+            $("#processModal_body").removeClass('loading_body_area');
+            setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#pageLoader").attr('hidden', true);
+                $("#access_modal_box").removeClass('loader_area');
+                $("#processModal_body").addClass('loading_body_area'); 
+                $("#model").modal('show');
+    
+                var time = null;
+                $(".head_title").addClass('skeleton');
+                $(".cols_title").addClass('skeleton');
+                $("#tb_orgin").addClass('skeleton');
+                $("#search_area_").addClass('skeleton');
+                $("#tb_orgin2").addClass('skeleton');
+                $("#med_label2").addClass('skeleton');
+                $("#orgin_nam").addClass('skeleton');
+                $("#origin_nam2").addClass('skeleton');
+                $("#origin_nam3").addClass('skeleton');
+                $("#origin_nam4").addClass('skeleton');
+                $("#origin_nam5").addClass('skeleton');
+                $("#prod_table").addClass('skeleton');
+                $("#iteam_label3").addClass('total-record-skeletone');
+                $("#total_prod_records").addClass('skeleton');
+                $("#iteam_label6").addClass('skeleton');
+                $(".per_page").addClass('skeleton');
+                $(".select_item").addClass('select-skeleton');
+                $(".totProduct").addClass('pill-label-skeletone');
+                $("#prod_get_table_paginate").addClass('paginate-skeleton');
+    
+                time = setTimeout(() => {
+                    $(".head_title").removeClass('skeleton');
+                    $(".cols_title").removeClass('skeleton');
+                    $("#tb_orgin").removeClass('skeleton');
+                    $("#search_area_").removeClass('skeleton');
+                    $("#tb_orgin2").removeClass('skeleton');
+                    $("#med_label2").removeClass('skeleton');
+                    $("#orgin_nam").removeClass('skeleton');
+                    $("#origin_nam2").removeClass('skeleton');
+                    $("#origin_nam3").removeClass('skeleton');
+                    $("#origin_nam4").removeClass('skeleton');
+                    $("#origin_nam5").removeClass('skeleton');
+                    $("#prod_table").removeClass('skeleton');
+                    $("#iteam_label3").removeClass('total-record-skeletone');
+                    $("#total_prod_records").removeClass('skeleton');
+                    $("#iteam_label6").removeClass('skeleton');
+                    $(".per_page").removeClass('skeleton');
+                    $(".select_item").removeClass('select-skeleton');
+                    $(".totProduct").removeClass('pill-label-skeletone');
+                    $("#prod_get_table_paginate").removeClass('paginate-skeleton');
+                }, 1000);
+    
+                return ()=>{
+                    clearTimeout(time);
+                }
+            }, 1500);
         });
 
         $(document).load('click', function(){

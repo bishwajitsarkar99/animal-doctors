@@ -55,11 +55,13 @@
                                 </li>
                             </ul>
                         </td>
-                        <td class="txt_ ps-1" id="cat_td4">${row.category_name}</td>
+                        <td class="txt_ ps-1" id="cat_td4">
+                            <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" readonly></span>
+                            ${row.category_name}
+                        </td>
                         <td class="tot_complete_ pe-2" id="cat_td6">
                             <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${statusBg} ${statusClass}">${statusSignal}</span>
                             <span class="${statusTextColor}">${statusText}</span>
-                            <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="cat_td5">
                             <input class="form-switch form-check-input check_permission" type="checkbox" category_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>
@@ -148,7 +150,6 @@
 
             var time = null;
             $("#category_data_table").addClass('skeleton');
-            $("#cat_td").addClass('skeleton');
             $("#cat_td2").addClass('skeleton');
             $("#cat_td3").addClass('skeleton');
             $("#cat_td4").addClass('skeleton');
@@ -157,7 +158,6 @@
 
             time = setTimeout(() => {
                 $("#category_data_table").removeClass('skeleton');
-                $("#cat_td").removeClass('skeleton');
                 $("#cat_td2").removeClass('skeleton');
                 $("#cat_td3").removeClass('skeleton');
                 $("#cat_td4").removeClass('skeleton');

@@ -8,16 +8,16 @@
       <div class="col-xl-7">
         <div class="card-body focus-color cd cat_form">
           <div class="row">
-            <div class="col-xl-8">
+            <div class="col-xl-9">
               <p class="catg mb-1">
                 <span class="skeleton-card-head-two">{{__('translate.Sub-Category')}}</span>
                 <span class="tot_summ" id="num_plate">
                   <label class="tot-search skeleton-card-head-labl-two mt-3 pt-2" for="tot_cagt"> ➤ {{__('translate.Total Sub-Category')}} :</label>
                   <label class="badge rounded-pill bg-primary skeleton-card-head-capsule-two" for="total_medic_records" style="font-weight: 600;color:white;" id="iteam_label4"><span class="total_users" style="font-weight: 600;" id="total_subcategory_records"></span><span class="skeleton" id="iteam_label5" style="font-weight: 600;color:white;">.00 {{__('translate.items')}}</span></label>
                 </span>
+                <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="margin-top:14px;"></i>
               </p>
             </div>
-            <div class="col-xl-1"><i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="margin-top:14px;"></i></div>
             <div class="col-xl-3 link">
               <button class="btn btn-sm cgt_btn btn_focus min-skeleton" href="#" type="button" id="showCategory">
                 <span class="get-cat-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
@@ -168,6 +168,7 @@
                     <span class="search_on skeleton" id="search_off_" style="color: darkcyan;font-weight:600;font-size: 12px;">OFF</span>
                     <span class="search_on skeleton" id="search_on_" style="color: darkcyan;font-weight:600;font-size: 12px;" hidden>ON</span>
                   </label>
+                  <i class="cat-search-icon fa fa-spinner fa-spin cat-search-hidden"></i>
                 </span>
               </div>
             </div>
@@ -175,7 +176,6 @@
               <div class="col-12">
                 <span id="search_plate">
                   <input id="cat_search" type="search" name="search" list="datalistOptions2" id="exampleDataList" class="category-all-search searchform2 catSearch ps-1" placeholder="{{__('translate.Category Search.........')}}" hidden>
-                  <i class="cat-search-icon fa fa-spinner fa-spin cat-search-hidden"></i>
                   <datalist id="datalistOptions2">
                     @foreach($categories as $category)
                     <option value="{{$category->category_name}}">
@@ -183,6 +183,20 @@
                   </datalist>
                 </span>
               </div>
+            </div>
+            <div class="table-responsive">
+              <table class="ord_table center border-1 mt-2" id="medic_nam">
+                <thead id="group_nam2">
+                  <tr id="group_nam3" style="color:black;">
+                    <th id="group_nam4" class="tableHead back_color align">{{__('translate.ID')}}</th>
+                    <th id="group_nam5" data-coloumn="id" data-order="desc" class="sortable-header tableHead back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Cateogry Name')}}</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-transparent" id="cat_table" style="color:black;font-weight:500;cursor:alias;">
+  
+                </tbody>
+                
+              </table>
             </div>
             <div class="row table_last_row">
               <div class="item_box col-3">
@@ -200,23 +214,9 @@
               <div class="col-9">
                 <span class="tot_summ" style="float: right;">
                   <label class="tot-search tot_record mt-3" for="tot_cagt"> {{__('translate.Total Category')}} :</label>
-                  <label class="badge rounded-pill bg-primary badge_label badg" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_cat_records" style="color:white;font-size:12px;font-family: sans-serif;"></span><span id="iteam_label6" style="font-weight: 600;color:white;">.00 {{__('translate.items')}}</span></label>
+                  <label class="badge rounded-pill bg-primary badge_label badg" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_cat_records" style="color:white;font-size:11px;"></span><span id="iteam_label6" style="font-weight: 600;color:white;">.00 {{__('translate.items')}}</span></label>
                 </span>
               </div>
-            </div>
-            <div class="table-responsive">
-              <table class="ord_table center border-1 mt-2" id="medic_nam">
-                <thead id="group_nam2">
-                  <tr id="group_nam3" style="color:black;">
-                    <th id="group_nam4" class="tableHead back_color align">{{__('translate.ID')}}</th>
-                    <th id="group_nam5" data-coloumn="id" data-order="desc" class="sortable-header tableHead back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Cateogry Name')}}</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-transparent" id="cat_table" style="color:black;font-weight:500;cursor:alias;">
-  
-                </tbody>
-                
-              </table>
             </div>
             <div class="row">
               <div class="col-12">

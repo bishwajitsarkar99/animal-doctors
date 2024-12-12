@@ -650,6 +650,7 @@ span.user_setting_bg {
 input#flexSwitchCheckDefault {
     animation: back 2s infinite;
     transition: transform .5s;
+    margin-top: -4px;
 }
 @keyframes back{
     50%{

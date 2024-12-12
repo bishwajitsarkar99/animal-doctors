@@ -93,14 +93,12 @@
             var time = null;
             $(".produ-search-icon").removeClass("produ-search-hidden");
             $("#prod_table").addClass('skeleton');
-            $("#prod_tabl").addClass('skeleton');
             $("#prod_tabl2").addClass('skeleton');
             $("#prod_tabl3").addClass('skeleton');
 
             time = setTimeout(() => {
                 $(".produ-search-icon").addClass("produ-search-hidden");
                 $("#prod_table").removeClass('skeleton');
-                $("#prod_tabl").removeClass('skeleton');
                 $("#prod_tabl2").removeClass('skeleton');
                 $("#prod_tabl3").removeClass('skeleton');
             }, 1000);
@@ -150,14 +148,18 @@
 
         // Search-mdoe-btn
         $("#search_off_").show();
-        $("#search_on_").hide();
-        $("#prod_search").hide();
 
-        $("#search_area_").on('click', function(){
-            $("#search_off_").toggle('slow');
-            $("#search_on_").toggle('slow');
-            $("#prod_search").toggle('slide');
-            $("#prod_search").focus();
+        $(document).on('click', '#search_area_', function() {
+
+            if ($(this).prop('checked')) {
+                $("#prod_search").removeAttr('hidden').focus();
+                $("#search_on_").removeAttr('hidden');
+                $("#search_off_").hide();
+            } else {
+                $("#prod_search").attr('hidden', true);
+                $("#search_on_").attr('hidden', true);
+                $("#search_off_").show();
+            }
         });
 
         // Event Listener for sorting columns

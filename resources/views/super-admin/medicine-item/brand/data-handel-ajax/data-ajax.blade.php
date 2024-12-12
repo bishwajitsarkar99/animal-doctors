@@ -57,11 +57,13 @@
                             </ul>
                         </td>
                         <td class="ps-1 border_ord" id="brand_tab3">${row.medicine_origins ? row.medicine_origins.origin_name : ''}</td>
-                        <td class="txt_ ps-1" id="brand_tab5">${row.brand_name}</td>
+                        <td class="txt_ ps-1" id="brand_tab5">
+                            <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" readonly></span>
+                            ${row.brand_name}
+                        </td>
                         <td class="tot_complete_ pe-2" id="cat_td6">
                             <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${statusBg} ${statusClass}">${statusSignal}</span>
                             <span class="${statusTextColor}">${statusText}</span>
-                            <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" readonly></span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="brand_tab6">
                             <input class="form-switch form-check-input check_permission" type="checkbox" brand_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>

@@ -8,16 +8,16 @@
       <div class="col-xl-7">
         <div class="card-body focus-color cd cat_form">
           <div class="row">
-            <div class="col-xl-8">
+            <div class="col-xl-9">
               <p class="catg mb-1">
                 <span class="skeleton-card-head-two">{{__('translate.Medicine-Name')}}</span>
                 <span class="tot_summ" id="num_plate">
                   <label class="tot-search skeleton-card-head-labl-two mt-3 pt-1" for="tot_cagt"> ➤ {{__('translate.Total Medicine')}} :</label>
                   <label class="badge rounded-pill bg-primary tot-search skeleton-card-head-capsule-two"><span class="total_users" style="font-weight: 600;color:white;" id="total_medicine_records"></span><span style="font-weight: 600;font-size:11px;color:white;">.00 {{__('translate.pics')}}</span></label>
                 </span>
+                <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="margin-top:11px;"></i>
               </p>
             </div>
-            <div class="col-xl-1"><i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="margin-top:11px;"></i></div>
             <div class="col-xl-3 link">
               <button class="btn btn-sm cgt_btn btn_focus min-skeleton ms-3 mt-1" href="#" type="button" id="showGroup">
                 <span class="get-group-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>

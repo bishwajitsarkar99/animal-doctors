@@ -8,7 +8,7 @@
       <div class="col-xl-7">
         <div class="card-body focus-color cd cat_form">
           <div class="row">
-            <div class="col-xl-8">
+            <div class="col-xl-9">
               <p class="catg mb-1">
                 <span class="skeleton-card-head-two">{{__('translate.Model-Name')}}</span>
                 <span class="tot_summ" id="num_plate">
@@ -18,9 +18,9 @@
                     <span class="" id="iteam_label5" style="font-weight: 600;color:white;font-size:12px;">.00</span>
                   </label>
                 </span>
+                <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="margin-top:11px;"></i>
               </p>
             </div>
-            <div class="col-xl-1"><i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="margin-top:11px;"></i></div>
             <div class="col-xl-3 link">
               <button class="btn btn-sm cgt_btn btn_focus min-skeleton ms-2 mt-1" href="#" type="button" id="showModel">
                 <span class="product-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
@@ -42,7 +42,7 @@
               </span>
             </div>
           </div>
-          <div>
+          <div class="table-responsive">
             <table class="ord_table center border-1 skeleton mt-2">
               <tr class="table-row order_body acc_setting_table skeleton">
                 <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col skeleton ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.ID')}}</th>
@@ -143,6 +143,7 @@
     </div>
   </div>
 </div>
+@include('loader.action-loader')
 {{-- Start Product Modal--}}
 <!-- Modal -->
 <div class="modal fade" id="model" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -159,17 +160,22 @@
         <div class="card form-control form-control-sm" id="tb_subcatg">
           <div class="card-body">
             <div class="row">
-              <div class="col-6">
-                <span class="form-check form-switch search_ skeleton me-2" id="tb_orgin">
+              <div class="col-12">
+                <span class="form-check form-switch search_ skeleton" id="tb_orgin">
                   <input class="form-check-input mt-2 skeleton" type="checkbox" id="search_area_" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                   <label class="search catg_ser_label ps-1 pt-1" id="med_label" for="search pe-2" id="tb_orgin2">{{__('translate.Search')}} :</label>
-                  <label class="form-check-label skeleton" id="med_label2" for="collapseExample"><span class="search_on skeleton" id="search_off_" style="color: darkcyan;font-weight:600;font-size: 11px;font-family: sans-serif;">OFF</span><span class="search_on skeleton" id="search_on_" style="color: darkcyan;font-weight:600;font-size: 11px;font-family: sans-serif;">ON</span></label>
+                  <label class="form-check-label skeleton" id="med_label2" for="collapseExample">
+                    <span class="search_on skeleton" id="search_off_" style="color: darkcyan;font-weight:600;font-size: 11px;">OFF</span>
+                    <span class="search_on skeleton" id="search_on_" style="color: darkcyan;font-weight:600;font-size: 11px;" hidden>ON</span>
+                  </label>
+                  <i class="produ-search-icon fa fa-spinner fa-spin produ-search-hidden"></i>
                 </span>
               </div>
-              <div class="col-6">
+            </div>
+            <div class="row">
+              <div class="col-12">
                 <span id="search_plate">
-                  <input id="prod_search" type="search" name="search" list="datalistOptions2" id="exampleDataList" class="category-all-search produSearch ps-1" placeholder="{{__('translate.Search.........')}}">
-                  <i class="produ-search-icon fa fa-spinner fa-spin produ-search-hidden"></i>
+                  <input id="prod_search" type="search" name="search" list="datalistOptions2" id="exampleDataList" class="category-all-search produSearch ps-1" placeholder="{{__('translate.Search.........')}}" hidden>
                   <datalist id="datalistOptions2">
                     @foreach($products as $product)
                       <option value="{{$product->product_name}}">
@@ -178,39 +184,41 @@
                 </span>
               </div>
             </div>
-            <table class="ord_table center border-1 mt-2" id="orgin_nam">
-              <thead id="origin_nam2">
-                <tr id="origin_nam3" style="color:black;">
-                  <th id="origin_nam4" class="tableHead back_color align">{{__('translate.ID')}}</th>
-                  <th id="origin_nam5" data-coloumn="id" data-order="desc" class="tableHead sortable-header back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Product Name')}}</th>
-                </tr>
-              </thead>
-              <tbody class="bg-transparent" id="prod_table" style="color:black;font-weight:500;cursor:alias;">
-
-              </tbody>
-              <div class="row table_last_row">
-                <div class="item_box col-2" id="per_item">
-                  <label class="item_class per_page" id="iteam_label">Peritem</label>
-                  <div class="custom-select select_item" id="iteam_label2">
-                    <select class="ps-1" id="perItemControlProd">
-                      <option selected>10</option>
-                      <option>20</option>
-                      <option>50</option>
-                      <option>100</option>
-                      <option>200</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-10">
-                  <span class="tot_summ" style="float: right;" id="num_plate">
-                    <label class="tot-search mt-3" style="font-size: 11px;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Origin Entry')}} :</label>
-                    <label class="badge rounded-pill bg-primary totProduct" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_prod_records">
-                      </span><span id="iteam_label6" style="font-weight: 600;color:white;font-size:11px;font-family:sans-serif;">.00</span>
-                    </label>
-                  </span>
+            <div class="table-responsive">
+              <table class="ord_table center border-1 mt-2" id="orgin_nam">
+                <thead id="origin_nam2">
+                  <tr id="origin_nam3" style="color:black;">
+                    <th id="origin_nam4" class="tableHead back_color align">{{__('translate.ID')}}</th>
+                    <th id="origin_nam5" data-coloumn="id" data-order="desc" class="tableHead sortable-header back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Product Name')}}</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-transparent" id="prod_table" style="color:black;font-weight:500;cursor:alias;">
+  
+                </tbody>
+              </table>
+            </div>
+            <div class="row table_last_row">
+              <div class="item_box col-2" id="per_item">
+                <label class="item_class per_page" id="iteam_label">Peritem</label>
+                <div class="custom-select select_item" id="iteam_label2">
+                  <select class="ps-1" id="perItemControlProd">
+                    <option selected>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                    <option>100</option>
+                    <option>200</option>
+                  </select>
                 </div>
               </div>
-            </table>
+              <div class="col-10">
+                <span class="tot_summ" style="float: right;" id="num_plate">
+                  <label class="tot-search mt-3" style="font-size: 11px;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Origin Entry')}} :</label>
+                  <label class="badge rounded-pill bg-primary totProduct" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_prod_records">
+                    </span><span id="iteam_label6" style="font-weight: 600;color:white;font-size:11px;">.00</span>
+                  </label>
+                </span>
+              </div>
+            </div>
             <div class="row">
               <div class="col-12">
                 <div class="pagination" style="float: right;" id="prod_get_table_paginate">
@@ -334,6 +342,7 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/model/model.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 @endsection
 @section('script')
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
