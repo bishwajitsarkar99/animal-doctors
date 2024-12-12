@@ -374,7 +374,7 @@
                 $("#accessconfirmbranch").modal('hide');
                 $("#dataPullingProgress").attr('hidden', true);
                 $("#access_modal_box").removeClass('progress_body');
-                $("#processModal_body").addClass('loading_body_area');
+                $("#processModal_body").removeClass('loading_body_area');
                 fetch_draft_email();   
             }, 1500);
         });

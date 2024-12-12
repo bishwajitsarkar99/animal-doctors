@@ -8,16 +8,16 @@
       <div class="col-xl-7">
         <div class="card-body focus-color cd cat_form">
           <div class="row">
-            <div class="col-xl-8">
+            <div class="col-xl-9">
               <p class="catg mb-1">
                 <span class="skeleton-card-head-two">{{__('translate.Brand-Name')}}</span>
                 <span class="tot_summ" id="num_plate">
                   <label class="tot-search skeleton-card-head-labl mt-3 pt-1" for="tot_cagt"> ➤ {{__('translate.Total Brand')}} :</label>
                   <label class="badge rounded-pill bg-primary skeleton-card-head-capsule-two" for="total_medic_records" id="iteam_label4" style="font-size: 11px;"><span class="total_users" style="font-weight: 600;" id="total_brand_records"></span><span id="iteam_label5" style="font-weight: 600;color:white;">.00 {{__('translate.items')}}</span></label>
                 </span>
+                <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="margin-top:11px;"></i>
               </p>
             </div>
-            <div class="col-xl-1"><i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="margin-top:11px;"></i></div>
             <div class="col-xl-3 link">
               <button class="btn btn-sm cgt_btn btn_focus min-skeleton ms-3 mt-1" type="button" id="showOrigin">
                 <span class="origin-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
@@ -159,21 +159,21 @@
           <div class="card-body">
             <div class="row">
               <div class="col-12">
-                <span class="form-check form-switch search_ me-2" id="tb_orgin">
+                <span class="form-check form-switch search_" id="tb_orgin">
                   <input class="form-check-input mt-2 skeleton" type="checkbox" id="search_area_" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <label class="search catg_ser_label ps-1 pt-1" id="med_label" for="search pe-2" id="tb_orgin2">{{__('translate.Search')}} :</label>
                   <label class="form-check-label skeleton" id="med_label2" for="collapseExample">
                     <span class="search_on skeleton" id="search_off_" style="color: darkcyan;font-weight:600;font-size: 11px;">OFF</span>
                     <span class="search_on skeleton" id="search_on_" style="color: darkcyan;font-weight:600;font-size: 11px;" hidden>ON</span>
                   </label>
+                  <i class="orgn-search-icon fa fa-spinner fa-spin orgn-search-hidden"></i>
                 </span>
               </div>
             </div>
             <div class="row">
               <div class="col-12">
-                <label class="search catg_ser_label ps-1 pt-1" id="med_label" for="search pe-2" id="tb_orgin2">{{__('translate.Search')}} :</label>
                 <span id="search_plate">
                   <input id="orgin_search" type="search" name="search" list="datalistOptions2" id="exampleDataList" class="category-all-search orgnSearch ps-1" placeholder="{{__('translate.Search.........')}}" hidden>
-                  <i class="orgn-search-icon fa fa-spinner fa-spin orgn-search-hidden"></i>
                   <datalist id="datalistOptions2">
                     @foreach($origins as $origin)
                       <option value="{{$origin->origin_name}}">
@@ -193,30 +193,30 @@
                 <tbody class="bg-transparent" id="orgin_table" style="color:black;font-weight:500;cursor:alias;">
   
                 </tbody>
-                <div class="row table_last_row">
-                  <div class="item_box col-2" id="per_item">
-                    <label class="item_class per_page" id="iteam_label">Peritem</label>
-                    <div class="custom-select select_item" id="iteam_label2">
-                      <select class="ps-1" id="perItemControls">
-                        <option selected>10</option>
-                        <option>20</option>
-                        <option>50</option>
-                        <option>100</option>
-                        <option>200</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-10" id="iteam_label3">
-                    <span class="tot_summ" style="float: right;" id="num_plate">
-                      <label class="tot-search mt-3" style="font-size: 12px;" for="tot_cagt"> {{__('translate.Total Origin Entry')}} :</label>
-                      <span class="badge rounded-pill bg-primary item_lab" for="total_medic_records" id="iteam_label4">
-                        <span class="total_result" id="total_org_records"></span>
-                        <span id="iteam_label6" style="font-weight: 600;color:white;font-size:12px;">.00</span>
-                      </span>
-                    </span>
-                  </div>
-                </div>
               </table>
+            </div>
+            <div class="row table_last_row">
+              <div class="item_box col-2" id="per_item">
+                <label class="item_class per_page" id="iteam_label">Peritem</label>
+                <div class="custom-select select_item" id="iteam_label2">
+                  <select class="ps-1" id="perItemControls">
+                    <option selected>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                    <option>100</option>
+                    <option>200</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-10">
+                <span class="tot_summ" style="float: right;" id="num_plate">
+                  <label class="tot-search mt-3" style="font-size: 12px;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Origin Entry')}} :</label>
+                  <span class="badge rounded-pill bg-primary item_lab" for="total_medic_records" id="iteam_lab">
+                    <span class="total_result" id="total_org_records"></span>
+                    <span id="iteam_label6" style="font-weight: 600;color:white;font-size:11px;">.00</span>
+                  </span>
+                </span>
+              </div>
             </div>
             <div class="row">
               <div class="col-12">

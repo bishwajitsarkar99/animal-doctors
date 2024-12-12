@@ -167,7 +167,6 @@
 
         $(document).on('keyup', '.search', function(){
             $("#medicine_dogs_data_table").addClass('skeleton');
-            $("#medic_dosage").addClass('skeleton');
             $("#medic_dosage2").addClass('skeleton');
             $("#medic_dosage3").addClass('skeleton');
             $("#medic_dosage4").addClass('skeleton');
@@ -179,7 +178,6 @@
 
             time = setTimeout(() => {
                 $("#medicine_dogs_data_table").removeClass('skeleton');
-                $("#medic_dosage").removeClass('skeleton');
                 $("#medic_dosage2").removeClass('skeleton');
                 $("#medic_dosage3").removeClass('skeleton');
                 $("#medic_dosage4").removeClass('skeleton');
@@ -302,17 +300,28 @@
                             $('#savForm_error').fadeIn();
                         });
                     } else {
-                        $('#savForm_error').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
-                        $('#medicine_dogs').val("");
-                        $('#medicine_id').val("");
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
                         setTimeout(() => {
-                            $('#success_message').fadeOut(3000);
-                        }, 5000);
-                        fetch_medicineDogs_data();
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            
+                            $('#savForm_error').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $('#success_message').text(response.messages);
+                            $('#medicine_dogs').val("");
+                            $('#medicine_id').val("");
+                            setTimeout(() => {
+                                $('#success_message').fadeOut(3000);
+                            }, 5000);
+                            fetch_medicineDogs_data();
+                        }, 1500);
                     }
 
                 }
@@ -417,18 +426,28 @@
                         $('#success_message').addClass('alert_show ps-1 pe-1');
                         $('#success_message').text(response.messages);
                     } else {
-                        $('#updateForm_errorList').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
-                        $('.edit_medicine_dogs').val("");
-                        $('.edit_medicine_id').val("");
-                        setTimeout(() => {
-                            $('#success_message').fadeOut(3000);
-                        }, 5000);
                         $("#updateconfirmmedicinedogs").modal('hide');
-                        fetch_medicineDogs_data();
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            $('#updateForm_errorList').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $('#success_message').text(response.messages);
+                            $('.edit_medicine_dogs').val("");
+                            $('.edit_medicine_id').val("");
+                            setTimeout(() => {
+                                $('#success_message').fadeOut(3000);
+                            }, 5000);
+                            fetch_medicineDogs_data();
+                        }, 1500);
                     }
                 }
             });
@@ -503,16 +522,27 @@
                 type: "DELETE",
                 url: "/delete-medicine-dosage/" + medicinedogs_id,
                 success: function(response) {
-                    $('#success_message').addClass('alert_show ps-1 pe-1');
-                    $('#success_message').fadeIn();
-                    $('#success_message').text(response.messages);
-                    setTimeout(() => {
-                        $('#success_message').fadeOut();
-                    }, 3000);
                     $('#deletemedicinedogs').modal('hide');
                     $("#deleteconfirmmedicinedogs").modal('hide');
+                    $("#accessconfirmbranch").modal('show');
+                    $("#pageLoader").removeAttr('hidden');
+                    $("#access_modal_box").addClass('loader_area');
+                    $("#processModal_body").removeClass('loading_body_area');
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#pageLoader").attr('hidden', true);
+                        $("#access_modal_box").removeClass('loader_area');
+                        $("#processModal_body").addClass('loading_body_area');
+                        $('#success_message').addClass('alert_show ps-1 pe-1');
+                        $('#success_message').fadeIn();
+                        $('#success_message').text(response.messages);
+                        setTimeout(() => {
+                            $('#success_message').fadeOut();
+                        }, 3000);
+    
+                        fetch_medicineDogs_data();
+                    }, 1500);
 
-                    fetch_medicineDogs_data();
                 }
 
             });
@@ -542,74 +572,95 @@
                 success: function({
                     messages
                 }) {
-                    console.log('messages', messages);
-                    $("#success_message").text(messages.messages);
-                    fetch_medicineDogs_data('', pagination_url);
+                    $("#accessconfirmbranch").modal('show');
+                    $("#dataCheckingProgress").removeAttr('hidden');
+                    $("#access_modal_box").addClass('progress_body');
+                    $("#processModal_body").addClass('loading_body_area');
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#dataCheckingProgress").attr('hidden', true);
+                        $("#access_modal_box").removeClass('progress_body');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        console.log('messages', messages);
+                        $("#success_message").text(messages.messages);
+                        fetch_medicineDogs_data('', pagination_url);
+                    }, 1500);
                 }
             });
         });
 
         // Show-Medicine Modal---------------
         $("#showMedicine").on('click', function() {
-            $("#MedicineName").modal('show');
-            $(".head_title").addClass('skeleton');
-            $(".clos_title").addClass('skeleton');
-            $(".per_page").addClass('skeleton');
-            $(".selec_item").addClass('select-skeleton');
-            $("#medic_nam").addClass('skeleton');
-            $("#medic_nam2").addClass('skeleton');
-            $("#medic_nam3").addClass('skeleton');
-            $("#medic_nam4").addClass('skeleton');
-            $("#medic_nam5").addClass('skeleton');
-            $("#medic_nam6").addClass('skeleton');
-            $("#medic_nam7").addClass('skeleton');
-            $("#medic_nam8").addClass('skeleton');
-            $("#medic_nam9").addClass('skeleton');
-            $("#search_area_").addClass('skeleton');
-            $("#med_label").addClass('skeleton');
-            $("#med_label2").addClass('skeleton');
-            $("#search_on_").addClass('skeleton');
-            $("#iteam_label").addClass('skeleton');
-            $("#iteam_label2").addClass('skeleton');
-            $("#iteam_label3").addClass('skeleton');
-            $("#iteam_label5").addClass('skeleton');
-            $("#total_medic_records").addClass('skeleton');
-            $("#med").addClass('skeleton');
-            $("#medicine_table_paginate").addClass('paginate-skeleton');
-            $(".iteam_label4").addClass('skeleton');
+            $("#accessconfirmbranch").modal('show');
+            $("#pageLoader").removeAttr('hidden');
+            $("#access_modal_box").addClass('loader_area');
+            $("#processModal_body").removeClass('loading_body_area');
+            setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#pageLoader").attr('hidden', true);
+                $("#access_modal_box").removeClass('loader_area');
+                $("#processModal_body").addClass('loading_body_area');
 
-            var time = null;
-            time = setTimeout(() => {
-                $(".head_title").removeClass('skeleton');
-                $(".clos_title").removeClass('skeleton');
-                $(".per_page").removeClass('skeleton');
-                $(".selec_item").removeClass('select-skeleton');
-                $("#medic_nam").removeClass('skeleton');
-                $("#medic_nam2").removeClass('skeleton');
-                $("#medic_nam3").removeClass('skeleton');
-                $("#medic_nam4").removeClass('skeleton');
-                $("#medic_nam5").removeClass('skeleton');
-                $("#medic_nam6").removeClass('skeleton');
-                $("#medic_nam7").removeClass('skeleton');
-                $("#medic_nam8").removeClass('skeleton');
-                $("#medic_nam9").removeClass('skeleton');
-                $("#search_area_").removeClass('skeleton');
-                $("#med_label").removeClass('skeleton');
-                $("#med_label2").removeClass('skeleton');
-                $("#search_on_").removeClass('skeleton');
-                $("#iteam_label").removeClass('skeleton');
-                $("#iteam_label2").removeClass('skeleton');
-                $("#iteam_label3").removeClass('skeleton');
-                $("#iteam_label5").removeClass('skeleton');
-                $("#total_medic_records").removeClass('skeleton');
-                $("#med").removeClass('skeleton');
-                $("#medicine_table_paginate").removeClass('paginate-skeleton');
-                $(".iteam_label4").removeClass('skeleton');
-            }, 1000);
-
-            return ()=>{
-                clearTimeout(time);
-            }
+                $("#MedicineName").modal('show');
+                $(".head_title").addClass('skeleton');
+                $(".clos_title").addClass('skeleton');
+                $(".per_page").addClass('skeleton');
+                $(".selec_item").addClass('select-skeleton');
+                $("#medic_nam").addClass('skeleton');
+                $("#medic_nam2").addClass('skeleton');
+                $("#medic_nam3").addClass('skeleton');
+                $("#medic_nam4").addClass('skeleton');
+                $("#medic_nam5").addClass('skeleton');
+                $("#medic_nam6").addClass('skeleton');
+                $("#medic_nam7").addClass('skeleton');
+                $("#medic_nam8").addClass('skeleton');
+                $("#medic_nam9").addClass('skeleton');
+                $("#search_area_").addClass('skeleton');
+                $("#med_label").addClass('skeleton');
+                $("#med_label2").addClass('skeleton');
+                $("#search_on_").addClass('skeleton');
+                $("#iteam_label").addClass('skeleton');
+                $("#iteam_label2").addClass('skeleton');
+                $("#iteam_label3").addClass('total-record-skeletone');
+                $("#iteam_label5").addClass('skeleton');
+                $("#total_medic_records").addClass('skeleton');
+                $("#med").addClass('skeleton');
+                $("#medicine_table_paginate").addClass('paginate-skeleton');
+                $(".iteam_label4").addClass('pill-label-skeletone');
+    
+                var time = null;
+                time = setTimeout(() => {
+                    $(".head_title").removeClass('skeleton');
+                    $(".clos_title").removeClass('skeleton');
+                    $(".per_page").removeClass('skeleton');
+                    $(".selec_item").removeClass('select-skeleton');
+                    $("#medic_nam").removeClass('skeleton');
+                    $("#medic_nam2").removeClass('skeleton');
+                    $("#medic_nam3").removeClass('skeleton');
+                    $("#medic_nam4").removeClass('skeleton');
+                    $("#medic_nam5").removeClass('skeleton');
+                    $("#medic_nam6").removeClass('skeleton');
+                    $("#medic_nam7").removeClass('skeleton');
+                    $("#medic_nam8").removeClass('skeleton');
+                    $("#medic_nam9").removeClass('skeleton');
+                    $("#search_area_").removeClass('skeleton');
+                    $("#med_label").removeClass('skeleton');
+                    $("#med_label2").removeClass('skeleton');
+                    $("#search_on_").removeClass('skeleton');
+                    $("#iteam_label").removeClass('skeleton');
+                    $("#iteam_label2").removeClass('skeleton');
+                    $("#iteam_label3").removeClass('total-record-skeletone');
+                    $("#iteam_label5").removeClass('skeleton');
+                    $("#total_medic_records").removeClass('skeleton');
+                    $("#med").removeClass('skeleton');
+                    $("#medicine_table_paginate").removeClass('paginate-skeleton');
+                    $(".iteam_label4").removeClass('pill-label-skeletone');
+                }, 1000);
+    
+                return ()=>{
+                    clearTimeout(time);
+                }
+            }, 1500);
         });
 
         $(document).load('click', function(){

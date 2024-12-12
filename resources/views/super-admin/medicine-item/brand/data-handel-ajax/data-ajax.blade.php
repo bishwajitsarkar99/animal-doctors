@@ -154,7 +154,7 @@
 
             var time = null;
             $("#brand_data_table").addClass('skeleton');
-            $("#brand_tab").addClass('skeleton');
+            $("#cat_td6").addClass('skeleton');
             $("#brand_tab2").addClass('skeleton');
             $("#brand_tab3").addClass('skeleton');
             $("#brand_tab4").addClass('skeleton');
@@ -164,7 +164,7 @@
 
             time = setTimeout(() => {
                 $("#brand_data_table").removeClass('skeleton');
-                $("#brand_tab").removeClass('skeleton');
+                $("#cat_td6").removeClass('skeleton');
                 $("#brand_tab2").removeClass('skeleton');
                 $("#brand_tab3").removeClass('skeleton');
                 $("#brand_tab4").removeClass('skeleton');
@@ -560,9 +560,19 @@
                 success: function({
                     messages
                 }) {
-                    console.log('messages', messages);
-                    $("#success_message").text(messages.messages);
-                    fetch_brand_data('', pagination_url);
+                    $("#accessconfirmbranch").modal('show');
+                    $("#dataCheckingProgress").removeAttr('hidden');
+                    $("#access_modal_box").addClass('progress_body');
+                    $("#processModal_body").addClass('loading_body_area');
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#dataCheckingProgress").attr('hidden', true);
+                        $("#access_modal_box").removeClass('progress_body');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        console.log('messages', messages);
+                        $("#success_message").text(messages.messages);
+                        fetch_brand_data('', pagination_url);
+                    }, 1500);
                 }
             });
         });

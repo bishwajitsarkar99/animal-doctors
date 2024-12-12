@@ -1,16 +1,20 @@
 <script>
     $(document).ready(() => {
         // switch on/off----- users table search
-        $("#name_search").hide();
         $("#search_off_").show();
-        $("#search_on_").hide();
+        
+        $(document).on('click', '#search_area_', function() {
 
-        $("#search_area_").on('click', function(){
-            $("#name_search").toggle('slide');
-            $("#name_search").focus();
-            $("#search_off_").toggle('slow');
-            $("#search_on_").toggle('slow');
-
+            if ($(this).prop('checked')) {
+                $("#name_search").removeAttr('hidden');
+                $("#name_search").focus();
+                $("#search_on_").removeAttr('hidden');
+                $("#search_off_").hide();
+            } else {
+                $("#name_search").attr('hidden', true);
+                $("#search_on_").attr('hidden', true);
+                $("#search_off_").show();
+            }
         });
     
         fetch_medicine_name();
@@ -106,7 +110,6 @@
         $(document).on('keyup', '.searchform', function(){
             $('.prd-search-icon').removeClass('prd-search-hidden');
             $("#medic_nam6").addClass('skeleton');
-            $("#medic_row").addClass('skeleton');
             $("#medic_row2").addClass('skeleton');
             $("#medic_row3").addClass('skeleton');
 
@@ -115,7 +118,6 @@
             time = setTimeout(() => {
                 $('.prd-search-icon').addClass('prd-search-hidden');
                 $("#medic_nam6").removeClass('skeleton');
-                $("#medic_row").removeClass('skeleton');
                 $("#medic_row2").removeClass('skeleton');
                 $("#medic_row3").removeClass('skeleton');
             }, 1000);

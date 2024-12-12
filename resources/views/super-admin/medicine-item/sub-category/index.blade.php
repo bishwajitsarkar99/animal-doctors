@@ -40,7 +40,7 @@
               </span>
             </div>
           </div>
-          <div>
+          <div class="table-responsive">
             <table class="ord_table center border-1 skeleton mt-2">
               <tr class="table-row order_body acc_setting_table">
                 <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.ID')}}</th>
@@ -143,6 +143,7 @@
     </div>
   </div>
 </div>
+@include('loader.action-loader')
 {{-- Start Category Modal--}}
 <!-- Modal -->
 <div class="modal fade" id="category" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -159,56 +160,64 @@
         <div class="card form-control form-control-sm" id="tb_subcatg">
           <div class="card-body" id="tb_subcatg2">
             <div class="row">
-              <div class="col-6">
-                <span class="form-check form-switch search_ me-2">
+              <div class="col-12">
+                <span class="form-check form-switch search_" id="src_box">
                   <input class="form-check-input mt-2 skeleton" type="checkbox" id="search_area_" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                   <label class="search catg_ser_label ps-1 pt-1" for="search pe-2" id="tb_group2">{{__('translate.Search')}} :</label>
-                  <label class="form-check-label skeleton" for="collapseExample"><span class="search_on skeleton" id="search_off_" style="color: darkcyan;font-weight:600;font-size: 12px;font-family: sans-serif;">OFF</span><span class="search_on skeleton" id="search_on_" style="color: darkcyan;font-weight:600;font-size: 12px;font-family: sans-serif;">ON</span></label>
-                </span>
-              </div>
-              <div class="col-6">
-                <span id="search_plate">
-                  <input id="cat_search" type="search" name="search" list="datalistOptions2" id="exampleDataList" class="category-all-search searchform2 catSearch ps-1" placeholder="{{__('translate.Category Search.........')}}">
-                    <i class="cat-search-icon fa fa-spinner fa-spin cat-search-hidden"></i>
-                    <datalist id="datalistOptions2">
-                      @foreach($categories as $category)
-                      <option value="{{$category->category_name}}">
-                      @endforeach
-                    </datalist>
+                  <label class="form-check-label skeleton" for="collapseExample">
+                    <span class="search_on skeleton" id="search_off_" style="color: darkcyan;font-weight:600;font-size: 12px;">OFF</span>
+                    <span class="search_on skeleton" id="search_on_" style="color: darkcyan;font-weight:600;font-size: 12px;" hidden>ON</span>
+                  </label>
                 </span>
               </div>
             </div>
-            <table class="ord_table center border-1 mt-2" id="medic_nam">
-              <thead id="group_nam2">
-                <tr id="group_nam3" style="color:black;">
-                  <th id="group_nam4" class="tableHead back_color align">{{__('translate.ID')}}</th>
-                  <th id="group_nam5" data-coloumn="id" data-order="desc" class="sortable-header tableHead back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Cateogry Name')}}</th>
-                </tr>
-              </thead>
-              <tbody class="bg-transparent" id="cat_table" style="color:black;font-weight:500;cursor:alias;">
-
-              </tbody>
-              <div class="row table_last_row">
-                <div class="item_box col-3">
-                  <label class="item_class" id="perPage">Peritem</label>
-                  <div class="custom-select" id="pagesBox">
-                    <select class="ps-1" id="perItemControls">
-                      <option selected>10</option>
-                      <option>20</option>
-                      <option>50</option>
-                      <option>100</option>
-                      <option>200</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-9">
-                  <span class="tot_summ" style="float: right;">
-                    <label class="tot-search tot_record mt-3" for="tot_cagt"> {{__('translate.Total Category')}} :</label>
-                    <label class="badge rounded-pill bg-primary badge_label badg" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_cat_records" style="color:white;font-size:12px;font-family: sans-serif;"></span><span id="iteam_label6" style="font-weight: 600;color:white;">.00 {{__('translate.items')}}</span></label>
-                  </span>
+            <div class="row">
+              <div class="col-12">
+                <span id="search_plate">
+                  <input id="cat_search" type="search" name="search" list="datalistOptions2" id="exampleDataList" class="category-all-search searchform2 catSearch ps-1" placeholder="{{__('translate.Category Search.........')}}" hidden>
+                  <i class="cat-search-icon fa fa-spinner fa-spin cat-search-hidden"></i>
+                  <datalist id="datalistOptions2">
+                    @foreach($categories as $category)
+                    <option value="{{$category->category_name}}">
+                    @endforeach
+                  </datalist>
+                </span>
+              </div>
+            </div>
+            <div class="row table_last_row">
+              <div class="item_box col-3">
+                <label class="item_class" id="perPage">Peritem</label>
+                <div class="custom-select" id="pagesBox">
+                  <select class="ps-1" id="perItemControls">
+                    <option selected>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                    <option>100</option>
+                    <option>200</option>
+                  </select>
                 </div>
               </div>
-            </table>
+              <div class="col-9">
+                <span class="tot_summ" style="float: right;">
+                  <label class="tot-search tot_record mt-3" for="tot_cagt"> {{__('translate.Total Category')}} :</label>
+                  <label class="badge rounded-pill bg-primary badge_label badg" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_cat_records" style="color:white;font-size:12px;font-family: sans-serif;"></span><span id="iteam_label6" style="font-weight: 600;color:white;">.00 {{__('translate.items')}}</span></label>
+                </span>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="ord_table center border-1 mt-2" id="medic_nam">
+                <thead id="group_nam2">
+                  <tr id="group_nam3" style="color:black;">
+                    <th id="group_nam4" class="tableHead back_color align">{{__('translate.ID')}}</th>
+                    <th id="group_nam5" data-coloumn="id" data-order="desc" class="sortable-header tableHead back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Cateogry Name')}}</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-transparent" id="cat_table" style="color:black;font-weight:500;cursor:alias;">
+  
+                </tbody>
+                
+              </table>
+            </div>
             <div class="row">
               <div class="col-12">
                 <div class="pagination mt-" style="float: right;" id="cat_table_paginate">
@@ -332,6 +341,7 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/sub-category/sub-category.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 @endsection
 @section('script')
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>

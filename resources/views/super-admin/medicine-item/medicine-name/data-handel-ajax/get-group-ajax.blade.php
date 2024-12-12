@@ -1,18 +1,20 @@
 <script>
     $(document).ready(() => {
         // switch on/off----- users table search
-        $("#name_search").hide();
         $("#search_off_").show();
-        $("#search_on_").hide();
-        $('.medic-search-icon').hide();
+        
+        $(document).on('click', '#search_area_', function() {
 
-        $("#search_area_").on('click', function(){
-            $("#name_search").toggle('slide');
-            $("#name_search").focus();
-            $("#search_off_").toggle('slow');
-            $("#search_on_").toggle('slow');
-            $('.medic-search-icon').toggle().removeClass('medic-search-hidden');
-
+            if ($(this).prop('checked')) {
+                $("#group_search").removeAttr('hidden');
+                $("#group_search").focus();
+                $("#search_on_").removeAttr('hidden');
+                $("#search_off_").hide();
+            } else {
+                $("#group_search").attr('hidden', true);
+                $("#search_on_").attr('hidden', true);
+                $("#search_off_").show();
+            }
         });
     
         fetch_group();
@@ -21,7 +23,7 @@
             if (rows.length === 0) {
                 return `
                     <tr>
-                        <td class="error_data" align="center" text-danger colspan="11">
+                        <td class="error_data" align="center" text-danger colspan="3">
                             Medicine Group Data Not Exists On Server !
                         </td>
                     </tr>
@@ -107,7 +109,6 @@
         $(document).on('keyup', '.searchform', function(){
             $('.medic-search-icon').removeClass('medic-search-hidden');
             $("#group_table").addClass('skeleton');
-            $("#group_row").addClass('skeleton');
             $("#group_row2").addClass('skeleton');
             $("#group_row3").addClass('skeleton');
 
@@ -116,7 +117,6 @@
             time = setTimeout(() => {
                 $('.medic-search-icon').addClass('medic-search-hidden');
                 $("#group_table").removeClass('skeleton');
-                $("#group_row").removeClass('skeleton');
                 $("#group_row2").removeClass('skeleton');
                 $("#group_row3").removeClass('skeleton');
             }, 1000);

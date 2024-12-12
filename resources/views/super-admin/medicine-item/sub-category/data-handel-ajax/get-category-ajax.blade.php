@@ -6,7 +6,7 @@
             if (rows.length === 0) {
                 return `
                     <tr>
-                        <td class="error_data" align="center" text-danger colspan="2">
+                        <td class="error_data" align="center" text-danger colspan="3">
                             Category Data Not Exists On Server !
                         </td>
                     </tr>
@@ -94,14 +94,12 @@
             var time =null;
 
             $("#cat_table").addClass('skeleton');
-            $("#category_td").addClass('skeleton');
             $("#category_td2").addClass('skeleton');
             $("#category_td3").addClass('skeleton');
             $(".cat-search-icon").removeClass('cat-search-hidden');
 
             time = setTimeout(() => {
                 $("#cat_table").removeClass('skeleton');
-                $("#category_td").removeClass('skeleton');
                 $("#category_td2").removeClass('skeleton');
                 $("#category_td3").removeClass('skeleton'); 
                 $(".cat-search-icon").addClass('cat-search-hidden');
@@ -113,15 +111,20 @@
 
         });
 
-        // search-mode
+        // search-mode-btn
         $("#search_off_").show();
-        $("#search_on_").hide();
-        $("#cat_search").hide();
-        $("#search_area_").on('click', function(){
-            $("#cat_search").toggle('slide');
-            $("#cat_search").focus();
-            $("#search_off_").toggle('slow');
-            $("#search_on_").toggle('slow');
+        
+        $(document).on('click', '#search_area_', function() {
+
+            if ($(this).prop('checked')) {
+                $("#cat_search").removeAttr('hidden').focus();
+                $("#search_on_").removeAttr('hidden');
+                $("#search_off_").hide();
+            } else {
+                $("#cat_search").attr('hidden', true);
+                $("#search_on_").attr('hidden', true);
+                $("#search_off_").show();
+            }
         });
         // Paginate Page-------------------------------
         const paginate_html = ({

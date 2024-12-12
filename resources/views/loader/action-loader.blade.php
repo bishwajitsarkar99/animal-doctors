@@ -30,6 +30,10 @@
             <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-processing" style="width:75%;"></div>
             <div class="progress-bar animation_progress">Searching...</div>
           </div>
+          <div class="progress ms-2" id="dataCheckingProgress" hidden>
+            <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-processing" style="width:75%;"></div>
+            <div class="progress-bar animation_progress">Checking...</div>
+          </div>
         </div>  
       </div>
     </div>

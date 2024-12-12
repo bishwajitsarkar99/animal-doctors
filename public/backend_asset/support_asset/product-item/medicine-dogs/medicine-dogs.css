@@ -1,10 +1,45 @@
 :root{
     --search-background:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, #e1e1e1, rgba(0, 0, 0, 0.05) 100%);
-    --table-head-background:linear-gradient(1deg, #dbd8d8db, transparent 3%, #d3d3d3c4, #d7d7d7db);
+    --table-head-background:linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
     --medicine-dosage-font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
-.skeleton-card-head-capsule-two,.skeleton-card-head-labl-two,.skeleton-card-head-two{
+span#num_plate {
+    margin-top: 10px;
+}
+label.item_class {
+    color: black;
+    font-weight: 600;
+    font-family: var(--medicine-dosage-font-family);
+    margin-top: 5px;
+}
+.skeleton-card-head-capsule-two,.skeleton-card-head-labl-two,.skeleton-card-head-two,.pill-label-skeletone,.total-record-skeletone{
     position: relative;
+}
+.total-record-skeletone::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 100%;
+    height: 23px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px;
+}
+.pill-label-skeletone::before{
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 106%;
+    height: 23px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 3px;
 }
 .skeleton-card-head-two::before{
     content: "";
@@ -74,7 +109,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 120%;
+    width: 50px;
     height: 97%;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
@@ -96,12 +131,12 @@ button#dosage4 {
 button#dosage4 {
     background: orangered;
     color: white;
-    font-family: sans-serif;
+    font-family: var(--medicine-dosage-font-family);
 }
 button#dosage4:hover {
     background: #e9e9e9;
     color: orangered;
-    font-family: sans-serif;
+    font-family: var(--medicine-dosage-font-family);
 }
 tr>th.tableHead {
     font-weight: 800;
@@ -116,13 +151,13 @@ span#search_off_ {
     color: darkcyan;
     font-size: 11px;
     font-weight: 600;
-    font-family: sans-serif;
+    font-family: var(--medicine-dosage-font-family);
 }
 span#search_on_ {
     color: darkcyan;
     font-size: 11px;
     font-weight: 600;
-    font-family: sans-serif;
+    font-family: var(--medicine-dosage-font-family);
 }
 .prd-search-hidden{
     display: none;
@@ -131,13 +166,13 @@ span.total_result {
     font-weight: 600;
     color: darkcyan;
     font-size: 12px;
-    font-family: sans-serif;
+    font-family: var(--medicine-dosage-font-family);
 }
 label.catg_ser_label {
     color: black;
     font-weight: 600;
     font-size: 13px;
-    font-family: sans-serif;
+    font-family: var(--medicine-dosage-font-family);
 }
 select#perItemControl2 {
     outline: none;
@@ -191,7 +226,8 @@ input#name_search {
     border-radius: 5px;
     box-shadow: 0px 2px 20px #0001;
     animation: text_color 3s infinite;
-    font-family: sans-serif;
+    font-family: var(--medicine-dosage-font-family);
+    width: 100%;
 }
 input#medicine_dogs {
     outline: none;
@@ -207,7 +243,7 @@ input#medicine_dogs {
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
-    font-family: sans-serif;
+    font-family: var(--medicine-dosage-font-family);
 }
 input#medicine_id {
     outline: none;
@@ -223,7 +259,7 @@ input#medicine_id {
     border-left: 1px solid #f1eeee;
     border-right: 1px solid #f1eeee;
     color: black;
-    font-family: sans-serif;
+    font-family: var(--medicine-dosage-font-family);
 }
 @keyframes supfncolor{
     0%{

@@ -284,17 +284,28 @@
                             $('#savForm_error').fadeIn();
                         });
                     } else {
-                        $('#savForm_error').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
-                        $('#sub_category_name').val("");
-                        $('#category_id').val("");
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
                         setTimeout(() => {
-                            $('#success_message').fadeOut(3000);
-                        }, 5000);
-                        fetch_subcategory_data();
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            
+                            $('#savForm_error').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $('#success_message').text(response.messages);
+                            $('#sub_category_name').val("");
+                            $('#category_id').val("");
+                            setTimeout(() => {
+                                $('#success_message').fadeOut(3000);
+                            }, 5000);
+                            fetch_subcategory_data();
+                        }, 1500);
                     }
 
                 }
@@ -401,19 +412,30 @@
                         $('#success_message').addClass('alert_show ps-1 pe-1');
                         $('#success_message').text(response.messages);
                     } else {
-                        $('#updateForm_errorList').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
-                        $('#success_message').text(response.messages);
-                        $('.edit_sub_category_name').val("");
-                        $('.edit_sub_category_name').val("");
-                        $('#category_id').val("");
-                        setTimeout(() => {
-                            $('#success_message').fadeOut(3000);
-                        }, 5000);
                         $("#updateconfirmsubcategory").modal('hide');
-                        fetch_subcategory_data();
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            
+                            $('#updateForm_errorList').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $('#success_message').text(response.messages);
+                            $('.edit_sub_category_name').val("");
+                            $('.edit_sub_category_name').val("");
+                            $('#category_id').val("");
+                            setTimeout(() => {
+                                $('#success_message').fadeOut(3000);
+                            }, 5000);
+                            fetch_subcategory_data();
+                        }, 1500);
                     }
                 }
             });
@@ -486,15 +508,26 @@
                 type: "DELETE",
                 url: "/delete-sub-category/" + sub_category_id,
                 success: function(response) {
-                    $('#success_message').addClass('alert_show ps-1 pe-1');
-                    $('#success_message').fadeIn();
-                    $('#success_message').text(response.messages);
-                    setTimeout(() => {
-                        $('#success_message').fadeOut();
-                    }, 3000);
                     $('#deletesubcategory').modal('hide');
                     $('#deleteconfirmsubcategory').modal('hide');
-                    fetch_subcategory_data();
+                    $("#accessconfirmbranch").modal('show');
+                    $("#pageLoader").removeAttr('hidden');
+                    $("#access_modal_box").addClass('loader_area');
+                    $("#processModal_body").removeClass('loading_body_area');
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#pageLoader").attr('hidden', true);
+                        $("#access_modal_box").removeClass('loader_area');
+                        $("#processModal_body").addClass('loading_body_area');
+                        
+                        $('#success_message').addClass('alert_show ps-1 pe-1');
+                        $('#success_message').fadeIn();
+                        $('#success_message').text(response.messages);
+                        setTimeout(() => {
+                            $('#success_message').fadeOut();
+                        }, 3000);
+                        fetch_subcategory_data();
+                    }, 1500);
                 }
 
             });
@@ -524,59 +557,83 @@
                 success: function({
                     messages
                 }) {
-                    console.log('messages', messages);
-                    $("#success_message").text(messages.messages);
-                    fetch_subcategory_data('', pagination_url);
+                    $("#accessconfirmbranch").modal('show');
+                    $("#dataCheckingProgress").removeAttr('hidden');
+                    $("#access_modal_box").addClass('progress_body');
+                    $("#processModal_body").addClass('loading_body_area');
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#dataCheckingProgress").attr('hidden', true);
+                        $("#access_modal_box").removeClass('progress_body');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        console.log('messages', messages);
+                        $("#success_message").text(messages.messages);
+                        fetch_subcategory_data('', pagination_url);
+                    }, 1500);
                 }
             });
         });
 
         // Show Category Data----------
         $("#showCategory").on('click', function(){
-            $("#category").modal('show');
-            $(".head_title").addClass('skeleton');
-            $("#search_area_").addClass('skeleton');
-            $("#tb_group2").addClass('skeleton');
-            $("#search_off_").addClass('skeleton');
-            $("#total_cat_records").addClass('skeleton');
-            $("#iteam_label6").addClass('skeleton');
-            $("#group_nam2").addClass('skeleton');
-            $("#group_nam3").addClass('skeleton');
-            $("#group_nam4").addClass('skeleton');
-            $("#group_nam5").addClass('skeleton');
-            $("#cat_table").addClass('skeleton');
-            $("#perPage").addClass('skeleton');
-            $("#pagesBox").addClass('skeleton');
-            $("#cat_table_paginate").addClass('paginate-skeleton');
-            $(".tot_record").addClass('skeleton');
-            $(".badge_label").addClass('skeleton');
-            $(".head_btn").addClass('skeleton');
+            $("#accessconfirmbranch").modal('show');
+            $("#pageLoader").removeAttr('hidden');
+            $("#access_modal_box").addClass('loader_area');
+            $("#processModal_body").removeClass('loading_body_area');
+            setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#pageLoader").attr('hidden', true);
+                $("#access_modal_box").removeClass('loader_area');
+                $("#processModal_body").addClass('loading_body_area');
+                
+                $("#category").modal('show');
+                $(".head_title").addClass('skeleton');
+                $("#search_area_").addClass('skeleton');
+                $("#tb_group2").addClass('skeleton');
+                $("#search_off_").addClass('skeleton');
+                $("#total_cat_records").addClass('pill-skeletone');
+                $("#iteam_label6").addClass('skeleton');
+                $("#group_nam2").addClass('skeleton');
+                $("#group_nam3").addClass('skeleton');
+                $("#group_nam4").addClass('skeleton');
+                $("#group_nam5").addClass('skeleton');
+                $("#cat_table").addClass('skeleton');
+                $("#perPage").addClass('skeleton');
+                $("#pagesBox").addClass('peritem-skeletone');
+                $("#cat_table_paginate").addClass('paginate-skeleton');
+                $(".tot_record").addClass('total-record-skeletone');
+                $(".badge_label").addClass('pill-label-skeletone');
+                $(".head_btn").addClass('skeleton');
+                $("#src_box").addClass('skeleton');
+    
+                var time = null;
+                time = setTimeout(() => {
+                    $(".head_title").removeClass('skeleton');
+                    $(".head_btn").removeClass('skeleton');
+                    $("#search_area_").removeClass('skeleton');
+                    $("#tb_group2").removeClass('skeleton');
+                    $("#search_off_").removeClass('skeleton');
+                    $("#total_cat_records").removeClass('pill-skeletone');
+                    $("#iteam_label6").removeClass('skeleton');
+                    $("#group_nam2").removeClass('skeleton');
+                    $("#group_nam3").removeClass('skeleton');
+                    $("#group_nam4").removeClass('skeleton');
+                    $("#group_nam5").removeClass('skeleton');
+                    $("#cat_table").removeClass('skeleton');
+    
+                    $(".badge_label").removeClass('pill-label-skeletone');
+                    $("#perPage").removeClass('skeleton');
+                    $("#pagesBox").removeClass('peritem-skeletone');
+                    $("#cat_table_paginate").removeClass('paginate-skeleton');
+                    $(".tot_record").removeClass('total-record-skeletone');
+                    $("#src_box").removeClass('skeleton');
+                }, 1000);
+    
+                return ()=>{
+                    clearTimeout(time);
+                }
+            }, 1500);
 
-            var time = null;
-            time = setTimeout(() => {
-                $(".head_title").removeClass('skeleton');
-                $(".head_btn").removeClass('skeleton');
-                $("#search_area_").removeClass('skeleton');
-                $("#tb_group2").removeClass('skeleton');
-                $("#search_off_").removeClass('skeleton');
-                $("#total_cat_records").removeClass('skeleton');
-                $("#iteam_label6").removeClass('skeleton');
-                $("#group_nam2").removeClass('skeleton');
-                $("#group_nam3").removeClass('skeleton');
-                $("#group_nam4").removeClass('skeleton');
-                $("#group_nam5").removeClass('skeleton');
-                $("#cat_table").removeClass('skeleton');
-
-                $(".badge_label").removeClass('skeleton');
-                $("#perPage").removeClass('skeleton');
-                $("#pagesBox").removeClass('skeleton');
-                $("#cat_table_paginate").removeClass('paginate-skeleton');
-                $(".tot_record").removeClass('skeleton');
-            }, 1000);
-
-            return ()=>{
-                clearTimeout(time);
-            }
         });
 
         $(document).load('click', function(){

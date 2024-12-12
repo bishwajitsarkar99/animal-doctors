@@ -33,15 +33,15 @@ div#access_modal_box{
 @keyframes progressfocus {
     0%{
         color: #fff;
-        background-color: #efefef;
+        background-color: #b8860b;
     }
     50%{
-        color: darkgrey;
-        background-color: darkgoldenrod;
+        color: #a9a9a9;
+        background-color: #b8860b;
     }
     100%{
-        color: white;
-        background-color: darkgoldenrod;
+        color: #fff;
+        background-color: #b8860b;
     }
 }
 .progress-bar-creating{

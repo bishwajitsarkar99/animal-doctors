@@ -43,16 +43,18 @@
               </span>
             </div>
           </div>
-          <div>
+          <div class="table-responsive">
             <table class="ord_table center border-1 skeleton mt-2">
-              <tr class="table-row order_body acc_setting_table skeleton">
-                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.ID')}}</th>
-                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Action')}}</th>
-                <th id="th_sort" data-coloumn="medicine_id" data-order="desc" class="tableHead table_th_color txt skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Medicine')}}</th>
-                <th id="th_sort" data-coloumn="dosage" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1" style="text-align: left;cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Medicine-Dosage')}}</th>
-                <th id="th_sort" data-coloumn="status" data-order="desc" class="tableHead table_th_color tot_pending_ skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Status')}}</th>
-                <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Check')}}</th>
-              </tr>
+              <thead>
+                <tr class="table-row order_body acc_setting_table skeleton">
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.ID')}}</th>
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Action')}}</th>
+                  <th id="th_sort" data-coloumn="medicine_id" data-order="desc" class="tableHead table_th_color txt skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Medicine')}}</th>
+                  <th id="th_sort" data-coloumn="dosage" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1" style="text-align: left;cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Medicine-Dosage')}}</th>
+                  <th id="th_sort" data-coloumn="status" data-order="desc" class="tableHead table_th_color tot_pending_ skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Status')}}</th>
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Check')}}</th>
+                </tr>
+              </thead>
               <tbody class="bg-transparent skeleton" id="medicine_dogs_data_table" style="color:black;font-weight:500;">
 
               </tbody>
@@ -139,6 +141,7 @@
     </div>
   </div>
 </div>
+@include('loader.action-loader')
 {{-- Start Medicine Name Modal--}}
 <!-- Modal -->
 <div class="modal fade" id="MedicineName" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -155,17 +158,22 @@
         <div class="card form-control form-control-sm" id="tb_subcatg">
           <div class="card-body">
             <div class="row">
-              <div class="col-6">
-                <span class="form-check form-switch search_ me-2" id="med">
+              <div class="col-12">
+                <span class="form-check form-switch search_" id="med">
                   <input class="form-check-input mt-2 skeleton" type="checkbox" id="search_area_" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                   <label class="search catg_ser_label ps-1 pt-1" id="med_label" for="search pe-2">{{__('translate.Search')}} :</label>
-                  <label class="form-check-label skeleton" id="med_label2" for="collapseExample"><span class="search_on skeleton" id="search_off_">OFF</span><span class="search_on skeleton" id="search_on_">ON</span></label>
+                  <label class="form-check-label skeleton" id="med_label2" for="collapseExample">
+                    <span class="search_on skeleton" id="search_off_">OFF</span>
+                    <span class="search_on skeleton" id="search_on_" hidden>ON</span>
+                  </label>
+                  <i class="prd-search-icon fa fa-spinner fa-spin prd-search-hidden"></i>
                 </span>
               </div>
-              <div class="col-6">
+            </div>
+            <div class="row">
+              <div class="col-12">
                 <span id="search_plate">
-                  <input id="name_search" type="search" name="search" list="datalistOptions2" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.Search.........')}}">
-                  <i class="prd-search-icon fa fa-spinner fa-spin prd-search-hidden"></i>
+                  <input id="name_search" type="search" name="search" list="datalistOptions2" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.Search.........')}}" hidden>
                   <datalist id="datalistOptions2">
                     @foreach($medicines as $medicine)
                       <option value="{{$medicine->medicine_name}}">
@@ -174,39 +182,41 @@
                 </span>
               </div>
             </div>
-            <table class="mt-1" id="medic_nam">
-              <thead id="medic_nam2">
-                <tr id="medic_nam3" style="color:black;">
-                  <th id="medic_nam4" class="tableHead back_color align">{{__('translate.ID')}}</th>
-                  <th id="medic_nam5" data-coloumn="id" data-order="desc" class="tableHead sortable-header back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Medicine Name')}}</th>
-                </tr>
-              </thead>
-              <tbody class="bg-transparnet tbody" id="medic_nam6" style="color:black;font-weight:500;cursor:alias;">
-
-              </tbody>
-              <div class="row table_last_row">
-                <div class="item_box col-2">
-                  <label class="item_class per_page">Peritem</label>
-                  <div class="custom-select selec_item">
-                    <select class="ps-1" id="perItemControl2">
-                      <option selected>10</option>
-                      <option>20</option>
-                      <option>50</option>
-                      <option>100</option>
-                      <option>200</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-10">
-                  <span class="tot_summ" style="float: right;" id="num_plate">
-                    <label class="tot-search mt-3" style="font-size: 12px;font-family: sans-serif;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Medicine Entry')}} :</label>
-                    <label class="badge rounded-pill bg-primary iteam_label4" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_medic_records"></span>
-                      <span id="iteam_label5" style="font-weight: 600;color:white;font-size:12px;font-family: sans-serif;">.00 {{__('translate.pics')}}</span>
-                    </label>
-                  </span>
+            <div class="table-responsive">
+              <table class="mt-1" id="medic_nam">
+                <thead id="medic_nam2">
+                  <tr id="medic_nam3" style="color:black;">
+                    <th id="medic_nam4" class="tableHead back_color align">{{__('translate.ID')}}</th>
+                    <th id="medic_nam5" data-coloumn="id" data-order="desc" class="tableHead sortable-header back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Medicine Name')}}</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-transparnet tbody" id="medic_nam6" style="color:black;font-weight:500;cursor:alias;">
+  
+                </tbody>
+              </table>
+            </div>
+            <div class="row table_last_row">
+              <div class="item_box col-2">
+                <label class="item_class per_page">Peritem</label>
+                <div class="custom-select selec_item">
+                  <select class="ps-1" id="perItemControl2">
+                    <option selected>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                    <option>100</option>
+                    <option>200</option>
+                  </select>
                 </div>
               </div>
-            </table>
+              <div class="col-10">
+                <span class="tot_summ" style="float: right;" id="num_plate">
+                  <label class="tot-search mt-3" style="font-size: 12px;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Medicine Entry')}} :</label>
+                  <label class="badge rounded-pill bg-primary iteam_label4" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_medic_records"></span>
+                    <span id="iteam_label5" style="font-weight: 600;color:white;font-size:11px;">.00 {{__('translate.pics')}}</span>
+                  </label>
+                </span>
+              </div>
+            </div>
             <div class="row">
               <div class="col-12">
                 <div class="pagination mt-" style="float: right;" id="medicine_table_paginate">
@@ -329,6 +339,7 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/medicine-dogs/medicine-dogs.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 @endsection
 @section('script')
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>

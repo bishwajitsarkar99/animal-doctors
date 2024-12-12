@@ -150,6 +150,7 @@ label.item_class {
     font-weight: 600;
     font-size: 12px;
     font-family: var(--product-font-family);
+    margin-top: 2px;
 }
 button#pro_delt4 {
     background: orangered;

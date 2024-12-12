@@ -340,21 +340,25 @@ td.center{
 .page-item:last-child .page-link, .page-item:last-child .datatable-pagination a, .datatable-pagination .page-item:last-child a, 
 .datatable-pagination li:last-child .page-link, .datatable-pagination li:last-child a {
  
-    background: linear-gradient(to bottom, silver, transparent, silver, lightgray);
+    background: linear-gradient(5deg, #b3b0b0, transparent 3%, lightgray, #c3c1c1c9);
     color: black;
     font-size: 11px;
     font-weight: 700;
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    opacity: 1;
+    background-color: transparent;
 }
 .page-item:first-child .page-link, .page-item:first-child .datatable-pagination a, .datatable-pagination .page-item:first-child a, 
 .datatable-pagination li:first-child .page-link, .datatable-pagination li:first-child a {
-    background: linear-gradient(to bottom, silver, transparent, silver, lightgray);
+    background: linear-gradient(5deg, #b3b0b0, transparent 3%, lightgray, #c3c1c1c9);
     color: black;
     font-size: 11px;
     font-weight: 700;
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    opacity: 1;
+    background-color: transparent;
 }
 
 li.page-item:active.page-link.btn_page{
@@ -366,7 +370,7 @@ li.page-item:active.page-link.btn_page{
 a.page-link.btn_page:hover{
     background:lightseagreen;
     color: white;
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'f;
 }
 .pagination, .datatable-pagination ul {
     --bs-pagination-padding-x: 0.75rem;
@@ -710,7 +714,7 @@ button#dltBtn{
 }
 td.error_data {
     text-align: center;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     color: #ffe7de;
     border-bottom: 1px solid silver;
@@ -718,7 +722,7 @@ td.error_data {
 }
 @keyframes alerttxtColor{
     0%{
-       color: #ddd;
+       color: #c5c5c5;
     }   
     100%{
        color: #cfa697;
@@ -740,7 +744,7 @@ opacity: 1;
 
 .paginate_link {
     line-height: 0.8;
-    margin-top: 14px;
+    margin-top: 18px;
 }
 
 .check_permission{
@@ -1007,13 +1011,17 @@ input#view_user_update {
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     opacity: 1;
 }
+tr.table-row.order_body.acc_setting_table {
+    background-image: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
+}
 th#th_sort {
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
-    background-image: var(--table-head-color);
+    /* background-image: var(--table-head-color); */
     color: black;
     font-size: 15px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    background-color: white;
+    background-color: transparent;
+    opacity: 5;
 }
 .search-hidden{
     display: none;

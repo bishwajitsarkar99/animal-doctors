@@ -93,14 +93,12 @@
             var time = null;
             $(".orgn-search-icon").removeClass('orgn-search-hidden');
             $("#orgin_table").addClass('skeleton');
-            $("#origin_tab").addClass('skeleton');
             $("#origin_tab2").addClass('skeleton');
             $("#origin_tab3").addClass('skeleton');
 
             time = setTimeout(() => {
                 $(".orgn-search-icon").addClass('orgn-search-hidden');
                 $("#orgin_table").removeClass('skeleton');
-                $("#origin_tab").removeClass('skeleton');
                 $("#origin_tab2").removeClass('skeleton');
                 $("#origin_tab3").removeClass('skeleton'); 
             }, 1000);
@@ -189,7 +187,8 @@
                 $("#origin_nam4").addClass('skeleton');
                 $("#origin_nam5").addClass('skeleton');
                 $("#orgin_table").addClass('skeleton');
-                $("#iteam_label3").addClass('result-skeleton');
+                $("#iteam_label3").addClass('total-record-skeletone');
+                $("#iteam_lab").addClass('pill-label-skeletone');
                 $("#total_org_records").addClass('skeleton');
                 $("#iteam_label6").addClass('skeleton');
                 $("#iteam_label").addClass('skeleton');
@@ -212,7 +211,8 @@
                     $("#origin_nam4").removeClass('skeleton');
                     $("#origin_nam5").removeClass('skeleton');
                     $("#orgin_table").removeClass('skeleton');
-                    $("#iteam_label3").removeClass('result-skeleton');
+                    $("#iteam_label3").removeClass('total-record-skeletone');
+                    $("#iteam_lab").removeClass('pill-label-skeletone');
                     $("#total_org_records").removeClass('skeleton');
                     $("#iteam_label6").removeClass('skeleton');
                     $("#iteam_label").removeClass('skeleton');

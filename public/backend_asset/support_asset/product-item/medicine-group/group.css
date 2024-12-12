@@ -14,8 +14,8 @@
     position: absolute;
     left: -1px;
     top: -1px;
-    width: 107%;
-    height: 107%;
+    width: 108%;
+    height: 108%;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
