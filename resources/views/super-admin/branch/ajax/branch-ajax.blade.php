@@ -120,17 +120,17 @@
                         $('#success_message').text(response.messages);
                     }else if(response.status == 200){
                         $("#accessconfirmbranch").modal('show');
-                        $("#pageLoader").removeAttr('hidden');
-                        $("#access_modal_box").addClass('loader_area');
-                        $("#processModal_body").removeClass('loading_body_area');
+                        $("#dataPullingProgress").removeAttr('hidden');
+                        $("#access_modal_box").addClass('progress_body');
+                        $("#processModal_body").addClass('loading_body_area');
                         $('#documents').attr('hidden', true);
                         $('.edit_branch_id').attr('hidden', true);
 
                         setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
-                            $("#pageLoader").attr('hidden', true);
-                            $("#access_modal_box").removeClass('loader_area');
-                            $("#processModal_body").addClass('loading_body_area');
+                            $("#dataPullingProgress").attr('hidden', true);
+                            $("#access_modal_box").removeClass('progress_body');
+                            $("#processModal_body").removeClass('loading_body_area');
                             $('#documents').removeAttr('hidden');
                             $('.edit_branch_id').removeAttr('hidden');
                             

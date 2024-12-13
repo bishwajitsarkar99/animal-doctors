@@ -30,19 +30,23 @@
             }
 
             return [...rows].map((row, key) => {
-                let statusClass, statusColor, statusText, statusBg, verifyText, statusSignal;
+                let statusClass, statusColor, statusText, statusBg, verifyText, statusSignal, statusTextColor, statusSinge;
                 if(row.status == 1){
-                    statusClass = 'text-dark';
-                    statusText = '❌ Unauthorize';
+                    statusClass = 'text-white';
+                    statusTextColor = 'text-danger';
+                    statusText = '<span style="font-weight:700;font-size: 12px;">Unauthorize</span>';
+                    statusSinge = '<i class="fa-solid fa-xmark"></i>';
                     statusColor = 'color:black;background-color: #fff;';
-                    statusBg = 'badge rounded-pill bg-warn';
+                    statusBg = 'badge rounded-pill bg-danger';
                     statusSignal = `<span class="fbox"><input id="light_focus" type="text" class="light5-focus" readonly></input></span>`;
                 }
                 else if(row.status == 0){
-                    statusClass = 'text-dark';
-                    statusText = '<span style="color:black;font-weight:800;font-size: 12px;"><i class="fa-solid fa-check"></i></span> Authorize';
+                    statusClass = 'text-white';
+                    statusTextColor = 'text-primary';
+                    statusText = '<span style="font-weight:700;font-size: 12px;">Authorize</span>';
+                    statusSinge = '<i class="fa-solid fa-check"></i>';
                     statusColor = 'color:black;background-color: #fff;';
-                    statusBg = 'badge rounded-pill bg-azure';
+                    statusBg = 'badge rounded-pill bg-success';
                     statusSignal = `<span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>`;
                 }
                 return `
@@ -66,19 +70,18 @@
                         </td>
                         <td class="txt_ bold ps-1">${row.name}</td>
                         <td class="tot_order_ bold ps-1">
+                            ${statusSignal}
                             <span style="color:gray"><i class="fa fa-envelope"></i></span>
                             ${row.email}
                         </td>
                         <td class="tot_pending_ bold ps-1">${row.contract_number}</td>
-                        <td class="tot_pending_ bold ps-1 ${row.role? ' text-primary': ' text-cyan'}">${row.role ==0 ? 'User': 'Superadmin' && row.role ==2 ? 'SubAdmin': 'User' && row.role ==1 ? 'SuperAdmin': 'User' && row.role ==3 ? 'Admin': 'User' && row.role ==5 ? 'Accounts': 'User' && row.role ==6 ? 'Marketing': 'User' && row.role ==7 ? 'Delivery Team': 'User'}</td>
+                        <td class="tot_pending_ bold ps-1 ${row.role? ' text-dark': ' text-dark'}">${row.role ==0 ? 'User': 'Superadmin' && row.role ==2 ? 'SubAdmin': 'User' && row.role ==1 ? 'SuperAdmin': 'User' && row.role ==3 ? 'Admin': 'User' && row.role ==5 ? 'Accounts': 'User' && row.role ==6 ? 'Marketing': 'User' && row.role ==7 ? 'Delivery Team': 'User'}</td>
                         <td class="tot_complete_ center ps-1">
                             <input class="form-switch form-check-input check_permission" type="checkbox" user_id="${row.id}" value="${row.status}" ${row.status? " checked": ''} ${row.email_verified_at === null ? 'disabled' : ''}>
                         </td>
-                        <td class="tot_complete_ pill ps-1 ${statusClass}">
-                            <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:12px;">
-                                ${statusText}
-                            </span>
-                            ${statusSignal}
+                        <td class="tot_complete_ pill ps-1">
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${statusBg} ${statusClass}">${statusSinge}</span>
+                            <span class=" ${statusTextColor}">${statusText}</span>
                         </td>
                         
                     </tr>
@@ -271,7 +274,6 @@
         $(document).on('click', '.edit_btn', function(e) {
             e.preventDefault();
             var user_id = $(this).val();
-            $('#edit_user_form').modal('show').fadeIn(300).delay(300);
             // Reset progress bar and image
             $(".register_img").removeClass('img-hidden');
             $('.bar').css('width', '0%');
@@ -286,36 +288,47 @@
                         $('#success_message').addClass('alert alert-danger');
                         $('#success_message').text(response.messages);
                     } else {
-                        $('#edit_user_id').val(user_id);
-                        $('#edit_user_name').val(response.data.name);
-                        $('#edit_user_email').val(response.data.email);
-                        $('#edit_user_contract').val(response.data.contract_number);
-                        $("#image_view").attr('src', `/image/${response.data.image}` );
-
-                        // Remove Error
-                        $('#updateForm_errorList').html("");
-                        $('#updateForm_errorList2').html("");
-                        $('#updateForm_errorList3').html("");
-
-                        if(response.data.name !== '' && response.data.email !== '' && response.data.contract_number !== '' && response.data.image !== ''){
-                            // Handle name validation
-                            $('.update_user').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
-                            $('.update_email').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
-                            $('.update_contract').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
-                            $('#usrName').html('<i class="fa-solid fa-check"></i>');
-                            $('#usrEmail').html('<i class="fa-solid fa-check"></i>');
-                            $('#usrContract').html('<i class="fa-solid fa-check"></i>');
-                            $('#usrImage').html('<i class="fa-solid fa-check"></i>');
-                        }else{
-                            // Handle name validation
-                            $('.update_user').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
-                            $('.update_email').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
-                            $('.update_contract').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
-                            $('#usrName').html("");
-                            $('#usrEmail').html("");
-                            $('#usrContract').html("");
-                            $('#usrImage').html("");
-                        }
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            $('#edit_user_form').modal('show').fadeIn(300).delay(300);
+                            $('#edit_user_id').val(user_id);
+                            $('#edit_user_name').val(response.data.name);
+                            $('#edit_user_email').val(response.data.email);
+                            $('#edit_user_contract').val(response.data.contract_number);
+                            $("#image_view").attr('src', `/image/${response.data.image}` );
+    
+                            // Remove Error
+                            $('#updateForm_errorList').html("");
+                            $('#updateForm_errorList2').html("");
+                            $('#updateForm_errorList3').html("");
+    
+                            if(response.data.name !== '' && response.data.email !== '' && response.data.contract_number !== '' && response.data.image !== ''){
+                                // Handle name validation
+                                $('.update_user').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
+                                $('.update_email').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
+                                $('.update_contract').addClass('show-success-border').removeClass('show-current-light-blue-border is-invalid');
+                                $('#usrName').html('<i class="fa-solid fa-check"></i>');
+                                $('#usrEmail').html('<i class="fa-solid fa-check"></i>');
+                                $('#usrContract').html('<i class="fa-solid fa-check"></i>');
+                                $('#usrImage').html('<i class="fa-solid fa-check"></i>');
+                            }else{
+                                // Handle name validation
+                                $('.update_user').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
+                                $('.update_email').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
+                                $('.update_contract').addClass('show-current-light-blue-border').removeClass('show-success-border is-invalid');
+                                $('#usrName').html("");
+                                $('#usrEmail').html("");
+                                $('#usrContract').html("");
+                                $('#usrImage').html("");
+                            }
+                        }, 1500);
                         
                     }
 
@@ -368,7 +381,6 @@
         $(document).on('click', '.view_btn', function(e) {
             e.preventDefault();
             var user_id = $(this).val();
-            $('#view_user_form').modal('show').fadeIn(300).delay(300);
 
             $.ajax({
                 type: "GET",
@@ -379,48 +391,59 @@
                         $('#success_message').addClass('alert alert-danger');
                         $('#success_message').text(response.messages);
                     } else {
-                        $('#view_user_id').val(user_id);
-                        $('#view_user_role').val(getRoleName(response.data.role)); 
-                        $('#view_user_name').val(response.data.name);
-                        $('#view_user_email').val(response.data.email);
-                        // email verification result
-                        if (response.data.email_verified_at === null) {
-                            $('#view_user_email_verified').html('<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">No verified</span>');
-                            $('#user_email_verified_session').html('<span style="color:orangered;font-size:14px;font-weight:700;"> - </span>');
-                        } else {
-                            $('#view_user_email_verified').html('<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">Verified</span>');
-                            // Displaying the calculated time difference
-                            const emailVerifiedSession = getTimeDifference(response.data.email_verified_at);
-                            $('#user_email_verified_session').html('<span style="color:blue;font-size:10px;font-weight:700;">'+ emailVerifiedSession +'</span>');
-                        }
-                        $('#view_user_contract').val(response.data.contract_number);
-                        // email verification date if it exists
-                        if (response.data.email_verified_at) {
-                            $('#view_user_email_verified_at').text(formatDate(response.data.email_verified_at));
-                        } else {
-                            $('#view_user_email_verified_at').text('- - - - - Null - - - - -');
-                        }
-                        $('#view_user_created_at').text(formatDate(response.data.created_at));
-                        $('#view_user_updated_at').text(formatDate(response.data.updated_at));
-                        $("#image_show").attr('src', `/image/${response.data.image}`);
-
-                        // Determine status properties
-                        let statusClass, statusColor, statusText, statusBg;
-                        if (response.data.status == 1) {
-                            statusClass = 'text-danger';
-                            statusText = '❌ Unauthorize';
-                            statusColor = 'color:darkgoldenrod;font-weight:600;';
-                            statusBg = 'badge rounded-pill';
-                        } else if (response.data.status == 0) {
-                            statusClass = 'text-cyan';
-                            statusText = '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span> Authorize';
-                            statusColor = 'color:black;font-weight:600;';
-                            statusBg = 'badge rounded-pill';
-                        }
-                        $('#view_user_status')
-                            .attr('class', statusClass)
-                            .attr('style', statusColor)
-                            .html(statusText);
+                        $("#accessconfirmbranch").modal('show');
+                        $("#loadingProgress").removeAttr('hidden');
+                        $("#access_modal_box").addClass('progress_body');
+                        $("#processModal_body").addClass('loading_body_area');
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#loadingProgress").attr('hidden', true);
+                            $("#access_modal_box").removeClass('progress_body');
+                            $("#processModal_body").removeClass('loading_body_area');
+                            $('#view_user_form').modal('show').fadeIn(300).delay(300);
+                            $('#view_user_id').val(user_id);
+                            $('#view_user_role').val(getRoleName(response.data.role)); 
+                            $('#view_user_name').val(response.data.name);
+                            $('#view_user_email').val(response.data.email);
+                            // email verification result
+                            if (response.data.email_verified_at === null) {
+                                $('#view_user_email_verified').html('<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">No verified</span>');
+                                $('#user_email_verified_session').html('<span style="color:orangered;font-size:14px;font-weight:700;"> - </span>');
+                            } else {
+                                $('#view_user_email_verified').html('<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 10px;">Verified</span>');
+                                // Displaying the calculated time difference
+                                const emailVerifiedSession = getTimeDifference(response.data.email_verified_at);
+                                $('#user_email_verified_session').html('<span style="color:blue;font-size:10px;font-weight:700;">'+ emailVerifiedSession +'</span>');
+                            }
+                            $('#view_user_contract').val(response.data.contract_number);
+                            // email verification date if it exists
+                            if (response.data.email_verified_at) {
+                                $('#view_user_email_verified_at').text(formatDate(response.data.email_verified_at));
+                            } else {
+                                $('#view_user_email_verified_at').text(' Null - - - - -');
+                            }
+                            $('#view_user_created_at').text(formatDate(response.data.created_at));
+                            $('#view_user_updated_at').text(formatDate(response.data.updated_at));
+                            $("#image_show").attr('src', `/image/${response.data.image}`);
+    
+                            // Determine status properties
+                            let statusClass, statusColor, statusText, statusBg;
+                            if (response.data.status == 1) {
+                                statusClass = 'text-white';
+                                statusText = '<span class="badge rounded-pill bg-danger"><i class="fa-solid fa-xmark"></i> Unauthorize</span>';
+                                statusColor = 'font-weight:600;font-size:14px;letter-spacing: 1px;';
+                                statusBg = 'badge rounded-pill';
+                            } else if (response.data.status == 0) {
+                                statusClass = 'text-white';
+                                statusText = '<span class="badge rounded-pill bg-success"><i class="fa-solid fa-check"></i> Authorize</span>';
+                                statusColor = 'font-weight:600;font-size:14px;letter-spacing: 1px;';
+                                statusBg = 'badge rounded-pill';
+                            }
+                            $('#view_user_status')
+                                .attr('class', statusClass)
+                                .attr('style', statusColor)
+                                .html(statusText);
+                        }, 1500);
                     }
                 }
 
@@ -526,15 +549,25 @@
                         handleSuccessMessage('#success_message');
                         $('#updateconfirmuser').modal('hide');
                     } else if(response.status == 200){
-                        $('#updateForm_errorList').html("");
-                        $('#updateForm_errorList2').html("");
-                        $('#updateForm_errorList3').html("");
-                        $('#success_message').addClass('background_error');
-                        $('#success_message').text(response.messages);
-                        handleSuccessMessage('#success_message');
-                        fetch_users_setting_data();
                         $('#edit_user_form').modal('hide').fadeOut(300).delay(300);
                         $('#updateconfirmuser').modal('hide').fadeOut(300).delay(300);
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            $('#updateForm_errorList').html("");
+                            $('#updateForm_errorList2').html("");
+                            $('#updateForm_errorList3').html("");
+                            $('#success_message').addClass('background_error');
+                            $('#success_message').text(response.messages);
+                            handleSuccessMessage('#success_message');
+                            fetch_users_setting_data();
+                        }, 1500);
                     }
                 }
             });
@@ -545,20 +578,30 @@
             e.preventDefault();
             var user_id = $(this).val();
             $('#user_id').val(user_id);
-            $('#deletecategory').modal('show').fadeIn(300).delay(300);
-
-            var time = null;
-            addAttributeOrClass([
-                {selector: '.head_title, .clos_btn,#usrdelt, #usrdelt2, #usrdelt3, #usrdelt5', type: 'class', name: 'skeleton'},
-                {selector: '#yesButton, #noButton', type: 'class', name: 'delete-skeletone'}
-            ]);
-            time = setTimeout(() => {
-                removeAttributeOrClass([
+            $("#accessconfirmbranch").modal('show');
+            $("#pageLoader").removeAttr('hidden');
+            $("#access_modal_box").addClass('loader_area');
+            $("#processModal_body").removeClass('loading_body_area');
+            setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#pageLoader").attr('hidden', true);
+                $("#access_modal_box").removeClass('loader_area');
+                $("#processModal_body").addClass('loading_body_area');
+                $('#deletecategory').modal('show').fadeIn(300).delay(300);
+                var time = null;
+                addAttributeOrClass([
                     {selector: '.head_title, .clos_btn,#usrdelt, #usrdelt2, #usrdelt3, #usrdelt5', type: 'class', name: 'skeleton'},
                     {selector: '#yesButton, #noButton', type: 'class', name: 'delete-skeletone'}
                 ]);
+                time = setTimeout(() => {
+                    removeAttributeOrClass([
+                        {selector: '.head_title, .clos_btn,#usrdelt, #usrdelt2, #usrdelt3, #usrdelt5', type: 'class', name: 'skeleton'},
+                        {selector: '#yesButton, #noButton', type: 'class', name: 'delete-skeletone'}
+                    ]);
+    
+                }, 1000);
+            }, 1500);
 
-            }, 1000);
         });
         // Confirm Delete Modal
         $(document).on('click', '.yes_button', function(e){
@@ -594,13 +637,23 @@
                 type: "DELETE",
                 url: "/delete-users/" + user_id,
                 success: function(response) {
-                    //$('#success_message').addClass('alert_show ps-1 pe-1');
-                    $('#success_message').addClass('background_error');
-                    $('#success_message').text(response.messages);
-                    handleSuccessMessage('#success_message');
-                    $('#deletecategory').modal('hide').fadeOut(300).delay(300);
-                    $('#deleteuser').modal('hide').fadeOut(300).delay(300);
-                    fetch_users_setting_data();
+                    $("#accessconfirmbranch").modal('show');
+                    $("#pageLoader").removeAttr('hidden');
+                    $("#access_modal_box").addClass('loader_area');
+                    $("#processModal_body").removeClass('loading_body_area');
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#pageLoader").attr('hidden', true);
+                        $("#access_modal_box").removeClass('loader_area');
+                        $("#processModal_body").addClass('loading_body_area');
+                        //$('#success_message').addClass('alert_show ps-1 pe-1');
+                        $('#deletecategory').modal('hide').fadeOut(300).delay(300);
+                        $('#deleteuser').modal('hide').fadeOut(300).delay(300);
+                        $('#success_message').addClass('background_error');
+                        $('#success_message').text(response.messages);
+                        handleSuccessMessage('#success_message');
+                        fetch_users_setting_data();
+                    }, 1500);
                 }
 
             });
@@ -629,11 +682,21 @@
                 success: function({
                     messages
                 }) {
-                    //console.log('messages', messages);
-                    $("#success_message").text(messages);
-                    $('#success_message').addClass('background_error');
-                    handleSuccessMessage('#success_message');
-                    fetch_users_setting_data('', pagination_url);
+                    $("#accessconfirmbranch").modal('show');
+                    $("#processingProgress").removeAttr('hidden');
+                    $("#access_modal_box").addClass('progress_body');
+                    $("#processModal_body").addClass('loading_body_area');
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#processingProgress").attr('hidden', true);
+                        $("#access_modal_box").removeClass('progress_body');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        //console.log('messages', messages);
+                        $("#success_message").text(messages);
+                        $('#success_message').addClass('background_error');
+                        handleSuccessMessage('#success_message');
+                        fetch_users_setting_data('', pagination_url);
+                    }, 1500);
                 }
             });
         });

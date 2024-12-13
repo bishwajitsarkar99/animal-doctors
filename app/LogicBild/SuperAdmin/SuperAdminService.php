@@ -16,6 +16,7 @@ use App\Models\Email\EmailVerification;
 use App\Models\CompanyProfile;
 use App\Models\AuthPages;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class SuperAdminService
 {
@@ -152,10 +153,12 @@ class SuperAdminService
                 'errors' => $validator->messages(),
             ]);
         }
-    
+        
+        $token = Str::random(32);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->contract_number = $request->input('contract_number');
+        $user->remember_token = $token;
     
         if ($request->hasFile('image')) {
             $this->handleImageUpload($request, $user);

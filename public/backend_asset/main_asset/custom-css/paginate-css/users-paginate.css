@@ -2,6 +2,15 @@
 table,th,tr,td{
     opacity: 1;
 }
+ul.dropdown-menu.action{
+    position: absolute;
+    inset: auto auto 0px 0px;
+    margin: 0px;
+    transform: translate(124px, -126px);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 16px 0px;
+    border: none;
+    background-image: radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
+}
 /* Adjust the width of the autocomplete input search able dropdown */
 .ui-menu {
     width: 400px;
@@ -407,8 +416,8 @@ label.tot-search {
 }
 select> option {
     font-weight: 600;
-    color: white;
-    background: #3b71ca;
+    color: black;
+    background: orange;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -1012,16 +1021,16 @@ input#view_user_update {
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     opacity: 1;
 }
-tr.table-row.order_body.acc_setting_table {
+thead,tr.table-row.order_body.acc_setting_table {
     background-image: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
 }
 th#th_sort {
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
-    /* background-image: var(--table-head-color); */
+    background-image: var(--table-head-color);
     color: black;
     font-size: 15px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    background-color: transparent;
+    background-color: white;
     opacity: 5;
 }
 .search-hidden{
@@ -1146,8 +1155,8 @@ span.status_bg {
 }
 .light5-focus{
     border-radius: 50%;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border: none;
     outline: none;
     animation: color5_focus 1s infinite;

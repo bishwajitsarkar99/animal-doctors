@@ -428,19 +428,12 @@ button#manage_button:hover{
     top: 70%;
 }
 select option {
-    background-color: #3b71ca;
-    color: white;
+    background-color: orange;
+    color: black;
     font-weight: 600;
     cursor: pointer;
     border: none;
     font-size: 13px;
-}
-select:hover option{
-    background-color: darkblue;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
 }
 .page-heading-skeleton,.cricale-skeleton,.button-skeleton{
     position: relative;

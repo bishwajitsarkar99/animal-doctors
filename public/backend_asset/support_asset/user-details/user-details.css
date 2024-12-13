@@ -128,8 +128,8 @@ htm,body{
 }
 select> option{
     font-weight: 600;
-    color: white;
-    background: #3b71ca;
+    color: black;
+    background: orange;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -284,7 +284,8 @@ img#loaderShow {
     border: none;
     box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
     /* background-image: radial-gradient(farthest-corner at 100px 100px, white, white); */
-    background-image: repeating-linear-gradient(55deg, #e39a3b, transparent 1px);
+    /* background-image: repeating-linear-gradient(55deg, #e39a3b, transparent 1px); */
+    background-color: white;
     opacity: 1;
 }
 .five-card{
@@ -341,9 +342,9 @@ div.card.order_line_chart {
     font-size: 14px;
     background-image: repeating-linear-gradient(55deg, #e39a3b, transparent 1px);
 }
-.mini-card-title{
+/* .mini-card-title{
     background-image: repeating-linear-gradient(55deg, #e39a3b, transparent 1px);
-}
+} */
 .card-head-title{
     font-family: var(--nav-font-family);
     font-size: 15px;

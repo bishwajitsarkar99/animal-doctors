@@ -2,11 +2,16 @@
     /* --background-color:linear-gradient(to bottom, silver, transparent,silver,lightgray); */
     --background-color:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, aliceblue, rgba(0, 0, 0, 0.05) 100%);
 }
+.toggle-icon {
+    font-size: 12px;
+}
 table,tr,th,td{
     opacity: 1;
 }
 th.th-bg {
-    background-image: linear-gradient(1deg, #dfdfdf, transparent 3%, lightgray, #d7d7d7);
+    background-image: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
+    opacity: 1;
+    background-color: white;
 }
 input.user-search{
     line-height: 1.9;

@@ -129,13 +129,13 @@
 	list-style-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
 }
 .ui-menu .ui-menu-item-wrapper {
-	background: darkblue;
+	background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
 	position: relative;
     padding: 3px 0.5em 3px .4em;
     font-size: 11px;
     letter-spacing: 1px;
     font-weight: 600;
-	color: white;
+	color: darkblue;
 }
 /* .ui-autocomplete{
 	width: 300px;

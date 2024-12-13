@@ -3,7 +3,7 @@
 @include('backend.layouts.dashboard-components._navbar')
 
   <div class="container">
-    <ul class="nav nav-tabs tab_bg" role="tablist" style="background:aliceblue;">
+    <ul class="nav nav-tabs tab_bg" role="tablist" style="background:white;">
       <li class="nav-item tab-skeletone">
         <a class="nav-link setting active home-text" data-bs-toggle="tab" href="#home" id="tabHome"> User Analysis</a>
       </li>

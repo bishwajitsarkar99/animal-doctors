@@ -18,9 +18,9 @@
             <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-deleting" style="width:75%;"></div>
             <div class="progress-bar animation_deleting_progress">Deleting</div>
           </div>
-          <div class="progress ms-2" id="viewProgress" hidden>
-            <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-view" style="width:75%;"></div>
-            <div class="progress-bar animation_view_progress">View</div>
+          <div class="progress ms-2" id="loadingProgress" hidden>
+            <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-processing" style="width:75%;"></div>
+            <div class="progress-bar animation_progress">Loading</div>
           </div>
           <div class="progress ms-2" id="processingProgress" hidden>
             <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-processing" style="width:75%;"></div>

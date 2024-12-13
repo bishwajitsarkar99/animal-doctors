@@ -276,9 +276,19 @@
                 success: function({
                     messages
                 }) {
-                    //console.log('messages', messages);
-                    $("#success_message").text(messages.messages);
-                    fetch_users_email_verification_data('', pagination_url);
+                    $("#accessconfirmbranch").modal('show');
+                    $("#processingProgress").removeAttr('hidden');
+                    $("#access_modal_box").addClass('progress_body');
+                    $("#processModal_body").addClass('loading_body_area');
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#processingProgress").attr('hidden', true);
+                        $("#access_modal_box").removeClass('progress_body');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        //console.log('messages', messages);
+                        $("#success_message").text(messages.messages);
+                        fetch_users_email_verification_data('', pagination_url);
+                    }, 1500);
                 }
             });
         });

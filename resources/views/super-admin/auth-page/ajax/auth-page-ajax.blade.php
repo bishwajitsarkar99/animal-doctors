@@ -20,20 +20,22 @@
             }
 
             return [...rows].map((row, key) => {
-                let statusClass, statusColor, statusText, statusBg, statusSignal;
+                let statusClass, statusColor, statusText, statusBg, statusSignal, statusSinge;
                 if(row.status == 0){
                     statusClass = 'text-danger';
-                    statusText = '❌ Not Allowed';
+                    statusText = '<span style="font-weight:700;font-size: 12px;">Unauthorize</span>';
                     statusSignal = '<span class="fbox"><input id="light_focus" type="text" class="light6-focus" readonly></input></span>';
-                    statusColor = 'color:darkgoldenrod;background-color: #ffedd8;';
-                    statusBg = 'badge rounded-pill bg-warn';
+                    statusColor = 'color:white;';
+                    statusBg = 'badge rounded-pill bg-danger';
+                    statusSinge = '<i class="fa-solid fa-xmark"></i>';
                 }
                 else if(row.status == 1){
-                    statusClass = 'text-dark';
-                    statusText = '<span style="color:green;font-weight:800;font-size: 12px;"><i class="fa-solid fa-check"></i></span> Authorize';
+                    statusClass = 'text-primary';
+                    statusText = '<span style="font-weight:700;font-size: 12px;">Authorize</span>';
                     statusSignal = '<span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>';
-                    statusColor = 'color:black;background-color: #ecfffd;';
-                    statusBg = 'badge rounded-pill bg-azure';
+                    statusColor = 'color:white;';
+                    statusBg = 'badge rounded-pill bg-success';
+                    statusSinge = '<i class="fa-solid fa-check"></i>';
                 }
                 return `
                     <tr class="table-row user-table-row user_setting" key="${key}" id="user_set">
@@ -44,10 +46,9 @@
                         </td>
                         <td class="tot_order_ ps-1" id="user_set6">${row.local_host_page_url}</td>
                         <td class="tot_pending_ ps-1" id="user_set7">${row.domain_page_url}</td>
-                        <td class="tot_complete_ pill ps-1 ${statusClass}">
-                            <span class="${statusBg} permission edit_inventory_table ps-1 ${statusClass}" style="font-size:12px;">
-                                ${statusText}
-                            </span>
+                        <td class="tot_complete_ pill ps-1">
+                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${statusBg}">${statusSinge}</span>
+                            <span class=" ${statusClass}">${statusText}</span>
                         </td>
                         
                     </tr>
@@ -98,33 +99,43 @@
                         $('#success_message').addClass('alert alert-danger');
                         $('#success_message').text(response.messages);
                     } else {
-                        $('#edit_page_id').val(page_id);
-                        $('#input-field-one').val(response.data.domain_name);
-                        $('#input-field-two').val(response.data.ip_name);
-                        $('#permissionCheck').prop('checked', response.data.status == 1);
-
-                        // Update the status text and styling based on the status value
-                        let statusClass, statusText;
-                        if (response.data.status == 0) {
-                            statusClass = ' text-danger';
-                            statusText = ' Not Allowed ❌';
-                            $('#pageSelect').removeClass('show-success-border').addClass('is-invalid');
-                            $('#input-field-one').removeClass('show-success-border').addClass('is-invalid');
-                            $('#input-field-two').removeClass('show-success-border').addClass('is-invalid');
-                            $('#permissionCheck').removeClass('show-success-border').addClass('is-invalid');
-                        } else if (response.data.status == 1) {
-                            statusClass = 'text-dark';
-                            statusText = '<span style="color:green;font-weight:600;font-size: 14px;">Authorize <i class="fa-solid fa-check"></i></span>';
-                            $('#pageSelect').addClass('show-success-border').removeClass('is-invalid');
-                            $('#input-field-one').addClass('show-success-border').removeClass('is-invalid');
-                            $('#input-field-two').addClass('show-success-border').removeClass('is-invalid');
-                            $('#permissionCheck').addClass('show-success-border').removeClass('is-invalid');
-                        }else {
-                            statusClass = 'text-dark';
-                            statusText = 'Permission';
-                        }
-
-                        $('#statusValue').html(statusText).addClass(statusClass);
+                        $("#accessconfirmbranch").modal('show');
+                        $("#dataPullingProgress").removeAttr('hidden');
+                        $("#access_modal_box").addClass('progress_body');
+                        $("#processModal_body").addClass('loading_body_area');
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#dataPullingProgress").attr('hidden', true);
+                            $("#access_modal_box").removeClass('progress_body');
+                            $("#processModal_body").removeClass('loading_body_area');
+                            $('#edit_page_id').val(page_id);
+                            $('#input-field-one').val(response.data.domain_name);
+                            $('#input-field-two').val(response.data.ip_name);
+                            $('#permissionCheck').prop('checked', response.data.status == 1);
+    
+                            // Update the status text and styling based on the status value
+                            let statusClass, statusText;
+                            if (response.data.status == 0) {
+                                statusClass = ' text-danger';
+                                statusText = ' Not Allowed ❌';
+                                $('#pageSelect').removeClass('show-success-border').addClass('is-invalid');
+                                $('#input-field-one').removeClass('show-success-border').addClass('is-invalid');
+                                $('#input-field-two').removeClass('show-success-border').addClass('is-invalid');
+                                $('#permissionCheck').removeClass('show-success-border').addClass('is-invalid');
+                            } else if (response.data.status == 1) {
+                                statusClass = 'text-dark';
+                                statusText = '<span style="color:green;font-weight:600;font-size: 14px;">Authorize <i class="fa-solid fa-check"></i></span>';
+                                $('#pageSelect').addClass('show-success-border').removeClass('is-invalid');
+                                $('#input-field-one').addClass('show-success-border').removeClass('is-invalid');
+                                $('#input-field-two').addClass('show-success-border').removeClass('is-invalid');
+                                $('#permissionCheck').addClass('show-success-border').removeClass('is-invalid');
+                            }else {
+                                statusClass = 'text-dark';
+                                statusText = 'Permission';
+                            }
+    
+                            $('#statusValue').html(statusText).addClass(statusClass);
+                        }, 1500);
                     }
                 }
             });
@@ -207,26 +218,36 @@
                     } else if (response.status == 404) {
                         $('#success_message').text(response.messages);
                     } else if (response.status == 200) {
-                        $('#success_message').addClass('background_error ps-1 pe-1').fadeIn().text(response.messages);
-                        $('#pageSelect').val("");
-                        $('.update_domain').val("");
-                        $('.update_ip').val("");
-                        $('#permissionCheck').prop('checked', false);
-
-                        var statusText = '<span class="text-gray">Permission</span>';
-                        var statusClass = 'text-gray';
-                        $('#statusValue').html(statusText).addClass(statusClass);
-                        
-                        $('#success_message').fadeIn();
-                        $('#pageSelect').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
-                        $('#input-field-one').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
-                        $('#input-field-two').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
-                        $('#permissionCheck').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
                         setTimeout(() => {
-                            $('#success_message').fadeOut(6000);
-                            $('#success_message').delay(6000);
-                        }, 3000);
-                        fetch_auth_page_data();
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            $('#success_message').addClass('background_error ps-1 pe-1').fadeIn().text(response.messages);
+                            $('#pageSelect').val("");
+                            $('.update_domain').val("");
+                            $('.update_ip').val("");
+                            $('#permissionCheck').prop('checked', false);
+    
+                            var statusText = '<span class="text-gray">Permission</span>';
+                            var statusClass = 'text-gray';
+                            $('#statusValue').html(statusText).addClass(statusClass);
+                            
+                            $('#success_message').fadeIn();
+                            $('#pageSelect').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
+                            $('#input-field-one').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
+                            $('#input-field-two').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
+                            $('#permissionCheck').removeClass('show-success-border').addClass('show-current-border').removeClass('is-invalid');
+                            setTimeout(() => {
+                                $('#success_message').fadeOut(6000);
+                                $('#success_message').delay(6000);
+                            }, 3000);
+                            fetch_auth_page_data();
+                        }, 1500);
                     }
                 }
             });

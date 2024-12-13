@@ -105,37 +105,42 @@
                       </div>
                       <div class="row">
                         <div class="col-xl-12">
-                          <table class="branch_table">
-                            <thead>
-                              <tr>
-                                <th class="branch_search_font label_position"></th>
-                                <th class="branch_search_font label_position"></th>
-                                <th class="branch_search_font label_position"></th>
-                                <th class="branch_search_font label_position"></th>
-                              </tr>
-                              <tr>
-                                <th colspan="2" class="branch_info_head"> Branch Information</th>
-                              </tr>
-                            </thead>
-                            <tbody class="branch_table_body">
-                              <tr class="fist_row">
-                                <td class="first_column">Branch-ID<input type="text" id="brnch_id" disabled></td>
-                                <td class="second_column">District<input type="text" id="district_id" disabled></td>
-                              </tr>
-                              <tr>
-                                <td class="first_column">Branch-Name<input type="text" id="branch_name" disabled></td>
-                                <td class="second_column">Upazila<input type="text" id="upazila_id" disabled></td>
-                              </tr>
-                              <tr>
-                                <td class="first_column">Branch-Type<input type="text" id="branch_type" disabled></td>
-                                <td class="second_column">City-Name<input type="text" id="town_name" disabled></td>
-                              </tr>
-                              <tr>
-                                <td class="first_column">Division<input type="text" id="division_id" disabled></td>
-                                <td colspan="2" class="second_column">Loaction<input type="text" id="location" disabled></td>
-                              </tr>
-                            </tbody>
-                          </table>
+                          <div class="table-response">
+                            <table class="branch_table brn_info_tb">
+                              <thead>
+                                <tr>
+                                  <th class="branch_search_font label_position"></th>
+                                  <th class="branch_search_font label_position"></th>
+                                  <th class="branch_search_font label_position"></th>
+                                  <th class="branch_search_font label_position"></th>
+                                </tr>
+                                <tr>
+                                  <th colspan="2" class="branch_info_head"> 
+                                    Branch Information 
+                                    <button type="button" class="btn-close cols_btn" data-bs-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody class="branch_table_body">
+                                <tr class="fist_row">
+                                  <td class="first_column"><span class="tb_lb">Branch-ID</span><input type="text" id="brnch_id" disabled></td>
+                                  <td class="second_column"><span class="tb_lb">District</span><input type="text" id="district_id" disabled></td>
+                                </tr>
+                                <tr>
+                                  <td class="first_column"><span class="tb_lb">Branch-Name</span><input type="text" id="branch_name" disabled></td>
+                                  <td class="second_column"><span class="tb_lb">Upazila</span><input type="text" id="upazila_id" disabled></td>
+                                </tr>
+                                <tr>
+                                  <td class="first_column"><span class="tb_lb">Branch-Type</span><input type="text" id="branch_type" disabled></td>
+                                  <td class="second_column"><span class="tb_lb">City-Name</span><input type="text" id="town_name" disabled></td>
+                                </tr>
+                                <tr>
+                                  <td class="first_column"><span class="tb_lb">Division</span><input type="text" id="division_id" disabled></td>
+                                  <td colspan="2" class="second_column"><span class="tb_lb">Loaction</span><input type="text" id="location" disabled></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                       </div>
                     </div>

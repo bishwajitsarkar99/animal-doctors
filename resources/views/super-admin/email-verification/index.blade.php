@@ -26,11 +26,13 @@
   <div class="col-xl-12 action_message">
     <p class="ps-1"><span id="success_message"></span></p>
   </div>
+@include('loader.action-loader')
 @endsection
 
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/user-details/user-details.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/user-details/email-verification.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 @endsection
 

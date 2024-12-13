@@ -229,8 +229,17 @@ input#delete_branch_id {
     font-family: var(--nav-font-family);
     color: darkcyan;
 }
+.brn_info_tb {
+    border-left: 3px solid lightblue;
+}
+button.btn-close.btn-btn-sm.bg-danger.cols_btn {
+    width: 30px;
+}
 table.info_table {
     background: white;
+}
+span.tb_lb {
+    margin-left: 2px;
 }
 .branch_info_card{
     background-image: linear-gradient(90deg, white, white, white 100%);
@@ -238,11 +247,11 @@ table.info_table {
     box-shadow: 0px 2px 20px #0001;
     border: none;
     border-radius: 5px;
-
     transform: translate(-50%, -50%);
     position: absolute;
     top: 42%;
-    left: 57%;
+    left: 66%;
+    width: 65%;
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     animation: slideIn 0.3s ease-out;
 }

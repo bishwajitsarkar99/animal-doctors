@@ -184,16 +184,16 @@
                         $('#success_message').text(response.messages);
                     }else if(response.status == 200){
                         $("#accessconfirmbranch").modal('show');
-                        $("#pageLoader").removeAttr('hidden');
-                        $("#access_modal_box").addClass('loader_area');
-                        $("#processModal_body").removeClass('loading_body_area');
+                        $("#dataPullingProgress").removeAttr('hidden');
+                        $("#access_modal_box").addClass('progress_body');
+                        $("#processModal_body").addClass('loading_body_area');
                         $('#documents').attr('hidden', true);
 
                         setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
-                            $("#pageLoader").attr('hidden', true);
-                            $("#access_modal_box").removeClass('loader_area');
-                            $("#processModal_body").addClass('loading_body_area');
+                            $("#dataPullingProgress").attr('hidden', true);
+                            $("#access_modal_box").removeClass('progress_body');
+                            $("#processModal_body").removeClass('loading_body_area');
                             $('#documents').removeAttr('hidden');
 
                             const messages = response.messages;
@@ -411,12 +411,14 @@
                     $("#accessconfirmbranch").modal('show');
                     $("#processingProgress").removeAttr('hidden');
                     $("#access_modal_box").addClass('progress_body');
+                    $("#processModal_body").addClass('loading_body_area');
                     
                     if (response.status === 202) {
                         setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
                             $("#processingProgress").attr('hidden', true);
                             $("#access_modal_box").removeClass('progress_body');
+                            $("#processModal_body").removeClass('loading_body_area');
                             $('#updateForm_error').html("");
                             $('#success_message').html("");
                             $('#success_message').addClass('alert_show ps-1 pe-1');
@@ -480,6 +482,11 @@
                 $("#role_type").attr('disabled', true);
             }
 
+        });
+
+        // Closing Branch Info Card
+        $(document).on('click', '.cols_btn', function(){
+            $('#documents').attr('hidden', true);
         });
     });
 </script>

@@ -6,8 +6,8 @@
 }
 select> option {
     font-weight: 600;
-    color: white;
-    background: darkblue;
+    color: black;
+    background: orange;
     padding: 10px;
     border: none;
     border-radius: 5px;
