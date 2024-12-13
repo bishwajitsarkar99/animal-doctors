@@ -18,9 +18,13 @@
     --btn-icon-transform:translateX(calc(100% + 7px));
     --btn-icon-webkit-transform:translateX(calc(100% + 7px));
 }
-h5#fileModalLabel{
-    color: black;
+.filemanager_modal_header {
+    height: 3em;
+}
+span#fileModalLabel{
+    color: #1a1a1a;
     font-family: var(--font-family-features);
+    font-weight: 700;
 }
 .file-manager-body {
     background: transparent;
@@ -342,7 +346,7 @@ input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,s
     content: 'Uploaded Folder :';
 }
 .lb-display::after{
-    content: 'Directory-Folder-Name :';
+    content: 'Folder-Name :';
 }
 #filesSelect {
     font-size: 14px;

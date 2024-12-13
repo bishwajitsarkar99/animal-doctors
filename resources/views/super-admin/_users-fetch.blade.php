@@ -59,13 +59,14 @@
                             <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
                             <ul class="dropdown-menu action ms-4 pe-3">
                                 <li class="upd cgy ps-1">
-                                    <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-4" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                                    <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-2" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                     <i class="fa-regular fa-eye fa-beat" style="color:darkcyan"></i></button>
                                     <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="edtBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                     <i class="fa-solid fa-pen-to-square fa-beat" style="color:darkcyan"></i></button>
                                     <button class="btn-sm delete_button ms-2 delt_button" value="${row.id}'" type="button" id="dltBtn" style="font-size: 10px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                     <i class="fa-solid fa-trash-can fa-beat" style="color:orangered"></i></button>
                                 </li>
+                                <span class="action-box-arrow mini"></span>
                             </ul>
                         </td>
                         <td class="txt_ bold ps-1">${row.name}</td>

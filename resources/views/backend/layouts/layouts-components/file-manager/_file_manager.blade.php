@@ -1,16 +1,16 @@
 <!-- Modal -->
 <div class="modal fade" id="fileModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="fileModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document" style="margin-top:5%;">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header file_manager_modal_header  profilesetting_modal_header">
+            <div class="modal-header file_manager_modal_header  filemanager_modal_header">
                 <div class="filemanager-skeletone" id="fileMang"></div>
-                <h5 class="modal-title admin_title font-effect-emboss" id="fileModalLabel"></h5>
+                <span class="modal-title admin_title font-effect-emboss" id="fileModalLabel"></span>
                 <p class="input_search_bar_skeletone" id="srchbarskle"></p>
                 <input type="search" class="form-control form-control-sm srch_name" name="folder_name" placeholder="Search Folder Name" id="srch_name">
                 <span class="show__table">
                     <input type="checkbox" class="ms-2 table-btn" id="tableCheck" data-bs-toggle="tooltip" data-bs-placement="right" title="Folder-Table" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                    <span class="ms-4 table-label" style="color:black;font-weight:800;">Table </span>
+                    <span class="ms-2 me-2 table-label" style="color:#1a1a1a;font-weight:700;">Table </span>
                 </span>
                 <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" 
                     data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" 

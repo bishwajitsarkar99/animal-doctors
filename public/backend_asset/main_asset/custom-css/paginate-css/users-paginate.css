@@ -11,6 +11,45 @@ ul.dropdown-menu.action{
     border: none;
     background-image: radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
 }
+li.upd.cgy {
+    text-align: center;
+}
+.action-box-arrow {
+    display: block;
+    top: -10px;
+    right: 72%;
+    position: absolute;
+    width: 1rem;
+    height: 25%;
+    pointer-events: none;
+    border-radius: 3px;
+}
+.action-box-arrow.mini{
+    right: 69%;
+}
+
+.action-box-arrow::before,.action-box-arrow::after{
+    --size:0.8em;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 300%;
+    right: 50%;
+    transform: translate(-50%,-50%);
+}
+/* .action-box-arrow::before{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-bottom: var(--size) solid rgb(209, 209, 209);
+    top: 30%;
+} */
+.action-box-arrow::after{
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid #a1cdf9;
+    top: 135%;
+}
 /* Adjust the width of the autocomplete input search able dropdown */
 .ui-menu {
     width: 400px;

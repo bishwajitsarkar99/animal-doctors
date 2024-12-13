@@ -55,6 +55,7 @@
                                     <button class="btn-sm edit_registration view_btn cgr_btn ms-4" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                     <i class="fa-solid fa-trash-can fa-beat" style="color:orangered"></i></button>
                                 </li>
+                                <span class="action-box-arrow mini"></span>
                             </ul>
                         </td>
                         <td class="ps-1 border_ord" id="medic_name3">${row.medicine_groups ? row.medicine_groups.group_name : ''}</td>

@@ -53,7 +53,7 @@
                                     data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                     <i class="fa-solid fa-trash-can fa-beat" style="color:orangered"></i></button>
                                 </li>
-                                <span class="custom-pivot-list-arrow mini"></span>
+                                <span class="action-box-arrow mini"></span>
                             </ul>
                         </td>
                         <td class="txt_ ps-1" id="cat_td4">
