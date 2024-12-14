@@ -352,6 +352,32 @@ class BranchServiceProvicer
     }
 
     /**
+     * Handle branch data get for user permission create.
+    */
+    public function branchGet(Request $request, $id)
+    {
+        $branch = Branch::with(
+            [
+                'divisions', 
+                'districts', 
+                'thana_or_upazilas',
+            ]
+        )->find($id);
+        if($branch){
+            return response()->json([
+                'status' => 200,
+                'messages' => $branch,
+            ]);
+        }else{
+
+            return response()->json([
+                'status' => 404,
+                'messages' => 'The branch is no found.',
+            ]);
+        }
+    }
+
+    /**
      * Handle user branch permission create.
     */
     public function userBranchPermissionCreate(Request $request)

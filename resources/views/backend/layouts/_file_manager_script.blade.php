@@ -2,91 +2,105 @@
     $(document).ready(function() {
         $('#static_nav').click(function(event) {
             event.preventDefault();
-            $('#fileModal').modal('show').fadeIn(300).delay(300);
-            fetchFolders();
-            fetch_get_folder();
-
-            // Modal Header
-            $("#fileMang").addClass('filemanager-skeletone');
-            $("#fileModalLabel").removeClass('flmangname_skeletone');
-            $("#galleryImage").addClass('gallery-image-skeletone');
-            $("#imageGally").addClass('gallery-image-display');
-            $("#svgFolderIcon").addClass('file-card-skeletone');
-            $("#srchbarskle").addClass('input_search_bar_skeletone');
-            $("#srch_name").addClass('search-bar-display');
-            // Modal body
-            $("#inputFieldOne").addClass('input_field_one_skeletone');
-            $("#folderName").addClass('input_field_one_display');
-            $("#labelSkele").addClass('input_label_skeletone');
-            $("#lab_disp").removeClass('lb-display');
-            $("#newBtnMode").addClass('new_btn_skeletone');
-            $("#createFolderBtn").addClass('new_display');
-            $("#fldSkele").addClass('folder-lb-skeletone');
-            $("#lbNme").removeClass('select_lb_display');
-            $("#inputFieldTwo").addClass('input_field_two_skeletone');
-            $("#folder").addClass('select_display');
-            $("#inputFieldThree").addClass('input_field_three_skeletone');
-            $("#file").addClass('file_display');
-            $("#uploadBtnMode").addClass('upload_btn_skeletone');
-            $("#uploadBtn").addClass('upload_btn_display');
-            // search files
-            $("#fldSkeletone").addClass('folder-serch-skeletone');
-            $("#uploadLab").removeClass('upload_lbel_display');
-            $("#selectField").addClass('select_field_skeletone');
-            $("#folderSelect").addClass('select_lbel_display');
-            $("#srchBtnMode").addClass('searh_btn_skeletone');
-            $("#searchFile").addClass('srh_lbel_display');
-            $("#backgroundColor").removeClass('src-bg');
-            $("#showFolderIcon").addClass('folder-svg-display');
-            $("#searFolder").addClass('display-parg');
-            $("#svgIn").removeClass('svg-icon');
-            $("#showFolderIcon").removeClass('icon_group');
-            $("#srcFolder").addClass('folder_name_skeletone');
-            $("#srcFolder").removeClass('flname_skeletone');
-            $(".show__table").addClass('show__table__display');
+            $("#accessconfirmbranch").modal('show');
+            $("#pageLoader").removeAttr('hidden');
+            $("#access_modal_box").addClass('loader_area');
+            $("#processModal_body").removeClass('loading_body_area');
 
             setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#pageLoader").attr('hidden', true);
+                $("#access_modal_box").removeClass('loader_area');
+                $("#processModal_body").addClass('loading_body_area');
+
+                $('#fileModal').modal('show').fadeIn(300).delay(300);
+                fetchFolders();
+                fetch_get_folder();
+    
                 // Modal Header
-                $("#fileMang").removeClass('filemanager-skeletone');
-                $("#fileModalLabel").addClass('flmangname_skeletone');
-                $("#srchbarskle").removeClass('input_search_bar_skeletone');
-                $("#srch_name").removeClass('search-bar-display');
-                $(".show__table").removeClass('show__table__display');
-
+                $("#fileMang").addClass('filemanager-skeletone');
+                $("#fileModalLabel").removeClass('flmangname_skeletone');
+                $("#galleryImage").addClass('gallery-image-skeletone');
+                $("#imageGally").addClass('gallery-image-display');
+                $("#svgFolderIcon").addClass('file-card-svg-skeletone');
+                $("#srchbarskle").addClass('input_search_bar_skeletone');
+                $("#srch_name").addClass('search-bar-display');
                 // Modal body
-                $("#inputFieldOne").removeClass('input_field_one_skeletone');
-                $("#folderName").removeClass('input_field_one_display');
-                $("#labelSkele").removeClass('input_label_skeletone');
-                $("#lab_disp").addClass('lb-display');
-                $("#newBtnMode").removeClass('new_btn_skeletone');
-                $("#createFolderBtn").removeClass('new_display');
-                $("#fldSkele").removeClass('folder-lb-skeletone');
-                $("#lbNme").addClass('select_lb_display');
-                $("#inputFieldTwo").removeClass('input_field_two_skeletone');
-                $("#folder").removeClass('select_display');
-                $("#inputFieldThree").removeClass('input_field_three_skeletone');
-                $("#file").removeClass('file_display');
-                $("#uploadBtnMode").removeClass('upload_btn_skeletone');
-                $("#uploadBtn").removeClass('upload_btn_display');
-
-                //search-files
-                $("#fldSkeletone").removeClass('folder-serch-skeletone');
-                $("#uploadLab").addClass('upload_lbel_display');
-                $("#selectField").removeClass('select_field_skeletone');
-                $("#folderSelect").removeClass('select_lbel_display');
-                $("#srchBtnMode").removeClass('searh_btn_skeletone');
-                $("#searchFile").removeClass('srh_lbel_display');
-                $("#backgroundColor").addClass('src-bg');
-                $("#galleryImage").removeClass('gallery-image-skeletone');
-                $("#imageGally").removeClass('gallery-image-display');
-                $("#svgFolderIcon").removeClass('file-card-skeletone');
-                $("#showFolderIcon").removeClass('folder-svg-display');
-                $("#searFolder").removeClass('display-parg');
-                $("#svgIn").addClass('svg-icon');
-                $("#showFolderIcon").addClass('icon_group');
-                $("#srcFolder").removeClass('folder_name_skeletone');
-                $("#srcFolder").addClass('flname_skeletone');
-            }, 3000);
+                $("#inputFieldOne").addClass('input_field_one_skeletone');
+                $("#folderName").addClass('input_field_one_display');
+                $("#labelSkele").addClass('input_labels_skeletone');
+                $("#lab_disp").removeClass('lb-display');
+                $("#newBtnMode").addClass('new_btn_skeletone');
+                $("#createFolderBtn").addClass('new_display');
+                $("#fldSkele").addClass('input_labels_skeletone');
+                $("#lbNme").removeClass('select_lb_display');
+                $("#inputFieldTwo").addClass('input_field_two_skeletone');
+                $("#folder").addClass('select_display');
+                $("#inputFieldThree").addClass('input_field_three_skeletone');
+                $("#file").addClass('file_display');
+                $("#uploadBtnMode").addClass('upload_btn_skeletone');
+                $("#uploadBtn").addClass('upload_btn_display');
+                // search files
+                $("#fldSkeletone").addClass('folder-serch-skeletone');
+                $("#uploadLab").removeClass('upload_lbel_display');
+                $("#selectField").addClass('select_field_skeletone');
+                $("#folderSelect").addClass('select_lbel_display');
+                $("#srchBtnMode").addClass('searh_btn_skeletone');
+                $("#searchFile").addClass('srh_lbel_display');
+                $("#backgroundColor").removeClass('src-bg');
+                $("#showFolderIcon").addClass('folder-svg-display');
+                $("#searFolder").addClass('display-parg');
+                $("#svgIn").removeClass('svg-icon');
+                $("#showFolderIcon").removeClass('icon_group');
+                $("#srcFolder").addClass('folder_name_skeletone');
+                $("#srcFolder").removeClass('flname_skeletone');
+                $(".show__table").addClass('show__table__display');
+                $(".btn__close").addClass('skeleton');
+    
+                setTimeout(() => {
+                    // Modal Header
+                    $("#fileMang").removeClass('filemanager-skeletone');
+                    $("#fileModalLabel").addClass('flmangname_skeletone');
+                    $("#srchbarskle").removeClass('input_search_bar_skeletone');
+                    $("#srch_name").removeClass('search-bar-display');
+                    $(".show__table").removeClass('show__table__display');
+    
+                    // Modal body
+                    $("#inputFieldOne").removeClass('input_field_one_skeletone');
+                    $("#folderName").removeClass('input_field_one_display');
+                    $("#labelSkele").removeClass('input_labels_skeletone');
+                    $("#lab_disp").addClass('lb-display');
+                    $("#newBtnMode").removeClass('new_btn_skeletone');
+                    $("#createFolderBtn").removeClass('new_display');
+                    $("#fldSkele").removeClass('input_labels_skeletone');
+                    $("#lbNme").addClass('select_lb_display');
+                    $("#inputFieldTwo").removeClass('input_field_two_skeletone');
+                    $("#folder").removeClass('select_display');
+                    $("#inputFieldThree").removeClass('input_field_three_skeletone');
+                    $("#file").removeClass('file_display');
+                    $("#uploadBtnMode").removeClass('upload_btn_skeletone');
+                    $("#uploadBtn").removeClass('upload_btn_display');
+    
+                    //search-files
+                    $("#fldSkeletone").removeClass('folder-serch-skeletone');
+                    $("#uploadLab").addClass('upload_lbel_display');
+                    $("#selectField").removeClass('select_field_skeletone');
+                    $("#folderSelect").removeClass('select_lbel_display');
+                    $("#srchBtnMode").removeClass('searh_btn_skeletone');
+                    $("#searchFile").removeClass('srh_lbel_display');
+                    $("#backgroundColor").addClass('src-bg');
+                    $("#galleryImage").removeClass('gallery-image-skeletone');
+                    $("#imageGally").removeClass('gallery-image-display');
+                    $("#svgFolderIcon").removeClass('file-card-svg-skeletone');
+                    $("#showFolderIcon").removeClass('folder-svg-display');
+                    $("#searFolder").removeClass('display-parg');
+                    $("#svgIn").addClass('svg-icon');
+                    $("#showFolderIcon").addClass('icon_group');
+                    $("#srcFolder").removeClass('folder_name_skeletone');
+                    $("#srcFolder").addClass('flname_skeletone');
+                    $(".btn__close").removeClass('skeleton');
+                }, 3000);
+            }, 1500);
         });
         
         // search folder
@@ -185,6 +199,7 @@
                                     <button class="btn-sm edit_registration view_btn cgr_btn ms-4" id="deleteBtnFolder" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip"  data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                                     <i class="fa-solid fa-trash-can fa-beat" style="color:orangered"></i></button>
                                 </li>
+                                <span class="action-box-arrow mini"></span>
                             </ul>
                         </td>
                         <td class="txt_ ps-1" id="cat_td4">${row.folder_name}</td>

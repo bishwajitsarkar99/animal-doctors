@@ -158,7 +158,7 @@
 
         <div class="modal-body profile-body pb-1">
           <div class="row profile-heading pb-3">
-            <div class="col-xl-122">
+            <div class="col-xl-12">
               <div class="form-group delete_content branch-skeleton" id="load_id">
                 <span><div id="active_loader" class="loader_chart mt-1"></div></span>
                 <label class="label_user_edit" id="cate_delete" for="id">Branch-ID : </label>

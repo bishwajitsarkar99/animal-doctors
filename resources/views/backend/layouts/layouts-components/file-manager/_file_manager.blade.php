@@ -10,9 +10,9 @@
                 <input type="search" class="form-control form-control-sm srch_name" name="folder_name" placeholder="Search Folder Name" id="srch_name">
                 <span class="show__table">
                     <input type="checkbox" class="ms-2 table-btn" id="tableCheck" data-bs-toggle="tooltip" data-bs-placement="right" title="Folder-Table" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                    <span class="ms-2 me-2 table-label" style="color:#1a1a1a;font-weight:700;">Table </span>
+                    <span class="ms-2 me-2 table-label" style="color:#1a1a1acf;font-weight:700;">Table </span>
                 </span>
-                <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" 
+                <button type="button" class="btn-close btn-btn-sm btn__close" data-bs-dismiss="modal" aria-label="Close" 
                     data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" 
                     data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                 </button>
@@ -27,7 +27,7 @@
                             <div class="row">
                                 <div class="col-3">
                                     <label for="folderName lb-display" class="form-label file-manager-label" id="lab_disp"></label>
-                                    <p class="input_label_skeletone" id="labelSkele"></p>
+                                    <p class="input_labels_skeletone" id="labelSkele"></p>
                                 </div>
                                 <div class="col-6">
                                     <input type="text" class="form-control form-control-sm edit_folder_name" id="folderName" name="folder_name" placeholder="Folder Name" required>
@@ -61,7 +61,7 @@
                         <div class="row">
                             <div class="col-3">
                                 <label for="folderName" class="form-label select_lb_display file-manager-label" id="lbNme"></label>
-                                <p class="folder-lb-skeletone" id="fldSkele"></p>
+                                <p class="input_labels_skeletone" id="fldSkele"></p>
                             </div>
                             <div class="col-6">
                                 @csrf
@@ -87,7 +87,7 @@
                     <div class="file-details mt-1">
                         <div class="row src-bg" id="backgroundColor">
                             <div class="col-3">
-                                <label class="search-label upload_lbel_display file-manager-label mt-4" id="uploadLab"></label>
+                                <label class="search-label upload_lbel_display file-manager-label" id="uploadLab"></label>
                                 <p class="folder-serch-skeletone" id="fldSkeletone"></p>
                             </div>
                             <div class="col-6">

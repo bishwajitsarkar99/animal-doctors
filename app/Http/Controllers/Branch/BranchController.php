@@ -99,6 +99,12 @@ class BranchController extends Controller
         return $this->branchServiceProvider->branchAccessUserPermissionView($request);
     }
 
+    // Branch Get Data For Create
+    public function branchGetData(Request $request, $id)
+    {
+        return $this->branchServiceProvider->branchGet($request, $id);
+    }
+
     // Branch User Access Permission Create
     public function permissionCreate(Request $request)
     {

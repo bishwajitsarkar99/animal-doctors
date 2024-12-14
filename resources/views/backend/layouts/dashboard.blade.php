@@ -61,6 +61,7 @@
     @include('backend.layouts.handler-js.footer-js._footer-menu-js')
     @include('backend.layouts.handler-js._footer-js')
     @include('backend.layouts.layouts-components.file-manager._file_manager')
+    @include('loader.action-loader');
 
     @yield('script')
     @stack('scripts')

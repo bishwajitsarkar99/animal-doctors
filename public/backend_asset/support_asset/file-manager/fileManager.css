@@ -18,13 +18,17 @@
     --btn-icon-transform:translateX(calc(100% + 7px));
     --btn-icon-webkit-transform:translateX(calc(100% + 7px));
 }
+#uploadLab{
+    margin-top: 18px;
+}
 .filemanager_modal_header {
     height: 3em;
 }
 span#fileModalLabel{
-    color: #1a1a1a;
+    color: #1a1a1acf;
     font-family: var(--font-family-features);
     font-weight: 700;
+    font-style: italic;
 }
 .file-manager-body {
     background: transparent;
@@ -146,7 +150,8 @@ input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,s
 }
 .file-card-skeletone,.folder_name_skeletone,.filemanager-skeletone,.input_search_bar_skeletone,.input_field_one_skeletone,
 .input_label_skeletone,.new_btn_skeletone,.folder-lb-skeletone,.input_field_two_skeletone,.input_field_three_skeletone,
-.upload_btn_skeletone,.folder-serch-skeletone,.select_field_skeletone,.searh_btn_skeletone,.gallery-image-skeletone,.svg_skeletone {
+.upload_btn_skeletone,.folder-serch-skeletone,.select_field_skeletone,.searh_btn_skeletone,.gallery-image-skeletone,.svg_skeletone,
+.input_labels_skeletone,.file-card-svg-skeletone {
     position: relative;
     background-color: rgb(0, 0, 0, 0.06);
 }
@@ -159,7 +164,26 @@ input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,s
     left: 1;
     z-index: 2;
     margin-top: 0px;
-    margin-left: -1px;
+    margin-left: 0;
+    min-height: 35px;
+    width: 40px;
+    border-radius: 1px;
+    background: var(--dot-skeletone-bg);
+    background-size: var(--animation-background-size);
+    animation-name: var(--animation);
+    animation-duration: var(--animation-duration);
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+}
+.file-card-svg-skeletone::before {
+    content: "";
+    position: absolute;
+    box-sizing: border-box;
+    justify-content: space-between;
+    left: 1;
+    z-index: 2;
+    margin-top: 0px;
+    margin-left: -27px;
     min-height: 35px;
     width: 40px;
     border-radius: 1px;
@@ -177,11 +201,11 @@ input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,s
     justify-content: space-between;
     left: 1;
     z-index: 2;
-    margin-top: 3px;
-    margin-left: 26px;
+    margin-top: 0;
+    margin-left: 0;
     min-height: 15px;
-    width: 320px;
-    border-radius: 10px;
+    width: 100%;
+    border-radius: 5px;
     background: var(--dot-skeletone-bg);
     background-size: var(--animation-background-size);
     animation-name: var(--animation);
@@ -234,10 +258,10 @@ input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,s
     justify-content: space-between;
     left: 1;
     z-index: 2;
-    margin-top: 3px;
-    margin-left: 23px;
+    margin-top: 0;
+    margin-left: 0;
     min-height: 15px;
-    width: 321px;
+    width: 100%;
     border-radius: 10px;
     background: var(--dot-skeletone-bg);
     background-size: var(--animation-background-size);
@@ -253,10 +277,10 @@ input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,s
     justify-content: space-between;
     left: 1;
     z-index: 2;
-    margin-top: 9px;
-    margin-left: 23px;
+    margin-top: 3px;
+    margin-left: 0;
     min-height: 15px;
-    width: 321px;
+    width: 100%;
     border-radius: 10px;
     background: var(--dot-skeletone-bg);
     background-size: var(--animation-background-size);
@@ -272,11 +296,30 @@ input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,s
     justify-content: space-between;
     left: 1;
     z-index: 2;
-    margin-top: -22px;
-    margin-left: 0px;
+    margin-top: -21px;
+    margin-left: 0;
     min-height: 15px;
-    width: 124px;
-    border-radius: 10px;
+    width: 21%;
+    border-radius: 6px;
+    background: var(--dot-skeletone-bg);
+    background-size: var(--animation-background-size);
+    animation-name: var(--animation);
+    animation-duration: var(--animation-duration);
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+}
+.input_labels_skeletone::before{
+    content: "";
+    position: absolute;
+    box-sizing: border-box;
+    justify-content: space-between;
+    left: 1;
+    z-index: 2;
+    margin-top: -18px;
+    margin-left: 0;
+    min-height: 15px;
+    width: 37px;
+    border-radius: 6px;
     background: var(--dot-skeletone-bg);
     background-size: var(--animation-background-size);
     animation-name: var(--animation);
@@ -308,11 +351,11 @@ input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,s
     justify-content: space-between;
     left: 1;
     z-index: 2;
-    margin-top: -2px;
+    margin-top: -6px;
     margin-left: 0px;
     min-height: 25px;
-    width: 70px;
-    border-radius: 15px;
+    width: 100%;
+    border-radius: 5px;
     background: var(--dot-skeletone-bg);
     background-size: var(--animation-background-size);
     animation-name: var(--animation);

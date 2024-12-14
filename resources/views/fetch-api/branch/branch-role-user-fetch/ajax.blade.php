@@ -17,32 +17,38 @@
                 dataType: 'json',
                 success: function(response) {
                     const roles = response.roles;
-                    $("#select_role").empty();
-                    $("#select_role").append('<option value="" style="font-weight:600;">Select User Role</option>');
+                    $("#select_role, #role_id").empty();
+                    $("#select_role, #role_id").append('<option value="" style="font-weight:600;">Select User Role</option>');
                     $.each(roles, function(key, item) {
-                        $("#select_role").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.name}</option>`);
+                        $("#select_role, #role_id").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.name}</option>`);
                     });
                 },
                 error: function() {
-                    $("#select_role").empty();
-                    $("#select_role").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
+                    $("#select_role, #role_id").empty();
+                    $("#select_role, #role_id").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
                 }
             });
         }
 
         // Handle Select only role
-        $(document).on('change', '#select_role', function() {
+        $(document).on('change', '#select_role, #role_id', function() {
             var changeValue = $(this).val();
+            var changeValue2 = $("#role_id").val();
             if (changeValue === '') {
                 $("#select_email").empty();
                 $("#select_email").empty();
                 $("#select_email").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
             }
+            if (changeValue2 === '') {
+                $("#email_id").empty();
+                $("#email_id").empty();
+                $("#email_id").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
+            }
         });
 
         // Event listener for only role dropdown
-        $(document).on('change', '#select_role', function() {
-            const selectedRole = $(this).val();
+        $(document).on('change', '#select_role, #role_id', function() {
+            const selectedRole = $("#select_role, #role_id").val();
             fetch_user_email(selectedRole);
         });
 
@@ -66,17 +72,17 @@
                 dataType: 'json',
                 success: function(response) {
                     const districts = response.users;
-                    $("#select_email").empty();
+                    $("#select_email, #email_id").empty();
                     $.each(users, function(key, item) {
-                        $("#select_email").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.email}</option>`);
+                        $("#select_email, #email_id").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.email}</option>`);
                     });
                     if (typeof callback === 'function') {
                         callback();
                     }
                 },
                 error: function() {
-                    $("#select_email").empty();
-                    $("#select_email").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select district</option>');
+                    $("#select_email, #email_id").empty();
+                    $("#select_email, #email_id").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select district</option>');
                 }
             });
         }
