@@ -359,12 +359,10 @@ class BranchServiceProvicer
     {
         // Get authenticated user's email
         $auth = Auth::user();
-        $authEmail = $auth->email;
+        $authEmail = $auth->id;
 
         $specify_branch = Branch::where('admin_email_id', $authEmail)
-            ->where('admin_approval_status', 1);
-
-            //dd( $specify_branch);
+            ->where('admin_approval_status', 1)->get();
 
         return response()->json([
             'specify_branch' => $specify_branch,

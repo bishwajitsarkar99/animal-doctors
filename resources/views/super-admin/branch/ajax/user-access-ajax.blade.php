@@ -59,7 +59,7 @@
 
         // fetch branch for dropdown
         function searchBranch(){
-            const currentUrl = "{{ route('search-branch.action') }}";
+            const currentUrl = "{{ route('branch_specify_search.action') }}";
 
             $.ajaxSetup({
                 headers: {
@@ -72,10 +72,10 @@
                 url: currentUrl,
                 dataType: 'json',
                 success: function(response) {
-                    const all_branchs = response.allBranch;
+                    const specify_branch = response.specify_branch;
                     $("#search_branch").empty();
                     $("#search_branch").append('<option value="">Select Company Branch Name</option>');
-                    $.each(all_branchs, function(key, item) {
+                    $.each(specify_branch, function(key, item) {
                         $("#search_branch").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.branch_name}</option>`);
                     });
                 },
@@ -183,6 +183,20 @@
             $('#email_id').val("");
         }
 
+        // Remove Validation Errors
+        $(document).on('change', '.email_id, .role_id', function(){
+            var selected_val = $(this).val();
+
+            if(selected_val !== ''){
+                $("#savForm_error3").html("");
+                $('#email_id').next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                $("#savForm_error3").removeClass('alert_show_errors');
+                $("#savForm_error2").html("");
+                $('#role_id').next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                $("#savForm_error2").removeClass('alert_show_errors');
+            }
+        });
+
         // Refresh
         $(document).on('click', '#refresh', function(){
             $('.select2').each(function () {
@@ -228,8 +242,6 @@
             };
         });
 
-
-
         // Add Branch Access For User by Modal
         $(document).on('click', '#save_btn_confirm', function(e){
             e.preventDefault();
@@ -258,28 +270,28 @@
                 url: "{{ route('permission_create.action') }}",
                 dataType: "json",
                 data:data,
-                success: function(response){
-                    if(response.status == 400){
-                        $.each(response.errors, function(key, err_value){
-                            if (key === 'branch_id') {
+                success: function (response) {
+                    if (response.status == 400) {
+                        $.each(response.errors, function (key, err_value) {
+                            if (key === "branch_id") {
                                 $("#savForm_error").fadeIn();
-                                $('#savForm_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $('#savForm_error').html('<span class="error_val" style="font-size:12px;font-weight:700;">' + err_value + '</span>');
                                 $("#savForm_error").addClass("alert_show_errors");
                                 $('#add_branch_id').addClass('is-invalid');
                                 $('#add_branch_id').html("");
-                            } else if (key === 'email_id') {
-                                $("#savForm_error2").fadeIn();
-                                $('#savForm_error2').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
-                                $("#savForm_error2").addClass("alert_show_errors");
-                                $('#email_id').next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                            } else if (key === 'role_id') {
+                            } else if (key === "email_id") {
                                 $("#savForm_error3").fadeIn();
-                                $('#savForm_error3').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $('#savForm_error3').html('<span class="error_val" style="font-size:12px;font-weight:700;">' + err_value + '</span>');
                                 $("#savForm_error3").addClass("alert_show_errors");
+                                $('#email_id').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                            } else if (key === "role_id") {
+                                $("#savForm_error2").fadeIn();
+                                $('#savForm_error2').html('<span class="error_val" style="font-size:12px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_error2").addClass("alert_show_errors");
                                 $('#role_id').next('.select2-container').find('.select2-selection').addClass('is-invalid');
                             }
                         });
-                    }else{
+                    } else {
                         $("#roleemailbranch").modal('hide');
                         $("#accessconfirmbranch").modal('show');
                         $("#pageLoader").removeAttr('hidden');
@@ -302,10 +314,39 @@
                             setTimeout(() => {
                                 $('#success_message').fadeOut(3000);
                             }, 3000);
-                            
+
                             clearFields();
                             searchBranch();
                         }, 1500);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // This handles 400 and other errors
+                    let response = xhr.responseJSON;
+                    console.log("Error Response:", response);
+
+                    if (response && response.errors) {
+                        // Render errors in modal
+                        $.each(response.errors, function (key, errorMessage) {
+                            if (key === "branch_id") {
+                                $("#savForm_error").fadeIn();
+                                $("#savForm_error").html('<span class="error_val" style="font-size:12px;font-weight:700;">' + errorMessage + '</span>');
+                                $("#savForm_error").addClass("alert_show_errors");
+                                $("#add_branch_id").addClass('is-invalid');
+                            } else if (key === "email_id") {
+                                $("#savForm_error3").fadeIn();
+                                $("#savForm_error3").html('<span class="error_val" style="font-size:12px;font-weight:700;">' + errorMessage + '</span>');
+                                $("#savForm_error3").addClass("alert_show_errors");
+                                $('#email_id').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                            } else if (key === "role_id") {
+                                $("#savForm_error2").fadeIn();
+                                $("#savForm_error2").html('<span class="error_val" style="font-size:12px;font-weight:700;">' + errorMessage + '</span>');
+                                $("#savForm_error2").addClass("alert_show_errors");
+                                $('#role_id').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                            }
+                        });
+                    } else {
+                        alert("An unexpected error occurred. Please try again.");
                     }
                 }
             });
