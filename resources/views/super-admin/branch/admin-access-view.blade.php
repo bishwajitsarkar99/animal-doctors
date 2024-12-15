@@ -32,25 +32,25 @@
                     <div class="form-group role_nme branch mb-1 skeleton" id="adminRole" hidden>
                       <label class="catg_name_label label_position" for="mail-transport">Role Name</label><br>
                       <select type="text" class="form-control form-control-sm admin_role_id select2" name="admin_role_id" id="select_role_one">
-                        <option value="">Select Admin Role Name...................................</option>
+                        <option value="">Select Admin Role Name</option>
                       </select>
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton" id="subAdminRole" hidden>
                       <label class="catg_name_label label_position" for="mail-transport">Role Name</label><br>
                       <select type="text" class="form-control form-control-sm sub_admin_role_id select2" name="sub_admin_role_id" id="select_role_two">
-                        <option value="">Select Sub Role Name........................................</option>
+                        <option value="">Select Sub Role Name</option>
                       </select>
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton" id="adminEmail" hidden>
                       <label class="catg_name_label label_position" for="mail-transport">Email Address</label><br>
                       <select type="text" class="form-control form-control-sm admin_email_id select2" name="admin_email_id" id="select_email_one">
-                        <option value="">Select Admin Email Address.............................</option>
+                        <option value="">Select Admin Email Address</option>
                       </select>
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton" id="subAdminEmail" hidden>
                       <label class="catg_name_label label_position" for="mail-transport">Email Address</label><br>
                       <select type="text" class="form-control form-control-sm sub_admin_email_id select2" name="sub_admin_email_id" id="select_email_two">
-                        <option value="">Select Sub Admin Email Address....................</option>
+                        <option value="">Select Sub Admin Email Address</option>
                       </select>
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton" id="adminstatus" hidden>

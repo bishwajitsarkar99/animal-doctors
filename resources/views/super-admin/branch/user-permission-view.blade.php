@@ -5,15 +5,15 @@
   <div class="container">
     <ul class="nav nav-tabs tab_bg" role="tablist" style="background:white;">
       <li class="nav-item tab-skeletone">
-        <a class="nav-link branch active home-text" data-bs-toggle="tab" href="#home" id="tabHome"> Create Branch Access</a>
+        <a class="nav-link branch active home-text" data-bs-toggle="tab" href="#home" id="tabHome"> Create Access</a>
       </li>
       <li class="nav-item tab-skeletone">
-        <a class="nav-link branch" data-bs-toggle="tab" href="#userBranchPermission" id="tabAccess">User Branch Access</a>
+        <a class="nav-link branch" data-bs-toggle="tab" href="#userBranchPermission" id="tabAccess">Access Permission</a>
       </li>
       <li class="nav-item tab-skeletone">
         <a type="button" class="nav-link branch refresh_btn" id="refresh">
-            <span class="btn-text ms-1">Refresh</span>
-            <span class="refresh-icon spinner-border spinner-border-sm text-white refrsh-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+          <span class="refresh-icon spinner-border spinner-border-sm text-primary refrsh-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+          <span class="refresh-btn-text ms-1">Refresh</span>
         </a>
       </li>
     </ul>
@@ -32,42 +32,59 @@
       <div class="modal-content" id="admin_modal_box">
         <div class="modal-header profile_modal_header profilesetting_modal_header">
           <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss branch-skeleton" id="staticBackdropLabel">
-            Role and Email
+            Confirm User Access
           </h5>
           <button type="button" class="btn-close btn-btn-sm head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
         </div>
-
-        <div class="modal-body profile-body pb-1">
-          <div class="row profile-heading">
-            <div class="col-xl-12">
-              <div class="form-group role_nme mb-1 skeleton">
-                <span class="input-label"><label class="catg_name_label label_position" for="role">User Role</label></span>
-                <select type="text" class="form-control form-control-sm role_id select2" name="role_id" id="role_id">
+        <form class="add_access_form" autocomplete="off">
+          @csrf
+          <div class="modal-body profile-body pb-1">
+            <div class="row profile-heading">
+              <div class="col-xl-12">
+                <input class="add_branches_id" name="branches_id" id="add_branches_id" hidden>
+                <input type="text" name="branch_id" id="add_branch_id" hidden>
+                <span id="savForm_error" hidden></span>
+                <input type="text" name="branch_type" id="add_branch_type" hidden>
+                <input type="text" name="branch_name" id="add_branch_name" hidden>
+                <input type="text" name="division_id" id="add_division_id" hidden>
+                <input type="text" name="district_id" id="add_district_id" hidden>
+                <input type="text" name="upazila_id" id="add_upazila_id" hidden>
+                <input type="text" name="town_name" id="add_town_name" hidden>
+                <input type="text" name="location" id="add_location" hidden>
+                <div class="form-group role_nme mb-1 branch-skeleton">
+                  <span class="input-label"><label class="catg_name_label label_position" for="role">User Role</label></span>
+                  <select type="text" class="form-control form-control-sm role_id select2" name="role_id" id="role_id">
                     <option value="">Select User Role</option>
-                </select>
+                  </select>
+                  <span id="savForm_error2"></span>
+                </div>
               </div>
-            </div>
-            <div class="col-xl-12">
-              <div class="form-group role_nme mb-1 skeleton">
-                <span class="input-label"><label class="catg_name_label label_position" for="email">User Email</label></span>
-                <select type="text" class="form-control form-control-sm email_id select2" name="email_id" id="email_id">
+              <div class="col-xl-12">
+                <div class="form-group role_nme mb-1 branch-skeleton">
+                  <span class="input-label"><label class="catg_name_label label_position" for="email">User Email</label></span>
+                  <select type="text" class="form-control form-control-sm email_id select2" name="email_id" id="email_id">
                     <option value="">Select User Email</option>
-                </select>
+                  </select>
+                  <span id="savForm_error3"></span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer profile_modal_footer">
-          <p id="btn_group2">
-            <button id="save_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus branch-skeleton">
-              <span class="save-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-              <span class="save-btn-text">Save</span>
-            </button>
-          </p>
-          <p id="btn_group">
-            <a type="button" class="btn btn-danger modal_button logout_button branch-delete-skeleton" data-bs-dismiss="modal" id="noButton">No</a>
-          </p>
-        </div>
+          <div class="modal-footer profile_modal_footer">
+            <p id="btn_group2">
+              <button id="save_btn_confirm" type="button" class="btn btn-sm cgt_btn btn_focus branch-skeleton mt-2">
+                <span class="save-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                <span class="save-btn-text">Confirm</span>
+              </button>
+            </p>
+            <p id="btn_group">
+              <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton mt-2" data-bs-dismiss="modal">
+                <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                <span class="cancel-btn-text">Cancel</span>
+              </button>
+            </p>
+          </div>
+        </form>
       </div>
     </div>
   </div>

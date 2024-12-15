@@ -80,6 +80,8 @@ Route::group(['middleware' => 'auth'], function (){
     Route::prefix('users')->group(function (){
         Route::get('/fetch-role', [AuthController::class, 'fetchRole'])->name('fetch_role.action');
         Route::get('/fetch-email/{id}', [AuthController::class, 'fetchEmail'])->name('fetch_email.action');
+        Route::get('/fetch-role-branch', [AuthController::class, 'fetchBranchRoles'])->name('fetch_branch_role.action');
+        Route::get('/fetch-email-branch/{id}', [AuthController::class, 'fetchBranchEmails'])->name('fetch_branch_email.action');
         Route::get('/fetch-email-one/{id}', [AuthController::class, 'fetchEmailOne'])->name('fetch_email_one.action');
         Route::get('/fetch-email-two/{id}', [AuthController::class, 'fetchEmailTwo'])->name('fetch_email_two.action');
     });

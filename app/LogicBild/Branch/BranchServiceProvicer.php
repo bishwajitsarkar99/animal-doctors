@@ -7,6 +7,7 @@ use App\Models\Branch\Division;
 use App\Models\Branch\District;
 use App\Models\Branch\ThanaOrUpazila;
 use App\Models\Branch\Branch;
+use App\Models\Branch\UserBranchAccessPermission;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
@@ -354,6 +355,26 @@ class BranchServiceProvicer
     /**
      * Handle branch data get for user permission create.
     */
+    public function getSpecifyBranch(Request $request)
+    {
+        // Get authenticated user's email
+        $auth = Auth::user();
+        $authEmail = $auth->email;
+
+        $specify_branch = Branch::where('admin_email_id', $authEmail)
+            ->where('admin_approval_status', 1);
+
+            //dd( $specify_branch);
+
+        return response()->json([
+            'specify_branch' => $specify_branch,
+        ], 200);
+
+        }
+
+    /**
+     * Handle branch data get for user permission create.
+    */
     public function branchGet(Request $request, $id)
     {
         $branch = Branch::with(
@@ -382,7 +403,46 @@ class BranchServiceProvicer
     */
     public function userBranchPermissionCreate(Request $request)
     {
-        //
+        $validators = Validator::make($request->all(),[
+            'email_id' => 'required|unique:user_branch_access_permissions',
+            'role_id' => 'required',
+            'branch_id' => 'required',
+        ],[
+            'email_id.required' => 'Email is required.',
+            'email_id.unique' => 'The email has already taken.',
+            'role_id.required' => 'Role is required.',
+            'branch_id.required' => 'Branch is is required.',
+        ]);
+
+        if($validators->fails()){
+            return response()->json([
+                'status' => 400,
+                'errors' => $validators->messages(),
+            ],400);
+        }
+
+        $auth = Auth::user();
+
+        $user_access = new UserBranchAccessPermission;
+        $user_access->branch_id = $request->input('branch_id');
+        $user_access->branch_type = $request->input('branch_type');
+        $user_access->branch_name = $request->input('branch_name');
+        $user_access->division_id = $request->input('division_id');
+        $user_access->district_id = $request->input('district_id');
+        $user_access->upazila_id = $request->input('upazila_id');
+        $user_access->town_name = $request->input('town_name');
+        $user_access->location = $request->input('location');
+        $user_access->role_id = $request->input('role_id');
+        $user_access->email_id = $request->input('email_id');
+        $user_access->created_by = $auth->id;
+
+        $user_access->save();
+
+        return response()->json([
+            'status' => 200,
+            'messages' => 'User access has created successfully.'
+        ],200);
+
     }
 
     /**

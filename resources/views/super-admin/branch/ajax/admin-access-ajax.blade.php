@@ -20,32 +20,38 @@
             if ($(this).attr('id') === 'select_branch_search') {
                 $(this).select2({
                     placeholder: 'Select Company Branch Name',
-                    allowClear: true
+                    allowClear: true,
+                    width: '100%'
                 });
             }else if ($(this).attr('id') === 'role_type') {
                 $(this).select2({
                     placeholder: 'Select Role Play',
-                    allowClear: true
+                    allowClear: true,
+                    width: '100%'
                 });
             }else if ($(this).attr('id') === 'select_role_one') {
                 $(this).select2({
-                    placeholder: 'Select Admin Role Name...................................',
-                    allowClear: true
+                    placeholder: 'Select Admin Role Name',
+                    allowClear: true,
+                    width: '100%'
                 });
             }else if ($(this).attr('id') === 'select_role_two') {
                 $(this).select2({
-                    placeholder: 'Select Sub Role Name........................................',
-                    allowClear: true
+                    placeholder: 'Select Sub Role Name',
+                    allowClear: true,
+                    width: '100%'
                 });
             }else if ($(this).attr('id') === 'select_email_one') {
                 $(this).select2({
-                    placeholder: 'Select Admin Email Address.............................',
-                    allowClear: true
+                    placeholder: 'Select Admin Email Address',
+                    allowClear: true,
+                    width: '100%'
                 });
             }else if ($(this).attr('id') === 'select_email_two') {
                 $(this).select2({
-                    placeholder: 'Select Sub Admin Email Address....................',
-                    allowClear: true
+                    placeholder: 'Select Sub Admin Email Address',
+                    allowClear: true,
+                    width: '100%'
                 });
             }
         });

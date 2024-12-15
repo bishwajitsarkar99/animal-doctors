@@ -447,4 +447,31 @@ class AuthService
             'users' => $users,
         ], 200);
     }
+
+    /**
+     * Handle User Role Fetch For Branch.
+    */
+    public function fetchBranchRole(Request $request)
+    {
+        $excludedRoles = ['Super Admin', 'Admin', 'Sub Admin'];
+        $branch_roles = Role::whereNotIn('name', $excludedRoles)->get();
+
+        return response()->json([
+            'branch_roles' => $branch_roles,
+        ], 200);
+    }
+
+    /**
+     * Handle User Email Fetch For Branch.
+    */
+    public function fetchBranchEmail(Request $request, $id)
+    {
+        $users = User::whereHas('roles', function ($query) use ($id) {
+            $query->where('id', $id);
+        })->get();
+
+        return response()->json([
+            'users' => $users,
+        ], 200);
+    }
 }

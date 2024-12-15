@@ -27,6 +27,18 @@ class AuthController extends Controller
         return $this->authService->fetchEmails($request, $id);
     }
 
+    // Fetch Role For Branch
+    public function fetchBranchRoles(Request $request)
+    {
+        return $this->authService->fetchBranchRole($request);
+    }
+
+    // Fetch Email For Branch
+    public function fetchBranchEmails(Request $request, $id)
+    {
+        return $this->authService->fetchBranchEmail($request, $id);
+    }
+
     // Fetch Role One
     public function fetchEmailOne(Request $request, $id)
     {

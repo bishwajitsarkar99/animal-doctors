@@ -28,12 +28,14 @@
             if ($(this).attr('id') === 'select_branch') {
                 $(this).select2({
                     placeholder: 'Select Company Branch Name',
-                    allowClear: true
+                    allowClear: true,
+                    width: '100%'
                 });
             }else if ($(this).attr('id') === 'branch_type') {
                 $(this).select2({
                     placeholder: 'Select Branch Type',
-                    allowClear: true
+                    allowClear: true,
+                    width: '100%'
                 });
             }
         });
