@@ -47,7 +47,27 @@ div.responsive {
     overflow-x: auto;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    max-height: 200px;
+    max-height: 400px;
+}
+.enter-focus{
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    animation-name: link_focus;
+    animation-duration: 1s;
+    animation-direction: alternate-reverse;
+    animation-fill-mode: both;
+    animation-play-state: running;
+    -o-animation-direction: alternate-reverse; 
+}
+@keyframes link_focus {
+    0%{
+        color: #007bff;
+    }
+    50%{
+        color: darkgray;
+    }
+    100%{
+        color: black;
+    }
 }
 ul#branch_menu{
     background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);

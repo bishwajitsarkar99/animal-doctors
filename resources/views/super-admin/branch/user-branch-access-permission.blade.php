@@ -9,11 +9,11 @@
                         <ul id="branch_menu" class="list_group"></ul>
                     </div>
                 </div>
-                <div class="col-xl-3">
+                <div class="col-xl-3" id="roleBox" hidden>
                     <div class="list_head">Select User Role</div>
                     <ul id="role_menu" class="list_group"></ul>
                 </div>
-                <div class="col-xl-5">
+                <div class="col-xl-5" id="emailBox">
                 <div class="list_head">Select User Email</div>
                 <ul id="email_menu" class="list_group"></ul>
                 </div>

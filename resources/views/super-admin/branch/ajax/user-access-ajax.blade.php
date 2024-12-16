@@ -417,6 +417,7 @@
                         branchMenu.append(
                             `<li tabindex="0" value="${item.id}" id="select_list_item">
                                 ${item.branch_name}
+                                <label class="enter_press enter-focus">Enter Press <i class="fa-solid fa-link"></i></label>
                                 <span class="badge bg-dark-orange rounded-pill bage_display_none" id="userNum">
                                     <label>User: </label>12
                                 </span>
@@ -434,6 +435,20 @@
                 }
             });
         }
+
+        // show Role Box press enter / click event
+        $(document).on('click keydown', '#select_list_item', function(){
+
+            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                const selectedVal = $(this).attr('data-val');
+
+                if (selectedVal === '1') {
+                    $("#roleBox").removeAttr('hidden');
+                } else if (selectedVal === '0') {
+                    $("#roleBox").attr('hidden', true);
+                }
+            }
+        });
     });
 </script>
 <script>
@@ -441,6 +456,8 @@
         const menu = document.getElementById('branch_menu');
         const menuItems = menu.querySelectorAll('li');
         const menuSpans = menu.querySelectorAll('span');
+        const menuPressEnter = menu.querySelectorAll('.enter_press');
+        const menuRole = menu.querySelectorAll('#select_list_item');
         let currentIndex = -1; // Tracks the currently highlighted item
         let menuVisible = true; // Tracks menu visibility, starts as visible
 
@@ -482,16 +499,24 @@
         function updateHighlight() {
             menuItems.forEach((item, index) => {
                 const span = menuSpans[index]; // Get the corresponding span
+                const enter = menuPressEnter[index];
+                const role = menuRole[index];
                 if (index === currentIndex) {
                     // Highlight the current item and show the badge
                     item.classList.add('highlight');
                     span.classList.add('bage_display');
                     span.classList.remove('bage_display_none');
+                    enter.classList.add('bage_display');
+                    enter.classList.remove('bage_display_none');
+                    role.setAttribute('data-val', '1');
                 } else {
                     // Remove highlight and hide the badge
                     item.classList.remove('highlight');
                     span.classList.remove('bage_display');
                     span.classList.add('bage_display_none');
+                    enter.classList.remove('bage_display');
+                    enter.classList.add('bage_display_none');
+                    role.setAttribute('data-val', '0');
                 }
             });
 
