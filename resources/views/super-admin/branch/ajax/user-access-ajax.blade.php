@@ -7,6 +7,8 @@
         fetch_branch_roles();
         fetch_branch_emails();
         searchBranch();
+        allSearchBranch();
+        searchBranchFetch();
         // Initialize the button loader for the login button
         buttonLoader('#add', '.add-icon', '.add-btn-text', 'ADD Access...', 'ADD Access', 1000);
         buttonLoader('#save_btn_confirm', '.save-icon', '.save-btn-text', 'Confirm...', 'Confirm', 1000);
@@ -21,10 +23,19 @@
                     allowClear: true,
                     width: '100%'
                 });
+            }else if($(this).attr('id') === 'search_branch_all'){
+                $(this).select2({
+                    placeholder: 'Select Company Branch Name',
+                    allowClear: true,
+                    width: '100%'
+                });
             }
         });
         // Set custom placeholder for the search input inside Select2 dropdowns
         $('#search_branch').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search branch...');
+        });
+        $('#search_branch_all').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search branch...');
         });
         $('#role_id').on('select2:open', function() {
@@ -58,6 +69,35 @@
         });
 
         // fetch branch for dropdown
+        function allSearchBranch(){
+            const currentUrl = "{{ route('search-branch.action') }}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const allBranch = response.allBranch;
+                    $("#search_branch_all").empty();
+                    $("#search_branch_all").append('<option value="">Select Company Branch Name</option>');
+                    $.each(allBranch, function(key, item) {
+                        $("#search_branch_all").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.branch_name}</option>`);
+                    });
+                },
+                error: function() {
+                    $("#search_branch_all").empty();
+                    $("#search_branch_all").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
+                }
+            });
+        }
+
+        // fetch branch for dropdown
         function searchBranch(){
             const currentUrl = "{{ route('branch_specify_search.action') }}";
 
@@ -87,7 +127,7 @@
         }
 
         // Search Select Dropdown
-        $(document).on('change', '#search_branch', function(e){
+        $(document).on('change', '#search_branch, #search_branch_all', function(e){
             e.preventDefault();
             var select = $(this).val();
 
@@ -143,8 +183,8 @@
     
                             $('#branches_id').val(id);
                             $('.edit_branch_id').val(response.messages.branch_id);
-                            $('.edit_branch_name').val(response.messages.branch_name);
                             $('.edit_branch_type').val(response.messages.branch_type);
+                            $('.edit_branch_name').val(response.messages.branch_name);
                             $('.edit_division_id').val(response.messages.divisions.division_name);
                             $('.edit_district_id').val(response.messages.districts.district_name);
                             $('.edit_upazila_id').val(response.messages.thana_or_upazilas.thana_or_upazila_name);
@@ -153,8 +193,8 @@
                             // Modal Form
                             $('#add_branches_id').val(id); 
                             $('#add_branch_id').val(response.messages.branch_id);
-                            $('#add_branch_type').val(response.messages.branch_name);
-                            $('#add_branch_name').val(response.messages.branch_type);
+                            $('#add_branch_type').val(response.messages.branch_type);
+                            $('#add_branch_name').val(response.messages.branch_name);
                             $('#add_division_id').val(response.messages.division_id);
                             $('#add_district_id').val(response.messages.district_id);
                             $('#add_upazila_id').val(response.messages.upazila_id);
@@ -209,6 +249,8 @@
                     placeholderText = 'Select User Role';
                 } else if (id === 'email_id') {
                     placeholderText = 'Select User Email';
+                } else if (id === 'search_branch_all') {
+                    placeholderText = 'Select Company Branch Name';
                 }
 
                 // Reinitialize Select2 with specific settings
@@ -352,5 +394,117 @@
             });
             
         });
+
+        // Branch Fetch For User Permission
+        function searchBranchFetch() {
+            const currentUrl = "{{ route('search-branch.action') }}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const allBranch = response.allBranch;
+                    const branchMenu = $("#branch_menu");
+                    branchMenu.empty();
+                    $.each(allBranch, function(key, item) {
+                        branchMenu.append(
+                            `<li tabindex="0" value="${item.id}" id="select_list_item">
+                                ${item.branch_name}
+                                <span class="badge bg-dark-orange rounded-pill bage_display_none" id="userNum">
+                                    <label>User: </label>12
+                                </span>
+                            </li>`
+                        );
+                    });
+
+                    // Update menuItems and menuSpans after dynamic content is added
+                    initializeMenuEvents();
+                },
+                error: function() {
+                    const branchMenu = $("#branch_menu");
+                    branchMenu.empty();
+                    branchMenu.append('<li tabindex="0" value="" disabled>Error Loading Data</li>');
+                }
+            });
+        }
     });
+</script>
+<script>
+    function initializeMenuEvents() {
+        const menu = document.getElementById('branch_menu');
+        const menuItems = menu.querySelectorAll('li');
+        const menuSpans = menu.querySelectorAll('span');
+        let currentIndex = -1; // Tracks the currently highlighted item
+        let menuVisible = true; // Tracks menu visibility, starts as visible
+
+        // Remove existing event listeners to prevent duplication
+        document.removeEventListener('keydown', handleKeydown);
+
+        // Add the event listener for keydown
+        document.addEventListener('keydown', handleKeydown);
+
+        // Add click event listeners to menu items
+        menuItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentIndex = index; // Set the clicked item's index as the current
+                updateHighlight();
+            });
+        });
+
+        function handleKeydown(event) {
+            if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+                // Handle navigation
+                if (menuVisible) {
+                    if (event.key === 'ArrowDown') {
+                        currentIndex = (currentIndex + 1) % menuItems.length; // Loop to start
+                    } else if (event.key === 'ArrowUp') {
+                        currentIndex = (currentIndex - 1 + menuItems.length) % menuItems.length; // Loop to end
+                    }
+                    updateHighlight();
+                }
+            } else if (event.key === 'Escape') {
+                // Toggle visibility on Escape key
+                menuVisible = !menuVisible;
+                menu.style.display = menuVisible ? 'block' : 'none';
+                if (!menuVisible) {
+                    currentIndex = -1; // Reset index when hiding
+                }
+            }
+        }
+
+        function updateHighlight() {
+            menuItems.forEach((item, index) => {
+                const span = menuSpans[index]; // Get the corresponding span
+                if (index === currentIndex) {
+                    // Highlight the current item and show the badge
+                    item.classList.add('highlight');
+                    span.classList.add('bage_display');
+                    span.classList.remove('bage_display_none');
+                } else {
+                    // Remove highlight and hide the badge
+                    item.classList.remove('highlight');
+                    span.classList.remove('bage_display');
+                    span.classList.add('bage_display_none');
+                }
+            });
+
+            if (currentIndex >= 0) {
+                // Focus the current item if it exists
+                menuItems[currentIndex].focus();
+            }
+        }
+
+        // Automatically highlight the first item when the menu is updated
+        if (menuVisible && menuItems.length > 0) {
+            currentIndex = 0; // Set to the first item
+            updateHighlight();
+        }
+    }
 </script>

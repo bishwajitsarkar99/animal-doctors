@@ -4,6 +4,16 @@
             @csrf
             <div class="row">
                 <div class="col-xl-6">
+                    @if(auth()->user()->role ==1)
+                    <div class="form-group mb-1 role_nme skeleton">
+                        <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Searching...</label></span>
+                        <select type="text" class="form-control form-control-sm search_all_branch select2" name="branch_name" id="search_branch_all">
+                        <option value="">Select Company Branch Name</option>
+                        </select>
+                        <input type="hidden" id="branches_id">
+                    </div>
+                    @endif
+                    @if(auth()->user()->role ==3)
                     <div class="form-group mb-1 role_nme skeleton">
                         <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Searching...</label></span>
                         <select type="text" class="form-control form-control-sm search_branch select2" name="branch_name" id="search_branch">
@@ -11,6 +21,7 @@
                         </select>
                         <input type="hidden" id="branches_id">
                     </div>
+                    @endif
                     <div class="form-group role_nme mb-1 skeleton">
                         <span class="input-label"><label class="catg_name_label label_position" for="branch-id">Branch ID</label></span>
                         <input class="form-control form-control-sm branch_input edit_branch_id" type="text" name="branch_id" id="brnch_id" placeholder="Branch ID" value="" disabled />

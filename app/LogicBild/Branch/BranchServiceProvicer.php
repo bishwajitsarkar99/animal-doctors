@@ -121,12 +121,15 @@ class BranchServiceProvicer
     */
     public function searchBranchs(Request $request)
     {
-        // Get Branch Data
-        $allBranch = Branch::orderBy('id', 'desc')->get();
-
-        return response()->json([
-            'allBranch' => $allBranch,
-        ], 200);
+        $auth = Auth::user();
+        if($auth->role ==1){
+            // Get Branch Data
+            $allBranch = Branch::orderBy('id', 'desc')->get();
+    
+            return response()->json([
+                'allBranch' => $allBranch,
+            ], 200);
+        }
 
     }
 
@@ -236,13 +239,17 @@ class BranchServiceProvicer
     */
     public function branchDataFetchs(Request $request)
     {
-        $branch_names = Branch::orderBy('id', 'desc')->where('branch_name', '!=', null)->get();
+        $auth = Auth::user();
 
-        if($branch_names){
-            return response()->json([
-                'branch_names' => $branch_names,
-            ], 200);
-        };
+        if($auth->role ==1){
+            $branch_names = Branch::orderBy('id', 'desc')->where('branch_name', '!=', null)->get();
+    
+            if($branch_names){
+                return response()->json([
+                    'branch_names' => $branch_names,
+                ], 200);
+            };
+        }
     }
 
     /**
@@ -361,14 +368,21 @@ class BranchServiceProvicer
         $auth = Auth::user();
         $authEmail = $auth->id;
 
-        $specify_branch = Branch::where('admin_email_id', $authEmail)
-            ->where('admin_approval_status', 1)->get();
-
-        return response()->json([
-            'specify_branch' => $specify_branch,
-        ], 200);
-
+        if (!$auth) {
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
+
+        if($auth->role ==3 && $authEmail){
+
+            $specify_branch = Branch::where('admin_email_id', $authEmail)
+                ->where('admin_approval_status', 1)->get();
+    
+            return response()->json([
+                'specify_branch' => $specify_branch,
+            ], 200);
+        }
+        return response()->json(['message' => 'No branches available for this role'], 403);
+    }
 
     /**
      * Handle branch data get for user permission create.
@@ -448,7 +462,25 @@ class BranchServiceProvicer
     */
     public function userBranchPermissionEdit($id)
     {
-        //
+        // $branch = Branch::with(
+        //     [
+        //         'divisions', 
+        //         'districts', 
+        //         'thana_or_upazilas',
+        //     ]
+        // )->find($id);
+        // if($branch){
+        //     return response()->json([
+        //         'status' => 200,
+        //         'messages' => $branch,
+        //     ]);
+        // }else{
+
+        //     return response()->json([
+        //         'status' => 404,
+        //         'messages' => 'The branch is no found.',
+        //     ]);
+        // }
     }
 
     /**
@@ -468,7 +500,7 @@ class BranchServiceProvicer
     }
 
     /**
-     * Handle user branch permission delete.
+     * Handle user branch permission.
     */
     public function userBranchAccessPermission(Request $request)
     {

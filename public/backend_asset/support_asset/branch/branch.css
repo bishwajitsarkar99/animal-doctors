@@ -12,6 +12,125 @@
     --animation-background-position-0:100% 50%;
     --animation-background-position-100:0 50%;
 }
+.highlight {
+    align-items: center !important;
+    justify-content: space-between !important;
+    display: flex !important;
+    background-color: orange;
+    outline: none;
+    border: none;
+    font-family: var(--nav-font-family);
+    font-size: 12px;
+    font-weight: 700;
+}
+.bg-dark-orange {
+    opacity: 1;
+    background-color: #a97007 !important;
+}
+.bage_display {
+    display: inline-block;
+}
+.bage_display_none{
+    display: none;
+}
+.list_head {
+    background: rebeccapurple;
+    color: white;
+    font-family: var(--nav-font-family);
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    padding: 2px;
+    text-align: center;
+}
+div.responsive {
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: 200px;
+}
+ul#branch_menu{
+    background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
+    border: 1px solid #ebebb5; 
+}
+ul#role_menu{
+    background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
+    border: 1px solid #ebebb5; 
+}
+ul#email_menu{
+    background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
+    border: 1px solid #ebebb5; 
+}
+ul#branch_menu>li {
+    margin: 0;
+    list-style-type: none;
+    position: relative;
+    align-items: center !important;
+    justify-content: space-between !important;
+    display: flex !important;
+    /* background-color: var(--bs-list-group-bg); */
+    padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+    color: var(--bs-list-group-color);
+    text-decoration: none;
+    font-family: var(--nav-font-family);
+    font-size: 12px;
+    font-weight: 700;
+}
+ul#role_menu>li {
+    margin: 0;
+    list-style-type: none;
+    position: relative;
+    align-items: center !important;
+    justify-content: space-between !important;
+    display: flex !important;
+    /* background-color: var(--bs-list-group-bg); */
+    padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+    color: var(--bs-list-group-color);
+    text-decoration: none;
+    font-family: var(--nav-font-family);
+    font-size: 12px;
+    font-weight: 700;
+}
+ul#email_menu>li {
+    margin: 0;
+    list-style-type: none;
+    position: relative;
+    align-items: center !important;
+    justify-content: space-between !important;
+    display: flex !important;
+    /* background-color: var(--bs-list-group-bg); */
+    padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+    color: var(--bs-list-group-color);
+    text-decoration: none;
+    font-family: var(--nav-font-family);
+    font-size: 12px;
+    font-weight: 700;
+}
+.list_group {
+    --bs-list-group-color: #212529;
+    --bs-list-group-bg: #fff;
+    --bs-list-group-border-color: rgba(0, 0, 0, 0.125);
+    --bs-list-group-border-width: 1px;
+    --bs-list-group-border-radius: 0.375rem;
+    /* --bs-list-group-border-radius: 0rem; */
+    --bs-list-group-item-padding-x: 1rem;
+    --bs-list-group-item-padding-y: 0.1rem;
+    --bs-list-group-action-color: #495057;
+    --bs-list-group-action-hover-color: #495057;
+    --bs-list-group-action-hover-bg: #f8f9fa;
+    --bs-list-group-action-active-color: #212529;
+    --bs-list-group-action-active-bg: #e9ecef;
+    --bs-list-group-disabled-color: #6c757d;
+    --bs-list-group-disabled-bg: #fff;
+    --bs-list-group-active-color: #fff;
+    --bs-list-group-active-bg: #0d6efd;
+    --bs-list-group-active-border-color: #0d6efd;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: var(--bs-list-group-border-radius);
+}
 .card-body.branch_form {
     box-shadow: 0px 2px 20px #0001;
     padding-bottom: 1px;
@@ -326,13 +445,13 @@ a#refresh{
     font-variant: all-petite-caps;
 }
 a#refresh:hover{
-    color: darkcyan;
+    color: rebeccapurple;
 }
 .nav-link.branch.active{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-size: 16px;
     font-weight: 500;
-    color: darkcyan;
+    color: rebeccapurple;
     text-transform: capitalize;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
     background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
@@ -343,7 +462,7 @@ a#refresh:hover{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-size: 16px;
     font-weight: 500;
-    color: darkcyan;
+    color: rebeccapurple;
     text-transform: capitalize;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
     background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
