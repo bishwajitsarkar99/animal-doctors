@@ -9,6 +9,8 @@
         searchBranch();
         allSearchBranch();
         searchBranchFetch();
+        searchRoleFetch();
+        searchEmailFetch();
         // Initialize the button loader for the login button
         buttonLoader('#add', '.add-icon', '.add-btn-text', 'ADD Access...', 'ADD Access', 1000);
         buttonLoader('#save_btn_confirm', '.save-icon', '.save-btn-text', 'Confirm...', 'Confirm', 1000);
@@ -415,10 +417,10 @@
                     branchMenu.empty();
                     $.each(allBranch, function(key, item) {
                         branchMenu.append(
-                            `<li tabindex="0" value="${item.id}" id="select_list_item">
+                            `<li tabindex="0" value="${item.branch_id}" id="select_list_item">
                                 ${item.branch_name}
                                 <label class="enter_press enter-focus">Enter Press <i class="fa-solid fa-link"></i></label>
-                                <span class="badge bg-dark-orange rounded-pill bage_display_none" id="userNum">
+                                <span class="badge bg-dark-cornflowerblue rounded-pill bage_display_none" id="userNum">
                                     <label>User: </label>12
                                 </span>
                             </li>`
@@ -426,7 +428,7 @@
                     });
 
                     // Update menuItems and menuSpans after dynamic content is added
-                    initializeMenuEvents();
+                    initializeMenuEvents('branch_menu');
                 },
                 error: function() {
                     const branchMenu = $("#branch_menu");
@@ -435,101 +437,239 @@
                 }
             });
         }
+        // Role Fetch For User Permission permission_user_role  permission_user_email 
+        function searchRoleFetch(branchID, callback) {
+            if (!branchID) {
+                return;
+            }
+            const currentUrl = "{{ route('permission_user_role.action', ':branchID') }}".replace(':branchID', branchID);
 
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const branch_roles = response.branch_roles;
+                    const roleMenu = $("#role_menu");
+                    roleMenu.empty();
+                    $.each(branch_roles, function(key, item) {
+                        roleMenu.append(
+                            `<li tabindex="0" value="${item.id}" id="role_select_list_item">
+                                ${item.name}
+                                <label class="role_enter_press enter-focus">Enter Press <i class="fa-solid fa-link"></i></label>
+                                <span class="badge bg-dark-cornflowerblue rounded-pill bage_display_none" id="roleNum">
+                                    12
+                                </span>
+                            </li>`
+                        );
+                    });
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
+
+                    // Update menuItems and menuSpans after dynamic content is added
+                    initializeMenuEvents('role_menu', true);
+                },
+                error: function() {
+                    const roleMenu = $("#role_menu");
+                    roleMenu.empty();
+                    roleMenu.append('<li tabindex="0" value="" disabled>Error Loading Data</li>');
+                }
+            });
+        }
+        // Email Fetch For User Permission
+        function searchEmailFetch(selectID, callback) {
+            if (!selectID) {
+                return;
+            }
+            const currentUrl = "{{ route('permission_user_email.action', ':selectID') }}".replace(':selectID', selectID);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const users = response.users;
+                    const emailMenu = $("#email_menu");
+                    emailMenu.empty();
+                    $.each(users, function(key, item) {
+                        emailMenu.append(
+                            `<li tabindex="0" value="${item.id}" id="email_select_list_item">
+                                ${item.email}
+                                <label class="email_enter_press enter-focus">Enter Press <i class="fa-solid fa-link"></i></label>
+                                <span class="bage_display_none" id="userImage">
+                                    <img class="user_img rounded-circle user_imgs" src="${item.image.includes('https://') ? item.image : '/image/' + item.image}">
+                                </span>
+                            </li>`
+                        );
+                    });
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
+
+                    // Update menuItems and menuSpans after dynamic content is added
+                    initializeMenuEvents('email_menu');
+                },
+                error: function() {
+                    const emailMenu = $("#email_menu");
+                    emailMenu.empty();
+                    emailMenu.append('<li tabindex="0" value="" disabled>Email does not exists for permission.</li>');
+                }
+            });
+        }
+        // tab access permission select document
+        $(document).on('click', '#tabAccess', function(){
+            searchBranchFetch();
+        });
         // show Role Box press enter / click event
         $(document).on('click keydown', '#select_list_item', function(){
-
             if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
                 const selectedVal = $(this).attr('data-val');
-
-                if (selectedVal === '1') {
+                const branchID = $(this).attr('value');
+                if (selectedVal === '1' && branchID) {
                     $("#roleBox").removeAttr('hidden');
+                    searchRoleFetch(branchID);
                 } else if (selectedVal === '0') {
                     $("#roleBox").attr('hidden', true);
+                }
+            }
+        });
+        // show Role Box press enter / click event
+        $(document).on('click keydown Enter', '#role_select_list_item', function(){
+            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                const selectedVal = $(this).attr('data-val');
+                const selectID = $(this).attr('value');
+                if (selectedVal === '1' && selectID) {
+                    searchEmailFetch(selectID);
+                    $("#emailBox").removeAttr('hidden');
+                } else if (selectedVal === '0') {
+                    $("#emailBox").attr('hidden', true);
                 }
             }
         });
     });
 </script>
 <script>
-    function initializeMenuEvents() {
-        const menu = document.getElementById('branch_menu');
+    function initializeMenuEvents(menuId, roleClass = false) {
+        const menu = document.getElementById(menuId);
         const menuItems = menu.querySelectorAll('li');
         const menuSpans = menu.querySelectorAll('span');
-        const menuPressEnter = menu.querySelectorAll('.enter_press');
-        const menuRole = menu.querySelectorAll('#select_list_item');
-        let currentIndex = -1; // Tracks the currently highlighted item
-        let menuVisible = true; // Tracks menu visibility, starts as visible
+        const menuPressEnter = menu.querySelectorAll(roleClass ? '.role_enter_press' : menuId === 'email_menu' ? '.email_enter_press' : '.enter_press');
+        const menuRole = menu.querySelectorAll(roleClass ? '#role_select_list_item' : menuId === 'email_menu' ? '#email_select_list_item' : '#select_list_item');
+        let currentIndex = -1;
+        let menuVisible = true;
 
-        // Remove existing event listeners to prevent duplication
+        // Clear previous keydown listener
         document.removeEventListener('keydown', handleKeydown);
 
-        // Add the event listener for keydown
+        // Attach keydown listener
         document.addEventListener('keydown', handleKeydown);
 
-        // Add click event listeners to menu items
+        // Add click event listeners for menu items
         menuItems.forEach((item, index) => {
             item.addEventListener('click', () => {
-                currentIndex = index; // Set the clicked item's index as the current
+                currentIndex = index;
                 updateHighlight();
             });
         });
 
         function handleKeydown(event) {
-            if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-                // Handle navigation
-                if (menuVisible) {
-                    if (event.key === 'ArrowDown') {
-                        currentIndex = (currentIndex + 1) % menuItems.length; // Loop to start
-                    } else if (event.key === 'ArrowUp') {
-                        currentIndex = (currentIndex - 1 + menuItems.length) % menuItems.length; // Loop to end
-                    }
-                    updateHighlight();
+            if (!menuVisible) return;
+
+            if (event.key === 'ArrowDown') {
+                currentIndex = (currentIndex + 1) % menuItems.length; // Move down
+            } else if (event.key === 'ArrowUp') {
+                currentIndex = (currentIndex - 1 + menuItems.length) % menuItems.length; // Move up
+            } else if (event.key === 'ArrowRight') {
+                // Switch to the next menu
+                if (menuId === 'branch_menu') {
+                    document.removeEventListener('keydown', handleKeydown);
+                    initializeMenuEvents('role_menu', true);
+                    return;
+                } else if (menuId === 'role_menu') {
+                    document.removeEventListener('keydown', handleKeydown);
+                    initializeMenuEvents('email_menu');
+                    return;
+                }
+            } else if (event.key === 'ArrowLeft') {
+                // Switch to the previous menu
+                if (menuId === 'email_menu') {
+                    document.removeEventListener('keydown', handleKeydown);
+                    initializeMenuEvents('role_menu', true);
+                    return;
+                } else if (menuId === 'role_menu') {
+                    document.removeEventListener('keydown', handleKeydown);
+                    initializeMenuEvents('branch_menu');
+                    return;
                 }
             } else if (event.key === 'Escape') {
-                // Toggle visibility on Escape key
+                // Toggle visibility
                 menuVisible = !menuVisible;
                 menu.style.display = menuVisible ? 'block' : 'none';
-                if (!menuVisible) {
-                    currentIndex = -1; // Reset index when hiding
-                }
+                if (!menuVisible) currentIndex = -1; // Reset index when hidden
+                return;
             }
+
+            updateHighlight();
         }
 
         function updateHighlight() {
             menuItems.forEach((item, index) => {
-                const span = menuSpans[index]; // Get the corresponding span
+                const span = menuSpans[index];
                 const enter = menuPressEnter[index];
                 const role = menuRole[index];
                 if (index === currentIndex) {
-                    // Highlight the current item and show the badge
                     item.classList.add('highlight');
-                    span.classList.add('bage_display');
-                    span.classList.remove('bage_display_none');
-                    enter.classList.add('bage_display');
-                    enter.classList.remove('bage_display_none');
-                    role.setAttribute('data-val', '1');
+                    if (span) {
+                        span.classList.add('bage_display');
+                        span.classList.remove('bage_display_none');
+                    }
+                    if (enter) {
+                        enter.classList.add('bage_display');
+                        enter.classList.remove('bage_display_none');
+                    }
+                    if (role) {
+                        role.setAttribute('data-val', '1');
+                    }
                 } else {
-                    // Remove highlight and hide the badge
                     item.classList.remove('highlight');
-                    span.classList.remove('bage_display');
-                    span.classList.add('bage_display_none');
-                    enter.classList.remove('bage_display');
-                    enter.classList.add('bage_display_none');
-                    role.setAttribute('data-val', '0');
+                    if (span) {
+                        span.classList.remove('bage_display');
+                        span.classList.add('bage_display_none');
+                    }
+                    if (enter) {
+                        enter.classList.remove('bage_display');
+                        enter.classList.add('bage_display_none');
+                    }
+                    if (role) {
+                        role.setAttribute('data-val', '0');
+                    }
                 }
             });
-
+            // Ensure the focused item is properly set
             if (currentIndex >= 0) {
-                // Focus the current item if it exists
-                menuItems[currentIndex].focus();
+                const currentItem = menuItems[currentIndex];
+                if (currentItem) currentItem.focus();
             }
         }
 
-        // Automatically highlight the first item when the menu is updated
+        // Automatically highlight the first item when the menu is shown
         if (menuVisible && menuItems.length > 0) {
-            currentIndex = 0; // Set to the first item
+            currentIndex = 0;
             updateHighlight();
         }
     }
+    
 </script>

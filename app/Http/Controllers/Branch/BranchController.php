@@ -117,6 +117,18 @@ class BranchController extends Controller
         return $this->branchServiceProvider->userBranchPermissionCreate($request);
     }
 
+    // Branch User Access Permission To Get Role
+    public function permission_role(Request $request, $id)
+    {
+        return $this->branchServiceProvider->userBranchFetchRole($request, $id);
+    }
+
+    // Branch User Access Permission To Get Email
+    public function permission_email(Request $request, $id)
+    {
+        return $this->branchServiceProvider->userBranchFetchEmail($request, $id);
+    }
+
     // Branch User Access Permission Edit
     public function permissionEdit($id)
     {

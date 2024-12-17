@@ -8,6 +8,8 @@ use App\Models\Branch\District;
 use App\Models\Branch\ThanaOrUpazila;
 use App\Models\Branch\Branch;
 use App\Models\Branch\UserBranchAccessPermission;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
@@ -455,6 +457,40 @@ class BranchServiceProvicer
             'messages' => 'User access has created successfully.'
         ],200);
 
+    }
+
+    /**
+     * Handle user branch fetch role for permission.
+    */
+    public function userBranchFetchRole(Request $request, $id)
+    {
+        // Fetch role IDs to exclude
+        $excludedRoleIds = UserBranchAccessPermission::where('branch_id', $id)
+        ->pluck('role_id')
+        ->toArray();
+        // Fetch roles excluding those specified in excludedRoleIds
+        $branch_roles = Role::whereIn('id', $excludedRoleIds)->get();
+        
+        return response()->json([
+            'branch_roles' => $branch_roles,
+        ], 200);
+    }
+
+    /**
+     * Handle user branch fetch email for permission.
+    */
+    public function userBranchFetchEmail(Request $request, $id)
+    {
+        $excludedEmailIds = UserBranchAccessPermission::where('role_id' , $id)
+        ->pluck('email_id')
+        ->toArray();
+
+        // Fetch roles excluding those specified in excludedRoleIds
+        $users = User::whereIn('id', $excludedEmailIds)->get();
+
+        return response()->json([
+            'users' => $users,
+        ], 200);
     }
 
     /**
