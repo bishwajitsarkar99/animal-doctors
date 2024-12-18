@@ -473,15 +473,27 @@ class BranchServiceProvicer
     public function userBranchFetchRole(Request $request, $id)
     {
         // Fetch role IDs to exclude
-        $excludedRoleIds = UserBranchAccessPermission::where('branch_id', $id)
-        ->pluck('role_id')
-        ->toArray();
-        // Fetch roles excluding those specified in excludedRoleIds
-        $branch_roles = Role::whereIn('id', $excludedRoleIds)->get();
-        
+        $auth = Auth::user();
+        if(in_array($auth->role, [1, 3]) && $auth->email){
+            $excludedRoleIds = UserBranchAccessPermission::where('branch_id', $id)
+            ->pluck('role_id')
+            ->toArray();
+
+            $emails = UserBranchAccessPermission::select('branch_id', DB::raw('COUNT(email_id) as email_count'))
+            ->groupBy('branch_id')
+            ->pluck('email_count', 'branch_id');
+            // Fetch roles excluding those specified in excludedRoleIds
+            $branch_roles = Role::whereIn('id', $excludedRoleIds)->get();
+            
+            return response()->json([
+                'branch_roles' => $branch_roles,
+                'emails' => $emails,
+            ], 200);
+        }
         return response()->json([
-            'branch_roles' => $branch_roles,
-        ], 200);
+            'message' => 'Unauthorized access or invalid role.',
+        ], 403);
+        
     }
 
     /**

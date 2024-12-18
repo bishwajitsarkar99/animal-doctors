@@ -462,15 +462,20 @@
                 dataType: 'json',
                 success: function(response) {
                     const branch_roles = response.branch_roles;
+                    const userEmailCounts = {};
+                    $.each(response.emails, function(key, value) {
+                        userEmailCounts[key.toString()] = value;
+                    });
                     const roleMenu = $("#role_menu");
                     roleMenu.empty();
                     $.each(branch_roles, function(key, item) {
+                        const userEmailCount = userEmailCounts[item.id.toString()] || 0; 
                         roleMenu.append(
                             `<li tabindex="0" value="${item.id}" id="role_select_list_item">
                                 ${item.name}
                                 <label class="role_enter_press enter-focus">Enter Press <i class="fa-solid fa-link"></i></label>
                                 <span class="badge bg-dark-cornflowerblue rounded-pill bage_display_none" id="roleNum">
-                                    12
+                                    ${userEmailCount}
                                 </span>
                             </li>`
                         );
@@ -485,7 +490,7 @@
                 error: function() {
                     const roleMenu = $("#role_menu");
                     roleMenu.empty();
-                    roleMenu.append('<li tabindex="0" value="" disabled>Error Loading Data</li>');
+                    roleMenu.append('<li tabindex="0" value="" disabled>Branch Role No Found</li>');
                 }
             });
         }
@@ -565,6 +570,20 @@
                 }
             }
         });
+
+        // Get User Email Data
+        // $(document).on('click keydown Enter', '#email_select_list_item', function(){
+        //     if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')){
+        //         const searchID = $(this).attr('value');
+        //         const selectedVal = $(this).attr('data-val');
+
+        //         if(selectedVal === '1' && searchID){
+
+        //         } else if (selectedVal === '0') {
+                    
+        //         }
+        //     }
+        // });
     });
 </script>
 <script>
