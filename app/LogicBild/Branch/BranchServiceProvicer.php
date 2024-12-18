@@ -12,6 +12,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class BranchServiceProvicer
 {
@@ -126,10 +127,17 @@ class BranchServiceProvicer
         $auth = Auth::user();
         if($auth->role ==1){
             // Get Branch Data
+            $branch_ids = Branch::whereNotNull('branch_id')->get();
+            $user_counts = UserBranchAccessPermission::select('branch_id', DB::raw('COUNT(email_id) as user_count'))
+                ->whereIn('branch_id', $branch_ids->pluck('branch_id'))
+                ->groupBy('branch_id')
+                ->pluck('user_count', 'branch_id');
+
             $allBranch = Branch::orderBy('id', 'desc')->get();
     
             return response()->json([
                 'allBranch' => $allBranch,
+                'user_counts' => $user_counts,
             ], 200);
         }
 

@@ -413,15 +413,21 @@
                 dataType: 'json',
                 success: function(response) {
                     const allBranch = response.allBranch;
+                    const userCounts = {};
+                    $.each(response.user_counts, function(key, value) {
+                        userCounts[key.toString()] = value;
+                    });
+
                     const branchMenu = $("#branch_menu");
                     branchMenu.empty();
                     $.each(allBranch, function(key, item) {
+                        const userCount = userCounts[item.branch_id.toString()] || 0; 
                         branchMenu.append(
                             `<li tabindex="0" value="${item.branch_id}" id="select_list_item">
                                 ${item.branch_name}
                                 <label class="enter_press enter-focus">Enter Press <i class="fa-solid fa-link"></i></label>
                                 <span class="badge bg-dark-cornflowerblue rounded-pill bage_display_none" id="userNum">
-                                    <label>User: </label>12
+                                    <label>User: ${userCount}</label>
                                 </span>
                             </li>`
                         );
@@ -643,6 +649,7 @@
                     if (role) {
                         role.setAttribute('data-val', '1');
                     }
+                    item.blur();
                 } else {
                     item.classList.remove('highlight');
                     if (span) {
@@ -661,7 +668,8 @@
             // Ensure the focused item is properly set
             if (currentIndex >= 0) {
                 const currentItem = menuItems[currentIndex];
-                if (currentItem) currentItem.focus();
+                currentItem.classList.add('highlight');
+                currentItem.focus();
             }
         }
 

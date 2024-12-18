@@ -7,30 +7,30 @@
                     <div class="list_head">
                         Select Branch Name
                         <span class="clos_btn">
-                            <button type="button" class="btn btn-sm cls_btn" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'><i class="fa-solid fa-xmark icon_colr"></i></button>
+                            <button type="button" class="btn btn-sm cls_btn" data-bs-toggle="tooltip" data-bs-placement="left" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'><i class="fa-solid fa-xmark icon_colr"></i></button>
                         </span>
                     </div>
                     <div class="responsive">
-                        <ul id="branch_menu" class="list_group"></ul>
+                        <ul id="branch_menu" class="list_group menu"></ul>
                     </div>
                 </div>
                 <div class="col-xl-3" id="roleBox" hidden>
                     <div class="second_list_head">
                         Select User Role
                         <span class="clos_btn">
-                            <button type="button" class="btn btn-sm cls_btn" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'><i class="fa-solid fa-xmark icon_colr"></i></button>
+                            <button type="button" class="btn btn-sm cls_btn" data-bs-toggle="tooltip" data-bs-placement="left" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'><i class="fa-solid fa-xmark icon_colr"></i></button>
                         </span>
                     </div>
-                    <ul id="role_menu" class="list_group"></ul>
+                    <ul id="role_menu" class="list_group menu"></ul>
                 </div>
                 <div class="col-xl-5" id="emailBox" hidden>
                     <div class="second_list_head">
                         Select User Email
                         <span class="clos_btn">
-                            <button type="button" class="btn btn-sm cls_btn" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'><i class="fa-solid fa-xmark icon_colr"></i></button>
+                            <button type="button" class="btn btn-sm cls_btn" data-bs-toggle="tooltip" data-bs-placement="left" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'><i class="fa-solid fa-xmark icon_colr"></i></button>
                         </span>
                     </div>
-                    <ul id="email_menu" class="list_group"></ul>
+                    <ul id="email_menu" class="list_group menu"></ul>
                 </div>
             </div>
             <div class="row">

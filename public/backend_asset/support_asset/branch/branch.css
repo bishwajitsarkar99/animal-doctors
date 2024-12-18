@@ -36,8 +36,23 @@
 .bage_display_none{
     display: none;
 }
+#userNum {
+    letter-spacing: 1px;
+}
+#userImage {
+    background: cornflowerblue;
+    height: 19px;
+    width: 19px;
+    border-radius: 50%;
+    padding-left: 2px;
+    line-height: 1.4;
+}
+.menu li:focus, 
+.menu li:focus-visible {
+    background-color: #cce7ff;
+}
 .list_head {
-    background: linear-gradient(35deg, #dbd8d800, transparent 0%, #d3d3d361, white 100%);
+    background: linear-gradient(35deg, #cce7ff, #cce7ff, #cce7ff 100%);
     color: black;
     font-family: var(--nav-font-family);
     font-size: 12px;
@@ -59,7 +74,7 @@
     border-bottom: 1px solid white;
 }
 .second_list_head{
-    background: linear-gradient(35deg, #dbd8d800, transparent 0%, #d3d3d361, white 100%);
+    background: linear-gradient(35deg, #cce7ff, #cce7ff, #cce7ff 100%);
     color: black;
     font-family: var(--nav-font-family);
     font-size: 12px;
@@ -82,10 +97,12 @@
 }
 button.cls_btn{
     color: black;
-    background: white;
+    background: #cce7ff;
     line-height: .5;
     border-radius: 2px;
     height: 23px;
+    outline: none;
+    border: none;
 }
 button.cls_btn:hover{
     background: orangered;
@@ -120,7 +137,7 @@ div.responsive {
 }
 ul#branch_menu{
     /* background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white); */
-    background: linear-gradient(5deg, white,#dbd8d8db, white 0%, transparent, #d3d3d3c4);
+    background: linear-gradient(5deg, white, #e5e5e5c9, white 100%, #d3d3d391);
     border-left: 1px solid lightgray;
     border-right: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
@@ -128,7 +145,7 @@ ul#branch_menu{
 }
 ul#role_menu{
     /* background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white); */
-    background: linear-gradient(5deg, white,#dbd8d8db, white 0%, transparent, #d3d3d3c4);
+    background: linear-gradient(5deg, white, #e5e5e5c9, white 100%, #d3d3d391);
     border-left: 1px solid lightgray;
     border-right: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
@@ -136,7 +153,7 @@ ul#role_menu{
 }
 ul#email_menu{
     /* background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white); */
-    background: linear-gradient(5deg, white,#dbd8d8db, white 0%, transparent, #d3d3d3c4);
+    background: linear-gradient(5deg, white, #e5e5e5c9, white 100%, #d3d3d391);
     border-left: 1px solid lightgray;
     border-right: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
