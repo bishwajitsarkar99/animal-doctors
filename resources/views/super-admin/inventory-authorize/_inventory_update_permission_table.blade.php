@@ -96,7 +96,7 @@
                 <th id="th_sort" class="table_th_color tot_pending_ skeleton ps-1" style="text-align: left;">Permission Issue</th>
 
             </tr>
-            <tbody class="bg-transparent skeleton inventory_permission_data_table src-data-table" id="inventory_permission_data_table">
+            <tbody class="bg-white skeleton inventory_permission_data_table src-data-table" id="inventory_permission_data_table">
                 
             </tbody>
         </table>

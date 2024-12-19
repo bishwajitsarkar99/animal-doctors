@@ -125,7 +125,13 @@ class BranchServiceProvicer
     public function searchBranchs(Request $request)
     {
         $auth = Auth::user();
-        if($auth->role ==1){
+        $authEmail = $auth->id;
+
+        if (!$auth) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        if($auth->role == 1){
             // Get Branch Data
             $branch_ids = Branch::whereNotNull('branch_id')->get();
             $user_counts = UserBranchAccessPermission::select('branch_id', DB::raw('COUNT(email_id) as user_count'))
@@ -139,7 +145,49 @@ class BranchServiceProvicer
                 'allBranch' => $allBranch,
                 'user_counts' => $user_counts,
             ], 200);
+
+        }elseif($auth->role == 3 && $authEmail){
+
+            $branch_ids = Branch::whereNotNull('branch_id')->get();
+            $user_counts = UserBranchAccessPermission::select('branch_id', DB::raw('COUNT(email_id) as user_count'))
+                ->whereIn('branch_id', $branch_ids->pluck('branch_id'))
+                ->groupBy('branch_id')
+                ->pluck('user_count', 'branch_id');
+
+            $allBranch = Branch::where('admin_email_id', $authEmail)
+                ->where('admin_approval_status', 1)
+                ->get();
+            
+            return response()->json([
+                'allBranch' => $allBranch,
+                'user_counts' => $user_counts,
+            ], 200);
+
+            if ($allBranch->isEmpty()) {
+                return response()->json(['message' => 'No branches found for this admin.'], 404);
+            }
+        }elseif($auth->role == 2 && $authEmail){
+
+            $branch_ids = Branch::whereNotNull('branch_id')->get();
+            $user_counts = UserBranchAccessPermission::select('branch_id', DB::raw('COUNT(email_id) as user_count'))
+                ->whereIn('branch_id', $branch_ids->pluck('branch_id'))
+                ->groupBy('branch_id')
+                ->pluck('user_count', 'branch_id');
+
+            $allBranch = Branch::where('admin_email_id', $authEmail)
+                ->where('sub_admin_approval_status', 1)->get();
+            
+            return response()->json([
+                'allBranch' => $allBranch,
+                'user_counts' => $user_counts,
+            ], 200);
+
+            if ($allBranch->isEmpty()) {
+                return response()->json(['message' => 'No branches found for this admin.'], 404);
+            }
         }
+
+        return response()->json(['message' => 'Invalid role or unauthorized.'], 403);
 
     }
 
@@ -383,7 +431,6 @@ class BranchServiceProvicer
         }
 
         if($auth->role ==3 && $authEmail){
-
             $specify_branch = Branch::where('admin_email_id', $authEmail)
                 ->where('admin_approval_status', 1)->get();
     
@@ -479,9 +526,9 @@ class BranchServiceProvicer
             ->pluck('role_id')
             ->toArray();
 
-            $emails = UserBranchAccessPermission::select('branch_id', DB::raw('COUNT(email_id) as email_count'))
-            ->groupBy('branch_id')
-            ->pluck('email_count', 'branch_id');
+            $emails = UserBranchAccessPermission::select('role_id', DB::raw('COUNT(email_id) as email_count'))
+            ->groupBy('role_id')
+            ->pluck('email_count', 'role_id');
             // Fetch roles excluding those specified in excludedRoleIds
             $branch_roles = Role::whereIn('id', $excludedRoleIds)->get();
             

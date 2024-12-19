@@ -46,7 +46,7 @@
                                     <th class="table_th_color th-bg us_td tot_pending_ skeleton" style="text-align: center;">Authorization</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-transparent skeleton" id="user_data_table">
+                            <tbody class="bg-white skeleton" id="user_data_table">
                                 @if(count($users)> 0)
                                     @foreach($users as $user)
                                     <tr class="table-row user-table-row histroy skeleton" style="font-weight: 600;">

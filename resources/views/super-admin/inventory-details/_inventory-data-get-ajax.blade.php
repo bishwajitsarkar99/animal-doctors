@@ -143,7 +143,7 @@
             <th id="th_sort" class="table_th_color tot_pending_ skeleton ">Amount</th>
             <th id="th_sort" class="table_th_color tot_pending_ skeleton">Status</th>
         </tr>
-        <tbody class="bg-transparent skeleton" id="inventory_get_data_table"></tbody>
+        <tbody class="bg-white skeleton" id="inventory_get_data_table"></tbody>
     </table>
 </span>
 <!-- Authorize Table Footer -->

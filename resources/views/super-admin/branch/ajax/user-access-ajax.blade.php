@@ -16,6 +16,7 @@
         buttonLoader('#save_btn_confirm', '.save-icon', '.save-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
         buttonLoader('#refresh', '.refresh-icon', '.refresh-btn-text', 'Refresh...', 'Refresh', 1000);
+        buttonLoader('#pagePermision', '.permission-page-icon', '.permission-page-btn-text', 'Permission...', 'Permission', 1000);
         // Initialize Select2 for all elements with the 'select2' class
         $('.select2').each(function() {
             // Check the ID or name to set specific options
@@ -439,7 +440,7 @@
                 error: function() {
                     const branchMenu = $("#branch_menu");
                     branchMenu.empty();
-                    branchMenu.append('<li tabindex="0" value="" disabled>Error Loading Data</li>');
+                    branchMenu.append('<li tabindex="0" value="" disabled>Branch Not Exits</li>');
                 }
             });
         }
@@ -541,8 +542,38 @@
             });
         }
         // tab access permission select document
-        $(document).on('click', '#tabAccess', function(){
+        $(document).on('click Enter', '#pagePermision', function(){
+            $("#tabAccess").removeAttr('hidden');
+            $("#tabAccess").addClass('active');
+            $("#tabHome").removeClass('active');
+            $("#home").removeClass('active show');
+            $("#userBranchPermission").addClass('active show');
             searchBranchFetch();
+        });
+        // Back Home page
+        $(document).on('click Enter', '.branch_close, #tabHome', function(){
+            $("#tabAccess").attr('hidden', true);
+            $("#home").addClass('active show');
+            $("#tabAccess").removeClass('active');
+            $("#tabHome").addClass('active');
+            $("#userBranchPermission").removeClass('active show');
+            $("#branchBox").setAttribute('hidden', false);
+        });
+        // menu close event 
+        $(document).on('click', '#branch_close, #role_close, #email_close', function () {
+            // Get the IDs of the boxes
+            const branchBox = document.getElementById('branchBox');
+            const roleBox = document.getElementById('roleBox');
+            const emailBox = document.getElementById('emailBox');
+
+            // Check which close button was clicked
+            if (this.id === 'branch_close' && branchBox) {
+                branchBox.setAttribute('hidden', true);
+            } else if (this.id === 'role_close' && roleBox) {
+                roleBox.setAttribute('hidden', true);
+            } else if (this.id === 'email_close' && emailBox) {
+                emailBox.setAttribute('hidden', true);
+            }
         });
         // show Role Box press enter / click event
         $(document).on('click keydown', '#select_list_item', function(){
@@ -640,10 +671,34 @@
                     return;
                 }
             } else if (event.key === 'Escape') {
-                // Toggle visibility
-                menuVisible = !menuVisible;
-                menu.style.display = menuVisible ? 'block' : 'none';
-                if (!menuVisible) currentIndex = -1; // Reset index when hidden
+                
+                const branchBox = document.getElementById('branchBox');
+                const roleBox = document.getElementById('roleBox');
+                const emailBox = document.getElementById('emailBox');
+
+                if (menuId === 'branch_menu' && branchBox) {
+                    branchBox.setAttribute('hidden', true);
+                    document.removeEventListener('keydown', handleKeydown);
+
+                } else if (menuId === 'role_menu' && roleBox) {
+                    roleBox.setAttribute('hidden', true);
+                    branchBox?.removeAttribute('hidden');
+                    document.removeEventListener('keydown', handleKeydown);
+                    initializeMenuEvents('branch_menu');  
+
+                } else if (menuId === 'email_menu' && emailBox) {
+                    emailBox.setAttribute('hidden', true);
+                    branchBox?.removeAttribute('hidden');
+                    roleBox?.removeAttribute('hidden');
+                    document.removeEventListener('keydown', handleKeydown);
+                    initializeMenuEvents('branch_menu');
+                    initializeMenuEvents('role_menu', true);
+
+                }
+
+                menuVisible = false;
+                currentIndex = -1;
+                updateHighlight();
                 return;
             }
 

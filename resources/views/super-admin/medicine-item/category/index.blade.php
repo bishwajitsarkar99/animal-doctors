@@ -38,7 +38,7 @@
                 <th id="th_sort" draggable="true" data-coloumn="status" data-order="desc" class="tableHead table_th_color tot_pending_ ps-1 pt-1" style="text-align: left;cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Status')}}</th>
                 <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ check_border col pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Check')}}</th>
               </tr>
-              <tbody class="bg-transparent" id="category_data_table">
+              <tbody class="bg-white" id="category_data_table">
 
 
               </tbody>

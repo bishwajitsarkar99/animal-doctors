@@ -50,7 +50,7 @@
                 <th id="th_sort" data-coloumn="status" data-order="desc" class="tableHead table_th_color tot_pending_ skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Status')}}</th>
                 <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Check')}}</th>
               </tr>
-              <tbody class="bg-transparent skeleton" id="brand_data_table">
+              <tbody class="bg-white skeleton" id="brand_data_table">
 
               </tbody>
             </table>
@@ -190,7 +190,7 @@
                     <th id="origin_nam5" data-coloumn="id" data-order="desc" class="tableHead sortable-header back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Origin Name')}}</th>
                   </tr>
                 </thead>
-                <tbody class="bg-transparent" id="orgin_table" style="color:black;font-weight:500;cursor:alias;">
+                <tbody class="bg-white" id="orgin_table" style="color:black;font-weight:500;cursor:alias;">
   
                 </tbody>
               </table>

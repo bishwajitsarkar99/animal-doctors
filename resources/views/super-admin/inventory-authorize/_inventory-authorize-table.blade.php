@@ -201,7 +201,7 @@
             <th id="th_sort" class="table_th_color tot_pending_ skeleton " hidden>Status-Inv</th>
             <th id="th_sort" class="table_th_color tot_pending_ skeleton">Status</th>
         </tr>
-        <tbody class="bg-transparent skeleton" id="inventory_authorize_data_table"></tbody>
+        <tbody class="bg-white skeleton" id="inventory_authorize_data_table"></tbody>
     </table>
 </span>
 <!-- Authorize Table Footer -->

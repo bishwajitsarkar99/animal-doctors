@@ -43,7 +43,7 @@
                     <th id="th_sort" style="cursor:pointer;" data-coloumn="status" data-order="desc" class="table_th_color tot_pending_ font_sid ps-2  skeleton"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Status</th>
                   </tr>
                 </thead>
-                <tbody class="bg-transparent skeleton tab" id="user_data_table">
+                <tbody class="bg-white skeleton tab" id="user_data_table">
 
                 </tbody>
               </table>

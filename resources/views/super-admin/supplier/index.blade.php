@@ -58,7 +58,7 @@
                                                 <th id="th_sort" class="table_th_color tot_pending_ skeleton pe-2" style="text-align: center;">Check</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="bg-transparent skeleton" id="supplier_data_table">
+                                        <tbody class="bg-white skeleton" id="supplier_data_table">
 
                                         </tbody>
                                     </table>

@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="table-responsive">
-        <table class="bg-transparent ord_table center border-1 mt-2">
+        <table class="bg-white ord_table center border-1 mt-2">
             <tr class="table-row order_body acc_setting_table">
                 <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="id" data-order="desc" class="table_th_color txt ps-2 pe-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> ID</th>
                 <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="role" data-order="desc" class="table_th_color txt ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Role</th>
@@ -34,7 +34,7 @@
                 <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="logout" data-order="desc" class="table_th_color tot_pending_ ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Logout</th>
                 <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="last_activity" data-order="desc" class="table_th_color tot_pending_ ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Last-Activity</th>
             </tr>
-            <tbody class="bg-transparent " id="user_activites_data_table">
+            <tbody class="bg-white " id="user_activites_data_table">
     
             </tbody>
         </table>

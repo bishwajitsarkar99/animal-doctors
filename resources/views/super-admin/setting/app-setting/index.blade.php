@@ -102,7 +102,7 @@
                     </p>
                     <div class="row">
                         <div id="treeTable" class="">
-                            <table class="bg-transparent">
+                            <table class="bg-white">
                                 @include('super-admin.setting.app-setting.moduel.nav-bar._nav-bar-moduel-setting')
                             </table>
                         </div>
@@ -124,7 +124,7 @@
                     </p>
                     <div class="row">
                         <div id="treeTable" class="">
-                            <table class="bg-transparent">
+                            <table class="bg-white">
                                 @include('super-admin.setting.app-setting.moduel.top-bar._top-bar-moduel-setting')
                             </table>
                         </div>
@@ -146,7 +146,7 @@
                     </p>
                     <div class="row">
                         <div id="treeTable" class="">
-                            <table class="bg-transparent">
+                            <table class="bg-white">
                                 @include('super-admin.setting.app-setting.moduel.side-bar._purchases-moduel-setting')
                                 @include('super-admin.setting.app-setting.moduel.side-bar._accounts-moduel-setting')
                                 @include('super-admin.setting.app-setting.moduel.side-bar._hrm-moduel-setting')
@@ -173,7 +173,7 @@
                     </p>
                     <div class="row">
                         <div id="treeTable" class="">
-                            <table class="bg-transparent">
+                            <table class="bg-white">
                                 @include('super-admin.setting.app-setting.moduel.footer._footer-moduel-setting')
                             </table>
                         </div>
@@ -195,7 +195,7 @@
                     </p>
                     <div class="row">
                         <div id="treeTable" class="">
-                            <table class="bg-transparent">
+                            <table class="bg-white">
                                 @include('super-admin.setting.app-setting.moduel.email.email-setting')
                             </table>
                         </div>

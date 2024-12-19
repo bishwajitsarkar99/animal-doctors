@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="table-responsive">
-        <table class="bg-transparent ord_table center border-1 mt-2">
+        <table class="bg-white ord_table center border-1 mt-2">
             <thead>
                 <tr class="table-row order_body acc_setting_table">
                     <th id="th_sort" style="background-color: white; cursor: pointer;" data-coloumn="id" data-order="desc" class="table_th_color col txt ps-2 pe-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> ID</th>
@@ -28,7 +28,7 @@
                     <th id="th_sort" style="background-color: white; cursor: pointer;" data-coloumn="created_at" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: left;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Update-Email-Verified</th>
                 </tr>
             </thead>
-            <tbody class="bg-transparent " id="user_email_verification_data_table">
+            <tbody class="bg-white " id="user_email_verification_data_table">
     
             </tbody>
         </table>

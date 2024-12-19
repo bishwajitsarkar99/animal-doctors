@@ -50,7 +50,7 @@
                 <th id="th_sort" data-coloumn="status" data-order="desc" class="table_th_color tot_pending_ skeleton ps-2 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Status')}}</th>
                 <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col skeleton check_border pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Check')}}</th>
               </tr>
-              <tbody class="bg-transparent" id="subcategory_data_table">
+              <tbody class="bg-white" id="subcategory_data_table">
 
               </tbody>
             </table>
@@ -192,7 +192,7 @@
                     <th id="group_nam5" data-coloumn="id" data-order="desc" class="sortable-header tableHead back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Cateogry Name')}}</th>
                   </tr>
                 </thead>
-                <tbody class="bg-transparent" id="cat_table" style="color:black;font-weight:500;cursor:alias;">
+                <tbody class="bg-white" id="cat_table" style="color:black;font-weight:500;cursor:alias;">
   
                 </tbody>
                 

@@ -38,7 +38,7 @@
                 <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ ps-2 skeleton" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Status')}}</th>
                 <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Check')}}</th>
               </tr>
-              <tbody class="bg-transparent skeleton" id="origin_data_table">
+              <tbody class="bg-white skeleton" id="origin_data_table">
 
               </tbody>
             </table>

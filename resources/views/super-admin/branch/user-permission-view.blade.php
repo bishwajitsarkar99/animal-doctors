@@ -8,7 +8,7 @@
         <a class="nav-link branch active home-text" data-bs-toggle="tab" href="#home" id="tabHome"> Create Access</a>
       </li>
       <li class="nav-item tab-skeletone">
-        <a class="nav-link branch" data-bs-toggle="tab" href="#userBranchPermission" id="tabAccess">Access Permission</a>
+        <a class="nav-link branch" data-bs-toggle="tab" href="#userBranchPermission" id="tabAccess" hidden>Access Permission</a>
       </li>
       <li class="nav-item tab-skeletone">
         <a type="button" class="nav-link branch refresh_btn" id="refresh">

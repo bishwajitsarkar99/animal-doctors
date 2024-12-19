@@ -82,7 +82,7 @@
                     <th id="th_sort" class="table_th_color tot_pending_ skeleton col ps-1" style="text-align: left;">My Sql Database</th>
                     <th id="th_sort" class="table_th_color tot_pending_ skeleton col ps-1" style="text-align: left;">Action</th>
                 </tr>
-                <tbody class="bg-transparent" id="access_permission_data_table">
+                <tbody class="bg-white" id="access_permission_data_table">
 
                 </tbody>
             </table>

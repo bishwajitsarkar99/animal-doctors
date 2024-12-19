@@ -185,7 +185,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="bg-transparent" id="access_permission_data_table">
+                    <tbody class="bg-white" id="access_permission_data_table">
     
                     </tbody>
                 </table>

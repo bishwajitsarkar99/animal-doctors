@@ -55,7 +55,7 @@
                   <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Check')}}</th>
                 </tr>
               </thead>
-              <tbody class="bg-transparent skeleton" id="medicine_dogs_data_table" style="color:black;font-weight:500;">
+              <tbody class="bg-white skeleton" id="medicine_dogs_data_table" style="color:black;font-weight:500;">
 
               </tbody>
             </table>
@@ -190,7 +190,7 @@
                     <th id="medic_nam5" data-coloumn="id" data-order="desc" class="tableHead sortable-header back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Medicine Name')}}</th>
                   </tr>
                 </thead>
-                <tbody class="bg-transparnet tbody" id="medic_nam6" style="color:black;font-weight:500;cursor:alias;">
+                <tbody class="bg-white tbody" id="medic_nam6" style="color:black;font-weight:500;cursor:alias;">
   
                 </tbody>
               </table>

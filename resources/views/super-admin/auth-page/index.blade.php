@@ -22,7 +22,7 @@
                         <th id="th_sort" class="table_th_color tot_pending_ ps-2  skeleton">Status</th>
                       </tr>
                     </thead>
-                    <tbody class="bg-transparent skeleton tab" id="auth_page_data_table">
+                    <tbody class="bg-white skeleton tab" id="auth_page_data_table">
 
                     </tbody>
                   </table>
