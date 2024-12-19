@@ -143,7 +143,8 @@ div.responsive {
 }
 ul#branch_menu{
     /* background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white); */
-    background: linear-gradient(5deg, white, #e5e5e5c9, white 100%, #d3d3d391);
+    /* background: linear-gradient(5deg, white, #e5e5e5c9, white 100%, #d3d3d391); */
+    background: linear-gradient(5deg, white, #e5e5e552, white 100%, #d3d3d378);
     border-left: 1px solid lightgray;
     border-right: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
@@ -151,7 +152,8 @@ ul#branch_menu{
 }
 ul#role_menu{
     /* background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white); */
-    background: linear-gradient(5deg, white, #e5e5e5c9, white 100%, #d3d3d391);
+    /* background: linear-gradient(5deg, white, #e5e5e5c9, white 100%, #d3d3d391); */
+    background: linear-gradient(5deg, white, #e5e5e552, white 100%, #d3d3d378);
     border-left: 1px solid lightgray;
     border-right: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
@@ -159,7 +161,8 @@ ul#role_menu{
 }
 ul#email_menu{
     /* background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white); */
-    background: linear-gradient(5deg, white, #e5e5e5c9, white 100%, #d3d3d391);
+    /* background: linear-gradient(5deg, white, #e5e5e5c9, white 100%, #d3d3d391); */
+    background: linear-gradient(5deg, white, #e5e5e552, white 100%, #d3d3d378);
     border-left: 1px solid lightgray;
     border-right: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
@@ -329,6 +332,32 @@ td.td_with{
     justify-content: space-between !important;
     border-collapse: collapse;
     background: linear-gradient(35deg, #cce7ff, #cce7ff, #cce7ff 100%);
+}
+.table-animation{
+    transform: translate(-50%, -50%);
+    position: relative;
+    top: 49%;
+    left: 50%;
+    width: 100%;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    animation: slideIn 0.3s ease-out;
+}
+@keyframes slideIn {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    
+    100% {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 1;
+    }
+}
+.button_group{
+    display: flex;
+    position: relative;
+    align-items: center !important;
+    justify-content: space-between !important;
 }
 .button_bx{
     position: relative;

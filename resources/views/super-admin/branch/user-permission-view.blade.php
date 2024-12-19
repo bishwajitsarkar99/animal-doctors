@@ -10,12 +10,6 @@
       <li class="nav-item tab-skeletone">
         <a class="nav-link branch" data-bs-toggle="tab" href="#userBranchPermission" id="tabAccess" hidden>Access Permission</a>
       </li>
-      <li class="nav-item tab-skeletone">
-        <a type="button" class="nav-link branch refresh_btn" id="refresh">
-          <span class="refresh-icon spinner-border spinner-border-sm text-primary refrsh-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-          <span class="refresh-btn-text ms-1">Refresh</span>
-        </a>
-      </li>
     </ul>
     <div class="tab-content" id="showCard" style="background:white;padding-bottom:15px;">
       <div id="home" class="container tab-pane active">

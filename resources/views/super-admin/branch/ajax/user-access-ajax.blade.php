@@ -156,6 +156,7 @@
                 $('.edit_town_name').attr('disabled', true);
                 $('.edit_location').attr('disabled', true);
                 $("#add").attr('disabled', true);
+                $("#branchInfo").attr('hidden', true);
                 clearFields();
             }
 
@@ -175,13 +176,15 @@
                         $("#dataPullingProgress").removeAttr('hidden');
                         $("#access_modal_box").addClass('progress_body');
                         $("#processModal_body").addClass('loading_body_area');
-
+                        $("#branchInfo").attr('hidden', true);
                         setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
                             $("#dataPullingProgress").attr('hidden', true);
                             $("#access_modal_box").removeClass('progress_body');
                             $("#processModal_body").removeClass('loading_body_area');
-                            
+                            $("#branchInfo").removeAttr('hidden');
+                            $("#branchInfo").addClass('table-animation');
+
                             const messages = response.messages;
     
                             $('#branches_id').val(id);
@@ -548,6 +551,7 @@
             $("#tabHome").removeClass('active');
             $("#home").removeClass('active show');
             $("#userBranchPermission").addClass('active show');
+            $("#branchBox").removeAttr('hidden');
             searchBranchFetch();
         });
         // Back Home page
@@ -679,6 +683,12 @@
                 if (menuId === 'branch_menu' && branchBox) {
                     branchBox.setAttribute('hidden', true);
                     document.removeEventListener('keydown', handleKeydown);
+                    $("#tabAccess").attr('hidden', true);
+                    $("#home").addClass('active show');
+                    $("#tabAccess").removeClass('active');
+                    $("#tabHome").addClass('active');
+                    $("#userBranchPermission").removeClass('active show');
+                    $("#branchBox").setAttribute('hidden', false);
 
                 } else if (menuId === 'role_menu' && roleBox) {
                     roleBox.setAttribute('hidden', true);
