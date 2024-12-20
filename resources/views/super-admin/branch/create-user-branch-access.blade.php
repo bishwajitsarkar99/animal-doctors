@@ -31,14 +31,11 @@
                             <span class="permission-page-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                             <span class="permission-page-btn-text">Permission</span>
                         </button>
-                        <button type="button" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" id="add" disabled>
-                            <span class="add-btn-text">ADD Access</span>
-                            <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                        </button>
+                        
                     </div>
                 </div>
                 <div class="col-xl-8">
-                    <div class="form-group branch-info mb-1 skeleton" id="branchInfo" hidden>
+                    <div class="form-group branch-info skeleton" id="branchInfo" hidden>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -93,7 +90,14 @@
                             </table>
                         </div>
                     </div>
-                    
+                    <div class="ps-2">
+                        <div class="form-group button_group ps-1" id="add_accss" hidden>
+                            <button type="button" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" id="add" disabled>
+                                <span class="add-btn-text">ADD Access</span>
+                                <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">

@@ -565,25 +565,25 @@ class BranchServiceProvicer
     */
     public function userBranchPermissionEdit($id)
     {
-        // $branch = Branch::with(
-        //     [
-        //         'divisions', 
-        //         'districts', 
-        //         'thana_or_upazilas',
-        //     ]
-        // )->find($id);
-        // if($branch){
-        //     return response()->json([
-        //         'status' => 200,
-        //         'messages' => $branch,
-        //     ]);
-        // }else{
+        $branch = Branch::with(
+            [
+                'divisions', 
+                'districts', 
+                'thana_or_upazilas',
+            ]
+        )->find($id);
+        if($branch){
+            return response()->json([
+                'status' => 200,
+                'messages' => $branch,
+            ]);
+        }else{
 
-        //     return response()->json([
-        //         'status' => 404,
-        //         'messages' => 'The branch is no found.',
-        //     ]);
-        // }
+            return response()->json([
+                'status' => 404,
+                'messages' => 'The branch is no found.',
+            ]);
+        }
     }
 
     /**

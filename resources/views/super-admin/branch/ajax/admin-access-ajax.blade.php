@@ -12,7 +12,7 @@
         // Initialize the button loader for the login button
         buttonLoader('#access_btn', '.access-icon', '.access-btn-text', 'Access...', 'Access', 1000);
         buttonLoader('#access_btn_confirm', '.access-confirm-icon', '.access-confirm-btn-text', 'Confirm...', 'Confirm', 1000);
-        buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
+        buttonLoader('#cnl_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
 
         // Initialize Select2 for all elements with the 'select2' class
         $('.select2').each(function() {
@@ -178,6 +178,8 @@
             if(select == ''){
                 $('#documents').attr('hidden', true);
                 $('#branches_id').val("");
+                $('#access_btn').attr('hidden', true);
+                $('#cnl_btn').attr('hidden', true);
             }
             
             $.ajax({
@@ -194,6 +196,8 @@
                         $("#access_modal_box").addClass('progress_body');
                         $("#processModal_body").addClass('loading_body_area');
                         $('#documents').attr('hidden', true);
+                        $('#access_btn').attr('hidden', true);
+                        $('#cnl_btn').attr('hidden', true);
 
                         setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
@@ -201,6 +205,8 @@
                             $("#access_modal_box").removeClass('progress_body');
                             $("#processModal_body").removeClass('loading_body_area');
                             $('#documents').removeAttr('hidden');
+                            $('#access_btn').removeAttr('hidden');
+                            $('#cnl_btn').removeAttr('hidden');
 
                             const messages = response.messages;
                             
@@ -493,6 +499,23 @@
         // Closing Branch Info Card
         $(document).on('click', '.cols_btn', function(){
             $('#documents').attr('hidden', true);
+        });
+
+        // Cancel Access
+        $(document).on('click', '#cnl_btn', function(){
+            $("#documents").attr('hidden', true);
+            $("#access_btn").attr('hidden', true);
+            $(this).attr('hidden', true);
+        });
+
+        // Select Role Type
+        $(document).on('change', '#role_type', function(){
+            var select_val = $(this).val();
+            if(select_val == ''){
+                $("#access_btn").attr('disabled', true);
+            }else if(select_val !== ''){
+                $("#access_btn").removeAttr('disabled');
+            }
         });
     });
 </script>

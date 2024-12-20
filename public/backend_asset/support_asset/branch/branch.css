@@ -56,6 +56,8 @@ span.permission-page-btn-text,span.permission-page-btn-text {
 .menu li:focus, 
 .menu li:focus-visible {
     background-color: #cce7ff;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 .list_head {
     background: linear-gradient(35deg, #cce7ff, #cce7ff, #cce7ff 100%);
@@ -182,6 +184,7 @@ ul#branch_menu>li {
     font-family: var(--nav-font-family);
     font-size: 12px;
     font-weight: 700;
+    cursor: pointer;
 }
 ul#role_menu>li {
     margin: 0;
@@ -197,6 +200,7 @@ ul#role_menu>li {
     font-family: var(--nav-font-family);
     font-size: 12px;
     font-weight: 700;
+    cursor: pointer;
 }
 ul#email_menu>li {
     margin: 0;
@@ -212,6 +216,7 @@ ul#email_menu>li {
     font-family: var(--nav-font-family);
     font-size: 12px;
     font-weight: 700;
+    cursor: pointer;
 }
 .list_group {
     --bs-list-group-color: #212529;
@@ -261,6 +266,12 @@ ul#branch_info>li{
     border-left: 1px solid lightgray;
     border-right: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
+    cursor: pointer;
+}
+ul#branch_menu>li:hover,ul#role_menu>li:hover,ul#email_menu>li:hover{
+    background-color: #cce7ff;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 ul>li#firstRow{
     border-top: 1px solid lightgray;
@@ -278,19 +289,19 @@ th.table_head_position{
     position: relative;
     text-align: center;
     background: linear-gradient(35deg, #cce7ff, #cce7ff, #cce7ff 100%);
-    border-top: 1px solid lightblue;
-    border-left: 1px solid lightblue;
-    border-right: 1px solid lightblue;
+    border-top: 2px solid #cce7ff;
+    border-left: 2px solid #cce7ff;
+    border-right: 2px solid #cce7ff;
 }
 th.head_position_left{
     margin: 0;
     position: relative;
     text-align: left;
     background: linear-gradient(35deg, #cce7ff, #cce7ff, #cce7ff 100%);
-    border-top: 1px solid white;
-    border-left: 1px solid lightblue;
-    border-right: 1px solid white;
-    border-bottom: 1px solid white;
+    border-top: 2px solid white;
+    border-left: 2px solid #cce7ff;
+    border-right: 2px solid white;
+    border-bottom: 2px solid #cce7ff;
     padding-left: 5px;
 }
 th.head_position_right{
@@ -298,14 +309,14 @@ th.head_position_right{
     position: relative;
     text-align: left;
     background: linear-gradient(35deg, #cce7ff, #cce7ff, #cce7ff 100%);
-    border-top: 1px solid white;
-    border-left: 1px solid white;
-    border-right: 1px solid lightblue;
-    border-bottom: 1px solid white;
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid #cce7ff;
+    border-bottom: 2px solid #cce7ff;
     padding-left: 5px;
 }
 tr.info-table-row{
-    border: 1px solid lightblue;
+    border: 2px solid #cce7ff;
     font-size: 12px;
     font-weight: 700;
     text-transform: capitalize;
@@ -315,11 +326,10 @@ tr.info-table-row{
     color: black;
 }
 td.info-element{
-    border: 1px solid white;
     font-size: 12px;
     font-weight: 700;
     text-transform: capitalize;
-    background: linear-gradient(35deg, #cce7ff, #cce7ff, #cce7ff 100%);
+    background: linear-gradient(35deg, #fff, #fff, #fff 100%);
     opacity: 5;
     font-family: var(--nav-font-family);
     color: black;
@@ -331,7 +341,7 @@ td.td_with{
     align-items: center !important;
     justify-content: space-between !important;
     border-collapse: collapse;
-    background: linear-gradient(35deg, #cce7ff, #cce7ff, #cce7ff 100%);
+    background: linear-gradient(35deg, #fff, #fff, #fff 100%);
 }
 .table-animation{
     transform: translate(-50%, -50%);
@@ -432,6 +442,7 @@ th.branch_search_font{
     color: black;
     font-family: var(--nav-font-family); 
     text-align: left; 
+    background: linear-gradient(35deg, #cce7ff, #cce7ff, #cce7ff 100%);
 }
 th.branch_info_head{
     font-size: 13px;
@@ -439,8 +450,8 @@ th.branch_info_head{
     color: black;
     font-family: var(--nav-font-family); 
     text-align: center; 
-    border: 1px solid #dfdede8f;
-    background: #d3d3d3b0;
+    border-bottom: 2px solid lightblue;
+    background: linear-gradient(35deg, #cce7ff, #cce7ff, #cce7ff 100%);
 }
 th.lab_padding{
     padding-left: 5px;
@@ -587,10 +598,73 @@ input#delete_branch_id {
     color: darkcyan;
 }
 .brn_info_tb {
-    border-left: 3px solid lightblue;
+    border: 2px solid lightblue;
+}
+.action_group{
+    position: relative;
+    align-items: center !important;
+    justify-content: space-between !important;
+    display: flex !important;
 }
 button.btn-close.btn-btn-sm.bg-danger.cols_btn {
     width: 30px;
+}
+button#permission_btn,button#branch_change_btn,button#access_update_btn,button#access_branch_delete,button#cancle_access{
+    font-family: var(--nav-font-family);
+}
+button#permission_btn:hover,button#branch_change_btn:hover{
+    background-image: linear-gradient(to bottom, rgb(14 14 14 / 5%) 0%, rgb(171 165 165 / 5%) 100%);
+    color: #0056b3;
+    transition: all 1s;
+}
+button#access_update_btn:hover{
+    background-image: linear-gradient(to bottom, rgb(14 14 14 / 5%) 0%, rgb(171 165 165 / 5%) 100%);
+    color: darkcyan;
+    transition: all 1s;
+}
+button#access_branch_delete:hover, button#cancle_access:hover{
+    background-image: linear-gradient(to bottom, rgb(14 14 14 / 5%) 0%, rgb(171 165 165 / 5%) 100%);
+    color: orangered;
+    transition: all 1s;
+}
+button.btn.btn-sm.delete_bg_btn{
+    background-color:#c73500;
+}
+.group-branch-skeleton,.mn-branch-skeleton{
+    position: relative;
+}
+.mn-branch-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    width: 108%;
+    height: 108%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton; 
+}
+.group-branch-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -1px;
+    width: 106%;
+    height: 111%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+@keyframes skeleton {
+    0% {
+        background-position: -100% 0;
+    }
+    
+    100% {
+        background-position: 100% 0;
+    }
 }
 table.info_table {
     background: white;
@@ -599,16 +673,15 @@ span.tb_lb {
     margin-left: 2px;
 }
 .branch_info_card{
-    background-image: radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 16px 0px;
     border: none;
     border-radius: 5px;
     transform: translate(-50%, -50%);
-    position: absolute;
-    top: 42%;
-    left: 66%;
-    width: 65%;
+    position: relative;
+    top: 48%;
+    left: 50%;
+    width: 100%;
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     animation: slideIn 0.3s ease-out;
 }

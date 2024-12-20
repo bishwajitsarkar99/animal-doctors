@@ -120,10 +120,6 @@
                         <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="update-btn-text">Update</span>
                       </button>
-                      <button type="button" id="access_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden>
-                        <span class="access-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                        <span class="access-btn-text">Access</span>
-                      </button>
                       <button type="button" id="deleteLoader" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden>
                         <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="delete-btn-text">Delete</span>

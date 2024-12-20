@@ -84,6 +84,92 @@
   </div>
   {{-- end role and email modal --}}
 
+  {{-- start user access action modal --}}
+  <div class="modal fade" id="userAccessActionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id="admin_modal_box">
+        <div class="modal-header profile_modal_header profilesetting_modal_header">
+          <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss branch-skeleton" id="staticBackdropLabel">
+            User Access Action Box
+          </h5>
+          <button type="button" class="btn-close btn-btn-sm head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+        </div>
+
+        <div class="modal-body profile-body pb-1">
+          <div class="row profile-heading pb-3">
+            <div class="action_group">
+              <button id="permission_btn" class="btn btn-sm modal_button update_confirm group-branch-skeleton">
+                <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                <span class="confirm-btn-text">Access Permission</span>
+              </button>
+              <button id="branch_change_btn" class="btn btn-sm modal_button update_confirm group-branch-skeleton">
+                <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                <span class="confirm-btn-text">Branch Change</span>
+              </button>
+            </div>
+            <div class="action_group mt-3">
+              <button id="access_update_btn" class="btn btn-sm modal_button update_confirm group-branch-skeleton">
+                <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                <span class="confirm-btn-text">Access Update</span>
+              </button>
+              <button type="button" class="btn btn-sm cgt_cancel_btn delete_bg_btn delet_btn_user mn-branch-skeleton access_branch_delete" id="access_branch_delete">
+                <span class="delete-confrm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                <span class="delete-confrm-btn-text">Access Delete</span>
+              </button>
+              <button type="button" class="btn btn-sm cgt_cancel_btn delete_cancel mn-branch-skeleton" id="cancle_access" data-bs-dismiss="modal">Access Cancel</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer profile_modal_footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- end user access action modal --}}
+
+  {{-- start user access permission modal --}}
+  <div class="modal fade" id="userAccessPermissionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id="admin_modal_box">
+        <div class="modal-header profile_modal_header profilesetting_modal_header">
+          <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss branch-skeleton" id="staticBackdropLabel">
+            User Access Permission
+          </h5>
+          <button type="button" class="btn-close btn-btn-sm head_btn branch-skeleton cancel_action_box" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+        </div>
+
+        <div class="modal-body profile-body pb-1">
+          <div class="row profile-heading pb-3">
+            <div class="action_group">
+              <button id="permission_btn" class="btn btn-sm modal_button update_confirm group-branch-skeleton">
+                <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                <span class="confirm-btn-text">Access Permission</span>
+              </button>
+              <button id="branch_change_btn" class="btn btn-sm modal_button update_confirm group-branch-skeleton">
+                <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                <span class="confirm-btn-text">Branch Change</span>
+              </button>
+            </div>
+            <div class="action_group mt-3">
+              <button id="access_update_btn" class="btn btn-sm modal_button update_confirm group-branch-skeleton">
+                <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                <span class="confirm-btn-text">Access Update</span>
+              </button>
+              <button type="button" class="btn btn-sm cgt_cancel_btn delete_bg_btn delet_btn_user mn-branch-skeleton access_branch_delete" id="access_branch_delete">
+                <span class="delete-confrm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                <span class="delete-confrm-btn-text">Access Delete</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer profile_modal_footer">
+          <button type="button" class="btn btn-sm cgt_cancel_btn delete_cancel mn-branch-skeleton back_action_box" id="cancle_access" data-bs-dismiss="modal">Access Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- end user access permission modal --}}
+
   {{-- start delete modal --}}
   <div class="modal fade" id="deletebranch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">

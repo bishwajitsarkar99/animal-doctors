@@ -86,10 +86,6 @@
             if(select !== ''){
                 $("#save").hide();
                 $("#save").fadeOut();
-                $("#update_btn").removeAttr('hidden');
-                $("#update_btn").fadeIn();
-                $("#deleteLoader").removeAttr('hidden');
-                $("#deleteLoader").fadeIn();
                 $("#cancel_btn").hide();
                 $("#cancel_btn").fadeOut();
             }else if(select == ''){
@@ -135,7 +131,10 @@
                             $("#processModal_body").removeClass('loading_body_area');
                             $('#documents').removeAttr('hidden');
                             $('.edit_branch_id').removeAttr('hidden');
-                            
+                            $("#update_btn").removeAttr('hidden');
+                            $("#update_btn").fadeIn();
+                            $("#deleteLoader").removeAttr('hidden');
+                            $("#deleteLoader").fadeIn();
                             const messages = response.messages;
                             
                             if(messages.created_by !== ''){

@@ -152,11 +152,11 @@
                   </div>
                   <div class="col-xl-3">
                     <p style="text-align: end;">
-                      <button type="button" id="access_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2">
+                      <button type="button" id="access_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden disabled>
                         <span class="access-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="access-btn-text">Access</span>
                       </button>
-                      <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton-button mt-2">
+                      <button id="cnl_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton-button mt-2" hidden>
                         <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="cancel-btn-text">Cancel</span>
                       </button>

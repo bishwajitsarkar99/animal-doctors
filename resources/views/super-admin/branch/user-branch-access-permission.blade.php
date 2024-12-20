@@ -34,32 +34,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-9 action_message">
+                <div class="col-xl-12 action_message">
                 <p class="ps-1 mt-2"><span id="success_message"></span></p>
-                </div>
-                <div class="col-xl-3">
-                    <p style="text-align: end;">
-                        <button type="button" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" id="save">
-                        <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                        <span class="add-btn-text">ADD</span>
-                        </button>
-                        <button type="button" id="update_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden>
-                        <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                        <span class="update-btn-text">Update</span>
-                        </button>
-                        <button type="button" id="access_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden>
-                        <span class="access-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                        <span class="access-btn-text">Access</span>
-                        </button>
-                        <button type="button" id="deleteLoader" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden>
-                        <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                        <span class="delete-btn-text">Delete</span>
-                        </button>
-                        <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton-button mt-2">
-                        <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                        <span class="cancel-btn-text">Cancel</span>
-                        </button>
-                    </p>
                 </div>
             </div>
         </form>
