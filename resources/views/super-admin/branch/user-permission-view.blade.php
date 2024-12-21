@@ -134,18 +134,21 @@
     <div class="modal-dialog">
       <div class="modal-content" id="admin_modal_box">
         <div class="modal-header profile_modal_header profilesetting_modal_header">
-          <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss branch-skeleton branch_name_head" id="staticBackdropLabel">
-            
-          </h5>
+          <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss branch-skeleton branch_name_head" id="staticBackdropLabel"></h5>
           <button type="button" class="btn-close btn-btn-sm head_btn branch-skeleton cancel_action_box" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
         </div>
 
         <div class="modal-body profile-body pb-1">
+          <div class="action_group group">
+            <span id="usrImage"></span>
+            <span id="usrRole"></span>
+            <span id="usrEmail"></span>
+          </div>
           <div class="row profile-heading pb-3">
             @csrf
             <input type="hidden" id="users_email_id">
             <div class="action_group">
-              <ul id="user_branch_menu" class="list_group menu"></ul>
+              <ul id="user_branch_menu" class="list_group menu table-responsive"></ul>
             </div>
           </div>
         </div>

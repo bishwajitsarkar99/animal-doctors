@@ -650,6 +650,12 @@
         // Access Permission Modal
         $(document).on('click', '#permission_btn', function(e){
             e.preventDefault();
+            $("#user_branch_menu").empty();
+            $(".branch_name_head").empty();
+            $("#usrRole").empty();
+            $("#usrEmail").empty();
+            $("#usrImage").empty();
+
             $("#userAccessActionModal").modal('hide');
             $("#accessconfirmbranch").modal('show');
             $("#loadingProgress").removeAttr('hidden');
@@ -680,8 +686,7 @@
 
                         let createdByRole;
                         const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/image/${messages.created_users.image}`;
-                        //$("#creatorUserImage").html(``);
-                        //$("#creatorCreatedAt").val(currentDate(messages.created_at));
+                        const secondUserImage = messages.user_emails.image.includes('https://') ? messages.user_emails.image : `${window.location.origin}/image/${messages.user_emails.image}`;
                         switch (messages.created_by) {
                             case 1:
                                 createdByRole = 'SuperAdmin';
@@ -709,45 +714,66 @@
                         }
                         const branchMenu = $("#user_branch_menu");
                         const branchName = $(".branch_name_head");
+                        const usrRole = $("#usrRole");
+                        const usrEmail = $("#usrEmail");
+                        const usrImg = $("#usrImage");
                         branchName.append( `
-                            <span>${messages.branch_name}</span>
+                            <span class="word_space">${messages.branch_name}</span>
                         `);
-                        //branchMenu.empty();
+                        usrRole.append( `
+                            <span class="word_space">${messages.user_roles.name}</span>
+                        `);
+                        usrEmail.append( `
+                            <span class="word_space">${messages.user_emails.email}</span>
+                        `);
+                        usrImg.append( `
+                            <span class="word_space"><img class="user_img rounded-square users_image position" src="${secondUserImage}"></span>
+                        `);
+                        
                         branchMenu.append(
                             `<li value="${messages.id}" id="branch_ids">
-                                <label class="enter_press enter-focus">Branch-ID : ${messages.branch_id}</label>
+                                <label class="enter_press text_label">Branch-ID : ${messages.branch_id}</label>
                             </li>
                             <li id="branch_types">
-                                <label class="enter_press enter-focus">Branch-Type : ${messages.branch_type}</label>
+                                <label class="enter_press text_label">Branch-Type : ${messages.branch_type}</label>
                             </li>
                             <li id="branch_names">
-                                <label class="enter_press enter-focus">Branch-Name : ${messages.branch_name}</label>
+                                <label class="enter_press text_label">Branch-Name : ${messages.branch_name}</label>
                             </li>
                             <li id="division_id">
-                                <label class="enter_press enter-focus">Division-Name : ${messages.divisions.division_name}</label>
+                                <label class="enter_press text_label">Division-Name : ${messages.divisions.division_name}</label>
                             </li>
                             <li id="district_id">
-                                <label class="enter_press enter-focus">District-Name : ${messages.districts.district_name}</label>
+                                <label class="enter_press text_label">District-Name : ${messages.districts.district_name}</label>
                             </li>
                             <li id="upazila_id">
-                                <label class="enter_press enter-focus">Upazila-Name : ${messages.thana_or_upazilas.thana_or_upazila_name}</label>
+                                <label class="enter_press text_label">Upazila-Name : ${messages.thana_or_upazilas.thana_or_upazila_name}</label>
                             </li>
                             <li id="town_name">
-                                <label class="enter_press enter-focus">City-Name : ${messages.town_name}</label>
+                                <label class="enter_press text_label">City-Name : ${messages.town_name}</label>
                             </li>
                             <li id="locations">
-                                <label class="enter_press enter-focus">Branch-Location : ${messages.location}</label>
+                                <label class="enter_press text_label">Branch-Location : ${messages.location}</label>
+                            </li>
+                            <li id="Creator">
+                                <label class="enter_press text_label">Creator</label>
+                            </li>
+                            <li id="creatorCreatedAt">
+                                <label class="enter_press text_label">Created-Date : ${currentDate(messages.created_at)}</label>
                             </li>
                             <li id="creatorCreatedBy">
-                                <label class="enter_press enter-focus">Role-Name : ${createdByRole}</label>
+                                <label class="enter_press text_label">Role-Name : ${createdByRole}</label>
                             </li>
                             <li id="creator_email">
-                                <label class="enter_press enter-focus" id="creatorUserEmail">
-                                    Email :<img class="user_img rounded-square users_image position" src="${firstUserImage}"> ${messages.created_users.email}
+                                <label class="enter_press text_label" id="creatorUserEmail">
+                                    Email : ${messages.created_users.email} <img class="user_img rounded-square users_image position" src="${firstUserImage}">
                                 </label>
                             </li>
+                            <li id="updator">
+                                <label class="enter_press text_label">Updator</label>
+                            </li>
                             <li id="#">
-                                <label class="email_enter_press enter-focus">Permission-Access :</label>
+                                <label class="text_label">Permission-Access :</label>
                                 <input class="form-switch form-check-input check_permission" type="checkbox" value="1" id="checkingSuperAdminAccess">
                                 <span class="badge rounded-pill bg-success" id="checkLabelSuperAdmin"></span>
                             </li>`
