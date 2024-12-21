@@ -29,8 +29,10 @@ class CreateUserBranchAccessPermissionsTable extends Migration
             $table->foreign('upazila_id')->references('id')->on('thana_or_upazilas')->onDelete('cascade');
             $table->string('town_name');
             $table->string('location');
-            $table->integer('created_by');
-            $table->integer('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
             // Foreign Keys for Roles
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
@@ -43,7 +45,8 @@ class CreateUserBranchAccessPermissionsTable extends Migration
             $table->tinyInteger('change_status')->default(0);
             $table->tinyInteger('status')->default(0);
             // Approval Metadata
-            $table->integer('approver_by')->nullable();
+            $table->unsignedBigInteger('approver_by')->nullable();
+            $table->foreign('approver_by')->references('id')->on('users')->onDelete('cascade');
             $table->date('admin_approver_date')->nullable();
             $table->date('super_admin_approver_date')->nullable();
             $table->timestamps();

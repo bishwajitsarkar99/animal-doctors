@@ -613,12 +613,13 @@
         // Get User Email Data 
         $(document).on('click keydown Enter', '#email_select_list_item', function(){
             if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')){
-                const searchID = $(this).attr('value');
+                const id = $(this).attr('value');
                 const selectedVal = $(this).attr('data-val');
-
-                if(selectedVal === '1' && searchID){
+                const btnVal = $(this).attr('data-val');
+                if(selectedVal === '1' && id){
+                    $('#user_email_id').val(id);
+                    $('#users_email_id').val(id);
                     $("#userAccessActionModal").modal('show');
-
                     const time = setTimeout(() => {
                         removeAttributeOrClass([
                             {
@@ -637,11 +638,12 @@
                                 name: 'group-branch-skeleton'
                             },
                         ]);
-                    }, 1000);
-                            
+                    }, 1000);      
                 } else if (selectedVal === '0') {
                     $("#userAccessActionModal").modal('hide');
                 }
+                
+                
             }
         });
 
@@ -653,7 +655,6 @@
             $("#loadingProgress").removeAttr('hidden');
             $("#access_modal_box").addClass('progress_body');
             $("#processModal_body").addClass('loading_body_area');
-
             setTimeout(() => {
                 $("#accessconfirmbranch").modal('hide');
                 $("#loadingProgress").attr('hidden', true);
@@ -661,6 +662,256 @@
                 $("#processModal_body").removeClass('loading_body_area');
                 $("#userAccessPermissionModal").modal('show');
             }, 1500);
+            
+            var id = $("#users_email_id").val();
+
+            $.ajax({
+                type: "GET",
+                url: "/company/branch-user-permission-edit/" + id,
+                dataType: "json",
+                success: function(response){
+                    //console.log(response.messages);
+                    if(response.status === 404){
+                        $('#success_message').html("");
+                        $('#success_message').addClass('alert alert-danger');
+                        $('#success_message').text(response.messages);
+                    }else if(response.status === 200){
+                        const messages = response.messages;
+
+                        let createdByRole;
+                        const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/image/${messages.created_users.image}`;
+                        //$("#creatorUserImage").html(``);
+                        //$("#creatorCreatedAt").val(currentDate(messages.created_at));
+                        switch (messages.created_by) {
+                            case 1:
+                                createdByRole = 'SuperAdmin';
+                                break;
+                            case 2:
+                                createdByRole = 'Sub-Admin';
+                                break;
+                            case 3:
+                                createdByRole = 'Admin';
+                                break;
+                            case 0:
+                                createdByRole = 'User';
+                                break;
+                            case 5:
+                                createdByRole = 'Accounts';
+                                break;
+                            case 6:
+                                createdByRole = 'Marketing';
+                                break;
+                            case 7:
+                                createdByRole = 'Delivery Team';
+                                break;
+                            default:
+                                createdByRole = 'Unknown';
+                        }
+                        const branchMenu = $("#user_branch_menu");
+                        const branchName = $(".branch_name_head");
+                        branchName.append( `
+                            <span>${messages.branch_name}</span>
+                        `);
+                        //branchMenu.empty();
+                        branchMenu.append(
+                            `<li value="${messages.id}" id="branch_ids">
+                                <label class="enter_press enter-focus">Branch-ID : ${messages.branch_id}</label>
+                            </li>
+                            <li id="branch_types">
+                                <label class="enter_press enter-focus">Branch-Type : ${messages.branch_type}</label>
+                            </li>
+                            <li id="branch_names">
+                                <label class="enter_press enter-focus">Branch-Name : ${messages.branch_name}</label>
+                            </li>
+                            <li id="division_id">
+                                <label class="enter_press enter-focus">Division-Name : ${messages.divisions.division_name}</label>
+                            </li>
+                            <li id="district_id">
+                                <label class="enter_press enter-focus">District-Name : ${messages.districts.district_name}</label>
+                            </li>
+                            <li id="upazila_id">
+                                <label class="enter_press enter-focus">Upazila-Name : ${messages.thana_or_upazilas.thana_or_upazila_name}</label>
+                            </li>
+                            <li id="town_name">
+                                <label class="enter_press enter-focus">City-Name : ${messages.town_name}</label>
+                            </li>
+                            <li id="locations">
+                                <label class="enter_press enter-focus">Branch-Location : ${messages.location}</label>
+                            </li>
+                            <li id="creatorCreatedBy">
+                                <label class="enter_press enter-focus">Role-Name : ${createdByRole}</label>
+                            </li>
+                            <li id="creator_email">
+                                <label class="enter_press enter-focus" id="creatorUserEmail">
+                                    Email :<img class="user_img rounded-square users_image position" src="${firstUserImage}"> ${messages.created_users.email}
+                                </label>
+                            </li>
+                            <li id="#">
+                                <label class="email_enter_press enter-focus">Permission-Access :</label>
+                                <input class="form-switch form-check-input check_permission" type="checkbox" value="1" id="checkingSuperAdminAccess">
+                                <span class="badge rounded-pill bg-success" id="checkLabelSuperAdmin"></span>
+                            </li>`
+                        );
+                        $('#users_email_id').val(id);
+                        // if(messages.created_by !== ''){
+                        //     const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/image/${messages.created_users.image}`;
+                        //     let createdByRole;
+                        //     switch (messages.created_by) {
+                        //         case 1:
+                        //             createdByRole = 'SuperAdmin';
+                        //             break;
+                        //         case 2:
+                        //             createdByRole = 'Sub-Admin';
+                        //             break;
+                        //         case 3:
+                        //             createdByRole = 'Admin';
+                        //             break;
+                        //         case 0:
+                        //             createdByRole = 'User';
+                        //             break;
+                        //         case 5:
+                        //             createdByRole = 'Accounts';
+                        //             break;
+                        //         case 6:
+                        //             createdByRole = 'Marketing';
+                        //             break;
+                        //         case 7:
+                        //             createdByRole = 'Delivery Team';
+                        //             break;
+                        //         default:
+                        //             createdByRole = 'Unknown';
+                        //     }
+                        //     $("#creatorUserImage").html(`<img class="user_img rounded-square users_image position" src="${firstUserImage}">`);
+
+                        //     $("#creatorUserEmail").val(messages.created_users.email);
+                        //     $("#creatorCreatedBy").val(createdByRole);
+                        //     if(messages.created_at !== ''){
+                        //         $("#creatorCreatedAt").val(currentDate(messages.created_at));
+                        //     }else{
+                        //         $("#creatorCreatedAt").val('-');
+                        //     }
+                        // }
+                        // if(messages.updated_by !== null){
+                        //     const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/image/${messages.updated_users.image}`;
+                        //     let updatedByRole;
+                        //     switch (messages.updated_by) {
+                        //         case 1:
+                        //             updatedByRole = 'SuperAdmin';
+                        //             break;
+                        //         case 2:
+                        //             updatedByRole = 'Sub-Admin';
+                        //             break;
+                        //         case 3:
+                        //             updatedByRole = 'Admin';
+                        //             break;
+                        //         case 0:
+                        //             updatedByRole = 'User';
+                        //             break;
+                        //         case 5:
+                        //             updatedByRole = 'Accounts';
+                        //             break;
+                        //         case 6:
+                        //             updatedByRole = 'Marketing';
+                        //             break;
+                        //         case 7:
+                        //             updatedByRole = 'Delivery Team';
+                        //             break;
+                        //         default:
+                        //             updatedByRole = 'Unknown';
+                        //     }
+                        //     $("#updatorUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
+
+                        //     $("#updatorUserEmail").val((messages.updated_users.email));
+                        //     $("#updatorUpdateBy").val(updatedByRole);
+                        //     if(messages.created_at !== messages.updated_at){
+                        //         $("#updatorUpdateAt").val(currentDate(messages.updated_at));
+                        //     }else{
+                        //         $("#updatorUpdateAt").val('-');
+                        //     }
+                        // }
+                        // if(messages.approver_by !== null){
+                        //     const secondUserImage = messages.approver_users.image.includes('https://') ? messages.approver_users.image : `${window.location.origin}/image/${messages.approver_users.image}`;
+                        //     let approverByRole;
+                        //     switch (messages.approver_by) {
+                        //         case 1:
+                        //             approverByRole = 'SuperAdmin';
+                        //             break;
+                        //         case 2:
+                        //             approverByRole = 'Sub-Admin';
+                        //             break;
+                        //         case 3:
+                        //             approverByRole = 'Admin';
+                        //             break;
+                        //         case 0:
+                        //             approverByRole = 'User';
+                        //             break;
+                        //         case 5:
+                        //             approverByRole = 'Accounts';
+                        //             break;
+                        //         case 6:
+                        //             approverByRole = 'Marketing';
+                        //             break;
+                        //         case 7:
+                        //             approverByRole = 'Delivery Team';
+                        //             break;
+                        //         default:
+                        //             approverByRole = 'Unknown';
+                        //     }
+                        //     $("#approverUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
+
+                        //     $("#approverUserEmail").val(messages.approver_users.email);
+                        //     $("#approverApprover").val(approverByRole);
+                        //     if(messages.approver_date !== null){
+                        //         $("#approverUpdateAt").val(currentDate(messages.approver_date));
+                        //     }else if(messages.approver_date == null){
+                        //         $("#approverUpdateAt").val('-');
+                        //     }
+                        // }
+
+                        
+                        // Super Admin Status
+                        if(response.messages.super_admin_approval_status == 1){
+                            let permissionLabel;
+                            switch (messages.super_admin_approval_status) {
+                                case 1:
+                                    permissionLabel = 'Access';
+                                break;
+                                case 0:
+                                    permissionLabel = 'Deny';
+                                break;
+                            
+                                default:
+                                    permissionLabel = 'Unknown';
+                                break;
+                            }
+                            $('#checkingSuperAdminAccess').val(permissionLabel);
+                            $('#checkingAdminAccess').prop('checked', response.messages.super_admin_approval_status == 1);
+                        }else{
+                            $('#checkingSuperAdminAccess').val(permissionLabel);
+                            $('#checkingAdminAccess').prop('checked', false);
+                        }
+                        // if(response.messages.admin_approval_status == 1){
+                        //     $("#adminSt").removeAttr('hidden').slideDown();
+                        //     $("#adminStTwo").attr('hidden', true);
+                        //     $('#admin_approval_status').prop('checked', response.messages.admin_approval_status == 1);
+                        // }
+                        // else{
+                        //     $("#adminSt").attr('hidden', true);
+                        //     $("#adminStTwo").attr('hidden', true);
+                        //     $('#admin_approval_status').prop('checked', false);
+                        // }
+                        // if(response.messages.sub_admin_approval_status == 1){
+                        //     $("#subAdminSt").removeAttr('hidden').slideDown();
+                        //     $("#subAdminStTwo").attr('hidden', true);
+                        //     $('#sub_admin_approval_status').prop('checked', response.messages.sub_admin_approval_status == 1);
+                        // }else{
+                        //     $("#subAdminSt").attr('hidden', true);
+                        //     $("#subAdminStTwo").attr('hidden', true);
+                        //     $('#sub_admin_approval_status').prop('checked', false);
+                        // }
+                    }
+                }
+            });
 
         });
         // back Acce Permission Modal

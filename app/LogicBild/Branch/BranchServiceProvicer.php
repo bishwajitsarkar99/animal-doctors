@@ -565,25 +565,55 @@ class BranchServiceProvicer
     */
     public function userBranchPermissionEdit($id)
     {
-        $branch = Branch::with(
-            [
-                'divisions', 
-                'districts', 
-                'thana_or_upazilas',
-            ]
-        )->find($id);
-        if($branch){
-            return response()->json([
-                'status' => 200,
-                'messages' => $branch,
-            ]);
-        }else{
+        $auth = Auth::user();
 
-            return response()->json([
-                'status' => 404,
-                'messages' => 'The branch is no found.',
-            ]);
+        if (!$auth) {
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
+    
+        $branch_user_data_query = UserBranchAccessPermission::with([
+            'divisions',
+            'districts',
+            'thana_or_upazilas',
+            'user_emails',
+            'user_roles',
+            'created_users',
+            'updated_users',
+            'approver_users',
+        ])->where('email_id', $id);
+    
+        if($auth->role == 1 ) {
+            $branch_user_data = $branch_user_data_query->first();
+    
+            if ($branch_user_data) {
+                return response()->json([
+                    'status' => 200,
+                    'messages' => $branch_user_data,
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'messages' => 'No data found for the given email.',
+                ]);
+            }
+        }elseif($auth->role == 3 ){
+            $branch_user_data = $branch_user_data_query->first();
+    
+            if ($branch_user_data) {
+                return response()->json([
+                    'status' => 200,
+                    'messages' => $branch_user_data,
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'messages' => 'No data found for the given email.',
+                ]);
+            }
+        }
+    
+        return response()->json(['messages' => 'Forbidden: Insufficient permissions'], 403);
+
     }
 
     /**
