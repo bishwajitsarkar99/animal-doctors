@@ -647,6 +647,18 @@
             }
         });
 
+        // Handel Checkbox
+        $(document).on('click', '#checkingSuperAdminAccess', function(){
+            var isChecked = $(this).val();
+            if(isChecked){
+                $("#checkLabelSuperAdmin").removeAttr('hidden');
+                $("#checkLabelSuperAdmin2").attr('hidden', true);
+            }else {
+                $("#checkLabelSuperAdmin").attr('hidden', true);
+                $("#checkLabelSuperAdmin2").removeAttr('hidden');
+            }
+        });
+
         // Access Permission Modal
         $(document).on('click', '#permission_btn', function(e){
             e.preventDefault();
@@ -687,7 +699,17 @@
                         const updated_by = messages.updated_by;
                         const approver_by = messages.approver_by;
                         const creatorUserEmail = messages.creator_emails.email;
+                        const adminApprovalStatus = messages.admin_approval_status;
+                        const superAdminApprovalStatus = messages.super_admin_approval_status;
+                        const superAdminApprovalBlogStatus = messages.status;
 
+                        if(superAdminApprovalStatus === 1){
+                            $("#checkLabelSuperAdmin").removeAttr('hidden');
+                            $("#checkLabelSuperAdmin2").attr('hidden', true);
+                        }else if(superAdminApprovalStatus === 0){
+                            $("#checkLabelSuperAdmin").attr('hidden', true);
+                            $("#checkLabelSuperAdmin2").removeAttr('hidden');
+                        }
                         let createdByRole;
                         let updatedByRole;
                         let aprrovedByRole;
@@ -840,13 +862,29 @@
                             `);
                             console.log("No updater details available as updated_by is null");
                         }
-                        branchMenu.append(
-                            `<li id="#">
-                                <label class="text_label">Permission-Access :</label>
-                                <input class="form-switch form-check-input check_permission" type="checkbox" value="1" id="checkingSuperAdminAccess">
-                                <span class="badge rounded-pill bg-success" id="checkLabelSuperAdmin"></span>
-                            </li>`
-                        );
+                        
+                        if(created_by === 1){
+                            branchMenu.append(
+                                `<li id="#">
+                                    <label class="text_label">Permission-Access :</label>
+                                    <input class="form-switch form-check-input check_permission" type="checkbox" value="1" id="checkingSuperAdminAccess" ${superAdminApprovalStatus == 1 ? 'checked' : ''}>
+                                    <span class="badge rounded-pill ${superAdminApprovalStatus == 1 ? 'bg-success' : 'bg-danger'}" id="checkLabelSuperAdmin">${superAdminApprovalStatus == 1 ? 'Justify' : 'Deny'}</span>
+                                </li>
+                                <li id="#">
+                                    <label class="text_label">Permission-Blog :</label>
+                                    <input class="form-switch form-check-input check_permission" type="checkbox" value="1" id="checkingSuperAdminBlog" ${superAdminApprovalBlogStatus ? 'checked' : ''}>
+                                    <span class="badge rounded-pill ${superAdminApprovalBlogStatus == 1 ? 'bg-success' : 'bg-danger'}" id="checkBlogLabelSuperAdmin">${superAdminApprovalBlogStatus == 1 ? 'Blog' : 'Deny'}</span>
+                                </li>`
+                            );
+                        }else if(created_by === 3){
+                            branchMenu.append(
+                                `<li id="#">
+                                    <label class="text_label">Permission-Access :</label>
+                                    <input class="form-switch form-check-input check_permission" type="checkbox" value="1" id="checkingAdminAccess" ${adminApprovalStatus ? 'checked' : ''}>
+                                    <span class="badge rounded-pill bg-success" id="checkLabelAdmin">${adminApprovalStatus == 1 ? 'Justify' : 'Deny'}</span>
+                                </li>`
+                            );
+                        }
                         $('#users_email_id').val(id);
                     }
                 }

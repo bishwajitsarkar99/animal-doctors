@@ -12,6 +12,9 @@
     --animation-background-position-0:100% 50%;
     --animation-background-position-100:0 50%;
 }
+button.button_margin{
+    margin-top: 5px;
+}
 button#pagePermision,button#add {
     height: 2.03em;
 }
