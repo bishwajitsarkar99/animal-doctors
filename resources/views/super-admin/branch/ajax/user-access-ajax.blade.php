@@ -683,55 +683,72 @@
                         $('#success_message').text(response.messages);
                     }else if(response.status === 200){
                         const messages = response.messages;
+                        const created_by = messages.created_by;
+                        const updated_by = messages.updated_by;
+                        const approver_by = messages.approver_by;
+                        const creatorUserEmail = messages.creator_emails.email;
 
                         let createdByRole;
-                        const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/image/${messages.created_users.image}`;
-                        const secondUserImage = messages.user_emails.image.includes('https://') ? messages.user_emails.image : `${window.location.origin}/image/${messages.user_emails.image}`;
-                        switch (messages.created_by) {
-                            case 1:
-                                createdByRole = 'SuperAdmin';
-                                break;
-                            case 2:
-                                createdByRole = 'Sub-Admin';
-                                break;
-                            case 3:
-                                createdByRole = 'Admin';
-                                break;
-                            case 0:
-                                createdByRole = 'User';
-                                break;
-                            case 5:
-                                createdByRole = 'Accounts';
-                                break;
-                            case 6:
-                                createdByRole = 'Marketing';
-                                break;
-                            case 7:
-                                createdByRole = 'Delivery Team';
-                                break;
-                            default:
-                                createdByRole = 'Unknown';
+                        let updatedByRole;
+                        let aprrovedByRole;
+                        let approverDate;
+
+                        const firstUserImage = messages.created_users.image.includes('https://') 
+                            ? messages.created_users.image 
+                            : `${window.location.origin}/image/${messages.created_users.image}`;
+                        const secondUserImage = messages.user_emails.image.includes('https://') 
+                            ? messages.user_emails.image 
+                            : `${window.location.origin}/image/${messages.user_emails.image}`;
+                        const thirdUserImage = 
+                            messages.user_emails && messages.user_emails.image 
+                            ? (messages.user_emails.image.includes('https://') 
+                                ? messages.user_emails.image 
+                                : `${window.location.origin}/image/${messages.user_emails.image}`)
+                            : `${window.location.origin}/image/default.png`;
+
+                        const fourUserImage = 
+                            messages.user_emails && messages.user_emails.image 
+                            ? (messages.user_emails.image.includes('https://') 
+                                ? messages.user_emails.image 
+                                : `${window.location.origin}/image/${messages.user_emails.image}`)
+                            : `${window.location.origin}/image/default.png`;
+
+                        const roles = {
+                            1: 'SuperAdmin',
+                            2: 'Sub-Admin',
+                            3: 'Admin',
+                            0: 'User',
+                            5: 'Accounts',
+                            6: 'Marketing',
+                            7: 'Delivery Team',
+                        };
+
+                        createdByRole = roles[created_by] || 'Unknown';
+                        updatedByRole = roles[updated_by] || '--';
+                        aprrovedByRole = roles[approver_by] || '--';
+                        if(approver_by === 1){
+                            approverDate = messages.super_admin_approver_date;
+                        }else if(approver_by === 3){
+                            approverDate = messages.admin_approver_date;
                         }
+
                         const branchMenu = $("#user_branch_menu");
                         const branchName = $(".branch_name_head");
                         const usrRole = $("#usrRole");
                         const usrEmail = $("#usrEmail");
                         const usrImg = $("#usrImage");
-                        branchName.append( `
-                            <span class="word_space">${messages.branch_name}</span>
-                        `);
-                        usrRole.append( `
-                            <span class="word_space">${messages.user_roles.name}</span>
-                        `);
-                        usrEmail.append( `
-                            <span class="word_space">${messages.user_emails.email}</span>
-                        `);
-                        usrImg.append( `
-                            <span class="word_space"><img class="user_img rounded-square users_image position" src="${secondUserImage}"></span>
-                        `);
-                        
+
+                        // Append user details
+                        branchName.append(`<span class="word_space">${messages.branch_name}</span>`);
+                        usrRole.append(`<span class="word_space">${messages.user_roles.name}</span>`);
+                        usrEmail.append(`<span class="word_space">${messages.user_emails.email}</span>`);
+                        usrImg.append(`<span class="word_space"><img class="user_img rounded-square users_image position" src="${secondUserImage}"></span>`);
+
                         branchMenu.append(
-                            `<li value="${messages.id}" id="branch_ids">
+                            `<li value="" id="branch_info">
+                                <label class="branch_head_label">Branch information</label>
+                            </li>
+                            <li value="${messages.id}" id="branch_ids">
                                 <label class="enter_press text_label">Branch-ID : ${messages.branch_id}</label>
                             </li>
                             <li id="branch_types">
@@ -756,7 +773,7 @@
                                 <label class="enter_press text_label">Branch-Location : ${messages.location}</label>
                             </li>
                             <li id="Creator">
-                                <label class="enter_press text_label">Creator</label>
+                                <label class="branch_head_label">Creator</label>
                             </li>
                             <li id="creatorCreatedAt">
                                 <label class="enter_press text_label">Created-Date : ${currentDate(messages.created_at)}</label>
@@ -766,175 +783,71 @@
                             </li>
                             <li id="creator_email">
                                 <label class="enter_press text_label" id="creatorUserEmail">
-                                    Email : ${messages.created_users.email} <img class="user_img rounded-square users_image position" src="${firstUserImage}">
+                                    Email : ${creatorUserEmail} <img class="user_img rounded-square users_image position" src="${firstUserImage}">
                                 </label>
-                            </li>
-                            <li id="updator">
-                                <label class="enter_press text_label">Updator</label>
-                            </li>
-                            <li id="#">
+                            </li>`
+                        );
+                        // Conditionally append updater details
+                        if (updated_by !== null) {
+                            branchMenu.append(`
+                                <li id="updator">
+                                    <label class="branch_head_label">Updator</label>
+                                </li>
+                                <li id="timeSet">
+                                    <label class="enter_press text_label" id="updatordAt">Update-Date : ${currentDate(messages.updated_at)}</label>
+                                </li>
+                                <li id="updatordBy">
+                                    <label class="enter_press text_label">Role-Name : ${updatedByRole}</label>
+                                </li>
+                                <li id="updator_email">
+                                    <label class="enter_press text_label" id="creatorUserEmail">
+                                        Email : ${messages.updator_emails.email} 
+                                        <img class="user_img rounded-square users_image position" src="${thirdUserImage}">
+                                    </label>
+                                </li>
+                            `);
+                        }else if(updated_by === null) {
+                            branchMenu.append(`
+                                <li>
+                                    <label class="no_data_label" hidden>No updater details available.</label>
+                                </li>
+                            `);
+                            console.log("No updater details available as updated_by is null");
+                        }
+                        if (approver_by !== null) {
+                            branchMenu.append(`
+                                <li id="updator">
+                                    <label class="branch_head_label">Approver</label>
+                                </li>
+                                <li id="timeSet">
+                                    <label class="enter_press text_label" id="updatordAt">Update-Date : ${currentDate(approverDate)}</label>
+                                </li>
+                                <li id="updatordBy">
+                                    <label class="enter_press text_label">Role-Name : ${aprrovedByRole}</label>
+                                </li>
+                                <li id="updator_email">
+                                    <label class="enter_press text_label" id="creatorUserEmail">
+                                        Email : ${messages.approver_emails.email} 
+                                        <img class="user_img rounded-square users_image position" src="${fourUserImage}">
+                                    </label>
+                                </li>
+                            `);
+                        }else if(approver_by === null) {
+                            branchMenu.append(`
+                                <li>
+                                    <label class="no_data_label" hidden>No updater details available.</label>
+                                </li>
+                            `);
+                            console.log("No updater details available as updated_by is null");
+                        }
+                        branchMenu.append(
+                            `<li id="#">
                                 <label class="text_label">Permission-Access :</label>
                                 <input class="form-switch form-check-input check_permission" type="checkbox" value="1" id="checkingSuperAdminAccess">
                                 <span class="badge rounded-pill bg-success" id="checkLabelSuperAdmin"></span>
                             </li>`
                         );
                         $('#users_email_id').val(id);
-                        // if(messages.created_by !== ''){
-                        //     const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/image/${messages.created_users.image}`;
-                        //     let createdByRole;
-                        //     switch (messages.created_by) {
-                        //         case 1:
-                        //             createdByRole = 'SuperAdmin';
-                        //             break;
-                        //         case 2:
-                        //             createdByRole = 'Sub-Admin';
-                        //             break;
-                        //         case 3:
-                        //             createdByRole = 'Admin';
-                        //             break;
-                        //         case 0:
-                        //             createdByRole = 'User';
-                        //             break;
-                        //         case 5:
-                        //             createdByRole = 'Accounts';
-                        //             break;
-                        //         case 6:
-                        //             createdByRole = 'Marketing';
-                        //             break;
-                        //         case 7:
-                        //             createdByRole = 'Delivery Team';
-                        //             break;
-                        //         default:
-                        //             createdByRole = 'Unknown';
-                        //     }
-                        //     $("#creatorUserImage").html(`<img class="user_img rounded-square users_image position" src="${firstUserImage}">`);
-
-                        //     $("#creatorUserEmail").val(messages.created_users.email);
-                        //     $("#creatorCreatedBy").val(createdByRole);
-                        //     if(messages.created_at !== ''){
-                        //         $("#creatorCreatedAt").val(currentDate(messages.created_at));
-                        //     }else{
-                        //         $("#creatorCreatedAt").val('-');
-                        //     }
-                        // }
-                        // if(messages.updated_by !== null){
-                        //     const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/image/${messages.updated_users.image}`;
-                        //     let updatedByRole;
-                        //     switch (messages.updated_by) {
-                        //         case 1:
-                        //             updatedByRole = 'SuperAdmin';
-                        //             break;
-                        //         case 2:
-                        //             updatedByRole = 'Sub-Admin';
-                        //             break;
-                        //         case 3:
-                        //             updatedByRole = 'Admin';
-                        //             break;
-                        //         case 0:
-                        //             updatedByRole = 'User';
-                        //             break;
-                        //         case 5:
-                        //             updatedByRole = 'Accounts';
-                        //             break;
-                        //         case 6:
-                        //             updatedByRole = 'Marketing';
-                        //             break;
-                        //         case 7:
-                        //             updatedByRole = 'Delivery Team';
-                        //             break;
-                        //         default:
-                        //             updatedByRole = 'Unknown';
-                        //     }
-                        //     $("#updatorUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
-
-                        //     $("#updatorUserEmail").val((messages.updated_users.email));
-                        //     $("#updatorUpdateBy").val(updatedByRole);
-                        //     if(messages.created_at !== messages.updated_at){
-                        //         $("#updatorUpdateAt").val(currentDate(messages.updated_at));
-                        //     }else{
-                        //         $("#updatorUpdateAt").val('-');
-                        //     }
-                        // }
-                        // if(messages.approver_by !== null){
-                        //     const secondUserImage = messages.approver_users.image.includes('https://') ? messages.approver_users.image : `${window.location.origin}/image/${messages.approver_users.image}`;
-                        //     let approverByRole;
-                        //     switch (messages.approver_by) {
-                        //         case 1:
-                        //             approverByRole = 'SuperAdmin';
-                        //             break;
-                        //         case 2:
-                        //             approverByRole = 'Sub-Admin';
-                        //             break;
-                        //         case 3:
-                        //             approverByRole = 'Admin';
-                        //             break;
-                        //         case 0:
-                        //             approverByRole = 'User';
-                        //             break;
-                        //         case 5:
-                        //             approverByRole = 'Accounts';
-                        //             break;
-                        //         case 6:
-                        //             approverByRole = 'Marketing';
-                        //             break;
-                        //         case 7:
-                        //             approverByRole = 'Delivery Team';
-                        //             break;
-                        //         default:
-                        //             approverByRole = 'Unknown';
-                        //     }
-                        //     $("#approverUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
-
-                        //     $("#approverUserEmail").val(messages.approver_users.email);
-                        //     $("#approverApprover").val(approverByRole);
-                        //     if(messages.approver_date !== null){
-                        //         $("#approverUpdateAt").val(currentDate(messages.approver_date));
-                        //     }else if(messages.approver_date == null){
-                        //         $("#approverUpdateAt").val('-');
-                        //     }
-                        // }
-
-                        
-                        // Super Admin Status
-                        if(response.messages.super_admin_approval_status == 1){
-                            let permissionLabel;
-                            switch (messages.super_admin_approval_status) {
-                                case 1:
-                                    permissionLabel = 'Access';
-                                break;
-                                case 0:
-                                    permissionLabel = 'Deny';
-                                break;
-                            
-                                default:
-                                    permissionLabel = 'Unknown';
-                                break;
-                            }
-                            $('#checkingSuperAdminAccess').val(permissionLabel);
-                            $('#checkingAdminAccess').prop('checked', response.messages.super_admin_approval_status == 1);
-                        }else{
-                            $('#checkingSuperAdminAccess').val(permissionLabel);
-                            $('#checkingAdminAccess').prop('checked', false);
-                        }
-                        // if(response.messages.admin_approval_status == 1){
-                        //     $("#adminSt").removeAttr('hidden').slideDown();
-                        //     $("#adminStTwo").attr('hidden', true);
-                        //     $('#admin_approval_status').prop('checked', response.messages.admin_approval_status == 1);
-                        // }
-                        // else{
-                        //     $("#adminSt").attr('hidden', true);
-                        //     $("#adminStTwo").attr('hidden', true);
-                        //     $('#admin_approval_status').prop('checked', false);
-                        // }
-                        // if(response.messages.sub_admin_approval_status == 1){
-                        //     $("#subAdminSt").removeAttr('hidden').slideDown();
-                        //     $("#subAdminStTwo").attr('hidden', true);
-                        //     $('#sub_admin_approval_status').prop('checked', response.messages.sub_admin_approval_status == 1);
-                        // }else{
-                        //     $("#subAdminSt").attr('hidden', true);
-                        //     $("#subAdminStTwo").attr('hidden', true);
-                        //     $('#sub_admin_approval_status').prop('checked', false);
-                        // }
                     }
                 }
             });

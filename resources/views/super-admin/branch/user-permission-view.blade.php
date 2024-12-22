@@ -139,21 +139,23 @@
         </div>
 
         <div class="modal-body profile-body pb-1">
-          <div class="action_group group">
-            <span id="usrImage"></span>
-            <span id="usrRole"></span>
-            <span id="usrEmail"></span>
-          </div>
-          <div class="row profile-heading pb-3">
-            @csrf
-            <input type="hidden" id="users_email_id">
-            <div class="action_group">
-              <ul id="user_branch_menu" class="list_group menu table-responsive"></ul>
+          <div class="branch_access">
+            <div class="action_group group">
+              <span id="usrImage"></span>
+              <span id="usrRole"></span>
+              <span id="usrEmail"></span>
+            </div>
+            <div class="row profile-heading pb-3">
+              @csrf
+              <input type="hidden" id="users_email_id">
+              <div class="action_group">
+                <ul id="user_branch_menu" class="list_group menu table-responsive"></ul>
+              </div>
             </div>
           </div>
         </div>
         <div class="modal-footer profile_modal_footer action_group">
-          <button id="permission_accss_btn" class="btn btn-sm modal_button update_confirm group-branch-skeleton">
+          <button id="permission_accss_btn" class="btn btn-sm modal_button update_confirm">
             <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
             <span class="confirm-btn-text">Permission</span>
           </button>

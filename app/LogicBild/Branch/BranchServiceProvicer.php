@@ -491,6 +491,7 @@ class BranchServiceProvicer
         }
 
         $auth = Auth::user();
+        $auth_email = $auth->id;
 
         $user_access = new UserBranchAccessPermission;
         $user_access->branch_id = $request->input('branch_id');
@@ -503,7 +504,8 @@ class BranchServiceProvicer
         $user_access->location = $request->input('location');
         $user_access->role_id = $request->input('role_id');
         $user_access->email_id = $request->input('email_id');
-        $user_access->created_by = $auth->id;
+        $user_access->created_by = $auth->role;
+        $user_access->creator_email = $auth_email;
 
         $user_access->save();
 
@@ -580,6 +582,9 @@ class BranchServiceProvicer
             'created_users',
             'updated_users',
             'approver_users',
+            'creator_emails',
+            'updator_emails',
+            'approver_emails',
         ])->where('email_id', $id);
     
         if($auth->role == 1 ) {

@@ -24,7 +24,9 @@ class UserBranchAccessPermission extends Model
         'town_name',
         'location',
         'created_by',
+        'creator_email',
         'updated_by',
+        'updator_email',
         'role_id',
         'email_id',
         'admin_approval_status',
@@ -32,6 +34,7 @@ class UserBranchAccessPermission extends Model
         'change_status',
         'status',
         'approver_by',
+        'approver_email',
         'admin_approver_date',
         'super_admin_approver_date',
     ];
@@ -55,12 +58,24 @@ class UserBranchAccessPermission extends Model
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
+    public function creator_emails() {
+        return $this->belongsTo(User::class, 'creator_email', 'id');
+    }
+
     public function updated_users() {
         return $this->belongsTo(User::class, 'updated_by', 'id');
     }
 
+    public function updator_emails() {
+        return $this->belongsTo(User::class, 'updator_email', 'id');
+    }
+
     public function approver_users() {
         return $this->belongsTo(User::class, 'approver_by', 'id');
+    }
+
+    public function approver_emails() {
+        return $this->belongsTo(User::class, 'approver_email', 'id');
     }
 
     public function user_emails() {

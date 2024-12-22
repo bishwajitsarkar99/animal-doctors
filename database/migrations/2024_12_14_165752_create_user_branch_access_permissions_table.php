@@ -31,8 +31,12 @@ class CreateUserBranchAccessPermissionsTable extends Migration
             $table->string('location');
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('creator_email');
+            $table->foreign('creator_email')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('updator_email')->nullable();
+            $table->foreign('updator_email')->references('id')->on('users')->onDelete('cascade');
             // Foreign Keys for Roles
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
@@ -47,6 +51,8 @@ class CreateUserBranchAccessPermissionsTable extends Migration
             // Approval Metadata
             $table->unsignedBigInteger('approver_by')->nullable();
             $table->foreign('approver_by')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('approver_email')->nullable();
+            $table->foreign('approver_email')->references('id')->on('users')->onDelete('cascade');
             $table->date('admin_approver_date')->nullable();
             $table->date('super_admin_approver_date')->nullable();
             $table->timestamps();
