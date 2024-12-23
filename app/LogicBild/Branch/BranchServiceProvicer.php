@@ -568,6 +568,7 @@ class BranchServiceProvicer
     public function userBranchPermissionEdit($id)
     {
         $auth = Auth::user();
+        $authEmail = $auth->id;
 
         if (!$auth) {
             return response()->json(['message' => 'Unauthorized'], 401);
@@ -587,9 +588,8 @@ class BranchServiceProvicer
             'approver_emails',
         ])->where('email_id', $id);
     
-        if($auth->role == 1 ) {
+        if($auth->role == 1 && $authEmail) {
             $branch_user_data = $branch_user_data_query->first();
-    
             if ($branch_user_data) {
                 return response()->json([
                     'status' => 200,
@@ -601,7 +601,7 @@ class BranchServiceProvicer
                     'messages' => 'No data found for the given email.',
                 ]);
             }
-        }elseif($auth->role == 3 ){
+        }elseif($auth->role == 3 && $authEmail){
             $branch_user_data = $branch_user_data_query->first();
     
             if ($branch_user_data) {
@@ -642,7 +642,50 @@ class BranchServiceProvicer
     */
     public function userBranchAccessPermission(Request $request)
     {
-        //
+
+        $auth = Auth::user();
+        $approvalDate = now();
+
+        $branch_access = UserBranchAccessPermission::where('email_id', $request->id)->first();
+        if (!$branch_access) {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'Branch User not found.',
+            ], 404);
+        }
+        // Super Admin Role With Email According to Send Data
+        if($auth->role == 1){
+            $branch_access->super_admin_approval_status = $request->super_admin_approval_status;
+            $branch_access->status = $request->status;
+
+            if($branch_access->super_admin_approval_status == 1) {
+                $branch_access->super_admin_approver_date = $approvalDate;
+                $branch_access->approver_by = $auth->role;
+                $branch_access->approver_email = $auth->id;
+            }
+
+            if($request->status == 1){
+                $branch_access->admin_approval_status = 0;
+                $branch_access->super_admin_approval_status = 0;
+            }
+        }
+        // Admin Role With Email According to Send Data
+        if($auth->role == 3){
+            $branch_access->admin_approval_status = $request->admin_approval_status;
+    
+            if ($branch_access->admin_approval_status == 1) {
+                $branch_access->admin_approver_date = $approvalDate;
+                $branch_access->approver_by = $auth->role;
+                $branch_access->approver_email = $auth->id;
+            }
+        }
+
+        $branch_access->save();
+
+        return response()->json([
+            'status' => 202,
+            'messages' => 'User branch access has been done.',
+        ], 202);
     }
 
 }

@@ -648,18 +648,56 @@
         });
 
         // Handel Checkbox
-        $(document).on('click', '#checkingSuperAdminAccess', function(){
-            var isChecked = $(this).val();
-            if(isChecked){
-                $("#checkLabelSuperAdmin").removeAttr('hidden');
-                $("#checkLabelSuperAdmin2").attr('hidden', true);
-            }else {
-                $("#checkLabelSuperAdmin").attr('hidden', true);
-                $("#checkLabelSuperAdmin2").removeAttr('hidden');
+        $("#checkLabelSuperAdmin").show();
+        $("#checkLabelSuperAdmin2").hide();
+        $("#checkBlogLabelSuperAdmin").show();
+        $("#checkBlogLabelSuperAdmin2").hide();
+        $("#checkLabelAdmin").show();
+        $("#checkLabelAdmin2").hide();
+        $(document).on('click', '#checkingSuperAdminAccess', function() {
+            var isChecked = $(this).prop('checked');
+            if (isChecked) {
+                $("#checkLabelSuperAdmin").show();
+                $("#checkLabelSuperAdmin2").hide();
+            } else {
+                $("#checkLabelSuperAdmin").hide();
+                $("#checkLabelSuperAdmin2").show();
             }
         });
+        $(document).on('click', '#checkingSuperAdminBlog', function() {
+            var isChecked = $(this).prop('checked');
+            if (isChecked) {
+                $("#checkBlogLabelSuperAdmin").show();
+                $("#checkBlogLabelSuperAdmin2").hide();
+            } else {
+                $("#checkBlogLabelSuperAdmin").hide();
+                $("#checkBlogLabelSuperAdmin2").show();
+            }
+        });
+        $(document).on('click', '#checkingAdminAccess', function() {
+            var isChecked = $(this).prop('checked');
+            if (isChecked) {
+                $("#checkLabelAdmin").show();
+                $("#checkLabelAdmin2").hide();
+            } else {
+                $("#checkLabelAdmin").hide();
+                $("#checkLabelAdmin2").show();
+            }
+        });
+        // back Acce Permission Modal
+        $(document).on('click', '.back_action_box, .cancel_action_box', function(e){
+            e.preventDefault();
+            $("#userAccessActionModal").modal('show');
+            $("#userAccessPermissionModal").modal('hide');
+        });
+        // back Acce Permission Confirm Modal
+        $(document).on('click', '#cancel_btn, .access_confirm_back', function(e){
+            e.preventDefault();
+            $("#userAccessPermissionConfirmModal").modal('hide');
+            $("#userAccessPermissionModal").modal('show');
+        });
 
-        // Access Permission Modal
+        // Access Permission Modal with user email search
         $(document).on('click', '#permission_btn', function(e){
             e.preventDefault();
             $("#user_branch_menu").empty();
@@ -667,6 +705,9 @@
             $("#usrRole").empty();
             $("#usrEmail").empty();
             $("#usrImage").empty();
+            $("#usrConfrmImage").empty();
+            $("#usrConfrmRole").empty();
+            $("#usrConfrmEmail").empty();
 
             $("#userAccessActionModal").modal('hide');
             $("#accessconfirmbranch").modal('show');
@@ -694,6 +735,7 @@
                         $('#success_message').addClass('alert alert-danger');
                         $('#success_message').text(response.messages);
                     }else if(response.status === 200){
+                        var userRole = {{ auth()->user()->role }};
                         const messages = response.messages;
                         const created_by = messages.created_by;
                         const updated_by = messages.updated_by;
@@ -702,14 +744,7 @@
                         const adminApprovalStatus = messages.admin_approval_status;
                         const superAdminApprovalStatus = messages.super_admin_approval_status;
                         const superAdminApprovalBlogStatus = messages.status;
-
-                        if(superAdminApprovalStatus === 1){
-                            $("#checkLabelSuperAdmin").removeAttr('hidden');
-                            $("#checkLabelSuperAdmin2").attr('hidden', true);
-                        }else if(superAdminApprovalStatus === 0){
-                            $("#checkLabelSuperAdmin").attr('hidden', true);
-                            $("#checkLabelSuperAdmin2").removeAttr('hidden');
-                        }
+                        
                         let createdByRole;
                         let updatedByRole;
                         let aprrovedByRole;
@@ -756,9 +791,9 @@
 
                         const branchMenu = $("#user_branch_menu");
                         const branchName = $(".branch_name_head");
-                        const usrRole = $("#usrRole");
-                        const usrEmail = $("#usrEmail");
-                        const usrImg = $("#usrImage");
+                        const usrRole = $("#usrRole, #usrConfrmRole");
+                        const usrEmail = $("#usrEmail, #usrConfrmEmail");
+                        const usrImg = $("#usrImage, #usrConfrmImage");
 
                         // Append user details
                         branchName.append(`<span class="word_space">${messages.branch_name}</span>`);
@@ -862,26 +897,28 @@
                             `);
                             console.log("No updater details available as updated_by is null");
                         }
-                        
-                        if(created_by === 1){
+                        if(created_by === 1 && userRole === 1){
                             branchMenu.append(
                                 `<li id="#">
                                     <label class="text_label">Permission-Access :</label>
-                                    <input class="form-switch form-check-input check_permission" type="checkbox" value="1" id="checkingSuperAdminAccess" ${superAdminApprovalStatus == 1 ? 'checked' : ''}>
-                                    <span class="badge rounded-pill ${superAdminApprovalStatus == 1 ? 'bg-success' : 'bg-danger'}" id="checkLabelSuperAdmin">${superAdminApprovalStatus == 1 ? 'Justify' : 'Deny'}</span>
+                                    <input class="form-switch form-check-input check_permission me-2" type="checkbox" name="super_admin_approval_status" value="1" id="checkingSuperAdminAccess" ${superAdminApprovalStatus == 1 ? 'checked' : ''}>
+                                    <span class="badge rounded-pill bg-success ${superAdminApprovalStatus == 1 ? '' : 'display_none'}" id="checkLabelSuperAdmin">Justify</span>
+                                    <span class="badge rounded-pill bg-danger ${superAdminApprovalStatus == 0 ? '' : 'display_none'}" id="checkLabelSuperAdmin2">Refuse</span>
                                 </li>
                                 <li id="#">
-                                    <label class="text_label">Permission-Blog :</label>
-                                    <input class="form-switch form-check-input check_permission" type="checkbox" value="1" id="checkingSuperAdminBlog" ${superAdminApprovalBlogStatus ? 'checked' : ''}>
-                                    <span class="badge rounded-pill ${superAdminApprovalBlogStatus == 1 ? 'bg-success' : 'bg-danger'}" id="checkBlogLabelSuperAdmin">${superAdminApprovalBlogStatus == 1 ? 'Blog' : 'Deny'}</span>
+                                    <label class="text_label">Permission- Blog :</label>
+                                    <input class="form-switch form-check-input check_permission" type="checkbox" name="status" value="1" id="checkingSuperAdminBlog" ${superAdminApprovalBlogStatus ? 'checked' : ''}>
+                                    <span class="badge rounded-pill bg-success ${superAdminApprovalBlogStatus == 1 ? '' : 'display_none'}" id="checkBlogLabelSuperAdmin">Justify</span>
+                                    <span class="badge rounded-pill bg-danger ${superAdminApprovalBlogStatus == 0 ? '' : 'display_none'}" id="checkBlogLabelSuperAdmin2">Refuse</span>
                                 </li>`
                             );
-                        }else if(created_by === 3){
+                        }else if(created_by === 3 || userRole === 3){
                             branchMenu.append(
                                 `<li id="#">
                                     <label class="text_label">Permission-Access :</label>
-                                    <input class="form-switch form-check-input check_permission" type="checkbox" value="1" id="checkingAdminAccess" ${adminApprovalStatus ? 'checked' : ''}>
-                                    <span class="badge rounded-pill bg-success" id="checkLabelAdmin">${adminApprovalStatus == 1 ? 'Justify' : 'Deny'}</span>
+                                    <input class="form-switch form-check-input check_permission" type="checkbox" name="admin_approval_status" value="1" id="checkingAdminAccess" ${adminApprovalStatus ? 'checked' : ''}>
+                                    <span class="badge rounded-pill bg-success ${adminApprovalStatus == 1 ? '' : 'display_none'}" id="checkLabelAdmin">Justify</span>
+                                    <span class="badge rounded-pill bg-danger ${adminApprovalStatus == 0 ? '' : 'display_none'}" id="checkLabelAdmin2">Refuse</span>
                                 </li>`
                             );
                         }
@@ -891,11 +928,94 @@
             });
 
         });
-        // back Acce Permission Modal
-        $(document).on('click', '.back_action_box, .cancel_action_box', function(e){
+
+        // Access Permission Confirm Modal Show
+        $(document).on('click', '#permission_accss_btn', function(e){
             e.preventDefault();
-            $("#userAccessActionModal").modal('show');
+            $("#userAccessPermissionConfirmModal").modal('show');
             $("#userAccessPermissionModal").modal('hide');
+            const time = setTimeout(() => {
+                removeAttributeOrClass([
+                    {
+                        selector: '#access_confirm_button, #cancel_btn, .access_confirm_back, .confirm-label, #usrConfrmRole, #usrConfrmEmail',
+                        type: 'class',
+                        name: 'branch-skeleton'
+                    },
+                    {
+                        selector: '#usrConfrmImage',
+                        type: 'class',
+                        name: 'img-branch-skeleton'
+                    },
+                    {
+                        selector: '.access_confirm_head_title',
+                        type: 'class',
+                        name: 'head-branch-skeleton'
+                    },
+
+                ]);
+            }, 1000);
         });
+
+        // User Access Permission
+        $(document).on('click', '#access_confirm_button', function(e){
+            e.preventDefault();
+            var id = $("#users_email_id").val();
+            console.log(id);
+            
+            var superAdminApprovalStatus = $("input[name='super_admin_approval_status']:checked").val();
+            var adminApprovalStatus = $("input[name='admin_approval_status']:checked").val();
+            var userBlogStatus = $("input[name='status']:checked").val();
+
+            const current_url = "{{route('permission_status.action')}}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: current_url,
+                dataType: 'json',
+                data: {
+                    id: id,
+                    super_admin_approval_status: superAdminApprovalStatus ? 1 : 0,
+                    admin_approval_status: adminApprovalStatus ? 1 : 0,
+                    status: userBlogStatus ? 1 : 0,
+                },
+                success: function(response) {
+                    $("#userAccessActionModal").modal('hide');
+                    $("#userAccessPermissionConfirmModal").modal('hide');
+                    $("#userAccessPermissionModal").modal('hide');
+                    if (response.status === 202) {
+                        $("#accessconfirmbranch").modal('show');
+                        $("#processingProgress").removeAttr('hidden');
+                        $("#access_modal_box").addClass('progress_body');
+                        $("#processModal_body").addClass('loading_body_area');
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#processingProgress").attr('hidden', true);
+                            $("#access_modal_box").removeClass('progress_body');
+                            $("#processModal_body").removeClass('loading_body_area');
+                            //$('#updateForm_error').html("");
+                            $('#success_messages').html("");
+                            $('#success_messages').addClass('alert_show ps-1 pe-1');
+                            $('#success_messages').fadeIn();
+                            $("#success_messages").text(response.messages);
+
+                            $("#checkingSuperAdminAccess").prop("checked", false);
+                            $("#checkingSuperAdminBlog").prop("checked", false);
+                            $("#checkingAdminAccess").prop("checked", false);
+
+                            setTimeout(() => {
+                                $("#success_messages").fadeOut();
+                            }, 3000);
+                        }, 3000);
+                    } 
+                }
+            });
+        });
+       
     });
 </script>

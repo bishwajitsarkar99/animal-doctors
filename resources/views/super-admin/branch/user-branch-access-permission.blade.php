@@ -35,7 +35,7 @@
             </div>
             <div class="row">
                 <div class="col-xl-12 action_message">
-                <p class="ps-1 mt-2"><span id="success_message"></span></p>
+                    <p class="mt-2 pb-1"><span id="success_messages"></span></p>
                 </div>
             </div>
         </form>
