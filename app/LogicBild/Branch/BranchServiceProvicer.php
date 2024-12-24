@@ -8,6 +8,7 @@ use App\Models\Branch\District;
 use App\Models\Branch\ThanaOrUpazila;
 use App\Models\Branch\Branch;
 use App\Models\Branch\UserBranchAccessPermission;
+use App\Models\Branch\BranchCategory;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
@@ -62,6 +63,124 @@ class BranchServiceProvicer
         
         return response()->json([
             'upazila_range' => $upazila_range
+        ]);
+    }
+
+    /**
+     * Handle create branch Type.
+    */
+    public function createBranchType(Request $request)
+    {
+        $validators = validator::make($request->all(),[
+            'branch_category_name' => 'required|unique:branch_categories',
+        ],[
+            'branch_category_name.required' => 'Branch category name is reqired.',
+            'branch_category_name.unique' => 'Branch category name has already taken.',
+        ]);
+        if($validators->fails()){
+            return response()->json([
+                'status' => 400,
+                'errors' => $validators->messages(),
+            ]);
+        }else{
+            // Retrieve authenticated user
+            $auth = Auth::user();
+
+            // Create a new branch
+            $branch_categories = new BranchCategory;
+            $branch_categories->branch_category_name = $request->input('branch_category_name');
+            $branch_categories->creator = $auth->id;
+
+
+            $branch_categories->save();
+            return response()->json([
+                'status' => 200,
+                'messages' => 'Branch category has created successfully.'
+            ]);
+        }
+    }
+
+    /**
+     * Handle search branch Type.
+    */
+    public function searchBranchTypes(Request $request)
+    {
+        $branch_categories = BranchCategory::orderBy('id', 'desc')->get();
+        return response()->json([
+            'branch_categories' => $branch_categories,
+        ],200);
+    }
+
+    /**
+     * Handle edit branch Type.
+    */
+    public function editBranchTypes($id)
+    {
+        $branch_categories = BranchCategory::where('branch_category_name', $id)->first();
+        if($branch_categories){
+            return response()->json([
+                'status' => 200,
+                'messages' => $branch_categories,
+            ]);
+        }else{
+
+            return response()->json([
+                'status' => 404,
+                'messages' => 'The branch category is no found.',
+            ]);
+        }
+    }
+
+    /**
+     * Handle update branch Type.
+    */
+    public function updateBranchTypes(Request $request, $id)
+    {
+        $validators = validator::make($request->all(),[
+            'branch_category_name' => 'required|unique:branch_categories',
+        ],[
+            'branch_category_name.required' => 'Branch category name is reqired.',
+            'branch_category_name.unique' => 'Branch category name has already taken.',
+        ]);
+        if($validators->fails()){
+            return response()->json([
+                'status' => 400,
+                'errors' => $validators->messages(),
+            ]);
+        }else{
+            // Retrieve authenticated user
+            $auth = Auth::user();
+
+            // Create a new branch
+            $branch_categories = BranchCategory::where('branch_category_name', $id)->first();
+            if($branch_categories){
+                $branch_categories->branch_category_name = $request->input('branch_category_name');
+                $branch_categories->updator = $auth->id;
+
+                $branch_categories->save();
+                return response()->json([
+                    'status' => 200,
+                    'messages' => 'Branch category has updated successfully.'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => 404,
+                    'messages' => 'Branch category name is no found.'
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Handle delete branch Type.
+    */
+    public function deleteBranchTypes($id)
+    {
+        $branch_categories = BranchCategory::where('branch_category_name', $id)->first();
+        $branch_categories->delete();
+        return response()->json([
+            'status' => 200,
+            'messages' => 'The branch category has deleted successfully.'
         ]);
     }
 

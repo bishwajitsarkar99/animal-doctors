@@ -39,6 +39,36 @@ class BranchController extends Controller
         return $this->branchServiceProvider->fetchUpazila($request, $selectedDistrict);
     }
 
+    // Create Branch Type
+    public function branchTypeStore(Request $request)
+    {
+        return $this->branchServiceProvider->createBranchType($request);
+    }
+
+    // Search Branch Type
+    public function searchBranchType(Request $request)
+    {
+        return $this->branchServiceProvider->searchBranchTypes($request);
+    }
+
+    // Edit Branch Type
+    public function editBranchType($id)
+    {
+        return $this->branchServiceProvider->editBranchTypes($id);
+    }
+
+    // Update Branch Type
+    public function updateBranchType(Request $request, $id)
+    {
+        return $this->branchServiceProvider->updateBranchTypes($request, $id);
+    }
+
+    // Delete Branch Type
+    public function deleteBranchType($id)
+    {
+        return $this->branchServiceProvider->deleteBranchTypes($id);
+    }
+
     // Create Branch
     public function store(Request $request)
     {

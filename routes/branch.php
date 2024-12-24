@@ -11,6 +11,12 @@ Route::group(['middleware' => 'auth'], function (){
     // Branch
     Route::middleware(['role:SuperAdmin|Admin|SubAdmin'])->group(function(){
         Route::prefix('company')->group(function () {
+            // Branch Create Type
+            Route::post('/branch-type-create', [BranchController::class, 'branchTypeStore'])->name('branch_type.store');
+            Route::get('/branch-type-search', [BranchController::class, 'searchBranchType'])->name('search-branch-type.action');
+            Route::get('/branch-type-edit/{id}', [BranchController::class, 'editBranchType'])->name('edit-branch-type.action');
+            Route::put('/branch-type-update/{id}', [BranchController::class, 'updateBranchType'])->name('update_branch_type.action');
+            Route::delete('/branch-type-delete/{id}', [BranchController::class, 'deleteBranchType'])->name('branch_type.delete');
             // Branch Create
             Route::get('/branch-activity', [BranchController::class, 'index'])->name('branch.index');
             Route::post('/branch-create', [BranchController::class, 'store'])->name('branch.store');

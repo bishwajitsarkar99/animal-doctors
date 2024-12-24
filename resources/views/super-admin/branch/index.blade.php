@@ -14,6 +14,21 @@
               <form autocomplete="off">
                 @csrf
                 <div class="row">
+                  <div class="col-xl-2">
+                    <button type="button" class="btn btn-sm cgt_btn btn_focus skeleton-button" id="branchTypeModalView">
+                      <span class="icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                      <span class="btn-text">Branch Category</span>
+                    </button>
+                  </div>
+                  <div class="col-xl-2">
+                    <button type="button" class="btn btn-sm cgt_btn btn_focus skeleton-button" id="branchTypeRefresh">
+                      <span class="type-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                      <span class="type-btn-text">Refresh</span>
+                    </button>
+                  </div>
+                  <div class="col-xl-8"></div>
+                </div>
+                <div class="row">
                   <div class="col-xl-6">
                     <div class="form-group mb-1 role_nme skeleton">
                       <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Searching...</label></span>
@@ -32,9 +47,6 @@
                       <label class="catg_name_label label_position" for="mail-transport">Branch Type</label>
                       <select type="text" class="form-control form-control-sm edit_branch_type select2" name="branch_type" id="branch_type">
                         <option value="">Select Branch Type</option>
-                        <option value="Main Branch">Main Branch</option>
-                        <option value="Corporate Branch">Corporate Branch</option>
-                        <option value="Local Branch">Local Branch</option>
                       </select>
                       <span id="savForm_error2"></span><span id="updateForm_error2"></span>
                     </div>
@@ -270,6 +282,103 @@
     </div>
   </div>
   {{-- end confirm access modal --}}
+
+  <!-- ======= Branch-Type-Create-Modal ========= -->
+  {{-- start branch type create modal --}}
+  <div class="modal fade" id="branchTypeCreateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id="admin_modal_box">
+        <div class="modal-header profile_modal_header profilesetting_modal_header">
+          <h5 class="modal-title admin_title branch_type_head_title ps-1 pe-1 font-effect-emboss branch-skeleton" id="staticBackdropLabel">
+           Branch Category
+          </h5>
+          <button type="button" class="btn-close btn-btn-sm branch_type_head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+        </div>
+
+        <div class="modal-body profile-body">
+          @csrf
+          <div class="row profile-heading">
+            <div class="col-xl-12">
+              <div class="form-group mb-1 role_nme branch_select_type branch-skeleton">
+                <span class="input-label"><label class="catg_name_label label_position" for="branch-category-name">Searching...</label></span>
+                <select type="text" class="form-control form-control-sm branch_category_name select2" name="branch_category_name" id="branch_category_name">
+                  <option value="">Select Branch Category Name</option>
+                </select>
+                <input type="hidden" id="branch_category_id">
+              </div>
+            </div>
+          </div>
+          <div class="row profile-heading">
+            <div class="col-xl-12">
+              <div class="form-group branch role_nme mb-1 branch_type_name branch-skeleton">
+                <label class="catg_name_label label_position" for="mail-transport">Category Name</label>
+                <input class="form-control form-control-sm branch_input edit_branch_category_name" type="text" name="branch_category_name" id="branchTypeName" placeholder="Branch Category Name" value="" autocomplete="off"/>
+                <span id="savForm_error_branch" hidden></span><span id="updateForm_error_branch" hidden></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer profile_modal_footer action action_group">
+          <button id="branch_type_cancel" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" data-bs-dismiss="modal" hidden>
+            <span class="branch-type-cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="branch-type-cancel-btn-text">Cancel</span>
+          </button>
+          <button type="button" id="branch_type_update" class="btn btn-sm cgt_btn btn_focus skeleton-button" hidden>
+            <span class="branch-type-update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="branch-type-update-btn-text">Update</span>
+          </button>
+          <button type="button" id="branch_type_delete" class="btn btn-sm cgt_btn btn_focus skeleton-button" hidden>
+            <span class="branch-type-delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="branch-type-delete-btn-text">Delete</span>
+          </button>
+          <button type="button" class="btn btn-sm cgt_btn btn_focus branch-skeleton" id="branch_type_create" hidden>
+            <span class="branch-type-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="branch-type-btn-text">Create</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- end branch type create modal --}}
+
+  {{-- start branch type confirm delete modal --}}
+  <div class="modal fade" id="branchTypeDeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id="admin_modal_box">
+        <div class="modal-header profile_modal_header profilesetting_modal_header">
+          <h5 class="modal-title admin_title branch_type_head_delete ps-1 pe-1 font-effect-emboss branch-skeleton" id="staticBackdropLabel">
+           Branch Category [<span id="Heading"></span>]
+          </h5>
+          <button type="button" class="btn-close btn-btn-sm branch_type_head_delete_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+        </div>
+
+        <div class="modal-body profile-body">
+          @csrf
+          <input type="hidden" id="branch_delete_category_id">
+          <div class="row profile-heading">
+            <div class="col-xl-12">
+              <div class="form-group branch role_nme mb-1 branch_category_name branch-skeleton">
+                <label class="catg_name_label label_position" for="mail-transport">
+                  Would you like to delete <span id="delete_label"></span>, confirm or cancel ? 
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer profile_modal_footer action action_group">
+          <button id="branch_type_delete_cancel" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" data-bs-dismiss="modal">
+            <span class="branch-type-confirm-cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="branch-type-confirm-cancel-btn-text">Cancel</span>
+          </button>
+          <button type="button" class="btn btn-sm cgt_btn btn_focus branch-skeleton" id="branch_type_delete_confirm">
+            <span class="branch-type-confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="branch-type-confirm-btn-text">Confirm</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- end branch type confirm delete modal --}}
 @endsection
 
 @section('css')

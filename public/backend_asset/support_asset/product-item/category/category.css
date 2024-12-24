@@ -162,7 +162,7 @@ button.btn.btn-sm.cgt_btn {
     border-radius: 3px;
     height: 2.1em;
     font-size: 12px;
-    font-variant: all-petite-caps;
+    text-transform: capitalize;
     letter-spacing: 0.5px;
     font-weight: 600;
     transition: border-color 0.3s ease, background-color 0.3s ease;
@@ -183,7 +183,7 @@ button.btn.btn-sm.cgt_cancel_btn{
     border-radius: 3px;
     height: 2.1em;
     font-size: 12px;
-    font-variant: all-petite-caps;
+    text-transform: capitalize;
     letter-spacing: 0.5px;
     font-weight: 600;
     transition: border-color 0.3s ease, background-color 0.3s ease;
