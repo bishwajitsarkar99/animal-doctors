@@ -315,7 +315,7 @@ class BranchServiceProvicer
     */
     public function editBranchs($id)
     {
-        $branch = Branch::with(['created_users', 'updated_users', 'approver_users'])->find($id);
+        $branch = Branch::with(['created_users', 'updated_users'])->find($id);
         if($branch){
             return response()->json([
                 'status' => 200,
@@ -430,6 +430,34 @@ class BranchServiceProvicer
     }
 
     /**
+     * Handle branch user email fetch.
+    */
+    public function branchFetchUserEmail(Request $request, $id)
+    {
+        $auth = Auth::user();
+    
+        if ($auth->role == 1) {
+
+            $branch_user = Branch::with('user_emails')->find($id);
+    
+            if ($branch_user && $branch_user->user_emails) {
+
+                return response()->json([
+                    'branch_user' => [
+                        'id' => $branch_user->user_emails->id,
+                        'user_email_id' => $branch_user->user_emails->email,
+                    ],
+                    'branch_id' => $branch_user->branch_id,
+                ], 200);
+            }
+        }
+    
+        return response()->json([
+            'message' => 'No emails found or unauthorized access.',
+        ], 404);
+    }
+
+    /**
      * Handle branch name query or search for admin access.
     */
     public function branchSearchNames(Request $request, $id)
@@ -442,12 +470,10 @@ class BranchServiceProvicer
                 'divisions', 
                 'districts', 
                 'thana_or_upazilas',
-                'admin_email_users',
-                'sub_admin_email_users',
-                'admin_roles',
-                'sub_admin_roles',
+                'user_roles',
+                'user_emails',
             ]
-        )->find($id);
+        )->where('user_email_id', $id)->first();
         if($branch){
             return response()->json([
                 'status' => 200,
@@ -470,12 +496,13 @@ class BranchServiceProvicer
         // Validation
         $validator = Validator::make($request->all(), [
             'branch_id' => 'required',
-            'admin_role_id' => 'nullable|exists:roles,id',
-            'sub_admin_role_id' => 'nullable|exists:roles,id',
-            'admin_email_id' => 'nullable|exists:users,id',
-            'sub_admin_email_id' => 'nullable|exists:users,id',
+            'user_role_id' => 'required|exists:roles,id',
+            'user_email_id' => 'required|unique:branches',
         ], [
             'branch_id.required' => 'Branch name is required',
+            'user_role_id.required' => 'Branch user role is required',
+            'user_email_id.required' => 'Branch user email is required',
+            'user_email_id.unique' => 'This email has already taken.',
         ]);
 
         if ($validator->fails()) {
@@ -497,30 +524,31 @@ class BranchServiceProvicer
         }
 
         $branch->branch_id = $request->branch_id;
-        $branch->admin_role_id = $request->admin_role_id;
-        $branch->sub_admin_role_id = $request->sub_admin_role_id;
-        $branch->admin_email_id = $request->admin_email_id;
-        $branch->sub_admin_email_id = $request->sub_admin_email_id;
-        $branch->admin_approval_status = $request->admin_approval_status;
-        $branch->sub_admin_approval_status = $request->sub_admin_approval_status;
+        $branch->user_role_id = $request->user_role_id;
+        $branch->user_email_id = $request->user_email_id;
+        $branch->status = $request->status;
 
-        if ($branch->admin_approval_status == 1) {
-            $branch->admin_approver_date = $approvalDate;
+        if ($branch->status == 1) {
+            $branch->approver_date = $approvalDate;
             $branch->approver_by = $auth->id;
         } else {
-            $branch->admin_approver_date = null;
-            $branch->approver_by = null;
-        }
-
-        if ($branch->sub_admin_approval_status == 1) {
-            $branch->sub_admin_approver_date = $approvalDate;
-            $branch->approver_by = $auth->id;
-        } else {
-            $branch->sub_admin_approver_date = null;
+            $branch->approver_date = null;
             $branch->approver_by = null;
         }
 
         $branch->save();
+        // Update specific user in the users table
+        // if ($request->user_email_id) {
+        //     $user = User::where('id', $request->user_email_id)->first();
+
+        //     if ($user) {
+        //         $user->branch_id = $request->branch_id;
+        //         $user->branch_type = $request->branch_type;
+        //         $user->branch_name = $request->branch_name;
+        //         $user->branch_sender_id = $auth->id;
+        //         $user->save();
+        //     }
+        // }
 
         return response()->json([
             'status' => 202,

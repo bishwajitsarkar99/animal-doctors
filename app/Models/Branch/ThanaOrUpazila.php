@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Branch\District;
 use App\Models\Branch\Branch;
+use App\Models\Branch\AdminBranchAccessPermission;
 
 class ThanaOrUpazila extends Model
 {
@@ -24,5 +25,10 @@ class ThanaOrUpazila extends Model
     public function branches()
     {
         return $this->hasMany(Branch::class, 'upazila_id');
+    }
+
+    public function admin_branch_access_permissions()
+    {
+        return $this->hasMany(AdminBranchAccessPermission::class, 'upazila_id');
     }
 }

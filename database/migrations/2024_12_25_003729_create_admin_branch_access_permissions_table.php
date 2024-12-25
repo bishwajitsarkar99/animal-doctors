@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBranchesTable extends Migration
+class CreateAdminBranchAccessPermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateBranchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('branches', function (Blueprint $table) {
+        Schema::create('admin_branch_access_permissions', function (Blueprint $table) {
             $table->id();
             $table->string('branch_id');
             $table->string('branch_type');
-            $table->string('branch_name')->unique();
+            $table->string('branch_name');
             // Foreign Keys for Divisions
             $table->unsignedBigInteger('division_id');
             $table->foreign('division_id')->references('id')->on('divisions')->onDelete('cascade');
@@ -30,12 +30,24 @@ class CreateBranchesTable extends Migration
             $table->string('town_name');
             $table->string('location');
 
+            // Foreign Keys for Roles
+            $table->unsignedBigInteger('user_role_id')->nullable();
+            $table->foreign('user_role_id')->references('id')->on('roles')->onDelete('cascade');
+            // Foreign Keys for Users
+            $table->unsignedBigInteger('user_email_id')->unique()->nullable();
+            $table->foreign('user_email_id')->references('id')->on('users')->onDelete('cascade');
+
             // Creator
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             // Updator
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
+            // Approver
+            $table->unsignedBigInteger('approver_by')->nullable();
+            $table->foreign('approver_by')->references('id')->on('users')->onDelete('cascade');
+            $table->tinyInteger('status')->default(0);
+            $table->date('approver_date')->nullable();
             $table->timestamps();
         });
     }
@@ -47,6 +59,6 @@ class CreateBranchesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('branches');
+        Schema::dropIfExists('admin_branch_access_permissions');
     }
 }

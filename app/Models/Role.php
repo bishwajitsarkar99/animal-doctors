@@ -10,6 +10,7 @@ use App\Models\Email\EmailVerification;
 use App\Models\UserEmail;
 use App\Models\UserEmailDeletePermission;
 use App\Models\Branch\Branch;
+use App\Models\Branch\AdminBranchAccessPermission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -46,5 +47,10 @@ class Role extends Model
     public function branchs()
     {
         return $this->hasMany(Branch::class);
+    }
+
+    public function admin_branch_access_permissions()
+    {
+        return $this->hasMany(AdminBranchAccessPermission::class);
     }
 }

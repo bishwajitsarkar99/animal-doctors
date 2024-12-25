@@ -21,49 +21,29 @@
                       <input type="hidden" id="branches_id">
                       <input type="hidden" name="branch_id" id="get_branch_id">
                     </div>
-                    <div class="form-group role_nme branch mb-1 skeleton">
-                      <label class="catg_name_label label_position" for="mail-transport">Select Role Play</label>
-                      <select type="text" class="form-control form-control-sm role_type select2" name="role_type" id="role_type" disabled>
-                        <option value="">Select Role Play</option>
-                        <option value="Admin Role">Coordinator</option>
-                        <option value="Sub Admin Role">Subordinator</option>
+                    <div class="form-group role_nme branch mb-1 skeleton" id="adminEmail">
+                      <label class="catg_name_label label_position" for="mail-transport">Select User Email</label><br>
+                      <select type="text" class="form-control form-control-sm select_user_email select2" name="user_email_id" id="select_user_email">
+                        <option value="">Select User Email</option>
                       </select>
                     </div>
-                    <div class="form-group role_nme branch mb-1 skeleton" id="adminRole" hidden>
+                    <div class="form-group role_nme branch mb-1 skeleton" id="adminRole">
                       <label class="catg_name_label label_position" for="mail-transport">Role Name</label><br>
-                      <select type="text" class="form-control form-control-sm admin_role_id select2" name="admin_role_id" id="select_role_one">
-                        <option value="">Select Admin Role Name</option>
+                      <select type="text" class="form-control form-control-sm user_role_id select2" name="user_role_id" id="select_role_one">
+                        <option value="">Select Role Name</option>
                       </select>
                     </div>
-                    <div class="form-group role_nme branch mb-1 skeleton" id="subAdminRole" hidden>
-                      <label class="catg_name_label label_position" for="mail-transport">Role Name</label><br>
-                      <select type="text" class="form-control form-control-sm sub_admin_role_id select2" name="sub_admin_role_id" id="select_role_two">
-                        <option value="">Select Sub Role Name</option>
-                      </select>
-                    </div>
-                    <div class="form-group role_nme branch mb-1 skeleton" id="adminEmail" hidden>
+                    <div class="form-group role_nme branch mb-1 skeleton" id="adminEmail">
                       <label class="catg_name_label label_position" for="mail-transport">Email Address</label><br>
-                      <select type="text" class="form-control form-control-sm admin_email_id select2" name="admin_email_id" id="select_email_one">
-                        <option value="">Select Admin Email Address</option>
+                      <select type="text" class="form-control form-control-sm user_email_id select2" name="user_email_id" id="select_email_one">
+                        <option value="">Select Email Address</option>
                       </select>
                     </div>
-                    <div class="form-group role_nme branch mb-1 skeleton" id="subAdminEmail" hidden>
-                      <label class="catg_name_label label_position" for="mail-transport">Email Address</label><br>
-                      <select type="text" class="form-control form-control-sm sub_admin_email_id select2" name="sub_admin_email_id" id="select_email_two">
-                        <option value="">Select Sub Admin Email Address</option>
-                      </select>
-                    </div>
-                    <div class="form-group role_nme branch mb-1 skeleton" id="adminstatus" hidden>
+                    <div class="form-group role_nme branch mb-1 skeleton" id="adminstatus">
                       <label class="catg_name_label label_position" for="status">Sataus</label>
-                      <input type="checkbox" class="admin_approval_status" name="admin_approval_status" id="admin_approval_status" value="1" />
+                      <input type="checkbox" class="admin_approval_status" name="status" id="admin_approval_status" value="1" />
                       <span class="catg_name_label label_position" for="status" id="adminSt" hidden>Justify</span>
                       <span class="catg_name_label label_position" for="status" id="adminStTwo" hidden>Deny</span>
-                    </div>
-                    <div class="form-group role_nme branch mb-1 skeleton" id="subAdminstatus" hidden>
-                      <label class="catg_name_label label_position" for="status">Sataus</label>
-                      <input type="checkbox" class="sub_admin_approval_status" name="sub_admin_approval_status" id="sub_admin_approval_status" value="1" />
-                      <label class="catg_name_label label_position" for="status" id="subAdminSt" hidden>Justify</label>
-                      <label class="catg_name_label label_position" for="status" id="subAdminStTwo" hidden>Deny</label>
                     </div>
                   </div>
                   <div class="col-xl-8">
@@ -152,7 +132,7 @@
                   </div>
                   <div class="col-xl-3">
                     <p style="text-align: end;">
-                      <button type="button" id="access_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden disabled>
+                      <button type="button" id="access_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden>
                         <span class="access-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="access-btn-text">Access</span>
                       </button>

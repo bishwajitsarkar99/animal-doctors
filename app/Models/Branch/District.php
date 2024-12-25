@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Branch\Division;
 use App\Models\Branch\ThanaOrUpazila;
 use App\Models\Branch\Branch;
+use App\Models\Branch\AdminBranchAccessPermission;
 
 class District extends Model
 {
@@ -30,5 +31,10 @@ class District extends Model
     public function branches()
     {
         return $this->hasMany(Branch::class, 'district_id', 'id');
+    }
+
+    public function admin_branch_access_permissions()
+    {
+        return $this->hasMany(AdminBranchAccessPermission::class, 'district_id', 'id');
     }
 }

@@ -243,49 +243,49 @@
                                 $("#secondContent").attr('hidden', true);
                                 $('#secondHead').attr('hidden', true);
                             }
-                            if(messages.approver_by !== null){
-                                $("#thirdContent").removeAttr('hidden');
-                                $('#thirdHead').removeAttr('hidden');
-                                const secondUserImage = messages.approver_users.image.includes('https://') ? messages.approver_users.image : `${window.location.origin}/image/${messages.approver_users.image}`;
-                                let approverByRole;
-                                switch (messages.approver_by) {
-                                    case 1:
-                                        approverByRole = 'SuperAdmin';
-                                        break;
-                                    case 2:
-                                        approverByRole = 'Sub-Admin';
-                                        break;
-                                    case 3:
-                                        approverByRole = 'Admin';
-                                        break;
-                                    case 0:
-                                        approverByRole = 'User';
-                                        break;
-                                    case 5:
-                                        approverByRole = 'Accounts';
-                                        break;
-                                    case 6:
-                                        approverByRole = 'Marketing';
-                                        break;
-                                    case 7:
-                                        approverByRole = 'Delivery Team';
-                                        break;
-                                    default:
-                                        approverByRole = 'Unknown';
-                                }
-                                $("#thirdUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
+                            // if(messages.approver_by !== null){
+                            //     $("#thirdContent").removeAttr('hidden');
+                            //     $('#thirdHead').removeAttr('hidden');
+                            //     const secondUserImage = messages.approver_users.image.includes('https://') ? messages.approver_users.image : `${window.location.origin}/image/${messages.approver_users.image}`;
+                            //     let approverByRole;
+                            //     switch (messages.approver_by) {
+                            //         case 1:
+                            //             approverByRole = 'SuperAdmin';
+                            //             break;
+                            //         case 2:
+                            //             approverByRole = 'Sub-Admin';
+                            //             break;
+                            //         case 3:
+                            //             approverByRole = 'Admin';
+                            //             break;
+                            //         case 0:
+                            //             approverByRole = 'User';
+                            //             break;
+                            //         case 5:
+                            //             approverByRole = 'Accounts';
+                            //             break;
+                            //         case 6:
+                            //             approverByRole = 'Marketing';
+                            //             break;
+                            //         case 7:
+                            //             approverByRole = 'Delivery Team';
+                            //             break;
+                            //         default:
+                            //             approverByRole = 'Unknown';
+                            //     }
+                            //     $("#thirdUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
     
-                                $("#thirdUserEmail").val(messages.approver_users.email);
-                                $("#thirdApprover").val(approverByRole);
-                                if(messages.approver_date !== null){
-                                    $("#thirdUpdateAt").val(currentDate(messages.approver_date));
-                                }else if(messages.approver_date == null){
-                                    $("#thirdUpdateAt").val('-');
-                                }
-                            }else{
-                                $("#thirdContent").attr('hidden', true);
-                                $('#thirdHead').attr('hidden', true);
-                            }
+                            //     $("#thirdUserEmail").val(messages.approver_users.email);
+                            //     $("#thirdApprover").val(approverByRole);
+                            //     if(messages.approver_date !== null){
+                            //         $("#thirdUpdateAt").val(currentDate(messages.approver_date));
+                            //     }else if(messages.approver_date == null){
+                            //         $("#thirdUpdateAt").val('-');
+                            //     }
+                            // }else{
+                            //     $("#thirdContent").attr('hidden', true);
+                            //     $('#thirdHead').attr('hidden', true);
+                            // }
     
                             $('#branches_id').val(id);
                             $('#edit_branch_id').val(response.messages.branch_id);

@@ -23,33 +23,21 @@
                     allowClear: true,
                     width: '100%'
                 });
-            }else if ($(this).attr('id') === 'role_type') {
-                $(this).select2({
-                    placeholder: 'Select Role Play',
-                    allowClear: true,
-                    width: '100%'
-                });
             }else if ($(this).attr('id') === 'select_role_one') {
                 $(this).select2({
-                    placeholder: 'Select Admin Role Name',
-                    allowClear: true,
-                    width: '100%'
-                });
-            }else if ($(this).attr('id') === 'select_role_two') {
-                $(this).select2({
-                    placeholder: 'Select Sub Role Name',
+                    placeholder: 'Select Role',
                     allowClear: true,
                     width: '100%'
                 });
             }else if ($(this).attr('id') === 'select_email_one') {
                 $(this).select2({
-                    placeholder: 'Select Admin Email Address',
+                    placeholder: 'Select User Email Address',
                     allowClear: true,
                     width: '100%'
                 });
-            }else if ($(this).attr('id') === 'select_email_two') {
+            }else if ($(this).attr('id') === 'select_user_email') {
                 $(this).select2({
-                    placeholder: 'Select Sub Admin Email Address',
+                    placeholder: 'Select User Email',
                     allowClear: true,
                     width: '100%'
                 });
@@ -65,13 +53,10 @@
         $('#select_role_one').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search role...');
         });
-        $('#select_role_two').on('select2:open', function() {
-            $('.select2-search__field').attr('placeholder', 'Search role...');
-        });
         $('#select_email_one').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search email...');
         });
-        $('#select_email_two').on('select2:open', function() {
+        $('#select_user_email').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search email...');
         });
 
@@ -165,21 +150,103 @@
                 }
             });
         }
+        // Fetch Branch User Email
+        fetch_branch_user_email();
+
+        function fetch_branch_user_email(selectID){
+            if (!selectID) {
+                return;
+            }
+
+            const currentUrl = "{{ route('branch_user_email_fetch.action', ':selectID') }}".replace(':selectID', selectID);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    $('#get_branch_id').val(response.branch_id); 
+                    const branch_user = response.branch_user;
+
+                    $("#select_user_email").empty();
+                    $("#select_user_email").append('<option value="" style="font-weight:600;">Select User Email</option>');
+                    if (branch_user) {
+                        $("#select_user_email").append(`
+                            <option style="color:white;font-weight:600;" value="${branch_user.id}">
+                                ${branch_user.user_email_id}
+                            </option>
+                        `);
+                    }
+                    
+                },
+                error: function() {
+                    $("#select_user_email").empty();
+                    $("#select_user_email").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
+                }
+            });
+        }
+
+        // Select User Email
+        $(document).on('change', '#select_branch_search', function(){
+            var selectID = $(this).val();
+            var id = selectID;
+            if(selectID == ''){
+                $('#documents').attr('hidden', true);
+                $('#select_user_email').val("").trigger('change.select2');
+                $('.user_role_id').val("").trigger('change.select2');
+                $('.user_email_id').val("").trigger('change.select2');
+                $('#access_btn').attr('hidden', true);
+                $('#cnl_btn').attr('hidden', true);
+                $("#adminSt").attr('hidden', true);
+                $("#adminStTwo").attr('hidden', true);
+                $('#admin_approval_status').prop('checked', false);
+            }else if(selectID !== ''){
+                $('#access_btn').removeAttr('hidden');
+                $('#cnl_btn').removeAttr('hidden');
+            }
+            $.ajax({
+                type: "GET",
+                url: "/company/branch-name-query/" + id,
+                success: function(response){
+                    if(response.status == 404){
+                        $('#success_message').html("");
+                        $('#success_message').addClass('alert alert-danger');
+                        $('#success_message').text(response.messages);
+                    }else if(response.status == 200){
+                        $('#branches_id').val(id);
+                        $('#get_branch_id').val(response.messages.branch_id);
+                    }
+                }
+            });
+            fetch_branch_user_email(selectID);
+        });
 
         // Search Select Dropdown
-        $(document).on('change', '#select_branch_search', function(e){
+        $(document).on('change', '#select_user_email', function(e){
             e.preventDefault();
 
             var select = $(this).val();
-
+            
             // Search ID
             var id = select;
             
             if(select == ''){
                 $('#documents').attr('hidden', true);
                 $('#branches_id').val("");
+                $('#select_branch_search').val("").trigger('change.select2');
+                $('.user_role_id').val("").trigger('change.select2');
+                $('.user_email_id').val("").trigger('change.select2');
                 $('#access_btn').attr('hidden', true);
                 $('#cnl_btn').attr('hidden', true);
+
+                $("#adminSt").attr('hidden', true);
+                $("#adminStTwo").attr('hidden', true);
+                $('#admin_approval_status').prop('checked', false);
             }
             
             $.ajax({
@@ -196,8 +263,6 @@
                         $("#access_modal_box").addClass('progress_body');
                         $("#processModal_body").addClass('loading_body_area');
                         $('#documents').attr('hidden', true);
-                        $('#access_btn').attr('hidden', true);
-                        $('#cnl_btn').attr('hidden', true);
 
                         setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
@@ -346,32 +411,20 @@
                             $('#town_name').val(response.messages.town_name);
                             $('#location').val(response.messages.location);
     
-                            $('.admin_role_id').val(response.messages.admin_role_id).trigger('change.select2');
-                            $('.sub_admin_role_id').val(response.messages.sub_admin_role_id).trigger('change.select2');
-                            fetch_user_email_one(response.messages.admin_role_id);
-                            fetch_user_email_two(response.messages.sub_admin_role_id);
+                            $('.user_role_id').val(response.messages.user_role_id).trigger('change.select2');
+                            fetch_user_email_one(response.messages.user_role_id);
                             setTimeout(() => {
-                                $('.admin_email_id').val(response.messages.admin_email_id).trigger('change.select2');
-                                $('.sub_admin_email_id').val(response.messages.sub_admin_email_id).trigger('change.select2');
+                                $('.user_email_id').val(response.messages.user_email_id).trigger('change.select2');
                             }, 500);
-                            if(response.messages.admin_approval_status == 1){
+                            if(response.messages.status == 1){
                                 $("#adminSt").removeAttr('hidden').slideDown();
                                 $("#adminStTwo").attr('hidden', true);
-                                $('#admin_approval_status').prop('checked', response.messages.admin_approval_status == 1);
+                                $('#admin_approval_status').prop('checked', response.messages.status == 1);
                             }
                             else{
                                 $("#adminSt").attr('hidden', true);
                                 $("#adminStTwo").attr('hidden', true);
                                 $('#admin_approval_status').prop('checked', false);
-                            }
-                            if(response.messages.sub_admin_approval_status == 1){
-                                $("#subAdminSt").removeAttr('hidden').slideDown();
-                                $("#subAdminStTwo").attr('hidden', true);
-                                $('#sub_admin_approval_status').prop('checked', response.messages.sub_admin_approval_status == 1);
-                            }else{
-                                $("#subAdminSt").attr('hidden', true);
-                                $("#subAdminStTwo").attr('hidden', true);
-                                $('#sub_admin_approval_status').prop('checked', false);
                             }
                             
                         }, 1500);
@@ -390,12 +443,9 @@
             var id = $("#branches_id").val();
 
             var branchID = $("#get_branch_id").val();
-            var adminRole = $("#select_role_one").val();
-            var subAdminRole = $("#select_role_two").val();
-            var adminEmail = $("#select_email_one").val();
-            var subAdminEmail = $("#select_email_two").val();
-            var adminApprovalStatus = $("input[name='admin_approval_status']:checked").val();
-            var subAdminApprovalStatus = $("input[name='sub_admin_approval_status']:checked").val();
+            var userRole = $("#select_role_one").val();
+            var userEmail = $("#select_email_one").val();
+            var approvalStatus = $("input[name='status']:checked").val();
 
             const current_url = "{{route('access_status.action')}}";
 
@@ -412,12 +462,9 @@
                 data: {
                     id: id,
                     branch_id: branchID,
-                    admin_role_id: adminRole,
-                    sub_admin_role_id: subAdminRole,
-                    admin_email_id: adminEmail,
-                    sub_admin_email_id: subAdminEmail,
-                    admin_approval_status: adminApprovalStatus ? 1 : 0,
-                    sub_admin_approval_status: subAdminApprovalStatus ? 1 : 0,
+                    user_role_id: userRole,
+                    user_email_id: userEmail,
+                    status: approvalStatus ? 1 : 0,
                 },
                 success: function(response) {
                     $("#accessconfirmbranch").modal('show');
@@ -439,12 +486,9 @@
                             $("#select_branch_search").val("").trigger('change');
                             $("#role_type").val("").trigger('change');
                             $("#select_role_one").val("").trigger('change');
-                            $("#select_role_two").val("").trigger('change');
                             $("#select_email_one").val("").trigger('change');
-                            $("#select_email_two").val("").trigger('change');
 
                             $("#admin_approval_status").prop("checked", false);
-                            $("#sub_admin_approval_status").prop("checked", false);
                             $("#adminSt").attr('hidden', true);
                             $("#adminStTwo").attr('hidden', true);
                             $("#subAdminSt").attr('hidden', true);
@@ -465,6 +509,16 @@
                         console.error(errors);
                         $.each(errors, function(key, err_value) {
                             if (key === 'branch_id') {
+                                $("#updateForm_error").fadeIn();
+                                $('#updateForm_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#updateForm_error").addClass("alert_show_errors");
+                                $('#select_branch_search').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                            }else if (key === 'user_role_id') {
+                                $("#updateForm_error").fadeIn();
+                                $('#updateForm_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#updateForm_error").addClass("alert_show_errors");
+                                $('#select_branch_search').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                            }else if (key === 'user_email_id') {
                                 $("#updateForm_error").fadeIn();
                                 $('#updateForm_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
                                 $("#updateForm_error").addClass("alert_show_errors");
