@@ -733,6 +733,28 @@ input#delete_branch_id {
 .brn_info_tb {
     border: 2px solid lightblue;
 }
+#SM_Modal_body {
+    background-color: white;
+    color: black;
+    animation-name: modal_bg;
+    animation-duration: 3s;
+    animation-delay: 1ms;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-play-state: running;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+@keyframes modal_bg {
+    0%{
+        background-image: repeating-linear-gradient(90deg, #f4f0f5, transparent 100px);
+        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    }
+    100%{
+        background-image: repeating-linear-gradient(45deg, #f4f0f5, transparent 100px);
+        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    }
+}
 .action_group{
     position: relative;
     align-items: center !important;

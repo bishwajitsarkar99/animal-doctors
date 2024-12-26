@@ -13,14 +13,14 @@
         fetch_branch_categories();
         initSelect2();
         // Initialize the button loader for the login button
-        buttonLoader('#save', '.add-icon', '.add-btn-text', 'ADD...', 'ADD', 3000);
+        buttonLoader('#save', '.add-icon', '.add-btn-text', 'Add...', 'Add', 3000);
         buttonLoader('#update_btn', '.update-icon', '.update-btn-text', 'Update...', 'Update', 1000);
         buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#access_btn', '.access-icon', '.access-btn-text', 'Access...', 'Access', 1000);
         buttonLoader('#access_btn_confirm', '.access-confirm-icon', '.access-confirm-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
         buttonLoader('#deleteLoader', '.delete-icon', '.delete-btn-text', 'Delete...', 'Delete', 1000);
-        buttonLoader('.yes_button', '.loading-yes-icon', '.btn-text', 'Yes...', 'Yes', 1000);
+        buttonLoader('.yes_button', '.loading-yes-icon', '.yes-btn-text', 'Yes...', 'Yes', 1000);
         buttonLoader('#delete_branch', '.delete-confrm-icon', '.delete-confrm-btn-text', 'Delete...', 'Delete', 1000);
         buttonLoader('#branchTypeRefresh', '.type-icon', '.type-btn-text', 'Refresh...', 'Refresh', 1000);
         buttonLoader('#branch_type_create', '.branch-type-icon', '.branch-type-btn-text', 'Create...', 'Create', 1000);
@@ -103,7 +103,12 @@
         // Search Select Dropdown
         $(document).on('change', '#select_branch', function(e){
             e.preventDefault();
-
+            $("#branch_update_modal").empty();
+            $("#branch_update_modal_heading").empty();
+            $("#delete_branch_id").empty();
+            $("#delete_branch").empty();
+            $("#delete_branch_body").empty();
+            $("#delete_confrm_branch_id").empty();
             fetch_division();
             var select = $(this).val();
 
@@ -302,6 +307,21 @@
                             });
                             $('.edit_town_name').val(response.messages.town_name);
                             $('.edit_location').val(response.messages.location);
+
+                            // Modal delete, update and confirm data get
+                            const updateBranch = $("#branch_update_modal");
+                            const updateBranchHeading = $("#branch_update_modal_heading");
+                            const deleteBranch = $("#delete_branch_id");
+                            const deleteBranchHeading = $("#delete_branch");
+                            const deleteBranchBody = $("#delete_branch_body");
+                            const deleteBranchConfirm = $("#delete_confrm_branch_id");
+                            updateBranch.append(`<span class="">${response.messages.branch_name}</span>`);
+                            updateBranchHeading.append(`<span class="">${response.messages.branch_name}</span>`);
+                            deleteBranch.append(`<span class="">${response.messages.branch_id}</span>`);
+                            deleteBranchHeading.append(`<span class="">${response.messages.branch_name}</span>`);
+                            deleteBranchBody.append(`<span class="">${response.messages.branch_name}</span>`);
+                            deleteBranchConfirm.append(`<span class="">${response.messages.branch_id}</span>`);
+
                         }, 1500);
                         
                     }
@@ -771,6 +791,7 @@
         // Branch Confirm Delete Modal Show
         $(document).on('click', '#yesButton', function(e){
             e.preventDefault();
+            $("#deletebranch").modal('hide');
             $("#deleteconfirmbranch").modal('show');
 
             var time = null;
@@ -788,6 +809,13 @@
                 clearTimeout(time);
             };
 
+        });
+
+        // Back delete modal
+        $(document).on('click', '#cate_delete3, .delete_confrm_canl', function(e){
+            e.preventDefault();
+            $("#deletebranch").modal('show');
+            $("#deleteconfirmbranch").modal('hide');
         });
 
         // Confirm Delete Branch

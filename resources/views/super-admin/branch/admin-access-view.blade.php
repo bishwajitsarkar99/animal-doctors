@@ -152,6 +152,54 @@
     </div>
   </div>
 @include('loader.action-loader')
+
+{{-- start branch admin access create modal --}}
+  <div class="modal fade" id="branchAdminAccessCreateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id="admin_modal_box">
+        <div class="modal-header profile_modal_header profilesetting_modal_header">
+          <h5 class="modal-title admin_title branch_admin_head_title ps-1 pe-1 font-effect-emboss branch-skeleton" id="staticBackdropLabel">
+           Branch [<span id="admin_acess_branch_name"></span>]
+          </h5>
+          <button type="button" class="btn-close btn-btn-sm admin_branch_type_head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+        </div>
+
+        <div class="modal-body profile-body" id="SM_Modal_body">
+          @csrf
+          <input type="hidden" id="branches_id">
+          <input type="text" id="add_branch_id">
+          <input type="hidden" id="add_branch_name">
+          <input type="hidden" id="add_branch_type">
+          <input type="hidden" id="add_division_id">
+          <input type="hidden" id="add_district_id">
+          <input type="hidden" id="add_upazila_id">
+          <input type="hidden" id="add_town_name">
+          <input type="hidden" id="add_location">
+          <div class="row profile-heading">
+            <div class="col-xl-12">
+              <div class="form-group mb-1 role_nme admin_branch_select_type branch-skeleton">
+                <label class="label_user_edit" id="cate_delete" for="id">Branch-ID : </label>
+                <label class="label_user_edit" id="cat_id"> <span id="admin_access_branch_id"></span><br></label>
+                <label class="label_user_edit" id="cate_delete2">Would you like to add admin access ?</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer profile_modal_footer action action_group">
+          <button id="branch_admin_cancel" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" data-bs-dismiss="modal">
+            <span class="branch-type-cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="branch-type-cancel-btn-text">Cancel</span>
+          </button>
+          <button type="button" class="btn btn-sm cgt_btn btn_focus branch-skeleton" id="branch_admin_access_yes">
+            <span class="branch-type-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="branch-type-btn-text">Save</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- end branch admin access create modal --}}
+
 @endsection
 
 @section('css')

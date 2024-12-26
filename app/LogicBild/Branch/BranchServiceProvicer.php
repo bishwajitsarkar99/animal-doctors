@@ -9,6 +9,7 @@ use App\Models\Branch\ThanaOrUpazila;
 use App\Models\Branch\Branch;
 use App\Models\Branch\UserBranchAccessPermission;
 use App\Models\Branch\BranchCategory;
+use App\Models\Branch\AdminBranchAccessPermission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
@@ -484,6 +485,61 @@ class BranchServiceProvicer
             return response()->json([
                 'status' => 404,
                 'messages' => 'The branch is no found.',
+            ]);
+        }
+    }
+
+    /**
+     * Handle admin branch access.
+    */
+    public function branchAdminAcessStore(Request $request)
+    {
+        $validators = validator::make($request->all(),[
+            'branch_id' => 'required',
+            'branch_type' => 'required',
+            'branch_name' => 'required',
+            'division_id' => 'required',
+            'district_id' => 'required',
+            'upazila_id' => 'required',
+            'town_name' => 'required',
+            'location' => 'required',
+        ],[
+            'branch_id.required' => 'Branch id is reqired.',
+            'branch_name.required' => 'Branch name is reqired.',
+            'branch_type.required' => 'The branch type is required.',
+            'division_id.required' => 'The branch Division is required.',
+            'district_id.required' => 'The branch District is required.',
+            'upazila_id.required' => 'The branch Upazila is required.',
+            'town_name.required' => 'The branch city is required.',
+            'location.required' => 'The branch loaction is required.',
+        ]);
+
+        if($validators->fails()){
+            return response()->json([
+                'status' => 400,
+                'errors' => $validators->messages(),
+            ]);
+        }else{
+            // Retrieve authenticated user
+            $auth = Auth::user();
+
+            // Create a new branch
+            $branch_admin_access = new AdminBranchAccessPermission;
+            $branch_admin_access->branch_id = $request->input('branch_id');
+            $branch_admin_access->branch_name = $request->input('branch_name');
+            $branch_admin_access->branch_type = $request->input('branch_type');
+            $branch_admin_access->division_id = $request->input('division_id');
+            $branch_admin_access->district_id = $request->input('district_id');
+            $branch_admin_access->upazila_id = $request->input('upazila_id');
+            $branch_admin_access->town_name = $request->input('town_name');
+            $branch_admin_access->location = $request->input('location');
+            $branch_admin_access->created_by = $auth->id;
+
+
+            $branch_admin_access->save();
+            return response()->json([
+                'status' => 200,
+                'messages' => 'Admin access has created successfully.'
             ]);
         }
     }

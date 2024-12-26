@@ -192,7 +192,23 @@
         }
 
         // Select User Email
-        $(document).on('change', '#select_branch_search', function(){
+        $(document).on('change', '#select_branch_search', function(e){
+            e.preventDefault();
+
+            $("#branchAdminAccessCreateModal").modal('show');
+            var time = null;
+            var time = setTimeout(() => {
+                // Remove skeleton classes
+                removeAttributeOrClass([
+                    { selector: '.branch_admin_head_title, .admin_branch_type_head_btn, .admin_branch_select_type', type: 'class', name: 'branch-skeleton' },
+                    { selector: '#branch_admin_cancel, #branch_admin_access_yes', type: 'class', name: 'branch-skeleton' },
+                ]);
+            }, 1000);
+
+            return () => {
+                clearTimeout(time);
+            };
+
             var selectID = $(this).val();
             var id = selectID;
             if(selectID == ''){
@@ -211,7 +227,7 @@
             }
             $.ajax({
                 type: "GET",
-                url: "/company/branch-name-query/" + id,
+                url: "/company/branch-get-data/" + id,
                 success: function(response){
                     if(response.status == 404){
                         $('#success_message').html("");
@@ -219,23 +235,34 @@
                         $('#success_message').text(response.messages);
                     }else if(response.status == 200){
                         $('#branches_id').val(id);
-                        $('#get_branch_id').val(response.messages.branch_id);
+                        $('#add_branch_id').val(response.messages.branch_id);
+                        $('#add_branch_name').val(response.messages.branch_name);
+                        $('#add_branch_type').val(response.messages.branch_type);
+                        $('#add_division_id').val(response.messages.divisions.division_name);
+                        $('#add_district_id').val(response.messages.districts.district_name);
+                        $('#add_upazila_id').val(response.messages.thana_or_upazilas.thana_or_upazila_name);
+                        $('#add_town_name').val(response.messages.town_name);
+                        $('#add_location').val(response.messages.location);
+
+                        const addBranchName = $("#admin_acess_branch_name");
+                        const addBranchId = $("#admin_access_branch_id");
+                        addBranchName.append(`<span class="">${response.messages.branch_name}</span>`);
+                        addBranchId.append(`<span class="">${response.messages.branch_id}</span>`);
                     }
                 }
             });
-            fetch_branch_user_email(selectID);
         });
 
         // Search Select Dropdown
         $(document).on('change', '#select_user_email', function(e){
             e.preventDefault();
 
-            var select = $(this).val();
+            var selectID = $(this).val();
             
             // Search ID
-            var id = select;
+            var id = selectID;
             
-            if(select == ''){
+            if(selectID == ''){
                 $('#documents').attr('hidden', true);
                 $('#branches_id').val("");
                 $('#select_branch_search').val("").trigger('change.select2');
@@ -432,6 +459,71 @@
                         
                     }
                     
+                }
+            });
+            fetch_branch_user_email(selectID);
+        });
+
+        // Add Access
+        $(document).on('click', '#branch_admin_access_yes', function(e){
+            e.preventDefault();
+
+            var branchID = $("#add_branch_id").val();
+            var branchName = $("#add_branch_name").val();
+            var branchType = $("#add_branch_type").val();
+            var branchDivision = $("#add_division_id").val();
+            var branchDistrict = $("#add_district_id").val();
+            var branchUpazila = $("#add_upazila_id").val();
+            var branchCity = $("#add_town_name").val();
+            var branchLocation = $("#add_location").val();
+
+            const current_url = "{{route('branch_access_store.action')}}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: current_url,
+                dataType: 'json',
+                data: {
+                    branch_id: branchID,
+                    branch_name: branchName,
+                    branch_type: branchType,
+                    division_id: branchDivision,
+                    district_id: branchDistrict,
+                    upazila_id: branchUpazila,
+                    town_name: branchCity,
+                    location: branchLocation,
+                },
+                success: function(response) {
+                    
+                    $("#branchAdminAccessCreateModal").modal('hide');
+                    $("#accessconfirmbranch").modal('show');
+                    $("#pageLoader").removeAttr('hidden');
+                    $("#access_modal_box").addClass('loader_area');
+                    $("#processModal_body").removeClass('loading_body_area');
+                    if (response.status === 200) {
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            $('#updateForm_error').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show ps-1 pe-1');
+                            $('#success_message').fadeIn();
+                            $("#success_message").text(response.messages).show();
+
+                            setTimeout(() => {
+                                $("#success_message").fadeOut();
+                                fetch_branch();
+                            }, 3000);
+                        }, 1500);
+                    } 
                 }
             });
         });

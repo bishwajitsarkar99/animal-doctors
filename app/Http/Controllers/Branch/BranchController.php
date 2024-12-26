@@ -123,6 +123,12 @@ class BranchController extends Controller
         return $this->branchServiceProvider->branchSearchNames($request, $id); 
     }
 
+    // Branch Admin Access Store
+    public function branchAcessStore(Request $request)
+    {
+        return $this->branchServiceProvider->branchAdminAcessStore($request);
+    }
+
     // Branch Admin Access
     public function accessBranch(Request $request)
     {

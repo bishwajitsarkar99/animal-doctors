@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function (){
             Route::delete('/branch-delete/{id}', [BranchController::class, 'deleteBranch'])->name('branch.delete');
             // Branch Admin Access
             Route::get('/branch-admin-access', [BranchController::class, 'branchAccessView'])->name('branch_access.view');
+            Route::post('/branch-admin-permission-store', [BranchController::class, 'branchAcessStore'])->name('branch_access_store.action');
             Route::post('/branch-admin-permission', [BranchController::class, 'accessBranch'])->name('access_status.action');
             // Brach User Access Permission
             Route::get('/branch-user-access', [BranchController::class, 'branchAccessUserPermission'])->name('branch_access_permission.view');
