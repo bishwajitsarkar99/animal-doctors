@@ -26,6 +26,7 @@ class CreateSuppliersTable extends Migration
             $table->string('whatsapp_number')->nullable()->unique();
             $table->string('email')->nullable()->unique();
             $table->tinyInteger('supplier_status')->default('1');
+            $table->string('branch_id')->nullable();
             $table->timestamps();
         });
     }

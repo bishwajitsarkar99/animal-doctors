@@ -25,6 +25,7 @@ class CreateInventoryPermissionsTable extends Migration
             $table->longText('issue_name');
             $table->boolean('permission_status')->nullable();
             $table->unsignedBigInteger('approved_by')->default(1);
+            $table->string('branch_id')->nullable();
             $table->timestamps();
         });
     }

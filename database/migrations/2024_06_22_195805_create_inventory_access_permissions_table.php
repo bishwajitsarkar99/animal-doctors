@@ -22,6 +22,7 @@ class CreateInventoryAccessPermissionsTable extends Migration
             $table->unique(['emails_id']);
             $table->tinyInteger('permission_status')->default('0');
             $table->tinyInteger('data_export_status')->default('0');
+            $table->string('branch_id')->nullable();
             $table->timestamps();
         });
     }

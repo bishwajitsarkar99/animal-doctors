@@ -33,6 +33,7 @@ class CreateSupplierPermissionsTable extends Migration
             $table->tinyInteger('supplier_searching_status')->default('0');
             $table->unsignedBigInteger('approved_by')->default(1);
             $table->unsignedBigInteger('update_by')->nullable();
+            $table->string('branch_id')->nullable();
             $table->timestamps();
         });
     }

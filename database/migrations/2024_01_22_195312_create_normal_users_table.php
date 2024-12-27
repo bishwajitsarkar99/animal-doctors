@@ -21,6 +21,7 @@ class CreateNormalUsersTable extends Migration
             $table->string('password');
             $table->tinyInteger('status')->default('1');
             $table->rememberToken();
+            $table->string('branch_id')->nullable();
             $table->timestamps();
         });
     }

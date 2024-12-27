@@ -18,9 +18,9 @@ class AdminBranchAccessPermission extends Model
         'branch_id',
         'branch_type',
         'branch_name',
-        'division_id',
-        'district_id',
-        'upazila_id',
+        'division_name',
+        'district_name',
+        'upazila_name',
         'town_name',
         'location',
         'user_role_id',
@@ -32,20 +32,20 @@ class AdminBranchAccessPermission extends Model
         'approver_date',
     ];
 
-    public function divisions()
-    {
-        return $this->belongsTo(Division::class, 'division_id', 'id');
-    }
+    // public function divisions()
+    // {
+    //     return $this->belongsTo(Division::class, 'division_id', 'id');
+    // }
 
-    public function districts()
-    {
-        return $this->belongsTo(District::class, 'district_id', 'id');
-    }
+    // public function districts()
+    // {
+    //     return $this->belongsTo(District::class, 'district_id', 'id');
+    // }
 
-    public function thana_or_upazilas()
-    {
-        return $this->belongsTo(ThanaOrUpazila::class, 'upazila_id', 'id');
-    }
+    // public function thana_or_upazilas()
+    // {
+    //     return $this->belongsTo(ThanaOrUpazila::class, 'upazila_id', 'id');
+    // }
 
     public function created_users() {
         return $this->belongsTo(User::class, 'created_by', 'id');

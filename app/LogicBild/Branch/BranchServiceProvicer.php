@@ -316,7 +316,12 @@ class BranchServiceProvicer
     */
     public function editBranchs($id)
     {
-        $branch = Branch::with(['created_users', 'updated_users'])->find($id);
+        $branch = Branch::with(
+            [
+                'created_users', 
+                'updated_users',
+            ]
+        )->find($id);
         if($branch){
             return response()->json([
                 'status' => 200,

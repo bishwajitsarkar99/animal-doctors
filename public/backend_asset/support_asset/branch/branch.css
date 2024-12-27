@@ -870,6 +870,16 @@ label#subAdminStTwo {
     color: orangered;
     font-weight: 600;
 }
+input#add_branch_id,input#add_district_id,input#add_branch_name,input#add_upazila_id,input#add_branch_type,input#add_town_name,
+input#add_division_id,input#add_location {
+    box-shadow: none;
+    border: 1px solid #d1d1d1b5;
+}
+input#add_branch_id:focus,input#add_district_id:focus,input#add_branch_name:focus,input#add_upazila_id:focus,input#add_branch_type:focus,input#add_town_name:focus,
+input#add_division_id:focus,input#add_location:focus {
+    box-shadow: none;
+    border: 1px solid #86b7fe;
+}
 /* user-access-permission */
 .card-body.user_access_branch_form {
     background-image: radial-gradient(farthest-corner at 100px 100px, #fff,#fff);

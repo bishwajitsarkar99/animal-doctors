@@ -191,43 +191,30 @@
             });
         }
 
-        // Select User Email
+        // Sarch branch name for add access
         $(document).on('change', '#select_branch_search', function(e){
             e.preventDefault();
-
-            $("#branchAdminAccessCreateModal").modal('show');
-            var time = null;
-            var time = setTimeout(() => {
-                // Remove skeleton classes
-                removeAttributeOrClass([
-                    { selector: '.branch_admin_head_title, .admin_branch_type_head_btn, .admin_branch_select_type', type: 'class', name: 'branch-skeleton' },
-                    { selector: '#branch_admin_cancel, #branch_admin_access_yes', type: 'class', name: 'branch-skeleton' },
-                ]);
-            }, 1000);
-
-            return () => {
-                clearTimeout(time);
-            };
 
             var selectID = $(this).val();
             var id = selectID;
             if(selectID == ''){
-                $('#documents').attr('hidden', true);
+                $('#add_documents').attr('hidden', true);
+                $('#branch_admin_access_store').attr('hidden', true);
                 $('#select_user_email').val("").trigger('change.select2');
                 $('.user_role_id').val("").trigger('change.select2');
                 $('.user_email_id').val("").trigger('change.select2');
-                $('#access_btn').attr('hidden', true);
                 $('#cnl_btn').attr('hidden', true);
                 $("#adminSt").attr('hidden', true);
                 $("#adminStTwo").attr('hidden', true);
                 $('#admin_approval_status').prop('checked', false);
             }else if(selectID !== ''){
-                $('#access_btn').removeAttr('hidden');
+                $('#add_documents').removeAttr('hidden');
+                $('#branch_admin_access_store').removeAttr('hidden');
                 $('#cnl_btn').removeAttr('hidden');
             }
             $.ajax({
                 type: "GET",
-                url: "/company/branch-get-data/" + id,
+                url: "/company/branch-edit/" + id,
                 success: function(response){
                     if(response.status == 404){
                         $('#success_message').html("");
@@ -235,25 +222,20 @@
                         $('#success_message').text(response.messages);
                     }else if(response.status == 200){
                         $('#branches_id').val(id);
-                        $('#add_branch_id').val(response.messages.branch_id);
-                        $('#add_branch_name').val(response.messages.branch_name);
-                        $('#add_branch_type').val(response.messages.branch_type);
-                        $('#add_division_id').val(response.messages.divisions.division_name);
-                        $('#add_district_id').val(response.messages.districts.district_name);
-                        $('#add_upazila_id').val(response.messages.thana_or_upazilas.thana_or_upazila_name);
-                        $('#add_town_name').val(response.messages.town_name);
-                        $('#add_location').val(response.messages.location);
-
-                        const addBranchName = $("#admin_acess_branch_name");
-                        const addBranchId = $("#admin_access_branch_id");
-                        addBranchName.append(`<span class="">${response.messages.branch_name}</span>`);
-                        addBranchId.append(`<span class="">${response.messages.branch_id}</span>`);
+                        $('.add_branch_id').val(response.messages.branch_id);
+                        $('.add_branch_name').val(response.messages.branch_name);
+                        $('.add_branch_type').val(response.messages.branch_type);
+                        $('.add_division_id').val(response.messages.divisions.division_name);
+                        $('.add_district_id').val(response.messages.districts.district_name);
+                        $('.add_upazila_id').val(response.messages.thana_or_upazilas.thana_or_upazila_name);
+                        $('.add_town_name').val(response.messages.town_name);
+                        $('.add_location').val(response.messages.location);
                     }
                 }
             });
         });
 
-        // Search Select Dropdown
+        // Search Select User Email
         $(document).on('change', '#select_user_email', function(e){
             e.preventDefault();
 
@@ -270,10 +252,22 @@
                 $('.user_email_id').val("").trigger('change.select2');
                 $('#access_btn').attr('hidden', true);
                 $('#cnl_btn').attr('hidden', true);
+                $('#admin_role').attr('hidden', true);
+                $('#admin_email').attr('hidden', true);
+                $('#adminstatus').attr('hidden', true);
 
                 $("#adminSt").attr('hidden', true);
                 $("#adminStTwo").attr('hidden', true);
                 $('#admin_approval_status').prop('checked', false);
+            }else if(selectID !== ''){
+                $('#add_documents').removeAttr('hidden');
+                $('#branch_admin_access_store').removeAttr('hidden');
+                $('#cnl_btn').removeAttr('hidden');
+                $('#admin_role').removeAttr('hidden');
+                $('#admin_email').removeAttr('hidden');
+                $('#adminstatus').removeAttr('hidden');
+                $('#admin_role').removeAttr('hidden');
+                $('#admin_email').removeAttr('hidden');
             }
             
             $.ajax({
@@ -465,7 +459,7 @@
         });
 
         // Add Access
-        $(document).on('click', '#branch_admin_access_yes', function(e){
+        $(document).on('click', '#branch_admin_access_store', function(e){
             e.preventDefault();
 
             var branchID = $("#add_branch_id").val();
@@ -500,13 +494,65 @@
                     location: branchLocation,
                 },
                 success: function(response) {
-                    
-                    $("#branchAdminAccessCreateModal").modal('hide');
-                    $("#accessconfirmbranch").modal('show');
-                    $("#pageLoader").removeAttr('hidden');
-                    $("#access_modal_box").addClass('loader_area');
-                    $("#processModal_body").removeClass('loading_body_area');
-                    if (response.status === 200) {
+                    if(response.status == 400){
+                        $.each(response.errors, function(key, err_value){
+                            if (key === 'branch_id') {
+                                $("#savForm_branch_error").fadeIn();
+                                $('#savForm_branch_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_branch_error").addClass("alert_show_errors");
+                                $('#add_branch_id').addClass('is-invalid');
+                                $('#add_branch_id').html("");
+                            }else if (key === 'branch_name') {
+                                $("#savForm_branch_error2").fadeIn();
+                                $('#savForm_branch_error2').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_branch_error2").addClass("alert_show_errors");
+                                $('#add_branch_name').addClass('is-invalid');
+                                $('#add_branch_name').html("");
+                            } else if (key === 'branch_type') {
+                                $("#savForm_branch_error3").fadeIn();
+                                $('#savForm_branch_error3').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_branch_error3").addClass("alert_show_errors");
+                                $('#add_branch_type').addClass('is-invalid');
+                                $('#add_branch_type').html("");
+                            } else if (key === 'division_id') {
+                                $("#savForm_branch_error4").fadeIn();
+                                $('#savForm_branch_error4').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_branch_error4").addClass("alert_show_errors");
+                                $('#add_division_id').addClass('is-invalid');
+                                $('#add_division_id').html("");
+                            } else if (key === 'district_id') {
+                                $("#savForm_branch_error5").fadeIn();
+                                $('#savForm_branch_error5').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_branch_error5").addClass("alert_show_errors");
+                                $('#add_district_id').addClass('is-invalid');
+                                $('#add_district_id').html("");
+                            } else if (key === 'upazila_id') {
+                                $("#savForm_branch_error6").fadeIn();
+                                $('#savForm_branch_error6').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_branch_error6").addClass("alert_show_errors");
+                                $('#add_upazila_id').addClass('is-invalid');
+                                $('#add_upazila_id').html("");
+                            } else if (key === 'town_name') {
+                                $("#savForm_branch_error7").fadeIn();
+                                $('#savForm_branch_error7').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_branch_error7").addClass("alert_show_errors");
+                                $('#add_town_name').addClass('is-invalid');
+                                $('#add_town_name').html("");
+                            } else if (key === 'location') {
+                                $("#savForm_branch_error8").fadeIn();
+                                $('#savForm_branch_error8').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#savForm_branch_error8").addClass("alert_show_errors");
+                                $('#add_location').addClass('is-invalid');
+                                $('#add_location').html("");
+                            }
+                        });
+                    }else if(response.status == 200){
+                        $("#branchAdminAccessCreateModal").modal('hide');
+                        $("#accessconfirmbranch").modal('show');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+
                         setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
                             $("#pageLoader").attr('hidden', true);
@@ -517,16 +563,29 @@
                             $('#success_message').addClass('alert_show ps-1 pe-1');
                             $('#success_message').fadeIn();
                             $("#success_message").text(response.messages).show();
-
+                            inputClear();
                             setTimeout(() => {
                                 $("#success_message").fadeOut();
+                                $('#add_documents').attr('hidden', true);
                                 fetch_branch();
                             }, 3000);
                         }, 1500);
-                    } 
+                    }
                 }
             });
         });
+
+        // Clear input field
+        function inputClear(){
+            $('#add_branch_id').val("");
+            $('#add_branch_name').val("");
+            $('#add_branch_type').val("");
+            $('#add_division_id').val("");
+            $('#add_district_id').val("");
+            $('#add_upazila_id').val("");
+            $('#add_town_name').val("");
+            $('#add_location').val("");
+        }
 
         // Admin Branch Access
         $(document).on('click', '#access_btn', function(e){

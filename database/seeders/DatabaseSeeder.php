@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
         
         // setting([
         //     // Profile---------
@@ -423,7 +422,6 @@ class DatabaseSeeder extends Seeder
 
         // ]);
 
-        // $this->call(DemoSeeder::class);
         // $this->call(FooterContentSeeder::class);
         // $this->call(NewsSeeder::class);
         // $this->call(LogoSeeder::class);

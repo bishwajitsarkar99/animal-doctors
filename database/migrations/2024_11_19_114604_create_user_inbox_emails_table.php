@@ -27,6 +27,7 @@ class CreateUserInboxEmailsTable extends Migration
             $table->tinyInteger('status')->nullable();
             $table->tinyInteger('read_mail')->nullable();
             $table->tinyInteger('draft_mail')->nullable();
+            $table->string('branch_id')->nullable();
             $table->timestamps();
         });
     }

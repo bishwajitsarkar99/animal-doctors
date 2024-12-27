@@ -45,6 +45,7 @@ class CreateInventoriesTable extends Migration
             $table->integer('updated_by')->nullable();
             $table->string('permission_token')->nullable();
             $table->integer('approved_by')->nullable();
+            $table->string('branch_id')->nullable();
             $table->timestamps();
         });
     }

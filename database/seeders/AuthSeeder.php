@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Database\Seeders\Demo\UsersTableSeeder;
+use Database\Seeders\RoleSeeder;
 
-class DemoSeeder extends Seeder
+class AuthSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,6 @@ class DemoSeeder extends Seeder
      */
     public function run()
     {
-        
-        $this->call(UsersTableSeeder::class);
+        $this->call(RoleSeeder::class);
     }
 }

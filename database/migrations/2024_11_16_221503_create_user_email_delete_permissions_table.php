@@ -28,6 +28,7 @@ class CreateUserEmailDeletePermissionsTable extends Migration
             $table->tinyInteger('report_email_forward_sendbox')->default('0');
             $table->tinyInteger('report_status_sendbox')->default('0');
             $table->tinyInteger('email_service')->default('0');
+            $table->string('branch_id')->nullable();
             $table->timestamps();
         });
     }

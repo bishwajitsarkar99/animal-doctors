@@ -13,7 +13,7 @@
                 <div class="row">
                   <div class="col-xl-4">
                     <div class="form-group mb-1 role_nme skeleton">
-                      <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Select Branch</label></span>
+                      <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Search Branch....</label></span>
                       <select type="text" class="form-control form-control-sm select_branch_search select2" name="branch_name" id="select_branch_search">
                         <option value="">Select Company Branch Name</option>
                       </select>
@@ -22,24 +22,24 @@
                       <input type="hidden" name="branch_id" id="get_branch_id">
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton" id="adminEmail">
-                      <label class="catg_name_label label_position" for="mail-transport">Select User Email</label><br>
+                      <label class="catg_name_label label_position" for="mail-transport">Search User Email....</label><br>
                       <select type="text" class="form-control form-control-sm select_user_email select2" name="user_email_id" id="select_user_email">
                         <option value="">Select User Email</option>
                       </select>
                     </div>
-                    <div class="form-group role_nme branch mb-1 skeleton" id="adminRole">
+                    <div class="form-group role_nme branch mb-1 skeleton" id="admin_role" hidden>
                       <label class="catg_name_label label_position" for="mail-transport">Role Name</label><br>
                       <select type="text" class="form-control form-control-sm user_role_id select2" name="user_role_id" id="select_role_one">
                         <option value="">Select Role Name</option>
                       </select>
                     </div>
-                    <div class="form-group role_nme branch mb-1 skeleton" id="adminEmail">
+                    <div class="form-group role_nme branch mb-1 skeleton" id="admin_email" hidden>
                       <label class="catg_name_label label_position" for="mail-transport">Email Address</label><br>
                       <select type="text" class="form-control form-control-sm user_email_id select2" name="user_email_id" id="select_email_one">
                         <option value="">Select Email Address</option>
                       </select>
                     </div>
-                    <div class="form-group role_nme branch mb-1 skeleton" id="adminstatus">
+                    <div class="form-group role_nme branch mb-1 skeleton" id="adminstatus" hidden>
                       <label class="catg_name_label label_position" for="status">Sataus</label>
                       <input type="checkbox" class="admin_approval_status" name="status" id="admin_approval_status" value="1" />
                       <span class="catg_name_label label_position" for="status" id="adminSt" hidden>Justify</span>
@@ -124,6 +124,56 @@
                         </div>
                       </div>
                     </div>
+                    <div class="card card-body branch_info_card" id="add_documents" hidden>
+                      <div class="row">
+                        <div class="col-xl-5">
+                          <label class="catg_name_label label_position" for="branch-id">Branch-ID</label>
+                          <input class="form-control form-control-sm branch_input add_branch_id" type="text" name="branch_id" id="add_branch_id" placeholder="Branch ID" value=""/>
+                          <span id="savForm_branch_error" hidden></span><span id="updateForm_branch_error" hidden></span>
+                        </div>
+                        <div class="col-xl-7">
+                          <label class="catg_name_label label_position" for="district-name">District-Name</label>
+                          <input class="form-control form-control-sm branch_input add_district_id" type="text" name="district_name" id="add_district_id" placeholder="District Name" value=""/>
+                          <span id="savForm_branch_error2" hidden></span><span id="updateForm_branch_error2" hidden></span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xl-5">
+                          <label class="catg_name_label label_position" for="branch-name">Branch-Name</label>
+                          <input class="form-control form-control-sm branch_input add_branch_name" type="text" name="branch_name" id="add_branch_name" placeholder="Branch Name" value=""/>
+                          <span id="savForm_branch_error3" hidden></span><span id="updateForm_branch_error3" hidden></span>
+                        </div>
+                        <div class="col-xl-7">
+                          <label class="catg_name_label label_position" for="upazila-or-thana">Upazila/Thana</label>
+                          <input class="form-control form-control-sm branch_input add_upazila_id" type="text" name="upazila_name" id="add_upazila_id" placeholder="Upazila Name" value=""/>
+                          <span id="savForm_branch_error4" hidden></span><span id="updateForm_branch_error4" hidden></span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xl-5">
+                          <label class="catg_name_label label_position" for="branch-type">Branch-Type</label>
+                          <input class="form-control form-control-sm branch_input add_branch_type" type="text" name="branch_type" id="add_branch_type" placeholder="Branch Type" value=""/>
+                          <span id="savForm_branch_error5" hidden></span><span id="updateForm_branch_error5" hidden></span>
+                        </div>
+                        <div class="col-xl-7">
+                          <label class="catg_name_label label_position" for="city-name">City-Name</label>
+                          <input class="form-control form-control-sm branch_input add_town_name" type="text" name="town_name" id="add_town_name" placeholder="City Name" value=""/>
+                          <span id="savForm_branch_error6" hidden></span><span id="updateForm_branch_error6" hidden></span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xl-5">
+                          <label class="catg_name_label label_position" for="division-name">Division-Name</label>
+                          <input class="form-control form-control-sm branch_input add_division_id" type="text" name="division_name" id="add_division_id" placeholder="Division Name" value=""/>
+                          <span id="savForm_branch_error7" hidden></span><span id="updateForm_branch_error7" hidden></span>
+                        </div>
+                        <div class="col-xl-7">
+                          <label class="catg_name_label label_position" for="location-name">Location</label>
+                          <input class="form-control form-control-sm branch_input add_location" type="text" name="location" id="add_location" placeholder="Location Name" value=""/>
+                          <span id="savForm_branch_error8" hidden></span><span id="updateForm_branch_error8" hidden></span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="row">
@@ -135,6 +185,10 @@
                       <button type="button" id="access_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden>
                         <span class="access-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="access-btn-text">Access</span>
+                      </button>
+                      <button type="button" id="branch_admin_access_store" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden>
+                        <span class="access-store-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                        <span class="access-store-btn-text">Save</span>
                       </button>
                       <button id="cnl_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton-button mt-2" hidden>
                         <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
@@ -152,54 +206,6 @@
     </div>
   </div>
 @include('loader.action-loader')
-
-{{-- start branch admin access create modal --}}
-  <div class="modal fade" id="branchAdminAccessCreateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content" id="admin_modal_box">
-        <div class="modal-header profile_modal_header profilesetting_modal_header">
-          <h5 class="modal-title admin_title branch_admin_head_title ps-1 pe-1 font-effect-emboss branch-skeleton" id="staticBackdropLabel">
-           Branch [<span id="admin_acess_branch_name"></span>]
-          </h5>
-          <button type="button" class="btn-close btn-btn-sm admin_branch_type_head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
-        </div>
-
-        <div class="modal-body profile-body" id="SM_Modal_body">
-          @csrf
-          <input type="hidden" id="branches_id">
-          <input type="text" id="add_branch_id">
-          <input type="hidden" id="add_branch_name">
-          <input type="hidden" id="add_branch_type">
-          <input type="hidden" id="add_division_id">
-          <input type="hidden" id="add_district_id">
-          <input type="hidden" id="add_upazila_id">
-          <input type="hidden" id="add_town_name">
-          <input type="hidden" id="add_location">
-          <div class="row profile-heading">
-            <div class="col-xl-12">
-              <div class="form-group mb-1 role_nme admin_branch_select_type branch-skeleton">
-                <label class="label_user_edit" id="cate_delete" for="id">Branch-ID : </label>
-                <label class="label_user_edit" id="cat_id"> <span id="admin_access_branch_id"></span><br></label>
-                <label class="label_user_edit" id="cate_delete2">Would you like to add admin access ?</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer profile_modal_footer action action_group">
-          <button id="branch_admin_cancel" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" data-bs-dismiss="modal">
-            <span class="branch-type-cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-            <span class="branch-type-cancel-btn-text">Cancel</span>
-          </button>
-          <button type="button" class="btn btn-sm cgt_btn btn_focus branch-skeleton" id="branch_admin_access_yes">
-            <span class="branch-type-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-            <span class="branch-type-btn-text">Save</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  {{-- end branch admin access create modal --}}
-
 @endsection
 
 @section('css')
