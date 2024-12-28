@@ -62,6 +62,8 @@
     @include('backend.layouts.handler-js._footer-js')
     @include('backend.layouts.layouts-components.file-manager._file_manager')
     @include('loader.action-loader');
+    @include('permission.permission-templete-index');
+    @include('permission.ajax.permission-ajax');
 
     @yield('script')
     @stack('scripts')

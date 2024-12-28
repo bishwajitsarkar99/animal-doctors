@@ -62,7 +62,8 @@
 
 <!-- ================ Admin Panel(Components-min-css) Custom Css file ================= -->
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/components-css/all-components-min.css">
-
+<!-- ================ Admin Panel(Permission-templete-min-css) Custom Css file ================= -->
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/permission/user-permission/permission.css">
 <!-- ================ Admin Panel Side-bar ================= -->
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/theme-setting-mode-min.css">
 @if(auth()->user()->role ==1)
