@@ -33,6 +33,8 @@ require __DIR__ . DIRECTORY_SEPARATOR .'product-iteam.php';
 require __DIR__ . DIRECTORY_SEPARATOR .'inventory.php';
 require __DIR__ . DIRECTORY_SEPARATOR .'stock.php';
 require __DIR__ . DIRECTORY_SEPARATOR .'branch.php';
+require __DIR__ . DIRECTORY_SEPARATOR .'permission.php';
+require __DIR__ . DIRECTORY_SEPARATOR .'module.php';
 
 Route::group(['middleware' => 'auth'], function () {
 

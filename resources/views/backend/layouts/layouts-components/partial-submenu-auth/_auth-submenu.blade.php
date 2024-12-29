@@ -107,15 +107,18 @@
 
         <div class="collapse" id="auth_" aria-labelledby="headingTwo" data-bs-parent="#auth_">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link underline" href="{{ route('user.details') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Installations" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                <a class="nav-link underline" href="{{ route('module_category_view.action') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Module Category" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Category
+                </a>
+                <a class="nav-link underline" href="{{ route('module_name_view.action') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Module Name" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Name
+                </a>
+                <a class="nav-link underline" href="{{ route('module.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Module" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Module
+                </a>
+                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Module Installations" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>Installations
                 </a>
-                <!-- <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.404 Page')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.404 Page')}}
-                </a>
-                <a class="nav-link underline" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.500 Page')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.500 Page')}}
-                </a> -->
             </nav>
         </div>
 
