@@ -293,10 +293,17 @@ td#table_edit_btn{
     /* background-color: rgb(210, 255, 210); */
     background-color: antiquewhite;
     outline: none;
+    opacity: 1;
 }
 .focused-td {
     outline: none;
     /* background-color: rgb(255, 253, 152); */
     background-color: #ffc06b;
     transition: 1s;
+    opacity: 1;
+}
+.inputlight{
+    background-color: white;
+    outline: none;
+    opacity: 5;
 }

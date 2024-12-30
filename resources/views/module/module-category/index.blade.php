@@ -10,13 +10,13 @@
             <tr class="module-category-table-head-row" id="module_catg_row">
               <th class="module-category-table-head-th-label" id="thCatgName">Category-Name :</th>
               <th class="module-category-table-head-th-input" colspan="3" id="thCateg">
-                <input class="module-category-input" type="text" name="module_category_name" value="" placeholder="Category Name" id="moduleCategoryName">
+                <input class="module-category-input input-field" type="text" tabindex="0" name="module_category_name" value="" placeholder="Category Name" id="moduleCategoryName">
               </th>
-              <th  class="module-category-table-head-th-action" colspan="3" id="thAction" hidden>
-                <button class="module-sm-btn" id="catgCreateBtn" hidden>Create</button>
-                <button class="module-sm-btn" id="catgUpdateBtn" hidden>Update</button>
-                <button class="module-sm-delete-btn" id="catgDeleteBtn" hidden>Delete</button>
-                <button class="module-sm-cancel-btn" id="catgCancelBtn" hidden>Cancel</button>
+              <th  class="module-category-table-head-th-action" colspan="3" tabindex="0" id="thAction" hidden>
+                <button class="module-sm-btn" id="catgCreateBtn" tabindex="0" hidden>Create</button>
+                <button class="module-sm-btn" id="catgUpdateBtn" tabindex="0" hidden>Update</button>
+                <button class="module-sm-delete-btn" id="catgDeleteBtn" tabindex="0" hidden>Delete</button>
+                <button class="module-sm-cancel-btn" id="catgCancelBtn" tabindex="0" hidden>Cancel</button>
               </th>
             </tr>
           </thead>
@@ -24,7 +24,7 @@
             <tr class="module-category-table-head-row-two" id="module_catg_row_two">
               <th class="module-category-table-head-th-search-label" id="module_searchBar">Search-Bar :</th>
               <th class="module-category-table-head-th-search-bar" colspan="5">
-                <input class="table-search-bar" type="search" name="module_category_name" value="" placeholder="Search" id="CategorySearchBar">
+                <input class="table-search-bar input-field" tabindex="0" type="search" name="module_category_name" value="" placeholder="Search" id="CategorySearchBar">
               </th>
             </tr>
           </thead>

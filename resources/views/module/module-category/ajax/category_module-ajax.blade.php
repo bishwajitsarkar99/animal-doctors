@@ -182,19 +182,19 @@
         $(document).on('click keyup', '#CategorySearchBar', function(event) {
             const query = $(this).val();
             fetch_category_module(query);
-
             // Handle Enter key or click event for highlighting
-            if (event.type === 'click' || (event.type === 'keyup' && event.key === 'Enter')) {
-                const addRow = $(".data-table-row").attr("data-val");
-                if (addRow.length) {
-                    // Add highlight to all rows and set focus on the first row
-                    $(".data-table-row")
-                        .addClass("highlight")
-                        .attr("data-val", 1)
-                        .first()
-                        .focus();
-                }
-            }
+            // if (event.type === 'click' || (event.type === 'keyup' && event.key === 'Enter')) {
+            //     const addRow = $(".data-table-row").attr("data-val");
+            //     if (addRow.length) {
+            //         // Add highlight to all rows and set focus on the first row
+            //         $(".data-table-row")
+            //             .addClass("highlight")
+            //             .attr("data-val", 1)
+            //             .first()
+            //             .focus();
+            //     }
+            // }
+            
         });
 
         // Module Category Field
@@ -212,46 +212,75 @@
         });
 
         // Autofocus and add class to input field on focus
-        // $(document).on('focus', '#moduleCategoryName', function () {
-        //     $(this).addClass('focused-input'); // Use a valid class name
-        // });
+        $(document).on('focus', '#moduleCategoryName', function () {
+            $(this).addClass('focused-input'); // Use a valid class name
+        });
+        // Handle keydown events on inputs and buttons inside #module_catg_first
+        $("#module_catg_first").on("keydown", "input, button", function (event) {
+            const keyCode = event.which || event.keyCode;
 
-        // // Handle keydown events on inputs inside #module_catg_first
-        // $("#module_catg_first").on('keydown', 'input', function (event) {
-        //     const keyCode = event.which || event.keyCode;
+            // Arrow Down key: Move focus to the next input field
+            if (keyCode === 40) {
+                const nextInput = $(this).closest("th").next().find("input");
+                if (nextInput.length) {
+                    $(this).removeClass("inputlight");
+                    nextInput.addClass("inputlight").focus();
+                } else {
+                    const firstInput = $("#module_catg_first").find(".input-field").first();
+                    if (firstInput.length) {
+                        $(this).removeClass("inputlight");
+                        firstInput.addClass("inputlight").focus();
+                    }
+                }
+                event.preventDefault();
+                return;
+            }
 
-        //     // Arrow Down key: Move focus to the next input field
-        //     if (keyCode === 40) {
-        //         const nextInput = $(this).closest(".table-search-bar").next(".table-search-bar").find("input");
-        //         if (nextInput.length) {
-        //             $(this).removeClass("highlight"); // Remove highlight from the current input
-        //             nextInput.addClass("highlight").focus(); // Highlight and focus the next input
-        //         } else {
-        //             const firstInput = $(".table-search-bar").first().find("input"); // Get the first input
-        //             if (firstInput.length) {
-        //                 $(this).removeClass("highlight"); // Remove highlight from the current input
-        //                 firstInput.addClass("highlight").focus(); // Highlight and focus the first input
-        //             }
-        //         }
-        //         event.preventDefault(); // Prevent default scrolling behavior
-        //     }
+            // Arrow Up key: Move focus to the previous input field
+            if (keyCode === 38) {
+                const prevInput = $(this).closest("th").prev().find("input");
+                if (prevInput.length) {
+                    $(this).removeClass("inputlight");
+                    prevInput.addClass("inputlight").focus();
+                } else {
+                    const lastInput = $("#module_catg_first").find(".input-field").last();
+                    if (lastInput.length) {
+                        $(this).removeClass("inputlight");
+                        lastInput.addClass("inputlight").focus();
+                    }
+                }
+                event.preventDefault();
+                return;
+            }
 
-        //     // Arrow Up key: Move focus to the previous input field
-        //     if (keyCode === 38) {
-        //         const prevInput = $(this).closest(".table-search-bar").prev(".table-search-bar").find("input");
-        //         if (prevInput.length) {
-        //             $(this).removeClass("highlight"); // Remove highlight from the current input
-        //             prevInput.addClass("highlight").focus(); // Highlight and focus the previous input
-        //         } else {
-        //             const lastInput = $(".table-search-bar").last().find("input"); // Get the last input
-        //             if (lastInput.length) {
-        //                 $(this).removeClass("highlight"); // Remove highlight from the current input
-        //                 lastInput.addClass("highlight").focus(); // Highlight and focus the last input
-        //             }
-        //         }
-        //         event.preventDefault(); // Prevent default scrolling behavior
-        //     }
-        // });
+            // Arrow Left key: Move focus to the previous button
+            // if (keyCode === 37) {
+            //     const currentTh = $(this).closest("th");
+            //     const prevButton = currentTh.prev().find("button:not([hidden])").last();
+
+            //     if (prevButton.length) {
+            //         prevButton.removeAttr("hidden").focus();
+            //         $(this).removeClass("highlight");
+            //         prevButton.addClass("highlight").focus();
+            //     }
+            //     event.preventDefault();
+            //     return;
+            // }
+
+            // // Arrow Right key: Move focus to the next button
+            // if (keyCode === 39) {
+            //     const currentTh = $(this).closest("th");
+            //     const nextButton = currentTh.next().find("button:not([hidden])").first();
+
+            //     if (nextButton.length) {
+            //         nextButton.removeAttr("hidden").focus();
+            //         $(this).removeClass("highlight");
+            //         nextButton.addClass("highlight").focus();
+            //     }
+            //     event.preventDefault();
+            //     return;
+            // }
+        });
 
         // Table Td select edit button
         $(document).on('click keydown Enter', '#table_edit_btn', function(){
