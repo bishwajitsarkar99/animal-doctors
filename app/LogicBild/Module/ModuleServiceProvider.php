@@ -25,27 +25,41 @@ class ModuleServiceProvider
     public function moduleCategoriesSearch(Request $request)
     {
         if (!$request->ajax()) {
-            //abort(404);
+            abort(404);
         }
-    
-        $start_day = now()->startOfDay();
-        $end_day = now()->endOfDay();
-    
-        $query = CategoryModule::whereBetween('created_at', [$start_day, $end_day]);
-    
-        if ($searchQuery = $request->get('query')) {
+
+        $input_value = $request->input('module_category_name');
+        $searchQuery = $request->get('query');
+
+        $query = CategoryModule::query();
+
+        // Check if search input is provided
+        if ($input_value) {
             $query->where('module_category_name', 'LIKE', '%' . $searchQuery . '%');
+        } else {
+            // Filter by today's date if no input is provided
+            $start_day = now()->startOfDay();
+            $end_day = now()->endOfDay();
+
+            $query->whereBetween('created_at', [$start_day, $end_day]);
+
+            if ($searchQuery) {
+                $query->where('module_category_name', 'LIKE', '%' . $searchQuery . '%');
+            }
         }
-    
+
+        // Fetch filtered data
         $data = $query->get();
 
+        // Get total count of records
         $total = CategoryModule::count();
-    
+
         return response()->json([
             'data' => $data,
             'total' => $total,
         ], 200);
     }
+
 
     /**
      * Handle Module Category Store

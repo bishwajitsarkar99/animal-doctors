@@ -44,7 +44,7 @@ ul.static-head,div.static-head {
 button.btn-close.btn-btn-sm {
     box-shadow: none;
     font-size: 10px;
-    background-color: #505050a1;
+    /* background-color: #505050a1; */
 }
 .temp-top-bar{
     position: relative;

@@ -5,44 +5,44 @@
   <div class="container">
     <div class="card form-control form-control-sm" id="moduleTemplete">
       <div class="card-body" id="table_card_body">
-        <table class="module-category-table" id="module_catg">
-            <thead class="module-category-table-head-one" id="module_catg_thead_one">
-                <tr class="module-category-table-head-row" id="module_catg_row">
-                    <th class="module-category-table-head-th-label" id="thCatgName">Category-Name :</th>
-                    <th class="module-category-table-head-th-input" colspan="3" id="thCateg">
-                        <input class="module-category-input" type="text" name="module_category_name" value="" placeholder="Category Name" id="moduleCategoryName">
-                    </th>
-                    <th  class="module-category-table-head-th-action" colspan="3" id="thAction" hidden>
-                        <button class="module-sm-btn" id="catgCreateBtn" hidden>Create</button>
-                        <button class="module-sm-btn" id="catgUpdateBtn" hidden>Update</button>
-                        <button class="module-sm-delete-btn" id="catgDeleteBtn" hidden>Delete</button>
-                        <button class="module-sm-cancel-btn" id="catgCancelBtn" hidden>Cancel</button>
-                    </th>
-                </tr>
-            </thead>
-            <thead class="module-category-table-head-two">
-                <tr class="module-category-table-head-row-two" id="module_catg_row_two">
-                    <th class="module-category-table-head-th-search-label" id="module_searchBar">Search-Bar :</th>
-                    <th class="module-category-table-head-th-search-bar" colspan="5">
-                        <input class="table-search-bar" type="search" name="module_category_name" value="" placeholder="Search" id="CategorySearchBar">
-                    </th>
-                </tr>
-            </thead>
-            <thead class="module-category-table-head-two">
-                <tr class="module-category-table-head-row-two" id="module_catg_row_three">
-                    <th class="module-category-table-head-th-search-bar" id="module_catg_row_sn">SN.</th>
-                    <th class="module-category-table-head-th-search-bar" colspan="5" id="module_catg_row_catname">Category-Name</th>
-                </tr>
-            </thead>
+        <table class="module-category-table" id="module_catg_first">
+          <thead class="module-category-table-head-one" id="module_catg_thead_one">
+            <tr class="module-category-table-head-row" id="module_catg_row">
+              <th class="module-category-table-head-th-label" id="thCatgName">Category-Name :</th>
+              <th class="module-category-table-head-th-input" colspan="3" id="thCateg">
+                <input class="module-category-input" type="text" name="module_category_name" value="" placeholder="Category Name" id="moduleCategoryName">
+              </th>
+              <th  class="module-category-table-head-th-action" colspan="3" id="thAction" hidden>
+                <button class="module-sm-btn" id="catgCreateBtn" hidden>Create</button>
+                <button class="module-sm-btn" id="catgUpdateBtn" hidden>Update</button>
+                <button class="module-sm-delete-btn" id="catgDeleteBtn" hidden>Delete</button>
+                <button class="module-sm-cancel-btn" id="catgCancelBtn" hidden>Cancel</button>
+              </th>
+            </tr>
+          </thead>
+          <thead class="module-category-table-head-two">
+            <tr class="module-category-table-head-row-two" id="module_catg_row_two">
+              <th class="module-category-table-head-th-search-label" id="module_searchBar">Search-Bar :</th>
+              <th class="module-category-table-head-th-search-bar" colspan="5">
+                <input class="table-search-bar" type="search" name="module_category_name" value="" placeholder="Search" id="CategorySearchBar">
+              </th>
+            </tr>
+          </thead>
+          <thead class="module-category-table-head-two">
+            <tr class="module-category-table-head-row-two" id="module_catg_row_three">
+              <th class="module-category-table-head-th-search-bar" id="module_catg_row_sn">SN.</th>
+              <th class="module-category-table-head-th-search-bar" colspan="5" id="module_catg_row_catname">Category-Name</th>
+            </tr>
+          </thead>
         </table>
         <table class="module-category-table table-responsive mb-3" id="module_catg">
-            <tbody class="module-category-table-body bg-white" id="module_category_table"></tbody>
-            <tfoot class="module-category-table-footer mb-3">
-                <tr class="module-category-table-footer-row table-row" id="footerRow">
-                    <th class="module-category-table-footer-th" colspan="5" id="module_catg_row_total">Module Category </th>
-                    <th class="module-category-table-footer-th" id="module_catg_row_amount"></th>
-                </tr>
-            </tfoot>
+          <tbody class="module-category-table-body bg-white" id="module_category_table"></tbody>
+          <tfoot class="module-category-table-footer mb-3">
+            <tr class="module-category-table-footer-row table-row" id="footerRow">
+              <th class="module-category-table-footer-th" colspan="5" id="module_catg_row_total">Module Category </th>
+              <th class="module-category-table-footer-th" id="module_catg_row_amount"></th>
+            </tr>
+          </tfoot>
         </table>
       </div>
       
@@ -292,8 +292,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- jQuery UI Auto-Complete or Date Picker -->
 <script src="{{asset('backend_asset')}}/support_asset/date-picker/jquery/jquery-ui.min.js"></script>
-<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
-<script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
+<!-- <script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
+<script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script> -->
 
 <script>
   // skeleton
