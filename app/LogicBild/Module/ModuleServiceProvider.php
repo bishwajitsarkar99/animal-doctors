@@ -28,24 +28,28 @@ class ModuleServiceProvider
             abort(404);
         }
 
-        $input_value = $request->input('module_category_name');
+        //$input_value = $request->input('module_category_name');
         $searchQuery = $request->get('query');
 
         $query = CategoryModule::query();
 
         // Check if search input is provided
-        if ($input_value) {
+        // if ($input_value) {
+        //     $query->where('module_category_name', 'LIKE', '%' . $searchQuery . '%');
+        // } else {
+        //     // Filter by today's date if no input is provided
+        //     $start_day = now()->startOfDay();
+        //     $end_day = now()->endOfDay();
+
+        //     $query->whereBetween('created_at', [$start_day, $end_day]);
+
+        //     if ($searchQuery) {
+        //         $query->where('module_category_name', 'LIKE', '%' . $searchQuery . '%');
+        //     }
+        // }
+
+        if ($searchQuery) {
             $query->where('module_category_name', 'LIKE', '%' . $searchQuery . '%');
-        } else {
-            // Filter by today's date if no input is provided
-            $start_day = now()->startOfDay();
-            $end_day = now()->endOfDay();
-
-            $query->whereBetween('created_at', [$start_day, $end_day]);
-
-            if ($searchQuery) {
-                $query->where('module_category_name', 'LIKE', '%' . $searchQuery . '%');
-            }
         }
 
         // Fetch filtered data
@@ -74,7 +78,18 @@ class ModuleServiceProvider
     */
     public function moduleCategoriesEdit($id)
     {
-        //
+        $module_categories = CategoryModule::find($id);
+        if ($module_categories) {
+            return response()->json([
+                'status' => 200,
+                'messages' => $module_categories,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'The module category is not found',
+            ]);
+        }
     }
 
     /**

@@ -6,17 +6,19 @@
     <div class="card form-control form-control-sm" id="moduleTemplete">
       <div class="card-body" id="table_card_body">
         <table class="module-category-table" id="module_catg_first">
+          @csrf
+          <input type="hidden" name="module_category_id" id="moduleCategoryId">
           <thead class="module-category-table-head-one" id="module_catg_thead_one">
             <tr class="module-category-table-head-row" id="module_catg_row">
               <th class="module-category-table-head-th-label" id="thCatgName">Category-Name :</th>
               <th class="module-category-table-head-th-input" colspan="3" id="thCateg">
-                <input class="module-category-input input-field" type="text" tabindex="0" name="module_category_name" value="" placeholder="Category Name" id="moduleCategoryName">
+                <input class="module-category-input edit-module-category-input" type="text" name="module_category_name" value="" placeholder="Category Name" id="moduleCategoryName">
               </th>
-              <th  class="module-category-table-head-th-action" colspan="3" tabindex="0" id="thAction" hidden>
-                <button class="module-sm-btn" id="catgCreateBtn" tabindex="0" hidden>Create</button>
-                <button class="module-sm-btn" id="catgUpdateBtn" tabindex="0" hidden>Update</button>
-                <button class="module-sm-delete-btn" id="catgDeleteBtn" tabindex="0" hidden>Delete</button>
-                <button class="module-sm-cancel-btn" id="catgCancelBtn" tabindex="0" hidden>Cancel</button>
+              <th  class="module-category-table-head-th-action action_th" colspan="3" id="thAction" hidden>
+                <button class="module-sm-btn" id="catgCreateBtn" hidden>Create</button>
+                <button class="module-sm-btn" id="catgUpdateBtn" hidden>Update</button>
+                <button class="module-sm-delete-btn" id="catgDeleteBtn" hidden>Delete</button>
+                <button class="module-sm-cancel-btn" id="catgCancelBtn" hidden>Cancel</button>
               </th>
             </tr>
           </thead>
@@ -24,7 +26,7 @@
             <tr class="module-category-table-head-row-two" id="module_catg_row_two">
               <th class="module-category-table-head-th-search-label" id="module_searchBar">Search-Bar :</th>
               <th class="module-category-table-head-th-search-bar" colspan="5">
-                <input class="table-search-bar input-field" tabindex="0" type="search" name="module_category_name" value="" placeholder="Search" id="CategorySearchBar">
+                <input class="table-search-bar input-field" type="search" name="module_category_name" value="" placeholder="Search" id="CategorySearchBar">
               </th>
             </tr>
           </thead>
@@ -35,17 +37,20 @@
             </tr>
           </thead>
         </table>
-        <table class="module-category-table table-responsive mb-3" id="module_catg">
-          <tbody class="module-category-table-body bg-white" id="module_category_table"></tbody>
+        <div class="table-responsive">
+          <table class="module-category-table mb-3" id="module_catg">
+            <tbody class="module-category-table-body bg-white" id="module_category_table"></tbody>
+          </table>
+        </div>
+        <table class="footer_box">
           <tfoot class="module-category-table-footer mb-3">
             <tr class="module-category-table-footer-row table-row" id="footerRow">
-              <th class="module-category-table-footer-th" colspan="5" id="module_catg_row_total">Module Category </th>
+              <th class="module-category-table-footer-th" colspan="5" id="module_catg_row_total">Total Category </th>
               <th class="module-category-table-footer-th" id="module_catg_row_amount"></th>
             </tr>
           </tfoot>
         </table>
       </div>
-      
     </div>
   </div>
   @include('loader.action-loader')
@@ -123,12 +128,12 @@
   {{-- end delete confirm modal --}}
 
   {{-- start confirm update modal --}}
-  <div class="modal fade" id="updateconfirmbranch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="updateconfirmmodule" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
       <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
-        <div class="modal-header" id="logoutModal_header">
+        <div class="modal-header header-padding" id="logoutModal_header">
           <h6 class="modal-title admin_title scan update_title branch-skeleton pt-1" id="staticBackdropLabel">
-            Update [<span id="branch_update_modal_heading"></span>]
+            Module Category : <span id="module_update_modal_heading"></span>
           </h6>
           <button type="button" class="btn-close btn-btn-sm head_btn3 branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
             data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
@@ -136,12 +141,12 @@
           </div>
           <div class="modal-body" id="SM_Modal_body">
             <p class="admin_paragraph branch-skeleton" style="text-align:center;" id="text_message">
-              <label class="label_user_edit" id="cate_confirm_update" for="id">Would you like to update <span id="branch_update_modal"></span>, confirm or cancel ? </label>
+              <label class="label_user_edit" id="cate_confirm_update" for="id">Would you like to update module category (<span id="module_catg_update_modal"></span>), confirm or cancel ? </label>
             </p>
           </div>
-          <div class="modal-footer action_group" id="logoutModal_footer">
-            <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus branch-skeleton" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
-            <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus branch-skeleton">
+          <div class="modal-footer action_group footer-padding" id="logoutModal_footer">
+            <button type="button" class="module-sm-cancel-btn delete_cancel branch-skeleton" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+            <button id="update_btn_confirm" class="module-sm-btn update_confirm branch-skeleton">
               <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               <span class="confirm-btn-text">Confirm</span>
             </button>
@@ -292,8 +297,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- jQuery UI Auto-Complete or Date Picker -->
 <script src="{{asset('backend_asset')}}/support_asset/date-picker/jquery/jquery-ui.min.js"></script>
-<!-- <script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
-<script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script> -->
+<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
+<!-- <script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script> -->
 
 <script>
   // skeleton

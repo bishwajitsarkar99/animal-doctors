@@ -1,5 +1,12 @@
-<script>
+<script type="module">
+    import {activeTableRow} from "/module/module-min-js/helper-function-min.js";
     $(document).ready(function(){
+        // ACtive table row background
+        $(document).on('click keydown', 'tr.table-row', function (event) {
+            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                activeTableRow(this);
+            }
+        });
         fetch_category_module();
         // Data View Table--------------
         const table_rows = (rows) => {
@@ -121,15 +128,16 @@
                 event.preventDefault(); 
             }
         });
-        // Add focus styles for rows
+        // Add focus styles for rows addClass tr
         $(document).on("focus", ".data-table-row", function () {
             $(this).addClass("highlight");
         });
+        // removeClass tr
         $(document).on("blur", ".data-table-row", function () {
             $(this).removeClass("highlight");
         });
 
-        // Handle key events on table cells
+        // Handle key events on table cells / td
         $("#module_category_table").on("keydown", "td", function (event) {
             const keyCode = event.which || event.keyCode;
 
@@ -166,14 +174,19 @@
             // Enter key: Perform action on the selected cell
             if (keyCode === 13) {
                 console.log("Enter key pressed on cell:", $(this).attr("id"));
-                // Add your logic for Enter key (e.g., editing or selecting the cell)
-                event.preventDefault();
+                // const firstCell = $(this).find("td").first();
+                // if (firstCell.length) {
+                //     firstCell.focus();
+                //     $(this).addClass("highlight");
+                // }
+                event.preventDefault(); 
             }
         });
-        // Add focus styles for cells
+        // Add focus styles for cells/ addClass for td
         $(document).on("focus", "td", function () {
             $(this).addClass("focused-td");
         });
+        // removeClass for td
         $(document).on("blur", "td", function () {
             $(this).removeClass("focused-td");
         });
@@ -197,24 +210,111 @@
             
         });
 
-        // Module Category Field
+        // Module Category input handle Field
         $(document).on('keyup', '#moduleCategoryName', function(){
             var value = $(this).val();
+            var edit_id = $("#moduleCategoryId").val();
             if(value !== ''){
-                $("#thAction").removeAttr('hidden');
-                $("#catgCreateBtn").removeAttr('hidden');
-                $("#catgCancelBtn").removeAttr('hidden');
+                if(edit_id !== ''){
+                    $("#thAction").removeAttr('hidden');
+                    $("#catgUpdateBtn").removeAttr('hidden');
+                    $("#catgDeleteBtn").removeAttr('hidden');
+                    $("#catgCancelBtn").removeAttr('hidden');
+                }else{
+                    $("#thAction").removeAttr('hidden');
+                    $("#catgCreateBtn").removeAttr('hidden');
+                    $("#catgCancelBtn").removeAttr('hidden');
+                }
             }else if(value == ''){
                 $("#thAction").attr('hidden', true);
                 $("#catgCreateBtn").attr('hidden', true);
                 $("#catgCancelBtn").attr('hidden', true);
+                $("#catgUpdateBtn").attr('hidden', true);
+                $("#catgDeleteBtn").attr('hidden', true);
             }
         });
 
-        // Autofocus and add class to input field on focus
-        $(document).on('focus', '#moduleCategoryName', function () {
-            $(this).addClass('focused-input'); // Use a valid class name
+        // Cancel Button
+        $(document).on('click', '#catgCancelBtn', function(){
+            $("#moduleCategoryId").val("");
+            $("#moduleCategoryName").val("");
+            $("#catgCreateBtn").removeAttr('hidden');
+            $("#catgCancelBtn").removeAttr('hidden');
+            $("#thAction").attr('hidden', true);
+            $("#catgUpdateBtn").attr('hidden', true);
+            $("#catgDeleteBtn").attr('hidden', true);
         });
+
+        // Edit Module Category (Table Td select edit button)
+        $(document).on('click keydown Enter', '#table_edit_btn', function(){
+            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                const edit_id = $(this).closest('td').attr('value');
+                if(edit_id !== ''){
+                    const nextRow = $(this).next(".data-table-row");
+                    if (nextRow.length) {
+                        $(this).attr("data-val", 0).removeClass("highlight");
+                        nextRow.attr("data-val", 1).addClass("highlight").focus();
+                    } else {
+                        const firstRow = $(".data-table-row").first();
+                        if (firstRow.length) {
+                            $(this).attr("data-val", 0).removeClass("highlight");
+                            firstRow.attr("data-val", 1).addClass("highlight").focus();
+                        }
+                    }
+                    $("#thAction").removeAttr('hidden');
+                    $("#catgUpdateBtn").removeAttr('hidden');
+                    $("#catgDeleteBtn").removeAttr('hidden');
+                    $("#catgCancelBtn").removeAttr('hidden');
+                    $("#catgCreateBtn").attr('hidden', true);
+
+                }else if(edit_id == ''){
+                    $("#thAction").attr('hidden', true);
+                    $("#catgCreateBtn").attr('hidden', true);
+                    $("#catgCancelBtn").attr('hidden', true);
+                }
+
+                var id = edit_id;
+
+                $.ajaxSetup({
+                    headers:{
+                        'X-CSRF-TOKEN' : $('meta[name="csrf_token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: "/application/module-category-edit/" +id,
+                    dataType: "json",
+                    success: function(response){
+                        if(response.status == 404){
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert alert-danger');
+                            $('#success_message').text(response.messages);
+                        }else if(response.status == 200){
+                            $('#moduleCategoryId').val(id);
+                            const updateModuleHeading = $("#module_update_modal_heading");
+                            const updateModuleBody = $("#module_catg_update_modal");
+                            updateModuleHeading.append(`<span class="">${response.messages.module_category_name}</span>`);
+                            updateModuleBody.append(`<span class="">${response.messages.module_category_name}</span>`);
+                            $('.edit-module-category-input').val(response.messages.module_category_name);
+                        }
+                    }
+                });
+            }
+        });
+
+        // Update Module Category Modal Show
+        $(document).on('click', '#catgUpdateBtn', function(e){
+            e.preventDefault();
+            $("#updateconfirmmodule").modal('show');
+        });
+
+
+    });
+</script>
+<!-- <script>
+    // key down and up for input field
+    $(document).ready(function(){
         // Handle keydown events on inputs and buttons inside #module_catg_first
         $("#module_catg_first").on("keydown", "input, button", function (event) {
             const keyCode = event.which || event.keyCode;
@@ -281,17 +381,5 @@
             //     return;
             // }
         });
-
-        // Table Td select edit button
-        $(document).on('click keydown Enter', '#table_edit_btn', function(){
-            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
-                const edit_id = $(this).val();
-                $("#thAction").removeAttr('hidden');
-                $("#catgUpdateBtn").removeAttr('hidden');
-                $("#catgDeleteBtn").removeAttr('hidden');
-            }
-        });
-
-
     });
-</script>
+</script> -->

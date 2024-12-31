@@ -27,19 +27,19 @@ th.module-category-table-head-th-label{
     width: 13%;
     padding-left: 30px;
     font-family: var(--nav-font-family);
-    font-weight: 700;
-    font-size: 10px;
+    font-weight: 800;
+    font-size: 11px;
     color: black;
     text-transform: uppercase;
     font-variant: none;
 }
 th.module-category-table-head-th-search-label{
     width: 13%;
-    padding-left: 30px;
+    padding-left: 20px;
     font-family: var(--nav-font-family);
-    font-weight: 700;
+    font-weight: 800;
     font-style: italic;
-    font-size: 10px;
+    font-size: 11px;
     color: black;
     text-transform: uppercase;
     font-variant: none;
@@ -56,8 +56,8 @@ input.table-search-bar{
     padding-left: 10px;
     padding-right: 10px;
     opacity: 5;
-    font-weight: 700;
-    font-size: 12px;
+    font-weight: 600;
+    font-size: 13px;
 }
 input.module-category-input{
     display: flex;
@@ -71,8 +71,8 @@ input.module-category-input{
     padding-left: 10px;
     padding-right: 10px;
     opacity: 5;
-    font-weight: 700;
-    font-size: 12px;
+    font-weight: 600;
+    font-size: 13px;
 }
 input.table-search-bar:focus{
     border: 1px solid #ffc06b;
@@ -98,7 +98,7 @@ thead.module-category-table-head-two, tr.module-category-table-head-row {
 }
 th.module-category-table-head-th-label {
     width: 13%;
-    padding-left: 30px;
+    padding-left: 20px;
 }
 th.module-category-table-head-th-action {
     text-align: center;
@@ -160,8 +160,9 @@ th#module_catg_row_sn{
     font-family: var(--nav-font-family);
     opacity: 5;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 12px;
     text-transform: uppercase;
+    font-variant: none;
 }
 th#module_catg_row_catname{
     text-align: left;
@@ -169,8 +170,9 @@ th#module_catg_row_catname{
     font-family: var(--nav-font-family);
     opacity: 5;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 12px;
     text-transform: uppercase;
+    font-variant: none;
 }
 th#module_catg_row_total{
     width: 100%;
@@ -181,7 +183,8 @@ th#module_catg_row_total{
     font-weight: 700;
     font-size: 13px;
     padding-left: 10px;
-    text-transform: uppercase;
+    text-transform: capitalize;
+    font-variant: none;
 }
 th#module_catg_row_amount{
     text-align: center;
@@ -193,6 +196,7 @@ th#module_catg_row_amount{
     text-transform: uppercase;
     padding-right: 10px;
     padding-left: 10px;
+    font-variant: none;
 }
 td.second_td{
     text-align: left;
@@ -217,11 +221,24 @@ td.table-row.user-table-row {
 tr.table-row.user-table-row:hover{
     background-image: var(--table-row-hover);
 }
-tbody.module-category-table-body{
-    overflow-x: auto;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+table.footer_box {
+    opacity: 1;
+}
+.footer_box {
+    padding-left: 7px;
+    padding-right: 7px;
+}
+div.table-responsive {
     max-height: 400px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for touch devices */
+    display: block; /* Ensure the div acts as a block-level element */
+    border-left: 1px solid #cfccccc7;
+    border-right: 1px solid #cfccccc7;
+}
+.module-category-table {
+    border-collapse: collapse;
+    width: 100%;
 }
 button.module-sm-btn{
     background-image: var(--nav-button-background);
@@ -306,4 +323,53 @@ td#table_edit_btn{
     background-color: white;
     outline: none;
     opacity: 5;
+}
+.action_th{
+    background-color: antiquewhite;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 16px 0px;
+    position: relative;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    animation: slideOut 0.3s ease-out;
+}
+@keyframes slideOut {
+    from {transform: translate(-2%, -5%) scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-2%, -5%) scale(0.9);
+        opacity: 1;
+    }
+}
+div.header-padding{
+    padding: 5px 10px;
+}
+div.footer-padding{
+    padding: 5px 10px;
+}
+.action_group{
+    align-items: center;
+    justify-content: space-between;
+}
+#staticBackdropLabel {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-variant: all-petite-caps;
+    color: black;
+    margin-top: -0.3em;
+    animation: 2s infinite;
+}
+label.label_user_edit {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: black;
+    text-shadow: 0 0 #000000;
+}
+button#cate_delete5 {
+    line-height: 1.6;
+}
+button#update_btn_confirm {
+    line-height: 1.6;
 }
