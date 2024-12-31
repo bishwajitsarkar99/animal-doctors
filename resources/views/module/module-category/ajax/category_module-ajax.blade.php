@@ -1,5 +1,7 @@
 <script type="module">
     import {activeTableRow} from "/module/module-min-js/helper-function-min.js";
+    import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
+    buttonLoader();
     $(document).ready(function(){
         // ACtive table row background
         $(document).on('click keydown', 'tr.table-row', function (event) {
@@ -7,6 +9,8 @@
                 activeTableRow(this);
             }
         });
+        // Initialize the button loader for the login button
+        buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm', 'Confirm', 1000);
         fetch_category_module();
         // Data View Table--------------
         const table_rows = (rows) => {
@@ -248,6 +252,9 @@
         // Edit Module Category (Table Td select edit button)
         $(document).on('click keydown Enter', '#table_edit_btn', function(){
             if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                $("#module_update_modal_heading").html("");
+                $("#module_catg_update_modal").html("");
+                $("#updateForm_error").html("");
                 const edit_id = $(this).closest('td').attr('value');
                 if(edit_id !== ''){
                     const nextRow = $(this).next(".data-table-row");
@@ -292,6 +299,7 @@
                             $('#success_message').text(response.messages);
                         }else if(response.status == 200){
                             $('#moduleCategoryId').val(id);
+                            $('#updateModuleCategoryId').val(id);
                             const updateModuleHeading = $("#module_update_modal_heading");
                             const updateModuleBody = $("#module_catg_update_modal");
                             updateModuleHeading.append(`<span class="">${response.messages.module_category_name}</span>`);
@@ -307,8 +315,83 @@
         $(document).on('click', '#catgUpdateBtn', function(e){
             e.preventDefault();
             $("#updateconfirmmodule").modal('show');
+            var time = null;
+
+            var time = setTimeout(() => {
+                // Remove skeleton classes
+                removeAttributeOrClass([
+                    { selector: '.modal_header_title, .modal_header_cancel, .modal_paragraph', type: 'class', name: 'branch-skeleton' },
+                    { selector: '#update_btn_confirm, #cate_delete5', type: 'class', name: 'branch-skeleton' },
+                ]);
+            }, 1000);
+
+            return () => {
+                clearTimeout(time);
+            };
         });
 
+        // Confirm Update Module Category
+        $(document).on('click', '#update_btn_confirm', function(e){
+            e.preventDefault();
+            var id = $("#moduleCategoryId").val();
+            var moduleCategoryName = $(".edit-module-category-input").val();
+            
+            var data = {
+                id : id,
+                module_category_name : moduleCategoryName,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            }
+
+            $.ajax({
+                type: "PUT",
+                url: "/application/module-category-update/" +id,
+                data: data,
+                dataType: "json",
+                success: function(response){
+                    if(response.status === 400){
+                        $.each(response.errors, function(key, err_value){
+                            if (key === 'module_category_name') {
+                                $("#updateForm_error").fadeIn();
+                                $('#updateForm_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $("#updateForm_error").addClass("alert_show_errors");
+                                $('#moduleCategoryName').addClass('is-invalid');
+                                $('#moduleCategoryName').html("");
+                            }
+                        });
+                        $("#updateconfirmmodule").modal('hide');
+                    }else if(response.status === 200){
+
+                        $("#accessconfirmbranch").modal('show');
+                        $("#updateconfirmmodule").modal('hide');
+                        $("#pageLoader").removeAttr('hidden');
+                        $("#access_modal_box").addClass('loader_area');
+                        $("#processModal_body").removeClass('loading_body_area');
+
+                        setTimeout(() => {
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#pageLoader").attr('hidden', true);
+                            $("#access_modal_box").removeClass('loader_area');
+                            $("#processModal_body").addClass('loading_body_area');
+                            
+                            $('#updateForm_error').html("");
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert_show font_size ps-1 pe-1 ms-5');
+                            $('#success_message').fadeIn();
+                            $('#success_message').text(response.messages);
+                            
+                            $('.edit-module-category-input').val("");
+                            
+                            setTimeout(() => {
+                                $('#success_message').fadeOut(3000);
+                            }, 3000);
+                            fetch_category_module();
+                        }, 1500);
+                    }
+                }
+            });
+            
+            
+        });
 
     });
 </script>

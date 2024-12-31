@@ -7,12 +7,14 @@
       <div class="card-body" id="table_card_body">
         <table class="module-category-table" id="module_catg_first">
           @csrf
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input type="hidden" name="module_category_id" id="moduleCategoryId">
           <thead class="module-category-table-head-one" id="module_catg_thead_one">
             <tr class="module-category-table-head-row" id="module_catg_row">
               <th class="module-category-table-head-th-label" id="thCatgName">Category-Name :</th>
               <th class="module-category-table-head-th-input" colspan="3" id="thCateg">
                 <input class="module-category-input edit-module-category-input" type="text" name="module_category_name" value="" placeholder="Category Name" id="moduleCategoryName">
+                <span id="savForm_error"></span> <span id="updateForm_error"></span>
               </th>
               <th  class="module-category-table-head-th-action action_th" colspan="3" id="thAction" hidden>
                 <button class="module-sm-btn" id="catgCreateBtn" hidden>Create</button>
@@ -45,7 +47,9 @@
         <table class="footer_box">
           <tfoot class="module-category-table-footer mb-3">
             <tr class="module-category-table-footer-row table-row" id="footerRow">
-              <th class="module-category-table-footer-th" colspan="5" id="module_catg_row_total">Total Category </th>
+              <th class="module-category-table-footer-th" colspan="5" id="module_catg_row_total">
+                Total Category <span class="action_message"><span id="success_message"></span></span>
+              </th>
               <th class="module-category-table-footer-th" id="module_catg_row_amount"></th>
             </tr>
           </tfoot>
@@ -132,15 +136,16 @@
     <div class="modal-dialog modal-sm modal-dialog-centered">
       <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
         <div class="modal-header header-padding" id="logoutModal_header">
-          <h6 class="modal-title admin_title scan update_title branch-skeleton pt-1" id="staticBackdropLabel">
+          <h6 class="modal-title admin_title scan modal_header_title branch-skeleton pt-1" id="staticBackdropLabel">
             Module Category : <span id="module_update_modal_heading"></span>
           </h6>
-          <button type="button" class="btn-close btn-btn-sm head_btn3 branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
+          <button type="button" class="btn-close btn-btn-sm modal_header_cancel branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
             data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
           </button>
           </div>
           <div class="modal-body" id="SM_Modal_body">
-            <p class="admin_paragraph branch-skeleton" style="text-align:center;" id="text_message">
+            <!-- <input type="hidden" name="module_category_id" id="updateModuleCategoryId"> -->
+            <p class="modal_paragraph branch-skeleton" style="text-align:center;" id="text_message">
               <label class="label_user_edit" id="cate_confirm_update" for="id">Would you like to update module category (<span id="module_catg_update_modal"></span>), confirm or cancel ? </label>
             </p>
           </div>
@@ -298,7 +303,7 @@
 <!-- jQuery UI Auto-Complete or Date Picker -->
 <script src="{{asset('backend_asset')}}/support_asset/date-picker/jquery/jquery-ui.min.js"></script>
 <script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
-<!-- <script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script> -->
+<script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 
 <script>
   // skeleton

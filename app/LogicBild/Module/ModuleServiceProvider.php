@@ -97,7 +97,28 @@ class ModuleServiceProvider
     */
     public function moduleCategoriesUpdate(Request $request, $id)
     {
-        //
+        $validators = Validator::make($request->all(),[
+            'module_category_name' => 'required',
+        ],[
+            'module_category_name.required' => 'Module Category Name Mandatory.',
+        ]);
+
+        if($validators->fails()){
+            return response()->json([
+                'status' => 400,
+                'errors' => $validators,
+            ]);
+        }else{
+
+            $module_categories = CategoryModule::find($id);
+            $module_categories->module_category_name = $request->input('module_category_name');
+            $module_categories->save();
+            
+            return response()->json([
+                'status' => 200,
+                'messages' => 'Module Category has updated successfully.'
+            ]);
+        }
     }
 
     /**
