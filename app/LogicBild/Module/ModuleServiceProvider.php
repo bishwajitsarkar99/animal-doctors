@@ -320,4 +320,13 @@ class ModuleServiceProvider
         }
     }
 
+    // ========================= Module Inject Service ==========================
+    /**
+     * Handle Module Inject Templete View
+    */
+    public function moduleInjectIndex(Request $request)
+    {
+        return view('module.module-inject.index');
+    }
+
 }

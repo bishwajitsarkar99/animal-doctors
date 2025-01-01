@@ -78,4 +78,10 @@ class ModuleController extends Controller
         return $this->moduleServiceProvider->ModuleNamesDelete($id);
     }
 
+    // Module Inject View Templete
+    public function index(Request $request)
+    {
+        return $this->moduleServiceProvider->moduleInjectIndex($request);
+    }
+
 }
