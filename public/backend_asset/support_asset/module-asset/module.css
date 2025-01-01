@@ -200,7 +200,7 @@ th#module_catg_row_amount{
 }
 td.second_td{
     text-align: left;
-    padding-left: 10px;
+    padding-left: 4px;
     font-family: var(--nav-font-family);
     opacity: 5;
     font-weight: 600;
@@ -305,6 +305,34 @@ button.module-sm-delete-btn:hover{
 }
 td#table_edit_btn{
     cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: #007bff;
+    text-decoration-thickness: revert;
+    -webkit-text-decorations-in-effect: underline;
+    animation-name: font_effect;
+    animation-duration: 5s;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-direction: alternate-reverse;
+    animation-play-state: running;
+}
+@keyframes font_effect {
+    0%{
+        color: #007bff;
+        text-decoration-color: #007bff;
+        opacity: 1;
+    }
+    50%{
+        color:black;
+        text-decoration-color: #007bff;
+        opacity: 1;
+    }
+    100%{
+        color: black;
+        text-decoration-color: #007bff;
+        opacity: 1; 
+    }
 }
 .highlight {
     /* background-color: rgb(210, 255, 210); */
@@ -367,10 +395,16 @@ label.label_user_edit {
     color: black;
     text-shadow: 0 0 #000000;
 }
-button#cate_delete5 {
+button#cate_delete5,button#cate_delete3,button#create_cancel {
     line-height: 1.6;
 }
 button#update_btn_confirm {
+    line-height: 1.6;
+}
+button#delete_module_category {
+    line-height: 1.6;
+}
+button#create_btn_confirm {
     line-height: 1.6;
 }
 .branch-skeleton{
@@ -398,4 +432,17 @@ button#update_btn_confirm {
 }
 span.font_size{
     font-size: 12px;
+}
+.alert_show{
+    text-transform: none;
+}
+span#module_catg_current_amount,span#module_name_current_amount{
+    font-size: 12px;
+    text-transform: lowercase;
+}
+td.error_data{
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--nav-font-family);
 }

@@ -20,14 +20,14 @@ Route::group(['middleware' => 'auth'], function (){
             Route::get('/module-name-edit/{id}', [ModuleController::Class, 'ModuleNameEdit'])->name('module_name_edit.action');
             Route::put('/module-name-update/{id}', [ModuleController::Class, 'ModuleNameUpdate'])->name('module_name_update.action');
             Route::delete('/module-name-delete/{id}', [ModuleController::Class, 'ModuleNameDelete'])->name('module_name_delete.action');
-            Route::get('/module-name-search', [ModuleController::Class, 'search'])->name('module_name_search.action');
+            Route::get('/module-name-search', [ModuleController::Class, 'moduleNameSearch'])->name('module_name_search.action');
             // Module
             Route::get('/module-index', [ModuleController::Class, 'index'])->name('module.index');
             Route::post('/module-store', [ModuleController::Class, 'store'])->name('module.store');
             Route::get('/module-edit/{id}', [ModuleController::Class, 'edit'])->name('module.edit');
             Route::put('/module-update/{id}', [ModuleController::Class, 'update'])->name('module.update');
             Route::delete('/module-delete/{id}', [ModuleController::Class, 'delete'])->name('module.delete');
-            Route::get('/module-search/{id}', [ModuleController::Class, 'search'])->name('module.search');
+            Route::get('/module-search/{id}', [ModuleController::Class, 'moduleSearch'])->name('module.search');
             
         });
     });

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Carbon\Carbon;
 use App\Models\Module\CategoryModule;
+use App\Models\Module\ModuleName;
 
 class ModuleServiceProvider
 {
@@ -28,49 +29,71 @@ class ModuleServiceProvider
             abort(404);
         }
 
-        //$input_value = $request->input('module_category_name');
-        $searchQuery = $request->get('query');
+        $searchQuery = $request->input('query'); // The search input from the request
+        $input_value = $request->input('module_category_name'); // The additional filter if provided
 
-        $query = CategoryModule::query();
+        $query = CategoryModule::query()->orderBy('id', 'desc');
 
-        // Check if search input is provided
-        // if ($input_value) {
-        //     $query->where('module_category_name', 'LIKE', '%' . $searchQuery . '%');
-        // } else {
-        //     // Filter by today's date if no input is provided
-        //     $start_day = now()->startOfDay();
-        //     $end_day = now()->endOfDay();
-
-        //     $query->whereBetween('created_at', [$start_day, $end_day]);
-
-        //     if ($searchQuery) {
-        //         $query->where('module_category_name', 'LIKE', '%' . $searchQuery . '%');
-        //     }
-        // }
+        // Apply filters
+        if ($input_value) {
+            $query->where('module_category_name', 'LIKE', '%' . $input_value . '%');
+        }
 
         if ($searchQuery) {
             $query->where('module_category_name', 'LIKE', '%' . $searchQuery . '%');
+        } else {
+            // Filter by today's date if no search query is provided
+            $start_day = now()->startOfDay();
+            $end_day = now()->endOfDay();
+            $query->whereBetween('created_at', [$start_day, $end_day]);
         }
 
-        // Fetch filtered data
         $data = $query->get();
-
-        // Get total count of records
+        // Total Module Category Count
         $total = CategoryModule::count();
 
+        if ($data->isEmpty()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No matching current module categories found, Please Search.......',
+                'data' => []
+            ], 200);
+        }
+
         return response()->json([
+            'status' => 'success',
             'data' => $data,
+            'current' => $data->count(),
             'total' => $total,
         ], 200);
     }
-
 
     /**
      * Handle Module Category Store
     */
     public function moduleCategoriesStore(Request $request)
     {
-        //
+        $validators = Validator::make($request->all(),[
+            'module_category_name' => 'required'
+        ],[
+            'module_category_name.required' => 'The module category name is required.'
+        ]);
+
+        if($validators->fails()){
+            return response()->json([
+                'status' => 400,
+                'errors' => $validators->messages()
+            ]);
+        }else{
+            $module_categories = new CategoryModule;
+            $module_categories->module_category_name = $request->input('module_category_name');
+            $module_categories->save();
+
+            return response()->json([
+                'status' => 200,
+                'messages' => 'The module category has created.'
+            ]);
+        }
     }
 
     /**
@@ -106,7 +129,7 @@ class ModuleServiceProvider
         if($validators->fails()){
             return response()->json([
                 'status' => 400,
-                'errors' => $validators,
+                'errors' => $validators->messages(),
             ]);
         }else{
 
@@ -116,7 +139,7 @@ class ModuleServiceProvider
             
             return response()->json([
                 'status' => 200,
-                'messages' => 'Module Category has updated successfully.'
+                'messages' => 'Module category has updated.'
             ]);
         }
     }
@@ -126,7 +149,175 @@ class ModuleServiceProvider
     */
     public function moduleCategoriesDelete($id)
     {
-        //
+        $module_categories = CategoryModule::find($id);
+        if($module_categories){
+            $module_categories->delete();
+            return response()->json([
+                'status' => 200,
+                'messages' => 'The module category has deleted.'
+            ]);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'messages' => 'This module category id is not found.'
+            ]);
+        }
+    }
+
+
+    // ========================= Module Name Service ==========================
+    /**
+     * Handle Module Name Templete View
+    */
+    public function moduleNameViewTemplate(Request $request)
+    {
+        return view('module.module-name.index');
+    }
+
+    /**
+     * Handle Module Name Search
+    */
+    public function moduleNamesSearch(Request $request)
+    {
+        if (!$request->ajax()) {
+            abort(404);
+        }
+
+        $searchQuery = $request->input('query'); // The search input from the request
+        $input_value = $request->input('module_name'); // The additional filter if provided
+
+        $query = ModuleName::query()->orderBy('id', 'desc');
+
+        // Apply filters
+        if ($input_value) {
+            $query->where('module_name', 'LIKE', '%' . $input_value . '%');
+        }
+
+        if ($searchQuery) {
+            $query->where('module_name', 'LIKE', '%' . $searchQuery . '%');
+        } else {
+            // Filter by today's date if no search query is provided
+            $start_day = now()->startOfDay();
+            $end_day = now()->endOfDay();
+            $query->whereBetween('created_at', [$start_day, $end_day]);
+        }
+
+        $data = $query->get();
+        // Total Module Category Count
+        $total = ModuleName::count();
+
+        if ($data->isEmpty()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No matching current module name found, Please Search.......',
+                'data' => []
+            ], 200);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $data,
+            'current' => $data->count(),
+            'total' => $total,
+        ], 200);
+    }
+
+    /**
+     * Handle Module Name Create
+    */
+    public function ModuleNamesStore(Request $request)
+    {
+        $validators = Validator::make($request->all(),[
+            'module_name' => 'required|unique:module_names'
+        ],[
+            'module_name.required' => 'The module name is required.',
+            'module_name.unique' => 'The module name has already taken.'
+        ]);
+
+        if($validators->fails()){
+            return response()->json([
+                'status' => 400,
+                'errors' => $validators->messages()
+            ]);
+        }else{
+            $module_names= new ModuleName;
+            $module_names->module_name = $request->input('module_name');
+            $module_names->save();
+
+            return response()->json([
+                'status' => 200,
+                'messages' => 'The module name has created.'
+            ]);
+        }
+    }
+
+    /**
+     * Handle Module Name Edit
+    */
+    public function ModuleNamesEdit($id)
+    {
+        $module_names = ModuleName::find($id);
+        if ($module_names) {
+            return response()->json([
+                'status' => 200,
+                'messages' => $module_names,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'The module name is not found',
+            ]);
+        }
+    }
+
+    /**
+     * Handle Module Name Update
+    */
+    public function ModuleNamesUpdate(Request $request, $id)
+    {
+        $validators = Validator::make($request->all(),[
+            'module_name' => 'required|unique:module_names'
+        ],[
+            'module_name.required' => 'The module name is required.',
+            'module_name.unique' => 'The module name has already taken.'
+        ]);
+
+        if($validators->fails()){
+            return response()->json([
+                'status' => 400,
+                'errors' => $validators->messages(),
+            ]);
+        }else{
+
+            $module_names = ModuleName::find($id);
+            $module_names->module_name = $request->input('module_name');
+            $module_names->save();
+            
+            return response()->json([
+                'status' => 200,
+                'messages' => 'Module name has updated.'
+            ]);
+        }
+    }
+
+    /**
+     * Handle Module Name Delete
+    */
+    public function ModuleNamesDelete($id)
+    {
+        $module_names = ModuleName::find($id);
+        if($module_names){
+            $module_names->delete();
+            return response()->json([
+                'status' => 200,
+                'messages' => 'The module name has deleted.'
+            ]);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'messages' => 'This module name id is not found.'
+            ]);
+        }
     }
 
 }

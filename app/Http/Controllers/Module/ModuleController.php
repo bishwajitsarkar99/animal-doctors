@@ -16,6 +16,7 @@ class ModuleController extends Controller
         return $this->moduleServiceProvider = $moduleServiceProvider;
     }
 
+    // Module Category ========================================================
     // Module Category View Templete
     public function moduleCategoryView(Request $request){
         return $this->moduleServiceProvider->viewModuleCategoryTemplete($request);
@@ -44,6 +45,37 @@ class ModuleController extends Controller
     // Module Category Delete
     public function moduleCategoryDelete($id){
         return $this->moduleServiceProvider->moduleCategoriesDelete($id);
+    }
+
+    // Module Name ===============================================================
+    // Module Name View Template
+    public function moduleNameView(Request $request){
+        return $this->moduleServiceProvider->moduleNameViewTemplate($request);
+    }
+
+    // Module Name Search
+    public function moduleNameSearch(Request $request){
+        return $this->moduleServiceProvider->moduleNamesSearch($request);
+    }
+
+    // Module Name Create
+    public function ModuleNameStore(Request $request){
+        return $this->moduleServiceProvider->ModuleNamesStore($request);
+    }
+
+    // Module Name Edit
+    public function ModuleNameEdit($id){
+        return $this->moduleServiceProvider->ModuleNamesEdit($id);
+    }
+
+    // Module Name Update
+    public function ModuleNameUpdate(Request $request, $id){
+        return $this->moduleServiceProvider->ModuleNamesUpdate($request, $id);
+    }
+
+    // Module Name Delete
+    public function ModuleNameDelete($id){
+        return $this->moduleServiceProvider->ModuleNamesDelete($id);
     }
 
 }

@@ -13,14 +13,15 @@
         buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm', 'Confirm', 1000);
         buttonLoader('#delete_module_category', '.delete-confrm-icon', '.delete-confrm-btn-text', 'Delete', 'Delete', 1000);
         buttonLoader('#create_btn_confirm', '.create-confirm-icon', '.create-confirm-btn-text', 'Confirm', 'Confirm', 1000);
-        fetch_category_module();
+
+        fetch_module_names();
         // Data View Table--------------
         const table_rows = (rows) => {
             if (!rows || rows.length === 0) {
                 return `
                     <tr class="table-row">
                         <td class="error_data text-danger" align="center" colspan="7">
-                            ${message || 'Module Category Currently Not Exists On Server! Please Search......'}
+                            ${message || 'Module Name Currently Not Exists On Server! Please Search......'}
                         </td>
                     </tr>
                 `;
@@ -30,67 +31,67 @@
                 return `
                     <tr class="table-row user-table-row data-table-row" id="row_id" value="${key}" tabindex="0">
                         <td class="sn border_ord first_td" id="table_edit_btn" value="${row.id}" tabindex="0">${row.id}</td>
-                        <td class="txt_ second_td" colspan="5" tabindex="0">${row.module_category_name}</td>
+                        <td class="txt_ second_td" colspan="5" tabindex="0">${row.module_name}</td>
                     </tr>
                 `;
             }).join("");
         };
 
         // Fetch Users Data ------------------
-        function fetch_category_module(query = '') {
-            const current_url = "{{ route('module_category_search.action') }}";
-            const input_value = $("#CategorySearchBar").val();
+        function fetch_module_names(query = '') {
+            const current_url = "{{ route('module_name_search.action') }}";
+            const input_value = $("#ModuleSearchBar").val();
 
             $.ajax({
                 type: "GET",
                 url: current_url,
                 dataType: 'json',
-                data: { query: query, module_category_name: input_value },
+                data: { query: query, module_name: input_value },
                 success: function(response) {
                     const { status, data, total, current, message } = response;
 
                     // Handle the table rendering based on the status
                     if (status === 'success') {
-                        $("#module_category_table").html(table_rows(data));
-                        $("#module_catg_row_amount").text(`${total}.00`);
-                        $("#module_catg_current_amount").text(` [ Current-Category : ${current}.00 ] `);
-                        $("#module_catg_current_amount").removeAttr('hidden');
+                        $("#module_name_table").html(table_rows(data));
+                        $("#module_nam_row_amount").text(`${total}.00`);
+                        $("#module_name_current_amount").text(` [ Current-Module : ${current}.00 ] `);
+                        $("#module_name_current_amount").removeAttr('hidden');
                     } else {
-                        $("#module_category_table").html(`
+                        $("#module_name_table").html(`
                             <tr class="table-row">
                                 <td class="error_data text-danger" align="center" colspan="7">
-                                    ${message || 'Module Category Currently Not Exists On Server! Please Search......'}
+                                    ${message || 'Module Name Currently Not Exists On Server! Please Search......'}
                                 </td>
                             </tr>
                         `);
-                        $("#module_catg_row_amount").text('0.00');
-                        $("#module_catg_current_amount").attr('hidden', true);
+                        $("#module_nam_row_amount").text('0.00');
+                        $("#module_name_current_amount").attr('hidden', true);
                     }
 
                     // Initialize tooltips
                     $('[data-bs-toggle="tooltip"]').tooltip();
 
                     // Populate autocomplete suggestions
-                    const suggestions = data.map(item => item.module_category_name);
-                    $("#CategorySearchBar").autocomplete({
+                    const suggestions = data.map(item => item.module_name);
+                    $("#ModuleSearchBar").autocomplete({
                         source: suggestions
                     });
                 },
                 error: function() {
-                    $("#module_category_table").html(`
+                    $("#module_name_table").html(`
                         <tr class="table-row">
                             <td class="error_data text-danger" align="center" colspan="7">
                                 Error Fetching Data!
                             </td>
                         </tr>
                     `);
-                    $("#module_catg_row_amount").text('0.00');
+                    $("#module_nam_row_amount").text('0.00');
                 }
             });
         }
-
+        
         // Event delegation for row key events
-        $("#module_category_table").on("keydown", ".data-table-row", function (event) {
+        $("#module_name_table").on("keydown", ".data-table-row", function (event) {
             const keyCode = event.which || event.keyCode;
 
             // Arrow Down key: Move focus to the next row or loop back to the first row
@@ -159,7 +160,7 @@
         });
 
         // Handle key events on table cells / td
-        $("#module_category_table").on("keydown", "td", function (event) {
+        $("#module_name_table").on("keydown", "td", function (event) {
             const keyCode = event.which || event.keyCode;
 
             // Arrow Down key: Move focus to the first <td> of the next row
@@ -208,13 +209,13 @@
         });
 
         // Live-Search-----------------------------
-        $(document).on('click keyup', '#CategorySearchBar', function(event) {
+        $(document).on('click keyup', '#ModuleSearchBar', function(event) {
             const query = $(this).val();
-            fetch_category_module(query);
+            fetch_module_names(query);
         });
 
-        // Module Category input handle Field
-        $(document).on('keyup', '#moduleCategoryName', function(){
+        // Module Name input handle Field
+        $(document).on('keyup', '#moduleName', function(){
             $("#module_create_modal_heading").html("");
             $("#module_catg_create_modal").html("");
             $(this).removeClass('is-invalid');
@@ -222,7 +223,7 @@
             $("#updateForm_error").html("");
 
             var value = $(this).val();
-            var edit_id = $("#moduleCategoryId").val();
+            var edit_id = $("#moduleNameId").val();
             if(value !== ''){
                 if(edit_id !== ''){
                     $("#thAction").removeAttr('hidden');
@@ -246,25 +247,25 @@
 
         // Cancel Button
         $(document).on('click', '#catgCancelBtn', function(){
-            $("#moduleCategoryId").val("");
-            $("#moduleCategoryName").val("");
+            $("#moduleNameId").val("");
+            $("#moduleName").val("");
             $("#catgCreateBtn").removeAttr('hidden');
             $("#catgCancelBtn").removeAttr('hidden');
             $("#thAction").attr('hidden', true);
             $("#catgUpdateBtn").attr('hidden', true);
             $("#catgDeleteBtn").attr('hidden', true);
-            $("#moduleCategoryName").removeClass('is-invalid');
+            $("#moduleName").removeClass('is-invalid');
             $("#savForm_error").html("");
             $("#updateForm_error").html("");
         });
 
-        // Create Module Category Modal Show
+        // Create Module Name Modal Show
         $(document).on('click', '#catgCreateBtn', function(e){
             e.preventDefault();
             $("#module_create_modal_heading").html("");
             $("#module_catg_create_modal").html("");
             $("#createconfirmmodulecategory").modal('show');
-            const input_val = $("#moduleCategoryName").val();
+            const input_val = $("#moduleName").val();
             if(input_val !== ''){
                 const category_input_val = input_val;
                 $("#module_create_modal_heading").append(`<span>${category_input_val}</span>`); 
@@ -289,30 +290,30 @@
             };
         });
 
-        // Confirm Create Category Module
+        // Confirm Create Name Module
         $(document).on('click', '#create_btn_confirm', function(e){
             e.preventDefault();
 
-            var moduleCategoryName = $("#moduleCategoryName").val();
+            var moduleName = $("#moduleName").val();
             var data ={
-                module_category_name : moduleCategoryName,
+                module_name : moduleName,
                 _token : $('meta[name="csrf-token"]').attr('content'),
             }
 
             $.ajax({
                 type: "POST",
-                url: "{{ route('module_category_store.action') }}",
+                url: "{{ route('module_name_store.action') }}",
                 dataType: "json",
                 data: data,
                 success: function(response){
                     if(response.status === 400){
                         $.each(response.errors, function(key, err_value){
-                            if (key === 'module_category_name') {
+                            if (key === 'module_name') {
                                 $("#savForm_error").fadeIn();
                                 $('#savForm_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">'+ 'Error-Message : ' + err_value + '</span>');
                                 $("#savForm_error").addClass("alert_show_errors");
-                                $('#moduleCategoryName').addClass('is-invalid');
-                                $('#moduleCategoryName').html("");
+                                $('#moduleName').addClass('is-invalid');
+                                $('#moduleName').html("");
                             }
                         });
                     }else if(response.status === 200){
@@ -334,7 +335,7 @@
                             $('#success_message').fadeIn();
                             $('#success_message').text(response.messages);
                             
-                            $("#moduleCategoryName").val("");
+                            $("#moduleName").val("");
                             $("#thAction").attr('hidden', true);
                             $("#catgCreateBtn").attr('hidden', true);
                             $("#catgCancelBtn").attr('hidden', true);
@@ -344,14 +345,14 @@
                             setTimeout(() => {
                                 $('#success_message').fadeOut(3000);
                             }, 3000);
-                            fetch_category_module();
+                            fetch_module_names();
                         }, 1500);
                     }
                 }
             });
         });
 
-        // Edit Module Category (Table Td select edit button)
+        // Edit Module Name (Table Td select edit button)
         $(document).on('click keydown Enter', '#table_edit_btn', function(){
             if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
                 $("#module_update_modal_heading").html("");
@@ -394,7 +395,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "/application/module-category-edit/" +id,
+                    url: "/application/module-name-edit/" +id,
                     dataType: "json",
                     success: function(response){
                         if(response.status == 404){
@@ -402,29 +403,29 @@
                             $('#success_message').addClass('alert alert-danger');
                             $('#success_message').text(response.messages);
                         }else if(response.status == 200){
-                            $('#moduleCategoryId').val(id);
+                            $('#moduleNameId').val(id);
                             const updateModuleHeading = $("#module_update_modal_heading");
                             const updateModuleBody = $("#module_catg_update_modal");
                             const deleteModuleHeading = $("#module_delete_modal_heading");
                             const deleteModuleBody = $("#module_catg_delete_modal");
-                            updateModuleHeading.append(`<span class="">${response.messages.module_category_name}</span>`);
-                            deleteModuleHeading.append(`<span class="">${response.messages.module_category_name}</span>`);
-                            deleteModuleBody.append(`<span class="">${response.messages.module_category_name}</span>`);
-                            updateModuleBody.append(`<span class="">${response.messages.module_category_name}</span>`);
-                            $('.edit-module-category-input').val(response.messages.module_category_name);
+                            updateModuleHeading.append(`<span class="">${response.messages.module_name}</span>`);
+                            deleteModuleHeading.append(`<span class="">${response.messages.module_name}</span>`);
+                            deleteModuleBody.append(`<span class="">${response.messages.module_name}</span>`);
+                            updateModuleBody.append(`<span class="">${response.messages.module_name}</span>`);
+                            $('.edit_module_name').val(response.messages.module_name);
                         }
                     }
                 });
             }
         });
 
-        // Update Module Category Modal Show
+        // Update Module Name Modal Show
         $(document).on('click', '#catgUpdateBtn', function(e){
             e.preventDefault();
             $("#module_update_modal_heading").html("");
             $("#module_catg_update_modal").html("");
             $("#updateconfirmmodule").modal('show');
-            const input_val = $("#moduleCategoryName").val();
+            const input_val = $("#moduleName").val();
             if(input_val !== ''){
                 const category_input_val = input_val;
                 $("#module_update_modal_heading").append(`<span>${category_input_val}</span>`); 
@@ -449,32 +450,32 @@
             };
         });
 
-        // Confirm Update Module Category
+        // Confirm Update Module Name
         $(document).on('click', '#update_btn_confirm', function(e){
             e.preventDefault();
-            var id = $("#moduleCategoryId").val();
-            var moduleCategoryName = $(".edit-module-category-input").val();
+            var id = $("#moduleNameId").val();
+            var moduleName = $(".edit_module_name").val();
             
             var data = {
                 id : id,
-                module_category_name : moduleCategoryName,
+                module_name : moduleName,
                 _token: $('meta[name="csrf-token"]').attr('content')
             }
 
             $.ajax({
                 type: "PUT",
-                url: "/application/module-category-update/" +id,
+                url: "/application/module-name-update/" +id,
                 data: data,
                 dataType: "json",
                 success: function(response){
                     if(response.status === 400){
                         $.each(response.errors, function(key, err_value){
-                            if (key === 'module_category_name') {
+                            if (key === 'module_name') {
                                 $("#updateForm_error").fadeIn();
                                 $('#updateForm_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
                                 $("#updateForm_error").addClass("alert_show_errors");
-                                $('#moduleCategoryName').addClass('is-invalid');
-                                $('#moduleCategoryName').html("");
+                                $('#moduleName').addClass('is-invalid');
+                                $('#moduleName').html("");
                             }
                         });
                     }else if(response.status === 200){
@@ -497,7 +498,7 @@
                             $('#success_message').fadeIn();
                             $('#success_message').text(response.messages);
                             
-                            $('.edit-module-category-input').val("");
+                            $('.edit_module_name').val("");
                             $("#thAction").attr('hidden', true);
                             $("#catgCreateBtn").attr('hidden', true);
                             $("#catgCancelBtn").attr('hidden', true);
@@ -507,7 +508,7 @@
                             setTimeout(() => {
                                 $('#success_message').fadeOut(3000);
                             }, 3000);
-                            fetch_category_module();
+                            fetch_module_names();
                         }, 1500);
                     }
                 }
@@ -516,14 +517,14 @@
             
         });
 
-        // Delete Module Category Modal Show
+        // Delete Module Name Modal Show
         $(document).on('click', '#catgDeleteBtn', function(e){
             e.preventDefault();
             $("#module_delete_modal_heading").html("");
             $("#module_catg_delete_modal").html("");
             $("#deleteconfirmmodulecategory").modal('show');
             var time = null;
-            const input_val = $("#moduleCategoryName").val();
+            const input_val = $("#moduleName").val();
             if(input_val !== ''){
                 const category_input_val = input_val;
                 $("#module_delete_modal_heading").append(`<span>${category_input_val}</span>`); 
@@ -546,10 +547,10 @@
             };
         });
 
-        // Confirm Delete Module Category
+        // Confirm Delete Module Name
         $(document).on('click', '#delete_module_category', function(e){
             e.preventDefault();
-            var id = $("#moduleCategoryId").val();
+            var id = $("#moduleNameId").val();
 
             $.ajaxSetup({
                 headers: {
@@ -559,7 +560,7 @@
 
             $.ajax({
                 type: "DELETE",
-                url: "/application/module-category-delete/" +id,
+                url: "/application/module-name-delete/" +id,
                 dataType: "json",
                 success: function(response){
                     if(response.status === 200){
@@ -580,7 +581,7 @@
                             $('#success_message').addClass('alert_show font_size ps-1 pe-1 ms-5');
                             $('#success_message').fadeIn();
                             $('#success_message').text(response.messages);
-                            $("#moduleCategoryName").val("");
+                            $("#moduleName").val("");
                             $("#thAction").attr('hidden', true);
                             $("#catgCreateBtn").attr('hidden', true);
                             $("#catgCancelBtn").attr('hidden', true);
@@ -590,83 +591,12 @@
                             setTimeout(() => {
                                 $('#success_message').fadeOut(3000);
                             }, 3000);
-                            fetch_category_module();
+                            fetch_module_names();
                         }, 1500);
                     }
                 }
             });
         });
-
+        
     });
 </script>
-<!-- <script>
-    // key down and up for input field
-    $(document).ready(function(){
-        // Handle keydown events on inputs and buttons inside #module_catg_first
-        $("#module_catg_first").on("keydown", "input, button", function (event) {
-            const keyCode = event.which || event.keyCode;
-
-            // Arrow Down key: Move focus to the next input field
-            if (keyCode === 40) {
-                const nextInput = $(this).closest("th").next().find("input");
-                if (nextInput.length) {
-                    $(this).removeClass("inputlight");
-                    nextInput.addClass("inputlight").focus();
-                } else {
-                    const firstInput = $("#module_catg_first").find(".input-field").first();
-                    if (firstInput.length) {
-                        $(this).removeClass("inputlight");
-                        firstInput.addClass("inputlight").focus();
-                    }
-                }
-                event.preventDefault();
-                return;
-            }
-
-            // Arrow Up key: Move focus to the previous input field
-            if (keyCode === 38) {
-                const prevInput = $(this).closest("th").prev().find("input");
-                if (prevInput.length) {
-                    $(this).removeClass("inputlight");
-                    prevInput.addClass("inputlight").focus();
-                } else {
-                    const lastInput = $("#module_catg_first").find(".input-field").last();
-                    if (lastInput.length) {
-                        $(this).removeClass("inputlight");
-                        lastInput.addClass("inputlight").focus();
-                    }
-                }
-                event.preventDefault();
-                return;
-            }
-
-            // Arrow Left key: Move focus to the previous button
-            // if (keyCode === 37) {
-            //     const currentTh = $(this).closest("th");
-            //     const prevButton = currentTh.prev().find("button:not([hidden])").last();
-
-            //     if (prevButton.length) {
-            //         prevButton.removeAttr("hidden").focus();
-            //         $(this).removeClass("highlight");
-            //         prevButton.addClass("highlight").focus();
-            //     }
-            //     event.preventDefault();
-            //     return;
-            // }
-
-            // // Arrow Right key: Move focus to the next button
-            // if (keyCode === 39) {
-            //     const currentTh = $(this).closest("th");
-            //     const nextButton = currentTh.next().find("button:not([hidden])").first();
-
-            //     if (nextButton.length) {
-            //         nextButton.removeAttr("hidden").focus();
-            //         $(this).removeClass("highlight");
-            //         nextButton.addClass("highlight").focus();
-            //     }
-            //     event.preventDefault();
-            //     return;
-            // }
-        });
-    });
-</script> -->

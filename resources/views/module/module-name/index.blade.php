@@ -8,12 +8,12 @@
         <table class="module-category-table" id="module_catg_first">
           @csrf
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <input type="hidden" name="module_category_id" id="moduleCategoryId">
+          <input type="hidden" name="module_category_id" id="moduleNameId">
           <thead class="module-category-table-head-one" id="module_catg_thead_one">
             <tr class="module-category-table-head-row" id="module_catg_row">
-              <th class="module-category-table-head-th-label" id="thCatgName">Category-Name :</th>
+              <th class="module-category-table-head-th-label" id="thCatgName">Module-Name :</th>
               <th class="module-category-table-head-th-input" colspan="3" id="thCateg">
-                <input class="module-category-input edit-module-category-input" type="text" name="module_category_name" value="" placeholder="Category Name" id="moduleCategoryName">
+                <input class="module-category-input edit_module_name" type="text" name="module_name" value="" placeholder="Module Name" id="moduleName">
               </th>
               <th  class="module-category-table-head-th-action action_th" colspan="3" id="thAction" hidden>
                 <button class="module-sm-btn" id="catgCreateBtn" hidden>Create</button>
@@ -27,29 +27,29 @@
             <tr class="module-category-table-head-row-two" id="module_catg_row_two">
               <th class="module-category-table-head-th-search-label" id="module_searchBar">Search-Bar :</th>
               <th class="module-category-table-head-th-search-bar" colspan="5">
-                <input class="table-search-bar input-field" type="search" name="module_category_name" value="" placeholder="Search" id="CategorySearchBar">
+                <input class="table-search-bar input-field" type="search" name="module_name" value="" placeholder="Search" id="ModuleSearchBar">
               </th>
             </tr>
           </thead>
           <thead class="module-category-table-head-two">
             <tr class="module-category-table-head-row-two" id="module_catg_row_three">
               <th class="module-category-table-head-th-search-bar ps-3" id="module_catg_row_sn">SN.</th>
-              <th class="module-category-table-head-th-search-bar" colspan="5" id="module_catg_row_catname">Category-Name <span id="module_catg_current_amount" hidden></span></th>
+              <th class="module-category-table-head-th-search-bar" colspan="5" id="module_catg_row_catname">Module-Name <span id="module_name_current_amount" hidden></span></th>
             </tr>
           </thead>
         </table>
         <div class="table-responsive">
           <table class="module-category-table mb-3" id="module_catg">
-            <tbody class="module-category-table-body bg-white" id="module_category_table"></tbody>
+            <tbody class="module-category-table-body bg-white" id="module_name_table"></tbody>
           </table>
         </div>
         <table class="footer_box">
           <tfoot class="module-category-table-footer mb-3">
             <tr class="module-category-table-footer-row table-row" id="footerRow">
               <th class="module-category-table-footer-th" colspan="5" id="module_catg_row_total">
-                Total Category <span class="action_message"><span id="success_message"></span></span>
+                Total Module <span class="action_message"><span id="success_message"></span></span>
               </th>
-              <th class="module-category-table-footer-th" id="module_catg_row_amount"></th>
+              <th class="module-category-table-footer-th" id="module_nam_row_amount"></th>
             </tr>
           </tfoot>
         </table>
@@ -159,7 +159,7 @@
 @endsection
 
 @push('scripts')
-@include('module.module-category.ajax.category_module-ajax')
+@include('module.module-name.ajax.module-name-ajax')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- jQuery UI Auto-Complete or Date Picker -->
