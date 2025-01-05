@@ -50,6 +50,18 @@ class AuthController extends Controller
     {
         return $this->authService->fetchEmailTwos($request, $id);
     }
+    
+    // Login Door Page View
+    public function loginDoor(Request $request)
+    {
+        return $this->authService->loginDoorPage($request);
+    }
+
+    // Open Login Page
+    public function openLogin(Request $request)
+    {
+        return $this->authService->openLoginPage($request);
+    }
 
     // load register page
     public function loadRegister()

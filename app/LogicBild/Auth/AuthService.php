@@ -52,7 +52,7 @@ class AuthService
             $route = $this->redirectDashboard();
             return redirect($route);
         }
-        return view('register', compact('company_profiles'));
+        return view('auth.register', compact('company_profiles'));
     }
     /**
      * Handle create user register.
@@ -93,8 +93,60 @@ class AuthService
             'account_create_session' => now(),
         ]);
 
-        return redirect(url('/email-verification'))->with('success', 'Your Registration has been completed successfully');
+        return redirect(url('auth.email-verification'))->with('success', 'Your Registration has been completed successfully');
     }
+    /**
+     * Handle Login Door View page.
+    */
+    public function loginDoorPage(Request $request)
+    {
+        return view('login-door');
+    }
+    /**
+     * Handle Open Login page.
+    */
+    public function openLoginPage(Request $request)
+    {
+        // Validate the email input
+        $request->validate([
+            'email' => 'required|email',
+        ], [
+            'email.required' => 'Email is required.',
+            'email.email' => 'Please enter a valid email address.',
+        ]);
+
+        $user_email = $request->input('email');
+
+        // Check if the user exists
+        $user = User::where('email', $user_email)->first();
+
+        if ($user) {
+            // Store session data indicating login completion
+            session(['login_completed' => true]);
+            // Determine redirect URL based on the user's role
+            $redirect = match ($user->role) {
+                1 => '/login',
+                2, 3 => '/admin-login',
+                5 => '/accounts-login',
+                6, 7 => '/common-user-login',
+                default => '/',
+            };
+
+            // Return the redirect URL in the response
+            return response()->json([
+                'status' => 200,
+                'redirect' => $redirect,
+            ]);
+        } else {
+            // User email does not exist
+            return response()->json([
+                'status' => 400,
+                'error' => 'User email does not exist.',
+            ]);
+        }
+    }
+
+
     /**
      * Handle Super Admin Login View page.
     */
@@ -108,7 +160,7 @@ class AuthService
             return redirect($route);
         }
 
-        return view('login', compact('company_profiles', 'roles'));
+        return view('auth.login', compact('company_profiles', 'roles'));
     }
     /**
      * Handle Admin Login View page.
@@ -123,7 +175,7 @@ class AuthService
             return redirect($route);
         }
 
-        return view('admin-login', compact('company_profiles', 'roles'));
+        return view('auth.admin-login', compact('company_profiles', 'roles'));
     }
     /**
      * Handle Accounts Login View page.
@@ -138,7 +190,7 @@ class AuthService
             return redirect($route);
         }
 
-        return view('accounts-login', compact('company_profiles', 'roles'));
+        return view('auth.accounts-login', compact('company_profiles', 'roles'));
     }
     /**
      * Handle Common-User Login View page.
@@ -153,7 +205,7 @@ class AuthService
             return redirect($route);
         }
 
-        return view('common-user-login', compact('company_profiles', 'roles'));
+        return view('auth.common-user-login', compact('company_profiles', 'roles'));
     }
     /**
      * Handle user login event.
@@ -208,6 +260,9 @@ class AuthService
                 ]);
             }
 
+            // Clear the 'login_completed' session flag
+            Session::forget('login_completed');
+
             session(['session_id' => $sessionId]);
                
             return redirect($route);
@@ -221,7 +276,7 @@ class AuthService
     public function forgetPasswordLoad()
     {
         $company_profiles = companyProfile::where('id', '=', 1)->get();
-        return view('forget-password', compact('company_profiles'));
+        return view('auth.forget-password', compact('company_profiles'));
     }
     /**
      * Handle send resetlink in email.
@@ -251,7 +306,7 @@ class AuthService
     public function resetPasswordLoad(Request $request)
     {
         $company_profiles = companyProfile::where('id', '=', 1)->get();
-        return view('reset-password', \compact('company_profiles'));
+        return view('auth.reset-password', \compact('company_profiles'));
     }
     /**
      * Handle set passord.
@@ -276,7 +331,7 @@ class AuthService
         );
 
         if($response == Password::PASSWORD_RESET){
-            return redirect()->route('login')->with('success', 'Password has changed successfully');
+            return redirect()->route('auth.login')->with('success', 'Password has changed successfully');
         }
         return back()->withInput($request->only('email'))->withErrors(['email' => trans($response)]);
     }
@@ -316,7 +371,7 @@ class AuthService
         $request->session()->flush();
 
         Auth::logout();
-        return redirect('/admin-login');
+        return redirect('/');
     }
     /**
      * Handle accounts logout.
@@ -335,7 +390,7 @@ class AuthService
         $request->session()->flush();
 
         Auth::logout();
-        return redirect('/accounts-login');
+        return redirect('/');
     }
     /**
      * Handle common user logout.
@@ -354,7 +409,7 @@ class AuthService
         $request->session()->flush();
 
         Auth::logout();
-        return redirect('/common-user-login');
+        return redirect('/');
     }
     /**
      * Handle email verification page load.
@@ -363,7 +418,7 @@ class AuthService
     {
         $company_profiles = companyProfile::where('id', '=', 1)->get();
         $email_verifications = EmailVerification::where('status', '=', 0)->orderBy('id', 'desc')->get();
-        return view('email-verirication', compact('company_profiles','email_verifications'));
+        return view('auth.email-verirication', compact('company_profiles','email_verifications'));
     }
     /**
      * Handle send email verification.

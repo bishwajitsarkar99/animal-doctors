@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Permission\InventoryAccessPermission;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login-door');
+    //return view('welcome');
 });
 
 require __DIR__ . DIRECTORY_SEPARATOR .'auth.php';

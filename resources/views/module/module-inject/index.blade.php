@@ -19,12 +19,34 @@
           </thead>
           <thead class="module-category-table-head-one" id="module_catg_thead_one">
             <tr class="module-category-table-head-row" id="module_catg_row">
-              <th class="module-category-table-head-th-input" id="thModule">
-                <input class="module-name-input edit_module_name" type="text" name="module_name" value="" placeholder="Module Name" id="module_name">
-              </th>
-              <th class="module-category-table-head-th-input" id="thModule">
-                <input class="module-category-input edit_module_category" type="text" name="module_category" value="" placeholder="Module Category" id="module_category">
-              </th>
+              <div class="dropdown">
+                <th class="module-category-table-head-th-input" id="thModule">
+                  <input class="module-name-input edit_module_name" type="text" name="module_name" value="" placeholder="Module Name" id="module_name">
+                  <div id="moduleNameMenu" class="dropdown-content">
+                    <div class="table_responsive">
+                      <table class="table">
+                        <tbody class="bg-white" id="moduleNameTable">
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </th>
+              </div>
+              <div class="dropdown">
+                <th class="module-category-table-head-th-input" id="thModule">
+                  <input class="module-category-input edit_module_category" type="text" name="module_category" value="" placeholder="Module Category" id="module_category">
+                  <div id="moduleCategoryMenu" class="dropdown-content">
+                    <div class="table_responsive">
+                      <table class="table">
+                        <tbody class="bg-white table-responsive" id="moduleCategoryTable">
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </th>
+              </div>
               <th class="module-category-table-head-th-input" colspan="2" id="thModule">
                 <input class="module-url-input edit_module_url" type="text" name="module_url" value="" placeholder="Module URL" id="module_url">
               </th>
@@ -57,7 +79,7 @@
                 <th class="module-table-index" id="module_catg_row_catname">Module-Category</th>
                 <th class="module-table-index" id="module_catg_row_catname">Module-URL</th>
                 <th class="module-table-index" id="module_catg_row_catname">Domain</th>
-                <th class="module-table-index" id="module_catg_row_catname">Ip-Address</th>
+                <th class="module-table-index" id="module_catg_row_catname">IP-Address</th>
               </tr>
             </thead>
             <tbody class="module-category-table-body bg-white" id="module_inject_table"></tbody>
@@ -179,7 +201,7 @@
 @endsection
 
 @push('scripts')
-@include('module.module-name.ajax.module-name-ajax')
+@include('module.module-inject.ajax.module-inject-ajax')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- jQuery UI Auto-Complete or Date Picker -->

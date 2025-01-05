@@ -23,6 +23,8 @@ Route::group(['middleware' => 'auth'], function (){
             Route::get('/module-name-search', [ModuleController::Class, 'moduleNameSearch'])->name('module_name_search.action');
             // Module
             Route::get('/module-index', [ModuleController::Class, 'index'])->name('module.index');
+            Route::get('/module-name-get', [ModuleController::Class, 'moduleNameGet'])->name('module_name_get.action');
+            Route::get('/module-category-get', [ModuleController::Class, 'moduleCategoryGet'])->name('module_category_get.action');
             Route::post('/module-store', [ModuleController::Class, 'store'])->name('module.store');
             Route::get('/module-edit/{id}', [ModuleController::Class, 'edit'])->name('module.edit');
             Route::put('/module-update/{id}', [ModuleController::Class, 'update'])->name('module.update');

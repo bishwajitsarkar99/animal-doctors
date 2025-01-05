@@ -91,5 +91,6 @@ class Kernel extends HttpKernel
         'emailVerificationPage' => \App\Http\Middleware\Pages\EmailVerification::class,
         'forgetPage' => \App\Http\Middleware\Pages\ForgetPage::class,
         'resetPage' => \App\Http\Middleware\Pages\ResetPage::class,
+        'checkLogin' => \App\Http\Middleware\CheckLoginCompletion::class,
     ];
 }

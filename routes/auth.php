@@ -4,12 +4,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Email\EmailController;
 
-Route::get('/login', function () {
+Route::get('/login-door', function () {
     return redirect('/');
 });
+// Login Door && User Registration Form Page
+// Route:: middleware('doorLoginPage')->group(function(){
+// });
+Route::get('/login-door', [AuthController::class, 'loginDoor'])->name('login_door.index');
+Route::get('/login-page-get', [AuthController::class, 'openLogin'])->name('login_page.action');
+Route::get('/registration-form', [AuthController::class, 'loadingRegistrationForm'])->name('registraion_form.index');
 // Super Admin Login Routes with Middleware
-Route::middleware('loginPage')->group(function () {
-    Route::get('/', [AuthController::class, 'loadLogin'])->name('superadmin.login');
+Route::middleware(['loginPage', 'checkLogin',])->group(function () {
+    Route::get('/login', [AuthController::class, 'loadLogin'])->name('superadmin.login');
 });
 // Admin Login Routes with Middleware
 Route::middleware('adminLoginPage')->group(function () {

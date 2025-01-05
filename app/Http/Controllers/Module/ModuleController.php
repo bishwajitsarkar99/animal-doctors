@@ -84,4 +84,16 @@ class ModuleController extends Controller
         return $this->moduleServiceProvider->moduleInjectIndex($request);
     }
 
+    // Module Inject Module Name Get
+    public function moduleNameGet(Request $request)
+    {
+        return $this->moduleServiceProvider->moduleInjectNameGet($request);
+    }
+
+    // Module Inject Module Category Get
+    public function moduleCategoryGet(Request $request)
+    {
+        return $this->moduleServiceProvider->moduleInjectCategoryGet($request);
+    }
+
 }

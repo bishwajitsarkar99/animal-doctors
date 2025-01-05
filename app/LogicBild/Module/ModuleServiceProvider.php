@@ -329,4 +329,44 @@ class ModuleServiceProvider
         return view('module.module-inject.index');
     }
 
+    /**
+     * Handle Module Inject Module Name Get
+    */
+    public function moduleInjectNameGet(Request $request)
+    {
+        $module_names = ModuleName::orderBy('id', 'asc')->get();
+        if($module_names->isEmpty()){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Module name is not exits.',
+                'module_names' => []
+            ]);
+        }else{
+            return response()->json([
+                'status' => 'success',
+                'module_names' => $module_names,
+            ], 200);
+        }
+    }
+
+    /**
+     * Handle Module Inject Module Category Get
+    */
+    public function moduleInjectCategoryGet(Request $request)
+    {
+        $module_categories = CategoryModule::orderBy('id', 'asc')->get();
+        if($module_categories->isEmpty()){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Module category is not exits.',
+                'module_categories' => []
+            ]);
+        }else{
+            return response()->json([
+                'status' => 'success',
+                'module_categories' => $module_categories,
+            ], 200);
+        }
+    }
+
 }
