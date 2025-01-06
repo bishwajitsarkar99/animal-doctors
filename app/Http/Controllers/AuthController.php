@@ -57,6 +57,12 @@ class AuthController extends Controller
         return $this->authService->loginDoorPage($request);
     }
 
+    // Clear Session
+    public function clearSession(Request $request)
+    {
+        return $this->authService->clearSessions($request);
+    }
+
     // Open Login Page
     public function openLogin(Request $request)
     {
@@ -76,24 +82,24 @@ class AuthController extends Controller
     }
 
     // Load Super Admin Login Page View
-    public function loadLogin()
+    public function loadLogin(Request $request)
     {
-        return $this->authService->loginPage();
+        return $this->authService->loginPage($request);
     }
     // Load Admin Login Page View
-    public function loadAdminLogin()
+    public function loadAdminLogin(Request $request)
     {
-        return $this->authService->viewAdminLoginPage();
+        return $this->authService->viewAdminLoginPage($request);
     }
     // Load Accounts Login Page View
-    public function loadAccountsLogin()
+    public function loadAccountsLogin(Request $request)
     {
-        return $this->authService->viewAccountsLoginPage();
+        return $this->authService->viewAccountsLoginPage($request);
     }
     // Load Common User Login Page View
-    public function loadCommonUserLogin()
+    public function loadCommonUserLogin(Request $request)
     {
-        return $this->authService->viewCommonUserLoginPage();
+        return $this->authService->viewCommonUserLoginPage($request);
     }
     // User Login
     public function login(Request $request)
@@ -114,9 +120,9 @@ class AuthController extends Controller
     }
 
     // password forget page laod
-    public function forgetPassword()
+    public function forgetPassword(Request $request)
     {
-        return $this->authService->forgetPasswordLoad();
+        return $this->authService->forgetPasswordLoad($request);
     }
 
     // Send ResetLink In Email

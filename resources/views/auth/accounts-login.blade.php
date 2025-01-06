@@ -162,7 +162,8 @@
                                 <div class="form-group ms-4">
                                     <label class="email email-label-skeleton" for="email">Email :</label>
                                     <span class="input-email-skeleton">
-                                        <input class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{old('email')}}" autofocus>
+                                        <!-- value="{{old('email')}}" -->
+                                        <input class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{ $email ?? ''}}" autofocus>
                                     </span>
                                     <span style="color:green;font-weight:800;font-size: 15px;">
                                         <i class="src_email fa fa-check src_email-hidden"></i>

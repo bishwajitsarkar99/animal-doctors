@@ -12,9 +12,10 @@ Route::get('/login-door', function () {
 // });
 Route::get('/login-door', [AuthController::class, 'loginDoor'])->name('login_door.index');
 Route::get('/login-page-get', [AuthController::class, 'openLogin'])->name('login_page.action');
+Route::post('/clear-session', [AuthController::class, 'clearSession'])->name('clear.session');
 Route::get('/registration-form', [AuthController::class, 'loadingRegistrationForm'])->name('registraion_form.index');
 // Super Admin Login Routes with Middleware
-Route::middleware(['loginPage', 'checkLogin',])->group(function () {
+Route::middleware('loginPage')->group(function () {
     Route::get('/login', [AuthController::class, 'loadLogin'])->name('superadmin.login');
 });
 // Admin Login Routes with Middleware

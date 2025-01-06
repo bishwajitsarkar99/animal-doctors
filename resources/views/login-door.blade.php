@@ -57,6 +57,11 @@
                 margin-top:27px;
                 background-color: beige;
                 padding-bottom:10px;
+                padding-right:19px;
+            }
+            table{
+                border-collapse: collapse;
+                width: 100%;
             }
             tr.table_head_row {
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -96,7 +101,7 @@
             .button_area {
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
                 justify-content: end;
-                padding-right: 39px;
+                padding-right: 16px;
                 padding-top: 10px;
             }
         </style>
@@ -135,7 +140,7 @@
                 <div class="flex justify-center mt-4 mb-3 sm:items-center sm:justify-between">
                     <div class="text-center text-sm text-gray-500 sm:text-left">
                         <div class="flex items-center">
-                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400">
+                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400" style="color:burlywood;">
                                 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                             </svg>
 
@@ -143,7 +148,7 @@
                                 <span>Supplier Management System Software V-3.0.1</span>
                             </a>
 
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400" style="color:burlywood;">
                                 <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                             </svg>
                         </div>
@@ -162,75 +167,75 @@
         <script type="module">
             import { 
                 buttonLoader, 
-                pageLoader, 
-                handleSuccessMessage, 
-                toolTip, 
-                browserInpect, 
-                rightSideBar, 
-                handleInputValidation, 
-                removeSkeletonClass 
+                //pageLoader, 
+                //handleSuccessMessage, 
+                //toolTip, 
+                //browserInpect, 
+                //rightSideBar, 
+                //handleInputValidation, 
+                //removeSkeletonClass 
             } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
             buttonLoader();
-            pageLoader();
-            toolTip();
+            //pageLoader();
+            //toolTip();
             //browserInpect();
 
             $(document).ready(function () {
                 // Initialize the message
-                handleSuccessMessage('#success_message');
+                //handleSuccessMessage('#success_message');
                 // Initialize the button loader for the login button
                 buttonLoader('.login_button', '.loading-icon', '.btn-text', 'Open...', 'Open', 2000);
                 // Initialize right sidebar canvas the loader modal with skeleton loading effect
-                rightSideBar(
-                    '.menu_btn',                   // Button selector to attach the click event
-                    '#loader_modal',               // Modal selector
-                    '.side_canvas_animation',       // Loader selector
-                    [                               // Array of elements to apply skeleton effect
-                        '.head_auth', 
-                        '.btn-close', 
-                        '.forg_page', 
-                        '.reg_page', 
-                        '.logn_page'
-                    ],
-                    2000
-                );
-                // Handle email validation
-                handleInputValidation(
-                    '.email_src',              // Input selector
-                    '.show-error',             // Error message selector
-                    'show-success-border',     // Success class
-                    'is-invalid',              // Error class
-                    'show-current-border',     // Default border class
-                    '.src_email'               // Success message selector
-                );
-                // Handle password validation
-                handleInputValidation(
-                    '.password_src',           // Input selector
-                    '.show-error2',            // Error message selector
-                    'show-success-border',     // Success class
-                    'is-invalid',              // Error class
-                    'show-current-border',     // Default border class
-                    '.src_password'            // Success message selector
-                );
-                // Array of skeleton class names
-                const skeletonClasses = [
-                    'headings-skeleton',
-                    'input-user-skeleton',
-                    'input-email-skeleton',
-                    'input-password-skeleton',
-                    'button-skeleton',
-                    'skeleton', // General skeleton
-                    'email-label-skeleton',
-                    'logo-skeleton',
-                    'menu-skeleton',
-                    'whatsapp-skeleton',
-                    'messenger-skeleton',
-                    'facebook-skeleton'
-                ];
+                // rightSideBar(
+                //     '.menu_btn',                   // Button selector to attach the click event
+                //     '#loader_modal',               // Modal selector
+                //     '.side_canvas_animation',       // Loader selector
+                //     [                               // Array of elements to apply skeleton effect
+                //         '.head_auth', 
+                //         '.btn-close', 
+                //         '.forg_page', 
+                //         '.reg_page', 
+                //         '.logn_page'
+                //     ],
+                //     2000
+                // );
+                // // Handle email validation
+                // handleInputValidation(
+                //     '.email_src',              // Input selector
+                //     '.show-error',             // Error message selector
+                //     'show-success-border',     // Success class
+                //     'is-invalid',              // Error class
+                //     'show-current-border',     // Default border class
+                //     '.src_email'               // Success message selector
+                // );
+                // // Handle password validation
+                // handleInputValidation(
+                //     '.password_src',           // Input selector
+                //     '.show-error2',            // Error message selector
+                //     'show-success-border',     // Success class
+                //     'is-invalid',              // Error class
+                //     'show-current-border',     // Default border class
+                //     '.src_password'            // Success message selector
+                // );
+                // // Array of skeleton class names
+                // const skeletonClasses = [
+                //     'headings-skeleton',
+                //     'input-user-skeleton',
+                //     'input-email-skeleton',
+                //     'input-password-skeleton',
+                //     'button-skeleton',
+                //     'skeleton', // General skeleton
+                //     'email-label-skeleton',
+                //     'logo-skeleton',
+                //     'menu-skeleton',
+                //     'whatsapp-skeleton',
+                //     'messenger-skeleton',
+                //     'facebook-skeleton'
+                // ];
                 // Remove skeleton
-                setTimeout(() => {
-                    removeSkeletonClass(skeletonClasses);
-                }, 2000);
+                // setTimeout(() => {
+                //     removeSkeletonClass(skeletonClasses);
+                // }, 2000);
             });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -264,20 +269,25 @@
                 // Open Login Page
                 $(document).on('click', '#openSubmit', function (e) {
                     e.preventDefault();
-                    var user_email = $("#user_login_form").val();
 
+                    var user_email = $("#user_login_form").val();
+                    if (!user_email) {
+                        alert("Please enter a valid email.");
+                        return;
+                    }
+
+                    currentURL = "{{ route('login_page.action') }}";
+
+                    // Make the AJAX request
                     $.ajax({
-                        type: "GET", // Ensure this matches your route method
-                        url: "{{ route('login_page.action') }}",
-                        data: { email: user_email },
+                        type: "GET",
+                        url: currentURL,
+                        data: { email: user_email},
                         dataType: "json",
                         success: function (response) {
                             if (response.status === 200) {
-                                // Redirect to the URL provided in the response
                                 window.location.href = response.redirect;
-                                $("#user_login_form").val("");
                             } else {
-                                // Display error message
                                 alert(response.error || "An unexpected error occurred.");
                             }
                         },
@@ -287,7 +297,21 @@
                     });
                 });
 
-
+                window.addEventListener('popstate', function () {
+                    $.ajax({
+                        url: "{{ route('clear.session') }}",
+                        type: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function (response) {
+                            console.log(response.message);
+                        },
+                        error: function () {
+                            console.error("Failed to clear session.");
+                        }
+                    });
+                });
             });
         </script>
     </body>

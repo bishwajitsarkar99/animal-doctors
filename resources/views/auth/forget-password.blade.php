@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/doctor-login.css">
     <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/register.css">
     <link rel="icon" type="shortcut icon" href="{{asset('backend_asset')}}/main_asset/img/com-black-favicon.png">
-    <title>Forget Password</title>
+    <title>{{setting('company_name')}}</title>
 </head>
 <header class="bg sticky-top">
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
@@ -135,7 +135,7 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="email" class="form-label skeleton lb_text">Email</label>
-                                                        <input type="email" id="email" style="border: 1px solid lightgray;" class="" name="email" placeholder="&#xf0e0; Enter Email Address" required="" autocomplete="off" autofocus />
+                                                        <input type="email" id="email" style="border: 1px solid lightgray;" class="" name="email" placeholder="&#xf0e0; Enter Email Address" value="{{ $email ?? ''}}" required="" autocomplete="off" autofocus disabled />
                                                         <span class="email-input2-skeleton"></span>
                                                     </div>
                                                     <div class="mb-3 d-grid">

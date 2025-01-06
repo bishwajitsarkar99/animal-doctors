@@ -102,6 +102,15 @@ class AuthService
     {
         return view('login-door');
     }
+
+    public function clearSessions(Request $request)
+    {
+        // Clear the 'email' session variable
+        Session::forget('email');
+
+        // Return a success response
+        return response()->json(['message' => 'Session cleared successfully.']);
+    }
     /**
      * Handle Open Login page.
     */
@@ -116,96 +125,108 @@ class AuthService
         ]);
 
         $user_email = $request->input('email');
-
-        // Check if the user exists
         $user = User::where('email', $user_email)->first();
 
         if ($user) {
-            // Store session data indicating login completion
-            session(['login_completed' => true]);
-            // Determine redirect URL based on the user's role
+            session(['email' => $user_email]);
             $redirect = match ($user->role) {
-                1 => '/login',
-                2, 3 => '/admin-login',
-                5 => '/accounts-login',
-                6, 7 => '/common-user-login',
-                default => '/',
+                1 => route('superadmin.login'),
+                2, 3 => route('admin.login'),
+                5 => route('accounts.login'),
+                6, 7 => route('common_user.login'),
+                default => route('login_door.index'),
             };
 
-            // Return the redirect URL in the response
             return response()->json([
                 'status' => 200,
                 'redirect' => $redirect,
             ]);
         } else {
-            // User email does not exist
             return response()->json([
                 'status' => 400,
                 'error' => 'User email does not exist.',
             ]);
         }
     }
-
-
     /**
      * Handle Super Admin Login View page.
     */
-    public function loginPage()
+    public function loginPage(Request $request)
     {
-        $company_profiles = companyProfile::where('id', '=', 1)->get();
-        $roles = Role::whereIn('name', ['Super Admin'])->get();
-
-        if (Auth::user()) {
-            $route = $this->redirectDashboard();
-            return redirect($route);
+        $email = session('email');
+        if($email){
+            $company_profiles = companyProfile::where('id', '=', 1)->get();
+            $roles = Role::whereIn('name', ['Super Admin'])->get();
+    
+            if (Auth::user()) {
+                $route = $this->redirectDashboard();
+                return redirect($route);
+            }
+    
+            return view('auth.login', compact('company_profiles', 'roles', 'email'));
+        }else{
+            return redirect(route('login_door.index'));
         }
-
-        return view('auth.login', compact('company_profiles', 'roles'));
     }
     /**
      * Handle Admin Login View page.
     */
-    public function viewAdminLoginPage()
+    public function viewAdminLoginPage(Request $request)
     {
-        $company_profiles = companyProfile::where('id', '=', 1)->get();
-        $roles = Role::whereIn('name', ['Admin', 'Sub Admin'])->get();
-
-        if (Auth::user()) {
-            $route = $this->redirectDashboard();
-            return redirect($route);
+        $email = session('email');
+        if($email){
+            $company_profiles = companyProfile::where('id', '=', 1)->get();
+            $roles = Role::whereIn('name', ['Admin', 'Sub Admin'])->get();
+    
+            if (Auth::user()) {
+                $route = $this->redirectDashboard();
+                return redirect($route);
+            }
+    
+            return view('auth.admin-login', compact('company_profiles', 'roles', 'email'));
+        }else{
+            return redirect(route('login_door.index'));
         }
-
-        return view('auth.admin-login', compact('company_profiles', 'roles'));
     }
     /**
      * Handle Accounts Login View page.
     */
-    public function viewAccountsLoginPage()
+    public function viewAccountsLoginPage(Request $request)
     {
-        $company_profiles = companyProfile::where('id', '=', 1)->get();
-        $roles = Role::whereIn('name', ['Accounts'])->get();
-
-        if (Auth::user()) {
-            $route = $this->redirectDashboard();
-            return redirect($route);
+        $email = session('email');
+        if($email){
+            $company_profiles = companyProfile::where('id', '=', 1)->get();
+            $roles = Role::whereIn('name', ['Accounts'])->get();
+    
+            if (Auth::user()) {
+                $route = $this->redirectDashboard();
+                return redirect($route);
+            }
+    
+            return view('auth.accounts-login', compact('company_profiles', 'roles', 'email'));
+        }else{
+            return redirect(route('login_door.index'));
         }
-
-        return view('auth.accounts-login', compact('company_profiles', 'roles'));
     }
     /**
      * Handle Common-User Login View page.
     */
-    public function viewCommonUserLoginPage()
+    public function viewCommonUserLoginPage(Request $request)
     {
-        $company_profiles = companyProfile::where('id', '=', 1)->get();
-        $roles = Role::whereIn('name', ['User','Marketing','Delivery Team'])->get();
-
-        if (Auth::user()) {
-            $route = $this->redirectDashboard();
-            return redirect($route);
+        $email = session('email');
+        if($email){
+            $company_profiles = companyProfile::where('id', '=', 1)->get();
+            $roles = Role::whereIn('name', ['User','Marketing','Delivery Team'])->get();
+    
+            if (Auth::user()) {
+                $route = $this->redirectDashboard();
+                return redirect($route);
+            }
+    
+            return view('auth.common-user-login', compact('company_profiles', 'roles', 'email'));
+        }else{
+            return redirect(route('login_door.index')); 
         }
-
-        return view('auth.common-user-login', compact('company_profiles', 'roles'));
     }
     /**
      * Handle user login event.
@@ -273,10 +294,15 @@ class AuthService
     /**
      * Handle password forget page load.
     */
-    public function forgetPasswordLoad()
+    public function forgetPasswordLoad(Request $request)
     {
-        $company_profiles = companyProfile::where('id', '=', 1)->get();
-        return view('auth.forget-password', compact('company_profiles'));
+        $email = session('email');
+        if($email){
+            $company_profiles = companyProfile::where('id', '=', 1)->get();
+            return view('auth.forget-password', compact('company_profiles', 'email'));
+        }else{
+            return redirect(route('login_door.index'));  
+        }
     }
     /**
      * Handle send resetlink in email.

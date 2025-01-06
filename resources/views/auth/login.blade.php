@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/doctor-login.css">
     <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
     <link rel="icon" type="shortcut icon" href="{{asset('backend_asset')}}/main_asset/img/com-black-favicon.png">
-    <title>GST Medicine Login</title>
+    <title>{{setting('company_name')}}</title>
 </head>
 <header class="bg sticky-top">
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
@@ -58,6 +58,7 @@
                         <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
                             <span class="btn-text forg_page"> Forget-Password</span>
                         </a>
+                        <input type="text" name="email" value="{{ $email ?? ''}}" id="emal_input" hidden>
                         <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
                             <span class="btn-text reg_page"> User-Register</span>
                         </a>
@@ -161,7 +162,8 @@
                                 <div class="form-group ms-4">
                                     <label class="email email-label-skeleton" for="email">Email :</label>
                                     <span class="input-email-skeleton">
-                                        <input class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{old('email')}}" autofocus>
+                                        <!-- value="{{old('email')}}" -->
+                                        <input class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{ $email ?? ''}}" autofocus>
                                     </span>
                                     <span style="color:green;font-weight:800;font-size: 15px;">
                                         <i class="src_email fa fa-check src_email-hidden"></i>
