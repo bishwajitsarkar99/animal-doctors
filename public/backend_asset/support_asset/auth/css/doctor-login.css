@@ -347,6 +347,37 @@ button.btn.btn-sm.btn.forget_button:hover,a.btn_back:hover,a.btn.btn-sm.btn.forg
     background-image: var(--nav-button-background);
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
+a.btn.btn-sm.btn.forget_button {
+    width: 100%;
+    height: 25px;
+    background-color: #0056b3;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    color: var(--nav-button-color);
+    font-family: var(--nav-font-family);
+    border-color: var(--mdb-btn-border-color);
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 1;
+    text-align: center;
+    font-weight: 700;
+    outline: none;
+    letter-spacing: 0.5px;
+    margin-left: -2px;
+    border-radius: 3px;
+    transition: .5s ease;
+    animation: text_font_color 5s infinite;
+}
+a.btn.btn-sm.btn.forget_button:hover{
+    background-image: var(--nav-button-background);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    border-color: var(--mdb-btn-border-color);
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
 a.btn_bg {
     width: 100px;
     height: 25px;
@@ -407,28 +438,6 @@ span.text-danger.verify_email_message {
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
     animation: skeleton 1s infinite reverse;
-}
-a.btn.btn-sm.btn.forget_button{
-    width: 100%;
-    height: 25px;
-    background-color: #0056b3;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-    color: var(--nav-button-color);
-    font-family: var(--nav-font-family);
-    border-color: var(--mdb-btn-border-color);
-    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
-    font-size: 12px;
-    line-height: 1.3;
-    opacity: 1;
-    text-align: center;
-    font-weight: 700;
-    outline: none;
-    letter-spacing: 0.5px;
-    margin-left: -2px;
-    border-radius: 3px;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-    animation: text_font_color 5s infinite;
 }
 
 @media (min-width:300px) and (max-width:400px){

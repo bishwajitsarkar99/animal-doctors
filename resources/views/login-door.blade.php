@@ -120,7 +120,7 @@
                     <table>
                         <thead>
                             <tr class="table_head_row">
-                                <th class="text-center py-1" colspan="2"><span>Open Login Form</span></th>
+                                <th class="text-center py-1" colspan="2"><span>Open Door</span></th>
                             </tr>
                         </thead>
                         <tbody class="bg-white">

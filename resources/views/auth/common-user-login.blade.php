@@ -20,7 +20,18 @@
     <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/doctor-login.css">
     <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
     <link rel="icon" type="shortcut icon" href="{{asset('backend_asset')}}/main_asset/img/com-black-favicon.png">
-    <title>GST Medicine Login</title>
+    <title>{{setting('company_name')}}</title>
+
+    <style>
+        .group_action {
+            justify-content: space-between !important;
+            align-items: center;
+            text-align: center;
+            display: flex;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+    </style>
 </head>
 <header class="bg sticky-top">
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
@@ -182,8 +193,12 @@
                                     Error Messages : {{$message}}@enderror
                                     </span><br>
                                 </div>
-                                <div class="col-md-9 offset-md-3">
-                                    <div class="form-group ms-3">
+                                <div class="col-md-12">
+                                    <div class="form-group group_action">
+                                        <a id="back" type="submit" href="/login-door" class="btn btn-sm btn-primary back_button button-skeleton">
+                                            <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                            <span class="back-btn-text">Back</span>
+                                        </a>
                                         <button id="submit" type="submit" class="btn btn-sm btn-primary login_button button-skeleton">
                                             <span class="loading-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                             <span class="btn-text">Login</span>

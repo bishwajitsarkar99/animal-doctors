@@ -100,16 +100,8 @@ class AuthService
     */
     public function loginDoorPage(Request $request)
     {
+        $request->session()->flush();
         return view('login-door');
-    }
-
-    public function clearSessions(Request $request)
-    {
-        // Clear the 'email' session variable
-        Session::forget('email');
-
-        // Return a success response
-        return response()->json(['message' => 'Session cleared successfully.']);
     }
     /**
      * Handle Open Login page.
@@ -162,7 +154,6 @@ class AuthService
                 $route = $this->redirectDashboard();
                 return redirect($route);
             }
-    
             return view('auth.login', compact('company_profiles', 'roles', 'email'));
         }else{
             return redirect(route('login_door.index'));
@@ -283,6 +274,8 @@ class AuthService
 
             // Clear the 'login_completed' session flag
             Session::forget('login_completed');
+            // Login Door Clear the session after retrieving the email
+            $request->session()->forget('email');
 
             session(['session_id' => $sessionId]);
                

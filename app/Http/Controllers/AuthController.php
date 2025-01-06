@@ -57,12 +57,6 @@ class AuthController extends Controller
         return $this->authService->loginDoorPage($request);
     }
 
-    // Clear Session
-    public function clearSession(Request $request)
-    {
-        return $this->authService->clearSessions($request);
-    }
-
     // Open Login Page
     public function openLogin(Request $request)
     {
