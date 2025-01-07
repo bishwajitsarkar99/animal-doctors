@@ -291,6 +291,7 @@ export function handleInputValidation(inputSelector, errorSelector, successClass
         }
     });
 }
+
 // General function to remove any skeleton class
 export function removeSkeletonClass(skeletonClasses) {
     skeletonClasses.forEach(className => {

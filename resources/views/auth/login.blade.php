@@ -319,6 +319,18 @@
                     }, 2000);
                 }
             });
+
+            // Select User
+            const selectField = $("#select_user").val();
+            const $errorField = $("#select_user").closest('.form-group').find('.show-error3');
+            const errorMessage = $errorField.text().trim();
+
+            if(errorMessage !=== ''){
+                $('#select_user').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+            }else if(errorMessage === ''){
+                $('#select_user').next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            }
+            
         });
     </script>
     <script>
@@ -331,6 +343,7 @@
         $('#select_user').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search user...');
         });
+
     </script>
 </body>
 
