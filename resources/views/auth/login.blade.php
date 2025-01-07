@@ -28,8 +28,7 @@
             align-items: center;
             text-align: center;
             display: flex;
-            padding-left: 8px;
-            padding-right: 8px;
+            padding-left:0px;
         }
     </style>
 </head>
@@ -115,7 +114,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
+                    <div class="carousel-indicators top__skeleton">
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
@@ -159,41 +158,35 @@
                             <div class="row">
                                 <div class="form-group mt-3">
                                     <span class="input-user-skeleton" style="text-align:center;">
-                                        <select type="text" class="form-control form-control-sm select2" name="role" value="{{old('role')}}" id="select_user">
+                                        <select type="text" class="form-control form-control-sm user-select select2" name="role" value="{{old('role')}}" id="select_user">
                                             <option value="" style="text-align:center;">Select Email</option>
                                             @foreach($roles as $item)
                                             <option value="{{$item->id}}" style="text-align:center;">{{$item->name}}</option>
                                             @endforeach
                                         </select>
                                     </span>
-                                    <span class="text-danger input_message show-error remove-user-error">@error('role')
+                                    <span class="text-danger input_message show-error3 remove-user-error">@error('role')
                                         Error Messages : {{$message}}@enderror
                                     </span><br>
                                 </div>
-                                <div class="form-group ms-4">
+                                <div class="form-group">
                                     <label class="email email-label-skeleton" for="email">Email :</label>
                                     <span class="input-email-skeleton">
                                         <!-- value="{{old('email')}}" -->
-                                        <input class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{ $email ?? ''}}" autofocus>
+                                        <input id="inputEmail" class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{ $email ?? ''}}" autofocus>
                                     </span>
-                                    <span style="color:green;font-weight:800;font-size: 15px;">
-                                        <i class="src_email fa fa-check src_email-hidden"></i>
-                                    </span>
-                                    <span class="text-danger input_message show-error remove-error">@error('email')
+                                </div>
+                                <span class="text-danger input_message show-error remove-error skeleton">@error('email')
+                                    Error Messages : {{$message}}@enderror
+                                </span><br>
+                                <div class="form-group ms-">
+                                    <label class="password email-label-skeleton" for="password">Password :</label>
+                                    <span class="input-password-skeleton"><input class="password_src password show-current-border ps-1" type="password" name="password" placeholder="Enter Password" value="{{old('password')}}"></span>
+                                    <span class="text-danger input_message show-error2 remove-error2 skeleton">@error('password')
                                         Error Messages : {{$message}}@enderror
                                     </span><br>
                                 </div>
-                                <div class="form-group ms-4">
-                                    <label class="password email-label-skeleton" for="password">Password :</label>
-                                    <span class="input-password-skeleton"><input class="password_src password show-current-border ps-1" type="password" name="password" placeholder="Enter Password" value="{{old('password')}}"></span>
-                                    <span style="color:green;font-weight:800;font-size: 15px;">
-                                        <i class="src_password fa fa-check src_password-hidden"></i>
-                                    </span>
-                                    <span class="text-danger input_message show-error2 remove-error2">@error('password')
-                                    Error Messages : {{$message}}@enderror
-                                    </span><br>
-                                </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 ms-1">
                                     <div class="form-group group_action">
                                         <a id="back" type="submit" href="/login-door" class="btn btn-sm btn-primary back_button button-skeleton">
                                             <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
@@ -222,7 +215,7 @@
     <!-- JQUERY CDN LINK -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js"></script>
+    <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-function.js"></script>
     <script type="module">
         import { 
             buttonLoader, 
@@ -233,7 +226,7 @@
             rightSideBar, 
             handleInputValidation, 
             removeSkeletonClass 
-        } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
+        } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-function.js";
         buttonLoader();
         pageLoader();
         toolTip();
@@ -258,11 +251,12 @@
                 ],
                 2000
             );
+            
             // Handle email validation
             handleInputValidation(
                 '.email_src',              // Input selector
                 '.show-error',             // Error message selector
-                'show-success-border',     // Success class
+                'is-valid',                // Success class
                 'is-invalid',              // Error class
                 'show-current-border',     // Default border class
                 '.src_email'               // Success message selector
@@ -271,7 +265,7 @@
             handleInputValidation(
                 '.password_src',           // Input selector
                 '.show-error2',            // Error message selector
-                'show-success-border',     // Success class
+                'is-valid',                // Success class
                 'is-invalid',              // Error class
                 'show-current-border',     // Default border class
                 '.src_password'            // Success message selector
@@ -289,7 +283,8 @@
                 'menu-skeleton',
                 'whatsapp-skeleton',
                 'messenger-skeleton',
-                'facebook-skeleton'
+                'facebook-skeleton',
+                'top__skeleton',
             ];
             // Remove skeleton
             setTimeout(() => {

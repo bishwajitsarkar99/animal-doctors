@@ -88,7 +88,6 @@
                 outline: none;
                 box-shadow: none;
                 width: 100%;
-                border: 1px solid goldenrod;
                 padding-left: 5px;
                 border-radius: 3px;
                 padding-bottom: 0px;
@@ -98,12 +97,97 @@
                 letter-spacing: 0.5px;
                 word-spacing: 0.5px;
             }
+            .email-border{
+                border: 1px solid goldenrod;
+            }
             .button_area {
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
                 justify-content: end;
                 padding-right: 16px;
                 padding-top: 10px;
             }
+            #loading_content{
+                width: 100%;
+                margin-left: 0px;
+                background: none;
+                border: none;
+            }
+            .progress-bar{
+                background-color: #ad7b00;
+            }
+            .progress-bar.animation_progress {
+                font-size: 12px;
+                font-weight: 700;
+                padding-right: 10px;
+                background-color: white;
+                color: darkgoldenrod;
+                padding-left: 5px;
+                animation: focus_color 1s linear infinite;
+            }
+            @keyframes focus_color {
+                0% {
+                    background-color:#9f7b24;
+                    color: white;
+                }
+
+                100% {
+                    background-color:#9f7b24;
+                    color: darkgoldenrod;
+                }
+            }
+            .progress-bar-animated {
+                -webkit-animation: progress-bar-stripes 1s linear infinite;
+                animation: progress-bar-stripes 1s linear infinite;
+            }
+            @keyframes progress-bar-stripes {
+                0% {
+                    background-position: 1rem 0;
+                }
+
+                100% {
+                    background-position: 0 0;
+                }
+            }
+            .percent {
+                font-size: 13px;
+                font-weight: 700;
+            }
+            span#error_message {
+                font-size: 12px;
+                font-weight: 700;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            }
+            tr.error_mess_row {
+                height: 28px;
+            }
+            td.group_action{
+                justify-content: space-between !important;
+                align-items: center;
+                text-align: center;
+                display: flex;
+            }
+            .valid-email-hidden{
+                display:hidden;
+            }
+            .is-invalid {
+                border: 1px solid #dc3545;
+                padding-right: calc(1.5em + 0.75rem);
+                background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e);
+                background-repeat: no-repeat;
+                background-position: right calc(0.375em + 0.1875rem) center;
+                background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+                box-sizing: border-box;
+            }
+            .is-valid {
+                border: 1px solid #159b15cf;
+                padding-right: calc(1.5em + 0.75rem);
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='darkgreen' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 8l4 4 8-8'/%3e%3c/svg%3e");
+                background-repeat: no-repeat;
+                background-position: right calc(0.375em + 0.1875rem) center;
+                background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+                box-sizing: border-box;
+            }
+            
         </style>
     </head>
 
@@ -126,7 +210,13 @@
                         <tbody class="bg-white">
                             <tr class="table-row">
                                 <td class="user_login_form_label"> Email : </td>
-                                <td class="user-login-td"><input class="user_login_form" type="text" name="email" value="" placeholder="User Email" id="user_login_form"></td>
+                                <td class="user-login-td">
+                                    <input class="user_login_form email-border" type="text" name="email" value="" placeholder="User Email" id="user_login_form">
+                                </td>
+                            </tr>
+                            <tr class="table-row error_mess_row">
+                                <td class="user_login_form_label"></td>
+                                <td class="user-login-td"><span class="text-danger" id="error_message"></span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -157,6 +247,30 @@
                 </div>
             </div>
         </div>
+
+        {{-- start loader modal --}}
+        <div class="modal fade" id="loadingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="loading_content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="progress_box">
+                                    <div class="progress" id="openingProgress">
+                                        <div class="progress-bar bar progress-bar-striped progress-bar-animated progress-bar-processing" style="width:0%;">
+                                            <div class="percent">0%</div>
+                                        </div>
+                                        <div class="progress-bar animation_progress">Opening...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+        {{-- end loader modal --}}
+
         <!-- Boostrap5 JS Table Filter -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -167,12 +281,12 @@
         <script type="module">
             import { 
                 buttonLoader, 
+                loadingProgressbar,
                 //pageLoader, 
                 //handleSuccessMessage, 
                 //toolTip, 
                 //browserInpect, 
                 //rightSideBar, 
-                //handleInputValidation, 
                 //removeSkeletonClass 
             } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
             buttonLoader();
@@ -183,6 +297,8 @@
             $(document).ready(function () {
                 // Initialize the message
                 //handleSuccessMessage('#success_message');
+                // Initialize the image upload with progress bar simulation
+                loadingProgressbar("#openSubmit");
                 // Initialize the button loader for the login button
                 buttonLoader('.login_button', '.loading-icon', '.btn-text', 'Open...', 'Open', 2000);
                 // Initialize right sidebar canvas the loader modal with skeleton loading effect
@@ -198,15 +314,6 @@
                 //         '.logn_page'
                 //     ],
                 //     2000
-                // );
-                // // Handle email validation
-                // handleInputValidation(
-                //     '.email_src',              // Input selector
-                //     '.show-error',             // Error message selector
-                //     'show-success-border',     // Success class
-                //     'is-invalid',              // Error class
-                //     'show-current-border',     // Default border class
-                //     '.src_email'               // Success message selector
                 // );
                 // // Handle password validation
                 // handleInputValidation(
@@ -250,33 +357,27 @@
         </script>
         <script>
             $(document).ready(function(){
-                // error skeleton
-                // $(document).on('click', '#submit', function() {
-                //     var errorMessage = $(this).text().trim();
-                //     $(this).attr("data-error", errorMessage);
-                //     if (errorMessage !== '') {
-                //         $('.remove-error').addClass('error-skeleton');
-                //         $('.remove-error2').addClass('error-skeleton');
-                //         $('.remove-user-error').addClass('user-error-skeleton');
-                //         setTimeout(function() {
-                //             $('.remove-error').removeClass('error-skeleton');
-                //             $('.remove-error2').removeClass('error-skeleton');
-                //             $('.remove-user-error').removeClass('user-error-skeleton');
-                //         }, 2000);
-                //     }
-                // });
-
                 // Open Login Page
                 $(document).on('click', '#openSubmit', function (e) {
                     e.preventDefault();
-
+                    $("#error_message").empty();
                     var user_email = $("#user_login_form").val();
-                    if (!user_email) {
-                        alert("Please enter a valid email.");
-                        return;
+                    if(user_email == ''){
+                        $("#loadingModal").modal('hide');
+                        $("#user_login_form").addClass('is-invalid');
+                        $("#user_login_form").removeClass('email-border');
+                        $("#error_message").append('Please enter a valid email.');
+                        setTimeout(() => {
+                            $("#loadingModal").modal('hide');
+                        }, 11000);
+                    }else if(user_email !== ''){
+                        $("#loadingModal").modal('show');
+                        setTimeout(() => {
+                            $("#loadingModal").modal('hide');
+                        }, 11000);
+                        currentURL = "{{ route('login_page.action') }}";
                     }
-
-                    currentURL = "{{ route('login_page.action') }}";
+                    
 
                     // Make the AJAX request
                     $.ajax({
@@ -285,33 +386,36 @@
                         data: { email: user_email},
                         dataType: "json",
                         success: function (response) {
-                            if (response.status === 200) {
-                                window.location.href = response.redirect;
-                            } else {
-                                alert(response.error || "An unexpected error occurred.");
-                            }
+                            setTimeout(() => {
+                                if (response.status === 200) {
+                                    window.location.href = response.redirect;
+                                } else {
+                                    $("#error_message").append(`<span>${response.error}</span>`);
+                                    
+                                }
+                            }, 10800);
                         },
                         error: function () {
-                            alert("An unexpected error occurred. Please try again.");
+                            setTimeout(() => {
+                                $("#error_message").append('Please enter a valid email.');
+                            }, 11000);
                         },
                     });
                 });
 
-                window.addEventListener('popstate', function () {
-                    $.ajax({
-                        url: "{{ route('clear.session') }}",
-                        type: "POST",
-                        data: {
-                            _token: "{{ csrf_token() }}"
-                        },
-                        success: function (response) {
-                            console.log(response.message);
-                        },
-                        error: function () {
-                            console.error("Failed to clear session.");
+                // input keyup action
+                $(document).on('keyup', '#user_login_form', function(){
+                
+                    if($(this).hasClass('is-invalid')){
+                        $(this).removeClass('is-invalid');
+                        $(this).addClass('is-valid');
+                    }else{
+                        if (!$(this).hasClass('is-valid')) {
+                            $(this).addClass('email-border');
                         }
-                    });
+                    }
                 });
+
             });
         </script>
     </body>

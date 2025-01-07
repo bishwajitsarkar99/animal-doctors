@@ -216,6 +216,26 @@ export function handleImageUpload(buttonID) {
         }, 200);
     });
 }
+// Function to handle image upload with progress bar simulation
+export function loadingProgressbar(buttonID) {
+    $(document).on('click', buttonID, function() {
+        var bar = document.querySelector('.bar');
+        var percent = document.querySelector('.percent');
+        var simulatedProgress = 0;
+
+        var uploadInterval = setInterval(function() {
+            simulatedProgress += 10;
+
+            if (simulatedProgress <= 100) {
+                bar.style.width = simulatedProgress + '%';
+                percent.innerHTML = simulatedProgress + '%';
+            } else {
+                clearInterval(uploadInterval);
+                $(".register_img").removeClass('img-hidden');
+            }
+        }, 1000);
+    });
+}
 // side bar canvas skeletone
 export function rightSideBar(buttonSelector, modalSelector, loaderSelector, elementsWithSkeleton, timeoutDuration = 2000) {
     $(document).on('click', buttonSelector, function(e) {
@@ -246,16 +266,16 @@ export function handleInputValidation(inputSelector, errorSelector, successClass
 
     if (errorMessage !== '') {
         $(inputSelector).removeClass(currentBorderClass).addClass(errorClass);
-    } else {
+    }else{
         var inputVal = $(inputSelector).val().trim();
         if (inputVal !== '') {
             $(inputSelector).removeClass(currentBorderClass).addClass(successClass);
             $(successMessageSelector).removeClass('hidden').fadeIn(fadeInDuration).delay(fadeInDuration);
-        } else {
+        }else {
             $(inputSelector).addClass(currentBorderClass).removeClass(errorClass);
         }
     }
-
+    
     // Handle input changes dynamically
     $(document).on('keyup', inputSelector, function() {
         var inputVal = $(this).val();

@@ -10,12 +10,12 @@
     box-sizing: border-box;
     cursor: pointer;
     display: block;
-    height: 26px;
+    height: 23px;
     user-select: none;
     -webkit-user-select: none;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .select2-container .select2-selection--single .select2-selection__rendered {
