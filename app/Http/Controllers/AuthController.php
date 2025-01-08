@@ -57,6 +57,12 @@ class AuthController extends Controller
         return $this->authService->loginDoorPage($request);
     }
 
+    // User Email Registration
+    public function loadingRegistrationForm(Request $request)
+    {
+        return $this->authService->emailRegistrationForm($request);
+    }
+
     // Open Login Page
     public function openLogin(Request $request)
     {
@@ -64,9 +70,9 @@ class AuthController extends Controller
     }
 
     // load register page
-    public function loadRegister()
+    public function loadRegister(Request $request)
     {
-        return $this->authService->register();
+        return $this->authService->register($request);
     }
     
     // User Register

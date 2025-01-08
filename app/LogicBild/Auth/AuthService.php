@@ -43,22 +43,54 @@ class AuthService
         return $redirect; 
     }
     /**
+     * Handle user email registration.
+    */
+    public function emailRegistrationForm(Request $request)
+    {
+        return view('registration');
+    }
+    /**
      * Handle register page.
     */
-    public function register()
+    public function register(Request $request)
     {
-        $company_profiles = companyProfile::where('id', '=', 1)->get();
-        if (Auth::user()) {
-            $route = $this->redirectDashboard();
-            return redirect($route);
+        // Validate the email input
+        $request->validate([
+            'valid_email' => 'required|email',
+        ], [
+            'valid_email.required' => 'Email is required.',
+            'valid_email.email' => 'Please enter a valid email address.',
+        ]);
+
+        $valid_email = $request->input('valid_email');
+
+        if ($valid_email) {
+            // Save valid email to session
+            //session(['valid_email' => $valid_email]);
+
+            // Determine redirect route
+            $redirect = route('register.loading');
+
+            return response()->json([
+                'status' => 200,
+                'redirect' => $redirect,
+            ]);
+        }else{
+            $redirect = route('login_door.index');
         }
-        return view('auth.register', compact('company_profiles'));
+
+        return response()->json([
+            'status' => 400,
+            'error' => 'Invalid email. Please try again.',
+        ]);
+        
     }
     /**
      * Handle create user register.
     */
     public function create(Request $request)
     {
+        //$email = session('email');
         // Validation
         $request->validate([
             'name' => 'string|required|max:120',

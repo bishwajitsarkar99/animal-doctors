@@ -32,7 +32,7 @@ Route::middleware('commonUserLoginPage')->group(function () {
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 // Registration Routes with Middleware
 Route::middleware('registerPage')->group(function () {
-    Route::get('/register', [AuthController::class, 'loadRegister']);
+    Route::get('/register', [AuthController::class, 'loadRegister'])->name('register.loading');
 });
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 // Password Routes with Middleware
