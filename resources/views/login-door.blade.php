@@ -300,7 +300,7 @@
                 // Initialize the image upload with progress bar simulation
                 loadingProgressbar("#openSubmit");
                 // Initialize the button loader for the login button
-                buttonLoader('.login_button', '.loading-icon', '.btn-text', 'Open...', 'Open', 2000);
+                buttonLoader('.login_button', '.loading-icon', '.btn-text', 'Open...', 'Open', 1000);
                 // Initialize right sidebar canvas the loader modal with skeleton loading effect
                 // rightSideBar(
                 //     '.menu_btn',                   // Button selector to attach the click event

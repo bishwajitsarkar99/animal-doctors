@@ -21,6 +21,35 @@
     <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/register.css">
     <link rel="icon" type="shortcut icon" href="{{asset('backend_asset')}}/main_asset/img/com-black-favicon.png">
     <title>{{setting('company_name')}}</title>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background-color:#d8edffd1;
+        }
+        button#change_Password{
+            margin-left: 0px;
+        }
+        a#back{
+            margin-left: 0px;
+        }
+        .first_block{
+            justify-content: space-between !important;
+            align-items: center;
+            text-align: center;
+            display: flex;
+        }
+        img.image_size{
+            width: 50px;
+            height: 50px;
+            margin-bottom: 5px;
+            border-radius: 6px;
+            transition: transform .5s;
+        }
+        img.image_size:hover{
+            transform: scale(1.5);
+        }
+    </style>
 </head>
 <header class="bg sticky-top">
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
@@ -29,44 +58,10 @@
             <span class="heading-rest-skeleton">{{setting('company_name')}}</span>
         </p>
         <p class="address skeleton media-address mt-1 me-2">{{setting('company_address')}}</p>
-        <p class="d-none d-md-inline-block form-inline ms-auto me-2 mt-2 me-md-0 my-0 my-md-0">
-            <a class="menu_btn menu-rest-skeleton" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                <span class="menu_icon"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
-            </a>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <h6 class="head_auth" id="offcanvasRightLabel">Auth-Menu</h6>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-toggle="tooltip"  data-bs-placement="left" title="Close" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div class="modal fade" id="loader_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-sm modal-dialog-centered">
-                            <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
-                                <div class="modal-body" id="loader_modalBody"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="group__button">
-                        <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
-                            <span class="btn-text reg_page"> User-Register</span>
-                        </a>
-                        <a type="submit" href="/email-verification" class="btn btn-sm" id="logn_page">
-                            <span class="btn-text logn_page"> Email-Verification</span>
-                        </a>
-                        <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
-                            <span class="btn-text forg_page"> Forget-Password</span>
-                        </a>
-                    </div>
-                    <div class="side_canvas_animation" hidden>
-                        <img class="sidebar-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
-                    </div>
-                </div>
-            </div>
-        </p>
     </nav>
 </header>
 
-<body class="register_background-color">
+<body class="">
     <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
@@ -87,7 +82,7 @@
         </div>
     </div>
 
-    <div class="container bg" style="margin-top: 62px;">
+    <div class="container" style="margin-top: 62px;">
         <div class="row">
             <div class="col-md-12 mb-5">
                 <h4 class="heading_register text-shadow font_size" style="text-align: center;">
@@ -116,23 +111,40 @@
                                                         </p>
                                                     </div>
                                                     <input type="hidden" name="token" value="{{request()->input('token')}}" />
+                                                    <div class="">
+                                                        <span class="first_block">
+                                                            <span class="skeleton lb_text">User : {{$user_image->name}}</span>
+                                                            <span class="image_skeletone">
+                                                                <img class="image_size" src="{{ asset('/image/' . $user_image->image) }}" alt="user" />
+                                                            </span>
+                                                        </span>
+                                                    </div>
                                                     <div class="mb-2">
                                                         <label for="email" class="form-label skeleton lb_text">Email</label>
-                                                        <input type="email" id="email" style="border: 1px solid rgba(0, 0, 0, 0.2);" class="" name="email" placeholder="Enter Your Email" required="" value="{{request()->input('email')}}" readonly="" />
+                                                        <input type="email" id="email" class="current_border" name="email" placeholder="Enter Your Email" required="" value="{{request()->input('email')}}" readonly="" />
+                                                        <span class="email-input2-skeleton"></span>
                                                     </div>
                                                     <div class="mb-2">
                                                         <label for="email" class="form-label skeleton lb_text">Password</label>
-                                                        <input type="password" style="border: 1px solid rgba(0, 0, 0, 0.2);" class="inpt_pass" name="password" placeholder="Enter Password" required="">
+                                                        <input type="password" id="passwrd" class="inpt_pass current_border" name="password" placeholder="Enter Password" required="">
+                                                        <span class="email-input2-skeleton"></span>
                                                     </div>
                                                     <div class="mb-2">
                                                         <label for="email" class="form-label skeleton lb_text">Conform Password</label>
-                                                        <input type="password" style="border: 1px solid rgba(0, 0, 0, 0.2);" class="inpt_pass" name="password_confirmation" placeholder="Enter Confirm Password" required="">
+                                                        <input type="password" id="confrm_passwrd" class="inpt_pass current_border" name="password_confirmation" placeholder="Enter Confirm Password" required="">
+                                                        <span class="email-input2-skeleton"></span>
                                                     </div>
                                                     <div class="mb-2 d-grid">
-                                                        <button type="submit" class="btn btn-sm btn-primary forget_button register_btn" id="change_Password">
+                                                        <button type="submit" class="btn btn-sm btn-primary forget_button register_btn reset-button-skeleton" id="change_Password">
                                                             <span class="btn-change-text">Change Password</span>
                                                             <span class="change-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                         </button>
+                                                    </div>
+                                                    <div class="mb-3 d-grid">
+                                                        <a id="back" type="submit" href="/login-door" class="btn btn-sm btn-primary forget_button back-button-skeleton">
+                                                            <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                                            <span class="back-btn-text">Back</span>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -205,11 +217,51 @@
                 'logo-skeleton',
                 'menu-rest-skeleton',
                 'panel-skeleton',
+                'back-button-skeleton',
+                'reset-button-skeleton',
+                'image_skeletone',
+                'email-input2-skeleton',
             ];
             // Remove skeleton
             setTimeout(() => {
                 removeSkeletonClass(skeletonClasses);
             }, 2000);
+        });
+    </script>
+    <script>
+        // handel validation 
+        $(document).ready(function(){
+            
+            const email_input = $("#email").val();
+            if(email_input !== '' ){
+                $("#email").addClass('is-valid');
+                $("#email").removeClass('current_border');
+            }
+            else{
+                $("#email").removeClass('is-valid');
+                $("#email").addClass('current_border');
+            }
+
+            $(document).on('keyup', '#email, #passwrd, #confrm_passwrd', function(){
+                
+                const password_input = $("#passwrd").val();
+                const confirm_password_input = $("#confrm_passwrd").val();
+    
+                if(password_input !== ''){
+                    $("#passwrd").addClass('is-valid');
+                    $("#passwrd").removeClass('current_border');
+                }else {
+                    $("#passwrd").removeClass('is-valid');
+                    $("#passwrd").addClass('current_border');
+                }
+                if(confirm_password_input !== ''){
+                    $("#confrm_passwrd").addClass('is-valid');
+                    $("#confrm_passwrd").removeClass('current_border');
+                }else{
+                    $("#confrm_passwrd").removeClass('is-valid');
+                    $("#confrm_passwrd").addClass('current_border');
+                }
+            });
         });
     </script>
 </body>

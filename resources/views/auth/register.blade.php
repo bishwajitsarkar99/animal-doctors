@@ -21,6 +21,35 @@
         <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/register.css">
         <link rel="icon" type="shortcut icon" href="{{asset('backend_asset')}}/main_asset/img/com-black-favicon.png">
         <title>{{setting('company_name')}}</title>
+
+        <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background-color:#d8edffd1;
+        }
+        button#email_submit{
+            margin-left: 0px;
+        }
+        a#regist_back{
+            margin-left: 0px;
+        }
+        .first_block{
+            justify-content: space-between !important;
+            align-items: center;
+            text-align: center;
+            display: flex;
+        }
+        img.image_size{
+            width: 50px;
+            height: 50px;
+            margin-bottom: 5px;
+            border-radius: 6px;
+            transition: transform .5s;
+        }
+        img.image_size:hover{
+            transform: scale(1.5);
+        }
+    </style>
     </head>
     <header class="bg sticky-top">
         <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
@@ -63,7 +92,7 @@
         </nav>
     </header>
 
-    <body class="register_background-color">
+    <body class="">
         <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered">
                 <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
@@ -84,7 +113,7 @@
             </div>
         </div>
 
-        <div class="container bg" style="margin-top: 65px;">
+        <div class="container" style="margin-top: 65px;">
             <div class="row">
                 <div class="col-md-12 mb-4" style="margin-top:px">
                     <h4 class="heading_register text-shadow font_size  ps-2" style="text-align: center;">

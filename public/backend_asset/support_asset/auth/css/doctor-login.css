@@ -85,7 +85,8 @@ div.url_link{
     transition: all 200ms;
 }
 .skeleton,.menus-skeleton,.mini-skeleton,.email-input-skeleton,.heading-skeleton,.menu-rest-skeleton,.heading-rest-skeleton,
-.rest-email-skeleton,.rest-password-skeleton,.rest-confirm-password-skeleton,.panel-skeleton,.select-skeleton{
+.rest-email-skeleton,.rest-password-skeleton,.rest-confirm-password-skeleton,.panel-skeleton,.select-skeleton,.email_verification_skeletone,
+.email_verification_back_skeletone,.sub-title-skeleton{
     position: relative;
 }
 .heading-skeleton::before{
@@ -130,7 +131,7 @@ div.url_link{
 .select-skeleton::before{
     content: "";
     position: absolute;
-    left: -5px;
+    left: 0;
     top: 0;
     width: 112%;
     height: 100%;
@@ -179,12 +180,51 @@ div.url_link{
     background-size: 200%;
     animation: skeleton 1s infinite reverse;
 }
+.email_verification_skeletone::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -27px;
+    width: 312px;
+    height: 28px;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg,#b3b3b3,#f9f9f9,#b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.email_verification_back_skeletone::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -27px;
+    width: 312px;
+    height: 28px;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg,#b3b3b3,#f9f9f9,#b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.sub-title-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 0;
+    width: 104%;
+    height: 100%;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
 .email-input-skeleton::before{
     content: "";
     position: absolute;
-    left: -315px;
+    left: -312px;
     top: -4px;
-    width: 315px;
+    width: 312px;
     height: 28px;
     border-radius: 3px;
     z-index: 10;
@@ -258,6 +298,24 @@ h6.head_auth {
     font-family: sans-serif;
     color: darkblue;
 }
+.is-invalid {
+    border: 1px solid #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    box-sizing: border-box;
+}
+.is-valid {
+    border: 1px solid #159b15cf;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='darkgreen' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 8l4 4 8-8'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    box-sizing: border-box;
+}
 .lb_text {
     font-weight: 500;
     color: darkblue;
@@ -266,12 +324,13 @@ h6.head_auth {
 .panel {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     border-left: #3b71ca solid 4px;
-    color: #718096;
+    color: #2c65b9;
     background-color: #edf2f7;
     padding: 5px 10px;
+    font-size: 12px;
 }
 input.inpt_pass{
-    font-size: 14px;
+    font-size: 12px;
     color: darkblue;
     min-height: calc(.8em + 0.5rem + .8px);
     padding: 0.10rem 0.5rem;
@@ -280,13 +339,19 @@ input.inpt_pass{
     font-weight: 600;
     opacity: 1;
     width: 100%;
+    line-height: 1.7;
+    background-color: white;
 }
 input.inpt_pass:focus{
-    border: 1px solid rgb(5, 5, 248);
+    border: 1px solid #0056b3;
     opacity: 1;
+    outline: none;
 }
 input.inpt_pass::placeholder{
     color: gray;
+}
+.current_border{
+    border: 1px solid goldenrod;
 }
 a.btn_back{
     width: 100%;
@@ -423,7 +488,7 @@ span.text-danger.verify_email_message {
     font-size: 12px;
     letter-spacing: 0.3px;
 }
-.email-input2-skeleton{
+.email-input2-skeleton,.reset-button-skeleton,.back-button-skeleton,.image_skeletone{
     position: relative;
 }
 .email-input2-skeleton::before{
@@ -433,6 +498,45 @@ span.text-danger.verify_email_message {
     top: -7px;
     width: 315px;
     height: 30px;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.reset-button-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -3px;
+    top: -2px;
+    width: 315px;
+    height: 27px;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.back-button-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -3px;
+    top: -2px;
+    width: 315px;
+    height: 27px;
+    border-radius: 3px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.image_skeletone::before{
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
     border-radius: 3px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);

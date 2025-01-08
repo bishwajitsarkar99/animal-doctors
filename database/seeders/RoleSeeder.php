@@ -20,7 +20,7 @@ class RoleSeeder extends Seeder
             array('id' => '3','name' => 'Admin'),
             array('id' => '5','name' => 'Accounts'),
             array('id' => '6','name' => 'Marketing'),
-            array('id' => '7','name' => 'Delevery Team'),
+            array('id' => '7','name' => 'Delivery Team'),
             array('id' => '8','name' => 'Accounts Admin'),
             array('id' => '9','name' => 'Marketing Admin'),
             array('id' => '10','name' => 'HRM'),

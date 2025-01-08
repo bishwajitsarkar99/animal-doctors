@@ -21,6 +21,38 @@
     <link rel="stylesheet" href="{{ asset('backend_asset') }}/support_asset/auth/css/register.css">
     <link rel="icon" type="shortcut icon" href="{{asset('backend_asset')}}/main_asset/img/com-black-favicon.png">
     <title>{{setting('company_name')}}</title>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background-color:#d8edffd1;
+        }
+        button#reset_password{
+            margin-left: 0px;
+        }
+        a#back{
+            margin-left: 0px;
+        }
+        .first_block{
+            justify-content: space-between !important;
+            align-items: center;
+            text-align: center;
+            display: flex;
+        }
+        img.image_size{
+            width: 50px;
+            height: 50px;
+            margin-bottom: 5px;
+            border-radius: 6px;
+            transition: transform .5s;
+        }
+        img.image_size:hover{
+            transform: scale(1.5);
+        }
+        input.user__email:focus{
+            outline: 1px solid #0056b3;
+        }
+    </style>
 </head>
 <header class="bg sticky-top">
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
@@ -29,41 +61,10 @@
             <span class="heading-skeleton">{{setting('company_name')}}</span>
         </p>
         <p class="address media-address skeleton">{{setting('company_address')}}</p>
-        <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
-            <a class="menu_btn" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                <span class="menu_icon menus-skeleton"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
-            </a>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <h6 class="head_auth" id="offcanvasRightLabel">Auth-Menu</h6>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-toggle="tooltip"  data-bs-placement="left" title="Close" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div class="modal fade" id="loader_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-sm modal-dialog-centered">
-                            <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
-                                <div class="modal-body" id="loader_modalBody"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="group__button">
-                        <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
-                            <span class="btn-text reg_page"> User-Register</span>
-                        </a>
-                        <a type="submit" href="/email-verification" class="btn btn-sm" id="logn_page">
-                            <span class="btn-text logn_page"> Email-Verification</span>
-                        </a>
-                    </div>
-                    <div class="side_canvas_animation" hidden>
-                        <img class="sidebar-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
-                    </div>
-                </div>
-            </div>
-        </p>
     </nav>
 </header>
 
-<body class="register_background-color">
+<body class="antialiased min-h-screen">
     <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
@@ -84,7 +85,7 @@
         </div>
     </div>
 
-    <div class="container bg" style="margin-top: 62px;">
+    <div class="container" style="margin-top: 62px;">
         <div class="row">
             <div class="col-md-12 mb-5" style="margin-top:px">
                 <h4 class="heading_register text-shadow font_size" style="text-align: center;">
@@ -107,20 +108,26 @@
                                             <div class="card forget_card">
                                                 <div class="card-body">
                                                     @if(request()->input('token'))
-                                                    <div class="mb-4">
+                                                    <div class="mb-3">
                                                         <h5 class="skeleton lb_text">Change Password?</h5>
                                                         <p class="panel-skeleton lb_text panel mb-2">Change your register email password.</p>
                                                     </div>
+                                                    <div class="">
+                                                        <span class="first_block">
+                                                            <span class="skeleton lb_text">User : {{$user_image->name}}</span>
+                                                            <img class="image_size" src="{{ asset('/image/' . $user_image->image) }}" alt="user" />
+                                                        </span>
+                                                    </div>
                                                     <div class="mb-3">
-                                                        <label for="email" class="form-label skeleton">Email</label>
+                                                        <span class="skeleton lb_text">Email</span>
                                                         <input type="email" id="email" style="border: 1px solid #f1f1f1;" class="form-control form-control-sm" name="email" placeholder="Enter Your Email" required="" value="{{request()->input('email')}}" readonly="" />
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="email" class="form-label skeleton">Password</label>
+                                                        <span class="skeleton lb_text">Password</span>
                                                         <input type="email" id="email" style="border: 1px solid #f1f1f1;" class="form-control form-control-sm" name="email" placeholder="Enter Your Email" required="">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="email" class="form-label skeleton">Conform Password</label>
+                                                        <span class="skeleton lb_text">Conform Password</span>
                                                         <input type="email" id="email" style="border: 1px solid #f1f1f1;" class="form-control form-control-sm" name="email" placeholder="Enter Your Email" required="">
                                                     </div>
                                                     <div class="mb-3 d-grid">
@@ -129,23 +136,31 @@
                                                         </button>
                                                     </div>
                                                     @else
-                                                    <div class="mb-4">
+                                                    <div class="mb-3">
                                                         <h5 class="skeleton lb_text">Forgot Password?</h5>
                                                         <p class="panel-skeleton lb_text panel mb-2">Enter your registered email ID to reset the password.</p>
                                                     </div>
+                                                    <div class="">
+                                                        <span class="first_block">
+                                                            <span class="skeleton lb_text">User : {{$user_image->name}}</span>
+                                                            <span class="image_skeletone">
+                                                                <img class="image_size" src="{{ asset('/image/' . $user_image->image) }}" alt="user" />
+                                                            </span>
+                                                        </span>
+                                                    </div>
                                                     <div class="mb-3">
-                                                        <label for="email" class="form-label skeleton lb_text">Email</label>
-                                                        <input type="email" id="email" style="border: 1px solid lightgray;" class="" name="email" placeholder="&#xf0e0; Enter Email Address" value="{{ $email ?? ''}}" required="" autocomplete="off" autofocus disabled />
+                                                        <span class="skeleton lb_text">Email</span>
+                                                        <input type="email" id="email" class="user__email" name="email" placeholder="&#xf0e0; Enter Email Address" value="{{ $email ?? ''}}" required="" autocomplete="off" autofocus readonly="" />
                                                         <span class="email-input2-skeleton"></span>
                                                     </div>
                                                     <div class="mb-3 d-grid">
-                                                        <button type="submit" class="btn btn-sm btn-primary forget_button register_btn" id="reset_password">
+                                                        <button type="submit" class="btn btn-sm btn-primary forget_button register_btn reset-button-skeleton" id="reset_password">
                                                             <span class="btn-reset-text">Reset Password</span>
                                                             <span class="reset-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                         </button>
                                                     </div>
                                                     <div class="mb-3 d-grid">
-                                                        <a id="back" type="submit" href="/login" class="btn btn-sm btn-primary forget_button">
+                                                        <a id="back" type="submit" href="/login" class="btn btn-sm btn-primary forget_button back-button-skeleton">
                                                             <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                             <span class="back-btn-text">Back</span>
                                                         </a>
@@ -216,7 +231,8 @@
             );
             // Initialize the button loader for the login button
             buttonLoader('#reset_password', '.reset-icon', '.btn-reset-text', 'Reset Password...', 'Reset Password', 3000);
-            buttonLoader('#user__login', '.acc-icon', '.btn-acc-text', 'sign in...', 'sign in', 3000);
+            buttonLoader('#back', '.back-icon', '.back-btn-text', 'Back...', 'Back', 1000);
+            
             // Array of skeleton class names
             const skeletonClasses = [
                 'skeleton', // General skeleton
@@ -229,6 +245,9 @@
                 'file-skeleton',
                 'menus-skeleton',
                 'email-input2-skeleton',
+                'reset-button-skeleton',
+                'back-button-skeleton',
+                'image_skeletone',
             ];
             // Remove skeleton
             setTimeout(() => {
@@ -236,6 +255,20 @@
             }, 2000);
         });
 
+    </script>
+    <script>
+        // handel validation
+        $(document).ready(function(){
+            const email_input = $("#email").val();
+
+            if(email_input !== ''){
+                $("#email").addClass('is-valid');
+                $("#email").removeClass('is-invalid');
+            }else if(email_input == ''){
+                $("#email").removeClass('is-valid');
+                $("#email").addClass('is-invalid');
+            }
+        });
     </script>
 </body>
 

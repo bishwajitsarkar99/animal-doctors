@@ -28,7 +28,14 @@
             align-items: center;
             text-align: center;
             display: flex;
-            padding-left:0px;
+            padding-left: 15px;
+            padding-right: 12px;
+        }
+        .first_block{
+            justify-content: space-between !important;
+            align-items: center;
+            text-align: center;
+            display: flex;
         }
     </style>
 </head>
@@ -157,41 +164,48 @@
                             @csrf
                             <div class="row">
                                 <div class="form-group mt-3">
-                                    <span class="input-user-skeleton" style="text-align:center;">
-                                        <select type="text" class="form-control form-control-sm user-select select2" name="role" value="{{old('role')}}" id="select_user">
-                                            <option value="" style="text-align:center;">Select Email</option>
-                                            @foreach($roles as $item)
-                                            <option value="{{$item->id}}" style="text-align:center;">{{$item->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </span>
-                                    <span class="text-danger input_message show-error3 remove-user-error">@error('role')
-                                        Error Messages : {{$message}}@enderror
-                                    </span><br>
+                                    <div class="combo_box">
+                                        <span class="input-user-skeleton" style="text-align:center;">
+                                            <select type="text" class="form-control form-control-sm user-select select2" name="role" value="{{old('role')}}" id="select_user">
+                                                <option value="" style="text-align:center;">Select Email</option>
+                                                @foreach($roles as $item)
+                                                <option value="{{$item->id}}" style="text-align:center;">{{$item->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </span>
+                                    </div>
                                 </div>
+                                
                                 <div class="form-group">
                                     <label class="email email-label-skeleton" for="email">Email :</label>
                                     <span class="input-email-skeleton">
                                         <!-- value="{{old('email')}}" -->
-                                        <input id="inputEmail" class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{ $email ?? ''}}" autofocus>
+                                        <input id="inputEmail" class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{ $email ?? ''}}" autofocus readonly="" />
                                     </span>
                                 </div>
-                                <span class="text-danger input_message show-error remove-error skeleton">@error('email')
-                                    Error Messages : {{$message}}@enderror
-                                </span><br>
-                                <div class="form-group ms-">
+                                <div class="form-group">
                                     <label class="password email-label-skeleton" for="password">Password :</label>
                                     <span class="input-password-skeleton"><input class="password_src password show-current-border ps-1" type="password" name="password" placeholder="Enter Password" value="{{old('password')}}"></span>
-                                    <span class="text-danger input_message show-error2 remove-error2 skeleton">@error('password')
-                                        Error Messages : {{$message}}@enderror
-                                    </span><br>
                                 </div>
-                                <div class="col-md-12 ms-1">
-                                    <div class="form-group group_action">
+                                <div class="form-group">
+                                    <span class="text-danger input_message show-error3 remove-user-error">@error('role')
+                                        Error Messages : (1).{{$message}}@enderror
+                                    </span>
+                                    <span class="text-danger input_message show-error remove-error skeleton">@error('email')
+                                        (3).{{$message}}@enderror
+                                    </span>
+                                    <span class="text-danger input_message show-error2 remove-error2 skeleton">@error('password')
+                                        (2).{{$message}}@enderror
+                                    </span>
+                                </div>
+                                <div class="col-md-12 group_action">
+                                    <div class="form-group">
                                         <a id="back" type="submit" href="/login-door" class="btn btn-sm btn-primary back_button button-skeleton">
                                             <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                             <span class="back-btn-text">Back</span>
                                         </a>
+                                    </div>
+                                    <div class="form-group">
                                         <button id="submit" type="submit" class="btn btn-sm btn-primary login_button button-skeleton">
                                             <span class="loading-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                             <span class="btn-text">Login</span>
@@ -215,7 +229,7 @@
     <!-- JQUERY CDN LINK -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-function.js"></script>
+    <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js"></script>
     <script type="module">
         import { 
             buttonLoader, 
@@ -226,7 +240,7 @@
             rightSideBar, 
             handleInputValidation, 
             removeSkeletonClass 
-        } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-function.js";
+        } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
         buttonLoader();
         pageLoader();
         toolTip();
@@ -237,6 +251,7 @@
             handleSuccessMessage('#success_message');
             // Initialize the button loader for the login button
             buttonLoader('.login_button', '.loading-icon', '.btn-text', 'Login...', 'Login', 6000);
+            buttonLoader('#back', '.back-icon', '.back-btn-text', 'Back...', 'Back', 1000);
             // Initialize right sidebar canvas the loader modal with skeleton loading effect
             rightSideBar(
                 '.menu_btn',                   // Button selector to attach the click event
@@ -305,31 +320,47 @@
     <script>
         $(document).ready(function(){
             // error skeleton
-            $(document).on('click', '#submit', function() {
-                var errorMessage = $(this).text().trim();
-                $(this).attr("data-error", errorMessage);
+            // $(document).on('click', '#submit', function() {
+            //     var errorMessage = $(this).text().trim();
+            //     const $errorField = $("#select_user").closest('.form-group').find('.show-error3');
+            //     const errorMessage = $errorField.text().trim();
+
+            //     $(this).attr("data-error", errorMessage);
+            //     if (errorMessage !== '') {
+            //         $('.remove-error').addClass('error-skeleton');
+            //         $('.remove-error2').addClass('error-skeleton');
+            //         $('.remove-user-error').addClass('user-error-skeleton');
+            //         $('#select_user').next('.select2-container').find('.select2-selection').addClass('is-invalid');
+            //         setTimeout(function() {
+            //             $('.remove-error').removeClass('error-skeleton');
+            //             $('.remove-error2').removeClass('error-skeleton');
+            //             $('.remove-user-error').removeClass('user-error-skeleton');
+            //         }, 2000);
+            //     }
+            // });
+
+            $(document).on('click', '#submit', function () {
+                const $selectUser = $('#select_user');
+                const errorMessage = $('.show-error3').text().trim(); // Assuming the error message is set here
+                console.log(errorMessage);
+                
                 if (errorMessage !== '') {
+                    // Add 'is-invalid' class to Select2 container
+                    const $select2Selection = $selectUser.closest('.form-group').find('.select2-container .select2-selection');
+                    console.log($select2Selection); // Verify if the element is found
+                    // Optionally display error message in the error container
+                    $('.show-error3').text(errorMessage);
+                    // Remove the 'is-invalid' class after 2 seconds (optional)
                     $('.remove-error').addClass('error-skeleton');
                     $('.remove-error2').addClass('error-skeleton');
                     $('.remove-user-error').addClass('user-error-skeleton');
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('.remove-error').removeClass('error-skeleton');
                         $('.remove-error2').removeClass('error-skeleton');
                         $('.remove-user-error').removeClass('user-error-skeleton');
                     }, 2000);
                 }
             });
-
-            // Select User
-            const selectField = $("#select_user").val();
-            const $errorField = $("#select_user").closest('.form-group').find('.show-error3');
-            const errorMessage = $errorField.text().trim();
-
-            if(errorMessage !=== ''){
-                $('#select_user').next('.select2-container').find('.select2-selection').addClass('is-invalid');
-            }else if(errorMessage === ''){
-                $('#select_user').next('.select2-container').find('.select2-selection').removeClass('is-invalid');
-            }
             
         });
     </script>

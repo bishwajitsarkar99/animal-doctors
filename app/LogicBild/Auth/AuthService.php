@@ -125,7 +125,7 @@ class AuthService
                 1 => route('superadmin.login'),
                 2, 3 => route('admin.login'),
                 5 => route('accounts.login'),
-                6, 7 => route('common_user.login'),
+                6, 7, 0 => route('user.login'),
                 default => route('login_door.index'),
             };
 
@@ -292,7 +292,8 @@ class AuthService
         $email = session('email');
         if($email){
             $company_profiles = companyProfile::where('id', '=', 1)->get();
-            return view('auth.forget-password', compact('company_profiles', 'email'));
+            $user_image = User::where('email', $email)->first();
+            return view('auth.forget-password', compact('company_profiles', 'email', 'user_image'));
         }else{
             return redirect(route('login_door.index'));  
         }
@@ -324,8 +325,14 @@ class AuthService
     */
     public function resetPasswordLoad(Request $request)
     {
-        $company_profiles = companyProfile::where('id', '=', 1)->get();
-        return view('auth.reset-password', \compact('company_profiles'));
+        $email = session('email');
+        if($email){
+            $company_profiles = companyProfile::where('id', '=', 1)->get();
+            $user_image = User::where('email', $email)->first();
+            return view('auth.reset-password', \compact('company_profiles', 'user_image'));
+        }else{
+            return redirect(route('login_door.index'));  
+        }
     }
     /**
      * Handle set passord.

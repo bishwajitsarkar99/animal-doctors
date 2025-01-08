@@ -166,39 +166,37 @@
                                             @endforeach
                                         </select>
                                     </span>
-                                    <span class="text-danger input_message show-error remove-user-error">@error('role')
-                                        Error Messages : {{$message}}@enderror
-                                    </span><br>
                                 </div>
-                                <div class="form-group ms-4">
+                                <div class="form-group">
                                     <label class="email email-label-skeleton" for="email">Email :</label>
                                     <span class="input-email-skeleton">
                                         <!-- value="{{old('email')}}" -->
-                                        <input class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{ $email ?? ''}}" autofocus>
+                                        <input class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{ $email ?? ''}}" autofocus readonly="" />
                                     </span>
-                                    <span style="color:green;font-weight:800;font-size: 15px;">
-                                        <i class="src_email fa fa-check src_email-hidden"></i>
-                                    </span>
-                                    <span class="text-danger input_message show-error remove-error">@error('email')
-                                        Error Messages : {{$message}}@enderror
-                                    </span><br>
                                 </div>
-                                <div class="form-group ms-4">
+                                <div class="form-group">
                                     <label class="password email-label-skeleton" for="password">Password :</label>
                                     <span class="input-password-skeleton"><input class="password_src password show-current-border ps-1" type="password" name="password" placeholder="Enter Password" value="{{old('password')}}"></span>
-                                    <span style="color:green;font-weight:800;font-size: 15px;">
-                                        <i class="src_password fa fa-check src_password-hidden"></i>
-                                    </span>
-                                    <span class="text-danger input_message show-error2 remove-error2">@error('password')
-                                    Error Messages : {{$message}}@enderror
-                                    </span><br>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group group_action">
+                                <div class="form-group">
+                                    <span class="text-danger input_message show-error3 remove-user-error">@error('role')
+                                        Error Messages : (1).{{$message}}@enderror
+                                    </span>
+                                    <span class="text-danger input_message show-error remove-error skeleton">@error('email')
+                                        (3).{{$message}}@enderror
+                                    </span>
+                                    <span class="text-danger input_message show-error2 remove-error2 skeleton">@error('password')
+                                        (2).{{$message}}@enderror
+                                    </span>
+                                </div>
+                                <div class="col-md-12 group_action">
+                                    <div class="form-group ms-2">
                                         <a id="back" type="submit" href="/login-door" class="btn btn-sm btn-primary back_button button-skeleton">
                                             <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                             <span class="back-btn-text">Back</span>
                                         </a>
+                                    </div>
+                                    <div class="form-group me-1">
                                         <button id="submit" type="submit" class="btn btn-sm btn-primary login_button button-skeleton">
                                             <span class="loading-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                             <span class="btn-text">Login</span>
@@ -244,6 +242,7 @@
             handleSuccessMessage('#success_message');
             // Initialize the button loader for the login button
             buttonLoader('.login_button', '.loading-icon', '.btn-text', 'Login...', 'Login', 6000);
+            buttonLoader('#back', '.back-icon', '.back-btn-text', 'Back...', 'Back', 1000);
             // Initialize right sidebar canvas the loader modal with skeleton loading effect
             rightSideBar(
                 '.menu_btn',                   // Button selector to attach the click event
@@ -262,7 +261,7 @@
             handleInputValidation(
                 '.email_src',              // Input selector
                 '.show-error',             // Error message selector
-                'show-success-border',     // Success class
+                'is-valid',                // Success class
                 'is-invalid',              // Error class
                 'show-current-border',     // Default border class
                 '.src_email'               // Success message selector
@@ -271,7 +270,7 @@
             handleInputValidation(
                 '.password_src',           // Input selector
                 '.show-error2',            // Error message selector
-                'show-success-border',     // Success class
+                'is-valid',                // Success class
                 'is-invalid',              // Error class
                 'show-current-border',     // Default border class
                 '.src_password'            // Success message selector
