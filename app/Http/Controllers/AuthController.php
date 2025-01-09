@@ -74,6 +74,12 @@ class AuthController extends Controller
     {
         return $this->authService->register($request);
     }
+
+    // email register
+    public function userEmailRegister(Request $request)
+    {
+        return $this->authService->EmailRegister($request);
+    }
     
     // User Register
     public function register(Request $request)

@@ -43,16 +43,17 @@ class AuthService
         return $redirect; 
     }
     /**
-     * Handle user email registration.
+     * Handle user email registration page.
     */
     public function emailRegistrationForm(Request $request)
     {
+        $request->session()->flush();
         return view('registration');
     }
     /**
-     * Handle register page.
+     * Handle email registration.
     */
-    public function register(Request $request)
+    public function EmailRegister(Request $request)
     {
         // Validate the email input
         $request->validate([
@@ -66,7 +67,7 @@ class AuthService
 
         if ($valid_email) {
             // Save valid email to session
-            //session(['valid_email' => $valid_email]);
+            session(['valid_email' => $valid_email]);
 
             // Determine redirect route
             $redirect = route('register.loading');
@@ -76,13 +77,26 @@ class AuthService
                 'redirect' => $redirect,
             ]);
         }else{
-            $redirect = route('login_door.index');
+            $redirect = route('registraion_form.index');
         }
 
         return response()->json([
             'status' => 400,
             'error' => 'Invalid email. Please try again.',
         ]);
+    }
+    /**
+     * Handle register page loading.
+    */
+    public function register(Request $request)
+    {
+        $valid_email = session('valid_email');
+        if($valid_email){
+            $company_profiles = companyProfile::where('id', '=', 1)->get();
+            return view('auth.register', compact('company_profiles', 'valid_email'));
+        }else{
+            return redirect(route('registraion_form.index'));  
+        }
         
     }
     /**
@@ -474,9 +488,15 @@ class AuthService
     */
     public function emailVerificationLoad()
     {
-        $company_profiles = companyProfile::where('id', '=', 1)->get();
-        $email_verifications = EmailVerification::where('status', '=', 0)->orderBy('id', 'desc')->get();
-        return view('auth.email-verirication', compact('company_profiles','email_verifications'));
+        $valid_email = session('valid_email');
+        if($valid_email){
+            $company_profiles = companyProfile::where('id', '=', 1)->get();
+            $email_verifications = EmailVerification::where('status', '=', 0)->orderBy('id', 'desc')->get();
+            $users = User::where('email', $valid_email)->first();
+            return view('auth.email-verification', compact('company_profiles','email_verifications', 'users'));
+        }else{
+            return redirect(route('registraion_form.index'));  
+        }
     }
     /**
      * Handle send email verification.

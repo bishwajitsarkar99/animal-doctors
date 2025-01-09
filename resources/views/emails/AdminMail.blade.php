@@ -8,7 +8,7 @@ This email verification link will expire in 60 minutes.
 If you did not request this, no further action is required.
 @endcomponent
 
-@component('mail::button', ['url' => $loginLink, 'color' => 'seeblue'])
+@component('mail::button', ['url' => $loginLink, 'color' => 'success'])
 Email Verified
 @endcomponent
 

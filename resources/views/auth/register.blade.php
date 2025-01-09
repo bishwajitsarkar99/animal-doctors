@@ -27,6 +27,22 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             background-color:#d8edffd1;
         }
+        .registation_container {
+            padding-left: 300px;
+            padding-right: 150px;
+        }
+        .card.forget_card{
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            padding: 20px 20px;
+        }
+        .form-carb-body {
+            background-color: beige;
+            padding-left: 20px;
+            border-radius: 5px;
+        }
+        .form_lbl_padding {
+            padding-left: 50px;
+        }
         button#email_submit{
             margin-left: 0px;
         }
@@ -49,6 +65,40 @@
         img.image_size:hover{
             transform: scale(1.5);
         }
+        .img-group-box {
+            justify-content: center;
+            display: flex;
+        }
+        button#reg_submit{
+            margin-left: 0px;
+            background-image: linear-gradient(to top, darkgoldenrod, darkgoldenrod, darkgoldenrod);
+            border: 1px solid darkgoldenrod;
+            color: white !important;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        button#reg_submit:hover{
+            background-image: linear-gradient(to top,  #39a839c9,  #39a839c9,  #39a839c9);
+            border: 1px solid #39a839c9;
+            color: white !important;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        a#back{
+            margin-left: 0px;
+            background-image: linear-gradient(to top, darkgoldenrod, darkgoldenrod, darkgoldenrod);
+            border: 1px solid darkgoldenrod;
+            color: white !important;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        a#back:hover{
+            background-image: linear-gradient(to top,  #39a839c9,  #39a839c9,  #39a839c9);
+            border: 1px solid #39a839c9;
+            color: white !important;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        .progress {
+            background-color: #dddddd;
+        }
+                
     </style>
     </head>
     <header class="bg sticky-top">
@@ -58,7 +108,7 @@
                 <span class="nav-head-skeleton">{{setting('company_name')}}</span>
             </p>
             <p class="address skeleton">{{setting('company_address')}}</p>
-            <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
+            <!-- <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
                 <a class="menu_btn" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <span class="menu_icon menu-skeleton"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
                 </a>
@@ -88,7 +138,7 @@
                         </div>
                     </div>
                 </div>
-            </p>
+            </p> -->
         </nav>
     </header>
 
@@ -116,9 +166,16 @@
         <div class="container" style="margin-top: 65px;">
             <div class="row">
                 <div class="col-md-12 mb-4" style="margin-top:px">
-                    <h4 class="heading_register text-shadow font_size  ps-2" style="text-align: center;">
-                        <span class="head-animaion form-head-skeleton">{{setting('register_page_title')}}</span>
-                    </h4>
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <h4 class="heading_register text-shadow font_size">
+                                <span style="text-align: center;">
+                                    <span class="head-animaion form-head-skeleton form_lbl_padding">{{setting('register_page_title')}}</span>
+                                </span>
+                            </h4>
+                        </div>
+                        <div class="col-xl-4"> </div>
+                    </div>
                     <div class="">
                         <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                             @csrf
@@ -129,121 +186,97 @@
                                 </div>
                                 @endif
                                 <div class="row">
-                                    <div class="container d-flex flex-column">
+                                    <div class="container d-flex flex-column py-5 registation_container">
                                         <div class="row align-items-center justify-content-center">
-                                            <div class="col-md-8 col-lg-4">
-                                                <div class="card forget_card">
-                                                    <div class="card-body">
-                                                        <div class="mb-2">
-                                                            <div class="row">
-                                                                <div class="col-xl-10">
-                                                                    <span class="input-skeleton"></span>
-                                                                    <input class="register filed_src show-current-border input_hidden" id="border_action" type="text" name="name" placeholder="User Name" value="{{old('name')}}" autofocus>
-                                                                    <span class="input-error-skeleton text-danger name_message show-error remove-error-one">@error('name')
-                                                                        {{$message}}@enderror
-                                                                    </span>
-                                                                </div>
-                                                                <div class="col-xl-2">
-                                                                    <span style="color:green;font-weight:800;font-size: 15px;"><i class="first-check fa fa-check check-hidden"></i></span>
-                                                                    <span id="firstFillUp" class="fillup-block mini-capsule-skeleton" style="color:gray;font-weight:500;font-size: 10px;padding-top:5px;">Fill up</span> 
-                                                                </div>
+                                            <div class="card forget_card">
+                                                <div class="card-body form-carb-body">
+                                                    <div class="row">
+                                                        <div class="col-xl-6">
+                                                          <div class="row mt-2">
+                                                            <div class="mb-4 d-grid">
+                                                                <span class="input-skeleton"></span>
+                                                                <input class="register filed_src show-current-border" id="border_action" type="text" name="name" placeholder="User Name" value="{{old('name')}}" autofocus>
+                                                                <span class="input-error-skeleton text-danger name_message show-error remove-error-one">@error('name')
+                                                                    {{$message}}@enderror
+                                                                </span>
                                                             </div>
-                                                        </div>
-                                                        <div class="mb-2">
-                                                            <div class="row">
-                                                                <div class="col-xl-10">
-                                                                    <span class="input-two-skeleton"></span>
-                                                                    <input class="contract show-current-border input_hidden" type="text" name="contract_number" id="border_action2" placeholder="Contract Number" value="{{old('contract_number')}}">
-                                                                    <span class="input-error-skeleton text-danger contact_message show-error remove-error-two">@error('contract_number')
-                                                                        {{$message}}@enderror
-                                                                    </span>
-                                                                </div>
-                                                                <div class="col-xl-2">
-                                                                    <span style="color:green;font-weight:800;font-size: 15px;"><i class="second-check fa fa-check check-hidden"></i></span>
-                                                                    <span id="secondFillUp" class="fillup-block mini-capsule-skeleton" style="color:gray;font-weight:500;font-size: 10px;padding-top:5px;">Fill up</span> 
-                                                                </div>
+                                                            <div class="mb-4 d-grid">
+                                                                <span class="input-two-skeleton"></span>
+                                                                <input class="contract show-current-border" type="text" name="contract_number" id="border_action2" placeholder="Contract Number" value="{{old('contract_number')}}">
+                                                                <span class="input-error-skeleton text-danger contact_message show-error remove-error-two">@error('contract_number')
+                                                                    {{$message}}@enderror
+                                                                </span>
                                                             </div>
-                                                        </div>
-                                                        <div class="mb-2">
-                                                            <div class="row">
-                                                                <div class="col-xl-10">
-                                                                    <span class="input-email-skeleton"></span>
-                                                                    <input class="reg_email show-current-border input_hidden" type="text" name="email" id="border_action3" placeholder="Email Address" value="{{old('email')}}">
-                                                                    <span class="input-error-skeleton text-danger email_message show-error remove-error-three">@error('email')
-                                                                        {{$message}}@enderror
-                                                                    </span>
-                                                                </div>
-                                                                <div class="col-xl-2">
-                                                                    <span style="color:green;font-weight:800;font-size: 15px;"><i class="third-check fa fa-check check-hidden"></i></span>
-                                                                    <span id="thirdFillUp" class="fillup-block mini-capsule-skeleton" style="color:gray;font-weight:500;font-size: 10px;padding-top:5px;">Fill up</span> 
-                                                                </div>
+                                                            <div class="mb-4 d-grid">
+                                                                <span class="input-email-skeleton"></span>
+                                                                <input class="reg_email show-current-border" type="text" name="email" id="border_action3" placeholder="Email Address" value="{{ $valid_email ?? ''}}" readonly ="" />
+                                                                <span class="input-error-skeleton text-danger email_message show-error remove-error-three">@error('email')
+                                                                    {{$message}}@enderror
+                                                                </span>
                                                             </div>
-                                                        </div>
-                                                        <div class="mb-2">
-                                                            <div class="row">
-                                                                <div class="col-xl-10">
-                                                                    <span class="input-three-skeleton"></span>
-                                                                    <input class="user_password show-current-border input_hidden" type="password" name="password" id="border_action4" placeholder="Password" value="{{old('password')}}">
-                                                                    <span class="input-error-skeleton text-danger input_message show-error remove-error-four">@error('password')
-                                                                        {{$message}}@enderror
-                                                                    </span>
-                                                                </div>
-                                                                <div class="col-xl-2">
-                                                                    <span style="color:green;font-weight:800;font-size: 15px;"><i class="four-check fa fa-check check-hidden"></i></span>
-                                                                    <span id="fourFillUp" class="fillup-block mini-capsule-skeleton" style="color:gray;font-weight:500;font-size: 10px;padding-top:5px;">Fill up</span> 
-                                                                </div>
+                                                            <div class="mb-4 d-grid">
+                                                                <span class="input-three-skeleton"></span>
+                                                                <input class="user_password show-current-border" type="password" name="password" id="border_action4" placeholder="Password" value="{{old('password')}}">
+                                                                <span class="input-error-skeleton text-danger input_message show-error remove-error-four">@error('password')
+                                                                    {{$message}}@enderror
+                                                                </span>
                                                             </div>
-                                                        </div>
-                                                        <div class="mb-2">
-                                                            <div class="row">
-                                                                <div class="col-xl-10">
-                                                                    <span class="input-four-skeleton"></span>
-                                                                    <input class="confirm confrim-password show-current-border input_hidden" type="password" name="password_confirmation" id="border_action5" placeholder="Confirm Password">
-                                                                    <span class="input-error-skeleton text-danger contact_message show-error remove-error-five">@error('password')
-                                                                        {{$message}}@enderror
-                                                                    </span>
-                                                                </div>
-                                                                <div class="col-xl-2">
-                                                                    <span style="color:green;font-weight:800;font-size: 15px;"><i class="five-check fa fa-check check-hidden"></i></span>
-                                                                    <span id="fiveFillUp" class="fillup-block mini-capsule-skeleton" style="color:gray;font-weight:500;font-size: 10px;padding-top:5px;">Fill up</span>
-                                                                </div>
+                                                            <div class="mb-4 d-grid">
+                                                                <span class="input-four-skeleton"></span>
+                                                                <input class="confirm confrim-password show-current-border" type="password" name="password_confirmation" id="border_action5" placeholder="Confirm Password">
+                                                                <span class="input-error-skeleton text-danger contact_message show-error remove-error-five">@error('password')
+                                                                    {{$message}}@enderror
+                                                                </span>
                                                             </div>
+                                                          </div>  
                                                         </div>
-                                                        <div class="mb-2">
-                                                            <div class="row">
-                                                                <div class="col-6">
-                                                                    <span class="image_size cap-skeleton" style="text-transform: uppercase;">150 x 150 (px) 
-                                                                        <span style="color:green;font-weight:800;font-size: 15px;"><i class="six-check fa fa-check check-hidden"></i></span>
-                                                                    </span>
+                                                        <div class="col-xl-6">
+                                                            <div class="d-grid">
+                                                                <span class="image_size cap-skeleton" style="text-transform: uppercase;text-align: center;background-color:beige;">
+                                                                   User-Image : 150 x 150 (px) 
+                                                                </span>
+                                                                <div class="img-group-box signal-img pb-1">
                                                                     <div class="img-area skeleton" id="registerAnimation">
-                                                                        <span class="skeleton"><img class="register_img image-current-border imge-border img-hidden" id="output" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500"></span>
-                                                                    </div>
-                                                                    <span class="file-skeleton"></span>
-                                                                    <input accept="image/*" type='file' id="imgInput" class="image click-img mt-1" name="image" onchange="loadFile(event)" required>
-                                                                    <span class="file-error-skeleton text-danger photo_message show-error remove-error-six">@error('image')
-                                                                        {{$message}}@enderror
-                                                                    </span>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <div class="upload-group align-items-center justify-content-center">
-                                                                        <div class="progress skeleton">
-                                                                            <div class="bar"></div>
-                                                                            <div class="percent">0%</div>
-                                                                        </div>
-                                                                        <a class="btn btn-group-sm upload_btn upload-button-skeleton" id="uploadButton">
-                                                                            <span class="upload-btn-text">Upload</span>
-                                                                            <span class="img-upload-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
-                                                                        </a>
+                                                                        <span class="skeleton">
+                                                                            <img class="register_img imge-border show-current-border img-hidden" id="output" src="{{asset('backend_asset')}}/main_asset/img/undraw_profile.svg" alt="Image 500X500">
+                                                                        </span>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="mb-4 d-grid">
+                                                                <span class="file-skeleton"></span>
+                                                                <input accept="image/*" type='file' id="imgInput" class="image click-img mt-1" name="image" onchange="loadFile(event)" required>
+                                                                <span class="file-error-skeleton text-danger photo_message show-error remove-error-six">@error('image')
+                                                                    {{$message}}@enderror
+                                                                </span>
+                                                            </div>
+                                                            <div class="mb-2 d-grid">
+                                                                <div class="align-items-center justify-content-center">
+                                                                    <div class="progress skeleton">
+                                                                        <div class="bar"></div>
+                                                                        <div class="percent">0%</div>
+                                                                    </div>
+                                                                    <a class="btn btn-group-sm upload_btn upload-button-skeleton" id="uploadButton">
+                                                                        <span class="img-upload-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                                                                        <span class="upload-btn-text">Upload</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="mb-1 d-grid">
-                                                            <button type="submit" class="btn btn-sm btn-primary forget_button register_btn register_action" id="reg_submit">
-                                                                <span class="btn-text">Register</span>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6"></div>
+                                                        <div class="col-md-3">
+                                                            <a type="submit" href="/registration-form" class="btn btn-sm btn-primary forget_button register_btn register_action button-skeleton" id="back">
+                                                                <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                                                <span class="back-btn-text">Back</span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <button type="submit" class="btn btn-sm btn-primary forget_button register_btn register_action button-skeleton" id="reg_submit">
                                                                 <span class="register-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                                                <span class="btn-text">Register</span>
                                                             </button>
-                                                            <span class="button-skeleton"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -298,7 +331,7 @@
                 handleImageUpload('#uploadButton');
                 // Initialize the button loader for the login button
                 buttonLoader('#reg_submit', '.register-icon', '.btn-text', 'Register...', 'Register', 3000);
-                buttonLoader('#back_login', '.back-icon', '.btn-back-text', 'Back...', 'Back', 3000);
+                buttonLoader('#back', '.back-icon', '.back-btn-text', 'Back...', 'Back', 1000);
                 // Initialize right sidebar canvas the loader modal with skeleton loading effect
                 rightSideBar(
                     '.menu_btn',                   // Button selector to attach the click event
@@ -337,45 +370,41 @@
                 // Remove skeleton
                 setTimeout(() => {
                     removeSkeletonClass(skeletonClasses);
-                    $('input').removeClass('input_hidden');
                 }, 2000);
             });
         </script>
         <script>
             $(document).ready(function () {
                 // Function to handle input validation on keyup
-                function handleInputValidation(inputSelector, errorSelector, checkSelector, fillupSelector) {
+                function handleInputValidation(inputSelector, errorSelector) {
                     var inputVal = $(inputSelector).val().trim();
                     
                     // Display or hide error message and border styles
                     if (inputVal !== '') {
-                        $(inputSelector).removeClass('show-current-border').removeClass('is-invalid').addClass('show-success-border');
-                        $(checkSelector).removeClass('check-hidden');
-                        $(fillupSelector).removeClass('fillup-block').addClass('fillup-hidden');
+                        $(inputSelector).removeClass('show-current-border').removeClass('is-invalid').addClass('is-valid');
                     } else {
-                        $(inputSelector).addClass('show-current-border').removeClass('show-success-border').removeClass('is-invalid');
-                        $(checkSelector).addClass('check-hidden');
-                        $(fillupSelector).addClass('fillup-block').removeClass('fillup-hidden');
+                        $(inputSelector).addClass('show-current-border').removeClass('is-valid').removeClass('is-invalid');
                     }
                 }
 
                 // Check input values and errors on page load
                 function checkInitialInputStates() {
                     // Apply styles based on the existing input values
-                    handleInputValidation('#border_action', '.remove-error-one', '.first-check', '#firstFillUp');
-                    handleInputValidation('#border_action2', '.remove-error-two', '.second-check', '#secondFillUp');
-                    handleInputValidation('#border_action3', '.remove-error-three', '.third-check', '#thirdFillUp');
-                    handleInputValidation('#border_action4', '.remove-error-four', '.four-check', '#fourFillUp');
-                    handleInputValidation('#border_action5', '.remove-error-five', '.five-check', '#fiveFillUp');
+                    handleInputValidation('#border_action', '.remove-error-one');
+                    handleInputValidation('#border_action2', '.remove-error-two');
+                    handleInputValidation('#border_action3', '.remove-error-three');
+                    handleInputValidation('#border_action4', '.remove-error-four');
+                    handleInputValidation('#border_action5', '.remove-error-five');
 
                     // Image upload field validation
                     var inputVal = $(".image").val().trim();
                     if (inputVal !== '') {
                         $(".six-check").removeClass('check-hidden');
-                        $(".imge-border").removeClass('image-current-border image-error-border').addClass('image-success-border');
+                        $(".imge-border").removeClass('show-current-border is-invalid').addClass('is-valid-img');
+                        $(".signal-img").addClass('is-valid-image');
                     } else {
                         $(".six-check").addClass('check-hidden');
-                        $(".imge-border").addClass('image-current-border').removeClass('image-success-border image-error-border');
+                        $(".imge-border").addClass('show-current-border is-valid-img').removeClass('is-invalid-img');
                     }
                 }
                 
@@ -386,14 +415,16 @@
                         var errorMessage = $(this).text().trim();
                         if (errorMessage !== '') {
                             var errorInput = $(this).closest('.row').find('input');
-                            errorInput.addClass('is-invalid').removeClass('show-current-border show-success-border');
+                            errorInput.addClass('is-invalid').removeClass('show-current-border is-valid');
                         }
                     });
 
                     // Error handling for image input
                     var imageErrorMessage = $(".photo_message").text().trim();
                     if (imageErrorMessage !== '') {
-                        $(".imge-border").removeClass('image-current-border image-success-border').addClass('image-error-border');
+                        $(".imge-border").removeClass('show-current-border is-valid').addClass('is-invalid');
+                        $(".imge-border").removeClass('show-current-border is-valid-img').addClass('is-invalid-img');
+                        $(".signal-img").addClass('is-invalid-image');
                     }
                 }
 
@@ -404,29 +435,29 @@
                 // Add event listeners for input changes
                 $('#border_action').on('keyup', function () {
                     $(".remove-error-one").text('');
-                    handleInputValidation('#border_action', '.remove-error-one', '.first-check', '#firstFillUp');
+                    handleInputValidation('#border_action', '.remove-error-one');
                 });
                 $('#border_action2').on('keyup', function () {
                     $(".remove-error-two").text('');
-                    handleInputValidation('#border_action2', '.remove-error-two', '.second-check', '#secondFillUp');
+                    handleInputValidation('#border_action2', '.remove-error-two');
                 });
                 $('#border_action3').on('keyup', function () {
                     $(".remove-error-three").text('');
-                    handleInputValidation('#border_action3', '.remove-error-three', '.third-check', '#thirdFillUp');
+                    handleInputValidation('#border_action3', '.remove-error-three');
                 });
                 $('#border_action4').on('keyup', function () {
                     $(".remove-error-four").text('');
-                    handleInputValidation('#border_action4', '.remove-error-four', '.four-check', '#fourFillUp');
+                    handleInputValidation('#border_action4', '.remove-error-four');
                 });
                 $('#border_action5').on('keyup', function () {
                     $(".remove-error-five").text('');
-                    handleInputValidation('#border_action5', '.remove-error-five', '.five-check', '#fiveFillUp');
+                    handleInputValidation('#border_action5', '.remove-error-five');
                 });
                 // Image upload field validation
                 $(".image").on('change', function () {
                     var inputVal = $(this).val().trim();
                     $(".photo_message").text('');  // Remove error message
-                    $(".image").removeClass('is-invalid');
+                    $(".image").removeClass('is-invalid-img');
 
                     // Reset progress bar
                     $('.bar').css('width', '0%');
@@ -434,11 +465,11 @@
                     $(".register_img").addClass('img-hidden');
 
                     if (inputVal !== '') {
-                        $(".six-check").removeClass('check-hidden');
-                        $(".imge-border").removeClass('image-current-border').addClass('image-success-border');
+                        $(".imge-border").removeClass('show-current-border').addClass('is-valid-img');
+                        $(".signal-img").addClass('is-valid-image');
                     } else {
-                        $(".six-check").addClass('check-hidden');
-                        $(".imge-border").addClass('image-current-border').removeClass('image-success-border');
+                        $(".imge-border").addClass('show-current-border').removeClass('is-valid-img');
+                        $(".signal-img").removeClass('is-valid-image');
                     }
                 });
             });

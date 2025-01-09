@@ -107,9 +107,9 @@
                                                         <form class="col-md-4">
                                                             <div class="">
                                                                 <span class="first_block">
-                                                                    <span class="skeleton lb_text">User : </span>
+                                                                    <span class="skeleton lb_text">User : {{$users->name}}</span>
                                                                     <span class="image_skeletone">
-                                                                        <img class="image_size" src="{{ asset('/image/') }}" alt="user" />
+                                                                        <img class="image_size" src="{{ asset('/image/ . $users->image') }}" alt="user" />
                                                                     </span>
                                                                 </span>
                                                             </div>

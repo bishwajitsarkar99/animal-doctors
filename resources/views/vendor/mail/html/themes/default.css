@@ -284,24 +284,30 @@ img {
     display: inline-block;
     overflow: hidden;
     text-decoration: none;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    transition: .5s ease;
+    letter-spacing: 0.5px;
+    font-size: 14px;
 }
 
 .button-blue,
 .button-primary {
-    background-color: #2d3748;
-    border-bottom: 8px solid #2d3748;
-    border-left: 18px solid #2d3748;
-    border-right: 18px solid #2d3748;
-    border-top: 8px solid #2d3748;
+    background-color: #3b71ca;
+    border-bottom: 5px solid #3b71ca;
+    border-left: 18px solid #3b71ca;
+    border-right: 18px solid #3b71ca;
+    border-top: 5px solid #3b71ca;
 }
 
 .button-green,
 .button-success {
     background-color: #48bb78;
-    border-bottom: 8px solid #48bb78;
+    border-bottom: 5px solid #48bb78;
     border-left: 18px solid #48bb78;
     border-right: 18px solid #48bb78;
-    border-top: 8px solid #48bb78;
+    border-top: 5px solid #48bb78;
 }
 
 .button-red,

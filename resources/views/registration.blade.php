@@ -375,7 +375,7 @@
                         setTimeout(() => {
                             $("#loadingModal").modal('hide');
                         }, 11000);
-                        currentURL = "{{ route('register.loading') }}";
+                        currentURL = "{{ route('email_register.action') }}";
                     }
                     
 

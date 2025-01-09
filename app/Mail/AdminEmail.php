@@ -18,7 +18,7 @@ class AdminEmail extends Mailable
      */
     public function __construct()
     {
-        //
+        $this->loginLink = route('login_door.index');
     }
 
     /**
@@ -28,12 +28,12 @@ class AdminEmail extends Mailable
      */
     public function build()
     {
-        $loginLink = setting('login_link');
+        // $loginLink = setting('login_link');
         return $this->from('superadmin@gmail.com', 'GST-Medicine-Center')
                     ->subject('Email Verification')
                     ->markdown('emails.AdminMail')
                     ->with([
-                        'loginLink' => $loginLink,
+                        'loginLink' => $this->loginLink,
                     ]);
     }
 }

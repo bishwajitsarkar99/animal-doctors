@@ -13,6 +13,7 @@ Route::get('/login-door', function () {
 Route::get('/login-door', [AuthController::class, 'loginDoor'])->name('login_door.index');
 Route::get('/login-page-get', [AuthController::class, 'openLogin'])->name('login_page.action');
 Route::get('/registration-form', [AuthController::class, 'loadingRegistrationForm'])->name('registraion_form.index');
+Route::get('/registration-get', [AuthController::class, 'userEmailRegister'])->name('email_register.action');
 // Super Admin Login Routes with Middleware
 Route::middleware('loginPage')->group(function () {
     Route::get('/login', [AuthController::class, 'loadLogin'])->name('superadmin.login');
