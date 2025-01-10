@@ -985,7 +985,7 @@ class EmailServiceProvider
     public function mailSetting(Request $request)
     {
         $mail_settings = MailSetting::first();
-
+        //$mail_settings = DB::connection('mysql')->table('mail_settings')->first();
         if (!$mail_settings) {
             return response()->json([
                 'message' => 'No mail settings found.',
