@@ -6,11 +6,12 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\MailSetting;
 
 class AdminEmail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    protected $loginLink;
     /**
      * Create a new message instance.
      *
@@ -29,10 +30,25 @@ class AdminEmail extends Mailable
     public function build()
     {
         // $loginLink = setting('login_link');
-        return $this->from('superadmin@gmail.com', 'GST-Medicine-Center')
+
+        // Fetch the mail settings
+        $mailSetting = MailSetting::first();
+
+        // Use the mail_from value from the settings table
+        $mailFrom = $mailSetting ? $mailSetting->mail_from : 'default@example.com';
+        $companyName = setting('company_name');
+        $companyLogo = asset('backend_asset/main_asset/img/' . setting('update_company_logo'));
+        $companyAddress = setting('company_address');
+        $date = now()->timezone('Asia/Dhaka')->format('d l M Y ; h:i:sA');
+
+        return $this->from($mailFrom, $companyName)
                     ->subject('Email Verification')
                     ->markdown('emails.AdminMail')
                     ->with([
+                        'companyName' => $companyName,
+                        'companyLogo' => $companyLogo,
+                        'companyAddress' => $companyAddress,
+                        'currentDate' => $date,
                         'loginLink' => $this->loginLink,
                     ]);
     }

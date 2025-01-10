@@ -68,14 +68,14 @@ h4 {
 }
 
 p {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.5em;
     margin-top: 0;
     text-align: left;
     color: #b0adc5;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 p.project{
@@ -290,6 +290,7 @@ img {
     transition: .5s ease;
     letter-spacing: 0.5px;
     font-size: 14px;
+    font-weight: 700;
 }
 
 .button-blue,
@@ -313,10 +314,10 @@ img {
 .button-red,
 .button-error {
     background-color: #e53e3e;
-    border-bottom: 8px solid #e53e3e;
+    border-bottom: 5px solid #e53e3e;
     border-left: 18px solid #e53e3e;
     border-right: 18px solid #e53e3e;
-    border-top: 8px solid #e53e3e;
+    border-top: 5px solid #e53e3e;
 }
 .button-seeblue,
 .button-reset {
@@ -339,23 +340,29 @@ img {
 
 /* Panels */
 
-.panel {
-    border-left: #3b71ca solid 4px;
+table.panel {
+    border-left: #3b71ca solid 4px !important;
     margin: 21px 0;
 }
 
-.panel-content {
+table.panel-content {
     background-color: #edf2f7;
     color: #718096;
     padding: 16px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
-.panel-content p {
+table.panel-content p {
     color: #718096;
+    font-weight: 500;
+    font-size: 14px;
 }
 
-.panel-item {
+table.panel-item {
     padding: 0;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 .panel-item p:last-of-type {
