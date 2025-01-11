@@ -98,6 +98,567 @@
         .progress {
             background-color: #dddddd;
         }
+
+        @media only screen and (max-width: 976px) {
+            header.sticky-top {
+                position: sticky;
+                width: 100%;
+            }
+            .container {
+                width: 100%;
+                padding-right: 0px;
+                padding-left: 0px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .container.registation_container{
+                padding-right: 14px;
+                padding-left: 10px;
+            }
+            .row {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+                margin-right: 0px;
+                margin-left: 0px;
+            }
+            .card.forget_card{
+                padding: 10px 10px;
+            }
+            p.address {
+                font-size: 13px;
+                color: floralwhite;
+                font-variant: none;
+                font-weight: 100;
+                margin-top: -8px;
+            }
+            .form_lbl_padding {
+                padding-left: 0;
+                font-size: 25px;
+            }
+            .form-carb-body{
+                padding-left: 17px;
+                padding-right: 17px;
+            }
+            input.register{
+                font-size:13px;
+                font-weight: 700;
+            }
+            input.contract{
+                font-size:13px;
+                font-weight: 700;
+            }
+            input.reg_email{
+                font-size:13px;
+                font-weight: 700; 
+            }
+            input.user_password{
+                font-size:13px;
+                font-weight: 700; 
+            }
+            input.confrim-password{
+                font-size:13px;
+                font-weight: 700; 
+            }
+            .image_size {
+                margin-left: initial;
+                font-size: 13px;
+                font-weight: 700;
+            }
+            #imgInput{
+                font-size: 10px;
+                font-weight: 600;
+                width: 99%;
+            }
+            input.image {
+                margin-left: 4px;
+            }
+            .upload_btn{
+                font-size: 12px;
+                font-weight: 600;  
+            }
+            button#reg_submit{
+                margin-top: 11px;
+                font-size: 12px;
+            }
+            a.btn.btn-sm.btn.forget_button{
+                margin-top: 12px;
+            }
+            .input-skeleton::before, .input-two-skeleton::before, .input-three-skeleton::before, .input-four-skeleton::before, .input-five-skeleton::before, .input-six-skeleton::before, .input-email-skeleton::before {
+                width: 100%;
+            }
+            .file-skeleton::before {
+                position: absolute;
+                left: 0px;
+                top: 2px;
+                width: 102%;
+                height: 30px;
+            }
+            .file-error-skeleton::before {
+                position: absolute;
+                top: 7px;
+                left: 0;
+                width: 100%;
+            }
+            .button-skeleton::before {
+                position: absolute;
+                top: -4px;
+                left: -3px;
+                height: 30px;
+            }
+            .upload-button-skeleton::before{
+                position: absolute;
+                left: -3px;
+                top: -3px;
+                width: 103%;
+                height: 30px;
+            }
+            .loader-login {
+                left: -38px;
+            }
+        }
+
+        @media only screen and (max-width: 700px) {
+            .container {
+                width: 100%;
+                padding-right: 0px;
+                padding-left: 0px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .container.registation_container{
+                padding-right: 14px;
+                padding-left: 10px;
+            }
+            .card.forget_card{
+                padding: 10px 10px;
+            }
+            p.address {
+                font-size: 11px;
+                color: floralwhite;
+                font-variant: none;
+                font-weight: 100;
+                margin-top: -8px;
+            }
+            .form_lbl_padding {
+                padding-left: 0;
+                font-size: 25px;
+            }
+            .form-carb-body{
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            input.register{
+                font-size:12px;
+                font-weight: 700;
+            }
+            input.contract{
+                font-size:12px;
+                font-weight: 700;
+            }
+            input.reg_email{
+                font-size:12px;
+                font-weight: 700; 
+            }
+            input.user_password{
+                font-size:12px;
+                font-weight: 700; 
+            }
+            input.confrim-password{
+                font-size:12px;
+                font-weight: 700; 
+            }
+            .image_size {
+                margin-left: initial;
+                font-size: 12px;
+                font-weight: 700;
+            }
+            #imgInput{
+                font-size: 10px;
+                font-weight: 600;
+                width: 99%;
+            }
+            input.image {
+                margin-left: 4px;
+            }
+            .upload_btn{
+                font-size: 12px;
+                font-weight: 600;  
+            }
+            button#reg_submit{
+                margin-top: 11px;
+                font-size: 12px;
+            }
+            .input-skeleton::before, .input-two-skeleton::before, .input-three-skeleton::before, .input-four-skeleton::before, .input-five-skeleton::before, .input-six-skeleton::before, .input-email-skeleton::before {
+                width: 100%;
+            }
+            .file-skeleton::before {
+                position: absolute;
+                left: 0px;
+                top: 2px;
+                width: 102%;
+                height: 30px;
+            }
+            .file-error-skeleton::before {
+                position: absolute;
+                top: 7px;
+                left: 0;
+                width: 100%;
+            }
+            .button-skeleton::before {
+                position: absolute;
+                top: -4px;
+                left: -3px;
+                height: 30px;
+            }
+            .upload-button-skeleton::before{
+                position: absolute;
+                left: -3px;
+                top: -3px;
+                width: 103%;
+                height: 30px;
+            }
+            .loader-login {
+                left: -38px;
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            .container.registation_container{
+                padding-right: 14px;
+                padding-left: 10px;
+            }
+            .card.forget_card{
+                padding: 10px 10px;
+            }
+            p.address {
+                font-size: 11px;
+                color: floralwhite;
+                font-variant: none;
+                font-weight: 100;
+                margin-top: -8px;
+            }
+            .form_lbl_padding {
+                padding-left: 0;
+                font-size: 25px;
+            }
+            .form-carb-body{
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            input.register{
+                font-size:12px;
+                font-weight: 700;
+            }
+            input.contract{
+                font-size:12px;
+                font-weight: 700;
+            }
+            input.reg_email{
+                font-size:12px;
+                font-weight: 700; 
+            }
+            input.user_password{
+                font-size:12px;
+                font-weight: 700; 
+            }
+            input.confrim-password{
+                font-size:12px;
+                font-weight: 700; 
+            }
+            .image_size {
+                margin-left: initial;
+                font-size: 12px;
+                font-weight: 700;
+            }
+            #imgInput{
+                font-size: 10px;
+                font-weight: 600;
+                width: 99%;
+            }
+            input.image {
+                margin-left: 4px;
+            }
+            .upload_btn{
+                font-size: 12px;
+                font-weight: 600;  
+            }
+            button#reg_submit{
+                margin-top: 11px;
+                font-size: 12px;
+            }
+            .input-skeleton::before, .input-two-skeleton::before, .input-three-skeleton::before, .input-four-skeleton::before, .input-five-skeleton::before, .input-six-skeleton::before, .input-email-skeleton::before {
+                width: 100%;
+            }
+            .file-skeleton::before {
+                position: absolute;
+                left: 0px;
+                top: 2px;
+                width: 102%;
+                height: 30px;
+            }
+            .file-error-skeleton::before {
+                position: absolute;
+                top: 7px;
+                left: 0;
+                width: 100%;
+            }
+            .button-skeleton::before {
+                position: absolute;
+                top: -4px;
+                left: -3px;
+                height: 30px;
+            }
+            .upload-button-skeleton::before{
+                position: absolute;
+                left: -3px;
+                top: -3px;
+                width: 103%;
+                height: 30px;
+            }
+            .loader-login {
+                left: -38px;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            .container.registation_container{
+                padding-right: 14px;
+                padding-left: 10px;
+            }
+            .card.forget_card{
+                padding: 10px 10px;
+            }
+            .form-carb-body{
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            input.register{
+                font-size:10px;
+            }
+            input.contract{
+                font-size:10px;
+            }
+            input.reg_email{
+                font-size:10px; 
+            }
+            input.user_password{
+                font-size:10px; 
+            }
+            input.confrim-password{
+                font-size:10px; 
+            }
+            .image_size {
+                margin-left: initial;
+                font-size: 12px;
+            }
+            #imgInput{
+                font-size: 9px;
+                font-weight: 600;
+            }
+            .upload_btn{
+                font-weight: 600;  
+            }
+            button#reg_submit{
+                margin-top: 11px;
+                font-size: 10px;
+            }
+            .file-skeleton::before {
+                position: absolute;
+                left: 0px;
+                top: 2px;
+                width: 100%;
+                height: 30px;
+            }
+            .file-error-skeleton::before {
+                position: absolute;
+                top: 7px;
+                left: 0;
+                width: 100%;
+            }
+            .button-skeleton::before {
+                position: absolute;
+                top: -4px;
+                left: -3px;
+                height: 30px;
+            }
+            .upload-button-skeleton::before{
+                position: absolute;
+                left: -3px;
+                top: -3px;
+                width: 103%;
+                height: 30px;
+            }
+            .loader-login {
+                left: 55px;
+            }
+        }
+
+        @media only screen and (max-width: 400px) {
+            .container.registation_container{
+                padding-right: 14px;
+                padding-left: 10px;
+            }
+            .card.forget_card{
+                padding: 10px 10px;
+            }
+            .form-carb-body{
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            input.register{
+                font-size:10px;
+            }
+            input.contract{
+                font-size:10px;
+            }
+            input.reg_email{
+                font-size:10px; 
+            }
+            input.user_password{
+                font-size:10px; 
+            }
+            input.confrim-password{
+                font-size:10px; 
+            }
+            .image_size {
+                margin-left: initial;
+                font-size: 12px;
+            }
+            #imgInput{
+                font-size: 9px;
+                font-weight: 600;
+            }
+            .upload_btn{
+                font-weight: 600;  
+            }
+            button#reg_submit{
+                margin-top: 11px;
+                font-size: 10px;
+            }
+            .file-skeleton::before {
+                position: absolute;
+                left: -2px;
+                top: 2px;
+                width: 90%;
+                height: 30px;
+            }
+            .file-error-skeleton::before {
+                position: absolute;
+                top: 33px;
+                left: -35px;
+                width: 90%;
+            }
+            .button-skeleton::before {
+                position: absolute;
+                top: -4px;
+                left: -3px;
+                height: 30px;
+            }
+            .upload-button-skeleton::before{
+                position: absolute;
+                left: -3px;
+                top: -3px;
+                width: 103%;
+                height: 30px;
+            }
+            .loader-login {
+                left: 6px;
+            }
+        }
+
+        @media only screen and (max-width: 380px) {
+            .container {
+                width: 100%;
+                padding-right: 0px;
+                padding-left: 0px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .container.registation_container{
+                padding-right: 14px;
+                padding-left: 10px;
+            }
+            p.address {
+                font-size: 8px;
+                color: floralwhite;
+                font-variant: none;
+                font-weight: 100;
+                margin-top: 8px;
+            }
+            .card.forget_card{
+                padding: 10px 10px;
+            }
+            .form-carb-body{
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            span.form_lbl_padding {
+                padding-left: 0px;
+                font-size: 18px;
+            }
+            input.register{
+                font-size:9px;
+            }
+            input.contract{
+                font-size:9px;
+            }
+            input.reg_email{
+                font-size:9px; 
+            }
+            input.user_password{
+                font-size:9px; 
+            }
+            input.confrim-password{
+                font-size:9px; 
+            }
+            .image_size {
+                margin-left: initial;
+                font-size: 12px;
+            }
+            #imgInput{
+                font-size: 9px;
+                font-weight: 600;
+            }
+            .upload_btn{
+                font-weight: 600;  
+            }
+            button#reg_submit{
+                margin-top: 11px;
+                font-size: 10px;
+            }
+            .file-skeleton::before {
+                position: absolute;
+                left: -2px;
+                top: 2px;
+                width: 93%;
+                height: 30px;
+            }
+            .file-error-skeleton::before {
+                position: absolute;
+                top: 33px;
+                left: -35px;
+                width: 93%;
+            }
+            .button-skeleton::before {
+                position: absolute;
+                top: -4px;
+                left: -3px;
+                height: 30px;
+            }
+            .upload-button-skeleton::before{
+                position: absolute;
+                left: -3px;
+                top: -3px;
+                width: 103%;
+                height: 30px;
+            }
+            .loader-login {
+                left: -18px;
+            }
+        }
                 
     </style>
     </head>
@@ -298,7 +859,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <!-- Sweet Alert CDN LINK -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
-        <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js"></script>
+        <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-function.js"></script>
         <script type="module">
             import { 
                 buttonLoader,
@@ -311,7 +872,7 @@
                 rightSideBar,
                 removeSkeletonClass,
                 browserInpect
-            } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
+            } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-function.js";
             buttonLoader();
             imageUploadBtnLoader();
             pageLoader();

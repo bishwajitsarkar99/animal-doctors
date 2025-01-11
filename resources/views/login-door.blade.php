@@ -187,6 +187,159 @@
                 background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
                 box-sizing: border-box;
             }
+
+            @media only screen and (max-width: 976px) {
+                span.media_text2 {
+                    font-size: 25px;
+                }
+                img.logo_size {
+                    height: 50px;
+                    width: 50px;
+                }
+                input.user_login_form{
+                    font-size:12px;
+                }
+                td.user_login_form_label{
+                    font-size: 13px;
+                }
+                .form-box {
+                    padding-left: 13px;
+                    padding-right: 17px;
+                }
+                form#loginDoorForm {
+                    padding-left: 13px;
+                    padding-right: 19px;
+                }
+                .footer_row{
+                    padding-left: 10px;
+                    font-size: 14px;
+                }
+                .button_area {
+                    padding-right: 17px;
+                    padding-top: 10px;
+                }
+                button.btn.btn-sm.btn.login_button{
+                    font-size:13px;
+                }
+            }
+
+            @media only screen and (max-width: 776px) {
+                span.media_text2 {
+                    font-size: 25px;
+                }
+                img.logo_size {
+                    height: 50px;
+                    width: 50px;
+                }
+                .form-box {
+                    padding-left: 13px;
+                    padding-right: 17px;
+                }
+                form#loginDoorForm {
+                    padding-left: 13px;
+                    padding-right: 19px;
+                }
+                .footer_row{
+                    padding-left: 10px;
+                    font-size: 14px;
+                }
+                .button_area {
+                    padding-right: 17px;
+                    padding-top: 10px;
+                }
+                button.btn.btn-sm.btn.login_button{
+                    font-size:13px;
+                }
+            }
+
+            @media only screen and (max-width: 600px) {
+                span.media_text2 {
+                    font-size: 20px;
+                }
+                img.logo_size {
+                    height: 40px;
+                    width: 40px;
+                }
+                .form-box {
+                    padding-left: 13px;
+                    padding-right: 17px;
+                }
+                form#loginDoorForm {
+                    padding-left: 13px;
+                    padding-right: 19px;
+                }
+                .footer_row{
+                    padding-left: 10px;
+                }
+                .button_area {
+                    padding-right: 3px;
+                    padding-top: 10px;
+                }
+            }
+
+            @media only screen and (max-width: 500px) {
+                span.media_text2 {
+                    font-size: 20px;
+                }
+                img.logo_size {
+                    height: 40px;
+                    width: 40px;
+                }
+                .form-box {
+                    padding-left: 13px;
+                    padding-right: 17px;
+                }
+                form#loginDoorForm {
+                    padding-left: 13px;
+                    padding-right: 19px;
+                }
+                .footer_row{
+                    padding-left: 10px;
+                }
+                .button_area {
+                    padding-right: 3px;
+                    padding-top: 10px;
+                }
+            }
+
+            @media only screen and (max-width: 400px) {
+                span.media_text2 {
+                    font-size: 15px;
+                }
+                img.logo_size {
+                    height: 30px;
+                    width: 30px;
+                }
+                input.user_login_form{
+                    font-size:11px;
+                }
+                td.user_login_form_label{
+                    font-size: 12px;
+                }
+                .form-box {
+                    padding-left: 13px;
+                    padding-right: 17px;
+                }
+                form#loginDoorForm {
+                    padding-left: 13px;
+                    padding-right: 19px;
+                }
+                .footer_row{
+                    padding-left: 10px;
+                    font-size:8px;
+                }
+                .button_area {
+                    padding-right: 9px;
+                    padding-top: 10px;
+                }
+                tr.table-row{
+                    display:flex;
+                }
+                td.user_login_form_label{
+                    width: 22%;
+                }
+            }
+
             
         </style>
     </head>
@@ -199,7 +352,7 @@
             <span class="media_text2 text_size text-primary ms-3 mt-1">{{setting('company_name')}}</span>
         </div>
         <div class="relative flex items-top justify-center py-1 sm:pt-0 pt-5">
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 sm:items-center">
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 sm:items-center form-box">
                 <form id="loginDoorForm" action="#" method="POST" autocomplete="off">
                     <table>
                         <thead>
@@ -211,7 +364,7 @@
                             <tr class="table-row">
                                 <td class="user_login_form_label"> Email : </td>
                                 <td class="user-login-td">
-                                    <input class="user_login_form email-border" type="text" name="email" value="" placeholder="User Email" id="user_login_form">
+                                    <input class="user_login_form email-border" type="text" name="email" value="" placeholder="User Email" autofocus id="user_login_form">
                                 </td>
                             </tr>
                             <tr class="table-row error_mess_row">
@@ -228,7 +381,7 @@
                     </div>
                 </form>
                 <div class="flex justify-center mt-4 mb-3 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 sm:text-left">
+                    <div class="text-center text-sm text-gray-500 sm:text-left footer_row">
                         <div class="flex items-center">
                             <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400" style="color:burlywood;">
                                 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>

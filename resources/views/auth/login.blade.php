@@ -180,12 +180,12 @@
                                     <label class="email email-label-skeleton" for="email">Email :</label>
                                     <span class="input-email-skeleton">
                                         <!-- value="{{old('email')}}" -->
-                                        <input id="inputEmail" class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{ $email ?? ''}}" autofocus readonly="" />
+                                        <input id="inputEmail" class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{ $email ?? ''}}" readonly="" />
                                     </span>
                                 </div>
                                 <div class="form-group">
                                     <label class="password email-label-skeleton" for="password">Password :</label>
-                                    <span class="input-password-skeleton"><input class="password_src password show-current-border ps-1" type="password" name="password" placeholder="Enter Password" value="{{old('password')}}"></span>
+                                    <span class="input-password-skeleton"><input class="password_src password show-current-border ps-1" type="password" name="password" placeholder="Enter Password" value="{{old('password')}}" autofocus></span>
                                 </div>
                                 <div class="form-group">
                                     <span class="text-danger input_message show-error3 remove-user-error">@error('role')

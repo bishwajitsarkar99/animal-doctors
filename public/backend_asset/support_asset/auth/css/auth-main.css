@@ -852,7 +852,7 @@ a.doctors_link{
   width: 100px;
 }
 .loader-login>img{
-  width: 100px;
+  width: 65px;
 }
 .log_close, .side_canvas_close{
   animation: faidout 3s;
