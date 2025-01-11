@@ -205,8 +205,9 @@
             .button-skeleton::before {
                 position: absolute;
                 top: -4px;
-                left: -3px;
+                left: -2px;
                 height: 30px;
+                width: 112%;
             }
             .upload-button-skeleton::before{
                 position: absolute;
@@ -312,6 +313,7 @@
                 top: -4px;
                 left: -3px;
                 height: 30px;
+                width: 103%;
             }
             .upload-button-skeleton::before{
                 position: absolute;
@@ -410,6 +412,7 @@
                 top: -4px;
                 left: -3px;
                 height: 30px;
+                width: 103%;
             }
             .upload-button-skeleton::before{
                 position: absolute;
@@ -483,6 +486,7 @@
                 top: -4px;
                 left: -3px;
                 height: 30px;
+                width: 103%;
             }
             .upload-button-skeleton::before{
                 position: absolute;
@@ -556,6 +560,7 @@
                 top: -4px;
                 left: -3px;
                 height: 30px;
+                width: 103%;
             }
             .upload-button-skeleton::before{
                 position: absolute;
@@ -647,6 +652,7 @@
                 top: -4px;
                 left: -3px;
                 height: 30px;
+                width: 103%;
             }
             .upload-button-skeleton::before{
                 position: absolute;
@@ -859,7 +865,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <!-- Sweet Alert CDN LINK -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
-        <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-function.js"></script>
+        <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js"></script>
         <script type="module">
             import { 
                 buttonLoader,
@@ -872,7 +878,7 @@
                 rightSideBar,
                 removeSkeletonClass,
                 browserInpect
-            } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-function.js";
+            } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
             buttonLoader();
             imageUploadBtnLoader();
             pageLoader();
