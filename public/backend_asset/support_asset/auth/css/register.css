@@ -40,27 +40,41 @@
 }
 /* Style the file input */
 #imgInput {
-    border: 1px solid goldenrod;
-    background-color: #a17300;
-    color: white !important;
+    border: 1px solid #dbdb90;
+    color: #684a00 !important;
+    background-color: #dbdb90;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
     outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     transition: border-color 0.3s ease, background-color 0.3s ease;
-    font-size: 10px;
-    font-weight: 800;
+    font-size: 11px;
+    font-weight: 700;
     letter-spacing: 1px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
-  
 /* Change border and background color on hover */
 #imgInput:hover {
     border-color: forestgreen;
     background-color: #e9ecef;
     color: forestgreen !important;
 }
-  
+#imgInput::file-selector-button {
+    padding-top: 2px;
+    font-size: 11px;
+    color: #684a00 !important;
+    background-color: #c5c57e;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#imgInput::file-selector-button:hover {
+    background-color: forestgreen;
+    color: white !important;
+}
 /* Change border color on focus */
 #imgInput:focus {
     border-color: forestgreen;
@@ -300,9 +314,10 @@ input.register{
     line-height: 1.5;
 }
 .upload_btn {
-    background-image: linear-gradient(to top, #a17300, #a17300, #a17300);
-    border: 1px solid goldenrod;
-    color: white !important;
+    background-image: linear-gradient(to top, #dbdb90, #dbdb90, #dbdb90);
+    margin-left: 0px;
+    border: 1px solid #dbdb90;
+    color: #684a00 !important;
     padding: 3px 5px;
     border-radius: 4px;
     cursor: pointer;
@@ -313,7 +328,7 @@ input.register{
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-size: 12px;
-    font-weight: 900;
+    font-weight: 700;
     letter-spacing: 1px;
     margin-top: 10px;
     text-decoration: none;
@@ -574,7 +589,7 @@ input.image{
     position: absolute;
     left: -1px;
     top: -2px;
-    width: 103%;
+    width: 101%;
     height: 26px;
     border-radius: 3px;
     z-index: 10;

@@ -7,16 +7,20 @@ use App\Http\Controllers\Email\EmailController;
 Route::get('/login-door', function () {
     return redirect('/');
 });
-// Login Door && User Registration Form Page
-// Route:: middleware('doorLoginPage')->group(function(){
-// });
 Route::get('/login-door', [AuthController::class, 'loginDoor'])->name('login_door.index');
-Route::get('/login-page-get', [AuthController::class, 'openLogin'])->name('login_page.action');
-Route::get('/registration-form', [AuthController::class, 'loadingRegistrationForm'])->name('registraion_form.index');
-Route::get('/registration-get', [AuthController::class, 'userEmailRegister'])->name('email_register.action');
 // Super Admin Login Routes with Middleware
+Route::get('/login', [AuthController::class, 'loadLogin'])->name('superadmin.login');
+// Login Door Open Action Route with Middleware
 Route::middleware('loginPage')->group(function () {
-    Route::get('/login', [AuthController::class, 'loadLogin'])->name('superadmin.login');
+    Route::get('/login-page-get', [AuthController::class, 'openLogin'])->name('login_page.action');
+});
+// User Email Registration Form Route with Middleware
+Route::middleware('userRegistration')->group(function () {
+    Route::get('/registration-form', [AuthController::class, 'loadingRegistrationForm'])->name('registraion_form.index');
+});
+// User Email Registration Action Route with Middleware
+Route::middleware('registrationAction')->group(function () {
+    Route::get('/registration-get', [AuthController::class, 'userEmailRegister'])->name('email_register.action');
 });
 // Admin Login Routes with Middleware
 Route::middleware('adminLoginPage')->group(function () {
@@ -30,12 +34,8 @@ Route::middleware('accountsLoginPage')->group(function () {
 Route::middleware('commonUserLoginPage')->group(function () {
     Route::get('/common-user-login', [AuthController::class, 'loadCommonUserLogin'])->name('user.login');
 });
+// User Login Action
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-// Registration Routes with Middleware
-Route::middleware('registerPage')->group(function () {
-    Route::get('/register', [AuthController::class, 'loadRegister'])->name('register.loading');
-});
-Route::post('/register', [AuthController::class, 'register'])->name('register');
 // Password Routes with Middleware
 Route::middleware('forgetPage')->group(function () {
     Route::get('forget-password', [AuthController::class, 'forgetPassword'])->name('password.forget');
@@ -45,12 +45,20 @@ Route::middleware('resetPage')->group(function () {
     Route::post('reset-password', [AuthController::class, 'sendResetLinkEmail'])->name('passwords.sent');
     Route::put('reset-password', [AuthController::class, 'setPassword'])->name('password.update');
 });
+// Email Link Sending Route
+Route::post('send-link', [AuthController::class, 'sendLink'])->name('send.link');
+
+// Registration Routes with Middleware
+Route::middleware('registerPage')->group(function () {
+    Route::get('/register', [AuthController::class, 'loadRegister'])->name('register.loading');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+});
+
 // Email Verification Routes with Middleware
 Route::middleware('emailVerificationPage')->group(function () {
     Route::get('email-verification', [AuthController::class, 'loadLink'])->name('email.verification');
 });
-// Email Link Sending Route
-Route::post('send-link', [AuthController::class, 'sendLink'])->name('send.link');
+
 // Send Email
 Route::middleware(['role:SuperAdmin|Admin|SubAdmin|Accounts|Marketing|DeliveryTeam|User'])->group(function(){
     Route::get('/email', [EmailController::class, 'index'])->name('email.index');

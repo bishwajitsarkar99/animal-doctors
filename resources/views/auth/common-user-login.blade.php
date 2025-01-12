@@ -193,7 +193,7 @@
                                 </div>
                                 <div class="col-md-12 group_action">
                                     <div class="form-group">
-                                        <a id="back" type="submit" href="/login-door" class="btn btn-sm btn-primary back_button button-skeleton">
+                                        <a id="back" type="submit" href="{{$home_url}}" class="btn btn-sm btn-primary back_button button-skeleton">
                                             <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                             <span class="back-btn-text">Back</span>
                                         </a>

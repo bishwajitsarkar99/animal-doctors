@@ -160,7 +160,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="mb-3 d-grid">
-                                                        <a id="back" type="submit" href="/login" class="btn btn-sm btn-primary forget_button back-button-skeleton">
+                                                        <a id="back" type="submit" href="{{$url}}" class="btn btn-sm btn-primary forget_button back-button-skeleton">
                                                             <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                             <span class="back-btn-text">Back</span>
                                                         </a>

@@ -69,7 +69,7 @@
                         <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
                             <span class="btn-text forg_page"> Forget-Password</span>
                         </a>
-                        <a type="submit" href="/register" class="btn btn-sm" id="reg_page">
+                        <a type="submit" href="{{$register_form_url}}" class="btn btn-sm" id="reg_page">
                             <span class="btn-text reg_page"> User-Register</span>
                         </a>
                         <a type="submit" href="/email-verification" class="btn btn-sm" id="logn_page">
@@ -191,7 +191,7 @@
                                 </div>
                                 <div class="col-md-12 group_action">
                                     <div class="form-group ms-2">
-                                        <a id="back" type="submit" href="/login-door" class="btn btn-sm btn-primary back_button button-skeleton">
+                                        <a id="back" type="submit" href="{{$home_url}}" class="btn btn-sm btn-primary back_button button-skeleton">
                                             <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                             <span class="back-btn-text">Back</span>
                                         </a>

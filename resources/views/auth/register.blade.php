@@ -70,10 +70,10 @@
             display: flex;
         }
         button#reg_submit{
+            background-image: linear-gradient(to top, #dbdb90, #dbdb90, #dbdb90);
             margin-left: 0px;
-            background-image: linear-gradient(to top, darkgoldenrod, darkgoldenrod, darkgoldenrod);
-            border: 1px solid darkgoldenrod;
-            color: white !important;
+            border: 1px solid #dbdb90;
+            color: #684a00 !important;
             transition: border-color 0.3s ease, background-color 0.3s ease;
         }
         button#reg_submit:hover{
@@ -83,10 +83,10 @@
             transition: border-color 0.3s ease, background-color 0.3s ease;
         }
         a#back{
+            background-image: linear-gradient(to top, #dbdb90, #dbdb90, #dbdb90);
             margin-left: 0px;
-            background-image: linear-gradient(to top, darkgoldenrod, darkgoldenrod, darkgoldenrod);
-            border: 1px solid darkgoldenrod;
-            color: white !important;
+            border: 1px solid #dbdb90;
+            color: #684a00 !important;
             transition: border-color 0.3s ease, background-color 0.3s ease;
         }
         a#back:hover{
@@ -171,6 +171,7 @@
                 font-size: 10px;
                 font-weight: 600;
                 width: 99%;
+                border: none;
             }
             input.image {
                 margin-left: 4px;
@@ -178,10 +179,16 @@
             .upload_btn{
                 font-size: 12px;
                 font-weight: 600;  
+                border: none;
             }
             button#reg_submit{
                 margin-top: 11px;
                 font-size: 12px;
+                border: none;
+            }
+            a#back{
+                margin-top: 11px;
+                border: none;
             }
             a.btn.btn-sm.btn.forget_button{
                 margin-top: 12px;
@@ -207,7 +214,7 @@
                 top: -4px;
                 left: -2px;
                 height: 30px;
-                width: 112%;
+                width: 103%;
             }
             .upload-button-skeleton::before{
                 position: absolute;
@@ -280,6 +287,7 @@
                 font-size: 10px;
                 font-weight: 600;
                 width: 99%;
+                border: none;
             }
             input.image {
                 margin-left: 4px;
@@ -287,10 +295,16 @@
             .upload_btn{
                 font-size: 12px;
                 font-weight: 600;  
+                border: none;
             }
             button#reg_submit{
                 margin-top: 11px;
                 font-size: 12px;
+                border: none;
+            }
+            a#back{
+                margin-top: 11px;
+                border: none;
             }
             .input-skeleton::before, .input-two-skeleton::before, .input-three-skeleton::before, .input-four-skeleton::before, .input-five-skeleton::before, .input-six-skeleton::before, .input-email-skeleton::before {
                 width: 100%;
@@ -379,6 +393,7 @@
                 font-size: 10px;
                 font-weight: 600;
                 width: 99%;
+                border: none;
             }
             input.image {
                 margin-left: 4px;
@@ -386,10 +401,16 @@
             .upload_btn{
                 font-size: 12px;
                 font-weight: 600;  
+                border: none;
             }
             button#reg_submit{
                 margin-top: 11px;
                 font-size: 12px;
+                border: none;
+            }
+            a#back{
+                margin-top: 11px;
+                border: none;
             }
             .input-skeleton::before, .input-two-skeleton::before, .input-three-skeleton::before, .input-four-skeleton::before, .input-five-skeleton::before, .input-six-skeleton::before, .input-email-skeleton::before {
                 width: 100%;
@@ -460,13 +481,20 @@
             #imgInput{
                 font-size: 9px;
                 font-weight: 600;
+                border: none;
+                
             }
             .upload_btn{
                 font-weight: 600;  
+                border: none;
             }
             button#reg_submit{
                 margin-top: 11px;
                 font-size: 10px;
+            }
+            a#back{
+                margin-top: 11px;
+                border: none;
             }
             .file-skeleton::before {
                 position: absolute;
@@ -534,26 +562,33 @@
             #imgInput{
                 font-size: 9px;
                 font-weight: 600;
+                border: none;
             }
             .upload_btn{
                 font-weight: 600;  
+                border: none;
             }
             button#reg_submit{
                 margin-top: 11px;
                 font-size: 10px;
+                border: none;
+            }
+            a#back{
+                margin-top: 11px;
+                border: none;
             }
             .file-skeleton::before {
                 position: absolute;
                 left: -2px;
                 top: 2px;
-                width: 90%;
+                width: 102%;
                 height: 30px;
             }
             .file-error-skeleton::before {
                 position: absolute;
-                top: 33px;
-                left: -35px;
-                width: 90%;
+                top: 7px;
+                left: -2px;
+                width: 102%;
             }
             .button-skeleton::before {
                 position: absolute;
@@ -626,26 +661,33 @@
             #imgInput{
                 font-size: 9px;
                 font-weight: 600;
+                border: none;
             }
             .upload_btn{
                 font-weight: 600;  
+                border: none;
             }
             button#reg_submit{
                 margin-top: 11px;
                 font-size: 10px;
+                border: none;
+            }
+            a#back{
+                margin-top: 10px;
+                border: none;
             }
             .file-skeleton::before {
                 position: absolute;
                 left: -2px;
                 top: 2px;
-                width: 93%;
+                width: 90%;
                 height: 30px;
             }
             .file-error-skeleton::before {
                 position: absolute;
                 top: 33px;
                 left: -35px;
-                width: 93%;
+                width: 90%;
             }
             .button-skeleton::before {
                 position: absolute;
@@ -753,7 +795,7 @@
                                 </div>
                                 @endif
                                 <div class="row">
-                                    <div class="container d-flex flex-column py-5 registation_container">
+                                    <div class="container d-flex flex-column py-3 registation_container">
                                         <div class="row align-items-center justify-content-center">
                                             <div class="card forget_card">
                                                 <div class="card-body form-carb-body">
@@ -778,6 +820,13 @@
                                                                 <span class="input-email-skeleton"></span>
                                                                 <input class="reg_email show-current-border" type="text" name="email" id="border_action3" placeholder="Email Address" value="{{ $valid_email ?? ''}}" readonly ="" />
                                                                 <span class="input-error-skeleton text-danger email_message show-error remove-error-three">@error('email')
+                                                                    {{$message}}@enderror
+                                                                </span>
+                                                            </div>
+                                                            <div class="mb-4 d-grid">
+                                                                <span class="input-email-skeleton"></span>
+                                                                <input class="reg_email show-current-border" type="text" name="reference_email" id="border_action6" placeholder="Reference Email Address" value="" />
+                                                                <span class="input-error-skeleton text-danger email_message show-error remove-error-six">@error('reference_email')
                                                                     {{$message}}@enderror
                                                                 </span>
                                                             </div>
@@ -829,21 +878,18 @@
                                                                     </a>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6"></div>
-                                                        <div class="col-md-3">
-                                                            <a type="submit" href="/registration-form" class="btn btn-sm btn-primary forget_button register_btn register_action button-skeleton" id="back">
-                                                                <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                                                                <span class="back-btn-text">Back</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <button type="submit" class="btn btn-sm btn-primary forget_button register_btn register_action button-skeleton" id="reg_submit">
-                                                                <span class="register-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                                                                <span class="btn-text">Register</span>
-                                                            </button>
+                                                            <div class="mb-2 d-grid">
+                                                                <button type="submit" class="btn btn-sm btn-primary forget_button register_btn register_action button-skeleton error_handle" id="reg_submit">
+                                                                    <span class="register-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                                                    <span class="btn-text">Register</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="mb-2 d-grid">
+                                                                <a type="submit" href="{{$register_form_url}}" class="btn btn-sm btn-primary forget_button register_btn register_action button-skeleton" id="back">
+                                                                    <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                                                    <span class="back-btn-text">Back</span>
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -962,6 +1008,7 @@
                     handleInputValidation('#border_action3', '.remove-error-three');
                     handleInputValidation('#border_action4', '.remove-error-four');
                     handleInputValidation('#border_action5', '.remove-error-five');
+                    handleInputValidation('#border_action5', '.remove-error-six');
 
                     // Image upload field validation
                     var inputVal = $(".image").val().trim();
@@ -1019,6 +1066,10 @@
                 $('#border_action5').on('keyup', function () {
                     $(".remove-error-five").text('');
                     handleInputValidation('#border_action5', '.remove-error-five');
+                });
+                $('#border_action6').on('keyup', function () {
+                    $(".remove-error-six").text('');
+                    handleInputValidation('#border_action6', '.remove-error-six');
                 });
                 // Image upload field validation
                 $(".image").on('change', function () {

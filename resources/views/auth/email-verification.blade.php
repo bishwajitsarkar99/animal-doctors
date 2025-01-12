@@ -135,7 +135,7 @@
                                                         <span class="email_verification_skeletone"></span>
                                                     </div>
                                                     <div class="mb-3 d-grid">
-                                                        <a type="button" class="btn_back ps-2 pe-2 pb-1" href="/register" id="regist_back">
+                                                        <a type="button" class="btn_back ps-2 pe-2 pb-1" href="{{$register_url}}" id="regist_back">
                                                             <span class="regst-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                             <span class="btn-regst-text">Back</span>
                                                         </a>

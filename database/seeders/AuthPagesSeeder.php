@@ -18,7 +18,9 @@ class AuthPagesSeeder extends Seeder
         $serverIp = $_SERVER['SERVER_ADDR'] ?? '127.0.0.1:8000'; // Fallback IP for CLI
         
         // Construct URLs with the server IP
-        $loginRoute = '/';
+        $loginDoorOpenActionRoute = '/login-page-get';
+        $userEmailRegistrationRoute = '/registration-form';
+        $userEmailRegistrationActionRoute = '/registration-get';
         $adminLoginRoute = '/admin-login';
         $accountsLoginRoute = '/accounts-login';
         $commonLoginRoute = '/common-user-login';
@@ -28,7 +30,9 @@ class AuthPagesSeeder extends Seeder
         $emailVerificationRoute = '/email-verification';
 
         // Construct Page Name
-        $loginPage = 'Login Page';
+        $loginGetAction = 'Login Door Open Action';
+        $emailRegistration = 'User Email Registration';
+        $emailRegistrationAction = 'User Email Registration Action';
         $adminLoginPage = 'Admin Login Page';
         $accountsloginPage = 'Accounts Login Page';
         $commonLoginPage = 'Common Login Page';
@@ -39,7 +43,9 @@ class AuthPagesSeeder extends Seeder
 
         // Array of pages to insert
         $pages = [
-            ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $loginPage, 'page_route' => $loginRoute,'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $loginGetAction, 'page_route' => $loginDoorOpenActionRoute,'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $emailRegistration, 'page_route' => $userEmailRegistrationRoute,'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $emailRegistrationAction, 'page_route' => $userEmailRegistrationActionRoute,'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $adminLoginPage, 'page_route' => $adminLoginRoute,'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $accountsloginPage, 'page_route' => $accountsLoginRoute,'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['domain_name' => $domain,'ip_name' => $serverIp,'page_name' => $commonLoginPage, 'page_route' => $commonLoginRoute,'local_host_page_url' => null, 'domain_page_url' => null, 'status' => 1, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],

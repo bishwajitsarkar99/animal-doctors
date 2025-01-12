@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('image',155);
             $table->tinyInteger('status')->default('1');
             $table->rememberToken();
+            $table->string('reference_email');
             $table->timestamps();
         });
     }

@@ -83,6 +83,8 @@ class Kernel extends HttpKernel
         'supplierDelete' => \App\Http\Middleware\Supplier\supplierDelete::class,
         'supplierView' => \App\Http\Middleware\Supplier\supplierView::class,
         'supplierMySqlData' => \App\Http\Middleware\Supplier\supplierMySqlData::class,
+        'userRegistration' => \App\Http\Middleware\Pages\EmailRegistrationPage::class,
+        'registrationAction' => \App\Http\Middleware\Pages\EmailRegistrationAction::class,
         'loginPage' => \App\Http\Middleware\Pages\LoginPage::class,
         'adminLoginPage' => \App\Http\Middleware\Pages\AdminLoginPage::class,
         'accountsLoginPage' => \App\Http\Middleware\Pages\AccountsLoginPage::class,

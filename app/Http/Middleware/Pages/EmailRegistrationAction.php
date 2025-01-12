@@ -5,7 +5,7 @@ namespace App\Http\Middleware\Pages;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\AuthPages;
-class LoginPage
+class EmailRegistrationAction
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class LoginPage
      */
     public function handle(Request $request, Closure $next)
     {
-        $accessPermissions = AuthPages::where('page_route', '/login-page-get')
+        $accessPermissions = AuthPages::where('page_route', '/registration-form')
             ->where('status', 1)
             ->get();
 
