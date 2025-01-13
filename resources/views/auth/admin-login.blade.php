@@ -72,9 +72,6 @@
                         <a type="submit" href="{{$register_form_url}}" class="btn btn-sm" id="reg_page">
                             <span class="btn-text reg_page"> User-Register</span>
                         </a>
-                        <a type="submit" href="/email-verification" class="btn btn-sm" id="logn_page">
-                            <span class="btn-text logn_page"> Email-Verification</span>
-                        </a>
                     </div>
                     <div class="side_canvas_animation" hidden>
                         <img class="sidebar-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />

@@ -53,7 +53,7 @@
                                         <td class="sn border_ord us_td skeleton">{{($i++)+1}}</td>
                                         <td class="sn border_ord us_td skeleton">{{$user->id}}</td>
                                         <td class="tot_order_ center us_td skeleton ">
-                                            <img class="user_img mt-1 mb-1" src="/image/{{$user->image}}">
+                                            <img class="user_img mt-1 mb-1" src="/storage/image/user-image/{{$user->image}}">
                                         </td>
                                         <td class="txt_  us_td skeleton ps-1">
                                             <label for="name">Name : <span style="font-size:small;letter-spacing:0.5px;">{{$user->name}}</span></label><br>

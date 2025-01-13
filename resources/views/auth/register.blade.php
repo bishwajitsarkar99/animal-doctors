@@ -812,35 +812,35 @@
                                                             <div class="mb-4 d-grid">
                                                                 <span class="input-two-skeleton"></span>
                                                                 <input class="contract show-current-border" type="text" name="contract_number" id="border_action2" placeholder="Contract Number" value="{{old('contract_number')}}">
-                                                                <span class="input-error-skeleton text-danger contact_message show-error remove-error-two">@error('contract_number')
+                                                                <span class="input-error-skeleton text-danger contact_message show-error-two remove-error-two">@error('contract_number')
                                                                     {{$message}}@enderror
                                                                 </span>
                                                             </div>
                                                             <div class="mb-4 d-grid">
                                                                 <span class="input-email-skeleton"></span>
                                                                 <input class="reg_email show-current-border" type="text" name="email" id="border_action3" placeholder="Email Address" value="{{ $valid_email ?? ''}}" readonly ="" />
-                                                                <span class="input-error-skeleton text-danger email_message show-error remove-error-three">@error('email')
+                                                                <span class="input-error-skeleton text-danger email_message show-error-three remove-error-three">@error('email')
                                                                     {{$message}}@enderror
                                                                 </span>
                                                             </div>
                                                             <div class="mb-4 d-grid">
                                                                 <span class="input-email-skeleton"></span>
-                                                                <input class="reg_email show-current-border" type="text" name="reference_email" id="border_action6" placeholder="Reference Email Address" value="" />
-                                                                <span class="input-error-skeleton text-danger email_message show-error remove-error-six">@error('reference_email')
+                                                                <input class="reg_email show-current-border" type="text" name="reference_email" id="border_action6" placeholder="Reference Email Address" value="{{ old('reference_email') }}" />
+                                                                <span class="input-error-skeleton text-danger email_message show-error-six remove-error-six">@error('reference_email')
                                                                     {{$message}}@enderror
                                                                 </span>
                                                             </div>
                                                             <div class="mb-4 d-grid">
                                                                 <span class="input-three-skeleton"></span>
                                                                 <input class="user_password show-current-border" type="password" name="password" id="border_action4" placeholder="Password" value="{{old('password')}}">
-                                                                <span class="input-error-skeleton text-danger input_message show-error remove-error-four">@error('password')
+                                                                <span class="input-error-skeleton text-danger input_message show-error-four remove-error-four">@error('password')
                                                                     {{$message}}@enderror
                                                                 </span>
                                                             </div>
                                                             <div class="mb-4 d-grid">
                                                                 <span class="input-four-skeleton"></span>
-                                                                <input class="confirm confrim-password show-current-border" type="password" name="password_confirmation" id="border_action5" placeholder="Confirm Password">
-                                                                <span class="input-error-skeleton text-danger contact_message show-error remove-error-five">@error('password')
+                                                                <input class="confirm confrim-password show-current-border" type="password" name="password_confirmation" id="border_action5" placeholder="Confirm Password" value="{{old('password')}}">
+                                                                <span class="input-error-skeleton text-danger contact_message show-error-five remove-error-five">@error('password')
                                                                     {{$message}}@enderror
                                                                 </span>
                                                             </div>
@@ -861,7 +861,7 @@
                                                             </div>
                                                             <div class="mb-4 d-grid">
                                                                 <span class="file-skeleton"></span>
-                                                                <input accept="image/*" type='file' id="imgInput" class="image click-img mt-1" name="image" onchange="loadFile(event)" required>
+                                                                <input accept="image/*" type='file' id="imgInput" class="image click-img image_inpt mt-1" name="image" onchange="loadFile(event)" required>
                                                                 <span class="file-error-skeleton text-danger photo_message show-error remove-error-six">@error('image')
                                                                     {{$message}}@enderror
                                                                 </span>
@@ -1008,7 +1008,7 @@
                     handleInputValidation('#border_action3', '.remove-error-three');
                     handleInputValidation('#border_action4', '.remove-error-four');
                     handleInputValidation('#border_action5', '.remove-error-five');
-                    handleInputValidation('#border_action5', '.remove-error-six');
+                    handleInputValidation('#border_action6', '.remove-error-six');
 
                     // Image upload field validation
                     var inputVal = $(".image").val().trim();
@@ -1025,13 +1025,84 @@
                 // Initial error handling
                 function checkForErrors() {
                     // Error handling for input fields
-                    $(".show-error").each(function () {
-                        var errorMessage = $(this).text().trim();
-                        if (errorMessage !== '') {
-                            var errorInput = $(this).closest('.row').find('input');
-                            errorInput.addClass('is-invalid').removeClass('show-current-border is-valid');
-                        }
-                    });
+                    var nameError = $(".show-error").text().trim();
+                    var nameInputValue = $("#border_action").val();
+                    var contractNumberError = $(".show-error-two").text().trim();
+                    var contractNumberInputValue = $("#border_action2").val();
+                    var emailError = $(".show-error-three").text().trim();
+                    var emailInputValue = $("#border_action3").val();
+                    var referenceEmailError = $(".show-error-four").text().trim();
+                    var referenceEmailInputValue = $("#border_action4").val();
+                    var passwordError = $(".show-error-five").text().trim();
+                    var passwordInputValue = $("#border_action5").val();
+                    var confirmPasswordError = $(".show-error-six").text().trim();
+                    var confirmPasswordInputValue = $("#border_action6").val();
+                    // name
+                    if(nameError !== '' && nameInputValue == ''){
+                        var errorName = $(".show-error").closest('.row').find('#border_action');  
+                        errorName.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(nameError !== '' && nameInputValue !== ''){
+                        var errorName = $(".show-error").closest('.row').find('#border_action');  
+                        errorName.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(nameError == '' && nameInputValue == ''){
+                        var errorName = $(".show-error").closest('.row').find('#border_action');  
+                        errorName.addClass('show-current-border').removeClass('is-invalid is-valid');
+                    }
+                    // contract number
+                    if(contractNumberError !== '' && contractNumberInputValue == ''){
+                        var errorContract = $(".show-error").closest('.row').find('#border_action2');  
+                        errorContract.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(contractNumberError !== '' && contractNumberInputValue !== ''){
+                        var errorContract = $(".show-error").closest('.row').find('#border_action2');  
+                        errorContract.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(contractNumberError == '' && contractNumberInputValue == ''){
+                        var errorContract = $(".show-error").closest('.row').find('#border_action2');  
+                        errorContract.addClass('show-current-border').removeClass('is-invalid is-valid');
+                    }
+                    // email
+                    if(emailError !== '' && emailInputValue == ''){
+                        var errorEmail = $(".show-error").closest('.row').find('#border_action3');  
+                        errorEmail.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(emailError !== '' && emailInputValue !== ''){
+                        var errorEmail = $(".show-error").closest('.row').find('#border_action3');  
+                        errorEmail.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(emailError == '' && emailInputValue == ''){
+                        var errorEmail = $(".show-error").closest('.row').find('#border_action3');  
+                        errorEmail.addClass('show-current-border').removeClass('is-invalid is-valid');
+                    }
+                    // reference email
+                    if(referenceEmailError !== '' && referenceEmailInputValue == ''){
+                        var errorReferenceEmail = $(".show-error").closest('.row').find('#border_action4');  
+                        errorReferenceEmail.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(referenceEmailError !== '' && referenceEmailInputValue !== ''){
+                        var errorReferenceEmail = $(".show-error").closest('.row').find('#border_action4');  
+                        errorReferenceEmail.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(referenceEmailError == '' && referenceEmailInputValue == ''){
+                        var errorReferenceEmail = $(".show-error").closest('.row').find('#border_action4');  
+                        errorReferenceEmail.addClass('show-current-border').removeClass('is-invalid is-valid');
+                    }
+                    // password
+                    if(passwordError !== '' && passwordInputValue == ''){
+                        var errorPassword = $(".show-error").closest('.row').find('#border_action5');  
+                        errorPassword.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(passwordError !== '' && passwordInputValue !== ''){
+                        var errorPassword = $(".show-error").closest('.row').find('#border_action5');  
+                        errorPassword.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(passwordError == '' && passwordInputValue == ''){
+                        var errorPassword = $(".show-error").closest('.row').find('#border_action5');  
+                        errorPassword.addClass('show-current-border').removeClass('is-invalid is-valid');
+                    }
+                    // confirm password
+                    if(confirmPasswordError !== '' && confirmPasswordInputValue == ''){
+                        var errorConfirmPassword = $(".show-error").closest('.row').find('#border_action6');  
+                        errorConfirmPassword.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(confirmPasswordError !== '' && confirmPasswordInputValue !== ''){
+                        var errorConfirmPassword = $(".show-error").closest('.row').find('#border_action6');  
+                        errorConfirmPassword.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(confirmPasswordError == '' && confirmPasswordInputValue == ''){
+                        var errorConfirmPassword = $(".show-error").closest('.row').find('#border_action6');  
+                        errorConfirmPassword.addClass('show-current-border').removeClass('is-invalid is-valid');
+                    }
 
                     // Error handling for image input
                     var imageErrorMessage = $(".photo_message").text().trim();
@@ -1039,6 +1110,7 @@
                         $(".imge-border").removeClass('show-current-border is-valid').addClass('is-invalid');
                         $(".imge-border").removeClass('show-current-border is-valid-img').addClass('is-invalid-img');
                         $(".signal-img").addClass('is-invalid-image');
+                        $(".image_inpt").addClass('is-invalid-image');
                     }
                 }
 
@@ -1085,6 +1157,7 @@
                     if (inputVal !== '') {
                         $(".imge-border").removeClass('show-current-border').addClass('is-valid-img');
                         $(".signal-img").addClass('is-valid-image');
+                        $(".image_inpt").addClass('is-valid');
                     } else {
                         $(".imge-border").addClass('show-current-border').removeClass('is-valid-img');
                         $(".signal-img").removeClass('is-valid-image');

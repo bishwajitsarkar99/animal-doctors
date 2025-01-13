@@ -115,7 +115,7 @@
                                                         <span class="first_block">
                                                             <span class="skeleton lb_text">User : {{$user_image->name}}</span>
                                                             <span class="image_skeletone">
-                                                                <img class="image_size" src="{{ asset('/image/' . $user_image->image) }}" alt="user" />
+                                                                <img class="image_size" src="{{ asset('/storage/image/user-image/' . $user_image->image) }}" alt="user" />
                                                             </span>
                                                         </span>
                                                     </div>

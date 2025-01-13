@@ -7,12 +7,14 @@ use App\Models\Email\EmailVerification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\CompanyProfile;
 use Illuminate\Support\Facades\Password;
 use App\Mail\AdminEmail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class AuthService
 {
@@ -109,13 +111,15 @@ class AuthService
     {
         //$email = session('email');
         // Validation
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'string|required|max:120',
             'contract_number' => 'required|numeric|digits:11',
             'email' => 'string|email|required|max:100|unique:users',
             'reference_email' => 'string|required|max:100',
             'password' => 'string|required|confirmed|min:6|max:30',
-            'image' => 'required|image|mimes:jpeg,png,jpg,giv,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ],[
+            'email.unique' => 'The email has already taken.',
         ]);
 
         // Reference email
@@ -128,14 +132,8 @@ class AuthService
             $user->password = Hash::make($request->password);
             $user->contract_number = $request->contract_number;
             $user->reference_email = $request->reference_email;
-    
-            if ($request->hasfile('image')) {
-                $file = $request->file('image');
-                $extension = $file->getClientOriginalExtension();
-                $filename = time() . '.' . $extension;
-                $file->move('image/', $filename);
-                $user->image = $filename;
-            }
+            // Use handleImageUpload for image processing
+            $this->handleImageUpload($request, $user);
     
             $user->save();
     
@@ -150,7 +148,40 @@ class AuthService
     
             return redirect(url('email-verification'))->with('success', 'Your Registration has been completed successfully');
         }else{
-            return redirect(url('email-verification'))->with('error', 'This reference email is not authenticated.');
+            return redirect(url('register'))->withErrors(['reference_email' => 'This reference email is not authenticated.'])->withInput();
+        }
+    }
+    private function handleImageUpload(Request $request, User $user)
+    {
+        // Check if a new image file is uploaded
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+
+            // Generate file name and hash for duplicate check
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $fileHash = md5_file($file->getRealPath());
+
+            // Define storage path for images
+            $storagePath = 'public/image/user-image/';
+            $filesInStorage = Storage::files($storagePath);
+
+            // Check for duplicates in the storage directory
+            $duplicateFound = false;
+            foreach ($filesInStorage as $storedFile) {
+                if (md5_file(Storage::path($storedFile)) === $fileHash) {
+                    $duplicateFound = true;
+                    $filename = basename($storedFile); // Use the existing file name
+                    break;
+                }
+            }
+
+            // Store the file if no duplicate is found
+            if (!$duplicateFound) {
+                $file->storeAs($storagePath, $filename);
+            }
+
+            // Update the user's image field
+            $user->image = $filename;
         }
     }
     /**
@@ -559,8 +590,9 @@ class AuthService
             ]);
 
             $userVerification = User::where('email', $userEmail)->firstOrFail();
+            $userVerification->refresh();
             $userVerification->update([
-                '	email_verified_at' => now(),
+                'email_verified_at' => now(),
             ]);
 
             return back()->with('success', 'Verification link has been sent to your email.');

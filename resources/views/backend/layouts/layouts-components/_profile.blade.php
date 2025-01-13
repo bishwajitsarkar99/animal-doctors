@@ -39,7 +39,7 @@
         <div class="row profile-heading pb-3">
           <div class="col-xl-4">
             <div class="card-body thumbial-image" id="pro_image">
-              <img style="width: 150px; height:150px;border-radius: 3%;" class="profile" src="/image/{{auth()->user()->image}}" alt="profile-image">
+              <img style="width: 150px; height:150px;border-radius: 3%;" class="profile" src="/storage/image/user-image/{{auth()->user()->image}}" alt="profile-image">
             </div>
           </div>
           <div class="col-xl-8">

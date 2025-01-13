@@ -109,7 +109,7 @@
                                                                 <span class="first_block">
                                                                     <span class="skeleton lb_text">User : {{$users->name}}</span>
                                                                     <span class="image_skeletone">
-                                                                        <img class="image_size" src="{{ asset('/image/' . $users->image) }}" alt="user" />
+                                                                        <img class="image_size" src="{{ asset('/storage/image/user-image/' . $users->image) }}" alt="user" />
                                                                     </span>
                                                                 </span>
                                                             </div>
@@ -133,13 +133,6 @@
                                                             <span class="btn-email-text">Email Verification</span>
                                                         </button>
                                                         <span class="email_verification_skeletone"></span>
-                                                    </div>
-                                                    <div class="mb-3 d-grid">
-                                                        <a type="button" class="btn_back ps-2 pe-2 pb-1" href="{{$register_url}}" id="regist_back">
-                                                            <span class="regst-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                                                            <span class="btn-regst-text">Back</span>
-                                                        </a>
-                                                        <span class="email_verification_back_skeletone"></span>
                                                     </div>
                                                 </div>
                                             </div>

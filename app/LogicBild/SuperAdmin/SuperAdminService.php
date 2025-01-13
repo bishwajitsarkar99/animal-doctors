@@ -17,6 +17,7 @@ use App\Models\CompanyProfile;
 use App\Models\AuthPages;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class SuperAdminService
 {
@@ -174,14 +175,17 @@ class SuperAdminService
     // image handle
     private function handleImageUpload(Request $request, User $user)
     {
-        $path = 'image/' . $user->image;
-        if (File::exists($path)) {
-            File::delete($path);
+        // Delete the old image if it exists
+        if ($user->image && Storage::exists('public/image/user-image/' . $user->image)) {
+            Storage::delete('public/image/user-image/' . $user->image);
         }
+
+        // Store the new image
         $file = $request->file('image');
-        $extension = $file->getClientOriginalExtension();
-        $filename = time() . '.' . $extension;
-        $file->move('image/', $filename);
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('public/image/user-image/', $filename);
+
+        // Update the user's image field
         $user->image = $filename;
     }
     /**

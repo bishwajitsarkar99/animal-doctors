@@ -53,7 +53,7 @@
                     <tr class="table-row user-table-row user_setting" key="${key}">
                         <td class="sn border_ord bold">${row.id}</td>
                         <td class="tot_order_ center ps-1">
-                            <img class="user_img rounded-circle user_imgs" src="${row.image.includes('https://')?row.image: '/image/'+ row.image}">
+                            <img class="user_img rounded-circle user_imgs" src="${row.image.includes('https://')?row.image: '/storage/image/user-image/'+ row.image}">
                         </td>
                         <td class="txt_ ps-1 center">
                             <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
@@ -303,7 +303,7 @@
                             $('#edit_user_name').val(response.data.name);
                             $('#edit_user_email').val(response.data.email);
                             $('#edit_user_contract').val(response.data.contract_number);
-                            $("#image_view").attr('src', `/image/${response.data.image}` );
+                            $("#image_view").attr('src', `/storage/image/user-image/${response.data.image}` );
     
                             // Remove Error
                             $('#updateForm_errorList').html("");
@@ -425,7 +425,7 @@
                             }
                             $('#view_user_created_at').text(formatDate(response.data.created_at));
                             $('#view_user_updated_at').text(formatDate(response.data.updated_at));
-                            $("#image_show").attr('src', `/image/${response.data.image}`);
+                            $("#image_show").attr('src', `/storage/image/user-image/${response.data.image}`);
     
                             // Determine status properties
                             let statusClass, statusColor, statusText, statusBg;

@@ -1,5 +1,5 @@
 <div class="modal-header" id="logoutModal_header" style="background: transparent;background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);border-bottom: double white;">
-    <span class="pro_image"><img class="img-profile rounded-circle" id="output" src="/image/{{auth()->user()->image}}"></span>
+    <span class="pro_image"><img class="img-profile rounded-circle" id="output" src="/storage/image/user-image/{{auth()->user()->image}}"></span>
     <h6 class="modal-title admin_title logout-modal-title ms-3 pt-1" id="staticBackdropLabel" style="color:black;">
         @if(auth()->user()->role ==1)
             Super Admin

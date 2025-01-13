@@ -84,7 +84,7 @@
 <ul class="navbar-nav ms-auto ms-md-0 me-lg-2">
     <li class="nav-item dropdown">
         <a class="dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding-left: 0.5rem;">
-            <img class="img-profile rounded-circle" style="margin-top: -2px;" id="output" src="/image/{{auth()->user()->image}}">
+            <img class="img-profile rounded-circle" style="margin-top: -2px;" id="output" src="/storage/image/user-image/{{auth()->user()->image}}">
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="themeMenuListBackground">
             <li>
