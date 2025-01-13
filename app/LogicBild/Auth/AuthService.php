@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use App\Models\CompanyProfile;
 use Illuminate\Support\Facades\Password;
 use App\Mail\AdminEmail;
+use App\Mail\UserRegistrationEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
@@ -53,14 +54,14 @@ class AuthService
         return view('registration');
     }
     /**
-     * Handle email registration.
+     * Handle send user email registration form.
     */
     public function EmailRegister(Request $request)
     {
         // Validate the email input
-        $request->validate([
-            'valid_email' => 'required|email',
-        ], [
+        $validators = validator::make($request->all(),[
+           'valid_email' => 'required|email',
+        ],[
             'valid_email.required' => 'Email is required.',
             'valid_email.email' => 'Please enter a valid email address.',
         ]);
@@ -70,22 +71,23 @@ class AuthService
         if ($valid_email) {
             // Save valid email to session
             session(['valid_email' => $valid_email]);
-
-            // Determine redirect route
-            $redirect = route('register.loading');
-
-            return response()->json([
-                'status' => 200,
-                'redirect' => $redirect,
-            ]);
+            try {
+                Mail::to($valid_email)->send(new UserRegistrationEmail());
+                return response()->json([
+                    'status' => 200,
+                    'messages' => 'User Register link has been sent to your email.',
+                ]);
+            } catch (\Exception $e) {
+                if($validators->fails()){
+                    return response()->json([
+                        'status'=> 400,
+                        'errors' =>$validators->messages(),
+                    ]);
+                } 
+            }
         }else{
             $redirect = route('registraion_form.index');
         }
-
-        return response()->json([
-            'status' => 400,
-            'error' => 'Invalid email. Please try again.',
-        ]);
     }
     /**
      * Handle register page loading.

@@ -4,6 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- ================ Admin Panel(googleleapis cdn link) Custom Css file ================= -->
@@ -352,7 +353,9 @@
         </div>
         <div class="relative flex items-top justify-center py-1 sm:pt-0 pt-5">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 sm:items-center form-box">
-                <form id="loginDoorForm" action="#" method="POST" autocomplete="off">
+                <form id="loginDoorForm" autocomplete="off">
+                    @csrf
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <table>
                         <thead>
                             <tr class="table_head_row">
@@ -375,7 +378,7 @@
                     <div class="row button_area">
                         <button id="registrationSubmit" type="button" class="btn btn-sm btn-primary login_button">
                             <span class="submit-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                            <span class="submit-btn-text">Submit</span>
+                            <span class="submit-btn-text">Send</span>
                         </button>
                     </div>
                 </form>
@@ -397,6 +400,12 @@
                     </div>
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0"></div>
                 </div>
+            </div>
+        </div>
+        
+        <div class="row d-flex flex-column align-items-center justify-content-center">
+            <div class="col-xl-12 action_message">
+                <p class="ps-1"><span id="success_message"></span></p>
             </div>
         </div>
 
@@ -452,7 +461,7 @@
                 // Initialize the image upload with progress bar simulation
                 loadingProgressbar("#registrationSubmit");
                 // Initialize the button loader for the login button
-                buttonLoader('.login_button', '.submit-icon', '.submit-btn-text', 'Submit...', 'Submit', 1000);
+                buttonLoader('.login_button', '.submit-icon', '.submit-btn-text', 'Send...', 'Send', 1000);
                 // Initialize right sidebar canvas the loader modal with skeleton loading effect
                 // rightSideBar(
                 //     '.menu_btn',                   // Button selector to attach the click event
@@ -514,38 +523,46 @@
                     e.preventDefault();
                     $("#error_message").empty();
                     var valid_email = $("#user_login_form").val();
-                    if(valid_email == ''){
-                        $("#loadingModal").modal('hide');
-                        $("#user_login_form").addClass('is-invalid');
-                        $("#user_login_form").removeClass('email-border');
-                        $("#error_message").append('Please enter a valid email.');
-                        setTimeout(() => {
-                            $("#loadingModal").modal('hide');
-                        }, 11000);
-                    }else if(valid_email !== ''){
-                        $("#loadingModal").modal('show');
-                        setTimeout(() => {
-                            $("#loadingModal").modal('hide');
-                        }, 11000);
-                        currentURL = "{{ route('email_register.action') }}";
+                    var data ={
+                        valid_email: valid_email,
+                        _token: $('meta[name="csrf-token"]').attr('content')
                     }
-                    
+                    currentURL = "{{ route('email_register.action') }}";
 
                     // Make the AJAX request
                     $.ajax({
-                        type: "GET",
+                        type: "POST",
                         url: currentURL,
-                        data: { valid_email: valid_email},
+                        data: data,
                         dataType: "json",
                         success: function (response) {
-                            setTimeout(() => {
-                                if (response.status === 200) {
-                                    window.location.href = response.redirect;
-                                } else {
-                                    $("#error_message").append(`<span>${response.error}</span>`);
+                            if (response.status == 400) {
+                                $.each(response.errors, function(key, err_value) {
+                                    $('#error_message').html("");
+                                    $('#error_message').removeClass('display-none');
+                                    $("#user_login_form").addClass('is-invalid');
+                                    $('#error_message').addClass('alert_show_errors');
+                                    $("#user_login_form").removeClass('email-border');
+                                    $("#error_message").append(`<span>${response.err_value}</span>`);
+                                    $('#error_message').fadeIn();
+                                });
+                            }else {
+                                //window.location.href = response.redirect;
+                                $("#loadingModal").modal('show');
+                                setTimeout(() => {
+                                    $("#loadingModal").modal('hide');
+                                    $('#error_message').html("");
+                                    $('#success_message').html("");
+                                    $('#success_message').addClass('alert_show ps-1 pe-1');
+                                    $('#success_message').fadeIn();
+                                    $('#success_message').text(response.messages);
+                                    $('#user_login_form').val("");
+                                    setTimeout(() => {
+                                        $('#success_message').fadeOut(3000);
+                                    }, 5000);
                                     
-                                }
-                            }, 10800);
+                                }, 10800);
+                            }
                         },
                         error: function () {
                             setTimeout(() => {

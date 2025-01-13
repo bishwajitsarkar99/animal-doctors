@@ -20,7 +20,7 @@ Route::middleware('userRegistration')->group(function () {
 });
 // User Email Registration Action Route with Middleware
 Route::middleware('registrationAction')->group(function () {
-    Route::get('/registration-get', [AuthController::class, 'userEmailRegister'])->name('email_register.action');
+    Route::post('/registration-get', [AuthController::class, 'userEmailRegister'])->name('email_register.action');
 });
 // Admin Login Routes with Middleware
 Route::middleware('adminLoginPage')->group(function () {

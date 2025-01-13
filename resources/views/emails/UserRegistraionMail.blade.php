@@ -1,0 +1,53 @@
+@component('mail::message')
+<a class="image-area" href="#" style="display: inline-block;">
+<img src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" class="logo" alt="Laravel Logo">
+</a><br><br>
+<span style="font-size:13px;font-weight:500;color:cornflowerblue;">Date : {{$currentDate}}</span><br>
+<span style="font-size:22px;font-weight:700;color:#242424cc;">Hello User!</span><br>
+<span style="font-size:15px;font-weight:500;color:#242424cc;">
+You are receiving this email because we received a request to register a new user. You are most welcome as a new member.
+</span>
+
+@component('mail::panel')
+<span style="font-size:14px;font-weight:500;color:#718096;">
+This user registraion form link will expire in 60 minutes. 
+If you did not request this, no further action is required.
+</span>
+@endcomponent
+
+<table style="border-collapse: collapse; margin: 0 auto;">
+    <tr>
+        <td>
+            <a href="{{ $userRegistrionLink }}" style="
+                display: inline-block;
+                background-color: #28a745;
+                color: white;
+                font-size: 14px;
+                font-weight: 700;
+                transition: .5s ease;
+                letter-spacing: 0.5px;
+                -mdb-box-shadow-color-rgb: 0, 0, 0;
+                box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+                text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+                padding: 5px 18px;
+                text-decoration: none;
+                border-radius: 4px;
+                text-align: center;">
+                Registraion Form
+            </a>
+        </td>
+    </tr>
+</table><br><br><br>
+
+<span style="font-size:14px;font-weight:600;color:#242424cc;">Thank you and best regards,</span><br>
+<span style="font-size:14px;font-weight:600;color:#242424cc;">Admin</span><br>
+<span style="font-size:14px;font-weight:600;color:#242424cc;">{{setting('company_name')}}</span><br><br><br>
+<table style="border-collapse: collapse; margin: 0 auto;">
+    <tr>
+        <td>
+            <span style="font-size:13px;font-weight:500;color:cornflowerblue;">{{setting('company_address')}}</span>
+        </td>
+    </tr>
+</table>
+@endcomponent
+
