@@ -52,12 +52,6 @@ class AuthService
         $request->session()->flush();
         return view('registration');
     }
-    // user for super admin default form
-    public function emailRegistrationDefaultForm(Request $request)
-    {
-        $request->session()->flush();
-        return view('registration');
-    }
     /**
      * Handle send user email registration form.
     */
@@ -269,7 +263,7 @@ class AuthService
             $home_url = null;
             $register_form_url = null;
             $home_url = route('login_door.index');
-            $register_form_url = route('registraion_form_default.index');
+            $register_form_url = route('registraion_form.index');
             if (Auth::user()) {
                 $route = $this->redirectDashboard();
                 return redirect($route);

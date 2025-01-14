@@ -441,67 +441,16 @@
             import { 
                 buttonLoader, 
                 loadingProgressbar,
-                //pageLoader, 
-                //handleSuccessMessage, 
-                //toolTip, 
                 //browserInpect, 
-                //rightSideBar, 
-                //removeSkeletonClass 
             } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
             buttonLoader();
-            //pageLoader();
-            //toolTip();
             //browserInpect();
 
             $(document).ready(function () {
-                // Initialize the message
-                //handleSuccessMessage('#success_message');
                 // Initialize the image upload with progress bar simulation
                 loadingProgressbar("#registrationSubmit");
                 // Initialize the button loader for the login button
                 buttonLoader('.login_button', '.submit-icon', '.submit-btn-text', 'Send...', 'Send', 1000);
-                // Initialize right sidebar canvas the loader modal with skeleton loading effect
-                // rightSideBar(
-                //     '.menu_btn',                   // Button selector to attach the click event
-                //     '#loader_modal',               // Modal selector
-                //     '.side_canvas_animation',       // Loader selector
-                //     [                               // Array of elements to apply skeleton effect
-                //         '.head_auth', 
-                //         '.btn-close', 
-                //         '.forg_page', 
-                //         '.reg_page', 
-                //         '.logn_page'
-                //     ],
-                //     2000
-                // );
-                // // Handle password validation
-                // handleInputValidation(
-                //     '.password_src',           // Input selector
-                //     '.show-error2',            // Error message selector
-                //     'show-success-border',     // Success class
-                //     'is-invalid',              // Error class
-                //     'show-current-border',     // Default border class
-                //     '.src_password'            // Success message selector
-                // );
-                // // Array of skeleton class names
-                // const skeletonClasses = [
-                //     'headings-skeleton',
-                //     'input-user-skeleton',
-                //     'input-email-skeleton',
-                //     'input-password-skeleton',
-                //     'button-skeleton',
-                //     'skeleton', // General skeleton
-                //     'email-label-skeleton',
-                //     'logo-skeleton',
-                //     'menu-skeleton',
-                //     'whatsapp-skeleton',
-                //     'messenger-skeleton',
-                //     'facebook-skeleton'
-                // ];
-                // Remove skeleton
-                // setTimeout(() => {
-                //     removeSkeletonClass(skeletonClasses);
-                // }, 2000);
             });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>

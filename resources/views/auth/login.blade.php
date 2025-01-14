@@ -76,7 +76,7 @@
                             <span class="btn-text forg_page"> Forget-Password</span>
                         </a>
                         <input type="text" name="email" value="{{ $email ?? ''}}" id="emal_input" hidden>
-                        <a type="submit" href="{{ route('registraion_form_default.index') }}" class="btn btn-sm" id="reg_page">
+                        <a type="submit" href="{{ $register_form_url }}" class="btn btn-sm" id="reg_page">
                             <span class="btn-text reg_page"> User-Register</span>
                         </a>
                         <a type="submit" href="{{ route('email.verification') }}" class="btn btn-sm" id="logn_page">

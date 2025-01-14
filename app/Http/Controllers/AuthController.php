@@ -62,11 +62,6 @@ class AuthController extends Controller
     {
         return $this->authService->emailRegistrationForm($request);
     }
-    // User Email Registration User For Super Admin
-    public function loadingRegistrationDefaultForm(Request $request)
-    {
-        return $this->authService->emailRegistrationDefaultForm($request);
-    }
 
     // Open Login Page
     public function openLogin(Request $request)
