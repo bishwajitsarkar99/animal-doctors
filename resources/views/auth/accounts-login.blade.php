@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="group__button">
-                        <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
+                        <a type="submit" href="{{$forget_password_url}}" class="btn btn-sm" id="forg_page">
                             <span class="btn-text forg_page"> Forget-Password</span>
                         </a>
                     </div>

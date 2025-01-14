@@ -18,9 +18,11 @@ Route::middleware('loginPage')->group(function () {
 Route::middleware('userRegistration')->group(function () {
     Route::get('/registration-form', [AuthController::class, 'loadingRegistrationForm'])->name('registraion_form.index');
 });
+// User Email Registration Form Route And Action Use For Super-Admin
+Route::get('/registration-form-default-link-super--admin', [AuthController::class, 'loadingRegistrationDefaultForm'])->name('registraion_form_default.index');
 // User Email Registration Action Route with Middleware
 Route::middleware('registrationAction')->group(function () {
-    Route::post('/registration-get', [AuthController::class, 'userEmailRegister'])->name('email_register.action');
+    Route::get('/registration-get', [AuthController::class, 'userEmailRegister'])->name('email_register.action');
 });
 // Admin Login Routes with Middleware
 Route::middleware('adminLoginPage')->group(function () {

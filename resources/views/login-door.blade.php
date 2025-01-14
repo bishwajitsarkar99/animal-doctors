@@ -540,9 +540,13 @@
                         dataType: "json",
                         success: function (response) {
                             setTimeout(() => {
+                                $("#error_message").html("");
                                 if (response.status === 200) {
                                     window.location.href = response.redirect;
                                 } else {
+                                    $("#error_message").html("");
+                                    $("#user_login_form").addClass('is-invalid');
+                                    $("#user_login_form").removeClass('email-border');
                                     $("#error_message").append(`<span>${response.error}</span>`);
                                     
                                 }
@@ -550,6 +554,9 @@
                         },
                         error: function () {
                             setTimeout(() => {
+                                $("#error_message").html("");
+                                $("#user_login_form").addClass('is-invalid');
+                                $("#user_login_form").removeClass('email-border');
                                 $("#error_message").append('Please enter a valid email.');
                             }, 11000);
                         },

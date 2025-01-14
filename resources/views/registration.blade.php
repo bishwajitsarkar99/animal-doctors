@@ -354,8 +354,6 @@
         <div class="relative flex items-top justify-center py-1 sm:pt-0 pt-5">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 sm:items-center form-box">
                 <form id="loginDoorForm" autocomplete="off">
-                    @csrf
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <table>
                         <thead>
                             <tr class="table_head_row">
@@ -518,54 +516,50 @@
         </script>
         <script>
             $(document).ready(function(){
-                // Open Login Page
+                // Open Registration Page
                 $(document).on('click', '#registrationSubmit', function (e) {
                     e.preventDefault();
                     $("#error_message").empty();
                     var valid_email = $("#user_login_form").val();
-                    var data ={
-                        valid_email: valid_email,
-                        _token: $('meta[name="csrf-token"]').attr('content')
+                    if(valid_email == ''){
+                        $("#loadingModal").modal('hide');
+                        $("#user_login_form").addClass('is-invalid');
+                        $("#user_login_form").removeClass('email-border');
+                        $("#error_message").append('Please enter a valid email.');
+                        setTimeout(() => {
+                            $("#loadingModal").modal('hide');
+                        }, 11000);
+                    }else if(valid_email !== ''){
+                        $("#loadingModal").modal('show');
+                        setTimeout(() => {
+                            $("#loadingModal").modal('hide');
+                        }, 11000);
+                        currentURL = "{{ route('email_register.action') }}";
                     }
-                    currentURL = "{{ route('email_register.action') }}";
-
                     // Make the AJAX request
                     $.ajax({
-                        type: "POST",
+                        type: "GET",
                         url: currentURL,
-                        data: data,
+                        data: { valid_email: valid_email },
                         dataType: "json",
                         success: function (response) {
-                            if (response.status == 400) {
-                                $.each(response.errors, function(key, err_value) {
-                                    $('#error_message').html("");
-                                    $('#error_message').removeClass('display-none');
+                            setTimeout(() => {
+                                $("#error_message").html("");
+                                if (response.status === 200) {
+                                    window.location.href = response.redirect;
+                                } else if(response.status === 400) {
+                                    $("#error_message").html("");
                                     $("#user_login_form").addClass('is-invalid');
-                                    $('#error_message').addClass('alert_show_errors');
                                     $("#user_login_form").removeClass('email-border');
-                                    $("#error_message").append(`<span>${response.err_value}</span>`);
-                                    $('#error_message').fadeIn();
-                                });
-                            }else {
-                                //window.location.href = response.redirect;
-                                $("#loadingModal").modal('show');
-                                setTimeout(() => {
-                                    $("#loadingModal").modal('hide');
-                                    $('#error_message').html("");
-                                    $('#success_message').html("");
-                                    $('#success_message').addClass('alert_show ps-1 pe-1');
-                                    $('#success_message').fadeIn();
-                                    $('#success_message').text(response.messages);
-                                    $('#user_login_form').val("");
-                                    setTimeout(() => {
-                                        $('#success_message').fadeOut(3000);
-                                    }, 5000);
-                                    
-                                }, 10800);
-                            }
+                                    $("#error_message").append(`<span>${response.errors}</span>`);
+                                }
+                            }, 10800);
                         },
                         error: function () {
                             setTimeout(() => {
+                                $("#error_message").html("");
+                                $("#user_login_form").addClass('is-invalid');
+                                $("#user_login_form").removeClass('email-border');
                                 $("#error_message").append('Please enter a valid email.');
                             }, 11000);
                         },
@@ -574,7 +568,6 @@
 
                 // input keyup action
                 $(document).on('keyup', '#user_login_form', function(){
-                
                     if($(this).hasClass('is-invalid')){
                         $(this).removeClass('is-invalid');
                         $(this).addClass('is-valid');

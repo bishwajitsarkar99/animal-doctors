@@ -13,7 +13,6 @@ use Illuminate\Support\Str;
 use App\Models\CompanyProfile;
 use Illuminate\Support\Facades\Password;
 use App\Mail\AdminEmail;
-use App\Mail\UserRegistrationEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
@@ -53,39 +52,40 @@ class AuthService
         $request->session()->flush();
         return view('registration');
     }
+    // user for super admin default form
+    public function emailRegistrationDefaultForm(Request $request)
+    {
+        $request->session()->flush();
+        return view('registration');
+    }
     /**
      * Handle send user email registration form.
     */
     public function EmailRegister(Request $request)
     {
         // Validate the email input
-        $validators = validator::make($request->all(),[
-           'valid_email' => 'required|email',
-        ],[
+        $request->validate([
+            'valid_email' => 'required|email',
+        ], [
             'valid_email.required' => 'Email is required.',
             'valid_email.email' => 'Please enter a valid email address.',
         ]);
 
         $valid_email = $request->input('valid_email');
-
-        if ($valid_email) {
+        $valid_user = User::where('email', $valid_email)->first();
+        if (!$valid_user) {
             // Save valid email to session
             session(['valid_email' => $valid_email]);
-            try {
-                Mail::to($valid_email)->send(new UserRegistrationEmail());
-                return response()->json([
-                    'status' => 200,
-                    'messages' => 'User Register link has been sent to your email.',
-                ]);
-            } catch (\Exception $e) {
-                if($validators->fails()){
-                    return response()->json([
-                        'status'=> 400,
-                        'errors' =>$validators->messages(),
-                    ]);
-                } 
-            }
+            $redirect = route('register.loading');
+            return response()->json([
+                'status' => 200,
+                'redirect' => $redirect,
+            ]);
         }else{
+            return response()->json([
+                'status' => 400,
+                'errors' => 'This email has already taken.',
+            ]);
             $redirect = route('registraion_form.index');
         }
     }
@@ -126,31 +126,56 @@ class AuthService
 
         // Reference email
         $reference_email = $request->input('reference_email');
-        $reference_user = User::where('email', $reference_email)->first();
-        if($reference_user){
-            $user = new User;
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password);
-            $user->contract_number = $request->contract_number;
-            $user->reference_email = $request->reference_email;
-            // Use handleImageUpload for image processing
-            $this->handleImageUpload($request, $user);
-    
-            $user->save();
-    
-            // Insert into email_verifications table
-            DB::table('email_verifications')->insert([
-                'user_id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'role' => $request->role ?? 0,
-                'account_create_session' => now(),
-            ]);
-    
+        $userRoles = Role::whereIn('id', [1, 3])->pluck('id');
+        $reference_user = User::where('email', $reference_email)->whereIn('role', $userRoles)->first();
+
+        if (!$reference_user) {
+            return redirect(url('register'))
+                ->withErrors(['reference_email' => 'This reference email is not authenticated.'])
+                ->withInput();
+        }
+
+        // Create new user
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->contract_number = $request->contract_number;
+        $user->reference_email = $request->reference_email;
+
+        // Process image upload
+        $this->handleImageUpload($request, $user);
+
+        $isSaved = false;
+
+        // Transaction to save user and related data
+        try {
+            DB::transaction(function () use ($user, $request, &$isSaved) {
+                if ($user->save()) {
+                    DB::table('email_verifications')->insert([
+                        'user_id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'role' => $request->role ?? 0,
+                        'account_create_session' => now(),
+                    ]);
+                    $isSaved = true;
+                }
+            });
+        } catch (\Exception $e) {
+            Log::error('Error during registration: ' . $e->getMessage());
+            return redirect(url('register'))
+                ->with('error', 'An unexpected error occurred. Please try again.')
+                ->withInput();
+        }
+
+        // Redirect based on the save status
+        if ($isSaved) {
             return redirect(url('email-verification'))->with('success', 'Your Registration has been completed successfully');
-        }else{
-            return redirect(url('register'))->withErrors(['reference_email' => 'This reference email is not authenticated.'])->withInput();
+        } else {
+            return redirect(url('register'))
+                ->with('error', 'An error occurred while processing your registration. Please try again.')
+                ->withInput();
         }
     }
     private function handleImageUpload(Request $request, User $user)
@@ -244,7 +269,7 @@ class AuthService
             $home_url = null;
             $register_form_url = null;
             $home_url = route('login_door.index');
-            $register_form_url = route('registraion_form.index');
+            $register_form_url = route('registraion_form_default.index');
             if (Auth::user()) {
                 $route = $this->redirectDashboard();
                 return redirect($route);
@@ -265,14 +290,18 @@ class AuthService
             $roles = Role::whereIn('name', ['Admin', 'Sub Admin'])->get();
             
             $home_url = null;
+            $register_form_url = null;
+            $forget_password_url = null;
             $home_url = route('login_door.index');
+            $register_form_url = route('registraion_form.index');
+            $forget_password_url = route('password.forget');
 
             if (Auth::user()) {
                 $route = $this->redirectDashboard();
                 return redirect($route);
             }
     
-            return view('auth.admin-login', compact('company_profiles', 'roles', 'email', 'home_url'));
+            return view('auth.admin-login', compact('company_profiles', 'roles', 'email', 'home_url', 'register_form_url', 'forget_password_url'));
         }else{
             return redirect(route('login_door.index'));
         }
@@ -288,14 +317,16 @@ class AuthService
             $roles = Role::whereIn('name', ['Accounts'])->get();
             
             $home_url = null;
+            $forget_password_url = null;
             $home_url = route('login_door.index');
+            $forget_password_url = route('password.forget');
 
             if (Auth::user()) {
                 $route = $this->redirectDashboard();
                 return redirect($route);
             }
     
-            return view('auth.accounts-login', compact('company_profiles', 'roles', 'email', 'home_url'));
+            return view('auth.accounts-login', compact('company_profiles', 'roles', 'email', 'home_url', 'forget_password_url'));
         }else{
             return redirect(route('login_door.index'));
         }
@@ -312,13 +343,15 @@ class AuthService
     
             $home_url = null;
             $home_url = route('login_door.index');
+            $forget_password_url = null;
+            $forget_password_url = route('password.forget');
 
             if (Auth::user()) {
                 $route = $this->redirectDashboard();
                 return redirect($route);
             }
     
-            return view('auth.common-user-login', compact('company_profiles', 'roles', 'email', 'home_url'));
+            return view('auth.common-user-login', compact('company_profiles', 'roles', 'email', 'home_url', 'forget_password_url'));
         }else{
             return redirect(route('login_door.index')); 
         }
@@ -428,6 +461,8 @@ class AuthService
 
 
         if ($response == Password::RESET_LINK_SENT) {
+            // Store the email in the session
+            session(['email' => $request->email, 'reset_link_sent' => true]);
             return back()->with('success', "Check you email for reset password");
         }
 
@@ -441,15 +476,20 @@ class AuthService
     public function resetPasswordLoad(Request $request)
     {
         $email = session('email');
-        if($email){
+        $resetLinkSent = session('reset_link_sent', false);
+        if($email && $resetLinkSent){
+            session()->forget('reset_link_sent'); // Clear the flag
             $company_profiles = companyProfile::where('id', '=', 1)->get();
             $user_image = User::where('email', $email)->first();
-            $home_url = null;
-            $home_url = route('login_door.index');
-            return view('auth.reset-password', \compact('company_profiles', 'user_image', 'home_url'));
-        }else{
-            return redirect(route('login_door.index'));  
+            
+            if($user_image){
+                $home_url = null;
+                $home_url = route('login_door.index');
+                return view('auth.reset-password', \compact('company_profiles', 'user_image', 'home_url'));
+            }
+            return redirect(route('password.forget'));  
         }
+        return redirect(route('login_door.index')); 
     }
     /**
      * Handle set passord.
@@ -564,9 +604,13 @@ class AuthService
             $company_profiles = companyProfile::where('id', '=', 1)->get();
             $email_verifications = EmailVerification::where('status', '=', 0)->orderBy('id', 'desc')->get();
             $users = User::where('email', $valid_email)->first();
-            $register_url = null;
-            $register_url = route('register.loading');
-            return view('auth.email-verification', compact('company_profiles','email_verifications', 'users', 'register_url'));
+            if($users !== null){
+                $register_url = null;
+                $register_url = route('register.loading');
+                return view('auth.email-verification', compact('company_profiles','email_verifications', 'users', 'register_url'));
+            }else if($users == null){
+                return redirect(route('register.loading'));  
+            }
         }else{
             return redirect(route('registraion_form.index'));  
         }
