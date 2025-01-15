@@ -804,8 +804,15 @@
                                                           <div class="row mt-2">
                                                             <div class="mb-4 d-grid">
                                                                 <span class="input-skeleton"></span>
-                                                                <input class="register filed_src show-current-border" id="border_action" type="text" name="name" placeholder="User Name" value="{{old('name')}}" autofocus>
-                                                                <span class="input-error-skeleton text-danger name_message show-error remove-error-one">@error('name')
+                                                                <input class="register filed_src show-current-border" id="border_action" type="text" name="first_name" placeholder="First Name" value="{{old('name')}}" autofocus>
+                                                                <span class="input-error-skeleton text-danger name_message show-error remove-error-one">@error('first_name')
+                                                                    {{$message}}@enderror
+                                                                </span>
+                                                            </div>
+                                                            <div class="mb-4 d-grid">
+                                                                <span class="input-skeleton"></span>
+                                                                <input class="register filed_src show-current-border" id="border_action7" type="text" name="last_name" placeholder="Last Name" value="{{old('name')}}" autofocus>
+                                                                <span class="input-error-skeleton text-danger name_message show-error-seven remove-error-seven">@error('last_name')
                                                                     {{$message}}@enderror
                                                                 </span>
                                                             </div>
@@ -873,20 +880,20 @@
                                                                         <div class="percent">0%</div>
                                                                     </div>
                                                                     <a class="btn btn-group-sm upload_btn upload-button-skeleton" id="uploadButton">
-                                                                        <span class="img-upload-icon spinner-border spinner-border-sm text-white register-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                                                                        <span class="img-upload-icon spinner-border spinner-border-sm register-hidden" style="color:forestgreen;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                                                         <span class="upload-btn-text">Upload</span>
                                                                     </a>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-2 d-grid">
                                                                 <button type="submit" class="btn btn-sm btn-primary forget_button register_btn register_action button-skeleton error_handle" id="reg_submit">
-                                                                    <span class="register-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                                                    <span class="register-icon spinner-border spinner-border-sm" style="color:forestgreen;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                                     <span class="btn-text">Register</span>
                                                                 </button>
                                                             </div>
                                                             <div class="mb-2 d-grid">
                                                                 <a type="submit" href="{{$register_form_url}}" class="btn btn-sm btn-primary forget_button register_btn register_action button-skeleton" id="back">
-                                                                    <span class="back-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                                                    <span class="back-icon spinner-border spinner-border-sm" style="color:forestgreen;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                                     <span class="back-btn-text">Back</span>
                                                                 </a>
                                                             </div>
@@ -1009,6 +1016,7 @@
                     handleInputValidation('#border_action4', '.remove-error-four');
                     handleInputValidation('#border_action5', '.remove-error-five');
                     handleInputValidation('#border_action6', '.remove-error-six');
+                    handleInputValidation('#border_action7', '.remove-error-seven');
 
                     // Image upload field validation
                     var inputVal = $(".image").val().trim();
@@ -1025,8 +1033,10 @@
                 // Initial error handling
                 function checkForErrors() {
                     // Error handling for input fields
-                    var nameError = $(".show-error").text().trim();
-                    var nameInputValue = $("#border_action").val();
+                    var firstNameError = $(".show-error").text().trim();
+                    var firstNameInputValue = $("#border_action").val();
+                    var lastNameError = $(".show-error-seven").text().trim();
+                    var lastNameInputValue = $("#border_action7").val();
                     var contractNumberError = $(".show-error-two").text().trim();
                     var contractNumberInputValue = $("#border_action2").val();
                     var emailError = $(".show-error-three").text().trim();
@@ -1037,16 +1047,27 @@
                     var passwordInputValue = $("#border_action5").val();
                     var confirmPasswordError = $(".show-error-six").text().trim();
                     var confirmPasswordInputValue = $("#border_action6").val();
-                    // name
-                    if(nameError !== '' && nameInputValue == ''){
-                        var errorName = $(".show-error").closest('.row').find('#border_action');  
-                        errorName.addClass('is-invalid').removeClass('show-current-border is-valid');
-                    }else if(nameError !== '' && nameInputValue !== ''){
-                        var errorName = $(".show-error").closest('.row').find('#border_action');  
-                        errorName.addClass('is-invalid').removeClass('show-current-border is-valid');
-                    }else if(nameError == '' && nameInputValue == ''){
-                        var errorName = $(".show-error").closest('.row').find('#border_action');  
-                        errorName.addClass('show-current-border').removeClass('is-invalid is-valid');
+                    // first name
+                    if(firstNameError !== '' && firstNameInputValue == ''){
+                        var errorFirstName = $(".show-error").closest('.row').find('#border_action');  
+                        errorFirstName.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(firstNameError !== '' && firstNameInputValue !== ''){
+                        var errorFirstName = $(".show-error").closest('.row').find('#border_action');  
+                        errorFirstName.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(firstNameError == '' && firstNameInputValue == ''){
+                        var errorFirstName = $(".show-error").closest('.row').find('#border_action');  
+                        errorFirstName.addClass('show-current-border').removeClass('is-invalid is-valid');
+                    }
+                    // last name
+                    if(lastNameError !== '' && lastNameInputValue == ''){
+                        var errorLastName = $(".show-error-seven").closest('.row').find('#border_action');  
+                        errorLastName.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(lastNameError !== '' && lastNameInputValue !== ''){
+                        var errorLastName = $(".show-error-seven").closest('.row').find('#border_action');  
+                        errorLastName.addClass('is-invalid').removeClass('show-current-border is-valid');
+                    }else if(lastNameError == '' && lastNameInputValue == ''){
+                        var errorLastName = $(".show-error-seven").closest('.row').find('#border_action');  
+                        errorLastName.addClass('show-current-border').removeClass('is-invalid is-valid');
                     }
                     // contract number
                     if(contractNumberError !== '' && contractNumberInputValue == ''){
@@ -1142,6 +1163,10 @@
                 $('#border_action6').on('keyup', function () {
                     $(".remove-error-six").text('');
                     handleInputValidation('#border_action6', '.remove-error-six');
+                });
+                $('#border_action7').on('keyup', function () {
+                    $(".remove-error-seven").text('');
+                    handleInputValidation('#border_action7', '.remove-error-seven');
                 });
                 // Image upload field validation
                 $(".image").on('change', function () {

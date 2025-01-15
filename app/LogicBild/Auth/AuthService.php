@@ -14,7 +14,9 @@ use App\Models\CompanyProfile;
 use Illuminate\Support\Facades\Password;
 use App\Mail\AdminEmail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use App\Support\Setting;
 
 class AuthService
 {
@@ -105,10 +107,10 @@ class AuthService
     */
     public function create(Request $request)
     {
-        //$email = session('email');
         // Validation
         $validator = Validator::make($request->all(), [
-            'name' => 'string|required|max:120',
+            'first_name' => 'string|required|min:4',
+            'last_name' => 'string|required|max:120',
             'contract_number' => 'required|numeric|digits:11',
             'email' => 'string|email|required|max:100|unique:users',
             'reference_email' => 'string|required|max:100',
@@ -128,13 +130,24 @@ class AuthService
                 ->withErrors(['reference_email' => 'This reference email is not authenticated.'])
                 ->withInput();
         }
+        // Generate user login email
+        $company_name = Setting('company_name');
+        $email_extension = '@gmail.com';
+        $user_first_name = $request->first_name;
+        $prefix = 'USER'; // Add a prefix for login email
+        $login_email = $this->userLoginEmailGenerator(new User, 'login_email', 4, $user_first_name, $email_extension, $company_name, $prefix);
 
+        // Concatenate first name and last name
+        $first_name = $request->first_name;
+        $last_name = $request->last_name;
+        $user_name = $first_name . ' ' . $last_name;
         // Create new user
         $user = new User;
-        $user->name = $request->name;
+        $user->name = $user_name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->contract_number = $request->contract_number;
+        $user->login_email = $login_email;
         $user->reference_email = $request->reference_email;
 
         // Process image upload
@@ -204,6 +217,22 @@ class AuthService
             // Update the user's image field
             $user->image = $filename;
         }
+    }
+    private function userLoginEmailGenerator($model, $trow, $length = 4, $user_first_name, $email_extension, $company_name, $prefix)
+    {
+        $data = $model::orderBy('id', 'desc')->first();
+
+        if (!$data) {
+            $last_number = str_pad(1, $length, '0', STR_PAD_LEFT);
+        } else {
+            $code = substr($data->$trow, strlen($prefix));
+            $last_number = (int) $code + 1;
+            $last_number = str_pad($last_number, $length, '0', STR_PAD_LEFT);
+        }
+
+        $formatted_name = ucfirst(strtolower($user_first_name));
+        $formatted_company = ucfirst(strtolower($company_name));
+        return $prefix . $formatted_name . $formatted_company . $last_number . $email_extension;
     }
     /**
      * Handle Login Door View page.

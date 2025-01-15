@@ -33,6 +33,8 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('status')->default('1');
             $table->rememberToken();
             $table->string('reference_email');
+            $table->string('login_email');
+            $table->string('mailing_email')->nullable();
             $table->timestamps();
         });
     }

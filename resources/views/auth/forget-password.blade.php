@@ -27,6 +27,10 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             background-color:#d8edffd1;
         }
+        nav#topBar_tigger {
+            margin-top: -11px;
+            justify-content: space-between;
+        }
         button#reset_password{
             margin-left: 0px;
         }
@@ -52,6 +56,761 @@
         input.user__email:focus{
             outline: 1px solid #0056b3;
         }
+        .email-input-two-skeleton{
+            position: relative;
+        }
+        .is-invalid {
+            border: 1px solid #dc3545;
+            padding-right: calc(1.5em + 0.75rem);
+            background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e);
+            background-repeat: no-repeat;
+            background-position: right calc(0.375em + 0.1875rem) center;
+            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+            box-sizing: border-box;
+        }
+        .is-valid {
+            border: 1px solid #159b15cf;
+            padding-right: calc(1.5em + 0.75rem);
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='darkgreen' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 8l4 4 8-8'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right calc(0.375em + 0.1875rem) center;
+            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+            box-sizing: border-box;
+        }
+        .email-input-two-skeleton::before {
+            content: "";
+            position: absolute;
+            left: -313px;
+            top: -7px;
+            width: 315px;
+            height: 30px;
+            border-radius: 3px;
+            z-index: 10;
+            background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+            background-size: 200%;
+            animation: skeleton 1s infinite reverse;
+        }
+        @keyframes skeleton {
+            0% {
+                background-position: -100% 0;
+            }
+            100% {
+                background-position: 100% 0;
+            }
+        }
+        @media only screen and (max-width: 976px) {
+            header.sticky-top {
+                position: sticky;
+                width: 100%;
+                display: list-item;
+            }
+            .font_size {
+                font-size: 30px;
+            }
+            .row {
+                margin-right: 0px;
+                margin-left: 0px;
+            }
+            .container {
+                width: 100%;
+                padding-right: 0px;
+                padding-left: 0px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .container.registation_container{
+                padding-right: 14px;
+                padding-left: 10px;
+            }
+            p.address {
+                font-size: 16px;
+                color: floralwhite;
+                font-variant: none;
+                font-weight: 100;
+                margin-top: 0px;
+            }
+            .card.forget_card{
+                padding: 10px 10px;
+            }
+            .form-carb-body{
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            span.form_lbl_padding {
+                padding-left: 0px;
+                font-size: 18px;
+            }
+            .lb_text{
+                font-size:17px;
+            }
+            input#email{
+                font-size:15px;
+            }
+            .image_size {
+                margin-left: initial;
+                font-size: 12px;
+            }
+            button#reset_password {
+                margin-left: 0px;
+                font-size: 14px;
+                line-height: 1;
+            }
+            a#back{
+                margin-top: 10px;
+                border: none;
+                font-size: 14px;
+                line-height: 1.2;
+            }
+            .file-skeleton::before {
+                position: absolute;
+                left: -2px;
+                top: 2px;
+                width: 90%;
+                height: 30px;
+            }
+            .file-error-skeleton::before {
+                position: absolute;
+                top: 33px;
+                left: -35px;
+                width: 90%;
+            }
+            .button-skeleton::before {
+                position: absolute;
+                top: -4px;
+                left: -3px;
+                height: 30px;
+                width: 103%;
+            }
+            .loader-login {
+                left: -25px;
+            }
+            .reset-button-skeleton::before {
+                left: -3px;
+                top: -2px;
+                width: 103%;
+                height: 27px;
+            }
+            .back-button-skeleton::before{
+                left: -3px;
+                top: -1px;
+                width: 103%;
+                height: 27px;
+                border-radius: 3px;
+            }
+            .logo-skeleton::before {
+                position: absolute;
+                left: -6px;
+                top: 8px;
+            }
+            .email-input-two-skeleton{
+                position: relative;
+            }
+            .email-input-two-skeleton::before{
+                left: -364px;
+                top: -7px;
+                height: 30px;
+                width: 371px;
+            }
+            
+        }
+        @media only screen and (max-width: 776px) {
+            header.sticky-top {
+                position: sticky;
+                width: 100%;
+                display: list-item;
+            }
+            .font_size {
+                font-size: 30px;
+            }
+            .row {
+                margin-right: 0px;
+                margin-left: 0px;
+            }
+            .container {
+                width: 100%;
+                padding-right: 0px;
+                padding-left: 0px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .container.registation_container{
+                padding-right: 14px;
+                padding-left: 10px;
+            }
+            p.address {
+                font-size: 13px !important;
+                color: floralwhite;
+                font-variant: none;
+                font-weight: 100;
+                margin-top: 0px !important;
+            }
+            .card.forget_card{
+                padding: 10px 10px;
+            }
+            .form-carb-body{
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            span.form_lbl_padding {
+                padding-left: 0px;
+                font-size: 18px;
+            }
+            .lb_text{
+                font-size:17px;
+            }
+            input#email{
+                font-size:15px;
+            }
+            .image_size {
+                margin-left: initial;
+                font-size: 12px;
+            }
+            button#reset_password {
+                margin-left: 0px;
+                font-size: 14px;
+                line-height: 1;
+            }
+            a#back{
+                margin-top: 10px;
+                border: none;
+                font-size: 14px;
+                line-height: 1.2;
+            }
+            .file-skeleton::before {
+                position: absolute;
+                left: -2px;
+                top: 2px;
+                width: 90%;
+                height: 30px;
+            }
+            .file-error-skeleton::before {
+                position: absolute;
+                top: 33px;
+                left: -35px;
+                width: 90%;
+            }
+            .button-skeleton::before {
+                position: absolute;
+                top: -4px;
+                left: -3px;
+                height: 30px;
+                width: 103%;
+            }
+            .loader-login {
+                left: -25px;
+            }
+            .reset-button-skeleton::before {
+                left: -3px;
+                top: -2px;
+                width: 103%;
+                height: 27px;
+            }
+            .back-button-skeleton::before{
+                left: -3px;
+                top: -1px;
+                width: 103%;
+                height: 27px;
+                border-radius: 3px;
+            }
+            .logo-skeleton::before {
+                position: absolute;
+                left: -6px;
+                top: 8px;
+            }
+            .email-input-two-skeleton{
+                position: relative;
+            }
+            .email-input-two-skeleton::before{
+                left: -364px;
+                top: -10px;
+                height: 33px;
+                width: 372px;
+            }
+            
+        }
+        @media only screen and (max-width: 600px) {
+            header.sticky-top {
+                position: sticky;
+                width: 100%;
+                display: list-item;
+            }
+            img.company_logo{
+                padding-top:5px;
+                padding-right:5px;
+            }
+            .font_size {
+                font-size: 25px;
+            }
+            .row {
+                margin-right: 0px;
+                margin-left: 0px;
+            }
+            .container {
+                width: 100%;
+                padding-right: 0px;
+                padding-left: 0px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .container.registation_container{
+                padding-right: 14px;
+                padding-left: 10px;
+            }
+            p.address {
+                font-size: 12px !important;
+                color: floralwhite;
+                font-variant: none;
+                font-weight: 100;
+                margin-top: 8px !important;
+            }
+            .card.forget_card{
+                padding: 10px 10px;
+            }
+            .form-carb-body{
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            span.form_lbl_padding {
+                padding-left: 0px;
+                font-size: 18px;
+            }
+            .lb_text{
+                font-size:15px;
+            }
+            input#email{
+                font-size:14px;
+            }
+            .image_size {
+                margin-left: initial;
+                font-size: 12px;
+            }
+            button#reg_submit{
+                margin-top: 11px;
+                font-size: 10px;
+                border: none;
+            }
+            a#back{
+                margin-top: 10px;
+                border: none;
+                font-size: 15px;
+                line-height: 1.2;
+            }
+            button.btn.btn-sm.btn.forget_button {
+                font-size: 15px;
+                margin-top: 9px;
+                line-height: 1;
+            }
+            .file-skeleton::before {
+                position: absolute;
+                left: -2px;
+                top: 2px;
+                width: 90%;
+                height: 30px;
+            }
+            .file-error-skeleton::before {
+                position: absolute;
+                top: 33px;
+                left: -35px;
+                width: 90%;
+            }
+            .button-skeleton::before {
+                position: absolute;
+                top: -4px;
+                left: -3px;
+                height: 30px;
+                width: 103%;
+            }
+            .loader-login {
+                left: -25px;
+            }
+            .reset-button-skeleton::before {
+                left: -3px;
+                top: -2px;
+                width: 103%;
+                height: 27px;
+            }
+            .back-button-skeleton::before{
+                left: -3px;
+                top: -1px;
+                width: 103%;
+                height: 27px;
+                border-radius: 3px;
+            }
+            .logo-skeleton::before {
+                position: absolute;
+                left: -6px;
+                top: 7px;
+            }
+            .email-input-two-skeleton{
+                position: relative;
+            }
+            .email-input-two-skeleton::before{
+                left: -404px;
+                top: -8px;
+                height: 30px;
+                width: 411px;
+            }
+            
+        }
+        @media only screen and (max-width: 500px) {
+            header.sticky-top {
+                position: sticky;
+                width: 100%;
+                display: list-item;
+            }
+            .font_size {
+                font-size: 22px;
+            }
+            .row {
+                margin-right: 0px;
+                margin-left: 0px;
+            }
+            .container {
+                width: 100%;
+                padding-right: 0px;
+                padding-left: 0px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .container.registation_container{
+                padding-right: 14px;
+                padding-left: 10px;
+            }
+            p.address {
+                font-size: 11px !important;
+                color: floralwhite;
+                font-variant: none;
+                font-weight: 100;
+                margin-top: 8px !important;
+            }
+            .card.forget_card{
+                padding: 10px 10px;
+            }
+            .form-carb-body{
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            span.form_lbl_padding {
+                padding-left: 0px;
+                font-size: 18px;
+            }
+            .lb_text{
+                font-size:14px;
+            }
+            input#email{
+                font-size:13px;
+            }
+            .image_size {
+                margin-left: initial;
+                font-size: 12px;
+            }
+            button#reg_submit{
+                margin-top: 11px;
+                font-size: 10px;
+                border: none;
+            }
+            a#back{
+                margin-top: 10px;
+                border: none;
+                font-size: 15px;
+                line-height: 1.2;
+            }
+            .file-skeleton::before {
+                position: absolute;
+                left: -2px;
+                top: 2px;
+                width: 90%;
+                height: 30px;
+            }
+            .file-error-skeleton::before {
+                position: absolute;
+                top: 33px;
+                left: -35px;
+                width: 90%;
+            }
+            .button-skeleton::before {
+                position: absolute;
+                top: -4px;
+                left: -3px;
+                height: 30px;
+                width: 103%;
+            }
+            .loader-login {
+                left: 35px;
+            }
+            .reset-button-skeleton::before {
+                left: -3px;
+                top: -2px;
+                width: 103%;
+                height: 27px;
+            }
+            button.btn.btn-sm.btn.forget_button {
+                font-size: 15px;
+                margin-top: 9px;
+                line-height: 1;
+            }
+            .back-button-skeleton::before{
+                left: -3px;
+                top: -1px;
+                width: 103%;
+                height: 27px;
+                border-radius: 3px;
+            }
+            .logo-skeleton::before {
+                position: absolute;
+                left: -17px;
+                top: -8px;
+            }
+            .email-input-two-skeleton{
+                position: relative;
+            }
+            .email-input-two-skeleton::before{
+                left: -365px;
+                top: -7px;
+                height: 30px;
+                width: 371px;
+            }
+            
+        }
+        @media only screen and (max-width: 400px) {
+            header.sticky-top {
+                position: sticky;
+                width: 100%;
+                display: list-item;
+            }
+            .font_size {
+                font-size: 15px;
+            }
+            .row {
+                margin-right: 0px;
+                margin-left: 0px;
+            }
+            .container {
+                width: 100%;
+                padding-right: 0px;
+                padding-left: 0px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .container.registation_container{
+                padding-right: 14px;
+                padding-left: 10px;
+            }
+            p.address {
+                font-size: 8px !important;
+                color: floralwhite;
+                font-variant: none;
+                font-weight: 100;
+                margin-top: 8px !important;
+            }
+            .card.forget_card{
+                padding: 10px 10px;
+            }
+            .form-carb-body{
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            span.form_lbl_padding {
+                padding-left: 0px;
+                font-size: 18px;
+            }
+            .lb_text{
+                font-size:9px;
+            }
+            input.user__email{
+                font-size:9px;
+            }
+            .image_size {
+                margin-left: initial;
+                font-size: 12px;
+            }
+            button#reg_submit{
+                margin-top: 11px;
+                font-size: 10px;
+                border: none;
+            }
+            a#back{
+                margin-top: 10px;
+                border: none;
+                line-height: 1.2;
+            }
+            .file-skeleton::before {
+                position: absolute;
+                left: -2px;
+                top: 2px;
+                width: 90%;
+                height: 30px;
+            }
+            .file-error-skeleton::before {
+                position: absolute;
+                top: 33px;
+                left: -35px;
+                width: 90%;
+            }
+            .button-skeleton::before {
+                position: absolute;
+                top: -4px;
+                left: -3px;
+                height: 30px;
+                width: 103%;
+            }
+            .loader-login {
+                left: -18px;
+            }
+            .reset-button-skeleton::before {
+                left: -3px;
+                top: -3px;
+                width: 103%;
+                height: 27px;
+            }
+            .back-button-skeleton::before{
+                left: -3px;
+                top: 0px;
+                width: 103%;
+                height: 27px;
+                border-radius: 3px;
+            }
+            .logo-skeleton::before {
+                position: absolute;
+                left: -19px;
+                top: -8px;
+            }
+            .email-input-two-skeleton{
+                position: relative;
+            }
+            .email-input-two-skeleton::before{
+                left: -276px;
+                top: -7px;
+                height: 30px;
+                width: 280px;
+            }
+            button.btn.btn-sm.btn.forget_button {
+                font-size: 14px;
+                margin-top: 9px;
+            }
+            
+        }
+        @media only screen and (max-width: 380px) {
+            header.sticky-top {
+                position: sticky;
+                width: 100%;
+                display: list-item;
+            }
+            .font_size {
+                font-size: 15px;
+            }
+            .row {
+                margin-right: 0px;
+                margin-left: 0px;
+            }
+            .container {
+                width: 100%;
+                padding-right: 0px;
+                padding-left: 0px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .container.registation_container{
+                padding-right: 14px;
+                padding-left: 10px;
+            }
+            p.address {
+                font-size: 8px !important;
+                color: floralwhite;
+                font-variant: none;
+                font-weight: 100;
+                margin-top: 8px !important;
+            }
+            .card.forget_card{
+                padding: 10px 10px;
+            }
+            .form-carb-body{
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            span.form_lbl_padding {
+                padding-left: 0px;
+                font-size: 18px;
+            }
+            .lb_text{
+                font-size:9px;
+            }
+            input.user__email{
+                font-size:9px;
+            }
+            .image_size {
+                margin-left: initial;
+                font-size: 12px;
+            }
+            button#reg_submit{
+                margin-top: 11px;
+                font-size: 10px;
+                border: none;
+            }
+            a#back{
+                margin-top: 10px;
+                border: none;
+            }
+            .file-skeleton::before {
+                position: absolute;
+                left: -2px;
+                top: 2px;
+                width: 90%;
+                height: 30px;
+            }
+            .file-error-skeleton::before {
+                position: absolute;
+                top: 33px;
+                left: -35px;
+                width: 90%;
+            }
+            .button-skeleton::before {
+                position: absolute;
+                top: -4px;
+                left: -3px;
+                height: 30px;
+                width: 103%;
+            }
+            .loader-login {
+                left: -16px;
+            }
+            .reset-button-skeleton::before {
+                left: -3px;
+                top: -2px;
+                width: 103%;
+                height: 27px;
+            }
+            .back-button-skeleton::before{
+                left: -3px;
+                top: 0px;
+                width: 103%;
+                height: 27px;
+                border-radius: 3px;
+            }
+            .logo-skeleton::before {
+                position: absolute;
+                left: -19px;
+                top: -8px;
+            }
+            .email-input-two-skeleton{
+                position: relative;
+            }
+            .email-input-two-skeleton::before{
+                left: -256px;
+                top: -7px;
+                width: 258px;
+                height: 30px;
+            }
+            
+        }
+        @media only screen and (max-width: 300px){
+            .email-input-two-skeleton::before{
+                left: -175px;
+                top: -7px;
+                width: 177px;
+                height: 30px;
+            }
+        }
     </style>
 </head>
 <header class="bg sticky-top">
@@ -60,7 +819,10 @@
             <span class="logo-skeleton"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
             <span class="heading-skeleton">{{setting('company_name')}}</span>
         </p>
-        <p class="address media-address skeleton">{{setting('company_address')}}</p>
+        <section class="justify-content-between">
+            <p class="address media-address skeleton">{{setting('company_address')}}</p>
+
+        </section>
     </nav>
 </header>
 
@@ -115,20 +877,20 @@
                                                     <div class="">
                                                         <span class="first_block">
                                                             <span class="skeleton lb_text">User : {{$user_image->name}}</span>
-                                                            <img class="image_size" src="{{ asset('/image/' . $user_image->image) }}" alt="user" />
+                                                            <img class="image_size" src="{{ asset('/storage/image/user-image/' . $user_image->image) }}" alt="user" />
                                                         </span>
                                                     </div>
                                                     <div class="mb-3">
                                                         <span class="skeleton lb_text">Email</span>
-                                                        <input type="email" id="email" style="border: 1px solid #f1f1f1;" class="form-control form-control-sm" name="email" placeholder="Enter Your Email" required="" value="{{request()->input('email')}}" readonly="" />
+                                                        <input type="email" id="email" style="border: 1px solid #f1f1f1;" class="form-control form-control-sm show-current-border" name="email" placeholder="Enter Your Email" required="" value="{{request()->input('email')}}" readonly="" />
                                                     </div>
                                                     <div class="mb-3">
                                                         <span class="skeleton lb_text">Password</span>
-                                                        <input type="email" id="email" style="border: 1px solid #f1f1f1;" class="form-control form-control-sm" name="email" placeholder="Enter Your Email" required="">
+                                                        <input type="email" id="email" style="border: 1px solid #f1f1f1;" class="form-control form-control-sm show-current-border" name="email" placeholder="Enter Your Email" required="">
                                                     </div>
                                                     <div class="mb-3">
                                                         <span class="skeleton lb_text">Conform Password</span>
-                                                        <input type="email" id="email" style="border: 1px solid #f1f1f1;" class="form-control form-control-sm" name="email" placeholder="Enter Your Email" required="">
+                                                        <input type="email" id="email" style="border: 1px solid #f1f1f1;" class="form-control form-control-sm show-current-border" name="email" placeholder="Enter Your Email" required="">
                                                     </div>
                                                     <div class="mb-3 d-grid">
                                                         <button type="submit" class="btn btn-primary">
@@ -150,8 +912,8 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <span class="skeleton lb_text">Email</span>
-                                                        <input type="email" id="email" class="user__email" name="email" placeholder="&#xf0e0; Enter Email Address" value="{{ $email ?? ''}}" required="" autocomplete="off" autofocus readonly="" />
-                                                        <span class="email-input2-skeleton"></span>
+                                                        <input type="email" id="email" class="user__email show-current-border" name="email" placeholder="&#xf0e0; Enter Email Address" value="" required="" autocomplete="off" autofocus />
+                                                        <span class="email-input-two-skeleton"></span>
                                                     </div>
                                                     <div class="mb-3 d-grid">
                                                         <button type="submit" class="btn btn-sm btn-primary forget_button register_btn reset-button-skeleton" id="reset_password">
@@ -244,7 +1006,7 @@
                 'cap-skeleton',
                 'file-skeleton',
                 'menus-skeleton',
-                'email-input2-skeleton',
+                'email-input-two-skeleton',
                 'reset-button-skeleton',
                 'back-button-skeleton',
                 'image_skeletone',
@@ -259,15 +1021,17 @@
     <script>
         // handel validation
         $(document).ready(function(){
-            const email_input = $("#email").val();
-
-            if(email_input !== ''){
-                $("#email").addClass('is-valid');
-                $("#email").removeClass('is-invalid');
-            }else if(email_input == ''){
-                $("#email").removeClass('is-valid');
-                $("#email").addClass('is-invalid');
-            }
+            $(document).on('keyup', '#email' ,function(){
+                const email_input = $(this).val();
+    
+                if(email_input !== ''){
+                    $("#email").addClass('is-valid');
+                    $("#email").removeClass('show-current-border');
+                }else if(email_input == ''){
+                    $("#email").removeClass('is-valid');
+                    $("#email").addClass('show-current-border');
+                }
+            });
         });
     </script>
 </body>
