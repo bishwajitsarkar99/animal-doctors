@@ -364,7 +364,7 @@
                             <tr class="table-row">
                                 <td class="user_login_form_label"> Email : </td>
                                 <td class="user-login-td">
-                                    <input class="user_login_form email-border" type="text" name="email" value="" placeholder="User Email" autofocus id="user_login_form">
+                                    <input class="user_login_form email-border" type="text" name="login_email" value="" placeholder="User Email" autofocus id="user_login_form">
                                 </td>
                             </tr>
                             <tr class="table-row error_mess_row">
@@ -485,7 +485,7 @@
                     $.ajax({
                         type: "GET",
                         url: currentURL,
-                        data: { email: user_email},
+                        data: { login_email: user_email},
                         dataType: "json",
                         success: function (response) {
                             setTimeout(() => {

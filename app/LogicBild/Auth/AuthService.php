@@ -34,14 +34,14 @@ class AuthService
         } else if (Auth::user() && Auth::user()->role == 3) {
             $redirect = '/admin/dashboard';
         } else if(Auth::user() && Auth::user()->role == 5) {
-            $redirect = '/accounts/dashboard';
+            $redirect = '/accounts/home';
         }else if(Auth::user() && Auth::user()->role == 6) {
-            $redirect = '/marketing/dashboard';
+            $redirect = '/marketing/home';
         }else if(Auth::user() && Auth::user()->role == 7) {
-            $redirect = '/delivery-team/dashboard';
+            $redirect = '/delivery-team/home';
         }
         else{
-            $redirect = '/doctors/home';
+            $redirect = '/default-user/home';
         }
 
         return $redirect; 
@@ -68,7 +68,7 @@ class AuthService
         ]);
 
         $valid_email = $request->input('valid_email');
-        $valid_user = User::where('email', $valid_email)->first();
+        $valid_user = User::where('login_email', $valid_email)->first();
         if (!$valid_user) {
             // Save valid email to session
             session(['valid_email' => $valid_email]);
@@ -118,6 +118,11 @@ class AuthService
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ],[
             'email.unique' => 'The email has already taken.',
+            'first_name.required' => 'The first name is required.',
+            'last_name.required' => 'The last name is required.',
+            'contract_number.required' => 'The contract number is required.',
+            'password.required' => 'The password is required.',
+            'reference_email.required' => 'The reference email is required.',
         ]);
 
         // Reference email
@@ -127,20 +132,26 @@ class AuthService
 
         if (!$reference_user) {
             return redirect(url('register'))
-                ->withErrors(['reference_email' => 'This reference email is not authenticated.'])
+                ->withErrors([
+                    'reference_email' => 'This reference email is not authenticated.',
+                ])
                 ->withInput();
         }
         // Generate user login email
         $company_name = Setting('company_name');
         $email_extension = '@gmail.com';
         $user_first_name = $request->first_name;
-        $prefix = 'USER'; // Add a prefix for login email
-        $login_email = $this->userLoginEmailGenerator(new User, 'login_email', 4, $user_first_name, $email_extension, $company_name, $prefix);
+        $login_email = $this->userLoginEmailGenerator(
+            new User,
+            'login_email',
+            4, // Generate a 4-digit random number
+            $user_first_name,
+            $company_name,
+            $email_extension
+        );
 
         // Concatenate first name and last name
-        $first_name = $request->first_name;
-        $last_name = $request->last_name;
-        $user_name = $first_name . ' ' . $last_name;
+        $user_name = "{$request->first_name} {$request->last_name}";
         // Create new user
         $user = new User;
         $user->name = $user_name;
@@ -218,21 +229,17 @@ class AuthService
             $user->image = $filename;
         }
     }
-    private function userLoginEmailGenerator($model, $trow, $length = 4, $user_first_name, $email_extension, $company_name, $prefix)
+    private function userLoginEmailGenerator($model, $trow, $length = 5, $user_first_name, $company_name, $email_extension)
     {
-        $data = $model::orderBy('id', 'desc')->first();
+        // Generate a random number of the specified length
+        $random_number = str_pad(mt_rand(0, pow(10, $length) - 1), $length, '0', STR_PAD_LEFT);
 
-        if (!$data) {
-            $last_number = str_pad(1, $length, '0', STR_PAD_LEFT);
-        } else {
-            $code = substr($data->$trow, strlen($prefix));
-            $last_number = (int) $code + 1;
-            $last_number = str_pad($last_number, $length, '0', STR_PAD_LEFT);
-        }
+        // Format all inputs to lowercase
+        $formatted_name = strtolower(str_replace(' ', '', $user_first_name));
+        $formatted_company = strtolower(str_replace(' ', '', $company_name));
 
-        $formatted_name = ucfirst(strtolower($user_first_name));
-        $formatted_company = ucfirst(strtolower($company_name));
-        return $prefix . $formatted_name . $formatted_company . $last_number . $email_extension;
+        // Concatenate components to create the email
+        return "{$formatted_name}{$formatted_company}{$random_number}{$email_extension}";
     }
     /**
      * Handle Login Door View page.
@@ -249,17 +256,17 @@ class AuthService
     {
         // Validate the email input
         $request->validate([
-            'email' => 'required|email',
+            'login_email' => 'required|email',
         ], [
-            'email.required' => 'Email is required.',
-            'email.email' => 'Please enter a valid email address.',
+            'login_email.required' => 'Email is required.',
+            'login_email.login_email' => 'Please enter a valid email address.',
         ]);
 
-        $user_email = $request->input('email');
-        $user = User::where('email', $user_email)->first();
+        $user_email = $request->input('login_email');
+        $user = User::where('login_email', $user_email)->first();
 
         if ($user) {
-            session(['email' => $user_email]);
+            session(['login_email' => $user_email]);
             $redirect = match ($user->role) {
                 1 => route('superadmin.login'),
                 2, 3 => route('admin.login'),
@@ -284,9 +291,10 @@ class AuthService
     */
     public function loginPage(Request $request)
     {
-        $email = session('email');
-        if($email){
+        $login_email = session('login_email');
+        if($login_email){
             $company_profiles = companyProfile::where('id', '=', 1)->get();
+            // Role Promote
             $roles = Role::whereIn('name', ['Super Admin'])->get();
 
             $home_url = null;
@@ -297,7 +305,7 @@ class AuthService
                 $route = $this->redirectDashboard();
                 return redirect($route);
             }
-            return view('auth.login', compact('company_profiles', 'roles', 'email', 'home_url', 'register_form_url'));
+            return view('auth.login', compact('company_profiles', 'roles', 'login_email', 'home_url', 'register_form_url'));
         }else{
             return redirect(route('login_door.index'));
         }
@@ -307,8 +315,8 @@ class AuthService
     */
     public function viewAdminLoginPage(Request $request)
     {
-        $email = session('email');
-        if($email){
+        $login_email = session('login_email');
+        if($login_email){
             $company_profiles = companyProfile::where('id', '=', 1)->get();
             $roles = Role::whereIn('name', ['Admin', 'Sub Admin'])->get();
             
@@ -324,7 +332,7 @@ class AuthService
                 return redirect($route);
             }
     
-            return view('auth.admin-login', compact('company_profiles', 'roles', 'email', 'home_url', 'register_form_url', 'forget_password_url'));
+            return view('auth.admin-login', compact('company_profiles', 'roles', 'login_email', 'home_url', 'register_form_url', 'forget_password_url'));
         }else{
             return redirect(route('login_door.index'));
         }
@@ -334,8 +342,8 @@ class AuthService
     */
     public function viewAccountsLoginPage(Request $request)
     {
-        $email = session('email');
-        if($email){
+        $login_email = session('login_email');
+        if($login_email){
             $company_profiles = companyProfile::where('id', '=', 1)->get();
             $roles = Role::whereIn('name', ['Accounts'])->get();
             
@@ -349,7 +357,7 @@ class AuthService
                 return redirect($route);
             }
     
-            return view('auth.accounts-login', compact('company_profiles', 'roles', 'email', 'home_url', 'forget_password_url'));
+            return view('auth.accounts-login', compact('company_profiles', 'roles', 'login_email', 'home_url', 'forget_password_url'));
         }else{
             return redirect(route('login_door.index'));
         }
@@ -359,8 +367,8 @@ class AuthService
     */
     public function viewCommonUserLoginPage(Request $request)
     {
-        $email = session('email');
-        if($email){
+        $login_email = session('login_email');
+        if($login_email){
             $company_profiles = companyProfile::where('id', '=', 1)->get();
             $roles = Role::whereIn('name', ['User','Marketing','Delivery Team'])->get();
     
@@ -374,7 +382,7 @@ class AuthService
                 return redirect($route);
             }
     
-            return view('auth.common-user-login', compact('company_profiles', 'roles', 'email', 'home_url', 'forget_password_url'));
+            return view('auth.common-user-login', compact('company_profiles', 'roles', 'login_email', 'home_url', 'forget_password_url'));
         }else{
             return redirect(route('login_door.index')); 
         }
@@ -387,14 +395,19 @@ class AuthService
         // Validation
         $request->validate([
             'role' => 'string|required',
-            'email' => 'string|email|required|max:100|exists:users',
+            'login_email' => 'string|email|required|max:100|exists:users',
             'password' => 'required|min:6|max:30',
         ], [
-            'email.exists' => 'This email is not exists on users table',
+            'login_email.exists' => 'This email is not exists on users table',
         ]);
 
+        $user_login_email = $request->login_email;
+        $user = User::where('login_email', $user_login_email)->value('email');
+        if (!$user) {
+            return back()->with('error', 'User not found.');
+        }
         // Check if the email of the user attempting to log in is verified
-        $user_email_verification = EmailVerification::where('email', $request->email)
+        $user_email_verification = EmailVerification::where('email', $user)
         ->where('status', 1)
         ->first();
 
@@ -402,7 +415,7 @@ class AuthService
             return back()->with('error', 'Email verification is required.');
         }
 
-        $userCredential = $request->only('role', 'email', 'password');
+        $userCredential = $request->only('role', 'login_email', 'password');
         if (Auth::attempt($userCredential)) {
             $route = $this->redirectDashboard();
 
@@ -416,7 +429,7 @@ class AuthService
                     'user_id' => $user->id,
                     'ip_address' => $request->ip(),
                     'name' => $user->name,
-                    'email' => $user->email,
+                    'email' => $user->login_email,
                     'role' => $user->role ?? '-',
                     'email_verified_at' => $user->email_verified_at,
                     'contract_number' => $user->contract_number ?? '-',
@@ -435,7 +448,7 @@ class AuthService
             // Clear the 'login_completed' session flag
             Session::forget('login_completed');
             // Login Door Clear the session after retrieving the email
-            $request->session()->forget('email');
+            $request->session()->forget('login_email');
 
             session(['session_id' => $sessionId]);
                
@@ -449,10 +462,10 @@ class AuthService
     */
     public function forgetPasswordLoad(Request $request)
     {
-        $email = session('email');
+        $email = session('login_email');
         if($email){
             $company_profiles = companyProfile::where('id', '=', 1)->get();
-            $user_image = User::where('email', $email)->first();
+            $user_image = User::where('login_email', $email)->first();
             // Define the default URL as null
             $url = null;
             if($user_image){
@@ -464,7 +477,7 @@ class AuthService
                     default => null,
                 };
             }
-            return view('auth.forget-password', compact('company_profiles', 'email', 'user_image', 'url'));
+            return view('auth.forget-password', compact('company_profiles', 'login_email', 'user_image', 'url'));
         }else{
             return redirect(route('login_door.index'));  
         }

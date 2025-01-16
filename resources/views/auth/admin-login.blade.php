@@ -165,10 +165,16 @@
                                     </span>
                                 </div>
                                 <div class="form-group">
+                                    <label class="email email-label-skeleton" for="branch">Branch :</label>
+                                    <span class="input-email-skeleton">
+                                        <input id="inputBranch" class="branch-name branch show-current-border ps-1" type="text" name="branch_name" placeholder="Branch Name" value="" readonly="" />
+                                    </span>
+                                </div>
+                                <div class="form-group">
                                     <label class="email email-label-skeleton" for="email">Email :</label>
                                     <span class="input-email-skeleton">
                                         <!-- value="{{old('email')}}" -->
-                                        <input class="email_src email show-current-border ps-1" type="text" name="email" placeholder="Enter Email Address" value="{{ $email ?? ''}}" autofocus readonly="" />
+                                        <input class="email_src email show-current-border ps-1" type="text" name="login_email" placeholder="Enter Email Address" value="{{ $login_email ?? ''}}" autofocus readonly="" />
                                     </span>
                                 </div>
                                 <div class="form-group">
@@ -179,7 +185,7 @@
                                     <span class="text-danger input_message show-error3 remove-user-error">@error('role')
                                         Error Messages : (1).{{$message}}@enderror
                                     </span>
-                                    <span class="text-danger input_message show-error remove-error skeleton">@error('email')
+                                    <span class="text-danger input_message show-error remove-error skeleton">@error('login_email')
                                         (3).{{$message}}@enderror
                                     </span>
                                     <span class="text-danger input_message show-error2 remove-error2 skeleton">@error('password')

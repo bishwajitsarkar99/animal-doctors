@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
+use App\Models\Role;
 class RoleMiddleware
 {
     /**
@@ -41,7 +41,8 @@ class RoleMiddleware
      */
     private function hasRole(string $roleName) {
 
-        $roles = ['SuperAdmin', 'SubAdmin', 'Admin', 'User', 'Accounts', 'Marketing', 'Delivery Team'];
+        $roles = Role::pluck('name')->toArray();
+        // $roles = ['SuperAdmin', 'SubAdmin', 'Admin', 'User', 'Accounts', 'Marketing', 'Delivery Team'];
 
         return \in_array($roleName, $roles);
     }

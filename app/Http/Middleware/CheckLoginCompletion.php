@@ -18,7 +18,7 @@ class CheckLoginCompletion
     public function handle(Request $request, Closure $next)
     {
         // Get the email from the request
-        $email_request = $request->input('email');
+        $email_request = $request->input('login_email');
 
         // Check if the email is not empty
         if (!empty($email_request)) {
