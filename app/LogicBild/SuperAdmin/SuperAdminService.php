@@ -267,6 +267,71 @@ class SuperAdminService
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
     /**
+     * Handle role promot view event.
+    */
+    public function rolesIndex(Request $request)
+    {
+        return view('super-admin.role.role-promot');
+    }
+    /**
+     * Handle role get view event.
+    */
+    public function rolesGet(Request $request)
+    {
+        $searchQuery = $request->input('query'); // The search input from the request
+        $input_value = $request->input('name'); // The additional filter if provided
+
+        $query = Role::query()->orderBy('id', 'desc');
+
+        // Apply filters
+        if ($input_value) {
+            $query->where('name', 'LIKE', '%' . $input_value . '%');
+        }
+
+        if ($searchQuery) {
+            $query->where('name', 'LIKE', '%' . $searchQuery . '%');
+        } else {
+            // Filter by today's date if no search query is provided
+            // $start_day = now()->startOfDay();
+            // $end_day = now()->endOfDay();
+            // $query->whereBetween('created_at', [$start_day, $end_day]);
+            $query = Role::orderBy('id', 'desc');
+        }
+
+        $data = $query->get();
+        // Total Module Category Count
+        $total = Role::count();
+
+        if ($data->isEmpty()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No matching current role found, Please Search.......',
+                'data' => []
+            ], 200);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $data,
+            'current' => $data->count(),
+            'total' => $total,
+        ], 200);
+    }
+    /**
+     * Handle role promot create event.
+    */
+    public function rolecreate(Request $request)
+    {
+        //return view('super-admin.role.role-promot');
+    }
+    /**
+     * Handle role permission view event.
+    */
+    public function rolesPermission(Request $request)
+    {
+        return view('super-admin.role.role-permission');
+    }
+    /**
      * Handle manage role view event.
     */
     public function manageRoles()
@@ -274,7 +339,7 @@ class SuperAdminService
         $users = User::where('status', '=', 0)->orderBy('id', 'desc')->get();
         // $company_profiles = companyProfile::where('id', '=', 1)->get();
         $roles = Role::all();
-        return view('super-admin.manage-role',compact('users', 'roles'));
+        return view('super-admin.role.manage-role',compact('users', 'roles'));
     }
     /**
      * Handle update manage role event.

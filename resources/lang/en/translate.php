@@ -276,6 +276,8 @@ return[
     'Auth'=>'Auth',
     'Account-History'=>'Account-History',
     'Manage Role'=>'Manage Role',
+    'Role Permission' => 'Role Permission',
+    'Role Promot' => 'Role Promot',
     'Users Setting'=>'Users Setting',
     'Users Access'=>'Users Access',
     'Users Permission'=>'Users Permission',

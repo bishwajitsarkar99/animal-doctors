@@ -276,6 +276,8 @@ return[
     'Auth'=>'প্রমাণ',
     'Account-History'=>'অ্যাকাউন্ট-ইতিহাস',
     'Manage Role'=>'ভূমিকা পরিচালনা করুন',
+    'Role Permission' => 'ভূমিকার অনুমতি',
+    'Role Promot' => 'ভূমিকা প্রম্পট',
     'Users Setting'=>'ব্যবহারকারীদের সেটিং',
     'Users Access'=>'ব্যবহারকারীর অ্যাক্সেস',
     'Users Permission'=>'ব্যবহারকারীদের অনুমতি',

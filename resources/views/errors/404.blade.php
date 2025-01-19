@@ -199,11 +199,11 @@
                         <div class="col-xl-3">
                             @auth
                                 <span class="image-skeletone">
-                                    <img class="img-profile rounded-circle" id="output" src="/storage/user-image/{{auth()->user()->image}}" alt="error-image"><br>
+                                    <img class="img-profile rounded-circle" id="output" src="/storage/image/user-image/{{auth()->user()->image}}" alt="error-image"><br>
                                 </span>
                                 <span class="display-6 text-bold fw-6 text-lg text-gray-500 user text-capsule" style="font-weight: 700;">User</span><br>
                                 <span class="display-6 text-bold fw-6 text-lg text-gray-500 auth_user text-capsule" style="font-weight: 700;">Name : {{ auth()->user()->name}}</span><br>
-                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 auth_user text-capsule" style="font-weight: 700;">Email : {{ auth()->user()->email}}</span>
+                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 auth_user text-capsule" style="font-weight: 700;">Email : {{ auth()->user()->login_email}}</span>
                             @else
                                 <span class="image-skeletone">
                                     <img class="img-profile rounded-circle" id="output" src="/image/828.jpg" alt="user-image"><br>

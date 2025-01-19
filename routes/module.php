@@ -5,7 +5,7 @@ use App\Http\Controllers\Module\ModuleController;
 
 Route::group(['middleware' => 'auth'], function (){
 
-    Route::middleware(['role:SuperAdmin'])->group(function(){
+    Route::middleware(['isSuperAdmin'])->group(function(){
         Route::prefix('application')->group(function () {
             // Module Category
             Route::get('/module-category-index', [ModuleController::Class, 'moduleCategoryView'])->name('module_category_view.action');

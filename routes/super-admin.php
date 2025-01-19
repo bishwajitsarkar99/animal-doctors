@@ -20,6 +20,16 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('/get-users', [SuperAdminController::class, 'getusers'])->name('search_users.action');
         Route::post('/status-users', [SuperAdminController::class, 'update_status'])->name('update_status.action');
         // Role Management Routes
+        Route::get('/role-index', [SuperAdminController::class, 'roleIndex'])->name('role_index');
+        Route::get('/role-create', [SuperAdminController::class, 'roleCreate'])->name('role_create.action');
+        Route::get('/role-get', [SuperAdminController::class, 'roleGet'])->name('role_get.action');
+        Route::get('/role-search', [SuperAdminController::class, 'roleSearch'])->name('role_search.action');
+        Route::get('/role-edit/{id}', [SuperAdminController::class, 'roleEdit'])->name('role_edit.action');
+        Route::put('/role-update/{id}', [SuperAdminController::class, 'roleUpdate'])->name('role_update.action');
+        Route::delete('/role-delete/{id}', [SuperAdminController::class, 'roleDelete'])->name('role_delete.action');
+        Route::post('/role-promot', [SuperAdminController::class, 'rolePromotIndex'])->name('role_promot.action');
+        Route::get('/role-permission-index', [SuperAdminController::class, 'rolePermission'])->name('role_permission.index');
+        Route::post('/role-permission-create', [SuperAdminController::class, 'rolePermissionCreate'])->name('role_permission_create.action');
         Route::get('/manage-role', [SuperAdminController::class, 'manageRole'])->name('manageRole');
         Route::post('/update-role', [SuperAdminController::class, 'updateRole'])->name('updateRole');
         // Application Settings Routes

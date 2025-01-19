@@ -91,10 +91,10 @@
                             <h4 class="display-6 text-bold" style="color:black;font-size: 1.5vw;font-weight: 700;">You are not able to access the action !</h4>
                         <div class="col-xl-3">
                             @auth
-                                <img class="img-profile rounded-circle" id="output" src="/image/{{auth()->user()->image}}" alt="error-image"><br>
+                                <img class="img-profile rounded-circle" id="output" src="/storage/image/user-image/{{auth()->user()->image}}" alt="error-image"><br>
                                 <span class="display-6 text-bold fw-6 text-lg text-gray-500 user" style="color:black;font-weight: 700;">User</span><br>
                                 <span class="display-6 text-bold fw-6 text-lg text-gray-500 auth_user" style="color:black;font-weight: 700;">Name : {{ auth()->user()->name}}</span><br>
-                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 auth_user" style="color:black;font-weight: 700;">Email : {{ auth()->user()->email}}</span>
+                                <span class="display-6 text-bold fw-6 text-lg text-gray-500 auth_user" style="color:black;font-weight: 700;">Email : {{ auth()->user()->login_email}}</span>
                                 
                             @else
                                 <img class="img-profile rounded-circle" id="output" src="/image/828.jpg" alt="user-image"><br>

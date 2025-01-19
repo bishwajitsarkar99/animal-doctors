@@ -73,6 +73,48 @@ class SuperAdminController extends Controller
         return $this->superAdminService->deleteUser($id);
     }
 
+    // Role Permission Index View-----------
+    public function roleIndex(Request $request)
+    {
+        return $this->superAdminService->rolesIndex($request);
+    }
+
+    // Role Create-----------
+    public function roleCreate(Request $request)
+    {
+        return $this->superAdminService->rolesCreate($request);
+    }
+
+    // Role Get-----------
+    public function roleGet(Request $request)
+    {
+        return $this->superAdminService->rolesGet($request);
+    }
+
+    // Role Edit-----------
+    public function roleEdit($id)
+    {
+        return $this->superAdminService->rolesEdit($id);
+    }
+
+    // Role Update-----------
+    public function roleUpdate(Request $request, $id)
+    {
+        return $this->superAdminService->rolesUpdate($request, $id);
+    }
+
+    // Role Delete-----------
+    public function roleDelete($id)
+    {
+        return $this->superAdminService->rolesDelete($id);
+    }
+
+    // Role Permission-----------
+    public function rolePermission(Request $request)
+    {
+        return $this->superAdminService->rolesPermission($request);
+    }
+
     // Manage Role-----------
     public function manageRole()
     {

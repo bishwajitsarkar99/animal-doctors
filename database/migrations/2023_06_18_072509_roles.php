@@ -16,7 +16,9 @@ class Roles extends Migration
         //
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('name',255);
+            $table->string('name',255)->unique();
+            $table->string('role_condition')->default('non-static');
+            $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });
     }
