@@ -1,5 +1,5 @@
 <script type="module">
-    import {activeTableRow} from "/module/module-min-js/helper-function-min.js";
+    import {activeTableRow, editTableRowSinge} from "/module/module-min-js/helper-function-min.js";
     import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     buttonLoader();
     $(document).ready(function(){
@@ -7,6 +7,7 @@
         $(document).on('click keydown', 'tr.table-row', function (event) {
             if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
                 activeTableRow(this);
+                editTableRowSinge(this);
             }
         });
         // Initialize the button loader for the login button
@@ -16,6 +17,15 @@
         fetch_roles();
         // Data View Table--------------
         const table_rows = (rows) => {
+            // Define the "Add New" row
+            const addNewRow = `
+                <tr class="table-row user-table-row data-table-row clicked" id="row_id_new" value="" tabindex="0">
+                    <td class="sn td_border_empty id-font" id="table_edit_btn" value="" tabindex="0">
+                        <span class="permission-plate ps-1 pe-1 ms-1"><i class="fa-brands fa-dropbox"></i></span>
+                    </td>
+                    <td class="td_border_empty font padding role_name placeholder_text" colspan="3" contenteditable="true" tabindex="0"></td>
+                </tr>
+            `;
             if (!rows || rows.length === 0) {
                 return `
                     <tr class="table-row">
@@ -24,15 +34,30 @@
                         </td>
                     </tr>
                 `;
-            }
+            } 
 
-            return rows.map((row, key) => {
+            return addNewRow + rows.map((row, key) => {
+                let statusText, statusSinge, statusClass, statusBg;
+                if(row.status == 0){
+                    statusText = 'no promot';
+                    statusSinge = '<i class="fa-solid fa-xmark"></i>';
+                    statusClass = 'text-white';
+                    statusBg = 'badge rounded-pill bg-danger';
+                }else if(row.status == 1){
+                    statusText = 'promoted';
+                    statusSinge = '<i class="fa-solid fa-check"></i>';
+                    statusClass = 'text-white';
+                    statusBg = 'badge rounded-pill bg-success';
+                }
                 return `
                     <tr class="table-row user-table-row data-table-row" id="row_id" value="${key}" tabindex="0">
-                        <td class="sn border_ord" id="table_edit_btn" value="${row.id}" tabindex="0">${row.id}</td>
-                        <td class="txt_" tabindex="0">${row.name}</td>
-                        <td class="txt_" tabindex="0">${row.role_condition}</td>
-                        <td class="txt_" tabindex="0">${row.status}</td>
+                        <td class="sn td_border id-font" id="table_edit_btn" value="${row.id}" tabindex="0">${row.id}</td>
+                        <td class="td_border font padding" contenteditable="true" tabindex="0">${row.name}</td>
+                        <td class="td_border font padding" tabindex="0">${row.role_condition}</td>
+                        <td class="td_border font padding" tabindex="0">
+                            ${statusText}
+                            <span class="permission-plate ps-1 pe-1 ms-1 ${statusBg} ${statusClass}">${statusSinge}</span>
+                        </td>
                     </tr>
                 `;
             }).join("");
@@ -99,8 +124,9 @@
             if (keyCode === 40) {
                 const nextRow = $(this).next(".data-table-row");
                 if (nextRow.length) {
-                    $(this).attr("data-val", 0).removeClass("highlight");
-                    nextRow.attr("data-val", 1).addClass("highlight").focus();
+                    $(this).attr("data-val", 0).removeClass("highlight-row");
+                    nextRow.attr("data-val", 1).addClass("highlight-row").focus();
+                    nextRow.addClass("active-row").siblings().removeClass("active-row");
                     // remove update and delete button
                     $("#thAction").attr('hidden', true);
                     $("#catgUpdateBtn").attr('hidden', true);
@@ -108,8 +134,8 @@
                 } else {
                     const firstRow = $(".data-table-row").first();
                     if (firstRow.length) {
-                        $(this).attr("data-val", 0).removeClass("highlight");
-                        firstRow.attr("data-val", 1).addClass("highlight").focus();
+                        $(this).attr("data-val", 0).removeClass("highlight-row");
+                        firstRow.attr("data-val", 1).addClass("highlight-row").focus();
                         // remove update and delete button
                         $("#thAction").attr('hidden', true);
                         $("#catgUpdateBtn").attr('hidden', true);
@@ -123,16 +149,17 @@
             if (keyCode === 38) {
                 const prevRow = $(this).prev(".data-table-row");
                 if (prevRow.length) {
-                    $(this).attr("data-val", 0).removeClass("highlight");
-                    prevRow.attr("data-val", 1).addClass("highlight").focus();
+                    $(this).attr("data-val", 0).removeClass("highlight-row");
+                    prevRow.attr("data-val", 1).addClass("highlight-row").focus();
+                    prevRow.addClass("active-row").siblings().removeClass("active-row");
                     // remove update and delete button
                     $("#thAction").attr('hidden', true);
                     $("#catgUpdateBtn").attr('hidden', true);
                     $("#catgDeleteBtn").attr('hidden', true);
                 } else {
                     const lastRow = $(".data-table-row").last();
-                    $(this).attr("data-val", 0).removeClass("highlight");
-                    lastRow.attr("data-val", 1).addClass("highlight").attr("tabindex", "0").focus();
+                    $(this).attr("data-val", 0).removeClass("highlight-row");
+                    lastRow.attr("data-val", 1).addClass("highlight-row").attr("tabindex", "0").focus();
                     // remove update and delete button
                     $("#thAction").attr('hidden', true);
                     $("#catgUpdateBtn").attr('hidden', true);
@@ -147,21 +174,21 @@
                 if (firstCell.length) {
                     firstCell.focus();
                 }
-                $(this).removeClass("highlight");
+                $(this).removeClass("highlight-row");
                 event.preventDefault(); 
             }
         });
         // Add focus styles for rows addClass tr
         $(document).on("focus", ".data-table-row", function () {
-            $(this).addClass("highlight");
+            $(this).addClass("highlight-row");
         });
         // removeClass tr
         $(document).on("blur", ".data-table-row", function () {
-            $(this).removeClass("highlight");
+            $(this).removeClass("highlight-row");
         });
 
         // Handle key events on table cells / td
-        $("#module_category_table").on("keydown", "td", function (event) {
+        $("#role_table").on("keydown", "td", function (event) {
             const keyCode = event.which || event.keyCode;
 
             // Arrow Down key: Move focus to the first <td> of the next row
@@ -202,21 +229,31 @@
         });
         // Add focus styles for cells/ addClass for td
         $(document).on("focus", "td", function () {
-            $(this).addClass("focused-td");
+            $(this).addClass("focusing-td");
         });
         // removeClass for td
         $(document).on("blur", "td", function () {
-            $(this).removeClass("focused-td");
+            $(this).removeClass("focusing-td");
         });
 
         // Live-Search-----------------------------
-        $(document).on('click keyup', '#CategorySearchBar', function(event) {
+        $(document).on('click keyup', '#RoleSearchBar', function(event) {
             const query = $(this).val();
             fetch_category_module(query);
         });
 
-        // Module Category input handle Field
-        $(document).on('keyup', '#moduleCategoryName', function(){
+        // Role Name handle 
+        $(document).on('keyup', '.role_name', function(){
+            var value = $(this).text().trim();
+            if(value !== ''){
+                $(this).removeClass('placeholder_text');
+            }else{
+                $(this).addClass('placeholder_text');
+            }
+        });
+
+        // Role Name input handle Field
+        $(document).on('keyup', '#moduleRoleName', function(){
             $("#module_create_modal_heading").html("");
             $("#module_catg_create_modal").html("");
             $(this).removeClass('is-invalid');
@@ -224,7 +261,7 @@
             $("#updateForm_error").html("");
 
             var value = $(this).val();
-            var edit_id = $("#moduleCategoryId").val();
+            var edit_id = $("#roleId").val();
             if(value !== ''){
                 if(edit_id !== ''){
                     $("#thAction").removeAttr('hidden');
@@ -601,74 +638,3 @@
 
     });
 </script>
-<!-- <script>
-    // key down and up for input field
-    $(document).ready(function(){
-        // Handle keydown events on inputs and buttons inside #module_catg_first
-        $("#module_catg_first").on("keydown", "input, button", function (event) {
-            const keyCode = event.which || event.keyCode;
-
-            // Arrow Down key: Move focus to the next input field
-            if (keyCode === 40) {
-                const nextInput = $(this).closest("th").next().find("input");
-                if (nextInput.length) {
-                    $(this).removeClass("inputlight");
-                    nextInput.addClass("inputlight").focus();
-                } else {
-                    const firstInput = $("#module_catg_first").find(".input-field").first();
-                    if (firstInput.length) {
-                        $(this).removeClass("inputlight");
-                        firstInput.addClass("inputlight").focus();
-                    }
-                }
-                event.preventDefault();
-                return;
-            }
-
-            // Arrow Up key: Move focus to the previous input field
-            if (keyCode === 38) {
-                const prevInput = $(this).closest("th").prev().find("input");
-                if (prevInput.length) {
-                    $(this).removeClass("inputlight");
-                    prevInput.addClass("inputlight").focus();
-                } else {
-                    const lastInput = $("#module_catg_first").find(".input-field").last();
-                    if (lastInput.length) {
-                        $(this).removeClass("inputlight");
-                        lastInput.addClass("inputlight").focus();
-                    }
-                }
-                event.preventDefault();
-                return;
-            }
-
-            // Arrow Left key: Move focus to the previous button
-            // if (keyCode === 37) {
-            //     const currentTh = $(this).closest("th");
-            //     const prevButton = currentTh.prev().find("button:not([hidden])").last();
-
-            //     if (prevButton.length) {
-            //         prevButton.removeAttr("hidden").focus();
-            //         $(this).removeClass("highlight");
-            //         prevButton.addClass("highlight").focus();
-            //     }
-            //     event.preventDefault();
-            //     return;
-            // }
-
-            // // Arrow Right key: Move focus to the next button
-            // if (keyCode === 39) {
-            //     const currentTh = $(this).closest("th");
-            //     const nextButton = currentTh.next().find("button:not([hidden])").first();
-
-            //     if (nextButton.length) {
-            //         nextButton.removeAttr("hidden").focus();
-            //         $(this).removeClass("highlight");
-            //         nextButton.addClass("highlight").focus();
-            //     }
-            //     event.preventDefault();
-            //     return;
-            // }
-        });
-    });
-</script> -->

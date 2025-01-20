@@ -5,32 +5,56 @@
   <div class="container">
     <div class="card form-control form-control-sm" id="moduleTemplete">
       <div class="card-body" id="table_card_body">
+      <table class="module-category-table" id="module_catg_first">
         @csrf
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="role_id" id="roleId">
-        <div class="table-responsive">
-          <table class="module-category-table mb-3" id="module_catg">
-            <thead class="module-category-table-head-two">
-              <tr class="table-heading-row" id="role_row">
-                <th class="" id="table_head_sn">SN.</th>
-                <th class="" id="row_role_name">Role-Name</th>
-                <th class="" id="row_role_condition">Role-Condition</span></th>
-                <th class="" id="row_role_status">Status</th>
-              </tr>
-            </thead>
-            <tbody class="module-category-table-body bg-white" id="role_table"></tbody>
-          </table>
-        </div>
-        <table class="footer_box">
-          <tfoot class="module-category-table-footer mb-3">
-            <tr class="module-category-table-footer-row table-row" id="footerRow">
-              <th class="module-category-table-footer-th" colspan="5" id="module_catg_row_total">
-                Total Role <span class="action_message"><span id="success_message"></span></span>
-              </th>
-              <th class="module-category-table-footer-th" id="module_catg_row_amount"></th>
+        <!-- <thead class="module-category-table-head-one" id="module_catg_thead_one">
+          <tr class="module-category-table-head-row" id="module_catg_row">
+            <th class="module-category-table-head-th-label" id="thCatgName">Role-Name :</th>
+            <th class="module-category-table-head-th-input" colspan="3" id="thCateg">
+              <input class="module-category-input edit-module-category-input" type="text" name="name" value="" placeholder="Role Name" autocomplete="off" id="moduleRoleName">
+            </th>
+            <th  class="module-category-table-head-th-action action_th" colspan="3" id="thAction" hidden>
+              <button class="module-sm-btn" id="catgCreateBtn" hidden>Create</button>
+              <button class="module-sm-btn" id="catgUpdateBtn" hidden>Update</button>
+              <button class="module-sm-delete-btn" id="catgDeleteBtn" hidden>Delete</button>
+              <button class="module-sm-cancel-btn" id="catgCancelBtn" hidden>Cancel</button>
+            </th>
+          </tr>
+        </thead> -->
+        <thead class="module-category-table-head-two">
+          <tr class="module-category-table-head-row-two" id="module_catg_row_two">
+            <th class="module-category-table-head-th-search-label" id="module_searchBar">Search-Bar :</th>
+            <th class="module-category-table-head-th-search-bar" colspan="5">
+              <input class="table-search-bar input-field" type="search" name="module_category_name" value="" placeholder="Search" id="RoleSearchBar">
+            </th>
+          </tr>
+        </thead>
+      </table>
+      <div class="table__responsive">
+        <table class="module-category-table" id="module_catg">
+          <thead class="module-category-table-head-two">
+            <tr class="table-heading-row" id="role_row">
+              <th class="" id="table_head_sn">SN.</th>
+              <th class="" id="row_role_name">Role-Name</th>
+              <th class="" id="row_role_condition">Role-Condition</span></th>
+              <th class="" id="row_role_status">Status</th>
             </tr>
-          </tfoot>
+          </thead>
+          <tbody class="module-category-table-body bg-white" id="role_table"></tbody>
         </table>
+      </div>
+      <table class="footer_box">
+        <tfoot class="module-category-table-footer mb-3">
+          <tr class="module-category-table-footer-row table-row" id="footerRow">
+            <th class="module-category-table-footer-th" colspan="5" id="module_catg_row_total">
+              Total Role <span class="action_message"><span id="success_message"></span></span>
+            </th>
+            <th class="module-category-table-footer-th" id="module_catg_row_amount"></th>
+          </tr>
+        </tfoot>
+      </table>
       </div>
     </div>
   </div>

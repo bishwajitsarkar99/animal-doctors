@@ -119,4 +119,8 @@ export function myLockFunction() {
 export function activeTableRow(element){
     $(element).addClass("clicked").siblings().removeClass("clicked");
 }
+// ACtive table row background
+export function editTableRowSinge(element){
+    $(element).addClass("active-row").siblings().removeClass("active-row");
+}
 
