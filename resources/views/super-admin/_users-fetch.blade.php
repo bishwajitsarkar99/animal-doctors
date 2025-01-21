@@ -52,7 +52,7 @@
                     statusSignal = `<span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>`;
                 }
                 return `
-                    <tr class="table-row data-table-row user-table-row" key="${key}" data-id="${row.id}" tabindex="0">
+                    <tr class="table-row data-table-row user-table-row temp-highlight" key="${key}" data-id="${row.id}" tabindex="0">
                         <td class="sn border_ord bold" id="table_id_btn" data-id="${row.id}" tabindex="0">
                             ${row.id}
                         </td>
@@ -169,19 +169,12 @@
                     $(this).attr("data-val", 0).removeClass("highlight-row");
                     nextRow.attr("data-val", 1).addClass("highlight-row").focus();
                     nextRow.addClass("active-row").siblings().removeClass("active-row");
-                    // remove update and delete button
-                    // $("#thAction").attr('hidden', true);
-                    // $("#catgUpdateBtn").attr('hidden', true);
-                    // $("#catgDeleteBtn").attr('hidden', true);
                 } else {
                     const firstRow = $(".data-table-row").first();
                     if (firstRow.length) {
                         $(this).attr("data-val", 0).removeClass("highlight-row");
                         firstRow.attr("data-val", 1).addClass("highlight-row").focus();
-                        // remove update and delete button
-                        // $("#thAction").attr('hidden', true);
-                        // $("#catgUpdateBtn").attr('hidden', true);
-                        // $("#catgDeleteBtn").attr('hidden', true);
+                        firstRow.addClass("active-row").siblings().removeClass("active-row");
                     }
                 }
                 event.preventDefault();
@@ -194,18 +187,11 @@
                     $(this).attr("data-val", 0).removeClass("highlight-row");
                     prevRow.attr("data-val", 1).addClass("highlight-row").focus();
                     prevRow.addClass("active-row").siblings().removeClass("active-row");
-                    // remove update and delete button
-                    // $("#thAction").attr('hidden', true);
-                    // $("#catgUpdateBtn").attr('hidden', true);
-                    // $("#catgDeleteBtn").attr('hidden', true);
                 } else {
                     const lastRow = $(".data-table-row").last();
                     $(this).attr("data-val", 0).removeClass("highlight-row");
                     lastRow.attr("data-val", 1).addClass("highlight-row").attr("tabindex", "0").focus();
-                    // remove update and delete button
-                    // $("#thAction").attr('hidden', true);
-                    // $("#catgUpdateBtn").attr('hidden', true);
-                    // $("#catgDeleteBtn").attr('hidden', true);
+                    lastRow.addClass("active-row").siblings().removeClass("active-row");
                 }
                 event.preventDefault(); // Prevent default scrolling behavior
             }
@@ -275,7 +261,24 @@
                 $("#viewBtn").val(cellDataId);
                 $("#edtBtn").val(cellDataId);
                 $("#dltBtn").val(cellDataId);
+                // Store the currently highlighted row for later use
+                const activeRow = $(".data-table-row.hightlight-row");
+                activeRow.addClass("temp-highlight"); // Temporarily mark the active row
+
+                // When modal is closed
+                $("#action_box").on('hidden.bs.modal', function () {
+                    // Restore focus to the previously active row
+                    const tempRow = $(".data-table-row.temp-highlight");
+                    tempRow.removeClass("temp-highlight").focus().addClass("hightlight-row");
+                });
             }
+        });
+        // action box cancel btn
+        $("#actionCancel").on('click', function (e) {
+            e.preventDefault();
+            $("#action_box").modal('hide');
+            const activeRow = $(".data-table-row.hightlight-row");
+            activeRow.addClass("temp-highlight");
         });
         // Add focus styles for cells/ addClass for td
         $(document).on("focus", "td", function () {
@@ -585,11 +588,6 @@
             e.preventDefault();
             $('#deletecategory').modal('hide');
             $("#action_box").modal('show');
-        });
-        // action box cancel btn
-        $(document).on('click', '#actionCancel', function(e){
-            e.preventDefault();
-            $("#action_box").modal('hide');
         });
         $(document).on('click', '#viewBtn', function(e){
             e.preventDefault();

@@ -49,9 +49,18 @@
                     statusClass = 'text-white';
                     statusBg = 'badge rounded-pill bg-success';
                 }
+                
+                let idLink, disabledLabel;
+                if(row.role_condition === 'non-static'){
+                    idLink = row.id;
+                    disabledLabel = '';
+                }else if(row.role_condition === 'static'){
+                    idLink = '';
+                    disabledLabel = 'disabled';
+                }
                 return `
                     <tr class="table-row user-table-row data-table-row" id="row_id" value="${key}" tabindex="0">
-                        <td class="sn td_border id-font" id="table_edit_btn" value="${row.id}" tabindex="0">${row.id}</td>
+                        <td class="sn td_border id-font" id="table_edit_btn" value="${idLink}" tabindex="0" ${disabledLabel}>${row.id}</td>
                         <td class="td_border font padding" contenteditable="true" tabindex="0">${row.name}</td>
                         <td class="td_border font padding" tabindex="0">${row.role_condition}</td>
                         <td class="td_border font padding" tabindex="0">
@@ -239,7 +248,7 @@
         // Live-Search-----------------------------
         $(document).on('click keyup', '#RoleSearchBar', function(event) {
             const query = $(this).val();
-            fetch_category_module(query);
+            fetch_roles(query);
         });
 
         // Role Name handle 
@@ -247,54 +256,13 @@
             var value = $(this).text().trim();
             if(value !== ''){
                 $(this).removeClass('placeholder_text');
+                $(this).addClass('is-valid');
+                $(this).removeClass('td_border_empty');
             }else{
                 $(this).addClass('placeholder_text');
+                $(this).removeClass('is-valid');
+                $(this).addClass('td_border_empty');
             }
-        });
-
-        // Role Name input handle Field
-        $(document).on('keyup', '#moduleRoleName', function(){
-            $("#module_create_modal_heading").html("");
-            $("#module_catg_create_modal").html("");
-            $(this).removeClass('is-invalid');
-            $("#savForm_error").html("");
-            $("#updateForm_error").html("");
-
-            var value = $(this).val();
-            var edit_id = $("#roleId").val();
-            if(value !== ''){
-                if(edit_id !== ''){
-                    $("#thAction").removeAttr('hidden');
-                    $("#catgUpdateBtn").removeAttr('hidden');
-                    $("#catgDeleteBtn").removeAttr('hidden');
-                    $("#catgCancelBtn").removeAttr('hidden');
-                }else{
-                    $("#thAction").removeAttr('hidden');
-                    $("#catgCreateBtn").removeAttr('hidden');
-                    $("#catgCancelBtn").removeAttr('hidden');
-                }
-                $("#catgDeleteBtn").attr('hidden', true);
-            }else if(value == ''){
-                $("#thAction").attr('hidden', true);
-                $("#catgCreateBtn").attr('hidden', true);
-                $("#catgCancelBtn").attr('hidden', true);
-                $("#catgUpdateBtn").attr('hidden', true);
-                $("#catgDeleteBtn").attr('hidden', true);
-            }
-        });
-
-        // Cancel Button
-        $(document).on('click', '#catgCancelBtn', function(){
-            $("#moduleCategoryId").val("");
-            $("#moduleCategoryName").val("");
-            $("#catgCreateBtn").removeAttr('hidden');
-            $("#catgCancelBtn").removeAttr('hidden');
-            $("#thAction").attr('hidden', true);
-            $("#catgUpdateBtn").attr('hidden', true);
-            $("#catgDeleteBtn").attr('hidden', true);
-            $("#moduleCategoryName").removeClass('is-invalid');
-            $("#savForm_error").html("");
-            $("#updateForm_error").html("");
         });
 
         // Create Module Category Modal Show

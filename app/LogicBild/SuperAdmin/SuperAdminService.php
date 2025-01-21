@@ -289,13 +289,14 @@ class SuperAdminService
         }
 
         if ($searchQuery) {
-            $query->where('name', 'LIKE', '%' . $searchQuery . '%');
+            $query->where('name', 'LIKE', '%' . $searchQuery . '%')
+            ->orWhere('role_condition', 'LIKE', $searchQuery . '%');
         } else {
             // Filter by today's date if no search query is provided
             // $start_day = now()->startOfDay();
             // $end_day = now()->endOfDay();
             // $query->whereBetween('created_at', [$start_day, $end_day]);
-            $query = Role::orderBy('id', 'desc');
+            $query = Role::query()->latest()->limit(10);
         }
 
         $data = $query->get();

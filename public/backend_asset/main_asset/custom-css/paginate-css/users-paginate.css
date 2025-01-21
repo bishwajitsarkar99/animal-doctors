@@ -366,6 +366,11 @@ tr.clicked{
 .row-hidden{
     display: none;
 }
+td#table_id_btn {
+    text-decoration: underline;
+    text-decoration-color: #3b71ca;
+    cursor: pointer;
+}
 li.act_box {
     text-align: left;
     list-style: none;
@@ -1110,7 +1115,7 @@ th#th_sort {
     color: black;
     font-size: 15px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    background-color: white;
+    background-color: #e7e7e7eb;
     opacity: 5;
 }
 .search-hidden{
