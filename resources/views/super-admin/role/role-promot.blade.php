@@ -59,7 +59,6 @@
     </div>
   </div>
   @include('loader.action-loader')
-  
   {{-- start confirm create modal --}}
   <div class="modal fade" id="createconfirmmodulecategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">

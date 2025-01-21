@@ -311,13 +311,7 @@ li.upd.cgy {
     animation: 1s infinite reverse skeleton;
     border-radius: 5px;
 }
-tr.user_setting {
-    background-color: white;
-    letter-spacing: 1px;
-}
-tr.user_setting:hover{
-    border: 1px solid var(--row-hover-border);
-    font-weight: 500;
+tr.table-row:hover {
     background-image: var(--table-row-hover);
     animation-name: fonColor;
     animation-duration: 1s;
@@ -337,9 +331,54 @@ tr.user_setting:hover{
         color: darkblue;
     }
 }
+tr.table-row:hover td#table_id_btn,tr.table-row.user-table-row.active-row td#table_id_btn {
+    position: relative;
+}
+tr.table-row:hover td#table_id_btn::after,tr.table-row.user-table-row.active-row td#table_id_btn::after {
+    content: "\f304";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+    text-align: center;
+    opacity: 5;
+}
+.highlight-row {
+    /* background-color: rgb(210, 255, 210); */
+    background-color: beige;
+    outline: none;
+    opacity: 1;
+}
+.focusing-td {
+    outline: none;
+    background-color: antiquewhite;
+    /* background-color: #ffc06b; */
+    transition: 1s;
+    opacity: 1;
+}
 tr.clicked{
     background-color: rgb(210, 255, 210);
     opacity: 1;
+}
+.row-hidden{
+    display: none;
+}
+li.act_box {
+    text-align: left;
+    list-style: none;
+    background-color: white;
+    border-radius: 5px;
+}
+div#actionBox {
+    width: 100%;
+}
+button#actionCancel {
+    outline: none;
+    border: none;
+    background-color: white;
 }
 .bg-transparent {
     opacity: 1;

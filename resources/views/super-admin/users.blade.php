@@ -34,7 +34,6 @@
                   <tr class="table-row order_body acc_setting_table skeleton">
                     <th id="th_sort" style="cursor:pointer;" data-coloumn="id" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> ID</th>
                     <th id="th_sort" style="cursor:pointer;" data-coloumn="image" data-order="desc" class="table_th_color txt col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Img</th>
-                    <th id="th_sort" style="cursor:pointer;" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Act</th>
                     <th id="th_sort" style="cursor:pointer;" data-coloumn="name" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Name</th>
                     <th id="th_sort" style="cursor:pointer;" data-coloumn="email" data-order="desc" class="table_th_color tot_order_ font_sid skeleton ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Email</th>
                     <th id="th_sort" style="cursor:pointer;" data-coloumn="contract_number" data-order="desc" class="table_th_color font_sid skeleton tot_order_ ps-1"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> Contract</th>
@@ -86,6 +85,30 @@
   </div>
 </div>
 @include('loader.action-loader')
+{{-- Start Action Box Modal--}}
+<div class="modal fade" id="action_box" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" id="access_modal_box">
+      <div class="modal-body" id="processModal_body">
+        <div class="ms-2" id="actionBox">
+          <input type="hidden" id="rowID">
+          <li class="act_box ps-1">
+            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-2" id="viewBtn" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+            <i class="fa-regular fa-eye fa-beat" style="color:darkcyan"></i></button>
+            <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="edtBtn" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+            <i class="fa-solid fa-pen-to-square fa-beat" style="color:darkcyan"></i></button>
+            <button class="btn-sm delete_button ms-2 delt_button" type="button" id="dltBtn" style="font-size: 10px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+            <i class="fa-solid fa-trash-can fa-beat" style="color:orangered"></i></button>
+            <button type="button" class="btn-sm edit_registration cancel_button cgr_btn edit_btn ms-2" id="actionCancel" data-bs-dismiss="modal" style="font-size: 15px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+            <i class="fa-solid fa-xmark" style="color:orangered"></i>
+            </button>
+          </li>
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>
+{{-- End Action Box Modal--}}
 {{-- Start Delete User Modal--}}
 <!-- User Delete Modal -->
 <div class="modal fade" id="deletecategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -95,7 +118,7 @@
         <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
           Delete User
         </h5>
-        <button type="button" class="btn-close btn-btn-sm clos_btn" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+        <button type="button" class="btn-close btn-btn-sm clos_btn delete_close_btn" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
       </div>
 
       <div class="modal-body profile-body pb-1" style="background:aliceblue;">

@@ -3,8 +3,10 @@
     import { handleImageUpload, addAttributeOrClass, removeAttributeOrClass, handleSuccessMessage } from "/module/module-min-js/design-helper-function-min.js";
     $(document).ready(function() {
         // ACtive table row background
-        $(document).on('click', 'tr.table-row', function(){
-            activeTableRow(this);
+        $(document).on('click keydown', 'tr.table-row', function (event) {
+            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                activeTableRow(this);
+            }
         });
         // show or hide users table search bar
         $("#search").hide();
@@ -50,41 +52,28 @@
                     statusSignal = `<span class="fbox"><input id="light_focus" type="text" class="light2-focus" readonly></input></span>`;
                 }
                 return `
-                    <tr class="table-row user-table-row user_setting" key="${key}">
-                        <td class="sn border_ord bold">${row.id}</td>
-                        <td class="tot_order_ center ps-1">
+                    <tr class="table-row data-table-row user-table-row" key="${key}" data-id="${row.id}" tabindex="0">
+                        <td class="sn border_ord bold" id="table_id_btn" data-id="${row.id}" tabindex="0">
+                            ${row.id}
+                        </td>
+                        <td class="tot_order_ center ps-1" tabindex="0">
                             <img class="user_img rounded-circle user_imgs" src="${row.image.includes('https://')?row.image: '/storage/image/user-image/'+ row.image}">
                         </td>
-                        <td class="txt_ ps-1 center">
-                            <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
-                            <ul class="dropdown-menu action ms-4 pe-3">
-                                <li class="upd cgy ps-1">
-                                    <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-2" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                                    <i class="fa-regular fa-eye fa-beat" style="color:darkcyan"></i></button>
-                                    <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="edtBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                                    <i class="fa-solid fa-pen-to-square fa-beat" style="color:darkcyan"></i></button>
-                                    <button class="btn-sm delete_button ms-2 delt_button" value="${row.id}'" type="button" id="dltBtn" style="font-size: 10px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                                    <i class="fa-solid fa-trash-can fa-beat" style="color:orangered"></i></button>
-                                </li>
-                                <span class="action-box-arrow mini"></span>
-                            </ul>
-                        </td>
-                        <td class="txt_ bold ps-1">${row.name}</td>
-                        <td class="tot_order_ bold ps-1">
+                        <td class="txt_ bold ps-1" tabindex="0">${row.name}</td>
+                        <td class="tot_order_ bold ps-1" tabindex="0">
                             ${statusSignal}
                             <span style="color:gray"><i class="fa fa-envelope"></i></span>
                             ${row.email}
                         </td>
-                        <td class="tot_pending_ bold ps-1">${row.contract_number}</td>
-                        <td class="tot_pending_ bold ps-1 ${row.role? ' text-dark': ' text-dark'}">${row.role ==0 ? 'User': 'Superadmin' && row.role ==2 ? 'SubAdmin': 'User' && row.role ==1 ? 'SuperAdmin': 'User' && row.role ==3 ? 'Admin': 'User' && row.role ==5 ? 'Accounts': 'User' && row.role ==6 ? 'Marketing': 'User' && row.role ==7 ? 'Delivery Team': 'User'}</td>
-                        <td class="tot_complete_ center ps-1">
+                        <td class="tot_pending_ bold ps-1" tabindex="0">${row.contract_number}</td>
+                        <td class="tot_pending_ bold ps-1 ${row.role? ' text-dark': ' text-dark'}" tabindex="0">${row.role ==0 ? 'User': 'Superadmin' && row.role ==2 ? 'SubAdmin': 'User' && row.role ==1 ? 'SuperAdmin': 'User' && row.role ==3 ? 'Admin': 'User' && row.role ==5 ? 'Accounts': 'User' && row.role ==6 ? 'Marketing': 'User' && row.role ==7 ? 'Delivery Team': 'User'}</td>
+                        <td class="tot_complete_ center ps-1" tabindex="0">
                             <input class="form-switch form-check-input check_permission" type="checkbox" user_id="${row.id}" value="${row.status}" ${row.status? " checked": ''} ${row.email_verified_at === null ? 'disabled' : ''}>
                         </td>
-                        <td class="tot_complete_ pill ps-1">
+                        <td class="tot_complete_ pill ps-1" tabindex="0">
                             <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${statusBg} ${statusClass}">${statusSinge}</span>
                             <span class=" ${statusTextColor}">${statusText}</span>
                         </td>
-                        
                     </tr>
                 `;
             }).join("\n");
@@ -148,7 +137,7 @@
                     $('[data-bs-toggle="tooltip"]').tooltip();
                    // Get suggestions for autocomplete
                     var suggestions = data.map(function(item) {
-                        var userImage = `<img class="user_img rounded-circle user_imgs" src="${item.image.includes('https://') ? item.image : '/image/' + item.image}">`;
+                        var userImage = `<img class="user_img rounded-circle user_imgs" src="${item.image.includes('https://') ? item.image : '/storage/image/user-image/' + item.image}">`;
                         return {
                             label: `ID : ${item.id} - ${userImage} - ${item.roles.name} - ${item.email}`,
                             value: item.email
@@ -169,6 +158,133 @@
                 
             });
         }
+        // Event delegation for row key events
+        $("#user_data_table").on("keydown", ".data-table-row", function (event) {
+            const keyCode = event.which || event.keyCode;
+
+            // Arrow Down key: Move focus to the next row or loop back to the first row
+            if (keyCode === 40) {
+                const nextRow = $(this).next(".data-table-row");
+                if (nextRow.length) {
+                    $(this).attr("data-val", 0).removeClass("highlight-row");
+                    nextRow.attr("data-val", 1).addClass("highlight-row").focus();
+                    nextRow.addClass("active-row").siblings().removeClass("active-row");
+                    // remove update and delete button
+                    // $("#thAction").attr('hidden', true);
+                    // $("#catgUpdateBtn").attr('hidden', true);
+                    // $("#catgDeleteBtn").attr('hidden', true);
+                } else {
+                    const firstRow = $(".data-table-row").first();
+                    if (firstRow.length) {
+                        $(this).attr("data-val", 0).removeClass("highlight-row");
+                        firstRow.attr("data-val", 1).addClass("highlight-row").focus();
+                        // remove update and delete button
+                        // $("#thAction").attr('hidden', true);
+                        // $("#catgUpdateBtn").attr('hidden', true);
+                        // $("#catgDeleteBtn").attr('hidden', true);
+                    }
+                }
+                event.preventDefault();
+            }
+
+            // Arrow Up key: Move focus to the previous row or loop back to the last row
+            if (keyCode === 38) {
+                const prevRow = $(this).prev(".data-table-row");
+                if (prevRow.length) {
+                    $(this).attr("data-val", 0).removeClass("highlight-row");
+                    prevRow.attr("data-val", 1).addClass("highlight-row").focus();
+                    prevRow.addClass("active-row").siblings().removeClass("active-row");
+                    // remove update and delete button
+                    // $("#thAction").attr('hidden', true);
+                    // $("#catgUpdateBtn").attr('hidden', true);
+                    // $("#catgDeleteBtn").attr('hidden', true);
+                } else {
+                    const lastRow = $(".data-table-row").last();
+                    $(this).attr("data-val", 0).removeClass("highlight-row");
+                    lastRow.attr("data-val", 1).addClass("highlight-row").attr("tabindex", "0").focus();
+                    // remove update and delete button
+                    // $("#thAction").attr('hidden', true);
+                    // $("#catgUpdateBtn").attr('hidden', true);
+                    // $("#catgDeleteBtn").attr('hidden', true);
+                }
+                event.preventDefault(); // Prevent default scrolling behavior
+            }
+
+            // Enter key: Perform action on the selected row
+            if (keyCode === 13) {
+                const firstCell = $(this).find("td").first();
+                if (firstCell.length) {
+                    firstCell.focus();
+                }
+                $(this).removeClass("highlight-row");
+                event.preventDefault(); 
+            }
+        });
+        // Add focus styles for rows addClass tr
+        $(document).on("focus", ".data-table-row", function () {
+            $(this).addClass("highlight-row");
+        });
+        // removeClass tr
+        $(document).on("blur", ".data-table-row", function () {
+            $(this).removeClass("highlight-row");
+        });
+
+        // Handle key events on table cells / td
+        $("#user_data_table").on("keydown", "td", function (event) {
+            const keyCode = event.which || event.keyCode;
+            // Arrow navigation keys
+            if (keyCode === 40 || keyCode === 38 || keyCode === 39 || keyCode === 37) {
+                handleArrowKeys($(this), keyCode);
+                event.preventDefault();
+            }
+
+            // Enter key: Perform action on the selected cell
+            if (keyCode === 13) {
+                const currentCell = $(this); // Current focused cell
+                if (currentCell.attr("id") === "table_id_btn") {
+                    displayDropdownContent(currentCell);
+                }
+                event.preventDefault();
+            }
+        });
+        // Function to handle arrow navigation keys
+        function handleArrowKeys(cell, keyCode) {
+            let targetCell;
+            if (keyCode === 40) { // Down arrow
+                targetCell = cell.closest("tr").next(".data-table-row").find("td").first();
+            } else if (keyCode === 38) { // Up arrow
+                targetCell = cell.closest("tr").prev(".data-table-row").find("td").first();
+            } else if (keyCode === 39) { // Right arrow
+                targetCell = cell.next("td");
+            } else if (keyCode === 37) { // Left arrow
+                targetCell = cell.prev("td");
+            }
+            if (targetCell && targetCell.length) {
+                targetCell.focus();
+            }
+        }
+        // Handle click events on table cells / td
+        $(document).on('click keydown', '#table_id_btn', function (event) {
+            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                const currentCell = $(this);
+                const cellDataId = currentCell.data('id');
+                // Show the modal
+                $("#action_box").modal('show');
+                // Pass the data-id into the hidden input field
+                $("#rowID").val(cellDataId);
+                $("#viewBtn").val(cellDataId);
+                $("#edtBtn").val(cellDataId);
+                $("#dltBtn").val(cellDataId);
+            }
+        });
+        // Add focus styles for cells/ addClass for td
+        $(document).on("focus", "td", function () {
+            $(this).addClass("focusing-td");
+        });
+        // removeClass for td
+        $(document).on("blur", "td", function () {
+            $(this).removeClass("focusing-td");
+        });
 
         // Event Listener for sorting columns
         $(document).on('click', '#th_sort', function(){
@@ -274,6 +390,7 @@
         // Edit Users-------------------------
         $(document).on('click', '.edit_btn', function(e) {
             e.preventDefault();
+            $("#action_box").modal('hide');
             var user_id = $(this).val();
             // Reset progress bar and image
             $(".register_img").removeClass('img-hidden');
@@ -381,6 +498,7 @@
         // View Users-------------------------
         $(document).on('click', '.view_btn', function(e) {
             e.preventDefault();
+            $("#action_box").modal('hide');
             var user_id = $(this).val();
 
             $.ajax({
@@ -449,6 +567,29 @@
                 }
 
             });
+        });
+        // view close buttn
+        $(document).on('click', '.view_close_btn', function(e){
+            e.preventDefault();
+            $('#view_user_form').modal('hide');
+            $("#action_box").modal('show');
+        }); 
+        // edit close buttn
+        $(document).on('click', '.edit_close_btn, .cancel_btn', function(e){
+            e.preventDefault();
+            $('#edit_user_form').modal('hide');
+            $("#action_box").modal('show');
+        });
+        // delete close buttn
+        $(document).on('click', '.delete_close_btn, #noButton', function(e){
+            e.preventDefault();
+            $('#deletecategory').modal('hide');
+            $("#action_box").modal('show');
+        });
+        // action box cancel btn
+        $(document).on('click', '#actionCancel', function(e){
+            e.preventDefault();
+            $("#action_box").modal('hide');
         });
         $(document).on('click', '#viewBtn', function(e){
             e.preventDefault();
@@ -577,6 +718,7 @@
         // Delete Users Modal-------------------------
         $(document).on('click', '.delete_button', function(e) {
             e.preventDefault();
+            $("#action_box").modal('hide');
             var user_id = $(this).val();
             $('#user_id').val(user_id);
             $("#accessconfirmbranch").modal('show');
