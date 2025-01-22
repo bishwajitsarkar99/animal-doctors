@@ -432,7 +432,7 @@
             $("#action_box").modal('hide');
             $("#updateconfirmrolemodal").modal('show');
             $('#updateForm_error').html("");
-            const currentCell = $(this);
+            const currentCell = $("#table_edit_btn");
             const cellDataId = currentCell.data('id');
             const currentRow = currentCell.closest('tr');
             const input_val = currentRow.find('.role-name').text().trim().toLowerCase();
@@ -463,6 +463,17 @@
             return () => {
                 clearTimeout(time);
             };
+        });
+
+        // update modal cancel
+        $(document).on('click keydown', '#cate_delete5, .modal_header_cancel', function(e){
+            e.preventDefault();
+            $("#action_box").modal('show');
+            $("#updateconfirmrolemodal").modal('hide');
+            $("#updateBtn").removeAttr('hidden');
+            $("#promotBtn").removeAttr('hidden');
+            $("#nonPromotBtn").removeAttr('hidden');
+            $("#roleDeleteBtn").removeAttr('hidden');
         });
 
         // Confirm Update Module Category
