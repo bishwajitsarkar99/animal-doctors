@@ -21,7 +21,7 @@ Route::group(['middleware' => 'auth'], function (){
         Route::post('/status-users', [SuperAdminController::class, 'update_status'])->name('update_status.action');
         // Role Management Routes
         Route::get('/role-index', [SuperAdminController::class, 'roleIndex'])->name('role_index');
-        Route::get('/role-create', [SuperAdminController::class, 'roleCreate'])->name('role_create.action');
+        Route::post('/role-create', [SuperAdminController::class, 'roleCreate'])->name('role_create.action');
         Route::get('/role-get', [SuperAdminController::class, 'roleGet'])->name('role_get.action');
         Route::get('/role-search', [SuperAdminController::class, 'roleSearch'])->name('role_search.action');
         Route::get('/role-edit/{id}', [SuperAdminController::class, 'roleEdit'])->name('role_edit.action');

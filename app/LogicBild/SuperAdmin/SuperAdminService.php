@@ -321,9 +321,30 @@ class SuperAdminService
     /**
      * Handle role promot create event.
     */
-    public function rolecreate(Request $request)
+    public function rolesCreate(Request $request)
     {
-        //return view('super-admin.role.role-promot');
+        $validators = Validator::make($request->all(),[
+            'name' => 'required|string|unique:roles,name',
+        ],[
+            'name.required' => 'Role name is required.',
+            'name.unique' => 'This role has already taken.',
+        ]);
+
+        if($validators->fails()){
+            return response()->json([
+                'status' => 400,
+                'errors' => $validators->messages()
+            ]);
+        }else{
+            $role_names = new Role;
+            $role_names->name = $request->input('name');
+            $role_names->save();
+
+            return response()->json([
+                'status' => 200,
+                'messages' => 'The role name has created successfully.'
+            ]);
+        }
     }
     /**
      * Handle role permission view event.

@@ -5,60 +5,103 @@
   <div class="container">
     <div class="card form-control form-control-sm" id="moduleTemplete">
       <div class="card-body" id="table_card_body">
-      <table class="module-category-table" id="module_catg_first">
-        @csrf
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input type="hidden" name="role_id" id="roleId">
-        <!-- <thead class="module-category-table-head-one" id="module_catg_thead_one">
-          <tr class="module-category-table-head-row" id="module_catg_row">
-            <th class="module-category-table-head-th-label" id="thCatgName">Role-Name :</th>
-            <th class="module-category-table-head-th-input" colspan="3" id="thCateg">
-              <input class="module-category-input edit-module-category-input" type="text" name="name" value="" placeholder="Role Name" autocomplete="off" id="moduleRoleName">
-            </th>
-            <th  class="module-category-table-head-th-action action_th" colspan="3" id="thAction" hidden>
-              <button class="module-sm-btn" id="catgCreateBtn" hidden>Create</button>
-              <button class="module-sm-btn" id="catgUpdateBtn" hidden>Update</button>
-              <button class="module-sm-delete-btn" id="catgDeleteBtn" hidden>Delete</button>
-              <button class="module-sm-cancel-btn" id="catgCancelBtn" hidden>Cancel</button>
-            </th>
-          </tr>
-        </thead> -->
-        <thead class="module-category-table-head-two">
-          <tr class="module-category-table-head-row-two" id="module_catg_row_two">
-            <th class="module-category-table-head-th-search-label" id="module_searchBar">Search-Bar :</th>
-            <th class="module-category-table-head-th-search-bar" colspan="5">
-              <input class="table-search-bar input-field" type="search" name="module_category_name" value="" placeholder="Search" id="RoleSearchBar">
-            </th>
-          </tr>
-        </thead>
-      </table>
-      <div class="table__responsive">
-        <table class="module-category-table" id="module_catg">
+        <table class="module-category-table" id="module_catg_first">
+          @csrf
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="role_id" id="roleId">
+          <!-- <thead class="module-category-table-head-one" id="module_catg_thead_one">
+            <tr class="module-category-table-head-row" id="module_catg_row">
+              <th class="module-category-table-head-th-label" id="thCatgName">Role-Name :</th>
+              <th class="module-category-table-head-th-input" colspan="3" id="thCateg">
+                <input class="module-category-input edit-module-category-input" type="text" name="name" value="" placeholder="Role Name" autocomplete="off" id="moduleRoleName">
+              </th>
+              <th  class="module-category-table-head-th-action action_th" colspan="3" id="thAction" hidden>
+                <button class="module-sm-btn" id="catgCreateBtn" hidden>Create</button>
+                <button class="module-sm-btn" id="catgUpdateBtn" hidden>Update</button>
+                <button class="module-sm-delete-btn" id="catgDeleteBtn" hidden>Delete</button>
+                <button class="module-sm-cancel-btn" id="catgCancelBtn" hidden>Cancel</button>
+              </th>
+            </tr>
+          </thead> -->
           <thead class="module-category-table-head-two">
-            <tr class="table-heading-row" id="role_row">
-              <th class="" id="table_head_sn">SN.</th>
-              <th class="" id="row_role_name">Role-Name</th>
-              <th class="" id="row_role_condition">Role-Condition</span></th>
-              <th class="" id="row_role_status">Status</th>
+            <tr class="module-category-table-head-row-two" id="module_catg_row_two">
+              <th class="module-category-table-head-th-search-label" id="module_searchBar">Search-Bar :</th>
+              <th class="module-category-table-head-th-search-bar" colspan="5">
+                <input class="table-search-bar input-field" type="search" name="module_category_name" value="" placeholder="Search" id="RoleSearchBar">
+              </th>
             </tr>
           </thead>
-          <tbody class="module-category-table-body bg-white" id="role_table"></tbody>
+        </table>
+        <div class="table__responsive">
+          <table class="module-category-table" id="module_catg">
+            <thead class="module-category-table-head-two">
+              <tr class="table-heading-row" id="role_row">
+                <th class="" id="table_head_sn">SN.</th>
+                <th class="" id="row_role_name">Role-Name</th>
+                <th class="" id="row_role_condition">Role-Condition</span></th>
+                <th class="" id="row_role_status">Status</th>
+              </tr>
+            </thead>
+            <tbody class="module-category-table-body bg-white" id="role_table"></tbody>
+          </table>
+        </div>
+        <table class="footer_box">
+          <tfoot class="module-category-table-footer mb-3">
+            <tr class="module-category-table-footer-row table-row" id="footerRow">
+              <th class="module-category-table-footer-th" colspan="5" id="module_catg_row_total">
+                Total Role 
+                <!-- <span class="action_message"><span id="success_message"></span></span> -->
+              </th>
+              <th class="module-category-table-footer-th" id="module_catg_row_amount"></th>
+            </tr>
+          </tfoot>
         </table>
       </div>
-      <table class="footer_box">
-        <tfoot class="module-category-table-footer mb-3">
-          <tr class="module-category-table-footer-row table-row" id="footerRow">
-            <th class="module-category-table-footer-th" colspan="5" id="module_catg_row_total">
-              Total Role <span class="action_message"><span id="success_message"></span></span>
-            </th>
-            <th class="module-category-table-footer-th" id="module_catg_row_amount"></th>
-          </tr>
-        </tfoot>
-      </table>
-      </div>
+    </div>
+    <div class="col-xl-12 action_message">
+      <p class="ps-1"><span id="success_message"></span></p>
     </div>
   </div>
   @include('loader.action-loader')
+  {{-- Start Action Box Modal--}}
+  <div class="modal fade" id="action_box" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" id="access_modal_box">
+        <div class="modal-body" id="processModal_body">
+          <div class="role_create_form" id="roleActionBox">
+            @csrf
+            <li class="act_box ps-1">
+              <button type="button" class="btn btn-sm role_create_button" id="createBtn" hidden>
+                <span class="create-btn-text">Save</span>
+                <span class="create-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+              </button>
+              <button type="button" class="btn btn-sm role_create_button" id="updateBtn" hidden>
+                <span class="update-btn-text">Update</span>
+                <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+              </button>
+              <button type="button" class="btn btn-sm role_create_button" id="promotBtn" hidden>
+                <span class="promotion-btn-text">Promot</span>
+                <span class="promotion-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+              </button>
+              <button type="button" class="btn btn-sm role_create_button" id="nonPromotBtn" hidden>
+                <span class="non-promotion-btn-text">Non-Promot</span>
+                <span class="non-promotion-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+              </button>
+              <button type="button" class="btn btn-sm role_delete_button" id="roleDeleteBtn" hidden>
+                <span class="delete-btn-text">Delete</span>
+                <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+              </button>
+              <button type="button" class="btn-sm edit_registration cancel_button cgr_btn edit_btn ms-2" id="actionCancel" data-bs-dismiss="modal" style="font-size: 15px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
+              <i class="fa-solid fa-xmark" style="color:orangered"></i>
+              </button>
+            </li>
+          </div>
+          <span id="savForm_error"></span>
+        </div>  
+      </div>
+    </div>
+  </div>
+  {{-- End Action Box Modal--}}
   {{-- start confirm create modal --}}
   <div class="modal fade" id="createconfirmmodulecategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
@@ -91,26 +134,26 @@
   {{-- end confirm create modal --}}
 
   {{-- start confirm update modal --}}
-  <div class="modal fade" id="updateconfirmmodule" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="updateconfirmrolemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
       <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
         <div class="modal-header header-padding" id="logoutModal_header">
-          <h6 class="modal-title admin_title scan modal_header_title branch-skeleton pt-1" id="staticBackdropLabel">
-            Module Category : <span id="module_update_modal_heading"></span>
+          <h6 class="modal-title admin_title scan modal_header_title pt-1" id="staticBackdropLabel">
+            Role-Name : <span id="update_role_name_modal_heading"></span>
           </h6>
-          <button type="button" class="btn-close btn-btn-sm modal_header_cancel branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
+          <button type="button" class="btn-close btn-btn-sm modal_header_cancel" data-bs-dismiss="modal" aria-label="Close" 
             data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
           </button>
           </div>
           <div class="modal-body" id="SM_Modal_body">
-            <p class="modal_paragraph branch-skeleton" style="text-align:center;" id="text_message">
-              <label class="label_user_edit" id="cate_confirm_update" for="id">Would you like to update module category (<span id="module_catg_update_modal"></span>), confirm or cancel ? </label>
+            <p class="modal_paragraph" style="text-align:center;" id="text_message">
+              <label class="label_user_edit" id="cate_confirm_update" for="id">Would you like to update role name (<span id="role_name_update_modal"></span>), confirm or cancel ? </label>
             </p>
             <span id="updateForm_error"></span>
           </div>
           <div class="modal-footer action_group footer-padding" id="logoutModal_footer">
-            <button type="button" class="module-sm-cancel-btn delete_cancel branch-skeleton" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
-            <button id="update_btn_confirm" class="module-sm-btn update_confirm branch-skeleton">
+            <button type="button" class="module-sm-cancel-btn delete_cancel" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+            <button id="update_btn_confirm" class="module-sm-btn update_confirm">
               <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               <span class="confirm-btn-text">Confirm</span>
             </button>
