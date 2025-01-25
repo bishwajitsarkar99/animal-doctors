@@ -296,7 +296,7 @@ class SuperAdminService
             // $start_day = now()->startOfDay();
             // $end_day = now()->endOfDay();
             // $query->whereBetween('created_at', [$start_day, $end_day]);
-            $query = Role::query()->latest()->limit(10);
+            $query = Role::query()->orderBy('id', 'desc')->latest()->limit(15);
         }
 
         $data = $query->get();

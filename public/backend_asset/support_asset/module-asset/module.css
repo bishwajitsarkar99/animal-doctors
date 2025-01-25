@@ -298,7 +298,7 @@ tr.table-row:hover td#table_edit_btn::after,tr.table-row.user-table-row.active-r
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     position: absolute;
-    right: 10px;
+    right: 30px;
     top: 50%;
     transform: translateY(-50%);
     color: #555;
@@ -329,8 +329,8 @@ tr.table-row:hover td#role_create_btn::after,tr.table-row.user-table-row.active-
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     position: absolute;
-    right: 10px;
-    top: 50%;
+    right: 30px;
+    top: 55%;
     transform: translateY(-50%);
     color: forestgreen;
     text-align: center;
@@ -353,6 +353,7 @@ button.role_create_button {
     transition: border-color 0.3s ease, background-color 0.3s ease;
     border: none;
     outline: none;
+    margin-bottom: 1px;
 }
 button.role_create_button:hover{
     background-color: #1775daee;
@@ -376,12 +377,41 @@ button.role_delete_button {
     transition: border-color 0.3s ease, background-color 0.3s ease;
     border: none;
     outline: none;
+    margin-bottom: 1px;
 }
 button.role_delete_button:hover{
     background-color: #d42c16;
     color: white;
     border: none;
     outline: none;
+}
+.btn:disabled, .btn.disabled, fieldset:disabled .btn {
+    pointer-events: none;
+    border-color: var(--bs-btn-disabled-border-color);
+    opacity: 0.65;
+    background-color: #74aeed;
+    color: white;
+    margin-bottom: 1px;
+}
+/* .focused-button {
+    outline: 2px solid #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+} */
+.focused-button {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5) !important;
+    border-radius: 3px !important;
+    background: linear-gradient(5deg, forestgreen, forestgreen) !important;
+    color: white !important;
+}
+button#actionCancel:hover{
+    background-color: #df250d;
+    color: white;
+}
+i.can-icon{
+    color: orangered;
+}
+i.can-icon:hover{
+    color: white;
 }
 div#roleActionBox{
     width: 100%;

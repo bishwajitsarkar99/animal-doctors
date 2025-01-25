@@ -9,20 +9,6 @@
           @csrf
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input type="hidden" name="role_id" id="roleId">
-          <!-- <thead class="module-category-table-head-one" id="module_catg_thead_one">
-            <tr class="module-category-table-head-row" id="module_catg_row">
-              <th class="module-category-table-head-th-label" id="thCatgName">Role-Name :</th>
-              <th class="module-category-table-head-th-input" colspan="3" id="thCateg">
-                <input class="module-category-input edit-module-category-input" type="text" name="name" value="" placeholder="Role Name" autocomplete="off" id="moduleRoleName">
-              </th>
-              <th  class="module-category-table-head-th-action action_th" colspan="3" id="thAction" hidden>
-                <button class="module-sm-btn" id="catgCreateBtn" hidden>Create</button>
-                <button class="module-sm-btn" id="catgUpdateBtn" hidden>Update</button>
-                <button class="module-sm-delete-btn" id="catgDeleteBtn" hidden>Delete</button>
-                <button class="module-sm-cancel-btn" id="catgCancelBtn" hidden>Cancel</button>
-              </th>
-            </tr>
-          </thead> -->
           <thead class="module-category-table-head-two">
             <tr class="module-category-table-head-row-two" id="module_catg_row_two">
               <th class="module-category-table-head-th-search-label" id="module_searchBar">Search-Bar :</th>
@@ -36,7 +22,7 @@
           <table class="module-category-table" id="module_catg">
             <thead class="module-category-table-head-two">
               <tr class="table-heading-row" id="role_row">
-                <th class="" id="table_head_sn">SN.</th>
+                <th class="" id="table_head_sn">ID-NO.</th>
                 <th class="" id="row_role_name">Role-Name</th>
                 <th class="" id="row_role_condition">Role-Condition</span></th>
                 <th class="" id="row_role_status">Status</th>
@@ -70,29 +56,30 @@
         <div class="modal-body" id="processModal_body">
           <div class="role_create_form" id="roleActionBox">
             @csrf
+            <input type="hidden" id="table_row_id">
             <li class="act_box ps-1">
-              <button type="button" class="btn btn-sm role_create_button" id="createBtn" hidden>
+              <button type="button" class="btn btn-sm role_create_button btn_key" id="createBtn" hidden>
                 <span class="create-btn-text">Save</span>
                 <span class="create-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               </button>
-              <button type="button" class="btn btn-sm role_create_button" id="updateBtn" hidden>
+              <button type="button" class="btn btn-sm role_create_button btn_key" id="updateBtn" hidden>
                 <span class="update-btn-text">Update</span>
                 <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               </button>
-              <button type="button" class="btn btn-sm role_create_button" id="promotBtn" hidden>
+              <button type="button" class="btn btn-sm role_create_button btn_key" id="promotBtn" hidden>
                 <span class="promotion-btn-text">Promot</span>
                 <span class="promotion-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               </button>
-              <button type="button" class="btn btn-sm role_create_button" id="nonPromotBtn" hidden>
+              <button type="button" class="btn btn-sm role_create_button btn_key" id="nonPromotBtn" hidden>
                 <span class="non-promotion-btn-text">Non-Promot</span>
                 <span class="non-promotion-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               </button>
-              <button type="button" class="btn btn-sm role_delete_button" id="roleDeleteBtn" hidden>
+              <button type="button" class="btn btn-sm role_delete_button btn_key" id="roleDeleteBtn" hidden>
                 <span class="delete-btn-text">Delete</span>
                 <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               </button>
               <button type="button" class="btn-sm edit_registration cancel_button cgr_btn edit_btn ms-2" id="actionCancel" data-bs-dismiss="modal" style="font-size: 15px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
-              <i class="fa-solid fa-xmark" style="color:orangered"></i>
+                <i class="fa-solid fa-xmark can-icon"></i>
               </button>
             </li>
           </div>

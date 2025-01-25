@@ -64,11 +64,13 @@
                 }
                 return `
                     <tr class="table-row user-table-row data-table-row" id="row_id" value="${key}" tabindex="0">
-                        <td class="sn td_border id-font" id="table_edit_btn" value="${idLink}" tabindex="0" ${disabledLabel}>${row.id}</td>
+                        <td class="sn td_border id-font" id="table_edit_btn" value="${idLink}" data-id="${row.id}" tabindex="0" ${disabledLabel}>${row.id}</td>
                         <td class="td_border font padding" contenteditable="true" tabindex="0">
                             <span class="role-name">${row.name}</span>
                         </td>
-                        <td class="td_border font padding" tabindex="0">${row.role_condition}</td>
+                        <td class="td_border font padding" tabindex="0">
+                            <span class="condition">${row.role_condition}</span>
+                        </td>
                         <td class="td_border font padding ${textColor}" tabindex="0">
                             <span class="promt">${statusText}</span>
                             <span class="permission-plate ps-1 pe-1 ms-1 ${statusBg} ${statusClass}">${statusSinge}</span>
@@ -385,9 +387,12 @@
             if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
                 $('#savForm_error').html("");
                 const currentCell = $(this);
-                const cellDataId = currentCell.data('id');
+                const cellDataId = currentCell.attr('data-id');
                 const currentRow = currentCell.closest('tr');
                 const promotionText = currentRow.find('.promt').text().trim().toLowerCase();
+                const conditionText = currentRow.find('.condition').text().trim().toLowerCase();
+                // Set the hidden input field value
+                $("#table_row_id").val(cellDataId);
                 // Show the modal
                 $("#action_box").modal('show');
                 // Store the currently highlighted row for later use
@@ -395,8 +400,19 @@
                 activeRow.addClass("temp-highlight"); // Temporarily mark the active row
                 $("#updateBtn").removeAttr('hidden');
                 $("#roleDeleteBtn").removeAttr('hidden');
-                
-                 // Update buttons based on promotion text
+                // button disabled based on condition
+                if(conditionText === 'static'){
+                    $("#updateBtn").attr('disabled', true);
+                    $("#roleDeleteBtn").attr('disabled', true);
+                    $("#nonPromotBtn").attr('disabled', true);
+                    $("#promotBtn").attr('disabled', true);
+                }else if(conditionText === 'non-static'){
+                    $("#updateBtn").removeAttr('disabled');
+                    $("#roleDeleteBtn").removeAttr('disabled');
+                    $("#nonPromotBtn").removeAttr('disabled');
+                    $("#promotBtn").removeAttr('disabled');
+                }
+                // Update buttons based on promotion text
                 if (promotionText === 'promoted') {
                     $("#nonPromotBtn").removeAttr('hidden');
                     $("#promotBtn").attr('hidden', true);
@@ -427,53 +443,142 @@
         });
 
         // Update Role Name Modal Show
-        $(document).on('click', '#updateBtn', function(e){
-            e.preventDefault();
-            $("#action_box").modal('hide');
-            $("#updateconfirmrolemodal").modal('show');
-            $('#updateForm_error').html("");
-            const currentCell = $("#table_edit_btn");
-            const cellDataId = currentCell.data('id');
-            const currentRow = currentCell.closest('tr');
-            const input_val = currentRow.find('.role-name').text().trim().toLowerCase();
-            console.log(input_val);
-            
-            if(input_val !== ''){
-                const role_input_val = input_val;
-                $("#update_role_name_modal_heading").append(`<span>${role_input_val}</span>`); 
-                $("#role_name_update_modal").append(`<span>${role_input_val}</span>`); 
-            }else if(input_val == ''){
-                const role_input_val = input_val;
-                $("#update_role_name_modal_heading").append(`<span class="text-danger">{...}</span>`); 
-                $("#role_name_update_modal").append(`<span class="text-danger">...</span>`); 
-            }
-            var time = null;
-            addAttributeOrClass([
-                { selector: '.modal_header_title, .modal_header_cancel, .modal_paragraph', type: 'class', name: 'branch-skeleton' },
-                { selector: '#update_btn_confirm, #cate_delete5', type: 'class', name: 'branch-skeleton' },
-            ]);
-            var time = setTimeout(() => {
-                // Remove skeleton classes
-                removeAttributeOrClass([
+        $(document).on('click keydown', '#updateBtn', function (event) {
+            event.preventDefault();
+            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                $('#updateForm_error').html("");
+                $("#update_role_name_modal_heading").html("");
+                $("#role_name_update_modal").html("");
+                const id = $("#table_row_id").val();
+                $("#action_box").modal('hide');
+                $("#updateconfirmrolemodal").modal('show');
+                const currentCell = $(`#table_edit_btn[data-id="${id}"]`);
+                const currentRow = currentCell.closest('tr');
+                const roleName = currentRow.find('.role-name').text().trim();
+
+                if (roleName !== '') {
+                    $("#update_role_name_modal_heading").text(roleName);
+                    $("#role_name_update_modal").text(roleName);
+                } else {
+                    $("#update_role_name_modal_heading").html('<span class="text-danger">No role name found</span>');
+                    $("#role_name_update_modal").html('<span class="text-danger">No role name found</span>');
+                }
+
+                // Skeleton loader logic
+                addAttributeOrClass([
                     { selector: '.modal_header_title, .modal_header_cancel, .modal_paragraph', type: 'class', name: 'branch-skeleton' },
                     { selector: '#update_btn_confirm, #cate_delete5', type: 'class', name: 'branch-skeleton' },
                 ]);
-            }, 1000);
 
-            return () => {
-                clearTimeout(time);
-            };
+                setTimeout(() => {
+                    removeAttributeOrClass([
+                        { selector: '.modal_header_title, .modal_header_cancel, .modal_paragraph', type: 'class', name: 'branch-skeleton' },
+                        { selector: '#update_btn_confirm, #cate_delete5', type: 'class', name: 'branch-skeleton' },
+                    ]);
+                }, 1000);
+            }
         });
+
+        // Array of button IDs in navigation order
+        const buttonIds = ['createBtn', 'updateBtn', 'promotBtn', 'nonPromotBtn', 'roleDeleteBtn', 'actionCancel'];
+        let focusedButtonIndex = -1;
+
+        // Add keydown event for modal action box
+        $(document).on('keydown', function (e) {
+            // Check if modal is visible
+            if (!$("#action_box").is(':visible')) return;
+            
+            switch (e.key) {
+                case 'ArrowLeft': // Navigate left
+                    focusedButtonIndex = (focusedButtonIndex <= 0) ? buttonIds.length - 1 : focusedButtonIndex - 1;
+                    focusButton(focusedButtonIndex);
+                    break;
+
+                case 'ArrowRight': // Navigate right
+                    focusedButtonIndex = (focusedButtonIndex >= buttonIds.length - 1) ? 0 : focusedButtonIndex + 1;
+                    focusButton(focusedButtonIndex);
+                    break;
+
+                case 'Enter': // Trigger the currently focused button
+                    if (focusedButtonIndex >= 0) {
+                        $(`#${buttonIds[focusedButtonIndex]}`).trigger('click');
+                    }
+                    break;
+
+                case 'Escape': // Close modal
+                    $("#action_box").modal('hide');
+                    break;
+
+                default:
+                    break;
+            }
+        });
+
+        // Add keyup event for logging or additional logic
+        $(document).on('keyup', function (e) {
+            if ($("#action_box").is(':visible')) {
+                console.log(`Key released: ${e.key}`);
+            }
+        });
+
+        // Focus management function
+        function focusButton(index) {
+            // Remove focus from all buttons
+            $(".btn_key, .cancel_button").removeClass("focused-button").attr('tabindex', -1).prop('disabled', false);
+
+            // Add focus to the selected button
+            const buttonId = buttonIds[index];
+            const $button = $(`#${buttonId}`);
+
+            // Get data from the table's current cell
+            const currentCell = $(`#table_edit_btn[data-id="${$("#table_row_id").val()}"]`);
+            const currentRow = currentCell.closest('tr');
+            const cellDataId = currentCell.attr('data-id');
+            const promotionText = currentRow.find('.promt').text().trim().toLowerCase();
+            const conditionText = currentRow.find('.condition').text().trim().toLowerCase();
+
+            // Update the hidden input field value
+            $("#table_row_id").val(cellDataId);
+
+            // Update modal preview data
+            const roleName = currentRow.find('.role-name').text().trim();
+            $("#update_role_name_modal_heading").text(roleName || 'N/A');
+            $("#role_name_update_modal").text(roleName || 'N/A');
+
+            // Determine if the button should be enabled or disabled
+            if (conditionText === 'static') {
+                // Disable the button if the condition is "static"
+                $button.addClass("focused-button disabled").attr('tabindex', 0).focus();
+                $button.prop('disabled', true);
+            } else if (conditionText === 'non-static') {
+                // Enable the button if condition is "non-static"
+                $button.addClass("focused-button").removeClass('disabled').removeAttr('disabled').attr('tabindex', 0).focus();
+                $button.prop('disabled', false);
+            } else {
+                // Disable the button for any other case
+                $button.removeClass("focused-button").addClass('disabled').attr('tabindex', -1).prop('disabled', true);
+            }
+        }
 
         // update modal cancel
         $(document).on('click keydown', '#cate_delete5, .modal_header_cancel', function(e){
             e.preventDefault();
             $("#action_box").modal('show');
             $("#updateconfirmrolemodal").modal('hide');
+
+            const id = $("#table_row_id").val();
+            const currentRow = $(`#table_edit_btn[value="${id}"]`).closest('tr');
+            const promotionText = currentRow.find('.promt').text().trim().toLowerCase();
+            
             $("#updateBtn").removeAttr('hidden');
-            $("#promotBtn").removeAttr('hidden');
-            $("#nonPromotBtn").removeAttr('hidden');
             $("#roleDeleteBtn").removeAttr('hidden');
+            if (promotionText === 'promoted') {
+                $("#nonPromotBtn").removeAttr('hidden');
+                $("#promotBtn").attr('hidden', true);
+            } else if (promotionText === 'non-promot') {
+                $("#promotBtn").removeAttr('hidden');
+                $("#nonPromotBtn").attr('hidden', true);
+            }
         });
 
         // Confirm Update Module Category
