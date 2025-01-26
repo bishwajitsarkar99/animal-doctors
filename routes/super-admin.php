@@ -24,7 +24,6 @@ Route::group(['middleware' => 'auth'], function (){
         Route::post('/role-create', [SuperAdminController::class, 'roleCreate'])->name('role_create.action');
         Route::get('/role-get', [SuperAdminController::class, 'roleGet'])->name('role_get.action');
         Route::get('/role-search', [SuperAdminController::class, 'roleSearch'])->name('role_search.action');
-        Route::get('/role-edit/{id}', [SuperAdminController::class, 'roleEdit'])->name('role_edit.action');
         Route::put('/role-update/{id}', [SuperAdminController::class, 'roleUpdate'])->name('role_update.action');
         Route::delete('/role-delete/{id}', [SuperAdminController::class, 'roleDelete'])->name('role_delete.action');
         Route::post('/role-promot', [SuperAdminController::class, 'rolePromotIndex'])->name('role_promot.action');

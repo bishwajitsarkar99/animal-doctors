@@ -91,12 +91,6 @@ class SuperAdminController extends Controller
         return $this->superAdminService->rolesGet($request);
     }
 
-    // Role Edit-----------
-    public function roleEdit($id)
-    {
-        return $this->superAdminService->rolesEdit($id);
-    }
-
     // Role Update-----------
     public function roleUpdate(Request $request, $id)
     {

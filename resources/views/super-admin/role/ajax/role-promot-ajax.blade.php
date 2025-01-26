@@ -16,6 +16,7 @@
         buttonLoader('#promotBtn', '.promotion-icon', '.promotion-btn-text', 'Promot', 'Promot', 1000);
         buttonLoader('#nonPromotBtn', '.non-promotion-icon', '.non-promotion-btn-text', 'Non-Promot', 'Non-Promot', 1000);
         buttonLoader('#roleDeleteBtn', '.delete-icon', '.delete-btn-text', 'Delete', 'Delete', 1000);
+        buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm', 'Confirm', 1000);
         fetch_roles();
         // Data View Table--------------
         const table_rows = (rows) => {
@@ -581,38 +582,105 @@
             }
         });
 
+        // Confirm Update Modal keydown event
+        const buttonConfirmIds = ['update_btn_confirm', 'cate_delete5']; // Array of button IDs
+        let focusingButtonIndex = -1;
+
+        // Keydown event for navigating and triggering buttons in the modal
+        $(document).on('keydown', function (e) {
+            // Check if modal is visible
+            if (!$("#updateconfirmrolemodal").is(':visible')) return;
+
+            switch (e.key) {
+                case 'ArrowLeft': // Navigate left
+                    focusingButtonIndex = (focusingButtonIndex <= 0) ? buttonConfirmIds.length - 1 : focusingButtonIndex - 1;
+                    focusingButton(focusingButtonIndex);
+                    break;
+
+                case 'ArrowRight': // Navigate right
+                    focusingButtonIndex = (focusingButtonIndex >= buttonConfirmIds.length - 1) ? 0 : focusingButtonIndex + 1;
+                    focusingButton(focusingButtonIndex);
+                    break;
+
+                case 'Enter': // Trigger the currently focused button
+                    if (focusingButtonIndex >= 0) {
+                        $(`#${buttonConfirmIds[focusingButtonIndex]}`).trigger('click');
+                    }
+                    break;
+
+                case 'Escape': // Close modal
+                    $("#updateconfirmrolemodal").modal('hide');
+                    break;
+
+                default:
+                    break;
+            }
+        });
+
+        // Add keyup event for logging or additional logic
+        $(document).on('keyup', function (e) {
+            if ($("#updateconfirmrolemodal").is(':visible')) {
+                console.log(`Key released: ${e.key}`);
+            }
+        });
+
+        // Focus management function
+        function focusingButton(index) {
+            // Remove focus from all buttons
+            $(".btn_key, .delete_cancel").removeClass("focused-button").attr('tabindex', -1).prop('disabled', false);
+
+            // Get the button ID based on the index
+            const buttonId = buttonConfirmIds[index];
+            const $button = $(`#${buttonId}`);
+
+            // Add focus and check conditions
+            if ($button.length) {
+                const roleName = $("#update_role_name_modal_heading").text().trim();
+                const conditionText = $button.data('condition') || 'non-static'; // Example condition (modify as needed)
+
+                if (conditionText === 'static') {
+                    // Disable the button if the condition is "static"
+                    $button.addClass("focused-button disabled").attr('tabindex', 0).focus().prop('disabled', true);
+                } else {
+                    // Enable the button for any other condition
+                    $button.addClass("focused-button").removeClass('disabled').attr('tabindex', 0).focus().prop('disabled', false);
+                }
+            }
+        }
+
         // Confirm Update Module Category
         $(document).on('click', '#update_btn_confirm', function(e){
             e.preventDefault();
-            var id = $("#moduleCategoryId").val();
-            var moduleCategoryName = $(".edit-module-category-input").val();
-            
-            var data = {
-                id : id,
-                module_category_name : moduleCategoryName,
+            let id = $("#table_row_id").val();
+            let roleName = $("#update_role_name_modal_heading").text().trim();
+
+            let data = {
+                id: id,
+                name: roleName,
                 _token: $('meta[name="csrf-token"]').attr('content')
-            }
+            };
 
             $.ajax({
                 type: "PUT",
-                url: "/application/module-category-update/" +id,
+                url: "/super-admin/role-update/" +id,
                 data: data,
                 dataType: "json",
-                success: function(response){
-                    if(response.status === 400){
-                        $.each(response.errors, function(key, err_value){
-                            if (key === 'module_category_name') {
-                                $("#updateForm_error").fadeIn();
-                                $('#updateForm_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
-                                $("#updateForm_error").addClass("alert_show_errors");
-                                $('#moduleCategoryName').addClass('is-invalid');
-                                $('#moduleCategoryName').html("");
-                            }
+                success: function (response) {
+                    if (response.status === 400) {
+                        // Handle validation errors
+                        $("#updateForm_error").fadeIn().html('');
+                        $.each(response.errors, function (key, err_value) {
+                            $("#updateForm_error").append(
+                                `<span class="errors_val">Error : ${err_value}</span><br>`
+                            );
+                            // if (key === 'name') {
+                            //     $('.role-name').addClass('is-invalid');
+                            // }
                         });
-                    }else if(response.status === 200){
-
+                    } else if (response.status === 200) {
+                        // Successful update
                         $("#accessconfirmbranch").modal('show');
-                        $("#updateconfirmmodule").modal('hide');
+                        $("#updateconfirmrolemodal").modal('hide');
                         $("#pageLoader").removeAttr('hidden');
                         $("#access_modal_box").addClass('loader_area');
                         $("#processModal_body").removeClass('loading_body_area');
@@ -625,23 +693,24 @@
                             
                             $('#updateForm_error').html("");
                             $('#success_message').html("");
-                            $('#success_message').addClass('alert_show font_size ps-1 pe-1 ms-5');
+                            $('#success_message').addClass('alert_show font_size ps-1 pe-1');
                             $('#success_message').fadeIn();
                             $('#success_message').text(response.messages);
-                            
-                            $('.edit-module-category-input').val("");
-                            $("#thAction").attr('hidden', true);
-                            $("#catgCreateBtn").attr('hidden', true);
-                            $("#catgCancelBtn").attr('hidden', true);
-                            $("#catgUpdateBtn").attr('hidden', true);
-                            $("#catgDeleteBtn").attr('hidden', true);
                             
                             setTimeout(() => {
                                 $('#success_message').fadeOut(3000);
                             }, 3000);
-                            fetch_category_module();
+                            fetch_roles();
                         }, 1500);
+
+                        fetch_roles();
                     }
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX Error:", error);
+                    $("#updateForm_error")
+                        .fadeIn()
+                        .html('<span class="error_val" style="font-size:10px;font-weight:700;">Error-Message: Something went wrong!</span>');
                 }
             });
             

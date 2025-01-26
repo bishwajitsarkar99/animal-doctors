@@ -292,10 +292,6 @@ class SuperAdminService
             $query->where('name', 'LIKE', '%' . $searchQuery . '%')
             ->orWhere('role_condition', 'LIKE', $searchQuery . '%');
         } else {
-            // Filter by today's date if no search query is provided
-            // $start_day = now()->startOfDay();
-            // $end_day = now()->endOfDay();
-            // $query->whereBetween('created_at', [$start_day, $end_day]);
             $query = Role::query()->orderBy('id', 'desc')->latest()->limit(15);
         }
 
@@ -343,6 +339,48 @@ class SuperAdminService
             return response()->json([
                 'status' => 200,
                 'messages' => 'The role name has created successfully.'
+            ]);
+        }
+    }
+    /**
+     * Handle role promot update event.
+    */
+    public function rolesUpdate(Request $request, $id)
+    {
+        try {
+            // Find the role by ID
+            $role = Role::findOrFail($id);
+    
+            // Validate the request
+            $validatedData = $request->validate([
+                'name' => 'required|string|unique:roles,name',
+            ], [
+                'name.required' => 'Role name is required.',
+                'name.unique' => 'This role has already been taken.',
+            ]);
+    
+            // Update the role name
+            $role->name = $validatedData['name'];
+            $role->save();
+    
+            // Success response
+            return response()->json([
+                'status' => 200,
+                'messages' => 'The role name has been updated successfully.',
+            ]);
+    
+        }  catch (\Illuminate\Validation\ValidationException $e) {
+            // Handle validation errors
+            return response()->json([
+                'status' => 400,
+                'errors' => $e->errors(),
+            ]);
+        } catch (\Exception $e) {
+            // Log other exceptions for debugging
+            \Log::error('Role update error: ' . $e->getMessage());
+            return response()->json([
+                'status' => 500,
+                'messages' => 'An unexpected error occurred. Please try again later.',
             ]);
         }
     }

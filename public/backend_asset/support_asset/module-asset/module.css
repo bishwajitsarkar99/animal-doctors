@@ -413,6 +413,11 @@ i.can-icon{
 i.can-icon:hover{
     color: white;
 }
+span.errors_val {
+    font-size: 11px;
+    font-weight: 700;
+    color: orangered;
+}
 div#roleActionBox{
     width: 100%;
     display: flex;

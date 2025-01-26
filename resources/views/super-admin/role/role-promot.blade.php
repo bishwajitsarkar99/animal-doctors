@@ -44,7 +44,7 @@
         </table>
       </div>
     </div>
-    <div class="col-xl-12 action_message">
+    <div class="col-xl-12 action_message mb-5">
       <p class="ps-1"><span id="success_message"></span></p>
     </div>
   </div>
