@@ -103,6 +103,12 @@ class SuperAdminController extends Controller
         return $this->superAdminService->rolesDelete($id);
     }
 
+    // Role Promot 
+    public function rolePromotIndex(Request $request)
+    {
+        return $this->superAdminService->rolesPromotIndex($request);
+    }
+
     // Role Permission-----------
     public function rolePermission(Request $request)
     {

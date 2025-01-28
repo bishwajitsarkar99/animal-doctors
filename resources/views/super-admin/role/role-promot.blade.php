@@ -66,14 +66,11 @@
                 <span class="update-btn-text">Update</span>
                 <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               </button>
-              <button type="button" class="btn btn-sm role_create_button btn_key" id="promotBtn" hidden>
-                <span class="promotion-btn-text">Promot</span>
-                <span class="promotion-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-              </button>
-              <button type="button" class="btn btn-sm role_create_button btn_key" id="nonPromotBtn" hidden>
-                <span class="non-promotion-btn-text">Non-Promot</span>
-                <span class="non-promotion-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-              </button>
+              <span id="promotLabel" hidden>
+                <span class="btn-label-text" id="promoted_label" hidden>Promoted :</span> 
+                <span class="btn-label-text" id="none_promoted_label" hidden>None-Promoted :</span> 
+                <input type="checkbox" class="form-switch form-check-input check_permission" value="" id="promotPermission" hidden>
+              </span>
               <button type="button" class="btn btn-sm role_delete_button btn_key" id="roleDeleteBtn" hidden>
                 <span class="delete-btn-text">Delete</span>
                 <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
@@ -89,36 +86,6 @@
     </div>
   </div>
   {{-- End Action Box Modal--}}
-  {{-- start confirm create modal --}}
-  <div class="modal fade" id="createconfirmmodulecategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-      <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
-        <div class="modal-header header-padding" id="logoutModal_header">
-          <h6 class="modal-title admin_title scan create_title branch-skeleton pt-1" id="staticBackdropLabel">
-            Module Category : <span id="module_create_modal_heading"></span>
-          </h6>
-          <button type="button" class="btn-close btn-btn-sm head_btn_create_close head_btn3 branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
-            data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
-          </button>
-          </div>
-          <div class="modal-body" id="SM_Modal_body">
-            <p class="module_category_create_paragraph branch-skeleton" style="text-align:center;" id="access_text_message">
-              <label class="label_user_edit" id="cate_confirm_update" for="id">Would you like to create module category (<span id="module_catg_create_modal"></span>), confirm or cancel ? </label>
-            </p>
-            <span id="savForm_error"></span>
-          </div>
-          <div class="modal-footer action_group footer-padding" id="logoutModal_footer">
-            <button type="button" class="module-sm-cancel-btn branch-skeleton" id="create_cancel" data-bs-dismiss="modal">Cancel</button>
-            <button id="create_btn_confirm" class="module-sm-btn branch-skeleton">
-              <span class="create-confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-              <span class="create-confirm-btn-text">Confirm</span>
-            </button>
-          </div>    
-        </div>
-      </div>
-    </div>
-  </div>
-  {{-- end confirm create modal --}}
 
   {{-- start confirm update modal --}}
   <div class="modal fade" id="updateconfirmrolemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -152,25 +119,26 @@
   {{-- end confirm update modal --}}
 
   {{-- start delete confirm modal --}}
-  <div class="modal fade" id="deleteconfirmmodulecategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="deleteconfirmrole" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
       <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
         <div class="modal-header header-padding" id="logoutModal_header">
-          <h6 class="modal-title module_category_delete_title scan confirm_title branch-skeleton pt-1" id="staticBackdropLabel">
-            Module Category : <span id="module_delete_modal_heading"></span>
+          <h6 class="modal-title role_delete_title scan confirm_title pt-1" id="staticBackdropLabel">
+            Role-Name : <span id="delete_role_name_modal_heading"></span>
           </h6>
-          <button type="button" class="btn-close btn-btn-sm modal_delete_header_cancel branch-skeleton delete_confrm_canl" data-bs-dismiss="modal" aria-label="Close" 
+          <button type="button" class="btn-close btn-btn-sm modal_delete_header_cancel delete_confrm_canl" data-bs-dismiss="modal" aria-label="Close" 
             data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
           </button>
           </div>
           <div class="modal-body" id="SM_Modal_body">
-            <p class="module_category_delete_paragraph branch-skeleton" style="text-align:center;" id="delete_text_message">
-              <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, module category (<span id="module_catg_delete_modal"></span>) delete or cancel ? </label>
+            <p class="role_delete_paragraph" style="text-align:center;" id="delete_text_message">
+              <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, role name (<span id="role_name_delete_modal"></span>) delete or cancel ? </label>
             </p>
+            <span id="deleteForm_error"></span>
           </div>
           <div class="modal-footer action_group footer-padding" id="logoutModal_footer">
-            <button type="button" class="module-sm-cancel-btn branch-skeleton" id="cate_delete3" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="module-sm-btn branch-skeleton delete_module_category" id="delete_module_category">
+            <button type="button" class="module-sm-cancel-btn btn_cancel" id="cate_delete3" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="role-delete-sm-btn delete_role_name btn_delt" id="delete_role_name">
               <span class="delete-confrm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               <span class="delete-confrm-btn-text">Delete</span>
             </button>

@@ -13,8 +13,6 @@
         // Initialize the button loader for the login button
         buttonLoader('#createBtn', '.create-icon', '.create-btn-text', 'Save', 'Save', 1000);
         buttonLoader('#updateBtn', '.update-icon', '.update-btn-text', 'Update', 'Update', 1000);
-        buttonLoader('#promotBtn', '.promotion-icon', '.promotion-btn-text', 'Promot', 'Promot', 1000);
-        buttonLoader('#nonPromotBtn', '.non-promotion-icon', '.non-promotion-btn-text', 'Non-Promot', 'Non-Promot', 1000);
         buttonLoader('#roleDeleteBtn', '.delete-icon', '.delete-btn-text', 'Delete', 'Delete', 1000);
         buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm', 'Confirm', 1000);
         fetch_roles();
@@ -217,6 +215,7 @@
                 const activeRow = $(".data-table-row.hightlight-row");
                 activeRow.addClass("temp-highlight"); // Temporarily mark the active row
                 $("#createBtn").removeAttr('hidden');
+                $("#promotPermission").attr('hidden', true);
 
                 // When modal is closed
                 $("#action_box").on('hidden.bs.modal', function () {
@@ -224,6 +223,7 @@
                     const tempRow = $(".data-table-row.temp-highlight");
                     tempRow.removeClass("temp-highlight").focus().addClass("hightlight-row");
                     $("#createBtn").attr('hidden', true);
+                    $("#promotPermission").removeAttr('hidden');
                 });
                 addAttributeOrClass([
                     { selector: '#access_modal_box', type: 'class', name: 'action-box-skeleton' },
@@ -401,25 +401,26 @@
                 activeRow.addClass("temp-highlight"); // Temporarily mark the active row
                 $("#updateBtn").removeAttr('hidden');
                 $("#roleDeleteBtn").removeAttr('hidden');
+                $("#promotPermission").removeAttr('hidden');
                 // button disabled based on condition
                 if(conditionText === 'static'){
                     $("#updateBtn").attr('disabled', true);
                     $("#roleDeleteBtn").attr('disabled', true);
-                    $("#nonPromotBtn").attr('disabled', true);
-                    $("#promotBtn").attr('disabled', true);
+                    $("#promotPermission").attr('disabled', true);
                 }else if(conditionText === 'non-static'){
                     $("#updateBtn").removeAttr('disabled');
                     $("#roleDeleteBtn").removeAttr('disabled');
-                    $("#nonPromotBtn").removeAttr('disabled');
-                    $("#promotBtn").removeAttr('disabled');
+                    $("#promotPermission").removeAttr('disabled');
                 }
                 // Update buttons based on promotion text
                 if (promotionText === 'promoted') {
-                    $("#nonPromotBtn").removeAttr('hidden');
-                    $("#promotBtn").attr('hidden', true);
+                    $("#none_promoted_label").attr('hidden', true);
+                    $("#promoted_label").removeAttr('hidden');
+                    $("#promotLabel").removeAttr('hidden');
                 } else if (promotionText === 'non-promot') {
-                    $("#nonPromotBtn").attr('hidden', true);
-                    $("#promotBtn").removeAttr('hidden');
+                    $("#none_promoted_label").removeAttr('hidden');
+                    $("#promoted_label").attr('hidden', true);
+                    $("#promotLabel").removeAttr('hidden');
                 }
                 // When modal is closed
                 $("#action_box").on('hidden.bs.modal', function () {
@@ -428,8 +429,8 @@
                     tempRow.removeClass("temp-highlight").focus().addClass("hightlight-row");
                     $("#updateBtn").attr('hidden', true);
                     $("#roleDeleteBtn").attr('hidden', true);
-                    $("#promotBtn").attr('hidden', true);
-                    $("#nonPromotBtn").attr('hidden', true);
+                    $("#promoted_label").attr('hidden', true);
+                    $("#none_promoted_label").attr('hidden', true);
                 });
                 addAttributeOrClass([
                     { selector: '#access_modal_box', type: 'class', name: 'action-box-skeleton' },
@@ -481,7 +482,7 @@
         });
 
         // Array of button IDs in navigation order
-        const buttonIds = ['createBtn', 'updateBtn', 'promotBtn', 'nonPromotBtn', 'roleDeleteBtn', 'actionCancel'];
+        const buttonIds = ['createBtn', 'updateBtn', 'roleDeleteBtn', 'actionCancel'];
         let focusedButtonIndex = -1;
 
         // Add keydown event for modal action box
@@ -574,11 +575,11 @@
             $("#updateBtn").removeAttr('hidden');
             $("#roleDeleteBtn").removeAttr('hidden');
             if (promotionText === 'promoted') {
-                $("#nonPromotBtn").removeAttr('hidden');
-                $("#promotBtn").attr('hidden', true);
+                $("#promoted_label").removeAttr('hidden');
+                $("#none_promoted_label").attr('hidden', true);
             } else if (promotionText === 'non-promot') {
-                $("#promotBtn").removeAttr('hidden');
-                $("#nonPromotBtn").attr('hidden', true);
+                $("#none_promoted_label").removeAttr('hidden');
+                $("#promoted_label").attr('hidden', true);
             }
         });
 
@@ -648,7 +649,7 @@
             }
         }
 
-        // Confirm Update Module Category
+        // Confirm Update Role Name
         $(document).on('click', '#update_btn_confirm', function(e){
             e.preventDefault();
             let id = $("#table_row_id").val();
@@ -690,7 +691,6 @@
                             $("#pageLoader").attr('hidden', true);
                             $("#access_modal_box").removeClass('loader_area');
                             $("#processModal_body").addClass('loading_body_area');
-                            
                             $('#updateForm_error').html("");
                             $('#success_message').html("");
                             $('#success_message').addClass('alert_show font_size ps-1 pe-1');
@@ -702,8 +702,6 @@
                             }, 3000);
                             fetch_roles();
                         }, 1500);
-
-                        fetch_roles();
                     }
                 },
                 error: function (xhr, status, error) {
@@ -717,40 +715,134 @@
             
         });
 
-        // Delete Module Category Modal Show
-        $(document).on('click', '#catgDeleteBtn', function(e){
-            e.preventDefault();
-            $("#module_delete_modal_heading").html("");
-            $("#module_catg_delete_modal").html("");
-            $("#deleteconfirmmodulecategory").modal('show');
-            var time = null;
-            const input_val = $("#moduleCategoryName").val();
-            if(input_val !== ''){
-                const category_input_val = input_val;
-                $("#module_delete_modal_heading").append(`<span>${category_input_val}</span>`); 
-                $("#module_catg_delete_modal").append(`<span>${category_input_val}</span>`); 
-            }else if(input_val == ''){
-                const category_input_val = input_val;
-                $("#module_delete_modal_heading").append(`<span class="text-danger">{id missing}</span>`); 
-                $("#module_catg_delete_modal").append(`<span class="text-danger">...you change category name</span>`); 
-            }
-            var time = setTimeout(() => {
-                // Remove skeleton classes
-                removeAttributeOrClass([
-                    { selector: '.module_category_delete_title, .modal_delete_header_cancel, .module_category_delete_paragraph', type: 'class', name: 'branch-skeleton' },
-                    { selector: '#delete_module_category, #cate_delete3', type: 'class', name: 'branch-skeleton' },
-                ]);
-            }, 1000);
+        // Delete Modal Show
+        $(document).on('click keydown', '#roleDeleteBtn', function(event){
+            event.preventDefault();
+            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                $('#updateForm_error').html("");
+                $("#delete_role_name_modal_heading").html("");
+                $("#role_name_delete_modal").html("");
+                const id = $("#table_row_id").val();
+                $("#action_box").modal('hide');
+                $("#deleteconfirmrole").modal('show');
+                const currentCell = $(`#table_edit_btn[data-id="${id}"]`);
+                const currentRow = currentCell.closest('tr');
+                const roleName = currentRow.find('.role-name').text().trim();
 
-            return () => {
-                clearTimeout(time);
-            };
+                if (roleName !== '') {
+                    $("#delete_role_name_modal_heading").text(roleName);
+                    $("#role_name_delete_modal").text(roleName);
+                } else {
+                    $("#delete_role_name_modal_heading").html('<span class="text-danger">No role name found</span>');
+                    $("#role_name_delete_modal").html('<span class="text-danger">No role name found</span>');
+                }
+
+                // Skeleton loader logic
+                addAttributeOrClass([
+                    { selector: '.role_delete_title, .delete_confrm_canl, .role_delete_paragraph', type: 'class', name: 'branch-skeleton' },
+                    { selector: '#delete_role_name, #cate_delete3', type: 'class', name: 'branch-skeleton' },
+                ]);
+
+                setTimeout(() => {
+                    removeAttributeOrClass([
+                        { selector: '.role_delete_title, .delete_confrm_canl, .role_delete_paragraph', type: 'class', name: 'branch-skeleton' },
+                        { selector: '#delete_role_name, #cate_delete3', type: 'class', name: 'branch-skeleton' },
+                    ]);
+                }, 1000);
+            }
         });
 
-        // Confirm Delete Module Category
-        $(document).on('click', '#delete_module_category', function(e){
+        // Confirm Update Modal keydown event
+        const buttonDeleteIds = ['delete_role_name', 'cate_delete3']; // Array of button IDs
+        let focuDeleteButtonIndex = -1;
+
+        // Keydown event for navigating and triggering buttons in the modal
+        $(document).on('keydown', function (e) {
+            // Check if modal is visible
+            if (!$("#deleteconfirmrole").is(':visible')) return;
+
+            switch (e.key) {
+                case 'ArrowLeft': // Navigate left
+                    focuDeleteButtonIndex = (focuDeleteButtonIndex <= 0) ? buttonDeleteIds.length - 1 : focuDeleteButtonIndex - 1;
+                    focusDeleteButton(focuDeleteButtonIndex);
+                    break;
+
+                case 'ArrowRight': // Navigate right
+                    focuDeleteButtonIndex = (focuDeleteButtonIndex >= buttonDeleteIds.length - 1) ? 0 : focuDeleteButtonIndex + 1;
+                    focusDeleteButton(focuDeleteButtonIndex);
+                    break;
+
+                case 'Enter': // Trigger the currently focused button
+                    if (focuDeleteButtonIndex >= 0) {
+                        $(`#${buttonDeleteIds[focuDeleteButtonIndex]}`).trigger('click');
+                    }
+                    break;
+
+                case 'Escape': // Close modal
+                    $("#deleteconfirmrole").modal('hide');
+                    break;
+
+                default:
+                    break;
+            }
+        });
+
+        // Add keyup event for logging or additional logic
+        $(document).on('keyup', function (e) {
+            if ($("#deleteconfirmrole").is(':visible')) {
+                console.log(`Key released: ${e.key}`);
+            }
+        });
+
+        // Focus management function
+        function focusDeleteButton(index) {
+            // Remove focus from all buttons
+            $(".btn_delt, .btn_cancel").removeClass("focused-button").attr('tabindex', -1).prop('disabled', false);
+
+            // Get the button ID based on the index
+            const buttonId = buttonDeleteIds[index];
+            const $button = $(`#${buttonId}`);
+
+            // Add focus and check conditions
+            if ($button.length) {
+                const roleName = $("#delete_role_name_modal_heading").text().trim();
+                const conditionText = $button.data('condition') || 'non-static'; // Example condition (modify as needed)
+
+                if (conditionText === 'static') {
+                    // Disable the button if the condition is "static"
+                    $button.addClass("focused-button disabled").attr('tabindex', 0).focus().prop('disabled', true);
+                } else {
+                    // Enable the button for any other condition
+                    $button.addClass("focused-button").removeClass('disabled').attr('tabindex', 0).focus().prop('disabled', false);
+                }
+            }
+        }
+
+        // Delete Modal Cancel
+        $(document).on('click keydown', '#cate_delete3, .delete_confrm_canl', function(e){
             e.preventDefault();
-            var id = $("#moduleCategoryId").val();
+            $("#action_box").modal('show');
+            $("#deleteconfirmrole").modal('hide');
+
+            const id = $("#table_row_id").val();
+            const currentRow = $(`#table_edit_btn[value="${id}"]`).closest('tr');
+            const promotionText = currentRow.find('.promt').text().trim().toLowerCase();
+            
+            $("#updateBtn").removeAttr('hidden');
+            $("#roleDeleteBtn").removeAttr('hidden');
+            if (promotionText === 'promoted') {
+                $("#promoted_label").removeAttr('hidden');
+                $("#none_promoted_label").attr('hidden', true);
+            } else if (promotionText === 'non-promot') {
+                $("#none_promoted_label").removeAttr('hidden');
+                $("#promoted_label").attr('hidden', true);
+            }
+        });
+
+        // Confirm Delete Role Name
+        $(document).on('click', '#delete_role_name', function(e){
+            e.preventDefault();
+            var id = $("#table_row_id").val();
 
             $.ajaxSetup({
                 headers: {
@@ -760,12 +852,12 @@
 
             $.ajax({
                 type: "DELETE",
-                url: "/application/module-category-delete/" +id,
+                url: "/super-admin/role-delete/" +id,
                 dataType: "json",
                 success: function(response){
                     if(response.status === 200){
                         $("#accessconfirmbranch").modal('show');
-                        $("#deleteconfirmmodulecategory").modal('hide');
+                        $("#deleteconfirmrole").modal('hide');
                         $("#pageLoader").removeAttr('hidden');
                         $("#access_modal_box").addClass('loader_area');
                         $("#processModal_body").removeClass('loading_body_area');
@@ -778,22 +870,62 @@
                             
                             $('#updateForm_error').html("");
                             $('#success_message').html("");
-                            $('#success_message').addClass('alert_show font_size ps-1 pe-1 ms-5');
+                            $('#success_message').addClass('alert_show font_size ps-1 pe-1');
                             $('#success_message').fadeIn();
                             $('#success_message').text(response.messages);
-                            $("#moduleCategoryName").val("");
-                            $("#thAction").attr('hidden', true);
-                            $("#catgCreateBtn").attr('hidden', true);
-                            $("#catgCancelBtn").attr('hidden', true);
-                            $("#catgUpdateBtn").attr('hidden', true);
-                            $("#catgDeleteBtn").attr('hidden', true);
                             
                             setTimeout(() => {
                                 $('#success_message').fadeOut(3000);
                             }, 3000);
-                            fetch_category_module();
+                            fetch_roles();
                         }, 1500);
+                    }else if(response.status === 422){
+                        // Handle validation errors
+                        $("#deleteForm_error").fadeIn().html('');
+                        $.each(response.errors, function (key, err_value) {
+                            $("#deleteForm_error").append(
+                                `<span class="errors_val">Error : ${err_value}</span><br>`
+                            );
+                        });
                     }
+                }
+            });
+        });
+
+        // Role Promot Permission
+        $(document).on('click', '#promotPermission', function(e){
+            const current_url = "{{route('role_promot.action')}}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: current_url,
+                dataType: 'json',
+                data: {
+                    id: $(this).attr('user_id'),
+                    status: $(this).val(),
+                },
+                success: function({
+                    messages
+                }) {
+                    $("#accessconfirmbranch").modal('show');
+                    $("#processingProgress").removeAttr('hidden');
+                    $("#access_modal_box").addClass('progress_body');
+                    $("#processModal_body").addClass('loading_body_area');
+                    setTimeout(() => {
+                        $("#accessconfirmbranch").modal('hide');
+                        $("#processingProgress").attr('hidden', true);
+                        $("#access_modal_box").removeClass('progress_body');
+                        $("#processModal_body").removeClass('loading_body_area');
+                        $("#success_message").text(messages);
+                        $('#success_message').addClass('background_error');
+                        
+                    }, 1500);
                 }
             });
         });

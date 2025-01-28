@@ -385,6 +385,34 @@ class SuperAdminService
         }
     }
     /**
+     * Handle role promot delete event.
+    */
+    public function rolesDelete($id)
+    {
+        $role = Role::where('role_condition', 'non-static')->find($id);
+        if($role){
+            $role->delete();
+    
+            return response()->json([
+                'status' => 200,
+                'messages' => 'Role is deleted successfully',
+            ]);
+        }else{
+            return response()->json([
+                'status' => 422,
+                'errors' => 'This role is a static condition'
+            ]);
+        }
+    }
+    /**
+     * Handle role promot permission event.
+    */
+    public function rolesPromotIndex(Request $request)
+    {
+        //
+    }
+
+    /**
      * Handle role permission view event.
     */
     public function rolesPermission(Request $request)
