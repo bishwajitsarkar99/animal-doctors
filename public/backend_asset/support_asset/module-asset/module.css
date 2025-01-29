@@ -427,16 +427,35 @@ span.btn-label-text{
     outline: none;
     margin-bottom: 1px;
 }
+span.btn-label-text-orangered{
+    background-color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: orangered;
+    font-size: 13px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    border: none;
+    outline: none;
+    margin-bottom: 1px;
+}
 input#promotPermission{
     cursor: pointer;
     outline: none;
     box-shadow: none;
     margin-top: 0.4em;
 }
-/* .focused-button {
-    outline: 2px solid #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-} */
+input.form-switch.form-check-input {
+    box-shadow: none;
+    border: none;
+    outline: none;
+    /* background-color: #0d6efd; */
+    background-color: orangered;
+}
+input.form-switch.form-check-input:checked {
+    background-color: #08a05c;
+}
 .focused-button {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5) !important;
     border-radius: 3px !important;

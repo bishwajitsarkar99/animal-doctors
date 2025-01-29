@@ -68,8 +68,8 @@
               </button>
               <span id="promotLabel" hidden>
                 <span class="btn-label-text" id="promoted_label" hidden>Promoted :</span> 
-                <span class="btn-label-text" id="none_promoted_label" hidden>None-Promoted :</span> 
-                <input type="checkbox" class="form-switch form-check-input check_permission" value="" id="promotPermission" hidden>
+                <span class="btn-label-text-orangered" id="none_promoted_label" hidden>None-Promoted :</span> 
+                <input type="checkbox" class="form-switch form-check-input check_permission" name="status" value="1" id="promotPermission" hidden>
               </span>
               <button type="button" class="btn btn-sm role_delete_button btn_key" id="roleDeleteBtn" hidden>
                 <span class="delete-btn-text">Delete</span>

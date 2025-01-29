@@ -383,7 +383,7 @@
             });
         });
 
-        // Update Action Box Role Name
+        // Update Button Action Box Role Name
         $(document).on('click keydown', '#table_edit_btn', function (event) {
             if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
                 $('#savForm_error').html("");
@@ -417,10 +417,12 @@
                     $("#none_promoted_label").attr('hidden', true);
                     $("#promoted_label").removeAttr('hidden');
                     $("#promotLabel").removeAttr('hidden');
+                    $(".check_permission").prop('checked', true);
                 } else if (promotionText === 'non-promot') {
                     $("#none_promoted_label").removeAttr('hidden');
                     $("#promoted_label").attr('hidden', true);
                     $("#promotLabel").removeAttr('hidden');
+                    $(".check_permission").prop('checked', false);
                 }
                 // When modal is closed
                 $("#action_box").on('hidden.bs.modal', function () {
@@ -892,9 +894,30 @@
             });
         });
 
-        // Role Promot Permission
+        // Role Promot Permission Btn Handel
+        $(document).on('change', '.check_permission', function(e){
+            e.preventDefault();
+            var promotPermission = $(this).is(':checked');
+            if (promotPermission) {
+                $("#none_promoted_label").attr('hidden', true);
+                $("#promoted_label").removeAttr('hidden');
+            } else if(!promotPermission) {
+                $("#none_promoted_label").removeAttr('hidden');
+                $("#promoted_label").attr('hidden', true);
+            }
+            
+        });
+
+        // Role Promot Permission status
         $(document).on('click', '#promotPermission', function(e){
+            var id = $("#table_row_id").val();
+            var status = $("input[name='status']:checked").val();
             const current_url = "{{route('role_promot.action')}}";
+    
+            var data = {
+                'id' : id,
+                'status': status ? 0 : 1,
+            }
 
             $.ajaxSetup({
                 headers: {
@@ -906,13 +929,11 @@
                 type: "POST",
                 url: current_url,
                 dataType: 'json',
-                data: {
-                    id: $(this).attr('user_id'),
-                    status: $(this).val(),
-                },
+                data: data,
                 success: function({
                     messages
                 }) {
+                    $("#action_box").modal('hide');
                     $("#accessconfirmbranch").modal('show');
                     $("#processingProgress").removeAttr('hidden');
                     $("#access_modal_box").addClass('progress_body');
@@ -923,8 +944,12 @@
                         $("#access_modal_box").removeClass('progress_body');
                         $("#processModal_body").removeClass('loading_body_area');
                         $("#success_message").text(messages);
-                        $('#success_message').addClass('background_error');
-                        
+                        $('#success_message').addClass('alert_show font_size ps-1 pe-1');
+                        $('#success_message').fadeIn();
+                        setTimeout(() => {
+                            $('#success_message').fadeOut(3000);
+                        }, 3000);
+                        fetch_roles();
                     }, 1500);
                 }
             });

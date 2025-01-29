@@ -49,6 +49,7 @@
     @include('backend.layouts.layouts-components._activity-log')
 
     @include('backend.layouts._script')
+    @include('backend.layouts._sidebar-script')
     @include('backend.layouts._file_manager_script')
     @include('backend.layouts.handler-js.design._dashboard-page-js')
     @include('backend.layouts.handler-js.dropdown-menu-js._message-menu-js')

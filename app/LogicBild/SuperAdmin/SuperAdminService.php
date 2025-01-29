@@ -409,7 +409,20 @@ class SuperAdminService
     */
     public function rolesPromotIndex(Request $request)
     {
-        //
+        $id = (int)$request->input('id');
+        $status = (bool)$request->input('status');
+        $status = !$status;
+
+        $data = Role::findOrFail($id);
+
+        $data->update([
+            'status' => (int)$status,
+        ]);
+
+        return response()->json([
+            'messages' => 'Role Status Update Successfully',
+            'code' => 202,
+        ], 202);
     }
 
     /**
