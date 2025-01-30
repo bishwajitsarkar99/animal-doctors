@@ -1,7 +1,6 @@
 @extends('backend.layouts.dashboard')
 @section('content')
 @include('backend.layouts.dashboard-components._navbar')
-
   <div class="container">
     <div class="card form-control form-control-sm" id="moduleTemplete">
       <div class="card-body" id="table_card_body">

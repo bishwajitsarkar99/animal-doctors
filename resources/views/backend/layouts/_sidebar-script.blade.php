@@ -1,46 +1,69 @@
 <script>
     $(document).ready(function(){
-        // Role Promot Index
-        $(document).on('click', '#role_promot_index', function(e){
+        $(document).on('click', '#', function(e){
             e.preventDefault();
-            // $("#accessconfirmbranch").modal('show');
-            // $("#pageLoader").removeAttr('hidden');
-            // $("#access_modal_box").addClass('loader_area');
-            // $("#processModal_body").removeClass('loading_body_area');
-
-            // setTimeout(() => {
-            //     $("#accessconfirmbranch").modal('hide');
-            //     $("#pageLoader").attr('hidden', true);
-            //     $("#access_modal_box").removeClass('loader_area');
-            //     $("#processModal_body").addClass('loading_body_area');
             
-            // }, 1500);
-
-            const prefix = 'super-admin';
-            const domain = config('app.url');
-            const serverIP = $_SERVER['SERVER_ADDR'] ?? '127.0.0.1:8000';
-            const RouteURL = "/role-index";
-
-            const currentURL = domain ?? serverIP.prefix.RouteURL;
+            let prefix = 'super-admin';
+            let newUrl = window.location.protocol + "//" + window.location.host + "/" + prefix + "/role-index";
             
-            // $.ajaxSetup({
-            //     headers: {
-            //         'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-            //     }
-            // });
+            // Update the browser URL without refreshing the page
+            history.pushState(null, '', newUrl);
 
-            // $.ajax({
-            //     type: "GET",
-            //     url: currentURL,
-            //     success: function (response) {
-            //         $("#main_content").html(response);
-            //         console.log("Page Loaded Successfully");
-            //     },
-            //     error: function (xhr) {
-            //         console.error("Error loading role index:", xhr.responseText);
-            //     }
-            // });
+            // Fetch the view using AJAX and load it into a container
+            $.ajax({
+                url: newUrl,
+                type: "GET",
+                success: function(response) {
+                    $('#myscreen').html(response); // Load the view inside a container
+                },
+                error: function(xhr) {
+                    console.error("Error loading the page:", xhr);
+                }
+            });
+        });
 
+        // Handle browser back/forward button navigation
+        window.addEventListener("popstate", function (event) {
+            let currentUrl = window.location.href;
+            $.ajax({
+                url: currentUrl,
+                type: "GET",
+                success: function(response) {
+                    $('#main_content').html(response);
+                },
+                error: function(xhr) {
+                    console.error("Error loading the page:", xhr);
+                }
+            });
         });
     });
+
+    // $(document).ready(function () {
+    //     $(document).on("click", "#role_promot_index", function (e) {
+    //         e.preventDefault();
+
+    //         let prefix = "super-admin";
+    //         let newUrl = window.location.protocol + "//" + window.location.host + "/" + prefix + "/role-index";
+
+    //         // Update URL
+    //         history.pushState(null, "", newUrl);
+
+    //         // Fetch the new content and load it into a div
+    //         $.ajax({
+    //             url: newUrl,
+    //             type: "GET",
+    //             success: function (data) {
+    //                 $("#main_content").html(data); // Load response into a container
+    //             },
+    //             error: function (xhr) {
+    //                 console.error("Failed to load content:", xhr);
+    //             }
+    //         });
+    //     });
+
+    //     // Handle browser back/forward navigation
+    //     window.addEventListener("popstate", function () {
+    //         location.reload(); // Reload page when back button is clicked
+    //     });
+    // });
 </script>
