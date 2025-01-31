@@ -1,5 +1,6 @@
 <!-- ================== Category ======================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty {{setting('categ_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         <span class="{{setting('categ_title_visual')}}">{{__('translate.Category')}}</span>
@@ -18,6 +19,7 @@
 </ul>
 <!-- ================= Sub-Category ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty {{setting('sub_categ_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1 {{setting('sub_categ_title_visual')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         {{__('translate.Sub Category')}}
@@ -38,6 +40,7 @@
 
 <!-- ================= Group ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty {{setting('group_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
     <i class="fa-solid fa-folder-open fa-beat"></i> <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Group')}}</span>
 </a>
 <ul class="dropdown-menu dropdown-menu-end tyg rgs line_menu" aria-labelledby="navbarDropdown">
@@ -53,6 +56,7 @@
 </ul>
 <!-- ================= Medicine ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty {{setting('medicine_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
     <i class="fa-solid fa-folder-open fa-beat"></i> <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Medicine Part')}}</span>
 </a>
 <ul class="dropdown-menu dropdown-menu-end tyg rgs line_menu" aria-labelledby="navbarDropdown">
@@ -74,6 +78,7 @@
 </ul>
 <!-- ================= Prodcut-Model ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty {{setting('product_model_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
     <i class="fa-solid fa-folder-open fa-beat"></i> <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Model')}}</span>
 </a>
 <ul class="dropdown-menu dropdown-menu-end tyg rgs line_menu" aria-labelledby="navbarDropdown">
@@ -89,6 +94,7 @@
 </ul>
 <!-- ============================= Units ==================== -->
 <a class="nav-link_cgrMenu dropdown-toggle ty {{setting('unit_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
     <i class="fa-solid fa-folder-open fa-beat"></i> <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         {{__('translate.Units')}}
     </span>
@@ -107,6 +113,7 @@
 </ul>
 <!-- =========================== Brand ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty {{setting('brand_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
     <i class="fa-solid fa-folder-open fa-beat"></i> <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         {{__('translate.Brand')}}
     </span>
@@ -125,6 +132,7 @@
 </ul>
 <!-- =========================== Product ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty {{setting('product_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
     <i class="fa-solid fa-folder-open fa-beat"></i> <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         {{__('translate.Product List')}}
     </span>

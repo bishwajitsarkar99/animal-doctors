@@ -6,12 +6,16 @@
     });
     // Plugin Product Lock or Unlock in Ajax 
     $(document).ready(function() {
-        $('#unlock').hide();
-        $('#lock').show();
+        $('#lock').removeAttr('hidden');
 
-        $('#prodct').click(function() {
-            $('#unlock').toggle();
-            $('#lock').toggle();
+        $('.product_btn').click(function() {
+            if ($(this).hasClass('collapsed')) {
+                $('#lock').removeAttr('hidden');
+                $('#unlock').attr('hidden', true);
+            } else {
+                $('#lock').attr('hidden', true);
+                $('#unlock').removeAttr('hidden');
+            }
         });
     });
 
@@ -128,7 +132,15 @@
 <script>
     $(document).ready(function(){
         // Product show Button
+        $('#plus').removeAttr('hidden');
         $(document).on('click','.prod_button',function(){
+            if ($(this).hasClass('collapsed')) {
+                $('#plus').removeAttr('hidden');
+                $('#minus').attr('hidden', true);
+            } else {
+                $('#plus').attr('hidden', true);
+                $('#minus').removeAttr('hidden');
+            }
             $('.product_btn').toggleClass('product-menu-btn');
             $('.product_btn').fadeIn('slide');
         });
