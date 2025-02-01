@@ -83,13 +83,15 @@ return[
     // Supplier
     'Supplier'=>'Supplier',
     'Supplier-Setting'=>'Supplier-Setting',
+    'Setting'=>'Setting',
     'Supplier-Create'=>'Supplier-Create',
-    'Supplier Record'=>'Supplier Record',
+    'Create'=>'Create',
+    'Record'=>'Record',
     'Supplier-Setup'=>'Supplier-Setup',
     'Supplier-Record'=>'Supplier-Record',
     'Details Record'=>'Details Record',
     'Supplier-Requisition'=>'Supplier-Requisition',
-    'Supplier Requisition'=>'Supplier Requisition',
+    'Requisition'=>'Requisition',
     // Accounts Moduel
     // Lager
     'Accounts Dept.'=>'Accounts Dept.',

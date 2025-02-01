@@ -1,6 +1,9 @@
 <!-- ================== Category ======================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty {{setting('categ_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
+<a class="nav-link_cgrMenu dropdown-toggle ty child_category {{setting('categ_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="collapsed">
+        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_category_link"></i>
+        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_category_link" hidden></i>
+    </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
         <span class="{{setting('categ_title_visual')}}">{{__('translate.Category')}}</span>
@@ -9,9 +12,10 @@
 <ul class="dropdown-menu dropdown-menu-end tyg rgs line_menu" aria-labelledby="navbarDropdown">
     <li>
         <div class="collapse" id="product" aria-labelledby="headingTwo" data-bs-parent="#product">
-            <nav class="sb-sidenav-menu-nested nav">
-                <a id="myLink" class="nav-link underline" href="{{setting('category_link')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Category List')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                    <i class="fa-regular fa-hand-point-right fa-beat me-1"></i><span class="{{setting('categ_title_visual')}}">{{__('translate.ADD Category')}}</span>
+            <nav class="sb-sidenav-menu-nested nav child-tree">
+                <a id="myLink" class="nav-link underline nav_space" href="{{setting('category_link')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Category List')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
+                    <span class="{{setting('categ_title_visual')}}">{{__('translate.ADD Category')}}</span>
                 </a>
             </nav>
         </div>

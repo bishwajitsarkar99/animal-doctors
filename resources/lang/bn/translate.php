@@ -82,13 +82,15 @@ return[
     // Supplier
     'Supplier'=>'সরবরাহকারী',
     'Supplier-Setting'=>'সরবরাহকারী-সেটিং',
+    'Setting'=>'সেটিং',
     'Supplier-Setup'=>'সরবরাহকারী-সেটআপ',
     'Supplier-Create'=>'সরবরাহকারী-তৈরি করুন',
-    'Supplier Record'=>'সরবরাহকারী রেকর্ড',
+    'Create'=>'তৈরি করুন',
+    'Record'=>'রেকর্ড',
     'Supplier-Record'=>'সরবরাহকারী-রেকর্ড',
     'Details Record'=>'বিস্তারিত রেকর্ড',
     'Supplier-Requisition'=>'সরবরাহকারী-রিকুইজিশন',
-    'Supplier Requisition'=>'সরবরাহকারী রিকুইজিশন',
+    'Requisition'=>'রিকুইজিশন',
 
     // Accounts Moduel
     // Lager

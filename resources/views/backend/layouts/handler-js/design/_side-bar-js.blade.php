@@ -6,8 +6,6 @@
     });
     // Plugin Product Lock or Unlock in Ajax 
     $(document).ready(function() {
-        $('#lock').removeAttr('hidden');
-
         $('.product_btn').click(function() {
             if ($(this).hasClass('collapsed')) {
                 $('#lock').removeAttr('hidden');
@@ -21,13 +19,15 @@
 
     // Plugin Purchases Lock or Unlock in Ajax 
     $(document).ready(function() {
-        $('#s_unlock').hide();
-        $('#s_lock').show();
-
-        $('#stock_id').click(function() {
-        $('#s_unlock').toggle();
-        $('#s_lock').toggle();
-    });
+        $('.stock_btn').click(function() {
+            if ($(this).hasClass('collapsed')) {
+                $('#lock_stock').removeAttr('hidden');
+                $('#unlock_stock').attr('hidden', true);
+            } else {
+                $('#lock_stock').attr('hidden', true);
+                $('#unlock_stock').removeAttr('hidden');
+            }
+        });
     });
     
     // Plugin Accounts Lock or Unlock in Ajax 
@@ -132,7 +132,6 @@
 <script>
     $(document).ready(function(){
         // Product show Button
-        $('#plus').removeAttr('hidden');
         $(document).on('click','.prod_button',function(){
             if ($(this).hasClass('collapsed')) {
                 $('#plus').removeAttr('hidden');
@@ -144,10 +143,69 @@
             $('.product_btn').toggleClass('product-menu-btn');
             $('.product_btn').fadeIn('slide');
         });
+        // Category LInk Button
+        $(document).on('click', '.child_category', function() {
+            let $plusIcon = $('#plus_category_link');
+            let $minusIcon = $('#minus_category_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
         // Stock show Button
         $(document).on('click','.stck_button',function(){
+            if ($(this).hasClass('collapsed')) {
+                $('#plus_stock').removeAttr('hidden');
+                $('#minus_stock').attr('hidden', true);
+            } else {
+                $('#plus_stock').attr('hidden', true);
+                $('#minus_stock').removeAttr('hidden');
+            }
             $('.stock_btn').toggleClass('product-menu-btn');
             $('.stock_btn').fadeIn('slide');
+        });
+        // Stock LInk Button
+        $(document).on('click', '.child_stock', function() {
+            let $plusIcon = $('#plus_stock_link');
+            let $minusIcon = $('#minus_stock_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Inventory LInk Button
+        $(document).on('click', '.child_inventory', function() {
+            let $plusIcon = $('#plus_inventory_link');
+            let $minusIcon = $('#minus_inventory_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Supplier LInk Button
+        $(document).on('click', '.child_supplier', function() {
+            let $plusIcon = $('#plus_supplier_link');
+            let $minusIcon = $('#minus_supplier_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
         });
         // Lager show Button
         $(document).on('click','.lag_button',function(){
