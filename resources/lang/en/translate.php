@@ -121,7 +121,7 @@ return[
     'Customer Due List'=>'Customer Due List',
     'Customer Due List'=>'Customer Due List',
     'Customer Payable Record'=>'Customer Payable Record',
-    'Customer Details Record'=>'Customer Details Record',
+    'Customer Details'=>'Customer Details',
     'Customer Setting'=>'Customer Setting',
     'Customer Setting'=>'Customer Setting',
     // Petty Cash Management
@@ -222,7 +222,7 @@ return[
     'Accounting Report Table Analycis'=>'Accounting Report Table Analycis',
     'Tabular Analycis'=>'Tabular Analycis',
     'Table of Blance-Sheet'=>'Table of Blance-Sheet',
-    'Table of Blance Sheet'=>'Table of Blance Sheet',
+    'Blance Sheet Table'=>'Blance Sheet Table',
     'Report Setting'=>'Report Setting',
     // Monthly Report
     'Monthly Report'=>'Monthly Report',

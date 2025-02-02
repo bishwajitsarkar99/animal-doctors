@@ -121,7 +121,7 @@ return[
     'Customer Due List'=>'গ্রাহকের বাকি তালিকা',
     'Customer Due List'=>'গ্রাহকের বাকি তালিকা',
     'Customer Payable Record'=>'গ্রাহকের প্রদেয় রেকর্ড',
-    'Customer Details Record'=>'গ্রাহক বিবরণ রেকর্ড',
+    'Customer Details'=>'গ্রাহক বিবরণ',
     'Customer Setting'=>'গ্রাহক সেটিং',
     'Customer Setting'=>'গ্রাহক সেটিং',
     // Petty Cash Management
@@ -221,7 +221,7 @@ return[
     'Accounting Report Table Analycis'=>'অ্যাকাউন্টিং রিপোর্ট টেবিল বিশ্লেষণ',
     'Tabular Analycis'=>'ট্যাবুলার অ্যানালাইসিস',
     'Table of Blance-Sheet'=>'ব্ল্যান্স-শীট টেবিল',
-    'Table of Blance Sheet'=>'ব্ল্যান্স শীট টেবিল',
+    'Blance Sheet Table'=>'ব্ল্যান্স শীট টেবিল',
     'Report Setting'=>'রিপোর্ট সেটিং',
     // Monthly Report
     'Monthly Report'=>'মাসিক রিপোর্ট',
