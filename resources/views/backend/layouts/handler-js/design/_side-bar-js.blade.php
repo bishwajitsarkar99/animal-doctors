@@ -110,23 +110,27 @@
 
     // Plugin Auth Lock or Unlock in Ajax 
     $(document).ready(function() {
-        $('#auth_lock').show();
-        $('#auth_unlock').hide();
-
-        $('#auth_id').click(function() {
-            $('#auth_lock').toggle();
-            $('#auth_unlock').toggle();
+        $('.auth_btn').click(function() {
+            if ($(this).hasClass('collapsed')) {
+                $('#auth_lock').removeAttr('hidden');
+                $('#auth_unlock').attr('hidden', true);
+            } else {
+                $('#auth_lock').attr('hidden', true);
+                $('#auth_unlock').removeAttr('hidden');
+            }
         });
     });
 
     // Plugin Components Lock or Unlock in Ajax 
     $(document).ready(function() {
-        $('#compont_lock').show();
-        $('#compont_unlock').hide();
-
-        $('#components_id').click(function() {
-            $('#compont_lock').toggle();
-            $('#compont_unlock').toggle();
+        $('.Components_btn').click(function() {
+            if ($(this).hasClass('collapsed')) {
+                $('#compont_lock').removeAttr('hidden');
+                $('#compont_unlock').attr('hidden', true);
+            } else {
+                $('#compont_lock').attr('hidden', true);
+                $('#compont_unlock').removeAttr('hidden');
+            }
         });
     });
 
@@ -602,15 +606,308 @@
             $('.hrm_btn').toggleClass('product-menu-btn');
             $('.hrm_btn').fadeIn('slide');
         });
+        // Employee LInk Button
+        $(document).on('click', '.child_employee', function() {
+            let $plusIcon = $('#plus_employee_link');
+            let $minusIcon = $('#minus_employee_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Employee Profile LInk Button
+        $(document).on('click', '.child_employee_profile', function() {
+            let $plusIcon = $('#plus_employee_profile_link');
+            let $minusIcon = $('#minus_employee_profile_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Salary Payment LInk Button
+        $(document).on('click', '.child_salary', function() {
+            let $plusIcon = $('#plus_salary_link');
+            let $minusIcon = $('#minus_salary_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Employee Performance LInk Button
+        $(document).on('click', '.child_emp_performance', function() {
+            let $plusIcon = $('#plus_emp_performance_link');
+            let $minusIcon = $('#minus_emp_performance_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Employee Attendence LInk Button
+        $(document).on('click', '.child_emp_attendence', function() {
+            let $plusIcon = $('#plus_emp_attendence_link');
+            let $minusIcon = $('#minus_emp_attendence_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Employee Details Record LInk Button
+        $(document).on('click', '.child_emp_details', function() {
+            let $plusIcon = $('#plus_emp_details_link');
+            let $minusIcon = $('#minus_emp_details_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
         // Auth show Button
         $(document).on('click','.ath_button',function(){
+            let $plusIcon = $('#plus_auth');
+            let $minusIcon = $('#minus_auth');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
             $('.auth_btn').toggleClass('product-menu-btn');
             $('.auth_btn').fadeIn('slide');
         });
+        // Atuthentication LInk Button
+        $(document).on('click', '.child_authentication', function() {
+            let $plusIcon = $('#plus_authentication_link');
+            let $minusIcon = $('#minus_authentication_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Permission LInk Button
+        $(document).on('click', '.child_permission', function() {
+            let $plusIcon = $('#plus_permission_link');
+            let $minusIcon = $('#minus_permission_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // User Location LInk Button
+        $(document).on('click', '.child_location', function() {
+            let $plusIcon = $('#plus_loaction_link');
+            let $minusIcon = $('#minus_loaction_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // User Location LInk Button
+        $(document).on('click', '.child_branch', function() {
+            let $plusIcon = $('#plus_branch_link');
+            let $minusIcon = $('#minus_branch_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Module LInk Button
+        $(document).on('click', '.child_module', function() {
+            let $plusIcon = $('#plus_module_link');
+            let $minusIcon = $('#minus_module_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Log Activity LInk Button
+        $(document).on('click', '.child_log_activity', function() {
+            let $plusIcon = $('#plus_log_activity_link');
+            let $minusIcon = $('#minus_log_activity_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Layout LInk Button
+        $(document).on('click', '.child_layout', function() {
+            let $plusIcon = $('#plus_layout_link');
+            let $minusIcon = $('#minus_layout_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
         // Components show Button
         $(document).on('click','.com_button',function(){
+            let $plusIcon = $('#plus_component_link');
+            let $minusIcon = $('#minus_component_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
             $('.Components_btn').toggleClass('product-menu-btn');
             $('.auth_btn').fadeIn('slide');
+        });
+        // Modal LInk Button
+        $(document).on('click', '.child_modal', function() {
+            let $plusIcon = $('#plus_modal_link');
+            let $minusIcon = $('#minus_modal_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Form LInk Button
+        $(document).on('click', '.child_form', function() {
+            let $plusIcon = $('#plus_form_link');
+            let $minusIcon = $('#minus_form_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Input LInk Button
+        $(document).on('click', '.child_input', function() {
+            let $plusIcon = $('#plus_input_link');
+            let $minusIcon = $('#minus_input_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Dropdown LInk Button
+        $(document).on('click', '.child_dropdown', function() {
+            let $plusIcon = $('#plus_dropdown_link');
+            let $minusIcon = $('#minus_dropdown_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Table LInk Button
+        $(document).on('click', '.child_table', function() {
+            let $plusIcon = $('#plus_table_link');
+            let $minusIcon = $('#minus_table_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Footer LInk Button
+        $(document).on('click', '.child_footer', function() {
+            let $plusIcon = $('#plus_footer_link');
+            let $minusIcon = $('#minus_footer_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Card LInk Button
+        $(document).on('click', '.child_card', function() {
+            let $plusIcon = $('#plus_card_link');
+            let $minusIcon = $('#minus_card_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
+        });
+        // Setting show Button
+        $(document).on('click','.child_setting',function(){
+            let $plusIcon = $('#plus_setting_link');
+            let $minusIcon = $('#minus_setting_link');
+
+            if ($(this).attr('aria-expanded') === 'true') {
+                $plusIcon.attr('hidden', true);
+                $minusIcon.removeAttr('hidden');
+            } else {
+                $plusIcon.removeAttr('hidden');
+                $minusIcon.attr('hidden', true);
+            }
         });
     });
 </script>

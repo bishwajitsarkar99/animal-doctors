@@ -260,7 +260,7 @@ return[
     // Employee Performance
     'Performance'=>'Performance',
     'Employee Experience'=>'Employee Experience',
-    'Working-Performance'=>'Working-Performance',
+    'Working-Experience'=>'Working-Experience',
     'Employee Accuracy'=>'Employee Accuracy',
     'Performance Setting'=>'Performance Setting',
     // Employee Attendence
@@ -275,6 +275,7 @@ return[
 
     // Auth Moduel
     'Authentication'=>'Authentication',
+    'User-Permission'=>'User-Permission',
     'Auth'=>'Auth',
     'Account-History'=>'Account-History',
     'Manage Role'=>'Manage Role',
@@ -292,6 +293,25 @@ return[
     '401 Page'=>'401 Page',
     '404 Page'=>'404 Page',
     '500 Page'=>'500 Page',
+    'User-Details'=>'User-Details',
+    // Branch
+    'Branch'=>'Branch',
+    'Create'=>'Create',
+    'Admin Access'=>'Admin Access',
+    'User Access'=>'User Access',
+    // Module
+    'Module'=>'Module',
+    'Category'=>'Category',
+    'Name'=>'Name',
+    'Inject'=>'Inject',
+    'Installations'=>'Installations',
+    // Log-Activity
+    'Log-Activity'=>'Log-Activity',
+    'User Activity'=>'User Activity',
+    // Layout
+    'File-Manager'=>'File-Manager',
+    'Dark Sidenav'=>'Dark Sidenav',
+    'Light Sidenav'=>'Light Sidenav',
     // Setting
     'SETTING'=>'SETTING',
     'Post-Setting'=>'Post-Setting',

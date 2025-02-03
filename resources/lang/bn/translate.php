@@ -260,7 +260,7 @@ return[
     // Employee Performance
     'Performance'=>'কর্মক্ষমতা',
     'Employee Experience'=>'কর্মচারীর অভিজ্ঞতা',
-    'Working-Performance'=>'কাজ এর-কর্মক্ষমতা',
+    'Working-Experience'=>'কাজের-অভিজ্ঞতা',
     'Employee Accuracy'=>'কর্মচারী নির্ভুলতা',
     'Performance Setting'=>'কর্মক্ষমতা সেটিং',
     // Employee Attendence
@@ -284,6 +284,7 @@ return[
     'Users Access'=>'ব্যবহারকারীর অ্যাক্সেস',
     'Users Permission'=>'ব্যবহারকারীদের অনুমতি',
     'Permission'=>'অনুমতি',
+    'User-Permission' => 'ব্যবহারকারী-অনুমতি',
     'Auth Pages'=>'প্রমাণীকরণ পৃষ্ঠাগুলি',
     'Page Permission'=>'প্পৃষ্ঠা অনুমতি',
     'ADD Permission'=>'অনুমতি যোগ করুন',
@@ -292,6 +293,25 @@ return[
     '401 Page'=>'401 পৃষ্ঠা',
     '404 Page'=>'404 পৃষ্ঠা',
     '500 Page'=>'500 পৃষ্ঠা',
+    'User-Details'=>'ব্যবহারকারী-বিশদ বিবরণ',
+    // Branch
+    'Branch'=>'শাখা',
+    'Create'=>'তৈরি করুন',
+    'Admin Access'=>'অ্যাডমিন অ্যাক্সেস',
+    'User Access'=>'ব্যবহারকারীর অ্যাক্সেস',
+    // Module
+    'Module'=>'মডিউল',
+    'Category'=>'শ্রেণী',
+    'Name'=>'নাম',
+    'Inject'=>'ইনজেক্ট',
+    'Installations'=>'ইনস্টলেশন',
+    // Log-Activity
+    'Log-Activity'=>'লগ-ক্রিয়াকলাপ',
+    'User Activity'=>'ব্যবহারকারী কার্যকলাপ',
+    // Layout
+    'File-Manager'=>'ফাইল-ম্যানেজার',
+    'Dark Sidenav'=>'ডার্ক সাইড নেভিগেশন',
+    'Light Sidenav'=>'আলো সাইড নেভিগেশন',
     // Setting
     'SETTING'=>'সেটিং',
     'Post-Setting'=>'পোস্ট-সেটিং',
