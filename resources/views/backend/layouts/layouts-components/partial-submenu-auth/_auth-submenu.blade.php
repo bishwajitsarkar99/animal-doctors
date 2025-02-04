@@ -30,9 +30,7 @@
                 </a>
             </nav>
         </div>
-
     </li>
-
 </ul>
 <!-- ================= Permission ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_permission" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

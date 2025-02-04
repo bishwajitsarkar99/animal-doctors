@@ -15,6 +15,12 @@
                 type: "GET",
                 success: function(response) {
                     $('#myscreen').html(response); // Load the view inside a container
+                    // Manually reinitialize the sidebar script if available
+                    if (typeof initSidebarScripts === "function") {
+                        initSidebarScripts();
+                    } else {
+                        console.error("initSidebarScripts is not defined");
+                    }
                 },
                 error: function(xhr) {
                     console.error("Error loading the page:", xhr);
@@ -30,6 +36,12 @@
                 type: "GET",
                 success: function(response) {
                     $('#main_content').html(response);
+                    // Manually reinitialize the sidebar script if available
+                    if (typeof initSidebarScripts === "function") {
+                        initSidebarScripts();
+                    } else {
+                        console.error("initSidebarScripts is not defined");
+                    }
                 },
                 error: function(xhr) {
                     console.error("Error loading the page:", xhr);

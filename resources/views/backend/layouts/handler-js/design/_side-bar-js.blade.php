@@ -1,139 +1,127 @@
 <!--============ Side-Bar Lock in Ajax ============-->
 <script>
-    // Admin-Panel Light Mode
+    // Initialize sidebar-specific behavior
+    function initSidebarScripts() {
+        // Remove any previous sidebar-toggle bindings (namespaced) and attach a new one
+        $('.sidebar-toggle').off('click.sidebar').on('click.sidebar', function() {
+            $('.sidebar').toggleClass('collapsed');
+        });
+    }
+    // Helper for toggling lock/unlock icons for buttons (non-delegated actions)
+    function toggleLockUnlock(buttonSelector, lockSelector, unlockSelector) {
+        // Remove previous bindings with the namespace "lockToggle" to avoid duplicates
+        $(document).off('click.lockToggle', buttonSelector)
+                   .on('click.lockToggle', buttonSelector, function() {
+            if ($(this).hasClass('collapsed')) {
+                $(lockSelector).removeAttr('hidden');
+                $(unlockSelector).attr('hidden', true);
+            } else {
+                $(lockSelector).attr('hidden', true);
+                $(unlockSelector).removeAttr('hidden');
+            }
+        });
+    }
+    // Helper for toggling link icons based on aria-expanded attribute
+    function toggleLinkIcon(clickSelector, plusSelector, minusSelector) {
+        // Use delegated events with namespacing ("linkToggle")
+        $(document).off('click.linkToggle', clickSelector)
+                   .on('click.linkToggle', clickSelector, function() {
+            if ($(this).attr('aria-expanded') === 'true') {
+                $(plusSelector).attr('hidden', true);
+                $(minusSelector).removeAttr('hidden');
+            } else {
+                $(plusSelector).removeAttr('hidden');
+                $(minusSelector).attr('hidden', true);
+            }
+        });
+    }
     $(document).ready(function(){
-        
+        initSidebarScripts();
+        // Initialize lock/unlock toggles for various plugins
+        toggleLockUnlock('.product_btn', '#lock', '#unlock');
+        toggleLockUnlock('.stock_btn', '#lock_stock', '#unlock_stock');
+        toggleLockUnlock('.lager_btn', '#lock_leger', '#unlock_leger');
+        toggleLockUnlock('.sales_btn', '#sales_lock', '#sales_unlock');
+        toggleLockUnlock('.vaoucher_btn', '#voch_lock', '#voch_unlock');
+        toggleLockUnlock('.report_btn', '#report_lock', '#report_unlock');
+        toggleLockUnlock('.asset_btn', '#ast_lock', '#ast_unlock');
+        toggleLockUnlock('.hrm_btn', '#hrm_lock', '#hrm_unlock');
+        toggleLockUnlock('.auth_btn', '#auth_lock', '#auth_unlock');
+        toggleLockUnlock('.Components_btn', '#compont_lock', '#compont_unlock');
+        // Initialize toggle for link buttons (example calls)
+        // Product show Button
+        toggleLinkIcon('.prod_button', '#plus', '#minus');
+        toggleLinkIcon('.child_category', '#plus_category_link', '#minus_category_link');
+        toggleLinkIcon('.child_sub_category', '#plus_sub_category_link', '#minus_sub_category_link');
+        toggleLinkIcon('.child_group', '#plus_group_link', '#minus_group_link');
+        toggleLinkIcon('.child_product', '#plus_product_link', '#minus_product_link');
+        toggleLinkIcon('.child_product_model', '#plus_product_model_link', '#minus_product_model_link');
+        toggleLinkIcon('.child_unit', '#plus_unit_link', '#minus_unit_link');
+        toggleLinkIcon('.child_brand', '#plus_brand_link', '#minus_brand_link');
+        toggleLinkIcon('.child_another_product', '#plus_another_product_link', '#minus_another_product_link');
+        // Stock show Button
+        toggleLinkIcon('.stck_button', '#plus_stock', '#minus_stock');
+        toggleLinkIcon('.child_stock', '#plus_stock_link', '#minus_stock_link');
+        toggleLinkIcon('.child_inventory', '#plus_inventory_link', '#minus_inventory_link');
+        toggleLinkIcon('.child_supplier', '#plus_supplier_link', '#minus_supplier_link');
+        // Lager show Button
+        toggleLinkIcon('.lag_button', '#plus_leger', '#minus_leger');
+        toggleLinkIcon('.child_daybook', '#plus_daybook_link', '#minus_daybook_link');
+        toggleLinkIcon('.child_expenses', '#plus_expenses_link', '#minus_expenses_link');
+        toggleLinkIcon('.child_customer', '#plus_customer_link', '#minus_customer_link');
+        toggleLinkIcon('.child_petty_cash', '#plus_petty_cash_link', '#minus_petty_cash_link');
+        toggleLinkIcon('.child_bank', '#plus_bank_link', '#minus_bank_link');
+        toggleLinkIcon('.child_tax', '#plus_tax_link', '#minus_tax_link');
+        // Sales show Button
+        toggleLinkIcon('.sal_button', '#plus_sales', '#minus_sales');
+        toggleLinkIcon('.child_order', '#plus_order_link', '#minus_order_link');
+        toggleLinkIcon('.child_invoice', '#plus_invoice_link', '#minus_invoice_link');
+        toggleLinkIcon('.child_sales_region', '#plus_sales_region_link', '#minus_sales_region_link');
+        // Vaoucher show Button
+        toggleLinkIcon('.voau_button', '#plus_vaoucher', '#minus_vaoucher');
+        toggleLinkIcon('.child_voucher', '#plus_voucher_link', '#minus_voucher_link');
+        toggleLinkIcon('.child_voucher_create', '#plus_voucher_create_link', '#minus_voucher_create_link');
+        // Asset show Button
+        toggleLinkIcon('.ass_button', '#plus_asset', '#minus_asset');
+        toggleLinkIcon('.child_asset', '#plus_asset_link', '#minus_asset_link');
+        toggleLinkIcon('.child_asset_details', '#plus_asset_details_link', '#minus_asset_details_link');
+        // Report show Button
+        toggleLinkIcon('.rept_button', '#plus_report', '#minus_report');
+        toggleLinkIcon('.child_report', '#plus_report_link', '#minus_report_link');
+        toggleLinkIcon('.child_monthly_report', '#plus_monthly_report_link', '#minus_monthly_report_link');
+        toggleLinkIcon('.child_daily_report', '#plus_daily_report_link', '#minus_daily_report_link');
+        // HRM show Button
+        toggleLinkIcon('.hm_button', '#plus_hrm', '#minus_hrm');
+        toggleLinkIcon('.child_employee', '#plus_employee_link', '#minus_employee_link');
+        toggleLinkIcon('.child_employee_profile', '#plus_employee_profile_link', '#minus_employee_profile_link');
+        toggleLinkIcon('.child_salary', '#plus_salary_link', '#minus_salary_link');
+        toggleLinkIcon('.child_emp_performance', '#plus_emp_performance_link', '#minus_emp_performance_link');
+        toggleLinkIcon('.child_emp_attendence', '#plus_emp_attendence_link', '#minus_emp_attendence_link');
+        toggleLinkIcon('.child_emp_details', '#plus_emp_details_link', '#minus_emp_details_link');
+        // Auth show Button
+        toggleLinkIcon('.ath_button', '#plus_auth', '#minus_auth');
+        toggleLinkIcon('.child_authentication', '#plus_authentication_link', '#minus_authentication_link');
+        toggleLinkIcon('.child_permission', '#plus_permission_link', '#minus_permission_link');
+        toggleLinkIcon('.child_location', '#plus_loaction_link', '#minus_loaction_link');
+        toggleLinkIcon('.child_branch', '#plus_branch_link', '#minus_branch_link');
+        toggleLinkIcon('.child_module', '#plus_module_link', '#minus_module_link');
+        // User Log Activity
+        toggleLinkIcon('.child_log_activity', '#plus_log_activity_link', '#minus_log_activity_link');
+        // Layout
+        toggleLinkIcon('.child_layout', '#plus_layout_link', '#minus_layout_link');
+        // Components Button
+        toggleLinkIcon('.com_button', '#plus_component_link', '#minus_component_link');
+        toggleLinkIcon('.child_modal', '#plus_modal_link', '#minus_modal_link');
+        toggleLinkIcon('.child_form', '#plus_form_link', '#minus_form_link');
+        toggleLinkIcon('.child_input', '#plus_input_link', '#minus_input_link');
+        toggleLinkIcon('.child_dropdown', '#plus_dropdown_link', '#minus_dropdown_link');
+        toggleLinkIcon('.child_table', '#plus_table_link', '#minus_table_link');
+        toggleLinkIcon('.child_footer', '#plus_footer_link', '#minus_footer_link');
+        toggleLinkIcon('.child_card', '#plus_card_link', '#minus_card_link');
+        toggleLinkIcon('.child_setting', '#plus_setting_link', '#minus_setting_link');
     });
-    // Plugin Product Lock or Unlock in Ajax 
-    $(document).ready(function() {
-        $('.product_btn').click(function() {
-            if ($(this).hasClass('collapsed')) {
-                $('#lock').removeAttr('hidden');
-                $('#unlock').attr('hidden', true);
-            } else {
-                $('#lock').attr('hidden', true);
-                $('#unlock').removeAttr('hidden');
-            }
-        });
-    });
-
-    // Plugin Purchases Lock or Unlock in Ajax 
-    $(document).ready(function() {
-        $('.stock_btn').click(function() {
-            if ($(this).hasClass('collapsed')) {
-                $('#lock_stock').removeAttr('hidden');
-                $('#unlock_stock').attr('hidden', true);
-            } else {
-                $('#lock_stock').attr('hidden', true);
-                $('#unlock_stock').removeAttr('hidden');
-            }
-        });
-    });
-    
-    // Plugin Accounts Lock or Unlock in Ajax 
-    $(document).ready(function() {
-        $('.lager_btn').click(function() {
-            if ($(this).hasClass('collapsed')) {
-                $('#lock_leger').removeAttr('hidden');
-                $('#unlock_leger').attr('hidden', true);
-            } else {
-                $('#lock_leger').attr('hidden', true);
-                $('#unlock_leger').removeAttr('hidden');
-            }
-        });
-    });
-
-    // Plugin Sales Lock or Unlock in Ajax 
-    $(document).ready(function() {
-        $('.sales_btn').click(function() {
-            if ($(this).hasClass('collapsed')) {
-                $('#sales_lock').removeAttr('hidden');
-                $('#sales_unlock').attr('hidden', true);
-            } else {
-                $('#sales_lock').attr('hidden', true);
-                $('#sales_unlock').removeAttr('hidden');
-            }
-        });
-    });
-
-    // Plugin Voucher Lock or Unlock in Ajax 
-    $(document).ready(function() {
-        $('.vaoucher_btn').click(function() {
-            if ($(this).hasClass('collapsed')) {
-                $('#voch_lock').removeAttr('hidden');
-                $('#voch_unlock').attr('hidden', true);
-            } else {
-                $('#voch_lock').attr('hidden', true);
-                $('#voch_unlock').removeAttr('hidden');
-            }
-        });
-    });
-
-    // Plugin Report Lock or Unlock in Ajax 
-    $(document).ready(function() {
-        $('.report_btn').click(function() {
-            if ($(this).hasClass('collapsed')) {
-                $('#report_lock').removeAttr('hidden');
-                $('#report_unlock').attr('hidden', true);
-            } else {
-                $('#report_lock').attr('hidden', true);
-                $('#report_unlock').removeAttr('hidden');
-            }
-        });
-    });
-
-    // Plugin Asset Lock or Unlock in Ajax 
-    $(document).ready(function() {
-        $('.asset_btn').click(function() {
-            if ($(this).hasClass('collapsed')) {
-                $('#ast_lock').removeAttr('hidden');
-                $('#ast_unlock').attr('hidden', true);
-            } else {
-                $('#ast_lock').attr('hidden', true);
-                $('#ast_unlock').removeAttr('hidden');
-            }
-        });
-    });
-
-    // Plugin HRM Lock or Unlock in Ajax 
-    $(document).ready(function() {
-        $('.hrm_btn').click(function() {
-            if ($(this).hasClass('collapsed')) {
-                $('#hrm_lock').removeAttr('hidden');
-                $('#hrm_unlock').attr('hidden', true);
-            } else {
-                $('#hrm_lock').attr('hidden', true);
-                $('#hrm_unlock').removeAttr('hidden');
-            }
-        });
-    });
-
-    // Plugin Auth Lock or Unlock in Ajax 
-    $(document).ready(function() {
-        $('.auth_btn').click(function() {
-            if ($(this).hasClass('collapsed')) {
-                $('#auth_lock').removeAttr('hidden');
-                $('#auth_unlock').attr('hidden', true);
-            } else {
-                $('#auth_lock').attr('hidden', true);
-                $('#auth_unlock').removeAttr('hidden');
-            }
-        });
-    });
-
-    // Plugin Components Lock or Unlock in Ajax 
-    $(document).ready(function() {
-        $('.Components_btn').click(function() {
-            if ($(this).hasClass('collapsed')) {
-                $('#compont_lock').removeAttr('hidden');
-                $('#compont_unlock').attr('hidden', true);
-            } else {
-                $('#compont_lock').attr('hidden', true);
-                $('#compont_unlock').removeAttr('hidden');
-            }
-        });
-    });
-
+</script>
+<script>
     // Plugin Admin Stock Lock or Unlock in Ajax 
     $(document).ready(function() {
         $('#admin_stock_lock').show();
@@ -142,772 +130,6 @@
         $('#admin_stock').click(function() {
             $('#admin_stock_lock').toggle();
             $('#admin_stock_unlock').toggle();
-        });
-    });
-</script>
-<script>
-    $(document).ready(function(){
-        // Product show Button
-        $(document).on('click','.prod_button',function(){
-            if ($(this).hasClass('collapsed')) {
-                $('#plus').removeAttr('hidden');
-                $('#minus').attr('hidden', true);
-            } else {
-                $('#plus').attr('hidden', true);
-                $('#minus').removeAttr('hidden');
-            }
-            $('.product_btn').toggleClass('product-menu-btn');
-            $('.product_btn').fadeIn('slide');
-        });
-        // Category LInk Button
-        $(document).on('click', '.child_category', function() {
-            let $plusIcon = $('#plus_category_link');
-            let $minusIcon = $('#minus_category_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Sub Category LInk Button
-        $(document).on('click', '.child_sub_category', function() {
-            let $plusIcon = $('#plus_sub_category_link');
-            let $minusIcon = $('#minus_sub_category_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Group LInk Button
-        $(document).on('click', '.child_group', function() {
-            let $plusIcon = $('#plus_group_link');
-            let $minusIcon = $('#minus_group_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Medicine as Product LInk Button
-        $(document).on('click', '.child_product', function() {
-            let $plusIcon = $('#plus_product_link');
-            let $minusIcon = $('#minus_product_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Product Model LInk Button
-        $(document).on('click', '.child_product_model', function() {
-            let $plusIcon = $('#plus_product_model_link');
-            let $minusIcon = $('#minus_product_model_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Unit LInk Button
-        $(document).on('click', '.child_unit', function() {
-            let $plusIcon = $('#plus_unit_link');
-            let $minusIcon = $('#minus_unit_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Brand LInk Button
-        $(document).on('click', '.child_brand', function() {
-            let $plusIcon = $('#plus_brand_link');
-            let $minusIcon = $('#minus_brand_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Another Product LInk Button
-        $(document).on('click', '.child_another_product', function() {
-            let $plusIcon = $('#plus_another_product_link');
-            let $minusIcon = $('#minus_another_product_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Stock show Button
-        $(document).on('click','.stck_button',function(){
-            if ($(this).hasClass('collapsed')) {
-                $('#plus_stock').removeAttr('hidden');
-                $('#minus_stock').attr('hidden', true);
-            } else {
-                $('#plus_stock').attr('hidden', true);
-                $('#minus_stock').removeAttr('hidden');
-            }
-            $('.stock_btn').toggleClass('product-menu-btn');
-            $('.stock_btn').fadeIn('slide');
-        });
-        // Stock LInk Button
-        $(document).on('click', '.child_stock', function() {
-            let $plusIcon = $('#plus_stock_link');
-            let $minusIcon = $('#minus_stock_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Inventory LInk Button
-        $(document).on('click', '.child_inventory', function() {
-            let $plusIcon = $('#plus_inventory_link');
-            let $minusIcon = $('#minus_inventory_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Supplier LInk Button
-        $(document).on('click', '.child_supplier', function() {
-            let $plusIcon = $('#plus_supplier_link');
-            let $minusIcon = $('#minus_supplier_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Lager show Button
-        $(document).on('click','.lag_button',function(){
-            if ($(this).hasClass('collapsed')) {
-                $('#plus_leger').removeAttr('hidden');
-                $('#minus_leger').attr('hidden', true);
-            } else {
-                $('#plus_leger').attr('hidden', true);
-                $('#minus_leger').removeAttr('hidden');
-            }
-            $('.lager_btn').toggleClass('product-menu-btn');
-            $('.lager_btn').fadeIn('slide');
-        });
-        // Day Book LInk Button
-        $(document).on('click', '.child_daybook', function() {
-            let $plusIcon = $('#plus_daybook_link');
-            let $minusIcon = $('#minus_daybook_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Expenses LInk Button
-        $(document).on('click', '.child_expenses', function() {
-            let $plusIcon = $('#plus_expenses_link');
-            let $minusIcon = $('#minus_expenses_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Customer LInk Button
-        $(document).on('click', '.child_customer', function() {
-            let $plusIcon = $('#plus_customer_link');
-            let $minusIcon = $('#minus_customer_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Petty Cash LInk Button
-        $(document).on('click', '.child_petty_cash', function() {
-            let $plusIcon = $('#plus_petty_cash_link');
-            let $minusIcon = $('#minus_petty_cash_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Bank Transaction LInk Button
-        $(document).on('click', '.child_bank', function() {
-            let $plusIcon = $('#plus_bank_link');
-            let $minusIcon = $('#minus_bank_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Tax/VAT LInk Button
-        $(document).on('click', '.child_tax', function() {
-            let $plusIcon = $('#plus_tax_link');
-            let $minusIcon = $('#minus_tax_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Sales show Button
-        $(document).on('click','.sal_button',function(){
-            if ($(this).hasClass('collapsed')) {
-                $('#plus_sales').removeAttr('hidden');
-                $('#minus_sales').attr('hidden', true);
-            } else {
-                $('#plus_sales').attr('hidden', true);
-                $('#minus_sales').removeAttr('hidden');
-            }
-            $('.sales_btn').toggleClass('product-menu-btn');
-            $('.sales_btn').fadeIn('slide');
-        });
-        // Order LInk Button
-        $(document).on('click', '.child_order', function() {
-            let $plusIcon = $('#plus_order_link');
-            let $minusIcon = $('#minus_order_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Invoice LInk Button
-        $(document).on('click', '.child_invoice', function() {
-            let $plusIcon = $('#plus_invoice_link');
-            let $minusIcon = $('#minus_invoice_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Sales Region LInk Button
-        $(document).on('click', '.child_sales_region', function() {
-            let $plusIcon = $('#plus_sales_region_link');
-            let $minusIcon = $('#minus_sales_region_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Vaoucher show Button
-        $(document).on('click','.voau_button',function(){
-            let $plusIcon = $('#plus_vaoucher');
-            let $minusIcon = $('#minus_vaoucher');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-            $('.vaoucher_btn').toggleClass('product-menu-btn');
-            $('.vaoucher_btn').fadeIn('slide');
-        });
-        // Voucher LInk Button
-        $(document).on('click', '.child_voucher', function() {
-            let $plusIcon = $('#plus_voucher_link');
-            let $minusIcon = $('#minus_voucher_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Voucher Create LInk Button
-        $(document).on('click', '.child_voucher_create', function() {
-            let $plusIcon = $('#plus_voucher_create_link');
-            let $minusIcon = $('#minus_voucher_create_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Asset show Button
-        $(document).on('click','.ass_button',function(){
-            let $plusIcon = $('#plus_asset');
-            let $minusIcon = $('#minus_asset');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-            $('.asset_btn').toggleClass('product-menu-btn');
-            $('.asset_btn').fadeIn('slide');
-        });
-        // Asset LInk Button
-        $(document).on('click', '.child_asset', function() {
-            let $plusIcon = $('#plus_asset_link');
-            let $minusIcon = $('#minus_asset_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Asset Details LInk Button
-        $(document).on('click', '.child_asset_details', function() {
-            let $plusIcon = $('#plus_asset_details_link');
-            let $minusIcon = $('#minus_asset_details_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Report show Button
-        $(document).on('click','.rept_button',function(){
-            let $plusIcon = $('#plus_report');
-            let $minusIcon = $('#minus_report');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-            $('.report_btn').toggleClass('product-menu-btn');
-            $('.report_btn').fadeIn('slide');
-        });
-        // Report LInk Button
-        $(document).on('click', '.child_report', function() {
-            let $plusIcon = $('#plus_report_link');
-            let $minusIcon = $('#minus_report_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Monthly Report LInk Button
-        $(document).on('click', '.child_monthly_report', function() {
-            let $plusIcon = $('#plus_monthly_report_link');
-            let $minusIcon = $('#minus_monthly_report_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Daily Report LInk Button
-        $(document).on('click', '.child_daily_report', function() {
-            let $plusIcon = $('#plus_daily_report_link');
-            let $minusIcon = $('#minus_daily_report_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // HRM show Button
-        $(document).on('click','.hm_button',function(){
-            let $plusIcon = $('#plus_hrm');
-            let $minusIcon = $('#minus_hrm');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-            $('.hrm_btn').toggleClass('product-menu-btn');
-            $('.hrm_btn').fadeIn('slide');
-        });
-        // Employee LInk Button
-        $(document).on('click', '.child_employee', function() {
-            let $plusIcon = $('#plus_employee_link');
-            let $minusIcon = $('#minus_employee_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Employee Profile LInk Button
-        $(document).on('click', '.child_employee_profile', function() {
-            let $plusIcon = $('#plus_employee_profile_link');
-            let $minusIcon = $('#minus_employee_profile_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Salary Payment LInk Button
-        $(document).on('click', '.child_salary', function() {
-            let $plusIcon = $('#plus_salary_link');
-            let $minusIcon = $('#minus_salary_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Employee Performance LInk Button
-        $(document).on('click', '.child_emp_performance', function() {
-            let $plusIcon = $('#plus_emp_performance_link');
-            let $minusIcon = $('#minus_emp_performance_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Employee Attendence LInk Button
-        $(document).on('click', '.child_emp_attendence', function() {
-            let $plusIcon = $('#plus_emp_attendence_link');
-            let $minusIcon = $('#minus_emp_attendence_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Employee Details Record LInk Button
-        $(document).on('click', '.child_emp_details', function() {
-            let $plusIcon = $('#plus_emp_details_link');
-            let $minusIcon = $('#minus_emp_details_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Auth show Button
-        $(document).on('click','.ath_button',function(){
-            let $plusIcon = $('#plus_auth');
-            let $minusIcon = $('#minus_auth');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-            $('.auth_btn').toggleClass('product-menu-btn');
-            $('.auth_btn').fadeIn('slide');
-        });
-        // Atuthentication LInk Button
-        $(document).on('click', '.child_authentication', function() {
-            let $plusIcon = $('#plus_authentication_link');
-            let $minusIcon = $('#minus_authentication_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Permission LInk Button
-        $(document).on('click', '.child_permission', function() {
-            let $plusIcon = $('#plus_permission_link');
-            let $minusIcon = $('#minus_permission_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // User Location LInk Button
-        $(document).on('click', '.child_location', function() {
-            let $plusIcon = $('#plus_loaction_link');
-            let $minusIcon = $('#minus_loaction_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // User Location LInk Button
-        $(document).on('click', '.child_branch', function() {
-            let $plusIcon = $('#plus_branch_link');
-            let $minusIcon = $('#minus_branch_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Module LInk Button
-        $(document).on('click', '.child_module', function() {
-            let $plusIcon = $('#plus_module_link');
-            let $minusIcon = $('#minus_module_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Log Activity LInk Button
-        $(document).on('click', '.child_log_activity', function() {
-            let $plusIcon = $('#plus_log_activity_link');
-            let $minusIcon = $('#minus_log_activity_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Layout LInk Button
-        $(document).on('click', '.child_layout', function() {
-            let $plusIcon = $('#plus_layout_link');
-            let $minusIcon = $('#minus_layout_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Components show Button
-        $(document).on('click','.com_button',function(){
-            let $plusIcon = $('#plus_component_link');
-            let $minusIcon = $('#minus_component_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-            $('.Components_btn').toggleClass('product-menu-btn');
-            $('.auth_btn').fadeIn('slide');
-        });
-        // Modal LInk Button
-        $(document).on('click', '.child_modal', function() {
-            let $plusIcon = $('#plus_modal_link');
-            let $minusIcon = $('#minus_modal_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Form LInk Button
-        $(document).on('click', '.child_form', function() {
-            let $plusIcon = $('#plus_form_link');
-            let $minusIcon = $('#minus_form_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Input LInk Button
-        $(document).on('click', '.child_input', function() {
-            let $plusIcon = $('#plus_input_link');
-            let $minusIcon = $('#minus_input_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Dropdown LInk Button
-        $(document).on('click', '.child_dropdown', function() {
-            let $plusIcon = $('#plus_dropdown_link');
-            let $minusIcon = $('#minus_dropdown_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Table LInk Button
-        $(document).on('click', '.child_table', function() {
-            let $plusIcon = $('#plus_table_link');
-            let $minusIcon = $('#minus_table_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Footer LInk Button
-        $(document).on('click', '.child_footer', function() {
-            let $plusIcon = $('#plus_footer_link');
-            let $minusIcon = $('#minus_footer_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Card LInk Button
-        $(document).on('click', '.child_card', function() {
-            let $plusIcon = $('#plus_card_link');
-            let $minusIcon = $('#minus_card_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
-        });
-        // Setting show Button
-        $(document).on('click','.child_setting',function(){
-            let $plusIcon = $('#plus_setting_link');
-            let $minusIcon = $('#minus_setting_link');
-
-            if ($(this).attr('aria-expanded') === 'true') {
-                $plusIcon.attr('hidden', true);
-                $minusIcon.removeAttr('hidden');
-            } else {
-                $plusIcon.removeAttr('hidden');
-                $minusIcon.attr('hidden', true);
-            }
         });
     });
 </script>
