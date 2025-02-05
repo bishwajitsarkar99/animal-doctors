@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     @include('backend.layouts._head')
-
+    @livewireStyles
     @yield('css')
     @stack('css')
 </head>
@@ -17,7 +17,7 @@
 
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-light-grey" id="sidenavAccordion">
-                @include('backend.layouts.layouts-components._sidebar')
+                @livewire('sidebar-component')
             </nav>
         </div>
         <div id="layoutSidenav_content">
@@ -58,7 +58,6 @@
     @include('backend.layouts.handler-js.profile-js._profile-handler')
     @include('backend.layouts.handler-js.account-setting-js._account-setting-ajax')
     @include('backend.layouts.handler-js.activity-log-js._activity-log-ajax')
-    @include('backend.layouts.handler-js.design._side-bar-js')
     @include('backend.layouts.handler-js.footer-js._footer-menu-js')
     @include('backend.layouts.handler-js._footer-js')
     @include('backend.layouts.layouts-components.file-manager._file_manager')
@@ -66,6 +65,7 @@
     @include('permission.permission-templete-index');
     @include('permission.ajax.permission-ajax');
 
+    @livewireScripts
     @yield('script')
     @stack('scripts')
 
