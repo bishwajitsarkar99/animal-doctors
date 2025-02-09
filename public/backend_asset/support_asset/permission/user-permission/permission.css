@@ -107,7 +107,7 @@ ul {
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
-#branchCategory,#branchName{
+#branchCategory{
     width: 100%;
     background-color: #cdf3ff;
     --mdb-box-shadow-color-rgb: 0, 0, 0;

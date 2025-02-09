@@ -10,22 +10,28 @@
     <li>
         <div class="collapse" id="auth_" aria-labelledby="headingTwo" data-bs-parent="#auth_">
             <nav class="sb-sidenav-menu-nested nav child-tree">
-                <a class="nav-link underline nav_space" href="{{route('get_account-holders.action')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Account-History')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a class="nav-link underline nav_space"
+                    wire:click.prevent="navigateToAccountHistoryIndex" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Account-History')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.Account-History')}}
                 </a>
-                <a class="nav-link underline nav_space" href="{{route('emailVerification')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Email-Verification')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a class="nav-link underline nav_space"
+                    wire:click.prevent="navigateToEmailVerificationIndex" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Email-Verification')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.Email-Verification')}}
                 </a>
-                <a class="nav-link underline nav_space" href="#" wire:click.prevent="$emit('loadPage', 'RolePromotComponent')" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Role Promot')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a class="nav-link underline nav_space"
+                    wire:click.prevent="navigateToRoleIndex" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Role Promot')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.Role Promot')}}
                 </a>
-                <a class="nav-link underline nav_space" href="{{route('role_permission.index')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Role Permission')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a class="nav-link underline nav_space"
+                    wire:click.prevent="navigateToRolePermissionIndex" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Role Permission')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.Role Permission')}}
                 </a>
-                <a class="nav-link underline nav_space" href="{{route('manageRole')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Manage Role')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a class="nav-link underline nav_space"
+                    wire:click.prevent="navigateToRoleManageIndex" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Manage Role')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.Manage Role')}}
                 </a>
-                <a class="nav-link underline nav_space" href="{{route('superAdminUsers')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Users Access')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a class="nav-link underline nav_space"
+                    wire:click.prevent="navigateToUserAccessIndex" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Users Access')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.Users Access')}}
                 </a>
             </nav>

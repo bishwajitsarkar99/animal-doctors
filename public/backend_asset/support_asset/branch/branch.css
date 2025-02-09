@@ -467,12 +467,21 @@ label.label_position {
     background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     padding: 10px 10px;
 }
+label.branch_label {
+    font-size: 12px;
+    font-weight: 700;
+    color: black;
+    font-family: var(--nav-font-family);
+}
 .branch_input {
     color: black;
-    font-weight: 600;
-    font-size: 13px;
+    font-weight: 700;
+    font-size: 12px;
     font-family: var(--nav-font-family);
     border: 1px solid #efeeee;
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.275rem;
+    line-height: 1;
 }
 input#branchName,input#branchCode,input#divisionName,input#districtName,input#thanaName,input#townName,
 input#location{

@@ -271,11 +271,6 @@ class SuperAdminService
     */
     public function rolesIndex(Request $request)
     {
-        // if ($request->ajax()) {
-        //     return response()->json([
-        //         'view' => view('super-admin.role.role-promot')->render()
-        //     ]);
-        // }
         return view('super-admin.role.role-promot');
     }
     /**
