@@ -529,7 +529,7 @@
                                 ${item.email}
                                 <label class="email_enter_press enter-focus">Enter Press <i class="fa-solid fa-link"></i></label>
                                 <span class="bage_display_none" id="userImage">
-                                    <img class="user_img rounded-circle user_imgs" src="${item.image.includes('https://') ? item.image : '/image/' + item.image}">
+                                    <img class="user_img rounded-circle user_imgs" src="${item.image.includes('https://') ? item.image : '/storage/image/user-image/' + item.image}">
                                 </span>
                             </li>`
                         );
@@ -752,22 +752,22 @@
 
                         const firstUserImage = messages.created_users.image.includes('https://') 
                             ? messages.created_users.image 
-                            : `${window.location.origin}/image/${messages.created_users.image}`;
+                            : `${window.location.origin}/storage/image/user-image/${messages.created_users.image}`;
                         const secondUserImage = messages.user_emails.image.includes('https://') 
                             ? messages.user_emails.image 
-                            : `${window.location.origin}/image/${messages.user_emails.image}`;
+                            : `${window.location.origin}/storage/image/user-image/${messages.user_emails.image}`;
                         const thirdUserImage = 
                             messages.user_emails && messages.user_emails.image 
                             ? (messages.user_emails.image.includes('https://') 
                                 ? messages.user_emails.image 
-                                : `${window.location.origin}/image/${messages.user_emails.image}`)
+                                : `${window.location.origin}/storage/image/user-image/${messages.user_emails.image}`)
                             : `${window.location.origin}/image/default.png`;
 
                         const fourUserImage = 
                             messages.user_emails && messages.user_emails.image 
                             ? (messages.user_emails.image.includes('https://') 
                                 ? messages.user_emails.image 
-                                : `${window.location.origin}/image/${messages.user_emails.image}`)
+                                : `${window.location.origin}/storage/image/user-image/${messages.user_emails.image}`)
                             : `${window.location.origin}/image/default.png`;
 
                         const roles = {

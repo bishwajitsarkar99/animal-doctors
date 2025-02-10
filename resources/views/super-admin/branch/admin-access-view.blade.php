@@ -128,48 +128,48 @@
                       <div class="row">
                         <div class="col-xl-5">
                           <label class="catg_name_label label_position" for="branch-id">Branch-ID</label>
-                          <input class="form-control form-control-sm branch_input add_branch_id" type="text" name="branch_id" id="add_branch_id" placeholder="Branch ID" value=""/>
+                          <input class="form-control branch_input add_branch_id" type="text" name="branch_id" id="add_branch_id" placeholder="Branch ID" value=""/>
                           <span id="savForm_branch_error" hidden></span><span id="updateForm_branch_error" hidden></span>
                         </div>
                         <div class="col-xl-7">
                           <label class="catg_name_label label_position" for="district-name">District-Name</label>
-                          <input class="form-control form-control-sm branch_input add_district_id" type="text" name="district_name" id="add_district_id" placeholder="District Name" value=""/>
+                          <input class="form-control branch_input add_district_id" type="text" name="district_name" id="add_district_id" placeholder="District Name" value=""/>
                           <span id="savForm_branch_error2" hidden></span><span id="updateForm_branch_error2" hidden></span>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-xl-5">
                           <label class="catg_name_label label_position" for="branch-name">Branch-Name</label>
-                          <input class="form-control form-control-sm branch_input add_branch_name" type="text" name="branch_name" id="add_branch_name" placeholder="Branch Name" value=""/>
+                          <input class="form-control branch_input add_branch_name" type="text" name="branch_name" id="add_branch_name" placeholder="Branch Name" value=""/>
                           <span id="savForm_branch_error3" hidden></span><span id="updateForm_branch_error3" hidden></span>
                         </div>
                         <div class="col-xl-7">
                           <label class="catg_name_label label_position" for="upazila-or-thana">Upazila/Thana</label>
-                          <input class="form-control form-control-sm branch_input add_upazila_id" type="text" name="upazila_name" id="add_upazila_id" placeholder="Upazila Name" value=""/>
+                          <input class="form-control branch_input add_upazila_id" type="text" name="upazila_name" id="add_upazila_id" placeholder="Upazila Name" value=""/>
                           <span id="savForm_branch_error4" hidden></span><span id="updateForm_branch_error4" hidden></span>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-xl-5">
                           <label class="catg_name_label label_position" for="branch-type">Branch-Type</label>
-                          <input class="form-control form-control-sm branch_input add_branch_type" type="text" name="branch_type" id="add_branch_type" placeholder="Branch Type" value=""/>
+                          <input class="form-control branch_input add_branch_type" type="text" name="branch_type" id="add_branch_type" placeholder="Branch Type" value=""/>
                           <span id="savForm_branch_error5" hidden></span><span id="updateForm_branch_error5" hidden></span>
                         </div>
                         <div class="col-xl-7">
                           <label class="catg_name_label label_position" for="city-name">City-Name</label>
-                          <input class="form-control form-control-sm branch_input add_town_name" type="text" name="town_name" id="add_town_name" placeholder="City Name" value=""/>
+                          <input class="form-control branch_input add_town_name" type="text" name="town_name" id="add_town_name" placeholder="City Name" value=""/>
                           <span id="savForm_branch_error6" hidden></span><span id="updateForm_branch_error6" hidden></span>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-xl-5">
                           <label class="catg_name_label label_position" for="division-name">Division-Name</label>
-                          <input class="form-control form-control-sm branch_input add_division_id" type="text" name="division_name" id="add_division_id" placeholder="Division Name" value=""/>
+                          <input class="form-control branch_input add_division_id" type="text" name="division_name" id="add_division_id" placeholder="Division Name" value=""/>
                           <span id="savForm_branch_error7" hidden></span><span id="updateForm_branch_error7" hidden></span>
                         </div>
                         <div class="col-xl-7">
                           <label class="catg_name_label label_position" for="location-name">Location</label>
-                          <input class="form-control form-control-sm branch_input add_location" type="text" name="location" id="add_location" placeholder="Location Name" value=""/>
+                          <input class="form-control branch_input add_location" type="text" name="location" id="add_location" placeholder="Location Name" value=""/>
                           <span id="savForm_branch_error8" hidden></span><span id="updateForm_branch_error8" hidden></span>
                         </div>
                       </div>

@@ -297,7 +297,7 @@
                             const messages = response.messages;
                             
                             if(messages.created_by !== ''){
-                                const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/image/${messages.created_users.image}`;
+                                const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/storage/image/user-image/${messages.created_users.image}`;
                                 let createdByRole;
                                 switch (messages.created_by) {
                                     case 1:
@@ -337,7 +337,7 @@
                             if(messages.updated_by !== null){
                                 $("#updatorContent").removeAttr('hidden');
                                 $('#updatorHead').removeAttr('hidden');
-                                const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/image/${messages.updated_users.image}`;
+                                const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/storage/image/user-image/${messages.updated_users.image}`;
                                 let updatedByRole;
                                 switch (messages.updated_by) {
                                     case 1:
@@ -380,7 +380,7 @@
                             if(messages.approver_by !== null){
                                 $("#approverContent").removeAttr('hidden');
                                 $('#approverHead').removeAttr('hidden');
-                                const secondUserImage = messages.approver_users.image.includes('https://') ? messages.approver_users.image : `${window.location.origin}/image/${messages.approver_users.image}`;
+                                const secondUserImage = messages.approver_users.image.includes('https://') ? messages.approver_users.image : `${window.location.origin}/storage/image/user-image/${messages.approver_users.image}`;
                                 let approverByRole;
                                 switch (messages.approver_by) {
                                     case 1:

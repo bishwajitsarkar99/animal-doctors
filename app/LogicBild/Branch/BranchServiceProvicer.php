@@ -6,7 +6,7 @@ use App\Models\CompanyProfile;
 use App\Models\Branch\Division;
 use App\Models\Branch\District;
 use App\Models\Branch\ThanaOrUpazila;
-use App\Models\Branch\Branch;
+use App\Models\Branch\Branches;
 use App\Models\Branch\UserBranchAccessPermission;
 use App\Models\Branch\BranchCategory;
 use App\Models\Branch\AdminBranchAccessPermission;
@@ -219,7 +219,7 @@ class BranchServiceProvicer
             $auth = Auth::user();
 
             // Create a new branch
-            $branch = new Branch;
+            $branch = new Branches;
             $branch->branch_id = $request->input('branch_id');
             $branch->branch_name = $request->input('branch_name');
             $branch->branch_type = $request->input('branch_type');
@@ -253,13 +253,13 @@ class BranchServiceProvicer
 
         if($auth->role == 1){
             // Get Branch Data
-            $branch_ids = Branch::whereNotNull('branch_id')->get();
+            $branch_ids = Branches::whereNotNull('branch_id')->get();
             $user_counts = UserBranchAccessPermission::select('branch_id', DB::raw('COUNT(email_id) as user_count'))
                 ->whereIn('branch_id', $branch_ids->pluck('branch_id'))
                 ->groupBy('branch_id')
                 ->pluck('user_count', 'branch_id');
 
-            $allBranch = Branch::orderBy('id', 'desc')->get();
+            $allBranch = Branches::orderBy('id', 'desc')->get();
     
             return response()->json([
                 'allBranch' => $allBranch,
@@ -268,13 +268,13 @@ class BranchServiceProvicer
 
         }elseif($auth->role == 3 && $authEmail){
 
-            $branch_ids = Branch::whereNotNull('branch_id')->get();
+            $branch_ids = Branches::whereNotNull('branch_id')->get();
             $user_counts = UserBranchAccessPermission::select('branch_id', DB::raw('COUNT(email_id) as user_count'))
                 ->whereIn('branch_id', $branch_ids->pluck('branch_id'))
                 ->groupBy('branch_id')
                 ->pluck('user_count', 'branch_id');
 
-            $allBranch = Branch::where('admin_email_id', $authEmail)
+            $allBranch = Branches::where('admin_email_id', $authEmail)
                 ->where('admin_approval_status', 1)
                 ->get();
             
@@ -288,13 +288,13 @@ class BranchServiceProvicer
             }
         }elseif($auth->role == 2 && $authEmail){
 
-            $branch_ids = Branch::whereNotNull('branch_id')->get();
+            $branch_ids = Branches::whereNotNull('branch_id')->get();
             $user_counts = UserBranchAccessPermission::select('branch_id', DB::raw('COUNT(email_id) as user_count'))
                 ->whereIn('branch_id', $branch_ids->pluck('branch_id'))
                 ->groupBy('branch_id')
                 ->pluck('user_count', 'branch_id');
 
-            $allBranch = Branch::where('admin_email_id', $authEmail)
+            $allBranch = Branches::where('admin_email_id', $authEmail)
                 ->where('sub_admin_approval_status', 1)->get();
             
             return response()->json([
@@ -316,8 +316,11 @@ class BranchServiceProvicer
     */
     public function editBranchs($id)
     {
-        $branch = Branch::with(
+        $branch = Branches::with(
             [
+                'divisions',
+                'districts',
+                'thana_or_upazilas',
                 'created_users', 
                 'updated_users',
             ]
@@ -369,7 +372,7 @@ class BranchServiceProvicer
             $auth = Auth::user();
 
             // Create a new branch
-            $branch = Branch::find($id);
+            $branch = Branches::find($id);
             if($branch){
                 $branch->branch_id = $request->input('branch_id');
                 $branch->branch_name = $request->input('branch_name');
@@ -401,7 +404,7 @@ class BranchServiceProvicer
     */
     public function deleteBranchs($id)
     {
-        $branchs = Branch::find($id);
+        $branchs = Branches::find($id);
         $branchs->delete();
         return response()->json([
             'status' => 200,
@@ -425,7 +428,7 @@ class BranchServiceProvicer
         $auth = Auth::user();
 
         if($auth->role ==1){
-            $branch_names = Branch::orderBy('id', 'desc')->where('branch_name', '!=', null)->get();
+            $branch_names = Branches::orderBy('id', 'desc')->where('branch_name', '!=', null)->get();
     
             if($branch_names){
                 return response()->json([
@@ -444,7 +447,7 @@ class BranchServiceProvicer
     
         if ($auth->role == 1) {
 
-            $branch_user = Branch::with('user_emails')->find($id);
+            $branch_user = Branches::with('user_emails')->find($id);
     
             if ($branch_user && $branch_user->user_emails) {
 
@@ -468,7 +471,7 @@ class BranchServiceProvicer
     */
     public function branchSearchNames(Request $request, $id)
     {
-        $branch = Branch::with(
+        $branch = Branches::with(
             [
                 'created_users', 
                 'updated_users', 
@@ -576,7 +579,7 @@ class BranchServiceProvicer
         $auth = Auth::user();
         $approvalDate = now();
 
-        $branch = Branch::find($request->id);
+        $branch = Branches::find($request->id);
         if (!$branch) {
             return response()->json([
                 'status' => 404,
@@ -639,7 +642,7 @@ class BranchServiceProvicer
         }
 
         if($auth->role ==3 && $authEmail){
-            $specify_branch = Branch::where('admin_email_id', $authEmail)
+            $specify_branch = Branches::where('admin_email_id', $authEmail)
                 ->where('admin_approval_status', 1)->get();
     
             return response()->json([
@@ -654,7 +657,7 @@ class BranchServiceProvicer
     */
     public function branchGet(Request $request, $id)
     {
-        $branch = Branch::with(
+        $branch = Branches::with(
             [
                 'divisions', 
                 'districts', 

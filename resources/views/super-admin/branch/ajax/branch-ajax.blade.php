@@ -81,6 +81,8 @@
                 $("#branch_id_field").val('C-BRN');
             }else if(brancType === 'Local Branch'){
                 $("#branch_id_field").val('L-BRN');
+            }else if(brancType === 'Delivery Branch'){
+                $("#branch_id_field").val('D-BRN');
             }
 
             var x = Math.random();
@@ -168,7 +170,7 @@
                             const messages = response.messages;
                             
                             if(messages.created_by !== ''){
-                                const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/image/${messages.created_users.image}`;
+                                const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/storage/image/user-image/${messages.created_users.image}`;
                                 let createdByRole;
                                 switch (messages.created_by) {
                                     case 1:
@@ -208,7 +210,7 @@
                             if(messages.updated_by !== null){
                                 $("#secondContent").removeAttr('hidden');
                                 $('#secondHead').removeAttr('hidden');
-                                const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/image/${messages.updated_users.image}`;
+                                const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/storage/image/user-image/${messages.updated_users.image}`;
                                 let updatedByRole;
                                 switch (messages.updated_by) {
                                     case 1:

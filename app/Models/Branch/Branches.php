@@ -9,7 +9,7 @@ use App\Models\Branch\District;
 use App\Models\Branch\ThanaOrUpazila;
 use App\Models\User;
 
-class Branch extends Model
+class Branches extends Model
 {
     use HasFactory;
     protected $table = 'branches';
