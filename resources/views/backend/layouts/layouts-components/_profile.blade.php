@@ -51,8 +51,16 @@
                 <span class="mt-1">{{Auth::user()->contract_number}}</span> <br>
               </span>
               <span id="info2">
-                <label class="mt-1" for="mail-address">Mail :</label>
+                <label class="mt-1" for="mail-address">Credentials-Email :</label>
                 <span class="mt-1">{{Auth::user()->email}}</span> <br>
+              </span>
+              <span id="info2">
+                <label class="mt-1" for="login-mail-address">Login-Email :</label>
+                <span class="mt-1">{{Auth::user()->login_email}}</span> <br>
+              </span>
+              <span id="info2">
+                <label class="mt-1" for="mailing-mail-address">Mailing-Email :</label>
+                <span class="mt-1">{{Auth::user()->mailing_email}}</span> <br>
               </span>
             </p>
           </div>

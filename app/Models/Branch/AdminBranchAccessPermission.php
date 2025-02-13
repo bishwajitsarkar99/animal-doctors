@@ -14,6 +14,8 @@ class AdminBranchAccessPermission extends Model
 {
     use HasFactory;
     protected $table = 'admin_branch_access_permissions';
+    protected $primaryKey = 'id';
+    public $timestamps = true; 
     protected $fillable = [
         'branch_id',
         'branch_type',

@@ -441,26 +441,31 @@ class BranchServiceProvicer
     /**
      * Handle branch user email fetch.
     */
-    public function branchFetchUserEmail(Request $request, $id)
+    public function branchFetchUserEmail(Request $request)
     {
         $auth = Auth::user();
-    
-        if ($auth->role == 1) {
 
-            $branch_user = Branches::with('user_emails')->find($id);
-    
-            if ($branch_user && $branch_user->user_emails) {
+        if ($auth->role == 1) {
+            $roles = Role::where('status', 1)->pluck('id')->toArray();
+            $branch_admin_users = AdminBranchAccessPermission::with('user_emails')
+                ->whereIn('user_role_id', $roles)
+                ->get();
+
+            if ($branch_admin_users->isNotEmpty()) {
+                $data = $branch_admin_users->map(function ($user) {
+                    return [
+                        'id' => $user->user_emails->id ?? null,
+                        'user_email_id' => $user->user_emails->login_email ?? null,
+                        'branch_id' => $user->branch_id,
+                    ];
+                });
 
                 return response()->json([
-                    'branch_user' => [
-                        'id' => $branch_user->user_emails->id,
-                        'user_email_id' => $branch_user->user_emails->email,
-                    ],
-                    'branch_id' => $branch_user->branch_id,
+                    'branch_admin_users' => $data,
                 ], 200);
             }
         }
-    
+
         return response()->json([
             'message' => 'No emails found or unauthorized access.',
         ], 404);
@@ -471,14 +476,11 @@ class BranchServiceProvicer
     */
     public function branchSearchNames(Request $request, $id)
     {
-        $branch = Branches::with(
+        $branch = AdminBranchAccessPermission::with(
             [
                 'created_users', 
                 'updated_users', 
                 'approver_users', 
-                'divisions', 
-                'districts', 
-                'thana_or_upazilas',
                 'user_roles',
                 'user_emails',
             ]
@@ -503,23 +505,30 @@ class BranchServiceProvicer
     public function branchAdminAcessStore(Request $request)
     {
         $validators = validator::make($request->all(),[
+            'id' => 'required',
             'branch_id' => 'required',
             'branch_type' => 'required',
             'branch_name' => 'required',
-            'division_id' => 'required',
-            'district_id' => 'required',
-            'upazila_id' => 'required',
+            'division_name' => 'required',
+            'district_name' => 'required',
+            'upazila_name' => 'required',
             'town_name' => 'required',
             'location' => 'required',
+            'user_role_id' => 'required|exists:roles,id',
+            'user_email_id' => 'required|unique:admin_branch_access_permissions',
         ],[
+            'id.required' => 'ID is reqired.',
             'branch_id.required' => 'Branch id is reqired.',
             'branch_name.required' => 'Branch name is reqired.',
             'branch_type.required' => 'The branch type is required.',
-            'division_id.required' => 'The branch Division is required.',
-            'district_id.required' => 'The branch District is required.',
-            'upazila_id.required' => 'The branch Upazila is required.',
+            'division_name.required' => 'The branch Division is required.',
+            'district_name.required' => 'The branch District is required.',
+            'upazila_name.required' => 'The branch Upazila is required.',
             'town_name.required' => 'The branch city is required.',
             'location.required' => 'The branch loaction is required.',
+            'user_role_id.required' => 'The role is required',
+            'user_email_id.required' => 'Branch user email is required',
+            'user_email_id.unique' => 'This email has already taken.',
         ]);
 
         if($validators->fails()){
@@ -530,19 +539,20 @@ class BranchServiceProvicer
         }else{
             // Retrieve authenticated user
             $auth = Auth::user();
-
-            // Create a new branch
+            // Create a new admin access store
             $branch_admin_access = new AdminBranchAccessPermission;
+            $branch_admin_access->id = $request->input('id');
             $branch_admin_access->branch_id = $request->input('branch_id');
             $branch_admin_access->branch_name = $request->input('branch_name');
             $branch_admin_access->branch_type = $request->input('branch_type');
-            $branch_admin_access->division_id = $request->input('division_id');
-            $branch_admin_access->district_id = $request->input('district_id');
-            $branch_admin_access->upazila_id = $request->input('upazila_id');
+            $branch_admin_access->division_name = $request->input('division_name');
+            $branch_admin_access->district_name = $request->input('district_name');
+            $branch_admin_access->upazila_name = $request->input('upazila_name');
             $branch_admin_access->town_name = $request->input('town_name');
             $branch_admin_access->location = $request->input('location');
+            $branch_admin_access->user_role_id = $request->input('user_role_id');
+            $branch_admin_access->user_email_id = $request->input('user_email_id');
             $branch_admin_access->created_by = $auth->id;
-
 
             $branch_admin_access->save();
             return response()->json([
@@ -559,14 +569,11 @@ class BranchServiceProvicer
     {
         // Validation
         $validator = Validator::make($request->all(), [
-            'branch_id' => 'required',
-            'user_role_id' => 'required|exists:roles,id',
-            'user_email_id' => 'required|unique:branches',
-        ], [
-            'branch_id.required' => 'Branch name is required',
-            'user_role_id.required' => 'Branch user role is required',
-            'user_email_id.required' => 'Branch user email is required',
-            'user_email_id.unique' => 'This email has already taken.',
+            'id' => 'required|integer',
+            'branch_id' => 'required|string',
+            'user_role_id' => 'required|integer',
+            'user_email_id' => 'required|integer',
+            'status' => 'required|boolean',
         ]);
 
         if ($validator->fails()) {
@@ -579,7 +586,7 @@ class BranchServiceProvicer
         $auth = Auth::user();
         $approvalDate = now();
 
-        $branch = Branches::find($request->id);
+        $branch = AdminBranchAccessPermission::find($request->id);
         if (!$branch) {
             return response()->json([
                 'status' => 404,
@@ -587,7 +594,8 @@ class BranchServiceProvicer
             ], 404);
         }
 
-        $branch->branch_id = $request->branch_id;
+        // Update branch access details
+        $branch->id = $request->id;
         $branch->user_role_id = $request->user_role_id;
         $branch->user_email_id = $request->user_email_id;
         $branch->status = $request->status;
@@ -601,22 +609,24 @@ class BranchServiceProvicer
         }
 
         $branch->save();
-        // Update specific user in the users table
-        // if ($request->user_email_id) {
-        //     $user = User::where('id', $request->user_email_id)->first();
 
-        //     if ($user) {
-        //         $user->branch_id = $request->branch_id;
-        //         $user->branch_type = $request->branch_type;
-        //         $user->branch_name = $request->branch_name;
-        //         $user->branch_sender_id = $auth->id;
-        //         $user->save();
-        //     }
-        // }
+        // Update User Details in `users` Table
+        $user = User::find($request->user_email_id);
+        if ($user) {
+            $user->branch_id = $request->branch_id;
+            $user->branch_type = $request->branch_type;
+            $user->branch_name = $request->branch_name;
+            $user->division_name = $request->division_name;
+            $user->district_name = $request->district_name;
+            $user->upazila_name = $request->upazila_name;
+            $user->town_name = $request->town_name;
+            $user->location = $request->location;
+            $user->save();
+        }
 
         return response()->json([
             'status' => 202,
-            'messages' => 'The branch access has been done.',
+            'messages' => 'The branch access has been updated successfully.',
         ], 202);
     }
 

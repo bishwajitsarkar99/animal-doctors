@@ -228,7 +228,7 @@
                     const users = response.users;
                     $("#select_email_one").empty();
                     $.each(users, function(key, item) {
-                        $("#select_email_one").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.email}</option>`);
+                        $("#select_email_one").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.login_email}</option>`);
                     });
                     if (typeof callback === 'function') {
                         callback();
