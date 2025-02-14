@@ -12,7 +12,7 @@
                 @csrf
                 <div class="row">
                   <div class="col-xl-4">
-                    <div class="form-group mb-1 role_nme skeleton" id="accessSearch" hidden>
+                    <div class="form-group mb-1 role_nme skeleton access_search" id="accessSearch" hidden>
                       <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Search Branch For Add Access....</label></span>
                       <select type="text" class="form-control form-control-sm select_branch_search select2" name="branch_name" id="select_branch_search">
                         <option value="">Select Company Branch Name</option>
@@ -21,7 +21,7 @@
                       <input type="hidden" name="id" id="branches_id">
                       <input type="hidden" name="branch_id" id="get_branch_id">
                     </div>
-                    <div class="form-group role_nme branch mb-1 skeleton" id="adminEmail" hidden>
+                    <div class="form-group role_nme branch mb-1 skeleton admin_email_search" id="adminEmail" hidden>
                       <label class="catg_name_label label_position" for="mail-transport">Search User Email For Access Promot....</label><br>
                       <select type="text" class="form-control form-control-sm select_user_email select2" name="user_email_id" id="select_user_email">
                         <option value="">Select User Email</option>

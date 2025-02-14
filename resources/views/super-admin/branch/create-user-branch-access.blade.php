@@ -90,11 +90,15 @@
                             </table>
                         </div>
                     </div>
-                    <div class="ps-2">
-                        <div class="form-group button_group ps-1" id="add_accss" hidden>
+                    <div class="">
+                        <div class="form-group button_group" id="add_accss" hidden>
                             <button type="button" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" id="add" disabled>
                                 <span class="add-btn-text">ADD Access</span>
                                 <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                            </button>
+                            <button id="cancel_of_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton-button mt-2">
+                                <span class="cancel-of-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                <span class="cancel-of-btn-text">Cancel</span>
                             </button>
                         </div>
                     </div>

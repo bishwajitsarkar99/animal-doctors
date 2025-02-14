@@ -172,7 +172,8 @@ button.btn.btn-sm.cgt_btn {
 }
 button.btn.btn-sm.cgt_btn:hover{
     background-color: #ddd;
-    color: darkcyan;
+    color: #0056b3;
+    transition: all 1s;
 }
 button.btn.btn-sm.cgt_cancel_btn{
     background-color: orangered;
@@ -194,6 +195,7 @@ button.btn.btn-sm.cgt_cancel_btn{
 button.btn.btn-sm.cgt_cancel_btn:hover{
     background-color: #ddd;
     color: orangered;
+    transition: all 1s;
 }
 .category-hidden{
     display: none;

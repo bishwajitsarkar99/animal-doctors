@@ -17,6 +17,7 @@
         buttonLoader('#save_btn_confirm', '.save-icon', '.save-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
         buttonLoader('#refresh', '.refresh-icon', '.refresh-btn-text', 'Refresh...', 'Refresh', 1000);
+        buttonLoader('#cancel_of_btn', '.cancel-of-icon', '.cancel-of-btn-text', 'Cancel...', 'Cancel', 1000);
         buttonLoader('#pagePermision', '.permission-page-icon', '.permission-page-btn-text', 'Permission...', 'Permission', 1000);
         // Initialize Select2 for all elements with the 'select2' class
         $('.select2').each(function() {
@@ -205,6 +206,8 @@
                             $('#add_branch_id').val(response.messages.branch_id);
                             $('#add_branch_type').val(response.messages.branch_type);
                             $('#add_branch_name').val(response.messages.branch_name);
+                            $('#branch_head_name').val(response.messages.branch_name);
+                            $('#confirm_branch_name').val(response.messages.branch_name);
                             $('#add_division_id').val(response.messages.division_id);
                             $('#add_district_id').val(response.messages.district_id);
                             $('#add_upazila_id').val(response.messages.upazila_id);
@@ -232,6 +235,18 @@
             $('#role_id').val("");
             $('#email_id').val("");
         }
+
+        // Cancel Access
+        $(document).on('click', '#cancel_of_btn', function(){
+            $("#branchInfo").attr('hidden', true);
+            $("#add_accss").attr('hidden', true);
+            $("#branchInfo").attr('hidden', true);
+            // Clear Select2 fields reliably with delay
+            setTimeout(function() {
+                $('#search_branch_all').val(null).trigger('change');
+                $('#search_branch').val(null).trigger('change');
+            }, 100);
+        });
 
         // Remove Validation Errors
         $(document).on('change', '.email_id, .role_id', function(){

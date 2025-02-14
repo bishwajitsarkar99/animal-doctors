@@ -634,8 +634,12 @@
             $('#add_upazila_id').val("");
             $('#add_town_name').val("");
             $('#add_location').val("");
-            $("#select_role_one").val("");
-            $("#select_email_one").val("");
+            setTimeout(function() {
+                $('#select_user_email').val(null).trigger('change');
+                $('#select_branch_search').val(null).trigger('change');
+                $('#select_role_one').val(null).trigger('change');
+                $('#select_email_one').val(null).trigger('change');
+            }, 100);
         }
 
         // Admin Branch Access
@@ -700,7 +704,7 @@
                             $("#select_branch_search, #role_type, #select_role_one, #select_email_one").val("").trigger('change');
                             $("#admin_approval_status").prop("checked", false);
                             $("#adminSt, #adminStTwo, #subAdminSt, #subAdminStTwo").attr('hidden', true);
-
+                            inputClear();
                             setTimeout(() => {
                                 $("#success_message").fadeOut();
                                 fetch_branch();
@@ -758,10 +762,22 @@
             $("#documents").attr('hidden', true);
             $("#add_documents").attr('hidden', true);
             $("#access_btn").attr('hidden', true);
+            $("#branch_admin_access_store").attr('hidden', true);
+            $("#admin_role").attr('hidden', true);
+            $("#admin_email").attr('hidden', true);
+            $("#adminstatus").attr('hidden', true);
+            $("#adminEmail").removeAttr('hidden');
+            $("#accessSearch").removeAttr('hidden');
             $("#savForm_branch_error9").attr('hidden', true);
             $("#savForm_branch_error10").attr('hidden', true);
             $(this).attr('hidden', true);
-            $("#select_branch_search").val("");
+            // Clear Select2 fields reliably with delay
+            setTimeout(function() {
+                $('#select_user_email').val(null).trigger('change');
+                $('#select_branch_search').val(null).trigger('change');
+                $('#select_role_one').val(null).trigger('change');
+                $('#select_email_one').val(null).trigger('change');
+            }, 100);
         });
 
         // Select Role Type
