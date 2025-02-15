@@ -70,15 +70,15 @@
     <div class="modal-dialog">
       <div class="modal-content" id="admin_modal_box">
         <div class="modal-header profile_modal_header profilesetting_modal_header">
-          <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss branch-skeleton" id="staticBackdropLabel">
+          <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss modal-head-skeleton" id="staticBackdropLabel">
             <input class="modal_heading" type="text" id="branch_head_name" readonly>
           </h5>
           <button type="button" class="btn-close btn-btn-sm head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
         </div>
 
-        <div class="modal-body profile-body pb-1">
+        <div class="modal-body profile-body">
           <div class="content_body">
-            <div class="row profile-heading pb-3">
+            <div class="row profile-heading">
               @csrf
               <input type="hidden" id="add_branches_id">
               <input type="hidden" id="add_branch_id">
@@ -89,32 +89,31 @@
               <input type="hidden" id="add_upazila_id">
               <input type="hidden" id="add_town_name">
               <input type="hidden" id="add_location">
-              <div class="content_message">
-                <label class="branch_name_sub_title" for="branch-name">Branch-name : </label>
-                <input type="text" class="branch_name_sub_title" id="confirm_branch_name" readonly>
-                <label class="catg_name_label label_position" for="mail-transport">Role Name</label>
-                <select type="text" class="form-control form-control-sm role_id select2" name="role_id" id="select_role_one">
+              <div class="content_message branch-nmT branch-skeleton">
+                <label class="catg_name_label" for="branch-name">Branch-name : </label>
+                <input type="text" class="branch_name_sub_title catg_name_label branch-rest" id="confirm_branch_name" readonly>
+              </div>
+              <div class="form-group content_message role_nme branch-skeleton">
+                <label class="catg_name_label" for="mail-transport">Role Name</label><br>
+                <select type="text" class="form-control form-control-sm role_id select2" name="role_id" id="role_id">
                   <option value="">Select Role Name</option>
                 </select>
-                <span id="savForm_branch_error9" hidden><span id="updateForm_branch_error" hidden></span>
-                <label class="catg_name_label label_position" for="mail-transport">Email Address</label>
-                <select type="text" class="form-control form-control-sm email_id select_email_one select2" name="email_id" id="select_email_one">
+                <label class="catg_name_label" for="mail-transport">Email Address</label><br>
+                <select type="text" class="form-control form-control-sm email_id select2" name="email_id" id="email_id">
                   <option value="">Select Email Address</option>
                 </select>
-                <span id="savForm_branch_error10" hidden><span id="updateForm_branch_error" hidden></span>
-                <p>Would you like to add branch for access, confirm or cancel ?</p>
+                <p class="mt-2">Would you like to add branch for access, confirm or cancel ?</p>
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer profile_modal_footer action_group">
-          <button id="save_btn_confirm" class="btn btn-sm modal_button button_margin">
+          <button type="button" class="btn btn-sm cgt_cancel_btn delete_cancel branch-skeleton" id="cancle_access" data-bs-dismiss="modal">Access Cancel</button>
+          <button id="save_btn_confirm" class="btn btn-sm modal_button button_margin mn-btn-branch-skeleton">
             <span class="confirm-access-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
             <span class="confirm-access-btn-text">Confirm</span>
           </button>
-          <button type="button" class="btn btn-sm cgt_cancel_btn delete_cancel" id="cancle_access" data-bs-dismiss="modal">Access Cancel</button>
         </div> 
-        <!-- mn-branch-skeleton -->
         </div>
     </div>
   </div>

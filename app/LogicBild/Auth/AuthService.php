@@ -687,7 +687,9 @@ class AuthService
     */
     public function fetchRoles(Request $request)
     {
-        $roles = Role::all();
+        // $roles = Role::all();
+        $includedRoles = ['Super Admin', 'Admin', 'Sub Admin'];
+        $roles = Role::where('status', 1)->whereIn('name', $includedRoles)->get();
 
         return response()->json([
             'roles' => $roles,
@@ -741,7 +743,7 @@ class AuthService
     public function fetchBranchRole(Request $request)
     {
         $excludedRoles = ['Super Admin', 'Admin', 'Sub Admin'];
-        $branch_roles = Role::whereNotIn('name', $excludedRoles)->get();
+        $branch_roles = Role::where('status', 1)->whereNotIn('name', $excludedRoles)->get();
 
         return response()->json([
             'branch_roles' => $branch_roles,

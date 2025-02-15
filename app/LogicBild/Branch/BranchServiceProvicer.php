@@ -29,7 +29,8 @@ class BranchServiceProvicer
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        return view('super-admin.branch.index', compact('company_profiles'));
+        $page_name = 'Branch Create';
+        return view('super-admin.branch.index', compact('company_profiles', 'page_name'));
     }
 
     /**
@@ -417,7 +418,8 @@ class BranchServiceProvicer
     */
     public function branchAdminAccessView()
     {
-        return view('super-admin.branch.admin-access-view');
+        $page_name = 'Admin Branch Access';
+        return view('super-admin.branch.admin-access-view', compact('page_name'));
     }
 
     /**
@@ -635,7 +637,8 @@ class BranchServiceProvicer
     */
     public function branchAccessUserPermissionView(Request $request)
     {
-        return view('super-admin.branch.user-permission-view');
+        $page_name = 'User Branch Access';
+        return view('super-admin.branch.user-permission-view', compact('page_name'));
     }
 
     /**
@@ -902,6 +905,20 @@ class BranchServiceProvicer
         }
 
         $branch_access->save();
+
+        // Update User Details in `users` Table
+        $user = User::find($request->id);
+        if ($user) {
+            $user->branch_id = $request->branch_id;
+            $user->branch_type = $request->branch_type;
+            $user->branch_name = $request->branch_name;
+            $user->division_name = $request->division_name;
+            $user->district_name = $request->district_name;
+            $user->upazila_name = $request->upazila_name;
+            $user->town_name = $request->town_name;
+            $user->location = $request->location;
+            $user->save();
+        }
 
         return response()->json([
             'status' => 202,

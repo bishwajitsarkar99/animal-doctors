@@ -256,11 +256,19 @@
 <div class="row mt-2">
     <div class="col-xl-8 col-md-8">
         @if(auth()->user()->role ==1)
-        <ol class="breadcrumb">
-            <span class="das_head ps-1 pe-1 mt-">
-                <li class="breadcrumb-item active font_color_focus">{{__('translate.Dashboard')}}</li>
-            </span>
-        </ol>
+            @if(isset($page_name) && $page_name)
+                <ol class="breadcrumb">
+                    <span class="das_head ps-1 pe-1 mt-1">
+                        <li class="breadcrumb-item active font_color_focus">{{$page_name}}</li>
+                    </span>
+                </ol>
+            @else
+                <ol class="breadcrumb">
+                    <span class="das_head ps-1 pe-1 mt-1">
+                        <li class="breadcrumb-item active font_color_focus">{{ __('translate.Dashboard') }}</li>
+                    </span>
+                </ol>
+            @endif
         @endif
         @if(auth()->user()->role ==2)
         <ol class="breadcrumb">

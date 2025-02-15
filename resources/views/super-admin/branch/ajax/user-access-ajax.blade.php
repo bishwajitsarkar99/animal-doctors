@@ -299,8 +299,10 @@
             var time = setTimeout(() => {
                 // Remove skeleton classes
                 removeAttributeOrClass([
-                    { selector: '.head_title, .btn-close, .role_nme', type: 'class', name: 'branch-skeleton' },
-                    { selector: '#save_btn_confirm, #cancel_btn', type: 'class', name: 'branch-skeleton' },
+                    { selector: '.btn-close, .branch-nmT, .branch-rest, .role_nme', type: 'class', name: 'branch-skeleton' },
+                    { selector: '.head_title', type: 'class', name: 'modal-head-skeleton' },
+                    { selector: '#cancle_access', type: 'class', name: 'branch-skeleton' },
+                    { selector: '#save_btn_confirm', type: 'class', name: 'mn-btn-branch-skeleton' },
                 ]);
             }, 1000);
 
@@ -370,6 +372,12 @@
                             $("#pageLoader").attr('hidden', true);
                             $("#access_modal_box").removeClass('loader_area');
                             $("#processModal_body").addClass('loading_body_area');
+                            $("#branchInfo").attr('hidden', true);
+                            // Clear Select2 fields reliably with delay
+                            setTimeout(function() {
+                                $('#search_branch_all').val(null).trigger('change');
+                                $('#search_branch').val(null).trigger('change');
+                            }, 100);
 
                             $('#savForm_error').html("");
                             $('#savForm_error2').html("");
@@ -541,7 +549,7 @@
                     $.each(users, function(key, item) {
                         emailMenu.append(
                             `<li tabindex="0" value="${item.id}" id="email_select_list_item">
-                                ${item.email}
+                                ${item.login_email}
                                 <label class="email_enter_press enter-focus">Enter Press <i class="fa-solid fa-link"></i></label>
                                 <span class="bage_display_none" id="userImage">
                                     <img class="user_img rounded-circle user_imgs" src="${item.image.includes('https://') ? item.image : '/storage/image/user-image/' + item.image}">
@@ -755,7 +763,7 @@
                         const created_by = messages.created_by;
                         const updated_by = messages.updated_by;
                         const approver_by = messages.approver_by;
-                        const creatorUserEmail = messages.creator_emails.email;
+                        const creatorUserEmail = messages.creator_emails.login_email;
                         const adminApprovalStatus = messages.admin_approval_status;
                         const superAdminApprovalStatus = messages.super_admin_approval_status;
                         const superAdminApprovalBlogStatus = messages.status;
@@ -813,35 +821,35 @@
                         // Append user details
                         branchName.append(`<span class="word_space">${messages.branch_name}</span>`);
                         usrRole.append(`<span class="word_space">${messages.user_roles.name}</span>`);
-                        usrEmail.append(`<span class="word_space">${messages.user_emails.email}</span>`);
+                        usrEmail.append(`<span class="word_space">${messages.user_emails.login_email}</span>`);
                         usrImg.append(`<span class="word_space"><img class="user_img rounded-square users_image position" src="${secondUserImage}"></span>`);
 
                         branchMenu.append(
                             `<li value="" id="branch_info">
                                 <label class="branch_head_label">Branch information</label>
                             </li>
-                            <li value="${messages.id}" id="branch_ids">
+                            <li value="${messages.id}" id="branch_ids" data-branch-id="${messages.branch_id}">
                                 <label class="enter_press text_label">Branch-ID : ${messages.branch_id}</label>
                             </li>
-                            <li id="branch_types">
+                            <li id="branch_types" data-branch-id="${messages.branch_type}">
                                 <label class="enter_press text_label">Branch-Type : ${messages.branch_type}</label>
                             </li>
-                            <li id="branch_names">
+                            <li id="branch_names" data-branch-id="${messages.branch_name}">
                                 <label class="enter_press text_label">Branch-Name : ${messages.branch_name}</label>
                             </li>
-                            <li id="division_id">
+                            <li id="division_names" data-branch-id="${messages.divisions.division_name}">
                                 <label class="enter_press text_label">Division-Name : ${messages.divisions.division_name}</label>
                             </li>
-                            <li id="district_id">
+                            <li id="district_names" data-branch-id="${messages.districts.district_name}">
                                 <label class="enter_press text_label">District-Name : ${messages.districts.district_name}</label>
                             </li>
-                            <li id="upazila_id">
+                            <li id="upazila_names" data-branch-id="${messages.thana_or_upazilas.thana_or_upazila_name}">
                                 <label class="enter_press text_label">Upazila-Name : ${messages.thana_or_upazilas.thana_or_upazila_name}</label>
                             </li>
-                            <li id="town_name">
+                            <li id="town_names" data-branch-id="${messages.town_name}">
                                 <label class="enter_press text_label">City-Name : ${messages.town_name}</label>
                             </li>
-                            <li id="locations">
+                            <li id="locations" data-branch-id="${messages.location}">
                                 <label class="enter_press text_label">Branch-Location : ${messages.location}</label>
                             </li>
                             <li id="Creator">
@@ -873,7 +881,7 @@
                                 </li>
                                 <li id="updator_email">
                                     <label class="enter_press text_label" id="creatorUserEmail">
-                                        Email : ${messages.updator_emails.email} 
+                                        Email : ${messages.updator_emails.login_email} 
                                         <img class="user_img rounded-square users_image position" src="${thirdUserImage}">
                                     </label>
                                 </li>
@@ -899,7 +907,7 @@
                                 </li>
                                 <li id="updator_email">
                                     <label class="enter_press text_label" id="creatorUserEmail">
-                                        Email : ${messages.approver_emails.email} 
+                                        Email : ${messages.approver_emails.login_email} 
                                         <img class="user_img rounded-square users_image position" src="${fourUserImage}">
                                     </label>
                                 </li>
@@ -975,11 +983,18 @@
         $(document).on('click', '#access_confirm_button', function(e){
             e.preventDefault();
             var id = $("#users_email_id").val();
-            console.log(id);
             
             var superAdminApprovalStatus = $("input[name='super_admin_approval_status']:checked").val();
             var adminApprovalStatus = $("input[name='admin_approval_status']:checked").val();
             var userBlogStatus = $("input[name='status']:checked").val();
+            var branchID = $("#branch_ids").attr("data-branch-id");
+            var branchType = $("#branch_types").attr("data-branch-id");
+            var branchName = $("#branch_names").attr("data-branch-id");
+            var divisionName = $("#division_names").attr("data-branch-id");
+            var districtName = $("#district_names").attr("data-branch-id");
+            var upazilaName = $("#upazila_names").attr("data-branch-id");
+            var townName = $("#town_names").attr("data-branch-id");
+            var location = $("#locations").attr("data-branch-id");
 
             const current_url = "{{route('permission_status.action')}}";
 
@@ -998,6 +1013,14 @@
                     super_admin_approval_status: superAdminApprovalStatus ? 1 : 0,
                     admin_approval_status: adminApprovalStatus ? 1 : 0,
                     status: userBlogStatus ? 1 : 0,
+                    branch_id: branchID,
+                    branch_type: branchType,
+                    branch_name: branchName,
+                    division_name: divisionName,
+                    district_name: districtName,
+                    upazila_name: upazilaName,
+                    town_name: townName,
+                    location: location,
                 },
                 success: function(response) {
                     $("#userAccessActionModal").modal('hide');

@@ -106,7 +106,7 @@
             </div>
             <div class="row">
                 <div class="col-xl-12 action_message">
-                    <p class="ps-1"><span id="success_message"></span></p>
+                    <p class="mt-1"><span id="success_message"></span></p>
                 </div>
             </div>
         </form>
