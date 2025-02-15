@@ -144,11 +144,11 @@
           </div>
         </div>
         <div class="modal-footer profile_modal_footer action_group">
+          <button type="button" class="btn btn-sm cgt_cancel_btn delete_cancel mn-branch-skeleton back_action_box" id="cancle_access" data-bs-dismiss="modal">Access Cancel</button>
           <button id="permission_accss_btn" class="btn btn-sm modal_button update_confirm button_margin">
             <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
             <span class="confirm-btn-text">Permission</span>
           </button>
-          <button type="button" class="btn btn-sm cgt_cancel_btn delete_cancel mn-branch-skeleton back_action_box" id="cancle_access" data-bs-dismiss="modal">Access Cancel</button>
         </div>
       </div>
     </div>

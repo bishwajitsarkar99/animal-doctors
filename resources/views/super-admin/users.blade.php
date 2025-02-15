@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-md-12 ps-2">
           <div class="card-body focus-color user_details cd pb-3">
-            <p class="users_heading skeleton mb-1">Users <span class="ms-1 skeleton">Update and Permission</span></p>
+            <p class="users_heading skeleton mb-1">Users <span class="ms-1 skeleton">Update and Authorize</span></p>
             <div class="row">
               <div class="col-5">
                 <span class="form-check form-switch search_ me-2 skeleton">

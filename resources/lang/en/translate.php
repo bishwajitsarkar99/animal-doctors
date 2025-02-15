@@ -282,7 +282,7 @@ return[
     'Role Permission' => 'Role Permission',
     'Role Promot' => 'Role Promot',
     'Users Setting'=>'Users Setting',
-    'Users Access'=>'Users Access',
+    'Users Authorize'=>'Users Authorize',
     'Users Permission'=>'Users Permission',
     'Permission'=>'Permission',
     'Auth Pages'=>'Auth Pages',

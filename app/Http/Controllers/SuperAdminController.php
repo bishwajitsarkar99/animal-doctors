@@ -27,7 +27,8 @@ class SuperAdminController extends Controller
     public function users()
     {
         // $users = User::latest()->paginate(1);
-        return view('super-admin.users');
+        $page_name = 'Users Authorization';
+        return view('super-admin.users', compact('page_name'));
     }
 
     // Search Account-Holders Data----------

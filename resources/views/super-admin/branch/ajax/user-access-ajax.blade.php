@@ -780,17 +780,17 @@
                             ? messages.user_emails.image 
                             : `${window.location.origin}/storage/image/user-image/${messages.user_emails.image}`;
                         const thirdUserImage = 
-                            messages.user_emails && messages.user_emails.image 
-                            ? (messages.user_emails.image.includes('https://') 
-                                ? messages.user_emails.image 
-                                : `${window.location.origin}/storage/image/user-image/${messages.user_emails.image}`)
+                            messages.updated_users && messages.updated_users.image 
+                            ? (messages.updated_users.image.includes('https://') 
+                                ? messages.updated_users.image 
+                                : `${window.location.origin}/storage/image/user-image/${messages.updated_users.image}`)
                             : `${window.location.origin}/image/default.png`;
 
                         const fourUserImage = 
-                            messages.user_emails && messages.user_emails.image 
-                            ? (messages.user_emails.image.includes('https://') 
-                                ? messages.user_emails.image 
-                                : `${window.location.origin}/storage/image/user-image/${messages.user_emails.image}`)
+                            messages.approver_users && messages.approver_users.image 
+                            ? (messages.approver_users.image.includes('https://') 
+                                ? messages.approver_users.image 
+                                : `${window.location.origin}/storage/image/user-image/${messages.approver_users.image}`)
                             : `${window.location.origin}/image/default.png`;
 
                         const roles = {

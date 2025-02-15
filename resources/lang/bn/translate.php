@@ -281,7 +281,7 @@ return[
     'Role Permission' => 'ভূমিকার অনুমতি',
     'Role Promot' => 'ভূমিকা প্রম্পট',
     'Users Setting'=>'ব্যবহারকারীদের সেটিং',
-    'Users Access'=>'ব্যবহারকারীর অ্যাক্সেস',
+    'Users Authorize'=>'ব্যবহারকারীর অনুমোদন',
     'Users Permission'=>'ব্যবহারকারীদের অনুমতি',
     'Permission'=>'অনুমতি',
     'User-Permission' => 'ব্যবহারকারী-অনুমতি',

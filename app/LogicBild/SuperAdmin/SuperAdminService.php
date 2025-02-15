@@ -262,8 +262,8 @@ class SuperAdminService
             ->latest()
             ->paginate(1);
         }
-
-        return view('super-admin.account-holders.account-holders_list', compact('data','roles','users'))
+        $page_name = 'Account Holders';
+        return view('super-admin.account-holders.account-holders_list', compact('data','roles','users', 'page_name'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
     /**
@@ -271,7 +271,8 @@ class SuperAdminService
     */
     public function rolesIndex(Request $request)
     {
-        return view('super-admin.role.role-promot');
+        $page_name = 'Role Promotion';
+        return view('super-admin.role.role-promot', compact('page_name'));
     }
     /**
      * Handle role get view event.
@@ -430,7 +431,8 @@ class SuperAdminService
     */
     public function rolesPermission(Request $request)
     {
-        return view('super-admin.role.role-permission');
+        $page_name = 'Role Permission';
+        return view('super-admin.role.role-permission', compact('page_name'));
     }
     /**
      * Handle manage role view event.
@@ -440,7 +442,8 @@ class SuperAdminService
         $users = User::where('status', '=', 0)->orderBy('id', 'desc')->get();
         // $company_profiles = companyProfile::where('id', '=', 1)->get();
         $roles = Role::all();
-        return view('super-admin.role.manage-role',compact('users', 'roles'));
+        $page_name = 'Manage Role';
+        return view('super-admin.role.manage-role',compact('users', 'roles', 'page_name'));
     }
     /**
      * Handle update manage role event.
@@ -524,7 +527,8 @@ class SuperAdminService
         }
 
         // Return view with roles if not an AJAX request
-        return view('super-admin.email-verification.index', compact('emails'));
+        $page_name = 'Email Verification';
+        return view('super-admin.email-verification.index', compact('emails', 'page_name'));
     }
     /**
      * Handle email verification manage event.
