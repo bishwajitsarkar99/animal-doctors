@@ -177,10 +177,16 @@ class BranchController extends Controller
         return $this->branchServiceProvider->userBranchPermissionEdit($id);
     }
 
-    // Branch User Access Permission Update
-    public function perpermissionUpdatemissionEdit(Request $request, $id)
+    // Branch User Access Permission Edit
+    public function userBranchChange($id)
     {
-        return $this->branchServiceProvider->userBranchPermissionUpdate($request, $id);
+        return $this->branchServiceProvider->userBranchChangeEdit($id);
+    }
+
+    // Branch User Access Permission Update
+    public function permissionUpdate(Request $request, $id)
+    {
+        return $this->branchServiceProvider->userBranchPermissionChange($request, $id);
     }
 
     // Branch User Access Permission Delete

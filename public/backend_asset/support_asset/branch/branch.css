@@ -274,7 +274,26 @@ ul#email_menu>li {
     font-weight: 700;
     cursor: pointer;
 }
-ul#user_branch_menu>li, ul#usrMenu>li{
+ul#user_branch_menu_change {
+    background-color: white;
+}
+ul#user_branch_menu_change>li, ul#usrMenu>li{
+    margin: 0;
+    list-style-type: none;
+    position: relative;
+    align-items: center !important;
+    justify-content: space-between !important;
+    display: flex !important;
+    /* background-color: var(--bs-list-group-bg); */
+    padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+    color: black;
+    text-decoration: none;
+    font-family: var(--nav-font-family);
+    font-size: 12px;
+    font-weight: 700;
+
+}
+ul#user_branch_menu_change>li, ul#usrMenu>li{
     margin: 0;
     list-style-type: none;
     position: relative;
@@ -676,6 +695,13 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     background-size: 200%;
     animation: 1s infinite reverse skeleton;
 }
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: black !important;
+    line-height: 24px;
+}
+#permission_btn{
+    margin-top: 0em;
+}
 .modal-head-skeleton::before {
     content: "";
     position: absolute;
@@ -829,7 +855,7 @@ button#access_branch_delete:hover, button#cancle_access:hover{
 button.btn.btn-sm.delete_bg_btn{
     background-color:#c73500;
 }
-.group-branch-skeleton,.mn-branch-skeleton,.mn-btn-branch-skeleton{
+.group-branch-skeleton,.mn-branch-skeleton,.mn-btn-branch-skeleton,.chn-btn-branch-skeleton{
     position: relative;
 }
 .mn-branch-skeleton::before{
@@ -851,6 +877,18 @@ button.btn.btn-sm.delete_bg_btn{
     top: -1px;
     width: 108%;
     height: 108%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton; 
+}
+.chn-btn-branch-skeleton::before{
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    width: 108%;
+    height: 118%;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;

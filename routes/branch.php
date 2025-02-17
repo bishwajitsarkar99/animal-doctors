@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function (){
             Route::get('/branch-user-permission-role/{id}', [BranchController::class, 'permission_role'])->name('permission_user_role.action');
             Route::get('/branch-user-permission-email/{id}', [BranchController::class, 'permission_email'])->name('permission_user_email.action');
             Route::get('/branch-user-permission-edit/{id}', [BranchController::class, 'permissionEdit'])->name('permission_edit.action');
+            Route::get('/branch-user-change/{id}', [BranchController::class, 'userBranchChange'])->name('user_branch_change.action');
             Route::put('/branch-user-permission-update/{id}', [BranchController::class, 'permissionUpdate'])->name('permission_update.action');
             Route::delete('/branch-user-permission-delete/{id}', [BranchController::class, 'permissionDelete'])->name('permission_delete.action');
             Route::post('/branch-user-permission', [BranchController::class, 'permissionBranch'])->name('permission_status.action');

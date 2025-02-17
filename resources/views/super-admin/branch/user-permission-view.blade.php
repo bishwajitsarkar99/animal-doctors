@@ -36,20 +36,10 @@
             @csrf
             <input type="hidden" id="user_email_id">
             <div class="action_group">
-              <button id="branch_change_btn" class="btn btn-sm modal_button update_confirm group-branch-skeleton">
-                <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                <span class="confirm-btn-text">Branch Change</span>
-              </button>
               <button id="permission_btn" class="btn btn-sm modal_button update_confirm group-branch-skeleton">
                 <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                 <span class="confirm-btn-text">Access Permission</span>
               </button>
-              <button id="access_update_btn" class="btn btn-sm modal_button update_confirm group-branch-skeleton">
-                <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                <span class="confirm-btn-text">Access Update</span>
-              </button>
-            </div>
-            <div class="action_group mt-3">
               <button type="button" class="btn btn-sm cgt_cancel_btn delete_bg_btn delet_btn_user mn-branch-skeleton access_branch_delete" id="access_branch_delete">
                 <span class="delete-confrm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                 <span class="delete-confrm-btn-text">Access Delete</span>
@@ -57,8 +47,6 @@
               <button type="button" class="btn btn-sm cgt_cancel_btn delete_cancel mn-branch-skeleton" id="cancle_access" data-bs-dismiss="modal">Access Cancel</button>
             </div>
           </div>
-        </div>
-        <div class="modal-footer profile_modal_footer">
         </div>
       </div>
     </div>
@@ -154,6 +142,51 @@
     </div>
   </div>
   {{-- end user access permission modal --}}
+
+  {{-- start branch change modal --}}
+  <div class="modal fade" id="userBranchChangeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id="admin_modal_box">
+        <div class="modal-header profile_modal_header profilesetting_modal_header">
+          <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss branch-skeleton branch_name_head" id="staticBackdropLabel"></h5>
+          <button type="button" class="btn-close btn-btn-sm head_btn branch-skeleton cancel_change_box" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+        </div>
+
+        <div class="modal-body profile-body pb-1">
+          <div class="branch_access">
+            <div class="action_group group">
+              <span id="usrImage"></span>
+              <span id="usrRole"></span>
+              <span id="usrEmail"></span>
+            </div>
+            <div class="row profile-heading pb-3">
+              @csrf
+              <input type="hidden" id="users_branch_change_id">
+              <input type="hidden" id="users_branch_email_id">
+              <input type="hidden" id="branch_change_role_id">
+              <div class="action_group">
+                <ul id="user_branch_menu_change" class="list_group menu table-responsive"></ul>
+              </div>
+              <div class="action_group">
+                <label class="catg_name_label" for="mail-transport">Branch-Change</label><br>
+                <select type="text" class="form-control form-control-sm role_id select2" name="branch_id" id="branch_name_id">
+                  <option value="">Select Branch Name</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer profile_modal_footer action_group">
+          <button type="button" class="btn btn-sm cgt_cancel_btn delete_cancel mn-branch-skeleton back_change_box" id="cancle_change" data-bs-dismiss="modal">Access Cancel</button>
+          <button id="change_btn_confirm" class="btn btn-sm cgt_btn btn_focus mn-branch-skeleton">
+            <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="confirm-btn-text">Confirm</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- end branch change modal --}}
 
   {{-- start user access permission confirm modal --}}
   <div class="modal fade" id="userAccessPermissionConfirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -262,7 +295,51 @@
   </div>
   {{-- end delete confirm modal --}}
 
-  {{-- start confirm update modal --}}
+  {{-- start Branch Change modal --}}
+  <div class="modal fade" id="branchChange" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+        <div class="modal-header" id="logoutModal_header">
+          <h6 class="modal-title admin_title scan change_title branch-skeleton pt-1" id="staticBackdropLabel">
+            <span style="color:black;">Branch Change</span>
+          </h6>
+          <button type="button" class="btn-close btn-btn-sm head_btn3 modal_close branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
+            data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+          </button>
+          </div>
+          <div class="modal-body" id="logoutModal_body">
+            <div class="content_body">
+              <div class="row profile-heading">
+                <div class="content_message branch-nmT branch-skeleton">
+                  <label class="catg_name_label ps-2" for="branch-name">User branch change.... </label>
+                </div>
+                <div class="form-group content_message role_nme branch-skeleton">
+                  <label class="catg_name_label ps-2" for="mail-transport">Role</label><br>
+                  <select type="text" class="form-control form-control-sm role_id select2" name="role_id" id="branch_role_id">
+                    <option value="">Select Role Name</option>
+                  </select>
+                  <label class="catg_name_label ps-2" for="mail-transport">Email Address</label><br>
+                  <select type="text" class="form-control form-control-sm email_id select2" name="email_id" id="branch_email_id">
+                    <option value="">Select Email Address</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer" id="logoutModal_footer">
+            <button id="branch_id_btn" class="btn btn-sm modal_button update_confirm mt-1 chn-btn-branch-skeleton">
+              <span class="branch-change-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+              <span class="branch-change-btn-text">Change</span>
+            </button>
+            <button type="button" class="btn btn-sm cgt_cancel_btn delete_cancel branch-skeleton" id="cancel_change" data-bs-dismiss="modal">Cancel</button>
+          </div>    
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- end Branch Change modal --}}
+
+  {{-- start confirm Branch Change modal --}}
   <div class="modal fade" id="updateconfirmbranch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
       <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
@@ -275,9 +352,11 @@
           </button>
           </div>
           <div class="modal-body" id="logoutModal_body">
+            
             <p class="admin_paragraph branch-skeleton" style="text-align:center;" id="text_message">
               <label class="label_user_edit" id="cate_confirm_update" for="id">Are you confirm or cancel ? </label>
             </p>
+            
           </div>
           <div class="modal-footer" id="logoutModal_footer">
             <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus branch-skeleton">
@@ -290,7 +369,7 @@
       </div>
     </div>
   </div>
-  {{-- end confirm update modal --}}
+  {{-- end confirm Branch Change modal --}}
 
   {{-- start confirm access modal --}}
   <div class="modal fade" id="accessconfirmbranch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

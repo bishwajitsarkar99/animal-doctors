@@ -7,30 +7,40 @@
     $(document).ready(function(){
         fetch_branch_roles();
         fetch_branch_emails();
+        fetch_branch_change_email();
+        fetch_branch_change();
         searchBranch();
         allSearchBranch();
         searchBranchFetch();
         searchRoleFetch();
         searchEmailFetch();
+        selectBranchFetch();
         // Initialize the button loader for the login button
-        buttonLoader('#add', '.add-icon', '.add-btn-text', 'ADD Access...', 'ADD Access', 1000);
         buttonLoader('#save_btn_confirm', '.save-icon', '.save-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
-        buttonLoader('#refresh', '.refresh-icon', '.refresh-btn-text', 'Refresh...', 'Refresh', 1000);
         buttonLoader('#cancel_of_btn', '.cancel-of-icon', '.cancel-of-btn-text', 'Cancel...', 'Cancel', 1000);
         buttonLoader('#pagePermision', '.permission-page-icon', '.permission-page-btn-text', 'Permission...', 'Permission', 1000);
         // Initialize Select2 for all elements with the 'select2' class
-        $('.select2').each(function() {
-            // Check the ID or name to set specific options
-            if ($(this).attr('id') === 'search_branch') {
+        $('.select2').each(function () {
+            let placeholderText = '';
+
+            switch ($(this).attr('id')) {
+                case 'search_branch':
+                case 'search_branch_all':
+                case 'select_branch_name':
+                    placeholderText = 'Select Company Branch Name';
+                    break;
+                case 'change_role_id':
+                    placeholderText = 'Select Role';
+                    break;
+                case 'change_email_id':
+                    placeholderText = 'Select Email';
+                    break;
+            }
+
+            if (placeholderText) {
                 $(this).select2({
-                    placeholder: 'Select Company Branch Name',
-                    allowClear: true,
-                    width: '100%'
-                });
-            }else if($(this).attr('id') === 'search_branch_all'){
-                $(this).select2({
-                    placeholder: 'Select Company Branch Name',
+                    placeholder: placeholderText,
                     allowClear: true,
                     width: '100%'
                 });
@@ -49,29 +59,54 @@
         $('#email_id').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search email...');
         });
-        // Reinitialize Select2 for modals
-        $('#roleemailbranch').on('shown.bs.modal', function() {
-            $('.select2').each(function() {
-                const id = $(this).attr('id');
-                let placeholderText = 'Select an option';
+        $('#branch_name_id').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search branch...');
+        });
+        $('#branch_role_id').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search role...');
+        });
+        $('#branch_email_id').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search email...');
+        });
+        // Reinitialize Select2 for first modals
+        function initializeSelect2(modalSelector) {
+            $(modalSelector).on('shown.bs.modal', function () {
+                $(this).find('.select2').each(function () {
+                    const id = $(this).attr('id');
+                    let placeholderText = 'Select an option';
 
-                if (id === 'role_id') {
-                    placeholderText = 'Select User Role';
-                } else if (id === 'email_id') {
-                    placeholderText = 'Select User Email';
-                }
-                // Initialize Select2 with specific placeholder and settings
-                if (!$(this).data('select2')) {
+                    const placeholders = {
+                        'role_id': 'Select User Role',
+                        'email_id': 'Select User Email',
+                        'branch_name_id': 'Select Branch Name',
+                        'branch_role_id': 'Select User Role',
+                        'branch_email_id': 'Select User Email'
+                    };
+
+                    if (placeholders[id]) {
+                        placeholderText = placeholders[id];
+                    }
+
+                    // Check if Select2 is already initialized before destroying
+                    if ($(this).hasClass("select2-hidden-accessible")) {
+                        $(this).select2('destroy');
+                    }
+
+                    // Initialize Select2 with specific placeholder and settings
                     $(this).select2({
                         placeholder: placeholderText,
                         allowClear: true,
                         width: '100%',
-                        dropdownParent: $('#roleemailbranch')
+                        dropdownParent: $(modalSelector)
                     });
-                }
+                });
             });
+        }
 
-        });
+        // Initialize Select2 for both modals
+        initializeSelect2('#roleemailbranch');
+        initializeSelect2('#branchChange');
+        initializeSelect2('#userBranchChangeModal');
 
         // fetch branch for dropdown
         function allSearchBranch(){
@@ -131,6 +166,37 @@
             });
         }
 
+        // fetch branch for select (change branch)
+        function selectBranchFetch(){
+            const currentUrl = "{{ route('branch_fetch.action') }}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const branch_names = response.branch_names;
+                    $("#branch_name_id").empty();
+                    $("#branch_name_id").append('<option value="">Select Company Branch Name</option>');
+
+                    $.each(branch_names, function(key, item) {
+                        $("#branch_name_id").append(`<option value="${item.id}">${item.branch_name}</option>`);
+                    });
+                    
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error:", error);
+                    $("#search_branch_name").empty().append('<option value="" disabled>Error loading data</option>');
+                }
+            });
+        }
+        
         // Search Select Dropdown
         $(document).on('change', '#search_branch, #search_branch_all', function(e){
             e.preventDefault();
@@ -1053,6 +1119,341 @@
                     } 
                 }
             });
+        });
+
+        // Branch Change Modal
+        $(document).on('click', '#branch_change_btn', function(e){
+            e.preventDefault();
+            $("#branchChange").modal('show');
+            var time = null;
+
+            var time = setTimeout(() => {
+                // Remove skeleton classes
+                removeAttributeOrClass([
+                    { selector: '.btn-close, .branch-nmT, .branch-rest, .role_nme', type: 'class', name: 'branch-skeleton' },
+                    { selector: '.change_title', type: 'class', name: 'branch-skeleton' },
+                    { selector: '#cancel_change', type: 'class', name: 'branch-skeleton' },
+                    { selector: '#branch_id_btn', type: 'class', name: 'chn-btn-branch-skeleton' },
+                ]);
+            }, 1000);
+
+            return () => {
+                clearTimeout(time);
+            };
+        });
+
+        // Cancel or close Branch Modal
+        $(document).on('click', '.modal_close , #cancel_change', function(){
+            $('.select2').each(function () {
+                const id = $(this).attr('id');
+                let placeholderText = 'Select an option';
+
+                if (id === 'search_branch') {
+                    placeholderText = 'Select Company Branch Name';
+                } else if (id === 'role_id') {
+                    placeholderText = 'Select User Role';
+                } else if (id === 'email_id') {
+                    placeholderText = 'Select User Email';
+                } else if (id === 'search_branch_all') {
+                    placeholderText = 'Select Company Branch Name';
+                }
+
+                // Reinitialize Select2 with specific settings
+                if (!$(this).data('select2')) {
+                    $(this).select2({
+                        placeholder: placeholderText,
+                        allowClear: true,
+                        width: '100%'
+                    });
+                }
+            });
+        });
+
+        // Branch Change
+        $(document).on('click', '#branch_id_btn', function(e){
+            e.preventDefault();
+            var id = $("#branch_email_id").val();
+            var role_id = $("#branch_role_id").val();
+            
+            const current_url = "/company/branch-user-change/" + id;
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: current_url,
+                dataType: 'json',
+                data: {
+                    id: id,
+                },
+                success: function(response) {
+                    //console.log(response.messages);
+                    if(response.status === 404){
+                        $('#success_message').html("");
+                        $('#success_message').addClass('alert alert-danger');
+                        $('#success_message').text(response.messages);
+                    }else if(response.status === 200){
+                        $("#branchChange").modal('hide');
+                        $("#userBranchChangeModal").modal('show');
+                        var userRole = {{ auth()->user()->role }};
+                        const messages = response.messages;
+                        const created_by = messages.created_by;
+                        const updated_by = messages.updated_by;
+                        const approver_by = messages.approver_by;
+                        const creatorUserEmail = messages.creator_emails.login_email;
+                        const adminApprovalStatus = messages.admin_approval_status;
+                        const superAdminApprovalStatus = messages.super_admin_approval_status;
+                        const superAdminApprovalBlogStatus = messages.status;
+                        
+                        let createdByRole;
+                        let updatedByRole;
+                        let aprrovedByRole;
+                        let approverDate;
+
+                        const firstUserImage = messages.created_users.image.includes('https://') 
+                            ? messages.created_users.image 
+                            : `${window.location.origin}/storage/image/user-image/${messages.created_users.image}`;
+                        const secondUserImage = messages.user_emails.image.includes('https://') 
+                            ? messages.user_emails.image 
+                            : `${window.location.origin}/storage/image/user-image/${messages.user_emails.image}`;
+                        const thirdUserImage = 
+                            messages.updated_users && messages.updated_users.image 
+                            ? (messages.updated_users.image.includes('https://') 
+                                ? messages.updated_users.image 
+                                : `${window.location.origin}/storage/image/user-image/${messages.updated_users.image}`)
+                            : `${window.location.origin}/image/default.png`;
+
+                        const fourUserImage = 
+                            messages.approver_users && messages.approver_users.image 
+                            ? (messages.approver_users.image.includes('https://') 
+                                ? messages.approver_users.image 
+                                : `${window.location.origin}/storage/image/user-image/${messages.approver_users.image}`)
+                            : `${window.location.origin}/image/default.png`;
+
+                        const roles = {
+                            1: 'SuperAdmin',
+                            2: 'Sub-Admin',
+                            3: 'Admin',
+                            0: 'User',
+                            5: 'Accounts',
+                            6: 'Marketing',
+                            7: 'Delivery Team',
+                        };
+
+                        createdByRole = roles[created_by] || 'Unknown';
+                        updatedByRole = roles[updated_by] || '--';
+                        aprrovedByRole = roles[approver_by] || '--';
+                        if(approver_by === 1){
+                            approverDate = messages.super_admin_approver_date;
+                        }else if(approver_by === 3){
+                            approverDate = messages.admin_approver_date;
+                        }
+
+                        const branchMenu = $("#user_branch_menu_change");
+                        const branchName = $(".branch_name_head");
+                        const usrRole = $("#usrRole, #usrConfrmRole");
+                        const usrEmail = $("#usrEmail, #usrConfrmEmail");
+                        const usrImg = $("#usrImage, #usrConfrmImage");
+
+                        // Append user details
+                        branchName.append(`<span class="word_space">${messages.branch_name}</span>`);
+                        usrRole.append(`<span class="word_space">${messages.user_roles.name}</span>`);
+                        usrEmail.append(`<span class="word_space">${messages.user_emails.login_email}</span>`);
+                        usrImg.append(`<span class="word_space"><img class="user_img rounded-square users_image position" src="${secondUserImage}"></span>`);
+
+                        branchMenu.append(
+                            `<li value="" id="branch_info">
+                                <label class="branch_head_label">Branch information</label>
+                            </li>
+                            <li value="${messages.id}" id="branch_ids" data-branch-id="${messages.branch_id}">
+                                <label class="enter_press text_label">Branch-ID : ${messages.branch_id}</label>
+                            </li>
+                            <li id="branch_types" data-branch-id="${messages.branch_type}">
+                                <label class="enter_press text_label">Branch-Type : ${messages.branch_type}</label>
+                            </li>
+                            <li id="branch_names" data-branch-id="${messages.branch_name}">
+                                <label class="enter_press text_label">Branch-Name : ${messages.branch_name}</label>
+                            </li>
+                            <li id="division_names" data-branch-id="${messages.divisions.division_name}">
+                                <label class="enter_press text_label">Division-Name : ${messages.divisions.division_name}</label>
+                            </li>
+                            <li id="district_names" data-branch-id="${messages.districts.district_name}">
+                                <label class="enter_press text_label">District-Name : ${messages.districts.district_name}</label>
+                            </li>
+                            <li id="upazila_names" data-branch-id="${messages.thana_or_upazilas.thana_or_upazila_name}">
+                                <label class="enter_press text_label">Upazila-Name : ${messages.thana_or_upazilas.thana_or_upazila_name}</label>
+                            </li>
+                            <li id="town_names" data-branch-id="${messages.town_name}">
+                                <label class="enter_press text_label">City-Name : ${messages.town_name}</label>
+                            </li>
+                            <li id="locations" data-branch-id="${messages.location}">
+                                <label class="enter_press text_label">Branch-Location : ${messages.location}</label>
+                            </li>
+                            <li id="Creator">
+                                <label class="branch_head_label">Creator</label>
+                            </li>
+                            <li id="creatorCreatedAt">
+                                <label class="enter_press text_label">Created-Date : ${currentDate(messages.created_at)}</label>
+                            </li>
+                            <li id="creatorCreatedBy">
+                                <label class="enter_press text_label">Role-Name : ${createdByRole}</label>
+                            </li>
+                            <li id="creator_email">
+                                <label class="enter_press text_label" id="creatorUserEmail">
+                                    Email : ${creatorUserEmail} <img class="user_img rounded-square users_image position" src="${firstUserImage}">
+                                </label>
+                            </li>`
+                        );
+                        // Conditionally append updater details
+                        if (updated_by !== null) {
+                            branchMenu.append(`
+                                <li id="updator">
+                                    <label class="branch_head_label">Updator</label>
+                                </li>
+                                <li id="timeSet">
+                                    <label class="enter_press text_label" id="updatordAt">Update-Date : ${currentDate(messages.updated_at)}</label>
+                                </li>
+                                <li id="updatordBy">
+                                    <label class="enter_press text_label">Role-Name : ${updatedByRole}</label>
+                                </li>
+                                <li id="updator_email">
+                                    <label class="enter_press text_label" id="creatorUserEmail">
+                                        Email : ${messages.updator_emails.login_email} 
+                                        <img class="user_img rounded-square users_image position" src="${thirdUserImage}">
+                                    </label>
+                                </li>
+                            `);
+                        }else if(updated_by === null) {
+                            branchMenu.append(`
+                                <li>
+                                    <label class="no_data_label" hidden>No updater details available.</label>
+                                </li>
+                            `);
+                            console.log("No updater details available as updated_by is null");
+                        }
+                        if (approver_by !== null) {
+                            branchMenu.append(`
+                                <li id="updator">
+                                    <label class="branch_head_label">Approver</label>
+                                </li>
+                                <li id="timeSet">
+                                    <label class="enter_press text_label" id="updatordAt">Update-Date : ${currentDate(approverDate)}</label>
+                                </li>
+                                <li id="updatordBy">
+                                    <label class="enter_press text_label">Role-Name : ${aprrovedByRole}</label>
+                                </li>
+                                <li id="updator_email">
+                                    <label class="enter_press text_label" id="creatorUserEmail">
+                                        Email : ${messages.approver_emails.login_email} 
+                                        <img class="user_img rounded-square users_image position" src="${fourUserImage}">
+                                    </label>
+                                </li>
+                            `);
+                        }else if(approver_by === null) {
+                            branchMenu.append(`
+                                <li>
+                                    <label class="no_data_label" hidden>No updater details available.</label>
+                                </li>
+                            `);
+                            console.log("No updater details available as updated_by is null");
+                        }
+                        if(created_by === 1 && userRole === 1){
+                            branchMenu.append(
+                                `<li id="#">
+                                    <label class="text_label">Permission-Access :
+                                        <span class="badge rounded-pill bg-success ${superAdminApprovalStatus == 1 ? '' : 'display_none'}" id="checkLabelSuperAdmin">Justify</span>
+                                        <span class="badge rounded-pill bg-danger ${superAdminApprovalStatus == 0 ? '' : 'display_none'}" id="checkLabelSuperAdmin2">Refuse</span>
+                                    </label>
+                                </li>
+                                <li id="#">
+                                    <label class="text_label">Permission- Blog :
+                                        <span class="badge rounded-pill bg-success ${superAdminApprovalBlogStatus == 1 ? '' : 'display_none'}" id="checkBlogLabelSuperAdmin">Justify</span>
+                                        <span class="badge rounded-pill bg-danger ${superAdminApprovalBlogStatus == 0 ? '' : 'display_none'}" id="checkBlogLabelSuperAdmin2">Refuse</span>
+                                    </label>
+                                </li>`
+                            );
+                        }else if(created_by === 3 || userRole === 3){
+                            branchMenu.append(
+                                `<li id="#">
+                                    <label class="text_label">Permission-Access :</label>
+                                    <span class="badge rounded-pill bg-success ${adminApprovalStatus == 1 ? '' : 'display_none'}" id="checkLabelAdmin">Justify</span>
+                                    <span class="badge rounded-pill bg-danger ${adminApprovalStatus == 0 ? '' : 'display_none'}" id="checkLabelAdmin2">Refuse</span>
+                                </li>`
+                            );
+                        }
+                        $('#users_branch_change_id').val(id);
+                        $('#users_branch_email_id').val(id);
+                        $("#branch_change_role_id").val(role_id);
+                    }
+                }
+            });
+        });
+
+        // Confirm Branch Change
+        $(document).on('click', '#change_btn_confirm', function(e){
+            e.preventDefault();
+            var id = $('#users_branch_change_id').val();
+            var change_email = $('#users_branch_email_id').val();
+            var change_role = $("#branch_change_role_id").val();
+            var branch_change = $("#branch_name_id").val();
+            var branchID = $("#branch_ids").attr("data-branch-id");
+            var branchType = $("#branch_types").attr("data-branch-id");
+            var branchName = $("#branch_names").attr("data-branch-id");
+            var divisionName = $("#division_names").attr("data-branch-id");
+            var districtName = $("#district_names").attr("data-branch-id");
+            var upazilaName = $("#upazila_names").attr("data-branch-id");
+            var townName = $("#town_names").attr("data-branch-id");
+            var location = $("#locations").attr("data-branch-id");
+
+            console.log([
+                id,
+                change_email,
+                change_role,
+                branch_change,
+                branchID,
+                branchType,
+                branchName,
+                divisionName,
+                districtName,
+                upazilaName,
+                townName,
+                location
+            ]);
+            
+            
+            // const current_url = "/company/branch-user-change/" + id;
+
+            // $.ajaxSetup({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+            //     }
+            // });
+
+            // $.ajax({
+            //     type: "GET",
+            //     url: current_url,
+            //     dataType: 'json',
+            //     data: {
+            //         id: id,
+            //     },
+            //     success: function(response) {
+            //         //console.log(response.messages);
+            //         if(response.status === 404){
+            //             $('#success_message').html("");
+            //             $('#success_message').addClass('alert alert-danger');
+            //             $('#success_message').text(response.messages);
+            //         }else if(response.status === 200){
+            //             $("#branchChange").modal('hide');
+            //             $("#userBranchChangeModal").modal('show');
+                        
+                        
+            //         }
+            //     }
+            // });
         });
        
     });

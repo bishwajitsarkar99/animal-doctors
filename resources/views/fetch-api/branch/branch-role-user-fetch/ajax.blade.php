@@ -59,6 +59,35 @@
             });
         }
 
+        // Fetch Only Role for user branch change
+        window.fetch_branch_change = function() {
+            const currentUrl = "{{ route('fetch_branch_role.action') }}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const branch_roles = response.branch_roles;
+                    $("#branch_role_id").empty();
+                    $("#branch_role_id").append('<option value="" style="font-weight:600;">Select User Role</option>');
+                    $.each(branch_roles, function(key, item) {
+                        $("#branch_role_id").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.name}</option>`);
+                    });
+                },
+                error: function() {
+                    $("#branch_role_id").empty();
+                    $("#branch_role_id").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
+                }
+            });
+        }
+
         // Handle Select only role
         $(document).on('change', '#select_role', function() {
             var changeValue = $(this).val();
@@ -91,6 +120,22 @@
             fetch_branch_emails(selectedRole);
         });
 
+        // Handle Select only role for branch
+        $(document).on('change', ' #branch_role_id', function() {
+            var changeValue = $(this).val();
+            if (changeValue === '') {
+                $("#branch_email_id").empty();
+                $("#branch_email_id").empty();
+                $("#branch_email_id").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
+            }
+        });
+
+        // Event listener for only for branch
+        $(document).on('change', '#branch_role_id', function() {
+            const selectedRole = $(this).val();
+            fetch_branch_change_email(selectedRole);
+        });
+
         // Function to fetch only user email
         window.fetch_branch_emails = function(selectedRole, callback) {
             if (!selectedRole) {
@@ -111,17 +156,52 @@
                 dataType: 'json',
                 success: function(response) {
                     const users = response.users;
-                    $("#email_id").empty();
+                    $("#email_id, #branch_email_id").empty();
                     $.each(users, function(key, item) {
-                        $("#email_id").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.email}</option>`);
+                        $("#email_id, #branch_email_id").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.email}</option>`);
                     });
                     if (typeof callback === 'function') {
                         callback();
                     }
                 },
                 error: function() {
-                    $("#email_id").empty();
-                    $("#email_id").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select district</option>');
+                    $("#email_id, #branch_email_id").empty();
+                    $("#email_id, #branch_email_id").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select district</option>');
+                }
+            });
+        }
+
+        // Function to fetch only user email
+        window.fetch_branch_change_email = function(selectedRole, callback) {
+            if (!selectedRole) {
+                return;
+            }
+
+            const currentUrl = "{{ route('fetch_branch_email.action', ':selectedRole') }}".replace(':selectedRole', selectedRole);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const users = response.users;
+                    $("#branch_email_id").empty();
+                    $.each(users, function(key, item) {
+                        $("#branch_email_id").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.login_email}</option>`);
+                    });
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
+                },
+                error: function() {
+                    $("#branch_email_id").empty();
+                    $("#branch_email_id").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select district</option>');
                 }
             });
         }
@@ -329,6 +409,8 @@
         fetch_user_email();
         fetch_user_email_one();
         fetch_user_email_two();
+        fetch_branch_change_email();
+        fetch_branch_change();
 
     });
 </script>

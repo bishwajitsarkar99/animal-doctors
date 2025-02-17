@@ -846,9 +846,68 @@ class BranchServiceProvicer
     }
 
     /**
+     * Handle user branch change.
+    */
+    public function userBranchChangeEdit($id)
+    {
+        $auth = Auth::user();
+        $authEmail = $auth->id;
+
+        if (!$auth) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+    
+        $branch_user_data_query = UserBranchAccessPermission::with([
+            'divisions',
+            'districts',
+            'thana_or_upazilas',
+            'user_emails',
+            'user_roles',
+            'created_users',
+            'updated_users',
+            'approver_users',
+            'creator_emails',
+            'updator_emails',
+            'approver_emails',
+        ])->where('email_id', $id);
+    
+        if($auth->role == 1 && $authEmail) {
+            $branch_user_data = $branch_user_data_query->first();
+            if ($branch_user_data) {
+                return response()->json([
+                    'status' => 200,
+                    'messages' => $branch_user_data,
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'messages' => 'No data found for the given email.',
+                ]);
+            }
+        }elseif($auth->role == 3 && $authEmail){
+            $branch_user_data = $branch_user_data_query->first();
+    
+            if ($branch_user_data) {
+                return response()->json([
+                    'status' => 200,
+                    'messages' => $branch_user_data,
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'messages' => 'No data found for the given email.',
+                ]);
+            }
+        }
+    
+        return response()->json(['messages' => 'Forbidden: Insufficient permissions'], 403);
+
+    }
+
+    /**
      * Handle user branch permission update.
     */
-    public function userBranchPermissionUpdate(Request $request, $id)
+    public function userBranchPermissionChange(Request $request, $id)
     {
         //
     }
