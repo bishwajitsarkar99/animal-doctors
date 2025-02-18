@@ -17,7 +17,7 @@
 
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-light-grey" id="sidenavAccordion">
-                @livewire('sidebar-component')
+                @include('backend.layouts.layouts-components._sidebar')
             </nav>
         </div>
         <div id="layoutSidenav_content">

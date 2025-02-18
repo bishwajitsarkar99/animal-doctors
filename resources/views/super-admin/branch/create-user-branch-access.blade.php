@@ -28,7 +28,7 @@
                             <span class="refresh-btn-text ms-1">Refresh</span>
                         </button>
                         @if(auth()->user()->role ==1)
-                            <button id="branch_change_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button skeleton-button mt-2">
+                            <button id="branch_change_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2">
                                 <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                 <span class="confirm-btn-text">Branch Change</span>
                             </button>

@@ -158,7 +158,7 @@
                     const users = response.users;
                     $("#email_id, #branch_email_id").empty();
                     $.each(users, function(key, item) {
-                        $("#email_id, #branch_email_id").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.email}</option>`);
+                        $("#email_id, #branch_email_id").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.login_email}</option>`);
                     });
                     if (typeof callback === 'function') {
                         callback();

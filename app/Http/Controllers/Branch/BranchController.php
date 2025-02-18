@@ -111,6 +111,12 @@ class BranchController extends Controller
         return $this->branchServiceProvider->branchDataFetchs($request);
     }
 
+    // Branch Data Fetch
+    public function userBranchDataFetch(Request $request)
+    {
+        return $this->branchServiceProvider->userBranchDataFetchs($request);
+    }
+
     // Branch User Email Data Fetch
     public function branchUserEmail(Request $request)
     {

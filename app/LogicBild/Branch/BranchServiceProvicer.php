@@ -441,6 +441,58 @@ class BranchServiceProvicer
     }
 
     /**
+     * Handle admin branch access view.
+    */
+    public function userBranchDataFetchs(Request $request)
+    {
+        $auth = Auth::user();
+
+        if($auth->role ==1){
+
+            $user_access_branches = UserBranchAccessPermission::whereIn('id', function ($query) {
+                $query->selectRaw('MAX(id)')
+                    ->from('user_branch_access_permissions')
+                    ->whereNotNull('branch_name')
+                    ->groupBy('branch_name');
+            })
+            ->orderBy('id', 'desc')
+            ->get([
+                'id', 
+                'branch_id', 
+                'branch_type',
+                'branch_name', 
+                'division_id', 
+                'district_id', 
+                'upazila_id', 
+                'town_name', 
+                'location', 
+                'created_by', 
+                'creator_email', 
+                'updated_by', 
+                'updator_email', 
+                'role_id', 
+                'email_id', 
+                'admin_approval_status', 
+                'super_admin_approval_status', 
+                'change_status', 
+                'status', 
+                'approver_by',
+                'approver_email',
+                'admin_approver_date',
+                'super_admin_approver_date',
+                'created_at',
+                'updated_at',
+            ]);
+    
+            if($user_access_branches){
+                return response()->json([
+                    'user_access_branches' => $user_access_branches,
+                ], 200);
+            };
+        }
+    }
+
+    /**
      * Handle branch user email fetch.
     */
     public function branchFetchUserEmail(Request $request)
@@ -909,7 +961,50 @@ class BranchServiceProvicer
     */
     public function userBranchPermissionChange(Request $request, $id)
     {
-        //
+        $auth = Auth::user();
+
+        $branch_access = UserBranchAccessPermission::where('email_id', $id)->first();
+        if (!$branch_access) {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'Branch User not found.',
+            ], 404);
+        }
+
+        // Update permission for Super Admin (role = 1) or Admin (role = 3)
+        if (in_array($auth->role, [1, 3])) {
+            $branch_access->branch_id = $request->branch_id;
+            $branch_access->branch_type = $request->branch_type;
+            $branch_access->branch_name = $request->branch_name;
+            $branch_access->division_id = $request->division_id;
+            $branch_access->district_id = $request->district_id;
+            $branch_access->upazila_id = $request->upazila_id;
+            $branch_access->town_name = $request->town_name;
+            $branch_access->location = $request->location;
+            $branch_access->change_status = $request->change_status ?? 1;
+            $branch_access->updated_by = $auth->role;
+            $branch_access->updator_email = $auth->id;
+            $branch_access->save();
+        }
+
+        // Update User Details in `users` Table
+        $user = User::find($id);
+        if ($user) {
+            $user->branch_id = $request->branch_id;
+            $user->branch_type = $request->branch_type;
+            $user->branch_name = $request->branch_name;
+            $user->division_name = $request->division_name;
+            $user->district_name = $request->district_name;
+            $user->upazila_name = $request->upazila_name;
+            $user->town_name = $request->town_name;
+            $user->location = $request->location;
+            $user->save();
+        }
+
+        return response()->json([
+            'status' => 200,
+            'messages' => 'User branch has been changed successfully.',
+        ], 200);
     }
 
     /**

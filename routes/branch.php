@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function (){
             Route::get('/branch-user-access', [BranchController::class, 'branchAccessUserPermission'])->name('branch_access_permission.view');
             Route::get('/branch-get-data/{id}', [BranchController::class, 'branchGetData'])->name('branch_get.action');
             Route::get('/branch-data-fetch', [BranchController::class, 'branchDataFetch'])->name('branch_fetch.action');
+            Route::get('/user-branch-data-fetch', [BranchController::class, 'userBranchDataFetch'])->name('user_branch_fetch.action');
             Route::get('/branch-user-email-fetch', [BranchController::class, 'branchUserEmail'])->name('branch_user_email_fetch.action');
             Route::get('/branch-specify-name-fetch', [BranchController::class, 'branchSearchSpecify'])->name('branch_specify_search.action');
             Route::get('/branch-name-query/{id}', [BranchController::class, 'branchSearchName'])->name('branch_name_search.action');
