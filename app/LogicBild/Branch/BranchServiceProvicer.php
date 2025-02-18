@@ -803,13 +803,13 @@ class BranchServiceProvicer
             $excludedRoleIds = UserBranchAccessPermission::where('branch_id', $id)
             ->pluck('role_id')
             ->toArray();
-
-            $emails = UserBranchAccessPermission::select('role_id', DB::raw('COUNT(email_id) as email_count'))
+            
+            $emails = UserBranchAccessPermission::where('branch_id', $id)
+            ->select('role_id', DB::raw('COUNT(email_id) as email_count'))
             ->groupBy('role_id')
             ->pluck('email_count', 'role_id');
             // Fetch roles excluding those specified in excludedRoleIds
             $branch_roles = Role::whereIn('id', $excludedRoleIds)->get();
-            
             return response()->json([
                 'branch_roles' => $branch_roles,
                 'emails' => $emails,
@@ -827,12 +827,9 @@ class BranchServiceProvicer
     public function userBranchFetchEmail(Request $request, $id)
     {
         $excludedEmailIds = UserBranchAccessPermission::where('role_id' , $id)
-        ->pluck('email_id')
-        ->toArray();
-
+        ->pluck('email_id');
         // Fetch roles excluding those specified in excludedRoleIds
         $users = User::whereIn('id', $excludedEmailIds)->get();
-
         return response()->json([
             'users' => $users,
         ], 200);
