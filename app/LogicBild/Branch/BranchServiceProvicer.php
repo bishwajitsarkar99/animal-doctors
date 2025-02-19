@@ -1007,9 +1007,47 @@ class BranchServiceProvicer
     /**
      * Handle user branch permission delete.
     */
-    public function userBranchPermissionDelete($id)
+    public function userBranchPermissionDelete(Request $request, $id)
     {
-        //
+        $auth = Auth::user();
+        // Fetch branch access record correctly
+        $branch_access = UserBranchAccessPermission::where('email_id', $id)->first();
+        if (!$branch_access) {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'Branch User not found.',
+            ], 404);
+        }
+    
+        // Fetch user correctly
+        $user = User::where('id', $id)->first();
+        if (!$user) {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'User not found.',
+            ], 404);
+        }
+    
+        // Update User Details
+        $user->branch_id = $request->branch_id ?? null;
+        $user->branch_type = $request->branch_type ?? null;
+        $user->branch_name = $request->branch_name ?? null;
+        $user->division_name = $request->division_name ?? null;
+        $user->district_name = $request->district_name ?? null;
+        $user->upazila_name = $request->upazila_name ?? null;
+        $user->town_name = $request->town_name ?? null;
+        $user->location = $request->location ?? null;
+        $user->save();
+    
+        // Allow Super Admin (1) or Admin (3) to delete
+        if (in_array($auth->role, [1, 3])) {
+            $branch_access->delete();
+        }
+    
+        return response()->json([
+            'status' => 200,
+            'messages' => 'The user branch has been deleted successfully.'
+        ], 200);
     }
 
     /**

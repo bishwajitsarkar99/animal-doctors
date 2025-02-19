@@ -13,7 +13,7 @@
                 <div class="row">
                   <div class="col-xl-4">
                     <div class="form-group mb-1 role_nme skeleton access_search" id="accessSearch" hidden>
-                      <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">Search Branch For Add Access....</label></span>
+                      <span class="input-label"><label class="catg_name_label label_position" for="mail-transport">ADD Access</label></span>
                       <select type="text" class="form-control form-control-sm select_branch_search select2" name="branch_name" id="select_branch_search">
                         <option value="">Select Company Branch Name</option>
                       </select>
@@ -22,7 +22,7 @@
                       <input type="hidden" name="branch_id" id="get_branch_id">
                     </div>
                     <div class="form-group role_nme branch mb-1 skeleton admin_email_search" id="adminEmail" hidden>
-                      <label class="catg_name_label label_position" for="mail-transport">Search User Email For Access Promot....</label><br>
+                      <label class="catg_name_label label_position" for="mail-transport">Access Promot</label><br>
                       <select type="text" class="form-control form-control-sm select_user_email select2" name="user_email_id" id="select_user_email">
                         <option value="">Select User Email</option>
                       </select>
@@ -180,18 +180,26 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-xl-9 action_message">
-                    <p class="ps-1 mt-2"><span id="success_message"></span></p>
+                  <div class="col-xl-7 action_message mb-2">
+                    <p class=""><span id="success_message"></span></p>
                   </div>
-                  <div class="col-xl-3">
-                    <p style="text-align: end;">
+                  <div class="col-xl-5">
+                    <p class ="group_action grp_action">
                       <button type="button" id="access_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden>
                         <span class="access-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="access-btn-text">Access Promot</span>
                       </button>
+                      <button type="button" id="amin_banch_change_btn" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden>
+                        <span class="change-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                        <span class="change-btn-text">Branch Change</span>
+                      </button>
                       <button type="button" id="branch_admin_access_store" class="btn btn-sm cgt_btn btn_focus skeleton-button mt-2" hidden>
                         <span class="access-store-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="access-store-btn-text">Access Add</span>
+                      </button>
+                      <button id="access_delete_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton-button mt-2" hidden>
+                        <span class="access-delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                        <span class="access-delete-btn-text">Access Delete</span>
                       </button>
                       <button id="cnl_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton-button mt-2" hidden>
                         <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
@@ -209,6 +217,78 @@
     </div>
   </div>
 @include('loader.action-loader')
+
+{{-- start branch change modal --}}
+  <div class="modal fade" id="adminBranchChangeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id="admin_modal_box">
+        <div class="modal-header profile_modal_header profilesetting_modal_header">
+          <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss branch_name_heading hd-branch-skeleton branch_name_hd" id="staticBackdropLabel">
+            Admin Branch Change
+          </h5>
+          <button type="button" class="btn-close btn-btn-sm head_btn branch-skeleton cancel_change_box" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+        </div>
+
+        <div class="modal-body profile-body pb-1">
+          <div class="branch_access">
+            <div class="row profile-heading pb-3">
+              @csrf
+              <div class="action_group first_part branch-content-skeleton">
+                <span class="branch_chang">
+                  <label class="catg_name_label" for="mail-transport">Admin-Role</label>
+                </span><br>
+                <div class="chng_brnch">
+                  <select type="text" class="form-control form-control-sm role_id select2" name="user_role_id" id="admin_roleID">
+                    <option value="">Select Admin Role</option>
+                  </select>
+                </div>
+              </div>
+              <div class="action_group second_part branch-content-skeleton">
+                <span class="branch_chang">
+                  <label class="catg_name_label" for="mail-transport">Admin-Email</label>
+                </span><br>
+                <div class="chng_brnch">
+                  <select type="text" class="form-control form-control-sm role_id select2" name="user_email_id" id="admin_emailID">
+                    <option value="">Select Admin Email</option>
+                  </select>
+                </div>
+              </div>
+              <div class="action_group">
+                <div class="third_part branch-content-footer-skeleton">
+                  <span class="branch_chang">
+                    <label class="catg_name_label" for="mail-transport">Branch-Change</label>
+                  </span><br>
+                  <div class="chng_brnch">
+                    <select type="text" class="form-control form-control-sm role_id select2" name="branch_name" id="admin_branch_name">
+                      <option value="">Select Branch Name</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- Hidden Input Fields for Storing Selected Branch Data -->
+                <input type="hidden" id="admin_change_branch_id">
+                <input type="hidden" id="admin_change_branch_type">
+                <input type="hidden" id="admin_change_branch_name">
+                <input type="hidden" id="admin_change_division_id">
+                <input type="hidden" id="admin_change_district_id">
+                <input type="hidden" id="admin_change_upazila_id">
+                <input type="hidden" id="admin_change_town_name">
+                <input type="hidden" id="admin_change_location">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer profile_modal_footer action_group">
+          <button type="button" class="btn btn-sm cgt_cancel_btn delete_cancel mn-branch-skeleton back_change_box" id="cancle_change" data-bs-dismiss="modal">Access Cancel</button>
+          <button id="admin_change_btn_confirm" class="btn btn-sm cgt_btn btn_focus admin_change_btn_confirm mn-branch-skeleton">
+            <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="confirm-btn-text">Confirm</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+{{-- end branch change modal --}}
+
 @endsection
 
 @section('css')

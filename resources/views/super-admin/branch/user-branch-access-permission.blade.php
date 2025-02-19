@@ -21,7 +21,9 @@
                             <button type="button" class="btn btn-sm cls_btn" id="role_close" data-bs-toggle="tooltip" data-bs-placement="left" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'><i class="fa-solid fa-xmark icon_colr"></i></button>
                         </span>
                     </div>
-                    <ul id="role_menu" class="list_group menu"></ul>
+                    <div class="responsive">
+                        <ul id="role_menu" class="list_group menu"></ul>
+                    </div>
                 </div>
                 <div class="col-xl-5" id="emailBox" hidden>
                     <div class="second_list_head">
@@ -30,7 +32,9 @@
                             <button type="button" class="btn btn-sm cls_btn" id="email_close" data-bs-toggle="tooltip" data-bs-placement="left" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'><i class="fa-solid fa-xmark icon_colr"></i></button>
                         </span>
                     </div>
-                    <ul id="email_menu" class="list_group menu"></ul>
+                    <div class="responsive">
+                        <ul id="email_menu" class="list_group menu"></ul>
+                    </div>
                 </div>
             </div>
             <div class="row">

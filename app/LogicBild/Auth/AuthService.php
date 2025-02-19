@@ -144,7 +144,7 @@ class AuthService
         $login_email = $this->userLoginEmailGenerator(
             new User,
             'login_email',
-            4, // Generate a 4-digit random number
+            2, // Generate a 4-digit random number
             $user_first_name,
             $company_name,
             $email_extension

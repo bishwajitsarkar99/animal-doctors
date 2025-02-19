@@ -78,7 +78,7 @@ span.permission-page-btn-text,span.permission-page-btn-text {
     font-weight: 800;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
     padding: 1px;
-    padding-left: 18px;
+    padding-left: 8px;
     text-align: center;
     position: relative;
     align-items: center !important;
@@ -100,7 +100,7 @@ span.permission-page-btn-text,span.permission-page-btn-text {
     font-weight: 800;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
     padding: 1px;
-    padding-left: 18px;
+    padding-left: 8px;
     text-align: center;
     position: relative;
     align-items: center !important;
@@ -281,6 +281,8 @@ ul#user_branch_menu_change {
     background-color: white;
 }
 ul#user_branch_menu>li, ul#usrMenu>li{
+    --bs-list-group-item-confrm-padding-y: 0.1rem;
+    --bs-list-group-item-confrm-padding-x:1rem;
     margin: 0;
     list-style-type: none;
     position: relative;
@@ -288,7 +290,7 @@ ul#user_branch_menu>li, ul#usrMenu>li{
     justify-content: space-between !important;
     display: flex !important;
     /* background-color: var(--bs-list-group-bg); */
-    padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+    padding: var(--bs-list-group-item-confrm-padding-y) var(--bs-list-group-item-confrm-padding-x);
     color: black;
     text-decoration: none;
     font-family: var(--nav-font-family);
@@ -297,6 +299,8 @@ ul#user_branch_menu>li, ul#usrMenu>li{
 
 }
 ul#user_branch_menu_change>li, ul#usrMenu>li{
+    --bs-list-group-items-padding-y: 0.1rem;
+    --bs-list-group-items-padding-x: 1rem;
     margin: 0;
     list-style-type: none;
     position: relative;
@@ -304,7 +308,7 @@ ul#user_branch_menu_change>li, ul#usrMenu>li{
     justify-content: space-between !important;
     display: flex !important;
     /* background-color: var(--bs-list-group-bg); */
-    padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+    padding: var(--bs-list-group-items-padding-y) var(--bs-list-group-items-padding-x);
     color: black;
     text-decoration: none;
     font-family: var(--nav-font-family);
@@ -329,8 +333,8 @@ ul#user_branch_menu_change>li, ul#usrMenu>li{
     --bs-list-group-border-width: 1px;
     --bs-list-group-border-radius: 0.375rem;
     /* --bs-list-group-border-radius: 0rem; */
-    --bs-list-group-item-padding-x: 1rem;
-    --bs-list-group-item-padding-y: 0.1rem;
+    --bs-list-group-item-padding-x: 0.5rem;
+    --bs-list-group-item-padding-y: 0.01rem;
     --bs-list-group-item-info-padding-x: 0.1rem;
     --bs-list-group-item-info-padding-y: 0rem;
     --bs-list-group-action-color: #495057;
@@ -387,6 +391,24 @@ ul>li#lastRow{
 .branch-info {
     background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, #fff 100%);
     padding: 10px 1px;
+}
+span.highlight_branch {
+    background-color: lightcyan;
+    color: black;
+    text-decoration: underline;
+    text-decoration-color: lightcyan;
+}
+.group_action{
+    justify-content: space-between;
+    display: flex;
+}
+.right-side-btn{
+    text-align: right;
+}
+.word_title{
+    font-size: 11px;
+    color: black;
+    font-weight: 700;
 }
 .modal_heading {
     outline: none;

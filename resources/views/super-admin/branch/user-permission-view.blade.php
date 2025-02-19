@@ -61,7 +61,7 @@
           <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss modal-head-skeleton" id="staticBackdropLabel">
             <input class="modal_heading" type="text" id="branch_head_name" readonly>
           </h5>
-          <button type="button" class="btn-close btn-btn-sm head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+          <button type="button" class="btn-close btn-btn-sm head_btn branch-skeleton access_cancel" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
         </div>
 
         <div class="modal-body profile-body">
@@ -245,28 +245,32 @@
     <div class="modal-dialog">
       <div class="modal-content" id="admin_modal_box">
         <div class="modal-header profile_modal_header profilesetting_modal_header">
-          <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss branch-skeleton" id="staticBackdropLabel">
-            Delete Branch
-          </h5>
-          <button type="button" class="btn-close btn-btn-sm head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+          <span><div id="active_loader" class="loader_chart mt-1"></div></span>
+          <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss branch_name_head hedng hd-branch-skeleton" id="staticBackdropLabel"></h5>
+          <button type="button" class="btn-close btn-btn-sm hedng_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
         </div>
 
         <div class="modal-body profile-body pb-1">
           <div class="row profile-heading pb-3">
             <div class="col-xl-12">
-              <div class="form-group delete_content branch-skeleton" id="load_id">
-                <span><div id="active_loader" class="loader_chart mt-1"></div></span>
-                <label class="label_user_edit" id="cate_delete" for="id">Branch-ID : </label>
-                <span id="cat_id"> <input type="text" class="mt-3 update_id id" id="delete_branch_id" readonly><br></span>
-                <span class="label_user_edit" id="cate_delete2">{{__('translate.Are you sure, Would you like to delete this category, permanently?')}}</span>
-                <input type="hidden" id="delete_branch_id" name="branches_id">
+              <div class="form-group branch-skeleton" id="load_id">
+                <div class="action_group group">
+                  <span id="usrImage4"></span>
+                  <span id="usrRole4"></span>
+                  <span id="usrEmail4"></span>
+                </div>
+                <label class="label_user_edit" id="cate_delete" for="id">
+                  Branch-ID : <span id="delete_branch_id"></span>
+                </label><br><br>
+                <label class="label_user_edit" id="cate_delete2">Are you sure, Would you like to delete <span class="highlight_branch">branch-id: <span id="branch__id"></span></span> , permanently?</label>
+                <input type="hidden" id="branch_delete_id">
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer profile_modal_footer">
           <p id="btn_group2">
-            <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button branch-delete-skeleton" id="yesButton">
+            <a type="button" class="btn btn-success modal_button logout_button yes_button branch-delete-skeleton" id="yesButton">
               <span class="loading-yes-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               <span class="btn-text">{{__('translate.Yes')}}</span>
             </a>
@@ -285,9 +289,11 @@
     <div class="modal-dialog modal-sm modal-dialog-centered">
       <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
         <div class="modal-header" id="logoutModal_header">
-          <h6 class="modal-title admin_title scan confirm_title branch-skeleton pt-1" id="staticBackdropLabel">
-            Confirm Delete
-          </h6>
+          <span class="modal-title admin_title scan confirm_title branch-skeleton pt-1">
+            <span id="usrConfrmImage"></span>
+            <span id="usrConfrmRole"></span>
+            <span id="usrConfrmEmail"></span>
+          </span>
           <button type="button" class="btn-close btn-btn-sm head_btn2 branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
             data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
           </button>
@@ -296,11 +302,12 @@
             <p class="admin_paragraph branch-skeleton" style="text-align:center;" id="delete_text_message">
               <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, delete or cancel ? </label>
             </p>
+            <input type="hidden" id="branch_delete_id">
           </div>
           <div class="modal-footer" id="logoutModal_footer">
             <button type="button" class="btn btn-sm modal_button delet_btn_user btn_focus branch-skeleton delete_branch" id="delete_branch">
               <span class="delete-confrm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-              <span class="delete-confrm-btn-text">Delete</span>
+              <span class="delete-confrm-btn-text">Confirm Delete</span>
             </button>
             <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus branch-skeleton" id="cate_delete3" data-bs-dismiss="modal">Cancel</button>
           </div>    

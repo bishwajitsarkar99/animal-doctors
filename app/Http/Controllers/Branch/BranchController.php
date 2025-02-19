@@ -196,9 +196,9 @@ class BranchController extends Controller
     }
 
     // Branch User Access Permission Delete
-    public function permissionDelete($id)
+    public function permissionDelete(Request $request, $id)
     {
-        return $this->branchServiceProvider->userBranchPermissionDelete($id);
+        return $this->branchServiceProvider->userBranchPermissionDelete($request, $id);
     }
 
     // Branch User Access Permission

@@ -1,6 +1,6 @@
 <script type="module">
     import { currentDate } from "/module/module-min-js/helper-function-min.js";
-    import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
+    import { buttonLoader , removeAttributeOrClass, addAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     buttonLoader();
 
     $(document).ready(function(){
@@ -8,9 +8,11 @@
         fetch_role_one();
         fetch_role_two();
         fetch_user_email_one();
+        fetch_admin_access_role();
+        fetch_admin_email_access();
         fetch_user_email_two();
         // Initialize the button loader for the login button
-        buttonLoader('#access_btn', '.access-icon', '.access-btn-text', 'Access Promot...', 'Access Promot', 1000);
+        // buttonLoader('#access_btn', '.access-icon', '.access-btn-text', 'Access Promot...', 'Access Promot', 1000);
         buttonLoader('#access_btn_confirm', '.access-confirm-icon', '.access-confirm-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#cnl_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
 
@@ -59,6 +61,41 @@
         $('#select_user_email').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search email...');
         });
+
+        // Reinitialize Select2 for first modals
+        function initializeSelect2(modalSelector) {
+            $(modalSelector).on('shown.bs.modal', function () {
+                $(this).find('.select2').each(function () {
+                    const id = $(this).attr('id');
+                    let placeholderText = 'Select an option';
+
+                    const placeholders = {
+                        'admin_branch_name': 'Select Branch Name',
+                        'admin_roleID': 'Select Admin Role',
+                        'admin_emailID': 'Select Admin Email',
+                    };
+
+                    if (placeholders[id]) {
+                        placeholderText = placeholders[id];
+                    }
+
+                    // Check if Select2 is already initialized before destroying
+                    if ($(this).hasClass("select2-hidden-accessible")) {
+                        $(this).select2('destroy');
+                    }
+
+                    // Initialize Select2 with specific placeholder and settings
+                    $(this).select2({
+                        placeholder: placeholderText,
+                        allowClear: true,
+                        width: '100%',
+                        dropdownParent: $(modalSelector)
+                    });
+                });
+            });
+        }
+        // Initialize Select2 for both modals
+        initializeSelect2('#adminBranchChangeModal');
 
         // Role Type
         $(document).on('change', '#role_type', function(){
@@ -215,12 +252,16 @@
                 $("#admin_email").attr('hidden', true);
                 $('#adminEmail').removeAttr('hidden');
                 $('#admin_approval_status').prop('checked', false);
+                $('.grp_action').addClass('group_action').removeClass('right-side-btn');
             }else if(selectID !== ''){
                 $('#admin_role').removeAttr('hidden');
                 $('#admin_email').removeAttr('hidden');
                 $("#adminEmail").attr('hidden', true);
                 $("#adminEmail").attr('hidden', true);
                 $("#access_btn").attr('hidden', true);
+                $('#amin_banch_change_btn').attr('hidden', true);
+                $('#access_delete_btn').attr('hidden', true);
+                $('.grp_action').removeClass('group_action').addClass('right-side-btn');
             }
             $.ajax({
                 type: "GET",
@@ -246,6 +287,8 @@
                             $('#branch_admin_access_store').removeAttr('hidden');
                             $("#access_btn").attr('hidden', true);
                             $('#cnl_btn').removeAttr('hidden');
+                            $('#amin_banch_change_btn').attr('hidden', true);
+                            $('#access_delete_btn').attr('hidden', true);
 
                             $('#branches_id').val(id);
                             $('.add_branch_id').val(response.messages.branch_id);
@@ -281,6 +324,8 @@
                 $('#access_btn').attr('hidden', true);
                 $("#branch_admin_access_store").attr('hidden', true);
                 $('#cnl_btn').attr('hidden', true);
+                $('#amin_banch_change_btn').attr('hidden', true);
+                $('#access_delete_btn').attr('hidden', true);
                 $('#admin_role').attr('hidden', true);
                 $('#admin_email').attr('hidden', true);
                 $('#accessSearch').removeAttr('hidden');
@@ -314,6 +359,8 @@
                         $('#documents').attr('hidden', true);
                         $('#cnl_btn').attr('hidden', true);
                         $('#access_btn').attr('hidden', true);
+                        $('#amin_banch_change_btn').attr('hidden', true);
+                        $('#access_delete_btn').attr('hidden', true);
 
                         setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
@@ -323,6 +370,8 @@
                             $('#documents').removeAttr('hidden');
                             $('#access_btn').removeAttr('hidden');
                             $('#cnl_btn').removeAttr('hidden');
+                            $('#amin_banch_change_btn').removeAttr('hidden');
+                            $('#access_delete_btn').removeAttr('hidden');
 
                             const messages = response.messages;
                             
@@ -788,6 +837,135 @@
             }else if(select_val !== ''){
                 $("#access_btn").removeAttr('disabled');
             }
+        });
+
+        // Admin Branch Change Modal
+        $(document).on('click', '#amin_banch_change_btn', function(e){
+            e.preventDefault();
+            $("#adminBranchChangeModal").modal('hide');
+            $("#accessconfirmbranch").modal('show');
+            $("#loadingProgress").removeAttr('hidden');
+            $("#access_modal_box").addClass('progress_body');
+            $("#processModal_body").addClass('loading_body_area');
+            setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#loadingProgress").attr('hidden', true);
+                $("#access_modal_box").removeClass('progress_body');
+                $("#processModal_body").removeClass('loading_body_area');
+                $("#adminBranchChangeModal").modal('show');
+            }, 1500);
+            addAttributeOrClass([
+                {
+                    selector: '.cancel_change_box',
+                    type: 'class',
+                    name: 'branch-skeleton'
+                },
+                {
+                    selector: '.first_part, .second_part',
+                    type: 'class',
+                    name: 'branch-content-skeleton'
+                },
+                {
+                    selector: '.third_part',
+                    type: 'class',
+                    name: 'branch-content-footer-skeleton'
+                },
+                {
+                    selector: '.branch_name_hd',
+                    type: 'class',
+                    name: 'hd-branch-skeleton'
+                },
+                {
+                    selector: '#cancle_change, #admin_change_btn_confirm',
+                    type: 'class',
+                    name: 'mn-branch-skeleton'
+                },
+
+            ]);
+            const time = setTimeout(() => {
+                removeAttributeOrClass([
+                    {
+                        selector: '.cancel_change_box',
+                        type: 'class',
+                        name: 'branch-skeleton'
+                    },
+                    {
+                        selector: '.first_part, .second_part',
+                        type: 'class',
+                        name: 'branch-content-skeleton'
+                    },
+                    {
+                        selector: '.third_part',
+                        type: 'class',
+                        name: 'branch-content-footer-skeleton'
+                    },
+                    {
+                        selector: '.branch_name_hd',
+                        type: 'class',
+                        name: 'hd-branch-skeleton'
+                    },
+                    {
+                        selector: '#cancle_change, #admin_change_btn_confirm',
+                        type: 'class',
+                        name: 'mn-branch-skeleton'
+                    },
+
+                ]);
+            }, 3000);
+        });
+
+        // fetch branch for select (change branch)
+        selectAdminBranchFetch();
+        function selectAdminBranchFetch(){
+            const currentUrl = "{{ route('user_branch_fetch.action') }}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const user_access_branches = response.user_access_branches;
+                    
+                    $("#admin_branch_name").empty();
+                    $("#admin_branch_name").append('<option value="">Select Company Branch Name</option>');
+
+                    $.each(user_access_branches, function(index, item) {
+                        $("#admin_branch_name").append(`<option value="${item.id}" data-branch_id="${item.branch_id}" 
+                        data-branch_type="${item.branch_type}" 
+                        data-branch_name="${item.branch_name}" 
+                        data-division_id="${item.division_id}" 
+                        data-district_id="${item.district_id}" 
+                        data-upazila_id="${item.upazila_id}" 
+                        data-town_name="${item.town_name}" 
+                        data-location="${item.location}">${item.branch_name}</option>`);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error:", error);
+                    $("#admin_branch_name").empty().append('<option value="" disabled>Error loading data</option>');
+                }
+            });
+        }
+
+        // Branch Change Handle
+        $(document).on('change', '#admin_branch_name', function(){
+            var selectedOption = $(this).find('option:selected');
+            // Update hidden inputs with selected option's data attributes
+            $("#change_branch_id").val(selectedOption.data("branch_id"));
+            $("#change_branch_type").val(selectedOption.data("branch_type"));
+            $("#change_branch_name").val(selectedOption.data("branch_name"));
+            $("#change_division_id").val(selectedOption.data("division_id"));
+            $("#change_district_id").val(selectedOption.data("district_id"));
+            $("#change_upazila_id").val(selectedOption.data("upazila_id"));
+            $("#change_town_name").val(selectedOption.data("town_name"));
+            $("#change_location").val(selectedOption.data("location"));
+
         });
     });
 </script>

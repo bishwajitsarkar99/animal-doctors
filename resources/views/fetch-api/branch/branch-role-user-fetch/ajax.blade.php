@@ -270,6 +270,35 @@
             });
         }
 
+        // Fetch Role One Part
+        window.fetch_admin_access_role = function() {
+            const currentUrl = "{{ route('fetch_role.action') }}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const roles = response.roles;
+                    $("#admin_roleID").empty();
+                    $("#admin_roleID").append('<option value="" style="font-weight:600;">Select User Role</option>');
+                    $.each(roles, function(key, item) {
+                        $("#admin_roleID").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.name}</option>`);
+                    });
+                },
+                error: function() {
+                    $("#admin_roleID").empty();
+                    $("#admin_roleID").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
+                }
+            });
+        }
+
         // Handle Select One Part role
         $(document).on('change', '#select_role_one', function() {
             var changeValue = $(this).val();
@@ -280,10 +309,26 @@
             }
         });
 
+        // Handle Select Admin Role Access Part role
+        $(document).on('change', '#admin_roleID', function() {
+            var changeValue = $(this).val();
+            if (changeValue === '') {
+                $("#admin_emailID").empty();
+                $("#admin_emailID").empty();
+                $("#admin_emailID").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
+            }
+        });
+
         // Event listener for One Part role dropdown
         $(document).on('change', '#select_role_one', function() {
             const selectedRoleOne = $(this).val();
             fetch_user_email_one(selectedRoleOne);
+        });
+
+        // Event listener for One Part role dropdown
+        $(document).on('change', '#admin_roleID', function() {
+            const selectedRoleAdmin = $(this).val();
+            fetch_admin_email_access(selectedRoleAdmin);
         });
 
         // Function to fetch user email_one
@@ -317,6 +362,41 @@
                 error: function() {
                     $("#select_email_one").empty();
                     $("#select_email_one").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select district</option>');
+                }
+            });
+        }
+
+        // Function to fetch user email_one
+        window.fetch_admin_email_access = function(selectedRoleAdmin, callback) {
+            if (!selectedRoleAdmin) {
+                return;
+            }
+
+            const currentUrl = "{{ route('fetch_email_one.action', ':selectedRoleAdmin') }}".replace(':selectedRoleAdmin', selectedRoleAdmin);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const users = response.users;
+                    $("#admin_emailID").empty();
+                    $.each(users, function(key, item) {
+                        $("#admin_emailID").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.login_email}</option>`);
+                    });
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
+                },
+                error: function() {
+                    $("#admin_emailID").empty();
+                    $("#admin_emailID").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select district</option>');
                 }
             });
         }
@@ -411,6 +491,8 @@
         fetch_user_email_two();
         fetch_branch_change_email();
         fetch_branch_change();
+        fetch_admin_access_role();
+        fetch_admin_email_access();
 
     });
 </script>
