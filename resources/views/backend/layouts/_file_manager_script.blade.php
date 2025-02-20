@@ -220,7 +220,7 @@
                 success: function(response) {
                     $("#folder_data_table").html(table_rows(response.data));
                     // Initialize tooltips after appending the elements
-                    $('[data-bs-toggle="tooltip"]').tooltip();
+                    // $('[data-bs-toggle="tooltip"]').tooltip();
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);

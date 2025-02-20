@@ -17,7 +17,8 @@ class ModuleServiceProvider
     */
     public function viewModuleCategoryTemplete(Request $request)
     {
-        return view('module.module-category.index');
+        $page_name = 'Module Category';
+        return view('module.module-category.index', compact('page_name'));
     }
 
     /**
@@ -171,7 +172,8 @@ class ModuleServiceProvider
     */
     public function moduleNameViewTemplate(Request $request)
     {
-        return view('module.module-name.index');
+        $page_name = 'Module Name';
+        return view('module.module-name.index', compact('page_name'));
     }
 
     /**
@@ -326,7 +328,8 @@ class ModuleServiceProvider
     */
     public function moduleInjectIndex(Request $request)
     {
-        return view('module.module-inject.index');
+        $page_name = 'Module Inject';
+        return view('module.module-inject.index', compact('page_name'));
     }
 
     /**

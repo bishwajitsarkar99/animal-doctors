@@ -235,7 +235,7 @@
                                             <option>{{ Config::get('languages')[App::getLocale()] }}</option>
                                             @foreach (Config::get('languages') as $lang => $language)
                                                 @if ($lang != App::getLocale())
-                                                    <option value="{{ $lang }}"> <a class="dropdown-item" href="#"> {{$language}}</a> </option>
+                                                    <option value="{{ $lang }}"> {{$language}} </option>
                                                 @endif
                                             @endforeach
                                         </select>

@@ -33,19 +33,6 @@
                 $("#loaderShow").addClass('loader-show');
             }, 800);
             
-        });
-    
-        // User Permission Tab
-        // $(document).on('click', '#tabUserPermission', function(e) {
-            // e.preventDefault();
-            // var changeURL = '#';
-            // window.location.href = changeURL;
-        //     $("#loaderShow").removeClass('loader-show');
-        //     $("#createSupplier").attr('hidden', true);
-        //         setTimeout(() => {
-        //         $("#loaderShow").addClass('loader-show');
-        //         $("#createSupplier").removeAttr('hidden');
-        //     }, 800);
-        // });  
+        }); 
     });
 </script>

@@ -192,11 +192,3 @@
     </div>
 </div>
 {{-- End EDelete User Modal---}}
-
-{{-- start tooltip script --}}
-<script type="module" src="/module/module-min-js/tooltip-helper-function-min.js"></script>
-<script type="module">
-    import { toolTip } from "/module/module-min-js/tooltip-helper-function-min.js";
-    toolTip();
-</script>
-{{-- end tooltip script --}}

@@ -77,9 +77,11 @@ class UserActivityServiceProvider
                 'percentageRoles' => $percentageRoles,
             ]);
         }
+
+        $page_name = 'User Activity';
         
         return view('super-admin.user-details.details', compact('usersCount','total_users','authentic_users','inactive_users','activity_users',
-            'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage','roles')
+            'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage','roles', 'page_name')
         );
     }
     /**

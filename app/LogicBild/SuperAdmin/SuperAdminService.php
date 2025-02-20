@@ -567,7 +567,8 @@ class SuperAdminService
                 'pages' => $pages,
             ]);
         }
-        return view('super-admin.auth-page.index', compact('auth_lists'));
+        $page_name = 'Auth Page Permission';
+        return view('super-admin.auth-page.index', compact('auth_lists', 'page_name'));
     }
     /**
      * Handle auth filter page item event.

@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     @include('backend.layouts._head')
-    @livewireStyles
     @yield('css')
     @stack('css')
 </head>
@@ -16,7 +15,7 @@
     <div id="layoutSidenav">
 
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-light-grey" id="sidenavAccordion">
+            <nav id="sidebar" class="sb-sidenav accordion sb-sidenav-light-grey sb-sidenav-menu" id="sidenavAccordion">
                 @include('backend.layouts.layouts-components._sidebar')
             </nav>
         </div>
@@ -65,7 +64,6 @@
     @include('permission.permission-templete-index');
     @include('permission.ajax.permission-ajax');
 
-    @livewireScripts
     @yield('script')
     @stack('scripts')
 
