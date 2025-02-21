@@ -299,10 +299,10 @@
 @endsection
 
 @push('scripts')
-@include('fetch-api.branch.branch-role-user-fetch.ajax')
-@include('super-admin.branch.ajax.admin-access-ajax')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+@include('fetch-api.branch.branch-role-user-fetch.ajax')
+@include('super-admin.branch.ajax.admin-access-ajax')
 <!-- jQuery UI Auto-Complete or Date Picker -->
 <script src="{{asset('backend_asset')}}/support_asset/date-picker/jquery/jquery-ui.min.js"></script>
 <script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
@@ -311,23 +311,25 @@
 <script>
   // skeleton
   function fetchData() {
-    requestAnimationFrame(() => {
-      document.querySelectorAll('.skeleton').forEach(item => {
-        item.classList.remove('skeleton');
-      });
+    const allSkeleton = document.querySelectorAll('.skeleton')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton')
     });
   }
   function focuButton() {
-    requestAnimationFrame(() => {
-      document.querySelectorAll('.skeleton-button').forEach(item => {
-        item.classList.remove('skeleton-button');
-      });
+    const allSkeleton = document.querySelectorAll('.skeleton-button')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton-button')
     });
   }
 
   setTimeout(() => {
-    fetchData();
-    focuButton();
+    requestAnimationFrame(() => {
+      fetchData();
+      focuButton();
+    });
   }, 1000);
 </script>
 @endpush('scripts')

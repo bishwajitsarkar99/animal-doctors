@@ -4,10 +4,14 @@
     buttonLoader();
 
     $(document).ready(function(){
-        // the fetch function call from the "division-district-upazila" script for Initialize...
-        fetch_division();
-        fetch_district();
-        fetch_upazila();
+        // Ensure function exists before calling
+        if (typeof fetch_division === "function") {
+            fetch_division();
+            fetch_district();
+            fetch_upazila();
+        } else {
+            // console.error("fetch_division is not defined. Check script order.");
+        }
         fetch_branch_types();
         searchBranch();
         fetch_branch_categories();
@@ -28,6 +32,12 @@
         buttonLoader('#branch_type_delete', '.branch-type-delete-icon', '.branch-type-delete-btn-text', 'Delete...', 'Delete', 1000);
         buttonLoader('#branch_type_cancel', '.branch-type-cancel-icon', '.branch-type-cancel-btn-text', 'Cancel...', 'Cancel', 1000);
 
+        if (typeof $.fn.select2 !== "undefined") {
+            console.log("Select2 is loaded successfully.");
+            initSelect2(); // Initialize Select2 on page load
+        } else {
+            console.error("Select2 is not loaded. Check script order.");
+        }
         // Initialize Select2 for all elements with the 'select2' class
         function initSelect2(parent = document) {
             $(parent).find('.select2').each(function() {
@@ -43,6 +53,11 @@
                 } else if (id === 'branch_category_name') {
                     placeholderText = 'Select Branch Category Name';
                     dropdownParent = $('#branchTypeCreateModal');
+                }
+
+                // Destroy previous instance before reinitializing
+                if ($(this).data('select2')) {
+                    $(this).select2('destroy');
                 }
 
                 // Reinitialize Select2 only if not already initialized

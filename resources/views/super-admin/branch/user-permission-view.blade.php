@@ -459,8 +459,10 @@
   }
 
   setTimeout(() => {
-    fetchData();
-    focuButton();
+    requestAnimationFrame(() => {
+      fetchData();
+      focuButton();
+    });
   }, 1000);
 </script>
 @endpush('scripts')
