@@ -236,9 +236,10 @@
         $('#adminEmail').removeAttr('hidden');
         $(document).on('change', '#select_branch_search', function(e){
             e.preventDefault();
-
+            $('#warning_message').html("");
+            $('#warning_message').removeClass('warning-message');
             var selectID = $(this).val();
-            var id = selectID;
+            
             if(selectID == ''){
                 $('#add_documents').attr('hidden', true);
                 $('#branch_admin_access_store').attr('hidden', true);
@@ -254,6 +255,7 @@
                 $('#admin_approval_status').prop('checked', false);
                 $('.grp_action').addClass('group_action').removeClass('right-side-btn');
             }else if(selectID !== ''){
+                var id = selectID;
                 $('#admin_role').removeAttr('hidden');
                 $('#admin_email').removeAttr('hidden');
                 $("#adminEmail").attr('hidden', true);
@@ -268,9 +270,10 @@
                 url: "/company/branch-edit/" + id,
                 success: function(response){
                     if(response.status == 404){
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert alert-danger');
-                        $('#success_message').text(response.messages);
+                        $("#select_warning_message").removeAttr('hidden');
+                        $('#warning_message').html("");
+                        // $('#warning_message').addClass('warning-message');
+                        // $('#warning_message').text(response.messages);
                     }else if(response.status == 200){
                         $("#accessconfirmbranch").modal('show');
                         $("#dataPullingProgress").removeAttr('hidden');
@@ -278,6 +281,7 @@
                         $("#processModal_body").addClass('loading_body_area');
                         $('#branch_admin_access_store').attr('hidden', true);
                         $('#cnl_btn').attr('hidden', true);
+                        $("#select_warning_message").attr('hidden', true);
                         setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
                             $("#dataPullingProgress").attr('hidden', true);
@@ -309,11 +313,10 @@
         $('#accessSearch').removeAttr('hidden');
         $(document).on('change', '#select_user_email', function(e){
             e.preventDefault();
+            $('#warning_message').html("");
+            $('#warning_message').removeClass('warning-message');
 
             var selectID = $(this).val();
-            
-            // Search ID
-            var id = selectID;
             
             if(selectID == ''){
                 $('#documents').attr('hidden', true);
@@ -335,6 +338,8 @@
                 $("#adminStTwo").attr('hidden', true);
                 $('#admin_approval_status').prop('checked', false);
             }else if(selectID !== ''){
+                // Search ID
+                var id = selectID;
                 $('#admin_role').removeAttr('hidden');
                 $('#admin_email').removeAttr('hidden');
                 $('#adminstatus').removeAttr('hidden');
@@ -348,9 +353,10 @@
                 url: "/company/branch-name-query/" + id,
                 success: function(response){
                     if(response.status == 404){
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert alert-danger');
-                        $('#success_message').text(response.messages);
+                        $("#select_warning_message").removeAttr('hidden');
+                        $('#warning_message').html("");
+                        $('#warning_message').addClass('warning-message');
+                        // $('#warning_message').text(response.messages);
                     }else if(response.status == 200){
                         $("#accessconfirmbranch").modal('show');
                         $("#dataPullingProgress").removeAttr('hidden');
@@ -361,171 +367,174 @@
                         $('#access_btn').attr('hidden', true);
                         $('#amin_banch_change_btn').attr('hidden', true);
                         $('#access_delete_btn').attr('hidden', true);
+                        $("#select_warning_message").attr('hidden', true);
 
                         setTimeout(() => {
-                            $("#accessconfirmbranch").modal('hide');
-                            $("#dataPullingProgress").attr('hidden', true);
-                            $("#access_modal_box").removeClass('progress_body');
-                            $("#processModal_body").removeClass('loading_body_area');
-                            $('#documents').removeAttr('hidden');
-                            $('#access_btn').removeAttr('hidden');
-                            $('#cnl_btn').removeAttr('hidden');
-                            $('#amin_banch_change_btn').removeAttr('hidden');
-                            $('#access_delete_btn').removeAttr('hidden');
-
-                            const messages = response.messages;
-                            
-                            if(messages.created_by !== ''){
-                                const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/storage/image/user-image/${messages.created_users.image}`;
-                                let createdByRole;
-                                switch (messages.created_by) {
-                                    case 1:
-                                        createdByRole = 'SuperAdmin';
-                                        break;
-                                    case 2:
-                                        createdByRole = 'Sub-Admin';
-                                        break;
-                                    case 3:
-                                        createdByRole = 'Admin';
-                                        break;
-                                    case 0:
-                                        createdByRole = 'User';
-                                        break;
-                                    case 5:
-                                        createdByRole = 'Accounts';
-                                        break;
-                                    case 6:
-                                        createdByRole = 'Marketing';
-                                        break;
-                                    case 7:
-                                        createdByRole = 'Delivery Team';
-                                        break;
-                                    default:
-                                        createdByRole = 'Unknown';
-                                }
-                                $("#creatorUserImage").html(`<img class="user_img rounded-square users_image position" src="${firstUserImage}">`);
+                            requestAnimationFrame(() => {
+                                $("#accessconfirmbranch").modal('hide');
+                                $("#dataPullingProgress").attr('hidden', true);
+                                $("#access_modal_box").removeClass('progress_body');
+                                $("#processModal_body").removeClass('loading_body_area');
+                                $('#documents').removeAttr('hidden');
+                                $('#access_btn').removeAttr('hidden');
+                                $('#cnl_btn').removeAttr('hidden');
+                                $('#amin_banch_change_btn').removeAttr('hidden');
+                                $('#access_delete_btn').removeAttr('hidden');
     
-                                $("#creatorUserEmail").val(messages.created_users.email);
-                                $("#creatorCreatedBy").val(createdByRole);
-                                if(messages.created_at !== ''){
-                                    $("#creatorCreatedAt").val(currentDate(messages.created_at));
+                                const messages = response.messages;
+                                
+                                if(messages.created_by !== ''){
+                                    const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/storage/image/user-image/${messages.created_users.image}`;
+                                    let createdByRole;
+                                    switch (messages.created_by) {
+                                        case 1:
+                                            createdByRole = 'SuperAdmin';
+                                            break;
+                                        case 2:
+                                            createdByRole = 'Sub-Admin';
+                                            break;
+                                        case 3:
+                                            createdByRole = 'Admin';
+                                            break;
+                                        case 0:
+                                            createdByRole = 'User';
+                                            break;
+                                        case 5:
+                                            createdByRole = 'Accounts';
+                                            break;
+                                        case 6:
+                                            createdByRole = 'Marketing';
+                                            break;
+                                        case 7:
+                                            createdByRole = 'Delivery Team';
+                                            break;
+                                        default:
+                                            createdByRole = 'Unknown';
+                                    }
+                                    $("#creatorUserImage").html(`<img class="user_img rounded-square users_image position" src="${firstUserImage}">`);
+        
+                                    $("#creatorUserEmail").val(messages.created_users.email);
+                                    $("#creatorCreatedBy").val(createdByRole);
+                                    if(messages.created_at !== ''){
+                                        $("#creatorCreatedAt").val(currentDate(messages.created_at));
+                                    }else{
+                                        $("#creatorCreatedAt").val('-');
+                                    }
+                                }
+                                if(messages.updated_by !== null){
+                                    $("#updatorContent").removeAttr('hidden');
+                                    $('#updatorHead').removeAttr('hidden');
+                                    const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/storage/image/user-image/${messages.updated_users.image}`;
+                                    let updatedByRole;
+                                    switch (messages.updated_by) {
+                                        case 1:
+                                            updatedByRole = 'SuperAdmin';
+                                            break;
+                                        case 2:
+                                            updatedByRole = 'Sub-Admin';
+                                            break;
+                                        case 3:
+                                            updatedByRole = 'Admin';
+                                            break;
+                                        case 0:
+                                            updatedByRole = 'User';
+                                            break;
+                                        case 5:
+                                            updatedByRole = 'Accounts';
+                                            break;
+                                        case 6:
+                                            updatedByRole = 'Marketing';
+                                            break;
+                                        case 7:
+                                            updatedByRole = 'Delivery Team';
+                                            break;
+                                        default:
+                                            updatedByRole = 'Unknown';
+                                    }
+                                    $("#updatorUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
+        
+                                    $("#updatorUserEmail").val((messages.updated_users.email));
+                                    $("#updatorUpdateBy").val(updatedByRole);
+                                    if(messages.created_at !== messages.updated_at){
+                                        $("#updatorUpdateAt").val(currentDate(messages.updated_at));
+                                    }else{
+                                        $("#updatorUpdateAt").val('-');
+                                    }
                                 }else{
-                                    $("#creatorCreatedAt").val('-');
+                                    $("#updatorContent").attr('hidden', true);
+                                    $('#updatorHead').attr('hidden', true);
                                 }
-                            }
-                            if(messages.updated_by !== null){
-                                $("#updatorContent").removeAttr('hidden');
-                                $('#updatorHead').removeAttr('hidden');
-                                const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/storage/image/user-image/${messages.updated_users.image}`;
-                                let updatedByRole;
-                                switch (messages.updated_by) {
-                                    case 1:
-                                        updatedByRole = 'SuperAdmin';
-                                        break;
-                                    case 2:
-                                        updatedByRole = 'Sub-Admin';
-                                        break;
-                                    case 3:
-                                        updatedByRole = 'Admin';
-                                        break;
-                                    case 0:
-                                        updatedByRole = 'User';
-                                        break;
-                                    case 5:
-                                        updatedByRole = 'Accounts';
-                                        break;
-                                    case 6:
-                                        updatedByRole = 'Marketing';
-                                        break;
-                                    case 7:
-                                        updatedByRole = 'Delivery Team';
-                                        break;
-                                    default:
-                                        updatedByRole = 'Unknown';
-                                }
-                                $("#updatorUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
-    
-                                $("#updatorUserEmail").val((messages.updated_users.email));
-                                $("#updatorUpdateBy").val(updatedByRole);
-                                if(messages.created_at !== messages.updated_at){
-                                    $("#updatorUpdateAt").val(currentDate(messages.updated_at));
+                                if(messages.approver_by !== null){
+                                    $("#approverContent").removeAttr('hidden');
+                                    $('#approverHead').removeAttr('hidden');
+                                    const secondUserImage = messages.approver_users.image.includes('https://') ? messages.approver_users.image : `${window.location.origin}/storage/image/user-image/${messages.approver_users.image}`;
+                                    let approverByRole;
+                                    switch (messages.approver_by) {
+                                        case 1:
+                                            approverByRole = 'SuperAdmin';
+                                            break;
+                                        case 2:
+                                            approverByRole = 'Sub-Admin';
+                                            break;
+                                        case 3:
+                                            approverByRole = 'Admin';
+                                            break;
+                                        case 0:
+                                            approverByRole = 'User';
+                                            break;
+                                        case 5:
+                                            approverByRole = 'Accounts';
+                                            break;
+                                        case 6:
+                                            approverByRole = 'Marketing';
+                                            break;
+                                        case 7:
+                                            approverByRole = 'Delivery Team';
+                                            break;
+                                        default:
+                                            approverByRole = 'Unknown';
+                                    }
+                                    $("#approverUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
+        
+                                    $("#approverUserEmail").val(messages.approver_users.email);
+                                    $("#approverApprover").val(approverByRole);
+                                    if(messages.approver_date !== null){
+                                        $("#approverUpdateAt").val(currentDate(messages.approver_date));
+                                    }else if(messages.approver_date == null){
+                                        $("#approverUpdateAt").val('-');
+                                    }
                                 }else{
-                                    $("#updatorUpdateAt").val('-');
+                                    $("#approverContent").attr('hidden', true);
+                                    $('#approverHead').attr('hidden', true);
                                 }
-                            }else{
-                                $("#updatorContent").attr('hidden', true);
-                                $('#updatorHead').attr('hidden', true);
-                            }
-                            if(messages.approver_by !== null){
-                                $("#approverContent").removeAttr('hidden');
-                                $('#approverHead').removeAttr('hidden');
-                                const secondUserImage = messages.approver_users.image.includes('https://') ? messages.approver_users.image : `${window.location.origin}/storage/image/user-image/${messages.approver_users.image}`;
-                                let approverByRole;
-                                switch (messages.approver_by) {
-                                    case 1:
-                                        approverByRole = 'SuperAdmin';
-                                        break;
-                                    case 2:
-                                        approverByRole = 'Sub-Admin';
-                                        break;
-                                    case 3:
-                                        approverByRole = 'Admin';
-                                        break;
-                                    case 0:
-                                        approverByRole = 'User';
-                                        break;
-                                    case 5:
-                                        approverByRole = 'Accounts';
-                                        break;
-                                    case 6:
-                                        approverByRole = 'Marketing';
-                                        break;
-                                    case 7:
-                                        approverByRole = 'Delivery Team';
-                                        break;
-                                    default:
-                                        approverByRole = 'Unknown';
+        
+                                $('#branches_id').val(id);
+                                $('#get_branch_id').val(response.messages.branch_id);
+                                $('#brnch_id').val(response.messages.branch_id);
+                                $('#branch_name').val(response.messages.branch_name);
+                                $('#branch_type').val(response.messages.branch_type);
+                                $('#division_id').val(response.messages.division_name);
+                                $('#district_id').val(response.messages.district_name);
+                                $('#upazila_id').val(response.messages.upazila_name);
+                                $('#town_name').val(response.messages.town_name);
+                                $('#location').val(response.messages.location);
+        
+                                $('.user_role_id').val(response.messages.user_role_id).trigger('change.select2');
+                                fetch_user_email_one(response.messages.user_role_id);
+                                setTimeout(() => {
+                                    $('.user_email_id').val(response.messages.user_email_id).trigger('change.select2');
+                                }, 500);
+                                if(response.messages.status == 1){
+                                    $("#adminSt").removeAttr('hidden').slideDown();
+                                    $("#adminStTwo").attr('hidden', true);
+                                    $('#admin_approval_status').prop('checked', response.messages.status == 1);
                                 }
-                                $("#approverUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
-    
-                                $("#approverUserEmail").val(messages.approver_users.email);
-                                $("#approverApprover").val(approverByRole);
-                                if(messages.approver_date !== null){
-                                    $("#approverUpdateAt").val(currentDate(messages.approver_date));
-                                }else if(messages.approver_date == null){
-                                    $("#approverUpdateAt").val('-');
+                                else{
+                                    $("#adminSt").attr('hidden', true);
+                                    $("#adminStTwo").attr('hidden', true);
+                                    $('#admin_approval_status').prop('checked', false);
                                 }
-                            }else{
-                                $("#approverContent").attr('hidden', true);
-                                $('#approverHead').attr('hidden', true);
-                            }
-    
-                            $('#branches_id').val(id);
-                            $('#get_branch_id').val(response.messages.branch_id);
-                            $('#brnch_id').val(response.messages.branch_id);
-                            $('#branch_name').val(response.messages.branch_name);
-                            $('#branch_type').val(response.messages.branch_type);
-                            $('#division_id').val(response.messages.division_name);
-                            $('#district_id').val(response.messages.district_name);
-                            $('#upazila_id').val(response.messages.upazila_name);
-                            $('#town_name').val(response.messages.town_name);
-                            $('#location').val(response.messages.location);
-    
-                            $('.user_role_id').val(response.messages.user_role_id).trigger('change.select2');
-                            fetch_user_email_one(response.messages.user_role_id);
-                            setTimeout(() => {
-                                $('.user_email_id').val(response.messages.user_email_id).trigger('change.select2');
-                            }, 500);
-                            if(response.messages.status == 1){
-                                $("#adminSt").removeAttr('hidden').slideDown();
-                                $("#adminStTwo").attr('hidden', true);
-                                $('#admin_approval_status').prop('checked', response.messages.status == 1);
-                            }
-                            else{
-                                $("#adminSt").attr('hidden', true);
-                                $("#adminStTwo").attr('hidden', true);
-                                $('#admin_approval_status').prop('checked', false);
-                            }
+                            });
                             
                         }, 1500);
 
@@ -657,14 +666,17 @@
                             $("#processModal_body").addClass('loading_body_area');
                             $('#updateForm_error').html("");
                             $('#success_message').html("");
-                            $('#success_message').addClass('alert_show ps-1 pe-1');
-                            $('#success_message').fadeIn();
-                            $("#success_message").text(response.messages).show();
+                            // Show Success Message Smoothly
+                            requestAnimationFrame(() => {
+                                $("#success_message").html(response.messages).fadeIn().addClass("alert_show ps-1 pe-1");
+                            });
                             inputClear();
                             setTimeout(() => {
-                                $("#success_message").fadeOut();
                                 $('#add_documents').attr('hidden', true);
-                                fetch_branch();
+                                requestAnimationFrame(() => {
+                                    $("#success_message").fadeOut();
+                                    fetch_branch();
+                                });
                             }, 3000);
                         }, 1500);
                     }
@@ -683,12 +695,10 @@
             $('#add_upazila_id').val("");
             $('#add_town_name').val("");
             $('#add_location').val("");
-            setTimeout(function() {
-                $('#select_user_email').val(null).trigger('change');
-                $('#select_branch_search').val(null).trigger('change');
-                $('#select_role_one').val(null).trigger('change');
-                $('#select_email_one').val(null).trigger('change');
-            }, 100);
+            $('#select_user_email').val(null).trigger('change');
+            $('#select_branch_search').val(null).trigger('change');
+            $('#select_role_one').val(null).trigger('change');
+            $('#select_email_one').val(null).trigger('change');
         }
 
         // Admin Branch Access
@@ -743,20 +753,28 @@
 
                     if (response.status === 202) {
                         setTimeout(() => {
-                            $("#accessconfirmbranch").modal('hide');
-                            $("#processingProgress").attr('hidden', true);
-                            $("#access_modal_box").removeClass('progress_body');
-                            $("#processModal_body").removeClass('loading_body_area');
-                            $('#success_message').html(response.messages).fadeIn().addClass('alert_show');
+                            $("#accessconfirmbranch").modal("hide");
+                            $("#processingProgress").attr("hidden", true);
+                            $("#access_modal_box").removeClass("progress_body");
+                            $("#processModal_body").removeClass("loading_body_area");
+
+                            // Show Success Message Smoothly
+                            requestAnimationFrame(() => {
+                                $("#success_message").html(response.messages).fadeIn().addClass("alert_show ps-1 pe-1");
+                            });
 
                             // Reset Form Fields
-                            $("#select_branch_search, #role_type, #select_role_one, #select_email_one").val("").trigger('change');
+                            $("#select_branch_search, #role_type, #select_role_one, #select_email_one").val("").trigger("change");
                             $("#admin_approval_status").prop("checked", false);
-                            $("#adminSt, #adminStTwo, #subAdminSt, #subAdminStTwo").attr('hidden', true);
+                            $("#adminSt, #adminStTwo, #subAdminSt, #subAdminStTwo").attr("hidden", true);
                             inputClear();
+
+                            // Hide Message & Fetch Branch Data After 3s
                             setTimeout(() => {
-                                $("#success_message").fadeOut();
-                                fetch_branch();
+                                requestAnimationFrame(() => {
+                                    $("#success_message").fadeOut();
+                                    fetch_branch();
+                                });
                             }, 3000);
                         }, 3000);
                     }
@@ -821,12 +839,10 @@
             $("#savForm_branch_error10").attr('hidden', true);
             $(this).attr('hidden', true);
             // Clear Select2 fields reliably with delay
-            setTimeout(function() {
-                $('#select_user_email').val(null).trigger('change');
-                $('#select_branch_search').val(null).trigger('change');
-                $('#select_role_one').val(null).trigger('change');
-                $('#select_email_one').val(null).trigger('change');
-            }, 100);
+            $('#select_user_email').val(null).trigger('change');
+            $('#select_branch_search').val(null).trigger('change');
+            $('#select_role_one').val(null).trigger('change');
+            $('#select_email_one').val(null).trigger('change');
         });
 
         // Select Role Type
@@ -848,69 +864,39 @@
             $("#access_modal_box").addClass('progress_body');
             $("#processModal_body").addClass('loading_body_area');
             setTimeout(() => {
-                $("#accessconfirmbranch").modal('hide');
-                $("#loadingProgress").attr('hidden', true);
-                $("#access_modal_box").removeClass('progress_body');
-                $("#processModal_body").removeClass('loading_body_area');
-                $("#adminBranchChangeModal").modal('show');
+                requestAnimationFrame(() => {
+                    $("#accessconfirmbranch").modal('hide');
+                    $("#loadingProgress").attr('hidden', true);
+                    $("#access_modal_box").removeClass('progress_body');
+                    $("#processModal_body").removeClass('loading_body_area');
+                    $("#adminBranchChangeModal").modal('show');
+                });
             }, 1500);
-            addAttributeOrClass([
-                {
-                    selector: '.cancel_change_box',
-                    type: 'class',
-                    name: 'branch-skeleton'
-                },
-                {
-                    selector: '.first_part, .second_part',
-                    type: 'class',
-                    name: 'branch-content-skeleton'
-                },
-                {
-                    selector: '.third_part',
-                    type: 'class',
-                    name: 'branch-content-footer-skeleton'
-                },
-                {
-                    selector: '.branch_name_hd',
-                    type: 'class',
-                    name: 'hd-branch-skeleton'
-                },
-                {
-                    selector: '#cancle_change, #admin_change_btn_confirm',
-                    type: 'class',
-                    name: 'mn-branch-skeleton'
-                },
 
-            ]);
-            const time = setTimeout(() => {
-                removeAttributeOrClass([
-                    {
-                        selector: '.cancel_change_box',
-                        type: 'class',
-                        name: 'branch-skeleton'
-                    },
-                    {
-                        selector: '.first_part, .second_part',
-                        type: 'class',
-                        name: 'branch-content-skeleton'
-                    },
-                    {
-                        selector: '.third_part',
-                        type: 'class',
-                        name: 'branch-content-footer-skeleton'
-                    },
-                    {
-                        selector: '.branch_name_hd',
-                        type: 'class',
-                        name: 'hd-branch-skeleton'
-                    },
-                    {
-                        selector: '#cancle_change, #admin_change_btn_confirm',
-                        type: 'class',
-                        name: 'mn-branch-skeleton'
-                    },
+            // Add skeleton loading classes (optimized inside setTimeout for UI smoothness)
+            setTimeout(() => {
+                requestAnimationFrame(() => {
+                    addAttributeOrClass([
+                        { selector: '.cancel_change_box', type: 'class', name: 'branch-skeleton' },
+                        { selector: '.first_part, .second_part', type: 'class', name: 'branch-content-skeleton' },
+                        { selector: '.third_part', type: 'class', name: 'branch-content-footer-skeleton' },
+                        { selector: '.branch_name_hd', type: 'class', name: 'hd-branch-skeleton' },
+                        { selector: '#cancle_change, #admin_change_btn_confirm', type: 'class', name: 'mn-branch-skeleton' }
+                    ]);
+                });
+            }, 50); // Slight delay to ensure skeleton appears before modal hides
 
-                ]);
+            // Remove skeleton loading classes after content is ready
+            setTimeout(() => {
+                requestAnimationFrame(() => {
+                    removeAttributeOrClass([
+                        { selector: '.cancel_change_box', type: 'class', name: 'branch-skeleton' },
+                        { selector: '.first_part, .second_part', type: 'class', name: 'branch-content-skeleton' },
+                        { selector: '.third_part', type: 'class', name: 'branch-content-footer-skeleton' },
+                        { selector: '.branch_name_hd', type: 'class', name: 'hd-branch-skeleton' },
+                        { selector: '#cancle_change, #admin_change_btn_confirm', type: 'class', name: 'mn-branch-skeleton' }
+                    ]);
+                });
             }, 3000);
         });
 

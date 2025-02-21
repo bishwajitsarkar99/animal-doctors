@@ -1,11 +1,11 @@
 <!-- Modal -->
-<div class="modal fade" id="profile_form" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="profile_form" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
   <div class="modal-dialog">
     <div class="modal-content" id="admin_modal_box">
-      <div class="modal-header profile_modal_header profilesetting_modal_header"style="background: transparent;background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);border-bottom: double white;">
+      <div class="modal-header profile_modal_header profilesetting_modal_header"style="background: transparent;background-image: repeating-linear-gradient(55deg, #5fd3cd7d, transparent 1px);border-bottom: double white;">
         @if(auth()->user()->role ==0)
           <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:black;">
-            Dr. {{Auth::user()->name}} Profile
+            {{Auth::user()->name}} Profile
           </h5>
         @elseif(auth()->user()->role ==1)
         <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:black;">
@@ -35,7 +35,7 @@
         <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'></button>
       </div>
 
-      <div class="modal-body profile-body pb-3" style="background: transparent;background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);">
+      <div class="modal-body profile-body pb-3" style="background: transparent;background-image: repeating-linear-gradient(55deg, #5fd3cd7d, transparent 1px);">
         <div class="row profile-heading pb-3">
           <div class="col-xl-4">
             <div class="card-body thumbial-image" id="pro_image">
@@ -66,7 +66,7 @@
           </div>
         </div>
       </div>
-      <div class="modal-footer profile_modal_footer" style="background-image: repeating-linear-gradient(55deg, #bf7a1f, transparent 1px);"> </div>
+      <div class="modal-footer profile_modal_footer" style="background-image: repeating-linear-gradient(55deg, #5fd3cd7d, transparent 1px)"> </div>
     </div>
   </div>
 </div>

@@ -335,7 +335,7 @@ class BranchServiceProvicer
 
             return response()->json([
                 'status' => 404,
-                'messages' => 'The branch is no found.',
+                'messages' => 'Select company branch name.',
             ]);
         }
     }
@@ -548,7 +548,7 @@ class BranchServiceProvicer
 
             return response()->json([
                 'status' => 404,
-                'messages' => 'The branch is no found.',
+                'messages' => 'Select User Email.',
             ]);
         }
     }

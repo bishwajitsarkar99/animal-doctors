@@ -1,5 +1,5 @@
 {{-- start loader modal --}}
-  <div class="modal fade" id="accessconfirmbranch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="accessconfirmbranch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content" id="access_modal_box">
         <div class="modal-body" id="processModal_body">

@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="fileModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="fileModalLabel" aria-hidden="true">
+<div class="modal fade" id="fileModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="fileModalLabel">
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document" style="margin-top:5%;">
         <div class="modal-content">
             <!-- Modal Header -->
@@ -152,7 +152,7 @@
 </div>
 {{-- Start Delete User Modal--}}
 <!-- Modal -->
-<div class="modal fade" id="deleteFolder" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="deleteFolder" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-sm">
         <div class="modal-content small_modal delete-folder-modal" id="admin_modal_box">
             <div class="modal-header folder_modal_header profilesetting_modal_header">

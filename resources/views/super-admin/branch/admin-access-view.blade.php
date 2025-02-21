@@ -219,7 +219,7 @@
 @include('loader.action-loader')
 
 {{-- start branch change modal --}}
-  <div class="modal fade" id="adminBranchChangeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="adminBranchChangeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog">
       <div class="modal-content" id="admin_modal_box">
         <div class="modal-header profile_modal_header profilesetting_modal_header">
@@ -311,17 +311,17 @@
 <script>
   // skeleton
   function fetchData() {
-    const allSkeleton = document.querySelectorAll('.skeleton')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton')
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.skeleton').forEach(item => {
+        item.classList.remove('skeleton');
+      });
     });
   }
   function focuButton() {
-    const allSkeleton = document.querySelectorAll('.skeleton-button')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-button')
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.skeleton-button').forEach(item => {
+        item.classList.remove('skeleton-button');
+      });
     });
   }
 

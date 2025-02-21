@@ -6,7 +6,7 @@
     @stack('css')
 </head>
 
-<body oncontextmenu="return flase;" class="sb-nav-fixed" id="myscreen" dir="{{setting('app_dir', 'ltr')}}">
+<body class="sb-nav-fixed" id="myscreen" dir="{{setting('app_dir', 'ltr')}}">
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
         @include('backend.layouts.layouts-components._topbar')
@@ -22,7 +22,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid bg-transparent px-4" id="main_content">
-                    <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
                         <div class="modal-dialog modal-sm modal-dialog-centered">
                             <div class="modal-content small_modal loader_modal" style="border:none;" id="admin_modal_box">
                                 <div class="modal-body" id="loaderModal_body">
@@ -60,9 +60,8 @@
     @include('backend.layouts.handler-js.footer-js._footer-menu-js')
     @include('backend.layouts.handler-js._footer-js')
     @include('backend.layouts.layouts-components.file-manager._file_manager')
-    @include('loader.action-loader');
-    @include('permission.permission-templete-index');
-    @include('permission.ajax.permission-ajax');
+    @include('permission.permission-templete-index')
+    @include('permission.ajax.permission-ajax')
 
     @yield('script')
     @stack('scripts')

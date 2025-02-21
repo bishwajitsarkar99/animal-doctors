@@ -12,6 +12,9 @@
     --animation-background-position-0:100% 50%;
     --animation-background-position-100:0 50%;
 }
+.msg_boxs{
+    padding: 35px 10px;
+}
 .confirm-label{
     color: black;
     font-weight: 700;

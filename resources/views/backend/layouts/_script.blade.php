@@ -19,7 +19,7 @@
     import { browserInpect, pageLoader, toolTip } from "/module/module-min-js/application-helper-function-min.js";
     pageLoader();
     toolTip();
-    //browserInpect();
+    // browserInpect();
 </script>
 <!--============= Chart-Pie Js 3D CDN Link =============-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
