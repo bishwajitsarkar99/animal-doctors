@@ -5,8 +5,7 @@
                 <ol class="breadcrumb mt-1">
                     <li class="" aria-current="page">
                         <div class="progress_login_header loadheight">
-                            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary ps-5 ms-3" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                            </div>
+                            <div id="loader" class="progress-bar progress-bar-striped progress-bar-animated bg-primary ps-5 ms-3" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </li>
                     <li>

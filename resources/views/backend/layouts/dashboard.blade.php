@@ -7,36 +7,37 @@
 </head>
 
 <body class="sb-nav-fixed" id="myscreen" dir="{{setting('app_dir', 'ltr')}}">
-
-    <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
-        @include('backend.layouts.layouts-components._topbar')
-    </nav>
-
-    <div id="layoutSidenav">
-
-        <div id="layoutSidenav_nav">
-            <nav id="sidebar" class="sb-sidenav accordion sb-sidenav-light-grey sb-sidenav-menu" id="sidenavAccordion">
-                @include('backend.layouts.layouts-components._sidebar')
-            </nav>
-        </div>
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid bg-transparent px-4" id="main_content">
-                    <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-                        <div class="modal-dialog modal-sm modal-dialog-centered">
-                            <div class="modal-content small_modal loader_modal" style="border:none;" id="admin_modal_box">
-                                <div class="modal-body" id="loaderModal_body">
-                                    <div class="loader-login">
-                                        <img class="modal-loader" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
-                                    </div> 
+    <div id="content-area">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
+            @include('backend.layouts.layouts-components._topbar')
+        </nav>
+    
+        <div id="layoutSidenav">
+    
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-light-grey sb-sidenav-menu" id="sidenavAccordion">
+                    @include('backend.layouts.layouts-components._sidebar')
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid bg-transparent px-4" id="main_content">
+                        <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
+                                <div class="modal-content small_modal loader_modal" style="border:none;" id="admin_modal_box">
+                                    <div class="modal-body" id="loaderModal_body">
+                                        <div class="loader-login">
+                                            <img class="modal-loader" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                                        </div> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        @yield('content')
                     </div>
-                    @yield('content')
-                </div>
-            </main>
-            @include('backend.layouts.layouts-components._footer')
+                </main>
+                @include('backend.layouts.layouts-components._footer')
+            </div>
         </div>
     </div>
     @include('backend.layouts.handler-js.them-setting-js._them-setup')

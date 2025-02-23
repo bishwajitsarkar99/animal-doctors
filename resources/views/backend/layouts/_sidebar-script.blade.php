@@ -8,11 +8,6 @@
             }
         });
         // Prevent multiple event bindings
-        // $(document).off("click", ".load-page").on("click", ".load-page", function (e) {
-        //     e.preventDefault();
-        //     let url = $(this).data("url");
-        //     loadPageContent(url);
-        // });
         $(document).off("click", ".load-page").on("click", ".load-page", function (e) {
             e.preventDefault();
             let url = $(this).data("url");
@@ -25,8 +20,9 @@
             $(this).data("loading", true);
             loadPageContent(url, () => $(this).data("loading", false));
         });
-        
+
     });
+
     // Function to load the page content via AJAX
     function loadPageContent(url) {
         $.ajaxSetup({
@@ -38,21 +34,21 @@
             url: url,
             type: "GET",
             success: function (data) {
-                $("body").html(data);
-                history.pushState(null, "", url); // Update the browser history
-                //reinitializeBootstrap(); // Reinitialize Bootstrap components
-                reinitializeSidebar(); // Reinitialize sidebar after content load
-                reinitializeAccordion(); // Reinitialize the accordion collapse buttons
-                
-
-                // const sidebarToggle = document.body.querySelector('#sidebarToggle');
-                // if (sidebarToggle) {
-                //     sidebarToggle.addEventListener('click', event => {
-                //         event.preventDefault();
-                //         document.body.classList.toggle('sb-sidenav-toggled');
-                //         localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
-                //     });
-                // }
+                $("#content-area").html(data);
+                history.pushState(null, "", url);;
+                setTimeout(() => {
+                    reinitializeAccordion();
+                    setupSidebarToggle();
+                    setupDropdowns();
+                }, 500);
+                // Ensure script is loaded before running dependent functions
+                loadScript("/backend_asset/main_asset/js/sidebar-script-min.js", function () {
+                    if (typeof toggleLinkIcon === "function") {
+                        toggleLinkIcon();
+                    }else if(typeof toggleLockUnlock === "function"){
+                        toggleLockUnlock();
+                    }
+                });
             },
             error: function () {
                 alert("Error loading page.");
@@ -60,45 +56,115 @@
         });
     }
 
-    function reinitializeBootstrap() {
-        // Bootstrap JS
-        // var script = document.createElement("script");
-        // script.src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js";
-        // script.crossOrigin = "anonymous";
+    // function reinitializeSidebar() {
+    //     const sidebarToggle = document.querySelector('#sidebarToggle');
+    //     if (sidebarToggle) {
+    //         sidebarToggle.removeEventListener('click', toggleSidebar); // Remove old event
+    //         sidebarToggle.addEventListener('click', toggleSidebar);
+    //     }
+    // }
 
-        // Append elements to the document head/body
-        //document.body.appendChild(script);
-        $('.tooltip').tooltip();
-    }
+    // function toggleSidebar(event) {
+    //     event.preventDefault();
+    //     document.body.classList.toggle('sb-sidenav-toggled');
+    //     localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+    // }
 
-    function reinitializeSidebar() {
-        // if (typeof initSidebarScripts === "function") {
-        //     initSidebarScripts();
-        // }
-        const sidebarToggle = document.querySelector('#sidebarToggle');
+    // function reinitializeModal(){
+    //     var modal = new bootstrap.Modal('#myModal');
+    //     var dropdown = new bootstrap.Dropdown('[data-bs-toggle="dropdown"]');
+    // }
+
+    // Sidebar toggle functionality
+    function setupSidebarToggle() {
+        const sidebarToggle = document.querySelector("#sidebarToggle");
         if (sidebarToggle) {
-            sidebarToggle.removeEventListener('click', toggleSidebar); // Remove old event
-            sidebarToggle.addEventListener('click', toggleSidebar);
+            sidebarToggle.addEventListener("click", function (event) {
+                event.preventDefault();
+                document.body.classList.toggle("sb-sidenav-toggled");
+                localStorage.setItem("sb|sidebar-toggle", document.body.classList.contains("sb-sidenav-toggled"));
+            });
         }
     }
+    // Dropdown functionality
+    function setupDropdowns() {
+        let dropdowns = document.querySelectorAll(".nav-item");
 
-    function toggleSidebar(event) {
-        event.preventDefault();
-        document.body.classList.toggle('sb-sidenav-toggled');
-        localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+        dropdowns.forEach(function (dropdown) {
+            let toggle = dropdown.querySelector(".dropdown-toggle");
+            let menu = dropdown.querySelector(".dropdown-menu");
+
+            if (toggle && menu) {
+                let bsDropdown = new bootstrap.Dropdown(toggle);
+
+                toggle.addEventListener("click", function (e) {
+                    e.preventDefault();
+
+                    // Close all other open dropdowns before opening this one
+                    document.querySelectorAll(".dropdown-menu.show").forEach((openMenu) => {
+                        if (openMenu !== menu) {
+                            let openToggle = openMenu.previousElementSibling;
+                            new bootstrap.Dropdown(openToggle).hide();
+                        }
+                    });
+
+                    // Toggle dropdown
+                    if (menu.classList.contains("show")) {
+                        bsDropdown.hide();
+                    } else {
+                        bsDropdown.show();
+                    }
+                });
+
+                // Close the dropdown when clicking outside
+                document.addEventListener("click", function (event) {
+                    if (!dropdown.contains(event.target)) {
+                        bsDropdown.hide();
+                    }
+                });
+            }
+        });
     }
 
     function reinitializeAccordion() {
-        $('.accordion-button').each(function () {
-            $(this).off('click').on('click', function () {
-                let target = $(this).attr("data-bs-target");
-                $(target).collapse('toggle');
-            });
+        $(document).off("click", ".accordion-button").on("click", ".accordion-button", function () {
+            let target = $(this).attr("data-bs-target");
+            
+            if ($(target).hasClass("show")) {
+                // If already open, close it
+                $(target).collapse("hide");
+                $(this).addClass("collapsed").attr("aria-expanded", "false");
+            } else {
+                // Close all other open accordions
+                $(".accordion-collapse").collapse("hide");
+                $(".accordion-button").addClass("collapsed").attr("aria-expanded", "false");
+
+                // Open the clicked one
+                $(target).collapse("show");
+                $(this).removeClass("collapsed").attr("aria-expanded", "true");
+            }
         });
-        // $('.accordion-button').off('click').on('click', function () {
-        //     let target = $(this).attr("data-bs-target");
-        //     $(target).collapse('toggle');
-        // });
     }
     
+    // Dynamically load an external script
+    function loadScript(url, callback) {
+        if (document.querySelector(`script[src="${url}"]`)) {
+            if (callback) callback();
+            return;
+        }
+
+        let script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = url + "?v=" + new Date().getTime(); // Prevent cache issues
+
+        script.onload = function () {
+            if (callback) callback();
+        };
+
+        script.onerror = function () {
+            console.error("Failed to load script:", url);
+        };
+
+        document.head.appendChild(script);
+    }
 </script>

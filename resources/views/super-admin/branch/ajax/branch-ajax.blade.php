@@ -127,10 +127,12 @@
             $("#delete_branch_body").empty();
             $("#delete_confrm_branch_id").empty();
             fetch_division();
-            var select = $(this).val();
 
+            var select = $(this).val();
             // Button Show Or Hide
             if(select !== ''){
+                // Search ID
+                var id = select;
                 $("#save").hide();
                 $("#save").fadeOut();
                 $("#cancel_btn").hide();
@@ -146,9 +148,6 @@
                 $("#cancel_btn").fadeIn();
             }
 
-            // Search ID
-            var id = select;
-
             if(select == ''){
                 $('.edit_branch_id').attr('hidden', true);
                 $('#documents').attr('hidden', true);
@@ -161,8 +160,8 @@
                 success: function(response){
                     if(response.status == 404){
                         $('#success_message').html("");
-                        $('#success_message').addClass('alert alert-danger');
-                        $('#success_message').text(response.messages);
+                        // $('#success_message').addClass('alert alert-danger');
+                        // $('#success_message').text(response.messages);
                     }else if(response.status == 200){
                         $("#accessconfirmbranch").modal('show');
                         $("#dataPullingProgress").removeAttr('hidden');
@@ -866,9 +865,9 @@
                         $("#processModal_body").addClass('loading_body_area');
 
                         $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').fadeIn();
                         $('#success_message').text(response.messages);
                         $("#select_branch").val("").trigger('change');
+                        $('#success_message').fadeIn();
                         clearFields();
                         setTimeout(() => {
                             $('#success_message').fadeOut();
@@ -891,14 +890,15 @@
             $("#branch_type_delete").attr('hidden', true);
             fetch_branch_categories();
             const time = setTimeout(() => {
-                removeAttributeOrClass([
-                    {
-                        selector: '.branch_type_head_title, .branch_type_head_btn, .branch_select_type, .branch_type_name, #branch_type_create, #branch_type_cancel',
-                        type: 'class',
-                        name: 'branch-skeleton'
-                    }
-
-                ]);
+                requestAnimationFrame(() => {
+                    removeAttributeOrClass([
+                        {
+                            selector: '.branch_type_head_title, .branch_type_head_btn, .branch_select_type, .branch_type_name, #branch_type_create, #branch_type_cancel',
+                            type: 'class',
+                            name: 'branch-skeleton'
+                        }
+                    ]);
+                });
             }, 1000);
         });
 
@@ -961,11 +961,10 @@
             e.preventDefault();
             $("#delete_label").empty();
             $("#Heading").empty();
-            var id = $(this).val();
-            var select = id;
+            var selectID = $(this).val();
 
             // Button Show Or Hide
-            if(select == ''){
+            if(selectID == ''){
                 $("#branch_type_create").removeAttr('hidden');
                 $("#branch_type_cancel").removeAttr('hidden');
                 $("#branch_type_update").attr('hidden', true);
@@ -974,6 +973,8 @@
                 $("#updateForm_error_branch").attr('hidden', true);
                 $("#savForm_error_branch").attr('hidden', true);
                 $('#branchTypeName').removeClass('is-invalid');
+            }else if(selectID !== ''){
+                var id = selectID;
             }
             $.ajax({
                 type: "GET",
@@ -981,8 +982,8 @@
                 success: function(response){
                     if(response.status == 404){
                         $('#success_message').html("");
-                        $('#success_message').addClass('alert alert-danger');
-                        $('#success_message').text(response.messages);
+                        // $('#success_message').addClass('alert alert-danger');
+                        // $('#success_message').text(response.messages);
                     }else if(response.status == 200){
                         $("#branchTypeCreateModal").modal('hide');
                         $("#accessconfirmbranch").modal('show');
