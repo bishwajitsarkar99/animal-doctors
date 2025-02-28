@@ -1,0 +1,184 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.supplier {
+  font-size: 75.5%;
+}
+
+.supplier-seeblue {
+  outline: none;
+  border: none;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.tablinksupplier {
+  outline: none;
+  border: none;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.supp_summ {
+  font-family: "Faster One";
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid silver;
+}
+
+table.summary_table {
+  background-image: radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
+  color: royalblue;
+  border-top: double;
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.0666666667), 0px 1px 6px rgba(0, 0, 0, 0.0666666667);
+}
+
+span.tol_ord {
+  color: royalblue;
+  font-weight: 600;
+}
+
+td.tb_body.sn_num {
+  border-bottom: 1px solid silver;
+  border-top: 1px solid silver;
+  font-size: 11px;
+}
+
+th.tb_body.sn_num {
+  border-bottom: 1px solid silver;
+  border-top: 1px solid silver;
+  font-size: 11px;
+}
+
+th.tb_heading {
+  text-align: left;
+}
+
+.card.ord_card {
+  border: none;
+}
+
+.card-body.order_pie_chart_bg {
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.0666666667), 0px 1px 6px rgba(0, 0, 0, 0.0666666667);
+  height: 110px;
+}
+
+.supplier_chart_bg {
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.0666666667), 0px 1px 6px rgba(0, 0, 0, 0.0666666667);
+  height: 160px;
+}
+
+select.select_month {
+  cursor: pointer;
+  outline: none;
+  border: 1px solid silver;
+  background-image: radial-gradient(farthest-corner at 100px 100px, lightgray, ghostwhite);
+  animation: drop_font_focus 5s linear infinite;
+}
+
+@keyframes drop_font_focus {
+  50% {
+    color: blue;
+  }
+  80% {
+    color: royalblue;
+  }
+  100% {
+    color: darkcyan;
+  }
+}
+input.select_dateOne {
+  cursor: pointer;
+  outline: none;
+  border: 1px solid silver;
+  background-image: radial-gradient(farthest-corner at 100px 100px, lightgray, ghostwhite);
+  animation: drop_font_focus 5s linear infinite;
+}
+
+table.supplier_table, th, td {
+  background-image: radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.0666666667), 0px 1px 6px rgba(0, 0, 0, 0.0666666667);
+}
+table.supplier_table th.sn.border_ord, th th.sn.border_ord, td th.sn.border_ord {
+  text-align: center;
+  border: 1px solid silver;
+  letter-spacing: 0.5px;
+  color: royalblue;
+}
+table.supplier_table th.txt, th th.txt, td th.txt {
+  text-align: left;
+  border: 1px solid silver;
+  letter-spacing: 0.5px;
+  color: royalblue;
+}
+table.supplier_table th.txt_accuracy, th th.txt_accuracy, td th.txt_accuracy {
+  text-align: center;
+  border: 1px solid silver;
+  letter-spacing: 0.5px;
+  color: royalblue;
+}
+table.supplier_table tr.table-body, th tr.table-body, td tr.table-body {
+  border: 1px solid silver;
+  letter-spacing: 0.2px;
+}
+table.supplier_table tr.table-body td.table_td, th tr.table-body td.table_td, td tr.table-body td.table_td {
+  border: 1px solid silver;
+}
+table.supplier_table tr.table-body:hover, th tr.table-body:hover, td tr.table-body:hover {
+  color: orangered;
+}
+table.supplier_table th.total_amunt, th th.total_amunt, td th.total_amunt {
+  color: royalblue;
+  border: 1px solid silver;
+}
+table.supplier_table td.total_amunt, th td.total_amunt, td td.total_amunt {
+  color: royalblue;
+  border: 1px solid silver;
+  text-align: right;
+  font-weight: 600;
+}
+table.supplier_table td.tot_supplier_payment, th td.tot_supplier_payment, td td.tot_supplier_payment {
+  color: royalblue;
+  border: 1px solid silver;
+  text-align: center;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) and (min-width: 300px) {
+  .dropdown-content {
+    font-size: 8px;
+  }
+  .supp_summ {
+    font-size: 11px;
+  }
+  .supplier-seeblue {
+    font-size: 8px;
+  }
+  .tablinksupplier {
+    font-size: 8px;
+  }
+  td.tb_body.sn_num {
+    font-size: 8px;
+  }
+  th.tb_body.sn_num {
+    font-size: 8px;
+  }
+  span.tol_ord {
+    font-size: 8px;
+  }
+  table.supplier_table, th, td {
+    font-size: 8px;
+  }
+  table.supplier_table td.total_amunt, th td.total_amunt, td td.total_amunt {
+    font-size: 7px;
+  }
+  footer#admin_footer {
+    display: none;
+  }
+}/*# sourceMappingURL=supplier-summary.css.map */

@@ -56,25 +56,6 @@
         });
     }
 
-    // function reinitializeSidebar() {
-    //     const sidebarToggle = document.querySelector('#sidebarToggle');
-    //     if (sidebarToggle) {
-    //         sidebarToggle.removeEventListener('click', toggleSidebar); // Remove old event
-    //         sidebarToggle.addEventListener('click', toggleSidebar);
-    //     }
-    // }
-
-    // function toggleSidebar(event) {
-    //     event.preventDefault();
-    //     document.body.classList.toggle('sb-sidenav-toggled');
-    //     localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
-    // }
-
-    // function reinitializeModal(){
-    //     var modal = new bootstrap.Modal('#myModal');
-    //     var dropdown = new bootstrap.Dropdown('[data-bs-toggle="dropdown"]');
-    // }
-
     // Sidebar toggle functionality
     function setupSidebarToggle() {
         const sidebarToggle = document.querySelector("#sidebarToggle");
@@ -125,7 +106,6 @@
             }
         });
     }
-
     function reinitializeAccordion() {
         $(document).off("click", ".accordion-button").on("click", ".accordion-button", function () {
             let target = $(this).attr("data-bs-target");
@@ -145,7 +125,25 @@
             }
         });
     }
-    
+    function reintializeButtonMenu(){
+        $(document).off("click", ".accordion-button").on("click", ".accordion-button", function () {
+            let target = $(this).attr("data-bs-target");
+            
+            if ($(target).hasClass("show")) {
+                // If already open, close it
+                $(target).collapse("hide");
+                $(this).addClass("collapsed").attr("aria-expanded", "false");
+            } else {
+                // Close all other open accordions
+                $(".accordion-collapse").collapse("hide");
+                $(".accordion-button").addClass("collapsed").attr("aria-expanded", "false");
+
+                // Open the clicked one
+                $(target).collapse("show");
+                $(this).removeClass("collapsed").attr("aria-expanded", "true");
+            }
+        });
+    }
     // Dynamically load an external script
     function loadScript(url, callback) {
         if (document.querySelector(`script[src="${url}"]`)) {

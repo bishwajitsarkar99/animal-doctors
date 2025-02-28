@@ -220,6 +220,8 @@
                 $('.edit_town_name').attr('disabled', true);
                 $('.edit_location').attr('disabled', true);
                 $("#add").removeAttr('disabled');
+                // Search ID
+                var id = select;
             }
             if(select == ''){
                 $('.edit_branch_id').attr('disabled', true);
@@ -235,18 +237,15 @@
                 $("#add_accss").attr('hidden', true);
                 clearFields();
             }
-
-            // Search ID
-            var id = select;
             
             $.ajax({
                 type: "GET",
                 url: "/company/branch-get-data/" + id,
                 success: function(response){
                     if(response.status == 404){
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert alert-danger');
-                        $('#success_message').text(response.messages);
+                        // $('#success_message').html("");
+                        // $('#success_message').addClass('alert alert-danger');
+                        // $('#success_message').text(response.messages);
                     }else if(response.status == 200){
                         $("#accessconfirmbranch").modal('show');
                         $("#dataPullingProgress").removeAttr('hidden');
@@ -675,7 +674,7 @@
             $("#tabAccess").removeClass('active');
             $("#tabHome").addClass('active');
             $("#userBranchPermission").removeClass('active show');
-            $("#branchBox").setAttribute('hidden', false);
+            // $("#branchBox").setAttribute('hidden', false);
         });
         // menu close event 
         $(document).on('click', '#branch_close, #role_close, #email_close', function () {
@@ -1401,7 +1400,7 @@
                                     <label class="branch_head_label">Updator</label>
                                 </li>
                                 <li id="timeSet">
-                                    <label class="enter_press text_label" id="updatordAt">Update-Date : ${currentDate(messages.updated_at)}</label>
+                                    <label class="enter_press text_label" id="updatordAt">Update-Date : ${formatDate(messages.updated_at)}</label>
                                 </li>
                                 <li id="updatordBy">
                                     <label class="enter_press text_label">Role-Name : ${updatedByRole}</label>
@@ -1507,15 +1506,6 @@
             var change_upazila_id = $("#change_upazila_id").val();
             var change_town_name = $("#change_town_name").val();
             var change_location = $("#change_location").val();
-            // for user table
-            var user_branch_id = $("#branch_ids").attr("data-branch-id");
-            var user_branch_type = $("#branch_types").attr("data-branch-id");
-            var user_branch_name = $("#branch_names").attr("data-branch-id");
-            var user_division_id = $("#division_names").attr("data-branch-id");
-            var user_district_id = $("#district_names").attr("data-branch-id");
-            var user_upazila_id = $("#upazila_names").attr("data-branch-id");
-            var user_town_name = $("#town_names").attr("data-branch-id");
-            var user_location = $("#locations").attr("data-branch-id");
             
             const current_url = "/company/branch-user-permission-update/" + id;
 
@@ -1538,14 +1528,6 @@
                     upazila_id : change_upazila_id,
                     town_name : change_town_name,
                     location : change_location,
-                    branch_id : user_branch_id,
-                    branch_type : user_branch_type,
-                    branch_name : user_branch_name,
-                    division_name : user_division_id,
-                    district_name : user_district_id,
-                    upazila_name : user_upazila_id,
-                    town_name : user_town_name,
-                    location : user_location
                 },
                 success: function(response) {
                     $("#branchChange").modal('hide');

@@ -162,9 +162,9 @@
                                     </span>
                                 </div>
                                 <div class="form-group">
-                                    <label class="email email-label-skeleton" for="branch">Branch :</label>
+                                    <label class="email email-label-skeleton" for="branch">Branch-ID :</label>
                                     <span class="input-email-skeleton">
-                                        <input id="inputBranch" class="branch-name branch show-current-border ps-1" type="text" name="branch_name" placeholder="Branch Name" value="" readonly="" />
+                                        <input id="inputBranch" class="branch-id branch show-current-border ps-1" type="text" name="branch_id" placeholder="Branch ID" value="{{session('user_branch')->branch_id ?? ''}}" readonly="" />
                                     </span>
                                 </div>
                                 <div class="form-group">
@@ -258,6 +258,15 @@
                     '.logn_page'
                 ],
                 2000
+            );
+            // Handle branch id validation
+            handleInputValidation(
+                '.branch-id',              // Input selector
+                '.show-error',             // Error message selector
+                'is-valid',                // Success class
+                'is-invalid',              // Error class
+                'show-current-border',     // Default border class
+                '.branch-id'               // Success message selector
             );
             // Handle email validation
             handleInputValidation(

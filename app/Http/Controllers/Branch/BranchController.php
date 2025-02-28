@@ -141,6 +141,24 @@ class BranchController extends Controller
         return $this->branchServiceProvider->accessBranchAdmin($request);
     }
 
+    // Admin Branch Fetch
+    public function adminBranchChangeFetch(Request $request)
+    {
+        return $this->branchServiceProvider->adminBranchChangesFetch($request);
+    }
+
+    // Admin Branch Change
+    public function adminBranchChange(Request $request, $id)
+    {
+        return $this->branchServiceProvider->adminBranchChanges($request, $id);
+    }
+
+    // Admin Branch Delete
+    public function adminBranchDelete(Request $request, $id)
+    {
+        return $this->branchServiceProvider->adminBranchsDelete($request, $id);
+    }
+
     // Branch User Access Permission View
     public function branchAccessUserPermission(Request $request)
     {

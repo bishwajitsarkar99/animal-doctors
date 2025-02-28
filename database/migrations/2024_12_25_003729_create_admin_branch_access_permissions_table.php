@@ -44,8 +44,9 @@ class CreateAdminBranchAccessPermissionsTable extends Migration
             $table->unsignedBigInteger('approver_by')->nullable();
             $table->foreign('approver_by')->references('id')->on('users')->onDelete('cascade');
             $table->tinyInteger('status')->default(0);
-            $table->date('approver_date')->nullable();
-            $table->timestamps();
+            // $table->dateTime('approver_date')->nullable();
+            $table->dateTime('approver_date')->nullable();
+            $table->timestamps(); 
         });
     }
 

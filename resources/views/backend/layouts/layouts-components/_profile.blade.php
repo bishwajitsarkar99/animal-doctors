@@ -44,25 +44,31 @@
           </div>
           <div class="col-xl-8">
             <p class="company-information" style="background: transparent;">
-              <label id="pro_com_name" class="mt-2" for="company_name">{{setting('company_name')}}</label><br>
-              <label id="com_address" class="address mt-1" for="address">{{setting('company_address')}}</label><br>
-              <span id="info">
-                <label class="mt-1" for="Contract-number">Contract :</label>
-                <span class="mt-1">{{Auth::user()->contract_number}}</span> <br>
-              </span>
-              <span id="info2">
-                <label class="mt-1" for="mail-address">Credentials-Email :</label>
-                <span class="mt-1">{{Auth::user()->email}}</span> <br>
-              </span>
-              <span id="info2">
-                <label class="mt-1" for="login-mail-address">Login-Email :</label>
-                <span class="mt-1">{{Auth::user()->login_email}}</span> <br>
-              </span>
-              <span id="info2">
-                <label class="mt-1" for="mailing-mail-address">Mailing-Email :</label>
-                <span class="mt-1">{{Auth::user()->mailing_email}}</span> <br>
-              </span>
+              <label id="pro_com_name" class="mt-2" for="company_name">Company : {{setting('company_name')}}</label><br>
+              <label id="com_address" class="address mt-1" for="address">Address : {{setting('company_address')}}</label><br>
             </p>
+          </div>
+          <div class="row">
+            <div class="col-xl-12">
+              <p class="company-information" style="background: transparent;">
+                <span id="info">
+                  <label class="mt-1" for="Contract-number">Contract :</label>
+                  <span class="mt-1">{{Auth::user()->contract_number}}</span> <br>
+                </span>
+                <span id="info2">
+                  <label class="mt-1" for="mail-address">Credentials-Email :</label>
+                  <span class="mt-1">{{Auth::user()->email}}</span> <br>
+                </span>
+                <span id="info2">
+                  <label class="mt-1" for="login-mail-address">Login-Email :</label>
+                  <span class="mt-1">{{Auth::user()->login_email}}</span> <br>
+                </span>
+                <span id="info2">
+                  <label class="mt-1" for="mailing-mail-address">Mailing-Email :</label>
+                  <span class="mt-1">{{Auth::user()->mailing_email}}</span> <br>
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </div>

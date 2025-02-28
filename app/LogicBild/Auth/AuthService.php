@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use App\Support\Setting;
+use App\Models\Branch\UserBranchAccessPermission;
+use App\Models\Branch\AdminBranchAccessPermission;
 
 class AuthService
 {
@@ -259,14 +261,40 @@ class AuthService
             'login_email' => 'required|email',
         ], [
             'login_email.required' => 'Email is required.',
-            'login_email.login_email' => 'Please enter a valid email address.',
+            'login_email.email' => 'Please enter a valid email address.',
         ]);
 
+        // Get User ID
         $user_email = $request->input('login_email');
         $user = User::where('login_email', $user_email)->first();
 
-        if ($user) {
-            session(['login_email' => $user_email]);
+        if (!$user) {
+            return response()->json([
+                'status' => 400,
+                'error' => 'User email does not exist.',
+            ]);
+        }
+
+        $user_id = $user->id;
+
+        // Get User Branch Permission
+        $user_branch = UserBranchAccessPermission::where('email_id', $user_id)->first();
+
+        // Get Admin Branch Permission
+        $admin_branch = AdminBranchAccessPermission::where('user_email_id', $user_id)->first();
+
+        if (
+            ($user_branch && ($user_branch->admin_approval_status == 1 || $user_branch->super_admin_approval_status == 1)) ||
+            ($admin_branch && $admin_branch->status == 1)
+        ) {
+            // Store login email in session
+            session([
+                'login_email' => $user_email,
+                'user_branch' => $user_branch,
+                'admin_branch' => $admin_branch,
+            ]);
+            
+            // Determine the login route
             $redirect = match ($user->role) {
                 1 => route('superadmin.login'),
                 2, 3 => route('admin.login'),
@@ -279,12 +307,12 @@ class AuthService
                 'status' => 200,
                 'redirect' => $redirect,
             ]);
-        } else {
-            return response()->json([
-                'status' => 400,
-                'error' => 'User email does not exist.',
-            ]);
         }
+
+        return response()->json([
+            'status' => 403,
+            'error' => 'Access denied. Your branch has not been approved.',
+        ]);
     }
     /**
      * Handle Super Admin Login View page.

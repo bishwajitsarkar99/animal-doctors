@@ -15,31 +15,31 @@
         @endif
     </span>
     @if(auth()->user()->role ==1)
-    {{Auth::user()->name}}
+    Super Admin
     @endif
 
     @if(auth()->user()->role ==2)
-    {{Auth::user()->name}}
+    Sub Admin
     @endif
 
     @if(auth()->user()->role ==3)
-    {{Auth::user()->name}}
+    Admin
     @endif
 
     @if(auth()->user()->role ==5)
-    {{Auth::user()->name}}
+    Accounts
     @endif
 
     @if(auth()->user()->role ==6)
-    {{Auth::user()->name}}
+    Marketing
     @endif
 
     @if(auth()->user()->role ==7)
-    {{Auth::user()->name}}
+    Delivery Team
     @endif
 
     @if(auth()->user()->role ==0)
-    Dr.{{Auth::user()->name}}
+    Default Role
     @endif
 </a>
 <!-- Sidebar Toggle-->
@@ -65,9 +65,11 @@
 <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 footer_toggle top__btn" style="color:darkblue;animation: none;" id="sidebarToggle" href="#!" data-bs-toggle="tooltip"  data-bs-placement="left" title="side-bar Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'><i class="fas fa-bars"></i></button>
 @endif
 @if(auth()->user()->role ==0)
-    <span style="color:darkblue;font-weight:700;font-size: .9rem;">{{Auth::user()->email}} </span>
+    <span style="color:darkblue;font-weight:700;font-size: .9rem;">{{Auth::user()->branch_name}} </span>
+@elseif(auth()->user()->role ==1)
+    <span class="admin_email">{{Auth::user()->branch_type}} </span>
 @else
-    <span class="admin_email">{{Auth::user()->email}} </span>
+    <span class="admin_email">{{Auth::user()->branch_name}} </span>
 @endif
 
 <!-- Navbar Search-->

@@ -15,6 +15,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class BranchServiceProvicer
 {
@@ -493,6 +494,148 @@ class BranchServiceProvicer
     }
 
     /**
+     * Handle admin branch fetch view.
+    */
+    public function adminBranchChangesFetch(Request $request)
+    {
+        $auth = Auth::user();
+
+        if($auth->role ==1){
+
+            $admin_branch_changes = AdminBranchAccessPermission::whereIn('id', function ($query) {
+                $query->selectRaw('MAX(id)')
+                    ->from('admin_branch_access_permissions')
+                    ->whereNotNull('branch_name')
+                    ->groupBy('branch_name');
+            })
+            ->orderBy('id', 'desc')
+            ->get([
+                'id',
+                'branch_id', 
+                'branch_type',
+                'branch_name',
+                'division_name',
+                'district_name',
+                'upazila_name',
+                'town_name',
+                'location',
+                'user_role_id',
+                'user_email_id',
+                'created_by',
+                'updated_by',
+                'approver_by',
+                'status',
+                'approver_date',
+                'created_at',
+                'updated_at',
+            ]);
+    
+            if($admin_branch_changes){
+                return response()->json([
+                    'admin_branch_changes' => $admin_branch_changes,
+                ], 200);
+            };
+        }
+    }
+
+    /**
+     * Handle admin branch change view.
+    */
+    public function adminBranchChanges(Request $request, $id)
+    {
+        $auth = Auth::user();
+
+        $branch_access = AdminBranchAccessPermission::where('user_email_id', $id)->first();
+        if (!$branch_access) {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'Branch Admin not found.',
+            ], 404);
+        }
+
+        // Update permission for Super Admin (role = 1) or Admin (role = 3)
+        if (in_array($auth->role, [1])) {
+            $branch_access->branch_id = $request->branch_id;
+            $branch_access->branch_type = $request->branch_type;
+            $branch_access->branch_name = $request->branch_name;
+            $branch_access->division_name = $request->division_name;
+            $branch_access->district_name = $request->district_name;
+            $branch_access->upazila_name = $request->upazila_name;
+            $branch_access->town_name = $request->town_name;
+            $branch_access->location = $request->location;
+            $branch_access->user_role_id = $request->user_role_id;
+            $branch_access->user_email_id = $request->user_email_id;
+            $branch_access->updated_by = $auth->id;
+            $branch_access->save();
+        }
+
+        // Update User Details in `users` Table
+        $user = User::find($id);
+        if ($user) {
+            $user->branch_id = $request->branch_id;
+            $user->branch_type = $request->branch_type;
+            $user->branch_name = $request->branch_name;
+            $user->division_name = $request->division_name;
+            $user->district_name = $request->district_name;
+            $user->upazila_name = $request->upazila_name;
+            $user->town_name = $request->town_name;
+            $user->location = $request->location;
+            $user->save();
+        }
+
+        return response()->json([
+            'status' => 200,
+            'messages' => 'Admin branch has been changed successfully.',
+        ], 200);
+    }
+
+    /**
+     * Handle admin branch delete.
+    */
+    public function adminBranchsDelete(Request $request, $id)
+    {
+        $auth = Auth::user();
+        // Fetch branch access record correctly
+        $branch_access = AdminBranchAccessPermission::where('user_email_id', $id)->first();
+        if (!$branch_access) {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'Branch User not found.',
+            ], 404);
+        }
+    
+        // Fetch user correctly
+        $user = User::where('id', $id)->first();
+        if (!$user) {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'User not found.',
+            ], 404);
+        }
+    
+        // Update User Details
+        $user->branch_id = $request->branch_id ?? null;
+        $user->branch_type = $request->branch_type ?? null;
+        $user->branch_name = $request->branch_name ?? null;
+        $user->division_name = $request->division_name ?? null;
+        $user->district_name = $request->district_name ?? null;
+        $user->upazila_name = $request->upazila_name ?? null;
+        $user->town_name = $request->town_name ?? null;
+        $user->location = $request->location ?? null;
+        $user->save();
+    
+        // Allow Super Admin (1) or Admin (3) to delete
+        if (in_array($auth->role, [1])) {
+            $branch_access->delete();
+        }
+    
+        return response()->json([
+            'status' => 200,
+            'messages' => 'The admin branch has been deleted successfully.'
+        ], 200);
+    }
+
+    /**
      * Handle branch user email fetch.
     */
     public function branchFetchUserEmail(Request $request)
@@ -638,8 +781,7 @@ class BranchServiceProvicer
         }
 
         $auth = Auth::user();
-        $approvalDate = now();
-
+        $approvalDate = Carbon::now('Asia/Dhaka')->format('Y-m-d H:i:s');
         $branch = AdminBranchAccessPermission::find($request->id);
         if (!$branch) {
             return response()->json([
@@ -738,7 +880,7 @@ class BranchServiceProvicer
 
             return response()->json([
                 'status' => 404,
-                'messages' => 'The branch is no found.',
+                'messages' => 'Select Branch Name.',
             ]);
         }
     }
@@ -984,15 +1126,22 @@ class BranchServiceProvicer
             $branch_access->save();
         }
 
+         // Get Division Name
+        $division_name = Division::where('id', $request->division_id)->value('division_name');
+        // Get District Name
+        $district_name = District::where('id', $request->district_id)->value('district_name');
+        // Get Upazila Name
+        $upazila_name = ThanaOrUpazila::where('id', $request->upazila_id)->value('thana_or_upazila_name');
+
         // Update User Details in `users` Table
         $user = User::find($id);
         if ($user) {
             $user->branch_id = $request->branch_id;
             $user->branch_type = $request->branch_type;
             $user->branch_name = $request->branch_name;
-            $user->division_name = $request->division_name;
-            $user->district_name = $request->district_name;
-            $user->upazila_name = $request->upazila_name;
+            $user->division_name = $division_name;
+            $user->district_name = $district_name;
+            $user->upazila_name = $upazila_name;
             $user->town_name = $request->town_name;
             $user->location = $request->location;
             $user->save();
@@ -1057,7 +1206,7 @@ class BranchServiceProvicer
     {
 
         $auth = Auth::user();
-        $approvalDate = now();
+        $approvalDate = Carbon::now('Asia/Dhaka')->format('Y-m-d H:i:s');
 
         $branch_access = UserBranchAccessPermission::where('email_id', $request->id)->first();
         if (!$branch_access) {
