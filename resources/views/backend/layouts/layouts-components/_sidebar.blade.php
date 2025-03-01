@@ -44,8 +44,11 @@
         </a>   
         @endif
         @if(auth()->user()->role ==1)
-            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;">
+            <span class="ms-4 ps-2" style="font-size: 12px;letter-spacing:1px;font-weight:600;color:white;">
                 {{setting('company_name')}}
+            </span>
+            <span class="ms-4 ps-2" style="font-size: 12px;letter-spacing:1px;font-weight:600;color:white;">
+                {{Auth::user()->branch_name}}
             </span>
         @endif
         @if(auth()->user()->role ==2)

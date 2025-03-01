@@ -2,8 +2,8 @@
 <!-- ================== Stock ======================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_stock {{setting('stock_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_stock_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_stock_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_stock_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_stock_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{ __('translate.Stock')}}</span>
@@ -41,8 +41,8 @@
 <!-- ================= Inventory ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_inventory {{setting('invnetory_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_inventory_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_inventory_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_inventory_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_inventory_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Inventory')}}</span>
@@ -74,8 +74,8 @@
 <!-- ================= Supplier ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_supplier_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_supplier_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_supplier_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_supplier_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Supplier')}}</span>
@@ -109,8 +109,8 @@
 <!-- ================== Stock ======================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_stock {{setting('stock_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_stock_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_stock_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_stock_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_stock_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{ __('translate.Stock')}}</span>
@@ -148,8 +148,8 @@
 <!-- ================= Inventory ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_inventory {{setting('invnetory_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_inventory_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_inventory_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_inventory_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_inventory_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Inventory')}}</span>
@@ -181,8 +181,8 @@
 <!-- ================= Supplier ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_supplier_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_supplier_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_supplier_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_supplier_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Supplier')}}</span>
@@ -217,8 +217,8 @@
 <!-- ================== Stock ======================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_stock {{setting('stock_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_stock_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_stock_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_stock_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_stock_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{ __('translate.Stock')}}</span>
@@ -256,8 +256,8 @@
 <!-- ================= Inventory ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_inventory {{setting('invnetory_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_inventory_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_inventory_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_inventory_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_inventory_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Inventory')}}</span>
@@ -289,8 +289,8 @@
 <!-- ================= Supplier ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_supplier_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_supplier_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_supplier_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_supplier_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Supplier')}}</span>
@@ -325,8 +325,8 @@
 <!-- ================== Stock ======================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_stock {{setting('stock_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_stock_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_stock_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_stock_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_stock_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{ __('translate.Stock')}}</span>
@@ -364,8 +364,8 @@
 <!-- ================= Inventory ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_inventory {{setting('invnetory_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_inventory_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_inventory_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_inventory_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_inventory_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Inventory')}}</span>
@@ -397,8 +397,8 @@
 <!-- ================= Supplier ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_supplier_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_supplier_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_supplier_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_supplier_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Supplier')}}</span>

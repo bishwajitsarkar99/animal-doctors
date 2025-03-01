@@ -1,8 +1,8 @@
 <!-- ================= Daybook ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_daybook {{setting('day_book_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_daybook_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_daybook_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_daybook_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_daybook_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
@@ -34,8 +34,8 @@
 <!-- ================= Expenses/Payable ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_expenses {{setting('expenses_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_expenses_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_expenses_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_expenses_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_expenses_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
@@ -70,8 +70,8 @@
 <!-- ================= Customer ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_customer {{setting('customer_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_customer_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_customer_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_customer_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_customer_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
@@ -106,8 +106,8 @@
 <!-- ================= Petty-Cash ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_petty_cash {{setting('petty_cash_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_petty_cash_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_petty_cash_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_petty_cash_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_petty_cash_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
@@ -142,8 +142,8 @@
 <!-- ================= Bank-Transaction ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_bank {{setting('bank_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_bank_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_bank_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_bank_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_bank_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
@@ -178,8 +178,8 @@
 <!-- ================= Tax/VAT ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_tax {{setting('tax_vat_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_tax_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_tax_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_tax_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_tax_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>

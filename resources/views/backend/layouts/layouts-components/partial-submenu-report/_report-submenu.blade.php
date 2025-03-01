@@ -1,8 +1,8 @@
 <!-- ================= Report ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_report {{setting('acc_report_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_report_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_report_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_report_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_report_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="acc_rep ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
@@ -60,8 +60,8 @@
 <!-- ================= Monthly-Report ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_monthly_report {{setting('acc_monthly_report_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_monthly_report_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_monthly_report_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_monthly_report_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_monthly_report_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="acc_rep ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
@@ -87,8 +87,8 @@
 <!-- ================= Daily-Report ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_daily_report {{setting('daily_report_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_daily_report_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_daily_report_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_daily_report_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_daily_report_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="acc_rep ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>

@@ -1,8 +1,8 @@
 <!-- ================= Orders ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_order {{setting('order_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_order_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_order_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_order_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_order_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
@@ -32,8 +32,8 @@
 <!-- ================= Invoice ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_invoice {{setting('invoice_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_invoice_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_invoice_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_invoice_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_invoice_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
@@ -59,8 +59,8 @@
 <!-- ================= Sales-Region ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_sales_region {{setting('sales_region_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_sales_region_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_sales_region_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_sales_region_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_sales_region_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>

@@ -1,7 +1,7 @@
 <a class="nav-link_cgrMenu dropdown-toggle ty child_employee" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_employee_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_employee_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_employee_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_employee_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Employee')}}</span>
@@ -34,8 +34,8 @@
 <!-- ================= Employee Profile ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_employee_profile" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_employee_profile_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_employee_profile_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_employee_profile_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_employee_profile_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1"  data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Employee Profile')}}</span>
@@ -54,8 +54,8 @@
 <!-- ================= Salary Payment Record ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_salary" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_salary_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_salary_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_salary_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_salary_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Salary Payment')}}</span>
@@ -84,8 +84,8 @@
 <!-- ================= Employee performance ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_emp_performance" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_emp_performance_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_emp_performance_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_emp_performance_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_emp_performance_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Performance')}}</span>
@@ -110,8 +110,8 @@
 <!-- ================= Employee Attendence ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_emp_attendence" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_emp_attendence_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_emp_attendence_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_emp_attendence_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_emp_attendence_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Attendence')}}</span>
@@ -133,8 +133,8 @@
 <!-- ================= Employee Details Record ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_emp_details" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_emp_details_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_emp_details_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_emp_details_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_emp_details_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{__('translate.Employee Record')}}</span>

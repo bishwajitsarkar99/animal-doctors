@@ -1,8 +1,8 @@
 <!-- ================= Voucher Category ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_voucher {{setting('vaoucher_category_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_voucher_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_voucher_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_voucher_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_voucher_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
@@ -28,8 +28,8 @@
 <!-- ================= Voucher Create ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_voucher_create {{setting('main_vaoucher_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_voucher_create_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_voucher_create_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_voucher_create_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_voucher_create_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>

@@ -1,7 +1,7 @@
 <a class="nav-link_cgrMenu dropdown-toggle ty child_asset {{setting('new_asset_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_asset_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_asset_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_asset_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_asset_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i>
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
@@ -27,8 +27,8 @@
 <!-- ================= Asset Details ================= -->
 <a class="nav-link_cgrMenu dropdown-toggle ty child_asset_details {{setting('details_asset_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
-        <i class="fa-solid fa-plus" style="color:#007effc4;" id="plus_asset_details_link"></i>
-        <i class="fa-solid fa-minus" style="color:#007effc4;" id="minus_asset_details_link" hidden></i>
+        <i class="fa-solid fa-plus" style="color:white;" id="plus_asset_details_link"></i>
+        <i class="fa-solid fa-minus" style="color:white;" id="minus_asset_details_link" hidden></i>
     </span>
     <i class="fa-solid fa-folder-open fa-beat"></i> 
     <span class="ps-1" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
