@@ -6,10 +6,10 @@
             <a class="nav-link collapsed sals_menu asset_btn" id="navbarDropdown" data-bs-toggle="collapse" data-bs-target="#asset_" aria-expanded="false" aria-controls="collapsePages">
                 <span class="prod_label" id="Asset_id" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <span class="{{setting('asset_title_display')}}">{{__('translate.Asset')}}</span>
+                    <span class="lock ps-2 pe-2" id="ast_lock">{{__('translate.Lock')}}</span>
+                    <span class="unlock ps-1 pe-1" id="ast_unlock" hidden>{{__('translate.Unlock')}}</span>
+                    <div class="sb-sidenav-collapse-arrow">▼</div>
                 </span>
-                <span class="lock ps-2 pe-2 ms-1" id="ast_lock">{{__('translate.Lock')}}</span>
-                <span class="unlock ps-1 pe-1 ms-1" id="ast_unlock" hidden>{{__('translate.Unlock')}}</span>
-                <div class="sb-sidenav-collapse-arrow ms-1">▼</div>
             </a>
         </button>
         <div id="asset_documentioin" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushExample">

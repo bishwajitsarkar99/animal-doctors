@@ -141,7 +141,7 @@
         @endif
         @if(auth()->user()->role == 1)
         <!-- ================== Purchases Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('purchases_visual')}}"><i class="fa-solid fa-link fa-beat-fade"></i></span> 
+        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('purchases_visual')}}"><i class="fa-solid fa-cart-shopping fa-beat-fade"></i></span> 
             <span class="{{setting('purchases_visual')}}" style="color:white;">{{__('translate.Purchases Dept.')}}</span>
         </div>
         <!-- ================== Product ======================= -->
@@ -151,7 +151,7 @@
         @include('backend.layouts.layouts-components.partial-sidebar._stock')
 
         <!-- ================== Accounts Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('accounts_moduel_display')}}"><i class="fa-solid fa-link fa-beat-fade"></i></span> 
+        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('accounts_moduel_display')}}"><i class="fa-solid fa-calculator fa-beat-fade"></i></span> 
             <span class="{{setting('accounts_moduel_display')}}" style="color:white;">{{__('translate.Accounts Dept.')}}</span>
         </div>
 

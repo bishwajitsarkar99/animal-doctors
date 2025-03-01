@@ -5,11 +5,13 @@
             <i class="fa-solid fa-minus" style="color:white;" id="minus" hidden></i>
             <a class="nav-link collapsed sals_menu product_link product_btn" id="navbarDropdown" data-bs-toggle="collapse" data-bs-target="#product" aria-expanded="false" aria-controls="collapsePages">
                 <span class="prod_label" id="prodct" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                    <span class="{{setting('product_visual')}}">{{__('translate.Product')}}</span>
+                    <span class="{{setting('product_visual')}}">
+                        {{__('translate.Product')}}
+                        <span class="lock ps-2 pe-2 ms-" id="lock">{{__('translate.Lock')}}</span>
+                        <span class="unlock ps-1 pe-1 ms-" id="unlock" hidden>{{__('translate.Unlock')}}</span>
+                        <div class="sb-sidenav-collapse-arrow layouts_block ms-">▼</div>
+                    </span>
                 </span>
-                <span class="lock ps-2 pe-2 ms-1" id="lock">{{__('translate.Lock')}}</span>
-                <span class="unlock ps-1 pe-1 ms-1" id="unlock" hidden>{{__('translate.Unlock')}}</span>
-                <div class="sb-sidenav-collapse-arrow layouts_block ms-1">▼</div>
             </a>
         </button>
         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">

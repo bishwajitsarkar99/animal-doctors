@@ -5,10 +5,12 @@
             <i class="fa-solid fa-plus" style="color:white;" id="plus_stock"></i>
             <i class="fa-solid fa-minus" style="color:white;" id="minus_stock" hidden></i>
             <a class="nav-link collapsed sals_menu stock_btn" id="navbarDropdown" data-bs-toggle="collapse" data-bs-target="#stock_" aria-expanded="false" aria-controls="collapsePages">
-                <span class="prod_label" id="stock_id" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{ __('translate.Stock')}}</span>
-                <span class="lock ps-2 pe-2 ms-1" id="lock_stock">{{__('translate.Lock')}}</span>
-                <span class="unlock ps-1 pe-1 ms-1" id="unlock_stock" hidden>{{__('translate.Unlock')}}</span>
-                <div class="sb-sidenav-collapse-arrow ms-1">▼</div>
+                <span class="prod_label" id="stock_id" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                    {{ __('translate.Stock')}}
+                    <span class="lock ps-2 pe-2" id="lock_stock">{{__('translate.Lock')}}</span>
+                    <span class="unlock ps-1 pe-1" id="unlock_stock" hidden>{{__('translate.Unlock')}}</span>
+                    <div class="sb-sidenav-collapse-arrow">▼</div>
+                </span>
             </a>
         </button>
         <div id="flush-collapse" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushExample">
