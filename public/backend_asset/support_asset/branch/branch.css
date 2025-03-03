@@ -172,7 +172,7 @@ ul#user_branch_menu {
 }
 .branch_head_label{
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    color: black;
+    color: white;
     font-family: var(--nav-font-family);
     text-transform: uppercase;
     font-size: 11px;
@@ -182,19 +182,16 @@ ul#user_branch_menu {
     padding: 0px 8px !important; 
 }
 #branch_info,.branch_chang{
-    padding: 0px 13px !important;
-    background-color: #bdbdbd30;
+    padding: 0px 16px !important;
+    background-color: #b667ff;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    border-bottom: 1px solid #d3d3d3ad;
-    border-left: 3px solid darkcyan;
+    letter-spacing: 1px;
 }
 #Creator,#updator{
-    padding: 0px 13px !important;
-    background-color: #bdbdbd30;
+    padding: 0px 16px !important;
+    background-color: #b667ff;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    border-bottom: 1px solid #d3d3d3ad;
-    border-top: 1px solid #d3d3d3ad;
-    border-left: 3px solid darkcyan;
+    letter-spacing: 1px;
 }
 span.word_space {
     padding-left: 12px;
@@ -320,7 +317,7 @@ ul#user_branch_menu_change>li, ul#usrMenu>li{
 
 }
 .group {
-    background-color: lightcyan;
+    background-color: white;
     border-bottom: 1px double darkgray;
     padding-bottom: 5px;
     padding-top: 5px;

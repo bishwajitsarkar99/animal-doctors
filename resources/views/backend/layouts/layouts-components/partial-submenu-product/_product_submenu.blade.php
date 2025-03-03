@@ -1,5 +1,5 @@
 <!-- ================== Category ======================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_category {{setting('categ_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_category {{setting('categ_title_visual')}}" id="navbar_Dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_category_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_category_link" hidden></i>
@@ -9,7 +9,7 @@
         <span class="{{setting('categ_title_visual')}}">{{__('translate.Category')}}</span>
     </span>
 </a>
-<ul class="dropdown-menu dropdown-menu-end tyg rgs line_menu" aria-labelledby="navbarDropdown">
+<ul class="dropdown-menu dropdown-menu-end tyg rgs line_menu" aria-labelledby="navbar_Dropdown">
     <li>
         <div class="collapse" id="product" aria-labelledby="headingTwo" data-bs-parent="#product">
             <nav class="sb-sidenav-menu-nested nav child-tree">

@@ -85,10 +85,10 @@
 <!-- Navbar Dropdown Menu-->
 <ul class="navbar-nav ms-auto ms-md-0 me-lg-2">
     <li class="nav-item dropdown">
-        <a class="dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding-left: 0.5rem;">
+        <a class="dropdown-toggle" id="navbar_Dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding-left: 0.5rem;">
             <img class="img-profile rounded-circle" style="margin-top: -2px;" id="output" src="/storage/image/user-image/{{auth()->user()->image}}">
         </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="themeMenuListBackground">
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar_Dropdown" id="themeMenuListBackground">
             <li>
                 <a class="dropdown-item pro_link" id="profile_urllinks">
                     <span class="show-profile badge rounded-pill bg-green text-white" hidden><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> {{__('translate.Profile')}}</span>

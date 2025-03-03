@@ -20,6 +20,15 @@
                 </nav>
             </div>
             <div id="layoutSidenav_content">
+                <div id="layoutSidenav_mini" hidden>
+                    <nav class="sb-sidenav accordion sb-sidenav-light-grey sb-sidenav-menu" id="sidenavMini">
+                        <div class="sb-sidenav sb-sidenav-menu sidebar-bg">
+                            <div class="nav">
+                                <div class="sb-nav-link-icon das_hdname pt-1"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
                 <main>
                     <div class="container-fluid bg-transparent px-4" id="main_content">
                         <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">

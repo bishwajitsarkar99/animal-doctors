@@ -37,11 +37,19 @@
                 height:50px;
                 width: 50px;
             }
+            .top-heading {
+                border-bottom: 3px solid #9667e7;
+                border-top: 3px solid #9667e7;
+                background: transparent;
+                box-shadow: 0px 20px 6px #0001, 0px 10px 6px #0001;
+                opacity: 1;
+            }
             span.text_size{
                 font-size:25px;
                 font-weight:800;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
                 text-transform: uppercase;
+                animation: fadeInFromTop 5s ease-out forwards, slideInRightToLeft 5s ease-out forwards;
 
             }
             a.reistration_text{
@@ -52,6 +60,42 @@
                 text-decoration:underline;
                 text-decoration-color:darkcyan;
             }
+            @keyframes fadeInFromTop {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                    filter: blur(10px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                    filter: blur(0);
+                }
+            }
+            @keyframes slideInLeftToRight {
+                0% {
+                    opacity: 0;
+                    transform: translateX(-50px);
+                    filter: blur(10px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0);
+                    filter: blur(0);
+                }
+            }
+            @keyframes slideInRightToLeft {
+                0% {
+                    opacity: 0;
+                    transform: translateX(50px);
+                    filter: blur(10px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0);
+                    filter: blur(0);
+                }
+            }
             form#loginDoorForm {
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
                 padding-left: 13px;
@@ -59,6 +103,22 @@
                 background-color: beige;
                 padding-bottom:10px;
                 padding-right:19px;
+                animation: fadeInFromTop 3s ease-out forwards, slideInLeftToRight 3s ease-out forwards;
+            }
+            .form-bottom{
+                animation: fadeInFromTop 5s ease-out forwards;
+            }
+            .media_text1{
+                animation: fadeInFromTop 5s ease-out forwards, slideInLeftToRight 5s ease-out forwards;
+            }
+            .text-animation{
+                animation: fadeInFromTop 5s ease-out forwards, slideInLeftToRight 5s ease-out forwards;
+            }
+            .animation-box-one{
+                animation: fadeInFromTop 5s ease-out forwards, slideInLeftToRight 5s ease-out forwards; 
+            }
+            .animation-box-two{
+                animation: fadeInFromTop 5s ease-out forwards, slideInRightToLeft 5s ease-out forwards;  
             }
             table{
                 border-collapse: collapse;
@@ -345,23 +405,23 @@
     </head>
 
     <body class="antialiased min-h-screen">
-        <div class="relative flex items-top justify-center pt-5">
+        <div class="relative flex items-top justify-center top-heading">
             <span class="media_text1">
-                <img class="mt-1 company_logo logo_size bg-primary" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt="">
+                <img class="mt-1 mb-1 company_logo logo_size bg-vaiolent" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt="">
             </span>
-            <span class="media_text2 text_size text-primary ms-3 mt-1">{{setting('company_name')}}</span>
+            <span class="media_text2 text_size text-vaiolent ms-3 mt-1">{{setting('company_name')}}</span>
         </div>
-        <div class="relative flex items-top justify-center py-1 sm:pt-0 pt-5">
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 sm:items-center form-box">
+        <div class="relative flex items-top justify-center py-1 sm:pt-0 pt-5 mt-5">
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 sm:items-center form-box animation-box-one">
                 <form id="loginDoorForm" autocomplete="off">
                     <table>
                         <thead>
-                            <tr class="table_head_row">
+                            <tr class="table_head_row form-bottom">
                                 <th class="text-center py-1" colspan="2"><span>User Email Registration</span></th>
                             </tr>
                         </thead>
                         <tbody class="bg-white">
-                            <tr class="table-row">
+                            <tr class="table-row form-bottom">
                                 <td class="user_login_form_label"> Email : </td>
                                 <td class="user-login-td">
                                     <input class="user_login_form email-border" type="text" name="valid_email" value="" placeholder="User Email" autofocus id="user_login_form">
@@ -380,10 +440,10 @@
                         </button>
                     </div>
                 </form>
-                <div class="flex justify-center mt-4 mb-3 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 sm:text-left footer_row">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400" style="color:burlywood;">
+                <div class="flex justify-center mt-4 mb-3 sm:items-center sm:justify-between form-bottom">
+                    <div class="text-center text-sm text-vaiolent sm:text-left footer_row">
+                        <div class="flex items-center text-animation">
+                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400" style="color:#7f56c5;">
                                 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                             </svg>
 
@@ -391,7 +451,7 @@
                                 <span>Supplier Management System Software V-3.0.1</span>
                             </a>
 
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400" style="color:burlywood;">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400" style="color:#7f56c5;">
                                 <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                             </svg>
                         </div>

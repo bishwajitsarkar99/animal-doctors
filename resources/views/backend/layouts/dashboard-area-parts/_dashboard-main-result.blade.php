@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <span class="card-head-title amount-skeleton">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
+        <span class="card-head-title amount-skeleton mt-1">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
         <div class="progress progress-bar-skeleton" style="height:0.3rem;">
             <div class="progress-bar progress-bar-striped bg-order progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
                 
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <span class="card-head-title amount-skeleton">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
+        <span class="card-head-title amount-skeleton mt-1">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
         <div class="progress skeleton" style="height:0.3rem;">
             <div class="progress-bar progress-bar-striped bg-pending progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
                 
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <span class="card-head-title amount-skeleton">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
+        <span class="card-head-title amount-skeleton mt-1">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
         <div class="progress skeleton" style="height:0.3rem;">
             <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
                 
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <span class="card-head-title amount-skeleton">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
+        <span class="card-head-title amount-skeleton mt-1">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
         <div class="progress skeleton" style="height:0.3rem;">
             <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
                 
@@ -101,7 +101,7 @@
                 </div>
             </div>
         </div>
-        <span class="card-head-title amount-skeleton">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
+        <span class="card-head-title amount-skeleton mt-1">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
         <div class="progress skeleton" style="height:0.3rem;">
             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
                 
@@ -123,7 +123,7 @@
                 </div>
             </div>
         </div>
-        <span class="card-head-title amount-skeleton">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
+        <span class="card-head-title amount-skeleton mt-1">2,20,500 <span class="number symbl pe-1" id="order_counter2">৳</span></span>
         <div class="progress skeleton" style="height:0.3rem;">
             <div class="progress-bar progress-bar-striped bg-expenses progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
                 

@@ -169,9 +169,9 @@
               </div>
               <div class="action_group">
                 <div class="third_part branch-content-footer-skeleton">
-                  <span class="branch_chang">
-                    <label class="catg_name_label" for="mail-transport">Branch-Change</label>
-                  </span><br>
+                  <div class="branch_chang">
+                    <label class="catg_name_label" style="color:white;">Branch-Change</label>
+                  </div>
                   <div class="chng_brnch">
                     <select type="text" class="form-control form-control-sm role_id select2" name="branch_name" id="branch_name_id">
                       <option value="">Select Branch Name</option>

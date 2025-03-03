@@ -8,6 +8,12 @@
             $("#pageLoader").removeAttr('hidden');
             $("#access_modal_box").addClass('loader_area');
             $("#processModal_body").removeClass('loading_body_area');
+            $(".text-fade-animation").addClass('profl_heading');
+            $("#pro_image").addClass('profl_imag');
+            $(".first_box").addClass('first_content');
+            $(".second_box").addClass('second_content');
+            $(".third_box").addClass('third_content');
+            $(".fourth_box").addClass('third_content');
             
             setTimeout(() => {
                 requestAnimationFrame(() => {
@@ -18,9 +24,10 @@
                     
                     $("#profile_form").modal('show').fadeIn(300).delay(300);
                     addAttributeOrClass([
-                        {selector: '#pro_image, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
+                        {selector: '.image-box, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
                         {selector: '#com_address', type: 'class', name: 'address-skeleton'},
                         {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
+                        {selector: '#company_info, #personal_info, #branch_info, #role_info', type: 'class', name: 'profile-head-skeleton'},
                     ]);
                 });
     
@@ -28,18 +35,19 @@
                 time = setTimeout(() => {
                     requestAnimationFrame(() => {
                         removeAttributeOrClass([
-                            {selector: '#pro_image, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
+                            {selector: '.image-box, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
                             {selector: '#com_address', type: 'class', name: 'address-skeleton'},
                             {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
+                            {selector: '#company_info, #personal_info, #branch_info, #role_info', type: 'class', name: 'profile-head-skeleton'},
                         ]);
                     });
-                }, 1000);
+                }, 3000);
     
                 return ()=>{
                     clearTimeout(time);
                 }
             }, 1500);
-
+            
         });
 
         $(document).on('click', '.dropdown-toggle', ()=>{

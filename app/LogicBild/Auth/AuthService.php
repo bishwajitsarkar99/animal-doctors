@@ -505,7 +505,7 @@ class AuthService
                     default => null,
                 };
             }
-            return view('auth.forget-password', compact('company_profiles', 'login_email', 'user_image', 'url'));
+            return view('auth.forget-password', compact('company_profiles', 'email', 'user_image', 'url'));
         }else{
             return redirect(route('login_door.index'));  
         }

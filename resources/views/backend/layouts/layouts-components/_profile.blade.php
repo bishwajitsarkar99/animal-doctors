@@ -2,7 +2,7 @@
 <div class="modal fade" id="profile_form" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
   <div class="modal-dialog">
     <div class="modal-content" id="admin_modal_box">
-      <div class="modal-header profile_modal_header profilesetting_modal_header"style="background: transparent;background-image: repeating-linear-gradient(55deg, #5fd3cd7d, transparent 1px);border-bottom: double white;">
+      <div class="modal-header profile_modal_header profilesetting_modal_header text-fade-animation"style="background: transparent;background-image: repeating-linear-gradient(55deg, #5fd3cd7d, transparent 1px);border-bottom: double white;">
         @if(auth()->user()->role ==0)
           <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:black;">
             {{Auth::user()->name}} Profile
@@ -36,21 +36,32 @@
       </div>
 
       <div class="modal-body profile-body pb-3" style="background: transparent;background-image: repeating-linear-gradient(55deg, #5fd3cd7d, transparent 1px);">
-        <div class="row profile-heading pb-3">
-          <div class="col-xl-4">
-            <div class="card-body thumbial-image" id="pro_image">
+        <div class="row profile-heading">
+          <div class="flex justify-center sm:items-center sm:justify-between mb-3" id="pro_image">
+            <span class="image-box">
               <img style="width: 150px; height:150px;border-radius: 3%;" class="profile" src="/storage/image/user-image/{{auth()->user()->image}}" alt="profile-image">
-            </div>
+            </span>
           </div>
-          <div class="col-xl-8">
-            <p class="company-information" style="background: transparent;">
-              <label id="pro_com_name" class="mt-2" for="company_name">Company : {{setting('company_name')}}</label><br>
-              <label id="com_address" class="address mt-1" for="address">Address : {{setting('company_address')}}</label><br>
-            </p>
-          </div>
+        </div>
+        <div class="page-responsive">
           <div class="row">
-            <div class="col-xl-12">
-              <p class="company-information" style="background: transparent;">
+            <div class="col-xl-12 first_box">
+              <div class="company-section" id="company_info">
+                <span>Company Information</span>
+              </div>
+              <div class="company-information" style="background: white;">
+                <label id="pro_com_name" class="mt-1" for="company_name">Company : {{setting('company_name')}}</label><br>
+                <label id="com_address" class="address mt-1" for="address">Address : {{setting('company_address')}}</label><br>
+                <label id="com_address" class="address mt-1" for="address">Email : .............</label><br>
+                <label id="com_address" class="address mt-1" for="address">Web : .............</label><br>
+                <label id="com_address" class="address mt-1" for="address">Contract : .............</label><br>
+              </div>
+            </div>
+            <div class="col-xl-12 second_box">
+              <div class="company-section" id="personal_info">
+                <span>Personal Information</span>
+              </div>
+              <div class="company-information" style="background: white;">
                 <span id="info">
                   <label class="mt-1" for="Contract-number">Contract :</label>
                   <span class="mt-1">{{Auth::user()->contract_number}}</span> <br>
@@ -67,7 +78,57 @@
                   <label class="mt-1" for="mailing-mail-address">Mailing-Email :</label>
                   <span class="mt-1">{{Auth::user()->mailing_email}}</span> <br>
                 </span>
-              </p>
+              </div>
+            </div>
+            <div class="col-xl-12 third_box">
+              <div class="company-section" id="branch_info">
+                <span>Branch Information</span>
+              </div>
+              <div class="company-information" style="background: white;">
+                <span id="info">
+                  <label class="mt-1" for="Contract-number">Branch-ID :</label>
+                  <span class="mt-1">{{Auth::user()->branch_id}}</span> <br>
+                </span>
+                <span id="info2">
+                  <label class="mt-1" for="mail-address">Branch-Type :</label>
+                  <span class="mt-1">{{Auth::user()->branch_type}}</span> <br>
+                </span>
+                <span id="info2">
+                  <label class="mt-1" for="login-mail-address">Branch-Name :</label>
+                  <span class="mt-1">{{Auth::user()->branch_name}}</span> <br>
+                </span>
+                <span id="info2">
+                  <label class="mt-1" for="mailing-mail-address">Division-Name :</label>
+                  <span class="mt-1">{{Auth::user()->division_name}}</span> <br>
+                </span>
+                <span id="info2">
+                  <label class="mt-1" for="mailing-mail-address">District-Name :</label>
+                  <span class="mt-1">{{Auth::user()->district_name}}</span> <br>
+                </span>
+                <span id="info2">
+                  <label class="mt-1" for="mailing-mail-address">Upazila/Thana :</label>
+                  <span class="mt-1">{{Auth::user()->upazila_name}}</span> <br>
+                </span>
+                <span id="info2">
+                  <label class="mt-1" for="mailing-mail-address">City-Name :</label>
+                  <span class="mt-1">{{Auth::user()->town_name}}</span> <br>
+                </span>
+                <span id="info2">
+                  <label class="mt-1" for="mailing-mail-address">Location :</label>
+                  <span class="mt-1">{{Auth::user()->location}}</span> <br>
+                </span>
+              </div>
+            </div>
+            <div class="col-xl-12 fourth_box">
+              <div class="company-section" id="role_info">
+                <span>Role Information</span>
+              </div>
+              <div class="company-information" style="background: white;">
+                <span id="info2">
+                  <label class="mt-1" for="mailing-mail-address">Role-Name :</label>
+                  <span class="mt-1">{{Auth::user()->roles->name}}</span> <br>
+                </span>
+              </div> 
             </div>
           </div>
         </div>

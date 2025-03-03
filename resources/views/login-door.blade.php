@@ -41,7 +41,43 @@
                 font-weight:800;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
                 text-transform: uppercase;
-
+                animation: fadeInFromTop 5s ease-out forwards, slideInRightToLeft 5s ease-out forwards;
+            }
+            @keyframes fadeInFromTop {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                    filter: blur(10px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                    filter: blur(0);
+                }
+            }
+            @keyframes slideInLeftToRight {
+                0% {
+                    opacity: 0;
+                    transform: translateX(-50px);
+                    filter: blur(10px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0);
+                    filter: blur(0);
+                }
+            }
+            @keyframes slideInRightToLeft {
+                0% {
+                    opacity: 0;
+                    transform: translateX(50px);
+                    filter: blur(10px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0);
+                    filter: blur(0);
+                }
             }
             a.reistration_text{
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -58,6 +94,22 @@
                 background-color: beige;
                 padding-bottom:10px;
                 padding-right:19px;
+                animation: fadeInFromTop 3s ease-out forwards, slideInLeftToRight 3s ease-out forwards;
+            }
+            .form-bottom{
+                animation: fadeInFromTop 5s ease-out forwards;
+            }
+            .media_text1{
+                animation: fadeInFromTop 5s ease-out forwards, slideInLeftToRight 5s ease-out forwards;
+            }
+            .text-animation{
+                animation: fadeInFromTop 5s ease-out forwards, slideInLeftToRight 5s ease-out forwards;
+            }
+            .animation-box-one{
+                animation: fadeInFromTop 5s ease-out forwards, slideInLeftToRight 5s ease-out forwards; 
+            }
+            .animation-box-two{
+                animation: fadeInFromTop 5s ease-out forwards, slideInRightToLeft 5s ease-out forwards;  
             }
             table{
                 border-collapse: collapse;
@@ -186,6 +238,44 @@
                 background-position: right calc(0.375em + 0.1875rem) center;
                 background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
                 box-sizing: border-box;
+            }
+
+            .top-heading {
+                border-bottom: 3px solid #9667e7;
+                border-top: 3px solid #9667e7;
+                background:transparent;
+                box-shadow: 0px 20px 6px #0001, 0px 10px 6px #0001;
+                opacity: 1;
+            }
+            .footer-box {
+                animation: fadeInFromTop 5s ease-out forwards;
+                background:transparent;
+                box-shadow: 0px 20px 6px #0004, 0px 10px 6px #0001;
+                border: 2px solid #fff;
+                border-radius:5px;
+                color: black;
+                font-weight: 600;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            }
+            span.list-heading {
+                font-weight: 700;
+                font-size: 16px;
+            }
+
+            img.social_whatapp_icon {
+                height: 43px;
+                border-radius: 50px;
+                margin-top: 0px;
+            }
+            img.social_messg_icon {
+                height: 25px;
+                border-radius: 50px;
+                margin-top: 0px;
+            }
+            img.social_fab_icon {
+                height: 20px;
+                border-radius: 50px;
+                margin-top: 0px;
             }
 
             @media only screen and (max-width: 976px) {
@@ -345,23 +435,23 @@
     </head>
 
     <body class="antialiased min-h-screen">
-        <div class="relative flex items-top justify-center pt-5">
+        <div class="relative flex items-top justify-center top-heading">
             <span class="media_text1">
-                <img class="mt-1 company_logo logo_size bg-primary" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt="">
+                <img class="mt-1 mb-1 company_logo logo_size bg-vaiolent" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt="">
             </span>
-            <span class="media_text2 text_size text-primary ms-3 mt-1">{{setting('company_name')}}</span>
+            <span class="media_text2 text_size text-vaiolent ms-3 mt-1">{{setting('company_name')}}</span>
         </div>
-        <div class="relative flex items-top justify-center py-1 sm:pt-0 pt-5">
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 sm:items-center form-box">
+        <div class="relative flex items-top justify-center py-1 sm:pt-0 mt-5">
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 sm:items-center form-box animation-box-one">
                 <form id="loginDoorForm" action="#" method="POST" autocomplete="off">
                     <table>
                         <thead>
-                            <tr class="table_head_row">
+                            <tr class="table_head_row form-bottom">
                                 <th class="text-center py-1" colspan="2"><span>Open Door</span></th>
                             </tr>
                         </thead>
                         <tbody class="bg-white">
-                            <tr class="table-row">
+                            <tr class="table-row form-bottom">
                                 <td class="user_login_form_label"> Email : </td>
                                 <td class="user-login-td">
                                     <input class="user_login_form email-border" type="text" name="login_email" value="" placeholder="User Email" autofocus id="user_login_form">
@@ -374,16 +464,16 @@
                         </tbody>
                     </table>
                     <div class="row button_area">
-                        <button id="openSubmit" type="button" class="btn btn-sm btn-primary login_button">
+                        <button id="openSubmit" type="button" class="btn btn-sm btn-primary login_button open_submit form-bottom">
                             <span class="loading-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                             <span class="btn-text">Open</span>
                         </button>
                     </div>
                 </form>
-                <div class="flex justify-center mt-4 mb-3 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 sm:text-left footer_row">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400" style="color:burlywood;">
+                <div class="flex justify-center mt-4 mb-3 sm:items-center sm:justify-between form-bottom">
+                    <div class="text-center text-sm text-vaiolent sm:text-left footer_row">
+                        <div class="flex items-center text-animation">
+                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400" style="color:#7f56c5;">
                                 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                             </svg>
 
@@ -391,12 +481,52 @@
                                 <span>Supplier Management System Software V-3.0.1</span>
                             </a>
 
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400" style="color:burlywood;">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400" style="color:#7f56c5;">
                                 <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                             </svg>
                         </div>
                     </div>
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0"></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-part relative flex items-top justify-center mt-5 animation-box-two">
+            <div class="relative flex items-top justify-center py-1 px-1 sm:pt-0 pb-3">
+                <div class="row footer-box">
+                    <div class="relative flex">
+                        <div class="col-xl-6">
+                            <span class="list-heading text-animation">Socal Media Info</span>
+                            <address>
+                                <span class="text-animation">
+                                    <a class="" href="{{setting('update_social_media_facebook_link')}}">
+                                        Facebook
+                                        <span class="social_icon ms-2"><img class="social_fab_icon" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_facebook')}}" alt=""></span>
+                                    </a>
+                                </span><br>
+                                <span class="text-animation">
+                                    Messenger
+                                    <a class="" href="{{setting('update_social_media_messanger_link')}}">
+                                        <span class="social_icon_mess ms-2"><img class="social_messg_icon" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_messanger')}}" alt=""></span>
+                                    </a>
+                                </span><br>
+                                <span class="text-animation">
+                                    What's App
+                                    <a class="" href="{{setting('update_social_media_whatsapp_link')}}">
+                                        <span class="social_icon_whatsapp"><img class="social_whatapp_icon" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_whatsapp')}}" alt=""></span>
+                                    </a>
+                                </span>
+                            </address>
+                        </div>
+                        <div class="col-xl-6">
+                            <span class="list-heading text-animation">Company Info</span>
+                            <address>
+                                <span class="text-animation">Adrress : {{setting('company_address')}}</span><br>
+                                <span class="text-animation">Contract - number : 01410-224512</span><br>
+                                <span class="text-animation">Email : gstmedicine@gmail.com</span><br>
+                                <span class="text-animation">Web : gstmedicine.com</span>
+                            </address>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -443,8 +573,8 @@
             $(document).ready(function () {
                 // Initialize the image upload with progress bar simulation
                 loadingProgressbar("#openSubmit");
-                // Initialize the button loader for the login button
-                buttonLoader('.login_button', '.loading-icon', '.btn-text', 'Open...', 'Open', 1000);
+                // Initialize the button loader only when input is not empty
+                buttonLoader('.login_button', '.loading-icon', '.btn-text', 'Opening...', 'Open', 1000);
             });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
