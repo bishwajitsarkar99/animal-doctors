@@ -170,5 +170,61 @@ li#sidebar_select_list_item{
     padding: 3px 5px;
     cursor: pointer;
 }
+label.role_permission_label {
+    font-family: var(--temp-font-family);
+    color: black;
+    font-size: 13px;
+    font-weight: 700;
+    transition: border-color 0.3sease, background-color 0.3sease;
+    letter-spacing: 0.5px;
+    padding-left: 9px;
+}
+span.confrm {
+    color: orangered;
+    font-weight: 700;
+    font-family: var(--temp-font-family);
+    font-size: 13px;
+}
+input.form-switch.form-check-input {
+    box-shadow: none;
+    border: none;
+    outline: none;
+    /* background-color: #0d6efd; */
+    background-color: orangered;
+    margin-top: 5px;
+}
+input.form-switch.form-check-input {
+    box-shadow: none;
+    border: none;
+    outline: none;
+    /* background-color: #0d6efd; */
+    background-color: #08a05c;
+    margin-top: 5px;
+}
+.form-group.role_nme {
+    background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    padding: 10px 10px;
+}
+.act_bx{
+    display: flex;
+    justify-content: space-between;
+}
+tr#module_catg_row_three {
+    border-radius: 5px;
+    border-top: 1px solid #cfccccc7;
+    border-bottom: 1px solid #cfccccc7;
+    border-left: 1px solid #cfccccc7;
+    border-right: 1px solid #cfccccc7;
+    background-color: beige;
+}
+.table_footers {
+    background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    font-family: var(--temp-font-family);
+    color: black;
+    font-size: 13px;
+    font-weight: 700;
+    transition: border-color 0.3sease, background-color 0.3sease;
+    letter-spacing: 0.5px;
+}
 
 

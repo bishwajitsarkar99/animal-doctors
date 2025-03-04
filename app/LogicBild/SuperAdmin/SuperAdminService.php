@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Models\Permission\RolePermission;
 use App\Models\Supplier\Supplier;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -293,7 +294,7 @@ class SuperAdminService
             $query->where('name', 'LIKE', '%' . $searchQuery . '%')
             ->orWhere('role_condition', 'LIKE', $searchQuery . '%');
         } else {
-            $query = Role::query()->orderBy('id', 'desc')->latest()->limit(15);
+            $query = Role::query()->orderBy('id', 'desc')->latest()->limit(10);
         }
 
         $data = $query->get();
@@ -433,6 +434,79 @@ class SuperAdminService
     {
         $page_name = 'Role Permission';
         return view('super-admin.role.role-permission', compact('page_name'));
+    }
+    /**
+     * Handle user email fetch event.
+    */
+    public function user_emailsFetch(Request $request, $selectedBranch)
+    {
+        $users = User::where('branch_id', $selectedBranch)->get();
+        return response()->json([
+            'users' => $users
+        ]);
+    }
+    /**
+     * Handle user role fetch event.
+    */
+    public function user_rolesFetch(Request $request)
+    {
+        $roles = Role::whereNotIn('name', ['Super Admin'])
+        ->orWhere('status', 1)
+        ->get();
+        return response()->json([
+            'roles' => $roles
+        ]);
+    }
+    /**
+     * Handle role permission create event.
+    */
+    public function rolesPermissionCreate(Request $request)
+    {
+        // Validate inputs
+        $validators = Validator::make($request->all(), [
+            'branch_id' => 'required|string',
+            'role' => 'required|integer',
+            'status' => 'required|in:0,1',
+            'login_email' => 'required|email',
+        ], [
+            'branch_id.required' => 'Branch ID is required.',
+            'login_email.required' => 'This user email is required.',
+            'status.required' => 'Permission status is required.',
+            'role.required' => 'The role name is required.',
+        ]);
+
+        if ($validators->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validators->messages(),
+            ]);
+        }
+        // Retrieve authenticated user
+        $auth = Auth::user();
+
+        // Create a new role permission
+        $role_permission = new RolePermission;
+        $role_permission->branch_id = $request->branch_id;
+        $role_permission->role = $request->role;
+        $role_permission->login_email = $request->login_email;
+        $role_permission->status = $request->status;
+        $role_permission->created_by = $auth->id;
+        $role_permission->save();
+
+        // Check if user exists in the database before updating
+        $user_email = User::where('login_email', $request->login_email)->first();
+
+        if ($user_email) {
+            // Update the existing user role if found
+            $user_email->role = $request->role;
+            $user_email->update();
+        }
+
+        return response()->json([
+            'status' => 200,
+            'messages' => 'Role permission has created successfully.'
+        ]);
+        
     }
     /**
      * Handle manage role view event.

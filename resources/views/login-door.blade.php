@@ -241,8 +241,6 @@
             }
 
             .top-heading {
-                border-bottom: 3px solid #9667e7;
-                border-top: 3px solid #9667e7;
                 background:transparent;
                 box-shadow: 0px 20px 6px #0001, 0px 10px 6px #0001;
                 opacity: 1;
@@ -250,12 +248,14 @@
             .footer-box {
                 animation: fadeInFromTop 5s ease-out forwards;
                 background:transparent;
-                box-shadow: 0px 20px 6px #0004, 0px 10px 6px #0001;
-                border: 2px solid #fff;
+                box-shadow: 0px 20px 6px #0001, 0px 10px 6px #0001;
                 border-radius:5px;
                 color: black;
                 font-weight: 600;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            }
+            .footer-box:hover{
+                box-shadow: 0px 0px 3px #0004, 1px 5px 5px #0001;
             }
             span.list-heading {
                 font-weight: 700;

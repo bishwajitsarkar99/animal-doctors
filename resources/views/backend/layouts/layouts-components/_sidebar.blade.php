@@ -173,7 +173,7 @@
 
 
         <!-- ==================  HRM Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading {{setting('hrm_moduel_display')}}" style="color:white;"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> 
+        <div class="sb-sidenav-menu-heading {{setting('hrm_moduel_display')}}" style="color:white;"><span class="link_menus"><i class="fa-solid fa-users fa-beat-fade">‌</i></span> 
             <span class="{{setting('hrm_moduel_display')}}">{{__('translate.HRM Dept.')}}</span>
         </div>
 
@@ -181,7 +181,7 @@
         @include('backend.layouts.layouts-components.partial-sidebar._hrm')
 
         <!-- ==================  Auth Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading {{setting('auth_moduel_display')}}"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> 
+        <div class="sb-sidenav-menu-heading {{setting('auth_moduel_display')}}"><span class="link_menus"><i class="fa-solid fa-rss fa-beat-fade">‌</i></span> 
             <span class="{{setting('auth_moduel_display')}}" style="color:white;">{{__('translate.Authentication')}}</span>
         </div>
 

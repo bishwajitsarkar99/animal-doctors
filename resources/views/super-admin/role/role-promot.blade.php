@@ -56,7 +56,7 @@
           <div class="role_create_form" id="roleActionBox">
             @csrf
             <input type="hidden" id="table_row_id">
-            <li class="act_box ps-1">
+            <li class="role_act_box ps-1">
               <button type="button" class="btn btn-sm role_create_button btn_key" id="createBtn" hidden>
                 <span class="create-btn-text">Save</span>
                 <span class="create-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
@@ -74,7 +74,7 @@
                 <span class="delete-btn-text">Delete</span>
                 <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               </button>
-              <button type="button" class="btn-sm edit_registration cancel_button cgr_btn edit_btn ms-2" id="actionCancel" data-bs-dismiss="modal" style="font-size: 15px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
+              <button type="button" class="btn-sm edit_registration cancel_button cgr_btn edit_btn" style="height: 24px;" id="actionCancel" data-bs-dismiss="modal" style="font-size: 15px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                 <i class="fa-solid fa-xmark can-icon"></i>
               </button>
             </li>

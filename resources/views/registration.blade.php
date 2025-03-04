@@ -38,8 +38,6 @@
                 width: 50px;
             }
             .top-heading {
-                border-bottom: 3px solid #9667e7;
-                border-top: 3px solid #9667e7;
                 background: transparent;
                 box-shadow: 0px 20px 6px #0001, 0px 10px 6px #0001;
                 opacity: 1;

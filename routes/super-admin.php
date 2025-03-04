@@ -27,10 +27,14 @@ Route::group(['middleware' => 'auth'], function (){
         Route::put('/role-update/{id}', [SuperAdminController::class, 'roleUpdate'])->name('role_update.action');
         Route::delete('/role-delete/{id}', [SuperAdminController::class, 'roleDelete'])->name('role_delete.action');
         Route::post('/role-promot', [SuperAdminController::class, 'rolePromotIndex'])->name('role_promot.action');
-        Route::get('/role-permission-index', [SuperAdminController::class, 'rolePermission'])->name('role_permission.index');
-        Route::post('/role-permission-create', [SuperAdminController::class, 'rolePermissionCreate'])->name('role_permission_create.action');
         Route::get('/manage-role', [SuperAdminController::class, 'manageRole'])->name('manageRole');
         Route::post('/update-role', [SuperAdminController::class, 'updateRole'])->name('updateRole');
+        // Branch Access
+        Route::get('/branch-data-get/{selectedBranch}', [SuperAdminController::class, 'user_emailFetch'])->name('users_email_fetch.action');
+        // Role Permission
+        Route::get('/role-data-get', [SuperAdminController::class, 'user_roleFetch'])->name('users_role_fetch.action');
+        Route::get('/role-permission-index', [SuperAdminController::class, 'rolePermission'])->name('role_permission.index');
+        Route::post('/role-permission-create', [SuperAdminController::class, 'rolePermissionCreate'])->name('role_permission_create.action');
         // Application Settings Routes
         Route::get('/app-setting', [SuperAdminController::class, 'appSetting'])->name('appSetting');
          // Email Verification Routes

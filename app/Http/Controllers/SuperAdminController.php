@@ -116,6 +116,24 @@ class SuperAdminController extends Controller
         return $this->superAdminService->rolesPermission($request);
     }
 
+    // Role Permission Create-----------
+    public function rolePermissionCreate(Request $request)
+    {
+        return $this->superAdminService->rolesPermissionCreate($request);
+    }
+
+    // Branch Fetch-----------
+    public function user_emailFetch(Request $request, $selectedBranch)
+    {
+        return $this->superAdminService->user_emailsFetch($request, $selectedBranch);
+    }
+
+    // Fetch Data Role---------
+    public function user_roleFetch(Request $request)
+    {
+        return $this->superAdminService->user_rolesFetch($request); 
+    }
+
     // Manage Role-----------
     public function manageRole()
     {

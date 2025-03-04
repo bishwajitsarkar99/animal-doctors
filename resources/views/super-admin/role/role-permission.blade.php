@@ -5,55 +5,99 @@
   <div class="container">
     <div class="card form-control form-control-sm" id="moduleTemplete">
       <div class="card-body" id="table_card_body">
-        <table class="module-category-table" id="module_catg_first">
-          @csrf
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <input type="hidden" name="module_category_id" id="moduleCategoryId">
-          <thead class="module-category-table-head-one" id="module_catg_thead_one">
-            <tr class="module-category-table-head-row" id="module_catg_row">
-              <th class="module-category-table-head-th-label" id="thCatgName">Role-Name :</th>
-              <th class="module-category-table-head-th-input" colspan="6" id="thCateg">
-                <input class="module-category-input edit-module-category-input" type="text" name="name" value="" placeholder="Role Name" id="moduleCategoryName">
-              </th>
-              <th  class="module-category-table-head-th-action action_th" colspan="3" id="thAction" hidden>
-                <button class="module-sm-btn" id="catgCreateBtn" hidden>Create</button>
-                <button class="module-sm-btn" id="catgUpdateBtn" hidden>Update</button>
-                <button class="module-sm-delete-btn" id="catgDeleteBtn" hidden>Delete</button>
-                <button class="module-sm-cancel-btn" id="catgCancelBtn" hidden>Cancel</button>
-              </th>
-            </tr>
-          </thead>
-          <thead class="module-category-table-head-two">
-            <tr class="module-category-table-head-row-two" id="module_catg_row_two">
-              <th class="module-category-table-head-th-search-label" id="module_searchBar">Search-Bar :</th>
-              <th class="module-category-table-head-th-search-bar" colspan="6">
-                <input class="table-search-bar input-field" type="search" name="name" value="" placeholder="Search" id="CategorySearchBar">
-              </th>
-            </tr>
-          </thead>
-          <thead class="module-category-table-head-two">
-            <tr class="module-category-table-head-row-two" id="module_catg_row_three">
-              <th class="module-category-table-head-th-search-bar ps-3" id="module_catg_row_sn">SN.</th>
-              <th class="module-category-table-head-th-search-bar" colspan="5" id="module_catg_row_catname">Role-Name <span id="module_catg_current_amount" hidden></span></th>
-              <th class="module-category-table-head-th-search-bar" colspan="5" id="module_catg_row_catname">Permission-Status <span id="module_catg_current_amount" hidden></span></th>
-            </tr>
-          </thead>
-        </table>
-        <div class="table-responsive">
+        @csrf
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="form-group mb-1 role_nme skeleton access_search" id="roleSearch">
+              <label class="role_permission_label" for="role-search">Role Permission Search</label>
+              <select type="text" class="form-control form-control-sm select_user_email_search select2" name="branch_name" id="select_user_email_search">
+                <option value="">Select User Email</option>
+              </select>
+              <span id="updateForm_error"></span>
+              <input type="hidden" name="id" id="branches_id">
+              <input type="hidden" name="branch_id" id="get_branch_id">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-4">
+            <div class="form-group role_nme branch mb-1 skeleton admin_email_search" id="select_Branch">
+              <label class="role_permission_label" for="branch">Select Branch <span class="confrm">*</span></label><br>
+              <select type="text" class="form-control form-control-sm edit_select_user_branch select2" name="branch_id" id="select_user_branch">
+                <option value="">Select Branch</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="form-group role_nme branch mb-1 skeleton admin_email_search" id="select_User">
+              <label class="role_permission_label" for="email">Select User <span class="confrm">*</span></label><br>
+              <select type="text" class="form-control form-control-sm edit_select_user_email select2" name="login_email" id="select_user_email">
+                <option value="">Select User Email Address</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="form-group role_nme branch mb-1 skeleton admin_email_search" id="select_Role">
+              <label class="role_permission_label" for="role">Select Role <span class="confrm">*</span></label><br>
+              <select type="text" class="form-control form-control-sm edit_select_user_role select2" name="role" id="select_user_role">
+                <option value="">Select Role</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-xl-4">
+            <label class="role_permission_label ps-3" for="permission-access">Role Permission Access <span class="confrm">*</span> :</label> 
+            <input type="checkbox" class="form-switch form-check-input check_permission" name="status" value="1" id="rolePermission">
+          </div>
+          <div class="col-xl-5"></div>
+          <div class="col-xl-3 act_bx">
+            <button type="button" class="btn btn-sm role_create_button btn_key" id="createBtn">
+              <span class="create-btn-text">Save</span>
+              <span class="create-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            </button>
+            <button type="button" class="btn btn-sm role_create_button btn_key" id="updateBtn" hidden>
+              <span class="update-btn-text">Update</span>
+              <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            </button>
+            <button type="button" class="btn btn-sm role_delete_button btn_key" id="roleDeleteBtn">
+              <span class="delete-btn-text">Delete</span>
+              <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            </button>
+            <button type="button" class="btn btn-sm role_delete_button btn_key" id="roleCancelBtn">
+              <span class="delete-btn-text">Cancel</span>
+              <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            </button>
+          </div>
+        </div>
+        <div class="table-responsive mt-2">
           <table class="module-category-table mb-3" id="module_catg">
+            <thead class="module-category-table-head-two">
+              <tr class="module-category-table-head-row-two" id="module_catg_row_three">
+                <th class="module-category-table-head-th-search-bar ps-1" id="module_catg_row_sn">SN.</th>
+                <th class="module-category-table-head-th-search-bar" id="module_catg_row_catname">Branch-ID</th>
+                <th class="module-category-table-head-th-search-bar" id="module_catg_row_catname">Email</th>
+                <th class="module-category-table-head-th-search-bar" id="module_catg_row_catname">Role-Name</th>
+                <th class="module-category-table-head-th-search-bar" id="module_catg_row_catname">Permission-Status</th>
+              </tr>
+            </thead>
             <tbody class="module-category-table-body bg-white" id="role_table"></tbody>
           </table>
         </div>
-        <table class="footer_box">
-          <tfoot class="module-category-table-footer mb-3">
-            <tr class="module-category-table-footer-row table-row" id="footerRow">
-              <th class="module-category-table-footer-th" colspan="5" id="module_catg_row_total">
-                Total Role <span class="action_message"><span id="success_message"></span></span>
-              </th>
-              <th class="module-category-table-footer-th" id="module_catg_row_amount"></th>
-            </tr>
-          </tfoot>
-        </table>
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="table_footers act_bx">
+              <span class="ps-3"> Total Permission </span>
+              <span class="pe-2">0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-12 action_message mb-5">
+        <p class="ps-1"><span id="success_message"></span></p>
       </div>
     </div>
   </div>
@@ -160,7 +204,7 @@
 @endsection
 
 @push('scripts')
-@include('module.module-category.ajax.category_module-ajax')
+@include('super-admin.role.ajax.role-permission-ajax')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- jQuery UI Auto-Complete or Date Picker -->
