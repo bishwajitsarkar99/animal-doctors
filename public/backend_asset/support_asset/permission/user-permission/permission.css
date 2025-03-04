@@ -172,7 +172,7 @@ li#sidebar_select_list_item{
 }
 label.role_permission_label {
     font-family: var(--temp-font-family);
-    color: black;
+    color: #000000d6;
     font-size: 13px;
     font-weight: 700;
     transition: border-color 0.3sease, background-color 0.3sease;
@@ -220,11 +220,34 @@ tr#module_catg_row_three {
 .table_footers {
     background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     font-family: var(--temp-font-family);
-    color: black;
+    color: #000000d6;
     font-size: 13px;
     font-weight: 700;
     transition: border-color 0.3sease, background-color 0.3sease;
     letter-spacing: 0.5px;
+}
+button.role_cancel_button {
+    background-color: #f91d00;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: white;
+    height: 1.8em;
+    font-size: 12px;
+    line-height: .1;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-top: -0.3em;
+    transition: border-color 0.3sease, background-color 0.3sease;
+    border: none;
+    outline: none;
+    margin-bottom: 1px;
+}
+button.role_cancel_button:hover{
+    background-color: #ff533c;
+    color: white;
+    transition: border-color 0.3sease, background-color 0.3sease;
 }
 
 

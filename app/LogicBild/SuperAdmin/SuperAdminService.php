@@ -467,10 +467,11 @@ class SuperAdminService
             'branch_id' => 'required|string',
             'role' => 'required|integer',
             'status' => 'required|in:0,1',
-            'login_email' => 'required|email',
+            'login_email' => 'required|unique:role_permissions,login_email',
         ], [
             'branch_id.required' => 'Branch ID is required.',
             'login_email.required' => 'This user email is required.',
+            'login_email.unique' => 'This user email has already taken.',
             'status.required' => 'Permission status is required.',
             'role.required' => 'The role name is required.',
         ]);

@@ -14,7 +14,6 @@
               <select type="text" class="form-control form-control-sm select_user_email_search select2" name="branch_name" id="select_user_email_search">
                 <option value="">Select User Email</option>
               </select>
-              <span id="updateForm_error"></span>
               <input type="hidden" name="id" id="branches_id">
               <input type="hidden" name="branch_id" id="get_branch_id">
             </div>
@@ -23,7 +22,7 @@
         <div class="row">
           <div class="col-xl-4">
             <div class="form-group role_nme branch mb-1 skeleton admin_email_search" id="select_Branch">
-              <label class="role_permission_label" for="branch">Select Branch <span class="confrm">*</span></label><br>
+              <label class="role_permission_label" for="branch">Select Branch <span class="confrm">*</span><span id="savForm_error"></span><span id="updateForm_error"></span></label><br>
               <select type="text" class="form-control form-control-sm edit_select_user_branch select2" name="branch_id" id="select_user_branch">
                 <option value="">Select Branch</option>
               </select>
@@ -31,7 +30,7 @@
           </div>
           <div class="col-xl-4">
             <div class="form-group role_nme branch mb-1 skeleton admin_email_search" id="select_User">
-              <label class="role_permission_label" for="email">Select User <span class="confrm">*</span></label><br>
+              <label class="role_permission_label" for="email">Select User <span class="confrm">*</span><span id="savForm_error2"></span><span id="updateForm_error2"></span></label><br>
               <select type="text" class="form-control form-control-sm edit_select_user_email select2" name="login_email" id="select_user_email">
                 <option value="">Select User Email Address</option>
               </select>
@@ -39,7 +38,7 @@
           </div>
           <div class="col-xl-4">
             <div class="form-group role_nme branch mb-1 skeleton admin_email_search" id="select_Role">
-              <label class="role_permission_label" for="role">Select Role <span class="confrm">*</span></label><br>
+              <label class="role_permission_label" for="role">Select Role <span class="confrm">*</span><span id="savForm_error3"><span id="updateForm_error3"></span></span></label><br>
               <select type="text" class="form-control form-control-sm edit_select_user_role select2" name="role" id="select_user_role">
                 <option value="">Select Role</option>
               </select>
@@ -50,22 +49,23 @@
           <div class="col-xl-4">
             <label class="role_permission_label ps-3" for="permission-access">Role Permission Access <span class="confrm">*</span> :</label> 
             <input type="checkbox" class="form-switch form-check-input check_permission" name="status" value="1" id="rolePermission">
+            <span id="savForm_error4"></span>
           </div>
           <div class="col-xl-5"></div>
           <div class="col-xl-3 act_bx">
+            <button type="button" class="btn btn-sm role_create_button btn_key" id="updateBtn" disabled>
+              <span class="update-btn-text">Update</span>
+              <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            </button>
+            <button type="button" class="btn btn-sm role_delete_button btn_key" id="roleDeleteBtn" disabled>
+              <span class="delete-btn-text">Delete</span>
+              <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            </button>
             <button type="button" class="btn btn-sm role_create_button btn_key" id="createBtn">
               <span class="create-btn-text">Save</span>
               <span class="create-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
             </button>
-            <button type="button" class="btn btn-sm role_create_button btn_key" id="updateBtn" hidden>
-              <span class="update-btn-text">Update</span>
-              <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-            </button>
-            <button type="button" class="btn btn-sm role_delete_button btn_key" id="roleDeleteBtn">
-              <span class="delete-btn-text">Delete</span>
-              <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-            </button>
-            <button type="button" class="btn btn-sm role_delete_button btn_key" id="roleCancelBtn">
+            <button type="button" class="btn btn-sm role_cancel_button btn_key" id="roleCancelBtn">
               <span class="delete-btn-text">Cancel</span>
               <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
             </button>
@@ -82,7 +82,7 @@
                 <th class="module-category-table-head-th-search-bar" id="module_catg_row_catname">Permission-Status</th>
               </tr>
             </thead>
-            <tbody class="module-category-table-body bg-white" id="role_table"></tbody>
+            <tbody class="module-category-table-body bg-white" id="role_permission_table"></tbody>
           </table>
         </div>
         <div class="row">

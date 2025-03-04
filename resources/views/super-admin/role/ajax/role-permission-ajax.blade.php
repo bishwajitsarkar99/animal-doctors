@@ -184,29 +184,28 @@
                     if(response.status == 400){
                         $.each(response.errors, function(key, err_value){
                             if (key === 'branch_id') {
-                                $("#savForm_branch_error").fadeIn();
-                                $('#savForm_branch_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
-                                $("#savForm_branch_error").addClass("alert_show_errors");
-                                $('#add_branch_id').addClass('is-invalid');
-                                $('#add_branch_id').html("");
+                                $("#savForm_error").fadeIn();
+                                $('#savForm_error').html('<span class="ps-2" style="font-size:10px;font-weight:700;letter-spacing: 1px;">' + err_value + '</span>');
+                                $("#select_user_branch").next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                                $("#savForm_error").addClass("alert_show_errors");
+                                $('#select_user_branch').addClass('is-invalid');
                             }else if (key === 'login_email') {
-                                $("#savForm_branch_error2").fadeIn();
-                                $('#savForm_branch_error2').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
-                                $("#savForm_branch_error2").addClass("alert_show_errors");
-                                $('#add_branch_name').addClass('is-invalid');
-                                $('#add_branch_name').html("");
+                                $("#savForm_error2").fadeIn();
+                                $('#savForm_error2').html('<span class="ps-2" style="font-size:10px;font-weight:700;letter-spacing: 1px;">' + err_value + '</span>');
+                                $("#select_user_email").next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                                $("#savForm_error2").addClass("alert_show_errors");
+                                $('#select_user_email').addClass('is-invalid');
                             } else if (key === 'role') {
-                                $("#savForm_branch_error3").fadeIn();
-                                $('#savForm_branch_error3').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
-                                $("#savForm_branch_error3").addClass("alert_show_errors");
-                                $('#add_branch_type').addClass('is-invalid');
-                                $('#add_branch_type').html("");
+                                $("#savForm_error3").fadeIn();
+                                $('#savForm_error3').html('<span class="ps-2" style="font-size:10px;font-weight:700;letter-spacing: 1px;">' + err_value + '</span>');
+                                $("#select_user_role").next('.select2-container').find('.select2-selection').addClass('is-invalid');
+                                $("#savForm_error3").addClass("alert_show_errors");
+                                $('#select_user_role').addClass('is-invalid');
                             } else if (key === 'status') {
-                                $("#savForm_branch_error4").fadeIn();
-                                $('#savForm_branch_error4').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
-                                $("#savForm_branch_error4").addClass("alert_show_errors");
-                                $('#add_division_id').addClass('is-invalid');
-                                $('#add_division_id').html("");
+                                $("#savForm_error4").fadeIn();
+                                $('#savForm_error4').html('<span class="ps-2" style="font-size:10px;font-weight:700;letter-spacing: 1px;">' + err_value + '</span>');
+                                $("#savForm_error4").addClass("alert_show_errors");
+                                $('#rolePermission').addClass('is-invalid');
                             }
                         });
                     }else if(response.status == 200){
@@ -227,9 +226,9 @@
                             requestAnimationFrame(() => {
                                 $("#success_message").html(response.messages).fadeIn().addClass("alert_show ps-1 pe-1");
                             });
-                            // inputClear();
+                            inputClear();
                             setTimeout(() => {
-                                $('#add_documents').attr('hidden', true);
+                                // $('#add_documents').attr('hidden', true);
                                 requestAnimationFrame(() => {
                                     $("#success_message").fadeOut();
                                     // fetch_branch();
@@ -243,6 +242,65 @@
 
         });
 
+        // input field clear
+        function inputClear(){
+            $("#select_user_branch").val("").trigger('change');
+            $("#select_user_email").val("").trigger('change');
+            $("#select_user_role").val("").trigger('change');
+            $("input[name='status']:checked").val("");
+        }
+        // Cancel field
+        $(document).on('click', '#roleCancelBtn', function(){
+            $("#savForm_error").empty();
+            $("#savForm_error").fadeOut();
+            $("#select_user_branch").val("").trigger('change');
+            $("#select_user_branch").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            $("#savForm_error2").empty();
+            $("#savForm_error2").fadeOut();
+            $("#select_user_email").val("").trigger('change');
+            $("#select_user_email").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            $("#savForm_error3").empty();
+            $("#savForm_error3").fadeOut();
+            $("#select_user_role").val("").trigger('change');
+            $("#select_user_role").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            $("#savForm_error4").empty();
+            $("#savForm_error4").fadeOut();
+            $("input[name='status']:checked").val("");
+        });
+    
+        // On Change action for error remove
+        $(document).on('change', '#select_user_branch, #select_user_email, #select_user_role', function(){
+    
+            var select_branch = $("#select_user_branch").val();
+            var select_email = $("#select_user_email").val();
+            var select_role = $("#select_user_role").val();
+    
+            if(select_branch !== ''){
+                $("#savForm_error").fadeOut();
+                $("#savForm_error").addClass('display-none');
+                $("#select_user_branch").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                $("#updateForm_error").fadeOut();
+                $("#updateForm_error").addClass('display-none');
+                $(".edit_select_user_branch").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            }
+            if(select_email !== ''){
+                $("#savForm_error2").fadeOut();
+                $("#savForm_error2").addClass('display-none');
+                $("#select_user_email").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                $("#updateForm_error2").fadeOut();
+                $("#updateForm_error2").addClass('display-none');
+                $(".edit_select_user_email").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            }
+            if(select_role !== ''){
+                $("#savForm_error3").fadeOut();
+                $("#savForm_error3").addClass('display-none');
+                $("#select_user_role").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                $("#updateForm_error3").fadeOut();
+                $("#updateForm_error3").addClass('display-none');
+                $(".edit_select_user_role").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            }
+    
+        });
         
     });
 </script>

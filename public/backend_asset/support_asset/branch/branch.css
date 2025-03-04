@@ -666,7 +666,7 @@ input#secondUpdateBy,input#secondUpdateAt,input#secondApprover,input#thirdUserEm
 }
 input#creatorUserImage,input#creatorUserEmail,input#creatorCreatedBy,input#creatorCreatedAt,input#approverUserImage,input#approverUserEmail,
 input#approverApprover,input#approverUpdateAt,input#updatorUserImage,input#updatorUserEmail,input#updatorUpdateBy,input#updatorUpdateAt,
-input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#district_id,input#upazila_id,input#town_name,input#location{
+input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#district_id,input#upazila_id,input#town_name{
     outline: none;
     box-shadow: none;
     background: white;
