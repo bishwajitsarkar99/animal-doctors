@@ -43,6 +43,122 @@
             $('.select2-search__field').attr('placeholder', 'Search email...');
         });
 
+        // Data View Table--------------
+        const table_rows = (rows) => {
+            // Define the "Add New" row
+            const addNewRow = `
+                <tr class="table-row user-table-row data-table-row clicked temp-highlight" id="row_id_new" value="" tabindex="0">
+                    <td class="sn td_border_empty id-font" id="role_create_btn" value="" tabindex="0">
+                        <span class="permission-plate pe-1 ms-1"><i class="fa-solid fa-database" style="color: forestgreen;"></i></span>
+                    </td>
+                    <td class="td_border_empty font padding role_name placeholder_text" colspan="3" contenteditable="true" tabindex="0" id="roleName"></td>
+                </tr>
+            `;
+            if (!rows || rows.length === 0) {
+                return `
+                    <tr class="table-row">
+                        <td class="error_data text-danger" align="center" colspan="7">
+                            ${message || 'Role Currently Not Exists On Server! Please Search......'}
+                        </td>
+                    </tr>
+                `;
+            } 
+
+            return addNewRow + rows.map((row, key) => {
+                let statusText, statusSinge, statusClass, statusBg, textColor;
+                if(row.status == 0){
+                    statusText = 'non-promot';
+                    statusSinge = '<i class="fa-solid fa-xmark"></i>';
+                    statusClass = 'text-white';
+                    textColor = 'text-danger';
+                    statusBg = 'badge rounded-pill bg-danger';
+                }else if(row.status == 1){
+                    statusText = 'promoted';
+                    statusSinge = '<i class="fa-solid fa-check"></i>';
+                    statusClass = 'text-white';
+                    textColor = 'text-dark';
+                    statusBg = 'badge rounded-pill bg-success';
+                }
+                
+                let idLink, disabledLabel;
+                if(row.role_condition === 'non-static'){
+                    idLink = row.id;
+                    disabledLabel = '';
+                }else if(row.role_condition === 'static'){
+                    idLink = '';
+                    disabledLabel = 'disabled';
+                }
+                return `
+                    <tr class="table-row user-table-row data-table-row" id="row_id" value="${key}" tabindex="0">
+                        <td class="sn td_border id-font" id="table_edit_btn" value="${idLink}" data-id="${row.id}" tabindex="0" ${disabledLabel}>${row.id}</td>
+                        <td class="td_border font padding" contenteditable="true" tabindex="0">
+                            <span class="role-name">${row.name}</span>
+                        </td>
+                        <td class="td_border font padding" tabindex="0">
+                            <span class="condition">${row.role_condition}</span>
+                        </td>
+                        <td class="td_border font padding ${textColor}" tabindex="0">
+                            <span class="promt">${statusText}</span>
+                            <span class="permission-plate ps-1 pe-1 ms-1 ${statusBg} ${statusClass}">${statusSinge}</span>
+                        </td>
+                    </tr>
+                `;
+            }).join("");
+        };
+
+        // Fetch Users Data ------------------
+        function fetch_roles(query = '') {
+            const current_url = "{{ route('role_get.action') }}";
+            const input_value = $("#RoleSearchBar").val();
+
+            $.ajax({
+                type: "GET",
+                url: current_url,
+                dataType: 'json',
+                data: { query: query, name: input_value },
+                success: function(response) {
+                    const { status, data, total, current, message } = response;
+
+                    // Handle the table rendering based on the status
+                    if (status === 'success') {
+                        $("#role_table").html(table_rows(data));
+                        $("#module_catg_row_amount").text(`${total}.00`);
+                        $("#module_catg_current_amount").text(` [ Current-Role : ${current}.00 ] `);
+                        $("#module_catg_current_amount").removeAttr('hidden');
+                    } else {
+                        $("#role_table").html(`
+                            <tr class="table-row">
+                                <td class="error_data text-danger" align="center" colspan="7">
+                                    ${message || 'Role Currently Not Exists On Server! Please Search......'}
+                                </td>
+                            </tr>
+                        `);
+                        $("#module_catg_row_amount").text('0.00');
+                        $("#module_catg_current_amount").attr('hidden', true);
+                    }
+
+                    // Initialize tooltips
+                    $('[data-bs-toggle="tooltip"]').tooltip();
+
+                    // Populate autocomplete suggestions
+                    const suggestions = data.map(item => item.name);
+                    $("#RoleSearchBar").autocomplete({
+                        source: suggestions
+                    });
+                },
+                error: function() {
+                    $("#role_table").html(`
+                        <tr class="table-row">
+                            <td class="error_data text-danger" align="center" colspan="7">
+                                Error Fetching Data!
+                            </td>
+                        </tr>
+                    `);
+                    $("#module_catg_row_amount").text('0.00');
+                }
+            });
+        }
+
         branchFetch();
         fetch_branch_emails();
         fetch_user_role();
