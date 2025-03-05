@@ -14,7 +14,7 @@
               <select type="text" class="form-control form-control-sm select_user_email_search select2" name="branch_name" id="select_user_email_search">
                 <option value="">Select User Email</option>
               </select>
-              <input type="hidden" name="id" id="branches_id">
+              <input type="hidden" name="id" id="role_permission_id">
               <input type="hidden" name="branch_id" id="get_branch_id">
             </div>
           </div>
@@ -56,19 +56,19 @@
           <div class="col-xl-3 act_bx">
             <button type="button" class="btn btn-sm role_create_button btn_key" id="updateBtn" disabled>
               <span class="update-btn-text">Update</span>
-              <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+              <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" hidden></span>
             </button>
             <button type="button" class="btn btn-sm role_delete_button btn_key" id="roleDeleteBtn" disabled>
               <span class="delete-btn-text">Delete</span>
-              <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+              <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" hidden></span>
             </button>
-            <button type="button" class="btn btn-sm role_create_button btn_key" id="createBtn">
-              <span class="create-btn-text">Save</span>
-              <span class="create-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <button type="button" class="btn btn-sm role_create_button btn_key" id="createBtn" disabled>
+              <span class="create-sm-btn-text">Save</span>
+              <span class="create-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" hidden></span>
             </button>
             <button type="button" class="btn btn-sm role_cancel_button btn_key" id="roleCancelBtn">
               <span class="delete-btn-text">Cancel</span>
-              <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+              <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" hidden></span>
             </button>
           </div>
         </div>

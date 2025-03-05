@@ -555,6 +555,24 @@ class SuperAdminService
         ]);
     }
     /**
+     * Handle role permission edit event.
+    */
+    public function rolesPermissionEdit($id)
+    {
+        $role_permission_data_query = RolePermission::with(['role'])->find($id);
+        if ($role_permission_data_query) {
+            return response()->json([
+                'status' => 200,
+                'messages' => $role_permission_data_query,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'No data found.',
+            ]);
+        }
+    }
+    /**
      * Handle manage role view event.
     */
     public function manageRoles()

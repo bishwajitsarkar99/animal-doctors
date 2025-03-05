@@ -147,9 +147,9 @@ class SuperAdminController extends Controller
     }
 
     // Edit Role Permission---------
-    public function rolePermissionEdit(Request $request, $id)
+    public function rolePermissionEdit($id)
     {
-        return $this->superAdminService->rolesPermissionEdit($request, $id); 
+        return $this->superAdminService->rolesPermissionEdit($id); 
     }
 
     // Update Role Permission---------

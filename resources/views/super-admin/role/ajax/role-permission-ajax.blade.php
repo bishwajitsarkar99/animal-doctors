@@ -80,7 +80,9 @@
                 
                 return `
                     <tr class="table-row data-table-row user-table-row temp-highlight" id="row_id" value="${key}" tabindex="0">
-                        <td class="sn td_border id-font" id="table_id_btn" data-id="${row.id}" tabindex="0">${row.id}</td>
+                        <td class="sn td_border id-font" id="table_id_btn" data-id="${row.id}" tabindex="0" style="color: #3b71ca;">
+                            ${row.id}
+                        </td>
                         <td class="td_border font padding" tabindex="0">
                             <span class="role-name">${row.branch_id}</span>
                         </td>
@@ -196,89 +198,7 @@
                 targetCell.focus();
             }
         }
-        // Handle click events on table cells / td
-        $(document).on('click keydown', '#table_id_btn', function (event) {
-            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
-                const currentCell = $(this);
-                const id = currentCell.data('id');
-
-                console.log(id);
-                
-
-                // const current_url = "/super-admin/role-permission-edit/"+ id;
-
-                // $.ajaxSetup({
-                //     headers: {
-                //         'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
-                //     }
-                // });
-
-                // $.ajax({
-                //     type: "GET",
-                //     url: current_url,
-                //     success: function(response) {
-                //         if(response.status == 404){
-                //             //$('#success_message').html("");
-                //         }else if(response.status == 200){
-                //             $("#accessconfirmbranch").modal('show');
-                //             $("#dataPullingProgress").removeAttr('hidden');
-                //             $("#access_modal_box").addClass('progress_body');
-                //             $("#processModal_body").addClass('loading_body_area');
-                //             $('#documents').attr('hidden', true);
-                //             $('.edit_branch_id').attr('hidden', true);
-
-                //             setTimeout(() => {
-                //                 $("#accessconfirmbranch").modal('hide');
-                //                 $("#dataPullingProgress").attr('hidden', true);
-                //                 $("#access_modal_box").removeClass('progress_body');
-                //                 $("#processModal_body").removeClass('loading_body_area');
-                //                 $('#documents').removeAttr('hidden');
-                //                 $('.edit_branch_id').removeAttr('hidden');
-                //                 $("#update_btn").removeAttr('hidden');
-                //                 $("#update_btn").fadeIn();
-                //                 $("#deleteLoader").removeAttr('hidden');
-                //                 $("#deleteLoader").fadeIn();
-                //                 const messages = response.messages;
-                                
-                //                 $('#branches_id').val(id);
-                //                 $('#edit_branch_id').val(response.messages.branch_id);
-                //                 $('.edit_branch_type').val(response.messages.branch_type).trigger('change.select2');
-                //                 $('.edit_division_id').val(response.messages.division_id).trigger('change.select2');
-                //                 fetch_district(response.messages.division_id, function(){
-                //                     // Set the value once options are available
-                //                     $('.edit_district_id').val(response.messages.district_id).trigger('change.select2');
-                //                 });
-                //                 fetch_upazila(response.messages.district_id, function (){
-                //                     // Set the value once options are available
-                //                     $('.edit_upazila_id').val(response.messages.upazila_id).trigger('change.select2');
-                //                 });
-                //                 $('.edit_town_name').val(response.messages.town_name);
-                //                 $('.edit_location').val(response.messages.location);
-
-                //                 // Modal delete, update and confirm data get
-                //                 const updateBranch = $("#branch_update_modal");
-                //                 const updateBranchHeading = $("#branch_update_modal_heading");
-                //                 const deleteBranch = $("#delete_branch_id");
-                //                 const deleteBranchHeading = $("#delete_branch");
-                //                 const deleteBranchBody = $("#delete_branch_body");
-                //                 const deleteBranchConfirm = $("#delete_confrm_branch_id");
-                //                 updateBranch.append(`<span class="">${response.messages.branch_name}</span>`);
-                //                 updateBranchHeading.append(`<span class="">${response.messages.branch_name}</span>`);
-                //                 deleteBranch.append(`<span class="">${response.messages.branch_id}</span>`);
-                //                 deleteBranchHeading.append(`<span class="">${response.messages.branch_name}</span>`);
-                //                 deleteBranchBody.append(`<span class="">${response.messages.branch_name}</span>`);
-                //                 deleteBranchConfirm.append(`<span class="">${response.messages.branch_id}</span>`);
-
-                //             }, 1500);
-                            
-                //         }
-                //     }
-                // });
-                // Store the currently highlighted row for later use
-                const activeRow = $(".data-table-row.hightlight-row");
-                activeRow.addClass("temp-highlight"); // Temporarily mark the active row
-            }
-        });
+        
         // Add focus styles for cells/ addClass for td
         $(document).on("focus", "td", function () {
             $(this).addClass("focusing-td");
@@ -291,7 +211,7 @@
         // Fetch Users Data ------------------
         function fetch_role_permissions(email_id = '') {
             const current_url = "{{ route('role_permission_fetch.action') }}";
-            const select_value = email_id || $("#select_user_email_search").val();;
+            const select_value = email_id || $("#select_user_email_search").val();
 
             $.ajax({
                 type: "GET",
@@ -336,7 +256,22 @@
         // Search Role Permission
         $(document).on('change', '#select_user_email_search', function(e){
             var email_id = $(this).val();
-            fetch_role_permissions(email_id);
+            if(email_id !== ''){
+                $("#accessconfirmbranch").modal('show');
+                $("#dataPullingProgress").removeAttr('hidden');
+                $("#access_modal_box").addClass('progress_body');
+                $("#processModal_body").addClass('loading_body_area');
+
+                setTimeout(() => {
+                    $("#accessconfirmbranch").modal('hide');
+                    $("#dataPullingProgress").attr('hidden', true);
+                    $("#access_modal_box").removeClass('progress_body');
+                    $("#processModal_body").removeClass('loading_body_area');
+                    fetch_role_permissions(email_id);
+                }, 1500);
+            }else{
+                fetch_role_permissions(email_id);
+            }
         });
 
         branchFetch();
@@ -405,8 +340,7 @@
             var changeValue = $(this).val();
             if (changeValue === '') {
                 $("#select_user_email").empty();
-                $("#select_user_email").empty();
-                $("#select_user_email").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
+                $("#select_user_email").append('<option style="color:white;font-weight:600;" value="" disabled>Select branch</option>');
             }
         });
 
@@ -417,7 +351,7 @@
         });
 
         // Function to fetch only user email
-        function fetch_branch_emails (selectedBranch) {
+        function fetch_branch_emails (selectedBranch, callback) {
             if (!selectedBranch) {
                 return;
             }
@@ -440,6 +374,10 @@
                     $.each(users, function(key, item) {
                         $("#select_user_email").append(`<option style="color:white;font-weight:600;" value="${item.login_email}">${item.login_email}</option>`);
                     });
+
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
                 },
                 error: function() {
                     $("#select_user_email").empty();
@@ -479,6 +417,7 @@
         }
 
         // Add Role Permission
+        $("#createBtn").removeAttr('disabled');
         $(document).on('click', '#createBtn', function(e){
             e.preventDefault();
 
@@ -592,6 +531,10 @@
             $("#savForm_error4").empty();
             $("#savForm_error4").fadeOut();
             $("input[name='status']:checked").val("");
+            // Button Enable or Disable
+            $("#updateBtn").attr('disabled', true);
+            $("#roleDeleteBtn").attr('disabled', true);
+            $("#createBtn").removeAttr('disabled');
         });
     
         // On Change action for error remove
@@ -635,7 +578,78 @@
         });
 
         // Edit Role Permission
-        
+        $(document).on('click keydown', '#table_id_btn', function (event) {
+            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                const currentCell = $(this);
+                const id = currentCell.data('id');
+
+                const current_url = "/super-admin/role-permission-edit/"+ id;
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: current_url,
+                    success: function(response) {
+                        if(response.status == 404){
+                            //$('#success_message').html("");
+                        }else if(response.status == 200){
+                            const messages = response.messages;
+                            
+                            $('#role_permission_id').val(id);
+                            $('.edit_select_user_branch').val(response.messages.branch_id).trigger('change.select2');
+                            fetch_branch_emails(response.messages.branch_id, function(){
+                                $('.edit_select_user_email').val(response.messages.login_email).trigger('change.select2');
+                                // Set the value once options are available
+                            });
+                            $('.edit_select_user_role').val(response.messages.role_id).trigger('change.select2');
+                            $('.check_permission').val(response.messages.status).prop('checked', true);
+
+
+                            // Button Enable or Disable
+                            $("#updateBtn").removeAttr('disabled');
+                            $("#roleDeleteBtn").removeAttr('disabled');
+                            $("#createBtn").attr('disabled', true);
+
+                            // Modal delete, update and confirm data get
+                            // const updateBranch = $("#branch_update_modal");
+                            // const updateBranchHeading = $("#branch_update_modal_heading");
+                            // const deleteBranch = $("#delete_branch_id");
+                            // const deleteBranchHeading = $("#delete_branch");
+                            // const deleteBranchBody = $("#delete_branch_body");
+                            // const deleteBranchConfirm = $("#delete_confrm_branch_id");
+                            // updateBranch.append(`<span class="">${response.messages.branch_name}</span>`);
+                            // updateBranchHeading.append(`<span class="">${response.messages.branch_name}</span>`);
+                            // deleteBranch.append(`<span class="">${response.messages.branch_id}</span>`);
+                            // deleteBranchHeading.append(`<span class="">${response.messages.branch_name}</span>`);
+                            // deleteBranchBody.append(`<span class="">${response.messages.branch_name}</span>`);
+                            // deleteBranchConfirm.append(`<span class="">${response.messages.branch_id}</span>`);
+                            
+                        }
+                    }
+                });
+                // Store the currently highlighted row for later use
+                const activeRow = $(".data-table-row.hightlight-row");
+                activeRow.addClass("temp-highlight"); // Temporarily mark the active row
+            }
+        });
+
+        // Update Role Permission
+        $(document).on('click', '#updateBtn', function(e){
+            e.preventDefault();
+            var id = $("#role_permission_id").val();
+
+            var brach = $('.edit_select_user_branch').val();
+            var email = $('.edit_select_user_email').val();
+            var role = $('.edit_select_user_role').val();
+            var permission = $("input[name='status']:checked").val();
+
+            
+        });
         
     });
 </script>
