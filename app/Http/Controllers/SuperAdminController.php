@@ -122,16 +122,46 @@ class SuperAdminController extends Controller
         return $this->superAdminService->rolesPermissionCreate($request);
     }
 
-    // Branch Fetch-----------
+    // Branch Fetch For Role Permission-----------
     public function user_emailFetch(Request $request, $selectedBranch)
     {
         return $this->superAdminService->user_emailsFetch($request, $selectedBranch);
     }
 
-    // Fetch Data Role---------
+    // Fetch Data For Role Permission---------
     public function user_roleFetch(Request $request)
     {
         return $this->superAdminService->user_rolesFetch($request); 
+    }
+
+    // Get Role Permission---------
+    public function rolePermissionGet(Request $request)
+    {
+        return $this->superAdminService->rolesPermissionGet($request); 
+    }
+
+    // Fetch Role Permission---------
+    public function rolePermissionFetch(Request $request)
+    {
+        return $this->superAdminService->rolesPermissionFetch($request); 
+    }
+
+    // Edit Role Permission---------
+    public function rolePermissionEdit(Request $request, $id)
+    {
+        return $this->superAdminService->rolesPermissionEdit($request, $id); 
+    }
+
+    // Update Role Permission---------
+    public function rolePermissionUpdate(Request $request, $id)
+    {
+        return $this->superAdminService->rolesPermissionUpdate($request, $id); 
+    }
+
+    // Delete Role Permission---------
+    public function rolePermissionDelete(Request $request, $id)
+    {
+        return $this->superAdminService->rolesPermissionDelete($request, $id); 
     }
 
     // Manage Role-----------

@@ -39,9 +39,10 @@
           <div class="col-xl-4">
             <div class="form-group role_nme branch mb-1 skeleton admin_email_search" id="select_Role">
               <label class="role_permission_label" for="role">Select Role <span class="confrm">*</span><span id="savForm_error3"><span id="updateForm_error3"></span></span></label><br>
-              <select type="text" class="form-control form-control-sm edit_select_user_role select2" name="role" id="select_user_role">
+              <select type="text" class="form-control form-control-sm edit_select_user_role select2" name="role_id" id="select_user_role">
                 <option value="">Select Role</option>
               </select>
+              <input type="hidden" name="role" value="role_id" id="user_role">
             </div>
           </div>
         </div>
@@ -71,15 +72,17 @@
             </button>
           </div>
         </div>
-        <div class="table-responsive mt-2">
-          <table class="module-category-table mb-3" id="module_catg">
+        <div class="table-sm-responsive mt-2">
+          <table class="module-category-table" id="module_catg">
             <thead class="module-category-table-head-two">
-              <tr class="module-category-table-head-row-two" id="module_catg_row_three">
-                <th class="module-category-table-head-th-search-bar ps-1" id="module_catg_row_sn">SN.</th>
-                <th class="module-category-table-head-th-search-bar" id="module_catg_row_catname">Branch-ID</th>
-                <th class="module-category-table-head-th-search-bar" id="module_catg_row_catname">Email</th>
-                <th class="module-category-table-head-th-search-bar" id="module_catg_row_catname">Role-Name</th>
-                <th class="module-category-table-head-th-search-bar" id="module_catg_row_catname">Permission-Status</th>
+              <tr class="module-category-table-head-row-two" id="table_header">
+                <th class="module-category-table-head-th-search-bar ps-1" id="role_permission_table_label_sn">SN.</th>
+                <th class="module-category-table-head-th-search-bar" id="role_permission_table_label">Branch-ID</th>
+                <th class="module-category-table-head-th-search-bar" id="role_permission_table_label">Role-Name</th>
+                <th class="module-category-table-head-th-search-bar" id="role_permission_table_label">Email</th>
+                <th class="module-category-table-head-th-search-bar" id="role_permission_table_label">Status</th>
+                <th class="module-category-table-head-th-search-bar" id="role_permission_table_label">Creator</th>
+                <th class="module-category-table-head-th-search-bar" id="role_permission_table_last_label">updator</th>
               </tr>
             </thead>
             <tbody class="module-category-table-body bg-white" id="role_permission_table"></tbody>
@@ -88,8 +91,8 @@
         <div class="row">
           <div class="col-xl-12">
             <div class="table_footers act_bx">
-              <span class="ps-3"> Total Permission </span>
-              <span class="pe-2">0.00</span>
+              <span class="ps-3"> Total Role Permission </span>
+              <span class="pe-2" id="role_permission_row_amount">0.00</span>
             </div>
           </div>
         </div>
@@ -97,7 +100,7 @@
     </div>
     <div class="row">
       <div class="col-xl-12 action_message mb-5">
-        <p class="ps-1"><span id="success_message"></span></p>
+        <p class="mt-1"><span id="success_message"></span></p>
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@
   <div class="container">
     <div class="card form-control form-control-sm" id="moduleTemplete">
       <div class="card-body" id="table_card_body">
-        <table class="module-category-table" id="module_catg_first">
+        <table class="module-category-table" id="module_catg_first" style="border:none;">
           @csrf
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input type="hidden" name="role_id" id="roleId">
@@ -21,7 +21,7 @@
           <table class="module-category-table" id="module_catg">
             <thead class="module-category-table-head-two">
               <tr class="table-heading-row" id="role_row">
-                <th class="" id="table_head_sn">ID-NO.</th>
+                <th class="" id="table_head_sn" style="font-size: 15px;">ID-NO.</th>
                 <th class="" id="row_role_name">Role-Name</th>
                 <th class="" id="row_role_condition">Role-Condition</span></th>
                 <th class="" id="row_role_status">Status</th>
@@ -30,17 +30,24 @@
             <tbody class="module-category-table-body bg-white" id="role_table"></tbody>
           </table>
         </div>
-        <table class="footer_box">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="table_footers act_bx">
+              <span class="ps-3"> Total Role </span>
+              <span class="pe-2" id="module_catg_row_amount">0.00</span>
+            </div>
+          </div>
+        </div>
+        <!-- <table class="footer_box">
           <tfoot class="module-category-table-footer mb-3">
             <tr class="module-category-table-footer-row table-row" id="footerRow">
               <th class="module-category-table-footer-th" colspan="5" id="module_catg_row_total">
                 Total Role 
-                <!-- <span class="action_message"><span id="success_message"></span></span> -->
               </th>
               <th class="module-category-table-footer-th" id="module_catg_row_amount"></th>
             </tr>
           </tfoot>
-        </table>
+        </table> -->
       </div>
     </div>
     <div class="col-xl-12 action_message mb-5">

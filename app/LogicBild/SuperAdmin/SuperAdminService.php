@@ -465,7 +465,7 @@ class SuperAdminService
         // Validate inputs
         $validators = Validator::make($request->all(), [
             'branch_id' => 'required|string',
-            'role' => 'required|integer',
+            'role_id' => 'required|integer',
             'status' => 'required|in:0,1',
             'login_email' => 'required|unique:role_permissions,login_email',
         ], [
@@ -473,7 +473,7 @@ class SuperAdminService
             'login_email.required' => 'This user email is required.',
             'login_email.unique' => 'This user email has already taken.',
             'status.required' => 'Permission status is required.',
-            'role.required' => 'The role name is required.',
+            'role_id.required' => 'The role name is required.',
         ]);
 
         if ($validators->fails()) {
@@ -488,7 +488,7 @@ class SuperAdminService
         // Create a new role permission
         $role_permission = new RolePermission;
         $role_permission->branch_id = $request->branch_id;
-        $role_permission->role = $request->role;
+        $role_permission->role_id = $request->role_id;
         $role_permission->login_email = $request->login_email;
         $role_permission->status = $request->status;
         $role_permission->created_by = $auth->id;
@@ -508,6 +508,51 @@ class SuperAdminService
             'messages' => 'Role permission has created successfully.'
         ]);
         
+    }
+    /**
+     * Handle role permission fetch event.
+    */
+    public function rolesPermissionFetch(Request $request)
+    {
+        $select_value = $request->input('login_email'); // The additional filter if provided
+
+        $query = RolePermission::with(['role', 'created_user', 'updated_user'])->orderBy('id', 'desc');
+        // Apply filters
+        if ($select_value) {
+            $query->where('login_email', $select_value);
+        } else {
+            $query = RolePermission::with(['role', 'created_user', 'updated_user'])->orderBy('id', 'desc')->latest()->limit(10);
+        }
+
+        $data = $query->get();
+        // Total Module Category Count
+        $total = RolePermission::count();
+
+        if ($data->isEmpty()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No matching current role permission found, Please Search.......',
+                'data' => []
+            ], 200);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $data,
+            'current' => $data->count(),
+            'total' => $total,
+        ], 200);
+    }
+    /**
+     * Handle role permission get event.
+    */
+    public function rolesPermissionGet(Request $request)
+    {
+        $role_permissions = RolePermission::all();
+        return response()->json([
+            'status' => 200,
+            'role_permissions' => $role_permissions,
+        ]);
     }
     /**
      * Handle manage role view event.

@@ -225,6 +225,11 @@ tr#module_catg_row_three {
     font-weight: 700;
     transition: border-color 0.3sease, background-color 0.3sease;
     letter-spacing: 0.5px;
+    border-left: 1px solid #cfccccc7;
+    border-bottom: 1px solid #cfccccc7;
+    border-right: 1px solid #cfccccc7;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 button.role_cancel_button {
     background-color: #f91d00;
@@ -248,6 +253,56 @@ button.role_cancel_button:hover{
     background-color: #ff533c;
     color: white;
     transition: border-color 0.3sease, background-color 0.3sease;
+}
+th#role_permission_table_label_sn {
+    text-align: center;
+    border-top: 1px solid #cfccccc7;
+    font-family: var(--nav-font-family);
+    opacity: 5;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-variant: none;
+    border-right: 2px solid #cfccccc7;
+}
+th#role_permission_table_label {
+    text-align: left;
+    padding-left: 5px;
+    font-family: var(--nav-font-family);
+    opacity: 5;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: capitalize;
+    font-variant: none;
+    border-right: 2px solid #cfccccc7;
+}
+th#role_permission_table_last_label {
+    text-align: left;
+    padding-left: 5px;
+    font-family: var(--nav-font-family);
+    opacity: 5;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: capitalize;
+    font-variant: none;
+}
+.table-sm-responsive {
+    max-height: 400px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+    border-left: 1px solid #cfccccc7;
+    border-bottom: 1px solid #cfccccc7;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+tr#table_header {
+    border-radius: 5px;
+    border-top: 1px solid #cfccccc7;
+    border-bottom: 1px solid #cfccccc7;
+    border-left: 1px solid #cfccccc7;
+    border-right: 1px solid #cfccccc7;
+    background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
 }
 
 

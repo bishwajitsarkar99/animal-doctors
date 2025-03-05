@@ -113,4 +113,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(AdminBranchAccessPermission::class);
     }
+
+    public function role_permissions(){
+        return $this->hasMany(RolePermission::class);
+    }
 }

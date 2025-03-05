@@ -16,7 +16,8 @@ class CreateRolePermissionsTable extends Migration
         Schema::create('role_permissions', function (Blueprint $table) {
             $table->id();
             $table->string('branch_id');
-            $table->integer('role');
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->string('login_email')->unique();
             $table->tinyInteger('status')->default(0);
             $table->unsignedBigInteger('created_by');

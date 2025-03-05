@@ -1,5 +1,12 @@
-<script>
+<script type="module">
+    import {activeTableRow} from "/module/module-min-js/helper-function-min.js";
     $(document).ready(function(){
+        // ACtive table row background
+        $(document).on('click keydown', 'tr.table-row', function (event) {
+            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                activeTableRow(this);
+            }
+        });
         // Initialize Select2 for all elements with the 'select2' class
         $('.select2').each(function() {
             // Check the ID or name to set specific options
@@ -45,15 +52,6 @@
 
         // Data View Table--------------
         const table_rows = (rows) => {
-            // Define the "Add New" row
-            const addNewRow = `
-                <tr class="table-row user-table-row data-table-row clicked temp-highlight" id="row_id_new" value="" tabindex="0">
-                    <td class="sn td_border_empty id-font" id="role_create_btn" value="" tabindex="0">
-                        <span class="permission-plate pe-1 ms-1"><i class="fa-solid fa-database" style="color: forestgreen;"></i></span>
-                    </td>
-                    <td class="td_border_empty font padding role_name placeholder_text" colspan="3" contenteditable="true" tabindex="0" id="roleName"></td>
-                </tr>
-            `;
             if (!rows || rows.length === 0) {
                 return `
                     <tr class="table-row">
@@ -64,87 +62,263 @@
                 `;
             } 
 
-            return addNewRow + rows.map((row, key) => {
+            return rows.map((row, key) => {
                 let statusText, statusSinge, statusClass, statusBg, textColor;
                 if(row.status == 0){
-                    statusText = 'non-promot';
+                    statusText = 'deny';
                     statusSinge = '<i class="fa-solid fa-xmark"></i>';
                     statusClass = 'text-white';
                     textColor = 'text-danger';
                     statusBg = 'badge rounded-pill bg-danger';
                 }else if(row.status == 1){
-                    statusText = 'promoted';
+                    statusText = 'justify';
                     statusSinge = '<i class="fa-solid fa-check"></i>';
                     statusClass = 'text-white';
                     textColor = 'text-dark';
                     statusBg = 'badge rounded-pill bg-success';
                 }
                 
-                let idLink, disabledLabel;
-                if(row.role_condition === 'non-static'){
-                    idLink = row.id;
-                    disabledLabel = '';
-                }else if(row.role_condition === 'static'){
-                    idLink = '';
-                    disabledLabel = 'disabled';
-                }
                 return `
-                    <tr class="table-row user-table-row data-table-row" id="row_id" value="${key}" tabindex="0">
-                        <td class="sn td_border id-font" id="table_edit_btn" value="${idLink}" data-id="${row.id}" tabindex="0" ${disabledLabel}>${row.id}</td>
-                        <td class="td_border font padding" contenteditable="true" tabindex="0">
-                            <span class="role-name">${row.name}</span>
+                    <tr class="table-row data-table-row user-table-row temp-highlight" id="row_id" value="${key}" tabindex="0">
+                        <td class="sn td_border id-font" id="table_id_btn" data-id="${row.id}" tabindex="0">${row.id}</td>
+                        <td class="td_border font padding" tabindex="0">
+                            <span class="role-name">${row.branch_id}</span>
                         </td>
                         <td class="td_border font padding" tabindex="0">
-                            <span class="condition">${row.role_condition}</span>
+                            <span class="condition">${row.role ? row.role.name : 'N/A'}</span>
+                        </td>
+                        <td class="td_border font padding" tabindex="0">
+                            <span class="condition">${row.login_email}</span>
                         </td>
                         <td class="td_border font padding ${textColor}" tabindex="0">
                             <span class="promt">${statusText}</span>
                             <span class="permission-plate ps-1 pe-1 ms-1 ${statusBg} ${statusClass}">${statusSinge}</span>
+                        </td>
+                        <td class="td_border font padding" tabindex="0">
+                            <span class="condition">${row.created_user ? row.created_user.name : '<i class="fa-solid fa-minus" style="padding-left:25px;color:#00000087;">‌</i>'}</span>
+                        </td>
+                        <td class="td_border font padding" tabindex="0">
+                            <span class="condition">${row.updated_user ? row.updated_user.name : '<i class="fa-solid fa-minus" style="padding-left:25px;color:#00000087;">‌</i>'}</span>
                         </td>
                     </tr>
                 `;
             }).join("");
         };
 
+        // Event delegation for row key events
+        $("#role_permission_table").on("keydown", ".data-table-row", function (event) {
+            const keyCode = event.which || event.keyCode;
+
+            // Arrow Down key: Move focus to the next row or loop back to the first row
+            if (keyCode === 40) {
+                const nextRow = $(this).next(".data-table-row");
+                if (nextRow.length) {
+                    $(this).attr("data-val", 0).removeClass("highlight-row");
+                    nextRow.attr("data-val", 1).addClass("highlight-row").focus();
+                    nextRow.addClass("active-row").siblings().removeClass("active-row");
+                } else {
+                    const firstRow = $(".data-table-row").first();
+                    if (firstRow.length) {
+                        $(this).attr("data-val", 0).removeClass("highlight-row");
+                        firstRow.attr("data-val", 1).addClass("highlight-row").focus();
+                        firstRow.addClass("active-row").siblings().removeClass("active-row");
+                    }
+                }
+                event.preventDefault();
+            }
+
+            // Arrow Up key: Move focus to the previous row or loop back to the last row
+            if (keyCode === 38) {
+                const prevRow = $(this).prev(".data-table-row");
+                if (prevRow.length) {
+                    $(this).attr("data-val", 0).removeClass("highlight-row");
+                    prevRow.attr("data-val", 1).addClass("highlight-row").focus();
+                    prevRow.addClass("active-row").siblings().removeClass("active-row");
+                } else {
+                    const lastRow = $(".data-table-row").last();
+                    $(this).attr("data-val", 0).removeClass("highlight-row");
+                    lastRow.attr("data-val", 1).addClass("highlight-row").attr("tabindex", "0").focus();
+                    lastRow.addClass("active-row").siblings().removeClass("active-row");
+                }
+                event.preventDefault(); // Prevent default scrolling behavior
+            }
+
+            // Enter key: Perform action on the selected row
+            if (keyCode === 13) {
+                const firstCell = $(this).find("td").first();
+                if (firstCell.length) {
+                    firstCell.focus();
+                }
+                $(this).removeClass("highlight-row");
+                event.preventDefault(); 
+            }
+        });
+        // Add focus styles for rows addClass tr
+        $(document).on("focus", ".data-table-row", function () {
+            $(this).addClass("highlight-row");
+        });
+        // removeClass tr
+        $(document).on("blur", ".data-table-row", function () {
+            $(this).removeClass("highlight-row");
+        });
+
+        // Handle key events on table cells / td
+        $("#role_permission_table").on("keydown", "td", function (event) {
+            const keyCode = event.which || event.keyCode;
+            // Arrow navigation keys
+            if (keyCode === 40 || keyCode === 38 || keyCode === 39 || keyCode === 37) {
+                handleArrowKeys($(this), keyCode);
+                event.preventDefault();
+            }
+
+            // Enter key: Perform action on the selected cell
+            if (keyCode === 13) {
+                const currentCell = $(this); // Current focused cell
+                if (currentCell.attr("id") === "table_id_btn") {
+                    //displayDropdownContent(currentCell);
+                }
+                event.preventDefault();
+            }
+        });
+        // Function to handle arrow navigation keys
+        function handleArrowKeys(cell, keyCode) {
+            let targetCell;
+            if (keyCode === 40) { // Down arrow
+                targetCell = cell.closest("tr").next(".data-table-row").find("td").first();
+            } else if (keyCode === 38) { // Up arrow
+                targetCell = cell.closest("tr").prev(".data-table-row").find("td").first();
+            } else if (keyCode === 39) { // Right arrow
+                targetCell = cell.next("td");
+            } else if (keyCode === 37) { // Left arrow
+                targetCell = cell.prev("td");
+            }
+            if (targetCell && targetCell.length) {
+                targetCell.focus();
+            }
+        }
+        // Handle click events on table cells / td
+        $(document).on('click keydown', '#table_id_btn', function (event) {
+            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                const currentCell = $(this);
+                const id = currentCell.data('id');
+
+                console.log(id);
+                
+
+                // const current_url = "/super-admin/role-permission-edit/"+ id;
+
+                // $.ajaxSetup({
+                //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+                //     }
+                // });
+
+                // $.ajax({
+                //     type: "GET",
+                //     url: current_url,
+                //     success: function(response) {
+                //         if(response.status == 404){
+                //             //$('#success_message').html("");
+                //         }else if(response.status == 200){
+                //             $("#accessconfirmbranch").modal('show');
+                //             $("#dataPullingProgress").removeAttr('hidden');
+                //             $("#access_modal_box").addClass('progress_body');
+                //             $("#processModal_body").addClass('loading_body_area');
+                //             $('#documents').attr('hidden', true);
+                //             $('.edit_branch_id').attr('hidden', true);
+
+                //             setTimeout(() => {
+                //                 $("#accessconfirmbranch").modal('hide');
+                //                 $("#dataPullingProgress").attr('hidden', true);
+                //                 $("#access_modal_box").removeClass('progress_body');
+                //                 $("#processModal_body").removeClass('loading_body_area');
+                //                 $('#documents').removeAttr('hidden');
+                //                 $('.edit_branch_id').removeAttr('hidden');
+                //                 $("#update_btn").removeAttr('hidden');
+                //                 $("#update_btn").fadeIn();
+                //                 $("#deleteLoader").removeAttr('hidden');
+                //                 $("#deleteLoader").fadeIn();
+                //                 const messages = response.messages;
+                                
+                //                 $('#branches_id').val(id);
+                //                 $('#edit_branch_id').val(response.messages.branch_id);
+                //                 $('.edit_branch_type').val(response.messages.branch_type).trigger('change.select2');
+                //                 $('.edit_division_id').val(response.messages.division_id).trigger('change.select2');
+                //                 fetch_district(response.messages.division_id, function(){
+                //                     // Set the value once options are available
+                //                     $('.edit_district_id').val(response.messages.district_id).trigger('change.select2');
+                //                 });
+                //                 fetch_upazila(response.messages.district_id, function (){
+                //                     // Set the value once options are available
+                //                     $('.edit_upazila_id').val(response.messages.upazila_id).trigger('change.select2');
+                //                 });
+                //                 $('.edit_town_name').val(response.messages.town_name);
+                //                 $('.edit_location').val(response.messages.location);
+
+                //                 // Modal delete, update and confirm data get
+                //                 const updateBranch = $("#branch_update_modal");
+                //                 const updateBranchHeading = $("#branch_update_modal_heading");
+                //                 const deleteBranch = $("#delete_branch_id");
+                //                 const deleteBranchHeading = $("#delete_branch");
+                //                 const deleteBranchBody = $("#delete_branch_body");
+                //                 const deleteBranchConfirm = $("#delete_confrm_branch_id");
+                //                 updateBranch.append(`<span class="">${response.messages.branch_name}</span>`);
+                //                 updateBranchHeading.append(`<span class="">${response.messages.branch_name}</span>`);
+                //                 deleteBranch.append(`<span class="">${response.messages.branch_id}</span>`);
+                //                 deleteBranchHeading.append(`<span class="">${response.messages.branch_name}</span>`);
+                //                 deleteBranchBody.append(`<span class="">${response.messages.branch_name}</span>`);
+                //                 deleteBranchConfirm.append(`<span class="">${response.messages.branch_id}</span>`);
+
+                //             }, 1500);
+                            
+                //         }
+                //     }
+                // });
+                // Store the currently highlighted row for later use
+                const activeRow = $(".data-table-row.hightlight-row");
+                activeRow.addClass("temp-highlight"); // Temporarily mark the active row
+            }
+        });
+        // Add focus styles for cells/ addClass for td
+        $(document).on("focus", "td", function () {
+            $(this).addClass("focusing-td");
+        });
+        // removeClass for td
+        $(document).on("blur", "td", function () {
+            $(this).removeClass("focusing-td");
+        });
+
         // Fetch Users Data ------------------
-        function fetch_roles(query = '') {
-            const current_url = "{{ route('role_get.action') }}";
-            const input_value = $("#RoleSearchBar").val();
+        function fetch_role_permissions(email_id = '') {
+            const current_url = "{{ route('role_permission_fetch.action') }}";
+            const select_value = email_id || $("#select_user_email_search").val();;
 
             $.ajax({
                 type: "GET",
                 url: current_url,
                 dataType: 'json',
-                data: { query: query, name: input_value },
+                data: {login_email: select_value },
                 success: function(response) {
-                    const { status, data, total, current, message } = response;
+
+                    const { status, data, total, message } = response;
 
                     // Handle the table rendering based on the status
                     if (status === 'success') {
-                        $("#role_table").html(table_rows(data));
-                        $("#module_catg_row_amount").text(`${total}.00`);
-                        $("#module_catg_current_amount").text(` [ Current-Role : ${current}.00 ] `);
-                        $("#module_catg_current_amount").removeAttr('hidden');
+                        $("#role_permission_table").html(table_rows(data));
+                        $("#role_permission_row_amount").text(`${total}.00`);
                     } else {
-                        $("#role_table").html(`
+                        $("#role_permission_table").html(`
                             <tr class="table-row">
                                 <td class="error_data text-danger" align="center" colspan="7">
                                     ${message || 'Role Currently Not Exists On Server! Please Search......'}
                                 </td>
                             </tr>
                         `);
-                        $("#module_catg_row_amount").text('0.00');
-                        $("#module_catg_current_amount").attr('hidden', true);
+                        $("#role_permission_row_amount").text('0.00');
                     }
 
                     // Initialize tooltips
                     $('[data-bs-toggle="tooltip"]').tooltip();
-
-                    // Populate autocomplete suggestions
-                    const suggestions = data.map(item => item.name);
-                    $("#RoleSearchBar").autocomplete({
-                        source: suggestions
-                    });
                 },
                 error: function() {
                     $("#role_table").html(`
@@ -154,14 +328,22 @@
                             </td>
                         </tr>
                     `);
-                    $("#module_catg_row_amount").text('0.00');
+                    $("#role_permission_row_amount").text('0.00');
                 }
             });
         }
 
+        // Search Role Permission
+        $(document).on('change', '#select_user_email_search', function(e){
+            var email_id = $(this).val();
+            fetch_role_permissions(email_id);
+        });
+
         branchFetch();
         fetch_branch_emails();
         fetch_user_role();
+        fetch_role_permissions();
+        fetchRolePermission();
         // Fetch Branch
         function branchFetch(){
             const currentUrl = "{{ route('search-branch.action') }}";
@@ -190,7 +372,34 @@
                 }
             });
         }
-
+        // Fetch Role Permission For Search Data
+        function fetchRolePermission(){
+            const currentUrl = "{{ route('role_permission_get.action')}}";
+    
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+    
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const role_permissions = response.role_permissions;
+                    $("#select_user_email_search").empty();
+                    $("#select_user_email_search").append('<option value="">Select Company Branch Name</option>');
+                    $.each(role_permissions, function(key, item) {
+                        $("#select_user_email_search").append(`<option style="color:white;font-weight:600;" value="${item.login_email}">${item.login_email}</option>`);
+                    });
+                },
+                error: function() {
+                    $("#select_user_email_search").empty();
+                    $("#select_user_email_search").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
+                }
+            });
+        }
         // Handle Select branch
         $(document).on('change', '#select_user_branch', function() {
             var changeValue = $(this).val();
@@ -276,6 +485,7 @@
             var branch = $("#select_user_branch").val();
             var user_email = $("#select_user_email").val();
             var user_role = $("#select_user_role").val();
+            var role_id = $("#user_role").val();
             var role_permission = $("input[name='status']:checked").val();
 
             const current_url = "{{ route('role_permission_create.action')}}";
@@ -293,6 +503,7 @@
                 data: {
                     branch_id: branch,
                     login_email: user_email,
+                    role_id: role_id,
                     role: user_role,
                     status: role_permission ? 1 : 0,
                 },
@@ -344,13 +555,12 @@
                             });
                             inputClear();
                             setTimeout(() => {
-                                // $('#add_documents').attr('hidden', true);
                                 requestAnimationFrame(() => {
                                     $("#success_message").fadeOut();
-                                    // fetch_branch();
                                 });
                             }, 3000);
-                            // fetch_branch_user_email();
+                            fetch_role_permissions();
+                            fetchRolePermission();
                         }, 1500);
                     }
                 }
@@ -363,7 +573,7 @@
             $("#select_user_branch").val("").trigger('change');
             $("#select_user_email").val("").trigger('change');
             $("#select_user_role").val("").trigger('change');
-            $("input[name='status']:checked").val("");
+            $("input[name='status']").prop('checked', false);
         }
         // Cancel field
         $(document).on('click', '#roleCancelBtn', function(){
@@ -417,6 +627,15 @@
             }
     
         });
+
+        // on change role for user data pass
+        $(document).on('change', '#select_user_role', function(){
+            var role = $(this).val();
+            $("#user_role").val(role);
+        });
+
+        // Edit Role Permission
+        
         
     });
 </script>

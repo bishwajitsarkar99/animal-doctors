@@ -70,7 +70,7 @@
                         <td class="td_border font padding" tabindex="0">
                             <span class="condition">${row.role_condition}</span>
                         </td>
-                        <td class="td_border font padding ${textColor}" tabindex="0">
+                        <td class="status-td font padding ${textColor}" tabindex="0">
                             <span class="promt">${statusText}</span>
                             <span class="permission-plate ps-1 pe-1 ms-1 ${statusBg} ${statusClass}">${statusSinge}</span>
                         </td>
