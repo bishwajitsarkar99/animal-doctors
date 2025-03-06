@@ -5,13 +5,11 @@
             <!-- Modal Header -->
             <div class="modal-header file_manager_modal_header  filemanager_modal_header">
                 <div class="filemanager-skeletone" id="fileMang"></div>
-                <span class="modal-title admin_title font-effect-emboss" id="fileModalLabel"></span>
-                <p class="input_search_bar_skeletone" id="srchbarskle"></p>
-                <input type="search" class="form-control form-control-sm srch_name" name="folder_name" placeholder="Search Folder Name" id="srch_name">
-                <span class="show__table">
-                    <input type="checkbox" class="ms-2 table-btn" id="tableCheck" data-bs-toggle="tooltip" data-bs-placement="right" title="Folder-Table" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                    <span class="ms-2 me-2 table-label" style="color:#1a1a1acf;font-weight:700;">Table </span>
-                </span>
+                <span class="modal-title admin_title" id="fileModalLabel"></span>
+                <div class="header__box me-2">
+                    <p class="input_search_bar_skeletone" id="srchbarskle"></p>
+                    <input type="search" class="form-control form-control-sm srch_name" name="folder_name" placeholder="Search Folder Name" id="srch_name">
+                </div>
                 <button type="button" class="btn-close btn-btn-sm btn__close" data-bs-dismiss="modal" aria-label="Close" 
                     data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" 
                     data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
@@ -19,6 +17,25 @@
             </div>
             <!-- Modal Body -->
             <div class="modal-body file-manager-body">
+                <div class="row mb-1">
+                    <div class="col-xl-3">
+                        <span class="show__table">
+                            <span class="table-label" style="color:#1a1a1acf;font-weight:700;">
+                                <i class="fa-solid fa-database" style="color:#0056b3;">‌</i>
+                            </span>
+                            <span class="file-manager-label">
+                                Table : 
+                                <input type="checkbox" class="table-btn ms-1" id="tableCheck" data-bs-toggle="tooltip" data-bs-placement="top" title="Folder-Table" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="col-xl-9">
+                        <!-- ========== Folder-Data-Table =========== -->
+                        <table class="ord_table center border-1 table-display-hidden" id="myFolderTable">
+                            <tbody class="bg-transparent" id="folder_data_table"></tbody>
+                        </table>
+                    </div>
+                </div>
                 <div class="card card-body form-control-sm file-manager-card">
                     <!-- Create Folder Form -->
                     <form id="createFolderForm">
@@ -30,26 +47,22 @@
                                     <p class="input_labels_skeletone" id="labelSkele"></p>
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" class="form-control form-control-sm edit_folder_name" id="folderName" name="folder_name" placeholder="Folder Name" required>
-                                    <input type="hidden" id="folder_id">
-                                    <p class="input_field_one_skeletone" id="inputFieldOne"></p>
+                                    <input type="text" class="form-control form-control-sm edit_folder_name border-color-light" id="folderName" name="folder_name" placeholder="Folder Name" required>
                                     <span id="savForm_validation"></span><span id="updateForm_validation"></span>
-                                    <!-- ========== Folder-Data-Table =========== -->
-                                    <table class="ord_table center border-1 table-display-hidden mt-2" id="myFolderTable">
-                                        <tbody class="bg-transparent" id="folder_data_table"></tbody>
-                                    </table>
+                                    <span class="input_field_one_skeletone" id="inputFieldOne"></span>
+                                    <input type="hidden" id="folder_id">
                                 </div>
-                                <div class="col-3">
+                                <div class="col-3 pb-2">
                                     <div class="new_btn_skeletone" id="newBtnMode"></div>
-                                    <button type="button" class="btn btn-sm btn-success new_display" id="createFolderBtn" style="line-height: 1px;">
-                                        <span class="create-icon spinner-border spinner-border-sm text-white create-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                                    <button type="button" class="btn btn-sm btn-success" id="createFolderBtn" style="line-height: 1px;" hidden>
+                                        <span class="create-icon spinner-border spinner-border-sm text-white create-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status"></span>
                                         <span class="btn-text">Create</span>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-success new_display" id="updateFolderBtn" style="line-height: 1px;">
-                                        <span class="update-folder-icon spinner-border spinner-border-sm text-white update-folder-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                                    <button type="button" class="btn btn-sm btn-success" id="updateFolderBtn" style="line-height: 1px;" hidden>
+                                        <span class="update-folder-icon spinner-border spinner-border-sm text-white update-folder-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status"></span>
                                         <span class="btn-text">Update</span>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-danger new_display" id="cancelFolderBtn" style="line-height: 1px;">
+                                    <button type="button" class="btn btn-sm btn-danger" id="cancelFolderBtn" style="line-height: 1px;" hidden>
                                         <span class="btn-text">Cancel</span>
                                     </button>
                                 </div>
@@ -77,7 +90,7 @@
                             <div class="col-3">
                                 <div class="upload_btn_skeletone" id="uploadBtnMode"></div>
                                 <button type="button" class="btn btn-sm btn-success" style="line-height: 1px;" id="uploadBtn">
-                                    <span class="upload-icon spinner-border spinner-border-sm text-white upload-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                                    <span class="upload-icon spinner-border spinner-border-sm text-white upload-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status"></span>
                                     <span class="btn-text">Upload</span>
                                 </button>
                             </div>
@@ -102,7 +115,7 @@
                                 <!-- Button to trigger fetching files -->
                                 <div class="searh_btn_skeletone" id="srchBtnMode"></div>
                                 <button type="button" class="btn btn-sm btn-success" style="line-height: 1px;" id="searchFile">
-                                    <span class="search-icon spinner-border spinner-border-sm text-white search-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+                                    <span class="search-icon spinner-border spinner-border-sm text-white search-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status"></span>
                                     <span class="btn-text">Search</span>
                                 </button>
                             </div>
@@ -156,7 +169,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content small_modal delete-folder-modal" id="admin_modal_box">
             <div class="modal-header folder_modal_header profilesetting_modal_header">
-                <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
+                <h5 class="modal-title admin_title ps-1 pe-1" id="staticBackdropLabel">
                     Delete Folder
                 </h5>
                 <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" 
@@ -169,10 +182,7 @@
 
                 <div class="row profile-heading folder-modal-body pb-3">
                     <div class="col-xl-12">
-                        <div class="form-group delete_content" id="load_id">
-                            <span>
-                                <div id="active_loader" class="loader_chart mt-1"></div>
-                            </span>
+                        <div class="form-group" id="load_id">
                             <label class="label_user_edit" id="cate_delete" for="id">Folder-ID : </label>
                             <span id="cat_id"> <input type="text" class="mt-3 update_id id" id="delete_folder_id" readonly><br></span>
                             <span class="label_user_edit" id="cate_delete2">Are you sure, Would you like to delete this folder, permanently?</span>
@@ -181,12 +191,12 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer profile_modal_footer">
-                <button type="button" class="btn btn-sm modal_button delet_btn_folder btn_focus" id="deleteLoader">
-                    <span class="delete-icon spinner-border spinner-border-sm text-white delete-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
+            <div class="modal-footer profile_modal_footer header__box">
+                <button type="button" class="btn btn-sm modal_button delete_cancel" id="cate_delete3" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-sm modal_button delet_btn_folder" id="deleteLoader">
+                    <span class="delete-icon spinner-border spinner-border-sm text-white delete-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status"></span>
                     <span class="btn-text">Delete</span>
                 </button>
-                <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete3" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>

@@ -241,8 +241,8 @@ button.role_cancel_button {
     font-size: 12px;
     line-height: .1;
     text-transform: capitalize;
-    letter-spacing: 0.5px;
-    font-weight: 600;
+    letter-spacing: 1px;
+    font-weight: 700;
     margin-top: -0.3em;
     transition: border-color 0.3sease, background-color 0.3sease;
     border: none;
@@ -253,6 +253,66 @@ button.role_cancel_button:hover{
     background-color: #ff533c;
     color: white;
     transition: border-color 0.3sease, background-color 0.3sease;
+}
+.btn-text-hovering{
+    color: white;
+    animation-name: btnTextHovering;
+    animation-duration: 2s;
+    animation-delay: 0ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-play-state: running;
+}
+@keyframes btnTextHovering {
+    0%{
+        color: cyan;
+    }
+    50%{
+        color: darkcyan;
+    }
+    100%{
+        color: white;
+    }
+}
+.delete-text-hovering{
+    color: white;
+    animation-name: deleteHovering;
+    animation-duration: 2s;
+    animation-delay: 0ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-play-state: running;
+}
+@keyframes deleteHovering {
+    0%{
+        color: orangered;
+    }
+    50%{
+        color: red;
+    }
+    100%{
+        color: white;
+    }
+}
+.cancel-text-hovering{
+    color: white;
+    animation-name: cancelHovering;
+    animation-duration: 2s;
+    animation-delay: 0ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-play-state: running;
+}
+@keyframes cancelHovering {
+    0%{
+        color: red;
+    }
+    50%{
+        color: red;
+    }
+    100%{
+        color: white;
+    }
 }
 th#role_permission_table_label_sn {
     text-align: center;
@@ -303,10 +363,6 @@ tr#table_header {
     border-left: 1px solid #cfccccc7;
     border-right: 1px solid #cfccccc7;
     background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
-}
-span.create-sm-btn-text {
-    text-decoration: underline 2px solid;
-    text-decoration-color: cyan;
 }
 
 

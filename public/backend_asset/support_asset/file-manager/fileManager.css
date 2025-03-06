@@ -28,7 +28,6 @@ span#fileModalLabel{
     color: #1a1a1acf;
     font-family: var(--font-family-features);
     font-weight: 700;
-    font-style: italic;
 }
 .file-manager-body {
     background: transparent;
@@ -79,16 +78,23 @@ input#file {
     padding: 0.20rem 0.5rem;
     border-radius: 0.25rem;
 }
+.header__box{
+    display: flex;
+    justify-content: space-between;
+}
+.border-color-light{
+    border: 1px solid #e9e9e9;
+}
 input#folderName {
     box-shadow: none;
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 0.75rem;
+    font-weight: 700;
     color: black;
-    border: 1px solid #e9e9e9;
     font-family: var(--font-family-features);
     min-height: calc(1em + 0.5rem + 1px);
     padding: 0.20rem 0.5rem;
     border-radius: 0.25rem;
+    letter-spacing: 1px;
 }
 input#folder {
     box-shadow: none;
@@ -386,7 +392,7 @@ input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,s
     content: 'File-Manager';
 }
 .upload_lbel_display::after{
-    content: 'Uploaded Folder :';
+    content: 'Upload Folder :';
 }
 .lb-display::after{
     content: 'Folder-Name :';
@@ -465,29 +471,33 @@ input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,s
 }
 .srch_name{
     width: 361px;
-    font-weight: 600;
-    margin-left: 80px;
+    font-weight: 700;
+    margin-left: 10px;
     border-radius: 10px;
     text-align: center;
     background-color: #fff;
-    border-color: #bbbbbb;
+    border-color: #bbbbbb2e;
     font-family: var(--font-family-features);
+    padding: 0.15rem 0.5rem;
+    height: 25px;
+    font-size: 0.70rem;
+    letter-spacing: 1px;
 }
 .srch_bg{
     animation-name: fontColor;
-    animation-duration: 5s;
+    animation-duration: 2s;
     animation-timing-function: ease;
     animation-iteration-count: infinite;
 }
 @keyframes fontColor{
     0%{
-        color: bisque;
+        color: rgb(54, 54, 219);
     }
     50%{
         color: blue;
     }
     100%{
-        color: orangered;
+        color: #0056b3;
     }
 }
 .mini-card{
@@ -526,10 +536,22 @@ ul.mini-box{
 .delete-folder-modal{
     border: none;
 }
+span.label_user_edit {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: black;
+}
 input#delete_folder_id {
     border: none;
     outline: none;
     box-shadow: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: black;
 }
 button#uploadBtn,button#createFolderBtn,button#updateFolderBtn,button#searchFile {
     border: 1px solid #007bff;
@@ -549,7 +571,7 @@ button#uploadBtn,button#createFolderBtn,button#updateFolderBtn,button#searchFile
     letter-spacing: 1px;
     margin-top: 0;
     text-decoration: none;
-    font-variant: all-petite-caps;
+    font-style: italic;
 }
 button#uploadBtn:hover,button#createFolderBtn:hover,button#updateFolderBtn:hover,button#searchFile:hover{
     background-image:  linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);
@@ -580,13 +602,53 @@ button#cancelFolderBtn{
     letter-spacing: 1px;
     margin-top: 0;
     text-decoration: none;
-    font-variant: all-petite-caps;
+    font-style: italic;
 }
-button#cancelFolderBtn:hover{
+button#cancelFolderBtn:hover,button#cate_delete3:hover,button#deleteLoader:hover{
     background-image: linear-gradient(90deg, red, transparent);
     border: 1px solid orangered;
     color: white !important;
     transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+button#cate_delete3{
+    border-color: orangered;
+    background-color: orangered;
+    color: white !important;
+    margin-top: 5px !important;
+    padding: 3px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 0;
+    text-decoration: none;
+    font-style: italic;
+}
+button#deleteLoader{
+    border-color: rgb(179, 48, 0);
+    background-color: rgb(179, 48, 0);
+    color: white !important;
+    margin-top: 5px !important;
+    padding: 3px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 0;
+    text-decoration: none;
+    font-style: italic;
 }
 button#searchFile{
     margin-top: 18px;
@@ -723,9 +785,8 @@ button#deleteBtnFolder,button#edtBtnFolder {
     line-height: 1;
 }
 .folder_modal_header {
-    background-color: #f1fff1;
+    background-color: aliceblue;
     box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
-    border-bottom: double silver;
 }
 .alert_show_errors{
     color: orangered;

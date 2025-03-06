@@ -55,19 +55,19 @@
           <div class="col-xl-5"></div>
           <div class="col-xl-3 act_bx">
             <button type="button" class="btn btn-sm role_create_button btn_key" id="updateBtn" disabled>
-              <span class="update-btn-text">Update</span>
+              <span class="update-btn-text capture-update">Update</span>
               <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" hidden></span>
             </button>
             <button type="button" class="btn btn-sm role_delete_button btn_key" id="roleDeleteBtn" disabled>
-              <span class="delete-btn-text">Delete</span>
+              <span class="delete-btn-text capture-delete">Delete</span>
               <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" hidden></span>
             </button>
             <button type="button" class="btn btn-sm role_create_button btn_key" id="createBtn" disabled>
-              <span class="create-sm-btn-text">Save</span>
+              <span class="create-sm-btn-text capture-save">Save</span>
               <span class="create-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" hidden></span>
             </button>
             <button type="button" class="btn btn-sm role_cancel_button btn_key" id="roleCancelBtn">
-              <span class="delete-btn-text">Cancel</span>
+              <span class="delete-btn-text capture-cancel">Cancel</span>
               <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" hidden></span>
             </button>
           </div>

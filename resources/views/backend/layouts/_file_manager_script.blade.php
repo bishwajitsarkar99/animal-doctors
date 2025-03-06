@@ -32,7 +32,7 @@
                     $("#labelSkele").addClass('input_labels_skeletone');
                     $("#lab_disp").removeClass('lb-display');
                     $("#newBtnMode").addClass('new_btn_skeletone');
-                    $("#createFolderBtn").addClass('new_display');
+                    $("#createFolderBtn").attr('hidden', true);
                     $("#fldSkele").addClass('input_labels_skeletone');
                     $("#lbNme").removeClass('select_lb_display');
                     $("#inputFieldTwo").addClass('input_field_two_skeletone');
@@ -75,7 +75,7 @@
                         $("#labelSkele").removeClass('input_labels_skeletone');
                         $("#lab_disp").addClass('lb-display');
                         $("#newBtnMode").removeClass('new_btn_skeletone');
-                        $("#createFolderBtn").removeClass('new_display');
+                        $("#createFolderBtn").removeAttr('hidden');
                         $("#fldSkele").removeClass('input_labels_skeletone');
                         $("#lbNme").addClass('select_lb_display');
                         $("#inputFieldTwo").removeClass('input_field_two_skeletone');
@@ -105,7 +105,7 @@
                         $(".btn__close").removeClass('skeleton');
 
                     });
-                }, 3000);
+                }, 2500);
             }, 1500);
         });
         
@@ -128,6 +128,20 @@
                     alert(response.success);
                 }
             });
+        });
+        // Input Field Handel
+        $(document).on('keyup', '#folderName', function(){
+            var value = $(this).val();
+            if(value !==''){
+                $('#folderName').removeClass('is-invalid');
+                $('#folderName').addClass('is-valid');
+                $("#folderName").removeClass('border-color-light');
+                $('#savForm_validation').html("");
+            }else if(value ==''){
+                $('#folderName').removeClass('is-invalid');
+                $('#folderName').removeClass('is-valid');
+                $("#folderName").addClass('border-color-light');
+            }
         });
         // Create Folder
         $(document).on('click', '#createFolderBtn', function(e) {
@@ -152,13 +166,9 @@
                         $.each(response.errors, function(key, err_value) {
                             $('#savForm_validation').html("");
                             $('#savForm_validation').addClass('alert_show_errors');
-                            $('#savForm_validation').append('<span class="error_val">' + err_value + '</span>');
+                            $('#savForm_validation').append('<span class="">' + err_value + '</span>');
                             $('#savForm_validation').fadeIn();
-                            setTimeout(() => {
-                                requestAnimationFrame(() => {
-                                    $('#savForm_validation').fadeOut();
-                                });
-                            }, 3000);
+                            $('#folderName').addClass('is-invalid');
                         });
                     } else {
                         $('#savForm_validation').html("");
@@ -198,10 +208,10 @@
             }
             return [...rows].map((row, key) => {
                 return `
-                    <tr class="user-table-row" id="cat_td" key="${key}">
+                    <tr class="user-table-row" style="font-weight:600;background: white;" id="cat_td" key="${key}">
                         <td class="sn border_ord" id="cat_td2">${row.id}</td>
                         <td class="txt_ ps-1 center" id="cat_td3">
-                            <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd mb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
+                            <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd mb-1" style="margin-top: 3px;" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
                             <ul class="dropdown-menu action mini-box ms-4 pe-3">
                                 <li class="upd cgy ps-1">
                                     <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="edtBtnFolder" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip"  data-bs-placement="top" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
@@ -230,7 +240,7 @@
                 success: function(response) {
                     $("#folder_data_table").html(table_rows(response.data));
                     // Initialize tooltips after appending the elements
-                    // $('[data-bs-toggle="tooltip"]').tooltip();
+                    $('[data-bs-toggle="tooltip"]').tooltip();
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
@@ -244,18 +254,21 @@
         });
         // show table
         $(document).on('click', '#tableCheck', function() {
-            $("#myFolderTable").toggleClass('table-display-hidden');
-            $('.table-label').toggleClass('table-mode');
-            $('.color-mode').toggleClass('color-mode');
-            $('.table-btn').toggleClass('table-classic');
-
+            if($(this).is(':checked')){
+                $("#myFolderTable").removeClass('table-display-hidden').show('slow');
+            } else {
+                $("#myFolderTable").addClass('table-display-hidden').hide('slow');
+            }
         });
         // Edit Folder Name
         $(document).on('click', '#edtBtnFolder', function(event) {
             event.preventDefault();
-            $("#createFolderBtn").hide('slow');
-            $("#updateFolderBtn").show('slow');
-            $("#cancelFolderBtn").show('slow');
+            $("#createFolderBtn").attr('hidden', true);
+            $("#createFolderBtn").fadeOut();
+            $("#updateFolderBtn").removeAttr('hidden');
+            $("#updateFolderBtn").fadeIn();
+            $("#cancelFolderBtn").removeAttr('hidden');
+            $("#cancelFolderBtn").fadeIn();
             $(".edit_folder_name").addClass('update-folder-name');
             var folder_id = $(this).val();
             $.ajax({
@@ -276,9 +289,9 @@
         // Update Folder Name
         $(document).on('click', '#updateFolderBtn', function(e) {
             e.preventDefault();
-            $("#createFolderBtn").show('slow');
+            $("#createFolderBtn").removeAttr('hidden');
             $(this).hide('slow');
-            $("#cancelFolderBtn").hide('slow');
+            $("#cancelFolderBtn").attr('hidden', true);
 
             var folder_id = $('#folder_id').val();
             var data = {
@@ -367,9 +380,12 @@
         });
         // Cancel Edit
         $(document).on('click', '#cancelFolderBtn', function() {
-            $("#createFolderBtn").show('slow');
-            $("#updateFolderBtn").hide('slow');
-            $("#cancelFolderBtn").hide('slow');
+            $("#createFolderBtn").removeAttr('hidden');
+            $("#createFolderBtn").fadeIn();
+            $("#updateFolderBtn").attr('hidden', true);
+            $("#updateFolderBtn").fadeOut();
+            $("#cancelFolderBtn").attr('hidden', true);
+            $("#cancelFolderBtn").fadeOut();
             $("#folderName").val("");
         });
         // File Upload AJAX Request
@@ -692,7 +708,6 @@
             $(this).attr('disabled', true);
 
             $(".create-btn").addClass('create-classic');
-
             setTimeout(() => {
                 requestAnimationFrame(() => {
                     $('.create-icon').addClass('create-hidden');

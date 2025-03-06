@@ -2,44 +2,51 @@
 <div class="modal fade" id="profile_form" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
   <div class="modal-dialog">
     <div class="modal-content" id="admin_modal_box">
-      <div class="modal-header profile_modal_header profilesetting_modal_header text-fade-animation"style="background: transparent;background-image: repeating-linear-gradient(55deg, #5fd3cd7d, transparent 1px);border-bottom: double white;">
+      <div class="modal-header profile_modal_header profilesetting_modal_header text-fade-animation"style="border-bottom: double white;background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);">
         @if(auth()->user()->role ==0)
-          <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:black;">
+          <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+          <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
             {{Auth::user()->name}} Profile
           </h5>
         @elseif(auth()->user()->role ==1)
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:black;">
+        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+          <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
           {{Auth::user()->name}} Profile
         </h5>
         @elseif(auth()->user()->role ==2)
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:black;">
+        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+          <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
           {{Auth::user()->name}} Profile
         </h5>
         @elseif(auth()->user()->role ==3)
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:black;">
+        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+          <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
           {{Auth::user()->name}} Profile
         </h5>
         @elseif(auth()->user()->role ==5)
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:black;">
+        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+          <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
           {{Auth::user()->name}} Profile
         </h5>
         @elseif(auth()->user()->role ==6)
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:black;">
+        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+          <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
           {{Auth::user()->name}} Profile
         </h5>
         @elseif(auth()->user()->role ==7)
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:black;">
+        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+          <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
           {{Auth::user()->name}} Profile
         </h5>
         @endif
         <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'></button>
       </div>
 
-      <div class="modal-body profile-body pb-3" style="background: transparent;background-image: repeating-linear-gradient(55deg, #5fd3cd7d, transparent 1px);">
+      <div class="modal-body profile-body pb-3">
         <div class="row profile-heading">
           <div class="flex justify-center sm:items-center sm:justify-between mb-3" id="pro_image">
             <span class="image-box">
-              <img style="width: 150px; height:150px;border-radius: 3%;" class="profile" src="/storage/image/user-image/{{auth()->user()->image}}" alt="profile-image">
+              <img class="profile" src="/storage/image/user-image/{{auth()->user()->image}}" style="width: 120px; height:120px;border-radius: 3%;" alt="profile-image">
             </span>
           </div>
         </div>
@@ -47,7 +54,8 @@
           <div class="row">
             <div class="col-xl-12 first_box">
               <div class="company-section" id="company_info">
-                <span>Company Information</span>
+                <i class="fa-solid fa-layer-group" style="color:#585858;">‌</i>
+                <span>Company Information :</span>
               </div>
               <div class="company-information" style="background: white;">
                 <label id="pro_com_name" class="mt-1" for="company_name">Company : {{setting('company_name')}}</label><br>
@@ -59,7 +67,8 @@
             </div>
             <div class="col-xl-12 second_box">
               <div class="company-section" id="personal_info">
-                <span>Personal Information</span>
+                <i class="fa-solid fa-layer-group" style="color:#585858;">‌</i>
+                <span>Personal Information :</span>
               </div>
               <div class="company-information" style="background: white;">
                 <span id="info">
@@ -82,7 +91,8 @@
             </div>
             <div class="col-xl-12 third_box">
               <div class="company-section" id="branch_info">
-                <span>Branch Information</span>
+                <i class="fa-solid fa-layer-group" style="color:#585858;">‌</i>
+                <span>Branch Information :</span>
               </div>
               <div class="company-information" style="background: white;">
                 <span id="info">
@@ -121,7 +131,8 @@
             </div>
             <div class="col-xl-12 fourth_box">
               <div class="company-section" id="role_info">
-                <span>Role Information</span>
+                <i class="fa-solid fa-layer-group" style="color:#585858;">‌</i>
+                <span>Role Information :</span>
               </div>
               <div class="company-information" style="background: white;">
                 <span id="info2">
@@ -133,7 +144,7 @@
           </div>
         </div>
       </div>
-      <div class="modal-footer profile_modal_footer" style="background-image: repeating-linear-gradient(55deg, #5fd3cd7d, transparent 1px)"> </div>
+      <div class="modal-footer profile_modal_footer" style="background-image:linear-gradient(to bottom, rgb(221 216 216 / 47%) 0%, rgba(0, 0, 0, 0.05) 100%);"> </div>
     </div>
   </div>
 </div>

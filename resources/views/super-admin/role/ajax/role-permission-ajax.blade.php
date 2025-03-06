@@ -1,6 +1,31 @@
 <script type="module">
     import {activeTableRow} from "/module/module-min-js/helper-function-min.js";
     $(document).ready(function(){
+        // Button Focus Action
+        $(document).on('click', '#createBtn', function(){
+            $('.capture-save').addClass('btn-text-hovering');
+            setTimeout(() => {
+                $('.capture-save').removeClass('btn-text-hovering');
+            }, 700);
+        });
+        $(document).on('click', '#updateBtn', function(){
+            $('.capture-update').addClass('btn-text-hovering');
+            setTimeout(() => {
+                $('.capture-update').removeClass('btn-text-hovering');
+            }, 700);
+        });
+        $(document).on('click', '#roleDeleteBtn', function(){
+            $('.capture-delete').addClass('delete-text-hovering');
+            setTimeout(() => {
+                $('.capture-delete').removeClass('delete-text-hovering');
+            }, 700);
+        });
+        $(document).on('click', '#roleCancelBtn', function(){
+            $('.capture-cancel').addClass('cancel-text-hovering');
+            setTimeout(() => {
+                $('.capture-cancel').removeClass('cancel-text-hovering');
+            }, 700);
+        });
         // ACtive table row background
         $(document).on('click keydown', 'tr.table-row', function (event) {
             if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
@@ -648,6 +673,7 @@
             var role = $('.edit_select_user_role').val();
             var permission = $("input[name='status']:checked").val();
 
+            
             
         });
         

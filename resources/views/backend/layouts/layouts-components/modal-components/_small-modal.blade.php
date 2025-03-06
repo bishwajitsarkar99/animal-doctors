@@ -28,7 +28,7 @@
     </button>
     </div>
     <div class="modal-body" id="logoutModal_body" style="background: transparent;background-image: repeating-linear-gradient(55deg, #5fd3cd7d, transparent 1px);border-bottom: double white;">
-        <p class="admin_paragraph" id="logout_text_message" style="color:black;font-weight:700;">{{auth()->user()->name}}, {{__('translate.do you want to logout')}} ?</p>
+        <p class="admin_paragraph" id="logout_text_message" style="font-weight:700;">{{auth()->user()->name}}, {{__('translate.do you want to logout')}} ?</p>
         <div class="modal fade" id="loader_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content small_modal loader_modal" style="border:none;" id="admin_modal_box">
