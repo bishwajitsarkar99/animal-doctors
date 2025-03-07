@@ -24,8 +24,10 @@
                                 <i class="fa-solid fa-database" style="color:#0056b3;">‌</i>
                             </span>
                             <span class="file-manager-label">
-                                Table : 
                                 <input type="checkbox" class="table-btn ms-1" id="tableCheck" data-bs-toggle="tooltip" data-bs-placement="top" title="Folder-Table" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                            </span>
+                            <span class="ms-1" id="refresh" data-bs-toggle="tooltip" data-bs-placement="top" title="Refresh" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                                <i class="fa-solid fa-refresh bf" style="color:#0056b3;">‌</i>
                             </span>
                         </span>
                     </div>
@@ -47,9 +49,9 @@
                                     <p class="input_labels_skeletone" id="labelSkele"></p>
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" class="form-control form-control-sm edit_folder_name border-color-light" id="folderName" name="folder_name" placeholder="Folder Name" required>
+                                    <input type="text" class="form-control form-control-sm edit_folder_name border-color-light" id="folderName" name="folder_name" placeholder="Folder Name">
                                     <span id="savForm_validation"></span><span id="updateForm_validation"></span>
-                                    <span class="input_field_one_skeletone" id="inputFieldOne"></span>
+                                    <p class="input_field_one_skeletone" id="inputFieldOne"></p>
                                     <input type="hidden" id="folder_id">
                                 </div>
                                 <div class="col-3 pb-2">
@@ -78,13 +80,14 @@
                             </div>
                             <div class="col-6">
                                 @csrf
-                                <select class="form-select form-select-sm" id="folder" name="folder_name" required>
+                                <select class="form-select form-select-sm border-color-light" id="folder" name="folder_name">
                                     <option value="" disabled selected> Select Folder </option>
                                 </select>
-                                <span id="upload_error" class="alert alert-danger" style="display: none;"></span>
+                                <span id="upload_error"></span>
                                 <!-- <span id="upload_error"></span> -->
                                 <p class="input_field_two_skeletone" id="inputFieldTwo"></p>
-                                <input type="file" class="form-control form-control-sm mt-2" name="file" required id="file">
+                                <input type="file" class="form-control form-control-sm mt-2" name="file" id="file">
+                                <span id="upload_error2"></span>
                                 <p class="input_field_three_skeletone" id="inputFieldThree"></p>
                             </div>
                             <div class="col-3">
@@ -105,11 +108,11 @@
                             </div>
                             <div class="col-6">
                                 @csrf
-                                <select class="form-select form-select-sm" id="folderSelect" name="folder_name" required>
+                                <select class="form-select form-select-sm border-color-light" id="folderSelect" name="folder_name">
                                     <option value="" disabled selected> Select Folder </option>
                                 </select>
+                                <span id="search_error"></span>
                                 <p class="select_field_skeletone" id="selectField"></p>
-    
                             </div>
                             <div class="col-3">
                                 <!-- Button to trigger fetching files -->
@@ -150,15 +153,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" id="uploadedFilesList">
-    
-                        </div>
+                        <div class="row" id="uploadedFilesList"></div>
                     </div>
                 </div>
             </div>
             <!-- Modal Footer -->
             <div class="modal-footer profile_modal_footer file-manager-footer">
-                <p class="ps-1"><span id="successMessage"></span></p>
+                <span id="successMessage"></span>
             </div>
         </div>
     </div>

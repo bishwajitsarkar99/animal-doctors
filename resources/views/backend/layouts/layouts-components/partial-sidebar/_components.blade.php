@@ -1,11 +1,11 @@
 <span class="{{setting('components_moduel_display')}}">
     <a class="nav-link collapsed lay_nav font_size com_button {{setting('components_moduel_display')}}" data-bs-toggle="collapse" data-bs-target="#components" aria-expanded="false" aria-controls="components">
         <span class="collapsed">
-            <i class="fa-solid fa-plus" style="color:#ffff;" id="plus_component_link"></i>
-            <i class="fa-solid fa-minus" style="color:#ffff;" id="minus_component_link" hidden></i>
+            <!-- <i class="fa-solid fa-plus" style="color:#ffff;" id="plus_component_link"></i>
+            <i class="fa-solid fa-minus" style="color:#ffff;" id="minus_component_link" hidden></i> -->
         </span>
         <div class="sb-nav-link-icon {{setting('components_moduel_display')}}">
-            <i class="fa-solid fa-folder-open fa-beat" style="font-size: 14px;color:white;"></i>
+            <!-- <i class="fa-solid fa-folder-open fa-beat" style="font-size: 14px;color:white;"></i> -->
         </div>
         <span class="{{setting('components_moduel_display')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{setting('components_moduel_title')}}</span>
         <div class="sb-sidenav-collapse-arrow {{setting('components_moduel_display')}}">▼</div>

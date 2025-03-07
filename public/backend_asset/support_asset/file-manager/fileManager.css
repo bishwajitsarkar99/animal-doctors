@@ -47,8 +47,8 @@ span#fileModalLabel{
 }
 .file-manager-card {
     border: none;
-    --mdb-box-shadow-color-rgb: 0, 0, 0 !important;
-    box-shadow: 0 4px 9px -4px rgba(0, 0, 0, 0.35) !important;
+    /* --mdb-box-shadow-color-rgb: 0, 0, 0 !important;
+    box-shadow: 0 4px 9px -4px rgba(0, 0, 0, 0.35) !important; */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 .src-bg{
@@ -72,11 +72,16 @@ input#file {
     font-weight: 600;
     color: black; 
     cursor: pointer;
-    border: 1px solid #e9e9e9;
     font-family: var(--font-family-features);
     min-height: calc(1em + 0.5rem + 1px);
     padding: 0.20rem 0.5rem;
     border-radius: 0.25rem;
+}
+.font_search {
+    font-family: var(--font-family-features);
+    font-size: 14px;
+    font-weight: 600;
+    color: #b1b1b1;
 }
 .header__box{
     display: flex;
@@ -113,11 +118,29 @@ select#folder{
     font-weight: 600;
     color: black; 
     cursor: pointer;
-    border: 1px solid #e9e9e9;
     font-family: var(--font-family-features);
     min-height: calc(1em + 0.5rem + 1px);
     padding: 0.20rem 0.5rem;
     border-radius: 0.25rem;
+}
+#refresh{
+    cursor: pointer;
+}
+.refresh{
+    animation: order_ring_hover;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    opacity: 1;
+}
+@keyframes order_ring_hover {
+    50% {
+        transform: rotate(0deg);
+    }
+    
+    100% {
+        transform: rotate(360deg);
+    }
 }
 select#folderSelect {
     box-shadow: none;
@@ -125,7 +148,6 @@ select#folderSelect {
     font-weight: 600;
     color: black; 
     cursor: pointer;
-    border: 1px solid #e9e9e9;
     margin-top: 16px;
     font-family: var(--font-family-features);
     min-height: calc(1em + 0.5rem + 1px);
@@ -401,7 +423,7 @@ input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,s
     font-size: 14px;
     font-weight: 600;
     font-variant: petite-caps;
-    color: #b1b1b1;
+    color: #7a7a7a;
 }
 .select_lb_display::after{
     content: 'Folder-Name :';
@@ -473,7 +495,7 @@ input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,s
     width: 361px;
     font-weight: 700;
     margin-left: 10px;
-    border-radius: 10px;
+    border-radius: 6px;
     text-align: center;
     background-color: #fff;
     border-color: #bbbbbb2e;

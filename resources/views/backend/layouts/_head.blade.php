@@ -146,7 +146,7 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/dashboard-css/product-score-css/white.css" id="dashboardProdSelect">
 <!-- ================ Admin Panel Trapezoid ================= -->
 @if(auth()->user()->role ==1)
-<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/trapezoid-css/gray.css" id="sidebarTrapezoidlink">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/trapezoid-css/white.css" id="sidebarTrapezoidlink">
 @endif
 @if(auth()->user()->role ==2)
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/themes-css/trapezoid-css/gray.css" id="sidebarTrapezoidlink">

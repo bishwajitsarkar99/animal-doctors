@@ -4,37 +4,37 @@
     <div class="modal-content" id="admin_modal_box">
       <div class="modal-header profile_modal_header profilesetting_modal_header text-fade-animation"style="border-bottom: double white;background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);">
         @if(auth()->user()->role ==0)
-          <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+          <h6 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;font-size:15;">
           <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
             {{Auth::user()->name}} Profile
-          </h5>
+          </h6>
         @elseif(auth()->user()->role ==1)
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;font-size:15;">
           <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
           {{Auth::user()->name}} Profile
         </h5>
         @elseif(auth()->user()->role ==2)
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;font-size:15;">
           <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
           {{Auth::user()->name}} Profile
         </h5>
         @elseif(auth()->user()->role ==3)
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;font-size:15;">
           <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
           {{Auth::user()->name}} Profile
         </h5>
         @elseif(auth()->user()->role ==5)
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;font-size:15;">
           <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
           {{Auth::user()->name}} Profile
         </h5>
         @elseif(auth()->user()->role ==6)
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;font-size:15;">
           <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
           {{Auth::user()->name}} Profile
         </h5>
         @elseif(auth()->user()->role ==7)
-        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;">
+        <h5 class="modal-title admin_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel" style="color:#0a0909;font-size:15;">
           <i class="fa-solid fa-rss" style="color:#585858;">‌</i>
           {{Auth::user()->name}} Profile
         </h5>

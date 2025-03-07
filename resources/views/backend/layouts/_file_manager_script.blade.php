@@ -7,6 +7,37 @@
             $("#access_modal_box").addClass('loader_area');
             $("#processModal_body").removeClass('loading_body_area');
 
+            // folder-name dropdown menu
+            $('#folderSelect').removeClass('is-invalid');
+            $('#folderSelect').removeClass('is-valid');
+            $('#folderSelect').addClass('border-color-light');
+            $('#search_error').empty();
+            $('#search_error').removeClass("alert_show_errors ps-1");
+            // updload-folder dropdown menu
+            $('#folder').removeClass('is-invalid');
+            $('#folder').removeClass('is-valid');
+            $('#folder').addClass('border-color-light');
+            $('#upload_error').empty();
+            $('#upload_error').removeClass("alert_show_errors ps-1");
+            // chose-file
+            $('#file').removeClass('is-invalid');
+            $('#file').removeClass('is-valid');
+            $('#file').addClass('border-color-light');
+            $('#upload_error2').empty();
+            $('#file').val("");
+            $('#upload_error2').removeClass("alert_show_errors ps-1");
+            // input field
+            $('#savForm_validation').html("");
+            $('#savForm_validation').removeClass("alert_show_errors");
+            $('#folderName').removeClass('is-invalid');
+            $('#folderName').removeClass('is-valid');
+            $("#folderName").addClass('border-color-light');
+            // search file
+            $("#filesSelect").html("");
+            // Table
+            $("#myFolderTable").addClass('table-display-hidden');
+            $("#tableCheck").prop('checked', false);
+            $("#uploadedFilesList").html("");
             setTimeout(() => {
                 requestAnimationFrame(() => {
                     $("#accessconfirmbranch").modal('hide');
@@ -105,7 +136,7 @@
                         $(".btn__close").removeClass('skeleton');
 
                     });
-                }, 2500);
+                }, 2000);
             }, 1500);
         });
         
@@ -146,6 +177,30 @@
         // Create Folder
         $(document).on('click', '#createFolderBtn', function(e) {
             e.preventDefault();
+            // input
+            $('#folderName').removeClass('is-invalid');
+            $('#folderName').removeClass('is-valid');
+            $('#folderName').addClass('border-color-light');
+            // folder-name dropdown menu
+            $('#folderSelect').removeClass('is-invalid');
+            $('#folderSelect').removeClass('is-valid');
+            $('#folderSelect').addClass('border-color-light');
+            $('#search_error').removeClass("alert_show_errors ps-1");
+            $('#search_error').empty();
+            // updload-folder dropdown menu
+            $('#folder').removeClass('is-invalid');
+            $('#folder').removeClass('is-valid');
+            $('#folder').addClass('border-color-light');
+            $('#upload_error').removeClass("alert_show_errors ps-1");
+            $('#upload_error').empty();
+            // chose file
+            $('#file').removeClass('is-invalid');
+            $('#file').removeClass('is-valid');
+            $('#file').addClass('border-color-light');
+            $('#upload_error2').removeClass("alert_show_errors ps-1");
+            $('#upload_error2').empty();
+            $('#file').val("");
+
             var data = {
                 'folder_name': $('#folderName').val(),
             }
@@ -250,7 +305,56 @@
         // Live-Search-----------------------------
         $(document).on('keyup', '#srch_name', function() {
             var query = $(this).val();
+            if(query !==''){
+                $("#myFolderTable").removeClass('table-display-hidden');
+                $("#tableCheck").prop('checked', true);
+            }else{
+                $("#myFolderTable").addClass('table-display-hidden');
+                $("#tableCheck").prop('checked', false);
+            }
             fetch_folder_data(query);
+        });
+        // Refresh
+        $(document).on('click', '#refresh', function(){
+            $('.bf').addClass('refresh');
+            setTimeout(() => {
+                requestAnimationFrame(() => {
+                    $('.bf').removeClass('refresh');
+                });
+            }, 2000);
+            // folder-name dropdown menu
+            $('#folderSelect').removeClass('is-invalid');
+            $('#folderSelect').removeClass('is-valid');
+            $('#folderSelect').addClass('border-color-light');
+            $('#search_error').empty();
+            // updload-folder dropdown menu
+            $('#folder').removeClass('is-invalid');
+            $('#folder').removeClass('is-valid');
+            $('#folder').addClass('border-color-light');
+            $('#upload_error').empty();
+            // chose-file
+            $('#file').removeClass('is-invalid');
+            $('#file').removeClass('is-valid');
+            $('#file').addClass('border-color-light');
+            $('#upload_error2').empty();
+            $('#file').val("");
+            // input field
+            $('#savForm_validation').html("");
+            $('#folderName').removeClass('is-invalid');
+            $('#folderName').removeClass('is-valid');
+            $("#folderName").addClass('border-color-light');
+            // clear error
+            $('#savForm_validation').removeClass("alert_show_errors");
+            $('#search_error').removeClass("alert_show_errors ps-1");
+            $('#upload_error').removeClass("alert_show_errors ps-1");
+            $('#upload_error2').removeClass("alert_show_errors ps-1");
+            $("#folderName").addClass('border-color-light');
+            // search file
+            $("#filesSelect").html("");
+            $("#uploadedFilesList").html("");
+            fetch_folder_data();
+            fetchFolders();
+            fetch_get_folder();
         });
         // show table
         $(document).on('click', '#tableCheck', function() {
@@ -289,6 +393,11 @@
         // Update Folder Name
         $(document).on('click', '#updateFolderBtn', function(e) {
             e.preventDefault();
+            // input
+            $('#folderName').removeClass('is-invalid');
+            $('#folderName').removeClass('is-valid');
+            $('#folderName').addClass('border-color-light');
+
             $("#createFolderBtn").removeAttr('hidden');
             $(this).hide('slow');
             $("#cancelFolderBtn").attr('hidden', true);
@@ -389,58 +498,9 @@
             $("#folderName").val("");
         });
         // File Upload AJAX Request
-        // $('#uploadBtn').on('click', function() {
-        //     var folderName = $('#folder').val();
-
-        //     var fileInput = $('#file')[0];
-        //     var files = fileInput.files;
-        //     var formData = new FormData();
-
-        //     for (var i = 0; i < files.length; i++) {
-        //         formData.append('file', files[i]);
-        //     }
-        //     formData.append('folder_name', folderName);
-
-        //     $.ajax({
-        //         url: "{{ route('upload.file') }}",
-        //         method: 'POST',
-        //         data: formData,
-        //         contentType: false,
-        //         processData: false,
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         },
-        //         success: function(response) {
-        //             if (response.status == 200) {
-        //                 // alert(response.success);
-        //                 $('#success_message').addClass('alert_show ps-1 pe-1');
-        //                 $('#success_message').fadeIn();
-        //                 $('#success_message').text(response.messages);
-        //                 $('#folder').val("");
-        //                 $('#file').val("");
-        //                 setTimeout(() => {
-        //                     $('#success_message').fadeOut();
-        //                 }, 3000);
-        //             } else (response.status == 404) {
-        //                 // alert(response.error);
-        //                 // $('#upload_error').html("");
-        //                 // $('#upload_error').addClass('alert_show_errors ps-1 pe-1');
-        //                 // $('#upload_error').append('<span>' + response.error + '</span>');
-        //                 $.each(response.errors, function(key, err_value) {
-        //                     $('#upload_error').html("");
-        //                     $('#upload_error').addClass('alert_show_errors ps-1 pe-1');
-        //                     $('#upload_error').append('<span>' + err_value + '</span>');
-        //                 });
-        //             }
-        //             fetchFiles();
-        //         }
-        //     });
-
-        // });
-
-        // File Upload AJAX Request
         $('#uploadBtn').on('click', function() {
-
+            $('#upload_error').empty();
+            $('#upload_error2').empty();
             var folderName = $('#folder').val();
 
             var fileInput = $('#file')[0];
@@ -465,6 +525,17 @@
                     $('#uploadedFilesList').empty();
                     $('#filesSelect').empty();
                     if (response.status == 200) {
+                        $('#folderSelect').removeClass('is-invalid');
+                        $('#folderSelect').removeClass('is-valid');
+                        $('#folderSelect').addClass('border-color-light');
+                        $('#search_error').empty();
+                        $('#search_error').removeClass('alert_show_errors ps-1');
+                        $('#folder').removeClass('is-invalid');
+                        $('#folder').removeClass('is-valid');
+                        $('#folder').addClass('border-color-light');
+                        $('#file').removeClass('is-invalid');
+                        $('#file').removeClass('is-valid');
+                        $('#file').addClass('border-color-light');
                         // alert(response.success);
                         $('#successMessage').addClass('alert_show ps-1 pe-1');
                         $('#successMessage').fadeIn();
@@ -480,8 +551,11 @@
                         // alert(response.error);
                         $('#upload_error').html("");
                         $('#upload_error').addClass('alert_show_errors ps-1 pe-1');
+                        $('#upload_error2').html("");
+                        $('#upload_error2').addClass('alert_show_errors ps-1 pe-1');
                         $.each(response.errors, function(key, err_value) {
                             $('#upload_error').append('<span>' + err_value + '</span>');
+                            $('#upload_error2').append('<span>' + err_value + '</span>');
                         });
                     }
                     setTimeout(() => {
@@ -495,10 +569,63 @@
                 },
                 error: function(xhr) {
                     console.error(xhr);
-                    alert('Select folder dropdown menu and with select choose file');
+                    $('#upload_error').addClass('alert_show_errors ps-1');
+                    $('#upload_error').append('<span>Select folder</span>');
+                    $('#upload_error2').addClass('alert_show_errors ps-1');
+                    $('#upload_error2').append('<span>Choose a file</span>');
+                    $('#folder').addClass('is-invalid');
+                    $('#file').addClass('is-invalid');
                 }
             });
 
+        });
+
+        // Folder Select Handel
+        $(document).on('change', '#folder', function(){
+            var value = $(this).val();
+            $('#upload_error').empty();
+            $('#upload_error').removeClass('alert_show_errors ps-1');
+            if(value !==''){
+                $('#folder').removeClass('is-invalid');
+                $('#folder').addClass('is-valid');
+                $('#folder').removeClass('border-color-light');
+            }else{
+                $('#folder').removeClass('is-invalid');
+                $('#folder').removeClass('is-valid');
+                $('#folder').addClass('border-color-light');
+            }
+        });
+
+        // Choose File Handel
+        $(document).on('change', '#file', function(){
+            var value = $(this).val();
+            $('#upload_error2').empty();
+            $('#upload_error2').removeClass('alert_show_errors ps-1');
+            if(value !==''){
+                $('#file').removeClass('is-invalid');
+                $('#file').addClass('is-valid');
+                $('#file').removeClass('border-color-light');
+            }else{
+                $('#file').removeClass('is-invalid');
+                $('#file').removeClass('is-valid');
+                $('#file').addClass('border-color-light');
+            }
+        });
+
+        // Folder Select Handel for search
+        $(document).on('change', '#folderSelect', function(){
+            var value = $(this).val();
+            $('#search_error').empty();
+            $('#search_error').removeClass('alert_show_errors ps-1');
+            if(value !==''){
+                $('#folderSelect').removeClass('is-invalid');
+                $('#folderSelect').addClass('is-valid');
+                $('#folderSelect').removeClass('border-color-light');
+            }else{
+                $('#folderSelect').removeClass('is-invalid');
+                $('#folderSelect').removeClass('is-valid');
+                $('#folderSelect').addClass('border-color-light');
+            }
         });
 
         // Fetch Folder Name
@@ -542,7 +669,15 @@
         // Event handler for the searchFile button
         $(document).on('click', '#searchFile', function() {
             $('#uploadedFilesList').empty();
-            $('#filesSelect').empty();
+            var value = $('#folderSelect').val();
+            if(value !==''){
+                $('#search_error').removeClass('alert_show_errors ps-1');
+                $('#folderSelect').removeClass('is-invalid');
+                $('#folderSelect').addClass('is-valid');
+                $('#folderSelect').removeClass('border-color-light');
+                $('#search_error').empty();
+                $('#filesSelect').empty();
+            }
             setTimeout(() => {
                 requestAnimationFrame(() => {
                     $('.svg__doted').removeClass('svg_skeletone');
@@ -575,10 +710,10 @@
                 url: "/files/" + selectedFolder,
                 success: function(response) {
                     var folderName = response.folder;
-                    $("#filesSelect").append('<span> ' + folderName + ' </span>');
+                    $("#filesSelect").append('<span class="ms-2"> ' + folderName + ' </span>');
 
                     if (response.files.length === 0) {
-                        $('#uploadedFilesList').append('<div class="alert alert-info" role="alert">No files found from the selected folder.</div>');
+                        $('#uploadedFilesList').append('<div class="font_search" role="alert">No files found from the selected folder.</div>');
                         return;
                     }
 
@@ -631,7 +766,11 @@
                 },
                 error: function(xhr) {
                     console.error(xhr);
-                    alert('Select folder dropdown menu');
+                    $('#search_error').append('<span>Select folder dropdown menu</span>');
+                    $('#search_error').addClass('alert_show_errors ps-1');
+                    $('#folderSelect').addClass('is-invalid');
+                    $('#folderSelect').removeClass('is-valid');
+                    $('#folderSelect').removeClass('border-color-light');
                 }
             });
         }

@@ -74,62 +74,104 @@ class FileManagerController extends Controller
     }
     // Update Folder Name
     public function updateFolder(Request $request, $id){
-        $validator = validator::make($request->all(),[
-            'folder_name'=>'required|max:191',
+        $validator = Validator::make($request->all(), [
+            'folder_name' => 'required|max:191',
         ]);
-        if($validator->fails()){
+    
+        if ($validator->fails()) {
             return response()->json([
-                'status'=> 400,
-                'errors'=> $validator->messages(),
+                'status' => 400,
+                'errors' => $validator->messages(),
             ]);
-        }    
-        else{
-            $folders = Folder_entry::find($id);
-            if($folders){
-                $folders->folder_name = $request->input('folder_name');
-                $folders->update();
-                return response()->json([
-                    'status'=> 200,
-                    'messages'=> 'Folder name updated successfully',
-                ]);
+        }
+    
+        $folder = Folder_entry::find($id);
+    
+        if ($folder) {
+            $oldFolderName = $folder->folder_name;
+            $newFolderName = $request->input('folder_name');
+    
+            $oldFolderPath = public_path('uploads/' . $oldFolderName);
+            $newFolderPath = public_path('uploads/' . $newFolderName);
+    
+            // Check if the old folder exists and rename it
+            if (file_exists($oldFolderPath)) {
+                if (!file_exists($newFolderPath)) {
+                    rename($oldFolderPath, $newFolderPath);
+                } else {
+                    return response()->json([
+                        'status' => 409,
+                        'messages' => 'Folder with this name exists!',
+                    ]);
+                }
             }
-            else{
-                return response()->json([
-                    'status'=> 404,
-                    'messages'=> 'Folder Name is not found',
-                ]);
-            } 
+    
+            // Update the folder name in the database
+            $folder->folder_name = $newFolderName;
+            $folder->update();
+    
+            return response()->json([
+                'status' => 200,
+                'messages' => 'Folder name has updated',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'Folder not found',
+            ]);
         }
     }
 
     // Delete Folder Name
     public function deleteFolder($id){
-        $folder_entries = Folder_entry::find($id);
-        $folder_entries->delete();
+        $folder = Folder_entry::find($id);
+
+        if ($folder) {
+            $folderPath = public_path('uploads/' . $folder->folder_name);
+
+            // Check if the folder exists before deleting
+            if (file_exists($folderPath)) {
+                // Delete the folder and its contents
+                $this->deleteFolderWithContents($folderPath);
+            }
+
+            // Delete the folder entry from the database
+            $folder->delete();
+
+            return response()->json([
+                'status' => 200,
+                'messages' => 'Folder has deleted',
+            ]);
+        }
 
         return response()->json([
-            'status'=> 200,
-            'messages'=> 'Folder has deleted successfully',
+            'status' => 404,
+            'messages' => 'Folder not found',
         ]);
     }
-    // Create Folder
-    // public function createFolder(Request $request)
-    // {
+    /**
+     * Recursively delete a folder and its contents.
+     */
+    private function deleteFolderWithContents($folderPath)
+    {
+        if (!is_dir($folderPath)) {
+            return;
+        }
 
-    //     $request->validate([
-    //         'folder_name' => 'required|string|max:255',
-    //     ]);
+        $files = array_diff(scandir($folderPath), ['.', '..']);
 
-    //     $folderName = $request->input('folder_name');
-    //     $folderPath = public_path('uploads') . '/' . $folderName;
+        foreach ($files as $file) {
+            $filePath = $folderPath . DIRECTORY_SEPARATOR . $file;
 
-    //     if (!File::exists($folderPath)) {
-    //         File::makeDirectory($folderPath, 0777, true, true);
-    //         return response()->json(['success' => 'Folder created successfully']);
-    //     }
+            if (is_dir($filePath)) {
+                $this->deleteFolderWithContents($filePath); // Recursively delete subfolders
+            } else {
+                unlink($filePath); // Delete file
+            }
+        }
 
-    //     return response()->json(['error' => 'Folder already exists']);
-    // }
+        rmdir($folderPath); // Finally, remove the empty folder
+    }
 
     public function createFolder(Request $request){
 
@@ -148,7 +190,7 @@ class FileManagerController extends Controller
             $Folder_entries->save();
             return response()->json([
                 'status'=> 200,
-                'messages'=> 'Folder has Created successfully',
+                'messages'=> 'Folder has Created',
             ]);
         }
     }
@@ -172,7 +214,7 @@ class FileManagerController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'messages' => 'File uploaded successfully',
+                'messages' => 'File has uploaded',
             ]);
         }
 
@@ -202,7 +244,7 @@ class FileManagerController extends Controller
 
         if (File::exists($filePath)) {
             File::delete($filePath);
-            return response()->json(['messages' => 'File deleted successfully']);
+            return response()->json(['messages' => 'File has deleted']);
         }
 
         return response()->json(['error' => 'File not found']);

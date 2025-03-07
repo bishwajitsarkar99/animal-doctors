@@ -16,7 +16,7 @@ return[
     'Admin'=>'Admin',
     'Doctor'=>'Doctor',
     // Mdouel
-    'Purchases Dept.'=>'Purchases Dept.',
+    'Purchases Management'=>'Purchases Management',
     'Product'=>'Product',
     'Click'=>'Click',
     'Lock'=>'Lock',
@@ -58,7 +58,7 @@ return[
     'Add Brand'=>'Add Brand',
     'ADD Brand'=>'ADD Brand',
     // Product Menu
-    'Product List'=>'Product List',
+    'Product'=>'Product',
     'Add Product'=>'Add Product',
     'ADD Product'=>'ADD Product',
     // Stock
@@ -94,7 +94,7 @@ return[
     'Requisition'=>'Requisition',
     // Accounts Moduel
     // Lager
-    'Accounts Dept.'=>'Accounts Dept.',
+    'Accounts Management'=>'Accounts Management',
     'Lager'=>'Lager',
     // Day Book
     'Day Book'=>'Day Book',
@@ -232,7 +232,7 @@ return[
     'Daily Report'=>'Daily Report',
     'Daily Report View'=>'Daily Report View',
     // HRM Moduel
-    'HRM Dept.'=>'HRM Management',
+    'HRM Management'=>'HRM Management',
     // HRM
     'HRM'=>'HRM',
     // Employee

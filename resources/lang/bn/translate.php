@@ -17,7 +17,7 @@ return[
     'Doctor'=>'ডাক্তার',
     // Moduel
     // Purchases Moduel
-    'Purchases Dept.'=>'ক্রয় বিভাগ',
+    'Purchases Management'=>'ক্রয় ব্যবস্থাপনা',
     'Product'=>'পণ্য',
     'Click'=>'ক্লিক করুন',
     'Lock'=>'তালা',
@@ -56,7 +56,7 @@ return[
     'Add Brand'=>'ব্র্যান্ড যোগ করুন',
     'ADD Brand'=>'ব্র্যান্ড যোগ করুন',
     // Product Menu
-    'Product List'=>'পণ্য তালিকা',
+    'Product'=>'পণ্য',
     'Add Product'=>'পণ্য যোগ করুন',
     'ADD Product'=>'পণ্য যোগ করুন',
     // Stock
@@ -94,7 +94,7 @@ return[
 
     // Accounts Moduel
     // Lager
-    'Accounts Dept.'=>'হিসাব বিভাগ',
+    'Accounts Management'=>'হিসাব ব্যবস্থাপনা',
     'Lager'=>'লেজার',
     // Day Book
     'Day Book'=>'ডে-বুক',
@@ -232,7 +232,7 @@ return[
     'Daily Report View'=>'দৈনিক রিপোর্ট দেখুন',
 
     // HRM Moduel
-    'HRM Dept.'=>'এইচআরএম বিভাগ',
+    'HRM Management'=>'এইচআরএম ব্যবস্থাপনা',
     // HRM
     'HRM'=>'এইচআরএম',
     // Employee

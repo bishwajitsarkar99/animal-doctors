@@ -3,43 +3,37 @@
     <div class="nav" id="menu_background">
         @if(auth()->user()->role ==1)
         <a class="nav-link" href="{{ route('super-admin.dashboard') }}" id="side_nav">
-            <div class="sb-nav-link-icon das_hdname pt-1"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
-            <span class="dashboard_text">{{__('translate.Dashboard')}}</span>
+            <!-- <div class="sb-nav-link-icon das_hdname pt-1"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div> -->
+            <span class="dashboard_text ms-4">{{__('translate.Dashboard')}}</span>
         </a>
         @endif
         @if(auth()->user()->role ==2)
         <a class="nav-link" href="{{ route('sub-admin.dashboard') }}" id="side_nav">
-            <div class="sb-nav-link-icon das_hdname pt-1"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
             <span class="dashboard_text">{{__('translate.Dashboard')}}</span>
         </a>
         @endif
         @if(auth()->user()->role ==3)
         <a class="nav-link" href="{{ route('admin.dashboard') }}" id="side_nav">
-            <div class="sb-nav-link-icon das_hdname pt-1"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
             <span class="dashboard_text">{{__('translate.Dashboard')}}</span>
         </a>
         @endif
         @if(auth()->user()->role ==5)
         <a class="nav-link" href="{{ route('accounts.dashboard') }}" id="side_nav">
-            <div class="sb-nav-link-icon das_hdname pt-1" style="color:#003a91;"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
             <span class="dashboard_text">Side-Menu</span>
         </a>  
         @endif
         @if(auth()->user()->role ==6)
         <a class="nav-link" href="#" id="side_nav">
-            <div class="sb-nav-link-icon das_hdname pt-1" style="color:#ab7800ab;"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
             <span class="dashboard_text">Side-Menu</span>
         </a>
         @endif
         @if(auth()->user()->role ==7)
         <a class="nav-link" href="#" id="side_nav">
-            <div class="sb-nav-link-icon das_hdname pt-1" style="color:#ab7800ab;"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
             <span class="dashboard_text">Side-Menu</span>
         </a> 
         @endif
         @if(auth()->user()->role ==0)
         <a class="nav-link" href="{{ route('doctors.dashboard') }}" id="side_nav">
-            <div class="sb-nav-link-icon das_hdname pt-1" style="color:#ab7800ab;"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div>
             <span class="dashboard_text">Side-Menu</span>
         </a>   
         @endif
@@ -141,8 +135,8 @@
         @endif
         @if(auth()->user()->role == 1)
         <!-- ================== Purchases Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('purchases_visual')}}"><i class="fa-solid fa-cart-shopping fa-beat-fade"></i></span> 
-            <span class="{{setting('purchases_visual')}}" style="color:white;">{{__('translate.Purchases Dept.')}}</span>
+        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('purchases_visual')}}"></span> 
+            <span class="{{setting('purchases_visual')}}" style="color:white;">{{__('translate.Purchases Management')}}</span>
         </div>
         <!-- ================== Product ======================= -->
         @include('backend.layouts.layouts-components.partial-sidebar._product')
@@ -151,8 +145,8 @@
         @include('backend.layouts.layouts-components.partial-sidebar._stock')
 
         <!-- ================== Accounts Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('accounts_moduel_display')}}"><i class="fa-solid fa-calculator fa-beat-fade"></i></span> 
-            <span class="{{setting('accounts_moduel_display')}}" style="color:white;">{{__('translate.Accounts Dept.')}}</span>
+        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('accounts_moduel_display')}}"></span> 
+            <span class="{{setting('accounts_moduel_display')}}" style="color:white;">{{__('translate.Accounts Management')}}</span>
         </div>
 
         <!-- ================== Leger ======================= -->
@@ -173,15 +167,15 @@
 
 
         <!-- ==================  HRM Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading {{setting('hrm_moduel_display')}}" style="color:white;"><span class="link_menus"><i class="fa-solid fa-users fa-beat-fade">‌</i></span> 
-            <span class="{{setting('hrm_moduel_display')}}">{{__('translate.HRM Dept.')}}</span>
+        <div class="sb-sidenav-menu-heading {{setting('hrm_moduel_display')}}" style="color:white;"><span class="link_menus"></span> 
+            <span class="{{setting('hrm_moduel_display')}}">{{__('translate.HRM Management')}}</span>
         </div>
 
         <!-- ================== HRM ======================= -->
         @include('backend.layouts.layouts-components.partial-sidebar._hrm')
 
         <!-- ==================  Auth Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading {{setting('auth_moduel_display')}}"><span class="link_menus"><i class="fa-solid fa-rss fa-beat-fade">‌</i></span> 
+        <div class="sb-sidenav-menu-heading {{setting('auth_moduel_display')}}"><span class="link_menus"></span> 
             <span class="{{setting('auth_moduel_display')}}" style="color:white;">{{__('translate.Authentication')}}</span>
         </div>
 
@@ -200,16 +194,16 @@
 
         @if(auth()->user()->role ==3)
             <!-- ==================  Auth Moduel ======================= -->
-            <div class="sb-sidenav-menu-heading"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> Purchases Dept.</div>
+            <div class="sb-sidenav-menu-heading"><span class="link_menus"></span> Purchases Management</div>
             @include('backend.layouts.layouts-components.partial-sidebar._stock')
-            <div class="sb-sidenav-menu-heading"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> {{__('translate.Post')}}</div>
+            <div class="sb-sidenav-menu-heading"><span class="link_menus"> {{__('translate.Post')}}</div>
             @include('backend.layouts.layouts-components.partial-sidebar._admin')
                 <!-- ================== Layouts ======================= -->
             @include('backend.layouts.layouts-components.partial-sidebar._layouts')
         @endif
         @if(auth()->user()->role ==2)
         <!-- ==================  Auth Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading"><span class="link_menus"><i class="fa-solid fa-link fa-beat-fade"></i></span> Purchases Dept.</div>
+        <div class="sb-sidenav-menu-heading"><span class="link_menus"> Purchases Management</div>
         @include('backend.layouts.layouts-components.partial-sidebar._stock')
         @include('backend.layouts.layouts-components.partial-sidebar._sub-admin')
         <!-- ================== Layouts ======================= -->
@@ -217,8 +211,8 @@
         @endif
         @if(auth()->user()->role == 5)
         <!-- ================== Purchases Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('purchases_visual')}}"><i class="fa-solid fa-link fa-beat-fade"></i></span> 
-            <span class="{{setting('purchases_visual')}}">{{__('translate.Purchases Dept.')}}</span>
+        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('purchases_visual')}}"></span> 
+            <span class="{{setting('purchases_visual')}}">{{__('translate.Purchases Management')}}</span>
         </div>
         <!-- ================== Product ======================= -->
         @include('backend.layouts.layouts-components.partial-sidebar._product')
@@ -227,8 +221,8 @@
         @include('backend.layouts.layouts-components.partial-sidebar._stock')
 
         <!-- ================== Accounts Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('accounts_moduel_display')}}"><i class="fa-solid fa-link fa-beat-fade"></i></span> 
-            <span class="{{setting('accounts_moduel_display')}}">{{__('translate.Accounts Dept.')}}</span>
+        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('accounts_moduel_display')}}"></span> 
+            <span class="{{setting('accounts_moduel_display')}}">{{__('translate.Accounts Management')}}</span>
         </div>
 
         <!-- ================== Leger ======================= -->
