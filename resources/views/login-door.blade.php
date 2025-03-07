@@ -29,7 +29,7 @@
 
         <style>
             body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                font-family: "Poppins", Sans-serif;
                 background-color:#d8edffd1;
             }
             img.logo_size{
@@ -37,11 +37,12 @@
                 width: 50px;
             }
             span.text_size{
-                font-size:25px;
-                font-weight:800;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                font-size: 25px;
                 text-transform: uppercase;
-                animation: fadeInFromTop 5s ease-out forwards, slideInRightToLeft 5s ease-out forwards;
+                animation: fadeInFromTop 5sease-out forwards, slideInRightToLeft 5sease-out forwards;
+                font-family: "Poppins", Sans-serif;
+                font-weight: 600;
+                line-height: 2em;
             }
             @keyframes fadeInFromTop {
                 0% {
@@ -88,7 +89,7 @@
                 text-decoration-color:darkcyan;
             }
             form#loginDoorForm {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                font-family: "Poppins", Sans-serif;
                 padding-left: 13px;
                 margin-top:27px;
                 background-color: beige;
@@ -101,6 +102,9 @@
             }
             .media_text1{
                 animation: fadeInFromTop 5s ease-out forwards, slideInLeftToRight 5s ease-out forwards;
+            }
+            .media_text2{
+                animation: fadeInFromTop 5s ease-out forwards, slideInRightToLeft 5s ease-out forwards;  
             }
             .text-animation{
                 animation: fadeInFromTop 5s ease-out forwards, slideInLeftToRight 5s ease-out forwards;
@@ -116,27 +120,27 @@
                 width: 100%;
             }
             tr.table_head_row {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-                color: black;
+                font-family: "Poppins", Sans-serif;
+                color: #333;
                 font-size: 15px;
             }
             td.user-login-td {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                font-family: "Poppins", Sans-serif;
                 width: 100%;
                 background-color: beige;
             }
             td.user_login_form_label {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                font-family: "Poppins", Sans-serif;
                 background-color: beige;
                 width: 14%;
                 font-weight: 700;
                 font-size: 12px;
                 text-align: center;
                 padding-top: 5px;
-                color: black;
+                color: #333;
             }
             input.user_login_form {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                font-family: "Poppins", Sans-serif;
                 outline: none;
                 box-shadow: none;
                 width: 100%;
@@ -145,7 +149,7 @@
                 padding-bottom: 0px;
                 font-size: 11px;
                 font-weight: 700;
-                color: black;
+                color: #333;
                 letter-spacing: 0.5px;
                 word-spacing: 0.5px;
             }
@@ -153,7 +157,7 @@
                 border: 1px solid goldenrod;
             }
             .button_area {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                font-family: "Poppins", Sans-serif;
                 justify-content: end;
                 padding-right: 16px;
                 padding-top: 10px;
@@ -207,7 +211,7 @@
             span#error_message {
                 font-size: 12px;
                 font-weight: 700;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                font-family: "Poppins", Sans-serif;
             }
             tr.error_mess_row {
                 height: 28px;
@@ -250,11 +254,12 @@
                 background:transparent;
                 box-shadow: 0px 20px 6px #0001, 0px 10px 6px #0001;
                 border-radius:5px;
-                color: black;
+                color: #333;
                 font-weight: 600;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                font-family: "Poppins", Sans-serif;
             }
             .footer-box:hover{
+                color:black;
                 box-shadow: 0px 0px 3px #0004, 1px 5px 5px #0001;
             }
             span.list-heading {
@@ -437,9 +442,9 @@
     <body class="antialiased min-h-screen">
         <div class="relative flex items-top justify-center top-heading">
             <span class="media_text1">
-                <img class="mt-1 mb-1 company_logo logo_size bg-vaiolent" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt="">
+                <img class="mt-1 mb-1 company_logo logo_size bg-light-blue" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt="">
             </span>
-            <span class="media_text2 text_size text-vaiolent ms-3 mt-1">{{setting('company_name')}}</span>
+            <span class="media_text2 text_size text-light-black ms-3 mt-1">{{setting('company_name')}}</span>
         </div>
         <div class="relative flex items-top justify-center py-1 sm:pt-0 mt-5">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 sm:items-center form-box animation-box-one">
@@ -472,8 +477,8 @@
                 </form>
                 <div class="flex justify-center mt-4 mb-3 sm:items-center sm:justify-between form-bottom">
                     <div class="text-center text-sm text-vaiolent sm:text-left footer_row">
-                        <div class="flex items-center text-animation">
-                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400" style="color:#7f56c5;">
+                        <div class="flex items-center text-light-black">
+                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400" style="color:#333;">
                                 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                             </svg>
 
@@ -481,7 +486,7 @@
                                 <span>Supplier Management System Software V-3.0.1</span>
                             </a>
 
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400" style="color:#7f56c5;">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400" style="color:#333;">
                                 <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                             </svg>
                         </div>

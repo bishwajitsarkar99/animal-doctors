@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     $(document).ready(function () {
         $(document).on('change', '.dynamic-dropdown', function () {
             if ($.fn.select2) {
@@ -165,4 +165,12 @@
 
         document.head.appendChild(script);
     }
+</script> -->
+<script>
+    $(document).ready(function(){
+        // Auth sidebar Action
+        $(document).on('click', '.load-page', function(){
+            $('#Auth').collapse('hide');
+        });
+    });
 </script>

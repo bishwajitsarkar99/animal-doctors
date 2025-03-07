@@ -9518,8 +9518,12 @@ a.text-primary:hover, a.text-primary:focus {
   color: #0056b3 !important; }
 .text-vaiolent {
   color: #7f56c5 !important;}
+.text-light-black {
+  color: #333 !important;}
 .bg-vaiolent {
   background-color: #7f56c5 !important;}
+.bg-light-blue {
+  background-color: #007bab !important;}
 .bg-dark-vaiolent {
   background-color: #554b66 !important;}
 .text-secondary {
