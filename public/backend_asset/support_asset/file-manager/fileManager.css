@@ -425,6 +425,9 @@ input#file:focus,input#folderName:focus,input#folder:focus,select#folder:focus,s
     font-variant: petite-caps;
     color: #7a7a7a;
 }
+.is-select{
+    border: 1px solid darkgreen;
+}
 .select_lb_display::after{
     content: 'Folder-Name :';
 }

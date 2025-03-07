@@ -197,27 +197,41 @@ class FileManagerController extends Controller
     // Upload File with request
     public function uploadFile(Request $request)
     {
-        
         $request->validate([
             'file' => 'required|file|mimes:jpeg,png,jpg,gif,pdf,csv,mp4|max:2048',
             'folder_name' => 'required|string'
         ]);
-
+    
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $folder = $request->input('folder_name');
-            $folderPath = ($folder) ? public_path('uploads/' . $folder) : public_path('uploads');
-
-            $fileName = time() . '_' . $file->getClientOriginalName();
-
+            $folderPath = public_path('uploads/' . $folder);
+    
+            // Ensure the folder exists
+            if (!file_exists($folderPath)) {
+                mkdir($folderPath, 0777, true);
+            }
+    
+            $fileName = $file->getClientOriginalName();
+            $filePath = $folderPath . '/' . $fileName;
+    
+            // Check if the file already exists
+            if (file_exists($filePath)) {
+                return response()->json([
+                    'status' => 409, // Conflict status
+                    'messages' => 'This file already exists',
+                ]);
+            }
+    
+            // Move the file if it's unique
             $file->move($folderPath, $fileName);
-
+    
             return response()->json([
                 'status' => 200,
-                'messages' => 'File has uploaded',
+                'messages' => 'File has been uploaded',
             ]);
         }
-
+    
         return response()->json([
             'status' => 404,
             'messages' => 'File not found'

@@ -8,7 +8,6 @@
             $("#processModal_body").removeClass('loading_body_area');
 
             // folder-name dropdown menu
-            $('#folderSelect').removeClass('is-invalid');
             $('#folderSelect').removeClass('is-valid');
             $('#folderSelect').addClass('border-color-light');
             $('#search_error').empty();
@@ -323,8 +322,7 @@
                 });
             }, 2000);
             // folder-name dropdown menu
-            $('#folderSelect').removeClass('is-invalid');
-            $('#folderSelect').removeClass('is-valid');
+            $('#folderSelect').removeClass('is-select');
             $('#folderSelect').addClass('border-color-light');
             $('#search_error').empty();
             // updload-folder dropdown menu
@@ -501,6 +499,7 @@
         $('#uploadBtn').on('click', function() {
             $('#upload_error').empty();
             $('#upload_error2').empty();
+            $('#successMessage').html("");
             var folderName = $('#folder').val();
 
             var fileInput = $('#file')[0];
@@ -525,8 +524,7 @@
                     $('#uploadedFilesList').empty();
                     $('#filesSelect').empty();
                     if (response.status == 200) {
-                        $('#folderSelect').removeClass('is-invalid');
-                        $('#folderSelect').removeClass('is-valid');
+                        $('#folderSelect').removeClass('is-select');
                         $('#folderSelect').addClass('border-color-light');
                         $('#search_error').empty();
                         $('#search_error').removeClass('alert_show_errors ps-1');
@@ -557,6 +555,10 @@
                             $('#upload_error').append('<span>' + err_value + '</span>');
                             $('#upload_error2').append('<span>' + err_value + '</span>');
                         });
+                    } else if(response.status == 409){
+                        $('#successMessage').addClass('alert_show ps-1 pe-1');
+                        $('#successMessage').fadeIn();
+                        $('#successMessage').text(response.messages);
                     }
                     setTimeout(() => {
                         requestAnimationFrame(() => {
@@ -618,12 +620,10 @@
             $('#search_error').empty();
             $('#search_error').removeClass('alert_show_errors ps-1');
             if(value !==''){
-                $('#folderSelect').removeClass('is-invalid');
-                $('#folderSelect').addClass('is-valid');
+                $('#folderSelect').addClass('is-select');
                 $('#folderSelect').removeClass('border-color-light');
             }else{
-                $('#folderSelect').removeClass('is-invalid');
-                $('#folderSelect').removeClass('is-valid');
+                $('#folderSelect').removeClass('is-select');
                 $('#folderSelect').addClass('border-color-light');
             }
         });
@@ -672,8 +672,7 @@
             var value = $('#folderSelect').val();
             if(value !==''){
                 $('#search_error').removeClass('alert_show_errors ps-1');
-                $('#folderSelect').removeClass('is-invalid');
-                $('#folderSelect').addClass('is-valid');
+                $('#folderSelect').addClass('is-select');
                 $('#folderSelect').removeClass('border-color-light');
                 $('#search_error').empty();
                 $('#filesSelect').empty();
@@ -766,10 +765,7 @@
                 },
                 error: function(xhr) {
                     console.error(xhr);
-                    $('#search_error').append('<span>Select folder dropdown menu</span>');
-                    $('#search_error').addClass('alert_show_errors ps-1');
-                    $('#folderSelect').addClass('is-invalid');
-                    $('#folderSelect').removeClass('is-valid');
+                    $('#folderSelect').addClass('is-select');
                     $('#folderSelect').removeClass('border-color-light');
                 }
             });

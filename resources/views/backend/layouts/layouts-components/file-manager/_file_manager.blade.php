@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-6">
                                 @csrf
-                                <select class="form-select form-select-sm border-color-light" id="folder" name="folder_name">
+                                <select class="form-select form-select-sm border-color-light select_responsive" id="folder" name="folder_name">
                                     <option value="" disabled selected> Select Folder </option>
                                 </select>
                                 <span id="upload_error"></span>
@@ -108,7 +108,7 @@
                             </div>
                             <div class="col-6">
                                 @csrf
-                                <select class="form-select form-select-sm border-color-light" id="folderSelect" name="folder_name">
+                                <select class="form-select form-select-sm border-color-light select_responsive" id="folderSelect" name="folder_name">
                                     <option value="" disabled selected> Select Folder </option>
                                 </select>
                                 <span id="search_error"></span>
@@ -186,7 +186,7 @@
                         <div class="form-group" id="load_id">
                             <label class="label_user_edit" id="cate_delete" for="id">Folder-ID : </label>
                             <span id="cat_id"> <input type="text" class="mt-3 update_id id" id="delete_folder_id" readonly><br></span>
-                            <span class="label_user_edit" id="cate_delete2">Are you sure, Would you like to delete this folder, permanently?</span>
+                            <span class="label_user_edit" id="cate_delete2">Are you sure, Would you like to delete this folder where included all the image, permanently?</span>
                             <input type="hidden" id="delete_folder_id" name="folder_id">
                         </div>
                     </div>
