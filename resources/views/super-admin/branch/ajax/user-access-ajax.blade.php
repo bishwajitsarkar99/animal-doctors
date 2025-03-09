@@ -6,6 +6,7 @@
 
     $(document).ready(function(){
         fetch_branch_roles();
+        fetch_initial_role();
         fetch_branch_emails();
         fetch_branch_change_email();
         fetch_branch_change();
@@ -200,6 +201,35 @@
                 error: function(xhr, status, error) {
                     console.error("AJAX Error:", error);
                     $("#search_branch_name").empty().append('<option value="" disabled>Error loading data</option>');
+                }
+            });
+        }
+
+        // fetch created user login email
+        function fetch_initial_role(){
+            const currentUrl = "{{ route('fetch_email_three.action') }}";
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const user_emails = response.user_emails;
+                    $("#email_id").empty();
+                    $("#email_id").append('<option value="" style="font-weight:600;">Select User Role</option>');
+                    $.each(user_emails, function(key, item) {
+                        $("#email_id").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.login_email}</option>`);
+                    });
+                },
+                error: function() {
+                    $("#email_id").empty();
+                    $("#email_id").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
                 }
             });
         }

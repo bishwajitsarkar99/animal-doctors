@@ -31,55 +31,64 @@
             padding-left: 16px;
             padding-right: 10px;
         }
+        h2.para {
+            margin-top: 0px;
+            margin-left: 15px;
+            color: #f5f5f5;
+            opacity: 1;
+            text-align: center;
+            box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+            animation: text_shadow 8slinear infinite;
+        }
     </style>
 </head>
-<header class="bg sticky-top">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
-        <p class="navbar-brand admin_panel text-shadow" style="float: right;">
-            <span class="logo-skeleton media_text1"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
-            <span class="headings-skeleton media_text2">{{setting('company_name')}}</span>
-        </p>
-        <p class="navbar-brand admin_panel text-shadow d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
-            <a class="" href="{{setting('update_social_media_facebook_link')}}">
-                <span class="social_icon facebook-skeleton"><img class="social_icon" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_facebook')}}" alt=""></span>
-            </a>
-            <a class="" href="{{setting('update_social_media_messanger_link')}}">
-                <span class="social_icon_mess messenger-skeleton ms-2"><img class="social_icon_mess" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_messanger')}}" alt=""></span>
-            </a>
-            <a class="" href="{{setting('update_social_media_whatsapp_link')}}">
-                <span class="social_icon_whatsapp whatsapp-skeleton"><img class="social_icon_whatsapp" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_whatsapp')}}" alt=""></span>
-            </a>
-            <a class="menu_btn" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                <span class="menu_icon menu-skeleton"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
-            </a>
-            <div class="offcanvas offcanvas-end" data-bs-backdrop="true" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <h6 class="head_auth" id="offcanvasRightLabel">Auth-Menu</h6>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-toggle="tooltip"  data-bs-placement="left" title="Close" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div class="modal fade" id="loader_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-sm modal-dialog-centered">
-                            <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
-                                <div class="modal-body" id="loader_modalBody"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="group__button">
-                        <a type="submit" href="{{$forget_password_url}}" class="btn btn-sm" id="forg_page">
-                            <span class="btn-text forg_page"> Forget-Password</span>
-                        </a>
-                    </div>
-                    <div class="side_canvas_animation" hidden>
-                        <img class="sidebar-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
-                    </div>
-                </div>
-            </div>
-        </p>
-    </nav>
-</header>
 
 <body class="accounts-background-color">
+    <header class="bg sticky-top">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger" style="margin-top: 0px;">
+            <p class="navbar-brand admin_panel text-shadow" style="float: right;">
+                <span class="logo-skeleton media_text1"><img class="company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
+                <span class="headings-skeleton media_text2">{{setting('company_name')}}</span>
+            </p>
+            <p class="navbar-brand admin_panel text-shadow d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
+                <a class="" href="{{setting('update_social_media_facebook_link')}}">
+                    <span class="social_icon facebook-skeleton"><img class="social_icon" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_facebook')}}" alt=""></span>
+                </a>
+                <a class="" href="{{setting('update_social_media_messanger_link')}}">
+                    <span class="social_icon_mess messenger-skeleton ms-2"><img class="social_icon_mess" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_messanger')}}" alt=""></span>
+                </a>
+                <a class="" href="{{setting('update_social_media_whatsapp_link')}}">
+                    <span class="social_icon_whatsapp whatsapp-skeleton"><img class="social_icon_whatsapp" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_social_media_whatsapp')}}" alt=""></span>
+                </a>
+                <a class="menu_btn" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                    <span class="menu_icon menu-skeleton"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
+                </a>
+                <div class="offcanvas offcanvas-end" data-bs-backdrop="true" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <h6 class="head_auth" id="offcanvasRightLabel">Auth-Menu</h6>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-toggle="tooltip"  data-bs-placement="left" title="Close" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="modal fade" id="loader_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
+                                <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+                                    <div class="modal-body" id="loader_modalBody"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group__button">
+                            <a type="submit" href="{{$forget_password_url}}" class="btn btn-sm" id="forg_page">
+                                <span class="btn-text forg_page"> Forget-Password</span>
+                            </a>
+                        </div>
+                        <div class="side_canvas_animation" hidden>
+                            <img class="sidebar-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                        </div>
+                    </div>
+                </div>
+            </p>
+        </nav>
+    </header>
     <div class="modal fade" id="loaderModalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
@@ -91,21 +100,23 @@
             </div>
         </div>
     </div>
+    <div class="hero-address">
+        <h2 class="para">
+            <span class="nav_head">
+                <p class="login-address skeleton login-head-address-animation ms-5">{{setting('company_address')}}</p>
+            </span>
+        </h2>
+    </div>
     <div class="hero-image">
         <div class="hero-text heading reg_hidden company-name-classic" id="page_head">
-            <h1 class="body_heading" style="font-size:25px;color:darkblue;">
+            <h1 class="body_heading" style="font-size:25px;">
                 <!-- Accounts-Page Title -->
                 <span class="skeleton">{{setting('forgot_page_sub_title')}}</span>
             </h1>
         </div>
     </div>
 
-    <h2 class="para">
-        <span class="nav_head">
-            <p class="login-address skeleton login-head-address-animation ms-5">{{setting('company_address')}}</p>
-        </span>
-    </h2>
-    <div class="container bg" style="margin-top: 100px;">
+    <div class="container bg" style="margin-top: 0px;">
         <div class="row">
             <div class="col-md-8">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -138,7 +149,7 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-4 mb-5 mt-3" style="margin-top:px">
+            <div class="col-md-4 mb-5" style="margin-top:px">
                 <h4 class="heading_admin text-shadow" style="text-align: center;"><span class="skeleton head-animation">{{ setting('login_page_title')}}</span></h4>
                 <div class="card card-form-control login_card">
                     <form id="loginForm" action="{{ route('login') }}" method="POST" autocomplete="off">

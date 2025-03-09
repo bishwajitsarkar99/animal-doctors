@@ -37,12 +37,12 @@
                 width: 50px;
             }
             span.text_size{
-                font-size: 25px;
+                font-size: 22px;
                 text-transform: uppercase;
                 animation: fadeInFromTop 5sease-out forwards, slideInRightToLeft 5sease-out forwards;
                 font-family: "Poppins", Sans-serif;
                 font-weight: 600;
-                line-height: 2em;
+                line-height: 2.5em;
             }
             @keyframes fadeInFromTop {
                 0% {
@@ -92,7 +92,7 @@
                 font-family: "Poppins", Sans-serif;
                 padding-left: 13px;
                 margin-top:27px;
-                background-color: beige;
+                background-color: #e7e7d763;
                 padding-bottom:10px;
                 padding-right:19px;
                 animation: fadeInFromTop 3s ease-out forwards, slideInLeftToRight 3s ease-out forwards;
@@ -108,6 +108,8 @@
             }
             .text-animation{
                 animation: fadeInFromTop 5s ease-out forwards, slideInLeftToRight 5s ease-out forwards;
+                font-size:13px;
+                font-weight:600;
             }
             .animation-box-one{
                 animation: fadeInFromTop 5s ease-out forwards, slideInLeftToRight 5s ease-out forwards; 
@@ -127,11 +129,11 @@
             td.user-login-td {
                 font-family: "Poppins", Sans-serif;
                 width: 100%;
-                background-color: beige;
+                background-color: #dfdfde63;
             }
             td.user_login_form_label {
                 font-family: "Poppins", Sans-serif;
-                background-color: beige;
+                background-color: #dfdfde63;
                 width: 14%;
                 font-weight: 700;
                 font-size: 12px;
@@ -153,8 +155,11 @@
                 letter-spacing: 0.5px;
                 word-spacing: 0.5px;
             }
+            input.user_login_form:focus{
+                border-color:#2f89fc;
+            }
             .email-border{
-                border: 1px solid goldenrod;
+                border: 1px solid #ddddddde;
             }
             .button_area {
                 font-family: "Poppins", Sans-serif;
@@ -264,7 +269,7 @@
             }
             span.list-heading {
                 font-weight: 700;
-                font-size: 16px;
+                font-size: 14px;
             }
 
             img.social_whatapp_icon {
@@ -348,6 +353,36 @@
             }
 
             @media only screen and (max-width: 600px) {
+                .row{
+                    margin-left:0px;
+                    margin-right:0px;
+                }
+                .form-bottom{
+                animation: fadeInFromTop 5s ease-out forwards;
+                }
+                .media_text1{
+                    animation: fadeInFromTop 5s ease-out forwards;
+                }
+                .media_text2{
+                    animation: fadeInFromTop 5s ease-out forwards;  
+                }
+                .text-animation{
+                    animation: fadeInFromTop 5s ease-out forwards;
+                    font-size:13px;
+                    font-weight:600;
+                }
+                .animation-box-one{
+                    animation: fadeInFromTop 5s ease-out forwards; 
+                }
+                .animation-box-two{
+                    animation: fadeInFromTop 5s ease-out forwards;  
+                }
+                form#loginDoorForm {
+                    animation: fadeInFromTop 3s ease-out forwards;
+                }
+                span.text_size{
+                    animation: fadeInFromTop 5sease-out forwards;
+                }
                 span.media_text2 {
                     font-size: 20px;
                 }
@@ -373,6 +408,36 @@
             }
 
             @media only screen and (max-width: 500px) {
+                .row{
+                    margin-left:0px;
+                    margin-right:0px;
+                }
+                .form-bottom{
+                animation: fadeInFromTop 5s ease-out forwards;
+                }
+                .media_text1{
+                    animation: fadeInFromTop 5s ease-out forwards;
+                }
+                .media_text2{
+                    animation: fadeInFromTop 5s ease-out forwards;  
+                }
+                .text-animation{
+                    animation: fadeInFromTop 5s ease-out forwards;
+                    font-size:13px;
+                    font-weight:600;
+                }
+                .animation-box-one{
+                    animation: fadeInFromTop 5s ease-out forwards; 
+                }
+                .animation-box-two{
+                    animation: fadeInFromTop 5s ease-out forwards;  
+                }
+                form#loginDoorForm {
+                    animation: fadeInFromTop 3s ease-out forwards;
+                }
+                span.text_size{
+                    animation: fadeInFromTop 5sease-out forwards;
+                }
                 span.media_text2 {
                     font-size: 20px;
                 }
@@ -398,6 +463,47 @@
             }
 
             @media only screen and (max-width: 400px) {
+                .row{
+                    margin-left:0px;
+                    margin-right:0px;
+                }
+                .form-bottom{
+                animation: fadeInFromTop 5s ease-out forwards;
+                }
+                .media_text1{
+                    animation: fadeInFromTop 5s ease-out forwards;
+                }
+                .media_text2{
+                    animation: fadeInFromTop 5s ease-out forwards;  
+                }
+                .text-animation{
+                    animation: fadeInFromTop 5s ease-out forwards;
+                    font-size:13px;
+                    font-weight:600;
+                }
+                .animation-box-one{
+                    animation: fadeInFromTop 5s ease-out forwards; 
+                }
+                .animation-box-two{
+                    animation: fadeInFromTop 5s ease-out forwards;  
+                }
+                form#loginDoorForm {
+                    animation: fadeInFromTop 3s ease-out forwards;
+                }
+                span.text_size{
+                    animation: fadeInFromTop 5sease-out forwards;
+                }
+                span.list-heading {
+                    font-weight: 600;
+                    font-size: 13px;
+                }
+                .text-animation{
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+                .flex {
+                    display: flex;
+                }
                 span.media_text2 {
                     font-size: 15px;
                 }
@@ -497,10 +603,10 @@
         </div>
         <div class="footer-part relative flex items-top justify-center mt-5 animation-box-two">
             <div class="relative flex items-top justify-center py-1 px-1 sm:pt-0 pb-3">
-                <div class="row footer-box">
+                <div class="footer-box">
                     <div class="relative flex">
                         <div class="col-xl-6">
-                            <span class="list-heading text-animation">Socal Media Info</span>
+                            <span class="list-heading text-animation pt-2">Socal Media Info</span>
                             <address>
                                 <span class="text-animation">
                                     <a class="" href="{{setting('update_social_media_facebook_link')}}">
@@ -523,7 +629,7 @@
                             </address>
                         </div>
                         <div class="col-xl-6">
-                            <span class="list-heading text-animation">Company Info</span>
+                            <span class="list-heading text-animation pt-2">Company Info</span>
                             <address>
                                 <span class="text-animation">Adrress : {{setting('company_address')}}</span><br>
                                 <span class="text-animation">Contract - number : 01410-224512</span><br>
@@ -579,7 +685,7 @@
                 // Initialize the image upload with progress bar simulation
                 loadingProgressbar("#openSubmit");
                 // Initialize the button loader only when input is not empty
-                buttonLoader('.login_button', '.loading-icon', '.btn-text', 'Opening...', 'Open', 1000);
+                buttonLoader('.login_button', '.loading-icon', '.btn-text', 'Open...', 'Open', 1000);
             });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>

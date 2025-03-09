@@ -25,7 +25,7 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            background-color:#d8edffd1;
+            background-color:#e8edf13d;
         }
         button#email_submit{
             margin-left: 0px;
@@ -805,7 +805,7 @@
     </div>
     <div class="hero-image">
         <div class="hero-text heading reg_hidden company-name-classic">
-            <h1 class="company" style="font-size:25px;color:darkblue;text-align:left">
+            <h1 class="company" style="font-size:25px;text-align:left">
                 <!-- Email verification Page Title -->
                 <span class="sub-title-skeleton">Verification</span>
             </h1>

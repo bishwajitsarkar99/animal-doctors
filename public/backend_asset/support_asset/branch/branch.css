@@ -159,12 +159,12 @@ div.responsive {
 }
 .branch_access{
     background: radial-gradient(farthest-corner at 100px 100px, #fff,#fff);
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
     opacity: 5;
 }
 .text_label{
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    color: black;
+    color: #333;
     font-family: var(--nav-font-family);
 }
 ul#user_branch_menu {
@@ -172,7 +172,7 @@ ul#user_branch_menu {
 }
 .branch_head_label{
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    color: white;
+    color: #000000;
     font-family: var(--nav-font-family);
     text-transform: uppercase;
     font-size: 11px;
@@ -183,13 +183,13 @@ ul#user_branch_menu {
 }
 #branch_info,.branch_chang{
     padding: 0px 16px !important;
-    background-color: #b667ff;
+    background-color: #e7e7d763;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
     letter-spacing: 1px;
 }
 #Creator,#updator{
     padding: 0px 16px !important;
-    background-color: #b667ff;
+    background-color: #e7e7d763;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
     letter-spacing: 1px;
 }
@@ -323,7 +323,7 @@ ul#user_branch_menu_change>li, ul#usrMenu>li{
     padding-top: 5px;
     padding-right: 5px;
     color: black;
-    font-weight: 700;
+    font-weight: 600;
     font-family: var(--nav-font-family);
 }
 .list_group {

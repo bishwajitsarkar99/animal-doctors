@@ -764,6 +764,17 @@ class AuthService
             'users' => $users,
         ], 200);
     }
+    /**
+     * Handle User Email Fetch. fetchEmailsThree
+    */
+    public function fetchEmailsThree(Request $request)
+    {
+        $user_emails = User::where('login_email')->orWhere('status', 1)->get();
+
+        return response()->json([
+            'user_emails' => $user_emails,
+        ], 200);
+    }
 
     /**
      * Handle User Role Fetch For Branch.

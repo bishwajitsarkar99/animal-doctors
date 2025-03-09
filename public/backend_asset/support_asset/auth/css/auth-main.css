@@ -32,7 +32,8 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
+  --font-family-sans-serif: "Poppins ", Sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; 
   /* --dashboard-head-font-family:'Faster One'; */
   --dashboard-head-font-family:futura;
@@ -43,7 +44,7 @@
   --bs-email-background-color:linear-gradient(to bottom, silver, transparent,silver,lightgray);
   --nav-button-background:linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);
   --mdb-btn-border-color:#007bff;
-  --nav-font-family:sans-serif;
+  --nav-font-family:"Poppins", Sans-serif;
   --nav-button-color:white;
 }
 
@@ -305,7 +306,7 @@ form#loginForm {
   left: 2px;
   top: -2px;
   width: 100%;
-  height: 25px;
+  height: 26px;
   border-radius: 3px;
   z-index: 10;
   background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
@@ -318,7 +319,7 @@ form#loginForm {
   left: 2px;
   top: -2px;
   width: 100%;
-  height: 25px;
+  height: 26px;
   border-radius: 3px;
   z-index: 10;
   background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
@@ -342,7 +343,7 @@ form#loginForm {
   content: "";
   position: absolute;
   left: 0;
-  top: 5px;
+  top: -6px;
   width: 100%;
   height: 50px;
   border-radius: 3px;
@@ -354,8 +355,8 @@ form#loginForm {
 .logo-skeleton::before{
   content: "";
   position: absolute;
-  left: -6px;
-  top: 6px;
+  left: -4px;
+  top: -4px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -368,7 +369,7 @@ form#loginForm {
   content: "";
   position: absolute;
   left: 0;
-  top: 5px;
+  top: -7px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -381,7 +382,7 @@ form#loginForm {
   content: "";
   position: absolute;
   left: 10px;
-  top: 6px;
+  top: -6px;
   width: 31px;
   height: 29px;
   border-radius: 50%;
@@ -394,7 +395,7 @@ form#loginForm {
   content: "";
   position: absolute;
   left: 1px;
-  top: 5px;
+  top: -7px;
   width: 31px;
   height: 30px;
   border-radius: 50%;
@@ -407,7 +408,7 @@ form#loginForm {
   content: "";
   position: absolute;
   left: -2px;
-  top: 4px;
+  top: -7px;
   width: 34px;
   height: 31px;
   border-radius: 50%;
@@ -587,10 +588,10 @@ div.address_top {
   }
 }
 .container.bg {
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
   opacity: 1;
-  animation: bg_focus 6s infinite;
+  /* animation: bg_focus 6s infinite; */
   
 }
 @keyframes bg_focus{
@@ -684,7 +685,7 @@ body.register_background_color {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  /* background-color: #fff; */
+  background-color: #fff;
   opacity: 1;
   /* animation: back_focus 6s infinite; */
 }
@@ -710,7 +711,7 @@ h1.company_heading{
 }
 h1.body_heading{
   /* font-family: 'Monoton'; */
-  font-family:"monoton";
+  font-family: var(--nav-font-family);
   font-size: 2vw;
   color: white;
   text-align: justify;
@@ -871,15 +872,16 @@ input.password {
   opacity: 5;
   width: 72%;
   word-spacing: normal;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: var(--nav-font-family);
   outline: none;
   box-shadow: none;
   padding-left: 5px;
   border-radius: 4px;
   padding-bottom: 1px;
+  padding-top: 3px;
   font-size: 11px;
   font-weight: 700;
-  color: black;
+  color: #333;
   letter-spacing: 0.5px;
   word-spacing: 0.5px;
   animation: inputColor 2s infinite;
@@ -899,24 +901,22 @@ a.acc_link {
   padding-left: 0px;
 }
 label.email {
-  color: darkblue;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  font-weight: 600;
-  text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
-  padding-left: 4px;
-  padding-right: 5px;
+  color: #333;
+  font-family: var(-nav-font-family);
+  font-weight: 700;
+  padding-left: 0px;
+  padding-right: 8px;
   border-radius: 3px;
-  font-size: 13px;
+  font-size: 12px;
 }
 label.password {
-  color: darkblue;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  font-weight: 600;
-  text-shadow: 2px 2px 4px rgb(0 0 0 / 18%);
-  padding-left: 3px;
-  padding-right: 5px;
+  color: #333;
+  font-family: var(-nav-font-family);
+  font-weight: 700;
+  padding-left: 0px;
+  padding-right: 4px;
   border-radius: 3px;
-  font-size: 13px;
+  font-size: 12px;
 }
 label.label_email {
   color: darkblue;
@@ -1042,7 +1042,7 @@ input.email {
   background-color: white;
   opacity: 5;
   word-spacing: normal;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: var(--nav-font-family);
   outline: none;
   box-shadow: none;
   width: 72%;
@@ -1051,7 +1051,7 @@ input.email {
   padding-bottom: 1px;
   font-size: 11px;
   font-weight: 700;
-  color: black;
+  color: #333;
   letter-spacing: 0.5px;
   word-spacing: 0.5px;
   animation: inputColor 2s infinite;
@@ -1060,10 +1060,10 @@ input.email {
 }
 @keyframes inputColor{
   0%{
-    color: darkblue;
+    color: gray;
   }
   100%{
-    color: darkblue;
+    color: #333;
   }
 }
 input.email:focus{
@@ -1084,11 +1084,11 @@ input.branch{
   padding-bottom: 1px;
   font-size: 11px;
   font-weight: 700;
-  color: black;
+  color: #333;
   letter-spacing: 0.5px;
   word-spacing: 0.5px;
   animation: inputColor 2s infinite;
-  margin-left: 12px;
+  margin-left: 10px;
 }
 input.branch:focus{
   border: 1px solid dodgerblue;
@@ -1163,11 +1163,11 @@ button.btn.btn-sm.btn.login_button {
   --mdb-box-shadow-color-rgb: 0, 0, 0;
   box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
   color: var(--nav-button-color);
-  font-family: var(--nav-font-family);
+  font-family: var(--font-family-sans-serif);
   border-color: var(--mdb-btn-border-color);
   text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
   font-variant: all-petite-caps;
-  font-size: 12px;
+  font-size: 13px;
   line-height: .2;
   opacity: 1;
   text-align: center;
@@ -1198,8 +1198,8 @@ a.btn.btn-sm.btn.back_button {
   border-color: var(--mdb-btn-border-color);
   text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
   font-variant: all-petite-caps;
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 13px;
+  line-height: 1.2;
   opacity: 1;
   text-align: center;
   font-weight: 700;
@@ -1274,7 +1274,7 @@ a.forgot_link{
   transition: all 200ms;
 } */
 h4.heading_admin_login{
-  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family:var(--nav-font-family);
   word-spacing: 1px;
   margin-top: 15px;
   letter-spacing: 1.5px;
@@ -1282,17 +1282,18 @@ h4.heading_admin_login{
 }
 @keyframes fontColor {
   0%{
-    color: royalblue;
+    color: whitesmoke;
   }
   100%{
-    color: darkblue;
+    color: white;
   }
 
 }
 h4.heading_admin{
-  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family:var(--nav-font-family);
   word-spacing: 1px;
   margin-top: 15px;
+  font-weight: 600;
   letter-spacing: 1.5px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   animation: focus 8s linear infinite;
@@ -1378,7 +1379,7 @@ button:not(:disabled),
   font-weight: 500;
   color: #ab7800ab;
   text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
-  font-family: var(--dashboard-head-font-family);
+  font-family: var(--nav-font-family);
   animation: text_shadow 8s infinite;
   
 }
@@ -1387,16 +1388,17 @@ button:not(:disabled),
   color: #fff;
 }
 10% {
-  color: royalblue;
+  color: whitesmoke;
 }
 100% {
     color: #fff;
 }
 }
 p.navbar-brand.admin_panel.text-shadow {
-  font-size: 38px;
-  font-family: var(--dashboard-head-font-family2);
-  margin-top: -17px;
+  font-size: 25px;
+  font-family: var(--nav-font-family);
+  margin-top: -6px;
+  font-weight: 700;
 }
 
 nav#topBar_tigger {
@@ -1407,13 +1409,13 @@ header.sticky-top{
 }
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: var(--nav-font-family);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff; 
+  /* background-color: #fff;  */
 }
 
 .background-color{
@@ -1428,18 +1430,15 @@ body {
   opacity: 1;
   /* animation: bg_color 2s infinite; */
 }
-.admin-background-color{
-  background-image: url("/image/login-background/admin-background.jpg");
-  /* background-color: #cccccc; */
-  height: auto;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  background-color: #fff;
-  /* background-image: linear-gradient(45deg,#1e1e1ed9,#1e1e1ed9); */
+.admin-background-color {
+  background-image: url("/image/login-background/admin-background.jpg") !important;
+  /* background-image: linear-gradient(45deg, #1e1e1ed9, #1e1e1ed9) !important; */
+  height: auto !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  position: relative !important;
   opacity: 1;
-  /* animation: bg_color 2s infinite; */
 }
 .accounts-background-color{
   background-image: url("/image/login-background/accounts-login-background.jpg");
@@ -1449,7 +1448,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  background-color: #fff;
+  /* background-color: #fff; */
   opacity: 1;
   /* animation: bg_color 2s infinite; */
 }
@@ -1461,7 +1460,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  background-color: #fff;
+  /* background-color: #fff; */
   opacity: 1;
   /* animation: bg_color 2s infinite; */
 }
@@ -1498,7 +1497,7 @@ h2.para{
   color: #f5f5f5;
   opacity: 1;
   text-align: center;
-  box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+  /* box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001; */
   animation: text_shadow 8s linear infinite;
 }
 @keyframes text_focus_color{
@@ -1512,13 +1511,12 @@ h2.para{
 p.login-address{
   text-align: justify;
   color: #fff;
-  font-style: italic;
   text-align: left;
   font-weight: 900;
-  font-size: 20px;
+  font-size: 18px;
   letter-spacing: 1px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: var(--nav-font-family);
 }
 p.address {
   text-align: justify;
@@ -1528,7 +1526,7 @@ p.address {
   font-size: 14px;
   letter-spacing: 1px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: var(--nav-font-family);
 }
 
 [tabindex="-1"]:focus {
@@ -9667,7 +9665,7 @@ body {
   font-size: 14px;
   line-height: 1.8;
   font-weight: normal;
-  background: #fff;
+  /* background: #fff; */
   color: gray; }
 
 a {

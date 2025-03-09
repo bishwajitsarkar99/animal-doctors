@@ -16,6 +16,7 @@ class EmailSetting extends Seeder
     {
         MailSetting::truncate();
         MailSetting::create([
+            'id' => '1',
             'mail_transport' => 'smtp',
             'mail_host' => 'smtp.gmail.com',
             'mail_port' => '587',

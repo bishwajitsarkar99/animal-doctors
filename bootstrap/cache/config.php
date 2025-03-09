@@ -1102,68 +1102,16 @@
   ),
   'mail' => 
   array (
-    'default' => NULL,
-    'mailers' => 
-    array (
-      'smtp' => 
-      array (
-        'transport' => 'smtp',
-        'host' => NULL,
-        'port' => NULL,
-        'encryption' => NULL,
-        'username' => NULL,
-        'password' => NULL,
-        'timeout' => NULL,
-        'auth_mode' => NULL,
-      ),
-      'ses' => 
-      array (
-        'transport' => 'ses',
-      ),
-      'mailgun' => 
-      array (
-        'transport' => 'mailgun',
-      ),
-      'postmark' => 
-      array (
-        'transport' => 'postmark',
-      ),
-      'sendmail' => 
-      array (
-        'transport' => 'sendmail',
-        'path' => '/usr/sbin/sendmail -t -i',
-      ),
-      'log' => 
-      array (
-        'transport' => 'log',
-        'channel' => NULL,
-      ),
-      'array' => 
-      array (
-        'transport' => 'array',
-      ),
-      'failover' => 
-      array (
-        'transport' => 'failover',
-        'mailers' => 
-        array (
-          0 => 'smtp',
-          1 => 'log',
-        ),
-      ),
-    ),
+    'driver' => 'smtp',
+    'host' => 'smtp.gmail.com',
+    'port' => 587,
+    'encryption' => 'tls',
+    'username' => 'bishwajitsarkar99@gmail.com',
+    'password' => 'ugqkatbjsgtowpfx',
     'from' => 
     array (
-      'address' => NULL,
+      'address' => 'bishwajitsarkar99@gmail.com',
       'name' => 'GST-Medicine-Center',
-    ),
-    'markdown' => 
-    array (
-      'theme' => 'default',
-      'paths' => 
-      array (
-        0 => 'C:\\Users\\HP\\Project-Manager\\Laravel-Project\\animal-doctors\\resources\\views/vendor/mail',
-      ),
     ),
   ),
   'queue' => 

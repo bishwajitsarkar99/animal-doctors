@@ -23,20 +23,34 @@
         <title>{{setting('company_name')}}</title>
 
         <style>
+        :root{
+            --font-register:"Poppins", Sans-serif;
+        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            background-color:#d8edffd1;
+            font-family: var(--font-register);
+            background-color:#e8edf13d;
+        }
+        p.address {
+            text-align: justify;
+            color: #fff;
+            text-align: left;
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-family: var(--font-register);
         }
         .registation_container {
             padding-left: 300px;
             padding-right: 150px;
         }
         .card.forget_card{
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-family: var(--font-register);
             padding: 20px 20px;
+            border-radius: 5px !important;
         }
         .form-carb-body {
-            background-color: beige;
+            background-color: #f7f7e3;
             padding-left: 20px;
             border-radius: 5px;
         }
@@ -70,30 +84,57 @@
             display: flex;
         }
         button#reg_submit{
-            background-image: linear-gradient(to top, #dbdb90, #dbdb90, #dbdb90);
-            margin-left: 0px;
             border: 1px solid #dbdb90;
-            color: #684a00 !important;
+            color: #333 !important;
+            background-color: #c3c3747d;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            outline: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
             transition: border-color 0.3s ease, background-color 0.3s ease;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-family: var(--font-register);
         }
         button#reg_submit:hover{
-            background-image: linear-gradient(to top,  #39a839c9,  #39a839c9,  #39a839c9);
-            border: 1px solid #39a839c9;
-            color: white !important;
+            border-color: #b6b6786b;
+            background-color: #dbdb906b;
+            color: forestgreen !important;
             transition: border-color 0.3s ease, background-color 0.3s ease;
+            --mdb-box-shadow-color-rgb: 0, 0, 0;
+            box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35) !important;
         }
         a#back{
-            background-image: linear-gradient(to top, #dbdb90, #dbdb90, #dbdb90);
+            background-color: #c3c3747d;
             margin-left: 0px;
             border: 1px solid #dbdb90;
-            color: #684a00 !important;
+            margin-left: 0px;
+            color: #333 !important;
+            padding: 3px 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            outline: none;
+            text-align:center;
             transition: border-color 0.3s ease, background-color 0.3s ease;
+            box-shadow: none;
+            font-family: var(--font-register);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-decoration: none;
         }
         a#back:hover{
-            background-image: linear-gradient(to top,  #39a839c9,  #39a839c9,  #39a839c9);
-            border: 1px solid #39a839c9;
-            color: white !important;
+            background-color: #c9c9836b;
+            border: 1px solid #dbdb906b;
+            color: forestgreen !important;
             transition: border-color 0.3s ease, background-color 0.3s ease;
+            --mdb-box-shadow-color-rgb: 0, 0, 0;
+            box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
         }
         .progress {
             background-color: #dddddd;
@@ -717,37 +758,6 @@
                 <span class="nav-head-skeleton">{{setting('company_name')}}</span>
             </p>
             <p class="address skeleton">{{setting('company_address')}}</p>
-            <!-- <p class="d-none d-md-inline-block form-inline ms-auto me-3 me-md-0 my-0 my-md-0">
-                <a class="menu_btn" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-toggle="tooltip"  data-bs-placement="left" title="Menu" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                    <span class="menu_icon menu-skeleton"><img class="menu_icon" src="{{asset('backend_asset/main_asset/img/menu.png')}}" alt=""></span>
-                </a>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                    <div class="offcanvas-header">
-                        <h6 class="head_auth" id="offcanvasRightLabel">Auth-Menu</h6>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-toggle="tooltip"  data-bs-placement="left" title="Close" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <div class="modal fade" id="loader_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-sm modal-dialog-centered">
-                                <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
-                                    <div class="modal-body" id="loader_modalBody"> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="group__button">
-                            <a type="submit" href="/forget-password" class="btn btn-sm" id="forg_page">
-                                <span class="btn-text forg_page"> Forget-Password</span>
-                            </a>
-                            <a type="submit" href="/email-verification" class="btn btn-sm" id="logn_page">
-                                <span class="btn-text logn_page"> Email-Verification</span>
-                            </a>
-                        </div>
-                        <div class="side_canvas_animation" hidden>
-                            <img class="sidebar-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
-                        </div>
-                    </div>
-                </div>
-            </p> -->
         </nav>
     </header>
 
@@ -767,7 +777,7 @@
             <div class="hero-text heading reg_hidden company-name-classic">
                 <h1 class="company">
                     <!-- User Register-Page Title -->
-                    <span class="sub-title-skeleton">Register</span>
+                    <span class="sub-title-skeleton">Registration</span>
                 </h1>
             </div>
         </div>
@@ -855,7 +865,7 @@
                                                         </div>
                                                         <div class="col-xl-6">
                                                             <div class="d-grid">
-                                                                <span class="image_size cap-skeleton" style="text-transform: uppercase;text-align: center;background-color:beige;">
+                                                                <span class="image_size cap-skeleton" style="text-align: center;background-color:beige;">
                                                                    User-Image : 150 x 150 (px) 
                                                                 </span>
                                                                 <div class="img-group-box signal-img pb-1">
@@ -886,13 +896,13 @@
                                                                 </div>
                                                             </div>
                                                             <div class="mb-2 d-grid">
-                                                                <button type="submit" class="btn btn-sm btn-primary forget_button register_btn register_action button-skeleton error_handle" id="reg_submit">
+                                                                <button type="submit" class="btn btn-group-sm register_btn register_action button-skeleton error_handle" id="reg_submit">
                                                                     <span class="register-icon spinner-border spinner-border-sm" style="color:forestgreen;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                                     <span class="btn-text">Register</span>
                                                                 </button>
                                                             </div>
                                                             <div class="mb-2 d-grid">
-                                                                <a type="submit" href="{{$register_form_url}}" class="btn btn-sm btn-primary forget_button register_btn register_action button-skeleton" id="back">
+                                                                <a type="submit" href="{{$register_form_url}}" class="btn btn-group-sm register_btn register_action button-skeleton" id="back">
                                                                     <span class="back-icon spinner-border spinner-border-sm" style="color:forestgreen;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                                                     <span class="back-btn-text">Back</span>
                                                                 </a>

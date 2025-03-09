@@ -229,7 +229,7 @@
               <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               <span class="cancel-btn-text">Cancel</span>
             </button>
-            <button id="access_confirm_button" type="button" class="btn btn-sm cgt_btn btn_focus branch-skeleton mt-2">
+            <button id="access_confirm_button" type="button" class="btn btn-sm modal_button btn_focus branch-skeleton mt-2">
               <span class="save-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
               <span class="save-btn-text">Confirm</span>
             </button>

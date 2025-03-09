@@ -41,8 +41,8 @@
 /* Style the file input */
 #imgInput {
     border: 1px solid #dbdb90;
-    color: #684a00 !important;
-    background-color: #dbdb90;
+    color: #333 !important;
+    background-color: #c3c3747d;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
@@ -51,16 +51,20 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     transition: border-color 0.3s ease, background-color 0.3s ease;
+    box-shadow: none;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Poppins", Sans-serif;
 }
 /* Change border and background color on hover */
 #imgInput:hover {
-    border-color: forestgreen;
+    border-color: #b6b6786b;
     background-color: #e9ecef;
     color: forestgreen !important;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 #imgInput::file-selector-button {
     padding-top: 2px;
@@ -69,17 +73,19 @@
     background-color: #c5c57e;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 #imgInput::file-selector-button:hover {
     background-color: forestgreen;
     color: white !important;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 /* Change border color on focus */
 #imgInput:focus {
     border-color: forestgreen;
     background-color: #e9ecef;
     outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 .label_register{
     color: darkblue;
@@ -124,8 +130,8 @@ div#admin_modal_box {
 .logo-skeleton::before{
     content: "";
     position: absolute;
-    left: -6px;
-    top: 6px;
+    left: -4px;
+    top: -4px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -228,7 +234,7 @@ a.menu_btn {
     padding: 1rem;
 }
 h4.heading_register {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: "Poppins", Sans-serif;
     word-spacing: 1px;
     margin-top: -1px;
     letter-spacing: 1px;
@@ -263,10 +269,10 @@ input.register{
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35); */
 }
 .show-current-border{
-    border-left: 1px solid goldenrod;
-    border-bottom: 1px solid goldenrod;
-    border-top: 1px solid goldenrod;
-    border-right: 1px solid goldenrod;
+    border-left: 1px solid #ddddddde;
+    border-bottom: 1px solid #ddddddde;
+    border-top: 1px solid #ddddddde;
+    border-right: 1px solid #ddddddde;
 }
 .show-error-border{
     border-left: 1px solid #f19a7a;
@@ -314,19 +320,17 @@ input.register{
     line-height: 1.5;
 }
 .upload_btn {
-    background-image: linear-gradient(to top, #dbdb90, #dbdb90, #dbdb90);
+    background-color: #c3c3747d;
     margin-left: 0px;
     border: 1px solid #dbdb90;
-    color: #684a00 !important;
+    color: #333 !important;
     padding: 3px 5px;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
     outline: none;
     transition: border-color 0.3s ease, background-color 0.3s ease;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: "Poppins", Sans-serif;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -334,10 +338,12 @@ input.register{
     text-decoration: none;
 }
 .upload_btn:hover {
-    background-image: linear-gradient(to top,  #39a839c9,  #39a839c9,  #39a839c9);
-    border: 1px solid #39a839c9;
-    color: white !important;
+    background-color: #c9c9836b;
+    border: 1px solid #dbdb906b;
+    color: forestgreen !important;
     transition: border-color 0.3s ease, background-color 0.3s ease;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 .fillup-block{
     display: block;
@@ -562,7 +568,7 @@ input.image{
     content: "";
     position: absolute;
     left: 0;
-    top: 7px;
+    top: -7px;
     width: 100%;
     height: 50px;
     border-radius: 3px;
@@ -784,11 +790,15 @@ body.register_background-color{
     left: 15%;
 }
 h1.company {
-    font-family: 'Monoton';
-    font-size: 2vw;
-    color: black;
+    font-family: "Poppins", Sans-serif;
+    font-size: 1.7vw;
+    color: #3333338a;
     text-align: justify;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-weight: 600;
+    text-shadow: none;
+}
+.card.forget_card{
+    box-shadow: none;
 }
 .company-name-classic {
     position: fixed;
@@ -813,7 +823,7 @@ h1.company {
     animation: com_animation 1500ms ease-out infinite;
     z-index: -1;
     display: block;
-    left: 90px;
+    left: 67px;
     width: 200px;
     height: 200px;
 }

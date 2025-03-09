@@ -2,7 +2,7 @@
     --input-background:linear-gradient(to bottom, silver, transparent,silver,lightgray);
     --nav-button-background:linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);
     --mdb-btn-border-color:#007bff;
-    --nav-font-family:sans-serif;
+    --nav-font-family:"Poppins", Sans-serif;
     --nav-button-color:white;
 }
 body.doctors-background-color{
@@ -86,19 +86,32 @@ div.url_link{
 }
 .skeleton,.menus-skeleton,.mini-skeleton,.email-input-skeleton,.heading-skeleton,.menu-rest-skeleton,.heading-rest-skeleton,
 .rest-email-skeleton,.rest-password-skeleton,.rest-confirm-password-skeleton,.panel-skeleton,.select-skeleton,.email_verification_skeletone,
-.email_verification_back_skeletone,.sub-title-skeleton{
+.email_verification_back_skeletone,.sub-title-skeleton,.logo-skeleton{
     position: relative;
 }
 .heading-skeleton::before{
     content: "";
     position: absolute;
     left: 0;
-    top: 7px;
+    top: -7px;
     width: 100%;
     height: 50px;
     border-radius: 3px;
     z-index: 10;
     background: linear-gradient(90deg,#b3b3b3,#f9f9f9,#b3b3b3);
+    background-size: 200%;
+    animation: skeleton 1s infinite reverse;
+}
+.logo-skeleton::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: -6px !important;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
     animation: skeleton 1s infinite reverse;
 }
@@ -236,7 +249,7 @@ div.url_link{
     content: "";
     position: absolute;
     left: 0;
-    top: 7px;
+    top: -7px;
     width: 100%;
     height: 50px;
     border-radius: 3px;
@@ -318,16 +331,29 @@ h6.head_auth {
 }
 .lb_text {
     font-weight: 500;
-    color: darkblue;
+    color: #333;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 .panel {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     border-left: #3b71ca solid 4px;
-    color: #2c65b9;
+    color: #333333c9;
     background-color: #edf2f7;
     padding: 5px 10px;
     font-size: 12px;
+}
+input#email {
+    background-color: white;
+    color: #333 !important;
+    font-size: 12px;
+    min-height: calc(.8em + 0.5rem + .8px);
+    padding: 0.10rem 0.5rem;
+    border-radius: 0.25rem;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    opacity: 1;
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 input.inpt_pass{
     font-size: 12px;

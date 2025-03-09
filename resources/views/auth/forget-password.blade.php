@@ -25,7 +25,7 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            background-color:#d8edffd1;
+            background-color:#e8edf13d;
         }
         nav#topBar_tigger {
             margin-top: -11px;
@@ -816,7 +816,7 @@
 <header class="bg sticky-top">
     <nav class="sb-topnav navbar navbar-expand navbar-dark" id="topBar_tigger">
         <p class="navbar-brand ps-3 admin_panel text-shadow" style="float: right;">
-            <span class="logo-skeleton"><img class="mt-1 company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
+            <span class="logo-skeleton"><img class="company_logo" src="{{asset('backend_asset/main_asset/img')}}/{{setting('update_company_logo')}}" alt=""></span>
             <span class="heading-skeleton">{{setting('company_name')}}</span>
         </p>
         <section class="justify-content-between">
@@ -840,7 +840,7 @@
     </div>
     <div class="hero-image">
         <div class="hero-text heading reg_hidden company-name-classic">
-            <h1 class="company" style="font-size:25px;color:darkblue;text-align:left">
+            <h1 class="company" style="font-size:25px;text-align:left">
                 <!-- Forget-Password-Page Title -->
                 <span class="skeleton">Password</span>
             </h1>
@@ -867,7 +867,7 @@
                                 <div class="container d-flex flex-column">
                                     <div class="row align-items-center justify-content-center mb-3 mt-3">
                                         <div class="col-12 col-md-8 col-lg-4">
-                                            <div class="card forget_card">
+                                            <div class="card forget_card" style="border-radius: 5px;">
                                                 <div class="card-body">
                                                     @if(request()->input('token'))
                                                     <div class="mb-3">

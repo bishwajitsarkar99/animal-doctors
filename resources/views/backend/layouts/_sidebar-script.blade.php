@@ -168,8 +168,11 @@
 </script> -->
 <script>
     $(document).ready(function(){
-        // Auth sidebar Action
+        // sidebar Action
         $(document).on('click', '.load-page', function(){
+            // Product
+            $('#flush-collapseOne').collapse('hide');
+            // Auth
             $('#Auth').collapse('hide');
         });
     });
