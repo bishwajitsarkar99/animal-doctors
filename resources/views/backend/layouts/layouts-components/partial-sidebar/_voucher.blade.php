@@ -8,9 +8,9 @@
                     <span class="{{setting('vaoucher_title_display')}}">{{__('translate.Vaoucher')}}</span>
                     <span class="lock" id="voch_lock">{{__('translate.Lock')}}</span>
                     <span class="unlock" id="voch_unlock" hidden>{{__('translate.Unlock')}}</span>
-                    <div class="sb-sidenav-collapse-arrow">▼</div>
                 </span>
             </a>
+            <div class="sb-sidenav-collapse-arrow ms-auto icon-size">▼</div>
         </button>
         <div id="flush-collapse3" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushExample">
             <div class="tree">

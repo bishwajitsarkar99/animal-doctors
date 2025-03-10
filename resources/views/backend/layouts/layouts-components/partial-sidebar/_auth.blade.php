@@ -8,9 +8,9 @@
                     <span class="{{setting('auth_visual')}} {{ Request::is('company/branch-admin-access') || Request::is('company/branch-activity') || Request::is('company/branch-user-access') || Request::is('super-admin/show-user-details') || Request::is('super-admin/auth-page') || Request::is('account-holders') || Request::is('super-admin/email-verification') || Request::is('super-admin/role-index') || Request::is('super-admin/role-permission-index') || Request::is('super-admin/manage-role') || Request::is('super-admin/users') || Request::is('application/module-category-index') || Request::is('application/module-name-index') || Request::is('application/module-index') ? 'folder-active' : '' }}">{{__('translate.Auth')}}</span>
                     <span class="lock" id="auth_lock">{{__('translate.Lock')}}</span>
                     <span class="unlock" id="auth_unlock" hidden>{{__('translate.Unlock')}}</span>
-                    <div class="sb-sidenav-collapse-arrow">▼</div>
                 </span>
             </a>
+            <div class="sb-sidenav-collapse-arrow ms-auto icon-size">▼</div>
         </button>
         <div id="Auth" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushExample">
             <div class="tree">

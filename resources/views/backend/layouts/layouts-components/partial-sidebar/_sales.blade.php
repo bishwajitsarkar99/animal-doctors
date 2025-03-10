@@ -8,9 +8,9 @@
                     <span class="{{setting('sales_title_display')}}">{{__('translate.Sales')}}</span>
                     <span class="lock" id="sales_lock">{{__('translate.Lock')}}</span>
                     <span class="unlock" id="sales_unlock" hidden>{{__('translate.Unlock')}}</span>
-                    <div class="sb-sidenav-collapse-arrow">▼</div>
                 </span>
             </a>
+            <div class="sb-sidenav-collapse-arrow ms-auto icon-size">▼</div>
         </button>
         <div id="flush-collapse2" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushExample">
             <div class="tree">

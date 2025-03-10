@@ -172,8 +172,39 @@
         $(document).on('click', '.load-page', function(){
             // Product
             $('#flush-collapseOne').collapse('hide');
+            // Stock
+            $('#flush-collapse').collapse('hide');
+            // Leger
+            $('#flush-collapse1').collapse('hide');
+            // Sales
+            $('#flush-collapse2').collapse('hide');
+            // Vaoucher
+            $('#flush-collapse3').collapse('hide');
+            // Asset
+            $('#asset_documentioin').collapse('hide');
+            // Report
+            $('#flush-collapse4').collapse('hide');
+            // HRM
+            $('#flush-collapse5').collapse('hide');
             // Auth
             $('#Auth').collapse('hide');
+            // Layouts
+            $('#collapseLayouts').collapse('hide');
+            // ForntEnd
+            $('#components').collapse('hide');
+            // Setting
+            $('#addons').collapse('hide');
+        });
+        $(document).off("click", ".accordion-button").on("click", ".accordion-button", function () {
+            let arrowIcon = $(this).find(".sb-sidenav-collapse-arrow");
+            // Toggle the rotation class
+            arrowIcon.toggleClass("rotate-icon");
+        });
+        // component
+        $(document).off("click", ".compontent-btn").on("click", ".compontent-btn", function () {
+            let arrowIcon = $(this).find(".sb-sidenav-collapse-arrow");
+            // Toggle the rotation class
+            arrowIcon.toggleClass("rotate-icon");
         });
     });
 </script>

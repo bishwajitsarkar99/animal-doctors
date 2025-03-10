@@ -116,7 +116,7 @@
     <div class="hero-address">
         <h2 class="para">
             <span class="nav_head">
-                <p class="login-address skeleton login-head-address-animation ms-5">{{setting('company_address')}}</p>
+                <p class="login-address skeleton login-head-address-animation ms-4">{{setting('company_address')}}</p>
             </span>
         </h2>
     </div>

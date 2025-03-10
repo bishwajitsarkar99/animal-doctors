@@ -179,7 +179,8 @@ return[
     'Vaoucher'=>'ভাউচার',
     'Voucher Category'=>'ভাউচার ধরন',
     'Vaoucher Category'=>'ভাউচার ধরন',
-    'Vaoucher List'=>'ভাউচার তালিকা',
+    'Category List'=>'ধরন তালিকা',
+    'Create'=>'তৈরি করুন',
     // Vaourcher Create
     'Voucher Create'=>'ভাউচার তৈরি করুন',
     'ADD Vaoucher'=>'ভাউচার যোগ করুন',
@@ -776,4 +777,7 @@ return[
     'Price'=>'দাম',
     'Tax(%)'=>'ট্যাক্স(%)',
     'Total Inventory'=>'মোট ইনভেন্টরি',
+
+    // ForntEnd
+    'Fornt-End'=>'ফ্রন্টএন্ড',
 ];

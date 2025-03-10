@@ -1,7 +1,7 @@
 <!-- ========= super-Admin ============ -->
 @if(auth()->user()->role == 1)
 <span class="{{setting('layouts_moduel_display')}}">
-    <a class="nav-link collapsed lay_nav font_size child_layout {{setting('layouts_moduel_display')}}" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+    <a class="accordion-button nav-link collapsed lay_nav font_size child_layout {{setting('layouts_moduel_display')}}" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
         <span class="collapsed">
             <!-- <i class="fa-solid fa-plus" style="color:#ffff;" id="plus_layout_link"></i>
             <i class="fa-solid fa-minus" style="color:#ffff;" id="minus_layout_link" hidden></i> -->
@@ -9,20 +9,20 @@
         <div class="sb-nav-link-icon">
             <!-- <i class="fa-solid fa-folder-open fa-beat" style="font-size: 14px;color:white;"></i> -->
         </div>
-        <span class="{{setting('layouts_moduel_display')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{setting('layouts_moduel_title')}}</span>
+        <span class="layout_label {{setting('layouts_moduel_display')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>{{setting('layouts_moduel_title')}}</span>
         <div class="sb-sidenav-collapse-arrow {{setting('layouts_moduel_display')}}">
             ▼
         </div>
     </a>
     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
         <nav class="sb-sidenav-menu-nested nav child-white-tree">
-            <a class="nav-link underline nav_space" style="font-size: 12px;color:#fff" id="static_nav" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a class="nav-link underline nav_space load-page" style="font-size: 12px;color:#fff" id="static_nav" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#ffff;"></i>{{__('translate.File-Manager')}}
             </a>
-            <a class="nav-link underline nav_space" style="font-size: 12px;color:#fff" href="#" id="dark_mode" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a class="nav-link underline nav_space load-page" style="font-size: 12px;color:#fff" href="#" id="dark_mode" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#ffff;"></i>{{__('translate.Dark Sidenav')}}
             </a>
-            <a class="nav-link underline nav_space" style="font-size: 12px;color:#fff" href="#" id="light_mode" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a class="nav-link underline nav_space load-page" style="font-size: 12px;color:#fff" href="#" id="light_mode" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#ffff;"></i>{{__('translate.Light Sidenav')}}
             </a>
         </nav>

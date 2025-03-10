@@ -178,9 +178,8 @@ return[
     // Vaourcher Category
     'Vaoucher'=>'Vaoucher',
     'Category'=>'Category',
-    'Voucher Category'=>'Voucher Category',
-    'Vaoucher Category'=>'Vaoucher Category',
-    'Vaoucher List'=>'Vaoucher List',
+    'Create'=>'Create',
+    'Category List'=>'Category List',
     // Vaourcher Create
     'Voucher Create'=>'Voucher Create',
     'ADD Vaoucher'=>'ADD Vaoucher',
@@ -802,5 +801,6 @@ return[
     'Tax(%)'=>'Tax(%)',
     'Total Inventory'=>'Total Inventory',
 
-
+    // ForntEnd
+    'Fornt-End'=>'Fornt-End',
 ];

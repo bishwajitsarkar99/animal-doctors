@@ -8,9 +8,9 @@
                     <span class="{{setting('lager_display')}}">{{__('translate.Lager')}}</span>
                     <span class="lock" id="lock_leger">{{__('translate.Lock')}}</span>
                     <span class="unlock" id="unlock_leger" hidden>{{__('translate.Unlock')}}</span>
-                    <div class="sb-sidenav-collapse-arrow">▼</div>
                 </span>
             </a>
+            <div class="sb-sidenav-collapse-arrow ms-auto icon-size">▼</div>
         </button>
         <div id="flush-collapse1" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushExample">
             <div class="tree">

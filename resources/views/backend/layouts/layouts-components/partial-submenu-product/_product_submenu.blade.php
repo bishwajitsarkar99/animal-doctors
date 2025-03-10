@@ -1,5 +1,5 @@
 <!-- ================== Category ======================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_category {{setting('categ_title_visual')}} {{ Request::is('/category') ? 'folder-active' : '' }}" id="navbar_Dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_category {{setting('categ_title_visual')}} {{ Request::is('category') ? 'folder-active' : '' }}" id="navbar_Dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_category_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_category_link" hidden></i>
@@ -22,7 +22,7 @@
     </li>
 </ul>
 <!-- ================= Sub-Category ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_sub_category {{setting('sub_categ_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_sub_category {{setting('sub_categ_title_visual')}} {{Request::is('sub-category') ? 'folder-active' : ''}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_sub_category_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_sub_category_link" hidden></i>
@@ -46,7 +46,7 @@
 </ul>
 
 <!-- ================= Group ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_group {{setting('group_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_group {{setting('group_title_visual')}} {{Request::is('medicine-group') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_group_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_group_link" hidden></i>
@@ -66,7 +66,7 @@
     </li>
 </ul>
 <!-- ================= Medicine ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_product {{setting('medicine_title_visual')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_product {{setting('medicine_title_visual')}} {{Request::is('medicine-name') || Request::is('medicine-dosage') || Request::is('origin') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_product_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_product_link" hidden></i>
@@ -94,7 +94,7 @@
     </li>
 </ul>
 <!-- ================= Prodcut-Model ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_product_model {{setting('product_model_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_product_model {{setting('product_model_title_display')}} {{Request::is('model') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_product_model_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_product_model_link" hidden></i>
@@ -114,7 +114,7 @@
     </li>
 </ul>
 <!-- ============================= Units ==================== -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_unit {{setting('unit_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_unit {{setting('unit_title_display')}} {{Request::is('units') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_unit_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_unit_link" hidden></i>
@@ -136,7 +136,7 @@
     </li>
 </ul>
 <!-- =========================== Brand ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_brand {{setting('brand_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_brand {{setting('brand_title_display')}} {{Request::is('brand') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_brand_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_brand_link" hidden></i>
@@ -158,7 +158,7 @@
     </li>
 </ul>
 <!-- =========================== Product ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_another_product {{setting('product_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_another_product {{setting('product_title_display')}} {{Request::is('product') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_another_product_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_another_product_link" hidden></i>
