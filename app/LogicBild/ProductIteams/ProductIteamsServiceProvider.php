@@ -230,7 +230,8 @@ class ProductIteamsServiceProvider
             return companyProfile::find(1);
         });
         $allfolders = Folder_entry::all();
-        return view('super-admin.medicine-item.category.index', compact('company_profiles', 'allfolders'));
+        $page_name = 'Product Category';
+        return view('super-admin.medicine-item.category.index', compact('company_profiles', 'allfolders', 'page_name'));
     }
     /**
      * Handle Category Fetch Data

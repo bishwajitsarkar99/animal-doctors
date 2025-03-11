@@ -896,14 +896,6 @@ input#delete_branch_id {
 button.btn-close.btn-btn-sm.bg-danger.cols_btn {
     width: 30px;
 }
-button#permission_btn,button#branch_change_btn,button#access_update_btn,button#access_branch_delete,button#cancle_access{
-    font-family: var(--nav-font-family);
-}
-button#permission_btn:hover,button#branch_change_btn:hover{
-    background-image: linear-gradient(to bottom, rgb(14 14 14 / 5%) 0%, rgb(171 165 165 / 5%) 100%);
-    color: #0056b3;
-    transition: all 1s;
-}
 button#access_update_btn:hover{
     background-image: linear-gradient(to bottom, rgb(14 14 14 / 5%) 0%, rgb(171 165 165 / 5%) 100%);
     color: darkcyan;
@@ -916,6 +908,10 @@ button#access_branch_delete:hover, button#cancle_access:hover{
 }
 button.btn.btn-sm.delete_bg_btn{
     background-color:#c73500;
+}
+button.btn_focus{
+    border-color: none;
+    border: none;
 }
 .group-branch-skeleton,.mn-branch-skeleton,.mn-btn-branch-skeleton,.chn-btn-branch-skeleton{
     position: relative;

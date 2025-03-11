@@ -8,7 +8,8 @@
     --apperence-app-setting-bg:linear-gradient(to bottom, #08a05c,#08a05c);
     --drop-border-bg-color:white;
     --inventory-navbar-btn-background-image-hover:linear-gradient(5deg, silver, transparent,silver,lightgray);
-    --category-font-family:font: normal 600 13px / 20px "Poppins", Helvetica, Arial, Verdana, sans-serif;;
+    --btn-btn-sm-font-family:normal 600 12px / 20px "Poppins", Helvetica, Arial, Verdana, sans-serif;
+    --category-font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     /* #e1e1e1 */
 }
 .toggle-icon {
@@ -51,13 +52,11 @@ table, th, td {
     font-weight: 600;
 }
 tr.table-row.user-table-row{
-    background-color: white;
     color: black;
 }
 tr.table-row.user-table-row:hover{
     background-image: var(--table-row-hover);
     color: var(--color);
-    border-left: var(--size) solid var(--bg-color);
     font-weight: var(--font-weight);
     animation:fnt_color 2s linear infinite;
 }
@@ -75,6 +74,35 @@ tr.table-row.user-table-row:hover{
     100%{
         color: purple;
     }
+}
+tr.table-row:hover td#cat_td3,tr.table-row.user-table-row.td#cat_td3 {
+    position: relative;
+}
+tr.table-row:hover td#cat_td3::after,tr.table-row.user-table-row.td#cat_td3::after {
+    content: "\f304";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+    text-align: center;
+    opacity: 5;
+}
+tr.clicked{
+    background-color: rgb(210, 255, 210);
+    opacity: 1;
+}
+td {
+    position: relative;
+}
+li.upd.cgy {
+    transform: translateY(0%) !important;
+    text-align: center;
+    padding: 0px 0px;
+    box-shadow: 0px 2px 20px #0001, 0px 2px 6px #0001;
+    border: none;
 }
 .form-check-input[type=checkbox] {
     border-radius: 0.25em;
@@ -149,38 +177,57 @@ label.catg_name_label {
     font-family: var(--category-font-family);
     
 }
+label.tot-search {
+    color: black;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    font-family: var(--category-font-family);
+}
 tbody#group_data_table {
     color: black;
     font-weight: 500;
 }
+.button_width{
+    width: 100%;
+}
 button.btn.btn-sm.cgt_btn {
+    height: 25px;
     background-color: #0056b3;
-    background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
-    color: white;
-    line-height: 5px;
-    border-radius: 3px;
-    height: 2.1em;
-    font-size: 12px;
-    font: var(--category-font-family);
-    text-transform: capitalize;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    color: var(--nav-button-color);
+    font: var(--btn-btn-sm-font-family);
+    border-color: var(--mdb-btn-border-color);
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    font-variant: all-petite-caps;
+    font-size: 13px;
+    line-height: .2;
+    opacity: 1;
+    text-align: center;
+    font-weight: 700;
+    outline: none;
+    letter-spacing: 1px;
+    margin-left: -4px;
+    border-radius: 3px;
     border: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    animation: text_font_color 5s infinite;
 }
 button.btn.btn-sm.cgt_btn:hover{
-    background-color: #ddd;
-    color: #0056b3;
-    transition: all 1s;
+    background-color: #1985f9e0;
+    border: none;
+    color: white;
+    opacity: 1;
+    transition: 1ms;
 }
 button.btn.btn-sm.cgt_cancel_btn{
     background-color: orangered;
     background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     color: white;
     line-height: 5px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font: var(--btn-btn-sm-font-family);
+    font-weight: 600;
     border-radius: 3px;
     height: 2.1em;
     font-size: 12px;
@@ -193,9 +240,9 @@ button.btn.btn-sm.cgt_cancel_btn{
     border: none;
 }
 button.btn.btn-sm.cgt_cancel_btn:hover{
-    background-color: #ddd;
-    color: orangered;
-    transition: all 1s;
+    background-color: #ff4500a8;
+    color: white;
+    transition: 1ms;
 }
 .category-hidden{
     display: none;
@@ -438,21 +485,32 @@ span.search_on {
     }
 }
 .card.form-control.cat_form {
-    box-shadow: 0px 2px 20px #0001;
+    /* box-shadow: 0px 2px 20px #0001; */
     border: none;
 }
+form.mini-form {
+    box-shadow: 0px 2px 20px #0001;
+    padding: 10px 10px;
+    margin: 8px 5px;
+    border-radius: 5px;
+}
 input#category_name {
+    width: 100%;
     box-shadow: none;
     outline: none;
     box-shadow: none;
-    animation: supfncolor 6s infinite;
+    /* animation: supfncolor 6s infinite; */
+    min-height: calc(1.0em + 0.5rem + 2px);
+    padding: 0.20rem 0.5rem;
+    line-height: 1;
+    border-radius: 5px;
     font-size: 13px;
     box-shadow: none;
-    font-weight: 700;
-    border-top: 1px solid #f1eeee;
-    border-bottom: 1px solid #f1eeee;
-    border-left: 1px solid #f1eeee;
-    border-right: 1px solid #f1eeee;
+    font-weight: 600;
+    border-top: 1px solid #d1d1d1;
+    border-bottom: 1px solid #d1d1d1;
+    border-left: 1px solid #d1d1d1;
+    border-right: 1px solid #d1d1d1;
     color: black;
     font-family: var(--category-font-family);
 }
@@ -466,6 +524,19 @@ input#category_name {
     100%{
         background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     }
+}
+.is-valid{
+    border-color: rgb(25, 135, 84) !important;
+}
+.btn_box {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 5px;
+}
+.pill-rounded {
+    border-radius: 50rem;
+    background-image: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);
+    border: 1px solid lightgray;
 }
 .display-none{
     display: none;
@@ -488,27 +559,30 @@ input#category_name {
 button#cate_delete5 {
     background: orangered;
     color: white;
-    font-family: var(--category-font-family);
+    border-radius: 5px;
 }
 button#cate_delete5:hover {
-    background: #e9e9e9;
-    color: orangered;
-    font-family: var(--category-font-family);
+    background-color: #ff4500a8;
+    color: white;
+    transition: 1ms;
 }
 button#update_btn_confirm {
-    background: #08a05c;
     color: white;
-    font-family: var(--category-font-family);
+    border-radius: 5px;
 }
 button#update_btn_confirm:hover {
-    background: #e9e9e9;
-    color: #08a05c;
-    font-family: var(--category-font-family);
+    background-color: #1985f9e0;
+    border: none;
+    color: white;
+    opacity: 1;
+    transition: 1ms;
 }
 span.error_val {
     font-size: 12px;
-    color: orangered;
+    color: #333;
     text-align: left;
+    font-weight: 600;
+    font-family: var(--category-font-family);
 }
 span#savForm_error {
     text-align: right;
@@ -529,7 +603,6 @@ button#deleteBtn {
 }
 button.btn.btn-sm.btn_focus {
     animation: btnFocus 1s infinite;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 @keyframes btnFocus{
     0%{
@@ -589,7 +662,7 @@ input#delete_category_id {
     border: none;
     font-weight: 600;
     font-family: var(--category-font-family);
-    color: darkcyan;
+    color: black;
 }
 button#deleteLoader {
     background: #dd3c00db;

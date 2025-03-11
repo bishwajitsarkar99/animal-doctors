@@ -1,16 +1,25 @@
 <script type="module">
     import { buttonLoader } from "/module/module-min-js/design-helper-function-min.js";
+    import { activeTableRow } from "/module/module-min-js/helper-function-min.js";
     buttonLoader();
     $(document).ready(() => {
+        // ACtive table row background
+        $(document).on('click keydown', 'tr.table-row', function (event) {
+            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+                activeTableRow(this);
+                $(this).addClass("clicked").siblings().removeClass("clicked");
+            }
+        });
         // Initialize the button loader for the login button
-        buttonLoader('#save', '.add-icon', '.category-btn-text', 'ADD...', 'ADD', 3000);
+        buttonLoader('#save', '.add-icon', '.category-btn-text', 'ADD...', 'ADD', 1000);
         buttonLoader('#update_btn', '.update-icon', '.update-btn-text', 'Update...', 'Update', 1000);
         buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#deleteLoader', '.delete-icon', '.delete-btn-text', 'Delete...', 'Delete', 1000);
-        buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
+        buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel', 'Cancel', 1000);
 
         fetch_category_data();
         // Data View Table--------------
+        //<input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
         const table_rows = (rows) => {
             if (rows.length === 0) {
                 return `
@@ -23,46 +32,47 @@
             }
 
             return [...rows].map((row, key) => {
-                var statusClass, statusText, statusSignal, statusBg, statusTextColor, permissionSignal;
+                var statusClass, statusText, statusSignal, statusBg, statusTextSpace, permissionSignal;
                 if (row.status == 1) {
                     statusClass = 'text-white';
                     statusText = 'Active';
-                    statusTextColor = 'text-primary';
+                    statusTextSpace = '';
                     statusSignal = '<i class="fa-solid fa-check"></i>';
                     statusBg = 'badge rounded-pill bg-success';
                     permissionSignal = 'light2-focus';
                 } else if (row.status == 0) {
                     statusClass = 'text-white';
                     statusText = 'Deny';
-                    statusTextColor = 'text-danger';
+                    statusTextSpace = 'ps-1';
                     statusSignal = '<i class="fa-solid fa-xmark"></i>';
                     statusBg = 'badge rounded-pill bg-danger';
                     permissionSignal = 'danger-focus';
                 }
                 return `
-                    <tr class="table-row user-table-row" id="cat_td" key="${key}">
+                    <tr class="table-light table-row user-table-row data-table-row" id="cat_td" key="${key}">
                         <td class="sn border_ord" id="cat_td2">${row.id}</td>
                         <td class="txt_ ps-1 center" id="cat_td3">
-                            <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
-                            <ul class="dropdown-menu action ms-4 pe-3">
-                                <li class="upd cgy ps-1">
+                            <div class="dropdown">
+                                <a type="button" data-bs-toggle="dropdown" id="showActionBox">
+                                    <i class="fa-solid fa-ellipsis">‌</i>
+                                </a>
+                                <li class="upd cgy ps-1 dropdown-menu dropdown-menu-end action">
                                     <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="edtBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Eidt" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" 
                                     data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                                    <i class="fa-solid fa-pen-to-square fa-beat" style="color:darkcyan"></i></button>
+                                    <i class="fa-solid fa-pen-to-square fa-beat" style="color:#0056b3"></i></button>
                                     <button class="btn-sm edit_registration view_btn cgr_btn ms-4" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" 
                                     data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                     <i class="fa-solid fa-trash-can fa-beat" style="color:orangered"></i></button>
                                 </li>
-                                <span class="action-box-arrow mini"></span>
-                            </ul>
+                            </div>
                         </td>
                         <td class="txt_ ps-1" id="cat_td4">
                             <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" readonly></span>
                             ${row.category_name}
                         </td>
-                        <td class="tot_complete_ pe-2" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${statusBg} ${statusClass}">${statusSignal}</span>
-                            <span class="${statusTextColor}">${statusText}</span>
+                        <td class="tot_complete_" id="cat_td6">
+                            <span class="permission-plate ms-1 pt-1 ${statusBg} ${statusClass}">${statusSignal}</span>
+                            <span class="${statusTextSpace}">${statusText}</span>
                         </td>
                         <td class="tot_complete_ center ps-1 pt-1" id="cat_td5">
                             <input class="form-switch form-check-input check_permission" type="checkbox" category_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>
@@ -71,6 +81,20 @@
                 `;
             }).join("\n");
         }
+
+        document.querySelectorAll("#showActionBox").forEach((button) => {
+            button.addEventListener("click", function () {
+                let dropdownMenu = this.nextElementSibling;
+                let rect = dropdownMenu.getBoundingClientRect();
+                let tableRect = this.closest("table").getBoundingClientRect();
+
+                if (rect.right > tableRect.right) {
+                    dropdownMenu.classList.add("dropdown-menu-end"); // Move left if overflowing
+                } else {
+                    dropdownMenu.classList.remove("dropdown-menu-end");
+                }
+            });
+        });
 
         // Fetch Users Data ------------------
         function fetch_category_data(
@@ -224,9 +248,13 @@
         $(document).on('keyup', "#category_name", function(){
             var categoryName = $(this).val();
             if (categoryName !== '') {
+                $("#category_name").addClass('is-valid');
                 $("#category_name").removeClass('is-invalid');
                 $('#updateForm_errorList').addClass('display-none');
                 $('#savForm_error').addClass('display-none');
+            }else if(categoryName == ''){
+                $("#category_name").removeClass('is-valid');
+                $("#category_name").removeClass('is-invalid');
             }
         });
 
@@ -255,6 +283,7 @@
                             $('#savForm_error').removeClass('display-none');
                             $("#category_name").addClass('is-invalid');
                             $('#savForm_error').addClass('alert_show_errors');
+                            $("#savForm_error").append('<span><i class="fa-solid fa-triangle-exclamation me-2" style="color:red;font-size:14px;"></i></span>');
                             $('#savForm_error').append('<span class="error_val">' + err_value + '</span>');
                             $('#savForm_error').fadeIn();
                         });
@@ -275,6 +304,7 @@
                             $('#success_message').fadeIn();
                             $('#success_message').text(response.messages);
                             $('#category_name').val("");
+                            $("#category_name").removeClass('is-valid');
                             setTimeout(() => {
                                 $('#success_message').fadeOut(3000);
                             }, 5000);
@@ -290,6 +320,8 @@
         // Edit Category
         $(document).on('click', '#edtBtn', function(e) {
             e.preventDefault();
+            $("#categry_id").empty();
+            $("#categry_name").empty();
             $("#save").hide('slow');
             $("#update_btn").show('slow');
             $("#update_btn").removeAttr('hidden');
@@ -305,6 +337,11 @@
                     } else {
                         $('#category_id').val(cateogory_id);
                         $('.edit_category_name').val(response.messages.category_name);
+
+                        const category_id = $("#categry_id");
+                        const category_name = $("#categry_name");
+                        category_id.append(`<label class="label_user_edit"> Category-ID : <span class="word_space">${response.messages.id}</span></label>`);
+                        category_name.append(`<label class="label_user_edit"> Category-Name : <span class="word_space">${response.messages.category_name}</span></label>`);
                     }
                 }
             });
@@ -320,6 +357,8 @@
             $("#cate_confirm_update").addClass('skeleton');
             $(".update_title").addClass('skeleton');
             $(".head_btn3").addClass('skeleton');
+            $("#categry_id").addClass('skeleton');
+            $("#categry_name").addClass('skeleton');
             var time = null;
             time = setTimeout(() => {
                 $(".update_title").removeClass('skeleton');
@@ -327,6 +366,8 @@
                 $("#update_btn_confirm").removeClass('skeleton');
                 $("#cate_delete5").removeClass('skeleton');
                 $("#cate_confirm_update").removeClass('skeleton');
+                $("#categry_id").removeClass('skeleton');
+                $("#categry_name").removeClass('skeleton');
             }, 1000);
 
             return () => {
@@ -359,6 +400,7 @@
                             $("#category_name").addClass('is-invalid');
                             $('#updateForm_errorList').removeClass('display-none');
                             $('#updateForm_errorList').addClass('alert_show_errors ps-1 pe-2');
+                            $("#updateForm_errorList").append('<span><i class="fa-solid fa-triangle-exclamation me-2" style="color:red;font-size:14px;"></i></span>');
                             $('#updateForm_errorList').append('<span>' + err_value + '</span>');
                             $("#updateconfirmcategory").modal('hide');
                         });
@@ -383,6 +425,9 @@
                             $('#success_message').fadeIn();
                             $('#success_message').text(response.messages);
                             $('.edit_category_name').val("");
+                            $("#save").show('slow');
+                            $("#update_btn").attr('hidden', true);
+                            $("#update_btn").hide('slow');
                             setTimeout(() => {
                                 $('#success_message').fadeOut();
                             }, 5000);
@@ -431,6 +476,7 @@
         // Delete Category confirm modal
         $(document).on('click', '.yes_button', function(e){
             e.preventDefault();
+            $('#deletecategory').modal('hide');
             $('#deleteconfirmcategory').modal('show');
             $("#deleteLoader").addClass('skeleton');
             $("#cate_delete3").addClass('skeleton');
