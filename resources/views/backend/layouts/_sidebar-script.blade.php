@@ -196,9 +196,9 @@
             $('#addons').collapse('hide');
         });
         $(document).off("click", ".accordion-button").on("click", ".accordion-button", function () {
-            let arrowIcon = $(this).find(".sb-sidenav-collapse-arrow");
+            let arrowIcon = $(this).find(".sb-sidenav-accordion-collapse-arrow");
             // Toggle the rotation class
-            arrowIcon.toggleClass("rotate-icon");
+            arrowIcon.toggleClass("accordion-rotate-icon");
         });
         // component
         $(document).off("click", ".compontent-btn").on("click", ".compontent-btn", function () {

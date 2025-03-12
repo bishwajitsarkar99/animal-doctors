@@ -10,7 +10,7 @@
                     <span class="unlock" id="voch_unlock" hidden>{{__('translate.Unlock')}}</span>
                 </span>
             </a>
-            <div class="sb-sidenav-collapse-arrow ms-auto icon-size">▼</div>
+            <div class="sb-sidenav-accordion-collapse-arrow ms-auto icon-size">▼</div>
         </button>
         <div id="flush-collapse3" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushExample">
             <div class="tree">

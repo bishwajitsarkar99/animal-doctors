@@ -1,8 +1,8 @@
 <?php
 return[
     // Topbar=============
-    'Open Full Screen Mode'=>'Open Full Screen Mode',
-    'Close Full Screen Mode'=>'Close Full Screen Mode',
+    'Full Screen'=>'Full Screen',
+    'Full Screen Exit'=>'Full Screen Exit',
     'Profile'=>'Profile',
     'Logout'=>'Logout',
     'Close'=>'Close',

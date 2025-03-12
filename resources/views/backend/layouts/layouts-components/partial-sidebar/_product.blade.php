@@ -12,7 +12,7 @@
                     </span>
                 </span>
             </a>
-            <div class="sb-sidenav-collapse-arrow layouts_block ms-auto icon-size" style="float:right;">▼</div>
+            <div class="sb-sidenav-accordion-collapse-arrow layouts_block ms-auto icon-size" style="float:right;">▼</div>
         </button>
         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
             <div class="tree">

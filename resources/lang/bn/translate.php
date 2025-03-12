@@ -1,8 +1,8 @@
 <?php
 return[
     // Topbar=============
-    'Open Full Screen Mode'=>'ফুল স্ক্রীন মোড খুলুন',
-    'Close Full Screen Mode'=>'ফুল স্ক্রীন মোড বন্ধ করুন',
+    'Full Screen'=>'ফুল স্ক্রীন',
+    'Full Screen Exit'=>'ফুল স্ক্রীন বন্ধ',
     'Profile'=>'প্রোফাইল',
     'Logout'=>'প্রস্থান',
     'Close'=>'বন্ধ',
