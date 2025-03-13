@@ -675,6 +675,34 @@ button.btn.btn-sm.btn_focus {
         transform: rotate(360deg);
     }
 }
+.loader-skeleton,.center-skeleton{
+    position: relative;
+}
+.loader-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+.center-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 156px;
+    top: 0;
+    width: 25%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 3px;
+}
 input#delete_category_id {
     outline: none;
     border: none;
