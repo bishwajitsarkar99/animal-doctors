@@ -621,17 +621,18 @@ input#search {
 }
 @keyframes text_color{
     50%{
-        color: darkcyan;
+        color: #333333a8;
         background-color: #fff;
+        transition: 1ms;
     }
     100%{
-        color: orangered;
-        background-image: linear-gradient(to bottom, white 0%, white, white 100%);
+        color: #333;
+        background-color: #fff;
+        transition: 1ms;
     }
 }
 input#search:focus{
     border-color: dodgerblue;
-    color: dodgerblue;
 }
 h5#staticBackdropLabels {
     color: darkgoldenrod;
@@ -807,18 +808,18 @@ button#dltBtn{
 }
 td.error_data {
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
-    color: #ffe7de;
+    text-transform: capitalize;
     border-bottom: 1px solid silver;
     animation: alerttxtColor 3s infinite;
 }
 @keyframes alerttxtColor{
     0%{
-       color: #c5c5c5;
+       color: #333333ab;
     }   
     100%{
-       color: #cfa697;
+       color: #333333d1;
     }
 }
 ::placeholder {
@@ -935,12 +936,22 @@ input.update_contract {
     /* background-image: var(--background-color); */
 }
 label.label_user_edit {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.6px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    color: black;
-    text-shadow: 0 0 #000000;
+    color: #1e1e1e;
+}
+.modal_icon{
+    display: flex;
+    justify-content: space-between;
+}
+.icon_text{
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: rgb(30, 30, 30);
 }
 /* input#imgInput {
     width: 150px;
@@ -1116,7 +1127,7 @@ tr>td {
 th#th_sort {
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
     /* background-image: var(--table-head-color); */
-    color: black;
+    color: #333;
     font-size: 15px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     /* background-color: #e7e7e7eb; */

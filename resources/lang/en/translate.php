@@ -553,7 +553,7 @@ return[
     'Category Name'=>'Category Name',
     'Delete Category'=>'Delete Category',
     'Category-ID'=>'Category-ID',
-    'Are you sure, Would you like to delete this category, permanently?'=>'Are you sure, Would you like to delete this category, permanently?',
+    'Are you sure, would you like to delete this category, permanently?'=>'Are you sure, would you like to delete this category, permanently?',
     // Sub-Category
     'Sub-Category'=>'Sub-Category',
     'Search Sub-Category.........'=>'Search Sub-Category.........',

@@ -536,7 +536,7 @@ return[
     'Category Name'=>'ক্যাটাগরি নাম',
     'Delete Category'=>'ক্যাটাগরি মুছুন',
     'Category-ID'=>'ক্যাটাগরি-আইডি',
-    'Are you sure, Would you like to delete this category, permanently?'=>'আপনি কি নিশ্চিত, আপনি কি এই ক্যাটাগরি স্থায়ীভাবে মুছে ফেলতে চান?',
+    'Are you sure, would you like to delete this category, permanently?'=>'আপনি কি নিশ্চিত, আপনি কি এই ক্যাটাগরি স্থায়ীভাবে মুছে ফেলতে চান?',
     // Sub-Category
     'Sub-Category'=>'সাব-ক্যাটাগরি',
     'Search Sub-Category.........'=>'সাব-ক্যাটাগরি অনুসন্ধান.........',

@@ -11,7 +11,7 @@
             }
         });
         // Initialize the button loader for the login button
-        buttonLoader('#save', '.add-icon', '.category-btn-text', 'ADD...', 'ADD', 1000);
+        buttonLoader('#save', '.add-icon', '.category-btn-text', 'Add...', 'Add', 1000);
         buttonLoader('#update_btn', '.update-icon', '.update-btn-text', 'Update...', 'Update', 1000);
         buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#deleteLoader', '.delete-icon', '.delete-btn-text', 'Delete...', 'Delete', 1000);
@@ -19,42 +19,37 @@
 
         fetch_category_data();
         // Data View Table--------------
-        //<input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
         const table_rows = (rows) => {
             if (rows.length === 0) {
                 return `
                     <tr>
                         <td class="error_data" align="center" text-danger colspan="11">
-                            Category Data Not Exists On Server !
+                            Search category data not exists on server !
                         </td>
                     </tr>
                 `;
             }
 
             return [...rows].map((row, key) => {
-                var statusClass, statusText, statusSignal, statusBg, statusTextSpace, permissionSignal;
+                var statusClass, statusText, statusSignal, permissionSignal;
                 if (row.status == 1) {
                     statusClass = 'text-white';
                     statusText = 'Active';
-                    statusTextSpace = '';
-                    statusSignal = '<i class="fa-solid fa-check"></i>';
-                    statusBg = 'badge rounded-pill bg-success';
+                    statusSignal = '<svg width="15px" height="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.88 122.88" enable-background="new 0 0 122.88 122.88" xml:space="preserve"><g><path fill="rgb(8, 160, 92)" d="M34.388,67.984c-0.286-0.308-0.542-0.638-0.762-0.981c-0.221-0.345-0.414-0.714-0.573-1.097 c-0.531-1.265-0.675-2.631-0.451-3.934c0.224-1.294,0.812-2.531,1.744-3.548l0.34-0.35c2.293-2.185,5.771-2.592,8.499-0.951 c0.39,0.233,0.762,0.51,1.109,0.827l0.034,0.031c1.931,1.852,5.198,4.881,7.343,6.79l1.841,1.651l22.532-23.635 c0.317-0.327,0.666-0.62,1.035-0.876c0.378-0.261,0.775-0.482,1.185-0.661c0.414-0.181,0.852-0.323,1.3-0.421 c0.447-0.099,0.903-0.155,1.356-0.165h0.026c0.451-0.005,0.893,0.027,1.341,0.103c0.437,0.074,0.876,0.193,1.333,0.369 c0.421,0.161,0.825,0.363,1.207,0.604c0.365,0.231,0.721,0.506,1.056,0.822l0.162,0.147c0.316,0.313,0.601,0.653,0.85,1.014 c0.256,0.369,0.475,0.766,0.652,1.178c0.183,0.414,0.325,0.852,0.424,1.299c0.1,0.439,0.154,0.895,0.165,1.36v0.23 c-0.004,0.399-0.042,0.804-0.114,1.204c-0.079,0.435-0.198,0.863-0.356,1.271c-0.16,0.418-0.365,0.825-0.607,1.21 c-0.238,0.377-0.518,0.739-0.832,1.07l-27.219,28.56c-0.32,0.342-0.663,0.642-1.022,0.898c-0.369,0.264-0.767,0.491-1.183,0.681 c-0.417,0.188-0.851,0.337-1.288,0.44c-0.435,0.104-0.889,0.166-1.35,0.187l-0.125,0.003c-0.423,0.009-0.84-0.016-1.241-0.078 l-0.102-0.02c-0.415-0.07-0.819-0.174-1.205-0.31c-0.421-0.15-0.833-0.343-1.226-0.575l-0.063-0.04 c-0.371-0.224-0.717-0.477-1.032-0.754l-0.063-0.06c-1.58-1.466-3.297-2.958-5.033-4.466c-3.007-2.613-7.178-6.382-9.678-9.02 L34.388,67.984L34.388,67.984z M61.44,0c16.96,0,32.328,6.883,43.453,17.987c11.104,11.125,17.986,26.493,17.986,43.453 c0,16.961-6.883,32.329-17.986,43.454C93.769,115.998,78.4,122.88,61.44,122.88c-16.961,0-32.329-6.882-43.454-17.986 C6.882,93.769,0,78.4,0,61.439C0,44.48,6.882,29.112,17.986,17.987C29.112,6.883,44.479,0,61.44,0L61.44,0z M96.899,25.981 C87.826,16.907,75.29,11.296,61.44,11.296c-13.851,0-26.387,5.611-35.46,14.685c-9.073,9.073-14.684,21.609-14.684,35.458 c0,13.851,5.611,26.387,14.684,35.46s21.609,14.685,35.46,14.685c13.85,0,26.386-5.611,35.459-14.685s14.684-21.609,14.684-35.46 C111.583,47.59,105.973,35.054,96.899,25.981L96.899,25.981z"/></g></svg>';
                     permissionSignal = 'light2-focus';
                 } else if (row.status == 0) {
                     statusClass = 'text-white';
                     statusText = 'Deny';
-                    statusTextSpace = 'ps-1';
-                    statusSignal = '<i class="fa-solid fa-xmark"></i>';
-                    statusBg = 'badge rounded-pill bg-danger';
+                    statusSignal = '<svg width="15px" height="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.88px" height="122.879px" viewBox="0 0 122.88 122.879" enable-background="new 0 0 122.88 122.879" xml:space="preserve"><g><path fill="#FF4141" d="M61.44,0c16.96,0,32.328,6.882,43.453,17.986c11.104,11.125,17.986,26.494,17.986,43.453 c0,16.961-6.883,32.328-17.986,43.453C93.769,115.998,78.4,122.879,61.44,122.879c-16.96,0-32.329-6.881-43.454-17.986 C6.882,93.768,0,78.4,0,61.439C0,44.48,6.882,29.111,17.986,17.986C29.112,6.882,44.48,0,61.44,0L61.44,0z M73.452,39.152 c2.75-2.792,7.221-2.805,9.986-0.026c2.764,2.776,2.775,7.292,0.027,10.083L71.4,61.445l12.077,12.25 c2.728,2.77,2.689,7.256-0.081,10.021c-2.772,2.766-7.229,2.758-9.954-0.012L61.445,71.541L49.428,83.729 c-2.75,2.793-7.22,2.805-9.985,0.025c-2.763-2.775-2.776-7.291-0.026-10.082L51.48,61.435l-12.078-12.25 c-2.726-2.769-2.689-7.256,0.082-10.022c2.772-2.765,7.229-2.758,9.954,0.013L61.435,51.34L73.452,39.152L73.452,39.152z M96.899,25.98C87.826,16.907,75.29,11.296,61.44,11.296c-13.851,0-26.387,5.611-35.46,14.685 c-9.073,9.073-14.684,21.609-14.684,35.459s5.611,26.387,14.684,35.459c9.073,9.074,21.609,14.686,35.46,14.686 c13.85,0,26.386-5.611,35.459-14.686c9.073-9.072,14.684-21.609,14.684-35.459S105.973,35.054,96.899,25.98L96.899,25.98z"/></g></svg>';
                     permissionSignal = 'danger-focus';
                 }
                 return `
                     <tr class="table-light table-row user-table-row data-table-row" id="cat_td" key="${key}">
                         <td class="sn border_ord" id="cat_td2">${row.id}</td>
-                        <td class="txt_ ps-1 center" id="cat_td3">
+                        <td class="txt_ ps-1 center line_height_one" id="cat_td3">
                             <div class="dropdown">
                                 <a type="button" data-bs-toggle="dropdown" id="showActionBox">
-                                    <i class="fa-solid fa-ellipsis">‌</i>
+                                    <i class="fa-solid fa-ellipsis" style="color:#686868;padding-top:7px;">‌</i>
                                 </a>
                                 <li class="upd cgy ps-1 dropdown-menu dropdown-menu-end action">
                                     <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="edtBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Eidt" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" 
@@ -67,21 +62,21 @@
                             </div>
                         </td>
                         <td class="txt_ ps-1" id="cat_td4">
-                            <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" readonly></span>
+                            <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" category_name readonly></span>
                             ${row.category_name}
                         </td>
-                        <td class="tot_complete_" id="cat_td6">
-                            <span class="permission-plate ms-1 pt-1 ${statusBg} ${statusClass}">${statusSignal}</span>
-                            <span class="${statusTextSpace}">${statusText}</span>
+                        <td class="tot_complete_ line_height_two" id="cat_td6">
+                            <span class="ps-1 ${statusClass}">${statusSignal}</span>
+                            <span>${statusText}</span>
                         </td>
-                        <td class="tot_complete_ center ps-1 pt-1" id="cat_td5">
+                        <td class="tot_complete_ center line_height_three ps-1" id="cat_td5">
                             <input class="form-switch form-check-input check_permission" type="checkbox" category_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>
                         </td>
                     </tr>
                 `;
             }).join("\n");
         }
-
+        // show table action box
         document.querySelectorAll("#showActionBox").forEach((button) => {
             button.addEventListener("click", function () {
                 let dropdownMenu = this.nextElementSibling;
@@ -587,14 +582,15 @@
         });
 
         // Event Listener for sorting columns
-        $(document).on('click', '#th_sort', function(){
+        $(document).on('click', '.th_sort', function(){
             var button = $(this);
-            // Get the column and current order
-            var column = button.data('column');
+            var column = button.data('coloumn');
             var order = button.data('order');
+
             // Toggle the order (asc/desc)
             order = order === 'desc' ? 'asc' : 'desc';
             button.data('order', order);
+
             fetch_category_data(
                 '', null, null,
                 column === 'id' ? column : 'id',
@@ -602,17 +598,17 @@
                 column === 'status' ? column : 'status',
                 order
             );
-            // Reset all icons in the table headers first - icon part
-            $("#th_sort").find('.toggle-icon').html('<i class="fa-solid fa-arrow-down-long"></i>');
-            var icon = button.find('.toggle-icon');
-            if(order === 'desc'){
-                icon.html('<i class="fa-solid fa-arrow-up-long"></i>');
-                $(".toggle-icon").fadeIn(300);
-            }else{
-                icon.html('<i class="fa-solid fa-arrow-down-long"></i>');
-                $(".toggle-icon").fadeIn(300);
-            }
 
+            // Remove only the icon from the clicked column (Keep other column icons)
+            button.find("svg").remove();
+
+            // Define sorting icons 
+            var iconHTML = order === 'desc'
+                ?  `<svg width="12px" height="12px" fill="#333" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>`// Down arrow
+                : `<svg width="12px" height="12px" fill="#333" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,122.88 0,59.207 39.403,59.207 39.403,0 83.033,0 83.033,59.207 122.433,59.207 61.216,122.88"/></g></svg>`; // Up arrow
+
+            // Append sorting icon only for the clicked column
+            button.append(iconHTML);
         });
 
     });
