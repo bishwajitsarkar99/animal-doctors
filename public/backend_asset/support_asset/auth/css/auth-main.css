@@ -63,7 +63,7 @@ html {
 }
 .select2-container--default .select2-selection--single {
   background-color: #fff;
-  border: 1px solid goldenrod !important;
+  border: 1px solid #ddddddde !important;
   border-radius: 4px !important;
   box-shadow: none !important;
 }
@@ -232,7 +232,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 form#loginForm {
-  background-color: white;
+  background-color: #e7e7d763;
 }
 .top__skeleton::before{
   content: "";
@@ -545,10 +545,10 @@ div.address_top {
   height: 26px;
 }
 .show-current-border{
-  border-left: 1px solid goldenrod;
-  border-bottom: 1px solid goldenrod;
-  border-top: 1px solid goldenrod;
-  border-right: 1px solid goldenrod;
+  border-left: 1px solid #ddddddde;
+  border-bottom: 1px solid #ddddddde;
+  border-top: 1px solid #ddddddde;
+  border-right: 1px solid #ddddddde;
 }
 .show-error-border{
   border-left: 1px solid #f19a7a;

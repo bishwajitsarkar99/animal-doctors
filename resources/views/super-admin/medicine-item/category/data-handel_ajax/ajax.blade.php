@@ -14,7 +14,7 @@
         buttonLoader('#save', '.add-icon', '.category-btn-text', 'Add...', 'Add', 1000);
         buttonLoader('#update_btn', '.update-icon', '.update-btn-text', 'Update...', 'Update', 1000);
         buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm...', 'Confirm', 1000);
-        buttonLoader('#deleteLoader', '.delete-icon', '.delete-btn-text', 'Delete...', 'Delete', 1000);
+        buttonLoader('#confirmDeleteBtn', '.delete-icon', '.delete-btn-text', 'Delete...', 'Delete', 1000);
         buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel', 'Cancel', 1000);
 
         fetch_category_data();
@@ -24,7 +24,8 @@
                 return `
                     <tr>
                         <td class="error_data" align="center" text-danger colspan="11">
-                            Search category data not exists on server !
+                            <svg width="20px" height="20px" fill="rgb(220, 53, 69)" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 122.88 120.54" style="enable-background:new 0 0 122.88 120.54" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M95.7,65.5c15.01,0,27.18,12.17,27.18,27.18c0,15.01-12.17,27.18-27.18,27.18 c-15.01,0-27.18-12.17-27.18-27.18C68.52,77.67,80.69,65.5,95.7,65.5L95.7,65.5z M96.74,77.05c1.18,0,2.12,0.34,2.79,1.02 c0.67,0.68,1.01,1.6,1.01,2.8c0,1.21-0.58,2.29-1.74,3.23c-1.17,0.94-2.53,1.42-4.07,1.42c-1.16,0-2.09-0.32-2.79-0.98 c-0.71-0.66-1.06-1.51-1.06-2.57c0-1.34,0.58-2.49,1.73-3.47C93.75,77.53,95.13,77.05,96.74,77.05L96.74,77.05z M90.94,107.09 V91.56h-2.87c0-3.91,7.19-1.37,12.48-2.71v18.24C110.54,107.09,80.68,107.09,90.94,107.09L90.94,107.09z M17.69,26.67 c8.1,2.71,19.38,4.38,31.91,4.38s23.81-1.67,31.91-4.38c7.11-2.37,11.51-5.25,11.51-8.06c0-2.81-4.4-5.69-11.51-8.06 c-8.1-2.7-19.38-4.38-31.91-4.38s-23.81,1.67-31.91,4.38C2.6,15.59,2.18,21.5,17.69,26.67L17.69,26.67z M6.24,47.86 c0.56,2.62,4.83,5.26,11.45,7.47c8.1,2.71,19.38,4.38,31.91,4.38s23.81-1.67,31.91-4.38c7.11-2.37,11.51-5.25,11.51-8.06h0.03 v-19.3c-2.53,1.73-5.78,3.26-9.59,4.53c-8.73,2.91-20.71,4.72-33.86,4.72c-13.16,0-25.13-1.8-33.86-4.72 c-3.77-1.26-6.98-2.76-9.49-4.47V47.86L6.24,47.86z M63.3,92.54c-4.35,0.44-8.95,0.67-13.7,0.67c-13.16,0-25.13-1.8-33.86-4.72 c-3.77-1.26-6.98-2.76-9.49-4.47v18.49c0.56,2.62,4.83,5.26,11.45,7.47c8.1,2.7,19.38,4.38,31.91,4.38c7.52,0,14.58-0.6,20.78-1.67 c1.56,1.94,3.33,3.7,5.29,5.24c-7.53,1.65-16.49,2.6-26.07,2.6c-13.16,0-25.13-1.8-33.86-4.72c-4.6-1.54-15.67-6.58-15.67-12.62 c0-0.71,0-1.3,0-1.98C0.06,73.69,0,46.15,0,18.61c0-5.76,6.01-10.65,15.73-13.9C24.46,1.8,36.44,0,49.6,0 c13.16,0,25.13,1.8,33.86,4.72c8.85,2.95,14.62,7.27,15.59,12.37c0.12,0.32,0.18,0.67,0.18,1.04v42.37 c-1.2-0.14-2.42-0.21-3.66-0.21c-0.85,0-1.68,0.03-2.51,0.1v-3.74c-2.53,1.73-5.78,3.26-9.59,4.53 c-8.73,2.91-20.71,4.72-33.86,4.72c-13.16,0-25.13-1.8-33.86-4.72c-3.77-1.26-6.98-2.76-9.49-4.47v18.49 c0.56,2.62,4.83,5.26,11.45,7.47c8.1,2.7,19.38,4.38,31.91,4.38c5.01,0,9.82-0.27,14.31-0.76C63.51,88.3,63.3,90.4,63.3,92.54 L63.3,92.54z"/></g></svg>
+                            Search category data not exists on server <span style="color:rgb(220, 53, 69)">!</span>
                         </td>
                     </tr>
                 `;
@@ -191,10 +192,32 @@
         });
 
         // Paginate Page-------------------------------
-        const paginate_html = ({
-            links,
-            total
-        }) => {
+        // const paginate_html = ({
+        //     links,
+        //     total
+        // }) => {
+        //     if (total == 0) {
+        //         return "";
+        //     }
+
+        //     return `
+        //         <nav class="paginate_link" aria-label="Page navigation example">
+        //             <ul class="pagination">
+        //                 ${links.map((link, key) => {
+        //                     return `
+        //                         <li class="page-item${link.active? ' active': ''}" key=${key}>
+        //                             <a class="page-link btn_page" href="${link.url? link.url: '#'}">
+        //                                 ${link.label}
+        //                             </a>
+        //                         </li>
+        //                     `;
+        //                 }).join("\n")}
+        //             </ul>
+        //         </nav>
+        //     `;
+        // }
+        // Paginate Page-------------------------------
+        const paginate_html = ({ links, total }) => {
             if (total == 0) {
                 return "";
             }
@@ -203,9 +226,30 @@
                 <nav class="paginate_link" aria-label="Page navigation example">
                     <ul class="pagination">
                         ${links.map((link, key) => {
+                            // Handle Previous and Next buttons separately
+                            if (link.label.toLowerCase().includes("previous")) {
+                                return `
+                                    <li class="page-item${link.active ? ' active' : ''}" key=${key}>
+                                        <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
+                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 121.66"><title>direction-left</title><path d="M1.24,62.65,120.1,121.46a1.92,1.92,0,0,0,2.58-.88,1.89,1.89,0,0,0,0-1.76h0l-30.87-58,30.87-58h0a1.89,1.89,0,0,0,0-1.76A1.92,1.92,0,0,0,120.1.2L1.24,59a2,2,0,0,0,0,3.64Z"/></svg>
+                                        </a>
+                                    </li>
+                                `;
+                            } 
+                            if (link.label.toLowerCase().includes("next")) {
+                                return `
+                                    <li class="page-item${link.active ? ' active' : ''}" key=${key}>
+                                        <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
+                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.86 121.64"><title>direction-right</title><path d="M121.62,59,2.78.2A1.92,1.92,0,0,0,.2,1.08a1.89,1.89,0,0,0,0,1.76h0l30.87,58L.23,118.8h0a1.89,1.89,0,0,0,0,1.76,1.92,1.92,0,0,0,2.58.88l118.84-58.8a2,2,0,0,0,0-3.64Z"/></svg>
+                                        </a>
+                                    </li>
+                                `;
+                            }
+
+                            // Regular page numbers
                             return `
-                                <li class="page-item${link.active? ' active': ''}" key=${key}>
-                                    <a class="page-link btn_page" href="${link.url? link.url: '#'}">
+                                <li class="page-item${link.active ? ' active' : ''}" key=${key}>
+                                    <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
                                         ${link.label}
                                     </a>
                                 </li>
@@ -214,7 +258,7 @@
                     </ul>
                 </nav>
             `;
-        }
+        };
         // change paginate page------------------------
         $("#category_data_table_paginate").delegate("a", "click", function(e) {
             e.stopImmediatePropagation();
@@ -278,7 +322,7 @@
                             $('#savForm_error').removeClass('display-none');
                             $("#category_name").addClass('is-invalid');
                             $('#savForm_error').addClass('alert_show_errors');
-                            $("#savForm_error").append('<span><i class="fa-solid fa-triangle-exclamation me-2" style="color:red;font-size:14px;"></i></span>');
+                            $("#savForm_error").append('<span><svg width="25px" hieght="20px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg></span>');
                             $('#savForm_error').append('<span class="error_val">' + err_value + '</span>');
                             $('#savForm_error').fadeIn();
                         });
@@ -354,6 +398,9 @@
             $(".head_btn3").addClass('skeleton');
             $("#categry_id").addClass('skeleton');
             $("#categry_name").addClass('skeleton');
+            $(".modal_icon_one").addClass('skeleton');
+            $(".modal_icon_two").addClass('skeleton');
+            $(".modal_icon_three").addClass('skeleton');
             var time = null;
             time = setTimeout(() => {
                 $(".update_title").removeClass('skeleton');
@@ -363,6 +410,9 @@
                 $("#cate_confirm_update").removeClass('skeleton');
                 $("#categry_id").removeClass('skeleton');
                 $("#categry_name").removeClass('skeleton');
+                $(".modal_icon_one").removeClass('skeleton');
+                $(".modal_icon_two").removeClass('skeleton');
+                $(".modal_icon_three").removeClass('skeleton');
             }, 1000);
 
             return () => {
@@ -395,7 +445,7 @@
                             $("#category_name").addClass('is-invalid');
                             $('#updateForm_errorList').removeClass('display-none');
                             $('#updateForm_errorList').addClass('alert_show_errors ps-1 pe-2');
-                            $("#updateForm_errorList").append('<span><i class="fa-solid fa-triangle-exclamation me-2" style="color:red;font-size:14px;"></i></span>');
+                            $("#updateForm_errorList").append('<span><svg width="25px" hieght="20px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg></span>');
                             $('#updateForm_errorList').append('<span>' + err_value + '</span>');
                             $("#updateconfirmcategory").modal('hide');
                         });
@@ -420,6 +470,7 @@
                             $('#success_message').fadeIn();
                             $('#success_message').text(response.messages);
                             $('.edit_category_name').val("");
+                            $('.edit_category_name').removeClass("is-valid");
                             $("#save").show('slow');
                             $("#update_btn").attr('hidden', true);
                             $("#update_btn").hide('slow');
@@ -457,8 +508,8 @@
                 $("#cate_delete").removeClass('skeleton');
                 $("#cat_id").removeClass('skeleton');
                 $("#cate_delete2").removeClass('skeleton');
-                $("#deleteLoader").removeClass('skeleton');
-                $("#cate_delete3").removeClass('skeleton');
+                $("#confirmDeleteBtn").removeClass('skeleton');
+                $("#cate_delete_cancel").removeClass('skeleton');
                 $("#yesButton").removeClass('min-skeleton');
                 $("#noButton").removeClass('min-skeleton');
                 $("#center_box").removeClass('center-skeleton');
@@ -473,20 +524,22 @@
             e.preventDefault();
             $('#deletecategory').modal('hide');
             $('#deleteconfirmcategory').modal('show');
-            $("#deleteLoader").addClass('skeleton');
-            $("#cate_delete3").addClass('skeleton');
+            $("#confirmDeleteBtn").addClass('skeleton');
+            $("#cate_delete_cancel").addClass('skeleton');
             $("#cate_confirm").addClass('skeleton');
             $(".confirm_title").addClass('skeleton');
             $(".head_btn2").addClass('skeleton');
             $(".loading-yes-icon").removeAttr('hidden');
+            $(".init_skeln").addClass('skeleton');
             var time = null;
             time = setTimeout(() => {
                 $(".confirm_title").removeClass('skeleton');
                 $(".head_btn2").removeClass('skeleton');
-                $("#deleteLoader").removeClass('skeleton');
-                $("#cate_delete3").removeClass('skeleton');
+                $("#confirmDeleteBtn").removeClass('skeleton');
+                $("#cate_delete_cancel").removeClass('skeleton');
                 $("#cate_confirm").removeClass('skeleton');
                 $(".loading-yes-icon").attr('hidden',true);
+                $(".init_skeln").removeClass('skeleton');
             }, 1000);
 
             return () => {
@@ -494,7 +547,7 @@
             }
         });
         // Delete Category
-        $(document).on('click', '.delet_btn_user', function(e) {
+        $(document).on('click', '.delete_btn_category', function(e) {
             e.preventDefault();
             var category_id = $('#delete_category_id').val();
 

@@ -431,11 +431,10 @@ td.center{
 }
 .page-item:last-child .page-link, .page-item:last-child .datatable-pagination a, .datatable-pagination .page-item:last-child a, 
 .datatable-pagination li:last-child .page-link, .datatable-pagination li:last-child a {
- 
     background: linear-gradient(5deg, #b3b0b0, transparent 3%, lightgray, #c3c1c1c9);
     color: black;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 9.5px;
+    font-weight: 800;
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     opacity: 1;
@@ -445,8 +444,8 @@ td.center{
 .datatable-pagination li:first-child .page-link, .datatable-pagination li:first-child a {
     background: linear-gradient(5deg, #b3b0b0, transparent 3%, lightgray, #c3c1c1c9);
     color: black;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 9.5px;
+    font-weight: 800;
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     opacity: 1;
@@ -454,15 +453,15 @@ td.center{
 }
 
 li.page-item:active.page-link.btn_page{
-    background:lightseagreen;
+    background:#333;
     color: white;
     border: 1px solid white;
     font-size: 10px;
 }
 a.page-link.btn_page:hover{
-    background:lightseagreen;
+    background-image: linear-gradient(to bottom, #585858 0%, #111 100%);
+    border: 1px solid #111;
     color: white;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'f;
 }
 .pagination, .datatable-pagination ul {
     --bs-pagination-padding-x: 0.75rem;
@@ -480,7 +479,7 @@ a.page-link.btn_page:hover{
     --bs-pagination-focus-bg: #e9ecef;
     --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
     --bs-pagination-active-color: #fff;
-    --bs-pagination-active-bg: lightseagreen;
+    --bs-pagination-active-bg: linear-gradient(to bottom, #585858 0%, #111 100%);
     --bs-pagination-active-border-color: lightseagreen;
     --bs-pagination-disabled-color: #6c757d;
     --bs-pagination-disabled-bg: #fff;
@@ -488,7 +487,8 @@ a.page-link.btn_page:hover{
     display: flex;
     padding-left: 0;
     list-style: none;
-    font-weight: 600;
+    font-weight: 800;
+    line-height: 1.3;
 }
 label.tot-search {
     color: black;
