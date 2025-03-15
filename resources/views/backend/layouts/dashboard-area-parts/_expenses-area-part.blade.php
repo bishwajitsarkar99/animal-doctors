@@ -1,13 +1,13 @@
 <!-- =============== Expenses-Area-Part ====================== -->
-<div class="card form-control form-control-sm skeleton" id="totalexpenses">
+<div class="card form-control form-control-sm" id="totalexpenses">
     <span class="sb-sidenav-collapse-arrow" id="orders_part" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Expenses-Area')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-        <p class="form-check form-switch order_area skeleton mt-3">
-            <input class="form-check-input ordrs skeleton" onclick="myExFunction()" type="checkbox" id="orders_box3" data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
-            <label class="form-check-label skeleton" for="collapseExample3"><span class="smy">
-                <span><span class=""></span><span class="of_switch3 pt-1 pb-1 marg color_showup skeleton" id="span3">off</span></span>
+        <p class="form-check form-switch order_area mt-3">
+            <input class="form-check-input ordrs" onclick="myExFunction()" type="checkbox" id="orders_box3" data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <label class="form-check-label" for="collapseExample3"><span class="smy">
+                <span><span class=""></span><span class="of_switch3 pt-1 pb-1 marg color_showup" id="span3">off</span></span>
             </label>
         </p>
-        <span class="ps-1 ms-5"><div class="loader_expenses_part ms-5" id="loader_expenses_part"></div></span>
+        <span class="ps-1 ms-5"><div class="loader_expenses_part ms-5" id="loader_expenses_part" hidden></div></span>
     </span>
 </div>
 <!-- =======EXPENSES BODY PART======== -->

@@ -359,7 +359,7 @@ span.search_on {
 }
 .skeleton-card-head,.skeleton-card-head-label,.skeleton-card-head-capsule,.skeleton-table,.peritem-label-skeleton,
 .peritem-skeleton,.pagination-skeleton,.skeleton-input-label,.skeleton-button,.skeleton-input,.skeleton-card-head-labl,
-.table-skeleton{
+.table-skeleton,.skeleton-table-head-capsule{
     position: relative;
 }
 .table-skeleton::before{
@@ -477,6 +477,19 @@ span.search_on {
     background-size: 200%;
     animation: 1s infinite reverse focus_skeleton;
     border-radius: 3px;
+}
+.skeleton-table-head-capsule::before {
+    content: "";
+    position: absolute;
+    left: -3px;
+    top: -2px;
+    width: 106%;
+    height: 20px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 20px;
 }
 .skeleton-input-label::before{
     content: "";

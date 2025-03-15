@@ -7,7 +7,7 @@
 <!-- =========== SUMMARY HEAD ============= -->
 <section>
     <ol class="breadcrumb ps-2 business_summary">
-        <li class="smy tp text-shadow heading-skeleton">{{__('translate.Statistical Summary Of Business')}} </li>
+        <li class="smy tp text-shadow">{{__('translate.Statistical Summary Of Business')}} </li>
     </ol>
 </section>
 <div class="row">
@@ -116,11 +116,11 @@
 
     setTimeout(() => {
         fetchData();
-        initSkeleton();
-        cricaleSkeleton();
-        amountSkeleton();
-        progressBarSkeleton();
-        dashboardPageHead();
+        // initSkeleton();
+        // cricaleSkeleton();
+        // amountSkeleton();
+        // progressBarSkeleton();
+        // dashboardPageHead();
     }, 1000);
 </script>
 <script> 

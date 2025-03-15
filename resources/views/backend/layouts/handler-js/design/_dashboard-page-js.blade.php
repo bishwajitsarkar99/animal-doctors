@@ -4,6 +4,7 @@
         var x = document.getElementById("span1");
         if (x.innerHTML === "off") {
             x.innerHTML = "on";
+            $("#order_part_loader").removeAttr('hidden');
         } else {
             x.innerHTML = "off";
         }
@@ -15,6 +16,7 @@
         var x = document.getElementById("span2");
         if (x.innerHTML === "off") {
             x.innerHTML = "on";
+            $("#loader_sales_part").removeAttr('hidden');
         } else {
             x.innerHTML = "off";
         }
@@ -24,6 +26,7 @@
         var x = document.getElementById("span3");
         if (x.innerHTML === "off") {
             x.innerHTML = "on";
+            $("#loader_expenses_part").removeAttr('hidden');
         } else {
             x.innerHTML = "off";
         }

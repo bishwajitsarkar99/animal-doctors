@@ -6,17 +6,17 @@
   <div class="card-body page-card-body" id="table_card_body">
     <div class="row">
       <div class="col-xl-7">
-        <div class="card-body focus-color cd cat_form table-skeleton">
+        <div class="card-body focus-color cd cat_form">
           <p class="catg mb-1">
-            <span class="skeleton-card-head" style="color:black;">{{__('translate.Category')}}</span>
+            <span class="" style="color:black;">{{__('translate.Category')}}</span>
             <span class="tot_summ" id="num_plate">
-              <label class="tot-search skeleton-card-head-labl mt-3 pt-2" style="color:black;" for="tot_cagt"> ➤ {{__('translate.Total Category')}} :</label>
-              <label class="badge pill-rounded skeleton-card-head-capsule" for="total_medic_records" id="iteam_label4"><span class="total_users" style="font-weight:700;color:black;" id="total_category_records"></span><span id="iteam_label5" style="font-weight: 700;color:black;font-size: 11px;">.00 {{__('translate.items')}}</span></label>
+              <label class="tot-search mt-3 pt-2" style="color:black;" for="tot_cagt"> ➤ {{__('translate.Total Category')}} :</label>
+              <label class="badge pill-rounded skeleton-table-head-capsule" for="total_medic_records" id="iteam_label4"><span class="total_users" style="font-weight:700;color:black;" id="total_category_records"></span><span id="iteam_label5" style="font-weight: 700;color:black;font-size: 11px;">.00 {{__('translate.items')}}</span></label>
             </span>
             <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="color:#333333ab;opacity:1;"></i>
           </p>
           <div class="row">
-            <div class="col-3 skeleton-card-head-label">
+            <div class="col-3 ">
               <span class="form-check form-switch search_ me-2">
                 <input class="form-check-input" onclick="mySrcFunction()" type="checkbox" id="search_area" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 <label class="search ser_label ps-1 pt-1" style="color:black;" for="search pe-2">{{__('translate.Search')}} :</label>
@@ -30,40 +30,39 @@
             </div>
           </div>
           <div class="table-responsive">
-            <table class="ord_table center border-1 table-skeleton" id="myTable">
+            <table class="ord_table center border-1" id="myTable">
               <thead class="table-light">
-                <tr class="table-row order_body acc_setting_table skeleton">
-                  <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col th_sort ps-1 pt-1" style="cursor: pointer;">
+                <tr class="table-row order_body acc_setting_table">
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col th_sort ps-1" style="cursor: pointer;">
                     <!-- Up arrow  -->
                     {{__('translate.ID')}}
                     <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
-                  <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col th_sort ps-1 pt-1" style="cursor: pointer;">
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col th_sort ps-1" style="cursor: pointer;">
                     {{__('translate.Action')}}
-                    <!-- Up arrow  -->
                     <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
-                  <th id="th_sort" draggable="true" data-coloumn="category_name" data-order="desc" class="tableHead table_th_color tot_pending_ col th_sort ps-1 pt-1" style="text-align: left;cursor: pointer;">
+                  <th id="th_sort" data-coloumn="category_name" data-order="desc" class="tableHead table_th_color tot_pending_ col th_sort ps-1" style="text-align: left;cursor: pointer;">
                     {{__('translate.Category-Name')}}
                     <!-- Up arrow  -->
                     <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
-                  <th id="th_sort" draggable="true" data-coloumn="status" data-order="desc" class="tableHead table_th_color tot_pending_ th_sort ps-1 pt-1" style="text-align: left;cursor: pointer;">
+                  <th id="th_sort" data-coloumn="status" data-order="desc" class="tableHead table_th_color tot_pending_ col th_sort ps-1" style="text-align: left;cursor: pointer;">
                     {{__('translate.Status')}}
                     <!-- Up arrow  -->
                     <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
-                  <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ check_border col th_sort pt-1" style="cursor: pointer;">
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ check_border col th_sort" style="cursor: pointer;">
                     {{__('translate.Check')}}
                     <!-- Up arrow  -->
                     <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
                 </tr>
               </thead>
-              <tbody class="table-light bg-white" id="category_data_table"> </tbody>
+              <tbody class="table-light bg-white table-skeleton" id="category_data_table"> </tbody>
             </table>
           </div>
-          <div class="row">
+          <div class="row table-light">
             <div class=" col-xl-2">
               <label class="item_class peritem-label-skeleton">Peritem</label>
               <div class="custom-select peritem-skeleton">
@@ -92,10 +91,10 @@
                 @csrf
                 <!-- Category-field -->
                 <div class="row mt-3">
-                  <div class="col-4 skeleton-input-label">
+                  <div class="col-4">
                     <label class="catg_name_label mt-1" for="category-name">{{__('translate.Category-Name')}} : </label>
                   </div>
-                  <div class="col-8 skeleton-input">
+                  <div class="col-8">
                     <input class="form-control form-control-sm edit_category_name skeleton" type="text" name="category_name" id="category_name" placeholder="{{__('translate.Category Name')}}" autofocus>
                     <input type="hidden" id="category_id">
                   </div>
@@ -112,11 +111,11 @@
                   <div class="col-4"></div>
                   <div class="col-5">
                     <div class="btn_box mt-2">
-                      <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width skeleton-button me-2" id="save">
+                      <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width me-2" id="save">
                         <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:0.8em;height:0.8em;" role="status" hidden></span>
                         <span class="category-btn-text">ADD</span>
                       </button>
-                      <button id="update_btn" class="btn btn-sm cgt_btn btn_focus button_width skeleton-button me-2" hidden>
+                      <button id="update_btn" class="btn btn-sm cgt_btn btn_focus button_width me-2" hidden>
                         <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:0.8em;height:0.8em;" role="status" hidden></span>
                         <span class="update-btn-text">Update</span>
                       </button>
@@ -124,7 +123,7 @@
                   </div>
                   <div class="col-3">
                     <div class="mt-2">
-                      <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus button_width skeleton-button">
+                      <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus button_width">
                         <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:0.8em;height:0.8em;" role="status" hidden></span>
                         <span class="cancel-btn-text">Cancel</span>
                       </button>
@@ -288,43 +287,11 @@
 @include('super-admin.medicine-item.category.data-handel_ajax.ajax')
 <script>
   // skeleton
-  function fetchData() {
-    const allSkeleton = document.querySelectorAll('.skeleton')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton')
-    });
-  }
-
-  function focuCardHead() {
-    const allSkeleton = document.querySelectorAll('.skeleton-card-head')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-card-head')
-    });
-  } 
-
-  function focuCardHeadLabel() {
-    const allSkeleton = document.querySelectorAll('.skeleton-card-head-label')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-card-head-label')
-    });
-  }
-
-  function focuCardHeadLabl() {
-    const allSkeleton = document.querySelectorAll('.skeleton-card-head-labl')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-card-head-labl')
-    });
-  }
-
   function focuCardHeadCapsule() {
-    const allSkeleton = document.querySelectorAll('.skeleton-card-head-capsule')
+    const allSkeleton = document.querySelectorAll('.skeleton-table-head-capsule')
 
     allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-card-head-capsule')
+      item.classList.remove('skeleton-table-head-capsule')
     });
   }
   
@@ -352,29 +319,6 @@
     });
   }
 
-  function focuInputLabel() {
-    const allSkeleton = document.querySelectorAll('.skeleton-input-label')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-input-label')
-    });
-  }
-  function focuButton() {
-    const allSkeleton = document.querySelectorAll('.skeleton-button')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-button')
-    });
-  }
-
-  function focuInput() {
-    const allSkeleton = document.querySelectorAll('.skeleton-input')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-input')
-    });
-  }
-
   function focuTableBody() {
     const allSkeleton = document.querySelectorAll('.table-skeleton')
 
@@ -385,18 +329,11 @@
 
   setTimeout(() => {
     requestAnimationFrame(() => {
-      fetchData();
-      focuCardHead();
-      focuCardHeadLabel();
-      focuCardHeadLabl();
       focuCardHeadCapsule();
       focuTableBody();
       focuCardTablePeritemLabel();
       focuCardTablePeritem();
       focuCardTablePagination();
-      focuInputLabel();
-      focuButton();
-      focuInput();
     });
   }, 3000);
 </script>
