@@ -17,9 +17,9 @@ class CategoryController extends Controller
     }
     
     // Category View
-    public function index()
+    public function index(Request $request)
     {
-        return $this->productIteamsServiceProvider->viewCategory();
+        return $this->productIteamsServiceProvider->viewCategory($request);
     }
 
     // Get Category

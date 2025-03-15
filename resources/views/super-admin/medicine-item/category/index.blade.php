@@ -6,7 +6,7 @@
   <div class="card-body page-card-body" id="table_card_body">
     <div class="row">
       <div class="col-xl-7">
-        <div class="card-body focus-color cd cat_form">
+        <div class="card-body focus-color cd cat_form table-skeleton">
           <p class="catg mb-1">
             <span class="skeleton-card-head" style="color:black;">{{__('translate.Category')}}</span>
             <span class="tot_summ" id="num_plate">
@@ -30,7 +30,7 @@
             </div>
           </div>
           <div class="table-responsive">
-            <table class="ord_table center border-1 skeleton-table" id="myTable">
+            <table class="ord_table center border-1 table-skeleton" id="myTable">
               <thead class="table-light">
                 <tr class="table-row order_body acc_setting_table skeleton">
                   <th id="th_sort" draggable="true" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col th_sort ps-1 pt-1" style="cursor: pointer;">
@@ -60,10 +60,7 @@
                   </th>
                 </tr>
               </thead>
-              <tbody class="table-light bg-white" id="category_data_table">
-
-
-              </tbody>
+              <tbody class="table-light bg-white" id="category_data_table"> </tbody>
             </table>
           </div>
           <div class="row">
@@ -85,7 +82,6 @@
               </div>
             </div>
           </div>
-          <!-- <span class="page-limit"></span> -->
         </div>
       </div>
       <div class="col-xl-5">
@@ -331,15 +327,7 @@
       item.classList.remove('skeleton-card-head-capsule')
     });
   }
-
-  function focuCardTable() {
-    const allSkeleton = document.querySelectorAll('.skeleton-table')
-
-    allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-table')
-    });
-  }
-
+  
   function focuCardTablePeritemLabel() {
     const allSkeleton = document.querySelectorAll('.peritem-label-skeleton')
 
@@ -387,19 +375,29 @@
     });
   }
 
+  function focuTableBody() {
+    const allSkeleton = document.querySelectorAll('.table-skeleton')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('table-skeleton')
+    });
+  }
+
   setTimeout(() => {
-    fetchData();
-    focuCardHead();
-    focuCardHeadLabel();
-    focuCardHeadLabl();
-    focuCardHeadCapsule();
-    focuCardTable();
-    focuCardTablePeritemLabel();
-    focuCardTablePeritem();
-    focuCardTablePagination();
-    focuInputLabel();
-    focuButton();
-    focuInput();
-  }, 1000);
+    requestAnimationFrame(() => {
+      fetchData();
+      focuCardHead();
+      focuCardHeadLabel();
+      focuCardHeadLabl();
+      focuCardHeadCapsule();
+      focuTableBody();
+      focuCardTablePeritemLabel();
+      focuCardTablePeritem();
+      focuCardTablePagination();
+      focuInputLabel();
+      focuButton();
+      focuInput();
+    });
+  }, 3000);
 </script>
 @endsection

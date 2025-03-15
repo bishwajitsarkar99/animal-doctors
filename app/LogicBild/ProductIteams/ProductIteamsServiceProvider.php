@@ -224,13 +224,18 @@ class ProductIteamsServiceProvider
     /**
      * Handle Category View
     */
-    public function viewCategory()
+    public function viewCategory(Request $request)
     {
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
         $allfolders = Folder_entry::all();
+        // Redirect to the 'search-category.action' route
+        // if ($request->has('redirect')) {
+        //     return redirect()->route('search-category.action');
+        // }
         $page_name = 'Product Category';
+
         return view('super-admin.medicine-item.category.index', compact('company_profiles', 'allfolders', 'page_name'));
     }
     /**
@@ -248,15 +253,13 @@ class ProductIteamsServiceProvider
         $sort_field_status = $request->input('sort_field_status', 'status');
         $sort_direction = $request->input('sort_direction', 'desc');
 
+        // Default query
         $data = Category::query();
 
+        // Search data
         if( $query = $request->get('query')){
             $data->Where('category_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
-        } 
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
         }
 
         // Apply sorting
@@ -264,6 +267,13 @@ class ProductIteamsServiceProvider
                         ->orderBy($sort_field_category_name, $sort_direction)
                         ->orderBy($sort_field_status, $sort_direction);
 
+        // Pagination settings
+        $perItem = 10;
+        if($request->input('per_item')){
+            $perItem = $request->input('per_item');
+        }
+
+        // Paginate the results (10 items per page)
         $data = $data->paginate($perItem)->toArray();
         
         return response()->json( $data, 200);
