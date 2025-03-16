@@ -8,27 +8,21 @@
       <div class="col-xl-7">
         <div class="card-body focus-color cd cat_form">
           <div class="row">
-            <div class="col-xl-9">
+            <div class="col-xl-12">
               <p class="catg mb-1">
-                <span class="skeleton-card-head-two">{{__('translate.Sub-Category')}}</span>
+                <span class="">{{__('translate.Sub-Category')}}</span>
                 <span class="tot_summ" id="num_plate">
-                  <label class="tot-search skeleton-card-head-labl-two mt-3 pt-2" for="tot_cagt"> ➤ {{__('translate.Total Sub-Category')}} :</label>
-                  <label class="badge rounded-pill bg-primary skeleton-card-head-capsule-two" for="total_medic_records" style="font-weight: 600;color:white;" id="iteam_label4"><span class="total_users" style="font-weight: 600;" id="total_subcategory_records"></span><span class="skeleton" id="iteam_label5" style="font-weight: 600;color:white;">.00 {{__('translate.items')}}</span></label>
+                  <label class="tot-search mt-3 pt-2" for="tot_cagt"> ➤ {{__('translate.Total Sub-Category')}} :</label>
+                  <label class="badge pill-rounded skeleton-table-head-capsule" for="total_medic_records" style="font-weight: 700;color:black;" id="iteam_label4"><span class="total_users" style="font-weight: 700;color:black;" id="total_subcategory_records"></span><span class="skeleton" id="iteam_label5" style="font-weight: 700;color:black;">.00 {{__('translate.items')}}</span></label>
                 </span>
                 <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="margin-top:14px;"></i>
               </p>
-            </div>
-            <div class="col-xl-3 link">
-              <button class="btn btn-sm cgt_btn btn_focus min-skeleton" href="#" type="button" id="showCategory">
-                <span class="get-cat-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                <span class="get-cat-btn-text">{{__('translate.Category')}}</span>
-              </button>
             </div>
           </div>
           
           <div class="row">
             <div class="col-3">
-              <span class="form-check form-switch skeleton search_ me-2">
+              <span class="form-check form-switch search_ me-2">
                 <input class="form-check-input" onclick="mySrcFunction()" type="checkbox" id="search_area" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 <label class="search ser_label ps-1 pt-1" for="search pe-2">{{__('translate.Search')}} :</label>
                 <label class="form-check-label" for="collapseExample"><span class="search_on" id="search_off">OFF</span></label>
@@ -41,16 +35,36 @@
             </div>
           </div>
           <div class="table-responsive">
-            <table class="ord_table center border-1 skeleton mt-2">
-              <tr class="table-row order_body acc_setting_table">
-                <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.ID')}}</th>
-                <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Action')}}</th>
-                <th id="th_sort" data-coloumn="category_id" data-order="desc" class="table_th_color txt skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Category')}}</th>
-                <th id="th_sort" data-coloumn="sub_category_name" data-order="desc" class="table_th_color tot_pending_ col skeleton ps-1 pt-1" style="text-align: left;cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.sub-Category-Name')}}</th>
-                <th id="th_sort" data-coloumn="status" data-order="desc" class="table_th_color tot_pending_ skeleton ps-2 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Status')}}</th>
-                <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col skeleton check_border pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Check')}}</th>
-              </tr>
-              <tbody class="bg-white" id="subcategory_data_table">
+            <table class="table-light center border-1">
+              <thead class="table-fixed table-light">
+                <tr class="table-row order_body acc_setting_table">
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col" style="cursor: pointer;"> 
+                    {{__('translate.ID')}}
+                    <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                  </th>
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col" style="cursor: pointer;">
+                    {{__('translate.Action')}}
+                    <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                  </th>
+                  <th id="th_sort" data-coloumn="category_id" data-order="desc" class="table_th_color txt" style="cursor: pointer;">
+                    {{__('translate.Category')}}
+                    <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                  </th>
+                  <th id="th_sort" data-coloumn="sub_category_name" data-order="desc" class="table_th_color tot_pending_ col" style="text-align: left;cursor: pointer;">
+                    {{__('translate.sub-Category-Name')}}
+                    <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                  </th>
+                  <th id="th_sort" data-coloumn="status" data-order="desc" class="table_th_color tot_pending_" style="cursor: pointer;">
+                    {{__('translate.Status')}}
+                    <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                  </th>
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col check_border" style="cursor: pointer;"> 
+                    {{__('translate.Check')}}
+                    <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="table-light bg-white skeleton" id="subcategory_data_table">
 
               </tbody>
             </table>
@@ -80,62 +94,57 @@
         <div class="row">
           <div class="category-form">
             <div class="card form-control cat_form">
-              <form autocomplete="off">
+              <form class="mini-form" autocomplete="off">
                 @csrf
                 <div class="row mt-3">
-                  <div class="col-5 skeleton-input-label">
-                    <label class="catg_name_label sub_catg mt-1" for="sub-category-name">{{__('translate.Sub-Category-Name')}} :</label>
-                  </div>
-                  <div class="col-1">
-                    <i class="subcategory-icon fa fa-spinner fa-spin subcategory-hidden mt-2"></i>
-                  </div>
-                  <div class="col-6 skeleton-input">
+                  <div class="col-12">
                     <span class=""><input class="form-control form-control-sm edit_sub_category_name" type="text" name="sub_category_name" id="sub_category_name" placeholder="{{__('translate.Sub Category')}}" autofocus></span>
                     <input type="hidden" id="sub_category_id">
                   </div>
-                  <span id="savForm_error"></span></span><span id="updateForm_errorList" style="text-align:right;"></span>
+                </div>
+                <!-- show-error -->
+                <div class="row">
+                  <div class="col-12" style="text-align:left;">
+                    <span id="savForm_error"></span><span id="updateForm_errorList"></span>
+                  </div>
                 </div>
                 <div class="row mt-2">
-                  <div class="col-5 skeleton-input-label">
-                    <label class="catg_name_label sub_catg mt-1" for="category-name">{{__('translate.Category-ID')}} :</label>
-                  </div>
-                  <div class="col-1">
-                    <i class="subcategoryid-icon fa fa-spinner fa-spin subcategoryid-hidden mt-2"></i>
-                  </div>
-                  <div class="col-6 role_nme cat_nme skeleton-input">
-                    <span class="">
-                      <input class="form-control form-control-sm categ_id edit_category_id" list="datalistOptions2" type="number" name="category_id" id="category_id" placeholder="{{__('translate.Category ID')}}" required>
-                      <datalist id="datalistOptions2">
-                        @foreach($categories as $category)
+                  <div class="col-12 role_nme cat_nme">
+                    <select type="number" class="form-control form-control-sm select2 edit_category_id" name="category_id" id="category_id">
+                      <option value="">Select Category</option>
+                      @foreach($categories as $category)
                         <option value="{{$category->id}}">{{$category->category_name}}</option>
-                        @endforeach
-                      </datalist>
-                    </span>
+                      @endforeach
+                    </select>
                   </div>
                 </div>
-                <p style="text-align: end;">
-                  <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" id="save">
-                    <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                    <span class="category-btn-text">ADD</span>
-                  </button>
-                  <button id="update_btn" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" hidden>
-                    <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                    <span class="update-btn-text">Update</span>
-                  </button>
-                  <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton mt-2">
-                    <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                    <span class="cancel-btn-text">Cancel</span>
-                  </button>
-                </p>
+                <div class="row mt-1">
+                  <div class="col-5">
+                    <div class="btn_box mt-2">
+                      <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width me-2" id="save">
+                        <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                        <span class="category-btn-text">ADD</span>
+                      </button>
+                      <button id="update_btn" class="btn btn-sm cgt_btn btn_focus button_width me-2" hidden>
+                        <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                        <span class="update-btn-text">Update</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-4"></div>
+                  <div class="col-3">
+                    <div class="">
+                      <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus button_width mt-2">
+                        <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                        <span class="cancel-btn-text">Cancel</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </form>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row table-footer">
-      <div class="alert-info brand_message ">
-
       </div>
     </div>
     <div class="col-xl-12 action_message">
@@ -339,15 +348,31 @@
 
 @endsection
 @section('css')
+<link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/sub-category/sub-category.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 @endsection
 @section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
 <script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 @include('super-admin.medicine-item.sub-category.data-handel-ajax.data-handel-ajax')
 @include('super-admin.medicine-item.sub-category.data-handel-ajax.get-category-ajax')
+<script>
+  $(document).ready(function(){
+    //$('.select2').select2();
+    $('.select2').select2({
+      placeholder: 'Select Category',
+      allowClear: true
+    });
+    // Set custom placeholder for the search input inside Select2 dropdowns
+    $('#category_id').on('select2:open', function() {
+      $('.select2-search__field').attr('placeholder', 'Search category...');
+    });
+  });
+</script>
 <script>
   // skeleton
   function fetchData() {
@@ -373,10 +398,10 @@
   }
 
   function focuCardHeadCapsule() {
-    const allSkeleton = document.querySelectorAll('.skeleton-card-head-capsule-two')
+    const allSkeleton = document.querySelectorAll('.skeleton-table-head-capsule')
 
     allSkeleton.forEach(item => {
-      item.classList.remove('skeleton-card-head-capsule-two')
+      item.classList.remove('skeleton-table-head-capsule')
     });
   }
   function categoryData() {

@@ -28,6 +28,7 @@ return[
     'ADD Category'=>'পণ্যের-ধরন যোগ করুন',
     // Sub Category
     'Sub-Category List'=>'উপ-ধরনের তালিকা',
+    'Sub-Category'=>'উপ-ধরন',
     'Sub Category'=>'পণ্যের উপ-ধরন',
     'ADD Sub Category'=>'উপ-ধরন যোগ করুন',
     // Group
@@ -65,6 +66,7 @@ return[
     'Stock-Book'=>'স্টক-বুক',
     'Add Stock Adjustment'=>'স্টক সামঞ্জস্য যোগ করুন',
     'Stock-Adjustment'=>'স্টক সামঞ্জস্য',
+    'Adjustment'=>'সামঞ্জস্য',
     'Open Damage-Stock'=>'ওপেন ড্যামেজ-স্টক',
     'Damage-Stock'=>'ড্যামেজ-স্টক',
     'Open Stock-Summary'=>'স্টক-সারাংশ খুলুন',
@@ -320,7 +322,7 @@ return[
 
     // Navbar============
     'Stock Summary'=>'স্টক সারাংশ',
-    'Supplier Summary'=>'সরবরাহকারীর সারাংশ',
+    'Summary'=>'সারাংশ',
     'Supplier'=>'সরবরাহকারী',
     'Pivot Table'=>'পিভট টেবিল',
     'Order'=>'অর্ডার',

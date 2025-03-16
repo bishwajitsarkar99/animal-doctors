@@ -30,24 +30,24 @@
             </div>
           </div>
           <div class="table-responsive">
-            <table class="ord_table center border-1" id="myTable">
-              <thead class="table-light">
+            <table class="table-light center border-1" id="myTable">
+              <thead class="table-fixed table-light">
                 <tr class="table-row order_body acc_setting_table">
-                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col th_sort ps-1" style="cursor: pointer;">
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col th_sort" style="cursor: pointer;">
                     <!-- Up arrow  -->
                     {{__('translate.ID')}}
                     <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
-                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col th_sort ps-1" style="cursor: pointer;">
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col th_sort" style="cursor: pointer;">
                     {{__('translate.Action')}}
                     <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
-                  <th id="th_sort" data-coloumn="category_name" data-order="desc" class="tableHead table_th_color tot_pending_ col th_sort ps-1" style="text-align: left;cursor: pointer;">
+                  <th id="th_sort" data-coloumn="category_name" data-order="desc" class="tableHead table_th_color tot_pending_ col th_sort" style="text-align: left;cursor: pointer;">
                     {{__('translate.Category-Name')}}
                     <!-- Up arrow  -->
                     <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
-                  <th id="th_sort" data-coloumn="status" data-order="desc" class="tableHead table_th_color tot_pending_ col th_sort ps-1" style="text-align: left;cursor: pointer;">
+                  <th id="th_sort" data-coloumn="status" data-order="desc" class="tableHead table_th_color tot_pending_ col th_sort" style="text-align: left;cursor: pointer;">
                     {{__('translate.Status')}}
                     <!-- Up arrow  -->
                     <svg width="12px" height="12px" fill="#333" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
@@ -91,24 +91,19 @@
                 @csrf
                 <!-- Category-field -->
                 <div class="row mt-3">
-                  <div class="col-4">
-                    <label class="catg_name_label mt-1" for="category-name">{{__('translate.Category-Name')}} : </label>
-                  </div>
-                  <div class="col-8">
-                    <input class="form-control form-control-sm edit_category_name skeleton" type="text" name="category_name" id="category_name" placeholder="{{__('translate.Category Name')}}" autofocus>
+                  <div class="col-12">
+                    <input class="form-control form-control-sm edit_category_name" type="text" name="category_name" id="category_name" placeholder="{{__('translate.Category Name')}}" autofocus>
                     <input type="hidden" id="category_id">
                   </div>
                 </div>
                 <!-- show-error -->
                 <div class="row">
-                  <div class="col-4"></div>
-                  <div class="col-8" style="text-align:right;">
+                  <div class="col-12" style="text-align:left;">
                     <span id="savForm_error"></span><span id="updateForm_errorList"></span>
                   </div>
                 </div>
                 <!-- button -->
-                <div class="row">
-                  <div class="col-4"></div>
+                <div class="row mt-1">
                   <div class="col-5">
                     <div class="btn_box mt-2">
                       <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width me-2" id="save">
@@ -121,6 +116,7 @@
                       </button>
                     </div>
                   </div>
+                  <div class="col-4"></div>
                   <div class="col-3">
                     <div class="mt-2">
                       <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus button_width">
@@ -134,11 +130,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row table-footer">
-      <div class="alert-info brand_message ">
-
       </div>
     </div>
     <div class="col-xl-12 action_message">
