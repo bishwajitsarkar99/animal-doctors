@@ -621,25 +621,35 @@ class ProductIteamsServiceProvider
         $sort_field_status = $request->input('sort_field_status', 'status');
         $sort_direction = $request->input('sort_direction', 'desc');
 
+        $total_group = MedicineGroup::count();
+
         $data = MedicineGroup::query();
 
         if( $query = $request->get('query')){
             $data->Where('group_name','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
-        }
+        
+        // Paginate
+        $perItem = $request->input('per_item', 10);
 
         // Apply sorting
         $data = $data->orderBy($sort_field_id, $sort_direction)
                         ->orderBy($sort_field_group_name, $sort_direction)
                         ->orderBy($sort_field_status, $sort_direction);
 
-        $data = $data->paginate($perItem)->toArray();
+        $paginateData = $data->paginate($perItem);
         
-        return response()->json( $data, 200);
+        $item_num = $paginateData->count();
+
+        return response()->json([
+            'data' => $paginateData->items(),
+            'links' => $paginateData->toArray()['links'] ?? [],
+            'total' => $paginateData->total(),
+            'total_group' => $total_group,
+            'per_page' => $perItem,
+            'per_item_num' => $item_num,
+        ],200);
     }
     /**
      * Handle Create Medicine Group Event

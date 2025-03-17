@@ -603,15 +603,25 @@ label.ser_label {
         letter-spacing: 10px;
     }
 }
+.is-valid{
+    border-color: rgb(25, 135, 84) !important;
+    outline: 1px solid rgb(25, 135, 84) !important;
+    transition: border 0.3s ease-in-out !important;
+}
+.is-invalid{
+    border-color: rgb(220, 53, 69) !important;
+    outline: 1px solid rgb(220, 53, 69) !important;
+    transition: border 0.3s ease-in-out !important;
+}
 input#search {
     outline: none;
     box-shadow: 0px 2px 20px #0001;
     background-image: linear-gradient(to bottom, white 0%, white, white 100%);
     border-radius: 5px;
-    border-top: 1px solid #f1eeee;
-    border-bottom: 1px solid #f1eeee;
-    border-left: 1px solid #f1eeee;
-    border-right: 1px solid #f1eeee;
+    border-top: 1px solid rgb(209, 209, 209);
+    border-bottom: 1px solid rgb(209, 209, 209);
+    border-left: 1px solid rgb(209, 209, 209);
+    border-right: 1px solid rgb(209, 209, 209);
     /* animation: text_color 3s infinite; */
     opacity: 1;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -633,10 +643,9 @@ input#search {
 }
 input#search:focus{
     border-color: #0056b3;
+    outline: 1px solid #0056b3;
     color: #0056b3;
-    transition: 1s;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    transition: border 0.3s ease-in-out;
 }
 h5#staticBackdropLabels {
     color: darkgoldenrod;
