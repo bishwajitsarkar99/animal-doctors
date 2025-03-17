@@ -576,7 +576,7 @@ input#category_name {
 input#category_name:focus{
     border-color: #0056b3;
     outline: 1px solid #0056b3;
-    color: #009779;
+    color: #0056b3;
     transition: border 0.3s ease-in-out;
 }
 @keyframes supfncolor{

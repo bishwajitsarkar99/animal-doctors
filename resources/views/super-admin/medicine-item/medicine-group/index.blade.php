@@ -82,12 +82,12 @@
           </div>
           <div class="row">
             <div class="col-xl-12">
-              <span class="item_class skeleton">
-                Peritem <span id="total_per_items"></span>
+              <label class="item_class skeleton">
+                Entries <span id="total_per_items"></span>
                 show <span id="per_items_num"></span>
                 out of
                 <span id="total_items"></span>
-              </span>
+              </label>
             </div>
           </div>
         </div>

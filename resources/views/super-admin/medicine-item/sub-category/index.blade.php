@@ -69,7 +69,7 @@
               </tbody>
             </table>
           </div>
-          <div class="row table_last_row">
+          <div class="row table-light">
             <div class=" col-2">
               <label class="item_class skeleton">Peritem</label>
               <div class="custom-select skeleton">
@@ -86,6 +86,16 @@
               <div class="pagination pagination-skeleton mt-1" id="subcategory_data_table_paginate">
 
               </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12">
+              <label class="item_class skeleton">
+                Entries <span id="total_per_items"></span>
+                show <span id="per_items_num"></span>
+                out of
+                <span id="total_items"></span>
+              </label>
             </div>
           </div>
         </div>
@@ -253,8 +263,8 @@
         </button>
         </div>
         <div class="modal-body" id="logoutModal_body">
-          <span id="sub_categry_id"></span><br>
-          <span id="sub_categry_name"></span><br>
+          <span id="sub_categries_id"></span><br>
+          <span id="sub_categries_name"></span><br>
           <p class="admin_paragraph" style="text-align:center;" id="text_message">
             <label class="label_user_edit" id="cate_confirm_update" for="id">Would you like to update ? </label>
           </p>

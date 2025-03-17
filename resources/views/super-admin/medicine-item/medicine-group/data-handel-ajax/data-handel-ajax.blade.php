@@ -256,15 +256,17 @@
 
         // Group Name Filed
         $(document).on('keyup', "#group_name", function(){
-            var groupName = $(this).val();
-            if (groupName !== '') {
-                $("#group_name").removeClass('is-invalid');
-                $("#group_name").addClass('is-valid');
+            if($(this).hasClass('is-invalid')){
+                $(this).removeClass('is-invalid');
+                $(this).addClass('is-valid');
                 $('#updateForm_errorList').addClass('display-none');
                 $('#savForm_error').addClass('display-none');
-            }else if(groupName == ''){
-                $("#group_name").removeClass('is-invalid');
-                $("#group_name").removeClass('is-valid');
+            }else{
+                var value=$(this).val();
+                if (value =='') {
+                    $(this).removeClass('is-invalid');
+                    $(this).removeClass('is-valid');
+                }
             }
         });
 

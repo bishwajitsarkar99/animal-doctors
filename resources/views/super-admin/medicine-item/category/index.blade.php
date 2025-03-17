@@ -81,6 +81,16 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-xl-12">
+              <label class="item_class skeleton">
+                Entries <span id="total_per_items"></span>
+                show <span id="per_items_num"></span>
+                out of
+                <span id="total_items"></span>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-xl-5">
@@ -278,6 +288,13 @@
 @include('super-admin.medicine-item.category.data-handel_ajax.ajax')
 <script>
   // skeleton
+  function fetchData() {
+    const allSkeleton = document.querySelectorAll('.skeleton')
+
+    allSkeleton.forEach(item => {
+      item.classList.remove('skeleton')
+    });
+  }
   function focuCardHeadCapsule() {
     const allSkeleton = document.querySelectorAll('.skeleton-table-head-capsule')
 
@@ -320,6 +337,7 @@
 
   setTimeout(() => {
     requestAnimationFrame(() => {
+      fetchData();
       focuCardHeadCapsule();
       focuTableBody();
       focuCardTablePeritemLabel();

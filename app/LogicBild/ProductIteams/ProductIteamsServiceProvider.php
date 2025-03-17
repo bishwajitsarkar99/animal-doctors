@@ -253,6 +253,8 @@ class ProductIteamsServiceProvider
         $sort_field_status = $request->input('sort_field_status', 'status');
         $sort_direction = $request->input('sort_direction', 'desc');
 
+        // total data count
+        $total_categories = Category::count();
         // Default query
         $data = Category::query();
 
@@ -267,16 +269,21 @@ class ProductIteamsServiceProvider
                         ->orderBy($sort_field_category_name, $sort_direction)
                         ->orderBy($sort_field_status, $sort_direction);
 
-        // Pagination settings
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
-        }
+        // Paginate
+        $perItem = $request->input('per_item', 10);
 
-        // Paginate the results (10 items per page)
-        $data = $data->paginate($perItem)->toArray();
+        $paginateData = $data->paginate($perItem);
         
-        return response()->json( $data, 200);
+        $item_num = $paginateData->count();
+
+        return response()->json([
+            'data' => $paginateData->items(),
+            'links' => $paginateData->toArray()['links'] ?? [],
+            'total' => $paginateData->total(),
+            'total_categories' => $total_categories,
+            'per_page' => $perItem,
+            'per_item_num' => $item_num,
+        ],200);
     }
     /**
      * Handle Create Category
@@ -423,6 +430,9 @@ class ProductIteamsServiceProvider
         $sort_field_status = $request->input('sort_field_status', 'status');
         $sort_direction = $request->input('sort_direction', 'desc');
 
+        // total data count
+        $total_sub_categories = SubCategory::count();
+        // Default query
         $data = SubCategory::with(['categories']);
 
         if( $query = $request->get('query')){
@@ -430,10 +440,8 @@ class ProductIteamsServiceProvider
                 ->orWhere('category_id','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
-        }
+        // Paginate
+        $perItem = $request->input('per_item', 10);
 
         // Apply sorting
         $data = $data->orderBy($sort_field_id, $sort_direction)
@@ -441,9 +449,19 @@ class ProductIteamsServiceProvider
                         ->orderBy($sort_field_sub_category_name, $sort_direction)
                         ->orderBy($sort_field_status, $sort_direction);
 
-        $data = $data->paginate($perItem)->toArray();
+
+        $paginateData = $data->paginate($perItem);
         
-        return response()->json( $data, 200);
+        $item_num = $paginateData->count();
+
+        return response()->json([
+            'data' => $paginateData->items(),
+            'links' => $paginateData->toArray()['links'] ?? [],
+            'total' => $paginateData->total(),
+            'total_sub_categories' => $total_sub_categories,
+            'per_page' => $perItem,
+            'per_item_num' => $item_num,
+        ],200);
     }
     /**
      * Handle Cateogry Data Get

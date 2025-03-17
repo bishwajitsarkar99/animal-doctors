@@ -232,7 +232,7 @@ input#sub_category_name {
 input#sub_category_name:focus{
     border-color: #0056b3;
     outline: 1px solid #0056b3;
-    color: #009779;
+    color: #0056b3;
     transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
 }

@@ -116,7 +116,10 @@
                 success: function({
                     data,
                     links,
-                    total
+                    total,
+                    total_sub_categories,
+                    per_page,
+                    per_item_num
 
                 }) {
                     $("#subcategory_data_table").html(table_rows([...data]));
@@ -125,6 +128,9 @@
                         total
                     }));
                     $("#total_subcategory_records").text(total);
+                    $("#total_items").text(total_sub_categories);
+                    $("#total_per_items").text(per_page);
+                    $("#per_items_num").text(per_item_num);
                     // Initialize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
                     // Get suggestions for autocomplete
@@ -257,29 +263,33 @@
 
         // Sub Category Name Filed
         $(document).on('keyup', "#sub_category_name", function(){
-            var subCategoryName = $("#sub_category_name").val();
-            if(subCategoryName !== ''){
-                $("#sub_category_name").removeClass('is-invalid');
-                $("#sub_category_name").addClass('is-valid');
-                $('#savForm_error').addClass('display-none');
+            if($(this).hasClass('is-invalid')){
+                $(this).removeClass('is-invalid');
+                $(this).addClass('is-valid');
                 $('#updateForm_errorList').addClass('display-none');
-            }else if(subCategoryName == ''){
-                $("#sub_category_name").removeClass('is-valid');
-                $("#sub_category_name").removeClass('is-invalid');
+                $('#savForm_error').addClass('display-none');
+            }else{
+                var value=$(this).val();
+                if (value =='') {
+                    $(this).removeClass('is-invalid');
+                    $(this).removeClass('is-valid');
+                }
             }
         });
 
         // Select Category Id Field
         $(document).on('change', '#category_id', function(){
-            var categoryName = $("#category_id").val();
-            if (categoryName !== '') {
-                $("#category_id").closest('.cat_nme').find('.select2-container').removeClass('is-select-invalid');
-                $("#category_id").closest('.cat_nme').find('.select2-container').addClass('is-select-valid');
+            if($(this).hasClass('is-invalid')){
+                $(this).closest('.cat_nme').find('.select2-container').removeClass('is-select-invalid');
+                $(this).closest('.cat_nme').find('.select2-container').addClass('is-select-valid');
                 $('.edit_category_id_error').empty();
                 $('.edit_category_id_error').addClass('display-none');
-            }else if(categoryName == ''){
-                $("#category_id").closest('.cat_nme').find('.select2-container').removeClass('is-select-valid');
-                $("#category_id").closest('.cat_nme').find('.select2-container').removeClass('is-select-invalid');
+            }else{
+                var value=$(this).val();
+                if (value =='') {
+                    $(this).closest('.cat_nme').find('.select2-container').removeClass('is-select-valid');
+                    $(this).closest('.cat_nme').find('.select2-container').removeClass('is-select-invalid');
+                }
             }
         });
 
@@ -381,15 +391,15 @@
                         $('.edit_sub_category_name').val(response.messages.sub_category_name);
                         $('#category_id').val(response.messages.category_id).trigger('change.select2');
 
-                        const sub_category_id = $("#sub_categry_id");
-                        const sub_category_name = $("#sub_categry_name");
-                        sub_category_id.append(`<label class="label_user_edit"> Sub Category-ID : <span class="word_space">${response.messages.id}</span></label>`);
-                        sub_category_name.append(`<label class="label_user_edit"> Sub Category-Name : <span class="word_space">${response.messages.sub_category_name}</span></label>`);
+                        const sub_categories_id = $("#sub_categries_id");
+                        const sub_categories_name = $("#sub_categries_name");
+                        sub_categories_id.append(`<label class="label_user_edit"> Sub Category-ID : <span class="word_space">${response.messages.id}</span></label>`);
+                        sub_categories_name.append(`<label class="label_user_edit"> Sub Category-Name : <span class="word_space">${response.messages.sub_category_name}</span></label>`);
                     }
                 }
             });
         });
-        // Show Update Sub Category Modal
+        // Show Update Sub Category Modal 
         $(document).on('click', '#update_btn', function(e){
             e.preventDefault();
             $("#updateconfirmsubcategory").modal('show');
@@ -398,6 +408,8 @@
             $("#cate_confirm_update").addClass('skeleton');
             $(".update_confirm").addClass('skeleton');
             $(".delete_cancel").addClass('skeleton');
+            $("#sub_categries_id").addClass('skeleton');
+            $("#sub_categries_name").addClass('skeleton');
             var time = null;
             time = setTimeout(() => {
             
@@ -406,6 +418,8 @@
                 $("#cate_confirm_update").removeClass('skeleton');
                 $(".update_confirm").removeClass('skeleton');
                 $(".delete_cancel").removeClass('skeleton');
+                $("#sub_categries_id").removeClass('skeleton');
+                $("#sub_categries_name").removeClass('skeleton');
             }, 1000);
 
             return ()=>{

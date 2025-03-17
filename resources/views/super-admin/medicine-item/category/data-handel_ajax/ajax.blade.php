@@ -141,7 +141,10 @@
                 success: function({
                     data,
                     links,
-                    total
+                    total,
+                    total_categories,
+                    per_page,
+                    per_item_num
                     
                 }) {
                     $("#category_data_table").html(table_rows([...data]));
@@ -150,6 +153,9 @@
                         total
                     }));
                     $("#total_category_records").text(total);
+                    $("#total_items").text(total_categories);
+                    $("#total_per_items").text(per_page);
+                    $("#per_items_num").text(per_item_num);
                     // Initialize tooltips after appending the elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
 
@@ -299,15 +305,17 @@
 
         // Category Name Filed
         $(document).on('keyup', "#category_name", function(){
-            var categoryName = $(this).val();
-            if (categoryName !== '') {
-                $("#category_name").addClass('is-valid');
-                $("#category_name").removeClass('is-invalid');
+            if($(this).hasClass('is-invalid')){
+                $(this).removeClass('is-invalid');
+                $(this).addClass('is-valid');
                 $('#updateForm_errorList').addClass('display-none');
                 $('#savForm_error').addClass('display-none');
-            }else if(categoryName == ''){
-                $("#category_name").removeClass('is-valid');
-                $("#category_name").removeClass('is-invalid');
+            }else{
+                var value=$(this).val();
+                if (value =='') {
+                    $(this).removeClass('is-invalid');
+                    $(this).removeClass('is-valid');
+                }
             }
         });
 
