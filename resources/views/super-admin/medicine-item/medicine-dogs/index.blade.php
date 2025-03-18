@@ -8,30 +8,23 @@
       <div class="col-xl-7">
         <div class="card-body focus-color cd cat_form">
           <div class="row">
-            <div class="col-xl-9">
-              <p class="catg mb-1">
-                <span class="skeleton-card-head-two">{{__('translate.Medicine-Dosage')}}</span>
+            <div class="col-xl-12">
+              <p class="catg mb-2">
+                <span class="">{{__('translate.Medicine-Dosage')}}</span>
                 <span class="tot_summ" id="num_plate">
-                  <label class="tot-search medic skeleton-card-head-labl-two mt-3 pt-1" for="tot_cagt" style="color:black;"> ➤ {{__('translate.Total')}} :</label>
-                  <label class="badge rounded-pill bg-primary skeleton-card-head-capsule-two" for="total_medicinedogs_records" id="iteam_label4">
+                  <label class="tot-search medic mt-3 pt-1" for="tot_cagt" style="color:black;"> ➤ {{__('translate.Total')}} :</label>
+                  <label class="badge pill-rounded skeleton-head-capsule" for="total_medicinedogs_records" id="iteam_label4">
                     <span class="total_result" id="total_medicinedogs_records"></span>
-                    <span style="font-weight: 600;color:white;font-size: 11px;">.00 {{__('translate.dosage')}}</span>
+                    <span style="font-weight: 600;color:black;font-size: 11px;">.00 {{__('translate.dosage')}}</span>
                   </label>
                 </span>
                 <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="margin-top:11px;"></i>
               </p>
             </div>
-            <div class="col-xl-3 link">
-              <button class="btn btn-sm cgt_btn btn_focus min-skeleton ms-1 mt-1" href="#" type="button" id="showMedicine">
-                <span class="get-medicine-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                <span class="get-medicine-btn-text">{{__('translate.Medicine')}}</span>
-              </button>
-            </div>
           </div>
-          
           <div class="row">
             <div class="col-3">
-              <span class="form-check form-switch search_ skeleton  me-2">
+              <span class="form-check form-switch search_  me-2">
                 <input class="form-check-input " onclick="mySrcFunction()" type="checkbox" id="search_area" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 <label class="search ser_label  ps-1 pt-1" for="search pe-2">{{__('translate.Search')}} :</label>
                 <label class="form-check-label " for="collapseExample"><span class="search_on " id="search_off">OFF</span></label>
@@ -44,23 +37,39 @@
             </div>
           </div>
           <div class="table-responsive">
-            <table class="ord_table center border-1 skeleton mt-2">
-              <thead>
+            <table class="table-light center border-1 skeleton mt-2">
+              <thead class="table-fixed table-light">
                 <tr class="table-row order_body acc_setting_table skeleton">
-                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.ID')}}</th>
-                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Action')}}</th>
-                  <th id="th_sort" data-coloumn="medicine_id" data-order="desc" class="tableHead table_th_color txt skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Medicine')}}</th>
-                  <th id="th_sort" data-coloumn="dosage" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton ps-1 pt-1" style="text-align: left;cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Medicine-Dosage')}}</th>
-                  <th id="th_sort" data-coloumn="status" data-order="desc" class="tableHead table_th_color tot_pending_ skeleton ps-1 pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Status')}}</th>
-                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col skeleton pt-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Check')}}</th>
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col" style="cursor: pointer;">
+                    {{__('translate.ID')}}
+                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                  </th>
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col" style="cursor: pointer;">
+                    {{__('translate.Action')}}
+                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                  </th>
+                  <th id="th_sort" data-coloumn="medicine_id" data-order="desc" class="tableHead table_th_color txt" style="cursor: pointer;">
+                    {{__('translate.Medicine')}}
+                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                  </th>
+                  <th id="th_sort" data-coloumn="dosage" data-order="desc" class="tableHead table_th_color tot_pending_ col" style="text-align: left;cursor: pointer;">
+                    {{__('translate.Medicine-Dosage')}}
+                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                  </th>
+                  <th id="th_sort" data-coloumn="status" data-order="desc" class="tableHead table_th_color tot_pending_" style="cursor: pointer;">
+                    {{__('translate.Status')}}
+                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                  </th>
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col" style="cursor: pointer;">
+                    {{__('translate.Check')}}
+                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                  </th>
                 </tr>
               </thead>
-              <tbody class="bg-white skeleton" id="medicine_dogs_data_table" style="color:black;font-weight:500;">
-
-              </tbody>
+              <tbody class="table-light bg-white skeleton" id="medicine_dogs_data_table"></tbody>
             </table>
           </div>
-          <div class="row table_last_row">
+          <div class="row table-light">
             <div class=" col-2">
               <label class="item_class skeleton">Peritem</label>
               <div class="custom-select skeleton">
@@ -74,9 +83,17 @@
               </div>
             </div>
             <div class="col-10">
-              <div class="pagination pagination-skeleton mt-1 pt-1" id="medicine_dogs_data_table_paginate">
-
-              </div>
+              <div class="pagination pagination-skeleton" id="medicine_dogs_data_table_paginate"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12">
+              <label class="item_class skeleton">
+                Entries <span id="total_per_items"></span>
+                show <span id="per_items_num"></span>
+                out of
+                <span id="total_items"></span>
+              </label>
             </div>
           </div>
         </div>
@@ -85,55 +102,57 @@
         <div class="row">
           <div class="category-form">
             <div class="card form-control cat_form">
-              <form autocomplete="off">
+              <form class="mini-form" autocomplete="off">
                 @csrf
                 <div class="row mt-3">
-                  <div class="col-5 skeleton-input-label">
-                    <label class="catg_name_label dogs mt-1" for="sub-category-name">{{__('translate.Medicine-Dosage')}} :</label>
-                  </div>
-                  <div class="col-1">
-                    <i class="medicinedogs-icon fa fa-spinner fa-spin medicinedogs-hidden mt-2"></i>
-                  </div>
-                  <div class="col-6 skeleton-input">
+                  <div class="col-12">
                     <span class=""><input class="form-control form-control-sm edit_medicine_dogs" type="text" name="dosage" id="medicine_dogs" placeholder="{{__('translate.Medicine Dosage')}}" autofocus></span>
                     <input type="hidden" id="medicinedogs_id">
                   </div>
-                  <span id="savForm_error"></span><span id="updateForm_errorList" style="text-align:right;"></span>
                 </div>
-                <div class="row mt-2">
-                  <div class="col-5 skeleton-input-label">
-                    <label class="catg_name_label dogs mt-1" for="medicine-id">{{__('translate.Medicine-ID')}} :</label>
-                  </div>
-                  <div class="col-1">
-                    <i class="medicineid-icon fa fa-spinner fa-spin medicineid-hidden mt-2"></i>
-                  </div>
-                  <div class="col-6 skeleton-input medicine_nme">
-                    <span class=""><input class="form-control form-control-sm medicine_ID edit_medicine_id" type="number" name="medicine_id" id="medicine_id" placeholder="{{__('translate.Medicine ID')}}" required></span>
+                <!-- show-error -->
+                <div class="row">
+                  <div class="col-12" style="text-align:left;">
+                    <span id="savForm_error"></span><span id="updateForm_errorList"></span>
                   </div>
                 </div>
-                <p style="text-align: end;">
-                  <button type="submit" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" id="save">
-                    <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                    <span class="category-btn-text">ADD</span>
-                  </button>
-                  <button id="update_btn" class="btn btn-sm cgt_btn btn_focus skeleton mt-2" hidden>
-                    <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                    <span class="update-btn-text">Update</span>
-                  </button>
-                  <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton mt-2">
-                    <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                    <span class="cancel-btn-text">Cancel</span>
-                  </button>
-                </p>
+                <div class="row mt-3">
+                  <div class="col-12 medicine_nme mt-2">
+                    <select type="number" class="form-control form-control-sm select2 edit_medicine_id" name="medicine_id" id="medicine_id">
+                      <option value="">Select Group</option>
+                      @foreach($medicines as $medicine)
+                        <option value="{{$medicine->id}}">{{$medicine->medicine_name}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+                <div class="row mt-1 pt-2">
+                  <div class="col-5">
+                    <div class="btn_box group_btn_box mt-4">
+                      <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width me-2" id="save">
+                        <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                        <span class="category-btn-text">ADD</span>
+                      </button>
+                      <button id="update_btn" class="btn btn-sm cgt_btn btn_focus button_width me-2" hidden>
+                        <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                        <span class="update-btn-text">Update</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-3"></div>
+                  <div class="col-4">
+                    <div class="mt-3">
+                      <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus button_width mt-2">
+                        <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                        <span class="cancel-btn-text">Cancel</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </form>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row table-footer">
-      <div class="alert-info brand_message ">
-
       </div>
     </div>
     <div class="col-xl-12 action_message">
@@ -142,95 +161,6 @@
   </div>
 </div>
 @include('loader.action-loader')
-{{-- Start Medicine Name Modal--}}
-<!-- Modal -->
-<div class="modal fade" id="MedicineName" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content" id="admin_modal_box">
-      <div class="modal-header profile_modal_header profilesetting_modal_header">
-        <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
-          {{__('translate.Medicine-List')}}
-        </h5>
-        <button type="button" class="btn-close btn-btn-sm clos_title" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
-      </div>
-
-      <div class="modal-body profile-body pb-3">
-        <div class="card form-control form-control-sm" id="tb_subcatg">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-12">
-                <span class="form-check form-switch search_" id="med">
-                  <input class="form-check-input mt-2 skeleton" type="checkbox" id="search_area_" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  <label class="search catg_ser_label ps-1 pt-1" id="med_label" for="search pe-2">{{__('translate.Search')}} :</label>
-                  <label class="form-check-label skeleton" id="med_label2" for="collapseExample">
-                    <span class="search_on skeleton" id="search_off_">OFF</span>
-                    <span class="search_on skeleton" id="search_on_" hidden>ON</span>
-                  </label>
-                  <i class="prd-search-icon fa fa-spinner fa-spin prd-search-hidden"></i>
-                </span>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <span id="search_plate">
-                  <input id="name_search" type="search" name="search" list="datalistOptions2" id="exampleDataList" class="category-all-search searchform ps-1" placeholder="{{__('translate.Search.........')}}" hidden>
-                  <datalist id="datalistOptions2">
-                    @foreach($medicines as $medicine)
-                      <option value="{{$medicine->medicine_name}}">
-                    @endforeach
-                  </datalist>
-                </span>
-              </div>
-            </div>
-            <div class="table-responsive">
-              <table class="mt-1" id="medic_nam">
-                <thead id="medic_nam2">
-                  <tr id="medic_nam3" style="color:black;">
-                    <th id="medic_nam4" class="tableHead back_color align">{{__('translate.ID')}}</th>
-                    <th id="medic_nam5" data-coloumn="id" data-order="desc" class="tableHead sortable-header back_color ps-1" style="cursor: pointer;"><i class="toggle-icon fa-solid fa-arrow-up-long"></i> {{__('translate.Medicine Name')}}</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white tbody" id="medic_nam6" style="color:black;font-weight:500;cursor:alias;">
-  
-                </tbody>
-              </table>
-            </div>
-            <div class="row table_last_row">
-              <div class="item_box col-2">
-                <label class="item_class per_page">Peritem</label>
-                <div class="custom-select selec_item">
-                  <select class="ps-1" id="perItemControl2">
-                    <option selected>10</option>
-                    <option>20</option>
-                    <option>50</option>
-                    <option>100</option>
-                    <option>200</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-10">
-                <span class="tot_summ" style="float: right;" id="num_plate">
-                  <label class="tot-search mt-3" style="font-size: 12px;" for="tot_cagt" id="iteam_label3"> {{__('translate.Total Medicine Entry')}} :</label>
-                  <label class="badge rounded-pill bg-primary iteam_label4" for="total_medic_records" id="iteam_label4"><span class="total_result" id="total_medic_records"></span>
-                    <span id="iteam_label5" style="font-weight: 600;color:white;font-size:11px;">.00 {{__('translate.pics')}}</span>
-                  </label>
-                </span>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <div class="pagination mt-" style="float: right;" id="medicine_table_paginate">
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{{-- Start  Medicine Name Modal--}}
 
 {{-- Start Delete  Medicine Dogs Modal--}}
 <!-- Modal -->
@@ -337,15 +267,37 @@
 
 @endsection
 @section('css')
+<link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
+<link href="{{ asset('backend_asset') }}/main_asset/jquery-ui-css/jquery-ui.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/medicine-dogs/medicine-dogs.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 @endsection
 @section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
 <script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 @include('super-admin.medicine-item.medicine-dogs.data-handel-ajax.data-ajax')
-@include('super-admin.medicine-item.medicine-dogs.data-handel-ajax.get-medicine-ajax')
+
+<script>
+  $(document).ready(function () {
+    // Initialize Select2
+    $('.select2').select2({
+      placeholder: 'Select Medicine',
+      allowClear: true,
+      width: '100%' // Ensures full width from the start
+    });
+
+    // Set custom placeholder for the search input inside Select2 dropdowns
+    $(document).on('select2:open', '#medicine_id', function () {
+      setTimeout(() => {
+        $('.select2-search__field').attr('placeholder', 'Search medicine...');
+      }, 50); // Small delay ensures the field is available
+    });
+  });
+</script>
 <script>
   // skeleton
   function fetchData() {

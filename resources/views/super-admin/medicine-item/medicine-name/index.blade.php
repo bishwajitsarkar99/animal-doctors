@@ -123,7 +123,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="row mt-4 pt-3">
+                <div class="row mt-3 pt-3">
                   <div class="col-5">
                     <div class="btn_box group_btn_box mt-4">
                       <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width me-2" id="save">
