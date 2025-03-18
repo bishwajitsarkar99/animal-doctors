@@ -28,12 +28,6 @@ class MedicineNameController extends Controller
         return $this->productIteamsServiceProvider->getMedicineNames($request);
     }
 
-    // Get Medicine Group
-    public function getGroup(Request $request)
-    {
-        return $this->productIteamsServiceProvider->getGroups($request);
-    }
-
     // Add Medicine Name
     public function storeData(Request $request)
     {

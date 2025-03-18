@@ -590,14 +590,28 @@ input#category_name:focus{
         background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     }
 }
+#savForm_error, #updateForm_errorList,.group_nme {
+    min-height: 30px;
+    font-size: 12px;
+    color: red;
+}
+#savForm_error, #updateForm_errorList,.group_nme {
+    position: absolute;
+    left: 0;
+    font-size: 12px;
+    color: red;
+}
+.group_btn_box {
+    min-height: 30px;
+}
 .is-valid{
     border-color: rgb(25, 135, 84) !important;
-    outline: 1px solid rgb(25, 135, 84) !important;
+    border: 1px solid rgb(25, 135, 84) !important;
     transition: border 0.3s ease-in-out !important;
 }
 .is-invalid{
     border-color: rgb(220, 53, 69) !important;
-    outline: 1px solid rgb(220, 53, 69) !important;
+    border: 1px solid rgb(220, 53, 69) !important;
     transition: border 0.3s ease-in-out !important;
 }
 .btn_box {

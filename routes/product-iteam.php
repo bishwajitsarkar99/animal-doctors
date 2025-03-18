@@ -29,7 +29,6 @@ Route::group(['middleware' => 'auth'], function (){
     // Sub-Category
     Route::middleware('isSuperAdmin')->group(function () {
         Route::get('/sub-category', [SubCategoryController::class, 'index'])->name('sub-category.index');
-        Route::get('/get-data-category', [SubCategoryController::class, 'getCategories'])->name('get-categories.action');
         Route::post('/add-sub-category', [SubCategoryController::class, 'storeData'])->name('add_subcategory.action');
         Route::get('/get-sub-category', [SubCategoryController::class, 'getSubCategory'])->name('search-subcategory.action');
         Route::get('/edit-sub-category/{id}', [SubCategoryController::class, 'editSubCategory']);
@@ -50,7 +49,6 @@ Route::group(['middleware' => 'auth'], function (){
     // Medicine-Name
     Route::middleware('isSuperAdmin')->group(function () {
         Route::get('/medicine-name', [MedicineNameController::class, 'index'])->name('medicine-name.index');
-        Route::get('/get-group', [MedicineNameController::class, 'getGroup'])->name('group.action');
         Route::post('/add-medicine-name', [MedicineNameController::class, 'storeData'])->name('add_medicinename.action');
         Route::get('/get-medicine-name', [MedicineNameController::class, 'getmedicinename'])->name('search-medicinename.action');
         Route::get('/edit-medicine-name/{id}', [MedicineNameController::class, 'editmedicinename']);

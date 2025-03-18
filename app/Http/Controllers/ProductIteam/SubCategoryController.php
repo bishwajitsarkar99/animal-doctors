@@ -28,12 +28,6 @@ class SubCategoryController extends Controller
         return $this->productIteamsServiceProvider->getSubCategories($request);
     }
 
-    // Get Cateogry
-    public function getCategories(Request $request)
-    {
-        return $this->productIteamsServiceProvider->getCategoriesData($request);
-    }
-
     // Add Sub-Cateogry
     public function storeData(Request $request)
     {

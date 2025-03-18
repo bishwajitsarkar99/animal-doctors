@@ -433,7 +433,7 @@ td.center{
 .datatable-pagination li:last-child .page-link, .datatable-pagination li:last-child a {
     background: linear-gradient(5deg, #b3b0b0, transparent 3%, lightgray, #c3c1c1c9);
     color: black;
-    font-size: 9.5px;
+    font-size: 10px;
     font-weight: 800;
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -444,7 +444,7 @@ td.center{
 .datatable-pagination li:first-child .page-link, .datatable-pagination li:first-child a {
     background: linear-gradient(5deg, #b3b0b0, transparent 3%, lightgray, #c3c1c1c9);
     color: black;
-    font-size: 9.5px;
+    font-size: 10px;
     font-weight: 800;
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -605,12 +605,12 @@ label.ser_label {
 }
 .is-valid{
     border-color: rgb(25, 135, 84) !important;
-    outline: 1px solid rgb(25, 135, 84) !important;
+    border: 1px solid rgb(25, 135, 84) !important;
     transition: border 0.3s ease-in-out !important;
 }
 .is-invalid{
     border-color: rgb(220, 53, 69) !important;
-    outline: 1px solid rgb(220, 53, 69) !important;
+    border: 1px solid rgb(220, 53, 69) !important;
     transition: border 0.3s ease-in-out !important;
 }
 input#search {

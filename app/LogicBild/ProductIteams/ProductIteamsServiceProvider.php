@@ -464,38 +464,6 @@ class ProductIteamsServiceProvider
         ],200);
     }
     /**
-     * Handle Cateogry Data Get
-    */
-    public function getCategoriesData(Request $request)
-    {
-        if($request->ajax() == false){
-            // return abort(404);
-        }
-
-        // Sort field and direction
-        $sort_field_id = $request->input('sort_field_id', 'id');
-        $sort_direction = $request->input('sort_direction', 'desc');
-
-        $data = Category::where('status', '!=', 0);
-
-        if( $query = $request->get('query')){
-            $data->Where('category_name','LIKE','%'.$query.'%')
-                ->orWhere('status','LIKE','%'.$query.'%');      
-        } 
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
-        }
-
-        // Apply sorting
-        $data = $data->orderBy($sort_field_id, $sort_direction);
-;
-
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
-    }
-    /**
      * Handle Create Sub Cateogry Event
     */
     public function createSubCategories(Request $request)
@@ -813,6 +781,8 @@ class ProductIteamsServiceProvider
         $sort_field_status = $request->input('sort_field_status', 'status');
         $sort_direction = $request->input('sort_direction', 'desc');
 
+        $total_medicine = MedicineName::count();
+
         $data = MedicineName::with('medicine_groups');
 
         if( $query = $request->get('query')){
@@ -820,6 +790,8 @@ class ProductIteamsServiceProvider
                 ->orWhere('group_id','LIKE','%'.$query.'%')
                 ->orWhere('status','LIKE','%'.$query.'%');      
         } 
+        // Paginate
+        //$perItem = $request->input('per_item', 10);
         $perItem = 10;
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
@@ -830,39 +802,18 @@ class ProductIteamsServiceProvider
                         ->orderBy($sort_field_medicine_name, $sort_direction)
                         ->orderBy($sort_field_status, $sort_direction);
 
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
-    }
-    /**
-     * Handle Medicine Group Get Data
-    */
-    public function getGroups(Request $request)
-    {
-        if($request->ajax() == false){
-            // return abort(404);
-        }
+        $paginateData = $data->paginate($perItem);
 
-        // Sort field and direction
-        $sort_field_id = $request->input('sort_field_id', 'id');
-        $sort_direction = $request->input('sort_direction', 'desc');
+        $item_num = $paginateData->count();
 
-        $data = MedicineGroup::query();
-
-        if( $query = $request->get('query')){
-            $data->Where('group_name','LIKE','%'.$query.'%')
-                ->orWhere('status','LIKE','%'.$query.'%');      
-        } 
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
-        }
-        // Apply sorting
-        $data = $data->orderBy($sort_field_id, $sort_direction);
-                        
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
+        return response()->json([
+            'data' => $paginateData->items(),
+            'links' => $paginateData->toArray()['links'] ?? [],
+            'total' => $paginateData->total(),
+            'total_medicine' => $total_medicine,
+            'per_page' => $perItem,
+            'per_item_num' => $item_num,
+        ],200);
     }
     /**
      * Handle Create Medicine Name Event
@@ -898,7 +849,7 @@ class ProductIteamsServiceProvider
     */
     public function editMedicineNames($id)
     {
-        $medicines = MedicineName::find($id);
+        $medicines = MedicineName::with('medicine_groups')->find($id);
 
         if($medicines){
             return response()->json([

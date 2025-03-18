@@ -9,7 +9,7 @@
         <div class="card-body focus-color cd cat_form">
           <div class="row">
             <div class="col-xl-12">
-              <p class="catg mb-1">
+              <p class="catg mb-2">
                 <span class="">{{__('translate.Sub-Category')}}</span>
                 <span class="tot_summ" id="num_plate">
                   <label class="tot-search mt-3 pt-2" for="tot_cagt"> ➤ {{__('translate.Total Sub-Category')}} :</label>
@@ -34,7 +34,7 @@
               </span>
             </div>
           </div>
-          <div class="table-responsive">
+          <div class="table-responsive mt-1">
             <table class="table-light center border-1">
               <thead class="table-fixed table-light">
                 <tr class="table-row order_body acc_setting_table">
@@ -119,7 +119,7 @@
                   </div>
                 </div>
                 <div class="row mt-3">
-                  <div class="col-12 role_nme cat_nme">
+                  <div class="col-12 role_nme cat_nme mt-2">
                     <select type="number" class="form-control form-control-sm select2 edit_category_id" name="category_id" id="category_id">
                       <option value="">Select Category</option>
                       @foreach($categories as $category)
@@ -128,9 +128,9 @@
                     </select>
                   </div>
                 </div>
-                <div class="row mt-1">
-                  <div class="col-5">
-                    <div class="btn_box mt-2">
+                <div class="row mt-5">
+                  <div class="col-5 mt-3">
+                    <div class="btn_box group_btn_box">
                       <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width me-2" id="save">
                         <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="category-btn-text">ADD</span>
@@ -142,8 +142,8 @@
                     </div>
                   </div>
                   <div class="col-3"></div>
-                  <div class="col-4">
-                    <div class="">
+                  <div class="col-4 mt-2">
+                    <div class="pt-1">
                       <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus button_width mt-2">
                         <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="cancel-btn-text">Cancel</span>
@@ -294,17 +294,18 @@
 @endsection
 @section('css')
 <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
+<link href="{{ asset('backend_asset') }}/main_asset/jquery-ui-css/jquery-ui.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/sub-category/sub-category.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 @endsection
 @section('script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
 <script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 @include('super-admin.medicine-item.sub-category.data-handel-ajax.data-handel-ajax')
-@include('super-admin.medicine-item.sub-category.data-handel-ajax.get-category-ajax')
 <script>
   $(document).ready(function () {
     // Initialize Select2
@@ -319,27 +320,6 @@
       setTimeout(() => {
         $('.select2-search__field').attr('placeholder', 'Search category...');
       }, 50); // Small delay ensures the field is available
-    });
-
-    // Adjust Select2 width dynamically on sidebar toggle
-    function adjustSelect2Width() {
-      $('.select2').each(function () {
-        $(this).select2('destroy').select2({
-          placeholder: 'Select Category',
-          allowClear: true,
-          width: '100%'
-        });
-      });
-    }
-
-    // Detect sidebar toggle event
-    $('.sidebar-toggle-button').on('click', function () {
-      setTimeout(adjustSelect2Width, 300); // Delay ensures layout changes are applied
-    });
-
-    // Recalculate Select2 width on window resize
-    $(window).on('resize', function () {
-      adjustSelect2Width();
     });
   });
 </script>

@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-xl-7">
         <div class="card-body focus-color cd cat_form">
-          <p class="catg mb-1">
+          <p class="catg mb-2">
             <span class="">{{__('translate.Product Group')}}</span>
             <span class="tot_summ" id="num_plate">
               <label class="tot-search mt-3 pt-2" for="tot_cagt"> ➤ {{__('translate.Total Group')}} :</label>
@@ -75,7 +75,7 @@
               </div>
             </div>
             <div class="col-xl-10">
-              <div class="pagination pagination-skeleton mt-1" id="group_data_table_paginate">
+              <div class="pagination pagination-skeleton" id="group_data_table_paginate">
 
               </div>
             </div>
@@ -110,9 +110,9 @@
                     <span id="savForm_error"></span><span id="updateForm_errorList"></span>
                   </div>
                 </div>
-                <div class="row mt-2">
+                <div class="row mt-3">
                   <div class="col-5">
-                    <div class="btn-box mt-2">
+                    <div class="btn-box group_btn_box mt-2">
                       <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width" id="save">
                         <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="category-btn-text">ADD</span>

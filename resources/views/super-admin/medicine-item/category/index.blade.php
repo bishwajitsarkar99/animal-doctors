@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-xl-7">
         <div class="card-body focus-color cd cat_form">
-          <p class="catg mb-1">
+          <p class="catg mb-2">
             <span class="" style="color:black;">{{__('translate.Category')}}</span>
             <span class="tot_summ" id="num_plate">
               <label class="tot-search mt-3 pt-2" style="color:black;" for="tot_cagt"> ➤ {{__('translate.Total Category')}} :</label>
@@ -16,7 +16,7 @@
             <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="color:#333333ab;opacity:1;"></i>
           </p>
           <div class="row">
-            <div class="col-3 ">
+            <div class="col-3">
               <span class="form-check form-switch search_ me-2">
                 <input class="form-check-input" onclick="mySrcFunction()" type="checkbox" id="search_area" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 <label class="search ser_label ps-1 pt-1" style="color:black;" for="search pe-2">{{__('translate.Search')}} :</label>
@@ -29,7 +29,7 @@
               </span>
             </div>
           </div>
-          <div class="table-responsive">
+          <div class="table-responsive mt-1">
             <table class="table-light center border-1" id="myTable">
               <thead class="table-fixed table-light">
                 <tr class="table-row order_body acc_setting_table">
@@ -114,8 +114,8 @@
                 </div>
                 <!-- button -->
                 <div class="row mt-1">
-                  <div class="col-5">
-                    <div class="btn_box mt-2">
+                  <div class="col-5 mt-3">
+                    <div class="btn_box group_btn_box">
                       <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width me-2" id="save">
                         <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:0.8em;height:0.8em;" role="status" hidden></span>
                         <span class="category-btn-text">ADD</span>
@@ -126,10 +126,10 @@
                       </button>
                     </div>
                   </div>
-                  <div class="col-4"></div>
-                  <div class="col-3">
-                    <div class="mt-2">
-                      <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus button_width">
+                  <div class="col-3"></div>
+                  <div class="col-4 mt-2">
+                    <div class=" pt-1">
+                      <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus button_width mt-2">
                         <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:0.8em;height:0.8em;" role="status" hidden></span>
                         <span class="cancel-btn-text">Cancel</span>
                       </button>
