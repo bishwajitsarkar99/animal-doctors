@@ -29,7 +29,8 @@ class ProductIteamsServiceProvider
             return companyProfile::find(1);
         });
         $origins = MedicineOrigin::all();
-        return view('super-admin.medicine-item.brand.index', compact('company_profiles','origins'));
+        $page_name = 'Product Brand';
+        return view('super-admin.medicine-item.brand.index', compact('company_profiles','origins', 'page_name'));
     }
     /**
      * Handle Brand Data Fetch
@@ -411,8 +412,8 @@ class ProductIteamsServiceProvider
             return companyProfile::find(1);
         });
         $categories = Category::where('status', '!=', 0)->get();
-
-        return view('super-admin.medicine-item.sub-category.index', compact('company_profiles', 'categories'));
+        $page_name = 'Product Sub Category';
+        return view('super-admin.medicine-item.sub-category.index', compact('company_profiles', 'categories', 'page_name'));
     }
     /**
      * Handle Sub Category Fetch Data
@@ -590,7 +591,8 @@ class ProductIteamsServiceProvider
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        return view('super-admin.medicine-item.medicine-group.index', compact('company_profiles'));
+        $page_name = 'Medicine Group';
+        return view('super-admin.medicine-item.medicine-group.index', compact('company_profiles', 'page_name'));
     }
     /**
      * Handle Medicine Group Fetch Data
@@ -763,7 +765,8 @@ class ProductIteamsServiceProvider
             return companyProfile::find(1);
         });
         $medicinegroups = MedicineGroup::where('status','!=', 0)->get();
-        return view('super-admin.medicine-item.medicine-name.index', compact('company_profiles','medicinegroups'));
+        $page_name = 'Medicine Name';
+        return view('super-admin.medicine-item.medicine-name.index', compact('company_profiles','medicinegroups', 'page_name'));
     }
     /**
      * Handle Medicine Name Fetch Data
@@ -946,7 +949,8 @@ class ProductIteamsServiceProvider
             return companyProfile::find(1);
         });
         $medicines = MedicineName::Where('status','!=', 0)->get();
-        return view('super-admin.medicine-item.medicine-dogs.index', compact('company_profiles', 'medicines'));
+        $page_name = 'Medicine Dosage';
+        return view('super-admin.medicine-item.medicine-dogs.index', compact('company_profiles', 'medicines', 'page_name'));
     }
     /**
      * Handle Medicine Dosage Fetch Data
@@ -964,57 +968,41 @@ class ProductIteamsServiceProvider
         $sort_field_status = $request->input('sort_field_status', 'status');
         $sort_direction = $request->input('sort_direction', 'desc');
 
+        $total_dosage = MedicineDogs::count();
+
         $data = MedicineDogs::with(['medicine_names']);
 
         if( $query = $request->get('query')){
             $data->orWhere('id','LIKE','%'.$query.'%')
-                ->orWhere('status','LIKE','%'.$query.'%');  
-                // ->Where('medicine_dogs','LIKE','%'.$query.'%')
-                // ->orWhere('medicine_id','LIKE','%'.$query.'%')    
+                ->orWhere('status','LIKE','%'.$query.'%')
+                ->Where('dosage','LIKE','%'.$query.'%')
+                ->orWhere('medicine_id','LIKE','%'.$query.'%');    
         } 
+
+        // Paginate
+        //$perItem = $request->input('per_item', 10);
         $perItem = 10;
         if($request->input('per_item')){
             $perItem = $request->input('per_item');
         }
         // Apply sorting
         $data = $data->orderBy($sort_field_id, $sort_direction)
-                        ->orderBy($sort_field_medicine_id, $sort_direction)
-                        ->orderBy($sort_field_medicine_dosage, $sort_direction)
-                        ->orderBy($sort_field_status, $sort_direction);
+        ->orderBy($sort_field_medicine_id, $sort_direction)
+        ->orderBy($sort_field_medicine_dosage, $sort_direction)
+        ->orderBy($sort_field_status, $sort_direction);
 
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
-    }
-    /**
-     * Handle Medicine Name Data Get
-    */
-    public function get_medicine_names(Request $request)
-    {
-        if($request->ajax() == false){
-            // return abort(404);
-        }
+        $paginateData = $data->paginate($perItem);
 
-        // Sort field and direction
-        $sort_field_id = $request->input('sort_field_id', 'id');
-        $sort_direction = $request->input('sort_direction', 'desc');
+        $item_num = $paginateData->count();
 
-        $data = MedicineName::query();
-
-        if( $query = $request->get('query')){
-            $data->Where('medicine_name','LIKE','%'.$query.'%')
-                ->orWhere('status','LIKE','%'.$query.'%');      
-        } 
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
-        }
-        // Apply sorting
-        $data = $data->orderBy($sort_field_id, $sort_direction);
-
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
+        return response()->json([
+            'data' => $paginateData->items(),
+            'links' => $paginateData->toArray()['links'] ?? [],
+            'total' => $paginateData->total(),
+            'total_dosage' => $total_dosage,
+            'per_page' => $perItem,
+            'per_item_num' => $item_num,
+        ],200);
     }
     /**
      * Handle Create Medicine Dosage Event
@@ -1049,7 +1037,7 @@ class ProductIteamsServiceProvider
     */
     public function editMedicineDosages($id)
     {
-        $medicinedogs = MedicineDogs::find($id);
+        $medicinedogs = MedicineDogs::with('medicine_names')->find($id);
         if($medicinedogs){
             return response()->json([
                 'status'=> 200,
@@ -1144,7 +1132,8 @@ class ProductIteamsServiceProvider
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        return view('super-admin.medicine-item.product.index', compact('company_profiles'));
+        $page_name = 'Product Name';
+        return view('super-admin.medicine-item.product.index', compact('company_profiles', 'page_name'));
     }
     /**
      * Handle Product Fetch Data
@@ -1160,6 +1149,8 @@ class ProductIteamsServiceProvider
         $sort_field_product_name = $request->input('sort_field_product_name', 'product_name');
         $sort_field_status = $request->input('sort_field_status', 'status');
         $sort_direction = $request->input('sort_direction', 'desc');
+
+        $total_product = Product::count();
 
         $data = Product::query();
 
@@ -1177,9 +1168,18 @@ class ProductIteamsServiceProvider
                         ->orderBy($sort_field_product_name, $sort_direction)
                         ->orderBy($sort_field_status, $sort_direction);
 
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
+        $paginateData = $data->paginate($perItem);
+
+        $item_num = $paginateData->count();
+
+        return response()->json([
+            'data' => $paginateData->items(),
+            'links' => $paginateData->toArray()['links'] ?? [],
+            'total' => $paginateData->total(),
+            'total_product' => $total_product,
+            'per_page' => $perItem,
+            'per_item_num' => $item_num,
+        ],200);
     }
     /**
      * Handle Create Product Event
@@ -1304,7 +1304,8 @@ class ProductIteamsServiceProvider
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        return view('super-admin.medicine-item.units.index', compact('company_profiles'));
+        $page_name = 'Units';
+        return view('super-admin.medicine-item.units.index', compact('company_profiles', 'page_name'));
     }
     /**
      * Handle Units Fetch Data
@@ -1321,6 +1322,8 @@ class ProductIteamsServiceProvider
         $sort_field_status = $request->input('sort_field_status', 'status');
         $sort_direction = $request->input('sort_direction', 'desc');
 
+        $total_unit = Unit::count();
+
         $data = Unit::query();
 
         if( $query = $request->get('query')){
@@ -1336,9 +1339,18 @@ class ProductIteamsServiceProvider
                         ->orderBy($sort_field_units_name, $sort_direction)
                         ->orderBy($sort_field_status, $sort_direction);
 
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
+        $paginateData = $data->paginate($perItem);
+
+        $item_num = $paginateData->count();
+
+        return response()->json([
+            'data' => $paginateData->items(),
+            'links' => $paginateData->toArray()['links'] ?? [],
+            'total' => $paginateData->total(),
+            'total_unit' => $total_unit,
+            'per_page' => $perItem,
+            'per_item_num' => $item_num,
+        ],200);
     }
     /**
      * Handle Create Units Event
@@ -1463,7 +1475,8 @@ class ProductIteamsServiceProvider
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        return view('super-admin.medicine-item.origin.index', compact('company_profiles'));
+        $page_name = 'Product Origin';
+        return view('super-admin.medicine-item.origin.index', compact('company_profiles', 'page_name'));
     }
     /**
      * Handle Origin Name Fetch Data
@@ -1625,7 +1638,8 @@ class ProductIteamsServiceProvider
             return companyProfile::find(1);
         });
         $products = Product::all();
-        return view('super-admin.medicine-item.model.index', compact('company_profiles','products'));
+        $page_name = 'Product Model';
+        return view('super-admin.medicine-item.model.index', compact('company_profiles','products', 'page_name'));
     }
     /**
      * Handle Product Model Fetch Data

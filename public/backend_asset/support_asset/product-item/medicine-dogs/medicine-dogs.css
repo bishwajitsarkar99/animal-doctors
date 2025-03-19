@@ -125,18 +125,11 @@ label.item_class {
 button#deleteLoader {
     line-height: .9;
 }
-button#dosage4 {
-    line-height: .9;
-}
-button#dosage4 {
-    background: orangered;
-    color: white;
-    font-family: var(--medicine-dosage-font-family);
-}
-button#dosage4:hover {
-    background: #e9e9e9;
-    color: orangered;
-    font-family: var(--medicine-dosage-font-family);
+p#dosage3 {
+    color: #333;
+    animation: none;
+    font-size: 0.9rem;
+    font-weight: 700;
 }
 tr>th.tableHead {
     font-weight: 800;
@@ -193,10 +186,10 @@ tr.table-row.user-table-row:hover{
     color: var(--color);
     font-weight: var(--font-weight);
 }
-tr.table-row:hover td#medic_name4,tr.table-row.user-table-row.td#medic_name4 {
+tr.table-row:hover td#medic_dosage4,tr.table-row.user-table-row.td#medic_dosage4 {
     position: relative;
 }
-tr.table-row:hover td#medic_name4::after,tr.table-row.user-table-row.td#medic_name4::after {
+tr.table-row:hover td#medic_dosage4::after,tr.table-row.user-table-row.td#medic_dosage4::after {
     content: "\f304";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -209,7 +202,7 @@ tr.table-row:hover td#medic_name4::after,tr.table-row.user-table-row.td#medic_na
     opacity: 5;
 }
 label.medic{
-    font-weight: 600;
+    font-weight: 700;
     font-size: 11px;
 }
 span#total_medicinedogs_records {
@@ -228,6 +221,7 @@ input#name_search {
 }
 input#medicine_dogs {
     background-color: white;
+    opacity: 1;
     box-sizing: border-box;
     width: 100%;
     min-height: calc(1em + 2px + 0.5rem);
@@ -296,7 +290,7 @@ input#medicine_dogs:focus{
     height: 25px !important;
     user-select: none;
     -webkit-user-select: none;
-    font-family: var(--sub-category-font-family);
+    font-family: var(--medicine-dosage-font-family);
     font-weight: 700;
     font-size: 13px !important;
 }
@@ -318,7 +312,7 @@ input#medicine_dogs:focus{
     border-collapse: collapse !important;
     width: 100% !important;
     font-weight: 700;
-    font-family: var(--sub-category-font-family);
+    font-family: var(--medicine-dosage-font-family);
 }
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-image: linear-gradient(-120deg, rgba(230, 230, 230, 0.05) 0%,rgb(241, 241, 241), rgba(0, 0, 0, 0.05) 0%);
@@ -327,6 +321,52 @@ input#medicine_dogs:focus{
     transition: 1s;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+}
+.skeleton-head-capsule{
+    position: relative;
+}
+.skeleton-head-capsule::before{
+    content: "";
+    position: absolute;
+    left: -3px;
+    top: 0px;
+    width: 106%;
+    height: 20px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse focus_skeleton;
+    border-radius: 20px;
+}
+@keyframes focus_skeleton {
+    0% {
+        background-position: -100% 0;
+    }
+    
+    100% {
+        background-position: 100% 0;
+    }
+}
+.edit_medicine_id_error{
+    font-size: 12px;
+    color: #333;
+    text-align: left;
+    font-weight: 600;
+    font-family: var(--medicine-dosage-font-family);
+}
+#savForm_error, #updateForm_errorList,.medicine_nme {
+    min-height: 30px;
+    font-size: 12px;
+    color: red;
+}
+#savForm_error, #updateForm_errorList,.medicine_nme {
+    position: absolute;
+    left: 0;
+    font-size: 12px;
+    color: red;
+}
+.group_btn_box {
+    min-height: 30px;
 }
 .medicine_nme{
     text-align: left;
@@ -341,9 +381,6 @@ input#medicine_dogs:focus{
     100%{
         background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     }
-}
-a.page-link.btn_page {
-    height: 22px;
 }
 input#medicine_id {
     outline: none;

@@ -59,7 +59,6 @@ Route::group(['middleware' => 'auth'], function (){
     // Medicine-Dosage
     Route::middleware('isSuperAdmin')->group(function () {
         Route::get('/medicine-dosage', [MedicineDogsController::class, 'index'])->name('medicine-dogs.index');
-        Route::get('/get-medicine', [MedicineDogsController::class, 'get_medicine'])->name('medicine_name.action');
         Route::post('/add-medicine-dosage', [MedicineDogsController::class, 'storeData'])->name('add_medicinedogs.action');
         Route::get('/get-medicine-dosage', [MedicineDogsController::class, 'getmedicinedogs'])->name('search-medicinedogs.action');
         Route::get('/edit-medicine-dosage/{id}', [MedicineDogsController::class, 'editmedicinedogs']);

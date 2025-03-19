@@ -277,8 +277,8 @@
             </span>
           </span>
         </div>
-        <div class="modal-footer btn_box" id="logoutModal_footer">
-          <button type="button" class="btn btn-sm cgt_btn btn_focus delete_cancel" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+        <div class="modal-footer btn_box ms-1" id="logoutModal_footer">
+          <button type="button" class="btn btn-sm cgt_btn btn_focus delete_cancel ms-1" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
           <button id="update_btn_confirm" class="btn btn-sm cgt_btn btn_focus update_confirm">
             <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
             <span class="confirm-btn-text">Confirm</span>

@@ -27,13 +27,6 @@ class MedicineDogsController extends Controller
     {
         return $this->productIteamsServiceProvider->getMedicineDosages($request);
     }
-
-    // Get Medicine Name
-    public function get_medicine(Request $request)
-    {
-        return $this->productIteamsServiceProvider->get_medicine_names($request);
-    }
-
     
     // Add Medicine Dosage
     public function storeData(Request $request)

@@ -12,11 +12,11 @@
             }
         });
         // Initialize the button loader for the login button
-        buttonLoader('#save', '.add-icon', '.category-btn-text', 'ADD...', 'ADD', 3000);
+        buttonLoader('#save', '.add-icon', '.category-btn-text', 'ADD...', 'ADD', 1000);
         buttonLoader('#update_btn', '.update-icon', '.update-btn-text', 'Update...', 'Update', 1000);
         buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#yesButton', '.delete-yes-icon', '.delete-yes-btn-text', 'Yes...', 'Yes', 1000);
-        buttonLoader('#deleteLoader', '.delete-icon', '.delete-btn-text', 'Delete...', 'Delete', 1000);
+        buttonLoader('#confirmDelete', '.delete-icon', '.delete-btn-text', 'Delete...', 'Delete', 1000);
         buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
         buttonLoader('#showMedicine', '.get-medicine-icon', '.get-medicine-btn-text', 'Medicine...', 'Medicine', 1000);
 
@@ -68,10 +68,10 @@
                                 <a type="button" data-bs-toggle="dropdown" id="showActionBox">
                                     <i class="fa-solid fa-ellipsis" style="color:#686868;padding-top:7px;">‌</i>
                                 </a>
-                                <li class="upd cgy ps-1">
-                                    <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-4" id="edtBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                                <li class="upd cgy ps-1 dropdown-menu dropdown-menu-end action">
+                                    <button class="btn-sm edit_registration edit_button cgr_btn edit_btn" id="edtBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
                                     <i class="fa-solid fa-pen-to-square fa-beat" style="color:darkcyan"></i></button>
-                                    <button class="btn-sm edit_registration view_btn cgr_btn ms-4" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                                    <button class="btn-sm edit_registration view_btn cgr_btn ms-4" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'>
                                     <i class="fa-solid fa-trash-can fa-beat" style="color:orangered"></i></button>
                                 </li>
                             </div>
@@ -131,7 +131,10 @@
                 success: function({
                     data,
                     links,
-                    total
+                    total,
+                    total_dosage,
+                    per_page,
+                    per_item_num
 
                 }) {
                     $("#medicine_dogs_data_table").html(table_rows([...data]));
@@ -140,6 +143,9 @@
                         total
                     }));
                     $("#total_medicinedogs_records").text(total);
+                    $("#total_items").text(total_dosage);
+                    $("#total_per_items").text(per_page);
+                    $("#per_items_num").text(per_item_num);
                     // Initalise the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
                     // Get suggestions for autocomplete
@@ -263,31 +269,42 @@
             $("#update_btn").hide('slow');
             $("#medicine_dogs").focus();
             $("#update_btn").attr('hidden',true);
-            $("#medicine_id").removeClass('is-invalid');
             $("#medicine_dogs").removeClass('is-invalid');
             $('.edit_medicine_id_error').addClass('display-none');
             $('#savForm_error').addClass('display-none');
             $('#updateForm_errorList').addClass('display-none');
+            $("#medicine_id").val(null).trigger('change');
+            $("#medicine_id").closest('.medicine_nme').find('.select2-container').removeClass('is-select-invalid');
         });
 
-        // Medicine Name Filed
-        $(document).on('keyup', "#medicine_id, #medicine_dogs", function(){
-            
-            var medicineName = $("#medicine_id").val();
-            var medicineDosage = $("#medicine_dogs").val();
-            if (medicineName !== '') {
-                $("#medicine_id").removeClass('is-invalid');
-                $('.edit_medicine_id_error').empty();
-                $('.edit_medicine_id_error').addClass('display-none');
-                $('#savForm_error').addClass('display-none');
-            }
-            if(medicineDosage !== ''){
-                $("#medicine_dogs").removeClass('is-invalid');
-                $('#savForm_error').addClass('display-none');
+        // Medicine Dosage Filed Handel
+        $(document).on('keyup', "#medicine_dogs", function(){
+            if($(this).hasClass('is-invalid')){
+                $(this).removeClass('is-invalid');
+                $(this).addClass('is-valid');
                 $('#updateForm_errorList').addClass('display-none');
+                $('#savForm_error').addClass('display-none');
+            }else{
+                var value=$(this).val();
+                if (value =='') {
+                    $(this).removeClass('is-invalid');
+                    $(this).removeClass('is-valid');
+                }
             }
         });
 
+        // Medicine ID Filed Handel
+        $(document).on('change', "#medicine_id", function(){
+            var $selectContainer = $(this).closest('.medicine_nme').find('.select2-container');
+            var $errorElement = $('.edit_medicine_id_error');
+            
+            if ($selectContainer.hasClass('is-select-invalid')) {
+                $selectContainer.removeClass('is-select-invalid').addClass('is-select-valid');
+                $errorElement.empty().addClass('display-none');
+            } else {
+                $selectContainer.removeClass('is-select-valid is-select-invalid');
+            }
+        });
         // Add Medicine Dogs
         $(document).on('click', '#save', function(e) {
             e.preventDefault();
@@ -295,8 +312,11 @@
             var groupName = $("#medicine_id").val();
 
             if(groupName.trim() == ''){
-                $("#medicine_id").addClass('is-invalid');
-                $("#medicine_id").closest('.medicine_nme').append('<span class="edit_medicine_id_error alert_show_errors ps-2"> Medicine id is required.</span>');
+                $("#medicine_id").next('.select2-container').addClass('is-select-invalid');
+                $("#medicine_id").closest('.medicine_nme').append(`<span class="edit_medicine_id_error ps-3">
+                    <span class="ps-1"><svg width="20px" hieght="20px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg></span>
+                    Medicine id is required.
+                </span>`);
             }
 
             var data = {
@@ -324,7 +344,8 @@
                             $("#medicine_id").addClass('is-invalid');
                             $('#medicine_dogs').removeClass('display-none');
                             $("#medicine_dogs").addClass('is-invalid');
-                            $('#savForm_error').addClass('alert_show_errors');
+                            $('#savForm_error').addClass('alert_show_errors ps-1');
+                            $("#savForm_error").append('<span class="ps-2"><svg width="20px" hieght="20px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg></span>');
                             $('#savForm_error').append('<span class="error_val">' + err_value + '</span>');
                             $('#savForm_error').fadeIn();
                         });
@@ -345,7 +366,9 @@
                             $('#success_message').fadeIn();
                             $('#success_message').text(response.messages);
                             $('#medicine_dogs').val("");
-                            $('#medicine_id').val("");
+                            $("#medicine_dogs").removeClass('is-valid');
+                            $("#medicine_id").val(null).trigger('change');
+                            $("#medicine_id").closest('.medicine_nme').find('.select2-container').removeClass('is-select-invalid');
                             setTimeout(() => {
                                 $('#success_message').fadeOut(3000);
                             }, 5000);
@@ -360,6 +383,9 @@
         // Edit Medicine Dogs
         $(document).on('click', '#edtBtn', function(e) {
             e.preventDefault();
+            $("#medicinedosageID").empty();
+            $("#medicinesID").empty();
+            $("#medicineDosage").empty();
             $("#save").hide('slow');
             $("#update_btn").show('slow');
             $("#update_btn").removeAttr('hidden');
@@ -382,7 +408,14 @@
                     } else {
                         $('#medicinedogs_id').val(medicinedogs_id);
                         $('.edit_medicine_dogs').val(response.messages.dosage);
-                        $('.edit_medicine_id').val(response.messages.medicine_id);
+                        $('.edit_medicine_id').val(response.messages.medicine_id).trigger('change');
+
+                        const medicinedosageID = $("#medicinedosageID");
+                        const medicineDosage = $("#medicineDosage");
+                        const medicinesID = $("#medicinesID");
+                        medicinedosageID.append(`<label class="label_user_edit"> Dosage-ID : <span class="word_space">${response.messages.id}</span></label>`);
+                        medicineDosage.append(`<label class="label_user_edit"> Dosage-Name : <span class="word_space">${response.messages.dosage}</span></label>`);
+                        medicinesID.append(`<label class="label_user_edit"> Mdedicine-Name : <span class="word_space">${response.messages.medicine_names ? response.messages.medicine_names.medicine_name : ''}</span></label>`);
                     }
                 }
             });
@@ -396,6 +429,12 @@
             $("#cate_confirm_update").addClass('skeleton');
             $(".update_confirm").addClass('skeleton');
             $(".delete_cancel").addClass('skeleton');
+            $("#medicinedosageID").addClass('skeleton');
+            $("#medicinesID").addClass('skeleton');
+            $("#medicineDosage").addClass('skeleton');
+            $(".modal_icon_one").addClass('skeleton');
+            $(".modal_icon_two").addClass('skeleton');
+            $(".modal_icon_three").addClass('skeleton');
             var time = null;
             time = setTimeout(() => {
                 $(".update_title").removeClass('skeleton');
@@ -403,6 +442,12 @@
                 $("#cate_confirm_update").removeClass('skeleton');
                 $(".update_confirm").removeClass('skeleton');
                 $(".delete_cancel").removeClass('skeleton');
+                $("#medicinedosageID").removeClass('skeleton');
+                $("#medicinesID").removeClass('skeleton');
+                $("#medicineDosage").removeClass('skeleton');
+                $(".modal_icon_one").removeClass('skeleton');
+                $(".modal_icon_two").removeClass('skeleton');
+                $(".modal_icon_three").removeClass('skeleton');
             }, 1000);
 
             return ()=>{
@@ -417,7 +462,10 @@
 
             if(groupName.trim() == ''){
                 $("#medicine_id").addClass('is-invalid');
-                $("#medicine_id").closest('.medicine_nme').append('<span class="edit_medicine_id_error alert_show_errors ps-2"> Medicine id is required.</span>');
+                $("#medicine_id").closest('.medicine_nme').append(`<span class="edit_medicine_id_error alert_show_errors ps-2"> 
+                <span class="ps-1"><svg width="20px" hieght="20px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg></span>
+                Medicine id is required.
+                </span>`);
                 $("#updateconfirmmedicinedogs").modal('hide');
             }
 
@@ -446,7 +494,8 @@
                             $('#medicine_id').removeClass('display-none');
                             $("#medicine_dogs").addClass('is-invalid');
                             $('#medicine_dogs').removeClass('display-none');
-                            $('#updateForm_errorList').addClass('alert_show_errors ps-1 pe-2');
+                            $('#updateForm_errorList').addClass('alert_show_errors ps-1');
+                            $("#updateForm_errorList").append('<span class="ps-2"><svg width="20px" hieght="20px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg></span>');
                             $('#updateForm_errorList').append('<span>' + err_value + '</span>');
                             $("#updateconfirmmedicinedogs").modal('hide');
                         });
@@ -472,6 +521,12 @@
                             $('#success_message').text(response.messages);
                             $('.edit_medicine_dogs').val("");
                             $('.edit_medicine_id').val("");
+                            $(".edit_medicine_id").val(null).trigger('change');
+                            $(".edit_medicine_dogs").removeClass('is-valid');
+                            $(".edit_medicine_id").closest('.group_nme').find('.select2-container').removeClass('is-select-invalid');
+                            $("#save").show('slow');
+                            $("#update_btn").attr('hidden', true);
+                            $("#update_btn").hide('slow');
                             setTimeout(() => {
                                 $('#success_message').fadeOut(3000);
                             }, 5000);
@@ -497,6 +552,7 @@
             $("#delete_medicine_dogs_id").addClass('skeleton');
             $("#yesButton").addClass('min-skeleton');
             $("#noButton").addClass('min-skeleton');
+            $("#center_box").addClass('skeleton');
 
             var time = null;
             time = setTimeout(() => {
@@ -508,6 +564,7 @@
                 $("#delete_medicine_dogs_id").removeClass('skeleton');
                 $("#yesButton").removeClass('min-skeleton');
                 $("#noButton").removeClass('min-skeleton');
+                $("#center_box").removeClass('skeleton');
             }, 1000);
 
             return ()=>{
@@ -518,12 +575,14 @@
         // Confirm Delete Medicine Dogs Modal
         $(document).on('click', '.yes_button', function(e){
             e.preventDefault();
+            $("#deletemedicinedogs").modal('hide');
             $("#deleteconfirmmedicinedogs").modal('show');
             $('.confirm_title').addClass('skeleton');
             $('.head_btn_confirm').addClass('skeleton');
             $('#cate_confirm').addClass('skeleton');
             $("#dosage4").addClass('skeleton');
-            $("#deleteLoader").addClass('skeleton');
+            $("#confirmDelete").addClass('skeleton');
+            $(".init_skeln").addClass('skeleton');
 
             var time = null;
             time = setTimeout(() => {
@@ -531,7 +590,8 @@
                 $('.head_btn_confirm').removeClass('skeleton');
                 $('#cate_confirm').removeClass('skeleton');
                 $('#dosage4').removeClass('skeleton');
-                $('#deleteLoader').removeClass('skeleton');
+                $('#confirmDelete').removeClass('skeleton');
+                $(".init_skeln").removeClass('skeleton');
             }, 1000);
             return ()=>{
                 clearTimeout(time);
@@ -628,7 +688,7 @@
             order = order === 'desc' ? 'asc' : 'desc';
             button.data('order', order);
 
-            fetch_medicineName_data(
+            fetch_medicineDogs_data(
                 '', null, null,
                 column === 'id' ? column : 'id',
                 column === 'medicine_id' ? column : 'medicine_id',

@@ -494,6 +494,9 @@
                             $(".edit_category_id").val(null).trigger('change');
                             $(".edit_category_id").removeClass('is-invalid').removeClass('is-valid');
                             $("#updateForm_errorList").removeClass('is-select-valid').removeClass('is-select-invalid');
+                            $("#save").show('slow');
+                            $("#update_btn").attr('hidden', true);
+                            $("#update_btn").hide('slow');
                             setTimeout(() => {
                                 $('#success_message').fadeOut(3000);
                             }, 5000);

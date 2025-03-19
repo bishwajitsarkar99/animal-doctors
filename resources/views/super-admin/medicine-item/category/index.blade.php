@@ -186,13 +186,15 @@
       </div>
       <div class="modal-footer btn_box profile_modal_footer" style="line-height: 1;">
         <p id="btn_group2">
+          <p id="btn_group2">
+            <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
+              <span class="loading-yes-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+              <span class="btn-text">{{__('translate.Yes')}}</span>
+            </a>
+          </p>
           <p id="btn_group">
             <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal" id="noButton">No</a>
           </p>
-          <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
-            <span class="loading-yes-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-            <span class="btn-text">{{__('translate.Yes')}}</span>
-          </a>
         </p>
       </div>
     </div>
@@ -265,9 +267,9 @@
             </span>
           </span>
         </div>
-        <div class="modal-footer btn_box" id="logoutModal_footer">
-          <button type="button" class="btn btn-sm cgt_btn delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
-          <button id="update_btn_confirm" class="btn btn-sm cgt_btn update_confirm btn_focus">
+        <div class="modal-footer btn_box ms-1" id="logoutModal_footer">
+          <button type="button" class="btn btn-sm cgt_btn delete_cancel btn_focus ms-1" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+          <button id="update_btn_confirm" class="btn btn-sm cgt_btn update_confirm btn_focus ms-1">
             <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
             <span class="confirm-btn-text">Confirm</span>
           </button>

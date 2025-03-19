@@ -347,7 +347,6 @@
                     } else {
                         $('#group_id').val(group_id);
                         $('.edit_group_name').val(response.messages.group_name);
-                        $('.edit_group_name').addClass('is-valid');
 
                         const groups_id = $("#groups_id");
                         const groups_name = $("#groups_name");
@@ -443,6 +442,9 @@
                             $('#success_message').text(response.messages);
                             $('.edit_group_name').val("");
                             $(".edit_group_name").removeClass('is-valid');
+                            $("#save").show('slow');
+                            $("#update_btn").attr('hidden', true);
+                            $("#update_btn").hide('slow');
                             setTimeout(() => {
                                 $('#success_message').fadeOut(3000);
                             }, 5000);
