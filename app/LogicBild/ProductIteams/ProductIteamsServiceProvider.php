@@ -48,6 +48,8 @@ class ProductIteamsServiceProvider
         $sort_field_status = $request->input('sort_field_status', 'status');
         $sort_direction = $request->input('sort_direction', 'desc');
 
+        $total_brand = Brand::count();
+
         $data = Brand::with(['medicine_origins']);
 
         if( $query = $request->get('query')){
@@ -66,9 +68,18 @@ class ProductIteamsServiceProvider
                         ->orderBy($sort_field_brand_name, $sort_direction)
                         ->orderBy($sort_field_status, $sort_direction);
 
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
+        $paginateData = $data->paginate($perItem);
+
+        $item_num = $paginateData->count();
+
+        return response()->json([
+            'data' => $paginateData->items(),
+            'links' => $paginateData->toArray()['links'] ?? [],
+            'total' => $paginateData->total(),
+            'total_brand' => $total_brand,
+            'per_page' => $perItem,
+            'per_item_num' => $item_num,
+        ],200);
     }
     /**
      * Handle Origin Data Fetch
@@ -1493,6 +1504,8 @@ class ProductIteamsServiceProvider
         $sort_field_status = $request->input('sort_field_status', 'status');
         $sort_direction = $request->input('sort_direction', 'desc');
 
+        $total_origin = MedicineOrigin::count();
+
         $data = MedicineOrigin::query();
 
         if( $query = $request->get('query')){
@@ -1508,9 +1521,18 @@ class ProductIteamsServiceProvider
                         ->orderBy($sort_field_origin_name, $sort_direction)
                         ->orderBy($sort_field_status, $sort_direction);
 
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
+        $paginateData = $data->paginate($perItem);
+
+        $item_num = $paginateData->count();
+
+        return response()->json([
+            'data' => $paginateData->items(),
+            'links' => $paginateData->toArray()['links'] ?? [],
+            'total' => $paginateData->total(),
+            'total_origin' => $total_origin,
+            'per_page' => $perItem,
+            'per_item_num' => $item_num,
+        ],200);
     }
     /**
      * Handle Create Origin Event
