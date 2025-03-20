@@ -89,7 +89,6 @@ Route::group(['middleware' => 'auth'], function (){
     // Brand
     Route::middleware('isSuperAdmin')->group(function () {
         Route::get('/brand', [BrandController::class, 'index'])->name('brand.index');
-        Route::get('/get-data-origin', [BrandController::class, 'getDataOrigin'])->name('get_origin.action');
         Route::post('/add-brand', [BrandController::class, 'storeData'])->name('add_brand.action');
         Route::get('/get-brand', [BrandController::class, 'getbrand'])->name('search-brand.action');
         Route::get('/edit-brand/{id}', [BrandController::class, 'editbrand']);
@@ -100,7 +99,6 @@ Route::group(['middleware' => 'auth'], function (){
     // Model
     Route::middleware('isSuperAdmin')->group(function () {
         Route::get('/model', [ProductModelController::class, 'index'])->name('model.index');
-        Route::get('/get-data-product', [ProductModelController::class, 'getDataProduct'])->name('get_product.action');
         Route::post('/add-model', [ProductModelController::class, 'storeData'])->name('add_model.action');
         Route::get('/get-model', [ProductModelController::class, 'getmodel'])->name('search-model.action');
         Route::get('/edit-model/{id}', [ProductModelController::class, 'editmodel']);

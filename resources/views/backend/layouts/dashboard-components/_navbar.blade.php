@@ -55,23 +55,23 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <a class="mt-2" href="#">
+                                        <a class="mt-1" href="#">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Stock Summary')}}
                                         </a>
-                                        <a class="mt-2" href="#">
+                                        <a class="mt-1" href="#">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Stock-Book')}}
                                         </a>
-                                        <a class="mt-2" href="#">
+                                        <a class="mt-1" href="#">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Adjustment')}}
                                         </a>
-                                        <a class="mt-2" href="#">
+                                        <a class="mt-1" href="#">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Damage-Stock')}}
                                         </a>
-                                        <a class="mt-2" href="#">
+                                        <a class="mt-1" href="#">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Stock-Report')}}
                                         </a>
@@ -95,23 +95,23 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <a class="{{ Request::routeIs('supplier_index') ? 'nav_btn_active' : '' }} mt-2" href="{{ route('supplier_index') }}">
+                                        <a class="{{ Request::routeIs('supplier_index') ? 'nav_btn_active' : '' }} mt-1" href="{{ route('supplier_index') }}">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Summary')}}
                                         </a>
-                                        <a class="{{ Request::routeIs('supplier.index') ? 'nav_btn_active' : '' }} mt-2" href="{{route('supplier.index')}}">
+                                        <a class="{{ Request::routeIs('supplier.index') ? 'nav_btn_active' : '' }} mt-1" href="{{route('supplier.index')}}">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Create')}}
                                         </a>
-                                        <a class=" mt-2" href="#">
+                                        <a class=" mt-1" href="#">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Record')}}
                                         </a>
-                                        <a class=" mt-2" href="#">
+                                        <a class=" mt-1" href="#">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Requisition')}}
                                         </a>
-                                        <a class="{{ Request::routeIs('access-permission.index') ? 'nav_btn_active' : '' }} mt-2" href="{{route('access-permission.index') }}">
+                                        <a class="mt-1 {{ Request::routeIs('access-permission.index') ? 'nav_btn_active' : '' }} mt-2" href="{{route('access-permission.index') }}">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Setting')}}
                                         </a>
@@ -135,15 +135,15 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <a class="{{Request::routeIs('showOrder_pivot') ? 'nav_btn_active' : '' }} mt-2" href="{{route('showOrder_pivot')}}">
+                                        <a class="mt-1 {{Request::routeIs('showOrder_pivot') ? 'nav_btn_active' : '' }} mt-2" href="{{route('showOrder_pivot')}}">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Order')}}
                                         </a>
-                                        <a class="{{Request::routeIs('showSales_pivot') ? 'nav_btn_active' : '' }} " href="{{route('showSales_pivot')}}">
+                                        <a class="mt-1 {{Request::routeIs('showSales_pivot') ? 'nav_btn_active' : '' }} " href="{{route('showSales_pivot')}}">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Sales')}}
                                         </a>
-                                        <a class="{{Request::routeIs('expenses_index') ? 'nav_btn_active' : '' }} " href="{{route('expenses_index')}}">
+                                        <a class="mt-1 {{Request::routeIs('expenses_index') ? 'nav_btn_active' : '' }} " href="{{route('expenses_index')}}">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Expenses')}}
                                         </a>
@@ -173,49 +173,75 @@
                                 <div class="row ">
                                     <div class="col-6 medicine mt-1">
                                         <div class="item-init-one">
-                                            <span class="medicinepart ms-2">{{__('translate.Medicine-Part')}}</span>
-                                            <a class="{{Request::routeIs('category.index') ? 'nav_btn_active' : '' }} mt-2" href="{{ route('category.index') }}">
-                                                <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
-                                                {{__('translate.Category')}}
-                                            </a>
-                                            <a class="{{Request::routeIs('sub-category.index') ? 'nav_btn_active' : '' }}" href="{{ route('sub-category.index') }}">
-                                                <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
-                                                {{__('translate.Sub-Category')}}
-                                            </a>
-                                            <a class="{{Request::routeIs('medicine-group.index') ? 'nav_btn_active' : '' }}" href="{{ route('medicine-group.index') }}">
+                                            <span class="medicinepart ms-2">{{__('translate.Medicine-Component')}}</span>
+                                            <a class="mt-1 {{Request::routeIs('medicine-group.index') ? 'nav_btn_active' : '' }}" href="{{ route('medicine-group.index') }}">
                                                 <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                                 {{__('translate.Medicine Group')}}
                                             </a>
-                                            <a class="{{Request::routeIs('medicine-name.index') ? 'nav_btn_active' : '' }}" href="{{ route('medicine-name.index') }}">
+                                            <a class="mt-1 {{Request::routeIs('medicine-name.index') ? 'nav_btn_active' : '' }}" href="{{ route('medicine-name.index') }}">
                                                 <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                                 {{__('translate.Medicine Name')}}
                                             </a>
-                                            <a class="{{Request::routeIs('medicine-dogs.index') ? 'nav_btn_active' : '' }}" href="{{ route('medicine-dogs.index') }}">
+                                            <a class="mt-1 {{Request::routeIs('medicine-dogs.index') ? 'nav_btn_active' : '' }}" href="{{ route('medicine-dogs.index') }}">
                                                 <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                                 {{__('translate.Medicine Dosage')}}
+                                            </a>
+                                        </div>
+                                        <div class="item-init-one">
+                                            <span class="medicinepart ms-2">{{__('translate.Quotation-Component')}}</span>
+                                            <a class="mt-1" href="#">
+                                                <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
+                                                {{__('translate.Product Quotation')}}
+                                            </a>
+                                        </div>
+                                        <div class="item-init-one">
+                                            <span class="medicinepart ms-2">{{__('translate.Post-Component')}}</span>
+                                            <a class="mt-1" href="#">
+                                                <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
+                                                {{__('translate.Category')}}
+                                            </a>
+                                            <a class="mt-1" href="#">
+                                                <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
+                                                {{__('translate.Sub Category')}}
+                                            </a>
+                                            <a class="mt-1" href="#">
+                                                <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
+                                                {{__('translate.Group')}}
                                             </a>
                                         </div>
                                     </div>
                                     <div class="col-6 mt-1">
                                         <div class="item-init-one">
-                                            <span class="medicinepart ms-2">{{__('translate.Farm-Product')}}</span>
-                                            <a class="{{Request::routeIs('product.index') ? 'nav_btn_active' : '' }} mt-2" href="{{ route('product.index') }}">
+                                            <span class="medicinepart ms-2">{{__('translate.Product-Component')}}</span>
+                                            <a class="mt-1 {{Request::routeIs('category.index') ? 'nav_btn_active' : '' }}" href="{{ route('category.index') }}">
+                                                <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
+                                                {{__('translate.Category')}}
+                                            </a>
+                                            <a class="mt-1 {{Request::routeIs('sub-category.index') ? 'nav_btn_active' : '' }}" href="{{ route('sub-category.index') }}">
+                                                <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
+                                                {{__('translate.Sub-Category')}}
+                                            </a>
+                                            <a class="mt-1" href="#">
+                                                <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
+                                                {{__('translate.Product-Group')}}
+                                            </a>
+                                            <a class="mt-1{{Request::routeIs('product.index') ? 'nav_btn_active' : '' }}" href="{{ route('product.index') }}">
                                                 <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                                 {{__('translate.Product')}}
                                             </a>
-                                            <a class="{{Request::routeIs('units.index') ? 'nav_btn_active' : '' }}" href="{{ route('units.index') }}">
+                                            <a class="mt-1{{Request::routeIs('units.index') ? 'nav_btn_active' : '' }}" href="{{ route('units.index') }}">
                                                 <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                                 {{__('translate.Units')}}
                                             </a>
-                                            <a class="{{Request::routeIs('origin.index') ? 'nav_btn_active' : '' }}" href="{{ route('origin.index') }}">
+                                            <a class="mt-1{{Request::routeIs('origin.index') ? 'nav_btn_active' : '' }}" href="{{ route('origin.index') }}">
                                                 <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                                 {{__('translate.Origin')}}
                                             </a>
-                                            <a class="{{Request::routeIs('brand.index') ? 'nav_btn_active' : '' }}" href="{{ route('brand.index') }}">
+                                            <a class="mt-1{{Request::routeIs('brand.index') ? 'nav_btn_active' : '' }}" href="{{ route('brand.index') }}">
                                                 <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                                 {{__('translate.Brand')}}
                                             </a>
-                                            <a class="{{Request::routeIs('model.index') ? 'nav_btn_active' : '' }}" href="{{ route('model.index') }}">
+                                            <a class="mt-1{{Request::routeIs('model.index') ? 'nav_btn_active' : '' }}" href="{{ route('model.index') }}">
                                                 <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                                 {{__('translate.Model')}}
                                             </a>

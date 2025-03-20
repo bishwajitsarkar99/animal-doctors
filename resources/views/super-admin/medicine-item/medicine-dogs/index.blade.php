@@ -228,7 +228,7 @@
         </div>
         <div class="modal-body" id="logoutModal_body">
           <p class="admin_paragraph" style="text-align:center;" id="text_message">
-            <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, to delete about the dosage ? </label>
+            <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, to delete about the medicine dosage ? </label>
           </p>
           <span class="modal_icon_position">
             <span class="init_skeln">

@@ -172,7 +172,6 @@
       </div>
 
       <div class="modal-body pb-1">
-
         <div class="row profile-heading pb-3">
           <div class="col-xl-12">
             <div class="form-group delete_content">

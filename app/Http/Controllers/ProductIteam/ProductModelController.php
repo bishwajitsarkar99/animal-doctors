@@ -28,12 +28,6 @@ class ProductModelController extends Controller
         return $this->productIteamsServiceProvider->getProductModels($request);
     }
 
-    // Get Product Data
-    public function getDataProduct(Request $request)
-    {
-        return $this->productIteamsServiceProvider->getDataProducts($request);
-    }
-
     // Add Model Name
     public function storeData(Request $request)
     {

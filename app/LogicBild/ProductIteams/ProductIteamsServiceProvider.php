@@ -82,36 +82,6 @@ class ProductIteamsServiceProvider
         ],200);
     }
     /**
-     * Handle Origin Data Fetch
-    */
-    public function getOrigins(Request $request)
-    {
-        if($request->ajax() == false){
-            // return abort(404);
-        }
-
-        // Sort field and direction
-        $sort_field_id = $request->input('sort_field_id', 'id');
-        $sort_direction = $request->input('sort_direction', 'desc');
-
-        $data = MedicineOrigin::query();
-
-        if( $query = $request->get('query')){
-            $data->Where('origin_name','LIKE','%'.$query.'%')
-                ->orWhere('status','LIKE','%'.$query.'%');      
-        } 
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
-        }
-        // Apply sorting
-        $data = $data->orderBy($sort_field_id, $sort_direction);
-
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
-    }
-    /**
      * Handle Create Brand Event
     */
     public function createBrands(Request $request)
@@ -145,7 +115,7 @@ class ProductIteamsServiceProvider
     */
     public function editBrands($id)
     {
-        $brands = Brand::find($id);
+        $brands = Brand::with(['medicine_origins'])->find($id);
         if($brands){
             return response()->json([
                 'status'=> 200,
@@ -1679,6 +1649,8 @@ class ProductIteamsServiceProvider
         $sort_field_status = $request->input('sort_field_status', 'status');
         $sort_direction = $request->input('sort_direction', 'desc');
 
+        $total_product_model = ProductModel::count();
+
         $data = ProductModel::with(['products']);
 
         if( $query = $request->get('query')){
@@ -1697,39 +1669,18 @@ class ProductIteamsServiceProvider
                         ->orderBy($sort_field_product_id, $sort_direction)
                         ->orderBy($sort_field_status, $sort_direction);
 
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
-    }
-    /**
-     * Handle Product Data Get
-    */
-    public function getDataProducts(Request $request)
-    {
-        if($request->ajax() == false){
-            // return abort(404);
-        }
+        $paginateData = $data->paginate($perItem);
 
-        // Sort field and direction
-        $sort_field_id = $request->input('sort_field_id', 'id');
-        $sort_direction = $request->input('sort_direction', 'desc');
+        $item_num = $paginateData->count();
 
-        $data = Product::query();
-
-        if( $query = $request->get('query')){
-            $data->Where('product_name','LIKE','%'.$query.'%')
-                ->orWhere('status','LIKE','%'.$query.'%');      
-        } 
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
-        }
-        // Apply sorting
-        $data = $data->orderBy($sort_field_id, $sort_direction);
-
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
+        return response()->json([
+            'data' => $paginateData->items(),
+            'links' => $paginateData->toArray()['links'] ?? [],
+            'total' => $paginateData->total(),
+            'total_product_model' => $total_product_model,
+            'per_page' => $perItem,
+            'per_item_num' => $item_num,
+        ],200);
     }
     /**
      * Handle Create Product Model Event
@@ -1764,7 +1715,7 @@ class ProductIteamsServiceProvider
     */
     public function editProductModels($id)
     {
-        $product_models = ProductModel::find($id);
+        $product_models = ProductModel::with(['products'])->find($id);
         if($product_models){
             return response()->json([
                 'status'=> 200,

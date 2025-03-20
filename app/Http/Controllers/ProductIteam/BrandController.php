@@ -27,11 +27,6 @@ class BrandController extends Controller
     {
         return $this->productIteamsServiceProvider->getBrands($request);
     }
-    // Get Origin Data
-    public function getDataOrigin(Request $request)
-    {
-        return $this->productIteamsServiceProvider->getOrigins($request);
-    }
     // Add Brand Name
     public function storeData(Request $request)
     {

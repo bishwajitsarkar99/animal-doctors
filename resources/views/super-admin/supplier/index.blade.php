@@ -2,7 +2,7 @@
 @section('content')
 @include('backend.layouts.dashboard-components._navbar')
 
-<div class="card form-control form-control-sm" id="category_page">
+<!-- <div class="card form-control form-control-sm" id="category_page">
     <div class="card-body" id="table_card_body">
         <div class="row">
             <div class="col-xl-2">
@@ -221,6 +221,7 @@
                                             <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton mt-2 me-5">Cancel</button>
                                         </p>
                                     </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -230,6 +231,102 @@
         <div class="row table-footer">
             <div class="alert-info brand_message ">
 
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card form-control-sm left-card">
+                <form class="data-form" autocomplete="off">
+                    @csrf
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <select class="form-control-sm" name="branch_type" id="branch_type">
+                                <option value="">Branch Type</option>
+                            </select>
+                        </div>
+                        <div class="col-xl-6">
+                            <select class="form-control-sm" name="branch_id" id="select_branch">
+                                <option value="">Select Branch</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-xl-6">
+                            <input class="form-control form-control-sm edit_type" type="text" name="type" id="type" placeholder="Supplier Category" autofocus>
+                            <input type="hidden" id="supp_id">
+                        </div>
+                        <div class="col-xl-6">
+                            <input class="form-control form-control-sm edit_bussiness_type" type="text" name="bussiness_type" id="bussiness_type" placeholder="Bussiness Type">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-xl-6">
+                            <input class="form-control form-control-sm edit_name" type="text" name="name" id="name" placeholder="Name" required>
+                        </div>
+                        <div class="col-xl-6">
+                            <input class="form-control form-control-sm edit_contact_number_one" type="text" name="contact_number_one" id="contact_number_one" placeholder="Contact Number One">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-xl-6">
+                            <input class="form-control form-control-sm edit_contact_number_two" type="text" name="contact_number_two" id="contact_number_two" placeholder="Contact Number Two">
+                        </div>
+                        <div class="col-xl-6">
+                            <input class="form-control form-control-sm edit_whatsapp_number" type="text" name="whatsapp_number" id="whatsapp_number" placeholder="WhatsApp Number">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-xl-12">
+                            <input class="form-control form-control-sm edit_email" type="text" name="email" id="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-xl-12">
+                            <textarea type="text" class="form-control form-control-sm edit_office_address" name="office_address" id="office_address" cols="30" rows="3" placeholder="Office Address"></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-xl-12">
+                            <textarea type="text" class="form-control form-control-sm edit_current_address font_color" name="current_address" id="current_address" cols="30" rows="3" placeholder="Current Address"></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-5">
+                            <div class="btn_box group_btn_box mt-3">
+                                <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width me-2" id="save">
+                                    <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                    <span class="category-btn-text">ADD</span>
+                                </button>
+                                <button id="update_btn" class="btn btn-sm cgt_btn btn_focus button_width me-2" hidden>
+                                    <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                    <span class="update-btn-text">Update</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-3"></div>
+                        <div class="col-4">
+                            <div class="mt-2">
+                                <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus button_width mt-2">
+                                    <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                    <span class="cancel-btn-text">Cancel</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-6 col-md-4">
+            <div class="card form-control-sm right-card">
+                <div class="row g-3">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Example label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

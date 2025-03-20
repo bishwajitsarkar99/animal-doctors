@@ -24,7 +24,8 @@ class SupplierServiceProvider
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        return view('super-admin.supplier.index', compact('company_profiles'));
+        $page_name = 'Supplier';
+        return view('super-admin.supplier.index', compact('company_profiles', 'page_name'));
     }
     /**
      * Handle Supplier Fetch Data
