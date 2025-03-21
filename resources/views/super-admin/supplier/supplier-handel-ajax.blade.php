@@ -1,6 +1,7 @@
 <script>
     $(document).ready(() => {
-        fetch_supplier_data();
+        //fetch_supplier_data();
+        fetch_branch();
         // Data View Table--------------
         const table_rows = (rows) => {
             if (rows.length === 0) {
@@ -50,6 +51,56 @@
                 `;
             }).join("\n");
         }
+
+        // Handle Select only for branch
+        $(document).on('change', ' #branch_type', function() {
+            var changeValue = $(this).val();
+            if (changeValue === '') {
+                $("#select_branch").empty();
+                $("#select_branch").empty();
+                $("#select_branch").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
+            }
+        });
+
+        // Event listener for only for branch
+        $(document).on('change', '#branch_type', function() {
+            const id = $(this).val();
+            fetch_branch(id);
+        });
+
+        // Function to fetch only branch 
+        function fetch_branch (id) {
+            if (!id) {
+                return;
+            }
+
+            const currentUrl = "/branch-fetch/"+ id;
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const branch = response.messages;
+                    
+                    $("#select_branch").empty();
+                    $.each(branch, function(key, item) {
+                        $("#select_branch").append(`<option style="color:white;font-weight:600;" value="${item.branch_id}">${item.branch_id}</option>`);
+                    });
+                },
+                error: function() {
+                    $("#select_branch").empty();
+                    $("#select_branch").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select district</option>');
+                }
+            });
+        }
+
 
         // Fetch Supplier Contact Data ------------------
         function fetch_supplier_data(query = '', url = null, perItem = null) {
@@ -734,22 +785,3 @@
         });
     });
 </script>
-<!-- <script>
-    $(doucment).read(function(){
-        var totalSupplierRecords = $("#total_supplier_records_progressbar").text(total);
-        updateProgressBarWithErrorHandling(totalSupplierRecords);
-        function updateProgressBarWithErrorHandling(totalSupplierRecords) {
-            var progressBar = $('.progress-bar');
-            var percentage = (totalSupplierRecords / 100) * 100; 
-            if (!isNaN(percentage) && percentage >= 0 && percentage <= 100) {
-                progressBar.css('width', percentage + '%');
-                progressBar.attr('aria-valuenow', percentage);
-                progressBar.text(percentage.toFixed(2) + '%'); 
-            } else {
-                progressBar.css('width', '0%');
-                progressBar.attr('aria-valuenow', '0');
-                progressBar.text('Error');
-            }
-        }
-    });
-</script> -->

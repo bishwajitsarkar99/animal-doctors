@@ -236,100 +236,150 @@
     </div>
 </div> -->
 <div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card form-control-sm left-card">
-                <form class="data-form" autocomplete="off">
-                    @csrf
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <select class="form-control-sm" name="branch_type" id="branch_type">
-                                <option value="">Branch Type</option>
-                            </select>
+    <form autocomplete="off">
+        @csrf
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card form-control-sm left-card">
+                    <div class="data-form">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <select class="form-control form-control-sm select2 edit_branch_type" name="branch_type" id="branch_type">
+                                    <option value="">Branch Type</option>
+                                    @foreach($branch_categories as $item)
+                                        <option value="{{$item->id}}">{{$item->branch_category_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-xl-6">
+                                <select class="form-control form-control-sm select2 edit_select_branch" name="branch_id" id="select_branch">
+                                    <option value="">Select Branch ID</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-xl-6">
-                            <select class="form-control-sm" name="branch_id" id="select_branch">
-                                <option value="">Select Branch</option>
-                            </select>
+                        <div class="row mt-4">
+                            <div class="col-xl-6">
+                                <input class="form-control form-control-sm edit_type" type="text" name="type" id="type" placeholder="Supplier Category" autofocus>
+                                <input type="hidden" id="supp_id">
+                            </div>
+                            <div class="col-xl-6">
+                                <input class="form-control form-control-sm edit_bussiness_type" type="text" name="bussiness_type" id="bussiness_type" placeholder="Bussiness Type">
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-xl-6">
+                                <input class="form-control form-control-sm edit_name" type="text" name="name" id="name" placeholder="Name" required>
+                            </div>
+                            <div class="col-xl-6">
+                                <input class="form-control form-control-sm edit_contact_number_one" type="text" name="contact_number_one" id="contact_number_one" placeholder="Contact Number One">
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-xl-6">
+                                <input class="form-control form-control-sm edit_contact_number_two" type="text" name="contact_number_two" id="contact_number_two" placeholder="Contact Number Two">
+                            </div>
+                            <div class="col-xl-6">
+                                <input class="form-control form-control-sm edit_whatsapp_number" type="text" name="whatsapp_number" id="whatsapp_number" placeholder="WhatsApp Number">
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-xl-12">
+                                <input class="form-control form-control-sm edit_email" type="text" name="email" id="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-xl-12">
+                                <textarea type="text" class="form-control form-control-sm edit_office_address" name="office_address" id="office_address" cols="30" rows="3" placeholder="Office Address"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-xl-12">
+                                <textarea type="text" class="form-control form-control-sm edit_current_address font_color" name="current_address" id="current_address" cols="30" rows="3" placeholder="Current Address"></textarea>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mt-4">
-                        <div class="col-xl-6">
-                            <input class="form-control form-control-sm edit_type" type="text" name="type" id="type" placeholder="Supplier Category" autofocus>
-                            <input type="hidden" id="supp_id">
+                </div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="card form-control-sm right-card">
+                    <div class="mini-right-group">
+                        <div class="row g-3">
+                            <div class="mb-1">
+                                <label for="select-branch" class="form-label select-label">Select Branch Name</label>
+                                <select class="form-control form-control-sm select2 edit_branch_type" name="branch_name" id="search_branch">
+                                    <option value="">Select Branch Name</option>
+                                    @foreach($branches as $item)
+                                        <option value="{{$item->branch_name}}">{{$item->branch_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-xl-6">
-                            <input class="form-control form-control-sm edit_bussiness_type" type="text" name="bussiness_type" id="bussiness_type" placeholder="Bussiness Type">
+                        <div class="row g-3">
+                            <div class="mb-3">
+                                <label for="supplier" class="form-label select-label">Select Supplier Name</label>
+                                <select class="form-control form-control-sm select2 edit_search_supplier" name="search_supplier" id="search_supplier">
+                                    <option value="">Select Supplier Name</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-xl-6">
-                            <input class="form-control form-control-sm edit_name" type="text" name="name" id="name" placeholder="Name" required>
-                        </div>
-                        <div class="col-xl-6">
-                            <input class="form-control form-control-sm edit_contact_number_one" type="text" name="contact_number_one" id="contact_number_one" placeholder="Contact Number One">
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-xl-6">
-                            <input class="form-control form-control-sm edit_contact_number_two" type="text" name="contact_number_two" id="contact_number_two" placeholder="Contact Number Two">
-                        </div>
-                        <div class="col-xl-6">
-                            <input class="form-control form-control-sm edit_whatsapp_number" type="text" name="whatsapp_number" id="whatsapp_number" placeholder="WhatsApp Number">
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-xl-12">
-                            <input class="form-control form-control-sm edit_email" type="text" name="email" id="email" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-xl-12">
-                            <textarea type="text" class="form-control form-control-sm edit_office_address" name="office_address" id="office_address" cols="30" rows="3" placeholder="Office Address"></textarea>
+                        <div class="row g-3">
+                            <div class="btn_box group_btn_box pt-3">
+                                <button type="submit" class="btn btn-sm cgt_btn text-white button_width me-1" id="search">
+                                    <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                    <span class="category-btn-text">Search</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mt-4">
-                        <div class="col-xl-12">
-                            <textarea type="text" class="form-control form-control-sm edit_current_address font_color" name="current_address" id="current_address" cols="30" rows="3" placeholder="Current Address"></textarea>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-5">
+                </div>
+                <div class="card form-control-sm right-card mt-4">
+                    <div class="row row g-2 py-1 px-2">
+                        <div class="col-8">
                             <div class="btn_box group_btn_box mt-3">
-                                <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width me-2" id="save">
+                                <button type="submit" class="btn btn-sm cgt_btn text-white button_width" id="save">
                                     <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                     <span class="category-btn-text">ADD</span>
                                 </button>
-                                <button id="update_btn" class="btn btn-sm cgt_btn btn_focus button_width me-2" hidden>
+                                <button id="update_btn" class="btn btn-sm cgt_btn text-white button_width" hidden>
                                     <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                     <span class="update-btn-text">Update</span>
                                 </button>
                             </div>
                         </div>
-                        <div class="col-3"></div>
                         <div class="col-4">
-                            <div class="mt-2">
-                                <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus button_width mt-2">
-                                    <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                                    <span class="cancel-btn-text">Cancel</span>
-                                </button>
-                            </div>
+                            <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn text-white button_width mt-3">
+                                <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                <span class="cancel-btn-text">Cancel</span>
+                            </button>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-        <div class="col-6 col-md-4">
-            <div class="card form-control-sm right-card">
-                <div class="row g-3">
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput" class="form-label">Example label</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                </div>
+                <div class="card form-control-sm right-card mt-4">
+                    <span class="mini-head">Supplier Access</span>
+                    <div class="row">
+                        <div class="col-5">
+                            <span class="child-label ms-3" id="accessLabel">Access-Date : </span>
+                            <span class="child-label ms-3" id="denyLabel" hidden>Deny-Date : </span>
+                        </div>
+                        <div class="col-7">
+                            <span class="child-label" id="accessDate" hidden> </span>
+                            <span class="child-label" id="denyDate" hidden> </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <span class="child-label ms-3" id="createLabel">Create-Date : </span>
+                            <span class="child-label ms-3" id="updateLabel" hidden>Update-Date : </span>
+                        </div>
+                        <div class="col-7">
+                            <span class="child-label" id="createDate" hidden> </span>
+                            <span class="child-label" id="updateDate" hidden> </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 
 {{-- Start Delete  Supplier or Vendor Modal--}}
@@ -499,14 +549,78 @@
 
 @endsection
 @section('css')
+<link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
+<link href="{{ asset('backend_asset') }}/main_asset/jquery-ui-css/jquery-ui.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/brand/brand.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/supplier/supplier.css">
 @endsection
 @section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
 @include('super-admin.supplier.supplier-handel-ajax')
 
+<script>
+  $(document).ready(function () {
+    // Initialize Select2 for branch type
+    $('#branch_type').select2({
+      placeholder: 'Select Branch Type',
+      allowClear: true,
+      width: '100%'
+    });
+
+    // Set custom placeholder for the search input inside Select2 dropdown for branch type
+    $(document).on('select2:open', '#branch_type', function () {
+      setTimeout(() => {
+        $('.select2-search__field').attr('placeholder', 'Search branch type...');
+      }, 50);
+    });
+
+    // Initialize Select2 for branch selection
+    $('#select_branch').select2({
+      placeholder: 'Select Branch ID',
+      allowClear: true,
+      width: '100%'
+    });
+
+    // Set custom placeholder for the search input inside Select2 dropdown for branch selection
+    $(document).on('select2:open', '#select_branch', function () {
+      setTimeout(() => {
+        $('.select2-search__field').attr('placeholder', 'Search branch id...');
+      }, 50);
+    });
+
+    // Initialize Select2 for branch selection
+    $('#search_branch').select2({
+      placeholder: 'Select Branch',
+      allowClear: true,
+      width: '100%'
+    });
+
+    // Set custom placeholder for the search input inside Select2 dropdown for branch selection
+    $(document).on('select2:open', '#search_branch', function () {
+      setTimeout(() => {
+        $('.select2-search__field').attr('placeholder', 'Search branch...');
+      }, 50);
+    });
+
+    // Initialize Select2 for branch selection
+    $('#search_supplier').select2({
+      placeholder: 'Select Branch',
+      allowClear: true,
+      width: '100%'
+    });
+
+    // Set custom placeholder for the search input inside Select2 dropdown for supplier selection
+    $(document).on('select2:open', '#search_supplier', function () {
+      setTimeout(() => {
+        $('.select2-search__field').attr('placeholder', 'Search supplier...');
+      }, 50);
+    });
+  });
+</script>
 <script>
     // skeleton
     function fetchData() {

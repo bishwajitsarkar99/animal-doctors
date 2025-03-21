@@ -8,6 +8,48 @@
     --drop-border-bg-color:royalblue;
     --font-family-sans-serif:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
+.mini-right-group {
+    margin: 10px 10px;
+}
+.mini-head{
+    text-align: center;
+    text-transform: uppercase;
+    color: #181818;
+    font-size: 0.9vw;
+    font-weight: 800;
+    opacity: 1;
+    letter-spacing: 0.5px;
+    margin: 10px 10px;
+    font-family: var(--font-family-sans-serif); 
+}
+.group-access{
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 700;
+    color: #181818;
+    letter-spacing: 0.5px;
+    font-family: var(--font-family-sans-serif);
+}
+.child-label{
+    display: flex;
+    box-sizing: border-box;
+    font-size: 13px;
+    font-weight: 700;
+    color: #181818;
+    letter-spacing: 0.5px;
+    font-family: var(--font-family-sans-serif);
+}
+.select-label {
+    color: #000000;
+    font-size: 1vw;
+    font-weight: 600;
+    opacity: 1;
+    letter-spacing: 0.5px;
+    margin-bottom: 1px;
+    font-family: var(--font-family-sans-serif);
+}
 .select2-container .select2-selection--single {
     box-sizing: border-box;
     cursor: pointer;
@@ -15,8 +57,8 @@
     height: 25px !important;
     user-select: none;
     -webkit-user-select: none;
-    font-family: var(--sub-category-font-family);
-    font-weight: 700;
+    font-family: var(--font-family-sans-serif);
+    font-weight: 600;
     font-size: 13px !important;
 }
 .select2-container--default .select2-selection--single {
@@ -32,12 +74,12 @@
     background-image: linear-gradient(to bottom, white 0%, white, white 100%);
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: #333;
+    color: #000000;
     line-height: 20px !important;
     border-collapse: collapse !important;
     width: 100% !important;
-    font-weight: 700;
-    font-family: var(--sub-category-font-family);
+    font-weight: 600;
+    font-family: var(--font-family-sans-serif);
 }
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-image: linear-gradient(-120deg, rgba(230, 230, 230, 0.05) 0%,rgb(241, 241, 241), rgba(0, 0, 0, 0.05) 0%);
@@ -78,6 +120,34 @@
     box-shadow: rgb(0 0 0 / 10%) 0px 2px 20px;
     border: none;
     opacity: 1; 
+}
+.pill-success-rounded {
+    border-radius: 50rem;
+    background-image: linear-gradient(45deg, darkgreen, green, darkgreen);
+    border: 1px solid lightseagreen;
+    color: white;
+    font-family: var(--font-family-sans-serif);
+    font-size: 0.9vw;
+    font-weight: 700;
+    opacity: 1;
+    letter-spacing: 1px;
+    line-height: .8;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+}
+.pill-danger-rounded {
+    border-radius: 50rem;
+    background-image: linear-gradient(45deg, rgb(255, 82, 20), rgb(255, 85, 23), orangered);
+    border: 1px solid rgb(255, 102, 47);
+    color: white;
+    font-family: var(--font-family-sans-serif);
+    font-size: 0.9vw;
+    font-weight: 700;
+    opacity: 1;
+    letter-spacing: 1px;
+    line-height: .8;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 .sup-btn-skeleton,.sup-btn-skeleton-two{
     position: relative;
@@ -241,7 +311,7 @@ div.item {
     font-size: 0.92vw;
     letter-spacing: 0.9px;
     color: black;
-    font-weight: 610;
+    font-weight: 600;
     text-transform: capitalize;
     font-family: var(--font-family-sans-serif);
 }
@@ -271,6 +341,7 @@ input#type {
     border-left: 1px solid rgb(219 219 219 / 80%);
     border-right: 1px solid rgb(219 219 219 / 80%);
     font-family:var(--font-family-sans-serif);
+    letter-spacing: 1px;
 }
 input#type:focus{
     border-color: #2f86e4;
@@ -278,6 +349,7 @@ input#type:focus{
     color: #0056b3;
     transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+    letter-spacing: 1px;
 }
 input#bussiness_type {
     background-color: white;
@@ -296,6 +368,7 @@ input#bussiness_type {
     border-left: 1px solid rgb(219 219 219 / 80%);
     border-right: 1px solid rgb(219 219 219 / 80%);
     font-family:var(--font-family-sans-serif);
+    letter-spacing: 1px;
 }
 input#bussiness_type:focus{
     border-color: #2f86e4;
@@ -303,6 +376,7 @@ input#bussiness_type:focus{
     color: #0056b3;
     transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+    letter-spacing: 1px;
 }
 input#name {
     background-color: white;
@@ -321,6 +395,7 @@ input#name {
     border-left: 1px solid rgb(219 219 219 / 80%);
     border-right: 1px solid rgb(219 219 219 / 80%);
     font-family:var(--font-family-sans-serif);
+    letter-spacing: 1px;
 }
 input#name:focus{
     border-color: #2f86e4;
@@ -328,6 +403,7 @@ input#name:focus{
     color: #0056b3;
     transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+    letter-spacing: 1px;
 }
 textarea#office_address {
     background-color: white;
@@ -346,6 +422,7 @@ textarea#office_address {
     border-left: 1px solid rgb(219 219 219 / 80%);
     border-right: 1px solid rgb(219 219 219 / 80%);
     font-family:var(--font-family-sans-serif);
+    letter-spacing: 1px;
 }
 textarea#office_address:focus{
     border-color: #2f86e4;
@@ -353,6 +430,7 @@ textarea#office_address:focus{
     color: #0056b3;
     transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+    letter-spacing: 1px;
 }
 textarea#current_address {
     background-color: white;
@@ -371,6 +449,7 @@ textarea#current_address {
     border-left: 1px solid rgb(219 219 219 / 80%);
     border-right: 1px solid rgb(219 219 219 / 80%);
     font-family:var(--font-family-sans-serif);
+    letter-spacing: 1px;
 }
 textarea#current_address:focus{
     border-color: #2f86e4;
@@ -378,6 +457,7 @@ textarea#current_address:focus{
     color: #0056b3;
     transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+    letter-spacing: 1px;
 }
 input#contact_number_one {
     background-color: white;
@@ -396,6 +476,7 @@ input#contact_number_one {
     border-left: 1px solid rgb(219 219 219 / 80%);
     border-right: 1px solid rgb(219 219 219 / 80%);
     font-family:var(--font-family-sans-serif);
+    letter-spacing: 1px;
 }
 input#contact_number_one:focus{
     border-color: #2f86e4;
@@ -403,6 +484,7 @@ input#contact_number_one:focus{
     color: #0056b3;
     transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+    letter-spacing: 1px;
 }
 input#contact_number_two {
     background-color: white;
@@ -421,6 +503,7 @@ input#contact_number_two {
     border-left: 1px solid rgb(219 219 219 / 80%);
     border-right: 1px solid rgb(219 219 219 / 80%);
     font-family:var(--font-family-sans-serif);
+    letter-spacing: 1px;
 }
 input#contact_number_two:focus{
     border-color: #2f86e4;
@@ -428,6 +511,7 @@ input#contact_number_two:focus{
     color: #0056b3;
     transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+    letter-spacing: 1px;
 }
 input#whatsapp_number {
     background-color: white;
@@ -446,6 +530,7 @@ input#whatsapp_number {
     border-left: 1px solid rgb(219 219 219 / 80%);
     border-right: 1px solid rgb(219 219 219 / 80%);
     font-family:var(--font-family-sans-serif);
+    letter-spacing: 1px;
 }
 input#whatsapp_number:focus{
     border-color: #2f86e4;
@@ -453,6 +538,7 @@ input#whatsapp_number:focus{
     color: #0056b3;
     transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+    letter-spacing: 1px;
 }
 input#email {
     background-color: white;
@@ -471,6 +557,7 @@ input#email {
     border-left: 1px solid rgb(219 219 219 / 80%);
     border-right: 1px solid rgb(219 219 219 / 80%);
     font-family:var(--font-family-sans-serif);
+    letter-spacing: 1px;
 }
 input#email:focus{
     border-color: #2f86e4;
@@ -478,6 +565,7 @@ input#email:focus{
     color: #0056b3;
     transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+    letter-spacing: 1px;
 }
 .is-valid{
     border-color: #198754;
@@ -664,9 +752,6 @@ label.search.ser_labe {
     100% {
         transform: rotate(360deg);
     }
-}
-button.btn.btn-sm.btn_focus {
-    animation: btnFocus 1s infinite;
 }
 @keyframes btnFocus{
     0%{

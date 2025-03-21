@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
         Route::get('/get-supplier', [SupplierController::class, 'getSupplier'])->name('search-supplier.action');
         Route::post('/add-supplier', [SupplierController::class, 'stroeData'])->name('add_supplier.action');
+        Route::get('/branch-fetch/{id}', [SupplierController::class, 'branchFetch'])->name('supplier_branch_fetch.action');
     });
     
     // Supplier Update

@@ -340,46 +340,46 @@
                                         </thead>
                                         <tbody class="bg-transparent">
                                             <tr class="table-row user-table-row supp-table-row">
-                                                <td class="border_ord ps-1 supp_vew"><a href="#about">1</a></td>
-                                                <td class="txt_ ps-1 supp_vew2">CU-0000</td>
-                                                <td class="txt_ ps-1 supp_vew2">OR-0000</td>
-                                                <td class="txt_ ps-1 supp_vew2">Dhaka</td>
-                                                <td class="txt_ ps-1 supp_vew2">Pending</td>
+                                                <td class="border_ord ps-1"><a href="#about">1</a></td>
+                                                <td class="txt_ ps-1">CU-0000</td>
+                                                <td class="txt_ ps-1">OR-0000</td>
+                                                <td class="txt_ ps-1">Dhaka</td>
+                                                <td class="txt_ ps-1">Pending</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
-                                                <td class="border_ord ps-1 supp_vew"><a href="#about">2</a></td>
-                                                <td class="txt_ ps-1 supp_vew2">CU-0001</td>
-                                                <td class="txt_ ps-1 supp_vew2">OR-0001</td>
-                                                <td class="txt_ ps-1 supp_vew2">Dhaka</td>
-                                                <td class="txt_ ps-1 supp_vew2">Pending</td>
+                                                <td class="border_ord ps-1"><a href="#about">2</a></td>
+                                                <td class="txt_ ps-1">CU-0001</td>
+                                                <td class="txt_ ps-1">OR-0001</td>
+                                                <td class="txt_ ps-1">Dhaka</td>
+                                                <td class="txt_ ps-1">Pending</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
-                                                <td class="border_ord ps-1 supp_vew"><a href="#about">3</a></td>
-                                                <td class="txt_ ps-1 supp_vew2">CU-0003</td>
-                                                <td class="txt_ ps-1 supp_vew2">OR-0003</td>
-                                                <td class="txt_ ps-1 supp_vew2">Natore</td>
-                                                <td class="txt_ ps-1 supp_vew2">Justified</td>
+                                                <td class="border_ord ps-1"><a href="#about">3</a></td>
+                                                <td class="txt_ ps-1">CU-0003</td>
+                                                <td class="txt_ ps-1">OR-0003</td>
+                                                <td class="txt_ ps-1">Natore</td>
+                                                <td class="txt_ ps-1">Justified</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
-                                                <td class="border_ord ps-1 supp_vew"><a href="#about">4</a></td>
-                                                <td class="txt_ ps-1 supp_vew2">CU-0004</td>
-                                                <td class="txt_ ps-1 supp_vew2">OR-0004</td>
-                                                <td class="txt_ ps-1 supp_vew2">Rangpur</td>
-                                                <td class="txt_ ps-1 supp_vew2">Justified</td>
+                                                <td class="border_ord ps-1"><a href="#about">4</a></td>
+                                                <td class="txt_ ps-1">CU-0004</td>
+                                                <td class="txt_ ps-1">OR-0004</td>
+                                                <td class="txt_ ps-1">Rangpur</td>
+                                                <td class="txt_ ps-1">Justified</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
-                                                <td class="border_ord ps-1 supp_vew"><a href="#about">5</a></td>
-                                                <td class="txt_ ps-1 supp_vew2">CU-0005</td>
-                                                <td class="txt_ ps-1 supp_vew2">OR-0005</td>
-                                                <td class="txt_ ps-1 supp_vew2">Dinajput</td>
-                                                <td class="txt_ ps-1 supp_vew2">Justified</td>
+                                                <td class="border_ord ps-1"><a href="#about">5</a></td>
+                                                <td class="txt_ ps-1">CU-0005</td>
+                                                <td class="txt_ ps-1">OR-0005</td>
+                                                <td class="txt_ ps-1">Dinajput</td>
+                                                <td class="txt_ ps-1">Justified</td>
                                             </tr>
                                             <tr class="table-row user-table-row supp-table-row">
-                                                <td class="border_ord ps-1 supp_vew"><a href="#about">6</a></td>
-                                                <td class="txt_ ps-1 supp_vew2">CU-0006</td>
-                                                <td class="txt_ ps-1 supp_vew2">OR-0006</td>
-                                                <td class="txt_ ps-1 supp_vew2">Gazipur</td>
-                                                <td class="txt_ ps-1 supp_vew2">Justified</td>
+                                                <td class="border_ord ps-1"><a href="#about">6</a></td>
+                                                <td class="txt_ ps-1">CU-0006</td>
+                                                <td class="txt_ ps-1">OR-0006</td>
+                                                <td class="txt_ ps-1">Gazipur</td>
+                                                <td class="txt_ ps-1">Justified</td>
                                             </tr>
                                         </tbody>
                                     </table>

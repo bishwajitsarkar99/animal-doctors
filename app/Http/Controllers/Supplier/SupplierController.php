@@ -22,6 +22,12 @@ class SupplierController extends Controller
         return $this->supplierServiceProvider->viewSupplier();
     }
 
+    // Branch Fetch
+    public function branchFetch(Request $request, $id)
+    {
+        return $this->supplierServiceProvider->branchToFetch($request, $id);
+    }
+
     // Supplier Permission Part
     public function Supplier_Access_Permission(Request $request)
     {

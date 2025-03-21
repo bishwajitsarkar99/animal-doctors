@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Cache;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Supplier\SupplierPermission;
+use App\Models\Branch\BranchCategory;
+use App\Models\Branch\Branches;
 use Illuminate\Validation\Rule;
 
 class SupplierServiceProvider
@@ -24,8 +26,44 @@ class SupplierServiceProvider
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
+        $branch_categories = BranchCategory::orderBy('id', 'desc')->get();
+        // Get authenticated user's email
+        $auth = Auth::user();
+        $user_branch = $auth->branch_id;
+        $branches = Branches::where('branch_id', $user_branch)->get();
         $page_name = 'Supplier';
-        return view('super-admin.supplier.index', compact('company_profiles', 'page_name'));
+        return view('super-admin.supplier.index', compact('company_profiles', 'page_name', 'branch_categories', 'branches'));
+    }
+    /**
+     * Handle Fetch Branch
+    */
+    public function branchToFetch(Request $request, $id)
+    {
+        // Get authenticated user's email
+        $auth = Auth::user();
+        $user_branch = $auth->branch_id;
+
+        if (!$auth) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        if($user_branch){
+            $branches = Branches::where('branch_id', $user_branch)->where('id', $id)->get();
+
+            if ($branches->isNotEmpty()) {
+                return response()->json([
+                    'status' => 200,
+                    'messages' => $branches,
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'messages' => [],
+                ]);
+            }
+        }
+        return response()->json(['message' => 'No branches available for this role'], 403);
+        
     }
     /**
      * Handle Supplier Fetch Data
