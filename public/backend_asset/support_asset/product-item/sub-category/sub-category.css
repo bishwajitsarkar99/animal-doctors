@@ -376,16 +376,6 @@ input#cat_search{
     font-family: var(--sub-category-font-family);
     width: 100%;
 }
-@keyframes focus_color{
-    50%{
-        color: darkcyan;
-        background-color: #fff;
-    }
-    100%{
-        color: orangered;
-        background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
-    }
-}
 select#perItemControls {
     outline: none;
     color: black;

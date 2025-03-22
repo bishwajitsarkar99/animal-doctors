@@ -354,7 +354,7 @@ span.search_on {
     top: 70%;
 }
 .card-body.cat_form {
-    box-shadow: 0px 2px 20px #0001;
+    box-shadow: rgb(0 0 0 / 11%) 0px 2px 20px;
     padding-bottom: 20px;
     padding-left: 15px;
     padding-right: 15px;
@@ -550,7 +550,7 @@ span.search_on {
     padding: 0px;
 }
 form.mini-form {
-    box-shadow: 0px 2px 20px #0001;
+    box-shadow: rgb(0 0 0 / 11%) 0px 2px 20px;
     padding: 10px 10px;
     border-radius: 5px;
 }

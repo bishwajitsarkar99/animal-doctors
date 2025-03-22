@@ -75,9 +75,7 @@
               </div>
             </div>
             <div class="col-xl-10">
-              <div class="pagination pagination-skeleton" id="group_data_table_paginate">
-
-              </div>
+              <div class="pagination pagination-skeleton" id="group_data_table_paginate"></div>
             </div>
           </div>
           <div class="row">
@@ -110,7 +108,7 @@
                     <span id="savForm_error"></span><span id="updateForm_errorList"></span>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-3 mb-2">
                   <div class="col-5">
                     <div class="btn-box group_btn_box mt-2">
                       <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width" id="save">

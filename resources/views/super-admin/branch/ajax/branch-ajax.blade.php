@@ -17,7 +17,7 @@
         fetch_branch_categories();
         initSelect2();
         // Initialize the button loader for the login button
-        buttonLoader('#save', '.add-icon', '.add-btn-text', 'Add...', 'Add', 3000);
+        buttonLoader('#save', '.add-icon', '.add-btn-text', 'Add...', 'Add', 1000);
         buttonLoader('#update_btn', '.update-icon', '.update-btn-text', 'Update...', 'Update', 1000);
         buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#access_btn', '.access-icon', '.access-btn-text', 'Access...', 'Access', 1000);

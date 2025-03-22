@@ -243,35 +243,41 @@
                 <div class="card form-control-sm left-card">
                     <div class="data-form">
                         <div class="row">
-                            <div class="col-xl-6">
+                            <div class="col-xl-6 branch_type_nme">
                                 <select class="form-control form-control-sm select2 edit_branch_type" name="branch_type" id="branch_type">
                                     <option value="">Branch Type</option>
                                     @foreach($branch_categories as $item)
                                         <option value="{{$item->id}}">{{$item->branch_category_name}}</option>
                                     @endforeach
                                 </select>
+                                <span id="savForm_error" hidden></span><span id="updateForm_errorList" hidden></span>
                             </div>
-                            <div class="col-xl-6">
+                            <div class="col-xl-6 branch_id_nme">
                                 <select class="form-control form-control-sm select2 edit_select_branch" name="branch_id" id="select_branch">
                                     <option value="">Select Branch ID</option>
                                 </select>
+                                <span id="savForm_error2" hidden></span><span id="updateForm_errorList2" hidden></span>
                             </div>
                         </div>
                         <div class="row mt-4">
-                            <div class="col-xl-6">
-                                <input class="form-control form-control-sm edit_type" type="text" name="type" id="type" placeholder="Supplier Category" autofocus>
+                            <div class="col-xl-6 type_nme">
+                                <input class="form-control form-control-sm edit_type" type="text" name="type" id="type" placeholder="Category Type... Supplier or Vendor etc.">
                                 <input type="hidden" id="supp_id">
+                                <span id="savForm_error3" hidden></span><span id="updateForm_errorList3" hidden></span>
                             </div>
-                            <div class="col-xl-6">
+                            <div class="col-xl-6 branch_type_nme">
                                 <input class="form-control form-control-sm edit_bussiness_type" type="text" name="bussiness_type" id="bussiness_type" placeholder="Bussiness Type">
+                                <span id="savForm_error4" hidden></span><span id="updateForm_errorList4" hidden></span>
                             </div>
                         </div>
                         <div class="row mt-4">
-                            <div class="col-xl-6">
-                                <input class="form-control form-control-sm edit_name" type="text" name="name" id="name" placeholder="Name" required>
+                            <div class="col-xl-6 sup_nme">
+                                <input class="form-control form-control-sm edit_name" type="text" name="name" id="name" placeholder="Supplier or Vendor Name">
+                                <span id="savForm_error5" hidden></span><span id="updateForm_errorList5" hidden></span>
                             </div>
-                            <div class="col-xl-6">
+                            <div class="col-xl-6 contract_nme">
                                 <input class="form-control form-control-sm edit_contact_number_one" type="text" name="contact_number_one" id="contact_number_one" placeholder="Contact Number One">
+                                <span id="savForm_error6" hidden></span><span id="updateForm_errorList6" hidden></span>
                             </div>
                         </div>
                         <div class="row mt-4">
@@ -288,13 +294,15 @@
                             </div>
                         </div>
                         <div class="row mt-4">
-                            <div class="col-xl-12">
+                            <div class="col-xl-12 office_address_nme">
                                 <textarea type="text" class="form-control form-control-sm edit_office_address" name="office_address" id="office_address" cols="30" rows="3" placeholder="Office Address"></textarea>
+                                <span id="savForm_error7" hidden></span><span id="updateForm_errorList7" hidden></span>
                             </div>
                         </div>
                         <div class="row mt-4">
-                            <div class="col-xl-12">
+                            <div class="col-xl-12 current_address_nme">
                                 <textarea type="text" class="form-control form-control-sm edit_current_address font_color" name="current_address" id="current_address" cols="30" rows="3" placeholder="Current Address"></textarea>
+                                <span id="savForm_error8" hidden></span><span id="updateForm_errorList8" hidden></span>
                             </div>
                         </div>
                     </div>
@@ -324,9 +332,9 @@
                         </div>
                         <div class="row g-3">
                             <div class="btn_box group_btn_box pt-3">
-                                <button type="submit" class="btn btn-sm cgt_btn text-white button_width me-1" id="search">
-                                    <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                                    <span class="category-btn-text">Search</span>
+                                <button id="search_btn" class="btn btn-sm cgt_btn text-white button_width me-1">
+                                    <span class="search-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                    <span class="search-btn-text">Search</span>
                                 </button>
                             </div>
                         </div>
@@ -334,15 +342,23 @@
                 </div>
                 <div class="card form-control-sm right-card mt-4">
                     <div class="row row g-2 py-1 px-2">
-                        <div class="col-8">
+                        <div class="col-4">
                             <div class="btn_box group_btn_box mt-3">
-                                <button type="submit" class="btn btn-sm cgt_btn text-white button_width" id="save">
+                                <button id="save" class="btn btn-sm cgt_btn text-white button_width">
                                     <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                                    <span class="category-btn-text">ADD</span>
+                                    <span class="add-btn-text">ADD</span>
                                 </button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="btn_box group_btn_box mt-3">
                                 <button id="update_btn" class="btn btn-sm cgt_btn text-white button_width" hidden>
                                     <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                     <span class="update-btn-text">Update</span>
+                                </button>
+                                <button id="delete_btn" class="btn btn-sm cgt_btn text-white button_width" hidden>
+                                    <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                                    <span class="delete-btn-text">Delete</span>
                                 </button>
                             </div>
                         </div>
@@ -354,9 +370,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="card form-control-sm right-card mt-4">
+                <div class="card form-control-sm right-card mt-3 pb-3">
                     <span class="mini-head">Supplier Access</span>
-                    <div class="row">
+                    <div class="row checkbox">
+                        <div class="col-5 pt-1">
+                            <span class="child-label ms-3" id="accessLabel">
+                                Access : <input class="form-switch form-check-input supplier_check_permission ms-2" type="checkbox" id="accessCheck">
+                            </span>
+                        </div>
+                        <div class="col-7">
+                            <span class="pill-success-rounded ms-3" id="justifyLabel" hidden> justify</span>
+                            <span class="pill-danger-rounded ms-3" id="deny_label" hidden> Deny</span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
                         <div class="col-5">
                             <span class="child-label ms-3" id="accessLabel">Access-Date : </span>
                             <span class="child-label ms-3" id="denyLabel" hidden>Deny-Date : </span>
@@ -366,7 +393,7 @@
                             <span class="child-label" id="denyDate" hidden> </span>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row mt-2">
                         <div class="col-5">
                             <span class="child-label ms-3" id="createLabel">Create-Date : </span>
                             <span class="child-label ms-3" id="updateLabel" hidden>Update-Date : </span>
@@ -380,6 +407,11 @@
             </div>
         </div>
     </form>
+    <div class="row">
+        <div class="col-xl-12 action_message">
+        <p class="ps-1"><span id="success_message"></span></p>
+        </div>
+    </div>
 </div>
 
 {{-- Start Delete  Supplier or Vendor Modal--}}
@@ -560,6 +592,8 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
+<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
+<script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 @include('super-admin.supplier.supplier-handel-ajax')
 
 <script>
