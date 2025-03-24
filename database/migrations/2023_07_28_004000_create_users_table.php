@@ -34,7 +34,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('reference_email');
             $table->string('login_email');
-            $table->string('mailing_email')->nullable();
+            $table->string('mailing_email');
             $table->timestamps();
         });
     }

@@ -143,12 +143,23 @@ class AuthService
         $company_name = Setting('company_name');
         $email_extension = '@gmail.com';
         $user_first_name = $request->first_name;
+        $user_last_name = $request->last_name;
         $login_email = $this->userLoginEmailGenerator(
             new User,
             'login_email',
             2, // Generate a 4-digit random number
             $user_first_name,
             $company_name,
+            $email_extension
+        );
+
+        // Generate user mailing email
+        $mailing_email = $this->userMailingEmailGenerator(
+            new User,
+            'mailing_email',
+            2, // Generate a 4-digit random number
+            $user_first_name,
+            $user_last_name,
             $email_extension
         );
 
@@ -161,6 +172,7 @@ class AuthService
         $user->password = Hash::make($request->password);
         $user->contract_number = $request->contract_number;
         $user->login_email = $login_email;
+        $user->mailing_email = $mailing_email;
         $user->reference_email = $request->reference_email;
 
         // Process image upload
@@ -242,6 +254,18 @@ class AuthService
 
         // Concatenate components to create the email
         return "{$formatted_name}{$formatted_company}{$random_number}{$email_extension}";
+    }
+    private function userMailingEmailGenerator($model, $trow, $length = 5, $user_first_name, $user_last_name, $email_extension)
+    {
+        // Generate a random number of the specified length
+        $random_number = str_pad(mt_rand(0, pow(10, $length) - 1), $length, '0', STR_PAD_LEFT);
+
+        // Format all inputs to lowercase
+        $formatted_first_name = strtolower(str_replace(' ', '', $user_first_name));
+        $formatted_last_name = strtolower(str_replace(' ', '', $user_last_name));
+
+        // Concatenate components to create the email
+        return "{$formatted_first_name}{$formatted_last_name}{$random_number}{$email_extension}";
     }
     /**
      * Handle Login Door View page.
@@ -454,6 +478,7 @@ class AuthService
                 $sessionId = Str::random(40);
                 DB::table('sessions')->insert([
                     'id' => $sessionId,
+                    'branch_id' => $user->branch_id,
                     'user_id' => $user->id,
                     'ip_address' => $request->ip(),
                     'name' => $user->name,
@@ -692,7 +717,7 @@ class AuthService
         try {
             $userEmail = $request->email;
             Mail::to($userEmail)->send(new AdminEmail());
-
+            
             $emailVerification = EmailVerification::where('email', $userEmail)->firstOrFail();
             $emailVerification->update([
                 'email_verified_session' => now(),

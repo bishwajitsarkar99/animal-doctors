@@ -105,20 +105,20 @@
         });
 
         // Handle Select only role for branch
-        // $(document).on('change', '#role_id', function() {
-        //     var changeValue = $(this).val();
-        //     if (changeValue === '') {
-        //         $("#email_id").empty();
-        //         $("#email_id").empty();
-        //         $("#email_id").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
-        //     }
-        // });
+        $(document).on('change', '#role_id', function() {
+            var changeValue = $(this).val();
+            if (changeValue === '') {
+                $("#email_id").empty();
+                $("#email_id").empty();
+                $("#email_id").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
+            }
+        });
 
         // Event listener for only for branch
-        // $(document).on('change', '#role_id', function() {
-        //     const selectedRole = $(this).val();
-        //     fetch_branch_emails(selectedRole);
-        // });
+        $(document).on('change', '#role_id', function() {
+            const selectedRole = $(this).val();
+            fetch_branch_emails(selectedRole);
+        });
 
         // Handle Select only role for branch
         $(document).on('change', ' #branch_role_id', function() {
@@ -156,17 +156,17 @@
                 dataType: 'json',
                 success: function(response) {
                     const users = response.users;
-                    $("#branch_email_id").empty();
+                    $("#branch_email_id, #email_id").empty();
                     $.each(users, function(key, item) {
-                        $("#branch_email_id").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.login_email}</option>`);
+                        $("#branch_email_id, #email_id").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.login_email}</option>`);
                     });
                     if (typeof callback === 'function') {
                         callback();
                     }
                 },
                 error: function() {
-                    $("#branch_email_id").empty();
-                    $("#branch_email_id").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select district</option>');
+                    $("#branch_email_id, #email_id").empty();
+                    $("#branch_email_id, #email_id").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select district</option>');
                 }
             });
         }

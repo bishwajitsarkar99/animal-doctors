@@ -16,6 +16,8 @@ class CreateSuppliersTable extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
             $table->string('id_name')->unique();
+            $table->string('branch_id');
+            $table->string('branch_category');
             $table->string('type');
             $table->string('bussiness_type');
             $table->string('name',200);
@@ -26,7 +28,14 @@ class CreateSuppliersTable extends Migration
             $table->string('whatsapp_number')->nullable()->unique();
             $table->string('email')->nullable()->unique();
             $table->tinyInteger('supplier_status')->default('1');
-            $table->string('branch_id')->nullable();
+            $table->timestamp('supplier_access_date');
+            $table->timestamp('supplier_deny_date')->nullable();
+            // Creator
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            // Updator
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

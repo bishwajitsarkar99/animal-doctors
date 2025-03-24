@@ -12,6 +12,7 @@ use App\Models\Branch\BranchCategory;
 use App\Models\Branch\AdminBranchAccessPermission;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Email\EmailVerification;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -820,6 +821,13 @@ class BranchServiceProvicer
             $user->save();
         }
 
+        // EmailVerification Branch Update
+        $emailVerification = EmailVerification::where('user_id', $request->id)->first();
+        if($emailVerification) {
+            $emailVerification->branch_id = $auth->branch_id;
+            $emailVerification->save();
+        }
+
         return response()->json([
             'status' => 202,
             'messages' => 'The branch access has been updated successfully.',
@@ -1256,6 +1264,13 @@ class BranchServiceProvicer
             $user->town_name = $request->town_name;
             $user->location = $request->location;
             $user->save();
+        }
+
+        // EmailVerification Branch Update
+        $emailVerification = EmailVerification::where('user_id', $request->id)->first();
+        if($emailVerification) {
+            $emailVerification->branch_id = $auth->branch_id;
+            $emailVerification->save();
         }
 
         return response()->json([

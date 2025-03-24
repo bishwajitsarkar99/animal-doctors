@@ -11,7 +11,7 @@ class BranchCategory extends Model
     use HasFactory;
     protected $table = 'branch_categories';
     protected $fillable = [
-        'branch_type_name',
+        'branch_category_name',
         'creator',
         'updator',
     ];

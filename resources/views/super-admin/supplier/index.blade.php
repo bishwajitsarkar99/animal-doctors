@@ -244,8 +244,8 @@
                     <div class="data-form">
                         <div class="row">
                             <div class="col-xl-6 branch_type_nme">
-                                <select class="form-control form-control-sm select2 edit_branch_type" name="branch_type" id="branch_type">
-                                    <option value="">Branch Type</option>
+                                <select class="form-control form-control-sm select2 edit_branch_type branch_type" name="branch_category" id="branch_type">
+                                    <option value="">Branch Category</option>
                                     @foreach($branch_categories as $item)
                                         <option value="{{$item->id}}">{{$item->branch_category_name}}</option>
                                     @endforeach
@@ -281,8 +281,9 @@
                             </div>
                         </div>
                         <div class="row mt-4">
-                            <div class="col-xl-6">
+                            <div class="col-xl-6 contract_two_nme">
                                 <input class="form-control form-control-sm edit_contact_number_two" type="text" name="contact_number_two" id="contact_number_two" placeholder="Contact Number Two">
+                                <span id="savForm_error7" hidden></span><span id="updateForm_errorList7" hidden></span>
                             </div>
                             <div class="col-xl-6">
                                 <input class="form-control form-control-sm edit_whatsapp_number" type="text" name="whatsapp_number" id="whatsapp_number" placeholder="WhatsApp Number">
@@ -370,12 +371,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="card form-control-sm right-card mt-3 pb-3">
+                <div class="card form-control-sm right-card mt-3 pb-3" hidden>
                     <span class="mini-head">Supplier Access</span>
                     <div class="row checkbox">
                         <div class="col-5 pt-1">
                             <span class="child-label ms-3" id="accessLabel">
-                                Access : <input class="form-switch form-check-input supplier_check_permission ms-2" type="checkbox" id="accessCheck">
+                                Access : <input class="form-switch form-check-input supplier_check_permission ms-2" type="checkbox" name="supplier_status" value="1" id="accessCheck">
                             </span>
                         </div>
                         <div class="col-7">
@@ -600,7 +601,7 @@
   $(document).ready(function () {
     // Initialize Select2 for branch type
     $('#branch_type').select2({
-      placeholder: 'Select Branch Type',
+      placeholder: 'Select Branch Category',
       allowClear: true,
       width: '100%'
     });
@@ -608,7 +609,7 @@
     // Set custom placeholder for the search input inside Select2 dropdown for branch type
     $(document).on('select2:open', '#branch_type', function () {
       setTimeout(() => {
-        $('.select2-search__field').attr('placeholder', 'Search branch type...');
+        $('.select2-search__field').attr('placeholder', 'Search branch category...');
       }, 50);
     });
 

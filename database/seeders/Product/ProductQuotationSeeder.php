@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
-
+namespace Database\Seeders\Product;
 use Illuminate\Database\Seeder;
-use Database\Seeders\RoleSeeder;
+use App\Models\ProductQuotation;
+use Carbon\Carbon;
 
-class AuthSeeder extends Seeder
+class ProductQuotationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class AuthSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(RoleSeeder::class);
+        //
     }
 }

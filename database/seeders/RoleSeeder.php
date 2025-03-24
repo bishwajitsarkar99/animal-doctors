@@ -15,7 +15,6 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $data =[
-            array('id' => '0','name' => 'User', 'status' => '1', 'role_condition' => 'static', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
             array('id' => '1','name' => 'Super Admin', 'status' => '1', 'role_condition' => 'static', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
             array('id' => '2','name' => 'Sub Admin', 'status' => '1', 'role_condition' => 'static', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
             array('id' => '3','name' => 'Admin', 'status' => '1', 'role_condition' => 'static', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
@@ -36,6 +35,7 @@ class RoleSeeder extends Seeder
             array('id' => '19','name' => 'Cashier', 'status' => '1', 'role_condition' => 'non-static', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
             array('id' => '20','name' => 'Store Keeper', 'status' => '1', 'role_condition' => 'non-static', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
             array('id' => '21','name' => 'Costing Department', 'status' => '1', 'role_condition' => 'non-static', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('id' => '0','name' => 'User', 'status' => '1', 'role_condition' => 'static', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
         ];
         Role::insert($data);
     }

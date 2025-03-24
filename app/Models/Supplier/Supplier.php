@@ -13,6 +13,8 @@ class Supplier extends Model
     protected $table ='suppliers';
     // protected $primaryKey ='supplier_id';
     protected $fillable=[
+        'branch_id',
+        'branch_category',
         'type',
         'bussiness_type',
         'name',
@@ -23,6 +25,11 @@ class Supplier extends Model
         'whatsapp_number',
         'email',
         'supplier_status',
+        'supplier_access_date',
+        'supplier_deny_date',
+        'created_by',
+        'updated_by',
+        
     ];
 
     public function inventories()
