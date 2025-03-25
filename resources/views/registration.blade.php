@@ -29,9 +29,59 @@
         </style>
 
         <style>
+            *{
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+            }
             body {
-                font-family: "Poppins ", Sans-serif;
+                justify-content:center;
+                align-items:center;
+                flex-direction:column;
+                font-family: "Poppins", Sans-serif;
                 background-color:#d8edffd1;
+            }
+            .input-group {
+                position: relative;
+                width: 100%;
+            }
+            .input-group input.user_login_form {
+                font-family: "Poppins", Sans-serif;
+                outline: none;
+                width: 100%;
+                padding: 2px 7px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                font-size: 11px;
+                font-weight: 700;
+                color: #333;
+                background: transparent;
+                letter-spacing: 0.5px;
+                word-spacing: 0.5px;
+            }
+            .input-group label {
+                position: absolute;
+                top: 50%;
+                left: 10px;
+                transform: translateY(-50%);
+                padding: 0;
+                pointer-events: none;
+                transition: 0.2s ease-out;
+                color: rgb(131 131 131);
+                background-color: transparent;
+                font-size: 12px;
+                font-weight: 700;
+                font-family: "Poppins", Sans-serif;
+            }
+            .input-group input.user_login_form:focus ~ label,
+            .input-group input.user_login_form:not(:placeholder-shown) ~ label {
+                top: 0;
+                left: 8px;
+                font-size: 9px;
+                font-weight:800;
+                color: #333;
+                background-color:rgba(223, 240, 255, 0.82);
+                padding: 0 3px;
             }
             .space{
                 display:flex;
@@ -106,7 +156,7 @@
                 margin-top:27px;
                 background-color: #e7e7d763;
                 padding-bottom:10px;
-                padding-right:19px;
+                padding-right:13px;
                 animation: fadeInFromTop 3s ease-out forwards, slideInLeftToRight 3s ease-out forwards;
             }
             .form-bottom{
@@ -149,19 +199,9 @@
                 padding-top: 5px;
                 color: #333;
             }
-            input.user_login_form {
-                font-family: "Poppins ", Sans-serif;
-                outline: none;
-                box-shadow: none;
-                width: 100%;
-                padding-left: 5px;
-                border-radius: 3px;
-                padding-bottom: 0px;
-                font-size: 11px;
-                font-weight: 700;
-                color: black;
-                letter-spacing: 0.5px;
-                word-spacing: 0.5px;
+            .input-group input.user_login_form {
+                border-top-right-radius: 3px !important;
+                border-bottom-right-radius: 3px !important;
             }
             input.user_login_form:focus{
                 border-color:#2f89fc;
@@ -239,22 +279,22 @@
                 display:hidden;
             }
             .is-invalid {
-                border: 1px solid #dc3545;
-                padding-right: calc(1.5em + 0.75rem);
-                background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e);
-                background-repeat: no-repeat;
-                background-position: right calc(0.375em + 0.1875rem) center;
-                background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-                box-sizing: border-box;
+                border: 1px solid #dc3545 !important;
+                padding-right: calc(1.5em + 0.75rem) !important;
+                background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e) !important;
+                background-repeat: no-repeat !important;
+                background-position: right calc(0.375em + 0.1875rem) center !important;
+                background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem) !important;
+                box-sizing: border-box !important;
             }
             .is-valid {
-                border: 1px solid #159b15cf;
-                padding-right: calc(1.5em + 0.75rem);
-                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='darkgreen' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 8l4 4 8-8'/%3e%3c/svg%3e");
-                background-repeat: no-repeat;
-                background-position: right calc(0.375em + 0.1875rem) center;
-                background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-                box-sizing: border-box;
+                border: 1px solid #159b15cf !important;
+                padding-right: calc(1.5em + 0.75rem) !important;
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='darkgreen' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 8l4 4 8-8'/%3e%3c/svg%3e") !important;
+                background-repeat: no-repeat !important;
+                background-position: right calc(0.375em + 0.1875rem) center !important;
+                background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem) !important;
+                box-sizing: border-box !important;
             }
 
             @media only screen and (max-width: 976px) {
@@ -430,9 +470,6 @@
                     width: 22%;
                 }
             }
-            /* #f7f7e3
-           #e8edf13d
-            1px solid #ddddddde */
         </style>
     </head>
 
@@ -454,13 +491,14 @@
                         </thead>
                         <tbody class="">
                             <tr class="table-row form-bottom">
-                                <td class="user_login_form_label"> Email : </td>
                                 <td class="user-login-td">
-                                    <input class="user_login_form email-border" type="text" name="valid_email" value="" placeholder="User Email" autofocus id="user_login_form">
+                                    <div class="input-group">
+                                        <input class="user_login_form email-border" type="text" name="valid_email" value="" placeholder="" autofocus id="user_login_form">
+                                        <label for="user_login_form">User Email</label>
+                                    </div>
                                 </td>
                             </tr>
                             <tr class="table-row error_mess_row">
-                                <td class="user_login_form_label"></td>
                                 <td class="user-login-td"><span class="text-danger space" id="error_message"></span></td>
                             </tr>
                         </tbody>
@@ -592,7 +630,8 @@
                                 } else if(response.status === 400) {
                                     $("#error_message").html("");
                                     $("#user_login_form").addClass('is-invalid');
-                                    $("#user_login_form").removeClass('email-border');
+                                    $("#user_login_form").removeClass('email-border is-valid');
+                                    $("#error_message").append(`<span><svg width="25px" hieght="20px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg> </span>`);
                                     $("#error_message").append(`<span>${response.errors}</span>`);
                                 }
                             }, 10800);
@@ -610,12 +649,17 @@
 
                 // input keyup action
                 $(document).on('keyup', '#user_login_form', function(){
+
+                    $("#error_message").empty();
                     if($(this).hasClass('is-invalid')){
                         $(this).removeClass('is-invalid');
                         $(this).addClass('is-valid');
                     }else{
-                        if (!$(this).hasClass('is-valid')) {
+                        var value=$(this).val();
+                        if (value =='') {
                             $(this).addClass('email-border');
+                            $(this).removeClass('is-invalid');
+                            $(this).removeClass('is-valid');
                         }
                     }
                 });
