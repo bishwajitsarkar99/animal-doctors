@@ -23,10 +23,81 @@
     <title>{{setting('company_name')}}</title>
 
     <style>
+        :root{
+            --font-register:"Poppins", Sans-serif;
+            --nav-button-background:linear-gradient(to top, #3b71ca, #3b71ca, #3b71ca);
+        }
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             background-color:#e8edf13d;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
         }
+        .input-group {
+            position: relative !important;
+            width: 100% !important;
+        }
+        .input-group input#email {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
+            outline: none !important;
+            width: 100% !important;
+            padding: 2px 8px !important;
+            border-radius: 3px !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            color: #333 !important;
+            background: white !important;
+            letter-spacing: 0.5px !important;
+            word-spacing: 0.5px !important;
+            animation: inputColor 2s infinite !important;
+            margin-left: 0 !important;
+            min-height: 0 !important;
+        }
+        @keyframes inputColor {
+            0% {
+                color: gray;
+            }
+            100% {
+                color: #333;
+            }
+        }
+        .input-group label {
+            z-index: 10;
+            position: absolute !important;
+            top: 50% !important;
+            left: 10px !important;
+            transform: translateY(-50%) !important;
+            padding: 0 !important;
+            pointer-events: none !important;
+            transition: 0.3s ease-out !important;
+            color: rgb(131 131 131) !important;
+            background-color: transparent !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
+        }
+        .input-group input#email:focus ~ label,
+        .input-group input#email:not(:placeholder-shown) ~ label {
+            top: 0 !important;
+            left: 8px !important;
+            font-size: 9px !important;
+            font-weight: 800 !important;
+            color: #333 !important;
+            background-color: rgb(228 243 255 / 67%) !important;
+            padding: 0 3px !important;
+            word-spacing: 2px !important;
+        }
+        .input-group input#email {
+            border-top-right-radius: 3px !important;
+            border-bottom-right-radius: 3px !important;
+        }
+
         nav#topBar_tigger {
             margin-top: -11px;
             justify-content: space-between;
@@ -59,29 +130,29 @@
         .email-input-two-skeleton{
             position: relative;
         }
-        .is-invalid {
-            border: 1px solid #dc3545;
-            padding-right: calc(1.5em + 0.75rem);
-            background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e);
-            background-repeat: no-repeat;
-            background-position: right calc(0.375em + 0.1875rem) center;
-            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-            box-sizing: border-box;
+        .is-email-invalid {
+            border: 1px solid #dc3545 !important;
+            padding-right: calc(1.5em + 0.75rem) !important;
+            background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e) !important;
+            background-repeat: no-repeat !important;
+            background-position: right calc(0.375em + 0.1875rem) center !important;
+            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem) !important;
+            box-sizing: border-box !important;
         }
-        .is-valid {
-            border: 1px solid #159b15cf;
-            padding-right: calc(1.5em + 0.75rem);
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='darkgreen' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 8l4 4 8-8'/%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right calc(0.375em + 0.1875rem) center;
-            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-            box-sizing: border-box;
+        .is-email-valid {
+            border: 1px solid #159b15cf !important;
+            padding-right: calc(1.5em + 0.75rem) !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='darkgreen' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 8l4 4 8-8'/%3e%3c/svg%3e") !important;
+            background-repeat: no-repeat !important;
+            background-position: right calc(0.375em + 0.1875rem) center !important;
+            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem) !important;
+            box-sizing: border-box !important;
         }
         .email-input-two-skeleton::before {
             content: "";
             position: absolute;
             left: -313px;
-            top: -7px;
+            top: -4px;
             width: 315px;
             height: 30px;
             border-radius: 3px;
@@ -911,9 +982,11 @@
                                                         </span>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <span class="skeleton lb_text">Email</span>
-                                                        <input type="email" id="email" class="user__email show-current-border" name="email" placeholder="&#xf0e0; Enter Email Address" value="" required="" autocomplete="off" autofocus />
-                                                        <span class="email-input-two-skeleton"></span>
+                                                        <div class="input-group">
+                                                            <input type="email" id="email" class="user__email show-current-border" name="email" placeholder=" " value="" required="" autocomplete="off" autofocus />
+                                                            <label for="email">Enter Email Address</label>
+                                                            <span class="email-input-two-skeleton"></span>
+                                                        </div>
                                                     </div>
                                                     <div class="mb-3 d-grid">
                                                         <button type="submit" class="btn btn-sm btn-primary forget_button register_btn reset-button-skeleton" id="reset_password">
@@ -1025,10 +1098,10 @@
                 const email_input = $(this).val();
     
                 if(email_input !== ''){
-                    $("#email").addClass('is-valid');
+                    $("#email").addClass('is-email-valid');
                     $("#email").removeClass('show-current-border');
                 }else if(email_input == ''){
-                    $("#email").removeClass('is-valid');
+                    $("#email").removeClass('is-email-valid');
                     $("#email").addClass('show-current-border');
                 }
             });

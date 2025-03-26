@@ -312,22 +312,22 @@ h6.head_auth {
     color: darkblue;
 }
 .is-invalid {
-    border: 1px solid #dc3545;
-    padding-right: calc(1.5em + 0.75rem);
+    border: 1px solid #dc3545 !important;
+    padding-right: calc(1.5em + 0.75rem) !important;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e") !important;
-    background-repeat: no-repeat;
-    background-position: right calc(0.375em + 0.1875rem) center;
-    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-    box-sizing: border-box;
+    background-repeat: no-repeat !important;
+    background-position: right calc(0.375em + 0.1875rem) center !important;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem) !important;
+    box-sizing: border-box !important;
 }
 .is-valid {
-    border: 1px solid #159b15cf;
-    padding-right: calc(1.5em + 0.75rem);
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='darkgreen' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 8l4 4 8-8'/%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right calc(0.375em + 0.1875rem) center;
-    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-    box-sizing: border-box;
+    border: 1px solid #159b15cf !important;
+    padding-right: calc(1.5em + 0.75rem) !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='darkgreen' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 8l4 4 8-8'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right calc(0.375em + 0.1875rem) center !important;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem) !important;
+    box-sizing: border-box !important;
 }
 .lb_text {
     font-weight: 500;
@@ -413,7 +413,6 @@ button.btn.btn-sm.btn.forget_button {
     color: var(--nav-button-color);
     font-family: var(--nav-font-family);
     border-color: var(--mdb-btn-border-color);
-    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
     font-size: 12px;
     line-height: .2;
     opacity: 1;
@@ -448,7 +447,6 @@ a.btn.btn-sm.btn.forget_button {
     color: var(--nav-button-color);
     font-family: var(--nav-font-family);
     border-color: var(--mdb-btn-border-color);
-    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
     font-size: 12px;
     line-height: 1.5;
     opacity: 1;
@@ -466,7 +464,6 @@ a.btn.btn-sm.btn.forget_button:hover{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     border-color: var(--mdb-btn-border-color);
-    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 a.btn_bg {
