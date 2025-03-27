@@ -259,7 +259,7 @@ export function rightSideBar(buttonSelector, modalSelector, loaderSelector, elem
     });
 }
 // input validation
-export function handleInputValidation(inputSelector, errorSelector, successClass, errorClass, currentBorderClass, successMessageSelector, fadeInDuration = 200, fadeOutDuration = 200) {
+export function handleInputValidation(inputSelector, selectSelector, selectErrorSelector, errorSelector, successClass, errorClass, currentBorderClass, successMessageSelector, fadeInDuration = 200, fadeOutDuration = 200) {
     // On page load, check if there's an error message and adjust the border styles accordingly
     var errorMessage = $(errorSelector).text().trim();
     $(errorSelector).attr("data-error", errorMessage);
@@ -290,6 +290,31 @@ export function handleInputValidation(inputSelector, errorSelector, successClass
             $(successMessageSelector).addClass('hidden').fadeOut(fadeOutDuration).delay(fadeOutDuration);
         }
     });
+
+    // Validate select dropdown on page load
+    var selectedOption = $(selectSelector).val();
+    if (!selectedOption) {
+        $(selectSelector).closest('.combo_box').find('.select2-container').addClass(errorClass);
+        $(selectErrorSelector).removeClass('display-none').text('Please select a valid option.');
+    } else {
+        $(selectSelector).closest('.combo_box').find('.select2-container').removeClass(errorClass).addClass(successClass);
+        $(selectErrorSelector).addClass('display-none').text('');
+    }
+
+    // Handle select changes dynamically
+    $(document).on('change', selectSelector, function () {
+        var selectedVal = $(this).val();
+        var $selectContainer = $(this).closest('.combo_box').find('.select2-container');
+        var $errorElement = $(selectErrorSelector);
+
+        if (selectedVal) {
+            $selectContainer.removeClass(errorClass).addClass(successClass);
+            $errorElement.empty().addClass('display-none');
+        } else {
+            $selectContainer.removeClass(successClass).addClass(errorClass);
+            $errorElement.removeClass('display-none').text('Please select a valid option.');
+        }
+    });
 }
 
 // General function to remove any skeleton class
@@ -302,6 +327,3 @@ export function removeSkeletonClass(skeletonClasses) {
         });
     });
 }
-
-
-

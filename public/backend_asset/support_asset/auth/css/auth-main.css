@@ -292,7 +292,7 @@ form#loginForm {
   left: 0;
   top: 0;
   width: 330px;
-  height: 27px;
+  height: 31px;
   margin-top: -3px;
   border-radius: 3px;
   z-index: 10;
@@ -316,10 +316,10 @@ form#loginForm {
 .input-email-skeleton::before{
   content: "";
   position: absolute;
-  left: 2px;
-  top: -2px;
+  left: 0px;
+  top: -4px;
   width: 100%;
-  height: 26px;
+  height: 31px;
   border-radius: 3px;
   z-index: 10;
   background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
@@ -329,10 +329,10 @@ form#loginForm {
 .input-password-skeleton::before{
   content: "";
   position: absolute;
-  left: 2px;
-  top: -2px;
+  left: 0px;
+  top: -4px;
   width: 100%;
-  height: 26px;
+  height: 31px;
   border-radius: 3px;
   z-index: 10;
   background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);

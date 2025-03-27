@@ -49,7 +49,7 @@
                 font-family: "Poppins", Sans-serif;
                 outline: none;
                 width: 100%;
-                padding: 2px 7px;
+                padding: 2px 8px;
                 border: 1px solid #ccc;
                 border-radius: 3px;
                 font-size: 11px;

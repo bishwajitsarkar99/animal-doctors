@@ -47,7 +47,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
             outline: none;
             width: 100%;
-            padding: 2px 8px !important;
+            padding: 2px 9px !important;
             border-radius: 3px;
             font-size: 11px;
             font-weight: 700;
@@ -432,34 +432,31 @@
         });
 
         $(document).ready(function(){
-            // submit button
-            // $(document).on('click', '.login_button', function(e){
-            //     e.preventDefault();
+            // Handel Select Role Dropdown
+            function selectRoleValidation(selectSelector, errorSelector) {
+                var $select = $(selectSelector);
+                var $errorElement = $(errorSelector);
+                var $selectContainer = $select.siblings('.select2-container');
 
-            //     $('.edit_select_user_id_error').empty();
-            //     var selectRole = $("#select_user").val();
+                function validate() {
+                    var selectedVal = $select.val();
+                    var errorVal = $errorElement.val();
 
-            //     if(selectRole.trim() == ''){
-            //         $("#select_user").next('.select2-container').addClass('is-select-invalid');
-            //         $("#select_user").closest('.combo_box').append(`<span class="edit_select_user_id_error error_val ps-1"> 
-            //         <span class="ps-2"><svg width="20px" hieght="20px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg></span>
-            //         User role is required.
-            //         </span>`);
-            //     }
-
-            // });
-            // Select Category Id Field
-            $(document).on('change', '#select_user', function(){
-                var $selectContainer = $(this).closest('.combo_box').find('.select2-container');
-                var $errorElement = $('.edit_select_user_id_error');
-                
-                if ($selectContainer.hasClass('is-select-invalid')) {
-                    $selectContainer.removeClass('is-select-invalid').addClass('is-select-valid');
-                    $errorElement.empty().addClass('display-none');
-                } else {
-                    $selectContainer.removeClass('is-select-valid is-select-invalid');
+                    if (selectedVal !=='') {
+                        $selectContainer.removeClass('is-select-invalid').addClass('is-select-valid');
+                        $errorElement.addClass('display-none');
+                    }else if(selectedVal ==''){
+                        $selectContainer.removeClass('is-select-valid').removeClass('is-select-invalid');
+                        $errorElement.removeClass('display-none');
+                    }
                 }
-            });
+
+                validate(); // Initial validation
+                $select.on('change', validate); // Validate on change
+            }
+
+            // Call validation for the select field
+            selectRoleValidation('#select_user', '.show-error3');
         });
 
     </script>

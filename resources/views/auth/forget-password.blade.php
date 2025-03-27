@@ -47,12 +47,12 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
             outline: none !important;
             width: 100% !important;
-            padding: 2px 8px !important;
+            padding: 2px 9px !important;
             border-radius: 3px !important;
             font-size: 11px !important;
             font-weight: 700 !important;
             color: #333 !important;
-            background: white !important;
+            background-color: white !important;
             letter-spacing: 0.5px !important;
             word-spacing: 0.5px !important;
             animation: inputColor 2s infinite !important;
