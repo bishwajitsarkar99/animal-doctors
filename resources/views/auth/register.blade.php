@@ -93,7 +93,7 @@
                 font-size: 9px;
                 font-weight:800;
                 color: #333;
-                background-color: rgb(228 243 255 / 67%);
+                background-color: rgb(255 255 255 / 82%);
                 padding: 0 3px;
                 word-spacing: 2px;
             }

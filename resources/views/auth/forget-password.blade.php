@@ -89,7 +89,7 @@
             font-size: 9px !important;
             font-weight: 800 !important;
             color: #333 !important;
-            background-color: rgb(228 243 255 / 67%) !important;
+            background-color: rgb(255 255 255) !important;
             padding: 0 3px !important;
             word-spacing: 2px !important;
         }

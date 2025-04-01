@@ -39,6 +39,9 @@
             font-family: var(--font-register);
             background-color:#000 !important;
         }
+        .display-none{
+            display:none;
+        }
         .input-group {
             position: relative;
             width: 100%;
@@ -89,7 +92,7 @@
             font-size: 9px;
             font-weight:800;
             color: #333;
-            background-color: rgb(228 243 255 / 67%);
+            background-color: rgb(255 255 255 / 55%);
             padding: 0 3px;
             word-spacing: 2px;
         }
@@ -446,7 +449,7 @@
                         $selectContainer.removeClass('is-select-invalid').addClass('is-select-valid');
                         $errorElement.addClass('display-none');
                     }else if(selectedVal ==''){
-                        $selectContainer.removeClass('is-select-valid').removeClass('is-select-invalid');
+                        $selectContainer.removeClass('is-select-valid').addClass('is-select-invalid');
                         $errorElement.removeClass('display-none');
                     }
                 }
