@@ -261,49 +261,76 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col-xl-6 type_nme">
-                                <input class="form-control form-control-sm edit_type" type="text" name="type" id="type" placeholder="Category Type... Supplier or Vendor etc.">
-                                <input type="hidden" id="supp_id">
-                                <span id="savForm_error3" hidden></span><span id="updateForm_errorList3" hidden></span>
+                                <div class="input-group">
+                                    <input class="form-control form-control-sm edit_type" type="text" name="type" id="type" placeholder="">
+                                    <label for="supplier_type">Supplier or Vendor</label>
+                                    <input type="hidden" id="supp_id">
+                                    <span id="savForm_error3" hidden></span><span id="updateForm_errorList3" hidden></span>
+                                </div>
                             </div>
                             <div class="col-xl-6 branch_type_nme">
-                                <input class="form-control form-control-sm edit_bussiness_type" type="text" name="bussiness_type" id="bussiness_type" placeholder="Bussiness Type">
-                                <span id="savForm_error4" hidden></span><span id="updateForm_errorList4" hidden></span>
+                                <div class="input-group">
+                                    <input class="form-control form-control-sm edit_bussiness_type" type="text" name="bussiness_type" id="bussiness_type" placeholder="">
+                                    <label for="bussiness_type">Bussiness Type</label>
+                                    <span id="savForm_error4" hidden></span><span id="updateForm_errorList4" hidden></span>
+                                </div>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col-xl-6 sup_nme">
-                                <input class="form-control form-control-sm edit_name" type="text" name="name" id="name" placeholder="Supplier or Vendor Name">
-                                <span id="savForm_error5" hidden></span><span id="updateForm_errorList5" hidden></span>
+                                <div class="input-group">
+                                    <input class="form-control form-control-sm edit_name" type="text" name="name" id="name" placeholder="">
+                                    <label for="name">Supplier or Vendor Name</label>
+                                    <span id="savForm_error5" hidden></span><span id="updateForm_errorList5" hidden></span>
+                                </div>
                             </div>
                             <div class="col-xl-6 contract_nme">
-                                <input class="form-control form-control-sm edit_contact_number_one" type="text" name="contact_number_one" id="contact_number_one" placeholder="Contact Number One">
-                                <span id="savForm_error6" hidden></span><span id="updateForm_errorList6" hidden></span>
+                                <div class="input-group">
+                                    <input class="form-control form-control-sm edit_contact_number_one" type="text" name="contact_number_one" id="contact_number_one" placeholder="">
+                                    <label for="contractNumberOne">Contact Number One</label>
+                                    <span id="savForm_error6" hidden></span><span id="updateForm_errorList6" hidden></span>
+                                </div>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col-xl-6 contract_two_nme">
-                                <input class="form-control form-control-sm edit_contact_number_two" type="text" name="contact_number_two" id="contact_number_two" placeholder="Contact Number Two">
-                                <span id="savForm_error7" hidden></span><span id="updateForm_errorList7" hidden></span>
+                                <div class="input-group">
+                                    <input class="form-control form-control-sm edit_contact_number_two" type="text" name="contact_number_two" id="contact_number_two" placeholder="">
+                                    <label for="contractNumberTwo">Contact Number Two</label>
+                                    <span id="savForm_error7" hidden></span><span id="updateForm_errorList7" hidden></span>
+                                </div>
                             </div>
                             <div class="col-xl-6">
-                                <input class="form-control form-control-sm edit_whatsapp_number" type="text" name="whatsapp_number" id="whatsapp_number" placeholder="WhatsApp Number">
+                                <div class="input-group">
+                                    <input class="form-control form-control-sm edit_whatsapp_number" type="text" name="whatsapp_number" id="whatsapp_number" placeholder="">
+                                    <label for="whatsappNumber">WhatsApp Number</label>
+                                </div>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col-xl-12">
-                                <input class="form-control form-control-sm edit_email" type="text" name="email" id="email" placeholder="Email">
+                                <div class="input-group">
+                                    <input class="form-control form-control-sm edit_email" type="text" name="email" id="email" placeholder="">
+                                    <label for="email">Email</label>
+                                </div>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col-xl-12 office_address_nme">
-                                <textarea type="text" class="form-control form-control-sm edit_office_address" name="office_address" id="office_address" cols="30" rows="3" placeholder="Office Address"></textarea>
-                                <span id="savForm_error7" hidden></span><span id="updateForm_errorList7" hidden></span>
+                                <div class="input-group">
+                                    <textarea type="text" class="form-control form-control-sm edit_office_address" name="office_address" id="office_address" cols="30" rows="3" placeholder=""></textarea>
+                                    <label for="officeAddress">Office Address</label>
+                                    <span id="savForm_error7" hidden></span><span id="updateForm_errorList7" hidden></span>
+                                </div>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col-xl-12 current_address_nme">
-                                <textarea type="text" class="form-control form-control-sm edit_current_address font_color" name="current_address" id="current_address" cols="30" rows="3" placeholder="Current Address"></textarea>
-                                <span id="savForm_error8" hidden></span><span id="updateForm_errorList8" hidden></span>
+                                <div class="input-group">
+                                    <textarea type="text" class="form-control form-control-sm edit_current_address font_color" name="current_address" id="current_address" cols="30" rows="3" placeholder=""></textarea>
+                                    <label for="crrentAddress">Current Address</label>
+                                    <span id="savForm_error8" hidden></span><span id="updateForm_errorList8" hidden></span>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -8,6 +8,102 @@
     --drop-border-bg-color:royalblue;
     --font-family-sans-serif:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-family: var(--font-family-sans-serif);
+}
+.display-none{
+    display:none;
+}
+.input-group {
+    position: relative;
+    width: 100%;
+}
+.input-group input#type, input#bussiness_type, input#name, input#contact_number_one, input#contact_number_two
+, input#whatsapp_number, input#email, textarea#office_address, textarea#current_address {
+    font-family: var(--font-family-sans-serif) !important;
+    outline: none !important;
+    width: 100% !important;
+    /* padding: 2px 9px !important; */
+    border-radius: 3px !important;
+    /* font-size: 11px !important; */
+    font-weight: 700 !important;
+    color: #333 !important;
+    background-color: white !important;
+    letter-spacing: 0.5px !important;
+    word-spacing: 0.5px !important;
+    animation: inputColor 2s infinite !important;
+    margin-left:0 !important;
+}
+@keyframes inputColor {
+    0% {
+        color: gray;
+    }
+
+    100% {
+        color: #333;
+    }
+}
+.input-group label {
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    padding: 0;
+    pointer-events: none;
+    transition: 0.3s ease-out;
+    color: rgb(131 131 131);
+    background-color: transparent;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--font-family-sans-serif);
+}
+.input-group input#type:focus ~ label, 
+.input-group input#bussiness_type:focus ~ label, 
+.input-group input#name:focus ~ label,.input-group input#contact_number_one:focus ~ label,
+.input-group input#contact_number_two:focus ~ label,.input-group input#whatsapp_number:focus ~ label,
+.input-group input#email:focus ~ label,.input-group textarea#office_address:focus ~ label,
+.input-group textarea#current_address:focus ~ label,
+.input-group input#type:not(:placeholder-shown) ~ label, 
+.input-group input#bussiness_type:not(:placeholder-shown) ~ label, 
+.input-group input#name:not(:placeholder-shown) ~ label,.input-group input#contact_number_one:not(:placeholder-shown) ~ label
+,.input-group input#contact_number_two:not(:placeholder-shown) ~ label,.input-group input#whatsapp_number:not(:placeholder-shown) ~ label
+,.input-group input#email:not(:placeholder-shown) ~ label,.input-group textarea#office_address:not(:placeholder-shown) ~ label
+,.input-group textarea#current_address:not(:placeholder-shown) ~ label { /* Fixed */
+    top: 0;
+    left: 8px;
+    font-size: 9px;
+    font-weight: 800;
+    color: #333;
+    background-color: rgb(255 255 255 / 85%);
+    padding: 0 3px;
+    word-spacing: 2px;
+}
+.input-group input#type, input#bussiness_type, input#name, input#contact_number_one, input#contact_number_two
+, input#whatsapp_number, input#email, textarea#office_address, textarea#current_address{
+    border-top-right-radius: 3px !important;
+    border-bottom-right-radius: 3px !important;
+}
+.edit_select_user_id_error{
+    font-size:10px;
+    font-weight:700;
+    font-family: var(--font-family-sans-serif);
+    color: #333;
+}
+.edit_input_user_id_error{
+    font-size:10px;
+    font-weight:700;
+    font-family: var(--font-family-sans-serif);
+    color: #333;
+}
 .mini-right-group {
     margin: 10px 10px;
 }
@@ -357,12 +453,12 @@ input#type {
     letter-spacing: 1px;
 }
 input#type:focus{
-    border-color: #2f86e4;
-    outline: 1px solid #2f86e4;
+    border-color: #2f86e4 !important;
+    outline: 1px solid #2f86e4 !important;
     color: #0056b3;
-    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
-    letter-spacing: 1px;
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out !important;
+    /* box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); */
+    letter-spacing: 1px !important;
 }
 input#bussiness_type {
     background-color: white;
@@ -384,12 +480,12 @@ input#bussiness_type {
     letter-spacing: 1px;
 }
 input#bussiness_type:focus{
-    border-color: #2f86e4;
-    outline: 1px solid #2f86e4;
-    color: #0056b3;
-    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
-    letter-spacing: 1px;
+    border-color: #2f86e4 !important;
+    outline: 1px solid #2f86e4 !important;
+    color: #0056b3 !important;
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out !important;
+    /* box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); */
+    letter-spacing: 1px !important;
 }
 input#name {
     background-color: white;
@@ -411,12 +507,12 @@ input#name {
     letter-spacing: 1px;
 }
 input#name:focus{
-    border-color: #2f86e4;
-    outline: 1px solid #2f86e4;
-    color: #0056b3;
-    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
-    letter-spacing: 1px;
+    border-color: #2f86e4 !important;
+    outline: 1px solid #2f86e4 !important;
+    color: #0056b3 !important;
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out !important;
+    /* box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); */
+    letter-spacing: 1px !important;
 }
 textarea#office_address {
     background-color: white;
@@ -438,12 +534,12 @@ textarea#office_address {
     letter-spacing: 1px;
 }
 textarea#office_address:focus{
-    border-color: #2f86e4;
-    outline: 1px solid #2f86e4;
-    color: #0056b3;
-    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
-    letter-spacing: 1px;
+    border-color: #2f86e4 !important;
+    outline: 1px solid #2f86e4 !important;
+    color: #0056b3 !important;
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out !important;
+    /* box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); */
+    letter-spacing: 1px !important;
 }
 textarea#current_address {
     background-color: white;
@@ -465,12 +561,12 @@ textarea#current_address {
     letter-spacing: 1px;
 }
 textarea#current_address:focus{
-    border-color: #2f86e4;
-    outline: 1px solid #2f86e4;
-    color: #0056b3;
-    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
-    letter-spacing: 1px;
+    border-color: #2f86e4 !important;
+    outline: 1px solid #2f86e4 !important;
+    color: #0056b3 !important;
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out !important;
+    /* box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); */
+    letter-spacing: 1px !important;
 }
 input#contact_number_one {
     background-color: white;
@@ -492,12 +588,12 @@ input#contact_number_one {
     letter-spacing: 1px;
 }
 input#contact_number_one:focus{
-    border-color: #2f86e4;
-    outline: 1px solid #2f86e4;
-    color: #0056b3;
-    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
-    letter-spacing: 1px;
+    border-color: #2f86e4 !important;
+    outline: 1px solid #2f86e4 !important;
+    color: #0056b3 !important;
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out !important;
+    /* box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); */
+    letter-spacing: 1px !important;
 }
 input#contact_number_two {
     background-color: white;
@@ -519,12 +615,12 @@ input#contact_number_two {
     letter-spacing: 1px;
 }
 input#contact_number_two:focus{
-    border-color: #2f86e4;
-    outline: 1px solid #2f86e4;
-    color: #0056b3;
-    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
-    letter-spacing: 1px;
+    border-color: #2f86e4 !important;
+    outline: 1px solid #2f86e4 !important;
+    color: #0056b3 !important;
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out !important;
+    /* box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); */
+    letter-spacing: 1px !important;
 }
 input#whatsapp_number {
     background-color: white;
@@ -546,12 +642,12 @@ input#whatsapp_number {
     letter-spacing: 1px;
 }
 input#whatsapp_number:focus{
-    border-color: #2f86e4;
-    outline: 1px solid #2f86e4;
-    color: #0056b3;
-    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
-    letter-spacing: 1px;
+    border-color: #2f86e4 !important;
+    outline: 1px solid #2f86e4 !important;
+    color: #0056b3 !important;
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out !important;
+    /* box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); */
+    letter-spacing: 1px !important;
 }
 input#email {
     background-color: white;
@@ -573,12 +669,12 @@ input#email {
     letter-spacing: 1px;
 }
 input#email:focus{
-    border-color: #2f86e4;
-    outline: 1px solid #2f86e4;
-    color: #0056b3;
-    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
-    letter-spacing: 1px;
+    border-color: #2f86e4 !important;
+    outline: 1px solid #2f86e4 !important;
+    color: #0056b3 !important;
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out !important;
+    /* box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); */
+    letter-spacing: 1px !important;
 }
 .is-valid{
     border-color: #198754;
@@ -953,4 +1049,9 @@ label.label_user_edit {
     font-weight: 800;
     letter-spacing: 0.6px;
     font-family: sans-serif;
+}
+@media (min-width: 1200px) {
+    .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 1400px;
+    }
 }
