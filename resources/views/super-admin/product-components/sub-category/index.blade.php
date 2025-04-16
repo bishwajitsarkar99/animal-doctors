@@ -7,17 +7,19 @@
     <div class="row">
       <div class="col-xl-7">
         <div class="card-body focus-color cd cat_form">
-          <p class="catg mb-2">
-            <span class="">{{__('translate.Product Group')}}</span>
-            <span class="tot_summ" id="num_plate">
-              <label class="tot-search mt-3 pt-2" for="tot_cagt"> ➤ {{__('translate.Total Group')}} :</label>
-              <label class="badge pill-rounded skeleton-table-head-capsule" for="total_medic_records" id="iteam_label4">
-                <span class="total_users" style="font-weight:700;color:black;" id="total_group_records"></span>
-                <span class="item_amount" id="iteam_label5" style="font-weight:700;color:black;">.00 {{__('translate.items')}}</span>
-              </label>
-            </span>
-            <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden"></i>
-          </p>
+          <div class="row">
+            <div class="col-xl-12">
+              <p class="catg mb-2">
+                <span class="">{{__('translate.Sub-Category')}}</span>
+                <span class="tot_summ" id="num_plate">
+                  <label class="tot-search mt-3 pt-2" for="tot_cagt"> ➤ {{__('translate.Total Sub-Category')}} :</label>
+                  <label class="badge pill-rounded skeleton-table-head-capsule" for="total_medic_records" style="font-weight: 700;color:black;" id="iteam_label4"><span class="total_users" style="font-weight: 700;color:black;" id="total_subcategory_records"></span><span class="skeleton" id="iteam_label5" style="font-weight: 700;color:black;">.00 {{__('translate.items')}}</span></label>
+                </span>
+                <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="margin-top:14px;"></i>
+              </p>
+            </div>
+          </div>
+          
           <div class="row">
             <div class="col-3">
               <span class="form-check form-switch search_ me-2">
@@ -28,41 +30,47 @@
             </div>
             <div class="col-9">
               <span id="search_plate">
-                <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform display_hidden ps-1" placeholder="{{__('translate.All Search.........')}}">
+                <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform display_hidden ps-1" placeholder="{{__('translate.Search Sub-Category.........')}}">
               </span>
             </div>
           </div>
-          <div class="table-responsive">
-            <table class="table-light center border-1 mt-1">
+          <div class="table-responsive mt-1">
+            <table class="table-light center border-1">
               <thead class="table-fixed table-light">
                 <tr class="table-row order_body acc_setting_table">
-                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color txt col" style="cursor: pointer;">
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color txt col" style="cursor: pointer;"> 
                     {{__('translate.ID')}}
                     <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
-                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col" style="cursor: pointer;">
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col" style="cursor: pointer;">
                     {{__('translate.Action')}}
                     <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
-                  <th id="th_sort" data-coloumn="group_name" data-order="desc" class="tableHead table_th_color tot_pending_ col" style="text-align: left;cursor: pointer;"> 
-                    {{__('translate.Group-Name')}}
+                  <th id="th_sort" data-coloumn="category_id" data-order="desc" class="table_th_color txt" style="cursor: pointer;">
+                    {{__('translate.Category')}}
                     <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
-                  <th id="th_sort" data-coloumn="status" data-order="desc" class="tableHead table_th_color tot_pending_" style="cursor: pointer;">
+                  <th id="th_sort" data-coloumn="sub_category_name" data-order="desc" class="table_th_color tot_pending_ col" style="text-align: left;cursor: pointer;">
+                    {{__('translate.sub-Category-Name')}}
+                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                  </th>
+                  <th id="th_sort" data-coloumn="status" data-order="desc" class="table_th_color tot_pending_" style="cursor: pointer;">
                     {{__('translate.Status')}}
                     <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
-                  <th id="th_sort" data-coloumn="id" data-order="desc" class="tableHead table_th_color tot_pending_ col" style="cursor: pointer;">
+                  <th id="th_sort" data-coloumn="id" data-order="desc" class="table_th_color tot_pending_ col check_border" style="cursor: pointer;"> 
                     {{__('translate.Check')}}
                     <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
                 </tr>
               </thead>
-              <tbody class="table-light bg-white skeleton" id="group_data_table"></tbody>
+              <tbody class="table-light bg-white skeleton" id="subcategory_data_table">
+
+              </tbody>
             </table>
           </div>
           <div class="row table-light">
-            <div class=" col-xl-2">
+            <div class=" col-2">
               <label class="item_class skeleton">Peritem</label>
               <div class="custom-select skeleton">
                 <select class="ps-1" id="perItemControl">
@@ -74,8 +82,10 @@
                 </select>
               </div>
             </div>
-            <div class="col-xl-10">
-              <div class="pagination pagination-skeleton" id="group_data_table_paginate"></div>
+            <div class="col-10">
+              <div class="pagination pagination-skeleton mt-1" id="subcategory_data_table_paginate">
+
+              </div>
             </div>
           </div>
           <div class="row">
@@ -98,8 +108,11 @@
                 @csrf
                 <div class="row mt-3">
                   <div class="col-12">
-                    <span class=""><input class="form-control form-control-sm edit_group_name" type="text" name="group_name" id="group_name" placeholder="{{__('translate.Group Name')}}" autofocus></span>
-                    <input type="hidden" id="group_id">
+                    <div class="input-group">
+                      <input class="form-control form-control-sm edit_sub_category_name" type="text" name="sub_category_name" id="sub_category_name" placeholder="" autofocus>
+                      <label for="sub-cagtegory">{{__('translate.Sub Category')}}</label>
+                      <input type="hidden" id="sub_category_id">
+                    </div>
                   </div>
                 </div>
                 <!-- show-error -->
@@ -108,23 +121,33 @@
                     <span id="savForm_error"></span><span id="updateForm_errorList"></span>
                   </div>
                 </div>
-                <div class="row mt-3 mb-2">
-                  <div class="col-5">
-                    <div class="btn-box group_btn_box mt-2">
-                      <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width" id="save">
+                <div class="row mt-3">
+                  <div class="col-12 role_nme cat_nme mt-2">
+                    <select type="number" class="form-control form-control-sm select2 edit_category_id" name="category_id" id="category_id">
+                      <option value="">Select Category</option>
+                      @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->category_name}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+                <div class="row mt-5">
+                  <div class="col-5 mt-3">
+                    <div class="btn_box group_btn_box">
+                      <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width me-2" id="save">
                         <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="category-btn-text">ADD</span>
                       </button>
-                      <button id="update_btn" class="btn btn-sm cgt_btn btn_focus button_width" hidden>
+                      <button id="update_btn" class="btn btn-sm cgt_btn btn_focus button_width me-2" hidden>
                         <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="update-btn-text">Update</span>
                       </button>
                     </div>
                   </div>
                   <div class="col-3"></div>
-                  <div class="col-4">
-                    <div class="mt-2">
-                      <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus button_width">
+                  <div class="col-4 mt-2">
+                    <div class="pt-1">
+                      <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus button_width mt-2">
                         <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                         <span class="cancel-btn-text">Cancel</span>
                       </button>
@@ -143,26 +166,27 @@
   </div>
 </div>
 @include('loader.action-loader')
-{{-- Start Delete Product Group Modal--}}
+
+{{-- Start Delete SubCategory Modal--}}
 <!-- Modal -->
-<div class="modal fade" id="deletegroup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="deletesubcategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" id="admin_modal_box">
       <div class="modal-header profile_modal_header profilesetting_modal_header">
         <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss" id="staticBackdropLabel">
-          {{__('translate.Delete Product Group')}}
+          {{__('translate.Delete Sub Category')}}
         </h5>
-        <button type="button" class="btn-close btn-btn-sm clos_title" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+        <button type="button" class="btn-close btn-btn-sm cols_btn" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
       </div>
 
-      <div class="modal-body pb-1" id="group_delete_modal" >
+      <div class="modal-body pb-1">
         <div class="row profile-heading pb-3">
-          <div class="col-xl-122">
-            <div class="form-group delete_content">
-              <label class="label_user_edit" for="id" id="delete_group">{{__('translate.Group-ID')}} : </label>
-              <span id="delete_group2"><input type="text" class="mt-3 update_id id" id="delete_group_id" readonly></span><br>
-              <span class="label_user_edit" id="delete_group3">{{__('translate.Are you sure, Would you like to delete this group, permanently?')}}</span>
-              <input type="hidden" id="delete_group_id" name="group_id">
+          <div class="col-xl-12">
+            <div class="form-group delete_content" id="delt_content">
+              <label class="label_user_edit" id="sub_id" for="id">{{__('translate.Sub Category-ID')}} : </label>
+              <span id="sub_id2"><input type="text" class="mt-3 update_id id" id="delete_sub_category_id" readonly></span><br>
+              <span class="label_user_edit" id="sub_id3">{{__('translate.Are you sure, Would you like to delete this sub category, permanently?')}}</span>
+              <input type="hidden" id="delete_sub_category_id" name="sub_category_id">
               <span class="modal_icon_position mt-3" id="center_box">
                 <span>
                   <svg width="40px" height="40px" fill="#198754" id="Layer_1" data-name="Layer 1" viewBox="0 0 76.2 122.88"><defs><style>.cls-1{fill:#00a912;}.cls-1,.cls-2{fill-rule:evenodd;}.cls-2{fill:#fff;}</style></defs><title>yes-checkmark</title><path class="" d="M38.1,0A38.1,38.1,0,1,1,0,38.1,38.1,38.1,0,0,1,38.1,0Z"/><path class="cls-2" d="M26.28,32.05,33,38.42,49,22.25c1.32-1.35,2.15-2.42,3.78-.74l5.29,5.42c1.74,1.72,1.65,2.72,0,4.32l-22,21.67c-3.45,3.39-2.85,3.59-6.36.12L17.37,40.78a1.52,1.52,0,0,1,.15-2.37L23.66,32c.93-1,1.67-.9,2.62,0Z"/><path d="M9.59,122.63v-8.86l-9-22.32H9l4.83,14,4.82-14h8.1l-9,22.32v8.86Zm27.17.25a16.59,16.59,0,0,1-2.41-.21,8.4,8.4,0,0,1-2.73-.92,5.69,5.69,0,0,1-2.2-2.21,8,8,0,0,1-.89-4.09V99.17a8.71,8.71,0,0,1,.72-3.77A6.31,6.31,0,0,1,31.09,93a7.17,7.17,0,0,1,2.52-1.21,10.66,10.66,0,0,1,2.69-.36q3.53,0,6.06.11c1.69.07,3.16.14,4.41.23s2.34.18,3.29.29V99H38.81a2.45,2.45,0,0,0-1.59.46,1.73,1.73,0,0,0-.55,1.39v2.6l11.29.42v6.46l-11.29.42v2.35a2.8,2.8,0,0,0,.24,1.24,1.5,1.5,0,0,0,.65.71,1.8,1.8,0,0,0,.92.23H50.06v6.88q-1.8.25-4.11.42c-1.54.12-3.11.2-4.7.26s-3.09.08-4.49.08Zm27.42,0c-.92,0-1.83,0-2.71-.08s-1.75-.14-2.6-.26-1.67-.23-2.45-.37-1.54-.31-2.27-.51V115.2c1,.08,2,.15,3.08.21s2.23.1,3.36.13,2.19,0,3.17,0a10.71,10.71,0,0,0,2.31-.21,2.79,2.79,0,0,0,1.38-.67,1.7,1.7,0,0,0,.46-1.26v-.5a1.58,1.58,0,0,0-.65-1.39,2.54,2.54,0,0,0-1.53-.46H63.51c-3.25,0-5.71-.72-7.39-2.14s-2.51-3.82-2.51-7.18v-1.38q0-4.62,2.76-6.9t8-2.29a33.45,33.45,0,0,1,3.71.19c1.16.12,2.25.28,3.27.46s1.94.37,2.75.57v6.46c-1.29-.11-2.73-.2-4.34-.27s-3.07-.11-4.39-.11a11.86,11.86,0,0,0-2.09.17,2.56,2.56,0,0,0-1.43.67,2,2,0,0,0-.51,1.47v.42a1.92,1.92,0,0,0,.68,1.59,3.16,3.16,0,0,0,2,.55h2.77a9.77,9.77,0,0,1,4.89,1.11,7.3,7.3,0,0,1,2.94,3,9.4,9.4,0,0,1,1,4.34v1.39a11.08,11.08,0,0,1-1.38,6.08,6.74,6.74,0,0,1-4,2.83,22.28,22.28,0,0,1-6.12.74Z"/></svg>
@@ -176,7 +200,7 @@
           </div>
         </div>
       </div>
-      <div class="modal-footer btn_box profile_modal_footer" style="line-height: 1;">
+      <div class="modal-footer profile_modal_footer btn_box" style="line-height: 1;">
         <p id="btn_group2">
           <p id="btn_group2">
             <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
@@ -192,11 +216,11 @@
     </div>
   </div>
 </div>
-{{-- End Delete Product Group Modal---}}
+{{-- End Delete SubCategory Modal---}}
 
-{{-- Start Confirm Delete Product Group Modal--}}
+{{-- Start Confirm Delete Category Modal--}}
 <!-- Modal -->
-<div class="modal fade" id="deleteconfirmgroup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="deleteconfirmsubcategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm modal-dialog-centered">
     <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
       <div class="modal-header" id="logoutModal_header">
@@ -209,7 +233,7 @@
         </div>
         <div class="modal-body" id="logoutModal_body">
           <p class="admin_paragraph" style="text-align:center;" id="text_message">
-            <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, to delete about the group ? </label>
+            <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, to delete about the sub category ? </label>
           </p>
           <span class="modal_icon_position">
             <span class="init_skeln">
@@ -228,25 +252,25 @@
     </div>
   </div>
 </div>
-{{-- End Confirm Delete Product Group Modal--}}
+{{-- End Confirm Delete Category Modal--}}
 
-{{-- Start Confirm Update Product Group Modal--}}
+{{-- Start Update Category Modal--}}
 <!-- Modal -->
-<div class="modal fade" id="updateconfirmsubgroup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="updateconfirmsubcategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm modal-dialog-centered">
     <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
       <div class="modal-header" id="logoutModal_header">
         <h6 class="modal-title admin_title scan update_title pt-1 me-1" id="staticBackdropLabel">
-          Update Product Group
+          Update Sub-Category
         </h6>
         <button type="button" class="btn-close btn-btn-sm head_btn3" data-bs-dismiss="modal" aria-label="Close" 
           data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
         </button>
         </div>
         <div class="modal-body" id="logoutModal_body">
-          <span id="groups_id"></span><br>
-          <span id="groups_name"></span><br>
-          <p class="admin_paragraph mt-2" id="text_message">
+          <span id="sub_categries_id"></span><br>
+          <span id="sub_categries_name"></span><br>
+          <p class="admin_paragraph" id="text_message">
             <label class="label_user_edit" id="cate_confirm_update" for="id">Would you like to update ? </label>
           </p>
           <span class="modal_icon">
@@ -260,8 +284,8 @@
           </span>
         </div>
         <div class="modal-footer btn_box" id="logoutModal_footer">
-          <button type="button" class="btn btn-sm cgt_btn btn_focus delete_cancel" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
-          <button id="update_btn_confirm" class="btn btn-sm cgt_btn btn_focus update_confirm">
+          <button type="button" class="btn btn-sm cgt_btn delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+          <button id="update_btn_confirm" class="btn btn-sm cgt_btn update_confirm btn_focus btn btn-sm cgt_btn">
             <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
             <span class="confirm-btn-text">Confirm</span>
           </button>
@@ -270,18 +294,40 @@
     </div>
   </div>
 </div>
-{{-- End Confirm Update Product Group Modal--}}
+{{-- End Update Category Modal--}}
 
 @endsection
 @section('css')
+<link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
+<link href="{{ asset('backend_asset') }}/main_asset/jquery-ui-css/jquery-ui.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
-<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/medicine-group/group.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/sub-category/sub-category.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 @endsection
 @section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
 <script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
-@include('super-admin.medicine-item.medicine-group.data-handel-ajax.data-handel-ajax')
+@include('super-admin.product-components.sub-category.data-handel-ajax.data-handel-ajax')
+<script>
+  $(document).ready(function () {
+    // Initialize Select2
+    $('.select2').select2({
+      placeholder: 'Select Category',
+      allowClear: true,
+      width: '100%' // Ensures full width from the start
+    });
+
+    // Set custom placeholder for the search input inside Select2 dropdowns
+    $(document).on('select2:open', '#category_id', function () {
+      setTimeout(() => {
+        $('.select2-search__field').attr('placeholder', 'Search category...');
+      }, 50); // Small delay ensures the field is available
+    });
+  });
+</script>
 <script>
   // skeleton
   function fetchData() {
@@ -312,6 +358,6 @@
       focuCardHeadCapsule();
       focuCardTablePagination();
     });
-  }, 3000);
+  }, 1000);
 </script>
 @endsection

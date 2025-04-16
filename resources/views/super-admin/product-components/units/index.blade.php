@@ -97,8 +97,11 @@
                 @csrf
                 <div class="row mt-3">
                   <div class="col-12">
-                    <input class="form-control form-control-sm edit_units_name" type="text" name="units_name" id="units_name" placeholder="{{__('translate.Unit Name')}}" autofocus>
-                    <input type="hidden" id="units_id">
+                    <div class="input-group">
+                      <input class="form-control form-control-sm edit_units_name" type="text" name="units_name" id="units_name" placeholder="" autofocus>
+                      <label for="units-name">{{__('translate.Unit Name')}}</label>
+                      <input type="hidden" id="units_id">
+                    </div>
                   </div>
                 </div>
                 <!-- show-error -->
@@ -281,7 +284,7 @@
 @section('script')
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
 <script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
-@include('super-admin.medicine-item.units.data-handel-ajax.data-ajax')
+@include('super-admin.product-components.units.data-handel-ajax.data-ajax')
 
 <script>
   // skeleton

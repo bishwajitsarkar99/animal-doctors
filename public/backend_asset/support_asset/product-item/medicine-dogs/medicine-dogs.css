@@ -3,6 +3,78 @@
     --table-head-background:linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
     --medicine-dosage-font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-family: var(--medicine-dosage-font-family);
+}
+.display-none{
+    display:none;
+}
+.input-group {
+    position: relative;
+    width: 100%;
+}
+.input-group input#medicine_dogs{
+    font-family: var(--medicine-dosage-font-family) !important;
+    outline: none !important;
+    width: 100% !important;
+    /* padding: 2px 9px !important; */
+    border-radius: 3px !important;
+    /* font-size: 11px !important; */
+    font-weight: 700 !important;
+    color: #333 !important;
+    background-color: white !important;
+    letter-spacing: 0.5px !important;
+    word-spacing: 0.5px !important;
+    animation: inputColor 2s infinite !important;
+    margin-left:0 !important;
+}
+@keyframes inputColor {
+    0% {
+        color: gray;
+    }
+
+    100% {
+        color: #333;
+    }
+}
+.input-group label {
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    padding: 0;
+    pointer-events: none;
+    transition: 0.3s ease-out;
+    color: rgb(131 131 131);
+    background-color: transparent;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--medicine-dosage-font-family);
+}
+.input-group input#medicine_dogs:focus ~ label,.input-group input#medicine_dogs:not(:placeholder-shown) ~ label
+{
+    top: 0;
+    left: 8px;
+    font-size: 9px;
+    font-weight: 800;
+    color: #333;
+    background-color: rgb(255 255 255 / 85%);
+    padding: 0 3px;
+    word-spacing: 2px;
+}
+.input-group input#medicine_dogs{
+    border-top-right-radius: 3px !important;
+    border-bottom-right-radius: 3px !important;
+}
 span#num_plate {
     margin-top: 10px;
 }
@@ -240,10 +312,9 @@ input#medicine_dogs {
 }
 input#medicine_dogs:focus{
     border-color: #0056b3;
-    outline: 1px solid #0056b3;
-    color: #0056b3;
-    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+    outline: 1px solid #0056b3 !important;
+    color: #0056b3 !important;
+    transition: border 0.3s ease-in-out;
 }
 .is-valid{
     border-color: #198754;

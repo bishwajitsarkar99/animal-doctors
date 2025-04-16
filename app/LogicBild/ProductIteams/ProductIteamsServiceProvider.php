@@ -30,7 +30,7 @@ class ProductIteamsServiceProvider
         });
         $origins = MedicineOrigin::all();
         $page_name = 'Product Brand';
-        return view('super-admin.medicine-item.brand.index', compact('company_profiles','origins', 'page_name'));
+        return view('super-admin.product-components.brand.index', compact('company_profiles','origins', 'page_name'));
     }
     /**
      * Handle Brand Data Fetch
@@ -218,7 +218,7 @@ class ProductIteamsServiceProvider
         // }
         $page_name = 'Product Category';
 
-        return view('super-admin.medicine-item.category.index', compact('company_profiles', 'allfolders', 'page_name'));
+        return view('super-admin.product-components.category.index', compact('company_profiles', 'allfolders', 'page_name'));
     }
     /**
      * Handle Category Fetch Data
@@ -394,7 +394,7 @@ class ProductIteamsServiceProvider
         });
         $categories = Category::where('status', '!=', 0)->get();
         $page_name = 'Product Sub Category';
-        return view('super-admin.medicine-item.sub-category.index', compact('company_profiles', 'categories', 'page_name'));
+        return view('super-admin.product-components.sub-category.index', compact('company_profiles', 'categories', 'page_name'));
     }
     /**
      * Handle Sub Category Fetch Data
@@ -573,7 +573,7 @@ class ProductIteamsServiceProvider
             return companyProfile::find(1);
         });
         $page_name = 'Medicine Group';
-        return view('super-admin.medicine-item.medicine-group.index', compact('company_profiles', 'page_name'));
+        return view('super-admin.medicine-components.medicine-group.index', compact('company_profiles', 'page_name'));
     }
     /**
      * Handle Medicine Group Fetch Data
@@ -747,7 +747,7 @@ class ProductIteamsServiceProvider
         });
         $medicinegroups = MedicineGroup::where('status','!=', 0)->get();
         $page_name = 'Medicine Name';
-        return view('super-admin.medicine-item.medicine-name.index', compact('company_profiles','medicinegroups', 'page_name'));
+        return view('super-admin.medicine-components.medicine-name.index', compact('company_profiles','medicinegroups', 'page_name'));
     }
     /**
      * Handle Medicine Name Fetch Data
@@ -931,7 +931,7 @@ class ProductIteamsServiceProvider
         });
         $medicines = MedicineName::Where('status','!=', 0)->get();
         $page_name = 'Medicine Dosage';
-        return view('super-admin.medicine-item.medicine-dogs.index', compact('company_profiles', 'medicines', 'page_name'));
+        return view('super-admin.medicine-components.medicine-dosage.index', compact('company_profiles', 'medicines', 'page_name'));
     }
     /**
      * Handle Medicine Dosage Fetch Data
@@ -1114,7 +1114,7 @@ class ProductIteamsServiceProvider
             return companyProfile::find(1);
         });
         $page_name = 'Product Name';
-        return view('super-admin.medicine-item.product.index', compact('company_profiles', 'page_name'));
+        return view('super-admin.product-components.product.index', compact('company_profiles', 'page_name'));
     }
     /**
      * Handle Product Fetch Data
@@ -1286,7 +1286,7 @@ class ProductIteamsServiceProvider
             return companyProfile::find(1);
         });
         $page_name = 'Units';
-        return view('super-admin.medicine-item.units.index', compact('company_profiles', 'page_name'));
+        return view('super-admin.product-components.units.index', compact('company_profiles', 'page_name'));
     }
     /**
      * Handle Units Fetch Data
@@ -1457,7 +1457,7 @@ class ProductIteamsServiceProvider
             return companyProfile::find(1);
         });
         $page_name = 'Product Origin';
-        return view('super-admin.medicine-item.origin.index', compact('company_profiles', 'page_name'));
+        return view('super-admin.product-components.origin.index', compact('company_profiles', 'page_name'));
     }
     /**
      * Handle Origin Name Fetch Data
@@ -1631,7 +1631,7 @@ class ProductIteamsServiceProvider
         });
         $products = Product::all();
         $page_name = 'Product Model';
-        return view('super-admin.medicine-item.model.index', compact('company_profiles','products', 'page_name'));
+        return view('super-admin.product-components.model.index', compact('company_profiles','products', 'page_name'));
     }
     /**
      * Handle Product Model Fetch Data
