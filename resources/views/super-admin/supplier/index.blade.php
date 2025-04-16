@@ -345,7 +345,7 @@
                                 <select class="form-control form-control-sm select2 edit_branch_type" name="branch_name" id="search_branch">
                                     <option value="">Select Branch Name</option>
                                     @foreach($branches as $item)
-                                        <option value="{{$item->branch_name}}">{{$item->branch_name}}</option>
+                                        <option value="{{$item->branch_id}}">{{$item->branch_name}}</option>
                                     @endforeach
                                 </select>
                             </div>

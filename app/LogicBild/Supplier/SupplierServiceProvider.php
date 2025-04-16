@@ -146,7 +146,7 @@ class SupplierServiceProvider
             $suppliers->contact_number_two = $request->input('contact_number_two');
             $suppliers->whatsapp_number = $request->input('whatsapp_number');
             $suppliers->email = $request->input('email');
-            $suppliers->created_by = $request->$auth->id;
+            $suppliers->created_by = $auth->id;
 
             $suppliers->save();
             return response()->json([
