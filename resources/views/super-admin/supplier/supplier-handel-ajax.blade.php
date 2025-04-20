@@ -10,55 +10,7 @@
         buttonLoader('#search_btn', '.search-icon', '.search-btn-text', 'Search', 'Search', 1000);
         //fetch_supplier_data();
         fetch_branch();
-        // Data View Table--------------
-        const table_rows = (rows) => {
-            if (rows.length === 0) {
-                return `
-                    <tr>
-                        <td class="error_data" align="center" text-danger colspan="11">
-                            Conatat Information Data Not Exists On Server !
-                        </td>
-                    </tr>
-                `;
-            }
-
-            return [...rows].map((row, key) => {
-                return `
-                    <tr class="table-row user-table-row supp-table-row" key="${key}" id="supp_tab">
-                        <td class="sn border_ord" id="supp_tab2">${row.id}</td>
-                        <td class="txt_ ps-1 center" id="supp_tab3">
-                            <input class="btn btn-info dropdown-toggle dropdown-toggle-split ef_brnd pb-1" type="checkbox" id="flexSwitchCheckDefault" data-bs-toggle="dropdown">
-                            <ul class="dropdown-menu action ms-4 pe-3">
-                                <li class="upd cgy ps-1">
-                                    <button class="btn-sm edit_registration edit_button cgr_btn edit_btn ms-2" id="edtBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                                    <i class="fa-solid fa-pen-to-square fa-beat" style="color:darkcyan"></i></button>
-                                    <button class="btn-sm edit_registration view_btn cgr_btn ms-4" id="deleteBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                                    <i class="fa-solid fa-trash-can fa-beat" style="color:orangered"></i></button>
-                                    <button class="btn-sm edit_registration view_btn cgr_btn ms-4" id="viewBtn" value="${row.id}" style="font-size: 10px;" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
-                                    <i class="fa-solid fa-eye fa-beat" style="color:royalblue"></i></button>
-                                </li>
-                            </ul>
-                        </td>
-                        <td class="border_ord ps-1 supp_vew" id="supp_tab4">${row.id_name}</td>
-                        <td class="txt_ ps-1 supp_vew2" id="supp_tab5">${row.type}</td>
-                        <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.bussiness_type}</td>
-                        <td class="txt_ ps-1 supp_vew4" id="supp_tab7">${row.name}</td>
-                        <td class="txt_ ps-1 supp_vew5" id="supp_tab8" hidden>${row.office_address}</td>
-                        <td class="txt_ ps-1 supp_vew6" id="supp_tab9" hidden>${row.current_address}</td>
-                        <td class="txt_ ps-1 supp_vew7" id="supp_tab10">${row.contact_number_one}</td>
-                        <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${row.contact_number_two}</td>
-                        <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${row.whatsapp_number}</td>
-                        <td class="txt_ ps-1 supp_vew10" id="supp_tab13">${row.email}</td>
-                        <td class="tot_complete_ pe-2 ${row.supplier_status ? 'bg-silver' : 'bg-danger'}" id="cat_td6">
-                            <span class="permission-plate ps-1 pe-1 ms-1 pt-1 ${row.supplier_status ? 'text-primary' : 'text-danger'}">${row.supplier_status ? '<span style="color:green;font-weight:800;font-size: 15px;"><i class="fa-solid fa-check"></i></span> Active' : '❌ Deny'}</span>
-                        </td>
-                        <td class="tot_complete_ ps-1 pt-1 center" id="supp_tab14">
-                            <input id="actOne" class="form-switch form-check-input supplier_check_permission me-2" type="checkbox" status_id="${row.id}" value="${row.supplier_status}" ${row.supplier_status? " checked": ''}>
-                        </td>
-                    </tr>
-                `;
-            }).join("\n");
-        }
+        fetch_branch_name();
 
         // Handle Select only for branch
         $(document).on('change', ' #branch_type', function() {
@@ -66,7 +18,7 @@
             if (changeValue === '') {
                 $("#select_branch").empty();
                 $("#select_branch").empty();
-                $("#select_branch").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
+                $("#select_branch").append('<option style="color:white;font-weight:600;" value="" disabled>Select branch type</option>');
             }
         });
 
@@ -109,81 +61,53 @@
             });
         }
 
-
-        // Fetch Supplier Contact Data ------------------
-        function fetch_supplier_data(query = '', url = null, perItem = null) {
-
-            if (perItem === null) {
-                perItem = $("#perItemControl").val();
+        // Handle Select only for Branch Name
+        $(document).on('change', ' #search_branch', function() {
+            var changeValue = $(this).val();
+            if (changeValue === '') {
+                $("#search_supplier").empty();
+                $("#search_supplier").append('<option style="color:white;font-weight:600;" value="" disabled>Select branch name</option>');
             }
-            
-            var current_url = url;
-            if (url === null) {
-                current_url = `{{ route('search-supplier.action')}}?per_item=${perItem}`;
-            }else {
-                current_url += `&per_item=${perItem}`
+        });
+
+        // Event listener for only for Branch Name
+        $(document).on('change', '#search_branch', function() {
+            const branch_id = $(this).val();
+            fetch_branch_name(branch_id);
+        });
+
+        // Function to fetch only branch 
+        function fetch_branch_name (branch_id) {
+            if (!branch_id) {
+                return;
             }
+
+            const currentUrl = "/get-supplier/"+ branch_id;
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
             $.ajax({
                 type: "GET",
-                url: current_url,
+                url: currentUrl,
                 dataType: 'json',
-                data: {
-                    query: query
+                success: function(response) {
+                    const suppliers = response.messages;
+                    
+                    $("#search_supplier").empty();
+                    $.each(suppliers, function(key, item) {
+                        $("#search_supplier").append(`<option style="color:white;font-weight:600;" value="${item.id}">${item.name}</option>`);
+                    });
                 },
-                success: function({
-                    data,
-                    links,
-                    total
-
-                }) {
-                    $("#supplier_data_table").html(table_rows([...data]));
-                    $("#supplier_data_table_paginate").html(paginate_html({
-                        links,
-                        total
-                    }));
-                    $("#total_supplier_records").text(total);
-                    $("#total_supplier_records_progressbar").text(total);
-                    // Initialize the tooltip elements
-                    $('[data-bs-toggle="tooltip"]').tooltip();
-                    // search autocomplete 
-                    var suggestions = data.map(function(item) {
-                        return {
-                            label: `${item.id_name} - ${item.name} - ${item.contact_number_one}`,
-                            value: item.name,
-                        };
-                    });
-                    // Initialize autocomplete
-                    $("#supplier_search").autocomplete({
-                        source: suggestions,
-                    });
+                error: function() {
+                    $("#search_supplier").empty();
+                    $("#search_supplier").append('<option style="color:red;font-weight:600;" value="" style="color:red;font-weight:600;" selected>Select supplier name</option>');
                 }
-
             });
         }
-        // peritem change
-        $("#perItemControl").on('change', (e) => {
-            const {
-                value
-            } = e.target;
-
-            fetch_supplier_data('', null, value);
-        });
-        // Live-Search-----------------------------
-        $(document).on('keyup', '#supplier_search', function() {
-            var query = $(this).val();
-            fetch_supplier_data(query);
-
-            $('.supp_search-icon').removeClass('supp_search-hidden');
-            setTimeout(() => {
-                $('.supp_search-icon').addClass('supp_search-hidden');
-            }, 1000);
-
-        });
-        $(document).on('click', '#search_area', function() {
-            $("#search_plate").toggleClass('display-block', 'slow');
-            $("#search_plate").toggleClass('display-hidden', 'slow');
-        });
 
         // Search- loader
         $(document).on('keyup', '.searchform', function(){
@@ -227,43 +151,6 @@
             return ()=>{
                 clearTimeout(time);
             }
-        });
-        // Paginate Page-------------------------------
-        const paginate_html = ({
-            links,
-            total
-        }) => {
-            if (total == 0) {
-                return "";
-            }
-
-            return `
-                <nav class="paginate_link" aria-label="Page navigation example">
-                    <ul class="pagination">
-                        ${links.map((link, key) => {
-                            return `
-                                <li class="page-item${link.active? ' active': ''}" key=${key}>
-                                    <a class="page-link btn_page" href="${link.url? link.url: '#'}">
-                                        ${link.label}
-                                    </a>
-                                </li>
-                            `;
-                        }).join("\n")}
-                    </ul>
-                </nav>
-            `;
-        }
-        // change paginate page------------------------
-        $("#supplier_data_table_paginate").delegate("a", "click", function(e) {
-            e.stopImmediatePropagation();
-            e.preventDefault();
-
-            const url = $(this).attr('href');
-
-            if (url !== '#') {
-                fetch_supplier_data('', url);
-            }
-
         });
 
         // Cancel Button
@@ -428,11 +315,15 @@
         });
 
         // Edit Supplier Contact
-        $(document).on('click', '#edtBtn', function(e) {
+        $(document).on('click', '#search_btn', function(e) {
             e.preventDefault();
             $("#save").hide('slow');
+            $("#save").attr('hidden', true);
             $("#update_btn").show('slow');
-            var supp_id = $(this).val();
+            $("#update_btn").removeAttr('hidden');
+            $("#delete_btn").show('slow');
+            $("#delete_btn").removeAttr('hidden');
+            var supp_id = $("#search_supplier").val();
             $.ajax({
                 type: "GET",
                 url: "/edit-supplier/" + supp_id,
@@ -443,6 +334,11 @@
                         $('#success_message').text(response.messages);
                     } else {
                         $('#supp_id').val(supp_id);
+                        $('.edit_branch_type').val(response.messages.branch_category).trigger('change.select2');
+                        fetch_branch(response.messages.branch_category);
+                        setTimeout(() => {
+                            $('.edit_select_branch').val(response.messages.branch_id).trigger('change.select2');
+                        }, 500);
                         $('.edit_type').val(response.messages.type);
                         $('.edit_bussiness_type').val(response.messages.bussiness_type);
                         $('.edit_name').val(response.messages.name);
@@ -452,6 +348,7 @@
                         $('.edit_contact_number_two').val(response.messages.contact_number_two);
                         $('.edit_whatsapp_number').val(response.messages.whatsapp_number);
                         $('.edit_email').val(response.messages.email);
+                        $("#accessCard").removeAttr('hidden');
                     }
                 },
                 error: function(xhr) {

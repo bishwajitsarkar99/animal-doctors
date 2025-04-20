@@ -68,28 +68,21 @@ class SupplierServiceProvider
     /**
      * Handle Supplier Fetch Data
     */
-    public function getSuppliers(Request $request)
+    public function getSuppliers(Request $request, $branch_id)
     {
-        if($request->ajax() == false){
-            // return abort(404);
-        }
+        $data = Supplier::where('branch_id', $branch_id)->get();
 
-        $data = Supplier::orderBy('id','desc')->latest();
-
-        if( $query = $request->get('query')){
-            $data->where('id_name','LIKE','%'.$query.'%')
-                ->orWhere('name','LIKE','%'.$query.'%')
-                ->orWhere('contact_number_one','LIKE','%'.$query.'%') 
-                ->orWhere('contact_number_two','LIKE','%'.$query.'%') 
-                ->orWhere('whatsapp_number','LIKE','%'.$query.'%');     
-        } 
-        $perItem = 10;
-        if($request->input('per_item')){
-            $perItem = $request->input('per_item');
+        if ($data->isNotEmpty()) {
+            return response()->json([
+                'status' => 200,
+                'messages' => $data,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'messages' => 'No suppliers found for this branch.',
+            ]);
         }
-        $data = $data->paginate($perItem)->toArray();
-        
-        return response()->json( $data, 200);
     }
     /**
      * Handle Create Supplier Event

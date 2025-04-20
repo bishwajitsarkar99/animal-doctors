@@ -71,9 +71,9 @@ class SupplierController extends Controller
     }
 
     // Get Supplier
-    public function getSupplier(Request $request)
+    public function getSupplier(Request $request, $branch_id)
     {
-        return $this->supplierServiceProvider->getSuppliers($request);
+        return $this->supplierServiceProvider->getSuppliers($request, $branch_id);
     }
 
     // Store Supplier
