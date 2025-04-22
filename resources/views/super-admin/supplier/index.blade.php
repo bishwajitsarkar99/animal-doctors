@@ -110,7 +110,7 @@
                         <div class="row g-3">
                             <div class="mb-1">
                                 <label for="select-branch" class="form-label select-label">Select Branch Name</label>
-                                <select class="form-control form-control-sm select2 edit_branch_type" name="branch_id" id="search_branch">
+                                <select class="form-control form-control-sm select2 edit_search_branch_type search_type" name="branch_id" id="search_branch">
                                     <option value="">Select Branch Name</option>
                                     @foreach($branches as $item)
                                         <option value="{{$item->branch_id}}">{{$item->branch_name}}</option>
@@ -119,10 +119,10 @@
                             </div>
                         </div>
                         <div class="row g-3">
-                            <div class="mb-3">
-                                <label for="supplier" class="form-label select-label">Select Supplier Name</label>
-                                <select class="form-control form-control-sm select2 edit_name" name="name" id="search_supplier">
-                                    <option value="">Select Supplier Name</option>
+                            <div class="mb-3 select_name">
+                                <label for="supplier" class="form-label select-label">Select Supplier Or Vendor Name</label>
+                                <select class="form-control form-control-sm select2 edit_name search_name" name="name" id="search_supplier">
+                                    <option value="">Select Supplier Or Vendor Name</option>
                                 </select>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card form-control-sm right-card mt-3 pb-3" hidden id="accessCard">
+                <div class="card form-control-sm right-card mt-4 pb-3" hidden id="accessCard">
                     <span class="mini-head">Supplier or Vendor</span>
                     <div class="row checkbox">
                         <div class="col-5 pt-1">
@@ -211,7 +211,7 @@
     </form>
     <div class="row">
         <div class="col-xl-12 action_message">
-        <p class="ps-1"><span id="success_message"></span></p>
+        <p class="mt-1"><span id="success_message"></span></p>
         </div>
     </div>
 </div>
@@ -296,22 +296,24 @@
     <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
       <div class="modal-header" id="logoutModal_header">
         <h6 class="modal-title admin_title scan update_title pt-1" id="staticBackdropLabel">
-          Update Supplier
+          Update <span id="headName"></span>
         </h6>
         <button type="button" class="btn-close btn-btn-sm head_btn3" data-bs-dismiss="modal" aria-label="Close" 
           data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
         </button>
         </div>
         <div class="modal-body" id="logoutModal_body">
-          <p class="admin_paragraph" style="text-align:center;" id="text_message">
-            <label class="label_user_edit" id="cate_confirm_update" for="id">Are you confirm or cancel ? </label>
+          <p class="admin_paragraph" style="text-align:left;" id="text_message">
+            <label class="label_user_edit" id="cate_confirm_update" for="id">
+            <span id="bodyName"></span> - are you updated, confirm or cancel ? 
+            </label>
           </p>
         </div>
-        <div class="modal-footer" id="logoutModal_footer">
-          <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus">
-            <span class="btn-text">Confirm</span>
-          </button>
-          <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+        <div class="modal-footer btn_box group_btn_box" id="logoutModal_footer">
+            <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+            <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus">
+                <span class="btn-text">Confirm</span>
+            </button>
         </div>    
       </div>
     </div>
@@ -444,7 +446,7 @@
 
     // Initialize Select2 for branch selection
     $('#search_supplier').select2({
-      placeholder: 'Select Branch',
+      placeholder: 'Select Supplier Or Vendor Name',
       allowClear: true,
       width: '100%'
     });

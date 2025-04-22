@@ -163,7 +163,7 @@ class SupplierServiceProvider
         else{
             return response()->json([
                 'status'=> 404,
-                'messages'=> 'Would yout like to change permission ?',
+                'messages'=> 'Search data no found.',
             ]);
         }
     }
@@ -176,17 +176,24 @@ class SupplierServiceProvider
         $validator = validator::make($request->all(),[
             'branch_category' => 'required|max:191',
             'branch_id' => 'required|max:191',
-            'type'=>'required|max:191',
-            'bussiness_type' =>'required|max:191',
-            'name' =>'required|max:191',
-            'current_address' =>'required|max:300',
-            'contact_number_one' =>'required|max:191',
+            'type' => 'required|max:191',
+            'bussiness_type' => 'required|max:191',
+            'name' => 'required|max:191',
+            'current_address' => 'required|max:300',
+            'contact_number_one' => 'required|max:11',
+            'contact_number_two' => 'max:11',
         ],[
             'branch_category.required' => 'The branch category required.',
             'branch_id.required' => 'The branch id required.',
-            'type.required'=>'The supplier type is required mandatory.',
-            'name.required'=>'The name is required mandatory.',
-            'contact_number_one.required'=>'The contact number is mandatory.',
+            'type.required' => 'The supplier type is required.',
+            'type.max' => 'The supplier type may not be greater than 191 characters.',
+            'bussiness_type.required' => 'The business type is required.',
+            'bussiness_type.max' => 'The business type may not be greater than 191 characters.',
+            'name.required' => 'The name is required.',
+            'current_address.required' => 'The current address is required.',
+            'contact_number_one.required' => 'The contact number is required.',
+            'contact_number_one.max' => 'The contact number may not be greater than 11 digit.',
+            'contact_number_two.max' => 'The contact number may not be greater than 11 digit.',
         ]);
         if($validator->fails()){
             return response()->json([
@@ -200,6 +207,8 @@ class SupplierServiceProvider
 
             $suppliers = Supplier::find($id);
             if($suppliers){
+                $suppliers->branch_category = $request->input('branch_category');
+                $suppliers->branch_id = $request->input('branch_id');
                 $suppliers->type = $request->input('type');
                 $suppliers->bussiness_type = $request->input('bussiness_type');
                 $suppliers->name = $request->input('name');
@@ -214,11 +223,13 @@ class SupplierServiceProvider
 
                 if($request->input('supplier_status') === 1){
                     $suppliers->supplier_access_date = now();
+                    $suppliers->supplier_deny_date = null;
                 }else if($request->input('supplier_status') === 0){
+                    $suppliers->supplier_access_date = null;
                     $suppliers->supplier_deny_date = now();
                 }
                 // updator
-                $suppliers->updated_by = $request->$auth->id;
+                $suppliers->updated_by = $auth->id;
 
                 $suppliers->update();
                 return response()->json([

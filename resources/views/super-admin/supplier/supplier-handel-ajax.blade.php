@@ -188,6 +188,9 @@
             $('#contact_number_two').val("");
             $('#whatsapp_number').val("");
             $('#email').val("");
+            $("#accessCard").attr('hidden', true);
+            $("#delete_btn").attr('hidden', true);
+            $("#save").removeAttr('hidden');
         });
 
         // Check Handel
@@ -307,7 +310,7 @@
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
-                        fetch_supplier_data();
+                        //fetch_supplier_data();
                     }
 
                 }
@@ -317,21 +320,29 @@
         // Edit Supplier Contact
         $(document).on('click', '#search_btn', function(e) {
             e.preventDefault();
-            $("#save").hide('slow');
-            $("#save").attr('hidden', true);
-            $("#update_btn").show('slow');
-            $("#update_btn").removeAttr('hidden');
-            $("#delete_btn").show('slow');
-            $("#delete_btn").removeAttr('hidden');
-            var supp_id = $("#search_supplier").val();
+            $("#headName").empty();
+            $("#bodyName").empty();
+            var selectValue = $("#search_supplier").val();
+            
+            if(selectValue !== "") {
+                var supp_id = selectValue;
+            } else {
+                $("#search_supplier").next('.select2-container').addClass('is-select-invalid');
+                return;
+            }
+
             $.ajax({
                 type: "GET",
                 url: "/edit-supplier/" + supp_id,
                 success: function(response) {
                     if (response.status == 404) {
                         $('#success_message').html("");
-                        $('#success_message').addClass('alert alert-danger');
+                        $('#success_message').fadeIn();
+                        $('#success_message').addClass('altert_danger ps-1 pe-1');
                         $('#success_message').text(response.messages);
+                        setTimeout(() => {
+                            $('#success_message').fadeOut();
+                        }, 5000);
                     } else {
                         $('#supp_id').val(supp_id);
                         $('.edit_branch_type').val(response.messages.branch_category).trigger('change.select2');
@@ -349,6 +360,32 @@
                         $('.edit_whatsapp_number').val(response.messages.whatsapp_number);
                         $('.edit_email').val(response.messages.email);
                         $("#accessCard").removeAttr('hidden');
+                        // Supplier Access Check
+                        if(response.messages.supplier_status == 1){
+                            $("#accessCheck").prop('checked', response.messages.supplier_status == 1);
+                            $("#justifyLabel").removeAttr('hidden');
+                            $("#deny_label").attr('hidden', true);
+                        }else if(response.messages.supplier_status == 0){
+                            $("#deny_label").removeAttr('hidden');
+                            $("#justifyLabel").attr('hidden', true);
+                        }else{
+                            $("#deny_label").attr('hidden', true);
+                            $("#justifyLabel").attr('hidden', true);
+                        }
+
+                        // Update Modal
+                        const messages = response.messages;
+                        const headName = $("#headName");
+                        const bodyName = $("#bodyName");
+                        headName.append(`<span>${messages.type}</span>`);
+                        bodyName.append(`<span>${messages.type} Name : ${messages.name}</span>`);
+                        // Button
+                        $("#save").hide('slow');
+                        $("#save").attr('hidden', true);
+                        $("#update_btn").show('slow');
+                        $("#update_btn").removeAttr('hidden');
+                        $("#delete_btn").show('slow');
+                        $("#delete_btn").removeAttr('hidden');
                     }
                 },
                 error: function(xhr) {
@@ -357,6 +394,16 @@
                     }
                 }
             });
+        });
+
+        // Select Supplier Or Vendor Name Search Menu
+        $(document).on('change', '#search_branch', function(){
+            var selectValue = $(this).val();
+            if(selectValue !== "") {
+                $("#search_supplier").next('.select2-container').removeClass('is-select-invalid').addClass('is-select-valid');
+            }else{
+                $("#search_supplier").next('.select2-container').removeClass('is-select-invalid is-select-valid');
+            }
         });
 
         // Confirm Update Supplier Contact Modal
@@ -387,40 +434,11 @@
         $(document).on('click', '.update_confirm', function(e) {
             e.preventDefault();
 
-            // Remove any existing error messages
-            $('.error-message').remove();
-            
-            // Validate form fields
-            var type = $('#type').val();
-            var bussinessType = $('#bussiness_type').val();
-            var name = $('#name').val();
-            var currentAddress = $('#current_address').val();
-            var contactNumberOne = $('#contact_number_one').val();
-            
-            if (type.trim() == '') {
-                $('#type').closest('.row').append('<span><span class="error-message alert_show_errors">The type(supplier or vendor or common) field is required.</span></span>');
-            }
-            if (bussinessType.trim() == '') {
-                $('#bussiness_type').closest('.row').append('<span><span class="error-message alert_show_errors bussiness_erorr">The bussiness type(bussiness name) field is required.</span></span>');
-            }
-            if (name.trim() == '') {
-                $('#name').closest('.row').append('<span><span class="error-message alert_show_errors name_erorr">The supplier name field is required.</span></span>');
-            }
-            if (currentAddress.trim() == '') {
-                $('#current_address').closest('.row').append('<span><span class="error-message alert_show_errors address_erorr">The current address field is required.</span></span>');
-            }
-            if (contactNumberOne.trim() == '') {
-                $('#contact_number_one').closest('.row').append('<span><span class="error-message alert_show_errors address_erorr">The contact number field is required.</span></span>');
-            }
-            
-            // Check if there are any error messages
-            if ($('.error-message').length > 0) {
-                // If there are error messages, stop further execution
-                return;
-            }
-
             var supp_id = $('#supp_id').val();
+            var permissionStatus = $("input[name='supplier_status']:checked").val();
             var data = {
+                'branch_category': $('#branch_type').val(),
+                'branch_id': $('#select_branch').val(),
                 'type': $('#type').val(),
                 'bussiness_type': $('#bussiness_type').val(),
                 'name': $('#name').val(),
@@ -430,6 +448,7 @@
                 'contact_number_two': $('#contact_number_two').val(),
                 'whatsapp_number': $('#whatsapp_number').val(),
                 'email': $('#email').val(),
+                'supplier_status': permissionStatus ? 1 : 0,
             }
 
             $.ajaxSetup({
@@ -445,14 +464,66 @@
                 dataType: "json",
                 success: function(response) {
                     if (response.status == 400) {
+                        $("#updateForm_errorList3").empty();
+                        $("#updateForm_errorList4").empty();
+                        $("#updateForm_errorList5").empty();
+                        $("#updateForm_errorList6").empty();
+                        $("#updateForm_errorList8").empty();
                         $.each(response.errors, function(key, err_value) {
                             $('#updateForm_errorList').html("");
-                            $('#updateForm_errorList').addClass('alert_show_errors ps-1 pe-1');
+                            $('#updateForm_errorList').addClass('altert_danger ps-1 pe-1');
                             $('#updateForm_errorList').append('<span>' + err_value + '</span>');
+                            if (key === 'branch_category') {
+                                $("#updateForm_errorList").removeAttr('hidden');
+                                $("#updateForm_errorList").fadeIn();
+                                $("#branch_type").next('.select2-container').addClass('is-select-invalid');
+                                $("#updateForm_errorList").closest('.branch_type_nme').append('<span class="error_group error_icon_one"><svg width="18px" hieght="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg> <span class="error_val select_error_one">' + err_value + '</span></span>');
+                            } else if (key === 'branch_id') {
+                                $("#updateForm_errorList2").removeAttr('hidden');
+                                $("#updateForm_errorList2").fadeIn();
+                                $("#select_branch").next('.select2-container').addClass('is-select-invalid');
+                                $("#updateForm_errorList2").closest('.branch_id_nme').append('<span class="error_group error_icon_two"><svg width="18px" hieght="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg> <span class="error_val select_error_two">' + err_value + '</span></span>');
+                            } else if (key === 'type') {
+                                $("#updateForm_errorList3").removeAttr('hidden');
+                                $("#updateForm_errorList3").fadeIn();
+                                $("#type").addClass('is-invalid');
+                                $("#updateForm_errorList3").append('<svg width="18px" hieght="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg>');
+                                $('#updateForm_errorList3').append('<span class="error_val">' + err_value + '</span>');
+                            } else if (key === 'bussiness_type') {
+                                $("#updateForm_errorList4").removeAttr('hidden');
+                                $("#updateForm_errorList4").fadeIn();
+                                $("#bussiness_type").addClass('is-invalid');
+                                $("#updateForm_errorList4").append('<svg width="18px" hieght="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg>');
+                                $('#updateForm_errorList4').append('<span class="error_val">' + err_value + '</span>');
+                            } else if (key === 'name') {
+                                $("#updateForm_errorList5").removeAttr('hidden');
+                                $("#updateForm_errorList5").fadeIn();
+                                $("#name").addClass('is-invalid');
+                                $("#updateForm_errorList5").append('<svg width="18px" hieght="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg>');
+                                $('#updateForm_errorList5').append('<span class="error_val">' + err_value + '</span>');
+                            } else if (key === 'contact_number_one') {
+                                $("#updateForm_errorList6").removeAttr('hidden');
+                                $("#updateForm_errorList6").fadeIn();
+                                $("#contact_number_one").addClass('is-invalid');
+                                $("#updateForm_errorList6").append('<svg width="18px" hieght="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg>');
+                                $('#updateForm_errorList6').append('<span class="error_val">' + err_value + '</span>');
+                            }else if (key === 'contact_number_two') {
+                                $("#updateForm_errorList7").removeAttr('hidden');
+                                $("#updateForm_errorList7").fadeIn();
+                                $("#contact_number_two").addClass('is-invalid');
+                                $("#updateForm_errorList7").append('<svg width="18px" hieght="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg>');
+                                $('#updateForm_errorList7').append('<span class="error_val">' + err_value + '</span>');
+                            }else if (key === 'current_address') {
+                                $("#updateForm_errorList8").removeAttr('hidden');
+                                $("#updateForm_errorList8").fadeIn();
+                                $("#current_address").addClass('is-invalid');
+                                $("#updateForm_errorList8").append('<span class="error_group"><svg width="18px" hieght="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg>');
+                                $('#updateForm_errorList8').append('<span class="error_val">' + err_value + '</span>');
+                            }
                         });
                     } else if (response.status == 404) {
                         $('#updateForm_errorList').html("");
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
+                        $('#success_message').addClass('altert_danger ps-1 pe-1');
                         $('#success_message').text(response.messages);
                     } else {
                         $('#updateForm_errorList').html("");
@@ -460,6 +531,8 @@
                         $('#success_message').addClass('alert_show ps-1 pe-1');
                         $('#success_message').fadeIn();
                         $('#success_message').text(response.messages);
+                        $('#branch_type').val(null).trigger('change');
+                        $('#select_branch').val(null).trigger('change');
                         $('#type').val("");
                         $('#bussiness_type').val("");
                         $('#name').val("");
@@ -473,7 +546,7 @@
                             $('#success_message').fadeOut();
                         }, 3000);
                         $("#updateconfirmsupplier").modal('hide');
-                        fetch_supplier_data();
+                        //fetch_supplier_data();
                     }
                 },
                 error: function(xhr) {
