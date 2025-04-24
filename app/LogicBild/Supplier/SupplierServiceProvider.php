@@ -221,12 +221,18 @@ class SupplierServiceProvider
                 // update status
                 $suppliers->supplier_status = $request->input('supplier_status');
 
-                if($request->input('supplier_status') === 1){
-                    $suppliers->supplier_access_date = now();
-                    $suppliers->supplier_deny_date = null;
-                }else if($request->input('supplier_status') === 0){
-                    $suppliers->supplier_access_date = null;
-                    $suppliers->supplier_deny_date = now();
+                if ($request->input('supplier_status') == 1) {
+                    if (is_null($suppliers->supplier_access_date)) {
+                        $suppliers->supplier_access_date = now();
+                    } else {
+                        $suppliers->supplier_deny_date = null;
+                    }
+                } elseif ($request->input('supplier_status') == 0) {
+                    if (is_null($suppliers->supplier_deny_date)) {
+                        $suppliers->supplier_deny_date = now();
+                    } else {
+                        $suppliers->supplier_access_date = null;
+                    }
                 }
                 // updator
                 $suppliers->updated_by = $auth->id;

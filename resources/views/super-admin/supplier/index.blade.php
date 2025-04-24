@@ -222,35 +222,34 @@
     <div class="modal-dialog">
         <div class="modal-content" id="admin_modal_box">
             <div class="modal-header profile_modal_header profilesetting_modal_header">
-                <h5 class="modal-title head_title ps-1 pe-1" id="staticBackdropLabels">
+                <h5 class="modal-title head_title ps-1 pe-1" id="staticBackdropLabels" style="color:black;">
                     Delete Supplier Or Vendor
                 </h5>
                 <button type="button" class="btn-close btn-btn-sm cols_title" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
             </div>
 
-            <div class="modal-body profile-body pb-1" style="background-color:seashell;">
-
+            <div class="modal-body pb-1">
                 <div class="row profile-heading pb-3">
                     <div class="col-xl-12">
                         <div class="form-group delete_content" id="supp_delt">
                             <div id="active_loader"></div>
                             <label class="label_user_edit" for="id" id="supp_delt2">ID : </label>
                             <input type="text" class="mt-3 update_id id" id="delete_supplier_id" readonly><br>
-                            <span class="label_user_edit" id="supp_delt3">Are you sure? Would you like to delete that, permanently?</span>
+                            <span class="label_user_edit" id="supp_delt3">Are you sure? Would you like to delete the <span id="suppName"></span> (<span id="suppType"></span>), permanently?</span>
                             <input type="hidden" id="delete_supplier_id" name="supplier_id">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer profile_modal_footer">
+            <div class="modal-footer profile_modal_footer btn_box group_btn_box">
+                <p id="btn_group">
+                    <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal" id="noButton">No</a>
+                </p>
                 <p id="btn_group2">
                     <a href="#" type="button" class="btn btn-success modal_button logout_button yes_button" id="yesButton">
                         <i class="loading-icon fa fa-spinner fa-spin hidden"></i>
                         <span class="btn-text">{{__('translate.Yes')}}</span>
                     </a>
-                </p>
-                <p id="btn_group">
-                    <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal" id="noButton">No</a>
                 </p>
             </div>
         </div>
@@ -276,12 +275,12 @@
             <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, delete or cancel ? </label>
           </p>
         </div>
-        <div class="modal-footer" id="logoutModal_footer">
-            <button href="#" type="button" class="btn btn-sm cgt_btn delet_btn_user btn_focus" id="deleteLoader">
+        <div class="modal-footer btn_box group_btn_box" id="logoutModal_footer">
+            <button type="button" class="btn btn-sm cgt_cancel_btn text-white delt_cancel" id="supp_delt4" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-sm cgt_btn text-white delet_btn_user" id="deleteConfirm">
                 <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
                 <span class="btn-text">Delete</span>
             </button>
-            <button type="button" class="btn btn-sm cgt_btn delete_cancel btn_focus" id="supp_delt4" data-bs-dismiss="modal">Cancel</button>
         </div>    
       </div>
     </div>
@@ -310,8 +309,8 @@
           </p>
         </div>
         <div class="modal-footer btn_box group_btn_box" id="logoutModal_footer">
-            <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
-            <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus">
+            <button type="button" class="btn btn-sm cgt_cancel_btn text-white" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+            <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus mt-1">
                 <span class="btn-text">Confirm</span>
             </button>
         </div>    
@@ -337,40 +336,40 @@
             <table class="table-responsive">
                 <tbody class="table_body">
                     <tr class="table=light">
-                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1" for="supplier_id">Supplier : </label></td>
-                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;background:seashell;" class="supp_vew" type="text" readonly></td>
+                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1" for="supplier_id">Supplier : </label></td>
+                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;" class="supp_vew" type="text" readonly></td>
                     </tr>
                     <tr class="table=light">
-                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_type">Type : </label></td>
-                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;background:seashell;" class="view_type" type="text" readonly></td>
+                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_type">Type : </label></td>
+                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;" class="view_type" type="text" readonly></td>
                     </tr>
                     <tr class="table=light">
-                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_bussiness_type">Bussiness : </label></td>
-                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;background:seashell;" class="view_bussiness_type" type="text" readonly></td>
+                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_bussiness_type">Bussiness : </label></td>
+                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;" class="view_bussiness_type" type="text" readonly></td>
                     </tr>
                     <tr>
-                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1 address" for="view_office_address">Office-Address : </label></td>
-                        <td class="lable_value"><textarea style="font-size:11px;width:200px;font-weight:700;background:seashell;" id="view_office_address"  rows="1" cols="35" class="view_office_address" readonly></textarea></td>
+                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1 address" for="view_office_address">Office-Address : </label></td>
+                        <td class="lable_value"><textarea style="font-size:11px;width:200px;font-weight:700;" id="view_office_address"  rows="1" cols="35" class="view_office_address" readonly></textarea></td>
                     </tr>
                     <tr class="table=light">
-                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1 address" for="view_current_address">Current-Address : </label></td>
-                        <td class="lable_value"><textarea style="font-size:11px;width:200px;font-weight:700;background:seashell;" id="view_current_address"  rows="1" cols="35" class="view_current_address" readonly></textarea></td>
+                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1 address" for="view_current_address">Current-Address : </label></td>
+                        <td class="lable_value"><textarea style="font-size:11px;width:200px;font-weight:700;" id="view_current_address"  rows="1" cols="35" class="view_current_address" readonly></textarea></td>
                     </tr>
                     <tr class="table=light">
-                        <td class="lable_class" style="font-size:11px;width:150px;background:seashell;text-align:left;"><label class="label_font ps-1" for="view_contact_number_one">Contract-1 : </label></td>
-                        <td class="lable_value" ><input style="font-size:11px;width:200px;font-weight:700;background:seashell;" class="view_contact_number_one" type="text" readonly></td>
+                        <td class="lable_class" style="font-size:11px;width:150px;text-align:left;"><label class="label_font ps-1" for="view_contact_number_one">Contract-1 : </label></td>
+                        <td class="lable_value" ><input style="font-size:11px;width:200px;font-weight:700;" class="view_contact_number_one" type="text" readonly></td>
                     </tr>
                     <tr class="table=light">
-                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_contact_number_two">Contract-2 : </label></td>
-                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;background:seashell;"  class="view_contact_number_two" type="text" readonly></td>
+                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_contact_number_two">Contract-2 : </label></td>
+                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;"  class="view_contact_number_two" type="text" readonly></td>
                     </tr>
                     <tr class="table=light">
-                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_whatsapp_number">Whats app : </label></td>
-                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;background:seashell;" class="view_whatsapp_number" type="text" readonly></td>
+                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_whatsapp_number">Whats app : </label></td>
+                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;" class="view_whatsapp_number" type="text" readonly></td>
                     </tr>
                     <tr class="table=light">
-                        <td style="font-size:11px;width:150px;background:seashell;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_email">Email : </label></td>
-                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;background:seashell;" class="view_email" type="text" readonly></td>
+                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_email">Email : </label></td>
+                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;" class="view_email" type="text" readonly></td>
                     </tr>
                 </tbody>
             </table>

@@ -322,6 +322,8 @@
             e.preventDefault();
             $("#headName").empty();
             $("#bodyName").empty();
+            $("#suppType").empty();
+            $("#suppName").empty();
             var selectValue = $("#search_supplier").val();
             
             if(selectValue !== "") {
@@ -345,6 +347,8 @@
                         }, 5000);
                     } else {
                         $('#supp_id').val(supp_id);
+                        $('#delete_btn').val(supp_id);
+                        $('#view_btn').val(supp_id);
                         $('.edit_branch_type').val(response.messages.branch_category).trigger('change.select2');
                         fetch_branch(response.messages.branch_category);
                         setTimeout(() => {
@@ -375,10 +379,12 @@
 
                         // Update Modal
                         const messages = response.messages;
-                        const headName = $("#headName");
+                        const headName = $("#headName, #suppType");
                         const bodyName = $("#bodyName");
+                        const supName = $("#suppName");
                         headName.append(`<span>${messages.type}</span>`);
                         bodyName.append(`<span>${messages.type} Name : ${messages.name}</span>`);
+                        supName.append(`<span>${messages.name}</span>`);
                         // Button
                         $("#save").hide('slow');
                         $("#save").attr('hidden', true);
@@ -542,6 +548,13 @@
                         $('#contact_number_two').val("");
                         $('#whatsapp_number').val("");
                         $('#email').val("");
+                        $('#search_branch').val(null).trigger('change');
+                        $('#search_supplier').val(null).trigger('change');
+                        $("#accessCard").attr('hidden', true);
+                        $("#update_btn").attr('hidden', true);
+                        $("#delete_btn").attr('hidden', true);
+                        $("#save").show('slow');
+                        $("#save").removeAttr('hidden');
                         setTimeout(() => {
                             $('#success_message').fadeOut();
                         }, 3000);
@@ -559,7 +572,7 @@
         });
 
         // Delete Supplier Contact Modal
-        $(document).on('click', '#deleteBtn', function(e) {
+        $(document).on('click', '#delete_btn', function(e) {
             e.preventDefault();
             var supplier_id = $(this).val();
             $('#delete_supplier_id').val(supplier_id);
@@ -593,30 +606,31 @@
         // Confirm Delete Supplier Contact Modal
         $(document).on('click', '.yes_button', function(e){
             e.preventDefault();
+            $('#deletesupplier').modal('hide');
             $('#deleteconfirmsupplier').modal('show');
-            $("#deleteLoader").addClass('skeleton');
+            $("#deleteConfirm").addClass('skeleton');
             $("#cate_delete3").addClass('skeleton');
             $("#cate_confirm").addClass('skeleton');
             $(".confirm_title").addClass('skeleton');
             $(".head_btn2").addClass('skeleton');
             $("#supp_delt4").addClass('sup-btn-skeleton');
-            $("#deleteLoader").addClass('sup-btn-skeleton-two');
+            $("#deleteConfirm").addClass('sup-btn-skeleton-two');
             var time = null;
             time = setTimeout(() => {
                 $(".confirm_title").removeClass('skeleton');
                 $(".head_btn2").removeClass('skeleton');
-                $("#deleteLoader").removeClass('skeleton');
+                $("#deleteConfirm").removeClass('skeleton');
                 $("#cate_delete3").removeClass('skeleton');
                 $("#cate_confirm").removeClass('skeleton');
                 $("#supp_delt4").removeClass('sup-btn-skeleton');
-                $("#deleteLoader").removeClass('sup-btn-skeleton-two');
+                $("#deleteConfirm").removeClass('sup-btn-skeleton-two');
             }, 1000);
 
             return () => {
                 clearTimeout(time);
             }
         });
-
+        
         $(document).on('click', '.delet_btn_user', function(e) {
             e.preventDefault();
             var supplier_id = $('#delete_supplier_id').val();
@@ -649,6 +663,12 @@
 
             });
         }); 
+
+        // delete Cancel
+        $(document).on('click', '.delt_cancel', function(){
+            $('#deletesupplier').modal('show');
+            $('#deleteconfirmsupplier').modal('hide');
+        });
 
         // Update- Supplier Status ------------------
         $("#supplier_data_table").delegate(".supplier_check_permission", "click", function(e) {
@@ -691,7 +711,7 @@
         });
         
         // Supplier Info View
-        $(document).on('click', '#viewBtn', function(e) {
+        $(document).on('click', '#view_btn', function(e) {
             e.preventDefault();
             var supplier_id = $(this).val();
             $('#view_supplier_id').val(supplier_id);
