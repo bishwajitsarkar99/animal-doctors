@@ -345,6 +345,24 @@ a#suppSetting:hover{
     padding: 0.2rem 0.2rem;
     text-decoration: none;
 }
+.supp_heading_name{
+    font-family: var(--font-family-sans-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: #000000;
+}
+ul#supplier_menu {
+    padding-left: 5px;
+}
+ul#supplier_menu_head{
+    font-family: var(--font-family-sans-serif);
+    font-size: 15px;
+    font-weight: 700;
+    padding-left: 8px;
+}
+ul>li{
+    list-style: none;
+}
 .view_name {
     background: aliceblue;
     font-size: 14px;
@@ -937,7 +955,7 @@ input.view_bussiness_type{
     font-weight: 600;
 }
 label.label_font{
-    font-weight: 650;
+    font-weight: 700;
 }
 input.view_whatsapp_number {
     box-shadow: none;

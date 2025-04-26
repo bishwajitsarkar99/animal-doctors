@@ -326,53 +326,28 @@
     <div class="modal-content small_modal" id="admin_modal_box">
         <div class="modal-header" id="viewModal_header">
             <span class="modal-title admin_title scan pt-1" id="staticBackHead">
-                <input class="view_name" type="text" readonly>
+                <span class="supp_heading_name" id="view_name"></span>
             </span>
             <button type="button" class="btn-close btn-btn-sm" data-bs-dismiss="modal" aria-label="Close" 
                 data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
             </button>
         </div>
-        <div class="modal-body" style="padding:0.5rem 0.5rem;" id="logoutModal_body">
-            <table class="table-responsive">
-                <tbody class="table_body">
-                    <tr class="table=light">
-                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1" for="supplier_id">Supplier : </label></td>
-                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;" class="supp_vew" type="text" readonly></td>
-                    </tr>
-                    <tr class="table=light">
-                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_type">Type : </label></td>
-                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;" class="view_type" type="text" readonly></td>
-                    </tr>
-                    <tr class="table=light">
-                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_bussiness_type">Bussiness : </label></td>
-                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;" class="view_bussiness_type" type="text" readonly></td>
-                    </tr>
-                    <tr>
-                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1 address" for="view_office_address">Office-Address : </label></td>
-                        <td class="lable_value"><textarea style="font-size:11px;width:200px;font-weight:700;" id="view_office_address"  rows="1" cols="35" class="view_office_address" readonly></textarea></td>
-                    </tr>
-                    <tr class="table=light">
-                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1 address" for="view_current_address">Current-Address : </label></td>
-                        <td class="lable_value"><textarea style="font-size:11px;width:200px;font-weight:700;" id="view_current_address"  rows="1" cols="35" class="view_current_address" readonly></textarea></td>
-                    </tr>
-                    <tr class="table=light">
-                        <td class="lable_class" style="font-size:11px;width:150px;text-align:left;"><label class="label_font ps-1" for="view_contact_number_one">Contract-1 : </label></td>
-                        <td class="lable_value" ><input style="font-size:11px;width:200px;font-weight:700;" class="view_contact_number_one" type="text" readonly></td>
-                    </tr>
-                    <tr class="table=light">
-                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_contact_number_two">Contract-2 : </label></td>
-                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;"  class="view_contact_number_two" type="text" readonly></td>
-                    </tr>
-                    <tr class="table=light">
-                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_whatsapp_number">Whats app : </label></td>
-                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;" class="view_whatsapp_number" type="text" readonly></td>
-                    </tr>
-                    <tr class="table=light">
-                        <td style="font-size:11px;width:150px;text-align:left;" class="lable_class"><label class="label_font ps-1" for="view_email">Email : </label></td>
-                        <td class="lable_value"><input style="font-size:11px;width:200px;font-weight:700;" class="view_email" type="text" readonly></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="modal-body" style="padding:0.5rem 0.5rem;background-color: white;" id="logoutModal_body">
+            <ul id="supplier_menu_head">
+                <li><span>Supplier/Vendor Information</span></li>
+            </ul>
+            <ul id="supplier_menu">
+                <li><label class="label_font ps-1" for="supplier_id" id="supp_vew"></label></li>
+                <li><label class="label_font ps-1" for="view_type" id="view_type"></label></li>
+                <li><label class="label_font ps-1" for="view_bussiness_type" id="view_bussiness_type"></label></li>
+                <li><label class="label_font ps-1" for="supplier_name" id="supplier_name"></label></li>
+                <li><label class="label_font ps-1" for="view_office_address" id="view_office_address"></label></li>
+                <li><label class="label_font ps-1" for="view_current_address" id="view_current_address"></label></li>
+                <li><label class="label_font ps-1" for="view_contact_number_one" id="view_contact_number_one"></label></li>
+                <li><label class="label_font ps-1" for="view_contact_number_two" id="view_contact_number_two"></label></li>
+                <li><label class="label_font ps-1" for="view_whatsapp_number" id="view_whatsapp_number"></label></li>
+                <li><label class="label_font ps-1" for="view_email" id="view_email"></label></li>
+            </ul>
         </div>
         <div class="modal-footer" id="logoutModal_footer">
     

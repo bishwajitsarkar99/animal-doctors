@@ -721,22 +721,49 @@
                 type: "GET",
                 url: "/view-supplier/" + supplier_id,
                 success: function(response) {
+                    $("#view_name").empty();
+                    $("#supp_vew").empty();
+                    $("#view_type").empty();
+                    $("#view_bussiness_type").empty();
+                    $("#supplier_name").empty();
+                    $("#view_office_address").empty();
+                    $("#view_current_address").empty();
+                    $("#view_contact_number_one").empty();
+                    $("#view_contact_number_two").empty();
+                    $("#view_whatsapp_number").empty();
+                    $("#view_email").empty();
                     if (response.status == 404) {
                         $('#success_message').html("");
                         $('#success_message').addClass('alert alert-danger');
                         $('#success_message').text(response.messages);
                     } else {
                         $('#view_supplier_id').val(supplier_id);
-                        $('.supp_vew').val(response.messages.id_name);
-                        $('.view_type').val(response.messages.type);
-                        $('.view_bussiness_type').val(response.messages.bussiness_type);
-                        $('.view_name').val(response.messages.name);
-                        $('.view_office_address').val(response.messages.office_address);
-                        $('.view_current_address').val(response.messages.current_address);
-                        $('.view_contact_number_one').val(response.messages.contact_number_one);
-                        $('.view_contact_number_two').val(response.messages.contact_number_two);
-                        $('.view_whatsapp_number').val(response.messages.whatsapp_number);
-                        $('.view_email').val(response.messages.email);
+
+                        const messages = response.messages;
+                        const supp_Name = $("#view_name");
+                        const supp_ID = $("#supp_vew");
+                        const type = $("#view_type");
+                        const view_bussiness_type = $("#view_bussiness_type");
+                        const supplier_name = $("#supplier_name");
+                        const view_office_address = $("#view_office_address");
+                        const view_current_address = $("#view_current_address");
+                        const view_contact_number_one = $("#view_contact_number_one");
+                        const view_contact_number_two = $("#view_contact_number_two");
+                        const view_whatsapp_number = $("#view_whatsapp_number");
+                        const view_email = $("#view_email");
+
+                        supp_Name.append(`<span>${messages.name}</span>`);
+                        supp_ID.append(`<span>Supplier-ID : ${messages.id_name}</span>`);
+                        type.append(`<span>Type : ${messages.type}</span>`);
+                        view_bussiness_type.append(`<span>Bussiness : ${messages.bussiness_type}</span>`);
+                        supplier_name.append(`<span>Name : ${messages.name}</span>`);
+                        view_office_address.append(`<span>Office Address : ${messages.office_address}</span>`);
+                        view_current_address.append(`<span>Current Address : ${messages.current_address}</span>`);
+                        view_contact_number_one.append(`<span>Contract-1 : ${messages.contact_number_one}</span>`);
+                        view_contact_number_two.append(`<span>Contract-2 : ${messages.contact_number_two}</span>`);
+                        view_whatsapp_number.append(`<span>What's app : ${messages.whatsapp_number}</span>`);
+                        view_email.append(`<span>Email : ${messages.email}</span>`);
+
                     }
                 },
                 error: function(xhr) {
