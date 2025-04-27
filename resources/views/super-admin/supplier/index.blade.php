@@ -334,9 +334,10 @@
         </div>
         <div class="modal-body" style="padding:0.5rem 0.5rem;background-color: white;" id="logoutModal_body">
             <ul id="supplier_menu_head">
-                <li><span>Supplier/Vendor Information</span></li>
+                <li><span># Supplier/Vendor Information :</span></li>
             </ul>
             <ul id="supplier_menu">
+            <li><label class="label_font ps-1" for="branch_id" id="branch_id"></label></li>
                 <li><label class="label_font ps-1" for="supplier_id" id="supp_vew"></label></li>
                 <li><label class="label_font ps-1" for="view_type" id="view_type"></label></li>
                 <li><label class="label_font ps-1" for="view_bussiness_type" id="view_bussiness_type"></label></li>
@@ -347,6 +348,12 @@
                 <li><label class="label_font ps-1" for="view_contact_number_two" id="view_contact_number_two"></label></li>
                 <li><label class="label_font ps-1" for="view_whatsapp_number" id="view_whatsapp_number"></label></li>
                 <li><label class="label_font ps-1" for="view_email" id="view_email"></label></li>
+                <li><label class="label_font ps-1" for="status" id="status"></label></li>
+                <li><label class="label_font ps-1" for="access_date" id="access_date"></label></li>
+                <li><label class="label_font ps-1" for="create_date" id="create_date"></label></li>
+                <li><label class="label_font ps-1" for="update_date" id="update_date"></label></li>
+                <li><label class="label_font ps-1" for="create_by" id="create_by"></label></li>
+                <li><label class="label_font ps-1" for="update_by" id="update_by"></label></li>
             </ul>
         </div>
         <div class="modal-footer" id="logoutModal_footer">

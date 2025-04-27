@@ -1,5 +1,5 @@
 <script type="module">
-    import { currentDate } from "/module/module-min-js/helper-function-min.js";
+    import { currentDate, formatDate } from "/module/module-min-js/helper-function-min.js";
     import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     buttonLoader();
     $(document).ready(() => {
@@ -732,14 +732,23 @@
                     $("#view_contact_number_two").empty();
                     $("#view_whatsapp_number").empty();
                     $("#view_email").empty();
+                    $("#status").empty();
+                    $("#access_date").empty();
+                    $("#create_date").empty();
+                    $("#update_date").empty();
+                    $("#create_by").empty();
+                    $("#update_by").empty();
+                    $("#branch_id").empty();
                     if (response.status == 404) {
                         $('#success_message').html("");
                         $('#success_message').addClass('alert alert-danger');
                         $('#success_message').text(response.messages);
                     } else {
                         $('#view_supplier_id').val(supplier_id);
-
+                        var userRole = {{ auth()->user()->role }};
                         const messages = response.messages;
+                        const created_by = messages.created_by;
+                        const updated_by = messages.updated_by;
                         const supp_Name = $("#view_name");
                         const supp_ID = $("#supp_vew");
                         const type = $("#view_type");
@@ -751,8 +760,32 @@
                         const view_contact_number_two = $("#view_contact_number_two");
                         const view_whatsapp_number = $("#view_whatsapp_number");
                         const view_email = $("#view_email");
+                        const branchID = $("#branch_id");
+                        
+                        const supplierStatus = messages.supplier_status;
+                        const status = $("#status");
+                        const access_date = $("#access_date");
+                        const create_date = $("#create_date");
+                        const update_date = $("#update_date");
+
+                        let createdByRole;
+                        let updatedByRole;
+
+                        const roles = {
+                            1: 'SuperAdmin',
+                            2: 'Sub-Admin',
+                            3: 'Admin',
+                            0: 'User',
+                            5: 'Accounts',
+                            6: 'Marketing',
+                            7: 'Delivery Team',
+                        };
+
+                        createdByRole = $("#create_by");
+                        updatedByRole = $("#update_by");
 
                         supp_Name.append(`<span>${messages.name}</span>`);
+                        branchID.append(`<span>Branch-ID : ${messages.branch_id}</span>`);
                         supp_ID.append(`<span>Supplier-ID : ${messages.id_name}</span>`);
                         type.append(`<span>Type : ${messages.type}</span>`);
                         view_bussiness_type.append(`<span>Bussiness : ${messages.bussiness_type}</span>`);
@@ -763,6 +796,20 @@
                         view_contact_number_two.append(`<span>Contract-2 : ${messages.contact_number_two}</span>`);
                         view_whatsapp_number.append(`<span>What's app : ${messages.whatsapp_number}</span>`);
                         view_email.append(`<span>Email : ${messages.email}</span>`);
+
+                        if(supplierStatus == 1){
+                            status.append(`<span>Status : <span class="pill-success-rounded ms-1">Justify</span></span>`);
+                            access_date.append(`<span>Access-Date : ${formatDate(messages.updated_at)}</span>`);
+                        }else if(supplierStatus == 0){
+                            status.append(`<span>Status : <span class="pill-danger-rounded ms-1">Deny</span></span>`);
+                            access_date.append(`<span>Deny-Date : ${formatDate(messages.supplier_deny_date)}</span>`);
+                        }
+
+                        create_date.append(`<span>Create-Date : ${formatDate(messages.created_at)}</span>`);
+                        update_date.append(`<span>Update-Date : ${formatDate(messages.updated_at)}</span>`);
+
+                        createdByRole.append(`<span>Creator : ${roles[created_by] || 'Unknown'}</span>`);
+                        updatedByRole.append(`<span>Updator : ${roles[updated_by] || '--'}</span>`);
 
                     }
                 },

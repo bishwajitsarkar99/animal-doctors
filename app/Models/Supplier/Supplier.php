@@ -31,6 +31,8 @@ class Supplier extends Model
         'updated_by',
         
     ];
+    
+    protected $dates = ['supplier_access_date', 'supplier_deny_date', 'created_at', 'updated_at'];
 
     public function inventories()
     {

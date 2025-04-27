@@ -105,10 +105,4 @@ class SupplierController extends Controller
     {
         return $this->supplierServiceProvider->deleteSuppliers($id); 
     }
-
-    // Supplier Status Update
-    public function updatesupplierStatus(Request $request)
-    {
-        return $this->supplierServiceProvider->supplierStatusUpdate($request); 
-    }
 }

@@ -40,12 +40,5 @@ Route::group(['middleware' => 'auth'], function (){
     Route::middleware('supplierView')->group(function () {
         Route::get('/view-supplier/{id}', [SupplierController::class, 'viewSupplier'])->name('view_supplier.action');
     });
-    // Supplier MySql Database Permission
-    Route::middleware('supplierMySqlData')->group(function () {
-        
-        Route::prefix('suppliers')->group(function(){
-            Route::post('/permission-status-update',[SupplierController::class, 'updatesupplierStatus'])->name('supplier_update_status.action');
-        });
-    });
     
 });

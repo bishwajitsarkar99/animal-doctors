@@ -283,26 +283,6 @@ class SupplierServiceProvider
             ]);
         }
     }
-    /**
-     * Handle Supplier Status Update Event
-    */
-    public function supplierStatusUpdate(Request $request)
-    {
-        $id = (int)$request->input('id');
-        $supplier_status = (bool)$request->input('supplier_status');
-        $supplier_status = !$supplier_status;
-
-        $data = Supplier::findOrFail($id);
-
-        $data->update([
-            'supplier_status' => (int)$supplier_status,
-        ]);
-
-        return response()->json([
-            'messages' => 'My Sql Data Permission has Updated',
-            'code' => 202,
-        ], 202);
-    }
 
 
     // ========================= Supplier Access Permission ====================
