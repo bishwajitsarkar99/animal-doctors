@@ -181,7 +181,7 @@
                         <div class="col-3">
                             <button id="view_btn" class="btn btn-sm cgt_btn text-white button_width">
                                 <span class="view-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                                <span class="view-btn-text">View</span>
+                                <span class="view-btn-text">Detail</span>
                             </button>
                         </div>
                     </div>
@@ -322,7 +322,7 @@
 
 {{--Start Supplier or Info View Modal--}}
 <div class="modal fade" id="supplierInfoView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <div class="modal-content small_modal" id="admin_modal_box">
         <div class="modal-header" id="viewModal_header">
             <span class="modal-title admin_title scan pt-1" id="staticBackHead">
@@ -332,12 +332,20 @@
                 data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
             </button>
         </div>
-        <div class="modal-body" style="padding:0.5rem 0.5rem;background-color: white;" id="logoutModal_body">
-            <ul id="supplier_menu_head">
+        <div class="modal-body supplier_content_view_responsive" style="padding:0.5rem 0.5rem;background-color: aliceblue;" id="logoutModal_body">
+            <ul id="supplier_menu_head" hidden>
+                <li><span># Branch Information :</span></li>
+            </ul>
+            <ul id="branch_supp" hidden>
+                <li><label class="label_font ps-1" for="branch_id" id="branch_id"></label></li>
+                <li><label class="label_font ps-1" for="branch_types" id="branch_types"></label></li>
+                <li><label class="label_font ps-1" for="branch_names" id="branch_names"></label></li>
+                <li><label class="label_font ps-1" for="branch_locations" id="branch_locations"></label></li>
+            </ul>
+            <ul id="supplier_menu_head2" hidden>
                 <li><span># Supplier/Vendor Information :</span></li>
             </ul>
-            <ul id="supplier_menu">
-            <li><label class="label_font ps-1" for="branch_id" id="branch_id"></label></li>
+            <ul id="supplier_menu" hidden>
                 <li><label class="label_font ps-1" for="supplier_id" id="supp_vew"></label></li>
                 <li><label class="label_font ps-1" for="view_type" id="view_type"></label></li>
                 <li><label class="label_font ps-1" for="view_bussiness_type" id="view_bussiness_type"></label></li>
@@ -348,17 +356,37 @@
                 <li><label class="label_font ps-1" for="view_contact_number_two" id="view_contact_number_two"></label></li>
                 <li><label class="label_font ps-1" for="view_whatsapp_number" id="view_whatsapp_number"></label></li>
                 <li><label class="label_font ps-1" for="view_email" id="view_email"></label></li>
+            </ul>
+            <ul id="supplier_menu_head3" hidden>
+                <li><span># Access Information :</span></li>
+            </ul>
+            <ul id="status_row" hidden>
                 <li><label class="label_font ps-1" for="status" id="status"></label></li>
                 <li><label class="label_font ps-1" for="access_date" id="access_date"></label></li>
-                <li><label class="label_font ps-1" for="create_date" id="create_date"></label></li>
-                <li><label class="label_font ps-1" for="update_date" id="update_date"></label></li>
-                <li><label class="label_font ps-1" for="create_by" id="create_by"></label></li>
-                <li><label class="label_font ps-1" for="update_by" id="update_by"></label></li>
             </ul>
+            <ul id="supplier_menu_head4" hidden>
+                <li><span># Creator Information :</span></li>
+            </ul>
+            <ul id="creatorORupdator" hidden>
+                <li><label class="label_font ps-1" for="user_names" id="user_names"></label></li>
+                <li><label class="label_font ps-1" for="create_by" id="create_by"></label></li>
+                <li><label class="label_font ps-1" for="user_creator_email" id="user_creator_email"></label></li>
+                <li><label class="label_font ps-1" for="create_date" id="create_date"></label></li>
+            </ul>
+            <ul id="supplier_menu_head5" hidden>
+                <li><span># Updator Information :</span></li>
+            </ul>
+            <ul id="creatorORupdator2" hidden>
+                <li><label class="label_font ps-1" for="user_update_names" id="user_update_names"></label></li>
+                <li><label class="label_font ps-1" for="update_by" id="update_by"></label></li>
+                <li><label class="label_font ps-1" for="user_updator_email" id="user_updator_email"></label></li>
+                <li><label class="label_font ps-1" for="update_date" id="update_date"></label></li>
+            </ul>
+            <div class="loader-position" id="searchLoader" hidden>
+                <img class="server-loader loader-show" id="loaderShow" src="{{asset('/image/loader/loading.gif')}}" alt="Loading...."/>
+            </div>
         </div>
-        <div class="modal-footer" id="logoutModal_footer">
-    
-        </div>    
+        <div class="modal-footer" id="logoutModal_footer"></div>    
     </div>
   </div>
 </div>
@@ -450,9 +478,11 @@
         });
     }
 
-    setTimeout(() => {
-        fetchData();
-    }, 1000);
+    requestAnimationFrame(()=> {
+        setTimeout(() => {
+            fetchData();
+        }, 1000);
+    });
 </script>
 
 @endsection

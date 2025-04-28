@@ -269,7 +269,7 @@ class SupplierServiceProvider
     */
     public function viewSuppliers($id)
     {
-        $suppliers = Supplier::find($id);
+        $suppliers = Supplier::with('users')->find($id);
         if($suppliers){
             return response()->json([
                 'status'=> 200,

@@ -669,46 +669,6 @@
             $('#deletesupplier').modal('show');
             $('#deleteconfirmsupplier').modal('hide');
         });
-
-        // Update- Supplier Status ------------------
-        $("#supplier_data_table").delegate(".supplier_check_permission", "click", function(e) {
-            e.preventDefault();
-
-            const current_url = "{{route('supplier_update_status.action')}}";
-            const pagination_url = $("#supplier_data_table_paginate .active").attr('href');
-            const status_id = $(this).attr('status_id');
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $.ajax({
-                type: "POST",
-                url: current_url,
-                dataType: 'json',
-                data: {
-                    id: status_id,
-                    supplier_status: $(this).val(),
-                },
-                success: function(response) {
-                    console.log('messages', response.messages);
-                    fetch_supplier_data('', pagination_url);
-                    $('#success_message').text(response.messages);
-                    $('#success_message').addClass('alert_show ps-1 pe-1');
-                    $('#success_message').fadeIn();
-                    setTimeout(() => {
-                        $('#success_message').fadeOut();
-                    }, 3000);
-                },
-                error: function(xhr) {
-                    if (xhr.status === 405) {
-                        window.location.href = '/data-connection/{id}';
-                    }
-                }
-            });
-        });
         
         // Supplier Info View
         $(document).on('click', '#view_btn', function(e) {
@@ -721,6 +681,38 @@
                 type: "GET",
                 url: "/view-supplier/" + supplier_id,
                 success: function(response) {
+                    // search-loader
+                    $("#view_name").addClass('form-head-skeletone');
+                    $(".btn-close").addClass('form-head-skeletone');
+                    $("#searchLoader").removeAttr('hidden');
+                    $("#supplier_menu_head").attr('hidden', true);
+                    $("#branch_supp").attr('hidden', true);
+                    $("#supplier_menu_head2").attr('hidden', true);
+                    $("#supplier_menu").attr('hidden', true);
+                    $("#supplier_menu_head3").attr('hidden', true);
+                    $("#status_row").attr('hidden', true);
+                    $("#supplier_menu_head4").attr('hidden', true);
+                    $("#supplier_menu_head5").attr('hidden', true);
+                    $("#creatorORupdator").attr('hidden', true);
+                    $("#creatorORupdator2").attr('hidden', true);
+                    requestAnimationFrame(()=>{
+                        setTimeout(() => {
+                            $("#view_name").removeClass('form-head-skeletone');
+                            $(".btn-close").removeClass('form-head-skeletone');
+                            $("#searchLoader").attr('hidden', true);
+                            $("#supplier_menu_head").removeAttr('hidden');
+                            $("#branch_supp").removeAttr('hidden');
+                            $("#supplier_menu_head2").removeAttr('hidden');
+                            $("#supplier_menu").removeAttr('hidden');
+                            $("#supplier_menu_head3").removeAttr('hidden');
+                            $("#status_row").removeAttr('hidden');
+                            $("#supplier_menu_head4").removeAttr('hidden');
+                            $("#supplier_menu_head5").removeAttr('hidden');
+                            $("#creatorORupdator").removeAttr('hidden');
+                            $("#creatorORupdator2").removeAttr('hidden');
+                        }, 1500);
+                    });
+
                     $("#view_name").empty();
                     $("#supp_vew").empty();
                     $("#view_type").empty();
@@ -739,6 +731,13 @@
                     $("#create_by").empty();
                     $("#update_by").empty();
                     $("#branch_id").empty();
+                    $("#user_creator_email").empty();
+                    $("#user_updator_email").empty();
+                    $("#user_names").empty();
+                    $("#user_update_names").empty();
+                    $("#branch_types").empty();
+                    $("#branch_names").empty();
+                    $("#branch_locations").empty();
                     if (response.status == 404) {
                         $('#success_message').html("");
                         $('#success_message').addClass('alert alert-danger');
@@ -747,8 +746,10 @@
                         $('#view_supplier_id').val(supplier_id);
                         var userRole = {{ auth()->user()->role }};
                         const messages = response.messages;
+                        
                         const created_by = messages.created_by;
                         const updated_by = messages.updated_by;
+                        const user_email = messages.users.login_email;
                         const supp_Name = $("#view_name");
                         const supp_ID = $("#supp_vew");
                         const type = $("#view_type");
@@ -761,6 +762,12 @@
                         const view_whatsapp_number = $("#view_whatsapp_number");
                         const view_email = $("#view_email");
                         const branchID = $("#branch_id");
+                        const branchType = messages.users.branch_type;
+                        const branchName = messages.users.branch_name;
+                        const branchLocation = messages.users.location;
+                        const user_name = messages.users.name;
+                        const creatorUserImage = messages.users.image.includes('https://') ? messages.users.image : `${window.location.origin}/storage/image/user-image/${messages.users.image}`;
+                        const updatorUserImage = messages.users.image.includes('https://') ? messages.users.image : `${window.location.origin}/storage/image/user-image/${messages.users.image}`;
                         
                         const supplierStatus = messages.supplier_status;
                         const status = $("#status");
@@ -770,6 +777,13 @@
 
                         let createdByRole;
                         let updatedByRole;
+                        let createdByEmail;
+                        let updatedByEmail;
+                        let branchTypes;
+                        let branchNames;
+                        let branchLocations;
+                        let userNames;
+                        let userUpdateNames;
 
                         const roles = {
                             1: 'SuperAdmin',
@@ -783,9 +797,19 @@
 
                         createdByRole = $("#create_by");
                         updatedByRole = $("#update_by");
+                        createdByEmail = $("#user_creator_email");
+                        updatedByEmail = $("#user_updator_email");
+                        branchTypes = $("#branch_types");
+                        branchNames = $("#branch_names");
+                        branchLocations = $("#branch_locations");
+                        userNames = $("#user_names");
+                        userUpdateNames = $("#user_update_names");
 
                         supp_Name.append(`<span>${messages.name}</span>`);
                         branchID.append(`<span>Branch-ID : ${messages.branch_id}</span>`);
+                        branchTypes.append(`<span>Branch-Type : ${branchType}</span>`);
+                        branchNames.append(`<span>Branch-Name : ${branchName}</span>`);
+                        branchLocations.append(`<span>Branch-Location : ${branchLocation}</span>`);
                         supp_ID.append(`<span>Supplier-ID : ${messages.id_name}</span>`);
                         type.append(`<span>Type : ${messages.type}</span>`);
                         view_bussiness_type.append(`<span>Bussiness : ${messages.bussiness_type}</span>`);
@@ -805,11 +829,33 @@
                             access_date.append(`<span>Deny-Date : ${formatDate(messages.supplier_deny_date)}</span>`);
                         }
 
-                        create_date.append(`<span>Create-Date : ${formatDate(messages.created_at)}</span>`);
-                        update_date.append(`<span>Update-Date : ${formatDate(messages.updated_at)}</span>`);
+                        if(created_by !== null){
+                            userNames.append(`<span>Name : ${user_name}</span> <img class="rounded-square ms-2" src="${creatorUserImage}">`);
+                            createdByRole.append(`<span>Role : ${roles[created_by] || 'Unknown'}</span>`);
+                            create_date.append(`<span>Date : ${formatDate(messages.created_at)}</span>`);
+                            createdByEmail.append(`<span>Email : ${user_email || 'null'}</span>`);
+                            $("#create_by").removeClass('display_none');
+                            $("#user_creator_email").removeClass('display_none');
+                        }else if(created_by == null){
+                            userNames.append(`<span> The data has not created yet. </span>`);
+                            $("#create_by").addClass('display_none');
+                            $("#user_creator_email").addClass('display_none');
+                        }
 
-                        createdByRole.append(`<span>Creator : ${roles[created_by] || 'Unknown'}</span>`);
-                        updatedByRole.append(`<span>Updator : ${roles[updated_by] || '--'}</span>`);
+                        if(updated_by !== null){
+                            userUpdateNames.append(`<span>Name : ${user_name} <img class="rounded-square ms-2" src="${updatorUserImage}"></span>`);
+                            update_date.append(`<span>Date : ${formatDate(messages.updated_at)}</span>`);
+                            updatedByRole.append(`<span>Role : ${roles[updated_by] || '--'}</span>`);
+                            updatedByEmail.append(`<span>Email : ${user_email || 'null'}</span>`);
+                            $("#user_update_names").removeClass('display_none');
+                            $("#update_by").removeClass('display_none');
+                            $("#user_updator_email").removeClass('display_none');
+                        }else if(updated_by == null){
+                            update_date.append(`<span> The data has not updated yet. </span>`);
+                            $("#user_update_names").addClass('display_none');
+                            $("#update_by").addClass('display_none');
+                            $("#user_updator_email").addClass('display_none');
+                        }
 
                     }
                 },

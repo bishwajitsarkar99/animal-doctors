@@ -5,6 +5,7 @@ namespace App\Models\Supplier;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Medicine\Inventory;
+use App\Models\User;
 
 class Supplier extends Model
 {
@@ -37,5 +38,10 @@ class Supplier extends Model
     public function inventories()
     {
         return $this->hasMany(Inventory::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 }

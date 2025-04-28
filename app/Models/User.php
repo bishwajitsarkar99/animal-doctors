@@ -117,4 +117,8 @@ class User extends Authenticatable
     public function role_permissions(){
         return $this->hasMany(RolePermission::class);
     }
+
+    public function suppliers(){
+        return $this->hasMany(Supplier::class);
+    }
 }

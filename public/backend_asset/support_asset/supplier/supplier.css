@@ -258,6 +258,32 @@ span#accessLabel {
     padding: 2px 10px;
     text-align: center;
 }
+.form-head-skeletone{
+    position: relative;
+}
+.form-head-skeletone::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation-name: css-skeleton-loading;
+    animation-duration: 1.4s;
+    animation-timing-function: ease;
+}
+@keyframes css-skeleton-loading{
+    0% {
+        background-position: var(--animation-background-position-0);
+    }
+    
+    100% {
+        background-position: var(--animation-background-position-100);
+    }
+}
 .sup-btn-skeleton,.sup-btn-skeleton-two{
     position: relative;
 }
@@ -351,14 +377,74 @@ a#suppSetting:hover{
     font-weight: 700;
     color: #000000;
 }
+.supplier_content_view_responsive {
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    max-height: 500px !important;
+}
+ul#branch_supp {
+    padding-left: 5px;
+    background-color: #fff;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
 ul#supplier_menu {
     padding-left: 5px;
+    background-color: #fff;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
-ul#supplier_menu_head{
+ul#status_row {
+    padding-left: 5px;
+    background-color: #fff;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+ul#creatorORupdator,ul#creatorORupdator2 {
+    padding-left: 5px;
+    background-color: #fff;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+ul#branch_supp:hover, ul#supplier_menu:hover, ul#status_row:hover, ul#creatorORupdator:hover{
+    background-color: #fff;
+    box-shadow: rgb(0 0 0 / 11%) 0px 2px 20px;
+    border: none;
+    opacity: 1;
+}
+ul#supplier_menu_head,ul#supplier_menu_head2,ul#supplier_menu_head3,ul#supplier_menu_head4,ul#supplier_menu_head5{
     font-family: var(--font-family-sans-serif);
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 700;
     padding-left: 8px;
+}
+.display_none{
+    display: none;
+}
+.rounded-square{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    transition: transform 0.5s ease-in-out;
+}
+.rounded-square:hover{
+    transform: scale(4);
+}
+.loader-position{
+    text-align: center;
+}
+img.server-loader {
+    width: 50px;
+    height: 50px;
 }
 ul>li{
     list-style: none;
@@ -370,6 +456,7 @@ ul>li{
 }
 #viewModal_header {
     background: aliceblue;
+    border-bottom: 1px solid lightgray;
 }
 .alert_show {
     font-size: 13px;
