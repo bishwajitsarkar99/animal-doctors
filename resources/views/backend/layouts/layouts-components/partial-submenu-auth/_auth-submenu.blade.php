@@ -162,7 +162,7 @@
         <div class="collapse" id="auth_" aria-labelledby="headingTwo" data-bs-parent="#auth_">
             <nav class="sb-sidenav-menu-nested nav child-tree">
                 <a class="nav-link underline nav_space load-page {{ Request::routeIs('user.details') ? 'active' : '' }}" href="{{ route('user.details') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
-                    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.User Activity')}}
+                    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.User Log Activity')}}
                 </a>
                 <!-- <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.404 Page')}}

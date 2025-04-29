@@ -201,7 +201,7 @@
                 </div>
                 <div class="col-xl-6"></div>
                 <div class="col-xl-2">
-                    <span class="login-user-title sub_total_user total-number-skeletone pt-1">{{ $total_users }}</span>
+                    <span class="login-user-title sub_total_user total-number-skeletone pt-1">{{ $total_users }}.00</span>
                 </div>
             </div>
         </div>
@@ -243,7 +243,7 @@
             borderWidth: 1,
             hoverBackgroundColor: "#b2dfb2",
             hoverBorderColor: "blue",
-            hoverBorderWidth: 3
+            hoverBorderWidth: 3,
             }]
         },
         options: {

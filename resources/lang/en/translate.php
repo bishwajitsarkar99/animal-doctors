@@ -307,7 +307,7 @@ return[
     'Installations'=>'Installations',
     // Log-Activity
     'Log-Activity'=>'Log-Activity',
-    'User Activity'=>'User Activity',
+    'User Log Activity'=>'User Log Activity',
     // Layout
     'File-Manager'=>'File-Manager',
     'Dark Sidenav'=>'Dark Sidenav',

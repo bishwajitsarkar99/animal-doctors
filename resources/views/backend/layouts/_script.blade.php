@@ -11,6 +11,7 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!--========== Ajax-Chart-Js 2.8.0 CDN Link ==========-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <!--========== Side-bar Script ==========-->
 <script src="{{asset('backend_asset')}}/main_asset/js/sidebar-script-min.js"></script>
 <!--========== Module - Helper Function Links ==========-->
@@ -26,7 +27,7 @@
 <!-- Bootstrap5 Sb-template asset -->
 <script src="{{asset('backend_asset')}}/main_asset/js/all-min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<!-- <script src="{{asset('backend_asset')}}/main_asset/demo/expenses-chart-line.js"></script> -->
+<script src="{{asset('backend_asset')}}/main_asset/demo/expenses-chart-line.js"></script>
 <script src="{{asset('backend_asset')}}/main_asset/demo/chart-bar-demo.js"></script>
 <script src="{{asset('backend_asset')}}/main_asset/demo/table-chart-demo.js"></script>
 <!-- Summar-Note -->

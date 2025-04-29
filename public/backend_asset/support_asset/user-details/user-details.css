@@ -554,6 +554,8 @@ div.card.order_line_chart:hover{
 }
 .sub_total_user{
     text-decoration: underline double;
+    font-size: 18px;
+    padding-left: 0;
     /* color: royalblue; */
 }
 label.item_class {
@@ -729,7 +731,7 @@ a.page-link.btn_page {
     left: -2px;
     top: 4px;
     width: 65px;
-    height: 21px;
+    height: 26px;
     border-radius: 5px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);

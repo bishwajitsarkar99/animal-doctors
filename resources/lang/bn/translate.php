@@ -310,7 +310,7 @@ return[
     'Installations'=>'ইনস্টলেশন',
     // Log-Activity
     'Log-Activity'=>'লগ-ক্রিয়াকলাপ',
-    'User Activity'=>'ব্যবহারকারী কার্যকলাপ',
+    'User Log Activity'=>'ব্যবহারকারী লগ-কার্যকলাপ',
     // Layout
     'File-Manager'=>'ফাইল-ম্যানেজার',
     'Dark Sidenav'=>'ডার্ক সাইড নেভিগেশন',

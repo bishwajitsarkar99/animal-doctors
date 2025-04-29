@@ -415,7 +415,7 @@ ul#creatorORupdator,ul#creatorORupdator2 {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }
-ul#branch_supp:hover, ul#supplier_menu:hover, ul#status_row:hover, ul#creatorORupdator:hover{
+ul#branch_supp:hover, ul#supplier_menu:hover, ul#status_row:hover, ul#creatorORupdator:hover, ul#creatorORupdator2:hover{
     background-color: #fff;
     box-shadow: rgb(0 0 0 / 11%) 0px 2px 20px;
     border: none;
