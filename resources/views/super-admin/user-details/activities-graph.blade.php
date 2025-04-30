@@ -1,37 +1,7 @@
 <!-- ==== User-Activities Analysis Graph ======= -->
 <div class="container">
     <div class="log-card">
-        <div class="row">
-            <div class="col-xl-6">
-                <div class="card card-body chart-card">
-                    <div class="card-header mini-bar-header ps-2" style="text-align:center;">
-                        <span class="card-head-title head-skeletone">
-                            <i class="fa-solid fa-layer-group"></i> 
-                            Total Current Users Activities ( Per Week )
-                        </span>
-                        <div class="loader_chart loader_skeleton" id="loader_userChart"></div>
-                    </div>
-                    <div class="user-activities--week-chart">
-                        <canvas id="userDayLogChart" width="100%" height="35"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6">
-                <div class="card card-body chart-card">
-                    <div class="card-header mini-bar-header ps-2" style="text-align:center;">
-                        <span class="card-head-title head-skeletone">
-                            <i class="fa-solid fa-layer-group"></i> 
-                            Total Current Users Activities ( Per Month )
-                        </span>
-                        <div class="loader_chart loader_skeleton" id="loader_userLogChart"></div>
-                    </div>
-                    <div class="user-activities--month-chart">
-                        <canvas id="userMonthLogChart" width="100%" height="35"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-5">
+        <div class="row mb-4">
             <div class="col-xl-12">
                 <div class="card card-body chart-card card-background">
                     <div class="row">
@@ -94,13 +64,42 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-12">
-                <p>
-                    <div class="users-activities">
-                        <span id="current_user_activites_records"></span>
+            <div class="col-xl-6">
+                <div class="card card-body chart-card">
+                    <div class="card-header mini-bar-header ps-2" style="text-align:center;">
+                        <span class="card-head-title head-skeletone">
+                            <i class="fa-solid fa-layer-group"></i> 
+                            Total Current Users Activities ( Per Week )
+                        </span>
+                        <div class="loader_chart loader_skeleton" id="loader_userChart"></div>
                     </div>
-                </p>
+                    <div class="user-activities--week-chart">
+                        <canvas id="userDayLogChart" width="100%" height="35"></canvas>
+                    </div>
+                </div>
             </div>
+            <div class="col-xl-6">
+                <div class="card card-body chart-card">
+                    <div class="card-header mini-bar-header ps-2" style="text-align:center;">
+                        <span class="card-head-title head-skeletone">
+                            <i class="fa-solid fa-layer-group"></i> 
+                            Total Current Users Activities ( Per Month )
+                        </span>
+                        <div class="loader_chart loader_skeleton" id="loader_userLogChart"></div>
+                    </div>
+                    <div class="user-activities--month-chart">
+                        <canvas id="userMonthLogChart" width="100%" height="35"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <div class="container users-activities">
+            <div id="logChartContainer" style="height: 400px; width: 100%;margin: 0 auto;"></div>
+            <img id="loader" src="https://canvasjs.com/wp-content/uploads/images/gallery/javascript-stockcharts/overview/loading.gif" style="position: absolute; top: 150px; left: 48%; display: none"/>
         </div>
     </div>
 </div>
@@ -346,6 +345,76 @@
             }
         });
 
+    });
+</script>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        var dataPoints1 = [], dataPoints2 = [];
+        var stockChart = new CanvasJS.StockChart("logChartContainer", {
+            title: {
+                text: "Total Current Users Activities ( Per Yearly )"
+            },
+            rangeChanged: rangeChanged,
+            charts: [{
+                axisY2: {
+                    prefix: "$"
+                },
+                data: [{
+                    type: "candlestick",
+                    yValueFormatString: "$#,###.##",
+                    axisYType: "secondary",
+                    dataPoints: dataPoints1
+                }]
+            }],
+            navigator: {
+                dynamicUpdate: false,
+                data: [{
+                    dataPoints: dataPoints2
+                }],
+                slider: {
+                    minimum: new Date(2015, 5, 1),
+                    maximum: new Date(2019, 5, 1)
+                }
+            }
+        });
+
+        function addData(data) {
+            stockChart.options.charts[0].data[0].dataPoints = [];
+            for (var i = 0; i < data.length; i++) {
+                stockChart.options.charts[0].data[0].dataPoints.push({
+                    x: new Date(data[i].dateTime * 1000),
+                    y: [Number(data[i].open), Number(data[i].high), Number(data[i].low), Number(data[i].close)]
+                });
+            }
+            stockChart.render();
+        }
+
+        function rangeChanged(e) {
+            var minimum = parseInt(e.minimum / 1000);
+            var maximum = parseInt(e.maximum / 1000);
+            var url = "https://canvasjs.com/services/data/datapoints-bitcoinusd.php?minimum=" + minimum + "&maximum=" + maximum;
+            $("#loader").css("display", "block");
+            $.getJSON(url, function (data) {
+                addData(data);
+                $("#loader").css("display", "none");
+            });
+        }
+
+        $("#loader").css("display", "block");
+        $.getJSON("https://canvasjs.com/services/data/datapoints-bitcoinusd.php", function (data) {
+            for (var i = 0; i < data.length; i++) {
+                dataPoints1.push({
+                    x: new Date(data[i].dateTime * 1000),
+                    y: [Number(data[i].open), Number(data[i].high), Number(data[i].low), Number(data[i].close)]
+                });
+                dataPoints2.push({
+                    x: new Date(data[i].dateTime * 1000),
+                    y: Number(data[i].close)
+                });
+            }
+            $("#loader").css("display", "none");
+            stockChart.render();
+        });
     });
 </script>
 @endPush
