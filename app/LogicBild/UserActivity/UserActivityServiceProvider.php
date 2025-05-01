@@ -34,8 +34,15 @@ class UserActivityServiceProvider
             'users' => User::where('role', 0)->count(),
             'inactive_users' => User::where('status', 1)->count(),
             'active_users' => User::where('status', 0)->count(),
-            'total_users' => User::count(),
             'users_log_activity' => SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count(),
+            'total_users' => User::count(),
+        ];
+
+        $usersActivityCount = [
+            'inactive_users_activity' => User::where('status', 1)->count(),
+            'active_users_activity' => User::where('status', 0)->count(),
+            'users_log_activities' => SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count(),
+            'total_users_activity' => User::count(),
         ];
 
         $total_users = User::count();
@@ -70,6 +77,7 @@ class UserActivityServiceProvider
                 'inactive_users' => $inactive_users,
                 'activity_users' => $activity_users,
                 'usersCount' => $usersCount,
+                'usersActivityCount' => $usersActivityCount,
                 'total_users_percentage' => $total_users_percentage,
                 'authentic_users_percentage' => $authentic_users_percentage,
                 'inactive_users_percentage' => $inactive_users_percentage,
@@ -80,7 +88,7 @@ class UserActivityServiceProvider
 
         $page_name = 'User Activity';
         
-        return view('super-admin.user-details.details', compact('usersCount','total_users','authentic_users','inactive_users','activity_users',
+        return view('super-admin.user-details.details', compact('usersCount','usersActivityCount','total_users','authentic_users','inactive_users','activity_users',
             'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage','roles', 'page_name')
         );
     }

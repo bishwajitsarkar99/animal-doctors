@@ -58,6 +58,7 @@
 
         // Loader Order Chart=======
         $("#loader_orderChart").addClass('loader_chart');
+        $("#loader_acivityChart").addClass('loader_chart');
 
     });
 

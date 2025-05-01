@@ -95,11 +95,14 @@
         </div>
     </div>
 </div>
-<div class="row mb-5">
-    <div class="col-xl-12">
-        <div class="container users-activities">
-            <div id="logChartContainer" style="height: 400px; width: 100%;margin: 0 auto;"></div>
-            <img id="loader" src="https://canvasjs.com/wp-content/uploads/images/gallery/javascript-stockcharts/overview/loading.gif" style="position: absolute; top: 150px; left: 48%; display: none"/>
+<div class="container">
+    <div class="row mb-5 mt-2">
+        <div class="col-xl-12">
+            <div class="users-activities">
+                <div class="container">
+                    <div id="logChartContainer" style="height: 400px; width: 100%;margin: 0 auto;"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -347,17 +350,29 @@
 
     });
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
         var dataPoints1 = [], dataPoints2 = [];
         var stockChart = new CanvasJS.StockChart("logChartContainer", {
             title: {
-                text: "Total Current Users Activities ( Per Yearly )"
+                text: "Total Current User Activities",
+                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                fontSize: 15,
+                fontWeight: "bold",
+                fontColor: "#000000"
             },
             rangeChanged: rangeChanged,
             charts: [{
                 axisY2: {
-                    prefix: "$"
+                    //prefix: "$",
+                    title: "Users",
+                    titleFontSize: 14,
+                    titleFontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                    titleFontWeight: "bold",
+                    labelFontSize: 12,
+                    fontColor: "#000000",
+                    titleFontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                    titleFontWeight: "bold",
                 },
                 data: [{
                     type: "candlestick",
@@ -367,6 +382,16 @@
                 }]
             }],
             navigator: {
+                axisX: {
+                    labelFontSize: 10,
+                    labelFontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                    labelFontWeight: "bold"
+                },
+                axisY: {
+                    labelFontSize: 10,
+                    labelFontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                    labelFontWeight: "bold"
+                },
                 dynamicUpdate: false,
                 data: [{
                     dataPoints: dataPoints2
@@ -416,5 +441,5 @@
             stockChart.render();
         });
     });
-</script>
+</script> -->
 @endPush
