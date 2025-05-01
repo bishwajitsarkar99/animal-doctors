@@ -356,6 +356,50 @@ div.card.order_line_chart {
     text-align: center;
     border: none;
 }
+.date-label{
+    font-family: var(--nav-font-family);
+    font-size: 13px;
+    font-weight: 700;
+    color: black;
+    opacity: 1;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    font-variant: all-petite-caps;
+    text-align: center;
+    border: none;
+}
+.input-group{
+    position: relative;
+    width: 100%;
+}
+input.input-date{
+    background-color: white;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: calc(1em + 2px + 0.5rem);
+    line-height: 1;
+    font-size: 13px;
+    box-shadow: none !important;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+    font-family: var(--nav-font-family);
+    opacity: 1;
+    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
+    letter-spacing: 1px;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    border-top: 1px solid rgba(219, 219, 219, 0.8);
+    border-bottom: 1px solid rgba(219, 219, 219, 0.8);
+    border-left: 1px solid rgba(219, 219, 219, 0.8);
+    border-right: 1px solid rgba(219, 219, 219, 0.8);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 .login-user-title{
     padding-left: 10px;
     font-family: var(--nav-font-family);
@@ -582,6 +626,13 @@ div.card.order_line_chart:hover{
     box-shadow: 0 4px 9px 0px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     opacity: 1;
 }
+.group_box {
+    display: flex !important;
+    justify-content: space-between !important;
+}
+.position {
+    text-align: right;
+}
 .sub_total_user{
     text-decoration: underline double;
     font-size: 18px;
@@ -674,9 +725,9 @@ a.page-link.btn_page {
     content: "";
     position: absolute;
     left: 0;
-    top: 0;
+    top: 1px;
     width: 100%;
-    height: 102%;
+    height: 103%;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
@@ -694,7 +745,7 @@ a.page-link.btn_page {
 .head-skeletone::before{
     content: "";
     position: absolute;
-    left: 0;
+    left: 1px;
     top: 0;
     width: 100%;
     height: 19px;
@@ -722,9 +773,9 @@ a.page-link.btn_page {
     position: absolute;
     left: -12px;
     top: -9px;
-    width: 94px;
+    width: 80px;
     border-radius: 50%;
-    height: 82px;
+    height: 68px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;

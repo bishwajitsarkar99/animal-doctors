@@ -68,8 +68,8 @@
                 <div class="card card-body chart-card">
                     <div class="card-header mini-bar-header ps-2" style="text-align:center;">
                         <span class="card-head-title head-skeletone">
-                            <i class="fa-solid fa-layer-group"></i> 
-                            Total Current Users Activities ( Per Week )
+                            <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
+                            Current Users Log Activities ( Per Week )
                         </span>
                         <div class="loader_chart loader_skeleton" id="loader_userChart"></div>
                     </div>
@@ -82,8 +82,8 @@
                 <div class="card card-body chart-card">
                     <div class="card-header mini-bar-header ps-2" style="text-align:center;">
                         <span class="card-head-title head-skeletone">
-                            <i class="fa-solid fa-layer-group"></i> 
-                            Total Current Users Activities ( Per Month )
+                            <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
+                            Current Users Log Activities ( Per Month )
                         </span>
                         <div class="loader_chart loader_skeleton" id="loader_userLogChart"></div>
                     </div>
@@ -98,9 +98,30 @@
 <div class="container">
     <div class="row mb-5 mt-2">
         <div class="col-xl-12">
-            <div class="users-activities">
-                <div class="container">
-                    <div id="logChartContainer" style="height: 400px; width: 100%;margin: 0 auto;"></div>
+            <div class="card card-body chart-card">
+                <div class="card-header mini-bar-header ps-2" style="text-align:center;">
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <span class="card-head-title head-skeletone">
+                                <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
+                                Total All Users Log Activities
+                            </span>
+                            <div class="loader_chart loader_skeleton" id="loader_userAllLogChart"></div>
+                        </div>
+                        <div class="col-xl-4 group_box">
+                            <span class="input-group">
+                                <label class="date-label" for="from">Form : </label>
+                                <input class="form-control form-control-sm input-date" type="text" Placeholder="DD-MM-YYYY" id="startDate">
+                            </span>
+                            <span class="input-group">
+                                <label class="date-label" for="from">To : </label>
+                                <input class="form-control form-control-sm input-date" type="text" Placeholder="DD-MM-YYYY" id="endDate">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-activities--month-chart">
+                    <canvas id="userAllLogChart" width="100%" height="25"></canvas>
                 </div>
             </div>
         </div>
@@ -350,96 +371,7 @@
 
     });
 </script>
-<!-- <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function () {
-        var dataPoints1 = [], dataPoints2 = [];
-        var stockChart = new CanvasJS.StockChart("logChartContainer", {
-            title: {
-                text: "Total Current User Activities",
-                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                fontSize: 15,
-                fontWeight: "bold",
-                fontColor: "#000000"
-            },
-            rangeChanged: rangeChanged,
-            charts: [{
-                axisY2: {
-                    //prefix: "$",
-                    title: "Users",
-                    titleFontSize: 14,
-                    titleFontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                    titleFontWeight: "bold",
-                    labelFontSize: 12,
-                    fontColor: "#000000",
-                    titleFontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                    titleFontWeight: "bold",
-                },
-                data: [{
-                    type: "candlestick",
-                    yValueFormatString: "$#,###.##",
-                    axisYType: "secondary",
-                    dataPoints: dataPoints1
-                }]
-            }],
-            navigator: {
-                axisX: {
-                    labelFontSize: 10,
-                    labelFontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                    labelFontWeight: "bold"
-                },
-                axisY: {
-                    labelFontSize: 10,
-                    labelFontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                    labelFontWeight: "bold"
-                },
-                dynamicUpdate: false,
-                data: [{
-                    dataPoints: dataPoints2
-                }],
-                slider: {
-                    minimum: new Date(2015, 5, 1),
-                    maximum: new Date(2019, 5, 1)
-                }
-            }
-        });
+<script>
 
-        function addData(data) {
-            stockChart.options.charts[0].data[0].dataPoints = [];
-            for (var i = 0; i < data.length; i++) {
-                stockChart.options.charts[0].data[0].dataPoints.push({
-                    x: new Date(data[i].dateTime * 1000),
-                    y: [Number(data[i].open), Number(data[i].high), Number(data[i].low), Number(data[i].close)]
-                });
-            }
-            stockChart.render();
-        }
-
-        function rangeChanged(e) {
-            var minimum = parseInt(e.minimum / 1000);
-            var maximum = parseInt(e.maximum / 1000);
-            var url = "https://canvasjs.com/services/data/datapoints-bitcoinusd.php?minimum=" + minimum + "&maximum=" + maximum;
-            $("#loader").css("display", "block");
-            $.getJSON(url, function (data) {
-                addData(data);
-                $("#loader").css("display", "none");
-            });
-        }
-
-        $("#loader").css("display", "block");
-        $.getJSON("https://canvasjs.com/services/data/datapoints-bitcoinusd.php", function (data) {
-            for (var i = 0; i < data.length; i++) {
-                dataPoints1.push({
-                    x: new Date(data[i].dateTime * 1000),
-                    y: [Number(data[i].open), Number(data[i].high), Number(data[i].low), Number(data[i].close)]
-                });
-                dataPoints2.push({
-                    x: new Date(data[i].dateTime * 1000),
-                    y: Number(data[i].close)
-                });
-            }
-            $("#loader").css("display", "none");
-            stockChart.render();
-        });
-    });
-</script> -->
+</script>
 @endPush

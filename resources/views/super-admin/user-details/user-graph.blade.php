@@ -239,6 +239,14 @@
 </div>
 @push('scripts')
 <script>
+    // Get the canvas context
+    const ctx2 = document.getElementById("userChart").getContext("2d");
+
+    // Create a vertical gradient for hoverBackgroundColor
+    const hoverGradient = ctx2.createLinearGradient(0, 0, 0, 400);
+    hoverGradient.addColorStop(0, "rgba(255,165,0,0.9)");  // Orange at top
+    hoverGradient.addColorStop(1, "rgba(255, 165, 0, 0)");   // Darker orange/red at bottom
+
     Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
     Chart.defaults.global.defaultFontColor = '#292b2c';
     const xValues = [
@@ -259,7 +267,8 @@
             backgroundColor: barColors,
             borderColor: "rgba(0, 0, 0, 0.1)",
             borderWidth: 1,
-            hoverBackgroundColor: "orange",
+            tension: 0.4,
+            hoverBackgroundColor: hoverGradient,
             hoverBorderColor: "orange",
             hoverBorderWidth: 3,
             }]
@@ -324,6 +333,9 @@
                 borderWidth: 2,
                 fill: false,
                 tension: 0.4,
+                pointStyle: 'triangle',
+                pointRadius: 5,
+                pointHoverRadius: 8,
                 pointBackgroundColor: ["#cf2e2e", "#fcb900", "#fcb900", "#fcb900"],
                 pointBorderColor: "orange",
                 pointHoverBackgroundColor: "orange",
