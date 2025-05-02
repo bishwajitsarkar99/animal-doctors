@@ -425,7 +425,7 @@ input.input-date{
     letter-spacing: 1px; 
 }
 
-#userDayLogChart {
+#userDayLogChart, #userMonthLogChart, #userAllLogChart {
     width: 100% !important;
 }
 .ring-div {

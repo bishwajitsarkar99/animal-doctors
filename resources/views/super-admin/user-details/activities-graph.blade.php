@@ -91,7 +91,7 @@
                         <div class="loader_chart loader_skeleton" id="loader_userLogChart"></div>
                     </div>
                     <div class="user-activities--month-chart">
-                        <canvas id="userMonthLogChart" width="100%" height="35"></canvas>
+                        <canvas id="userMonthLogChart" height="106"></canvas>
                     </div>
                 </div>
             </div>
@@ -124,7 +124,7 @@
                     </div>
                 </div>
                 <div class="user-activities--month-chart">
-                    <canvas id="userAllLogChart" width="100%" height="25"></canvas>
+                    <canvas id="userAllLogChart" height="80"></canvas>
                 </div>
             </div>
         </div>
@@ -232,8 +232,8 @@
                     },
                     y: {
                         grid: {
-                            display: true,
-                            color: 'rgba(98, 166, 255, 0.66)',
+                            display: false,
+                            color: 'silver',
                         },
                         ticks: {
                             beginAtZero: true,
@@ -321,9 +321,11 @@
                         display: true,
                         position: 'top',
                         labels: {
-                            color: '#333',
+                            color: '#000000',
                             font: {
                                 size: 12,
+                                family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                                weight: 'bold',
                             }
                         }
                     },
@@ -358,7 +360,7 @@
                         },
                         ticks: {
                             beginAtZero: true,
-                            color: '#333',
+                            color: '#3b71ca',
                             font: {
                                 size: 12, 
                                 family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
@@ -554,16 +556,53 @@
                         options: {
                             responsive: true,
                             plugins: {
+                                color: '#000000',
                                 legend: {
+                                    display: true,
                                     position: 'top',
+                                    labels: {
+                                        color: '#000000',
+                                        font: {
+                                            size: 12,
+                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                                            weight: 'bold',
+                                        }
+                                    }
                                 },
+                                font: {
+                                    size: 12,
+                                    family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                                    weight: 'bold',
+                                }
                             },
                             scales: {
+                                x: {
+                                    grid: {
+                                        display: true,
+                                        color: 'silver',
+                                    },
+                                    ticks: {
+                                        color: 'rgba(0, 0, 0, 0.99)',
+                                        font: {
+                                            size: 11, 
+                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                                            weight: 'bold',
+                                        }
+                                    }
+                                },
                                 y: {
                                     grid: {
                                         display: false,
                                     },
-                                    beginAtZero: true
+                                    ticks: {
+                                        beginAtZero: true,
+                                        color: 'royalblue',
+                                        font: {
+                                            size: 12, 
+                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                                            weight: 'bold',
+                                        }
+                                    }
                                 }
                             },
                             animation: {
