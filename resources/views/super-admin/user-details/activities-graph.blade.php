@@ -62,6 +62,9 @@
                     </div>
                 </div>
             </div>
+            <!-- <div class="col-xl-4">
+                <canvas id="chartContainer" width="100%" height="36"></canvas>
+            </div> -->
         </div>
         <div class="row">
             <div class="col-xl-6">
@@ -74,7 +77,7 @@
                         <div class="loader_chart loader_skeleton" id="loader_userChart"></div>
                     </div>
                     <div class="user-activities--week-chart">
-                        <canvas id="userDayLogChart" width="100%" height="35"></canvas>
+                        <canvas id="userDayLogChart" height="106"></canvas>
                     </div>
                 </div>
             </div>
@@ -139,7 +142,7 @@
         gradientLogin.addColorStop(1, 'rgba(34, 139, 34, 0)');    // transparent at bottom
 
         var gradientLogout = ctx.createLinearGradient(0, 0, 0, 400);
-        gradientLogout.addColorStop(0, 'rgba(255, 165, 0, 0.5)');  // orange at top
+        gradientLogout.addColorStop(0, '#e74a3b');  // orange at top
         gradientLogout.addColorStop(1, 'rgba(255, 165, 0, 0)');    // transparent at bottom
 
         var gradientUsers = ctx.createLinearGradient(0, 0, 0, 400);
@@ -165,7 +168,7 @@
                 }, {
                     label: "Logout",
                     data: [], // Placeholder for Current Logout Activity data
-                    borderColor: "#b98527",
+                    borderColor: '#e74a3b',
                     backgroundColor: gradientLogout,
                     borderWidth: 3,
                     fill: true, 
@@ -173,7 +176,7 @@
                     pointStyle: 'triangle',
                     pointRadius: 5,
                     pointHoverRadius: 8,
-                    pointBackgroundColor: "orange",
+                    pointBackgroundColor: "#e74a3b",
                 }, {
                     label: "Users Activity",
                     data: [], // Placeholder for Current Activity Users data
@@ -195,9 +198,11 @@
                         display: true,
                         position: 'top',
                         labels: {
-                            color: '#333',
+                            color: '#000000',
                             font: {
-                                size: 14,
+                                size: 12,
+                                family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                                weight: 'bold',
                             }
                         }
                     },
@@ -206,20 +211,20 @@
                         backgroundColor: 'rgba(0, 0, 0, 0.7)',
                         titleColor: '#fff',
                         bodyColor: '#fff',
-                        titleFont: { size: 16 },
-                        bodyFont: { size: 14 },
+                        titleFont: { size: 12 },
+                        bodyFont: { size: 12 },
                     }
                 },
                 scales: {
                     x: {
                         grid: {
-                            display: true,
+                            display: false,
                             color: 'rgba(0, 0, 0, 0.1)',
                         },
                         ticks: {
-                            color: '#333',
+                            color: 'rgba(0, 0, 0, 0.99)',
                             font: {
-                                size: 12, 
+                                size: 11, 
                                 family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
                                 weight: 'bold',
                             }
@@ -228,11 +233,11 @@
                     y: {
                         grid: {
                             display: true,
-                            color: 'rgba(0, 0, 0, 0.1)',
+                            color: 'rgba(98, 166, 255, 0.66)',
                         },
                         ticks: {
                             beginAtZero: true,
-                            color: '#333',
+                            color: '#3b71ca',
                             font: {
                                 size: 12, 
                                 family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
@@ -260,7 +265,7 @@
         gradientLogin.addColorStop(1, 'rgba(34, 139, 34, 0)');    // transparent at bottom
 
         var gradientLogout = monthUserCtx.createLinearGradient(0, 0, 0, 400);
-        gradientLogout.addColorStop(0, 'rgba(255, 165, 0, 0.5)');  // orange at top
+        gradientLogout.addColorStop(0, '#e74a3b');  // orange at top
         gradientLogout.addColorStop(1, 'rgba(255, 165, 0, 0)');    // transparent at bottom
 
         var gradientUsers = monthUserCtx.createLinearGradient(0, 0, 0, 400);
@@ -286,7 +291,7 @@
                 }, {
                     label: "Logout",
                     data: [], // Placeholder for Current Logout Activity data
-                    borderColor: "#b98527",
+                    borderColor: '#e74a3b',
                     backgroundColor: gradientLogout,
                     borderWidth: 3,
                     fill: true, 
@@ -294,7 +299,7 @@
                     pointStyle: 'triangle',
                     pointRadius: 5,
                     pointHoverRadius: 8,
-                    pointBackgroundColor: "orange",
+                    pointBackgroundColor: "#e74a3b",
                 }, {
                     label: "Users Activity",
                     data: [], // Placeholder for current user data
@@ -318,7 +323,7 @@
                         labels: {
                             color: '#333',
                             font: {
-                                size: 14,
+                                size: 12,
                             }
                         }
                     },
@@ -327,14 +332,14 @@
                         backgroundColor: 'rgba(0, 0, 0, 0.7)',
                         titleColor: '#fff',
                         bodyColor: '#fff',
-                        titleFont: { size: 16 },
-                        bodyFont: { size: 14 },
+                        titleFont: { size: 12 },
+                        bodyFont: { size: 12 },
                     }
                 },
                 scales: {
                     x: {
                         grid: {
-                            display: true,
+                            display: false,
                             color: 'rgba(0, 0, 0, 0.1)',
                         },
                         ticks: {
@@ -348,7 +353,7 @@
                     },
                     y: {
                         grid: {
-                            display: true,
+                            display: false,
                             color: 'rgba(0, 0, 0, 0.1)',
                         },
                         ticks: {
@@ -371,7 +376,7 @@
 
     });
 </script>
-<script>
+<!-- <script>
     const userCanvas  = document.getElementById('userAllLogChart').getContext('2d');
 
     const userCtx = new Chart(userCanvas , {
@@ -384,7 +389,7 @@
             datasets: [
                 {
                     type: 'line',
-                    label: 'Expected Sales',
+                    label: 'Users Logout',
                     borderColor: '#e74a3b',
                     backgroundColor: 'transparent',
                     borderWidth: 2,
@@ -397,7 +402,7 @@
                 },
                 {
                     type: 'line',
-                    label: 'Profit',
+                    label: 'Users Login',
                     backgroundColor: 'rgba(28,200,138,0.5)',
                     borderColor: 'rgba(28,200,138,1)',
                     fill: true,
@@ -410,7 +415,7 @@
                 },
                 {
                     type: 'bar',
-                    label: 'Actual Sales',
+                    label: 'Users Activity',
                     backgroundColor: '#4e73df',
                     data: [20000, 30000, 25000, 70000, 50000, 35000, 30000, 43000, 35000, 30000, 40000, 50000],
                     order: 1
@@ -468,29 +473,168 @@
         order = Math.max(0, Math.min(order, suffixes.length - 1));
         return (value / Math.pow(1000, order)).toFixed(1) + suffixes[order];
     }
-</script>
+</script> -->
 <script>
     $(document).ready(function(){
-        analyticalChartFetch();
+        let chart; // Declare outside to update globally
 
-        function analyticalChartFetch(){
-
-            var start = $("#chartStartDate").val();
-            var end = $("#chartEndDate").val();
+        function analyticalChartFetch() {
+            let start = $("#chartStartDate").val();
+            let end = $("#chartEndDate").val();
 
             $.ajax({
-                type:'GET',
-                url: "{{route('user.analytical_chart')}}",
+                type: 'GET',
+                url: "{{ route('user.analytical_chart') }}",
                 dataType: 'json',
                 data: {
-                    start_date : $start,
-                    end_date : $end
+                    start_date: start,
+                    end_date: end
                 },
-                success: function() {
-                    // 
+                success: function(response) {
+                    const labels = response.labels;
+                    const data = response.monthly_user_count_per_day;
+
+                    if (chart) {
+                        chart.destroy(); // Destroy existing chart before redrawing
+                    }
+
+                    const userCanvas = document.getElementById('userAllLogChart').getContext('2d');
+                    // Create gradient for each dataset line
+                    var gradientLogin = userCanvas.createLinearGradient(0, 0, 0, 400);
+                    gradientLogin.addColorStop(0, 'rgba(28,200,138,0.5)');  // darkgreen at top
+                    gradientLogin.addColorStop(1, 'rgba(34, 139, 34, 0)');    // transparent at bottom
+
+                    var gradientLogout = userCanvas.createLinearGradient(0, 0, 0, 400);
+                    gradientLogout.addColorStop(0, '#e74a3b');  // orange at top
+                    gradientLogout.addColorStop(1, 'rgba(255, 165, 0, 0)');    // transparent at bottom
+
+                    var gradientUsers = userCanvas.createLinearGradient(0, 0, 0, 400);
+                    gradientUsers.addColorStop(0, '#4e73df');  // blue at top
+                    gradientUsers.addColorStop(1, 'rgba(0, 0, 255, 0)');    // transparent at bottom
+                    chart = new Chart(userCanvas, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    type: 'line',
+                                    label: 'Login Count',
+                                    data: data.login_counts,
+                                    backgroundColor: gradientLogin,
+                                    borderColor: 'rgba(28,200,138,1)',
+                                    fill: true,
+                                    tension: 0.4,
+                                    pointRadius: 5,
+                                    pointHoverRadius: 8,
+                                    pointBackgroundColor: "darkgreen",
+                                },
+                                {
+                                    type: 'line',
+                                    label: 'Logout Count',
+                                    data: data.logout_counts,
+                                    fill: true,
+                                    borderColor: '#e74a3b',
+                                    backgroundColor: gradientLogout,
+                                    borderWidth: 2,
+                                    tension: 0.4,
+                                    pointRadius: 5,
+                                    pointHoverRadius: 8,
+                                    pointBackgroundColor: "#e74a3b",
+                                },
+                                {
+                                    type: 'bar',
+                                    label: 'Active Users',
+                                    data: data.current_user_counts,
+                                    backgroundColor: gradientUsers,
+                                    tension: 0.4,
+                                    fill: false
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                            },
+                            scales: {
+                                y: {
+                                    grid: {
+                                        display: false,
+                                    },
+                                    beginAtZero: true
+                                }
+                            },
+                            animation: {
+                                duration: 1500,
+                                easing: 'easeInOutBounce',
+                            }
+                        }
+                    });
                 }
             });
         }
+
+        analyticalChartFetch();
+
+        // Optional: Re-fetch on date change or button click
+        $("#chartStartDate, #chartEndDate").on('change', function(){
+            analyticalChartFetch();
+        });
     });
 </script>
+<!-- <script>
+    window.onload = function () {
+        const ctx = document.getElementById('chartContainer').getContext('2d');
+
+        const dataValues = [67, 28, 10, 7, 15, 6];
+        const dataLabels = ['Inbox', 'Archives', 'Labels', 'Drafts', 'Trash', 'Spam'];
+        const total = dataValues.reduce((a, b) => a + b, 0);
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: dataLabels,
+                datasets: [{
+                    data: dataValues,
+                    backgroundColor: [
+                        '#4e73df', '#e74a3b', '#a4de02', '#2ed9c3', '#8e44ad', '#36b9cc'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Email Categories',
+                        align: 'start',
+                        padding: {
+                            top: 10,
+                            bottom: 30
+                        }
+                    },
+                    datalabels: {
+                        color: '#000',
+                        anchor: 'end',
+                        align: 'start',
+                        offset: 10,
+                        clamp: true,
+                        formatter: function (value, context) {
+                            const percent = ((value / total) * 100).toFixed(2);
+                            return `${context.chart.data.labels[context.dataIndex]} - ${percent}%`;
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    };
+</script> -->
 @endPush

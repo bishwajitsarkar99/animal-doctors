@@ -11,6 +11,8 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!--========== Ajax-Chart-Js 2.8.0 CDN Link ==========-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> -->
 <!--========== Side-bar Script ==========-->
 <script src="{{asset('backend_asset')}}/main_asset/js/sidebar-script-min.js"></script>
 <!--========== Module - Helper Function Links ==========-->

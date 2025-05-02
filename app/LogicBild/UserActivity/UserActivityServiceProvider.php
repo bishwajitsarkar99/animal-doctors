@@ -303,63 +303,65 @@ class UserActivityServiceProvider
     */
     public function userAnalyticalCharts(Request $request)
     {
-        // Start of the month
-        $startOfMonth = Carbon::now()->startOfMonth();
-        $endOfMonth = Carbon::now()->endOfMonth();
-        // Date Request
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
 
-        // Apply default current month filter if no custom date range provided
-        if (!$start_date || !$end_date) {
-            $user_activities->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
-        }
-
-        // Apply date range filter
         if ($start_date && $end_date) {
             $start = Carbon::parse($start_date)->startOfDay();
             $end = Carbon::parse($end_date)->endOfDay();
-            $user_activities->whereBetween('created_at', [$start, $end]);
+        } else {
+            $start = Carbon::now()->startOfYear();
+            $end = Carbon::now()->endOfYear();
         }
 
-        // Group by day for login, logout, and current user counts (weekly data)
-        $login_counts = SessionModel::select(DB::raw('DATE(created_at) as day'), DB::raw('count(*) as count'))
+        $login_counts_monthly = SessionModel::whereBetween('created_at', [$start, $end])
+            ->whereNotNull('user_id')
             ->where('payload', 'login')
-            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
-            ->groupBy('day')
-            ->pluck('count', 'day')
+            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
+            ->groupBy('month')
+            ->pluck('count', 'month')
             ->toArray();
 
-        $logout_counts = SessionModel::select(DB::raw('DATE(created_at) as day'), DB::raw('count(*) as count'))
+        $logout_counts_monthly = SessionModel::whereBetween('created_at', [$start, $end])
+            ->whereNotNull('user_id')
             ->where('payload', 'logout')
-            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
-            ->groupBy('day')
-            ->pluck('count', 'day')
+            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
+            ->groupBy('month')
+            ->pluck('count', 'month')
             ->toArray();
 
-        $current_user_counts = SessionModel::whereNotNull('user_id')
-            ->select(DB::raw('DATE(created_at) as day'), DB::raw('COUNT(DISTINCT user_id) as count'))
-            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
-            ->groupBy('day')
-            ->pluck('count', 'day')
+        $current_user_counts_monthly = SessionModel::whereBetween('created_at', [$start, $end])
+            ->whereNotNull('user_id')
+            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('COUNT(DISTINCT user_id) as count'))
+            ->groupBy('month')
+            ->pluck('count', 'month')
             ->toArray();
-        
-        // Prepare array with the last 7 days (Saturday to Friday)
-        $daysOfWeek = [];
-        for ($i = 6; $i >= 0; $i--) {
-            $day = Carbon::now()->subDays($i)->format('Y-m-d');
-            $daysOfWeek[] = $day;
+
+        $monthly_labels = [];
+        $login_counts_monthly_filled = [];
+        $logout_counts_monthly_filled = [];
+        $current_user_counts_monthly_filled = [];
+
+        $period = Carbon::parse($start)->startOfMonth();
+        $endPeriod = Carbon::parse($end)->startOfMonth();
+
+        while ($period <= $endPeriod) {
+            $formattedMonth = $period->format('Y-m');
+            $monthly_labels[] = $period->format('M Y');
+            $login_counts_monthly_filled[] = $login_counts_monthly[$formattedMonth] ?? 0;
+            $logout_counts_monthly_filled[] = $logout_counts_monthly[$formattedMonth] ?? 0;
+            $current_user_counts_monthly_filled[] = $current_user_counts_monthly[$formattedMonth] ?? 0;
+
+            $period->addMonth();
         }
 
-        // Fill in missing days with 0 counts
-        $login_counts_filled = [];
-        $logout_counts_filled = [];
-        $current_user_counts_filled = [];
-
-        foreach ($daysOfWeek as $day) {
-            $login_counts_filled[] = isset($login_counts[$day]) ? $login_counts[$day] : 0;
-            $logout_counts_filled[] = isset($logout_counts[$day]) ? $logout_counts[$day] : 0;
-            $current_user_counts_filled[] = isset($current_user_counts[$day]) ? $current_user_counts[$day] : 0;
-        }
+        return response()->json([
+            'labels' => $monthly_labels,
+            'monthly_user_count_per_day' => [
+                'login_counts' => $login_counts_monthly_filled,
+                'logout_counts' => $logout_counts_monthly_filled,
+                'current_user_counts' => $current_user_counts_monthly_filled,
+            ],
+        ]);
     }
 }

@@ -246,11 +246,11 @@
         "Super admin", "Admin", "Sub admin", "Accounts", "Marketing", "Delivery", "General",
         "Inactive Users","Authentic Users","Log Activity","Total Users"
     ];
-    const barColors = ["rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)","#cf2e2e","#fcb900","#fcb900","#fcb900"];
+    const barColors = ["rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)","#cf2e2e","#198754","#6f42c1","#0A5EDB"];
     // bg-color:royalblue
     // Pass the PHP array to JavaScript 
     const userCounts = @json(array_values($usersCount));
-    const userChart = new Chart(ctx2, {
+    const userCtx2 = new Chart(ctx2, {
         type: "bar",
         data: {
             labels: xValues,
@@ -265,10 +265,9 @@
             legend: { display: false },
             scales: {
                 y: {
-                    min: 0,
+                    beginAtZero: true,
                     grid: { display: false },
                     ticks: {
-                        beginAtZero: true,
                         color: '#4285F4',
                         font: {
                             family: "'Times New Roman', Times, serif",
@@ -298,7 +297,10 @@
 </script>
 <script>
     const ctxUserActivityChart = document.getElementById("userActivityChart").getContext("2d");
-    const userActivityChart = new Chart(ctxUserActivityChart, {
+    var gradientColor = ctxUserActivityChart.createLinearGradient(0, 0, 0, 400);
+    gradientColor.addColorStop(0, 'rgb(142, 229, 255)');  // orange at top
+    gradientColor.addColorStop(1, 'rgba(255, 165, 0, 0)');    // transparent at bottom
+    const userActivityLineChart = new Chart(ctxUserActivityChart, {
         type: "line",
         data: {
             labels: ["Inactive Users", "Authentic Users", "Log Activity", "Total Users"],
@@ -306,7 +308,7 @@
                 type: "line",
                 label: "User Activity",
                 data: @json(array_values($usersActivityCount)),
-                backgroundColor: 'rgb(142, 195, 255)',
+                backgroundColor: gradientColor,
                 borderColor: '#0A5EDB',
                 borderWidth: 2,
                 fill: true,
@@ -329,7 +331,6 @@
             },
             scales: {
                 y: {
-                    min: 0,
                     ticks: {
                         beginAtZero: true,
                         color: '#000000',
