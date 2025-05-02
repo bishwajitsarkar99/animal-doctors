@@ -66,6 +66,16 @@
       changeMonth: true,
       changeYear: true,
     });
+    $('#chartStartDate').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
+    $('#chartEndDate').datepicker({
+      dateFormat: "dd-mm-yy",
+      changeMonth: true,
+      changeYear: true,
+    });
   });
 </script>
 <script>

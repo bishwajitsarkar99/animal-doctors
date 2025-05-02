@@ -362,6 +362,7 @@ div.card.order_line_chart {
     font-weight: 700;
     color: black;
     opacity: 1;
+    line-height: 2;
     text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
     font-variant: all-petite-caps;
     text-align: center;

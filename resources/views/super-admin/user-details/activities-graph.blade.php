@@ -111,11 +111,11 @@
                         <div class="col-xl-4 group_box">
                             <span class="input-group">
                                 <label class="date-label" for="from">Form : </label>
-                                <input class="form-control form-control-sm input-date" type="text" Placeholder="DD-MM-YYYY" id="startDate">
+                                <input class="form-control form-control-sm input-date" type="text" name="start_date" Placeholder="DD-MM-YYYY" id="chartStartDate" autocomplete="off">
                             </span>
                             <span class="input-group">
                                 <label class="date-label" for="from">To : </label>
-                                <input class="form-control form-control-sm input-date" type="text" Placeholder="DD-MM-YYYY" id="endDate">
+                                <input class="form-control form-control-sm input-date" type="text" name="end_date" Placeholder="DD-MM-YYYY" id="chartEndDate" autocomplete="off">
                             </span>
                         </div>
                     </div>
@@ -252,22 +252,22 @@
 <script>
     $(document).ready(function() {
         // Initialize the chart
-        var ctx = document.getElementById("userMonthLogChart").getContext('2d');
+        var monthUserCtx = document.getElementById("userMonthLogChart").getContext('2d');
 
         // Create gradient for each dataset line
-        var gradientLogin = ctx.createLinearGradient(0, 0, 0, 400);
+        var gradientLogin = monthUserCtx.createLinearGradient(0, 0, 0, 400);
         gradientLogin.addColorStop(0, 'rgba(34, 139, 34, 0.5)');  // darkgreen at top
         gradientLogin.addColorStop(1, 'rgba(34, 139, 34, 0)');    // transparent at bottom
 
-        var gradientLogout = ctx.createLinearGradient(0, 0, 0, 400);
+        var gradientLogout = monthUserCtx.createLinearGradient(0, 0, 0, 400);
         gradientLogout.addColorStop(0, 'rgba(255, 165, 0, 0.5)');  // orange at top
         gradientLogout.addColorStop(1, 'rgba(255, 165, 0, 0)');    // transparent at bottom
 
-        var gradientUsers = ctx.createLinearGradient(0, 0, 0, 400);
+        var gradientUsers = monthUserCtx.createLinearGradient(0, 0, 0, 400);
         gradientUsers.addColorStop(0, 'rgba(0, 0, 255, 0.5)');  // blue at top
         gradientUsers.addColorStop(1, 'rgba(0, 0, 255, 0)');    // transparent at bottom
 
-        userMonthLogChart = new Chart(ctx, {
+        userMonthLogChart = new Chart(monthUserCtx, {
             type: 'line',
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -372,6 +372,125 @@
     });
 </script>
 <script>
+    const userCanvas  = document.getElementById('userAllLogChart').getContext('2d');
 
+    const userCtx = new Chart(userCanvas , {
+        type: 'bar', // base type, we'll mix types
+        data: {
+            labels: [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ],
+            datasets: [
+                {
+                    type: 'line',
+                    label: 'Expected Sales',
+                    borderColor: '#e74a3b',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: "#e74a3b",
+                    data: [40000, 42000, 45000, 45000, 47000, 43000, 42000, 43000, 41000, 45000, 42000, 50000],
+                    order: 2
+                },
+                {
+                    type: 'line',
+                    label: 'Profit',
+                    backgroundColor: 'rgba(28,200,138,0.5)',
+                    borderColor: 'rgba(28,200,138,1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: "darkgreen",
+                    data: [5000, 7000, 6000, 30000, 20000, 15000, 13000, 20000, 15000, 10000, 19000, 22000],
+                    order: 3
+                },
+                {
+                    type: 'bar',
+                    label: 'Actual Sales',
+                    backgroundColor: '#4e73df',
+                    data: [20000, 30000, 25000, 70000, 50000, 35000, 30000, 43000, 35000, 30000, 40000, 50000],
+                    order: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Monthly Sales Data'
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function(context) {
+                            let value = context.parsed.y;
+                            return context.dataset.label + ': $' + formatWithSuffix(value);
+                        }
+                    }
+                },
+                legend: {
+                    onClick: (e, legendItem, legend) => {
+                        const index = legendItem.datasetIndex;
+                        const chart = legend.chart;
+                        const meta = chart.getDatasetMeta(index);
+                        meta.hidden = meta.hidden === null ? !chart.data.datasets[index].hidden : null;
+                        chart.update();
+                    }
+                }
+            },
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + formatWithSuffix(value);
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Helper function to add suffixes like K/M
+    function formatWithSuffix(value) {
+        const suffixes = ['', 'K', 'M', 'B'];
+        let order = Math.floor(Math.log10(Math.abs(value)) / 3);
+        order = Math.max(0, Math.min(order, suffixes.length - 1));
+        return (value / Math.pow(1000, order)).toFixed(1) + suffixes[order];
+    }
+</script>
+<script>
+    $(document).ready(function(){
+        analyticalChartFetch();
+
+        function analyticalChartFetch(){
+
+            var start = $("#chartStartDate").val();
+            var end = $("#chartEndDate").val();
+
+            $.ajax({
+                type:'GET',
+                url: "{{route('user.analytical_chart')}}",
+                dataType: 'json',
+                data: {
+                    start_date : $start,
+                    end_date : $end
+                },
+                success: function() {
+                    // 
+                }
+            });
+        }
+    });
 </script>
 @endPush

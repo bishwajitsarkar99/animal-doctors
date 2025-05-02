@@ -10,4 +10,5 @@ Route::group(['prefix' => 'super-admin', 'middleware' => ['web', 'isSuperAdmin']
     Route::get('/show-user-details', [UserLocationController::class, 'details'])->name('user.details');
     Route::get('/show-user-activity', [UserLocationController::class, 'activity'])->name('user.activity');
     Route::get('/get-user-activity', [UserLocationController::class, 'getActivity'])->name('user.get_activity');
+    Route::get('/user-activity-analytical-chart', [UserLocationController::class, 'userAnalyticalChart'])->name('user.analytical_chart');
 });

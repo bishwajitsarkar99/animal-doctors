@@ -78,7 +78,7 @@
                     </tr>
                     <tr class="table-row user-table-row supp-table-row hidden child-row" data-user-id="${row.last_activity}">
                         <td class="txt_ supp_vew9" id="supp_tab12">
-                            <img class="user_img rounded-circle user_imgs ms-3" src="${row.image.includes('https://')?row.image: '/image/'+ row.image}">
+                            <img class="user_img rounded-circle user_imgs ms-3" src="${row.image.includes('https://')?row.image: '/storage/image/user-image/'+ row.image}">
                         </td>
                         <td class="txt_ ps-1 supp_vew5" id="supp_tab8" colspan="7" style="color:blue;"><span style="font-weight:600;">User-Agent :</span> ${row.user_agent}</td>
                     </tr>

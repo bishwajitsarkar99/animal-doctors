@@ -242,13 +242,6 @@
     // Get the canvas context
     const ctx2 = document.getElementById("userChart").getContext("2d");
 
-    // Create a vertical gradient for hoverBackgroundColor
-    const hoverGradient = ctx2.createLinearGradient(0, 0, 0, 400);
-    hoverGradient.addColorStop(0, "rgba(255,165,0,0.9)");  // Orange at top
-    hoverGradient.addColorStop(1, "rgba(255, 165, 0, 0)");   // Darker orange/red at bottom
-
-    Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-    Chart.defaults.global.defaultFontColor = '#292b2c';
     const xValues = [
         "Super admin", "Admin", "Sub admin", "Accounts", "Marketing", "Delivery", "General",
         "Inactive Users","Authentic Users","Log Activity","Total Users"
@@ -257,59 +250,44 @@
     // bg-color:royalblue
     // Pass the PHP array to JavaScript 
     const userCounts = @json(array_values($usersCount));
-
-    const userChart = new Chart("userChart", {
+    const userChart = new Chart(ctx2, {
         type: "bar",
         data: {
             labels: xValues,
             datasets: [{
-            data: userCounts,
-            backgroundColor: barColors,
-            borderColor: "rgba(0, 0, 0, 0.1)",
-            borderWidth: 1,
-            tension: 0.4,
-            hoverBackgroundColor: hoverGradient,
-            hoverBorderColor: "orange",
-            hoverBorderWidth: 3,
+                data: userCounts,
+                backgroundColor: barColors,
+                tension: 0.4,
             }]
         },
         options: {
             responsive: true,
             legend: { display: false },
             scales: {
-            y: {
-                beginAtZero: true,
-                grid: { display: false },
-                gridLines: {
-                display: false
+                y: {
+                    min: 0,
+                    grid: { display: false },
+                    ticks: {
+                        beginAtZero: true,
+                        color: '#4285F4',
+                        font: {
+                            family: "'Times New Roman', Times, serif",
+                            size: 12,
+                            weight: 'bold'
+                        }
+                    },
                 },
-                grid: {
-                offset: true
-                },
-                ticks: {
-                color: '#4285F4',
-                    font: {
-                        size: 12,
-                        weight: 'bold'
+                x: {
+                    grid: { display: false },
+                    ticks: {
+                        color: '#f44242',
+                        font: {
+                            family: "'Times New Roman', Times, serif",
+                            size: 12,
+                            weight: 'bold'
+                        }
                     }
                 }
-            },
-            x: {
-                grid: { display: false },
-                gridLines: {
-                display: false
-                },
-                grid: {
-                offset: true
-                },
-                ticks: {
-                color: '#f44242',
-                font: {
-                    size: 12,
-                    weight: 'bold'
-                }
-                }
-            }
             },
             animation: {
             duration: 2000,
@@ -319,27 +297,27 @@
     });
 </script>
 <script>
-    Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-    Chart.defaults.global.defaultFontColor = '#292b2c';
     const ctxUserActivityChart = document.getElementById("userActivityChart").getContext("2d");
     const userActivityChart = new Chart(ctxUserActivityChart, {
         type: "line",
         data: {
             labels: ["Inactive Users", "Authentic Users", "Log Activity", "Total Users"],
             datasets: [{
+                type: "line",
                 label: "User Activity",
                 data: @json(array_values($usersActivityCount)),
-                borderColor: "darkgreen",
+                backgroundColor: 'rgb(142, 195, 255)',
+                borderColor: '#0A5EDB',
                 borderWidth: 2,
-                fill: false,
+                fill: true,
                 tension: 0.4,
-                pointStyle: 'triangle',
+                pointStyle: ['triangle','triangle','triangle','triangle'],
                 pointRadius: 5,
-                pointHoverRadius: 8,
-                pointBackgroundColor: ["#cf2e2e", "#fcb900", "#fcb900", "#fcb900"],
-                pointBorderColor: "orange",
-                pointHoverBackgroundColor: "orange",
-                pointHoverBorderColor: "orange"
+                pointHoverRadius: 10,
+                pointBackgroundColor: ["#cf2e2e", "darkgreen", "#6f42c1", "#0A5EDB"],
+                pointBorderColor: ["#cf2e2e", "darkgreen", "#6f42c1", "#0A5EDB"],
+                pointHoverBackgroundColor: ["#cf2e2e", "darkgreen", "#6f42c1", "#0A5EDB"],
+                pointHoverBorderColor: ["#cf2e2e", "darkgreen", "#6f42c1", "#0A5EDB"]
             }]
         },
         options: {
@@ -350,35 +328,23 @@
                 }
             },
             scales: {
-                yAxes: {
-                    beginAtZero: true,
-                    gridLines: {
-                        display: false
-                    },
-                    grid: { 
-                        display: false 
-                    },
+                y: {
+                    min: 0,
                     ticks: {
-                        family: "'Times New Roman', Times, serif",
+                        beginAtZero: true,
                         color: '#000000',
                         font: {
+                            family: "'Times New Roman', Times, serif",
                             size: 12,
                             weight: 'bold'
                         }
                     }
                 },
-                xAxes: {
-                    gridLines: {
-                        display: false
-                    },
-                    grid: { 
-                        display: false,
-                        offset: true 
-                    },
+                x: {
                     ticks: {
-                        family: "'Times New Roman', Times, serif",
                         color: '#000000',
                         font: {
+                            family: "'Times New Roman', Times, serif",
                             size: 12,
                             weight: 'bold'
                         }
@@ -391,169 +357,5 @@
             }
         }
     });
-</script>
-<script>
-    // pie chart
-    // window.onload = function () {
-
-    //     var chart = new CanvasJS.Chart("pieChartContainer", {
-    //         exportEnabled: true,
-    //         animationEnabled: true,
-    //         title:{
-    //             text: "Total User Pie Chart",
-    //             fontSize: 14, // Title font size
-    //             fontFamily: "Segoe UI"
-    //         },
-    //         legend:{
-    //             cursor: "pointer",
-    //             itemclick: explodePie
-    //         },
-    //         legend: {
-    //             cursor: "pointer",
-    //             itemclick: explodePie,
-    //             fontSize: 12 // Legend font size
-    //         },
-    //         data: [{
-    //             type: "pie",
-    //             showInLegend: true,
-    //             toolTipContent: "{name}: <strong>{y}%</strong>",
-    //             indexLabel: "{name} - {y}%",
-    //             indexLabelFontSize: 12, 
-    //             dataPoints: [
-    //                 { y: 26, name: "Total User", exploded: true },
-    //                 { y: 20, name: "Authentic Users" },
-    //                 { y: 5, name: "Inactive Users" },
-    //                 { y: 3, name: " Log Activity Of Users" }
-    //             ]
-    //         }]
-    //     });
-    //     chart.render();
-    // }
-
-    // function explodePie (e) {
-    //     if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
-    //         e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
-    //     } else {
-    //         e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
-    //     }
-    //     e.chart.render();
-
-    // }
-
-    // stock chart
-    // window.onload = function () {
-    //     var dataPoints1 = [], dataPoints2 = [];
-    //     var stockChart = new CanvasJS.StockChart("chartContainer",{
-    //         theme: "light2",
-    //         animationEnabled: true,
-    //         title:{
-    //         text:"Multi-Series StockChart with Navigator"
-    //         },
-    //         subtitles: [{
-    //         text: "No of Trades: BTC/USD vs BTC/EUR"
-    //         }],
-    //         charts: [{
-    //         axisY: {
-    //             title: "No of Trades"
-    //         },
-    //         toolTip: {
-    //             shared: true
-    //         },
-    //         legend: {
-    //                 cursor: "pointer",
-    //                 itemclick: function (e) {
-    //                 if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible)
-    //                     e.dataSeries.visible = false;
-    //                 else
-    //                     e.dataSeries.visible = true;
-    //                 e.chart.render();
-    //                 }
-    //             },
-    //         data: [{
-    //             showInLegend: true,
-    //             name: "No of Trades in $",
-    //             yValueFormatString: "#,##0",
-    //             xValueType: "dateTime",
-    //             dataPoints : dataPoints1
-    //         },{
-    //             showInLegend: true,
-    //             name: "No of Trades in €",
-    //             yValueFormatString: "#,##0",
-    //             dataPoints : dataPoints2
-    //         }]
-    //         }],
-    //         rangeSelector: {
-    //         enabled: false
-    //         },
-    //         navigator: {
-    //         data: [{
-    //             dataPoints: dataPoints1
-    //         }],
-    //         slider: {
-    //             minimum: new Date(2018, 00, 15),
-    //             maximum: new Date(2018, 02, 01)
-    //         }
-    //         }
-    //     });
-    //     $.getJSON("https://canvasjs.com/data/docs/btcvolume2018.json", function(data) {
-    //         for(var i = 0; i < data.length; i++){
-    //         dataPoints1.push({x: new Date(data[i].date), y: Number(data[i].volume_btc_usd)});
-    //         dataPoints2.push({x: new Date(data[i].date), y: Number(data[i].volume_btc_eur)});
-    //         }
-    //         stockChart.render();
-    //     });
-    // }
-</script>
-<script>
-    // document.addEventListener("DOMContentLoaded", function () {
-    //     const chartContainer = document.getElementById("chartContainer");
-
-    //     let chart = new CanvasJS.Chart(chartContainer, {
-    //         animationEnabled: true,
-    //         title: {
-    //             text: "TOTAL LOG Activity USER ( ANALYSIS )",
-    //             fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-    //             fontSize: 14,
-    //             fontWeight: "bold",
-    //             fontColor: "#000000"
-    //         },
-    //         axisX: {
-    //             interval: 1,
-    //             labelFontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-    //             labelFontSize: 12,
-    //             fontWeight: "bold",
-    //             labelFontColor: "#000000"
-    //         },
-    //         axisY2: {
-    //             interlacedColor: "rgba(1,77,101,.2)",
-    //             gridColor: "rgba(1,77,101,.1)",
-    //             title: "<--Users-->",
-    //             titleFontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-    //             titleFontSize: 15,
-    //             titleFontColor: "#000000",
-    //             labelFontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-    //             labelFontSize: 12,
-    //             fontWeight: "bold",
-    //             labelFontColor: "#000000"
-    //         },
-    //         data: [{
-    //             type: "bar",
-    //             name: "companies",
-    //             color: "#014D65",
-    //             axisYType: "secondary",
-    //             indexLabelFontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-    //             indexLabelFontSize: 12,
-    //             fontWeight: "bold",
-    //             dataPoints: [
-    //                 { y: 3, label: "Inactive Users" },
-    //                 { y: 7, label: "Authentic Users" },
-    //                 { y: 5, label: "Activity Of Users" },
-    //                 { y: 134, label: "Total-Users" }
-    //             ]
-    //         }]
-    //     });
-
-    //     chart.render();
-    // });
 </script>
 @endPush

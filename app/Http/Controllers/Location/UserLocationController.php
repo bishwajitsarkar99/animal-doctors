@@ -33,4 +33,10 @@ class UserLocationController extends Controller
     {
         return $this->userActivityServiceProvider->activities($request);
     }
+
+    // User Log Activity Analytical Chart
+    public function userAnalyticalChart(Request $request)
+    {
+        return $this->userActivityServiceProvider->userAnalyticalCharts($request);
+    }
 }
