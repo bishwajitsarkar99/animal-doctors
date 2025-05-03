@@ -10,13 +10,13 @@
                         </div>
                         <div class="col-xl-6">
                             <div class="progress mt-2" style="height:0.8rem;">
-                                <div id="current_login_activites_percentage_records" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                <div id="current_login_activites_percentage_records" class="progress-bar progress-bar-striped bg-login progress-bar-animated" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                                     0%
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-2">
-                            <label class="badge rounded-pill bg-success" for="total_medic_records " id="iteam_label4" style="font-size: 11px;">
+                            <label class="badge rounded-pill bg-login" for="total_medic_records " id="iteam_label4" style="font-size: 11px;">
                                 <span class="total_users " style="font-weight: 600;color:white;" id="current_login_activites_records"></span>
                                 <span id="iteam_label5" style="font-weight: 600;color:white;">.00</span>
                             </label>
@@ -28,13 +28,13 @@
                         </div>
                         <div class="col-xl-6">
                             <div class="progress mt-2" style="height:0.8rem;">
-                                <div id="current_logout_activites_percentage_records" class="progress-bar progress-bar-striped bg-alert progress-bar-animated" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                <div id="current_logout_activites_percentage_records" class="progress-bar progress-bar-striped bg-light-alert progress-bar-animated" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                                     0%
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-2">
-                            <label class="badge rounded-pill bg-logout" for="total_medic_records " id="iteam_label4" style="font-size: 11px;">
+                            <label class="badge rounded-pill bg-light-alert" for="total_medic_records " id="iteam_label4" style="font-size: 11px;">
                                 <span class="total_users " style="font-weight: 600;color:white;" id="current_logout_activites_records"></span>
                                 <span id="iteam_label5" style="font-weight: 600;color:white;">.00</span>
                             </label>
@@ -48,13 +48,13 @@
                         </div>
                         <div class="col-xl-6">
                             <div class="progress mt-2" style="height:0.8rem;">
-                                <div id="current_total_activites_percentage_records" class="progress-bar progress-bar-striped bg-login progress-bar-animated" role="progressbar" style="width: 20%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                <div id="current_total_activites_percentage_records" class="progress-bar progress-bar-striped bg-activity progress-bar-animated" role="progressbar" style="width: 20%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                                     0%
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-2">
-                            <label class="badge rounded-pill bg-primary" for="total_medic_records " id="iteam_label4" style="font-size: 11px;">
+                            <label class="badge rounded-pill bg-activity" for="total_medic_records " id="iteam_label4" style="font-size: 11px;">
                                 <span class="total_users " style="font-weight: 600;color:white;" id="total_current_activites_records"></span>
                                 <span id="iteam_label5" style="font-weight: 600;color:white;">.00</span>
                             </label>
@@ -133,6 +133,251 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
+        // hover grid
+        const hoverGridPlugin = {
+            id: 'hoverGrid',
+            beforeInit(chart) {
+                chart._prevHoverYIndex = -1;
+                chart._prevHoverXIndex = -1;
+            },
+            afterEvent(chart, args) {
+                const { event } = args;
+                const yAxis = chart.scales.y;
+                const xAxis = chart.scales.x;
+
+                if (!event || (!event.x && !event.y) || !yAxis || !xAxis) return;
+
+                let hoverYIndex = -1;
+                let hoverXIndex = -1;
+
+                const hoverY = event.y;
+                const hoverX = event.x;
+
+                // Check Y axis ticks
+                yAxis.ticks.forEach((_, index) => {
+                    const pixel = yAxis.getPixelForTick(index);
+                    if (Math.abs(pixel - hoverY) < 10) {
+                        hoverYIndex = index;
+                    }
+                });
+
+                // Check X axis ticks
+                xAxis.ticks.forEach((_, index) => {
+                    const pixel = xAxis.getPixelForTick(index);
+                    if (Math.abs(pixel - hoverX) < 10) {
+                        hoverXIndex = index;
+                    }
+                });
+
+                if (hoverYIndex === chart._prevHoverYIndex && hoverXIndex === chart._prevHoverXIndex) return;
+
+                chart._prevHoverYIndex = hoverYIndex;
+                chart._prevHoverXIndex = hoverXIndex;
+
+                chart._hoverYTick = yAxis.getTicks?.()[hoverYIndex]?.value;
+                chart._hoverXTick = xAxis.getTicks?.()[hoverXIndex]?.value;
+
+                chart.options.scales.y.grid.color = (context) =>
+                    context.tick.value === chart._hoverYTick ? 'rgba(0,0,0,0)' : 'silver';
+
+                chart.options.scales.x.grid.color = (context) =>
+                    context.tick.value === chart._hoverXTick ? 'rgba(0,0,0,0)' : 'silver';
+
+                chart.update();
+            }
+        };
+        // hover dotted
+        const dottedGridPlugin = {
+            id: 'dottedGrid',
+            afterDraw(chart) {
+                const yAxis = chart.scales.y;
+                const xAxis = chart.scales.x;
+                const ctx = chart.ctx;
+                const chartArea = chart.chartArea;
+
+                const hoverYTick = chart._hoverYTick;
+                const hoverXTick = chart._hoverXTick;
+
+                ctx.save();
+                ctx.fillStyle = '#000000';
+
+                // Draw dotted horizontal line (Y axis hover)
+                if (hoverYTick !== undefined) {
+                    const tickIndex = yAxis.getTicks().findIndex(t => t.value === hoverYTick);
+                    if (tickIndex !== -1) {
+                        const y = yAxis.getPixelForTick(tickIndex);
+                        for (let x = chartArea.left; x <= chartArea.right; x += 6) {
+                            ctx.beginPath();
+                            ctx.arc(x, y, 0.7, 0, 2 * Math.PI);
+                            ctx.fill();
+                        }
+                    }
+                }
+
+                // Draw dotted vertical line (X axis hover)
+                if (hoverXTick !== undefined) {
+                    const tickIndex = xAxis.getTicks().findIndex(t => t.value === hoverXTick);
+                    if (tickIndex !== -1) {
+                        const x = xAxis.getPixelForTick(tickIndex);
+                        for (let y = chartArea.top; y <= chartArea.bottom; y += 6) {
+                            ctx.beginPath();
+                            ctx.arc(x, y, 0.7, 0, 2 * Math.PI);
+                            ctx.fill();
+                        }
+                    }
+                }
+
+                ctx.restore();
+            }
+        };
+        // hover tooltip
+        const axisTooltipPlugin = {
+            id: 'axisTooltip',
+            afterDraw(chart) {
+                const ctx = chart.ctx;
+                const xAxis = chart.scales.x;
+                const yAxis = chart.scales.y;
+                const chartArea = chart.chartArea;
+
+                const hoverXTick = chart._hoverXTick;
+                const hoverYTick = chart._hoverYTick;
+
+                ctx.save();
+                ctx.font = "11px Arial";
+                ctx.fillStyle = "#fff";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+
+                // Show tooltip for Y-axis tick
+                if (hoverYTick !== undefined) {
+                    const yIndex = yAxis.getTicks().findIndex(t => t.value === hoverYTick);
+                    if (yIndex !== -1) {
+                        const y = yAxis.getPixelForTick(yIndex);
+                        const text = hoverYTick.toString();
+                        const boxWidth = ctx.measureText(text).width + 10;
+                        const boxHeight = 18;
+
+                        ctx.fillStyle = "black";
+                        ctx.strokeStyle = "#888";
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.roundRect(chartArea.left - boxWidth - 8, y - boxHeight / 2, boxWidth, boxHeight, 1);
+                        ctx.fill();
+                        ctx.stroke();
+
+                        ctx.fillStyle = "#fff";
+                        ctx.fillText(text, chartArea.left - boxWidth / 2 - 8, y);
+                    }
+                }
+
+                // Show tooltip in label date for X-axis tick
+                if (hoverXTick !== undefined) {
+                    const xIndex = xAxis.getTicks().findIndex(t => t.value === hoverXTick);
+                    if (xIndex !== -1) {
+                        const x = xAxis.getPixelForTick(xIndex);
+
+                        let label = chart.data.labels[hoverXTick];
+                        let text = label;
+
+                        if (label) {
+                            const date = new Date(label);
+                            if (!isNaN(date)) {
+                                // date formate
+                                // text = `${String(date.getDate()).padStart(2, '0')}-${date.toLocaleString('default', { month: 'short' })}-${date.getFullYear()}`;
+                                // day formate
+                                text = date.toLocaleDateString('en-US', { weekday: 'short' });
+                            }
+                        }
+                        const boxWidth = ctx.measureText(text).width + 10;
+                        const boxHeight = 18;
+
+                        ctx.fillStyle = "black";
+                        ctx.strokeStyle = "#888";
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.roundRect(x - boxWidth / 2, chartArea.bottom + 8, boxWidth, boxHeight, 1);
+                        ctx.fill();
+                        ctx.stroke();
+
+                        ctx.fillStyle = "#fff";
+                        ctx.fillText(text, x, chartArea.bottom + boxHeight / 2 + 8);
+                    }
+                }
+
+                ctx.restore();
+            }
+        };
+        // hover axisCursor move
+        const axisCursorPlugin = {
+            id: 'axisCursor',
+            afterEvent(chart, args) {
+                const {event} = args;
+                const xAxis = chart.scales.x;
+                const yAxis = chart.scales.y;
+                const chartArea = chart.chartArea;
+                const mouseX = event.x;
+                const mouseY = event.y;
+                let isOnX = false;
+                let isOnY = false;
+
+                // Check X-axis hover
+                xAxis.ticks.forEach((tick, index) => {
+                    const x = xAxis.getPixelForTick(index);
+                    if (Math.abs(mouseX - x) < 6 && mouseY >= chartArea.top && mouseY <= chartArea.bottom) {
+                        isOnX = true;
+                    }
+                });
+
+                // Check Y-axis hover
+                yAxis.ticks.forEach((tick, index) => {
+                    const y = yAxis.getPixelForTick(index);
+                    if (Math.abs(mouseY - y) < 6 && mouseX >= chartArea.left && mouseX <= chartArea.right) {
+                        isOnY = true;
+                    }
+                });
+
+                // Change cursor
+                if (isOnX || isOnY) {
+                    chart.canvas.style.cursor = 'move';
+                } else {
+                    chart.canvas.style.cursor = 'default';
+                }
+            }
+        };
+        // hover legendCursor
+        const legendCursorPlugin = {
+            id: 'legendCursor',
+            afterEvent(chart, args) {
+                const { event } = args;
+                const canvas = chart.canvas;
+                const legend = chart.legend;
+
+                if (!legend || !legend.legendItems || !legend._hitBoxes) return;
+
+                const rect = canvas.getBoundingClientRect();
+                const mouseX = event.x - rect.left;
+                const mouseY = event.y - rect.top;
+                let isOnLegend = false;
+
+                legend._hitBoxes.forEach((hitBox, index) => {
+                    const left = hitBox.left;
+                    const top = hitBox.top;
+                    const right = left + hitBox.width;
+                    const bottom = top + hitBox.height;
+
+                    if (
+                        mouseX >= left &&
+                        mouseX <= right &&
+                        mouseY >= top &&
+                        mouseY <= bottom
+                    ) {
+                        isOnLegend = true;
+                    }
+                });
+
+                canvas.style.cursor = isOnLegend ? 'pointer' : 'default';
+            }
+        };
         // Initialize the chart
         var ctx = document.getElementById("userDayLogChart").getContext('2d');
 
@@ -158,11 +403,11 @@
                     data: [], // Placeholder for Current login data
                     borderColor: "darkgreen",
                     backgroundColor: gradientLogin,
-                    borderWidth: 3,
-                    fill: true,
+                    borderWidth: 1,
+                    fill: false,
                     tension: 0.4,
                     pointStyle: 'rectRounded',
-                    pointRadius: 5,
+                    pointRadius: 3,
                     pointHoverRadius: 8,
                     pointBackgroundColor: "darkgreen",
                 }, {
@@ -170,11 +415,11 @@
                     data: [], // Placeholder for Current Logout Activity data
                     borderColor: '#e74a3b',
                     backgroundColor: gradientLogout,
-                    borderWidth: 3,
-                    fill: true, 
+                    borderWidth: 1,
+                    fill: false, 
                     tension: 0.4,
                     pointStyle: 'triangle',
-                    pointRadius: 5,
+                    pointRadius: 3,
                     pointHoverRadius: 8,
                     pointBackgroundColor: "#e74a3b",
                 }, {
@@ -182,11 +427,11 @@
                     data: [], // Placeholder for Current Activity Users data
                     borderColor: "blue",
                     backgroundColor: gradientUsers,
-                    borderWidth: 3,
-                    fill: true,
+                    borderWidth: 1,
+                    fill: false,
                     tension: 0.4,
                     pointStyle: 'circle',
-                    pointRadius: 5,
+                    pointRadius: 3,
                     pointHoverRadius: 8,
                     pointBackgroundColor: "blue",
                 }]
@@ -203,7 +448,7 @@
                                 size: 12,
                                 family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
                                 weight: 'bold',
-                            }
+                            },
                         }
                     },
                     tooltip: {
@@ -226,9 +471,9 @@
                             font: {
                                 size: 11, 
                                 family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                weight: 'bold',
+                                //weight: 'bold',
                             }
-                        }
+                        },
                     },
                     y: {
                         grid: {
@@ -237,11 +482,11 @@
                         },
                         ticks: {
                             beginAtZero: true,
-                            color: '#3b71ca',
+                            color: 'rgba(0, 0, 0, 0.99)',
                             font: {
-                                size: 12, 
+                                size: 11, 
                                 family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                weight: 'bold',
+                                //weight: 'bold',
                             }
                         }
                     }
@@ -250,7 +495,8 @@
                     duration: 1500,
                     easing: 'easeInOutBounce'
                 }
-            }
+            },
+            plugins: [hoverGridPlugin, dottedGridPlugin, axisTooltipPlugin, axisCursorPlugin, legendCursorPlugin]
         });
     });
 </script>
@@ -273,7 +519,7 @@
         gradientUsers.addColorStop(1, 'rgba(0, 0, 255, 0)');    // transparent at bottom
 
         userMonthLogChart = new Chart(monthUserCtx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
@@ -281,7 +527,7 @@
                     data: [], // Placeholder for Current login data
                     borderColor: "darkgreen",
                     backgroundColor: gradientLogin,
-                    borderWidth: 3,
+                    //borderWidth: 2,
                     fill: true,
                     tension: 0.4,
                     pointStyle: 'rectRounded',
@@ -293,7 +539,7 @@
                     data: [], // Placeholder for Current Logout Activity data
                     borderColor: '#e74a3b',
                     backgroundColor: gradientLogout,
-                    borderWidth: 3,
+                    //borderWidth: 2,
                     fill: true, 
                     tension: 0.4,
                     pointStyle: 'triangle',
@@ -305,7 +551,7 @@
                     data: [], // Placeholder for current user data
                     borderColor: "blue",
                     backgroundColor: gradientUsers,
-                    borderWidth: 3,
+                    //borderWidth: 2,
                     fill: true,
                     tension: 0.4,
                     pointStyle: 'circle',
@@ -327,6 +573,12 @@
                                 family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
                                 weight: 'bold',
                             }
+                        },
+                        onHover: function(event) {
+                            event.native.target.style.cursor = 'pointer'; // or 'move'
+                        },
+                        onLeave: function(event) {
+                            event.native.target.style.cursor = 'default';
                         }
                     },
                     tooltip: {
@@ -345,26 +597,26 @@
                             color: 'rgba(0, 0, 0, 0.1)',
                         },
                         ticks: {
-                            color: '#333',
+                            color: 'rgba(0, 0, 0, 0.99)',
                             font: {
-                                size: 12, 
+                                size: 11, 
                                 family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                weight: 'bold',
+                                //weight: 'bold',
                             }
                         }
                     },
                     y: {
                         grid: {
                             display: false,
-                            color: 'rgba(0, 0, 0, 0.1)',
+                            color: 'silver',
                         },
                         ticks: {
                             beginAtZero: true,
-                            color: '#3b71ca',
+                            color: 'rgba(0, 0, 0, 0.99)',
                             font: {
-                                size: 12, 
+                                size: 11, 
                                 family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                weight: 'bold',
+                                //weight: 'bold',
                             }
                         }
                     }
@@ -372,7 +624,7 @@
                 animation: {
                     duration: 1500,
                     easing: 'easeInOutBounce',
-                }
+                },
             }
         });
 
@@ -526,6 +778,7 @@
                                     borderColor: 'rgba(28,200,138,1)',
                                     fill: true,
                                     tension: 0.4,
+                                    borderWidth: 1,
                                     pointRadius: 5,
                                     pointHoverRadius: 8,
                                     pointBackgroundColor: "darkgreen",
@@ -537,8 +790,8 @@
                                     fill: true,
                                     borderColor: '#e74a3b',
                                     backgroundColor: gradientLogout,
-                                    borderWidth: 2,
                                     tension: 0.4,
+                                    borderWidth: 1,
                                     pointRadius: 5,
                                     pointHoverRadius: 8,
                                     pointBackgroundColor: "#e74a3b",
@@ -567,6 +820,12 @@
                                             family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
                                             weight: 'bold',
                                         }
+                                    },
+                                    onHover: function(event) {
+                                        event.native.target.style.cursor = 'pointer'; // or 'move'
+                                    },
+                                    onLeave: function(event) {
+                                        event.native.target.style.cursor = 'default';
                                     }
                                 },
                                 font: {
@@ -575,10 +834,18 @@
                                     weight: 'bold',
                                 }
                             },
+                            tooltip: {
+                                enabled: true,
+                                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                                titleColor: '#fff',
+                                bodyColor: '#fff',
+                                titleFont: { size: 12 },
+                                bodyFont: { size: 12 },
+                            },
                             scales: {
                                 x: {
                                     grid: {
-                                        display: true,
+                                        display: false,
                                         color: 'silver',
                                     },
                                     ticks: {
@@ -586,21 +853,22 @@
                                         font: {
                                             size: 11, 
                                             family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                            weight: 'bold',
+                                            // weight: 'bold',
                                         }
                                     }
                                 },
                                 y: {
                                     grid: {
-                                        display: false,
+                                        display: true,
+                                        color: 'silver',
                                     },
                                     ticks: {
                                         beginAtZero: true,
-                                        color: 'royalblue',
+                                        color: 'rgba(0, 0, 0, 0.99)',
                                         font: {
-                                            size: 12, 
+                                            size: 11, 
                                             family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                            weight: 'bold',
+                                            // weight: 'bold',
                                         }
                                     }
                                 }

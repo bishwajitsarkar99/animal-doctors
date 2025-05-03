@@ -268,22 +268,22 @@
                     beginAtZero: true,
                     grid: { display: false },
                     ticks: {
-                        color: '#4285F4',
+                        color: 'rgba(0, 0, 0, 0.99)',
                         font: {
                             family: "'Times New Roman', Times, serif",
                             size: 12,
-                            weight: 'bold'
+                            //weight: 'bold'
                         }
                     },
                 },
                 x: {
                     grid: { display: false },
                     ticks: {
-                        color: '#f44242',
+                        color: 'rgba(0, 0, 0, 0.99)',
                         font: {
                             family: "'Times New Roman', Times, serif",
                             size: 12,
-                            weight: 'bold'
+                            //weight: 'bold'
                         }
                     }
                 }
@@ -298,8 +298,8 @@
 <script>
     const ctxUserActivityChart = document.getElementById("userActivityChart").getContext("2d");
     var gradientColor = ctxUserActivityChart.createLinearGradient(0, 0, 0, 400);
-    gradientColor.addColorStop(0, 'rgb(142, 229, 255)');  // orange at top
-    gradientColor.addColorStop(1, 'rgba(255, 165, 0, 0)');    // transparent at bottom
+    gradientColor.addColorStop(0, 'rgb(157, 235, 255)');  // orange at top rgb(142, 229, 255) 
+    gradientColor.addColorStop(1, 'rgb(138, 65, 255)'); // transparent at bottom rgba(255, 166, 0, 0)
     const userActivityLineChart = new Chart(ctxUserActivityChart, {
         type: "line",
         data: {
@@ -310,7 +310,7 @@
                 data: @json(array_values($usersActivityCount)),
                 backgroundColor: gradientColor,
                 borderColor: '#0A5EDB',
-                borderWidth: 2,
+                borderWidth: 1,
                 fill: true,
                 tension: 0.4,
                 pointStyle: ['triangle','triangle','triangle','triangle'],
@@ -333,21 +333,21 @@
                 y: {
                     ticks: {
                         beginAtZero: true,
-                        color: '#000000',
+                        color: 'rgba(0, 0, 0, 0.99)',
                         font: {
                             family: "'Times New Roman', Times, serif",
                             size: 12,
-                            weight: 'bold'
+                            //weight: 'bold'
                         }
                     }
                 },
                 x: {
                     ticks: {
-                        color: '#000000',
+                        color: 'rgba(0, 0, 0, 0.99)',
                         font: {
                             family: "'Times New Roman', Times, serif",
                             size: 12,
-                            weight: 'bold'
+                            //weight: 'bold'
                         }
                     }
                 }

@@ -268,7 +268,7 @@ class UserActivityServiceProvider
         $current_user_counts_monthly_filled = [];
 
         for ($month = 1; $month <= 12; $month++) {
-            $formattedMonth = sprintf('%s-%02d', $year, $month); // Format as 'YYYY-MM'
+            $formattedMonth = sprintf('%s-%02d', $year, $month); // Format as 'MM-YYYY'
 
             $login_counts_monthly_filled[] = isset($login_counts_monthly[$formattedMonth]) ? $login_counts_monthly[$formattedMonth] : 0;
             $logout_counts_monthly_filled[] = isset($logout_counts_monthly[$formattedMonth]) ? $logout_counts_monthly[$formattedMonth] : 0;

@@ -322,16 +322,28 @@ div.card.order_line_chart {
     opacity: 1 !important;
     background-color: #b98527 !important;
 }
+.bg-light-alert {
+    opacity: 1 !important;
+    background-color:#ff675a !important;
+}
+.bg-login{
+    opacity: 1 !important;
+    background-color: #198754c2 !important;
+}
 .bg-logout {
     opacity: 1;
     background-color: #b98527 !important;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
-.bg-login{
+.bg-activity{
     opacity: 1 !important;
-    background-color: #0d6efd !important;
+    background-color: #3b71ca !important;
 }
+/* .bg-login{
+    opacity: 1 !important;
+    background-color: #3b71ca !important;
+} */
 .log-card {
     background: white;
     padding-bottom: 7px;
@@ -427,6 +439,7 @@ input.input-date{
 
 #userDayLogChart, #userMonthLogChart, #userAllLogChart {
     width: 100% !important;
+    /* cursor: move !important; */
 }
 .ring-div {
     width: 100px;
