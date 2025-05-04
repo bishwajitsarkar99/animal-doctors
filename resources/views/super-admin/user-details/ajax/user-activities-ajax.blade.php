@@ -137,68 +137,66 @@
                 }
             });
         }
-        fetch_current_users_activities_data();
-        // Fetch Current User Activities Data ------------------
-        function fetch_current_users_activities_data() {
+        // fetch_current_users_activities_data();
+        // // Fetch Current User Activities Data ------------------
+        // function fetch_current_users_activities_data() {
 
-            $.ajax({
-                type: "GET",
-                url: "{{ route('user.activity')}}",
-                dataType: 'json',
-                success: function(response){
+        //     $.ajax({
+        //         type: "GET",
+        //         url: "{{ route('user.activity')}}",
+        //         dataType: 'json',
+        //         success: function(response){
                     
-                    const {
-                        current_users, 
-                        current_login_users, 
-                        current_logout_users, 
-                        total_current_users_activities_percentage,
-                        login_current_users_activities_percentage,
-                        logout_current_users_activities_percentage,
-                        current_user_count_per_day,
-                        labels,
-                        data,
-                        monthly_user_count_per_day,
-                    } = response;
+        //             const {
+        //                 current_users, 
+        //                 current_login_users, 
+        //                 current_logout_users, 
+        //                 total_current_users_activities_percentage,
+        //                 login_current_users_activities_percentage,
+        //                 logout_current_users_activities_percentage,
+        //                 current_user_count_per_day,
+        //                 labels,
+        //                 data,
+        //                 monthly_user_count_per_day,
+        //             } = response;
 
-                    $("#total_current_activites_records").text(current_users);
-                    $("#current_login_activites_records").text(current_login_users);
-                    $("#current_logout_activites_records").text(current_logout_users);
-                    
-                    // Get the percentage value total current activities users
-                    var percentage = total_current_users_activities_percentage.toFixed(2);
-                    $("#current_total_activites_percentage_records").attr("aria-valuenow", percentage).text(percentage + "%"); 
-                    // Get the percentage value total current login activities users
-                    var percentage = login_current_users_activities_percentage.toFixed(2);
-                    $("#current_login_activites_percentage_records").attr("aria-valuenow", percentage).text(percentage + "%");
-                    // Get the percentage value total current logout activities users
-                    var percentage = logout_current_users_activities_percentage.toFixed(2);
-                    $("#current_logout_activites_percentage_records").attr("aria-valuenow", percentage).text(percentage + "%");
-                    // chart with dynamic dat from server
-                    userDayLogChart.data.labels = response.labels; // Set the labels dynamically from the server response
-                    userDayLogChart.data.datasets[0].data = response.data; // Set the data dynamically
-                    // Check if current_user_count_per_day exists and is an object
-                    if (userDayLogChart) {
-                        
-                        userDayLogChart.data.datasets[0].data = current_user_count_per_day.login_counts || [];
-                        userDayLogChart.data.datasets[1].data = current_user_count_per_day.logout_counts || [];
-                        userDayLogChart.data.datasets[2].data = current_user_count_per_day.current_user_counts || [];
+        //             $("#total_current_activites_records").text(current_users);
+        //             $("#current_login_activites_records").text(current_login_users);
+        //             $("#current_logout_activites_records").text(current_logout_users);
 
-                        userDayLogChart.update();
-                    }
-                    // Check if current_user_count_per_day exists and is an object
-                    if (userMonthLogChart) {
-                        
-                        userMonthLogChart.data.datasets[0].data = monthly_user_count_per_day.login_counts || [];
-                        userMonthLogChart.data.datasets[1].data = monthly_user_count_per_day.logout_counts || [];
-                        userMonthLogChart.data.datasets[2].data = monthly_user_count_per_day.current_user_counts || [];
+        //             $("#current_total_activites_percentage_records")
+        //                 .attr("aria-valuenow", total_current_users_activities_percentage.toFixed(2))
+        //                 .text(total_current_users_activities_percentage.toFixed(2) + "%");
 
-                        userMonthLogChart.update();
-                    }
-                    // Initialize the tooltip elements
-                    $('[data-bs-toggle="tooltip"]').tooltip();
-                }
-            });
-        }
+        //             $("#current_login_activites_percentage_records")
+        //                 .attr("aria-valuenow", login_current_users_activities_percentage.toFixed(2))
+        //                 .text(login_current_users_activities_percentage.toFixed(2) + "%");
+
+        //             $("#current_logout_activites_percentage_records")
+        //                 .attr("aria-valuenow", logout_current_users_activities_percentage.toFixed(2))
+        //                 .text(logout_current_users_activities_percentage.toFixed(2) + "%");
+
+        //             // Update Day Log Chart
+        //             if (typeof userDayLogChart !== 'undefined' && userDayLogChart.data) {
+        //                 userDayLogChart.data.labels = labels || [];
+        //                 userDayLogChart.data.datasets[0].data = current_user_count_per_day.login_counts || [];
+        //                 userDayLogChart.data.datasets[1].data = current_user_count_per_day.logout_counts || [];
+        //                 userDayLogChart.data.datasets[2].data = current_user_count_per_day.current_user_counts || [];
+        //                 userDayLogChart.update();
+        //             }
+
+        //             // Update Month Log Chart
+        //             if (typeof userMonthLogChart !== 'undefined' && userMonthLogChart.data) {
+        //                 userMonthLogChart.data.datasets[0].data = monthly_user_count_per_day.login_counts || [];
+        //                 userMonthLogChart.data.datasets[1].data = monthly_user_count_per_day.logout_counts || [];
+        //                 userMonthLogChart.data.datasets[2].data = monthly_user_count_per_day.current_user_counts || [];
+        //                 userMonthLogChart.update();
+        //             }
+        //             // Initialize the tooltip elements
+        //             $('[data-bs-toggle="tooltip"]').tooltip();
+        //         }
+        //     });
+        // }
         // Event Listener for sorting columns
         $(document).on('click', '#th_sort', function () {
 

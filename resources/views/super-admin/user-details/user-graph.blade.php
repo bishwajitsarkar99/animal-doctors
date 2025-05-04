@@ -81,7 +81,7 @@
         </div>
     </div>
 </div>
-<div class="row mt-3">
+<div class="row mt-4">
     <div class="col-xl-6">
         <div class="card card-body five-card">
             <span class="card-head-title" style="border-bottom: 1px solid rgba(0, 0, 0, 0.175);">
@@ -207,7 +207,7 @@
         </div>
     </div>
     <div class="col-xl-6">
-        <div class="card order_line_chart" id="orderChart">
+        <div class="card user_line_chart" id="orderChart">
             <div class="card-header bar-header ps-2" style="text-align:center;">
                 <span class="card-head-title head-skeletone">
                     <i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i> 
@@ -221,9 +221,9 @@
         </div>
     </div>
 </div>
-<div class="row mb-5 mt-3">
+<div class="row mb-5 mt-4">
     <div class="col-xl-12">
-        <div class="card order_line_chart" id="orderChart">
+        <div class="card user_line_chart" id="orderChart">
             <div class="card-header bar-header ps-2" style="text-align:center;">
                 <span class="card-head-title head-skeletone">
                     <i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i> 

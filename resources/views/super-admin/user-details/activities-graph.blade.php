@@ -130,254 +130,77 @@
         </div>
     </div>
 </div>
+<div class="range-box mb-5">
+    <input type="range" class="custom-range-slider" min="0" max="100" value="50" id="rangeSlider">
+</div>
 @push('scripts')
-<script>
+<script type="module">
+    // hover plugins
+    import { hoverGridPlugin, dottedGridPlugin, axisTooltipDayFormatePlugin, axisTooltipMonthFormatePlugin, axisCursorPlugin} from "/plugins/chartHoverPlugins.js";
+    // Line Cahrt Initialize
+    let userDayLogChart;
+    // Line Bar Initialize
+    let userMonthLogChart;
+    // Define the current login,logout and activity data percentage (%)
+    function fetch_current_users_activities_data() {
+        $.ajax({
+            type: "GET",
+            url: "{{ route('user.activity')}}",
+            dataType: 'json',
+            success: function(response){
+                
+                const {
+                    current_users, 
+                    current_login_users, 
+                    current_logout_users, 
+                    total_current_users_activities_percentage,
+                    login_current_users_activities_percentage,
+                    logout_current_users_activities_percentage,
+                    current_user_count_per_day,
+                    labels,
+                    data,
+                    monthly_user_count_per_day,
+                } = response;
+                // Current total login, logout and activity data
+                $("#total_current_activites_records").text(current_users);
+                $("#current_login_activites_records").text(current_login_users);
+                $("#current_logout_activites_records").text(current_logout_users);
+                // Current activity data percentage
+                $("#current_total_activites_percentage_records")
+                    .attr("aria-valuenow", total_current_users_activities_percentage.toFixed(2))
+                    .text(total_current_users_activities_percentage.toFixed(2) + "%");
+                // Current login data percentage
+                $("#current_login_activites_percentage_records")
+                    .attr("aria-valuenow", login_current_users_activities_percentage.toFixed(2))
+                    .text(login_current_users_activities_percentage.toFixed(2) + "%");
+                // Current logout data percentage
+                $("#current_logout_activites_percentage_records")
+                    .attr("aria-valuenow", logout_current_users_activities_percentage.toFixed(2))
+                    .text(logout_current_users_activities_percentage.toFixed(2) + "%");
+
+                // Update Week Log Chart
+                if (typeof userDayLogChart !== 'undefined' && userDayLogChart.data) {
+                    userDayLogChart.data.labels = labels || [];
+                    userDayLogChart.data.datasets[0].data = current_user_count_per_day.login_counts || [];
+                    userDayLogChart.data.datasets[1].data = current_user_count_per_day.logout_counts || [];
+                    userDayLogChart.data.datasets[2].data = current_user_count_per_day.current_user_counts || [];
+                    userDayLogChart.update();
+                }
+
+                // Update Month Log Chart
+                if (typeof userMonthLogChart !== 'undefined' && userMonthLogChart.data) {
+                    userMonthLogChart.data.datasets[0].data = monthly_user_count_per_day.login_counts || [];
+                    userMonthLogChart.data.datasets[1].data = monthly_user_count_per_day.logout_counts || [];
+                    userMonthLogChart.data.datasets[2].data = monthly_user_count_per_day.current_user_counts || [];
+                    userMonthLogChart.update();
+                }
+                // Initialize the tooltip elements
+                $('[data-bs-toggle="tooltip"]').tooltip();
+            }
+        });
+    }
+    // Current User Weekly Line Chart
     $(document).ready(function() {
-        // hover grid
-        const hoverGridPlugin = {
-            id: 'hoverGrid',
-            beforeInit(chart) {
-                chart._prevHoverYIndex = -1;
-                chart._prevHoverXIndex = -1;
-            },
-            afterEvent(chart, args) {
-                const { event } = args;
-                const yAxis = chart.scales.y;
-                const xAxis = chart.scales.x;
-
-                if (!event || (!event.x && !event.y) || !yAxis || !xAxis) return;
-
-                let hoverYIndex = -1;
-                let hoverXIndex = -1;
-
-                const hoverY = event.y;
-                const hoverX = event.x;
-
-                // Check Y axis ticks
-                yAxis.ticks.forEach((_, index) => {
-                    const pixel = yAxis.getPixelForTick(index);
-                    if (Math.abs(pixel - hoverY) < 10) {
-                        hoverYIndex = index;
-                    }
-                });
-
-                // Check X axis ticks
-                xAxis.ticks.forEach((_, index) => {
-                    const pixel = xAxis.getPixelForTick(index);
-                    if (Math.abs(pixel - hoverX) < 10) {
-                        hoverXIndex = index;
-                    }
-                });
-
-                if (hoverYIndex === chart._prevHoverYIndex && hoverXIndex === chart._prevHoverXIndex) return;
-
-                chart._prevHoverYIndex = hoverYIndex;
-                chart._prevHoverXIndex = hoverXIndex;
-
-                chart._hoverYTick = yAxis.getTicks?.()[hoverYIndex]?.value;
-                chart._hoverXTick = xAxis.getTicks?.()[hoverXIndex]?.value;
-
-                chart.options.scales.y.grid.color = (context) =>
-                    context.tick.value === chart._hoverYTick ? 'rgba(0,0,0,0)' : 'silver';
-
-                chart.options.scales.x.grid.color = (context) =>
-                    context.tick.value === chart._hoverXTick ? 'rgba(0,0,0,0)' : 'silver';
-
-                chart.update();
-            }
-        };
-        // hover dotted
-        const dottedGridPlugin = {
-            id: 'dottedGrid',
-            afterDraw(chart) {
-                const yAxis = chart.scales.y;
-                const xAxis = chart.scales.x;
-                const ctx = chart.ctx;
-                const chartArea = chart.chartArea;
-
-                const hoverYTick = chart._hoverYTick;
-                const hoverXTick = chart._hoverXTick;
-
-                ctx.save();
-                ctx.fillStyle = '#000000';
-
-                // Draw dotted horizontal line (Y axis hover)
-                if (hoverYTick !== undefined) {
-                    const tickIndex = yAxis.getTicks().findIndex(t => t.value === hoverYTick);
-                    if (tickIndex !== -1) {
-                        const y = yAxis.getPixelForTick(tickIndex);
-                        for (let x = chartArea.left; x <= chartArea.right; x += 6) {
-                            ctx.beginPath();
-                            ctx.arc(x, y, 0.7, 0, 2 * Math.PI);
-                            ctx.fill();
-                        }
-                    }
-                }
-
-                // Draw dotted vertical line (X axis hover)
-                if (hoverXTick !== undefined) {
-                    const tickIndex = xAxis.getTicks().findIndex(t => t.value === hoverXTick);
-                    if (tickIndex !== -1) {
-                        const x = xAxis.getPixelForTick(tickIndex);
-                        for (let y = chartArea.top; y <= chartArea.bottom; y += 6) {
-                            ctx.beginPath();
-                            ctx.arc(x, y, 0.7, 0, 2 * Math.PI);
-                            ctx.fill();
-                        }
-                    }
-                }
-
-                ctx.restore();
-            }
-        };
-        // hover tooltip
-        const axisTooltipPlugin = {
-            id: 'axisTooltip',
-            afterDraw(chart) {
-                const ctx = chart.ctx;
-                const xAxis = chart.scales.x;
-                const yAxis = chart.scales.y;
-                const chartArea = chart.chartArea;
-
-                const hoverXTick = chart._hoverXTick;
-                const hoverYTick = chart._hoverYTick;
-
-                ctx.save();
-                ctx.font = "11px Arial";
-                ctx.fillStyle = "#fff";
-                ctx.textAlign = "center";
-                ctx.textBaseline = "middle";
-
-                // Show tooltip for Y-axis tick
-                if (hoverYTick !== undefined) {
-                    const yIndex = yAxis.getTicks().findIndex(t => t.value === hoverYTick);
-                    if (yIndex !== -1) {
-                        const y = yAxis.getPixelForTick(yIndex);
-                        const text = hoverYTick.toString();
-                        const boxWidth = ctx.measureText(text).width + 10;
-                        const boxHeight = 18;
-
-                        ctx.fillStyle = "black";
-                        ctx.strokeStyle = "#888";
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.roundRect(chartArea.left - boxWidth - 8, y - boxHeight / 2, boxWidth, boxHeight, 1);
-                        ctx.fill();
-                        ctx.stroke();
-
-                        ctx.fillStyle = "#fff";
-                        ctx.fillText(text, chartArea.left - boxWidth / 2 - 8, y);
-                    }
-                }
-
-                // Show tooltip in label date for X-axis tick
-                if (hoverXTick !== undefined) {
-                    const xIndex = xAxis.getTicks().findIndex(t => t.value === hoverXTick);
-                    if (xIndex !== -1) {
-                        const x = xAxis.getPixelForTick(xIndex);
-
-                        let label = chart.data.labels[hoverXTick];
-                        let text = label;
-
-                        if (label) {
-                            const date = new Date(label);
-                            if (!isNaN(date)) {
-                                // date formate
-                                // text = `${String(date.getDate()).padStart(2, '0')}-${date.toLocaleString('default', { month: 'short' })}-${date.getFullYear()}`;
-                                // day formate
-                                text = date.toLocaleDateString('en-US', { weekday: 'short' });
-                            }
-                        }
-                        const boxWidth = ctx.measureText(text).width + 10;
-                        const boxHeight = 18;
-
-                        ctx.fillStyle = "black";
-                        ctx.strokeStyle = "#888";
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.roundRect(x - boxWidth / 2, chartArea.bottom + 8, boxWidth, boxHeight, 1);
-                        ctx.fill();
-                        ctx.stroke();
-
-                        ctx.fillStyle = "#fff";
-                        ctx.fillText(text, x, chartArea.bottom + boxHeight / 2 + 8);
-                    }
-                }
-
-                ctx.restore();
-            }
-        };
-        // hover axisCursor move
-        const axisCursorPlugin = {
-            id: 'axisCursor',
-            afterEvent(chart, args) {
-                const {event} = args;
-                const xAxis = chart.scales.x;
-                const yAxis = chart.scales.y;
-                const chartArea = chart.chartArea;
-                const mouseX = event.x;
-                const mouseY = event.y;
-                let isOnX = false;
-                let isOnY = false;
-
-                // Check X-axis hover
-                xAxis.ticks.forEach((tick, index) => {
-                    const x = xAxis.getPixelForTick(index);
-                    if (Math.abs(mouseX - x) < 6 && mouseY >= chartArea.top && mouseY <= chartArea.bottom) {
-                        isOnX = true;
-                    }
-                });
-
-                // Check Y-axis hover
-                yAxis.ticks.forEach((tick, index) => {
-                    const y = yAxis.getPixelForTick(index);
-                    if (Math.abs(mouseY - y) < 6 && mouseX >= chartArea.left && mouseX <= chartArea.right) {
-                        isOnY = true;
-                    }
-                });
-
-                // Change cursor
-                if (isOnX || isOnY) {
-                    chart.canvas.style.cursor = 'move';
-                } else {
-                    chart.canvas.style.cursor = 'default';
-                }
-            }
-        };
-        // hover legendCursor
-        const legendCursorPlugin = {
-            id: 'legendCursor',
-            afterEvent(chart, args) {
-                const { event } = args;
-                const canvas = chart.canvas;
-                const legend = chart.legend;
-
-                if (!legend || !legend.legendItems || !legend._hitBoxes) return;
-
-                const rect = canvas.getBoundingClientRect();
-                const mouseX = event.x - rect.left;
-                const mouseY = event.y - rect.top;
-                let isOnLegend = false;
-
-                legend._hitBoxes.forEach((hitBox, index) => {
-                    const left = hitBox.left;
-                    const top = hitBox.top;
-                    const right = left + hitBox.width;
-                    const bottom = top + hitBox.height;
-
-                    if (
-                        mouseX >= left &&
-                        mouseX <= right &&
-                        mouseY >= top &&
-                        mouseY <= bottom
-                    ) {
-                        isOnLegend = true;
-                    }
-                });
-
-                canvas.style.cursor = isOnLegend ? 'pointer' : 'default';
-            }
-        };
         // Initialize the chart
         var ctx = document.getElementById("userDayLogChart").getContext('2d');
 
@@ -400,7 +223,7 @@
                 labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
                 datasets: [{
                     label: "Login",
-                    data: [], // Placeholder for Current login data
+                    data: [], // Placeholder for Current login data (weekly)
                     borderColor: "darkgreen",
                     backgroundColor: gradientLogin,
                     borderWidth: 1,
@@ -412,7 +235,7 @@
                     pointBackgroundColor: "darkgreen",
                 }, {
                     label: "Logout",
-                    data: [], // Placeholder for Current Logout Activity data
+                    data: [], // Placeholder for Current Logout Activity data (weekly)
                     borderColor: '#e74a3b',
                     backgroundColor: gradientLogout,
                     borderWidth: 1,
@@ -424,7 +247,7 @@
                     pointBackgroundColor: "#e74a3b",
                 }, {
                     label: "Users Activity",
-                    data: [], // Placeholder for Current Activity Users data
+                    data: [], // Placeholder for Current Activity Users data (weekly)
                     borderColor: "blue",
                     backgroundColor: gradientUsers,
                     borderWidth: 1,
@@ -448,7 +271,13 @@
                                 size: 12,
                                 family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
                                 weight: 'bold',
-                            },
+                            }
+                        },
+                        onHover: function(event, legendItem, legend) {
+                            legend.chart.canvas.style.cursor = 'pointer';
+                        },
+                        onLeave: function(event, legendItem, legend) {
+                            legend.chart.canvas.style.cursor = 'default';
                         }
                     },
                     tooltip: {
@@ -459,6 +288,10 @@
                         titleFont: { size: 12 },
                         bodyFont: { size: 12 },
                     }
+                },
+                interaction: {
+                    mode: 'index',
+                    intersect: false
                 },
                 scales: {
                     x: {
@@ -496,11 +329,17 @@
                     easing: 'easeInOutBounce'
                 }
             },
-            plugins: [hoverGridPlugin, dottedGridPlugin, axisTooltipPlugin, axisCursorPlugin, legendCursorPlugin]
+            // import plugins
+            plugins: [
+                hoverGridPlugin(), 
+                dottedGridPlugin(), 
+                axisTooltipDayFormatePlugin(), 
+                //axisCursorPlugin(), 
+            ]
         });
+        fetch_current_users_activities_data();
     });
-</script>
-<script>
+    // Current User Monthly Bar Chart
     $(document).ready(function() {
         // Initialize the chart
         var monthUserCtx = document.getElementById("userMonthLogChart").getContext('2d');
@@ -574,11 +413,11 @@
                                 weight: 'bold',
                             }
                         },
-                        onHover: function(event) {
-                            event.native.target.style.cursor = 'pointer'; // or 'move'
+                        onHover: function(event, legendItem, legend) {
+                            legend.chart.canvas.style.cursor = 'pointer';
                         },
-                        onLeave: function(event) {
-                            event.native.target.style.cursor = 'default';
+                        onLeave: function(event, legendItem, legend) {
+                            legend.chart.canvas.style.cursor = 'default';
                         }
                     },
                     tooltip: {
@@ -589,6 +428,11 @@
                         titleFont: { size: 12 },
                         bodyFont: { size: 12 },
                     }
+                },
+                // tooltip interaction
+                interaction: {
+                    mode: 'index',
+                    intersect: false
                 },
                 scales: {
                     x: {
@@ -625,11 +469,19 @@
                     duration: 1500,
                     easing: 'easeInOutBounce',
                 },
-            }
+            },
+            // import plugins
+            plugins: [
+                hoverGridPlugin(), 
+                dottedGridPlugin(), 
+                axisTooltipMonthFormatePlugin(), 
+                //axisCursorPlugin(), 
+            ]
         });
-
+        fetch_current_users_activities_data();
     });
 </script>
+<!-- Demo bar chart -->
 <!-- <script>
     const userCanvas  = document.getElementById('userAllLogChart').getContext('2d');
 
@@ -728,13 +580,17 @@
         return (value / Math.pow(1000, order)).toFixed(1) + suffixes[order];
     }
 </script> -->
-<script>
-    $(document).ready(function(){
-        let chart; // Declare outside to update globally
+<script type="module">
+    // hover plugins
+    import { hoverGridPlugin, dottedGridPlugin, axisTooltipYearFormatePlugin, axisCursorPlugin } from "/plugins/chartHoverPlugins.js";
+
+    let chart; // Declare outside to update globally
+
+    $(document).ready(function () {
 
         function analyticalChartFetch() {
-            let start = $("#chartStartDate").val();
-            let end = $("#chartEndDate").val();
+            const start = $("#chartStartDate").val();
+            const end = $("#chartEndDate").val();
 
             $.ajax({
                 type: 'GET',
@@ -744,31 +600,31 @@
                     start_date: start,
                     end_date: end
                 },
-                success: function(response) {
+                success: function (response) {
                     const labels = response.labels;
                     const data = response.monthly_user_count_per_day;
 
-                    if (chart) {
-                        chart.destroy(); // Destroy existing chart before redrawing
-                    }
+                    if (chart) chart.destroy(); // Clean existing chart
 
-                    const userCanvas = document.getElementById('userAllLogChart').getContext('2d');
-                    // Create gradient for each dataset line
-                    var gradientLogin = userCanvas.createLinearGradient(0, 0, 0, 400);
-                    gradientLogin.addColorStop(0, 'rgba(28,200,138,0.5)');  // darkgreen at top
-                    gradientLogin.addColorStop(1, 'rgba(34, 139, 34, 0)');    // transparent at bottom
+                    const ctx = document.getElementById('userAllLogChart').getContext('2d');
 
-                    var gradientLogout = userCanvas.createLinearGradient(0, 0, 0, 400);
-                    gradientLogout.addColorStop(0, '#e74a3b');  // orange at top
-                    gradientLogout.addColorStop(1, 'rgba(255, 165, 0, 0)');    // transparent at bottom
+                    // Create gradients
+                    const gradientLogin = ctx.createLinearGradient(0, 0, 0, 400);
+                    gradientLogin.addColorStop(0, 'rgba(28,200,138,0.5)');
+                    gradientLogin.addColorStop(1, 'rgba(34,139,34,0)');
 
-                    var gradientUsers = userCanvas.createLinearGradient(0, 0, 0, 400);
-                    gradientUsers.addColorStop(0, '#4e73df');  // blue at top
-                    gradientUsers.addColorStop(1, 'rgba(0, 0, 255, 0)');    // transparent at bottom
-                    chart = new Chart(userCanvas, {
+                    const gradientLogout = ctx.createLinearGradient(0, 0, 0, 400);
+                    gradientLogout.addColorStop(0, '#e74a3b');
+                    gradientLogout.addColorStop(1, 'rgba(255,165,0,0)');
+
+                    const gradientUsers = ctx.createLinearGradient(0, 0, 0, 400);
+                    gradientUsers.addColorStop(0, '#4e73df');
+                    gradientUsers.addColorStop(1, 'rgba(0,0,255,0)');
+
+                    chart = new Chart(ctx, {
                         type: 'bar',
                         data: {
-                            labels: labels,
+                            labels,
                             datasets: [
                                 {
                                     type: 'line',
@@ -781,20 +637,20 @@
                                     borderWidth: 1,
                                     pointRadius: 5,
                                     pointHoverRadius: 8,
-                                    pointBackgroundColor: "darkgreen",
+                                    pointBackgroundColor: "darkgreen"
                                 },
                                 {
                                     type: 'line',
                                     label: 'Logout Count',
                                     data: data.logout_counts,
-                                    fill: true,
-                                    borderColor: '#e74a3b',
                                     backgroundColor: gradientLogout,
+                                    borderColor: '#e74a3b',
+                                    fill: true,
                                     tension: 0.4,
                                     borderWidth: 1,
                                     pointRadius: 5,
                                     pointHoverRadius: 8,
-                                    pointBackgroundColor: "#e74a3b",
+                                    pointBackgroundColor: "#e74a3b"
                                 },
                                 {
                                     type: 'bar',
@@ -809,86 +665,89 @@
                         options: {
                             responsive: true,
                             plugins: {
-                                color: '#000000',
                                 legend: {
                                     display: true,
                                     position: 'top',
                                     labels: {
-                                        color: '#000000',
+                                        color: '#000',
                                         font: {
                                             size: 12,
-                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                            weight: 'bold',
+                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                                            weight: 'bold'
                                         }
                                     },
-                                    onHover: function(event) {
-                                        event.native.target.style.cursor = 'pointer'; // or 'move'
+                                    onHover(event, item, legend) {
+                                        legend.chart.canvas.style.cursor = 'pointer'; // ew-resize
                                     },
-                                    onLeave: function(event) {
-                                        event.native.target.style.cursor = 'default';
+                                    onLeave(event, item, legend) {
+                                        legend.chart.canvas.style.cursor = 'default';
                                     }
                                 },
-                                font: {
-                                    size: 12,
-                                    family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                    weight: 'bold',
+                                tooltip: {
+                                    enabled: true,
+                                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                                    titleColor: '#fff',
+                                    bodyColor: '#fff',
+                                    titleFont: { size: 12 },
+                                    bodyFont: { size: 12 }
                                 }
                             },
-                            tooltip: {
-                                enabled: true,
-                                backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                                titleColor: '#fff',
-                                bodyColor: '#fff',
-                                titleFont: { size: 12 },
-                                bodyFont: { size: 12 },
+                            interaction: {
+                                mode: 'index',
+                                intersect: false
                             },
                             scales: {
                                 x: {
-                                    grid: {
-                                        display: false,
-                                        color: 'silver',
-                                    },
+                                    grid: { display: false, color: 'silver' },
                                     ticks: {
-                                        color: 'rgba(0, 0, 0, 0.99)',
+                                        color: '#000',
                                         font: {
-                                            size: 11, 
-                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                            // weight: 'bold',
+                                            size: 11,
+                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
                                         }
                                     }
                                 },
                                 y: {
-                                    grid: {
-                                        display: true,
-                                        color: 'silver',
-                                    },
+                                    beginAtZero: true,
+                                    grid: { display: true, color: 'silver' },
                                     ticks: {
-                                        beginAtZero: true,
-                                        color: 'rgba(0, 0, 0, 0.99)',
+                                        color: '#000',
                                         font: {
-                                            size: 11, 
-                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                            // weight: 'bold',
+                                            size: 11,
+                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
                                         }
                                     }
                                 }
                             },
                             animation: {
                                 duration: 1500,
-                                easing: 'easeInOutBounce',
+                                easing: 'easeInOutBounce'
                             }
-                        }
+                        },
+                        plugins: [
+                            hoverGridPlugin(),
+                            dottedGridPlugin(),
+                            axisTooltipYearFormatePlugin(),
+                            // axisCursorPlugin()
+                        ]
                     });
                 }
             });
         }
 
         analyticalChartFetch();
-
-        // Optional: Re-fetch on date change or button click
-        $("#chartStartDate, #chartEndDate").on('change', function(){
+        // update data according date range
+        $("#chartStartDate, #chartEndDate").on('change', function () {
             analyticalChartFetch();
         });
+    });
+</script>
+<script>
+    const slider = document.getElementById('rangeSlider');
+
+    slider.addEventListener('input', function () {
+    const value = (this.value - this.min) / (this.max - this.min) * 100;
+    this.style.background = `linear-gradient(to right, rgba(0, 123, 255, 0.1) ${value}%,transparent ${value}%)`;
     });
 </script>
 <!-- <script>

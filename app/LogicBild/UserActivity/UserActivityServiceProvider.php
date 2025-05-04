@@ -224,6 +224,7 @@ class UserActivityServiceProvider
         $daysOfWeek = [];
         for ($i = 6; $i >= 0; $i--) {
             $day = Carbon::now()->subDays($i)->format('Y-m-d');
+            //$daysOfWeek[] = $day->format('d M Y');
             $daysOfWeek[] = $day;
         }
 
