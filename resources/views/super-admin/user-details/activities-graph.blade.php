@@ -4,6 +4,7 @@
         <div class="row mb-4">
             <div class="col-xl-12">
                 <div class="card card-body chart-card card-background">
+                    <!-- Current Day Data -->
                     <div class="row">
                         <div class="col-xl-4">
                             <span class="login-user-title ps-4">Total Current Login Users</span>
@@ -62,12 +63,10 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-xl-4">
-                <canvas id="chartContainer" width="100%" height="36"></canvas>
-            </div> -->
         </div>
         <div class="row">
             <div class="col-xl-6">
+                <!-- Weekly Data Chart -->
                 <div class="card card-body chart-card">
                     <div class="card-header mini-bar-header ps-2" style="text-align:center;">
                         <span class="card-head-title head-skeletone">
@@ -82,6 +81,7 @@
                 </div>
             </div>
             <div class="col-xl-6">
+                <!-- Monthly Data Chart -->
                 <div class="card card-body chart-card">
                     <div class="card-header mini-bar-header ps-2" style="text-align:center;">
                         <span class="card-head-title head-skeletone">
@@ -105,9 +105,10 @@
                 <div class="card-header mini-bar-header ps-2" style="text-align:center;">
                     <div class="row">
                         <div class="col-xl-8">
+                            <!-- Total all data chart -->
                             <span class="card-head-title head-skeletone">
                                 <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
-                                Total All Users Log Activities
+                                Total Users Log Activities
                             </span>
                             <div class="loader_chart loader_skeleton" id="loader_userAllLogChart"></div>
                         </div>
@@ -126,9 +127,11 @@
                 <div class="user-activities--month-chart">
                     <canvas id="userAllLogChart" height="80"></canvas>
                     <canvas id="userLogDateChart" height="36"></canvas>
-                    <div class="range-box ">
+                    <div class="dual-range-container">
+                        <input type="range" id="rangeLeftSlider" min="0" max="365" value="0" class="dual-range">
+                        <input type="range" id="rangeRightSlider" min="0" max="365" value="365" class="dual-range">
+                        <div class="range-track"></div>
                         <img class="full-width-img" src="/image/LineChart.PNG" alt="Chart" />
-                        <input type="range" class="custom-range-slider" min="0" max="30" value="0" id="rangeSlider">
                     </div>
                 </div>
             </div>
@@ -583,6 +586,7 @@
         return (value / Math.pow(1000, order)).toFixed(1) + suffixes[order];
     }
 </script> -->
+<!-- Total User Activity Multi-Chart -->
 <script type="module">
     // hover plugins
     import { hoverGridPlugin, dottedGridPlugin, axisTooltipYearFormatePlugin, axisCursorPlugin } from "/plugins/chartHoverPlugins.js";
@@ -594,6 +598,14 @@
             timeout = setTimeout(() => func.apply(this, args), wait);
         };
     }
+    // Extend Date prototype to get the day of the year (1–365/366)
+    Date.prototype.getDayOfYear = function () {
+        const start = new Date(this.getFullYear(), 0, 0);
+        const diff = this - start;
+        const oneDay = 1000 * 60 * 60 * 24;
+        return Math.floor(diff / oneDay);
+    };
+
     let chart; // Declare outside to update globally
 
     $(document).ready(function () {
@@ -753,48 +765,78 @@
         $("#chartStartDate, #chartEndDate").on('change', function () {
             analyticalChartFetch();
         });
-        // input range trigger action for data get
-        const slider = document.getElementById('rangeSlider');
+        // input range id initialize
+        const sliderLeft = document.getElementById('rangeLeftSlider');
+        const sliderRight = document.getElementById('rangeRightSlider');
         const startInput = document.getElementById('chartStartDate');
         const endInput = document.getElementById('chartEndDate');
-        // Base starting date (e.g., Jan 1, 2025)
-        const baseStartDate = new Date(2023, 12, 31);
-        // 48 weeks = 336 days
-        const rangeDays = 336;
-        // Optionally set a larger sliding window (e.g., 0 to 365)
-        slider.min = 0;
-        slider.max = 365;
-        // Format DD-MM-YYYY
+
+        const currentYear = new Date().getFullYear();
+        const baseStartDate = new Date(currentYear, 0, 1); // Jan 1 current year
+
+        // Helper to format DD-MM-YYYY
         function formatDate(date) {
             const day = String(date.getDate()).padStart(2, '0');
             const month = String(date.getMonth() + 1).padStart(2, '0');
             const year = date.getFullYear();
             return `${day}-${month}-${year}`;
         }
-        const debouncedFetch = debounce(() => {
-            if (typeof analyticalChartFetch === 'function') {
-                analyticalChartFetch();
-            }
-        }, 500); // 500ms delay
-        slider.addEventListener('input', function () {
-            const offset = parseInt(this.value);
-            const fromDate = new Date(baseStartDate);
-            fromDate.setDate(baseStartDate.getDate() + offset);
+        // bckground change according to range
+        function updateDateInputs() {
+            const fromOffset = parseInt(sliderLeft.value);
+            const toOffset = parseInt(sliderRight.value);
 
-            const toDate = new Date(fromDate);
-            toDate.setDate(fromDate.getDate() + rangeDays);
+            const fromDate = new Date(baseStartDate);
+            fromDate.setDate(baseStartDate.getDate() + fromOffset);
+
+            const toDate = new Date(baseStartDate);
+            toDate.setDate(baseStartDate.getDate() + toOffset);
 
             startInput.value = formatDate(fromDate);
             endInput.value = formatDate(toDate);
 
-            const value = (offset / (slider.max - slider.min)) * 100;
-            this.style.background = `linear-gradient(to right, rgba(0, 123, 255, 0.3) ${value}%, rgba(143, 197, 255, 0) ${value}%)`;
+            // Gradient split logic
+            const min = parseInt(sliderLeft.min);
+            const max = parseInt(sliderRight.max);
+            const range = max - min;
 
-            debouncedFetch(); // ✅ Debounced call
+            const leftPercent = ((fromOffset - min) / range) * 100;
+            const rightPercent = ((toOffset - min) / range) * 100;
+
+            // Left slider shows gradient to the right of the thumb
+            sliderLeft.style.background = `linear-gradient(to right, 
+                white ${leftPercent}%, 
+                rgba(0, 123, 255, 0.2) ${leftPercent}%)`;
+
+            // Right slider shows gradient to the left of the thumb
+            sliderRight.style.background = `linear-gradient(to right, 
+                rgba(0, 123, 255, 0.2) ${rightPercent}%, 
+                white ${rightPercent}%)`;
+        }
+        // debounce
+        const debouncedFetch = debounce(() => {
+            if (typeof analyticalChartFetch === 'function') analyticalChartFetch();
+        }, 500);
+        // input range left side
+        sliderLeft.addEventListener('input', function () {
+            if (parseInt(sliderLeft.value) >= parseInt(sliderRight.value)) {
+                sliderLeft.value = parseInt(sliderRight.value) - 1;
+            }
+            updateDateInputs();
+            debouncedFetch();
         });
-
-        // Initialize on load
-        slider.dispatchEvent(new Event('input'));
+        // input range right side
+        sliderRight.addEventListener('input', function () {
+            if (parseInt(sliderRight.value) <= parseInt(sliderLeft.value)) {
+                sliderRight.value = parseInt(sliderLeft.value) + 1;
+            }
+            updateDateInputs();
+            debouncedFetch();
+        });
+        // Initialize sliders on page load
+        sliderLeft.value = 0;
+        sliderRight.value = new Date().getDayOfYear();
+        updateDateInputs();
     });
 </script>
 <script>

@@ -347,61 +347,66 @@ img#loaderShow {
     opacity: 1 !important;
     background-color: #3b71ca !important;
 } */
-.custom-range-slider {
-    -webkit-appearance: none;
+img.full-width-img {
+    width: 100%;
+    height: 100%;
+}
+/* input range  */
+.dual-range-container {
+    position: relative;
     width: 100%;
     height: 95px;
-    background: #fff;
-    /* border: 1px solid rgba(0, 123, 255, 0.200); */
-    /* border-radius: 4px; */
     outline: none;
-    background: linear-gradient(to right, rgba(0, 123, 255, 0.1), transparent);
     padding: 0;
-    z-index: 999;
     transition: background 450ms ease-in;
-    margin-top: -94px;
-    border-left: 1px solid gray;
-    border-right: 1px solid gray;
-    border-bottom: 1px solid gray;
+    border-bottom: 2px solid #878787;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
 }
-/* Webkit (Chrome, Safari) */
-.custom-range-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
-    appearance: none;
-    font-size: 12px;
-    z-index: 999;
-    user-select: none;
-    width: 10px;
-    height: 94px;
-    margin-top: 2px;
-    background-image: linear-gradient(to right, rgba(0, 123, 255, 0.678)); /* blue */
-    border: 1px solid transparent;
-    border-radius: 5%;
-    /* box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.2); */
-    cursor: ew-resize;
-    transition: background 0.3s ease;
-    margin-top: 0px; /* Align thumb with track */
-}
-/* Firefox */
-.custom-range-slider::-moz-range-thumb {
-    width: 10px;
-    height: 90px;
-    /* background: #007bff; */
-    border: 1px solid gray;
-    border-radius: 5%;
-    /* box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.2); */
-    cursor: ew-resize;
-}
-img.full-width-img {
+  
+.dual-range {
+    position: absolute;
     width: 100%;
-    height: 100%;
+    height: 95px;
+    pointer-events: none; /* Disable default mouse interaction */
+    -webkit-appearance: none;
+    background: none;
+    z-index: 2;
 }
   
+.dual-range::-webkit-slider-thumb {
+    pointer-events: all; /* Reactivate thumb dragging */
+    width: 10px;
+    height: 35px;
+    background-image: linear-gradient(to right,rgb(0, 81, 255), rgba(0, 123, 255, 0.1), rgb(0, 81, 255) 100%);
+    border-radius: 5%;
+    border: none;
+    -webkit-appearance: none;
+    cursor: ew-resize;
+}
+  
+.range-track {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 95px;
+    width: 100%;
+    background: transparent;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+  
+.range-track::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    background: transparent;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
 .log-card {
     background: white;
     padding-bottom: 7px;
