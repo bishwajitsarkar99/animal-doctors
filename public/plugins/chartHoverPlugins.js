@@ -112,10 +112,27 @@ export function dottedGridPlugin(){
         }
     };
 }
-// hover tooltip with name of day formate
-export function axisTooltipDayFormatePlugin(){
+export function axisTooltipDayFormatePlugin() {
     return {
         id: 'axisTooltipDay',
+
+        afterEvent(chart, args) {
+            const event = args.event;
+            const { x, y } = event;
+            const chartArea = chart.chartArea;
+
+            // Check if cursor is inside the chart area
+            const inside = x >= chartArea.left &&
+                           x <= chartArea.right &&
+                           y >= chartArea.top &&
+                           y <= chartArea.bottom;
+
+            if (!inside) {
+                chart._hoverXTick = undefined;
+                chart._hoverYTick = undefined;
+            }
+        },
+
         afterDraw(chart) {
             const ctx = chart.ctx;
             const xAxis = chart.scales.x;
@@ -131,7 +148,7 @@ export function axisTooltipDayFormatePlugin(){
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
 
-            // Show tooltip for Y-axis tick
+            // Y-axis tooltip
             if (hoverYTick !== undefined) {
                 const yIndex = yAxis.getTicks().findIndex(t => t.value === hoverYTick);
                 if (yIndex !== -1) {
@@ -153,7 +170,7 @@ export function axisTooltipDayFormatePlugin(){
                 }
             }
 
-            // Show tooltip in label date for X-axis tick
+            // X-axis tooltip
             if (hoverXTick !== undefined) {
                 const xIndex = xAxis.getTicks().findIndex(t => t.value === hoverXTick);
                 if (xIndex !== -1) {
@@ -165,10 +182,10 @@ export function axisTooltipDayFormatePlugin(){
                     if (label) {
                         const date = new Date(label);
                         if (!isNaN(date)) {
-                            // day formate
                             text = date.toLocaleDateString('en-US', { weekday: 'short' });
                         }
                     }
+
                     const boxWidth = ctx.measureText(text).width + 10;
                     const boxHeight = 18;
 
@@ -193,6 +210,23 @@ export function axisTooltipDayFormatePlugin(){
 export function axisTooltipDateFormatePlugin(){
     return {
         id: 'axisTooltipDate',
+        afterEvent(chart, args) {
+            const event = args.event;
+            const { x, y } = event;
+            const chartArea = chart.chartArea;
+
+            // Check if cursor is inside the chart area
+            const inside = x >= chartArea.left &&
+                           x <= chartArea.right &&
+                           y >= chartArea.top &&
+                           y <= chartArea.bottom;
+
+            if (!inside) {
+                chart._hoverXTick = undefined;
+                chart._hoverYTick = undefined;
+            }
+        },
+
         afterDraw(chart) {
             const ctx = chart.ctx;
             const xAxis = chart.scales.x;
@@ -208,7 +242,7 @@ export function axisTooltipDateFormatePlugin(){
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
 
-            // Show tooltip for Y-axis tick
+            // Y-axis tooltip
             if (hoverYTick !== undefined) {
                 const yIndex = yAxis.getTicks().findIndex(t => t.value === hoverYTick);
                 if (yIndex !== -1) {
@@ -230,7 +264,7 @@ export function axisTooltipDateFormatePlugin(){
                 }
             }
 
-            // Show tooltip in label date for X-axis tick
+            // X-axis tooltip
             if (hoverXTick !== undefined) {
                 const xIndex = xAxis.getTicks().findIndex(t => t.value === hoverXTick);
                 if (xIndex !== -1) {
@@ -246,6 +280,7 @@ export function axisTooltipDateFormatePlugin(){
                             text = `${String(date.getDate()).padStart(2, '0')}-${date.toLocaleString('default', { month: 'short' })}-${date.getFullYear()}`;
                         }
                     }
+
                     const boxWidth = ctx.measureText(text).width + 10;
                     const boxHeight = 18;
 
@@ -270,6 +305,23 @@ export function axisTooltipDateFormatePlugin(){
 export function axisTooltipMonthFormatePlugin(){
     return {
         id: 'axisTooltipMonth',
+        afterEvent(chart, args) {
+            const event = args.event;
+            const { x, y } = event;
+            const chartArea = chart.chartArea;
+
+            // Check if cursor is inside the chart area
+            const inside = x >= chartArea.left &&
+                           x <= chartArea.right &&
+                           y >= chartArea.top &&
+                           y <= chartArea.bottom;
+
+            if (!inside) {
+                chart._hoverXTick = undefined;
+                chart._hoverYTick = undefined;
+            }
+        },
+
         afterDraw(chart) {
             const ctx = chart.ctx;
             const xAxis = chart.scales.x;
@@ -285,7 +337,7 @@ export function axisTooltipMonthFormatePlugin(){
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
 
-            // Show tooltip for Y-axis tick
+            // Y-axis tooltip
             if (hoverYTick !== undefined) {
                 const yIndex = yAxis.getTicks().findIndex(t => t.value === hoverYTick);
                 if (yIndex !== -1) {
@@ -307,7 +359,7 @@ export function axisTooltipMonthFormatePlugin(){
                 }
             }
 
-            // Show tooltip in label date for X-axis tick
+            // X-axis tooltip
             if (hoverXTick !== undefined) {
                 const xIndex = xAxis.getTicks().findIndex(t => t.value === hoverXTick);
                 if (xIndex !== -1) {
@@ -319,10 +371,11 @@ export function axisTooltipMonthFormatePlugin(){
                     if (label) {
                         const date = new Date(label);
                         if (!isNaN(date)) {
-                            // date format changed to "Jan 2025"
+                            // date format changed to "Jan"
                             text = `${date.toLocaleString('default', { month: 'short' })}`;
                         }
                     }
+
                     const boxWidth = ctx.measureText(text).width + 10;
                     const boxHeight = 18;
 
@@ -347,6 +400,23 @@ export function axisTooltipMonthFormatePlugin(){
 export function axisTooltipYearFormatePlugin(){
     return {
         id: 'axisTooltipYear',
+        afterEvent(chart, args) {
+            const event = args.event;
+            const { x, y } = event;
+            const chartArea = chart.chartArea;
+
+            // Check if cursor is inside the chart area
+            const inside = x >= chartArea.left &&
+                           x <= chartArea.right &&
+                           y >= chartArea.top &&
+                           y <= chartArea.bottom;
+
+            if (!inside) {
+                chart._hoverXTick = undefined;
+                chart._hoverYTick = undefined;
+            }
+        },
+
         afterDraw(chart) {
             const ctx = chart.ctx;
             const xAxis = chart.scales.x;
@@ -362,7 +432,7 @@ export function axisTooltipYearFormatePlugin(){
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
 
-            // Show tooltip for Y-axis tick
+            // Y-axis tooltip
             if (hoverYTick !== undefined) {
                 const yIndex = yAxis.getTicks().findIndex(t => t.value === hoverYTick);
                 if (yIndex !== -1) {
@@ -384,7 +454,7 @@ export function axisTooltipYearFormatePlugin(){
                 }
             }
 
-            // Show tooltip in label date for X-axis tick
+            // X-axis tooltip
             if (hoverXTick !== undefined) {
                 const xIndex = xAxis.getTicks().findIndex(t => t.value === hoverXTick);
                 if (xIndex !== -1) {
@@ -400,6 +470,7 @@ export function axisTooltipYearFormatePlugin(){
                             text = `${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}`;
                         }
                     }
+
                     const boxWidth = ctx.measureText(text).width + 10;
                     const boxHeight = 18;
 

@@ -26,6 +26,7 @@ return[
     'Category List'=>'Category List',
     'ADD Category'=>'ADD Category',
     // Sub Category
+    'Group'=> 'Group',
     'Sub-Category List'=>'Sub-Category List',
     'Sub Category'=>'Sub Category',
     'ADD Sub Category'=>'ADD Sub Category',

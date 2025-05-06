@@ -126,7 +126,7 @@
                 </div>
                 <div class="user-activities--month-chart">
                     <canvas id="userAllLogChart" height="80"></canvas>
-                    <canvas id="userLogDateChart" height="36"></canvas>
+                    <canvas id="allUserDateLogChart" height="36"></canvas>
                     <div class="dual-range-container">
                         <input type="range" id="rangeLeftSlider" min="0" max="365" value="0" class="dual-range">
                         <input type="range" id="rangeRightSlider" min="0" max="365" value="365" class="dual-range">
@@ -619,6 +619,7 @@
     };
 
     let chart; // Declare outside to update globally
+    let chartDate;
 
     $(document).ready(function () {
         function analyticalChartFetch() {
@@ -637,9 +638,15 @@
                     const labels = response.labels;
                     const data = response.monthly_user_count_per_day;
 
+                    const date_labels = response.date_labels;
+                    const date_data = response.monthly_user_count_per_date;
+                    
+
                     if (chart) chart.destroy(); // Clean existing chart
+                    if (chartDate) chartDate.destroy();
 
                     const ctx = document.getElementById('userAllLogChart').getContext('2d');
+                    const ctxDateChart = document.getElementById('allUserDateLogChart').getContext('2d');
 
                     // Create gradients
                     const gradientLogin = ctx.createLinearGradient(0, 0, 0, 400);
@@ -653,7 +660,8 @@
                     const gradientUsers = ctx.createLinearGradient(0, 0, 0, 400);
                     gradientUsers.addColorStop(0, 'rgba(0, 123, 255, 0.2)');
                     gradientUsers.addColorStop(1, 'rgba(0,0,255,0)');
-
+                    
+                    // Montly Basis Data Line Chart
                     chart = new Chart(ctx, {
                         type: 'bar',
                         data: {
@@ -782,6 +790,141 @@
                                     beginAtZero: true,
                                     grid: { display: true, color: 'silver' },
                                     ticks: {
+                                        source: 'data',
+                                        autoSkip: true,
+                                        color: '#000',
+                                        //stepSize: 1,
+                                        font: {
+                                            size: 11,
+                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        plugins: [
+                            hoverGridPlugin(),
+                            dottedGridPlugin(),
+                            axisTooltipDateFormatePlugin(),
+                            ChartScrollPlugin(),
+                            ChartZoom,
+                            // axisCursorPlugin()
+                        ]
+                    });
+
+                    // Date Basis Data Bar Chart
+                    chartDate = new Chart(ctxDateChart, {
+                        type: 'bar',
+                        data: {
+                            labels: date_labels,
+                            datasets: [
+                                {
+                                    type: 'bar',
+                                    label: 'Login Count',
+                                    data: date_data.date_login_counts,
+                                    backgroundColor: 'rgba(28,200,138,0.5)',
+                                    fill: true,
+                                    tension: 0.4,
+                                    order: 3
+                                },
+                                {
+                                    type: 'bar',
+                                    label: 'Logout Count',
+                                    data: date_data.date_logout_counts,
+                                    backgroundColor: '#e74a3b',
+                                    fill: true,
+                                    tension: 0.4,
+                                    order: 2
+                                },
+                                {
+                                    type: 'bar',
+                                    label: 'Active Users',
+                                    data: date_data.date_current_user_counts,
+                                    backgroundColor: '#4e73df',
+                                    fill: true,
+                                    tension: 0.4,
+                                    order: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            // maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                    position: 'top',
+                                    labels: {
+                                        color: '#000',
+                                        font: {
+                                            size: 12,
+                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                                            weight: 'bold'
+                                        }
+                                    }
+                                },
+                                tooltip: {
+                                    enabled: true,
+                                    backgroundColor: 'rgb(255, 255, 255)',
+                                    titleColor: '#000000',
+                                    bodyColor: '#000000',
+                                    borderWidth: 1,
+                                    borderColor:'rgba(2, 149, 168, 0.6)',
+                                    titleFont: { size: 12 },
+                                    bodyFont: { size: 12 }
+                                },
+                                zoom: {
+                                    pan: {
+                                        enabled: true,
+                                        mode: 'x',
+                                        threshold: 10
+                                    },
+                                    zoom: {
+                                        wheel: {
+                                            enabled: true
+                                        },
+                                        pinch: {
+                                            enabled: true
+                                        },
+                                        mode: 'x'
+                                    }
+                                }
+                            },
+                            interaction: {
+                                mode: 'index',
+                                intersect: false
+                            },
+                            scales: {
+                                x: {
+                                    grid: { display: false, color: 'silver' },
+                                    ticks: {
+                                        source: 'data',
+                                        autoSkip: true,
+                                        color: '#000',
+                                        font: {
+                                            size: 11,
+                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+                                        },
+                                        // x-label rotation change 
+                                        // autoSkip: false,
+                                        // maxRotation: 45,
+                                        // minRotation: 0
+                                        type: 'time',
+                                        time: {
+                                            unit: 'day',
+                                            tooltipFormat: 'dd MMM yyyy',
+                                            displayFormats: {
+                                                day: 'dd MMM yyyy'
+                                            }
+                                        },
+                                    }   
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    grid: { display: true, color: 'silver' },
+                                    ticks: {
+                                        source: 'data',
+                                        autoSkip: true,
                                         color: '#000',
                                         font: {
                                             size: 11,
@@ -882,7 +1025,7 @@
         updateDateInputs();
     });
 </script>
-<script>
+<!-- <script>
     const userCanvas  = document.getElementById('userLogDateChart').getContext('2d');
 
     const userCtx = new Chart(userCanvas , {
@@ -976,7 +1119,7 @@
         order = Math.max(0, Math.min(order, suffixes.length - 1));
         return (value / Math.pow(1000, order)).toFixed(1) + suffixes[order];
     }
-</script>
+</script> -->
 <!-- <script>
     const slider = document.getElementById('rangeSlider');
     const startInput = document.getElementById('chartStartDate');

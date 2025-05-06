@@ -27,6 +27,7 @@ return[
     'Category List'=>'পণ্যের-ধরনের তালিকা',
     'ADD Category'=>'পণ্যের-ধরন যোগ করুন',
     // Sub Category
+    'Group'=> 'গ্রুপ',
     'Sub-Category List'=>'উপ-ধরনের তালিকা',
     'Sub-Category'=>'উপ-ধরন',
     'Sub Category'=>'পণ্যের উপ-ধরন',

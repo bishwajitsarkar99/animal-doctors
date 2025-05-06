@@ -47,7 +47,7 @@
                     <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
                   <th id="th_sort" data-coloumn="category_id" data-order="desc" class="table_th_color txt" style="cursor: pointer;">
-                    {{__('translate.Category')}}
+                    {{__('translate.Group')}}
                     <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
                   </th>
                   <th id="th_sort" data-coloumn="sub_category_name" data-order="desc" class="table_th_color tot_pending_ col" style="text-align: left;cursor: pointer;">
@@ -315,7 +315,7 @@
   $(document).ready(function () {
     // Initialize Select2
     $('.select2').select2({
-      placeholder: 'Select Category',
+      placeholder: 'Select Group Name',
       allowClear: true,
       width: '100%' // Ensures full width from the start
     });
@@ -323,7 +323,7 @@
     // Set custom placeholder for the search input inside Select2 dropdowns
     $(document).on('select2:open', '#category_id', function () {
       setTimeout(() => {
-        $('.select2-search__field').attr('placeholder', 'Search category...');
+        $('.select2-search__field').attr('placeholder', 'Search Group...');
       }, 50); // Small delay ensures the field is available
     });
   });

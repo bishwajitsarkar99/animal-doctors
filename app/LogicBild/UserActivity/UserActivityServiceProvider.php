@@ -314,7 +314,7 @@ class UserActivityServiceProvider
             $start = Carbon::now()->startOfYear();
             $end = Carbon::now()->endOfYear();
         }
-
+        // Monthly data get 
         $login_counts_monthly = SessionModel::whereBetween('created_at', [$start, $end])
             ->whereNotNull('user_id')
             ->where('payload', 'login')
@@ -352,10 +352,123 @@ class UserActivityServiceProvider
             $login_counts_monthly_filled[] = $login_counts_monthly[$formattedMonth] ?? 0;
             $logout_counts_monthly_filled[] = $logout_counts_monthly[$formattedMonth] ?? 0;
             $current_user_counts_monthly_filled[] = $current_user_counts_monthly[$formattedMonth] ?? 0;
-
             // change period day or month
             //$period->addDay();
             $period->addMonth();
+        }
+
+        // Day Basis data 
+        $login_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
+            ->whereNotNull('user_id')
+            ->where('payload', 'login')
+            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
+            ->groupBy('month')
+            ->pluck('count', 'month')
+            ->toArray();
+
+        $logout_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
+            ->whereNotNull('user_id')
+            ->where('payload', 'logout')
+            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
+            ->groupBy('month')
+            ->pluck('count', 'month')
+            ->toArray();
+
+        $current_user_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
+            ->whereNotNull('user_id')
+            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('COUNT(DISTINCT user_id) as count'))
+            ->groupBy('month')
+            ->pluck('count', 'month')
+            ->toArray();
+
+
+        $date_labels = [];
+        $login_counts_date_filled = [];
+        $logout_counts_date_filled = [];
+        $current_user_counts_date_filled = [];
+
+        $start_period = Carbon::parse($start)->startOfDay();
+        $end_eriod = Carbon::parse($end)->startOfDay();
+
+        while ($start_period <= $end_eriod) {
+            $formattedDate = $start_period->format('Y-m');
+            $date_labels[] = $start_period->format('d M Y');
+            $login_counts_date_filled[] = $login_counts_date[$formattedDate] ?? 0;
+            $logout_counts_date_filled[] = $logout_counts_date[$formattedDate] ?? 0;
+            $current_user_counts_date_filled[] = $current_user_counts_date[$formattedDate] ?? 0;
+
+            $start_period->addDay();
+        }
+        
+        return response()->json([
+            // Monthly Basis
+            'labels' => $monthly_labels,
+            'monthly_user_count_per_day' => [
+                'login_counts' => $login_counts_monthly_filled,
+                'logout_counts' => $logout_counts_monthly_filled,
+                'current_user_counts' => $current_user_counts_monthly_filled,
+            ],
+            // Date Basis
+            'date_labels' => $date_labels,
+            'monthly_user_count_per_date' => [
+                'date_login_counts' => $login_counts_date_filled,
+                'date_logout_counts' => $logout_counts_date_filled,
+                'date_current_user_counts' => $current_user_counts_date_filled,
+            ],
+        ]);
+    }
+    public function userAnalyticalChart_day(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        if ($start_date && $end_date) {
+            $start = Carbon::parse($start_date)->startOfDay();
+            $end = Carbon::parse($end_date)->endOfDay();
+        } else {
+            $start = Carbon::now()->startOfYear();
+            $end = Carbon::now()->endOfYear();
+        }
+
+        $login_counts_monthly = SessionModel::whereBetween('created_at', [$start, $end])
+            ->whereNotNull('user_id')
+            ->where('payload', 'login')
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as count'))
+            ->groupBy('date')
+            ->pluck('count', 'date')
+            ->toArray();
+
+        $logout_counts_monthly = SessionModel::whereBetween('created_at', [$start, $end])
+            ->whereNotNull('user_id')
+            ->where('payload', 'logout')
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as count'))
+            ->groupBy('date')
+            ->pluck('count', 'date')
+            ->toArray();
+
+        $current_user_counts_monthly = SessionModel::whereBetween('created_at', [$start, $end])
+            ->whereNotNull('user_id')
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as count'))
+            ->groupBy('date')
+            ->pluck('count', 'date')
+            ->toArray();
+
+        $monthly_labels = [];
+        $login_counts_monthly_filled = [];
+        $logout_counts_monthly_filled = [];
+        $current_user_counts_monthly_filled = [];
+
+        $period = Carbon::parse($start)->startOfDay();
+        $endPeriod = Carbon::parse($end)->startOfDay();
+
+        while ($period <= $endPeriod) {
+            $formattedMonth = $period->format('Y-m-d');
+            $monthly_labels[] = $period->format('d M Y');
+            $login_counts_monthly_filled[] = $login_counts_monthly[$formattedMonth] ?? 0;
+            $logout_counts_monthly_filled[] = $logout_counts_monthly[$formattedMonth] ?? 0;
+            $current_user_counts_monthly_filled[] = $current_user_counts_monthly[$formattedMonth] ?? 0;
+
+            $period->addDay();
         }
 
         return response()->json([
@@ -367,72 +480,6 @@ class UserActivityServiceProvider
             ],
         ]);
     }
-    // public function userAnalyticalCharts(Request $request)
-    // {
-    //     $start_date = $request->input('start_date');
-    //     $end_date = $request->input('end_date');
-
-    //     if ($start_date && $end_date) {
-    //         $start = Carbon::parse($start_date)->startOfDay();
-    //         $end = Carbon::parse($end_date)->endOfDay();
-    //     } else {
-    //         $start = Carbon::now()->startOfYear();
-    //         $end = Carbon::now()->endOfYear();
-    //     }
-
-    //     $login_counts_monthly = SessionModel::whereBetween('created_at', [$start, $end])
-    //         ->whereNotNull('user_id')
-    //         ->where('payload', 'login')
-    //         // ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
-    //         ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as count'))
-    //         ->groupBy('date')
-    //         ->pluck('count', 'date')
-    //         ->toArray();
-
-    //     $logout_counts_monthly = SessionModel::whereBetween('created_at', [$start, $end])
-    //         ->whereNotNull('user_id')
-    //         ->where('payload', 'logout')
-    //         // ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
-    //         ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as count'))
-    //         ->groupBy('date')
-    //         ->pluck('count', 'date')
-    //         ->toArray();
-
-    //     $current_user_counts_monthly = SessionModel::whereBetween('created_at', [$start, $end])
-    //         ->whereNotNull('user_id')
-    //         // ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('COUNT(DISTINCT user_id) as count'))
-    //         ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as count'))
-    //         ->groupBy('date')
-    //         ->pluck('count', 'date')
-    //         ->toArray();
-
-    //     $monthly_labels = [];
-    //     $login_counts_monthly_filled = [];
-    //     $logout_counts_monthly_filled = [];
-    //     $current_user_counts_monthly_filled = [];
-
-    //     $period = Carbon::parse($start)->startOfDay();
-    //     $endPeriod = Carbon::parse($end)->startOfDay();
-
-    //     while ($period <= $endPeriod) {
-    //         $formattedMonth = $period->format('Y-m-d');
-    //         $monthly_labels[] = $period->format('d M Y');
-    //         $login_counts_monthly_filled[] = $login_counts_monthly[$formattedMonth] ?? 0;
-    //         $logout_counts_monthly_filled[] = $logout_counts_monthly[$formattedMonth] ?? 0;
-    //         $current_user_counts_monthly_filled[] = $current_user_counts_monthly[$formattedMonth] ?? 0;
-
-    //         $period->addDay();
-    //     }
-
-    //     return response()->json([
-    //         'labels' => $monthly_labels,
-    //         'monthly_user_count_per_day' => [
-    //             'login_counts' => $login_counts_monthly_filled,
-    //             'logout_counts' => $logout_counts_monthly_filled,
-    //             'current_user_counts' => $current_user_counts_monthly_filled,
-    //         ],
-    //     ]);
-    // }
 
     // public function userAnalyticalDailyChart(Request $request)
     // {
