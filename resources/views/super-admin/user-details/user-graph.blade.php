@@ -216,7 +216,7 @@
                 <div class="loader_skeleton" id="loader_orderChart"></div>
             </div>
             <div class="card card-body third-card body-skeletone user-activities--month-bar-chart">
-                <canvas id="userActivityChart" width="100%" height="36"></canvas>
+                <canvas id="userActivityChart" height="110"></canvas>
             </div>
         </div>
     </div>
@@ -232,13 +232,15 @@
                 <div class="loader_skeleton" id="loader_acivityChart"></div>
             </div>
             <div class="card card-body third-card body-skeletone user-activities--week-chart">
-                <canvas id="userChart" width="100%" height="20"></canvas>
+                <canvas id="userChart" height="80"></canvas>
             </div>
         </div>
     </div>
 </div>
 @push('scripts')
-<script>
+<script type="module">
+    // hover plugins
+    import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin} from "/plugins/chartHoverPlugins.js";
     // Get the canvas context
     const ctx2 = document.getElementById("userChart").getContext("2d");
 
@@ -255,6 +257,7 @@
         data: {
             labels: xValues,
             datasets: [{
+                label: "Total Qty",
                 data: userCounts,
                 backgroundColor: barColors,
                 tension: 0.4,
@@ -262,7 +265,43 @@
         },
         options: {
             responsive: true,
-            legend: { display: false },
+            plugins: {
+                legend: {
+                    display: false,
+                    position: 'top',
+                    labels: {
+                        color: '#000000',
+                        font: {
+                            size: 12,
+                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                            weight: 'bold',
+                        }
+                    },
+                    // onHover: function(event, legendItem, legend) {
+                    //     legend.chart.canvas.style.cursor = 'pointer';
+                    // },
+                    // onLeave: function(event, legendItem, legend) {
+                    //     legend.chart.canvas.style.cursor = 'default';
+                    // }
+                },
+                tooltip: {
+                    enabled: true,
+                    // backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                    // titleColor: '#fff',
+                    // bodyColor: '#fff',
+                    backgroundColor: 'rgb(255, 255, 255)',
+                    titleColor: '#000000',
+                    bodyColor: '#000000',
+                    borderWidth: 1,
+                    borderColor:'rgba(2, 149, 168, 0.6)',
+                    titleFont: { size: 12 },
+                    bodyFont: { size: 12 },
+                }
+            },
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
             scales: {
                 y: {
                     beginAtZero: true,
@@ -289,13 +328,22 @@
                 }
             },
             animation: {
-            duration: 2000,
-            easing: 'easeInOutBounce',
+                duration: 2000,
+                easing: 'easeInOutBounce',
             }
-        }
+        },
+        // import plugins
+        plugins:[
+            hoverGridPlugin(),
+            dottedGridPlugin(),
+            axisTooltipTextPlugin(),
+            axisCursorPlugin()
+        ]
     });
 </script>
-<script>
+<script type="module">
+    // hover plugins
+    import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin} from "/plugins/chartHoverPlugins.js";
     const ctxUserActivityChart = document.getElementById("userActivityChart").getContext("2d");
     var gradientColor = ctxUserActivityChart.createLinearGradient(0, 0, 0, 400);
     gradientColor.addColorStop(0, 'rgb(157, 235, 255)');  // orange at top rgb(142, 229, 255) 
@@ -327,10 +375,28 @@
             plugins: {
                 legend: { 
                     display: false 
+                },
+                tooltip: {
+                    enabled: true,
+                    // backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                    // titleColor: '#fff',
+                    // bodyColor: '#fff',
+                    backgroundColor: 'rgb(255, 255, 255)',
+                    titleColor: '#000000',
+                    bodyColor: '#000000',
+                    borderWidth: 1,
+                    borderColor:'rgba(2, 149, 168, 0.6)',
+                    titleFont: { size: 12 },
+                    bodyFont: { size: 12 },
                 }
+            },
+            interaction: {
+                mode: 'index',
+                intersect: false
             },
             scales: {
                 y: {
+                    grid: { display: false },
                     ticks: {
                         beginAtZero: true,
                         color: 'rgba(0, 0, 0, 0.99)',
@@ -342,6 +408,7 @@
                     }
                 },
                 x: {
+                    grid: { display: false },
                     ticks: {
                         color: 'rgba(0, 0, 0, 0.99)',
                         font: {
@@ -356,7 +423,14 @@
                 duration: 2000,
                 easing: 'easeInOutBounce'
             }
-        }
+        },
+        // import plugins
+        plugins:[
+            hoverGridPlugin(),
+            dottedGridPlugin(),
+            axisTooltipTextPlugin(),
+            axisCursorPlugin()
+        ]
     });
 </script>
 @endPush

@@ -13,7 +13,7 @@
         });
         // User Activities Data Fetch
         fetch_activities_users_data();
-        // Data View Table--------------
+        // Data View Table--------------   <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.roles.name}</td>
         const table_rows = (rows) => {
             if (rows.length === 0) {
                 return `
@@ -58,7 +58,6 @@
                                 <span class="toggle-icon">➤</span>
                             </button>
                         </td>
-                        <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.roles.name}</td>
                         <td class="border_ord ps-1 supp_vew" id="supp_tab4" hidden>${row.name}</td>
                         <td class="txt_ ps-1 supp_vew2" id="supp_tab5">
                             <span style="color:gray"><i class="fa fa-envelope"></i></span>
@@ -139,26 +138,30 @@
         }
         // Event Listener for sorting columns
         $(document).on('click', '#th_sort', function () {
-
             var button = $(this);
-            // Get the column and current order
-            var column = button.data('column');
+            var column = button.data('coloumn');
             var order = button.data('order');
+
             // Toggle the order (asc/desc)
             order = order === 'desc' ? 'asc' : 'desc';
             button.data('order', order);
-            fetch_activities_users_data('', null, null, column, order);
 
-            // Reset all icons in the table headers first - icon part
-            $('#th_sort').find('.toggle-icon').html('<i class="fa-solid fa-arrow-up-long"></i>');
-            var icon = button.find('.toggle-icon');
-            if (order === 'asc') {
-                icon.html('<i class="fa-solid fa-arrow-down-long"></i>');
-                $(".toggle-icon").fadeIn(300);
-            } else {
-                icon.html('<i class="fa-solid fa-arrow-up-long"></i>');
-                $(".toggle-icon").fadeIn(300);
-            }
+            fetch_activities_users_data(
+                '', null, null,
+                column === 'id' ? column : 'id',
+                order
+            );
+
+            // Remove only the icon from the clicked column (Keep other column icons)
+            button.find("svg").remove();
+
+            // Define sorting icons 
+            var iconHTML = order === 'desc'
+                ?  `<svg width="12px" height="12px" fill="#333333a1" version="1.1" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>`// Down arrow
+                : `<svg width="12px" height="12px" fill="#333333a1" version="1.1" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,122.88 0,59.207 39.403,59.207 39.403,0 83.033,0 83.033,59.207 122.433,59.207 61.216,122.88"/></g></svg>`; // Up arrow
+
+            // Append sorting icon only for the clicked column
+            button.append(iconHTML);
         });
 
         // peritem change

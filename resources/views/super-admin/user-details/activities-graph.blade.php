@@ -105,7 +105,6 @@
                 <div class="card-header mini-bar-header ps-2" style="text-align:center;">
                     <div class="row">
                         <div class="col-xl-8">
-                            <!-- Total all data chart -->
                             <span class="card-head-title head-skeletone">
                                 <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
                                 Total Users Log Activities
@@ -124,6 +123,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Total all data chart -->
                 <div class="user-activities--month-chart">
                     <canvas id="userAllLogChart" height="80"></canvas>
                     <canvas id="allUserDateLogChart" height="36"></canvas>
@@ -940,7 +940,7 @@
                             axisTooltipDateFormatePlugin(),
                             ChartScrollPlugin(),
                             ChartZoom,
-                            // axisCursorPlugin()
+                            axisCursorPlugin()
                         ]
                     });
                 }

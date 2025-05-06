@@ -499,8 +499,7 @@ input.input-date{
     text-align: center;
     letter-spacing: 1px; 
 }
-
-#userDayLogChart, #userMonthLogChart, #userAllLogChart {
+#userDayLogChart, #userMonthLogChart, #userAllLogChart, #userActivityChart, #userChart {
     width: 100% !important;
     /* cursor: move !important; */
 }
@@ -735,7 +734,7 @@ tr.table-row {
     font-weight: 600;
 }
 tr.table-row.user-table-row:hover{
-    border: 1px solid var(--row-hover-border);
+    /* border: 1px solid var(--row-hover-border); */
     font-weight: 600;
     background-image: var(--table-row-hover);
     animation-name: fonColor;
@@ -778,11 +777,11 @@ tr.clicked {
     }
 }
 td.user-details-links{
-    background-color: white;
+    /* background-color: white; */
     color: blue;
 }
 td.user-details-links:hover{
-    background-color: rgb(223 255 223);
+    /* background-color: rgb(223 255 223); */
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     color: white;

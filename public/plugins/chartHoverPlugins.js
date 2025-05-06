@@ -112,6 +112,116 @@ export function dottedGridPlugin(){
         }
     };
 }
+// hover tooltip with text
+export function axisTooltipTextPlugin() {
+    return {
+        id: 'axisTooltipText',
+
+        afterEvent(chart, args) {
+            const event = args.event;
+            const { x, y } = event;
+            const chartArea = chart.chartArea;
+            const xAxis = chart.scales.x;
+            const yAxis = chart.scales.y;
+
+            const inside = x >= chartArea.left &&
+                           x <= chartArea.right &&
+                           y >= chartArea.top &&
+                           y <= chartArea.bottom;
+
+            if (!inside) {
+                chart._hoverXIndex = undefined;
+                chart._hoverYValue = undefined;
+                return;
+            }
+
+            // Detect closest X tick (index)
+            let minXDist = Infinity;
+            let closestXIndex = undefined;
+            xAxis.getTicks().forEach((tick, i) => {
+                const px = xAxis.getPixelForTick(i);
+                const dist = Math.abs(px - x);
+                if (dist < minXDist) {
+                    minXDist = dist;
+                    closestXIndex = i;
+                }
+            });
+            chart._hoverXIndex = closestXIndex;
+
+            // Detect closest Y tick (value)
+            let minYDist = Infinity;
+            let closestYValue = undefined;
+            yAxis.getTicks().forEach((tick) => {
+                const py = yAxis.getPixelForValue(tick.value);
+                const dist = Math.abs(py - y);
+                if (dist < minYDist) {
+                    minYDist = dist;
+                    closestYValue = tick.value;
+                }
+            });
+            chart._hoverYValue = closestYValue;
+        },
+
+        afterDraw(chart) {
+            const ctx = chart.ctx;
+            const xAxis = chart.scales.x;
+            const yAxis = chart.scales.y;
+            const chartArea = chart.chartArea;
+
+            const hoverXIndex = chart._hoverXIndex;
+            const hoverYValue = chart._hoverYValue;
+
+            ctx.save();
+            ctx.font = "11px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+            // Y-axis Tooltip
+            if (hoverYValue !== undefined) {
+                const y = yAxis.getPixelForValue(hoverYValue);
+                const text = hoverYValue.toString();
+                const padding = 5;
+                const boxWidth = ctx.measureText(text).width + padding * 2;
+                const boxHeight = 18;
+
+                ctx.fillStyle = "#000";
+                ctx.strokeStyle = "#888";
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.rect(chartArea.left - boxWidth - 8, y - boxHeight / 2, boxWidth, boxHeight);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = "#fff";
+                ctx.fillText(text, chartArea.left - boxWidth / 2 - 8, y);
+            }
+
+            // X-axis Tooltip
+            if (hoverXIndex !== undefined) {
+                const x = xAxis.getPixelForTick(hoverXIndex);
+                const label = chart.data.labels[hoverXIndex] || '';
+                const text = label.toString();
+                const padding = 5;
+                const boxWidth = ctx.measureText(text).width + padding * 2;
+                const boxHeight = 18;
+
+                ctx.fillStyle = "#000";
+                ctx.strokeStyle = "#888";
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.rect(x - boxWidth / 2, chartArea.bottom + 8, boxWidth, boxHeight);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = "#fff";
+                ctx.fillText(text, x, chartArea.bottom + boxHeight / 2 + 8);
+            }
+
+            ctx.restore();
+        }
+    };
+}
+// hover tooltip with day name formate
 export function axisTooltipDayFormatePlugin() {
     return {
         id: 'axisTooltipDay',
