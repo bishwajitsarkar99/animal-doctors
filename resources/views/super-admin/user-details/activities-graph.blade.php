@@ -287,9 +287,14 @@
                     },
                     tooltip: {
                         enabled: true,
-                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                        titleColor: '#fff',
-                        bodyColor: '#fff',
+                        // backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        // titleColor: '#fff',
+                        // bodyColor: '#fff',
+                        backgroundColor: 'rgb(255, 255, 255)',
+                        titleColor: '#000000',
+                        bodyColor: '#000000',
+                        borderWidth: 1,
+                        borderColor:'rgba(2, 149, 168, 0.6)',
                         titleFont: { size: 12 },
                         bodyFont: { size: 12 },
                     }
@@ -427,9 +432,14 @@
                     },
                     tooltip: {
                         enabled: true,
-                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                        titleColor: '#fff',
-                        bodyColor: '#fff',
+                        // backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        // titleColor: '#fff',
+                        // bodyColor: '#fff',
+                        backgroundColor: 'rgb(255, 255, 255)',
+                        titleColor: '#000000',
+                        bodyColor: '#000000',
+                        borderWidth: 1,
+                        borderColor:'rgba(2, 149, 168, 0.6)',
                         titleFont: { size: 12 },
                         bodyFont: { size: 12 },
                     }
@@ -589,7 +599,9 @@
 <!-- Total User Activity Multi-Chart -->
 <script type="module">
     // hover plugins
-    import { hoverGridPlugin, dottedGridPlugin, axisTooltipYearFormatePlugin, axisCursorPlugin } from "/plugins/chartHoverPlugins.js";
+    import { hoverGridPlugin, dottedGridPlugin, axisTooltipDateFormatePlugin, axisCursorPlugin } from "/plugins/chartHoverPlugins.js";
+    // scroll plugins
+    import { ChartScrollPlugin } from "/plugins/chartScrollPlugin.js";
     // debounce for ajax request too data loading maintain            
     function debounce(func, wait) {
         let timeout;
@@ -690,6 +702,7 @@
                         },
                         options: {
                             responsive: true,
+                            // maintainAspectRatio: false,
                             plugins: {
                                 legend: {
                                     display: true,
@@ -711,11 +724,29 @@
                                 },
                                 tooltip: {
                                     enabled: true,
-                                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                                    titleColor: '#fff',
-                                    bodyColor: '#fff',
+                                    backgroundColor: 'rgb(255, 255, 255)',
+                                    titleColor: '#000000',
+                                    bodyColor: '#000000',
+                                    borderWidth: 1,
+                                    borderColor:'rgba(2, 149, 168, 0.6)',
                                     titleFont: { size: 12 },
                                     bodyFont: { size: 12 }
+                                },
+                                zoom: {
+                                    pan: {
+                                        enabled: true,
+                                        mode: 'x',
+                                        threshold: 10
+                                    },
+                                    zoom: {
+                                        wheel: {
+                                            enabled: true
+                                        },
+                                        pinch: {
+                                            enabled: true
+                                        },
+                                        mode: 'x'
+                                    }
                                 }
                             },
                             interaction: {
@@ -726,12 +757,26 @@
                                 x: {
                                     grid: { display: false, color: 'silver' },
                                     ticks: {
+                                        source: 'data',
+                                        autoSkip: true,
                                         color: '#000',
                                         font: {
                                             size: 11,
                                             family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
-                                        }
-                                    }
+                                        },
+                                        // x-label rotation change 
+                                        // autoSkip: false,
+                                        // maxRotation: 45,
+                                        // minRotation: 0
+                                        type: 'time',
+                                        time: {
+                                            unit: 'day',
+                                            tooltipFormat: 'dd MMM yyyy',
+                                            displayFormats: {
+                                                day: 'dd MMM yyyy'
+                                            }
+                                        },
+                                    }   
                                 },
                                 y: {
                                     beginAtZero: true,
@@ -744,16 +789,14 @@
                                         }
                                     }
                                 }
-                            },
-                            // animation: {
-                            //     duration: 1500,
-                            //     easing: 'easeInOutBounce'
-                            // }
+                            }
                         },
                         plugins: [
                             hoverGridPlugin(),
                             dottedGridPlugin(),
-                            axisTooltipYearFormatePlugin(),
+                            axisTooltipDateFormatePlugin(),
+                            ChartScrollPlugin(),
+                            ChartZoom,
                             // axisCursorPlugin()
                         ]
                     });
