@@ -170,6 +170,16 @@ tr.table-row:hover td#cat_td3::after,tr.table-row.user-table-row.td#cat_td3::aft
     text-align: center;
     opacity: 5;
 }
+/* tr.table-row:hover td#cat_td2 {
+    background-image: linear-gradient(to bottom, #585858 0%, #111 100%);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    color: #fff;
+    opacity: 1;
+    border: 1px solid #111;
+    border-radius: 2px;
+    z-index: 3;
+} */
 .modal-header-bg {
     background-color: white;
     border-bottom: 1px solid lightgray;

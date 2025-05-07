@@ -19,7 +19,8 @@
                 return `
                     <tr>
                         <td class="error_data" align="center" text-danger colspan="11">
-                            User Logged Data Not Exists On Server !
+                            <svg width="20px" height="20px" fill="rgb(220, 53, 69)" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 122.88 120.54" style="enable-background:new 0 0 122.88 120.54" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M95.7,65.5c15.01,0,27.18,12.17,27.18,27.18c0,15.01-12.17,27.18-27.18,27.18 c-15.01,0-27.18-12.17-27.18-27.18C68.52,77.67,80.69,65.5,95.7,65.5L95.7,65.5z M96.74,77.05c1.18,0,2.12,0.34,2.79,1.02 c0.67,0.68,1.01,1.6,1.01,2.8c0,1.21-0.58,2.29-1.74,3.23c-1.17,0.94-2.53,1.42-4.07,1.42c-1.16,0-2.09-0.32-2.79-0.98 c-0.71-0.66-1.06-1.51-1.06-2.57c0-1.34,0.58-2.49,1.73-3.47C93.75,77.53,95.13,77.05,96.74,77.05L96.74,77.05z M90.94,107.09 V91.56h-2.87c0-3.91,7.19-1.37,12.48-2.71v18.24C110.54,107.09,80.68,107.09,90.94,107.09L90.94,107.09z M17.69,26.67 c8.1,2.71,19.38,4.38,31.91,4.38s23.81-1.67,31.91-4.38c7.11-2.37,11.51-5.25,11.51-8.06c0-2.81-4.4-5.69-11.51-8.06 c-8.1-2.7-19.38-4.38-31.91-4.38s-23.81,1.67-31.91,4.38C2.6,15.59,2.18,21.5,17.69,26.67L17.69,26.67z M6.24,47.86 c0.56,2.62,4.83,5.26,11.45,7.47c8.1,2.71,19.38,4.38,31.91,4.38s23.81-1.67,31.91-4.38c7.11-2.37,11.51-5.25,11.51-8.06h0.03 v-19.3c-2.53,1.73-5.78,3.26-9.59,4.53c-8.73,2.91-20.71,4.72-33.86,4.72c-13.16,0-25.13-1.8-33.86-4.72 c-3.77-1.26-6.98-2.76-9.49-4.47V47.86L6.24,47.86z M63.3,92.54c-4.35,0.44-8.95,0.67-13.7,0.67c-13.16,0-25.13-1.8-33.86-4.72 c-3.77-1.26-6.98-2.76-9.49-4.47v18.49c0.56,2.62,4.83,5.26,11.45,7.47c8.1,2.7,19.38,4.38,31.91,4.38c7.52,0,14.58-0.6,20.78-1.67 c1.56,1.94,3.33,3.7,5.29,5.24c-7.53,1.65-16.49,2.6-26.07,2.6c-13.16,0-25.13-1.8-33.86-4.72c-4.6-1.54-15.67-6.58-15.67-12.62 c0-0.71,0-1.3,0-1.98C0.06,73.69,0,46.15,0,18.61c0-5.76,6.01-10.65,15.73-13.9C24.46,1.8,36.44,0,49.6,0 c13.16,0,25.13,1.8,33.86,4.72c8.85,2.95,14.62,7.27,15.59,12.37c0.12,0.32,0.18,0.67,0.18,1.04v42.37 c-1.2-0.14-2.42-0.21-3.66-0.21c-0.85,0-1.68,0.03-2.51,0.1v-3.74c-2.53,1.73-5.78,3.26-9.59,4.53 c-8.73,2.91-20.71,4.72-33.86,4.72c-13.16,0-25.13-1.8-33.86-4.72c-3.77-1.26-6.98-2.76-9.49-4.47v18.49 c0.56,2.62,4.83,5.26,11.45,7.47c8.1,2.7,19.38,4.38,31.91,4.38c5.01,0,9.82-0.27,14.31-0.76C63.51,88.3,63.3,90.4,63.3,92.54 L63.3,92.54z"/></g></svg>
+                            User Logged Data Not Exists On Server <span style="color:rgb(220, 53, 69)">!</span>
                         </td>
                     </tr>
                 `;
@@ -34,7 +35,7 @@
                     lastActivity = `<span>${row.last_activity}</span>`;
                     tdPadding = ` style="padding-top:2px;padding-bottom:2px;" `;
                     // Calculate active time based on logout time
-                    activeTime = `<span style="color:#686868;font-size:10px;">${getTimeDifference(row.updated_at)} ago</span>`;
+                    activeTime = `<span style="color:#504e4e;font-size:10px;">${getTimeDifference(row.updated_at)} ago</span>`;
                 } else if (row.payload == 'login') {
                     statusText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 11px;letter-spacing: 1px;">login</span>';
                     statusOffColor = 'color:black;background-color: #fff;';
@@ -49,13 +50,12 @@
                     activeTime = `<span style="color:blue;font-size:10px;">${getTimeDifference(row.created_at)} <input id="light_focus" type="text" class="light2-focus ms-1" readonly></input></span>`;
                 }
                 return `
-                    <tr class="table-row user-table-row supp-table-row" key="${key}" data-user-id="${row.last_activity}" id="supp_tab">
+                    <tr class="table-row user-table-row supp-table-row table-light" key="${key}" data-user-id="${row.last_activity}" id="supp_tab">
                         <td class="sn border_ord" id="supp_tab2" hidden>${row.id}</td>
                         <td class="txt_ user-details-links ps-1" id="supp_tab3">
-                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" id="viewBtn" value="${row.last_activity}" style="font-size: 10px;height: 17px;" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="User Agent" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div></div>'>
+                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" id="viewBtn" value="${row.last_activity}" style="font-size: 10px;height: 18px;">
                                 <span hidden>${row.last_activity}</span>
                                 ${row.user_id} 
-                                <span class="toggle-icon">➤</span>
                             </button>
                         </td>
                         <td class="border_ord ps-1 supp_vew" id="supp_tab4" hidden>${row.name}</td>
@@ -63,9 +63,9 @@
                             <span style="color:gray"><i class="fa fa-envelope"></i></span>
                             ${row.email} ${activeTime ? activeTime : ''}
                         </td>
-                        <td class="txt_ ps-1 supp_vew4 table-td-align" id="supp_tab7">${row.ip_address}</td>
+                        <td class="txt_ supp_vew4 table-td-align" id="supp_tab7">${row.ip_address}</td>
                         <td class="txt_ ps-1 supp_vew5" id="supp_tab8" hidden>${row.user_agent}</td>
-                        <td class="txt_ ps-1 supp_vew6 table-td-align" ${tdPadding} id="supp_tab9">
+                        <td class="txt_ supp_vew6 table-td-align" ${tdPadding} id="supp_tab9">
                             <span class="permission edit_inventory_table" style="font-size:12px; ${statusOffColor}">
                                 ${statusText}
                             </span>
@@ -73,13 +73,64 @@
                         <td class="txt_ ps-1 supp_vew7" id="supp_tab10" hidden>${row.last_activity}</td>
                         <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${formatDate(row.created_at)}</td>
                         <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${updateDate}</td>
-                        <td class="txt_ ps-1 supp_vew7 table-td-align" id="supp_tab10">${lastActivity}</td>
+                        <td class="txt_ pe-2 supp_vew7 table-td-align" id="supp_tab10">${lastActivity}</td>
                     </tr>
                     <tr class="table-row user-table-row supp-table-row hidden child-row" data-user-id="${row.last_activity}">
-                        <td class="txt_ supp_vew9" id="supp_tab12">
-                            <img class="user_img rounded-circle user_imgs ms-3" src="${row.image.includes('https://')?row.image: '/storage/image/user-image/'+ row.image}">
+                        <td colspan="14">
+                            <div class="card detail-content" style="background-color:white;">
+                                <div class="row mt-1">
+                                    <div class="email_header" id="emailHeader">
+                                        <div class="row">
+                                            <div class="col-xl-2">
+                                                <label class="logo_area" for="logo_area" id="logo_area">
+                                                    <img class="user_img rounded-circle user_imgs ms-3" src="${row.image.includes('https://')?row.image: '/storage/image/user-image/'+ row.image}">
+                                                </label>
+                                            </div>
+                                            <div class="col-xl-9">
+                                                <p class="company_name_area">
+                                                    <label class="company_name" for="company_name" id="companyName"></label><br>
+                                                    <label class="company_address" for="company_address" id="companyAddress"></label>
+                                                </p>
+                                            </div>
+                                            <div class="col-xl-1">
+                                                <div class="div_close_btn">
+                                                    <button type="button" class="btn-close btn-btn-sm clos_btn2" data-parent="${row.id}" id="viewBtn" value="${row.id}"
+                                                        data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col-xl-12">
+                                        <label class="card_row_first_part mt-2" for="user_to" id="user_to">Date : ${formatDate(row.created_at)}</label><br>
+                                        <label class="card_row_first_part" for="user_to" id="user_to">From : </label><br>
+                                        <label class="card_row_first_part mt-1" for="user_to" id="user_to">To : </label><br>
+                                        <label class="card_row_first_part" for="user_cc" id="user_cc">Cc : </label><br>
+                                        <label class="card_row_first_part" for="user_bcc" id="user_bcc">Bcc : </label><br>
+                                        <label class="card_row_first_part subject mt-2 ps-1" for="subject" id="subject">Subject :  </label><br>
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col-xl-12" style="margin-bottom: 2px;">
+                                        <p>${row.user_agent}</p><br>
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <span class="attachment_files">Attachment-Type : </span>
+                                    <div class="col-xl-12">
+                                        
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col-xl-12">
+                                        <p class="email_footer">Thanks with best regard,</p>
+                                        <p class="email_footer"></p><br>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
-                        <td class="txt_ ps-1 supp_vew5" id="supp_tab8" colspan="7" style="color:blue;"><span style="font-weight:600;">User-Agent :</span> ${row.user_agent}</td>
                     </tr>
                 `;
             }).join("\n");
@@ -173,10 +224,31 @@
             fetch_activities_users_data('', null, value);
         });
         // Paginate Page-------------------------------
-        const paginate_html = ({
-            links,
-            total
-        }) => {
+        // const paginate_html = ({
+        //     links,
+        //     total
+        // }) => {
+        //     if (total == 0) {
+        //         return "";
+        //     }
+
+        //     return `
+        //         <nav class="paginate_link" aria-label="Page navigation example">
+        //             <ul class="pagination">
+        //                 ${links.map((link, key) => {
+        //                     return `
+        //                         <li class="page-item${link.active? ' active': ''}" key=${key}>
+        //                             <a class="page-link btn_page" href="${link.url? link.url: '#'}">
+        //                                 ${link.label}
+        //                             </a>
+        //                         </li>
+        //                     `;
+        //                 }).join("\n")}
+        //             </ul>
+        //         </nav>
+        //     `;
+        // }
+        const paginate_html = ({ links, total }) => {
             if (total == 0) {
                 return "";
             }
@@ -185,9 +257,30 @@
                 <nav class="paginate_link" aria-label="Page navigation example">
                     <ul class="pagination">
                         ${links.map((link, key) => {
+                            // Handle Previous and Next buttons separately
+                            if (link.label.toLowerCase().includes("previous")) {
+                                return `
+                                    <li class="page-item${link.active ? ' active' : ''}" key=${key}>
+                                        <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
+                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 121.66"><title>direction-left</title><path d="M1.24,62.65,120.1,121.46a1.92,1.92,0,0,0,2.58-.88,1.89,1.89,0,0,0,0-1.76h0l-30.87-58,30.87-58h0a1.89,1.89,0,0,0,0-1.76A1.92,1.92,0,0,0,120.1.2L1.24,59a2,2,0,0,0,0,3.64Z"/></svg>
+                                        </a>
+                                    </li>
+                                `;
+                            } 
+                            if (link.label.toLowerCase().includes("next")) {
+                                return `
+                                    <li class="page-item${link.active ? ' active' : ''}" key=${key}>
+                                        <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
+                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.86 121.64"><title>direction-right</title><path d="M121.62,59,2.78.2A1.92,1.92,0,0,0,.2,1.08a1.89,1.89,0,0,0,0,1.76h0l30.87,58L.23,118.8h0a1.89,1.89,0,0,0,0,1.76,1.92,1.92,0,0,0,2.58.88l118.84-58.8a2,2,0,0,0,0-3.64Z"/></svg>
+                                        </a>
+                                    </li>
+                                `;
+                            }
+
+                            // Regular page numbers
                             return `
-                                <li class="page-item${link.active? ' active': ''}" key=${key}>
-                                    <a class="page-link btn_page" href="${link.url? link.url: '#'}">
+                                <li class="page-item${link.active ? ' active' : ''}" key=${key}>
+                                    <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
                                         ${link.label}
                                     </a>
                                 </li>
@@ -196,7 +289,7 @@
                     </ul>
                 </nav>
             `;
-        }
+        };
         // change paginate page------------------------
         $("#activities_users_data_table_paginate").delegate("a", "click", function(e) {
             e.stopImmediatePropagation();

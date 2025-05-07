@@ -3,7 +3,7 @@
 @include('backend.layouts.dashboard-components._navbar')
 
   <div class="container">
-    <ul class="nav nav-tabs tab_bg" role="tablist" style="background:white;border-top: 1px solid #dee2e6;">
+    <ul class="nav nav-tabs tab_bg" role="tablist" style="background-image:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, transparent 50%, rgba(0, 0, 0, 0.05) 100%);border-top: 1px solid #dee2e6;">
       <li class="nav-item tab-skeletone">
         <a class="nav-link setting active home-text" data-bs-toggle="tab" href="#home" id="tabHome"> User Analysis</a>
       </li>
