@@ -866,6 +866,19 @@ label#info_label {
 .user_detls{
     border-right: 1px solid #dfdfdf;
 }
+.branch_info {
+    padding-bottom: 10px;
+}
+.user_agent {
+    background-image: var(--table-row-hover);
+    padding-left: 14px;
+    border-bottom: 1px solid #dfdfdf;
+    color: #0808b3;
+}
+.card_close_btn{
+    text-align: center;
+    margin-top: 10px;
+}
 .user_image_log{
     width: 150px;
     height: 150px;

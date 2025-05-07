@@ -97,7 +97,7 @@
                                                 </p>
                                             </div>
                                             <div class="col-xl-1">
-                                                <div class="div_close_btn">
+                                                <div class="card_close_btn">
                                                     <button type="button" class="btn-close btn-btn-sm clos_btn2" data-parent="${row.id}" id="viewBtn" value="${row.id}"
                                                         data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
                                                     </button>
@@ -122,31 +122,30 @@
                                         <label class="card_row_first_part" for="user_bcc" id="user_bcc">Account Last Update : ${formatDate(row.account_last_update)}</label><br>
                                         <label class="card_row_first_part subject" for="subject" id="subject">Email-Verified : ${formatDate(row.email_verified_at)}</label><br>
                                     </div>
-                                    <div class="col-xl-5">
+                                    <div class="col-xl-5 branch_info">
                                         <label class="card_row_first_part mt-2" for="info_label" id="info_label">Branch Information</label><br>
-                                        <label class="card_row_first_part mt-2" for="user_to" id="user_to">Branch-ID : ${row.branch_id}</label><br>
-                                        <label class="card_row_first_part" for="user_to" id="user_to">From : </label><br>
-                                        <label class="card_row_first_part mt-1" for="user_to" id="user_to">To : </label><br>
-                                        <label class="card_row_first_part" for="user_cc" id="user_cc">Cc : </label><br>
-                                        <label class="card_row_first_part" for="user_bcc" id="user_bcc">Bcc : </label><br>
-                                        <label class="card_row_first_part subject mt-1" for="subject" id="subject">Subject :  </label><br>
+                                        <label class="card_row_first_part mt-2" for="branch_id" id="branch_id">Branch-ID : ${row.branch_id}</label><br>
+                                        <label class="card_row_first_part" for="branch_type" id="branch_type">Branch Type : ${row.users.branch_type}</label><br>
+                                        <label class="card_row_first_part mt-1" for="branch_name" id="branch_name">Branch Name : ${row.users.branch_name}</label><br>
+                                        <label class="card_row_first_part" for="division_name" id="division_name">Division Name : ${row.users.division_name}</label><br>
+                                        <label class="card_row_first_part" for="district_name" id="district_name">District Name : ${row.users.district_name}</label><br>
+                                        <label class="card_row_first_part mt-1" for="upazila_name" id="upazila_name">Upazila Name : ${row.users.upazila_name}</label><br>
+                                        <label class="card_row_first_part mt-1" for="town_name" id="town_name">Town Name : ${row.users.town_name}</label><br>
+                                        <label class="card_row_first_part mt-1" for="location" id="location">Location : ${row.users.location}</label><br>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-12" style="margin-bottom: 2px;">
-                                        <p>${row.user_agent}</p><br>
+                                        <p class="user_agent">User-Agent : ${row.user_agent}</p><br>
                                     </div>
                                 </div>
                                 <div class="row mt-1">
-                                    <span class="attachment_files">Attachment-Type : </span>
+                                    <p>User-Location : ${row.users.location}</p>
                                     <div class="col-xl-12">
-                                        
-                                    </div>
-                                </div>
-                                <div class="row mt-1">
-                                    <div class="col-xl-12">
-                                        <p class="email_footer">Thanks with best regard,</p>
-                                        <p class="email_footer"></p><br>
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.617951418238!2d90.38652287410459!3d23.867696584265456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c52508392dd9%3A0xb4ca29290ae07ede!2sUttara%20%2CSector%2014%2C%20Road%2016%2C%20House%2040!5e0!3m2!1sbn!2sbd!4v1705776713912!5m2!1sbn!2sbd" 
+                                            width="100%" height="250"allowfullscreen="" loading="lazy" 
+                                            referrerpolicy="no-referrer-when-downgrade">
+                                        </iframe>
                                     </div>
                                 </div>
                             </div>
