@@ -875,6 +875,12 @@ label#info_label {
     border-bottom: 1px solid #dfdfdf;
     color: #0808b3;
 }
+.user_location{
+    padding-left: 14px;
+}
+.gps-location{
+    padding: 14px 10px;
+}
 .card_close_btn{
     text-align: center;
     margin-top: 10px;

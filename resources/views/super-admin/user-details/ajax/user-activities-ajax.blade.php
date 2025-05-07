@@ -135,17 +135,10 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xl-12" style="margin-bottom: 2px;">
-                                        <p class="user_agent">User-Agent : ${row.user_agent}</p><br>
-                                    </div>
-                                </div>
-                                <div class="row mt-1">
-                                    <p>User-Location : ${row.users.location}</p>
                                     <div class="col-xl-12">
-                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.617951418238!2d90.38652287410459!3d23.867696584265456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c52508392dd9%3A0xb4ca29290ae07ede!2sUttara%20%2CSector%2014%2C%20Road%2016%2C%20House%2040!5e0!3m2!1sbn!2sbd!4v1705776713912!5m2!1sbn!2sbd" 
-                                            width="100%" height="250"allowfullscreen="" loading="lazy" 
-                                            referrerpolicy="no-referrer-when-downgrade">
-                                        </iframe>
+                                        <p class="user_agent">User-Agent : ${row.user_agent}</p>
+                                        <span class="user_location">User-Location : ${row.users.location}</span>
+                                        <div id="googleMap" style="width:100%;height:400px;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -367,3 +360,13 @@
         });
     });
 </script>
+<script>
+    function myMap() {
+        var mapProp= {
+        center:new google.maps.LatLng(51.508742,-0.120850),
+        zoom:5,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
