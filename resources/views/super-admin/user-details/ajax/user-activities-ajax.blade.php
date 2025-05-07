@@ -1,6 +1,10 @@
 <script type="module">
     import { getTimeDifference } from "/module/module-min-js/helper-function-min.js";
     import { formatDate } from "/module/module-min-js/helper-function-min.js";
+    const companyName = @json(setting('company_name'));
+    const companyAddress = @json(setting('company_address'));
+    const companyLogo = "{{ asset('backend_asset/main_asset/img/' . setting('update_company_logo')) }}";
+    const pageLoader = "{{asset('image/loader/loading.gif')}}";
     $(document).ready(function(){
         // ACtive table row background
         $(document).on('click', 'tr.table-row', function(){
@@ -75,21 +79,21 @@
                         <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${updateDate}</td>
                         <td class="txt_ pe-2 supp_vew7 table-td-align" id="supp_tab10">${lastActivity}</td>
                     </tr>
-                    <tr class="table-row user-table-row supp-table-row hidden child-row" data-user-id="${row.last_activity}">
+                    <tr class="table-log-details-row supp-table-row hidden child-row" data-user-id="${row.last_activity}">
                         <td colspan="14">
-                            <div class="card detail-content" style="background-color:white;">
-                                <div class="row mt-1">
-                                    <div class="email_header" id="emailHeader">
+                            <div class="card log-content-card" style="background-color:white;">
+                                <div class="row mt-3">
+                                    <div class="log_card_header" id="logCardHeader">
                                         <div class="row">
-                                            <div class="col-xl-2">
+                                            <div class="col-xl-2 logo_box">
                                                 <label class="logo_area" for="logo_area" id="logo_area">
-                                                    <img class="user_img rounded-circle user_imgs ms-3" src="${row.image.includes('https://')?row.image: '/storage/image/user-image/'+ row.image}">
+                                                    <img class="company_logo" src="${companyLogo}">
                                                 </label>
                                             </div>
                                             <div class="col-xl-9">
                                                 <p class="company_name_area">
-                                                    <label class="company_name" for="company_name" id="companyName"></label><br>
-                                                    <label class="company_address" for="company_address" id="companyAddress"></label>
+                                                    <label class="company_name" for="company_name" id="companyName">${companyName}</label><br>
+                                                    <label class="company_address" for="company_address" id="companyAddress">${companyAddress}</label>
                                                 </p>
                                             </div>
                                             <div class="col-xl-1">
@@ -102,17 +106,33 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-1">
-                                    <div class="col-xl-12">
-                                        <label class="card_row_first_part mt-2" for="user_to" id="user_to">Date : ${formatDate(row.created_at)}</label><br>
+                                <div class="row info_part_one">
+                                    <div class="col-xl-2 img_box">
+                                        <img class="user_image_log" src="${row.image.includes('https://')?row.image: '/storage/image/user-image/'+ row.image}"><br>
+                                        <label class="card_row_first_part" for="user_id" id="user_id">User-ID : ${row.user_id}</label><br>
+                                        <label class="card_row_first_part" for="role_id" id="role_id">Role : ${row.roles.name}</label><br>
+                                    </div>
+                                    <div class="col-xl-5 user_detls">
+                                        <label class="card_row_first_part mt-2" for="info_label" id="info_label">User Information</label><br>
+                                        <label class="card_row_first_part mt-2" for="user_to" id="user_to">Name : ${row.name}</label><br>
+                                        <label class="card_row_first_part" for="user_to" id="user_to">Login-Email : ${row.email}</label><br>
+                                        <label class="card_row_first_part" for="user_to" id="user_to">Reference-Email : ${row.users.reference_email}</label><br>
+                                        <label class="card_row_first_part" for="user_cc" id="user_cc">Contract-Number : ${row.contract_number}</label><br>
+                                        <label class="card_row_first_part" for="user_bcc" id="user_bcc">Account-Create : ${formatDate(row.account_create)}</label><br>
+                                        <label class="card_row_first_part" for="user_bcc" id="user_bcc">Account Last Update : ${formatDate(row.account_last_update)}</label><br>
+                                        <label class="card_row_first_part subject" for="subject" id="subject">Email-Verified : ${formatDate(row.email_verified_at)}</label><br>
+                                    </div>
+                                    <div class="col-xl-5">
+                                        <label class="card_row_first_part mt-2" for="info_label" id="info_label">Branch Information</label><br>
+                                        <label class="card_row_first_part mt-2" for="user_to" id="user_to">Branch-ID : ${row.branch_id}</label><br>
                                         <label class="card_row_first_part" for="user_to" id="user_to">From : </label><br>
                                         <label class="card_row_first_part mt-1" for="user_to" id="user_to">To : </label><br>
                                         <label class="card_row_first_part" for="user_cc" id="user_cc">Cc : </label><br>
                                         <label class="card_row_first_part" for="user_bcc" id="user_bcc">Bcc : </label><br>
-                                        <label class="card_row_first_part subject mt-2 ps-1" for="subject" id="subject">Subject :  </label><br>
+                                        <label class="card_row_first_part subject mt-1" for="subject" id="subject">Subject :  </label><br>
                                     </div>
                                 </div>
-                                <div class="row mt-1">
+                                <div class="row">
                                     <div class="col-xl-12" style="margin-bottom: 2px;">
                                         <p>${row.user_agent}</p><br>
                                     </div>

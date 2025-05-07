@@ -36,11 +36,11 @@ class AuthService
         } else if (Auth::user() && Auth::user()->role == 3) {
             $redirect = '/admin/dashboard';
         } else if(Auth::user() && Auth::user()->role == 5) {
-            $redirect = '/accounts/home';
+            $redirect = '/accounts/accounts-home-page';
         }else if(Auth::user() && Auth::user()->role == 6) {
-            $redirect = '/marketing/home';
+            $redirect = '/marketing/dashboard';
         }else if(Auth::user() && Auth::user()->role == 7) {
-            $redirect = '/delivery-team/home';
+            $redirect = '/delivery-team/dashboard';
         }
         else{
             $redirect = '/default-user/home';

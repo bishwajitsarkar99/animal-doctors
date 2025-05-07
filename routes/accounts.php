@@ -9,6 +9,6 @@ Route::group(['middleware' => 'auth'], function (){
     
     // ********** Accounts Department Routes *********
     Route::group(['prefix' => 'accounts', 'middleware' => ['web', 'isAccounts']], function () {
-        Route::get('/dashboard', [AccountsController::class, 'dashboard'])->name('accounts.dashboard');
+        Route::get('/accounts-home-page', [AccountsController::class, 'dashboard'])->name('accounts.dashboard');
     });
 });

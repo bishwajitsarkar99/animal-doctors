@@ -14,6 +14,6 @@ class AccountsServiceProvider
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        return view('accounts.dashboard',compact('company_profiles'));
+        return view('accounts.accounts-home-page',compact('company_profiles'));
     }
 }

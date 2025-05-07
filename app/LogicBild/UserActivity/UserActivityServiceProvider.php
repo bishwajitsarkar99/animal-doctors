@@ -112,7 +112,7 @@ class UserActivityServiceProvider
         $sort_direction = $request->input('sort_direction', 'desc');
 
         // Start the query for user activities
-        $user_activities = SessionModel::whereNotNull('role')->with(['roles']);
+        $user_activities = SessionModel::whereNotNull('role')->with(['roles', 'users']);
 
         // Apply default current month filter if no custom date range provided
         if (!$start_date || !$end_date) {

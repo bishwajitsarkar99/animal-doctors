@@ -47,7 +47,6 @@
     @include('backend.layouts.handler-js.profile-js._profile-handler')
     @include('backend.layouts.handler-js.account-setting-js._account-setting-ajax')
     @include('backend.layouts.handler-js.activity-log-js._activity-log-ajax')
-    @include('backend.layouts.handler-js.design._side-bar-js')
     @include('backend.layouts.handler-js.footer-js._footer-menu-js')
     @include('backend.layouts.handler-js._footer-js')
     @include('backend.layouts.layouts-components.file-manager._file_manager')

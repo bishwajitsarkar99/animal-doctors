@@ -818,6 +818,60 @@ tr.clicked {
 tr>td{
     font-size: 12px;
 }
+.card.log-content-card {
+    border: none;
+    border-radius: 0px;
+}
+#logCardHeader {
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 11px;
+}
+.logo_box {
+    justify-content: end;
+    display: flex;
+}
+img.company_logo {
+    width: 50px;
+    height: 50px;
+    padding: 5px 5px;
+    background-color: transparent;
+    background-image: linear-gradient(to right, rgb(39 126 205) 100%, rgb(0 123 255) 50%, rgb(0, 81, 255) 100%);
+    border-radius: 5px;
+}
+tr.table-log-details-row{
+    background-color: transparent;
+    font-family: var(--nav-font-family);
+    font-size: 13px;
+    font-weight: 600;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+.info_part_one{
+    border-bottom: 1px solid #dfdfdf;
+}
+.img_box {
+    border-right: 1px solid #dfdfdf;
+    padding-left: 16px;
+}
+#user_id {
+    padding-left: 10px;
+}
+#role_id {
+    padding-left: 10px;
+    padding-bottom: 5px;
+}
+label#info_label {
+    font-size: 14px;
+    font-weight: 700;
+}
+.user_detls{
+    border-right: 1px solid #dfdfdf;
+}
+.user_image_log{
+    width: 150px;
+    height: 150px;
+    padding: 10px 10px;
+    border-radius: 15px;
+}
 td.user-details-links{
     /* background-color: white; */
     color: blue;
