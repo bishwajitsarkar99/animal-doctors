@@ -52,6 +52,7 @@ return[
     'ADD Model'=>'ADD Model',
     // Units
     'Units'=>'Units',
+    'All Units'=>'All Units',
     'Create Units'=>'Create Units',
     'ADD Unit'=>'ADD Unit',
     // BrandBrand

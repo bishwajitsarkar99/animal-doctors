@@ -17,7 +17,7 @@
         });
         // User Activities Data Fetch
         fetch_activities_users_data();
-        // Data View Table--------------   <td class="txt_ ps-1 supp_vew3" id="supp_tab6">${row.roles.name}</td>
+        // Data View Table--------------
         const table_rows = (rows) => {
             if (rows.length === 0) {
                 return `
@@ -33,13 +33,13 @@
             return [...rows].map((row, key) => {
                 let statusText, statusOffColor, currentLogText, activeTime, updateDate, lastActivity, tdPadding;
                 if (row.payload == 'logout') {
-                    statusText = '<span class="bg-danger badge rounded-pill" style="color:white;font-weight:800;font-size: 11px;letter-spacing: 1px;">logout</span>';
+                    statusText = '<span class="bg-light-alert badge rounded-pill" style="color:white;font-weight:800;font-size: 11px;letter-spacing: 1px;">logout</span>';
                     statusOffColor = 'color:black;background-color: #fff;';
                     updateDate = `<span>${formatDate(row.updated_at)}</span>`;
                     lastActivity = `<span>${row.last_activity}</span>`;
                     tdPadding = ` style="padding-top:2px;padding-bottom:2px;" `;
                     // Calculate active time based on logout time
-                    activeTime = `<span style="color:#504e4e;font-size:10px;">${getTimeDifference(row.updated_at)} ago</span>`;
+                    activeTime = `<span style="color:#4c4c4c;font-size:10px;">${getTimeDifference(row.updated_at)} ago</span>`;
                 } else if (row.payload == 'login') {
                     statusText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 11px;letter-spacing: 1px;">login</span>';
                     statusOffColor = 'color:black;background-color: #fff;';
@@ -136,9 +136,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-12">
-                                        <p class="user_agent">User-Agent : ${row.user_agent}</p>
-                                        <span class="user_location">User-Location : ${row.users.location}</span>
-                                        <div id="googleMap" style="width:100%;height:400px;"></div>
+                                        <span class="user_location" data-id="${row.id}"><span class="user_agent_label">Session-ID :</span> ${row.id}</span>
+                                        <p class="user_agent"><span class="user_agent_label">User-Agent :</span> ${row.user_agent}</p>
+                                        <span class="user_location"><span class="user_agent_label">Branch-Location :</span> ${row.users.location}</span>
+                                        <div id="googleMap" style="width:100%;height:300px;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -176,10 +177,13 @@
                     sort_field: sortField,
                     sort_direction: sortDirection
                 },
-                success: function({ data, links, total }) {
+                success: function({ data, links, total ,total_users, per_page, per_item_num}) {
                     $("#user_activites_data_table").html(table_rows([...data]));
                     $("#activities_users_data_table_paginate").html(paginate_html({ links, total }));
                     $("#total_activites_records").text(total);
+                    $("#total_items").text(total_users);
+                    $("#total_per_items").text(per_page);
+                    $("#per_items_num").text(per_item_num);
                     // Initialize the tooltip elements
                     $('[data-bs-toggle="tooltip"]').tooltip();
 

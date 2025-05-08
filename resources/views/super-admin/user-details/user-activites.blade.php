@@ -69,7 +69,7 @@
         </table>
     </div>
     <div class="row table_last_row mb-1">
-        <div class="col-3">
+        <div class="col-1">
             <label class="item_class">Peritem</label>
             <div class="custom-select ">
                 <select class="ps-1" id="perItemControl" style="background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);border:1px solid lightgray;">
@@ -82,7 +82,15 @@
                 <span class="custom-list-item-arrow-mini me-2"></span>
             </div>
         </div>
-        <div class="col-9">
+        <div class="col-3">
+            <label class="per_item_class">
+                Entries <span id="total_per_items"></span>
+                show <span id="per_items_num"></span>
+                out of
+                <span id="total_items"></span>
+            </label>
+        </div>
+        <div class="col-8">
             <div class="pagination  mt-1" id="activities_users_data_table_paginate" style="float: right;padding-top:1px;"> </div>
         </div>
     </div>

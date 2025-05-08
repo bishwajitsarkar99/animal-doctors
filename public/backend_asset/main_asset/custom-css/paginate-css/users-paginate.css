@@ -624,10 +624,10 @@ input#search {
     border-right: 1px solid #dee2e6;
     /* animation: text_color 3s infinite; */
     opacity: 1;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
     font-size: 12px;
     width: 100%;
-    font-weight: 700;
+    font-weight: 500;
 }
 @keyframes text_color{
     50%{
@@ -649,10 +649,9 @@ input#search:focus{
 }
 h5#staticBackdropLabels {
     color: darkgoldenrod;
-    font-family: sans-serif;
-    font-size: 17px;
-    font-weight: 600;
-    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
     font-variant: all-petite-caps;
     color: darkgoldenrod;
     margin-top: -0.3em;
@@ -660,7 +659,7 @@ h5#staticBackdropLabels {
 }
 div#deleteuser {
     border: none;
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
     box-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
     outline: none;
     text-align: center;
@@ -821,10 +820,11 @@ button#dltBtn{
 }
 td.error_data {
     text-align: center;
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 500;
     text-transform: capitalize;
     animation: alerttxtColor 3s infinite;
+    font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
 }
 @keyframes alerttxtColor{
     0%{
@@ -1133,15 +1133,16 @@ thead,tr.table-row.order_body.acc_setting_table {
     background-image: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
 }
 tr>td {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    font-size: 13px;
+    font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
+    font-size: 12px;
+    color: #333;
 }
 th#th_sort {
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
     background-image: var(--table-head-color);
     color: #333;
-    font-size: 14px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-size: 13px;
+    font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
     /* background-color: #e7e7e7eb; */
     opacity: 5;
     white-space: nowrap;

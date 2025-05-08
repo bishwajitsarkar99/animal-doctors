@@ -121,7 +121,7 @@
                     <div class="btn_box group_btn_box">
                       <button type="submit" class="btn btn-sm cgt_btn btn_focus button_width me-2" id="save">
                         <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:0.8em;height:0.8em;" role="status" hidden></span>
-                        <span class="category-btn-text">ADD</span>
+                        <span class="category-btn-text">Add</span>
                       </button>
                       <button id="update_btn" class="btn btn-sm cgt_btn btn_focus button_width me-2" hidden>
                         <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:0.8em;height:0.8em;" role="status" hidden></span>

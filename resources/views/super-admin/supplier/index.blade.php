@@ -142,7 +142,7 @@
                             <div class="btn_box group_btn_box mt-3">
                                 <button id="save" class="btn btn-sm cgt_btn text-white button_width">
                                     <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                                    <span class="add-btn-text">ADD</span>
+                                    <span class="add-btn-text">Add</span>
                                 </button>
                                 <button id="update_btn" class="btn btn-sm cgt_btn text-white button_width" hidden>
                                     <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
@@ -169,12 +169,12 @@
                 <div class="card form-control-sm right-card mt-4 pb-3" hidden id="accessCard">
                     <span class="mini-head">Supplier or Vendor</span>
                     <div class="row checkbox">
-                        <div class="col-5 pt-1">
+                        <div class="col-5 pt-2">
                             <span class="child-label ms-2" id="accessLabel">
                                 Access : <input class="form-switch form-check-input supplier_check_permission ms-2" type="checkbox" name="supplier_status" value="1" id="accessCheck">
                             </span>
                         </div>
-                        <div class="col-4">
+                        <div class="col-4 pt-1">
                             <span class="pill-success-rounded ms-1" id="justifyLabel" hidden> justify</span>
                             <span class="pill-danger-rounded ms-1" id="deny_label" hidden> Deny</span>
                         </div>

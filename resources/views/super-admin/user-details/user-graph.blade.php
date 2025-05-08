@@ -246,7 +246,7 @@
 
     const xValues = [
         "Super admin", "Admin", "Sub admin", "Accounts", "Marketing", "Delivery", "General",
-        "Inactive Users","Authentic Users","Log Activity","Total Users"
+        "Inactive","Authentic","Activity","Total Users"
     ];
     const barColors = ["rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)","#cf2e2e","#198754","#6f42c1","#0A5EDB"];
     // bg-color:royalblue
@@ -273,7 +273,7 @@
                         color: '#000000',
                         font: {
                             size: 12,
-                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                             weight: 'bold',
                         }
                     },
@@ -307,22 +307,22 @@
                     beginAtZero: true,
                     grid: { display: false },
                     ticks: {
-                        color: 'rgba(0, 0, 0, 0.99)',
+                        color: '#333',
                         font: {
-                            family: "'Times New Roman', Times, serif",
+                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                             size: 12,
-                            //weight: 'bold'
+                            weight: 'bold'
                         }
                     },
                 },
                 x: {
                     grid: { display: false },
                     ticks: {
-                        color: 'rgba(0, 0, 0, 0.99)',
+                        color: '#333',
                         font: {
-                            family: "'Times New Roman', Times, serif",
+                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                             size: 12,
-                            //weight: 'bold'
+                            weight: 'bold'
                         }
                     }
                 }
@@ -399,22 +399,22 @@
                     grid: { display: false },
                     ticks: {
                         beginAtZero: true,
-                        color: 'rgba(0, 0, 0, 0.99)',
+                        color: '#333',
                         font: {
-                            family: "'Times New Roman', Times, serif",
+                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                             size: 12,
-                            //weight: 'bold'
+                            weight: 'bold'
                         }
                     }
                 },
                 x: {
                     grid: { display: false },
                     ticks: {
-                        color: 'rgba(0, 0, 0, 0.99)',
+                        color: '#333',
                         font: {
-                            family: "'Times New Roman', Times, serif",
+                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                             size: 12,
-                            //weight: 'bold'
+                            weight: 'bold'
                         }
                     }
                 }

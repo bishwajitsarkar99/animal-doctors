@@ -13,8 +13,9 @@
     height: 23px;
     user-select: none;
     -webkit-user-select: none;
-    font-family: "Poppins ", sans-serif;
-    font-weight: 600;
+    /* font-family: "Poppins ", sans-serif; */
+    font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
+    font-weight: 500;
     font-size: 12px;
 }
 

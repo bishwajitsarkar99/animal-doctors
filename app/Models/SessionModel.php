@@ -11,7 +11,9 @@ class SessionModel extends Model
 {
     use HasFactory;
     protected $table = 'sessions';
-
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
     public function roles()
     {
         return $this->hasOne(Role::class,'id', 'role');

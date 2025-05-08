@@ -271,10 +271,10 @@
                         display: true,
                         position: 'top',
                         labels: {
-                            color: '#000000',
+                            color: '#333',
                             font: {
                                 size: 12,
-                                family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                                 weight: 'bold',
                             }
                         },
@@ -310,11 +310,11 @@
                             color: 'rgba(0, 0, 0, 0.1)',
                         },
                         ticks: {
-                            color: 'rgba(0, 0, 0, 0.99)',
+                            color: '#333',
                             font: {
                                 size: 11, 
-                                family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                //weight: 'bold',
+                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                weight: 'bold',
                             }
                         },
                     },
@@ -325,11 +325,11 @@
                         },
                         ticks: {
                             beginAtZero: true,
-                            color: 'rgba(0, 0, 0, 0.99)',
+                            color: '#333',
                             font: {
                                 size: 11, 
-                                family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                //weight: 'bold',
+                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                weight: 'bold',
                             }
                         }
                     }
@@ -416,10 +416,10 @@
                         display: true,
                         position: 'top',
                         labels: {
-                            color: '#000000',
+                            color: '#333',
                             font: {
                                 size: 12,
-                                family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                                 weight: 'bold',
                             }
                         },
@@ -456,11 +456,11 @@
                             color: 'rgba(0, 0, 0, 0.1)',
                         },
                         ticks: {
-                            color: 'rgba(0, 0, 0, 0.99)',
+                            color: '#333',
                             font: {
                                 size: 11, 
-                                family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                //weight: 'bold',
+                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                weight: 'bold',
                             }
                         }
                     },
@@ -471,11 +471,11 @@
                         },
                         ticks: {
                             beginAtZero: true,
-                            color: 'rgba(0, 0, 0, 0.99)',
+                            color: '#333',
                             font: {
                                 size: 11, 
-                                family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-                                //weight: 'bold',
+                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                weight: 'bold',
                             }
                         }
                     }
@@ -716,10 +716,10 @@
                                     display: true,
                                     position: 'top',
                                     labels: {
-                                        color: '#000',
+                                        color: '#333',
                                         font: {
                                             size: 12,
-                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                                             weight: 'bold'
                                         }
                                     },
@@ -767,10 +767,11 @@
                                     ticks: {
                                         source: 'data',
                                         autoSkip: true,
-                                        color: '#000',
+                                        color: '#333',
                                         font: {
                                             size: 11,
-                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+                                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                            weight: 'bold'
                                         },
                                         // x-label rotation change 
                                         // autoSkip: false,
@@ -792,11 +793,12 @@
                                     ticks: {
                                         source: 'data',
                                         autoSkip: true,
-                                        color: '#000',
+                                        color: '#333',
                                         //stepSize: 1,
                                         font: {
                                             size: 11,
-                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+                                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                            weight: 'bold'
                                         }
                                     }
                                 }
@@ -855,10 +857,10 @@
                                     display: false,
                                     position: 'top',
                                     labels: {
-                                        color: '#000',
+                                        color: '#333',
                                         font: {
                                             size: 12,
-                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                                             weight: 'bold'
                                         }
                                     }
@@ -900,10 +902,11 @@
                                     ticks: {
                                         source: 'data',
                                         autoSkip: true,
-                                        color: '#000',
+                                        color: '#333',
                                         font: {
                                             size: 11,
-                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+                                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                            weight: 'bold'
                                         },
                                         // x-label rotation change 
                                         // autoSkip: false,
@@ -925,10 +928,11 @@
                                     ticks: {
                                         source: 'data',
                                         autoSkip: true,
-                                        color: '#000',
+                                        color: '#333',
                                         font: {
                                             size: 11,
-                                            family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+                                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                            weight: 'bold'
                                         }
                                     }
                                 }

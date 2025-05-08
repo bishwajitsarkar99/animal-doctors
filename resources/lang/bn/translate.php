@@ -51,6 +51,7 @@ return[
     'ADD Model'=>'মডেল যোগ করুন',
     // Units
     'Units'=>'একক সমুহ',
+    'All Units'=>'মোট একক',
     'Create Units'=>'একক তৈরি করুন',
     'ADD Unit'=>'একক যোগ করুন',
     // BrandBrand

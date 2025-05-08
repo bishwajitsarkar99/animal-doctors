@@ -111,6 +111,9 @@ class UserActivityServiceProvider
         $sort_field = $request->input('sort_field', 'id');
         $sort_direction = $request->input('sort_direction', 'desc');
 
+        // total data count
+        $total_users = SessionModel::count();
+
         // Start the query for user activities
         $user_activities = SessionModel::whereNotNull('role')->with(['roles', 'users']);
 
@@ -147,11 +150,21 @@ class UserActivityServiceProvider
 
         // Set pagination limit
         $perItem = $request->input('per_item', 10);
+        
+        // Paginate
+        $perItem = $request->input('per_item', 10);
 
-        // Get the final paginated data
-        $data = $user_activities->paginate($perItem)->toArray();
-
-        return response()->json($data, 200);
+        $paginateData = $user_activities->paginate($perItem);
+        
+        $item_num = $paginateData->count();
+        return response()->json([
+            'data' => $paginateData->items(),
+            'links' => $paginateData->toArray()['links'] ?? [],
+            'total' => $paginateData->total(),
+            'total_users' => $total_users,
+            'per_page' => $perItem,
+            'per_item_num' => $item_num,
+        ],200);
     }
     /**
      * Handle User Activity Log Show
