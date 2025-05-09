@@ -161,22 +161,24 @@
                 display: flex;
             }
             button#reg_submit{
-                border: 1px solid #e7e7d97d;
-                color: #333 !important;
-                background-color: #e7e7d97d;
+                width: 100%;
+                height: 25px;
+                background-color: #0056b3;
+                transition: border-color 0.3s ease, background-color 0.3s ease;
                 --mdb-box-shadow-color-rgb: 0, 0, 0;
                 box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-                border-radius: 4px;
-                cursor: pointer;
-                width: 100%;
-                outline: none;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                transition: border-color 0.3s ease, background-color 0.3s ease;
-                font-size: 11px;
+                color: var(--nav-button-color);
+                border-color: #0056b3;
+                font-size: 12px;
+                line-height: .2;
+                opacity: 1;
+                text-align: center;
                 font-weight: 700;
-                letter-spacing: 1px;
+                outline: none;
+                letter-spacing: 0.5px;
+                margin-left: -2px;
+                border-radius: 30px;
+                transition: .5s ease;
                 font-family: var(--font-register);
                 animation: text_font_color 5s infinite;
             }
@@ -194,27 +196,28 @@
                 --mdb-box-shadow-color-rgb: 0, 0, 0;
                 box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
                 border-color: var(--mdb-btn-border-color);
-                text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
                 transition: border-color 0.3s ease, background-color 0.3s ease;
                 color: white !important;
             }
             a#back{
-                border: 1px solid #e7e7d97d;
-                color: #333 !important;
-                background-color: #e7e7d97d;
+                width: 100%;
+                height: 25px;
+                background-color: #0056b3;
+                transition: border-color 0.3s ease, background-color 0.3s ease;
                 --mdb-box-shadow-color-rgb: 0, 0, 0;
                 box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-                border-radius: 4px;
-                cursor: pointer;
-                width: 100%;
-                outline: none;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                transition: border-color 0.3s ease, background-color 0.3s ease;
-                font-size: 11px;
+                color: var(--nav-button-color);
+                border-color: #0056b3;
+                font-size: 12px;
+                line-height: 1;
+                opacity: 1;
+                text-align: center;
                 font-weight: 700;
-                letter-spacing: 1px;
+                outline: none;
+                letter-spacing: 0.5px;
+                margin-left: -2px;
+                border-radius: 30px;
+                transition: .5s ease;
                 font-family: var(--font-register);
                 animation: text_font_color 5s infinite;
             }
@@ -223,7 +226,6 @@
                 --mdb-box-shadow-color-rgb: 0, 0, 0;
                 box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
                 border-color: var(--mdb-btn-border-color);
-                text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
                 transition: border-color 0.3s ease, background-color 0.3s ease;
                 color: white !important;
             }
@@ -1025,7 +1027,7 @@
                                                                         <div class="bar"></div>
                                                                         <div class="percent">0%</div>
                                                                     </div>
-                                                                    <a class="btn btn-group-sm upload_btn upload-button-skeleton mt-2" id="uploadButton">
+                                                                    <a class="btn btn-group-sm upload_btn button-skeleton mt-2" id="uploadButton">
                                                                         <span class="img-upload-icon spinner-border spinner-border-sm register-hidden" style="color:forestgreen;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
                                                                         <span class="upload-btn-text">Upload</span>
                                                                     </a>
@@ -1056,12 +1058,20 @@
                 </div>
             </div>
         </div>
+        <!-- JQUERY CDN LINK -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- Inputmask plugin (depends on jQuery) -->
+        <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/jquery.inputmask.min.js"></script>
+        <!-- Popper (for Bootstrap tooltips/popovers) -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <!-- Boostrap5 JS Table Filter -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-        <!-- JQUERY CDN LINK -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $(".contract").inputmask("+(880)-9999-999999");
+            });
+        </script>
         <!-- Sweet Alert CDN LINK -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
         <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js"></script>

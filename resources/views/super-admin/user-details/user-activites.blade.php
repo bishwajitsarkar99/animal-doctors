@@ -1,21 +1,21 @@
 <!-- ==== User-Activities ======= -->
 <div class="container table-container-card">
     <div class="row">
-        <div class="col-xl-3">
-            <input type="text" class="date form-control form-control-sm" name="start_date" placeholder="Start Date : DD-MM-YYY" id="date_start" autocomplete="off">
+        <div class="col-xl-2">
+            <input type="text" class="date form-control form-control-sm" name="start_date" placeholder="From : DD-MM-YYY" id="date_start" autocomplete="off">
         </div>
-        <div class="col-xl-3">
-            <input type="text" class="date form-control form-control-sm" name="end_date" placeholder="End Date : DD-MM-YYY" id="date_end" autocomplete="off">
+        <div class="col-xl-2">
+            <input type="text" class="date form-control form-control-sm" name="end_date" placeholder="To : DD-MM-YYY" id="date_end" autocomplete="off">
         </div>
         <div class="col-xl-3">
             <select type="text" class="form-control form-control-sm select2" name="role" id="select_role">
                 <option value="">Select Role</option>
                 @foreach($roles as $item)
-                    <option value="{{$item->id}}">{{ $item->name}}</option>
+                <option value="{{$item->id}}">{{ $item->name}}</option>
                 @endforeach
             </select>
         </div>
-        <div class="col-xl-3">
+        <div class="col-xl-5">
             <input class="form-control form-control-sm font-weight" type="search" name="search" value="" placeholder="Search.........." id="search" />
         </div>
     </div>

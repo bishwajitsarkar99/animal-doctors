@@ -314,6 +314,13 @@ img#loaderShow {
     opacity: 1 !important;
     background-color: blueviolet !important;
 }
+.bg-light-blueviolet {
+    opacity: 1 !important;
+    background-image:linear-gradient(0deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white) !important;
+}
+.bg-light{
+    background-color: #e9ecef !important;
+}
 .bg-alert {
     opacity: 1 !important;
     background-color: #b98527 !important;
@@ -482,7 +489,6 @@ input.input-date{
     font-weight: 700;
     color: white;
     opacity: 1;
-    font-variant: all-petite-caps;
     text-align: center;
     letter-spacing: 1px; 
 }

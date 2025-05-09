@@ -2,94 +2,94 @@
     <!-- defult background focus for sidebar/ = class / side_nav_background for id = menu_background -->
     <div class="nav" id="menu_background">
         @if(auth()->user()->role ==1)
-        <a class="nav-link" href="{{ route('super-admin.dashboard') }}" id="side_nav">
+        <a class="nav-link ms-1" href="{{ route('super-admin.dashboard') }}" id="side_nav">
             <!-- <div class="sb-nav-link-icon das_hdname pt-1"><i class="fas fa-tachometer-alt fa-beat-fade"></i></div> -->
             <span class="dashboard_text ms-4">{{__('translate.Dashboard')}}</span>
         </a>
         @endif
         @if(auth()->user()->role ==2)
-        <a class="nav-link" href="{{ route('sub-admin.dashboard') }}" id="side_nav">
-            <span class="dashboard_text">{{__('translate.Dashboard')}}</span>
+        <a class="nav-link ms-1" href="{{ route('sub-admin.dashboard') }}" id="side_nav">
+            <span class="dashboard_text ms-4">{{__('translate.Dashboard')}}</span>
         </a>
         @endif
         @if(auth()->user()->role ==3)
-        <a class="nav-link" href="{{ route('admin.dashboard') }}" id="side_nav">
-            <span class="dashboard_text">{{__('translate.Dashboard')}}</span>
+        <a class="nav-link ms-1" href="{{ route('admin.dashboard') }}" id="side_nav">
+            <span class="dashboard_text ms-4">{{__('translate.Dashboard')}}</span>
         </a>
         @endif
         @if(auth()->user()->role ==5)
-        <a class="nav-link" href="{{ route('accounts.dashboard') }}" id="side_nav">
-            <span class="dashboard_text">Side-Menu</span>
+        <a class="nav-link ms-1" href="{{ route('accounts.dashboard') }}" id="side_nav">
+            <span class="dashboard_text ms-4">Side-Menu</span>
         </a>  
         @endif
         @if(auth()->user()->role ==6)
-        <a class="nav-link" href="#" id="side_nav">
-            <span class="dashboard_text">Side-Menu</span>
+        <a class="nav-link ms-1" href="#" id="side_nav">
+            <span class="dashboard_text ms-4">Side-Menu</span>
         </a>
         @endif
         @if(auth()->user()->role ==7)
-        <a class="nav-link" href="#" id="side_nav">
-            <span class="dashboard_text">Side-Menu</span>
+        <a class="nav-link ms-1" href="#" id="side_nav">
+            <span class="dashboard_text ms-4">Side-Menu</span>
         </a> 
         @endif
         @if(auth()->user()->role ==0)
-        <a class="nav-link" href="{{ route('doctors.dashboard') }}" id="side_nav">
-            <span class="dashboard_text">Side-Menu</span>
+        <a class="nav-link ms-1" href="{{ route('doctors.dashboard') }}" id="side_nav">
+            <span class="dashboard_text ms-4">Side-Menu</span>
         </a>   
         @endif
         @if(auth()->user()->role ==1)
-            <span class="ms-4 ps-2" style="font-size: 11px;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 11px;text-align: center;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{setting('company_name')}}
             </span>
-            <span class="ms-4 ps-2" style="font-size: 11px;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 11px;text-align: center;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{Auth::user()->branch_name}}
             </span>
         @endif
         @if(auth()->user()->role ==2)
-            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 10px;text-align: center;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{setting('company_name')}}
             </span>
-            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 10px;text-align: center;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{Auth::user()->branch_name}}
             </span>
         @endif
         @if(auth()->user()->role ==3)
-            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;text-transform: uppercase;color:white;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 10px;text-align: center;letter-spacing:1px;font-weight:600;text-transform: uppercase;color:white;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{setting('company_name')}}
             </span>
-            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 10px;text-align: center;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{Auth::user()->branch_name}}
             </span>
         @endif
         @if(auth()->user()->role ==5)
-            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:700;color: #003a91;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 10px;text-align: center;letter-spacing:1px;font-weight:700;color: #003a91;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{setting('company_name')}}
             </span>
-            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 10px;text-align: center;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{Auth::user()->branch_name}}
             </span>
         @endif
         @if(auth()->user()->role ==6)
-            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 10px;text-align: center;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{setting('company_name')}}
             </span>
-            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 10px;text-align: center;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{Auth::user()->branch_name}}
             </span>
         @endif
         @if(auth()->user()->role ==7)
-            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 10px;text-align: center;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{setting('company_name')}}
             </span>
-            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 10px;text-align: center;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{Auth::user()->branch_name}}
             </span>
         @endif
         @if(auth()->user()->role ==0)
-            <span class="ms-4 ps-2 mb-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 10px;text-align: center;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{setting('company_name')}}
             </span>
-            <span class="ms-4 ps-2" style="font-size: 10px;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
+            <span class="" style="font-size: 10px;text-align: center;letter-spacing:1px;font-weight:600;color:white;text-transform: uppercase;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
                 {{Auth::user()->branch_name}}
             </span>
         @endif

@@ -40,9 +40,9 @@
 }
 /* Style the file input */
 #imgInput {
-    border: 1px solid #dbdb90;
-    color: #333 !important;
-    background-color: #c3c3747d;
+    border: none;
+    color: #fff !important;
+    background-color: forestgreen;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
@@ -59,7 +59,7 @@
 }
 /* Change border and background color on hover */
 #imgInput:hover {
-    border-color: #b6b6786b;
+    border-color: none;
     background-color: #e9ecef;
     color: forestgreen !important;
     transition: border-color 0.3s ease, background-color 0.3s ease;
@@ -69,8 +69,8 @@
 #imgInput::file-selector-button {
     padding-top: 2px;
     font-size: 11px;
-    color: #684a00 !important;
-    background-color: #c5c57e;
+    color: #fff !important;
+    background-color: forestgreen;
     border: none;
     cursor: pointer;
     transition: border-color 0.3s ease, background-color 0.3s ease;
@@ -320,22 +320,25 @@ input.register{
     line-height: 1.5;
 }
 .upload_btn {
-    border: 1px solid #e7e7d97d;
-    color: #333 !important;
-    background-color: #e7e7d97d;
+    color: #fff !important;
+    width: 100%;
+    height: 25px;
+    background-color: #008d3b;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    outline: none;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-    font-size: 11px;
+    color: var(--nav-button-color);
+    border-color: #008d3b;
+    font-size: 12px;
+    line-height: 1.1;
+    opacity: 1;
+    text-align: center;
     font-weight: 700;
-    letter-spacing: 1px;
+    outline: none;
+    letter-spacing: 0.5px;
+    margin-left: -2px;
+    border-radius: 30px;
+    transition: .5s ease;
     font-family: "Poppins", Sans-serif;
     animation: text_font_color 5s infinite;
 }
@@ -355,7 +358,6 @@ input.register{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     border-color: var(--mdb-btn-border-color);
-    text-shadow: 0px 1px 1px #fff, 0px 0px 0px #000;
     transition: border-color 0.3s ease, background-color 0.3s ease;
     color: white !important;
 }
@@ -647,9 +649,9 @@ input.image{
     content: "";
     position: absolute;
     left: -1px;
-    top: 4px;
+    top: -23px;
     width: 100%;
-    height: 12px;
+    height: 40px;
     border-radius: 3px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);

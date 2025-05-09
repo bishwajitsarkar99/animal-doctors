@@ -136,6 +136,7 @@
     letter-spacing: 1px;
     font-weight: 600;
 	color: darkblue;
+	font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
 }
 /* .ui-autocomplete{
 	width: 300px;

@@ -96,13 +96,13 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width:20%" aria-valuenow="{{ round($percentageRoles['super_admin'], 2) }}" style="width:20%" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['super_admin'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['super_admin'], 2) }}" style="width:20%" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['super_admin'], 2) }}%;">
                             {{ round($percentageRoles['super_admin'], 2) }}%
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-primary result-skeletone pt-1">{{ $usersCount['super_admin']}}</span>
+                    <span class="user-amount badge rounded-pill bg-light-blueviolet result-skeletone pt-1" style="color:#000;font-weight:800;background-color: #6ba7ff;">{{ $usersCount['super_admin']}}.00</span>
                 </div>
             </div>
             <div class="row">
@@ -111,13 +111,13 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width:20%" aria-valuenow="{{ round($percentageRoles['admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['admin'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['admin'], 2) }}%;">
                             {{ round($percentageRoles['admin'], 2) }}%
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-primary result-skeletone pt-1">{{ $usersCount['admin']}}</span>
+                    <span class="user-amount badge rounded-pill bg-light-blueviolet result-skeletone pt-1" style="color:#000;font-weight:800;background-color: #6ba7ff;">{{ $usersCount['admin']}}.00</span>
                 </div>
             </div>
             <div class="row">
@@ -126,13 +126,13 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width:20%" aria-valuenow="{{ round($percentageRoles['sub_admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['sub_admin'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['sub_admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['sub_admin'], 2) }}%;">
                             {{ round($percentageRoles['sub_admin'], 2) }}%
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-primary result-skeletone pt-1">{{ $usersCount['sub_admin']}}</span>
+                    <span class="user-amount badge rounded-pill bg-light-blueviolet result-skeletone pt-1" style="color:#000;font-weight:800;background-color: #6ba7ff;">{{ $usersCount['sub_admin']}}.00</span>
                 </div>
             </div>
             <div class="row">
@@ -141,13 +141,13 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width:20%" aria-valuenow="{{ round($percentageRoles['accounts'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['accounts'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['accounts'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['accounts'], 2) }}%;">
                             {{ round($percentageRoles['accounts'], 2) }}%
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-primary result-skeletone pt-1">{{ $usersCount['accounts']}}</span>
+                    <span class="user-amount badge rounded-pill bg-light-blueviolet result-skeletone pt-1" style="color:#000;font-weight:800;background-color: #6ba7ff;">{{ $usersCount['accounts']}}.00</span>
                 </div>
             </div>
             <div class="row">
@@ -156,13 +156,13 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width:20%" aria-valuenow="{{ round($percentageRoles['marketing'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['marketing'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['marketing'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['marketing'], 2) }}%;">
                             {{ round($percentageRoles['marketing'], 2) }}%
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-primary result-skeletone pt-1">{{ $usersCount['marketing']}}</span>
+                    <span class="user-amount badge rounded-pill bg-light-blueviolet result-skeletone pt-1" style="color:#000;font-weight:800;background-color: #6ba7ff;">{{ $usersCount['marketing']}}.00</span>
                 </div>
             </div>
             <div class="row">
@@ -171,13 +171,13 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width:20%" aria-valuenow="{{ round($percentageRoles['delivery_team'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['delivery_team'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['delivery_team'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['delivery_team'], 2) }}%;">
                             {{ round($percentageRoles['delivery_team'], 2) }}%
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-primary result-skeletone pt-1">{{ $usersCount['delivery_team']}}</span>
+                    <span class="user-amount badge rounded-pill bg-light-blueviolet result-skeletone pt-1" style="color:#000;font-weight:800;background-color: #6ba7ff;">{{ $usersCount['delivery_team']}}.00</span>
                 </div>
             </div>
             <div class="row">
@@ -186,22 +186,26 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-royalblue progress-bar-animated" role="progressbar" style="width:20%" aria-valuenow="{{ round($percentageRoles['users'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['users'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['users'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['users'], 2) }}%;">
                             {{ round($percentageRoles['users'], 2) }}%
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-primary result-skeletone pt-1">{{ $usersCount['users']}}</span>
+                    <span class="user-amount badge rounded-pill bg-light-blueviolet result-skeletone pt-1" style="color:#000;font-weight:800;background-color: #6ba7ff;">{{ $usersCount['users']}}.00</span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xl-4">
                     <span class="login-user-title percentage-skeletone">Total Users</span>
                 </div>
-                <div class="col-xl-6"></div>
+                <div class="col-xl-6">
+                    <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
+                        <div class="progress-bar progress-bar-striped bg-light progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                    </div>
+                </div>
                 <div class="col-xl-2">
-                    <span class="login-user-title sub_total_user total-number-skeletone pt-1">{{ $total_users }}.00</span>
+                    <span class="user-amount badge rounded-pill bg-light-blueviolet total-number-skeletone pt-1" style="color:#000;font-weight:800;background-color:lightgray;">{{ $total_users }}.00</span>
                 </div>
             </div>
         </div>

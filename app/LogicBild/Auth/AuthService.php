@@ -113,7 +113,7 @@ class AuthService
         $validator = Validator::make($request->all(), [
             'first_name' => 'string|required|min:4',
             'last_name' => 'string|required|max:120',
-            'contract_number' => 'required|numeric|digits:11',
+            'contract_number' => 'required',
             'email' => 'string|email|required|max:100|unique:users',
             'reference_email' => 'string|required|max:100',
             'password' => 'string|required|confirmed|min:6|max:30',
@@ -122,7 +122,6 @@ class AuthService
             'email.unique' => 'The email has already taken.',
             'first_name.required' => 'The first name is required.',
             'last_name.required' => 'The last name is required.',
-            'contract_number.required' => 'The contract number is required.',
             'password.required' => 'The password is required.',
             'reference_email.required' => 'The reference email is required.',
         ]);
@@ -454,6 +453,16 @@ class AuthService
         ]);
 
         $user_login_email = $request->login_email;
+
+        // ✅ Clear any existing login session for this user
+        DB::table('sessions')
+        ->where('email', $user_login_email)
+        ->where('payload', 'login')
+        ->update([
+            'payload' => 'logout',
+            //'updated_at' => now()
+        ]);
+
         $user = User::where('login_email', $user_login_email)->value('email');
         if (!$user) {
             return back()->with('error', 'User not found.');
