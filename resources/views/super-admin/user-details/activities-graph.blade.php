@@ -126,7 +126,9 @@
                 <!-- Total all data chart -->
                 <div class="user-activities--month-chart">
                     <canvas id="userAllLogChart" height="80"></canvas>
-                    <canvas id="allUserDateLogChart" height="36"></canvas>
+                    <div class="chart-scrollbar-responsive">
+                        <canvas id="allUserDateLogChart" height="36"></canvas>
+                    </div>
                     <div class="dual-range-container">
                         <input type="range" id="rangeLeftSlider" min="0" max="365" value="0" class="dual-range">
                         <input type="range" id="rangeRightSlider" min="0" max="365" value="365" class="dual-range">
@@ -804,6 +806,7 @@
                                         source: 'data',
                                         autoSkip: true,
                                         color: '#333',
+                                        //stepSize: 1,
                                         font: {
                                             size: 11,
                                             family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
