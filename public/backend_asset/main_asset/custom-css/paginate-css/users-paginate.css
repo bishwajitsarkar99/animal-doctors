@@ -611,15 +611,39 @@ label.ser_label {
     border: 1px solid rgb(220, 53, 69) !important;
     transition: border 0.3s ease-in-out !important;
 }
+.input-search-box {
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+.input-search-box .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #aaa;
+}
+.input-search-box input {
+    padding-left: 35px; /* space for the icon */
+    width: 100%;
+    box-sizing: border-box;
+}
+/* position icon in input */
+span.icon-box {
+    z-index: 999;
+    position: absolute;
+    padding-left: 5px;
+}
 input#search {
     outline: none;
     box-shadow: 0px 2px 20px #0001;
     background-image: linear-gradient(to bottom, white 0%, white, white 100%);
     border-radius: 5px;
-    border-top: 1px solid #dee2e6;
-    border-bottom: 1px solid #dee2e6;
-    border-left: 1px solid #dee2e6;
-    border-right: 1px solid #dee2e6;
+    border-top: 1px solid rgba(0, 123, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 123, 255, 0.2);
+    border-left: 1px solid rgba(0, 123, 255, 0.2);
+    border-right: 1px solid rgba(0, 123, 255, 0.2);
     /* animation: text_color 3s infinite; */
     opacity: 1;
     font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
@@ -946,22 +970,22 @@ input.update_contract {
     /* background-image: var(--background-color); */
 }
 label.label_user_edit {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.6px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    color: #1e1e1e;
+    letter-spacing: 0.5px;
+    font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
+    color: #222222;
 }
 .modal_icon{
     display: flex;
     justify-content: space-between;
 }
 .icon_text{
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.6px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    color: rgb(30, 30, 30);
+    letter-spacing: 0.5px;
+    font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
+    color: #222222;
 }
 /* input#imgInput {
     width: 150px;

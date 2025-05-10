@@ -687,6 +687,12 @@
             button.append(iconHTML);
         });
 
+        // Search icon hidden/display-block
+        $(document).on('click', '.orm-check-input', function(){
+            // $("#searchSvgIcon").removeClass('display_hidden');
+            // $("#searchSvgIcon").addClass('display_hidden');
+        });
+
     });
 </script>
 <!-- <script>

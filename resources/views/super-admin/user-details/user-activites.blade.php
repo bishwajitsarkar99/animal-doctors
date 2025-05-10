@@ -16,7 +16,15 @@
             </select>
         </div>
         <div class="col-xl-5">
-            <input class="form-control form-control-sm font-weight" type="search" name="search" value="" placeholder="Search.........." id="search" />
+            <span class="input-search-box">
+                <span class="icon-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(170, 170, 170)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </span>
+                <input class="form-control form-control-sm font-weight" type="search" name="search" value="" placeholder="User Search" id="search" />
+            </span>
         </div>
     </div>
     <div class="table-responsive">

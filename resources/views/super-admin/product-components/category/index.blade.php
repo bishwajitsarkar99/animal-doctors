@@ -24,8 +24,14 @@
               </span>
             </div>
             <div class="col-9">
-              <span id="search_plate">
-                <input id="search" type="search" name="search" id="exampleDataList" class="category-all-search searchform display_hidden ps-1" placeholder="{{__('translate.Category Search.........')}}">
+              <span class="input-search-box" id="search_plate">
+                <span class="icon-box" id="searchSvgIcon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgb(170, 170, 170)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  </svg>
+                </span>
+                <input class="category-all-search searchform display_hidden" type="search" name="search" value="" placeholder="{{__('translate.Category Search.........')}}" id="search" />
               </span>
             </div>
           </div>
@@ -220,7 +226,7 @@
         </div>
         <div class="modal-body modal-bg" id="logoutModal_body">
           <p class="admin_paragraph" style="text-align:center;" id="text_message">
-            <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, to delete about the category ?</label>
+            <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, to delete the category ?</label>
           </p>
           <span class="modal_icon_position">
             <span class="init_skeln">

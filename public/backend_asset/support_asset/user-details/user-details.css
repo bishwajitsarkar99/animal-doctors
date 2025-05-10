@@ -25,10 +25,6 @@ htm,body{
     padding: 0;
     margin: 0;
 }
-#googleMap {
-    width: 100%;
-    height: 300px;
-}
 .loader_chart {
     background-color: orange;
     border: 6px solid #f3f3f3;
@@ -448,6 +444,9 @@ img.full-width-img {
     position: relative;
     width: 100%;
 }
+input#chartStartDate, input#chartEndDate{
+    cursor: pointer;
+}
 input.input-date{
     background-color: white;
     box-sizing: border-box;
@@ -466,14 +465,17 @@ input.input-date{
     border-top-left-radius: 5px !important;
     border-bottom-left-radius: 5px !important;
     border-bottom-right-radius: 5px !important;
-    border-top: 1px solid rgba(219, 219, 219, 0.8);
-    border-bottom: 1px solid rgba(219, 219, 219, 0.8);
-    border-left: 1px solid rgba(219, 219, 219, 0.8);
-    border-right: 1px solid rgba(219, 219, 219, 0.8);
+    border-top: 1px solid rgba(0, 123, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 123, 255, 0.2);
+    border-left: 1px solid rgba(0, 123, 255, 0.2);
+    border-right: 1px solid rgba(0, 123, 255, 0.2);
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+input.input-date:focus{
+    outline: 2px solid #3b71ca;
 }
 .login-user-title{
     padding-left: 10px;
@@ -1253,10 +1255,10 @@ a.page-link.btn_page {
     border-radius: 4px;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-    border-top: 1px solid #dee2e6 !important;
-    border-bottom: 1px solid #dee2e6 !important;
-    border-left: 1px solid #dee2e6 !important;
-    border-right: 1px solid #dee2e6 !important;
+    border-top: 1px solid rgba(0, 123, 255, 0.2) !important;
+    border-bottom: 1px solid rgba(0, 123, 255, 0.2) !important;
+    border-left: 1px solid rgba(0, 123, 255, 0.2) !important;
+    border-right: 1px solid rgba(0, 123, 255, 0.2) !important;
     box-shadow: 0px 2px 20px #0001;
     background-image: linear-gradient(to bottom, white 0%, white, white 100%);
 }
@@ -1284,10 +1286,10 @@ input#date_start,input#date_end {
     box-shadow: 0px 2px 20px #0001;
     background-image: linear-gradient(to bottom, white 0%, white, white 100%);
     border-radius: 3px;
-    border-top: 1px solid #dee2e6;
-    border-bottom: 1px solid #dee2e6;
-    border-left: 1px solid #dee2e6;
-    border-right: 1px solid #dee2e6;
+    border-top: 1px solid rgba(0, 123, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 123, 255, 0.2);
+    border-left: 1px solid rgba(0, 123, 255, 0.2);
+    border-right: 1px solid rgba(0, 123, 255, 0.2);
     animation: text_color 3s infinite;
     opacity: 1;
     font-size: 12px;
@@ -1316,11 +1318,14 @@ input#date_start:focus,input#date_end:focus,#search:focus{
         background-color: lightblue;
     }
 }
+input#search::placeholder{
+    color: rgb(201, 201, 201);
+}
 input::placeholder{
-    color: rgb(194, 194, 194);
+    color: rgb(201, 201, 201);
 }
 select::placeholder{
-    color: rgb(194, 194, 194);
+    color: rgb(201, 201, 201);
     font-weight: 800;
 }
 th#th_sort {

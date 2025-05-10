@@ -8,7 +8,7 @@
     --animation-background-position-0:100% 50%;
     --animation-background-position-100:0 50%;
     --searchbar-background-image:linear-gradient(90deg, transparent, #aaeaff, transparent);
-    --font-family-features:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    --font-family-features:Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
     --modal-backgorund-image:repeating-linear-gradient(55deg, #5fd3cd7d, transparent 1px);
     --animation-transform-1245:translateX(-50%) translateY(-50%) translateZ(0) scale(1);
     --animation-transform-1246:translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
@@ -565,8 +565,8 @@ span.label_user_edit {
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 1px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    color: black;
+    font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
+    color: #222222;
 }
 input#delete_folder_id {
     border: none;
@@ -575,8 +575,8 @@ input#delete_folder_id {
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    color: black;
+    font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
+    color: #222222;
 }
 button#uploadBtn,button#createFolderBtn,button#updateFolderBtn,button#searchFile {
     border: 1px solid #007bff;
@@ -590,7 +590,7 @@ button#uploadBtn,button#createFolderBtn,button#updateFolderBtn,button#searchFile
     transition: border-color 0.3s ease, background-color 0.3s ease;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -621,7 +621,7 @@ button#cancelFolderBtn{
     transition: border-color 0.3s ease, background-color 0.3s ease;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -647,7 +647,7 @@ button#cate_delete3{
     transition: border-color 0.3s ease, background-color 0.3s ease;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -667,7 +667,7 @@ button#deleteLoader{
     transition: border-color 0.3s ease, background-color 0.3s ease;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 1px;
