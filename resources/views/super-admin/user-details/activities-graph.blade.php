@@ -139,6 +139,7 @@
     </div>
 </div>
 @push('scripts')
+<!-- Weekly and Monthly Line and Bar Chart -->
 <script type="module">
     // hover plugins
     import { hoverGridPlugin, dottedGridPlugin, axisTooltipDayFormatePlugin, axisTooltipMonthFormatePlugin, axisCursorPlugin} from "/plugins/chartHoverPlugins.js";
@@ -496,106 +497,6 @@
         fetch_current_users_activities_data();
     });
 </script>
-<!-- Demo bar chart -->
-<!-- <script>
-    const userCanvas  = document.getElementById('userLogDateChart').getContext('2d');
-
-    const userCtx = new Chart(userCanvas , {
-        type: 'bar', // base type, we'll mix types
-        data: {
-            labels: [
-                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-            ],
-            datasets: [
-                {
-                    type: 'bar',
-                    label: 'Users Logout',
-                    borderColor: '#e74a3b',
-                    backgroundColor: 'transparent',
-                    borderWidth: 2,
-                    tension: 0.4,
-                    pointRadius: 5,
-                    pointHoverRadius: 8,
-                    pointBackgroundColor: "#e74a3b",
-                    data: [40000, 42000, 45000, 45000, 47000, 43000, 42000, 43000, 41000, 45000, 42000, 50000],
-                    order: 2
-                },
-                {
-                    type: 'bar',
-                    label: 'Users Login',
-                    backgroundColor: 'rgba(28,200,138,0.5)',
-                    borderColor: 'rgba(28,200,138,1)',
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 5,
-                    pointHoverRadius: 8,
-                    pointBackgroundColor: "darkgreen",
-                    data: [5000, 7000, 6000, 30000, 20000, 15000, 13000, 20000, 15000, 10000, 19000, 22000],
-                    order: 3
-                },
-                {
-                    type: 'bar',
-                    label: 'Users Activity',
-                    backgroundColor: '#4e73df',
-                    data: [20000, 30000, 25000, 70000, 50000, 35000, 30000, 43000, 35000, 30000, 40000, 50000],
-                    order: 1
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Monthly Sales Data'
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false,
-                    callbacks: {
-                        label: function(context) {
-                            let value = context.parsed.y;
-                            return context.dataset.label + ': $' + formatWithSuffix(value);
-                        }
-                    }
-                },
-                legend: {
-                    display:true,
-                    onClick: (e, legendItem, legend) => {
-                        const index = legendItem.datasetIndex;
-                        const chart = legend.chart;
-                        const meta = chart.getDatasetMeta(index);
-                        meta.hidden = meta.hidden === null ? !chart.data.datasets[index].hidden : null;
-                        chart.update();
-                    }
-                }
-            },
-            interaction: {
-                mode: 'index',
-                intersect: false
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            return '$' + formatWithSuffix(value);
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // Helper function to add suffixes like K/M
-    function formatWithSuffix(value) {
-        const suffixes = ['', 'K', 'M', 'B'];
-        let order = Math.floor(Math.log10(Math.abs(value)) / 3);
-        order = Math.max(0, Math.min(order, suffixes.length - 1));
-        return (value / Math.pow(1000, order)).toFixed(1) + suffixes[order];
-    }
-</script> -->
 <!-- Total User Activity Multi-Chart -->
 <script type="module">
     // hover plugins
@@ -1029,6 +930,7 @@
         updateDateInputs();
     });
 </script>
+<!-- Demo bar chart -->
 <!-- <script>
     const userCanvas  = document.getElementById('userLogDateChart').getContext('2d');
 
@@ -1043,8 +945,13 @@
                 {
                     type: 'bar',
                     label: 'Users Logout',
-                    backgroundColor: '#e74a3b',
+                    borderColor: '#e74a3b',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
                     tension: 0.4,
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: "#e74a3b",
                     data: [40000, 42000, 45000, 45000, 47000, 43000, 42000, 43000, 41000, 45000, 42000, 50000],
                     order: 2
                 },
@@ -1052,7 +959,12 @@
                     type: 'bar',
                     label: 'Users Login',
                     backgroundColor: 'rgba(28,200,138,0.5)',
+                    borderColor: 'rgba(28,200,138,1)',
+                    fill: true,
                     tension: 0.4,
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: "darkgreen",
                     data: [5000, 7000, 6000, 30000, 20000, 15000, 13000, 20000, 15000, 10000, 19000, 22000],
                     order: 3
                 },
@@ -1069,7 +981,7 @@
             responsive: true,
             plugins: {
                 title: {
-                    display: false,
+                    display: true,
                     text: 'Monthly Sales Data'
                 },
                 tooltip: {
@@ -1083,7 +995,7 @@
                     }
                 },
                 legend: {
-                    display:false,
+                    display:true,
                     onClick: (e, legendItem, legend) => {
                         const index = legendItem.datasetIndex;
                         const chart = legend.chart;
@@ -1099,18 +1011,12 @@
             },
             scales: {
                 y: {
-                    display:true,
-                    grid: { display: true, color: 'silver' },
                     beginAtZero: true,
                     ticks: {
                         callback: function(value) {
                             return '$' + formatWithSuffix(value);
                         }
                     }
-                },
-                x: {
-                    display:true,
-                    grid: { display: false, color: 'silver' },
                 }
             }
         }
@@ -1123,53 +1029,6 @@
         order = Math.max(0, Math.min(order, suffixes.length - 1));
         return (value / Math.pow(1000, order)).toFixed(1) + suffixes[order];
     }
-</script> -->
-<!-- <script>
-    const slider = document.getElementById('rangeSlider');
-    const startInput = document.getElementById('chartStartDate');
-    const endInput = document.getElementById('chartEndDate');
-
-    // Base starting date (e.g., Jan 1, 2025)
-    const baseStartDate = new Date(2023, 12, 31);
-
-    // 48 weeks = 336 days
-    const rangeDays = 336;
-
-    // Optionally set a larger sliding window (e.g., 0 to 365)
-    slider.min = 0;
-    slider.max = 365;
-
-    // Format DD-MM-YYYY
-    function formatDate(date) {
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const year = date.getFullYear();
-        return `${day}-${month}-${year}`;
-    }
-
-    slider.addEventListener('input', function () {
-        const offset = parseInt(this.value);
-
-        const fromDate = new Date(baseStartDate);
-        fromDate.setDate(baseStartDate.getDate() + offset);
-
-        const toDate = new Date(fromDate);
-        toDate.setDate(fromDate.getDate() + rangeDays); // Always 48 weeks ahead
-
-        startInput.value = formatDate(fromDate);
-        endInput.value = formatDate(toDate);
-
-        // Dynamic background
-        const value = (offset / (slider.max - slider.min)) * 100;
-        this.style.background = `linear-gradient(to right, rgba(0, 123, 255, 0.3) ${value}%, #e9ecef ${value}%)`;
-        // Trigger data fetch
-        if (typeof analyticalChartFetch === 'function') {
-            analyticalChartFetch();
-        }
-    });
-
-    // Initialize on load
-    slider.dispatchEvent(new Event('input'));
 </script> -->
 <!-- <script>
     window.onload = function () {

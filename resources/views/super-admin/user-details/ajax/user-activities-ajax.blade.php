@@ -11,9 +11,9 @@
             $(this).addClass("clicked").siblings().removeClass("clicked");
         });
         // ACtive table td user-id background
-        $(document).on('click', 'td.user-details-links', function() {
-            $('td.user-details-links').removeClass("background");
-            $(this).addClass("background");
+        $(document).on('click', 'button.user-details-btn', function() {
+            $('button.user-details-btn').removeClass("btn-background");
+            $(this).addClass("btn-background");
         });
         // User Activities Data Fetch
         fetch_activities_users_data();
@@ -57,7 +57,7 @@
                     <tr class="table-row user-table-row supp-table-row table-light" key="${key}" data-user-id="${row.last_activity}" id="supp_tab">
                         <td class="sn border_ord" id="supp_tab2" hidden>${row.id}</td>
                         <td class="txt_ user-details-links ps-1" id="supp_tab3">
-                            <button class="btn-sm edit_registration view_btn cgr_btn viewurs ms-1" id="viewBtn" value="${row.last_activity}" style="font-size: 10px;height: 18px;">
+                            <button class="btn-sm edit_registration user-details-btn view_btn cgr_btn viewurs ms-1" id="viewBtn" value="${row.last_activity}" style="font-size: 10px;height: 18px;">
                                 <span hidden>${row.last_activity}</span>
                                 ${row.user_id} 
                             </button>
@@ -79,67 +79,77 @@
                         <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${updateDate}</td>
                         <td class="txt_ pe-2 supp_vew7 table-td-align" id="supp_tab10">${lastActivity}</td>
                     </tr>
-                    <tr class="table-log-details-row supp-table-row hidden child-row" data-user-id="${row.last_activity}">
+                    <tr class="table-log-details-row supp-table-row child-row" data-user-id="${row.last_activity}"  style="display: none;">
                         <td colspan="14">
                             <div class="card log-content-card" style="background-color:white;">
-                                <div class="row mt-3">
-                                    <div class="log_card_header" id="logCardHeader">
-                                        <div class="row">
-                                            <div class="col-xl-2 logo_box">
-                                                <label class="logo_area" for="logo_area" id="logo_area">
-                                                    <img class="company_logo" src="${companyLogo}">
-                                                </label>
-                                            </div>
-                                            <div class="col-xl-9">
-                                                <p class="company_name_area">
-                                                    <label class="company_name" for="company_name" id="companyName">${companyName}</label><br>
-                                                    <label class="company_address" for="company_address" id="companyAddress">${companyAddress}</label>
-                                                </p>
-                                            </div>
-                                            <div class="col-xl-1">
-                                                <div class="card_close_btn">
-                                                    <button type="button" class="btn-close btn-btn-sm clos_btn2" data-parent="${row.id}" id="viewBtn" value="${row.id}"
-                                                        data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
-                                                    </button>
-                                                </div>
+                                <div class="log_card_header view-card-section" id="logCardHeader">
+                                    <div class="row">
+                                        <div class="col-xl-2 logo_box">
+                                            <span class="l-icon ps-2">
+                                                <svg width="40" height="40" viewBox="0 0 20 20">
+                                                    <path d="M5 0 V15 H20" stroke="#4c4c4cd6" stroke-width="1" fill="none"/>
+                                                </svg>
+                                            </span>
+                                            <label class="logo_area mt-3" for="logo_area" id="logo_area">
+                                                <img class="company_logo" src="${companyLogo}">
+                                            </label>
+                                        </div>
+                                        <div class="col-xl-9">
+                                            <p class="company_name_area mt-3">
+                                                <label class="company_name" for="company_name" id="companyName">${companyName}</label><br>
+                                                <label class="company_address" for="company_address" id="companyAddress">${companyAddress}</label>
+                                            </p>
+                                        </div>
+                                        <div class="col-xl-1">
+                                            <div class="card_close_btn mt-4">
+                                                <button type="button" class="btn-close btn-btn-sm clos_btn2 close_send_view" data-parent="${row.last_activity}" id="viewBtn" value="${row.last_activity}"
+                                                    data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row info_part_one">
-                                    <div class="col-xl-2 img_box">
-                                        <img class="user_image_log" src="${row.image.includes('https://')?row.image: '/storage/image/user-image/'+ row.image}"><br>
-                                        <label class="card_row_first_part" for="user_id" id="user_id">User-ID : ${row.user_id}</label><br>
-                                        <label class="card_row_first_part" for="role_id" id="role_id">Role : ${row.roles.name}</label><br>
-                                    </div>
-                                    <div class="col-xl-5 user_detls">
-                                        <label class="card_row_first_part mt-2" for="info_label" id="info_label">User Information</label><br>
-                                        <label class="card_row_first_part mt-2" for="user_to" id="user_to">Name : ${row.name}</label><br>
-                                        <label class="card_row_first_part" for="user_to" id="user_to">Login-Email : ${row.email}</label><br>
-                                        <label class="card_row_first_part" for="user_to" id="user_to">Reference-Email : ${row.users.reference_email}</label><br>
-                                        <label class="card_row_first_part" for="user_cc" id="user_cc">Contract-Number : ${row.contract_number}</label><br>
-                                        <label class="card_row_first_part" for="user_bcc" id="user_bcc">Account-Create : ${formatDate(row.account_create)}</label><br>
-                                        <label class="card_row_first_part" for="user_bcc" id="user_bcc">Account Last Update : ${formatDate(row.account_last_update)}</label><br>
-                                        <label class="card_row_first_part subject" for="subject" id="subject">Email-Verified : ${formatDate(row.email_verified_at)}</label><br>
-                                    </div>
-                                    <div class="col-xl-5 branch_info">
-                                        <label class="card_row_first_part mt-2" for="info_label" id="info_label">Branch Information</label><br>
-                                        <label class="card_row_first_part mt-2" for="branch_id" id="branch_id">Branch-ID : ${row.branch_id}</label><br>
-                                        <label class="card_row_first_part" for="branch_type" id="branch_type">Branch Type : ${row.users.branch_type}</label><br>
-                                        <label class="card_row_first_part mt-1" for="branch_name" id="branch_name">Branch Name : ${row.users.branch_name}</label><br>
-                                        <label class="card_row_first_part" for="division_name" id="division_name">Division Name : ${row.users.division_name}</label><br>
-                                        <label class="card_row_first_part" for="district_name" id="district_name">District Name : ${row.users.district_name}</label><br>
-                                        <label class="card_row_first_part mt-1" for="upazila_name" id="upazila_name">Upazila Name : ${row.users.upazila_name}</label><br>
-                                        <label class="card_row_first_part mt-1" for="town_name" id="town_name">Town Name : ${row.users.town_name}</label><br>
-                                        <label class="card_row_first_part mt-1" for="location" id="location">Location : ${row.users.location}</label><br>
+                                <div class="details-content-body info_part_one">
+                                    <div class="row">
+                                        <div class="col-xl-2 img_box view-card-section">
+                                            <img class="user_image_log" src="${row.image.includes('https://')?row.image: '/storage/image/user-image/'+ row.image}"><br>
+                                            <label class="card_row_first_part" for="user_id" id="user_id">User-ID : ${row.user_id}</label><br>
+                                            <label class="card_row_first_part" for="role_id" id="role_id">Role : ${row.roles.name}</label><br>
+                                        </div>
+                                        <div class="col-xl-5 user_detls view-card-section">
+                                            <label class="card_row_first_part mt-2" for="info_label" id="info_label">User Information</label><br>
+                                            <label class="card_row_first_part mt-2" for="user_to" id="user_to">Name : ${row.name}</label><br>
+                                            <label class="card_row_first_part" for="user_to" id="user_to">Login-Email : ${row.email}</label><br>
+                                            <label class="card_row_first_part" for="user_to" id="user_to">Reference-Email : ${row.users.reference_email}</label><br>
+                                            <label class="card_row_first_part" for="user_cc" id="user_cc">Contract-Number : ${row.contract_number}</label><br>
+                                            <label class="card_row_first_part" for="user_bcc" id="user_bcc">Account-Create : ${formatDate(row.account_create)}</label><br>
+                                            <label class="card_row_first_part" for="user_bcc" id="user_bcc">Account Last Update : ${formatDate(row.account_last_update)}</label><br>
+                                            <label class="card_row_first_part subject" for="subject" id="subject">Email-Verified : ${formatDate(row.email_verified_at)}</label><br>
+                                        </div>
+                                        <div class="col-xl-5 branch_info view-card-section">
+                                            <label class="card_row_first_part mt-2" for="info_label" id="info_label">Branch Information</label><br>
+                                            <label class="card_row_first_part mt-2" for="branch_id" id="branch_id">Branch-ID : ${row.branch_id}</label><br>
+                                            <label class="card_row_first_part" for="branch_type" id="branch_type">Branch Type : ${row.users.branch_type}</label><br>
+                                            <label class="card_row_first_part mt-1" for="branch_name" id="branch_name">Branch Name : ${row.users.branch_name}</label><br>
+                                            <label class="card_row_first_part" for="division_name" id="division_name">Division Name : ${row.users.division_name}</label><br>
+                                            <label class="card_row_first_part" for="district_name" id="district_name">District Name : ${row.users.district_name}</label><br>
+                                            <label class="card_row_first_part mt-1" for="upazila_name" id="upazila_name">Upazila Name : ${row.users.upazila_name}</label><br>
+                                            <label class="card_row_first_part mt-1" for="town_name" id="town_name">Town Name : ${row.users.town_name}</label><br>
+                                            <label class="card_row_first_part mt-1" for="location" id="location">Location : ${row.users.location}</label><br>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-xl-12">
-                                        <span class="user_location" data-id="${row.id}"><span class="user_agent_label">Session-ID :</span> ${row.id}</span>
-                                        <p class="user_agent"><span class="user_agent_label">User-Agent :</span> ${row.user_agent}</p>
-                                        <span class="user_location"><span class="user_agent_label">Branch-Location :</span> ${row.users.location}</span>
-                                        <div id="googleMap" style="width:100%;height:300px;"></div>
+                                <div class="user-track-mesg">
+                                    <div class="row view-card-section">
+                                        <div class="col-xl-12 pb-3 pt-3">
+                                            <span class="session_id" data-id="${row.id}"><span class="user_agent_label">Session-ID :</span> ${row.id}</span>
+                                            <p class="user_agent"><span class="user_agent_label">User-Agent :</span> ${row.user_agent} <br>
+                                                <span class="user_location"><span class="user_agent_label">IP-Address :</span> ${row.ip_address}</span> <br>
+                                                <span class="user_location"><span class="user_agent_label">Login-Date :</span> ${formatDate(row.created_at)}</span> <br>
+                                                <span class="user_location"><span class="user_agent_label">Logout-Date :</span> ${formatDate(row.updated_at)}</span> <br>
+                                                <span class="user_location"><span class="user_agent_label">Last-Activity :</span> ${row.last_activity}</span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -329,21 +339,39 @@
         // User Details View
         $(document).on('click', '.view_btn', function (e) {
             e.preventDefault();
+            var userId = $(this).val();
             
-            var button = $(this);
-            var user_id = button.val();
+            var $childRow = $('tr.child-row[data-user-id="' + userId + '"]');
+            $childRow.stop(true, true).slideToggle('slow');
 
-            // Toggle the child row visibility
-            var childRows = $('tr.child-row[data-user-id="' + user_id + '"]');
-            childRows.toggleClass('hidden');
+            // Add/remove skeleton class to all relevant sections
+            requestAnimationFrame(() => {
+                const $sections = $childRow.find('.view-card-section');
+                $sections.addClass('view-card-skeletone');
+                setTimeout(() => {
+                    $sections.removeClass('view-card-skeletone');
+                }, 1000);
+            });
 
-            // Change the icon based on visibility
-            var icon = button.find('.toggle-icon');
-            if (childRows.is(':visible')) {
-                icon.html('▼');
-            } else {
-                icon.html('➤');
-            }
+        });
+        // Close View Card
+        $(document).on('click', '.close_send_view', function (e) {
+            e.preventDefault();
+            var parentId = $(this).data('parent');
+            $(this).tooltip('hide'); // Hide tooltip if you are using Bootstrap tooltips
+            // Slide up to close the view card
+            // $('tr.child-row[data-user-id="' + parentId + '"]').stop(true, true).slideUp('slow');
+            var $childRow = $('tr.child-row[data-user-id="' + parentId + '"]');
+            $childRow.stop(true, true).slideToggle('slow');
+
+            // Add/remove skeleton class to all relevant sections
+            requestAnimationFrame(() => {
+                const $sections = $childRow.find('.view-card-section');
+                $sections.addClass('view-card-skeletone');
+                setTimeout(() => {
+                    $sections.removeClass('view-card-skeletone');
+                }, 1000);
+            });
         });
         // Refresh Button
         $(document).on('click', '#refresh', function(e){
@@ -364,13 +392,33 @@
         });
     });
 </script>
-<script>
-    function myMap() {
-        var mapProp= {
-        center:new google.maps.LatLng(51.508742,-0.120850),
-        zoom:5,
-        };
-        var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    }
+<!-- Google Map Setting -->
+ <!-- <div id="googleMap"></div> -->
+<!-- <script
+    async defer
+    loading="async"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmpHK68DMyMpFw-KM73MO0rc8W93KT85w">
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+<script>
+    function loadMapWhenReady() {
+        const checkInterval = setInterval(() => {
+            const mapDiv = document.getElementById("googleMap");
+            if (mapDiv && window.google && google.maps) {
+                clearInterval(checkInterval);
+                initMap();
+            }
+        }, 100); // Check every 100ms
+    }
+
+    function initMap() {
+        const myLatLng = { lat: 51.508742, lng: -0.120850 };
+        const map = new google.maps.Map(document.getElementById("googleMap"), {
+            center: myLatLng,
+            zoom: 7,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+    }
+
+    // Wait for both DOM and Google Maps to load
+    document.addEventListener("DOMContentLoaded", loadMapWhenReady);
+</script> -->

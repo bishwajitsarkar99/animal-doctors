@@ -84,7 +84,7 @@
 <div class="row mt-4">
     <div class="col-xl-6">
         <div class="card card-body five-card">
-            <span class="card-head-title" style="border-bottom: 1px solid rgba(0, 0, 0, 0.175);">
+            <span class="card-head-title pb-2" style="border-bottom: 1px solid rgba(0, 0, 0, 0.175);">
                 <span class="head-skeletone">
                     <i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i>
                     Users Summary
@@ -96,7 +96,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['super_admin'], 2) }}" style="width:20%" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['super_admin'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['super_admin'], 2) }}" style="width:20%" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['super_admin'], 2) }}%;">
                             {{ round($percentageRoles['super_admin'], 2) }}%
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['admin'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['admin'], 2) }}%;">
                             {{ round($percentageRoles['admin'], 2) }}%
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['sub_admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['sub_admin'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['sub_admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['sub_admin'], 2) }}%;">
                             {{ round($percentageRoles['sub_admin'], 2) }}%
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['accounts'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['accounts'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['accounts'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['accounts'], 2) }}%;">
                             {{ round($percentageRoles['accounts'], 2) }}%
                         </div>
                     </div>
@@ -156,7 +156,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['marketing'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['marketing'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['marketing'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['marketing'], 2) }}%;">
                             {{ round($percentageRoles['marketing'], 2) }}%
                         </div>
                     </div>
@@ -171,7 +171,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['delivery_team'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['delivery_team'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['delivery_team'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['delivery_team'], 2) }}%;">
                             {{ round($percentageRoles['delivery_team'], 2) }}%
                         </div>
                     </div>
@@ -186,7 +186,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="{{ round($percentageRoles['users'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['users'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['users'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['users'], 2) }}%;">
                             {{ round($percentageRoles['users'], 2) }}%
                         </div>
                     </div>

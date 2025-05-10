@@ -106,20 +106,22 @@
   }
   $("#showCard").attr('hidden', true);
   $("#loaderShow").removeClass('loader-show');
-  setTimeout(() => {
-    removeSkeletons('.head-skeletone');
-    removeSkeletons('.body-skeletone');
-    removeSkeletons('.cricale-number-skeleton');
-    removeSkeletons('.loader_skeleton');
-    removeSkeletons('.percentage-skeletone');
-    removeSkeletons('.result-skeletone');
-    removeSkeletons('.total-number-skeletone');
-    removeSkeletons('.tab-skeletone');
-    $("#loaderShow").addClass('loader-show');
-    
-  }, 1800);
-  setTimeout(() => {
-    $("#showCard").removeAttr('hidden');
-  }, 500);
+  requestAnimationFrame(()=> {
+    setTimeout(() => {
+      removeSkeletons('.head-skeletone');
+      removeSkeletons('.body-skeletone');
+      removeSkeletons('.cricale-number-skeleton');
+      removeSkeletons('.loader_skeleton');
+      removeSkeletons('.percentage-skeletone');
+      removeSkeletons('.result-skeletone');
+      removeSkeletons('.total-number-skeletone');
+      removeSkeletons('.tab-skeletone');
+      $("#loaderShow").addClass('loader-show');
+      
+    }, 1800);
+    setTimeout(() => {
+      $("#showCard").removeAttr('hidden');
+    }, 500);
+  });
 </script>
 @endpush
