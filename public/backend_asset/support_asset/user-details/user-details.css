@@ -727,7 +727,7 @@ select#perItemControl {
     font-size: 12px;
 }
 tr.table-row {
-    background-color: white;
+    background-image: linear-gradient(90deg, #ffffffff 100%, transparent 100%, #ffffffff 100%);
     color: black;
     font-weight: 600;
 }

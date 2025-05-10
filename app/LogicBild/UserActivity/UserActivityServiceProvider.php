@@ -325,7 +325,7 @@ class UserActivityServiceProvider
             $end = Carbon::parse($end_date)->endOfDay();
         } else {
             $start = Carbon::now()->startOfYear();
-            $end = Carbon::now()->endOfYear();
+            $end = Carbon::now()->endOfMonth();
         }
         // Monthly data get 
         $login_counts_monthly = SessionModel::whereBetween('created_at', [$start, $end])
@@ -361,7 +361,7 @@ class UserActivityServiceProvider
 
         while ($period <= $endPeriod) {
             $formattedMonth = $period->format('Y-m');
-            $monthly_labels[] = $period->format('d M Y');
+            $monthly_labels[] = $period->format('M Y');
             $login_counts_monthly_filled[] = $login_counts_monthly[$formattedMonth] ?? 0;
             $logout_counts_monthly_filled[] = $logout_counts_monthly[$formattedMonth] ?? 0;
             $current_user_counts_monthly_filled[] = $current_user_counts_monthly[$formattedMonth] ?? 0;

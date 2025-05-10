@@ -125,7 +125,6 @@ span.tot_summ {
 table, th, td {
     border-collapse: collapse;
     font-size: 14px;
-    letter-spacing: 1px;
     opacity: 1;
     font-family: var(--sub-category-font-family);
 }
