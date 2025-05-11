@@ -374,25 +374,42 @@ class UserActivityServiceProvider
         $login_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
             ->whereNotNull('user_id')
             ->where('payload', 'login')
-            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
-            ->groupBy('month')
-            ->pluck('count', 'month')
+            ->select(DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y") as day'), DB::raw('count(*) as count'))
+            ->groupBy('day')
+            ->pluck('count', 'day')
             ->toArray();
+            // ->whereNotNull('user_id')
+            // ->where('payload', 'login')
+            // ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
+            // ->groupBy('month')
+            // ->pluck('count', 'month')
+            // ->toArray();
 
         $logout_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
             ->whereNotNull('user_id')
             ->where('payload', 'logout')
-            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
-            ->groupBy('month')
-            ->pluck('count', 'month')
+            ->select(DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y") as day'), DB::raw('count(*) as count'))
+            ->groupBy('day')
+            ->pluck('count', 'day')
             ->toArray();
+                // ->whereNotNull('user_id')
+            // ->where('payload', 'logout')
+            // ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
+            // ->groupBy('month')
+            // ->pluck('count', 'month')
+            // ->toArray();
 
         $current_user_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
             ->whereNotNull('user_id')
-            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('COUNT(DISTINCT user_id) as count'))
-            ->groupBy('month')
-            ->pluck('count', 'month')
+            ->select(DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y") as day'), DB::raw('COUNT(DISTINCT user_id) as count'))
+            ->groupBy('day')
+            ->pluck('count', 'day')
             ->toArray();
+            // ->whereNotNull('user_id')
+            // ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('COUNT(DISTINCT user_id) as count'))
+            // ->groupBy('month')
+            // ->pluck('count', 'month')
+            // ->toArray();
 
 
         $date_labels = [];
@@ -404,7 +421,7 @@ class UserActivityServiceProvider
         $end_eriod = Carbon::parse($end)->startOfDay();
 
         while ($start_period <= $end_eriod) {
-            $formattedDate = $start_period->format('Y-m');
+            $formattedDate = $start_period->format('d-m-Y');
             $date_labels[] = $start_period->format('d M Y');
             $login_counts_date_filled[] = $login_counts_date[$formattedDate] ?? 0;
             $logout_counts_date_filled[] = $logout_counts_date[$formattedDate] ?? 0;

@@ -130,8 +130,18 @@
                         <canvas id="allUserDateLogChart" height="36"></canvas>
                     </div>
                     <div class="dual-range-container">
+                        <!-- <label>Start: <span id="leftPercentLabel">0%</span></label>
                         <input type="range" id="rangeLeftSlider" min="0" max="365" value="0" class="dual-range">
-                        <input type="range" id="rangeRightSlider" min="0" max="365" value="365" class="dual-range">
+                        <label>End: <span id="rightPercentLabel">0%</span></label>
+                        <input type="range" id="rangeRightSlider" min="0" max="365" value="365" class="dual-range"> -->
+                        <div class="slider-wrapper-first">
+                            <span id="leftTooltip" class="range-tooltip">0%</span>
+                            <input type="range" id="rangeLeftSlider" min="0" max="365" value="0" class="dual-range">
+                        </div>
+                        <div class="slider-wrapper-second">
+                            <span id="rightTooltip" class="range-tooltip">0%</span>
+                            <input type="range" id="rangeRightSlider" min="0" max="365" value="365" class="dual-range">
+                        </div>
                         <div class="range-track"></div>
                         <img class="full-width-img" src="/image/LineChart.PNG" alt="Chart" />
                     </div>
@@ -906,6 +916,30 @@
             sliderRight.style.background = `linear-gradient(to right, 
                 rgba(0, 123, 255, 0.2) ${rightPercent}%, 
                 white ${rightPercent}%)`;
+
+            const leftTooltip = document.getElementById('leftTooltip');
+            const rightTooltip = document.getElementById('rightTooltip');
+
+            leftTooltip.textContent = `${leftPercent.toFixed(0)}%`;
+            rightTooltip.textContent = `${rightPercent.toFixed(0)}%`;
+
+            positionTooltip(sliderLeft, leftTooltip);
+            positionTooltip(sliderRight, rightTooltip);
+        }
+        // show tooltip input range
+        function positionTooltip(slider, tooltip) {
+            const sliderRect = slider.getBoundingClientRect();
+            const tooltipWidth = tooltip.offsetWidth;
+            const sliderWidth = slider.offsetWidth;
+            const value = parseInt(slider.value);
+            const min = parseInt(slider.min);
+            const max = parseInt(slider.max);
+            const percent = (value - min) / (max - min);
+
+            const offset = percent * sliderWidth;
+            const thumbOffset = offset - (tooltipWidth / 2);
+
+            tooltip.style.left = `${thumbOffset}px`;
         }
         // debounce
         const debouncedFetch = debounce(() => {
