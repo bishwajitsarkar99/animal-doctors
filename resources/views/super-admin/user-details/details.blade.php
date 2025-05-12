@@ -57,22 +57,22 @@
 <script>
   $(document).ready(function(){
     $('#date_start').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "dd-M-yy",
       changeMonth: true,
       changeYear: true,
     });
     $('#date_end').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "dd-M-yy",
       changeMonth: true,
       changeYear: true,
     });
     $('#chartStartDate').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "dd-M-yy",
       changeMonth: true,
       changeYear: true,
     });
     $('#chartEndDate').datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "dd-M-yy",
       changeMonth: true,
       changeYear: true,
     });

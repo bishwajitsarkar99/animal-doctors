@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-xl-6 contract_nme">
                                 <div class="input-group">
-                                    <input class="form-control form-control-sm edit_contact_number_one" type="text" name="contact_number_one" id="contact_number_one" placeholder="">
+                                    <input class="form-control form-control-sm edit_contact_number_one contract-one" type="text" name="contact_number_one" id="contact_number_one" placeholder="">
                                     <label for="contractNumberOne">Contact Number One</label>
                                 </div>
                                 <span id="savForm_error6" hidden></span><span id="updateForm_errorList6" hidden></span>
@@ -63,14 +63,14 @@
                         <div class="row mt-4">
                             <div class="col-xl-6 contract_two_nme">
                                 <div class="input-group">
-                                    <input class="form-control form-control-sm edit_contact_number_two" type="text" name="contact_number_two" id="contact_number_two" placeholder="">
+                                    <input class="form-control form-control-sm edit_contact_number_two contract-two" type="text" name="contact_number_two" id="contact_number_two" placeholder="">
                                     <label for="contractNumberTwo">Contact Number Two</label>
                                 </div>
                                 <span id="savForm_error7" hidden></span><span id="updateForm_errorList7" hidden></span>
                             </div>
                             <div class="col-xl-6">
                                 <div class="input-group">
-                                    <input class="form-control form-control-sm edit_whatsapp_number" type="text" name="whatsapp_number" id="whatsapp_number" placeholder="">
+                                    <input class="form-control form-control-sm edit_whatsapp_number contract-whats-app" type="text" name="whatsapp_number" id="whatsapp_number" placeholder="">
                                     <label for="whatsappNumber">WhatsApp Number</label>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                         </div>
                         <div class="row g-3">
                             <div class="btn_box group_btn_box pt-3">
-                                <button id="search_btn" class="btn btn-sm cgt_btn text-white button_width me-1">
+                                <button id="search_btn" class="btn btn-sm cgt_btn text-white button_width btn-line-height me-1">
                                     <span class="search-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                     <span class="search-btn-text">Search</span>
                                 </button>
@@ -140,11 +140,11 @@
                     <div class="row g-2 py-1 px-2">
                         <div class="col-4">
                             <div class="btn_box group_btn_box mt-3">
-                                <button id="save" class="btn btn-sm cgt_btn text-white button_width">
+                                <button id="save" class="btn btn-sm cgt_btn text-white button_width btn-line-height">
                                     <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                     <span class="add-btn-text">Add</span>
                                 </button>
-                                <button id="update_btn" class="btn btn-sm cgt_btn text-white button_width" hidden>
+                                <button id="update_btn" class="btn btn-sm cgt_btn text-white button_width btn-line-height" hidden>
                                     <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                     <span class="update-btn-text">Update</span>
                                 </button>
@@ -152,14 +152,14 @@
                         </div>
                         <div class="col-4">
                             <div class="btn_box group_btn_box mt-3">
-                                <button id="delete_btn" class="btn btn-sm cgt_btn text-white button_width" hidden>
+                                <button id="delete_btn" class="btn btn-sm cgt_btn text-white button_width btn-line-height" hidden>
                                     <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                     <span class="delete-btn-text">Delete</span>
                                 </button>
                             </div>
                         </div>
                         <div class="col-4">
-                            <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn text-white button_width mt-3">
+                            <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn text-white button_width btn-line-height mt-3">
                                 <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                 <span class="cancel-btn-text">Cancel</span>
                             </button>
@@ -179,7 +179,7 @@
                             <span class="pill-danger-rounded ms-1" id="deny_label" hidden> Deny</span>
                         </div>
                         <div class="col-3">
-                            <button id="view_btn" class="btn btn-sm cgt_btn text-white button_width">
+                            <button id="view_btn" class="btn btn-sm cgt_btn text-white button_width btn-line-height">
                                 <span class="view-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                 <span class="view-btn-text">Detail</span>
                             </button>
@@ -276,8 +276,8 @@
           </p>
         </div>
         <div class="modal-footer btn_box group_btn_box" id="logoutModal_footer">
-            <button type="button" class="btn btn-sm cgt_cancel_btn text-white delt_cancel" id="supp_delt4" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-sm cgt_btn text-white delet_btn_user" id="deleteConfirm">
+            <button type="button" class="btn btn-sm cgt_cancel_btn text-white delt_cancel btn-line-height" id="supp_delt4" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-sm cgt_btn text-white delet_btn_user btn-line-height" id="deleteConfirm">
                 <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
                 <span class="btn-text">Delete</span>
             </button>
@@ -402,13 +402,20 @@
 @endsection
 @section('script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/jquery.inputmask.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="{{asset('backend_asset')}}/support_asset/product-item/js/medicine-iteam.min.js"></script>
 <script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
 <script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 @include('super-admin.supplier.supplier-handel-ajax')
-
+<script>
+    $(document).ready(function(){
+        $(".contract-one").inputmask("+(880)-9999-999999");
+        $(".contract-two").inputmask("+(880)-9999-999999");
+        $(".contract-whats-app").inputmask("+(880)-9999-999999");
+    });
+</script>
 <script>
   $(document).ready(function () {
     // Initialize Select2 for branch type

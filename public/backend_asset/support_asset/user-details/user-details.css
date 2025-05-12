@@ -1328,7 +1328,7 @@ a.page-link.btn_page {
 }
 input#date_start,input#date_end {
     font-family: var(--nav-font-family);
-    font-weight: 500;
+    font-weight: 800;
     letter-spacing: 1px;
     cursor: pointer;
     outline: none;
@@ -1339,7 +1339,7 @@ input#date_start,input#date_end {
     border-bottom: 1px solid rgba(0, 123, 255, 0.2);
     border-left: 1px solid rgba(0, 123, 255, 0.2);
     border-right: 1px solid rgba(0, 123, 255, 0.2);
-    animation: text_color 3s infinite;
+    /* animation: text_color 3s infinite; */
     opacity: 1;
     font-size: 12px;
     width: 100%;

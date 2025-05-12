@@ -1,7 +1,7 @@
 :root{
     --dashboard-part-background-image:radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
     --dashboard-part-hover-background-image:radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
-    --dashboard-part-shadow: 0px 2px 20px #0001, 0px 1px 6px #0001;
+    --dashboard-part-shadow: rgba(0, 0, 0, 0.067) 0px 1px 20px, rgba(0, 123, 255, 0.2) 0px 2px 6px;
     --dashboard-part-transition:0.5s;
     --dashboard-part-transform:scale(0.9);
     --dashboard-part-animation-border-top-color-0:white;

@@ -97,8 +97,8 @@ class SupplierServiceProvider
             'bussiness_type' => 'required|max:191',
             'name' => 'required|max:191',
             'current_address' => 'required|max:300',
-            'contact_number_one' => 'required|max:11|unique:suppliers',
-            'contact_number_two' => 'max:11|unique:suppliers',
+            'contact_number_one' => 'required|unique:suppliers',
+            'contact_number_two' => 'unique:suppliers',
         ], [
             'branch_category.required' => 'The branch category required.',
             'branch_id.required' => 'The branch id required.',
@@ -109,9 +109,7 @@ class SupplierServiceProvider
             'name.required' => 'The name is required.',
             'current_address.required' => 'The current address is required.',
             'contact_number_one.required' => 'The contact number is required.',
-            'contact_number_one.max' => 'The contact number may not be greater than 11 digit.',
             'contact_number_one.unique' => 'The contact number has already been taken.',
-            'contact_number_two.max' => 'The contact number may not be greater than 11 digit.',
             'contact_number_two.unique' => 'The contact number has already been taken.',
         ]);
         if($validators->fails()){
@@ -180,8 +178,7 @@ class SupplierServiceProvider
             'bussiness_type' => 'required|max:191',
             'name' => 'required|max:191',
             'current_address' => 'required|max:300',
-            'contact_number_one' => 'required|max:11',
-            'contact_number_two' => 'max:11',
+            'contact_number_one' => 'required',
         ],[
             'branch_category.required' => 'The branch category required.',
             'branch_id.required' => 'The branch id required.',
@@ -192,8 +189,6 @@ class SupplierServiceProvider
             'name.required' => 'The name is required.',
             'current_address.required' => 'The current address is required.',
             'contact_number_one.required' => 'The contact number is required.',
-            'contact_number_one.max' => 'The contact number may not be greater than 11 digit.',
-            'contact_number_two.max' => 'The contact number may not be greater than 11 digit.',
         ]);
         if($validator->fails()){
             return response()->json([

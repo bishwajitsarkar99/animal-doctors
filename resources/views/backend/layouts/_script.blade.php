@@ -7,8 +7,6 @@
 <!--============ Jquery Min Js ============-->
 <!-- JQUERY CDN LINK -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery.inputmask/3.4.4/jquery.inputmask.bundle.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script> -->
 <!-- =============== Jquery Autocomplete Link ============================= -->
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!--========== Ajax-Chart-Js 2.8.0 CDN Link ==========-->

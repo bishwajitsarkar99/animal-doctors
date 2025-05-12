@@ -1072,8 +1072,6 @@
                 $(".contract").inputmask("+(880)-9999-999999");
             });
         </script>
-        <!-- Sweet Alert CDN LINK -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
         <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js"></script>
         <script type="module">
             import { 

@@ -6,8 +6,8 @@
                 <!-- =============== Number of total product ============== -->
                 <div class="row">
                     <div class="col-xl-4">
-                        <span class="plantform produ ps-1">
-                            <svg version="1.1" id="Layer_1" width="15px" height="15px" fill="#333333c9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.88px" height="122.433px" viewBox="0 0 122.88 122.433" enable-background="new 0 0 122.88 122.433" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="122.88,61.217 59.207,122.433 59.207,83.029 0,83.029 0,39.399 59.207,39.399 59.207,0 122.88,61.217"/></g></svg>
+                        <span class="produ ps-1">
+                            <svg version="1.1" id="Layer_1" width="15px" height="15px" fill="#999" x="0px" y="0px" width="122.88px" height="122.433px" viewBox="0 0 122.88 122.433" enable-background="new 0 0 122.88 122.433" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="122.88,61.217 59.207,122.433 59.207,83.029 0,83.029 0,39.399 59.207,39.399 59.207,0 122.88,61.217"/></g></svg>
                             {{__('translate.Total Products')}} <span class="pro_"></span>
                         </span>
                     </div>
@@ -22,8 +22,8 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-4">
-                        <span class="plantform produ ps-1">
-                            <svg version="1.1" id="Layer_1" width="15px" height="15px" fill="#333333c9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.88px" height="122.433px" viewBox="0 0 122.88 122.433" enable-background="new 0 0 122.88 122.433" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="122.88,61.217 59.207,122.433 59.207,83.029 0,83.029 0,39.399 59.207,39.399 59.207,0 122.88,61.217"/></g></svg>
+                        <span class="produ ps-1">
+                            <svg version="1.1" id="Layer_1" width="15px" height="15px" fill="#999" x="0px" y="0px" width="122.88px" height="122.433px" viewBox="0 0 122.88 122.433" enable-background="new 0 0 122.88 122.433" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="122.88,61.217 59.207,122.433 59.207,83.029 0,83.029 0,39.399 59.207,39.399 59.207,0 122.88,61.217"/></g></svg>
                             {{__('translate.Total Category')}} <span class="pro_"></span>
                         </span>
                     </div>
@@ -38,8 +38,8 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-4">
-                        <span class="plantform produ ps-1">
-                            <svg version="1.1" id="Layer_1" width="15px" height="15px" fill="#333333c9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.88px" height="122.433px" viewBox="0 0 122.88 122.433" enable-background="new 0 0 122.88 122.433" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="122.88,61.217 59.207,122.433 59.207,83.029 0,83.029 0,39.399 59.207,39.399 59.207,0 122.88,61.217"/></g></svg>
+                        <span class="produ ps-1">
+                            <svg version="1.1" id="Layer_1" width="15px" height="15px" fill="#999" x="0px" y="0px" width="122.88px" height="122.433px" viewBox="0 0 122.88 122.433" enable-background="new 0 0 122.88 122.433" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="122.88,61.217 59.207,122.433 59.207,83.029 0,83.029 0,39.399 59.207,39.399 59.207,0 122.88,61.217"/></g></svg>
                             {{__('translate.Total Sub-Cateogry')}} <span class="pro_"></span>
                         </span>
                     </div>
@@ -54,8 +54,8 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-4">
-                        <span class="plantform produ ps-1">
-                            <svg version="1.1" id="Layer_1" width="15px" height="15px" fill="#333333c9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.88px" height="122.433px" viewBox="0 0 122.88 122.433" enable-background="new 0 0 122.88 122.433" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="122.88,61.217 59.207,122.433 59.207,83.029 0,83.029 0,39.399 59.207,39.399 59.207,0 122.88,61.217"/></g></svg>
+                        <span class="produ ps-1">
+                            <svg version="1.1" id="Layer_1" width="15px" height="15px" fill="#999" x="0px" y="0px" width="122.88px" height="122.433px" viewBox="0 0 122.88 122.433" enable-background="new 0 0 122.88 122.433" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="122.88,61.217 59.207,122.433 59.207,83.029 0,83.029 0,39.399 59.207,39.399 59.207,0 122.88,61.217"/></g></svg>
                             {{__('translate.Total Brand')}} <span class="pro_"></span>
                         </span>
                     </div>
@@ -72,8 +72,8 @@
             <div class="card form-control form-control-sm mt-3 ps-2 pb-2 pe-2 mb-3 prod_reslt">
                 <div class="row">
                     <div class="col-xl-4">
-                        <span class="plantform produ ps-1">
-                            <svg version="1.1" id="Layer_1" width="15px" height="15px" fill="#333333c9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.88px" height="122.433px" viewBox="0 0 122.88 122.433" enable-background="new 0 0 122.88 122.433" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="122.88,61.217 59.207,122.433 59.207,83.029 0,83.029 0,39.399 59.207,39.399 59.207,0 122.88,61.217"/></g></svg>
+                        <span class="produ ps-1">
+                            <svg version="1.1" id="Layer_1" width="15px" height="15px" fill="#999" x="0px" y="0px" width="122.88px" height="122.433px" viewBox="0 0 122.88 122.433" enable-background="new 0 0 122.88 122.433" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="122.88,61.217 59.207,122.433 59.207,83.029 0,83.029 0,39.399 59.207,39.399 59.207,0 122.88,61.217"/></g></svg>
                             {{__('translate.Total Supplier')}} <span class="pro_"></span>
                         </span>
                     </div>
@@ -88,8 +88,8 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-4">
-                        <span class="plantform produ ps-1">
-                            <svg version="1.1" id="Layer_1" width="15px" height="15px" fill="#333333c9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.88px" height="122.433px" viewBox="0 0 122.88 122.433" enable-background="new 0 0 122.88 122.433" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="122.88,61.217 59.207,122.433 59.207,83.029 0,83.029 0,39.399 59.207,39.399 59.207,0 122.88,61.217"/></g></svg>
+                        <span class="produ ps-1">
+                            <svg version="1.1" id="Layer_1" width="15px" height="15px" fill="#999" x="0px" y="0px" width="122.88px" height="122.433px" viewBox="0 0 122.88 122.433" enable-background="new 0 0 122.88 122.433" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="122.88,61.217 59.207,122.433 59.207,83.029 0,83.029 0,39.399 59.207,39.399 59.207,0 122.88,61.217"/></g></svg>
                             {{__('translate.Total Vendor')}} <span class="pro_"></span>
                         </span>
                     </div>

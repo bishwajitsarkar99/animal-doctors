@@ -430,13 +430,14 @@
             @if(isset($page_name) && $page_name)
                 <ol class="breadcrumb">
                     <span class="das_head ps-1 pe-1 mt-1">
-                        <li class="breadcrumb-item active font_color_focus">{{$page_name}}</li>
+                        <!-- active -->
+                        <li class="breadcrumb-item font_color_focus">{{$page_name}}</li>
                     </span>
                 </ol>
             @else
                 <ol class="breadcrumb">
                     <span class="das_head ps-1 pe-1 mt-1">
-                        <li class="breadcrumb-item active font_color_focus">{{ __('translate.Dashboard') }}</li>
+                        <li class="breadcrumb-item font_color_focus">{{ __('translate.Dashboard') }}</li>
                     </span>
                 </ol>
             @endif
@@ -444,21 +445,21 @@
         @if(auth()->user()->role ==2)
         <ol class="breadcrumb">
             <span class="das_head ps-1 pe-1 mt-1">
-                <li class="breadcrumb-item active font_color_focus">{{__('translate.Home')}}</li>
+                <li class="breadcrumb-item font_color_focus">{{__('translate.Home')}}</li>
             </span>
         </ol>
         @endif
         @if(auth()->user()->role ==3)
         <ol class="breadcrumb">
             <span class="das_head ps-1 pe-1 mt-1">
-                <li class="breadcrumb-item active font_color_focus">{{__('translate.Home')}}</li>
+                <li class="breadcrumb-item font_color_focus">{{__('translate.Home')}}</li>
             </span>
         </ol>
         @endif
         @if(auth()->user()->role ==0)
         <ol class="breadcrumb">
             <span class="das_head ps-1 pe-1 mt-1">
-                <li class="breadcrumb-item active font_color_focus">{{__('translate.Home')}}</li>
+                <li class="breadcrumb-item font_color_focus">{{__('translate.Home')}}</li>
             </span>
         </ol>
         @endif

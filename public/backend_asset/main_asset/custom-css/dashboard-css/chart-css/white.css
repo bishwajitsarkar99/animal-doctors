@@ -1,5 +1,5 @@
 :root{
-    --dashboard-chart-box-shadow:0px 2px 20px #0001, 0px 1px 6px #0001;
+    --dashboard-chart-box-shadow:rgba(0, 0, 0, 0.067) 0px 1px 20px, rgba(0, 123, 255, 0.2) 0px 2px 6px;
     --dashboard-chart-background-image:radial-gradient(farthest-corner at 100px 100px, white, white);
     --dashboard-chart-hover-background-image:radial-gradient(farthest-corner at 100px 100px, white, white);
     --dashboard-chart-transition: 0.5s;

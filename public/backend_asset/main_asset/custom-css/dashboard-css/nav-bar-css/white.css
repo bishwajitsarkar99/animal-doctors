@@ -1,6 +1,6 @@
 :root{
     --dashbord-nav-bar-background-image:none;
-    --dashbord-nav-bar-shadow:0px 2px 20px #0001, 0px 1px 6px #0001;
+    --dashbord-nav-bar-shadow:rgba(0, 0, 0, 0.067) 0px 1px 20px, rgba(0, 123, 255, 0.2) 0px 2px 6px;
     --dashbord-nav-bar-height:1.9;
     --dashbord-nav-bar-opacity:1;
     --dashbord-nav-bar-icon-color:white;

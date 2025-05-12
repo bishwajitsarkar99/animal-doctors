@@ -130,10 +130,6 @@
                         <canvas id="allUserDateLogChart" height="36"></canvas>
                     </div>
                     <div class="dual-range-container">
-                        <!-- <label>Start: <span id="leftPercentLabel">0%</span></label>
-                        <input type="range" id="rangeLeftSlider" min="0" max="365" value="0" class="dual-range">
-                        <label>End: <span id="rightPercentLabel">0%</span></label>
-                        <input type="range" id="rangeRightSlider" min="0" max="365" value="365" class="dual-range"> -->
                         <div class="slider-wrapper-first">
                             <span id="leftTooltip" class="range-tooltip">0%</span>
                             <input type="range" id="rangeLeftSlider" min="0" max="365" value="0" class="dual-range">
@@ -235,6 +231,33 @@
         gradientUsers.addColorStop(0, 'rgba(0, 0, 255, 0.5)');  // blue at top
         gradientUsers.addColorStop(1, 'rgba(0, 0, 255, 0)');    // transparent at bottom
 
+        // Pointer Design rectangle candle
+        function createCandlePointStyle(color = 'black') {
+            const canvas = document.createElement('canvas');
+            canvas.width = 20;  // wider
+            canvas.height = 40; // taller
+            const ctx = canvas.getContext('2d');
+
+            // Draw wick (centered)
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2, canvas.height);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw body (rectangle candle)
+            const bodyWidth = 8;
+            const bodyHeight = 20;
+            const bodyX = (canvas.width - bodyWidth) / 2;
+            const bodyY = (canvas.height - bodyHeight) / 2;
+
+            ctx.fillStyle = color;
+            ctx.fillRect(bodyX, bodyY, bodyWidth, bodyHeight);
+
+            return canvas;
+        }
+        
         userDayLogChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -247,9 +270,7 @@
                     borderWidth: 1,
                     fill: false,
                     tension: 0.4,
-                    pointStyle: 'rectRounded',
-                    pointRadius: 3,
-                    pointHoverRadius: 8,
+                    pointStyle: createCandlePointStyle('darkgreen'),
                     pointBackgroundColor: "darkgreen",
                 }, {
                     label: "Logout",
@@ -259,9 +280,7 @@
                     borderWidth: 1,
                     fill: false, 
                     tension: 0.4,
-                    pointStyle: 'triangle',
-                    pointRadius: 3,
-                    pointHoverRadius: 8,
+                    pointStyle: createCandlePointStyle('#e74a3b'),
                     pointBackgroundColor: "#e74a3b",
                 }, {
                     label: "Users Activity",
@@ -271,9 +290,7 @@
                     borderWidth: 1,
                     fill: false,
                     tension: 0.4,
-                    pointStyle: 'circle',
-                    pointRadius: 3,
-                    pointHoverRadius: 8,
+                    pointStyle: createCandlePointStyle('blue'),
                     pointBackgroundColor: "blue",
                 }]
             },
@@ -573,6 +590,33 @@
                     const gradientUsers = ctx.createLinearGradient(0, 0, 0, 400);
                     gradientUsers.addColorStop(0, 'rgba(0, 123, 255, 0.2)');
                     gradientUsers.addColorStop(1, 'rgba(0,0,255,0)');
+
+                    // Pointer Design rectangle candle
+                    function createCandlePointStyle(color = 'black') {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = 20;  // wider
+                        canvas.height = 40; // taller
+                        const ctx = canvas.getContext('2d');
+
+                        // Draw wick (centered)
+                        ctx.beginPath();
+                        ctx.moveTo(canvas.width / 2, 0);
+                        ctx.lineTo(canvas.width / 2, canvas.height);
+                        ctx.strokeStyle = color;
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        // Draw body (rectangle candle)
+                        const bodyWidth = 8;
+                        const bodyHeight = 20;
+                        const bodyX = (canvas.width - bodyWidth) / 2;
+                        const bodyY = (canvas.height - bodyHeight) / 2;
+
+                        ctx.fillStyle = color;
+                        ctx.fillRect(bodyX, bodyY, bodyWidth, bodyHeight);
+
+                        return canvas;
+                    }
                     
                     // Montly Basis Data Line Chart
                     chart = new Chart(ctx, {
@@ -589,9 +633,8 @@
                                     fill: true,
                                     tension: 0.4,
                                     borderWidth: 1,
-                                    pointRadius: 5,
-                                    pointHoverRadius: 8,
-                                    pointBackgroundColor: "darkgreen"
+                                    pointStyle: createCandlePointStyle('darkgreen'),
+                                    pointHoverBackgroundColor: "darkgreen"
                                 },
                                 {
                                     type: 'line',
@@ -602,9 +645,8 @@
                                     fill: true,
                                     tension: 0.4,
                                     borderWidth: 1,
-                                    pointRadius: 5,
-                                    pointHoverRadius: 8,
-                                    pointBackgroundColor: "#e74a3b"
+                                    pointStyle: createCandlePointStyle('#e74a3b'),
+                                    pointHoverBackgroundColor: "#e74a3b"
                                 },
                                 {
                                     type: 'line',
@@ -615,9 +657,8 @@
                                     fill: true,
                                     tension: 0.4,
                                     borderWidth: 1,
-                                    pointRadius: 5,
-                                    pointHoverRadius: 8,
-                                    pointBackgroundColor: "#4e73df"
+                                    pointStyle: createCandlePointStyle('#4e73df'),
+                                    pointHoverBackgroundColor: "#4e73df"
                                 }
                             ]
                         },
@@ -865,23 +906,25 @@
             });
         }
         analyticalChartFetch();
-        // update data according date range
-        $("#chartStartDate, #chartEndDate").on('change', function () {
-            analyticalChartFetch();
-        });
         // input range id initialize
         const sliderLeft = document.getElementById('rangeLeftSlider');
         const sliderRight = document.getElementById('rangeRightSlider');
         const startInput = document.getElementById('chartStartDate');
         const endInput = document.getElementById('chartEndDate');
 
-        const currentYear = new Date().getFullYear();
+        const today = new Date();
+        const currentYear = today.getFullYear();
         const baseStartDate = new Date(currentYear, 0, 1); // Jan 1 current year
+        const diffInMs = today - baseStartDate;
+        const offsetInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+        sliderRight.value = offsetInDays;
 
         // Helper to format DD-MM-YYYY
         function formatDate(date) {
             const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = monthNames[date.getMonth()];
             const year = date.getFullYear();
             return `${day}-${month}-${year}`;
         }
@@ -890,11 +933,15 @@
             const fromOffset = parseInt(sliderLeft.value);
             const toOffset = parseInt(sliderRight.value);
 
+            // Start Date
             const fromDate = new Date(baseStartDate);
             fromDate.setDate(baseStartDate.getDate() + fromOffset);
+            // fromDate.setDate(baseStartDate.getDate() + fromOffset - 1);
 
+            // Current End Date
             const toDate = new Date(baseStartDate);
-            toDate.setDate(baseStartDate.getDate() + toOffset);
+            // toDate.setDate(baseStartDate.getDate() + toOffset);
+            toDate.setDate(baseStartDate.getDate() + toOffset - 1);
 
             startInput.value = formatDate(fromDate);
             endInput.value = formatDate(toDate);
@@ -920,8 +967,13 @@
             const leftTooltip = document.getElementById('leftTooltip');
             const rightTooltip = document.getElementById('rightTooltip');
 
-            leftTooltip.textContent = `${leftPercent.toFixed(0)}%`;
-            rightTooltip.textContent = `${rightPercent.toFixed(0)}%`;
+            // Show percentage in tooltip
+            // leftTooltip.textContent = `${leftPercent.toFixed(0)}%`;
+            // rightTooltip.textContent = `${rightPercent.toFixed(0)}%`;
+
+            // Show Date in tooltip
+            leftTooltip.textContent = startInput.value;
+            rightTooltip.textContent = endInput.value;
 
             positionTooltip(sliderLeft, leftTooltip);
             positionTooltip(sliderRight, rightTooltip);
@@ -960,6 +1012,10 @@
             }
             updateDateInputs();
             debouncedFetch();
+        });
+        // update data according date range
+        $("#chartStartDate, #chartEndDate").on('change', function () {
+            analyticalChartFetch();
         });
         // Initialize sliders on page load
         sliderLeft.value = 0;
