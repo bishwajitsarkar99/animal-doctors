@@ -39,7 +39,7 @@ return[
     // Medicine Part
     'Medicine-Component'=>'ঔষধ-উপাদান',
     'Add Medicine Name'=>'ওষুধের নাম যোগ করুন',
-    'ADD Name'=>'নাম যোগ করুন',
+    'ADD Medicine Name'=>'ওষুধের নাম যোগ করুন',
     'Add Medicine Dosage'=>'ওষুধের ডোজ যোগ করুন',
     'Delete Medicine Dosage'=>'ওষুধের ডোজ মুছুন',
     'ADD Dosage'=>'ডোজ যোগ করুন',

@@ -101,33 +101,49 @@
 </script>
 
 <script>
-    // Full Screen--------------
     var screenMode = document.getElementById("myscreen");
-    //open
-    function openFullscreen() {
-        if (screenMode.requestFullscreen) {
-            screenMode.requestFullscreen();
+    var screenModeOn = document.getElementById("screenopen");
+    var screenModeOff = document.getElementById("screenclose");
 
-        } else if (screenMode.webkitRequestFullScreen) {
-            screenMode.webkitRequestFullScreen();
-        } else if (screenMode.msRequestFullScreen) {
-            screenMode.msRequestFullScreen();
+    // Open Fullscreen
+    function openFullscreen() {
+        const elem = document.documentElement; // or any specific element you want fullscreen
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
         }
 
+        screenModeOn.setAttribute('hidden', true);
+        screenModeOff.removeAttribute('hidden');
     }
 
-    // close
+    // Close Fullscreen
     function closeFullscreen() {
         if (document.exitFullscreen) {
             document.exitFullscreen();
         } else if (document.webkitExitFullscreen) {
-            /* Safari */
             document.webkitExitFullscreen();
         } else if (document.msExitFullscreen) {
-            /* IE11 */
             document.msExitFullscreen();
         }
+
+        screenModeOn.removeAttribute('hidden');
+        screenModeOff.setAttribute('hidden', true);
     }
+
+    // Scrolbar Enable When Full Screen Mode
+    document.addEventListener("fullscreenchange", () => {
+        if (document.fullscreenElement) {
+            // Fullscreen enabled
+            document.body.style.overflow = 'auto';
+        } else {
+            // Exited fullscreen
+            document.body.style.overflow = '';
+        }
+    });
 </script>
 
 <script>

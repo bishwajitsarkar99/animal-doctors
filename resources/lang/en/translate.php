@@ -37,7 +37,7 @@ return[
     // Medicine
     'Medicine-Component'=>'Medicine-Component',
     'Add Medicine Name'=>'Add Medicine Name',
-    'ADD Name'=>'ADD Name',
+    'ADD Medicine Name'=>'ADD Medicine Name',
     'Add Medicine Dosage'=>'Add Medicine Dosage',
     'Delete Medicine Dosage'=>'Delete Medicine Dosage',
     'ADD Dosage'=>'ADD Dosage',

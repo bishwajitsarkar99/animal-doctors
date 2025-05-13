@@ -125,11 +125,11 @@
                 </div>
                 <!-- Total all data chart -->
                 <div class="user-activities--month-chart">
-                    <canvas id="userAllLogChart" height="80"></canvas>
                     <div class="chart-scrollbar-responsive">
+                        <canvas id="userAllLogChart" height="80"></canvas>
                         <canvas id="allUserDateLogChart" height="36"></canvas>
                     </div>
-                    <div class="dual-range-container">
+                    <div class="dual-range-container mt-2" id="dateRange">
                         <div class="slider-wrapper-first">
                             <span id="leftTooltip" class="range-tooltip">0%</span>
                             <input type="range" id="rangeLeftSlider" min="0" max="365" value="0" class="dual-range">
@@ -138,8 +138,9 @@
                             <span id="rightTooltip" class="range-tooltip">0%</span>
                             <input type="range" id="rangeRightSlider" min="0" max="365" value="365" class="dual-range">
                         </div>
-                        <div class="range-track"></div>
-                        <img class="full-width-img" src="/image/LineChart.PNG" alt="Chart" />
+                        <div class="range-track">
+                            <img class="full-width-img" src="/image/LineChart3.PNG" alt="Chart" />
+                        </div>
                     </div>
                 </div>
             </div>

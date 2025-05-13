@@ -3,7 +3,7 @@
 @include('backend.layouts.dashboard-components._navbar')
 
   <div class="container">
-    <div class="card form-control form-control-sm" id="category_page">
+    <div class="card form-control form-control-sm" id="branch_page">
       <div class="card-body" id="table_card_body">
         <div class="row">
           <div class="col-xl-12">
@@ -13,7 +13,7 @@
               <input id="branch_id" type="text" name="branch_id" class="branch_id_field branch_id" hidden />
               <form autocomplete="off">
                 @csrf
-                <div class="row">
+                <div class="row form-topbar">
                   <div class="col-xl-2">
                     <button type="button" class="btn btn-sm cgt_btn btn_focus skeleton-button" id="branchTypeModalView">
                       <span class="icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
@@ -123,6 +123,10 @@
                     <p class="ps-1 mt-1"><span id="success_message"></span></p>
                   </div>
                   <div class="col-xl-2 action_group">
+                    <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton-button">
+                      <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                      <span class="cancel-btn-text">Cancel</span>
+                    </button>
                     <button type="button" class="btn btn-sm cgt_btn btn_focus skeleton-button" id="save">
                       <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                       <span class="add-btn-text">Add</span>
@@ -134,10 +138,6 @@
                     <button type="button" id="deleteLoader" class="btn btn-sm cgt_btn btn_focus skeleton-button" hidden>
                       <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                       <span class="delete-btn-text">Delete</span>
-                    </button>
-                    <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn btn_focus skeleton-button">
-                      <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                      <span class="cancel-btn-text">Cancel</span>
                     </button>
                   </div>
                 </div>

@@ -27,7 +27,7 @@
                         {selector: '.image-box, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
                         {selector: '#com_address', type: 'class', name: 'address-skeleton'},
                         {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
-                        {selector: '#company_info, #personal_info, #branch_info, #role_info', type: 'class', name: 'profile-head-skeleton'},
+                        {selector: '#company_info, #personal_info, #branch_information, #role_info', type: 'class', name: 'profile-head-skeleton'},
                     ]);
                 });
     
@@ -38,7 +38,7 @@
                             {selector: '.image-box, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
                             {selector: '#com_address', type: 'class', name: 'address-skeleton'},
                             {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
-                            {selector: '#company_info, #personal_info, #branch_info, #role_info', type: 'class', name: 'profile-head-skeleton'},
+                            {selector: '#company_info, #personal_info, #branch_information, #role_info', type: 'class', name: 'profile-head-skeleton'},
                         ]);
                     });
                 }, 3000);

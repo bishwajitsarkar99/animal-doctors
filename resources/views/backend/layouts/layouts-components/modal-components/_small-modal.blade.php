@@ -44,7 +44,7 @@
             </div>
         </div>
     </div>
-    <div class="modal-footer" id="logoutModal_footer" style="background: transparent;background-image: repeating-linear-gradient(55deg, #5fd3cd7d, transparent 1px);">
+    <div class="modal-footer" id="logoutModal_footer" style="background: transparent;background-image: repeating-linear-gradient(55deg, #5fd3cd7d, transparent 1px);justify-content: space-around;display:flex;">
         <p id="logout_btn_group">
             <a type="button" class="btn btn-danger modal_button logout_button" data-bs-dismiss="modal">
                 {{__('translate.Cancel')}}

@@ -171,7 +171,7 @@
             <nav class="sb-sidenav-menu-nested nav child-tree">
                 <a class="nav-link underline nav_space load-page {{Request::routeIs('medicine-name.index') ? 'active' : '' }}" href="{{route('medicine-name.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
-                    <span class="{{ setting('medicine_visual') }}">{{__('translate.ADD Name')}}</span>
+                    <span class="{{ setting('medicine_visual') }}">{{__('translate.ADD Medicine Name')}}</span>
                 </a>
                 <a class="nav-link underline nav_space load-page {{Request::routeIs('medicine-dogs.index') ? 'active' : '' }}" href="{{route('medicine-dogs.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
