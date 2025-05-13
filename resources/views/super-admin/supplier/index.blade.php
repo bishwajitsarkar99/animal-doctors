@@ -140,11 +140,11 @@
                     <div class="row g-2 py-1 px-2">
                         <div class="col-4">
                             <div class="btn_box group_btn_box mt-3">
-                                <button id="save" class="btn btn-sm cgt_btn text-white button_width btn-line-height">
+                                <button id="save" class="btn btn-sm cgt_btn text-white button_width">
                                     <span class="add-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                     <span class="add-btn-text">Add</span>
                                 </button>
-                                <button id="update_btn" class="btn btn-sm cgt_btn text-white button_width btn-line-height" hidden>
+                                <button id="update_btn" class="btn btn-sm cgt_btn text-white button_width" hidden>
                                     <span class="update-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                     <span class="update-btn-text">Update</span>
                                 </button>
@@ -152,14 +152,14 @@
                         </div>
                         <div class="col-4">
                             <div class="btn_box group_btn_box mt-3">
-                                <button id="delete_btn" class="btn btn-sm cgt_btn text-white button_width btn-line-height" hidden>
+                                <button id="delete_btn" class="btn btn-sm cgt_btn text-white button_width" hidden>
                                     <span class="delete-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                     <span class="delete-btn-text">Delete</span>
                                 </button>
                             </div>
                         </div>
                         <div class="col-4">
-                            <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn text-white button_width btn-line-height mt-3">
+                            <button id="cancel_btn" type="reset" class="btn btn-sm cgt_cancel_btn text-white button_width mt-3">
                                 <span class="cancel-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                 <span class="cancel-btn-text">Cancel</span>
                             </button>
@@ -179,7 +179,7 @@
                             <span class="pill-danger-rounded ms-1" id="deny_label" hidden> Deny</span>
                         </div>
                         <div class="col-3">
-                            <button id="view_btn" class="btn btn-sm cgt_btn text-white button_width btn-line-height">
+                            <button id="view_btn" class="btn btn-sm cgt_btn text-white button_width">
                                 <span class="view-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                                 <span class="view-btn-text">Detail</span>
                             </button>
@@ -222,7 +222,7 @@
     <div class="modal-dialog">
         <div class="modal-content" id="admin_modal_box">
             <div class="modal-header profile_modal_header profilesetting_modal_header">
-                <h5 class="modal-title head_title ps-1 pe-1" id="staticBackdropLabels" style="color:black;">
+                <h5 class="modal-title head_title ps-1 pe-1" id="staticBackdropLabels" style="color:#222;">
                     Delete Supplier Or Vendor
                 </h5>
                 <button type="button" class="btn-close btn-btn-sm cols_title" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
@@ -235,7 +235,7 @@
                             <div id="active_loader"></div>
                             <label class="label_user_edit" for="id" id="supp_delt2">ID : </label>
                             <input type="text" class="mt-3 update_id id" id="delete_supplier_id" readonly><br>
-                            <span class="label_user_edit" id="supp_delt3">Are you sure? Would you like to delete the <span id="suppName"></span> (<span id="suppType"></span>), permanently?</span>
+                            <p class="label_user_edit" id="supp_delt3">Are you sure? Would you like to delete the <span id="suppName"></span> (<span id="suppType"></span>), permanently?</p>
                             <input type="hidden" id="delete_supplier_id" name="supplier_id">
                         </div>
                     </div>
@@ -276,8 +276,8 @@
           </p>
         </div>
         <div class="modal-footer btn_box group_btn_box" id="logoutModal_footer">
-            <button type="button" class="btn btn-sm cgt_cancel_btn text-white delt_cancel btn-line-height" id="supp_delt4" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-sm cgt_btn text-white delet_btn_user btn-line-height" id="deleteConfirm">
+            <button type="button" class="btn btn-sm cgt_cancel_btn text-white delt_cancel" id="supp_delt4" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-sm cgt_btn text-white delet_btn_user" id="deleteConfirm">
                 <i class="delete-icon fa fa-spinner fa-spin delete-hidden"></i>
                 <span class="btn-text">Delete</span>
             </button>
@@ -410,10 +410,28 @@
 <script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 @include('super-admin.supplier.supplier-handel-ajax')
 <script>
+    // Hover Show Input Mask
+    // $(document).ready(function(){
+    //     $(".contract-one").inputmask("+(880)-9999-999999");
+    //     $(".contract-two").inputmask("+(880)-9999-999999");
+    //     $(".contract-whats-app").inputmask("+(880)-9999-999999");
+    // });
+    
+    // Click Input Mask Show
     $(document).ready(function(){
-        $(".contract-one").inputmask("+(880)-9999-999999");
-        $(".contract-two").inputmask("+(880)-9999-999999");
-        $(".contract-whats-app").inputmask("+(880)-9999-999999");
+        function handleMaskOnFocusBlur(selector) {
+            $(document).on('focus', selector, function() {
+                $(this).inputmask("+(880)-9999-999999");
+            });
+
+            $(document).on('blur', selector, function() {
+                $(this).inputmask('remove');
+            });
+        }
+
+        handleMaskOnFocusBlur(".contract-one");
+        handleMaskOnFocusBlur(".contract-two");
+        handleMaskOnFocusBlur(".contract-whats-app");
     });
 </script>
 <script>

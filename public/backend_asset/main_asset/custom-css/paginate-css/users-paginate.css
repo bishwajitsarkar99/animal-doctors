@@ -671,12 +671,12 @@ input#search:focus{
 }
 h5#staticBackdropLabels {
     color: darkgoldenrod;
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
-    font-variant: all-petite-caps;
+    text-transform: uppercase;
     color: darkgoldenrod;
-    margin-top: -0.3em;
+    margin-top: 0.1em;
     animation: 2s infinite;
 }
 div#deleteuser {

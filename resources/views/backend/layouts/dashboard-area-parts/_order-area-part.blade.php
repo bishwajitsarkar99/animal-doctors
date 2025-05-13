@@ -1,27 +1,26 @@
 <!-- =============== Order-Area-Part ====================== -->
 <div class="card form-control form-control-sm" id="totalOrder">
-    <span class="sb-sidenav-collapse-arrow" id="orders_part" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Orders-Area')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-        <p class="form-check form-switch order_area mt-3">
+    <span class="sb-sidenav-collapse-arrow" id="orders_part" data-bs-toggle="tooltip"  data-bs-placement="top" title="{{__('translate.Orders-Area')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+        <span class="form-check form-switch order_area">
             <input class="form-check-input ordrs" onclick="myOrderFunction()" type="checkbox" id="orders_box" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
             <label class="form-check-label" for="collapseExample"><span class="smy">
-                <span><span class=""><span class="of_switch pt-1 pb-1 marg color_showup" id="span1">off</span></span>
+                <span><span class=""><span class="of_switch marg color_showup" id="span1">off</span></span>
             </label>
-        </p>
+        </span>
         <span class="ps-1 ms-5">
             <div class="loader_order_part ms-5" id="order_part_loader" hidden></div>
         </span>
     </span>
-
 </div>
 <!-- =======ORDER BODY PART======== -->
 <div class="row collapse" id="collapseExample">
-    <div class="col-xl-6">
+    <div class="col-xl-12">
         <div class="row" id="displayOrder">
             @include('backend.layouts.dashboard-area-parts.order-area-body-parts._order-body-part')
 
         </div>
     </div>
-    <div class="col-xl-6" id="orderChart">
+    <div class="col-xl-12" id="orderChart">
         @include('backend.layouts.dashboard-area-parts.order-area-body-parts._order-chart')
     </div>
     <div class="col-xl-12">

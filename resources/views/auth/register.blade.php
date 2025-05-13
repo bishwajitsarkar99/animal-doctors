@@ -1068,8 +1068,23 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
+            // Hover Input Mask Show
+            // $(document).ready(function(){
+            //     $(".contract").inputmask("+(880)-9999-999999");
+            // });
+            // Click Input Mask Show
             $(document).ready(function(){
-                $(".contract").inputmask("+(880)-9999-999999");
+                function handleMaskOnFocusBlur(selector) {
+                    $(document).on('focus', selector, function() {
+                        $(this).inputmask("+(880)-9999-999999");
+                    });
+
+                    $(document).on('blur', selector, function() {
+                        $(this).inputmask('remove');
+                    });
+                }
+
+                handleMaskOnFocusBlur(".contract");
             });
         </script>
         <script type="module" src="{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js"></script>

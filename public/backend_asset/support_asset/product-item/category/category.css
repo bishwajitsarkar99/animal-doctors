@@ -8,7 +8,7 @@
     --apperence-app-setting-bg:linear-gradient(to bottom, #08a05c,#08a05c);
     --drop-border-bg-color:white;
     --inventory-navbar-btn-background-image-hover:linear-gradient(5deg, silver, transparent,silver,lightgray);
-    --btn-btn-sm-font-family:normal 600 12px / 20px "Poppins", Helvetica, Arial, Verdana, sans-serif;
+    --btn-btn-sm-font-family:Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
     /* --category-font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; */
     --category-font-family:Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
     /* #e1e1e1 */
