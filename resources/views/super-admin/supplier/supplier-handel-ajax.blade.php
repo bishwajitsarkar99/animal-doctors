@@ -403,14 +403,14 @@
         });
 
         // Select Supplier Or Vendor Name Search Menu
-        $(document).on('change', '#search_branch', function(){
-            var selectValue = $(this).val();
-            if(selectValue !== "") {
-                $("#search_supplier").next('.select2-container').removeClass('is-select-invalid').addClass('is-select-valid');
-            }else{
-                $("#search_supplier").next('.select2-container').removeClass('is-select-invalid is-select-valid');
-            }
-        });
+        // $(document).on('change', '#search_branch', function(){
+        //     var selectValue = $(this).val();
+        //     if(selectValue !== "") {
+        //         $("#search_supplier").next('.select2-container').removeClass('is-select-invalid').addClass('is-select-valid');
+        //     }else{
+        //         $("#search_supplier").next('.select2-container').removeClass('is-select-invalid is-select-valid');
+        //     }
+        // });
 
         // Confirm Update Supplier Contact Modal
         $(document).on('click', '#update_btn', function(e){
