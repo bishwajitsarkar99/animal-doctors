@@ -225,7 +225,7 @@
         </div>
     </div>
 </div>
-<div class="row mb-5 mt-4">
+<div class="row mt-4">
     <div class="col-xl-12">
         <div class="card user_line_chart" id="orderChart">
             <div class="card-header bar-header ps-2" style="text-align:center;">

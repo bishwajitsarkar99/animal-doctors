@@ -25,6 +25,16 @@ htm,body{
     padding: 0;
     margin: 0;
 }
+.activity-table-responsive{
+    overflow-y: auto !important;
+    overflow-x: auto !important;
+    max-height: 480px !important;
+}
+.activity-tab-responsive{
+    overflow-y: auto !important;
+    overflow-x: auto !important;
+    max-height: 600px !important;
+}
 .chart-scrollbar-responsive {
     width: 100%;
     overflow-x: auto;

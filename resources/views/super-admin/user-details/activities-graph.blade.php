@@ -99,7 +99,7 @@
     </div>
 </div>
 <div class="container">
-    <div class="row mb-5 mt-2">
+    <div class="row mt-2">
         <div class="col-xl-12">
             <div class="card card-body chart-card">
                 <div class="card-header mini-bar-header ps-2" style="text-align:center;">

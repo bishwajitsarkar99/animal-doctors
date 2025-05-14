@@ -20,7 +20,7 @@
         </button>
       </li>
     </ul>
-    <div class="tab-content" id="showCard" style="background:white;padding-bottom:15px;" hidden>
+    <div class="tab-content activity-tab-responsive" id="showCard" style="background:white;padding-bottom:15px;" hidden>
       <div id="home" class="container tab-pane active"><br>
         @include('super-admin.user-details.user-graph')
       </div>

@@ -27,50 +27,52 @@
             </span>
         </div>
     </div>
-    <div class="table-responsive">
+    <div class="table-light activity-table-responsive">
         <table class="bg-white table-light ord_table center border-1 mt-2">
-            <tr class="table-light table-row order_body acc_setting_table">
-                <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="id" data-order="desc" class="table_th_color txt ps-2 pe-1">
-                    ID
-                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
-                </th>
-                <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="name" data-order="desc" class="table_th_color txt ps-1" hidden>
-                    Name
-                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
-                </th>
-                <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="email" data-order="desc" class="table_th_color txt ps-1">
-                    Email
-                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
-                </th>
-                <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="ip_address" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: center;">
-                    IP
-                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
-                </th>
-                <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="user_agent" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: left;" hidden>
-                    User Agent
-                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
-                </th>
-                <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="payload" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: left;">
-                    Payload
-                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
-                </th>
-                <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="last_activity" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: left;" hidden>
-                    Last_activity
-                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
-                </th>
-                <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="login" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: left;">
-                    Login
-                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
-                </th>
-                <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="logout" data-order="desc" class="table_th_color tot_pending_ ps-1">
-                    Logout
-                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
-                </th>
-                <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="last_activity" data-order="desc" class="table_th_color tot_pending_ ps-1">
-                    Activity
-                    <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
-                </th>
-            </tr>
+            <thead>
+                <tr class="table-light table-row order_body acc_setting_table">
+                    <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="id" data-order="desc" class="table_th_color txt ps-2 pe-1">
+                        ID
+                        <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                    </th>
+                    <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="name" data-order="desc" class="table_th_color txt ps-1" hidden>
+                        Name
+                        <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                    </th>
+                    <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="email" data-order="desc" class="table_th_color txt ps-1">
+                        Email
+                        <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                    </th>
+                    <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="ip_address" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: center;">
+                        IP
+                        <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                    </th>
+                    <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="user_agent" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: left;" hidden>
+                        User Agent
+                        <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                    </th>
+                    <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="payload" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: left;">
+                        Payload
+                        <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                    </th>
+                    <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="last_activity" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: left;" hidden>
+                        Last_activity
+                        <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                    </th>
+                    <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="login" data-order="desc" class="table_th_color tot_pending_ ps-1" style="text-align: left;">
+                        Login
+                        <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                    </th>
+                    <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="logout" data-order="desc" class="table_th_color tot_pending_ ps-1">
+                        Logout
+                        <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                    </th>
+                    <th id="th_sort" style="background-color: white;cursor: pointer;" data-coloumn="last_activity" data-order="desc" class="table_th_color tot_pending_ ps-1">
+                        Activity
+                        <svg width="12px" height="12px" fill="#333333a1" version="1.1" id="Layer_1" x="0px" y="0px" width="122.433px" height="122.88px" viewBox="0 0 122.433 122.88" enable-background="new 0 0 122.433 122.88" xml:space="preserve"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>
+                    </th>
+                </tr>
+            </thead>
             <tbody class="bg-white table-light" id="user_activites_data_table">
     
             </tbody>
