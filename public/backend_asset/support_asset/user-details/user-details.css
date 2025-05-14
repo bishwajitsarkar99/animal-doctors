@@ -107,6 +107,16 @@ htm,body{
 .ui-menu-item-wrapper span {
     margin-left: 10px;
 }
+.filter-box{
+    border-bottom: 1px solid rgba(0, 123, 255, 0.2);
+    border-left: 1px solid rgba(0, 123, 255, 0.2);
+    border-top: 1px solid rgba(0, 123, 255, 0.2);
+    border-right: none;
+    height: 25px;
+    margin-top: -2px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
 .form-control-sm {
     /* min-height: calc(1.5em + 0.5rem + 2px); */
     min-height: calc(1.5em + 0.1rem + 1px);
@@ -1309,7 +1319,7 @@ a.page-link.btn_page {
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     border-top: 1px solid rgba(0, 123, 255, 0.2) !important;
     border-bottom: 1px solid rgba(0, 123, 255, 0.2) !important;
-    border-left: 1px solid rgba(0, 123, 255, 0.2) !important;
+    border-left: none !important;
     border-right: 1px solid rgba(0, 123, 255, 0.2) !important;
     box-shadow: 0px 2px 20px #0001;
     background-image: linear-gradient(to bottom, white 0%, white, white 100%);
@@ -1371,13 +1381,20 @@ input#date_start:focus,input#date_end:focus,#search:focus{
     }
 }
 input#search::placeholder{
-    color: rgb(201, 201, 201);
+    color: rgb(179, 179, 179);
 }
-input::placeholder{
-    color: rgb(201, 201, 201);
+input#date_start::placeholder{
+    color: rgb(179, 179, 179);
+    font-size:11px;
+    font-weight:800;
+}
+input#date_end::placeholder{
+    color: rgb(179, 179, 179);
+    font-size:11px;
+    font-weight:800;
 }
 select::placeholder{
-    color: rgb(201, 201, 201);
+    color: rgb(179, 179, 179);
     font-weight: 800;
 }
 th#th_sort {

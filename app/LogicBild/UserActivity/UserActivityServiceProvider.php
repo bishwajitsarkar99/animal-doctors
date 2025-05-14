@@ -98,9 +98,14 @@ class UserActivityServiceProvider
     public function getActivities(Request $request)
     {
         // Start of the week on Sunday
-        $startOfWeek = Carbon::now()->startOfWeek(Carbon::SUNDAY);
+        //$startOfWeek = Carbon::now()->startOfWeek(Carbon::SUNDAY);
         // End of the week on Saturday
-        $endOfWeek = Carbon::now()->endOfWeek(Carbon::SATURDAY);
+        //$endOfWeek = Carbon::now()->endOfWeek(Carbon::SATURDAY);
+
+        // Start of the day
+        $startOfDay = Carbon::now()->startOfDay();
+        // End of the day
+        $endOfDay = Carbon::now()->endOfDay();
 
 
         // Date Request
@@ -119,7 +124,7 @@ class UserActivityServiceProvider
 
         // Apply default current month filter if no custom date range provided
         if (!$start_date || !$end_date) {
-            $user_activities->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
+            $user_activities->whereBetween('created_at', [$startOfDay, $endOfDay]);
         }
 
         // Apply date range filter

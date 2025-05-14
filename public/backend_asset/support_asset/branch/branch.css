@@ -15,6 +15,9 @@
 .msg_boxs{
     padding: 35px 10px;
 }
+.rotate-icon {
+    transform: rotate(90deg);
+}
 .form-topbar {
     background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, transparent 50%, rgba(0, 0, 0, 0.05) 100%);
     border-top: 1px solid #dee2e6;
@@ -538,8 +541,12 @@ label.label_position {
     padding: 0px 8px;
 }
 .form-group.role_nme {
-    background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     padding: 10px 10px;
+    background-image: none;
+}
+.profile-body{
+    background-color: white;
+    background-image: none;
 }
 #branch_page {
     border: none;
@@ -551,16 +558,18 @@ label.label_position {
 label.branch_label {
     font-size: 12px;
     font-weight: 700;
-    color: black;
+    color: #222;
     font-family: var(--nav-font-family);
 }
 .branch_input {
-    color: black;
+    display: flex;
+    background-color: white;
+    color: #222;
     font-weight: 700;
     font-size: 12px;
     font-family: var(--nav-font-family);
-    border: 1px solid #efeeee;
-    padding: 0.15rem 0.5rem;
+    border: 1px solid rgba(0,123,255,0.2);
+    padding: 0.25rem 0.5rem;
     border-radius: 0.275rem;
     line-height: 1;
 }
@@ -810,9 +819,6 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     background-size: 200%;
     animation: 1s infinite reverse skeleton;
 }
-#staticBackdropLabel{
-    color: #040404c7;
-}
 button#branch_type_create {
     margin-top: 5px;
 }
@@ -828,9 +834,23 @@ button#branch_type_delete:hover{
 button#branch_type_cancel,button#branch_type_create {
     line-height: 0px;
 }
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    /* border: 1px solid #aaa; */
+    /* border: 1px solid lightblue; */
+    border-radius: 4px;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    border-top: 1px solid rgba(0, 123, 255, 0.2) !important;
+    border-bottom: 1px solid rgba(0, 123, 255, 0.2) !important;
+    border-left: 1px solid rgba(0, 123, 255, 0.2) !important;
+    border-right: 1px solid rgba(0, 123, 255, 0.2) !important;
+    box-shadow: 0px 2px 20px #0001;
+    background-image: linear-gradient(to bottom, white 0%, white, white 100%);
+}
 input#branchTypeName {
     box-shadow: none;
-    border: 1px solid #dddddd;
+    border: 1px solid rgba(0,123,255,0.2);
 }
 input#branchTypeName:focus{
     border: 1px solid #0056b3;

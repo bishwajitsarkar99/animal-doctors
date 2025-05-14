@@ -26,7 +26,23 @@
                       <span class="type-btn-text">Refresh</span>
                     </button>
                   </div>
-                  <div class="col-xl-8"></div>
+                  <div class="col-xl-8">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="feather feather-git-commit rotate-icon"
+                      >
+                      <circle cx="12" cy="12" r="4" />
+                      <line x1="1.05" y1="12" x2="7" y2="12" />
+                      <line x1="17.01" y1="12" x2="22.96" y2="12" />
+                    </svg>
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-xl-6">
@@ -289,7 +305,7 @@
     <div class="modal-dialog">
       <div class="modal-content" id="admin_modal_box">
         <div class="modal-header profile_modal_header profilesetting_modal_header">
-          <h5 class="modal-title admin_title branch_type_head_title ps-1 pe-1 font-effect-emboss branch-skeleton" id="staticBackdropLabel">
+          <h5 class="modal-title admin_title branch_type_head_title ps-1 pe-1 branch-skeleton" id="staticBackdropLabel">
            Branch Category
           </h5>
           <button type="button" class="btn-close btn-btn-sm branch_type_head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>

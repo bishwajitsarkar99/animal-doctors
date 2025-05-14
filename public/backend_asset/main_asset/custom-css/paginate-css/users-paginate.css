@@ -625,7 +625,7 @@ label.ser_label {
     color: #aaa;
 }
 .input-search-box input {
-    padding-left: 35px; /* space for the icon */
+    padding-left: 26px; /* space for the icon */
     width: 100%;
     box-sizing: border-box;
 }
