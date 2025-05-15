@@ -38,7 +38,7 @@
                       <input type="hidden" id="branches_id">
                     </div>
                     <div class="form-group role_nme branch skeleton">
-                      <label class="branch_label label_position" for="mail-transport">
+                      <label class="branch_label label_position branch_type_nme" for="mail-transport">
                         Branch Type
                         <span id="savForm_error2"></span><span id="updateForm_error2"></span>
                       </label>
@@ -73,7 +73,7 @@
                   </div>
                   <div class="col-xl-6">
                     <div class="form-group role_nme branch skeleton">
-                      <label class="branch_label label_position" for="mail-transport">
+                      <label class="branch_label label_position division_nme" for="mail-transport">
                         Division Name
                         <span id="savForm_error3"></span><span id="updateForm_error3"></span>
                       </label>

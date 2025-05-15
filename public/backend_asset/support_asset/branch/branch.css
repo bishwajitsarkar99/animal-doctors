@@ -32,7 +32,7 @@
     font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
     font-weight: 600;
     font-size: 12px;
-    margin-top: -2px;
+    margin-top: 0px;
 }
 .select2-container--default .select2-selection--single:focus {
     border: 2px solid #3b71ca !important;
@@ -853,18 +853,24 @@ button#branch_type_delete:hover{
 button#branch_type_cancel,button#branch_type_create {
     line-height: 0px;
 }
+.select2-container {
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0;
+    position: relative;
+    vertical-align: middle;
+    border-radius: 0.275rem !important;
+}
 .select2-container--default .select2-selection--single {
     background-color: #fff;
-    /* border: 1px solid #aaa; */
-    /* border: 1px solid lightblue; */
     border-radius: 4px;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    /* --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35); */
     border-top: 1px solid rgba(0, 123, 255, 0.2) !important;
     border-bottom: 1px solid rgba(0, 123, 255, 0.2) !important;
     border-left: 1px solid rgba(0, 123, 255, 0.2) !important;
     border-right: 1px solid rgba(0, 123, 255, 0.2) !important;
-    box-shadow: 0px 2px 20px #0001;
+    box-shadow: none !important;
     background-image: linear-gradient(to bottom, white 0%, white, white 100%);
 }
 input#branchTypeName {
