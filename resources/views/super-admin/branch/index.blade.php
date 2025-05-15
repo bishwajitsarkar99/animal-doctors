@@ -14,10 +14,10 @@
               <form autocomplete="off">
                 @csrf
                 <div class="row form-topbar">
-                  <div class="col-xl-2">
+                  <div class="col-xl-1 fist_btn">
                     <button type="button" class="btn btn-sm cgt_btn btn_focus skeleton-button" id="branchTypeModalView">
                       <span class="icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                      <span class="btn-text">Branch Category</span>
+                      <span class="btn-text">Create</span>
                     </button>
                   </div>
                   <div class="col-xl-2">
@@ -26,63 +26,80 @@
                       <span class="type-btn-text">Refresh</span>
                     </button>
                   </div>
-                  <div class="col-xl-8"></div>
+                  <div class="col-xl-9"></div>
                 </div>
                 <div class="row">
                   <div class="col-xl-6">
-                    <div class="form-group mb-1 role_nme skeleton">
+                    <div class="form-group role_nme skeleton">
                       <span class="input-label"><label class="branch_label label_position" for="mail-transport">Searching...</label></span>
                       <select type="text" class="form-control select_branch select2" name="branch_name" id="select_branch">
                         <option value="">Select Company Branch Name</option>
                       </select>
                       <input type="hidden" id="branches_id">
                     </div>
-                    <div class="form-group role_nme mb-1 skeleton">
-                      <span class="input-label"><label class="branch_label label_position" for="mail-transport">Branch Name</label></span>
-                      <input class="form-control branch_input edit_branch_name" type="text" name="branch_name" id="branchName" placeholder="Branch Name" value="" />
-                      <span class="input-label edit_branch_id" hidden><label class="id_label label_position" for="mail-transport">Branch ID : <input class="update_branch_id" name="branch_id" id="edit_branch_id" disabled></label></span>
-                      <span id="savForm_error" hidden></span><span id="updateForm_error" hidden></span>
-                    </div>
-                    <div class="form-group role_nme branch mb-1 skeleton">
-                      <label class="branch_label label_position" for="mail-transport">Branch Type</label>
+                    <div class="form-group role_nme branch skeleton">
+                      <label class="branch_label label_position" for="mail-transport">
+                        Branch Type
+                        <span id="savForm_error2"></span><span id="updateForm_error2"></span>
+                      </label>
                       <select type="text" class="form-control edit_branch_type select2" name="branch_type" id="branch_type">
                         <option value="">Select Branch Type</option>
                       </select>
-                      <span id="savForm_error2"></span><span id="updateForm_error2"></span>
                     </div>
-                    <div class="form-group role_nme branch mb-1 skeleton">
-                      <label class="branch_label label_position" for="mail-transport">Division Name</label>
-                      <select type="text" class="form-control edit_division_id select2" name="division_id" id="select_division">
-                        <option value="">Select Division</option>
-                      </select>
-                      <span id="savForm_error3"></span><span id="updateForm_error3"></span>
+                    <div class="form-group role_nme skeleton">
+                      <label class="branch_label label_position" for="mail-transport">
+                        Branch Name
+                        <span id="savForm_error" hidden></span><span id="updateForm_error" hidden></span>
+                      </label>
+                      <!-- <span class="input-label">
+                      </span> -->
+                      <input class="form-control branch_input edit_branch_name" type="text" name="branch_name" id="branchName" placeholder="Branch Name" value="" />
+                      <span class="input-label edit_branch_id" hidden><label class="id_label label_position" for="mail-transport">Branch ID : <input class="update_branch_id" name="branch_id" id="edit_branch_id" disabled></label></span>
+                    </div>
+                    <div class="form-group role_nme branch skeleton">
+                      <label class="branch_label label_position" for="mail-transport">
+                        City Name
+                        <span id="savForm_error6" hidden></span><span id="updateForm_error6" hidden></span>
+                      </label>
+                      <input class="form-control branch_input edit_town_name" type="text" name="town_name" id="townName" placeholder="Town Name" value=""/>
+                    </div>
+                    <div class="form-group role_nme branch skeleton">
+                      <label class="branch_label label_position" for="mail-transport">
+                        Location
+                        <span id="savForm_error7" hidden></span><span id="updateForm_error7" hidden></span>
+                      </label>
+                      <input class="form-control branch_input edit_location" type="text" name="location" id="location" placeholder="Location" value=""/>
                     </div>
                   </div>
                   <div class="col-xl-6">
-                    <div class="form-group role_nme branch mb-1 skeleton">
-                      <label class="branch_label label_position" for="mail-transport">District Name</label>
+                    <div class="form-group role_nme branch skeleton">
+                      <label class="branch_label label_position" for="mail-transport">
+                        Division Name
+                        <span id="savForm_error3"></span><span id="updateForm_error3"></span>
+                      </label>
+                      <select type="text" class="form-control edit_division_id select2" name="division_id" id="select_division">
+                        <option value="">Select Division</option>
+                      </select>
+                    </div>
+                    <div class="form-group role_nme branch skeleton">
+                      <label class="branch_label label_position" for="mail-transport">
+                        District Name
+                        <span id="savForm_error4"></span><span id="updateForm_error4"></span>
+                      </label>
                       <select type="text" class="form-control edit_district_id select2" name="district_id" id="select_district">
                         <option value="">Select District</option>
                       </select>
-                      <span id="savForm_error4"></span><span id="updateForm_error4"></span>
                     </div>
-                    <div class="form-group role_nme branch mb-1 skeleton">
-                      <label class="branch_label label_position" for="mail-transport">Upazila/Thana Name</label>
+                    <div class="form-group role_nme branch skeleton">
+                      <label class="branch_label label_position" for="mail-transport">
+                        Upazila/Thana Name
+                        <span id="savForm_error5"></span><span id="updateForm_error5"></span>
+                      </label>
                       <select type="text" class="form-control edit_upazila_id select2" name="upazila_id" id="select_upazila">
                         <option value="">Select Upazila</option>
                       </select>
-                      <span id="savForm_error5"></span><span id="updateForm_error5"></span>
                     </div>
-                    <div class="form-group role_nme branch mb-1 skeleton">
-                      <label class="branch_label label_position" for="mail-transport">City Name</label>
-                      <input class="form-control branch_input edit_town_name" type="text" name="town_name" id="townName" placeholder="Town Name" value=""/>
-                      <span id="savForm_error6" hidden></span><span id="updateForm_error6" hidden></span>
-                    </div>
-                    <div class="form-group role_nme branch mb-1 skeleton">
-                      <label class="branch_label label_position" for="mail-transport">Location</label>
-                      <input class="form-control branch_input edit_location" type="text" name="location" id="location" placeholder="Location" value=""/>
-                      <span id="savForm_error7" hidden></span><span id="updateForm_error7" hidden></span>
-                    </div>
+                    
                     <div class="form-group role_nme branch mb-1" id="documents" hidden>
                       <table class="info_table">
                         <thead>

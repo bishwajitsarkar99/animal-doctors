@@ -27,7 +27,7 @@
                                 <span id="savForm_error2" hidden></span><span id="updateForm_errorList2" hidden></span>
                             </div>
                         </div>
-                        <div class="row mt-4">
+                        <div class="row mt-3">
                             <div class="col-xl-6 type_nme">
                                 <div class="input-group">
                                     <input class="form-control form-control-sm edit_type" type="text" name="type" id="type" placeholder="">
@@ -44,7 +44,7 @@
                                 <span id="savForm_error4" hidden></span><span id="updateForm_errorList4" hidden></span>
                             </div>
                         </div>
-                        <div class="row mt-4">
+                        <div class="row mt-3">
                             <div class="col-xl-6 sup_nme">
                                 <div class="input-group">
                                     <input class="form-control form-control-sm edit_name" type="text" name="name" id="name" placeholder="">
@@ -60,7 +60,7 @@
                                 <span id="savForm_error6" hidden></span><span id="updateForm_errorList6" hidden></span>
                             </div>
                         </div>
-                        <div class="row mt-4">
+                        <div class="row mt-3">
                             <div class="col-xl-6 contract_two_nme">
                                 <div class="input-group">
                                     <input class="form-control form-control-sm edit_contact_number_two contract-two" type="text" name="contact_number_two" id="contact_number_two" placeholder="">
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-4">
+                        <div class="row mt-3">
                             <div class="col-xl-12">
                                 <div class="input-group">
                                     <input class="form-control form-control-sm edit_email" type="text" name="email" id="email" placeholder="">
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-4">
+                        <div class="row mt-3">
                             <div class="col-xl-12 office_address_nme">
                                 <div class="input-group">
                                     <textarea type="text" class="form-control form-control-sm edit_office_address" name="office_address" id="office_address" cols="30" rows="3" placeholder=""></textarea>
@@ -92,7 +92,7 @@
                                 <span id="savForm_error7" hidden></span><span id="updateForm_errorList7" hidden></span>
                             </div>
                         </div>
-                        <div class="row mt-4">
+                        <div class="row mt-3">
                             <div class="col-xl-12 current_address_nme">
                                 <div class="input-group">
                                     <textarea type="text" class="form-control form-control-sm edit_current_address font_color" name="current_address" id="current_address" cols="30" rows="3" placeholder=""></textarea>
