@@ -7,13 +7,13 @@
         @csrf
         <div class="row">
             <div class="col-md-8">
-                <div class="card form-control-sm left-card">
+                <div class="card form-control-sm left-card skeleton">
                     <div class="data-form">
                         <input type="hidden" id="supp_id">
                         <div class="row">
                             <div class="col-xl-6 branch_type_nme">
                                 <select class="form-control form-control-sm select2 edit_branch_type branch_type" name="branch_category" id="branch_type">
-                                    <option value="">Branch Category</option>
+                                    <option value="">Select Branch Category</option>
                                     @foreach($branch_categories as $item)
                                         <option value="{{$item->id}}">{{$item->branch_category_name}}</option>
                                     @endforeach
@@ -105,13 +105,13 @@
                 </div>
             </div>
             <div class="col-6 col-md-4">
-                <div class="card form-control-sm right-card">
+                <div class="card form-control-sm right-card skeleton">
                     <div class="mini-right-group">
                         <div class="row g-3">
                             <div class="mb-1">
-                                <label for="select-branch" class="form-label select-label">Select Branch Name</label>
+                                <label for="select-branch" class="form-label select-label">Branch Name</label>
                                 <select class="form-control form-control-sm select2 edit_search_branch_type search_type" name="branch_id" id="search_branch">
-                                    <option value="">Select Branch Name</option>
+                                    <option value="">Select Branch</option>
                                     @foreach($branches as $item)
                                         <option value="{{$item->branch_id}}">{{$item->branch_name}}</option>
                                     @endforeach
@@ -120,9 +120,9 @@
                         </div>
                         <div class="row g-3">
                             <div class="mb-3 select_name">
-                                <label for="supplier" class="form-label select-label">Select Supplier Or Vendor Name</label>
+                                <label for="supplier" class="form-label select-label">Supplier Or Vendor Name</label>
                                 <select class="form-control form-control-sm select2 edit_name search_name" name="name" id="search_supplier">
-                                    <option value="">Select Supplier Or Vendor Name</option>
+                                    <option value="">Select Supplier Or Vendor</option>
                                 </select>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card form-control-sm right-card mt-4">
+                <div class="card form-control-sm right-card skeleton mt-4">
                     <div class="row g-2 py-1 px-2">
                         <div class="col-4">
                             <div class="btn_box group_btn_box mt-3">
@@ -332,9 +332,28 @@
                 data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
             </button>
         </div>
-        <div class="modal-body supplier_content_view_responsive" style="padding:0.5rem 0.5rem;background-color: aliceblue;" id="logoutModal_body">
+        <div class="modal-body supplier_content_view_responsive" style="padding:0.5rem 0.2rem;background-color: white;" id="logoutModal_body">
             <ul id="supplier_menu_head" hidden>
-                <li><span># Branch Information :</span></li>
+                <li>
+                    <span>
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#999"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-git-commit rotate-icon"
+                            >
+                            <circle cx="12" cy="12" r="4" />
+                            <line x1="1.05" y1="12" x2="7" y2="12" />
+                            <line x1="17.01" y1="12" x2="22.96" y2="12" />
+                        </svg>
+                        Branch Information :
+                    </span>
+                </li>
             </ul>
             <ul id="branch_supp" hidden>
                 <li><label class="label_font ps-1" for="branch_id" id="branch_id"></label></li>
@@ -343,7 +362,26 @@
                 <li><label class="label_font ps-1" for="branch_locations" id="branch_locations"></label></li>
             </ul>
             <ul id="supplier_menu_head2" hidden>
-                <li><span># Supplier/Vendor Information :</span></li>
+                <li>
+                    <span>
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#999"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-git-commit rotate-icon"
+                            >
+                            <circle cx="12" cy="12" r="4" />
+                            <line x1="1.05" y1="12" x2="7" y2="12" />
+                            <line x1="17.01" y1="12" x2="22.96" y2="12" />
+                        </svg>
+                        Supplier/Vendor Information :
+                    </span>
+                </li>
             </ul>
             <ul id="supplier_menu" hidden>
                 <li><label class="label_font ps-1" for="supplier_id" id="supp_vew"></label></li>
@@ -358,14 +396,52 @@
                 <li><label class="label_font ps-1" for="view_email" id="view_email"></label></li>
             </ul>
             <ul id="supplier_menu_head3" hidden>
-                <li><span># Access Information :</span></li>
+                <li>
+                    <span>
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#999"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-git-commit rotate-icon"
+                            >
+                            <circle cx="12" cy="12" r="4" />
+                            <line x1="1.05" y1="12" x2="7" y2="12" />
+                            <line x1="17.01" y1="12" x2="22.96" y2="12" />
+                        </svg>
+                        Access Information :
+                    </span>
+                </li>
             </ul>
             <ul id="status_row" hidden>
                 <li><label class="label_font ps-1" for="status" id="status"></label></li>
                 <li><label class="label_font ps-1" for="access_date" id="access_date"></label></li>
             </ul>
             <ul id="supplier_menu_head4" hidden>
-                <li><span># Creator Information :</span></li>
+                <li>
+                    <span>
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#999"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-git-commit rotate-icon"
+                            >
+                            <circle cx="12" cy="12" r="4" />
+                            <line x1="1.05" y1="12" x2="7" y2="12" />
+                            <line x1="17.01" y1="12" x2="22.96" y2="12" />
+                        </svg>
+                        Creator Information :
+                    </span>
+                </li>
             </ul>
             <ul id="creatorORupdator" hidden>
                 <li><label class="label_font ps-1" for="user_names" id="user_names"></label></li>
@@ -374,7 +450,26 @@
                 <li><label class="label_font ps-1" for="create_date" id="create_date"></label></li>
             </ul>
             <ul id="supplier_menu_head5" hidden>
-                <li><span># Updator Information :</span></li>
+                <li>
+                    <span>
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#999"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-git-commit rotate-icon"
+                            >
+                            <circle cx="12" cy="12" r="4" />
+                            <line x1="1.05" y1="12" x2="7" y2="12" />
+                            <line x1="17.01" y1="12" x2="22.96" y2="12" />
+                        </svg>
+                        Updator Information :
+                    </span>
+                </li>
             </ul>
             <ul id="creatorORupdator2" hidden>
                 <li><label class="label_font ps-1" for="user_update_names" id="user_update_names"></label></li>
@@ -480,7 +575,7 @@
 
     // Initialize Select2 for branch selection
     $('#search_supplier').select2({
-      placeholder: 'Select Supplier Or Vendor Name',
+      placeholder: 'Select Supplier Or Vendor',
       allowClear: true,
       width: '100%'
     });
@@ -488,7 +583,7 @@
     // Set custom placeholder for the search input inside Select2 dropdown for supplier selection
     $(document).on('select2:open', '#search_supplier', function () {
       setTimeout(() => {
-        $('.select2-search__field').attr('placeholder', 'Search supplier...');
+        $('.select2-search__field').attr('placeholder', 'Search supplier or vendor...');
       }, 50);
     });
   });

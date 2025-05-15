@@ -124,7 +124,7 @@
                 <div class="row mt-3">
                   <div class="col-12 role_nme cat_nme mt-2">
                     <select type="number" class="form-control form-control-sm select2 edit_category_id" name="category_id" id="category_id">
-                      <option value="">Select Category</option>
+                      <option value="">Select Group Name</option>
                       @foreach($categories as $category)
                         <option value="{{$category->id}}">{{$category->category_name}}</option>
                       @endforeach

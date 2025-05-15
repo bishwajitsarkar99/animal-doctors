@@ -114,7 +114,7 @@ body{
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-image: linear-gradient(-120deg, rgba(230, 230, 230, 0.05) 0%,rgb(241, 241, 241), rgba(0, 0, 0, 0.05) 0%);
     color: #0056b3;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
     transition: 1s;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
