@@ -28,9 +28,9 @@ class UserActivityServiceProvider
         $auth= Auth::User();
         $email = $auth->login_email;
         if($email && $auth->role===1){
-            $user_analycis_authorize = 1; // log chart dashboard page authorize
-            $user_log_data_authorize = 1; // log data authorize
-            $user_activity_graph_authorize = 1; // log user activity graph authorize
+            $user_analycis_authorize = 0; // log chart dashboard page authorize
+            $user_log_data_authorize = 0; // log data authorize
+            $user_activity_graph_authorize = 0; // log user activity graph authorize
         }else if($email && $auth->role===2){
             $user_analycis_authorize = 1; // log chart dashboard page authorize
             $user_log_data_authorize = 1; // log data authorize
@@ -128,6 +128,8 @@ class UserActivityServiceProvider
     
             $storedRandom = session('valid_user_log_random');
             $page_name = 'User Log Activity';
+            $user_activity_page_name = 'User Activity';
+            $user_activity_graph_page_name = 'User Activity Graph';
             
             if ($storedRandom && $slug === $storedRandom) {
                 $user_analycis_authorize = (int) $user_analycis_authorize;
@@ -135,7 +137,7 @@ class UserActivityServiceProvider
                 if ($user_analycis_authorize === 1) {
                     return view('super-admin.user-details.details', compact('usersCount','usersActivityCount','total_users','authentic_users','inactive_users','activity_users',
                         'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage','roles', 'page_name',
-                        'user_log_data_authorize', 'user_activity_graph_authorize')
+                        'user_log_data_authorize', 'user_activity_graph_authorize', 'user_activity_page_name', 'user_activity_graph_page_name')
                     );
                 }else{
                     return view('unauthorize-page.index', compact('page_name'));

@@ -44,6 +44,7 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/user-details/user-details.css">
 <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-ui.min.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/suspended-page-asset/suspended-asset.css">
 @endsection
 
 @push('scripts')
@@ -123,5 +124,67 @@
       $("#showCard").removeAttr('hidden');
     }, 500);
   });
+</script>
+<script>
+  // skeleton
+  function pageTopBar() {
+      const allSkeleton = document.querySelectorAll('.top-skeleton')
+
+      allSkeleton.forEach(item => {
+        item.classList.remove('top-skeleton')
+      });
+  }
+  function imageSkeletone() {
+      const allSkeleton = document.querySelectorAll('.image-skeletone')
+
+      allSkeleton.forEach(item => {
+        item.classList.remove('image-skeletone')
+      });
+  }
+  function forbidenSkeletone() {
+      const allSkeleton = document.querySelectorAll('.forbiden_skeletone')
+
+      allSkeleton.forEach(item => {
+        item.classList.remove('forbiden_skeletone')
+      });
+  }
+  function codeSkeletone() {
+      const allSkeleton = document.querySelectorAll('.code-skeletone')
+
+      allSkeleton.forEach(item => {
+        item.classList.remove('code-skeletone')
+      });
+  }
+  function leftCapsule() {
+      const allSkeleton = document.querySelectorAll('.text-capsule')
+
+      allSkeleton.forEach(item => {
+        item.classList.remove('text-capsule')
+      });
+  }
+  function boldText(){
+      const allSkeleton = document.querySelectorAll('.text-bold-skeletone')
+
+      allSkeleton.forEach(item => {
+        item.classList.remove('text-bold-skeletone')
+      });
+  }
+  function btnCapsule() {
+      const allSkeleton = document.querySelectorAll('.btn-capsule')
+
+      allSkeleton.forEach(item => {
+        item.classList.remove('btn-capsule')
+      });
+  }
+
+  setTimeout(() => {
+    pageTopBar();
+    imageSkeletone();
+    //forbidenSkeletone();
+    codeSkeletone();
+    leftCapsule();
+    boldText();
+    btnCapsule();
+  }, 2000);
 </script>
 @endpush
