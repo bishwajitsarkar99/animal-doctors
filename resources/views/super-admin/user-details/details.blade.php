@@ -8,10 +8,10 @@
         <a class="nav-link setting active home-text" data-bs-toggle="tab" href="#home" id="tabHome"> User Analysis</a>
       </li>
       <li class="nav-item tab-skeletone">
-        <a class="nav-link setting" data-bs-toggle="tab" href="#userActivity" id="tabActivity">User Activity</a>
+        <a class="nav-link setting {{$user_log_data_authorize != 1 ? 'disabled' : '' }}" data-bs-toggle="tab" href="#userActivity" id="tabActivity">User Activity</a>
       </li>
       <li class="nav-item tab-skeletone">
-        <a class="nav-link setting home-text" data-bs-toggle="tab" href="#userDetails" id="tabDetails">User Activity Graph</a>
+        <a class="nav-link setting home-text {{$user_activity_graph_authorize != 1 ? 'disabled' : '' }}" data-bs-toggle="tab" href="#userDetails" id="tabDetails">User Activity Graph</a>
       </li>
       <li class="nav-item tab-skeletone">
         <button type="button" class="btn btn-sm refresh-btn ripple-surface " id="refresh">

@@ -14,11 +14,16 @@ class BranchController extends Controller
     {
         return $this->branchServiceProvider = $branchServiceProvider;
     }
+    // Branch Create Page Url id generate
+    public function redirectWithRandom()
+    {
+        return $this->branchServiceProvider->redirectWithRandomId();
+    }
 
     // Branch Page View
-    public function index(Request $request)
+    public function index(Request $request, $random, $page_authorize)
     {
-        return $this->branchServiceProvider->viewBranchTemplate($request);
+        return $this->branchServiceProvider->viewBranchTemplate($request, $random, $page_authorize);
     }
 
     // Get Division Name
@@ -99,10 +104,16 @@ class BranchController extends Controller
         return $this->branchServiceProvider->deleteBranchs($id);
     }
 
-    // Branch Admin Access View
-    public function branchAccessView()
+    // Branch Create Page Url id generate
+    public function redirectWithRandomAdminBranchAccess()
     {
-        return $this->branchServiceProvider->branchAdminAccessView();
+        return $this->branchServiceProvider->redirectWithRandomAdminBranchAccessId();
+    }
+
+    // Branch Admin Access View
+    public function branchAccessView(Request $request, $random, $page_authorize)
+    {
+        return $this->branchServiceProvider->branchAdminAccessView($request, $random, $page_authorize);
     }
 
     // Branch Data Fetch
@@ -159,10 +170,16 @@ class BranchController extends Controller
         return $this->branchServiceProvider->adminBranchsDelete($request, $id);
     }
 
-    // Branch User Access Permission View
-    public function branchAccessUserPermission(Request $request)
+    // Branch Create Page Url id generate
+    public function redirectWithRandomUserBranchAccess()
     {
-        return $this->branchServiceProvider->branchAccessUserPermissionView($request);
+        return $this->branchServiceProvider->redirectWithRandomUserBranchAccessId();
+    }
+
+    // Branch User Access Permission View
+    public function branchAccessUserPermission(Request $request, $random, $page_authorize)
+    {
+        return $this->branchServiceProvider->branchAccessUserPermissionView($request, $random, $page_authorize);
     }
 
     // Branch Search Data For Create

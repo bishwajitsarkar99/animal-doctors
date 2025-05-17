@@ -18,21 +18,24 @@ Route::group(['middleware' => 'auth'], function (){
             Route::put('/branch-type-update/{id}', [BranchController::class, 'updateBranchType'])->name('update_branch_type.action');
             Route::delete('/branch-type-delete/{id}', [BranchController::class, 'deleteBranchType'])->name('branch_type.delete');
             // Branch Create
-            Route::get('/branch-activity', [BranchController::class, 'index'])->name('branch.index');
+            Route::get('/branch-activity/branch-create', [BranchController::class, 'redirectWithRandom'])->name('branch.redirect');
+            Route::get('/branch-activity/branch-{random}-{page_authorize}/create/index', [BranchController::class, 'index'])->name('branch.index');
             Route::post('/branch-create', [BranchController::class, 'store'])->name('branch.store');
             Route::get('/branch-search', [BranchController::class, 'searchBranch'])->name('search-branch.action');
             Route::get('/branch-edit/{id}', [BranchController::class, 'editBranch'])->name('edit-branch.action');
             Route::put('/branch-update/{id}', [BranchController::class, 'updateBranch'])->name('update_branch.action');
             Route::delete('/branch-delete/{id}', [BranchController::class, 'deleteBranch'])->name('branch.delete');
             // Branch Admin Access
-            Route::get('/branch-admin-access', [BranchController::class, 'branchAccessView'])->name('branch_access.view');
+            Route::get('/branch-activity/branch-admin-access', [BranchController::class, 'redirectWithRandomAdminBranchAccess'])->name('branch_access.redirect');
+            Route::get('/branch-activity/branch-{random}-{page_authorize}/admin-access/index', [BranchController::class, 'branchAccessView'])->name('branch_access.view');
             Route::post('/branch-admin-permission-store', [BranchController::class, 'branchAcessStore'])->name('branch_access_store.action');
             Route::post('/branch-admin-permission', [BranchController::class, 'accessBranch'])->name('access_status.action');
             Route::get('/branch-admin-change-fetch', [BranchController::class, 'adminBranchChangeFetch'])->name('admin_branch_fetch.action');
             Route::put('/branch-admin-change/{id}', [BranchController::class, 'adminBranchChange'])->name('admin_branch_change.action');
             Route::delete('/branch-admin-change-delete/{id}', [BranchController::class, 'adminBranchDelete'])->name('admin_branch_delete.action');
             // Brach User Access Permission
-            Route::get('/branch-user-access', [BranchController::class, 'branchAccessUserPermission'])->name('branch_access_permission.view');
+            Route::get('/branch-activity/branch-user-access', [BranchController::class, 'redirectWithRandomUserBranchAccess'])->name('branch_access_permission.redirect');
+            Route::get('/branch-activity/branch-{random}-{page_authorize}/user-access/index', [BranchController::class, 'branchAccessUserPermission'])->name('branch_access_permission.view');
             Route::get('/branch-get-data/{id}', [BranchController::class, 'branchGetData'])->name('branch_get.action');
             Route::get('/branch-data-fetch', [BranchController::class, 'branchDataFetch'])->name('branch_fetch.action');
             Route::get('/user-branch-data-fetch', [BranchController::class, 'userBranchDataFetch'])->name('user_branch_fetch.action');

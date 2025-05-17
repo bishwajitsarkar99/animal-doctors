@@ -1,7 +1,7 @@
 <div class="col-xl-6">
     <div class="card ord_card">
         <div id="supp_chart" class="card-body supplier_chart_bg supplier-chart-focus">
-            <canvas id="mypaymentbarchart" width="5007" height="150"></canvas>
+            <canvas id="mypaymentbarchart" width="100%" height="150"></canvas>
         </div>
     </div>
     <div class="expfig mt-1">

@@ -72,7 +72,7 @@
     </li>
 </ul>
 <!-- ================= Supplier ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}} {{Request::is('supplier') || Request::is('super-admin/supplier/access-permission') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}} {{Request::is('company-supplier/suppliers/index') || Request::is('company-supplier/suppliers/access-permission') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_supplier_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_supplier_link" hidden></i>
@@ -179,7 +179,7 @@
     </li>
 </ul>
 <!-- ================= Supplier ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}} {{Request::is('supplier') || Request::is('super-admin/supplier/access-permission') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}} {{Request::is('company-supplier/suppliers/index') || Request::is('company-supplier/suppliers/access-permission') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_supplier_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_supplier_link" hidden></i>
@@ -287,7 +287,7 @@
     </li>
 </ul>
 <!-- ================= Supplier ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}} {{Request::is('supplier') || Request::is('super-admin/supplier/access-permission') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}} {{Request::is('company-supplier/suppliers/index') || Request::is('company-supplier/suppliers/access-permission') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_supplier_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_supplier_link" hidden></i>
@@ -395,7 +395,7 @@
     </li>
 </ul>
 <!-- ================= Supplier ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}} {{Request::is('supplier') || Request::is('super-admin/supplier/access-permission') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}} {{Request::is('company-supplier/suppliers/index') || Request::is('company-supplier/suppliers/access-permission') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_supplier_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_supplier_link" hidden></i>

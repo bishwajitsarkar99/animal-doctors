@@ -7,169 +7,537 @@ use App\Models\Role;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use DB;
+use Illuminate\Support\Str;
 
 class UserActivityServiceProvider
 {
     // ========================= User Activity =================================
     // =========================================================================
     /**
-     * Handle User Details View
+     * Handle Route ID Generate User Log Details.
     */
-    public function viewUserDetails(Request $request)
+    public function redirectWithRandomId()
     {
-        // Get Role
-        $roles = Role::orderBy('id', 'desc')->get();
-
-        // Define the start and end of the current month
-        $startOfMonth = Carbon::now()->startOfMonth();
-        $endOfMonth = Carbon::now()->endOfMonth();
-        $usersCount = [
-            'super_admin' => User::where('role', 1)->count(),
-            'admin' => User::where('role', 3)->count(),
-            'sub_admin' => User::where('role', 2)->count(),
-            'accounts' => User::where('role', 5)->count(),
-            'marketing' => User::where('role', 6)->count(),
-            'delivery_team' => User::where('role', 7)->count(),
-            'users' => User::where('role', 0)->count(),
-            'inactive_users' => User::where('status', 1)->count(),
-            'active_users' => User::where('status', 0)->count(),
-            'users_log_activity' => SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count(),
-            'total_users' => User::count(),
-        ];
-
-        $usersActivityCount = [
-            'inactive_users_activity' => User::where('status', 1)->count(),
-            'active_users_activity' => User::where('status', 0)->count(),
-            'users_log_activities' => SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count(),
-            'total_users_activity' => User::count(),
-        ];
-
-        $total_users = User::count();
-        $authentic_users = User::where('status', 0)->count();
-        $inactive_users = User::where('status', 1)->count();
-
-        // Calculate the percentage of total users
-        $total_users_percentage = $total_users > 0 ? ($total_users / $total_users) * 100 : 0;
-        // Calculate the percentage of total authentic_users
-        $authentic_users_percentage = $total_users > 0 ? ($authentic_users / $total_users) * 100 : 0;
-        // Calculate the percentage of total inactive_users
-        $inactive_users_percentage = $total_users > 0 ? ($inactive_users / $total_users) * 100 : 0;
-        // Calculate the percentage for each role
-        $percentageRoles = [];
-        foreach ($usersCount as $role => $count) {
-            $percentageRoles[$role] = $total_users > 0 ? ($count / $total_users) * 100 : 0;
+        $idRange = 30; // Random 30-character string
+        $slug = Str::random($idRange);
+        session([
+            'valid_user_log_random' => $slug,
+        ]);
+        $auth= Auth::User();
+        $email = $auth->login_email;
+        if($email && $auth->role===1){
+            $user_analycis_authorize = 1; // log chart dashboard page authorize
+            $user_log_data_authorize = 1; // log data authorize
+            $user_activity_graph_authorize = 1; // log user activity graph authorize
+        }else if($email && $auth->role===2){
+            $user_analycis_authorize = 1; // log chart dashboard page authorize
+            $user_log_data_authorize = 1; // log data authorize
+            $user_activity_graph_authorize = 1; // log user activity graph authorize
+        }else if($email && $auth->role===3){
+            $user_analycis_authorize = 1; // log chart dashboard page authorize
+            $user_log_data_authorize = 1; // log data authorize
+            $user_activity_graph_authorize = 1; // log user activity graph authorize
         }
 
-        // activity users
-        $startOfMonth = Carbon::now()->startOfMonth();
-        $endOfMonth = Carbon::now()->endOfMonth();
-        $intime_or_outtime_activity_users = SessionModel::whereNotNull('id')->count();
-        $intime_activity_users = SessionModel::where('status', 0)->count();
-        $activity_users = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
-        // Calculate the percentage of total activity users
-        $activity_users_percentage = $intime_or_outtime_activity_users > 0 ? ($intime_activity_users / $intime_or_outtime_activity_users) * 100 : 0;
+        return redirect()->route('user.details', [
+            'slug' => $slug,
+            'user_analycis_authorize' => $user_analycis_authorize,
+            'user_log_data_authorize' => $user_log_data_authorize,
+            'user_activity_graph_authorize' => $user_activity_graph_authorize,
+        ]);
+    }
+    /**
+     * Handle User Details View 
+    */
+    public function viewUserDetails(Request $request, $slug, $user_analycis_authorize, $user_log_data_authorize, $user_activity_graph_authorize)
+    {
+        $auth = Auth::User();
+        $branch_id = $auth->branch_id;
+        $role_id = $auth->role;
+        if($branch_id && $role_id === 1){
 
-        if ($request->expectsJson()) {
-            return response()->json([
-                'total_users' => $total_users,
-                'authentic_users' => $authentic_users,
-                'inactive_users' => $inactive_users,
-                'activity_users' => $activity_users,
-                'usersCount' => $usersCount,
-                'usersActivityCount' => $usersActivityCount,
-                'total_users_percentage' => $total_users_percentage,
-                'authentic_users_percentage' => $authentic_users_percentage,
-                'inactive_users_percentage' => $inactive_users_percentage,
-                'activity_users_percentage' => $activity_users_percentage,
-                'percentageRoles' => $percentageRoles,
-            ]);
+            // Get Role
+            $roles = Role::orderBy('id', 'desc')->get();
+    
+            // Define the start and end of the current month
+            $startOfMonth = Carbon::now()->startOfMonth();
+            $endOfMonth = Carbon::now()->endOfMonth();
+            $usersCount = [
+                'super_admin' => User::where('role', 1)->count(),
+                'admin' => User::where('role', 3)->count(),
+                'sub_admin' => User::where('role', 2)->count(),
+                'accounts' => User::where('role', 5)->count(),
+                'marketing' => User::where('role', 6)->count(),
+                'delivery_team' => User::where('role', 7)->count(),
+                'users' => User::where('role', 0)->count(),
+                'inactive_users' => User::where('status', 1)->count(),
+                'active_users' => User::where('status', 0)->count(),
+                'users_log_activity' => SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count(),
+                'total_users' => User::count(),
+            ];
+    
+            $usersActivityCount = [
+                'inactive_users_activity' => User::where('status', 1)->count(),
+                'active_users_activity' => User::where('status', 0)->count(),
+                'users_log_activities' => SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count(),
+                'total_users_activity' => User::count(),
+            ];
+    
+            $total_users = User::count();
+            $authentic_users = User::where('status', 0)->count();
+            $inactive_users = User::where('status', 1)->count();
+    
+            // Calculate the percentage of total users
+            $total_users_percentage = $total_users > 0 ? ($total_users / $total_users) * 100 : 0;
+            // Calculate the percentage of total authentic_users
+            $authentic_users_percentage = $total_users > 0 ? ($authentic_users / $total_users) * 100 : 0;
+            // Calculate the percentage of total inactive_users
+            $inactive_users_percentage = $total_users > 0 ? ($inactive_users / $total_users) * 100 : 0;
+            // Calculate the percentage for each role
+            $percentageRoles = [];
+            foreach ($usersCount as $role => $count) {
+                $percentageRoles[$role] = $total_users > 0 ? ($count / $total_users) * 100 : 0;
+            }
+    
+            // activity users
+            $startOfMonth = Carbon::now()->startOfMonth();
+            $endOfMonth = Carbon::now()->endOfMonth();
+            $intime_or_outtime_activity_users = SessionModel::whereNotNull('id')->count();
+            $intime_activity_users = SessionModel::where('status', 0)->count();
+            $activity_users = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
+            // Calculate the percentage of total activity users
+            $activity_users_percentage = $intime_or_outtime_activity_users > 0 ? ($intime_activity_users / $intime_or_outtime_activity_users) * 100 : 0;
+    
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'total_users' => $total_users,
+                    'authentic_users' => $authentic_users,
+                    'inactive_users' => $inactive_users,
+                    'activity_users' => $activity_users,
+                    'usersCount' => $usersCount,
+                    'usersActivityCount' => $usersActivityCount,
+                    'total_users_percentage' => $total_users_percentage,
+                    'authentic_users_percentage' => $authentic_users_percentage,
+                    'inactive_users_percentage' => $inactive_users_percentage,
+                    'activity_users_percentage' => $activity_users_percentage,
+                    'percentageRoles' => $percentageRoles,
+                ]);
+            }
+    
+            $storedRandom = session('valid_user_log_random');
+            $page_name = 'User Log Activity';
+            
+            if ($storedRandom && $slug === $storedRandom) {
+                $user_analycis_authorize = (int) $user_analycis_authorize;
+    
+                if ($user_analycis_authorize === 1) {
+                    return view('super-admin.user-details.details', compact('usersCount','usersActivityCount','total_users','authentic_users','inactive_users','activity_users',
+                        'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage','roles', 'page_name',
+                        'user_log_data_authorize', 'user_activity_graph_authorize')
+                    );
+                }else{
+                    return view('unauthorize-page.index', compact('page_name'));
+                }
+            }
+            return view('unauthorize-page.page-session-block', compact('page_name'));
+        }else if($branch_id && $role_id === 2){
+            // Get Role
+            $roles = Role::orderBy('id', 'desc')->get();
+    
+            // Define the start and end of the current month
+            $startOfMonth = Carbon::now()->startOfMonth();
+            $endOfMonth = Carbon::now()->endOfMonth();
+            $usersCount = [
+                'super_admin' => User::where('role', 1)->where('branch_id', $branch_id)->count(),
+                'admin' => User::where('role', 3)->where('branch_id', $branch_id)->count(),
+                'sub_admin' => User::where('role', 2)->where('branch_id', $branch_id)->count(),
+                'accounts' => User::where('role', 5)->where('branch_id', $branch_id)->count(),
+                'marketing' => User::where('role', 6)->where('branch_id', $branch_id)->count(),
+                'delivery_team' => User::where('role', 7)->where('branch_id', $branch_id)->count(),
+                'users' => User::where('role', 0)->where('branch_id', $branch_id)->count(),
+                'inactive_users' => User::where('status', 1)->where('branch_id', $branch_id)->count(),
+                'active_users' => User::where('status', 0)->where('branch_id', $branch_id)->count(),
+                'users_log_activity' => SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->where('branch_id', $branch_id)->count(),
+                'total_users' => User::where('branch_id', $branch_id)->count(),
+            ];
+    
+            $usersActivityCount = [
+                'inactive_users_activity' => User::where('status', 1)->where('branch_id', $branch_id)->count(),
+                'active_users_activity' => User::where('status', 0)->where('branch_id', $branch_id)->count(),
+                'users_log_activities' => SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->where('branch_id', $branch_id)->count(),
+                'total_users_activity' => User::where('branch_id', $branch_id)->count(),
+            ];
+    
+            $total_users = User::where('branch_id', $branch_id)->count();
+            $authentic_users = User::where('status', 0)->where('branch_id', $branch_id)->count();
+            $inactive_users = User::where('status', 1)->where('branch_id', $branch_id)->count();
+    
+            // Calculate the percentage of total users
+            $total_users_percentage = $total_users > 0 ? ($total_users / $total_users) * 100 : 0;
+            // Calculate the percentage of total authentic_users
+            $authentic_users_percentage = $total_users > 0 ? ($authentic_users / $total_users) * 100 : 0;
+            // Calculate the percentage of total inactive_users
+            $inactive_users_percentage = $total_users > 0 ? ($inactive_users / $total_users) * 100 : 0;
+            // Calculate the percentage for each role
+            $percentageRoles = [];
+            foreach ($usersCount as $role => $count) {
+                $percentageRoles[$role] = $total_users > 0 ? ($count / $total_users) * 100 : 0;
+            }
+    
+            // activity users
+            $startOfMonth = Carbon::now()->startOfMonth();
+            $endOfMonth = Carbon::now()->endOfMonth();
+            $intime_or_outtime_activity_users = SessionModel::whereNotNull('id')->where('branch_id', $branch_id)->count();
+            $intime_activity_users = SessionModel::where('status', 0)->where('branch_id', $branch_id)->count();
+            $activity_users = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->where('branch_id', $branch_id)->count();
+            // Calculate the percentage of total activity users
+            $activity_users_percentage = $intime_or_outtime_activity_users > 0 ? ($intime_activity_users / $intime_or_outtime_activity_users) * 100 : 0;
+    
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'total_users' => $total_users,
+                    'authentic_users' => $authentic_users,
+                    'inactive_users' => $inactive_users,
+                    'activity_users' => $activity_users,
+                    'usersCount' => $usersCount,
+                    'usersActivityCount' => $usersActivityCount,
+                    'total_users_percentage' => $total_users_percentage,
+                    'authentic_users_percentage' => $authentic_users_percentage,
+                    'inactive_users_percentage' => $inactive_users_percentage,
+                    'activity_users_percentage' => $activity_users_percentage,
+                    'percentageRoles' => $percentageRoles,
+                ]);
+            }
+    
+            $storedRandom = session('valid_user_log_random');
+            $page_name = 'User Log Activity';
+            
+            if ($storedRandom && $random === $storedRandom) {
+                $page_authorize = (int) $page_authorize;
+    
+                if ($page_authorize === 1) {
+                    return view('super-admin.user-details.details', compact('usersCount','usersActivityCount','total_users','authentic_users','inactive_users','activity_users',
+                        'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage','roles', 'page_name')
+                    );
+                }else{
+                    return view('unauthorize-page.index', compact('page_name'));
+                }
+            }
+            return view('unauthorize-page.page-session-block', compact('page_name'));
+
+        }else if($branch_id && $role_id === 3){
+            // Get Role
+            $roles = Role::orderBy('id', 'desc')->get();
+    
+            // Define the start and end of the current month
+            $startOfMonth = Carbon::now()->startOfMonth();
+            $endOfMonth = Carbon::now()->endOfMonth();
+            $usersCount = [
+                'super_admin' => User::where('role', 1)->where('branch_id', $branch_id)->count(),
+                'admin' => User::where('role', 3)->where('branch_id', $branch_id)->count(),
+                'sub_admin' => User::where('role', 2)->where('branch_id', $branch_id)->count(),
+                'accounts' => User::where('role', 5)->where('branch_id', $branch_id)->count(),
+                'marketing' => User::where('role', 6)->where('branch_id', $branch_id)->count(),
+                'delivery_team' => User::where('role', 7)->where('branch_id', $branch_id)->count(),
+                'users' => User::where('role', 0)->where('branch_id', $branch_id)->count(),
+                'inactive_users' => User::where('status', 1)->where('branch_id', $branch_id)->count(),
+                'active_users' => User::where('status', 0)->where('branch_id', $branch_id)->count(),
+                'users_log_activity' => SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->where('branch_id', $branch_id)->count(),
+                'total_users' => User::where('branch_id', $branch_id)->count(),
+            ];
+    
+            $usersActivityCount = [
+                'inactive_users_activity' => User::where('status', 1)->where('branch_id', $branch_id)->count(),
+                'active_users_activity' => User::where('status', 0)->where('branch_id', $branch_id)->count(),
+                'users_log_activities' => SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->where('branch_id', $branch_id)->count(),
+                'total_users_activity' => User::where('branch_id', $branch_id)->count(),
+            ];
+    
+            $total_users = User::where('branch_id', $branch_id)->count();
+            $authentic_users = User::where('status', 0)->where('branch_id', $branch_id)->count();
+            $inactive_users = User::where('status', 1)->where('branch_id', $branch_id)->count();
+    
+            // Calculate the percentage of total users
+            $total_users_percentage = $total_users > 0 ? ($total_users / $total_users) * 100 : 0;
+            // Calculate the percentage of total authentic_users
+            $authentic_users_percentage = $total_users > 0 ? ($authentic_users / $total_users) * 100 : 0;
+            // Calculate the percentage of total inactive_users
+            $inactive_users_percentage = $total_users > 0 ? ($inactive_users / $total_users) * 100 : 0;
+            // Calculate the percentage for each role
+            $percentageRoles = [];
+            foreach ($usersCount as $role => $count) {
+                $percentageRoles[$role] = $total_users > 0 ? ($count / $total_users) * 100 : 0;
+            }
+    
+            // activity users
+            $startOfMonth = Carbon::now()->startOfMonth();
+            $endOfMonth = Carbon::now()->endOfMonth();
+            $intime_or_outtime_activity_users = SessionModel::whereNotNull('id')->where('branch_id', $branch_id)->count();
+            $intime_activity_users = SessionModel::where('status', 0)->where('branch_id', $branch_id)->count();
+            $activity_users = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->where('branch_id', $branch_id)->count();
+            // Calculate the percentage of total activity users
+            $activity_users_percentage = $intime_or_outtime_activity_users > 0 ? ($intime_activity_users / $intime_or_outtime_activity_users) * 100 : 0;
+    
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'total_users' => $total_users,
+                    'authentic_users' => $authentic_users,
+                    'inactive_users' => $inactive_users,
+                    'activity_users' => $activity_users,
+                    'usersCount' => $usersCount,
+                    'usersActivityCount' => $usersActivityCount,
+                    'total_users_percentage' => $total_users_percentage,
+                    'authentic_users_percentage' => $authentic_users_percentage,
+                    'inactive_users_percentage' => $inactive_users_percentage,
+                    'activity_users_percentage' => $activity_users_percentage,
+                    'percentageRoles' => $percentageRoles,
+                ]);
+            }
+    
+            $storedRandom = session('valid_user_log_random');
+            $page_name = 'User Log Activity';
+            
+            if ($storedRandom && $random === $storedRandom) {
+                $page_authorize = (int) $page_authorize;
+    
+                if ($page_authorize === 1) {
+                    return view('super-admin.user-details.details', compact('usersCount','usersActivityCount','total_users','authentic_users','inactive_users','activity_users',
+                        'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage','roles', 'page_name')
+                    );
+                }else{
+                    return view('unauthorize-page.index', compact('page_name'));
+                }
+            }
+            return view('unauthorize-page.page-session-block', compact('page_name'));
         }
-
-        $page_name = 'User Activity';
-        
-        return view('super-admin.user-details.details', compact('usersCount','usersActivityCount','total_users','authentic_users','inactive_users','activity_users',
-            'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage','roles', 'page_name')
-        );
     }
     /**
      * Handle User Activity Get
     */
     public function getActivities(Request $request)
     {
+        $auth = Auth::User();
+        $branch_id = $auth->branch_id;
+        $role_id = $auth->role;
+
         // Start of the week on Sunday
         //$startOfWeek = Carbon::now()->startOfWeek(Carbon::SUNDAY);
         // End of the week on Saturday
         //$endOfWeek = Carbon::now()->endOfWeek(Carbon::SATURDAY);
 
-        // Start of the day
-        $startOfDay = Carbon::now()->startOfDay();
-        // End of the day
-        $endOfDay = Carbon::now()->endOfDay();
+        if($branch_id && $role_id === 1){
 
+            // Start of the day
+            $startOfDay = Carbon::now()->startOfDay();
+            // End of the day
+            $endOfDay = Carbon::now()->endOfDay();
+    
+    
+            // Date Request
+            $start_date = $request->input('start_date');
+            $end_date = $request->input('end_date');
+    
+            // Sort field and direction
+            $sort_field = $request->input('sort_field', 'id');
+            $sort_direction = $request->input('sort_direction', 'desc');
+    
+            // total data count
+            $total_users = SessionModel::count();
+    
+            // Start the query for user activities
+            $user_activities = SessionModel::whereNotNull('role')->with(['roles', 'users']);
+    
+            // Apply default current month filter if no custom date range provided
+            if (!$start_date || !$end_date) {
+                $user_activities->whereBetween('created_at', [$startOfDay, $endOfDay]);
+            }
+    
+            // Apply date range filter
+            if ($start_date && $end_date) {
+                $start = Carbon::parse($start_date)->startOfDay();
+                $end = Carbon::parse($end_date)->endOfDay();
+                $user_activities->whereBetween('created_at', [$start, $end]);
+            }
+    
+            // Apply search query
+            if ($query = $request->get('query')) {
+                $user_activities->where(function ($q) use ($query) {
+                    $q->where('name', 'LIKE', '%' . $query . '%')
+                    ->orWhere('email', 'LIKE', '%' . $query . '%')
+                    ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
+                    ->orWhere('role', 'LIKE', '%' . $query . '%')
+                    ->orWhere('user_id', 'LIKE', '%' . $query . '%');
+                });
+            }
+    
+            // Apply role filter
+            if ($role = $request->input('role')) {
+                $user_activities->where('role', $role);
+            }
+    
+            // Apply sorting based on requested field and direction
+            $user_activities->orderBy($sort_field, $sort_direction);
+    
+            // Set pagination limit
+            $perItem = $request->input('per_item', 10);
+            
+            // Paginate
+            $perItem = $request->input('per_item', 10);
+    
+            $paginateData = $user_activities->paginate($perItem);
+            
+            $item_num = $paginateData->count();
+            return response()->json([
+                'data' => $paginateData->items(),
+                'links' => $paginateData->toArray()['links'] ?? [],
+                'total' => $paginateData->total(),
+                'total_users' => $total_users,
+                'per_page' => $perItem,
+                'per_item_num' => $item_num,
+            ],200);
+        }else if($branch_id && $role_id === 2){
 
-        // Date Request
-        $start_date = $request->input('start_date');
-        $end_date = $request->input('end_date');
+            // Start of the day
+            $startOfDay = Carbon::now()->startOfDay();
+            // End of the day
+            $endOfDay = Carbon::now()->endOfDay();
+    
+    
+            // Date Request
+            $start_date = $request->input('start_date');
+            $end_date = $request->input('end_date');
+    
+            // Sort field and direction
+            $sort_field = $request->input('sort_field', 'id');
+            $sort_direction = $request->input('sort_direction', 'desc');
+    
+            // total data count
+            $total_users = SessionModel::where('branch_id', $branch_id)->count();
+    
+            // Start the query for user activities
+            $user_activities = SessionModel::whereNotNull('role')->with(['roles', 'users'])->where('branch_id', $branch_id);
+    
+            // Apply default current month filter if no custom date range provided
+            if (!$start_date || !$end_date) {
+                $user_activities->whereBetween('created_at', [$startOfDay, $endOfDay])->where('branch_id', $branch_id);
+            }
+    
+            // Apply date range filter
+            if ($start_date && $end_date) {
+                $start = Carbon::parse($start_date)->startOfDay();
+                $end = Carbon::parse($end_date)->endOfDay();
+                $user_activities->whereBetween('created_at', [$start, $end])->where('branch_id', $branch_id);
+            }
+    
+            // Apply search query
+            if ($query = $request->get('query')) {
+                $user_activities->where(function ($q) use ($query) {
+                    $q->where('name', 'LIKE', '%' . $query . '%')
+                    ->orWhere('email', 'LIKE', '%' . $query . '%')
+                    ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
+                    ->orWhere('role', 'LIKE', '%' . $query . '%')
+                    ->orWhere('user_id', 'LIKE', '%' . $query . '%');
+                });
+            }
+    
+            // Apply role filter
+            if ($role = $request->input('role')) {
+                $user_activities->where('role', $role);
+            }
+    
+            // Apply sorting based on requested field and direction
+            $user_activities->orderBy($sort_field, $sort_direction);
+    
+            // Set pagination limit
+            $perItem = $request->input('per_item', 10);
+            
+            // Paginate
+            $perItem = $request->input('per_item', 10);
+    
+            $paginateData = $user_activities->paginate($perItem);
+            
+            $item_num = $paginateData->count();
+            return response()->json([
+                'data' => $paginateData->items(),
+                'links' => $paginateData->toArray()['links'] ?? [],
+                'total' => $paginateData->total(),
+                'total_users' => $total_users,
+                'per_page' => $perItem,
+                'per_item_num' => $item_num,
+            ],200);
+        }else if($branch_id && $role_id === 3){
 
-        // Sort field and direction
-        $sort_field = $request->input('sort_field', 'id');
-        $sort_direction = $request->input('sort_direction', 'desc');
-
-        // total data count
-        $total_users = SessionModel::count();
-
-        // Start the query for user activities
-        $user_activities = SessionModel::whereNotNull('role')->with(['roles', 'users']);
-
-        // Apply default current month filter if no custom date range provided
-        if (!$start_date || !$end_date) {
-            $user_activities->whereBetween('created_at', [$startOfDay, $endOfDay]);
+            // Start of the day
+            $startOfDay = Carbon::now()->startOfDay();
+            // End of the day
+            $endOfDay = Carbon::now()->endOfDay();
+    
+    
+            // Date Request
+            $start_date = $request->input('start_date');
+            $end_date = $request->input('end_date');
+    
+            // Sort field and direction
+            $sort_field = $request->input('sort_field', 'id');
+            $sort_direction = $request->input('sort_direction', 'desc');
+    
+            // total data count
+            $total_users = SessionModel::where('branch_id', $branch_id)->count();
+    
+            // Start the query for user activities
+            $user_activities = SessionModel::whereNotNull('role')->with(['roles', 'users'])->where('branch_id', $branch_id);
+    
+            // Apply default current month filter if no custom date range provided
+            if (!$start_date || !$end_date) {
+                $user_activities->whereBetween('created_at', [$startOfDay, $endOfDay])->where('branch_id', $branch_id);
+            }
+    
+            // Apply date range filter
+            if ($start_date && $end_date) {
+                $start = Carbon::parse($start_date)->startOfDay();
+                $end = Carbon::parse($end_date)->endOfDay();
+                $user_activities->whereBetween('created_at', [$start, $end])->where('branch_id', $branch_id);
+            }
+    
+            // Apply search query
+            if ($query = $request->get('query')) {
+                $user_activities->where(function ($q) use ($query) {
+                    $q->where('name', 'LIKE', '%' . $query . '%')
+                    ->orWhere('email', 'LIKE', '%' . $query . '%')
+                    ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
+                    ->orWhere('role', 'LIKE', '%' . $query . '%')
+                    ->orWhere('user_id', 'LIKE', '%' . $query . '%');
+                });
+            }
+    
+            // Apply role filter
+            if ($role = $request->input('role')) {
+                $user_activities->where('role', $role);
+            }
+    
+            // Apply sorting based on requested field and direction
+            $user_activities->orderBy($sort_field, $sort_direction);
+    
+            // Set pagination limit
+            $perItem = $request->input('per_item', 10);
+            
+            // Paginate
+            $perItem = $request->input('per_item', 10);
+    
+            $paginateData = $user_activities->paginate($perItem);
+            
+            $item_num = $paginateData->count();
+            return response()->json([
+                'data' => $paginateData->items(),
+                'links' => $paginateData->toArray()['links'] ?? [],
+                'total' => $paginateData->total(),
+                'total_users' => $total_users,
+                'per_page' => $perItem,
+                'per_item_num' => $item_num,
+            ],200);
         }
-
-        // Apply date range filter
-        if ($start_date && $end_date) {
-            $start = Carbon::parse($start_date)->startOfDay();
-            $end = Carbon::parse($end_date)->endOfDay();
-            $user_activities->whereBetween('created_at', [$start, $end]);
-        }
-
-        // Apply search query
-        if ($query = $request->get('query')) {
-            $user_activities->where(function ($q) use ($query) {
-                $q->where('name', 'LIKE', '%' . $query . '%')
-                ->orWhere('email', 'LIKE', '%' . $query . '%')
-                ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
-                ->orWhere('role', 'LIKE', '%' . $query . '%')
-                ->orWhere('user_id', 'LIKE', '%' . $query . '%');
-            });
-        }
-
-        // Apply role filter
-        if ($role = $request->input('role')) {
-            $user_activities->where('role', $role);
-        }
-
-        // Apply sorting based on requested field and direction
-        $user_activities->orderBy($sort_field, $sort_direction);
-
-        // Set pagination limit
-        $perItem = $request->input('per_item', 10);
-        
-        // Paginate
-        $perItem = $request->input('per_item', 10);
-
-        $paginateData = $user_activities->paginate($perItem);
-        
-        $item_num = $paginateData->count();
-        return response()->json([
-            'data' => $paginateData->items(),
-            'links' => $paginateData->toArray()['links'] ?? [],
-            'total' => $paginateData->total(),
-            'total_users' => $total_users,
-            'per_page' => $perItem,
-            'per_item_num' => $item_num,
-        ],200);
     }
     /**
      * Handle User Activity Log Show

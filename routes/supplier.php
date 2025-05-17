@@ -9,22 +9,25 @@ Route::group(['middleware' => 'auth'], function (){
     
     // Supplier Access Permission
     Route::middleware('isSuperAdmin')->group(function () {
-
-        Route::get('/super-admin/supplier/access-permission', [SupplierController::class, 'Supplier_Access_Permission'])->name('access-permission.index');
-        Route::get('/super-admin/get-email/{selectedUserRole}',[SupplierController::class, 'getUserEmail'])->name('user-permission.email');
-        Route::post('/super-admin/store-permission',[SupplierController::class, 'storeUserPermission'])->name('user-permission.store');
-        Route::get('/super-admin/edit-permission/{id}',[SupplierController::class, 'editUserPermission'])->name('user-permission.edit');
-        Route::put('/super-admin/update-permission/{id}',[SupplierController::class, 'updateUserPermission'])->name('user-permission.update');
-        Route::delete('/super-admin/delete-permission/{id}',[SupplierController::class, 'deleteUserPermission'])->name('user-permission.delete');
-        Route::post('/super-admin/permission-status-update',[SupplierController::class, 'permissionUserStatusUpdate'])->name('user-permission.status_update');
-        Route::post('/super-admin/supplier-module-permission',[SupplierSetting::class, 'supplierSettingUpdate'])->name('module.action');
+        Route::prefix('company-supplier')->group(function (){
+            Route::get('/suppliers/access-permission', [SupplierController::class, 'Supplier_Access_Permission'])->name('access-permission.index');
+            Route::get('/suppliers/get-email/{selectedUserRole}',[SupplierController::class, 'getUserEmail'])->name('user-permission.email');
+            Route::post('/suppliers/store-permission',[SupplierController::class, 'storeUserPermission'])->name('user-permission.store');
+            Route::get('/suppliers/edit-permission/{id}',[SupplierController::class, 'editUserPermission'])->name('user-permission.edit');
+            Route::put('/suppliers/update-permission/{id}',[SupplierController::class, 'updateUserPermission'])->name('user-permission.update');
+            Route::delete('/suppliers/delete-permission/{id}',[SupplierController::class, 'deleteUserPermission'])->name('user-permission.delete');
+            Route::post('/suppliers/permission-status-update',[SupplierController::class, 'permissionUserStatusUpdate'])->name('user-permission.status_update');
+            Route::post('/suppliers/supplier-module-permission',[SupplierSetting::class, 'supplierSettingUpdate'])->name('module.action');
+        });
     });
     // Supplier Create
     Route::middleware('supplierCreate')->group(function () {
-        Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
-        Route::get('/get-supplier/{branch_id}', [SupplierController::class, 'getSupplier']);
-        Route::post('/add-supplier', [SupplierController::class, 'stroeData'])->name('add_supplier.action');
-        Route::get('/branch-fetch/{id}', [SupplierController::class, 'branchFetch'])->name('supplier_branch_fetch.action');
+        Route::prefix('company-supplier')->group(function (){
+            Route::get('/suppliers/index', [SupplierController::class, 'index'])->name('supplier.index');
+            Route::get('/get-supplier/{branch_id}', [SupplierController::class, 'getSupplier']);
+            Route::post('/add-supplier', [SupplierController::class, 'stroeData'])->name('add_supplier.action');
+            Route::get('/branch-fetch/{id}', [SupplierController::class, 'branchFetch'])->name('supplier_branch_fetch.action');
+        });
     });
     
     // Supplier Update

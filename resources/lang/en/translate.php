@@ -288,7 +288,7 @@ return[
     'Users Permission'=>'Users Permission',
     'Permission'=>'Permission',
     'Auth Pages'=>'Auth Pages',
-    'Page Permission'=>'Page Permission',
+    'Auth Page'=>'Auth Page',
     'ADD Permission'=>'ADD Permission',
     'Email-Verification'=>'Email-Verification',
     'Error Page'=>'Error',

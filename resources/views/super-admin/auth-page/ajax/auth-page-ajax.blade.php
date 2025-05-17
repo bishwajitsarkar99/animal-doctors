@@ -60,7 +60,7 @@
         function fetch_auth_page_data() {
             $.ajax({
                 type: "GET",
-                url: '/super-admin/auth-page',
+                url: '/super-admin/auth-pages/auth-page-permission',
                 dataType: 'json',
                 success: function({
                     pages

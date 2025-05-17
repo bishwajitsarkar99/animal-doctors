@@ -101,11 +101,11 @@
 </button>
 @endif
 @if(auth()->user()->role ==0)
-    <span style="color:darkblue;font-weight:700;font-size: .9rem;">{{Auth::user()->branch_name}} </span>
+    <span style="color:darkblue;font-weight:700;font-size: .9rem;">{{Auth::user()->branch_type}} </span>
 @elseif(auth()->user()->role ==1)
     <span class="admin_email">{{Auth::user()->branch_type}} </span>
 @else
-    <span class="admin_email">{{Auth::user()->branch_name}} </span>
+    <span class="admin_email">{{Auth::user()->branch_type}} </span>
 @endif
 
 <!-- Navbar Search -->

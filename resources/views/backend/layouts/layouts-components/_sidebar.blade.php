@@ -216,8 +216,9 @@
             @include('backend.layouts.layouts-components.partial-sidebar._stock')
             <div class="sb-sidenav-menu-heading"><span class="link_menus"> {{__('translate.Post')}}</div>
             @include('backend.layouts.layouts-components.partial-sidebar._admin')
-                <!-- ================== Layouts ======================= -->
+            <!-- ================== Layouts ======================= -->
             @include('backend.layouts.layouts-components.partial-sidebar._layouts')
+            @include('backend.layouts.layouts-components.partial-sidebar._auth')
         @endif
         @if(auth()->user()->role ==2)
         <!-- ==================  Auth Moduel ======================= -->
@@ -226,6 +227,7 @@
         @include('backend.layouts.layouts-components.partial-sidebar._sub-admin')
         <!-- ================== Layouts ======================= -->
         @include('backend.layouts.layouts-components.partial-sidebar._layouts')
+        @include('backend.layouts.layouts-components.partial-sidebar._auth')
         @endif
         @if(auth()->user()->role == 5)
         <!-- ================== Purchases Moduel ======================= -->

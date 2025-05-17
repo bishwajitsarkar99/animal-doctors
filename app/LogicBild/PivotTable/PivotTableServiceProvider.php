@@ -17,7 +17,8 @@ class PivotTableServiceProvider
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        return view('backend.dashboard-navbar-item.orders-pivot-table.index', compact('company_profiles'));
+        $page_name = 'Order Pivot Table';
+        return view('backend.dashboard-navbar-item.orders-pivot-table.index', compact('company_profiles','page_name'));
     }
 
     // ========================= Expenses Pivot Table ==========================
@@ -30,7 +31,8 @@ class PivotTableServiceProvider
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        return view('backend.dashboard-navbar-item.expenses-povit-table.index', compact('company_profiles'));
+        $page_name = 'Expenses Pivot Table';
+        return view('backend.dashboard-navbar-item.expenses-povit-table.index', compact('company_profiles','page_name'));
     }
 
     // ========================= Sales Pivot Table =============================
@@ -43,13 +45,14 @@ class PivotTableServiceProvider
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        return view('backend.dashboard-navbar-item.sales-povit-table.index', compact('company_profiles'));
+        $page_name = 'Sales Pivot Table';
+        return view('backend.dashboard-navbar-item.sales-povit-table.index', compact('company_profiles','page_name'));
     }
 
-    // ========================= Supplier Summary ==============================
+    // ========================= Supplier Pivot Table ==============================
     // =========================================================================
     /**
-     * Handle Supplier Summary View
+     * Handle Supplier Pivot Table View
     */
     public function viewSupplierSummary()
     {
@@ -65,8 +68,10 @@ class PivotTableServiceProvider
         $active_vendor_counts = Supplier::where('type','Vendor')->where('supplier_status',1)->count();
         $inactive_vendor_counts = Supplier::where('type','Vendor')->where('supplier_status',0)->count();
 
+        $page_name = 'Supplier Pivot Table';
+
         return view('backend.dashboard-navbar-item.supplier-summary.index', compact('company_profiles','total_supplier_counts','active_supplier_counts',
-        'inactive_supplier_counts','total_vendor_counts','active_vendor_counts','inactive_vendor_counts'));
+        'inactive_supplier_counts','total_vendor_counts','active_vendor_counts','inactive_vendor_counts', 'page_name'));
     }
     
 }

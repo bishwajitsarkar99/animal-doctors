@@ -77,13 +77,13 @@
                                         </a>
                                     </div>
                                 </div>
-                                <span class="custom-summary-arrow"></span>
+                                <span class="custom-stock-arrow"></span>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown dashboard_menubar {{setting('navbar_supplier_moduel_display')}}">
-                            <a class="dropbtn {{ Request::is('supplier-summary') || Request::is('supplier') || Request::is('super-admin/supplier/access-permission') ? 'nav-active' : '' }}">{{__('translate.Supplier')}}</a>
+                            <a class="dropbtn {{ Request::is('company-supplier/suppliers/index') || Request::is('company-supplier/suppliers/access-permission') ? 'nav-active' : '' }}">{{__('translate.Supplier')}}</a>
                             <div class="dropdown-content">
                                 <div class="row mt-1">
                                     <div class="col-xl-12">
@@ -95,10 +95,6 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <a class="{{ Request::routeIs('supplier_index') ? 'nav_btn_active' : '' }} mt-1" href="{{ route('supplier_index') }}">
-                                            <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
-                                            {{__('translate.Summary')}}
-                                        </a>
                                         <a class="{{ Request::routeIs('supplier.index') ? 'nav_btn_active' : '' }} mt-1" href="{{route('supplier.index')}}">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Create')}}
@@ -123,7 +119,7 @@
                     </li>
                     <li>
                         <div class="dropdown dashboard_menubar {{setting('navbar_pivot_moduel_display')}}">
-                            <a class="dropbtn {{ Request::is('order-pivot-table') || Request::is('sales-pivot-table') || Request::is('expenses-pivot-table') ? 'nav-active' : '' }}">{{__('translate.Pivot Table')}}</a>
+                            <a class="dropbtn {{ Request::is('pivot-tables/supplier-pivot-table') || Request::is('pivot-tables/order-pivot-table') || Request::is('pivot-tables/sales-pivot-table') || Request::is('pivot-tables/expenses-pivot-table') ? 'nav-active' : '' }}">{{__('translate.Pivot Table')}}</a>
                             <div class="dropdown-content pivot">
                                 <div class="row mt-1">
                                     <div class="col-xl-12">
@@ -146,6 +142,10 @@
                                         <a class="mt-1 {{Request::routeIs('expenses_index') ? 'nav_btn_active' : '' }} " href="{{route('expenses_index')}}">
                                             <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
                                             {{__('translate.Expenses')}}
+                                        </a>
+                                        <a class="{{ Request::routeIs('supplier_index') ? 'nav_btn_active' : '' }} mt-1" href="{{ route('supplier_index') }}">
+                                            <svg width="15px" height="10px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.999 507.107"><path fill="#2470BD" fill-rule="nonzero" d="M25.967 505.131l479.615-241.993c8.555-4.05 8.555-15.093 0-19.147L25.964 2.005C10.301-5.855-5.728 10.881 2.05 26.448l120.852 227.115L2.05 480.679c-7.868 15.689 8.377 32.206 23.917 24.452zm-1.657-22.342l116.464-218.858H458.11L24.31 482.789z"/></svg>
+                                            {{__('translate.Supplier')}}
                                         </a>
                                     </div>
                                 </div>

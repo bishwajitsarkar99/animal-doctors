@@ -102,15 +102,15 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{'backend_asset'}}/main_asset/custom-css/dashboard-css/pivot-table-css/sales-pivot.css">
-<link rel="stylesheet" href="{{'backend_asset'}}/main_asset/custom-css/dashboard-css/pivot-table-css/sales-page-focus-css/white.css" id="dashboardSalesPivotUrl">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/dashboard-css/pivot-table-css/sales-pivot.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/dashboard-css/pivot-table-css/sales-page-focus-css/white.css" id="dashboardSalesPivotUrl">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-ui.min.css">
 @endsection
 
 @section('script')
-<script src="{{'backend_asset'}}/main_asset/demo/sales-pivot-chart-line.js"></script>
-<script src="{{'backend_asset'}}/main_asset/demo/sales-pivot-chart-pie.js"></script>
-<script src="{{'backend_asset'}}/main_asset/demo/sales-pivot-chart-bar.js"></script>
+<script src="{{asset('backend_asset')}}/main_asset/demo/sales-pivot-chart-line.js"></script>
+<script src="{{asset('backend_asset')}}/main_asset/demo/sales-pivot-chart-pie.js"></script>
+<script src="{{asset('backend_asset')}}/main_asset/demo/sales-pivot-chart-bar.js"></script>
 
 <script>
     // skeleton
@@ -390,23 +390,23 @@
     $(document).ready(function() {
         // Sales summary record
         $('#start_sales_date').datepicker({
-            dateFormat: "dd-mm-yy",
+            dateFormat: "dd-M-yy",
             changeMonth: true,
             changeYear: true,
         });
         $('#end_sales_date').datepicker({
-            dateFormat: "dd-mm-yy",
+            dateFormat: "dd-M-yy",
             changeMonth: true,
             changeYear: true,
         });
         // Sales details record
         $('#start_details_date').datepicker({
-            dateFormat: "dd-mm-yy",
+            dateFormat: "dd-M-yy",
             changeMonth: true,
             changeYear: true,
         });
         $('#end_details_date').datepicker({
-            dateFormat: "dd-mm-yy",
+            dateFormat: "dd-M-yy",
             changeMonth: true,
             changeYear: true,
         });

@@ -1,4 +1,4 @@
-<a class="nav-link_cgrMenu dropdown-toggle ty child_authentication {{ Request::is('account-holders') || Request::is('super-admin/email-verification') || Request::is('super-admin/role-index') || Request::is('super-admin/role-permission-index') || Request::is('super-admin/manage-role') || Request::is('super-admin/users') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_authentication {{ Request::is('super-admin/user-accounts/account-holder/account-history') || Request::is('super-admin/register-emails/email-verification') || Request::is('super-admin/roles/role-index') || Request::is('super-admin/roles/role-permission') || Request::is('super-admin/roles/manage-role') || Request::is('super-admin/users/user-authorization') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_authentication_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_authentication_link" hidden></i>
@@ -33,7 +33,7 @@
     </li>
 </ul>
 <!-- ================= Permission ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_permission {{ Request::is('super-admin/auth-page') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_permission {{ Request::is('super-admin/auth-pages/auth-page-permission') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_permission_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_permission_link" hidden></i>
@@ -49,7 +49,7 @@
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.User-Permission')}}
                 </a>
                 <a class="nav-link underline nav_space load-page {{ Request::routeIs('authPageLoad') ? 'active' : '' }}" href="{{route('authPageLoad')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.Page Permission')}}
+                    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.Auth Page')}}
                 </a>
                 <!-- <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>">
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>Role Setting
@@ -89,7 +89,7 @@
 </ul>
 
 <!-- ================= Company Branch ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_branch {{ Request::is('company/branch-admin-access') || Request::is('company/branch-activity') || Request::is('company/branch-user-access') ? 'folder-active' : '' }}" 
+<a class="nav-link_cgrMenu dropdown-toggle ty child_branch {{ Request::is('company/branch-activity/branch-*/admin-access/index') || Request::is('company/branch-activity/branch-*/create/index') || Request::is('company/branch-activity/branch-*/user-access/index') ? 'folder-active' : '' }}" 
     id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_branch_link"></i>
@@ -102,13 +102,13 @@
     <li>
         <div class="collapse" id="auth_" aria-labelledby="headingTwo" data-bs-parent="#auth_">
             <nav class="sb-sidenav-menu-nested nav child-tree">
-                <a class="nav-link underline nav_space load-page {{ Request::routeIs('branch.index') ? 'active' : '' }}" href="{{ route('branch.index') }}" data-url="{{ route('branch.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                <a class="nav-link underline nav_space load-page {{ Request::routeIs('branch.index') ? 'active' : '' }}" href="{{ route('branch.redirect') }}" data-url="{{ route('branch.redirect') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.Create')}}
                 </a>
-                <a class="nav-link underline nav_space load-page {{ Request::routeIs('branch_access.view') ? 'active' : '' }}" href="{{ route('branch_access.view') }}" data-url="{{ route('branch_access.view') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                <a class="nav-link underline nav_space load-page {{ Request::routeIs('branch_access.view') ? 'active' : '' }}" href="{{ route('branch_access.redirect') }}" data-url="{{ route('branch_access.redirect') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.Admin Access')}}
                 </a>
-                <a class="nav-link underline nav_space load-page {{ Request::routeIs('branch_access_permission.view') ? 'active' : '' }}" href="{{ route('branch_access_permission.view') }}" data-url="{{ route('branch_access_permission.view') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                <a class="nav-link underline nav_space load-page {{ Request::routeIs('branch_access_permission.view') ? 'active' : '' }}" href="{{ route('branch_access_permission.redirect') }}" data-url="{{ route('branch_access_permission.redirect') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.User Access')}}
                 </a>
             </nav>
@@ -117,9 +117,8 @@
     </li>
 
 </ul>
-
 <!-- ================= Module ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_module {{ Request::is('application/module-category-index') || Request::is('application/module-name-index') || Request::is('application/module-index') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_module {{ Request::is('application/modules/module-category-index') || Request::is('application/modules/module-name-index') || Request::is('application/modules/module-index') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_module_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_module_link" hidden></i>
@@ -149,7 +148,7 @@
 </ul>
 
 <!-- ================= Log Activity ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_log_activity {{ Request::is('super-admin/show-user-details') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_log_activity {{ Request::is('application/user-log/user-log-activity-*/log-dashboard') ? 'folder-active' : '' }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_log_activity_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_log_activity_link" hidden></i>
@@ -161,7 +160,7 @@
     <li>
         <div class="collapse" id="auth_" aria-labelledby="headingTwo" data-bs-parent="#auth_">
             <nav class="sb-sidenav-menu-nested nav child-tree">
-                <a class="nav-link underline nav_space load-page {{ Request::routeIs('user.details') ? 'active' : '' }}" href="{{ route('user.details') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                <a class="nav-link underline nav_space load-page {{ Request::routeIs('user.details') ? 'active' : '' }}" href="{{ route('user.redirect') }}" data-url="{{ route('user.redirect') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
                     <i class="fa-solid fa-minus" style="color:#007effc4;"></i>{{__('translate.User Log Activity')}}
                 </a>
                 <!-- <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >

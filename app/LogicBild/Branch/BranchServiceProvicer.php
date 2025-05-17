@@ -17,22 +17,51 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class BranchServiceProvicer
 {
     // ========================= Company Branch ================================
     // =========================================================================
+    /**
+     * Handle Route ID Generate create company branch.
+    */
+    public function redirectWithRandomId()
+    {
+        $idRange = 30; // Random 30-character string
+        $random = Str::random($idRange);
+        session(['valid_branch_random' => $random]);
 
+        $page_authorize = 1; // create branch page authorize
+
+        return redirect()->route('branch.index', [
+            'random' => $random,
+            'page_authorize' => $page_authorize
+        ]);
+    }
     /**
      * Handle view company branch.
     */
-    public function viewBranchTemplate(Request $request)
+    public function viewBranchTemplate(Request $request, $random, $page_authorize)
     {
-        $company_profiles = Cache::rememberForever('company_profiles', function () {
-            return companyProfile::find(1);
-        });
+        $storedRandom = session('valid_branch_random');
+
         $page_name = 'Branch Create';
-        return view('super-admin.branch.index', compact('company_profiles', 'page_name'));
+
+        if ($storedRandom && $random === $storedRandom) {
+            $page_authorize = (int) $page_authorize;
+
+            if ($page_authorize === 1) {
+                $company_profiles = Cache::rememberForever('company_profiles', function () {
+                    return companyProfile::find(1);
+                });
+
+                return view('super-admin.branch.index', compact('company_profiles', 'page_name'));
+            }else{
+                return view('unauthorize-page.index', compact('page_name'));
+            }
+        }
+        return view('unauthorize-page.page-session-block', compact('page_name'));
     }
 
     /**
@@ -416,12 +445,41 @@ class BranchServiceProvicer
     }
 
     /**
+     * Handle Route ID Generate admin branch access.
+    */
+    public function redirectWithRandomAdminBranchAccessId()
+    {
+        $idRange = 30; // Random 30-character string
+        $random = Str::random($idRange);
+        session(['valid_branch_random' => $random]);
+
+        $page_authorize = 1; // or 0 based on logic
+
+        return redirect()->route('branch_access.view', [
+            'random' => $random,
+            'page_authorize' => $page_authorize
+        ]);
+    }
+
+    /**
      * Handle admin branch access view.
     */
-    public function branchAdminAccessView()
+    public function branchAdminAccessView(Request $request, $random, $page_authorize)
     {
+        $storedRandom = session('valid_branch_random');
+
         $page_name = 'Admin Branch Access';
-        return view('super-admin.branch.admin-access-view', compact('page_name'));
+
+        if ($storedRandom && $random === $storedRandom) {
+            $page_authorize = (int) $page_authorize;
+
+            if ($page_authorize === 1) {
+                return view('super-admin.branch.admin-access-view', compact('page_name'));
+            }else{
+                return view('unauthorize-page.index', compact('page_name'));
+            }
+        }
+        return view('unauthorize-page.page-session-block', compact('page_name'));
     }
 
     /**
@@ -835,12 +893,41 @@ class BranchServiceProvicer
     }
 
     /**
+     * Handle Route ID Generate user branch access.
+    */
+    public function redirectWithRandomUserBranchAccessId()
+    {
+        $idRange = 30; // Random 30-character string
+        $random = Str::random($idRange);
+        session(['valid_branch_random' => $random]);
+
+        $page_authorize = 1; // or 0 based on logic
+
+        return redirect()->route('branch_access_permission.view', [
+            'random' => $random,
+            'page_authorize' => $page_authorize
+        ]);
+    }
+
+    /**
      * Handle user branch permission view.
     */
-    public function branchAccessUserPermissionView(Request $request)
+    public function branchAccessUserPermissionView(Request $request, $random, $page_authorize)
     {
+        $storedRandom = session('valid_branch_random');
+
         $page_name = 'User Branch Access';
-        return view('super-admin.branch.user-permission-view', compact('page_name'));
+
+        if ($storedRandom && $random === $storedRandom) {
+            $page_authorize = (int) $page_authorize;
+
+            if ($page_authorize === 1) {
+                return view('super-admin.branch.user-permission-view', compact('page_name'));
+            }else{
+                return view('unauthorize-page.index', compact('page_name'));
+            }
+        }
+        return view('unauthorize-page.page-session-block', compact('page_name'));
     }
 
     /**

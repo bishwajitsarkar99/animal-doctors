@@ -291,7 +291,7 @@ return[
     'Permission'=>'অনুমতি',
     'User-Permission' => 'ব্যবহারকারী-অনুমতি',
     'Auth Pages'=>'প্রমাণীকরণ পৃষ্ঠাগুলি',
-    'Page Permission'=>'প্পৃষ্ঠা অনুমতি',
+    'Auth Page'=>'প্রমাণীকরণ প্পৃষ্ঠা',
     'ADD Permission'=>'অনুমতি যোগ করুন',
     'Email-Verification'=>'ইমেল-যাচাই',
     'Error Page'=>'ত্রুটি-পৃষ্ঠা',

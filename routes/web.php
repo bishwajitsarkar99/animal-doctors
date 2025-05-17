@@ -5,10 +5,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\FileManagerController\FileManagerController;
 use App\Http\Controllers\Language\LanguageController;
-use App\Http\Controllers\PivotTable\OrderPivotTableController;
-use App\Http\Controllers\PivotTable\PivotTableController;
-use App\Http\Controllers\PivotTable\SalesPivotTableController;
-use App\Http\Controllers\PivotTable\SupplierRecordController;
 use App\Http\Controllers\SettingController;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Auth;
@@ -38,16 +34,6 @@ require __DIR__ . DIRECTORY_SEPARATOR .'permission.php';
 require __DIR__ . DIRECTORY_SEPARATOR .'module.php';
 
 Route::group(['middleware' => 'auth'], function () {
-
-    // partial-part(dashboard-pivot table)
-    Route::middleware('isSuperAdmin')->group(function () {
-        Route::get('/expenses-pivot-table', [PivotTableController::class, 'index'])->name('expenses_index');
-        Route::get('/order-pivot-table', [OrderPivotTableController::class, 'showOrderPivot'])->name('showOrder_pivot');
-        Route::get('/sales-pivot-table', [SalesPivotTableController::class, 'showSalesPivot'])->name('showSales_pivot');
-        Route::get('/supplier-summary', [SupplierRecordController::class, 'index'])->name('supplier_index');
-        Route::get('/account-holders', [SuperAdminController::class, 'accounts_holders'])->name('get_account-holders.action');
-    });
-    
     // File - Manager System
     Route::middleware(['role:SuperAdmin|Admin|SubAdmin'])->group(function(){
         Route::get('file-manager/modal-content', [FileManagerController::class, 'modalContent'])->name('file.modalContent');

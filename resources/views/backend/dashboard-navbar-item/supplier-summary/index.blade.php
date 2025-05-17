@@ -67,15 +67,13 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{'backend_asset/main_asset/custom-css/dashboard-css/supplier-summary/scss/dist/supplier-summary.css'}}">
-<link rel="stylesheet" href="{{'backend_asset/main_asset/custom-css/dashboard-css/supplier-summary/scss/dist/supplier-summary-page-css/silver.css'}}">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/dashboard-css/supplier-summary/scss/dist/supplier-summary.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/dashboard-css/supplier-summary/scss/dist/supplier-summary-page-css/silver.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-ui.min.css">
 @endsection
 
 @section('script')
-<script src="{{'backend_asset'}}/main_asset/demo/supplier-pie-chart.js"></script>
-<script src="{{'backend_asset'}}/main_asset/demo/vendor-pie-chart.js"></script>
-<script src="{{'backend_asset'}}/main_asset/demo/supplier-payment-bar-chart.js"></script>
+<script src="{{asset('backend_asset')}}/main_asset/demo/supplier-payment-bar-chart.js"></script>
 @include('backend.dashboard-navbar-item.supplier-summary.ajax.supplier-ajax')
 <script>
     // skeleton
@@ -265,12 +263,12 @@
     $(document).ready(function() {
         // Supplier details record
         $('#start_supp_date').datepicker({
-            dateFormat: "dd-mm-yy",
+            dateFormat: "dd-M-yy",
             changeMonth: true,
             changeYear: true,
         });
         $('#end_supp_date').datepicker({
-            dateFormat: "dd-mm-yy",
+            dateFormat: "dd-M-yy",
             changeMonth: true,
             changeYear: true,
         });

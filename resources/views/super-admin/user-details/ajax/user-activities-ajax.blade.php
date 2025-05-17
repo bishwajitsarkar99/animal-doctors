@@ -43,7 +43,9 @@
                 } else if (row.payload == 'login') {
                     statusText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 11px;letter-spacing: 1px;">login</span>';
                     statusOffColor = 'color:black;background-color: #fff;';
-                    updateDate = `<span style="text-align:center;font-weight:800;padding-left:70px;"> - </span>`;
+                    updateDate = `<span style="text-align:center;font-weight:800;"> 
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="#333" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </span>`;
                     lastActivity = `<span class="animated" style="color:blue;">Running
                         <input id="light_focus" type="text" class="lightA-focus" readonly></input>
                         <input id="light_focus" type="text" class="lightB-focus" readonly></input>
@@ -146,8 +148,8 @@
                                             <p class="user_agent"><span class="user_agent_label">User-Agent :</span> ${row.user_agent} <br>
                                                 <span class="user_location"><span class="user_agent_label">IP-Address :</span> ${row.ip_address}</span> <br>
                                                 <span class="user_location"><span class="user_agent_label">Login-Date :</span> ${formatDate(row.created_at)}</span> <br>
-                                                <span class="user_location"><span class="user_agent_label">Logout-Date :</span> ${formatDate(row.updated_at)}</span> <br>
-                                                <span class="user_location"><span class="user_agent_label">Last-Activity :</span> ${row.last_activity}</span>
+                                                <span class="user_location"><span class="user_agent_label">Logout-Date :</span> ${updateDate}</span> <br>
+                                                <span class="user_location"><span class="user_agent_label">Last-Activity :</span> ${lastActivity}</span>
                                             </p>
                                         </div>
                                     </div>
@@ -376,14 +378,14 @@
         // Refresh Button
         $(document).on('click', '#refresh', function(e){
             e.preventDefault();
-            var changeURL = '/super-admin/show-user-details';
+            var changeURL = '/application/user-log/user-log-activity/log-dashboard';
             window.location.href = changeURL;
             
             $(".refresh-icon").removeClass('refrsh-hidden');
             var time = null;
             time = setTimeout(() => {
                 $(".refresh-icon").addClass('refrsh-hidden');
-            }, 1000);
+            }, 2500);
 
             return()=>{
                 clearTimeout(time);
@@ -392,33 +394,3 @@
         });
     });
 </script>
-<!-- Google Map Setting -->
- <!-- <div id="googleMap"></div> -->
-<!-- <script
-    async defer
-    loading="async"
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmpHK68DMyMpFw-KM73MO0rc8W93KT85w">
-</script>
-<script>
-    function loadMapWhenReady() {
-        const checkInterval = setInterval(() => {
-            const mapDiv = document.getElementById("googleMap");
-            if (mapDiv && window.google && google.maps) {
-                clearInterval(checkInterval);
-                initMap();
-            }
-        }, 100); // Check every 100ms
-    }
-
-    function initMap() {
-        const myLatLng = { lat: 51.508742, lng: -0.120850 };
-        const map = new google.maps.Map(document.getElementById("googleMap"), {
-            center: myLatLng,
-            zoom: 7,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-    }
-
-    // Wait for both DOM and Google Maps to load
-    document.addEventListener("DOMContentLoaded", loadMapWhenReady);
-</script> -->

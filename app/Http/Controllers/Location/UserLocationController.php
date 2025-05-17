@@ -16,10 +16,16 @@ class UserLocationController extends Controller
         return $this->userActivityServiceProvider = $userActivityServiceProvider;
     }
 
-    // User Activity
-    public function details(Request $request)
+    // User Activity redirect for generate id
+    public function redirectWithRandom()
     {
-        return $this->userActivityServiceProvider->viewUserDetails($request);
+        return $this->userActivityServiceProvider->redirectWithRandomId();
+    }
+
+    // User Activity
+    public function details(Request $request, $slug, $user_analycis_authorize, $user_log_data_authorize, $user_activity_graph_authorize)
+    {
+        return $this->userActivityServiceProvider->viewUserDetails($request, $slug, $user_analycis_authorize, $user_log_data_authorize, $user_activity_graph_authorize);
     }
 
     // Get User Activity

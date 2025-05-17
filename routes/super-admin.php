@@ -7,6 +7,10 @@ use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Setting\PostSettngController;
 use App\Http\Controllers\Inventory\InventoryAuthorization;
 use App\Http\Controllers\Inventory\InventoryDetailsRecord;
+use App\Http\Controllers\PivotTable\OrderPivotTableController;
+use App\Http\Controllers\PivotTable\PivotTableController;
+use App\Http\Controllers\PivotTable\SalesPivotTableController;
+use App\Http\Controllers\PivotTable\SupplierRecordController;
 
 Route::group(['middleware' => 'auth'], function (){
     
@@ -15,25 +19,31 @@ Route::group(['middleware' => 'auth'], function (){
     Route::group(['prefix' => 'super-admin', 'middleware' => ['web', 'isSuperAdmin']], function () {
         // Dashboard Route
         Route::get('/dashboard', [SuperAdminController::class, 'dashboard'])->name('super-admin.dashboard');
+        // partial-part(dashboard-pivot table)
+        Route::get('/pivot-tables/expenses-pivot-table', [PivotTableController::class, 'index'])->name('expenses_index');
+        Route::get('/pivot-tables/order-pivot-table', [OrderPivotTableController::class, 'showOrderPivot'])->name('showOrder_pivot');
+        Route::get('/pivot-tables/sales-pivot-table', [SalesPivotTableController::class, 'showSalesPivot'])->name('showSales_pivot');
+        Route::get('/pivot-tables/supplier-pivot-table', [SupplierRecordController::class, 'index'])->name('supplier_index');
         // User Management Routes
-        Route::get('/users', [SuperAdminController::class, 'users'])->name('superAdminUsers');
+        Route::get('/users/user-authorization', [SuperAdminController::class, 'users'])->name('superAdminUsers');
         Route::get('/get-users', [SuperAdminController::class, 'getusers'])->name('search_users.action');
         Route::post('/status-users', [SuperAdminController::class, 'update_status'])->name('update_status.action');
+        Route::get('/user-accounts/account-holder/account-history', [SuperAdminController::class, 'accounts_holders'])->name('get_account-holders.action');
         // Role Management Routes
-        Route::get('/role-index', [SuperAdminController::class, 'roleIndex'])->name('role_index');
+        Route::get('/roles/role-index', [SuperAdminController::class, 'roleIndex'])->name('role_index');
         Route::post('/role-create', [SuperAdminController::class, 'roleCreate'])->name('role_create.action');
         Route::get('/role-get', [SuperAdminController::class, 'roleGet'])->name('role_get.action');
         Route::get('/role-search', [SuperAdminController::class, 'roleSearch'])->name('role_search.action');
         Route::put('/role-update/{id}', [SuperAdminController::class, 'roleUpdate'])->name('role_update.action');
         Route::delete('/role-delete/{id}', [SuperAdminController::class, 'roleDelete'])->name('role_delete.action');
         Route::post('/role-promot', [SuperAdminController::class, 'rolePromotIndex'])->name('role_promot.action');
-        Route::get('/manage-role', [SuperAdminController::class, 'manageRole'])->name('manageRole');
+        Route::get('/roles/manage-role', [SuperAdminController::class, 'manageRole'])->name('manageRole');
         Route::post('/update-role', [SuperAdminController::class, 'updateRole'])->name('updateRole');
         // Branch Access
         Route::get('/branch-data-get/{selectedBranch}', [SuperAdminController::class, 'user_emailFetch'])->name('users_email_fetch.action');
         // Role Permission
         Route::get('/role-data-get', [SuperAdminController::class, 'user_roleFetch'])->name('users_role_fetch.action');
-        Route::get('/role-permission-index', [SuperAdminController::class, 'rolePermission'])->name('role_permission.index');
+        Route::get('/roles/role-permission', [SuperAdminController::class, 'rolePermission'])->name('role_permission.index');
         Route::post('/role-permission-create', [SuperAdminController::class, 'rolePermissionCreate'])->name('role_permission_create.action');
         Route::get('/role-permission-fetch', [SuperAdminController::class, 'rolePermissionFetch'])->name('role_permission_fetch.action');
         Route::get('/role-permission-edit/{id}', [SuperAdminController::class, 'rolePermissionEdit'])->name('role_permission_edit.action');
@@ -43,10 +53,10 @@ Route::group(['middleware' => 'auth'], function (){
         // Application Settings Routes
         Route::get('/app-setting', [SuperAdminController::class, 'appSetting'])->name('appSetting');
          // Email Verification Routes
-        Route::get('/email-verification', [SuperAdminController::class, 'loadEmailVerification'])->name('emailVerification');
+        Route::get('/register-emails/email-verification', [SuperAdminController::class, 'loadEmailVerification'])->name('emailVerification');
         Route::post('/email-verification-status', [SuperAdminController::class, 'updateEmailStatus'])->name('email_update_status.action');
         // Authentication Page Management Routes
-        Route::get('/auth-page', [SuperAdminController::class, 'loadAuthPage'])->name('authPageLoad');
+        Route::get('/auth-pages/auth-page-permission', [SuperAdminController::class, 'loadAuthPage'])->name('authPageLoad');
         Route::get('/auth-page-filter/{page_id}', [SuperAdminController::class, 'pageItemFilter'])->name('filter.action');
         Route::post('/update-auth-page/{id}', [SuperAdminController::class, 'authManagePage'])->name('update_auth_page.action');
     });

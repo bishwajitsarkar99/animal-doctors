@@ -63,8 +63,8 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{'backend_asset'}}/main_asset/custom-css/dashboard-css/pivot-table-css/expenses-pivot.css">
-<link rel="stylesheet" href="{{'backend_asset'}}/main_asset/custom-css/dashboard-css/pivot-table-css/expenses-page-focus-css/silver.css" id="dashboardExpensesPivotURL">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/dashboard-css/pivot-table-css/expenses-pivot.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/dashboard-css/pivot-table-css/expenses-page-focus-css/silver.css" id="dashboardExpensesPivotURL">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-ui.min.css">
 @endsection
 @section('script')
@@ -371,23 +371,23 @@
         $(document).ready(function() {
             // Sales summary record
             $('#start_sales_date').datepicker({
-                dateFormat: "dd-mm-yy",
+                dateFormat: "dd-M-yy",
                 changeMonth: true,
                 changeYear: true,
             });
             $('#end_sales_date').datepicker({
-                dateFormat: "dd-mm-yy",
+                dateFormat: "dd-M-yy",
                 changeMonth: true,
                 changeYear: true,
             });
             // Sales details record
             $('#start_details_date').datepicker({
-                dateFormat: "dd-mm-yy",
+                dateFormat: "dd-M-yy",
                 changeMonth: true,
                 changeYear: true,
             });
             $('#end_details_date').datepicker({
-                dateFormat: "dd-mm-yy",
+                dateFormat: "dd-M-yy",
                 changeMonth: true,
                 changeYear: true,
             });
