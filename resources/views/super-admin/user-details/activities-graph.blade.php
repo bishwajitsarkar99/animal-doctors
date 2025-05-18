@@ -1,5 +1,6 @@
-@if($user_log_data_authorize ==1 )
+@if($user_log_data_authorize ==1)
 <!-- ==== User-Activities Analysis Graph ======= -->
+@if($user_log_data_table_permission == 1)
 <div class="container">
     <div class="log-card">
         <div class="row mb-4">
@@ -148,54 +149,6 @@
         </div>
     </div>
 </div>
-@elseif($user_log_data_authorize ==0)
-<div class="card card-message form-control form-control-sm">
-    <div class="card-body" id="table_card_body">
-    <div class="row">
-        <div class="col-xl-12">
-        <div class="card-body focus-color cd branch_form">
-            <div class="row">
-                <div style="justify-content:center;align-items:center;display:flex;">
-                    @auth
-                        <h4 class="display-6 text-bold top-skeleton" style="color:#555;font-size: 1.5vw;font-weight: 700;font-family: 'Poppins', Sans-serif;">
-                            <svg viewBox="0 0 24 24" width="30" height="30" stroke="orange" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                            You are not able to access the {{$page_name}} page !
-                        </h4>
-                    @endauth
-                </div>
-                <div class="col-xl-5">
-                    @auth
-                        <span class="image-skeletone">
-                            <img class="img-profile rounded-circle" id="userOutput" src="/storage/image/user-image/{{auth()->user()->image}}" alt="error-image"><br>
-                        </span><br>
-                        <span class="auth_user text-capsule" style="color:#555;font-weight: 700;font-family: 'Poppins', Sans-serif;font-size:0.9rem">Name : {{ auth()->user()->name}}</span><br>
-                        <span class="auth_user text-capsule" style="color:#555;font-weight: 700;font-family: 'Poppins', Sans-serif;font-size:0.9rem">Email : {{ auth()->user()->login_email}}</span>
-                    @else
-                        <span class="image-skeletone">
-                            <img class="img-profile rounded-circle" id="userOutput" src="/image/828.jpg" alt="user-image">
-                        </span>
-                    @endauth
-                </div>
-                <div class="col-xl-3 text-bold-skeletone" style="text-align:center;align-items:center;margin-top:15px;">
-                    @auth
-                        <img class="" style="width:300px;height:300px;margin-top: -10px;" src="/image/403 Error Forbidden.gif" alt="error-image">
-                    @endauth
-                </div>
-                <div class="col-xl-4" style="text-align:center;">
-                    @auth
-                        <h1 class="mt-4  display-1 fw-6 px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider error-code code-skeletone">403</h1>
-                        <span class="text-bold-skeletone" style="color:#555;font-size: 3vw;font-family: 'Poppins', Sans-serif;">
-                            <strong>Unauthorized</strong>  
-                        </span>
-                    @endauth
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
-    </div>
-</div>
-@endif
 @push('scripts')
 <!-- Weekly and Monthly Line and Bar Chart -->
 <script type="module">
@@ -224,42 +177,52 @@
                     labels,
                     data,
                     monthly_user_count_per_day,
+                    message,
                 } = response;
-                // Current total login, logout and activity data
-                $("#total_current_activites_records").text(current_users);
-                $("#current_login_activites_records").text(current_login_users);
-                $("#current_logout_activites_records").text(current_logout_users);
-                // Current activity data percentage
-                $("#current_total_activites_percentage_records")
-                    .attr("aria-valuenow", total_current_users_activities_percentage.toFixed(2))
-                    .text(total_current_users_activities_percentage.toFixed(2) + "%");
-                // Current login data percentage
-                $("#current_login_activites_percentage_records")
-                    .attr("aria-valuenow", login_current_users_activities_percentage.toFixed(2))
-                    .text(login_current_users_activities_percentage.toFixed(2) + "%");
-                // Current logout data percentage
-                $("#current_logout_activites_percentage_records")
-                    .attr("aria-valuenow", logout_current_users_activities_percentage.toFixed(2))
-                    .text(logout_current_users_activities_percentage.toFixed(2) + "%");
 
-                // Update Week Log Chart
-                if (typeof userDayLogChart !== 'undefined' && userDayLogChart.data) {
-                    userDayLogChart.data.labels = labels || [];
-                    userDayLogChart.data.datasets[0].data = current_user_count_per_day.login_counts || [];
-                    userDayLogChart.data.datasets[1].data = current_user_count_per_day.logout_counts || [];
-                    userDayLogChart.data.datasets[2].data = current_user_count_per_day.current_user_counts || [];
-                    userDayLogChart.update();
-                }
+                if(message){
+                    // Current total login, logout and activity data
+                    $("#total_current_activites_records").text('');
+                    $("#current_login_activites_records").text('');
+                    $("#current_logout_activites_records").text('');
+                }else{
+                    // Current total login, logout and activity data
+                    $("#total_current_activites_records").text(current_users);
+                    $("#current_login_activites_records").text(current_login_users);
+                    $("#current_logout_activites_records").text(current_logout_users);
+                    // Current activity data percentage
+                    $("#current_total_activites_percentage_records")
+                        .attr("aria-valuenow", total_current_users_activities_percentage.toFixed(2))
+                        .text(total_current_users_activities_percentage.toFixed(2) + "%");
+                    // Current login data percentage
+                    $("#current_login_activites_percentage_records")
+                        .attr("aria-valuenow", login_current_users_activities_percentage.toFixed(2))
+                        .text(login_current_users_activities_percentage.toFixed(2) + "%");
+                    // Current logout data percentage
+                    $("#current_logout_activites_percentage_records")
+                        .attr("aria-valuenow", logout_current_users_activities_percentage.toFixed(2))
+                        .text(logout_current_users_activities_percentage.toFixed(2) + "%");
+    
+                    // Update Week Log Chart
+                    if (typeof userDayLogChart !== 'undefined' && userDayLogChart.data) {
+                        userDayLogChart.data.labels = labels || [];
+                        userDayLogChart.data.datasets[0].data = current_user_count_per_day.login_counts || [];
+                        userDayLogChart.data.datasets[1].data = current_user_count_per_day.logout_counts || [];
+                        userDayLogChart.data.datasets[2].data = current_user_count_per_day.current_user_counts || [];
+                        userDayLogChart.update();
+                    }
+    
+                    // Update Month Log Chart
+                    if (typeof userMonthLogChart !== 'undefined' && userMonthLogChart.data) {
+                        userMonthLogChart.data.datasets[0].data = monthly_user_count_per_day.login_counts || [];
+                        userMonthLogChart.data.datasets[1].data = monthly_user_count_per_day.logout_counts || [];
+                        userMonthLogChart.data.datasets[2].data = monthly_user_count_per_day.current_user_counts || [];
+                        userMonthLogChart.update();
+                    }
+                    // Initialize the tooltip elements
+                    $('[data-bs-toggle="tooltip"]').tooltip();
 
-                // Update Month Log Chart
-                if (typeof userMonthLogChart !== 'undefined' && userMonthLogChart.data) {
-                    userMonthLogChart.data.datasets[0].data = monthly_user_count_per_day.login_counts || [];
-                    userMonthLogChart.data.datasets[1].data = monthly_user_count_per_day.logout_counts || [];
-                    userMonthLogChart.data.datasets[2].data = monthly_user_count_per_day.current_user_counts || [];
-                    userMonthLogChart.update();
                 }
-                // Initialize the tooltip elements
-                $('[data-bs-toggle="tooltip"]').tooltip();
             }
         });
     }
@@ -615,343 +578,349 @@
                     end_date: end
                 },
                 success: function (response) {
-                    const labels = response.labels;
-                    const data = response.monthly_user_count_per_day;
+                    const messages = response.message;
+                    if(messages){
+                        $("show_messg").text(messages);
+                    }else{
 
-                    const date_labels = response.date_labels;
-                    const date_data = response.monthly_user_count_per_date;
-                    
-
-                    if (chart) chart.destroy(); // Clean existing chart
-                    if (chartDate) chartDate.destroy();
-
-                    const ctx = document.getElementById('userAllLogChart').getContext('2d');
-                    const ctxDateChart = document.getElementById('allUserDateLogChart').getContext('2d');
-
-                    // Create gradients
-                    const gradientLogin = ctx.createLinearGradient(0, 0, 0, 400);
-                    gradientLogin.addColorStop(0, 'rgba(28,200,138,0.5)');
-                    gradientLogin.addColorStop(1, 'rgba(34,139,34,0)');
-
-                    const gradientLogout = ctx.createLinearGradient(0, 0, 0, 400);
-                    gradientLogout.addColorStop(0, '#e74a3b');
-                    gradientLogout.addColorStop(1, 'rgba(255,165,0,0)');
-
-                    const gradientUsers = ctx.createLinearGradient(0, 0, 0, 400);
-                    gradientUsers.addColorStop(0, 'rgba(0, 123, 255, 0.2)');
-                    gradientUsers.addColorStop(1, 'rgba(0,0,255,0)');
-
-                    // Pointer Design rectangle candle
-                    function createCandlePointStyle(color = 'black') {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = 20;  // wider
-                        canvas.height = 40; // taller
-                        const ctx = canvas.getContext('2d');
-
-                        // Draw wick (centered)
-                        ctx.beginPath();
-                        ctx.moveTo(canvas.width / 2, 0);
-                        ctx.lineTo(canvas.width / 2, canvas.height);
-                        ctx.strokeStyle = color;
-                        ctx.lineWidth = 2;
-                        ctx.stroke();
-
-                        // Draw body (rectangle candle)
-                        const bodyWidth = 8;
-                        const bodyHeight = 20;
-                        const bodyX = (canvas.width - bodyWidth) / 2;
-                        const bodyY = (canvas.height - bodyHeight) / 2;
-
-                        ctx.fillStyle = color;
-                        ctx.fillRect(bodyX, bodyY, bodyWidth, bodyHeight);
-
-                        return canvas;
+                        const labels = response.labels;
+                        const data = response.monthly_user_count_per_day;
+    
+                        const date_labels = response.date_labels;
+                        const date_data = response.monthly_user_count_per_date;
+                        
+    
+                        if (chart) chart.destroy(); // Clean existing chart
+                        if (chartDate) chartDate.destroy();
+    
+                        const ctx = document.getElementById('userAllLogChart').getContext('2d');
+                        const ctxDateChart = document.getElementById('allUserDateLogChart').getContext('2d');
+    
+                        // Create gradients
+                        const gradientLogin = ctx.createLinearGradient(0, 0, 0, 400);
+                        gradientLogin.addColorStop(0, 'rgba(28,200,138,0.5)');
+                        gradientLogin.addColorStop(1, 'rgba(34,139,34,0)');
+    
+                        const gradientLogout = ctx.createLinearGradient(0, 0, 0, 400);
+                        gradientLogout.addColorStop(0, '#e74a3b');
+                        gradientLogout.addColorStop(1, 'rgba(255,165,0,0)');
+    
+                        const gradientUsers = ctx.createLinearGradient(0, 0, 0, 400);
+                        gradientUsers.addColorStop(0, 'rgba(0, 123, 255, 0.2)');
+                        gradientUsers.addColorStop(1, 'rgba(0,0,255,0)');
+    
+                        // Pointer Design rectangle candle
+                        function createCandlePointStyle(color = 'black') {
+                            const canvas = document.createElement('canvas');
+                            canvas.width = 20;  // wider
+                            canvas.height = 40; // taller
+                            const ctx = canvas.getContext('2d');
+    
+                            // Draw wick (centered)
+                            ctx.beginPath();
+                            ctx.moveTo(canvas.width / 2, 0);
+                            ctx.lineTo(canvas.width / 2, canvas.height);
+                            ctx.strokeStyle = color;
+                            ctx.lineWidth = 2;
+                            ctx.stroke();
+    
+                            // Draw body (rectangle candle)
+                            const bodyWidth = 8;
+                            const bodyHeight = 20;
+                            const bodyX = (canvas.width - bodyWidth) / 2;
+                            const bodyY = (canvas.height - bodyHeight) / 2;
+    
+                            ctx.fillStyle = color;
+                            ctx.fillRect(bodyX, bodyY, bodyWidth, bodyHeight);
+    
+                            return canvas;
+                        }
+                        
+                        // Montly Basis Data Line Chart
+                        chart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels,
+                                datasets: [
+                                    {
+                                        type: 'line',
+                                        label: 'Login Count',
+                                        data: data.login_counts,
+                                        backgroundColor: gradientLogin,
+                                        borderColor: 'rgb(0, 160, 101)',
+                                        fill: true,
+                                        tension: 0.4,
+                                        borderWidth: 1,
+                                        pointStyle: createCandlePointStyle('darkgreen'),
+                                        pointHoverBackgroundColor: "darkgreen"
+                                    },
+                                    {
+                                        type: 'line',
+                                        label: 'Logout Count',
+                                        data: data.logout_counts,
+                                        backgroundColor: gradientLogout,
+                                        borderColor: '#e74a3b',
+                                        fill: true,
+                                        tension: 0.4,
+                                        borderWidth: 1,
+                                        pointStyle: createCandlePointStyle('#e74a3b'),
+                                        pointHoverBackgroundColor: "#e74a3b"
+                                    },
+                                    {
+                                        type: 'line',
+                                        label: 'Active Users',
+                                        data: data.current_user_counts,
+                                        backgroundColor: gradientUsers,
+                                        borderColor: '#2259ff',
+                                        fill: true,
+                                        tension: 0.4,
+                                        borderWidth: 1,
+                                        pointStyle: createCandlePointStyle('#4e73df'),
+                                        pointHoverBackgroundColor: "#4e73df"
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                // maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        position: 'top',
+                                        labels: {
+                                            color: '#333',
+                                            font: {
+                                                size: 12,
+                                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                                weight: 'bold'
+                                            }
+                                        },
+                                        onHover(event, item, legend) {
+                                            legend.chart.canvas.style.cursor = 'pointer'; // ew-resize
+                                        },
+                                        onLeave(event, item, legend) {
+                                            legend.chart.canvas.style.cursor = 'default';
+                                        }
+                                    },
+                                    tooltip: {
+                                        enabled: true,
+                                        backgroundColor: 'rgb(255, 255, 255)',
+                                        titleColor: '#000000',
+                                        bodyColor: '#000000',
+                                        borderWidth: 1,
+                                        borderColor:'rgba(2, 149, 168, 0.6)',
+                                        titleFont: { size: 12 },
+                                        bodyFont: { size: 12 }
+                                    },
+                                    zoom: {
+                                        pan: {
+                                            enabled: true,
+                                            mode: 'x',
+                                            threshold: 10
+                                        },
+                                        zoom: {
+                                            wheel: {
+                                                enabled: true
+                                            },
+                                            pinch: {
+                                                enabled: true
+                                            },
+                                            mode: 'x'
+                                        }
+                                    }
+                                },
+                                interaction: {
+                                    mode: 'index',
+                                    intersect: false
+                                },
+                                scales: {
+                                    x: {
+                                        grid: { display: false, color: 'silver' },
+                                        ticks: {
+                                            source: 'data',
+                                            autoSkip: true,
+                                            color: '#333',
+                                            font: {
+                                                size: 11,
+                                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                                weight: 'bold'
+                                            },
+                                            // x-label rotation change 
+                                            // autoSkip: false,
+                                            // maxRotation: 45,
+                                            // minRotation: 0
+                                            type: 'time',
+                                            time: {
+                                                unit: 'day',
+                                                tooltipFormat: 'dd MMM yyyy',
+                                                displayFormats: {
+                                                    day: 'dd MMM yyyy'
+                                                }
+                                            },
+                                        }   
+                                    },
+                                    y: {
+                                        beginAtZero: true,
+                                        grid: { display: true, color: 'silver' },
+                                        ticks: {
+                                            source: 'data',
+                                            autoSkip: true,
+                                            color: '#333',
+                                            //stepSize: 1,
+                                            font: {
+                                                size: 11,
+                                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                                weight: 'bold'
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            plugins: [
+                                hoverGridPlugin(),
+                                dottedGridPlugin(),
+                                axisTooltipDateFormatePlugin(),
+                                ChartScrollPlugin(),
+                                ChartZoom,
+                                // axisCursorPlugin()
+                            ]
+                        });
+    
+                        // Date Basis Data Bar Chart
+                        chartDate = new Chart(ctxDateChart, {
+                            type: 'bar',
+                            data: {
+                                labels: date_labels,
+                                datasets: [
+                                    {
+                                        type: 'bar',
+                                        label: 'Login Count',
+                                        data: date_data.date_login_counts,
+                                        backgroundColor: 'rgba(28,200,138,0.5)',
+                                        fill: true,
+                                        tension: 0.4,
+                                        order: 3
+                                    },
+                                    {
+                                        type: 'bar',
+                                        label: 'Logout Count',
+                                        data: date_data.date_logout_counts,
+                                        backgroundColor: '#e74a3b',
+                                        fill: true,
+                                        tension: 0.4,
+                                        order: 2
+                                    },
+                                    {
+                                        type: 'bar',
+                                        label: 'Active Users',
+                                        data: date_data.date_current_user_counts,
+                                        backgroundColor: '#4e73df',
+                                        fill: true,
+                                        tension: 0.4,
+                                        order: 1
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                // maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: false,
+                                        position: 'top',
+                                        labels: {
+                                            color: '#333',
+                                            font: {
+                                                size: 12,
+                                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                                weight: 'bold'
+                                            }
+                                        }
+                                    },
+                                    tooltip: {
+                                        enabled: true,
+                                        backgroundColor: 'rgb(255, 255, 255)',
+                                        titleColor: '#000000',
+                                        bodyColor: '#000000',
+                                        borderWidth: 1,
+                                        borderColor:'rgba(2, 149, 168, 0.6)',
+                                        titleFont: { size: 12 },
+                                        bodyFont: { size: 12 }
+                                    },
+                                    zoom: {
+                                        pan: {
+                                            enabled: true,
+                                            mode: 'x',
+                                            threshold: 10
+                                        },
+                                        zoom: {
+                                            wheel: {
+                                                enabled: true
+                                            },
+                                            pinch: {
+                                                enabled: true
+                                            },
+                                            mode: 'x'
+                                        }
+                                    }
+                                },
+                                interaction: {
+                                    mode: 'index',
+                                    intersect: false
+                                },
+                                scales: {
+                                    x: {
+                                        grid: { display: false, color: 'silver' },
+                                        ticks: {
+                                            source: 'data',
+                                            autoSkip: true,
+                                            color: '#333',
+                                            //stepSize: 1,
+                                            font: {
+                                                size: 11,
+                                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                                weight: 'bold'
+                                            },
+                                            // x-label rotation change 
+                                            // autoSkip: false,
+                                            // maxRotation: 45,
+                                            // minRotation: 0
+                                            type: 'time',
+                                            time: {
+                                                unit: 'day',
+                                                tooltipFormat: 'dd MMM yyyy',
+                                                displayFormats: {
+                                                    day: 'dd MMM yyyy'
+                                                }
+                                            },
+                                        }   
+                                    },
+                                    y: {
+                                        beginAtZero: true,
+                                        grid: { display: true, color: 'silver' },
+                                        ticks: {
+                                            source: 'data',
+                                            autoSkip: true,
+                                            color: '#333',
+                                            font: {
+                                                size: 11,
+                                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                                weight: 'bold'
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            plugins: [
+                                hoverGridPlugin(),
+                                dottedGridPlugin(),
+                                axisTooltipDateFormatePlugin(),
+                                ChartScrollPlugin(),
+                                ChartZoom,
+                                axisCursorPlugin()
+                            ]
+                        });
                     }
-                    
-                    // Montly Basis Data Line Chart
-                    chart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels,
-                            datasets: [
-                                {
-                                    type: 'line',
-                                    label: 'Login Count',
-                                    data: data.login_counts,
-                                    backgroundColor: gradientLogin,
-                                    borderColor: 'rgb(0, 160, 101)',
-                                    fill: true,
-                                    tension: 0.4,
-                                    borderWidth: 1,
-                                    pointStyle: createCandlePointStyle('darkgreen'),
-                                    pointHoverBackgroundColor: "darkgreen"
-                                },
-                                {
-                                    type: 'line',
-                                    label: 'Logout Count',
-                                    data: data.logout_counts,
-                                    backgroundColor: gradientLogout,
-                                    borderColor: '#e74a3b',
-                                    fill: true,
-                                    tension: 0.4,
-                                    borderWidth: 1,
-                                    pointStyle: createCandlePointStyle('#e74a3b'),
-                                    pointHoverBackgroundColor: "#e74a3b"
-                                },
-                                {
-                                    type: 'line',
-                                    label: 'Active Users',
-                                    data: data.current_user_counts,
-                                    backgroundColor: gradientUsers,
-                                    borderColor: '#2259ff',
-                                    fill: true,
-                                    tension: 0.4,
-                                    borderWidth: 1,
-                                    pointStyle: createCandlePointStyle('#4e73df'),
-                                    pointHoverBackgroundColor: "#4e73df"
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            // maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
-                                    display: true,
-                                    position: 'top',
-                                    labels: {
-                                        color: '#333',
-                                        font: {
-                                            size: 12,
-                                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
-                                            weight: 'bold'
-                                        }
-                                    },
-                                    onHover(event, item, legend) {
-                                        legend.chart.canvas.style.cursor = 'pointer'; // ew-resize
-                                    },
-                                    onLeave(event, item, legend) {
-                                        legend.chart.canvas.style.cursor = 'default';
-                                    }
-                                },
-                                tooltip: {
-                                    enabled: true,
-                                    backgroundColor: 'rgb(255, 255, 255)',
-                                    titleColor: '#000000',
-                                    bodyColor: '#000000',
-                                    borderWidth: 1,
-                                    borderColor:'rgba(2, 149, 168, 0.6)',
-                                    titleFont: { size: 12 },
-                                    bodyFont: { size: 12 }
-                                },
-                                zoom: {
-                                    pan: {
-                                        enabled: true,
-                                        mode: 'x',
-                                        threshold: 10
-                                    },
-                                    zoom: {
-                                        wheel: {
-                                            enabled: true
-                                        },
-                                        pinch: {
-                                            enabled: true
-                                        },
-                                        mode: 'x'
-                                    }
-                                }
-                            },
-                            interaction: {
-                                mode: 'index',
-                                intersect: false
-                            },
-                            scales: {
-                                x: {
-                                    grid: { display: false, color: 'silver' },
-                                    ticks: {
-                                        source: 'data',
-                                        autoSkip: true,
-                                        color: '#333',
-                                        font: {
-                                            size: 11,
-                                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
-                                            weight: 'bold'
-                                        },
-                                        // x-label rotation change 
-                                        // autoSkip: false,
-                                        // maxRotation: 45,
-                                        // minRotation: 0
-                                        type: 'time',
-                                        time: {
-                                            unit: 'day',
-                                            tooltipFormat: 'dd MMM yyyy',
-                                            displayFormats: {
-                                                day: 'dd MMM yyyy'
-                                            }
-                                        },
-                                    }   
-                                },
-                                y: {
-                                    beginAtZero: true,
-                                    grid: { display: true, color: 'silver' },
-                                    ticks: {
-                                        source: 'data',
-                                        autoSkip: true,
-                                        color: '#333',
-                                        //stepSize: 1,
-                                        font: {
-                                            size: 11,
-                                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
-                                            weight: 'bold'
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        plugins: [
-                            hoverGridPlugin(),
-                            dottedGridPlugin(),
-                            axisTooltipDateFormatePlugin(),
-                            ChartScrollPlugin(),
-                            ChartZoom,
-                            // axisCursorPlugin()
-                        ]
-                    });
-
-                    // Date Basis Data Bar Chart
-                    chartDate = new Chart(ctxDateChart, {
-                        type: 'bar',
-                        data: {
-                            labels: date_labels,
-                            datasets: [
-                                {
-                                    type: 'bar',
-                                    label: 'Login Count',
-                                    data: date_data.date_login_counts,
-                                    backgroundColor: 'rgba(28,200,138,0.5)',
-                                    fill: true,
-                                    tension: 0.4,
-                                    order: 3
-                                },
-                                {
-                                    type: 'bar',
-                                    label: 'Logout Count',
-                                    data: date_data.date_logout_counts,
-                                    backgroundColor: '#e74a3b',
-                                    fill: true,
-                                    tension: 0.4,
-                                    order: 2
-                                },
-                                {
-                                    type: 'bar',
-                                    label: 'Active Users',
-                                    data: date_data.date_current_user_counts,
-                                    backgroundColor: '#4e73df',
-                                    fill: true,
-                                    tension: 0.4,
-                                    order: 1
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            // maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
-                                    display: false,
-                                    position: 'top',
-                                    labels: {
-                                        color: '#333',
-                                        font: {
-                                            size: 12,
-                                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
-                                            weight: 'bold'
-                                        }
-                                    }
-                                },
-                                tooltip: {
-                                    enabled: true,
-                                    backgroundColor: 'rgb(255, 255, 255)',
-                                    titleColor: '#000000',
-                                    bodyColor: '#000000',
-                                    borderWidth: 1,
-                                    borderColor:'rgba(2, 149, 168, 0.6)',
-                                    titleFont: { size: 12 },
-                                    bodyFont: { size: 12 }
-                                },
-                                zoom: {
-                                    pan: {
-                                        enabled: true,
-                                        mode: 'x',
-                                        threshold: 10
-                                    },
-                                    zoom: {
-                                        wheel: {
-                                            enabled: true
-                                        },
-                                        pinch: {
-                                            enabled: true
-                                        },
-                                        mode: 'x'
-                                    }
-                                }
-                            },
-                            interaction: {
-                                mode: 'index',
-                                intersect: false
-                            },
-                            scales: {
-                                x: {
-                                    grid: { display: false, color: 'silver' },
-                                    ticks: {
-                                        source: 'data',
-                                        autoSkip: true,
-                                        color: '#333',
-                                        //stepSize: 1,
-                                        font: {
-                                            size: 11,
-                                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
-                                            weight: 'bold'
-                                        },
-                                        // x-label rotation change 
-                                        // autoSkip: false,
-                                        // maxRotation: 45,
-                                        // minRotation: 0
-                                        type: 'time',
-                                        time: {
-                                            unit: 'day',
-                                            tooltipFormat: 'dd MMM yyyy',
-                                            displayFormats: {
-                                                day: 'dd MMM yyyy'
-                                            }
-                                        },
-                                    }   
-                                },
-                                y: {
-                                    beginAtZero: true,
-                                    grid: { display: true, color: 'silver' },
-                                    ticks: {
-                                        source: 'data',
-                                        autoSkip: true,
-                                        color: '#333',
-                                        font: {
-                                            size: 11,
-                                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
-                                            weight: 'bold'
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        plugins: [
-                            hoverGridPlugin(),
-                            dottedGridPlugin(),
-                            axisTooltipDateFormatePlugin(),
-                            ChartScrollPlugin(),
-                            ChartZoom,
-                            axisCursorPlugin()
-                        ]
-                    });
                 }
             });
         }
@@ -1227,3 +1196,9 @@
     };
 </script> -->
 @endPush
+@elseif($user_log_data_table_permission == 0)
+@include('super-admin.user-details.error.data-table-permission')
+@endif
+@elseif($user_log_data_authorize ==0)
+@include('super-admin.user-details.error.unauthorize')
+@endif

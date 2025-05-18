@@ -23,9 +23,9 @@ class UserLocationController extends Controller
     }
 
     // User Activity
-    public function details(Request $request, $slug, $user_analycis_authorize, $user_log_data_authorize, $user_activity_graph_authorize)
+    public function details(Request $request, $slug)
     {
-        return $this->userActivityServiceProvider->viewUserDetails($request, $slug, $user_analycis_authorize, $user_log_data_authorize, $user_activity_graph_authorize);
+        return $this->userActivityServiceProvider->viewUserDetails($request, $slug);
     }
 
     // Get User Activity

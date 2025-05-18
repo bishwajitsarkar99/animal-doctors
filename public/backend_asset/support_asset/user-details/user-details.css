@@ -285,6 +285,35 @@ button.btn-refresh:hover{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
+.head-init{
+    font-family: var(--nav-font-family);
+    font-size: 16px;
+    font-weight: 800;
+    color: #000;
+    text-align: center;
+}
+.text-position{
+    padding-right: 53px;
+}
+.data-head{
+    margin: 0 21px;
+    padding: 1px 0;
+    border-bottom: 1px solid #c7c7c7;
+    border-top: 1px solid #c7c7c7;
+}
+.font-gray-700{
+    font-family: var(--nav-font-family);
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+}
+ul#branchLabel>li, ul#roleLabel>li, ul#brancChart>li{
+    list-style: none;
+    font-family: var(--nav-font-family);
+    font-size: 12px;
+    font-weight: 600;
+    color: #222;
+}
 th{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
@@ -319,7 +348,14 @@ img#loaderShow {
     background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
     opacity: 1;
 }
-.first-card:hover, .second-card:hover, .third-card:hover, .four-card:hover, .five-card:hover,.log-panel-card:hover,.user_line_chart:hover {
+.branch-info-card{
+    border: none;
+    /* box-shadow: 0px 1px 20px #0001, 0px 2px 6px #0001; */
+    box-shadow: 0px 1px 20px #0001, 0px 2px 6px rgba(0, 123, 255, 0.2);
+    background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
+    opacity: 1;
+}
+.first-card:hover, .second-card:hover, .third-card:hover, .four-card:hover, .five-card:hover,.log-panel-card:hover,.user_line_chart:hover,.branch-info-card:hover {
     /* --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35); */
     box-shadow: 0px 2px 20px rgba(rgba(0, 123, 255, 0.2), 0.35), 0px 2px 6px #0001;
@@ -415,6 +451,23 @@ img.full-width-img {
     border: none;
     -webkit-appearance: none;
     cursor: ew-resize;
+}
+
+/* Firefox: style the thumb */
+.dual-range::-moz-range-thumb {
+    pointer-events: all;
+    width: 10px;
+    height: 35px;
+    background-image: linear-gradient(to right, rgb(0, 81, 255), rgba(0, 123, 255, 0.1), rgb(0, 81, 255) 100%);
+    border-radius: 5%;
+    border: none;
+    cursor: ew-resize;
+}
+
+/* Firefox: remove default styles from track */
+.dual-range::-moz-range-track {
+    background: none;
+    height: 95px;
 }
   
 .range-track {

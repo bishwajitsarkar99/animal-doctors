@@ -1,3 +1,4 @@
+@if($user_log_data_table_permission == 1)
 <!-- ==== User-Details-Graph ======= -->
 <div class="row">
     <div class="col-xl-3">
@@ -241,6 +242,53 @@
         </div>
     </div>
 </div>
+<div class="row mt-4 mb-4">
+    <div class="col-xl-12">
+        <div class="card card-body branch-info-card" id="branchCard">
+            <div class="row">
+                <div class="col-xl-12 head-init">
+                    <span class="text-position">Branch Log Data Information</span>
+                </div>
+                @foreach($branch_log_session_data as $branchId => $rolesGroup)
+                    @php
+                        $firstSession = $rolesGroup->first();
+                    @endphp
+
+                    <div>
+                        <div class="row font-gray-700 data-head">
+                            <div class="col-xl-4"><span>Branch</span></div>
+                            <div class="col-xl-4"><span class="ms-3 ps-1">Role</span></div>
+                            <div class="col-xl-4" style="text-align:center;"><span>Barchart</span></div>
+                        </div>
+                    </div>
+                    <div class="row font-gray-700">
+                        <div class="col-xl-4">
+                            <ul id="branchLabel">
+                                <li>Branch-ID : {{ $branchId }}</li>
+                                <li>Branch-Category : {{ $firstSession->users->branch_type ?? 'N/A' }}</li>
+                                <li>Branch-Name : {{ $firstSession->users->branch_name ?? 'N/A' }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-xl-4">
+                            <ul id="roleLabel">
+                                @foreach($rolesGroup->unique('role') as $roleItem)
+                                    <li class="ps-2">Role-Name : {{ $roleItem->roles->name ?? $roleItem->role }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="col-xl-4">
+                            <ul id="brancChart">
+                                <li>
+                                    <canvas id="branchChart" height="20"></canvas>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
 @push('scripts')
 <script type="module">
     // hover plugins
@@ -438,3 +486,6 @@
     });
 </script>
 @endPush
+@elseif($user_log_data_table_permission == 0)
+@include('super-admin.user-details.error.data-table-permission')
+@endif

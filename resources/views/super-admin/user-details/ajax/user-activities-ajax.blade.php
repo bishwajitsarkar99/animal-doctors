@@ -189,29 +189,33 @@
                     sort_field: sortField,
                     sort_direction: sortDirection
                 },
-                success: function({ data, links, total ,total_users, per_page, per_item_num}) {
-                    $("#user_activites_data_table").html(table_rows([...data]));
-                    $("#activities_users_data_table_paginate").html(paginate_html({ links, total }));
-                    $("#total_activites_records").text(total);
-                    $("#total_items").text(total_users);
-                    $("#total_per_items").text(per_page);
-                    $("#per_items_num").text(per_item_num);
-                    // Initialize the tooltip elements
-                    $('[data-bs-toggle="tooltip"]').tooltip();
-
-                    // Initialize autocomplete for search
-                    var suggestions = data.map(function(item) {
-                        return { label: `${item.email}`, value: item.email };
-                    });
-
-                    $("#search").autocomplete({
-                        source: suggestions,
-                        classes: {
-                            "ui-autocomplete": "custom-autocomplete",
-                            "ui-menu-item": "custom-menu-item",
-                            "ui-state-active": "custom-state-active"
-                        }
-                    });
+                success: function({ data, links, total ,total_users, per_page, per_item_num, message}) {
+                    if(message){
+                       $("#user_activites_data_table").text(message); 
+                    }else{
+                        $("#user_activites_data_table").html(table_rows([...data]));
+                        $("#activities_users_data_table_paginate").html(paginate_html({ links, total }));
+                        $("#total_activites_records").text(total);
+                        $("#total_items").text(total_users);
+                        $("#total_per_items").text(per_page);
+                        $("#per_items_num").text(per_item_num);
+                        // Initialize the tooltip elements
+                        $('[data-bs-toggle="tooltip"]').tooltip();
+    
+                        // Initialize autocomplete for search
+                        var suggestions = data.map(function(item) {
+                            return { label: `${item.email}`, value: item.email };
+                        });
+    
+                        $("#search").autocomplete({
+                            source: suggestions,
+                            classes: {
+                                "ui-autocomplete": "custom-autocomplete",
+                                "ui-menu-item": "custom-menu-item",
+                                "ui-state-active": "custom-state-active"
+                            }
+                        });
+                    }
                 }
             });
         }
@@ -385,7 +389,7 @@
             var time = null;
             time = setTimeout(() => {
                 $(".refresh-icon").addClass('refrsh-hidden');
-            }, 2500);
+            }, 3000);
 
             return()=>{
                 clearTimeout(time);

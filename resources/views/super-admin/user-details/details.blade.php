@@ -30,10 +30,6 @@
     <div id="userDetails" class="container tab-pane" hidden><br>
       @include('super-admin.user-details.activities-graph')
     </div>
-    <div id="userPermission" class="container tab-pane"><br>
-
-    </div>
-    </div>
   </div>
   <div class="loader-position">
     <img class="server-loader loader-show" id="loaderShow" src="{{asset('/image/loader/loading.gif')}}" alt="Loading...."/>
