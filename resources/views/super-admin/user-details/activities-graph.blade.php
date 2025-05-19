@@ -73,7 +73,7 @@
                     <div class="card-header mini-bar-header ps-2" style="text-align:center;">
                         <span class="card-head-title head-skeletone">
                             <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
-                            Current Users Log Activities ( Per Week )
+                            Current Users Log Activities Line Chart ( Per Week )
                         </span>
                         <div class="loader_chart loader_skeleton" id="loader_userChart"></div>
                     </div>
@@ -88,7 +88,7 @@
                     <div class="card-header mini-bar-header ps-2" style="text-align:center;">
                         <span class="card-head-title head-skeletone">
                             <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
-                            Current Users Log Activities ( Per Month )
+                            Current Users Log Activities Bar Chart ( Per Month )
                         </span>
                         <div class="loader_chart loader_skeleton" id="loader_userLogChart"></div>
                     </div>
@@ -109,7 +109,7 @@
                         <div class="col-xl-8">
                             <span class="card-head-title head-skeletone">
                                 <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
-                                Total Users Log Activities
+                                Users Log Activities Line Chart
                             </span>
                             <div class="loader_chart loader_skeleton" id="loader_userAllLogChart"></div>
                         </div>
@@ -314,9 +314,9 @@
                         display: true,
                         position: 'top',
                         labels: {
-                            color: '#333',
+                            color: '#000',
                             font: {
-                                size: 12,
+                                size: 11,
                                 family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                                 weight: 'bold',
                             }
@@ -338,8 +338,9 @@
                         bodyColor: '#000000',
                         borderWidth: 1,
                         borderColor:'rgba(2, 149, 168, 0.6)',
-                        titleFont: { size: 12 },
-                        bodyFont: { size: 12 },
+                        titleFont: { size: 11 },
+                        bodyFont: { size: 11 },
+                        fontWeight: 'bold'
                     }
                 },
                 interaction: {
@@ -353,7 +354,7 @@
                             color: 'rgba(0, 0, 0, 0.1)',
                         },
                         ticks: {
-                            color: '#333',
+                            color: '#111',
                             font: {
                                 size: 11, 
                                 family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
@@ -368,7 +369,7 @@
                         },
                         ticks: {
                             beginAtZero: true,
-                            color: '#333',
+                            color: '#111',
                             font: {
                                 size: 11, 
                                 family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
@@ -459,9 +460,9 @@
                         display: true,
                         position: 'top',
                         labels: {
-                            color: '#333',
+                            color: '#000',
                             font: {
-                                size: 12,
+                                size: 11,
                                 family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                                 weight: 'bold',
                             }
@@ -483,8 +484,9 @@
                         bodyColor: '#000000',
                         borderWidth: 1,
                         borderColor:'rgba(2, 149, 168, 0.6)',
-                        titleFont: { size: 12 },
-                        bodyFont: { size: 12 },
+                        titleFont: { size: 11 },
+                        bodyFont: { size: 11 },
+                        fontWeight: 'bold'
                     }
                 },
                 // tooltip interaction
@@ -499,7 +501,7 @@
                             color: 'rgba(0, 0, 0, 0.1)',
                         },
                         ticks: {
-                            color: '#333',
+                            color: '#111',
                             font: {
                                 size: 11, 
                                 family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
@@ -514,7 +516,7 @@
                         },
                         ticks: {
                             beginAtZero: true,
-                            color: '#333',
+                            color: '#111',
                             font: {
                                 size: 11, 
                                 family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
@@ -688,9 +690,9 @@
                                         display: true,
                                         position: 'top',
                                         labels: {
-                                            color: '#333',
+                                            color: '#000',
                                             font: {
-                                                size: 12,
+                                                size: 11,
                                                 family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                                                 weight: 'bold'
                                             }
@@ -709,8 +711,9 @@
                                         bodyColor: '#000000',
                                         borderWidth: 1,
                                         borderColor:'rgba(2, 149, 168, 0.6)',
-                                        titleFont: { size: 12 },
-                                        bodyFont: { size: 12 }
+                                        titleFont: { size: 11 },
+                                        bodyFont: { size: 11 },
+                                        fontWeight: 'bold'
                                     },
                                     zoom: {
                                         pan: {
@@ -739,7 +742,7 @@
                                         ticks: {
                                             source: 'data',
                                             autoSkip: true,
-                                            color: '#333',
+                                            color: '#111',
                                             font: {
                                                 size: 11,
                                                 family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
@@ -765,7 +768,7 @@
                                         ticks: {
                                             source: 'data',
                                             autoSkip: true,
-                                            color: '#333',
+                                            color: '#111',
                                             //stepSize: 1,
                                             font: {
                                                 size: 11,
@@ -829,9 +832,9 @@
                                         display: false,
                                         position: 'top',
                                         labels: {
-                                            color: '#333',
+                                            color: '#000',
                                             font: {
-                                                size: 12,
+                                                size: 11,
                                                 family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                                                 weight: 'bold'
                                             }
@@ -844,8 +847,9 @@
                                         bodyColor: '#000000',
                                         borderWidth: 1,
                                         borderColor:'rgba(2, 149, 168, 0.6)',
-                                        titleFont: { size: 12 },
-                                        bodyFont: { size: 12 }
+                                        titleFont: { size: 11 },
+                                        bodyFont: { size: 11 },
+                                        fontWeight: 'bold'
                                     },
                                     zoom: {
                                         pan: {
@@ -874,7 +878,7 @@
                                         ticks: {
                                             source: 'data',
                                             autoSkip: true,
-                                            color: '#333',
+                                            color: '#111',
                                             //stepSize: 1,
                                             font: {
                                                 size: 11,
@@ -901,7 +905,7 @@
                                         ticks: {
                                             source: 'data',
                                             autoSkip: true,
-                                            color: '#333',
+                                            color: '#111',
                                             font: {
                                                 size: 11,
                                                 family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
@@ -976,11 +980,11 @@
             // Left slider shows gradient to the right of the thumb
             sliderLeft.style.background = `linear-gradient(to right, 
                 white ${leftPercent}%, 
-                rgba(0, 123, 255, 0.2) ${leftPercent}%)`;
+                rgba(0, 123, 255, 0.1) ${leftPercent}%)`;
 
             // Right slider shows gradient to the left of the thumb
             sliderRight.style.background = `linear-gradient(to right, 
-                rgba(0, 123, 255, 0.2) ${rightPercent}%, 
+                rgba(0, 123, 255, 0.1) ${rightPercent}%, 
                 white ${rightPercent}%)`;
 
             const leftTooltip = document.getElementById('leftTooltip');

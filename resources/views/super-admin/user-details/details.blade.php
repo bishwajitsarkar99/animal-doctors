@@ -106,6 +106,7 @@
   requestAnimationFrame(()=> {
     setTimeout(() => {
       removeSkeletons('.head-skeletone');
+      removeSkeletons('.chart-body-skeletone');
       removeSkeletons('.body-skeletone');
       removeSkeletons('.cricale-number-skeleton');
       removeSkeletons('.loader_skeleton');
@@ -113,9 +114,10 @@
       removeSkeletons('.result-skeletone');
       removeSkeletons('.total-number-skeletone');
       removeSkeletons('.tab-skeletone');
+      removeSkeletons('.branch-card-skeletone');
       $("#loaderShow").addClass('loader-show');
       
-    }, 1800);
+    }, 2500);
     setTimeout(() => {
       $("#showCard").removeAttr('hidden');
     }, 500);

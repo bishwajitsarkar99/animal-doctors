@@ -220,7 +220,7 @@
                 </span>
                 <div class="loader_skeleton" id="loader_orderChart"></div>
             </div>
-            <div class="card card-body third-card body-skeletone user-activities--month-bar-chart">
+            <div class="card card-body third-card chart-body-skeletone user-activities--month-bar-chart">
                 <canvas id="userActivityChart" height="110"></canvas>
             </div>
         </div>
@@ -247,41 +247,51 @@
         <div class="card card-body branch-info-card" id="branchCard">
             <div class="row">
                 <div class="col-xl-12 head-init">
-                    <span class="text-position">Branch Log Data Information</span>
+                    <span class="head-skeletone">
+                        <i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i> 
+                        Branch User Log Data Information
+                    </span>
                 </div>
                 @foreach($branch_log_session_data as $branchId => $rolesGroup)
                     @php
                         $firstSession = $rolesGroup->first();
                     @endphp
 
-                    <div>
+                    <div class="branch-card-skeletone">
                         <div class="row font-gray-700 data-head">
-                            <div class="col-xl-4"><span>Branch</span></div>
-                            <div class="col-xl-2"><span class="me-5">Role</span></div>
-                            <div class="col-xl-6" style="text-align:center;"><span>Barchart</span></div>
+                            <div class="col-xl-3"><span>Branch</span></div>
+                            <div class="col-xl-3"><span class="me-5">Role</span></div>
+                            <div class="col-xl-6" style="text-align:center;"><span>Bar Chart</span></div>
                         </div>
-                    </div>
-                    <div class="row font-gray-700">
-                        <div class="col-xl-4">
-                            <ul id="branchLabel">
-                                <li>ID : {{ $branchId }}</li>
-                                <li>Category : {{ $firstSession->users->branch_type ?? 'N/A' }}</li>
-                                <li>Name : {{ $firstSession->users->branch_name ?? 'N/A' }}</li>
-                            </ul>
-                        </div>
-                        <div class="col-xl-2">
-                            <ul id="roleLabel">
-                                @foreach($rolesGroup->unique('role') as $roleItem)
-                                    <li class="ps-2">{{ $roleItem->roles->name ?? $roleItem->role }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <div class="col-xl-6">
-                            <ul id="branchChart">
-                                <li>
-                                    <canvas id="branchInfoChart_{{ $branchId }}" height="80"></canvas>
-                                </li>
-                            </ul>
+                        <div class="row font-gray-700">
+                            <div class="col-xl-3">
+                                <ul class="pt-1 mt-3" id="branchLabel">
+                                    <li>ID : {{ $branchId }}</li>
+                                    <li>Category : {{ $firstSession->users->branch_type ?? 'N/A' }}</li>
+                                    <li>Name : {{ $firstSession->users->branch_name ?? 'N/A' }}</li>
+                                </ul>
+                            </div>
+                            <div class="col-xl-3">
+                                <ul class="pt-1 mt-3" id="roleLabel">
+                                    @foreach($rolesGroup->unique('role') as $roleItem)
+                                        <li class="ps-2" style="display:flex;justify-content:space-between;">
+                                            {{ $roleItem->roles->name ?? $roleItem->role }}
+                                            <span class="user-amount badge rounded-pill bg-light-blueviolet mb-1" style="color:#000;font-size:11px;font-weight:800;background-color: #6ba7ff;">
+                                                {{ $roleItem->unique_email_count }}.00
+                                            </span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="col-xl-6">
+                                <ul class="pt-1 mt-1" id="branchChart">
+                                    <li>
+                                        <div  style="width: 100% !important; height: 150px;">
+                                            <canvas id="branchInfoChart_{{ $branchId }}" height="80"></canvas>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -336,8 +346,9 @@
                     bodyColor: '#000000',
                     borderWidth: 1,
                     borderColor:'rgba(2, 149, 168, 0.6)',
-                    titleFont: { size: 12 },
-                    bodyFont: { size: 12 },
+                    titleFont: { size: 11 },
+                    bodyFont: { size: 11 },
+                    fontWeight: 'bold'
                 }
             },
             interaction: {
@@ -349,7 +360,7 @@
                     grid: { display: false },
                     ticks: {
                         beginAtZero: true,
-                        color: '#333',
+                        color: '#111',
                         font: {
                             family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                             size: 12,
@@ -360,7 +371,7 @@
                 x: {
                     grid: { display: false },
                     ticks: {
-                        color: '#333',
+                        color: '#111',
                         font: {
                             family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                             size: 12,
@@ -440,8 +451,9 @@
                     bodyColor: '#000000',
                     borderWidth: 1,
                     borderColor:'rgba(2, 149, 168, 0.6)',
-                    titleFont: { size: 12 },
-                    bodyFont: { size: 12 },
+                    titleFont: { size: 11 },
+                    bodyFont: { size: 11 },
+                    fontWeight: 'bold'
                 }
             },
             interaction: {
@@ -453,7 +465,7 @@
                     beginAtZero: true,
                     grid: { display: false },
                     ticks: {
-                        color: '#333',
+                        color: '#111',
                         font: {
                             family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                             size: 12,
@@ -464,7 +476,7 @@
                 x: {
                     grid: { display: false },
                     ticks: {
-                        color: '#333',
+                        color: '#111',
                         font: {
                             family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                             size: 12,
@@ -492,11 +504,40 @@
     import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin } from "/plugins/chartHoverPlugins.js";
 
     const branchData = @json($branchRoleStats);
-    console.log(branchData);
-    
 
     Object.entries(branchData).forEach(([branchId, stats]) => {
         const userCanvas = document.getElementById(`branchInfoChart_${branchId}`).getContext('2d');
+
+        // Create gradients
+        const gradientActivity = userCanvas.createLinearGradient(0, 0, 0, 400);
+        gradientActivity.addColorStop(0, 'rgba(28,200,138,0.5)');
+        gradientActivity.addColorStop(1, 'rgba(34,139,34,0)');
+        // Pointer Design rectangle candle
+        function createCandlePointStyle(color = 'black') {
+            const canvas = document.createElement('canvas');
+            canvas.width = 20;  // wider
+            canvas.height = 40; // taller
+            const ctx = canvas.getContext('2d');
+
+            // Draw wick (centered)
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2, canvas.height);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw body (rectangle candle)
+            const bodyWidth = 8;
+            const bodyHeight = 20;
+            const bodyX = (canvas.width - bodyWidth) / 2;
+            const bodyY = (canvas.height - bodyHeight) / 2;
+
+            ctx.fillStyle = color;
+            ctx.fillRect(bodyX, bodyY, bodyWidth, bodyHeight);
+
+            return canvas;
+        }
 
         new Chart(userCanvas, {
             type: 'bar',
@@ -507,36 +548,37 @@
                         type: 'bar',
                         label: 'Login',
                         data: stats.login_counts,
-                        backgroundColor: 'rgba(28,200,138,0.5)',
-                        borderColor: 'rgba(28,200,138,1)',
-                        borderWidth: 1,
+                        backgroundColor: '#4e73df',
+                        tension: 0.4,
                         order: 2
                     },
                     {
                         type: 'bar',
                         label: 'Logout',
                         data: stats.logout_counts,
-                        backgroundColor: '#4e73df',
-                        borderColor: '#4e73df',
-                        borderWidth: 1,
+                        backgroundColor: '#cf2e2e',
+                        tension: 0.4,
                         order: 3
                     },
                     {
                         type: 'line',
                         label: 'Activity',
+                        fill: true,
                         data: stats.activity_counts,
-                        backgroundColor: '#4e73df',
-                        borderColor: '#4e73df',
+                        backgroundColor: gradientActivity,
+                        borderColor: 'rgba(28,200,138,1)',
                         borderWidth: 1,
+                        tension: 0.4,
+                        pointStyle: createCandlePointStyle('rgb(194, 143, 96)'),
+                        pointHoverBackgroundColor: "rgb(194, 143, 96)",
                         order: 4
                     },
                     {
                         type: 'bar',
                         label: 'Current Login',
                         data: stats.current_login_counts,
-                        backgroundColor: '#4e73df',
-                        borderColor: '#4e73df',
-                        borderWidth: 1,
+                        backgroundColor: 'purple',
+                        tension: 0.4,
                         order: 1
                     }
                 ]
@@ -544,14 +586,27 @@
             options: {
                 responsive: true,
                 plugins: {
-                    legend: { display: true },
+                    legend: { 
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '#000000',
+                            font: {
+                                size: 11,
+                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                weight: 'bold',
+                            }
+                        }, 
+                    },
                     tooltip: {
                         enabled: true,
-                        backgroundColor: '#fff',
-                        titleColor: '#000',
-                        bodyColor: '#000',
-                        borderColor: 'rgba(2, 149, 168, 0.6)',
-                        borderWidth: 1
+                        backgroundColor: 'rgb(255, 255, 255)',
+                        titleColor: '#000000',
+                        bodyColor: '#000000',
+                        borderWidth: 1,
+                        borderColor:'rgba(2, 149, 168, 0.6)',
+                        titleFont: { size: 11 },
+                        bodyFont: { size: 11 },
                     },
                     zoom: {
                         pan: {
@@ -570,14 +625,38 @@
                         }
                     }
                 },
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
                 scales: {
                     x: {
-                        ticks: { color: '#333', font: { size: 10, weight: 'bold' } }
+                        grid: { display: false },
+                        ticks: { 
+                            color: '#111', 
+                            font: { 
+                                size: 10, 
+                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                weight: 'bold' 
+                            } 
+                        }
                     },
                     y: {
+                        grid: { display: false },
                         beginAtZero: true,
-                        ticks: { color: '#333', font: { size: 10, weight: 'bold' } }
+                        ticks: { 
+                            color: '#111', 
+                            font: { 
+                                size: 10, 
+                                family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                                weight: 'bold' 
+                            } 
+                        }
                     }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeInOutBounce',
                 }
             },
             plugins: [
