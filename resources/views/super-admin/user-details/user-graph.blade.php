@@ -257,29 +257,29 @@
                     <div>
                         <div class="row font-gray-700 data-head">
                             <div class="col-xl-4"><span>Branch</span></div>
-                            <div class="col-xl-4"><span class="ms-3 ps-1">Role</span></div>
-                            <div class="col-xl-4" style="text-align:center;"><span>Barchart</span></div>
+                            <div class="col-xl-2"><span class="me-5">Role</span></div>
+                            <div class="col-xl-6" style="text-align:center;"><span>Barchart</span></div>
                         </div>
                     </div>
                     <div class="row font-gray-700">
                         <div class="col-xl-4">
                             <ul id="branchLabel">
-                                <li>Branch-ID : {{ $branchId }}</li>
-                                <li>Branch-Category : {{ $firstSession->users->branch_type ?? 'N/A' }}</li>
-                                <li>Branch-Name : {{ $firstSession->users->branch_name ?? 'N/A' }}</li>
+                                <li>ID : {{ $branchId }}</li>
+                                <li>Category : {{ $firstSession->users->branch_type ?? 'N/A' }}</li>
+                                <li>Name : {{ $firstSession->users->branch_name ?? 'N/A' }}</li>
                             </ul>
                         </div>
-                        <div class="col-xl-4">
+                        <div class="col-xl-2">
                             <ul id="roleLabel">
                                 @foreach($rolesGroup->unique('role') as $roleItem)
-                                    <li class="ps-2">Role-Name : {{ $roleItem->roles->name ?? $roleItem->role }}</li>
+                                    <li class="ps-2">{{ $roleItem->roles->name ?? $roleItem->role }}</li>
                                 @endforeach
                             </ul>
                         </div>
-                        <div class="col-xl-4">
-                            <ul id="brancChart">
+                        <div class="col-xl-6">
+                            <ul id="branchChart">
                                 <li>
-                                    <canvas id="branchChart" height="20"></canvas>
+                                    <canvas id="branchInfoChart_{{ $branchId }}" height="80"></canvas>
                                 </li>
                             </ul>
                         </div>
@@ -290,6 +290,100 @@
     </div>
 </div>
 @push('scripts')
+<!-- first Chart Graphp -->
+<script type="module">
+    // hover plugins
+    import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin} from "/plugins/chartHoverPlugins.js";
+    const ctxUserActivityChart = document.getElementById("userActivityChart").getContext("2d");
+    var gradientColor = ctxUserActivityChart.createLinearGradient(0, 0, 0, 400);
+    gradientColor.addColorStop(0, 'rgb(157, 235, 255)');  // orange at top rgb(142, 229, 255) 
+    gradientColor.addColorStop(1, 'rgb(138, 65, 255)'); // transparent at bottom rgba(255, 166, 0, 0)
+    const userActivityLineChart = new Chart(ctxUserActivityChart, {
+        type: "line",
+        data: {
+            labels: ["Inactive Users", "Authentic Users", "Log Activity", "Total Users"],
+            datasets: [{
+                type: "line",
+                label: "User Activity",
+                data: @json(array_values($usersActivityCount)),
+                backgroundColor: gradientColor,
+                borderColor: '#0A5EDB',
+                borderWidth: 1,
+                fill: true,
+                tension: 0.4,
+                pointStyle: ['triangle','triangle','triangle','triangle'],
+                pointRadius: 5,
+                pointHoverRadius: 10,
+                pointBackgroundColor: ["#cf2e2e", "darkgreen", "#6f42c1", "#0A5EDB"],
+                pointBorderColor: ["#cf2e2e", "darkgreen", "#6f42c1", "#0A5EDB"],
+                pointHoverBackgroundColor: ["#cf2e2e", "darkgreen", "#6f42c1", "#0A5EDB"],
+                pointHoverBorderColor: ["#cf2e2e", "darkgreen", "#6f42c1", "#0A5EDB"]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { 
+                    display: false 
+                },
+                tooltip: {
+                    enabled: true,
+                    // backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                    // titleColor: '#fff',
+                    // bodyColor: '#fff',
+                    backgroundColor: 'rgb(255, 255, 255)',
+                    titleColor: '#000000',
+                    bodyColor: '#000000',
+                    borderWidth: 1,
+                    borderColor:'rgba(2, 149, 168, 0.6)',
+                    titleFont: { size: 12 },
+                    bodyFont: { size: 12 },
+                }
+            },
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            scales: {
+                y: {
+                    grid: { display: false },
+                    ticks: {
+                        beginAtZero: true,
+                        color: '#333',
+                        font: {
+                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                            size: 12,
+                            weight: 'bold'
+                        }
+                    }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: {
+                        color: '#333',
+                        font: {
+                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
+                            size: 12,
+                            weight: 'bold'
+                        }
+                    }
+                }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutBounce'
+            }
+        },
+        // import plugins
+        plugins:[
+            hoverGridPlugin(),
+            dottedGridPlugin(),
+            axisTooltipTextPlugin(),
+            axisCursorPlugin()
+        ]
+    });
+</script>
+<!-- second Chart Graphp -->
 <script type="module">
     // hover plugins
     import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin} from "/plugins/chartHoverPlugins.js";
@@ -393,96 +487,107 @@
         ]
     });
 </script>
+<!-- third Chart Graphp -->
 <script type="module">
-    // hover plugins
-    import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin} from "/plugins/chartHoverPlugins.js";
-    const ctxUserActivityChart = document.getElementById("userActivityChart").getContext("2d");
-    var gradientColor = ctxUserActivityChart.createLinearGradient(0, 0, 0, 400);
-    gradientColor.addColorStop(0, 'rgb(157, 235, 255)');  // orange at top rgb(142, 229, 255) 
-    gradientColor.addColorStop(1, 'rgb(138, 65, 255)'); // transparent at bottom rgba(255, 166, 0, 0)
-    const userActivityLineChart = new Chart(ctxUserActivityChart, {
-        type: "line",
-        data: {
-            labels: ["Inactive Users", "Authentic Users", "Log Activity", "Total Users"],
-            datasets: [{
-                type: "line",
-                label: "User Activity",
-                data: @json(array_values($usersActivityCount)),
-                backgroundColor: gradientColor,
-                borderColor: '#0A5EDB',
-                borderWidth: 1,
-                fill: true,
-                tension: 0.4,
-                pointStyle: ['triangle','triangle','triangle','triangle'],
-                pointRadius: 5,
-                pointHoverRadius: 10,
-                pointBackgroundColor: ["#cf2e2e", "darkgreen", "#6f42c1", "#0A5EDB"],
-                pointBorderColor: ["#cf2e2e", "darkgreen", "#6f42c1", "#0A5EDB"],
-                pointHoverBackgroundColor: ["#cf2e2e", "darkgreen", "#6f42c1", "#0A5EDB"],
-                pointHoverBorderColor: ["#cf2e2e", "darkgreen", "#6f42c1", "#0A5EDB"]
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { 
-                    display: false 
+    import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin } from "/plugins/chartHoverPlugins.js";
+
+    const branchData = @json($branchRoleStats);
+    console.log(branchData);
+    
+
+    Object.entries(branchData).forEach(([branchId, stats]) => {
+        const userCanvas = document.getElementById(`branchInfoChart_${branchId}`).getContext('2d');
+
+        new Chart(userCanvas, {
+            type: 'bar',
+            data: {
+                labels: stats.roles,
+                datasets: [
+                    {
+                        type: 'bar',
+                        label: 'Login',
+                        data: stats.login_counts,
+                        backgroundColor: 'rgba(28,200,138,0.5)',
+                        borderColor: 'rgba(28,200,138,1)',
+                        borderWidth: 1,
+                        order: 2
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Logout',
+                        data: stats.logout_counts,
+                        backgroundColor: '#4e73df',
+                        borderColor: '#4e73df',
+                        borderWidth: 1,
+                        order: 3
+                    },
+                    {
+                        type: 'line',
+                        label: 'Activity',
+                        data: stats.activity_counts,
+                        backgroundColor: '#4e73df',
+                        borderColor: '#4e73df',
+                        borderWidth: 1,
+                        order: 4
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Current Login',
+                        data: stats.current_login_counts,
+                        backgroundColor: '#4e73df',
+                        borderColor: '#4e73df',
+                        borderWidth: 1,
+                        order: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true },
+                    tooltip: {
+                        enabled: true,
+                        backgroundColor: '#fff',
+                        titleColor: '#000',
+                        bodyColor: '#000',
+                        borderColor: 'rgba(2, 149, 168, 0.6)',
+                        borderWidth: 1
+                    },
+                    zoom: {
+                        pan: {
+                            enabled: true,
+                            mode: 'x',
+                            threshold: 10
+                        },
+                        zoom: {
+                            wheel: {
+                                enabled: true
+                            },
+                            pinch: {
+                                enabled: true
+                            },
+                            mode: 'x'
+                        }
+                    }
                 },
-                tooltip: {
-                    enabled: true,
-                    // backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                    // titleColor: '#fff',
-                    // bodyColor: '#fff',
-                    backgroundColor: 'rgb(255, 255, 255)',
-                    titleColor: '#000000',
-                    bodyColor: '#000000',
-                    borderWidth: 1,
-                    borderColor:'rgba(2, 149, 168, 0.6)',
-                    titleFont: { size: 12 },
-                    bodyFont: { size: 12 },
-                }
-            },
-            interaction: {
-                mode: 'index',
-                intersect: false
-            },
-            scales: {
-                y: {
-                    grid: { display: false },
-                    ticks: {
+                scales: {
+                    x: {
+                        ticks: { color: '#333', font: { size: 10, weight: 'bold' } }
+                    },
+                    y: {
                         beginAtZero: true,
-                        color: '#333',
-                        font: {
-                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
-                            size: 12,
-                            weight: 'bold'
-                        }
-                    }
-                },
-                x: {
-                    grid: { display: false },
-                    ticks: {
-                        color: '#333',
-                        font: {
-                            family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
-                            size: 12,
-                            weight: 'bold'
-                        }
+                        ticks: { color: '#333', font: { size: 10, weight: 'bold' } }
                     }
                 }
             },
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutBounce'
-            }
-        },
-        // import plugins
-        plugins:[
-            hoverGridPlugin(),
-            dottedGridPlugin(),
-            axisTooltipTextPlugin(),
-            axisCursorPlugin()
-        ]
+            plugins: [
+                hoverGridPlugin(),
+                dottedGridPlugin(),
+                axisTooltipTextPlugin(),
+                axisCursorPlugin(),
+                ChartZoom,
+            ]
+        });
     });
 </script>
 @endPush

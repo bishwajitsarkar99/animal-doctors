@@ -293,7 +293,10 @@ button.btn-refresh:hover{
     text-align: center;
 }
 .text-position{
-    padding-right: 53px;
+    padding-right: 94px;
+}
+ul#roleLabel {
+    padding-left: 0.7rem;
 }
 .data-head{
     margin: 0 21px;
@@ -307,7 +310,11 @@ button.btn-refresh:hover{
     font-weight: 700;
     color: #000;
 }
-ul#branchLabel>li, ul#roleLabel>li, ul#brancChart>li{
+#branchInfoChart{
+    width: 100% !important;
+    padding-left: 0.0rem;
+}
+ul#branchLabel>li, ul#roleLabel>li, ul#brancChart>li, ul#branchChart{
     list-style: none;
     font-family: var(--nav-font-family);
     font-size: 12px;

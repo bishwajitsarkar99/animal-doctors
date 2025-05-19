@@ -55,15 +55,130 @@ class UserActivityServiceProvider
             $startOfMonth = Carbon::now()->startOfMonth();
             $endOfMonth = Carbon::now()->endOfMonth();
             if($role_id === 1){
+                // Start Branch Information Data Chart
                 // Get Session Log Data According to Branch with role for Branch card data
                 $branch_log_session_data = SessionModel::whereNotNull('user_id')
                 ->whereNotNull('role')
+                ->whereNotNull('branch_id')
                 ->select('user_id', 'branch_id', 'role')
                 ->with(['users', 'roles'])
                 ->get()
                 ->groupBy('branch_id');
 
+                // Get Session user login data
+                $start = Carbon::now()->startOfYear();
+                $end = Carbon::now();
+
+                // Get login data grouped by branch and role
+                $logins = SessionModel::whereBetween('created_at', [$start, $end])
+                    ->whereNotNull('user_id')
+                    ->whereNotNull('role')
+                    ->whereNotNull('branch_id')
+                    ->whereIn('payload', ['login', 'logout'])
+                    ->with('roles') // ensure you load the role relationship
+                    ->select('branch_id', 'role', DB::raw('count(*) as login_count'))
+                    ->groupBy('branch_id', 'role')
+                    ->get();
+
+                // Get logout data grouped by branch and role
+                $logouts = SessionModel::whereBetween('created_at', [$start, $end])
+                    ->whereNotNull('user_id')
+                    ->whereNotNull('role')
+                    ->whereNotNull('branch_id')
+                    ->where('payload', 'logout')
+                    ->with('roles')
+                    ->select('branch_id', 'role', DB::raw('count(*) as logout_count'))
+                    ->groupBy('branch_id', 'role')
+                    ->get();
+
+                // ✅ Additional query 1: Total login + logout activity
+                $logActivities = SessionModel::whereBetween('created_at', [$start, $end])
+                    ->whereNotNull('user_id')
+                    ->whereNotNull('role')
+                    ->whereNotNull('branch_id')
+                    ->whereIn('payload', ['login', 'logout']) // fixed: should be `whereIn`
+                    ->with('roles')
+                    ->select('branch_id', 'role', DB::raw("COUNT(*) as total_activity_count"))
+                    ->groupBy('branch_id', 'role')
+                    ->get();
+
+                // ✅ Additional query 2: Current login counts
+                $currentLogin = SessionModel::whereBetween('created_at', [$start, $end])
+                    ->whereNotNull('user_id')
+                    ->whereNotNull('role')
+                    ->whereNotNull('branch_id')
+                    ->where('payload', 'login')
+                    ->with('roles')
+                    ->select('branch_id', 'role', DB::raw('count(*) as current_login'))
+                    ->groupBy('branch_id', 'role')
+                    ->get();
                 
+                // Step 1: Prepare lookup arrays for total activity and current login
+                $activityMap = [];
+                foreach ($logActivities as $activity) {
+                    $branchId = $activity->branch_id;
+                    $roleName = $activity->roles->name ?? 'N/A';
+                    $activityMap[$branchId][$roleName] = $activity->total_activity_count;
+                }
+
+                $currentLoginMap = [];
+                foreach ($currentLogin as $login) {
+                    $branchId = $login->branch_id;
+                    $roleName = $login->roles->name ?? 'N/A';
+                    $currentLoginMap[$branchId][$roleName] = $login->current_login;
+                }
+                // Combine login and logout counts
+                $branchRoleStats = [];
+
+                foreach ($logins as $login) {
+                    $branchId = $login->branch_id;
+                    $roleName = $login->roles->name ?? 'N/A';
+
+                    $branchRoleStats[$branchId][$roleName]['login'] = $login->login_count;
+                    $branchRoleStats[$branchId][$roleName]['logout'] = 0; // initialize
+                }
+
+                foreach ($logouts as $logout) {
+                    $branchId = $logout->branch_id;
+                    $roleName = $logout->roles->name ?? 'N/A';
+
+                    if (!isset($branchRoleStats[$branchId][$roleName])) {
+                        $branchRoleStats[$branchId][$roleName]['login'] = 0; // initialize
+                    }
+                    $branchRoleStats[$branchId][$roleName]['logout'] = $logout->logout_count;
+                }
+
+                $formattedBranchStats = [];
+
+                foreach ($branchRoleStats as $branchId => $roleData) {
+                    $roles = [];
+                    $loginCounts = [];
+                    $logoutCounts = [];
+                    $activityCounts = [];
+                    $currentLogins = [];
+
+                    foreach ($roleData as $role => $counts) {
+                        $roles[] = $role;
+                        $loginCounts[] = $counts['login'] ?? 0;
+                        $logoutCounts[] = $counts['logout'] ?? 0;
+                        // Add total activity count
+                        $activityCounts[] = $activityMap[$branchId][$role] ?? 0;
+
+                        // Add current login count
+                        $currentLogins[] = $currentLoginMap[$branchId][$role] ?? 0;
+                    }
+
+                    $formattedBranchStats[$branchId] = [
+                        'roles' => $roles,
+                        'login_counts' => $loginCounts,
+                        'logout_counts' => $logoutCounts,
+                        'activity_counts' => $activityCounts,        // ✅ added
+                        'current_login_counts' => $currentLogins     // ✅ added
+                    ];
+                }
+
+                // End Branch Information Data Chart
+
                 // Get Role
                 $user_roles = User::pluck('role')->unique();
                 $roles = Role::whereIn('id', $user_roles)->get();
@@ -192,8 +307,8 @@ class UserActivityServiceProvider
                     return view('super-admin.user-details.details', compact('usersCount','usersActivityCount','total_users','authentic_users','inactive_users','activity_users',
                         'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage','roles', 'page_name',
                         'user_log_data_authorize', 'user_activity_graph_authorize', 'user_activity_page_name', 'user_activity_graph_page_name', 'user_log_data_table_permission', 
-                        'branch_log_session_data')
-                    );
+                        'branch_log_session_data', 'formattedBranchStats')
+                    )->with('branchRoleStats', $formattedBranchStats);
                 }else{
                     return view('unauthorize-page.index', compact('page_name'));
                 }
