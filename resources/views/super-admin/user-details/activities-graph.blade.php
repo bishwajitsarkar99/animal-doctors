@@ -101,7 +101,7 @@
     </div>
 </div>
 <div class="container">
-    <div class="row mt-2">
+    <div class="row mt-2 mb-3">
         <div class="col-xl-12">
             <div class="card card-body chart-card">
                 <div class="card-header mini-bar-header ps-2" style="text-align:center;">
@@ -142,6 +142,102 @@
                         </div>
                         <div class="range-track">
                             <img class="full-width-img" src="/image/LineChart3.PNG" alt="Chart" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-12 head-init">
+                        <span class="head-skeletone">
+                            <i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i> 
+                            Branch User Log Data Information
+                        </span>
+                    </div>
+                    <div class="branch-card-skeletone">
+                        <div class="row font-gray-700 data-head">
+                            <div class="col-xl-3"><span>Branch</span></div>
+                            <div class="col-xl-3"><span class="me-5">Role</span></div>
+                            <div class="col-xl-6" style="text-align:center;"><span>Bar Chart</span></div>
+                        </div>
+                        <div class="row font-gray-700">
+                            <div class="col-xl-3">
+                                <ul class="pt-1 mt-3" id="branchLabel">
+                                    <li>ID : </li>
+                                    <li>Category : </li>
+                                    <li>Name : </li>
+                                </ul>
+                            </div>
+                            <div class="col-xl-3">
+                                <ul class="pt-1 mt-3" id="roleLabel">
+                                        <li class="ps-2" style="display:flex;justify-content:space-between;">
+                                            <span class="user-amount badge rounded-pill bg-light-blueviolet mb-1" style="color:#000;font-size:11px;font-weight:800;background-color: #6ba7ff;">
+                                                .00
+                                            </span>
+                                        </li>
+                                </ul>
+                            </div>
+                            <div class="col-xl-6">
+                                <ul class="pt-1 mt-1" id="branchChart">
+                                    <li>
+                                        <div  style="width: 100% !important; height: 150px;">
+                                            <canvas id="branchInfoChart_" height="80"></canvas>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row font-gray-700 data-head">
+                            <div class="col-xl-12" style="text-align:center;"><span><i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i>  Branch Log Data (Bar Chart)</span></div>
+                        </div>
+                        <div class="row font-gray-700">
+                            <div class="user-branch-log-data-summary">
+                                <div class="row">
+                                    <div class="data-table-response">
+                                        <table class="table">
+                                            <thead>
+                                                <tr class="table-light">
+                                                    <th scope="col" class="text-position tex-size">ID</th>
+                                                    <th scope="col" class="tex-size">Email</th>
+                                                    <th scope="col" class="tex-size">Role</th>
+                                                    <th scope="col" class="tex-size">Current-Login</th>
+                                                    <th scope="col" class="tex-size">Total-Login</th>
+                                                    <th scope="col" class="tex-size">Total-Logout</th>
+                                                    <th scope="col" class="tex-size">Total-Activity</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="table-light bg-transparent" id="dataLogTable">
+                                                <tr class="table-light">
+                                                    <td class="td-cell text-position">1</td>
+                                                    <td class="td-cell">superadmingstmedicinecenter4215@gmail.com</td>
+                                                    <td class="td-cell">Super Admin</td>
+                                                    <td class="td-cell ps-1">1.00</td>
+                                                    <td class="td-cell ps-1">84.00</td>
+                                                    <td class="td-cell ps-1">83.00</td>
+                                                    <td class="td-cell ps-1">84.00</td>
+                                                </tr>
+                                                <tr class="table-light">
+                                                    <td class="td-cell text-position">2</td>
+                                                    <td class="td-cell">admingstmedicinecenter4215@gmail.com</td>
+                                                    <td class="td-cell">Admin</td>
+                                                    <td class="td-cell ps-1">0.00</td>
+                                                    <td class="td-cell ps-1">6.00</td>
+                                                    <td class="td-cell ps-1">6.00</td>
+                                                    <td class="td-cell ps-1">6.00</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr class="table-light">
+                                                    <th scope="col" class="tex-size"></th>
+                                                    <th colspan="2" scope="col" class="tex-size">Total Count</th>
+                                                    <th scope="col" class="tex-size ps-1">1.00</th>
+                                                    <th scope="col" class="tex-size ps-1">90.00</th>
+                                                    <th scope="col" class="tex-size ps-1">89.00</th>
+                                                    <th scope="col" class="tex-size ps-1">90.00</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

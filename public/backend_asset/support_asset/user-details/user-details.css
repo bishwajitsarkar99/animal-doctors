@@ -25,6 +25,54 @@ htm,body{
     padding: 0;
     margin: 0;
 }
+.progress-bar{
+    font-size: 10px;
+    font-weight: 900;
+}
+.user-branch-log-data-summary {
+    padding: 10px 35px;
+}
+.table{
+    border-left: 1px solid rgba(0, 123, 255, 0.3);
+    border-right: 1px solid rgba(0, 123, 255, 0.3);
+}
+table{
+    font-family: var(--nav-font-family);
+    background-color: #fff !important;
+    border-bottom: 1px solid rgba(0, 123, 255, 0.3);
+    border-top: 1px solid rgba(0, 123, 255, 0.3);
+    border-collapse: collapse;
+    font-size: 12px;
+    opacity: 1;
+    letter-spacing: 0.5px;
+}
+td.td-cell{
+    border-top: 1px solid rgba(0, 123, 255, 0.3);
+    border-bottom: 1px solid rgba(0, 123, 255, 0.3);
+    color: #111;
+    letter-spacing: 0.8px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.3;
+    padding: 0.09rem 0.09rem !important;
+}
+th.text-position,td.text-position{
+    text-align: center;
+}
+th.tex-size{
+    font-size: 11px;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    padding: 0.09rem 0.09rem !important; 
+    opacity: 1;
+}
+thead,th,td{
+    font-family: var(--nav-font-family);
+    background-color: #fff !important;
+    border-bottom: 0.5px solid rgba(0, 123, 255, 0.3);
+    border-top: 0.5px solid rgba(0, 123, 255, 0.3);
+    border-collapse: collapse;
+}
 .activity-table-responsive{
     overflow-y: auto !important;
     overflow-x: auto !important;
@@ -422,13 +470,15 @@ img#loaderShow {
 }
 img.full-width-img {
     width: 100%;
-    height: 100%;
+    height: 99%;
+    padding: 0 22px;
 }
 /* input range  */
 .dual-range-container {
     position: relative;
+    padding: 0 22px !important;
     width: 100%;
-    height: 95px;
+    height: 65px;
     outline: none;
     padding: 0;
     transition: background 450ms ease-in;
@@ -446,7 +496,7 @@ img.full-width-img {
 .dual-range {
     position: absolute;
     width: 100%;
-    height: 95px;
+    height: 65px;
     pointer-events: none; /* Disable default mouse interaction */
     -webkit-appearance: none;
     background: none;
@@ -485,7 +535,7 @@ img.full-width-img {
     position: absolute;
     top: 50%;
     left: 0;
-    height: 94px;
+    height: 65px;
     width: 100%;
     background: transparent;
     transform: translateY(-50%);
@@ -505,13 +555,13 @@ img.full-width-img {
 .slider-wrapper-first {
     position: relative;
     width: 100%;
-    height: 95px;
+    height: 68px;
 }
 .slider-wrapper-second {
     position: relative;
     width: 100%;
-    height: 95px;
-    top: -100%;
+    height: 68px;
+    top: -106%;
 }
 .range-tooltip {
     position: absolute;
@@ -926,7 +976,7 @@ button.btn-background{
     border-radius: 2px;
     z-index: 3;
 }
-tr.clicked {
+tr.clicked td{
     background-image: var(--table-row-light-blue-hover);
     background-color: transparent;
     opacity: 5;

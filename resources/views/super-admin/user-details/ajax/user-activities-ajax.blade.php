@@ -8,7 +8,7 @@
     $(document).ready(function(){
         // ACtive table row background
         $(document).on('click', 'tr.table-row', function(){
-            $(this).addClass("clicked").siblings().removeClass("clicked");
+            $(this).addClass("clicked td").siblings().removeClass("clicked td");
         });
         // ACtive table td user-id background
         $(document).on('click', 'button.user-details-btn', function() {

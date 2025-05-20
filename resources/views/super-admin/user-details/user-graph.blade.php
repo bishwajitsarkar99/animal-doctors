@@ -97,7 +97,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['super_admin'], 2) }}" style="width:20%" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['super_admin'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#111;font-weight:900;" aria-valuenow="{{ round($percentageRoles['super_admin'], 2) }}" style="width:20%" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['super_admin'], 2) }}%;">
                             {{ round($percentageRoles['super_admin'], 2) }}%
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['admin'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#111;font-weight:900;" aria-valuenow="{{ round($percentageRoles['admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['admin'], 2) }}%;">
                             {{ round($percentageRoles['admin'], 2) }}%
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['sub_admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['sub_admin'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#111;font-weight:900;" aria-valuenow="{{ round($percentageRoles['sub_admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['sub_admin'], 2) }}%;">
                             {{ round($percentageRoles['sub_admin'], 2) }}%
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['accounts'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['accounts'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#111;font-weight:900;" aria-valuenow="{{ round($percentageRoles['accounts'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['accounts'], 2) }}%;">
                             {{ round($percentageRoles['accounts'], 2) }}%
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['marketing'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['marketing'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#111;font-weight:900;" aria-valuenow="{{ round($percentageRoles['marketing'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['marketing'], 2) }}%;">
                             {{ round($percentageRoles['marketing'], 2) }}%
                         </div>
                     </div>
@@ -172,7 +172,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['delivery_team'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['delivery_team'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#111;font-weight:900;" aria-valuenow="{{ round($percentageRoles['delivery_team'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['delivery_team'], 2) }}%;">
                             {{ round($percentageRoles['delivery_team'], 2) }}%
                         </div>
                     </div>
@@ -187,7 +187,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#333333;font-weight:800;" aria-valuenow="{{ round($percentageRoles['users'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['users'], 2) }}%;">
+                        <div class="progress-bar progress-bar-striped bg-light-blueviolet progress-bar-animated" role="progressbar" style="width:20%;color:#111;font-weight:900;" aria-valuenow="{{ round($percentageRoles['users'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($percentageRoles['users'], 2) }}%;">
                             {{ round($percentageRoles['users'], 2) }}%
                         </div>
                     </div>
@@ -202,7 +202,7 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light progress-bar-animated" role="progressbar" style="width:20%;color:#000;font-weight:500;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                        <div class="progress-bar progress-bar-striped bg-light progress-bar-animated" role="progressbar" style="width:20%;color:#111;font-weight:900;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
                     </div>
                 </div>
                 <div class="col-xl-2">
@@ -249,7 +249,7 @@
                 <div class="col-xl-12 head-init">
                     <span class="head-skeletone">
                         <i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i> 
-                        Branch User Log Data Information
+                        Branch Information
                     </span>
                 </div>
                 @foreach($branch_log_session_data as $branchId => $rolesGroup)
@@ -293,6 +293,57 @@
                                 </ul>
                             </div>
                         </div>
+                        <!-- <div class="row font-gray-700">
+                            <div class="user-branch-log-data-summary">
+                                <div class="row">
+                                    <div class="data-table-response">
+                                        <table class="table">
+                                            <thead>
+                                                <tr class="table-light">
+                                                    <th scope="col" class="text-position tex-size">ID</th>
+                                                    <th scope="col" class="tex-size">Email</th>
+                                                    <th scope="col" class="tex-size">Role</th>
+                                                    <th scope="col" class="tex-size">Current-Login</th>
+                                                    <th scope="col" class="tex-size">Total-Login</th>
+                                                    <th scope="col" class="tex-size">Total-Logout</th>
+                                                    <th scope="col" class="tex-size">Total-Activity</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="table-light bg-transparent" id="dataLogTable">
+                                                <tr class="table-light">
+                                                    <td class="td-cell text-position">1</td>
+                                                    <td class="td-cell">superadmingstmedicinecenter4215@gmail.com</td>
+                                                    <td class="td-cell">Super Admin</td>
+                                                    <td class="td-cell ps-1">1.00</td>
+                                                    <td class="td-cell ps-1">84.00</td>
+                                                    <td class="td-cell ps-1">83.00</td>
+                                                    <td class="td-cell ps-1">84.00</td>
+                                                </tr>
+                                                <tr class="table-light">
+                                                    <td class="td-cell text-position">2</td>
+                                                    <td class="td-cell">admingstmedicinecenter4215@gmail.com</td>
+                                                    <td class="td-cell">Admin</td>
+                                                    <td class="td-cell ps-1">0.00</td>
+                                                    <td class="td-cell ps-1">6.00</td>
+                                                    <td class="td-cell ps-1">6.00</td>
+                                                    <td class="td-cell ps-1">6.00</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr class="table-light">
+                                                    <th scope="col" class="tex-size"></th>
+                                                    <th colspan="2" scope="col" class="tex-size">Total Count</th>
+                                                    <th scope="col" class="tex-size ps-1">1.00</th>
+                                                    <th scope="col" class="tex-size ps-1">90.00</th>
+                                                    <th scope="col" class="tex-size ps-1">89.00</th>
+                                                    <th scope="col" class="tex-size ps-1">90.00</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
                 @endforeach
             </div>
