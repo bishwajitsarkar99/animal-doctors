@@ -242,6 +242,7 @@ return[
     'HRM Management'=>'HRM Management',
     // HRM
     'HRM'=>'HRM',
+    'Hrm'=>'Hrm',
     // Employee
     'Employee'=>'Employee',
     'Employee Information'=>'Employee Information',
@@ -316,11 +317,13 @@ return[
     'Log-Activity'=>'Log-Activity',
     'User Log Activity'=>'User Log Activity',
     // Layout
+    'Layouts'=>'Layouts',
     'File-Manager'=>'File-Manager',
     'Dark Sidenav'=>'Dark Sidenav',
     'Light Sidenav'=>'Light Sidenav',
     // Setting
     'SETTING'=>'SETTING',
+    'Setting'=>'Setting',
     'Post-Setting'=>'Post-Setting',
     'App-Setting'=>'App-Setting',
     // Navbar==========

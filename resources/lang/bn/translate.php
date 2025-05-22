@@ -247,6 +247,7 @@ return[
     'HRM Management'=>'এইচআরএম ব্যবস্থাপনা',
     // HRM
     'HRM'=>'এইচআরএম',
+    'Hrm'=>'এইচআরএম',
     // Employee
     'Employee'=>'কর্মচারী',
     'Employee Information'=>'কর্মচারী তথ্য',
@@ -321,11 +322,13 @@ return[
     'Log-Activity'=>'লগ-ক্রিয়াকলাপ',
     'User Log Activity'=>'ব্যবহারকারী লগ-কার্যকলাপ',
     // Layout
+    'Layouts'=>'লেআউট',
     'File-Manager'=>'ফাইল-ম্যানেজার',
     'Dark Sidenav'=>'ডার্ক সাইড নেভিগেশন',
     'Light Sidenav'=>'আলো সাইড নেভিগেশন',
     // Setting
     'SETTING'=>'সেটিং',
+    'Setting'=>'সেটিং',
     'Post-Setting'=>'পোস্ট-সেটিং',
     'App-Setting'=>'অ্যাপ-সেটিং',
 

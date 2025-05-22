@@ -7,10 +7,10 @@
                 <line x1="1.05" y1="12" x2="7" y2="12" />
                 <line x1="17.01" y1="12" x2="22.96" y2="12" />
             </svg>
-            <span class="prod_label {{Request::is('report/inventory-details-record') || 
+            <span class="prod_label text-animation {{Request::is('report/inventory-details-record') || 
                 Request::is('super-admin/inventory-authorize') || 
                 Request::is('company-supplier/suppliers/index') || 
-                Request::is('company-supplier/suppliers/access-permission') ? 'folder-active' : '' }}" id="stock_id" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                Request::is('company-supplier/suppliers/access-permission') ? 'folder-active' : '' }}">
                 {{ __('translate.Stock')}}
             </span>
             <div class="sb-sidenav-accordion-collapse-arrow ms-auto icon-size">▼</div>
