@@ -1,39 +1,39 @@
 <div class="sb-sidenav-menu">
     <div class="nav" id="menu_background">
         @if(auth()->user()->role ==1)
-        <a class="nav-link ms-1" href="{{ route('super-admin.dashboard') }}" id="side_nav">
-            <span class="dashboard_text ms-4">{{__('translate.Dashboard')}}</span>
-        </a>
+            <a class="nav-link ms-1" href="{{ route('super-admin.dashboard') }}" id="side_nav">
+                <span class="dashboard_text ms-4">{{__('translate.Dashboard')}}</span>
+            </a>
         @endif
         @if(auth()->user()->role ==2)
-        <a class="nav-link ms-1" href="{{ route('sub-admin.dashboard') }}" id="side_nav">
-            <span class="dashboard_text ms-4">{{__('translate.Dashboard')}}</span>
-        </a>
+            <a class="nav-link ms-1" href="{{ route('sub-admin.dashboard') }}" id="side_nav">
+                <span class="dashboard_text ms-4">{{__('translate.Dashboard')}}</span>
+            </a>
         @endif
         @if(auth()->user()->role ==3)
-        <a class="nav-link ms-1" href="{{ route('admin.dashboard') }}" id="side_nav">
-            <span class="dashboard_text ms-4">{{__('translate.Dashboard')}}</span>
-        </a>
+            <a class="nav-link ms-1" href="{{ route('admin.dashboard') }}" id="side_nav">
+                <span class="dashboard_text ms-4">{{__('translate.Dashboard')}}</span>
+            </a>
         @endif
         @if(auth()->user()->role ==5)
-        <a class="nav-link ms-1" href="{{ route('accounts.dashboard') }}" id="side_nav">
-            <span class="dashboard_text ms-4">Side-Menu</span>
-        </a>  
+            <a class="nav-link ms-1" href="{{ route('accounts.dashboard') }}" id="side_nav">
+                <span class="dashboard_text ms-4">Side-Menu</span>
+            </a>  
         @endif
         @if(auth()->user()->role ==6)
-        <a class="nav-link ms-1" href="#" id="side_nav">
-            <span class="dashboard_text ms-4">Side-Menu</span>
-        </a>
+            <a class="nav-link ms-1" href="#" id="side_nav">
+                <span class="dashboard_text ms-4">Side-Menu</span>
+            </a>
         @endif
         @if(auth()->user()->role ==7)
-        <a class="nav-link ms-1" href="#" id="side_nav">
-            <span class="dashboard_text ms-4">Side-Menu</span>
-        </a> 
+            <a class="nav-link ms-1" href="#" id="side_nav">
+                <span class="dashboard_text ms-4">Side-Menu</span>
+            </a> 
         @endif
         @if(auth()->user()->role ==0)
-        <a class="nav-link ms-1" href="{{ route('doctors.dashboard') }}" id="side_nav">
-            <span class="dashboard_text ms-4">Side-Menu</span>
-        </a>   
+            <a class="nav-link ms-1" href="{{ route('doctors.dashboard') }}" id="side_nav">
+                <span class="dashboard_text ms-4">Side-Menu</span>
+            </a>   
         @endif
         @if(auth()->user()->role ==1)
             <span class="ms-4 ps-2" style="display: flex;font-size: 12px;align-items: center !important;letter-spacing:1px;font-weight:600;color:white;text-transform: capitalize;font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;">
@@ -91,175 +91,166 @@
                 {{Auth::user()->branch_name}}
             </span>
         @endif
-        <!-- ================= Company Logo ================= -->
-        @if(auth()->user()->role ==1)
-        <div class="sb-sidenav-menu-heading platform_name trapezoid">
-            <span class="animation-examples three">
-                <img style="width:200px;height:75px;padding:0px;margin-left:-25px;" src="{{asset('/image/log/app-logo.svg')}}" alt="company-logo" width="100">
-            </span>
-        </div>
+            <!-- ================= Company Logo ================= -->
+            @if(auth()->user()->role ==1)
+            <div class="sb-sidenav-menu-heading platform_name trapezoid">
+                <span class="animation-examples three">
+                    <img style="width:200px;height:65px;padding:0px;margin-left:-25px;" src="{{asset('/image/log/app-logo.svg')}}" alt="company-logo" width="100">
+                </span>
+            </div>
         @endif
         @if(auth()->user()->role ==2)
-        <div class="sb-sidenav-menu-heading platform_name trapezoid">
-            <span class="animation-examples three">
-                <img style="width:100%;height:75px;padding:0px;border:1px solid lightgray;" src="{{asset('/image/log/app-logo.png')}}" alt="company-logo" width="100">
-            </span>
-        </div>
+            <div class="sb-sidenav-menu-heading platform_name trapezoid">
+                <span class="animation-examples three">
+                    <img style="width:100%;height:65px;padding:0px;border:1px solid lightgray;" src="{{asset('/image/log/app-logo.png')}}" alt="company-logo" width="100">
+                </span>
+            </div>
         @endif
         @if(auth()->user()->role ==3)
-        <div class="sb-sidenav-menu-heading platform_name trapezoid">
-            <span class="animation-examples three">
-                <img style="width:100%;height:75px;padding:0px;border:1px solid lightgray;" src="{{asset('/image/log/app-logo.png')}}" alt="company-logo" width="100">
-            </span>
-        </div>
+            <div class="sb-sidenav-menu-heading platform_name trapezoid">
+                <span class="animation-examples three">
+                    <img style="width:100%;height:65px;padding:0px;border:1px solid lightgray;" src="{{asset('/image/log/app-logo.png')}}" alt="company-logo" width="100">
+                </span>
+            </div>
         @endif
         @if(auth()->user()->role ==5)
-        <div class="sb-sidenav-menu-heading platform_name trapezoid" style="width: 205px;height:150px;">
-            <span class="animation-examples three pb-2">
-                <i class="fa-solid fa-dice-d6 fa-flip"></i>
-                <span class="lar_pro plantform1">{{__('Accounts')}} </span>
-                <img class="profile" style="width: 100px;height:100px; border-radius:50%;" src="/image/{{auth()->user()->image}}" alt="profile-image">
-            </span>
-        </div>
+            <div class="sb-sidenav-menu-heading platform_name trapezoid" style="width: 205px;height:150px;">
+                <span class="animation-examples three pb-2">
+                    <i class="fa-solid fa-dice-d6 fa-flip"></i>
+                    <span class="lar_pro plantform1">{{__('Accounts')}} </span>
+                    <img class="profile" style="width: 100px;height:100px; border-radius:50%;" src="/image/{{auth()->user()->image}}" alt="profile-image">
+                </span>
+            </div>
         @endif
         @if(auth()->user()->role ==6)
-        <div class="sb-sidenav-menu-heading platform_name trapezoid" style="width: 205px;height:150px;">
-            <span class="animation-examples three pb-2">
-                <i class="fa-solid fa-dice-d6 fa-flip"></i>
-                <span class="lar_pro plantform1">{{__('Marketing')}} </span>
-                <img class="profile" style="width: 100px;height:100px; border-radius:50%;" src="/image/{{auth()->user()->image}}" alt="profile-image">
-            </span>
-        </div>
+            <div class="sb-sidenav-menu-heading platform_name trapezoid" style="width: 205px;height:150px;">
+                <span class="animation-examples three pb-2">
+                    <i class="fa-solid fa-dice-d6 fa-flip"></i>
+                    <span class="lar_pro plantform1">{{__('Marketing')}} </span>
+                    <img class="profile" style="width: 100px;height:100px; border-radius:50%;" src="/image/{{auth()->user()->image}}" alt="profile-image">
+                </span>
+            </div>
         @endif
         @if(auth()->user()->role ==7)
-        <div class="sb-sidenav-menu-heading platform_name trapezoid" style="width: 205px;height:150px;">
-            <span class="animation-examples three pb-2">
-                <i class="fa-solid fa-dice-d6 fa-flip"></i>
-                <span class="lar_pro plantform1">{{__('Delivery Team')}} </span>
-                <img class="profile" style="width: 100px;height:100px; border-radius:50%;" src="/image/{{auth()->user()->image}}" alt="profile-image">
-            </span>
-        </div>
+            <div class="sb-sidenav-menu-heading platform_name trapezoid" style="width: 205px;height:150px;">
+                <span class="animation-examples three pb-2">
+                    <i class="fa-solid fa-dice-d6 fa-flip"></i>
+                    <span class="lar_pro plantform1">{{__('Delivery Team')}} </span>
+                    <img class="profile" style="width: 100px;height:100px; border-radius:50%;" src="/image/{{auth()->user()->image}}" alt="profile-image">
+                </span>
+            </div>
         @endif
         @if(auth()->user()->role ==0)
-        <div class="sb-sidenav-menu-heading platform_name trapezoid" style="width: 205px;height:150px;">
-            <span class="animation-examples three pb-2">
-                <i class="fa-solid fa-dice-d6 fa-flip"></i>
-                <span class="lar_pro plantform1">{{__('translate.Doctor')}}</span><br>
-                <img class="profile" style="width: 100px;height:100px; border-radius:50%;" src="/image/{{auth()->user()->image}}" alt="profile-image">
-            </span>
-        </div>
+            <div class="sb-sidenav-menu-heading platform_name trapezoid" style="width: 205px;height:150px;">
+                <span class="animation-examples three pb-2">
+                    <i class="fa-solid fa-dice-d6 fa-flip"></i>
+                    <span class="lar_pro plantform1">{{__('translate.Doctor')}}</span><br>
+                    <img class="profile" style="width: 100px;height:100px; border-radius:50%;" src="/image/{{auth()->user()->image}}" alt="profile-image">
+                </span>
+            </div>
         @endif
         @if(auth()->user()->role == 1)
-        <!-- ================== Purchases Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('purchases_visual')}}"></span> 
-            <span class="{{setting('purchases_visual')}}" style="color:white;">{{__('translate.Purchases Management')}}</span>
-        </div>
-        <!-- ================== Product ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._product')
-
-        <!-- ================== Stock ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._stock')
-
-        <!-- ================== Accounts Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('accounts_moduel_display')}}"></span> 
-            <span class="{{setting('accounts_moduel_display')}}" style="color:white;">{{__('translate.Accounts Management')}}</span>
-        </div>
-
-        <!-- ================== Leger ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._leger')
-
-
-        <!-- ================== Sales ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._sales')
-
-        <!-- ================== Voucher ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._voucher')
-
-        <!-- ================== Asset ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._asset')
-
-        <!-- ================== Report ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._report')
-
-
-        <!-- ==================  HRM Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading {{setting('hrm_moduel_display')}}" style="color:white;"><span class="link_menus"></span> 
-            <span class="{{setting('hrm_moduel_display')}}">{{__('translate.HRM Management')}}</span>
-        </div>
-
-        <!-- ================== HRM ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._hrm')
-
-        <!-- ==================  Auth Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading {{setting('auth_moduel_display')}}"><span class="link_menus"></span> 
-            <span class="{{setting('auth_moduel_display')}}" style="color:white;">{{__('translate.Authentication')}}</span>
-        </div>
-
-        @include('backend.layouts.layouts-components.partial-sidebar._auth')
-
-
-        <!-- ================== Layouts ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._layouts')
-
-        <!-- ================== Components ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._components')
+            <!-- ================== Purchases Moduel ======================= -->
+            <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('purchases_visual')}}"></span> 
+                <span class="{{setting('purchases_visual')}}" style="color:white;">{{__('translate.Purchases Management')}}</span>
+                <!-- ================== Product ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._product')
         
-        <!-- ================== Setting ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._setting')
+                <!-- ================== Stock ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._stock')
+            </div>
+            <!-- ================== Accounts Moduel ======================= -->
+            <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('accounts_moduel_display')}}"></span> 
+                <span class="{{setting('accounts_moduel_display')}}" style="color:white;">{{__('translate.Accounts Management')}}</span>
+                <!-- ================== Leger ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._leger')
+        
+        
+                <!-- ================== Sales ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._sales')
+        
+                <!-- ================== Voucher ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._voucher')
+        
+                <!-- ================== Asset ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._asset')
+        
+                <!-- ================== Report ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._report')
+            </div>
+            <!-- ==================  HRM Moduel ======================= -->
+            <div class="sb-sidenav-menu-heading {{setting('hrm_moduel_display')}}" style="color:white;"><span class="link_menus"></span> 
+                <span class="{{setting('hrm_moduel_display')}}">{{__('translate.HRM Management')}}</span>
+                <!-- ================== HRM ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._hrm')
+            </div>
+            <!-- ==================  Auth Moduel ======================= -->
+            <div class="sb-sidenav-menu-heading {{setting('auth_moduel_display')}}"><span class="link_menus"></span> 
+                <span class="{{setting('auth_moduel_display')}}" style="color:white;">{{__('translate.Authentication')}}</span>
+                @include('backend.layouts.layouts-components.partial-sidebar._auth')
+        
+        
+                <!-- ================== Layouts ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._layouts')
+        
+                <!-- ================== Components ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._components')
+                
+                <!-- ================== Setting ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._setting')
+            </div>
         @endif
 
         @if(auth()->user()->role ==3)
             <!-- ==================  Auth Moduel ======================= -->
-            <div class="sb-sidenav-menu-heading"><span class="link_menus"></span> Purchases Management</div>
-            @include('backend.layouts.layouts-components.partial-sidebar._stock')
-            <div class="sb-sidenav-menu-heading"><span class="link_menus"> {{__('translate.Post')}}</div>
-            @include('backend.layouts.layouts-components.partial-sidebar._admin')
-            <!-- ================== Layouts ======================= -->
-            @include('backend.layouts.layouts-components.partial-sidebar._layouts')
-            @include('backend.layouts.layouts-components.partial-sidebar._auth')
+            <div class="sb-sidenav-menu-heading">
+                <span class="link_menus"></span> Purchases Management
+                @include('backend.layouts.layouts-components.partial-sidebar._stock')
+            </div>
+            <div class="sb-sidenav-menu-heading">
+                <span class="link_menus">{{__('translate.Post')}}</span>
+                @include('backend.layouts.layouts-components.partial-sidebar._admin')
+                <!-- ================== Layouts ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._layouts')
+                @include('backend.layouts.layouts-components.partial-sidebar._auth')
+            </div>
         @endif
         @if(auth()->user()->role ==2)
-        <!-- ==================  Auth Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading"><span class="link_menus"> Purchases Management</div>
-        @include('backend.layouts.layouts-components.partial-sidebar._stock')
-        @include('backend.layouts.layouts-components.partial-sidebar._sub-admin')
-        <!-- ================== Layouts ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._layouts')
-        @include('backend.layouts.layouts-components.partial-sidebar._auth')
+            <!-- ==================  Auth Moduel ======================= -->
+            <div class="sb-sidenav-menu-heading">
+                <span class="link_menus"> Purchases Management </span>
+                @include('backend.layouts.layouts-components.partial-sidebar._stock')
+                @include('backend.layouts.layouts-components.partial-sidebar._sub-admin')
+                <!-- ================== Layouts ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._layouts')
+                @include('backend.layouts.layouts-components.partial-sidebar._auth')
+            </div>
         @endif
         @if(auth()->user()->role == 5)
-        <!-- ================== Purchases Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('purchases_visual')}}"></span> 
-            <span class="{{setting('purchases_visual')}}">{{__('translate.Purchases Management')}}</span>
-        </div>
-        <!-- ================== Product ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._product')
-
-        <!-- ================== Stock ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._stock')
-
-        <!-- ================== Accounts Moduel ======================= -->
-        <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('accounts_moduel_display')}}"></span> 
-            <span class="{{setting('accounts_moduel_display')}}">{{__('translate.Accounts Management')}}</span>
-        </div>
-
-        <!-- ================== Leger ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._leger')
-
-
-        <!-- ================== Sales ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._sales')
-
-        <!-- ================== Voucher ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._voucher')
-
-        <!-- ================== Asset ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._asset')
-
-        <!-- ================== Report ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._report')
-        <!-- ================== Layouts ======================= -->
-        @include('backend.layouts.layouts-components.partial-sidebar._layouts')
+            <!-- ================== Purchases Moduel ======================= -->
+            <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('purchases_visual')}}"></span> 
+                <span class="{{setting('purchases_visual')}}">{{__('translate.Purchases Management')}}</span>
+                <!-- ================== Product ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._product')
+                <!-- ================== Stock ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._stock')
+            </div>
+            <!-- ================== Accounts Moduel ======================= -->
+            <div class="sb-sidenav-menu-heading"><span class="link_menus {{setting('accounts_moduel_display')}}"></span> 
+                <span class="{{setting('accounts_moduel_display')}}">{{__('translate.Accounts Management')}}</span>
+                <!-- ================== Leger ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._leger')
+                <!-- ================== Sales ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._sales')
+                <!-- ================== Voucher ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._voucher')
+                <!-- ================== Asset ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._asset')
+                <!-- ================== Report ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._report')
+                <!-- ================== Layouts ======================= -->
+                @include('backend.layouts.layouts-components.partial-sidebar._layouts')
+            </div>
         @endif
 
     </div>

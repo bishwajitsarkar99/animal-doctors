@@ -39,9 +39,9 @@ class UserActivityServiceProvider
     public function viewUserDetails(Request $request, $slug)
     {
         $auth = Auth::User();
-        $branch_id = $auth->branch_id;
         $role_id = $auth->role;
         $email = $auth->login_email;
+        $branch_id = $auth->branch_id;
 
         if($email && $role_id){
             $user_analycis_authorize = 1; // log chart dashboard page authorize
@@ -55,17 +55,6 @@ class UserActivityServiceProvider
             $startOfMonth = Carbon::now()->startOfMonth();
             $endOfMonth = Carbon::now()->endOfMonth();
             if($role_id === 1){
-
-                // Start Branch Information Data Chart
-                $branch_log_session_data = SessionModel::whereNotNull('user_id')
-                ->whereNotNull('role')
-                ->whereNotNull('branch_id')
-                ->select('user_id', 'branch_id', 'role', DB::raw('COUNT(DISTINCT user_id) as unique_email_count'))
-                ->groupBy('user_id', 'branch_id', 'role')
-                ->with(['users', 'roles'])
-                ->get()
-                ->groupBy('branch_id');
-                //dd($branch_log_session_data);
 
                 // Get Session user login data
                 $start = Carbon::now()->startOfYear();
@@ -179,61 +168,32 @@ class UserActivityServiceProvider
                 }
                 // End Branch Information Data Chart
 
-                // Get Role for dropdown menu
+                // User and Role Count
                 $user_roles = User::pluck('role')->unique();
                 $roles = Role::whereIn('id', $user_roles)->get();
-
-                // start user activity bar chart
-                $usersCount = [
-                    'super_admin' => User::where('role', 1)->count(),
-                    'admin' => User::where('role', 3)->count(),
-                    'sub_admin' => User::where('role', 2)->count(),
-                    'accounts' => User::where('role', 5)->count(),
-                    'marketing' => User::where('role', 6)->count(),
-                    'delivery_team' => User::where('role', 7)->count(),
-                    'users' => User::where('role', 0)->count(),
-                    'inactive_users' => User::where('status', 1)->count(),
-                    'active_users' => User::where('status', 0)->count(),
-                    'users_log_activity' => SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count(),
-                    'total_users' => User::count(),
-                ];
-
-                $usersActivityCount = [
-                    'inactive_users_activity' => User::where('status', 1)->count(),
-                    'active_users_activity' => User::where('status', 0)->count(),
-                    'users_log_activities' => SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count(),
-                    'total_users_activity' => User::count(),
-                ];
-
                 $total_users = User::count();
-                $authentic_users = User::where('status', 0)->count();
-                $inactive_users = User::where('status', 1)->count();
-                
-                // end user activity bar chart
+                $superAdmin = User::where('role', 1)->count();
+                $admin = User::where('role', 3)->count();
+                $subAdmin = User::where('role', 2)->count();
+                $accounts = User::where('role', 5)->count();
+                $marketing = User::where('role', 6)->count();
+                $deliveryTeam = User::where('role', 7)->count();
+                $users = User::where('role', 0)->count();
+                $inactiveUsers = User::where('status', 1)->count();
+                $activeUsers = User::where('status', 0)->count();
+                // User Session Data Count
+                $userSessionData = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
 
-                // start top mini card Calculate the percentage of total users
-                $total_users_percentage = $total_users > 0 ? ($total_users / $total_users) * 100 : 0;
-                // Calculate the percentage of total authentic_users
-                $authentic_users_percentage = $total_users > 0 ? ($authentic_users / $total_users) * 100 : 0;
-                // Calculate the percentage of total inactive_users
-                $inactive_users_percentage = $total_users > 0 ? ($inactive_users / $total_users) * 100 : 0;
-                // Calculate the percentage for each role
-                $percentageRoles = [];
-                foreach ($usersCount as $role => $count) {
-                    $percentageRoles[$role] = $total_users > 0 ? ($count / $total_users) * 100 : 0;
-                }
-                // end top mini card Calculate the percentage of total users
-                
-                // start user activity line chart
-                $startOfMonth = Carbon::now()->startOfMonth();
-                $endOfMonth = Carbon::now()->endOfMonth();
-                $intime_or_outtime_activity_users = SessionModel::whereNotNull('id')->count();
-                $intime_activity_users = SessionModel::where('status', 0)->count();
-                $activity_users = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
-                // end user activity line chart
-
-                // Calculate the percentage of total activity users(summary)
-                $activity_users_percentage = $intime_or_outtime_activity_users > 0 ? ($intime_activity_users / $intime_or_outtime_activity_users) * 100 : 0;
+                // User Analycis Page Mini Card Data
+                $miniCardData = $this->getMiniCardData($total_users, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers);
+                // User Analycis Page Summary Card Data
+                $summaryCardData = $this->getSummaryCardData($roles, $total_users, $superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users);
+                // User Analycis Page Branch Session Data 
+                $branch_log_session_data = $this->getBranchInfoData();
+                // User Analycis Page User Activities Line Chart
+                $usersActivityCount = $this->getUserActivitiesLineChart($startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers, $userSessionData, $total_users);
+                // User Analycis Page User Activities Bar Chart
+                $usersCount = $this->getUserActivitiesBarChart($total_users, $startOfMonth, $endOfMonth,$superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users, $inactiveUsers, $activeUsers, $userSessionData);
             }else {
                 // Start Branch Information Data Chart
                 $branch_log_session_data = SessionModel::where('branch_id', $branch_id)
@@ -446,8 +406,9 @@ class UserActivityServiceProvider
                 $user_analycis_authorize = (int) $user_analycis_authorize;
     
                 if ($user_analycis_authorize === 1) {
-                    return view('super-admin.user-details.details', compact('usersCount','usersActivityCount','total_users','authentic_users','inactive_users','activity_users',
-                        'total_users_percentage','authentic_users_percentage','inactive_users_percentage','percentageRoles','activity_users_percentage','roles', 'page_name',
+                    return view('super-admin.user-details.details', compact('usersCount','usersActivityCount',
+                    'miniCardData'
+                    ,'summaryCardData','roles', 'page_name',
                         'user_log_data_authorize', 'user_activity_graph_authorize', 'user_activity_page_name', 'user_activity_graph_page_name', 'user_log_data_table_permission', 
                         'branch_log_session_data', 'formattedBranchStats')
                     )->with('branchRoleStats', $formattedBranchStats);
@@ -458,6 +419,108 @@ class UserActivityServiceProvider
             return view('unauthorize-page.page-session-block', compact('page_name'));
         }
     }
+
+    // Helper Function User Analycis Page Mini Card Get Data
+    private function getMiniCardData($total_users, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers)
+    {
+        $authentic_users = $activeUsers;
+        $inactive_users = $inactiveUsers;
+
+        // start top mini card Calculate the percentage of total users
+        $total_users_percentage = $total_users > 0 ? ($total_users / $total_users) * 100 : 0;
+        // Calculate the percentage of total authentic_users
+        $authentic_users_percentage = $total_users > 0 ? ($authentic_users / $total_users) * 100 : 0;
+        // Calculate the percentage of total inactive_users
+        $inactive_users_percentage = $total_users > 0 ? ($inactive_users / $total_users) * 100 : 0;
+
+        // Calculate the percentage and total activity users
+        $intime_or_outtime_activity_users = SessionModel::whereNotNull('id')->count();
+        $intime_activity_users = SessionModel::where('status', 0)->count();
+        $activity_users = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
+
+        $activity_users_percentage = $intime_or_outtime_activity_users > 0 ? ($intime_activity_users / $intime_or_outtime_activity_users) * 100 : 0;
+
+        return [
+            'total_users' => $total_users,
+            'total_users_percentage' => $total_users_percentage,
+            'authentic_users' => $authentic_users,
+            'authentic_users_percentage' => $authentic_users_percentage,
+            'inactive_users' => $inactive_users,
+            'inactive_users_percentage' => $inactive_users_percentage,
+            'activity_users' => $activity_users,
+            'activity_users_percentage' => $activity_users_percentage,
+        ];
+    }
+    // Helper Function User Analycis Page Summary Card Get Data
+    private function getSummaryCardData($roles, $total_users, $superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users)
+    {
+        $usersCount = [
+            'super_admin' => $superAdmin,
+            'admin' => $admin,
+            'sub_admin' => $subAdmin,
+            'accounts' => $accounts,
+            'marketing' => $marketing,
+            'delivery_team' => $deliveryTeam,
+            'users' => $users,
+        ];
+        $percentageRoles = [];
+        foreach ($usersCount as $role => $count) {
+            $percentageRoles[$role] = $total_users > 0 ? ($count / $total_users) * 100 : 0;
+        }
+        return $percentageRoles;
+    }
+    // Helper Function User Analycis Page Branch Information Get Data
+    private function getBranchInfoData()
+    {
+        // Start Branch Information Data Chart
+        $branch_session_data = SessionModel::whereNotNull('user_id')
+        ->whereNotNull('role')
+        ->whereNotNull('branch_id')
+        ->select('user_id', 'branch_id', 'role', DB::raw('COUNT(DISTINCT user_id) as unique_email_count'))
+        ->groupBy('user_id', 'branch_id', 'role')
+        ->with(['users', 'roles'])
+        ->get()
+        ->groupBy('branch_id');
+
+        return $branch_session_data;
+    }
+    // Helper Function User Analycis Page User Acivities Line Chart ( Current Time )
+    private function getUserActivitiesLineChart($startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers, $userSessionData, $total_users)
+    {
+        $usersActivityLineCount = [
+            'inactive_users_activity' => $inactiveUsers,
+            'active_users_activity' => $activeUsers,
+            'users_log_activities' => $userSessionData,
+            'total_users_activity' => $total_users,
+        ];
+
+        return $usersActivityLineCount;
+    }
+    // Helper Function User Analycis Page User Acivities Bar Chart
+    private function getUserActivitiesBarChart($total_users, $startOfMonth, $endOfMonth, $superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users, $inactiveUsers, $activeUsers, $userSessionData)
+    {
+        $usersBarChartCount = [
+            'super_admin' => $superAdmin,
+            'admin' => $admin,
+            'sub_admin' => $subAdmin,
+            'accounts' => $accounts,
+            'marketing' => $marketing,
+            'delivery_team' => $deliveryTeam,
+            'users' => $users,
+            'inactive_users' => $inactiveUsers,
+            'active_users' => $activeUsers,
+            'users_log_activity' => $userSessionData,
+            'total_users' => $total_users,
+        ];
+
+        return $usersBarChartCount;
+    }
+    // Helper Function User Analycis Page User Acivities Bar Chart
+    private function getBranchBarChart()
+    {
+       // 
+    }
+
     /**
      * Handle User Activity Get
     */
