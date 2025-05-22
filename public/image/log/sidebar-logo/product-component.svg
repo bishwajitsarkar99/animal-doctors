@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 194" width="512" height="194" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
+  <!-- Circle attached just left of the shape's left edge -->
+  <circle cx="140" cy="97" r="75" fill="#FF0084" />
+    <!-- Text inside the circle -->
+  <text x="140" y="97" text-anchor="middle" dominant-baseline="middle"
+    font-family="Arial, sans-serif" font-size="50" fill="#fff">
+    P
+  </text>
+</svg>

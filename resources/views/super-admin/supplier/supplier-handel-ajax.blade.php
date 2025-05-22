@@ -34,7 +34,7 @@
                 return;
             }
 
-            const currentUrl = "/branch-fetch/"+ id;
+            const currentUrl = "/company-supplier/branch-fetch/"+ id;
 
             $.ajaxSetup({
                 headers: {
@@ -82,7 +82,7 @@
                 return;
             }
 
-            const currentUrl = "/get-supplier/"+ branch_id;
+            const currentUrl = "/company-supplier/get-supplier/"+ branch_id;
 
             $.ajaxSetup({
                 headers: {

@@ -1,4 +1,4 @@
-<a class="nav-link_cgrMenu dropdown-toggle ty child_asset {{setting('new_asset_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_asset {{setting('new_asset_title_display')}}" role="button" data-bs-toggle="collapse" data-bs-target="#assetCreate" aria-expanded="false" aria-controls="flush-heading">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_asset_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_asset_link" hidden></i>
@@ -8,6 +8,20 @@
         <span class="{{setting('new_asset_title_display')}}">{{__('translate.New Asset')}}</span>
     </span>
 </a>
+<div id="assetCreate" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushAsset">
+    <div class="child-tree">
+        <div class="accordion-body sub_box">
+            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <i class="fa-solid fa-minus" style="color:#fff;"></i>
+                <span class="{{setting('add_asset_visual')}}">{{__('translate.Create Asset')}}</span>
+            </a>
+            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <i class="fa-solid fa-minus" style="color:#fff;"></i>
+                <span class="{{setting('asset_details_visual')}}">{{__('translate.Asset List')}}</span>
+            </a>
+        </div>
+    </div>
+</div>
 <ul class="dropdown-menu dropdown-menu-end tyg rgs line_menu" aria-labelledby="navbarDropdown">
     <li>
         <div class="collapse" id="asset_" aria-labelledby="headingTwo" data-bs-parent="#asset_">
@@ -25,7 +39,7 @@
     </li>
 </ul>
 <!-- ================= Asset Details ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_asset_details {{setting('details_asset_title_display')}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_asset_details {{setting('details_asset_title_display')}}" role="button" data-bs-toggle="collapse" data-bs-target="#assetDetails" aria-expanded="false" aria-controls="flush-heading">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_asset_details_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_asset_details_link" hidden></i>
@@ -35,27 +49,25 @@
         <span class="{{setting('details_asset_title_display')}}">{{__('translate.Details')}}</span>
     </span>
 </a>
-<ul class="dropdown-menu dropdown-menu-end tyg rgs line_menu" aria-labelledby="navbarDropdown">
-    <li>
-        <div class="collapse" id="asset_" aria-labelledby="headingTwo" data-bs-parent="#asset_">
-            <nav class="sb-sidenav-menu-nested nav child-tree">
-                <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
-                    <span class="{{setting('previous_asset_visual')}}">{{__('translate.Previous Asset')}}</span>
-                </a>
-                <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
-                    <span class="{{setting('current_asset_visual')}}">{{__('translate.Current Asset')}}</span>
-                </a>
-                <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
-                    <span class="{{setting('aasset_detls_visual')}}">{{__('translate.Asset Details')}}</span>
-                </a>
-                <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
-                    <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
-                    <span class="{{setting('asset_setting_visual')}}">{{__('translate.Asset Setting')}}</span>
-                </a>
-            </nav>
+<div id="assetDetails" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushAsset">
+    <div class="child-tree">
+        <div class="accordion-body sub_box">
+            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <i class="fa-solid fa-minus" style="color:#fff;"></i>
+                <span class="{{setting('previous_asset_visual')}}">{{__('translate.Previous Asset')}}</span>
+            </a>
+            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <i class="fa-solid fa-minus" style="color:#fff;"></i>
+                <span class="{{setting('current_asset_visual')}}">{{__('translate.Current Asset')}}</span>
+            </a>
+            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <i class="fa-solid fa-minus" style="color:#fff;"></i>
+                <span class="{{setting('aasset_detls_visual')}}">{{__('translate.Asset Details')}}</span>
+            </a>
+            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <i class="fa-solid fa-minus" style="color:#fff;"></i>
+                <span class="{{setting('asset_setting_visual')}}">{{__('translate.Asset Setting')}}</span>
+            </a>
         </div>
-    </li>
-</ul>
+    </div>
+</div>

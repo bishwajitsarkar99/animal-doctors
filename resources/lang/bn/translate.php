@@ -25,15 +25,18 @@ return[
     // Category
     'Category'=>'ধরন',
     'Category List'=>'পণ্যের-ধরনের তালিকা',
+    'Add Category'=>'পণ্যের-ধরন যোগ করুন',
     'ADD Category'=>'পণ্যের-ধরন যোগ করুন',
     // Sub Category
     'Group'=> 'গ্রুপ',
     'Sub-Category List'=>'উপ-ধরনের তালিকা',
     'Sub-Category'=>'উপ-ধরন',
     'Sub Category'=>'পণ্যের উপ-ধরন',
+    'Add Sub Category'=>'উপ-ধরন যোগ করুন',
     'ADD Sub Category'=>'উপ-ধরন যোগ করুন',
     // Group
     'Group'=>'গ্রুপ',
+    'Add Group'=>'গ্রুপ যোগ করুন',
     'ADD Group'=>'গ্রুপ যোগ করুন',
     'Medicine Group'=>'মেডিসিন গ্রুপ',
     // Medicine Part
@@ -49,19 +52,23 @@ return[
     'Model'=>'মডেল',
     'Product Model'=>'পণ্যের মডেল',
     'ADD Model'=>'মডেল যোগ করুন',
+    'Add Model'=>'মডেল যোগ করুন',
     // Units
     'Units'=>'একক সমুহ',
     'All Units'=>'মোট একক',
     'Create Units'=>'একক তৈরি করুন',
     'ADD Unit'=>'একক যোগ করুন',
+    'Add Unit'=>'একক যোগ করুন',
     // BrandBrand
     'Brand'=>'ব্র্যান্ড',
     'Add Brand'=>'ব্র্যান্ড যোগ করুন',
     'ADD Brand'=>'ব্র্যান্ড যোগ করুন',
+    'Add Brand'=>'ব্র্যান্ড যোগ করুন',
     // Product Menu
     'Product'=>'পণ্য',
     'Add Product'=>'পণ্য যোগ করুন',
     'ADD Product'=>'পণ্য যোগ করুন',
+    'Add Product'=>'পণ্য যোগ করুন',
     // Stock
     'Stock'=>'স্টক',
     'Open Stock-Book'=>'স্টক-বুক খুলুন',

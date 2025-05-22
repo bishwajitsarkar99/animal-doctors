@@ -4,7 +4,7 @@
     --nav-button-color:white;
     --nav-font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
     --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, transparent 50%, rgba(0, 0, 0, 0.05) 100%);
-    --table-row-light-blue-hover:linear-gradient(to bottom, rgba(0, 123, 255, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%);
+    --table-row-light-blue-hover:linear-gradient(150deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%);
     --row-hover-border:dodgerblue;
     /* button btn-primary */
     --mdb-btn-bg: #3b71ca;
@@ -33,22 +33,22 @@ htm,body{
     padding: 10px 35px;
 }
 .table{
-    border-left: 1px solid rgba(0, 123, 255, 0.3);
-    border-right: 1px solid rgba(0, 123, 255, 0.3);
+    border-left: 1px groove rgba(0, 123, 255, 0.3);
+    border-right: 1px groove rgba(0, 123, 255, 0.3);
 }
 table{
     font-family: var(--nav-font-family);
     background-color: #fff !important;
-    border-bottom: 1px solid rgba(0, 123, 255, 0.3);
-    border-top: 1px solid rgba(0, 123, 255, 0.3);
+    border-bottom: 1px groove rgba(0, 123, 255, 0.3);
+    border-top: 1px groove rgba(0, 123, 255, 0.3);
     border-collapse: collapse;
     font-size: 12px;
     opacity: 1;
     letter-spacing: 0.5px;
 }
 td.td-cell{
-    border-top: 1px solid rgba(0, 123, 255, 0.3);
-    border-bottom: 1px solid rgba(0, 123, 255, 0.3);
+    border-top: 1px ridge rgba(0, 123, 255, 0.3);
+    border-bottom: 1px ridge rgba(0, 123, 255, 0.3);
     color: #111;
     letter-spacing: 0.8px;
     font-size: 11px;
@@ -69,8 +69,8 @@ th.tex-size{
 thead,th,td{
     font-family: var(--nav-font-family);
     background-color: #fff !important;
-    border-bottom: 0.5px solid rgba(0, 123, 255, 0.3);
-    border-top: 0.5px solid rgba(0, 123, 255, 0.3);
+    border-bottom: 0.5px ridge rgba(0, 123, 255, 0.3);
+    border-top: 0.5px ridge rgba(0, 123, 255, 0.3);
     border-collapse: collapse;
 }
 .activity-table-responsive{
@@ -234,14 +234,14 @@ select> option{
 }
 .nav-tabs {
     --bs-nav-tabs-border-width: 1px;
-    --bs-nav-tabs-border-color: #dee2e6;
+    --bs-nav-tabs-border-color: #d6dadd;
     /* --bs-nav-tabs-border-radius: 0.375rem; */
     --bs-nav-tabs-border-radius: 0.1rem;
     --bs-nav-tabs-link-hover-border-color: #e9ecef #e9ecef #dee2e6;
     --bs-nav-tabs-link-active-color: #495057;
     --bs-nav-tabs-link-active-bg: #fff;
     --bs-nav-tabs-link-active-border-color: #dee2e6 #dee2e6 #fff;
-    border-bottom: var(--bs-nav-tabs-border-width) solid var(--bs-nav-tabs-border-color);
+    border-bottom: var(--bs-nav-tabs-border-width) groove var(--bs-nav-tabs-border-color);
 }
 li.nav-item {
     height: 26px;
@@ -350,8 +350,8 @@ ul#roleLabel {
 .data-head{
     margin: 0 21px;
     padding: 1px 0;
-    border-bottom: 1px solid #c7c7c7;
-    border-top: 1px solid #c7c7c7;
+    border-bottom: 1px groove #c7c7c7bf;
+    border-top: 1px groove #c7c7c7bf;
 }
 .font-gray-700{
     font-family: var(--nav-font-family);
@@ -1459,10 +1459,10 @@ a.page-link.btn_page {
     border-radius: 4px;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-    border-top: 1px solid rgba(0, 123, 255, 0.2) !important;
-    border-bottom: 1px solid rgba(0, 123, 255, 0.2) !important;
+    border-top: 1px ridge rgba(0, 123, 255, 0.2) !important;
+    border-bottom: 1px ridge rgba(0, 123, 255, 0.2) !important;
     border-left: none !important;
-    border-right: 1px solid rgba(0, 123, 255, 0.2) !important;
+    border-right: 1px ridge rgba(0, 123, 255, 0.2) !important;
     box-shadow: 0px 2px 20px #0001;
     background-image: linear-gradient(to bottom, white 0%, white, white 100%);
 }
@@ -1490,10 +1490,10 @@ input#date_start,input#date_end {
     box-shadow: 0px 2px 20px #0001;
     background-image: linear-gradient(to bottom, white 0%, white, white 100%);
     border-radius: 3px;
-    border-top: 1px solid rgba(0, 123, 255, 0.2);
-    border-bottom: 1px solid rgba(0, 123, 255, 0.2);
-    border-left: 1px solid rgba(0, 123, 255, 0.2);
-    border-right: 1px solid rgba(0, 123, 255, 0.2);
+    border-top: 1px ridge rgba(0, 123, 255, 0.2);
+    border-bottom: 1px ridge rgba(0, 123, 255, 0.2);
+    border-left: 1px ridge rgba(0, 123, 255, 0.2);
+    border-right: 1px ridge rgba(0, 123, 255, 0.2);
     /* animation: text_color 3s infinite; */
     opacity: 1;
     font-size: 12px;

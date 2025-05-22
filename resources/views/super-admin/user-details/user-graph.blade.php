@@ -85,12 +85,12 @@
 <div class="row mt-4">
     <div class="col-xl-6">
         <div class="card card-body five-card">
-            <span class="card-head-title pb-2" style="border-bottom: 1px solid rgba(0, 0, 0, 0.175);">
+            <div class="card-head-title pb-1">
                 <span class="head-skeletone">
                     <i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i>
                     Users Summary
                 </span>
-            </span>
+            </div>
             <div class="row">
                 <div class="col-xl-4">
                     <span class="login-user-title percentage-skeletone">Super-Admin Users</span>

@@ -24,14 +24,17 @@ return[
     // Category
     'Category'=>'Category',
     'Category List'=>'Category List',
+    'Add Category'=>'Add Category',
     'ADD Category'=>'ADD Category',
     // Sub Category
     'Group'=> 'Group',
     'Sub-Category List'=>'Sub-Category List',
     'Sub Category'=>'Sub Category',
+    'Add Sub Category'=>'Add Sub Category',
     'ADD Sub Category'=>'ADD Sub Category',
     // Group
     'Group'=>'Group',
+    'Add Group'=>'Add Group',
     'ADD Group'=>'ADD Group',
     'Medicine Group'=>'Medicine Group',
     // Medicine
@@ -43,18 +46,20 @@ return[
     'ADD Dosage'=>'ADD Dosage',
     'Add Medicine Origin'=>'Add Medicine Origin',
     'ADD Origin'=>'ADD Origin',
-    'ADD Dosage'=>'ADD Dosage',
+    'Add Dosage'=>'Add Dosage',
     'Add Medicine Origin'=>'Add Medicine Origin',
-    'ADD Origin'=>'ADD Origin',
+    'Add Origin'=>'Add Origin',
     // Model
     'Model'=>'Model',
     'Product Model'=>'Product Model',
     'ADD Model'=>'ADD Model',
+    'Add Model'=>'Add Model',
     // Units
     'Units'=>'Units',
     'All Units'=>'All Units',
     'Create Units'=>'Create Units',
     'ADD Unit'=>'ADD Unit',
+    'Add Unit'=>'Add Unit',
     // BrandBrand
     'Brand'=>'Brand',
     'Add Brand'=>'Add Brand',

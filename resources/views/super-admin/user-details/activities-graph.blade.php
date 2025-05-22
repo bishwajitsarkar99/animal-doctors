@@ -1115,7 +1115,7 @@
         // debounce
         const debouncedFetch = debounce(() => {
             if (typeof analyticalChartFetch === 'function') analyticalChartFetch();
-        }, 500);
+        }, 300);
         // input range left side
         sliderLeft.addEventListener('input', function () {
             if (parseInt(sliderLeft.value) >= parseInt(sliderRight.value)) {
