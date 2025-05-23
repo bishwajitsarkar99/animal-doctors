@@ -1,4 +1,4 @@
-@if($user_log_data_authorize == 1)
+@if($user_activity_authorize == 1)
 <!-- ==== User-Activities ======= -->
 @if($user_log_data_table_permission == 1)
 <div class="container table-container-card">
@@ -121,6 +121,6 @@
 @elseif($user_log_data_table_permission == 0)
 @include('super-admin.user-details.error.data-table-permission')
 @endif
-@elseif($user_log_data_authorize == 0)
+@elseif($user_activity_authorize == 0)
 @include('super-admin.user-details.error.unauthorize')
 @endif

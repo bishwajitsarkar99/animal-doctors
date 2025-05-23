@@ -102,14 +102,14 @@
         @if(auth()->user()->role ==2)
             <div class="sb-sidenav-menu-heading platform_name trapezoid">
                 <span class="animation-examples three">
-                    <img style="width:100%;height:65px;padding:0px;border:1px solid lightgray;" src="{{asset('/image/log/app-logo.png')}}" alt="company-logo" width="100">
+                    <img style="width:200px;height:65px;padding:0px;margin-left:-25px;" src="{{asset('/image/log/app-logo.svg')}}" alt="company-logo" width="100">
                 </span>
             </div>
         @endif
         @if(auth()->user()->role ==3)
             <div class="sb-sidenav-menu-heading platform_name trapezoid">
                 <span class="animation-examples three">
-                    <img style="width:100%;height:65px;padding:0px;border:1px solid lightgray;" src="{{asset('/image/log/app-logo.png')}}" alt="company-logo" width="100">
+                    <img style="width:200px;height:65px;padding:0px;margin-left:-25px;" src="{{asset('/image/log/app-logo.svg')}}" alt="company-logo" width="100">
                 </span>
             </div>
         @endif

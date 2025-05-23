@@ -29,6 +29,17 @@ htm,body{
     font-size: 10px;
     font-weight: 900;
 }
+.text-progress-percentage{
+    color:#111;
+    font-weight:900;
+    padding-left: 0px;
+    padding-right: 15px;
+}
+.text-number-count{
+    color:#000 !important;
+    font-weight:800;
+    background-color: #6ba7ff;
+}
 .user-branch-log-data-summary {
     padding: 10px 35px;
 }
@@ -443,7 +454,7 @@ img#loaderShow {
 }
 .bg-light-blueviolet {
     opacity: 1 !important;
-    background-image:linear-gradient(0deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white) !important;
+    background-image:linear-gradient(0deg, #dbd8d8e3, transparent 2%, #d3d3d3c4, lightgray) !important;
 }
 .bg-light{
     background-color: #e9ecef !important;
