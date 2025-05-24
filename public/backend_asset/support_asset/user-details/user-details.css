@@ -33,7 +33,7 @@ htm,body{
     color:#111;
     font-weight:900;
     padding-left: 0px;
-    padding-right: 15px;
+    padding-right: 0px;
 }
 .text-number-count{
     color:#000 !important;
@@ -469,7 +469,7 @@ img#loaderShow {
 }
 .bg-light-blueviolet {
     opacity: 1 !important;
-    background-image:linear-gradient(0deg, #dbd8d8cf, transparent 0%, #d3d3d3c4, lightgray) !important;
+    background-image:linear-gradient(0deg, #dbd8d8d1, transparent 0%, #d3d3d3bd, #d3d3d3) !important;
 }
 .bg-light{
     background-color: #e9ecef !important;
@@ -1231,6 +1231,30 @@ a.page-link.btn_page {
     background-size: 200%;
     animation: 1s infinite reverse skeleton;
 }
+span.chart-svg {
+    width: 100%;
+    display: flex;
+    z-index: 999;
+    box-sizing: border-box;
+    position: absolute;
+    padding: 40px 160px;
+}
+span.chart-svg-two { 
+    width: 100%;
+    display: flex;
+    z-index: 999;
+    box-sizing: border-box;
+    position: absolute;
+    padding: 55px 160px;
+}
+span.chart-svg-three{
+    width: 100%;
+    display: flex;
+    z-index: 999;
+    box-sizing: border-box;
+    position: absolute;
+    padding: 40px 160px;
+}
 .chart-body-skeletone::before{
     content: "";
     position: absolute;
@@ -1274,9 +1298,9 @@ a.page-link.btn_page {
     content: "";
     position: absolute;
     left: -1px;
-    top: 0;
+    top: -2px;
     width: 65px;
-    height: 20px;
+    height: 22px;
     border-radius: 10px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);

@@ -103,6 +103,7 @@
   }
   $("#showCard").attr('hidden', true);
   $("#loaderShow").removeClass('loader-show');
+  $("#svgIcon").removeAttr('hidden');
   requestAnimationFrame(()=> {
     setTimeout(() => {
       removeSkeletons('.head-skeletone');
@@ -116,6 +117,7 @@
       removeSkeletons('.tab-skeletone');
       removeSkeletons('.branch-card-skeletone');
       $("#loaderShow").addClass('loader-show');
+      $("#svgIcon").attr('hidden', true);
       
     }, 2500);
     setTimeout(() => {
