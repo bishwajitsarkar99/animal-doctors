@@ -332,18 +332,27 @@ class UserActivityServiceProvider
     public function getActivities(Request $request)
     {
         $auth = Auth::User();
-        $branch_id = $auth->branch_id;
+        $user_branch_id = $auth->branch_id;
         $role_id = $auth->role;
         $email = $auth->login_email;
 
-        // Start of the week on Sunday
-        //$startOfWeek = Carbon::now()->startOfWeek(Carbon::SUNDAY);
-        // End of the week on Saturday
-        //$endOfWeek = Carbon::now()->endOfWeek(Carbon::SATURDAY);
-
-        if($branch_id && $role_id && $email){
-
+        if($email && $role_id){
             $user_log_data_table_permission = 1; // log data table permission
+        }
+
+        if($user_branch_id && $role_id){
+
+            if ($role_id === 1) {
+                $branch_id = Branches::pluck('branch_id'); // Get all branch IDs as array
+            } else {
+                $branch_id = [$user_branch_id]; // Wrap single branch_id in an array
+            }
+
+            // Start of the week on Sunday
+            //$startOfWeek = Carbon::now()->startOfWeek(Carbon::SUNDAY);
+            // End of the week on Saturday
+            //$endOfWeek = Carbon::now()->endOfWeek(Carbon::SATURDAY);
+
             // Start of the day
             $startOfDay = Carbon::now()->startOfDay();
             // End of the day
@@ -358,43 +367,23 @@ class UserActivityServiceProvider
             $sort_field = $request->input('sort_field', 'id');
             $sort_direction = $request->input('sort_direction', 'desc');
             
-            if($role_id === 1){
-                // total data count
-                $total_users = SessionModel::count();
-                // Start the query for user activities
-                $user_activities = SessionModel::whereNotNull('role')->with(['roles', 'users']);
-        
-                // Apply default current month filter if no custom date range provided
-                if (!$start_date || !$end_date) {
-                    $user_activities->whereBetween('created_at', [$startOfDay, $endOfDay]);
-                }
-        
-                // Apply date range filter
-                if ($start_date && $end_date) {
-                    $start = Carbon::parse($start_date)->startOfDay();
-                    $end = Carbon::parse($end_date)->endOfDay();
-                    $user_activities->whereBetween('created_at', [$start, $end]);
-                }
-            }else{
-               // total data count
-                $total_users = SessionModel::where('branch_id', $branch_id)->count();
-        
-                // Start the query for user activities
-                $user_activities = SessionModel::whereNotNull('role')->with(['roles', 'users'])->where('branch_id', $branch_id);
-        
-                // Apply default current month filter if no custom date range provided
-                if (!$start_date || !$end_date) {
-                    $user_activities->whereBetween('created_at', [$startOfDay, $endOfDay])->where('branch_id', $branch_id);
-                }
-        
-                // Apply date range filter
-                if ($start_date && $end_date) {
-                    $start = Carbon::parse($start_date)->startOfDay();
-                    $end = Carbon::parse($end_date)->endOfDay();
-                    $user_activities->whereBetween('created_at', [$start, $end])->where('branch_id', $branch_id);
-                } 
+            // total data count
+            $total_users = SessionModel::whereIn('branch_id', $branch_id)->count();
+            // Start the query for user activities
+            $user_activities = SessionModel::whereNotNull('role')->whereIn('branch_id', $branch_id)->with(['roles', 'users']);
+    
+            // Apply default current month filter if no custom date range provided
+            if (!$start_date || !$end_date) {
+                $user_activities->whereBetween('created_at', [$startOfDay, $endOfDay]);
             }
     
+            // Apply date range filter
+            if ($start_date && $end_date) {
+                $start = Carbon::parse($start_date)->startOfDay();
+                $end = Carbon::parse($end_date)->endOfDay();
+                $user_activities->whereBetween('created_at', [$start, $end]);
+            }
+
             // Apply search query
             if ($query = $request->get('query')) {
                 $user_activities->where(function ($q) use ($query) {

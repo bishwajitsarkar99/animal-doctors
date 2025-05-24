@@ -38,7 +38,8 @@ htm,body{
 .text-number-count{
     color:#000 !important;
     font-weight:800;
-    background-color: #6ba7ff;
+    border: 1px ridge #87cefabd;
+    /* background-color: #6ba7ff; */
 }
 .user-branch-log-data-summary {
     padding: 10px 35px;
@@ -83,6 +84,11 @@ thead,th,td{
     border-bottom: 0.5px ridge rgba(0, 123, 255, 0.3);
     border-top: 0.5px ridge rgba(0, 123, 255, 0.3);
     border-collapse: collapse;
+}
+.label-svg {
+    line-height: 1.6 !important;
+    vertical-align: middle;
+    align-items: center;
 }
 .activity-table-responsive{
     overflow-y: auto !important;
@@ -254,7 +260,8 @@ select> option{
     --bs-nav-tabs-link-active-color: #495057;
     --bs-nav-tabs-link-active-bg: #fff;
     --bs-nav-tabs-link-active-border-color: #dee2e6 #dee2e6 #fff;
-    border-bottom: var(--bs-nav-tabs-border-width) groove var(--bs-nav-tabs-border-color);
+    /* border-bottom: var(--bs-nav-tabs-border-width) groove var(--bs-nav-tabs-border-color); */
+    border-bottom: none;
 }
 li.nav-item {
     height: 26px;
@@ -361,10 +368,11 @@ ul#roleLabel {
     padding-left: 0.7rem;
 }
 .data-head{
+    background: aliceblue;
     margin: 0 21px;
     padding: 1px 0;
-    border-bottom: 1px groove #c7c7c7bf;
-    border-top: 1px groove #c7c7c7bf;
+    border-bottom: 1px groove #50505012;
+    border-top: 1px groove #50505012;
 }
 .font-gray-700{
     font-family: var(--nav-font-family);
@@ -410,12 +418,19 @@ img#loaderShow {
     box-shadow: 0px 1px 20px #0001, 0px 2px 6px rgba(0, 123, 255, 0.2);
     /* background-image: radial-gradient(farthest-corner at 100px 100px, white, white); */
     /* background-image: repeating-linear-gradient(55deg, #e39a3b, transparent 1px); */
-    background-color: white;
+    background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
     opacity: 1;
 }
 .five-card{
     border: none;
     /* box-shadow: 0px 1px 20px #0001, 0px 2px 6px #0001; */
+    box-shadow: 0px 1px 20px #0001, 0px 2px 6px rgba(0, 123, 255, 0.2);
+    background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
+    opacity: 1;
+}
+.card-light-bg{
+    transition: 0.5s;
+    border: none;
     box-shadow: 0px 1px 20px #0001, 0px 2px 6px rgba(0, 123, 255, 0.2);
     background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
     opacity: 1;
@@ -454,7 +469,7 @@ img#loaderShow {
 }
 .bg-light-blueviolet {
     opacity: 1 !important;
-    background-image:linear-gradient(0deg, #dbd8d8e3, transparent 2%, #d3d3d3c4, lightgray) !important;
+    background-image:linear-gradient(0deg, #dbd8d8cf, transparent 0%, #d3d3d3c4, lightgray) !important;
 }
 .bg-light{
     background-color: #e9ecef !important;
@@ -742,6 +757,20 @@ input.input-date:focus{
 }
 span.total-number {
     font-size: 18px;
+}
+.total-user-rolling.animate {
+  animation: fadeScale 0.5s ease forwards;
+}
+
+@keyframes fadeScale {
+  from {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 .total-user-loader {
     border-right: 7px solid #0A5EDB;

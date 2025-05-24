@@ -203,10 +203,16 @@
                         $('[data-bs-toggle="tooltip"]').tooltip();
     
                         // Initialize autocomplete for search
-                        var suggestions = data.map(function(item) {
-                            return { label: `${item.email}`, value: item.email };
+                        var seenEmails = new Set();
+                        var suggestions = [];
+
+                        data.forEach(function(item){
+                            if(item.email && !seenEmails.has(item.email)){
+                                seenEmails.add(item.email);
+                                suggestions.push({ label: item.email, value: item.email });
+                            }
                         });
-    
+
                         $("#search").autocomplete({
                             source: suggestions,
                             classes: {

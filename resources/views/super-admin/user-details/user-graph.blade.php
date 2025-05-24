@@ -1,215 +1,67 @@
 @if($user_log_data_table_permission == 1)
 <!-- ==== User-Details-Graph ======= -->
 <div class="row">
-    <div class="col-xl-3">
-        <div class="card card-body first-card">
-            <div class="card card-head-title mini-card-title align-items-center justify-content-center">
-                <span class="align-items-left justify-content-left head-skeletone">
-                    <i class="fa-solid fa-layer-group" style="color:#0A5EDB;"></i>
-                    Total-Users
-                </span>
-                <div class="ring-div">
-                    <div class="total-user-loader cricale-number-skeleton">
-                        <span class="total-number">{{ $miniCardData['total_users'] }}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="progress percentage-skeletone" style="height:0.7rem;">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ $miniCardData['total_users_percentage'] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $miniCardData['total_users_percentage'] }}%;">
-                    {{ round($miniCardData['total_users_percentage'], 2) }}%
-                </div>
-            </div>
+    @php
+        $titles = [
+            'total_users' => ['label' => 'Total-Users', 'bg' => 'card-light-bg', 'icolor' => '#0A5EDB', 'loader' => 'total-user-loader', 'progressbg' => '#0A5EDB'],
+            'authentic_users' => ['label' => 'Authentic Users', 'bg' => 'card-light-bg', 'icolor' => '#198754', 'loader' => 'authentic-loader', 'progressbg' => 'bg-success'],
+            'inactive_users' => ['label' => 'Inactive Users', 'bg' => 'card-light-bg', 'icolor' => '#dc3545', 'loader' => 'inactive-loader', 'progressbg' => 'bg-danger'],
+            'activity_users' => ['label' => 'Log Activity Of Users', 'bg' => 'card-light-bg', 'icolor' => '#6f42c1', 'loader' => 'activity-loader', 'progressbg' => 'bg-blueviolet'],
+        ];
+    @endphp
+    @foreach($titles as $key => $data)
+        <div class="col-xl-3">
+            <x-user-cards.user-mini-card 
+                title="{{ $data['label'] }}" 
+                count="{{ $miniCardData[$key] }}"
+                percentage="{{ $miniCardData[$key . '_percentage'] }}"
+                cardClass="{{ $data['bg'] }}"
+                loaderClass="{{ $data['loader'] }}"
+                iconColor="{{ $data['icolor'] }}"
+                progressColor="{{ $data['progressbg'] }}"
+            />
         </div>
-    </div>
-    <div class="col-xl-3">
-        <div class="card card-body second-card">
-            <span class="card card-head-title mini-card-title align-items-center justify-content-center">
-                <span class="align-items-left justify-content-left head-skeletone">
-                    <i class="fa-solid fa-layer-group" style="color:#198754;"></i>
-                    Authentic Users
-                </span>
-                <div class="ring-div">
-                    <div class="authentic-loader cricale-number-skeleton">
-                        <span class="total-number">{{ $miniCardData['authentic_users'] }}</span>
-                    </div>
-                </div>
-            </span>
-            <div class="progress percentage-skeletone" style="height:0.7rem;">
-                <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="{{ $miniCardData['authentic_users_percentage'] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $miniCardData['authentic_users_percentage'] }}%;">
-                    {{ round($miniCardData['authentic_users_percentage'], 2) }}%
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3">
-        <div class="card card-body third-card">
-            <span class="card card-head-title mini-card-title align-items-center justify-content-center">
-                <span class="align-items-left justify-content-left head-skeletone">
-                    <i class="fa-solid fa-layer-group" style="color:#dc3545;"></i>
-                    Inactive Users
-                </span>
-                <div class="ring-div">
-                    <div class="inactive-loader cricale-number-skeleton">
-                        <span class="total-number">{{ $miniCardData['inactive_users'] }}</span>
-                    </div>
-                </div>
-            </span>
-            <div class="progress percentage-skeletone" style="height:0.7rem;">
-                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" aria-valuenow="{{ $miniCardData['inactive_users_percentage'] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $miniCardData['inactive_users_percentage'] }}%;">
-                    {{ round($miniCardData['inactive_users_percentage'], 2) }}%
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3">
-        <div class="card card-body four-card">
-            <span class="card card-head-title mini-card-title align-items-center justify-content-center">
-                <span class="align-items-left justify-content-left head-skeletone">
-                    <i class="fa-solid fa-layer-group" style="color:6f42c1;"></i>
-                    Log Activity Of Users
-                </span>
-                <div class="ring-div">
-                    <div class="activity-loader cricale-number-skeleton">
-                        <span class="total-number">{{ $miniCardData['activity_users'] }}</span>
-                    </div>
-                </div>
-            </span>
-            <div class="progress percentage-skeletone" style="height:0.7rem;">
-                <div class="progress-bar progress-bar-striped bg-blueviolet progress-bar-animated" role="progressbar" aria-valuenow="{{ $miniCardData['activity_users_percentage'] }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $miniCardData['activity_users_percentage'] }}%;">
-                    {{ round($miniCardData['activity_users_percentage'], 2) }}%
-                </div>
-            </div>
-        </div>
-    </div>
+    @endforeach
 </div>
 <div class="row mt-4">
     <div class="col-xl-6">
-        <div class="card card-body five-card">
-            <div class="card-head-title pb-1">
-                <span class="head-skeletone">
-                    <i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i>
-                    Users Summary
-                </span>
-            </div>
-            <div class="row">
-                <div class="col-xl-4">
-                    <span class="login-user-title percentage-skeletone">Super-Admin Users</span>
-                </div>
-                <div class="col-xl-6">
-                    <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet text-progress-percentage progress-bar-animated" role="progressbar" aria-valuenow="{{ round($summaryCardData['super_admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($summaryCardData['super_admin'], 2) }}%;">
-                            {{ round($summaryCardData['super_admin'], 2) }}%
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-light-blueviolet text-number-count result-skeletone pt-1">{{ $usersCount['super_admin']}}.00</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4">
-                    <span class="login-user-title percentage-skeletone">Admin Users</span>
-                </div>
-                <div class="col-xl-6">
-                    <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet text-progress-percentage progress-bar-animated" role="progressbar" aria-valuenow="{{ round($summaryCardData['admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($summaryCardData['admin'], 2) }}%;">
-                            {{ round($summaryCardData['admin'], 2) }}%
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-light-blueviolet text-number-count result-skeletone pt-1">{{ $usersCount['admin']}}.00</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4">
-                    <span class="login-user-title percentage-skeletone">Sub-Admin Users</span>
-                </div>
-                <div class="col-xl-6">
-                    <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet text-progress-percentage progress-bar-animated" role="progressbar" aria-valuenow="{{ round($summaryCardData['sub_admin'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($summaryCardData['sub_admin'], 2) }}%;">
-                            {{ round($summaryCardData['sub_admin'], 2) }}%
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-light-blueviolet text-number-count result-skeletone pt-1">{{ $usersCount['sub_admin']}}.00</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4">
-                    <span class="login-user-title percentage-skeletone">Accounts Users</span>
-                </div>
-                <div class="col-xl-6">
-                    <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet text-progress-percentage progress-bar-animated" role="progressbar" aria-valuenow="{{ round($summaryCardData['accounts'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($summaryCardData['accounts'], 2) }}%;">
-                            {{ round($summaryCardData['accounts'], 2) }}%
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-light-blueviolet text-number-count result-skeletone pt-1">{{ $usersCount['accounts']}}.00</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4">
-                    <span class="login-user-title percentage-skeletone">Marketing Users</span>
-                </div>
-                <div class="col-xl-6">
-                    <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet text-progress-percentage progress-bar-animated" role="progressbar" aria-valuenow="{{ round($summaryCardData['marketing'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($summaryCardData['marketing'], 2) }}%;">
-                            {{ round($summaryCardData['marketing'], 2) }}%
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-light-blueviolet text-number-count result-skeletone pt-1">{{ $usersCount['marketing']}}.00</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4">
-                    <span class="login-user-title percentage-skeletone">Delivery Users</span>
-                </div>
-                <div class="col-xl-6">
-                    <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet text-progress-percentage progress-bar-animated" role="progressbar" aria-valuenow="{{ round($summaryCardData['delivery_team'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($summaryCardData['delivery_team'], 2) }}%;">
-                            {{ round($summaryCardData['delivery_team'], 2) }}%
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-light-blueviolet text-number-count result-skeletone pt-1">{{ $usersCount['delivery_team']}}.00</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4">
-                    <span class="login-user-title percentage-skeletone">General Users</span>
-                </div>
-                <div class="col-xl-6">
-                    <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light-blueviolet text-progress-percentage progress-bar-animated" role="progressbar" aria-valuenow="{{ round($summaryCardData['users'], 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($summaryCardData['users'], 2) }}%;">
-                            {{ round($summaryCardData['users'], 2) }}%
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-light-blueviolet text-number-count result-skeletone pt-1">{{ $usersCount['users']}}.00</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4">
-                    <span class="login-user-title percentage-skeletone">Total Users</span>
-                </div>
-                <div class="col-xl-6">
-                    <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
-                        <div class="progress-bar progress-bar-striped bg-light progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                    </div>
-                </div>
-                <div class="col-xl-2">
-                    <span class="user-amount badge rounded-pill bg-light-blueviolet text-number-count total-number-skeletone pt-1" style="background-color:lightgray;">{{ $miniCardData['total_users'] }}.00</span>
-                </div>
-            </div>
-        </div>
+        <x-card>
+            <x-user-cards.user-summary-card-header cardHeadTitile="Users Summary" iconColor="#2e42cb" />
+            @php
+                $roles = [
+                    'super_admin' => ['label' => 'Super-Admin Users', 'bg' => 'bg-light-blueviolet'],
+                    'admin' => ['label' => 'Admin Users', 'bg' => 'bg-light-blueviolet'],
+                    'sub_admin' => ['label' => 'Sub-Admin Users', 'bg' => 'bg-light-blueviolet'],
+                    'accounts' => ['label' => 'Accounts Users', 'bg' => 'bg-light-blueviolet'],
+                    'marketing' => ['label' => 'Marketing Users', 'bg' => 'bg-light-blueviolet'],
+                    'delivery_team' => ['label' => 'Delivery Users', 'bg' => 'bg-light-blueviolet'],
+                    'users' => ['label' => 'General Users', 'bg' => 'bg-light-blueviolet'],
+                ];
+            @endphp
+            @foreach($roles as $key => $data)
+                <x-user-cards.user-summary-card-body
+                    title="{{ $data['label'] }}"
+                    count="{{ $usersCount[$key] ?? 0 }}"
+                    progressbarbg="{{ $data['bg'] }}"
+                    textPercentageProgress="text-progress-percentage"
+                    percentage="{{ round($summaryCardData[$key] ?? 0, 2) }}"
+                    numberAmountClass="user-amount" 
+                    badgeClass="badge"
+                    badgeRoundedClass="rounded-pill"
+                    textNumberClass="text-number-count"
+                />
+            @endforeach
+            <x-user-cards.user-summary-card-footer 
+                title="Total Users"
+                count="{{ $miniCardData['total_users'] }}"
+                progressbarbg="bg-light-blueviolet"
+                textPercentageProgress="text-progress-percentage"
+                numberAmountClass="user-amount" 
+                badgeClass="badge"
+                badgeRoundedClass="rounded-pill"
+                textNumberClass="text-number-count"
+            />
+        </x-card>
     </div>
     <div class="col-xl-6">
         <div class="card user_line_chart" id="orderChart">
@@ -259,7 +111,7 @@
 
                     <div class="branch-card-skeletone">
                         <div class="row font-gray-700 data-head">
-                            <div class="col-xl-3"><span>Branch</span></div>
+                            <div class="col-xl-3"><span>{{ $firstSession->users->branch_name ?? 'N/A' }}</span></div>
                             <div class="col-xl-3"><span class="me-5">Role</span></div>
                             <div class="col-xl-6" style="text-align:center;"><span>Bar Chart</span></div>
                         </div>
@@ -276,7 +128,7 @@
                                     @foreach($rolesGroup->unique('role') as $roleItem)
                                         <li class="ps-2" style="display:flex;justify-content:space-between;">
                                             {{ $roleItem->roles->name ?? $roleItem->role }}
-                                            <span class="user-amount badge rounded-pill bg-light-blueviolet mb-1" style="color:#000;font-size:11px;font-weight:800;background-color: #6ba7ff;">
+                                            <span class="user-amount badge rounded-pill bg-light-blueviolet number-rolling total-user-rolling mb-1" style="color:#000;font-size:11px;font-weight:800;border:1px ridge #87cefabd;" data-target="{{ $roleItem->unique_email_count }}">
                                                 {{ $roleItem->unique_email_count }}.00
                                             </span>
                                         </li>
@@ -293,57 +145,6 @@
                                 </ul>
                             </div>
                         </div>
-                        <!-- <div class="row font-gray-700">
-                            <div class="user-branch-log-data-summary">
-                                <div class="row">
-                                    <div class="data-table-response">
-                                        <table class="table">
-                                            <thead>
-                                                <tr class="table-light">
-                                                    <th scope="col" class="text-position tex-size">ID</th>
-                                                    <th scope="col" class="tex-size">Email</th>
-                                                    <th scope="col" class="tex-size">Role</th>
-                                                    <th scope="col" class="tex-size">Current-Login</th>
-                                                    <th scope="col" class="tex-size">Total-Login</th>
-                                                    <th scope="col" class="tex-size">Total-Logout</th>
-                                                    <th scope="col" class="tex-size">Total-Activity</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="table-light bg-transparent" id="dataLogTable">
-                                                <tr class="table-light">
-                                                    <td class="td-cell text-position">1</td>
-                                                    <td class="td-cell">superadmingstmedicinecenter4215@gmail.com</td>
-                                                    <td class="td-cell">Super Admin</td>
-                                                    <td class="td-cell ps-1">1.00</td>
-                                                    <td class="td-cell ps-1">84.00</td>
-                                                    <td class="td-cell ps-1">83.00</td>
-                                                    <td class="td-cell ps-1">84.00</td>
-                                                </tr>
-                                                <tr class="table-light">
-                                                    <td class="td-cell text-position">2</td>
-                                                    <td class="td-cell">admingstmedicinecenter4215@gmail.com</td>
-                                                    <td class="td-cell">Admin</td>
-                                                    <td class="td-cell ps-1">0.00</td>
-                                                    <td class="td-cell ps-1">6.00</td>
-                                                    <td class="td-cell ps-1">6.00</td>
-                                                    <td class="td-cell ps-1">6.00</td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr class="table-light">
-                                                    <th scope="col" class="tex-size"></th>
-                                                    <th colspan="2" scope="col" class="tex-size">Total Count</th>
-                                                    <th scope="col" class="tex-size ps-1">1.00</th>
-                                                    <th scope="col" class="tex-size ps-1">90.00</th>
-                                                    <th scope="col" class="tex-size ps-1">89.00</th>
-                                                    <th scope="col" class="tex-size ps-1">90.00</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 @endforeach
             </div>
@@ -720,6 +521,125 @@
         });
     });
 </script>
+<script>
+    function animateNumber(el, target, duration = 3000) {
+        const startTime = performance.now();
+
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const current = Math.floor(progress * target);
+            el.textContent = current.toLocaleString();
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            }
+        }
+
+        requestAnimationFrame(update);
+    }
+
+    function animateProgressBar(el, targetPercent, duration = 3000) {
+        el.style.transition = `width ${duration}ms ease-in-out`;
+        // Trigger reflow for transition restart
+        el.offsetWidth;
+        el.style.width = targetPercent + '%';
+    }
+
+    function isInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+    }
+
+    const animatedElements = new WeakMap();
+
+    function triggerIfInView() {
+        const numberElements = document.querySelectorAll('.total-number');
+
+        numberElements.forEach(numEl => {
+            const card = numEl.closest('.card-body');
+            if (!card) return;
+
+            const isVisible = isInViewport(card);
+            const isAnimated = animatedElements.has(card);
+
+            if (isVisible && !isAnimated) {
+                // Animate number
+                const target = parseFloat(numEl.getAttribute('data-target'));
+                animateNumber(numEl, target);
+
+                // Animate progress bar
+                const progressBar = card.querySelector('.progress-bar');
+                if (progressBar) {
+                    const targetPercent = parseFloat(progressBar.getAttribute('aria-valuenow'));
+                    animateProgressBar(progressBar, targetPercent);
+                }
+
+                animatedElements.set(card, true);
+            } else if (!isVisible && isAnimated) {
+                // Reset progress bar width when scrolled out
+                const progressBar = card.querySelector('.progress-bar');
+                if (progressBar) {
+                    progressBar.style.transition = 'none';
+                    progressBar.style.width = '0%';
+                }
+
+                animatedElements.delete(card);
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', triggerIfInView);
+    window.addEventListener('scroll', triggerIfInView);
+</script>
+<!-- <script>
+    function animateNumber(el, target, duration = 3000) {
+    const startTime = performance.now();
+
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = Math.floor(progress * target);
+        el.textContent = current.toLocaleString();
+
+        if (progress < 1) {
+        requestAnimationFrame(update);
+        }
+    }
+
+    requestAnimationFrame(update);
+    }
+
+    function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return rect.top < window.innerHeight && rect.bottom > 0;
+    }
+
+    const animatedElements = new WeakMap(); // Track animation state and timeout
+
+    function triggerIfInView() {
+    const elements = document.querySelectorAll('.number-rolling');
+
+    elements.forEach(el => {
+        const target = parseInt(el.getAttribute('data-target'), 10);
+
+        if (isInViewport(el)) {
+        if (!animatedElements.has(el)) {
+            animateNumber(el, target, 3000);
+            animatedElements.set(el, true); // mark as animated
+
+            // Reset after animation completes (3.2s)
+            setTimeout(() => {
+            animatedElements.delete(el);
+            }, 3200);
+        }
+        }
+    });
+    }
+
+    document.addEventListener('DOMContentLoaded', triggerIfInView);
+    window.addEventListener('scroll', triggerIfInView);
+</script> -->
 @endPush
 @elseif($user_log_data_table_permission == 0)
 @include('super-admin.user-details.error.data-table-permission')
