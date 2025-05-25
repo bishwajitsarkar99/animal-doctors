@@ -6,18 +6,20 @@
         <div class="progress percentage-skeletone mt-2" style="height:0.8rem;">
             <div class="progress-bar progress-bar-striped {{ $progressbarbg }} {{ $textPercentageProgress}} progress-bar-animated" 
                 role="progressbar" 
-                aria-valuenow="{{ round($percentage, 2) }}" 
+                aria-valuenow="{{ round($percentage) }}" 
                 aria-valuemin="0" 
                 aria-valuemax="100" 
-                style="width: {{ round($percentage, 2) }}%;">
+                style="width: {{ round($percentage) }}%;">
                 <span>
-                    <span class="number-rolling total-user-rolling" data-target="{{ round($percentage, 2) }}%">{{ round($percentage, 2) }}</span>
-                    %
+                    <span class="number-rolling total-user-rolling" data-target="{{ round($percentage) }}KB">{{ round($percentage) }}</span>
+                    KB out of {{$storageCapacity}}MB
                 </span>
             </div>
         </div>
     </div>
     <div class="col-xl-2">
-        @include('components.number-plate.number-badge')
+        <span>
+            <span class="{{ $numberAmountClass }} {{ $badgeClass }} {{ $badgeRoundedClass }} {{ $progressbarbg }} number-rolling total-user-rolling {{ $textNumberClass }} result-skeletone pt-1" data-target="{{ $count }}">{{ $count }}<span>.00</span></span>
+        </span>
     </div>
 </div>

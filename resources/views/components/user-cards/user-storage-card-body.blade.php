@@ -11,15 +11,13 @@
                 aria-valuemax="100" 
                 style="width: {{ round($percentage, 2) }}%;">
                 <span>
-                    <span class="number-rolling total-user-rolling" data-target="{{ round($percentage, 2) }}%">{{ round($percentage, 2) }}</span>
-                    %
+                    <span class="number-rolling total-user-rolling" data-target="{{ round($percentage, 2) }}KB">{{ round($percentage) }}</span>
+                    KB
                 </span>
             </div>
         </div>
     </div>
     <div class="col-xl-2">
-        <span>
-            <span class="{{ $numberAmountClass }} {{ $badgeClass }} {{ $badgeRoundedClass }} {{ $progressbarbg }} number-rolling total-user-rolling {{ $textNumberClass }} result-skeletone pt-1" data-target="{{ $count }}">{{ $count }}<span>.00</span></span>
-        </span>
+        @include('components.number-plate.number-badge')
     </div>
 </div>

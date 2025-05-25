@@ -3,10 +3,10 @@
 <div class="row">
     @php
         $titles = [
-            'total_users' => ['label' => 'Total-Users', 'bg' => 'card-light-bg', 'icolor' => '#0A5EDB', 'loader' => 'total-user-loader', 'progressbg' => '#0A5EDB'],
-            'authentic_users' => ['label' => 'Authentic Users', 'bg' => 'card-light-bg', 'icolor' => '#198754', 'loader' => 'authentic-loader', 'progressbg' => 'bg-success'],
-            'inactive_users' => ['label' => 'Inactive Users', 'bg' => 'card-light-bg', 'icolor' => '#dc3545', 'loader' => 'inactive-loader', 'progressbg' => 'bg-danger'],
-            'activity_users' => ['label' => 'Log Activity Of Users', 'bg' => 'card-light-bg', 'icolor' => '#6f42c1', 'loader' => 'activity-loader', 'progressbg' => 'bg-blueviolet'],
+            'total_users' => ['label' => 'Total-Users', 'bg' => 'card-light-bg', 'icolor' => '#0A5EDB', 'loader' => 'total-user-loader', 'progressbg' => '#0A5EDB', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+            'authentic_users' => ['label' => 'Authentic Users', 'bg' => 'card-light-bg', 'icolor' => '#198754', 'loader' => 'authentic-loader', 'progressbg' => 'bg-success', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+            'inactive_users' => ['label' => 'Inactive Users', 'bg' => 'card-light-bg', 'icolor' => '#dc3545', 'loader' => 'inactive-loader', 'progressbg' => 'bg-danger', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+            'activity_users' => ['label' => 'Log Activity Of Users', 'bg' => 'card-light-bg', 'icolor' => '#6f42c1', 'loader' => 'activity-loader', 'progressbg' => 'bg-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
         ];
     @endphp
     @foreach($titles as $key => $data)
@@ -19,6 +19,9 @@
                 loaderClass="{{ $data['loader'] }}"
                 iconColor="{{ $data['icolor'] }}"
                 progressColor="{{ $data['progressbg'] }}"
+                numberCountAnimationKey="{{ $data['number-animation-key'] }}"
+                numberCountAnimation="{{ $data['number-animation'] }}"
+                progrssBarAnimationQuerySelector="{{ $data['progress-bar-animation-query-selector'] }}"
             />
         </div>
     @endforeach
@@ -26,7 +29,7 @@
 <div class="row mt-4">
     <div class="col-xl-6">
         <x-card>
-            <x-user-cards.user-summary-card-header cardHeadTitile="Users Summary" iconColor="#2e42cb" />
+            <x-user-cards.user-storage-card-header cardHeadTitile="Users Storage" iconColor="#2e42cb" />
             @php
                 $roles = [
                     'super_admin' => ['label' => 'Super-Admin Users', 'bg' => 'bg-light-blueviolet'],
@@ -39,19 +42,19 @@
                 ];
             @endphp
             @foreach($roles as $key => $data)
-                <x-user-cards.user-summary-card-body
+                <x-user-cards.user-storage-card-body
                     title="{{ $data['label'] }}"
                     count="{{ $usersCount[$key] ?? 0 }}"
                     progressbarbg="{{ $data['bg'] }}"
                     textPercentageProgress="text-progress-percentage"
-                    percentage="{{ round($summaryCardData[$key] ?? 0, 2) }}"
+                    percentage="{{ round($usersCount[$key] ?? 0, 2) }}"
                     numberAmountClass="user-amount" 
                     badgeClass="badge"
                     badgeRoundedClass="rounded-pill"
                     textNumberClass="text-number-count"
                 />
             @endforeach
-            <x-user-cards.user-summary-card-footer 
+            <x-user-cards.user-storage-card-footer 
                 title="Total Users"
                 count="{{ $miniCardData['total_users'] }}"
                 progressbarbg="bg-light-blueviolet"
@@ -61,17 +64,18 @@
                 badgeClass="badge"
                 badgeRoundedClass="rounded-pill"
                 textNumberClass="text-number-count"
-                textNumberClass="text-number-count"
+                storageCapacity="{{$storage}}"
+                
             />
         </x-card>
     </div>
     <div class="col-xl-6">
         <x-chart-cards.chart-card id="orderChart">
-            <x-chart-cards.chart-card-header 
+            <x-chart-cards.chart-storage-card-header 
                 cardHeadSkeletone="head-skeletone"
                 loaderSkeletone="loader_skeleton"
                 iconColor="#2e42cb"
-                title="User Acivities Line Chart ( Current Time )"
+                title="User Storage Line Chart ( Current Time )"
                 loaderId="loader_orderChart"
                 textAlign="center"
             />
@@ -120,7 +124,7 @@
             <div class="row">
                 <div class="col-xl-12 head-init">
                     <span class="head-skeletone">
-                        <i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i> 
+                        <svg id="Layer_1" data-name="Layer 1" width="25" height="25" viewBox="0 0 122.88 104.01"><defs><style>.cls-1{fill-rule:evenodd;}</style></defs><title>stocks</title><path class="cls-1" d="M0,13.86a6,6,0,1,1,12.06,0V91.94H116.85a6,6,0,0,1,0,12.07H0V13.86ZM101.9,7.15l-3-3.88a2,2,0,0,1-.43-1.89C99-.19,100.8,0,102.09.05c3.65.26,11.72.84,13.6.91a2,2,0,0,1,2,2.49c-.38,1.9-1.59,10.55-2.22,14-.22,1.2-.58,2.77-2.11,2.88a2,2,0,0,1-1.72-.87l-3-3.88-1.23-1.56L92.39,25.41v.26a9.06,9.06,0,0,1-18.12,0c0-.2,0-.4,0-.6L63.78,17.48A9.05,9.05,0,0,1,52.85,17l-10.2,7.26A9.2,9.2,0,0,1,43,26.6a9,9,0,1,1-5.39-8.29l12-8.54A9.06,9.06,0,0,1,67.67,10c0,.2,0,.4,0,.59l10.51,7.6a9.06,9.06,0,0,1,10.55.15L102.48,7.89l-.58-.74Zm-.09,23.38H114.3a1.31,1.31,0,0,1,1.31,1.3V80.37a1.32,1.32,0,0,1-1.31,1.31H101.81a1.31,1.31,0,0,1-1.31-1.31V31.83a1.31,1.31,0,0,1,1.31-1.3ZM77.09,47.16H89.58a1.31,1.31,0,0,1,1.31,1.31v31.9a1.32,1.32,0,0,1-1.31,1.31H77.09a1.31,1.31,0,0,1-1.31-1.31V48.47a1.31,1.31,0,0,1,1.31-1.31ZM52.36,30.53h12.5a1.3,1.3,0,0,1,1.3,1.3V80.37a1.32,1.32,0,0,1-1.3,1.31H52.36a1.32,1.32,0,0,1-1.31-1.31V31.83a1.31,1.31,0,0,1,1.31-1.3ZM27.64,49.84H40.13a1.31,1.31,0,0,1,1.31,1.31V80.37a1.32,1.32,0,0,1-1.31,1.31H27.64a1.31,1.31,0,0,1-1.31-1.31V51.15a1.31,1.31,0,0,1,1.31-1.31Z"/></svg>
                         Branch Information
                     </span>
                 </div>
@@ -577,7 +581,7 @@
     const animatedElements = new WeakMap();
 
     function triggerIfInView() {
-        const numberElements = document.querySelectorAll('.total-number');
+        const numberElements = document.querySelectorAll('.number-rolling');
 
         numberElements.forEach(numEl => {
             const card = numEl.closest('.card-body');

@@ -67,6 +67,8 @@ class UserActivityServiceProvider
             $end = Carbon::now();
 
             // User and Role Count
+            $user_capacity=100;
+            $storage=10;
             $user_roles = User::whereIn('branch_id', $branch_id)->pluck('role')->unique();
             $roles = Role::whereIn('id', $user_roles)->get();
 
@@ -128,7 +130,7 @@ class UserActivityServiceProvider
                 ->get();
 
             // User Analycis Page Mini Card Data
-            $miniCardData = $this->getMiniCardData($branch_id, $total_users, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers);
+            $miniCardData = $this->getMiniCardData($branch_id, $total_users, $user_capacity, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers);
             // User Analycis Page Summary Card Data
             $summaryCardData = $this->getSummaryCardData($roles, $total_users, $superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users);
             // User Analycis Page Branch Session Data 
@@ -153,7 +155,7 @@ class UserActivityServiceProvider
                     return view('super-admin.user-details.details', compact('usersCount','usersActivityCount',
                     'miniCardData','summaryCardData','roles', 'page_name','user_activity_authorize', 'user_activity_graph_authorize', 
                     'user_activity_page_name', 'user_activity_graph_page_name', 'user_log_data_table_permission', 
-                    'branch_log_session_data', 'formattedBranchStats'))->with('branchRoleStats', $formattedBranchStats);
+                    'branch_log_session_data', 'formattedBranchStats', 'storage'))->with('branchRoleStats', $formattedBranchStats);
                 }else{
                     return view('unauthorize-page.index', compact('page_name'));
                 }
@@ -163,17 +165,17 @@ class UserActivityServiceProvider
     }
 
     // Helper Function User Analycis Page Mini Card Get Data
-    private function getMiniCardData($branch_id, $total_users, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers)
+    private function getMiniCardData($branch_id, $total_users, $user_capacity, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers)
     {
         $authentic_users = $activeUsers;
         $inactive_users = $inactiveUsers;
 
         // start top mini card Calculate the percentage of total users
-        $total_users_percentage = $total_users > 0 ? ($total_users / $total_users) * 100 : 0;
+        $total_users_percentage = $user_capacity > 0 ? ($total_users / $user_capacity) * 100 : 0;
         // Calculate the percentage of total authentic_users
-        $authentic_users_percentage = $total_users > 0 ? ($authentic_users / $total_users) * 100 : 0;
+        $authentic_users_percentage = $user_capacity > 0 ? ($authentic_users / $user_capacity) * 100 : 0;
         // Calculate the percentage of total inactive_users
-        $inactive_users_percentage = $total_users > 0 ? ($inactive_users / $total_users) * 100 : 0;
+        $inactive_users_percentage = $user_capacity > 0 ? ($inactive_users / $user_capacity) * 100 : 0;
 
         // Calculate the percentage and total activity users
         $intime_or_outtime_activity_users = SessionModel::whereNotNull('id')->whereIn('branch_id', $branch_id)->count();
