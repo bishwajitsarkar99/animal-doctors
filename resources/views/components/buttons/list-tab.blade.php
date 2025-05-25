@@ -1,0 +1,1 @@
+<ul class="nav nav-tabs {{$tabMargin}}" role="tablist" style="background-color:{{ $tabBg }};">{{$slot}}</ul>

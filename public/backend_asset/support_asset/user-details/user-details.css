@@ -25,6 +25,10 @@ htm,body{
     padding: 0;
     margin: 0;
 }
+.tab-margin{
+    margin-left: 10px;
+    margin-right: 10px;
+}
 .progress-bar{
     font-size: 10px;
     font-weight: 900;
@@ -431,7 +435,7 @@ img#loaderShow {
 .card-light-bg{
     transition: 0.5s;
     border: none;
-    box-shadow: 0px 1px 20px #0001, 0px 2px 6px rgba(0, 123, 255, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.067) 0px 1px 20px, rgba(0, 123, 255, 0.2) 0px 2px 6px;
     background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
     opacity: 1;
 }

@@ -3,37 +3,39 @@
 @include('backend.layouts.dashboard-components._navbar')
 
   <div class="container">
-    <ul class="nav nav-tabs tab_bg" role="tablist" style="background-color:aliceblue;">
-      <li class="nav-item tab-skeletone">
-        <a class="nav-link setting active home-text" data-bs-toggle="tab" href="#home" id="tabHome"> User Analysis</a>
-      </li>
-      <li class="nav-item tab-skeletone">
-        <a class="nav-link setting {{$user_activity_authorize != 1 ? 'disabled' : '' }}" data-bs-toggle="tab" href="#userActivity" id="tabActivity">User Activity</a>
-      </li>
-      <li class="nav-item tab-skeletone">
-        <a class="nav-link setting home-text {{$user_activity_graph_authorize != 1 ? 'disabled' : '' }}" data-bs-toggle="tab" href="#userDetails" id="tabDetails">User Activity Graph</a>
-      </li>
-      <li class="nav-item tab-skeletone">
-        <button type="button" class="btn btn-sm refresh-btn ripple-surface " id="refresh">
-          <span class="refresh-icon spinner-border spinner-border-sm text-white refrsh-hidden" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true"></span>
-          <span class="btn-text ms-1">Refresh</span>
-        </button>
-      </li>
-    </ul>
-    <div class="tab-content activity-tab-responsive" id="showCard" style="background:white;padding-bottom:15px;" hidden>
-      <div id="home" class="container tab-pane active"><br>
+    <x-buttons.list-tab tabMargin="tab-margin" tabBg="aliceblue">
+      <x-buttons.list-nav-item tabSkeletone="tab-skeletone">
+        <x-buttons.tab-selector label="User Analysis" tablParentClass="nav-link" tablChildClass="setting" tablClass="home-text" tablActiveClass="active" link="#home" tabId="tabHome" />
+      </x-buttons.list-nav-item>
+
+      <x-buttons.list-nav-item tabSkeletone="tab-skeletone">
+        <x-buttons.tab-selector label="User Activity" tablParentClass="nav-link" tablChildClass="setting" btnDisabled="{{$user_activity_authorize != 1 ? 'disabled' : '' }}" link="#userActivity" tabId="tabActivity" />
+      </x-buttons.list-nav-item>
+
+      <x-buttons.list-nav-item tabSkeletone="tab-skeletone">
+        <x-buttons.tab-selector label="User Activity Graph" tablParentClass="nav-link" tablChildClass="setting" tablClass="home-text" btnDisabled="{{$user_activity_graph_authorize != 1 ? 'disabled' : '' }}" link="#userDetails" tabId="tabDetails" />
+      </x-buttons.list-nav-item>
+
+      <x-buttons.list-nav-item tabSkeletone="tab-skeletone">
+        <x-buttons.tab-refresh-button label="Refresh" buttonParentClass="refresh-btn" buttonChildClass="ripple-surface" buttonId="refresh" />
+      </x-buttons.list-nav-item>
+    </x-buttons.list-tab>
+
+    <x-buttons.tab-content tabResponse="activity-tab-responsive" bg="white" tabPadding="15px" tabId="showCard">
+      <x-buttons.tab-content-panel tabPanel="tab-pane" tabClass="active" conentId="home">
         @include('super-admin.user-details.user-graph')
-      </div>
-      <div id="userActivity" class="container tab-pane" hidden><br>
-      @include('super-admin.user-details.user-activites')
-    </div>
-    <div id="userDetails" class="container tab-pane" hidden><br>
-      @include('super-admin.user-details.activities-graph')
-    </div>
+      </x-buttons.tab-content-panel>
+
+      <x-buttons.tab-content-panel tabPanel="tab-pane" tabClass="" conentId="userActivity">
+        @include('super-admin.user-details.user-activites')
+      </x-buttons.tab-content-panel>
+
+      <x-buttons.tab-content-panel tabPanel="tab-pane" tabClass="" conentId="userDetails">
+        @include('super-admin.user-details.activities-graph')
+      </x-buttons.tab-content-panel>
+    </x-buttons.tab-content>
   </div>
-  <div class="loader-position">
-    <img class="server-loader loader-show" id="loaderShow" src="{{asset('/image/loader/loading.gif')}}" alt="Loading...."/>
-  </div>
+  <x-page-loader.loader loaderName="server-loader" loaderPosition="loader-position" />
 @endsection
 
 @section('css')

@@ -1,0 +1,2 @@
+@props(['tabId', 'tabResponse'=> '', 'bg'=>'', 'tabPadding'=>''])
+<div class="tab-content {{ $tabResponse }}" id="{{ $tabId }}" style="background:{{ $bg }};padding-bottom:{{ $tabPadding }};" hidden>{{$slot}}</div>

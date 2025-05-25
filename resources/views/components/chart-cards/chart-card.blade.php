@@ -1,0 +1,1 @@
+<div class="card user_line_chart">{{$slot}}</div>
