@@ -25,8 +25,8 @@
                 aria-valuemax="100" 
                 style="width: {{ round($percentage, 2) }}%;">
                 <span>
-                    <span class="{{ $numberCountAnimationKey }} {{ $numberCountAnimation }}" data-target="{{ round($percentage, 2) }}BT">{{ round($percentage) }}</span>
-                    BT
+                    <span class="{{ $numberCountAnimationKey }} {{ $numberCountAnimation }}" data-target="{{ round($percentage, 2) }}B">{{ round($percentage) }}</span>
+                    B
                 </span>
             </div>
         </div>

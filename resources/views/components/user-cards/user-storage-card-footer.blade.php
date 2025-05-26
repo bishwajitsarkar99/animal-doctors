@@ -12,7 +12,7 @@
                 style="width: {{ round($percentage) }}KB;">
                 <span>
                     <span class="number-rolling total-user-rolling" data-target="{{ round($percentage) }}KB">{{ round($percentage) }}</span>
-                    KB out of {{$storageCapacity}}MB
+                    B out of {{$storageCapacity}}
                 </span>
             </div>
         </div>

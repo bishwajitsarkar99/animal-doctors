@@ -68,7 +68,7 @@ class UserActivityServiceProvider
 
             // User storage capacity
             $user_capacity=100;
-            $storage=1;
+            
             // User and Role Count
             $user_roles = User::whereIn('branch_id', $branch_id)->pluck('role')->unique();
             $roles = Role::whereIn('id', $user_roles)->get();
@@ -145,7 +145,8 @@ class UserActivityServiceProvider
             $usersCount = $this->getUserActivitiesBarChart($total_users, $startOfMonth, $endOfMonth,$superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users, $inactiveUsers, $activeUsers, $userSessionData);
             // User Analycis Page User Branch Bar Chart
             [$formattedBranchStats, $branchRoleStats] = $this->getBranchBarChart($logins, $logouts, $logActivities, $currentLogin);
-    
+            // User Storage allocation
+            $storage = $this->storageAllocation($total_users);
             
             $storedRandom = session('valid_user_log_random');
             $page_name = 'User Log Activity';
@@ -159,7 +160,7 @@ class UserActivityServiceProvider
                     return view('super-admin.user-details.details', compact('usersCount','usersActivityCount',
                     'miniCardData','summaryCardData', 'totalPercentage', 'roles', 'page_name','user_activity_authorize', 'user_activity_graph_authorize', 
                     'user_activity_page_name', 'user_activity_graph_page_name', 'user_log_data_table_permission', 
-                    'branch_log_session_data', 'formattedBranchStats', 'storage'))->with('branchRoleStats', $formattedBranchStats);
+                    'branch_log_session_data', 'formattedBranchStats', 'storage', 'totalPercentageVlaue'))->with('branchRoleStats', $formattedBranchStats);
                 }else{
                     return view('unauthorize-page.index', compact('page_name'));
                 }
@@ -331,7 +332,19 @@ class UserActivityServiceProvider
 
         return [$formattedBranchStats, $branchRoleStats];
     }
+    // User Dynamic Storage Allocation
+    private function storageAllocation($total_users)
+    {
+        // Each 100 users = 1 KB
+        $kb_storage = ceil($total_users / 100);
 
+        // If 100 KB or more, convert to MB
+        if ($kb_storage >= 100) {
+            $mb_storage = number_format($kb_storage / 100, 2);
+            return $mb_storage . ' MB';
+        }
+        return $kb_storage . ' KB';
+    }
     /**
      * Handle User Activity Get
     */

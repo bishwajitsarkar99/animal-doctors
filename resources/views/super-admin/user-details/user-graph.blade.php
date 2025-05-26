@@ -62,7 +62,7 @@
                 count="{{ $miniCardData['total_users'] }}"
                 progressbarbg="bg-light-blueviolet"
                 textPercentageProgress="text-progress-percentage"
-                percentage="{{ round($totalPercentage) }}"
+                percentage="{{ round($totalPercentageVlaue) }}"
                 numberAmountClass="user-amount" 
                 badgeClass="badge"
                 badgeRoundedClass="rounded-pill"
@@ -145,7 +145,7 @@
                         </span>
                         <div class="row font-gray-700 data-head">
                             <div class="col-xl-3"><span>{{ $firstSession->users->branch_name ?? 'N/A' }}</span></div>
-                            <div class="col-xl-3"><span class="me-5">Role</span></div>
+                            <div class="col-xl-3"><span class="ms-4">Role</span></div>
                             <div class="col-xl-6" style="text-align:center;"><span>Bar Chart</span></div>
                         </div>
                         <div class="row font-gray-700">
@@ -555,23 +555,102 @@
     });
 </script>
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = new WeakMap();
+
+    function animateNumber(el, target, duration = 2000) {
+        const start = performance.now();
+        function step(currentTime) {
+            const elapsed = currentTime - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const current = Math.floor(progress * target);
+            el.textContent = current.toLocaleString();
+            if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
+    function animateProgressBar(el, targetPercent, duration = 1500) {
+        el.style.transition = `width ${duration}ms ease`;
+        requestAnimationFrame(() => {
+            el.style.width = targetPercent + '%';
+        });
+    }
+
+    function isInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+    }
+
+    function animateInActiveTab() {
+        const activeTab = document.querySelector('.tab-pane.active');
+        if (!activeTab) return;
+
+        const elements = activeTab.querySelectorAll('.number-rolling');
+        elements.forEach(el => {
+            const container = el.closest('.card-body, .storage-row, .storage-card-body, .branch-card-body') || el;
+            const isVisible = isInViewport(container);
+            const alreadyAnimated = animatedElements.has(container);
+
+            if (isVisible && !alreadyAnimated) {
+                const target = parseFloat(el.dataset.target || '0');
+                animateNumber(el, target);
+
+                const progressBar = container.querySelector('.progress-bar');
+                if (progressBar) {
+                    const percent = parseFloat(progressBar.getAttribute('aria-valuenow') || '0');
+                    progressBar.style.width = '0%'; // reset
+                    animateProgressBar(progressBar, percent);
+                }
+
+                animatedElements.set(container, true);
+            } else if (!isVisible && alreadyAnimated) {
+                const progressBar = container.querySelector('.progress-bar');
+                if (progressBar) {
+                    progressBar.style.transition = 'none';
+                    progressBar.style.width = '0%';
+                }
+                animatedElements.delete(container);
+            }
+        });
+    }
+
+    // Scroll/resize triggers inside the visible tab
+    window.addEventListener('scroll', animateInActiveTab);
+    window.addEventListener('resize', animateInActiveTab);
+
+    // Fix: Tab switch detection
+    const tabButtons = document.querySelectorAll('a[data-bs-toggle="tab"]');
+    tabButtons.forEach(btn => {
+        btn.addEventListener('shown.bs.tab', () => {
+            // Give time for .active class and visibility to update
+            setTimeout(() => {
+                animateInActiveTab();
+            }, 100); // Delay is key here!
+        });
+    });
+
+    // Trigger once on load
+    setTimeout(() => {
+        animateInActiveTab();
+    }, 200);
+});
+</script>
+<!-- <script>
     document.addEventListener('DOMContentLoaded', () => {
         const animatedElements = new WeakMap();
 
         function animateNumber(el, target, duration = 2000) {
             const start = performance.now();
-
             function step(currentTime) {
                 const elapsed = currentTime - start;
                 const progress = Math.min(elapsed / duration, 1);
                 const current = Math.floor(progress * target);
                 el.textContent = current.toLocaleString();
-
                 if (progress < 1) {
                     requestAnimationFrame(step);
                 }
             }
-
             requestAnimationFrame(step);
         }
 
@@ -589,7 +668,6 @@
 
         function triggerIfInView() {
             const allNumberElements = document.querySelectorAll('.number-rolling');
-
             allNumberElements.forEach(numEl => {
                 const container = numEl.closest('.card-body, .storage-row, .storage-card-body, .branch-card-body');
                 if (!container) return;
@@ -615,135 +693,28 @@
                         progressBar.style.transition = 'none';
                         progressBar.style.width = '0%';
                     }
-
                     animatedElements.delete(container);
                 }
             });
         }
 
-        // Initial trigger and scroll/resize event
+        // Trigger on scroll, resize, and slight delay on load
         window.addEventListener('scroll', triggerIfInView);
         window.addEventListener('resize', triggerIfInView);
-        setTimeout(triggerIfInView, 100); // minor delay to ensure full DOM rendering
-    });
-</script>
-<!-- <script>
-    function animateNumber(el, target, duration = 3000) {
-        const startTime = performance.now();
+        setTimeout(triggerIfInView, 100);
 
-        function update(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const current = Math.floor(progress * target);
-            el.textContent = current.toLocaleString();
-
-            if (progress < 1) {
-                requestAnimationFrame(update);
-            }
-        }
-
-        requestAnimationFrame(update);
-    }
-
-    function animateProgressBar(el, targetPercent, duration = 3000) {
-        el.style.transition = `width ${duration}ms ease-in-out`;
-        el.offsetWidth; // trigger reflow
-        el.style.width = targetPercent + '%';
-    }
-
-    function isInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return rect.top < window.innerHeight && rect.bottom > 0;
-    }
-
-    const animatedElements = new WeakMap();
-
-    function triggerIfInView() {
-        const allNumberElements = document.querySelectorAll('.number-rolling');
-
-        allNumberElements.forEach(numEl => {
-            let container = numEl.closest('.card-body') || numEl.closest('.storage-row') || numEl.closest('.storage-card-body') || numEl.closest('.branch-card-body');
-            if (!container) return;
-
-            const isVisible = isInViewport(container);
-            const isAnimated = animatedElements.has(container);
-
-            if (isVisible && !isAnimated) {
-                // Animate number
-                const target = parseFloat(numEl.getAttribute('data-target'));
-                animateNumber(numEl, target);
-
-                // Animate progress bar
-                const progressBar = container.querySelector('.progress-bar');
-                if (progressBar) {
-                    const targetPercent = parseFloat(progressBar.getAttribute('aria-valuenow'));
-                    animateProgressBar(progressBar, targetPercent);
-                }
-
-                animatedElements.set(container, true);
-            } else if (!isVisible && isAnimated) {
-                // Reset progress bar width when scrolled out
-                const progressBar = container.querySelector('.progress-bar');
-                if (progressBar) {
-                    progressBar.style.transition = 'none';
-                    progressBar.style.width = '0%';
-                }
-
-                animatedElements.delete(container);
-            }
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', triggerIfInView);
-    window.addEventListener('scroll', triggerIfInView);
-</script> -->
-<!-- <script>
-    function animateNumber(el, target, duration = 3000) {
-    const startTime = performance.now();
-
-    function update(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const current = Math.floor(progress * target);
-        el.textContent = current.toLocaleString();
-
-        if (progress < 1) {
-        requestAnimationFrame(update);
-        }
-    }
-
-    requestAnimationFrame(update);
-    }
-
-    function isInViewport(el) {
-    const rect = el.getBoundingClientRect();
-    return rect.top < window.innerHeight && rect.bottom > 0;
-    }
-
-    const animatedElements = new WeakMap(); // Track animation state and timeout
-
-    function triggerIfInView() {
-    const elements = document.querySelectorAll('.number-rolling');
-
-    elements.forEach(el => {
-        const target = parseInt(el.getAttribute('data-target'), 10);
-
-        if (isInViewport(el)) {
-        if (!animatedElements.has(el)) {
-            animateNumber(el, target, 3000);
-            animatedElements.set(el, true); // mark as animated
-
-            // Reset after animation completes (3.2s)
+        // Re-trigger on tab shown
+        $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
             setTimeout(() => {
-            animatedElements.delete(el);
-            }, 3200);
-        }
-        }
+                const targetId = $(e.target).attr('href'); // #tab-id
+                const targetPane = document.querySelector(targetId);
+                if (targetPane) {
+                    targetPane.scrollTop = 0; // ensure content is visible
+                }
+                triggerIfInView();
+            }, 100);
+        });
     });
-    }
-
-    document.addEventListener('DOMContentLoaded', triggerIfInView);
-    window.addEventListener('scroll', triggerIfInView);
 </script> -->
 @endPush
 @elseif($user_log_data_table_permission == 0)
