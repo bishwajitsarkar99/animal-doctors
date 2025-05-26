@@ -66,9 +66,10 @@ class UserActivityServiceProvider
             $start = Carbon::now()->startOfYear();
             $end = Carbon::now();
 
-            // User and Role Count
+            // User storage capacity
             $user_capacity=100;
-            $storage=10;
+            $storage=1;
+            // User and Role Count
             $user_roles = User::whereIn('branch_id', $branch_id)->pluck('role')->unique();
             $roles = Role::whereIn('id', $user_roles)->get();
 
@@ -133,6 +134,9 @@ class UserActivityServiceProvider
             $miniCardData = $this->getMiniCardData($branch_id, $total_users, $user_capacity, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers);
             // User Analycis Page Summary Card Data
             $summaryCardData = $this->getSummaryCardData($roles, $total_users, $superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users);
+            $totalPercentageVlaue = array_sum($summaryCardData);
+            $bytes = 1024;
+            $totalPercentage = $totalPercentageVlaue > 0 ? ($totalPercentageVlaue / $bytes) * 100 : 0;
             // User Analycis Page Branch Session Data 
             $branch_log_session_data = $this->getBranchInfoData($branch_id);
             // User Analycis Page User Activities Line Chart
@@ -153,7 +157,7 @@ class UserActivityServiceProvider
     
                 if ($user_analycis_authorize === 1) {
                     return view('super-admin.user-details.details', compact('usersCount','usersActivityCount',
-                    'miniCardData','summaryCardData','roles', 'page_name','user_activity_authorize', 'user_activity_graph_authorize', 
+                    'miniCardData','summaryCardData', 'totalPercentage', 'roles', 'page_name','user_activity_authorize', 'user_activity_graph_authorize', 
                     'user_activity_page_name', 'user_activity_graph_page_name', 'user_log_data_table_permission', 
                     'branch_log_session_data', 'formattedBranchStats', 'storage'))->with('branchRoleStats', $formattedBranchStats);
                 }else{
@@ -179,10 +183,10 @@ class UserActivityServiceProvider
 
         // Calculate the percentage and total activity users
         $intime_or_outtime_activity_users = SessionModel::whereNotNull('id')->whereIn('branch_id', $branch_id)->count();
-        $intime_activity_users = SessionModel::where('status', 0)->whereIn('branch_id', $branch_id)->count();
+        // $intime_activity_users = SessionModel::where('status', 0)->whereIn('branch_id', $branch_id)->count();
         $activity_users = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->whereIn('branch_id', $branch_id)->count();
 
-        $activity_users_percentage = $intime_or_outtime_activity_users > 0 ? ($intime_activity_users / $intime_or_outtime_activity_users) * 100 : 0;
+        $activity_users_percentage = $intime_or_outtime_activity_users > 0 ? ($activity_users / $intime_or_outtime_activity_users) * 100 : 0;
 
         return [
             'total_users' => $total_users,

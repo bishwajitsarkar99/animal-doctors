@@ -452,6 +452,9 @@ img#loaderShow {
     box-shadow: 0px 2px 20px rgba(rgba(0, 123, 255, 0.2), 0.35), 0px 2px 6px #0001;
     opacity: 1;
 }
+.badge-position {
+    text-align: center;
+}
 .card.user_line_chart {
     transition: 0.5s;
     border: none;
@@ -615,7 +618,9 @@ img.full-width-img {
 .slider-wrapper-second:hover .range-tooltip {
     display: block;
 }
-
+.chart-svg-display{
+    display: none !important;
+}
 .log-card {
     background: white;
     padding-bottom: 7px;
@@ -629,6 +634,9 @@ img.full-width-img {
 /* .mini-card-title{
     background-image: repeating-linear-gradient(55deg, #e39a3b, transparent 1px);
 } */
+.storage-card-body {
+    padding: 7px 10px;
+}
 .card-head-title{
     font-family: var(--nav-font-family);
     font-size: 13px;
@@ -1301,9 +1309,9 @@ span.chart-svg-three{
 .result-skeletone::before{
     content: "";
     position: absolute;
-    left: -1px;
+    left: -16px;
     top: -2px;
-    width: 65px;
+    width: 50px;
     height: 22px;
     border-radius: 10px;
     z-index: 10;

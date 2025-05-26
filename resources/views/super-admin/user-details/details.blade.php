@@ -106,6 +106,10 @@
   $("#showCard").attr('hidden', true);
   $("#loaderShow").removeClass('loader-show');
   $("#svgIcon").removeAttr('hidden');
+  $("#svgIcon2").removeAttr('hidden');
+  $(".svg_chart_body").removeClass('chart-svg-display');
+  $(".svg_icon_branch").addClass('chart-svg-display');
+  $(".svg_icon_chart").addClass('chart-svg-display');
   requestAnimationFrame(()=> {
     setTimeout(() => {
       removeSkeletons('.head-skeletone');
@@ -120,6 +124,10 @@
       removeSkeletons('.branch-card-skeletone');
       $("#loaderShow").addClass('loader-show');
       $("#svgIcon").attr('hidden', true);
+      $("#svgIcon2").attr('hidden', true);
+      $(".svg_chart_body").addClass('chart-svg-display');
+      $(".svg_icon_branch").removeClass('chart-svg-display');
+      $(".svg_icon_chart").removeClass('chart-svg-display');
       
     }, 2500);
     setTimeout(() => {

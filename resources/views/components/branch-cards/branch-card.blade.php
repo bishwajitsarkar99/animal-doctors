@@ -1,0 +1,1 @@
+<div class="card card-light-bg">{{ $slot }}</div>
