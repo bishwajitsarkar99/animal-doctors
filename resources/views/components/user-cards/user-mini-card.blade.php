@@ -5,8 +5,8 @@
             <i class="fa-solid fa-layer-group" style="color:{{ $iconColor }};"></i>
             {{ $title }}
         </span>
-        <div class="ring-div">
-            <div class="{{ $loaderClass }} cricale-number-skeleton">
+        <div class="pb-1">
+            <div class="{{ $loaderClass }} cricale-number-skeleton" style="--percentage: 76;">
                 <span class="total-number {{ $numberCountAnimationKey }} {{ $numberCountAnimation }}" data-target="{{ $count }}">{{ $count }}</span>
             </div>
         </div>

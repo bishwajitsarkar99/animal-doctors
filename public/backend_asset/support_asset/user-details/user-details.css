@@ -720,53 +720,6 @@ input.input-date:focus{
     width: 100% !important;
     /* cursor: move !important; */
 }
-.ring-div {
-    width: 100px;
-    height: 70px;
-    /* margin-left: 58px; */
-}
-.activity-loader {
-    border-right: 7px solid #6f42c1;
-    border-left: 7px solid #ffc107;
-    border-radius: 50%;
-    margin: 1% 15%;
-    border-top: 7px solid #ffc107;
-    border-bottom: 7px solid #6f42c1;
-    width: 73px;
-    height: 62px;
-    padding: 0.5rem 0.5rem;
-    animation: ring_hover;
-    animation-duration: 10s;
-    animation-delay: 2s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate-reverse;
-    animation-fill-mode: forwards;
-    opacity: 1;
-}
-@keyframes activity_ring_hover {
-    50%{
-        transform: rotate(0deg);
-        transition: 1s;
-        background: 300px;
-        background-clip: border-box;
-        background-color: #fff;
-        color: #333;
-        border-right: 7px solid #dddddd;
-        border-left: 7px solid #dddddd;
-        border-top: 7px solid #dddddd;
-        border-bottom: 7px solid #dddddd;
-        font-size: 10px;
-    }
-    100%{
-        transform: rotate(360deg);
-        transition: 1s;
-        background: 400px;
-        background-clip: border-box;
-        background-color: white;
-        color: #161616;
-        font-size: 10px;
-    }
-}
 span.total-number {
     font-size: 18px;
 }
@@ -785,16 +738,20 @@ span.total-number {
   }
 }
 .total-user-loader {
-    border-right: 7px solid #0A5EDB;
-    border-left: 7px solid #ffc107;
-    border-radius: 50%;
-    margin: 1% 15%;
-    border-top: 7px solid #ffc107;
-    border-bottom: 7px solid #0A5EDB;
-    width: 73px;
-    height: 62px;
-    padding: 0.5rem 0.5rem;
-    animation: ring_hover;
+    position: relative;
+    /* width: 140px; 
+    height: 140px;  for full circle*/
+    width: 70px;
+    height: 70px;
+    border-top-left-radius: 120px;
+    border-top-right-radius: 120px;
+    border-bottom: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: ring_hover_one;
     animation-duration: 10s;
     animation-delay: 2s;
     animation-iteration-count: infinite;
@@ -802,18 +759,55 @@ span.total-number {
     animation-fill-mode: forwards;
     opacity: 1;
 }
-@keyframes ring_hover {
+
+/* This draws the circular background with progress */
+.total-user-loader::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*width: 140px;
+    height: 140px;  full circle */
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: conic-gradient(#0A5EDB calc(var(--percentage, 0) * 1%), #bbddff 0);
+    transform: rotate(-90deg); /* start from top  #9c27b0*/
+    z-index: 1;
+    transition: background 0.8s ease-in-out;
+}
+
+/* This creates the white hole in the center */
+.total-user-loader::after {
+    content: "";
+    position: absolute;
+    /* top: 16px;
+    left: 16px;
+    width: 108px;
+    height: 108px; for full cricle */
+    left: 10px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    background: #0632af8c;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.total-user-loader span {
+    position: relative;
+    color: white;
+    z-index: 3;
+    text-align: center;
+    font-weight: bold;
+}
+@keyframes ring_hover_one {
     50%{
         transform: rotate(0deg);
         transition: 1s;
         background: 300px;
         background-clip: border-box;
-        background-color: #fff;
         color: #333;
-        /* border-right: 7px solid #dddddd;
-        border-left: 7px solid #dddddd;
-        border-top: 7px solid #dddddd;
-        border-bottom: 7px solid #dddddd; */
         font-size: 10px;
     }
     100%{
@@ -821,22 +815,25 @@ span.total-number {
         transition: 1s;
         background: 400px;
         background-clip: border-box;
-        background-color: white;
         color: #161616;
         font-size: 10px;
     }
 }
 .authentic-loader {
-    border-right: 7px solid #198754;
-    border-left: 7px solid #ffc107;
-    border-radius: 50%;
-    margin: 1% 15%;
-    border-top: 7px solid #ffc107;
-    border-bottom: 7px solid #198754;
-    width: 73px;
-    height: 62px;
-    padding: 0.5rem 0.5rem;
-    animation: ring_hover;
+    position: relative;
+    /* width: 140px; 
+    height: 140px;  for full circle*/
+    width: 70px;
+    height: 70px;
+    border-top-left-radius: 120px;
+    border-top-right-radius: 120px;
+    border-bottom: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: ring_hover_one;
     animation-duration: 10s;
     animation-delay: 2s;
     animation-iteration-count: infinite;
@@ -844,41 +841,62 @@ span.total-number {
     animation-fill-mode: forwards;
     opacity: 1;
 }
-@keyframes authentic_ring_hover {
-    50%{
-        transform: rotate(0deg);
-        transition: 1s;
-        background: 300px;
-        background-clip: border-box;
-        background-color: #fff;
-        color: #333;
-        border-right: 7px solid #dddddd;
-        border-left: 7px solid #dddddd;
-        border-top: 7px solid #dddddd;
-        border-bottom: 7px solid #dddddd;
-        font-size: 10px;
-    }
-    100%{
-        transform: rotate(360deg);
-        transition: 1s;
-        background: 400px;
-        background-clip: border-box;
-        background-color: white;
-        color: #161616;
-        font-size: 10px;
-    }
+/* This draws the circular background with progress */
+.authentic-loader::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*width: 140px;
+    height: 140px;  full circle */
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: conic-gradient(#198754 calc(var(--percentage, 0) * 1%), #bbddff 0);
+    transform: rotate(-90deg); /* start from top  #9c27b0*/
+    z-index: 1;
+    transition: background 0.8s ease-in-out;
+}
+
+/* This creates the white hole in the center */
+.authentic-loader::after {
+    content: "";
+    position: absolute;
+    /* top: 16px;
+    left: 16px;
+    width: 108px;
+    height: 108px; for full cricle */
+    left: 10px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    background: #4600708c;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.authentic-loader span {
+    position: relative;
+    color: white;
+    z-index: 3;
+    text-align: center;
+    font-weight: bold;
 }
 .inactive-loader {
-    border-right: 7px solid #dc3545;
-    border-left: 7px solid #ffc107;
-    border-radius: 50%;
-    margin: 1% 15%;
-    border-top: 7px solid #ffc107;
-    border-bottom: 7px solid #dc3545;
-    width: 73px;
-    height: 62px;
-    padding: 0.5rem 0.5rem;
-    animation: ring_hover;
+    position: relative;
+    /* width: 140px; 
+    height: 140px;  for full circle*/
+    width: 70px;
+    height: 70px;
+    border-top-left-radius: 120px;
+    border-top-right-radius: 120px;
+    border-bottom: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: ring_hover_one;
     animation-duration: 10s;
     animation-delay: 2s;
     animation-iteration-count: infinite;
@@ -886,29 +904,109 @@ span.total-number {
     animation-fill-mode: forwards;
     opacity: 1;
 }
-@keyframes inactive_ring_hover {
-    50%{
-        transform: rotate(0deg);
-        transition: 1s;
-        background: 300px;
-        background-clip: border-box;
-        background-color: #fff;
-        color: #333;
-        border-right: 7px solid #dddddd;
-        border-left: 7px solid #dddddd;
-        border-top: 7px solid #dddddd;
-        border-bottom: 7px solid #dddddd;
-        font-size: 10px;
-    }
-    100%{
-        transform: rotate(360deg);
-        transition: 1s;
-        background: 400px;
-        background-clip: border-box;
-        background-color: white;
-        color: #161616;
-        font-size: 10px;
-    }
+/* This draws the circular background with progress */
+.inactive-loader::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*width: 140px;
+    height: 140px;  full circle */
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: conic-gradient(#dc3545 calc(var(--percentage, 0) * 1%), #bbddff 0);
+    transform: rotate(-90deg); /* start from top  #9c27b0*/
+    z-index: 1;
+    transition: background 0.8s ease-in-out;
+}
+
+/* This creates the white hole in the center */
+.inactive-loader::after {
+    content: "";
+    position: absolute;
+    /* top: 16px;
+    left: 16px;
+    width: 108px;
+    height: 108px; for full cricle */
+    left: 10px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    background: #4600708c;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.inactive-loader span {
+    position: relative;
+    color: white;
+    z-index: 3;
+    text-align: center;
+    font-weight: bold;
+}
+.activity-loader {
+    position: relative;
+    /* width: 140px; 
+    height: 140px;  for full circle*/
+    width: 70px;
+    height: 70px;
+    border-top-left-radius: 120px;
+    border-top-right-radius: 120px;
+    border-bottom: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: ring_hover_one;
+    animation-duration: 10s;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-fill-mode: forwards;
+    opacity: 1;
+}
+/* This draws the circular background with progress */
+.activity-loader::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*width: 140px;
+    height: 140px;  full circle */
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: conic-gradient(#6f42c1e0 calc(var(--percentage, 0) * 1%), #bbddff 0);
+    transform: rotate(-90deg); /* start from top  #9c27b0*/
+    z-index: 1;
+    transition: background 0.8s ease-in-out;
+}
+
+/* This creates the white hole in the center */
+.activity-loader::after {
+    content: "";
+    position: absolute;
+    /* top: 16px;
+    left: 16px;
+    width: 108px;
+    height: 108px; for full cricle */
+    left: 10px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    background: #4600708c;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.activity-loader span {
+    position: relative;
+    color: white;
+    z-index: 3;
+    text-align: center;
+    font-weight: bold;
 }
 div.card.order_line_chart:hover{
     transform: none;
@@ -1233,11 +1331,11 @@ a.page-link.btn_page {
 .cricale-number-skeleton::before {
     content: "";
     position: absolute;
-    left: -12px;
-    top: -9px;
-    width: 80px;
+    left: 0;
+    top: 0;
+    width: 70px;
     border-radius: 50%;
-    height: 68px;
+    height: 70px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
@@ -1296,10 +1394,11 @@ span.chart-svg-three{
 .branch-card-skeletone::before{
     content: "";
     position: absolute;
-    left: 16px;
-    top: -1px;
-    width: 97%;
-    height: 97%;
+    left: -1px;
+    top: 0;
+    width: 96%;
+    height: 96%;
+    margin: 0px 22px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;

@@ -161,7 +161,7 @@
                                     @foreach($rolesGroup->unique('role') as $roleItem)
                                         <li class="ps-2" style="display:flex;justify-content:space-between;">
                                             {{ $roleItem->roles->name ?? $roleItem->role }}
-                                            <span class="user-amount badge rounded-pill bg-light-blueviolet number-rolling total-user-rolling mb-1" style="color:#000;font-size:11px;font-weight:800;border:1px ridge #87cefabd;" data-target="{{ $roleItem->unique_email_count }}">
+                                            <span class="user-amount badge rounded-pill bg-light-blueviolet mb-1" style="color:#000;font-size:11px;font-weight:800;border:1px ridge #87cefabd;" data-target="{{ $roleItem->unique_email_count }}">
                                                 {{ $roleItem->unique_email_count }}
                                             </span>
                                         </li>
@@ -555,88 +555,29 @@
     });
 </script>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = new WeakMap();
-
-    function animateNumber(el, target, duration = 2000) {
-        const start = performance.now();
-        function step(currentTime) {
-            const elapsed = currentTime - start;
-            const progress = Math.min(elapsed / duration, 1);
-            const current = Math.floor(progress * target);
-            el.textContent = current.toLocaleString();
-            if (progress < 1) requestAnimationFrame(step);
+    document.querySelectorAll('.total-number').forEach(el => {
+        const target = +el.getAttribute('data-target');
+        const parentLoader = el.closest('.total-user-loader,.authentic-loader,.inactive-loader,.activity-loader');
+        if (parentLoader) {
+            parentLoader.style.setProperty('--percentage', target);
         }
-        requestAnimationFrame(step);
-    }
 
-    function animateProgressBar(el, targetPercent, duration = 1500) {
-        el.style.transition = `width ${duration}ms ease`;
-        requestAnimationFrame(() => {
-            el.style.width = targetPercent + '%';
-        });
-    }
-
-    function isInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return rect.top < window.innerHeight && rect.bottom > 0;
-    }
-
-    function animateInActiveTab() {
-        const activeTab = document.querySelector('.tab-pane.active');
-        if (!activeTab) return;
-
-        const elements = activeTab.querySelectorAll('.number-rolling');
-        elements.forEach(el => {
-            const container = el.closest('.card-body, .storage-row, .storage-card-body, .branch-card-body') || el;
-            const isVisible = isInViewport(container);
-            const alreadyAnimated = animatedElements.has(container);
-
-            if (isVisible && !alreadyAnimated) {
-                const target = parseFloat(el.dataset.target || '0');
-                animateNumber(el, target);
-
-                const progressBar = container.querySelector('.progress-bar');
-                if (progressBar) {
-                    const percent = parseFloat(progressBar.getAttribute('aria-valuenow') || '0');
-                    progressBar.style.width = '0%'; // reset
-                    animateProgressBar(progressBar, percent);
-                }
-
-                animatedElements.set(container, true);
-            } else if (!isVisible && alreadyAnimated) {
-                const progressBar = container.querySelector('.progress-bar');
-                if (progressBar) {
-                    progressBar.style.transition = 'none';
-                    progressBar.style.width = '0%';
-                }
-                animatedElements.delete(container);
+        // Optional number count animation
+        let count = 0;
+        const increment = target / 50;
+        const updateCount = () => {
+            count += increment;
+            if (count < target) {
+                el.innerText = Math.floor(count);
+                requestAnimationFrame(updateCount);
+            } else {
+                el.innerText = target;
             }
-        });
-    }
-
-    // Scroll/resize triggers inside the visible tab
-    window.addEventListener('scroll', animateInActiveTab);
-    window.addEventListener('resize', animateInActiveTab);
-
-    // Fix: Tab switch detection
-    const tabButtons = document.querySelectorAll('a[data-bs-toggle="tab"]');
-    tabButtons.forEach(btn => {
-        btn.addEventListener('shown.bs.tab', () => {
-            // Give time for .active class and visibility to update
-            setTimeout(() => {
-                animateInActiveTab();
-            }, 100); // Delay is key here!
-        });
+        };
+        updateCount();
     });
-
-    // Trigger once on load
-    setTimeout(() => {
-        animateInActiveTab();
-    }, 200);
-});
 </script>
-<!-- <script>
+<script>
     document.addEventListener('DOMContentLoaded', () => {
         const animatedElements = new WeakMap();
 
@@ -652,13 +593,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             requestAnimationFrame(step);
-        }
-
-        function animateProgressBar(el, targetPercent, duration = 2000) {
-            el.style.transition = `width ${duration}ms ease`;
-            requestAnimationFrame(() => {
-                el.style.width = targetPercent + '%';
-            });
         }
 
         function isInViewport(el) {
@@ -678,21 +612,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (isVisible && !isAnimated) {
                     const target = parseFloat(numEl.dataset.target || '0');
                     animateNumber(numEl, target);
-
-                    const progressBar = container.querySelector('.progress-bar');
-                    if (progressBar) {
-                        const targetPercent = parseFloat(progressBar.getAttribute('aria-valuenow') || '0');
-                        progressBar.style.width = '0%'; // reset before animating
-                        animateProgressBar(progressBar, targetPercent);
-                    }
-
                     animatedElements.set(container, true);
                 } else if (!isVisible && isAnimated) {
-                    const progressBar = container.querySelector('.progress-bar');
-                    if (progressBar) {
-                        progressBar.style.transition = 'none';
-                        progressBar.style.width = '0%';
-                    }
                     animatedElements.delete(container);
                 }
             });
@@ -706,16 +627,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Re-trigger on tab shown
         $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
             setTimeout(() => {
-                const targetId = $(e.target).attr('href'); // #tab-id
+                const targetId = $(e.target).attr('href');
                 const targetPane = document.querySelector(targetId);
                 if (targetPane) {
-                    targetPane.scrollTop = 0; // ensure content is visible
+                    targetPane.scrollTop = 0;
                 }
                 triggerIfInView();
             }, 100);
         });
     });
-</script> -->
+</script>
 @endPush
 @elseif($user_log_data_table_permission == 0)
 @include('super-admin.user-details.error.data-table-permission')
