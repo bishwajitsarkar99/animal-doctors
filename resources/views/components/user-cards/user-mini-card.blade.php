@@ -7,16 +7,17 @@
         </span>
         <div class="pb-1">
             <div class="{{ $loaderClass }} cricale-number-skeleton" style="--percentage: 76;">
-                <span class="total-number {{ $numberCountAnimationKey }} {{ $numberCountAnimation }}" data-target="{{ $count }}">{{ $count }}</span>
+                <span>
+                    <span class="total-number {{ $numberCountAnimationKey }} {{ $numberCountAnimation }}" data-target="{{ round($percentage) }}">{{ round($percentage) }}</span>
+                    <span class="percentage-size">%</span>
+                </span>
             </div>
         </div>
     </div>
-    <div class="progress percentage-skeletone" style="height:0.7rem;">
-        <div class="{{ $progrssBarAnimationQuerySelector }} progress-bar-striped {{ $progressColor ?? '' }} progress-bar-animated" role="progressbar" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $percentage }}%;">
-            <span>
-                <span class="{{ $numberCountAnimationKey }} {{ $numberCountAnimation }}" data-target="{{ round($percentage, 2) }}%">{{ round($percentage, 2) }}</span>
-                %
-            </span>
-        </div>
+    <div class="--count_box">
+        <span class="count-number percentage-skeletone">
+            Count-Number :
+            <span class="{{ $numberCountAnimationKey }} {{ $numberCountAnimation }}" data-target="{{ $count }}">{{ $count }}</span>
+        </span>
     </div>
 </div>

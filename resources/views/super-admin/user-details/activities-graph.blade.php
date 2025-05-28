@@ -249,7 +249,7 @@
 <!-- Weekly and Monthly Line and Bar Chart -->
 <script type="module">
     // hover plugins
-    import { hoverGridPlugin, dottedGridPlugin, axisTooltipDayFormatePlugin, axisTooltipMonthFormatePlugin, axisCursorPlugin} from "/plugins/chartHoverPlugins.js";
+    import { hoverGridPlugin, dottedGridPlugin, axisTooltipDayFormatePlugin, axisTooltipMonthFormatePlugin, axisCursorPlugin} from "/plugins/plugins-min.js";
     // Line Cahrt Initialize
     let userDayLogChart;
     // Line Bar Initialize
@@ -640,7 +640,7 @@
 <!-- Total User Activity Multi-Chart -->
 <script type="module">
     // hover plugins
-    import { hoverGridPlugin, dottedGridPlugin, axisTooltipDateFormatePlugin, axisCursorPlugin } from "/plugins/chartHoverPlugins.js";
+    import { hoverGridPlugin, dottedGridPlugin, axisTooltipDateFormatePlugin, axisCursorPlugin } from "/plugins/plugins-min.js";
     // scroll plugins
     import { ChartScrollPlugin } from "/plugins/chartScrollPlugin.js";
     // debounce for ajax request too data loading maintain            

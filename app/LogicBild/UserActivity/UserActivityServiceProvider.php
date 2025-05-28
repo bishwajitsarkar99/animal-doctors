@@ -183,11 +183,11 @@ class UserActivityServiceProvider
         $inactive_users_percentage = $user_capacity > 0 ? ($inactive_users / $user_capacity) * 100 : 0;
 
         // Calculate the percentage and total activity users
-        //$intime_or_outtime_activity_users = SessionModel::whereNotNull('id')->whereIn('branch_id', $branch_id)->count();
-        // $intime_activity_users = SessionModel::where('status', 0)->whereIn('branch_id', $branch_id)->count();
+        $intime_or_outtime_activity_users = SessionModel::whereNotNull('id')->whereIn('branch_id', $branch_id)->count();
+        $intime_activity_users = SessionModel::where('status', 0)->whereIn('branch_id', $branch_id)->count();
         $activity_users = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->whereIn('branch_id', $branch_id)->count();
 
-        $activity_users_percentage = $user_capacity > 0 ? ($activity_users / $user_capacity) * 100 : 0;
+        $activity_users_percentage = $intime_activity_users > 0 ? ($activity_users / $intime_or_outtime_activity_users) * 100 : 0;
 
         return [
             'total_users' => $total_users,

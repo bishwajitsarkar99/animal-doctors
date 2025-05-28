@@ -737,7 +737,26 @@ span.total-number {
     opacity: 1;
   }
 }
-.total-user-loader {
+.percentage-size{
+    font-size: 18px;
+}
+.--count_box{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.count-number{
+    font-family: var(--nav-font-family);
+    font-size: 13px;
+    font-weight: 800;
+    color: black;
+    opacity: 1;
+    text-align: center;
+    border: none;
+    text-transform: capitalize;
+    letter-spacing: 0.3px;
+}
+.total-user-cricle-bar {
     position: relative;
     /* width: 140px; 
     height: 140px;  for full circle*/
@@ -761,7 +780,7 @@ span.total-number {
 }
 
 /* This draws the circular background with progress */
-.total-user-loader::before {
+.total-user-cricle-bar::before {
     content: "";
     position: absolute;
     top: 0;
@@ -771,14 +790,14 @@ span.total-number {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background: conic-gradient(#0A5EDB calc(var(--percentage, 0) * 1%), #bbddff 0);
+    background: conic-gradient(#0A5EDB calc(var(--percentage, 0) * 1%), #b6daffa8 0);
     transform: rotate(-90deg); /* start from top  #9c27b0*/
     z-index: 1;
     transition: background 0.8s ease-in-out;
 }
 
 /* This creates the white hole in the center */
-.total-user-loader::after {
+.total-user-cricle-bar::after {
     content: "";
     position: absolute;
     /* top: 16px;
@@ -789,12 +808,12 @@ span.total-number {
     top: 10px;
     width: 50px;
     height: 50px;
-    background: #0632af8c;
+    background: #384e8b8c;
     border-radius: 50%;
     z-index: 2;
 }
 
-.total-user-loader span {
+.total-user-cricle-bar span {
     position: relative;
     color: white;
     z-index: 3;
@@ -808,7 +827,6 @@ span.total-number {
         background: 300px;
         background-clip: border-box;
         color: #333;
-        font-size: 10px;
     }
     100%{
         transform: rotate(360deg);
@@ -816,10 +834,9 @@ span.total-number {
         background: 400px;
         background-clip: border-box;
         color: #161616;
-        font-size: 10px;
     }
 }
-.authentic-loader {
+.authentic-cricle-bar {
     position: relative;
     /* width: 140px; 
     height: 140px;  for full circle*/
@@ -842,7 +859,7 @@ span.total-number {
     opacity: 1;
 }
 /* This draws the circular background with progress */
-.authentic-loader::before {
+.authentic-cricle-bar::before {
     content: "";
     position: absolute;
     top: 0;
@@ -852,14 +869,14 @@ span.total-number {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background: conic-gradient(#198754 calc(var(--percentage, 0) * 1%), #bbddff 0);
+    background: conic-gradient(#198754 calc(var(--percentage, 0) * 1%), #b6daffa8 0);
     transform: rotate(-90deg); /* start from top  #9c27b0*/
     z-index: 1;
     transition: background 0.8s ease-in-out;
 }
 
 /* This creates the white hole in the center */
-.authentic-loader::after {
+.authentic-cricle-bar::after {
     content: "";
     position: absolute;
     /* top: 16px;
@@ -870,19 +887,19 @@ span.total-number {
     top: 10px;
     width: 50px;
     height: 50px;
-    background: #4600708c;
+    background: #384e8b8c;
     border-radius: 50%;
     z-index: 2;
 }
 
-.authentic-loader span {
+.authentic-cricle-bar span {
     position: relative;
     color: white;
     z-index: 3;
     text-align: center;
     font-weight: bold;
 }
-.inactive-loader {
+.inactive-cricle-bar {
     position: relative;
     /* width: 140px; 
     height: 140px;  for full circle*/
@@ -905,7 +922,7 @@ span.total-number {
     opacity: 1;
 }
 /* This draws the circular background with progress */
-.inactive-loader::before {
+.inactive-cricle-bar::before {
     content: "";
     position: absolute;
     top: 0;
@@ -915,14 +932,14 @@ span.total-number {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background: conic-gradient(#dc3545 calc(var(--percentage, 0) * 1%), #bbddff 0);
+    background: conic-gradient(#dc3545 calc(var(--percentage, 0) * 1%), #b6daffa8 0);
     transform: rotate(-90deg); /* start from top  #9c27b0*/
     z-index: 1;
     transition: background 0.8s ease-in-out;
 }
 
 /* This creates the white hole in the center */
-.inactive-loader::after {
+.inactive-cricle-bar::after {
     content: "";
     position: absolute;
     /* top: 16px;
@@ -933,19 +950,19 @@ span.total-number {
     top: 10px;
     width: 50px;
     height: 50px;
-    background: #4600708c;
+    background: #384e8b8c;
     border-radius: 50%;
     z-index: 2;
 }
 
-.inactive-loader span {
+.inactive-cricle-bar span {
     position: relative;
     color: white;
     z-index: 3;
     text-align: center;
     font-weight: bold;
 }
-.activity-loader {
+.activity-cricle-bar {
     position: relative;
     /* width: 140px; 
     height: 140px;  for full circle*/
@@ -968,7 +985,7 @@ span.total-number {
     opacity: 1;
 }
 /* This draws the circular background with progress */
-.activity-loader::before {
+.activity-cricle-bar::before {
     content: "";
     position: absolute;
     top: 0;
@@ -978,14 +995,14 @@ span.total-number {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background: conic-gradient(#6f42c1e0 calc(var(--percentage, 0) * 1%), #bbddff 0);
+    background: conic-gradient(#00b7ae calc(var(--percentage, 0) * 1%), #b6daffa8 0);
     transform: rotate(-90deg); /* start from top  #9c27b0*/
     z-index: 1;
     transition: background 0.8s ease-in-out;
 }
 
 /* This creates the white hole in the center */
-.activity-loader::after {
+.activity-cricle-bar::after {
     content: "";
     position: absolute;
     /* top: 16px;
@@ -996,12 +1013,12 @@ span.total-number {
     top: 10px;
     width: 50px;
     height: 50px;
-    background: #4600708c;
+    background: #384e8b8c;
     border-radius: 50%;
     z-index: 2;
 }
 
-.activity-loader span {
+.activity-cricle-bar span {
     position: relative;
     color: white;
     z-index: 3;
@@ -1321,7 +1338,7 @@ a.page-link.btn_page {
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
+    height: 17px;
     border-radius: 5px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);

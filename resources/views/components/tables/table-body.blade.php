@@ -1,0 +1,1 @@
+<tbody class="{{ $tableClass }}" id="{{ $tableId }}">{{$slot}}</tbody>

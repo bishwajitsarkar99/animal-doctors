@@ -1,0 +1,1 @@
+<tr class="{{ $tableHeadRowClass }}">{{$slot}}</tr>

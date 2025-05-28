@@ -1,14 +1,14 @@
 @if($user_log_data_table_permission == 1)
 <!-- ==== User-Details-Graph ======= -->
 <div class="row">
-    @php
+    <?php
         $titles = [
-            'total_users' => ['label' => 'Total-Users', 'bg' => 'card-light-bg', 'icolor' => '#0A5EDB', 'loader' => 'total-user-loader', 'progressbg' => '#0A5EDB', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-            'authentic_users' => ['label' => 'Authentic Users', 'bg' => 'card-light-bg', 'icolor' => '#198754', 'loader' => 'authentic-loader', 'progressbg' => 'bg-success', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-            'inactive_users' => ['label' => 'Inactive Users', 'bg' => 'card-light-bg', 'icolor' => '#dc3545', 'loader' => 'inactive-loader', 'progressbg' => 'bg-danger', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-            'activity_users' => ['label' => 'Log Activity Count', 'bg' => 'card-light-bg', 'icolor' => '#6f42c1', 'loader' => 'activity-loader', 'progressbg' => 'bg-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-        ];
-    @endphp
+            'total_users' => ['label' => 'Total-Users', 'bg' => 'card-light-bg', 'icolor' => '#0A5EDB', 'loader' => 'total-user-cricle-bar', 'progressbg' => '#0A5EDB', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+            'authentic_users' => ['label' => 'Authentic Users', 'bg' => 'card-light-bg', 'icolor' => '#198754', 'loader' => 'authentic-cricle-bar', 'progressbg' => 'bg-success', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+            'inactive_users' => ['label' => 'Inactive Users', 'bg' => 'card-light-bg', 'icolor' => '#dc3545', 'loader' => 'inactive-cricle-bar', 'progressbg' => 'bg-danger', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+            'activity_users' => ['label' => 'Log Activity Count', 'bg' => 'card-light-bg', 'icolor' => '#6f42c1', 'loader' => 'activity-cricle-bar', 'progressbg' => 'bg-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+        ]; 
+    ?>
     @foreach($titles as $key => $data)
         <div class="col-xl-3">
             <x-user-cards.user-mini-card 
@@ -30,7 +30,7 @@
     <div class="col-xl-6">
         <x-user-cards.user-storage-card>
             <x-user-cards.user-storage-card-header cardHeadTitile="Users Storage" iconColor="#2e42cb" />
-            @php
+            <?php
                 $roles = [
                     'super_admin' => ['label' => 'Super-Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
                     'admin' => ['label' => 'Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
@@ -39,8 +39,8 @@
                     'marketing' => ['label' => 'Marketing Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
                     'delivery_team' => ['label' => 'Delivery Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
                     'users' => ['label' => 'General Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                ];
-            @endphp
+                ]; 
+            ?>
             @foreach($roles as $key => $data)
                 <x-user-cards.user-storage-card-body
                     title="{{ $data['label'] }}"
@@ -188,11 +188,11 @@
 <!-- first Chart Graphp -->
 <script type="module">
     // hover plugins
-    import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin} from "/plugins/chartHoverPlugins.js";
+    import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin} from "/plugins/plugins-min.js";
     const ctxUserActivityChart = document.getElementById("userActivityChart").getContext("2d");
     var gradientColor = ctxUserActivityChart.createLinearGradient(0, 0, 0, 400);
     gradientColor.addColorStop(0, 'rgb(157, 235, 255)');  // orange at top rgb(142, 229, 255) 
-    gradientColor.addColorStop(1, 'rgb(138, 65, 255)'); // transparent at bottom rgba(255, 166, 0, 0)
+    gradientColor.addColorStop(1, 'rgb(138, 65, 255)'); // transparent at bottom rgba(185, 185, 185, 0)
     const userActivityLineChart = new Chart(ctxUserActivityChart, {
         type: "line",
         data: {
@@ -282,7 +282,7 @@
 <!-- second Chart Graphp -->
 <script type="module">
     // hover plugins
-    import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin} from "/plugins/chartHoverPlugins.js";
+    import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin} from "/plugins/plugins-min.js";
     // Get the canvas context
     const ctx2 = document.getElementById("userChart").getContext("2d");
 
@@ -290,7 +290,7 @@
         "Super admin", "Admin", "Sub admin", "Accounts", "Marketing", "Delivery", "General",
         "Inactive","Authentic","Activity","Total Users"
     ];
-    const barColors = ["rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)","#cf2e2e","#198754","#6f42c1","#0A5EDB"];
+    const barColors = ["rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)","#cf2e2e","#198754","#008982","#0A5EDB"];
     // bg-color:royalblue
     // Pass the PHP array to JavaScript 
     const userCounts = @json(array_values($usersCount));
@@ -386,7 +386,7 @@
 </script>
 <!-- third Chart Graphp -->
 <script type="module">
-    import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin } from "/plugins/chartHoverPlugins.js";
+    import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin } from "/plugins/plugins-min.js";
 
     const branchData = @json($branchRoleStats);
 
@@ -451,7 +451,7 @@
                         fill: true,
                         data: stats.activity_counts,
                         backgroundColor: gradientActivity,
-                        borderColor: 'rgba(28,200,138,1)',
+                        borderColor: '#00898275',
                         borderWidth: 1,
                         tension: 0.4,
                         pointStyle: createCandlePointStyle('rgb(194, 143, 96)'),
@@ -554,88 +554,23 @@
         });
     });
 </script>
-<script>
-    document.querySelectorAll('.total-number').forEach(el => {
-        const target = +el.getAttribute('data-target');
-        const parentLoader = el.closest('.total-user-loader,.authentic-loader,.inactive-loader,.activity-loader');
-        if (parentLoader) {
-            parentLoader.style.setProperty('--percentage', target);
-        }
+<!-- number cricle bar and number rolling animation with scrol animation -->
+<script type="module">
+    import { cricleNumberPlate, numberRolling } from "/module/module-min-js/design-helper-function-min.js";
 
-        // Optional number count animation
-        let count = 0;
-        const increment = target / 50;
-        const updateCount = () => {
-            count += increment;
-            if (count < target) {
-                el.innerText = Math.floor(count);
-                requestAnimationFrame(updateCount);
-            } else {
-                el.innerText = target;
-            }
-        };
-        updateCount();
-    });
-</script>
-<script>
+    // number cricle bar
+    const numberClass = '.total-number';
+    const cricleBar = '.total-user-cricle-bar, .authentic-cricle-bar, .inactive-cricle-bar, .activity-cricle-bar';
+    const percentage = '--percentage';
+
+    // number rolling animation and with scrol animation
+    const numberSelector = '.number-rolling';
+    const containerSelector = '.card-body, .storage-row, .storage-card-body, .branch-card-body';
     document.addEventListener('DOMContentLoaded', () => {
-        const animatedElements = new WeakMap();
-
-        function animateNumber(el, target, duration = 2000) {
-            const start = performance.now();
-            function step(currentTime) {
-                const elapsed = currentTime - start;
-                const progress = Math.min(elapsed / duration, 1);
-                const current = Math.floor(progress * target);
-                el.textContent = current.toLocaleString();
-                if (progress < 1) {
-                    requestAnimationFrame(step);
-                }
-            }
-            requestAnimationFrame(step);
-        }
-
-        function isInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return rect.top < window.innerHeight && rect.bottom > 0;
-        }
-
-        function triggerIfInView() {
-            const allNumberElements = document.querySelectorAll('.number-rolling');
-            allNumberElements.forEach(numEl => {
-                const container = numEl.closest('.card-body, .storage-row, .storage-card-body, .branch-card-body');
-                if (!container) return;
-
-                const isVisible = isInViewport(container);
-                const isAnimated = animatedElements.has(container);
-
-                if (isVisible && !isAnimated) {
-                    const target = parseFloat(numEl.dataset.target || '0');
-                    animateNumber(numEl, target);
-                    animatedElements.set(container, true);
-                } else if (!isVisible && isAnimated) {
-                    animatedElements.delete(container);
-                }
-            });
-        }
-
-        // Trigger on scroll, resize, and slight delay on load
-        window.addEventListener('scroll', triggerIfInView);
-        window.addEventListener('resize', triggerIfInView);
-        setTimeout(triggerIfInView, 100);
-
-        // Re-trigger on tab shown
-        $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
-            setTimeout(() => {
-                const targetId = $(e.target).attr('href');
-                const targetPane = document.querySelector(targetId);
-                if (targetPane) {
-                    targetPane.scrollTop = 0;
-                }
-                triggerIfInView();
-            }, 100);
-        });
+        numberRolling(numberSelector, containerSelector);
     });
+
+    cricleNumberPlate(numberClass, cricleBar, percentage);
 </script>
 @endPush
 @elseif($user_log_data_table_permission == 0)
