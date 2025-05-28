@@ -247,50 +247,53 @@ export function cricleNumberPlate(numberClass, cricleBar, percentage){
         updateCount();
     });
 }
+
+// Aniamte Number
+const animatedElements = new WeakMap();
+function animateNumber(el, target, duration = 2000) {
+    const start = performance.now();
+    function step(currentTime) {
+        const elapsed = currentTime - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = Math.floor(progress * target);
+        el.textContent = current.toLocaleString();
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        }
+    }
+    requestAnimationFrame(step);
+}
+function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    const viewHeight = window.innerHeight || document.documentElement.clientHeight;
+    const inView = rect.top < viewHeight && rect.bottom > 0;
+    console.log(`Element ${el.className} in view: ${inView}`, rect, viewHeight);
+    return inView;
+}
+// Trigger 
+export function triggerIfInView(numberSelector, containerSelector) {
+    const allNumberElements = document.querySelectorAll(numberSelector);
+    allNumberElements.forEach(numEl => {
+        const container = numEl.closest(containerSelector);
+        if (!container) return;
+
+        const isVisible = isInViewport(container);
+        const isAnimated = animatedElements.has(container);
+
+        if (isVisible && !isAnimated) {
+            const target = parseFloat(numEl.dataset.target || '0');
+            animateNumber(numEl, target);
+            animatedElements.set(container, true);
+        } else if (!isVisible && isAnimated) {
+            animatedElements.delete(container);
+        }
+    });
+}
 // Number Rolling animate with scrol animate
 export function numberRolling(numberSelector, containerSelector) {
-    const animatedElements = new WeakMap();
-
-    function animateNumber(el, target, duration = 2000) {
-        const start = performance.now();
-        function step(currentTime) {
-            const elapsed = currentTime - start;
-            const progress = Math.min(elapsed / duration, 1);
-            const current = Math.floor(progress * target);
-            el.textContent = current.toLocaleString();
-            if (progress < 1) {
-                requestAnimationFrame(step);
-            }
-        }
-        requestAnimationFrame(step);
-    }
-
-    function isInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return rect.top < window.innerHeight && rect.bottom > 0;
-    }
-
-    function triggerIfInView() {
-        const allNumberElements = document.querySelectorAll(numberSelector);
-        allNumberElements.forEach(numEl => {
-            const container = numEl.closest(containerSelector);
-            if (!container) return;
-
-            const isVisible = isInViewport(container);
-            const isAnimated = animatedElements.has(container);
-
-            if (isVisible && !isAnimated) {
-                const target = parseFloat(numEl.dataset.target || '0');
-                animateNumber(numEl, target);
-                animatedElements.set(container, true);
-            } else if (!isVisible && isAnimated) {
-                animatedElements.delete(container);
-            }
-        });
-    }
-
-    // Attach listeners immediately (not inside DOMContentLoaded)
-    window.addEventListener('scroll', triggerIfInView);
-    window.addEventListener('resize', triggerIfInView);
-    setTimeout(triggerIfInView, 100);
+    // Just set up the scroll/resize listeners here
+    window.addEventListener('scroll', () => triggerIfInView(numberSelector, containerSelector));
+    window.addEventListener('resize', () => triggerIfInView(numberSelector, containerSelector));
+    document.addEventListener('fullscreenchange', () => triggerIfInView(numberSelector, containerSelector));
+    setTimeout(() => triggerIfInView(numberSelector, containerSelector), 100);
 }

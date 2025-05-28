@@ -1,0 +1,1 @@
+<div class="{{ $paginationClass }}" id="{{ $paginationId}}" style="{{ $paginationStyle }}"></div>

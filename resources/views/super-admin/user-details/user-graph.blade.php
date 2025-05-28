@@ -395,7 +395,7 @@
 
         // Create gradients
         const gradientActivity = userCanvas.createLinearGradient(0, 0, 0, 400);
-        gradientActivity.addColorStop(0, 'rgba(28,200,138,0.5)');
+        gradientActivity.addColorStop(0, 'rgba(28, 200, 137, 0.66)');
         gradientActivity.addColorStop(1, 'rgba(34,139,34,0)');
         // Pointer Design rectangle candle
         function createCandlePointStyle(color = 'black') {
@@ -451,7 +451,7 @@
                         fill: true,
                         data: stats.activity_counts,
                         backgroundColor: gradientActivity,
-                        borderColor: '#00898275',
+                        borderColor: 'rgb(0, 160, 101)',
                         borderWidth: 1,
                         tension: 0.4,
                         pointStyle: createCandlePointStyle('rgb(194, 143, 96)'),
@@ -556,7 +556,7 @@
 </script>
 <!-- number cricle bar and number rolling animation with scrol animation -->
 <script type="module">
-    import { cricleNumberPlate, numberRolling } from "/module/module-min-js/design-helper-function-min.js";
+    import { cricleNumberPlate, numberRolling , triggerIfInView } from "/module/design-helper-function.js";
 
     // number cricle bar
     const numberClass = '.total-number';
@@ -566,11 +566,18 @@
     // number rolling animation and with scrol animation
     const numberSelector = '.number-rolling';
     const containerSelector = '.card-body, .storage-row, .storage-card-body, .branch-card-body';
+    // DOM ready
     document.addEventListener('DOMContentLoaded', () => {
+        cricleNumberPlate(numberClass, cricleBar, percentage);
         numberRolling(numberSelector, containerSelector);
     });
 
-    cricleNumberPlate(numberClass, cricleBar, percentage);
+    // Always re-trigger on fullscreen change
+    document.addEventListener('fullscreenchange', () => {
+        cricleNumberPlate(numberClass, cricleBar, percentage);
+        triggerIfInView(numberSelector, containerSelector);
+    });
+
 </script>
 @endPush
 @elseif($user_log_data_table_permission == 0)
