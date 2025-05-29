@@ -7,8 +7,10 @@
             <line x1="1.05" y1="12" x2="7" y2="12" />
             <line x1="17.01" y1="12" x2="22.96" y2="12" />
         </svg>
-        <span class="layout_label text-animation {{setting('layouts_moduel_display')}}">
-            {{setting('layouts_moduel_title')}}
+        <span class="text-animation">
+            <span class="layout_label {{setting('layouts_moduel_display')}}">
+                {{setting('layouts_moduel_title')}}
+            </span>
         </span>
         <div class="sb-sidenav-collapse-arrow {{setting('layouts_moduel_display')}}">▼</div>
     </a>

@@ -6,8 +6,8 @@
                 <line x1="1.05" y1="12" x2="7" y2="12" />
                 <line x1="17.01" y1="12" x2="22.96" y2="12" />
             </svg>
-            <span class="prod_label">
-                <span class="text-animation {{setting('hrm_visual')}}">{{__('translate.Hrm')}}</span>
+            <span class="prod_label text-animation">
+                <span class="{{setting('hrm_visual')}}">{{__('translate.Hrm')}}</span>
             </span>
             <div class="sb-sidenav-accordion-collapse-arrow ms-auto icon-size">▼</div>
         </button>

@@ -135,9 +135,9 @@
                     </span>
                 </div>
                 @foreach($branch_log_session_data as $branchId => $rolesGroup)
-                    @php
+                    <?php 
                         $firstSession = $rolesGroup->first();
-                    @endphp
+                    ?>
     
                     <div class="branch-card-skeletone" id="branchInfo">
                         <span class="chart-svg-three chart-svg-display svg_chart_body">
@@ -178,12 +178,51 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="--chartanimation" style="width: 100% !important; height: 150px;">
+                                    <svg id="chart_{{ $branchId }}" width="100%" height="120" fill="none" viewBox="0 0 1000 120"style="border: none;overflow: hidden;path {fill: none;stroke-width: 2;}">
+                                    <path class="line-0" />
+                                    <path class="line-1" />
+                                    <path class="line-2" />
+                                    <path class="line-3" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
         </x-branch-cards.branch-card>
     </div>
 </div>
+<!-- <svg id="chart" width="500" height="200" viewBox="0 0 600 300" style="border:1px solid #ccc;path {
+    fill: none;
+    stroke: #007bff;
+    stroke-width: 1;
+    stroke-linecap: round;
+  }">
+  <path id="animatedPath" />
+</svg> -->
+
+<!-- <svg id="chart" width="100%" height="110" fill="none" viewBox="0 0 1000 110"style="border: 1px solid #ccc;
+    background: #f9f9f9;
+    overflow: hidden;path {
+    fill: none;
+    stroke-width: 2;
+}">
+  <path class="line-0" />
+  <path class="line-1" />
+  <path class="line-2" />
+  <path class="line-3" />
+</svg> -->
+<!-- <svg id="chart" viewBox="0 0 800 400" fill="none" style="border: 1px solid #ccc;
+    background: #f9f9f9;
+    overflow: hidden;path {
+    fill: none;
+    stroke-width: 2.5;display: block;margin: 2rem auto;">
+  <rect x="0" y="0" width="800" height="400" fill="white" />
+</svg> -->
 @push('scripts')
 <!-- first Chart Graphp -->
 <script type="module">
@@ -556,7 +595,7 @@
 </script>
 <!-- number cricle bar and number rolling animation with scrol animation -->
 <script type="module">
-    import { cricleNumberPlate, numberRolling , triggerIfInView } from "/module/design-helper-function.js";
+    import { cricleNumberPlate, numberRolling , triggerIfInView } from "/module/module-min-js/design-helper-function-min.js";
 
     // number cricle bar
     const numberClass = '.total-number';
@@ -571,7 +610,11 @@
         cricleNumberPlate(numberClass, cricleBar, percentage);
         numberRolling(numberSelector, containerSelector);
     });
-
+    // Scroll animation
+    document.addEventListener('scroll', ()=>{
+        cricleNumberPlate(numberClass, cricleBar, percentage);
+        triggerIfInView(numberSelector, containerSelector);
+    });
     // Always re-trigger on fullscreen change
     document.addEventListener('fullscreenchange', () => {
         cricleNumberPlate(numberClass, cricleBar, percentage);
@@ -579,6 +622,430 @@
     });
 
 </script>
+<!-- demo line chart -->
+<!-- <script>
+    const dataSets = [
+    [10, 60, 30, 90, 50, 100],
+    [40, 80, 20, 70, 30, 110],
+    [20, 70, 50, 80, 40, 90]
+    ];
+
+    let currentIndex = 0;
+    const svg = document.getElementById("chart");
+    const path = document.getElementById("animatedPath");
+
+    function getSmoothPath(points, width, height, padding = 40) {
+    const stepX = (width - 2 * padding) / (points.length - 1);
+    const maxY = Math.max(...points);
+    const scaledPoints = points.map((y, i) => {
+        const x = padding + i * stepX;
+        const scaledY = height - padding - (y / maxY) * (height - 2 * padding);
+        return [x, scaledY];
+    });
+
+    let d = `M ${scaledPoints[0][0]},${scaledPoints[0][1]}`;
+    for (let i = 1; i < scaledPoints.length; i++) {
+        const [x1, y1] = scaledPoints[i - 1];
+        const [x2, y2] = scaledPoints[i];
+        const cx = (x1 + x2) / 2;
+        d += ` Q ${x1},${y1} ${cx},${(y1 + y2) / 2}`;
+    }
+    const last = scaledPoints[scaledPoints.length - 1];
+    d += ` T ${last[0]},${last[1]}`;
+    return d;
+    }
+
+    function animateToNextCurve() {
+    const currentData = dataSets[currentIndex];
+    const nextData = dataSets[(currentIndex + 1) % dataSets.length];
+
+    const d1 = getSmoothPath(currentData, 600, 300);
+    const d2 = getSmoothPath(nextData, 600, 300);
+
+    // Animate using SMIL-compatible fallback
+    const animate = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+    animate.setAttribute("attributeName", "d");
+    animate.setAttribute("from", d1);
+    animate.setAttribute("to", d2);
+    animate.setAttribute("dur", "2s");
+    animate.setAttribute("repeatCount", "1");
+    path.setAttribute("d", d1);
+    path.appendChild(animate);
+    animate.beginElement();
+
+    currentIndex = (currentIndex + 1) % dataSets.length;
+
+    // Call again after animation
+    setTimeout(animateToNextCurve, 2000);
+    }
+
+    // Start animation
+    animateToNextCurve();
+</script> -->
+<!-- correct line chart -->
+<!-- <script>
+    const svg = document.getElementById("chart");
+    const width = svg.viewBox.baseVal.width || svg.clientWidth;
+    const height = svg.viewBox.baseVal.height || svg.clientHeight;
+    const padding = 40;
+    const maxPoints = 60;
+    const maxY = 150;
+    const lineCount = 4;
+    const stepX = (width - padding * 2) / (maxPoints - 1);
+
+    // Create axes
+    function drawAxes() {
+    // Y-axis
+    const yAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    yAxis.setAttribute("x1", padding);
+    yAxis.setAttribute("y1", padding);
+    yAxis.setAttribute("x2", padding);
+    yAxis.setAttribute("y2", height - padding);
+    yAxis.setAttribute("class", "axis");
+    svg.appendChild(yAxis);
+
+    // X-axis
+    const xAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    xAxis.setAttribute("x1", padding);
+    xAxis.setAttribute("y1", height - padding);
+    xAxis.setAttribute("x2", width - padding);
+    xAxis.setAttribute("y2", height - padding);
+    xAxis.setAttribute("class", "axis");
+    svg.appendChild(xAxis);
+
+    // Y-axis labels
+    for (let i = 0; i <= 5; i++) {
+        const yVal = i * (maxY / 5);
+        const y = height - padding - (yVal / maxY) * (height - 2 * padding);
+
+        const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        label.setAttribute("x", padding - 10);
+        label.setAttribute("y", y + 4);
+        label.setAttribute("text-anchor", "end");
+        label.setAttribute("class", "label");
+        label.textContent = yVal.toFixed(0);
+        svg.appendChild(label);
+    }
+
+    // X-axis labels
+    for (let i = 0; i < maxPoints; i += 10) {
+        const x = padding + i * stepX;
+        const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        label.setAttribute("x", x);
+        label.setAttribute("y", height - padding + 15);
+        label.setAttribute("text-anchor", "middle");
+        label.setAttribute("class", "label");
+        label.textContent = `${i}`;
+        svg.appendChild(label);
+    }
+    }
+
+    // Generate starting data
+    const lines = Array.from({ length: lineCount }, () =>
+        Array.from({ length: maxPoints }, () => Math.random() * 100 + 25)
+    );
+
+    // Create path elements
+    const paths = [];
+    for (let i = 0; i < lineCount; i++) {
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("class", `line-${i}`);
+        svg.appendChild(path);
+        paths.push(path);
+    }
+
+    // Compute smooth line
+    function getSmoothPath(data) {
+    const scaled = data.map((y, i) => {
+        const x = padding + i * stepX;
+        const scaledY = height - padding - (y / maxY) * (height - 2 * padding);
+        return [x, scaledY];
+    });
+
+    let d = `M ${scaled[0][0]},${scaled[0][1]}`;
+    for (let i = 1; i < scaled.length - 1; i++) {
+        const [x1, y1] = scaled[i];
+        const [x2, y2] = scaled[i + 1];
+        const midX = (x1 + x2) / 2;
+        const midY = (y1 + y2) / 2;
+        d += ` Q ${x1},${y1} ${midX},${midY}`;
+    }
+    return d;
+    }
+
+    // Update data & redraw paths
+    function updateChart() {
+    for (let i = 0; i < lines.length; i++) {
+        lines[i].push(Math.random() * 100 + 25); // push new point
+        if (lines[i].length > maxPoints) lines[i].shift(); // remove first to scroll left
+        const d = getSmoothPath(lines[i]);
+        paths[i].setAttribute("d", d);
+    }
+    }
+
+    // Animate left to right
+    function animate() {
+    updateChart();
+        setTimeout(() => requestAnimationFrame(animate), 600); // adjust speed
+    }
+
+    // Run
+    drawAxes();
+    animate();
+</script> -->
+<!-- correct bar chart -->
+<!-- <script>
+    const svg = document.getElementById("chart");
+    const width = svg.viewBox.baseVal.width || svg.clientWidth;
+    const height = svg.viewBox.baseVal.height || svg.clientHeight;
+    const padding = 40;
+    const maxPoints = 20;
+    const datasetCount = 4;
+    const colors = ["#2196f3", "#e91e63", "#4caf50", "#ff9800"];
+    const maxY = 110;
+    const barWidth = 10;
+    const groupSpacing = 10;
+    const barSpacing = 20;
+
+    const stepX = ((width - 2 * padding) / maxPoints);
+
+    // Initialize datasets
+    const datasets = Array.from({ length: datasetCount }, () =>
+    Array.from({ length: maxPoints }, () => Math.random() * 100 + 25)
+    );
+
+    // Axis drawing
+    function drawAxes() {
+        const xAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        xAxis.setAttribute("x1", padding);
+        xAxis.setAttribute("y1", height - padding);
+        xAxis.setAttribute("x2", width - padding);
+        xAxis.setAttribute("y2", height - padding);
+        xAxis.setAttribute("class", "axis");
+        svg.appendChild(xAxis);
+
+        const yAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        yAxis.setAttribute("x1", padding);
+        yAxis.setAttribute("y1", padding);
+        yAxis.setAttribute("x2", padding);
+        yAxis.setAttribute("y2", height - padding);
+        yAxis.setAttribute("class", "axis");
+        svg.appendChild(yAxis);
+
+        for (let i = 0; i <= 5; i++) {
+            const yVal = i * (maxY / 5);
+            const y = height - padding - (yVal / maxY) * (height - 2 * padding);
+
+            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.setAttribute("x", padding - 10);
+            label.setAttribute("y", y + 4);
+            label.setAttribute("text-anchor", "end");
+            label.setAttribute("class", "label");
+            //label.textContent = yVal.toFixed(0);
+            svg.appendChild(label);
+        }
+    }
+
+    // Create groups for bars
+    const barGroups = Array.from({ length: maxPoints }, () => {
+        const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        group.setAttribute("class", "bar-group");
+        svg.appendChild(group);
+        return group;
+    });
+
+    // Draw bars
+    function drawBars() {
+        barGroups.forEach((group, index) => {
+            group.innerHTML = "";
+            datasets.forEach((dataSet, dIndex) => {
+            const val = dataSet[index];
+            const barHeight = (val / maxY) * (height - 2 * padding);
+            const x = padding + index * stepX + dIndex * (barWidth + barSpacing);
+            const y = height - padding - barHeight;
+
+            const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            rect.setAttribute("x", x);
+            rect.setAttribute("y", y);
+            rect.setAttribute("width", barWidth);
+            rect.setAttribute("height", barHeight);
+            rect.setAttribute("fill", colors[dIndex]);
+            group.appendChild(rect);
+            });
+        });
+    }
+
+    // Update data
+    function updateData() {
+        datasets.forEach(dataSet => {
+            dataSet.push(Math.random() * 100 + 25);
+            if (dataSet.length > maxPoints) dataSet.shift();
+        });
+        drawBars();
+    }
+
+    // Animate
+    function animate() {
+        updateData();
+        setTimeout(() => requestAnimationFrame(animate), 600);
+    }
+
+    // Run
+    drawAxes();
+    drawBars();
+    animate();
+</script> -->
+<!-- correct bar chart forEach() in this case use  ["#2196f3", "#e91e63", "#4caf50", "#ff9800"]-->
+<script>
+    const colors = ["#4e73df", "#e91e63", "#008982", "purple"];
+    const maxY = 110;
+    const barWidth = 10;
+    const groupSpacing = 10;
+    const barSpacing = 20;
+    const padding = 40;
+    const maxPoints = 20;
+    const datasetCount = 4;
+
+    // Loop through all SVGs that match chart_*
+    document.querySelectorAll('svg[id^="chart_"]').forEach(svg => {
+        const width = svg.viewBox.baseVal.width || svg.clientWidth;
+        const height = svg.viewBox.baseVal.height || svg.clientHeight;
+        const stepX = ((width - 2 * padding) / maxPoints);
+
+        // Create random data
+        const datasets = Array.from({ length: datasetCount }, () =>
+            Array.from({ length: maxPoints }, () => Math.random() * 100 + 10)
+        );
+
+        // Draw axes
+        function drawAxes() {
+            const createLine = (x1, y1, x2, y2) => {
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", x1);
+                line.setAttribute("y1", y1);
+                line.setAttribute("x2", x2);
+                line.setAttribute("y2", y2);
+                line.setAttribute("stroke", "#ccc");
+                line.setAttribute("stroke-width", "1");
+                return line;
+            };
+
+            svg.appendChild(createLine(padding, height - padding, width - padding, height - padding)); // X-axis
+            svg.appendChild(createLine(padding, padding, padding, height - padding)); // Y-axis
+        }
+
+        // Draw bars
+        const barGroups = Array.from({ length: maxPoints }, () => {
+            const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            svg.appendChild(group);
+            return group;
+        });
+
+        function drawBars() {
+            barGroups.forEach((group, index) => {
+                group.innerHTML = "";
+                datasets.forEach((dataSet, dIndex) => {
+                    const val = dataSet[index];
+                    const barHeight = (val / maxY) * (height - 2 * padding);
+                    const x = padding + index * stepX + dIndex * (barWidth + 2);
+                    const y = height - padding - barHeight;
+
+                    const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                    rect.setAttribute("x", x);
+                    rect.setAttribute("y", y);
+                    rect.setAttribute("width", barWidth);
+                    rect.setAttribute("height", barHeight);
+                    rect.setAttribute("fill", colors[dIndex]);
+                    group.appendChild(rect);
+                });
+            });
+        }
+
+        // Update + Animate
+        function updateData() {
+            datasets.forEach(dataSet => {
+                dataSet.push(Math.random() * 100 + 10);
+                if (dataSet.length > maxPoints) dataSet.shift();
+            });
+            drawBars();
+        }
+
+        function animate() {
+            updateData();
+            setTimeout(() => requestAnimationFrame(animate), 800);
+        }
+
+        drawAxes();
+        drawBars();
+        animate();
+    });
+</script>
+<!-- demo line chart -->
+<!-- <script type="module">
+  const svg = document.getElementById("chart");
+  const width = 800;
+  const height = 400;
+  const padding = 50;
+
+  const datasets = [
+    [20, 40, 30, 60, 50, 90],
+    [10, 60, 20, 70, 40, 80],
+    [15, 45, 25, 65, 35, 75],
+    [5, 35, 20, 50, 30, 60]
+  ];
+
+  const colors = ["line-1", "line-2", "line-3", "line-4"];
+
+  const maxY = Math.max(...datasets.flat());
+  const scaleX = (width - padding * 2) / (datasets[0].length - 1);
+  const scaleY = (height - padding * 2) / maxY;
+
+  datasets.forEach((data, lineIndex) => {
+    const scaled = data.map((val, i) => [
+      padding + i * scaleX,
+      height - padding - val * scaleY
+    ]);
+
+    // Create smooth path (cubic Bezier)
+    let d = `M ${scaled[0][0]},${scaled[0][1]}`;
+    for (let i = 1; i < scaled.length; i++) {
+      const [x1, y1] = scaled[i - 1];
+      const [x2, y2] = scaled[i];
+      const cx = (x1 + x2) / 2;
+      d += ` Q ${cx},${y1} ${x2},${y2}`;
+    }
+
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", d);
+    path.setAttribute("class", colors[lineIndex]);
+
+    // Animate left to right
+    const totalLength = path.getTotalLength();
+    path.style.strokeDasharray = totalLength;
+    path.style.strokeDashoffset = totalLength;
+    path.style.animation = "draw-line 3s ease forwards";
+    path.style.animationDelay = `${lineIndex * 0.5}s`; // staggered lines
+
+    svg.appendChild(path);
+
+    // Add circles and labels
+    scaled.forEach(([x, y], i) => {
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", x);
+      circle.setAttribute("cy", y);
+      circle.setAttribute("r", 3);
+      circle.setAttribute("fill", getComputedStyle(path).stroke);
+      svg.appendChild(circle);
+
+      const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      label.setAttribute("x", x);
+      label.setAttribute("y", y - 10);
+      label.setAttribute("text-anchor", "middle");
+      label.textContent = data[i];
+      svg.appendChild(label);
+    });
+  });
+</script> -->
 @endPush
 @elseif($user_log_data_table_permission == 0)
 @include('super-admin.user-details.error.data-table-permission')

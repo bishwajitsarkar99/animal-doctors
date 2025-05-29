@@ -247,7 +247,6 @@ export function cricleNumberPlate(numberClass, cricleBar, percentage){
         updateCount();
     });
 }
-
 // Aniamte Number
 const animatedElements = new WeakMap();
 function animateNumber(el, target, duration = 2000) {
@@ -267,7 +266,6 @@ function isInViewport(el) {
     const rect = el.getBoundingClientRect();
     const viewHeight = window.innerHeight || document.documentElement.clientHeight;
     const inView = rect.top < viewHeight && rect.bottom > 0;
-    console.log(`Element ${el.className} in view: ${inView}`, rect, viewHeight);
     return inView;
 }
 // Trigger 
@@ -292,8 +290,15 @@ export function triggerIfInView(numberSelector, containerSelector) {
 // Number Rolling animate with scrol animate
 export function numberRolling(numberSelector, containerSelector) {
     // Just set up the scroll/resize listeners here
-    window.addEventListener('scroll', () => triggerIfInView(numberSelector, containerSelector));
     window.addEventListener('resize', () => triggerIfInView(numberSelector, containerSelector));
     document.addEventListener('fullscreenchange', () => triggerIfInView(numberSelector, containerSelector));
-    setTimeout(() => triggerIfInView(numberSelector, containerSelector), 100);
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (!scrollTimeout) {
+            scrollTimeout = setTimeout(() => {
+                triggerIfInView(numberSelector, containerSelector);
+                scrollTimeout = null;
+            }, 100); // Adjust delay as needed
+        }
+    });
 }

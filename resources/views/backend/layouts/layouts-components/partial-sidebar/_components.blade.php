@@ -5,9 +5,11 @@
             <line x1="1.05" y1="12" x2="7" y2="12" />
             <line x1="17.01" y1="12" x2="22.96" y2="12" />
         </svg>
-        <span class="layout_label text-animation {{setting('components_moduel_display')}}
-            {{Request::is('super-admin/forntend-footer-information') || Request::is('super-admin/forntend-footer-newletter') ? 'folder-active' : '' }}">
-            {{__('translate.Fornt-End')}}
+        <span class="text-animation">
+            <span class="layout_label {{setting('components_moduel_display')}}
+                {{Request::is('super-admin/forntend-footer-information') || Request::is('super-admin/forntend-footer-newletter') ? 'folder-active' : '' }}">
+                {{__('translate.Fornt-End')}}
+            </span>
         </span>
         <div class="sb-sidenav-collapse-arrow {{setting('components_moduel_display')}}">▼</div>
     </a>

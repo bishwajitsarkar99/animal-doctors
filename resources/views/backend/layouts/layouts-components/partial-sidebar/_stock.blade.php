@@ -7,11 +7,13 @@
                 <line x1="1.05" y1="12" x2="7" y2="12" />
                 <line x1="17.01" y1="12" x2="22.96" y2="12" />
             </svg>
-            <span class="prod_label text-animation {{Request::is('report/inventory-details-record') || 
-                Request::is('super-admin/inventory-authorize') || 
-                Request::is('company-supplier/suppliers/index') || 
-                Request::is('company-supplier/suppliers/access-permission') ? 'folder-active' : '' }}">
-                {{ __('translate.Stock')}}
+            <span class="text-animation">
+                <span class="prod_label {{Request::is('report/inventory-details-record') || 
+                    Request::is('super-admin/inventory-authorize') || 
+                    Request::is('company-supplier/suppliers/index') || 
+                    Request::is('company-supplier/suppliers/access-permission') ? 'folder-active' : '' }}">
+                    {{ __('translate.Stock')}}
+                </span>
             </span>
             <div class="sb-sidenav-accordion-collapse-arrow ms-auto icon-size">▼</div>
         </button>
