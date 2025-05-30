@@ -1,1 +1,1 @@
-<div class="card user_line_chart">{{$slot}}</div>
+<div class="card {{ $borderStyle }} {{ $cardBg }}">{{$slot}}</div>

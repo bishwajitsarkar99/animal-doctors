@@ -1,1 +1,1 @@
-<div class="card storage-card-body card-light-bg">{{ $slot }}</div>
+<div class="card storage-card-body {{ $borderStyle }} {{ $cardBg }}">{{ $slot }}</div>

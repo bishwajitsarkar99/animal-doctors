@@ -2,8 +2,8 @@
 <!-- ==== User-Activities Analysis Graph ======= -->
 @if($user_log_data_table_permission == 1)
 <div class="container">
-    <div class="chart-card">
-        <div class="row mb-4">
+    <div class="chart-card pt-3 pb-3">
+        <div class="row mb-2">
             <div class="col-xl-12">
                 <div class="card card-body border-style card-background">
                     <!-- Current Day Data -->
@@ -97,32 +97,32 @@
             </div>
         </div>
     </div>
-    <div class="chart-card">
-        <div class="row mt-2 mb-3">
+    <div class="chart-card mb-4">
+        <div class="row mt-4 mb-3">
             <div class="col-xl-12">
-                <div class="card card-body border-style">
-                    <div class="card-header mini-bar-header ps-2" style="text-align:center;">
-                        <div class="row">
-                            <div class="col-xl-8">
-                                <span class="card-head-title head-skeletone">
-                                    <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
-                                    Users Log Activities Line Chart
-                                </span>
-                            </div>
-                            <div class="col-xl-4 group_box">
-                                <span class="input-group">
-                                    <label class="date-label" for="from">Form : </label>
-                                    <input class="form-control form-control-sm input-date" type="text" name="start_date" Placeholder="DD-MM-YYYY" id="chartStartDate" autocomplete="off">
-                                </span>
-                                <span class="input-group">
-                                    <label class="date-label" for="from">To : </label>
-                                    <input class="form-control form-control-sm input-date" type="text" name="end_date" Placeholder="DD-MM-YYYY" id="chartEndDate" autocomplete="off">
-                                </span>
-                            </div>
+                <div class="card-header max-card-header">
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <span class="card-head-title head-skeletone">
+                                <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
+                                Users Log Activities Line Chart
+                            </span>
+                        </div>
+                        <div class="col-xl-4 group_box">
+                            <span class="input-group">
+                                <label class="date-label" for="from">Form : </label>
+                                <input class="form-control form-control-sm input-date" type="text" name="start_date" Placeholder="DD-MM-YYYY" id="chartStartDate" autocomplete="off">
+                            </span>
+                            <span class="input-group">
+                                <label class="date-label" for="from">To : </label>
+                                <input class="form-control form-control-sm input-date" type="text" name="end_date" Placeholder="DD-MM-YYYY" id="chartEndDate" autocomplete="off">
+                            </span>
                         </div>
                     </div>
+                </div>
+                <div class="card card-body border-style">
                     <!-- Total all data chart -->
-                    <div class="user-activities--month-chart">
+                    <div class="user-activities--month-chart mb-5">
                         <div class="chart-scrollbar-responsive">
                             <canvas id="userAllLogChart" height="80"></canvas>
                             <canvas id="allUserDateLogChart" height="36"></canvas>
@@ -147,8 +147,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-5 pt-5">
-                        <div class="col-xl-12 head-init">
+                    <div class="branch-details-info mt-5">
+                        <div class="head-init" style="border-top:1px dotted lightgray;">
                             <span class="head-skeletone">
                                 <i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i> 
                                 Branch User Log Data Information
@@ -420,12 +420,12 @@
                                 weight: 'bold',
                             }
                         },
-                        onHover: function(event, legendItem, legend) {
-                            legend.chart.canvas.style.cursor = 'pointer';
-                        },
-                        onLeave: function(event, legendItem, legend) {
-                            legend.chart.canvas.style.cursor = 'default';
-                        }
+                        // onHover: function(event, legendItem, legend) {
+                        //     legend.chart.canvas.style.cursor = 'pointer';
+                        // },
+                        // onLeave: function(event, legendItem, legend) {
+                        //     legend.chart.canvas.style.cursor = 'default';
+                        // }
                     },
                     tooltip: {
                         enabled: true,
@@ -487,7 +487,7 @@
                 hoverGridPlugin(), 
                 dottedGridPlugin(), 
                 axisTooltipDayFormatePlugin(), 
-                //axisCursorPlugin(), 
+                axisCursorPlugin(), 
             ]
         });
         fetch_current_users_activities_data();
@@ -566,12 +566,12 @@
                                 weight: 'bold',
                             }
                         },
-                        onHover: function(event, legendItem, legend) {
-                            legend.chart.canvas.style.cursor = 'pointer';
-                        },
-                        onLeave: function(event, legendItem, legend) {
-                            legend.chart.canvas.style.cursor = 'default';
-                        }
+                        // onHover: function(event, legendItem, legend) {
+                        //     legend.chart.canvas.style.cursor = 'pointer';
+                        // },
+                        // onLeave: function(event, legendItem, legend) {
+                        //     legend.chart.canvas.style.cursor = 'default';
+                        // }
                     },
                     tooltip: {
                         enabled: true,
@@ -634,7 +634,7 @@
                 hoverGridPlugin(), 
                 dottedGridPlugin(), 
                 axisTooltipMonthFormatePlugin(), 
-                //axisCursorPlugin(), 
+                axisCursorPlugin(), 
             ]
         });
         fetch_current_users_activities_data();
@@ -796,12 +796,12 @@
                                                 weight: 'bold'
                                             }
                                         },
-                                        onHover(event, item, legend) {
-                                            legend.chart.canvas.style.cursor = 'pointer'; // ew-resize
-                                        },
-                                        onLeave(event, item, legend) {
-                                            legend.chart.canvas.style.cursor = 'default';
-                                        }
+                                        // onHover(event, item, legend) {
+                                        //     legend.chart.canvas.style.cursor = 'pointer'; // ew-resize
+                                        // },
+                                        // onLeave(event, item, legend) {
+                                        //     legend.chart.canvas.style.cursor = 'default';
+                                        // }
                                     },
                                     tooltip: {
                                         enabled: true,
@@ -884,7 +884,7 @@
                                 axisTooltipDateFormatePlugin(),
                                 ChartScrollPlugin(),
                                 ChartZoom,
-                                // axisCursorPlugin()
+                                axisCursorPlugin()
                             ]
                         });
     

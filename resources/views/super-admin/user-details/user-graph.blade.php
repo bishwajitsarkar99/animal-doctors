@@ -26,104 +26,111 @@
         </div>
     @endforeach
 </div>
-<div class="row mt-4">
-    <div class="col-xl-6">
-        <x-user-cards.user-storage-card>
-            <x-user-cards.user-storage-card-header cardHeadTitile="Users Storage" iconColor="#2e42cb" />
-            <?php
-                $roles = [
-                    'super_admin' => ['label' => 'Super-Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                    'admin' => ['label' => 'Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                    'sub_admin' => ['label' => 'Sub-Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                    'accounts' => ['label' => 'Accounts Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                    'marketing' => ['label' => 'Marketing Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                    'delivery_team' => ['label' => 'Delivery Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                    'users' => ['label' => 'General Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                ]; 
-            ?>
-            @foreach($roles as $key => $data)
-                <x-user-cards.user-storage-card-body
-                    title="{{ $data['label'] }}"
-                    count="{{ $usersCount[$key] ?? 0 }}"
-                    progressbarbg="{{ $data['bg'] }}"
+<x-big-card>
+    <div class="row mt-4">
+        <div class="col-xl-6">
+            <x-user-cards.user-storage-card cardBg="" borderStyle="border-style">
+                <x-user-cards.user-storage-card-header cardHeadTitile="Users Storage" iconColor="#2e42cb" />
+                <?php
+                    $roles = [
+                        'super_admin' => ['label' => 'Super-Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+                        'admin' => ['label' => 'Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+                        'sub_admin' => ['label' => 'Sub-Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+                        'accounts' => ['label' => 'Accounts Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+                        'marketing' => ['label' => 'Marketing Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+                        'delivery_team' => ['label' => 'Delivery Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+                        'users' => ['label' => 'General Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+                    ]; 
+                ?>
+                @foreach($roles as $key => $data)
+                    <x-user-cards.user-storage-card-body
+                        title="{{ $data['label'] }}"
+                        count="{{ $usersCount[$key] ?? 0 }}"
+                        progressbarbg="{{ $data['bg'] }}"
+                        textPercentageProgress="text-progress-percentage"
+                        percentage="{{ round($summaryCardData[$key] ?? 0, 2) }}"
+                        numberAmountClass="user-amount" 
+                        badgeClass="badge"
+                        badgeRoundedClass="rounded-pill"
+                        textNumberClass="text-number-count"
+                        numberCountAnimationKey="{{ $data['number-animation-key'] }}"
+                        numberCountAnimation="{{ $data['number-animation'] }}"
+                        progrssBarAnimationQuerySelector="{{ $data['progress-bar-animation-query-selector'] }}"
+                    />
+                @endforeach
+                <x-user-cards.user-storage-card-footer 
+                    title="Total Users"
+                    count="{{ $miniCardData['total_users'] }}"
+                    progressbarbg="bg-light-blueviolet"
                     textPercentageProgress="text-progress-percentage"
-                    percentage="{{ round($summaryCardData[$key] ?? 0, 2) }}"
+                    percentage="{{ round($totalPercentageVlaue) }}"
                     numberAmountClass="user-amount" 
                     badgeClass="badge"
                     badgeRoundedClass="rounded-pill"
                     textNumberClass="text-number-count"
-                    numberCountAnimationKey="{{ $data['number-animation-key'] }}"
-                    numberCountAnimation="{{ $data['number-animation'] }}"
-                    progrssBarAnimationQuerySelector="{{ $data['progress-bar-animation-query-selector'] }}"
+                    storageCapacity="{{$storage}}"
+                    progrssQuerySelector="progress-bar"
+                    numberKey="number-rolling"
+                    numberCount="total-user-rolling"
+                    
                 />
-            @endforeach
-            <x-user-cards.user-storage-card-footer 
-                title="Total Users"
-                count="{{ $miniCardData['total_users'] }}"
-                progressbarbg="bg-light-blueviolet"
-                textPercentageProgress="text-progress-percentage"
-                percentage="{{ round($totalPercentageVlaue) }}"
-                numberAmountClass="user-amount" 
-                badgeClass="badge"
-                badgeRoundedClass="rounded-pill"
-                textNumberClass="text-number-count"
-                storageCapacity="{{$storage}}"
-                progrssQuerySelector="progress-bar"
-                numberKey="number-rolling"
-                numberCount="total-user-rolling"
-                
-            />
-        </x-user-cards.user-storage-card>
+            </x-user-cards.user-storage-card>
+        </div>
+        <div class="col-xl-6">
+            <x-chart-cards.chart-card cardBg="" borderStyle="border-style" id="orderChart">
+                <x-chart-cards.chart-activity-card-header 
+                    cardHeadSkeletone="head-skeletone"
+                    loaderSkeletone="loader_skeleton"
+                    iconColor="#2e42cb7d"
+                    title="User Activity Count Line Chart ( Current Time )"
+                    loaderId="loader_orderChart"
+                    textAlign="center"
+                />
+                <x-chart-cards.chart-card-body
+                    cardBodySkeletone="chart-body-skeletone"
+                    cardBodyBg=""
+                    borderStyle="border-style"
+                    cardBodyAnimation="user-activities--month-bar-chart"
+                    svgId="svgIcon"
+                    svgClass="chart-svg"
+                    svgWidth="100%"
+                    svgHeight="100px"
+                    svgColor="#969696"
+                    canvasHeight="110"
+                    canvasId="userActivityChart"
+                />
+            </x-card>
+        </div>
     </div>
-    <div class="col-xl-6">
-        <x-chart-cards.chart-card id="orderChart">
-            <x-chart-cards.chart-activity-card-header 
-                cardHeadSkeletone="head-skeletone"
-                loaderSkeletone="loader_skeleton"
-                iconColor="#2e42cb7d"
-                title="User Activity Count Line Chart ( Current Time )"
-                loaderId="loader_orderChart"
-                textAlign="center"
-            />
-            <x-chart-cards.chart-card-body
-                cardBodySkeletone="chart-body-skeletone"
-                cardBodyAnimation="user-activities--month-bar-chart"
-                svgId="svgIcon"
-                svgClass="chart-svg"
-                svgWidth="100%"
-                svgHeight="100px"
-                svgColor="#969696"
-                canvasHeight="110"
-                canvasId="userActivityChart"
-            />
-        </x-card>
+    <div class="row mt-4">
+        <div class="col-xl-12">
+            <x-chart-cards.chart-card cardBg="" borderStyle="border-style" id="orderChart">
+                <x-chart-cards.chart-card-header 
+                    cardTopBorder="dotted"
+                    cardHeadSkeletone="head-skeletone"
+                    loaderSkeletone="loader_skeleton"
+                    iconColor="#2e42cb7d"
+                    title="Total User Acivities Bar Chart ( Current Month )"
+                    loaderId="loader_acivityChart"
+                    textAlign="center"
+                />
+                <x-chart-cards.chart-card-body
+                    cardBodySkeletone="body-skeletone"
+                    cardBodyBg=""
+                    borderStyle="border-style"
+                    cardBodyAnimation="user-activities--week-chart"
+                    svgId="svgIcon2"
+                    svgClass="chart-svg-two"
+                    svgWidth="100%"
+                    svgHeight="95px"
+                    svgColor="#969696"
+                    canvasHeight="80"
+                    canvasId="userChart"
+                />
+            </x-card>
+        </div>
     </div>
-</div>
-<div class="row mt-4">
-    <div class="col-xl-12">
-        <x-chart-cards.chart-card id="orderChart">
-            <x-chart-cards.chart-card-header 
-                cardHeadSkeletone="head-skeletone"
-                loaderSkeletone="loader_skeleton"
-                iconColor="#2e42cb7d"
-                title="Total User Acivities Bar Chart ( Current Month )"
-                loaderId="loader_acivityChart"
-                textAlign="center"
-            />
-            <x-chart-cards.chart-card-body
-                cardBodySkeletone="body-skeletone"
-                cardBodyAnimation="user-activities--week-chart"
-                svgId="svgIcon2"
-                svgClass="chart-svg-two"
-                svgWidth="100%"
-                svgHeight="95px"
-                svgColor="#969696"
-                canvasHeight="80"
-                canvasId="userChart"
-            />
-        </x-card>
-    </div>
-</div>
+</x-big-card>
 <div class="row mt-4 mb-4">
     <div class="col-xl-12">
         <x-branch-cards.branch-card id="branchCard">

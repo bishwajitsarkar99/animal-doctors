@@ -527,12 +527,22 @@ img#loaderShow {
     background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
     opacity: 1;
 }
+.max-card-header{
+    background-color: white;
+    text-align: center;
+    border-bottom: 1px dotted lightgray;
+    padding: 8px 10px;
+}
+.dotted{
+    border-top: 1px dotted lightgray;
+}
 .card-light-bg{
     transition: 0.5s;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.067) 0px 1px 20px, rgba(0, 123, 255, 0.2) 0px 2px 6px;
     background-image: radial-gradient(farthest-corner at 100px 100px, white, white);
     opacity: 1;
+    border-radius: 5px;
 }
 .branch-info-card{
     border: none;
