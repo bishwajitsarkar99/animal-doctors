@@ -6,11 +6,15 @@
             {{ $title }}
         </span>
         <div class="pb-1">
-            <div class="{{ $loaderClass }} cricale-number-skeleton" style="--percentage: 76;">
-                <span>
-                    <span class="total-number {{ $numberCountAnimationKey }} {{ $numberCountAnimation }}" data-target="{{ round($percentage) }}">{{ round($percentage) }}</span>
-                    <span class="percentage-size">%</span>
-                </span>
+            <div class="ring-container cricale-number-skeleton">
+                <div class="outer-ring"></div>
+                <div class="inner-ring"> </div>
+                <div class="{{ $loaderClass }}" style="--percentage: 76;">
+                    <span>
+                        <span class="total-number {{ $numberCountAnimationKey }} {{ $numberCountAnimation }}" data-target="{{ round($percentage) }}">{{ round($percentage) }}</span>
+                        <span class="percentage-size">%</span>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

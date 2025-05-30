@@ -114,9 +114,9 @@
                 cardBodySkeletone="body-skeletone"
                 cardBodyAnimation="user-activities--week-chart"
                 svgId="svgIcon2"
-                svgClass="chart-svg"
+                svgClass="chart-svg-two"
                 svgWidth="100%"
-                svgHeight="180px"
+                svgHeight="95px"
                 svgColor="#969696"
                 canvasHeight="80"
                 canvasId="userChart"
@@ -204,7 +204,6 @@
   }">
   <path id="animatedPath" />
 </svg> -->
-
 <!-- <svg id="chart" width="100%" height="110" fill="none" viewBox="0 0 1000 110"style="border: 1px solid #ccc;
     background: #f9f9f9;
     overflow: hidden;path {
@@ -216,12 +215,12 @@
   <path class="line-2" />
   <path class="line-3" />
 </svg> -->
-<!-- <svg id="chart" viewBox="0 0 800 400" fill="none" style="border: 1px solid #ccc;
+<!-- <svg id="cruveChart" viewBox="0 0 800 50" fill="rgba(0,123,255,0.2)" style="border: 1px solid #ccc;
     background: #f9f9f9;
     overflow: hidden;path {
     fill: none;
-    stroke-width: 2.5;display: block;margin: 2rem auto;">
-  <rect x="0" y="0" width="800" height="400" fill="white" />
+    stroke-width: 2.5;display: block;margin: none;">
+  <rect x="0" y="0" width="800" height="50" fill="white" />
 </svg> -->
 @push('scripts')
 <!-- first Chart Graphp -->
@@ -595,7 +594,7 @@
 </script>
 <!-- number cricle bar and number rolling animation with scrol animation -->
 <script type="module">
-    import { cricleNumberPlate, numberRolling , triggerIfInView } from "/module/module-min-js/design-helper-function-min.js";
+    import { cricleNumberPlate, numberRolling , triggerIfInView, initializeBarCharts } from "/module/module-min-js/design-helper-function-min.js";
 
     // number cricle bar
     const numberClass = '.total-number';
@@ -621,6 +620,7 @@
         triggerIfInView(numberSelector, containerSelector);
     });
 
+    initializeBarCharts();
 </script>
 <!-- demo line chart -->
 <!-- <script>
@@ -682,14 +682,14 @@
     // Start animation
     animateToNextCurve();
 </script> -->
-<!-- correct line chart -->
+<!-- correct cruve line chart -->
 <!-- <script>
-    const svg = document.getElementById("chart");
+    const svg = document.getElementById("cruveChart");
     const width = svg.viewBox.baseVal.width || svg.clientWidth;
     const height = svg.viewBox.baseVal.height || svg.clientHeight;
     const padding = 40;
     const maxPoints = 60;
-    const maxY = 150;
+    const maxY = 110;
     const lineCount = 4;
     const stepX = (width - padding * 2) / (maxPoints - 1);
 
@@ -793,193 +793,76 @@
     drawAxes();
     animate();
 </script> -->
-<!-- correct bar chart -->
 <!-- <script>
-    const svg = document.getElementById("chart");
+    const svg = document.getElementById("cruveChart");
     const width = svg.viewBox.baseVal.width || svg.clientWidth;
     const height = svg.viewBox.baseVal.height || svg.clientHeight;
     const padding = 40;
-    const maxPoints = 20;
-    const datasetCount = 4;
-    const colors = ["#2196f3", "#e91e63", "#4caf50", "#ff9800"];
-    const maxY = 110;
-    const barWidth = 10;
-    const groupSpacing = 10;
-    const barSpacing = 20;
+    const maxPoints = 120;
+    const stepX = (width - padding * 2) / (maxPoints - 1);
+    const baseY = height / 2; // baseline of the ECG
 
-    const stepX = ((width - 2 * padding) / maxPoints);
+    // ECG pattern data: flat → small up → sharp spike → drop → recover → flat
+    const pattern = [
+        0, 0, 10, 0, 20, 80, 30, -40, 10, 0, 0, 0
+    ]; // Modify this to adjust sharpness
 
-    // Initialize datasets
-    const datasets = Array.from({ length: datasetCount }, () =>
-    Array.from({ length: maxPoints }, () => Math.random() * 100 + 25)
-    );
+    let data = Array.from({ length: maxPoints }, () => 0);
 
-    // Axis drawing
+    // Create ECG path
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("stroke", "#e91e63");
+    path.setAttribute("stroke-width", "2");
+    path.setAttribute("fill", "none");
+    svg.appendChild(path);
+
+    // Draw axes
     function drawAxes() {
-        const xAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        xAxis.setAttribute("x1", padding);
-        xAxis.setAttribute("y1", height - padding);
-        xAxis.setAttribute("x2", width - padding);
-        xAxis.setAttribute("y2", height - padding);
-        xAxis.setAttribute("class", "axis");
-        svg.appendChild(xAxis);
+        const createLine = (x1, y1, x2, y2) => {
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", x1);
+            line.setAttribute("y1", y1);
+            line.setAttribute("x2", x2);
+            line.setAttribute("y2", y2);
+            line.setAttribute("stroke", "#ccc");
+            line.setAttribute("stroke-width", "1");
+            return line;
+        };
+        svg.appendChild(createLine(padding, padding, padding, height - padding)); // Y-axis
+        svg.appendChild(createLine(padding, height - padding, width - padding, height - padding)); // X-axis
+    }
 
-        const yAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        yAxis.setAttribute("x1", padding);
-        yAxis.setAttribute("y1", padding);
-        yAxis.setAttribute("x2", padding);
-        yAxis.setAttribute("y2", height - padding);
-        yAxis.setAttribute("class", "axis");
-        svg.appendChild(yAxis);
+    // Update path
+    function updatePath() {
+        const scaled = data.map((y, i) => {
+            const x = padding + i * stepX;
+            const yPos = baseY - y;
+            return [x, yPos];
+        });
 
-        for (let i = 0; i <= 5; i++) {
-            const yVal = i * (maxY / 5);
-            const y = height - padding - (yVal / maxY) * (height - 2 * padding);
-
-            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
-            label.setAttribute("x", padding - 10);
-            label.setAttribute("y", y + 4);
-            label.setAttribute("text-anchor", "end");
-            label.setAttribute("class", "label");
-            //label.textContent = yVal.toFixed(0);
-            svg.appendChild(label);
+        let d = `M ${scaled[0][0]},${scaled[0][1]}`;
+        for (let i = 1; i < scaled.length; i++) {
+            d += ` L ${scaled[i][0]},${scaled[i][1]}`;
         }
+
+        path.setAttribute("d", d);
     }
 
-    // Create groups for bars
-    const barGroups = Array.from({ length: maxPoints }, () => {
-        const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
-        group.setAttribute("class", "bar-group");
-        svg.appendChild(group);
-        return group;
-    });
-
-    // Draw bars
-    function drawBars() {
-        barGroups.forEach((group, index) => {
-            group.innerHTML = "";
-            datasets.forEach((dataSet, dIndex) => {
-            const val = dataSet[index];
-            const barHeight = (val / maxY) * (height - 2 * padding);
-            const x = padding + index * stepX + dIndex * (barWidth + barSpacing);
-            const y = height - padding - barHeight;
-
-            const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-            rect.setAttribute("x", x);
-            rect.setAttribute("y", y);
-            rect.setAttribute("width", barWidth);
-            rect.setAttribute("height", barHeight);
-            rect.setAttribute("fill", colors[dIndex]);
-            group.appendChild(rect);
-            });
-        });
-    }
-
-    // Update data
-    function updateData() {
-        datasets.forEach(dataSet => {
-            dataSet.push(Math.random() * 100 + 25);
-            if (dataSet.length > maxPoints) dataSet.shift();
-        });
-        drawBars();
-    }
-
-    // Animate
+    // Animate ECG
     function animate() {
-        updateData();
-        setTimeout(() => requestAnimationFrame(animate), 600);
+        const next = pattern.shift();  // Take next point from pattern
+        pattern.push(next);            // Push it to the end (looping)
+
+        data.push(next);
+        if (data.length > maxPoints) data.shift();
+
+        updatePath();
+        setTimeout(() => requestAnimationFrame(animate), 150); // speed of animation
     }
 
-    // Run
     drawAxes();
-    drawBars();
     animate();
 </script> -->
-<!-- correct bar chart forEach() in this case use  ["#2196f3", "#e91e63", "#4caf50", "#ff9800"]-->
-<script>
-    const colors = ["#4e73df", "#e91e63", "#008982", "purple"];
-    const maxY = 110;
-    const barWidth = 10;
-    const groupSpacing = 10;
-    const barSpacing = 20;
-    const padding = 40;
-    const maxPoints = 20;
-    const datasetCount = 4;
-
-    // Loop through all SVGs that match chart_*
-    document.querySelectorAll('svg[id^="chart_"]').forEach(svg => {
-        const width = svg.viewBox.baseVal.width || svg.clientWidth;
-        const height = svg.viewBox.baseVal.height || svg.clientHeight;
-        const stepX = ((width - 2 * padding) / maxPoints);
-
-        // Create random data
-        const datasets = Array.from({ length: datasetCount }, () =>
-            Array.from({ length: maxPoints }, () => Math.random() * 100 + 10)
-        );
-
-        // Draw axes
-        function drawAxes() {
-            const createLine = (x1, y1, x2, y2) => {
-                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                line.setAttribute("x1", x1);
-                line.setAttribute("y1", y1);
-                line.setAttribute("x2", x2);
-                line.setAttribute("y2", y2);
-                line.setAttribute("stroke", "#ccc");
-                line.setAttribute("stroke-width", "1");
-                return line;
-            };
-
-            svg.appendChild(createLine(padding, height - padding, width - padding, height - padding)); // X-axis
-            svg.appendChild(createLine(padding, padding, padding, height - padding)); // Y-axis
-        }
-
-        // Draw bars
-        const barGroups = Array.from({ length: maxPoints }, () => {
-            const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
-            svg.appendChild(group);
-            return group;
-        });
-
-        function drawBars() {
-            barGroups.forEach((group, index) => {
-                group.innerHTML = "";
-                datasets.forEach((dataSet, dIndex) => {
-                    const val = dataSet[index];
-                    const barHeight = (val / maxY) * (height - 2 * padding);
-                    const x = padding + index * stepX + dIndex * (barWidth + 2);
-                    const y = height - padding - barHeight;
-
-                    const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-                    rect.setAttribute("x", x);
-                    rect.setAttribute("y", y);
-                    rect.setAttribute("width", barWidth);
-                    rect.setAttribute("height", barHeight);
-                    rect.setAttribute("fill", colors[dIndex]);
-                    group.appendChild(rect);
-                });
-            });
-        }
-
-        // Update + Animate
-        function updateData() {
-            datasets.forEach(dataSet => {
-                dataSet.push(Math.random() * 100 + 10);
-                if (dataSet.length > maxPoints) dataSet.shift();
-            });
-            drawBars();
-        }
-
-        function animate() {
-            updateData();
-            setTimeout(() => requestAnimationFrame(animate), 800);
-        }
-
-        drawAxes();
-        drawBars();
-        animate();
-    });
-</script>
 <!-- demo line chart -->
 <!-- <script type="module">
   const svg = document.getElementById("chart");

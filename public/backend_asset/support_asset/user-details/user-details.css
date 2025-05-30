@@ -26,19 +26,72 @@ htm,body{
     padding: 0;
     margin: 0;
 }
+.ring-container {
+  position: relative;
+  width: 95px;
+  height: 95px;
+  display: flex;
+}
+
+.outer-ring,
+.inner-ring {
+  position: absolute;
+  border-radius: 50%;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  background-size: cover;
+}
+.outer-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  background: conic-gradient(#e7e7e7 0% 25%, #a0a3ff 25% 50%, #d3d3d3b5 50% 100%);
+  animation: rotateClockwise 7s linear infinite;
+  mask-image: radial-gradient(transparent 44px, black 46px);
+  -webkit-mask-image: radial-gradient(transparent 44px, black 46px);
+}
+
+.inner-ring {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 5px;
+  left: 5px;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background: conic-gradient(#e7e7e7 0% 25%, #a0caff 25% 50%, #d3d3d3b5 50% 100%);
+  animation: rotateCounterClockwise 5s linear infinite;
+  mask-image: radial-gradient(transparent 38px, #000000 40px);
+  -webkit-mask-image: radial-gradient(transparent 38px, #000000 40px);
+}
+
+@keyframes rotateClockwise {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes rotateCounterClockwise {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
 .--chartanimation{
     background: linear-gradient(180deg, rgba(230, 230, 230, .03) 0%, rgba(0, 0, 0, .03) 100%);
     background-color: white !important;
     opacity: 1;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
     animation-name: chart_animate;
-    animation-duration: 2s;
+    animation-duration: 10s;
     animation-direction: alternate-reverse;
     animation-delay: 1s;
     animation-iteration-count: infinite;
     animation-fill-mode: forwards;
     background-size: 100% 20%;
-    background-position: 0 200% !important;
 }
 @keyframes chart_animate {
     100%{
@@ -60,6 +113,9 @@ htm,body{
 .label {
     font-size: 10px;
     fill: #333;
+}
+#cruveChart path {
+    filter: drop-shadow(0 0 4px lightgray);
 }
 .bar-group rect {
     transition: all 0.4s ease;
@@ -550,9 +606,8 @@ img.full-width-img {
 /* input range  */
 .dual-range-container {
     position: relative;
-    padding: 0 22px !important;
     width: 100%;
-    height: 65px;
+    height: 7px;
     outline: none;
     padding: 0;
     transition: background 450ms ease-in;
@@ -580,19 +635,22 @@ img.full-width-img {
 .dual-range::-webkit-slider-thumb {
     pointer-events: all; /* Reactivate thumb dragging*/
     width: 10px;
-    height: 35px;
+    height: 25px;
     background-image: linear-gradient(to right,rgb(23, 91, 238), #fff, rgb(23, 91, 238) 100%);
     border: 1px solid #666;
     border-radius: 5%;
     -webkit-appearance: none;
     cursor: ew-resize;
 }
-
+input#rangeLeftSlider {
+    border: 1px ridge #ccc;
+    border-radius: 3px;
+}
 /* Firefox: style the thumb */
 .dual-range::-moz-range-thumb {
     pointer-events: all;
     width: 10px;
-    height: 35px;
+    height: 25px;
     background-image: linear-gradient(to right,rgb(23, 91, 238), #fff, rgb(23, 91, 238) 100%);
     border-radius: 5%;
     border: 1px solid #666;
@@ -607,11 +665,11 @@ img.full-width-img {
   
 .range-track {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 0;
-    height: 65px;
+    height: 0px;
     width: 100%;
-    background: transparent;
+    /* background: transparent; */
     transform: translateY(-50%);
     z-index: 1;
 }
@@ -620,7 +678,7 @@ img.full-width-img {
     content: '';
     position: absolute;
     height: 100%;
-    background: transparent;
+    /* background: transparent; */
     left: 0;
     right: 0;
     z-index: 2;
@@ -629,13 +687,13 @@ img.full-width-img {
 .slider-wrapper-first {
     position: relative;
     width: 100%;
-    height: 68px;
+    /* height: 0; */
 }
 .slider-wrapper-second {
     position: relative;
     width: 100%;
-    height: 68px;
-    top: -106%;
+    /* height: 0;
+    top: -210%; */
 }
 .range-tooltip {
     position: absolute;
@@ -659,10 +717,6 @@ img.full-width-img {
 }
 .chart-svg-display{
     display: none !important;
-}
-.log-card {
-    background: white;
-    padding-bottom: 7px;
 }
 .card-header.staticrept {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -799,6 +853,8 @@ span.total-number {
     position: relative;
     /* width: 140px; 
     height: 140px;  for full circle*/
+    margin-left: 12px;
+    margin-top: 12px;
     width: 70px;
     height: 70px;
     border-top-left-radius: 120px;
@@ -879,6 +935,8 @@ span.total-number {
     position: relative;
     /* width: 140px; 
     height: 140px;  for full circle*/
+    margin-left: 12px;
+    margin-top: 12px;
     width: 70px;
     height: 70px;
     border-top-left-radius: 120px;
@@ -942,6 +1000,8 @@ span.total-number {
     position: relative;
     /* width: 140px; 
     height: 140px;  for full circle*/
+    margin-left: 12px;
+    margin-top: 12px;
     width: 70px;
     height: 70px;
     border-top-left-radius: 120px;
@@ -1005,6 +1065,8 @@ span.total-number {
     position: relative;
     /* width: 140px; 
     height: 140px;  for full circle*/
+    margin-left: 12px;
+    margin-top: 12px;
     width: 70px;
     height: 70px;
     border-top-left-radius: 120px;
@@ -1389,9 +1451,9 @@ a.page-link.btn_page {
     position: absolute;
     left: 0;
     top: 0;
-    width: 70px;
+    width: 95px;
     border-radius: 50%;
-    height: 70px;
+    height: 95px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
@@ -1411,7 +1473,7 @@ span.chart-svg-two {
     z-index: 999;
     box-sizing: border-box;
     position: absolute;
-    padding: 55px 160px;
+    padding: 85px 160px;
 }
 span.chart-svg-three{
     width: 100%;
@@ -1419,7 +1481,7 @@ span.chart-svg-three{
     z-index: 999;
     box-sizing: border-box;
     position: absolute;
-    padding: 40px 160px;
+    padding: 125px 160px;
 }
 .chart-body-skeletone::before{
     content: "";
@@ -1520,16 +1582,20 @@ span.chart-svg-three{
     opacity: 1;
 }
 .chart-card{
-    border: none;
+    background: white;
+    padding-bottom: 7px;
     box-shadow: 0px 1px 20px #0001, 0px 2px 6px rgba(0, 123, 255, 0.2);
-    /* box-shadow: 0px 1px 20px #0001, 0px 2px 6px #0001; */
-    opacity: 1;
+    border-radius: 5px;
+    border: none;
 }
 .chart-card:hover{
     /* --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35); */
     box-shadow: 0px 2px 20px rgba(rgba(0, 123, 255, 0.2), 0.35), 0px 2px 6px #0001;
     opacity: 1;
+}
+.border-style{
+    border: none;
 }
 .user-activities--week-chart{
     background:linear-gradient(180deg, rgba(230,230,230,.03) 0%, rgba(0,0,0,.03) 100%);

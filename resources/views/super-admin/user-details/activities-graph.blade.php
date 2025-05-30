@@ -2,10 +2,10 @@
 <!-- ==== User-Activities Analysis Graph ======= -->
 @if($user_log_data_table_permission == 1)
 <div class="container">
-    <div class="log-card">
+    <div class="chart-card">
         <div class="row mb-4">
             <div class="col-xl-12">
-                <div class="card card-body chart-card card-background">
+                <div class="card card-body border-style card-background">
                     <!-- Current Day Data -->
                     <div class="row">
                         <div class="col-xl-4">
@@ -69,13 +69,12 @@
         <div class="row">
             <div class="col-xl-6">
                 <!-- Weekly Data Chart -->
-                <div class="card card-body chart-card">
+                <div class="card card-body border-style">
                     <div class="card-header mini-bar-header ps-2" style="text-align:center;">
                         <span class="card-head-title head-skeletone">
                             <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
                             Current Users Log Activities Line Chart ( Per Week )
                         </span>
-                        <div class="loader_chart loader_skeleton" id="loader_userChart"></div>
                     </div>
                     <div class="user-activities--week-chart">
                         <canvas id="userDayLogChart" height="106"></canvas>
@@ -84,13 +83,12 @@
             </div>
             <div class="col-xl-6">
                 <!-- Monthly Data Chart -->
-                <div class="card card-body chart-card">
+                <div class="card card-body border-style">
                     <div class="card-header mini-bar-header ps-2" style="text-align:center;">
                         <span class="card-head-title head-skeletone">
                             <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
                             Current Users Log Activities Bar Chart ( Per Month )
                         </span>
-                        <div class="loader_chart loader_skeleton" id="loader_userLogChart"></div>
                     </div>
                     <div class="user-activities--month-chart">
                         <canvas id="userMonthLogChart" height="106"></canvas>
@@ -99,142 +97,147 @@
             </div>
         </div>
     </div>
-</div>
-<div class="container">
-    <div class="row mt-2 mb-3">
-        <div class="col-xl-12">
-            <div class="card card-body chart-card">
-                <div class="card-header mini-bar-header ps-2" style="text-align:center;">
-                    <div class="row">
-                        <div class="col-xl-8">
-                            <span class="card-head-title head-skeletone">
-                                <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
-                                Users Log Activities Line Chart
-                            </span>
-                            <div class="loader_chart loader_skeleton" id="loader_userAllLogChart"></div>
-                        </div>
-                        <div class="col-xl-4 group_box">
-                            <span class="input-group">
-                                <label class="date-label" for="from">Form : </label>
-                                <input class="form-control form-control-sm input-date" type="text" name="start_date" Placeholder="DD-MM-YYYY" id="chartStartDate" autocomplete="off">
-                            </span>
-                            <span class="input-group">
-                                <label class="date-label" for="from">To : </label>
-                                <input class="form-control form-control-sm input-date" type="text" name="end_date" Placeholder="DD-MM-YYYY" id="chartEndDate" autocomplete="off">
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Total all data chart -->
-                <div class="user-activities--month-chart">
-                    <div class="chart-scrollbar-responsive">
-                        <canvas id="userAllLogChart" height="80"></canvas>
-                        <canvas id="allUserDateLogChart" height="36"></canvas>
-                    </div>
-                    <div class="dual-range-container mt-2" id="dateRange">
-                        <div class="slider-wrapper-first">
-                            <span id="leftTooltip" class="range-tooltip">0%</span>
-                            <input type="range" id="rangeLeftSlider" min="0" max="365" value="0" class="dual-range">
-                        </div>
-                        <div class="slider-wrapper-second">
-                            <span id="rightTooltip" class="range-tooltip">0%</span>
-                            <input type="range" id="rangeRightSlider" min="0" max="365" value="365" class="dual-range">
-                        </div>
-                        <div class="range-track">
-                            <img class="full-width-img" src="/image/LineChart3.PNG" alt="Chart" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-xl-12 head-init">
-                        <span class="head-skeletone">
-                            <i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i> 
-                            Branch User Log Data Information
-                        </span>
-                    </div>
-                    <div class="branch-card-skeletone">
-                        <div class="row font-gray-700 data-head">
-                            <div class="col-xl-3"><span>Branch</span></div>
-                            <div class="col-xl-3"><span class="me-5">Role</span></div>
-                            <div class="col-xl-6" style="text-align:center;"><span>Bar Chart</span></div>
-                        </div>
-                        <div class="row font-gray-700">
-                            <div class="col-xl-3">
-                                <ul class="pt-1 mt-3" id="branchLabel">
-                                    <li>ID : </li>
-                                    <li>Category : </li>
-                                    <li>Name : </li>
-                                </ul>
+    <div class="chart-card">
+        <div class="row mt-2 mb-3">
+            <div class="col-xl-12">
+                <div class="card card-body border-style">
+                    <div class="card-header mini-bar-header ps-2" style="text-align:center;">
+                        <div class="row">
+                            <div class="col-xl-8">
+                                <span class="card-head-title head-skeletone">
+                                    <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
+                                    Users Log Activities Line Chart
+                                </span>
                             </div>
-                            <div class="col-xl-3">
-                                <ul class="pt-1 mt-3" id="roleLabel">
-                                        <li class="ps-2" style="display:flex;justify-content:space-between;">
-                                            <span class="user-amount badge rounded-pill bg-light-blueviolet mb-1" style="color:#000;font-size:11px;font-weight:800;background-color: #6ba7ff;">
-                                                .00
-                                            </span>
+                            <div class="col-xl-4 group_box">
+                                <span class="input-group">
+                                    <label class="date-label" for="from">Form : </label>
+                                    <input class="form-control form-control-sm input-date" type="text" name="start_date" Placeholder="DD-MM-YYYY" id="chartStartDate" autocomplete="off">
+                                </span>
+                                <span class="input-group">
+                                    <label class="date-label" for="from">To : </label>
+                                    <input class="form-control form-control-sm input-date" type="text" name="end_date" Placeholder="DD-MM-YYYY" id="chartEndDate" autocomplete="off">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Total all data chart -->
+                    <div class="user-activities--month-chart">
+                        <div class="chart-scrollbar-responsive">
+                            <canvas id="userAllLogChart" height="80"></canvas>
+                            <canvas id="allUserDateLogChart" height="36"></canvas>
+                        </div>
+                        <div class="dual-range-container mt-2" id="dateRange">
+                            <div class="slider-wrapper-first">
+                                <span id="leftTooltip" class="range-tooltip">0%</span>
+                                <input type="range" id="rangeLeftSlider" min="0" max="365" value="0" class="dual-range">
+                            </div>
+                            <div class="slider-wrapper-second">
+                                <span id="rightTooltip" class="range-tooltip">0%</span>
+                                <input type="range" id="rangeRightSlider" min="0" max="365" value="365" class="dual-range">
+                            </div>
+                            <div class="range-track">
+                                <svg id="cruveChart" viewBox="0 0 800 50" fill="rgba(0,123,255,0.2)" style="border: none;
+                                    background: #f9f9f9;
+                                    overflow: hidden;path {
+                                    fill: none;
+                                    stroke-width: 2.5;display: block;margin: none;">
+                                    <rect x="0" y="0" width="800" height="50" fill="white" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5 pt-5">
+                        <div class="col-xl-12 head-init">
+                            <span class="head-skeletone">
+                                <i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i> 
+                                Branch User Log Data Information
+                            </span>
+                        </div>
+                        <div class="branch-card-skeletone">
+                            <div class="row font-gray-700 data-head">
+                                <div class="col-xl-3"><span>Branch</span></div>
+                                <div class="col-xl-3"><span class="me-5">Role</span></div>
+                                <div class="col-xl-6" style="text-align:center;"><span>Bar Chart</span></div>
+                            </div>
+                            <div class="row font-gray-700">
+                                <div class="col-xl-3">
+                                    <ul class="pt-1 mt-3" id="branchLabel">
+                                        <li>ID : </li>
+                                        <li>Category : </li>
+                                        <li>Name : </li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3">
+                                    <ul class="pt-1 mt-3" id="roleLabel">
+                                            <li class="ps-2" style="display:flex;justify-content:space-between;">
+                                                <span class="user-amount badge rounded-pill bg-light-blueviolet mb-1" style="color:#000;font-size:11px;font-weight:800;background-color: #6ba7ff;">
+                                                    .00
+                                                </span>
+                                            </li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-6">
+                                    <ul class="pt-1 mt-1" id="branchChart">
+                                        <li>
+                                            <div  style="width: 100% !important; height: 150px;">
+                                                <canvas id="branchInfoChart_" height="80"></canvas>
+                                            </div>
                                         </li>
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="col-xl-6">
-                                <ul class="pt-1 mt-1" id="branchChart">
-                                    <li>
-                                        <div  style="width: 100% !important; height: 150px;">
-                                            <canvas id="branchInfoChart_" height="80"></canvas>
+                            <div class="row font-gray-700 data-head">
+                                <div class="col-xl-12" style="text-align:center;"><span><i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i>  Branch Log Data (Bar Chart)</span></div>
+                            </div>
+                            <div class="row font-gray-700">
+                                <div class="user-branch-log-data-summary">
+                                    <div class="row">
+                                        <div class="data-table-response">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr class="table-light">
+                                                        <th scope="col" class="text-position tex-size">ID</th>
+                                                        <th scope="col" class="tex-size">Email</th>
+                                                        <th scope="col" class="tex-size">Role</th>
+                                                        <th scope="col" class="tex-size">Current-Login</th>
+                                                        <th scope="col" class="tex-size">Total-Login</th>
+                                                        <th scope="col" class="tex-size">Total-Logout</th>
+                                                        <th scope="col" class="tex-size">Total-Activity</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-light bg-transparent" id="dataLogTable">
+                                                    <tr class="table-light">
+                                                        <td class="td-cell text-position">1</td>
+                                                        <td class="td-cell">superadmingstmedicinecenter4215@gmail.com</td>
+                                                        <td class="td-cell">Super Admin</td>
+                                                        <td class="td-cell ps-1">1.00</td>
+                                                        <td class="td-cell ps-1">84.00</td>
+                                                        <td class="td-cell ps-1">83.00</td>
+                                                        <td class="td-cell ps-1">84.00</td>
+                                                    </tr>
+                                                    <tr class="table-light">
+                                                        <td class="td-cell text-position">2</td>
+                                                        <td class="td-cell">admingstmedicinecenter4215@gmail.com</td>
+                                                        <td class="td-cell">Admin</td>
+                                                        <td class="td-cell ps-1">0.00</td>
+                                                        <td class="td-cell ps-1">6.00</td>
+                                                        <td class="td-cell ps-1">6.00</td>
+                                                        <td class="td-cell ps-1">6.00</td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr class="table-light">
+                                                        <th scope="col" class="tex-size"></th>
+                                                        <th colspan="2" scope="col" class="tex-size">Total Count</th>
+                                                        <th scope="col" class="tex-size ps-1">1.00</th>
+                                                        <th scope="col" class="tex-size ps-1">90.00</th>
+                                                        <th scope="col" class="tex-size ps-1">89.00</th>
+                                                        <th scope="col" class="tex-size ps-1">90.00</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
                                         </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row font-gray-700 data-head">
-                            <div class="col-xl-12" style="text-align:center;"><span><i class="fa-solid fa-layer-group" style="color:#2e42cb;"></i>  Branch Log Data (Bar Chart)</span></div>
-                        </div>
-                        <div class="row font-gray-700">
-                            <div class="user-branch-log-data-summary">
-                                <div class="row">
-                                    <div class="data-table-response">
-                                        <table class="table">
-                                            <thead>
-                                                <tr class="table-light">
-                                                    <th scope="col" class="text-position tex-size">ID</th>
-                                                    <th scope="col" class="tex-size">Email</th>
-                                                    <th scope="col" class="tex-size">Role</th>
-                                                    <th scope="col" class="tex-size">Current-Login</th>
-                                                    <th scope="col" class="tex-size">Total-Login</th>
-                                                    <th scope="col" class="tex-size">Total-Logout</th>
-                                                    <th scope="col" class="tex-size">Total-Activity</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="table-light bg-transparent" id="dataLogTable">
-                                                <tr class="table-light">
-                                                    <td class="td-cell text-position">1</td>
-                                                    <td class="td-cell">superadmingstmedicinecenter4215@gmail.com</td>
-                                                    <td class="td-cell">Super Admin</td>
-                                                    <td class="td-cell ps-1">1.00</td>
-                                                    <td class="td-cell ps-1">84.00</td>
-                                                    <td class="td-cell ps-1">83.00</td>
-                                                    <td class="td-cell ps-1">84.00</td>
-                                                </tr>
-                                                <tr class="table-light">
-                                                    <td class="td-cell text-position">2</td>
-                                                    <td class="td-cell">admingstmedicinecenter4215@gmail.com</td>
-                                                    <td class="td-cell">Admin</td>
-                                                    <td class="td-cell ps-1">0.00</td>
-                                                    <td class="td-cell ps-1">6.00</td>
-                                                    <td class="td-cell ps-1">6.00</td>
-                                                    <td class="td-cell ps-1">6.00</td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr class="table-light">
-                                                    <th scope="col" class="tex-size"></th>
-                                                    <th colspan="2" scope="col" class="tex-size">Total Count</th>
-                                                    <th scope="col" class="tex-size ps-1">1.00</th>
-                                                    <th scope="col" class="tex-size ps-1">90.00</th>
-                                                    <th scope="col" class="tex-size ps-1">89.00</th>
-                                                    <th scope="col" class="tex-size ps-1">90.00</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -1075,13 +1078,13 @@
 
             // Left slider shows gradient to the right of the thumb
             sliderLeft.style.background = `linear-gradient(to right, 
-                white ${leftPercent}%, 
+                transparent ${leftPercent}%, 
                 rgba(0, 123, 255, 0.1) ${leftPercent}%)`;
 
             // Right slider shows gradient to the left of the thumb
             sliderRight.style.background = `linear-gradient(to right, 
                 rgba(0, 123, 255, 0.1) ${rightPercent}%, 
-                white ${rightPercent}%)`;
+                transparent ${rightPercent}%)`;
 
             const leftTooltip = document.getElementById('leftTooltip');
             const rightTooltip = document.getElementById('rightTooltip');
@@ -1141,6 +1144,12 @@
         sliderRight.value = new Date().getDayOfYear();
         updateDateInputs();
     });
+</script>
+<!-- Date Range Scroll chart module-min-js -->
+<script type="module">
+    import { initializeCurveLineChart } from "/module/module-min-js/design-helper-function-min.js";
+    const dateRangeId = "cruveChart";
+    initializeCurveLineChart(dateRangeId);
 </script>
 <!-- Demo bar chart -->
 <!-- <script>
