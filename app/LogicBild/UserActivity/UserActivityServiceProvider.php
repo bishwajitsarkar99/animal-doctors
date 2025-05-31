@@ -196,7 +196,7 @@ class UserActivityServiceProvider
             'authentic_users_percentage' => $authentic_users_percentage,
             'inactive_users' => $inactive_users,
             'inactive_users_percentage' => $inactive_users_percentage,
-            'activity_users' => $activity_users,
+            'activity_users' => $intime_or_outtime_activity_users,
             'activity_users_percentage' => $activity_users_percentage,
         ];
     }
@@ -321,12 +321,23 @@ class UserActivityServiceProvider
                 $currentLogins[] = $currentLoginMap[$branchId][$role] ?? 0;
             }
 
+            // Total values
+            $totalLogin = array_sum($loginCounts);
+            $totalLogout = array_sum($logoutCounts);
+            $totalActivity = array_sum($activityCounts);
+            $totalCurrentLogin = array_sum($currentLogins);
+
             $formattedBranchStats[$branchId] = [
                 'roles' => $roles,
                 'login_counts' => $loginCounts,
                 'logout_counts' => $logoutCounts,
                 'activity_counts' => $activityCounts,
-                'current_login_counts' => $currentLogins
+                'current_login_counts' => $currentLogins,
+                // Totals
+                'total_login' => $totalLogin,
+                'total_logout' => $totalLogout,
+                'total_activity' => $totalActivity,
+                'total_current_login' => $totalCurrentLogin,
             ];
         } 
 

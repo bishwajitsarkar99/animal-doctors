@@ -188,8 +188,26 @@
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="card card-body border-style">
+                                    @php
+                                        $stats = $formattedBranchStats[$branchId] ?? null;
+                                    @endphp
+
+                                    @if ($stats)
+                                        <div class="marque-area">
+                                            <span class="--parent-class-scrol-plate">
+                                                <span class="me-3"><div id="marbel"></div></span>
+                                                <span class="--child-class-scrol-plate">Total Activity: {{ $stats['total_activity'] }}.00</span>
+                                                <span class="right-arrow"><img class="svg-image" src="{{asset('/icon-svg/right-arrow.svg')}}" alt="right-arrow"></span>
+                                                <span class="--child-class-scrol-plate">Login: {{ $stats['total_login'] }}.00</span>
+                                                <span class="right-arrow"><img class="svg-image" src="{{asset('/icon-svg/right-arrow.svg')}}" alt="right-arrow"></span>
+                                                <span class="--child-class-scrol-plate">Logout: {{ $stats['total_logout'] }}.00</span>
+                                                <span class="right-arrow"><img class="svg-image" src="{{asset('/icon-svg/right-arrow.svg')}}" alt="right-arrow"></span>
+                                                <span class="--child-class-scrol-plate">Current-Login: {{ $stats['total_current_login'] }}.00</span>
+                                            </span>
+                                        </div>
+                                    @endif
                                     <div class="bar-chart">
-                                        <div class="--chartanimation" style="width: 100% !important; height: 150px;">
+                                        <div class="--chartanimation" style="width: 100% !important; height: 90px;">
                                             <svg id="chart_{{ $branchId }}" width="100%" height="120" fill="none" viewBox="0 0 1000 120"style="border: none;overflow: hidden;path {fill: none;stroke-width: 2;}">
                                             <path class="line-0" />
                                             <path class="line-1" />

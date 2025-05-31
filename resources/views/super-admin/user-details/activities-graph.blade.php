@@ -145,7 +145,7 @@
                         inputFirstId="chartStartDate" 
                         inputSecondId="chartEndDate" 
                     />
-                    <!-- <div class="card-header max-card-header">
+                    <div class="card-header max-card-header">
                         <div class="row">
                             <div class="col-xl-8">
                                 <span class="card-head-title head-skeletone">
@@ -164,7 +164,7 @@
                                 </span>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="card card-body border-style">
                         <!-- Total all data chart -->
                         <div class="user-activities--month-chart mb-5">
