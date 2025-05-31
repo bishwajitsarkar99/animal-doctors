@@ -178,7 +178,7 @@
                             <div class="col-xl-6">
                                 <ul class="pt-1 mt-1" id="branchChart">
                                     <li>
-                                        <div  style="width: 100% !important; height: 150px;">
+                                        <div class="card card-body border-style"  style="width: 100% !important; height: 150px;">
                                             <canvas id="branchInfoChart_{{ $branchId }}" height="80"></canvas>
                                         </div>
                                     </li>
@@ -187,13 +187,17 @@
                         </div>
                         <div class="row">
                             <div class="col-xl-12">
-                                <div class="--chartanimation" style="width: 100% !important; height: 150px;">
-                                    <svg id="chart_{{ $branchId }}" width="100%" height="120" fill="none" viewBox="0 0 1000 120"style="border: none;overflow: hidden;path {fill: none;stroke-width: 2;}">
-                                    <path class="line-0" />
-                                    <path class="line-1" />
-                                    <path class="line-2" />
-                                    <path class="line-3" />
-                                    </svg>
+                                <div class="card card-body border-style">
+                                    <div class="bar-chart">
+                                        <div class="--chartanimation" style="width: 100% !important; height: 150px;">
+                                            <svg id="chart_{{ $branchId }}" width="100%" height="120" fill="none" viewBox="0 0 1000 120"style="border: none;overflow: hidden;path {fill: none;stroke-width: 2;}">
+                                            <path class="line-0" />
+                                            <path class="line-1" />
+                                            <path class="line-2" />
+                                            <path class="line-3" />
+                                            </svg>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

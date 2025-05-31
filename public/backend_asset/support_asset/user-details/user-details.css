@@ -533,6 +533,9 @@ img#loaderShow {
     border-bottom: 1px dotted lightgray;
     padding: 8px 10px;
 }
+.bar-chart {
+    margin: 0 15px;
+}
 .dotted{
     border-top: 1px dotted lightgray;
 }

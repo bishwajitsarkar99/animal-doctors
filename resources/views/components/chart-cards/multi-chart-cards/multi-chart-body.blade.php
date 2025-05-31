@@ -1,0 +1,1 @@
+<div class="card card-body border-style">{{$solt}}</div>
