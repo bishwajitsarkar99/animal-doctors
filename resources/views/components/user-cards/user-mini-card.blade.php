@@ -1,5 +1,5 @@
-@props(['title', 'count', 'percentage', 'cardClass'=> '', 'iconColor'=> '', 'loaderClass'=> '', 'numberCountAnimationKey'=> '', 'numberCountAnimation'=> '', 'progrssBarAnimationQuerySelector'=> '', 'progressColor'=> ''])
-<div class="card card-body {{ $cardClass }}">
+@props(['title', 'count', 'percentage', 'cardClass'=> '', 'iconColor'=> '', 'loaderClass'=> '', 'numberCountAnimationKey'=> '', 'numberCountAnimation'=> '', 'progrssBarAnimationQuerySelector'=> '', 'progressColor'=> '', 'cardId'=> '', 'drag'=> ''])
+<div class="card card-body group-card {{ $cardClass }}" draggable="{{ $drag }}" id="{{ $cardId }}">
     <div class="card card-head-title mini-card-title align-items-center justify-content-center">
         <span class="align-items-left justify-content-left head-skeletone">
             <i class="fa-solid fa-layer-group" style="color:{{ $iconColor }};"></i>

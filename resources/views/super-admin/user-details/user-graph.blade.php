@@ -1,17 +1,17 @@
 @if($user_log_data_table_permission == 1)
 <!-- ==== User-Details-Graph ======= -->
-<div class="row">
+<div class="row drag-row">
     <?php
         $titles = [
-            'total_users' => ['label' => 'Total-Users', 'bg' => 'card-light-bg', 'icolor' => '#0A5EDB', 'loader' => 'total-user-cricle-bar', 'progressbg' => '#0A5EDB', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-            'authentic_users' => ['label' => 'Authentic Users', 'bg' => 'card-light-bg', 'icolor' => '#198754', 'loader' => 'authentic-cricle-bar', 'progressbg' => 'bg-success', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-            'inactive_users' => ['label' => 'Inactive Users', 'bg' => 'card-light-bg', 'icolor' => '#dc3545', 'loader' => 'inactive-cricle-bar', 'progressbg' => 'bg-danger', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-            'activity_users' => ['label' => 'Log Activity Count', 'bg' => 'card-light-bg', 'icolor' => '#6f42c1', 'loader' => 'activity-cricle-bar', 'progressbg' => 'bg-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+            'total_users' => ['label' => 'Total-Users', 'bg' => 'card-light-bg', 'icolor' => '#0A5EDB', 'loader' => 'total-user-cricle-bar', 'progressbg' => '#0A5EDB', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar', 'dragId' => 'card-1', 'dragged' => 'true', 'columnId' => 'column-1'],
+            'authentic_users' => ['label' => 'Authentic Users', 'bg' => 'card-light-bg', 'icolor' => '#198754', 'loader' => 'authentic-cricle-bar', 'progressbg' => 'bg-success', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar', 'dragId' => 'card-2', 'dragged' => 'true', 'columnId' => 'column-2'],
+            'inactive_users' => ['label' => 'Inactive Users', 'bg' => 'card-light-bg', 'icolor' => '#dc3545', 'loader' => 'inactive-cricle-bar', 'progressbg' => 'bg-danger', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar', 'dragId' => 'card-3', 'dragged' => 'true', 'columnId' => 'column-3'],
+            'activity_users' => ['label' => 'Log Activity Count', 'bg' => 'card-light-bg', 'icolor' => '#6f42c1', 'loader' => 'activity-cricle-bar', 'progressbg' => 'bg-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar', 'dragId' => 'card-4', 'dragged' => 'true', 'columnId' => 'column-4'],
         ]; 
     ?>
     @foreach($titles as $key => $data)
-        <div class="col-xl-3">
-            <x-user-cards.user-mini-card 
+        <div class="col-xl-3 drag-column" id="{{ $data['columnId'] }}">
+            <x-user-cards.user-mini-card drag="{{ $data['dragged'] }}" cardId="{{ $data['dragId'] }}"
                 title="{{ $data['label'] }}" 
                 count="{{ $miniCardData[$key] }}"
                 percentage="{{ $miniCardData[$key . '_percentage'] }}"
@@ -195,14 +195,10 @@
                                     @if ($stats)
                                         <div class="marque-area">
                                             <span class="--parent-class-scrol-plate">
-                                                <span class="me-3"><div id="marbel"></div></span>
                                                 <span class="--child-class-scrol-plate">Total Activity: {{ $stats['total_activity'] }}.00</span>
-                                                <span class="right-arrow"><img class="svg-image" src="{{asset('/icon-svg/right-arrow.svg')}}" alt="right-arrow"></span>
-                                                <span class="--child-class-scrol-plate">Login: {{ $stats['total_login'] }}.00</span>
-                                                <span class="right-arrow"><img class="svg-image" src="{{asset('/icon-svg/right-arrow.svg')}}" alt="right-arrow"></span>
-                                                <span class="--child-class-scrol-plate">Logout: {{ $stats['total_logout'] }}.00</span>
-                                                <span class="right-arrow"><img class="svg-image" src="{{asset('/icon-svg/right-arrow.svg')}}" alt="right-arrow"></span>
-                                                <span class="--child-class-scrol-plate">Current-Login: {{ $stats['total_current_login'] }}.00</span>
+                                                <span class="--child-class-scrol-plate">&#x237D;Total Login: {{ $stats['total_login'] }}.00</span>
+                                                <span class="--child-class-scrol-plate">&#x237D;Total Logout: {{ $stats['total_logout'] }}.00</span>
+                                                <span class="--child-class-scrol-plate">&#x237D;Total Current-Login: {{ $stats['total_current_login'] }}.00</span>
                                             </span>
                                         </div>
                                     @endif
@@ -650,6 +646,145 @@
     });
 
     initializeBarCharts();
+</script>
+<!-- <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.group-card');
+  const columns = document.querySelectorAll('.drag-column');
+
+  let draggedCard = null;
+
+  cards.forEach(card => {
+    card.addEventListener('dragstart', (e) => {
+      draggedCard = card;
+      setTimeout(() => {
+        card.style.display = 'none';
+      }, 0);
+    });
+
+    card.addEventListener('dragend', () => {
+      draggedCard.style.display = 'block';
+      draggedCard = null;
+    });
+  });
+
+  columns.forEach(column => {
+    column.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    column.addEventListener('dragenter', (e) => {
+      e.preventDefault();
+      column.style.backgroundColor = '#fff';
+    });
+
+    column.addEventListener('dragleave', () => {
+      column.style.backgroundColor = '#fff';
+    });
+
+    // this use for column
+    // column.addEventListener('drop', () => {
+    //   if (draggedCard) {
+    //     column.appendChild(draggedCard);
+    //   }
+    //   column.style.backgroundColor = '#fff';
+    // });
+
+    // this use for row
+    column.addEventListener('drop', (e) => {
+        e.preventDefault();
+        column.style.backgroundColor = '#fff';
+
+        if (!draggedCard) return;
+
+        const targetCard = column.querySelector('.group-card');
+
+        if (targetCard && draggedCard !== targetCard) {
+            // Swap the two cards
+            const fromColumn = draggedCard.parentElement;
+            column.replaceChild(draggedCard, targetCard);
+            fromColumn.appendChild(targetCard);
+        }
+    });
+  });
+});
+</script> -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const dragRow = document.querySelector('.drag-row');
+  const columns = Array.from(document.querySelectorAll('.drag-column'));
+  let draggedCard = null;
+
+  function saveCardOrder() {
+    const order = columns.map(column => {
+      const card = column.querySelector('.group-card');
+      return card ? card.id : null;
+    });
+    localStorage.setItem('cardOrder', JSON.stringify(order));
+  }
+
+  function loadCardOrder() {
+    const savedOrder = JSON.parse(localStorage.getItem('cardOrder') || '[]');
+    if (savedOrder.length) {
+      savedOrder.forEach((cardId, index) => {
+        const card = document.getElementById(cardId);
+        if (card && columns[index]) {
+          columns[index].appendChild(card);
+        }
+      });
+    }
+  }
+
+  // Load saved order on page load
+  loadCardOrder();
+
+  // Enable drag events
+  const cards = document.querySelectorAll('.group-card');
+
+  cards.forEach(card => {
+    card.addEventListener('dragstart', () => {
+      draggedCard = card;
+      setTimeout(() => {
+        card.style.display = 'none';
+      }, 0);
+    });
+
+    card.addEventListener('dragend', () => {
+      draggedCard.style.display = 'block';
+      draggedCard = null;
+    });
+  });
+
+  columns.forEach(column => {
+    column.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    column.addEventListener('dragenter', (e) => {
+      e.preventDefault();
+      column.style.backgroundColor = '#fff';
+    });
+
+    column.addEventListener('dragleave', () => {
+      column.style.backgroundColor = '#fff';
+    });
+
+    column.addEventListener('drop', () => {
+      if (!draggedCard) return;
+
+      const targetCard = column.querySelector('.group-card');
+      const fromColumn = draggedCard.parentElement;
+
+      if (targetCard && targetCard !== draggedCard) {
+        column.replaceChild(draggedCard, targetCard);
+        fromColumn.appendChild(targetCard);
+      }
+
+      column.style.backgroundColor = '#fff';
+      saveCardOrder(); // Save after each drop
+    });
+  });
+});
 </script>
 <!-- demo line chart -->
 <!-- <script>

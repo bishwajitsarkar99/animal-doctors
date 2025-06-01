@@ -6,7 +6,7 @@
             $("#showCard").attr('hidden', true);
             $("#loaderShow").removeClass('loader-show');
             setTimeout(() => {
-                $("#showCard").removeAttr('hidden');
+                $("#showCard").removeAttr('hidden').fadeIn('slow');
                 $("#loaderShow").addClass('loader-show');
             }, 800);
     
@@ -17,7 +17,7 @@
             $("#userDetails").attr('hidden', true);
             $("#loaderShow").removeClass('loader-show');
             setTimeout(() => {
-                $("#userDetails").removeAttr('hidden');
+                $("#userDetails").removeAttr('hidden').fadeIn('slow');
                 $("#loaderShow").addClass('loader-show');
             }, 800);
     
@@ -28,10 +28,13 @@
     
             $("#userActivity").attr('hidden', true);
             $("#loaderShow").removeClass('loader-show');
-            setTimeout(() => {
-                $("#userActivity").removeAttr('hidden');
-                $("#loaderShow").addClass('loader-show');
-            }, 800);
+
+            requestAnimationFrame(()=>{
+                setTimeout(() => {
+                    $("#userActivity").removeAttr('hidden').fadeIn('slow');
+                    $("#loaderShow").addClass('loader-show');
+                }, 800);
+            });
             
         }); 
     });

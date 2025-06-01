@@ -32,6 +32,12 @@ htm,body{
     margin: 0;
 }
 .--parent-class-scrol-plate {
+    --card-name-100-transform:translateX(0px);
+    --card-name-0-transition: all 0.5s;
+    --card-name-50-letter-spacing: 0.5px;
+    --card-name-common-transition: all 0.6s;
+    --card-name-50-transform: translateY(0px);
+    --card-name-100-letter-spacing: 1px;
     font-family: var(--nav-font-family);
     font-size: 12px;
     font-weight: 700;
@@ -40,19 +46,46 @@ htm,body{
     white-space: nowrap;
     display: inline-block;
     position: relative;
-    animation-name: var(--animation-origin);
+    /* animation-name: var(--animation-origin);
     animation-duration: 30s;
     animation-timing-function: linear;
-    animation-iteration-count: infinite;
+    animation-iteration-count: infinite alternate; */
+    animation: textDesign 5s linear infinite alternate;
+    transform: translateY(0px);
 }
 @keyframes move{
     from{
         transform: var(--animation-translate-from);
         transition: 1ms;
+        display: block;
     }
     to{
         transform: var(--animation-translate-to);
         transition: 1ms;
+        display: none;
+    }
+}
+@keyframes textDesign {
+    0% {
+        color: #222;
+        transition: all .5s;
+        transition: var(--card-name-0-transition);
+    }
+    50% {
+        color: #222;
+        letter-spacing: .5px;
+        letter-spacing: var(--card-name-50-letter-spacing);
+        transform: var(--card-name-50-transform);
+        transition: all .6s;
+        transition: var(--card-name-common-transition);
+    }
+    100% {
+        color: #222;
+        letter-spacing: 1px;
+        letter-spacing: var(--card-name-100-letter-spacing);
+        transform: var(--card-name-100-transform);
+        transition: all .6s;
+        transition: var(--card-name-common-transition);
     }
 }
 .svg-image{
@@ -68,6 +101,7 @@ htm,body{
     border-radius: 30px;
     line-height: 1.2;
     position: relative;
+    text-align: center;
 }
 .marque-area-skeletone{
     position: relative;
@@ -107,6 +141,31 @@ htm,body{
     border-radius: 50%;
     background-color: #629b627d;
     margin-top: 1px;
+}
+.group-card {
+  cursor: move;
+  user-select: none;
+  /*transition: transform 0.2s ease;*/
+}
+.columns-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+.drag-column {
+  flex: 1;
+  min-width: 200px;
+  transition: 0.3s;
+}
+.drag-row {
+  display: flex;
+  flex-direction: row;
+  /* gap: 1rem; */   /* optional spacing between columns */
+}
+.drag-clone {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  background-color: white !important;
+  z-index: 9999;
 }
 .ring-container {
   position: relative;
