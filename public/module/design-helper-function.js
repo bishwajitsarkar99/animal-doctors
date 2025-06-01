@@ -834,3 +834,124 @@ export function initializeCommonBarCharts(chartId){
     drawBars();
     animate();
 }
+// Drag and Drop Card move
+export function initializeDrag(dragColumn, cardBg, cardId){
+    let draggedCard = null;
+    let originalColumn = null;
+    const columns = Array.from(document.querySelectorAll(dragColumn));
+
+    function handleDragStart(e, card) {
+        draggedCard = card;
+        originalColumn = card.closest(dragColumn);
+
+        const rect = card.getBoundingClientRect();
+        card.classList.add(cardBg);
+        card.style.position = 'fixed';
+        card.style.zIndex = '1000';
+        card.style.width = `${rect.width}px`;
+        card.style.height = `${rect.height}px`;
+        card.style.cursor = 'move';
+        card.style.left = `${rect.left}px`;
+        card.style.top = `${rect.top}px`;
+
+        document.body.appendChild(card);
+
+        const offsetX = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+        const offsetY = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+
+        function moveCard(ev) {
+            const pageX = ev.touches ? ev.touches[0].pageX : ev.pageX;
+            const pageY = ev.touches ? ev.touches[0].pageY : ev.pageY;
+            card.style.left = `${pageX - offsetX}px`;
+            card.style.top = `${pageY - offsetY}px`;
+        }
+
+        function dropCard(ev) {
+            document.removeEventListener('mousemove', moveCard);
+            document.removeEventListener('mouseup', dropCard);
+            document.removeEventListener('touchmove', moveCard);
+            document.removeEventListener('touchend', dropCard);
+
+            const dropTargetColumn = columns.find(col => {
+                const rect = col.getBoundingClientRect();
+                const x = ev.touches ? ev.touches[0].clientX : ev.clientX;
+                const y = ev.touches ? ev.touches[0].clientY : ev.clientY;
+                return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+            });
+
+            if (dropTargetColumn && dropTargetColumn !== originalColumn) {
+                const targetCard = dropTargetColumn.querySelector(cardId);
+
+                if (targetCard) {
+                    // Swap cards
+                    originalColumn.appendChild(targetCard);
+                }
+
+                dropTargetColumn.innerHTML = ''; // Clean up
+                dropTargetColumn.appendChild(card);
+            } else {
+                // Return to original place if not dropped in valid column
+                originalColumn.appendChild(card);
+            }
+
+            // Reset styles
+            card.style.position = '';
+            card.style.left = '';
+            card.style.top = '';
+            card.style.zIndex = '';
+            card.style.width = '';
+            card.style.height = '';
+            card.style.cursor = '';
+            card.classList.add(cardBg);
+
+            saveCardOrder();
+        }
+
+        if (e.type === 'mousedown') {
+            document.addEventListener('mousemove', moveCard);
+            document.addEventListener('mouseup', dropCard, { once: true });
+        } else if (e.type === 'touchstart') {
+            document.addEventListener('touchmove', moveCard, { passive: false });
+            document.addEventListener('touchend', dropCard, { once: true });
+        }
+    }
+
+    function addCardListeners(card) {
+        card.addEventListener('mousedown', (e) => handleDragStart(e, card));
+        card.addEventListener('touchstart', (e) => handleDragStart(e, card));
+        card.ondragstart = () => false;
+    }
+
+    function saveCardOrder() {
+        const order = columns.map(col => {
+            const card = col.querySelector(cardId);
+            return card ? card.id : null;
+        });
+        localStorage.setItem('cardOrder', JSON.stringify(order));
+    }
+
+    function loadCardOrder() {
+        const savedOrder = JSON.parse(localStorage.getItem('cardOrder') || '[]');
+        if (!savedOrder.length) return;
+
+        // Get all cards first
+        const allCards = Array.from(document.querySelectorAll(cardId));
+        const cardMap = {};
+        allCards.forEach(card => {
+            cardMap[card.id] = card;
+        });
+
+        savedOrder.forEach((cardId, index) => {
+            const card = document.getElementById(cardId);
+            const col = columns[index];
+            if (card && col) {
+                //col.innerHTML = '';
+                col.appendChild(card);
+            }
+        });
+    }
+
+    // Init
+    loadCardOrder();
+    document.querySelectorAll(cardId).forEach(addCardListeners);
+}

@@ -196,7 +196,7 @@ class UserActivityServiceProvider
             'authentic_users_percentage' => $authentic_users_percentage,
             'inactive_users' => $inactive_users,
             'inactive_users_percentage' => $inactive_users_percentage,
-            'activity_users' => $intime_or_outtime_activity_users,
+            'activity_users' => $activity_users,
             'activity_users_percentage' => $activity_users_percentage,
         ];
     }

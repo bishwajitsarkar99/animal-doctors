@@ -162,11 +162,7 @@ htm,body{
   flex-direction: row;
   /* gap: 1rem; */   /* optional spacing between columns */
 }
-.drag-clone {
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  background-color: white !important;
-  z-index: 9999;
-}
+ 
 .ring-container {
   position: relative;
   width: 95px;

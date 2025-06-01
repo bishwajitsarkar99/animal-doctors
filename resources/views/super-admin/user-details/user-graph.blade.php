@@ -3,10 +3,10 @@
 <div class="row drag-row">
     <?php
         $titles = [
-            'total_users' => ['label' => 'Total-Users', 'bg' => 'card-light-bg', 'icolor' => '#0A5EDB', 'loader' => 'total-user-cricle-bar', 'progressbg' => '#0A5EDB', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar', 'dragId' => 'card-1', 'dragged' => 'true', 'columnId' => 'column-1'],
-            'authentic_users' => ['label' => 'Authentic Users', 'bg' => 'card-light-bg', 'icolor' => '#198754', 'loader' => 'authentic-cricle-bar', 'progressbg' => 'bg-success', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar', 'dragId' => 'card-2', 'dragged' => 'true', 'columnId' => 'column-2'],
-            'inactive_users' => ['label' => 'Inactive Users', 'bg' => 'card-light-bg', 'icolor' => '#dc3545', 'loader' => 'inactive-cricle-bar', 'progressbg' => 'bg-danger', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar', 'dragId' => 'card-3', 'dragged' => 'true', 'columnId' => 'column-3'],
-            'activity_users' => ['label' => 'Log Activity Count', 'bg' => 'card-light-bg', 'icolor' => '#6f42c1', 'loader' => 'activity-cricle-bar', 'progressbg' => 'bg-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar', 'dragId' => 'card-4', 'dragged' => 'true', 'columnId' => 'column-4'],
+            'total_users' => ['label' => 'Total-Users', 'bg' => 'group-card card-light-bg', 'icolor' => '#0A5EDB', 'loader' => 'total-user-cricle-bar', 'progressbg' => '#0A5EDB', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar', 'dragId' => 'card-1', 'dragged' => 'true', 'columnId' => 'column-1'],
+            'authentic_users' => ['label' => 'Authentic Users', 'bg' => 'group-card card-light-bg', 'icolor' => '#198754', 'loader' => 'authentic-cricle-bar', 'progressbg' => 'bg-success', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar', 'dragId' => 'card-2', 'dragged' => 'true', 'columnId' => 'column-2'],
+            'inactive_users' => ['label' => 'Inactive Users', 'bg' => 'group-card card-light-bg', 'icolor' => '#dc3545', 'loader' => 'inactive-cricle-bar', 'progressbg' => 'bg-danger', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar', 'dragId' => 'card-3', 'dragged' => 'true', 'columnId' => 'column-3'],
+            'activity_users' => ['label' => 'Log Activity Count', 'bg' => 'group-card card-light-bg', 'icolor' => '#6f42c1', 'loader' => 'activity-cricle-bar', 'progressbg' => 'bg-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar', 'dragId' => 'card-4', 'dragged' => 'true', 'columnId' => 'column-4'],
         ]; 
     ?>
     @foreach($titles as $key => $data)
@@ -353,7 +353,7 @@
         "Super admin", "Admin", "Sub admin", "Accounts", "Marketing", "Delivery", "General",
         "Inactive","Authentic","Activity","Total Users"
     ];
-    const barColors = ["rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)", "rgb(194, 143, 96)","#cf2e2e","#198754","#008982","#0A5EDB"];
+    const barColors = ["rgba(23, 100, 109, 0.9)", "rgba(23, 100, 109, 0.9)", "rgba(23, 100, 109, 0.9)", "rgb(136, 86, 40)", "rgb(136, 86, 40)", "rgb(136, 86, 40)", "rgb(136, 86, 40)","#cf2e2e","#198754","#008982","#0A5EDB"];
     // bg-color:royalblue
     // Pass the PHP array to JavaScript 
     const userCounts = @json(array_values($usersCount));
@@ -619,7 +619,7 @@
 </script>
 <!-- number cricle bar and number rolling animation with scrol animation -->
 <script type="module">
-    import { cricleNumberPlate, numberRolling , triggerIfInView, initializeBarCharts } from "/module/module-min-js/design-helper-function-min.js";
+    import { cricleNumberPlate, numberRolling , triggerIfInView, initializeBarCharts, initializeDrag } from "/module/module-min-js/design-helper-function-min.js";
 
     // number cricle bar
     const numberClass = '.total-number';
@@ -629,10 +629,17 @@
     // number rolling animation and with scrol animation
     const numberSelector = '.number-rolling';
     const containerSelector = '.card-body, .storage-row, .storage-card-body, .branch-card-body';
+
+    // drag and drop card
+    const dragColumn = '.drag-column';
+    const cardBg = 'card-light-bg';
+    const cardId = '.group-card';
+
     // DOM ready
     document.addEventListener('DOMContentLoaded', () => {
         cricleNumberPlate(numberClass, cricleBar, percentage);
         numberRolling(numberSelector, containerSelector);
+        initializeDrag(dragColumn, cardBg, cardId);
     });
     // Scroll animation
     document.addEventListener('scroll', ()=>{
@@ -646,145 +653,6 @@
     });
 
     initializeBarCharts();
-</script>
-<!-- <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.group-card');
-  const columns = document.querySelectorAll('.drag-column');
-
-  let draggedCard = null;
-
-  cards.forEach(card => {
-    card.addEventListener('dragstart', (e) => {
-      draggedCard = card;
-      setTimeout(() => {
-        card.style.display = 'none';
-      }, 0);
-    });
-
-    card.addEventListener('dragend', () => {
-      draggedCard.style.display = 'block';
-      draggedCard = null;
-    });
-  });
-
-  columns.forEach(column => {
-    column.addEventListener('dragover', (e) => {
-      e.preventDefault();
-    });
-
-    column.addEventListener('dragenter', (e) => {
-      e.preventDefault();
-      column.style.backgroundColor = '#fff';
-    });
-
-    column.addEventListener('dragleave', () => {
-      column.style.backgroundColor = '#fff';
-    });
-
-    // this use for column
-    // column.addEventListener('drop', () => {
-    //   if (draggedCard) {
-    //     column.appendChild(draggedCard);
-    //   }
-    //   column.style.backgroundColor = '#fff';
-    // });
-
-    // this use for row
-    column.addEventListener('drop', (e) => {
-        e.preventDefault();
-        column.style.backgroundColor = '#fff';
-
-        if (!draggedCard) return;
-
-        const targetCard = column.querySelector('.group-card');
-
-        if (targetCard && draggedCard !== targetCard) {
-            // Swap the two cards
-            const fromColumn = draggedCard.parentElement;
-            column.replaceChild(draggedCard, targetCard);
-            fromColumn.appendChild(targetCard);
-        }
-    });
-  });
-});
-</script> -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const dragRow = document.querySelector('.drag-row');
-  const columns = Array.from(document.querySelectorAll('.drag-column'));
-  let draggedCard = null;
-
-  function saveCardOrder() {
-    const order = columns.map(column => {
-      const card = column.querySelector('.group-card');
-      return card ? card.id : null;
-    });
-    localStorage.setItem('cardOrder', JSON.stringify(order));
-  }
-
-  function loadCardOrder() {
-    const savedOrder = JSON.parse(localStorage.getItem('cardOrder') || '[]');
-    if (savedOrder.length) {
-      savedOrder.forEach((cardId, index) => {
-        const card = document.getElementById(cardId);
-        if (card && columns[index]) {
-          columns[index].appendChild(card);
-        }
-      });
-    }
-  }
-
-  // Load saved order on page load
-  loadCardOrder();
-
-  // Enable drag events
-  const cards = document.querySelectorAll('.group-card');
-
-  cards.forEach(card => {
-    card.addEventListener('dragstart', () => {
-      draggedCard = card;
-      setTimeout(() => {
-        card.style.display = 'none';
-      }, 0);
-    });
-
-    card.addEventListener('dragend', () => {
-      draggedCard.style.display = 'block';
-      draggedCard = null;
-    });
-  });
-
-  columns.forEach(column => {
-    column.addEventListener('dragover', (e) => {
-      e.preventDefault();
-    });
-
-    column.addEventListener('dragenter', (e) => {
-      e.preventDefault();
-      column.style.backgroundColor = '#fff';
-    });
-
-    column.addEventListener('dragleave', () => {
-      column.style.backgroundColor = '#fff';
-    });
-
-    column.addEventListener('drop', () => {
-      if (!draggedCard) return;
-
-      const targetCard = column.querySelector('.group-card');
-      const fromColumn = draggedCard.parentElement;
-
-      if (targetCard && targetCard !== draggedCard) {
-        column.replaceChild(draggedCard, targetCard);
-        fromColumn.appendChild(targetCard);
-      }
-
-      column.style.backgroundColor = '#fff';
-      saveCardOrder(); // Save after each drop
-    });
-  });
-});
 </script>
 <!-- demo line chart -->
 <!-- <script>
