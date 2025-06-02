@@ -162,14 +162,25 @@ htm,body{
   flex-direction: row;
   /* gap: 1rem; */   /* optional spacing between columns */
 }
- 
 
+div#current_login_activites_percentage_records{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+div#current_logout_activites_percentage_records{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+div#current_total_activites_percentage_records{
+    padding-left: 5px;
+    padding-right: 5px;
+}
 
+/* For Resize Table Design */
 table {
     border-collapse: collapse;
     user-select: none;
 }
-
 th#headId, td#cellId{
     border: 1px solid #ccc;
     padding: 8px;
@@ -177,7 +188,6 @@ th#headId, td#cellId{
     min-width: 30px;
     min-height: 30px;
 }
-
 /* Column resizer handle */
 .col-resizer {
     position: absolute;
@@ -188,7 +198,6 @@ th#headId, td#cellId{
     cursor: col-resize;
     user-select: none;
 }
-
 /* Row resizer handle */
 .row-resizer {
     position: absolute;
@@ -199,6 +208,7 @@ th#headId, td#cellId{
     cursor: row-resize;
     user-select: none;
 }
+
 
 .ring-container {
   position: relative;
@@ -957,16 +967,16 @@ input.input-date{
     color: rgb(0, 0, 0);
     font-family: var(--nav-font-family);
     opacity: 1;
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem 1.7rem;
     border-radius: 5px;
     border-top-right-radius: 5px !important;
     border-top-left-radius: 5px !important;
     border-bottom-left-radius: 5px !important;
     border-bottom-right-radius: 5px !important;
-    border-top: 1px solid rgba(0, 123, 255, 0.2);
-    border-bottom: 1px solid rgba(0, 123, 255, 0.2);
-    border-left: 1px solid rgba(0, 123, 255, 0.2);
-    border-right: 1px solid rgba(0, 123, 255, 0.2);
+    border-top: 1px solid rgba(0, 123, 255, 0.3);
+    border-bottom: 1px solid rgba(0, 123, 255, 0.3);
+    border-left: 1px solid rgba(0, 123, 255, 0.3);
+    border-right: 1px solid rgba(0, 123, 255, 0.3);
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;

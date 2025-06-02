@@ -144,6 +144,14 @@
                         inputPlaceHolder="DD-MM-YYYY" 
                         inputFirstId="chartStartDate" 
                         inputSecondId="chartEndDate" 
+                        iconClass="icon-box"
+                        iconStyle="line-height: 1.2;"
+                        svgWidth="18"
+                        svgHeight="18"
+                        svgStroke="white"
+                        svgStrokeWidth="2"
+                        svgFillColor="rgb(170, 170, 170)"
+                        filterBoxId="filteringBox"
                     />
                     <x-chart-cards.multi-chart-cards.multi-chart-body cardBodyClass="border-style">
                         <x-chart-cards.multi-chart-cards.multi-chart-box cardBoxClass="user-activities--month-chart mb-5">

@@ -17,7 +17,7 @@
     </div>
     <div class="col-xl-6">
         <div class="{{ $cardProgressClass }}" style="{{ $cardProgressStyle }}">
-            <div id="{{ $cardResultId }}" class="progress-bar progress-bar-striped {{ $cardProgressBg }} progress-bar-animated" role="progressbar" style="width: 20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            <div id="{{ $cardResultId }}" class="progress-bar progress-bar-striped {{ $cardProgressBg }} progress-bar-animated" role="progressbar" style="width: {{ $cardResultId }}%;" aria-valuenow="{{ $cardResultId }};" aria-valuemin="0" aria-valuemax="10000">
                 0%
             </div>
         </div>

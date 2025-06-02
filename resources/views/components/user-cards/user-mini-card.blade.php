@@ -9,7 +9,7 @@
             <div class="ring-container cricale-number-skeleton">
                 <div class="outer-ring"></div>
                 <div class="inner-ring"> </div>
-                <div class="{{ $loaderClass }}" style="--percentage: 76;">
+                <div class="{{ $loaderClass }}" style="--percentage: 10000;">
                     <span>
                         <span class="total-number {{ $numberCountAnimationKey }} {{ $numberCountAnimation }}" data-target="{{ round($percentage) }}">{{ round($percentage) }}</span>
                         <span class="percentage-size">%</span>
