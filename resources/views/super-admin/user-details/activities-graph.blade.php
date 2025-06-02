@@ -94,7 +94,7 @@
                             canvasHeight="106"
                             canvasId="userDayLogChart"
                         />
-                    </x-card>
+                    </x-chart-cards.chart-card>
                 </div>
                 <div class="col-xl-6">
                     <!-- Monthly Data Chart -->
@@ -121,7 +121,7 @@
                             canvasHeight="106"
                             canvasId="userMonthLogChart"
                         />
-                    </x-card>
+                    </x-chart-cards.chart-card>
                 </div>
             </div>
         </x-chart-card>
@@ -145,53 +145,42 @@
                         inputFirstId="chartStartDate" 
                         inputSecondId="chartEndDate" 
                     />
-                    <div class="card-header max-card-header">
-                        <div class="row">
-                            <div class="col-xl-8">
-                                <span class="card-head-title head-skeletone">
-                                    <i class="fa-solid fa-layer-group" style="color:rgba(0, 0, 255, 0.5);"></i> 
-                                    Users Log Activities Line Chart
-                                </span>
-                            </div>
-                            <div class="col-xl-4 group_box">
-                                <span class="input-group">
-                                    <label class="date-label" for="from">Form : </label>
-                                    <input class="form-control form-control-sm input-date" type="text" name="start_date" Placeholder="DD-MM-YYYY" id="chartStartDate" autocomplete="off">
-                                </span>
-                                <span class="input-group">
-                                    <label class="date-label" for="from">To : </label>
-                                    <input class="form-control form-control-sm input-date" type="text" name="end_date" Placeholder="DD-MM-YYYY" id="chartEndDate" autocomplete="off">
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card card-body border-style">
-                        <!-- Total all data chart -->
-                        <div class="user-activities--month-chart mb-5">
-                            <div class="chart-scrollbar-responsive">
-                                <canvas id="userAllLogChart" height="80"></canvas>
-                                <canvas id="allUserDateLogChart" height="36"></canvas>
-                            </div>
-                            <div class="dual-range-container mt-2" id="dateRange">
-                                <div class="slider-wrapper-first">
-                                    <span id="leftTooltip" class="range-tooltip">0%</span>
-                                    <input type="range" id="rangeLeftSlider" min="0" max="365" value="0" class="dual-range">
-                                </div>
-                                <div class="slider-wrapper-second">
-                                    <span id="rightTooltip" class="range-tooltip">0%</span>
-                                    <input type="range" id="rangeRightSlider" min="0" max="365" value="365" class="dual-range">
-                                </div>
-                                <div class="range-track">
-                                    <svg id="cruveChart" viewBox="0 0 800 50" fill="rgba(0,123,255,0.2)" style="border: none;
-                                        background: #f9f9f9;
-                                        overflow: hidden;path {
-                                        fill: none;
-                                        stroke-width: 2.5;display: block;margin: none;">
-                                        <rect x="0" y="0" width="800" height="50" fill="white" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
+                    <x-chart-cards.multi-chart-cards.multi-chart-body cardBodyClass="border-style">
+                        <x-chart-cards.multi-chart-cards.multi-chart-box cardBoxClass="user-activities--month-chart mb-5">
+                            <!-- Total all data chart -->
+                            <x-chart-cards.multi-chart-cards.multi-chart-canvas
+                                canvasClass="user-activities--month-chart mb-1"
+                                monthlyLogChartId="userAllLogChart"
+                                monthlyLogChartHeight="80"
+                                dateLogChartId="allUserDateLogChart" 
+                                dateLogChartHeight="36"
+                            />
+                            <x-date-range-filter-cards.date-range-card
+                                dateRangeCardClass="dual-range-container mt-2"
+                                dateRangeId="dateRange"
+                                firstWrapperClass="slider-wrapper-first"
+                                leftInputRangeSliderId="rangeLeftSlider"
+                                leftTooltipId="leftTooltip"
+                                rightTooltipId="rightTooltip"
+                                tooltipClass="range-tooltip"
+                                inputRangeClass="dual-range"
+                                inputRangeMin="0"
+                                inputRangeMax="365"
+                                leftinputRangeValue="0"
+                                rightinputRangeValue="365"
+                                inputRangeSliderType="range"
+                                secondWrapperClass="slider-wrapper-second"
+                                rightInputRangeSliderId="rangeRightSlider"
+                                dateRangeTrackingClass="range-track"
+                                dateRangeSvgChartId="cruveChart"
+                                dateRangeSvgChartViewBox="0 0 800 50"
+                                dateRangeSvgChartFill="rgba(0,123,255,0.2)"
+                                dateRangeSvgChartStyle="border: none;background: #f9f9f9;overflow: hidden;path {fill: none;stroke-width: 2.5;display: block;margin: none;}"
+                                dateRangeSvgChartWidth="800"
+                                dateRangeSvgChartHeight="50"
+                                dateRangeSvgChartRectFill="white"
+                            />
+                        </x-chart-cards.multi-chart-cards.multi-chart-box>
                         <div class="branch-details-info mt-5">
                             <div class="head-init" style="border-top:1px dotted lightgray;">
                                 <span class="head-skeletone">
@@ -215,11 +204,11 @@
                                     </div>
                                     <div class="col-xl-3">
                                         <ul class="pt-1 mt-3" id="roleLabel">
-                                                <li class="ps-2" style="display:flex;justify-content:space-between;">
-                                                    <span class="user-amount badge rounded-pill bg-light-blueviolet mb-1" style="color:#000;font-size:11px;font-weight:800;background-color: #6ba7ff;">
-                                                        .00
-                                                    </span>
-                                                </li>
+                                            <li class="ps-2" style="display:flex;justify-content:space-between;">
+                                                <span class="user-amount badge rounded-pill bg-light-blueviolet mb-1" style="color:#000;font-size:11px;font-weight:800;background-color: #6ba7ff;">
+                                                    .00
+                                                </span>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="col-xl-6">
@@ -288,7 +277,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </x-chart-cards.multi-chart-cards.multi-chart-body>
                 </div>
             </div>
         </x-chart-cards.multi-chart-cards.multi-chart>

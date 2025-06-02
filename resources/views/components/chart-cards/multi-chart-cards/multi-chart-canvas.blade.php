@@ -1,4 +1,4 @@
-<div class="chart-scrollbar-responsive">
-    <canvas id="userAllLogChart" height="80"></canvas>
-    <canvas id="allUserDateLogChart" height="36"></canvas>
+<div class="{{ $canvasClass }}">
+    <canvas id="{{ $monthlyLogChartId }}" height="{{ $monthlyLogChartHeight }}"></canvas>
+    <canvas id="{{ $dateLogChartId }}" height="{{ $dateLogChartHeight }}"></canvas>
 </div>

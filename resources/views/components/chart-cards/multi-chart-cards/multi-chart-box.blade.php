@@ -1,1 +1,1 @@
-<div class="user-activities--month-chart mb-5">{{$slot}}</div>
+<div class="{{ $cardBoxClass }}">{{$slot}}</div>

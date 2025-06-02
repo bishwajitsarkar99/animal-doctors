@@ -102,7 +102,7 @@
             </x-card>
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="row">
         <div class="col-xl-12">
             <x-chart-cards.chart-card cardBg="" borderStyle="border-style" id="orderChart">
                 <x-chart-cards.chart-card-header 
@@ -617,9 +617,10 @@
         });
     });
 </script>
-<!-- number cricle bar and number rolling animation with scrol animation -->
+<!-- number cricle bar and number rolling animation with scrol animation and drag and drop -->
 <script type="module">
-    import { cricleNumberPlate, numberRolling , triggerIfInView, initializeBarCharts, initializeDrag } from "/module/module-min-js/design-helper-function-min.js";
+    import { cricleNumberPlate, numberRolling , triggerIfInView, initializeBarCharts, initDragAndDrop } from "/module/module-min-js/design-helper-function-min.js";
+    // initializeDrag
 
     // number cricle bar
     const numberClass = '.total-number';
@@ -630,7 +631,12 @@
     const numberSelector = '.number-rolling';
     const containerSelector = '.card-body, .storage-row, .storage-card-body, .branch-card-body';
 
-    // drag and drop card
+    // drag and drop default card
+    const row = '.drag-row';
+    const column = '.drag-column';
+    const cardKey = '.group-card';
+
+    // drag and drop custom card
     const dragColumn = '.drag-column';
     const cardBg = 'card-light-bg';
     const cardId = '.group-card';
@@ -639,7 +645,8 @@
     document.addEventListener('DOMContentLoaded', () => {
         cricleNumberPlate(numberClass, cricleBar, percentage);
         numberRolling(numberSelector, containerSelector);
-        initializeDrag(dragColumn, cardBg, cardId);
+        initDragAndDrop(column, cardKey, row);
+        //initializeDrag(dragColumn, cardBg, cardId);
     });
     // Scroll animation
     document.addEventListener('scroll', ()=>{

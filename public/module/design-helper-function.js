@@ -834,7 +834,7 @@ export function initializeCommonBarCharts(chartId){
     drawBars();
     animate();
 }
-// Drag and Drop Card move
+// Drag and Drop Card custom move
 export function initializeDrag(dragColumn, cardBg, cardId){
     let draggedCard = null;
     let originalColumn = null;
@@ -954,4 +954,80 @@ export function initializeDrag(dragColumn, cardBg, cardId){
     // Init
     loadCardOrder();
     document.querySelectorAll(cardId).forEach(addCardListeners);
+}
+// Drag and Drop Card default move
+export function initDragAndDrop(column, cardKey, row){
+    const dragRow = document.querySelector(row);
+    const columns = Array.from(document.querySelectorAll(column));
+    let draggedCard = null;
+
+    function saveCardOrder() {
+        const order = columns.map(column => {
+        const card = column.querySelector(cardKey);
+        return card ? card.id : null;
+        });
+        localStorage.setItem('cardOrder', JSON.stringify(order));
+    }
+
+    function loadCardOrder() {
+        const savedOrder = JSON.parse(localStorage.getItem('cardOrder') || '[]');
+        if (savedOrder.length) {
+            savedOrder.forEach((cardKey, index) => {
+                const card = document.getElementById(cardKey);
+                if (card && columns[index]) {
+                columns[index].appendChild(card);
+                }
+            });
+        }
+    }
+
+    // Load saved order on page load
+    loadCardOrder();
+
+    // Enable drag events
+    const cards = document.querySelectorAll(cardKey);
+
+    cards.forEach(card => {
+        card.addEventListener('dragstart', () => {
+            draggedCard = card;
+            setTimeout(() => {
+                card.style.display = 'none';
+            }, 0);
+        });
+
+        card.addEventListener('dragend', () => {
+            draggedCard.style.display = 'block';
+            draggedCard = null;
+        });
+    });
+
+    columns.forEach(column => {
+        column.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        column.addEventListener('dragenter', (e) => {
+            e.preventDefault();
+            column.style.backgroundColor = '#fff';
+        });
+
+        column.addEventListener('dragleave', () => {
+            column.style.backgroundColor = '#fff';
+        });
+
+        column.addEventListener('drop', () => {
+            if (!draggedCard) return;
+
+            const targetCard = column.querySelector(cardKey);
+            const fromColumn = draggedCard.parentElement;
+
+            if (targetCard && targetCard !== draggedCard) {
+                column.replaceChild(draggedCard, targetCard);
+                fromColumn.appendChild(targetCard);
+            }
+
+            column.style.backgroundColor = '#fff';
+            saveCardOrder(); // Save after each drop
+        });
+    });
 }

@@ -1,1 +1,1 @@
-<div class="card card-body border-style">{{$solt}}</div>
+<div class="card card-body {{ $cardBodyClass }}">{{$slot}}</div>

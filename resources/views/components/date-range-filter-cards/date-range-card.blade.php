@@ -1,19 +1,15 @@
-<div class="dual-range-container mt-2" id="dateRange">
-    <div class="slider-wrapper-first">
-        <span id="leftTooltip" class="range-tooltip">0%</span>
-        <input type="range" id="rangeLeftSlider" min="0" max="365" value="0" class="dual-range">
+<div class="{{ $dateRangeCardClass }}" id="{{ $dateRangeId }}">
+    <div class="{{ $firstWrapperClass }}">
+        <span id="{{ $leftTooltipId }}" class="{{ $tooltipClass }}">0%</span>
+        <input type="{{ $inputRangeSliderType }}" id="{{ $leftInputRangeSliderId }}" min="{{ $inputRangeMin }}" max="{{ $inputRangeMax }}" value="{{ $leftinputRangeValue }}" class="{{ $inputRangeClass }}">
     </div>
-    <div class="slider-wrapper-second">
-        <span id="rightTooltip" class="range-tooltip">0%</span>
-        <input type="range" id="rangeRightSlider" min="0" max="365" value="365" class="dual-range">
+    <div class="{{ $secondWrapperClass }}">
+        <span id="{{ $rightTooltipId }}" class="{{ $tooltipClass }}">0%</span>
+        <input type="{{ $inputRangeSliderType }}" id="rangeRightSlider" min="{{ $inputRangeMin }}" max="{{ $inputRangeMax }}" value="{{ $rightinputRangeValue }}" class="{{ $inputRangeClass }}">
     </div>
-    <div class="range-track">
-        <svg id="cruveChart" viewBox="0 0 800 50" fill="rgba(0,123,255,0.2)" style="border: none;
-            background: #f9f9f9;
-            overflow: hidden;path {
-            fill: none;
-            stroke-width: 2.5;display: block;margin: none;">
-            <rect x="0" y="0" width="800" height="50" fill="white" />
+    <div class="{{ $dateRangeTrackingClass }}">
+        <svg id="{{ $dateRangeSvgChartId }}" viewBox="{{ $dateRangeSvgChartViewBox }}" fill="{{ $dateRangeSvgChartFill }}" style="{{ $dateRangeSvgChartStyle }}">
+            <rect x="0" y="0" width="{{ $dateRangeSvgChartWidth }}" height="{{ $dateRangeSvgChartHeight }}" fill="{{ $dateRangeSvgChartRectFill }}" />
         </svg>
     </div>
 </div>
