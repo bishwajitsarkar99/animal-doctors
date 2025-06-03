@@ -597,8 +597,9 @@ button.refresh-btn{
     opacity: 1;
     text-align: center;
     font-weight: 600;
-    border-color: var(--mdb-btn-border-color);
     outline: none;
+    border: none;
+    letter-spacing: 0.5px;
 }
 button.refresh-btn:hover{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
@@ -606,14 +607,17 @@ button.refresh-btn:hover{
     color: white;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
     opacity: 1;
-    border-color: var(--mdb-btn-border-color);
     outline: none;
+    border: none;
+    letter-spacing: 0.5px;
 }
 button.refresh-btn:focus {
-    box-shadow: var(--mdb-btn-box-shadow-state);
-    background-color: var(--mdb-btn-focus-bg);
+    background-image: var(--nav-button-background);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     color: var(--mdb-btn-focus-color);
     outline: none;
+    border: none;
 }
 button.btn-refresh {
     --bs-bg-opacity: 1;
@@ -635,6 +639,7 @@ button.btn-refresh:hover{
     opacity: var(--bs-bg-opacity);
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    border: none;
 }
 .head-init{
     font-family: var(--nav-font-family);

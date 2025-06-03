@@ -7,12 +7,13 @@
             </span>
         </div>
         <div class="col-xl-2">
-            <span class="{{ $inputGroupClass }}">
-                <label class="date-label" for="from"> 
-                    <x-dropdown.filter-box filterBox="" filterWidth="24" filterHeight="18" filterStroke="rgb(170, 170, 170)" filterStrokeWidth="2" filterFill="white" />
-                    <span id="{{ $filterBoxId }}">Data Filter</span> 
-                </label>
-            </span>
+            <x-menu-filex-boxs.medium-menu-filex-box
+                filexGroup="{{ $inputGroupClass }}"
+                filexId="{{ $filterBoxId }}" 
+                filexLabel="{{ $filterLabel }}"
+                filexContent="{{ $filterContentBoxClass }}"
+                filexBoxArrow="{{ $filterBoxArrow }}"
+            />
         </div>
         <div class="col-xl-5 {{ $groupClass }}">
             <span class="{{ $inputGroupClass }}">

@@ -152,6 +152,9 @@
                         svgStrokeWidth="2"
                         svgFillColor="rgb(170, 170, 170)"
                         filterBoxId="filteringBox"
+                        filterLabel="Data Filter"
+                        filterContentBoxClass="--filex-box-medium-content"
+                        filterBoxArrow="filex-box-arrow"
                     />
                     <x-chart-cards.multi-chart-cards.multi-chart-body cardBodyClass="border-style">
                         <x-chart-cards.multi-chart-cards.multi-chart-box cardBoxClass="user-activities--month-chart mb-5">
@@ -1194,6 +1197,26 @@
     import { initializeCurveLineChart } from "/module/module-min-js/design-helper-function-min.js";
     const dateRangeId = "cruveChart";
     initializeCurveLineChart(dateRangeId);
+</script>
+<script type="module">
+    import { initDragAndDrop } from "/module/module-min-js/design-helper-function-min.js";
+    // initializeDrag
+
+    // drag and drop default card
+    const row = '.drag-row';
+    const column = '.drag-column';
+    const cardKey = '.group-card';
+
+    // drag and drop custom card
+    const dragColumn = '.drag-column';
+    const cardBg = 'filex-column-card';
+    const cardId = '.group-card';
+
+    // DOM ready
+    document.addEventListener('DOMContentLoaded', () => {
+        initDragAndDrop(column, cardKey, row);
+        //initializeDrag(dragColumn, cardBg, cardId);
+    });
 </script>
 <!-- Demo bar chart -->
 <!-- <script>
