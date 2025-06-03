@@ -7,12 +7,15 @@
             </span>
         </div>
         <div class="col-xl-2">
-            <x-menu-filex-boxs.medium-menu-filex-box
-                filexGroup="{{ $inputGroupClass }}"
-                filexId="{{ $filterBoxId }}" 
-                filexLabel="{{ $filterLabel }}"
-                filexContent="{{ $filterContentBoxClass }}"
-                filexBoxArrow="{{ $filterBoxArrow }}"
+            <?php
+                $flex=['filexGroup'=>'input-group', 'filexId'=>'filteringBox', 'filexLabel'=>'Data Filter', 'filexContent'=>'--filex-box-medium-content', 'filexBoxArrow'=>'filex-box-arrow'];
+            ?>
+            <x-menu-filex-boxs.medium-menu-filex-box 
+                filexClas="{{ $flex['filexGroup'] }}"
+                filexFilterId="{{ $flex['filexId'] }}"
+                filexLabelName="{{ $flex['filexLabel'] }}"
+                filexContentArea="{{ $flex['filexContent'] }}"
+                filexUpArrow="{{ $flex['filexBoxArrow'] }}"
             />
         </div>
         <div class="col-xl-5 {{ $groupClass }}">

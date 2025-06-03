@@ -151,10 +151,6 @@
                         svgStroke="white"
                         svgStrokeWidth="2"
                         svgFillColor="rgb(170, 170, 170)"
-                        filterBoxId="filteringBox"
-                        filterLabel="Data Filter"
-                        filterContentBoxClass="--filex-box-medium-content"
-                        filterBoxArrow="filex-box-arrow"
                     />
                     <x-chart-cards.multi-chart-cards.multi-chart-body cardBodyClass="border-style">
                         <x-chart-cards.multi-chart-cards.multi-chart-box cardBoxClass="user-activities--month-chart mb-5">
@@ -1217,6 +1213,8 @@
         initDragAndDrop(column, cardKey, row);
         //initializeDrag(dragColumn, cardBg, cardId);
     });
+    // ACtive dropdown row background
+    
 </script>
 <!-- Demo bar chart -->
 <!-- <script>
