@@ -956,15 +956,147 @@ export function initializeDrag(dragColumn, cardBg, cardId){
     document.querySelectorAll(cardId).forEach(addCardListeners);
 }
 // Drag and Drop Card default move
-export function initDragAndDrop(column, cardKey, row){
+// export function initDragAndDrop(column, cardKey, row, lineConnectionId){
+//     const dragRow = document.querySelector(row);
+//     const columns = Array.from(document.querySelectorAll(column));
+//     let draggedCard = null;
+
+//     function saveCardOrder() {
+//         const order = columns.map(column => {
+//         const card = column.querySelector(cardKey);
+//         return card ? card.id : null;
+//         });
+//         localStorage.setItem('cardOrder', JSON.stringify(order));
+//     }
+
+//     function loadCardOrder() {
+//         const savedOrder = JSON.parse(localStorage.getItem('cardOrder') || '[]');
+//         if (savedOrder.length) {
+//             savedOrder.forEach((cardKey, index) => {
+//                 const card = document.getElementById(cardKey);
+//                 if (card && columns[index]) {
+//                 columns[index].appendChild(card);
+//                 }
+//             });
+//         }
+//     }
+
+//     // Load saved order on page load
+//     loadCardOrder();
+
+//     function drawConnectionLines(draggedCard) {
+//         const svg = document.getElementById(lineConnectionId);
+//         svg.innerHTML = ''; // clear old lines
+
+//         const draggedRect = draggedCard.getBoundingClientRect();
+
+//         document.querySelectorAll(cardKey).forEach(card => {
+//             if (card === draggedCard) return;
+
+//             const rect = card.getBoundingClientRect();
+
+//             const startX = draggedRect.left + draggedRect.width / 2;
+//             const startY = draggedRect.top + draggedRect.height / 2;
+//             const endX = rect.left + rect.width / 2;
+//             const endY = rect.top + rect.height / 2;
+
+//             const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+//             const curve = `M${startX},${startY} C${(startX + endX) / 2},${startY} ${(startX + endX) / 2},${endY} ${endX},${endY}`;
+            
+//             path.setAttribute("d", curve);
+//             path.setAttribute("stroke", "darkcyan");
+//             path.setAttribute("stroke-width", "2");
+//             path.setAttribute("fill", "none");
+//             path.setAttribute("class", "curve-line");
+
+//             svg.appendChild(path);
+//         });
+//     }
+
+//     function removeConnectionLines() {
+//         const svg = document.getElementById('connectionLines');
+//         svg.innerHTML = '';
+//     }
+
+
+//     // Enable drag events
+//     const cards = document.querySelectorAll(cardKey);
+
+//     cards.forEach(card => {
+//         // card.addEventListener('dragstart', () => {
+//         //     draggedCard = card;
+//         //     setTimeout(() => {
+//         //         card.style.display = 'none';
+//         //     }, 0);
+//         // });
+
+//         // card.addEventListener('dragend', () => {
+//         //     draggedCard.style.display = 'block';
+//         //     draggedCard = null;
+//         // });
+
+//         card.addEventListener('dragstart', (e) => {
+//             draggedCard = card;
+//             setTimeout(() => {
+//                 card.style.display = 'none';
+//                 drawConnectionLines(card); // Initial draw
+//             }, 0);
+//         });
+
+//         card.addEventListener('drag', () => {
+//             if (draggedCard) {
+//                 drawConnectionLines(draggedCard);
+//             }
+//         });
+
+//         card.addEventListener('dragend', () => {
+//             draggedCard.style.display = 'block';
+//             draggedCard = null;
+//             removeConnectionLines(); // Remove curves
+//         });
+//     });
+
+//     columns.forEach(column => {
+//         column.addEventListener('dragover', (e) => {
+//             e.preventDefault();
+//         });
+
+//         column.addEventListener('dragenter', (e) => {
+//             e.preventDefault();
+//             column.style.backgroundColor = '#fff';
+//         });
+
+//         column.addEventListener('dragleave', () => {
+//             column.style.backgroundColor = '#fff';
+//         });
+
+//         column.addEventListener('drop', () => {
+//             if (!draggedCard) return;
+
+//             const targetCard = column.querySelector(cardKey);
+//             const fromColumn = draggedCard.parentElement;
+
+//             if (targetCard && targetCard !== draggedCard) {
+//                 column.replaceChild(draggedCard, targetCard);
+//                 fromColumn.appendChild(targetCard);
+//             }
+
+//             column.style.backgroundColor = '#fff';
+//             saveCardOrder(); // Save after each drop
+//         });
+//     });
+// }
+export function initDragAndDrop(column, cardKey, row, lineConnectionId) {
     const dragRow = document.querySelector(row);
     const columns = Array.from(document.querySelectorAll(column));
     let draggedCard = null;
 
+    const svg = document.getElementById(lineConnectionId);
+
     function saveCardOrder() {
         const order = columns.map(column => {
-        const card = column.querySelector(cardKey);
-        return card ? card.id : null;
+            const card = column.querySelector(cardKey);
+            return card ? card.id : null;
         });
         localStorage.setItem('cardOrder', JSON.stringify(order));
     }
@@ -972,22 +1104,72 @@ export function initDragAndDrop(column, cardKey, row){
     function loadCardOrder() {
         const savedOrder = JSON.parse(localStorage.getItem('cardOrder') || '[]');
         if (savedOrder.length) {
-            savedOrder.forEach((cardKey, index) => {
-                const card = document.getElementById(cardKey);
+            savedOrder.forEach((cardId, index) => {
+                const card = document.getElementById(cardId);
                 if (card && columns[index]) {
-                columns[index].appendChild(card);
+                    columns[index].appendChild(card);
                 }
             });
         }
     }
 
-    // Load saved order on page load
     loadCardOrder();
 
-    // Enable drag events
+    function drawConnections() {
+        svg.innerHTML = '';
+
+        const cards = document.querySelectorAll(cardKey);
+        const svgRect = svg.getBoundingClientRect();
+
+        const baseY = Math.max(...Array.from(cards).map(c => c.getBoundingClientRect().bottom)) - svgRect.top + 20;
+
+        const centerXs = [];
+
+        cards.forEach(card => {
+            const cardRect = card.getBoundingClientRect();
+            const top = cardRect.top - svgRect.top;
+            const left = cardRect.left - svgRect.left;
+            const width = cardRect.width;
+            const height = cardRect.height;
+
+            const cx = left + width / 2;
+            const cy = top + height;
+
+            centerXs.push(cx); // collect all center x-coordinates
+
+            // Draw rectangle around card
+            const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            rect.setAttribute('x', left);
+            rect.setAttribute('y', top);
+            rect.setAttribute('width', width);
+            rect.setAttribute('height', height);
+            rect.setAttribute('fill', 'none');
+            rect.setAttribute('stroke', '#007BFF');
+            rect.setAttribute('stroke-width', '1');
+            svg.appendChild(rect);
+
+            // Draw vertical line from card to baseY
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute('x1', cx);
+            line.setAttribute('y1', cy);
+            line.setAttribute('x2', cx);
+            line.setAttribute('y2', baseY);
+            line.setAttribute('stroke', '#007BFF');
+            line.setAttribute('stroke-width', '1');
+            svg.appendChild(line);
+        });
+    }
+
+    drawConnections();
+
+    // Recalculate lines on window resize
+    window.addEventListener('resize', drawConnections);
+
     const cards = document.querySelectorAll(cardKey);
 
     cards.forEach(card => {
+        card.setAttribute('draggable', true);
+
         card.addEventListener('dragstart', () => {
             draggedCard = card;
             setTimeout(() => {
@@ -995,39 +1177,37 @@ export function initDragAndDrop(column, cardKey, row){
             }, 0);
         });
 
+        card.addEventListener('drag', () => {
+            if (draggedCard) {
+                drawConnections(); // live redraw while dragging
+            }
+        });
+
         card.addEventListener('dragend', () => {
-            draggedCard.style.display = 'block';
+            card.style.display = 'block';
             draggedCard = null;
+            setTimeout(drawConnections, 0); // ensure reflow
         });
     });
 
     columns.forEach(column => {
-        column.addEventListener('dragover', (e) => {
-            e.preventDefault();
-        });
-
-        column.addEventListener('dragenter', (e) => {
-            e.preventDefault();
-            column.style.backgroundColor = '#fff';
-        });
-
-        column.addEventListener('dragleave', () => {
-            column.style.backgroundColor = '#fff';
-        });
+        column.addEventListener('dragover', (e) => e.preventDefault());
 
         column.addEventListener('drop', () => {
             if (!draggedCard) return;
 
-            const targetCard = column.querySelector(cardKey);
             const fromColumn = draggedCard.parentElement;
+            const existingCard = column.querySelector(cardKey);
 
-            if (targetCard && targetCard !== draggedCard) {
-                column.replaceChild(draggedCard, targetCard);
-                fromColumn.appendChild(targetCard);
+            if (existingCard && existingCard !== draggedCard) {
+                column.replaceChild(draggedCard, existingCard);
+                fromColumn.appendChild(existingCard);
+            } else {
+                column.appendChild(draggedCard);
             }
 
-            column.style.backgroundColor = '#fff';
-            saveCardOrder(); // Save after each drop
+            saveCardOrder();
+            drawConnections();
         });
     });
 }

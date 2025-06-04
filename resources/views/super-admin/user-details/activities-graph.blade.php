@@ -1188,20 +1188,21 @@
         updateDateInputs();
     });
 </script>
-<!-- Date Range Scroll chart module-min-js -->
+<!-- Date Range Scroll chart module-min-js /module-min-js-->
 <script type="module">
     import { initializeCurveLineChart } from "/module/module-min-js/design-helper-function-min.js";
     const dateRangeId = "cruveChart";
     initializeCurveLineChart(dateRangeId);
 </script>
 <script type="module">
-    import { initDragAndDrop } from "/module/module-min-js/design-helper-function-min.js";
+    import { initDragAndDrop } from "/module/design-helper-function.js";
     // initializeDrag
 
     // drag and drop default card
     const row = '.drag-row';
     const column = '.drag-column';
     const cardKey = '.group-card';
+    const lineConnectionId = 'connectionLines';
 
     // drag and drop custom card
     const dragColumn = '.drag-column';
@@ -1210,7 +1211,7 @@
 
     // DOM ready
     document.addEventListener('DOMContentLoaded', () => {
-        initDragAndDrop(column, cardKey, row);
+        initDragAndDrop(column, cardKey, row, lineConnectionId);
         //initializeDrag(dragColumn, cardBg, cardId);
     });
     // ACtive dropdown row background

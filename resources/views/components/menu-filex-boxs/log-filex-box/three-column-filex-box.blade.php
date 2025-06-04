@@ -5,10 +5,12 @@
         ['label'=>'Email','inputPlaceholder'=>'Email Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search'],
     ]; 
 ?>
-<div class="row drag-row">
-    @foreach($group_flex_box as $data)
+<div id="card-container" style="position: relative;">
+    <div class="row drag-row">
+        @foreach($group_flex_box as $index => $data)
         <div class="col-xl-4 drag-column">
-            <div class="card filex-column-card group-card" draggable="true">
+            <!-- Cards go here -->
+            <div class="card filex-column-card group-card" draggable="true" id="group_card_{{ $index }}">
                 <div class="card-header filex-column-card-header filex-group">
                     <span class="move-icon">
                         <svg viewBox="0 0 24 24" width="18" height="14" stroke="darkcyan" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="5 9 2 12 5 15"></polyline><polyline points="9 5 12 2 15 5"></polyline><polyline points="15 19 12 22 9 19"></polyline><polyline points="19 9 22 12 19 15"></polyline><line x1="2" y1="12" x2="22" y2="12"></line><line x1="12" y1="2" x2="12" y2="22"></line></svg>
@@ -57,11 +59,13 @@
                 </div>
                 <div class="card-footer filex-column-card-footer">
                     <div class="group-filex-button">
-                        <button type="button" class="{{ $data['buttonClass'] }}" id="#">{{ $data['buttonLabelOne'] }}</button>
-                        <button type="button" class="{{ $data['buttonClass'] }}" id="#">{{ $data['buttonLabelTwo'] }}</button>
+                        <button type="button" class="{{ $data['buttonClass'] }}">{{ $data['buttonLabelOne'] }}</button>
+                        <button type="button" class="{{ $data['buttonClass'] }}">{{ $data['buttonLabelTwo'] }}</button>
                     </div>
                 </div>
             </div>
         </div>
-    @endforeach
+        @endforeach
+    </div>
+    <svg id="connectionLines" width="100%" height="300" style="position:absolute; top:0; left:0; z-index:1;"></svg>
 </div>
