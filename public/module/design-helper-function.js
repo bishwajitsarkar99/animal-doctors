@@ -1156,9 +1156,80 @@ export function initDragAndDrop(column, cardKey, row, lineConnectionId) {
             line.setAttribute('y2', baseY);
             line.setAttribute('stroke', '#007BFF');
             line.setAttribute('stroke-width', '1');
-            svg.appendChild(line);
         });
+        
     }
+
+    
+    // function drawConnections() {
+    //     svg.innerHTML = '';
+
+    //     const cards = document.querySelectorAll(cardKey);
+    //     const svgRect = svg.getBoundingClientRect();
+    //     if (cards.length < 2) return;
+
+    //     const getHeaderPoints = (el) => {
+    //         const rect = el.getBoundingClientRect();
+    //         const top = rect.top - svgRect.top;
+    //         const left = rect.left - svgRect.left;
+    //         const width = rect.width;
+    //         const headerHeight = 40;
+
+    //         return {
+    //             headerLeft: { x: left, y: top + headerHeight / 2 },
+    //             headerRight: { x: left + width, y: top + headerHeight / 2 }
+    //         };
+    //     };
+
+    //     cards.forEach((card, index) => {
+    //         const points = getHeaderPoints(card);
+
+    //         // ✅ Draw pinpoints based on position
+    //         if (index === 0) {
+    //             drawPin(points.headerRight); // ✅ Only right pin
+    //         } else if (index === cards.length - 1) {
+    //             drawPin(points.headerLeft);  // ✅ Only left pin
+    //         } else {
+    //             drawPin(points.headerLeft);  // ✅ Both pins
+    //             drawPin(points.headerRight);
+    //         }
+
+    //         // ✅ Draw curved line from previous card’s right pin to this card’s left pin
+    //         if (index > 0) {
+    //             const prevPoints = getHeaderPoints(cards[index - 1]);
+    //             drawCurvedPath(prevPoints.headerRight, points.headerLeft); // ✅ Start from inside previous
+    //         }
+    //     });
+    // }
+
+    // function drawPin({ x, y }) {
+    //     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    //     circle.setAttribute('cx', x);
+    //     circle.setAttribute('cy', y);
+    //     circle.setAttribute('r', 4);
+    //     circle.setAttribute('fill', '#007BFF');
+    //     svg.appendChild(circle);
+    // }
+
+    // function drawCurvedPath(start, end) {
+    //     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+    //     const midX = (start.x + end.x) / 2;
+    //     const d = `M ${start.x} ${end.y} ${midX} ${start.y}, ${end.x} ${end.y} C ${midX} ${end.y}, ${end.x} ${end.y}`;
+
+    //     path.setAttribute('d', d);
+    //     path.setAttribute('stroke', '#007BFF');
+    //     path.setAttribute('stroke-width', '2');
+    //     path.setAttribute('fill', 'none');
+
+    //     // Optional animation
+    //     const length = path.getTotalLength();
+    //     path.style.strokeDasharray = length;
+    //     path.style.strokeDashoffset = length;
+    //     path.style.animation = 'dash 0.8s ease forwards';
+
+    //     svg.appendChild(path);
+    // }
 
     drawConnections();
 
@@ -1173,7 +1244,7 @@ export function initDragAndDrop(column, cardKey, row, lineConnectionId) {
         card.addEventListener('dragstart', () => {
             draggedCard = card;
             setTimeout(() => {
-                card.style.display = 'none';
+                card.style.visibility = 'hidden';
             }, 0);
         });
 
@@ -1184,7 +1255,7 @@ export function initDragAndDrop(column, cardKey, row, lineConnectionId) {
         });
 
         card.addEventListener('dragend', () => {
-            card.style.display = 'block';
+            card.style.visibility = 'visible';
             draggedCard = null;
             setTimeout(drawConnections, 0); // ensure reflow
         });

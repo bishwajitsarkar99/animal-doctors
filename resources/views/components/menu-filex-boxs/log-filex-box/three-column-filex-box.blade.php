@@ -5,7 +5,7 @@
         ['label'=>'Email','inputPlaceholder'=>'Email Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search'],
     ]; 
 ?>
-<div id="card-container" style="position: relative;">
+<div id="card-container">
     <div class="row drag-row">
         @foreach($group_flex_box as $index => $data)
         <div class="col-xl-4 drag-column">

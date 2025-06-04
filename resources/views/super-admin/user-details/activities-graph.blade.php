@@ -1196,7 +1196,6 @@
 </script>
 <script type="module">
     import { initDragAndDrop } from "/module/design-helper-function.js";
-    // initializeDrag
 
     // drag and drop default card
     const row = '.drag-row';
@@ -1212,9 +1211,7 @@
     // DOM ready
     document.addEventListener('DOMContentLoaded', () => {
         initDragAndDrop(column, cardKey, row, lineConnectionId);
-        //initializeDrag(dragColumn, cardBg, cardId);
     });
-    // ACtive dropdown row background
     
 </script>
 <!-- Demo bar chart -->

@@ -31,6 +31,9 @@ htm,body{
     padding: 0;
     margin: 0;
 }
+.drag-placeholder {
+    box-sizing: border-box;
+}
 .drag-row {
     position: relative;
     z-index: 1;
@@ -47,6 +50,11 @@ htm,body{
 }
 .drag-row-wrapper {
     position: relative;
+}
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
 }
 .card {
     position: relative;
@@ -995,22 +1003,23 @@ input.input-date{
     font-family: var(--nav-font-family);
     opacity: 1;
     padding: 0.2rem 1.7rem;
-    border-radius: 5px;
-    border-top-right-radius: 5px !important;
-    border-top-left-radius: 5px !important;
-    border-bottom-left-radius: 5px !important;
-    border-bottom-right-radius: 5px !important;
-    border-top: 1px solid rgba(0, 123, 255, 0.3);
-    border-bottom: 1px solid rgba(0, 123, 255, 0.3);
-    border-left: 1px solid rgba(0, 123, 255, 0.3);
-    border-right: 1px solid rgba(0, 123, 255, 0.3);
+    border-top: 1px ridge rgba(0, 123, 255, 0.2);
+    border-bottom: 1px ridge rgba(0, 123, 255, 0.2);
+    border-left: 1px ridge rgba(0, 123, 255, 0.2);
+    border-right: 1px ridge rgba(0, 123, 255, 0.2);
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 input.input-date:focus{
-    outline: 2px solid #3b71ca;
+    outline: 2px ridge #3b71ca;
+}
+input.input-date::-webkit-color-swatch-wrapper{
+    padding: 0;
+}
+input.input-date::-webkit-color-swatch{
+    border-radius: 5px;
 }
 .login-user-title{
     padding-left: 10px;
@@ -2004,6 +2013,18 @@ span.chart-svg-three{
 .select2-container--default .select2-selection--single:focus {
     border: 2px solid #3b71ca !important;
 }
+.select2-container--default .select2-selection--single::-webkit-color-swatch-wrapper{
+    padding: 0;
+}
+.select2-container--default .select2-selection--single::-webkit-color-swatch{
+    border-radius: 5px;
+}
+.select2-container .select2-selection--single::-webkit-color-swatch-wrapper{
+    padding: 0;
+}
+.select2-container .select2-selection--single::-webkit-color-swatch{
+    border-radius: 5px;
+}
 input#date_start,input#date_end {
     font-family: var(--nav-font-family);
     font-weight: 800;
@@ -2012,7 +2033,6 @@ input#date_start,input#date_end {
     outline: none;
     box-shadow: 0px 2px 20px #0001;
     background-image: linear-gradient(to bottom, white 0%, white, white 100%);
-    border-radius: 3px;
     border-top: 1px ridge rgba(0, 123, 255, 0.2);
     border-bottom: 1px ridge rgba(0, 123, 255, 0.2);
     border-left: 1px ridge rgba(0, 123, 255, 0.2);
@@ -2024,6 +2044,18 @@ input#date_start,input#date_end {
 }
 input#date_start:focus,input#date_end:focus,#search:focus{
     outline: 2px solid #3b71ca;
+}
+input#date_start::-webkit-color-swatch-wrapper{
+    padding: 0;
+}
+input#date_end::-webkit-color-swatch-wrapper{
+    padding: 0;
+}
+input#date_start::-webkit-color-swatch{
+    border-radius: 5px;
+}
+input#date_end::-webkit-color-swatch{
+    border-radius: 5px;
 }
 .light2-focus {
     border-radius: 50%;

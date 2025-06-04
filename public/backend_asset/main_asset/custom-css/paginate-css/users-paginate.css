@@ -639,7 +639,6 @@ input#search {
     outline: none;
     box-shadow: 0px 2px 20px #0001;
     background-image: linear-gradient(to bottom, white 0%, white, white 100%);
-    border-radius: 5px;
     border-top: 1px ridge rgba(0, 123, 255, 0.2);
     border-bottom: 1px ridge rgba(0, 123, 255, 0.2);
     border-left: 1px ridge rgba(0, 123, 255, 0.2);
@@ -668,6 +667,12 @@ input#search:focus{
     outline: 1px solid #0056b3;
     color: #0056b3;
     transition: border 0.3s ease-in-out;
+}
+input#search::-webkit-color-swatch-wrapper{
+    padding: 0;
+}
+input#search::-webkit-color-swatch{
+    border-radius: 5px;
 }
 h5#staticBackdropLabels {
     color: darkgoldenrod;

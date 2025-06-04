@@ -200,6 +200,18 @@
 .select2-container--default .select2-selection--single:focus{
     border: 2px solid #3b71ca;
 }
+.select2-container--default .select2-selection--single::-webkit-color-swatch-wrapper{
+    padding: 0;
+}
+.select2-container--default .select2-selection--single::-webkit-color-swatch{
+    border-radius: 5px;
+}
+.select2-container .select2-selection--single::-webkit-color-swatch-wrapper{
+    padding: 0;
+}
+.select2-container .select2-selection--single::-webkit-color-swatch{
+    border-radius: 5px;
+}
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: #444;
     line-height: 24px
