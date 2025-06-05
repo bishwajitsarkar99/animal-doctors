@@ -284,24 +284,59 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <svg id="svg" style="width: 100%; height: 400px; border: 1px solid #ccc;">
-                        <path id="resizablePath" d="" stroke="rgb(238, 155, 53)" fill="none" stroke-width="2" />
-                        <path id="startPoint" data-rotation="-90" transform="translate(100,100) rotate(-90)" style="cursor: pointer; fill: darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
-                        <path id="endPoint" data-rotation="90" transform="translate(300,200) rotate(90)" style="cursor: pointer; fill:darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
-                        </svg>
-
-                        <svg id="svgDemo" style="width: 100%; height: 400px; border: 1px solid #ccc;">
-                        <path id="resizablePathDemo" d="" stroke="#007BFF" fill="none" stroke-width="2" />
-                        <path id="startPointDemo" data-rotation="-90" transform="translate(100,100) rotate(-90)" style="cursor: pointer; fill: #007BFF;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
-                        <path id="endPointDemo" data-rotation="90" transform="translate(300,200) rotate(90)" style="cursor: pointer; fill: #007BFF;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
-                        </svg> -->
+                        
                     </x-chart-cards.multi-chart-cards.multi-chart-body>
                 </div>
             </div>
         </x-chart-cards.multi-chart-cards.multi-chart>
-        </div>
     </div>
 </div>
+</div>
+<div class="row" style="position: relative; height: 300px;">
+    <svg id="svg">
+        <path id="resizablePath" stroke="rgb(238, 155, 53)" fill="none" stroke-width="2" />
+        <path id="startPoint" data-rotation="-90" transform="translate(0,0) rotate(-90)" style="fill: darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+        <path id="endPoint" data-rotation="90" transform="translate(0,0) rotate(90)" style="fill: darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+    </svg>
+
+    <div class="table-relation-wrapper" id="userTableWrapper" style="left: 50px; top: 50px;">
+        <table id="userTable">
+            <thead><tr><th>Id</th><th>User</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Sumon</td></tr>
+                <tr><td>2</td><td>Kamal</td></tr>
+                <tr><td>3</td><td>Jamal</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-relation-wrapper" id="emailTableWrapper" style="left: 300px; top: 150px;">
+        <table id="emailTable">
+            <thead><tr><th>Id</th><th>Email</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Sumon@gmail.com</td></tr>
+                <tr><td>2</td><td>Kamal@gmail.com</td></tr>
+                <tr><td>3</td><td>Jamal@gmail.com</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- <div class="row">
+    <div class="col-xl-6">
+        <svg id="svg" style="width: 100%; height: 400px; border: 1px solid #ccc;">
+        <path id="resizablePath" d="" stroke="rgb(238, 155, 53)" fill="none" stroke-width="2" />
+        <path id="startPoint" data-rotation="-90" transform="translate(100,100) rotate(-90)" style="cursor: pointer; fill: darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+        <path id="endPoint" data-rotation="90" transform="translate(300,200) rotate(90)" style="cursor: pointer; fill:darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+        </svg>
+    </div>
+    <div class="col-xl-6">
+        <svg id="svgDemo" style="width: 100%; height: 400px; border: 1px solid #ccc;">
+        <path id="resizablePathDemo" d="" stroke="#007BFF" fill="none" stroke-width="2" />
+        <path id="startPointDemo" data-rotation="-90" transform="translate(100,100) rotate(-90)" style="cursor: pointer; fill: #007BFF;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+        <path id="endPointDemo" data-rotation="90" transform="translate(300,200) rotate(90)" style="cursor: pointer; fill: #007BFF;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+        </svg>
+    </div>
+</div> -->
 @push('scripts')
 <!-- Weekly and Monthly Line and Bar Chart -->
 <script type="module">
@@ -1206,24 +1241,17 @@
     initializeCurveLineChart(dateRangeId);
 </script>
 <script type="module">
-    import { initDragCard } from "/module/design-helper-function.js";
+    import { initDragAndDrop } from "/module/design-helper-function.js";
 
     // drag and drop default card
     const row = '.drag-row';
     const column = '.drag-column';
     const cardKey = '.group-card';
     const lineConnectionId = 'connectionLines';
-    const svgId1='svg';
-    const svgId2='svgDemo';
-
-    // drag and drop custom card
-    // const dragColumn = '.drag-column';
-    // const cardBg = 'filex-column-card';
-    // const cardId = '.group-card';
 
     // DOM ready
     document.addEventListener('DOMContentLoaded', () => {
-        initDragCard(column, cardKey, row, svgId1, svgId2)
+        initDragAndDrop(column, cardKey, row, lineConnectionId)
     });
     
 </script>
@@ -1381,6 +1409,154 @@
     };
 </script> -->
 <script>
+    // --------------------- DRAG FUNCTIONALITY ---------------------
+    function makeDraggable(wrapperId) {
+        const wrapper = document.getElementById(wrapperId);
+        let offsetX = 0, offsetY = 0, isDragging = false;
+
+        wrapper.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            offsetX = e.clientX - wrapper.offsetLeft;
+            offsetY = e.clientY - wrapper.offsetTop;
+            wrapper.style.zIndex = 1;
+        });
+
+        document.addEventListener("mousemove", (e) => {
+            if (isDragging) {
+                wrapper.style.left = (e.clientX - offsetX) + "px";
+                wrapper.style.top = (e.clientY - offsetY) + "px";
+                drawConnection();
+            }
+        });
+
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+            wrapper.style.zIndex = 0;
+        });
+    }
+
+    makeDraggable("userTableWrapper");
+    makeDraggable("emailTableWrapper");
+
+    // --------------------- LINE DRAWING ---------------------
+    function drawConnection() {
+        const svg = document.getElementById("svg");
+        const path = document.getElementById("resizablePath");
+        const startPoint = document.getElementById("startPoint");
+        const endPoint = document.getElementById("endPoint");
+
+        const svgRect = svg.getBoundingClientRect();
+        const userRow = document.querySelector("#userTable tbody tr");
+        const emailRow = document.querySelector("#emailTable tbody tr");
+
+        if (!userRow || !emailRow) return;
+
+        const userRect = userRow.getBoundingClientRect();
+        const emailRect = emailRow.getBoundingClientRect();
+
+        const startX = userRect.right - svgRect.left;
+        const startY = userRect.top + userRect.height / 2 - svgRect.top;
+
+        const endX = emailRect.left - svgRect.left;
+        const endY = emailRect.top + emailRect.height / 2 - svgRect.top;
+
+        const dx = (endX - startX) * 0.3;
+
+        const d = `
+            M ${startX} ${startY}
+            C ${startX + dx} ${startY},
+            ${endX - dx} ${endY},
+            ${endX} ${endY}
+        `;
+
+        path.setAttribute("d", d.trim());
+
+        // Show start and end points
+        startPoint.setAttribute("transform", `translate(${startX},${startY}) rotate(-90)`);
+        endPoint.setAttribute("transform", `translate(${endX},${endY}) rotate(90)`);
+    }
+
+    // --------------------- ENSURE INITIAL DRAW ---------------------
+    document.addEventListener("DOMContentLoaded", () => {
+        // Give layout time to finish
+        setTimeout(() => {
+            drawConnection();
+        }, 50); // small delay ensures tables are rendered
+    });
+
+    window.addEventListener("resize", drawConnection);
+</script>
+<!-- <script>
+    // --------------------- DRAG FUNCTIONALITY ---------------------
+    function makeDraggable(wrapperId) {
+        const wrapper = document.getElementById(wrapperId);
+        let offsetX = 0, offsetY = 0, isDragging = false;
+
+        wrapper.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            offsetX = e.clientX - wrapper.offsetLeft;
+            offsetY = e.clientY - wrapper.offsetTop;
+            wrapper.style.zIndex = 1;
+        });
+
+        document.addEventListener("mousemove", (e) => {
+            if (isDragging) {
+                wrapper.style.left = (e.clientX - offsetX) + "px";
+                wrapper.style.top = (e.clientY - offsetY) + "px";
+                drawConnection();
+            }
+        });
+
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+            wrapper.style.zIndex = 0;
+        });
+    }
+
+    makeDraggable("userTableWrapper");
+    makeDraggable("emailTableWrapper");
+
+    // --------------------- LINE DRAWING ---------------------
+    function drawConnection() {
+        const svg = document.getElementById("svg");
+        const path = document.getElementById("resizablePath");
+        const startPoint = document.getElementById("startPoint");
+        const endPoint = document.getElementById("endPoint");
+
+        const svgRect = svg.getBoundingClientRect();
+        const userRow = document.querySelector("#userTable tbody tr");
+        const emailRow = document.querySelector("#emailTable tbody tr");
+
+        if (!userRow || !emailRow) return;
+
+        const userRect = userRow.getBoundingClientRect();
+        const emailRect = emailRow.getBoundingClientRect();
+
+        const startX = userRect.right - svgRect.left;
+        const startY = userRect.top + userRect.height / 2 - svgRect.top;
+
+        const endX = emailRect.left - svgRect.left;
+        const endY = emailRect.top + emailRect.height / 2 - svgRect.top;
+
+        const dx = (endX - startX) * 0.3;
+
+        const d = `
+            M ${startX} ${startY}
+            C ${startX + dx} ${startY},
+            ${endX - dx} ${endY},
+            ${endX} ${endY}
+        `;
+
+        path.setAttribute("d", d.trim());
+        startPoint.setAttribute("transform", `translate(${startX},${startY}) rotate(-90)`);
+        endPoint.setAttribute("transform", `translate(${endX},${endY}) rotate(90)`);
+    }
+
+    // Initial draw
+    document.addEventListener("DOMContentLoaded", drawConnection);
+    window.addEventListener("resize", drawConnection);
+</script> -->
+<!-- <script>
 (function () {
   const svg = document.getElementById("svg");
   const path = document.getElementById("resizablePath");
@@ -1452,77 +1628,77 @@
 })();
 </script>
 
-// <script>
-// (function () {
-//   const svg = document.getElementById("svgDemo");
-//   const path = document.getElementById("resizablePathDemo");
-//   const start = document.getElementById("startPointDemo");
-//   const end = document.getElementById("endPointDemo");
+<script>
+(function () {
+  const svg = document.getElementById("svgDemo");
+  const path = document.getElementById("resizablePathDemo");
+  const start = document.getElementById("startPointDemo");
+  const end = document.getElementById("endPointDemo");
 
-//   let draggingPoint = null;
+  let draggingPoint = null;
 
-//   const getMouseCoords = (e) => {
-//     const rect = svg.getBoundingClientRect();
-//     return {
-//       x: e.clientX - rect.left,
-//       y: e.clientY - rect.top
-//     };
-//   };
+  const getMouseCoords = (e) => {
+    const rect = svg.getBoundingClientRect();
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
+  };
 
-//   const getPositionFromTransform = (element) => {
-//     const transform = element.getAttribute("transform");
-//     if (!transform) return { x: 0, y: 0 };
-//     const match = transform.match(/translate\(([^,]+),\s*([^)]+)\)/);
-//     if (!match) return { x: 0, y: 0 };
-//     return {
-//       x: parseFloat(match[1]),
-//       y: parseFloat(match[2])
-//     };
-//   };
+  const getPositionFromTransform = (element) => {
+    const transform = element.getAttribute("transform");
+    if (!transform) return { x: 0, y: 0 };
+    const match = transform.match(/translate\(([^,]+),\s*([^)]+)\)/);
+    if (!match) return { x: 0, y: 0 };
+    return {
+      x: parseFloat(match[1]),
+      y: parseFloat(match[2])
+    };
+  };
 
-//   const setPositionPreserveRotation = (element, x, y) => {
-//     const rotation = element.getAttribute("data-rotation") || "0";
-//     element.setAttribute("transform", `translate(${x},${y}) rotate(${rotation})`);
-//   };
+  const setPositionPreserveRotation = (element, x, y) => {
+    const rotation = element.getAttribute("data-rotation") || "0";
+    element.setAttribute("transform", `translate(${x},${y}) rotate(${rotation})`);
+  };
 
-//   const updatePath = () => {
-//     const startPos = getPositionFromTransform(start);
-//     const endPos = getPositionFromTransform(end);
-//     const dx = endPos.x - startPos.x;
-//     const curveStrength = 1.1;
-//     const cx1 = startPos.x + dx * curveStrength;
-//     const cy1 = startPos.y;
-//     const cx2 = endPos.x - dx * curveStrength;
-//     const cy2 = endPos.y;
-//     const d = `M${startPos.x} ${startPos.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${endPos.x} ${endPos.y}`;
-//     path.setAttribute("d", d);
-//   };
+  const updatePath = () => {
+    const startPos = getPositionFromTransform(start);
+    const endPos = getPositionFromTransform(end);
+    const dx = endPos.x - startPos.x;
+    const curveStrength = 1.1;
+    const cx1 = startPos.x + dx * curveStrength;
+    const cy1 = startPos.y;
+    const cx2 = endPos.x - dx * curveStrength;
+    const cy2 = endPos.y;
+    const d = `M${startPos.x} ${startPos.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${endPos.x} ${endPos.y}`;
+    path.setAttribute("d", d);
+  };
 
-//   const onMouseDown = (e) => {
-//     if (e.target === start || e.target === end) {
-//       draggingPoint = e.target;
-//     }
-//   };
+  const onMouseDown = (e) => {
+    if (e.target === start || e.target === end) {
+      draggingPoint = e.target;
+    }
+  };
 
-//   const onMouseMove = (e) => {
-//     if (!draggingPoint) return;
-//     const { x, y } = getMouseCoords(e);
-//     setPositionPreserveRotation(draggingPoint, x, y);
-//     updatePath();
-//   };
+  const onMouseMove = (e) => {
+    if (!draggingPoint) return;
+    const { x, y } = getMouseCoords(e);
+    setPositionPreserveRotation(draggingPoint, x, y);
+    updatePath();
+  };
 
-//   const onMouseUp = () => {
-//     draggingPoint = null;
-//   };
+  const onMouseUp = () => {
+    draggingPoint = null;
+  };
 
-//   svg.addEventListener("mousedown", onMouseDown);
-//   svg.addEventListener("mousemove", onMouseMove);
-//   svg.addEventListener("mouseup", onMouseUp);
-//   svg.addEventListener("mouseleave", onMouseUp);
+  svg.addEventListener("mousedown", onMouseDown);
+  svg.addEventListener("mousemove", onMouseMove);
+  svg.addEventListener("mouseup", onMouseUp);
+  svg.addEventListener("mouseleave", onMouseUp);
 
-//   updatePath(); // Initial render
-// })();
-// </script>
+  updatePath(); // Initial render
+})();
+</script> -->
 
 <!-- <script>
     // resize line is correct code

@@ -31,6 +31,24 @@ htm,body{
     padding: 0;
     margin: 0;
 }
+.table-relation-wrapper {
+    width: 20%;
+    position: absolute;
+    cursor: move;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 0 10px #ccc;
+    background-color: transparent;
+}
+#svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
 rect.handle {
     fill: #007bff;
     cursor: move;

@@ -955,374 +955,12 @@ export function initializeDrag(dragColumn, cardBg, cardId){
     loadCardOrder();
     document.querySelectorAll(cardId).forEach(addCardListeners);
 }
-// Drag and Drop Card default move
-// export function initDragAndDrop(column, cardKey, row, lineConnectionId){
-//     const dragRow = document.querySelector(row);
-//     const columns = Array.from(document.querySelectorAll(column));
-//     let draggedCard = null;
-
-//     function saveCardOrder() {
-//         const order = columns.map(column => {
-//         const card = column.querySelector(cardKey);
-//         return card ? card.id : null;
-//         });
-//         localStorage.setItem('cardOrder', JSON.stringify(order));
-//     }
-
-//     function loadCardOrder() {
-//         const savedOrder = JSON.parse(localStorage.getItem('cardOrder') || '[]');
-//         if (savedOrder.length) {
-//             savedOrder.forEach((cardKey, index) => {
-//                 const card = document.getElementById(cardKey);
-//                 if (card && columns[index]) {
-//                 columns[index].appendChild(card);
-//                 }
-//             });
-//         }
-//     }
-
-//     // Load saved order on page load
-//     loadCardOrder();
-
-//     function drawConnectionLines(draggedCard) {
-//         const svg = document.getElementById(lineConnectionId);
-//         svg.innerHTML = ''; // clear old lines
-
-//         const draggedRect = draggedCard.getBoundingClientRect();
-
-//         document.querySelectorAll(cardKey).forEach(card => {
-//             if (card === draggedCard) return;
-
-//             const rect = card.getBoundingClientRect();
-
-//             const startX = draggedRect.left + draggedRect.width / 2;
-//             const startY = draggedRect.top + draggedRect.height / 2;
-//             const endX = rect.left + rect.width / 2;
-//             const endY = rect.top + rect.height / 2;
-
-//             const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-//             const curve = `M${startX},${startY} C${(startX + endX) / 2},${startY} ${(startX + endX) / 2},${endY} ${endX},${endY}`;
-            
-//             path.setAttribute("d", curve);
-//             path.setAttribute("stroke", "darkcyan");
-//             path.setAttribute("stroke-width", "2");
-//             path.setAttribute("fill", "none");
-//             path.setAttribute("class", "curve-line");
-
-//             svg.appendChild(path);
-//         });
-//     }
-
-//     function removeConnectionLines() {
-//         const svg = document.getElementById('connectionLines');
-//         svg.innerHTML = '';
-//     }
-
-
-//     // Enable drag events
-//     const cards = document.querySelectorAll(cardKey);
-
-//     cards.forEach(card => {
-//         // card.addEventListener('dragstart', () => {
-//         //     draggedCard = card;
-//         //     setTimeout(() => {
-//         //         card.style.display = 'none';
-//         //     }, 0);
-//         // });
-
-//         // card.addEventListener('dragend', () => {
-//         //     draggedCard.style.display = 'block';
-//         //     draggedCard = null;
-//         // });
-
-//         card.addEventListener('dragstart', (e) => {
-//             draggedCard = card;
-//             setTimeout(() => {
-//                 card.style.display = 'none';
-//                 drawConnectionLines(card); // Initial draw
-//             }, 0);
-//         });
-
-//         card.addEventListener('drag', () => {
-//             if (draggedCard) {
-//                 drawConnectionLines(draggedCard);
-//             }
-//         });
-
-//         card.addEventListener('dragend', () => {
-//             draggedCard.style.display = 'block';
-//             draggedCard = null;
-//             removeConnectionLines(); // Remove curves
-//         });
-//     });
-
-//     columns.forEach(column => {
-//         column.addEventListener('dragover', (e) => {
-//             e.preventDefault();
-//         });
-
-//         column.addEventListener('dragenter', (e) => {
-//             e.preventDefault();
-//             column.style.backgroundColor = '#fff';
-//         });
-
-//         column.addEventListener('dragleave', () => {
-//             column.style.backgroundColor = '#fff';
-//         });
-
-//         column.addEventListener('drop', () => {
-//             if (!draggedCard) return;
-
-//             const targetCard = column.querySelector(cardKey);
-//             const fromColumn = draggedCard.parentElement;
-
-//             if (targetCard && targetCard !== draggedCard) {
-//                 column.replaceChild(draggedCard, targetCard);
-//                 fromColumn.appendChild(targetCard);
-//             }
-
-//             column.style.backgroundColor = '#fff';
-//             saveCardOrder(); // Save after each drop
-//         });
-//     });
-// }
-// export function initDragAndDrop(column, cardKey, row, lineConnectionId) {
-//     const dragRow = document.querySelector(row);
-//     const columns = Array.from(document.querySelectorAll(column));
-//     let draggedCard = null;
-
-//     const svg = document.getElementById(lineConnectionId);
-
-//     function saveCardOrder() {
-//         const order = columns.map(column => {
-//             const card = column.querySelector(cardKey);
-//             return card ? card.id : null;
-//         });
-//         localStorage.setItem('cardOrder', JSON.stringify(order));
-//     }
-
-//     function loadCardOrder() {
-//         const savedOrder = JSON.parse(localStorage.getItem('cardOrder') || '[]');
-//         if (savedOrder.length) {
-//             savedOrder.forEach((cardId, index) => {
-//                 const card = document.getElementById(cardId);
-//                 if (card && columns[index]) {
-//                     columns[index].appendChild(card);
-//                 }
-//             });
-//         }
-//     }
-
-//     loadCardOrder();
-
-//     function drawConnections() {
-//         svg.innerHTML = '';
-
-//         const cards = document.querySelectorAll(cardKey);
-//         const svgRect = svg.getBoundingClientRect();
-
-//         const baseY = Math.max(...Array.from(cards).map(c => c.getBoundingClientRect().bottom)) - svgRect.top + 20;
-
-//         const centerXs = [];
-
-//         cards.forEach(card => {
-//             const cardRect = card.getBoundingClientRect();
-//             const top = cardRect.top - svgRect.top;
-//             const left = cardRect.left - svgRect.left;
-//             const width = cardRect.width;
-//             const height = cardRect.height;
-
-//             const cx = left + width / 2;
-//             const cy = top + height;
-
-//             centerXs.push(cx); // collect all center x-coordinates
-
-//             // Draw rectangle around card
-//             // const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-//             // rect.setAttribute('x', left);
-//             // rect.setAttribute('y', top);
-//             // rect.setAttribute('width', width);
-//             // rect.setAttribute('height', height);
-//             // rect.setAttribute('fill', 'none');
-//             // rect.setAttribute('stroke', '#007BFF');
-//             // rect.setAttribute('stroke-width', '1');
-//             // svg.appendChild(rect);
-
-//             // Draw vertical line from card to baseY
-//             const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-//             line.setAttribute('x1', cx);
-//             line.setAttribute('y1', cy);
-//             line.setAttribute('x2', cx);
-//             line.setAttribute('y2', baseY);
-//             line.setAttribute('stroke', '#007BFF');
-//             line.setAttribute('stroke-width', '1');
-//         });
-        
-//     }
-
-    
-//     // function drawConnections() {
-//     //     svg.innerHTML = '';
-
-//     //     const cards = document.querySelectorAll(cardKey);
-//     //     const svgRect = svg.getBoundingClientRect();
-//     //     if (cards.length < 2) return;
-
-//     //     const getHeaderPoints = (el) => {
-//     //         const rect = el.getBoundingClientRect();
-//     //         const top = rect.top - svgRect.top;
-//     //         const left = rect.left - svgRect.left;
-//     //         const width = rect.width;
-//     //         const headerHeight = 40;
-
-//     //         return {
-//     //             headerLeft: { x: left, y: top + headerHeight / 2 },
-//     //             headerRight: { x: left + width, y: top + headerHeight / 2 }
-//     //         };
-//     //     };
-
-//     //     cards.forEach((card, index) => {
-//     //         const points = getHeaderPoints(card);
-
-//     //         // ✅ Draw pinpoints based on position
-//     //         if (index === 0) {
-//     //             drawPin(points.headerRight); // ✅ Only right pin
-//     //         } else if (index === cards.length - 1) {
-//     //             drawPin(points.headerLeft);  // ✅ Only left pin
-//     //         } else {
-//     //             drawPin(points.headerLeft);  // ✅ Both pins
-//     //             drawPin(points.headerRight);
-//     //         }
-
-//     //         // ✅ Draw curved line from previous card’s right pin to this card’s left pin
-//     //         if (index > 0) {
-//     //             const prevPoints = getHeaderPoints(cards[index - 1]);
-//     //             drawCurvedPath(prevPoints.headerRight, points.headerLeft); // ✅ Start from inside previous
-//     //         }
-//     //     });
-//     // }
-
-//     // function drawPin({ x, y }) {
-//     //     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-//     //     circle.setAttribute('cx', x);
-//     //     circle.setAttribute('cy', y);
-//     //     circle.setAttribute('r', 4);
-//     //     circle.setAttribute('fill', '#007BFF');
-//     //     svg.appendChild(circle);
-//     // }
-
-//     // function drawCurvedPath(start, end) {
-//     //     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-
-//     //     const midX = (start.x + end.x) / 2;
-//     //     const d = `M ${start.x} ${end.y} ${midX} ${start.y}, ${end.x} ${end.y} C ${midX} ${end.y}, ${end.x} ${end.y}`;
-
-//     //     path.setAttribute('d', d);
-//     //     path.setAttribute('stroke', '#007BFF');
-//     //     path.setAttribute('stroke-width', '2');
-//     //     path.setAttribute('fill', 'none');
-
-//     //     // Optional animation
-//     //     const length = path.getTotalLength();
-//     //     path.style.strokeDasharray = length;
-//     //     path.style.strokeDashoffset = length;
-//     //     path.style.animation = 'dash 0.8s ease forwards';
-
-//     //     svg.appendChild(path);
-//     // }
-
-//     drawConnections();
-
-//     // Recalculate lines on window resize
-//     window.addEventListener('resize', drawConnections);
-
-//     const cards = document.querySelectorAll(cardKey);
-
-//     cards.forEach(card => {
-//         card.setAttribute('draggable', true);
-
-//         card.addEventListener('dragstart', () => {
-//             draggedCard = card;
-//             setTimeout(() => {
-//                 card.style.visibility = 'hidden';
-//             }, 0);
-//         });
-
-//         card.addEventListener('drag', () => {
-//             if (draggedCard) {
-//                 drawConnections(); // live redraw while dragging
-//             }
-//         });
-
-//         card.addEventListener('dragend', () => {
-//             card.style.visibility = 'visible';
-//             draggedCard = null;
-//             setTimeout(drawConnections, 0); // ensure reflow
-//         });
-//     });
-
-//     columns.forEach(column => {
-//         column.addEventListener('dragover', (e) => e.preventDefault());
-
-//         column.addEventListener('drop', () => {
-//             if (!draggedCard) return;
-
-//             const fromColumn = draggedCard.parentElement;
-//             const existingCard = column.querySelector(cardKey);
-
-//             if (existingCard && existingCard !== draggedCard) {
-//                 column.replaceChild(draggedCard, existingCard);
-//                 fromColumn.appendChild(existingCard);
-//             } else {
-//                 column.appendChild(draggedCard);
-//             }
-
-//             saveCardOrder();
-//             drawConnections();
-//         });
-//     });
-// }
-
-export function initDragCard(column, cardKey, row, svgId1, svgId2) {
+export function initDragAndDrop(column, cardKey, row, lineConnectionId) {
     const dragRow = document.querySelector(row);
     const columns = Array.from(document.querySelectorAll(column));
-    const svg1 = document.getElementById(svgId1); // connects card 0 to 1
-    const svg2 = document.getElementById(svgId2); // connects card 1 to 2
+    let draggedCard = null;
 
-    function getCardCenter(card) {
-        const rect = card.getBoundingClientRect();
-        return {
-            x: rect.left + rect.width / 2,
-            y: rect.top + rect.height / 2
-        };
-    }
-
-    function drawLine(svg, fromCardId, toCardId, color) {
-        const fromCard = document.getElementById(fromCardId);
-        const toCard = document.getElementById(toCardId);
-        if (!fromCard || !toCard) return;
-
-        const svgRect = svg.getBoundingClientRect();
-        const from = getCardCenter(fromCard);
-        const to = getCardCenter(toCard);
-
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        line.setAttribute('x1', from.x - svgRect.left);
-        line.setAttribute('y1', from.y - svgRect.top);
-        line.setAttribute('x2', to.x - svgRect.left);
-        line.setAttribute('y2', to.y - svgRect.top);
-        line.setAttribute('stroke', color);
-        line.setAttribute('stroke-width', '2');
-        svg.appendChild(line);
-    }
-
-    function drawConnections() {
-        svg1.innerHTML = '';
-        svg2.innerHTML = '';
-
-        drawLine(svg1, 'group_card_0', 'group_card_1', 'orange');
-        drawLine(svg2, 'group_card_1', 'group_card_2', '#007BFF');
-    }
+    const svg = document.getElementById(lineConnectionId);
 
     function saveCardOrder() {
         const order = columns.map(column => {
@@ -1346,27 +984,170 @@ export function initDragCard(column, cardKey, row, svgId1, svgId2) {
 
     loadCardOrder();
 
-    let draggedCard = null;
+    function drawConnections() {
+        svg.innerHTML = '';
 
-    dragRow.addEventListener('dragstart', (e) => {
-        if (e.target.matches(cardKey)) {
-            draggedCard = e.target;
-        }
+        const cards = document.querySelectorAll(cardKey);
+        const svgRect = svg.getBoundingClientRect();
+
+        const baseY = Math.max(...Array.from(cards).map(c => c.getBoundingClientRect().bottom)) - svgRect.top + 20;
+
+        const centerXs = [];
+
+        cards.forEach(card => {
+            const cardRect = card.getBoundingClientRect();
+            const top = cardRect.top - svgRect.top;
+            const left = cardRect.left - svgRect.left;
+            const width = cardRect.width;
+            const height = cardRect.height;
+
+            const cx = left + width / 2;
+            const cy = top + height;
+
+            centerXs.push(cx); // collect all center x-coordinates
+
+            // Draw rectangle around card
+            // const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            // rect.setAttribute('x', left);
+            // rect.setAttribute('y', top);
+            // rect.setAttribute('width', width);
+            // rect.setAttribute('height', height);
+            // rect.setAttribute('fill', 'none');
+            // rect.setAttribute('stroke', '#007BFF');
+            // rect.setAttribute('stroke-width', '1');
+            // svg.appendChild(rect);
+
+            // Draw vertical line from card to baseY
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute('x1', cx);
+            line.setAttribute('y1', cy);
+            line.setAttribute('x2', cx);
+            line.setAttribute('y2', baseY);
+            line.setAttribute('stroke', '#007BFF');
+            line.setAttribute('stroke-width', '1');
+        });
+        
+    }
+
+    
+    // function drawConnections() {
+    //     svg.innerHTML = '';
+
+    //     const cards = document.querySelectorAll(cardKey);
+    //     const svgRect = svg.getBoundingClientRect();
+    //     if (cards.length < 2) return;
+
+    //     const getHeaderPoints = (el) => {
+    //         const rect = el.getBoundingClientRect();
+    //         const top = rect.top - svgRect.top;
+    //         const left = rect.left - svgRect.left;
+    //         const width = rect.width;
+    //         const headerHeight = 40;
+
+    //         return {
+    //             headerLeft: { x: left, y: top + headerHeight / 2 },
+    //             headerRight: { x: left + width, y: top + headerHeight / 2 }
+    //         };
+    //     };
+
+    //     cards.forEach((card, index) => {
+    //         const points = getHeaderPoints(card);
+
+    //         // ✅ Draw pinpoints based on position
+    //         if (index === 0) {
+    //             drawPin(points.headerRight); // ✅ Only right pin
+    //         } else if (index === cards.length - 1) {
+    //             drawPin(points.headerLeft);  // ✅ Only left pin
+    //         } else {
+    //             drawPin(points.headerLeft);  // ✅ Both pins
+    //             drawPin(points.headerRight);
+    //         }
+
+    //         // ✅ Draw curved line from previous card’s right pin to this card’s left pin
+    //         if (index > 0) {
+    //             const prevPoints = getHeaderPoints(cards[index - 1]);
+    //             drawCurvedPath(prevPoints.headerRight, points.headerLeft); // ✅ Start from inside previous
+    //         }
+    //     });
+    // }
+
+    // function drawPin({ x, y }) {
+    //     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    //     circle.setAttribute('cx', x);
+    //     circle.setAttribute('cy', y);
+    //     circle.setAttribute('r', 4);
+    //     circle.setAttribute('fill', '#007BFF');
+    //     svg.appendChild(circle);
+    // }
+
+    // function drawCurvedPath(start, end) {
+    //     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+    //     const midX = (start.x + end.x) / 2;
+    //     const d = `M ${start.x} ${end.y} ${midX} ${start.y}, ${end.x} ${end.y} C ${midX} ${end.y}, ${end.x} ${end.y}`;
+
+    //     path.setAttribute('d', d);
+    //     path.setAttribute('stroke', '#007BFF');
+    //     path.setAttribute('stroke-width', '2');
+    //     path.setAttribute('fill', 'none');
+
+    //     // Optional animation
+    //     const length = path.getTotalLength();
+    //     path.style.strokeDasharray = length;
+    //     path.style.strokeDashoffset = length;
+    //     path.style.animation = 'dash 0.8s ease forwards';
+
+    //     svg.appendChild(path);
+    // }
+
+    drawConnections();
+
+    // Recalculate lines on window resize
+    window.addEventListener('resize', drawConnections);
+
+    const cards = document.querySelectorAll(cardKey);
+
+    cards.forEach(card => {
+        card.setAttribute('draggable', true);
+
+        card.addEventListener('dragstart', () => {
+            draggedCard = card;
+            setTimeout(() => {
+                card.style.visibility = 'hidden';
+            }, 0);
+        });
+
+        card.addEventListener('drag', () => {
+            if (draggedCard) {
+                drawConnections(); // live redraw while dragging
+            }
+        });
+
+        card.addEventListener('dragend', () => {
+            card.style.visibility = 'visible';
+            draggedCard = null;
+            setTimeout(drawConnections, 0); // ensure reflow
+        });
     });
 
-    dragRow.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
+    columns.forEach(column => {
+        column.addEventListener('dragover', (e) => e.preventDefault());
 
-    dragRow.addEventListener('drop', (e) => {
-        if (e.target.closest(column)) {
-            e.target.closest(column).appendChild(draggedCard);
+        column.addEventListener('drop', () => {
+            if (!draggedCard) return;
+
+            const fromColumn = draggedCard.parentElement;
+            const existingCard = column.querySelector(cardKey);
+
+            if (existingCard && existingCard !== draggedCard) {
+                column.replaceChild(draggedCard, existingCard);
+                fromColumn.appendChild(existingCard);
+            } else {
+                column.appendChild(draggedCard);
+            }
+
             saveCardOrder();
             drawConnections();
-        }
+        });
     });
-
-    window.addEventListener('resize', drawConnections);
-    window.addEventListener('DOMContentLoaded', drawConnections);
-    drawConnections();
 }
