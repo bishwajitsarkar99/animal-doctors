@@ -619,7 +619,7 @@
 </script>
 <!-- number cricle bar and number rolling animation with scrol animation and drag and drop -->
 <script type="module">
-    import { cricleNumberPlate, numberRolling , triggerIfInView, initializeBarCharts, initDragAndDrop } from "/module/module-min-js/design-helper-function-min.js";
+    import { cricleNumberPlate, numberRolling , triggerIfInView, initializeBarCharts } from "/module/module-min-js/design-helper-function-min.js";
     // initializeDrag
 
     // number cricle bar
@@ -645,7 +645,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         cricleNumberPlate(numberClass, cricleBar, percentage);
         numberRolling(numberSelector, containerSelector);
-        initDragAndDrop(column, cardKey, row);
+        //initDragAndDrop(column, cardKey, row);
         //initializeDrag(dragColumn, cardBg, cardId);
     });
     // Scroll animation

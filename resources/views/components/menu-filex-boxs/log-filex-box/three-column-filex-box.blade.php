@@ -67,5 +67,28 @@
         </div>
         @endforeach
     </div>
-    <svg id="connectionLines" width="100%" height="300" style="position:absolute; top:0; left:0; z-index:1;"></svg>
+    <svg id="svg" style="width: 100%; height: 400px; border: 1px solid #ccc;position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;">
+    <path id="resizablePath" d="" stroke="rgb(238, 155, 53)" fill="none" stroke-width="2" />
+    <path id="startPoint" data-rotation="-90" transform="translate(100,100) rotate(-90)" style="cursor: pointer; fill: darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+    <path id="endPoint" data-rotation="90" transform="translate(300,200) rotate(90)" style="cursor: pointer; fill:darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+    </svg>
+
+    <svg id="svgDemo" style="width: 100%; height: 400px; border: 1px solid #ccc;position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;">
+    <path id="resizablePathDemo" d="" stroke="#007BFF" fill="none" stroke-width="2" />
+    <path id="startPointDemo" data-rotation="-90" transform="translate(100,100) rotate(-90)" style="cursor: pointer; fill: #007BFF;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+    <path id="endPointDemo" data-rotation="90" transform="translate(300,200) rotate(90)" style="cursor: pointer; fill: #007BFF;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+    </svg>
 </div>
+<!-- <svg id="connectionLines" width="100%" height="300" style="position:absolute; top:0; left:0; z-index:1;"></svg> -->

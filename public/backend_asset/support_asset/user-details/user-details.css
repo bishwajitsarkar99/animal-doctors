@@ -31,8 +31,18 @@ htm,body{
     padding: 0;
     margin: 0;
 }
+rect.handle {
+    fill: #007bff;
+    cursor: move;
+    width: 12px;
+    height: 12px;
+}
 .drag-placeholder {
     box-sizing: border-box;
+    background-color: rgb(238, 155, 53);
+}
+#card-container {
+    position: relative;
 }
 .drag-row {
     position: relative;

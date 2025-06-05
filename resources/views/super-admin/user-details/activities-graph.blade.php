@@ -284,6 +284,17 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- <svg id="svg" style="width: 100%; height: 400px; border: 1px solid #ccc;">
+                        <path id="resizablePath" d="" stroke="rgb(238, 155, 53)" fill="none" stroke-width="2" />
+                        <path id="startPoint" data-rotation="-90" transform="translate(100,100) rotate(-90)" style="cursor: pointer; fill: darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+                        <path id="endPoint" data-rotation="90" transform="translate(300,200) rotate(90)" style="cursor: pointer; fill:darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+                        </svg>
+
+                        <svg id="svgDemo" style="width: 100%; height: 400px; border: 1px solid #ccc;">
+                        <path id="resizablePathDemo" d="" stroke="#007BFF" fill="none" stroke-width="2" />
+                        <path id="startPointDemo" data-rotation="-90" transform="translate(100,100) rotate(-90)" style="cursor: pointer; fill: #007BFF;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+                        <path id="endPointDemo" data-rotation="90" transform="translate(300,200) rotate(90)" style="cursor: pointer; fill: #007BFF;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+                        </svg> -->
                     </x-chart-cards.multi-chart-cards.multi-chart-body>
                 </div>
             </div>
@@ -1195,22 +1206,24 @@
     initializeCurveLineChart(dateRangeId);
 </script>
 <script type="module">
-    import { initDragAndDrop } from "/module/design-helper-function.js";
+    import { initDragCard } from "/module/design-helper-function.js";
 
     // drag and drop default card
     const row = '.drag-row';
     const column = '.drag-column';
     const cardKey = '.group-card';
     const lineConnectionId = 'connectionLines';
+    const svgId1='svg';
+    const svgId2='svgDemo';
 
     // drag and drop custom card
-    const dragColumn = '.drag-column';
-    const cardBg = 'filex-column-card';
-    const cardId = '.group-card';
+    // const dragColumn = '.drag-column';
+    // const cardBg = 'filex-column-card';
+    // const cardId = '.group-card';
 
     // DOM ready
     document.addEventListener('DOMContentLoaded', () => {
-        initDragAndDrop(column, cardKey, row, lineConnectionId);
+        initDragCard(column, cardKey, row, svgId1, svgId2)
     });
     
 </script>
@@ -1367,6 +1380,405 @@
         });
     };
 </script> -->
+<script>
+(function () {
+  const svg = document.getElementById("svg");
+  const path = document.getElementById("resizablePath");
+  const start = document.getElementById("startPoint");
+  const end = document.getElementById("endPoint");
+
+  let draggingPoint = null;
+
+  const getMouseCoords = (e) => {
+    const rect = svg.getBoundingClientRect();
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
+  };
+
+  const getPositionFromTransform = (element) => {
+    const transform = element.getAttribute("transform");
+    if (!transform) return { x: 0, y: 0 };
+    const match = transform.match(/translate\(([^,]+),\s*([^)]+)\)/);
+    if (!match) return { x: 0, y: 0 };
+    return {
+      x: parseFloat(match[1]),
+      y: parseFloat(match[2])
+    };
+  };
+
+  const setPositionPreserveRotation = (element, x, y) => {
+    const rotation = element.getAttribute("data-rotation") || "0";
+    element.setAttribute("transform", `translate(${x},${y}) rotate(${rotation})`);
+  };
+
+  const updatePath = () => {
+    const startPos = getPositionFromTransform(start);
+    const endPos = getPositionFromTransform(end);
+    const dx = endPos.x - startPos.x;
+    const curveStrength = 1.1;
+    const cx1 = startPos.x + dx * curveStrength;
+    const cy1 = startPos.y;
+    const cx2 = endPos.x - dx * curveStrength;
+    const cy2 = endPos.y;
+    const d = `M${startPos.x} ${startPos.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${endPos.x} ${endPos.y}`;
+    path.setAttribute("d", d);
+  };
+
+  const onMouseDown = (e) => {
+    if (e.target === start || e.target === end) {
+      draggingPoint = e.target;
+    }
+  };
+
+  const onMouseMove = (e) => {
+    if (!draggingPoint) return;
+    const { x, y } = getMouseCoords(e);
+    setPositionPreserveRotation(draggingPoint, x, y);
+    updatePath();
+  };
+
+  const onMouseUp = () => {
+    draggingPoint = null;
+  };
+
+  svg.addEventListener("mousedown", onMouseDown);
+  svg.addEventListener("mousemove", onMouseMove);
+  svg.addEventListener("mouseup", onMouseUp);
+  svg.addEventListener("mouseleave", onMouseUp);
+
+  updatePath(); // Initial render
+})();
+</script>
+
+// <script>
+// (function () {
+//   const svg = document.getElementById("svgDemo");
+//   const path = document.getElementById("resizablePathDemo");
+//   const start = document.getElementById("startPointDemo");
+//   const end = document.getElementById("endPointDemo");
+
+//   let draggingPoint = null;
+
+//   const getMouseCoords = (e) => {
+//     const rect = svg.getBoundingClientRect();
+//     return {
+//       x: e.clientX - rect.left,
+//       y: e.clientY - rect.top
+//     };
+//   };
+
+//   const getPositionFromTransform = (element) => {
+//     const transform = element.getAttribute("transform");
+//     if (!transform) return { x: 0, y: 0 };
+//     const match = transform.match(/translate\(([^,]+),\s*([^)]+)\)/);
+//     if (!match) return { x: 0, y: 0 };
+//     return {
+//       x: parseFloat(match[1]),
+//       y: parseFloat(match[2])
+//     };
+//   };
+
+//   const setPositionPreserveRotation = (element, x, y) => {
+//     const rotation = element.getAttribute("data-rotation") || "0";
+//     element.setAttribute("transform", `translate(${x},${y}) rotate(${rotation})`);
+//   };
+
+//   const updatePath = () => {
+//     const startPos = getPositionFromTransform(start);
+//     const endPos = getPositionFromTransform(end);
+//     const dx = endPos.x - startPos.x;
+//     const curveStrength = 1.1;
+//     const cx1 = startPos.x + dx * curveStrength;
+//     const cy1 = startPos.y;
+//     const cx2 = endPos.x - dx * curveStrength;
+//     const cy2 = endPos.y;
+//     const d = `M${startPos.x} ${startPos.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${endPos.x} ${endPos.y}`;
+//     path.setAttribute("d", d);
+//   };
+
+//   const onMouseDown = (e) => {
+//     if (e.target === start || e.target === end) {
+//       draggingPoint = e.target;
+//     }
+//   };
+
+//   const onMouseMove = (e) => {
+//     if (!draggingPoint) return;
+//     const { x, y } = getMouseCoords(e);
+//     setPositionPreserveRotation(draggingPoint, x, y);
+//     updatePath();
+//   };
+
+//   const onMouseUp = () => {
+//     draggingPoint = null;
+//   };
+
+//   svg.addEventListener("mousedown", onMouseDown);
+//   svg.addEventListener("mousemove", onMouseMove);
+//   svg.addEventListener("mouseup", onMouseUp);
+//   svg.addEventListener("mouseleave", onMouseUp);
+
+//   updatePath(); // Initial render
+// })();
+// </script>
+
+<!-- <script>
+    // resize line is correct code
+  const svg = document.getElementById("svg");
+  const path = document.getElementById("resizablePath");
+  const start = document.getElementById("startPoint");
+  const end = document.getElementById("endPoint");
+
+  let draggingPoint = null;
+
+  const getMouseCoords = (e) => {
+    const rect = svg.getBoundingClientRect();
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
+  };
+
+  const getPositionFromTransform = (element) => {
+    const transform = element.getAttribute("transform");
+    if (!transform) return { x: 0, y: 0 };
+
+    const match = transform.match(/translate\(([^,]+),\s*([^)]+)\)/);
+    if (!match) return { x: 0, y: 0 };
+
+    return {
+      x: parseFloat(match[1]),
+      y: parseFloat(match[2])
+    };
+  };
+
+  const setPositionPreserveRotation = (element, x, y) => {
+    const rotation = element.getAttribute("data-rotation") || "0";
+    element.setAttribute("transform", `translate(${x},${y}) rotate(${rotation})`);
+  };
+
+  const updatePath = () => {
+    const startPos = getPositionFromTransform(start);
+    const endPos = getPositionFromTransform(end);
+
+    const dx = endPos.x - startPos.x;
+    const dy = endPos.y - startPos.y;
+
+    // Horizontal curve bias
+    const curveStrength = 1.1;
+    const cx1 = startPos.x + dx * curveStrength;
+    const cy1 = startPos.y;
+    const cx2 = endPos.x - dx * curveStrength;
+    const cy2 = endPos.y;
+
+    const d = `M${startPos.x} ${startPos.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${endPos.x} ${endPos.y}`;
+    path.setAttribute("d", d);
+  };
+
+  const onMouseDown = (e) => {
+    if (e.target === start || e.target === end) {
+      draggingPoint = e.target;
+    }
+  };
+
+  const onMouseMove = (e) => {
+    if (!draggingPoint) return;
+
+    const { x, y } = getMouseCoords(e);
+    setPositionPreserveRotation(draggingPoint, x, y);
+    updatePath();
+  };
+
+  const onMouseUp = () => {
+    draggingPoint = null;
+  };
+
+  svg.addEventListener("mousedown", onMouseDown);
+  svg.addEventListener("mousemove", onMouseMove);
+  svg.addEventListener("mouseup", onMouseUp);
+  svg.addEventListener("mouseleave", onMouseUp);
+
+  updatePath(); // Initial render
+</script> -->
+
+<!-- <script>
+  const svg = document.getElementById("svg");
+  const path = document.getElementById("resizablePath");
+  const start = document.getElementById("startPoint");
+  const end = document.getElementById("endPoint");
+
+  let draggingPoint = null;
+
+  const getMouseCoords = (e) => {
+    const rect = svg.getBoundingClientRect();
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
+  };
+
+    const getPositionFromTransform = (element) => {
+        const transform = element.getAttribute("transform");
+        if (!transform) return { x: 0, y: 0 }; // fallback position
+
+        const match = transform.match(/translate\(([^,]+),\s*([^)]+)\)/);
+        if (!match) return { x: 0, y: 0 }; // if pattern doesn't match
+
+        return {
+            x: parseFloat(match[1]),
+            y: parseFloat(match[2])
+        };
+    };
+
+  const setPosition = (element, x, y) => {
+    element.setAttribute("transform", `translate(${x},${y})`);
+  };
+
+  const updatePath = () => {
+    const startPos = getPositionFromTransform(start);
+    const endPos = getPositionFromTransform(end);
+
+    // Control points for cubic Bezier
+    const dx = endPos.x - startPos.x;
+    const dy = endPos.y - startPos.y;
+
+    // Curve strength (dynamic)
+    const curveStrength = 1; // tweak this to make it more/less curvy
+    const cx1 = startPos.x + dx * curveStrength;
+    const cy1 = startPos.y;
+    const cx2 = endPos.x - dx * curveStrength;
+    const cy2 = endPos.y;
+
+    const d = `M${startPos.x} ${startPos.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${endPos.x} ${endPos.y}`;
+    path.setAttribute("d", d);
+  };
+
+  const onMouseDown = (e) => {
+    if (e.target === start || e.target === end) {
+      draggingPoint = e.target;
+    }
+  };
+
+  const onMouseMove = (e) => {
+    if (!draggingPoint) return;
+
+    const { x, y } = getMouseCoords(e);
+    setPosition(draggingPoint, x, y);
+    updatePath();
+  };
+
+  const onMouseUp = () => {
+    draggingPoint = null;
+  };
+
+  svg.addEventListener("mousedown", onMouseDown);
+  svg.addEventListener("mousemove", onMouseMove);
+  svg.addEventListener("mouseup", onMouseUp);
+  svg.addEventListener("mouseleave", onMouseUp);
+
+  updatePath(); // initial render
+</script> -->
+<!-- <script>
+  const svg = document.getElementById("svg");
+  const path = document.getElementById("resizablePath");
+  const start = document.getElementById("startPoint");
+  const end = document.getElementById("endPoint");
+
+  let draggingPoint = null;
+
+  const getMouseCoords = (e) => {
+    const rect = svg.getBoundingClientRect();
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
+  };
+
+  const updatePath = () => {
+    const startX = parseFloat(start.getAttribute("x")) + 6;
+    const startY = parseFloat(start.getAttribute("y")) + 6;
+    const endX = parseFloat(end.getAttribute("x")) + 6;
+    const endY = parseFloat(end.getAttribute("y")) + 6;
+
+    // control point for curve — you can tweak the multiplier for effect
+    const controlX = (startX + endX) / 2;
+    const controlY = Math.min(startY, endY) - 50;
+
+    const d = `M${startX} ${startY} Q ${controlX} ${controlY}, ${endX} ${endY}`;
+    path.setAttribute("d", d);
+  };
+
+  const onMouseDown = (e) => {
+    if (e.target === start || e.target === end) {
+      draggingPoint = e.target;
+    }
+  };
+
+  const onMouseMove = (e) => {
+    if (!draggingPoint) return;
+
+    const { x, y } = getMouseCoords(e);
+    draggingPoint.setAttribute("x", x - 6);
+    draggingPoint.setAttribute("y", y - 6);
+    updatePath();
+  };
+
+  const onMouseUp = () => {
+    draggingPoint = null;
+  };
+
+  svg.addEventListener("mousedown", onMouseDown);
+  svg.addEventListener("mousemove", onMouseMove);
+  svg.addEventListener("mouseup", onMouseUp);
+  svg.addEventListener("mouseleave", onMouseUp);
+
+  // Initial render
+  updatePath();
+</script> -->
+<!-- <script>
+  const svg = document.getElementById("svg");
+  const line = document.getElementById("resizableLine");
+  const start = document.getElementById("startPoint");
+  const end = document.getElementById("endPoint");
+
+  let draggingPoint = null;
+
+  const onMouseDown = (e) => {
+    draggingPoint = e.target;
+  };
+
+  const onMouseMove = (e) => {
+    if (!draggingPoint) return;
+
+    const rect = svg.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    draggingPoint.setAttribute("cx", x);
+    draggingPoint.setAttribute("cy", y);
+
+    if (draggingPoint === start) {
+      line.setAttribute("x1", x);
+      line.setAttribute("y1", y);
+    } else if (draggingPoint === end) {
+      line.setAttribute("x2", x);
+      line.setAttribute("y2", y);
+    }
+  };
+
+  const onMouseUp = () => {
+    draggingPoint = null;
+  };
+
+  start.addEventListener("mousedown", onMouseDown);
+  end.addEventListener("mousedown", onMouseDown);
+  svg.addEventListener("mousemove", onMouseMove);
+  svg.addEventListener("mouseup", onMouseUp);
+  svg.addEventListener("mouseleave", onMouseUp);
+</script> -->
+
 @endPush
 @elseif($user_log_data_table_permission == 0)
 @include('super-admin.user-details.error.data-table-permission')
