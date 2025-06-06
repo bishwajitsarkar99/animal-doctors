@@ -31,6 +31,15 @@ htm,body{
     padding: 0;
     margin: 0;
 }
+#connectorPath {
+    stroke-dasharray: 5, 5;
+    animation: dashmove 1s linear infinite;
+}
+@keyframes dashmove {
+    to {
+        stroke-dashoffset: -10;
+    }
+}
 .table-relation-wrapper {
     width: 20%;
     position: absolute;
@@ -47,7 +56,7 @@ htm,body{
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 0;
+    z-index: 9999;
 }
 rect.handle {
     fill: #007bff;

@@ -254,7 +254,7 @@
     import { hoverGridPlugin, dottedGridPlugin, axisCursorPlugin, axisTooltipTextPlugin} from "/plugins/plugins-min.js";
     const ctxUserActivityChart = document.getElementById("userActivityChart").getContext("2d");
     var gradientColor = ctxUserActivityChart.createLinearGradient(0, 0, 0, 400);
-    gradientColor.addColorStop(0, 'rgb(157, 235, 255)');  // orange at top rgb(142, 229, 255) 
+    gradientColor.addColorStop(0, '#6ec6ff');  // orange at top rgb(142, 229, 255) 
     gradientColor.addColorStop(1, 'rgb(138, 65, 255)'); // transparent at bottom rgba(185, 185, 185, 0)
     const userActivityLineChart = new Chart(ctxUserActivityChart, {
         type: "line",
@@ -353,8 +353,8 @@
         "Super admin", "Admin", "Sub admin", "Accounts", "Marketing", "Delivery", "General",
         "Inactive","Authentic","Activity","Total Users"
     ];
-    const barColors = ["rgba(23, 100, 109, 0.9)", "rgba(23, 100, 109, 0.9)", "rgba(23, 100, 109, 0.9)", "rgb(136, 86, 40)", "rgb(136, 86, 40)", "rgb(136, 86, 40)", "rgb(136, 86, 40)","#cf2e2e","#198754","#008982","#0A5EDB"];
-    // bg-color:royalblue
+    const barColors = ["#6ec6ff", "#6ec6ff", "#6ec6ff", "#6ec6ff", "#6ec6ff", "#6ec6ff", "#6ec6ff","#dc3545","#198754","#00b7ae","#384e8b8c"];
+    // bg-color:royalblue rgba(23, 100, 109, 0.9)
     // Pass the PHP array to JavaScript 
     const userCounts = @json(array_values($usersCount));
     const userCtx2 = new Chart(ctx2, {
@@ -496,7 +496,7 @@
                         type: 'bar',
                         label: 'Login',
                         data: stats.login_counts,
-                        backgroundColor: '#4e73df',
+                        backgroundColor: '#6ec6ff',
                         tension: 0.4,
                         order: 2
                     },
@@ -504,7 +504,7 @@
                         type: 'bar',
                         label: 'Logout',
                         data: stats.logout_counts,
-                        backgroundColor: '#cf2e2e',
+                        backgroundColor: '#dc3545',
                         tension: 0.4,
                         order: 3
                     },
@@ -525,7 +525,7 @@
                         type: 'bar',
                         label: 'Current Login',
                         data: stats.current_login_counts,
-                        backgroundColor: 'purple',
+                        backgroundColor: '#4e73df',
                         tension: 0.4,
                         order: 1
                     }

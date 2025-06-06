@@ -293,15 +293,35 @@
 </div>
 </div>
 <div class="row" style="position: relative; height: 300px;">
-    <svg id="svg">
-        <path id="resizablePath" stroke="rgb(238, 155, 53)" fill="none" stroke-width="2" />
-        <path id="startPoint" data-rotation="-90" transform="translate(0,0) rotate(-90)" style="fill: darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
-        <path id="endPoint" data-rotation="90" transform="translate(0,0) rotate(90)" style="fill: darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+    <svg id="svg" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; pointer-events: none;">
+        <!-- Connection 1: user to email -->
+        <g class="connection" id="connectorEmailGroup">
+            <path class="connectorPath" fill="none" stroke="rgb(238, 155, 53)" stroke-width="3" stroke-linecap="round"/>
+            <circle class="startSocket" r="5" fill="rgb(238, 155, 53)" />
+            <g class="endSocket" fill="rgb(238, 155, 53)">
+                <g transform="scale(1) translate(-12, -12)">
+                    <path d="M21.707 11.293l-7-7A1 1 0 0 0 13 5v3H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h10v3a1 1 0 0 0 1.707.707l7-7a1 1 0 0 0 0-1.414zM15 16.586V15a1 1 0 0 0-1-1H4v-4h10a1 1 0 0 0 1-1V7.414L19.586 12z"/>
+                </g>
+            </g>
+        </g>
+
+        <!-- Connection 2: user to login -->
+        <g class="connection" id="connectorLoginGroup">
+            <path class="connectorPath" fill="none" stroke="#4e73df" stroke-width="3" stroke-linecap="round"/>
+            <circle class="startSocket" r="5" fill="#4e73df" />
+            <g class="endSocket" fill="#4e73df">
+                <g transform="scale(1) translate(-12, -12)">
+                    <path d="M21.707 11.293l-7-7A1 1 0 0 0 13 5v3H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h10v3a1 1 0 0 0 1.707.707l7-7a1 1 0 0 0 0-1.414zM15 16.586V15a1 1 0 0 0-1-1H4v-4h10a1 1 0 0 0 1-1V7.414L19.586 12z"/>
+                </g>
+            </g>
+        </g>
     </svg>
 
     <div class="table-relation-wrapper" id="userTableWrapper" style="left: 50px; top: 50px;">
         <table id="userTable">
-            <thead><tr><th>Id</th><th>User</th></tr></thead>
+            <thead>
+                <tr><th>Id</th><th>User</th></tr>
+            </thead>
             <tbody>
                 <tr><td>1</td><td>Sumon</td></tr>
                 <tr><td>2</td><td>Kamal</td></tr>
@@ -313,6 +333,17 @@
     <div class="table-relation-wrapper" id="emailTableWrapper" style="left: 300px; top: 150px;">
         <table id="emailTable">
             <thead><tr><th>Id</th><th>Email</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Sumon@gmail.com</td></tr>
+                <tr><td>2</td><td>Kamal@gmail.com</td></tr>
+                <tr><td>3</td><td>Jamal@gmail.com</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-relation-wrapper" id="loginTableWrapper" style="left: 400px; top: 150px;">
+        <table id="loginTable">
+            <thead><tr><th>Id</th><th>Login</th></tr></thead>
             <tbody>
                 <tr><td>1</td><td>Sumon@gmail.com</td></tr>
                 <tr><td>2</td><td>Kamal@gmail.com</td></tr>
@@ -1414,6 +1445,13 @@
         const wrapper = document.getElementById(wrapperId);
         let offsetX = 0, offsetY = 0, isDragging = false;
 
+        // Restore from localStorage if exists
+        const savedPosition = JSON.parse(localStorage.getItem(wrapperId));
+        if (savedPosition) {
+            wrapper.style.left = savedPosition.left;
+            wrapper.style.top = savedPosition.top;
+        }
+
         wrapper.addEventListener("mousedown", (e) => {
             isDragging = true;
             offsetX = e.clientX - wrapper.offsetLeft;
@@ -1423,8 +1461,18 @@
 
         document.addEventListener("mousemove", (e) => {
             if (isDragging) {
-                wrapper.style.left = (e.clientX - offsetX) + "px";
-                wrapper.style.top = (e.clientY - offsetY) + "px";
+                const left = (e.clientX - offsetX);
+                const top = (e.clientY - offsetY);
+
+                wrapper.style.left = left + "px";
+                wrapper.style.top = top + "px";
+
+                // Save position to localStorage
+                localStorage.setItem(wrapperId, JSON.stringify({
+                    left: wrapper.style.left,
+                    top: wrapper.style.top
+                }));
+
                 drawConnection();
             }
         });
@@ -1437,52 +1485,132 @@
 
     makeDraggable("userTableWrapper");
     makeDraggable("emailTableWrapper");
+    makeDraggable("loginTableWrapper");
 
     // --------------------- LINE DRAWING ---------------------
     function drawConnection() {
         const svg = document.getElementById("svg");
-        const path = document.getElementById("resizablePath");
-        const startPoint = document.getElementById("startPoint");
-        const endPoint = document.getElementById("endPoint");
-
         const svgRect = svg.getBoundingClientRect();
-        const userRow = document.querySelector("#userTable tbody tr");
-        const emailRow = document.querySelector("#emailTable tbody tr");
+
+        const connections = [
+            {
+                groupId: "connectorEmailGroup",
+                targetSelector: "#emailTable thead tr th:nth-child(1)",
+                color: "rgb(238, 155, 53)"
+            },
+            {
+                groupId: "connectorLoginGroup",
+                targetSelector: "#loginTable thead tr th:nth-child(1)",
+                color: "rgb(0, 180, 200)"
+            }
+        ];
+
+        const userHeader = document.querySelector("#userTable thead tr");
+        if (!userHeader) return;
+        const userRect = userHeader.getBoundingClientRect();
+        const startX = userRect.right - svgRect.left;
+        const startY = userRect.top + userRect.height / 2 - svgRect.top;
+
+        connections.forEach(conn => {
+            const group = document.getElementById(conn.groupId);
+            if (!group) return;
+
+            const target = document.querySelector(conn.targetSelector);
+            if (!target) return;
+            const targetRect = target.getBoundingClientRect();
+            const endX = targetRect.left - 20 - svgRect.left;
+            const endY = targetRect.top + targetRect.height / 2 - svgRect.top;
+
+            const dx = (endX - startX) * 0.7;
+            const pathD = `
+                M ${startX} ${startY}
+                C ${startX + dx} ${startY},
+                ${endX - dx} ${endY},
+                ${endX} ${endY}
+            `;
+
+            const path = group.querySelector(".connectorPath");
+            path.setAttribute("d", pathD.trim());
+
+            // Ensure animation styling
+            path.style.strokeDasharray = "5,5";
+            path.style.animation = "none"; // reset
+            void path.offsetWidth; // trigger reflow
+            path.style.animation = "dashmove 1s linear infinite";
+
+            group.querySelector(".startSocket").setAttribute("cx", startX);
+            group.querySelector(".startSocket").setAttribute("cy", startY);
+
+            const angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);
+            group.querySelector(".endSocket").setAttribute("transform", `translate(${endX}, ${endY}) rotate(${angle})`);
+        });
+    }
+    // function drawConnection() {
+    //     const svg = document.getElementById("svg");
+    //     const path = document.getElementById("connectorPath");
+    //     const startSocket = document.getElementById("startSocket");
+    //     const endSocket = document.getElementById("endSocket");
+
+    //     const svgRect = svg.getBoundingClientRect();
+
+    //     const userHeader = document.querySelector("#userTable thead tr");
+    //     const emailHeader = document.querySelector("#emailTable thead tr th:nth-child(1)");
+
+    //     if (!userHeader || !emailHeader) return;
+
+    //     const userHeaderRect = userHeader.getBoundingClientRect();
+    //     const emailHeaderRect = emailHeader.getBoundingClientRect();
+
+    //     // Start: right center of user table header
+    //     const startX = userHeaderRect.right - svgRect.left;
+    //     const startY = userHeaderRect.top + userHeaderRect.height / 2 - svgRect.top;
+
+    //     // End: left center of email table header
+    //     //const endX = emailHeaderRect.left - svgRect.left;
+    //     const endX = emailHeaderRect.left - 20 - svgRect.left;
+    //     const endY = emailHeaderRect.top + emailHeaderRect.height / 2 - svgRect.top;
+
+    //     // Curve control
+    //     const dx = (endX - startX) * 0.7;
+
+    //     const pathD = `
+    //         M ${startX} ${startY}
+    //         C ${startX + dx} ${startY},
+    //         ${endX - dx} ${endY},
+    //         ${endX} ${endY}
+    //     `;
+    //     path.setAttribute("d", pathD.trim());
+
+    //     // Position circle
+    //     startSocket.setAttribute("cx", startX);
+    //     startSocket.setAttribute("cy", startY);
+        
+    //     // Position plug group (endSocket)
+    //     const angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);
+    //     endSocket.setAttribute("transform", `translate(${endX}, ${endY}) rotate(${angle})`);
+    // }
+
+    // --------------------- ENSURE INITIAL DRAW ---------------------
+    function waitForLayoutThenDraw() {
+        const userRow = document.querySelector("#userTable thead tr");
+        const emailRow = document.querySelector("#emailTable thead tr");
 
         if (!userRow || !emailRow) return;
 
         const userRect = userRow.getBoundingClientRect();
         const emailRect = emailRow.getBoundingClientRect();
 
-        const startX = userRect.right - svgRect.left;
-        const startY = userRect.top + userRect.height / 2 - svgRect.top;
+        const layoutReady =
+            userRect.top > 0 && emailRect.top > 0 && userRect.left !== emailRect.left;
 
-        const endX = emailRect.left - svgRect.left;
-        const endY = emailRect.top + emailRect.height / 2 - svgRect.top;
-
-        const dx = (endX - startX) * 0.3;
-
-        const d = `
-            M ${startX} ${startY}
-            C ${startX + dx} ${startY},
-            ${endX - dx} ${endY},
-            ${endX} ${endY}
-        `;
-
-        path.setAttribute("d", d.trim());
-
-        // Show start and end points
-        startPoint.setAttribute("transform", `translate(${startX},${startY}) rotate(-90)`);
-        endPoint.setAttribute("transform", `translate(${endX},${endY}) rotate(90)`);
+        if (layoutReady) {
+            drawConnection();
+        } else {
+            requestAnimationFrame(waitForLayoutThenDraw);
+        }
     }
 
-    // --------------------- ENSURE INITIAL DRAW ---------------------
-    document.addEventListener("DOMContentLoaded", () => {
-        // Give layout time to finish
-        setTimeout(() => {
-            drawConnection();
-        }, 50); // small delay ensures tables are rendered
-    });
+    document.addEventListener("DOMContentLoaded", waitForLayoutThenDraw);
 
     window.addEventListener("resize", drawConnection);
 </script>
@@ -1954,6 +2082,14 @@
   svg.addEventListener("mouseup", onMouseUp);
   svg.addEventListener("mouseleave", onMouseUp);
 </script> -->
+
+<!-- <svg viewBox="0 0 64 64" fill="none" fill-rule="evenodd" stroke="#4f4f4f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10 10h22v44h22"/><path d="M15 5v10m39 33l-7 6M21 5v10m33 45l-7-6m-2-5v10"/></svg>
+
+<svg id="svg">
+    <path id="resizablePath" d="M0 0" stroke="rgb(238, 155, 53)" fill="none" stroke-width="2" />
+    <path id="startPoint" data-rotation="-90" transform="translate(0,0) rotate(-90)" style="fill: darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+    <path id="endPoint" data-rotation="90" transform="translate(0,0) rotate(90)" style="fill: darkorange;" d="M-5 -15 L5 -15 L5 15 L-5 15 Z" />
+</svg> -->
 
 @endPush
 @elseif($user_log_data_table_permission == 0)
