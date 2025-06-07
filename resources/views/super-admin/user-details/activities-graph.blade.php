@@ -292,9 +292,63 @@
     </div>
 </div>
 </div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="--page-head">
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="80px" height="80px" viewBox="0 0 24 24"><defs>
+                    <style>.cls-1{fill:#aecbfa;}.cls-1,.cls-2,.cls-3{fill-rule:evenodd;}.cls-2{fill:#669df6;}.cls-3{fill:#4285f4;}</style></defs>
+                    <title>Icon_24px_SQL_Color</title>
+                    <g data-name="Product Icons">
+                        <g>
+                            <polygon class="cls-1" points="4.67 10.44 4.67 13.45 12 17.35 12 14.34 4.67 10.44"/>
+                            <polygon class="cls-1" points="4.67 15.09 4.67 18.1 12 22 12 18.99 4.67 15.09"/>
+                            <polygon class="cls-2" points="12 17.35 19.33 13.45 19.33 10.44 12 14.34 12 17.35"/>
+                            <polygon class="cls-2" points="12 22 19.33 18.1 19.33 15.09 12 18.99 12 22"/>
+                            <polygon class="cls-3" points="19.33 8.91 19.33 5.9 12 2 12 5.01 19.33 8.91"/>
+                            <polygon class="cls-2" points="12 2 4.67 5.9 4.67 8.91 12 5.01 12 2"/>
+                            <polygon class="cls-1" points="4.67 5.87 4.67 8.89 12 12.79 12 9.77 4.67 5.87"/>
+                            <polygon class="cls-2" points="12 12.79 19.33 8.89 19.33 5.87 12 9.77 12 12.79"/>       
+                        </g>
+                    </g>
+                </svg>
+            </span>
+            Server Connection
+        </div>
+    </div>
+</div>
 <div class="row" style="position: relative; height: 300px;">
     <svg id="svg" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; pointer-events: none;">
-        <!-- Connection 1: user to email -->
+        <!-- Connection 1: server -->
+        <g class="connection" id="connectorServer">
+            <path class="connectorPath" fill="none" stroke="#4e73df" stroke-width="3" stroke-linecap="round"/>
+            <circle class="startSocket" r="5" fill="#4e73df" />
+            <g class="endSocket" fill="#4e73df">
+                <g transform="scale(1) translate(-12, -12)">
+                    <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/><line x1="8" y1="12" x2="16" y2="12"/>
+                </g>
+            </g>
+        </g>
+
+        <!-- Connection 2: database -->
+        <g class="connection" id="connectorDatabseGroup">
+            <path class="connectorPath" fill="none" stroke="#4e73df" stroke-width="3" stroke-linecap="round"/>
+            <circle class="startSocket" r="5" fill="#4e73df" />
+            <circle class="endSocket" r="5" fill="#4e73df" />
+        </g>
+
+        <!-- Connection 2: database to user table -->
+        <g class="connection" id="connectorUserGroup">
+            <path class="connectorPath" fill="none" stroke="#4e73df" stroke-width="3" stroke-linecap="round"/>
+            <circle class="startSocket" r="5" fill="#4e73df" />
+            <g class="endSocket" fill="#4e73df">
+                <g transform="scale(1) translate(-12, -12)">
+                    <path d="M21.707 11.293l-7-7A1 1 0 0 0 13 5v3H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h10v3a1 1 0 0 0 1.707.707l7-7a1 1 0 0 0 0-1.414zM15 16.586V15a1 1 0 0 0-1-1H4v-4h10a1 1 0 0 0 1-1V7.414L19.586 12z"/>
+                </g>
+            </g>
+        </g>
+
+        <!-- Connection 3: user to email -->
         <g class="connection" id="connectorEmailGroup">
             <path class="connectorPath" fill="none" stroke="rgb(238, 155, 53)" stroke-width="3" stroke-linecap="round"/>
             <circle class="startSocket" r="5" fill="rgb(238, 155, 53)" />
@@ -305,7 +359,7 @@
             </g>
         </g>
 
-        <!-- Connection 2: user to login -->
+        <!-- Connection 4: user to login -->
         <g class="connection" id="connectorLoginGroup">
             <path class="connectorPath" fill="none" stroke="#4e73df" stroke-width="3" stroke-linecap="round"/>
             <circle class="startSocket" r="5" fill="#4e73df" />
@@ -316,38 +370,119 @@
             </g>
         </g>
     </svg>
-
+    <div class="database-wrapper" style="left: 22px; top: 0px;">
+        <svg viewBox="0 0 128 128" id="mysql">
+            <path fill="#00618A" d="M2.001 90.458h4.108v-16.223l6.36 14.143c.75 1.712 1.777 2.317 3.792 2.317s3.003-.605 3.753-2.317l6.36-14.143v16.223h4.108v-16.196c0-1.58-.632-2.345-1.936-2.739-3.121-.974-5.215-.131-6.163 1.976l-6.241 13.958-6.043-13.959c-.909-2.106-3.042-2.949-6.163-1.976-1.304.395-1.936 1.159-1.936 2.739v16.197zM33.899 77.252h4.107v8.938c-.038.485.156 1.625 2.406 1.661 1.148.018 8.862 0 8.934 0v-10.643h4.117c.019 0-.004 14.514-.004 14.574.022 3.58-4.441 4.357-6.499 4.417h-12.972v-2.764c.022 0 12.963.003 12.995-.001 2.645-.279 2.332-1.593 2.331-2.035v-1.078h-8.731c-4.062-.037-6.65-1.81-6.683-3.85-.002-.187.089-9.129-.001-9.219z"/>
+            <path fill="#E48E00" d="M56.63 90.458h11.812c1.383 0 2.727-.289 3.793-.789 1.777-.816 2.646-1.922 2.646-3.372v-3.002c0-1.185-.987-2.292-2.923-3.028-1.027-.396-2.292-.605-3.517-.605h-4.978c-1.659 0-2.449-.5-2.646-1.606-.039-.132-.039-.237-.039-.369v-1.87c0-.105 0-.211.039-.342.197-.843.632-1.08 2.094-1.212l.395-.026h11.733v-2.738h-11.535c-1.659 0-2.528.105-3.318.342-2.449.764-3.517 1.975-3.517 4.082v2.396c0 1.844 2.095 3.424 5.61 3.793.396.025.79.053 1.185.053h4.267c.158 0 .316 0 .435.025 1.304.105 1.856.343 2.252.816.237.237.315.475.315.737v2.397c0 .289-.197.658-.592.974-.355.316-.948.527-1.738.58l-.435.026h-11.338v2.738zM100.511 85.692c0 2.817 2.094 4.397 6.32 4.714.395.026.79.052 1.185.052h10.706v-2.738h-10.784c-2.41 0-3.318-.606-3.318-2.055v-14.168h-4.108v14.195zM77.503 85.834v-9.765c0-2.48 1.742-3.985 5.186-4.46.356-.053.753-.079 1.108-.079h7.799c.396 0 .752.026 1.147.079 3.444.475 5.187 1.979 5.187 4.46v9.765c0 2.014-.74 3.09-2.445 3.792l4.048 3.653h-4.771l-3.274-2.956-3.296.209h-4.395c-.752 0-1.543-.105-2.414-.343-2.613-.712-3.88-2.085-3.88-4.355zm4.434-.237c0 .132.039.265.079.423.237 1.135 1.307 1.768 2.929 1.768h3.732l-3.428-3.095h4.771l2.989 2.7c.552-.295.914-.743 1.041-1.32.039-.132.039-.264.039-.396v-9.368c0-.105 0-.238-.039-.37-.238-1.056-1.307-1.662-2.89-1.662h-6.216c-1.82 0-3.008.792-3.008 2.032v9.288z"/>
+            <path fill="#00618A" d="M122.336 66.952c-2.525-.069-4.454.166-6.104.861-.469.198-1.216.203-1.292.79.257.271.297.674.502 1.006.394.637 1.059 1.491 1.652 1.938.647.489 1.315 1.013 2.011 1.437 1.235.754 2.615 1.184 3.806 1.938.701.446 1.397 1.006 2.082 1.509.339.247.565.634 1.006.789v-.071c-.231-.294-.291-.698-.503-1.006l-.934-.934c-.913-1.212-2.071-2.275-3.304-3.159-.982-.705-3.18-1.658-3.59-2.801l-.072-.071c.696-.079 1.512-.331 2.154-.503 1.08-.29 2.045-.215 3.16-.503l1.508-.432v-.286c-.563-.578-.966-1.344-1.58-1.867-1.607-1.369-3.363-2.737-5.17-3.879-1.002-.632-2.241-1.043-3.304-1.579-.356-.181-.984-.274-1.221-.575-.559-.711-.862-1.612-1.293-2.441-.9-1.735-1.786-3.631-2.585-5.458-.544-1.245-.9-2.473-1.579-3.59-3.261-5.361-6.771-8.597-12.208-11.777-1.157-.677-2.55-.943-4.021-1.292l-2.37-.144c-.481-.201-.983-.791-1.436-1.077-1.802-1.138-6.422-3.613-7.756-.358-.842 2.054 1.26 4.058 2.011 5.099.527.73 1.203 1.548 1.58 2.369.248.54.29 1.081.503 1.652.521 1.406.976 2.937 1.651 4.236.341.658.718 1.351 1.149 1.939.264.36.718.52.789 1.077-.443.62-.469 1.584-.718 2.369-1.122 3.539-.699 7.938.934 10.557.501.805 1.681 2.529 3.303 1.867 1.419-.578 1.103-2.369 1.509-3.95.092-.357.035-.621.215-.861v.072l1.293 2.585c.957 1.541 2.654 3.15 4.093 4.237.746.563 1.334 1.538 2.298 1.867v-.073h-.071c-.188-.291-.479-.411-.719-.646-.562-.551-1.187-1.235-1.651-1.867-1.309-1.776-2.465-3.721-3.519-5.745-.503-.966-.94-2.032-1.364-3.016-.164-.379-.162-.953-.502-1.148-.466.72-1.149 1.303-1.509 2.154-.574 1.36-.648 3.019-.861 4.739l-.144.071c-1.001-.241-1.352-1.271-1.724-2.154-.94-2.233-1.115-5.83-.287-8.401.214-.666 1.181-2.761.789-3.376-.187-.613-.804-.967-1.148-1.437-.427-.579-.854-1.341-1.149-2.011-.77-1.741-1.129-3.696-1.938-5.457-.388-.842-1.042-1.693-1.58-2.441-.595-.83-1.262-1.44-1.724-2.442-.164-.356-.387-.927-.144-1.293.077-.247.188-.35.432-.431.416-.321 1.576.107 2.01.287 1.152.479 2.113.934 3.089 1.58.468.311.941.911 1.508 1.077h.646c1.011.232 2.144.071 3.088.358 1.67.508 3.166 1.297 4.524 2.155 4.139 2.614 7.522 6.334 9.838 10.772.372.715.534 1.396.861 2.154.662 1.528 1.496 3.101 2.154 4.596.657 1.491 1.298 2.996 2.227 4.237.488.652 2.374 1.002 3.231 1.364.601.254 1.585.519 2.154.861 1.087.656 2.141 1.437 3.16 2.155.509.362 2.076 1.149 2.154 1.798zM90.237 39.593c-.526-.01-.899.058-1.293.144v.071h.072c.251.517.694.849 1.005 1.293l.719 1.508.071-.071c.445-.313.648-.814.646-1.58-.179-.188-.205-.423-.359-.646-.204-.3-.602-.468-.861-.719z"/>
+        </svg>
+        <svg style="display:none">
+            <symbol id="my" viewBox="0 0 61 82" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+                <g fill="#0072c6" stroke="none">
+                    <path d="M0 10.93v58.141C0 75.106 13.432 80 30 80V10.93H0z"/>
+                    <path d="M29.59 79.999h.41c16.568 0 30-4.891 30-10.93V10.93H29.59v69.069z" opacity=".65"/>
+                </g>
+                <path d="M60 10.93c0 6.037-13.432 10.93-30 10.93S0 16.965 0 10.93 13.432 0 30 0s30 4.893 30 10.93" stroke="none"/>
+                <path d="M53.866 10.301c0 3.986-10.686 7.211-23.866 7.211S6.133 14.285 6.133 10.301 16.819 3.09 30 3.09s23.866 3.227 23.866 7.211" fill="#dd5900" stroke="none"/>
+                <path d="M48.867 14.706c3.125-1.219 5.002-2.745 5.002-4.403 0-3.986-10.686-7.213-23.867-7.213S6.136 6.319 6.136 10.303c0 1.658 1.877 3.184 5.002 4.403 4.361-1.704 11.179-2.803 18.862-2.803s14.5 1.099 18.867 2.803" fill="#ff8c00" stroke="none"/>
+            </symbol>
+        </svg>
+        <div class="svg-container" id="server">
+            <svg class="sql-3d" width="30" height="40" viewBox="0 0 61 82">
+                <use xlink:href="#my" />
+            </svg>
+        </div>
+    </div>
+    <div class="--database" id="database" style="left: 200px; top: -2px;">
+        <svg width="40" height="42" viewBox="0 0 61 81" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="#A" x=".5" y=".5"/><symbol id="A" overflow="visible"><g stroke="none"><path d="M0 10.929V69.07C0 75.106 13.432 80 30 80V10.929H0z" fill="#3999c6"/><path d="M29.589 79.999h.412c16.568 0 30-4.891 30-10.929v-58.14H29.589v69.07z" fill="#59b4d9"/><path d="M60 10.929c0 6.036-13.432 10.929-30 10.929S0 16.965 0 10.929 13.432 0 30 0s30 4.893 30 10.929"/><path d="M53.867 10.299c0 3.985-10.686 7.211-23.867 7.211S6.132 14.284 6.132 10.299 16.819 3.088 30 3.088s23.867 3.228 23.867 7.211" fill="#7fba00"/><path d="M48.867 14.707c3.124-1.219 5.002-2.745 5.002-4.403 0-3.985-10.686-7.213-23.868-7.213S6.134 6.318 6.134 10.303c0 1.658 1.877 3.185 5.002 4.403 4.363-1.703 11.182-2.803 18.865-2.803s14.5 1.1 18.866 2.803" fill="#b8d432"/><path d="M49.389 58.071c-1.605 1.346-3.78 2.022-6.607 2.022h-9.428V35.358h8.943c2.816 0 4.973.517 6.457 1.588 1.389 1.005 2.086 2.41 2.086 4.205 0 1.431-.507 2.648-1.543 3.719-.882.885-1.942 1.497-3.248 1.856v.058c1.753.217 3.184.889 4.25 2.017.997 1.071 1.511 2.384 1.511 3.903.007 2.262-.813 4.033-2.42 5.366m-22.977-1.457c-2.359 2.322-5.544 3.479-9.519 3.479H8.19V35.358h8.704c8.731 0 13.098 3.998 13.098 12.043 0 3.846-1.181 6.925-3.579 9.213"/><path d="M16.439 39.873h-2.727v15.704h2.759c2.425 0 4.304-.763 5.695-2.227 1.332-1.463 2.006-3.415 2.006-5.883 0-2.317-.674-4.143-1.975-5.495-1.365-1.397-3.275-2.099-5.757-2.099" fill="#3999c6"/><path d="M43.993 44.483c.666-.583.999-1.346.999-2.293 0-1.834-1.332-2.747-4.033-2.747h-2.084v5.86h2.454c1.122 0 2.031-.282 2.665-.821m.909 5.817c-.73-.546-1.722-.853-3.004-.853h-3.03v6.524h3.001c1.276 0 2.303-.304 3.062-.914.696-.612 1.058-1.399 1.058-2.439.006-.977-.357-1.769-1.087-2.317" fill="#59b4d9"/></g></symbol></svg>
+    </div>
     <div class="table-relation-wrapper" id="userTableWrapper" style="left: 50px; top: 50px;">
-        <table id="userTable">
+        <table id="userTable" style="border-collapse: collapse;box-sizing: border-box;">
             <thead>
-                <tr><th>Id</th><th>User</th></tr>
+                <tr>
+                    <th class="table-heading ps-1" style="text-align:left;" colspan="2">
+                        <svg width="20" height="20" fill="#3999c6" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 445.38"><path d="M6.95 0h498.1c3.82 0 6.95 3.16 6.95 6.92v96.5l-.02.46v341.5H0V88.11h.01L0 6.92C0 3.11 3.12 0 6.95 0zm11.57 315.78h104.12V219.6H18.52v96.18zm122.64 0h105.8V219.6h-105.8v96.18zm124.32 0h105.35V219.6H265.48v96.18zm123.87 0h104.12V219.6H389.35v96.18zm104.12 18.52H389.35v92.56h104.12V334.3zm-122.64 0H265.48v92.56h105.35V334.3zm-123.87 0h-105.8v92.56h105.8V334.3zm-124.32 0H18.52v92.56h104.12V334.3zM18.52 201.09h104.12v-94.46H18.52v94.46zm122.64 0h105.8v-94.46h-105.8v94.46zm124.32 0h105.35v-94.46H265.48v94.46zm123.87 0h104.12v-94.46H389.35v94.46z"/></svg>
+                        User Table
+                    </th>
+                </tr>
+                <tr>
+                    <th class="ps-2">ID</th>
+                    <th class="ps-2">User</th>
+                </tr>
             </thead>
             <tbody>
-                <tr><td>1</td><td>Sumon</td></tr>
-                <tr><td>2</td><td>Kamal</td></tr>
-                <tr><td>3</td><td>Jamal</td></tr>
+                <tr>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">1</td>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">Sumon</td>
+                </tr>
+                <tr>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">2</td>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">Kamal</td>
+                </tr>
+                <tr>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">3</td>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">Jamal</td>
+                </tr>
             </tbody>
         </table>
     </div>
-
     <div class="table-relation-wrapper" id="emailTableWrapper" style="left: 300px; top: 150px;">
-        <table id="emailTable">
-            <thead><tr><th>Id</th><th>Email</th></tr></thead>
+        <table id="emailTable" style="border-collapse: collapse;box-sizing: border-box;">
+            <thead>
+                <tr>
+                    <th class="table-heading ps-1" style="text-align:left;" colspan="2">
+                        <svg width="20" height="20" fill="#7fba00" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 445.38"><path d="M6.95 0h498.1c3.82 0 6.95 3.16 6.95 6.92v96.5l-.02.46v341.5H0V88.11h.01L0 6.92C0 3.11 3.12 0 6.95 0zm11.57 315.78h104.12V219.6H18.52v96.18zm122.64 0h105.8V219.6h-105.8v96.18zm124.32 0h105.35V219.6H265.48v96.18zm123.87 0h104.12V219.6H389.35v96.18zm104.12 18.52H389.35v92.56h104.12V334.3zm-122.64 0H265.48v92.56h105.35V334.3zm-123.87 0h-105.8v92.56h105.8V334.3zm-124.32 0H18.52v92.56h104.12V334.3zM18.52 201.09h104.12v-94.46H18.52v94.46zm122.64 0h105.8v-94.46h-105.8v94.46zm124.32 0h105.35v-94.46H265.48v94.46zm123.87 0h104.12v-94.46H389.35v94.46z"/></svg>
+                        Email Table
+                    </th>
+                </tr>
+                <tr>
+                    <th class="ps-2">ID</th>
+                    <th class="ps-2">Email</th>
+                </tr>
+            </thead>
             <tbody>
-                <tr><td>1</td><td>Sumon@gmail.com</td></tr>
-                <tr><td>2</td><td>Kamal@gmail.com</td></tr>
-                <tr><td>3</td><td>Jamal@gmail.com</td></tr>
+                <tr>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">1</td>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">Sumon@gmail.com</td>
+                </tr>
+                <tr>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">2</td>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">Kamal@gmail.com</td>
+                </tr>
+                <tr>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">3</td>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">Jamal@gmail.com</td>
+                </tr>
             </tbody>
         </table>
     </div>
-
     <div class="table-relation-wrapper" id="loginTableWrapper" style="left: 400px; top: 150px;">
-        <table id="loginTable">
-            <thead><tr><th>Id</th><th>Login</th></tr></thead>
+        <table id="loginTable" style="border-collapse: collapse;box-sizing: border-box;">
+            <thead>
+                <tr>
+                    <th class="table-heading ps-1" style="text-align:left;" colspan="2">
+                        <svg width="20" height="20" fill="#7fba00" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 445.38"><path d="M6.95 0h498.1c3.82 0 6.95 3.16 6.95 6.92v96.5l-.02.46v341.5H0V88.11h.01L0 6.92C0 3.11 3.12 0 6.95 0zm11.57 315.78h104.12V219.6H18.52v96.18zm122.64 0h105.8V219.6h-105.8v96.18zm124.32 0h105.35V219.6H265.48v96.18zm123.87 0h104.12V219.6H389.35v96.18zm104.12 18.52H389.35v92.56h104.12V334.3zm-122.64 0H265.48v92.56h105.35V334.3zm-123.87 0h-105.8v92.56h105.8V334.3zm-124.32 0H18.52v92.56h104.12V334.3zM18.52 201.09h104.12v-94.46H18.52v94.46zm122.64 0h105.8v-94.46h-105.8v94.46zm124.32 0h105.35v-94.46H265.48v94.46zm123.87 0h104.12v-94.46H389.35v94.46z"/></svg>
+                        Login Table
+                    </th>
+                </tr>
+                <tr>
+                    <th class="ps-2">ID</th>
+                    <th class="ps-2">Login</th>
+                </tr>
+            </thead>
             <tbody>
-                <tr><td>1</td><td>Sumon@gmail.com</td></tr>
-                <tr><td>2</td><td>Kamal@gmail.com</td></tr>
-                <tr><td>3</td><td>Jamal@gmail.com</td></tr>
+                <tr>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">1</td>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">Sumon@gmail.com</td>
+                </tr>
+                <tr>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">2</td>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">Kamal@gmail.com</td>
+                </tr>
+                <tr>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">3</td>
+                    <td class="ps-2" style="color: #222;font-size: 12px;font-weight:500;">Jamal@gmail.com</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -1486,6 +1621,7 @@
     makeDraggable("userTableWrapper");
     makeDraggable("emailTableWrapper");
     makeDraggable("loginTableWrapper");
+    makeDraggable("database");
 
     // --------------------- LINE DRAWING ---------------------
     function drawConnection() {
@@ -1494,34 +1630,107 @@
 
         const connections = [
             {
-                groupId: "connectorEmailGroup",
-                targetSelector: "#emailTable thead tr th:nth-child(1)",
-                color: "rgb(238, 155, 53)"
+                groupId: "connectorServer",
+                color: "#4e73df",
+                getStartPosition: () => {
+                    const el = document.querySelector("#server");
+                    if (!el) return null;
+                    const rect = el.getBoundingClientRect();
+                    return {
+                        x: rect.right - 20 - svgRect.left,
+                        y: rect.top + rect.height / 2 - svgRect.top
+                    };
+                },
+                getEndPosition: () => {
+                    const el = document.querySelector("#database");
+                    if (!el) return null;
+                    const rect = el.getBoundingClientRect();
+                    return {
+                        x: rect.left - 10 - svgRect.left,
+                        y: rect.top + rect.height / 2 - svgRect.top
+                    };
+                }
+            },
+            {
+                groupId: "connectorDatabseGroup",
+                color: "#4e73df",
+                getStartPosition: () => {
+                    const el = document.querySelector("#database");
+                    if (!el) return null;
+                    const rect = el.getBoundingClientRect();
+                    return {
+                        x: rect.right - 22 - svgRect.left,
+                        y: rect.top + rect.height / 2 - svgRect.top
+                    };
+                },
+                getEndPosition: () => {
+                    const el = document.querySelector("#userTable thead tr th:nth-child(1)");
+                    if (!el) return null;
+                    const rect = el.getBoundingClientRect();
+                    return {
+                        x: rect.left + 1.5 - svgRect.left,
+                        y: rect.top + rect.height / 2 - svgRect.top
+                    };
+                }
+            },
+            {
+                groupId: "connectorUserGroup",
+                color: "rgb(238, 155, 53)",
+                getStartPosition: () => {
+                    const el = document.querySelector("#userTable thead tr th:nth-child(1)");
+                    if (!el) return null;
+                    const rect = el.getBoundingClientRect();
+                    return {
+                        x: rect.right - 185 - svgRect.left,
+                        y: rect.top + rect.height / 2 - svgRect.top
+                    };
+                },
+                getEndPosition: () => {
+                    const el = document.querySelector("#emailTable thead tr th:nth-child(1)");
+                    if (!el) return null;
+                    const rect = el.getBoundingClientRect();
+                    return {
+                        x: rect.left - 18 - svgRect.left,
+                        y: rect.top + rect.height / 2 - svgRect.top
+                    };
+                }
             },
             {
                 groupId: "connectorLoginGroup",
-                targetSelector: "#loginTable thead tr th:nth-child(1)",
-                color: "rgb(0, 180, 200)"
+                color: "rgb(0, 180, 200)",
+                getStartPosition: () => {
+                    const el = document.querySelector("#userTable thead tr th:nth-child(1)");
+                    if (!el) return null;
+                    const rect = el.getBoundingClientRect();
+                    return {
+                        x: rect.right - 185 - svgRect.left,
+                        y: rect.bottom - 10 - svgRect.top
+                    };
+                },
+                getEndPosition: () => {
+                    const el = document.querySelector("#loginTable thead tr th:nth-child(1)");
+                    if (!el) return null;
+                    const rect = el.getBoundingClientRect();
+                    return {
+                        x: rect.left - 18 - svgRect.left,
+                        y: rect.top + rect.height / 2 - svgRect.top
+                    };
+                }
             }
         ];
-
-        const userHeader = document.querySelector("#userTable thead tr");
-        if (!userHeader) return;
-        const userRect = userHeader.getBoundingClientRect();
-        const startX = userRect.right - svgRect.left;
-        const startY = userRect.top + userRect.height / 2 - svgRect.top;
 
         connections.forEach(conn => {
             const group = document.getElementById(conn.groupId);
             if (!group) return;
 
-            const target = document.querySelector(conn.targetSelector);
-            if (!target) return;
-            const targetRect = target.getBoundingClientRect();
-            const endX = targetRect.left - 20 - svgRect.left;
-            const endY = targetRect.top + targetRect.height / 2 - svgRect.top;
+            const startPos = conn.getStartPosition?.();
+            const endPos = conn.getEndPosition?.();
+            if (!startPos || !endPos) return;
 
-            const dx = (endX - startX) * 0.7;
+            const { x: startX, y: startY } = startPos;
+            const { x: endX, y: endY } = endPos;
+
+            const dx = (endX - startX) * 0; // curve controll
             const pathD = `
                 M ${startX} ${startY}
                 C ${startX + dx} ${startY},
@@ -1530,65 +1739,29 @@
             `;
 
             const path = group.querySelector(".connectorPath");
-            path.setAttribute("d", pathD.trim());
+            if (path) {
+                path.setAttribute("d", pathD.trim());
+                path.setAttribute("stroke", conn.color || "#999");
+                path.style.strokeDasharray = "5,5";
+                path.style.animation = "none";
+                void path.offsetWidth;
+                path.style.animation = "dashmove 1s linear infinite";
+            }
 
-            // Ensure animation styling
-            path.style.strokeDasharray = "5,5";
-            path.style.animation = "none"; // reset
-            void path.offsetWidth; // trigger reflow
-            path.style.animation = "dashmove 1s linear infinite";
+            const startSocket = group.querySelector(".startSocket");
+            if (startSocket) {
+                startSocket.setAttribute("cx", startX);
+                startSocket.setAttribute("cy", startY);
+                startSocket.setAttribute("fill", conn.color || "#999");
+            }
 
-            group.querySelector(".startSocket").setAttribute("cx", startX);
-            group.querySelector(".startSocket").setAttribute("cy", startY);
-
-            const angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);
-            group.querySelector(".endSocket").setAttribute("transform", `translate(${endX}, ${endY}) rotate(${angle})`);
+            const endSocket = group.querySelector(".endSocket");
+            if (endSocket) {
+                const angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);
+                endSocket.setAttribute("transform", `translate(${endX}, ${endY}) rotate(${angle})`);
+            }
         });
     }
-    // function drawConnection() {
-    //     const svg = document.getElementById("svg");
-    //     const path = document.getElementById("connectorPath");
-    //     const startSocket = document.getElementById("startSocket");
-    //     const endSocket = document.getElementById("endSocket");
-
-    //     const svgRect = svg.getBoundingClientRect();
-
-    //     const userHeader = document.querySelector("#userTable thead tr");
-    //     const emailHeader = document.querySelector("#emailTable thead tr th:nth-child(1)");
-
-    //     if (!userHeader || !emailHeader) return;
-
-    //     const userHeaderRect = userHeader.getBoundingClientRect();
-    //     const emailHeaderRect = emailHeader.getBoundingClientRect();
-
-    //     // Start: right center of user table header
-    //     const startX = userHeaderRect.right - svgRect.left;
-    //     const startY = userHeaderRect.top + userHeaderRect.height / 2 - svgRect.top;
-
-    //     // End: left center of email table header
-    //     //const endX = emailHeaderRect.left - svgRect.left;
-    //     const endX = emailHeaderRect.left - 20 - svgRect.left;
-    //     const endY = emailHeaderRect.top + emailHeaderRect.height / 2 - svgRect.top;
-
-    //     // Curve control
-    //     const dx = (endX - startX) * 0.7;
-
-    //     const pathD = `
-    //         M ${startX} ${startY}
-    //         C ${startX + dx} ${startY},
-    //         ${endX - dx} ${endY},
-    //         ${endX} ${endY}
-    //     `;
-    //     path.setAttribute("d", pathD.trim());
-
-    //     // Position circle
-    //     startSocket.setAttribute("cx", startX);
-    //     startSocket.setAttribute("cy", startY);
-        
-    //     // Position plug group (endSocket)
-    //     const angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);
-    //     endSocket.setAttribute("transform", `translate(${endX}, ${endY}) rotate(${angle})`);
-    // }
 
     // --------------------- ENSURE INITIAL DRAW ---------------------
     function waitForLayoutThenDraw() {

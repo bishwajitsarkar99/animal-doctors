@@ -40,15 +40,80 @@ htm,body{
         stroke-dashoffset: -10;
     }
 }
+.table-heading{
+    font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #222;
+}
+li{
+    list-style: none;
+}
+.--database{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 5%;
+    position: absolute;
+    cursor: move;
+    background: white;
+    box-shadow:rgba(0, 123, 255, 0.2) 0px 0px 10px;
+    background-color: transparent;
+}
+.--database:hover, .database-wrapper:hover{
+    background: none;
+    outline: 2px dashed rgba(128, 128, 128, 0.664);
+    transition: 1ms;
+}
+.database-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 10%;
+    position: absolute;
+    cursor: move;
+    background: white;
+    padding: 14px;
+    box-shadow:rgba(0, 123, 255, 0.2) 0px 0px 10px;
+    background-color: transparent;
+}
+.svg-container {
+    display: inline-block;
+    animation: jump 1.2s ease-in-out infinite;
+}
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  70% {
+    transform: translateY(-4px);
+  }
+}
 .table-relation-wrapper {
     width: 20%;
     position: absolute;
     cursor: move;
     background: white;
-    padding: 10px;
-    box-shadow: 0 0 10px #ccc;
+    padding: 14px;
+    box-shadow:rgba(0, 123, 255, 0.2) 0px 0px 10px;
     background-color: transparent;
 }
+.table-relation-wrapper:hover{
+    background: none;
+    outline: 2px dashed rgba(128, 128, 128, 0.664);
+    transition: 1ms;
+}
+table.relation-table{
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
 #svg {
     position: absolute;
     top: 0;
