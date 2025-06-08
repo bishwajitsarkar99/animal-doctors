@@ -1,5 +1,13 @@
 <?php
 namespace App\LogicBild\UserActivity;
+use Illuminate\Pipeline\Pipeline;
+use App\LogicBild\UserActivity\{
+    DateFilter,
+    RoleFilter,
+    SearchFilter,
+    SortFilter,
+    BranchFilter
+};
 use Illuminate\Http\Request;
 use App\Models\SessionModel;
 use App\Models\User;
@@ -361,103 +369,150 @@ class UserActivityServiceProvider
     /**
      * Handle User Activity Get
     */
+    // public function getActivities(Request $request)
+    // {
+    //     $auth = Auth::User();
+    //     $user_branch_id = $auth->branch_id;
+    //     $role_id = $auth->role;
+    //     $email = $auth->login_email;
+
+    //     if($email && $role_id){
+    //         $user_log_data_table_permission = 1; // log data table permission
+    //     }
+
+    //     if($user_branch_id && $role_id){
+
+    //         if ($role_id === 1) {
+    //             $branch_id = Branches::pluck('branch_id'); // Get all branch IDs as array
+    //         } else {
+    //             $branch_id = [$user_branch_id]; // Wrap single branch_id in an array
+    //         }
+
+    //         // Start of the week on Sunday
+    //         //$startOfWeek = Carbon::now()->startOfWeek(Carbon::SUNDAY);
+    //         // End of the week on Saturday
+    //         //$endOfWeek = Carbon::now()->endOfWeek(Carbon::SATURDAY);
+
+    //         // Start of the day
+    //         $startOfDay = Carbon::now()->startOfDay();
+    //         // End of the day
+    //         $endOfDay = Carbon::now()->endOfDay();
+    
+    
+    //         // Date Request
+    //         $start_date = $request->input('start_date');
+    //         $end_date = $request->input('end_date');
+    
+    //         // Sort field and direction
+    //         $sort_field = $request->input('sort_field', 'id');
+    //         $sort_direction = $request->input('sort_direction', 'desc');
+            
+    //         // total data count
+    //         $total_users = SessionModel::whereIn('branch_id', $branch_id)->count();
+    //         // Start the query for user activities
+    //         $user_activities = SessionModel::whereNotNull('role')->whereIn('branch_id', $branch_id)->with(['roles', 'users']);
+    
+    //         // Apply default current month filter if no custom date range provided
+    //         if (!$start_date || !$end_date) {
+    //             $user_activities->whereBetween('created_at', [$startOfDay, $endOfDay]);
+    //         }
+    
+    //         // Apply date range filter
+    //         if ($start_date && $end_date) {
+    //             $start = Carbon::parse($start_date)->startOfDay();
+    //             $end = Carbon::parse($end_date)->endOfDay();
+    //             $user_activities->whereBetween('created_at', [$start, $end]);
+    //         }
+
+    //         // Apply search query
+    //         if ($query = $request->get('query')) {
+    //             $user_activities->where(function ($q) use ($query) {
+    //                 $q->where('name', 'LIKE', '%' . $query . '%')
+    //                 ->orWhere('email', 'LIKE', '%' . $query . '%')
+    //                 ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
+    //                 ->orWhere('role', 'LIKE', '%' . $query . '%')
+    //                 ->orWhere('user_id', 'LIKE', '%' . $query . '%');
+    //             });
+    //         }
+    
+    //         // Apply role filter
+    //         if ($role = $request->input('role')) {
+    //             $user_activities->where('role', $role);
+    //         }
+    
+    //         // Apply sorting based on requested field and direction
+    //         $user_activities->orderBy($sort_field, $sort_direction);
+            
+    //         // Paginate
+    //         $perItem = (int) $request->input('per_item', 10);
+    //         $perItem = $perItem > 0 ? $perItem : 10;
+    
+    //         $paginateData = $user_activities->paginate($perItem);
+            
+    //         $item_num = $paginateData->count();
+    //         if($user_log_data_table_permission === 1){
+    //             return response()->json([
+    //                 'data' => $paginateData->items(),
+    //                 'links' => $paginateData->toArray()['links'] ?? [],
+    //                 'total' => $paginateData->total(),
+    //                 'total_users' => $total_users,
+    //                 'per_page' => $perItem,
+    //                 'per_item_num' => $item_num,
+    //             ],200);
+
+    //         }else{
+    //             return response()->json([
+    //                 'message' => 'Server does not response data.'
+    //             ], 200);
+    //         }
+    //     }
+    // }
+
     public function getActivities(Request $request)
     {
-        $auth = Auth::User();
-        $user_branch_id = $auth->branch_id;
+        $auth = Auth::user();
         $role_id = $auth->role;
         $email = $auth->login_email;
+        $branch_id = $role_id === 1
+            ? Branches::pluck('branch_id')->toArray()
+            : [$auth->branch_id];
 
+        //$user_log_data_table_permission = ($auth->login_email && $role_id) ? 1 : 0;
         if($email && $role_id){
             $user_log_data_table_permission = 1; // log data table permission
         }
 
-        if($user_branch_id && $role_id){
+        if ($user_log_data_table_permission) {
 
-            if ($role_id === 1) {
-                $branch_id = Branches::pluck('branch_id'); // Get all branch IDs as array
-            } else {
-                $branch_id = [$user_branch_id]; // Wrap single branch_id in an array
-            }
+            $baseQuery = SessionModel::query()
+                ->whereNotNull('role')
+                ->with(['roles', 'users']);
 
-            // Start of the week on Sunday
-            //$startOfWeek = Carbon::now()->startOfWeek(Carbon::SUNDAY);
-            // End of the week on Saturday
-            //$endOfWeek = Carbon::now()->endOfWeek(Carbon::SATURDAY);
+            $user_activities = app(Pipeline::class)
+                ->send($baseQuery)
+                ->through([
+                    new BranchFilter($branch_id),
+                    DateFilter::class,
+                    SearchFilter::class,
+                    RoleFilter::class,
+                    SortFilter::class,
+                ])
+                ->thenReturn();
 
-            // Start of the day
-            $startOfDay = Carbon::now()->startOfDay();
-            // End of the day
-            $endOfDay = Carbon::now()->endOfDay();
-    
-    
-            // Date Request
-            $start_date = $request->input('start_date');
-            $end_date = $request->input('end_date');
-    
-            // Sort field and direction
-            $sort_field = $request->input('sort_field', 'id');
-            $sort_direction = $request->input('sort_direction', 'desc');
-            
-            // total data count
-            $total_users = SessionModel::whereIn('branch_id', $branch_id)->count();
-            // Start the query for user activities
-            $user_activities = SessionModel::whereNotNull('role')->whereIn('branch_id', $branch_id)->with(['roles', 'users']);
-    
-            // Apply default current month filter if no custom date range provided
-            if (!$start_date || !$end_date) {
-                $user_activities->whereBetween('created_at', [$startOfDay, $endOfDay]);
-            }
-    
-            // Apply date range filter
-            if ($start_date && $end_date) {
-                $start = Carbon::parse($start_date)->startOfDay();
-                $end = Carbon::parse($end_date)->endOfDay();
-                $user_activities->whereBetween('created_at', [$start, $end]);
-            }
-
-            // Apply search query
-            if ($query = $request->get('query')) {
-                $user_activities->where(function ($q) use ($query) {
-                    $q->where('name', 'LIKE', '%' . $query . '%')
-                    ->orWhere('email', 'LIKE', '%' . $query . '%')
-                    ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
-                    ->orWhere('role', 'LIKE', '%' . $query . '%')
-                    ->orWhere('user_id', 'LIKE', '%' . $query . '%');
-                });
-            }
-    
-            // Apply role filter
-            if ($role = $request->input('role')) {
-                $user_activities->where('role', $role);
-            }
-    
-            // Apply sorting based on requested field and direction
-            $user_activities->orderBy($sort_field, $sort_direction);
-            
-            // Paginate
-            $perItem = (int) $request->input('per_item', 10);
-            $perItem = $perItem > 0 ? $perItem : 10;
-    
+            $perItem = max((int) $request->input('per_item', 10), 1);
             $paginateData = $user_activities->paginate($perItem);
             
-            $item_num = $paginateData->count();
-            if($user_log_data_table_permission === 1){
-                return response()->json([
-                    'data' => $paginateData->items(),
-                    'links' => $paginateData->toArray()['links'] ?? [],
-                    'total' => $paginateData->total(),
-                    'total_users' => $total_users,
-                    'per_page' => $perItem,
-                    'per_item_num' => $item_num,
-                ],200);
-
-            }else{
-                return response()->json([
-                    'message' => 'Server does not response data.'
-                ], 200);
-            }
+            return response()->json([
+                'data' => $paginateData->items(),
+                'links' => $paginateData->toArray()['links'] ?? [],
+                'total' => $paginateData->total(),
+                'total_users' => SessionModel::whereIn('branch_id', $branch_id)->count(),
+                'per_page' => $perItem,
+                'per_item_num' => $paginateData->count(),
+            ]);
         }
+
+        return response()->json(['message' => 'Server does not response data.']);
     }
 
     /**
