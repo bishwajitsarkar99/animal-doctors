@@ -219,28 +219,11 @@
                 background: none;
                 border: none;
             }
-            .progress-bar{
-                background-color: #ad7b00;
-            }
-            .progress-bar.animation_progress {
-                font-size: 12px;
-                font-weight: 700;
-                padding-right: 10px;
-                background-color: white;
-                color: darkgoldenrod;
-                padding-left: 5px;
-                animation: focus_color 1s linear infinite;
-            }
-            @keyframes focus_color {
-                0% {
-                    background-color:#9f7b24;
-                    color: white;
-                }
-
-                100% {
-                    background-color:#9f7b24;
-                    color: darkgoldenrod;
-                }
+            /* .progress-bar{
+                background-color: #6d56c1;
+                --mdb-box-shadow-color-rgb: 0, 0, 0;
+                box-shadow:0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+                background: linear-gradient(0deg, #0056b3 0%,transparen 5%, #0056b3 100%);
             }
             .progress-bar-animated {
                 -webkit-animation: progress-bar-stripes 1s linear infinite;
@@ -249,15 +232,96 @@
             @keyframes progress-bar-stripes {
                 0% {
                     background-position: 1rem 0;
+                    background: linear-gradient(0deg, #0056b3 0%,transparen 5%, #0056b3 100%);
                 }
 
                 100% {
                     background-position: 0 0;
+                    background: linear-gradient(0deg, #0056b3 0%,transparen 5%, #0056b3 100%);
+                }
+            } */
+            .progress-bar.animation_progress_title{
+                font-size: 12px;
+                font-weight: 700;
+                padding-right: 10px;
+                background-color: #0056b3;
+                padding-left: 5px;
+                animation: progress_focus_color 1s linear infinite;
+                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+            }
+            @keyframes progress_focus_color {
+                0% {
+                    background-color: #0056b3;
+                    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+                }
+
+                100% {
+                    background-color: #0056b3;
+                    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+                }
+            }
+            .progress-bar.animation_progress {
+                font-size: 12px;
+                font-weight: 700;
+                padding-right: 10px;
+                background-color: #0056b3;
+                color: darkgoldenrod;
+                padding-left: 5px;
+                animation: focus_color 1s linear infinite;
+                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+            }
+            @keyframes focus_color {
+                0% {
+                    background-color: #0056b3;
+                    color: #969ec9;
+                    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+                }
+
+                100% {
+                    background-color: #0056b3;
+                    color: lightblue;
+                    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+                }
+            }
+            #openingProgress {
+                position: relative;
+                overflow: hidden;
+            }
+            /* Apply barcode stripes to the progress-bar-processing */
+            .progress-bar-processing::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 200%;
+                background-image: repeating-linear-gradient(
+                    to right,rgb(168, 157, 207) 0px, rgb(168, 157, 207) 4px, transparent 4px, transparent 8px
+                );
+                animation: barcodeScroll 50s linear infinite;
+                pointer-events: none;
+            }
+
+            /* Keep existing styles clean */
+            .progress-bar-processing {
+                position: relative;
+                background-color: #020202d4; /* or your preferred base color */
+                overflow: hidden;
+            }
+
+            /* Barcode animation keyframes */
+            @keyframes barcodeScroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(-50%);
                 }
             }
             .percent {
                 font-size: 13px;
                 font-weight: 700;
+                z-index:999;
             }
             span#error_message {
                 font-size: 12px;
@@ -699,9 +763,9 @@
                                 <div class="progress_box">
                                     <div class="progress" id="openingProgress">
                                         <div class="progress-bar bar progress-bar-striped progress-bar-animated progress-bar-processing" style="width:0%;">
-                                            <div class="percent">0%</div>
+                                            <div class="progress-bar animation_progress_title">...</div>
                                         </div>
-                                        <div class="progress-bar animation_progress">Opening...</div>
+                                        <div class="progress-bar animation_progress percent">0%</div>
                                     </div>
                                 </div>
                             </div>
