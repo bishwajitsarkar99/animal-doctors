@@ -1401,12 +1401,8 @@
 </script>
 <!-- Date Range Scroll chart module-min-js /module-min-js-->
 <script type="module">
-    import { initializeCurveLineChart } from "/module/module-min-js/design-helper-function-min.js";
+    import { initializeCurveLineChart, initDragAndDrop } from "/module/module-min-js/design-helper-function-min.js";
     const dateRangeId = "cruveChart";
-    initializeCurveLineChart(dateRangeId);
-</script>
-<script type="module">
-    import { initDragAndDrop } from "/module/design-helper-function.js";
 
     // drag and drop default card
     const row = '.drag-row';
@@ -1418,7 +1414,8 @@
     document.addEventListener('DOMContentLoaded', () => {
         initDragAndDrop(column, cardKey, row, lineConnectionId)
     });
-    
+
+    initializeCurveLineChart(dateRangeId);
 </script>
 <!-- Demo bar chart -->
 <!-- <script>

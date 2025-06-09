@@ -1151,3 +1151,21 @@ export function initDragAndDrop(column, cardKey, row, lineConnectionId) {
         });
     });
 }
+// Scroll Progress Bar
+export function initScrollProgressBar(scrollKey, progressClass) {
+    const $element = $(scrollKey);
+
+    if ($element.length === 0) return;
+
+    $(window).on('scroll', function () {
+        const scroll = $(window).scrollTop();
+        const offsetTop = $element.offset().top - window.innerHeight;
+
+        if (scroll > offsetTop && !$element.hasClass(progressClass)) {
+            $element.addClass(progressClass);
+            setTimeout(() => {
+                $element.removeClass(progressClass);
+            }, 1500);
+        }
+    });
+}

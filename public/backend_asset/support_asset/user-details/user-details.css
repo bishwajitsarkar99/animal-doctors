@@ -31,6 +31,32 @@ htm,body{
     padding: 0;
     margin: 0;
 }
+.progressbar-active{
+	animation-name: progress;
+	animation-duration: 5s linear;
+	animation-fill-mode: forwards;
+	animation-delay: 0.4s;
+}
+@keyframes progress{
+	0%{
+		width:0;
+	}
+	100%{
+		width:100%;
+	}
+}
+#user_activites_data_table_wrapper {
+    position: relative;
+}
+#svgOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
 #connectorPath {
     stroke-dasharray: 5, 5;
     animation: dashmove 1s linear infinite;
@@ -93,6 +119,24 @@ li{
   }
   70% {
     transform: translateY(-4px);
+  }
+}
+
+svg {
+  perspective: 500px; /* creates 3D context */
+}
+.rotateX {
+  animation: rotateXAnim 2s linear infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes rotateXAnim {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(360deg);
   }
 }
 .table-relation-wrapper {

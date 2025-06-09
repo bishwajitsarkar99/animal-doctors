@@ -49,6 +49,9 @@ class UserActivityServiceProvider
     public function viewUserDetails(Request $request, $slug)
     {
         $auth = Auth::User();
+        if (!$auth) {
+            return redirect()->route('login'); // or unauthorized view
+        }
         $role_id = $auth->role;
         $email = $auth->login_email;
         $user_branch_id = $auth->branch_id;
@@ -69,76 +72,68 @@ class UserActivityServiceProvider
             }
             
             // Define the start and end of the current month
-            $startOfMonth = Carbon::now()->startOfMonth();
-            $endOfMonth = Carbon::now()->endOfMonth();
+            $now = Carbon::now();
+            $startOfMonth = $now->copy()->startOfMonth();
+            $endOfMonth = $now->copy()->endOfMonth();
             // Get Session user login data
-            $start = Carbon::now()->startOfYear();
-            $end = Carbon::now();
+            $start = $now->copy()->startOfYear();
+            $end = $now;
 
             // User storage capacity
             $user_capacity=100;
             
-            // User and Role Count
+            // Role Count
             $user_roles = User::whereIn('branch_id', $branch_id)->pluck('role')->unique();
             $roles = Role::whereIn('id', $user_roles)->get();
 
-            $total_users = User::whereIn('branch_id', $branch_id)->count();
-            $superAdmin = User::where('role', 1)->whereIn('branch_id', $branch_id)->count();
-            $admin = User::where('role', 3)->whereIn('branch_id', $branch_id)->count();
-            $subAdmin = User::where('role', 2)->whereIn('branch_id', $branch_id)->count();
-            $accounts = User::where('role', 5)->whereIn('branch_id', $branch_id)->count();
-            $marketing = User::where('role', 6)->whereIn('branch_id', $branch_id)->count();
-            $deliveryTeam = User::where('role', 7)->whereIn('branch_id', $branch_id)->count();
-            $users = User::where('role', 0)->whereIn('branch_id', $branch_id)->count();
-            $inactiveUsers = User::where('status', 1)->whereIn('branch_id', $branch_id)->count();
-            $activeUsers = User::where('status', 0)->whereIn('branch_id', $branch_id)->count();
+            $roleCounts = User::whereIn('branch_id', $branch_id)
+                ->select('role', DB::raw('count(*) as count'))
+                ->groupBy('role')
+                ->pluck('count', 'role');
+            $superAdmin = $roleCounts[1] ?? 0;
+            $admin = $roleCounts[3] ?? 0;
+            $subAdmin = $roleCounts[2] ?? 0;
+            $accounts = $roleCounts[5] ?? 0;
+            $marketing = $roleCounts[6] ?? 0;
+            $deliveryTeam = $roleCounts[7] ?? 0;
+            $users = $roleCounts[0] ?? 0;
+
+            // User Count
+            $user_action_counts = User::selectRaw("
+                    COUNT(*) as total_users,
+                    SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) as active_users,
+                    SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) as inactive_users
+                ")
+                ->whereIn('branch_id', $branch_id)
+                ->first();
+            $total_users = $user_action_counts->total_users;
+            $inactiveUsers = $user_action_counts->inactive_users;
+            $activeUsers = $user_action_counts->active_users;
+
             // User Session Data Count
             $userSessionData = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->whereIn('branch_id', $branch_id)->count();
 
             // Get login data grouped by branch and role
-            $logins = SessionModel::whereIn('branch_id', $branch_id)->whereBetween('created_at', [$start, $end])
-                ->whereNotNull('user_id')
-                ->whereNotNull('role')
-                ->whereNotNull('branch_id')
-                ->whereIn('payload', ['login', 'logout'])
-                ->with('roles') // ensure you load the role relationship
-                ->select('branch_id', 'role', DB::raw('count(*) as login_count'))
-                ->groupBy('branch_id', 'role')
-                ->get();
-
-            // Get logout data grouped by branch and role
-            $logouts = SessionModel::whereIn('branch_id', $branch_id)->whereBetween('created_at', [$start, $end])
-                ->whereNotNull('user_id')
-                ->whereNotNull('role')
-                ->whereNotNull('branch_id')
-                ->where('payload', 'logout')
-                ->with('roles')
-                ->select('branch_id', 'role', DB::raw('count(*) as logout_count'))
-                ->groupBy('branch_id', 'role')
-                ->get();
-
-            // Additional query 1: Total login + logout activity
-            $logActivities = SessionModel::whereIn('branch_id', $branch_id)->whereBetween('created_at', [$start, $end])
-                ->whereNotNull('user_id')
-                ->whereNotNull('role')
-                ->whereNotNull('branch_id')
-                ->whereIn('payload', ['login', 'logout']) // fixed: should be `whereIn`
-                ->with('roles')
-                ->select('branch_id', 'role', DB::raw("COUNT(*) as total_activity_count"))
-                ->groupBy('branch_id', 'role')
-                ->get();
-
-            // Additional query 2: Current login counts
-            $currentLogin = SessionModel::whereIn('branch_id', $branch_id)->whereBetween('created_at', [$start, $end])
-                ->whereNotNull('user_id')
-                ->whereNotNull('role')
-                ->whereNotNull('branch_id')
-                ->where('payload', 'login')
-                ->with('roles')
-                ->select('branch_id', 'role', DB::raw('count(*) as current_login'))
-                ->groupBy('branch_id', 'role')
-                ->get();
-
+            $sessionStats = SessionModel::whereBetween('created_at', [$start, $end])
+            ->whereIn('branch_id', $branch_id)
+            ->whereNotNull('user_id')
+            ->whereNotNull('role')
+            ->whereNotNull('branch_id')
+            ->whereIn('payload', ['login', 'logout'])
+            ->with('roles') // keep eager loading if needed for roles
+            ->select(
+                'branch_id',
+                'role',
+                DB::raw('
+                    COUNT(*) as total_activity_count,
+                    SUM(CASE WHEN payload IN ("login", "logout") THEN 1 ELSE 0 END) as login_count,
+                    SUM(CASE WHEN payload = "logout" THEN 1 ELSE 0 END) as logout_count,
+                    SUM(CASE WHEN payload = "login" THEN 1 ELSE 0 END) as current_login
+                ')
+            )
+            ->groupBy('branch_id', 'role')
+            ->get();
+            
             // User Analycis Page Mini Card Data
             $miniCardData = $this->getMiniCardData($branch_id, $total_users, $user_capacity, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers);
             // User Analycis Page Summary Card Data
@@ -153,7 +148,7 @@ class UserActivityServiceProvider
             // User Analycis Page User Activities Bar Chart
             $usersCount = $this->getUserActivitiesBarChart($total_users, $startOfMonth, $endOfMonth,$superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users, $inactiveUsers, $activeUsers, $userSessionData);
             // User Analycis Page User Branch Bar Chart
-            [$formattedBranchStats, $branchRoleStats] = $this->getBranchBarChart($logins, $logouts, $logActivities, $currentLogin);
+            [$formattedBranchStats, $branchRoleStats] = $this->getBranchBarChart($sessionStats);
             // User Storage allocation
             $storage = $this->storageAllocation($total_users);
             
@@ -191,11 +186,19 @@ class UserActivityServiceProvider
         // Calculate the percentage of total inactive_users
         $inactive_users_percentage = $user_capacity > 0 ? ($inactive_users / $user_capacity) * 100 : 0;
 
-        // Calculate the percentage and total activity users
-        $intime_or_outtime_activity_users = SessionModel::whereNotNull('id')->whereIn('branch_id', $branch_id)->count();
-        $intime_activity_users = SessionModel::where('status', 0)->whereIn('branch_id', $branch_id)->count();
-        $activity_users = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->whereIn('branch_id', $branch_id)->count();
+        // Merge all session counts into one query
+        $sessionStats = SessionModel::selectRaw("
+                COUNT(*) as total_sessions,
+                SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) as intime_activity_users,
+                SUM(CASE WHEN created_at BETWEEN ? AND ? THEN 1 ELSE 0 END) as activity_users
+            ", [$startOfMonth, $endOfMonth])
+            ->whereIn('branch_id', $branch_id)
+            ->first();
 
+        $intime_or_outtime_activity_users = $sessionStats->total_sessions;
+        $intime_activity_users = $sessionStats->intime_activity_users;
+        $activity_users = $sessionStats->activity_users;
+        // Calculate the percentage and total activity users
         $activity_users_percentage = $intime_activity_users > 0 ? ($activity_users / $intime_or_outtime_activity_users) * 100 : 0;
 
         return [
@@ -275,40 +278,24 @@ class UserActivityServiceProvider
         return $usersBarChartCount;
     }
     // Helper Function User Analycis Page User Acivities Bar Chart
-    private function getBranchBarChart($logins, $logouts, $logActivities, $currentLogin)
+    private function getBranchBarChart($sessionStats)
     {
-       $activityMap = [];
-        foreach ($logActivities as $activity) {
-            $branchId = $activity->branch_id;
-            $roleName = $activity->roles->name ?? 'N/A';
-            $activityMap[$branchId][$roleName] = $activity->total_activity_count;
-        }
-
-        $currentLoginMap = [];
-        foreach ($currentLogin as $login) {
-            $branchId = $login->branch_id;
-            $roleName = $login->roles->name ?? 'N/A';
-            $currentLoginMap[$branchId][$roleName] = $login->current_login;
-        }
-        // Combine login and logout counts
         $branchRoleStats = [];
+        $activityMap = [];
+        $currentLoginMap = [];
 
-        foreach ($logins as $login) {
-            $branchId = $login->branch_id;
-            $roleName = $login->roles->name ?? 'N/A';
+        foreach ($sessionStats as $entry) {
+            $branchId = $entry->branch_id;
+            $roleName = $entry->roles->name ?? 'N/A';
 
-            $branchRoleStats[$branchId][$roleName]['login'] = $login->login_count;
-            $branchRoleStats[$branchId][$roleName]['logout'] = 0; // initialize
-        }
+            // Assign all values directly
+            $branchRoleStats[$branchId][$roleName] = [
+                'login' => (int) $entry->login_count,
+                'logout' => (int) $entry->logout_count,
+            ];
 
-        foreach ($logouts as $logout) {
-            $branchId = $logout->branch_id;
-            $roleName = $logout->roles->name ?? 'N/A';
-
-            if (!isset($branchRoleStats[$branchId][$roleName])) {
-                $branchRoleStats[$branchId][$roleName]['login'] = 0; // initialize
-            }
-            $branchRoleStats[$branchId][$roleName]['logout'] = $logout->logout_count;
+            $activityMap[$branchId][$roleName] = (int) $entry->total_activity_count;
+            $currentLoginMap[$branchId][$roleName] = (int) $entry->current_login;
         }
 
         $formattedBranchStats = [];
@@ -324,17 +311,9 @@ class UserActivityServiceProvider
                 $roles[] = $role;
                 $loginCounts[] = $counts['login'] ?? 0;
                 $logoutCounts[] = $counts['logout'] ?? 0;
-                // Add total activity count
                 $activityCounts[] = $activityMap[$branchId][$role] ?? 0;
-                // Add current login count
                 $currentLogins[] = $currentLoginMap[$branchId][$role] ?? 0;
             }
-
-            // Total values
-            $totalLogin = array_sum($loginCounts);
-            $totalLogout = array_sum($logoutCounts);
-            $totalActivity = array_sum($activityCounts);
-            $totalCurrentLogin = array_sum($currentLogins);
 
             $formattedBranchStats[$branchId] = [
                 'roles' => $roles,
@@ -342,13 +321,12 @@ class UserActivityServiceProvider
                 'logout_counts' => $logoutCounts,
                 'activity_counts' => $activityCounts,
                 'current_login_counts' => $currentLogins,
-                // Totals
-                'total_login' => $totalLogin,
-                'total_logout' => $totalLogout,
-                'total_activity' => $totalActivity,
-                'total_current_login' => $totalCurrentLogin,
+                'total_login' => array_sum($loginCounts),
+                'total_logout' => array_sum($logoutCounts),
+                'total_activity' => array_sum($activityCounts),
+                'total_current_login' => array_sum($currentLogins),
             ];
-        } 
+        }
 
         return [$formattedBranchStats, $branchRoleStats];
     }
@@ -369,105 +347,6 @@ class UserActivityServiceProvider
     /**
      * Handle User Activity Get
     */
-    // public function getActivities(Request $request)
-    // {
-    //     $auth = Auth::User();
-    //     $user_branch_id = $auth->branch_id;
-    //     $role_id = $auth->role;
-    //     $email = $auth->login_email;
-
-    //     if($email && $role_id){
-    //         $user_log_data_table_permission = 1; // log data table permission
-    //     }
-
-    //     if($user_branch_id && $role_id){
-
-    //         if ($role_id === 1) {
-    //             $branch_id = Branches::pluck('branch_id'); // Get all branch IDs as array
-    //         } else {
-    //             $branch_id = [$user_branch_id]; // Wrap single branch_id in an array
-    //         }
-
-    //         // Start of the week on Sunday
-    //         //$startOfWeek = Carbon::now()->startOfWeek(Carbon::SUNDAY);
-    //         // End of the week on Saturday
-    //         //$endOfWeek = Carbon::now()->endOfWeek(Carbon::SATURDAY);
-
-    //         // Start of the day
-    //         $startOfDay = Carbon::now()->startOfDay();
-    //         // End of the day
-    //         $endOfDay = Carbon::now()->endOfDay();
-    
-    
-    //         // Date Request
-    //         $start_date = $request->input('start_date');
-    //         $end_date = $request->input('end_date');
-    
-    //         // Sort field and direction
-    //         $sort_field = $request->input('sort_field', 'id');
-    //         $sort_direction = $request->input('sort_direction', 'desc');
-            
-    //         // total data count
-    //         $total_users = SessionModel::whereIn('branch_id', $branch_id)->count();
-    //         // Start the query for user activities
-    //         $user_activities = SessionModel::whereNotNull('role')->whereIn('branch_id', $branch_id)->with(['roles', 'users']);
-    
-    //         // Apply default current month filter if no custom date range provided
-    //         if (!$start_date || !$end_date) {
-    //             $user_activities->whereBetween('created_at', [$startOfDay, $endOfDay]);
-    //         }
-    
-    //         // Apply date range filter
-    //         if ($start_date && $end_date) {
-    //             $start = Carbon::parse($start_date)->startOfDay();
-    //             $end = Carbon::parse($end_date)->endOfDay();
-    //             $user_activities->whereBetween('created_at', [$start, $end]);
-    //         }
-
-    //         // Apply search query
-    //         if ($query = $request->get('query')) {
-    //             $user_activities->where(function ($q) use ($query) {
-    //                 $q->where('name', 'LIKE', '%' . $query . '%')
-    //                 ->orWhere('email', 'LIKE', '%' . $query . '%')
-    //                 ->orWhere('contract_number', 'LIKE', '%' . $query . '%')
-    //                 ->orWhere('role', 'LIKE', '%' . $query . '%')
-    //                 ->orWhere('user_id', 'LIKE', '%' . $query . '%');
-    //             });
-    //         }
-    
-    //         // Apply role filter
-    //         if ($role = $request->input('role')) {
-    //             $user_activities->where('role', $role);
-    //         }
-    
-    //         // Apply sorting based on requested field and direction
-    //         $user_activities->orderBy($sort_field, $sort_direction);
-            
-    //         // Paginate
-    //         $perItem = (int) $request->input('per_item', 10);
-    //         $perItem = $perItem > 0 ? $perItem : 10;
-    
-    //         $paginateData = $user_activities->paginate($perItem);
-            
-    //         $item_num = $paginateData->count();
-    //         if($user_log_data_table_permission === 1){
-    //             return response()->json([
-    //                 'data' => $paginateData->items(),
-    //                 'links' => $paginateData->toArray()['links'] ?? [],
-    //                 'total' => $paginateData->total(),
-    //                 'total_users' => $total_users,
-    //                 'per_page' => $perItem,
-    //                 'per_item_num' => $item_num,
-    //             ],200);
-
-    //         }else{
-    //             return response()->json([
-    //                 'message' => 'Server does not response data.'
-    //             ], 200);
-    //         }
-    //     }
-    // }
-
     public function getActivities(Request $request)
     {
         $auth = Auth::user();

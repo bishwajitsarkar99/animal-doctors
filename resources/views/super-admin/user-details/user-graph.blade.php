@@ -33,13 +33,13 @@
                 <x-user-cards.user-storage-card-header cardHeadTitile="Users Storage" iconColor="#2e42cb" />
                 <?php
                     $roles = [
-                        'super_admin' => ['label' => 'Super-Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                        'admin' => ['label' => 'Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                        'sub_admin' => ['label' => 'Sub-Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                        'accounts' => ['label' => 'Accounts Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                        'marketing' => ['label' => 'Marketing Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                        'delivery_team' => ['label' => 'Delivery Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
-                        'users' => ['label' => 'General Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar'],
+                        'super_admin' => ['label' => 'Super-Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar scrolling'],
+                        'admin' => ['label' => 'Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar scrolling'],
+                        'sub_admin' => ['label' => 'Sub-Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar scrolling'],
+                        'accounts' => ['label' => 'Accounts Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar scrolling'],
+                        'marketing' => ['label' => 'Marketing Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar scrolling'],
+                        'delivery_team' => ['label' => 'Delivery Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar scrolling'],
+                        'users' => ['label' => 'General Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar scrolling'],
                     ]; 
                 ?>
                 @foreach($roles as $key => $data)
@@ -619,7 +619,7 @@
 </script>
 <!-- number cricle bar and number rolling animation with scrol animation and drag and drop -->
 <script type="module">
-    import { cricleNumberPlate, numberRolling , triggerIfInView, initializeBarCharts, initDragAndDrop } from "/module/module-min-js/design-helper-function-min.js";
+    import { cricleNumberPlate, numberRolling , triggerIfInView, initializeBarCharts, initScrollProgressBar} from "/module/module-min-js/design-helper-function-min.js";
 
     // number cricle bar
     const numberClass = '.total-number';
@@ -634,11 +634,6 @@
     const row = '.drag-row';
     const column = '.drag-column';
     const cardKey = '.group-card';
-
-    // drag and drop custom card
-    const dragColumn = '.drag-column';
-    const cardBg = 'card-light-bg';
-    const cardId = '.group-card';
 
     // DOM ready
     document.addEventListener('DOMContentLoaded', () => {
@@ -657,6 +652,14 @@
         triggerIfInView(numberSelector, containerSelector);
     });
 
+    // Use jQuery's correct ready syntax
+    $(document).ready(function () {
+        // scroll progress bar
+        const scrollKey = '.scrolling'; //Add dot for class selector
+        const ProgressClas = 'progressbar-active';
+        initScrollProgressBar(scrollKey, ProgressClas);
+    });
+    
     initializeBarCharts();
 </script>
 <!-- demo line chart -->

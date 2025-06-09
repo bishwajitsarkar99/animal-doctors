@@ -2,6 +2,23 @@
 table,th,tr,td{
     opacity: 1;
 }
+.table-svg-container {
+    animation: jump 1.2s ease-in-out infinite;
+}
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  70% {
+    transform: translateY(-4px);
+  }
+}
 ul.dropdown-menu.action{
     position: absolute;
     inset: auto auto 0px 0px;
