@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 class UserActivityServiceProvider
 {
@@ -82,33 +83,40 @@ class UserActivityServiceProvider
             // User storage capacity
             $user_capacity=100;
             
+            // Get Role
+            $roles = Role::select('roles.id', 'roles.name', 'roles.created_at', 'roles.updated_at')
+            ->join('users', 'users.role', '=', 'roles.id')
+            ->whereIn('users.branch_id', $branch_id)
+            ->groupBy('roles.id', 'roles.name', 'roles.created_at', 'roles.updated_at')
+            ->get();
+
+            // Get User For Calculation
+            $userStats = User::selectRaw("
+                SUM(CASE WHEN role = 1 THEN 1 ELSE 0 END) as super_admin,
+                SUM(CASE WHEN role = 2 THEN 1 ELSE 0 END) as sub_admin,
+                SUM(CASE WHEN role = 3 THEN 1 ELSE 0 END) as admin,
+                SUM(CASE WHEN role = 5 THEN 1 ELSE 0 END) as accounts,
+                SUM(CASE WHEN role = 6 THEN 1 ELSE 0 END) as marketing,
+                SUM(CASE WHEN role = 7 THEN 1 ELSE 0 END) as delivery_team,
+                SUM(CASE WHEN role = 0 THEN 1 ELSE 0 END) as users,
+                COUNT(*) as total_users,
+                SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) as active_users,
+                SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) as inactive_users
+            ")
+            ->whereIn('branch_id', $branch_id)
+            ->first();
             // Role Count
-            $user_roles = User::whereIn('branch_id', $branch_id)->pluck('role')->unique();
-            $roles = Role::whereIn('id', $user_roles)->get();
-
-            $roleCounts = User::whereIn('branch_id', $branch_id)
-                ->select('role', DB::raw('count(*) as count'))
-                ->groupBy('role')
-                ->pluck('count', 'role');
-            $superAdmin = $roleCounts[1] ?? 0;
-            $admin = $roleCounts[3] ?? 0;
-            $subAdmin = $roleCounts[2] ?? 0;
-            $accounts = $roleCounts[5] ?? 0;
-            $marketing = $roleCounts[6] ?? 0;
-            $deliveryTeam = $roleCounts[7] ?? 0;
-            $users = $roleCounts[0] ?? 0;
-
+            $superAdmin   = $userStats->super_admin;
+            $subAdmin     = $userStats->sub_admin;
+            $admin        = $userStats->admin;
+            $accounts     = $userStats->accounts;
+            $marketing    = $userStats->marketing;
+            $deliveryTeam = $userStats->delivery_team;
+            $users        = $userStats->users;
             // User Count
-            $user_action_counts = User::selectRaw("
-                    COUNT(*) as total_users,
-                    SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) as active_users,
-                    SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) as inactive_users
-                ")
-                ->whereIn('branch_id', $branch_id)
-                ->first();
-            $total_users = $user_action_counts->total_users;
-            $inactiveUsers = $user_action_counts->inactive_users;
-            $activeUsers = $user_action_counts->active_users;
+            $total_users   = $userStats->total_users;
+            $activeUsers   = $userStats->active_users;
+            $inactiveUsers = $userStats->inactive_users;
 
             // User Session Data Count
             $userSessionData = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->whereIn('branch_id', $branch_id)->count();
@@ -136,12 +144,19 @@ class UserActivityServiceProvider
             
             // User Analycis Page Mini Card Data
             $miniCardData = $this->getMiniCardData($branch_id, $total_users, $user_capacity, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers);
+            // $miniCardData = Cache::remember(
+            //     'miniCardData_' . implode('_', $branch_id) . '_' . now()->format('Y_m'),
+            //     600, // Cache for 10 miniutes
+            //     function () use ($branch_id, $total_users, $user_capacity, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers) {
+            //         return $this->getMiniCardData($branch_id, $total_users, $user_capacity, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers);
+            //     }
+            // );
             // User Analycis Page Summary Card Data
             $summaryCardData = $this->getSummaryCardData($roles, $total_users, $superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users);
             $totalPercentageVlaue = array_sum($summaryCardData);
             $bytes = 1024;
             $totalPercentage = $totalPercentageVlaue > 0 ? ($totalPercentageVlaue / $bytes) * 100 : 0;
-            // User Analycis Page Branch Session Data 
+            // User Analycis Page Branch Information Data Chart
             $branch_log_session_data = $this->getBranchInfoData($branch_id);
             // User Analycis Page User Activities Line Chart
             $usersActivityCount = $this->getUserActivitiesLineChart($startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers, $userSessionData, $total_users);
