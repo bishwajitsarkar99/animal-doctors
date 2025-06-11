@@ -119,7 +119,7 @@ class UserActivityServiceProvider
             $activeUsers   = $userStats->active_users;
             $inactiveUsers = $userStats->inactive_users;
 
-            // User Session Data Count
+            // User Session Data Count for frequently data change Cache::put('temp_live_stats', $value, now()->addSeconds(10));
             $userSessionData = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->whereIn('branch_id', $branch_id)->count();
 
             // Get login data grouped by branch and role

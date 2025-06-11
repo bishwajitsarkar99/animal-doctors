@@ -111,21 +111,6 @@ class CacheManage
     /**
      * Remember or cache a complex object using consistent key.
      */
-    // public static function remember(string $prefix, \Closure $callback, $branchId = null, string $dateFormat = null, $ttl = 600)
-    // {
-    //     $key = self::generateKey($prefix, $branchId, $dateFormat);
-
-    //     // Check if already cached
-    //     if (Cache::has($key)) {
-    //         return Cache::get($key);
-    //     }
-    //     // Generate new value
-    //     $newValue = $callback();
-    //     // Cache it
-    //     Cache::put($key, $newValue, now()->addSeconds($ttl));
-
-    //     return $newValue;
-    // }
     public static function remember(
         string $prefix,
         \Closure $callback,
