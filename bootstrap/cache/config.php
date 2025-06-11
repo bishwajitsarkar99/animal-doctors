@@ -844,7 +844,7 @@
     'migrations' => 'migrations',
     'redis' => 
     array (
-      'client' => 'phpredis',
+      'client' => 'predis',
       'options' => 
       array (
         'cluster' => 'redis',

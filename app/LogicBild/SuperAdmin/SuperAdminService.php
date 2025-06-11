@@ -231,9 +231,9 @@ class SuperAdminService
         $status = (bool)$request->input('status');
         $status = !$status;
 
-        $data = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        $data->update([
+        $user->update([
             'status' => (int)$status,
         ]);
 
