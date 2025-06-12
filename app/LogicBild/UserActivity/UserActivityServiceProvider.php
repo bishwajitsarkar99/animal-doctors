@@ -68,7 +68,7 @@ class UserActivityServiceProvider
         if($user_branch_id && $role_id){
 
             if ($role_id === 1) {
-                $branch_id = Branches::pluck('branch_id')->toArray(); // Get all branch IDs as array
+                $branch_id = DB::table('branches')->pluck('branch_id')->toArray(); // Get all branch IDs as array
             } else {
                 $branch_id = [$user_branch_id]; // Wrap single branch_id in an array
             }
@@ -85,14 +85,14 @@ class UserActivityServiceProvider
             $user_capacity=100;
             
             // Get Role
-            $roles = Role::select('roles.id', 'roles.name', 'roles.created_at', 'roles.updated_at')
+            $roles = DB::table('roles')->select('roles.id', 'roles.name', 'roles.created_at', 'roles.updated_at')
             ->join('users', 'users.role', '=', 'roles.id')
             ->whereIn('users.branch_id', $branch_id)
             ->groupBy('roles.id', 'roles.name', 'roles.created_at', 'roles.updated_at')
             ->get();
 
             // Get User For Calculation
-            $userStats = User::selectRaw("
+            $userStats = DB::table('users')->selectRaw("
                 SUM(CASE WHEN role = 1 THEN 1 ELSE 0 END) as super_admin,
                 SUM(CASE WHEN role = 2 THEN 1 ELSE 0 END) as sub_admin,
                 SUM(CASE WHEN role = 3 THEN 1 ELSE 0 END) as admin,
@@ -120,7 +120,7 @@ class UserActivityServiceProvider
             $inactiveUsers = $userStats->inactive_users;
 
             // User Session Data Count for frequently data change Cache::put('temp_live_stats', $value, now()->addSeconds(10));
-            $userSessionData = SessionModel::whereBetween('created_at', [$startOfMonth, $endOfMonth])->whereIn('branch_id', $branch_id)->count();
+            $userSessionData = DB::table('sessions')->whereBetween('created_at', [$startOfMonth, $endOfMonth])->whereIn('branch_id', $branch_id)->count();
 
             // Get login data grouped by branch and role
             $sessionStats = SessionModel::whereBetween('created_at', [$start, $end])
@@ -146,7 +146,7 @@ class UserActivityServiceProvider
             // User Analycis Page Mini Card Data
             // Mini Card Data
             $cacheFormat = now()->format('Y_m');
-            CacheManage::clear('miniCardData', $branch_id, $cacheFormat);
+            // CacheManage::clear('miniCardData', $branch_id, $cacheFormat);
             $miniCardData = CacheManage::remember(
                 'miniCardData',
                 function () use ($branch_id, $total_users, $user_capacity, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers) {
@@ -160,7 +160,7 @@ class UserActivityServiceProvider
             // User Analycis Page Summary Card Data
             // Summary Card Data
             $cacheFormat = now()->format('Y_m');
-            CacheManage::clear('summaryCardData', $branch_id, $cacheFormat);
+            // CacheManage::clear('summaryCardData', $branch_id, $cacheFormat);
             $summaryCardData = CacheManage::remember(
                 'summaryCardData',
                 function () use (
@@ -179,7 +179,7 @@ class UserActivityServiceProvider
             // User Analycis Page Branch Information Data Chart
             // Branch Info Chart Data
             $cacheFormat = now()->format('Y_m');
-            CacheManage::clear('branch_log_session_data', $branch_id, $cacheFormat);
+            // CacheManage::clear('branch_log_session_data', $branch_id, $cacheFormat);
             $branch_log_session_data = CacheManage::remember(
                 'branch_log_session_data',
                 fn () => $this->getBranchInfoData($branch_id),
@@ -190,21 +190,21 @@ class UserActivityServiceProvider
             );
             // User Analycis Page User Activities Line Chart
             // Line Chart Data
-            CacheManage::clear('usersActivityCount');
+            // CacheManage::clear('usersActivityCount');
             $usersActivityCount = CacheManage::remember(
                 'usersActivityCount',
                 fn () => $this->getUserActivitiesLineChart($startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers, $userSessionData, $total_users)
             );
             // User Analycis Page User Activities Bar Chart
             // Bar Chart Data
-            CacheManage::clear('usersCount');
+            // CacheManage::clear('usersCount');
             $usersCount = CacheManage::remember(
                 'usersCount',
                 fn () => $this->getUserActivitiesBarChart($total_users, $startOfMonth, $endOfMonth,$superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users, $inactiveUsers, $activeUsers, $userSessionData)
             );
             // User Analycis Page User Branch Bar Chart
             $dateForKey = now()->format('Y_m');
-            CacheManage::clear('userBranchBarChart', $branch_id, $dateForKey);
+            // CacheManage::clear('userBranchBarChart', $branch_id, $dateForKey);
             $startDate = Carbon::parse($start);
             $dateForKey = $startDate->format('Y_m');
 
@@ -223,7 +223,7 @@ class UserActivityServiceProvider
                 true // <<< key part: compare before writing to cache
             );
             // Storage Allocation
-            CacheManage::clear('usersCount');
+            // CacheManage::clear('usersCount');
             $storage = CacheManage::remember(
                 'storageAllocation',
                 fn () => $this->storageAllocation($total_users)
@@ -264,7 +264,7 @@ class UserActivityServiceProvider
         $inactive_users_percentage = $user_capacity > 0 ? ($inactive_users / $user_capacity) * 100 : 0;
 
         // Merge all session counts into one query
-        $sessionStats = SessionModel::selectRaw("
+        $sessionStats = DB::table('sessions')->selectRaw("
                 COUNT(*) as total_sessions,
                 SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) as intime_activity_users,
                 SUM(CASE WHEN created_at BETWEEN ? AND ? THEN 1 ELSE 0 END) as activity_users
@@ -432,7 +432,7 @@ class UserActivityServiceProvider
         $user_branch_id = $auth->branch_id;
         
         if ($role_id === 1) {
-            $branch_id = Branches::pluck('branch_id')->toArray(); // Get all branch IDs as array
+            $branch_id = DB::table('branches')->pluck('branch_id')->toArray(); // Get all branch IDs as array
         } else {
             $branch_id = [$user_branch_id]; // Wrap single branch_id in an array
         }
@@ -444,7 +444,7 @@ class UserActivityServiceProvider
 
         if ($user_log_data_table_permission) {
 
-            $baseQuery = SessionModel::query()
+            $baseQuery = DB::table('sessions')->query()
                 ->whereNotNull('role')
                 ->with(['roles', 'users']);
 
@@ -466,7 +466,7 @@ class UserActivityServiceProvider
                 'data' => $paginateData->items(),
                 'links' => $paginateData->toArray()['links'] ?? [],
                 'total' => $paginateData->total(),
-                'total_users' => SessionModel::whereIn('branch_id', $branch_id)->count(),
+                'total_users' => DB::table('sessions')->whereIn('branch_id', $branch_id)->count(),
                 'per_page' => $perItem,
                 'per_item_num' => $paginateData->count(),
             ]);
@@ -492,7 +492,7 @@ class UserActivityServiceProvider
         if($user_branch_id && $role_id && $email){
 
             if ($role_id === 1) {
-                $branch_id = Branches::pluck('branch_id'); // Get all branch IDs as array
+                $branch_id = DB::table('branches')->pluck('branch_id'); // Get all branch IDs as array
             } else {
                 $branch_id = [$user_branch_id]; // Wrap single branch_id in an array
             }
@@ -594,14 +594,14 @@ class UserActivityServiceProvider
     // Helper function count current users, logins, and logouts
     private function countCurrentUsers($startOfDay, $endOfDay, $branch_id)
     {
-        $current_users = SessionModel::whereBetween('created_at', [$startOfDay, $endOfDay])
+        $current_users = DB::table('sessions')->whereBetween('created_at', [$startOfDay, $endOfDay])
         ->whereNotNull('user_id')->distinct('user_id')->whereIn('branch_id', $branch_id)->count('user_id');
 
-        $current_login_users = SessionModel::where('payload', 'login')
+        $current_login_users = DB::table('sessions')->where('payload', 'login')
             ->whereBetween('created_at', [$startOfDay, $endOfDay])
             ->whereNotNull('user_id')->whereIn('branch_id', $branch_id)->count();
 
-        $current_logout_users = SessionModel::where('payload', 'logout')
+        $current_logout_users = DB::table('sessions')->where('payload', 'logout')
             ->whereBetween('created_at', [$startOfDay, $endOfDay])
             ->whereNotNull('user_id')->whereIn('branch_id', $branch_id)->count();
         
@@ -699,7 +699,7 @@ class UserActivityServiceProvider
         if($user_branch_id && $role_id && $email){
 
             if ($role_id === 1) {
-                $branch_id = Branches::pluck('branch_id'); // Get all branch IDs as array
+                $branch_id = DB::table('branches')->pluck('branch_id'); // Get all branch IDs as array
             } else {
                 $branch_id = [$user_branch_id]; // Wrap single branch_id in an array
             }
