@@ -142,58 +142,103 @@ class UserActivityServiceProvider
             )
             ->groupBy('branch_id', 'role')
             ->get();
-            
-            // User Analycis Page Mini Card Data
-            // Mini Card Data
-            $cacheFormat = now()->format('Y_m');
-            // CacheManage::clear('miniCardData', $branch_id, $cacheFormat);
+            //dd(config('cache.prefix'));
+            // Cache::put('sample_test_key', 'value', 600);
+            // $redis = Cache::store('redis')->getRedis();
+            // $redis->select(1);
+            // dd($redis->keys('*'));
+
+            // // Should appear in DB 1
+            // $redis = Cache::store('redis')->getRedis();
+            // $redis->select(1);
+            // dd($redis->keys('*'));
+            // if (is_array($branch_id)) {
+            //     // If nested array, flatten it or convert properly
+            //     $branchIdString = implode('-', array_map(function($item) {
+            //         return is_array($item) ? implode('_', $item) : $item;
+            //     }, $branch_id));
+            // } elseif (is_null($branch_id)) {
+            //     $branchIdString = 'null';
+            // } else {
+            //     $branchIdString = (string) $branch_id;
+            // }
+            // $cacheFormat = now()->format('Y_m'); // Or your desired format
+            // $cacheKey = "miniCardData:{$branchIdString}:{$cacheFormat}";
+            // $miniCardData = Cache::remember($cacheKey, 600, function () use (
+            //     $branch_id,
+            //     $total_users,
+            //     $user_capacity,
+            //     $startOfMonth,
+            //     $endOfMonth,
+            //     $inactiveUsers,
+            //     $activeUsers
+            //     ) {
+            //     return $this->getMiniCardData(
+            //         $branch_id,
+            //         $total_users,
+            //         $user_capacity,
+            //         $startOfMonth,
+            //         $endOfMonth,
+            //         $inactiveUsers,
+            //         $activeUsers
+            //     );
+            // });
             $miniCardData = CacheManage::remember(
                 'miniCardData',
-                function () use ($branch_id, $total_users, $user_capacity, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers) {
-                    return $this->getMiniCardData($branch_id, $total_users, $user_capacity, $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers);
-                },
+                fn() => $this->getMiniCardData(
+                    $branch_id,
+                    $total_users,
+                    $user_capacity,
+                    $startOfMonth,
+                    $endOfMonth,
+                    $inactiveUsers,
+                    $activeUsers
+                ),
                 $branch_id,
-                $cacheFormat,
-                600,
-                true // <<< key part: compare before writing to cache
+                $total_users,
+                $user_capacity,
+                $startOfMonth,
+                $endOfMonth,
+                $inactiveUsers,
+                $activeUsers
             );
-            // User Analycis Page Summary Card Data
             // Summary Card Data
-            $cacheFormat = now()->format('Y_m');
-            // CacheManage::clear('summaryCardData', $branch_id, $cacheFormat);
             $summaryCardData = CacheManage::remember(
                 'summaryCardData',
-                function () use (
-                    $roles, $total_users, $superAdmin, $admin, $subAdmin,
-                    $accounts, $marketing, $deliveryTeam, $users) {
-                    return $this->getSummaryCardData($roles, $total_users, $superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users);
-                },
-                $branch_id,
-                $cacheFormat,
-                600,
-                true // <<< key part: compare before writing to cache
+                fn() => $this->getSummaryCardData($roles, $total_users, $superAdmin, $admin, $subAdmin,$accounts, $marketing, $deliveryTeam, $users),
+                $roles, $total_users, $superAdmin, $admin, $subAdmin,$accounts, $marketing, $deliveryTeam, $users
             );
+            // $summaryCardData = CacheManage::remember(
+            //     'summaryCardData',
+            //     function () use (
+            //         $roles, $total_users, $superAdmin, $admin, $subAdmin,
+            //         $accounts, $marketing, $deliveryTeam, $users) {
+            //         return $this->getSummaryCardData($roles, $total_users, $superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users);
+            //     },
+            // );
             $totalPercentageVlaue = array_sum($summaryCardData);
             $bytes = 1024;
             $totalPercentage = $totalPercentageVlaue > 0 ? ($totalPercentageVlaue / $bytes) * 100 : 0;
-            // User Analycis Page Branch Information Data Chart
             // Branch Info Chart Data
-            $cacheFormat = now()->format('Y_m');
-            // CacheManage::clear('branch_log_session_data', $branch_id, $cacheFormat);
             $branch_log_session_data = CacheManage::remember(
                 'branch_log_session_data',
-                fn () => $this->getBranchInfoData($branch_id),
-                $branch_id,
-                $cacheFormat,
-                600,
-                true // <<< key part: compare before writing to cache
+                fn() => $this->getBranchInfoData($branch_id),
+                $branch_id
             );
+            // $branch_log_session_data = CacheManage::remember(
+            //     'branch_log_session_data',
+            //     fn () => $this->getBranchInfoData($branch_id),
+            //     $branch_id,
+            //     $cacheFormat,
+            //     600,
+            //     true
+            // );
             // User Analycis Page User Activities Line Chart
             // Line Chart Data
-            // CacheManage::clear('usersActivityCount');
             $usersActivityCount = CacheManage::remember(
                 'usersActivityCount',
-                fn () => $this->getUserActivitiesLineChart($startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers, $userSessionData, $total_users)
+                fn () => $this->getUserActivitiesLineChart($startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers, $userSessionData, $total_users),
+                $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers, $userSessionData, $total_users
             );
             // User Analycis Page User Activities Bar Chart
             // Bar Chart Data
@@ -203,31 +248,26 @@ class UserActivityServiceProvider
                 fn () => $this->getUserActivitiesBarChart($total_users, $startOfMonth, $endOfMonth,$superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users, $inactiveUsers, $activeUsers, $userSessionData)
             );
             // User Analycis Page User Branch Bar Chart
-            $dateForKey = now()->format('Y_m');
-            // CacheManage::clear('userBranchBarChart', $branch_id, $dateForKey);
-            $startDate = Carbon::parse($start);
-            $dateForKey = $startDate->format('Y_m');
-
-            $userBranchBarChartCacheKey = md5(json_encode([
-                'start' => $start,
-                'end' => $end,
-                'branch_id' => $branch_id,
-            ]));
+            // $startDate = Carbon::parse($start);
+            // $dateForKey = $startDate->format('Y_m');
+            // $userBranchBarChartCacheKey = md5(json_encode([
+            //     'start' => $start,
+            //     'end' => $end,
+            //     'branch_id' => $branch_id,
+            // ]));
             // Remember with consistent key
             [$formattedBranchStats, $branchRoleStats] = CacheManage::remember(
                 'userBranchBarChart',
                 fn () => $this->getBranchBarChart($sessionStats),
-                $userBranchBarChartCacheKey,
-                $dateForKey,
-                600,
-                true // <<< key part: compare before writing to cache
+                $branch_id, now()->format('Y_m')
             );
             // Storage Allocation
             // CacheManage::clear('usersCount');
             $storage = CacheManage::remember(
                 'storageAllocation',
-                fn () => $this->storageAllocation($total_users)
+                fn () => $this->storageAllocation($total_users),$total_users
             );
+            //dd($storage);
 
             $storedRandom = session('valid_user_log_random');
             $page_name = 'User Log Activity';
@@ -444,7 +484,7 @@ class UserActivityServiceProvider
 
         if ($user_log_data_table_permission) {
 
-            $baseQuery = DB::table('sessions')->query()
+            $baseQuery = SessionModel::query()
                 ->whereNotNull('role')
                 ->with(['roles', 'users']);
 

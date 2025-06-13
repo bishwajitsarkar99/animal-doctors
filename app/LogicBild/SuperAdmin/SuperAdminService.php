@@ -19,6 +19,7 @@ use App\Models\AuthPages;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\cacheStorage\CacheManage;
 
 class SuperAdminService
 {
@@ -232,6 +233,22 @@ class SuperAdminService
         $status = !$status;
 
         $user = User::findOrFail($id);
+
+        // Clear the exact 5min cache key
+        // $branchId = $user->branch_id ?? null;
+        // $cacheFormat = now()->format('Y_m');
+
+        $prefixes = [
+            'miniCardData',
+            'summaryCardData',
+            'branch_log_session_data',
+            'usersActivityCount',
+            'usersCount',
+            'storageAllocation',
+            'userBranchBarChart',
+        ];
+
+        CacheManage::clearMultiple($prefixes, $user->branch_id);
 
         $user->update([
             'status' => (int)$status,

@@ -4,7 +4,7 @@ namespace App\CacheStorage;
 
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
-
+use Illuminate\Support\Str;
 class CacheManage
 {
     protected static $attributes = [];
@@ -23,6 +23,8 @@ class CacheManage
         // Convert branchId array to string if needed
         if (is_array($branchId)) {
             $branchId = implode('_', $branchId);
+        } elseif (is_null($branchId)) {
+            $branchId = 'null';
         }
 
         return collect([$prefix, $branchId, $dateFormat])
@@ -100,14 +102,14 @@ class CacheManage
     /**
      * Completely clear cached dataset.
      */
-    public static function clear(string $prefix, $branchId = null, string $dateFormat = null)
+    public static function clear($prefix, $branchId = null, $dateFormat = null)
     {
-        $key = self::generateKey($prefix, $branchId, $dateFormat);
-        unset(self::$attributes[$key]);
+        $branchIdStr = is_array($branchId) ? implode('-', $branchId) : ($branchId ?? 'null');
+        $key = "{$prefix}:{$branchIdStr}:" . ($dateFormat ?? now()->format('Y_m'));
 
+        unset(self::$attributes[$key]);
         return Cache::forget($key);
     }
-
     /**
      * Remember or cache a complex object using consistent key.
      */
@@ -116,33 +118,44 @@ class CacheManage
         \Closure $callback,
         $branchId = null,
         string $dateFormat = null,
-        int $ttl = 600,
-        bool $checkDiff = false
+        int $ttl = 600
     ) {
-        $key = self::generateKey($prefix, $branchId, $dateFormat);
+        $branchStr = is_array($branchId) ? implode('-', $branchId) : ($branchId ?? 'null');
+        $dateStr = $dateFormat ?? now()->format('Y_m');
+        $key = "{$prefix}:{$branchStr}:{$dateStr}";
 
-        // Always try to read from cache
-        $existing = Cache::get($key);
+        return Cache::store('redis')->remember($key, $ttl, $callback);
+    }
 
-        if ($existing !== null) {
-            if (!$checkDiff) {
-                return $existing;
-            }
+    /**
+     * Completely clear multiple cached datasets.
+     */
+    public static function clearMultiple(array $prefixes, string $branchId, ?string $dateSuffix = null)
+    {
+        $redis = Cache::store('redis')->getRedis();
 
-            // For big data: compare values
-            $newValue = $callback();
-            if (md5(serialize($existing)) === md5(serialize($newValue))) {
-                return $existing; // No change, skip disk write
-            }
-
-            // Value changed, update cache
-            Cache::put($key, $newValue, now()->addSeconds($ttl));
-            return $newValue;
+        // Ensure you select the right Redis DB if needed
+        if ($db = config('cache.redis.database')) {
+            $redis->select($db);
         }
 
-        // Cache is missing – generate and store
-        $newValue = $callback();
-        Cache::put($key, $newValue, now()->addSeconds($ttl));
-        return $newValue;
+        foreach ($prefixes as $prefix) {
+            // Build pattern including branchId and optional date suffix if used in keys
+            $pattern = config('cache.prefix') . ':' . $prefix . ':' . $branchId;
+            
+            if ($dateSuffix) {
+                $pattern .= ':' . $dateSuffix;
+            }
+            
+            $pattern .= '*'; // wildcard to match all keys starting with this prefix
+
+            // Get all matching keys
+            $keys = $redis->keys($pattern);
+
+            if (!empty($keys)) {
+                // Delete all matching keys
+                $redis->del($keys);
+            }
+        }
     }
 }

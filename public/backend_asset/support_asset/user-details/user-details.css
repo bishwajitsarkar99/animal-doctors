@@ -1559,7 +1559,12 @@ tr.table-row {
     color: black;
     font-weight: 600;
 }
-tr.table-row.user-table-row:hover{
+tr.table-row-light{
+    background-image: linear-gradient(90deg, #ffffffff 100%, transparent 100%, #ffffffff 100%);
+    color: black;
+    font-weight: 600;
+}
+tr.table-row-light:hover{
     font-weight: 600;
     background-image: var(--table-row-hover);
     animation-name: fonColor;
