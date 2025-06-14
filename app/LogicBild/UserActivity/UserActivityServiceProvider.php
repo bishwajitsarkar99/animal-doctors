@@ -881,16 +881,30 @@ class UserActivityServiceProvider
     // Get Branch Data 
     public function fetchBranchData()
     {
-        // $branch_data = DB::table('branches')
-        // ->select('branches.id', 'branch.name', 'branch.crated_at', 'branch.updated_at')
-        // ->join('sessions', 'sessions.branch_id', '=', 'branches.name')
-        // ->groupBy('sessions.id', 'sessions.branch_id', 'sessions.created_at', 'sessions.updated_at')
-        // ->get();
+        $auth = Auth::User();
+        if (!$auth) {
+            return redirect()->route('login'); // or unauthorized view
+        }
+        $role_id = $auth->role;
+        $user_branch_id = $auth->branch_id;
 
-        // return response()->json([
-        //     'status' => 200,
-        //     'branch_data' => $branch_data
-        // ]);
+        if ($role_id === 1) {
+            $branch_ids = DB::table('branches')->pluck('branch_id')->toArray(); // Get all branch IDs as array
+        } else {
+            $branch_ids = [$user_branch_id]; // Wrap single branch_id in an array
+        }
+
+        $branch_data = DB::table('branches')
+        ->select('branches.id','branches.branch_id','branches.branch_name','branches.created_at','branches.updated_at')
+        ->join('users', 'users.branch_id', '=', 'branches.branch_id')
+        ->whereIn('users.branch_id', $branch_ids)
+        ->groupBy('branches.id','branches.branch_id','branches.branch_name','branches.created_at','branches.updated_at')
+        ->get();
+        
+        return response()->json([
+            'status' => 200,
+            'branch_data' => $branch_data
+        ]);
     }
 
     // Get Role Data

@@ -7,7 +7,7 @@
     </span>
     <div class="{{ $filexContentArea }}">
         <div class="content-area">
-            <x-menu-filex-boxs.log-filex-box.three-column-filex-box />
+            <x-menu-filex-boxs.log-filex-box.three-column-log-filex-box />
         </div>
         <span class="{{ $filexUpArrow }}"></span>
     </div>

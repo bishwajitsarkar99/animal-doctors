@@ -1,8 +1,8 @@
 <?php
     $group_flex_box=[
-        ['label'=>'Branch','inputPlaceholder'=>'Branch Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search'],
-        ['label'=>'Role','inputPlaceholder'=>'Role Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search'],
-        ['label'=>'Email','inputPlaceholder'=>'Email Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search'],
+        ['label'=>'Branch','inputPlaceholder'=>'Branch Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search', 'flexGroupID'=>'branchFetchData'],
+        ['label'=>'Role','inputPlaceholder'=>'Role Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search', 'flexGroupID'=>'roleFetchData'],
+        ['label'=>'Email','inputPlaceholder'=>'Email Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search', 'flexGroupID'=>'emailFetchData'],
     ]; 
 ?>
 <div id="card-container">
@@ -36,26 +36,7 @@
                     </span>
                 </div>
                 <div class="card-body filex-column-card-body">
-                    <ul class="first-filex-group">
-                        <li>Dhaka Branch</li>
-                        <li>Rangpur Branch</li>
-                        <li>Barisal Branch</li>
-                        <li>Natore Branch</li>
-                        <li>Gazipur Branch</li>
-                        <li>Rajshahi Branch</li>
-                        <li>Dhaka Branch</li>
-                        <li>Rangpur Branch</li>
-                        <li>Barisal Branch</li>
-                        <li>Natore Branch</li>
-                        <li>Gazipur Branch</li>
-                        <li>Rajshahi Branch</li>
-                        <li>Dhaka Branch</li>
-                        <li>Rangpur Branch</li>
-                        <li>Barisal Branch</li>
-                        <li>Natore Branch</li>
-                        <li>Gazipur Branch</li>
-                        <li>Rajshahi Branch</li>
-                    </ul>
+                    <ul class="first-filex-group" id="{{ $data['flexGroupID'] }}"></ul>
                 </div>
                 <div class="card-footer filex-column-card-footer">
                     <div class="group-filex-button">

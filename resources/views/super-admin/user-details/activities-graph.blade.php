@@ -128,6 +128,16 @@
         <x-chart-cards.multi-chart-cards.multi-chart chartClass="chart-card mb-4">
             <div class="row mt-4 mb-3">
                 <div class="col-xl-12">
+                    <?php
+                        $flex=['filexGroup'=>'input-group', 'filexId'=>'filteringBox', 'filexLabel'=>'Data Filter', 'filexContent'=>'--filex-box-medium-content', 'filexBoxArrow'=>'filex-box-arrow'];
+                    ?>
+                    <?php
+                        $group_flex_box=[
+                            ['label'=>'Branch','inputPlaceholder'=>'Branch Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search'],
+                            ['label'=>'Role','inputPlaceholder'=>'Role Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search'],
+                            ['label'=>'Email','inputPlaceholder'=>'Email Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search'],
+                        ]; 
+                    ?>
                     <x-chart-cards.multi-chart-cards.multi-chart-header
                         parentClass="card-header max-card-header"
                         childClass="card-head-title head-skeletone"
@@ -151,6 +161,12 @@
                         svgStroke="white"
                         svgStrokeWidth="2"
                         svgFillColor="rgb(170, 170, 170)"
+
+                        filexGroup="{{ $flex['filexGroup'] }}"
+                        filexId="{{ $flex['filexId'] }}"
+                        filexLabel="{{ $flex['filexLabel'] }}"
+                        filexContent="{{ $flex['filexContent'] }}"
+                        filexUpArrw="{{ $flex['filexBoxArrow'] }}"
                     />
                     <x-chart-cards.multi-chart-cards.multi-chart-body cardBodyClass="border-style">
                         <x-chart-cards.multi-chart-cards.multi-chart-box cardBoxClass="user-activities--month-chart mb-5">
@@ -1417,6 +1433,54 @@
 
     initializeCurveLineChart(dateRangeId);
 </script>
+<!-- Get Branch -->
+ <script>
+    $(document).ready(function(){
+        // Branch Data Fetch get-branch-fetch-data
+        branchInitFetch();
+        function branchInitFetch(){
+            const currentURL = "{{route('branch.fetch')}}"
+
+            $.ajaxSetup({
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentURL,
+                dataType: "json",
+                success: function(response) {
+                    const branchData = response.branch_data;
+                    const branchMenu = $("#branchFetchData");
+                    
+                    branchMenu.empty();
+
+                    $.each(branchData, function(key, item) {
+                        branchMenu.append(
+                            `<li tabindex="0" value="${item.branch_id}" id="select_list_item">
+                                ${item.branch_name}
+                            </li>`
+                        );
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX error:", error);
+                }
+            });
+        }
+        // const userCounts = {};
+        // $.each(response.user_counts, function(key, value) {
+        //     userCounts[key.toString()] = value;
+        // });
+        //const userCount = userCounts[item.branch_id.toString()] || 0; 
+        // <label class="enter_press enter-focus">Enter Press <i class="fa-solid fa-link"></i></label>
+        //             <span class="badge bg-dark-cornflowerblue rounded-pill bage_display_none" id="userNum">
+        //                 <label>User: ${userCount}</label>
+        //             </span>
+    });
+ </script>
 <!-- Demo bar chart -->
 <!-- <script>
     const userCanvas  = document.getElementById('userLogDateChart').getContext('2d');
