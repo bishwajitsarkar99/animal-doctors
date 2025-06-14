@@ -166,6 +166,19 @@ class SuperAdminService
         if ($request->hasFile('image')) {
             $this->handleImageUpload($request, $user);
         }
+
+        $prefixes = [
+            'miniCardData',
+            'summaryCardData',
+            'usersCount',
+            'storageAllocation',
+            // 'branch_log_session_data',
+            // 'usersActivityCount',
+            // 'userBranchBarChart',
+        ];
+
+        CacheManage::clearMultiple($prefixes, $user->branch_id);
+
         $user->save();
         
         return response()->json([
@@ -216,6 +229,18 @@ class SuperAdminService
     public function deleteUser($id)
     {
         $users = User::find($id);
+        $prefixes = [
+            'miniCardData',
+            'summaryCardData',
+            'usersCount',
+            'storageAllocation',
+            // 'branch_log_session_data',
+            // 'usersActivityCount',
+            // 'userBranchBarChart',
+        ];
+
+        CacheManage::clearMultiple($prefixes, $user->branch_id);
+
         $users->delete();
 
         return response()->json([
@@ -237,15 +262,15 @@ class SuperAdminService
         // Clear the exact 5min cache key
         // $branchId = $user->branch_id ?? null;
         // $cacheFormat = now()->format('Y_m');
-
+        
         $prefixes = [
             'miniCardData',
-            'summaryCardData',
-            'branch_log_session_data',
-            'usersActivityCount',
-            'usersCount',
-            'storageAllocation',
-            'userBranchBarChart',
+            // 'summaryCardData',
+            // 'branch_log_session_data',
+            // 'usersActivityCount',
+            // 'usersCount',
+            // 'storageAllocation',
+            // 'userBranchBarChart',
         ];
 
         CacheManage::clearMultiple($prefixes, $user->branch_id);

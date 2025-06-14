@@ -45,4 +45,28 @@ class UserLocationController extends Controller
     {
         return $this->userActivityServiceProvider->userAnalyticalCharts($request);
     }
+
+    // Fetch Branch Data
+    public function getBranch()
+    {
+        return $this->userActivityServiceProvider->fetchBranchData();
+    }
+
+    // Fetch Role Data
+    public function fetchRoleData(Request $request , $id)
+    {
+        return $this->userActivityServiceProvider->getFetchRoleData($request , $id);
+    }
+
+    // Fetch User Email Data
+    public function fetchUserEmail(Request $request , $id)
+    {
+        return $this->userActivityServiceProvider->getFetchUserEmail($request , $id);
+    }
+
+    // Search User Log Session Data
+    public function fetchLogSessionData(Request $request)
+    {
+        return $this->userActivityServiceProvider->getFetchLogSessionData($request);
+    }
 }

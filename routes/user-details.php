@@ -14,6 +14,10 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/show-user-activity', [UserLocationController::class, 'activity'])->name('user.activity');
             Route::get('/get-user-activity', [UserLocationController::class, 'getActivity'])->name('user.get_activity');
             Route::get('/user-activity-analytical-chart', [UserLocationController::class, 'userAnalyticalChart'])->name('user.analytical_chart');
+            Route::get('/get-branch-fetch-data', [UserLocationController::class, 'getBranch'])->name('branch.fetch');
+            Route::get('/get-fetch-role-data/{id}', [UserLocationController::class, 'fetchRoleData'])->name('role.fetch');
+            Route::get('/get-user-fetch-email/{id}', [UserLocationController::class, 'fetchUserEmail'])->name('user_email.fetch');
+            Route::get('/search-log-session-data', [UserLocationController::class, 'fetchLogSessionData'])->name('log_session_data.fetch');
         });
     });
 });

@@ -1091,7 +1091,7 @@
                                 },
                                 scales: {
                                     x: {
-                                        grid: { display: false, color: 'silver' },
+                                        grid: { display: false, color: 'rgb(255, 255, 255)' },
                                         ticks: {
                                             source: 'data',
                                             autoSkip: true,
@@ -1117,7 +1117,7 @@
                                     },
                                     y: {
                                         beginAtZero: true,
-                                        grid: { display: true, color: 'silver' },
+                                        grid: { display: false, color: 'rgb(255, 255, 255)' },
                                         ticks: {
                                             source: 'data',
                                             autoSkip: true,

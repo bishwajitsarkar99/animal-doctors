@@ -46,7 +46,7 @@ class UserActivityServiceProvider
     }
 
     /**
-     * Handle User Details View 
+     * Handle User Details Home Page View 
     */
     public function viewUserDetails(Request $request, $slug)
     {
@@ -119,7 +119,7 @@ class UserActivityServiceProvider
             $activeUsers   = $userStats->active_users;
             $inactiveUsers = $userStats->inactive_users;
 
-            // User Session Data Count for frequently data change Cache::put('temp_live_stats', $value, now()->addSeconds(10));
+            // User Session Data Count for frequently data change;
             $userSessionData = DB::table('sessions')->whereBetween('created_at', [$startOfMonth, $endOfMonth])->whereIn('branch_id', $branch_id)->count();
 
             // Get login data grouped by branch and role
@@ -129,7 +129,7 @@ class UserActivityServiceProvider
             ->whereNotNull('role')
             ->whereNotNull('branch_id')
             ->whereIn('payload', ['login', 'logout'])
-            ->with('roles') // keep eager loading if needed for roles
+            ->with('roles')
             ->select(
                 'branch_id',
                 'role',
@@ -147,42 +147,6 @@ class UserActivityServiceProvider
             // $redis = Cache::store('redis')->getRedis();
             // $redis->select(1);
             // dd($redis->keys('*'));
-
-            // // Should appear in DB 1
-            // $redis = Cache::store('redis')->getRedis();
-            // $redis->select(1);
-            // dd($redis->keys('*'));
-            // if (is_array($branch_id)) {
-            //     // If nested array, flatten it or convert properly
-            //     $branchIdString = implode('-', array_map(function($item) {
-            //         return is_array($item) ? implode('_', $item) : $item;
-            //     }, $branch_id));
-            // } elseif (is_null($branch_id)) {
-            //     $branchIdString = 'null';
-            // } else {
-            //     $branchIdString = (string) $branch_id;
-            // }
-            // $cacheFormat = now()->format('Y_m'); // Or your desired format
-            // $cacheKey = "miniCardData:{$branchIdString}:{$cacheFormat}";
-            // $miniCardData = Cache::remember($cacheKey, 600, function () use (
-            //     $branch_id,
-            //     $total_users,
-            //     $user_capacity,
-            //     $startOfMonth,
-            //     $endOfMonth,
-            //     $inactiveUsers,
-            //     $activeUsers
-            //     ) {
-            //     return $this->getMiniCardData(
-            //         $branch_id,
-            //         $total_users,
-            //         $user_capacity,
-            //         $startOfMonth,
-            //         $endOfMonth,
-            //         $inactiveUsers,
-            //         $activeUsers
-            //     );
-            // });
             $miniCardData = CacheManage::remember(
                 'miniCardData',
                 fn() => $this->getMiniCardData(
@@ -200,74 +164,45 @@ class UserActivityServiceProvider
                 $startOfMonth,
                 $endOfMonth,
                 $inactiveUsers,
-                $activeUsers
+                $activeUsers,
             );
-            // Summary Card Data
+            // User Count Summary Card Data
             $summaryCardData = CacheManage::remember(
                 'summaryCardData',
                 fn() => $this->getSummaryCardData($roles, $total_users, $superAdmin, $admin, $subAdmin,$accounts, $marketing, $deliveryTeam, $users),
                 $roles, $total_users, $superAdmin, $admin, $subAdmin,$accounts, $marketing, $deliveryTeam, $users
             );
-            // $summaryCardData = CacheManage::remember(
-            //     'summaryCardData',
-            //     function () use (
-            //         $roles, $total_users, $superAdmin, $admin, $subAdmin,
-            //         $accounts, $marketing, $deliveryTeam, $users) {
-            //         return $this->getSummaryCardData($roles, $total_users, $superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users);
-            //     },
-            // );
             $totalPercentageVlaue = array_sum($summaryCardData);
             $bytes = 1024;
             $totalPercentage = $totalPercentageVlaue > 0 ? ($totalPercentageVlaue / $bytes) * 100 : 0;
-            // Branch Info Chart Data
+            // Branch Info Bar Chart Data
             $branch_log_session_data = CacheManage::remember(
                 'branch_log_session_data',
                 fn() => $this->getBranchInfoData($branch_id),
                 $branch_id
             );
-            // $branch_log_session_data = CacheManage::remember(
-            //     'branch_log_session_data',
-            //     fn () => $this->getBranchInfoData($branch_id),
-            //     $branch_id,
-            //     $cacheFormat,
-            //     600,
-            //     true
-            // );
-            // User Analycis Page User Activities Line Chart
-            // Line Chart Data
+            // User Activities Line Chart Data
             $usersActivityCount = CacheManage::remember(
                 'usersActivityCount',
                 fn () => $this->getUserActivitiesLineChart($startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers, $userSessionData, $total_users),
                 $startOfMonth, $endOfMonth, $inactiveUsers, $activeUsers, $userSessionData, $total_users
             );
-            // User Analycis Page User Activities Bar Chart
-            // Bar Chart Data
-            // CacheManage::clear('usersCount');
+            // User Analycis Bar Chart -- Data
             $usersCount = CacheManage::remember(
                 'usersCount',
                 fn () => $this->getUserActivitiesBarChart($total_users, $startOfMonth, $endOfMonth,$superAdmin, $admin, $subAdmin, $accounts, $marketing, $deliveryTeam, $users, $inactiveUsers, $activeUsers, $userSessionData)
             );
-            // User Analycis Page User Branch Bar Chart
-            // $startDate = Carbon::parse($start);
-            // $dateForKey = $startDate->format('Y_m');
-            // $userBranchBarChartCacheKey = md5(json_encode([
-            //     'start' => $start,
-            //     'end' => $end,
-            //     'branch_id' => $branch_id,
-            // ]));
-            // Remember with consistent key
+            // User Analycis Bar Chart
             [$formattedBranchStats, $branchRoleStats] = CacheManage::remember(
                 'userBranchBarChart',
                 fn () => $this->getBranchBarChart($sessionStats),
                 $branch_id, now()->format('Y_m')
             );
             // Storage Allocation
-            // CacheManage::clear('usersCount');
             $storage = CacheManage::remember(
                 'storageAllocation',
                 fn () => $this->storageAllocation($total_users),$total_users
             );
-            //dd($storage);
 
             $storedRandom = session('valid_user_log_random');
             $page_name = 'User Log Activity';
@@ -516,7 +451,7 @@ class UserActivityServiceProvider
     }
 
     /**
-     * Handle User Activity Log Show
+     * Handle User Activity Grahp Tab ===> Daily,Weekly and Monthly Chart Data
     */
     public function activities(Request $request)
     {
@@ -537,17 +472,18 @@ class UserActivityServiceProvider
                 $branch_id = [$user_branch_id]; // Wrap single branch_id in an array
             }
             
+            $now = Carbon::now();
             // Current Month User Activities
-            $startOfMonth = Carbon::now()->startOfMonth();
-            $endOfMonth = Carbon::now()->endOfMonth();
+            $startOfMonth = $now->copy()->startOfMonth();
+            $endOfMonth = $now->copy()->endOfMonth();
     
             // Current Week User Activities (last 7 days)
-            $startOfWeek = Carbon::now()->subDays(6)->startOfDay();
-            $endOfWeek = Carbon::now()->endOfDay();
+            $startOfWeek = $now->copy()->subDays(6)->startOfDay();
+            $endOfWeek = $now->copy()->endOfDay();
     
             // Current Day User Activities
-            $startOfDay = Carbon::now()->startOfDay();
-            $endOfDay = Carbon::now()->endOfDay();
+            $startOfDay = $now->copy()->startOfDay();
+            $endOfDay = $now->copy()->endOfDay();
 
             // Count current users, logins, and logouts
             [$current_users, $current_login_users, $current_logout_users] = $this->countCurrentUsers($startOfDay, $endOfDay, $branch_id);
@@ -634,17 +570,33 @@ class UserActivityServiceProvider
     // Helper function count current users, logins, and logouts
     private function countCurrentUsers($startOfDay, $endOfDay, $branch_id)
     {
-        $current_users = DB::table('sessions')->whereBetween('created_at', [$startOfDay, $endOfDay])
-        ->whereNotNull('user_id')->distinct('user_id')->whereIn('branch_id', $branch_id)->count('user_id');
+        // First Query
+        // $current_users = DB::table('sessions')->whereBetween('created_at', [$startOfDay, $endOfDay])
+        // ->whereNotNull('user_id')->distinct('user_id')->whereIn('branch_id', $branch_id)->count('user_id');
 
-        $current_login_users = DB::table('sessions')->where('payload', 'login')
-            ->whereBetween('created_at', [$startOfDay, $endOfDay])
-            ->whereNotNull('user_id')->whereIn('branch_id', $branch_id)->count();
+        // $current_login_users = DB::table('sessions')->where('payload', 'login')
+        //     ->whereBetween('created_at', [$startOfDay, $endOfDay])
+        //     ->whereNotNull('user_id')->whereIn('branch_id', $branch_id)->count();
 
-        $current_logout_users = DB::table('sessions')->where('payload', 'logout')
-            ->whereBetween('created_at', [$startOfDay, $endOfDay])
-            ->whereNotNull('user_id')->whereIn('branch_id', $branch_id)->count();
-        
+        // $current_logout_users = DB::table('sessions')->where('payload', 'logout')
+        //     ->whereBetween('created_at', [$startOfDay, $endOfDay])
+        //     ->whereNotNull('user_id')->whereIn('branch_id', $branch_id)->count();
+
+        // Alternative Query
+        $sessionCounts = DB::table('sessions')->whereBetween('created_at', [$startOfDay, $endOfDay])
+        ->whereIn('branch_id', $branch_id)
+        ->whereNotNull('user_id')
+        ->selectRaw("
+            COUNT(DISTINCT user_id) as current_users,
+            SUM(CASE WHEN payload = 'login' THEN 1 ELSE 0 END) as current_login_users,
+            SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as current_logout_users
+        ")
+        ->first();
+
+        $current_users = $sessionCounts->current_users ?? 0;
+        $current_login_users = $sessionCounts->current_login_users ?? 0;
+        $current_logout_users = $sessionCounts->current_logout_users ?? 0;
+
         return [$current_users, $current_login_users, $current_logout_users];
     }
     // Helper function calculate percentage values for current activities
@@ -667,57 +619,103 @@ class UserActivityServiceProvider
     // Helper function group by day for login, logout, and current user counts (weekly data)
     private function countWeeklyUsersLogData($startOfWeek, $endOfWeek, $branch_id)
     {
-        $login_counts = SessionModel::select(DB::raw('DATE(created_at) as day'), DB::raw('count(*) as count'))
-            ->where('payload', 'login')
-            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
-            ->whereIn('branch_id', $branch_id)
-            ->groupBy('day')
-            ->pluck('count', 'day')
-            ->toArray();
+        // $login_counts = SessionModel::select(DB::raw('DATE(created_at) as day'), DB::raw('count(*) as count'))
+        //     ->where('payload', 'login')
+        //     ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+        //     ->whereIn('branch_id', $branch_id)
+        //     ->groupBy('day')
+        //     ->pluck('count', 'day')
+        //     ->toArray();
 
-        $logout_counts = SessionModel::select(DB::raw('DATE(created_at) as day'), DB::raw('count(*) as count'))
-            ->where('payload', 'logout')
-            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
-            ->whereIn('branch_id', $branch_id)
-            ->groupBy('day')
-            ->pluck('count', 'day')
-            ->toArray();
+        // $logout_counts = SessionModel::select(DB::raw('DATE(created_at) as day'), DB::raw('count(*) as count'))
+        //     ->where('payload', 'logout')
+        //     ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+        //     ->whereIn('branch_id', $branch_id)
+        //     ->groupBy('day')
+        //     ->pluck('count', 'day')
+        //     ->toArray();
 
-        $current_user_counts = SessionModel::whereNotNull('user_id')
-            ->select(DB::raw('DATE(created_at) as day'), DB::raw('COUNT(DISTINCT user_id) as count'))
-            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
-            ->whereIn('branch_id', $branch_id)
-            ->groupBy('day')
-            ->pluck('count', 'day')
-            ->toArray();
+        // $current_user_counts = SessionModel::whereNotNull('user_id')
+        //     ->select(DB::raw('DATE(created_at) as day'), DB::raw('COUNT(DISTINCT user_id) as count'))
+        //     ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+        //     ->whereIn('branch_id', $branch_id)
+        //     ->groupBy('day')
+        //     ->pluck('count', 'day')
+        //     ->toArray();
+        
+        $weeklyUserLogSession = DB::table('sessions')
+        ->selectRaw('
+            DATE(created_at) as day,
+            SUM(CASE WHEN payload IN ("login", "logout") THEN 1 ELSE 0 END) as login_counts,
+            SUM(CASE WHEN payload = "logout" THEN 1 ELSE 0 END) as logout_counts,
+            COUNT(DISTINCT CASE WHEN user_id IS NOT NULL THEN user_id ELSE NULL END) as current_user_counts
+        ')
+        ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+        ->whereIn('branch_id', $branch_id)
+        ->groupBy(DB::raw('DATE(created_at)'))
+        ->get();
 
+        // Convert to associative arrays
+        $login_counts = [];
+        $logout_counts = [];
+        $current_user_counts = [];
+
+        foreach ($weeklyUserLogSession as $row) {
+            $day = $row->day;
+            $login_counts[$day] = $row->login_counts;
+            $logout_counts[$day] = $row->logout_counts;
+            $current_user_counts[$day] = $row->current_user_counts;
+        }
+                
         return [$login_counts, $logout_counts, $current_user_counts];
     }
     // Helper function monthly user activity data (group by month)
     private function countMonthlyUsersLogData($branch_id)
     {
-        $login_counts_monthly = SessionModel::whereNotNull('user_id')
-            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
-            ->where('payload', 'login')
-            ->whereIn('branch_id', $branch_id)
-            ->groupBy('month')
-            ->pluck('count', 'month')
-            ->toArray();
+        // $login_counts_monthly = SessionModel::whereNotNull('user_id')
+        //     ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
+        //     ->where('payload', 'login')
+        //     ->whereIn('branch_id', $branch_id)
+        //     ->groupBy('month')
+        //     ->pluck('count', 'month')
+        //     ->toArray();
         
-        $logout_counts_monthly = SessionModel::whereNotNull('user_id')
-            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
-            ->where('payload', 'logout')
-            ->whereIn('branch_id', $branch_id)
-            ->groupBy('month')
-            ->pluck('count', 'month')
-            ->toArray();
+        // $logout_counts_monthly = SessionModel::whereNotNull('user_id')
+        //     ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
+        //     ->where('payload', 'logout')
+        //     ->whereIn('branch_id', $branch_id)
+        //     ->groupBy('month')
+        //     ->pluck('count', 'month')
+        //     ->toArray();
         
-        $current_user_counts_monthly = SessionModel::whereNotNull('user_id')
-            ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('COUNT(DISTINCT user_id) as count'))
-            ->whereIn('branch_id', $branch_id)
-            ->groupBy('month')
-            ->pluck('count', 'month')
-            ->toArray();
+        // $current_user_counts_monthly = SessionModel::whereNotNull('user_id')
+        //     ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('COUNT(DISTINCT user_id) as count'))
+        //     ->whereIn('branch_id', $branch_id)
+        //     ->groupBy('month')
+        //     ->pluck('count', 'month')
+        //     ->toArray();
+
+        $monthlyUserLogSession = DB::table('sessions')
+        ->selectRaw('
+            DATE_FORMAT(created_at, "%Y-%m") as month,
+            SUM(CASE WHEN payload IN ("login", "logout") THEN 1 ELSE 0 END) as login_counts_monthly,
+            SUM(CASE WHEN payload = "logout" THEN 1 ELSE 0 END) as logout_counts_monthly,
+            COUNT(DISTINCT CASE WHEN user_id IS NOT NULL THEN user_id ELSE NULL END) as current_user_counts_monthly
+        ')
+        ->whereIn('branch_id', $branch_id)
+        ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'))
+        ->get();
+
+        $login_counts_monthly = [];
+        $logout_counts_monthly = [];
+        $current_user_counts_monthly = [];
+
+        foreach ($monthlyUserLogSession as $row) {
+            $month = $row->month;
+            $login_counts_monthly[$month] = $row->login_counts_monthly;
+            $logout_counts_monthly[$month] = $row->logout_counts_monthly;
+            $current_user_counts_monthly[$month] = $row->current_user_counts_monthly;
+        }
 
         return [$login_counts_monthly, $logout_counts_monthly, $current_user_counts_monthly];
     }
@@ -746,13 +744,13 @@ class UserActivityServiceProvider
 
             $start_date = $request->input('start_date');
             $end_date = $request->input('end_date');
-    
+            $now = Carbon::now();
             if ($start_date && $end_date) {
                 $start = Carbon::parse($start_date)->startOfDay();
                 $end = Carbon::parse($end_date)->endOfDay();
             } else {
-                $start = Carbon::now()->startOfYear();
-                $end = Carbon::now()->endOfMonth();
+                $start = $now->copy()->startOfYear();
+                $end = $now->copy()->endOfMonth();
             }
 
             // Monthly user activity data (group by month)
@@ -828,33 +826,88 @@ class UserActivityServiceProvider
     // Helper function day base user activity data (group by day)
     private function countDailyUsersLogData($start, $end, $branch_id)
     {
-        $login_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
-            ->whereNotNull('user_id')
-            ->where('payload', 'login')
-            ->whereIn('branch_id', $branch_id)
-            ->select(DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y") as day'), DB::raw('count(*) as count'))
-            ->groupBy('day')
-            ->pluck('count', 'day')
-            ->toArray();
+        // $login_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
+        //     ->whereNotNull('user_id')
+        //     ->where('payload', 'login')
+        //     ->whereIn('branch_id', $branch_id)
+        //     ->select(DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y") as day'), DB::raw('count(*) as count'))
+        //     ->groupBy('day')
+        //     ->pluck('count', 'day')
+        //     ->toArray();
 
-        $logout_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
-            ->whereNotNull('user_id')
-            ->where('payload', 'logout')
-            ->whereIn('branch_id', $branch_id)
-            ->select(DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y") as day'), DB::raw('count(*) as count'))
-            ->groupBy('day')
-            ->pluck('count', 'day')
-            ->toArray();
+        // $logout_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
+        //     ->whereNotNull('user_id')
+        //     ->where('payload', 'logout')
+        //     ->whereIn('branch_id', $branch_id)
+        //     ->select(DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y") as day'), DB::raw('count(*) as count'))
+        //     ->groupBy('day')
+        //     ->pluck('count', 'day')
+        //     ->toArray();
 
-        $current_user_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
-            ->whereNotNull('user_id')
-            ->whereIn('branch_id', $branch_id)
-            ->select(DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y") as day'), DB::raw('COUNT(DISTINCT user_id) as count'))
-            ->groupBy('day')
-            ->pluck('count', 'day')
-            ->toArray();
+        // $current_user_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
+        //     ->whereNotNull('user_id')
+        //     ->whereIn('branch_id', $branch_id)
+        //     ->select(DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y") as day'), DB::raw('COUNT(DISTINCT user_id) as count'))
+        //     ->groupBy('day')
+        //     ->pluck('count', 'day')
+        //     ->toArray();
+
+        $dateBasisUserLogSessionData = DB::table('sessions')
+        ->whereBetween('created_at', [$start, $end])
+        ->whereIn('branch_id', $branch_id)
+        ->selectRaw('
+            DATE_FORMAT(created_at, "%d-%m-%Y") as day,
+            SUM(CASE WHEN payload IN ("login", "logout") THEN 1 ELSE 0 END) as login_counts_date,
+            SUM(CASE WHEN payload = "logout" THEN 1 ELSE 0 END) as logout_counts_date,
+            COUNT(DISTINCT CASE WHEN user_id IS NOT NULL THEN user_id ELSE NULL END) as current_user_counts_date
+        ')
+        ->groupBy(DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y")'))
+        ->get();
+
+        $login_counts_date = [];
+        $logout_counts_date = [];
+        $current_user_counts_date = [];
+
+        foreach ($dateBasisUserLogSessionData as $row) {
+            $date = $row->day;
+            $login_counts_date[$date] = $row->login_counts_date;
+            $logout_counts_date[$date] = $row->logout_counts_date;
+            $current_user_counts_date[$date] = $row->current_user_counts_date;
+        }
 
         return [$login_counts_date, $logout_counts_date, $current_user_counts_date];
     }
     
+    // Get Branch Data 
+    public function fetchBranchData()
+    {
+        // $branch_data = DB::table('branches')
+        // ->select('branches.id', 'branch.name', 'branch.crated_at', 'branch.updated_at')
+        // ->join('sessions', 'sessions.branch_id', '=', 'branches.name')
+        // ->groupBy('sessions.id', 'sessions.branch_id', 'sessions.created_at', 'sessions.updated_at')
+        // ->get();
+
+        // return response()->json([
+        //     'status' => 200,
+        //     'branch_data' => $branch_data
+        // ]);
+    }
+
+    // Get Role Data
+    public function getFetchRoleData($request , $id)
+    {
+        //
+    }
+
+    // Get User Email Data
+    public function getFetchUserEmail($request , $id)
+    {
+        //
+    }
+
+    // Search User Log Session Data
+    public function getFetchLogSessionData($request)
+    {
+        //
+    }
 }

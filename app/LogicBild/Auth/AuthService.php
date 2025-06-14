@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Support\Setting;
 use App\Models\Branch\UserBranchAccessPermission;
 use App\Models\Branch\AdminBranchAccessPermission;
-
+use App\cacheStorage\CacheManage;
 class AuthService
 {
     /**
@@ -454,7 +454,7 @@ class AuthService
 
         $user_login_email = $request->login_email;
 
-        // ✅ Clear any existing login session for this user
+        // Clear any existing login session for this user
         DB::table('sessions')
         ->where('email', $user_login_email)
         ->where('payload', 'login')
@@ -482,6 +482,13 @@ class AuthService
 
             // Get the authenticated user's details
             $user = Auth::user();
+            // Clear cache redis data
+            $prefixes = [
+                'branch_log_session_data',
+                'usersActivityCount',
+                'userBranchBarChart',
+            ];
+            CacheManage::clearMultiple($prefixes, $user->branch_id);
 
             if($user){
                 $sessionId = Str::random(40);
