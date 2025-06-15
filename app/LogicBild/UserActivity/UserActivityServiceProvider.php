@@ -879,7 +879,7 @@ class UserActivityServiceProvider
     }
     
     // Get Branch Data 
-    public function fetchBranchData()
+    public function fetchBranchData(Request $request)
     {
         $auth = Auth::User();
         if (!$auth) {
@@ -891,26 +891,55 @@ class UserActivityServiceProvider
         if ($role_id === 1) {
             $branch_ids = DB::table('branches')->pluck('branch_id')->toArray(); // Get all branch IDs as array
         } else {
-            $branch_ids = [$user_branch_id]; // Wrap single branch_id in an array
+            $branch_ids = [$user_branch_id]; // Wrap single branch_id in an array get-branch-fetch-data
         }
 
-        $branch_data = DB::table('branches')
-        ->select('branches.id','branches.branch_id','branches.branch_name','branches.created_at','branches.updated_at')
+        $branch_data_query = DB::table('branches')
+        ->select('branches.id', 'branches.branch_id', 'branches.branch_name', 'branches.created_at', 'branches.updated_at')
         ->join('users', 'users.branch_id', '=', 'branches.branch_id')
         ->whereIn('users.branch_id', $branch_ids)
-        ->groupBy('branches.id','branches.branch_id','branches.branch_name','branches.created_at','branches.updated_at')
-        ->get();
+        ->groupBy('branches.id', 'branches.branch_id', 'branches.branch_name', 'branches.created_at', 'branches.updated_at');
+
+        if( $query = $request->get('query')){
+            $branch_data_query->where('branches.branch_name','LIKE','%'.$query.'%');      
+        } 
+        $branch_data = $branch_data_query->get();
         
+        // Get distinct role count per branch
+        $role_count_per_branch = DB::table('users')
+            ->select('users.branch_id', DB::raw('COUNT(DISTINCT users.role) as role_count'))
+            ->whereIn('users.branch_id', $branch_ids)
+            ->groupBy('users.branch_id')
+            ->pluck('role_count', 'branch_id');
+
         return response()->json([
             'status' => 200,
-            'branch_data' => $branch_data
+            'branch_data' => $branch_data,
+            'role_count_per_branch' => $role_count_per_branch
         ]);
     }
 
     // Get Role Data
-    public function getFetchRoleData($request , $id)
+    public function getFetchRoleData(Request $request , $id)
     {
-        //
+
+        $role_data = DB::table('roles')
+        ->select('roles.id', 'roles.name', 'roles.created_at', 'roles.updated_at')
+        ->join('users', 'users.role', '=', 'roles.id')
+        ->whereIn('users.branch_id', (array) $id)
+        ->groupBy('roles.id', 'roles.name', 'roles.created_at', 'roles.updated_at')->get();;
+
+        $user_count_per_role = DB::table('users')
+            ->select('role', DB::raw('COUNT(*) as user_count'))
+            ->whereIn('branch_id', (array) $id)
+            ->groupBy('role')
+            ->pluck('user_count', 'role');
+
+        return response()->json([
+            'status' => 200,
+            'role_data' => $role_data,
+            'user_count_per_role' => $user_count_per_role
+        ]);
     }
 
     // Get User Email Data

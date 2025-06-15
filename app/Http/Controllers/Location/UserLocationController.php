@@ -47,9 +47,9 @@ class UserLocationController extends Controller
     }
 
     // Fetch Branch Data
-    public function getBranch()
+    public function getBranch(Request $request)
     {
-        return $this->userActivityServiceProvider->fetchBranchData();
+        return $this->userActivityServiceProvider->fetchBranchData($request);
     }
 
     // Fetch Role Data

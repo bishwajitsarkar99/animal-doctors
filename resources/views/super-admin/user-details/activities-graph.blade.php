@@ -1436,9 +1436,10 @@
 <!-- Get Branch -->
  <script>
     $(document).ready(function(){
-        // Branch Data Fetch get-branch-fetch-data
         branchInitFetch();
-        function branchInitFetch(){
+        roleInitFetch();
+        // Branch Data Fetch
+        function branchInitFetch(query = ''){
             const currentURL = "{{route('branch.fetch')}}"
 
             $.ajaxSetup({
@@ -1451,34 +1452,195 @@
                 type: "GET",
                 url: currentURL,
                 dataType: "json",
+                data:{query},
                 success: function(response) {
                     const branchData = response.branch_data;
+                    const roleCounts = response.role_count_per_branch || {};
                     const branchMenu = $("#branchFetchData");
-                    
-                    branchMenu.empty();
 
-                    $.each(branchData, function(key, item) {
-                        branchMenu.append(
-                            `<li tabindex="0" value="${item.branch_id}" id="select_list_item">
-                                ${item.branch_name}
-                            </li>`
-                        );
+                    branchMenu.empty();
+                    
+                    // Check if no data found
+                    if (!branchData || branchData.length === 0) {
+                        branchMenu.append(`
+                            <li id="errorPage">
+                                ⚠️ No branch found !
+                            </li>
+                        `);
+                    }else{
+                        $.each(branchData, function(key, item) {
+                            const branchId = item.branch_id;
+                            const roleCount = roleCounts.hasOwnProperty(branchId) ? roleCounts[branchId] : 0;
+                            branchMenu.append(`
+                                <li tabindex="0" data-value="${item.branch_id}" id="select_list_branch">
+                                    ${item.branch_name}
+                                    <label class="enter_press enter-focus">
+                                        <svg width="24" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0, 123, 255, 2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                                    </label>
+                                    <span class="badge bg-dark-cornflowerblue rounded-pill bage_display_none" id="roleNum">
+                                        Role : ${roleCount}
+                                    </span>
+                                </li>
+                            `);
+                        });
+                    }
+                    branchMenu.append(`
+                        <li id="loaderPage">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+                        </li>
+                    `);
+
+                    // Autocomplete
+                    let seenBranchs = new Set();
+                    let suggestions = [];
+
+                    branchData.forEach(item => {
+                        if (item.branch_name && !seenBranchs.has(item.branch_name)) {
+                            seenBranchs.add(item.branch_name);
+                            suggestions.push({ label: item.branch_name, value: item.branch_name });
+                        }
                     });
+                    
+                    if (!$("#searchBranch").data("ui-autocomplete")) {
+                        $("#searchBranch").autocomplete({
+                            source: suggestions,
+                            classes: {
+                                "ui-autocomplete": "custom-autocomplete",
+                                "ui-menu-item": "custom-menu-item",
+                                "ui-state-active": "custom-state-active"
+                            }
+                        });
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.error("AJAX error:", error);
                 }
             });
         }
-        // const userCounts = {};
-        // $.each(response.user_counts, function(key, value) {
-        //     userCounts[key.toString()] = value;
-        // });
-        //const userCount = userCounts[item.branch_id.toString()] || 0; 
-        // <label class="enter_press enter-focus">Enter Press <i class="fa-solid fa-link"></i></label>
-        //             <span class="badge bg-dark-cornflowerblue rounded-pill bage_display_none" id="userNum">
-        //                 <label>User: ${userCount}</label>
-        //             </span>
+        // Active Column Row
+        $(document).on('click', '#select_list_branch', function(){
+            $(this).addClass("active-line").siblings().removeClass("active-line");
+            $("#searchBranch").val("");
+        });
+        // Branch Search
+        $(document).on('keyup', '#searchBranch', function(){
+            var query = $(this).val();
+            $(".feather-loader").removeClass('display_none');
+            $("#select_list_branch").addClass('add_display_none');
+            setTimeout(() => {
+               $(".feather-loader").addClass('display_none'); 
+               $("#select_list_branch").removeClass('add_display_none');
+            }, 1000);
+            branchInitFetch(query);
+        });
+        // Branch Refresh
+        $(document).on('click', '.enter_press', function(){
+            $(".feather-loader").removeClass('display_none');
+            $(".feather-loader").removeClass('display_none');
+            $("#select_list_branch").addClass('add_display_none');
+            setTimeout(() => {
+               $(".feather-loader").addClass('display_none'); 
+               $("#select_list_branch").removeClass('add_display_none');
+            }, 1000);
+            branchInitFetch();
+        });
+
+        // Handle Select Branch
+        $(document).on('click', '#select_list_branch', function() {
+            var changeValue = $(this).val();
+            if (changeValue === '') {
+                $("#select_list_role").empty();
+                $("#select_list_role").empty();
+                $("#select_list_role").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
+            }
+        });
+        // Event listener for only branch
+        $(document).on('click', '#select_list_branch', function() {
+            const id = $(this).data("value");
+            roleInitFetch(id);
+        });
+        // Role Data Fetch
+        function roleInitFetch(id) {
+            if (!id) {
+                return;
+            }
+
+            const currentUrl = "/application/get-fetch-role-data/" + id;
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                success: function(response) {
+                    const roleData = response.role_data;
+                    const userCounts = response.user_count_per_role || {};
+                    const roleMenu = $("#roleFetchData");
+
+                    roleMenu.empty();
+                    
+                    // Check if no data found
+                    if (!roleData || roleData.length === 0) {
+                        roleMenu.append(`
+                            <li id="errorPage">
+                                ⚠️ No branch found !
+                            </li>
+                        `);
+                    }else{
+                        $.each(roleData, function(key, item) {
+                            const roleId = item.id;
+                            const userCount = userCounts.hasOwnProperty(roleId) ? userCounts[roleId] : 0;
+                            branchMenu.append(`
+                                <li tabindex="0" value="${item.id}" id="select_list_role">
+                                    ${item.name}
+                                    <label class="enter_press enter-focus">
+                                        <svg width="24" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0, 123, 255, 2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                                    </label>
+                                    <span class="badge bg-dark-cornflowerblue rounded-pill bage_display_none" id="roleNum">
+                                        Role : ${userCount}
+                                    </span>
+                                </li>
+                            `);
+                        });
+                    }
+                    roleMenu.append(`
+                        <li id="loaderPage">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+                        </li>
+                    `);
+
+                    // Autocomplete
+                    let seenBranchs = new Set();
+                    let suggestions = [];
+
+                    roleData.forEach(item => {
+                        if (item.name && !seenBranchs.has(item.name)) {
+                            seenBranchs.add(item.name);
+                            suggestions.push({ label: item.name, value: item.name });
+                        }
+                    });
+                    
+                    if (!$("#searchBranch").data("ui-autocomplete")) {
+                        $("#searchBranch").autocomplete({
+                            source: suggestions,
+                            classes: {
+                                "ui-autocomplete": "custom-autocomplete",
+                                "ui-menu-item": "custom-menu-item",
+                                "ui-state-active": "custom-state-active"
+                            }
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX error:", error);
+                }
+            });
+        }
     });
  </script>
 <!-- Demo bar chart -->
