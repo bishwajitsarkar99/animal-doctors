@@ -1,8 +1,8 @@
 <?php
     $group_flex_box=[
-        ['label'=>'Branch','filexBoxsearch'=>'searchBranch','inputPlaceholder'=>'Branch Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnBranch','buttonLabelTwo'=>'Enable','enableBtnId'=>'enableBtnBranch','searchLabel'=>'search', 'flexGroupID'=>'branchFetchData','serachBtn'=>'branch-search-btn'],
-        ['label'=>'Role','filexBoxsearch'=>'searchRole','inputPlaceholder'=>'Role Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnRole','buttonLabelTwo'=>'Enable','enableBtnId'=>'enableBtnRole','searchLabel'=>'search', 'flexGroupID'=>'roleFetchData','serachBtn'=>'role-search-btn'],
-        ['label'=>'Email','filexBoxsearch'=>'searchEmail','inputPlaceholder'=>'Email Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnEmail','buttonLabelTwo'=>'Enable','enableBtnId'=>'enableBtnEmail','searchLabel'=>'search', 'flexGroupID'=>'emailFetchData','serachBtn'=>'email-search-btn'],
+        ['label'=>'Branch','filexBoxsearch'=>'searchBranch','inputPlaceholder'=>'Branch Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnBranch','buttonLabelTwo'=>'Enable','enableBtnId'=>'enableBtnBranch','searchLabel'=>'search', 'flexGroupID'=>'branchFetchData','serachBtn'=>'branch-search-btn','enableCheck'=>'branch-check-point','enableSpin'=>'branchSpin','disableCheck'=>'branch-disable-check-point','disableSpin'=>'disableBranchSpin'],
+        ['label'=>'Role','filexBoxsearch'=>'searchRole','inputPlaceholder'=>'Role Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnRole','buttonLabelTwo'=>'Enable','enableBtnId'=>'enableBtnRole','searchLabel'=>'search', 'flexGroupID'=>'roleFetchData','serachBtn'=>'role-search-btn','enableCheck'=>'role-check-point','enableSpin'=>'roleSpin','disableCheck'=>'role-check-disable-point','disableSpin'=>'disableRolechSpin'],
+        ['label'=>'Email','filexBoxsearch'=>'searchEmail','inputPlaceholder'=>'Email Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnEmail','buttonLabelTwo'=>'Enable','enableBtnId'=>'enableBtnEmail','searchLabel'=>'search', 'flexGroupID'=>'emailFetchData','serachBtn'=>'email-search-btn','enableCheck'=>'email-check-point','enableSpin'=>'emailSpin','disableCheck'=>'email-check-disable-point','disableSpin'=>'disableEmailSpin'],
     ]; 
 ?>
 <div id="card-container">
@@ -41,12 +41,18 @@
                 </div>
                 <div class="card-footer filex-column-card-footer">
                     <div class="group-filex-button">
-                        <button type="button" class="{{ $data['buttonClass'] }}" id="{{ $data['disableBtnId'] }}" hidden>{{ $data['buttonLabelOne'] }}</button>
+                        <button type="button" class="{{ $data['buttonClass'] }}" id="{{ $data['disableBtnId'] }}" hidden>
+                            <i class="fa-solid fa-check {{ $data['disableCheck'] }}" style="color:white;" hidden></i>
+                            {{ $data['buttonLabelOne'] }}
+                        </button>
+                        <div class="spinner-border text-success" role="status" id="{{ $data['disableSpin'] }}" hidden>
+                            <span class="visually-hidden"></span>
+                        </div>
                         <button type="button" class="{{ $data['buttonClass'] }}" id="{{ $data['enableBtnId'] }}">
-                            <i class="fa-solid fa-check check-point" style="color:white;" hidden></i>
+                            <i class="fa-solid fa-check {{ $data['enableCheck'] }}" style="color:white;" hidden></i>
                             {{ $data['buttonLabelTwo'] }}
                         </button>
-                        <div class="spinner-border text-success spin" role="status">
+                        <div class="spinner-border text-success" role="status" id="{{ $data['enableSpin'] }}" hidden>
                             <span class="visually-hidden"></span>
                         </div>
                     </div>

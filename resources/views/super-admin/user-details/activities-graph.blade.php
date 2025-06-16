@@ -1801,17 +1801,29 @@
             emailInitFetch(id);
         });
 
-        // Filter Enable Button
+        // Branch Filter Enable Button
         $(document).on('click', '#enableBtnBranch', function(){
-            $("#disableBtnBranch").removeAttr('hidden');
-            $(".check-point").removeAttr('hidden');
-            $(".spin").addClass('display_none');
-            $(this).setAttr('hidden');
+            $(".branch-check-point").attr('hidden', true);
+            $("#branchSpin").removeAttr('hidden');
+            $("#enableBtnBranch").addClass('display_none');
             setTimeout(() => {
-                $("#disableBtnBranch").attr('hidden', true);
-                $(".check-point").attr('hidden', true);
-                $(".spin").removeClass('display_none');
-                $(this).removeAttr('hidden');
+                $("#disableBtnBranch").removeAttr('hidden');
+                $(".branch-check-point").removeAttr('hidden');
+                $(".branch-disable-check-point").attr('hidden', true);
+                $("#branchSpin").attr('hidden', true);
+                $("#enableBtnBranch").removeClass('display_none');
+            }, 2000);
+        });
+        // Branch Filter Disable Button
+        $(document).on('click', '#disableBtnBranch', function(){
+            $(".branch-disable-check-point").attr('hidden', true);
+            $("#disableBranchSpin").removeAttr('hidden');
+            $("#disableBtnBranch").attr('hidden', true);
+            setTimeout(() => {
+                $("#disableBtnBranch").removeAttr('hidden');
+                $(".branch-disable-check-point").removeAttr('hidden');
+                $("#disableBranchSpin").attr('hidden', true);
+                $(".branch-check-point").attr('hidden', true);
             }, 2000);
         });
         
