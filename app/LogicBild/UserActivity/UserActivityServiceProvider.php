@@ -922,12 +922,17 @@ class UserActivityServiceProvider
     // Get Role Data
     public function getFetchRoleData(Request $request , $id)
     {
+        $query = $request->input('query');
 
         $role_data = DB::table('roles')
-        ->select('roles.id', 'roles.name', 'roles.created_at', 'roles.updated_at')
-        ->join('users', 'users.role', '=', 'roles.id')
-        ->whereIn('users.branch_id', (array) $id)
-        ->groupBy('roles.id', 'roles.name', 'roles.created_at', 'roles.updated_at')->get();;
+            ->select('roles.id', 'roles.name', 'roles.created_at', 'roles.updated_at')
+            ->join('users', 'users.role', '=', 'roles.id')
+            ->whereIn('users.branch_id', (array) $id)
+            ->when($query, function ($q) use ($query) {
+                $q->where('roles.name', 'like', '%' . $query . '%');
+            })
+            ->groupBy('roles.id', 'roles.name', 'roles.created_at', 'roles.updated_at')
+            ->get();
 
         $user_count_per_role = DB::table('users')
             ->select('role', DB::raw('COUNT(*) as user_count'))
@@ -945,7 +950,22 @@ class UserActivityServiceProvider
     // Get User Email Data
     public function getFetchUserEmail($request , $id)
     {
-        //
+        $query = $request->input('query');
+
+        $email_data = DB::table('users')
+            ->select('users.id', 'users.login_email', 'users.created_at', 'users.updated_at')
+            ->join('roles', 'roles.id', '=', 'users.role')
+            ->whereIn('roles.id', (array) $id)
+            ->when($query, function ($q) use ($query) {
+                $q->where('users.login_email', 'like', '%' . $query . '%');
+            })
+            ->groupBy('users.id', 'users.login_email', 'users.created_at', 'users.updated_at')
+            ->get();
+
+        return response()->json([
+            'status' => 200,
+            'email_data' => $email_data,
+        ]);
     }
 
     // Search User Log Session Data

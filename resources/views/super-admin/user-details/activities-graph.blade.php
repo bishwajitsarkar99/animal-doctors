@@ -1438,6 +1438,7 @@
     $(document).ready(function(){
         branchInitFetch();
         roleInitFetch();
+        emailInitFetch();
         // Branch Data Fetch
         function branchInitFetch(query = ''){
             const currentURL = "{{route('branch.fetch')}}"
@@ -1484,11 +1485,6 @@
                             `);
                         });
                     }
-                    branchMenu.append(`
-                        <li id="loaderPage">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
-                        </li>
-                    `);
 
                     // Autocomplete
                     let seenBranchs = new Set();
@@ -1518,13 +1514,22 @@
             });
         }
         // Active Column Row
-        $(document).on('click', '#select_list_branch', function(){
+        $(document).on('click', '#select_list_branch, #select_list_role, #select_list_email', function(){
             $(this).addClass("active-line").siblings().removeClass("active-line");
             $("#searchBranch").val("");
+            $("#searchRole").val("");
+            $("#searchEmail").val("");
         });
         // Branch Search
         $(document).on('keyup', '#searchBranch', function(){
             var query = $(this).val();
+            const branchMenu = $("#branchFetchData");
+            branchMenu.empty();
+            branchMenu.append(`
+                <li id="loaderPage">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+                </li>
+            `);
             $(".feather-loader").removeClass('display_none');
             $("#select_list_branch").addClass('add_display_none');
             setTimeout(() => {
@@ -1535,32 +1540,11 @@
         });
         // Branch Refresh
         $(document).on('click', '.enter_press', function(){
-            $(".feather-loader").removeClass('display_none');
-            $(".feather-loader").removeClass('display_none');
-            $("#select_list_branch").addClass('add_display_none');
-            setTimeout(() => {
-               $(".feather-loader").addClass('display_none'); 
-               $("#select_list_branch").removeClass('add_display_none');
-            }, 1000);
             branchInitFetch();
         });
 
-        // Handle Select Branch
-        $(document).on('click', '#select_list_branch', function() {
-            var changeValue = $(this).val();
-            if (changeValue === '') {
-                $("#select_list_role").empty();
-                $("#select_list_role").empty();
-                $("#select_list_role").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
-            }
-        });
-        // Event listener for only branch
-        $(document).on('click', '#select_list_branch', function() {
-            const id = $(this).data("value");
-            roleInitFetch(id);
-        });
         // Role Data Fetch
-        function roleInitFetch(id) {
+        function roleInitFetch(id, query = '') {
             if (!id) {
                 return;
             }
@@ -1577,6 +1561,7 @@
                 type: "GET",
                 url: currentUrl,
                 dataType: 'json',
+                data:{query},
                 success: function(response) {
                     const roleData = response.role_data;
                     const userCounts = response.user_count_per_role || {};
@@ -1595,38 +1580,33 @@
                         $.each(roleData, function(key, item) {
                             const roleId = item.id;
                             const userCount = userCounts.hasOwnProperty(roleId) ? userCounts[roleId] : 0;
-                            branchMenu.append(`
-                                <li tabindex="0" value="${item.id}" id="select_list_role">
+                            roleMenu.append(`
+                                <li tabindex="0" value="${item.id}" data-value="${item.id}" id="select_list_role">
                                     ${item.name}
-                                    <label class="enter_press enter-focus">
+                                    <label class="enter_press_option_role enter-focus">
                                         <svg width="24" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0, 123, 255, 2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
                                     </label>
                                     <span class="badge bg-dark-cornflowerblue rounded-pill bage_display_none" id="roleNum">
-                                        Role : ${userCount}
+                                        Email : ${userCount}
                                     </span>
                                 </li>
                             `);
                         });
                     }
-                    roleMenu.append(`
-                        <li id="loaderPage">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
-                        </li>
-                    `);
-
+                    
                     // Autocomplete
-                    let seenBranchs = new Set();
+                    let seenRoles = new Set();
                     let suggestions = [];
 
                     roleData.forEach(item => {
-                        if (item.name && !seenBranchs.has(item.name)) {
-                            seenBranchs.add(item.name);
+                        if (item.name && !seenRoles.has(item.name)) {
+                            seenRoles.add(item.name);
                             suggestions.push({ label: item.name, value: item.name });
                         }
                     });
                     
-                    if (!$("#searchBranch").data("ui-autocomplete")) {
-                        $("#searchBranch").autocomplete({
+                    if (!$("#searchRole").data("ui-autocomplete")) {
+                        $("#searchRole").autocomplete({
                             source: suggestions,
                             classes: {
                                 "ui-autocomplete": "custom-autocomplete",
@@ -1641,6 +1621,200 @@
                 }
             });
         }
+        // Role Search
+        $(document).on('keyup', '#searchRole', function(){
+            var query = $(this).val();
+            const id = $('#selectedBranchId').val();
+            const roleMenu = $("#roleFetchData");
+            roleMenu.empty();
+
+            roleMenu.append(`
+                <li id="loaderPage">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="role-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+                </li>
+            `);
+            $(".role-loader").removeClass('display_none');
+            $("#select_list_role").addClass('add_display_none');
+            setTimeout(() => {
+               $(".role-loader").addClass('display_none'); 
+               $("#select_list_role").removeClass('add_display_none');
+            }, 1000);
+            roleInitFetch(id, query);
+        });
+        // Role Refresh
+        $(document).on('click', '.enter_press_option_role', function(){
+            roleInitFetch();
+        });
+        // Handle Select Branch
+        $(document).on('click', '#select_list_branch', function() {
+            var changeValue = $(this).val();
+            if (changeValue === '') {
+                $("#select_list_role").empty();
+                $("#select_list_role").empty();
+                $("#select_list_role").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
+            }
+        });
+        // Event listener for only branch=>role
+        $(document).on('click', '#select_list_branch', function() {
+            const id = $(this).data("value");
+            $('#selectedBranchId').val(id);
+            const roleMenu = $("#roleFetchData");
+            roleMenu.empty();
+
+            roleMenu.append(`
+                <li id="loaderPage">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="role-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+                </li>
+            `);
+            $(".role-loader").removeClass('display_none');
+            $("#select_list_role").addClass('add_display_none');
+            setTimeout(() => {
+               $(".role-loader").addClass('display_none'); 
+               $("#select_list_role").removeClass('add_display_none');
+            }, 1000);
+            roleInitFetch(id);
+        });
+
+        // Email Fetch Data
+        function emailInitFetch(id, query = '') {
+            if (!id) {
+                return;
+            }
+
+            const currentUrl = "/application/get-user-fetch-email/" + id;
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentUrl,
+                dataType: 'json',
+                data:{query},
+                success: function(response) {
+                    const emailData = response.email_data;
+                    const emailMenu = $("#emailFetchData");
+
+                    emailMenu.empty();
+                    
+                    // Check if no data found
+                    if (!emailData || emailData.length === 0) {
+                        emailMenu.append(`
+                            <li id="errorPage">
+                                ⚠️ No branch found !
+                            </li>
+                        `);
+                    }else{
+                        $.each(emailData, function(key, item) {
+                            emailMenu.append(`
+                                <li tabindex="0" value="${item.id}" data-value="${item.id}" id="select_list_email">
+                                    ${item.login_email}
+                                    <label class="enter_press_option_email enter-focus">
+                                        <svg width="24" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0, 123, 255, 2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                                    </label>
+                                </li>
+                            `);
+                        });
+                    }
+                    
+                    // Autocomplete
+                    let seenRoles = new Set();
+                    let suggestions = [];
+
+                    emailData.forEach(item => {
+                        if (item.login_email && !seenRoles.has(item.login_email)) {
+                            seenRoles.add(item.login_email);
+                            suggestions.push({ label: item.login_email, value: item.login_email });
+                        }
+                    });
+                    
+                    if (!$("#searchEmail").data("ui-autocomplete")) {
+                        $("#searchEmail").autocomplete({
+                            source: suggestions,
+                            classes: {
+                                "ui-autocomplete": "custom-autocomplete",
+                                "ui-menu-item": "custom-menu-item",
+                                "ui-state-active": "custom-state-active"
+                            }
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX error:", error);
+                }
+            });
+        }
+        // Email Search
+        $(document).on('keyup', '#searchEmail', function(){
+            var query = $(this).val();
+            const id = $('#selectedBranchId').val();
+            const emailMenu = $("#emailFetchData");
+            emailMenu.empty();
+
+            emailMenu.append(`
+                <li id="loaderPage">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="role-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+                </li>
+            `);
+            $(".role-loader").removeClass('display_none');
+            $("#select_list_email").addClass('add_display_none');
+            setTimeout(() => {
+               $(".role-loader").addClass('display_none'); 
+               $("#select_list_email").removeClass('add_display_none');
+            }, 1000);
+            emailInitFetch(id, query);
+        });
+        // Email Refresh
+        $(document).on('click', '.enter_press_option_email', function(){
+            roleInitFetch();
+        });
+        // Handle Select Branch
+        $(document).on('click', '#select_list_role', function() {
+            var changeValue = $(this).val();
+            if (changeValue === '') {
+                $("#select_list_email").empty();
+                $("#select_list_email").empty();
+                $("#select_list_email").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
+            }
+        });
+        // Event listener for only branch=>role
+        $(document).on('click', '#select_list_role', function() {
+            const id = $(this).data("value");
+            $('#selectedBranchId').val(id);
+            const emailMenu = $("#emailFetchData");
+            emailMenu.empty();
+
+            emailMenu.append(`
+                <li id="loaderPage">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="email-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+                </li>
+            `);
+            $(".email-loader").removeClass('display_none');
+            $("#select_list_email").addClass('add_display_none');
+            setTimeout(() => {
+               $(".email-loader").addClass('display_none'); 
+               $("#select_list_email").removeClass('add_display_none');
+            }, 1000);
+            emailInitFetch(id);
+        });
+
+        // Filter Enable Button
+        $(document).on('click', '#enableBtnBranch', function(){
+            $("#disableBtnBranch").removeAttr('hidden');
+            $(".check-point").removeAttr('hidden');
+            $(".spin").addClass('display_none');
+            $(this).setAttr('hidden');
+            setTimeout(() => {
+                $("#disableBtnBranch").attr('hidden', true);
+                $(".check-point").attr('hidden', true);
+                $(".spin").removeClass('display_none');
+                $(this).removeAttr('hidden');
+            }, 2000);
+        });
+        
     });
  </script>
 <!-- Demo bar chart -->

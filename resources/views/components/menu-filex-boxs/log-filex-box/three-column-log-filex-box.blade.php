@@ -1,8 +1,8 @@
 <?php
     $group_flex_box=[
-        ['label'=>'Branch','filexBoxsearch'=>'searchBranch','inputPlaceholder'=>'Branch Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search', 'flexGroupID'=>'branchFetchData','serachBtn'=>'branch-search-btn'],
-        ['label'=>'Role','filexBoxsearch'=>'searchRole','inputPlaceholder'=>'Role Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search', 'flexGroupID'=>'roleFetchData','serachBtn'=>'role-search-btn'],
-        ['label'=>'Email','filexBoxsearch'=>'searchEmail','inputPlaceholder'=>'Email Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search', 'flexGroupID'=>'emailFetchData','serachBtn'=>'email-search-btn'],
+        ['label'=>'Branch','filexBoxsearch'=>'searchBranch','inputPlaceholder'=>'Branch Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnBranch','buttonLabelTwo'=>'Enable','enableBtnId'=>'enableBtnBranch','searchLabel'=>'search', 'flexGroupID'=>'branchFetchData','serachBtn'=>'branch-search-btn'],
+        ['label'=>'Role','filexBoxsearch'=>'searchRole','inputPlaceholder'=>'Role Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnRole','buttonLabelTwo'=>'Enable','enableBtnId'=>'enableBtnRole','searchLabel'=>'search', 'flexGroupID'=>'roleFetchData','serachBtn'=>'role-search-btn'],
+        ['label'=>'Email','filexBoxsearch'=>'searchEmail','inputPlaceholder'=>'Email Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnEmail','buttonLabelTwo'=>'Enable','enableBtnId'=>'enableBtnEmail','searchLabel'=>'search', 'flexGroupID'=>'emailFetchData','serachBtn'=>'email-search-btn'],
     ]; 
 ?>
 <div id="card-container">
@@ -36,12 +36,19 @@
                     </span>
                 </div>
                 <div class="card-body filex-column-card-body">
+                    <input type="hidden" id="selectedBranchId" value="">
                     <ul class="first-filex-group" id="{{ $data['flexGroupID'] }}"></ul>
                 </div>
                 <div class="card-footer filex-column-card-footer">
                     <div class="group-filex-button">
-                        <button type="button" class="{{ $data['buttonClass'] }}">{{ $data['buttonLabelOne'] }}</button>
-                        <button type="button" class="{{ $data['buttonClass'] }}">{{ $data['buttonLabelTwo'] }}</button>
+                        <button type="button" class="{{ $data['buttonClass'] }}" id="{{ $data['disableBtnId'] }}" hidden>{{ $data['buttonLabelOne'] }}</button>
+                        <button type="button" class="{{ $data['buttonClass'] }}" id="{{ $data['enableBtnId'] }}">
+                            <i class="fa-solid fa-check check-point" style="color:white;" hidden></i>
+                            {{ $data['buttonLabelTwo'] }}
+                        </button>
+                        <div class="spinner-border text-success spin" role="status">
+                            <span class="visually-hidden"></span>
+                        </div>
                     </div>
                 </div>
             </div>
