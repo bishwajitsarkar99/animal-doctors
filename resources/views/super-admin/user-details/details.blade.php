@@ -36,6 +36,35 @@
     </x-buttons.tab-content>
   </div>
   <x-page-loader.loader loaderName="server-loader" loaderPosition="loader-position" />
+
+  <!-- Download Modal -->
+  <div class="modal fade" id="downloadModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
+        <div class="modal-header modal-heading" id="logoutModal_header">
+          <!-- Modal Header -->
+          <span class="heading-text" id="head_info"></span>
+          <button type="button" class="btn-close-modal" 
+            data-bs-dismiss="modal" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+          </button>
+        </div>
+        <!-- Modal Body -->
+        <div class="modal-body center-modal-content" id="SM_Modal_body">
+          <ul id="downloadInfo">
+            <li><span id="branhInfo">ID: </span>
+              <ul>
+                <li><span id="roleInfo">Role: </span></li>
+                  <ul>
+                    <li><span id="emailInfo">Email: </span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+        </ul>
+        </div>  
+      </div>
+    </div>
+  </div>
 @endsection
 
 @section('css')

@@ -1,8 +1,8 @@
 <?php
     $group_flex_box=[
-        ['label'=>'Branch','filexBoxsearch'=>'searchBranch','inputPlaceholder'=>'Branch Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnBranch','buttonLabelTwo'=>'Enable','enableBtnId'=>'enableBtnBranch','searchLabel'=>'search', 'flexGroupID'=>'branchFetchData','serachBtn'=>'branch-search-btn','enableCheck'=>'branch-check-point','enableSpin'=>'branchSpin','disableCheck'=>'branch-disable-check-point','disableSpin'=>'disableBranchSpin'],
-        ['label'=>'Role','filexBoxsearch'=>'searchRole','inputPlaceholder'=>'Role Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnRole','buttonLabelTwo'=>'Enable','enableBtnId'=>'enableBtnRole','searchLabel'=>'search', 'flexGroupID'=>'roleFetchData','serachBtn'=>'role-search-btn','enableCheck'=>'role-check-point','enableSpin'=>'roleSpin','disableCheck'=>'role-check-disable-point','disableSpin'=>'disableRolechSpin'],
-        ['label'=>'Email','filexBoxsearch'=>'searchEmail','inputPlaceholder'=>'Email Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnEmail','buttonLabelTwo'=>'Enable','enableBtnId'=>'enableBtnEmail','searchLabel'=>'search', 'flexGroupID'=>'emailFetchData','serachBtn'=>'email-search-btn','enableCheck'=>'email-check-point','enableSpin'=>'emailSpin','disableCheck'=>'email-check-disable-point','disableSpin'=>'disableEmailSpin'],
+        ['label'=>'Branch','filexBoxsearch'=>'searchBranch','inputPlaceholder'=>'Branch Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnBranch','buttonLabelTwo'=>'Enable','buttonLabelDownload'=>'Download','enableBtnId'=>'enableBtnBranch','downloadBtnId'=>'branchDownloadBtn','searchLabel'=>'search', 'flexGroupID'=>'branchFetchData','serachBtn'=>'branch-search-btn','enableCheck'=>'branch-check-point','enableSpin'=>'branchSpin','disableCheck'=>'branch-disable-check-point','disableSpin'=>'disableBranchSpin'],
+        ['label'=>'Role','filexBoxsearch'=>'searchRole','inputPlaceholder'=>'Role Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnRole','buttonLabelTwo'=>'Enable','buttonLabelDownload'=>'Download','enableBtnId'=>'enableBtnRole','downloadBtnId'=>'roleDownloadBtn','searchLabel'=>'search', 'flexGroupID'=>'roleFetchData','serachBtn'=>'role-search-btn','enableCheck'=>'role-check-point','enableSpin'=>'roleSpin','disableCheck'=>'role-check-disable-point','disableSpin'=>'disableRolechSpin'],
+        ['label'=>'Email','filexBoxsearch'=>'searchEmail','inputPlaceholder'=>'Email Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Disable','disableBtnId'=>'disableBtnEmail','buttonLabelTwo'=>'Enable','buttonLabelDownload'=>'Download','enableBtnId'=>'enableBtnEmail','downloadBtnId'=>'emailDownloadBtn','searchLabel'=>'search', 'flexGroupID'=>'emailFetchData','serachBtn'=>'email-search-btn','enableCheck'=>'email-check-point','enableSpin'=>'emailSpin','disableCheck'=>'email-check-disable-point','disableSpin'=>'disableEmailSpin'],
     ]; 
 ?>
 <div id="card-container">
@@ -45,16 +45,19 @@
                             <i class="fa-solid fa-check {{ $data['disableCheck'] }}" style="color:white;" hidden></i>
                             {{ $data['buttonLabelOne'] }}
                         </button>
-                        <div class="spinner-border text-success" role="status" id="{{ $data['disableSpin'] }}" hidden>
+                        <div class="spinner-border text-success spinner-width" role="status" id="{{ $data['disableSpin'] }}" hidden>
                             <span class="visually-hidden"></span>
                         </div>
                         <button type="button" class="{{ $data['buttonClass'] }}" id="{{ $data['enableBtnId'] }}">
                             <i class="fa-solid fa-check {{ $data['enableCheck'] }}" style="color:white;" hidden></i>
                             {{ $data['buttonLabelTwo'] }}
                         </button>
-                        <div class="spinner-border text-success" role="status" id="{{ $data['enableSpin'] }}" hidden>
+                        <div class="spinner-border text-success spinner-width" role="status" id="{{ $data['enableSpin'] }}" hidden>
                             <span class="visually-hidden"></span>
                         </div>
+                        <button type="button" class="{{ $data['buttonClass'] }}" id="{{ $data['downloadBtnId'] }}" hidden>
+                            {{ $data['buttonLabelDownload'] }}
+                        </button>
                     </div>
                 </div>
             </div>

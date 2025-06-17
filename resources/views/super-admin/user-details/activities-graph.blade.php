@@ -1485,28 +1485,6 @@
                             `);
                         });
                     }
-
-                    // Autocomplete
-                    let seenBranchs = new Set();
-                    let suggestions = [];
-
-                    branchData.forEach(item => {
-                        if (item.branch_name && !seenBranchs.has(item.branch_name)) {
-                            seenBranchs.add(item.branch_name);
-                            suggestions.push({ label: item.branch_name, value: item.branch_name });
-                        }
-                    });
-                    
-                    if (!$("#searchBranch").data("ui-autocomplete")) {
-                        $("#searchBranch").autocomplete({
-                            source: suggestions,
-                            classes: {
-                                "ui-autocomplete": "custom-autocomplete",
-                                "ui-menu-item": "custom-menu-item",
-                                "ui-state-active": "custom-state-active"
-                            }
-                        });
-                    }
                 },
                 error: function(xhr, status, error) {
                     console.error("AJAX error:", error);
@@ -1593,28 +1571,6 @@
                             `);
                         });
                     }
-                    
-                    // Autocomplete
-                    let seenRoles = new Set();
-                    let suggestions = [];
-
-                    roleData.forEach(item => {
-                        if (item.name && !seenRoles.has(item.name)) {
-                            seenRoles.add(item.name);
-                            suggestions.push({ label: item.name, value: item.name });
-                        }
-                    });
-                    
-                    if (!$("#searchRole").data("ui-autocomplete")) {
-                        $("#searchRole").autocomplete({
-                            source: suggestions,
-                            classes: {
-                                "ui-autocomplete": "custom-autocomplete",
-                                "ui-menu-item": "custom-menu-item",
-                                "ui-state-active": "custom-state-active"
-                            }
-                        });
-                    }
                 },
                 error: function(xhr, status, error) {
                     console.error("AJAX error:", error);
@@ -1654,10 +1610,13 @@
                 $("#select_list_role").append('<option style="color:white;font-weight:600;" value="" disabled>Select district</option>');
             }
         });
-        // Event listener for only branch=>role
+        // Event listener for only branch=>role active-line
         $(document).on('click', '#select_list_branch', function() {
             const id = $(this).data("value");
+            const branchName = $(this).clone().children().remove().end().text().trim();
             $('#selectedBranchId').val(id);
+            $("#head_info").text(branchName);
+            $("#branhInfo").text(id);
             const roleMenu = $("#roleFetchData");
             roleMenu.empty();
 
@@ -1710,7 +1669,14 @@
                     }else{
                         $.each(emailData, function(key, item) {
                             emailMenu.append(`
-                                <li tabindex="0" value="${item.id}" data-value="${item.id}" id="select_list_email">
+                                <li tabindex="0" value="${item.id}" data-value="${item.id}" id="select_list_email" 
+                                    data-bs-toggle="tooltip"  
+                                    data-bs-placement="left" 
+                                    title="<span style='height:40px;'>${item.name}</span>"
+                                    data-bs-delay="100" 
+                                    data-bs-html="true" 
+                                    data-bs-boundary="window" 
+                                    data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                                     ${item.login_email}
                                     <label class="enter_press_option_email enter-focus">
                                         <svg width="24" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0, 123, 255, 2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
@@ -1719,28 +1685,11 @@
                             `);
                         });
                     }
-                    
-                    // Autocomplete
-                    let seenRoles = new Set();
-                    let suggestions = [];
 
-                    emailData.forEach(item => {
-                        if (item.login_email && !seenRoles.has(item.login_email)) {
-                            seenRoles.add(item.login_email);
-                            suggestions.push({ label: item.login_email, value: item.login_email });
-                        }
+                    // Tooltip (Bootstrap 5)
+                    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+                        new bootstrap.Tooltip(el);
                     });
-                    
-                    if (!$("#searchEmail").data("ui-autocomplete")) {
-                        $("#searchEmail").autocomplete({
-                            source: suggestions,
-                            classes: {
-                                "ui-autocomplete": "custom-autocomplete",
-                                "ui-menu-item": "custom-menu-item",
-                                "ui-state-active": "custom-state-active"
-                            }
-                        });
-                    }
                 },
                 error: function(xhr, status, error) {
                     console.error("AJAX error:", error);
@@ -1783,7 +1732,9 @@
         // Event listener for only branch=>role
         $(document).on('click', '#select_list_role', function() {
             const id = $(this).data("value");
+            const roleName = $(this).clone().children().remove().end().text().trim();
             $('#selectedBranchId').val(id);
+            $("#roleInfo").text(roleName);
             const emailMenu = $("#emailFetchData");
             emailMenu.empty();
 
@@ -1800,18 +1751,28 @@
             }, 1000);
             emailInitFetch(id);
         });
+        // Event listener for only branch=>email
+        $(document).on('click', '#select_list_email', function() {
+            const id = $(this).data("value");
+            const emailName = $(this).clone().children().remove().end().text().trim();
+            $('#selectedBranchId').val(id);
+            $("#emailInfo").text(emailName);
+        });
 
         // Branch Filter Enable Button
         $(document).on('click', '#enableBtnBranch', function(){
             $(".branch-check-point").attr('hidden', true);
             $("#branchSpin").removeAttr('hidden');
             $("#enableBtnBranch").addClass('display_none');
+            $(".filex-show").removeClass('display_block');
             setTimeout(() => {
                 $("#disableBtnBranch").removeAttr('hidden');
                 $(".branch-check-point").removeAttr('hidden');
                 $(".branch-disable-check-point").attr('hidden', true);
                 $("#branchSpin").attr('hidden', true);
                 $("#enableBtnBranch").removeClass('display_none');
+                $("#branchDownloadBtn").removeAttr('hidden');
+                $(".filex-show").addClass('display_block');
             }, 2000);
         });
         // Branch Filter Disable Button
@@ -1819,12 +1780,88 @@
             $(".branch-disable-check-point").attr('hidden', true);
             $("#disableBranchSpin").removeAttr('hidden');
             $("#disableBtnBranch").attr('hidden', true);
+            $("#enableBtnBranch").attr('hidden', true);
+            $("#branchDownloadBtn").attr('hidden', true);
+            $(".filex-show").addClass('display_block');
             setTimeout(() => {
                 $("#disableBtnBranch").removeAttr('hidden');
+                $("#enableBtnBranch").removeAttr('hidden');
                 $(".branch-disable-check-point").removeAttr('hidden');
                 $("#disableBranchSpin").attr('hidden', true);
                 $(".branch-check-point").attr('hidden', true);
+                $(".filex-show").removeClass('display_block');
             }, 2000);
+        });
+        // Role Filter Enable Button
+        $(document).on('click', '#enableBtnRole', function(){
+            $(".role-check-point").attr('hidden', true);
+            $("#roleSpin").removeAttr('hidden');
+            $("#enableBtnRole").addClass('display_none');
+            $(".filex-show").removeClass('display_block');
+            setTimeout(() => {
+                $("#disableBtnRole").removeAttr('hidden');
+                $(".role-check-point").removeAttr('hidden');
+                $(".role-check-disable-point").attr('hidden', true);
+                $("#roleSpin").attr('hidden', true);
+                $("#enableBtnRole").removeClass('display_none');
+                $("#roleDownloadBtn").removeAttr('hidden');
+                $(".filex-show").addClass('display_block');
+            }, 2000);
+        });
+        // Role Filter Disable Button
+        $(document).on('click', '#disableBtnRole', function(){
+            $(".role-check-disable-point").attr('hidden', true);
+            $("#disableRolechSpin").removeAttr('hidden');
+            $("#disableBtnRole").attr('hidden', true);
+            $("#enableBtnRole").attr('hidden', true);
+            $("#roleDownloadBtn").attr('hidden', true);
+            $(".filex-show").addClass('display_block');
+            setTimeout(() => {
+                $("#disableBtnRole").removeAttr('hidden');
+                $("#enableBtnRole").removeAttr('hidden');
+                $(".role-check-disable-point").removeAttr('hidden');
+                $("#disableRolechSpin").attr('hidden', true);
+                $(".role-check-point").attr('hidden', true);
+                $(".filex-show").removeClass('display_block');
+            }, 2000);
+        });
+        // Email Filter Enable Button
+        $(document).on('click', '#enableBtnEmail', function(){
+            $(".email-check-point").attr('hidden', true);
+            $("#emailSpin").removeAttr('hidden');
+            $("#enableBtnEmail").addClass('display_none');
+            $(".filex-show").removeClass('display_block');
+            setTimeout(() => {
+                $("#disableBtnEmail").removeAttr('hidden');
+                $(".email-check-point").removeAttr('hidden');
+                $(".email-check-disable-point").attr('hidden', true);
+                $("#emailSpin").attr('hidden', true);
+                $("#enableBtnEmail").removeClass('display_none');
+                $("#emailDownloadBtn").removeAttr('hidden');
+                $(".filex-show").addClass('display_block');
+            }, 2000);
+        });
+        // Email Filter Disable Button
+        $(document).on('click', '#disableBtnEmail', function(){
+            $(".email-check-disable-point").attr('hidden', true);
+            $("#disableEmailSpin").removeAttr('hidden');
+            $("#disableBtnEmail").attr('hidden', true);
+            $("#enableBtnEmail").addClass('display_none');
+            $("#emailDownloadBtn").attr('hidden', true);
+            $(".filex-show").addClass('display_block');
+            setTimeout(() => {
+                $("#disableBtnEmail").removeAttr('hidden');
+                $(".email-check-disable-point").removeAttr('hidden');
+                $("#disableEmailSpin").attr('hidden', true);
+                $(".email-check-point").attr('hidden', true);
+                $("#enableBtnEmail").removeClass('display_none');
+                $(".filex-show").removeClass('display_block');
+            }, 2000);
+        });
+        // Show Branch Download Modal
+        $(document).on('click', '#branchDownloadBtn,#roleDownloadBtn,#emailDownloadBtn', function(){
+            $("#downloadModal").modal('show');
+
         });
         
     });

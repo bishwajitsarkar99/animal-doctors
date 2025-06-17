@@ -5,7 +5,7 @@
             <span id="{{ $filexFilterId }}">{{ $filexLabelName }}</span> 
         </label>
     </span>
-    <div class="{{ $filexContentArea }}">
+    <div class="{{ $filexContentArea }} filex-show">
         <div class="content-area">
             <x-menu-filex-boxs.log-filex-box.three-column-log-filex-box />
         </div>

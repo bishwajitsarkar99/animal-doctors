@@ -79,6 +79,8 @@ ul.first-filex-group{
     padding-left: 0px;
     border: 1px ridge rgba(0, 123, 255, 0.2);
     border-radius: 3px;
+    max-width: 100%;
+    overflow-x: auto;
 }
 li#select_list_branch, li#select_list_role, li#select_list_email {
     display: flex;
@@ -89,6 +91,13 @@ li#select_list_branch, li#select_list_role, li#select_list_email {
     padding-left: 5px;
     cursor: pointer;
     line-height: 1.8;
+    max-width: 100%;
+    word-break: break-word;
+    white-space: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-wrap: break-word;
+    overflow: hidden;
 }
 span.bg-dark-cornflowerblue {
     display: none;
@@ -105,6 +114,13 @@ span.bg-dark-cornflowerblue {
     border-radius: 10px;
     font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
 }
+.spinner-width {
+    width: 23px;
+    height: 23px;
+}
+.display_block{
+    display: block;
+}
 label.enter_press, label.enter_press_option_role, label.enter_press_option_email {
     display: none;
     cursor: pointer;
@@ -113,8 +129,9 @@ li#select_list_branch:hover, li#select_list_branch.active-line,
 li#select_list_role:hover, li#select_list_role.active-line,
 li#select_list_email:hover, li#select_list_email.active-line{
     display: flex;
-    width: 100%;
-    background: #6a9fff4d;
+    max-width: 100%;
+    /* background: #6a9fff4d; */
+    background: #ffc107b0;
     color: #111;
     transition: opacity 0.2s ease;
 }
@@ -168,6 +185,109 @@ li#errorPage{
 li{
     list-style: none;
 }
+/* ======= Modal-sm-Design =========== */
+.modal-header .btn-close-modal {
+    padding: calc(var(--bs-modal-header-padding-y)1rem* 0.5) calc(var(--bs-modal-header-padding-x) * 0.5);
+    margin: calc(-0.5 * var(--bs-modal-header-padding-y)) calc(-0.5 * var(--bs-modal-header-padding-x)) calc(-0.5 * var(--bs-modal-header-padding-y)) auto;
+    border-radius: 50%;
+}
+.btn-close-modal {
+    width: 1.5em;
+    height: 1.5em;
+    padding: 0.25em;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='8' fill='%23000'/%3E%3Cline x1='4.5' y1='4.5' x2='11.5' y2='11.5' stroke='%23fff' stroke-width='1.5'/%3E%3Cline x1='11.5' y1='4.5' x2='4.5' y2='11.5' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    border-radius: 50%;
+    opacity: 0.85;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+}
+.btn-close-modal:hover {
+    color: white;
+    text-decoration: none;
+    opacity: 0.75;
+}
+.modal-heading{
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #1e3d47),color-stop(1, #2e5764));
+    color: white;
+    font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
+    font-size: 15px;
+    height: 25px;
+    border-radius: 0px;
+}
+.center-modal-content{
+    margin: 0;
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #eee),color-stop(1, #fff));
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
+}
+ul#downloadInfo {
+    padding: 0;
+    font-size: 12px;
+    font-weight: 800;
+    color: #333;
+}
+#downloadInfo {
+    list-style: none;
+    padding-left: 20px;
+    position: relative;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+#downloadInfo li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    color: #444;
+    font-weight: 500;
+}
+
+/* Line from parent to child */
+#downloadInfo li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 8px;
+    width: 2px;
+    height: 100%;
+    background: #ccc;
+}
+
+/* Horizontal line to connect item */
+#downloadInfo li::after {
+    content: '';
+    position: absolute;
+    top: 0.75em;
+    left: 0;
+    width: 12px;
+    height: 2px;
+    background: #ccc;
+}
+
+/* Folder icon before each item */
+#downloadInfo li span::before {
+    content: "📁 ";
+    margin-right: 4px;
+}
+
+/* Child ULs inside LI */
+#downloadInfo ul {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 6px;
+    position: relative;
+}
+
+/* Prevent vertical line from extending too far on last child */
+#downloadInfo li:last-child::before {
+    height: 0.75em;
+}
+/* =========================================== */
 .--database{
     display: flex;
     justify-content: space-between;

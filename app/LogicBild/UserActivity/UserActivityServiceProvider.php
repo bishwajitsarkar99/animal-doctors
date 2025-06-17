@@ -953,13 +953,13 @@ class UserActivityServiceProvider
         $query = $request->input('query');
 
         $email_data = DB::table('users')
-            ->select('users.id', 'users.login_email', 'users.created_at', 'users.updated_at')
+            ->select('users.id', 'users.login_email', 'users.name', 'users.created_at', 'users.updated_at')
             ->join('roles', 'roles.id', '=', 'users.role')
             ->whereIn('roles.id', (array) $id)
             ->when($query, function ($q) use ($query) {
                 $q->where('users.login_email', 'like', '%' . $query . '%');
             })
-            ->groupBy('users.id', 'users.login_email', 'users.created_at', 'users.updated_at')
+            ->groupBy('users.id', 'users.login_email', 'users.name', 'users.created_at', 'users.updated_at')
             ->get();
 
         return response()->json([
