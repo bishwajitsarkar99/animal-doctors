@@ -234,16 +234,16 @@ ul#downloadInfo {
 }
 #downloadInfo {
     list-style: none;
-    padding-left: 20px;
+    padding-left: 10px;
     position: relative;
     font-family: 'Segoe UI', sans-serif;
 }
 
 #downloadInfo li {
     position: relative;
-    padding-left: 20px;
-    margin-bottom: 10px;
-    color: #444;
+    padding-left: 0px;
+    margin-bottom: 5px;
+    color: darkgreen;
     font-weight: 500;
 }
 
@@ -252,10 +252,10 @@ ul#downloadInfo {
     content: '';
     position: absolute;
     top: 0;
-    left: 8px;
+    left: var(--card-name-100-letter-spacing);
     width: 2px;
     height: 100%;
-    background: #ccc;
+    background: darkgreen;
 }
 
 /* Horizontal line to connect item */
@@ -266,20 +266,20 @@ ul#downloadInfo {
     left: 0;
     width: 12px;
     height: 2px;
-    background: #ccc;
+    background: darkgreen;
 }
 
-/* Folder icon before each item */
+/* Folder icon before each item 📁*/
 #downloadInfo li span::before {
-    content: "📁 ";
-    margin-right: 4px;
+    content: " ";
+    margin-right: 12px;
 }
 
 /* Child ULs inside LI */
 #downloadInfo ul {
     list-style: none;
     padding-left: 20px;
-    margin-top: 6px;
+    margin-top: 2px;
     position: relative;
 }
 
