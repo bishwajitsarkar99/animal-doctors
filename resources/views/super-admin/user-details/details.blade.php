@@ -101,16 +101,12 @@
                     <svg width="30" height="30" viewBox="0 0 64 64">
                       <!-- File Background -->
                       <rect x="8" y="4" width="48" height="56" rx="6" ry="6" fill="#f4f4f4" stroke="#ccc" stroke-width="1.5"/>
-                      
                       <!-- Folded corner -->
                       <polygon points="48,4 56,12 48,12" fill="#ccc"/>
-
                       <!-- Label Background -->
-                      <rect x="16" y="42" width="32" height="12" rx="3" ry="3" fill="#1d6f42"/>
-
+                      <rect x="16" y="32" width="32" height="24" rx="3" ry="3" fill="#fff"/>
                       <!-- CSV Text -->
-                      <text x="32" y="51" font-size="8" font-family="Segoe UI, sans-serif" font-weight="bold" fill="#fff" text-anchor="middle">CSV</text>
-
+                      <text x="32" y="51" font-size="15" font-family="Segoe UI, sans-serif" font-weight="bold" fill="#1d6f42" text-anchor="middle">CSV</text>
                       <!-- File lines for table look -->
                       <line x1="16" y1="20" x2="48" y2="20" stroke="#bbb" stroke-width="1"/>
                       <line x1="16" y1="26" x2="48" y2="26" stroke="#bbb" stroke-width="1"/>
@@ -125,7 +121,7 @@
               <div class="download-tab">
                 <span class="download-group-btn">
                   <a class="download-link-btn" href="#">
-                    <svg width="35" height="35" viewBox="0 0 64 64">
+                    <svg width="30" height="30" viewBox="0 0 64 64">
                       <!-- Printer body -->
                       <rect x="12" y="20" width="40" height="26" rx="4" ry="4" fill="#555"/>
                       
@@ -151,11 +147,8 @@
             <ul id="downloadInfo">
               <li><span id="branhInfo">ID: </span>
                 <ul>
-                  <li><span id="roleInfo">Role: </span></li>
-                    <ul>
-                      <li><span id="emailInfo">Email: </span></li>
-                    </ul>
-                  </li>
+                  <li id="roleInfo"></li>
+                  <ul id="emailInfo"></ul>
                 </ul>
               </li>
             </ul>

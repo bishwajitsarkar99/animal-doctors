@@ -1492,11 +1492,9 @@
             });
         }
         // Active Column Row
-        $(document).on('click', '#select_list_branch, #select_list_role, #select_list_email', function(){
+        $(document).on('click', '#select_list_branch', function(){
             $(this).addClass("active-line").siblings().removeClass("active-line");
             $("#searchBranch").val("");
-            $("#searchRole").val("");
-            $("#searchEmail").val("");
         });
         // Branch Search
         $(document).on('keyup', '#searchBranch', function(){
@@ -1561,12 +1559,10 @@
                             roleMenu.append(`
                                 <li tabindex="0" value="${item.id}" data-value="${item.id}" id="select_list_role">
                                     ${item.name}
-                                    <label class="enter_press_option_role enter-focus">
-                                        <svg width="24" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0, 123, 255, 2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-                                    </label>
                                     <span class="badge bg-dark-cornflowerblue rounded-pill bage_display_none" id="roleNum">
                                         Email : ${userCount}
                                     </span>
+                                    <input type="checkbox" class="role-checkbox" data-id="${item.id}" data-value="${item.name}">
                                 </li>
                             `);
                         });
@@ -1652,9 +1648,12 @@
                 type: "GET",
                 url: currentUrl,
                 dataType: 'json',
-                data:{query},
+                data:{
+                    role_ids: id,
+                    query: $('#searchEmail').val()
+                },
                 success: function(response) {
-                    const emailData = response.email_data;
+                    const emailData = response.email_data || [];
                     const emailMenu = $("#emailFetchData");
 
                     emailMenu.empty();
@@ -1669,7 +1668,7 @@
                     }else{
                         $.each(emailData, function(key, item) {
                             emailMenu.append(`
-                                <li tabindex="0" value="${item.id}" data-value="${item.id}" id="select_list_email" 
+                                <li tabindex="0" value="${item.id}" data-id="${item.id}" data-value="${item.login_email}" id="select_list_email" 
                                     data-bs-toggle="tooltip"  
                                     data-bs-placement="left" 
                                     title="<span style='height:40px;'>${item.name}</span>"
@@ -1698,8 +1697,10 @@
         }
         // Email Search
         $(document).on('keyup', '#searchEmail', function(){
-            var query = $(this).val();
-            const id = $('#selectedBranchId').val();
+            const query = $(this).val();
+            const selectedId = $('#selectedBranchId').val();
+            const id = Array.isArray(selectedId) ? selectedId : [selectedId];
+
             const emailMenu = $("#emailFetchData");
             emailMenu.empty();
 
@@ -1711,9 +1712,10 @@
             $(".role-loader").removeClass('display_none');
             $("#select_list_email").addClass('add_display_none');
             setTimeout(() => {
-               $(".role-loader").addClass('display_none'); 
-               $("#select_list_email").removeClass('add_display_none');
+                $(".role-loader").addClass('display_none'); 
+                $("#select_list_email").removeClass('add_display_none');
             }, 1000);
+
             emailInitFetch(id, query);
         });
         // Email Refresh
@@ -1730,33 +1732,84 @@
             }
         });
         // Event listener for only branch=>role
-        $(document).on('click', '#select_list_role', function() {
-            const id = $(this).data("value");
-            const roleName = $(this).clone().children().remove().end().text().trim();
-            $('#selectedBranchId').val(id);
-            $("#roleInfo").text(roleName);
-            const emailMenu = $("#emailFetchData");
-            emailMenu.empty();
+        $(document).on('change', '.role-checkbox', function () {
+            const id = [];
+            const $parent = $(this).closest('#select_list_role');
+            
+            if ($(this).is(':checked')) {
+                $parent.addClass('active-line');
+            } else {
+                $parent.removeClass('active-line');
+            }
+            $("#searchRole").val("");
 
-            emailMenu.append(`
+            // Collect all checked role IDs
+            $('.role-checkbox:checked').each(function () {
+                id.push($(this).data('id'));
+            });
+            const selectedRoles = $('.role-checkbox:checked').map(function () {
+                return $(this).data('value');
+            }).get();
+
+            let html = '';
+
+            if (selectedRoles.length) {
+                selectedRoles.forEach(role => {
+                    html += `<li><span class="ms-1">Role: ${role}</span></li>`;
+                });
+            } else {
+                html = '<span>No Role Selected</span>';
+            }
+
+            $('#roleInfo').html(html);
+            
+            // Clear and show loader
+            const emailMenu = $("#emailFetchData");
+            emailMenu.empty().append(`
                 <li id="loaderPage">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="email-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
                 </li>
             `);
             $(".email-loader").removeClass('display_none');
             $("#select_list_email").addClass('add_display_none');
+
+            // Fetch emails after short delay
             setTimeout(() => {
-               $(".email-loader").addClass('display_none'); 
-               $("#select_list_email").removeClass('add_display_none');
+                $(".email-loader").addClass('display_none');
+                $("#select_list_email").removeClass('add_display_none');
+
+                if (id.length > 0) {
+                    emailInitFetch(id);
+                }
             }, 1000);
-            emailInitFetch(id);
         });
         // Event listener for only branch=>email
-        $(document).on('click', '#select_list_email', function() {
-            const id = $(this).data("value");
-            const emailName = $(this).clone().children().remove().end().text().trim();
+        $(document).on('click', '#select_list_email', function () {
+            const id = [];
+
+            $(this).toggleClass("active-line");
+            $("#searchEmail").val("");
+
+            $('#select_list_email.active-line').each(function () {
+                id.push($(this).data('id'));
+            });
+
+            const selectedEmails = $('#select_list_email.active-line').map(function () {
+                return $(this).data('value');
+            }).get();
+
+            let html = '';
+
+            if (selectedEmails.length) {
+                selectedEmails.forEach(email => {
+                    html += `<li><span class="ms-1">${email}</span></li>`;
+                });
+            } else {
+                html = '<span>No Email Selected</span>';
+            }
+
+            $('#emailInfo').html(html);
             $('#selectedBranchId').val(id);
-            $("#emailInfo").text(emailName);
         });
 
         // Branch Filter Enable Button

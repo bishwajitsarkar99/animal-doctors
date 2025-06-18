@@ -952,15 +952,35 @@ class UserActivityServiceProvider
     {
         $query = $request->input('query');
 
-        $email_data = DB::table('users')
+        // Normalize role_ids
+        $roleIds = $request->input('role_ids', []);
+        if (!is_array($roleIds)) {
+            $roleIds = explode(',', $roleIds);
+        }
+
+        if ($id !== null) {
+            $roleIds[] = $id;
+        }
+
+        $roleIds = array_unique(array_filter($roleIds));
+
+        if (empty($roleIds)) {
+            return response()->json([
+                'status' => 400,
+                'message' => 'No valid role IDs provided.',
+                'email_data' => [],
+            ]);
+        }
+
+        $emailQuery = DB::table('users')
             ->select('users.id', 'users.login_email', 'users.name', 'users.created_at', 'users.updated_at')
-            ->join('roles', 'roles.id', '=', 'users.role')
-            ->whereIn('roles.id', (array) $id)
-            ->when($query, function ($q) use ($query) {
-                $q->where('users.login_email', 'like', '%' . $query . '%');
-            })
-            ->groupBy('users.id', 'users.login_email', 'users.name', 'users.created_at', 'users.updated_at')
-            ->get();
+            ->whereIn('users.role', $roleIds);
+
+        if (!empty($query)) {
+            $emailQuery->where('users.login_email', 'like', '%' . $query . '%');
+        }
+
+        $email_data = $emailQuery->get();
 
         return response()->json([
             'status' => 200,
