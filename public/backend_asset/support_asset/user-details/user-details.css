@@ -7,6 +7,7 @@
     --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, transparent 50%, rgba(0, 0, 0, 0.05) 100%);
     --table-row-light-blue-hover:linear-gradient(150deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%);
     --row-hover-border:dodgerblue;
+    --table-row-select-background:-webkit-gradient(linear, 0% 100%, 0% 0%, from(rgb(224, 254, 255)), to(rgb(195, 235, 255)));
     /* button btn-primary */
     --mdb-btn-bg: #3b71ca;
     --mdb-btn-color: #fff;
@@ -30,6 +31,18 @@ htm,body{
     font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
     padding: 0;
     margin: 0;
+}
+input#searchBranch, input#searchRole, input#searchEmail{
+    outline: none;
+    box-shadow: none;
+    border-top: 1px ridge rgba(0, 123, 255, 0.1);
+    border-bottom: 1px ridge rgba(0, 123, 255, 0.1);
+    border-left: 1px ridge rgba(0, 123, 255, 0.1);
+    border-right: 1px ridge rgba(0, 123, 255, 0.1);
+    height: 22px;
+}
+.input-search-box {
+    margin-left: 7px;
 }
 .progressbar-active{
 	animation-name: progress;
@@ -81,6 +94,7 @@ ul.first-filex-group{
     border-radius: 3px;
     max-width: 100%;
     overflow-x: auto;
+    overflow-y: auto;
 }
 li#select_list_branch, li#select_list_role, li#select_list_email {
     display: flex;
@@ -97,7 +111,6 @@ li#select_list_branch, li#select_list_role, li#select_list_email {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow-wrap: break-word;
-    overflow: hidden;
 }
 span.bg-dark-cornflowerblue {
     display: none;
@@ -304,8 +317,29 @@ ul#emailInfo {
     font-size: 11px;
     font-weight: 900;
 }
-.role-checkbox{
+.role-checkbox[type="checkbox"]{
     cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #00868b;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    position: relative;
+    top: 1px;
+    right: 3px;
+}
+.role-checkbox[type="checkbox"]:checked {
+    background-color: #00868b;
+    border-color: #00868b;
+}
+.role-checkbox[type="checkbox"]:checked::after {
+    content: "✔";
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    left: 2px;
+    top: -4px;
 }
 /* =========================================== */
 .--database{
@@ -1792,14 +1826,14 @@ tr.table-row {
     color: black;
     font-weight: 600;
 }
-tr.table-row-light{
+tr.table-row{
     background-image: linear-gradient(90deg, #ffffffff 100%, transparent 100%, #ffffffff 100%);
     color: black;
     font-weight: 600;
 }
-tr.table-row-light:hover{
+tr.table-row:hover td{
     font-weight: 600;
-    background-image: var(--table-row-hover);
+    background-image: var(--table-row-select-background);
     animation-name: fonColor;
     animation-duration: 1s;
     animation-direction: alternate-reverse;
@@ -1864,11 +1898,11 @@ button.btn-background{
     z-index: 3;
 }
 tr.clicked td{
-    background-image: var(--table-row-light-blue-hover);
+    background: var(--table-row-select-background);
     background-color: transparent;
     opacity: 5;
     transition: border-color 0.3s, background-color 0.3s;
-    animation-name: fonColor;
+    /* animation-name: fonColor; */
     animation-duration: 1s;
     animation-direction: alternate-reverse;
     animation-delay: 1s;
@@ -2480,7 +2514,7 @@ select::placeholder{
 }
 th#th_sort {
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
-    background-image: var(--table-head-color);
+    background-image: var(--table-row-select-background);
     color: black;
     font-size: 12px;
     font-family: var(--nav-font-family);

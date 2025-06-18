@@ -129,7 +129,7 @@
             <div class="row mt-4 mb-3">
                 <div class="col-xl-12">
                     <?php
-                        $flex=['filexGroup'=>'input-group', 'filexId'=>'filteringBox', 'filexLabel'=>'Data Filter', 'filexContent'=>'--filex-box-medium-content', 'filexBoxArrow'=>'filex-box-arrow'];
+                        $flex=['filexGroup'=>'input-group', 'filexId'=>'filteringBox', 'filexLabel'=>'Download', 'filexContent'=>'--filex-box-medium-content', 'filexBoxArrow'=>'filex-box-arrow'];
                     ?>
                     <?php
                         $group_flex_box=[

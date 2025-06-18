@@ -1,6 +1,7 @@
 :root{
     --search-box-background-color:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, #e1e1e1, rgba(0, 0, 0, 0.05) 100%);
     --table-head-color:linear-gradient(0deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
+    --table-head-bg:-webkit-gradient(linear, 0% 100%, 0% 0%, from(rgb(224, 254, 255)), to(rgb(195, 235, 255)));
     --table-row-hover:linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, transparent 80%, rgba(0, 0, 0, 0.05) 100%);
     --bg-color:darkgoldenrod;
     --color:royalblue;
@@ -96,10 +97,10 @@ body{
     border-radius: 4px;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-    border-top: 1px solid rgb(209, 209, 209);
-    border-bottom: 1px solid rgb(209, 209, 209);
-    border-left: 1px solid rgb(209, 209, 209);
-    border-right: 1px solid rgb(209, 209, 209);
+    border-top: 1px ridge rgba(0, 123, 255, 0.2);
+    border-bottom: 1px ridge rgba(0, 123, 255, 0.2);
+    border-left: 1px ridge rgba(0, 123, 255, 0.2);
+    border-right: 1px ridge rgba(0, 123, 255, 0.2);
     box-shadow: 0px 2px 20px #0001;
     background-image: linear-gradient(to bottom, white 0%, white, white 100%);
 }
@@ -127,6 +128,8 @@ table, th, td {
     font-size: 14px;
     opacity: 1;
     font-family: var(--sub-category-font-family);
+    border-bottom: 1px ridge lightgray;
+    border-top: 1px ridge lightgray;
 }
 th {
     display: table-cell;
@@ -137,7 +140,8 @@ th {
     font-variant: all-petite-caps;
 }
 th#th_sort {
-    background-image: var(--table-head-color);
+    /* background-image: var(--table-head-color); */
+    background-image: var(--table-head-bg);
     color: #333;
     font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -263,7 +267,8 @@ tr.table-row.user-table-row{
     background-color: white;
 }
 tr.table-row.user-table-row:hover{
-    background-image: var(--table-row-hover);
+    /* background-image: var(--table-row-hover); */
+    background-image: var(--table-head-bg);
     color: var(--color);
     font-weight: var(--font-weight);
 }
@@ -308,10 +313,10 @@ input#sub_category_name {
     color: #333;
     padding: 0.2rem 0.5rem;
     border-radius: 5px;
-    border-top: 1px solid rgb(209, 209, 209);
-    border-bottom: 1px solid rgb(209, 209, 209);
-    border-left: 1px solid rgb(209, 209, 209);
-    border-right: 1px solid rgb(209, 209, 209);
+    border-top: 1px ridge rgba(0, 123, 255, 0.2);
+    border-bottom: 1px ridge rgba(0, 123, 255, 0.2);
+    border-left: 1px ridge rgba(0, 123, 255, 0.2);
+    border-right: 1px ridge rgba(0, 123, 255, 0.2);
     font-family: var(--sub-category-font-family);
 }
 input#sub_category_name:focus{
@@ -415,10 +420,11 @@ input#category_id {
 span#total_subcategory_records {
     color: white;
     font-weight: 700;
+    font-size: 12px;
 }
 label.tot-search {
     color: black;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.3px;
     font-family: var(--sub-category-font-family);

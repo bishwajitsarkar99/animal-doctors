@@ -66,11 +66,11 @@
                             <span class="fbox"><input id="light_focus" type="text" class="${permissionSignal}" category_name readonly></span>
                             ${row.category_name}
                         </td>
-                        <td class="tot_complete_ line_height_two" id="cat_td6">
+                        <td class="txt_ line_height_two" id="cat_td6">
                             <span class= "${statusClass}">${statusSignal}</span>
                             <span>${statusText}</span>
                         </td>
-                        <td class="tot_complete_ center line_height_three" id="cat_td5">
+                        <td class="txt_ center line_height_three" id="cat_td5">
                             <input class="form-switch form-check-input check_permission" type="checkbox" category_id="${row.id}" value="${row.status}" ${row.status? " checked": ''}>
                         </td>
                     </tr>

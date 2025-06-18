@@ -1,7 +1,7 @@
 <div class="filex-wrapper">
     <span class="filex-tab {{ $filexClas }}">
         <label class="date-label" for="from"> 
-            <x-dropdown.filter-box filterBox="" filterWidth="24" filterHeight="18" filterStroke="rgb(170, 170, 170)" filterStrokeWidth="2" filterFill="white" />
+            <x-dropdown.download-box downloadBox="" downloadWidth="24" downloadHeight="18" downloadStroke="rgb(170, 170, 170)" downloadStrokeWidth="2" downloadFill="white" />
             <span id="{{ $filexFilterId }}">{{ $filexLabelName }}</span> 
         </label>
     </span>

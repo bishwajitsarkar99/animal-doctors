@@ -18,21 +18,17 @@
                     <span class="card-label pt-1">
                         <span>{{ $data['label'] }}</span>
                     </span>
+                    <x-dropdown.filter-box filterBox="" filterWidth="24" filterHeight="18" filterStroke="rgb(170, 170, 170)" filterStrokeWidth="2" filterFill="white" />
                     <span class="search-box dropstart">
-                        <a type="button" class="dropdown-toggle filex-search-btn serach-btn-btn {{ $data['serachBtn'] }}" id="search_Dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding-left: 0.5rem;">
-                            {{ $data['searchLabel'] }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="search_Dropdown" id="filexBoxMenu">
-                            <span class="input-search-box">
-                                <span class="filex-search-icon-box">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="rgb(170, 170, 170)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
-                                        <circle cx="11" cy="11" r="8"/>
-                                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                                    </svg>
-                                </span>
-                                <input class="form-control form-control-sm font-weight" type="search" name="search" value="" placeholder="{{ $data['inputPlaceholder'] }}" id="{{ $data['filexBoxsearch'] }}" autoComplete="off" />
+                        <span class="input-search-box">
+                            <span class="filex-search-icon-box">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="rgb(170, 170, 170)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                </svg>
                             </span>
-                        </ul>
+                            <input class="form-control form-control-sm font-weight" type="search" name="search" value="" placeholder="{{ $data['inputPlaceholder'] }}" id="{{ $data['filexBoxsearch'] }}" autoComplete="off" />
+                        </span>
                     </span>
                 </div>
                 <div class="card-body filex-column-card-body">

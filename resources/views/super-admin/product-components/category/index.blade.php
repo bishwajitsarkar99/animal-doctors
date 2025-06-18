@@ -11,7 +11,7 @@
             <span class="" style="color:black;">{{__('translate.Category')}}</span>
             <span class="tot_summ" id="num_plate">
               <label class="tot-search mt-3 pt-2" style="color:black;" for="tot_cagt"> ➤ {{__('translate.Total Category')}} :</label>
-              <label class="badge pill-rounded skeleton-table-head-capsule" for="total_medic_records" id="iteam_label4"><span class="total_users" style="font-weight:700;color:black;" id="total_category_records"></span><span id="iteam_label5" style="font-weight: 700;color:black;font-size: 11px;">.00 {{__('translate.items')}}</span></label>
+              <label class="badge pill-rounded skeleton-table-head-capsule" for="total_medic_records" id="iteam_label4"><span class="total_users" style="font-weight:700;color:black;" id="total_category_records"></span><span id="iteam_label5" style="font-weight: 700;color:black;">.00 {{__('translate.items')}}</span></label>
             </span>
             <i class="catg_search-icon fa fa-spinner fa-spin catg_search-hidden" style="color:#333333ab;opacity:1;"></i>
           </p>
