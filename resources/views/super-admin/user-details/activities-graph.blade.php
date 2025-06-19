@@ -1473,7 +1473,7 @@
                             const branchId = item.branch_id;
                             const roleCount = roleCounts.hasOwnProperty(branchId) ? roleCounts[branchId] : 0;
                             branchMenu.append(`
-                                <li tabindex="0" data-value="${item.branch_id}" id="select_list_branch">
+                                <li class="select_list_branch" tabindex="0" data-value="${item.branch_id}" id="select_list_branch">
                                     ${item.branch_name}
                                     <label class="enter_press enter-focus">
                                         <svg width="24" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0, 123, 255, 2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
@@ -1608,7 +1608,7 @@
         });
         // Event listener for only branch=>role active-line
         $(document).on('click', '#select_list_branch', function() {
-            const id = $(this).data("value");
+            const id = $(this).data("value"); 
             const branchName = $(this).clone().children().remove().end().text().trim();
             $('#selectedBranchId').val(id);
             $("#head_info").text(branchName);
@@ -1809,7 +1809,6 @@
             }
 
             $('#emailInfo').html(html);
-            $('#selectedBranchId').val(id);
             $('#selectedEmailId').val(id);
         });
 
@@ -1918,22 +1917,44 @@
 
         });
 
+        function convertToYMD(dateStr) {
+            const months = {
+                Jan: '01', Feb: '02', Mar: '03', Apr: '04',
+                May: '05', Jun: '06', Jul: '07', Aug: '08',
+                Sep: '09', Oct: '10', Nov: '11', Dec: '12'
+            };
+
+            const [day, mon, year] = dateStr.split('-');
+            return `${year}-${months[mon]}-${day.padStart(2, '0')}`;
+        }
         // PDF Download
         $(document).on('click', '#exportPdf', function(e){
             e.preventDefault();
 
-            const start_date = $("#chartStartDate").val();
-            const end_date = $("#chartEndDate").val();
+            const start_date_raw = $("#chartStartDate").val();
+            const end_date_raw = $("#chartEndDate").val(); 
+
+            const start_date = convertToYMD(start_date_raw);
+            const end_date = convertToYMD(end_date_raw); 
+
             const branch_id = $('#selectedBranchId').val();
-            const role = $('#selectedRoleId').val();
-            const email = $('#selectedEmailId').val();
+            const role = $('#selectedRoleId').val() ? $('#selectedRoleId').val().split(',') : [];
+            const selectedEmails = $('#select_list_email.active-line').map(function () {
+                return $(this).data('value');
+            }).get();
 
-            const url = '{{ route("inventory-details-record_pdf.action") }}?' +
-                `start_date=${start_date}&end_date=${end_date}&branch_id=${branch_id}&role=${role}&email=${email}`;
+            // Check all values right before proceeding
+            console.log("DEBUG EXPORT:");
+            console.log("Branch ID:", branch_id);
+            console.log("Role IDs:", role);
+            console.log("Selected Emails:", selectedEmails);
+            console.log("Start:", start_date, "End:", end_date);
 
-            window.location.href = url;
+            // const url = '{{ route("pdf_session_data.fetch") }}?' +
+            //     `start_date=${start_date}&end_date=${end_date}&branch_id=${branch_id}&role=${role}&email=${email}`;
+    
+            // window.location.href = url;
         });
-        
     });
  </script>
 <!-- Demo bar chart -->
