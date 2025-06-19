@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Cache;
 use DB;
 use Illuminate\Support\Str;
 use App\cacheStorage\CacheManage;
+use Illuminate\Support\Arr;
+use App\Services\LandScapPdfService;
 
 class UserActivityServiceProvider
 {
@@ -948,48 +950,171 @@ class UserActivityServiceProvider
     }
 
     // Get User Email Data
-    public function getFetchUserEmail($request , $id)
+    public function getFetchUserEmail(Request $request , $id = null)
     {
-        $query = $request->input('query');
+        $query= $request->input('query', '');
 
-        // Normalize role_ids
-        $roleIds = $request->input('role_ids', []);
-        if (!is_array($roleIds)) {
-            $roleIds = explode(',', $roleIds);
-        }
-
+        // wrap() always returns a flat array
+        $roleIds = Arr::wrap($request->input('role_ids', []));
         if ($id !== null) {
             $roleIds[] = $id;
         }
-
         $roleIds = array_unique(array_filter($roleIds));
-
         if (empty($roleIds)) {
-            return response()->json([
-                'status' => 400,
-                'message' => 'No valid role IDs provided.',
-                'email_data' => [],
-            ]);
+            return response()->json([ 'status' => 400, 'message' => 'No valid role IDs.', 'email_data' => [] ]);
         }
 
-        $emailQuery = DB::table('users')
-            ->select('users.id', 'users.login_email', 'users.name', 'users.created_at', 'users.updated_at')
-            ->whereIn('users.role', $roleIds);
+        $q = DB::table('users')
+            ->select('role','login_email','name')
+            ->whereNotNull('branch_id')
+            ->whereIn('role', $roleIds);
 
-        if (!empty($query)) {
-            $emailQuery->where('users.login_email', 'like', '%' . $query . '%');
+        if ($query !== '') {
+            $q->where('login_email', 'like', "%{$query}%");
         }
-
-        $email_data = $emailQuery->get();
 
         return response()->json([
-            'status' => 200,
-            'email_data' => $email_data,
+            'status'     => 200,
+            'email_data' => $q->get(),
         ]);
     }
 
-    // Search User Log Session Data
-    public function getFetchLogSessionData($request)
+    /**
+     * Handle PDF Download
+    */
+    public function pdfDownloadSessionData(Request $request, LandScapPdfService $landscappdfService)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        $branch_id = $request->input('branch_id');
+        $role = $request->input('role', []);
+        $email = $request->input('email', []);
+
+        // Initialize month and year arrays
+        $months = [];
+        $years = [];
+    
+        if ($start_date && $end_date) {
+            $start = Carbon::parse($start_date)->startOfMonth();
+            $end = Carbon::parse($end_date)->endOfMonth();
+    
+            while ($start->lte($end)) {
+                $months[] = $start->format('F Y');
+                $start->addMonth();
+            }
+            $years = array_unique(array_map(function($month) {
+                return Carbon::parse($month)->format('Y');
+            }, $months));
+        }
+
+        // Fetch inventory based on date range
+        $query = SessionModel::with(['roles',])->orderBy('user_id', 'asc');
+
+        // Apply date filter
+        if ($start_date && $end_date) {
+            $query->whereBetween('created_at', [
+                Carbon::parse($start_date), 
+                Carbon::parse($end_date)->endOfDay()
+            ]);
+        }
+
+        // Apply additional filters
+        if ($branch_id) {
+            $query->where('branch_id', 'LIKE', '%' . $branch_id . '%');
+        }
+        
+        if ($role) {
+            $query->where('role', 'LIKE', '%' . $role . '%');
+        }
+    
+        if ($email) {
+            $query->where('email', 'LIKE', '%' . $email . '%');
+        }
+
+
+        // Clone the query for calculating totals
+        $totalVatQuery = clone $query;
+        $totalInvVat = $totalVatQuery->sum('vat_percentage');
+    
+        $totalTaxQuery = clone $query;
+        $totalInvTax = $totalTaxQuery->sum('tax_percentage');
+    
+        $totalDiscountQuery = clone $query;
+        $totalInvDiscount = $totalDiscountQuery->sum('discount_percentage');
+    
+        $totalQuantityQuery = clone $query;
+        $totalInvQty = $totalQuantityQuery->sum('quantity');
+        
+        $totalAmount = $query->sum('amount');
+        $totalInv = $query->sum('sub_total');
+
+        // Table Top header
+        $totalPendingQuery = clone $query;
+        $totalInvPending = $totalPendingQuery->whereNull('status')->sum('sub_total');
+    
+        $totalDenyQuery = clone $query;
+        $totalInvDeny = $totalDenyQuery->where('status', '0')->sum('sub_total');
+    
+        $totalJustifyQuery = clone $query;
+        $totalInvJustify = $totalJustifyQuery->where('status', '1')->sum('sub_total');
+
+        $netTotal = $totalInvPending + $totalInvDeny + $totalInvJustify;
+
+        $logSessionData = $query->get();
+        $companyinformations = ForntEndFooter::get();
+        $companylogo = Logodegin::get();
+        // Convert image to base64
+        $imagePath = public_path('image/log/comp-logo.png');
+        $imageData = base64_encode(file_get_contents($imagePath)); 
+
+        $html = view('pdf-download.inventory-pdf', [
+            'logSessionData' => $logSessionData,
+            
+            'totalInv' => $totalInv,
+            'totalInvQty' => $totalInvQty,
+            'totalAmount' => $totalAmount,
+            'totalInvVat' => $totalInvVat,
+            'totalInvTax' => $totalInvTax,
+            'totalInvDiscount' => $totalInvDiscount,
+            'totalInvPending' => $totalInvPending,
+            'totalInvDeny' => $totalInvDeny,
+            'totalInvJustify' => $totalInvJustify,
+            'netTotal' => $netTotal,
+
+            'months' => $months,
+            'years' => $years,
+            'companyinformations' => $companyinformations,
+            'companylogo' => $companylogo,
+            'imageData' => $imageData,
+        ])->render();
+
+        $pdf = $landscappdfService->generatePdf($html);
+
+        return response($pdf, 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="Inventory-Download-'. date('d-M-Y') .'.pdf"');
+    }
+
+    /**
+     * Handle Export Excel Download
+    */
+    public function exportExcelDownloadSessionData(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Handle Export Excel CVS Format Download
+    */
+    public function exportExcelCsvDownloadSessionData(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Handle Print Session Data
+    */
+    public function printSessionData(Request $request)
     {
         //
     }

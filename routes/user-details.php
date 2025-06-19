@@ -17,7 +17,10 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/get-branch-fetch-data', [UserLocationController::class, 'getBranch'])->name('branch.fetch');
             Route::get('/get-fetch-role-data/{id}', [UserLocationController::class, 'fetchRoleData'])->name('role.fetch');
             Route::get('/get-user-fetch-email/{id}', [UserLocationController::class, 'fetchUserEmail'])->name('user_email.fetch');
-            Route::get('/search-log-session-data', [UserLocationController::class, 'fetchLogSessionData'])->name('log_session_data.fetch');
+            Route::get('/session-data-download/export-pdf', [UserLocationController::class, 'pdfDownloadSession'])->name('pdf_session_data.fetch');
+            Route::get('/session-data-download/export-excel', [UserLocationController::class, 'exportExcelDownloadSession'])->name('session-record_excel.action');
+            Route::get('/session-data-download/export-cvs-format', [UserLocationController::class, 'exportExcelCsvDownloadSession'])->name('session-record_cvs_file.action');
+            Route::get('/session-data-download/print', [UserLocationController::class, 'printSession'])->name('session-record.print');
         });
     });
 });

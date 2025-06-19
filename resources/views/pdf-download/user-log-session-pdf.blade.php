@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Inventory PDF - 
+    <title>User Log Session PDF - 
         <?php
             $timezone = date_default_timezone_get();
             ?>
@@ -111,7 +111,7 @@
     <div class="content">
         <div class="row">
             <div class="col-xl-6" style="float:right;">
-                <p style="font-weight: 700; font-size:12px; color:black; text-align:left;">Total Inventory Iteams : {{ $inventories->count()}}.00</p>
+                <p style="font-weight: 700; font-size:12px; color:black; text-align:left;">Total Inventory Iteams : .00</p>
                 <p style="font-weight: 700; font-size:12px; color:black; text-align:left;">
                     Month :
                     @if(count($months) > 0)
@@ -123,10 +123,10 @@
             </div>
             <div class="col-xl-6">
                 <p style="font-weight: 700; font-size:12px; color:black; text-align:left;">
-                    <span>Pending :TK. {{ number_format($totalInvPending, 2) }} </span><br>
-                    <span>Unauthorize :TK. {{ number_format($totalInvDeny, 2) }} </span><br>
-                    <span>Authorize :TK. {{ number_format($totalInvJustify, 2) }} </span><br>
-                    <span>Total : <span style="border-bottom:1px double darkgray;">TK. {{ number_format($netTotal, 2) }}</span> </span>
+                    <span>Pending : </span><br>
+                    <span>Unauthorize : </span><br>
+                    <span>Authorize :</span><br>
+                    <span>Total : <span style="border-bottom:1px double darkgray;"></span> </span>
                 </p>
             </div>
         </div>
@@ -134,20 +134,18 @@
             <thead>
                 <tr>
                     <th id="theadLeftBorder">SN.</th>
-                    <th>INV-ID</th>
-                    <th>Create</th>
-                    <th>Group</th>
-                    <th>Medicine</th>
-                    <th>Dosage</th>
-                    <th>MRP</th>
-                    <th>Units</th>
-                    <th>Qty</th>
-                    <th>Amount</th>
-                    <th>VAT</th>
-                    <th style="text-align:left;">Tax</th>
-                    <th>Discount</th>
-                    <th>Sub Total</th>
-                    <th id="theadRightBorder">Status</th>
+                    <th>User-ID</th>
+                    <th>Branch-ID</th>
+                    <th>Branch-Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>IP</th>
+                    <th>Login-Date</th>
+                    <th>Logout-Date</th>
+                    <th>Curr.login</th>
+                    <th>Login</th>
+                    <th>Logout</th>
+                    <th>Activity</th>
                 </tr>
             </thead>
             <tbody>
@@ -157,30 +155,6 @@
                 @endphp
                 @if( count($inventories) >0 )
                     @foreach($inventories as $item)
-                        @php
-
-                            $statusClass = 'text-dark';
-                            $statusText = 'Pending';
-                            $statusColor = 'color:black;background-color: white;cursor: pointer;';
-                            $statusBg = 'badge rounded-pill bg-gray';
-
-                            if ($item->status === null) {
-                                $statusClass = 'text-dark';
-                                $statusText = 'Pending';
-                                $statusColor = 'color:black;background-color: white;cursor: pointer;';
-                                $statusBg = 'badge rounded-pill bg-gray';
-                            } elseif ($item->status == 0) {
-                                $statusClass = 'text-danger';
-                                $statusText = 'Unauthorize';
-                                $statusColor = 'color:black;background-color: white;cursor: pointer;';
-                                $statusBg = 'badge rounded-pill bg-warn';
-                            } elseif ($item->status == 1) {
-                                $statusClass = 'text-dark';
-                                $statusText = 'Authorize';
-                                $statusColor = 'color:black;background-color: white;cursor: pointer;';
-                                $statusBg = 'badge rounded-pill bg-azure';
-                            }
-                        @endphp
                         <tr>
                             <td style="text-align: center;">{{ $serialNumber++ }}</td>
                             <td style="text-align: center;">{{ $item->inv_id }}</td>
@@ -193,18 +167,12 @@
                             <td style="text-align: center;">{{ number_format($item->quantity, 2) }}</td>
                             <td style="text-align: center;">TK.{{ number_format($item->amount, 2) }} </td>
                             <td style="text-align: center;">{{ number_format($item->vat_percentage, 2) }} %</td>
-                            <td style="text-align: center;">{{ number_format($item->tax_percentage, 2) }} %</td>
-                            <td style="text-align: center;">{{ number_format($item->discount_percentage, 2) }} %</td>
-                            <td style="text-align: center;">TK.{{ number_format($item->sub_total, 2) }} </td>
-                            <td class="{{ $statusClass }}" style="{{ $statusColor }} font-size:12px;text-align:center;">
-                                <span class="{{ $statusBg }}">{{ $statusText }}</span>
-                            </td>
                         </tr>
                     @endforeach
                     @else
                     <tr>
                         <td class="error_data" align="center" text-danger colspan="3">
-                            Inventory Data Not Exists On Server !
+                            Session Data Not Exists On Server !
                         </td>
                     </tr> 
                 @endif

@@ -1698,7 +1698,7 @@
         // Email Search
         $(document).on('keyup', '#searchEmail', function(){
             const query = $(this).val();
-            const selectedId = $('#selectedBranchId').val();
+            const selectedId = $('#selectedRoleId').val();
             const id = Array.isArray(selectedId) ? selectedId : [selectedId];
 
             const emailMenu = $("#emailFetchData");
@@ -1762,7 +1762,7 @@
             }
 
             $('#roleInfo').html(html);
-            
+            $('#selectedRoleId').val(id);
             // Clear and show loader
             const emailMenu = $("#emailFetchData");
             emailMenu.empty().append(`
@@ -1810,6 +1810,7 @@
 
             $('#emailInfo').html(html);
             $('#selectedBranchId').val(id);
+            $('#selectedEmailId').val(id);
         });
 
         // Branch Filter Enable Button
@@ -1915,6 +1916,22 @@
         $(document).on('click', '#branchDownloadBtn,#roleDownloadBtn,#emailDownloadBtn', function(){
             $("#downloadModal").modal('show');
 
+        });
+
+        // PDF Download
+        $(document).on('click', '#exportPdf', function(e){
+            e.preventDefault();
+
+            const start_date = $("#chartStartDate").val();
+            const end_date = $("#chartEndDate").val();
+            const branch_id = $('#selectedBranchId').val();
+            const role = $('#selectedRoleId').val();
+            const email = $('#selectedEmailId').val();
+
+            const url = '{{ route("inventory-details-record_pdf.action") }}?' +
+                `start_date=${start_date}&end_date=${end_date}&branch_id=${branch_id}&role=${role}&email=${email}`;
+
+            window.location.href = url;
         });
         
     });

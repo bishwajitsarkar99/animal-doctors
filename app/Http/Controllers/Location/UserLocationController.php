@@ -64,9 +64,27 @@ class UserLocationController extends Controller
         return $this->userActivityServiceProvider->getFetchUserEmail($request , $id);
     }
 
-    // Search User Log Session Data
-    public function fetchLogSessionData(Request $request)
+    // PDF Download Session Data
+    public function pdfDownloadSession(Request $request)
     {
-        return $this->userActivityServiceProvider->getFetchLogSessionData($request);
+        return $this->userActivityServiceProvider->pdfDownloadSessionData($request);
+    }
+
+    // Export Excel Download Session Data
+    public function exportExcelDownloadSession(Request $request)
+    {
+        return $this->userActivityServiceProvider->exportExcelDownloadSessionData($request);
+    }
+
+    // Export Excel CVS Format Download Session Data
+    public function exportExcelCsvDownloadSession(Request $request)
+    {
+        return $this->userActivityServiceProvider->exportExcelCsvDownloadSessionData($request);
+    }
+
+    // Print Session Data
+    public function printSession(Request $request)
+    {
+        return $this->userActivityServiceProvider->printSessionData($request);
     }
 }

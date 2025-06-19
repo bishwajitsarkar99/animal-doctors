@@ -54,7 +54,7 @@
             <div class="col-xl-3">
               <div class="download-tab">
                 <span class="download-group-btn">
-                  <a class="download-link-btn" href="#">
+                  <a class="download-link-btn" href="#" id="exportPdf">
                     <svg width="30" height="30" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 421 511.605">
                       <path fill="#6DBF39" d="M95.705.014h199.094L421 136.548v317.555c0 31.54-25.961 57.502-57.502 57.502H95.705c-31.55 0-57.502-25.873-57.502-57.502V57.515C38.203 25.886 64.076.014 95.705.014z"/>
                       <path fill="#589B2E" d="M341.028 133.408h-.019L421 188.771v-52.066h-54.357c-9.458-.15-17.998-1.274-25.615-3.297z"/>

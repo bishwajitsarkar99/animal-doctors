@@ -18,11 +18,11 @@
                     <span class="card-label pt-1">
                         <span>{{ $data['label'] }}</span>
                     </span>
-                    <x-dropdown.filter-box filterBox="" filterWidth="24" filterHeight="18" filterStroke="rgb(170, 170, 170)" filterStrokeWidth="2" filterFill="white" />
+                    <x-dropdown.filter-box filterBox="" filterWidth="24" filterHeight="18" filterStroke="rgb(194, 194, 194)" filterStrokeWidth="2" filterFill="white" />
                     <span class="search-box dropstart">
                         <span class="input-search-box">
                             <span class="filex-search-icon-box">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="rgb(170, 170, 170)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="rgb(194, 194, 194)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
                                     <circle cx="11" cy="11" r="8"/>
                                     <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                                 </svg>
@@ -33,6 +33,8 @@
                 </div>
                 <div class="card-body filex-column-card-body">
                     <input type="hidden" id="selectedBranchId" value="">
+                    <input type="hidden" id="selectedRoleId" value="">
+                    <input type="hidden" id="selectedEmailId" value="">
                     <ul class="first-filex-group" id="{{ $data['flexGroupID'] }}"></ul>
                 </div>
                 <div class="card-footer filex-column-card-footer">
