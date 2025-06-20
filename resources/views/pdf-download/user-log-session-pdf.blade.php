@@ -25,7 +25,10 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
+        }
+        p,span{
+          font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;  
         }
         .header {
             text-align: center;
@@ -40,7 +43,7 @@
             bottom: 0;
             width: 100%;
         }
-        table {
+        table,tr,th,td {
             width: 100%;
             border-collapse: collapse;
         }
@@ -92,7 +95,7 @@
                         echo date("h:i:sA");
                         ?>
                         <label for="prepared">
-                            [ User : {{Auth::User()->email}} ]
+                            [ User : {{Auth::User()->login_email}} ]
                         </label><br>
                     </span>
                 </div>
@@ -111,86 +114,131 @@
     <div class="content">
         <div class="row">
             <div class="col-xl-6" style="float:right;">
-                <p style="font-weight: 700; font-size:12px; color:black; text-align:left;">Total Inventory Iteams : .00</p>
+                @php
+                    $firstSession = $logSessionData->first();
+                @endphp
                 <p style="font-weight: 700; font-size:12px; color:black; text-align:left;">
-                    Month :
-                    @if(count($months) > 0)
-                        {{ implode(', ', $months) }}
-                    @else
-                        No months found
-                    @endif
-                </p>
+                    Branch-Type : {{ optional($firstSession->users)->branch_type ?? 'N/A' }}<br>
+                    Branch-ID : {{ $firstSession->branch_id ?? 'N/A' }}<br>
+                    Branch-Name : {{ optional($firstSession->users)->branch_name ?? 'N/A' }}<br>
+                    Branch-Location : {{ optional($firstSession->users)->location ?? 'N/A' }}
+                </p><br>
             </div>
             <div class="col-xl-6">
                 <p style="font-weight: 700; font-size:12px; color:black; text-align:left;">
-                    <span>Pending : </span><br>
-                    <span>Unauthorize : </span><br>
-                    <span>Authorize :</span><br>
-                    <span>Total : <span style="border-bottom:1px double darkgray;"></span> </span>
+                    From : {{ $start_date->format('d M Y') }}<br>
+                    To : {{ $end_date->format('d M Y') }}<br>
                 </p>
             </div>
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <th id="theadLeftBorder">SN.</th>
-                    <th>User-ID</th>
-                    <th>Branch-ID</th>
-                    <th>Branch-Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>IP</th>
-                    <th>Login-Date</th>
-                    <th>Logout-Date</th>
-                    <th>Curr.login</th>
-                    <th>Login</th>
-                    <th>Logout</th>
-                    <th>Activity</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php
-                    <!-- // Initialize serial number -->
-                    $serialNumber = 1;
-                @endphp
-                @if( count($inventories) >0 )
-                    @foreach($inventories as $item)
-                        <tr>
-                            <td style="text-align: center;">{{ $serialNumber++ }}</td>
-                            <td style="text-align: center;">{{ $item->inv_id }}</td>
-                            <td style="text-align: center;">{{ $item->created_at->format('d M Y') }}</td>
-                            <td style="text-align: center;">{{ $item->medicine_groups->group_name }}</td>
-                            <td style="text-align: center;">{{ $item->medicine_names->medicine_name }}</td>
-                            <td style="text-align: center;">{{ $item->medicine_dogs->dosage }}</td>
-                            <td style="text-align: center;">TK.{{ number_format($item->price, 2) }} </td>
-                            <td style="text-align: center;">{{ $item->units->units_name }}</td>
-                            <td style="text-align: center;">{{ number_format($item->quantity, 2) }}</td>
-                            <td style="text-align: center;">TK.{{ number_format($item->amount, 2) }} </td>
-                            <td style="text-align: center;">{{ number_format($item->vat_percentage, 2) }} %</td>
-                        </tr>
-                    @endforeach
-                    @else
+        </div><br>
+        <div class="row">
+            <table style="margin-top:5px;">
+                <thead>
                     <tr>
-                        <td class="error_data" align="center" text-danger colspan="3">
-                            Session Data Not Exists On Server !
-                        </td>
-                    </tr> 
-                @endif
-            </tbody>
-            <tfoot>
-                <tr style="background-color:whitesmoke;">
-                    <th id="th_sort" colspan="8" style="text-align:center;
-                    font-size:13px; padding-left:5px; padding-right:5px; background-color:whitesmoke;">Total </th>
-                    <th id="th_sort" style="text-align:center; font-size:12px; padding-left:5px; padding-right:5px;">{{ number_format($totalInvQty, 2) }}</th>
-                    <th id="th_sort" style="text-align:center; font-size:12px; padding-left:5px; padding-right:5px;">TK.{{ number_format($totalAmount, 2) }} </th>
-                    <th id="th_sort" style="text-align:center; font-size:12px; padding-left:5px; padding-right:5px;">{{ number_format($totalInvVat, 2) }} %</th>
-                    <th id="th_sort" style="text-align:center; font-size:12px; padding-left:4px; padding-right:4px;">{{ number_format($totalInvTax, 2) }} %</th>
-                    <th id="th_sort" style="text-align:center; font-size:12px; padding-left:5px; padding-right:5px;">{{ number_format($totalInvDiscount, 2) }} %</th>
-                    <th id="th_sort" colspan="2" style="text-align:left; font-size:12px; padding-left:5px; padding-right:5px;">TK.{{ number_format($totalInv, 2) }} </th>
-                </tr>
-            </tfoot>
-        </table>
-        
+                        <th id="theadLeftBorder" style="text-align:center;width:30px;">SN.</th>
+                        <th style="text-align:center;width:30px;">ID</th>
+                        <th style="text-align:left;">Email</th>
+                        <th style="text-align:left;">Role</th>
+                        <th style="text-align:left;">IP</th>
+                        <th style="text-align:left;">Login-Date</th>
+                        <th style="text-align:left;">Logout-Date</th>
+                        <th style="text-align:left;">Last-Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        // Initialize serial number
+                        $serialNumber = 1;
+                    @endphp
+                    @if( count($logSessionData) >0 )
+                        @foreach($logSessionData as $item)
+                            <tr>
+                                <td style="text-align: center;">{{ $serialNumber++ }}</td>
+                                <td style="text-align: center;">{{ $item->user_id }}</td>
+                                <td style="text-align: left;">{{ $item->email }}</td>
+                                <td style="text-align: left;">{{ $item->roles->name }}</td>
+                                <td style="text-align: left;width:60px;">{{ $item->ip_address }}</td>
+                                <td style="text-align: left;width:80px;">{{ $item->created_at->format('d M Y h:i:s A') }}</td>
+                                <td style="text-align: left;width:80px;">{{ $item->updated_at->format('d M Y h:i:s A') }}</td>
+                                <td style="text-align: left;width:80px;">{{ $item->last_activity }}</td>
+                            </tr>
+                        @endforeach
+                        @else
+                        <tr>
+                            <td class="error_data" align="center" text-danger colspan="3">
+                                Session Data Not Exists On Server !
+                            </td>
+                        </tr> 
+                    @endif
+                </tbody>
+            </table>
+        </div>
+        <div style="width: 100%; overflow: hidden;margin-top:10px;">
+            <div style="display: inline-block; width: 49%; vertical-align: top;">
+                <table style="width: 100%; border: 1px solid lightgray;">
+                    <thead>
+                        <tr style="background-color:whitesmoke;">
+                            <th colspan="5" style="text-align:center; font-size:13px;">User Summary</th>
+                        </tr>
+                        <tr>
+                            <th style="width: 10%;">SN.</th>
+                            <th style="width: 60%;text-align:left;">Email</th>
+                            <th style="width: 10%;">Login</th>
+                            <th style="width: 10%;">Logout</th>
+                            <th style="width: 10%;">Activity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($userSummaryData as $index => $user)
+                        <tr>
+                            <td style="width: 10%;text-align:center;">{{ $index + 1 }}</td>
+                            <td style="width: 60%;text-align:left;">{{ $user->email }}</td>
+                            <td style="width: 10%;text-align:center;">{{ number_format($user->total_login, 2) }}</td>
+                            <td style="width: 10%;text-align:center;">{{ number_format($user->total_logout, 2) }}</td>
+                            <td style="width: 10%;text-align:center;">{{ number_format($user->total_activity, 2) }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr style="background-color:whitesmoke;font-weight: 700;">
+                            <td colspan="2" style="text-align:center;">Total</td>
+                            <td style="width: 10%;text-align:center;">{{ number_format($userTotalLogin, 2) }}</td>
+                            <td style="width: 10%;text-align:center;">{{ number_format($userTotalLogout, 2) }}</td>
+                            <td style="width: 10%;text-align:center;">{{ number_format($userSubTotalActivity, 2) }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div style="display: inline-block; width: 49%; vertical-align: top;margin-left:15px;">
+                <table style="width: 100%; border: 1px solid lightgray;">
+                    <thead>
+                        <tr style="background-color:whitesmoke;">
+                            <th colspan="5" style="text-align:center; font-size:13px;">Branch Summary</th>
+                        </tr>
+                        <tr>
+                            <th style="width: 10%;">SN.</th>
+                            <th style="width: 30%;text-align:left;">Branch-ID</th>
+                            <th style="width: 20%;">Login-Count</th>
+                            <th style="width: 20%;">Logout-Count</th>
+                            <th style="width: 20%;">Activity-Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $firstSession = $logSessionData->first();
+                        @endphp
+                        <tr>
+                            <td style="width: 10%;text-align:center;">1</td>
+                            <td style="width: 30%;text-align:left;">{{ $firstSession->branch_id ?? 'N/A' }}</td>
+                            <td style="width: 20%;text-align:center;">{{ number_format($totalLogin, 2) }}</td>
+                            <td style="width: 20%;text-align:center;">{{ number_format($totalLogout, 2) }}</td>
+                            <td style="width: 20%;text-align:center;">{{ number_format($totalActivity, 2) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-12">

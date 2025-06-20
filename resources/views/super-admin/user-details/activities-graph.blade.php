@@ -1939,21 +1939,14 @@
 
             const branch_id = $('#selectedBranchId').val();
             const role = $('#selectedRoleId').val() ? $('#selectedRoleId').val().split(',') : [];
-            const selectedEmails = $('#select_list_email.active-line').map(function () {
+            const email = $('#select_list_email.active-line').map(function () {
                 return $(this).data('value');
             }).get();
 
-            // Check all values right before proceeding
-            console.log("DEBUG EXPORT:");
-            console.log("Branch ID:", branch_id);
-            console.log("Role IDs:", role);
-            console.log("Selected Emails:", selectedEmails);
-            console.log("Start:", start_date, "End:", end_date);
-
-            // const url = '{{ route("pdf_session_data.fetch") }}?' +
-            //     `start_date=${start_date}&end_date=${end_date}&branch_id=${branch_id}&role=${role}&email=${email}`;
+            const url = '{{ route("pdf_session_data.fetch") }}?' +
+                `start_date=${start_date}&end_date=${end_date}&branch_id=${branch_id}&role=${role}&email=${email}`;
     
-            // window.location.href = url;
+            window.location.href = url;
         });
     });
  </script>

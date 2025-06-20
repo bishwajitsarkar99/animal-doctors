@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Location;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\LogicBild\UserActivity\UserActivityServiceProvider;
+use App\Services\PdfService;
 
 class UserLocationController extends Controller
 {
@@ -65,9 +66,9 @@ class UserLocationController extends Controller
     }
 
     // PDF Download Session Data
-    public function pdfDownloadSession(Request $request)
+    public function pdfDownloadSession(Request $request, PdfService $pdfService)
     {
-        return $this->userActivityServiceProvider->pdfDownloadSessionData($request);
+        return $this->userActivityServiceProvider->pdfDownloadSessionData($request, $pdfService);
     }
 
     // Export Excel Download Session Data

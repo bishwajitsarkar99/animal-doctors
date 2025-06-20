@@ -13,6 +13,8 @@ use App\Models\SessionModel;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Branch\Branches;
+use App\Models\Forntend\ForntEndFooter;
+use App\Models\Logo\Logodegin;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Log;
@@ -22,7 +24,7 @@ use DB;
 use Illuminate\Support\Str;
 use App\cacheStorage\CacheManage;
 use Illuminate\Support\Arr;
-use App\Services\LandScapPdfService;
+use App\Services\PdfService;
 
 class UserActivityServiceProvider
 {
@@ -982,117 +984,124 @@ class UserActivityServiceProvider
     /**
      * Handle PDF Download
     */
-    public function pdfDownloadSessionData(Request $request, LandScapPdfService $landscappdfService)
+    public function pdfDownloadSessionData(Request $request, PdfService $pdfService)
     {
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
         $branch_id = $request->input('branch_id');
-        $role = $request->input('role', []);
-        $email = $request->input('email', []);
+        $roles = explode(',', $request->input('role', ''));
+        $emails = explode(',', $request->input('email', ''));
 
-        // Initialize month and year arrays
-        $months = [];
-        $years = [];
-    
-        if ($start_date && $end_date) {
-            $start = Carbon::parse($start_date)->startOfMonth();
-            $end = Carbon::parse($end_date)->endOfMonth();
-    
-            while ($start->lte($end)) {
-                $months[] = $start->format('F Y');
-                $start->addMonth();
-            }
-            $years = array_unique(array_map(function($month) {
-                return Carbon::parse($month)->format('Y');
-            }, $months));
-        }
-
-        // Fetch inventory based on date range
-        $query = SessionModel::with(['roles',])->orderBy('user_id', 'asc');
-
-        // Apply date filter
+        $query = SessionModel::with(['roles', 'users'])
+            ->select(
+                DB::raw("COUNT(DISTINCT user_id) as total_users"),
+                DB::raw("SUM(CASE WHEN payload = 'login' THEN 1 ELSE 0 END) as total_current_login"),
+                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
+                DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
+                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
+            );
+        
+        // Filter by date
         if ($start_date && $end_date) {
             $query->whereBetween('created_at', [
-                Carbon::parse($start_date), 
+                Carbon::parse($start_date)->startOfDay(),
                 Carbon::parse($end_date)->endOfDay()
             ]);
         }
 
-        // Apply additional filters
+        // Filter by branch_id
         if ($branch_id) {
-            $query->where('branch_id', 'LIKE', '%' . $branch_id . '%');
+            $query->where('branch_id', $branch_id);
         }
+
+        // Filter by roles (if applicable)
+        if (!empty($roles) && $roles[0] !== '') {
+            $query->whereIn('role', $roles);
+        }
+
+        // Filter by emails (if applicable)
+        if (!empty($emails) && $emails[0] !== '') {
+            $query->whereIn('email', $emails);
+        }
+
+        // Get branch summary data
+        $summary = $query->first();
+
+        $login = $summary->total_login ?? 0;
+        $logout = $summary->total_logout ?? 0;
+        $activity = $summary->total_activity ?? 0;
+
+        // Fetch session log data for table (you can apply the same filters again if needed)
+        $logSessionData = SessionModel::with(['roles', 'users'])
+        ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
+            $q->whereBetween('created_at', [
+                Carbon::parse($start_date)->startOfDay(),
+                Carbon::parse($end_date)->endOfDay()
+            ]);
+        })
+        ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
+        ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
+        ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
+        ->orderBy('user_id')
+        ->get();
         
-        if ($role) {
-            $query->where('role', 'LIKE', '%' . $role . '%');
-        }
-    
-        if ($email) {
-            $query->where('email', 'LIKE', '%' . $email . '%');
-        }
+        // 3. User-wise summary
+        $userSummaryData = SessionModel::select(
+            'email',
+            DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
+            DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
+            DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
+        )
+        ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
+            $q->whereBetween('created_at', [
+                Carbon::parse($start_date)->startOfDay(),
+                Carbon::parse($end_date)->endOfDay()
+            ]);
+        })
+        ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
+        ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
+        ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
+        ->groupBy('email')
+        ->orderBy('email')
+        ->get();
 
+        // Get user summary data
+        $userSummary = $query->first();
 
-        // Clone the query for calculating totals
-        $totalVatQuery = clone $query;
-        $totalInvVat = $totalVatQuery->sum('vat_percentage');
-    
-        $totalTaxQuery = clone $query;
-        $totalInvTax = $totalTaxQuery->sum('tax_percentage');
-    
-        $totalDiscountQuery = clone $query;
-        $totalInvDiscount = $totalDiscountQuery->sum('discount_percentage');
-    
-        $totalQuantityQuery = clone $query;
-        $totalInvQty = $totalQuantityQuery->sum('quantity');
-        
-        $totalAmount = $query->sum('amount');
-        $totalInv = $query->sum('sub_total');
+        $login = $userSummary->total_login ?? 0;
+        $logout = $userSummary->total_logout ?? 0;
+        $logout = $userSummary->total_activity ?? 0;
 
-        // Table Top header
-        $totalPendingQuery = clone $query;
-        $totalInvPending = $totalPendingQuery->whereNull('status')->sum('sub_total');
-    
-        $totalDenyQuery = clone $query;
-        $totalInvDeny = $totalDenyQuery->where('status', '0')->sum('sub_total');
-    
-        $totalJustifyQuery = clone $query;
-        $totalInvJustify = $totalJustifyQuery->where('status', '1')->sum('sub_total');
-
-        $netTotal = $totalInvPending + $totalInvDeny + $totalInvJustify;
-
-        $logSessionData = $query->get();
+        // Load additional info
         $companyinformations = ForntEndFooter::get();
         $companylogo = Logodegin::get();
-        // Convert image to base64
         $imagePath = public_path('image/log/comp-logo.png');
         $imageData = base64_encode(file_get_contents($imagePath)); 
 
-        $html = view('pdf-download.inventory-pdf', [
+        // Render the PDF
+        $html = view('pdf-download.user-log-session-pdf', [
             'logSessionData' => $logSessionData,
-            
-            'totalInv' => $totalInv,
-            'totalInvQty' => $totalInvQty,
-            'totalAmount' => $totalAmount,
-            'totalInvVat' => $totalInvVat,
-            'totalInvTax' => $totalInvTax,
-            'totalInvDiscount' => $totalInvDiscount,
-            'totalInvPending' => $totalInvPending,
-            'totalInvDeny' => $totalInvDeny,
-            'totalInvJustify' => $totalInvJustify,
-            'netTotal' => $netTotal,
-
-            'months' => $months,
-            'years' => $years,
+            'userSummaryData' => $userSummaryData,
+            'userTotalLogin' => $userSummary->total_login,
+            'userTotalLogout' => $userSummary->total_logout,
+            'userSubTotalActivity' => $userSummary->total_activity,
+            'totalCurrentLogin' => $summary->total_current_login,
+            'totalLogin' => $summary->total_login,
+            'totalLogout' => $summary->total_logout,
+            'totalActivity' => $summary->total_activity,
+            'total_users' => $summary->total_users,
+            'start_date' => Carbon::parse($start_date),
+            'end_date' => Carbon::parse($end_date),
             'companyinformations' => $companyinformations,
             'companylogo' => $companylogo,
             'imageData' => $imageData,
         ])->render();
 
-        $pdf = $landscappdfService->generatePdf($html);
+        $pdf = $pdfService->generatePdf($html);
 
         return response($pdf, 200)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="Inventory-Download-'. date('d-M-Y') .'.pdf"');
+            ->header('Content-Disposition', 'attachment; filename="Log-Session-Download-'. date('d-M-Y') .'.pdf"');
     }
 
     /**
