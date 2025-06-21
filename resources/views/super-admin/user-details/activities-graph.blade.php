@@ -1955,7 +1955,26 @@
             window.location.href = url;
         });
         // Excel Download
-        
+        $(document).on('click', '#exportExcel', function(e){
+            e.preventDefault();
+
+            const start_date_raw = $("#chartStartDate").val();
+            const end_date_raw = $("#chartEndDate").val(); 
+
+            const start_date = convertToYMD(start_date_raw);
+            const end_date = convertToYMD(end_date_raw); 
+
+            const branch_id = $('#selectedBranchId').val();
+            const role = $('#selectedRoleId').val() ? $('#selectedRoleId').val().split(',') : [];
+            const email = $('#select_list_email.active-line').map(function () {
+                return $(this).data('value');
+            }).get();
+
+            const url = '{{ route("session-record_excel.action") }}?' +
+                `start_date=${start_date}&end_date=${end_date}&branch_id=${branch_id}&role=${role}&email=${email}`;
+    
+            window.location.href = url;
+        });
     });
  </script>
 <!-- Demo bar chart -->

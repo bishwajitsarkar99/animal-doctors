@@ -1129,8 +1129,102 @@ class UserActivityServiceProvider
     */
     public function exportExcelDownloadSessionData(Request $request)
     {
-        //
+        $auth_user = Auth::User()->name;
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        $branch_id = $request->input('branch_id');
+        $roles = explode(',', $request->input('role', ''));
+        $emails = explode(',', $request->input('email', ''));
+
+        $query = SessionModel::with(['roles', 'users'])
+            ->select(
+                DB::raw("COUNT(DISTINCT user_id) as total_users"),
+                DB::raw("SUM(CASE WHEN payload = 'login' THEN 1 ELSE 0 END) as total_login"),
+                DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
+                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
+            );
+
+        if ($start_date && $end_date) {
+            $query->whereBetween('created_at', [
+                Carbon::parse($start_date)->startOfDay(),
+                Carbon::parse($end_date)->endOfDay()
+            ]);
+        }
+
+        if ($branch_id) {
+            $query->where('branch_id', $branch_id);
+        }
+
+        if (!empty($roles) && $roles[0] !== '') {
+            $query->whereIn('role', $roles);
+        }
+
+        if (!empty($emails) && $emails[0] !== '') {
+            $query->whereIn('email', $emails);
+        }
+
+        $summary = $query->first();
+
+        $totalLogin = $summary->total_login ?? 0;
+        $totalLogout = $summary->total_logout ?? 0;
+        $totalActivity = $summary->total_activity ?? 0;
+
+        $logSessionData = SessionModel::with(['roles', 'users'])
+            ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
+                $q->whereBetween('created_at', [
+                    Carbon::parse($start_date)->startOfDay(),
+                    Carbon::parse($end_date)->endOfDay()
+                ]);
+            })
+            ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
+            ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
+            ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
+            ->orderBy('user_id')
+            ->get();
+
+        $userSummaryData = SessionModel::select(
+                'email',
+                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
+                DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
+                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
+            )
+            ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
+                $q->whereBetween('created_at', [
+                    Carbon::parse($start_date)->startOfDay(),
+                    Carbon::parse($end_date)->endOfDay()
+                ]);
+            })
+            ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
+            ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
+            ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
+            ->groupBy('email')
+            ->orderBy('email')
+            ->get();
+
+        $userTotalLogin = $userSummaryData->sum('total_login');
+        $userTotalLogout = $userSummaryData->sum('total_logout');
+        $userSubTotalActivity = $userSummaryData->sum('total_activity');
+
+        $companyinformations = ForntEndFooter::get();
+        $companylogo = Logodegin::get();
+        $imagePath = public_path('image/log/comp-logo.png');
+        $imageData = base64_encode(file_get_contents($imagePath));
+
+        $headers = [
+            'Content-Type' => 'application/vnd.ms-excel; charset=utf-8',
+            'Content-Disposition' => 'attachment; filename=log_session_export-' . date('d-M-Y') . '.xls',
+        ];
+
+        $content = "\xEF\xBB\xBF"; // UTF-8 BOM
+        $content .= view('exports-data.log_session_excel_format', compact(
+            'start_date', 'end_date', 'summary', 'logSessionData', 'userSummaryData',
+            'userTotalLogin', 'userTotalLogout', 'userSubTotalActivity',
+            'companyinformations', 'companylogo', 'imageData', 'auth_user'
+        ))->render();
+
+        return Response::make($content, 200, $headers);
     }
+
 
     /**
      * Handle Export Excel CVS Format Download
