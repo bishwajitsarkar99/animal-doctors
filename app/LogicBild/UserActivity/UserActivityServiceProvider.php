@@ -25,6 +25,7 @@ use Illuminate\Support\Str;
 use App\cacheStorage\CacheManage;
 use Illuminate\Support\Arr;
 use App\Services\PdfService;
+use Illuminate\Support\Facades\Response;
 
 class UserActivityServiceProvider
 {
@@ -1078,6 +1079,24 @@ class UserActivityServiceProvider
         $imagePath = public_path('image/log/comp-logo.png');
         $imageData = base64_encode(file_get_contents($imagePath)); 
 
+        // 🧪 Check if there's no session data — use fallback PDF view
+        if ($logSessionData->isEmpty()) {
+            $html = view('pdf-download.empty-session', [
+                'message' => 'No session data found because the user has not logged in during the selected period.',
+                'start_date' => Carbon::parse($start_date),
+                'end_date' => Carbon::parse($end_date),
+                'companyinformations' => $companyinformations,
+                'companylogo' => $companylogo,
+                'imageData' => $imageData,
+            ])->render();
+
+            $pdf = $pdfService->generatePdf($html);
+
+            return response($pdf, 200)
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'attachment; filename="Log-Session-Download-'. date('d-M-Y') .'.pdf"');
+        }
+
         // Render the PDF
         $html = view('pdf-download.user-log-session-pdf', [
             'logSessionData' => $logSessionData,
@@ -1102,6 +1121,7 @@ class UserActivityServiceProvider
         return response($pdf, 200)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'attachment; filename="Log-Session-Download-'. date('d-M-Y') .'.pdf"');
+        
     }
 
     /**

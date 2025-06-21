@@ -239,6 +239,9 @@ li{
     overflow: hidden;
     font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
 }
+a.download-link-btn{
+    cursor: pointer;
+}
 ul#downloadInfo {
     padding: 0;
     font-size: 12px;

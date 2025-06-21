@@ -54,7 +54,7 @@
             <div class="col-xl-3">
               <div class="download-tab">
                 <span class="download-group-btn">
-                  <a class="download-link-btn" href="#" id="exportPdf">
+                  <a class="download-link-btn" id="exportPdf">
                     <svg width="30" height="30" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 421 511.605">
                       <path fill="#6DBF39" d="M95.705.014h199.094L421 136.548v317.555c0 31.54-25.961 57.502-57.502 57.502H95.705c-31.55 0-57.502-25.873-57.502-57.502V57.515C38.203 25.886 64.076.014 95.705.014z"/>
                       <path fill="#589B2E" d="M341.028 133.408h-.019L421 188.771v-52.066h-54.357c-9.458-.15-17.998-1.274-25.615-3.297z"/>
@@ -71,7 +71,7 @@
             <div class="col-xl-3">
               <div class="download-tab">
                 <span class="download-group-btn">
-                  <a class="download-link-btn" href="#">
+                  <a class="download-link-btn">
                     <svg width="30" height="30" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
                       <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
                         <path d="M 80.959 78.79 H 19.13 c -1.588 0 -2.876 -1.288 -2.876 -2.876 V 14.085 c 0 -1.588 1.288 -2.876 2.876 -2.876 h 61.829 c 1.588 0 2.876 1.288 2.876 2.876 v 61.829 C 83.835 77.503 82.547 78.79 80.959 78.79 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
@@ -97,7 +97,7 @@
             <div class="col-xl-3">
               <div class="download-tab">
                 <span class="download-group-btn">
-                  <a class="download-link-btn" href="#">
+                  <a class="download-link-btn">
                     <svg width="30" height="30" viewBox="0 0 64 64">
                       <!-- File Background -->
                       <rect x="8" y="4" width="48" height="56" rx="6" ry="6" fill="#f4f4f4" stroke="#ccc" stroke-width="1.5"/>
@@ -120,7 +120,7 @@
             <div class="col-xl-3">
               <div class="download-tab">
                 <span class="download-group-btn">
-                  <a class="download-link-btn" href="#">
+                  <a class="download-link-btn">
                     <svg width="30" height="30" viewBox="0 0 64 64">
                       <!-- Printer body -->
                       <rect x="12" y="20" width="40" height="26" rx="4" ry="4" fill="#555"/>

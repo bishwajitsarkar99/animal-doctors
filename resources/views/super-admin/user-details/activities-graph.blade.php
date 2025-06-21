@@ -1491,11 +1491,6 @@
                 }
             });
         }
-        // Active Column Row
-        $(document).on('click', '#select_list_branch', function(){
-            $(this).addClass("active-line").siblings().removeClass("active-line");
-            $("#searchBranch").val("");
-        });
         // Branch Search
         $(document).on('keyup', '#searchBranch', function(){
             var query = $(this).val();
@@ -1608,6 +1603,15 @@
         });
         // Event listener for only branch=>role active-line
         $(document).on('click', '#select_list_branch', function() {
+            const isActive = $(this).hasClass("active-line");
+            $("#searchBranch").val("");
+            if (isActive) {
+                $(this).removeClass("active-line");
+                return;
+            }
+            
+            $(this).addClass("active-line").siblings().removeClass("active-line");
+
             const id = $(this).data("value"); 
             const branchName = $(this).clone().children().remove().end().text().trim();
             $('#selectedBranchId').val(id);
@@ -1624,10 +1628,12 @@
             $(".role-loader").removeClass('display_none');
             $("#select_list_role").addClass('add_display_none');
             setTimeout(() => {
-               $(".role-loader").addClass('display_none'); 
-               $("#select_list_role").removeClass('add_display_none');
+                $(".role-loader").addClass('display_none'); 
+                $("#select_list_role").removeClass('add_display_none');
+                if (id.length > 0) {
+                    roleInitFetch(id);
+                }
             }, 1000);
-            roleInitFetch(id);
         });
 
         // Email Fetch Data
@@ -1916,7 +1922,7 @@
             $("#downloadModal").modal('show');
 
         });
-
+        // Change to data format
         function convertToYMD(dateStr) {
             const months = {
                 Jan: '01', Feb: '02', Mar: '03', Apr: '04',
@@ -1948,6 +1954,8 @@
     
             window.location.href = url;
         });
+        // Excel Download
+        
     });
  </script>
 <!-- Demo bar chart -->

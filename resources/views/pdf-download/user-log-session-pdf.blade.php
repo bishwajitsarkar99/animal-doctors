@@ -39,8 +39,8 @@
         }
         .footer {
             text-align: center;
-            position: fixed;
-            bottom: 0;
+            /* position: fixed;
+            bottom: 0; */
             width: 100%;
         }
         table,tr,th,td {
@@ -80,12 +80,12 @@
 <body>
     <div class="header">
         <div class="row">
-            <div style="background-color:white;margin-top:1px;border-top: 1px solid lightgray;border-bottom: 1px solid lightgray;padding-bottom:15px;">
+            <div style="background-color:white;margin-top:1px;border-top: 1px solid lightgray;border-bottom: 1px solid lightgray;padding-bottom:0px;">
                 <div class="col-6">
                     <span style="float:inline-start;">
-                        <img style="width:80px;height:85px;padding:0px;border:1px solid lightgray;" src="data:image/log/png;base64,{{ $imageData }}" alt="company-logo" width="100">
+                        <img style="width:70px;height:55px;padding:0px;border:1px solid lightgray;" src="data:image/log/png;base64,{{ $imageData }}" alt="company-logo" width="100">
                     </span>
-                    <span style="color:black; font-size:12px; font-wight:700px; float:right; margin-top:30px; padding-right:5px">
+                    <span style="color:black; font-size:11px; font-wight:700px; float:right; margin-top:10px; padding-right:5px">
                         Download :<?php
                         $timezone = date_default_timezone_get();
                         ?>
@@ -93,7 +93,7 @@
                         date_default_timezone_set('Asia/Dhaka');
                         echo date('d l M Y') . " || ";
                         echo date("h:i:sA");
-                        ?>
+                        ?><br>
                         <label for="prepared">
                             [ User : {{Auth::User()->login_email}} ]
                         </label><br>
@@ -101,8 +101,8 @@
                 </div>
                 <div class="col-6">
                     @foreach($companyinformations as $infos)
-                        <p style="color:black; font-size:12px; text-align:left;margin-left:100px;margin-top:20px;">
-                            <span style="color:black; font-size:20px; font-wight:600px;">{{$infos->company_name}}</span><br>
+                        <p style="color:black; font-size:12px; text-align:left;margin-left:100px;margin-top:10px;">
+                            <span style="color:black; font-size:17px; font-wight:600px;">{{$infos->company_name}}</span><br>
                             <span style="color:black; font-size:12px;">Address :{{$infos->company_address}}</span><br>
                         </p>
                     @endforeach
@@ -117,7 +117,7 @@
                 @php
                     $firstSession = $logSessionData->first();
                 @endphp
-                <p style="font-weight: 700; font-size:12px; color:black; text-align:left;">
+                <p style="font-weight:700; font-size:11px; color:black; text-align:left;">
                     Branch-Type : {{ optional($firstSession->users)->branch_type ?? 'N/A' }}<br>
                     Branch-ID : {{ $firstSession->branch_id ?? 'N/A' }}<br>
                     Branch-Name : {{ optional($firstSession->users)->branch_name ?? 'N/A' }}<br>
@@ -125,7 +125,7 @@
                 </p><br>
             </div>
             <div class="col-xl-6">
-                <p style="font-weight: 700; font-size:12px; color:black; text-align:left;">
+                <p style="font-weight:700; font-size:11px; color:black; text-align:left;">
                     From : {{ $start_date->format('d M Y') }}<br>
                     To : {{ $end_date->format('d M Y') }}<br>
                 </p>
@@ -174,11 +174,11 @@
             </table>
         </div>
         <div style="width: 100%; overflow: hidden;margin-top:10px;">
-            <div style="display: inline-block; width: 49%; vertical-align: top;">
+            <div style="display: inline-block; width: 40%; vertical-align: top;">
                 <table style="width: 100%; border: 1px solid lightgray;">
                     <thead>
-                        <tr style="background-color:whitesmoke;">
-                            <th colspan="5" style="text-align:center; font-size:13px;">User Summary</th>
+                        <tr style="font-weight: 700;font-size:12px;">
+                            <td colspan="5" style="text-align:center;">User Summary</td>
                         </tr>
                         <tr>
                             <th style="width: 10%;">SN.</th>
@@ -200,7 +200,7 @@
                         @endforeach
                     </tbody>
                     <tfoot>
-                        <tr style="background-color:whitesmoke;font-weight: 700;">
+                        <tr style="background-color:whitesmoke;font-weight:700;">
                             <td colspan="2" style="text-align:center;">Total</td>
                             <td style="width: 10%;text-align:center;">{{ number_format($userTotalLogin, 2) }}</td>
                             <td style="width: 10%;text-align:center;">{{ number_format($userTotalLogout, 2) }}</td>
@@ -210,25 +210,25 @@
                 </table>
             </div>
 
-            <div style="display: inline-block; width: 49%; vertical-align: top;margin-left:15px;">
+            <div style="display: inline-block; width: 40%; vertical-align: top;margin-left:136px">
                 <table style="width: 100%; border: 1px solid lightgray;">
                     <thead>
-                        <tr style="background-color:whitesmoke;">
-                            <th colspan="5" style="text-align:center; font-size:13px;">Branch Summary</th>
+                        <tr style="font-weight: 700;font-size:12px;">
+                            <td colspan="5" style="text-align:center;">Branch Summary</td>
                         </tr>
-                        <tr>
+                        <tr style="font-weight: 700;">
                             <th style="width: 10%;">SN.</th>
                             <th style="width: 30%;text-align:left;">Branch-ID</th>
-                            <th style="width: 20%;">Login-Count</th>
-                            <th style="width: 20%;">Logout-Count</th>
-                            <th style="width: 20%;">Activity-Count</th>
+                            <th style="width: 20%;">Login</th>
+                            <th style="width: 20%;">Logout</th>
+                            <th style="width: 20%;">Activity</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
                             $firstSession = $logSessionData->first();
                         @endphp
-                        <tr>
+                        <tr style="font-weight: 600;">
                             <td style="width: 10%;text-align:center;">1</td>
                             <td style="width: 30%;text-align:left;">{{ $firstSession->branch_id ?? 'N/A' }}</td>
                             <td style="width: 20%;text-align:center;">{{ number_format($totalLogin, 2) }}</td>
@@ -243,18 +243,18 @@
     <div class="row">
         <div class="col-12">
             <div style="background-color: white; color:black; text-align:left; font-size:12px;font-weight:700;">
-                <p style="display: inline-block; margin-top:40px;">
+                <p style="display: inline-block; margin-top:50px;">
                     <span style="text-align: center;">
                         <label for="prepared">
                             Prepared by ({{Auth::User()->name}})
                         </label>
                     </span>
-                    <span style="text-align: center; margin-left:300px;">
+                    <span style="text-align: center; margin-left:150px;">
                         <label for="reference">
                             Reference by
                         </label>
                     </span>
-                    <span style="text-align: center; margin-left:380px;">
+                    <span style="text-align: center; margin-left:205px;">
                         <label for="prepared">
                             Authorized by
                         </label>
@@ -262,7 +262,7 @@
                 </p>
             </div>
         </div>
-    </div>                        
+    </div>                    
     <div class="footer" style="border-top: 1px double lightgray;">
         @if(count($companyinformations) > 0)
             @foreach($companyinformations as $infos)
