@@ -1129,7 +1129,9 @@ class UserActivityServiceProvider
     */
     public function exportExcelDownloadSessionData(Request $request)
     {
-        $auth_user = Auth::User()->name;
+        $auth_user = Auth::User();
+        $auth_user_name = $auth_user->name;
+        $auth_user_email = $auth_user->login_email;
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
         $branch_id = $request->input('branch_id');
@@ -1139,7 +1141,7 @@ class UserActivityServiceProvider
         $query = SessionModel::with(['roles', 'users'])
             ->select(
                 DB::raw("COUNT(DISTINCT user_id) as total_users"),
-                DB::raw("SUM(CASE WHEN payload = 'login' THEN 1 ELSE 0 END) as total_login"),
+                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
                 DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
                 DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
             );
@@ -1209,17 +1211,18 @@ class UserActivityServiceProvider
         $companylogo = Logodegin::get();
         $imagePath = public_path('image/log/comp-logo.png');
         $imageData = base64_encode(file_get_contents($imagePath));
-
+        
+        $formattedDate = now('Asia/Dhaka')->format('d-M-Y');
         $headers = [
             'Content-Type' => 'application/vnd.ms-excel; charset=utf-8',
-            'Content-Disposition' => 'attachment; filename=log_session_export-' . date('d-M-Y') . '.xls',
+            'Content-Disposition' => 'attachment; filename=log_session_export-' . $formattedDate . '.xls',
         ];
 
         $content = "\xEF\xBB\xBF"; // UTF-8 BOM
         $content .= view('exports-data.log_session_excel_format', compact(
             'start_date', 'end_date', 'summary', 'logSessionData', 'userSummaryData',
             'userTotalLogin', 'userTotalLogout', 'userSubTotalActivity',
-            'companyinformations', 'companylogo', 'imageData', 'auth_user'
+            'companyinformations', 'companylogo', 'imageData', 'auth_user_name', 'auth_user_email'
         ))->render();
 
         return Response::make($content, 200, $headers);
@@ -1231,7 +1234,207 @@ class UserActivityServiceProvider
     */
     public function exportExcelCsvDownloadSessionData(Request $request)
     {
-        //
+        $auth_user = Auth::User();
+        $auth_user_name = $auth_user->name;
+        $auth_user_email = $auth_user->login_email;
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        $branch_id = $request->input('branch_id');
+        $roles = explode(',', $request->input('role', ''));
+        $emails = explode(',', $request->input('email', ''));
+
+        // Queries (same as yours)
+        $query = SessionModel::with(['roles', 'users'])
+            ->select(
+                DB::raw("COUNT(DISTINCT user_id) as total_users"),
+                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
+                DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
+                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
+            );
+
+        if ($start_date && $end_date) {
+            $query->whereBetween('created_at', [
+                Carbon::parse($start_date)->startOfDay(),
+                Carbon::parse($end_date)->endOfDay()
+            ]);
+        }
+
+        if ($branch_id) {
+            $query->where('branch_id', $branch_id);
+        }
+
+        if (!empty($roles) && $roles[0] !== '') {
+            $query->whereIn('role', $roles);
+        }
+
+        if (!empty($emails) && $emails[0] !== '') {
+            $query->whereIn('email', $emails);
+        }
+
+        $summary = $query->first();
+
+        $totalLogin = $summary->total_login ?? 0;
+        $totalLogout = $summary->total_logout ?? 0;
+        $totalActivity = $summary->total_activity ?? 0;
+
+        $logSessionData = SessionModel::with(['roles', 'users'])
+        ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
+            $q->whereBetween('created_at', [
+                Carbon::parse($start_date)->startOfDay(),
+                Carbon::parse($end_date)->endOfDay()
+            ]);
+        })
+        ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
+        ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
+        ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
+        ->orderBy('user_id')
+        ->get();
+
+        $userSummaryData = SessionModel::select(
+            'email',
+            DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
+            DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
+            DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
+        )
+        ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
+            $q->whereBetween('created_at', [
+                Carbon::parse($start_date)->startOfDay(),
+                Carbon::parse($end_date)->endOfDay()
+            ]);
+        })
+        ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
+        ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
+        ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
+        ->groupBy('email')
+        ->orderBy('email')
+        ->get();
+
+        $userTotalLogin = $userSummaryData->sum('total_login');
+        $userTotalLogout = $userSummaryData->sum('total_logout');
+        $userSubTotalActivity = $userSummaryData->sum('total_activity');
+
+        $companyinformations = ForntEndFooter::first(); // Get one row (logo, address, etc.)
+        $companylogo = Logodegin::first();              // Just use logo URL or name
+
+        // Create CSV in memory
+        $handle = fopen('php://temp', 'w');
+        fprintf($handle, chr(0xEF).chr(0xBB).chr(0xBF)); // UTF-8 BOM for Excel
+
+        // 1️⃣ Company Info Section
+        $timezone = date_default_timezone_get();
+        date_default_timezone_set('Asia/Dhaka');
+        $currentDate = date('d l M Y') . " || ";
+        $currentTime = date('h:i:s A');
+        
+        fputcsv($handle, [$companyinformations->company_name ?? 'N/A']);
+        fputcsv($handle, ['Address :', $companyinformations->company_address ?? 'N/A']);
+        fputcsv($handle, ['User Log Session Data Download :', "$currentDate $currentTime", "[ User : $auth_user_email ]"]);
+        fputcsv($handle, []); // Empty line
+
+        // 2️⃣ Filter Info Section
+        $firstSession = $logSessionData->first();
+        fputcsv($handle, ['', 'From :', "\t" .Carbon::parse($start_date)->format('d-M-Y'), '', '', 'Branch Type :', optional($firstSession->users)->branch_type ?? 'N/A']);
+        fputcsv($handle, ['', 'To :', "\t" .Carbon::parse($end_date)->format('d-M-Y'), '', '', 'Branch ID :', $branch_id ?? 'All']);
+        fputcsv($handle, ['', '', '', '', '', 'Branch Name :', optional($firstSession->users)->branch_name ?? 'N/A']);
+        fputcsv($handle, ['', '', '', '', '', 'Branch Location :', optional($firstSession->users)->location ?? 'N/A']);
+        fputcsv($handle, []); // Empty line
+
+        // 3️⃣ Session Data Table Header
+        fputcsv($handle, [
+            'SN.', 'User ID', 'Email', 'Role',
+            'IP Address', 'Login Time', 'Logout Time', 'Last Activity'
+        ]);
+
+        // 4️⃣ Session Data Rows
+        foreach ($logSessionData as $index => $session) {
+            fputcsv($handle, [
+                $index + 1,
+                $session->user_id,
+                $session->email,
+                optional($session->roles)->name ?? 'N/A',
+                $session->ip_address,
+                "\t" .Carbon::parse($session->created_at)->format('d M Y h:i:sA'),
+                "\t" .Carbon::parse($session->updated_at)->format('d M Y h:i:sA'),
+                "\t" . $session->last_activity
+            ]);
+        }
+
+        fputcsv($handle, []); // Empty line
+
+        // 5️⃣ User Summary Table
+        fputcsv($handle, ['', '', '', 'User Summary', '', '']);
+        fputcsv($handle, ['', 'SN.', 'Email', 'Login', 'Logout', 'Activity']);
+        foreach ($userSummaryData as $index => $userSummary) {
+            fputcsv($handle, [
+                '',
+                $index + 1,
+                $userSummary->email,
+                "\t" .number_format($userSummary->total_login, 2),
+                "\t" .number_format($userSummary->total_logout, 2),
+                "\t" .number_format($userSummary->total_activity, 2)
+            ]);
+        }
+
+        // 6️⃣ Footer Totals
+        fputcsv($handle, ['', '', 'Total', "\t" .number_format($userTotalLogin, 2), "\t" .number_format($userTotalLogout, 2), "\t" .number_format($userSubTotalActivity, 2)]);
+
+        fputcsv($handle, []); // Empty line
+
+        // 5️⃣ Branch Summary Table
+        $index = 1;
+        fputcsv($handle, ['','', '', 'Branch Summary', '', '']);
+        fputcsv($handle, ['', 'SN.', 'Branch ID', 'Login', 'Logout', 'Activity']);
+        fputcsv($handle, [
+            '',
+            $index,
+            $branch_id ?? 'All',
+            "\t" .number_format($summary->total_login, 2),
+            "\t" .number_format($summary->total_logout, 2),
+            "\t" .number_format($summary->total_activity, 2)
+        ]);
+
+        // Page Footer Part
+        fputcsv($handle, []); // Empty line
+        fputcsv($handle, []); // Empty line
+        fputcsv($handle, []); // Empty line
+
+        fputcsv($handle, ['', 'Prepared by ' . ( $auth_user_name ), '', 'Reference by', '', 'Authorized by', '', '']);
+
+        fputcsv($handle, []); // Empty line
+
+        fputcsv($handle, [
+            '', '',
+            'Email: ' . ($companyinformations->email ?? 'N/A'),
+            'Facebook: ' . ($companyinformations->facebook_address ?? 'N/A'),
+            'LinkedIn: ' . ($companyinformations->linkedin ?? 'N/A'),
+            '', '', '', '', ''
+        ]);
+
+        fputcsv($handle, [
+            '', '', '',
+            'Contact: ' . ($companyinformations->contract_number_one ?? 'N/A'),
+            "\t" . ($companyinformations->contract_number_two ?? 'N/A'),
+            '', '', '', '', ''
+        ]);
+
+        fputcsv($handle, [
+            '', '', '',
+            'Hotline: ' . ($companyinformations->hot_number ?? 'N/A'),
+            '', '', '', '', '', ''
+        ]);
+
+        // Finalize file
+        rewind($handle);
+        $csvContent = stream_get_contents($handle);
+        fclose($handle);
+
+        // Download filename and headers
+        $filename = 'log_session_export-' . now('Asia/Dhaka')->format('d-M-Y') . '.csv';
+
+        return response($csvContent, 200, [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"$filename\"",
+        ]);
     }
 
     /**

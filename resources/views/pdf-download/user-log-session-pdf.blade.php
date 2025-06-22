@@ -48,7 +48,7 @@
             border-collapse: collapse;
         }
         th{
-            background-color: whitesmoke;
+            background-color: rgb(239, 255, 255);
             border-top: 1px solid lightgray;
             border-bottom: 1px solid lightgray;
             padding: 2px;
@@ -64,7 +64,7 @@
         }
         tr{
             border: 1px solid lightgray;
-            padding: 2px;
+            padding: 1px;
             font-size:12px;
             color:black;
             width: 100%;
@@ -80,7 +80,7 @@
 <body>
     <div class="header">
         <div class="row">
-            <div style="background-color:white;margin-top:1px;border-top: 1px solid lightgray;border-bottom: 1px solid lightgray;padding-bottom:0px;">
+            <div style="background-color:white;margin-top:1px;border-bottom: 2px double lightgray;padding-bottom:0px;">
                 <div class="col-6">
                     <span style="float:inline-start;">
                         <img style="width:70px;height:55px;padding:0px;border:1px solid lightgray;" src="data:image/log/png;base64,{{ $imageData }}" alt="company-logo" width="100">
@@ -140,9 +140,9 @@
                         <th style="text-align:left;">Email</th>
                         <th style="text-align:left;">Role</th>
                         <th style="text-align:left;">IP</th>
-                        <th style="text-align:left;">Login-Date</th>
-                        <th style="text-align:left;">Logout-Date</th>
-                        <th style="text-align:left;">Last-Activity</th>
+                        <th style="text-align:left;">Login Time</th>
+                        <th style="text-align:left;">Logout Time</th>
+                        <th style="text-align:left;">Last Activity</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -178,7 +178,7 @@
                 <table style="width: 100%; border: 1px solid lightgray;">
                     <thead>
                         <tr style="font-weight: 700;font-size:12px;">
-                            <td colspan="5" style="text-align:center;">User Summary</td>
+                            <th colspan="5" style="text-align:center;background-color:rgb(239, 255, 255);">User Summary</th>
                         </tr>
                         <tr>
                             <th style="width: 10%;">SN.</th>
@@ -200,7 +200,7 @@
                         @endforeach
                     </tbody>
                     <tfoot>
-                        <tr style="background-color:whitesmoke;font-weight:700;">
+                        <tr style="background-color:rgb(239, 255, 255);font-weight:700;">
                             <td colspan="2" style="text-align:center;">Total</td>
                             <td style="width: 10%;text-align:center;">{{ number_format($userTotalLogin, 2) }}</td>
                             <td style="width: 10%;text-align:center;">{{ number_format($userTotalLogout, 2) }}</td>
@@ -214,7 +214,7 @@
                 <table style="width: 100%; border: 1px solid lightgray;">
                     <thead>
                         <tr style="font-weight: 700;font-size:12px;">
-                            <td colspan="5" style="text-align:center;">Branch Summary</td>
+                            <th colspan="5" style="text-align:center;background-color:rgb(239, 255, 255);">Branch Summary</th>
                         </tr>
                         <tr style="font-weight: 700;">
                             <th style="width: 10%;">SN.</th>

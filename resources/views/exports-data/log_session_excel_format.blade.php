@@ -2,156 +2,204 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
-        table, th, td {
-            border: 1px solid black;
+        table, tr, th, td {
+            width: 100%;
             border-collapse: collapse;
-            padding: 4px;
         }
         th {
-            background-color: lightcyan;
+            width: 100%;
+            background-color: rgb(239, 255, 255);">;
         }
     </style>
 </head>
 <body>
     @foreach($companyinformations as $infos)
-        <table style="width: 100%;">
-            <tr><td colspan="6" style="font-size: 24px; font-weight: bold;">{{ $infos->company_name }}</td></tr>
-            <tr><td colspan="6">Address: {{ $infos->company_address }}</td></tr>
-            <tr><td colspan="6">User Log Session Data</td></tr>
+        <table style="width: 100%;border-bottom: 1px double rgb(221, 221, 221);">
+            <tr><td colspan="11" style="font-size: 24px; font-weight: bold;">{{ $infos->company_name }}</td></tr>
+            <tr><td colspan="11"><strong>Address : {{ $infos->company_address }}</strong></td></tr>
+            <tr><td colspan="11">
+                <strong>
+                    <span>
+                        User Log Session Data Download :<?php
+                        $timezone = date_default_timezone_get();
+                        ?>
+                        <?php
+                        date_default_timezone_set('Asia/Dhaka');
+                        echo date('d l M Y') . " || ";
+                        echo date("h:i:sA");
+                        ?>
+                        <label for="prepared">
+                            [ User : {{$auth_user_email}} ]
+                        </label>
+                    </span>
+                </strong>
+            </td></tr>
         </table>
         <br>
     @endforeach
 
     @php $firstSession = $logSessionData->first(); @endphp
 
-    <table style="width: 100%;">
+    <table>
         <tr>
-            <td>Branch Type</td>
-            <td colspan="2">{{ optional($firstSession->users)->branch_type ?? 'N/A' }}</td>
-            <td>Branch ID</td>
-            <td colspan="2">{{ $firstSession->branch_id ?? 'N/A' }}</td>
+            <td></td>
+            <td style="border: 1px ridge rgb(233, 233, 233);"><strong>From :</strong> </td>
+            <td style="border: 1px ridge rgb(233, 233, 233);text-align:left;mso-number-format:'\@';"><strong>{{ \Carbon\Carbon::parse($start_date)->format('d-M-Y') }}</strong></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="border: 1px ridge rgb(233, 233, 233);"><strong>Branch Type : </strong></td>
+            <td colspan="2" style="border: 1px ridge rgb(233, 233, 233);"><strong>{{ optional($firstSession->users)->branch_type ?? 'N/A' }}</strong></td>
         </tr>
         <tr>
-            <td>Branch Name</td>
-            <td colspan="2">{{ optional($firstSession->users)->branch_name ?? 'N/A' }}</td>
-            <td>Branch Location</td>
-            <td colspan="2">{{ optional($firstSession->users)->location ?? 'N/A' }}</td>
+            <td></td>
+            <td style="border: 1px ridge rgb(233, 233, 233);"><strong>To : </strong></td>
+            <td style="border: 1px ridge rgb(233, 233, 233);text-align:left;mso-number-format:'\@';"><strong>{{ \Carbon\Carbon::parse($end_date)->format('d-M-Y') }}</strong></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="border: 1px ridge rgb(233, 233, 233);"><strong>Branch ID : </strong></td>
+            <td colspan="2" style="border: 1px ridge rgb(233, 233, 233);"><strong>{{ $firstSession->branch_id ?? 'N/A' }}</strong></td>
         </tr>
         <tr>
-            <td>Date From</td>
-            <td colspan="2">{{ \Carbon\Carbon::parse($start_date)->format('d M Y') }}</td>
-            <td>Date To</td>
-            <td colspan="2">{{ \Carbon\Carbon::parse($end_date)->format('d M Y') }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="border: 1px ridge rgb(233, 233, 233);"><strong>Branch Name : </strong></td>
+            <td colspan="2" style="border: 1px ridge rgb(233, 233, 233);"><strong>{{ optional($firstSession->users)->branch_name ?? 'N/A' }}</strong></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="border: 1px ridge rgb(233, 233, 233);"><strong>Branch Location : </strong></td>
+            <td colspan="2" style="border: 1px ridge rgb(233, 233, 233);"><strong>{{ optional($firstSession->users)->location ?? 'N/A' }}</strong></td>
         </tr>
     </table>
-
     <br>
-    <table style="width: 100%;">
+    <table style="width: 100%; border: 1px ridge rgb(221, 221, 221);">
         <thead>
             <tr>
-                <th>SN</th>
-                <th>User ID</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>IP Address</th>
-                <th>Login Time</th>
-                <th>Logout Time</th>
-                <th>Last Activity</th>
+                <th style="text-align:center;border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">SN</th>
+                <th style="text-align:center;border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">User ID</th>
+                <th colspan="4" style="text-align:left;border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">Email</th>
+                <th style="text-align:left;border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">Role</th>
+                <th style="text-align:left;border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">IP Address</th>
+                <th style="text-align:left;border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">Login Time</th>
+                <th style="text-align:left;border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">Logout Time</th>
+                <th style="text-align:left;border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">Last Activity</th>
             </tr>
         </thead>
         <tbody>
             @foreach($logSessionData as $index => $item)
                 <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $item->user_id }}</td>
-                    <td>{{ $item->email }}</td>
-                    <td>{{ $item->roles->name ?? 'N/A' }}</td>
-                    <td>{{ $item->ip_address }}</td>
-                    <td>{{ $item->created_at->format('d M Y h:i:s A') }}</td>
-                    <td>{{ $item->updated_at->format('d M Y h:i:s A') }}</td>
-                    <td>{{ $item->last_activity }}</td>
+                    <td style="text-align:center;border: 1px ridge rgb(233, 233, 233);">{{ $index + 1 }}</td>
+                    <td style="text-align:center;border: 1px ridge rgb(233, 233, 233);">{{ $item->user_id }}</td>
+                    <td colspan="4" style="text-align:left;border: 1px ridge rgb(233, 233, 233);">{{ $item->email }}</td>
+                    <td style="text-align:left;border: 1px ridge rgb(233, 233, 233);">{{ $item->roles->name ?? 'N/A' }}</td>
+                    <td style="text-align:left;border: 1px ridge rgb(233, 233, 233);">{{ $item->ip_address }}</td>
+                    <td style="text-align:left;border: 1px ridge rgb(233, 233, 233);">{{ $item->created_at->format('d M Y h:i:sA') }}</td>
+                    <td style="text-align:left;border: 1px ridge rgb(233, 233, 233);">{{ $item->updated_at->format('d M Y h:i:sA') }}</td>
+                    <td style="text-align:left;border: 1px ridge rgb(233, 233, 233);">{{ $item->last_activity }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
-    <br><br>
-    <table style="width: 100%;">
+    <br>
+    <table>
         <thead>
-            <tr><th colspan="6" style="background-color: lightgreen;">User Summary</th></tr>
+            <tr><th></th><th colspan="8" style="background-color: rgb(239, 255, 255);border: 1px ridge rgb(221, 221, 221);">User Summary</th></tr>
             <tr>
-                <th>SN</th>
-                <th>Email</th>
-                <th>Login</th>
-                <th>Logout</th>
-                <th>Activity</th>
+                <th></th>
+                <th style="border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">SN.</th>
+                <th colspan="4" style="text-align:left;border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">Email</th>
+                <th style="border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">Login</th>
+                <th style="border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">Logout</th>
+                <th style="border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">Activity</th>
             </tr>
         </thead>
         <tbody>
             @foreach($userSummaryData as $index => $user)
                 <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ number_format($user->total_login, 2) }}</td>
-                    <td>{{ number_format($user->total_logout, 2) }}</td>
-                    <td>{{ number_format($user->total_activity, 2) }}</td>
+                    <td></td>
+                    <td style="text-align:center;border-left: 1px ridge rgb(221, 221, 221);border-right: 1px ridge rgb(233, 233, 233);border-bottom: 1px ridge rgb(233, 233, 233);border-top: 1px ridge rgb(233, 233, 233);">{{ $index + 1 }}</td>
+                    <td colspan="4" style="text-align:left;border: 1px ridge rgb(233, 233, 233);">{{ $user->email }}</td>
+                    <td style="text-align:center;border: 1px ridge rgb(233, 233, 233);mso-number-format:'0.00';">{{ $user->total_login }}</td>
+                    <td style="text-align:center;border: 1px ridge rgb(233, 233, 233);mso-number-format:'0.00';">{{ $user->total_logout }}</td>
+                    <td style="text-align:center;border-left: 1px ridge rgb(233, 233, 233);border-right: 1px ridge rgb(221, 221, 221);border-bottom: 1px ridge rgb(233, 233, 233);border-top: 1px ridge rgb(233, 233, 233);mso-number-format:'0.00';">{{ $user->total_activity }}</td>
                 </tr>
             @endforeach
             <tr style="font-weight: bold;">
-                <td colspan="2">Total</td>
-                <td>{{ number_format($userTotalLogin, 2) }}</td>
-                <td>{{ number_format($userTotalLogout, 2) }}</td>
-                <td>{{ number_format($userSubTotalActivity, 2) }}</td>
+                <td></td>
+                <td colspan="5" style="text-align:center;font-weight:700;border: 1px ridge rgb(221, 221, 221);">Total</td>
+                <td style="text-align:center;font-weight:700;border: 1px ridge rgb(221, 221, 221);mso-number-format:'0.00';">{{ $userTotalLogin }}</td>
+                <td style="text-align:center;font-weight:700;border: 1px ridge rgb(221, 221, 221);mso-number-format:'0.00';">{{ $userTotalLogout }}</td>
+                <td style="text-align:center;font-weight:700;border: 1px ridge rgb(221, 221, 221);mso-number-format:'0.00';">{{ $userSubTotalActivity }}</td>
             </tr>
         </tbody>
     </table>
 
-    <br><br>
-    <table style="width: 100%;">
+    <br>
+    <table>
         <thead>
-            <tr><th colspan="6" style="background-color: lightgreen;">Branch Summary</th></tr>
+            <tr><th></th><th colspan="5" style="background-color: rgb(239, 255, 255);border: 1px ridge rgb(221, 221, 221);">Branch Summary</th></tr>
             <tr>
-                <th>SN</th>
-                <th>Branch ID</th>
-                <th>Login</th>
-                <th>Logout</th>
-                <th>Activity</th>
+                <th></th>
+                <th style="border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">SN</th>
+                <th style="text-align:left;border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">Branch ID</th>
+                <th style="border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">Login</th>
+                <th style="border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">Logout</th>
+                <th style="border: 1px ridge rgb(221, 221, 221);background-color: rgb(239, 255, 255);">Activity</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>1</td>
-                <td>{{ $firstSession->branch_id ?? 'N/A' }}</td>
-                <td>{{ number_format($summary->total_login ?? 0, 2) }}</td>
-                <td>{{ number_format($summary->total_logout ?? 0, 2) }}</td>
-                <td>{{ number_format($summary->total_activity ?? 0, 2) }}</td>
+                <td></td>
+                <td style="text-align:center;border: 1px ridge rgb(221, 221, 221);"><strong>1</strong></td>
+                <td style="border: 1px ridge rgb(221, 221, 221);"><strong>{{ $firstSession->branch_id ?? 'N/A' }}</strong></td>
+                <td style="text-align:center;border: 1px ridge rgb(221, 221, 221);mso-number-format:'0.00';"><strong>{{ $summary->total_login }}</strong></td>
+                <td style="text-align:center;border: 1px ridge rgb(221, 221, 221);mso-number-format:'0.00';"><strong>{{ $summary->total_logout }}</strong></td>
+                <td style="text-align:center;border: 1px ridge rgb(221, 221, 221);mso-number-format:'0.00';"><strong>{{ $summary->total_activity }}</strong></td>
             </tr>
         </tbody>
     </table>
 
-    <br><br>
-    <table style="width: 100%;">
+    <br><br><br>
+    <table>
         <tr>
-            <td>Prepared by</td>
-            <td>{{ $auth_user }}</td>
-            <td>Reference by</td>
-            <td></td>
-            <td>Authorized by</td>
-            <td></td>
+            <td colspan="4" style="text-align:center;font-weight:700;">Prepared by ( {{ $auth_user_name }} )</td>
+            <td colspan="5" style="text-align:center;font-weight:700;">Reference by</td>
+            <td colspan="2" style="text-align:center;font-weight:700;">Authorized by</td>
         </tr>
     </table>
-
-    <br><br>
+    <br>
     @foreach($companyinformations as $infos)
-        <table style="width: 100%;">
+        <table style="width: 100%;border-top: 1px ridge rgb(221, 221, 221);">
             <tr>
-                <td>Email: {{ $infos->email }}</td>
-                <td>Facebook: {{ $infos->facebook_address }}</td>
-                <td>LinkedIn: {{ $infos->linkedin }}</td>
+                <td colspan="11" style="text-align:center;font-weight:700;">
+                    <span>Email: {{ $infos->email }}, Facebook: {{ $infos->facebook_address }}, LinkedIn: {{ $infos->linkedin }}</span>
+                </td>
             </tr>
             <tr>
-                <td>Contact: {{ $infos->contract_number_one }}, {{ $infos->contract_number_two }}</td>
-                <td>Hotline: {{ $infos->hot_number }}</td>
+                <td colspan="11" style="text-align:center;font-weight:700;">Contact: {{ $infos->contract_number_one }}, {{ $infos->contract_number_two }}</td>
+            </tr>
+            <tr>
+                <td colspan="11" style="text-align:center;font-weight:700;">Hotline: {{ $infos->hot_number }}</td>
             </tr>
         </table>
     @endforeach
