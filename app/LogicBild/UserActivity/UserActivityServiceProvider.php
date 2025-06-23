@@ -1082,12 +1082,13 @@ class UserActivityServiceProvider
         // 🧪 Check if there's no session data — use fallback PDF view
         if ($logSessionData->isEmpty()) {
             $html = view('pdf-download.empty-session', [
-                'message' => 'No session data found because the user has not logged in during the selected period.',
+                'message' => 'no log session data found because the user has not logged in during the selected period.',
                 'start_date' => Carbon::parse($start_date),
                 'end_date' => Carbon::parse($end_date),
                 'companyinformations' => $companyinformations,
                 'companylogo' => $companylogo,
                 'imageData' => $imageData,
+                'emails' => $emails,
             ])->render();
 
             $pdf = $pdfService->generatePdf($html);
@@ -1139,12 +1140,12 @@ class UserActivityServiceProvider
         $emails = explode(',', $request->input('email', ''));
 
         $query = SessionModel::with(['roles', 'users'])
-            ->select(
-                DB::raw("COUNT(DISTINCT user_id) as total_users"),
-                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
-                DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
-                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
-            );
+        ->select(
+            DB::raw("COUNT(DISTINCT user_id) as total_users"),
+            DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
+            DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
+            DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
+        );
 
         if ($start_date && $end_date) {
             $query->whereBetween('created_at', [
@@ -1166,43 +1167,43 @@ class UserActivityServiceProvider
         }
 
         $summary = $query->first();
-
+        // Branch summary
         $totalLogin = $summary->total_login ?? 0;
         $totalLogout = $summary->total_logout ?? 0;
         $totalActivity = $summary->total_activity ?? 0;
 
         $logSessionData = SessionModel::with(['roles', 'users'])
-            ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
-                $q->whereBetween('created_at', [
-                    Carbon::parse($start_date)->startOfDay(),
-                    Carbon::parse($end_date)->endOfDay()
-                ]);
-            })
-            ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
-            ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
-            ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
-            ->orderBy('user_id')
-            ->get();
-
+        ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
+            $q->whereBetween('created_at', [
+                Carbon::parse($start_date)->startOfDay(),
+                Carbon::parse($end_date)->endOfDay()
+            ]);
+        })
+        ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
+        ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
+        ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
+        ->orderBy('user_id')
+        ->get();
+        // user summary
         $userSummaryData = SessionModel::select(
-                'email',
-                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
-                DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
-                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
-            )
-            ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
-                $q->whereBetween('created_at', [
-                    Carbon::parse($start_date)->startOfDay(),
-                    Carbon::parse($end_date)->endOfDay()
-                ]);
-            })
-            ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
-            ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
-            ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
-            ->groupBy('email')
-            ->orderBy('email')
-            ->get();
-
+            'email',
+            DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
+            DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
+            DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
+        )
+        ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
+            $q->whereBetween('created_at', [
+                Carbon::parse($start_date)->startOfDay(),
+                Carbon::parse($end_date)->endOfDay()
+            ]);
+        })
+        ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
+        ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
+        ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
+        ->groupBy('email')
+        ->orderBy('email')
+        ->get();
+        // user summary
         $userTotalLogin = $userSummaryData->sum('total_login');
         $userTotalLogout = $userSummaryData->sum('total_logout');
         $userSubTotalActivity = $userSummaryData->sum('total_activity');
@@ -1217,6 +1218,17 @@ class UserActivityServiceProvider
             'Content-Type' => 'application/vnd.ms-excel; charset=utf-8',
             'Content-Disposition' => 'attachment; filename=log_session_export-' . $formattedDate . '.xls',
         ];
+
+        if ($logSessionData->isEmpty()) {
+            $errorMessage = '⚠ no log session data found because the user has not logged in during the selected period.';
+            
+            $content = "\xEF\xBB\xBF"; // UTF-8 BOM
+            $content .= view('exports-data.empty_excel_message', compact(
+                'errorMessage', 'auth_user_name', 'auth_user_email','start_date', 'end_date', 'companyinformations', 'logSessionData', 'emails'
+            ))->render();
+
+            return Response::make($content, 200, $headers);
+        }
 
         $content = "\xEF\xBB\xBF"; // UTF-8 BOM
         $content .= view('exports-data.log_session_excel_format', compact(
@@ -1290,6 +1302,74 @@ class UserActivityServiceProvider
         ->orderBy('user_id')
         ->get();
 
+        $companyinformations = ForntEndFooter::first(); // Get one row (logo, address, etc.)
+        $companylogo = Logodegin::first();              // Just use logo URL or name
+
+        // If no data found, return CSV with error message
+        if ($logSessionData->isEmpty()) {
+            $handle = fopen('php://temp', 'w');
+            fprintf($handle, chr(0xEF).chr(0xBB).chr(0xBF)); // UTF-8 BOM
+
+            date_default_timezone_set('Asia/Dhaka');
+            $currentDate = date('d-M-Y');
+            $currentTime = date('h:i:s A');
+
+            fputcsv($handle, [$companyinformations->company_name ?? 'N/A']);
+            fputcsv($handle, ['Address :', $companyinformations->company_address ?? 'N/A']);
+            fputcsv($handle, ['User Log Session Data Download :', "$currentDate $currentTime\t[ User : $auth_user_email ]"]);
+            fputcsv($handle, []); // Empty line
+
+            fputcsv($handle, ['', 'From :', "\t" .Carbon::parse($start_date)->format('d-M-Y')]);
+            fputcsv($handle, ['', 'To :', "\t" .Carbon::parse($end_date)->format('d-M-Y')]);
+
+            fputcsv($handle, []); // Empty line
+
+            fputcsv($handle, ['', 'Log Session Export - No Data Found']);
+            fputcsv($handle, []);
+            fputcsv($handle, ['', 'Note :', implode(', ', $emails), ', ⚠ no log session data found because the user has not logged in during the selected period.']);
+
+            // Page Footer Part
+            fputcsv($handle, []); // Empty line
+            fputcsv($handle, []); // Empty line
+            fputcsv($handle, []); // Empty line
+
+            fputcsv($handle, ['', 'Prepared by ' . ( $auth_user_name ), '', 'Reference by', '', 'Authorized by', '', '']);
+
+            fputcsv($handle, []); // Empty line
+
+            fputcsv($handle, [
+                '', '',
+                'Email: ' . ($companyinformations->email ?? 'N/A'),
+                'Facebook: ' . ($companyinformations->facebook_address ?? 'N/A'),
+                'LinkedIn: ' . ($companyinformations->linkedin ?? 'N/A'),
+                '', '', '', '', ''
+            ]);
+
+            fputcsv($handle, [
+                '', '', '',
+                'Contact: ' . ($companyinformations->contract_number_one ?? 'N/A'),
+                "\t" . ($companyinformations->contract_number_two ?? 'N/A'),
+                '', '', '', '', ''
+            ]);
+
+            fputcsv($handle, [
+                '', '', '',
+                'Hotline: ' . ($companyinformations->hot_number ?? 'N/A'),
+                '', '', '', '', '', ''
+            ]);
+
+            rewind($handle);
+            $csvContent = stream_get_contents($handle);
+            fclose($handle);
+
+            $filename = 'log_session_export-' . now('Asia/Dhaka')->format('d-M-Y') . '.csv';
+
+            return response($csvContent, 200, [
+                'Content-Type' => 'text/csv; charset=UTF-8',
+                'Content-Disposition' => "attachment; filename=\"$filename\"",
+            ]);
+        }
+
         $userSummaryData = SessionModel::select(
             'email',
             DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
@@ -1312,9 +1392,6 @@ class UserActivityServiceProvider
         $userTotalLogin = $userSummaryData->sum('total_login');
         $userTotalLogout = $userSummaryData->sum('total_logout');
         $userSubTotalActivity = $userSummaryData->sum('total_activity');
-
-        $companyinformations = ForntEndFooter::first(); // Get one row (logo, address, etc.)
-        $companylogo = Logodegin::first();              // Just use logo URL or name
 
         // Create CSV in memory
         $handle = fopen('php://temp', 'w');
@@ -1442,6 +1519,128 @@ class UserActivityServiceProvider
     */
     public function printSessionData(Request $request)
     {
-        //
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        $branch_id = $request->input('branch_id');
+        $roles = explode(',', $request->input('role', ''));
+        $emails = explode(',', $request->input('email', ''));
+
+        $query = SessionModel::with(['roles', 'users'])
+            ->select(
+                DB::raw("COUNT(DISTINCT user_id) as total_users"),
+                DB::raw("SUM(CASE WHEN payload = 'login' THEN 1 ELSE 0 END) as total_current_login"),
+                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
+                DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
+                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
+            );
+        
+        // Filter by date
+        if ($start_date && $end_date) {
+            $query->whereBetween('created_at', [
+                Carbon::parse($start_date)->startOfDay(),
+                Carbon::parse($end_date)->endOfDay()
+            ]);
+        }
+
+        // Filter by branch_id
+        if ($branch_id) {
+            $query->where('branch_id', $branch_id);
+        }
+
+        // Filter by roles (if applicable)
+        if (!empty($roles) && $roles[0] !== '') {
+            $query->whereIn('role', $roles);
+        }
+
+        // Filter by emails (if applicable)
+        if (!empty($emails) && $emails[0] !== '') {
+            $query->whereIn('email', $emails);
+        }
+
+        // Get branch summary data
+        $summary = $query->first();
+
+        $login = $summary->total_login ?? 0;
+        $logout = $summary->total_logout ?? 0;
+        $activity = $summary->total_activity ?? 0;
+
+        // Fetch session log data for table (you can apply the same filters again if needed)
+        $logSessionData = SessionModel::with(['roles', 'users'])
+        ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
+            $q->whereBetween('created_at', [
+                Carbon::parse($start_date)->startOfDay(),
+                Carbon::parse($end_date)->endOfDay()
+            ]);
+        })
+        ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
+        ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
+        ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
+        ->orderBy('user_id')
+        ->get();
+        
+        // 3. User-wise summary
+        $userSummaryData = SessionModel::select(
+            'email',
+            DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
+            DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
+            DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
+        )
+        ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
+            $q->whereBetween('created_at', [
+                Carbon::parse($start_date)->startOfDay(),
+                Carbon::parse($end_date)->endOfDay()
+            ]);
+        })
+        ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
+        ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
+        ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
+        ->groupBy('email')
+        ->orderBy('email')
+        ->get();
+
+        // Get user summary data
+        $userSummary = $query->first();
+
+        $login = $userSummary->total_login ?? 0;
+        $logout = $userSummary->total_logout ?? 0;
+        $logout = $userSummary->total_activity ?? 0;
+
+        // Load additional info
+        $companyinformations = ForntEndFooter::get();
+        $companylogo = Logodegin::get();
+        $imagePath = public_path('image/log/comp-logo.png');
+        $imageData = base64_encode(file_get_contents($imagePath)); 
+
+        // 🧪 Check if there's no session data — use fallback PDF view
+        if ($logSessionData->isEmpty()) {
+            return view('print-data.empty-log-session-data-print', [
+                'message' => 'no log session data found because the user has not logged in during the selected period.',
+                'start_date' => Carbon::parse($start_date),
+                'end_date' => Carbon::parse($end_date),
+                'companyinformations' => $companyinformations,
+                'companylogo' => $companylogo,
+                'imageData' => $imageData,
+                'emails' => $emails,
+            ]);
+        }
+
+        // Render the PDF
+        return view('print-data.log-session-data-print', [
+            'logSessionData' => $logSessionData,
+            'userSummaryData' => $userSummaryData,
+            'userTotalLogin' => $userSummary->total_login,
+            'userTotalLogout' => $userSummary->total_logout,
+            'userSubTotalActivity' => $userSummary->total_activity,
+            'totalCurrentLogin' => $summary->total_current_login,
+            'totalLogin' => $summary->total_login,
+            'totalLogout' => $summary->total_logout,
+            'totalActivity' => $summary->total_activity,
+            'total_users' => $summary->total_users,
+            'start_date' => Carbon::parse($start_date),
+            'end_date' => Carbon::parse($end_date),
+            'companyinformations' => $companyinformations,
+            'companylogo' => $companylogo,
+            'imageData' => $imageData,
+        ]);
     }
 }

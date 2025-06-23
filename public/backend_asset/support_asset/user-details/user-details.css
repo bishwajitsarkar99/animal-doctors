@@ -32,6 +32,19 @@ htm,body{
     padding: 0;
     margin: 0;
 }
+#largeModalContent{
+    box-shadow: rgba(0, 0, 0, 0.067) 0px 1px 20px, rgba(0, 123, 255, 0.2) 0px 2px 6px;
+}
+.responsive-modal-body{
+    font-family: Roboto, "Noto Sans", "Noto Sans JP", "Noto Sans KR", "Noto Naskh Arabic", "Noto Sans Thai", "Noto Sans Hebrew", "Noto Sans Bengali", sans-serif;
+    margin: 0px;
+    background: -webkit-gradient(linear, 0% 100%, 0% 0%, from(rgb(238, 238, 238)), to(rgb(255, 255, 255)));
+    border-bottom: 1px solid rgb(221, 221, 221);
+    min-height: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
 input#searchBranch, input#searchRole, input#searchEmail{
     outline: none;
     box-shadow: none;

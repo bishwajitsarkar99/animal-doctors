@@ -112,8 +112,14 @@
     </div>
 
     <div class="content">
-        <p style="font-size:13px;font-weight:700;">From : {{ $start_date->format('d M Y') }} To : {{ $end_date->format('d M Y') }}</p>
-        <p style="font-size:13px;font-weight:700;background-color:lightgray;">Note : {{ $message }}</p>
+        <p style="font-size:13px;font-weight:700;">From : {{ $start_date->format('d M Y') }} <br> To : {{ $end_date->format('d M Y') }}</p>
+        <p style="font-size:13px;font-weight:700;background-color:rgb(239, 255, 255);">
+            
+            Note :  @if(!empty($emails))
+                        {{ implode(', ', $emails) }}, 
+                    @endif
+                    {{ $message }}
+        </p>
     </div>
     <div class="row">
         <div class="col-12">

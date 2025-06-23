@@ -45,7 +45,7 @@
           <!-- Modal Header -->
           <span class="heading-text" id="head_info"></span>
           <button type="button" class="btn-close-modal" 
-            data-bs-dismiss="modal" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+            data-bs-dismiss="modal" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="cancelPrintModal">
           </button>
         </div>
         <!-- Modal Body -->
@@ -120,7 +120,7 @@
             <div class="col-xl-3">
               <div class="download-tab">
                 <span class="download-group-btn">
-                  <a class="download-link-btn">
+                  <a class="download-link-btn" id="dataPrint">
                     <svg width="30" height="30" viewBox="0 0 64 64">
                       <!-- Printer body -->
                       <rect x="12" y="20" width="40" height="26" rx="4" ry="4" fill="#555"/>
@@ -154,6 +154,25 @@
             </ul>
           </div>
         </div>  
+      </div>
+    </div>
+  </div>
+  <!-- Print Preview Modal Structure -->
+  <div class="modal fade" id="logSessionPrintModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content" style="border:none;" id="largeModalContent">
+        <div class="modal-header modal-heading">
+          <!-- Modal Header -->
+          <span class="heading-text">Print Preview</span>
+          <button type="button" class="btn btn-sm refresh-btn ripple-surface ms-3" id="printOnlyContent">Print</button>
+          <button type="button" class="btn-close-modal" 
+            data-bs-dismiss="modal" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+          </button>
+        </div>
+        <!-- Modal Body -->
+        <div class="modal-body responsive-modal-body">
+          <div id="session-modal-content"></div>
+        </div>
       </div>
     </div>
   </div>

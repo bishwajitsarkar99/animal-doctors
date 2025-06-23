@@ -1899,6 +1899,58 @@
     
             window.location.href = url;
         });
+        // Data Print
+        $(document).on('click', '#dataPrint', function(e){
+            e.preventDefault();
+            const start_date_raw = $("#chartStartDate").val();
+            const end_date_raw = $("#chartEndDate").val(); 
+
+            const start_date = convertToYMD(start_date_raw);
+            const end_date = convertToYMD(end_date_raw); 
+
+            const branch_id = $('#selectedBranchId').val();
+            const role = $('#selectedRoleId').val() ? $('#selectedRoleId').val().split(',') : [];
+            const email = $('#select_list_email.active-line').map(function () {
+                return $(this).data('value');
+            }).get();
+
+            const url = '{{ route("session-record.print") }}?' +
+                `start_date=${start_date}&end_date=${end_date}&branch_id=${branch_id}&role=${role}&email=${email}`;
+    
+
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('session-modal-content').innerHTML = data;
+                    $('#logSessionPrintModal').modal('show');
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        // Print
+        $(document).on('click', '#printOnlyContent', function () {
+            const content = document.getElementById('session-modal-content').innerHTML;
+
+            const printWindow = window.open('', '', 'height=700,width=900');
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Print</title>
+                        <style>
+                            body { font-family: sans-serif; padding: 20px; }
+                            table { border-collapse: collapse; width: 100%; }
+                            th, td { border: 1px solid #ddd; padding: 2px; }
+                        </style>
+                    </head>
+                    <body>
+                        ${content}
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        });
     });
  </script>
 <!-- Demo bar chart -->
