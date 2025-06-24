@@ -1969,9 +1969,9 @@
                                     text-align: center;
                                     /* 3D shadow effect */
                                     text-shadow:
-                                        2px 2px 0 rgba(0, 0, 0, 0.05),
-                                        4px 4px 0 rgba(0, 0, 0, 0.04),
-                                        6px 6px 0 rgba(0, 0, 0, 0.03);
+                                        2px 2px 0 rgba(0, 0, 0, 0.04),
+                                        4px 4px 0 rgba(0, 0, 0, 0.03),
+                                        6px 6px 0 rgba(0, 0, 0, 0.02);
 
                                     /* Optional: give a soft blur for realism */
                                     filter: blur(0.2px);
