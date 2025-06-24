@@ -1338,6 +1338,8 @@
 </script>
 <!-- Get Branch -->
  <script>
+    const companyName = @json(setting('company_name'));
+    const companyAddress = @json(setting('company_address'));
     $(document).ready(function(){
         branchInitFetch();
         roleInitFetch();
@@ -1899,9 +1901,16 @@
     
             window.location.href = url;
         });
-        // Data Print
+        // Get data for Print
         $(document).on('click', '#dataPrint', function(e){
             e.preventDefault();
+            // Destroy all active tooltips before showing print modal
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.forEach(function (tooltipEl) {
+                const tooltip = bootstrap.Tooltip.getInstance(tooltipEl);
+                if (tooltip) tooltip.dispose();
+            });
+
             const start_date_raw = $("#chartStartDate").val();
             const end_date_raw = $("#chartEndDate").val(); 
 
@@ -1926,22 +1935,69 @@
                 })
                 .catch(error => console.error('Error:', error));
         });
-        // Print
+        // Print Button
         $(document).on('click', '#printOnlyContent', function () {
             const content = document.getElementById('session-modal-content').innerHTML;
+            
+            const windowWidth = 900;
+            const windowHeight = 700;
+            // More right side — closer to the right edge
+            const rightMargin = 10; // minimal space from the right edge
+            const left = screen.availWidth - windowWidth - rightMargin;
+            const top = 50;
+            const printWindow = window.open('', '', `width=${windowWidth},height=${windowHeight},top=${top},left=${left}`);
 
-            const printWindow = window.open('', '', 'height=700,width=900');
             printWindow.document.write(`
                 <html>
                     <head>
                         <title>Print</title>
                         <style>
-                            body { font-family: sans-serif; padding: 20px; }
-                            table { border-collapse: collapse; width: 100%; }
-                            th, td { border: 1px solid #ddd; padding: 2px; }
+                            @media print{
+                                .print-watermark-text {
+                                    display:block;
+                                    position: fixed;
+                                    top: 50%;
+                                    left: 40%;
+                                    transform: translate(-50%, -40%) rotate(-45deg);
+                                    font-size: 100px;
+                                    color: rgba(0, 0, 0, 0.08); /* very light gray */
+                                    font-weight: bold;
+                                    z-index: 0;
+                                    white-space: nowrap;
+                                    pointer-events: none;
+                                    width: 100%;
+                                    text-align: center;
+                                    /* 3D shadow effect */
+                                    text-shadow:
+                                        2px 2px 0 rgba(0, 0, 0, 0.05),
+                                        4px 4px 0 rgba(0, 0, 0, 0.04),
+                                        6px 6px 0 rgba(0, 0, 0, 0.03);
+
+                                    /* Optional: give a soft blur for realism */
+                                    filter: blur(0.2px);
+                                }
+                                body { 
+                                    -webkit-print-color-adjust: exact !important;
+                                    print-color-adjust: exact !important;
+                                    font-family: sans-serif; 
+                                    padding: 20px; 
+                                }
+                                table { 
+                                    border-collapse: collapse; 
+                                    width: 100%; 
+                                    position: relative;
+                                    z-index: 1;
+                                }
+                                th, td { border: 1px solid #ddd; padding: 2px; }
+                            }
                         </style>
                     </head>
                     <body>
+                        <div class="print-watermark-text">
+                            <span>
+                                ${companyName} 
+                            </span>
+                        </div>
                         ${content}
                     </body>
                 </html>

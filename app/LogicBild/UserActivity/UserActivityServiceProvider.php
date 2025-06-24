@@ -1076,7 +1076,7 @@ class UserActivityServiceProvider
         // Load additional info
         $companyinformations = ForntEndFooter::get();
         $companylogo = Logodegin::get();
-        $imagePath = public_path('image/log/comp-logo.png');
+        $imagePath = public_path('image/log/print-page-logo.svg');
         $imageData = base64_encode(file_get_contents($imagePath)); 
 
         // 🧪 Check if there's no session data — use fallback PDF view
@@ -1608,7 +1608,7 @@ class UserActivityServiceProvider
         // Load additional info
         $companyinformations = ForntEndFooter::get();
         $companylogo = Logodegin::get();
-        $imagePath = public_path('image/log/comp-logo.png');
+        $imagePath = public_path('image/log/print-page-logo.svg');
         $imageData = base64_encode(file_get_contents($imagePath)); 
 
         // 🧪 Check if there's no session data — use fallback PDF view

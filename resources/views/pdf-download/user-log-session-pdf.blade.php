@@ -75,15 +75,45 @@
             color:black;
             width: 100%; 
         }
+        .print-watermark-text {
+            display:block;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 100px;
+            color: rgba(0, 0, 0, 0.08); /* very light gray */
+            font-weight: bold;
+            z-index: 0;
+            white-space: nowrap;
+            pointer-events: none;
+            width: 100%;
+            text-align: center;
+            /* 3D shadow effect */
+            text-shadow:
+                2px 2px 0 rgba(0, 0, 0, 0.05),
+                4px 4px 0 rgba(0, 0, 0, 0.04),
+                6px 6px 0 rgba(0, 0, 0, 0.03);
+
+            /* Optional: give a soft blur for realism */
+            filter: blur(0.2px);
+        }
     </style>
 </head>
 <body>
+    <div class="print-watermark-text">
+        @foreach($companyinformations as $infos)
+            <span>
+                {{$infos->company_name}}
+            </span>
+        @endforeach
+    </div>
     <div class="header">
         <div class="row">
             <div style="background-color:white;margin-top:1px;border-bottom: 2px double lightgray;padding-bottom:0px;">
                 <div class="col-6">
                     <span style="float:inline-start;">
-                        <img style="width:70px;height:55px;padding:0px;border:1px solid lightgray;" src="data:image/log/png;base64,{{ $imageData }}" alt="company-logo" width="100">
+                        <img style="width:70px;height:55px;padding:0px;" src="data:image/svg+xml;base64,{{ $imageData }}" alt="company-logo" width="100">
                     </span>
                     <span style="color:black; font-size:11px; font-wight:700px; float:right; margin-top:10px; padding-right:5px">
                         Download :<?php
@@ -101,7 +131,7 @@
                 </div>
                 <div class="col-6">
                     @foreach($companyinformations as $infos)
-                        <p style="color:black; font-size:12px; text-align:left;margin-left:100px;margin-top:10px;">
+                        <p style="color:black; font-size:12px; text-align:left;margin-left:80px;margin-top:10px;">
                             <span style="color:black; font-size:17px; font-wight:600px;">{{$infos->company_name}}</span><br>
                             <span style="color:black; font-size:12px;">Address :{{$infos->company_address}}</span><br>
                         </p>

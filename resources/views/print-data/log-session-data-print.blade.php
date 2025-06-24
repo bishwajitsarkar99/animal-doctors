@@ -43,7 +43,7 @@
             border: 1px solid lightgray;
         }
         th{
-            background-color: rgb(239, 255, 255);
+            background-color: rgb(239, 255, 255) !important;
             /* optional-border */
             border-top: 1px solid lightgray;
             border-bottom: 1px solid lightgray;
@@ -79,10 +79,10 @@
 <body>
     <div id="session-modal-content">
         <div class="header">
-            <div class="row" style="background-color:white;border-bottom: 1px double lightgray;padding-bottom:20px;">
+            <div class="row" style="background-color:white;border-bottom: 1px double rgb(33 197 197);padding-bottom:20px;">
                 <div class="col-12">
                     <span style="float:inline-start;">
-                        <img style="width:70px;height:55px;padding:0px;border:1px solid lightgray;" src="data:image/log/png;base64,{{ $imageData }}" alt="company-logo" width="100">
+                        <img style="width:70px;height:55px;padding:0px;" src="data:image/svg+xml;base64,{{ $imageData }}" alt="company-logo" width="100">
                     </span>
                     @foreach($companyinformations as $infos)
                         <p style="color:black; font-size:12px; text-align:left;margin-left:80px;margin-bottom: 0px;margin-top:0px;padding-top:12px;">
@@ -259,7 +259,7 @@
                 </span>
             </div>
         </div>                    
-        <div class="footer" style="border-top: 1px double lightgray;">
+        <div class="footer" style="border-top: 1px double rgb(33 197 197);">
             @if(count($companyinformations) > 0)
                 @foreach($companyinformations as $infos)
                     <p style="color:black; font-size:12px; text-align:center;">
