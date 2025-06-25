@@ -1075,7 +1075,6 @@ class UserActivityServiceProvider
 
         // Load additional info
         $companyinformations = ForntEndFooter::get();
-        $companylogo = Logodegin::get();
         $imagePath = public_path('image/log/print-page-logo.png');
         $imageData = base64_encode(file_get_contents($imagePath)); 
 
@@ -1086,7 +1085,6 @@ class UserActivityServiceProvider
                 'start_date' => Carbon::parse($start_date),
                 'end_date' => Carbon::parse($end_date),
                 'companyinformations' => $companyinformations,
-                'companylogo' => $companylogo,
                 'imageData' => $imageData,
                 'emails' => $emails,
             ])->render();
@@ -1113,7 +1111,6 @@ class UserActivityServiceProvider
             'start_date' => Carbon::parse($start_date),
             'end_date' => Carbon::parse($end_date),
             'companyinformations' => $companyinformations,
-            'companylogo' => $companylogo,
             'imageData' => $imageData,
         ])->render();
 
@@ -1209,7 +1206,6 @@ class UserActivityServiceProvider
         $userSubTotalActivity = $userSummaryData->sum('total_activity');
 
         $companyinformations = ForntEndFooter::get();
-        $companylogo = Logodegin::get();
         $imagePath = public_path('image/log/comp-logo.png');
         $imageData = base64_encode(file_get_contents($imagePath));
         
@@ -1234,7 +1230,7 @@ class UserActivityServiceProvider
         $content .= view('exports-data.log_session_excel_format', compact(
             'start_date', 'end_date', 'summary', 'logSessionData', 'userSummaryData',
             'userTotalLogin', 'userTotalLogout', 'userSubTotalActivity',
-            'companyinformations', 'companylogo', 'imageData', 'auth_user_name', 'auth_user_email'
+            'companyinformations', 'imageData', 'auth_user_name', 'auth_user_email'
         ))->render();
 
         return Response::make($content, 200, $headers);
@@ -1303,7 +1299,6 @@ class UserActivityServiceProvider
         ->get();
 
         $companyinformations = ForntEndFooter::first(); // Get one row (logo, address, etc.)
-        $companylogo = Logodegin::first();              // Just use logo URL or name
 
         // If no data found, return CSV with error message
         if ($logSessionData->isEmpty()) {
@@ -1607,24 +1602,18 @@ class UserActivityServiceProvider
 
         // Load additional info
         $companyinformations = ForntEndFooter::get();
-        $companylogo = Logodegin::get();
-        $imagePath = public_path('image/log/print-page-logo.svg');
-        $imageData = base64_encode(file_get_contents($imagePath)); 
-
-        // 🧪 Check if there's no session data — use fallback PDF view
+        // 🧪 Check if there's no session data — use fallback Print view
         if ($logSessionData->isEmpty()) {
             return view('print-data.empty-log-session-data-print', [
                 'message' => 'no log session data found because the user has not logged in during the selected period.',
                 'start_date' => Carbon::parse($start_date),
                 'end_date' => Carbon::parse($end_date),
                 'companyinformations' => $companyinformations,
-                'companylogo' => $companylogo,
-                'imageData' => $imageData,
                 'emails' => $emails,
             ]);
         }
 
-        // Render the PDF
+        // Render the Print
         return view('print-data.log-session-data-print', [
             'logSessionData' => $logSessionData,
             'userSummaryData' => $userSummaryData,
@@ -1639,8 +1628,6 @@ class UserActivityServiceProvider
             'start_date' => Carbon::parse($start_date),
             'end_date' => Carbon::parse($end_date),
             'companyinformations' => $companyinformations,
-            'companylogo' => $companylogo,
-            'imageData' => $imageData,
         ]);
     }
 }

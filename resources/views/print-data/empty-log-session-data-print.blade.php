@@ -67,9 +67,6 @@
         <div class="header">
             <div class="row" style="background-color:white;border-bottom: 1px double rgb(33 197 197);padding-bottom:20px;">
                 <div class="col-12">
-                    <span style="float:inline-start;">
-                        <img style="width:70px;height:55px;padding:0px;" src="data:image/svg+xml;base64,{{ $imageData }}" alt="company-logo" width="100">
-                    </span>
                     @foreach($companyinformations as $infos)
                         <p style="color:black; font-size:12px; text-align:left;margin-left:80px;margin-bottom: 0px;margin-top:0px;padding-top:12px;">
                             <span style="color:black; font-size:17px; font-wight:600;">{{$infos->company_name}}</span><br>

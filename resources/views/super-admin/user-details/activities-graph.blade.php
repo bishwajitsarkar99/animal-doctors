@@ -1338,8 +1338,6 @@
 </script>
 <!-- Get Branch -->
  <script>
-    const companyName = @json(setting('company_name'));
-    const companyAddress = @json(setting('company_address'));
     $(document).ready(function(){
         branchInitFetch();
         roleInitFetch();
@@ -1902,21 +1900,19 @@
             window.location.href = url;
         });
         // Get data for Print
-        $(document).on('click', '#dataPrint', function(e){
+        $(document).on('click', '#dataPrint', function (e) {
             e.preventDefault();
-            // Destroy all active tooltips before showing print modal
-            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            tooltipTriggerList.forEach(function (tooltipEl) {
-                const tooltip = bootstrap.Tooltip.getInstance(tooltipEl);
-                if (tooltip) tooltip.dispose();
-            });
+            
+            const iframe = document.getElementById('printFrame');
+            if (!iframe) {
+                console.error("Iframe with ID 'printFrame' not found.");
+                return;
+            }
 
             const start_date_raw = $("#chartStartDate").val();
             const end_date_raw = $("#chartEndDate").val(); 
-
             const start_date = convertToYMD(start_date_raw);
             const end_date = convertToYMD(end_date_raw); 
-
             const branch_id = $('#selectedBranchId').val();
             const role = $('#selectedRoleId').val() ? $('#selectedRoleId').val().split(',') : [];
             const email = $('#select_list_email.active-line').map(function () {
@@ -1925,87 +1921,275 @@
 
             const url = '{{ route("session-record.print") }}?' +
                 `start_date=${start_date}&end_date=${end_date}&branch_id=${branch_id}&role=${role}&email=${email}`;
-    
 
             fetch(url)
                 .then(response => response.text())
                 .then(data => {
-                    document.getElementById('session-modal-content').innerHTML = data;
-                    $('#logSessionPrintModal').modal('show');
-                })
-                .catch(error => console.error('Error:', error));
-        });
-        // Print Button
-        $(document).on('click', '#printOnlyContent', function () {
-            const content = document.getElementById('session-modal-content').innerHTML;
-            
-            const windowWidth = 900;
-            const windowHeight = 700;
-            // More right side — closer to the right edge
-            const rightMargin = 10; // minimal space from the right edge
-            const left = screen.availWidth - windowWidth - rightMargin;
-            const top = 50;
-            const printWindow = window.open('', '', `width=${windowWidth},height=${windowHeight},top=${top},left=${left}`);
+                    const companyName = @json(setting('company_name'));
+                    const companyAddress = @json(setting('company_address'));
+                    const companyLogo = "{{ asset('image/log/print-page-logo.svg') }}";
+                    
+                    const doc = iframe.contentDocument || iframe.contentWindow.document;
 
-            printWindow.document.write(`
-                <html>
-                    <head>
-                        <title>Print</title>
-                        <style>
-                            @media print{
-                                .print-watermark-text {
-                                    display:block;
-                                    position: fixed;
-                                    top: 50%;
-                                    left: 40%;
-                                    transform: translate(-50%, -40%) rotate(-45deg);
-                                    font-size: 100px;
-                                    color: rgba(0, 0, 0, 0.08); /* very light gray */
-                                    font-weight: bold;
-                                    z-index: 0;
-                                    white-space: nowrap;
-                                    pointer-events: none;
-                                    width: 100%;
-                                    text-align: center;
-                                    /* 3D shadow effect */
-                                    text-shadow:
-                                        2px 2px 0 rgba(0, 0, 0, 0.04),
-                                        4px 4px 0 rgba(0, 0, 0, 0.03),
-                                        6px 6px 0 rgba(0, 0, 0, 0.02);
-
-                                    /* Optional: give a soft blur for realism */
-                                    filter: blur(0.2px);
-                                }
-                                body { 
-                                    -webkit-print-color-adjust: exact !important;
-                                    print-color-adjust: exact !important;
-                                    font-family: sans-serif; 
-                                    padding: 20px; 
-                                }
-                                table { 
-                                    border-collapse: collapse; 
-                                    width: 100%; 
-                                    position: relative;
-                                    z-index: 1;
-                                }
-                                th, td { border: 1px solid #ddd; padding: 2px; }
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <div class="print-watermark-text">
-                            <span>
-                                ${companyName} 
+                    // Dynamically inject logo image
+                    let logoHTML = '';
+                    if (companyLogo) {
+                        logoHTML = `
+                            <span style="float:inline-start;">
+                                <img id="company-logo" src="${companyLogo}" 
+                                    style="width:70px;height:55px;padding:0px;" 
+                                    alt="company-logo">
                             </span>
-                        </div>
-                        ${content}
-                    </body>
-                </html>
-            `);
-            printWindow.document.close();
-            printWindow.focus();
-            printWindow.print();
-            printWindow.close();
+                        `;
+                    }
+
+                    // Inject logo before full HTML write
+                    const updatedData = data.replace('<div class="header">', `<div class="header">${logoHTML}`);
+
+                    const html = `
+                        <!DOCTYPE html>
+                        <html>
+                            <head>
+                                <title>Print Preview</title>
+                                <style>
+                                    body {
+                                        padding: 20px;
+                                        font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
+                                    }
+                                    p,span{
+                                    font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;  
+                                    }
+                                    .header {
+                                        text-align: center;
+                                        margin-bottom: 0px;
+                                    }
+                                    .content {
+                                        margin: 0px;
+                                    }
+                                    .footer {
+                                        text-align: center;
+                                        /* position: fixed;
+                                        bottom: 0; */
+                                        width: 100%;
+                                    }
+                                    table,tr,th,td {
+                                        width: 100%;
+                                        border-collapse: collapse;
+                                        /* common-border : if the common border is stop then will start optional border 
+                                            other wise will be continue common border. 
+                                        */
+                                        border: 1px solid lightgray;
+                                    }
+                                    th{
+                                        background-color: rgb(239, 255, 255) !important;
+                                        /* optional-border */
+                                        border-top: 1px solid lightgray;
+                                        border-bottom: 1px solid lightgray;
+                                        padding: 2px;
+                                        font-size:12px;
+                                        color:black;
+                                        width: 100%;
+                                    }
+                                    /* session table */
+                                    .session-log-table {
+                                        width: 100%;
+                                        border-collapse: collapse;
+                                        border: 1px solid lightgray;
+                                        font-size: 12px;
+                                        color: black;
+                                        margin-top: 5px;
+                                    }
+                                    .session-log-table th,
+                                    .session-log-table td {
+                                        border: 1px solid lightgray;
+                                        padding: 2px;
+                                    }
+                                    .session-log-table thead th {
+                                        background-color: rgb(239, 255, 255);
+                                        font-weight: 700;
+                                    }
+                                    /* Column widths */
+                                    .session-log-table th:nth-child(1),
+                                    .session-log-table td:nth-child(1) { width: 5%; text-align: center; }
+
+                                    .session-log-table th:nth-child(2),
+                                    .session-log-table td:nth-child(2) { width: 5%; text-align: center; }
+
+                                    .session-log-table th:nth-child(3),
+                                    .session-log-table td:nth-child(3) { width: 30%; text-align: left; }
+
+                                    .session-log-table th:nth-child(4),
+                                    .session-log-table td:nth-child(4),
+                                    .session-log-table th:nth-child(5),
+                                    .session-log-table td:nth-child(5) { width: 10%; text-align: left; }
+
+                                    .session-log-table th:nth-child(6),
+                                    .session-log-table td:nth-child(6),
+                                    .session-log-table th:nth-child(7),
+                                    .session-log-table td:nth-child(7) { width: 15%; text-align: left; }
+
+                                    .session-log-table th:nth-child(8),
+                                    .session-log-table td:nth-child(8) { width: 10%; text-align: left; }
+                                    /* summary table */
+                                    #session-modal-content .summary-table {
+                                        width: 100%;
+                                        border-collapse: collapse;
+                                        border: 1px solid lightgray;
+                                        font-size: 12px;
+                                        color: black;
+                                    }
+                                    #session-modal-content .summary-table th,
+                                    #session-modal-content .summary-table td {
+                                        border: 1px solid lightgray;
+                                        padding: 2px;
+                                        text-align: center;
+                                    }
+                                    #session-modal-content .summary-table thead tr:nth-child(1) th {
+                                        background-color: rgb(239, 255, 255);
+                                        font-weight: 700;
+                                        text-align: center;
+                                    }
+                                    #session-modal-content .summary-table th:nth-child(1),
+                                    #session-modal-content .summary-table td:nth-child(1) {
+                                        width: 10%;
+                                    }
+
+                                    #session-modal-content .summary-table th:nth-child(2),
+                                    #session-modal-content .summary-table td:nth-child(2) {
+                                        width: 60%;
+                                        text-align: left;
+                                    }
+                                    #session-modal-content .summary-table th:nth-child(3),
+                                    #session-modal-content .summary-table td:nth-child(3),
+                                    #session-modal-content .summary-table th:nth-child(4),
+                                    #session-modal-content .summary-table td:nth-child(4),
+                                    #session-modal-content .summary-table th:nth-child(5),
+                                    #session-modal-content .summary-table td:nth-child(5) {
+                                        width: 10%;
+                                    }
+                                    /* branch table */
+                                    .print-table-wrapper {
+                                        display: inline-block;
+                                        width: 40%;
+                                        vertical-align: top;
+                                    }
+                                    .branch-summary-table {
+                                        width: 100%;
+                                        border: 1px solid lightgray;
+                                        border-collapse: collapse;
+                                        font-size: 12px;
+                                        color: black;
+                                    }
+                                    .branch-summary-table th,
+                                    .branch-summary-table td {
+                                        border: 1px solid lightgray;
+                                        padding: 2px;
+                                        text-align: center;
+                                    }
+                                    .branch-summary-table thead tr:first-child th.heading {
+                                        background-color: rgb(239, 255, 255);
+                                        font-weight: 700;
+                                        text-align: center;
+                                    }
+                                    .branch-summary-table thead tr:nth-child(2) th:nth-child(1),
+                                    .branch-summary-table tbody tr td:nth-child(1) {
+                                        width: 10%;
+                                    }
+                                    .branch-summary-table thead tr:nth-child(2) th:nth-child(2),
+                                    .branch-summary-table tbody tr td:nth-child(2) {
+                                        width: 30%;
+                                        text-align: left;
+                                    }
+                                    .branch-summary-table thead tr:nth-child(2) th:nth-child(3),
+                                    .branch-summary-table tbody tr td:nth-child(3),
+                                    .branch-summary-table thead tr:nth-child(2) th:nth-child(4),
+                                    .branch-summary-table tbody tr td:nth-child(4),
+                                    .branch-summary-table thead tr:nth-child(2) th:nth-child(5),
+                                    .branch-summary-table tbody tr td:nth-child(5) {
+                                        width: 20%;
+                                    }
+                                    th #theadLeftBorder{
+                                        /* optional-border */
+                                        border-left: 1px solid lightgray;
+                                    }
+                                    th #theadRightBorder{
+                                        /* optional-border */
+                                        border-right:1px solid lightgray;
+                                    }
+                                    tr{
+                                        /* optional-border */
+                                        border: 1px solid lightgray;
+                                        padding: 1px;
+                                        font-size:12px;
+                                        color:black;
+                                        width: 100%;
+                                    }
+                                    td{
+                                        padding: 2px;
+                                        font-size:12px;
+                                        color:black;
+                                        width: 100%; 
+                                    }
+                                    @media print {
+                                        .print-watermark-text {
+                                            display:block;
+                                            position: fixed;
+                                            top: 50%;
+                                            left: 40%;
+                                            transform: translate(-50%, -40%) rotate(-45deg);
+                                            font-size: 100px;
+                                            color: rgba(0, 0, 0, 0.08);
+                                            font-weight: bold;
+                                            z-index: 0;
+                                            white-space: nowrap;
+                                            pointer-events: none;
+                                            width: 100%;
+                                            text-align: center;
+                                            text-shadow:
+                                                2px 2px 0 rgba(0, 0, 0, 0.04),
+                                                4px 4px 0 rgba(0, 0, 0, 0.03),
+                                                6px 6px 0 rgba(0, 0, 0, 0.02);
+                                            filter: blur(0.2px);
+                                        }
+                                        body { 
+                                            -webkit-print-color-adjust: exact !important;
+                                            print-color-adjust: exact !important;
+                                            font-family: sans-serif; 
+                                            padding: 20px; 
+                                        }
+                                        table { 
+                                            border-collapse: collapse; 
+                                            width: 100%; 
+                                            position: relative;
+                                            z-index: 1;
+                                        }
+                                        th, td { border: 1px solid #ddd; padding: 2px; }
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <div class="print-watermark-text">${companyName}</div>
+                                ${updatedData}
+                            </body>
+                        </html>
+                    `;
+
+                    doc.open();
+                    doc.write(html);
+                    doc.close();
+
+                    // Wait for image load inside iframe before printing
+                    const logoImage = doc.getElementById('company-logo');
+
+                    if (logoImage) {
+                        // Attach load event listener
+                        logoImage.addEventListener('load', () => {
+                            iframe.contentWindow.focus();
+                            iframe.contentWindow.print();
+                        });
+                    }
+                })
+                .catch(error => console.error('Error loading print content:', error));
         });
     });
  </script>
