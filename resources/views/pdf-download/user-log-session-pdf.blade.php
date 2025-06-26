@@ -47,23 +47,15 @@
             width: 100%;
             border-collapse: collapse;
         }
+        th, td { border: 1px solid #ddd;}
         th{
             background-color: rgb(239, 255, 255);
-            border-top: 1px solid lightgray;
-            border-bottom: 1px solid lightgray;
             padding: 2px;
             font-size:12px;
             color:black;
             width: 100%;
         }
-        th #theadLeftBorder{
-            border-left: 1px solid lightgray;
-        }
-        th #theadRightBorder{
-            border-right:1px solid lightgray;
-        }
         tr{
-            border: 1px solid lightgray;
             padding: 1px;
             font-size:12px;
             color:black;
@@ -110,22 +102,22 @@
     </div>
     <div class="header">
         <div class="row">
-            <div style="background-color:white;margin-top:1px;border-bottom: 2px double lightgray;padding-bottom:0px;">
+            <div style="background-color:white;margin-top:1px;border-bottom: 2px double rgb(209, 230, 230);padding-bottom:0px;">
                 <div class="col-6">
                     <span style="float:inline-start;">
                         <img style="width:70px;height:55px;padding:0px;" src="data:image/png;base64,{{ $imageData }}" alt="company-logo" width="100">
                     </span>
-                    <span style="color:black; font-size:11px; font-wight:700px; float:right; margin-top:10px; padding-right:5px">
-                        Download :<?php
+                    <span style="color:black; font-size:11px; font-wight:700px; float:right; margin-top:-20px; padding-right:5px">
+                       [ Download :<?php
                         $timezone = date_default_timezone_get();
                         ?>
                         <?php
                         date_default_timezone_set('Asia/Dhaka');
                         echo date('d l M Y') . " || ";
                         echo date("h:i:sA");
-                        ?><br>
+                        ?> ] ,<br>
                         <label for="prepared">
-                            [ User : {{Auth::User()->login_email}} ]
+                            [ Data-Exporter : {{Auth::User()->login_email}} ]
                         </label><br>
                     </span>
                 </div>
@@ -203,77 +195,80 @@
                 </tbody>
             </table>
         </div>
-        <div style="width: 100%; overflow: hidden;margin-top:10px;">
-            <div style="display: inline-block; width: 40%; vertical-align: top;">
-                <table style="width: 100%; border: 1px solid lightgray;">
-                    <thead>
-                        <tr style="font-weight: 700;font-size:12px;">
-                            <th colspan="5" style="text-align:center;background-color:rgb(239, 255, 255);">User Summary</th>
-                        </tr>
-                        <tr>
-                            <th style="width: 10%;">SN.</th>
-                            <th style="width: 60%;text-align:left;">Email</th>
-                            <th style="width: 10%;">Login</th>
-                            <th style="width: 10%;">Logout</th>
-                            <th style="width: 10%;">Activity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($userSummaryData as $index => $user)
-                        <tr>
-                            <td style="width: 10%;text-align:center;">{{ $index + 1 }}</td>
-                            <td style="width: 60%;text-align:left;">{{ $user->email }}</td>
-                            <td style="width: 10%;text-align:center;">{{ number_format($user->total_login, 2) }}</td>
-                            <td style="width: 10%;text-align:center;">{{ number_format($user->total_logout, 2) }}</td>
-                            <td style="width: 10%;text-align:center;">{{ number_format($user->total_activity, 2) }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        <tr style="background-color:rgb(239, 255, 255);font-weight:700;">
-                            <td colspan="2" style="text-align:center;">Total</td>
-                            <td style="width: 10%;text-align:center;">{{ number_format($userTotalLogin, 2) }}</td>
-                            <td style="width: 10%;text-align:center;">{{ number_format($userTotalLogout, 2) }}</td>
-                            <td style="width: 10%;text-align:center;">{{ number_format($userSubTotalActivity, 2) }}</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-
-            <div style="display: inline-block; width: 40%; vertical-align: top;margin-left:136px">
-                <table style="width: 100%; border: 1px solid lightgray;">
-                    <thead>
-                        <tr style="font-weight: 700;font-size:12px;">
-                            <th colspan="5" style="text-align:center;background-color:rgb(239, 255, 255);">Branch Summary</th>
-                        </tr>
-                        <tr style="font-weight: 700;">
-                            <th style="width: 10%;">SN.</th>
-                            <th style="width: 30%;text-align:left;">Branch-ID</th>
-                            <th style="width: 20%;">Login</th>
-                            <th style="width: 20%;">Logout</th>
-                            <th style="width: 20%;">Activity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $firstSession = $logSessionData->first();
-                        @endphp
-                        <tr style="font-weight: 600;">
-                            <td style="width: 10%;text-align:center;">1</td>
-                            <td style="width: 30%;text-align:left;">{{ $firstSession->branch_id ?? 'N/A' }}</td>
-                            <td style="width: 20%;text-align:center;">{{ number_format($totalLogin, 2) }}</td>
-                            <td style="width: 20%;text-align:center;">{{ number_format($totalLogout, 2) }}</td>
-                            <td style="width: 20%;text-align:center;">{{ number_format($totalActivity, 2) }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <!-- Summary Table -->
+        <table style="width: 100%; margin-top:10px;border:none;">
+            <tr style="border:none;padding: 0px;">
+                <td style="width: 49%; vertical-align: top;border:none;padding: 0px;">
+                    <!-- User Summary Table -->
+                    <table style="width: 100%; border: 1px solid lightgray;">
+                        <thead>
+                            <tr style="font-weight: 700;font-size:12px;">
+                                <th colspan="5" style="text-align:center;background-color:rgb(239, 255, 255);">User Summary</th>
+                            </tr>
+                            <tr>
+                                <th style="width: 10%;">SN.</th>
+                                <th style="width: 60%;text-align:left;">Email</th>
+                                <th style="width: 10%;">Login</th>
+                                <th style="width: 10%;">Logout</th>
+                                <th style="width: 10%;">Activity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($userSummaryData as $index => $user)
+                            <tr>
+                                <td style="text-align:center;">{{ $index + 1 }}</td>
+                                <td style="text-align:left;">{{ $user->email }}</td>
+                                <td style="text-align:center;">{{ number_format($user->total_login, 2) }}</td>
+                                <td style="text-align:center;">{{ number_format($user->total_logout, 2) }}</td>
+                                <td style="text-align:center;">{{ number_format($user->total_activity, 2) }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr style="background-color:rgb(239, 255, 255);font-weight:700;">
+                                <td colspan="2" style="text-align:center;">Total</td>
+                                <td style="text-align:center;">{{ number_format($userTotalLogin, 2) }}</td>
+                                <td style="text-align:center;">{{ number_format($userTotalLogout, 2) }}</td>
+                                <td style="text-align:center;">{{ number_format($userSubTotalActivity, 2) }}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </td>
+                <td style="width: 2%;border:none;"></td>
+                <td style="width: 49%; vertical-align: top;border:none;padding: 0px;">
+                    <!-- Branch Summary Table -->
+                    <table style="width: 100%; border: 1px solid lightgray;">
+                        <thead>
+                            <tr style="font-weight: 700;font-size:12px;">
+                                <th colspan="5" style="text-align:center;background-color:rgb(239, 255, 255);">Branch Summary</th>
+                            </tr>
+                            <tr style="font-weight: 700;">
+                                <th style="width: 10%;">SN.</th>
+                                <th style="width: 30%;text-align:left;">Branch-ID</th>
+                                <th style="width: 20%;">Login</th>
+                                <th style="width: 20%;">Logout</th>
+                                <th style="width: 20%;">Activity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php $firstSession = $logSessionData->first(); @endphp
+                            <tr style="font-weight: 600;">
+                                <td style="text-align:center;">1</td>
+                                <td style="text-align:left;">{{ $firstSession->branch_id ?? 'N/A' }}</td>
+                                <td style="text-align:center;">{{ number_format($totalLogin, 2) }}</td>
+                                <td style="text-align:center;">{{ number_format($totalLogout, 2) }}</td>
+                                <td style="text-align:center;">{{ number_format($totalActivity, 2) }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
     </div>
     <div class="row">
         <div class="col-12">
             <div style="background-color: white; color:black; text-align:left; font-size:12px;font-weight:700;">
-                <p style="display: inline-block; margin-top:50px;">
+                <p style="display: inline-block; margin-top:50px;margin-bottom:2px;">
                     <span style="text-align: center;">
                         <label for="prepared">
                             Prepared by ({{Auth::User()->name}})
@@ -293,7 +288,7 @@
             </div>
         </div>
     </div>                    
-    <div class="footer" style="border-top: 1px double lightgray;">
+    <div class="footer" style="border-top: 2px double rgb(209, 230, 230);">
         @if(count($companyinformations) > 0)
             @foreach($companyinformations as $infos)
                 <p style="color:black; font-size:12px; text-align:center;">

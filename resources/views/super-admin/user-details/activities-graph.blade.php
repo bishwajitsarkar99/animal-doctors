@@ -2016,20 +2016,20 @@
                                     .session-log-table td:nth-child(2) { width: 5%; text-align: center; }
 
                                     .session-log-table th:nth-child(3),
-                                    .session-log-table td:nth-child(3) { width: 30%; text-align: left; }
+                                    .session-log-table td:nth-child(3) { width: 30%; text-align: left; padding-left:5px; }
 
                                     .session-log-table th:nth-child(4),
                                     .session-log-table td:nth-child(4),
                                     .session-log-table th:nth-child(5),
-                                    .session-log-table td:nth-child(5) { width: 10%; text-align: left; }
+                                    .session-log-table td:nth-child(5) { width: 10%; text-align: left; padding-left:5px; }
 
                                     .session-log-table th:nth-child(6),
                                     .session-log-table td:nth-child(6),
                                     .session-log-table th:nth-child(7),
-                                    .session-log-table td:nth-child(7) { width: 15%; text-align: left; }
+                                    .session-log-table td:nth-child(7) { width: 15%; text-align: left; padding-left:5px; }
 
                                     .session-log-table th:nth-child(8),
-                                    .session-log-table td:nth-child(8) { width: 10%; text-align: left; }
+                                    .session-log-table td:nth-child(8) { width: 10%; text-align: left; padding-left:5px; }
                                     /* summary table */
                                     #session-modal-content .summary-table {
                                         width: 100%;
@@ -2058,6 +2058,7 @@
                                     #session-modal-content .summary-table td:nth-child(2) {
                                         width: 60%;
                                         text-align: left;
+                                        padding-left:5px;
                                     }
                                     #session-modal-content .summary-table th:nth-child(3),
                                     #session-modal-content .summary-table td:nth-child(3),
@@ -2191,7 +2192,43 @@
                 })
                 .catch(error => console.error('Error loading print content:', error));
         });
+        
+        let connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        if (connection) {
+            console.log("Network Connection Spreed:", connection.effectiveType); // e.g., 'wifi', '4g', 'cellular'
+        }
     });
+ </script>
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        fetch("https://api.ipify.org?format=json")
+            .then(res => res.json())
+            .then(data => {
+                const userIp = data.ip;
+
+                const userInfo = {
+                    os: platform.os?.family + " " + platform.os?.version,
+                    browser: platform.name + " " + platform.version,
+                    layout: platform.layout, // e.g. Blink, Trident
+                    device: platform.product || 'Desktop',
+                    description: platform.description,
+                    userNetworkIp: userIp // include IP here too
+                };
+
+                console.log(userInfo); // Now includes IP
+            });
+
+    });
+    // Optional: Send to Laravel backend
+    // fetch("/log-user-agent", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //         "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+    //     },
+    //     body: JSON.stringify(userInfo)
+    // });
  </script>
 <!-- Demo bar chart -->
 <!-- <script>

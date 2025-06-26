@@ -149,12 +149,25 @@
                                     <div class="row view-card-section">
                                         <div class="col-xl-12 pb-3 pt-3">
                                             <span class="session_id" data-id="${row.id}"><span class="user_agent_label">Session-ID :</span> ${row.id}</span>
-                                            <p class="user_agent"><span class="user_agent_label">User-Agent :</span> ${row.user_agent} <br>
-                                                <span class="user_location"><span class="user_agent_label">IP-Address :</span> ${row.ip_address}</span> <br>
-                                                <span class="user_location"><span class="user_agent_label">Login-Date :</span> ${formatDate(row.created_at)}</span> <br>
-                                                <span class="user_location"><span class="user_agent_label">Logout-Date :</span> ${updateDate}</span> <br>
-                                                <span class="user_location"><span class="user_agent_label">Last-Activity :</span> ${lastActivity}</span>
-                                            </p>
+                                            <div class="user-agent-tree">
+                                                <span class="user_agent_label">User-Agent :</span>
+                                                <ul>
+                                                    <li><span class="user_agent_label">Browser-Name:</span> ${row.user_agent?.browser ?? ''}
+                                                        <ul>
+                                                            <li><span class="user_agent_label">Browser Engine:</span> ${row.user_agent?.layout ?? ''}</li>
+                                                            <li><span class="user_agent_label">Operating-System:</span> ${row.user_agent?.os ?? ''}</li>
+                                                            <li><span class="user_agent_label">Device:</span> ${row.user_agent?.device ?? ''}</li>
+                                                            <li><span class="user_agent_label">Device-Manufacturer:</span> ${row.user_agent?.manufacturer ?? ''}</li>
+                                                            <li><span class="user_agent_label">Public-IP:</span> ${row.user_agent?.network_ip ?? ''}</li>
+                                                            <li><span class="user_agent_label">Client-IP:</span> ${row.ip_address}</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><span class="user_agent_label">Description:</span> ${row.user_agent?.description ?? ''}</li>
+                                                </ul>
+                                            </div>
+                                            <span class="user_location"><span class="user_agent_label">Login-Date :</span> ${formatDate(row.created_at)}</span> <br>
+                                            <span class="user_location"><span class="user_agent_label">Logout-Date :</span> ${updateDate}</span> <br>
+                                            <span class="user_location"><span class="user_agent_label">Last-Activity :</span> ${lastActivity}</span>
                                         </div>
                                     </div>
                                 </div>

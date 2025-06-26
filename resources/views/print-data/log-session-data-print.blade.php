@@ -17,7 +17,7 @@
 <body>
     <div id="session-modal-content">
         <div class="header">
-            <div class="row" style="background-color:white;border-bottom: 1px double rgb(33 197 197);padding-bottom:20px;">
+            <div class="row" style="background-color:white;border-bottom: 2px double rgb(209, 230, 230);padding-bottom:20px;">
                 <div class="col-12">
                     @foreach($companyinformations as $infos)
                         <p style="color:black; font-size:12px; text-align:left;margin-left:80px;margin-bottom: 0px;margin-top:0px;padding-top:12px;">
@@ -25,17 +25,17 @@
                             <span style="color:black; font-size:12px;">Address :{{$infos->company_address}}</span><br>
                         </p>
                     @endforeach
-                    <span style="color:black; font-size:11px; padding-right:5px;float:right;margin-top:-30px;">
-                        Download :<?php
+                    <span style="color:black; font-size:11px; padding-right:5px;float:right;margin-top:-60px;">
+                        [ Download :<?php
                         $timezone = date_default_timezone_get();
                         ?>
                         <?php
                         date_default_timezone_set('Asia/Dhaka');
                         echo date('d l M Y') . " || ";
                         echo date("h:i:sA");
-                        ?><br>
+                        ?> ] ,<br>
                         <label for="prepared">
-                            [ User : {{Auth::User()->login_email}} ]
+                           [ Data-Exporter : {{Auth::User()->login_email}} ]
                         </label>
                     </span>
                 </div>
@@ -131,10 +131,10 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="2">Total</td>
-                                <td>{{ number_format($userTotalLogin, 2) }}</td>
-                                <td>{{ number_format($userTotalLogout, 2) }}</td>
-                                <td>{{ number_format($userSubTotalActivity, 2) }}</td>
+                                <td colspan="2"><strong>Total</strong></td>
+                                <td><strong>{{ number_format($userTotalLogin, 2) }}</strong></td>
+                                <td><strong>{{ number_format($userTotalLogout, 2) }}</strong></td>
+                                <td><strong>{{ number_format($userSubTotalActivity, 2) }}</strong></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -159,11 +159,11 @@
                                 $firstSession = $logSessionData->first();
                             @endphp
                             <tr>
-                                <td>1</td>
-                                <td>{{ $firstSession->branch_id ?? 'N/A' }}</td>
-                                <td>{{ number_format($totalLogin, 2) }}</td>
-                                <td>{{ number_format($totalLogout, 2) }}</td>
-                                <td>{{ number_format($totalActivity, 2) }}</td>
+                                <td><strong>1</strong></td>
+                                <td><strong>{{ $firstSession->branch_id ?? 'N/A' }}</strong></td>
+                                <td><strong>{{ number_format($totalLogin, 2) }}</strong></td>
+                                <td><strong>{{ number_format($totalLogout, 2) }}</strong></td>
+                                <td><strong>{{ number_format($totalActivity, 2) }}</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -171,21 +171,21 @@
             </div>
         </div>
         <div class="row" style="display: flex;justify-content: space-between;color:black; text-align:left; font-size:12px;font-weight:700;">
-            <div class="col-4" style="margin-top:50px;text-align: center;">
+            <div class="col-4" style="margin-top:50px;margin-bottom:5px;text-align: center;">
                 <span>
                     <label for="prepared">
                         Prepared by ({{Auth::User()->name}})
                     </label>
                 </span>
             </div>
-            <div class="col-4" style="margin-top:50px;text-align: center;">
+            <div class="col-4" style="margin-top:50px;margin-bottom:5px;text-align: center;">
                 <span>
                     <label for="reference">
                         Reference by
                     </label>
                 </span>
             </div>
-            <div class="col-4" style="margin-top:50px;text-align: center;">
+            <div class="col-4" style="margin-top:50px;margin-bottom:5px;text-align: center;">
                 <span>
                     <label for="prepared">
                         Authorized by
@@ -193,7 +193,7 @@
                 </span>
             </div>
         </div>                    
-        <div class="footer" style="border-top: 1px double rgb(33 197 197);">
+        <div class="footer" style="border-top: 2px double rgb(209, 230, 230);">
             @if(count($companyinformations) > 0)
                 @foreach($companyinformations as $infos)
                     <p style="color:black; font-size:12px; text-align:center;">

@@ -491,6 +491,16 @@ class AuthService
             CacheManage::clearMultiple($prefixes, $user->branch_id);
 
             if($user){
+                // Safely extract device info
+                $deviceInfo = json_decode($request->input('device_info'), true);
+                $browser = $deviceInfo['browser'] ?? null;
+                $os = $deviceInfo['os'] ?? null;
+                $layout = $deviceInfo['layout'] ?? null;
+                $manufacturer = $deviceInfo['manufacturer'] ?? null;
+                $device = $deviceInfo['device'] ?? null;
+                $description = $deviceInfo['description'] ?? null;
+                $publicIp = $deviceInfo['user_network_ip'] ?? null;
+
                 $sessionId = Str::random(40);
                 DB::table('sessions')->insert([
                     'id' => $sessionId,
@@ -506,7 +516,15 @@ class AuthService
                     'status' => $user->status ?? '-',
                     'account_create' => $user->created_at,
                     'account_last_update' => $user->updated_at,
-                    'user_agent' => $request->userAgent(),
+                    'user_agent' => serialize([
+                        'browser' => $browser,
+                        'os' => $os,
+                        'layout' => $layout,
+                        'manufacturer' => $manufacturer,
+                        'device' => $device,
+                        'network_ip' => $publicIp,
+                        'description' => $description,
+                    ]),
                     'payload' => 'login',
                     'last_activity' => now()->timestamp,
                     'created_at' => now(),

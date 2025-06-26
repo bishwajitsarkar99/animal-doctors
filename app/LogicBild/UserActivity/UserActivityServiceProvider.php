@@ -441,6 +441,12 @@ class UserActivityServiceProvider
 
             $perItem = max((int) $request->input('per_item', 10), 1);
             $paginateData = $user_activities->paginate($perItem);
+
+            // Unserialize user_agent on the paginated collection
+            $paginateData->getCollection()->transform(function ($item) {
+                $item->user_agent = @unserialize($item->user_agent);
+                return $item;
+            });
             
             return response()->json([
                 'data' => $paginateData->items(),
