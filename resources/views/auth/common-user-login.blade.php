@@ -240,7 +240,7 @@
                 <h4 class="heading_admin text-shadow" style="text-align: center;"><span class="skeleton head-animation">{{ setting('login_page_title')}}</span></h4>
                 <div class="card card-form-control login_card">
                     <form id="loginForm" action="{{ route('login') }}" method="POST" autocomplete="off">
-                        <input type="hidden" name="device_info" id="device_info">
+                        <input type="hidden" name="device_user_agent" id="device_user_agent">
                         <div class="col-md-12">
                             @if(Session::get('fail'))
                             <div class="alert alert-danger error_message">
@@ -339,7 +339,6 @@
     <!-- Boostrap5 JS Table Filter -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/platform/1.3.6/platform.min.js"></script>
     <!-- JQUERY CDN LINK -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
@@ -483,48 +482,15 @@
                 .then(res => res.json())
                 .then(data => {
                     const userIp = data.ip;
+                    const userAgent = navigator.userAgent;
 
-                    function detectDeviceType() {
-                        const ua = navigator.userAgent;
-                        const screenWidth = window.innerWidth;
-                        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-                        // Mobile checks
-                        if (/android/i.test(ua)) {
-                            return /mobile/i.test(ua) ? 'Mobile' : 'Tablet';
-                        }
-
-                        if (/iPhone|iPod/i.test(ua)) return 'Mobile';
-                        if (/iPad|Tablet/i.test(ua)) return 'Tablet';
-                        if (/Windows Phone|webOS|BlackBerry/i.test(ua)) return 'Mobile';
-
-                        // Screen width heuristic
-                        if (screenWidth <= 768) return 'Mobile';
-
-                        // Touchscreen heuristic
-                        if (screenWidth > 768 && screenWidth <= 1366) {
-                            // If it has touch, assume laptop/tablet hybrid
-                            return isTouch ? 'Laptop' : 'Desktop';
-                        }
-
-                        // Large screen and no touch → Desktop
-                        return 'Desktop';
-                    }
-
-                    const userInfo = {
-                        os: platform.os?.family + " " + platform.os?.version,
-                        browser: platform.name + " " + platform.version,
-                        layout: platform.layout,
-                        manufacturer: platform.manufacturer ?? null,
-                        device: detectDeviceType(),
-                        description: platform.description,
-                        user_network_ip: userIp
-                    };
-
-                    // Set value to hidden input as JSON
-                    const deviceInput = document.getElementById("device_info");
-                    if (deviceInput) {
-                        deviceInput.value = JSON.stringify(userInfo);
+                    const input = document.getElementById("device_user_agent");
+                    if (input) {
+                        const info = {
+                            description: userAgent,
+                            user_network_ip: userIp
+                        };
+                        input.value = JSON.stringify(info);
                     }
                 });
         });

@@ -154,15 +154,23 @@
                                                 <ul>
                                                     <li><span class="user_agent_label">Browser-Name:</span> ${row.user_agent?.browser ?? ''}
                                                         <ul>
-                                                            <li><span class="user_agent_label">Browser Engine:</span> ${row.user_agent?.layout ?? ''}</li>
-                                                            <li><span class="user_agent_label">Operating-System:</span> ${row.user_agent?.os ?? ''}</li>
-                                                            <li><span class="user_agent_label">Device:</span> ${row.user_agent?.device ?? ''}</li>
-                                                            <li><span class="user_agent_label">Device-Manufacturer:</span> ${row.user_agent?.manufacturer ?? ''}</li>
-                                                            <li><span class="user_agent_label">Public-IP:</span> ${row.user_agent?.network_ip ?? ''}</li>
-                                                            <li><span class="user_agent_label">Client-IP:</span> ${row.ip_address}</li>
+                                                            <li><span class="user_agent_label">Browser Engine :</span> ${row.user_agent?.layout ?? ''}</li>
+                                                            <li><span class="user_agent_label">Operating-System :</span> ${row.user_agent?.os ?? ''}</li>
+                                                            <li><span class="user_agent_label">Device :</span> ${row.user_agent?.device ?? ''}</li>
+                                                            <li><span class="user_agent_label">Device-Brand:</span>
+                                                                ${row.user_agent?.brand && row.user_agent.brand.trim() !== '' ? row.user_agent.brand : 'Unknown (that will be shown only about mobile or tablet)'}
+                                                            </li>
+                                                            <li><span class="user_agent_label">Device-Model:</span>
+                                                                ${row.user_agent?.model && row.user_agent.model.trim() !== '' ? row.user_agent.model : 'Unknown (that will be shown only about mobile or tablet)'}
+                                                            </li>
+                                                            <li><span class="user_agent_label">Device-Manufacturer:</span>
+                                                                ${row.user_agent?.manufacturer && row.user_agent.manufacturer.trim() !== '' ? row.user_agent.manufacturer : 'Unknown (that will be shown only about mobile or tablet)'}
+                                                            </li>
+                                                            <li><span class="user_agent_label">Public-IP :</span> ${row.user_agent?.network_ip ?? 'Unknown'}</li>
+                                                            <li><span class="user_agent_label">IP-Address :</span> ${row.ip_address}</li>
                                                         </ul>
                                                     </li>
-                                                    <li><span class="user_agent_label">Description:</span> ${row.user_agent?.description ?? ''}</li>
+                                                    <li><span class="user_agent_label">Description :</span> ${row.user_agent?.description ?? ''}</li>
                                                 </ul>
                                             </div>
                                             <span class="user_location"><span class="user_agent_label">Login-Date :</span> ${formatDate(row.created_at)}</span> <br>

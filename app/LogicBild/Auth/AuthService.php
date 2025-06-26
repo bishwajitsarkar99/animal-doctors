@@ -20,6 +20,8 @@ use App\Support\Setting;
 use App\Models\Branch\UserBranchAccessPermission;
 use App\Models\Branch\AdminBranchAccessPermission;
 use App\cacheStorage\CacheManage;
+use DeviceDetector\DeviceDetector;
+
 class AuthService
 {
     /**
@@ -491,14 +493,44 @@ class AuthService
             CacheManage::clearMultiple($prefixes, $user->branch_id);
 
             if($user){
-                // Safely extract device info
-                $deviceInfo = json_decode($request->input('device_info'), true);
-                $browser = $deviceInfo['browser'] ?? null;
-                $os = $deviceInfo['os'] ?? null;
-                $layout = $deviceInfo['layout'] ?? null;
-                $manufacturer = $deviceInfo['manufacturer'] ?? null;
-                $device = $deviceInfo['device'] ?? null;
-                $description = $deviceInfo['description'] ?? null;
+                // Use DeviceDetector to extract detailed info from User-Agent
+                $deviceInfo = json_decode($request->input('device_user_agent'), true);
+                $userAgent = $deviceInfo['description'] ?? $request->userAgent();
+                $dd = new DeviceDetector($userAgent);
+                $dd->parse();
+
+                if ($dd->isBot()) {
+                    $browser = 'Bot';
+                    $os = null;
+                    $layout = null;
+                    $manufacturer = null;
+                    $device = 'Bot';
+                    $description = $userAgent;
+                } else {
+                    $clientInfo = $dd->getClient(); // browser info
+                    $osInfo = $dd->getOs();         // OS info
+                    $browser = ($clientInfo['name'] ?? '') . ' ' . ($clientInfo['version'] ?? '');
+                    $layout = $clientInfo['engine'] ?? '';
+                    $os = ($osInfo['name'] ?? '') . ' ' . ($osInfo['version'] ?? '');
+                    $manufacturer = $dd->getBrandName() ?? 'Unknown';
+                    $device = $dd->getDeviceName() ?? 'Unknown';
+                    $brand = $dd->getBrandName() ?? ($device === 'desktop' ? 'Desktop' : 'Unknown');
+                    $model = $dd->getModel() ?? ($device === 'desktop' ? 'Generic PC' : 'Unknown');
+
+                    $shortDescription = trim(
+                        ($clientInfo['name'] ?? 'Unknown') . ' ' .
+                        ($clientInfo['version'] ?? '') . ' [ ' .
+                        ($clientInfo['engine'] ?? '') . ']'
+                    );
+                    $osName = $osInfo['name'] ?? '';
+                    $osVersion = $osInfo['version'] ?? '';
+                    if ($osName || $osVersion) {
+                        $shortDescription .= ' on ' . trim($osName . ' ' . $osVersion);
+                    }
+
+                    $description = $shortDescription;
+                }
+
                 $publicIp = $deviceInfo['user_network_ip'] ?? null;
 
                 $sessionId = Str::random(40);
@@ -522,6 +554,8 @@ class AuthService
                         'layout' => $layout,
                         'manufacturer' => $manufacturer,
                         'device' => $device,
+                        'brand' => $brand,
+                        'model' => $model,
                         'network_ip' => $publicIp,
                         'description' => $description,
                     ]),
