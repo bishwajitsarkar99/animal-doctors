@@ -38,8 +38,6 @@
         <br>
     @endforeach
 
-    @php $firstSession = $logSessionData->first(); @endphp
-
     <table>
         <tr>
             <td></td>

@@ -21,6 +21,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/session-data-download/export-excel', [UserLocationController::class, 'exportExcelDownloadSession'])->name('session-record_excel.action');
             Route::get('/session-data-download/export-cvs-format', [UserLocationController::class, 'exportExcelCsvDownloadSession'])->name('session-record_cvs_file.action');
             Route::get('/session-data-download/print', [UserLocationController::class, 'printSession'])->name('session-record.print');
+            Route::get('/user-session-single-data-download/pdf', [UserLocationController::class, 'pdfDownloadUserLogged'])->name('details-session-record.pdf');
+            Route::get('/user-session-single-data-download/print', [UserLocationController::class, 'printDownloadUserLogged'])->name('details-session-record.print');
         });
     });
 });

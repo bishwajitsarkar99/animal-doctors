@@ -45,9 +45,12 @@ htm,body{
     content: '';
     border-left: 2px solid #ccc;
     position: absolute;
-    top: 0;
+    top: -4px;
     bottom: 0;
     left: 18px;
+}
+ul#userAgentParentTree {
+    margin-left: 53px;
 }
 .user-agent-tree li {
     position: relative;
@@ -1993,17 +1996,51 @@ label.per_item_class {
     border-bottom: 1px solid #dfdfdf;
     padding-bottom: 11px;
 }
+label#companyName {
+    font-size: 14px;
+    font-weight: 700;
+}
 .logo_box {
     justify-content: left;
     display: flex;
+    width: 120px;
+}
+.card_btn_group{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+button.btn-close.btn-btn-sm{
+    box-shadow: none;
+    font-size: 12px;
+}
+button.close_send_view {
+    height: 20px;
+    padding: 6px 6px;
+}
+a#pdf, a#print{
+    padding: 4px 4px;  
+}
+a#pdf:hover{
+    background-color: rgba(0,123,255,0.3);
+    border-radius: 3px;
+    padding: 4px 4px; 
+}
+a#print:hover{
+    background-color: rgba(0,123,255,0.3);
+    border-radius: 3px;
+    padding: 4px 4px;
+}
+button#viewBtnClose:hover{
+    background-color: rgba(0,123,255,0.3);
+    border-radius: 3px;
+    padding: 6px 6px; 
 }
 img.company_logo {
-    width: 50px;
-    height: 50px;
-    padding: 5px 5px;
+    width: 65px;
+    height: 55px;
     background-color: transparent;
-    background-image: linear-gradient(to right, rgb(39 126 205) 100%, rgb(0 123 255) 50%, rgb(0, 81, 255) 100%);
-    border-radius: 5px;
+    margin-top: -11px;
 }
 tr.table-log-details-row{
     background-color: transparent;

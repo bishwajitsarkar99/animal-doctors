@@ -1,9 +1,10 @@
 <script type="module">
     import { getTimeDifference } from "/module/module-min-js/helper-function-min.js";
-    import { formatDate } from "/module/module-min-js/helper-function-min.js";
+    import { modernDateFormat } from "/module/module-min-js/helper-function-min.js";
     const companyName = @json(setting('company_name'));
     const companyAddress = @json(setting('company_address'));
-    const companyLogo = "{{ asset('backend_asset/main_asset/img/' . setting('update_company_logo')) }}";
+    // const companyLogo = "{{ asset('backend_asset/main_asset/img/' . setting('update_company_logo')) }}";
+    const companyLogo = "{{ asset('image/log/print-page-logo.svg') }}";
     const pageLoader = "{{asset('image/loader/loading.gif')}}";
     $(document).ready(function(){
         // ACtive table row background
@@ -35,15 +36,16 @@
             }
 
             return [...rows].map((row, key) => {
-                let statusText, statusOffColor, currentLogText, activeTime, updateDate, lastActivity, tdPadding;
+                let statusText, statusOffColor, currentLogText, activeTime, lastLogged, updateDate, lastActivity, tdPadding;
                 if (row.payload == 'logout') {
                     statusText = '<span class="bg-light-alert badge rounded-pill" style="color:white;font-weight:800;font-size: 11px;letter-spacing: 1px;">logout</span>';
                     statusOffColor = 'color:black;background-color: #fff;';
-                    updateDate = `<span>${formatDate(row.updated_at)}</span>`;
+                    updateDate = `<span>${modernDateFormat(row.updated_at)}</span>`;
                     lastActivity = `<span>${row.last_activity}</span>`;
                     tdPadding = ` style="padding-top:2px;padding-bottom:2px;" `;
                     // Calculate active time based on logout time
                     activeTime = `<span style="color:#4c4c4c;font-size:10px;">${getTimeDifference(row.updated_at)} ago</span>`;
+                    lastLogged = `<span>${getTimeDifference(row.updated_at)} ago</span>`;
                 } else if (row.payload == 'login') {
                     statusText = '<span class="bg-success badge rounded-pill" style="color:white;font-weight:800;font-size: 11px;letter-spacing: 1px;">login</span>';
                     statusOffColor = 'color:black;background-color: #fff;';
@@ -58,6 +60,7 @@
                     tdPadding = ` style="padding-top:2px;padding-bottom:2px;" `;
                     // Calculate active time based on login time
                     activeTime = `<span style="color:blue;font-size:10px;">${getTimeDifference(row.created_at)} <input id="light_focus" type="text" class="light2-focus ms-1" readonly></input></span>`;
+                    lastLogged = `<span>${getTimeDifference(row.created_at)} <input id="light_focus" type="text" class="light2-focus ms-1 mt-2" readonly></input></span>`;
                 }
                 return `
                     <tr class="table-row-light table-row user-table-row supp-table-row table-light" key="${key}" data-user-id="${row.last_activity}" id="supp_tab">
@@ -81,7 +84,7 @@
                             </span>
                         </td>
                         <td class="txt_ ps-1 supp_vew7" id="supp_tab10" hidden>${row.last_activity}</td>
-                        <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${formatDate(row.created_at)}</td>
+                        <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${modernDateFormat(row.created_at)}</td>
                         <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${updateDate}</td>
                         <td class="txt_ pe-2 supp_vew7 table-td-align" id="supp_tab10">${lastActivity}</td>
                     </tr>
@@ -91,25 +94,57 @@
                                 <div class="log_card_header view-card-section" id="logCardHeader">
                                     <div class="row">
                                         <div class="col-xl-2 logo_box">
-                                            <span class="l-icon ps-2">
-                                                <svg width="40" height="40" viewBox="0 0 20 20">
-                                                    <path d="M5 0 V15 H20" stroke="#4c4c4cd6" stroke-width="1" fill="none"/>
+                                            <span class="l-icon ps-1">
+                                                <svg width="40" height="65" viewBox="0 0 20 35">
+                                                    <path d="M5 0 V22.5 H20" stroke="#4c4c4cd6" stroke-width="1" fill="none"/>
                                                 </svg>
                                             </span>
-                                            <label class="logo_area mt-3" for="logo_area" id="logo_area">
+                                            <label class="logo_area mt-4" for="logo_area" id="logo_area">
                                                 <img class="company_logo" src="${companyLogo}">
                                             </label>
                                         </div>
-                                        <div class="col-xl-9">
-                                            <p class="company_name_area mt-3">
+                                        <div class="col-xl-8">
+                                            <p class="company_name_area mt-4">
                                                 <label class="company_name" for="company_name" id="companyName">${companyName}</label><br>
                                                 <label class="company_address" for="company_address" id="companyAddress">${companyAddress}</label>
                                             </p>
                                         </div>
-                                        <div class="col-xl-1">
-                                            <div class="card_close_btn mt-4">
-                                                <button type="button" class="btn-close btn-btn-sm clos_btn2 close_send_view" data-parent="${row.last_activity}" id="viewBtn" value="${row.last_activity}"
-                                                    data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
+                                        <div class="col-xl-2">
+                                            <div class="card_close_btn card_btn_group mt-4">
+                                                <a class="download-link-btn" id="pdf" data-value="${row.last_activity}"
+                                                    data-bs-toggle="tooltip"  data-bs-placement="top" title="PDF Download" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                                                    <svg width="30" height="30" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 421 511.605">
+                                                    <path fill="#6DBF39" d="M95.705.014h199.094L421 136.548v317.555c0 31.54-25.961 57.502-57.502 57.502H95.705c-31.55 0-57.502-25.873-57.502-57.502V57.515C38.203 25.886 64.076.014 95.705.014z"/>
+                                                    <path fill="#589B2E" d="M341.028 133.408h-.019L421 188.771v-52.066h-54.357c-9.458-.15-17.998-1.274-25.615-3.297z"/>
+                                                    <path fill="#DFFACD" d="M294.8 0L421 136.533v.172h-54.357c-45.068-.718-69.33-23.397-71.843-61.384V0z"/>
+                                                    <path fill="#4F8C29" fill-rule="nonzero" d="M0 431.901V253.404l.028-1.261c.668-16.446 14.333-29.706 30.936-29.706h7.238v50.589h342.975c12.862 0 23.373 10.51 23.373 23.371v135.504c0 12.83-10.543 23.373-23.373 23.373H23.373C10.541 455.274 0 444.75 0 431.901z"/>
+                                                    <path fill="#4F8C29" fill-rule="nonzero" d="M143.448 240.364a8.496 8.496 0 01-8.496-8.497 8.496 8.496 0 018.496-8.497h163.176a8.496 8.496 0 018.496 8.497 8.496 8.496 0 01-8.496 8.497H143.448zm0-59.176a8.496 8.496 0 010-16.993h172.304a8.496 8.496 0 110 16.993H143.448z"/>
+                                                    <path fill="#fff" fill-rule="nonzero" d="M11.329 276.171v154.728c0 7.793 6.38 14.178 14.179 14.178H380.175c7.799 0 14.178-6.379 14.178-14.178V297.405c0-7.798-6.388-14.178-14.178-14.178H37.892c-12.618-.096-19.586-1.638-26.563-7.056z"/>
+                                                    <path fill="#1A1A1A" fill-rule="nonzero" d="M136.343 381.786h-17.035v19.785H93.103v-81.894h41.274c18.782 0 28.171 10.09 28.171 30.269 0 11.093-2.445 19.306-7.336 24.634-1.835 2.008-4.367 3.712-7.6 5.11-3.233 1.396-6.988 2.096-11.269 2.096zm-17.035-41.144v20.179h6.029c3.145 0 5.438-.327 6.878-.982 1.443-.656 2.162-2.163 2.162-4.522v-9.171c0-2.359-.719-3.866-2.162-4.521-1.44-.656-3.733-.983-6.878-.983h-6.029zm53.069 60.929v-81.894h36.689c14.762 0 24.895 3.145 30.399 9.435 5.502 6.289 8.255 16.794 8.255 31.512 0 14.72-2.753 25.223-8.255 31.513-5.504 6.289-15.637 9.434-30.399 9.434h-36.689zm37.083-60.929h-10.878v39.964h10.878c3.581 0 6.178-.415 7.794-1.244 1.616-.83 2.426-2.731 2.426-5.7v-26.075c0-2.969-.81-4.87-2.426-5.699-1.616-.831-4.213-1.246-7.794-1.246zm97.879 30.53h-22.277v30.399h-26.206v-81.894h53.724l-3.276 20.965h-24.242v11.008h22.277v19.522z"/>
+                                                    </svg>
+                                                </a>
+                                                <a class="download-link-btn" id="print"
+                                                    data-bs-toggle="tooltip"  data-bs-placement="top" title="Print" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                                                    <svg width="30" height="30" viewBox="0 0 64 64">
+                                                    <!-- Printer body -->
+                                                    <rect x="12" y="20" width="40" height="26" rx="4" ry="4" fill="#555"/>
+                                                    
+                                                    <!-- Paper output -->
+                                                    <rect x="18" y="34" width="28" height="18" rx="2" ry="2" fill="#fff" stroke="#ccc" stroke-width="2"/>
+                                                    
+                                                    <!-- Paper lines -->
+                                                    <line x1="22" y1="40" x2="42" y2="40" stroke="#aaa" stroke-width="2"/>
+                                                    <line x1="22" y1="45" x2="42" y2="45" stroke="#aaa" stroke-width="2"/>
+                                                    
+                                                    <!-- Top panel -->
+                                                    <rect x="16" y="10" width="32" height="14" rx="2" ry="2" fill="#777"/>
+                                                    
+                                                    <!-- Status light -->
+                                                    <circle cx="46" cy="28" r="3" fill="#38b2ac"/>
+                                                    </svg>
+                                                </a>
+                                                <button type="button" class="btn-close btn-btn-sm clos_btn2 close_send_view" data-parent="${row.last_activity}" id="viewBtnClose" value="${row.last_activity}"
+                                                    data-bs-toggle="tooltip"  data-bs-placement="top" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>'>
                                                 </button>
                                             </div>
                                         </div>
@@ -127,10 +162,12 @@
                                             <label class="card_row_first_part mt-2" for="user_to" id="user_to">Name : ${row.name}</label><br>
                                             <label class="card_row_first_part" for="user_to" id="user_to">Login-Email : ${row.email}</label><br>
                                             <label class="card_row_first_part" for="user_to" id="user_to">Reference-Email : ${row.users.reference_email}</label><br>
+                                            <label class="card_row_first_part" for="user_to" id="user_to">Mailing-Email : ${row.users.mailing_email}</label><br>
+                                            <label class="card_row_first_part" for="user_to" id="user_to">Credential-Email : ${row.users.email}</label><br>
                                             <label class="card_row_first_part" for="user_cc" id="user_cc">Contract-Number : ${row.contract_number}</label><br>
-                                            <label class="card_row_first_part" for="user_bcc" id="user_bcc">Account-Create : ${formatDate(row.account_create)}</label><br>
-                                            <label class="card_row_first_part" for="user_bcc" id="user_bcc">Account Last Update : ${formatDate(row.account_last_update)}</label><br>
-                                            <label class="card_row_first_part subject" for="subject" id="subject">Email-Verified : ${formatDate(row.email_verified_at)}</label><br>
+                                            <label class="card_row_first_part" for="user_bcc" id="user_bcc">Account-Created : ${modernDateFormat(row.account_create)}</label><br>
+                                            <label class="card_row_first_part" for="user_bcc" id="user_bcc">Account Last Updated : ${modernDateFormat(row.account_last_update)}</label><br>
+                                            <label class="card_row_first_part subject" for="subject" id="subject">Email-Verified : ${modernDateFormat(row.email_verified_at)}</label><br>
                                         </div>
                                         <div class="col-xl-5 branch_info view-card-section">
                                             <label class="card_row_first_part mt-2" for="info_label" id="info_label">Branch Information</label><br>
@@ -151,19 +188,19 @@
                                             <span class="session_id" data-id="${row.id}"><span class="user_agent_label">Session-ID :</span> ${row.id}</span>
                                             <div class="user-agent-tree">
                                                 <span class="user_agent_label">User-Agent :</span>
-                                                <ul>
-                                                    <li><span class="user_agent_label">Browser-Name:</span> ${row.user_agent?.browser ?? ''}
+                                                <ul id="userAgentParentTree">
+                                                    <li><span class="user_agent_label">Browser-Name :</span> ${row.user_agent?.browser ?? ''}
                                                         <ul>
                                                             <li><span class="user_agent_label">Browser Engine :</span> ${row.user_agent?.layout ?? ''}</li>
                                                             <li><span class="user_agent_label">Operating-System :</span> ${row.user_agent?.os ?? ''}</li>
                                                             <li><span class="user_agent_label">Device :</span> ${row.user_agent?.device ?? ''}</li>
-                                                            <li><span class="user_agent_label">Device-Brand:</span>
+                                                            <li><span class="user_agent_label">Device-Brand :</span>
                                                                 ${row.user_agent?.brand && row.user_agent.brand.trim() !== '' ? row.user_agent.brand : 'Unknown (that will be shown only about mobile or tablet)'}
                                                             </li>
-                                                            <li><span class="user_agent_label">Device-Model:</span>
+                                                            <li><span class="user_agent_label">Device-Model :</span>
                                                                 ${row.user_agent?.model && row.user_agent.model.trim() !== '' ? row.user_agent.model : 'Unknown (that will be shown only about mobile or tablet)'}
                                                             </li>
-                                                            <li><span class="user_agent_label">Device-Manufacturer:</span>
+                                                            <li><span class="user_agent_label">Device-Manufacturer :</span>
                                                                 ${row.user_agent?.manufacturer && row.user_agent.manufacturer.trim() !== '' ? row.user_agent.manufacturer : 'Unknown (that will be shown only about mobile or tablet)'}
                                                             </li>
                                                             <li><span class="user_agent_label">Public-IP :</span> ${row.user_agent?.network_ip ?? 'Unknown'}</li>
@@ -173,8 +210,9 @@
                                                     <li><span class="user_agent_label">Description :</span> ${row.user_agent?.description ?? ''}</li>
                                                 </ul>
                                             </div>
-                                            <span class="user_location"><span class="user_agent_label">Login-Date :</span> ${formatDate(row.created_at)}</span> <br>
+                                            <span class="user_location"><span class="user_agent_label">Login-Date :</span> ${modernDateFormat(row.created_at)}</span> <br>
                                             <span class="user_location"><span class="user_agent_label">Logout-Date :</span> ${updateDate}</span> <br>
+                                            <span class="user_location"><span class="user_agent_label">Last Logged Duration :</span> ${lastLogged ? lastLogged : ''}</span> <br>
                                             <span class="user_location"><span class="user_agent_label">Last-Activity :</span> ${lastActivity}</span>
                                         </div>
                                     </div>
@@ -461,6 +499,17 @@
                 clearTimeout(time);
             }
             fetch_activities_users_data();
+        });
+        // PDF Download
+        $(document).on('click', '#pdf', function(e){
+            e.preventDefault();
+
+            const last_activity = $(this).data('value');
+
+            const url = '{{ route("details-session-record.pdf") }}?' +
+                `last_activity=${last_activity}`;
+    
+            window.location.href = url;
         });
     });
 </script>

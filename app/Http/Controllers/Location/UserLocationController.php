@@ -88,4 +88,16 @@ class UserLocationController extends Controller
     {
         return $this->userActivityServiceProvider->printSessionData($request);
     }
+
+    // PDF Download Single Session Data
+    public function pdfDownloadUserLogged(Request $request, PdfService $pdfService)
+    {
+        return $this->userActivityServiceProvider->pdfDownloadUserLoggedData($request, $pdfService);
+    }
+
+    // Print Single Session Data
+    public function printDownloadUserLogged(Request $request)
+    {
+        return $this->userActivityServiceProvider->printDownloadUserLoggedData($request);
+    }
 }

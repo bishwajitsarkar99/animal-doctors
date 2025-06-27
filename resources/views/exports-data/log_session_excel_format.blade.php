@@ -38,7 +38,9 @@
         <br>
     @endforeach
 
-    @php $firstSession = $logSessionData->first(); @endphp
+    <?php 
+        $firstSession = $logSessionData->first();
+    ?>
 
     <table>
         <tr>

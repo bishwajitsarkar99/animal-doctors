@@ -2192,43 +2192,12 @@
                 })
                 .catch(error => console.error('Error loading print content:', error));
         });
-        
-        let connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-        if (connection) {
-            console.log("Network Connection Spreed:", connection.effectiveType); // e.g., 'wifi', '4g', 'cellular'
-        }
+        // Network connection spreed
+        // let connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        // if (connection) {
+        //     console.log("Network Connection Spreed:", connection.effectiveType); // e.g., 'wifi', '4g', 'cellular'
+        // }
     });
- </script>
- <script>
-    document.addEventListener("DOMContentLoaded", function () {
-
-        fetch("https://api.ipify.org?format=json")
-            .then(res => res.json())
-            .then(data => {
-                const userIp = data.ip;
-
-                const userInfo = {
-                    os: platform.os?.family + " " + platform.os?.version,
-                    browser: platform.name + " " + platform.version,
-                    layout: platform.layout, // e.g. Blink, Trident
-                    device: platform.product || 'Desktop',
-                    description: platform.description,
-                    userNetworkIp: userIp // include IP here too
-                };
-
-                console.log(userInfo); // Now includes IP
-            });
-
-    });
-    // Optional: Send to Laravel backend
-    // fetch("/log-user-agent", {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //         "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
-    //     },
-    //     body: JSON.stringify(userInfo)
-    // });
  </script>
 <!-- Demo bar chart -->
 <!-- <script>
