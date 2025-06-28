@@ -76,17 +76,16 @@
                             <span style="color:gray"><i class="fa fa-envelope"></i></span>
                             ${row.email} ${activeTime ? activeTime : ''}
                         </td>
-                        <td class="txt_ supp_vew4 table-td-align" id="supp_tab7">${row.ip_address}</td>
+                        <td class="txt_ supp_vew4" id="supp_tab7">${row.ip_address}</td>
                         <td class="txt_ ps-1 supp_vew5" id="supp_tab8" hidden>${row.user_agent}</td>
-                        <td class="txt_ supp_vew6 table-td-align" ${tdPadding} id="supp_tab9">
+                        <td class="txt_ supp_vew6" ${tdPadding} id="supp_tab9">
                             <span class="permission edit_inventory_table" style="font-size:12px; ${statusOffColor}">
                                 ${statusText}
                             </span>
                         </td>
-                        <td class="txt_ ps-1 supp_vew7" id="supp_tab10" hidden>${row.last_activity}</td>
                         <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${modernDateFormat(row.created_at)}</td>
                         <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${updateDate}</td>
-                        <td class="txt_ pe-2 supp_vew7 table-td-align" id="supp_tab10">${lastActivity}</td>
+                        <td class="txt_ pe-2 supp_vew7" id="supp_tab10">${lastActivity}</td>
                     </tr>
                     <tr class="table-log-details-row supp-table-row child-row" data-user-id="${row.last_activity}"  style="display: none;">
                         <td colspan="14">
@@ -268,7 +267,6 @@
                         showMessageInTable(message);
                         return;
                     }
-
                     $('#user_activites_data_table .error_data').remove(); // clear any old error
                     $("#user_activites_data_table").html(table_rows([...data]));
                     $("#activities_users_data_table_paginate").html(paginate_html({ links, total }));
@@ -730,20 +728,6 @@
                 })
                 .catch(error => console.error('Error loading print content:', error));
         });
-
-        // Set the width on initialization to prevent resizing
-        function fixTableColumnWidth(selector) {
-            const table = document.querySelector(selector);
-            const ths = table.querySelectorAll("thead th");
-            const tds = table.querySelectorAll("tbody tr:first-child td");
-            if (tds.length === ths.length) {
-                ths.forEach((th, index) => {
-                    const tdWidth = tds[index].offsetWidth;
-                    th.style.width = tdWidth + "px";
-                });
-            }
-        }
-        fixTableColumnWidth('.custom-table');
     });
 </script>
 <!-- <script>

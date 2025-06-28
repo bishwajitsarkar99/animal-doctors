@@ -1,15 +1,15 @@
 <?php
     $tableHeads = [
-        ['label'=>'ID', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;', 'dataColumn'=>'id', 'dataOrder'=>'desc', 'thClass'=>'table_th_color txt ps-2 pe-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
+        ['label'=>'ID', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;width:30px;', 'dataColumn'=>'id', 'dataOrder'=>'desc', 'thClass'=>'table_th_color txt ps-2 pe-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
         ['label'=>'Name', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;', 'dataColumn'=>'name', 'dataOrder'=>'desc', 'thClass'=>'table_th_color txt ps-1 label-svg', 'thAttribute'=>'hidden', 'svgLable'=>'label-svg'], 
-        ['label'=>'Email', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;', 'dataColumn'=>'email', 'dataOrder'=>'desc', 'thClass'=>'table_th_color txt ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
-        ['label'=>'IP', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: center;', 'dataColumn'=>'ip_address', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
+        ['label'=>'Email', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;width:450px;', 'dataColumn'=>'email', 'dataOrder'=>'desc', 'thClass'=>'table_th_color txt ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
+        ['label'=>'IP', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: left;width:40px;', 'dataColumn'=>'ip_address', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
         ['label'=>'User Agent', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: left;', 'dataColumn'=>'user_agent', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'hidden', 'svgLable'=>'label-svg'], 
-        ['label'=>'Payload', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: left;', 'dataColumn'=>'payload', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
+        ['label'=>'Payload', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: left;width:40px;', 'dataColumn'=>'payload', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
         ['label'=>'Last_activity', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: left;', 'dataColumn'=>'last_activity', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'hidden', 'svgLable'=>'label-svg'], 
-        ['label'=>'Login', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: left;', 'dataColumn'=>'login', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
-        ['label'=>'Logout', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;', 'dataColumn'=>'logout', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
-        ['label'=>'Activity', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;', 'dataColumn'=>'last_activity', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'],
+        ['label'=>'Login', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: left;width:150px;', 'dataColumn'=>'login', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
+        ['label'=>'Logout', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;width:150px;', 'dataColumn'=>'logout', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
+        ['label'=>'Activity', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;width:40px;', 'dataColumn'=>'last_activity', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'],
     ];
     $dateInputs = [
         'boxClass'=>'input-search-box', 'iconClass'=>'icon-box', 'svgWidth'=>'18', 'svgHeight'=>'18', 'svgStroke'=>'white', 'svgStrokeWidth'=>'2', 'svgFill'=>'rgb(170, 170, 170)',
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <x-tables.table-component tableResponsiveClass="table-light activity-table-responsive">
-                <x-tables.table tableParentClass="bg-white table-light ord_table center border-1 mt-2">
+                <x-tables.table tableParentClass="bg-white table-light ord_table center border-1 mt-2 table-custom">
                     <x-tables.table-head>
                         <x-tables.head-row tableHeadRowClass="table-light table-row order_body acc_setting_table" />
                         @foreach($tableHeads as $data)
