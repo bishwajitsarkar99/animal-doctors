@@ -160,22 +160,22 @@
                                         <div class="col-xl-5 user_detls view-card-section">
                                             <label class="card_row_first_part mt-2" for="info_label" id="info_label">User Information</label><br>
                                             <label class="card_row_first_part mt-2" for="user_to" id="user_to">Name : ${row.name}</label><br>
-                                            <label class="card_row_first_part" for="user_to" id="user_to">Login-Email : ${row.email}</label><br>
-                                            <label class="card_row_first_part" for="user_to" id="user_to">Reference-Email : ${row.users.reference_email}</label><br>
-                                            <label class="card_row_first_part" for="user_to" id="user_to">Mailing-Email : ${row.users.mailing_email}</label><br>
-                                            <label class="card_row_first_part" for="user_to" id="user_to">Credential-Email : ${row.users.email}</label><br>
-                                            <label class="card_row_first_part" for="user_cc" id="user_cc">Contract-Number : ${row.contract_number}</label><br>
-                                            <label class="card_row_first_part" for="user_bcc" id="user_bcc">Account-Created : ${modernDateFormat(row.account_create)}</label><br>
-                                            <label class="card_row_first_part" for="user_bcc" id="user_bcc">Account Last Updated : ${modernDateFormat(row.account_last_update)}</label><br>
-                                            <label class="card_row_first_part subject" for="subject" id="subject">Email-Verified : ${modernDateFormat(row.email_verified_at)}</label><br>
+                                            <label class="card_row_first_part mt-1" for="user_to" id="user_to">Login-Email : ${row.email}</label><br>
+                                            <label class="card_row_first_part mt-1" for="user_to" id="user_to">Reference-Email : ${row.users.reference_email}</label><br>
+                                            <label class="card_row_first_part mt-1" for="user_to" id="user_to">Mailing-Email : ${row.users.mailing_email}</label><br>
+                                            <label class="card_row_first_part mt-1" for="user_to" id="user_to">Credential-Email : ${row.users.email}</label><br>
+                                            <label class="card_row_first_part mt-1" for="user_cc" id="user_cc">Contract-Number : ${row.contract_number}</label><br>
+                                            <label class="card_row_first_part mt-1" for="user_bcc" id="user_bcc">Account-Created : ${modernDateFormat(row.account_create)}</label><br>
+                                            <label class="card_row_first_part mt-1" for="user_bcc" id="user_bcc">Account Last Updated : ${modernDateFormat(row.account_last_update)}</label><br>
+                                            <label class="card_row_first_part subject mt-1" for="subject" id="subject">Email-Verified : ${modernDateFormat(row.email_verified_at)}</label><br>
                                         </div>
                                         <div class="col-xl-5 branch_info view-card-section">
                                             <label class="card_row_first_part mt-2" for="info_label" id="info_label">Branch Information</label><br>
                                             <label class="card_row_first_part mt-2" for="branch_id" id="branch_id">Branch-ID : ${row.branch_id}</label><br>
-                                            <label class="card_row_first_part" for="branch_type" id="branch_type">Branch Type : ${row.users.branch_type}</label><br>
+                                            <label class="card_row_first_part mt-1" for="branch_type" id="branch_type">Branch Type : ${row.users.branch_type}</label><br>
                                             <label class="card_row_first_part mt-1" for="branch_name" id="branch_name">Branch Name : ${row.users.branch_name}</label><br>
-                                            <label class="card_row_first_part" for="division_name" id="division_name">Division Name : ${row.users.division_name}</label><br>
-                                            <label class="card_row_first_part" for="district_name" id="district_name">District Name : ${row.users.district_name}</label><br>
+                                            <label class="card_row_first_part mt-1" for="division_name" id="division_name">Division Name : ${row.users.division_name}</label><br>
+                                            <label class="card_row_first_part mt-1" for="district_name" id="district_name">District Name : ${row.users.district_name}</label><br>
                                             <label class="card_row_first_part mt-1" for="upazila_name" id="upazila_name">Upazila Name : ${row.users.upazila_name}</label><br>
                                             <label class="card_row_first_part mt-1" for="town_name" id="town_name">Town Name : ${row.users.town_name}</label><br>
                                             <label class="card_row_first_part mt-1" for="location" id="location">Location : ${row.users.location}</label><br>
@@ -187,33 +187,42 @@
                                         <div class="col-xl-12 pb-3 pt-3">
                                             <span class="session_id" data-id="${row.id}"><span class="user_agent_label">Session-ID :</span> ${row.id}</span>
                                             <div class="user-agent-tree">
-                                                <span class="user_agent_label">User-Agent :</span>
+                                                <span class="user_agent_label">User-Agent : <span style="display:inline-block;width:22px;height:2px;background:lightgray;vertical-align:middle;margin-top:0px;"></span></span></span>
                                                 <ul id="userAgentParentTree">
-                                                    <li><span class="user_agent_label">Browser-Name :</span> ${row.user_agent?.browser ?? ''}
+                                                    <li style="padding-top:8px;">
+                                                        <span class="user_agent_label">
+                                                            <span style="display:inline-block;width:37px;height:2px;background:lightgray;vertical-align:middle;margin-top:0px;"></span>
+                                                            Browser-Name : ${row.user_agent?.browser ?? ''}
+                                                        </span>
                                                         <ul>
-                                                            <li><span class="user_agent_label">Browser Engine :</span> ${row.user_agent?.layout ?? ''}</li>
-                                                            <li><span class="user_agent_label">Operating-System :</span> ${row.user_agent?.os ?? ''}</li>
-                                                            <li><span class="user_agent_label">Device :</span> ${row.user_agent?.device ?? ''}</li>
-                                                            <li><span class="user_agent_label">Device-Brand :</span>
+                                                            <li style="padding-top:8px;"><span class="user_agent_label">Browser Engine :</span> ${row.user_agent?.layout ?? ''}</li>
+                                                            <li style="padding-top:8px;"><span class="user_agent_label">Operating-System :</span> ${row.user_agent?.os ?? ''}</li>
+                                                            <li style="padding-top:8px;"><span class="user_agent_label">Device :</span> ${row.user_agent?.device ?? ''}</li>
+                                                            <li style="padding-top:8px;"><span class="user_agent_label">Device-Brand :</span>
                                                                 ${row.user_agent?.brand && row.user_agent.brand.trim() !== '' ? row.user_agent.brand : 'Unknown (that will be shown only about mobile or tablet)'}
                                                             </li>
-                                                            <li><span class="user_agent_label">Device-Model :</span>
+                                                            <li style="padding-top:8px;"><span class="user_agent_label">Device-Model :</span>
                                                                 ${row.user_agent?.model && row.user_agent.model.trim() !== '' ? row.user_agent.model : 'Unknown (that will be shown only about mobile or tablet)'}
                                                             </li>
-                                                            <li><span class="user_agent_label">Device-Manufacturer :</span>
+                                                            <li style="padding-top:8px;"><span class="user_agent_label">Device-Manufacturer :</span>
                                                                 ${row.user_agent?.manufacturer && row.user_agent.manufacturer.trim() !== '' ? row.user_agent.manufacturer : 'Unknown (that will be shown only about mobile or tablet)'}
                                                             </li>
-                                                            <li><span class="user_agent_label">Public-IP :</span> ${row.user_agent?.network_ip ?? 'Unknown'}</li>
-                                                            <li><span class="user_agent_label">IP-Address :</span> ${row.ip_address}</li>
+                                                            <li style="padding-top:8px;"><span class="user_agent_label">Public-IP :</span> ${row.user_agent?.network_ip ?? 'Unknown'}</li>
+                                                            <li style="padding-top:8px;"><span class="user_agent_label">IP-Address :</span> ${row.ip_address}</li>
                                                         </ul>
                                                     </li>
-                                                    <li><span class="user_agent_label">Description :</span> ${row.user_agent?.description ?? ''}</li>
+                                                    <li style="padding-top:8px;"><span class="user_agent_label">
+                                                        <span style="display:inline-block;width:36px;height:2px;background:lightgray;vertical-align:middle;margin-top:0px;"></span>
+                                                        Description :</span> ${row.user_agent?.description ?? ''}
+                                                    </li>
                                                 </ul>
                                             </div>
-                                            <span class="user_location"><span class="user_agent_label">Login-Date :</span> ${modernDateFormat(row.created_at)}</span> <br>
-                                            <span class="user_location"><span class="user_agent_label">Logout-Date :</span> ${updateDate}</span> <br>
-                                            <span class="user_location"><span class="user_agent_label">Last Logged Duration :</span> ${lastLogged ? lastLogged : ''}</span> <br>
-                                            <span class="user_location"><span class="user_agent_label">Last-Activity :</span> ${lastActivity}</span>
+                                            <div class="mt-2">
+                                                <span class="user_location"><span class="user_agent_label">Login-Date :</span> ${modernDateFormat(row.created_at)}</span> <br>
+                                                <span class="user_location"><span class="user_agent_label">Logout-Date :</span> ${updateDate}</span> <br>
+                                                <span class="user_location"><span class="user_agent_label">Last Logged Duration :</span> ${lastLogged ? lastLogged : ''}</span> <br>
+                                                <span class="user_location"><span class="user_agent_label">Last-Activity :</span> ${lastActivity}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -577,7 +586,7 @@
                                     }
                                     .user_agent_label {
                                         font-size: 13px;
-                                        font-weight: 600;
+                                        font-weight: 500;
                                     }
                                     /* Tree Styles */
                                     ul, li {
@@ -586,7 +595,7 @@
                                     li::before {
                                         content: '';
                                         position: absolute;
-                                        top: 0;
+                                        top: -6px;
                                         left: -10px;
                                         border-left: 1px solid #000;
                                         height: 100%;
@@ -594,9 +603,9 @@
                                     li::after {
                                         content: '';
                                         position: absolute;
-                                        top: 12px;
+                                        top: 8px;
                                         left: -10px;
-                                        width: 10px;
+                                        width: 12px;
                                         border-top: 1px solid #000;
                                     }
                                     ul#userAgentParentTree,
@@ -721,6 +730,20 @@
                 })
                 .catch(error => console.error('Error loading print content:', error));
         });
+
+        // Set the width on initialization to prevent resizing
+        function fixTableColumnWidth(selector) {
+            const table = document.querySelector(selector);
+            const ths = table.querySelectorAll("thead th");
+            const tds = table.querySelectorAll("tbody tr:first-child td");
+            if (tds.length === ths.length) {
+                ths.forEach((th, index) => {
+                    const tdWidth = tds[index].offsetWidth;
+                    th.style.width = tdWidth + "px";
+                });
+            }
+        }
+        fixTableColumnWidth('.custom-table');
     });
 </script>
 <!-- <script>

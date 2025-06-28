@@ -97,47 +97,49 @@
                     <span><strong>Logged Information</strong></span>
                 </div>
                 <div class="col-xl-12" style="padding-top:10px;">
-                    <span class="user_agent_label">Session-ID : {{$firstSession->id}}</span><br>
-                    <span class="user_agent_label">
+                    <span class="">Session-ID : {{$firstSession->id}}</span><br>
+                    <span class="">
                         <div style="font-size:13px;">
-                            <ul style="list-style: none; margin: 0; padding-left: 20px; position: relative;">
-                                <li style="position: relative; padding-left: 20px;">
-                                    <span style="font-weight: bold;">User-Agent :</span>
-                                    <ul style="list-style: none; margin-top: 5px; padding-left: 20px; position: relative;">
-                                        <li style="position: relative; padding-left: 20px;">
-                                            <span style="font-weight: bold;">Browser Name:</span> {{ $firstSession->user_agent['browser'] ?? 'N/A' }}
-                                            <ul style="list-style: none; margin-top: 5px; padding-left: 20px; position: relative;">
-                                                <li style="position: relative; padding-left: 20px;">
-                                                    <span style="font-weight: bold;">Browser Engine:</span> {{ $firstSession->user_agent['layout'] ?? 'N/A' }}
-                                                </li>
-                                                <li style="position: relative; padding-left: 20px;">
-                                                    <span style="font-weight: bold;">Operating System:</span> {{ $firstSession->user_agent['os'] ?? 'N/A' }}
-                                                </li>
-                                                <li style="position: relative; padding-left: 20px;">
-                                                    <span style="font-weight: bold;">Device:</span> {{ $firstSession->user_agent['device'] ?? 'N/A' }}
-                                                </li>
-                                                <li style="position: relative; padding-left: 20px;">
-                                                    <span style="font-weight: bold;">Device Brand:</span> {{ $firstSession->user_agent['brand'] ?? 'Unknown (shown only on mobile or tablet)' }}
-                                                </li>
-                                                <li style="position: relative; padding-left: 20px;">
-                                                    <span style="font-weight: bold;">Device Model:</span> {{ $firstSession->user_agent['model'] ?? 'Unknown (shown only on mobile or tablet)' }}
-                                                </li>
-                                                <li style="position: relative; padding-left: 20px;">
-                                                    <span style="font-weight: bold;">Device Manufacturer:</span> {{ $firstSession->user_agent['manufacturer'] ?? 'Unknown (shown only on mobile or tablet)' }}
-                                                </li>
-                                                <li style="position: relative; padding-left: 20px;">
-                                                    <span style="font-weight: bold;">Public IP:</span> {{ $firstSession->user_agent['network_ip'] ?? 'N/A' }}
-                                                </li>
-                                                <li style="position: relative; padding-left: 20px;">
-                                                    <span style="font-weight: bold;">IP Address:</span> {{ $firstSession->ip_address ?? 'N/A' }}
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li style="margin-top: 8px;">
-                                            <span style="font-weight: bold;">Description:</span> {{ $firstSession->user_agent['description'] ?? 'N/A' }}
-                                        </li>
-                                    </ul>
-                                </li>
+                            <span style="">User-Agent : <span style="display:inline-block;width:24px;height:1px;background:#000;vertical-align:middle;margin-top:0px;"></span></span>
+                            <ul style="list-style: none; margin-left: 50px;margin-top: 0px; position: relative;">
+                                <ul style="list-style: none; padding-left: 20px; position: relative;margin-top: 0px">
+                                    <li style="position: relative; padding-left: 20px;">
+                                        <span style="font-weight: bold;">
+                                            <span style="display:inline-block;width:30px;height:1px;background:#000;vertical-align:middle;margin-top:0px;margin-left:-17px;"></span></span>
+                                            <span style="margin-left: -1px;"><strong>Browser Name :</strong> {{ $firstSession->user_agent['browser'] ?? 'N/A' }}</span>
+                                        </span>
+                                        <ul style="list-style: none; margin-top: 0px; padding-left: 20px;margin-left:-10px; position: relative;">
+                                            <li style="position: relative; padding-left: 5px;">
+                                                <span><strong>Browser Engine :</strong> {{ $firstSession->user_agent['layout'] ?? 'N/A' }}</span>
+                                            </li>
+                                            <li style="position: relative; padding-left: 5px;">
+                                                <span><strong>Operating System :</strong> {{ $firstSession->user_agent['os'] ?? 'N/A' }}</span>
+                                            </li>
+                                            <li style="position: relative; padding-left: 5px;">
+                                                <span><strong>Device :</strong> {{ $firstSession->user_agent['device'] ?? 'N/A' }}</span>
+                                            </li>
+                                            <li style="position: relative; padding-left: 5px;">
+                                                <span><strong>Device Brand :</strong> {{ !empty($firstSession->user_agent['brand']) ? $firstSession->user_agent['brand'] : 'Unknown (shown only on mobile or tablet)' }}</span>
+                                            </li>
+                                            <li style="position: relative; padding-left: 5px;">
+                                                <span><strong>Device Model :</strong> {{ !empty($firstSession->user_agent['model']) ? $firstSession->user_agent['model'] : 'Unknown (shown only on mobile or tablet)' }}</span>
+                                            </li>
+                                            <li style="position: relative; padding-left: 5px;">
+                                                <span><strong>Device Manufacturer :</strong> {{ !empty($firstSession->user_agent['manufacturer']) ? $firstSession->user_agent['manufacturer'] : 'Unknown (shown only on mobile or tablet)' }}</span>
+                                            </li>
+                                            <li style="position: relative; padding-left: 5px;">
+                                                <span><strong>Public IP :</strong> {{ $firstSession->user_agent['network_ip'] ?? 'N/A' }}</span>
+                                            </li>
+                                            <li style="position: relative; padding-left: 5px;">
+                                                <span><strong>IP Address :</strong> {{ $firstSession->ip_address ?? 'N/A' }}</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li style="margin-top: 0px;padding-left: 0px;">
+                                        <span style="display:inline-block;width:31px;height:1px;background:#000;vertical-align:middle;margin-top:0px;"></span></span>
+                                        <span><strong>Description :</strong> {{ $firstSession->user_agent['description'] ?? 'N/A' }}</span>
+                                    </li>
+                                </ul>
                             </ul>
                         </div>
                     </span>
