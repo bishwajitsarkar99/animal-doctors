@@ -5,7 +5,7 @@ use App\Models\Supplier\Supplier;
 use App\Models\CompanyProfile;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use App\Helpers\helper;
+use App\Helpers\Helper;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Role;
 use App\Models\User;
@@ -122,7 +122,7 @@ class SupplierServiceProvider
 
             $auth = Auth::user();
 
-            $id_name = helper::IDGenerator(new Supplier, 'id_name',5, 'SVC');
+            $id_name = Helper::IDGenerator(new Supplier, 'id_name',5, 'SVC');
 
             $suppliers = new Supplier;
             $suppliers->branch_category = $request->input('branch_category');

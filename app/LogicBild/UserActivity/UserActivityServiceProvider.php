@@ -1650,9 +1650,6 @@ class UserActivityServiceProvider
             $item->user_agent = @unserialize($item->user_agent);
             return $item;
         });
-
-        $userAgentData = $userLoggedData;
-
         
         $userImage = null;
 
@@ -1690,7 +1687,6 @@ class UserActivityServiceProvider
         // Render the PDF
         $html = view('pdf-download.user-logged-single-session-pdf', [
             'userLoggedData' => $userLoggedData,
-            'userAgentData' => $userAgentData,
             'companyinformations' => $companyinformations,
             'imageData' => $imageData,
             'userImage' => $image,
@@ -1709,120 +1705,50 @@ class UserActivityServiceProvider
     */
     public function printDownloadUserLoggedData(Request $request)
     {
-        $start_date = $request->input('start_date');
-        $end_date = $request->input('end_date');
-        $branch_id = $request->input('branch_id');
-        $roles = explode(',', $request->input('role', ''));
-        $emails = explode(',', $request->input('email', ''));
+        $last_activity = $request->input('last_activity');
 
-        $query = SessionModel::with(['roles', 'users'])
-            ->select(
-                DB::raw("COUNT(DISTINCT user_id) as total_users"),
-                DB::raw("SUM(CASE WHEN payload = 'login' THEN 1 ELSE 0 END) as total_current_login"),
-                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
-                DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
-                DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
-            );
+        $userLoggedData = SessionModel::with(['users', 'roles'])->where('last_activity', $last_activity)->get();
+
+        // Unserialize user_agent collection
+        $userLoggedData->transform(function ($item){
+            $item->user_agent = @unserialize($item->user_agent);
+            return $item;
+        });
         
-        // Filter by date
-        if ($start_date && $end_date) {
-            $query->whereBetween('created_at', [
-                Carbon::parse($start_date)->startOfDay(),
-                Carbon::parse($end_date)->endOfDay()
-            ]);
+        $userImage = null;
+
+        if(!$userLoggedData->isEmpty()){
+            $firstSession = $userLoggedData->first();
+            $userImage = optional($firstSession->users)->image;
+
+            if($userImage){
+                $image_path = public_path('storage/image/user-image/' . $userImage);
+                if(file_exists($image_path)){
+                    $image = base64_encode(file_get_contents($image_path));
+                };
+            }
         }
-
-        // Filter by branch_id
-        if ($branch_id) {
-            $query->where('branch_id', $branch_id);
-        }
-
-        // Filter by roles (if applicable)
-        if (!empty($roles) && $roles[0] !== '') {
-            $query->whereIn('role', $roles);
-        }
-
-        // Filter by emails (if applicable)
-        if (!empty($emails) && $emails[0] !== '') {
-            $query->whereIn('email', $emails);
-        }
-
-        // Get branch summary data
-        $summary = $query->first();
-
-        $login = $summary->total_login ?? 0;
-        $logout = $summary->total_logout ?? 0;
-        $activity = $summary->total_activity ?? 0;
-
-        // Fetch session log data for table (you can apply the same filters again if needed)
-        $logSessionData = SessionModel::with(['roles', 'users'])
-        ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
-            $q->whereBetween('created_at', [
-                Carbon::parse($start_date)->startOfDay(),
-                Carbon::parse($end_date)->endOfDay()
-            ]);
-        })
-        ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
-        ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
-        ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
-        ->orderBy('user_id')
-        ->get();
         
-        // 3. User-wise summary
-        $userSummaryData = SessionModel::select(
-            'email',
-            DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_login"),
-            DB::raw("SUM(CASE WHEN payload = 'logout' THEN 1 ELSE 0 END) as total_logout"),
-            DB::raw("SUM(CASE WHEN payload IN ('login', 'logout') THEN 1 ELSE 0 END) as total_activity")
-        )
-        ->when($start_date && $end_date, function ($q) use ($start_date, $end_date) {
-            $q->whereBetween('created_at', [
-                Carbon::parse($start_date)->startOfDay(),
-                Carbon::parse($end_date)->endOfDay()
-            ]);
-        })
-        ->when($branch_id, fn($q) => $q->where('branch_id', $branch_id))
-        ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
-        ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
-        ->groupBy('email')
-        ->orderBy('email')
-        ->get();
-
-        // Get user summary data
-        $userSummary = $query->first();
-
-        $login = $userSummary->total_login ?? 0;
-        $logout = $userSummary->total_logout ?? 0;
-        $logout = $userSummary->total_activity ?? 0;
-
         // Load additional info
         $companyinformations = ForntEndFooter::get();
+        $imagePath = public_path('image/log/print-page-logo.png');
+        $imageData = base64_encode(file_get_contents($imagePath)); 
+
         // 🧪 Check if there's no session data — use fallback Print view
-        if ($logSessionData->isEmpty()) {
-            return view('print-data.empty-log-session-data-print', [
+        if ($userLoggedData->isEmpty()) {
+            return view('print-data.empty-user-logged-single-session-print', [
                 'message' => 'no log session data found because the user has not logged in during the selected period.',
-                'start_date' => Carbon::parse($start_date),
-                'end_date' => Carbon::parse($end_date),
                 'companyinformations' => $companyinformations,
-                'emails' => $emails,
+                'imageData' => $imageData,
             ]);
         }
 
         // Render the Print
-        return view('print-data.log-session-data-print', [
-            'logSessionData' => $logSessionData,
-            'userSummaryData' => $userSummaryData,
-            'userTotalLogin' => $userSummary->total_login,
-            'userTotalLogout' => $userSummary->total_logout,
-            'userSubTotalActivity' => $userSummary->total_activity,
-            'totalCurrentLogin' => $summary->total_current_login,
-            'totalLogin' => $summary->total_login,
-            'totalLogout' => $summary->total_logout,
-            'totalActivity' => $summary->total_activity,
-            'total_users' => $summary->total_users,
-            'start_date' => Carbon::parse($start_date),
-            'end_date' => Carbon::parse($end_date),
+        return view('print-data.user-logged-single-session-print', [
+            'userLoggedData' => $userLoggedData,
             'companyinformations' => $companyinformations,
+            'imageData' => $imageData,
+            'userImage' => $image
         ]);
     }
 }

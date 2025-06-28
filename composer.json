@@ -30,7 +30,7 @@
     },
     "autoload": {
         "files": [
-            "app/Helpers/helper.php",
+            "app/Helpers/Helper.php",
             "app/Http/Helpers.php",
             "app/cacheStorage/cacheManage.php"
         ],

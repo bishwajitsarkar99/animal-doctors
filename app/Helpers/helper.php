@@ -1,9 +1,11 @@
 <?php
     
     namespace App\Helpers;
+    use Carbon\Carbon;
 
-    class helper
+    class Helper
     {
+        // Private ID Generator 
         public static function IDGenerator($model, $trow, $prefix, $length = 4){
             $data = $model::orderBy('id', 'desc')->first();
 
@@ -21,6 +23,27 @@
 
             $zeros = str_repeat('0', $og_length);
             return $prefix . '-' . $zeros . $last_number;
+        }
+        // Time Generator From Now example--- [2 months 4 days 5 hrs 12 mins]
+        public static function getTimeDifferenceCurrent($start)
+        {
+            $now = Carbon::now();
+            $startDate = Carbon::parse($start);
+
+            $months = $startDate->diffInMonths($now);
+            $adjusted = $startDate->copy()->addMonths($months);
+            $days = $adjusted->diffInDays($now);
+            $adjusted = $adjusted->copy()->addDays($days);
+            $hours = $adjusted->diffInHours($now);
+            $minutes = $adjusted->copy()->addHours($hours)->diffInMinutes($now);
+
+            $str = '';
+            if ($months > 0) $str .= "$months months ";
+            if ($days > 0) $str .= "$days days ";
+            if ($hours > 0) $str .= "$hours hrs ";
+            $str .= "$minutes mins";
+
+            return trim($str);
         }
     }
 

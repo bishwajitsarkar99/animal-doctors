@@ -90,6 +90,72 @@
             /* Optional: give a soft blur for realism */
             filter: blur(0.2px);
         }
+        .user_agent_label{
+            font-size:13px;
+        }
+        #userAgentParentTree,
+        #userAgentParentTree ul {
+            list-style-type: none;
+            padding-left: 15px;
+            position: relative;
+            font-size:13px;
+        }
+        #userAgentParentTree li {
+            margin-left: 10px;
+            padding-left: 40px;
+            position: relative;
+            font-size:13px;
+        }
+        #userAgentParentTree li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 38px;
+            height: 1px;
+            background: #000;
+        }
+        #userAgentParentTree li::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1px;
+            height: 41.80%;
+            background: #000;
+        }
+        #userAgentChildTree li {
+            list-style-type: none;
+            margin-left: -25px;
+            padding-left: 10px;
+            position: relative;
+            font-size:13px;
+        }
+        #userAgentChildTree li::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 8px;
+            width: 12px;
+            height: 1px;
+            background: #000;
+        }
+        #userAgentChildTree li::after {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: -7px;
+            width: 1px;
+            height: 9.14%;
+            background: #000;
+        }
+        #userAgentParentTree li:last-child::after {
+            height: 8px;
+        }
+        ul#userAgentParentTree {
+            margin-left: 75px;
+            margin-top: -7px;
+        }
     </style>
 </head>
 <body>
@@ -134,7 +200,11 @@
     </div>
 
     <div class="content">
-        <div class="row">
+        <!-- User Information -->
+        <div class="row" style="margin-top:20px;">
+            <div class="col-xl-12" style="font-size:13px;background-color:rgba(0, 0, 0, 0.05);margin-top:10px;">
+                <span><strong>User Information</strong></span>
+            </div>
             <div class="col-xl-6" style="float:right;">
                 <?php 
                     $firstSession = $userLoggedData->first();
@@ -160,17 +230,81 @@
                     <span>Role : {{ optional($firstSession->roles)->name}}</span><br>
                 </p>
             </div>
-        </div><br>
-        <div class="row">
-            
         </div>
-        <!-- Summary Table -->
+        <!-- Branch Information -->
+        <div class="row" style="margin-top:20px;">
+            <div class="col-xl-12" style="font-size:13px;background-color:rgba(0, 0, 0, 0.05);">
+                <span><strong>Branch Information</strong></span>
+            </div>
+            <div class="col-xl-12">
+                <p style="font-size:13px; color:black; text-align:left;">
+                    Branch-Type : {{ optional($firstSession->users)->branch_type ?? 'N/A' }}<br>
+                    Branch-ID : {{ $firstSession->branch_id ?? 'N/A' }}<br>
+                    Branch-Name : {{ optional($firstSession->users)->branch_name ?? 'N/A' }}<br>
+                    Division-Name : {{ optional($firstSession->users)->division_name ?? 'N/A' }}<br>
+                    District-Name : {{ optional($firstSession->users)->district_name ?? 'N/A' }}<br>
+                    Upazila-Name : {{ optional($firstSession->users)->upazila_name ?? 'N/A' }}<br>
+                    Town-Name : {{ optional($firstSession->users)->town_name ?? 'N/A' }}<br>
+                    Location : {{ optional($firstSession->users)->location ?? 'N/A' }}
+                </p>
+            </div>
+        </div>
+        <!-- User Logged Information -->
+        <div class="row" style="margin-top:20px;">
+            <div class="col-xl-12" style="font-size:13px;background-color:rgba(0, 0, 0, 0.05);">
+                <span><strong>Logged Information</strong></span>
+            </div>
+            <div class="col-xl-12" style="padding-top:10px;">
+                <span class="user_agent_label">Session-ID : {{$firstSession->id}}</span><br>
+                <span class="user_agent_label">
+                    User-Agent :  <span style="display:inline-block;width:24px;height:1px;background:#000;vertical-align:middle;margin-top:6px;"></span>
+                    <ul id="userAgentParentTree">
+                        <li><span class="user_agent_label"><strong>Browser-Name :</strong> {{$firstSession->user_agent['browser'] ?? 'N/A' }}</span><br>
+                            <ul id="userAgentChildTree">
+                                <li><span class="user_agent_label"><strong>Browser Engine :</strong></span> {{$firstSession->user_agent['layout'] ?? 'N/A' }}</li>
+                                <li><span class="user_agent_label"><strong>Operating-System :</strong></span> {{$firstSession->user_agent['os'] ?? 'N/A' }}</li>
+                                <li><span class="user_agent_label"><strong>Device :</strong></span> {{$firstSession->user_agent['device'] ?? 'N/A' }}</li>
+                                <li><span class="user_agent_label"><strong>Device-Brand :</strong></span>
+                                    {{ !empty($firstSession->user_agent['brand']) ? $firstSession->user_agent['brand'] : 'Unknown (shown only on mobile or tablet)' }}
+                                </li>
+                                <li><span class="user_agent_label"><strong>Device-Model :</strong></span>
+                                    {{ !empty($firstSession->user_agent['model']) ? $firstSession->user_agent['model'] : 'Unknown (shown only on mobile or tablet)' }}
+                                </li>
+                                <li><span class="user_agent_label"><strong>Device-Manufacturer :</strong></span>
+                                    {{ !empty($firstSession->user_agent['manufacturer']) ? $firstSession->user_agent['manufacturer'] : 'Unknown (shown only on mobile or tablet)' }}
+                                </li>
+                                <li><span class="user_agent_label"><strong>Public-IP :</strong></span> {{$firstSession->user_agent['network_ip'] ?? 'N/A' }}</li>
+                                <li><span class="user_agent_label"><strong>IP-Address :</strong></span> {{$firstSession->ip_address ?? 'N/A' }}</li>
+                            </ul>
+                        </li>
+                        <li><span class="user_agent_label"><strong>Description :</strong></span> {{$firstSession->user_agent['description'] ?? 'N/A' }}</li>
+                    </ul>
+                </span>
+                <span class="user_agent_label">Login-Date : {{ $firstSession->created_at->format('d-M-Y, h:i:s A') }}</span><br>
+                <span class="user_agent_label">Logout-Date : {{ $firstSession->updated_at->format('d-M-Y, h:i:s A') }}</span><br>
+                <span class="user_agent_label">
+                    <?php
+                        use App\Helpers\Helper; 
+                    ?>
+                    Last Logged Duration : {{ Helper::getTimeDifferenceCurrent($firstSession->created_at) }}
+                </span><br>
+                <span class="user_agent_label">Last-Activity : 
+                    @if($firstSession->payload == 'logout')
+                        {{ $firstSession->last_activity }}
+                    @elseif($firstSession->payload == 'login')
+                        <span>Runing</span>
+                    @else
+                        <span>N/A</span>
+                    @endif
+                </span>
+            </div>
+        </div>
         
     </div>
-    <div class="row">
+    <div class="row" style="margin-top:100px;">
         <div class="col-12">
             <div style="background-color: white; color:black; text-align:left; font-size:12px;font-weight:700;">
-                <p style="display: inline-block; margin-top:50px;margin-bottom:2px;">
+                <p style="display: inline-block; margin-top:0px;margin-bottom:50px;">
                     <span style="text-align: center;">
                         <label for="prepared">
                             Prepared by ({{Auth::User()->name}})

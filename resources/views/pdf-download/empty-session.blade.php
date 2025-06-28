@@ -154,7 +154,7 @@
     <div class="row">
         <div class="col-12">
             <div style="background-color: white; color:black; text-align:left; font-size:12px;font-weight:700;">
-                <p style="display: inline-block; margin-top:50px;margin-bottom:2px;">
+                <p style="display: inline-block; margin-top:50px;margin-bottom:30px;">
                     <span style="text-align: center;">
                         <label for="prepared">
                             Prepared by ({{Auth::User()->name}})

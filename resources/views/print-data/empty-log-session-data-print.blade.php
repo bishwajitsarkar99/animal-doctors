@@ -115,21 +115,21 @@
             </div>
         </div>
         <div class="row" style="display: flex;justify-content: space-between;color:black; text-align:left; font-size:12px;font-weight:700;">
-            <div class="col-4" style="margin-top:50px;margin-bottom:5px;text-align: center;">
+            <div class="col-4" style="margin-top:50px;margin-bottom:30px;text-align: center;">
                 <span>
                     <label for="prepared">
                         Prepared by ({{Auth::User()->name}})
                     </label>
                 </span>
             </div>
-            <div class="col-4" style="margin-top:50px;margin-bottom:5px;text-align: center;">
+            <div class="col-4" style="margin-top:50px;margin-bottom:30px;text-align: center;">
                 <span>
                     <label for="reference">
                         Reference by
                     </label>
                 </span>
             </div>
-            <div class="col-4" style="margin-top:50px;margin-bottom:5px;text-align: center;">
+            <div class="col-4" style="margin-top:50px;margin-bottom:30px;text-align: center;">
                 <span>
                     <label for="prepared">
                         Authorized by

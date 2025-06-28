@@ -123,7 +123,7 @@
                                                     <path fill="#1A1A1A" fill-rule="nonzero" d="M136.343 381.786h-17.035v19.785H93.103v-81.894h41.274c18.782 0 28.171 10.09 28.171 30.269 0 11.093-2.445 19.306-7.336 24.634-1.835 2.008-4.367 3.712-7.6 5.11-3.233 1.396-6.988 2.096-11.269 2.096zm-17.035-41.144v20.179h6.029c3.145 0 5.438-.327 6.878-.982 1.443-.656 2.162-2.163 2.162-4.522v-9.171c0-2.359-.719-3.866-2.162-4.521-1.44-.656-3.733-.983-6.878-.983h-6.029zm53.069 60.929v-81.894h36.689c14.762 0 24.895 3.145 30.399 9.435 5.502 6.289 8.255 16.794 8.255 31.512 0 14.72-2.753 25.223-8.255 31.513-5.504 6.289-15.637 9.434-30.399 9.434h-36.689zm37.083-60.929h-10.878v39.964h10.878c3.581 0 6.178-.415 7.794-1.244 1.616-.83 2.426-2.731 2.426-5.7v-26.075c0-2.969-.81-4.87-2.426-5.699-1.616-.831-4.213-1.246-7.794-1.246zm97.879 30.53h-22.277v30.399h-26.206v-81.894h53.724l-3.276 20.965h-24.242v11.008h22.277v19.522z"/>
                                                     </svg>
                                                 </a>
-                                                <a class="download-link-btn" id="print"
+                                                <a class="download-link-btn" id="print" data-value="${row.last_activity}"
                                                     data-bs-toggle="tooltip"  data-bs-placement="top" title="Print" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                                                     <svg width="30" height="30" viewBox="0 0 64 64">
                                                     <!-- Printer body -->
@@ -510,6 +510,216 @@
                 `last_activity=${last_activity}`;
     
             window.location.href = url;
+        });
+        // Print
+        $(document).on('click', '#print', function (e) {
+            e.preventDefault();
+            
+            const iframe = document.getElementById('printFrame');
+            if (!iframe) {
+                console.error("Iframe with ID 'printFrame' not found.");
+                return;
+            }
+
+            const last_activity = $(this).data('value');
+
+            const url = '{{ route("details-session-record.print") }}?' +
+                `last_activity=${last_activity}`;
+
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    const companyName = @json(setting('company_name'));
+                    const companyAddress = @json(setting('company_address'));
+                    const companyLogo = "{{ asset('image/log/print-page-logo.svg') }}";
+                    
+                    const doc = iframe.contentDocument || iframe.contentWindow.document;
+
+                    // Dynamically inject logo image
+                    let logoHTML = '';
+                    if (companyLogo) {
+                        logoHTML = `
+                            <span style="float:inline-start;">
+                                <img id="company-logo" src="${companyLogo}" 
+                                    style="width:70px;height:55px;padding:0px;" 
+                                    alt="company-logo">
+                            </span>
+                        `;
+                    }
+
+                    // Inject logo before full HTML write
+                    const updatedData = data.replace('<div class="header">', `<div class="header">${logoHTML}`);
+
+                    const html = `
+                        <!DOCTYPE html>
+                        <html>
+                            <head>
+                                <title>Print Preview</title>
+                                <style>
+                                    body {
+                                        padding: 20px;
+                                        font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
+                                    }
+                                    p, span {
+                                        font-family: inherit;
+                                        font-size: 13px;
+                                    }
+                                    .header {
+                                        text-align: center;
+                                        margin-bottom: 0;
+                                    }
+                                    .content {
+                                        margin: 0;
+                                    }
+                                    .footer {
+                                        text-align: center;
+                                        width: 100%;
+                                    }
+                                    .user_agent_label {
+                                        font-size: 13px;
+                                        font-weight: 600;
+                                    }
+                                    /* Tree Styles */
+                                    ul, li {
+                                        position: relative;
+                                    }
+                                    li::before {
+                                        content: '';
+                                        position: absolute;
+                                        top: 0;
+                                        left: -10px;
+                                        border-left: 1px solid #000;
+                                        height: 100%;
+                                    }
+                                    li::after {
+                                        content: '';
+                                        position: absolute;
+                                        top: 12px;
+                                        left: -10px;
+                                        width: 10px;
+                                        border-top: 1px solid #000;
+                                    }
+                                    ul#userAgentParentTree,
+                                    ul#userAgentParentTree ul {
+                                        list-style-type: none;
+                                        padding-left: 15px;
+                                        position: relative;
+                                        font-size: 13px;
+                                        margin: 0;
+                                    }
+                                    #userAgentParentTree > li {
+                                        margin-left: 10px;
+                                        padding-left: 40px;
+                                        position: relative;
+                                    }
+                                    #userAgentParentTree > li::before {
+                                        content: '';
+                                        position: absolute;
+                                        left: 0;
+                                        top: 8px;
+                                        width: 38px;
+                                        height: 1px;
+                                        background: #000;
+                                    }
+                                    #userAgentParentTree > li::after {
+                                        content: '';
+                                        position: absolute;
+                                        left: 0;
+                                        top: 0;
+                                        width: 1px;
+                                        height: 42px; /* Changed from % to px */
+                                        background: #000;
+                                    }
+                                    #userAgentParentTree > li:last-child::after {
+                                        height: 8px;
+                                    }
+                                    #userAgentChildTree li {
+                                        list-style-type: none;
+                                        margin-left: -25px;
+                                        padding-left: 10px;
+                                        position: relative;
+                                    }
+                                    #userAgentChildTree li::before {
+                                        content: '';
+                                        position: absolute;
+                                        left: -4px;
+                                        top: 8px;
+                                        width: 12px;
+                                        height: 1px;
+                                        background: #000;
+                                    }
+                                    #userAgentChildTree li::after {
+                                        content: '';
+                                        position: absolute;
+                                        left: -5px;
+                                        top: -7px;
+                                        width: 1px;
+                                        height: 10px; /* Changed from % to px */
+                                        background: #000;
+                                    }
+                                    ul#userAgentParentTree {
+                                        margin-left: 75px;
+                                        margin-top: -7px;
+                                    }
+                                    /* Print Optimizations */
+                                    @media print {
+                                        .print-watermark-text {
+                                            display: block;
+                                            position: fixed;
+                                            top: 50%;
+                                            left: 40%;
+                                            transform: translate(-50%, -40%) rotate(-45deg);
+                                            font-size: 100px;
+                                            color: rgba(0, 0, 0, 0.08);
+                                            font-weight: bold;
+                                            z-index: 0;
+                                            white-space: nowrap;
+                                            pointer-events: none;
+                                            width: 100%;
+                                            text-align: center;
+                                            text-shadow:
+                                                2px 2px 0 rgba(0, 0, 0, 0.04),
+                                                4px 4px 0 rgba(0, 0, 0, 0.03),
+                                                6px 6px 0 rgba(0, 0, 0, 0.02);
+                                            filter: blur(0.2px);
+                                        }
+                                        body {
+                                            -webkit-print-color-adjust: exact !important;
+                                            print-color-adjust: exact !important;
+                                            font-family: sans-serif;
+                                            padding: 20px;
+                                        }
+                                        #userAgentParentTree li::after,
+                                        #userAgentChildTree li::after {
+                                            height: auto; /* fallback if px values don't render well */
+                                        }
+                                        
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <div class="print-watermark-text">${companyName}</div>
+                                ${updatedData}
+                            </body>
+                        </html>
+                    `;
+
+                    doc.open();
+                    doc.write(html);
+                    doc.close();
+
+                    // Wait for image load inside iframe before printing
+                    const logoImage = doc.getElementById('company-logo');
+
+                    if (logoImage) {
+                        // Attach load event listener
+                        logoImage.addEventListener('load', () => {
+                            iframe.contentWindow.focus();
+                            iframe.contentWindow.print();
+                        });
+                    }
+                })
+                .catch(error => console.error('Error loading print content:', error));
         });
     });
 </script>
