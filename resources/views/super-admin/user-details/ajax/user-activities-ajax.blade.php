@@ -42,7 +42,7 @@
                     statusOffColor = 'color:black;background-color: #fff;';
                     updateDate = `<span>${modernDateFormat(row.updated_at)}</span>`;
                     lastActivity = `<span>${row.last_activity}</span>`;
-                    tdPadding = ` style="padding-top:2px;padding-bottom:2px;" `;
+                    tdPadding = ` style="padding-top:2px;padding-bottom:2px;text-align:center;" `;
                     // Calculate active time based on logout time
                     activeTime = `<span style="color:#4c4c4c;font-size:10px;">${getTimeDifference(row.updated_at)} ago</span>`;
                     lastLogged = `<span>${getTimeDifference(row.updated_at)} ago</span>`;
@@ -57,7 +57,7 @@
                         <input id="light_focus" type="text" class="lightB-focus" readonly></input>
                         <input id="light_focus" type="text" class="lightC-focus" readonly></input>
                     </span>`;
-                    tdPadding = ` style="padding-top:2px;padding-bottom:2px;" `;
+                    tdPadding = ` style="padding-top:2px;padding-bottom:2px;text-align:center;" `;
                     // Calculate active time based on login time
                     activeTime = `<span style="color:blue;font-size:10px;">${getTimeDifference(row.created_at)} <input id="light_focus" type="text" class="light2-focus ms-1" readonly></input></span>`;
                     lastLogged = `<span>${getTimeDifference(row.created_at)} <input id="light_focus" type="text" class="light2-focus ms-1 mt-2" readonly></input></span>`;

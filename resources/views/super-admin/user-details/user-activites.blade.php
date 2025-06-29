@@ -5,11 +5,11 @@
         ['label'=>'Email', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;width:450px;', 'dataColumn'=>'email', 'dataOrder'=>'desc', 'thClass'=>'table_th_color txt ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
         ['label'=>'IP', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: left;width:40px;', 'dataColumn'=>'ip_address', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
         ['label'=>'User Agent', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: left;', 'dataColumn'=>'user_agent', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'hidden', 'svgLable'=>'label-svg'], 
-        ['label'=>'Payload', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: left;width:40px;', 'dataColumn'=>'payload', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
+        ['label'=>'Payload', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: center;width:40px;', 'dataColumn'=>'payload', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
         ['label'=>'Last_activity', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: left;', 'dataColumn'=>'last_activity', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'hidden', 'svgLable'=>'label-svg'], 
-        ['label'=>'Login', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: left;width:150px;', 'dataColumn'=>'login', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
-        ['label'=>'Logout', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;width:150px;', 'dataColumn'=>'logout', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
-        ['label'=>'Activity', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;width:40px;', 'dataColumn'=>'last_activity', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'],
+        ['label'=>'Login', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;text-align: left;width:120px;', 'dataColumn'=>'login', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
+        ['label'=>'Logout', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;width:120px;', 'dataColumn'=>'logout', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'], 
+        ['label'=>'Activity', 'headId'=>'th_sort', 'headStyle'=>'background-color: white;cursor: pointer;padding: 2px;width:80px;', 'dataColumn'=>'last_activity', 'dataOrder'=>'desc', 'thClass'=>'table_th_color tot_pending_ ps-1 label-svg', 'thAttribute'=>'', 'svgLable'=>'label-svg'],
     ];
     $dateInputs = [
         'boxClass'=>'input-search-box', 'iconClass'=>'icon-box', 'svgWidth'=>'18', 'svgHeight'=>'18', 'svgStroke'=>'white', 'svgStrokeWidth'=>'2', 'svgFill'=>'rgb(170, 170, 170)',
@@ -44,52 +44,54 @@
                     />
                 </div>
             </div>
-            <x-tables.table-component tableResponsiveClass="table-light activity-table-responsive">
-                <x-tables.table tableParentClass="bg-white table-light ord_table center border-1 mt-2 table-custom">
-                    <x-tables.table-head>
-                        <x-tables.head-row tableHeadRowClass="table-light table-row order_body acc_setting_table" />
-                        @foreach($tableHeads as $data)
-                            <th id="{{ $data['headId'] }}" style="{{ $data['headStyle'] }}"
-                                data-coloumn="{{ $data['dataColumn'] }}" data-order="{{ $data['dataOrder'] }}"
-                                class="{{ $data['thClass'] }}" {!! $data['thAttribute'] ?: '' !!}>
-                                <span class="{{ $data['svgLable'] }}">
-                                    {{$data['label']}}
-                                    <x-tables.table-head-svg svgWidth="12px" svgHeight="12px" svgFillColor="#333333a1" />
-                                </span>
-                            </th>
-                        @endforeach
-                    </x-tables.table-head>
-                    <x-tables.table-body tableClass="bg-white table-light" tableId="user_activites_data_table" />
-                </x-tables.table>
-            </x-tables.table-component>
-            <x-tables.table-footer footerClass="row table_last_row mb-1">
-                <div class="col-1">
-                    <x-dropdown.table-footer-select-dropdown 
-                        labelClass="item_class"
-                        labelName="Peritem"
-                        dropdownBox="custom-select"
-                        selectClass="ps-1"
-                        selectId="perItemControl"
-                        selectStyle="background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);border:1px ridge rgba(135, 206, 250, 0.74);"
-                        selectedValue="10"
-                    />
-                </div>
-                <div class="col-3">
-                    <x-tables.table-entries
-                        labelClass="per_item_class"
-                        entryId="total_per_items"
-                        showId="per_items_num"
-                        totalIems="total_items" 
-                    />
-                </div>
-                <div class="col-8">
-                    <x-tables.table-pagination
-                        paginationClass="pagination mt-1"
-                        paginationId="activities_users_data_table_paginate" 
-                        paginationStyle="float: right;padding-top:0px;"
-                    />
-                </div>
-            </x-tables.table-footer>
+            <div class="table-wrapper">
+                <x-tables.table-component tableResponsiveClass="table-light activity-table-responsive">
+                    <x-tables.table tableParentClass="bg-white table-light ord_table center border-1 mt-2 table-custom">
+                        <x-tables.table-head>
+                            <x-tables.head-row tableHeadRowClass="table-light table-row order_body acc_setting_table" />
+                            @foreach($tableHeads as $data)
+                                <th id="{{ $data['headId'] }}" style="{{ $data['headStyle'] }}"
+                                    data-coloumn="{{ $data['dataColumn'] }}" data-order="{{ $data['dataOrder'] }}"
+                                    class="{{ $data['thClass'] }}" {!! $data['thAttribute'] ?: '' !!}>
+                                    <span class="{{ $data['svgLable'] }}">
+                                        {{$data['label']}}
+                                        <x-tables.table-head-svg svgWidth="12px" svgHeight="12px" svgFillColor="#333333a1" />
+                                    </span>
+                                </th>
+                            @endforeach
+                        </x-tables.table-head>
+                        <x-tables.table-body tableClass="bg-white table-light" tableId="user_activites_data_table" />
+                    </x-tables.table>
+                </x-tables.table-component>
+                <x-tables.table-footer footerClass="row table_last_row mb-1">
+                    <div class="col-1">
+                        <x-dropdown.table-footer-select-dropdown 
+                            labelClass="item_class"
+                            labelName="Peritem"
+                            dropdownBox="custom-select"
+                            selectClass="ps-1"
+                            selectId="perItemControl"
+                            selectStyle="background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);border:1px ridge rgba(135, 206, 250, 0.74);"
+                            selectedValue="10"
+                        />
+                    </div>
+                    <div class="col-3">
+                        <x-tables.table-entries
+                            labelClass="per_item_class"
+                            entryId="total_per_items"
+                            showId="per_items_num"
+                            totalIems="total_items" 
+                        />
+                    </div>
+                    <div class="col-8">
+                        <x-tables.table-pagination
+                            paginationClass="pagination mt-1"
+                            paginationId="activities_users_data_table_paginate" 
+                            paginationStyle="float: right;padding-top:0px;"
+                        />
+                    </div>
+                </x-tables.table-footer>
+            </div>
         </div>
 
         <!-- <table id="resizableTable">
