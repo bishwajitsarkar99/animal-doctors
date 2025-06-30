@@ -11,23 +11,23 @@
 <div id="stocks" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushStock">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page" href="#" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('stock_book_visual')}}">{{__('translate.Stock-Book')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('adjustment_visual')}}">{{__('translate.Stock-Adjustment')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('damage_stock_visual')}}">{{__('translate.Damage-Stock')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('stock_summary_visual')}}">{{__('translate.Stock-Summary')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('stock_report_visual')}}">{{__('translate.Stock-Report')}}</span>
             </a>
@@ -46,17 +46,17 @@
 <div id="inventories" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushStock">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <!-- <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Create-Inventory">
+            <!-- <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Create-Inventory">
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Add Inventory
             </a> -->
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('inventory_details.action') ? 'active' : '' }}" href="{{ route('inventory_details.action') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('inventory_details.action') ? 'active' : '' }}" data-url="{{ route('inventory_details.action') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('inventory_details_visual')}}">{{__('translate.Inventory Details')}}</span>
             </a>
-            <!-- <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Inventory-Setting">
+            <!-- <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Inventory-Setting">
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Inventory Setting
             </a> -->
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('inventory-auth') ? 'active' : '' }}" href="{{route('inventory-auth')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('inventory-auth') ? 'active' : '' }}" data-url="{{route('inventory-auth')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('inventory_visual')}}">{{__('translate.Inventory Setting')}}</span>
             </a>
@@ -75,19 +75,19 @@
 <div id="suppliers" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushStock">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('supplier.index') ? 'active' : '' }}" href="{{route('supplier.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('supplier.index') ? 'active' : '' }}" data-url="{{route('supplier.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_setup_display')}}">{{__('translate.Create')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_details_display')}}">{{__('translate.Record')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_requisition_display')}}">{{__('translate.Requisition')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('access-permission.index') ? 'active' : '' }}" href="{{route('access-permission.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('access-permission.index') ? 'active' : '' }}" data-url="{{route('access-permission.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_requisition_display')}}">{{__('translate.Setting')}}</span>
             </a>
@@ -108,23 +108,23 @@
 <div id="stocks" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushStock">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page" href="#" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('stock_book_visual')}}">{{__('translate.Stock-Book')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('adjustment_visual')}}">{{__('translate.Stock-Adjustment')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('damage_stock_visual')}}">{{__('translate.Damage-Stock')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('stock_summary_visual')}}">{{__('translate.Stock-Summary')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('stock_report_visual')}}">{{__('translate.Stock-Report')}}</span>
             </a>
@@ -143,17 +143,17 @@
 <div id="inventories" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushStock">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <!-- <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Create-Inventory">
+            <!-- <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Create-Inventory">
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Add Inventory
             </a> -->
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('inventory_details.action') ? 'active' : '' }}" href="{{ route('inventory_details.action') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('inventory_details.action') ? 'active' : '' }}" data-url="{{ route('inventory_details.action') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('inventory_details_visual')}}">{{__('translate.Inventory Details')}}</span>
             </a>
-            <!-- <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Inventory-Setting">
+            <!-- <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Inventory-Setting">
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Inventory Setting
             </a> -->
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('inventory-auth') ? 'active' : '' }}" href="{{route('inventory-auth')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('inventory-auth') ? 'active' : '' }}" data-url="{{route('inventory-auth')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('inventory_visual')}}">{{__('translate.Inventory Setting')}}</span>
             </a>
@@ -172,19 +172,19 @@
 <div id="suppliers" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushStock">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('supplier.index') ? 'active' : '' }}" href="{{route('supplier.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('supplier.index') ? 'active' : '' }}" data-url="{{route('supplier.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_setup_display')}}">{{__('translate.Create')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_details_display')}}">{{__('translate.Record')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_requisition_display')}}">{{__('translate.Requisition')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('access-permission.index') ? 'active' : '' }}" href="{{route('access-permission.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('access-permission.index') ? 'active' : '' }}" data-url="{{route('access-permission.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_requisition_display')}}">{{__('translate.Setting')}}</span>
             </a>
@@ -205,23 +205,23 @@
 <div id="stocks" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushStock">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page" href="#" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('stock_book_visual')}}">{{__('translate.Stock-Book')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('adjustment_visual')}}">{{__('translate.Stock-Adjustment')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('damage_stock_visual')}}">{{__('translate.Damage-Stock')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('stock_summary_visual')}}">{{__('translate.Stock-Summary')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('stock_report_visual')}}">{{__('translate.Stock-Report')}}</span>
             </a>
@@ -240,17 +240,17 @@
 <div id="inventories" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushStock">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <!-- <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Create-Inventory">
+            <!-- <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Create-Inventory">
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Add Inventory
             </a> -->
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('inventory_details.action') ? 'active' : '' }}" href="{{ route('inventory_details.action') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('inventory_details.action') ? 'active' : '' }}" data-url="{{ route('inventory_details.action') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('inventory_details_visual')}}">{{__('translate.Inventory Details')}}</span>
             </a>
-            <!-- <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Inventory-Setting">
+            <!-- <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Inventory-Setting">
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Inventory Setting
             </a> -->
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('inventory-auth') ? 'active' : '' }}" href="{{route('inventory-auth')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('inventory-auth') ? 'active' : '' }}" data-url="{{route('inventory-auth')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('inventory_visual')}}">{{__('translate.Inventory Setting')}}</span>
             </a>
@@ -269,19 +269,19 @@
 <div id="suppliers" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushStock">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('supplier.index') ? 'active' : '' }}" href="{{route('supplier.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('supplier.index') ? 'active' : '' }}" data-url="{{route('supplier.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_setup_display')}}">{{__('translate.Create')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_details_display')}}">{{__('translate.Record')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_requisition_display')}}">{{__('translate.Requisition')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('access-permission.index') ? 'active' : '' }}" href="{{route('access-permission.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('access-permission.index') ? 'active' : '' }}" data-url="{{route('access-permission.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_requisition_display')}}">{{__('translate.Setting')}}</span>
             </a>
@@ -302,23 +302,23 @@
 <div id="stocks" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushStock">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page" href="#" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Click')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('stock_book_visual')}}">{{__('translate.Stock-Book')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('adjustment_visual')}}">{{__('translate.Stock-Adjustment')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('damage_stock_visual')}}">{{__('translate.Damage-Stock')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('stock_summary_visual')}}">{{__('translate.Stock-Summary')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('stock_report_visual')}}">{{__('translate.Stock-Report')}}</span>
             </a>
@@ -337,17 +337,17 @@
 <div id="inventories" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushStock">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <!-- <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Create-Inventory">
+            <!-- <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Create-Inventory">
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Add Inventory
             </a> -->
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('inventory_details.action') ? 'active' : '' }}" href="{{ route('inventory_details.action') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('inventory_details.action') ? 'active' : '' }}" data-url="{{ route('inventory_details.action') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('inventory_details_visual')}}">{{__('translate.Inventory Details')}}</span>
             </a>
-            <!-- <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Inventory-Setting">
+            <!-- <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Inventory-Setting">
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Inventory Setting
             </a> -->
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('inventory-auth') ? 'active' : '' }}" href="{{route('inventory-auth')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('inventory-auth') ? 'active' : '' }}" data-url="{{route('inventory-auth')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('inventory_visual')}}">{{__('translate.Inventory Setting')}}</span>
             </a>
@@ -366,19 +366,19 @@
 <div id="suppliers" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushStock">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('supplier.index') ? 'active' : '' }}" href="{{route('supplier.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('supplier.index') ? 'active' : '' }}" data-url="{{route('supplier.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_setup_display')}}">{{__('translate.Create')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_details_display')}}">{{__('translate.Record')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_requisition_display')}}">{{__('translate.Requisition')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('access-permission.index') ? 'active' : '' }}" href="{{route('access-permission.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('access-permission.index') ? 'active' : '' }}" data-url="{{route('access-permission.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_requisition_display')}}">{{__('translate.Setting')}}</span>
             </a>

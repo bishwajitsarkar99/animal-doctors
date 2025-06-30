@@ -38,5 +38,14 @@
             // Toggle the rotation class
             arrowIcon.toggleClass("rotate-icon");
         });
+        document.querySelectorAll('.side-bar-link').forEach(link => {
+            link.addEventListener('click', function(e){
+                e.preventDefault();
+                const url = this.getAttribute('data-url');
+                if(url){
+                    window.location.href = url;
+                }
+            });
+        });
     });
 </script>

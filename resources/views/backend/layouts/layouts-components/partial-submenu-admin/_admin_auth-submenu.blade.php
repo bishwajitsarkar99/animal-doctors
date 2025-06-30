@@ -11,12 +11,12 @@
     <li>
         <div class="collapse" id="auth_" aria-labelledby="headingTwo" data-bs-parent="#auth_">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link underline" href="{{ route('categories.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Category')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a type="button" class="nav-link underline side-bar-link load-page" data-url="{{ route('categories.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Category')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.Category')}}
                 </a>
             </nav>
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link underline" href="{{ route('post.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Post')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a type="button" class="nav-link underline side-bar-link load-page" data-url="{{ route('post.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Post')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.Post')}}
                 </a>
             </nav>
@@ -37,12 +37,12 @@
     <li>
         <div class="collapse" id="auth_" aria-labelledby="headingTwo" data-bs-parent="#auth_">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link underline" href="{{ route('create.doctorpost')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Add-Post')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a type="button" class="nav-link underline side-bar-link load-page" data-url="{{ route('create.doctorpost')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Add-Post')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.Add-Post')}}
                 </a>
             </nav>
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link underline" href="{{ route('doctors.index')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Post-List')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a type="button" class="nav-link underline side-bar-link load-page" data-url="{{ route('doctors.index')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Post-List')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>{{__('translate.Post-List')}}
                 </a>
             </nav>

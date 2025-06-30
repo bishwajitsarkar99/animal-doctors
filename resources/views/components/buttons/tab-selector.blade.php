@@ -1,2 +1,2 @@
 @props(['label', 'tablParentClass' => '', 'tablChildClass' => '', 'tablClass' => '', 'tablActiveClass' => '', 'btnDisabled' => '', 'link', 'tabId', ])
-<a class="{{ $tablParentClass}} {{ $tablChildClass}} {{ $tablClass}} {{ $tablActiveClass}} {{ $btnDisabled }}" data-bs-toggle="tab" href="{{ $link }}" id="{{ $tabId }}">{{ $label }}</a>
+<a class="{{ $tablParentClass}} {{ $tablChildClass}} {{ $tablClass}} {{ $tablActiveClass}} {{ $btnDisabled }}" data-bs-toggle="tab" data-target="{{ $link }}" id="{{ $tabId }}">{{ $label }}</a>

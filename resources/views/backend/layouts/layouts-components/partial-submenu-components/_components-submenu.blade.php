@@ -12,7 +12,7 @@
 <div id="forntendPartOne" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushReport">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Add
             </a>
         </div>
@@ -32,7 +32,7 @@
 <div id="forntendPartTwo" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushReport">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Add
             </a>
         </div>
@@ -52,7 +52,7 @@
 <div id="forntendPartThree" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushReport">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Add
             </a>
         </div>
@@ -72,13 +72,13 @@
 <div id="forntendPartFour" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushReport">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Page One
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Page Two
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Page Three
             </a>
         </div>
@@ -98,13 +98,13 @@
 <div id="forntendPartFive" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushReport">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Post-One
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Post-Two
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Post-Three
             </a>
         </div>
@@ -124,16 +124,16 @@
 <div id="forntendPartSix" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushReport">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('forntend_footer.index') ? 'active' : '' }}" href="{{route('forntend_footer.index')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('forntend_footer.index') ? 'active' : '' }}" data-url="{{route('forntend_footer.index')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Company-Informaion
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Payment Getway
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Features
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>Content
             </a>
         </div>
@@ -153,7 +153,7 @@
 <div id="forntendPartSeven" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushReport">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page {{Request::routeIs('forntend_footer_newletter.index') ? 'active' : '' }}" href="{{route('forntend_footer_newletter.index')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('forntend_footer_newletter.index') ? 'active' : '' }}" data-url="{{route('forntend_footer_newletter.index')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>News-Letter
             </a>
         </div>

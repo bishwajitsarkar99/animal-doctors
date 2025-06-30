@@ -44,7 +44,7 @@
                     />
                 </div>
             </div>
-            <div class="table-wrapper">
+            <div class="table-loader-wrapper position-relative">
                 <x-tables.table-component tableResponsiveClass="table-light activity-table-responsive">
                     <x-tables.table tableParentClass="bg-white table-light ord_table center border-1 mt-2 table-custom">
                         <x-tables.table-head>
@@ -61,37 +61,53 @@
                             @endforeach
                         </x-tables.table-head>
                         <x-tables.table-body tableClass="bg-white table-light" tableId="user_activites_data_table" />
+                        <!-- Loader Overlay -->
+                        <div id="tableOverlayLoader" class="table-loader-overlay display_none">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="darkgreen" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="data-table-loader">
+                                <line x1="12" y1="2" x2="12" y2="6"/>
+                                <line x1="12" y1="18" x2="12" y2="22"/>
+                                <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/>
+                                <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+                                <line x1="2" y1="12" x2="6" y2="12"/>
+                                <line x1="18" y1="12" x2="22" y2="12"/>
+                                <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
+                                <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+                            </svg>
+                            <span class="loader-text ms-1">Loading....</span>
+                        </div>
                     </x-tables.table>
                 </x-tables.table-component>
-                <x-tables.table-footer footerClass="row table_last_row mb-1">
-                    <div class="col-1">
-                        <x-dropdown.table-footer-select-dropdown 
-                            labelClass="item_class"
-                            labelName="Peritem"
-                            dropdownBox="custom-select"
-                            selectClass="ps-1"
-                            selectId="perItemControl"
-                            selectStyle="background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);border:1px ridge rgba(135, 206, 250, 0.74);"
-                            selectedValue="10"
-                        />
-                    </div>
-                    <div class="col-3">
-                        <x-tables.table-entries
-                            labelClass="per_item_class"
-                            entryId="total_per_items"
-                            showId="per_items_num"
-                            totalIems="total_items" 
-                        />
-                    </div>
-                    <div class="col-8">
-                        <x-tables.table-pagination
-                            paginationClass="pagination mt-1"
-                            paginationId="activities_users_data_table_paginate" 
-                            paginationStyle="float: right;padding-top:0px;"
-                        />
-                    </div>
-                </x-tables.table-footer>
             </div>
+            <x-tables.table-footer footerClass="row table_last_row mb-1">
+                <div class="col-1">
+                    <x-dropdown.table-footer-select-dropdown 
+                        labelClass="item_class"
+                        labelName="Peritem"
+                        dropdownBox="custom-select"
+                        selectClass="ps-1"
+                        selectId="perItemControl"
+                        selectStyle="background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);border:1px ridge rgba(135, 206, 250, 0.74);"
+                        selectedValue="10"
+                    />
+                </div>
+                <div class="col-3">
+                    <x-tables.table-entries
+                        labelClass="per_item_class"
+                        entryId="total_per_items"
+                        showId="per_items_num"
+                        totalIems="total_items" 
+                    />
+                </div>
+                <div class="col-8">
+                    <x-tables.table-pagination
+                        paginationClass="pagination mt-1"
+                        paginationId="activities_users_data_table_paginate" 
+                        paginationStyle="float: right;padding-top:0px;"
+                    />
+                </div>
+            </x-tables.table-footer>
         </div>
 
         <!-- <table id="resizableTable">

@@ -178,7 +178,7 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/user-details/user-details.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/user-details/user-details-min.css">
 <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/date-picker/css/jquery-ui.min.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/suspended-page-asset/suspended-asset.css">
@@ -212,6 +212,19 @@
       dateFormat: "dd-M-yy",
       changeMonth: true,
       changeYear: true,
+    });
+    // Tab on click action
+    $(document).on('click', '[data-target]', function(e) {
+      e.preventDefault();
+      const target = $(this).data('target');
+
+      // Remove 'active' from all
+      $('.tab-pane').removeClass('active');
+      $('[data-target]').removeClass('active');
+
+      // Add 'active' to the current
+      $(target).addClass('active');
+      $(this).addClass('active');
     });
   });
 </script>

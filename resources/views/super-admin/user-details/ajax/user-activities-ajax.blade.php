@@ -36,13 +36,14 @@
             }
 
             return [...rows].map((row, key) => {
-                let statusText, statusOffColor, currentLogText, activeTime, lastLogged, updateDate, lastActivity, tdPadding;
+                let statusText, statusOffColor, currentLogText, activeTime, lastLogged, updateDate, lastActivity, tdPadding, tdBorder;
+                const tableBorder = `style="border-top:1px ridge #dfdfdf;border-bottom:none;"`;
                 if (row.payload == 'logout') {
                     statusText = '<span class="bg-light-alert badge rounded-pill" style="color:white;font-weight:800;font-size: 11px;letter-spacing: 1px;">logout</span>';
                     statusOffColor = 'color:black;background-color: #fff;';
                     updateDate = `<span>${modernDateFormat(row.updated_at)}</span>`;
                     lastActivity = `<span>${row.last_activity}</span>`;
-                    tdPadding = ` style="padding-top:2px;padding-bottom:2px;text-align:center;" `;
+                    tdPadding = ` style="padding-top:2px;padding-bottom:2px;text-align:center;border-top:1px ridge #dfdfdf;border-bottom:none;" `;
                     // Calculate active time based on logout time
                     activeTime = `<span style="color:#4c4c4c;font-size:10px;">${getTimeDifference(row.updated_at)} ago</span>`;
                     lastLogged = `<span>${getTimeDifference(row.updated_at)} ago</span>`;
@@ -57,35 +58,35 @@
                         <input id="light_focus" type="text" class="lightB-focus" readonly></input>
                         <input id="light_focus" type="text" class="lightC-focus" readonly></input>
                     </span>`;
-                    tdPadding = ` style="padding-top:2px;padding-bottom:2px;text-align:center;" `;
+                    tdPadding = ` style="padding-top:2px;padding-bottom:2px;text-align:center;border-top:1px ridge #dfdfdf;border-bottom:none;" `;
                     // Calculate active time based on login time
                     activeTime = `<span style="color:blue;font-size:10px;">${getTimeDifference(row.created_at)} <input id="light_focus" type="text" class="light2-focus ms-1" readonly></input></span>`;
                     lastLogged = `<span>${getTimeDifference(row.created_at)} <input id="light_focus" type="text" class="light2-focus ms-1 mt-2" readonly></input></span>`;
                 }
                 return `
                     <tr class="table-row-light table-row user-table-row supp-table-row table-light" key="${key}" data-user-id="${row.last_activity}" id="supp_tab">
-                        <td class="sn border_ord" id="supp_tab2" hidden>${row.id}</td>
-                        <td class="txt_ user-details-links ps-1" id="supp_tab3">
+                        <td class="sn border_ord" ${tableBorder} id="supp_tab2" hidden>${row.id}</td>
+                        <td class="user-details-links ps-1" ${tableBorder} id="supp_tab3">
                             <button class="btn-sm edit_registration user-details-btn view_btn cgr_btn viewurs ms-1" id="viewBtn" value="${row.last_activity}" style="font-size: 10px;height: 18px;">
                                 <span hidden>${row.last_activity}</span>
                                 ${row.user_id} 
                             </button>
                         </td>
-                        <td class="border_ord ps-1 supp_vew" id="supp_tab4" hidden>${row.name}</td>
-                        <td class="txt_ ps-1 supp_vew2" id="supp_tab5">
+                        <td class="border_ord ps-1 supp_vew" ${tableBorder} id="supp_tab4" hidden>${row.name}</td>
+                        <td class="ps-1 supp_vew2" ${tableBorder} id="supp_tab5">
                             <span style="color:gray"><i class="fa fa-envelope"></i></span>
                             ${row.email} ${activeTime ? activeTime : ''}
                         </td>
-                        <td class="txt_ supp_vew4" id="supp_tab7">${row.ip_address}</td>
-                        <td class="txt_ ps-1 supp_vew5" id="supp_tab8" hidden>${row.user_agent}</td>
-                        <td class="txt_ supp_vew6" ${tdPadding} id="supp_tab9">
+                        <td class="supp_vew4" ${tableBorder} id="supp_tab7">${row.ip_address}</td>
+                        <td class="ps-1 supp_vew5" ${tableBorder} id="supp_tab8" hidden>${row.user_agent}</td>
+                        <td class="supp_vew6" ${tdPadding} id="supp_tab9">
                             <span class="permission edit_inventory_table" style="font-size:12px; ${statusOffColor}">
                                 ${statusText}
                             </span>
                         </td>
-                        <td class="txt_ ps-1 supp_vew8" id="supp_tab11">${modernDateFormat(row.created_at)}</td>
-                        <td class="txt_ ps-1 supp_vew9" id="supp_tab12">${updateDate}</td>
-                        <td class="txt_ pe-2 supp_vew7" id="supp_tab10">${lastActivity}</td>
+                        <td class="ps-1 supp_vew8" ${tdPadding} id="supp_tab11">${modernDateFormat(row.created_at)}</td>
+                        <td class="ps-1 supp_vew9" ${tdPadding} id="supp_tab12">${updateDate}</td>
+                        <td class="pe-2 supp_vew7" ${tdPadding} id="supp_tab10">${lastActivity}</td>
                     </tr>
                     <tr class="table-log-details-row supp-table-row child-row" data-user-id="${row.last_activity}"  style="display: none;">
                         <td colspan="14">
@@ -250,6 +251,8 @@
                 return;
             }
 
+            showTableLoader();
+
             $.ajax({
                 type: "GET",
                 url: current_url,
@@ -302,6 +305,9 @@
                         });
                     }
                 },
+                complete: function() {
+                    hideTableLoader();
+                },
                 error: function(xhr) {
                     if (xhr.status === 422) {
                         let res = xhr.responseJSON;
@@ -329,6 +335,12 @@
                     </tr>
                 `);
             }
+        }
+        function showTableLoader() {
+            $('#tableOverlayLoader').removeClass('display_none');
+        }
+        function hideTableLoader() {
+            $('#tableOverlayLoader').addClass('display_none');
         }
         // Event Listener for sorting columns
         $(document).on('click', '#th_sort', function () {

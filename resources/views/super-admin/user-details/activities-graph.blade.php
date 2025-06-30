@@ -1342,10 +1342,16 @@
         branchInitFetch();
         roleInitFetch();
         emailInitFetch();
+        function showMenuLoader() {
+            $('#loaderPage').removeClass('display_none');
+        }
+        function hideMenuLoader() {
+            $('#loaderPage').addClass('display_none');
+        }
         // Branch Data Fetch
         function branchInitFetch(query = ''){
             const currentURL = "{{route('branch.fetch')}}"
-
+            showMenuLoader();
             $.ajaxSetup({
                 headers:{
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1389,6 +1395,9 @@
                         });
                     }
                 },
+                complete: function() {
+                    hideMenuLoader();
+                },
                 error: function(xhr, status, error) {
                     console.error("AJAX error:", error);
                 }
@@ -1400,23 +1409,28 @@
             const branchMenu = $("#branchFetchData");
             branchMenu.empty();
             branchMenu.append(`
-                <li id="loaderPage">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
-                </li>
+                <div id="loaderPage" class="menu-loader-overlay">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                        class="data-menu-loader">
+                        <line x1="12" y1="2" x2="12" y2="6"/>
+                        <line x1="12" y1="18" x2="12" y2="22"/>
+                        <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/>
+                        <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+                        <line x1="2" y1="12" x2="6" y2="12"/>
+                        <line x1="18" y1="12" x2="22" y2="12"/>
+                        <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
+                        <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+                    </svg>
+                    <span class="menu-loader-text ms-1">Loading....</span>
+                </div>
             `);
-            $(".feather-loader").removeClass('display_none');
-            $("#select_list_branch").addClass('add_display_none');
-            setTimeout(() => {
-               $(".feather-loader").addClass('display_none'); 
-               $("#select_list_branch").removeClass('add_display_none');
-            }, 1000);
             branchInitFetch(query);
         });
         // Branch Refresh
         $(document).on('click', '.enter_press', function(){
             branchInitFetch();
         });
-
         // Role Data Fetch
         function roleInitFetch(id, query = '') {
             if (!id) {
@@ -1424,7 +1438,7 @@
             }
 
             const currentUrl = "/application/get-fetch-role-data/" + id;
-
+            showMenuLoader();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1466,6 +1480,9 @@
                         });
                     }
                 },
+                complete: function() {
+                    hideMenuLoader();
+                },
                 error: function(xhr, status, error) {
                     console.error("AJAX error:", error);
                 }
@@ -1479,9 +1496,21 @@
             roleMenu.empty();
 
             roleMenu.append(`
-                <li id="loaderPage">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="role-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
-                </li>
+                <div id="loaderPage" class="menu-loader-overlay display_none">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                        class="data-menu-loader">
+                        <line x1="12" y1="2" x2="12" y2="6"/>
+                        <line x1="12" y1="18" x2="12" y2="22"/>
+                        <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/>
+                        <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+                        <line x1="2" y1="12" x2="6" y2="12"/>
+                        <line x1="18" y1="12" x2="22" y2="12"/>
+                        <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
+                        <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+                    </svg>
+                    <span class="menu-loader-text ms-1">Loading....</span>
+                </div>
             `);
             $(".role-loader").removeClass('display_none');
             $("#select_list_role").addClass('add_display_none');
@@ -1524,21 +1553,26 @@
             roleMenu.empty();
 
             roleMenu.append(`
-                <li id="loaderPage">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="role-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
-                </li>
+                <div id="loaderPage" class="menu-loader-overlay display_none">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                        class="data-menu-loader">
+                        <line x1="12" y1="2" x2="12" y2="6"/>
+                        <line x1="12" y1="18" x2="12" y2="22"/>
+                        <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/>
+                        <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+                        <line x1="2" y1="12" x2="6" y2="12"/>
+                        <line x1="18" y1="12" x2="22" y2="12"/>
+                        <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
+                        <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+                    </svg>
+                    <span class="menu-loader-text ms-1">Loading....</span>
+                </div>
             `);
-            $(".role-loader").removeClass('display_none');
-            $("#select_list_role").addClass('add_display_none');
-            setTimeout(() => {
-                $(".role-loader").addClass('display_none'); 
-                $("#select_list_role").removeClass('add_display_none');
-                if (id.length > 0) {
-                    roleInitFetch(id);
-                }
-            }, 1000);
+            if (id.length > 0) {
+                roleInitFetch(id);
+            }
         });
-
         // Email Fetch Data
         function emailInitFetch(id, query = '') {
             if (!id) {
@@ -1546,7 +1580,7 @@
             }
 
             const currentUrl = "/application/get-user-fetch-email/" + id;
-
+            showMenuLoader();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1599,6 +1633,9 @@
                         new bootstrap.Tooltip(el);
                     });
                 },
+                complete: function() {
+                    hideMenuLoader();
+                },
                 error: function(xhr, status, error) {
                     console.error("AJAX error:", error);
                 }
@@ -1614,20 +1651,26 @@
             emailMenu.empty();
 
             emailMenu.append(`
-                <li id="loaderPage">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="role-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
-                </li>
+                <div id="loaderPage" class="menu-loader-overlay display_none">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                        class="data-menu-loader">
+                        <line x1="12" y1="2" x2="12" y2="6"/>
+                        <line x1="12" y1="18" x2="12" y2="22"/>
+                        <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/>
+                        <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+                        <line x1="2" y1="12" x2="6" y2="12"/>
+                        <line x1="18" y1="12" x2="22" y2="12"/>
+                        <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
+                        <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+                    </svg>
+                    <span class="menu-loader-text ms-1">Loading....</span>
+                </div>
             `);
-            $(".role-loader").removeClass('display_none');
-            $("#select_list_email").addClass('add_display_none');
-            setTimeout(() => {
-                $(".role-loader").addClass('display_none'); 
-                $("#select_list_email").removeClass('add_display_none');
-            }, 1000);
 
             emailInitFetch(id, query);
         });
-        // Email Refresh
+        // Role Refresh
         $(document).on('click', '.enter_press_option_email', function(){
             roleInitFetch();
         });
@@ -1675,22 +1718,25 @@
             // Clear and show loader
             const emailMenu = $("#emailFetchData");
             emailMenu.empty().append(`
-                <li id="loaderPage">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="email-loader display_none"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
-                </li>
+                <div id="loaderPage" class="menu-loader-overlay display_none">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                        class="data-menu-loader">
+                        <line x1="12" y1="2" x2="12" y2="6"/>
+                        <line x1="12" y1="18" x2="12" y2="22"/>
+                        <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/>
+                        <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+                        <line x1="2" y1="12" x2="6" y2="12"/>
+                        <line x1="18" y1="12" x2="22" y2="12"/>
+                        <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
+                        <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+                    </svg>
+                    <span class="menu-loader-text ms-1">Loading....</span>
+                </div>
             `);
-            $(".email-loader").removeClass('display_none');
-            $("#select_list_email").addClass('add_display_none');
-
-            // Fetch emails after short delay
-            setTimeout(() => {
-                $(".email-loader").addClass('display_none');
-                $("#select_list_email").removeClass('add_display_none');
-
-                if (id.length > 0) {
-                    emailInitFetch(id);
-                }
-            }, 1000);
+            if (id.length > 0) {
+                emailInitFetch(id);
+            }
         });
         // Event listener for only branch=>email
         $(document).on('click', '#select_list_email', function () {

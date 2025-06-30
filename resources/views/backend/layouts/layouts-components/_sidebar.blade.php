@@ -1,37 +1,37 @@
 <div class="sb-sidenav-menu">
     <div class="nav" id="menu_background">
         @if(auth()->user()->role ==1)
-            <a class="nav-link ms-1" href="{{ route('super-admin.dashboard') }}" id="side_nav">
+            <a type="button" class="side-bar-link nav-link ms-1" data-url="{{ route('super-admin.dashboard') }}" id="side_nav">
                 <span class="dashboard_text ms-4">{{__('translate.Dashboard')}}</span>
             </a>
         @endif
         @if(auth()->user()->role ==2)
-            <a class="nav-link ms-1" href="{{ route('sub-admin.dashboard') }}" id="side_nav">
+            <a type="button" class="side-bar-link nav-link ms-1" data-url="{{ route('sub-admin.dashboard') }}" id="side_nav">
                 <span class="dashboard_text ms-4">{{__('translate.Dashboard')}}</span>
             </a>
         @endif
         @if(auth()->user()->role ==3)
-            <a class="nav-link ms-1" href="{{ route('admin.dashboard') }}" id="side_nav">
+            <a type="button" class="side-bar-link nav-link ms-1" data-url="{{ route('admin.dashboard') }}" id="side_nav">
                 <span class="dashboard_text ms-4">{{__('translate.Dashboard')}}</span>
             </a>
         @endif
         @if(auth()->user()->role ==5)
-            <a class="nav-link ms-1" href="{{ route('accounts.dashboard') }}" id="side_nav">
+            <a type="button" class="side-bar-link nav-link ms-1" data-url="{{ route('accounts.dashboard') }}" id="side_nav">
                 <span class="dashboard_text ms-4">Side-Menu</span>
             </a>  
         @endif
         @if(auth()->user()->role ==6)
-            <a class="nav-link ms-1" href="#" id="side_nav">
+            <a type="button" class="side-bar-link nav-link ms-1" data-url="#" id="side_nav">
                 <span class="dashboard_text ms-4">Side-Menu</span>
             </a>
         @endif
         @if(auth()->user()->role ==7)
-            <a class="nav-link ms-1" href="#" id="side_nav">
+            <a type="button" class="side-bar-link nav-link ms-1" data-url="#" id="side_nav">
                 <span class="dashboard_text ms-4">Side-Menu</span>
             </a> 
         @endif
         @if(auth()->user()->role ==0)
-            <a class="nav-link ms-1" href="{{ route('doctors.dashboard') }}" id="side_nav">
+            <a type="button" class="side-bar-link nav-link ms-1" data-url="{{ route('doctors.dashboard') }}" id="side_nav">
                 <span class="dashboard_text ms-4">Side-Menu</span>
             </a>   
         @endif

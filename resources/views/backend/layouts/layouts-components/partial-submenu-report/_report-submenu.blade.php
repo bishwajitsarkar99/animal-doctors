@@ -12,43 +12,43 @@
 <div id="accountingReport" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushReport">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('blance_sheet_visual')}}">{{__('translate.Blance Sheet')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('trial_blance_sheet_visual')}}">{{__('translate.Trial Balance Sheet')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('financial_statement_visual')}}">{{__('translate.Financial Statement')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('income_statement_visual')}}">{{__('translate.Income Statement')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('cash_flow_statement_visual')}}">{{__('translate.Cash Flow Statement')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('petty_cash_statement_visual')}}">{{__('translate.Petty Cash Statement')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('p_l_statement_visual')}}">{{__('translate.P/L Statement')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('tabular_analycis_visual')}}">{{__('translate.Tabular Analycis')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('table_blance_sheet_visual')}}">{{__('translate.Blance Sheet Table')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('report_setting_visual')}}">{{__('translate.Report Setting')}}</span>
             </a>
@@ -69,11 +69,11 @@
 <div id="accountingMonthlyReport" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushReport">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('monthly_report_view_visual')}}">{{__('translate.Monthly Report View')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('monthly_report_setting_visual')}}">{{__('translate.Setting')}}</span>
             </a>
@@ -94,11 +94,11 @@
 <div id="accountingDailyReport" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushReport">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
                 <span class="{{setting('daily_report_view_visual')}}">{{__('translate.Daily Report View')}}</span>
             </a>
-            <a class="nav-link underline nav_space load-page" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#007effc4;"></i>
                 <span class="{{setting('daily_report_setting_visual')}}">{{__('translate.Setting')}}</span>
             </a>

@@ -88,6 +88,66 @@ ul#userAgentParentTree {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+#table-loader {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+}
+.table-loader-wrapper {
+    position: relative;
+}
+
+.table-loader-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.75);
+    /* background: rgb(0 0 0 / 42%); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    pointer-events: all; /* block clicks */
+}
+.loader-text{
+    font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: darkgreen;
+    letter-spacing: 1px;
+}
+.data-table-loader {
+    animation: spin 1s linear infinite;
+    transform-origin: center center;
+}
+.menu-loader-overlay {
+    position: absolute;
+    top: 37px;
+    left: 8px;
+    width: 94%;
+    height: 70%;
+    /* background: rgba(255,255,255,0.75); */
+    background: rgb(0 0 0 / 42%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    pointer-events: all; /* block clicks */
+}
+.menu-loader-text{
+    font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+}
+.data-menu-loader {
+    animation: spin 1s linear infinite;
+    transform-origin: center center;
+}
 /* .modal.fade .modal-dialog.modal-xl {
     transform: none !important;
     position: relative !important;
@@ -116,9 +176,6 @@ input#searchBranch, input#searchRole, input#searchEmail{
     border-left: 1px ridge rgba(0, 123, 255, 0.1);
     border-right: 1px ridge rgba(0, 123, 255, 0.1);
     height: 22px;
-}
-.input-search-box {
-    margin-left: 7px;
 }
 .progressbar-active{
 	animation-name: progress;

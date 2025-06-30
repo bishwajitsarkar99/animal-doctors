@@ -1050,6 +1050,7 @@ class UserActivityServiceProvider
         ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
         ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
         ->orderBy('user_id')
+        ->orderBy('created_at', 'asc')
         ->get();
         
         // 3. User-wise summary
@@ -1186,6 +1187,7 @@ class UserActivityServiceProvider
         ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
         ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
         ->orderBy('user_id')
+        ->orderBy('created_at', 'asc')
         ->get();
         // user summary
         $userSummaryData = SessionModel::select(
@@ -1301,6 +1303,7 @@ class UserActivityServiceProvider
         ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
         ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
         ->orderBy('user_id')
+        ->orderBy('created_at', 'asc')
         ->get();
 
         $companyinformations = ForntEndFooter::first(); // Get one row (logo, address, etc.)
@@ -1576,6 +1579,7 @@ class UserActivityServiceProvider
         ->when(!empty($roles) && $roles[0] !== '', fn($q) => $q->whereIn('role', $roles))
         ->when(!empty($emails) && $emails[0] !== '', fn($q) => $q->whereIn('email', $emails))
         ->orderBy('user_id')
+        ->orderBy('created_at', 'asc')
         ->get();
         
         // 3. User-wise summary

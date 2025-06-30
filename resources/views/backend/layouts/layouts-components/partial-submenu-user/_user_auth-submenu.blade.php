@@ -5,7 +5,7 @@
     <li>
         <div class="collapse" id="auth_" aria-labelledby="headingTwo" data-bs-parent="#auth_">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link underline" href="{{ route('Users') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Forget Password" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                <a type="button" class="nav-link underline side-bar-link load-page" data-url="{{ route('Users') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Forget Password" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                     <i class="fa-regular fa-hand-point-right fa-beat me-1"></i>User Account
                 </a>
             </nav>
