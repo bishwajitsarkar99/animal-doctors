@@ -21,10 +21,7 @@
                     </button>
                   </div>
                   <div class="col-xl-2">
-                    <button type="button" class="btn btn-sm cgt_btn btn_focus skeleton-button" id="branchTypeRefresh">
-                      <span class="type-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-                      <span class="type-btn-text">Refresh</span>
-                    </button>
+                    <x-buttons.common-refresh-page-btn label="Refresh" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchTypeRefresh" iconClass="type-icon" labelClass="type-btn-text" />
                   </div>
                   <div class="col-xl-9"></div>
                 </div>

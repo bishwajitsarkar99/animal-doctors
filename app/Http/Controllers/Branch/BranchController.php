@@ -21,9 +21,9 @@ class BranchController extends Controller
     }
 
     // Branch Page View
-    public function index(Request $request, $random, $page_authorize)
+    public function index(Request $request, $slug)
     {
-        return $this->branchServiceProvider->viewBranchTemplate($request, $random, $page_authorize);
+        return $this->branchServiceProvider->viewBranchTemplate($request, $slug);
     }
 
     // Get Division Name

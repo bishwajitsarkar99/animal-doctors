@@ -1411,7 +1411,7 @@
             branchMenu.append(`
                 <div id="loaderPage" class="menu-loader-overlay">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="data-menu-loader">
                         <line x1="12" y1="2" x2="12" y2="6"/>
                         <line x1="12" y1="18" x2="12" y2="22"/>
@@ -1498,7 +1498,7 @@
             roleMenu.append(`
                 <div id="loaderPage" class="menu-loader-overlay display_none">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="data-menu-loader">
                         <line x1="12" y1="2" x2="12" y2="6"/>
                         <line x1="12" y1="18" x2="12" y2="22"/>
@@ -1555,7 +1555,7 @@
             roleMenu.append(`
                 <div id="loaderPage" class="menu-loader-overlay display_none">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="data-menu-loader">
                         <line x1="12" y1="2" x2="12" y2="6"/>
                         <line x1="12" y1="18" x2="12" y2="22"/>
@@ -1653,7 +1653,7 @@
             emailMenu.append(`
                 <div id="loaderPage" class="menu-loader-overlay display_none">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="data-menu-loader">
                         <line x1="12" y1="2" x2="12" y2="6"/>
                         <line x1="12" y1="18" x2="12" y2="22"/>
@@ -1720,7 +1720,7 @@
             emailMenu.empty().append(`
                 <div id="loaderPage" class="menu-loader-overlay display_none">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="data-menu-loader">
                         <line x1="12" y1="2" x2="12" y2="6"/>
                         <line x1="12" y1="18" x2="12" y2="22"/>

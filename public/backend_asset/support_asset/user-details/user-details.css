@@ -32,6 +32,9 @@ htm,body{
     padding: 0;
     margin: 0;
 }
+ul.tab-margin {
+    margin: 0px 10px;
+}
 .user-agent-tree {
     margin-left: 15px;
 }
@@ -125,12 +128,12 @@ ul#userAgentParentTree {
 }
 .menu-loader-overlay {
     position: absolute;
-    top: 37px;
-    left: 8px;
-    width: 94%;
-    height: 70%;
-    /* background: rgba(255,255,255,0.75); */
-    background: rgb(0 0 0 / 42%);
+    top: 30px;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    background: rgba(255,255,255,0.75);
+    /* background: rgb(0 0 0 / 56%); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -141,7 +144,7 @@ ul#userAgentParentTree {
     font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
     font-size: 13px;
     font-weight: 700;
-    color: white;
+    color: #838383;
     letter-spacing: 1px;
 }
 .data-menu-loader {
@@ -1151,6 +1154,7 @@ li.nav-item {
     font-size: 12px;
     opacity: 1;
     text-align: center;
+    cursor: pointer;
 }
 .nav-link.setting:hover{
     background-image: var(--nav-button-background);

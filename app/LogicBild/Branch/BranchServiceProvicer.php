@@ -29,29 +29,41 @@ class BranchServiceProvicer
     public function redirectWithRandomId()
     {
         $idRange = 30; // Random 30-character string
-        $random = Str::random($idRange);
-        session(['valid_branch_random' => $random]);
-
-        $page_authorize = 1; // create branch page authorize
+        $firstRanger = '~^&&>@^&&' ; // First Ranger
+        $lastRanger = '@$^&&<$^&' ; // First Ranger
+        $id = Str::random($idRange);
+        $slug = $firstRanger.$id.$lastRanger;
+        
+        session(['valid_branch_random' => $slug]);
 
         return redirect()->route('branch.index', [
-            'random' => $random,
-            'page_authorize' => $page_authorize
+            'slug' => $slug,
         ]);
     }
     /**
      * Handle view company branch.
     */
-    public function viewBranchTemplate(Request $request, $random, $page_authorize)
+    public function viewBranchTemplate(Request $request, $slug)
     {
+        $auth = Auth::User();
+        if (!$auth) {
+            return redirect()->route('login'); // or unauthorized view
+        }
+        $role_id = $auth->role;
+        $email = $auth->login_email;
+
+        if($email && $role_id){
+            $branch_create_page_authorize = 1; // branch create page authorize
+        }
+
         $storedRandom = session('valid_branch_random');
 
         $page_name = 'Branch Create';
 
-        if ($storedRandom && $random === $storedRandom) {
-            $page_authorize = (int) $page_authorize;
+        if ($storedRandom && $slug === $storedRandom) {
+            $branch_create_page_authorize = (int) $branch_create_page_authorize;
 
-            if ($page_authorize === 1) {
+            if ($branch_create_page_authorize === 1) {
                 $company_profiles = Cache::rememberForever('company_profiles', function () {
                     return companyProfile::find(1);
                 });
