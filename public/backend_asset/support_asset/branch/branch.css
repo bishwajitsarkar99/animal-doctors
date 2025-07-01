@@ -46,6 +46,9 @@
     font-weight: 700;
     font-family: var(--nav-font-family);
 }
+thead.info_table_head{
+    background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(rgb(224, 254, 255)), to(rgb(195, 235, 255)));
+}
 .display_none{
     display: none;
 }

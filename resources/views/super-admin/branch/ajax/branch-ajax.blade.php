@@ -23,7 +23,7 @@
         buttonLoader('#access_btn', '.access-icon', '.access-btn-text', 'Access...', 'Access', 1000);
         buttonLoader('#access_btn_confirm', '.access-confirm-icon', '.access-confirm-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
-        buttonLoader('#deleteLoader', '.delete-icon', '.delete-btn-text', 'Delete...', 'Delete', 1000);
+        buttonLoader('#deleteBranch', '.delete-icon', '.delete-btn-text', 'Delete...', 'Delete', 1000);
         buttonLoader('.yes_button', '.loading-yes-icon', '.yes-btn-text', 'Yes...', 'Yes', 1000);
         buttonLoader('#delete_branch', '.delete-confrm-icon', '.delete-confrm-btn-text', 'Delete...', 'Delete', 1000);
         buttonLoader('#branchTypeRefresh', '.type-icon', '.type-btn-text', 'Refresh...', 'Refresh', 1000);
@@ -142,8 +142,8 @@
                 $("#save").fadeIn();
                 $("#update_btn").attr('hidden', true);
                 $("#update_btn").fadeOut();
-                $("#deleteLoader").attr('hidden', true);
-                $("#deleteLoader").fadeOut();
+                $("#deleteBranch").attr('hidden', true);
+                $("#deleteBranch").fadeOut();
                 $("#cancel_btn").show();
                 $("#cancel_btn").fadeIn();
             }
@@ -179,8 +179,8 @@
                             $('.edit_branch_id').removeAttr('hidden');
                             $("#update_btn").removeAttr('hidden');
                             $("#update_btn").fadeIn();
-                            $("#deleteLoader").removeAttr('hidden');
-                            $("#deleteLoader").fadeIn();
+                            $("#deleteBranch").removeAttr('hidden');
+                            $("#deleteBranch").fadeIn();
                             const messages = response.messages;
                             
                             if(messages.created_by !== ''){
@@ -782,7 +782,7 @@
         });
 
         // Branch Delete Modal Show
-        $(document).on('click', '#deleteLoader', function(e){
+        $(document).on('click', '#deleteBranch', function(e){
             e.preventDefault();
             var branch_id = $("#branches_id").val();
             $('#delete_branch_id').val(branch_id);
