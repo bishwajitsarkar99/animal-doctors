@@ -91,14 +91,14 @@
 <div id="companyBranch" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushReport">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('branch.index') ? 'active' : '' }}" data-url="{{ route('branch.redirect') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
-                <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.Create')}}
-            </a>
             <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('branch_access.view') ? 'active' : '' }}" data-url="{{ route('branch_access.redirect') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.Admin Access')}}
             </a>
             <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('branch_access_permission.view') ? 'active' : '' }}" data-url="{{ route('branch_access_permission.redirect') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.User Access')}}
+            </a>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('branch.index') ? 'active' : '' }}" data-url="{{ route('branch.redirect') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+                <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.Setting')}}
             </a>
         </div>
     </div>

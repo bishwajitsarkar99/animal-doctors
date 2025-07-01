@@ -1,6 +1,6 @@
 <?php 
   $dropdowmMenuData = [
-    ['groupBox'=>'form-group role_nme skeleton', 'label'=>'Searching...', 'labelClass'=>'branch_label label_position', 'labelFor'=>'branch-search', 'menuLabel'=>'Select Company Branch Name', 'Menusname'=>'select_branch', 'MenusId'=>'select_branch', 'menusClass'=>'form-control select_branch select2', 'menusType'=>'text'],
+    ['groupBox'=>'form-group role_nme skeleton', 'label'=>'Search', 'labelClass'=>'branch_label label_position', 'labelFor'=>'branch-search', 'menuLabel'=>'Select Company Branch Name', 'Menusname'=>'select_branch', 'MenusId'=>'select_branch', 'menusClass'=>'form-control select_branch select2', 'menusType'=>'text'],
     ['groupBox'=>'form-group role_nme branch skeleton','label'=>'Branch Type', 'labelClass'=>'branch_label label_position branch_type_nme', 'labelFor'=>'branch-type', 'menuLabel'=>'Select Branch Type', 'Menusname'=>'branch_type', 'MenusId'=>'branch_type', 'menusClass'=>'form-control edit_branch_type select2', 'menusType'=>'text'],
   ];
   $inputGroup = [
@@ -45,7 +45,78 @@
 @extends('backend.layouts.dashboard')
 @section('content')
 @include('backend.layouts.dashboard-components._navbar')
-  <div class="container">
+  <div class="container setting-page-container">
+    <div class="setting-top-area">
+      <div class="logo_size">
+        <img src="{{ asset('/image/setting-two.png') }}" alt="setting-logo">
+      </div>
+      <div class="head-word">
+        <strong>Branch Setting</strong>
+      </div>
+    </div>
+    <div class="setting-table-wrapper">
+      <table class="setting-table">
+        <thead class="table-head">
+          <tr class="table-head-row">
+            <th class="th-head space" style="width:30%;">Setting Operation</th>
+            <th class="th-head space" style="width:20%;">Setting Mode</th>
+            <th class="th-head space" style="width:50%;">Setting Display</th>
+          </tr>
+        </thead>
+        <tbody class="setting-table-body" id="settingTableBody">
+          <tr class="setting-table-row" id="BranchOption">
+            <td class="table-cell">
+              <span style="display:flex;justify-content:space-between;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                <p>
+                  To create, update, or delete a branch, please select the Settings mode option.
+                </p>
+              </span>
+            </td>
+            <td class="table-cell">
+              <select class="form-select select-box" size="3" aria-label="size 3 select example" id="SettingMode">
+                <option class="custom-optation" selected>Setting Optation</option>
+                <option class="custom-optation" value="1">ADD</option>
+                <option class="custom-optation" value="2">Update</option>
+                <option class="custom-optation" value="3">Delete</option>
+              </select>
+            </td>
+            <td class="table-cell">
+              <select class="form-select select-box" size="3" aria-label="size 3 select example" id="SettingDisplay">
+                <option class="custom-optation" selected>Setting Option Display</option>
+                <option class="custom-optation" value="1">Branch ADD Form</option>
+                <option class="custom-optation" value="2">Branch Update Form</option>
+                <option class="custom-optation" value="3">Branch Delete Form</option>
+              </select>
+            </td>
+          </tr>
+          <tr class="setting-table-row" id="AdminOption">
+            <td class="table-cell"></td>
+            <td class="table-cell"></td>
+            <td class="table-cell"></td>
+          </tr>
+          <tr class="setting-table-row" id="UserOption">
+            <td class="table-cell"></td>
+            <td class="table-cell"></td>
+            <td class="table-cell"></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="form-top-heading">
+      <div class="row form-topbar">
+        <div class="col-xl-3 group-btn fist_btn">
+          <x-buttons.form-medium-button label="ADD Branch" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchTypeModalView" iconClass="icon" labelClass="btn-text" />
+          <x-buttons.common-refresh-page-btn label="Refresh" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchTypeRefresh" iconClass="type-icon" labelClass="type-btn-text" />
+        </div>
+        <div class="col-xl-9"></div>
+      </div>
+    </div>
     <div class="card form-control form-control-sm" id="branch_page">
       <div class="card-body" id="table_card_body">
         <div class="row">
@@ -56,15 +127,6 @@
               <input id="branch_id" type="text" name="branch_id" class="branch_id_field branch_id" hidden />
               <form autocomplete="off">
                 @csrf
-                <div class="row form-topbar">
-                  <div class="col-xl-1 fist_btn">
-                    <x-buttons.form-medium-button label="Create" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchTypeModalView" iconClass="icon" labelClass="btn-text" />
-                  </div>
-                  <div class="col-xl-2">
-                    <x-buttons.common-refresh-page-btn label="Refresh" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchTypeRefresh" iconClass="type-icon" labelClass="type-btn-text" />
-                  </div>
-                  <div class="col-xl-9"></div>
-                </div>
                 <div class="row">
                   <div class="col-xl-6">
                     @foreach($dropdowmMenuData as $data)
