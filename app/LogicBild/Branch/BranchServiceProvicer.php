@@ -304,15 +304,16 @@ class BranchServiceProvicer
 
         $paginateData = Branches::orderBy('id', 'desc')->whereIn('branch_id', $branch_ids)->paginate($perItem);
         // Dropdown Search Menu
-        $allBranch = $paginateData->items();
+        $allBranch = Branches::whereIn('branch_id', $branch_ids)->orderBy('id', 'desc')->get();
+        //dd($allBranch);
 
         return response()->json([
-            'allBranch' => $allBranch,
-            'data' => $allBranch,
+            'data' => $paginateData->items(),
             'links' => $paginateData->toArray()['links'] ?? [],
             'total' => $paginateData->total(),
             'per_page' => $perItem,
             'per_item_num' => $paginateData->count(),
+            'allBranch' => $allBranch,
         ], 200);
     }
 

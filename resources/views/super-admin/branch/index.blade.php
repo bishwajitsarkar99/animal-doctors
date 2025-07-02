@@ -51,7 +51,7 @@
         <div class="col-xl-6 group-btn fist_btn">
           <x-buttons.form-medium-button label="Branch List" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchList" iconClass="icon" labelClass="btn-text" />
           <x-buttons.form-medium-button label="Create Branch Category" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchTypeModalView" iconClass="icon" labelClass="btn-text" />
-          <x-buttons.form-medium-button label="Setting" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchSettingPageView" iconClass="icon" labelClass="btn-text" />
+          <x-buttons.form-medium-button label="Branch Setting" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchSettingPageView" iconClass="icon" labelClass="btn-text" />
         </div>
         <div class="col-xl-2 group-btn fist_btn">
           <x-buttons.common-refresh-page-btn label="Refresh" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchTypeRefresh" iconClass="type-icon" labelClass="type-btn-text" />
@@ -65,8 +65,8 @@
           <thead class="table-head">
             <tr class="table-head-row">
               <th class="branch-th-head" style="width:5%;">SN.</th>
-              <th class="branch-th-head">Branch-ID</th>
               <th class="branch-th-head">Branch-Type</th>
+              <th class="branch-th-head">Branch-ID</th>
               <th class="branch-th-head">Branch-Name</th>
               <th class="branch-th-head">Division</th>
               <th class="branch-th-head">District</th>
@@ -75,19 +75,7 @@
               <th class="branch-th-head">Loaction</th>
             </tr>
           </thead>
-          <tbody class="branch-table-body" id="BranchListTableBody">
-            <tr class="branch-table-row" id="BranchRow">
-              <td class="td-cell"></td>
-              <td class="td-cell"></td>
-              <td class="td-cell"></td>
-              <td class="td-cell"></td>
-              <td class="td-cell"></td>
-              <td class="td-cell"></td>
-              <td class="td-cell"></td>
-              <td class="td-cell"></td>
-              <td class="td-cell"></td>
-            </tr>
-          </tbody>
+          <tbody class="branch-table-body" id="BranchListTableBody"></tbody>
         </table>
       </div>
     </div>

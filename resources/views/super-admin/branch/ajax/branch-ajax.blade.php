@@ -361,7 +361,16 @@
                 url: currentUrl,
                 dataType: 'json',
                 success: function(response) {
+                    //const data = response.data || [];
                     const all_branchs = response.allBranch;
+                    // Branch Table Data =======================
+                    // $("#user_activites_data_table").html(table_rows([...data]));
+                    // $("#activities_users_data_table_paginate").html(paginate_html({ links, total }));
+                    // $("#total_activites_records").text(total);
+                    // $("#total_items").text(total_users);
+                    // $("#total_per_items").text(per_page);
+                    // $("#per_items_num").text(per_item_num);
+                    // Branch Table Data =======================
                     $("#select_branch").empty();
                     $("#select_branch").append('<option value="">Select Company Branch Name</option>');
                     $.each(all_branchs, function(key, item) {
@@ -394,38 +403,18 @@
 
             return [...rows].map((row, key) => {
                 return `
-                    <tr class="" key="${key}">
-                        <td class="" ${tableBorder}>${row.id}</td>
-                        <td class="" ${tableBorder}>${row.name}</td>
-                        <td class="">${row.ip_address}</td>
-                        <td class="">${row.user_agent}</td>
+                    <tr class="branch-table-row" key="${key}" id="BranchRow">
+                        <td class="td-cell">${row.id}</td>
+                        <td class="td-cell">${row.branch_type}</td>
+                        <td class="td-cell">${row.branch_id}</td>
+                        <td class="td-cell">${row.branch_name}</td>
+                        <td class="td-cell">${row.division_id}</td>
+                        <td class="td-cell">${row.district_id}</td>
+                        <td class="td-cell">${row.upazila_id}</td>
+                        <td class="td-cell">${row.location}</td>
                     </tr>
                 `;
             }).join("\n");
-        }
-        // fetch branch list
-        function fetchBranchList(){
-            const currentUrl = "{{ route('search-branch.action') }}";
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $.ajax({
-                type: "GET",
-                url: currentUrl,
-                dataType: 'json',
-                success: function(response) {
-                    //const all_branchs = response.allBranch;
-                    
-                },
-                error: function() {
-                    $("#select_branch").empty();
-                    $("#select_branch").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
-                }
-            });
         }
 
         // fetch branch type/category for dropdown
