@@ -58,7 +58,7 @@ class BranchServiceProvicer
 
         $storedRandom = session('valid_branch_random');
 
-        $page_name = 'Branch Create';
+        $page_name = 'Branch Setting';
 
         if ($storedRandom && $slug === $storedRandom) {
             $branch_create_page_authorize = (int) $branch_create_page_authorize;
@@ -289,70 +289,31 @@ class BranchServiceProvicer
     public function searchBranchs(Request $request)
     {
         $auth = Auth::user();
-        $authEmail = $auth->id;
-
         if (!$auth) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        if($auth->role == 1){
-            // Get Branch Data
-            $branch_ids = Branches::whereNotNull('branch_id')->get();
-            $user_counts = UserBranchAccessPermission::select('branch_id', DB::raw('COUNT(email_id) as user_count'))
-                ->whereIn('branch_id', $branch_ids->pluck('branch_id'))
-                ->groupBy('branch_id')
-                ->pluck('user_count', 'branch_id');
+        $role_id = $auth->role;
+        $user_branch_id = $auth->branch_id;
 
-            $allBranch = Branches::orderBy('id', 'desc')->get();
-    
-            return response()->json([
-                'allBranch' => $allBranch,
-                'user_counts' => $user_counts,
-            ], 200);
+        // Get branch IDs based on role
+        $branch_ids = ($role_id === 1) ? DB::table('branches')->pluck('branch_id')->toArray() : [$user_branch_id];
+        
+        // Paginate branch table data using query, not collection
+        $perItem = max((int) $request->input('per_item', 10), 1);
 
-        }elseif($auth->role == 3 && $authEmail){
+        $paginateData = Branches::orderBy('id', 'desc')->whereIn('branch_id', $branch_ids)->paginate($perItem);
+        // Dropdown Search Menu
+        $allBranch = $paginateData->items();
 
-            $branch_ids = Branches::whereNotNull('branch_id')->get();
-            $user_counts = UserBranchAccessPermission::select('branch_id', DB::raw('COUNT(email_id) as user_count'))
-                ->whereIn('branch_id', $branch_ids->pluck('branch_id'))
-                ->groupBy('branch_id')
-                ->pluck('user_count', 'branch_id');
-
-            $allBranch = Branches::where('admin_email_id', $authEmail)
-                ->where('admin_approval_status', 1)
-                ->get();
-            
-            return response()->json([
-                'allBranch' => $allBranch,
-                'user_counts' => $user_counts,
-            ], 200);
-
-            if ($allBranch->isEmpty()) {
-                return response()->json(['message' => 'No branches found for this admin.'], 404);
-            }
-        }elseif($auth->role == 2 && $authEmail){
-
-            $branch_ids = Branches::whereNotNull('branch_id')->get();
-            $user_counts = UserBranchAccessPermission::select('branch_id', DB::raw('COUNT(email_id) as user_count'))
-                ->whereIn('branch_id', $branch_ids->pluck('branch_id'))
-                ->groupBy('branch_id')
-                ->pluck('user_count', 'branch_id');
-
-            $allBranch = Branches::where('admin_email_id', $authEmail)
-                ->where('sub_admin_approval_status', 1)->get();
-            
-            return response()->json([
-                'allBranch' => $allBranch,
-                'user_counts' => $user_counts,
-            ], 200);
-
-            if ($allBranch->isEmpty()) {
-                return response()->json(['message' => 'No branches found for this admin.'], 404);
-            }
-        }
-
-        return response()->json(['message' => 'Invalid role or unauthorized.'], 403);
-
+        return response()->json([
+            'allBranch' => $allBranch,
+            'data' => $allBranch,
+            'links' => $paginateData->toArray()['links'] ?? [],
+            'total' => $paginateData->total(),
+            'per_page' => $perItem,
+            'per_item_num' => $paginateData->count(),
+        ], 200);
     }
 
     /**

@@ -45,201 +45,230 @@
 @extends('backend.layouts.dashboard')
 @section('content')
 @include('backend.layouts.dashboard-components._navbar')
-  <div class="container setting-page-container">
-    <div class="setting-top-area">
-      <div class="logo_size">
-        <img src="{{ asset('/image/setting-two.png') }}" alt="setting-logo">
-      </div>
-      <div class="head-word">
-        <strong>Branch Setting</strong>
-      </div>
-    </div>
-    <div class="setting-table-wrapper">
-      <table class="setting-table">
-        <thead class="table-head">
-          <tr class="table-head-row">
-            <th class="th-head space" style="width:30%;">Setting Operation</th>
-            <th class="th-head space" style="width:20%;">Setting Mode</th>
-            <th class="th-head space" style="width:50%;">Setting Display</th>
-          </tr>
-        </thead>
-        <tbody class="setting-table-body" id="settingTableBody">
-          <tr class="setting-table-row" id="BranchOption">
-            <td class="table-cell">
-              <span style="display:flex;justify-content:space-between;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                <p>
-                  To create, update, or delete a branch, please select the Settings mode option.
-                </p>
-              </span>
-            </td>
-            <td class="table-cell">
-              <select class="form-select select-box" size="3" aria-label="size 3 select example" id="SettingMode">
-                <option class="custom-optation" selected>Setting Optation</option>
-                <option class="custom-optation" value="1">ADD</option>
-                <option class="custom-optation" value="2">Update</option>
-                <option class="custom-optation" value="3">Delete</option>
-              </select>
-            </td>
-            <td class="table-cell">
-              <select class="form-select select-box" size="3" aria-label="size 3 select example" id="SettingDisplay">
-                <option class="custom-optation" selected>Setting Option Display</option>
-                <option class="custom-optation" value="1">Branch ADD Form</option>
-                <option class="custom-optation" value="2">Branch Update Form</option>
-                <option class="custom-optation" value="3">Branch Delete Form</option>
-              </select>
-            </td>
-          </tr>
-          <tr class="setting-table-row" id="AdminOption">
-            <td class="table-cell"></td>
-            <td class="table-cell"></td>
-            <td class="table-cell"></td>
-          </tr>
-          <tr class="setting-table-row" id="UserOption">
-            <td class="table-cell"></td>
-            <td class="table-cell"></td>
-            <td class="table-cell"></td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th></th>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-    <div class="form-top-heading">
+  <div class="container">
+    <div class="form-top-heading" id="branchListPage" hidden>
       <div class="row form-topbar">
-        <div class="col-xl-3 group-btn fist_btn">
-          <x-buttons.form-medium-button label="ADD Branch" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchTypeModalView" iconClass="icon" labelClass="btn-text" />
+        <div class="col-xl-6 group-btn fist_btn">
+          <x-buttons.form-medium-button label="Branch List" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchList" iconClass="icon" labelClass="btn-text" />
+          <x-buttons.form-medium-button label="Create Branch Category" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchTypeModalView" iconClass="icon" labelClass="btn-text" />
+          <x-buttons.form-medium-button label="Setting" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchSettingPageView" iconClass="icon" labelClass="btn-text" />
+        </div>
+        <div class="col-xl-2 group-btn fist_btn">
           <x-buttons.common-refresh-page-btn label="Refresh" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchTypeRefresh" iconClass="type-icon" labelClass="type-btn-text" />
         </div>
-        <div class="col-xl-9"></div>
+        <div class="col-xl-4"></div>
       </div>
     </div>
-    <div class="card form-control form-control-sm" id="branch_page">
-      <div class="card-body" id="table_card_body">
-        <div class="row">
-          <div class="col-xl-12">
-            <div class="card-body focus-color cd branch_form">
-              <input id="branch_id_field" type="text" name="branch_id_field" value="" hidden />
-              <input id="generate_id" type="text" name="generate_id" hidden />
-              <input id="branch_id" type="text" name="branch_id" class="branch_id_field branch_id" hidden />
-              <form autocomplete="off">
-                @csrf
-                <div class="row">
-                  <div class="col-xl-6">
-                    @foreach($dropdowmMenuData as $data)
-                      @if($data['groupBox'] === 'form-group role_nme skeleton' || $data['groupBox'] === 'form-group role_nme branch skeleton')
-                        <div class="{{ $data['groupBox'] }}">
-                          <span class="input-label">
-                            <label class="{{ $data['labelClass'] }}" for="{{ $data['labelFor'] }}">
-                              {{ $data['label'] }}
-                            </label>
-                          </span>
-                          <x-dropdown.dropdown-menu 
-                            menuType="{{ $data['menusType'] }}" 
-                            menuClass="{{ $data['menusClass'] }}" 
-                            menuName="{{ $data['Menusname'] }}" 
-                            menuId="{{ $data['MenusId'] }}" 
-                            menuSelectLabel="{{ $data['menuLabel'] }}">
-                            <input type="hidden" id="branches_id">
-                          </x-dropdown.dropdown-menu>
-                        </div>
-                      @endif
-                    @endforeach
-                    @foreach($inputGroup as $data)
-                      @if($data['inputGroupBox'] === 'form-group role_nme skeleton' || $data['inputGroupBox'] === 'form-group role_nme branch skeleton')
-                        <div class="{{ $data['inputGroupBox'] }}">
-                          <label class="{{ $data['formInputLabelClass'] }}" for="{{ $data['inputLabelFor'] }}">
-                            {{ $data['label'] }}
-                            <span id="{{ $data['formInputErrorId'] }}" hidden></span><span id="{{ $data['formInputUpdateError'] }}" hidden></span>
-                          </label>
-                          <x-input.form-input.form-input-field formInputFieldClass="{{ $data['formInputClass'] }}" formInputFieldType="{{ $data ['formInputType'] }}" formInputFieldName="{{ $data['formInputName'] }}" formInputFieldId="{{ $data['formInputId'] }}" formInputFieldPlaceHolder="{{ $data['formInputPlaceHolder'] }}" />
-                        </div>
-                      @endif
-                    @endforeach
-                  </div>
-                  <div class="col-xl-6">
-                    @foreach($secondColumnDropdownData as $data)
-                      <div class="{{ $data['secondGroupBox'] }}">
-                        <span class="input-label">
-                          <label class="{{ $data['secondLabelClass'] }}" for="{{ $data['secondLabelFor'] }}">
-                            {{ $data['secondLabel'] }}
-                          </label>
-                        </span>
-                        <x-dropdown.dropdown-menu 
-                          menuType="{{ $data['secondMenusType'] }}" 
-                          menuClass="{{ $data['secondMenusClass'] }}" 
-                          menuName="{{ $data['secondMenusname'] }}" 
-                          menuId="{{ $data['secondMenusId'] }}" 
-                          menuSelectLabel="{{ $data['secondMenuLabel'] }}">
-                          <input type="hidden" id="branches_id">
-                        </x-dropdown.dropdown-menu>
-                      </div>
-                    @endforeach
-                    <div class="form-group role_nme branch mb-1" id="documents" hidden>
-                      <table class="info_table">
-                        <thead class="info_table_head">
-                          <tr>
-                            <th class="branch_font label_position">Creator</th>
-                            <th class="branch_font label_position" id="secondHead" hidden>Updator</th>
-                            <th class="branch_font label_position" id="thirdHead" hidden>Approver</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="branch_font" id="firstContent">
-                              <label class="image_position" for="user_image"><span id="firstUserImage"></span></label>
-                              <input id="firstUserEmail" disabled>
-                              <input id="firstCreatedBy" disabled>
-                              <input id="firstCreatedAt" disabled>
-                            </td>
-                            <td class="branch_font" id="secondContent" hidden>
-                              <label for="user_image"><span id="secondUserImage"></span></label>
-                              <input id="secondUserEmail" disabled>
-                              <input id="secondUpdateBy" disabled>
-                              <input id="secondUpdateAt" disabled>
-                            </td>
-                            <td class="branch_font" id="thirdContent" hidden>
-                              <label for="user_image"><span id="thirdUserImage"></span></label>
-                              <input id="thirdUserEmail" disabled>
-                              <input id="thirdApprover" disabled>
-                              <input id="thirdUpdateAt" disabled>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-                <div class="row mb-2">
-                  <div class="col-xl-10 action_message">
-                    <p class="ps-1 mt-1"><span id="success_message"></span></p>
-                  </div>
-                  <div class="col-xl-2 action_group">
-                    @foreach($formGroupButtons as $data)
-                      <?php
-                        $hiddenAttr = $data['hiddenAttribute'] === 'hidden' ? 'hidden' : '';
-                      ?>
-                      <x-buttons.form-medium-button 
-                        label="{{ $data['formGroupButtonLabel'] }}" 
-                        buttonParentClass="{{ $data['formGroupButtonClass'] }}" 
-                        buttonChildClass="" 
-                        buttonId="{{ $data['formGroupButtonId'] }}" 
-                        iconClass="{{ $data['groupIconClass'] }}" 
-                        labelClass="{{ $data['formGroupButtonSpinerText'] }}"
-                        :hiddenAttr="$hiddenAttr"
-                      />
-                    @endforeach
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
+    <div class="branch-list-tab-panel" id="branchListTab" hidden>
+      <div class="branch-table-wrapper">
+        <table class="branch-table">
+          <thead class="table-head">
+            <tr class="table-head-row">
+              <th class="branch-th-head" style="width:5%;">SN.</th>
+              <th class="branch-th-head">Branch-ID</th>
+              <th class="branch-th-head">Branch-Type</th>
+              <th class="branch-th-head">Branch-Name</th>
+              <th class="branch-th-head">Division</th>
+              <th class="branch-th-head">District</th>
+              <th class="branch-th-head">Upazila</th>
+              <th class="branch-th-head">City</th>
+              <th class="branch-th-head">Loaction</th>
+            </tr>
+          </thead>
+          <tbody class="branch-table-body" id="BranchListTableBody">
+            <tr class="branch-table-row" id="BranchRow">
+              <td class="td-cell"></td>
+              <td class="td-cell"></td>
+              <td class="td-cell"></td>
+              <td class="td-cell"></td>
+              <td class="td-cell"></td>
+              <td class="td-cell"></td>
+              <td class="td-cell"></td>
+              <td class="td-cell"></td>
+              <td class="td-cell"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- =========== Branch Setting =========== -->
+    <div class="setting-page-container" id="BranchSettingPage" hidden>
+      <div class="setting-top-area">
+        <div class="logo_size">
+          <img src="{{ asset('/image/setting-two.png') }}" alt="setting-logo">
+        </div>
+        <div class="head-word">
+          <strong>Setting</strong>
         </div>
       </div>
-      
+      <div class="setting-table-wrapper">
+        <table class="setting-table">
+          <thead class="table-head">
+            <tr class="table-head-row">
+              <th class="th-head space" style="width:30%;">Operation</th>
+              <th class="th-head space" style="width:25%;">Mode</th>
+              <th class="th-head space" style="width:45%;">Action</th>
+            </tr>
+          </thead>
+          <tbody class="setting-table-body" id="settingTableBody">
+            <tr class="setting-table-first-row" id="BranchOption">
+              <td class="table-cell">
+                <span style="display:flex;justify-content:space-between;">
+                  <svg width="30" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                  <p>
+                    <span class="stronger">Branch Setting :</span> To add, to update, or to delete a branch, please select the settings mode option form the menu box .
+                  </p>
+                </span>
+              </td>
+              <td class="table-cell">
+                <select class="form-select select-box" size="3" aria-label="size 3 select example" id="SettingMode">
+                  <option class="custom-optation" selected>Setting Optation Mode</option>
+                  <option class="custom-optation" value="1">New</option>
+                  <option class="custom-optation" value="2">Update</option>
+                  <option class="custom-optation" value="3">Delete</option>
+                </select>
+              </td>
+              <td class="table-cell">
+                <select class="form-select select-box" size="3" aria-label="size 3 select example" id="SettingActionButton">
+                  <option class="custom-optation" value="1">Enable to new branch action</option>
+                  <option class="custom-optation" value="2">Disable to new branch action</option>
+                  <option class="custom-optation" value="3" hidden>Enable to update branch action</option>
+                  <option class="custom-optation" value="4" hidden>Disable to update branch action</option>
+                  <option class="custom-optation" value="5" hidden>Enable to delete branch action</option>
+                  <option class="custom-optation" value="6" hidden>Disable to delete branch action</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="setting-table-second-row" id="AdminOption">
+              <td  class="second-row-table-cell"></td>
+              <td  class="second-row-table-cell"></td>
+              <td  class="second-row-table-cell td-margin">
+                <div class="card form-control form-control-sm" id="branch_page">
+                  <div class="card-body focus-color cd branch_form" id="table_card_body">
+                    <input id="branch_id_field" type="text" name="branch_id_field" value="" hidden />
+                    <input id="generate_id" type="text" name="generate_id" hidden />
+                    <input id="branch_id" type="text" name="branch_id" class="branch_id_field branch_id" hidden />
+                    <form autocomplete="off">
+                      @csrf
+                      <div class="row">
+                        <div class="col-xl-12">
+                          @foreach($dropdowmMenuData as $data)
+                            @if($data['groupBox'] === 'form-group role_nme skeleton' || $data['groupBox'] === 'form-group role_nme branch skeleton')
+                              <div class="{{ $data['groupBox'] }}">
+                                <span class="input-label">
+                                  <label class="{{ $data['labelClass'] }}" for="{{ $data['labelFor'] }}">
+                                    {{ $data['label'] }}
+                                  </label>
+                                </span>
+                                <x-dropdown.dropdown-menu 
+                                  menuType="{{ $data['menusType'] }}" 
+                                  menuClass="{{ $data['menusClass'] }}" 
+                                  menuName="{{ $data['Menusname'] }}" 
+                                  menuId="{{ $data['MenusId'] }}" 
+                                  menuSelectLabel="{{ $data['menuLabel'] }}">
+                                  <input type="hidden" id="branches_id">
+                                </x-dropdown.dropdown-menu>
+                              </div>
+                            @endif
+                          @endforeach
+                          @foreach($inputGroup as $data)
+                            @if($data['inputGroupBox'] === 'form-group role_nme skeleton' || $data['inputGroupBox'] === 'form-group role_nme branch skeleton')
+                              <div class="{{ $data['inputGroupBox'] }}">
+                                <label class="{{ $data['formInputLabelClass'] }}" for="{{ $data['inputLabelFor'] }}">
+                                  {{ $data['label'] }}
+                                  <span id="{{ $data['formInputErrorId'] }}" hidden></span><span id="{{ $data['formInputUpdateError'] }}" hidden></span>
+                                </label>
+                                <x-input.form-input.form-input-field formInputFieldClass="{{ $data['formInputClass'] }}" formInputFieldType="{{ $data ['formInputType'] }}" formInputFieldName="{{ $data['formInputName'] }}" formInputFieldId="{{ $data['formInputId'] }}" formInputFieldPlaceHolder="{{ $data['formInputPlaceHolder'] }}" />
+                              </div>
+                            @endif
+                          @endforeach
+                          @foreach($secondColumnDropdownData as $data)
+                            <div class="{{ $data['secondGroupBox'] }}">
+                              <span class="input-label">
+                                <label class="{{ $data['secondLabelClass'] }}" for="{{ $data['secondLabelFor'] }}">
+                                  {{ $data['secondLabel'] }}
+                                </label>
+                              </span>
+                              <x-dropdown.dropdown-menu 
+                                menuType="{{ $data['secondMenusType'] }}" 
+                                menuClass="{{ $data['secondMenusClass'] }}" 
+                                menuName="{{ $data['secondMenusname'] }}" 
+                                menuId="{{ $data['secondMenusId'] }}" 
+                                menuSelectLabel="{{ $data['secondMenuLabel'] }}">
+                                <input type="hidden" id="branches_id">
+                              </x-dropdown.dropdown-menu>
+                            </div>
+                          @endforeach
+                          <div class="form-group role_nme branch mb-1" id="documents" hidden>
+                            <table class="info_table">
+                              <thead class="info_table_head">
+                                <tr>
+                                  <th class="branch_font label_position">Creator</th>
+                                  <th class="branch_font label_position" id="secondHead" hidden>Updator</th>
+                                  <th class="branch_font label_position" id="thirdHead" hidden>Approver</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="branch_font" id="firstContent">
+                                    <label class="image_position" for="user_image"><span id="firstUserImage"></span></label>
+                                    <input id="firstUserEmail" disabled>
+                                    <input id="firstCreatedBy" disabled>
+                                    <input id="firstCreatedAt" disabled>
+                                  </td>
+                                  <td class="branch_font" id="secondContent" hidden>
+                                    <label for="user_image"><span id="secondUserImage"></span></label>
+                                    <input id="secondUserEmail" disabled>
+                                    <input id="secondUpdateBy" disabled>
+                                    <input id="secondUpdateAt" disabled>
+                                  </td>
+                                  <td class="branch_font" id="thirdContent" hidden>
+                                    <label for="user_image"><span id="thirdUserImage"></span></label>
+                                    <input id="thirdUserEmail" disabled>
+                                    <input id="thirdApprover" disabled>
+                                    <input id="thirdUpdateAt" disabled>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-2 mt-2">
+                        <div class="col-xl-7 action_message">
+                          <p class="ps-1 mt-1"><span id="success_message"></span></p>
+                        </div>
+                        <div class="col-xl-5 pe-3 action_group">
+                          @foreach($formGroupButtons as $data)
+                            <?php
+                              $hiddenAttr = $data['hiddenAttribute'] === 'hidden' ? 'hidden' : '';
+                            ?>
+                            <x-buttons.form-medium-button 
+                              label="{{ $data['formGroupButtonLabel'] }}" 
+                              buttonParentClass="{{ $data['formGroupButtonClass'] }}" 
+                              buttonChildClass="" 
+                              buttonId="{{ $data['formGroupButtonId'] }}" 
+                              iconClass="{{ $data['groupIconClass'] }}" 
+                              labelClass="{{ $data['formGroupButtonSpinerText'] }}"
+                              :hiddenAttr="$hiddenAttr"
+                            />
+                          @endforeach
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  </div>
+                </div> 
+              </td>
+            </tr>
+            <tr class="setting-table-row" id="UserOption">
+              <td class="table-cell"></td>
+              <td class="table-cell"></td>
+              <td class="table-cell"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   @include('loader.action-loader')
@@ -514,5 +543,22 @@
       focuButton();
     });
   }, 1000);
+</script>
+<script>
+  $(document).ready(function(){
+    $("#branchListPage").removeAttr('hidden');
+    $("#branchListTab").removeAttr('hidden');
+    $(document).on('click', '#branchList',function(e){
+      e.preventDefault();
+      $("#branchListPage").removeAttr('hidden');
+      $("#branchListTab").removeAttr('hidden');
+      $("#BranchSettingPage").attr('hidden', true);
+    });
+    $(document).on('click', '#branchSettingPageView',function(e){
+      e.preventDefault();
+      $("#BranchSettingPage").removeAttr('hidden');
+      $("#branchListTab").attr('hidden', true);
+    });
+  });
 </script>
 @endpush('scripts')
