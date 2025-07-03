@@ -48,35 +48,83 @@
   <div class="container">
     <div class="form-top-heading" id="branchListPage" hidden>
       <div class="row form-topbar">
-        <div class="col-xl-6 group-btn fist_btn">
-          <x-buttons.form-medium-button label="Branch List" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchList" iconClass="icon" labelClass="btn-text" />
-          <x-buttons.form-medium-button label="Create Branch Category" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchTypeModalView" iconClass="icon" labelClass="btn-text" />
-          <x-buttons.form-medium-button label="Branch Setting" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchSettingPageView" iconClass="icon" labelClass="btn-text" />
-        </div>
-        <div class="col-xl-2 group-btn fist_btn">
-          <x-buttons.common-refresh-page-btn label="Refresh" buttonParentClass="btn btn-sm cgt_btn btn_focus" buttonChildClass="skeleton-button" buttonId="branchTypeRefresh" iconClass="type-icon" labelClass="type-btn-text" />
+        <div class="col-xl-8 group-btn fist_btn">
+          <x-buttons.form-medium-button label="Branch List" buttonParentClass="btn btn-sm branch-tab-btn active-button" buttonChildClass="skeleton-button" buttonId="branchList" iconClass="icon" labelClass="btn-text" />
+          <x-buttons.form-medium-button label="Create Branch Category" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchTypeModalView" iconClass="icon" labelClass="btn-text" />
+          <x-buttons.form-medium-button label="Branch Setting" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchSettingPageView" iconClass="icon" labelClass="btn-text" />
+          <x-buttons.common-refresh-page-btn label="Refresh" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchTypeRefresh" iconClass="type-icon" labelClass="type-btn-text" />
         </div>
         <div class="col-xl-4"></div>
       </div>
     </div>
     <div class="branch-list-tab-panel" id="branchListTab" hidden>
+      <div class="table-heading">
+        <span>
+          <span class="skeleton"><svg width="26" height="24" fill="gray" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 445.38"><path d="M6.95 0h498.1c3.82 0 6.95 3.16 6.95 6.92v96.5l-.02.46v341.5H0V88.11h.01L0 6.92C0 3.11 3.12 0 6.95 0zm11.57 315.78h104.12V219.6H18.52v96.18zm122.64 0h105.8V219.6h-105.8v96.18zm124.32 0h105.35V219.6H265.48v96.18zm123.87 0h104.12V219.6H389.35v96.18zm104.12 18.52H389.35v92.56h104.12V334.3zm-122.64 0H265.48v92.56h105.35V334.3zm-123.87 0h-105.8v92.56h105.8V334.3zm-124.32 0H18.52v92.56h104.12V334.3zM18.52 201.09h104.12v-94.46H18.52v94.46zm122.64 0h105.8v-94.46h-105.8v94.46zm124.32 0h105.35v-94.46H265.48v94.46zm123.87 0h104.12v-94.46H389.35v94.46z"/></svg></span>
+        </span>
+        <span class="skeleton"><strong>Branch List Table</strong></span>
+      </div>
       <div class="branch-table-wrapper">
-        <table class="branch-table">
+        <!-- Loader Overlay -->
+        <div id="tableOverlayLoader" class="table-loader-overlay display_none">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="data-table-loader">
+            <line x1="12" y1="2" x2="12" y2="6"/>
+            <line x1="12" y1="18" x2="12" y2="22"/>
+            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/>
+            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+            <line x1="2" y1="12" x2="6" y2="12"/>
+            <line x1="18" y1="12" x2="22" y2="12"/>
+            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
+            <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+          </svg>
+          <span class="loader-text ms-1">Loading....</span>
+        </div>
+        <table class="branch-table branch-table-responsive">
           <thead class="table-head">
             <tr class="table-head-row">
-              <th class="branch-th-head" style="width:5%;">SN.</th>
-              <th class="branch-th-head">Branch-Type</th>
-              <th class="branch-th-head">Branch-ID</th>
-              <th class="branch-th-head">Branch-Name</th>
-              <th class="branch-th-head">Division</th>
-              <th class="branch-th-head">District</th>
-              <th class="branch-th-head">Upazila</th>
-              <th class="branch-th-head">City</th>
-              <th class="branch-th-head">Loaction</th>
+              <th class="branch-th-head skeleton" style="width:5%;text-align:center;">SN.</th>
+              <th class="branch-th-head skeleton">Branch-Type</th>
+              <th class="branch-th-head skeleton">Branch-ID</th>
+              <th class="branch-th-head skeleton">Branch-Name</th>
+              <th class="branch-th-head skeleton">Division</th>
+              <th class="branch-th-head skeleton">District</th>
+              <th class="branch-th-head skeleton">Upazila</th>
+              <th class="branch-th-head skeleton">City</th>
+              <th class="branch-th-head skeleton">Loaction</th>
             </tr>
           </thead>
           <tbody class="branch-table-body" id="BranchListTableBody"></tbody>
         </table>
+        <x-tables.table-footer footerClass="row table_last_row mb-1">
+          <div class="col-1">
+            <x-dropdown.table-footer-select-dropdown 
+              labelClass="item_class skeleton"
+              labelName="Peritem"
+              dropdownBox="custom-select skeleton"
+              selectClass="ps-1"
+              selectId="perItemControl"
+              selectStyle="background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);border:1px ridge rgba(135, 206, 250, 0.74);"
+              selectedValue="10"
+            />
+          </div>
+          <div class="col-3">
+            <x-tables.table-entries
+              labelClass="per_item_class table-footer-label"
+              entryId="total_per_branch_items"
+              showId="per_branch_items_num"
+              totalIems="total_branch_items" 
+            />
+          </div>
+          <div class="col-8">
+            <x-tables.table-pagination
+              paginationClass="pagination mt-1 skeleton"
+              paginationId="branch_data_table_paginate" 
+              paginationStyle="float: right;padding-top:0px;"
+            />
+          </div>
+        </x-tables.table-footer>
       </div>
     </div>
     <!-- =========== Branch Setting =========== -->
@@ -508,7 +556,7 @@
 <script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
 <script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 
-<script>
+<!-- <script>
   // skeleton
   function fetchData() {
     const allSkeleton = document.querySelectorAll('.skeleton')
@@ -530,22 +578,31 @@
       fetchData();
       focuButton();
     });
-  }, 1000);
-</script>
+  }, 2500);
+</script> -->
 <script>
   $(document).ready(function(){
     $("#branchListPage").removeAttr('hidden');
     $("#branchListTab").removeAttr('hidden');
-    $(document).on('click', '#branchList',function(e){
+    // Branch List click
+    $(document).on('click', '#branchList', function (e) {
       e.preventDefault();
-      $("#branchListPage").removeAttr('hidden');
-      $("#branchListTab").removeAttr('hidden');
-      $("#BranchSettingPage").attr('hidden', true);
+      // Hide setting page with animation, then set hidden
+      $("#BranchSettingPage").slideUp("slow", function () {
+          $(this).attr("hidden", true);
+      });
+      // Show branch list with animation and remove hidden before show
+      $("#branchListTab").removeAttr("hidden").hide().slideDown("slow");
     });
-    $(document).on('click', '#branchSettingPageView',function(e){
+    // Branch Setting click
+    $(document).on('click', '#branchSettingPageView', function (e) {
       e.preventDefault();
-      $("#BranchSettingPage").removeAttr('hidden');
-      $("#branchListTab").attr('hidden', true);
+      // Hide branch list with animation, then set hidden
+      $("#branchListTab").slideUp("slow", function () {
+          $(this).attr("hidden", true);
+      });
+      // Show setting page
+      $("#BranchSettingPage").removeAttr("hidden").hide().slideDown("slow");
     });
   });
 </script>

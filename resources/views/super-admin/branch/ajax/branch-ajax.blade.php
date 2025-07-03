@@ -361,15 +361,7 @@
                 url: currentUrl,
                 dataType: 'json',
                 success: function(response) {
-                    //const data = response.data || [];
                     const all_branchs = response.allBranch;
-                    // Branch Table Data =======================
-                    // $("#user_activites_data_table").html(table_rows([...data]));
-                    // $("#activities_users_data_table_paginate").html(paginate_html({ links, total }));
-                    // $("#total_activites_records").text(total);
-                    // $("#total_items").text(total_users);
-                    // $("#total_per_items").text(per_page);
-                    // $("#per_items_num").text(per_item_num);
                     // Branch Table Data =======================
                     $("#select_branch").empty();
                     $("#select_branch").append('<option value="">Select Company Branch Name</option>');
@@ -383,7 +375,7 @@
                 }
             });
         }
-
+        fetchTableBranch();
         // Branch List Table
         const table_rows = (rows) => {
             if (rows.length === 0) {
@@ -404,19 +396,152 @@
             return [...rows].map((row, key) => {
                 return `
                     <tr class="branch-table-row" key="${key}" id="BranchRow">
-                        <td class="td-cell">${row.id}</td>
-                        <td class="td-cell">${row.branch_type}</td>
-                        <td class="td-cell">${row.branch_id}</td>
-                        <td class="td-cell">${row.branch_name}</td>
-                        <td class="td-cell">${row.division_id}</td>
-                        <td class="td-cell">${row.district_id}</td>
-                        <td class="td-cell">${row.upazila_id}</td>
-                        <td class="td-cell">${row.location}</td>
+                        <td class="td-cell" style="text-align:center;">${row.id}</td>
+                        <td class="td-cell-second">${row.branch_type}</td>
+                        <td class="td-cell-second">${row.branch_id}</td>
+                        <td class="td-cell-second">${row.branch_name}</td>
+                        <td class="td-cell-second">${row.divisions.division_name}</td>
+                        <td class="td-cell-second">${row.districts.district_name}</td>
+                        <td class="td-cell-second">${row.thana_or_upazilas.thana_or_upazila_name}</td>
+                        <td class="td-cell-second">${row.town_name}</td>
+                        <td class="td-cell-second">${row.location}</td>
                     </tr>
                 `;
             }).join("\n");
         }
+        // fetch branch for table
+        function fetchTableBranch(url = null, perItem = null){
+            perItem = perItem ?? $("#perItemControl").val();
 
+            let current_url = url ?? `{{ route('search-branch.action') }}`;
+            current_url += current_url.includes('?') ? `&per_item=${perItem}` : `?per_item=${perItem}`;
+
+            showTableLoader();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: current_url,
+                dataType: 'json',
+                success: function(response) {
+                    const { data, links, total, per_page, per_item_num } = response;
+                    
+                    // Branch Table Data =======================
+                    $("#BranchListTableBody").html(table_rows([...data]));
+                    $("#branch_data_table_paginate").html(paginate_html({ links, total }));
+                    $("#total_branch").text(total);
+                    $("#total_branch_items").text(total);
+                    $("#total_per_branch_items").text(per_page);
+                    $("#per_branch_items_num").text(per_item_num);
+                },
+                complete: function() {
+                    hideTableLoader();
+                    fetchData();
+                    focuButton();
+                    focuTableFooterLabel();
+                },
+            });
+        }
+        function showTableLoader() {
+            $('#tableOverlayLoader').removeClass('display_none');
+        }
+        function hideTableLoader() {
+            $('#tableOverlayLoader').addClass('display_none');
+        }
+        // tab button
+        $(document).on('click', '.branch-tab-btn', function () {
+            $('.branch-tab-btn').removeClass('active-button').addClass('deactive');
+            $(this).removeClass('deactive').addClass('active-button');
+        });
+        // skeleton
+        function fetchData() {
+            const allSkeleton = document.querySelectorAll('.skeleton')
+
+            allSkeleton.forEach(item => {
+                item.classList.remove('skeleton')
+            });
+        }
+        function focuButton() {
+            const allSkeleton = document.querySelectorAll('.skeleton-button')
+
+            allSkeleton.forEach(item => {
+            item.classList.remove('skeleton-button')
+            });
+        }
+        function focuTableFooterLabel() {
+            const allSkeleton = document.querySelectorAll('.table-footer-label')
+
+            allSkeleton.forEach(item => {
+            item.classList.remove('table-footer-label')
+            });
+        }
+        const paginate_html = ({ links, total }) => {
+            if (total == 0) {
+                return "";
+            }
+
+            return `
+                <nav class="paginate_link" aria-label="Page navigation example">
+                    <ul class="pagination">
+                        ${links.map((link, key) => {
+                            // Handle Previous and Next buttons separately
+                            if (link.label.toLowerCase().includes("previous")) {
+                                return `
+                                    <li class="page-item${link.active ? ' active' : ''}" key=${key}>
+                                        <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
+                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 121.66"><title>direction-left</title><path d="M1.24,62.65,120.1,121.46a1.92,1.92,0,0,0,2.58-.88,1.89,1.89,0,0,0,0-1.76h0l-30.87-58,30.87-58h0a1.89,1.89,0,0,0,0-1.76A1.92,1.92,0,0,0,120.1.2L1.24,59a2,2,0,0,0,0,3.64Z"/></svg>
+                                        </a>
+                                    </li>
+                                `;
+                            } 
+                            if (link.label.toLowerCase().includes("next")) {
+                                return `
+                                    <li class="page-item${link.active ? ' active' : ''}" key=${key}>
+                                        <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
+                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.86 121.64"><title>direction-right</title><path d="M121.62,59,2.78.2A1.92,1.92,0,0,0,.2,1.08a1.89,1.89,0,0,0,0,1.76h0l30.87,58L.23,118.8h0a1.89,1.89,0,0,0,0,1.76,1.92,1.92,0,0,0,2.58.88l118.84-58.8a2,2,0,0,0,0-3.64Z"/></svg>
+                                        </a>
+                                    </li>
+                                `;
+                            }
+
+                            // Regular page numbers
+                            return `
+                                <li class="page-item${link.active ? ' active' : ''}" key=${key}>
+                                    <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
+                                        ${link.label}
+                                    </a>
+                                </li>
+                            `;
+                        }).join("\n")}
+                    </ul>
+                </nav>
+            `;
+        };
+        // peritem change
+        $("#perItemControl").on('change', (e) => {
+            const {
+                value
+            } = e.target;
+
+            fetchTableBranch('', null, value);
+        });
+        // change paginate page------------------------
+        $("#branch_data_table_paginate").delegate("a", "click", function(e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+
+            const url = $(this).attr('href');
+
+            if (url !== '#') {
+                fetchTableBranch('', url);
+            }
+
+        });
         // fetch branch type/category for dropdown
         function fetch_branch_types(){
 

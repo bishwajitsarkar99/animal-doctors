@@ -302,7 +302,7 @@ class BranchServiceProvicer
         // Paginate branch table data using query, not collection
         $perItem = max((int) $request->input('per_item', 10), 1);
 
-        $paginateData = Branches::orderBy('id', 'desc')->whereIn('branch_id', $branch_ids)->paginate($perItem);
+        $paginateData = Branches::with(['divisions', 'districts', 'thana_or_upazilas'])->orderBy('id', 'asc')->whereIn('branch_id', $branch_ids)->paginate($perItem);
         // Dropdown Search Menu
         $allBranch = Branches::whereIn('branch_id', $branch_ids)->orderBy('id', 'desc')->get();
         //dd($allBranch);
