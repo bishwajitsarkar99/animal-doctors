@@ -141,6 +141,28 @@ li.page-item.active {
     z-index: 10;
     pointer-events: all; /* block clicks */
 }
+#table_card_body{
+    position: relative;
+}
+.card-message-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    pointer-events: all; /* block clicks */
+}
+#messgText {
+    font-family: var(--nav-font-family);
+    font-size: 13px;
+    font-weight: bold;
+    color: purple;
+}
 .data-table-loader {
     animation: spin 1s linear infinite;
     transform-origin: center center;
@@ -273,6 +295,14 @@ li.page-item.active {
     border-right: 1px ridge lightgray;
     padding: 0px 5px;
 }
+.second-row-table-middle-cell{
+    background: white;
+    border-top:none;
+    border-bottom: 1px ridge lightgray;
+    border-left: none;
+    border-right: none;
+    padding: 0px 5px;
+}
 .second-row-table-cell{
     background: white;
     border-top:none;
@@ -288,6 +318,14 @@ th.th-head {
     padding: 5px 18px;
     border: 1px ridge #bbbbbb80;
 }
+th.th-head-middle {
+    font-size: 13px;
+    font-weight: 800;
+    text-align: left;
+    padding: 5px 18px;
+    border-bottom: 1px ridge #bbbbbb80;
+    border-top: 1px ridge #bbbbbb80;
+}
 .branch-table-wrapper {
     padding: 20px 20px;
 }
@@ -300,8 +338,14 @@ td.table-cell {
     background-color: white;
     letter-spacing: 0.5px;
     border-left: 1px ridge #dfdede;
-    border-top: 1px ridge #dfdede;
+    border-top: none;
     border-right: 1px ridge #dfdede;
+}
+td.middle-cell{
+    padding: 10px 10px;
+    background-color: white;
+    letter-spacing: 0.5px;
+    border: none;
 }
 th.branch-th-head{
     color: #222;
@@ -400,6 +444,71 @@ select> option[class="custom-optation"] {
     font-size: 12px;
     margin-bottom: 5px;
     letter-spacing: 0.5px;
+}
+button.btn.btn-sm.btn_focus {
+    animation: 1s ease 0s infinite normal none running btnFocus;
+}
+button.btn.btn-sm.setting-btn {
+    height: 24px;
+    background-color: mediumpurple;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    color: var(--nav-button-color);
+    font-family: var(--btn-btn-sm-font-family);
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 1;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-left: -4px;
+    outline: none;
+    border-radius: 30px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    transition: border-color 0.3s, background-color 0.3s;
+    animation: 5s ease 0s infinite normal none running text_font_color;
+}
+button.btn.btn-sm.setting-btn:hover{
+    background-color: mediumpurple;
+    color: white;
+    transition: 1ms;
+}
+button.btn.btn-sm.setting-btn-focus {
+    animation: 1s ease 0s infinite normal none running btnFocus;
+}
+@keyframes btnFocus{
+    0%{}
+    100% {
+        background-image: linear-gradient(rgba(14, 14, 14, 0.05) 0%, rgba(171, 165, 165, 0.05) 100%);
+    }
+}
+button.setting-btn-focus {
+    --nav-button-background: linear-gradient(to top, #8000805c, #80008078, #8000802e);
+    --nav-button-color: white;
+    --nav-font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
+    --mdb-btn-border-color: mediumpurple;
+    text-decoration: none;
+    background-image: var(--nav-button-background);
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    color: var(--nav-button-color);
+    font-family: var(--nav-font-family);
+    font-size: 12px;
+    line-height: 1;
+    opacity: 1;
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: 700;
+    border-color: var(--mdb-btn-border-color);
+    outline: none;
+    height: 24px;
+    border-radius: 30px;
+}
+button.btn.btn-sm.cgt_cancel_btn{
+    border-radius: 30px;
 }
 thead.info_table_head{
     background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(rgb(224, 254, 255)), to(rgb(195, 235, 255)));
@@ -923,12 +1032,12 @@ label.label_position {
     background-image: none;
 }
 #branch_page {
-    border: none;
+    border: 1px ridge #dbdbdbe0;
     background: white;
     border-radius: 5px;
     opacity: 1;
     margin-bottom: 10px;
-    box-shadow: rgba(0, 0, 0, 0.067) 0px 1px 5px, rgba(0, 123, 255, 0.2) 0px 2px 6px;
+    /* box-shadow: rgba(0, 0, 0, 0.067) 0px 1px 5px, rgba(0, 123, 255, 0.2) 0px 2px 6px; */
 }
 label.branch_label {
     font-size: 12px;

@@ -522,6 +522,94 @@
                 </nav>
             `;
         };
+        // next button action
+        $(document).on('click', '#next', function () {
+            var branchType = $("#branch_type").val();
+            var branchName = $("#branchName").val();
+            var townName = $("#townName").val();
+            var location = $("#location").val();
+            var division = $("#select_division").val();
+            var district = $("#select_district").val();
+            var upazila = $("#select_upazila").val();
+
+            if (branchType === '') {
+                showOverlayMessage('Please select branch type');
+                return;
+            }
+
+            if ($("#inputBranchNameGroup").hasClass('display_none')) {
+                $("#inputBranchNameGroup").removeClass('display_none').hide().slideDown("slow");
+                return;
+            }
+
+            if (branchName === '') {
+                showOverlayMessage('Please enter branch name');
+                return;
+            }
+
+            if ($("#inputCityNameGroup").hasClass('display_none')) {
+                $("#inputCityNameGroup").removeClass('display_none').hide().slideDown("slow");
+                return;
+            }
+
+            if (townName === '') {
+                showOverlayMessage('Please enter city/town name');
+                return;
+            }
+
+            if ($("#inputLocatioinNameGroup").hasClass('display_none')) {
+                $("#inputLocatioinNameGroup").removeClass('display_none').hide().slideDown("slow");
+                return;
+            }
+
+            if (location === '') {
+                showOverlayMessage('Please enter location');
+                return;
+            }
+
+            if ($("#dropdwonDivisionNameGroup").hasClass('display_none')) {
+                $("#dropdwonDivisionNameGroup").removeClass('display_none').hide().slideDown("slow");
+                return;
+            }
+
+            if (division === '') {
+                showOverlayMessage('Please select division');
+                return;
+            }
+
+            if ($("#dropdwonDistrictNameGroup").hasClass('display_none')) {
+                $("#dropdwonDistrictNameGroup").removeClass('display_none').hide().slideDown("slow");
+                return;
+            }
+
+            if (district === '') {
+                showOverlayMessage('Please select district');
+                return;
+            }
+
+            if ($("#dropdwonUpazilaNameGroup").hasClass('display_none')) {
+                $("#dropdwonUpazilaNameGroup").removeClass('display_none').hide().slideDown("slow");
+                return;
+            }
+
+            if (upazila === '') {
+                showOverlayMessage('Please select upazila');
+                return;
+            }
+
+            showOverlayMessage('All fields completed!');
+        });
+        function showOverlayMessage(message, duration = 2000) {
+            $("#messgText").text(message);
+            $("#formMessage").removeClass("display_none").fadeIn("fast");
+
+            setTimeout(function () {
+                $("#formMessage").fadeOut("fast", function () {
+                    $(this).addClass("display_none");
+                    $("#messgText").text('');
+                });
+            }, duration);
+        }
         // peritem change
         $("#perItemControl").on('change', (e) => {
             const {
@@ -737,6 +825,29 @@
         // Cancell Button
         $(document).on('click', '#cancel_btn', function(){
             removeField();
+            $("#inputBranchNameGroup").slideUp("slow", function () {
+                $(this).addClass('display_none');
+            });
+
+            $("#inputCityNameGroup").slideUp("slow", function () {
+                $(this).addClass('display_none');
+            });
+
+            $("#inputLocatioinNameGroup").slideUp("slow", function () {
+                $(this).addClass('display_none');
+            });
+
+            $("#dropdwonDivisionNameGroup").slideUp("slow", function () {
+                $(this).addClass('display_none');
+            });
+
+            $("#dropdwonDistrictNameGroup").slideUp("slow", function () {
+                $(this).addClass('display_none');
+            });
+
+            $("#dropdwonUpazilaNameGroup").slideUp("slow", function () {
+                $(this).addClass('display_none');
+            });
         });
 
         // On keyup action for error remove
