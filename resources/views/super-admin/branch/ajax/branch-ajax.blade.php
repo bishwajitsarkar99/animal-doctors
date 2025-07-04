@@ -92,6 +92,9 @@
             $('.select2-search__field').attr('placeholder', 'Search branch type...');
         });
 
+
+        // =================== Start Branch Setting Section ===================================
+        // =============== Home Page Branch List =====================
         // Branch unique id generator according to branch
         $("#branch_type").on('change', function() {
             var brancType = $(this).val();
@@ -527,6 +530,19 @@
                 </nav>
             `;
         };
+
+        // =============== Second Page Setting Box =====================
+
+        // =============== Setting Optation Mode Part
+        // Select ID Button form Setting Mode
+        $(document).on('click', 'label.custom-label', function(){
+            // Remove class from all other custom-labels within the #SettingMode list
+            $('#SettingMode label.custom-label').removeClass('label-highlight');
+            // Add class to the clicked one
+            $(this).addClass('label-highlight');
+        });
+
+        // =============== Setting Action Part
         // next button action
         $(document).on('click', '#next', function () {
             $("#SelectBranchID").empty();
@@ -605,7 +621,7 @@
                 showOverlayMessage('Please select upazila');
                 return;
             }
-            
+            // Select Dropdown Branch Id
             branchIdShow.append(`
                 <option class="custom-optation" selected>Select Branch ID</option>
                 <option class="custom-optation" id="optation_id" value="${branchID}">${branchID}</option>
@@ -694,9 +710,9 @@
                     $("#branch_type").append('<option style="color:white;font-weight:600;" value="" disabled>Error loading data</option>');
                 }
             });
-            }
+        }
 
-        // Create Branch
+        // ADD New Branch
         $(document).on('click', '#save', function(e){
             e.preventDefault();
             $("#savForm_error").removeAttr('hidden');
@@ -1180,7 +1196,21 @@
             });
         });
 
-        // Create Branch Modal Show
+        // Refresh Button
+        $(document).on('keyup', '#branchTypeRefresh', function(){
+            fetch_division();
+            fetch_district();
+            fetch_upazila();
+            searchBranch();
+            fetch_branch_types();
+        });
+
+        // =================== End Branch Setting Section ===================================
+
+
+        // =================== Start Branch Category Setting Section ===================================
+
+        // Create Branch Category Modal Show
         $(document).on('click', '#branchTypeModalView', function(e){
             e.preventDefault();
             $("#branchTypeCreateModal").modal('show');
@@ -1247,15 +1277,6 @@
             $('#branchTypeName').val("");
         });
         
-        // Refresh Button
-        $(document).on('keyup', '#branchTypeRefresh', function(){
-            fetch_division();
-            fetch_district();
-            fetch_upazila();
-            searchBranch();
-            fetch_branch_types();
-        });
-
         // Search Branch Category
         $(document).on('change', '#branch_category_name', function(e){
             e.preventDefault();
@@ -1515,6 +1536,8 @@
                 }
             });
         });
+
+        // =================== End Branch Category Setting Section ===================================
 
     });
 </script>

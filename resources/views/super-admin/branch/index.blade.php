@@ -158,12 +158,40 @@
                 </span>
               </td>
               <td class="middle-cell">
-                <select class="form-select select-box" size="3" aria-label="size 3 select example" id="SettingMode">
-                  <option class="custom-optation" selected>Setting Optation Mode</option>
-                  <option class="custom-optation" value="1">New</option>
-                  <option class="custom-optation" value="2">Update</option>
-                  <option class="custom-optation" value="3">Delete</option>
-                </select>
+                <ul class="optation-box">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="darkgray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                  <ul id="SettingMode">
+                    <li>
+                      <label class="form-check-label" for="flexRadioDefault">
+                        Setting Optation Mode
+                      </label>
+                    </li>
+                    <li>
+                      <label class="form-check-label custom-label" for="flexRadioDefault1">
+                        <input class="form-check-input input-triger" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        New
+                      </label>
+                    </li>
+                    <li>
+                      <label class="form-check-label custom-label" for="flexRadioDefault2">
+                        <input class="form-check-input input-triger" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                        Update
+                      </label>
+                    </li>
+                    <li>
+                      <label class="form-check-label custom-label" for="flexRadioDefault3">
+                        <input class="form-check-input input-triger" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
+                        Delete
+                      </label>
+                    </li>
+                    <li>
+                      <label class="form-check-label custom-label" for="flexRadioDefault4">
+                        <input class="form-check-input input-triger" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked>
+                        None
+                      </label>
+                    </li>
+                  </ul>
+                </ul>
               </td>
               <td class="table-cell">
                 <select class="form-select select-box" size="3" aria-label="size 3 select example" id="SettingActionButton">

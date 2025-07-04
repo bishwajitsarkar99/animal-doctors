@@ -373,7 +373,7 @@ th.th-head {
 th.th-head-middle {
     font-size: 13px;
     font-weight: 800;
-    text-align: left;
+    text-align: center;
     padding: 5px 18px;
     border-bottom: 1px ridge #bbbbbb80;
     border-top: 1px ridge #bbbbbb80;
@@ -468,6 +468,44 @@ select#SettingDisplay {
     padding-top: 10px;
     padding-bottom: 10px;
     border: none;
+}
+ul.optation-box{
+    display: flex;
+    justify-content: left;
+    padding-left: 1px;
+}
+ul#SettingMode {
+    padding-left: 5px;
+    padding-right: 10px;
+}
+ul#SettingMode>li {
+    list-style: none;
+}
+.form-check-input{
+    background-color: white;
+}
+input.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+.custom-label {
+    cursor: pointer;
+    padding-left: 0px;
+    padding-right: 10px;
+    border-radius: 3px;
+    margin-bottom: 4px;
+}
+.custom-label:hover{
+    background: #9fc9b84a;
+    color: #0d6efd;
+}
+.label-highlight{
+    background: #9fc9b84a;
+    color: #0d6efd;
+}
+input#flexRadioDefault1,input#flexRadioDefault2,input#flexRadioDefault3,input#flexRadioDefault4 {
+    box-shadow: none;
+    cursor: pointer;
 }
 td.second-row-table-cell.td-margin {
     padding: 0px 20px;
