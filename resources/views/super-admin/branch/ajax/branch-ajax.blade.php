@@ -38,7 +38,6 @@
         } else {
             console.error("Select2 is not loaded. Check script order.");
         }
-        // Initialize Select2 for all elements with the 'select2' class
         function initSelect2(parent = document) {
             $(parent).find('.select2').each(function() {
                 const id = $(this).attr('id');
@@ -50,7 +49,13 @@
                     placeholderText = 'Select Company Branch Name';
                 } else if (id === 'branch_type') {
                     placeholderText = 'Select Branch Type';
-                } else if (id === 'branch_category_name') {
+                } else if (id === 'select_division') {
+                    placeholderText = 'Select Division';
+                }else if (id === 'select_district') {
+                    placeholderText = 'Select District';
+                }else if (id === 'select_upazila') {
+                    placeholderText = 'Select Upazila/Thana';
+                }else if (id === 'branch_category_name') {
                     placeholderText = 'Select Branch Category Name';
                     dropdownParent = $('#branchTypeCreateModal');
                 }
@@ -524,6 +529,10 @@
         };
         // next button action
         $(document).on('click', '#next', function () {
+            $("#SelectBranchID").empty();
+            $('.error_val').empty();
+            var branchID = $("#branch_id").val();
+            var branchIdShow = $("#SelectBranchID");
             var branchType = $("#branch_type").val();
             var branchName = $("#branchName").val();
             var townName = $("#townName").val();
@@ -596,11 +605,30 @@
                 showOverlayMessage('Please select upazila');
                 return;
             }
-
+            
+            branchIdShow.append(`
+                <option class="custom-optation" selected>Select Branch ID</option>
+                <option class="custom-optation" id="optation_id" value="${branchID}">${branchID}</option>
+            `);
             showOverlayMessage('All fields completed!');
         });
+        // setting message show
         function showOverlayMessage(message, duration = 2000) {
             $("#messgText").text(message);
+            $("#formContent").removeClass('display_none').fadeIn("fast");
+            if(message == 'All fields completed!'){
+                setTimeout(function () {
+                    $("#formMessage").fadeOut("fast", function () {
+                        $(this).addClass("display_none");
+                        $("#messgText").text('');
+                        $("#formContent").addClass('display_none');
+                        $("#next").addClass('display_none');
+                        $("#save").removeClass('display_none');
+                        $("#ContentView").removeClass('display_none');
+                    });
+                }, duration);
+            }
+
             $("#formMessage").removeClass("display_none").fadeIn("fast");
 
             setTimeout(function () {
@@ -610,6 +638,14 @@
                 });
             }, duration);
         }
+        // Select ID Button form Setting Box
+        $(document).on('click', '#optation_id', function(){
+            const idValue = $(this).val();
+            if(idValue !== ''){
+                $("#save").removeAttr('disabled');
+                $(this).addClass('active-height-light');
+            }
+        });
         // peritem change
         $("#perItemControl").on('change', (e) => {
             const {
@@ -666,6 +702,7 @@
             $("#savForm_error").removeAttr('hidden');
             $("#savForm_error6").removeAttr('hidden');
             $("#savForm_error7").removeAttr('hidden');
+            
             var data = {
                 'branch_id' : $("#branch_id").val(),
                 'branch_name' : $("#branchName").val(),
@@ -690,75 +727,72 @@
                 dataType: "json",
                 success : function(response){
                     if(response.status == 400){
+                        // display form field
+                        $("#formContent").removeClass('display_none');
+                        $("#ContentView").addClass('display_none');
+                        // change form button mode
+                        $("#save").addClass('display_none');
+                        $("#save").attr('disabled', true);
+                        $("#next").removeClass('display_none');
+
                         $.each(response.errors, function(key, err_value){
                             if (key === 'branch_name') {
                                 $("#savForm_error").fadeIn();
-                                $('#savForm_error').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $('#savForm_error').html('<span class="error_val" style="font-size:10px;font-weight:700;color:#dc3545;">' + err_value + '</span>');
                                 $("#savForm_error").addClass("alert_show_errors");
-                                $('#branchName').addClass('is-invalid');
                                 $('#branchName').html("");
                             } else if (key === 'branch_type') {
                                 $("#savForm_error2").fadeIn();
-                                $('#savForm_error2').closest('.branch_type_nme').append('<span class="ps-1"><svg width="15px" hieght="8px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg><span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span></span>');
-                                $("#branch_type").next('.select2-container').addClass('is-invalid');
+                                $('#savForm_error2').closest('.role_nme').append('<span class="error_val" style="font-size:10px;font-weight:700;color:#dc3545;margin-left:-10px;">' + err_value + '</span>');
                                 $("#savForm_error2").addClass("alert_show_errors");
                             } else if (key === 'division_id') {
                                 $("#savForm_error3").fadeIn();
-                                //$('#savForm_error3').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
-                                $('#savForm_error3').closest('.division_nme').append('<span class="ps-1"><svg width="15px" hieght="8px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.435"><path fill="rgb(220, 53, 69)" fill-rule="nonzero" d="M109.524 317.184c6.788 0 12.29 5.502 12.29 12.29 0 6.788-5.502 12.291-12.29 12.291H71.37L33.265 464.853h444.623l-41.373-123.088H407.93c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.29 12.291-12.29h46.171L512 489.435H0l53.325-172.251h56.199zM235.89 189.162c0-1.749-.019-3.502-.019-5.252a80.87 80.87 0 011.779-16.793A27.72 27.72 0 01242.941 156c4.888-5.793 10.569-8.671 16.306-13.285 7.492-5.755 11.679-17.97 1.311-23.267a13.563 13.563 0 00-6.006-1.263c-4.871 0-9.284 2.393-11.795 6.596a13.933 13.933 0 00-1.765 6.787c0 .75-31.634.397-34.966.397a43.395 43.395 0 016.823-25.164 38.973 38.973 0 0117.713-14.235c15.79-6.302 34.448-5.866 50.281.004a39.69 39.69 0 0118.072 13.236c7.342 10.397 8.674 25.281 3.75 37.048a35.112 35.112 0 01-7.814 11.159c-6.52 6.398-13.659 9.306-19.922 15.09a20.821 20.821 0 00-5.063 7.138 24.317 24.317 0 00-1.764 9.083l.003.314v3.345l-32.215.179zm16.626 47.349l-.382.001a18.084 18.084 0 01-13.169-5.696 19.012 19.012 0 01-5.568-13.44c0-.186.006-.38.01-.562v-.268a18.67 18.67 0 015.558-13.286 18.562 18.562 0 0126.743 0 18.92 18.92 0 015.876 13.554 19.45 19.45 0 01-2.801 9.984 21 21 0 01-6.958 7.09 17.546 17.546 0 01-9.221 2.623h-.133.045z"/><path fill="#EF4147" d="M266.131 425.009c-3.121 2.276-7.359 2.59-10.837.357-37.51-23.86-69.044-52.541-93.797-83.672-34.164-42.861-55.708-90.406-63.066-136.169-7.493-46.427-.492-91.073 22.612-127.381 9.098-14.36 20.739-27.428 34.923-38.714C188.57 13.428 225.81-.263 262.875.004c35.726.268 70.96 13.601 101.422 41.39 10.707 9.723 19.715 20.872 27.075 32.96 24.843 40.898 30.195 93.083 19.269 145.981-17.047 82.829-71.772 160.521-144.51 204.674zM255.789 37.251c69.041 0 125.006 55.965 125.006 125.005 0 69.041-55.965 125.006-125.006 125.006-69.04 0-125.005-55.965-125.005-125.006 0-69.04 55.965-125.005 125.005-125.005z"/></svg><span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span></span>');
-                                $("#select_division").next('.select2-container').addClass('is-invalid');
+                                $('#savForm_error3').closest('.role_nme').append('<span class="error_val" style="font-size:10px;font-weight:700;color:#dc3545;margin-left:-10px;">' + err_value + '</span>');
                                 $("#savForm_error3").addClass("alert_show_errors");
-                                //$('#select_division').next('.select2-container').find('.select2-selection').addClass('is-invalid');
                             } else if (key === 'district_id') {
                                 $("#savForm_error4").fadeIn();
-                                $('#savForm_error4').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $('#savForm_error4').closest('.role_nme').append('<span class="error_val" style="font-size:10px;font-weight:700;color:#dc3545;margin-left:-10px;">' + err_value + '</span>');
                                 $("#savForm_error4").addClass("alert_show_errors");
-                                $('#select_district').next('.select2-container').find('.select2-selection').addClass('is-invalid');
-                            } else if (key === 'upazila_id') {
+                            } if (key === 'upazila_id') {
                                 $("#savForm_error5").fadeIn();
-                                $('#savForm_error5').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $('#savForm_error5').closest('.role_nme').append('<span class="error_val" style="font-size:10px;font-weight:700;color:#dc3545;margin-left:-10px;">' + err_value + '</span>');
                                 $("#savForm_error5").addClass("alert_show_errors");
-                                $('#select_upazila').next('.select2-container').find('.select2-selection').addClass('is-invalid');
                             } else if (key === 'town_name') {
                                 $("#savForm_error6").fadeIn();
-                                $('#savForm_error6').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $('#savForm_error6').html('<span class="error_val" style="font-size:10px;font-weight:700;color:#dc3545;">' + err_value + '</span>');
                                 $("#savForm_error6").addClass("alert_show_errors");
-                                $('#townName').addClass('is-invalid');
                                 $('#townName').html("");
                             } else if (key === 'location') {
                                 $("#savForm_error7").fadeIn();
-                                $('#savForm_error7').html('<span class="error_val" style="font-size:10px;font-weight:700;">' + err_value + '</span>');
+                                $('#savForm_error7').html('<span class="error_val" style="font-size:10px;font-weight:700;color:#dc3545;">' + err_value + '</span>');
                                 $("#savForm_error7").addClass("alert_show_errors");
-                                $('#location').addClass('is-invalid');
                                 $('#location').html("");
                             }
                         });
                     }else{
-                        $("#accessconfirmbranch").modal('show');
-                        $("#pageLoader").removeAttr('hidden');
-                        $("#access_modal_box").addClass('loader_area');
-                        $("#processModal_body").removeClass('loading_body_area');
+                        $("#loaderBox").removeClass('display_none');
+                        $("#ContentView").removeClass('display_none');
 
                         setTimeout(() => {
-                            $("#accessconfirmbranch").modal('hide');
-                            $("#pageLoader").attr('hidden', true);
-                            $("#access_modal_box").removeClass('loader_area');
-                            $("#processModal_body").addClass('loading_body_area');
+                            $("#loaderBox").addClass('display_none');
+                            $("#ContentView").addClass('display_none');
 
                             $('#savForm_error').html("");
-                            $('#success_message').html("");
-                            $('#success_message').addClass('alert_show ps-1 pe-1');
-                            $('#success_message').fadeIn();
-                            $('#success_message').text(response.messages);
+                            $('#success_message_show').html("");
+                            $('#success_message_show').addClass('alert_show ps-1 pe-1');
+                            $('#success_message_show').fadeIn();
+                            $('#success_message_show').text(response.messages);
                             setTimeout(() => {
-                                $('#success_message').fadeOut(3000);
+                                $('#success_message_show').fadeOut(3000);
                             }, 3000);
                             
                             clearFields();
+                            removeField();
                             fetch_division();
                             fetch_district();
                             fetch_upazila();
                             searchBranch();
+                            fetchTableBranch();
                         }, 1500);
                     }
                 }
@@ -800,31 +834,38 @@
             $("#updateForm_error7").attr('hidden', true);
 
             $("#branchName").val("");
-            $("#branchName").removeClass('is-invalid');
+            $("#branchName").removeClass('is-invalid is-valid');
             $(".error_val").addClass('display-none');
             $("#branch_type").val("").trigger('change');
-            $("#branch_type").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            $("#branch_type").next('.select2-container').find('.select2-selection').removeClass('is-invalid is-valid');
             $(".edit_branch_type_error").addClass('display-none');
             $("#select_division").val("").trigger('change');
-            $("#select_division").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            $("#select_division").next('.select2-container').find('.select2-selection').removeClass('is-invalid is-valid');
             $(".edit_division_error").addClass('display-none');
             $("#select_district").val("").trigger('change');
-            $("#select_district").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            $("#select_district").next('.select2-container').find('.select2-selection').removeClass('is-invalid is-valid');
             $(".edit_district_error").addClass('display-none');
             $("#select_upazila").val("").trigger('change');
-            $("#select_upazila").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+            $("#select_upazila").next('.select2-container').find('.select2-selection').removeClass('is-invalid is-valid');
             $(".edit_upazila_error").addClass('display-none');
             $("#townName").val("");
-            $("#townName").removeClass('is-invalid');
+            $("#townName").removeClass('is-invalid is-valid');
             $(".edit_city_error").addClass('display-none');
             $("#location").val("");
-            $("#location").removeClass('is-invalid');
+            $("#location").removeClass('is-invalid is-valid');
             $(".edit_branch_loaction_error").addClass('display-none');
         }
 
         // Cancell Button
         $(document).on('click', '#cancel_btn', function(){
+            // error field cancel
             removeField();
+            $("#next").removeClass('display_none');
+            $("#formContent").removeClass('display_none');
+            $("#ContentView").addClass('display_none');
+            $("#save").addClass('display_none');
+            $("#save").attr('disabled', true);
+
             $("#inputBranchNameGroup").slideUp("slow", function () {
                 $(this).addClass('display_none');
             });
@@ -853,84 +894,63 @@
         // On keyup action for error remove
         $(document).on('keyup', '#branchName, #townName, #location', function(){
 
-            var branch_name = $("#branchName").val();
-            var town_name = $("#townName").val();
-            var loaction_name = $("#location").val();
+            var field = $(this);
+            var fieldId = field.attr('id');
+            var value = field.val().trim();
 
-            if(branch_name !== ''){
-                $("#savForm_error").empty();
-                $("#savForm_error").fadeOut();
-                $("#savForm_error").addClass('display-none');
-                $("#branchName").removeClass("is-invalid");
-                $("#updateForm_error").empty();
-                $("#updateForm_error").fadeOut();
-                $("#updateForm_error").addClass('display-none');
-                $(".edit_branch_name").removeClass("is-invalid");
-            }
-            if(town_name !== ''){
-                $("#savForm_error6").empty();
-                $("#savForm_error6").fadeOut();
-                $("#savForm_error6").addClass("display-none");
-                $("#townName").removeClass("is-invalid");
-                $("#updateForm_error6").empty();
-                $("#updateForm_error6").fadeOut();
-                $("#updateForm_error6").addClass("display-none");
-                $(".edit_town_name").removeClass("is-invalid");
-            }
-            if(loaction_name !== ''){
-                $("#savForm_error7").empty();
-                $("#savForm_error7").fadeOut();
-                $("#savForm_error7").addClass("display-none");
-                $("#location").removeClass("is-invalid");
-                $("#updateForm_error7").empty();
-                $("#updateForm_error7").fadeOut();
-                $("#updateForm_error7").addClass("display-none");
-                $(".edit_location").removeClass("is-invalid");
+            if (value !== '') {
+                if (fieldId === 'branchName' && field.hasClass('is-invalid')) {
+                    $("#savForm_error, #updateForm_error").empty().fadeOut().addClass("display-none");
+                    field.removeClass("is-invalid").addClass("is-valid");
+                    $(".edit_branch_name").removeClass("is-invalid");
+                }
+
+                if (fieldId === 'townName' && field.hasClass('is-invalid')) {
+                    $("#savForm_error6, #updateForm_error6").empty().fadeOut().addClass("display-none");
+                    field.removeClass("is-invalid").addClass("is-valid");
+                    $(".edit_town_name").removeClass("is-invalid");
+                }
+
+                if (fieldId === 'location' && field.hasClass('is-invalid')) {
+                    $("#savForm_error7, #updateForm_error7").empty().fadeOut().addClass("display-none");
+                    field.removeClass("is-invalid").addClass("is-valid");
+                    $(".edit_location").removeClass("is-invalid");
+                }
             }
 
         });
 
         // On Change action for error remove
-        $(document).on('change', '#branch_type, #select_division, #select_district, #select_upazila', function(){
+        $(document).on('change', '#branch_type, #select_division, #select_district, #select_upazila', function () {
+            var field = $(this);
+            var fieldId = field.attr('id');
+            var value = field.val();
 
-            var branch_type = $("#branch_type").val();
-            var select_division = $("#select_division").val();
-            var select_district = $("#select_district").val();
-            var select_upazila = $("#select_upazila").val();
+            if (value !== '') {
+                if (fieldId === 'branch_type' && field.next('.select2-container').find('.select2-selection').hasClass('is-invalid')) {
+                    $("#savForm_error2, #updateForm_error2").fadeOut().addClass('display-none');
+                    field.next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                    $(".edit_branch_type").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                }
 
-            if(branch_type !== ''){
-                $("#savForm_error2").fadeOut();
-                $("#savForm_error2").addClass('display-none');
-                $("#branch_type").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
-                $("#updateForm_error2").fadeOut();
-                $("#updateForm_error2").addClass('display-none');
-                $(".edit_branch_type").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
-            }
-            if(select_division !== ''){
-                $("#savForm_error3").fadeOut();
-                $("#savForm_error3").addClass('display-none');
-                $("#select_division").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
-                $("#updateForm_error3").fadeOut();
-                $("#updateForm_error3").addClass('display-none');
-                $(".edit_division_id").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
-            }
-            if(select_district !== ''){
-                $("#savForm_error4").fadeOut();
-                $("#savForm_error4").addClass('display-none');
-                $("#select_district").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
-                $("#updateForm_error4").fadeOut();
-                $("#updateForm_error4").addClass('display-none');
-                $(".edit_district_id").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
-            }
-            if(select_upazila !== ''){
-                $("#savForm_error5").fadeOut();
-                $("#savForm_error5").addClass('display-none');
-                $("#select_upazila").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
-                $("#updateForm_error5").fadeOut();
-                $("#updateForm_error5").addClass('display-none');
-                $(".edit_upazila_id").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
-            }
+                if (fieldId === 'select_division' && field.next('.select2-container').find('.select2-selection').hasClass('is-invalid')) {
+                    $("#savForm_error3, #updateForm_error3").fadeOut().addClass('display-none');
+                    field.next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                    $(".edit_division_id").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                }
 
+                if (fieldId === 'select_district' && field.next('.select2-container').find('.select2-selection').hasClass('is-invalid')) {
+                    $("#savForm_error4, #updateForm_error4").fadeOut().addClass('display-none');
+                    field.next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                    $(".edit_district_id").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                }
+
+                if (fieldId === 'select_upazila' && field.next('.select2-container').find('.select2-selection').hasClass('is-invalid')) {
+                    $("#savForm_error5, #updateForm_error5").fadeOut().addClass('display-none');
+                    field.next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                    $(".edit_upazila_id").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
+                }
+            }
         });
 
         // Branch Update Modal Show

@@ -1,20 +1,20 @@
 <?php 
   $dropdowmMenuData = [
-    ['groupBox'=>'form-group role_nme skeleton display_none', 'label'=>'Search', 'labelClass'=>'branch_label label_position', 'labelFor'=>'branch-search', 'menuLabel'=>'Select Company Branch Name', 'Menusname'=>'select_branch', 'MenusId'=>'select_branch', 'menusClass'=>'form-control select_branch select2', 'menusType'=>'text'],
-    ['groupBox'=>'form-group role_nme branch skeleton','label'=>'Branch Type', 'labelClass'=>'branch_label label_position branch_type_nme', 'labelFor'=>'branch-type', 'menuLabel'=>'Select Branch Type', 'Menusname'=>'branch_type', 'MenusId'=>'branch_type', 'menusClass'=>'form-control edit_branch_type select2', 'menusType'=>'text'],
+    ['groupBox'=>'form-group role_nme form-field-padding skeleton display_none mt-3', 'label'=>'', 'labelClass'=>'branch_label label_position', 'labelFor'=>'branch-search', 'menuLabel'=>'Select Company Branch Name', 'Menusname'=>'select_branch', 'MenusId'=>'select_branch', 'menusClass'=>'form-control select_branch select2', 'menusType'=>'text'],
+    ['groupBox'=>'form-group role_nme form-field-padding branch skeleton mt-3','label'=>'', 'labelClass'=>'branch_label label_position branch_type_nme', 'labelFor'=>'branch-type', 'menuLabel'=>'Select Branch Type', 'Menusname'=>'branch_type', 'MenusId'=>'branch_type', 'menusClass'=>'form-control edit_branch_type select2', 'menusType'=>'text'],
   ];
   $inputGroup = [
-    ['inputGroupBox'=>'form-group role_nme skeleton display_none','label'=>'Branch Name', 'inputGroupId'=>'inputBranchNameGroup',
+    ['inputGroupBox'=>'form-group role_nme form-field-padding skeleton display_none','label'=>'', 'inputGroupId'=>'inputBranchNameGroup',
     'formInputLabelClass'=>'branch_label label_position', 'inputLabelFor'=>'branch-name', 
     'formInputLabel'=>'Branch Name', 'formInputName'=>'branch_name', 'formInputId'=>'branchName', 
     'formInputClass'=>'form-control branch_input edit_branch_name', 'formInputType'=>'text', 
     'formInputPlaceHolder'=> 'Branch Name', 'formInputErrorId'=>'savForm_error', 'formInputUpdateError'=>'updateForm_error'],
-    ['inputGroupBox'=>'form-group role_nme branch skeleton display_none','label'=>'City Name', 'inputGroupId'=>'inputCityNameGroup',
+    ['inputGroupBox'=>'form-group role_nme form-field-padding branch skeleton display_none','label'=>'', 'inputGroupId'=>'inputCityNameGroup',
     'formInputLabelClass'=>'branch_label label_position', 'inputLabelFor'=>'city-name', 
     'formInputLabel'=>'Branch Name', 'formInputName'=>'town_name', 'formInputId'=>'townName', 
     'formInputClass'=>'form-control branch_input edit_town_name', 'formInputType'=>'text', 
     'formInputPlaceHolder'=> 'Town Name', 'formInputErrorId'=>'savForm_error6', 'formInputUpdateError'=>'updateForm_error6'],
-    ['inputGroupBox'=>'form-group role_nme branch skeleton display_none','label'=>'Location', 'inputGroupId'=>'inputLocatioinNameGroup',
+    ['inputGroupBox'=>'form-group role_nme form-field-padding branch skeleton display_none','label'=>'', 'inputGroupId'=>'inputLocatioinNameGroup',
     'formInputLabelClass'=>'branch_label label_position', 'inputLabelFor'=>'branch-location', 
     'formInputLabel'=>'Location', 'formInputName'=>'location', 'formInputId'=>'location', 
     'formInputClass'=>'form-control branch_input edit_location', 'formInputType'=>'text', 
@@ -22,25 +22,25 @@
 
   ];
   $secondColumnDropdownData = [
-    ['secondGroupBox'=>'form-group role_nme branch skeleton display_none','secondLabel'=>'Division Name', 'dropdownGroupId'=>'dropdwonDivisionNameGroup',
+    ['secondGroupBox'=>'form-group role_nme form-field-padding branch skeleton display_none','secondLabel'=>'', 'dropdownGroupId'=>'dropdwonDivisionNameGroup',
     'secondLabelClass'=>'branch_label label_position division_nme', 'secondLabelFor'=>'division-name', 
     'secondMenuLabel'=>'Select Division', 'secondMenusname'=>'division_id', 'secondMenusId'=>'select_division', 
     'secondMenusClass'=>'form-control edit_division_id select2', 'secondMenusType'=>'text', 'dropdownError'=>'savForm_error3', 'dropdownUpdateError'=>'updateForm_error3'],
-    ['secondGroupBox'=>'form-group role_nme branch skeleton display_none','secondLabel'=>'District Name', 'dropdownGroupId'=>'dropdwonDistrictNameGroup',
-    'secondLabelClass'=>'branch_label label_position division_nme', 'secondLabelFor'=>'district-name', 
+    ['secondGroupBox'=>'form-group role_nme form-field-padding branch skeleton display_none','secondLabel'=>'', 'dropdownGroupId'=>'dropdwonDistrictNameGroup',
+    'secondLabelClass'=>'branch_label label_position district_nme', 'secondLabelFor'=>'district-name', 
     'secondMenuLabel'=>'Select District', 'secondMenusname'=>'district_id', 'secondMenusId'=>'select_district', 
     'secondMenusClass'=>'form-control edit_district_id select2', 'secondMenusType'=>'text', 'dropdownError'=>'savForm_error4', 'dropdownUpdateError'=>'updateForm_error4'],
-    ['secondGroupBox'=>'form-group role_nme branch skeleton display_none','secondLabel'=>'Upazila/Thana Name', 'dropdownGroupId'=>'dropdwonUpazilaNameGroup',
-    'secondLabelClass'=>'branch_label label_position division_nme', 'secondLabelFor'=>'upazila-name', 
+    ['secondGroupBox'=>'form-group role_nme form-field-padding branch skeleton display_none','secondLabel'=>'', 'dropdownGroupId'=>'dropdwonUpazilaNameGroup',
+    'secondLabelClass'=>'branch_label label_position upazila_nme', 'secondLabelFor'=>'upazila-name', 
     'secondMenuLabel'=>'Select Upazila', 'secondMenusname'=>'upazila_id', 'secondMenusId'=>'select_upazila', 
     'secondMenusClass'=>'form-control edit_upazila_id select2', 'secondMenusType'=>'text', 'dropdownError'=>'savForm_error5', 'dropdownUpdateError'=>'updateForm_error5']
   ];
   $formGroupButtons = [
-    ['formGroupButtonLabel'=>'Cancel','formGroupButtonClass'=>'btn btn-sm cgt_cancel_btn btn_focus skeleton-button', 'formGroupButtonId'=>'cancel_btn', 'formGroupButtonType'=>'reset', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'hiddenAttribute'=>''],
-    ['formGroupButtonLabel'=>'Next','formGroupButtonClass'=>'btn btn-sm setting-btn setting-btn-focus skeleton-button', 'formGroupButtonId'=>'next', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'hiddenAttribute'=>''],
-    ['formGroupButtonLabel'=>'Finish','formGroupButtonClass'=>'btn btn-sm cgt_btn btn_focus skeleton-button', 'formGroupButtonId'=>'save', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'hiddenAttribute'=>'hidden'],
-    ['formGroupButtonLabel'=>'Update','formGroupButtonClass'=>'btn btn-sm cgt_btn btn_focus skeleton-button', 'formGroupButtonId'=>'update_btn', 'formGroupButtonType'=>'reset', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'hiddenAttribute'=>'hidden'],
-    ['formGroupButtonLabel'=>'Delete','formGroupButtonClass'=>'btn btn-sm cgt_cancel_btn btn_focus', 'formGroupButtonId'=>'deleteBranch', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'hiddenAttribute'=>'hidden'],
+    ['formGroupButtonLabel'=>'Cancel','formGroupButtonClass'=>'btn btn-sm cgt_cancel_btn btn_focus skeleton-button', 'formGroupButtonId'=>'cancel_btn', 'formGroupButtonType'=>'reset', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>''],
+    ['formGroupButtonLabel'=>'Next','formGroupButtonClass'=>'btn btn-sm setting-btn setting-btn-focus skeleton-button', 'formGroupButtonId'=>'next', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>''],
+    ['formGroupButtonLabel'=>'Finish','formGroupButtonClass'=>'btn btn-sm setting-btn setting-btn-focus skeleton-button display_none', 'formGroupButtonId'=>'save', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>'disabled'],
+    ['formGroupButtonLabel'=>'Update','formGroupButtonClass'=>'btn btn-sm setting-btn setting-btn-focus skeleton-button display_none', 'formGroupButtonId'=>'update_btn', 'formGroupButtonType'=>'reset', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>'disabled'],
+    ['formGroupButtonLabel'=>'Delete','formGroupButtonClass'=>'btn btn-sm cgt_cancel_btn btn_focus display_none', 'formGroupButtonId'=>'deleteBranch', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>'disabled'],
   ];
 ?>
 @extends('backend.layouts.dashboard')
@@ -174,6 +174,9 @@
                   <option class="custom-optation" value="5" hidden>Enable to delete branch action</option>
                   <option class="custom-optation" value="6" hidden>Disable to delete branch action</option>
                 </select>
+                <div class="message-show">
+                  <p class="ps-3 mt-1"><span id="success_message_show"></span></p>
+                </div>
               </td>
             </tr>
             <tr class="setting-table-second-row" id="AdminOption">
@@ -183,6 +186,9 @@
                 <div class="card form-control form-control-sm" id="branch_page">
                   <!-- Message Overlay -->
                   <div id="formMessage" class="card-message-overlay display_none">
+                    <div class="animate_box">
+                      <img class="box-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                    </div>
                     <svg id="Layer_1" width="35" height="35" data-name="Layer 1" viewBox="0 0 122.88 106.08">
                       <defs>
                         <style>.cls-1{fill-rule:evenodd;}</style>
@@ -192,22 +198,22 @@
                     </svg>
                     <span class="loader-text ms-1" id="messgText"></span>
                   </div>
+                  <div id="loaderBox" class="card-message-overlay display_none">
+                    <div class="animate_box">
+                      <img class="box-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
+                    </div>
+                  </div>
                   <div class="card-body focus-color cd branch_form" id="table_card_body">
                     <input id="branch_id_field" type="text" name="branch_id_field" value="" hidden />
                     <input id="generate_id" type="text" name="generate_id" hidden />
                     <input id="branch_id" type="text" name="branch_id" class="branch_id_field branch_id" hidden />
                     <form autocomplete="off">
                       @csrf
-                      <div class="row">
+                      <div class="row" id="formContent">
                         <div class="col-xl-12">
                           @foreach($dropdowmMenuData as $data)
-                            @if($data['groupBox'] === 'form-group role_nme skeleton' || $data['groupBox'] === 'form-group role_nme branch skeleton')
+                            @if($data['groupBox'] === 'form-group role_nme form-field-padding skeleton mt-3' || $data['groupBox'] === 'form-group role_nme form-field-padding branch skeleton mt-3')
                               <div class="{{ $data['groupBox'] }}">
-                                <span class="input-label">
-                                  <label class="{{ $data['labelClass'] }}" for="{{ $data['labelFor'] }}">
-                                    {{ $data['label'] }}
-                                  </label>
-                                </span>
                                 <x-dropdown.dropdown-menu 
                                   menuType="{{ $data['menusType'] }}" 
                                   menuClass="{{ $data['menusClass'] }}" 
@@ -216,27 +222,27 @@
                                   menuSelectLabel="{{ $data['menuLabel'] }}">
                                   <input type="hidden" id="branches_id">
                                 </x-dropdown.dropdown-menu>
+                                <span class="input-label">
+                                  <label class="{{ $data['labelClass'] }}" for="{{ $data['labelFor'] }}">
+                                    {{ $data['label'] }}
+                                  </label>
+                                </span>
                               </div>
                             @endif
                           @endforeach
                           @foreach($inputGroup as $data)
-                            @if($data['inputGroupBox'] === 'form-group role_nme skeleton display_none' || $data['inputGroupBox'] === 'form-group role_nme branch skeleton display_none')
+                            @if($data['inputGroupBox'] === 'form-group role_nme form-field-padding skeleton display_none' || $data['inputGroupBox'] === 'form-group role_nme form-field-padding branch skeleton display_none')
                               <div class="{{ $data['inputGroupBox'] }}" id="{{ $data['inputGroupId'] }}">
+                                <x-input.form-input.form-input-field formInputFieldClass="{{ $data['formInputClass'] }}" formInputFieldType="{{ $data ['formInputType'] }}" formInputFieldName="{{ $data['formInputName'] }}" formInputFieldId="{{ $data['formInputId'] }}" formInputFieldPlaceHolder="{{ $data['formInputPlaceHolder'] }}" />
                                 <label class="{{ $data['formInputLabelClass'] }}" for="{{ $data['inputLabelFor'] }}">
                                   {{ $data['label'] }}
                                   <span id="{{ $data['formInputErrorId'] }}" hidden></span><span id="{{ $data['formInputUpdateError'] }}" hidden></span>
                                 </label>
-                                <x-input.form-input.form-input-field formInputFieldClass="{{ $data['formInputClass'] }}" formInputFieldType="{{ $data ['formInputType'] }}" formInputFieldName="{{ $data['formInputName'] }}" formInputFieldId="{{ $data['formInputId'] }}" formInputFieldPlaceHolder="{{ $data['formInputPlaceHolder'] }}" />
                               </div>
                             @endif
                           @endforeach
                           @foreach($secondColumnDropdownData as $data)
                             <div class="{{ $data['secondGroupBox'] }}" id="{{ $data['dropdownGroupId'] }}">
-                              <span class="input-label">
-                                <label class="{{ $data['secondLabelClass'] }}" for="{{ $data['secondLabelFor'] }}">
-                                  {{ $data['secondLabel'] }}
-                                </label>
-                              </span>
                               <x-dropdown.dropdown-menu 
                                 menuType="{{ $data['secondMenusType'] }}" 
                                 menuClass="{{ $data['secondMenusClass'] }}" 
@@ -245,6 +251,13 @@
                                 menuSelectLabel="{{ $data['secondMenuLabel'] }}">
                                 <input type="hidden" id="branches_id">
                               </x-dropdown.dropdown-menu>
+                              <span class="input-label">
+                                <label class="{{ $data['secondLabelClass'] }}" for="{{ $data['secondLabelFor'] }}">
+                                  {{ $data['secondLabel'] }}
+                                  <span id="{{ $data['dropdownUpdateError'] }}" hidden></span>
+                                  <span id="{{ $data['dropdownError'] }}" hidden></span>
+                                </label>
+                              </span>
                             </div>
                           @endforeach
                           <div class="form-group role_nme branch mb-1" id="documents" hidden>
@@ -282,6 +295,17 @@
                           </div>
                         </div>
                       </div>
+                      <div class="content-view display_none" id="ContentView">
+                        <div class="content-text">
+                          <span>All data has been siwtching already for new branch.</span><br>
+                          <span>Please select the branch id.</span>
+                        </div>
+                        <div class="select-menu-box">
+                          <div>
+                            <select class="form-select select-box" size="3" aria-label="size 3 select example" id="SelectBranchID"></select> 
+                          </div>
+                        </div>
+                      </div>
                       <div class="row mb-2 mt-2">
                         <div class="col-xl-7 action_message">
                           <p class="ps-1 mt-1"><span id="success_message"></span></p>
@@ -289,7 +313,7 @@
                         <div class="col-xl-5 pe-3 action_group">
                           @foreach($formGroupButtons as $data)
                             <?php
-                              $hiddenAttr = $data['hiddenAttribute'] === 'hidden' ? 'hidden' : '';
+                              $disabledAttr = $data['disabledAttribute'] === 'disabled' ? 'disabled' : '';
                             ?>
                             <x-buttons.form-medium-button 
                               label="{{ $data['formGroupButtonLabel'] }}" 
@@ -298,7 +322,7 @@
                               buttonId="{{ $data['formGroupButtonId'] }}" 
                               iconClass="{{ $data['groupIconClass'] }}" 
                               labelClass="{{ $data['formGroupButtonSpinerText'] }}"
-                              :hiddenAttr="$hiddenAttr"
+                              :disabledAttr="$disabledAttr"
                             />
                           @endforeach
                         </div>

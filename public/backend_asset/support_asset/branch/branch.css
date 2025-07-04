@@ -157,6 +157,58 @@ li.page-item.active {
     z-index: 10;
     pointer-events: all; /* block clicks */
 }
+.form-group.role_nme.form-field-padding {
+    padding: 0px 5px;
+    background-image: none;
+}
+.content-text{
+    font-family: var(--nav-font-family);
+    color: mediumpurple;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.5px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+select#SelectBranchID{
+    outline: none;
+    box-shadow: none;
+    padding: 20px 15px;
+}
+.active-height-light{
+    background: mediumpurple;
+    color: white;
+    padding: 5px;
+}
+#success_message_show{
+    color: mediumpurple;
+}
+.is-valid {
+    border: 1px solid #159b15cf !important;
+    padding-right: calc(1.5em + 0.75rem) !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='darkgreen' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 8l4 4 8-8'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right calc(0.375em + 0.1875rem) center !important;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem) !important;
+    box-sizing: border-box !important;
+}
+#savForm_error, #updateForm_errorList, .group_nme {
+    position: relative;
+    left: 0;
+    font-size: 12px;
+    color: red;
+}
+.select-menu-box{
+    padding: 10px 20px;
+}
+.display_block{
+    display: block;
+}
+.box-animation-size{
+    width: 50px;
+    height: 50px;
+}
 #messgText {
     font-family: var(--nav-font-family);
     font-size: 13px;
