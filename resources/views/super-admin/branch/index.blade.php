@@ -36,7 +36,7 @@
     'secondMenusClass'=>'form-control edit_upazila_id select2', 'secondMenusType'=>'text', 'dropdownError'=>'savForm_error5', 'dropdownUpdateError'=>'updateForm_error5']
   ];
   $formGroupButtons = [
-    ['formGroupButtonLabel'=>'Cancel','formGroupButtonClass'=>'btn btn-sm cgt_cancel_btn btn_focus skeleton-button', 'formGroupButtonId'=>'cancel_btn', 'formGroupButtonType'=>'reset', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>''],
+    ['formGroupButtonLabel'=>'Cancel','formGroupButtonClass'=>'btn btn-sm cgt_cancel_btn btn_focus me-5 skeleton-button', 'formGroupButtonId'=>'cancel_btn', 'formGroupButtonType'=>'reset', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>''],
     ['formGroupButtonLabel'=>'Next','formGroupButtonClass'=>'btn btn-sm setting-btn setting-btn-focus skeleton-button', 'formGroupButtonId'=>'next', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>''],
     ['formGroupButtonLabel'=>'Finish','formGroupButtonClass'=>'btn btn-sm setting-btn setting-btn-focus skeleton-button display_none', 'formGroupButtonId'=>'save', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>'disabled'],
     ['formGroupButtonLabel'=>'Update','formGroupButtonClass'=>'btn btn-sm setting-btn setting-btn-focus skeleton-button display_none', 'formGroupButtonId'=>'update_btn', 'formGroupButtonType'=>'reset', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>'disabled'],
@@ -148,28 +148,23 @@
       </div>
       <div class="d-flex align-items-start">
         <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <button class="btn btn-sm setting-tab-btn active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Setting</button>
+          <button class="btn btn-sm setting-tab-btn active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Branch</button>
           <button class="btn btn-sm setting-tab-btn" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Category</button>
-          <button class="btn btn-sm setting-tab-btn" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</button>
+          <button class="btn btn-sm setting-tab-btn" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Search</button>
           <button class="btn btn-sm setting-tab-btn" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Replace</button>
         </div>
         <div class="tab-content" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
             <div class="row">
-              <div class="col-sm-6">
-                  <div class="card">
-                    <div class="card-header th-head-middle space">
-                      Mode
+              <div class="col-sm-3">
+                  <div class="card custom-card">
+                    <div class="card-header custom-header">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                      Setting Operation
                     </div>
                     <div class="card-body">
                       <ul class="optation-box">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="darkgray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                         <ul id="SettingMode">
-                          <li>
-                            <label class="form-check-label" for="flexRadioDefault">
-                              Setting Optation Mode
-                            </label>
-                          </li>
                           <li>
                             <label class="form-check-label custom-label" for="flexRadioDefault1">
                               <input class="form-check-input input-triger" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
@@ -199,10 +194,16 @@
                     </div>
                   </div>
               </div>
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-header">
-                    Action
+              <div class="col-sm-5">
+                <div class="loader-position" id="boxLoading" hidden>
+                  <div class="spinner-border text-success spinner-width" role="status" id="loaderSpin" hidden>
+                    <span class="visually-hidden"></span>
+                  </div>
+                </div>
+                <div class="card custom-card" id="settingImplementCard" hidden>
+                  <div class="card-header custom-header">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    Setting Implement
                   </div>
                   <div class="card-body">
                     <div class="optation-group-btn" id="SettingActionButton">
@@ -221,10 +222,7 @@
                         <span class="visually-hidden"></span>
                       </div>
                     </div>
-                    <div class="message-show">
-                      <p class="ps-3 mt-1"><span id="success_message_show"></span></p>
-                    </div>
-                    <div class="card form-control form-control-sm" id="branch_page" hidden>
+                    <div class="card form-control form-control-sm" id="setting_card" hidden>
                       
                       <div id="formMessage" class="card-message-overlay display_none">
                         <div class="animate_box">
@@ -338,8 +336,8 @@
                           </div>
                           <div class="content-view display_none" id="ContentView">
                             <div class="content-text">
-                              <span>All data has been siwtching already for new branch.</span><br>
-                              <span>Please select the branch id.</span>
+                              <span>All data has already been switched to the new branch.</span><br>
+                              <span>Please select the branch ID.</span>
                             </div>
                             <div class="select-menu-box">
                               <div>
@@ -347,30 +345,79 @@
                               </div>
                             </div>
                           </div>
-                          <div class="row mb-2 mt-2">
-                            <div class="col-xl-7 action_message">
-                              <p class="ps-1 mt-1"><span id="success_message"></span></p>
-                            </div>
-                            <div class="col-xl-5 pe-3 action_group">
-                              @foreach($formGroupButtons as $data)
-                                <?php
-                                  $disabledAttr = $data['disabledAttribute'] === 'disabled' ? 'disabled' : '';
-                                ?>
-                                <x-buttons.form-medium-button 
-                                  label="{{ $data['formGroupButtonLabel'] }}" 
-                                  buttonParentClass="{{ $data['formGroupButtonClass'] }}" 
-                                  buttonChildClass="" 
-                                  buttonId="{{ $data['formGroupButtonId'] }}" 
-                                  iconClass="{{ $data['groupIconClass'] }}" 
-                                  labelClass="{{ $data['formGroupButtonSpinerText'] }}"
-                                  :disabledAttr="$disabledAttr"
-                                />
-                              @endforeach
-                            </div>
+                          <div class="d-flex pe-1 setting_btn_group">
+                            @foreach($formGroupButtons as $data)
+                              <?php
+                                $disabledAttr = $data['disabledAttribute'] === 'disabled' ? 'disabled' : '';
+                              ?>
+                              <x-buttons.form-medium-button 
+                                label="{{ $data['formGroupButtonLabel'] }}" 
+                                buttonParentClass="{{ $data['formGroupButtonClass'] }}" 
+                                buttonChildClass="" 
+                                buttonId="{{ $data['formGroupButtonId'] }}" 
+                                iconClass="{{ $data['groupIconClass'] }}" 
+                                labelClass="{{ $data['formGroupButtonSpinerText'] }}"
+                                :disabledAttr="$disabledAttr"
+                              />
+                            @endforeach
                           </div>
                         </form>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="loader-position" id="displayLoading" hidden>
+                  <div class="spinner-border text-success spinner-width" role="status" id="displayLoader" hidden>
+                    <span class="visually-hidden"></span>
+                  </div>
+                </div>
+                <div class="card custom-card" id="settingDisplayCard">
+                  <div class="card-header custom-header">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    Display
+                  </div>
+                  <div class="card-body">
+                    <ul class="optation-box">
+                        <ul id="SettingMode">
+                          <li>
+                            <label class="form-check-label line-label" for="branch-type">
+                              Branch-Type : dfdsf
+                            </label>
+                          </li>
+                          <li>
+                            <label class="form-check-label line-label" for="branch-id">
+                              Branch-ID :
+                            </label>
+                          </li>
+                          <li>
+                            <label class="form-check-label line-label" for="branch-name">
+                              Branch-Name :
+                            </label>
+                          </li>
+                          <li>
+                            <label class="form-check-label line-label" for="division">
+                              Division :
+                            </label>
+                          </li>
+                          <li>
+                            <label class="form-check-label line-label" for="district">
+                              District :
+                            </label>
+                          </li>
+                          <li>
+                            <label class="form-check-label line-label" for="upazila">
+                              Upazila :
+                            </label>
+                          </li>
+                          <li>
+                            <label class="form-check-label line-label" for="location">
+                              Location :
+                            </label>
+                          </li>
+                        </ul>
+                      </ul>
                   </div>
                 </div>
               </div>
@@ -612,6 +659,9 @@
           <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
           <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
           <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+          <div class="message-show">
+            <p class="ps-3 mt-1"><span id="success_message_show"></span></p>
+          </div>
         </div>
       </div>
     </div>

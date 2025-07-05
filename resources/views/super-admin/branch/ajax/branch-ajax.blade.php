@@ -550,39 +550,54 @@
             $("#disabledNewBranch").attr('hidden', true);
             $("#disabledUpdatedBranch").attr('hidden', true);
             $("#disabledDeleteBranch").attr('hidden', true);
-            $("#branch_page").attr('hidden', true);
+            $("#setting_card").attr('hidden', true);
+            $("#settingImplementCard").attr('hidden', true);
 
             $(".disabledChecking").attr('hidden', true);
             $(".enableChecking").attr('hidden', true);
+            $("#boxLoading").removeAttr('hidden');
+            $("#loaderSpin").removeAttr('hidden');
             $("#loaderSpinner").removeAttr('hidden');
 
             // Show button step by step according to condition
             if($(this).attr('id') === 'flexRadioDefault1' ){
                 setTimeout(() => {
+                    $("#settingImplementCard").removeAttr('hidden');
                     $("#enableNewBranch").removeAttr('hidden');
+                    $("#boxLoading").attr('hidden', true);
+                    $("#loaderSpin").attr('hidden', true);
                     $("#loaderSpinner").attr('hidden', true);
                 }, 1000);
             }else if($(this).attr('id') === 'flexRadioDefault2'){
                 setTimeout(() => {
+                    $("#settingImplementCard").removeAttr('hidden');
                     $("#enableUpdateBranch").removeAttr('hidden');
+                    $("#boxLoading").attr('hidden', true);
+                    $("#loaderSpin").attr('hidden', true);
                     $("#loaderSpinner").attr('hidden', true);
                 }, 1000);
             }else if($(this).attr('id') === 'flexRadioDefault3'){
                 setTimeout(() => {
+                    $("#settingImplementCard").removeAttr('hidden');
                     $("#enableDeleteBranch").removeAttr('hidden');
+                    $("#boxLoading").attr('hidden', true);
+                    $("#loaderSpin").attr('hidden', true);
                     $("#loaderSpinner").attr('hidden', true);
                 }, 1000);
             }else if($(this).attr('id') === 'flexRadioDefault4'){
+                $("#settingImplementCard").attr('hidden', true);
                 $("#enableNewBranch").attr('hidden', true);
                 $("#enableUpdateBranch").attr('hidden', true);
                 $("#enableDeleteBranch").attr('hidden', true);
+                $("#boxLoading").attr('hidden', true);
+                $("#loaderSpin").attr('hidden', true);
                 $("#loaderSpinner").attr('hidden', true);
                 $("#disabledNewBranch").attr('hidden', true);
                 $("#disabledUpdatedBranch").attr('hidden', true);
                 $("#disabledDeleteBranch").attr('hidden', true);
                 $(".disabledChecking").attr('hidden', true);
                 $(".enableChecking").attr('hidden', true);
-                $("#branch_page").attr('hidden', true);
+                $("#setting_card").attr('hidden', true);
             }
         });
         // setting action enable button
@@ -594,7 +609,7 @@
             $("#enableNewBranch").attr('hidden', true);
             $("#enableUpdateBranch").attr('hidden', true);
             $("#enableDeleteBranch").attr('hidden', true);
-            $("#branch_page").attr('hidden', true);
+            $("#setting_card").attr('hidden', true);
 
             $("#loaderSpinner").removeAttr('hidden');
             $(".disabledChecking").attr('hidden', true);
@@ -606,7 +621,7 @@
                     $("#enableNewBranch").removeAttr('hidden');
                     $("#disabledNewBranch").removeAttr('hidden');
                     $(".enableChecking").removeAttr('hidden');
-                    $("#branch_page").removeAttr('hidden');
+                    $("#setting_card").removeAttr('hidden');
                 }, 1000);
             }else if($(this).attr('id') === 'enableUpdateBranch'){
                 setTimeout(() => {
@@ -614,7 +629,7 @@
                     $("#enableUpdateBranch").removeAttr('hidden');
                     $("#disabledUpdatedBranch").removeAttr('hidden');
                     $(".enableChecking").removeAttr('hidden');
-                    $("#branch_page").removeAttr('hidden');
+                    $("#setting_card").removeAttr('hidden');
                 }, 1000);
             }else if($(this).attr('id') === 'enableDeleteBranch'){
                 setTimeout(() => {
@@ -622,7 +637,7 @@
                     $("#enableDeleteBranch").removeAttr('hidden');
                     $("#disabledDeleteBranch").removeAttr('hidden');
                     $(".enableChecking").removeAttr('hidden');
-                    $("#branch_page").removeAttr('hidden');
+                    $("#setting_card").removeAttr('hidden');
                 }, 1000);
             }
         });
