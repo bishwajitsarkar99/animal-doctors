@@ -84,7 +84,7 @@ table.setting-table {
 .head-word{
     font-family: var(--nav-font-family);
     text-align: left;
-    font-size: 18px;
+    font-size: 16px;
     color: gray;
     font-weight: bold;
     vertical-align: middle;
@@ -93,9 +93,8 @@ table.setting-table {
 .logo_size{
     display: flex;
     justify-content: center;
-    width: 45px;
-    height: 40px;
-    margin-left: 12px;
+    width: 30px;
+    height: 35px;
 }
 .group-btn{
     display: flex;
@@ -107,6 +106,30 @@ label.per_item_class {
     padding-top: 29px;
     font-size: 12px;
     font-weight: 800;
+}
+.setting-tab-btn{
+    background-image: linear-gradient(1deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
+    background-color: white;
+    margin-right: 15px;
+    line-height: 1.2;
+    font-weight:700;
+    border: 1px ridge rgba(0, 123, 255, 0.5);
+    font-size: 12px;
+    color: #222;
+    letter-spacing: 1px;
+    text-align: left;
+    margin-bottom: 5px;
+}
+.active{
+    color: #004a99e0 !important;
+    font-family: var(--nav-font-family);
+    opacity: 1;
+    text-align: left;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    outline: none;
+    border-radius: 3px;
+    transition: border-color 0.3s, background-color 0.3s;
 }
 li.page-item.active {
     border-bottom: 1px solid #111;
@@ -324,6 +347,9 @@ select#SelectBranchID{
     background-image: linear-gradient(to bottom, rgb(14 14 14 / 5%) 0%, rgb(171 165 165 / 5%) 100%);
 }
 }
+#v-pills-tabContent {
+    width: 100%;
+}
 .branch-table{
     width: 100%;
     table-layout: auto;
@@ -442,6 +468,15 @@ button#branchTypeRefresh{
     margin-left: 0px;
     margin-right: 15px;
 }
+#SettingActionButton {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#loaderSpinner {
+    width: 25px;
+    height: 25px;
+}
 select#SettingMode {
     box-shadow: none;
     outline: none;
@@ -496,11 +531,9 @@ input.form-check-input:checked {
     margin-bottom: 4px;
 }
 .custom-label:hover{
-    background: #9fc9b84a;
     color: #0d6efd;
 }
 .label-highlight{
-    background: #9fc9b84a;
     color: #0d6efd;
 }
 input#flexRadioDefault1,input#flexRadioDefault2,input#flexRadioDefault3,input#flexRadioDefault4 {

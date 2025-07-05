@@ -536,10 +536,95 @@
         // =============== Setting Optation Mode Part
         // Select ID Button form Setting Mode
         $(document).on('click', 'label.custom-label', function(){
-            // Remove class from all other custom-labels within the #SettingMode list
+            // Remove class from all other custom-labels
             $('#SettingMode label.custom-label').removeClass('label-highlight');
             // Add class to the clicked one
             $(this).addClass('label-highlight');
+        });
+        // setting mode optation radio button action
+        $(document).on('click', '#flexRadioDefault1, #flexRadioDefault2, #flexRadioDefault3, #flexRadioDefault4', function(){
+            // Hide all button initially
+            $("#enableNewBranch").attr('hidden', true);
+            $("#enableUpdateBranch").attr('hidden', true);
+            $("#enableDeleteBranch").attr('hidden', true);
+            $("#disabledNewBranch").attr('hidden', true);
+            $("#disabledUpdatedBranch").attr('hidden', true);
+            $("#disabledDeleteBranch").attr('hidden', true);
+            $("#branch_page").attr('hidden', true);
+
+            $(".disabledChecking").attr('hidden', true);
+            $(".enableChecking").attr('hidden', true);
+            $("#loaderSpinner").removeAttr('hidden');
+
+            // Show button step by step according to condition
+            if($(this).attr('id') === 'flexRadioDefault1' ){
+                setTimeout(() => {
+                    $("#enableNewBranch").removeAttr('hidden');
+                    $("#loaderSpinner").attr('hidden', true);
+                }, 1000);
+            }else if($(this).attr('id') === 'flexRadioDefault2'){
+                setTimeout(() => {
+                    $("#enableUpdateBranch").removeAttr('hidden');
+                    $("#loaderSpinner").attr('hidden', true);
+                }, 1000);
+            }else if($(this).attr('id') === 'flexRadioDefault3'){
+                setTimeout(() => {
+                    $("#enableDeleteBranch").removeAttr('hidden');
+                    $("#loaderSpinner").attr('hidden', true);
+                }, 1000);
+            }else if($(this).attr('id') === 'flexRadioDefault4'){
+                $("#enableNewBranch").attr('hidden', true);
+                $("#enableUpdateBranch").attr('hidden', true);
+                $("#enableDeleteBranch").attr('hidden', true);
+                $("#loaderSpinner").attr('hidden', true);
+                $("#disabledNewBranch").attr('hidden', true);
+                $("#disabledUpdatedBranch").attr('hidden', true);
+                $("#disabledDeleteBranch").attr('hidden', true);
+                $(".disabledChecking").attr('hidden', true);
+                $(".enableChecking").attr('hidden', true);
+                $("#branch_page").attr('hidden', true);
+            }
+        });
+        // setting action enable button
+        $(document).on('click', '#enableNewBranch, #enableUpdateBranch, #enableDeleteBranch', function(){
+            // Hide all button initially
+            $("#disabledNewBranch").attr('hidden', true);
+            $("#disabledUpdatedBranch").attr('hidden', true);
+            $("#disabledDeleteBranch").attr('hidden', true);
+            $("#enableNewBranch").attr('hidden', true);
+            $("#enableUpdateBranch").attr('hidden', true);
+            $("#enableDeleteBranch").attr('hidden', true);
+            $("#branch_page").attr('hidden', true);
+
+            $("#loaderSpinner").removeAttr('hidden');
+            $(".disabledChecking").attr('hidden', true);
+            $(".enableChecking").attr('hidden', true);
+
+            if($(this).attr('id') === 'enableNewBranch'){
+                setTimeout(() => {
+                    $("#loaderSpinner").attr('hidden', true);
+                    $("#enableNewBranch").removeAttr('hidden');
+                    $("#disabledNewBranch").removeAttr('hidden');
+                    $(".enableChecking").removeAttr('hidden');
+                    $("#branch_page").removeAttr('hidden');
+                }, 1000);
+            }else if($(this).attr('id') === 'enableUpdateBranch'){
+                setTimeout(() => {
+                    $("#loaderSpinner").attr('hidden', true);
+                    $("#enableUpdateBranch").removeAttr('hidden');
+                    $("#disabledUpdatedBranch").removeAttr('hidden');
+                    $(".enableChecking").removeAttr('hidden');
+                    $("#branch_page").removeAttr('hidden');
+                }, 1000);
+            }else if($(this).attr('id') === 'enableDeleteBranch'){
+                setTimeout(() => {
+                    $("#loaderSpinner").attr('hidden', true);
+                    $("#enableDeleteBranch").removeAttr('hidden');
+                    $("#disabledDeleteBranch").removeAttr('hidden');
+                    $(".enableChecking").removeAttr('hidden');
+                    $("#branch_page").removeAttr('hidden');
+                }, 1000);
+            }
         });
 
         // =============== Setting Action Part
