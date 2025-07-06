@@ -18,8 +18,7 @@ Route::group(['middleware' => 'auth'], function (){
             Route::put('/branch-type-update/{id}', [BranchController::class, 'updateBranchType'])->name('update_branch_type.action');
             Route::delete('/branch-type-delete/{id}', [BranchController::class, 'deleteBranchType'])->name('branch_type.delete');
             // Branch Create
-            Route::get('/branch-activity/branch-create', [BranchController::class, 'redirectWithRandom'])->name('branch.redirect');
-            Route::get('/branch-activity/branch-{slug}/create/index', [BranchController::class, 'index'])->name('branch.index');
+            Route::get('/branch-activity/branch-{slug}/index', [BranchController::class, 'index'])->name('branch.index');
             Route::post('/branch-create', [BranchController::class, 'store'])->name('branch.store');
             Route::get('/branch-search', [BranchController::class, 'searchBranch'])->name('search-branch.action');
             Route::get('/branch-edit/{id}', [BranchController::class, 'editBranch'])->name('edit-branch.action');

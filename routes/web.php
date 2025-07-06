@@ -9,6 +9,7 @@ use App\Http\Controllers\SettingController;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Permission\InventoryAccessPermission;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('login-door');
@@ -59,5 +60,10 @@ Route::group(['middleware' => 'auth'], function () {
     // ->withoutMiddleware('auth')
     // Language
     Route::get('lang/{lang}', [LanguageController::class, 'switchLang'])->name('lang.switch');
+    // Store Slug
+    Route::post('/store-slug', function (Request $request) {
+        session(['valid_branch_random' => $request->slug]);
+        return response()->json(['status' => 'ok']);
+    })->name('branch.slug.store');
 });
 

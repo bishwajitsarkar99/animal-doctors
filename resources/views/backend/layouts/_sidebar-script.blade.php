@@ -38,13 +38,57 @@
             // Toggle the rotation class
             arrowIcon.toggleClass("rotate-icon");
         });
+        // document.querySelectorAll('.side-bar-link').forEach(link => {
+        //     link.addEventListener('click', function(e){
+        //         e.preventDefault();
+        //         const url = this.getAttribute('data-url');
+        //         if(url){
+        //             window.location.href = url;
+        //         }
+        //     });
+        // });
+        // <!-- Create URL Slug -->
         document.querySelectorAll('.side-bar-link').forEach(link => {
-            link.addEventListener('click', function(e){
+            link.addEventListener('click', function (e) {
                 e.preventDefault();
-                const url = this.getAttribute('data-url');
-                if(url){
-                    window.location.href = url;
+
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let random = '';
+                for (let i = 0; i < 30; i++) {
+                    random += chars.charAt(Math.floor(Math.random() * chars.length));
                 }
+
+                const slug = '~^&&>@^&&' + random + '@$^&&<$^&';
+
+                fetch('/store-slug', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ slug })
+                })
+                .then(async res => {
+                    const contentType = res.headers.get('content-type') || '';
+                    if (!res.ok || !contentType.includes('application/json')) {
+                        const text = await res.text();
+                        throw new Error(`Expected JSON but got:\n${text}`);
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    if (data.status === 'ok') {
+                        const rawUrl = this.getAttribute('data-url');
+                        const finalUrl = rawUrl.replace('{slug}', encodeURIComponent(slug));
+                        window.location.href = finalUrl;
+                    } else {
+                        alert('Server responded but failed');
+                    }
+                })
+                .catch(err => {
+                    console.error('Fetch or parse error:', err);
+                    alert('Something went wrong. See console.');
+                });
             });
         });
     });
