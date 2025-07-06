@@ -1,0 +1,1 @@
+<table class="{{ $tableClass }}"> {{$slot}} </table>

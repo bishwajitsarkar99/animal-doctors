@@ -1,10 +1,10 @@
 <?php
 namespace App\view\components;
 
-class Table extends Component
+class BigCard extends Component
 {
     public function render()
     {
-        return view('component.Tables.Table');
+        return view('components.BigCard');
     }
 }

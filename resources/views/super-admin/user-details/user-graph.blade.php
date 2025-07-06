@@ -11,7 +11,7 @@
     ?>
     @foreach($titles as $key => $data)
         <div class="col-xl-3 drag-column" id="{{ $data['columnId'] }}">
-            <x-user-cards.user-mini-card drag="{{ $data['dragged'] }}" cardId="{{ $data['dragId'] }}"
+            <x-Cards.MiniCard drag="{{ $data['dragged'] }}" cardId="{{ $data['dragId'] }}"
                 title="{{ $data['label'] }}" 
                 count="{{ $miniCardData[$key] }}"
                 percentage="{{ $miniCardData[$key . '_percentage'] }}"
@@ -26,11 +26,11 @@
         </div>
     @endforeach
 </div>
-<x-big-card>
+<x-BigCard>
     <div class="row mt-4">
         <div class="col-xl-6">
-            <x-user-cards.user-storage-card cardBg="" borderStyle="border-style">
-                <x-user-cards.user-storage-card-header cardHeadTitile="Users Storage" iconColor="#2e42cb" />
+            <x-Cards.StorageCard cardBg="" borderStyle="border-style">
+                <x-Cards.StorageCardHeader cardHeadTitile="Users Storage" iconColor="#2e42cb" />
                 <?php
                     $roles = [
                         'super_admin' => ['label' => 'Super-Admin Users', 'bg' => 'bg-light-blueviolet', 'number-animation-key' => 'number-rolling', 'number-animation' => 'total-user-rolling', 'progress-bar-animation-query-selector' => 'progress-bar scrolling'],
@@ -43,7 +43,7 @@
                     ]; 
                 ?>
                 @foreach($roles as $key => $data)
-                    <x-user-cards.user-storage-card-body
+                    <x-Cards.StorageCardBody
                         title="{{ $data['label'] }}"
                         count="{{ $usersCount[$key] ?? 0 }}"
                         progressbarbg="{{ $data['bg'] }}"
@@ -58,7 +58,7 @@
                         progrssBarAnimationQuerySelector="{{ $data['progress-bar-animation-query-selector'] }}"
                     />
                 @endforeach
-                <x-user-cards.user-storage-card-footer 
+                <x-Cards.StorageCardFooter 
                     title="Total Users"
                     count="{{ $miniCardData['total_users'] }}"
                     progressbarbg="bg-light-blueviolet"
@@ -74,11 +74,11 @@
                     numberCount="total-user-rolling"
                     
                 />
-            </x-user-cards.user-storage-card>
+            </x-Cards.StorageCard>
         </div>
         <div class="col-xl-6">
-            <x-chart-cards.chart-card cardBg="" borderStyle="border-style" id="orderChart">
-                <x-chart-cards.chart-activity-card-header 
+            <x-ChartCards.ChartCard cardBg="" borderStyle="border-style" id="orderChart">
+                <x-ChartCards.ChartActivityCardHeader 
                     cardHeadSkeletone="head-skeletone"
                     loaderSkeletone="loader_skeleton"
                     iconColor="#2e42cb7d"
@@ -86,7 +86,7 @@
                     loaderId="loader_orderChart"
                     textAlign="center"
                 />
-                <x-chart-cards.chart-card-body
+                <x-ChartCards.ChartCardBody
                     cardBodySkeletone="chart-body-skeletone"
                     cardBodyBg=""
                     borderStyle="border-style"
@@ -99,13 +99,13 @@
                     canvasHeight="110"
                     canvasId="userActivityChart"
                 />
-            </x-card>
+            </x-ChartCards.ChartCard>
         </div>
     </div>
     <div class="row">
         <div class="col-xl-12">
-            <x-chart-cards.chart-card cardBg="" borderStyle="border-style" id="orderChart">
-                <x-chart-cards.chart-card-header 
+            <x-ChartCards.ChartCard cardBg="" borderStyle="border-style" id="orderChart">
+                <x-ChartCards.ChartCardHeader 
                     cardTopBorder="dotted"
                     cardHeadSkeletone="head-skeletone"
                     loaderSkeletone="loader_skeleton"
@@ -114,7 +114,7 @@
                     loaderId="loader_acivityChart"
                     textAlign="center"
                 />
-                <x-chart-cards.chart-card-body
+                <x-ChartCards.ChartCardBody
                     cardBodySkeletone="body-skeletone"
                     cardBodyBg=""
                     borderStyle="border-style"
@@ -127,13 +127,13 @@
                     canvasHeight="80"
                     canvasId="userChart"
                 />
-            </x-card>
+            </x-ChartCards.ChartCard>
         </div>
     </div>
-</x-big-card>
+</x-BigCard>
 <div class="row mt-4 mb-4">
     <div class="col-xl-12">
-        <x-branch-cards.branch-card id="branchCard">
+        <x-BranchCards.BranchCard id="branchCard">
             <div class="row">
                 <div class="col-xl-12 head-init">
                     <span class="head-skeletone">
@@ -218,7 +218,7 @@
                     </div>
                 @endforeach
             </div>
-        </x-branch-cards.branch-card>
+        </x-BranchCards.BranchCard>
     </div>
 </div>
 <!-- <svg id="chart" width="500" height="200" viewBox="0 0 600 300" style="border:1px solid #ccc;path {

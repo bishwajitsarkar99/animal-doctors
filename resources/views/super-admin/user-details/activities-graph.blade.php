@@ -46,13 +46,13 @@
 @if($user_log_data_table_permission == 1)
 <div class="row">
     <div class="container">
-        <x-chart-cards.chart-card cardBg="chart-card pt-3 pb-3" borderStyle="border-style">
+        <x-ChartCards.ChartCard cardBg="chart-card pt-3 pb-3" borderStyle="border-style">
             <div class="row mb-2">
                 <div class="col-xl-12">
                     <!-- Current Day Data -->
-                    <x-chart-cards.progress-bar-cards.body.card-body cardBodyClass="card card-body border-style card-background">
+                    <x-ChartCards.ProgressBarCards.Body.CardBody cardBodyClass="card card-body border-style card-background">
                         @foreach($progressBarCards as $data)
-                            <x-chart-cards.progress-bar-cards.body.card-content
+                            <x-ChartCards.ProgressBarCards.Body.CardContent
                                 cardLabel="{{ $data['label'] }}"
                                 cardLabelClass="{{ $data['labelClass'] }}"
                                 cardProgressClass="{{ $data['progressClass'] }}"
@@ -66,14 +66,14 @@
                                 cardRecordId="{{ $data['recordId'] }}"
                             />
                         @endforeach
-                    </x-chart-cards.progress-bar-cards.body.card-body>
+                    </x-ChartCards.ProgressBarCards.Body.CardBody>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xl-6">
                     <!-- Weekly Data Chart -->
-                    <x-chart-cards.chart-card cardBg="" borderStyle="border-style">
-                        <x-chart-cards.chart-activity-card-header 
+                    <x-ChartCards.ChartCard cardBg="" borderStyle="border-style">
+                        <x-ChartCards.ChartActivityCardHeader 
                             cardHeadSkeletone="head-skeletone"
                             loaderSkeletone="loader_skeleton"
                             iconColor="#2e42cb7d"
@@ -81,7 +81,7 @@
                             loaderId="loader_orderChart"
                             textAlign="center"
                         />
-                        <x-chart-cards.chart-card-body
+                        <x-ChartCards.ChartCardBody
                             cardBodySkeletone="chart-body-skeletone"
                             cardBodyBg=""
                             borderStyle="border-style"
@@ -94,12 +94,12 @@
                             canvasHeight="106"
                             canvasId="userDayLogChart"
                         />
-                    </x-chart-cards.chart-card>
+                    </x-ChartCards.ChartCard>
                 </div>
                 <div class="col-xl-6">
                     <!-- Monthly Data Chart -->
-                    <x-chart-cards.chart-card cardBg="" borderStyle="border-style">
-                        <x-chart-cards.chart-card-header 
+                    <x-ChartCards.ChartCard cardBg="" borderStyle="border-style">
+                        <x-ChartCards.ChartCardHeader 
                             cardTopBorder=""
                             cardHeadSkeletone="head-skeletone"
                             loaderSkeletone="loader_skeleton"
@@ -108,7 +108,7 @@
                             loaderId="loader_acivityChart"
                             textAlign="center"
                         />
-                        <x-chart-cards.chart-card-body
+                        <x-ChartCards.ChartCardBody
                             cardBodySkeletone="body-skeletone"
                             cardBodyBg=""
                             borderStyle="border-style"
@@ -121,11 +121,11 @@
                             canvasHeight="106"
                             canvasId="userMonthLogChart"
                         />
-                    </x-chart-cards.chart-card>
+                    </x-ChartCards.ChartCard>
                 </div>
             </div>
-        </x-chart-card>
-        <x-chart-cards.multi-chart-cards.multi-chart chartClass="chart-card mb-4">
+        </x-ChartCards.ChartCard>
+        <x-ChartCards.MultiChartCards.MultiChart chartClass="chart-card mb-4">
             <div class="row mt-4 mb-3">
                 <div class="col-xl-12">
                     <?php
@@ -138,7 +138,7 @@
                             ['label'=>'Email','inputPlaceholder'=>'Email Search','buttonClass'=>'btn btn-sm refresh-btn ripple-surface','buttonLabelOne'=>'Remove','buttonLabelTwo'=>'Enable','searchLabel'=>'search'],
                         ]; 
                     ?>
-                    <x-chart-cards.multi-chart-cards.multi-chart-header
+                    <x-ChartCards.MultiChartCards.MultiChartHeader
                         parentClass="card-header max-card-header"
                         childClass="card-head-title head-skeletone"
                         iconColor='rgba(46, 66, 203, 0.49)'
@@ -168,17 +168,17 @@
                         filexContent="{{ $flex['filexContent'] }}"
                         filexUpArrw="{{ $flex['filexBoxArrow'] }}"
                     />
-                    <x-chart-cards.multi-chart-cards.multi-chart-body cardBodyClass="border-style">
-                        <x-chart-cards.multi-chart-cards.multi-chart-box cardBoxClass="user-activities--month-chart mb-5">
+                    <x-ChartCards.MultiChartCards.MultiChartBody cardBodyClass="border-style">
+                        <x-ChartCards.MultiChartCards.multiChartBox cardBoxClass="user-activities--month-chart mb-5">
                             <!-- Total all data chart -->
-                            <x-chart-cards.multi-chart-cards.multi-chart-canvas
+                            <x-ChartCards.MultiChartCards.MultiChartCanvas
                                 canvasClass="user-activities--month-chart mb-1"
                                 monthlyLogChartId="userAllLogChart"
                                 monthlyLogChartHeight="80"
                                 dateLogChartId="allUserDateLogChart" 
                                 dateLogChartHeight="36"
                             />
-                            <x-date-range-filter-cards.date-range-card
+                            <x-DateRangeFilterCards.DateRangeCard
                                 dateRangeCardClass="dual-range-container mt-2"
                                 dateRangeId="dateRange"
                                 firstWrapperClass="slider-wrapper-first"
@@ -203,11 +203,11 @@
                                 dateRangeSvgChartHeight="50"
                                 dateRangeSvgChartRectFill="white"
                             />
-                        </x-chart-cards.multi-chart-cards.multi-chart-box>
-                    </x-chart-cards.multi-chart-cards.multi-chart-body>
+                        </x-ChartCards.MultiChartCards.multiChartBox>
+                    </x-ChartCards.MultiChartCards.MultiChartBody>
                 </div>
             </div>
-        </x-chart-cards.multi-chart-cards.multi-chart>
+        </x-ChartCards.MultiChartCards.MultiChart>
     </div>
 </div>
 <div class="row">

@@ -78,6 +78,12 @@
     font-size: 12px;
     font-weight: 800;
 }
+.home-icon-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 30px;
+}
 .confirm-label{
     color: black;
     font-weight: 700;
@@ -152,7 +158,7 @@ label.per_item_class {
     text-align: left;
     margin-bottom: 5px;
 }
-.active{
+button.active{
     color: #004a99e0 !important;
     font-family: var(--nav-font-family);
     opacity: 1;

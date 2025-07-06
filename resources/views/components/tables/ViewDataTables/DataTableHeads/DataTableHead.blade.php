@@ -1,0 +1,1 @@
+<thead class="{{ $className }}">{{ $slot }}</thead>
