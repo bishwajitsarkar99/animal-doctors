@@ -7,7 +7,7 @@
         ['lable'=>'None', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault4', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault4', 'checkedAttr'=>'checked']
     ];
 ?>
-<x-CustomCards.Card cardClass="card custom-card">
+<x-CustomCards.Card cardClass="card custom-card component-focus">
     <x-CustomCards.CardHeaders.CardHeader cardHeaderClass="card-header custom-header">
         <x-Tables.Icon.SettingIcon iconWidth="20" iconHeight="20" firstFill="#686868" secondFill="#4a92ff" thirdFill="#4a92ff" fourFill="#4a92ff" />
             Setting Operation

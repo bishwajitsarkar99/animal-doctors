@@ -42,19 +42,23 @@
     border: 2px solid #3b71ca !important;
 }
 .tab-content-panel-bg,.setting-page-container{
-    background-image: linear-gradient(to bottom, aliceblue 50%, aliceblue 100%);
+    background-image: linear-gradient(to bottom, white 50%, white 100%);
+    box-shadow: rgba(0,0,0,.067) 0 1px 20px,rgba(0,123,255,.2) 0 2px 6px;
 }
 .tab-panel-topbar {
-    background-image: linear-gradient(to bottom, aliceblue 50%, aliceblue 100%);
+    background-image: linear-gradient(to bottom, white 50%, white 100%);
     width: 100%;
     margin: 0;
     padding: 15px 15px;
-    border-bottom: 1px ridge #d9d9d9;
+    box-shadow: rgba(0,0,0,.067) 0 1px 20px,rgba(0,123,255,.2) 0 2px 6px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom: 1px ridge #f1f1f5;
 }
 .custom-card{
     border: none;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 15px -9px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    transition: 0.5ms;
+    box-shadow: rgba(0,0,0,.067) 0 1px 20px,rgba(0,123,255,.2) 0 2px 6px;
 }
 .loader-position{
     align-items: center;
@@ -87,7 +91,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px 30px;
 }
 .confirm-label{
     color: black;
@@ -483,6 +486,50 @@ select#SettingDisplay {
     padding-top: 10px;
     padding-bottom: 10px;
     border: none;
+}
+.watermark-text {
+    display:inline-table;
+    position: relative;
+    top: 0;
+    left: 0;
+    /* transform: translate(-30%, -10%) rotate(-45deg); */
+    font-size: 50px;
+    /* color: rgba(0, 0, 0, 0.08);  very light gray */
+    color: #2900cf1a;
+    font-weight: bold;
+    z-index: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    width: 100%;
+    text-align: center;
+    /* 3D shadow effect */
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.04), 4px 4px 0 rgba(0, 0, 0, 0.03), 6px 6px 0 rgba(0, 0, 0, 0.02);
+    /* Optional: give a soft blur for realism */
+    filter: blur(0.2px);
+}
+.component-focus{
+    animation: pulse 1s;
+}
+.text_movilaization {
+  display: inline-block;
+  background-color: transparent;
+  color: #41357129;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-family: var(--nav-font-family);
+  animation: pulse 1s;
+  letter-spacing: 1px;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(0.1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 ul.optation-box{
     display: flex;
