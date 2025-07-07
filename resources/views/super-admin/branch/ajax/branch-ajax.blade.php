@@ -893,13 +893,14 @@
                             $("#loaderBox").addClass('display_none');
                             $("#ContentView").addClass('display_none');
 
-                            $('#savForm_error').html("");
-                            $('#success_message_show').html("");
-                            $('#success_message_show').addClass('alert_show ps-1 pe-1');
-                            $('#success_message_show').fadeIn();
-                            $('#success_message_show').text(response.messages);
+                            // $('#savForm_error').html("");
+                            // $('#success_message_show').html("");
+                            // $('#success_message_show').addClass('alert_show ps-1 pe-1');
+                            // $('#success_message_show').fadeIn();
+                            // $('#success_message_show').text(response.messages);
+                            // $('#success_message_show').fadeOut(3000);
                             setTimeout(() => {
-                                $('#success_message_show').fadeOut(3000);
+                                showSuccessToast(response.messages)
                             }, 3000);
                             
                             clearFields();
@@ -914,6 +915,13 @@
                 }
             })
         });
+
+        // Show Message Tostar
+        function showSuccessToast(messages) {
+            $('#toast-body-message').text(messages);
+            const toast = new bootstrap.Toast(document.getElementById('liveToast'));
+            toast.show();
+        }
 
         // Input Field Clear
         function clearFields(){

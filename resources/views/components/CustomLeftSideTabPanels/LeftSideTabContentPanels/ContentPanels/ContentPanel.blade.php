@@ -1,0 +1,1 @@
+<div class="{{ $className }}" id="{{ $homePanelId }}" role="{{ $homeRole }}" aria-labelledby="{{ $ariaLabel }}">{{ $slot }}</div>

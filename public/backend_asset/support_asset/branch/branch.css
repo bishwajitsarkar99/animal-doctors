@@ -489,11 +489,11 @@ ul.optation-box{
     justify-content: left;
     padding-left: 1px;
 }
-ul#SettingMode {
+ul.optation-padding {
     padding-left: 5px;
     padding-right: 10px;
 }
-ul#SettingMode>li {
+ul.optation-padding>li {
     list-style: none;
 }
 .form-check-input{

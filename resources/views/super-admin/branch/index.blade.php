@@ -50,6 +50,13 @@
     ['label'=>'Enable Delete Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm cgt_btn', 'enableBtnId'=>'enableDeleteBranch', 'enableCheck'=>'enableChecking', 'loader'=>'deleteEnableLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
     ['label'=>'Disabled Delete Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm cgt_btn', 'enableBtnId'=>'disabledDeleteBranch', 'enableCheck'=>'disabledChecking', 'loader'=>'deleteDisabledLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
   ];
+  // Radio Button Groups
+  // $radioButtonGroups = [
+  //   ['lable'=>'New Branch', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault1', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault1', 'checkedAttr'=>''],
+  //   ['lable'=>'Branch Update', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault2', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault2', 'checkedAttr'=>'checked'],
+  //   ['lable'=>'Branch Delete', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault3', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault3', 'checkedAttr'=>'checked'],
+  //   ['lable'=>'None', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault4', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault4', 'checkedAttr'=>'checked']
+  // ];
   // Table-Head-th
   $headThRows = [
     ['label'=>'SN.', 'className'=>'th-head skeleton', 'styleShow'=>'width:5%;text-align:center;'],
@@ -162,6 +169,7 @@
     </x-CustomTabPanels.TabPanelContents.TabContentPanel>
     <!-- =========== Tap Panel Branch Setting =========== -->
     <x-CustomTabPanels.TabPanelContents.TabContentPanel contentTabClass="setting-page-container" contentTabId="BranchSettingPage" :hiddenAttr="$hiddenAttr">
+      <!-- =========== Header =========== -->
       <x-CustomLeftSideTabPanels.LeftSideTabPanelTopBars.LeftSideTabPanelTopBar className="setting-top-area">
         <div class="logo_size">
           <img src="{{ asset('/image/setting-two.png') }}" alt="setting-logo">
@@ -172,6 +180,7 @@
       </x-CustomLeftSideTabPanels.LeftSideTabPanelTopBars.LeftSideTabPanelTopBar>
       <!-- =========== Left Side Tab Panel =========== -->
       <x-CustomLeftSideTabPanels.LeftSideTabPanel className="d-flex align-items-start">
+        <!-- =========== Navbar =========== -->
         <x-CustomLeftSideTabPanels.LeftSideTabPanelNavBars.LeftSideTabPanelNavBar className="nav flex-column nav-pills me-3" navBarId="v-pills-tab" navBarRole="tablist" ariaOrientation="vertical">
           @foreach($customLeftSideTabPanelGroupBtns as $data)
           <x-CustomLeftSideTabPanels.LeftSideTabPanelBtn 
@@ -187,51 +196,19 @@
           />
           @endforeach
         </x-CustomLeftSideTabPanels.LeftSideTabPanel>
-        <div class="tab-content" id="v-pills-tabContent">
-          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+        <!-- =========== Content =========== -->
+        <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.LeftSideTabContent className="tab-content" contentPanelId="v-pills-tabContent" >
+          <!-- Home -->
+          <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade show active" homePanelId="v-pills-home" homeRole="tabpanel" ariaLabel="v-pills-home-tab" >
             <div class="home-icon-box">
               <x-Tables.Icon.SettingIcon iconWidth="80" iconHeight="80" firstFill="#686868" secondFill="#DEDEDE" thirdFill="#C8C8C8" fourFill="#8F9094" />
             </div>
-          </div>
-          <div class="tab-pane fade" id="v-pills-branch" role="tabpanel" aria-labelledby="v-pills-branch-tab">
+          </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel>
+          <!-- Branch Setting -->
+          <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade" homePanelId="v-pills-branch" homeRole="tabpanel" ariaLabel="v-pills-branch-tab" >
             <div class="row">
               <div class="col-sm-3">
-                  <div class="card custom-card">
-                    <div class="card-header custom-header">
-                      <x-Tables.Icon.SettingIcon iconWidth="20" iconHeight="20" firstFill="#686868" secondFill="#4a92ff" thirdFill="#4a92ff" fourFill="#4a92ff" />
-                      Setting Operation
-                    </div>
-                    <div class="card-body">
-                      <ul class="optation-box">
-                        <ul id="SettingMode">
-                          <li>
-                            <label class="form-check-label custom-label" for="flexRadioDefault1">
-                              <input class="form-check-input input-triger" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                              New Branch
-                            </label>
-                          </li>
-                          <li>
-                            <label class="form-check-label custom-label" for="flexRadioDefault2">
-                              <input class="form-check-input input-triger" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                              Branch Update
-                            </label>
-                          </li>
-                          <li>
-                            <label class="form-check-label custom-label" for="flexRadioDefault3">
-                              <input class="form-check-input input-triger" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
-                              Branch Delete
-                            </label>
-                          </li>
-                          <li>
-                            <label class="form-check-label custom-label" for="flexRadioDefault4">
-                              <input class="form-check-input input-triger" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked>
-                              None
-                            </label>
-                          </li>
-                        </ul>
-                      </ul>
-                    </div>
-                  </div>
+                @include('super-admin.branch._branch-setting-card')
               </div>
               <div class="col-sm-5">
                 <div class="loader-position" id="boxLoading" hidden>
@@ -262,7 +239,6 @@
                       </div>
                     </div>
                     <div class="card form-control form-control-sm" id="setting_card" hidden>
-                      
                       <div id="formMessage" class="card-message-overlay display_none">
                         <div class="animate_box">
                           <img class="box-animation-size" src="{{ asset('/image/loader/load-30.gif') }}" alt="Loading...." />
@@ -461,14 +437,24 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="tab-pane fade" id="v-pills-category" role="tabpanel" aria-labelledby="v-pills-category-tab">...</div>
-          <div class="tab-pane fade" id="v-pills-search" role="tabpanel" aria-labelledby="v-pills-search-tab">...</div>
-          <div class="tab-pane fade" id="v-pills-replace" role="tabpanel" aria-labelledby="v-pills-replace-tab">...</div>
-          <div class="message-show">
+          </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel>
+          <!-- Category Setting -->
+          <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade" homePanelId="v-pills-category" homeRole="tabpanel" ariaLabel="v-pills-category-tab" >
+            ...
+          </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel>
+          <!-- Search Setting -->
+          <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade" homePanelId="v-pills-search" homeRole="tabpanel" ariaLabel="v-pills-search-tab" >
+            ...
+          </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel>
+          <!-- Branch Replace -->
+          <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade" homePanelId="v-pills-replace" homeRole="tabpanel" ariaLabel="v-pills-replace-tab" >
+            ...
+          </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel>
+          
+          <!-- <div class="message-show">
             <p class="ps-3 mt-1"><span id="success_message_show"></span></p>
-          </div>
-        </div>
+          </div> -->
+        </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.LeftSideTabContent>
       </x-CustomLeftSideTabPanels.LeftSideTabPanel>
     </x-CustomTabPanels.TabPanelContents.TabContentPanel>
   </div>
@@ -703,22 +689,8 @@
   </div>
   {{-- end branch type confirm delete modal --}}
 
-  <!-- Flexbox container for aligning the toasts -->
-  <!-- Then put toasts within -->
-  <!-- <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
-
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <img src="..." class="rounded me-2" alt="...">
-        <strong class="me-auto">Bootstrap</strong>
-        <small>11 mins ago</small>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        Hello, world! This is a toast message.
-      </div>
-    </div>
-  </div> -->
+  <!-- Tostar Message Show -->
+  <x-TostarMessage.Tostar messageId="toast-body-message" tostarId="liveToast" />
 @endsection
 
 @section('css')

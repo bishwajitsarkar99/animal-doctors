@@ -1,0 +1,1 @@
+<div class="{{ $cardHeaderClass }}">{{ $slot }}</div>
