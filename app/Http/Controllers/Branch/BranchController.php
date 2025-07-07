@@ -14,11 +14,6 @@ class BranchController extends Controller
     {
         return $this->branchServiceProvider = $branchServiceProvider;
     }
-    // Branch Create Page Url id generate
-    public function redirectWithRandom()
-    {
-        return $this->branchServiceProvider->redirectWithRandomId();
-    }
 
     // Branch Page View
     public function index(Request $request, $slug)

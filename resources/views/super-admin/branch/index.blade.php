@@ -50,64 +50,86 @@
     ['label'=>'Enable Delete Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm cgt_btn', 'enableBtnId'=>'enableDeleteBranch', 'enableCheck'=>'enableChecking', 'loader'=>'deleteEnableLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
     ['label'=>'Disabled Delete Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm cgt_btn', 'enableBtnId'=>'disabledDeleteBranch', 'enableCheck'=>'disabledChecking', 'loader'=>'deleteDisabledLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
   ];
+  // Table-Head-th
+  $headThRows = [
+    ['label'=>'SN.', 'className'=>'th-head skeleton', 'styleShow'=>'width:5%;text-align:center;'],
+    ['label'=>'Branch-Type', 'className'=>'th-head skeleton', 'styleShow'=>''],
+    ['label'=>'Branch-ID', 'className'=>'th-head skeleton', 'styleShow'=>''],
+    ['label'=>'Branch-Name', 'className'=>'th-head skeleton', 'styleShow'=>''],
+    ['label'=>'Division', 'className'=>'th-head skeleton', 'styleShow'=>''],
+    ['label'=>'District', 'className'=>'th-head skeleton', 'styleShow'=>''],
+    ['label'=>'Upazila', 'className'=>'th-head skeleton', 'styleShow'=>''],
+    ['label'=>'City', 'className'=>'th-head skeleton', 'styleShow'=>''],
+    ['label'=>'Location', 'className'=>'th-head skeleton', 'styleShow'=>''],
+  ];
+  $hiddenAttr = 'hidden';
+  // Custom Left Side Tab Panel Button
+  $customLeftSideTabPanelGroupBtns = [
+    ['labelName'=>'Home', 'btnClass'=>'btn btn-sm custom-tab-btn active','btnType'=>'button', 'btnId'=>'v-pills-home-tab', 'toggle'=>'pill', 'target'=>'#v-pills-home', 'btnRole'=>'tab', 'controls'=>'v-pills-home', 'selected'=>'true'],
+    ['labelName'=>'Branch', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-branch-tab', 'toggle'=>'pill', 'target'=>'#v-pills-branch', 'btnRole'=>'tab', 'controls'=>'v-pills-branch', 'selected'=>'true'],
+    ['labelName'=>'Category', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-category-tab', 'toggle'=>'pill', 'target'=>'#v-pills-category', 'btnRole'=>'tab', 'controls'=>'v-pills-category', 'selected'=>'false'],
+    ['labelName'=>'Search', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-search-tab', 'toggle'=>'pill', 'target'=>'#v-pills-search', 'btnRole'=>'tab', 'controls'=>'v-pills-search', 'selected'=>'false'],
+    ['labelName'=>'Replace', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-replace-tab', 'toggle'=>'pill', 'target'=>'#v-pills-replace', 'btnRole'=>'tab', 'controls'=>'v-pills-replace', 'selected'=>'false'],
+  ];
 ?>
 @extends('backend.layouts.dashboard')
 @section('content')
 @include('backend.layouts.dashboard-components._navbar')
   <div class="container">
-    <div class="form-top-heading" id="branchListPage" hidden>
-      <div class="row form-topbar">
-        <div class="col-xl-8 group-btn fist_btn">
-          <x-Buttons.FormMediumButton label="Branch List" buttonParentClass="btn btn-sm branch-tab-btn active-button" buttonChildClass="skeleton-button" buttonId="branchList" iconClass="icon" labelClass="btn-text" />
-          <x-Buttons.FormMediumButton label="Create Branch Category" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchTypeModalView" iconClass="icon" labelClass="btn-text" />
-          <x-Buttons.FormMediumButton label="Branch Setting" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchSettingPageView" iconClass="icon" labelClass="btn-text" />
-          <x-Buttons.CommonRefreshPageBtn label="Refresh" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchTypeRefresh" iconClass="type-icon" labelClass="type-btn-text" />
-        </div>
-        <div class="col-xl-4"></div>
+    <!-- =========== Tap Panel Top Bar =========== -->
+    <x-CustomTabPanels.TabPanelTopBars.TabPanelTopBar topBarClass="tab-panel" topBarRowClass="row tab-panel-topbar" topBarId="branchListPage" :hiddenAttr="$hiddenAttr">
+      <div class="col-xl-8 group-btn">
+        <x-Buttons.FormMediumButton label="Branch List" buttonParentClass="btn btn-sm branch-tab-btn active-button" buttonChildClass="skeleton-button" buttonId="branchList" iconClass="icon" labelClass="btn-text" />
+        <x-Buttons.FormMediumButton label="Create Branch Category" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchTypeModalView" iconClass="icon" labelClass="btn-text" />
+        <x-Buttons.FormMediumButton label="Branch Setting" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchSettingPageView" iconClass="icon" labelClass="btn-text" />
+        <x-Buttons.CommonRefreshPageBtn label="Refresh" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchTypeRefresh" iconClass="type-icon" labelClass="type-btn-text" />
       </div>
-    </div>
-    <div class="branch-list-tab-panel" id="branchListTab" hidden>
-      <div class="table-heading">
+      <div class="col-xl-4"></div>
+    </x-CustomTabPanels.TabPanelTopBars.TabPanelTopBar>
+    <!-- =========== Tap Content Panel Home Page =========== -->
+    <x-CustomTabPanels.TabPanelContents.TabContentPanel contentTabClass="tab-content-panel-bg" contentTabId="branchListTab" :hiddenAttr="$hiddenAttr">
+      <!-- =========== Home Tab Content Panel Header =========== -->
+      <x-CustomTabPanels.TabPanelContents.TabContentPanelHeader contentTabHeaderClass="table-heading">
         <span>
           <span class="skeleton">
-            <x-Tables.Icon.TableIcon iconWidth="26" iconHeight="24" fillColor="gray" />
+            <x-Tables.Icon.TableIcon iconWidth="26" iconHeight="24" fillColor="#413571a6" />
           </span>
         </span>
         <span class="skeleton"><strong>Branch List Table</strong></span>
-      </div>
-      <div class="branch-table-wrapper">
-        <x-Tables.ViewDataTables.ViewDataTable tableClass="branch-table branch-table-responsive" >
-          <x-Tables.ViewDataTables.DataTableHeads.DataTableHead className="table-head">
-            <tr class="table-head-row">
-              <th class="branch-th-head skeleton" style="width:5%;text-align:center;">SN.</th>
-              <th class="branch-th-head skeleton">Branch-Type</th>
-              <th class="branch-th-head skeleton">Branch-ID</th>
-              <th class="branch-th-head skeleton">Branch-Name</th>
-              <th class="branch-th-head skeleton">Division</th>
-              <th class="branch-th-head skeleton">District</th>
-              <th class="branch-th-head skeleton">Upazila</th>
-              <th class="branch-th-head skeleton">City</th>
-              <th class="branch-th-head skeleton">Loaction</th>
-            </tr>
-          </x-Tables.ViewDataTables.DataTableHeads.DataTableHead>
-          <tbody class="branch-table-body" id="BranchListTableBody">
-            <!-- Loader Overlay -->
-            <x-Tables.Icon.LoaderOverlay 
-              tableOverlayClass="table-loader-overlay display_none" 
-              loaderId="tableOverlayLoader" 
-              loaderClass="data-table-loader" 
-              loaderWidth="24" 
-              loaderHeight="24" 
-              loaderStroke="currentColor" 
-              loaderStrokeWidth="2" 
-              loaderText="Loading...." 
-              loaderTextClass="loader-text ms-1" 
-              loaderFill="none"
-            />
-          </tbody>
-        </x-Tables.ViewDataTables.ViewDataTable>
-        <!-- <table class="branch-table branch-table-responsive">
-        </table> -->
+      </x-CustomTabPanels.TabPanelContents.TabContentPanelHeader>
+      <!-- =========== Home Tab Content =========== -->
+      <x-Tables.ViewDataTables.DataTableWrappers.DataTableWrapper wrapperClass="table-wrapper">
+        <x-Tables.ViewDataTables.DataTableResponsives.DataTableResponsive tableResponsiveClass="table-responsive">
+          <!-- ========== Branch-List Table =============== table-striped-->
+          <x-Tables.ViewDataTables.ViewDataTable tableClass="table">
+            <x-Tables.ViewDataTables.DataTableHeads.DataTableHead className="table-head" >
+              <x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow rowClass="table-head-row">
+                @foreach($headThRows as $data)
+                  <x-Tables.ViewDataTables.DataTableHeads.DataTableHeadTh 
+                    thClassName="{{ $data['className'] }}" 
+                    thStyle="{{ $data['styleShow'] }}" 
+                    lableName="{{ $data['label'] }}"
+                  />
+                @endforeach
+              </x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow>
+            </x-Tables.ViewDataTables.DataTableHeads.DataTableHead>
+            <x-Tables.ViewDataTables.DataTableBody.TableBody bodyClassName="table-body table-light" tableId="BranchListTableBody">
+              <!-- Loader Overlay -->
+              <x-Tables.Icon.LoaderOverlay 
+                tableOverlayClass="table-loader-overlay display_none" 
+                loaderId="tableOverlayLoader" 
+                loaderClass="data-table-loader" 
+                loaderWidth="24" 
+                loaderHeight="24" 
+                loaderStroke="currentColor" 
+                loaderStrokeWidth="2" 
+                loaderText="Loading...." 
+                loaderTextClass="loader-text ms-1" 
+                loaderFill="none"
+              />
+            </x-Tables.ViewDataTables.DataTableBody.TableBody>
+          </x-Tables.ViewDataTables.ViewDataTable>
+        </x-Tables.ViewDataTables.DataTableResponsives.DataTableResponsive>
         <x-Tables.TableFooter footerClass="row table_last_row mb-1">
           <div class="col-1">
             <x-Tables.TableFooterSelectDropdown 
@@ -136,26 +158,35 @@
             />
           </div>
         </x-Tables.TableFooter>
-      </div>
-    </div>
-    <!-- =========== Branch Setting =========== -->
-    <div class="setting-page-container" id="BranchSettingPage" hidden>
-      <div class="setting-top-area">
+      </x-Tables.ViewDataTables.DataTableWrappers.DataTableWrapper>
+    </x-CustomTabPanels.TabPanelContents.TabContentPanel>
+    <!-- =========== Tap Panel Branch Setting =========== -->
+    <x-CustomTabPanels.TabPanelContents.TabContentPanel contentTabClass="setting-page-container" contentTabId="BranchSettingPage" :hiddenAttr="$hiddenAttr">
+      <x-CustomLeftSideTabPanels.LeftSideTabPanelTopBars.LeftSideTabPanelTopBar className="setting-top-area">
         <div class="logo_size">
           <img src="{{ asset('/image/setting-two.png') }}" alt="setting-logo">
         </div>
         <div class="head-word">
           <strong>Setting</strong>
         </div>
-      </div>
-      <div class="d-flex align-items-start">
-        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <button class="btn btn-sm setting-tab-btn active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</button>
-          <button class="btn btn-sm setting-tab-btn" id="v-pills-branch-tab" data-bs-toggle="pill" data-bs-target="#v-pills-branch" type="button" role="tab" aria-controls="v-pills-branch" aria-selected="true">Branch</button>
-          <button class="btn btn-sm setting-tab-btn" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Category</button>
-          <button class="btn btn-sm setting-tab-btn" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Search</button>
-          <button class="btn btn-sm setting-tab-btn" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Replace</button>
-        </div>
+      </x-CustomLeftSideTabPanels.LeftSideTabPanelTopBars.LeftSideTabPanelTopBar>
+      <!-- =========== Left Side Tab Panel =========== -->
+      <x-CustomLeftSideTabPanels.LeftSideTabPanel className="d-flex align-items-start">
+        <x-CustomLeftSideTabPanels.LeftSideTabPanelNavBars.LeftSideTabPanelNavBar className="nav flex-column nav-pills me-3" navBarId="v-pills-tab" navBarRole="tablist" ariaOrientation="vertical">
+          @foreach($customLeftSideTabPanelGroupBtns as $data)
+          <x-CustomLeftSideTabPanels.LeftSideTabPanelBtn 
+            labe="{{ $data['labelName'] }}" 
+            buttonType="{{ $data['btnType'] }}" 
+            className="{{ $data['btnClass'] }}" 
+            buttonID="{{ $data['btnId'] }}" 
+            dataBsToggle="{{ $data['toggle'] }}" 
+            dataBsTarget="{{ $data['target'] }}" 
+            buttonRole="{{ $data['btnRole'] }}" 
+            ariaControl="{{ $data['controls'] }}" 
+            ariaSelect="{{ $data['selected'] }}" 
+          />
+          @endforeach
+        </x-CustomLeftSideTabPanels.LeftSideTabPanel>
         <div class="tab-content" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
             <div class="home-icon-box">
@@ -431,15 +462,15 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-          <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-          <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+          <div class="tab-pane fade" id="v-pills-category" role="tabpanel" aria-labelledby="v-pills-category-tab">...</div>
+          <div class="tab-pane fade" id="v-pills-search" role="tabpanel" aria-labelledby="v-pills-search-tab">...</div>
+          <div class="tab-pane fade" id="v-pills-replace" role="tabpanel" aria-labelledby="v-pills-replace-tab">...</div>
           <div class="message-show">
             <p class="ps-3 mt-1"><span id="success_message_show"></span></p>
           </div>
         </div>
-      </div>
-    </div>
+      </x-CustomLeftSideTabPanels.LeftSideTabPanel>
+    </x-CustomTabPanels.TabPanelContents.TabContentPanel>
   </div>
   @include('loader.action-loader')
   
@@ -691,8 +722,9 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category-min.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/branch/branch.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/table/zebra-table/zebra-table-min.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 @endsection
@@ -740,7 +772,7 @@
       e.preventDefault();
       // Hide setting page with animation, then set hidden
       $("#BranchSettingPage").slideUp("slow", function () {
-          $(this).attr("hidden", true);
+        $(this).attr("hidden", true);
       });
       // Show branch list with animation and remove hidden before show
       $("#branchListTab").removeAttr("hidden").hide().slideDown("slow");
@@ -750,7 +782,7 @@
       e.preventDefault();
       // Hide branch list with animation, then set hidden
       $("#branchListTab").slideUp("slow", function () {
-          $(this).attr("hidden", true);
+        $(this).attr("hidden", true);
       });
       // Show setting page
       $("#BranchSettingPage").removeAttr("hidden").hide().slideDown("slow");

@@ -17,12 +17,6 @@ class UserLocationController extends Controller
         return $this->userActivityServiceProvider = $userActivityServiceProvider;
     }
 
-    // User Activity redirect for generate id
-    public function redirectWithRandom()
-    {
-        return $this->userActivityServiceProvider->redirectWithRandomId();
-    }
-
     // User Activity
     public function details(Request $request, $slug)
     {

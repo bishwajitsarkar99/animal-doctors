@@ -1,0 +1,1 @@
+<div class="{{ $className }}" id="{{ $navBarId }}" role="{{ $navBarRole }}" aria-orientation="{{ $ariaOrientation }}">{{ $slot }}</div>

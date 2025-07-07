@@ -30,26 +30,6 @@ use Illuminate\Support\Facades\Response;
 class UserActivityServiceProvider
 {
     // ========================= User Activity =================================
-    // =========================================================================
-    /**
-     * Handle Route ID Generate User Log Details.
-    */
-    public function redirectWithRandomId()
-    {
-        $idRange = 30; // Random 30-character string
-        $firstRanger = '~^&&>~^&&' ; // First Ranger
-        $lastRanger = '~$^&&<$^&' ; // First Ranger
-        $id = Str::random($idRange);
-        $slug = $firstRanger.$id.$lastRanger;
-        session([
-            'valid_user_log_random' => $slug,
-        ]);
-
-        return redirect()->route('user.details', [
-            'slug' => $slug,
-        ]);
-    }
-
     /**
      * Handle User Details Home Page View 
     */
@@ -209,7 +189,7 @@ class UserActivityServiceProvider
                 fn () => $this->storageAllocation($total_users),$total_users
             );
 
-            $storedRandom = session('valid_user_log_random');
+            $storedRandom = session('valid_branch_random');
             $page_name = 'User Log Activity';
             $user_activity_page_name = 'User Activity';
             $user_activity_graph_page_name = 'User Activity Graph';

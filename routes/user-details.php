@@ -9,7 +9,6 @@ use App\Http\Controllers\Location\UserLocationController;
 Route::group(['middleware' => 'auth'], function () {
     Route::middleware(['role:SuperAdmin|Admin|SubAdmin'])->group(function(){
         Route::prefix('application')->group(function () {
-            Route::get('/user-log/user-log-activity/log-dashboard', [UserLocationController::class, 'redirectWithRandom'])->name('user.redirect');
             Route::get('/user-log/user-log-activity-{slug}/log-dashboard', [UserLocationController::class, 'details'])->name('user.details');
             Route::get('/show-user-activity', [UserLocationController::class, 'activity'])->name('user.activity');
             Route::get('/get-user-activity', [UserLocationController::class, 'getActivity'])->name('user.get_activity');

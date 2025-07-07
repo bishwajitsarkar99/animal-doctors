@@ -1,0 +1,1 @@
+<div class="{{ $contentTabHeaderClass }}">{{ $slot }}</div>

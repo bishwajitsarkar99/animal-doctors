@@ -23,24 +23,6 @@ use Illuminate\Support\Facades\Session;
 class BranchServiceProvicer
 {
     // ========================= Company Branch ================================
-    // =========================================================================
-    /**
-     * Handle Route ID Generate create company branch.
-    */
-    public function redirectWithRandomId()
-    {
-        $idRange = 30; // Random 30-character string
-        $firstRanger = '~^&&>@^&&' ; // First Ranger
-        $lastRanger = '@$^&&<$^&' ; // First Ranger
-        $id = Str::random($idRange);
-        $slug = $firstRanger.$id.$lastRanger;
-        
-        session(['valid_branch_random' => $slug]);
-
-        return redirect()->route('branch.index', [
-            'slug' => $slug,
-        ]);
-    }
     /**
      * Handle view company branch.
     */

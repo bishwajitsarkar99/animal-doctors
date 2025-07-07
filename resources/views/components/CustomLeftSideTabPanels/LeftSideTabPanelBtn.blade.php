@@ -1,0 +1,1 @@
+<button class="{{ $className}}" id="{{ $buttonID }}" data-bs-toggle="{{ $dataBsToggle }}" data-bs-target="{{ $dataBsTarget }}" type="{{ $buttonType }}" role="{{ $buttonRole }}" aria-controls="{{ $ariaControl }}" aria-selected="{{ $ariaSelect }}">{{ $labe }}</button>

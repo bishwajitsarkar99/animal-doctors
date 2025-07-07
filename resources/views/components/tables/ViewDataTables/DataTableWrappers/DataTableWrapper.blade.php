@@ -1,0 +1,1 @@
+<div class="{{ $wrapperClass }}">{{ $slot }}</div>
