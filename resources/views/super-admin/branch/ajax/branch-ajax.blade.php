@@ -642,7 +642,7 @@
             }
         });
 
-        // =============== Setting Action Part
+        // =============== Setting Components Part ===============
         // next button action
         $(document).on('click', '#next', function () {
             $("#SelectBranchID").empty();
@@ -727,6 +727,38 @@
                 <option class="custom-optation" id="optation_id" value="${branchID}">${branchID}</option>
             `);
             showOverlayMessage('All fields completed!');
+        });
+        // Setting components Display
+        $(document).on('change', '#branch_type', function(){
+
+            // setting dispaly
+            let branchType = $(this).val();
+            let settingDisplay = $("#SettingDisplay");
+
+            // setting dispalay part
+            $("#displayLoading").removeAttr('hidden');
+            $("#displayLoader").removeAttr('hidden');
+            $("#settingDisplayCard").attr('hidden', true);
+
+            setTimeout(() => {
+                $("#displayLoader").attr('hidden', true);
+                $("#displayLoading").attr('hidden', true);
+                $("#settingDisplayCard").removeAttr('hidden'); 
+            }, 1000);
+
+            if(branchType !== ''){
+                settingDisplay.find('#clearBranchType').remove();
+                // Setting Display
+                settingDisplay.append(`
+                    <li id="clearBranchType">
+                        <label class="form-check-label line-label" for="branch-type">
+                            Branch-Type : ${branchType}
+                        </label>
+                    </li>
+                `);
+            }else if(branchType == ''){
+                settingDisplay.find('#clearBranchType').remove();
+            }
         });
         // setting message show
         function showOverlayMessage(message, duration = 2000) {
@@ -1018,9 +1050,15 @@
         // On keyup action for error remove
         $(document).on('keyup', '#branchName, #townName, #location', function(){
 
-            var field = $(this);
-            var fieldId = field.attr('id');
-            var value = field.val().trim();
+            let field = $(this);
+            let fieldId = field.attr('id');
+            let value = field.val().trim();
+
+            // setting dispaly
+            let branch_name = $("#branchName").val();
+            let city_name = $("#townName").val();
+            let location = $("#location").val();
+            let settingDisplay = $("#SettingDisplay");
 
             if (value !== '') {
                 if (fieldId === 'branchName' && field.hasClass('is-invalid')) {
@@ -1042,13 +1080,61 @@
                 }
             }
 
+            if(branch_name !== ''){
+                settingDisplay.find('#clearBranchName').remove();
+                // Setting Display
+                settingDisplay.append(`
+                    <li id="clearBranchName">
+                        <label class="form-check-label line-label" for="branch-type">
+                            Branch-Name : ${branch_name}
+                        </label>
+                    </li>
+                `);
+            }else if(branch_name == ''){
+                settingDisplay.find('#clearBranchName').remove();
+            }
+
+            if(city_name !== ''){
+                settingDisplay.find('#clearCityName').remove();
+                // Setting Display
+                settingDisplay.append(`
+                    <li id="clearCityName">
+                        <label class="form-check-label line-label" for="branch-type">
+                            City-Name : ${city_name}
+                        </label>
+                    </li>
+                `);
+            }else if(city_name == ''){
+                settingDisplay.find('#clearCityName').remove();
+            }
+
+            if(location !== ''){
+                settingDisplay.find('#clearLocation').remove();
+                // Setting Display
+                settingDisplay.append(`
+                    <li id="clearLocation">
+                        <label class="form-check-label line-label" for="branch-type">
+                            Location : ${location}
+                        </label>
+                    </li>
+                `);
+            }else if(location == ''){
+                settingDisplay.find('#clearLocation').remove();
+            }
+
         });
 
         // On Change action for error remove
         $(document).on('change', '#branch_type, #select_division, #select_district, #select_upazila', function () {
-            var field = $(this);
-            var fieldId = field.attr('id');
-            var value = field.val();
+            let field = $(this);
+            let fieldId = field.attr('id');
+            let value = field.val();
+
+            // setting dispaly
+            let division = $("#select_division").val();
+            let district = $("#select_district").val();
+            let upazila = $("#select_upazila").val();
+            let settingDisplay = $("#SettingDisplay");
 
             if (value !== '') {
                 if (fieldId === 'branch_type' && field.next('.select2-container').find('.select2-selection').hasClass('is-invalid')) {
@@ -1074,6 +1160,48 @@
                     field.next('.select2-container').find('.select2-selection').removeClass('is-invalid');
                     $(".edit_upazila_id").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
                 }
+            }
+
+            if(division !== ''){
+                settingDisplay.find('#clearDivision').remove();
+                // Setting Display
+                settingDisplay.append(`
+                    <li id="clearDivision">
+                        <label class="form-check-label line-label" for="branch-type">
+                            Division-Name : ${division}
+                        </label>
+                    </li>
+                `);
+            }else if(division == ''){
+                settingDisplay.find('#clearDivision').remove();
+            }
+
+            if(district !== ''){
+                settingDisplay.find('#clearDistrict').remove();
+                // Setting Display
+                settingDisplay.append(`
+                    <li id="clearDistrict">
+                        <label class="form-check-label line-label" for="branch-type">
+                            District-Name : ${district}
+                        </label>
+                    </li>
+                `);
+            }else if(district == ''){
+                settingDisplay.find('#clearDistrict').remove();
+            }
+
+            if(upazila !== ''){
+                settingDisplay.find('#clearUpazila').remove();
+                // Setting Display
+                settingDisplay.append(`
+                    <li id="clearUpazila">
+                        <label class="form-check-label line-label" for="branch-type">
+                            Upazila : ${upazila}
+                        </label>
+                    </li>
+                `);
+            }else if(upazila == ''){
+                settingDisplay.find('#clearUpazila').remove();
             }
         });
 

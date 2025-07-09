@@ -7,13 +7,13 @@
         ['lable'=>'None', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault4', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault4', 'checkedAttr'=>'checked']
     ];
 ?>
-<x-CustomCards.Card cardClass="card custom-card component-focus">
-    <x-CustomCards.CardHeaders.CardHeader cardHeaderClass="card-header custom-header">
+<x-CustomCards.Card cardClass="card custom-card component-focus" cardId="" hiddenAttr="">
+    <x-CustomCards.CardHeaders.CardHeader cardHeaderClass="card-header custom-header" cardHeaderId="" hiddenAttr="">
         <x-Tables.Icon.SettingIcon iconWidth="20" iconHeight="20" firstFill="#686868" secondFill="#4a92ff" thirdFill="#4a92ff" fourFill="#4a92ff" />
-            Setting Operation
-        </x-CustomCards.CardHeaders.CardHeader>
-        <x-CustomCards.CardBodies.CardBody cardBodyClass="card-body">
-        <x-UlListMenus.UlListMenu ulClassName="optation-box" ulPaddingClassName="" ulId="" >
+            Setting Options
+    </x-CustomCards.CardHeaders.CardHeader>
+    <x-CustomCards.CardBodies.CardBody cardBodyClass="card-body" cardBodyId="" hiddenAttr="">
+        <x-UlListMenus.UlListMenu ulClassName="optation-box" ulPaddingClassName="" ulId="">
             <x-UlListMenus.UlListMenu ulClassName="" ulPaddingClassName="optation-padding" ulId="SettingMode" >
                 @foreach($radioButtonGroups as $data)
                     <li>

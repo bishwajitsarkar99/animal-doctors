@@ -1,1 +1,6 @@
-<div class="{{ $cardHeaderClass }}">{{ $slot }}</div>
+@props([
+    'cardHeaderClass',
+    'cardHeaderId',
+    'hiddenAttr'=>'',
+])
+<div class="{{ $cardHeaderClass }}" id="{{ $cardHeaderId }}" {{$hiddenAttr}}>{{ $slot }}</div>

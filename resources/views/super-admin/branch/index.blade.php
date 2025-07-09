@@ -30,7 +30,7 @@
       <div class="col-xl-8 group-btn">
         <x-Buttons.FormMediumButton label="Branch List" buttonParentClass="btn btn-sm branch-tab-btn active-button" buttonChildClass="skeleton-button" buttonId="branchList" iconClass="icon" labelClass="btn-text" />
         <x-Buttons.FormMediumButton label="Create Branch Category" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchTypeModalView" iconClass="icon" labelClass="btn-text" />
-        <x-Buttons.FormMediumButton label="Branch Setting" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchSettingPageView" iconClass="icon" labelClass="btn-text" />
+        <x-Buttons.FormMediumButton label="Branch Settings" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchSettingPageView" iconClass="icon" labelClass="btn-text" />
         <x-Buttons.CommonRefreshPageBtn label="Refresh" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchTypeRefresh" iconClass="type-icon" labelClass="type-btn-text" />
       </div>
       <div class="col-xl-4"></div>
@@ -117,12 +117,12 @@
           <img src="{{ asset('/image/setting-two.png') }}" alt="setting-logo">
         </div>
         <div class="head-word">
-          <strong>Setting</strong>
+          <strong>Settings</strong>
         </div>
       </x-CustomLeftSideTabPanels.LeftSideTabPanelTopBars.LeftSideTabPanelTopBar>
       <!-- =========== Left Side Tab Panel =========== -->
       <x-CustomLeftSideTabPanels.LeftSideTabPanel className="d-flex align-items-start">
-        <!-- =========== Navbar =========== -->
+        <!------------- Navbar ------------->
         <x-CustomLeftSideTabPanels.LeftSideTabPanelNavBars.LeftSideTabPanelNavBar className="nav flex-column nav-pills component-focus me-3" navBarId="v-pills-tab" navBarRole="tablist" ariaOrientation="vertical">
           @foreach($customLeftSideTabPanelGroupBtns as $data)
           <x-CustomLeftSideTabPanels.LeftSideTabPanelBtn 
@@ -138,7 +138,7 @@
           />
           @endforeach
         </x-CustomLeftSideTabPanels.LeftSideTabPanel>
-        <!-- =========== Content =========== -->
+        <!------------ Content ------------->
         <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.LeftSideTabContent className="tab-content" contentPanelId="v-pills-tabContent" >
           <!-- Home -->
           <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade show active" homePanelId="v-pills-home" homeRole="tabpanel" ariaLabel="v-pills-home-tab" >

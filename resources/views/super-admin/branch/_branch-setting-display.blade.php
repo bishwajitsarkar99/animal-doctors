@@ -2,51 +2,17 @@
     <div class="spinner-border text-success spinner-width" role="status" id="displayLoader" hidden>
         <span class="visually-hidden"></span>
     </div>
-    </div>
-<div class="card custom-card component-focus" id="settingDisplayCard">
-    <div class="card-header custom-header">
-        <x-Tables.Icon.SettingIcon iconWidth="20" iconHeight="20" firstFill="#686868" secondFill="#4a92ff" thirdFill="#4a92ff" fourFill="#4a92ff" />
-        Display
-    </div>
-    <div class="card-body">
-        <ul class="optation-box">
-            <ul id="SettingMode">
-                <li>
-                <label class="form-check-label line-label" for="branch-type">
-                    Branch-Type : dfdsf
-                </label>
-                </li>
-                <li>
-                <label class="form-check-label line-label" for="branch-id">
-                    Branch-ID :
-                </label>
-                </li>
-                <li>
-                <label class="form-check-label line-label" for="branch-name">
-                    Branch-Name :
-                </label>
-                </li>
-                <li>
-                <label class="form-check-label line-label" for="division">
-                    Division :
-                </label>
-                </li>
-                <li>
-                <label class="form-check-label line-label" for="district">
-                    District :
-                </label>
-                </li>
-                <li>
-                <label class="form-check-label line-label" for="upazila">
-                    Upazila :
-                </label>
-                </li>
-                <li>
-                <label class="form-check-label line-label" for="location">
-                    Location :
-                </label>
-                </li>
-            </ul>
-        </ul>
-    </div>
 </div>
+<x-CustomCards.Card cardClass="card custom-card component-focus" cardId="settingDisplayCard" hiddenAttr="hidden">
+    <x-CustomCards.CardHeaders.CardHeader cardHeaderClass="card-header custom-header" cardHeaderId="" hiddenAttr="">
+        <x-Tables.Icon.SettingIcon iconWidth="20" iconHeight="20" firstFill="#686868" secondFill="#4a92ff" thirdFill="#4a92ff" fourFill="#4a92ff" />
+        Display Settings Components
+    </x-CustomCards.CardHeaders.CardHeader>
+    <x-CustomCards.CardBodies.CardBody cardBodyClass="card-body" cardBodyId="" hiddenAttr="">
+        <x-UlListMenus.UlListMenu ulClassName="optation-box" ulPaddingClassName="" ulId="">
+            <x-UlListMenus.UlListMenu ulClassName="setting-display" ulPaddingClassName="optation-padding" ulId="SettingDisplay" >
+                <!-- Show Setting Component Display -->
+            </x-UlListMenus.UlListMenu>
+        </x-UlListMenus.UlListMenu>
+    </x-CustomCards.CardBodies.CardBody>
+</x-CustomCards.Card>

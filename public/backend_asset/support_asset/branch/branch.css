@@ -26,6 +26,12 @@
 .fist_btn{
     display: flex;
 }
+ul.setting-display {
+    vertical-align: middle;
+    line-height: 1.2;
+    list-style: none;
+    word-wrap: break-word;
+}
 .select2-container .select2-selection--single {
     box-sizing: border-box;
     cursor: pointer;
