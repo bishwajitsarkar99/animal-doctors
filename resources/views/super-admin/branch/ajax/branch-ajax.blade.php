@@ -141,19 +141,6 @@
             if(select !== ''){
                 // Search ID
                 var id = select;
-                $("#save").hide();
-                $("#save").fadeOut();
-                $("#cancel_btn").hide();
-                $("#cancel_btn").fadeOut();
-            }else if(select == ''){
-                $("#save").show();
-                $("#save").fadeIn();
-                $("#update_btn").attr('hidden', true);
-                $("#update_btn").fadeOut();
-                $("#deleteBranch").attr('hidden', true);
-                $("#deleteBranch").fadeOut();
-                $("#cancel_btn").show();
-                $("#cancel_btn").fadeIn();
             }
 
             if(select == ''){
@@ -185,10 +172,13 @@
                             $("#processModal_body").removeClass('loading_body_area');
                             $('#documents').removeAttr('hidden');
                             $('.edit_branch_id').removeAttr('hidden');
-                            $("#update_btn").removeAttr('hidden');
-                            $("#update_btn").fadeIn();
-                            $("#deleteBranch").removeAttr('hidden');
-                            $("#deleteBranch").fadeIn();
+
+                            // open filed box
+                            document.querySelectorAll('.open_field').forEach(el => {
+                                el.classList.remove('display_none');
+                            });
+                            
+
                             const messages = response.messages;
                             
                             if(messages.created_by !== ''){
@@ -272,49 +262,6 @@
                                 $("#secondContent").attr('hidden', true);
                                 $('#secondHead').attr('hidden', true);
                             }
-                            // if(messages.approver_by !== null){
-                            //     $("#thirdContent").removeAttr('hidden');
-                            //     $('#thirdHead').removeAttr('hidden');
-                            //     const secondUserImage = messages.approver_users.image.includes('https://') ? messages.approver_users.image : `${window.location.origin}/image/${messages.approver_users.image}`;
-                            //     let approverByRole;
-                            //     switch (messages.approver_by) {
-                            //         case 1:
-                            //             approverByRole = 'SuperAdmin';
-                            //             break;
-                            //         case 2:
-                            //             approverByRole = 'Sub-Admin';
-                            //             break;
-                            //         case 3:
-                            //             approverByRole = 'Admin';
-                            //             break;
-                            //         case 0:
-                            //             approverByRole = 'User';
-                            //             break;
-                            //         case 5:
-                            //             approverByRole = 'Accounts';
-                            //             break;
-                            //         case 6:
-                            //             approverByRole = 'Marketing';
-                            //             break;
-                            //         case 7:
-                            //             approverByRole = 'Delivery Team';
-                            //             break;
-                            //         default:
-                            //             approverByRole = 'Unknown';
-                            //     }
-                            //     $("#thirdUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
-    
-                            //     $("#thirdUserEmail").val(messages.approver_users.email);
-                            //     $("#thirdApprover").val(approverByRole);
-                            //     if(messages.approver_date !== null){
-                            //         $("#thirdUpdateAt").val(currentDate(messages.approver_date));
-                            //     }else if(messages.approver_date == null){
-                            //         $("#thirdUpdateAt").val('-');
-                            //     }
-                            // }else{
-                            //     $("#thirdContent").attr('hidden', true);
-                            //     $('#thirdHead').attr('hidden', true);
-                            // }
     
                             $('#branches_id').val(id);
                             $('#edit_branch_id').val(response.messages.branch_id);
@@ -345,6 +292,56 @@
                             deleteBranchHeading.append(`<span class="">${response.messages.branch_name}</span>`);
                             deleteBranchBody.append(`<span class="">${response.messages.branch_name}</span>`);
                             deleteBranchConfirm.append(`<span class="">${response.messages.branch_id}</span>`);
+
+                            // setting component display
+                            $("#settingDisplayCard").removeAttr('hidden');
+                            const settingDisplay = $("#SettingDisplay"); 
+                            const division = $("#select2-select_division-container").attr('title');
+                            const district = $("#select2-select_district-container").attr('title');
+                            const upazila = $("#select2-select_upazila-container").attr('title');
+
+                            settingDisplay.append(`
+                                <li id="clearBranchType">
+                                    <label class="form-check-label line-label" for="branch-type">
+                                        Branch-Type : ${response.messages.branch_type}
+                                    </label>
+                                </li>
+                                <li id="clearBranchID">
+                                    <label class="form-check-label line-label" for="branch-id">
+                                        Branch-ID : ${response.messages.branch_id}
+                                    </label>
+                                </li>
+                                <li id="clearBranchName">
+                                    <label class="form-check-label line-label" for="branch-name">
+                                        Branch-Name : ${response.messages.branch_name}
+                                    </label>
+                                </li>
+                                <li id="clearDivision">
+                                    <label class="form-check-label line-label" for="division">
+                                        Division : ${division}
+                                    </label>
+                                </li>
+                                <li id="clearDistrict">
+                                    <label class="form-check-label line-label" for="district">
+                                        District : ${district}
+                                    </label>
+                                </li>
+                                <li id="clearUpazila">
+                                    <label class="form-check-label line-label" for="upazila">
+                                        Upazila/Thana : ${upazila}
+                                    </label>
+                                </li>
+                                <li id="clearCity">
+                                    <label class="form-check-label line-label" for="city">
+                                        City/Town : ${response.messages.town_name}
+                                    </label>
+                                </li>
+                                <li id="clearLocation">
+                                    <label class="form-check-label line-label" for="location">
+                                        Location : ${response.messages.location}
+                                    </label>
+                                </li>
+                            `);
 
                         }, 1500);
                         
@@ -567,6 +564,10 @@
                     $("#boxLoading").attr('hidden', true);
                     $("#loaderSpin").attr('hidden', true);
                     $("#loaderSpinner").attr('hidden', true);
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                    $("#documents").attr('hidden', true);
                 }, 1000);
             }else if($(this).attr('id') === 'flexRadioDefault2'){
                 setTimeout(() => {
@@ -575,6 +576,10 @@
                     $("#boxLoading").attr('hidden', true);
                     $("#loaderSpin").attr('hidden', true);
                     $("#loaderSpinner").attr('hidden', true);
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                    $("#documents").attr('hidden', true);
                 }, 1000);
             }else if($(this).attr('id') === 'flexRadioDefault3'){
                 setTimeout(() => {
@@ -583,6 +588,10 @@
                     $("#boxLoading").attr('hidden', true);
                     $("#loaderSpin").attr('hidden', true);
                     $("#loaderSpinner").attr('hidden', true);
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                    $("#documents").attr('hidden', true);
                 }, 1000);
             }else if($(this).attr('id') === 'flexRadioDefault4'){
                 $("#settingImplementCard").attr('hidden', true);
@@ -598,6 +607,10 @@
                 $(".disabledChecking").attr('hidden', true);
                 $(".enableChecking").attr('hidden', true);
                 $("#setting_card").attr('hidden', true);
+                // Display Component Settings Empty
+                $("#SettingDisplay").empty();
+                $("#settingDisplayCard").attr('hidden', true);
+                $("#documents").attr('hidden', true);
             }
         });
         // setting action enable button
@@ -622,6 +635,17 @@
                     $("#disabledNewBranch").removeAttr('hidden');
                     $(".enableChecking").removeAttr('hidden');
                     $("#setting_card").removeAttr('hidden');
+                    $(".branch_select").addClass('display_none');
+                    $(".branch_type").removeClass('display_none');
+                    // button show
+                    $("#save").hide();
+                    $("#cancel_btn").show();
+                    $("#next").show();
+                    $("#deleteBranch").hide();
+                    $("#update_btn").hide();
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
                 }, 1000);
             }else if($(this).attr('id') === 'enableUpdateBranch'){
                 setTimeout(() => {
@@ -630,6 +654,17 @@
                     $("#disabledUpdatedBranch").removeAttr('hidden');
                     $(".enableChecking").removeAttr('hidden');
                     $("#setting_card").removeAttr('hidden');
+                    $(".branch_select").removeClass('display_none');
+                    $(".branch_type").addClass('display_none');
+                    // button show
+                    $("#save").hide();
+                    $("#deleteBranch").hide();
+                    $("#next").hide();
+                    $("#cancel_btn").show();
+                    $("#update_btn").show();
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
                 }, 1000);
             }else if($(this).attr('id') === 'enableDeleteBranch'){
                 setTimeout(() => {
@@ -638,6 +673,17 @@
                     $("#disabledDeleteBranch").removeAttr('hidden');
                     $(".enableChecking").removeAttr('hidden');
                     $("#setting_card").removeAttr('hidden');
+                    $(".branch_select").removeClass('display_none');
+                    $(".branch_type").addClass('display_none');
+                    // button show
+                    $("#save").hide();
+                    $("#update_btn").hide();
+                    $("#next").hide();
+                    $("#cancel_btn").show();
+                    $("#deleteBranch").show();
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
                 }, 1000);
             }
         });
@@ -728,6 +774,25 @@
             `);
             showOverlayMessage('All fields completed!');
         });
+        // Select ID Button form Compnent Setting 
+        $(document).on('click', '#optation_id', function(){
+            const idValue = $(this).val();
+            const settingDisplay = $("#SettingDisplay");
+            // Clear Branch ID
+            settingDisplay.find('#clearBranchID').remove();
+            if(idValue !== ''){
+                $("#save").removeAttr('disabled');
+                $(this).addClass('active-height-light');
+                // display component setting
+                settingDisplay.append(`
+                    <li id="clearBranchID">
+                        <label class="form-check-label line-label" for="branch-type">
+                            Branch-ID : ${idValue}
+                        </label>
+                    </li>
+                `);
+            }
+        });
         // Setting components Display
         $(document).on('change', '#branch_type', function(){
 
@@ -757,6 +822,7 @@
                     </li>
                 `);
             }else if(branchType == ''){
+                // Display Component Settings Empty
                 settingDisplay.find('#clearBranchType').remove();
             }
         });
@@ -786,14 +852,6 @@
                 });
             }, duration);
         }
-        // Select ID Button form Setting Box
-        $(document).on('click', '#optation_id', function(){
-            const idValue = $(this).val();
-            if(idValue !== ''){
-                $("#save").removeAttr('disabled');
-                $(this).addClass('active-height-light');
-            }
-        });
         // peritem change
         $("#perItemControl").on('change', (e) => {
             const {
@@ -920,6 +978,15 @@
                     }else{
                         $("#loaderBox").removeClass('display_none');
                         $("#ContentView").removeClass('display_none');
+                        // Display Component Settings Empty
+                        $("#settingDisplayCard").attr('hidden', true);
+                        let settingDisplay = $("#SettingDisplay");
+                        settingDisplay.find('#clearBranchID').remove();
+                        settingDisplay.find('#clearBranchName').remove();
+                        settingDisplay.find('#clearCityName').remove();
+                        settingDisplay.find('#clearLocation').remove();
+                        settingDisplay.find('#clearDistrict').remove();
+                        settingDisplay.find('#clearUpazila').remove();
 
                         setTimeout(() => {
                             $("#loaderBox").addClass('display_none');
@@ -1045,6 +1112,16 @@
             $("#dropdwonUpazilaNameGroup").slideUp("slow", function () {
                 $(this).addClass('display_none');
             });
+
+            // Display Component Settings Empty
+            let settingDisplay = $("#SettingDisplay");
+            settingDisplay.find('#clearBranchID').remove();
+            settingDisplay.find('#clearBranchName').remove();
+            settingDisplay.find('#clearCityName').remove();
+            settingDisplay.find('#clearLocation').remove();
+            settingDisplay.find('#clearDistrict').remove();
+            settingDisplay.find('#clearUpazila').remove();
+            $("#documents").attr('hidden', true);
         });
 
         // On keyup action for error remove
@@ -1054,7 +1131,7 @@
             let fieldId = field.attr('id');
             let value = field.val().trim();
 
-            // setting dispaly
+            // setting dispaly component
             let branch_name = $("#branchName").val();
             let city_name = $("#townName").val();
             let location = $("#location").val();
@@ -1130,12 +1207,6 @@
             let fieldId = field.attr('id');
             let value = field.val();
 
-            // setting dispaly
-            let division = $("#select_division").val();
-            let district = $("#select_district").val();
-            let upazila = $("#select_upazila").val();
-            let settingDisplay = $("#SettingDisplay");
-
             if (value !== '') {
                 if (fieldId === 'branch_type' && field.next('.select2-container').find('.select2-selection').hasClass('is-invalid')) {
                     $("#savForm_error2, #updateForm_error2").fadeOut().addClass('display-none');
@@ -1161,50 +1232,109 @@
                     $(".edit_upazila_id").next('.select2-container').find('.select2-selection').removeClass('is-invalid');
                 }
             }
+        });
+        // setting dispaly component division
+        $(document).on('change', '#select_division', function () {
+            let division = $("#select2-select_division-container").attr('title');
+            let settingDisplay = $("#SettingDisplay");
 
-            if(division !== ''){
-                settingDisplay.find('#clearDivision').remove();
-                // Setting Display
+            // Clear old data
+            settingDisplay.find('#clearDivision').remove();
+            settingDisplay.find('#clearDistrict').remove();
+            settingDisplay.find('#clearUpazila').remove();
+
+            // Show Division
+            settingDisplay.append(`
+                <li id="clearDivision">
+                    <label class="form-check-label line-label" for="branch-type">
+                        Division-Name : ${division && division !== 'Select Division' ? division : '<span style="color:red">Required</span>'}
+                    </label>
+                </li>
+            `);
+
+            // Show District (required by default after division)
+            settingDisplay.append(`
+                <li id="clearDistrict">
+                    <label class="form-check-label line-label" for="branch-type">
+                        District-Name : <span style="color:red">Required</span>
+                    </label>
+                </li>
+            `);
+        });
+        // setting dispaly component district
+        $(document).on('change', '#select_district', function () {
+            let district = $("#select2-select_district-container").attr('title');
+            let division = $("#select2-select_division-container").attr('title');
+            let settingDisplay = $("#SettingDisplay");
+
+            // Clear District & Upazila
+            settingDisplay.find('#clearDistrict').remove();
+            settingDisplay.find('#clearUpazila').remove();
+
+            // Re-show Division if needed (optional, but good UX)
+            if (!settingDisplay.find('#clearDivision').length) {
                 settingDisplay.append(`
                     <li id="clearDivision">
                         <label class="form-check-label line-label" for="branch-type">
-                            Division-Name : ${division}
+                            Division-Name : ${division && division !== 'Select Division' ? division : '<span style="color:red">Required</span>'}
                         </label>
                     </li>
                 `);
-            }else if(division == ''){
-                settingDisplay.find('#clearDivision').remove();
             }
 
-            if(district !== ''){
-                settingDisplay.find('#clearDistrict').remove();
-                // Setting Display
-                settingDisplay.append(`
-                    <li id="clearDistrict">
-                        <label class="form-check-label line-label" for="branch-type">
-                            District-Name : ${district}
-                        </label>
-                    </li>
-                `);
-            }else if(district == ''){
-                settingDisplay.find('#clearDistrict').remove();
-            }
+            // Show District
+            settingDisplay.append(`
+                <li id="clearDistrict">
+                    <label class="form-check-label line-label" for="branch-type">
+                        District-Name : ${district && district !== 'Select District' ? district : '<span style="color:red">Required</span>'}
+                    </label>
+                </li>
+            `);
 
-            if(upazila !== ''){
-                settingDisplay.find('#clearUpazila').remove();
-                // Setting Display
-                settingDisplay.append(`
-                    <li id="clearUpazila">
-                        <label class="form-check-label line-label" for="branch-type">
-                            Upazila : ${upazila}
-                        </label>
-                    </li>
-                `);
-            }else if(upazila == ''){
-                settingDisplay.find('#clearUpazila').remove();
-            }
+            // Show Upazila (required placeholder)
+            settingDisplay.append(`
+                <li id="clearUpazila">
+                    <label class="form-check-label line-label" for="branch-type">
+                        Upazila : <span style="color:red">Required</span>
+                    </label>
+                </li>
+            `);
         });
+        // setting dispaly component upazila
+        $(document).on('change', '#select_upazila', function () {
+            let division = $("#select2-select_division-container").attr('title');
+            let district = $("#select2-select_district-container").attr('title');
+            let upazila = $("#select2-select_upazila-container").attr('title');
+            let settingDisplay = $("#SettingDisplay");
 
+            // Clear all
+            settingDisplay.find('#clearDivision').remove();
+            settingDisplay.find('#clearDistrict').remove();
+            settingDisplay.find('#clearUpazila').remove();
+
+            // Show all with actual values
+            settingDisplay.append(`
+                <li id="clearDivision">
+                    <label class="form-check-label line-label" for="branch-type">
+                        Division-Name : ${division && division !== 'Select Division' ? division : '<span style="color:red">Required</span>'}
+                    </label>
+                </li>
+            `);
+            settingDisplay.append(`
+                <li id="clearDistrict">
+                    <label class="form-check-label line-label" for="branch-type">
+                        District-Name : ${district && district !== 'Select District' ? district : '<span style="color:red">Required</span>'}
+                    </label>
+                </li>
+            `);
+            settingDisplay.append(`
+                <li id="clearUpazila">
+                    <label class="form-check-label line-label" for="branch-type">
+                        Upazila : ${upazila && upazila !== 'Select Upazila' ? upazila : '<span style="color:red">Required</span>'}
+                    </label>
+                </li>
+            `);
+        });
         // Branch Update Modal Show
         $(document).on('click', '#update_btn', function(e){
             e.preventDefault();
@@ -1314,16 +1444,29 @@
                             $("#pageLoader").attr('hidden', true);
                             $("#access_modal_box").removeClass('loader_area');
                             $("#processModal_body").addClass('loading_body_area');
-                            
-                            $('#updateForm_error').html("");
-                            $('#success_message').html("");
-                            $('#success_message').addClass('alert_show ps-1 pe-1');
-                            $('#success_message').fadeIn();
-                            $('#success_message').text(response.messages);
+
+                            // clear fields
+                            //clearFields();
+                            // Setting Branch
+                            // close filed box
+                            document.querySelectorAll('.open_field').forEach(el => {
+                                el.classList.add('display_none');
+                            });
+                            $("#documents").attr('hidden', true);
+                            // Display Branch Settings Empty
+                            let settingDisplay = $("#SettingDisplay");
+                            settingDisplay.find('#clearBranchType').remove();
+                            settingDisplay.find('#clearBranchID').remove();
+                            settingDisplay.find('#clearBranchName').remove();
+                            settingDisplay.find('#clearDivision').remove();
+                            settingDisplay.find('#clearDistrict').remove();
+                            settingDisplay.find('#clearUpazila').remove();
+                            settingDisplay.find('#clearCity').remove();
+                            settingDisplay.find('#clearLocation').remove();
                             
                             setTimeout(() => {
-                                $('#success_message').fadeOut(3000);
-                            }, 3000);
+                                showSuccessToast(response.messages)
+                            }, 1000);
                             searchBranch();
                         }, 1500);
                     }

@@ -261,7 +261,7 @@ class BranchServiceProvicer
             $branch->save();
             return response()->json([
                 'status' => 200,
-                'messages' => 'New branch has been added successfully.'
+                'messages' => 'New branch has added successfully.'
             ]);
         }
     }
@@ -377,7 +377,7 @@ class BranchServiceProvicer
                 $branch->save();
                 return response()->json([
                     'status' => 200,
-                    'messages' => 'Branch name has updated successfully.'
+                    'messages' => 'Branch has updated successfully.'
                 ]);
             }else{
                 return response()->json([

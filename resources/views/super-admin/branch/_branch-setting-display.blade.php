@@ -6,7 +6,7 @@
 <x-CustomCards.Card cardClass="card custom-card component-focus" cardId="settingDisplayCard" hiddenAttr="hidden">
     <x-CustomCards.CardHeaders.CardHeader cardHeaderClass="card-header custom-header" cardHeaderId="" hiddenAttr="">
         <x-Tables.Icon.SettingIcon iconWidth="20" iconHeight="20" firstFill="#686868" secondFill="#4a92ff" thirdFill="#4a92ff" fourFill="#4a92ff" />
-        Display Settings Components
+        Display Branch Settings
     </x-CustomCards.CardHeaders.CardHeader>
     <x-CustomCards.CardBodies.CardBody cardBodyClass="card-body" cardBodyId="" hiddenAttr="">
         <x-UlListMenus.UlListMenu ulClassName="optation-box" ulPaddingClassName="" ulId="">
