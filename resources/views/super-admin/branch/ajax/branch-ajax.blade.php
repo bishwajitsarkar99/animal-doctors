@@ -1012,12 +1012,6 @@
                             $("#loaderBox").addClass('display_none');
                             $("#ContentView").addClass('display_none');
 
-                            // $('#savForm_error').html("");
-                            // $('#success_message_show').html("");
-                            // $('#success_message_show').addClass('alert_show ps-1 pe-1');
-                            // $('#success_message_show').fadeIn();
-                            // $('#success_message_show').text(response.messages);
-                            // $('#success_message_show').fadeOut(3000);
                             setTimeout(() => {
                                 showSuccessToast(response.messages)
                             }, 3000);
@@ -1464,12 +1458,10 @@
                         });
                     }else{
                         $("#updateconfirmbranch").modal('hide');
-                        $("#processModal_body").removeClass('loading_body_area');
+                        $("#loaderBox").removeClass('display_none');
 
                         setTimeout(() => {
-                            $("#pageLoader").attr('hidden', true);
-                            $("#processModal_body").addClass('loading_body_area');
-
+                            $("#loaderBox").addClass('display_none');
                             // clear fields
                             removeField();
                             $("#inputBranchNameGroup").slideUp("slow", function () {
@@ -1554,7 +1546,7 @@
                 // Remove skeleton classes
                 removeAttributeOrClass([
                     { selector: '.confirm_title, .head_btn2, #delete_text_message', type: 'class', name: 'branch-skeleton' },
-                    { selector: '.delete_branch, #cate_delete3', type: 'class', name: 'branch-skeleton' },
+                    { selector: '.delete_branch, #cancel_delete', type: 'class', name: 'branch-skeleton' },
                 ]);
             }, 1000);
 
@@ -1566,7 +1558,7 @@
         });
 
         // Back delete modal
-        $(document).on('click', '#cate_delete3, .delete_confrm_canl', function(e){
+        $(document).on('click', '#cancel_delete, .delete_confrm_canl', function(e){
             e.preventDefault();
             $("#deletebranch").modal('show');
             $("#deleteconfirmbranch").modal('hide');
