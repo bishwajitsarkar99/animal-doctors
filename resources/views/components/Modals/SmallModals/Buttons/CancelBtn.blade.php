@@ -1,0 +1,1 @@
+<button type="button" class="{{ $className }}" id="{{ $btnId }}" data-bs-dismiss="modal">{{ $lableName }}</button>

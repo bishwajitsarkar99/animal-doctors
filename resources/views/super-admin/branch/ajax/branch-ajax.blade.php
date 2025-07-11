@@ -19,7 +19,7 @@
         // Initialize the button loader for the login button
         buttonLoader('#save', '.add-icon', '.add-btn-text', 'Add...', 'Add', 1000);
         buttonLoader('#update_btn', '.update-icon', '.update-btn-text', 'Update...', 'Update', 1000);
-        buttonLoader('#update_btn_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm...', 'Confirm', 1000);
+        buttonLoader('#update_confirm', '.confirm-icon', '.confirm-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#access_btn', '.access-icon', '.access-btn-text', 'Access...', 'Access', 1000);
         buttonLoader('#access_btn_confirm', '.access-confirm-icon', '.access-confirm-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
@@ -174,8 +174,28 @@
                             $('.edit_branch_id').removeAttr('hidden');
 
                             // open filed box
-                            document.querySelectorAll('.open_field').forEach(el => {
-                                el.classList.remove('display_none');
+                            $("#inputBranchNameGroup").slideDown("slow", function () {
+                                $(this).removeClass('display_none');
+                            });
+
+                            $("#inputCityNameGroup").slideDown("slow", function () {
+                                $(this).removeClass('display_none');
+                            });
+
+                            $("#inputLocatioinNameGroup").slideDown("slow", function () {
+                                $(this).removeClass('display_none');
+                            });
+
+                            $("#dropdwonDivisionNameGroup").slideDown("slow", function () {
+                                $(this).removeClass('display_none');
+                            });
+
+                            $("#dropdwonDistrictNameGroup").slideDown("slow", function () {
+                                $(this).removeClass('display_none');
+                            });
+
+                            $("#dropdwonUpazilaNameGroup").slideDown("slow", function () {
+                                $(this).removeClass('display_none');
                             });
                             
 
@@ -211,7 +231,7 @@
                                 }
                                 $("#firstUserImage").html(`<img class="user_img rounded-square users_image position" src="${firstUserImage}">`);
     
-                                $("#firstUserEmail").val(messages.created_users.email);
+                                $("#firstUserEmail").val(messages.created_users.login_email);
                                 $("#firstCreatedBy").val(createdByRole);
                                 if(messages.created_at !== ''){
                                     $("#firstCreatedAt").val(currentDate(messages.created_at));
@@ -251,7 +271,7 @@
                                 }
                                 $("#secondUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
     
-                                $("#secondUserEmail").val((messages.updated_users.email));
+                                $("#secondUserEmail").val((messages.updated_users.login_email));
                                 $("#secondUpdateBy").val(updatedByRole);
                                 if(messages.created_at !== messages.updated_at){
                                     $("#secondUpdateAt").val(currentDate(messages.updated_at));
@@ -638,9 +658,9 @@
                     $(".branch_select").addClass('display_none');
                     $(".branch_type").removeClass('display_none');
                     // button show
-                    $("#save").hide();
+                    $("#save").addClass('display_none');
                     $("#cancel_btn").show();
-                    $("#next").show();
+                    $("#next").removeClass('display_none');
                     $("#deleteBranch").hide();
                     $("#update_btn").hide();
                     // Display Component Settings Empty
@@ -657,9 +677,9 @@
                     $(".branch_select").removeClass('display_none');
                     $(".branch_type").addClass('display_none');
                     // button show
-                    $("#save").hide();
+                    $("#save").addClass('display_none');
                     $("#deleteBranch").hide();
-                    $("#next").hide();
+                    $("#next").addClass('display_none');
                     $("#cancel_btn").show();
                     $("#update_btn").show();
                     // Display Component Settings Empty
@@ -676,9 +696,9 @@
                     $(".branch_select").removeClass('display_none');
                     $(".branch_type").addClass('display_none');
                     // button show
-                    $("#save").hide();
+                    $("#save").addClass('display_none');
                     $("#update_btn").hide();
-                    $("#next").hide();
+                    $("#next").addClass('display_none');
                     $("#cancel_btn").show();
                     $("#deleteBranch").show();
                     // Display Component Settings Empty
@@ -1083,11 +1103,19 @@
         $(document).on('click', '#cancel_btn', function(){
             // error field cancel
             removeField();
-            $("#next").removeClass('display_none');
-            $("#formContent").removeClass('display_none');
-            $("#ContentView").addClass('display_none');
-            $("#save").addClass('display_none');
-            $("#save").attr('disabled', true);
+
+            if ($("#save").is(":visible")) {
+                $("#next").removeClass('display_none');
+                $("#formContent").removeClass('display_none');
+                $("#ContentView").addClass('display_none');
+                $("#save").addClass('display_none');
+                $("#save").attr('disabled', true);
+            }
+
+            if ($("#update_btn").is(":visible") || $("#deleteBranch").is(":visible")) {
+                $("#next").addClass('display_none');
+                $("#select_branch").val("").trigger('change');
+            }
 
             $("#inputBranchNameGroup").slideUp("slow", function () {
                 $(this).addClass('display_none');
@@ -1121,6 +1149,8 @@
             settingDisplay.find('#clearLocation').remove();
             settingDisplay.find('#clearDistrict').remove();
             settingDisplay.find('#clearUpazila').remove();
+            settingDisplay.find('#clearDivision').remove();
+            settingDisplay.find('#clearCity').remove();
             $("#documents").attr('hidden', true);
         });
 
@@ -1346,7 +1376,7 @@
                 // Remove skeleton classes
                 removeAttributeOrClass([
                     { selector: '.update_title, .head_btn3, #text_message', type: 'class', name: 'branch-skeleton' },
-                    { selector: '#update_btn_confirm, #cate_delete5', type: 'class', name: 'branch-skeleton' },
+                    { selector: '#update_confirm, #cate_delete5', type: 'class', name: 'branch-skeleton' },
                 ]);
             }, 1000);
 
@@ -1358,7 +1388,7 @@
         });
 
         // Confirm Update Branch
-        $(document).on('click', '#update_btn_confirm', function(e){
+        $(document).on('click', '#update_confirm', function(e){
             e.preventDefault();
 
             $("#updateForm_error").removeAttr('hidden');
@@ -1433,24 +1463,37 @@
                             $("#updateconfirmbranch").modal('hide').fadeOut();
                         });
                     }else{
-                        $("#accessconfirmbranch").modal('show');
                         $("#updateconfirmbranch").modal('hide');
-                        $("#pageLoader").removeAttr('hidden');
-                        $("#access_modal_box").addClass('loader_area');
                         $("#processModal_body").removeClass('loading_body_area');
 
                         setTimeout(() => {
-                            $("#accessconfirmbranch").modal('hide');
                             $("#pageLoader").attr('hidden', true);
-                            $("#access_modal_box").removeClass('loader_area');
                             $("#processModal_body").addClass('loading_body_area');
 
                             // clear fields
-                            //clearFields();
-                            // Setting Branch
-                            // close filed box
-                            document.querySelectorAll('.open_field').forEach(el => {
-                                el.classList.add('display_none');
+                            removeField();
+                            $("#inputBranchNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#inputCityNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#inputLocatioinNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#dropdwonDivisionNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#dropdwonDistrictNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#dropdwonUpazilaNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
                             });
                             $("#documents").attr('hidden', true);
                             // Display Branch Settings Empty
@@ -1576,7 +1619,7 @@
         });
 
         // Refresh Button
-        $(document).on('keyup', '#branchTypeRefresh', function(){
+        $(document).on('click', '#branchTypeRefresh', function(){
             fetch_division();
             fetch_district();
             fetch_upazila();

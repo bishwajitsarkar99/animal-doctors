@@ -1,0 +1,1 @@
+<div class="modal-body" id="SM_Modal_body">{{ $slot }}</div>

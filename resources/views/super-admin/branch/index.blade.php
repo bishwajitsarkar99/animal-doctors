@@ -177,10 +177,6 @@
           <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade" homePanelId="v-pills-replace" homeRole="tabpanel" ariaLabel="v-pills-replace-tab" >
             ...
           </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel>
-          
-          <!-- <div class="message-show">
-            <p class="ps-3 mt-1"><span id="success_message_show"></span></p>
-          </div> -->
         </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.LeftSideTabContent>
       </x-CustomLeftSideTabPanels.LeftSideTabPanel>
     </x-CustomTabPanels.TabPanelContents.TabContentPanel>
@@ -260,7 +256,41 @@
   {{-- end delete confirm modal --}}
 
   {{-- start confirm update modal --}}
-  <div class="modal fade" id="updateconfirmbranch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+  <x-Modals.Modal modalParentClass="modal fade" modalChildClass="modal-dialog modal-sm modal-dialog-centered" modalId="updateconfirmbranch">
+    <x-Modals.SmallModals.SmallModal className="modal-content small_modal" styling="border:none;" smModalId="admin_modal_box">
+      {{-- header --}}
+      <x-Modals.SmallModals.Headers.Header className="modal-header" headerId="logoutModal_header">
+        <h6 class="modal-title admin_title scan update_title branch-skeleton pt-1" id="staticBackdropLabel">
+          Update [<span id="branch_update_modal_heading"></span>]
+        </h6>
+        <button type="button" class="btn-close btn-btn-sm head_btn3 branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+      </x-Modals.SmallModals.Headers.Header>
+      {{-- body --}}
+      <x-Modals.SmallModals.Bodies.Body>
+        <p class="admin_paragraph branch-skeleton" style="text-align:center;" id="text_message">
+          <label class="label_user_edit" id="cate_confirm_update" for="id">Would you like to update <span id="branch_update_modal"></span>, confirm or cancel ? </label>
+        </p>
+      </x-Modals.SmallModals.Bodies.Body>
+      {{-- footer --}}
+      <x-Modals.SmallModals.Footers.Footer className="modal-footer action_group" footerId="logoutModal_footer">
+        <x-Modals.SmallModals.Buttons.CancelBtn 
+          className="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" 
+          btnId="cate_delete5" 
+          lableName="Cancel"
+        />  
+        <x-Modals.SmallModals.Buttons.ConfirmBtn 
+          className="btn btn-sm purple-btn purple-btn-focus update_confirm branch-skeleton" 
+          btnId="update_confirm" 
+          lableName="Confirm" 
+          lableClass="confirm-btn-text" 
+          spinerClass="confirm-icon"
+        />  
+      </x-Modals.SmallModals.Footers.Footer>
+    </x-Modals.SmallModals.SmallModal>
+  </x-Modals.Modal>
+  <!-- <div class="modal fade" id="updateconfirmbranch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-sm modal-dialog-centered">
       <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
         <div class="modal-header" id="logoutModal_header">
@@ -270,23 +300,22 @@
           <button type="button" class="btn-close btn-btn-sm head_btn3 branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
             data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
           </button>
-          </div>
-          <div class="modal-body" id="SM_Modal_body">
-            <p class="admin_paragraph branch-skeleton" style="text-align:center;" id="text_message">
-              <label class="label_user_edit" id="cate_confirm_update" for="id">Would you like to update <span id="branch_update_modal"></span>, confirm or cancel ? </label>
-            </p>
-          </div>
-          <div class="modal-footer action_group" id="logoutModal_footer">
-            <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus branch-skeleton" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
-            <button id="update_btn_confirm" class="btn btn-sm modal_button update_confirm btn_focus branch-skeleton">
-              <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-              <span class="confirm-btn-text">Confirm</span>
-            </button>
-          </div>    
         </div>
+        <div class="modal-body" id="SM_Modal_body">
+          <p class="admin_paragraph branch-skeleton" style="text-align:center;" id="text_message">
+            <label class="label_user_edit" id="cate_confirm_update" for="id">Would you like to update <span id="branch_update_modal"></span>, confirm or cancel ? </label>
+          </p>
+        </div>
+        <div class="modal-footer action_group" id="logoutModal_footer">
+          <button type="button" class="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" id="cate_delete5" data-bs-dismiss="modal">Cancel</button>
+          <button id="update_confirm" class="btn btn-sm purple-btn purple-btn-focus update_confirm branch-skeleton">
+            <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+            <span class="confirm-btn-text">Confirm</span>
+          </button>
+        </div>    
       </div>
     </div>
-  </div>
+  </div> -->
   {{-- end confirm update modal --}}
 
   {{-- start confirm access modal --}}

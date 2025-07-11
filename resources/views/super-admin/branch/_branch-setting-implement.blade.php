@@ -4,17 +4,17 @@
     ['groupBox'=>'form-group role_nme form-field-padding branch branch_type mt-3','label'=>'', 'labelClass'=>'branch_label label_position branch_type_nme', 'labelFor'=>'branch-type', 'menuLabel'=>'Select Branch Type', 'Menusname'=>'branch_type', 'MenusId'=>'branch_type', 'menusClass'=>'form-control edit_branch_type select2', 'menusType'=>'text'],
   ];
   $inputGroup = [
-    ['inputGroupBox'=>'form-group role_nme form-field-padding skeleton open_field display_none','label'=>'', 'inputGroupId'=>'inputBranchNameGroup',
+    ['inputGroupBox'=>'form-group role_nme form-field-padding skeleton display_none','label'=>'', 'inputGroupId'=>'inputBranchNameGroup',
     'formInputLabelClass'=>'branch_label label_position', 'inputLabelFor'=>'branch-name', 
     'formInputLabel'=>'Branch Name', 'formInputName'=>'branch_name', 'formInputId'=>'branchName', 
     'formInputClass'=>'form-control branch_input edit_branch_name', 'formInputType'=>'text', 
     'formInputPlaceHolder'=> 'Branch Name', 'formInputErrorId'=>'savForm_error', 'formInputUpdateError'=>'updateForm_error'],
-    ['inputGroupBox'=>'form-group role_nme form-field-padding branch skeleton open_field display_none','label'=>'', 'inputGroupId'=>'inputCityNameGroup',
+    ['inputGroupBox'=>'form-group role_nme form-field-padding branch skeleton display_none','label'=>'', 'inputGroupId'=>'inputCityNameGroup',
     'formInputLabelClass'=>'branch_label label_position', 'inputLabelFor'=>'city-name', 
     'formInputLabel'=>'Branch Name', 'formInputName'=>'town_name', 'formInputId'=>'townName', 
     'formInputClass'=>'form-control branch_input edit_town_name', 'formInputType'=>'text', 
     'formInputPlaceHolder'=> 'Town Name', 'formInputErrorId'=>'savForm_error6', 'formInputUpdateError'=>'updateForm_error6'],
-    ['inputGroupBox'=>'form-group role_nme form-field-padding branch skeleton open_field display_none','label'=>'', 'inputGroupId'=>'inputLocatioinNameGroup',
+    ['inputGroupBox'=>'form-group role_nme form-field-padding branch skeleton display_none','label'=>'', 'inputGroupId'=>'inputLocatioinNameGroup',
     'formInputLabelClass'=>'branch_label label_position', 'inputLabelFor'=>'branch-location', 
     'formInputLabel'=>'Location', 'formInputName'=>'location', 'formInputId'=>'location', 
     'formInputClass'=>'form-control branch_input edit_location', 'formInputType'=>'text', 
@@ -22,33 +22,33 @@
 
   ];
   $secondColumnDropdownData = [
-    ['secondGroupBox'=>'form-group role_nme form-field-padding branch skeleton open_field display_none','secondLabel'=>'', 'dropdownGroupId'=>'dropdwonDivisionNameGroup',
+    ['secondGroupBox'=>'form-group role_nme form-field-padding branch skeleton display_none','secondLabel'=>'', 'dropdownGroupId'=>'dropdwonDivisionNameGroup',
     'secondLabelClass'=>'branch_label label_position division_nme', 'secondLabelFor'=>'division-name', 
     'secondMenuLabel'=>'Select Division', 'secondMenusname'=>'division_id', 'secondMenusId'=>'select_division', 
     'secondMenusClass'=>'form-control edit_division_id select2', 'secondMenusType'=>'text', 'dropdownError'=>'savForm_error3', 'dropdownUpdateError'=>'updateForm_error3'],
-    ['secondGroupBox'=>'form-group role_nme form-field-padding branch skeleton open_field display_none','secondLabel'=>'', 'dropdownGroupId'=>'dropdwonDistrictNameGroup',
+    ['secondGroupBox'=>'form-group role_nme form-field-padding branch skeleton display_none','secondLabel'=>'', 'dropdownGroupId'=>'dropdwonDistrictNameGroup',
     'secondLabelClass'=>'branch_label label_position district_nme', 'secondLabelFor'=>'district-name', 
     'secondMenuLabel'=>'Select District', 'secondMenusname'=>'district_id', 'secondMenusId'=>'select_district', 
     'secondMenusClass'=>'form-control edit_district_id select2', 'secondMenusType'=>'text', 'dropdownError'=>'savForm_error4', 'dropdownUpdateError'=>'updateForm_error4'],
-    ['secondGroupBox'=>'form-group role_nme form-field-padding branch skeleton open_field display_none','secondLabel'=>'', 'dropdownGroupId'=>'dropdwonUpazilaNameGroup',
+    ['secondGroupBox'=>'form-group role_nme form-field-padding branch skeleton display_none','secondLabel'=>'', 'dropdownGroupId'=>'dropdwonUpazilaNameGroup',
     'secondLabelClass'=>'branch_label label_position upazila_nme', 'secondLabelFor'=>'upazila-name', 
     'secondMenuLabel'=>'Select Upazila', 'secondMenusname'=>'upazila_id', 'secondMenusId'=>'select_upazila', 
     'secondMenusClass'=>'form-control edit_upazila_id select2', 'secondMenusType'=>'text', 'dropdownError'=>'savForm_error5', 'dropdownUpdateError'=>'updateForm_error5']
   ];
   $formGroupButtons = [
     ['formGroupButtonLabel'=>'Cancel','formGroupButtonClass'=>'btn btn-sm cgt_cancel_btn btn_focus me-5 skeleton-button', 'formGroupButtonId'=>'cancel_btn', 'formGroupButtonType'=>'reset', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>''],
-    ['formGroupButtonLabel'=>'Next','formGroupButtonClass'=>'btn btn-sm setting-btn setting-btn-focus skeleton-button', 'formGroupButtonId'=>'next', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>''],
-    ['formGroupButtonLabel'=>'Finish','formGroupButtonClass'=>'btn btn-sm setting-btn setting-btn-focus skeleton-button display_none', 'formGroupButtonId'=>'save', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>'disabled'],
-    ['formGroupButtonLabel'=>'Update','formGroupButtonClass'=>'btn btn-sm setting-btn setting-btn-focus skeleton-button display_none', 'formGroupButtonId'=>'update_btn', 'formGroupButtonType'=>'reset', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>''],
+    ['formGroupButtonLabel'=>'Next','formGroupButtonClass'=>'btn btn-sm purple-btn purple-btn-focus skeleton-button', 'formGroupButtonId'=>'next', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>''],
+    ['formGroupButtonLabel'=>'Finish','formGroupButtonClass'=>'btn btn-sm purple-btn purple-btn-focus skeleton-button display_none', 'formGroupButtonId'=>'save', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>'disabled'],
+    ['formGroupButtonLabel'=>'Update','formGroupButtonClass'=>'btn btn-sm purple-btn purple-btn-focus skeleton-button display_none', 'formGroupButtonId'=>'update_btn', 'formGroupButtonType'=>'reset', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>''],
     ['formGroupButtonLabel'=>'Delete','formGroupButtonClass'=>'btn btn-sm cgt_cancel_btn btn_focus display_none', 'formGroupButtonId'=>'deleteBranch', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>''],
   ];
   $optationGroupBtns = [
-    ['label'=>'Enable New Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm cgt_btn', 'enableBtnId'=>'enableNewBranch', 'enableCheck'=>'enableChecking', 'loader'=>'newEnableLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
-    ['label'=>'Disabled New Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm cgt_btn', 'enableBtnId'=>'disabledNewBranch', 'enableCheck'=>'disabledChecking', 'loader'=>'newDisabledLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
-    ['label'=>'Enable Update Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm cgt_btn', 'enableBtnId'=>'enableUpdateBranch', 'enableCheck'=>'enableChecking', 'loader'=>'updateEnableLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
-    ['label'=>'Disabled Update Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm cgt_btn', 'enableBtnId'=>'disabledUpdatedBranch', 'enableCheck'=>'disabledChecking', 'loader'=>'updateDisabledLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
-    ['label'=>'Enable Delete Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm cgt_btn', 'enableBtnId'=>'enableDeleteBranch', 'enableCheck'=>'enableChecking', 'loader'=>'deleteEnableLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
-    ['label'=>'Disabled Delete Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm cgt_btn', 'enableBtnId'=>'disabledDeleteBranch', 'enableCheck'=>'disabledChecking', 'loader'=>'deleteDisabledLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
+    ['label'=>'Enable New Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm purple-btn purple-btn-shadow', 'enableBtnId'=>'enableNewBranch', 'enableCheck'=>'enableChecking', 'loader'=>'newEnableLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
+    ['label'=>'Disabled New Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm purple-btn purple-btn-shadow', 'enableBtnId'=>'disabledNewBranch', 'enableCheck'=>'disabledChecking', 'loader'=>'newDisabledLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
+    ['label'=>'Enable Update', 'btnType'=>'button', 'btnClass'=>'btn btn-sm purple-btn purple-btn-shadow', 'enableBtnId'=>'enableUpdateBranch', 'enableCheck'=>'enableChecking', 'loader'=>'updateEnableLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
+    ['label'=>'Disabled Update', 'btnType'=>'button', 'btnClass'=>'btn btn-sm purple-btn purple-btn-shadow', 'enableBtnId'=>'disabledUpdatedBranch', 'enableCheck'=>'disabledChecking', 'loader'=>'updateDisabledLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
+    ['label'=>'Enable Delete Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm purple-btn purple-btn-shadow', 'enableBtnId'=>'enableDeleteBranch', 'enableCheck'=>'enableChecking', 'loader'=>'deleteEnableLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
+    ['label'=>'Disabled Delete Branch', 'btnType'=>'button', 'btnClass'=>'btn btn-sm purple-btn purple-btn-shadow', 'enableBtnId'=>'disabledDeleteBranch', 'enableCheck'=>'disabledChecking', 'loader'=>'deleteDisabledLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
   ];
 
 ?>
@@ -62,7 +62,7 @@
         <x-Tables.Icon.SettingIcon iconWidth="20" iconHeight="20" firstFill="#686868" secondFill="#4a92ff" thirdFill="#4a92ff" fourFill="#4a92ff" />
         Branch Settings
     </x-CustomCards.CardHeaders.CardHeader>
-    <x-CustomCards.CardBodies.CardBody cardBodyClass="card-body" cardBodyId="" hiddenAttr="">
+    <x-CustomCards.CardBodies.CardBody cardBodyClass="card-body responsive-card" cardBodyId="" hiddenAttr="">
         <div class="optation-group-btn" id="SettingActionButton">
             @foreach($optationGroupBtns as $data)
                 <?php
@@ -129,7 +129,7 @@
                                 @endif
                             @endforeach
                             @foreach($inputGroup as $data)
-                            @if($data['inputGroupBox'] === 'form-group role_nme form-field-padding skeleton open_field display_none' || $data['inputGroupBox'] === 'form-group role_nme form-field-padding branch skeleton open_field display_none')
+                            @if($data['inputGroupBox'] === 'form-group role_nme form-field-padding skeleton display_none' || $data['inputGroupBox'] === 'form-group role_nme form-field-padding branch skeleton display_none')
                                 <div class="{{ $data['inputGroupBox'] }}" id="{{ $data['inputGroupId'] }}">
                                     <x-Inputs.FormInputs.FormInputField formInputFieldClass="{{ $data['formInputClass'] }}" formInputFieldType="{{ $data ['formInputType'] }}" formInputFieldName="{{ $data['formInputName'] }}" formInputFieldId="{{ $data['formInputId'] }}" formInputFieldPlaceHolder="{{ $data['formInputPlaceHolder'] }}" />
                                     <label class="{{ $data['formInputLabelClass'] }}" for="{{ $data['inputLabelFor'] }}">
@@ -158,34 +158,38 @@
                                     </span>
                                 </div>
                             @endforeach
+                            <!-- setting-provider -->
                             <div class="form-group role_nme branch mb-1" id="documents" hidden>
                                 <table class="info_table">
                                     <thead class="info_table_head">
                                         <tr>
                                             <th class="branch_font label_position">Creator</th>
-                                            <th class="branch_font label_position" id="secondHead" hidden>Updator</th>
-                                            <th class="branch_font label_position" id="thirdHead" hidden>Approver</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td class="branch_font" id="firstContent">
-                                                <label class="image_position" for="user_image"><span id="firstUserImage"></span></label>
-                                                <input id="firstUserEmail" disabled>
-                                                <input id="firstCreatedBy" disabled>
+                                                <label class="image_position" for="user_image"><span id="firstUserImage"></span></label><br>
+                                                <input id="firstUserEmail" disabled><br>
+                                                <input id="firstCreatedBy" disabled><br>
                                                 <input id="firstCreatedAt" disabled>
                                             </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="info_table mt-3">
+                                    <thead class="info_table_head">
+                                        <tr>
+                                            <th class="branch_font label_position" id="secondHead" hidden>Updator</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
                                             <td class="branch_font" id="secondContent" hidden>
-                                                <label for="user_image"><span id="secondUserImage"></span></label>
-                                                <input id="secondUserEmail" disabled>
-                                                <input id="secondUpdateBy" disabled>
+                                                <label class="image_position" for="user_image"><span id="secondUserImage"></span></label><br>
+                                                <input id="secondUserEmail" disabled><br>
+                                                <input id="secondUpdateBy" disabled><br>
                                                 <input id="secondUpdateAt" disabled>
-                                            </td>
-                                            <td class="branch_font" id="thirdContent" hidden>
-                                                <label for="user_image"><span id="thirdUserImage"></span></label>
-                                                <input id="thirdUserEmail" disabled>
-                                                <input id="thirdApprover" disabled>
-                                                <input id="thirdUpdateAt" disabled>
                                             </td>
                                         </tr>
                                     </tbody>

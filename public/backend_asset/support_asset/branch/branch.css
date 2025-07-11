@@ -103,6 +103,11 @@ ul.setting-display {
     font-weight: 700;
     font-family: var(--nav-font-family);
 }
+.responsive-card{
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
 .setting-table-wrapper{
     max-height: 400px;
     overflow-y: auto;
@@ -606,67 +611,10 @@ select> option[class="custom-optation"] {
 button.btn.btn-sm.btn_focus {
     animation: 1s ease 0s infinite normal none running btnFocus;
 }
-button.btn.btn-sm.setting-btn {
-    height: 24px;
-    background-color: mediumpurple;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-    color: var(--nav-button-color);
-    font-family: var(--btn-btn-sm-font-family);
-    font-size: 12px;
-    line-height: 1.5;
-    opacity: 1;
-    text-align: center;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-left: -4px;
-    outline: none;
-    border-radius: 30px;
-    border-width: initial;
-    border-style: none;
-    border-color: initial;
-    border-image: initial;
-    transition: border-color 0.3s, background-color 0.3s;
-    animation: 5s ease 0s infinite normal none running text_font_color;
-}
-button.btn.btn-sm.setting-btn:hover{
-    background-color: mediumpurple;
-    color: white;
-    transition: 1ms;
-}
-button.btn.btn-sm.setting-btn-focus {
-    animation: 1s ease 0s infinite normal none running btnFocus;
-}
 @keyframes btnFocus{
-    0%{}
     100% {
         background-image: linear-gradient(rgba(14, 14, 14, 0.05) 0%, rgba(171, 165, 165, 0.05) 100%);
     }
-}
-button.setting-btn-focus {
-    --nav-button-background: linear-gradient(to top, #8000805c, #80008078, #8000802e);
-    --nav-button-color: white;
-    --nav-font-family: Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
-    --mdb-btn-border-color: mediumpurple;
-    text-decoration: none;
-    background-image: var(--nav-button-background);
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
-    color: var(--nav-button-color);
-    font-family: var(--nav-font-family);
-    font-size: 12px;
-    line-height: 1;
-    opacity: 1;
-    text-transform: capitalize;
-    text-align: center;
-    font-weight: 700;
-    border-color: var(--mdb-btn-border-color);
-    outline: none;
-    height: 24px;
-    border-radius: 30px;
-}
-button.btn.btn-sm.cgt_cancel_btn{
-    border-radius: 30px;
 }
 thead.info_table_head{
     background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(rgb(224, 254, 255)), to(rgb(195, 235, 255)));
@@ -1300,6 +1248,9 @@ button.btn-close.cols_btn {
     box-shadow: none;
     outline: none;
 }
+.image_position {
+    margin-top: 20px;
+}
 .user_img {
     width: 30px;
     height: 30px;
@@ -1307,7 +1258,7 @@ button.btn-close.cols_btn {
     transition: transform .5s;
 }
 .user_img:hover{
-    transform: scale(5);
+    transform: scale(3);
 }
 #updateconfirmbranch,#deletebranch,#deleteconfirmbranch,#accessconfirmbranch{
     transition: transform .5s;
@@ -1324,6 +1275,7 @@ input#secondUpdateBy,input#secondUpdateAt,input#secondApprover,input#thirdUserEm
     outline: none;
     box-shadow: none;
     background: white;
+    color: #111;
     width: 100%;
     border-collapse: collapse;
     border: none;
@@ -1331,7 +1283,7 @@ input#secondUpdateBy,input#secondUpdateAt,input#secondApprover,input#thirdUserEm
     font-weight: 700;
     letter-spacing: .5px;
     font-family: var(--nav-font-family);
-    text-align: center;
+    text-align: left;
 }
 input#creatorUserImage,input#creatorUserEmail,input#creatorCreatedBy,input#creatorCreatedAt,input#approverUserImage,input#approverUserEmail,
 input#approverApprover,input#approverUpdateAt,input#updatorUserImage,input#updatorUserEmail,input#updatorUpdateBy,input#updatorUpdateAt,
@@ -1339,6 +1291,7 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     outline: none;
     box-shadow: none;
     background: white;
+    color: #111;
     width: 100%;
     border-collapse: collapse;
     border: none;
@@ -1507,8 +1460,12 @@ input#branchTypeName {
 input#branchTypeName:focus{
     border: 1px solid #0056b3;
 }
-button#update_btn_confirm, button#cate_delete5{
+button#update_btn_confirm{
     font-size: 13px;
+}
+button#cate_delete5{
+    font-size: 13px;
+    line-height: 1.4;
 }
 button#access_btn_confirm {
     background: #08a05c;

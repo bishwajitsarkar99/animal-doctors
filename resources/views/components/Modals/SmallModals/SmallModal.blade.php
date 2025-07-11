@@ -1,0 +1,1 @@
+<div class="{{ $className }}" style="{{ $styling }}" id="{{ $smModalId }}">{{ $slot }}</div>

@@ -1,0 +1,1 @@
+<div class="{{ $className }}" id="{{ $footerId }}">{{ $slot }}</div>
