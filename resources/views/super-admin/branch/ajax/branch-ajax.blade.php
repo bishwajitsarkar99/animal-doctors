@@ -444,6 +444,7 @@
                 return `
                     <tr class="branch-table-row" key="${key}" id="BranchRow">
                         <td class="td-cell" style="text-align:center;">${(key)+1}</td>
+                        <td class="td-cell" style="text-align:center;" hidden>${row.id}</td>
                         <td class="td-cell-second">${row.branch_type}</td>
                         <td class="td-cell-second">${row.branch_id}</td>
                         <td class="td-cell-second">${row.branch_name}</td>
@@ -490,6 +491,11 @@
                     $("#total_branch_items").text(total);
                     $("#total_per_branch_items").text(per_page);
                     $("#per_branch_items_num").text(per_item_num);
+
+                    // Tooltip (Bootstrap 5)
+                    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+                        new bootstrap.Tooltip(el);
+                    });
 
                 },
                 complete: function() {
@@ -571,8 +577,8 @@
                             if (link.label.toLowerCase().includes("previous")) {
                                 return `
                                     <li class="page-item${link.active ? ' active' : ''}" key=${key}>
-                                        <a class="page-link btn_page" data-url="${link.url ? link.url : '#'}">
-                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 121.66"><title>direction-left</title><path d="M1.24,62.65,120.1,121.46a1.92,1.92,0,0,0,2.58-.88,1.89,1.89,0,0,0,0-1.76h0l-30.87-58,30.87-58h0a1.89,1.89,0,0,0,0-1.76A1.92,1.92,0,0,0,120.1.2L1.24,59a2,2,0,0,0,0,3.64Z"/></svg>
+                                        <a class="page-link btn_page" data-url="${link.url ? link.url : '#'}" data-bs-toggle="tooltip"  data-bs-placement="left" title="Previous" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 121.66"><path d="M1.24,62.65,120.1,121.46a1.92,1.92,0,0,0,2.58-.88,1.89,1.89,0,0,0,0-1.76h0l-30.87-58,30.87-58h0a1.89,1.89,0,0,0,0-1.76A1.92,1.92,0,0,0,120.1.2L1.24,59a2,2,0,0,0,0,3.64Z"/></svg>
                                         </a>
                                     </li>
                                 `;
@@ -580,8 +586,8 @@
                             if (link.label.toLowerCase().includes("next")) {
                                 return `
                                     <li class="page-item${link.active ? ' active' : ''}" key=${key}>
-                                        <a class="page-link btn_page" data-url="${link.url ? link.url : '#'}">
-                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.86 121.64"><title>direction-right</title><path d="M121.62,59,2.78.2A1.92,1.92,0,0,0,.2,1.08a1.89,1.89,0,0,0,0,1.76h0l30.87,58L.23,118.8h0a1.89,1.89,0,0,0,0,1.76,1.92,1.92,0,0,0,2.58.88l118.84-58.8a2,2,0,0,0,0-3.64Z"/></svg>
+                                        <a class="page-link btn_page" data-url="${link.url ? link.url : '#'}" data-bs-toggle="tooltip"  data-bs-placement="right" title="Next" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.86 121.64"><path d="M121.62,59,2.78.2A1.92,1.92,0,0,0,.2,1.08a1.89,1.89,0,0,0,0,1.76h0l30.87,58L.23,118.8h0a1.89,1.89,0,0,0,0,1.76,1.92,1.92,0,0,0,2.58.88l118.84-58.8a2,2,0,0,0,0-3.64Z"/></svg>
                                         </a>
                                     </li>
                                 `;
@@ -600,6 +606,28 @@
                 </nav>
             `;
         };
+
+        // peritem change
+        $("#perItemControl").on('change', (e) => {
+            const {
+                value
+            } = e.target;
+
+            fetchTableBranch(null, value);
+        });
+        // change paginate page------------------------
+        $("#branch_data_table_paginate").delegate("a", "click", function(e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+
+            const url = $(this).attr('data-url');
+            $(this).tooltip('hide'); // Hide tooltip if you are using Bootstrap tooltips
+
+            if (url !== '#') {
+                fetchTableBranch(url);
+            }
+
+        });
 
         // =============== Second Page Branch Setting =====================
 
@@ -701,6 +729,8 @@
             $(".disabledChecking").attr('hidden', true);
             $(".enableChecking").attr('hidden', true);
 
+            $("#formContent").removeClass('display_none');
+
             if($(this).attr('id') === 'enableNewBranch'){
                 setTimeout(() => {
                     $("#loaderSpinner").attr('hidden', true);
@@ -754,6 +784,80 @@
                     $("#next").addClass('display_none');
                     $("#cancel_btn").show();
                     $("#deleteBranch").show();
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                }, 1000);
+            }
+        });
+        // setting action disabled button
+        $(document).on('click', '#disabledNewBranch, #disabledUpdatedBranch, #disabledDeleteBranch', function(){
+
+            // Hide all button initially
+            $("#disabledNewBranch").attr('hidden', true);
+            $("#disabledUpdatedBranch").attr('hidden', true);
+            $("#disabledDeleteBranch").attr('hidden', true);
+            $("#enableNewBranch").attr('hidden', true);
+            $("#enableUpdateBranch").attr('hidden', true);
+            $("#enableDeleteBranch").attr('hidden', true);
+            $("#setting_card").attr('hidden', true);
+
+            $("#loaderSpinner").removeAttr('hidden');
+            $(".disabledChecking").attr('hidden', true);
+            $(".enableChecking").attr('hidden', true);
+
+            $("#formContent").addClass('display_none');
+
+            if($(this).attr('id') === 'disabledNewBranch'){
+                setTimeout(() => {
+                    $("#loaderSpinner").attr('hidden', true);
+                    $("#enableNewBranch").removeAttr('hidden');
+                    $("#disabledNewBranch").removeAttr('hidden');
+                    $(".enableChecking").attr('hidden', true);
+                    $(".disabledChecking").removeAttr('hidden');
+                    $("#setting_card").attr('hidden', true);
+                    // button show
+                    $("#save").addClass('display_none');
+                    $("#cancel_btn").hide();
+                    $("#next").addClass('display_none');
+                    $("#deleteBranch").hide();
+                    $("#update_btn").hide();
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                }, 1000);
+            }else if($(this).attr('id') === 'disabledUpdatedBranch'){
+                setTimeout(() => {
+                    $("#loaderSpinner").attr('hidden', true);
+                    $("#enableUpdateBranch").removeAttr('hidden');
+                    $("#disabledUpdatedBranch").removeAttr('hidden');
+                    $(".enableChecking").attr('hidden', true);
+                    $(".disabledChecking").removeAttr('hidden');
+                    $("#setting_card").attr('hidden', true);
+                    // button show
+                    $("#save").addClass('display_none');
+                    $("#cancel_btn").hide();
+                    $("#next").addClass('display_none');
+                    $("#deleteBranch").hide();
+                    $("#update_btn").hide();
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                }, 1000);
+            }else if($(this).attr('id') === 'disabledDeleteBranch'){
+                setTimeout(() => {
+                    $("#loaderSpinner").attr('hidden', true);
+                    $("#enableDeleteBranch").removeAttr('hidden');
+                    $("#disabledDeleteBranch").removeAttr('hidden');
+                    $(".enableChecking").attr('hidden', true);
+                    $(".disabledChecking").removeAttr('hidden');
+                    $("#setting_card").attr('hidden', true);
+                    // button show
+                    $("#save").addClass('display_none');
+                    $("#cancel_btn").hide();
+                    $("#next").addClass('display_none');
+                    $("#deleteBranch").hide();
+                    $("#update_btn").hide();
                     // Display Component Settings Empty
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
@@ -925,26 +1029,6 @@
                 });
             }, duration);
         }
-        // peritem change
-        $("#perItemControl").on('change', (e) => {
-            const {
-                value
-            } = e.target;
-
-            fetchTableBranch('', null, value);
-        });
-        // change paginate page------------------------
-        $("#branch_data_table_paginate").delegate("a", "click", function(e) {
-            e.stopImmediatePropagation();
-            e.preventDefault();
-
-            const url = $(this).attr('data-url');
-
-            if (url !== '#') {
-                fetchTableBranch('', url);
-            }
-
-        });
         // fetch branch type/category for dropdown
         function fetch_branch_types(){
 
@@ -1067,19 +1151,50 @@
                     }else{
                         $("#loaderBox").removeClass('display_none');
                         $("#ContentView").removeClass('display_none');
-                        // Display Component Settings Empty
-                        $("#settingDisplayCard").attr('hidden', true);
-                        let settingDisplay = $("#SettingDisplay");
-                        settingDisplay.find('#clearBranchID').remove();
-                        settingDisplay.find('#clearBranchName').remove();
-                        settingDisplay.find('#clearCityName').remove();
-                        settingDisplay.find('#clearLocation').remove();
-                        settingDisplay.find('#clearDistrict').remove();
-                        settingDisplay.find('#clearUpazila').remove();
+                        
 
                         setTimeout(() => {
                             $("#loaderBox").addClass('display_none');
+                            $("#formContent").removeClass('display_none');
                             $("#ContentView").addClass('display_none');
+                            // button
+                            $("#save").addClass('display_none');
+                            $("#next").removeClass('display_none');
+                            $("#select_branch").val("").trigger('change');
+                            // form input
+                            $("#inputBranchNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#inputCityNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#inputLocatioinNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#dropdwonDivisionNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#dropdwonDistrictNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#dropdwonUpazilaNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            // Display Component Settings Empty
+                            $("#settingDisplayCard").attr('hidden', true);
+                            let settingDisplay = $("#SettingDisplay");
+                            settingDisplay.find('#clearBranchID').remove();
+                            settingDisplay.find('#clearBranchName').remove();
+                            settingDisplay.find('#clearCityName').remove();
+                            settingDisplay.find('#clearLocation').remove();
+                            settingDisplay.find('#clearDistrict').remove();
+                            settingDisplay.find('#clearUpazila').remove();
 
                             setTimeout(() => {
                                 showSuccessToast(response.messages)
@@ -1734,6 +1849,7 @@
             fetch_upazila();
             searchBranch();
             fetch_branch_types();
+            fetchTableBranch();
         });
 
         // =================== End Branch Setting Section ===================================

@@ -173,7 +173,17 @@
           </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel>
           <!-- Category Setting -->
           <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade" homePanelId="v-pills-category" homeRole="tabpanel" ariaLabel="v-pills-category-tab" >
-            ...
+            <div class="row">
+              <div class="col-sm-3">
+                @include('super-admin.branch._branch-category-setting-operation')
+              </div>
+              <div class="col-sm-5">
+                @include('super-admin.branch._branch-category-setting-implement')
+              </div>
+              <div class="col-sm-4">
+                @include('super-admin.branch._branch-category-setting-display')
+              </div>
+            </div>
           </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel>
           <!-- Search Setting -->
           <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade" homePanelId="v-pills-search" homeRole="tabpanel" ariaLabel="v-pills-search-tab" >

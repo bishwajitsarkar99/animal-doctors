@@ -315,10 +315,14 @@ class BranchServiceProvicer
                     $branch_id = [$user_branch_id];
                 }
                 
+                
+                $getBranches = Branches::with(['divisions', 'districts', 'thana_or_upazilas'])->orderBy('id', 'asc');
+
                 // Paginate branch table data using query, not collection
                 $perItem = max((int) $request->input('per_item', 10), 1);
-        
-                $paginateData = Branches::with(['divisions', 'districts', 'thana_or_upazilas'])->orderBy('id', 'asc')->paginate($perItem);
+
+                $paginateData = $getBranches->paginate($perItem);
+
                 // Dropdown Search Menu
                 $allBranch = Branches::whereIn('branch_id', $branch_id)->orderBy('id', 'desc')->get();
                 //dd($allBranch);

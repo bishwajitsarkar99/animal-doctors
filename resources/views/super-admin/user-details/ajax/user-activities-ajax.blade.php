@@ -379,30 +379,6 @@
             fetch_activities_users_data('', null, value);
         });
         // Paginate Page-------------------------------
-        // const paginate_html = ({
-        //     links,
-        //     total
-        // }) => {
-        //     if (total == 0) {
-        //         return "";
-        //     }
-
-        //     return `
-        //         <nav class="paginate_link" aria-label="Page navigation example">
-        //             <ul class="pagination">
-        //                 ${links.map((link, key) => {
-        //                     return `
-        //                         <li class="page-item${link.active? ' active': ''}" key=${key}>
-        //                             <a class="page-link btn_page" href="${link.url? link.url: '#'}">
-        //                                 ${link.label}
-        //                             </a>
-        //                         </li>
-        //                     `;
-        //                 }).join("\n")}
-        //             </ul>
-        //         </nav>
-        //     `;
-        // }
         const paginate_html = ({ links, total }) => {
             if (total == 0) {
                 return "";
@@ -416,8 +392,8 @@
                             if (link.label.toLowerCase().includes("previous")) {
                                 return `
                                     <li class="page-item${link.active ? ' active' : ''}" key=${key}>
-                                        <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
-                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 121.66"><title>direction-left</title><path d="M1.24,62.65,120.1,121.46a1.92,1.92,0,0,0,2.58-.88,1.89,1.89,0,0,0,0-1.76h0l-30.87-58,30.87-58h0a1.89,1.89,0,0,0,0-1.76A1.92,1.92,0,0,0,120.1.2L1.24,59a2,2,0,0,0,0,3.64Z"/></svg>
+                                        <a class="page-link btn_page" data-url="${link.url ? link.url : '#'}" data-bs-toggle="tooltip"  data-bs-placement="left" title="Previous" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 121.66"><path d="M1.24,62.65,120.1,121.46a1.92,1.92,0,0,0,2.58-.88,1.89,1.89,0,0,0,0-1.76h0l-30.87-58,30.87-58h0a1.89,1.89,0,0,0,0-1.76A1.92,1.92,0,0,0,120.1.2L1.24,59a2,2,0,0,0,0,3.64Z"/></svg>
                                         </a>
                                     </li>
                                 `;
@@ -425,8 +401,8 @@
                             if (link.label.toLowerCase().includes("next")) {
                                 return `
                                     <li class="page-item${link.active ? ' active' : ''}" key=${key}>
-                                        <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
-                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.86 121.64"><title>direction-right</title><path d="M121.62,59,2.78.2A1.92,1.92,0,0,0,.2,1.08a1.89,1.89,0,0,0,0,1.76h0l30.87,58L.23,118.8h0a1.89,1.89,0,0,0,0,1.76,1.92,1.92,0,0,0,2.58.88l118.84-58.8a2,2,0,0,0,0-3.64Z"/></svg>
+                                        <a class="page-link btn_page" data-url="${link.url ? link.url : '#'}" data-bs-toggle="tooltip"  data-bs-placement="right" title="Next" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+                                            <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.86 121.64"><path d="M121.62,59,2.78.2A1.92,1.92,0,0,0,.2,1.08a1.89,1.89,0,0,0,0,1.76h0l30.87,58L.23,118.8h0a1.89,1.89,0,0,0,0,1.76,1.92,1.92,0,0,0,2.58.88l118.84-58.8a2,2,0,0,0,0-3.64Z"/></svg>
                                         </a>
                                     </li>
                                 `;
@@ -435,7 +411,7 @@
                             // Regular page numbers
                             return `
                                 <li class="page-item${link.active ? ' active' : ''}" key=${key}>
-                                    <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
+                                    <a class="page-link btn_page" data-url="${link.url ? link.url : '#'}">
                                         ${link.label}
                                     </a>
                                 </li>
@@ -450,7 +426,8 @@
             e.stopImmediatePropagation();
             e.preventDefault();
 
-            const url = $(this).attr('href');
+            const url = $(this).attr('data-url');
+            $(this).tooltip('hide'); // Hide tooltip if you are using Bootstrap tooltips
 
             if (url !== '#') {
                 fetch_activities_users_data('', url);

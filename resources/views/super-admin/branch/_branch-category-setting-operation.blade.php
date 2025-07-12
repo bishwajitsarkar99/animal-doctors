@@ -1,9 +1,9 @@
 <?php
     // Radio Button Groups
     $radioButtonGroups = [
-        ['lable'=>'New Branch', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault1', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault1', 'checkedAttr'=>''],
-        ['lable'=>'Branch Update', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault2', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault2', 'checkedAttr'=>'checked'],
-        ['lable'=>'Branch Delete', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault3', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault3', 'checkedAttr'=>'checked'],
+        ['lable'=>'New Branch Category', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault1', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault1', 'checkedAttr'=>''],
+        ['lable'=>'Branch Category Update', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault2', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault2', 'checkedAttr'=>'checked'],
+        ['lable'=>'Branch Category Delete', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault3', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault3', 'checkedAttr'=>'checked'],
         ['lable'=>'None', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault4', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault4', 'checkedAttr'=>'checked']
     ];
 ?>
