@@ -17,6 +17,11 @@
     padding: 0;
     box-sizing: border-box;
 }
+.alert{
+    --bs-alert-padding-x: 0.5rem;
+    --bs-alert-padding-y: 0.0rem;
+    padding: var(--bs-alert-padding-y) var(--bs-alert-padding-x);
+}
 .msg_boxs{
     padding: 35px 10px;
 }
@@ -81,11 +86,14 @@ ul.setting-display {
     margin-bottom: 10px;
 }
 .custom-header {
+    --bs-card-cap-padding-y: 0.2rem;
+    --bs-card-cap-padding-x: 1rem;
     color: #0d6efd;
     font-size: 13px;
     font-weight: 700;
-    background-image: linear-gradient(1deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
-    background-color: floralwhite;
+    background-image: linear-gradient(1deg, #d3d3d3d4, #cdcdcd00, snow);
+    background-color: snow;
+    padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
 }
 .line-label {
     border-radius: 3px;
@@ -107,6 +115,13 @@ ul.setting-display {
     max-height: 400px;
     overflow-y: auto;
     overflow-x: auto;
+}
+td.td-error-cell{
+    padding: 0 5px;
+    border-right: 1px ridge #dfdede;
+    border-left: 1px ridge #dfdede;
+    border-bottom: none;
+    background-color: #fff;
 }
 .setting-table-wrapper{
     max-height: 400px;
@@ -223,7 +238,7 @@ li.page-item.active {
 }
 select#SelectBranchID{
     border: none;
-    outline: 4px solid #a5d5cb54;
+    outline: 4px solid #e7e7e754;
     box-shadow: none;
     padding: 20px 15px;
 }
@@ -308,7 +323,8 @@ select#SelectBranchID{
 }
 .active-button {
     height: 24px;
-    background: linear-gradient(5deg, gray, transparent 3%, #d3d3d33d, #c0c0c0a6);
+    background: linear-gradient(5deg, #808080e0, transparent 3%, #d3d3d33d, #c0c0c0a6);
+    background-color: snow;
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     color: #004a99e0;
@@ -349,8 +365,8 @@ select#SelectBranchID{
     transition: border-color 0.3s, background-color 0.3s;
 }
 .deactive{
-    background-image: linear-gradient(1deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
-    background-color: white;
+    background-image: linear-gradient(1deg, #dbd8d8db, transparent 3%, #d3d3d38a, snow);
+    background-color: snow;
     margin-right: 15px;
     line-height: 1.2;
     font-weight: 700;
@@ -1148,13 +1164,13 @@ label.label_position {
 label.branch_label {
     font-size: 12px;
     font-weight: 700;
-    color: #333;
+    color: #111;
     font-family: var(--nav-font-family);
 }
 .branch_input {
     display: flex;
     background-color: white;
-    color: #333;
+    color: #111;
     font-weight: 700;
     font-size: 12px;
     font-family: var(--nav-font-family);
@@ -1380,7 +1396,7 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     animation: 1s infinite reverse skeleton;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: black !important;
+    color: #111 !important;
     line-height: 24px;
 }
 #permission_btn{

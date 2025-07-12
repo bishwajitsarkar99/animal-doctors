@@ -1,7 +1,7 @@
 <?php 
   $dropdowmMenuData = [
-    ['groupBox'=>'form-group role_nme form-field-padding branch_select display_none mt-3', 'label'=>'', 'labelClass'=>'branch_label label_position', 'labelFor'=>'branch-search', 'menuLabel'=>'Select Company Branch Name', 'Menusname'=>'select_branch', 'MenusId'=>'select_branch', 'menusClass'=>'form-control select_branch select2', 'menusType'=>'text'],
-    ['groupBox'=>'form-group role_nme form-field-padding branch branch_type mt-3','label'=>'', 'labelClass'=>'branch_label label_position branch_type_nme', 'labelFor'=>'branch-type', 'menuLabel'=>'Select Branch Type', 'Menusname'=>'branch_type', 'MenusId'=>'branch_type', 'menusClass'=>'form-control edit_branch_type select2', 'menusType'=>'text'],
+    ['groupBox'=>'form-group role_nme form-field-padding branch_select display_none mt-3', 'label'=>'', 'labelClass'=>'branch_label label_position', 'labelFor'=>'branch-search', 'menuLabel'=>'Select Company Branch Name', 'Menusname'=>'select_branch', 'MenusId'=>'select_branch', 'menusClass'=>'form-control select_branch select2', 'menusType'=>'text', 'errorId'=>'response_message'],
+    ['groupBox'=>'form-group role_nme form-field-padding branch branch_type mt-3','label'=>'', 'labelClass'=>'branch_label label_position branch_type_nme', 'labelFor'=>'branch-type', 'menuLabel'=>'Select Branch Type', 'Menusname'=>'branch_type', 'MenusId'=>'branch_type', 'menusClass'=>'form-control edit_branch_type select2', 'menusType'=>'text', 'errorId'=>'permission_message'],
   ];
   $inputGroup = [
     ['inputGroupBox'=>'form-group role_nme form-field-padding skeleton display_none','label'=>'', 'inputGroupId'=>'inputBranchNameGroup',
@@ -59,7 +59,7 @@
 </div>
 <x-CustomCards.Card cardClass="card custom-card component-focus" cardId="settingImplementCard" hiddenAttr="hidden">
     <x-CustomCards.CardHeaders.CardHeader cardHeaderClass="card-header custom-header" cardHeaderId="" hiddenAttr="">
-        <x-Tables.Icon.SettingIcon iconWidth="20" iconHeight="20" firstFill="#686868" secondFill="#4a92ff" thirdFill="#4a92ff" fourFill="#4a92ff" />
+        <x-Tables.Icon.SettingIcon iconWidth="20" iconHeight="15" firstFill="#686868" secondFill="#4a92ff" thirdFill="#4a92ff" fourFill="#4a92ff" />
         Branch Settings
     </x-CustomCards.CardHeaders.CardHeader>
     <x-CustomCards.CardBodies.CardBody cardBodyClass="card-body responsive-card" cardBodyId="" hiddenAttr="">
@@ -120,6 +120,7 @@
                                             menuSelectLabel="{{ $data['menuLabel'] }}">
                                             <input type="hidden" id="branches_id">
                                         </x-Dropdown.DropdownMenu>
+                                        <span id="{{ $data['errorId'] }}"></span>
                                         <span class="input-label">
                                             <label class="{{ $data['labelClass'] }}" for="{{ $data['labelFor'] }}">
                                             {{ $data['label'] }}

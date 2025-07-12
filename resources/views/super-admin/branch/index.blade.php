@@ -20,6 +20,12 @@
     ['labelName'=>'Search', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-search-tab', 'toggle'=>'pill', 'target'=>'#v-pills-search', 'btnRole'=>'tab', 'controls'=>'v-pills-search', 'selected'=>'false'],
     ['labelName'=>'Replace', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-replace-tab', 'toggle'=>'pill', 'target'=>'#v-pills-replace', 'btnRole'=>'tab', 'controls'=>'v-pills-replace', 'selected'=>'false'],
   ];
+  // Modals
+  $modals = [
+    ['modal_id'=>'deletebranch'],
+    ['modal_id'=>'deleteconfirmbranch'],
+    ['modal_id'=>'updateconfirmbranch'],
+  ];
 ?>
 @extends('backend.layouts.dashboard')
 @section('content')
@@ -183,123 +189,105 @@
   </div>
   @include('loader.action-loader')
   
-  {{-- start delete modal --}}
-  <x-Modals.Modal modalParentClass="modal fade" modalChildClass="modal-dialog modal-sm modal-dialog-centered" modalId="deletebranch">
-    <x-Modals.SmallModals.SmallModal className="modal-content small_modal" styling="border:none;" smModalId="admin_modal_box">
-      {{-- header --}}
-      <x-Modals.SmallModals.Headers.Header className="modal-header modal-heading" headerId="logoutModal_header">
-        <h5 class="modal-title admin_title head_title font-white branch-skeleton ps-1 pe-1" id="staticBackdropLabel">
-          Delete [<span id="delete_branch"></span>]
-        </h5>
-        <button type="button" class="btn-close-modal head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
-          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
-        </button>
-      </x-Modals.SmallModals.Headers.Header>
-      {{-- body --}}
-      <x-Modals.SmallModals.Bodies.Body className="modal-body center-modal-content">
-        <div class="row profile-heading pb-3">
-          <div class="col-xl-12">
-            <div class="form-group delete_content branch-skeleton" id="load_id">
-              <span><div id="active_loader" class="loader_chart mt-1"></div></span>
-              <label class="label_user_edit" id="cate_delete" for="id">Branch-ID : </label>
-              <label class="label_user_edit" id="cat_id"> <span id="delete_branch_id"></span><br></label>
-              <label class="label_user_edit" id="cate_delete2">Are you sure, Would you like to delete <span id="delete_branch_body"></span>, permanently?</label>
-              <input type="hidden" id="delete_branch_id" name="branches_id">
+  {{-- start modal --}}
+  @foreach($modals as $data)
+    <x-Modals.Modal modalParentClass="modal fade" modalChildClass="modal-dialog modal-sm modal-dialog-centered" modalId="{{ $data['modal_id'] }}">
+      <x-Modals.SmallModals.SmallModal className="modal-content small_modal" styling="border:none;" smModalId="admin_modal_box">
+        {{-- header --}}
+        <x-Modals.SmallModals.Headers.Header className="modal-header modal-heading" headerId="logoutModal_header">
+          @if($data['modal_id'] === 'deletebranch')
+            <h5 class="modal-title admin_title head_title font-white branch-skeleton ps-1 pe-1" id="staticBackdropLabel">
+              Delete [<span id="delete_branch"></span>]
+            </h5>
+            <button type="button" class="btn-close-modal head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
+              data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+            </button>
+          @elseif($data['modal_id'] === 'deleteconfirmbranch')
+            <h6 class="modal-title admin_title scan confirm_title branch-skeleton font-white pt-1" id="staticBackdropLabel">
+              Confirm Delete
+            </h6>
+            <button type="button" class="btn-close-modal head_btn2 branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
+              data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+            </button>
+          @elseif($data['modal_id'] === 'updateconfirmbranch')
+            <h6 class="modal-title admin_title scan update_title branch-skeleton font-white pt-1" id="staticBackdropLabel">
+              Update [<span id="branch_update_modal_heading"></span>]
+            </h6>
+            <button type="button" class="btn-close-modal head_btn3 branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
+              data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+            </button>
+          @endif
+        </x-Modals.SmallModals.Headers.Header>
+        {{-- body --}}
+        <x-Modals.SmallModals.Bodies.Body className="modal-body center-modal-content">
+          @if($data['modal_id'] === 'deletebranch')
+            <div class="row profile-heading pb-3">
+              <div class="col-xl-12">
+                <div class="form-group delete_content branch-skeleton" id="load_id">
+                  <span><div id="active_loader" class="loader_chart mt-1"></div></span>
+                  <label class="label_user_edit" id="cate_delete" for="id">Branch-ID : </label>
+                  <label class="label_user_edit" id="cat_id"> <span id="delete_branch_id"></span><br></label>
+                  <label class="label_user_edit" id="cate_delete2">Are you sure, Would you like to delete <span id="delete_branch_body"></span>, permanently?</label>
+                  <input type="hidden" id="delete_branch_id" name="branches_id">
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </x-Modals.SmallModals.Bodies.Body>
-      {{-- footer --}}
-      <x-Modals.SmallModals.Footers.Footer className="modal-footer action_group" footerId="logoutModal_footer">
-        <p id="btn_group">
-          <a type="button" class="btn btn-danger modal_button logout_button branch-delete-skeleton" data-bs-dismiss="modal" id="noButton">No</a>
-        </p>
-        <p id="btn_group2">
-          <a type="button" class="btn btn-success modal_button logout_button yes_button branch-delete-skeleton" id="yesButton">
-            <span class="loading-yes-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-            <span class="yes-btn-text">{{__('translate.Yes')}}</span>
-          </a>
-        </p>  
-      </x-Modals.SmallModals.Footers.Footer>
-    </x-Modals.SmallModals.SmallModal>
-  </x-Modals.Modal>
-  {{-- end delete modal --}}
-
-  {{-- start delete confirm modal --}}
-  <x-Modals.Modal modalParentClass="modal fade" modalChildClass="modal-dialog modal-sm modal-dialog-centered" modalId="deleteconfirmbranch">
-    <x-Modals.SmallModals.SmallModal className="modal-content small_modal" styling="border:none;" smModalId="admin_modal_box">
-      {{-- header --}}
-      <x-Modals.SmallModals.Headers.Header className="modal-header modal-heading" headerId="logoutModal_header">
-        <h6 class="modal-title admin_title scan confirm_title branch-skeleton font-white pt-1" id="staticBackdropLabel">
-          Confirm Delete
-        </h6>
-        <button type="button" class="btn-close-modal head_btn2 branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
-          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
-        </button>
-      </x-Modals.SmallModals.Headers.Header>
-      {{-- body --}}
-      <x-Modals.SmallModals.Bodies.Body className="modal-body center-modal-content">
-        <p class="admin_paragraph branch-skeleton" style="text-align:center;" id="delete_text_message">
-          <label class="label_user_edit" id="cate_delete" for="id">Branch-ID : </label>
-          <label class="label_user_edit" id="cat_id"> <span id="delete_confrm_branch_id"></span><br></label>
-          <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, confirm or cancel ? </label>
-        </p>
-      </x-Modals.SmallModals.Bodies.Body>
-      {{-- footer --}}
-      <x-Modals.SmallModals.Footers.Footer className="modal-footer action_group" footerId="logoutModal_footer">
-        <x-Modals.SmallModals.Buttons.CancelBtn 
-          className="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" 
-          btnId="cancel_delete" 
-          lableName="Cancel"
-        />  
-        <x-Modals.SmallModals.Buttons.ConfirmBtn 
-          className="btn btn-sm purple-btn purple-btn-focus delete_branch branch-skeleton" 
-          btnId="delete_branch" 
-          lableName="Confirm" 
-          lableClass="delete-confrm-btn-text" 
-          spinerClass="delete-confrm-icon"
-        />  
-      </x-Modals.SmallModals.Footers.Footer>
-    </x-Modals.SmallModals.SmallModal>
-  </x-Modals.Modal>
-  {{-- end delete confirm modal --}}
-
-  {{-- start confirm update modal --}}
-  <x-Modals.Modal modalParentClass="modal fade" modalChildClass="modal-dialog modal-sm modal-dialog-centered" modalId="updateconfirmbranch">
-    <x-Modals.SmallModals.SmallModal className="modal-content small_modal" styling="border:none;" smModalId="admin_modal_box">
-      {{-- header --}}
-      <x-Modals.SmallModals.Headers.Header className="modal-header modal-heading" headerId="logoutModal_header">
-        <h6 class="modal-title admin_title scan update_title branch-skeleton font-white pt-1" id="staticBackdropLabel">
-          Update [<span id="branch_update_modal_heading"></span>]
-        </h6>
-        <button type="button" class="btn-close-modal head_btn3 branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
-          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
-        </button>
-      </x-Modals.SmallModals.Headers.Header>
-      {{-- body --}}
-      <x-Modals.SmallModals.Bodies.Body className="modal-body center-modal-content">
-        <p class="admin_paragraph branch-skeleton" style="text-align:center;" id="text_message">
-          <label class="label_user_edit" id="cate_confirm_update" for="id">Would you like to update <span id="branch_update_modal"></span>, confirm or cancel ? </label>
-        </p>
-      </x-Modals.SmallModals.Bodies.Body>
-      {{-- footer --}}
-      <x-Modals.SmallModals.Footers.Footer className="modal-footer action_group" footerId="logoutModal_footer">
-        <x-Modals.SmallModals.Buttons.CancelBtn 
-          className="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" 
-          btnId="cate_delete5" 
-          lableName="Cancel"
-        />  
-        <x-Modals.SmallModals.Buttons.ConfirmBtn 
-          className="btn btn-sm purple-btn purple-btn-focus update_confirm branch-skeleton" 
-          btnId="update_confirm" 
-          lableName="Confirm" 
-          lableClass="confirm-btn-text" 
-          spinerClass="confirm-icon"
-        />  
-      </x-Modals.SmallModals.Footers.Footer>
-    </x-Modals.SmallModals.SmallModal>
-  </x-Modals.Modal>
-  {{-- end confirm update modal --}}
+          @elseif($data['modal_id'] === 'deleteconfirmbranch')
+            <p class="admin_paragraph branch-skeleton" style="text-align:center;" id="delete_text_message">
+              <label class="label_user_edit" id="cate_delete" for="id">Branch-ID : </label>
+              <label class="label_user_edit" id="cat_id"> <span id="delete_confrm_branch_id"></span><br></label>
+              <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, confirm or cancel ? </label>
+            </p>
+          @elseif($data['modal_id'] === 'updateconfirmbranch')
+            <p class="admin_paragraph branch-skeleton" style="text-align:center;" id="text_message">
+              <label class="label_user_edit" id="cate_confirm_update" for="id">Would you like to update <span id="branch_update_modal"></span>, confirm or cancel ? </label>
+            </p>
+          @endif
+        </x-Modals.SmallModals.Bodies.Body>
+        {{-- footer --}}
+        <x-Modals.SmallModals.Footers.Footer className="modal-footer action_group" footerId="logoutModal_footer">
+          @if($data['modal_id'] === 'deletebranch')
+            <p id="btn_group">
+              <a type="button" class="btn btn-danger modal_button logout_button branch-delete-skeleton" data-bs-dismiss="modal" id="noButton">No</a>
+            </p>
+            <p id="btn_group2">
+              <a type="button" class="btn btn-success modal_button logout_button yes_button branch-delete-skeleton" id="yesButton">
+                <span class="loading-yes-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
+                <span class="yes-btn-text">{{__('translate.Yes')}}</span>
+              </a>
+            </p>  
+          @elseif($data['modal_id'] === 'deleteconfirmbranch')
+            <x-Modals.SmallModals.Buttons.CancelBtn 
+              className="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" 
+              btnId="cancel_delete" 
+              lableName="Cancel"
+            />  
+            <x-Modals.SmallModals.Buttons.ConfirmBtn 
+              className="btn btn-sm purple-btn purple-btn-focus delete_branch branch-skeleton" 
+              btnId="delete_branch" 
+              lableName="Confirm" 
+              lableClass="delete-confrm-btn-text" 
+              spinerClass="delete-confrm-icon"
+            />
+          @elseif($data['modal_id'] === 'updateconfirmbranch')
+            <x-Modals.SmallModals.Buttons.CancelBtn 
+              className="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" 
+              btnId="cate_delete5" 
+              lableName="Cancel"
+            />  
+            <x-Modals.SmallModals.Buttons.ConfirmBtn 
+              className="btn btn-sm purple-btn purple-btn-focus update_confirm branch-skeleton" 
+              btnId="update_confirm" 
+              lableName="Confirm" 
+              lableClass="confirm-btn-text" 
+              spinerClass="confirm-icon"
+            />
+          @endif
+        </x-Modals.SmallModals.Footers.Footer>
+      </x-Modals.SmallModals.SmallModal>
+    </x-Modals.Modal>
+  @endforeach
+  {{-- end modal --}}
 
   {{-- start confirm access modal --}}
   <div class="modal fade" id="accessconfirmbranch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">

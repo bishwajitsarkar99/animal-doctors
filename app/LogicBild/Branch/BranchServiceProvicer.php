@@ -245,24 +245,45 @@ class BranchServiceProvicer
             // Retrieve authenticated user
             $auth = Auth::user();
 
-            // Create a new branch
-            $branch = new Branches;
-            $branch->branch_id = $request->input('branch_id');
-            $branch->branch_name = $request->input('branch_name');
-            $branch->branch_type = $request->input('branch_type');
-            $branch->division_id = $request->input('division_id');
-            $branch->district_id = $request->input('district_id');
-            $branch->upazila_id = $request->input('upazila_id');
-            $branch->town_name = $request->input('town_name');
-            $branch->location = $request->input('location');
-            $branch->created_by = $auth->id;
+            if(!$auth){
+                return redirect()->route('login');
+            }
 
+            $role_id = $auth->role;
+            $email = $auth->login_email;
+            $user_branch_id = $auth->branch_id;
 
-            $branch->save();
-            return response()->json([
-                'status' => 200,
-                'messages' => 'New branch has added successfully.'
-            ]);
+            if($email && $role_id){
+                $data_create_permission = 1; // data create permission
+            }
+
+            if($data_create_permission === 1){
+                // Create a new branch
+                $branch = new Branches;
+                $branch->branch_id = $request->input('branch_id');
+                $branch->branch_name = $request->input('branch_name');
+                $branch->branch_type = $request->input('branch_type');
+                $branch->division_id = $request->input('division_id');
+                $branch->district_id = $request->input('district_id');
+                $branch->upazila_id = $request->input('upazila_id');
+                $branch->town_name = $request->input('town_name');
+                $branch->location = $request->input('location');
+                $branch->created_by = $auth->id;
+    
+                $branch->save();
+
+                return response()->json([
+                    'status' => 200,
+                    'messages' => 'New branch has added successfully.'
+                ]);
+            }else{
+
+                return response()->json([
+                    'status' => 403,
+                    'messages' => 'You have no data create permission.'
+                ]);
+            }
+
         }
     }
 
@@ -277,27 +298,48 @@ class BranchServiceProvicer
         }
 
         $role_id = $auth->role;
+        $email = $auth->login_email;
         $user_branch_id = $auth->branch_id;
 
-        // Get branch IDs based on role
-        $branch_ids = ($role_id === 1) ? DB::table('branches')->pluck('branch_id')->toArray() : [$user_branch_id];
+        if($role_id && $email){
+            $data_table_permission = 1; // Branch data table permission
+        }
+
+        if($data_table_permission === 1){
+
+            if($user_branch_id && $role_id){
+
+                if($role_id === 1){
+                    $branch_id = DB::table('branches')->pluck('branch_id')->toArray();
+                }else{
+                    $branch_id = [$user_branch_id];
+                }
+                
+                // Paginate branch table data using query, not collection
+                $perItem = max((int) $request->input('per_item', 10), 1);
         
-        // Paginate branch table data using query, not collection
-        $perItem = max((int) $request->input('per_item', 10), 1);
+                $paginateData = Branches::with(['divisions', 'districts', 'thana_or_upazilas'])->orderBy('id', 'asc')->paginate($perItem);
+                // Dropdown Search Menu
+                $allBranch = Branches::whereIn('branch_id', $branch_id)->orderBy('id', 'desc')->get();
+                //dd($allBranch);
+        
+                return response()->json([
+                    'data' => $paginateData->items(),
+                    'links' => $paginateData->toArray()['links'] ?? [],
+                    'total' => $paginateData->total(),
+                    'per_page' => $perItem,
+                    'per_item_num' => $paginateData->count(),
+                    'allBranch' => $allBranch,
+                ], 200);
+            }
 
-        $paginateData = Branches::with(['divisions', 'districts', 'thana_or_upazilas'])->orderBy('id', 'asc')->whereIn('branch_id', $branch_ids)->paginate($perItem);
-        // Dropdown Search Menu
-        $allBranch = Branches::whereIn('branch_id', $branch_ids)->orderBy('id', 'desc')->get();
-        //dd($allBranch);
+        }else{
+            return response()->json([
+                'status' => 422,
+                'message' => 'You have no data table permission.'
+            ]);
+        }
 
-        return response()->json([
-            'data' => $paginateData->items(),
-            'links' => $paginateData->toArray()['links'] ?? [],
-            'total' => $paginateData->total(),
-            'per_page' => $perItem,
-            'per_item_num' => $paginateData->count(),
-            'allBranch' => $allBranch,
-        ], 200);
     }
 
     /**
@@ -305,27 +347,58 @@ class BranchServiceProvicer
     */
     public function editBranchs($id)
     {
-        $branch = Branches::with(
-            [
-                'divisions',
-                'districts',
-                'thana_or_upazilas',
-                'created_users', 
-                'updated_users',
-            ]
-        )->find($id);
-        if($branch){
-            return response()->json([
-                'status' => 200,
-                'messages' => $branch,
-            ]);
-        }else{
-
-            return response()->json([
-                'status' => 404,
-                'messages' => 'Select company branch name.',
-            ]);
+        $auth = Auth::User();
+        if (!$auth) {
+            return redirect()->route('login'); // or unauthorized view
         }
+        $role_id = $auth->role;
+        $email = $auth->login_email;
+        $user_branch_id = $auth->branch_id;
+
+        if($email && $role_id){
+            $data_table_permission = 1; // log dashboard page authorize
+        }
+
+        if($user_branch_id && $role_id){
+
+            if ($role_id === 1) {
+                $branch_id = DB::table('branches')->pluck('branch_id')->toArray(); // Get all branch IDs as array
+            } else {
+                $branch_id = [$user_branch_id]; // Wrap single branch_id in an array
+            }
+
+            $branch = Branches::with(
+                [
+                    'divisions',
+                    'districts',
+                    'thana_or_upazilas',
+                    'created_users', 
+                    'updated_users',
+                ]
+            )->whereIn('branch_id', $branch_id)->find($id);
+
+            if($data_table_permission === 1){
+
+                if($branch){
+
+                    return response()->json([
+                        'status' => 200,
+                        'messages' => $branch,
+                    ]);
+                }else{
+        
+                    return response()->json([
+                        'status' => 404,
+                        'messages' => 'Select company branch name.',
+                    ]);
+                }
+            }else{
+                return response()->json([
+                    'status' => 400,
+                    'messages' => 'You have no data table permission.',
+                ]);
+            }
+        } 
     }
 
     /**
@@ -360,30 +433,63 @@ class BranchServiceProvicer
             // Retrieve authenticated user
             $auth = Auth::user();
 
-            // Create a new branch
-            $branch = Branches::find($id);
-            if($branch){
-                $branch->branch_id = $request->input('branch_id');
-                $branch->branch_name = $request->input('branch_name');
-                $branch->branch_type = $request->input('branch_type');
-                $branch->division_id = $request->input('division_id');
-                $branch->district_id = $request->input('district_id');
-                $branch->upazila_id = $request->input('upazila_id');
-                $branch->town_name = $request->input('town_name');
-                $branch->location = $request->input('location');
-                $branch->updated_by = $auth->id;
+            if (!$auth) {
+                return redirect()->route('login'); // or unauthorized view
+            }
+
+            $role_id = $auth->role;
+            $email = $auth->login_email;
+            $user_branch_id = $auth->branch_id;
+
+            if($email && $role_id){
+                $data_update_permission = 1; // data update permission
+            }
+
+            if($user_branch_id && $role_id){
+
+                if ($role_id === 1) {
+                    $branch_id = DB::table('branches')->pluck('branch_id')->toArray(); // Get all branch IDs as array
+                } else {
+                    $branch_id = [$user_branch_id]; // Wrap single branch_id in an array
+                }
+
+                // Create a new branch
+                $branch = Branches::whereIn('branch_id', $branch_id)->find($id);
+                
+                if($data_update_permission === 1){
+
+                    if($branch){
+
+                        $branch->branch_id = $request->input('branch_id');
+                        $branch->branch_name = $request->input('branch_name');
+                        $branch->branch_type = $request->input('branch_type');
+                        $branch->division_id = $request->input('division_id');
+                        $branch->district_id = $request->input('district_id');
+                        $branch->upazila_id = $request->input('upazila_id');
+                        $branch->town_name = $request->input('town_name');
+                        $branch->location = $request->input('location');
+                        $branch->updated_by = $auth->id;
+            
+            
+                        $branch->save();
     
-    
-                $branch->save();
-                return response()->json([
-                    'status' => 200,
-                    'messages' => 'Branch has updated successfully.'
-                ]);
-            }else{
-                return response()->json([
-                    'status' => 404,
-                    'messages' => 'Branch name is no found.'
-                ]);
+                        return response()->json([
+                            'status' => 200,
+                            'messages' => 'Branch has updated successfully.'
+                        ]);
+
+                    }else{
+                        return response()->json([
+                            'status' => 404,
+                            'messages' => 'Branch name is no found.'
+                        ]);
+                    }
+                }else{
+                    return response()->json([
+                        'status' => 403,
+                        'messages' => 'You have no data update permission.'
+                    ]);
+                }
             }
         }
     }
@@ -393,12 +499,45 @@ class BranchServiceProvicer
     */
     public function deleteBranchs($id)
     {
-        $branchs = Branches::find($id);
-        $branchs->delete();
-        return response()->json([
-            'status' => 200,
-            'messages' => 'The branch has deleted successfully.'
-        ]);
+        $auth = Auth::user();
+        if(!$auth){
+            return redirect()->route('login'); // unauthorize user
+        }
+
+        $role_id = $auth->role;
+        $email = $auth->login_email;
+        $user_branch_id = $auth->branch_id;
+
+        if($role_id && $email){
+            $delete_permission = 1; // delete permission
+        }
+
+        if($role_id && $user_branch_id){
+
+            if($role_id === 1){
+                $branch_id = DB::table('branches')->pluck('branch_id')->toArray();
+            }else{
+                $branch_id = [$user_branch_id];
+            }
+
+            $branchs = Branches::whereIn('branch_id', $branch_id)->find($id);
+            
+            if($delete_permission === 1){
+                $branchs->delete();
+                
+                return response()->json([
+                    'status' => 200,
+                    'messages' => 'The branch has deleted successfully.'
+                ]);
+            }else{
+
+                return response()->json([
+                    'status' => 403,
+                    'messages' => 'You have no data delete permission.'
+                ]);
+            }
+        }
+
     }
 
     /**

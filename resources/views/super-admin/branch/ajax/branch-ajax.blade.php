@@ -1,5 +1,5 @@
 <script type="module">
-    import { currentDate } from "/module/module-min-js/helper-function-min.js";
+    import { modernDateFormat } from "/module/module-min-js/helper-function-min.js";
     import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     buttonLoader();
 
@@ -153,10 +153,17 @@
                 type: "GET",
                 url: "/company/branch-edit/" + id,
                 success: function(response){
+                    $('#response_message').empty();
+                    $("#SettingDisplay").empty();
+                    $('#response_message').removeClass('alert alert-danger');
                     if(response.status == 404){
-                        $('#success_message').html("");
-                        // $('#success_message').addClass('alert alert-danger');
-                        // $('#success_message').text(response.messages);
+                        $('#response_message').html("");
+                        // $('#response_message').addClass('alert alert-danger');
+                        // $('#response_message').text(response.messages);
+                    }else if(response.status == 400){
+                        $('#response_message').html("");
+                        $('#response_message').addClass('alert alert-danger');
+                        $('#response_message').text(response.messages);
                     }else if(response.status == 200){
                         $("#accessconfirmbranch").modal('show');
                         $("#dataPullingProgress").removeAttr('hidden');
@@ -234,7 +241,7 @@
                                 $("#firstUserEmail").val(messages.created_users.login_email);
                                 $("#firstCreatedBy").val(createdByRole);
                                 if(messages.created_at !== ''){
-                                    $("#firstCreatedAt").val(currentDate(messages.created_at));
+                                    $("#firstCreatedAt").val(modernDateFormat(messages.created_at));
                                 }else{
                                     $("#firstCreatedAt").val('-');
                                 }
@@ -274,7 +281,7 @@
                                 $("#secondUserEmail").val((messages.updated_users.login_email));
                                 $("#secondUpdateBy").val(updatedByRole);
                                 if(messages.created_at !== messages.updated_at){
-                                    $("#secondUpdateAt").val(currentDate(messages.updated_at));
+                                    $("#secondUpdateAt").val(modernDateFormat(messages.updated_at));
                                 }else{
                                     $("#secondUpdateAt").val('-');
                                 }
@@ -291,6 +298,33 @@
                             fetch_district(response.messages.division_id, function(){
                                 // Set the value once options are available
                                 $('.edit_district_id').val(response.messages.district_id).trigger('change.select2');
+                                // Add a small delay to ensure Select2 DOM is updated
+                                setTimeout(function () {
+                                    const district = $("#select2-select_district-container").attr('title');
+
+                                    fetch_upazila(response.messages.district_id, function () {
+                                        $('.edit_upazila_id').val(response.messages.upazila_id).trigger('change.select2');
+
+                                        setTimeout(function () {
+                                            const upazila = $("#select2-select_upazila-container").attr('title');
+
+                                            // Now safely append setting display
+                                            const settingDisplay = $("#SettingDisplay");
+                                            settingDisplay.append(`
+                                                <li id="clearDistrict">
+                                                    <label class="form-check-label line-label" for="district">
+                                                        District : ${district}
+                                                    </label>
+                                                </li>
+                                                <li id="clearUpazila">
+                                                    <label class="form-check-label line-label" for="upazila">
+                                                        Upazila/Thana : ${upazila}
+                                                    </label>
+                                                </li>
+                                            `);
+                                        }, 200); // Allow Select2 to finish updating the DOM
+                                    });
+                                }, 200);
                             });
                             fetch_upazila(response.messages.district_id, function (){
                                 // Set the value once options are available
@@ -317,8 +351,6 @@
                             $("#settingDisplayCard").removeAttr('hidden');
                             const settingDisplay = $("#SettingDisplay"); 
                             const division = $("#select2-select_division-container").attr('title');
-                            const district = $("#select2-select_district-container").attr('title');
-                            const upazila = $("#select2-select_upazila-container").attr('title');
 
                             settingDisplay.append(`
                                 <li id="clearBranchType">
@@ -336,21 +368,6 @@
                                         Branch-Name : ${response.messages.branch_name}
                                     </label>
                                 </li>
-                                <li id="clearDivision">
-                                    <label class="form-check-label line-label" for="division">
-                                        Division : ${division}
-                                    </label>
-                                </li>
-                                <li id="clearDistrict">
-                                    <label class="form-check-label line-label" for="district">
-                                        District : ${district}
-                                    </label>
-                                </li>
-                                <li id="clearUpazila">
-                                    <label class="form-check-label line-label" for="upazila">
-                                        Upazila/Thana : ${upazila}
-                                    </label>
-                                </li>
                                 <li id="clearCity">
                                     <label class="form-check-label line-label" for="city">
                                         City/Town : ${response.messages.town_name}
@@ -359,6 +376,11 @@
                                 <li id="clearLocation">
                                     <label class="form-check-label line-label" for="location">
                                         Location : ${response.messages.location}
+                                    </label>
+                                </li>
+                                <li id="clearDivision">
+                                    <label class="form-check-label line-label" for="division">
+                                        Division : ${division}
                                     </label>
                                 </li>
                             `);
@@ -406,7 +428,7 @@
             if (rows.length === 0) {
                 return `
                     <tr>
-                        <td class="error_data" align="center" text-danger colspan="11">
+                        <td class="td-error-cell" align="center" text-danger colspan="9">
                             <div class="table-svg-container pt-1">
                                 <svg width="20" height="30" viewBox="0 0 61 81" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="#A" x=".5" y=".5"/><symbol id="A" overflow="visible"><g stroke="none"><path d="M0 10.929V69.07C0 75.106 13.432 80 30 80V10.929H0z" fill="#3999c6"/><path d="M29.589 79.999h.412c16.568 0 30-4.891 30-10.929v-58.14H29.589v69.07z" fill="#59b4d9"/><path d="M60 10.929c0 6.036-13.432 10.929-30 10.929S0 16.965 0 10.929 13.432 0 30 0s30 4.893 30 10.929"/><path d="M53.867 10.299c0 3.985-10.686 7.211-23.867 7.211S6.132 14.284 6.132 10.299 16.819 3.088 30 3.088s23.867 3.228 23.867 7.211" fill="#7fba00"/><path d="M48.867 14.707c3.124-1.219 5.002-2.745 5.002-4.403 0-3.985-10.686-7.213-23.868-7.213S6.134 6.318 6.134 10.303c0 1.658 1.877 3.185 5.002 4.403 4.363-1.703 11.182-2.803 18.865-2.803s14.5 1.1 18.866 2.803" fill="#b8d432"/><path d="M49.389 58.071c-1.605 1.346-3.78 2.022-6.607 2.022h-9.428V35.358h8.943c2.816 0 4.973.517 6.457 1.588 1.389 1.005 2.086 2.41 2.086 4.205 0 1.431-.507 2.648-1.543 3.719-.882.885-1.942 1.497-3.248 1.856v.058c1.753.217 3.184.889 4.25 2.017.997 1.071 1.511 2.384 1.511 3.903.007 2.262-.813 4.033-2.42 5.366m-22.977-1.457c-2.359 2.322-5.544 3.479-9.519 3.479H8.19V35.358h8.704c8.731 0 13.098 3.998 13.098 12.043 0 3.846-1.181 6.925-3.579 9.213"/><path d="M16.439 39.873h-2.727v15.704h2.759c2.425 0 4.304-.763 5.695-2.227 1.332-1.463 2.006-3.415 2.006-5.883 0-2.317-.674-4.143-1.975-5.495-1.365-1.397-3.275-2.099-5.757-2.099" fill="#3999c6"/><path d="M43.993 44.483c.666-.583.999-1.346.999-2.293 0-1.834-1.332-2.747-4.033-2.747h-2.084v5.86h2.454c1.122 0 2.031-.282 2.665-.821m.909 5.817c-.73-.546-1.722-.853-3.004-.853h-3.03v6.524h3.001c1.276 0 2.303-.304 3.062-.914.696-.612 1.058-1.399 1.058-2.439.006-.977-.357-1.769-1.087-2.317" fill="#59b4d9"/></g></symbol></svg>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="rgb(205, 247, 0)" stroke="#3999c6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-git-commit"><circle cx="12" cy="12" r="4"/><line x1="1.05" y1="12" x2="7" y2="12"/><line x1="17.01" y1="12" x2="22.96" y2="12"/></svg>
@@ -421,7 +443,7 @@
             return [...rows].map((row, key) => {
                 return `
                     <tr class="branch-table-row" key="${key}" id="BranchRow">
-                        <td class="td-cell" style="text-align:center;">${row.id}</td>
+                        <td class="td-cell" style="text-align:center;">${(key)+1}</td>
                         <td class="td-cell-second">${row.branch_type}</td>
                         <td class="td-cell-second">${row.branch_id}</td>
                         <td class="td-cell-second">${row.branch_name}</td>
@@ -454,7 +476,12 @@
                 url: current_url,
                 dataType: 'json',
                 success: function(response) {
-                    const { data, links, total, per_page, per_item_num } = response;
+                    const { data, links, total, per_page, per_item_num, message } = response;
+
+                    if (message) {
+                        showMessageInTable(message);
+                        return;
+                    }
                     
                     // Branch Table Data =======================
                     $("#BranchListTableBody").html(table_rows([...data]));
@@ -463,6 +490,7 @@
                     $("#total_branch_items").text(total);
                     $("#total_per_branch_items").text(per_page);
                     $("#per_branch_items_num").text(per_item_num);
+
                 },
                 complete: function() {
                     hideTableLoader();
@@ -470,7 +498,32 @@
                     focuButton();
                     focuTableFooterLabel();
                 },
+                error: function(xhr) {
+                    if (xhr.status === 422) {
+                        let res = xhr.responseJSON;
+                        if (res && res.message) {
+                            showMessageInTable(res.message);
+                        }
+                        console.clear(); // Clears the console (optional)
+                    } else {
+                        showMessageInTable('Server error. Please try again later');
+                    }
+                }
             });
+            function showMessageInTable(message) {
+                $('#BranchListTableBody').html(`
+                    <tr>
+                        <td class="td-error-cell text-center" colspan="9">
+                            <div class="table-svg-container pt-1">
+                                <svg width="20" height="30" viewBox="0 0 61 81" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="#A" x=".5" y=".5"/><symbol id="A" overflow="visible"><g stroke="none"><path d="M0 10.929V69.07C0 75.106 13.432 80 30 80V10.929H0z" fill="#3999c6"/><path d="M29.589 79.999h.412c16.568 0 30-4.891 30-10.929v-58.14H29.589v69.07z" fill="#59b4d9"/><path d="M60 10.929c0 6.036-13.432 10.929-30 10.929S0 16.965 0 10.929 13.432 0 30 0s30 4.893 30 10.929"/><path d="M53.867 10.299c0 3.985-10.686 7.211-23.867 7.211S6.132 14.284 6.132 10.299 16.819 3.088 30 3.088s23.867 3.228 23.867 7.211" fill="#7fba00"/><path d="M48.867 14.707c3.124-1.219 5.002-2.745 5.002-4.403 0-3.985-10.686-7.213-23.868-7.213S6.134 6.318 6.134 10.303c0 1.658 1.877 3.185 5.002 4.403 4.363-1.703 11.182-2.803 18.865-2.803s14.5 1.1 18.866 2.803" fill="#b8d432"/><path d="M49.389 58.071c-1.605 1.346-3.78 2.022-6.607 2.022h-9.428V35.358h8.943c2.816 0 4.973.517 6.457 1.588 1.389 1.005 2.086 2.41 2.086 4.205 0 1.431-.507 2.648-1.543 3.719-.882.885-1.942 1.497-3.248 1.856v.058c1.753.217 3.184.889 4.25 2.017.997 1.071 1.511 2.384 1.511 3.903.007 2.262-.813 4.033-2.42 5.366m-22.977-1.457c-2.359 2.322-5.544 3.479-9.519 3.479H8.19V35.358h8.704c8.731 0 13.098 3.998 13.098 12.043 0 3.846-1.181 6.925-3.579 9.213"/><path d="M16.439 39.873h-2.727v15.704h2.759c2.425 0 4.304-.763 5.695-2.227 1.332-1.463 2.006-3.415 2.006-5.883 0-2.317-.674-4.143-1.975-5.495-1.365-1.397-3.275-2.099-5.757-2.099" fill="#3999c6"/><path d="M43.993 44.483c.666-.583.999-1.346.999-2.293 0-1.834-1.332-2.747-4.033-2.747h-2.084v5.86h2.454c1.122 0 2.031-.282 2.665-.821m.909 5.817c-.73-.546-1.722-.853-3.004-.853h-3.03v6.524h3.001c1.276 0 2.303-.304 3.062-.914.696-.612 1.058-1.399 1.058-2.439.006-.977-.357-1.769-1.087-2.317" fill="#59b4d9"/></g></symbol></svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="rgb(205, 247, 0)" stroke="#3999c6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-git-commit"><circle cx="12" cy="12" r="4"/><line x1="1.05" y1="12" x2="7" y2="12"/><line x1="17.01" y1="12" x2="22.96" y2="12"/></svg>
+                                <span><svg width="20" height="20" fill="#3999c6" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 445.38"><path d="M6.95 0h498.1c3.82 0 6.95 3.16 6.95 6.92v96.5l-.02.46v341.5H0V88.11h.01L0 6.92C0 3.11 3.12 0 6.95 0zm11.57 315.78h104.12V219.6H18.52v96.18zm122.64 0h105.8V219.6h-105.8v96.18zm124.32 0h105.35V219.6H265.48v96.18zm123.87 0h104.12V219.6H389.35v96.18zm104.12 18.52H389.35v92.56h104.12V334.3zm-122.64 0H265.48v92.56h105.35V334.3zm-123.87 0h-105.8v92.56h105.8V334.3zm-124.32 0H18.52v92.56h104.12V334.3zM18.52 201.09h104.12v-94.46H18.52v94.46zm122.64 0h105.8v-94.46h-105.8v94.46zm124.32 0h105.35v-94.46H265.48v94.46zm123.87 0h104.12v-94.46H389.35v94.46z"/></svg></span>
+                                <span>${message} <span style="color:rgb(220, 53, 69)">!</span></span>
+                            </div>
+                        </td>
+                    </tr>
+                `);
+            }
         }
         function showTableLoader() {
             $('#tableOverlayLoader').removeClass('display_none');
@@ -518,7 +571,7 @@
                             if (link.label.toLowerCase().includes("previous")) {
                                 return `
                                     <li class="page-item${link.active ? ' active' : ''}" key=${key}>
-                                        <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
+                                        <a class="page-link btn_page" data-url="${link.url ? link.url : '#'}">
                                             <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 121.66"><title>direction-left</title><path d="M1.24,62.65,120.1,121.46a1.92,1.92,0,0,0,2.58-.88,1.89,1.89,0,0,0,0-1.76h0l-30.87-58,30.87-58h0a1.89,1.89,0,0,0,0-1.76A1.92,1.92,0,0,0,120.1.2L1.24,59a2,2,0,0,0,0,3.64Z"/></svg>
                                         </a>
                                     </li>
@@ -527,7 +580,7 @@
                             if (link.label.toLowerCase().includes("next")) {
                                 return `
                                     <li class="page-item${link.active ? ' active' : ''}" key=${key}>
-                                        <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
+                                        <a class="page-link btn_page" data-url="${link.url ? link.url : '#'}">
                                             <svg width="10px" height="9px" fill="#111" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.86 121.64"><title>direction-right</title><path d="M121.62,59,2.78.2A1.92,1.92,0,0,0,.2,1.08a1.89,1.89,0,0,0,0,1.76h0l30.87,58L.23,118.8h0a1.89,1.89,0,0,0,0,1.76,1.92,1.92,0,0,0,2.58.88l118.84-58.8a2,2,0,0,0,0-3.64Z"/></svg>
                                         </a>
                                     </li>
@@ -537,7 +590,7 @@
                             // Regular page numbers
                             return `
                                 <li class="page-item${link.active ? ' active' : ''}" key=${key}>
-                                    <a class="page-link btn_page" href="${link.url ? link.url : '#'}">
+                                    <a class="page-link btn_page" data-url="${link.url ? link.url : '#'}">
                                         ${link.label}
                                     </a>
                                 </li>
@@ -548,9 +601,9 @@
             `;
         };
 
-        // =============== Second Page Setting Box =====================
+        // =============== Second Page Branch Setting =====================
 
-        // =============== Setting Optation Mode Part
+        // =============== Setting Optations
         // Select ID Button form Setting Mode
         $(document).on('click', 'label.custom-label', function(){
             // Remove class from all other custom-labels
@@ -708,7 +761,7 @@
             }
         });
 
-        // =============== Setting Components Part ===============
+        // =============== Branch Setting Part ===============
         // next button action
         $(document).on('click', '#next', function () {
             $("#SelectBranchID").empty();
@@ -885,7 +938,7 @@
             e.stopImmediatePropagation();
             e.preventDefault();
 
-            const url = $(this).attr('href');
+            const url = $(this).attr('data-url');
 
             if (url !== '#') {
                 fetchTableBranch('', url);
@@ -908,6 +961,8 @@
                 url: currentUrl,
                 dataType: 'json',
                 success: function(response) {
+                    $('#permission_message').empty();
+                    $('#permission_message').removeClass('alert alert-danger');
                     const branch_categories = response.branch_categories;
                     $("#branch_type").empty();
                     $("#branch_type").append('<option value="">Select Branch Category Name</option>');
@@ -952,6 +1007,7 @@
                 data: data,
                 dataType: "json",
                 success : function(response){
+                    
                     if(response.status == 400){
                         // display form field
                         $("#formContent").removeClass('display_none');
@@ -995,6 +1051,19 @@
                                 $('#location').html("");
                             }
                         });
+                    }if(response.status == 403){
+                        // display form field
+                        $("#formContent").removeClass('display_none');
+                        $("#ContentView").addClass('display_none');
+                        // change form button mode
+                        $("#save").addClass('display_none');
+                        $("#save").attr('disabled', true);
+                        $("#next").removeClass('display_none');
+
+                        $('#permission_message').html("");
+                        $('#permission_message').addClass('alert alert-danger');
+                        $('#permission_message').text(response.messages);
+                        
                     }else{
                         $("#loaderBox").removeClass('display_none');
                         $("#ContentView").removeClass('display_none');
@@ -1097,6 +1166,10 @@
         $(document).on('click', '#cancel_btn', function(){
             // error field cancel
             removeField();
+            $('#permission_message').empty();
+            $('#response_message').empty();
+            $('#permission_message').removeClass('alert alert-danger');
+            $('#response_message').removeClass('alert alert-danger');
 
             if ($("#save").is(":visible")) {
                 $("#next").removeClass('display_none');
@@ -1414,6 +1487,7 @@
                 dataType: "json",
                 success : function(response){
                     if(response.status == 400){
+                        $("#updateconfirmbranch").modal('hide');
                         $.each(response.errors, function(key, err_value){
                             if (key === 'branch_name') {
                                 $("#updateForm_error").fadeIn();
@@ -1456,6 +1530,11 @@
                             }
                             $("#updateconfirmbranch").modal('hide').fadeOut();
                         });
+                    }else if(response.status == 403){
+                        $("#updateconfirmbranch").modal('hide');
+                        $('#response_message').html("");
+                        $('#response_message').addClass('alert alert-danger');
+                        $('#response_message').text(response.messages);
                     }else{
                         $("#updateconfirmbranch").modal('hide');
                         $("#loaderBox").removeClass('display_none');
@@ -1580,32 +1659,70 @@
                 type: "DELETE",
                 url: "/company/branch-delete/" + id,
                 success: function(response){
-                    $("#accessconfirmbranch").modal('show');
-                    $("#updateconfirmbranch").modal('hide');
-                    $("#deletebranch").modal('hide').fadeOut();
-                    $("#deleteconfirmbranch").modal('hide').fadeOut();
-                    $("#pageLoader").removeAttr('hidden');
-                    $("#access_modal_box").addClass('loader_area');
-                    $("#processModal_body").removeClass('loading_body_area');
-
-                    setTimeout(() => {
+                    if(response.status == 403){
                         $("#accessconfirmbranch").modal('hide');
-                        $("#pageLoader").attr('hidden', true);
-                        $("#access_modal_box").removeClass('loader_area');
-                        $("#processModal_body").addClass('loading_body_area');
+                        $("#deletebranch").modal('hide').fadeOut();
+                        $("#deleteconfirmbranch").modal('hide').fadeOut();
+                        $('#response_message').html("");
+                        $('#response_message').addClass('alert alert-danger');
+                        $('#response_message').text(response.messages);
 
-                        $('#success_message').addClass('alert_show ps-1 pe-1');
-                        $('#success_message').text(response.messages);
-                        $("#select_branch").val("").trigger('change');
-                        $('#success_message').fadeIn();
-                        clearFields();
+                    }else{
+
+                        $("#accessconfirmbranch").modal('show');
+                        $("#deletebranch").modal('hide').fadeOut();
+                        $("#deleteconfirmbranch").modal('hide').fadeOut();
+                        $("#loaderBox").removeClass('display_none');
+    
                         setTimeout(() => {
-                            $('#success_message').fadeOut();
-                        }, 3000);
-                        
-                        searchBranch();
-                        
-                    }, 1500);
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#loaderBox").addClass('display_none');
+                            clearFields();
+
+                            $("#inputBranchNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#inputCityNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#inputLocatioinNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#dropdwonDivisionNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#dropdwonDistrictNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+
+                            $("#dropdwonUpazilaNameGroup").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
+                            $("#documents").attr('hidden', true);
+                            // Display Branch Settings Empty
+                            let settingDisplay = $("#SettingDisplay");
+                            settingDisplay.find('#clearBranchType').remove();
+                            settingDisplay.find('#clearBranchID').remove();
+                            settingDisplay.find('#clearBranchName').remove();
+                            settingDisplay.find('#clearDivision').remove();
+                            settingDisplay.find('#clearDistrict').remove();
+                            settingDisplay.find('#clearUpazila').remove();
+                            settingDisplay.find('#clearCity').remove();
+                            settingDisplay.find('#clearLocation').remove();
+    
+                            setTimeout(() => {
+                                showSuccessToast(response.messages)
+                            }, 1000);
+                            
+                            searchBranch();
+                            fetchTableBranch();
+                            
+                        }, 1500);
+                    }
                 }
             });
         });
@@ -1620,7 +1737,6 @@
         });
 
         // =================== End Branch Setting Section ===================================
-
 
         // =================== Start Branch Category Setting Section ===================================
 
