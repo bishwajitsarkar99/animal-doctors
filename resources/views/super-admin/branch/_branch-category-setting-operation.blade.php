@@ -1,10 +1,10 @@
 <?php
     // Radio Button Groups
     $radioButtonGroups = [
-        ['lable'=>'New Branch Category', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault1', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault1', 'checkedAttr'=>''],
-        ['lable'=>'Branch Category Update', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault2', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault2', 'checkedAttr'=>'checked'],
-        ['lable'=>'Branch Category Delete', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault3', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault3', 'checkedAttr'=>'checked'],
-        ['lable'=>'None', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault4', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefault', 'btnId'=>'flexRadioDefault4', 'checkedAttr'=>'checked']
+        ['lable'=>'New Branch Category', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault5', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefaults', 'btnId'=>'flexRadioDefault5', 'checkedAttr'=>''],
+        ['lable'=>'Branch Category Update', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault6', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefaults', 'btnId'=>'flexRadioDefault6', 'checkedAttr'=>'checked'],
+        ['lable'=>'Branch Category Delete', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault7', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefaults', 'btnId'=>'flexRadioDefault7', 'checkedAttr'=>'checked'],
+        ['lable'=>'None', 'lableClass'=>'form-check-label custom-label', 'lbFor'=>'flexRadioDefault8', 'btnClass'=>'form-check-input input-triger', 'btnType'=>'radio', 'btnName'=>'flexRadioDefaults', 'btnId'=>'flexRadioDefault8', 'checkedAttr'=>'checked']
     ];
 ?>
 <x-CustomCards.Card cardClass="card custom-card component-focus" cardId="" hiddenAttr="">
@@ -14,7 +14,7 @@
     </x-CustomCards.CardHeaders.CardHeader>
     <x-CustomCards.CardBodies.CardBody cardBodyClass="card-body" cardBodyId="" hiddenAttr="">
         <x-UlListMenus.UlListMenu ulClassName="optation-box" ulPaddingClassName="" ulId="">
-            <x-UlListMenus.UlListMenu ulClassName="" ulPaddingClassName="optation-padding" ulId="SettingMode" >
+            <x-UlListMenus.UlListMenu ulClassName="" ulPaddingClassName="optation-padding" ulId="settingModeTwo" >
                 @foreach($radioButtonGroups as $data)
                     <li>
                         <x-Buttons.RadioButtons.RadioButton 

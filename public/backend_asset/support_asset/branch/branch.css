@@ -483,7 +483,7 @@ button#branchTypeRefresh{
     justify-content: space-evenly;
     align-items: center;
 }
-#loaderSpinner {
+#loaderSpinner,#loadingSpinner {
     width: 25px;
     height: 25px;
 }
@@ -590,7 +590,8 @@ input.form-check-input:checked {
 .label-highlight{
     color: #0d6efd;
 }
-input#flexRadioDefault1,input#flexRadioDefault2,input#flexRadioDefault3,input#flexRadioDefault4 {
+input#flexRadioDefault1,input#flexRadioDefault2,input#flexRadioDefault3,input#flexRadioDefault4,
+input#flexRadioDefault5,input#flexRadioDefault6,input#flexRadioDefault7,input#flexRadioDefault8 {
     box-shadow: none;
     cursor: pointer;
 }
@@ -1142,9 +1143,6 @@ td.td_with{
     /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
     padding-bottom: 1px;
 }
-label.label_position {
-    padding: 0px 8px;
-}
 .form-group.role_nme {
     padding: 3px 5px;
     background-image: none;
@@ -1434,8 +1432,10 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     background-size: 200%;
     animation: 1s infinite reverse skeleton;
 }
-button#branch_type_create {
-    margin-top: 5px;
+#setting__card {
+    border: none;
+    outline: none;
+    margin-top: 15px;
 }
 button#branch_type_delete {
     background: rgb(205 55 0 / 84%);
@@ -1474,7 +1474,8 @@ input#branchTypeName {
     border: 1px solid rgba(0,123,255,0.2);
 }
 input#branchTypeName:focus{
-    border: 1px solid #0056b3;
+    outline: 1px solid #2f86e4;
+    border-color: #2f86e4;
 }
 button#update_btn_confirm{
     font-size: 13px;

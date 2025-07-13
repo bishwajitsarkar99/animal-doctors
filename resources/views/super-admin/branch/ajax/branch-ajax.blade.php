@@ -632,7 +632,7 @@
         // =============== Second Page Branch Setting =====================
 
         // =============== Setting Optations
-        // Select ID Button form Setting Mode
+        // Select ID Radio Button form Setting Mode
         $(document).on('click', 'label.custom-label', function(){
             // Remove class from all other custom-labels
             $('#SettingMode label.custom-label').removeClass('label-highlight');
@@ -1855,6 +1855,240 @@
         // =================== End Branch Setting Section ===================================
 
         // =================== Start Branch Category Setting Section ===================================
+
+        // =============== Setting Optations
+        // Select ID Button form Setting Mode
+        $(document).on('click', 'label.custom-label', function(){
+            // Remove class from all other custom-labels
+            $('#settingModeTwo label.custom-label').removeClass('label-highlight');
+            // Add class to the clicked one
+            $(this).addClass('label-highlight');
+        });
+
+        // setting mode optation radio button action
+        $(document).on('click', '#flexRadioDefault5, #flexRadioDefault6, #flexRadioDefault7, #flexRadioDefault8', function(){
+            // Hide all button initially
+            $("#enableCategoryBranch").attr('hidden', true);
+            $("#enableUpdateCategory").attr('hidden', true);
+            $("#enableDeleteCategory").attr('hidden', true);
+            $("#disabledCategoryBranch").attr('hidden', true);
+            $("#disabledUpdatedCategory").attr('hidden', true);
+            $("#disabledDeleteCategory").attr('hidden', true);
+            $("#setting__card").attr('hidden', true);
+            $("#settingCard").attr('hidden', true);
+
+            $(".disabledChecking").attr('hidden', true);
+            $(".enableChecking").attr('hidden', true);
+            $("#loading").removeAttr('hidden');
+            $("#loadingSpin").removeAttr('hidden');
+            $("#loadingSpinner").attr('hidden', true);
+
+            // Show button step by step according to condition
+            if($(this).attr('id') === 'flexRadioDefault5' ){
+                setTimeout(() => {
+                    $("#settingCard").removeAttr('hidden');
+                    $("#enableCategoryBranch").removeAttr('hidden');
+                    $("#loading").attr('hidden', true);
+                    $("#loadingSpin").attr('hidden', true);
+                    $("#loadingSpinner").attr('hidden', true);
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                }, 1000);
+            }else if($(this).attr('id') === 'flexRadioDefault6'){
+                setTimeout(() => {
+                    $("#settingCard").removeAttr('hidden');
+                    $("#enableUpdateCategory").removeAttr('hidden');
+                    $("#loading").attr('hidden', true);
+                    $("#loadingSpin").attr('hidden', true);
+                    $("#loadingSpinner").attr('hidden', true);
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                }, 1000);
+            }else if($(this).attr('id') === 'flexRadioDefault7'){
+                setTimeout(() => {
+                    $("#settingCard").removeAttr('hidden');
+                    $("#enableDeleteCategory").removeAttr('hidden');
+                    $("#loading").attr('hidden', true);
+                    $("#loadingSpin").attr('hidden', true);
+                    $("#loadingSpinner").attr('hidden', true);
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                }, 1000);
+            }else if($(this).attr('id') === 'flexRadioDefault8'){
+                $("#settingCard").attr('hidden', true);
+                $("#enableCategoryBranch").attr('hidden', true);
+                $("#enableUpdateCategory").attr('hidden', true);
+                $("#enableDeleteCategory").attr('hidden', true);
+                $("#loading").attr('hidden', true);
+                $("#loadingSpin").attr('hidden', true);
+                $("#loadingSpinner").attr('hidden', true);
+                $("#disabledCategoryBranch").attr('hidden', true);
+                $("#disabledUpdatedCategory").attr('hidden', true);
+                $("#disabledDeleteCategory").attr('hidden', true);
+                $(".disabledChecking").attr('hidden', true);
+                $(".enableChecking").attr('hidden', true);
+                $("#setting__card").attr('hidden', true);
+                // Display Component Settings Empty
+                $("#SettingDisplay").empty();
+                $("#settingDisplayCard").attr('hidden', true);
+            }
+        });
+        // setting action enable button
+        $(document).on('click', '#enableCategoryBranch, #enableUpdateCategory, #enableDeleteCategory', function(){
+            // Hide all button initially
+            $("#disabledCategoryBranch").attr('hidden', true);
+            $("#disabledUpdatedCategory").attr('hidden', true);
+            $("#disabledDeleteCategory").attr('hidden', true);
+            $("#enableCategoryBranch").attr('hidden', true);
+            $("#enableUpdateCategory").attr('hidden', true);
+            $("#enableDeleteCategory").attr('hidden', true);
+            $("#setting__card").attr('hidden', true);
+
+            $("#loadingSpinner").removeAttr('hidden');
+            $(".disabledChecking").attr('hidden', true);
+            $(".enableChecking").attr('hidden', true);
+
+            $("#formContent").removeClass('display_none');
+
+            if($(this).attr('id') === 'enableCategoryBranch'){
+                setTimeout(() => {
+                    $("#loadingSpinner").attr('hidden', true);
+                    $("#enableCategoryBranch").removeAttr('hidden');
+                    $("#disabledCategoryBranch").removeAttr('hidden');
+                    $(".enableChecking").removeAttr('hidden');
+                    $("#setting__card").removeAttr('hidden');
+                    $("#dropBox").addClass('display_none');
+                    $("#branchTypeName").removeClass('display_none');
+                    $("#inputBranchCategory").removeClass('display_none');
+                    // button show
+                    $("#branch_type_create").removeClass('display_none');
+                    $("#branch_type_cancel").show();
+                    $("#branch_type_delete").hide();
+                    $("#branch_type_update").hide();
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                }, 1000);
+            }else if($(this).attr('id') === 'enableUpdateCategory'){
+                setTimeout(() => {
+                    $("#loadingSpinner").attr('hidden', true);
+                    $("#enableUpdateCategory").removeAttr('hidden');
+                    $("#disabledUpdatedCategory").removeAttr('hidden');
+                    $(".enableChecking").removeAttr('hidden');
+                    $("#setting__card").removeAttr('hidden');
+                    $("#dropBox").removeClass('display_none');
+                    $("#branchTypeName").addClass('display_none');
+                    $("#inputBranchCategory").addClass('display_none');
+                    // button show
+                    $("#branch_type_create").addClass('display_none');
+                    $("#branch_type_delete").hide();
+                    $("#branch_type_cancel").show();
+                    $("#branch_type_update").show();
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                }, 1000);
+            }else if($(this).attr('id') === 'enableDeleteCategory'){
+                setTimeout(() => {
+                    $("#loadingSpinner").attr('hidden', true);
+                    $("#enableDeleteCategory").removeAttr('hidden');
+                    $("#disabledDeleteCategory").removeAttr('hidden');
+                    $(".enableChecking").removeAttr('hidden');
+                    $("#setting__card").removeAttr('hidden');
+                    $("#dropBox").removeClass('display_none');
+                    $("#branchTypeName").addClass('display_none');
+                    $("#inputBranchCategory").addClass('display_none');
+                    // button show
+                    $("#branch_type_create").addClass('display_none');
+                    $("#branch_type_update").hide();
+                    $("#branch_type_cancel").show();
+                    $("#branch_type_delete").show();
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                }, 1000);
+            }
+        });
+        // setting action disabled button
+        $(document).on('click', '#disabledCategoryBranch, #disabledUpdatedCategory, #disabledDeleteCategory', function(){
+
+            // Hide all button initially
+            $("#disabledCategoryBranch").attr('hidden', true);
+            $("#disabledUpdatedCategory").attr('hidden', true);
+            $("#disabledDeleteCategory").attr('hidden', true);
+            $("#enableCategoryBranch").attr('hidden', true);
+            $("#enableUpdateCategory").attr('hidden', true);
+            $("#enableDeleteCategory").attr('hidden', true);
+            $("#setting__card").attr('hidden', true);
+
+            $("#loadingSpinner").removeAttr('hidden');
+            $(".disabledChecking").attr('hidden', true);
+            $(".enableChecking").attr('hidden', true);
+
+            $("#formContent").addClass('display_none');
+
+            if($(this).attr('id') === 'disabledCategoryBranch'){
+                setTimeout(() => {
+                    $("#loadingSpinner").attr('hidden', true);
+                    $("#enableCategoryBranch").removeAttr('hidden');
+                    $("#disabledCategoryBranch").removeAttr('hidden');
+                    $(".enableChecking").attr('hidden', true);
+                    $(".disabledChecking").removeAttr('hidden');
+                    $("#setting__card").attr('hidden', true);
+                    $("#branchTypeName").addClass('display_none');
+                    $("#dropBox").addClass('display_none');
+                    // button show
+                    $("#branch_type_create").addClass('display_none');
+                    $("#branch_type_cancel").hide();
+                    $("#branch_type_delete").hide();
+                    $("#branch_type_update").hide();
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                }, 1000);
+            }else if($(this).attr('id') === 'disabledUpdatedCategory'){
+                setTimeout(() => {
+                    $("#loadingSpinner").attr('hidden', true);
+                    $("#enableUpdateCategory").removeAttr('hidden');
+                    $("#disabledUpdatedCategory").removeAttr('hidden');
+                    $(".enableChecking").attr('hidden', true);
+                    $(".disabledChecking").removeAttr('hidden');
+                    $("#setting__card").attr('hidden', true);
+                    $("#branchTypeName").addClass('display_none');
+                    $("#dropBox").addClass('display_none');
+                    // button show
+                    $("#branch_type_create").addClass('display_none');
+                    $("#branch_type_cancel").hide();
+                    $("#branch_type_delete").hide();
+                    $("#branch_type_update").hide();
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                }, 1000);
+            }else if($(this).attr('id') === 'disabledDeleteCategory'){
+                setTimeout(() => {
+                    $("#loadingSpinner").attr('hidden', true);
+                    $("#enableDeleteCategory").removeAttr('hidden');
+                    $("#disabledDeleteCategory").removeAttr('hidden');
+                    $(".enableChecking").attr('hidden', true);
+                    $(".disabledChecking").removeAttr('hidden');
+                    $("#setting__card").attr('hidden', true);
+                    $("#branchTypeName").addClass('display_none');
+                    $("#dropBox").addClass('display_none');
+                    // button show
+                    $("#branch_type_create").addClass('display_none');
+                    $("#branch_type_cancel").hide();
+                    $("#branch_type_delete").hide();
+                    $("#branch_type_update").hide();
+                    // Display Component Settings Empty
+                    $("#SettingDisplay").empty();
+                    $("#settingDisplayCard").attr('hidden', true);
+                }, 1000);
+            }
+        });
 
         // Create Branch Category Modal Show
         $(document).on('click', '#branchTypeModalView', function(e){
