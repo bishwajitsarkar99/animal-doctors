@@ -57,7 +57,9 @@
                     placeholderText = 'Select Upazila/Thana';
                 }else if (id === 'branch_category_name') {
                     placeholderText = 'Select Branch Category Name';
-                    dropdownParent = $('#branchTypeCreateModal');
+                }else if (id === '...') {
+                    placeholderText = '...';
+                    dropdownParent = $('#');
                 }
 
                 // Destroy previous instance before reinitializing
@@ -1883,6 +1885,11 @@
             $("#loadingSpin").removeAttr('hidden');
             $("#loadingSpinner").attr('hidden', true);
 
+            // setting dispalay part
+            $("#startLoading").attr('hidden', true);
+            $("#continueousLoading").attr('hidden', true);
+            $("#categorySettingDisplayCard").attr('hidden', true);
+
             // Show button step by step according to condition
             if($(this).attr('id') === 'flexRadioDefault5' ){
                 setTimeout(() => {
@@ -1934,6 +1941,10 @@
                 // Display Component Settings Empty
                 $("#SettingDisplay").empty();
                 $("#settingDisplayCard").attr('hidden', true);
+                // setting dispalay part
+                $("#startLoading").attr('hidden', true);
+                $("#continueousLoading").attr('hidden', true);
+                $("#categorySettingDisplayCard").attr('hidden', true);
             }
         });
         // setting action enable button
@@ -1953,6 +1964,11 @@
 
             $("#formContent").removeClass('display_none');
 
+            // setting dispalay part
+            $("#startLoading").removeAttr('hidden');
+            $("#continueousLoading").removeAttr('hidden');
+            $("#categorySettingDisplayCard").attr('hidden', true);
+
             if($(this).attr('id') === 'enableCategoryBranch'){
                 setTimeout(() => {
                     $("#loadingSpinner").attr('hidden', true);
@@ -1971,6 +1987,10 @@
                     // Display Component Settings Empty
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
+                    // setting dispalay part
+                    $("#startLoading").attr('hidden', true);
+                    $("#continueousLoading").attr('hidden', true);
+                    $("#categorySettingDisplayCard").removeAttr('hidden'); 
                 }, 1000);
             }else if($(this).attr('id') === 'enableUpdateCategory'){
                 setTimeout(() => {
@@ -1986,10 +2006,15 @@
                     $("#branch_type_create").addClass('display_none');
                     $("#branch_type_delete").hide();
                     $("#branch_type_cancel").show();
-                    $("#branch_type_update").show();
+                    $("#branch_type_update").removeAttr('hidden');
+                    $("#branch_type_update").removeClass('display_none');
                     // Display Component Settings Empty
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
+                    // setting dispalay part
+                    $("#startLoading").attr('hidden', true);
+                    $("#continueousLoading").attr('hidden', true);
+                    $("#categorySettingDisplayCard").removeAttr('hidden'); 
                 }, 1000);
             }else if($(this).attr('id') === 'enableDeleteCategory'){
                 setTimeout(() => {
@@ -2005,10 +2030,15 @@
                     $("#branch_type_create").addClass('display_none');
                     $("#branch_type_update").hide();
                     $("#branch_type_cancel").show();
-                    $("#branch_type_delete").show();
+                    $("#branch_type_delete").removeAttr('hidden');
+                    $("#branch_type_delete").removeClass('display_none');
                     // Display Component Settings Empty
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
+                    // setting dispalay part
+                    $("#startLoading").attr('hidden', true);
+                    $("#continueousLoading").attr('hidden', true);
+                    $("#categorySettingDisplayCard").removeAttr('hidden'); 
                 }, 1000);
             }
         });
@@ -2144,10 +2174,24 @@
 
         // Validation Clear
         $(document).on('keyup', '#branchTypeName', function(){
-            var selectedVal = $(this).val();
+            let selectedVal = $(this).val();
+            let settingDisplay = $("#categorySettingDisplay");
+
             if(selectedVal !== ''){
                 $("#savForm_error_branch").attr('hidden', true);
                 $('#branchTypeName').removeClass('is-invalid');
+                settingDisplay.find('#clearBranchCategory').remove();
+                // Setting Display
+                settingDisplay.append(`
+                    <li id="clearBranchCategory">
+                        <label class="form-check-label line-label" for="branch-type">
+                            Branch-Category : ${selectedVal}
+                        </label>
+                    </li>
+                `);
+            }else if(selectedVal == ''){
+                // Display Component Settings Empty
+                settingDisplay.find('#clearBranchCategory').remove();
             }
         });
         $(document).on('click', '.branch_type_head_btn, #branch_type_cancel', function(){
@@ -2155,6 +2199,33 @@
             $("#updateForm_error_branch").attr('hidden', true);
             $('#branchTypeName').removeClass('is-invalid');
             $('#branchTypeName').val("");
+            $('#branch_category_name').val("").trigger('change');
+
+            // setting dispalay part
+            $("#startLoading").attr('hidden', true);
+            $("#continueousLoading").attr('hidden', true);
+            $("#categorySettingDisplayCard").attr('hidden', true);
+
+            // check if update mode is active
+            if ($("#enableUpdateCategory").is(":visible")) {
+                $("#branch_type_create").addClass('display_none');
+                $("#branch_type_delete").attr('hidden', true);
+                $("#branch_type_delete").addClass('display_none');
+                $("#branch_type_cancel").show();
+                $("#branch_type_update").removeAttr('hidden');
+                $("#branch_type_update").removeClass('display_none');
+            }
+
+            // check if delete mode is active
+            if ($("#enableDeleteCategory").is(":visible")) {
+                $("#branch_type_create").addClass('display_none');
+                $("#branch_type_update").attr('hidden', true);
+                $("#branch_type_update").addClass('display_none');
+                $("#branch_type_cancel").show();
+                $("#branch_type_delete").removeAttr('hidden');
+                $("#branch_type_delete").removeClass('display_none');
+            }
+
         });
         
         // Search Branch Category
@@ -2200,21 +2271,58 @@
                             $("#dataPullingProgress").attr('hidden', true);
                             $("#access_modal_box").removeClass('progress_body');
                             $("#processModal_body").removeClass('loading_body_area');
-                            $("#branch_type_update").removeAttr('hidden');
-                            $("#branch_type_delete").removeAttr('hidden');
-                            $("#branch_type_create").attr('hidden', true);
-                            $("#branch_type_cancel").attr('hidden', true);
-                            $("#branch_type_update").fadeIn();
-                            $("#branch_type_delete").fadeIn();
+
+                            // check if update mode is active
+                            if ($("#enableUpdateCategory").is(":visible")) {
+                                $("#branch_type_create").addClass('display_none');
+                                $("#branch_type_delete").attr('hidden', true);
+                                $("#branch_type_delete").addClass('display_none');
+                                $("#branch_type_cancel").show();
+                                $("#branch_type_update").removeAttr('hidden');
+                                $("#branch_type_update").removeClass('display_none');
+                            }
+
+                            // check if delete mode is active
+                            if ($("#enableDeleteCategory").is(":visible")) {
+                                $("#branch_type_create").addClass('display_none');
+                                $("#branch_type_update").attr('hidden', true);
+                                $("#branch_type_update").addClass('display_none');
+                                $("#branch_type_cancel").show();
+                                $("#branch_type_delete").removeAttr('hidden');
+                                $("#branch_type_delete").removeClass('display_none');
+                            }
+                            
                             const messages = response.messages;
     
                             $('#branch_category_id').val(id);
                             $('#branch_delete_category_id').val(id);
+                            $('#inputBranchCategory').removeClass('display_none');
+                            $('.edit_branch_category_name').removeClass('display_none');
                             $('.edit_branch_category_name').val(response.messages.branch_category_name);
                             const branchCategory = $("#delete_label");
                             const branchCategoryHeading = $("#Heading");
                             branchCategory.append(`<span class="">${response.messages.branch_category_name}</span>`);
                             branchCategoryHeading.append(`<span class="">${response.messages.branch_category_name}</span>`);
+
+                            let inputValue = response.messages.branch_category_name;
+                            let settingDisplay = $("#categorySettingDisplay");
+
+                            if(inputValue !== ''){
+                                $("#savForm_error_branch").attr('hidden', true);
+                                $('#branchTypeName').removeClass('is-invalid');
+                                settingDisplay.find('#clearBranchCategory').remove();
+                                // Setting Display
+                                settingDisplay.append(`
+                                    <li id="clearBranchCategory">
+                                        <label class="form-check-label line-label" for="branch-type">
+                                            Branch-Category : ${inputValue}
+                                        </label>
+                                    </li>
+                                `);
+                            }else if(inputValue == ''){
+                                // Display Component Settings Empty
+                                settingDisplay.find('#clearBranchCategory').remove();
+                            }
                         }, 1500);
                         
                     }

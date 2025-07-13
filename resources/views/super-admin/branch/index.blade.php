@@ -331,7 +331,7 @@
 
   <!-- ======= Branch-Type-Create-Modal ========= -->
   {{-- start branch type create modal --}}
-  <div class="modal fade" id="branchTypeCreateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+  <!-- <div class="modal fade" id="branchTypeCreateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog">
       <div class="modal-content" id="admin_modal_box">
         <div class="modal-header profile_modal_header profilesetting_modal_header">
@@ -384,7 +384,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   {{-- end branch type create modal --}}
 
   {{-- start branch type confirm delete modal --}}

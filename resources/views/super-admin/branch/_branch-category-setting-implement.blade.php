@@ -25,7 +25,7 @@
         <x-Tables.Icon.SettingIcon iconWidth="20" iconHeight="15" firstFill="#686868" secondFill="#4a92ff" thirdFill="#4a92ff" fourFill="#4a92ff" />
         Branch Category Settings
     </x-CustomCards.CardHeaders.CardHeader>
-    <x-CustomCards.CardBodies.CardBody cardBodyClass="card-body responsive-card" cardBodyId="" hiddenAttr="">
+    <x-CustomCards.CardBodies.CardBody cardBodyClass="card-body responsive-card pt-3" cardBodyId="" hiddenAttr="">
         <div class="optation-group-btn" id="SettingActionButton">
             @foreach($optationGroupBtns as $data)
                 <?php
@@ -68,7 +68,7 @@
                     @csrf
                     <div class="row" id="formContent">
                         <div class="col-xl-12">
-                            <div class="form-group role_nme form-field-padding branch_select display_none mt-3" id="dropBox">
+                            <div class="form-group role_nme form-field-padding branch_select display_none mb-3" id="dropBox">
                                 <x-Dropdown.DropdownMenu 
                                     menuType="text" 
                                     menuClass="form-control select_branch branch_category_name select2" 

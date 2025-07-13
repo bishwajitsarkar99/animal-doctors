@@ -232,7 +232,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 form#loginForm {
-  background-color: #e7e7d763;
+  background-color: #fff;
 }
 .top__skeleton::before{
   content: "";

@@ -1437,15 +1437,6 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     outline: none;
     margin-top: 15px;
 }
-button#branch_type_delete {
-    background: rgb(205 55 0 / 84%);
-    font-family: var(--nav-font-family);
-    opacity: 5;
-}
-button#branch_type_delete:hover{
-    background-color: #ddd;
-    color: orangered;
-}
 button#branch_type_cancel,button#branch_type_create {
     line-height: 0px;
 }
