@@ -12,11 +12,12 @@
         } else {
             // console.error("fetch_division is not defined. Check script order.");
         }
-        // Fetch Founction Run
+        // Fetch Data Cache For RAM
         let hasFetchedBranchTypes = false;
         let cachedBranchTypes = []; // This will store the data for later use
         let hasFetchedBranchCategories = false;
         let cachedBranchCategories = []; // This will store the data for later use
+        let branchDetailsCache = {};
         let hasFetchedBranchSearch = false;
         let cachedBranchSearch = []; // This will store the data for later use
         
@@ -156,250 +157,281 @@
                 $('#documents').attr('hidden', true);
                 clearFields();
             }
-            
-            $.ajax({
-                type: "GET",
-                url: "/company/branch-edit/" + id,
-                success: function(response){
-                    $('#response_message').empty();
-                    $("#SettingDisplay").empty();
-                    $('#response_message').removeClass('alert alert-danger');
-                    if(response.status == 404){
-                        $('#response_message').html("");
-                        // $('#response_message').addClass('alert alert-danger');
-                        // $('#response_message').text(response.messages);
-                    }else if(response.status == 400){
-                        $('#response_message').html("");
-                        $('#response_message').addClass('alert alert-danger');
-                        $('#response_message').text(response.messages);
-                    }else if(response.status == 200){
-                        $("#accessconfirmbranch").modal('show');
-                        $("#dataPullingProgress").removeAttr('hidden');
-                        $("#access_modal_box").addClass('progress_body');
-                        $("#processModal_body").addClass('loading_body_area');
-                        $('#documents').attr('hidden', true);
-                        $('.edit_branch_id').attr('hidden', true);
 
-                        setTimeout(() => {
-                            $("#accessconfirmbranch").modal('hide');
-                            $("#dataPullingProgress").attr('hidden', true);
-                            $("#access_modal_box").removeClass('progress_body');
-                            $("#processModal_body").removeClass('loading_body_area');
-                            $('#documents').removeAttr('hidden');
-                            $('.edit_branch_id').removeAttr('hidden');
+            // Check if data is cached
+            if (branchDetailsCache[select]) {
+                handleBranchResponse(branchDetailsCache[select], select);
+            }else{
+                $.ajax({
+                    type: "GET",
+                    url: "/company/branch-edit/" + id,
+                    success: function(response){
+                        $('#response_message').empty();
+                        $("#SettingDisplay").empty();
+                        $('#response_message').removeClass('alert alert-danger');
+                        if(response.status == 404){
+                            $('#response_message').html("");
+                            // $('#response_message').addClass('alert alert-danger');
+                            // $('#response_message').text(response.messages);
+                        }else if(response.status == 400){
+                            $('#response_message').html("");
+                            $('#response_message').addClass('alert alert-danger');
+                            $('#response_message').text(response.messages);
+                        }else if(response.status == 200){
+                            branchDetailsCache[select] = response; // Cache it
+                            handleBranchResponse(response, select);
 
-                            // open filed box
-                            $("#inputBranchNameGroup").slideDown("slow", function () {
-                                $(this).removeClass('display_none');
-                            });
-
-                            $("#inputCityNameGroup").slideDown("slow", function () {
-                                $(this).removeClass('display_none');
-                            });
-
-                            $("#inputLocatioinNameGroup").slideDown("slow", function () {
-                                $(this).removeClass('display_none');
-                            });
-
-                            $("#dropdwonDivisionNameGroup").slideDown("slow", function () {
-                                $(this).removeClass('display_none');
-                            });
-
-                            $("#dropdwonDistrictNameGroup").slideDown("slow", function () {
-                                $(this).removeClass('display_none');
-                            });
-
-                            $("#dropdwonUpazilaNameGroup").slideDown("slow", function () {
-                                $(this).removeClass('display_none');
-                            });
                             
-
-                            const messages = response.messages;
                             
-                            if(messages.created_by !== ''){
-                                const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/storage/image/user-image/${messages.created_users.image}`;
-                                let createdByRole;
-                                switch (messages.created_by) {
-                                    case 1:
-                                        createdByRole = 'SuperAdmin';
-                                        break;
-                                    case 2:
-                                        createdByRole = 'Sub-Admin';
-                                        break;
-                                    case 3:
-                                        createdByRole = 'Admin';
-                                        break;
-                                    case 0:
-                                        createdByRole = 'User';
-                                        break;
-                                    case 5:
-                                        createdByRole = 'Accounts';
-                                        break;
-                                    case 6:
-                                        createdByRole = 'Marketing';
-                                        break;
-                                    case 7:
-                                        createdByRole = 'Delivery Team';
-                                        break;
-                                    default:
-                                        createdByRole = 'Unknown';
-                                }
-                                $("#firstUserImage").html(`<img class="user_img rounded-square users_image position" src="${firstUserImage}">`);
-    
-                                $("#firstUserEmail").val(messages.created_users.login_email);
-                                $("#firstCreatedBy").val(createdByRole);
-                                if(messages.created_at !== ''){
-                                    $("#firstCreatedAt").val(modernDateFormat(messages.created_at));
-                                }else{
-                                    $("#firstCreatedAt").val('-');
-                                }
-                            } 
-                            if(messages.updated_by !== null){
-                                $("#secondContent").removeAttr('hidden');
-                                $('#secondHead').removeAttr('hidden');
-                                const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/storage/image/user-image/${messages.updated_users.image}`;
-                                let updatedByRole;
-                                switch (messages.updated_by) {
-                                    case 1:
-                                        updatedByRole = 'SuperAdmin';
-                                        break;
-                                    case 2:
-                                        updatedByRole = 'Sub-Admin';
-                                        break;
-                                    case 3:
-                                        updatedByRole = 'Admin';
-                                        break;
-                                    case 0:
-                                        updatedByRole = 'User';
-                                        break;
-                                    case 5:
-                                        updatedByRole = 'Accounts';
-                                        break;
-                                    case 6:
-                                        updatedByRole = 'Marketing';
-                                        break;
-                                    case 7:
-                                        updatedByRole = 'Delivery Team';
-                                        break;
-                                    default:
-                                        updatedByRole = 'Unknown';
-                                }
-                                $("#secondUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
-    
-                                $("#secondUserEmail").val((messages.updated_users.login_email));
-                                $("#secondUpdateBy").val(updatedByRole);
-                                if(messages.created_at !== messages.updated_at){
-                                    $("#secondUpdateAt").val(modernDateFormat(messages.updated_at));
-                                }else{
-                                    $("#secondUpdateAt").val('-');
-                                }
-                            }else{
-                                $("#secondContent").attr('hidden', true);
-                                $('#secondHead').attr('hidden', true);
-                            }
-    
-                            $('#branches_id').val(id);
-                            $('#edit_branch_id').val(response.messages.branch_id);
-                            $('.edit_branch_name').val(response.messages.branch_name);
-                            $('.edit_branch_type').val(response.messages.branch_type).trigger('change.select2');
-                            $('.edit_division_id').val(response.messages.division_id).trigger('change.select2');
-                            fetch_district(response.messages.division_id, function(){
-                                // Set the value once options are available
-                                $('.edit_district_id').val(response.messages.district_id).trigger('change.select2');
-                                // Add a small delay to ensure Select2 DOM is updated
-                                setTimeout(function () {
-                                    const district = $("#select2-select_district-container").attr('title');
-
-                                    fetch_upazila(response.messages.district_id, function () {
-                                        $('.edit_upazila_id').val(response.messages.upazila_id).trigger('change.select2');
-
-                                        setTimeout(function () {
-                                            const upazila = $("#select2-select_upazila-container").attr('title');
-
-                                            // Now safely append setting display
-                                            const settingDisplay = $("#SettingDisplay");
-                                            settingDisplay.append(`
-                                                <li id="clearDistrict">
-                                                    <label class="form-check-label line-label" for="district">
-                                                        District : ${district}
-                                                    </label>
-                                                </li>
-                                                <li id="clearUpazila">
-                                                    <label class="form-check-label line-label" for="upazila">
-                                                        Upazila/Thana : ${upazila}
-                                                    </label>
-                                                </li>
-                                            `);
-                                        }, 200); // Allow Select2 to finish updating the DOM
-                                    });
-                                }, 200);
-                            });
-                            fetch_upazila(response.messages.district_id, function (){
-                                // Set the value once options are available
-                                $('.edit_upazila_id').val(response.messages.upazila_id).trigger('change.select2');
-                            });
-                            $('.edit_town_name').val(response.messages.town_name);
-                            $('.edit_location').val(response.messages.location);
-
-                            // Modal delete, update and confirm data get
-                            const updateBranch = $("#branch_update_modal");
-                            const updateBranchHeading = $("#branch_update_modal_heading");
-                            const deleteBranch = $("#delete_branch_id");
-                            const deleteBranchHeading = $("#delete_branch");
-                            const deleteBranchBody = $("#delete_branch_body");
-                            const deleteBranchConfirm = $("#delete_confrm_branch_id");
-                            updateBranch.append(`<span class="">${response.messages.branch_name}</span>`);
-                            updateBranchHeading.append(`<span class="">${response.messages.branch_name}</span>`);
-                            deleteBranch.append(`<span class="">${response.messages.branch_id}</span>`);
-                            deleteBranchHeading.append(`<span class="">${response.messages.branch_name}</span>`);
-                            deleteBranchBody.append(`<span class="">${response.messages.branch_name}</span>`);
-                            deleteBranchConfirm.append(`<span class="">${response.messages.branch_id}</span>`);
-
-                            // setting component display
-                            $("#settingDisplayCard").removeAttr('hidden');
-                            const settingDisplay = $("#SettingDisplay"); 
-                            const division = $("#select2-select_division-container").attr('title');
-
-                            settingDisplay.append(`
-                                <li id="clearBranchType">
-                                    <label class="form-check-label line-label" for="branch-type">
-                                        Branch-Type : ${response.messages.branch_type}
-                                    </label>
-                                </li>
-                                <li id="clearBranchID">
-                                    <label class="form-check-label line-label" for="branch-id">
-                                        Branch-ID : ${response.messages.branch_id}
-                                    </label>
-                                </li>
-                                <li id="clearBranchName">
-                                    <label class="form-check-label line-label" for="branch-name">
-                                        Branch-Name : ${response.messages.branch_name}
-                                    </label>
-                                </li>
-                                <li id="clearCity">
-                                    <label class="form-check-label line-label" for="city">
-                                        City/Town : ${response.messages.town_name}
-                                    </label>
-                                </li>
-                                <li id="clearLocation">
-                                    <label class="form-check-label line-label" for="location">
-                                        Location : ${response.messages.location}
-                                    </label>
-                                </li>
-                                <li id="clearDivision">
-                                    <label class="form-check-label line-label" for="division">
-                                        Division : ${division}
-                                    </label>
-                                </li>
-                            `);
-
-                        }, 1500);
+                        }else{
+                            $('#response_message').addClass('alert alert-danger').text(response.messages);
+                        }
                         
+                    },
+                    error: function() {
+                        $('#response_message').addClass('alert alert-danger').text("Error fetching branch data.");
                     }
-                    
-                }
-            });
+                });
+            }
+            
         });
+        function handleBranchResponse(response, id){
+            const messages = response.messages;
+
+            $("#accessconfirmbranch").modal('show');
+            $("#dataPullingProgress").removeAttr('hidden');
+            $("#access_modal_box").addClass('progress_body');
+            $("#processModal_body").addClass('loading_body_area');
+            $('#documents').attr('hidden', true);
+            $('.edit_branch_id').attr('hidden', true);
+
+            setTimeout(() => {
+                $("#accessconfirmbranch").modal('hide');
+                $("#dataPullingProgress").attr('hidden', true);
+                $("#access_modal_box").removeClass('progress_body');
+                $("#processModal_body").removeClass('loading_body_area');
+                $('#documents').removeAttr('hidden');
+                $('.edit_branch_id').removeAttr('hidden');
+
+                // open filed box
+                $("#inputBranchNameGroup").slideDown("slow", function () {
+                    $(this).removeClass('display_none');
+                });
+
+                $("#inputCityNameGroup").slideDown("slow", function () {
+                    $(this).removeClass('display_none');
+                });
+
+                $("#inputLocatioinNameGroup").slideDown("slow", function () {
+                    $(this).removeClass('display_none');
+                });
+
+                $("#dropdwonDivisionNameGroup").slideDown("slow", function () {
+                    $(this).removeClass('display_none');
+                });
+
+                $("#dropdwonDistrictNameGroup").slideDown("slow", function () {
+                    $(this).removeClass('display_none');
+                });
+
+                $("#dropdwonUpazilaNameGroup").slideDown("slow", function () {
+                    $(this).removeClass('display_none');
+                });
+                
+
+                const messages = response.messages;
+                
+                if(messages.created_by !== ''){
+                    const firstUserImage = messages.created_users.image.includes('https://') ? messages.created_users.image : `${window.location.origin}/storage/image/user-image/${messages.created_users.image}`;
+                    let createdByRole;
+                    switch (messages.created_by) {
+                        case 1:
+                            createdByRole = 'SuperAdmin';
+                            break;
+                        case 2:
+                            createdByRole = 'Sub-Admin';
+                            break;
+                        case 3:
+                            createdByRole = 'Admin';
+                            break;
+                        case 0:
+                            createdByRole = 'User';
+                            break;
+                        case 5:
+                            createdByRole = 'Accounts';
+                            break;
+                        case 6:
+                            createdByRole = 'Marketing';
+                            break;
+                        case 7:
+                            createdByRole = 'Delivery Team';
+                            break;
+                        default:
+                            createdByRole = 'Unknown';
+                    }
+                    $("#firstUserImage").html(`<img class="user_img rounded-square users_image position" src="${firstUserImage}">`);
+
+                    $("#firstUserEmail").val(messages.created_users.login_email);
+                    $("#firstCreatedBy").val(createdByRole);
+                    if(messages.created_at !== ''){
+                        $("#firstCreatedAt").val(modernDateFormat(messages.created_at));
+                    }else{
+                        $("#firstCreatedAt").val('-');
+                    }
+                } 
+                if(messages.updated_by !== null){
+                    $("#secondContent").removeAttr('hidden');
+                    $('#secondHead').removeAttr('hidden');
+                    const secondUserImage = messages.updated_users.image.includes('https://') ? messages.updated_users.image : `${window.location.origin}/storage/image/user-image/${messages.updated_users.image}`;
+                    let updatedByRole;
+                    switch (messages.updated_by) {
+                        case 1:
+                            updatedByRole = 'SuperAdmin';
+                            break;
+                        case 2:
+                            updatedByRole = 'Sub-Admin';
+                            break;
+                        case 3:
+                            updatedByRole = 'Admin';
+                            break;
+                        case 0:
+                            updatedByRole = 'User';
+                            break;
+                        case 5:
+                            updatedByRole = 'Accounts';
+                            break;
+                        case 6:
+                            updatedByRole = 'Marketing';
+                            break;
+                        case 7:
+                            updatedByRole = 'Delivery Team';
+                            break;
+                        default:
+                            updatedByRole = 'Unknown';
+                    }
+                    $("#secondUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
+
+                    $("#secondUserEmail").val((messages.updated_users.login_email));
+                    $("#secondUpdateBy").val(updatedByRole);
+                    if(messages.created_at !== messages.updated_at){
+                        $("#secondUpdateAt").val(modernDateFormat(messages.updated_at));
+                    }else{
+                        $("#secondUpdateAt").val('-');
+                    }
+                }else{
+                    $("#secondContent").attr('hidden', true);
+                    $('#secondHead').attr('hidden', true);
+                }
+
+                $('#branches_id').val(id);
+                $('#edit_branch_id').val(response.messages.branch_id);
+                $('.edit_branch_name').val(response.messages.branch_name);
+                $('.edit_branch_type').val(response.messages.branch_type).trigger('change.select2');
+                $('.edit_division_id').val(response.messages.division_id).trigger('change.select2');
+                fetch_district(response.messages.division_id, function(){
+                    // Set the value once options are available
+                    $('.edit_district_id').val(response.messages.district_id).trigger('change.select2');
+                    // Add a small delay to ensure Select2 DOM is updated
+                    setTimeout(function () {
+                        const district = $("#select2-select_district-container").attr('title');
+
+                        fetch_upazila(response.messages.district_id, function () {
+                            $('.edit_upazila_id').val(response.messages.upazila_id).trigger('change.select2');
+
+                            setTimeout(function () {
+                                const upazila = $("#select2-select_upazila-container").attr('title');
+
+                                // Now safely append setting display
+                                const settingDisplay = $("#SettingDisplay");
+                                settingDisplay.append(`
+                                    <li id="clearDistrict">
+                                        <label class="form-check-label line-label" for="district">
+                                            District : ${district}
+                                        </label>
+                                    </li>
+                                    <li id="clearUpazila">
+                                        <label class="form-check-label line-label" for="upazila">
+                                            Upazila/Thana : ${upazila}
+                                        </label>
+                                    </li>
+                                `);
+                            }, 200); // Allow Select2 to finish updating the DOM
+                        });
+                    }, 200);
+                });
+                fetch_upazila(response.messages.district_id, function (){
+                    // Set the value once options are available
+                    $('.edit_upazila_id').val(response.messages.upazila_id).trigger('change.select2');
+                });
+                $('.edit_town_name').val(response.messages.town_name);
+                $('.edit_location').val(response.messages.location);
+
+                // Modal delete, update and confirm data get
+                const updateBranch = $("#branch_update_modal");
+                const updateBranchHeading = $("#branch_update_modal_heading");
+                const deleteBranch = $("#delete_branch_id");
+                const deleteBranchHeading = $("#delete_branch");
+                const deleteBranchBody = $("#delete_branch_body");
+                const deleteBranchConfirm = $("#delete_confrm_branch_id");
+                updateBranch.append(`<span class="">${response.messages.branch_name}</span>`);
+                updateBranchHeading.append(`<span class="">${response.messages.branch_name}</span>`);
+                deleteBranch.append(`<span class="">${response.messages.branch_id}</span>`);
+                deleteBranchHeading.append(`<span class="">${response.messages.branch_name}</span>`);
+                deleteBranchBody.append(`<span class="">${response.messages.branch_name}</span>`);
+                deleteBranchConfirm.append(`<span class="">${response.messages.branch_id}</span>`);
+
+                // setting component display
+                $("#settingDisplayCard").removeAttr('hidden');
+                const settingDisplay = $("#SettingDisplay"); 
+                const division = $("#select2-select_division-container").attr('title');
+
+                settingDisplay.append(`
+                    <li id="clearBranchType">
+                        <label class="form-check-label line-label" for="branch-type">
+                            Branch-Type : ${response.messages.branch_type}
+                        </label>
+                    </li>
+                    <li id="clearBranchID">
+                        <label class="form-check-label line-label" for="branch-id">
+                            Branch-ID : ${response.messages.branch_id}
+                        </label>
+                    </li>
+                    <li id="clearBranchName">
+                        <label class="form-check-label line-label" for="branch-name">
+                            Branch-Name : ${response.messages.branch_name}
+                        </label>
+                    </li>
+                    <li id="clearCity">
+                        <label class="form-check-label line-label" for="city">
+                            City/Town : ${response.messages.town_name}
+                        </label>
+                    </li>
+                    <li id="clearLocation">
+                        <label class="form-check-label line-label" for="location">
+                            Location : ${response.messages.location}
+                        </label>
+                    </li>
+                    <li id="clearDivision">
+                        <label class="form-check-label line-label" for="division">
+                            Division : ${division}
+                        </label>
+                    </li>
+                `);
+
+            }, 1500);
+        }
+        // delete cache for id single data
+        function clearBranchCache(branchId) {
+            if (branchDetailsCache.hasOwnProperty(branchId)) {
+                delete branchDetailsCache[branchId];
+                console.log(`Cache cleared for branch ID: ${branchId}`);
+            }
+        }
+        // all cache clear
+        function clearAllBranchCache() {
+            branchDetailsCache = {};
+            console.log("All branch cache cleared.");
+        }
 
         // fetch branch for dropdown
         function searchBranch(){
@@ -2057,9 +2089,10 @@
                 }, 1000);
             }else if($(this).attr('id') === 'enableUpdateCategory'){
                 setTimeout(() => {
-                    if(!hasFetchedBranchCategories){
-                        fetch_branch_categories();
-                        hasFetchedBranchCategories = true;
+                    if (!hasFetchedBranchCategories) {
+                        fetch_branch_categories(); // ✅ Only call it; let the fetch function control the flag
+                    } else {
+                        populate_branch_categories(cachedBranchCategories); // ✅ Use cached version
                     }
                     
                     $("#loadingSpinner").attr('hidden', true);
@@ -2086,9 +2119,10 @@
                 }, 1000);
             }else if($(this).attr('id') === 'enableDeleteCategory'){
                 setTimeout(() => {
-                    if(!hasFetchedBranchCategories){
-                        fetch_branch_categories();
-                        hasFetchedBranchCategories = true;
+                    if (!hasFetchedBranchCategories) {
+                        fetch_branch_categories(); // ✅ Only call it; let the fetch function control the flag
+                    } else {
+                        populate_branch_categories(cachedBranchCategories); // ✅ Use cached version
                     }
                     $("#loadingSpinner").attr('hidden', true);
                     $("#enableDeleteCategory").removeAttr('hidden');
@@ -2165,7 +2199,6 @@
                     $("#dropBox").addClass('display_none');
                     // input filed clear
                     $('#branchTypeName').val("");
-                    $('#branch_category_name').val("").trigger('change');
                     // button show
                     $("#branch_type_create").addClass('display_none');
                     $("#branch_type_cancel").addClass('display_none');
@@ -2187,7 +2220,6 @@
                     $("#dropBox").addClass('display_none');
                     // input filed clear
                     $('#branchTypeName').val("");
-                    $('#branch_category_name').val("").trigger('change');
                     // button show
                     $("#branch_type_create").addClass('display_none');
                     $("#branch_type_cancel").addClass('display_none');
