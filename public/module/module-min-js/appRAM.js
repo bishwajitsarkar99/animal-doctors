@@ -1,11 +1,11 @@
 // Load from sessionStorage or initialize fresh
-window.AppRAM = sessionStorage.getItem("AppRAM")
+let AppRAM = sessionStorage.getItem("AppRAM")
     ? JSON.parse(sessionStorage.getItem("AppRAM"))
     : {
         // Branches Flag
-        hasFetchedBranchTypes: false,
-        hasFetchedBranchCategories: false,
-        hasFetchedBranchSearch: false,
+        branchTypeFlags: false,
+        branchCategoryFlags: false,
+        branchSearchFlags: false,
         // Branches Data Array and Object
         branchDetails: {},
         branchTypes: [],
@@ -35,26 +35,35 @@ window.AppRAM = sessionStorage.getItem("AppRAM")
         tempFormData: {},
     };
 
-// Get Data Safely
-window.getAppRAM = function (key, fallback = null) {
-    return window.AppRAM.hasOwnProperty(key) ? window.AppRAM[key] : fallback;
-};
-// Update AppRAM and sync to sessionStorage
-window.updateAppRAM = function (key, value) {
-    window.AppRAM[key] = value;
-    sessionStorage.setItem("AppRAM", JSON.stringify(window.AppRAM));
-};
+// Get single key
+function getAppRAM(key, fallback = null) {
+    return AppRAM.hasOwnProperty(key) ? AppRAM[key] : fallback;
+}
 
-// Optional helper: set multiple keys
-window.updateAppRAMBulk = function (obj = {}) {
+// Update single key
+function updateAppRAM(key, value) {
+    AppRAM[key] = value;
+    sessionStorage.setItem("AppRAM", JSON.stringify(AppRAM));
+}
+
+// Update multiple keys
+function updateAppRAMBulk(obj = {}) {
     Object.entries(obj).forEach(([key, value]) => {
-        window.AppRAM[key] = value;
+        AppRAM[key] = value;
     });
-    sessionStorage.setItem("AppRAM", JSON.stringify(window.AppRAM));
-};
+    sessionStorage.setItem("AppRAM", JSON.stringify(AppRAM));
+}
 
-// Clear everything from memory + sessionStorage
-window.clearAppRAM = function () {
+// Clear everything
+function clearAppRAM() {
     sessionStorage.removeItem("AppRAM");
-    window.AppRAM = {};
+    AppRAM = {};
+}
+
+// ✅ Export
+export {
+    getAppRAM,
+    updateAppRAM,
+    updateAppRAMBulk,
+    clearAppRAM
 };

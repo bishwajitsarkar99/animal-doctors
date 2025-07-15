@@ -1,6 +1,8 @@
 <script type="module">
     import { modernDateFormat } from "/module/module-min-js/helper-function-min.js";
     import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
+    // ✅ Import RAM functions
+    import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/module/module-min-js/appRAM.js";
     buttonLoader();
 
     $(document).ready(function(){
@@ -12,14 +14,17 @@
         } else {
             // console.error("fetch_division is not defined. Check script order.");
         }
-        // Fetch Data Cache For RAM
-        let hasFetchedBranchTypes = false;
-        let cachedBranchTypes = []; // This will store the data for later use
-        let hasFetchedBranchCategories = false;
-        let cachedBranchCategories = []; // This will store the data for later use
-        let branchDetailsCache = {};
-        let hasFetchedBranchSearch = false;
-        let cachedBranchSearch = []; // This will store the data for later use
+
+        // Fetch data cache used for as RAM
+        // Cache Data Flag Mode
+        let hasFetchedBranchTypes = getAppRAM('branchTypeFlags');
+        let hasFetchedBranchCategories = getAppRAM('branchCategoryFlags');
+        let hasFetchedBranchSearch = getAppRAM('branchSearchFlags');
+        // Cache Array, Object Data Structure and Data Store
+        let cachedBranchTypes = getAppRAM('branchTypes', []);
+        let cachedBranchCategories = getAppRAM('branchCategories', []);
+        let cachedBranchSearch = getAppRAM('branchSearchResults', []);
+        let branchDetailsCache = getAppRAM('branchDetails', {}); 
         
         fetchTableBranch();
         initSelect2();
@@ -436,12 +441,6 @@
             }
         }
         // single data cache clear
-        // function clearBranchCache(branchId) {
-        //     if (branchDetailsCache.hasOwnProperty(branchId)) {
-        //         delete branchDetailsCache[branchId];
-        //         console.log(`Cache cleared for branch ID: ${branchId}`);
-        //     }
-        // }
         function clearBranchCache(branchId) {
             const stringId = String(branchId); // Force it to match the cache key
             if (branchDetailsCache.hasOwnProperty(stringId)) {
