@@ -153,13 +153,16 @@
             }
 
             if(select == ''){
+                return select;
                 $('.edit_branch_id').attr('hidden', true);
                 $('#documents').attr('hidden', true);
                 clearFields();
             }
-
             // Check if data is cached
             if (branchDetailsCache[select]) {
+                $('#response_message').empty();
+                $("#SettingDisplay").empty();
+                $('#response_message').removeClass('alert alert-danger');
                 handleBranchResponse(branchDetailsCache[select], select);
             }else{
                 $.ajax({
@@ -181,12 +184,9 @@
                             branchDetailsCache[select] = response; // Cache it
                             handleBranchResponse(response, select);
 
-                            
-                            
                         }else{
                             $('#response_message').addClass('alert alert-danger').text(response.messages);
                         }
-                        
                     },
                     error: function() {
                         $('#response_message').addClass('alert alert-danger').text("Error fetching branch data.");
@@ -214,6 +214,9 @@
                 $('.edit_branch_id').removeAttr('hidden');
 
                 // open filed box
+                
+                $(".branch_type").removeClass('display_none');
+
                 $("#inputBranchNameGroup").slideDown("slow", function () {
                     $(this).removeClass('display_none');
                 });
@@ -326,7 +329,8 @@
                 $('#branches_id').val(id);
                 $('#edit_branch_id').val(response.messages.branch_id);
                 $('.edit_branch_name').val(response.messages.branch_name);
-                $('.edit_branch_type').val(response.messages.branch_type).trigger('change.select2');
+                // $('.edit_branch_type').val(response.messages.branch_type).trigger('change.select2');
+                safelySetBranchType(response.messages.branch_type);
                 $('.edit_division_id').val(response.messages.division_id).trigger('change.select2');
                 fetch_district(response.messages.division_id, function(){
                     // Set the value once options are available
@@ -420,11 +424,32 @@
 
             }, 1500);
         }
-        // delete cache for id single data
+        // call branch type
+        function safelySetBranchType(branchTypeName) {
+            if ($(`.edit_branch_type option[value="${branchTypeName}"]`).length === 0) {
+                fetch_branch_types(); // Fetch if missing
+                setTimeout(() => {
+                    $('.edit_branch_type').val(branchTypeName).trigger('change.select2');
+                }, 500);
+            } else {
+                $('.edit_branch_type').val(branchTypeName).trigger('change.select2');
+            }
+        }
+        // single data cache clear
+        // function clearBranchCache(branchId) {
+        //     if (branchDetailsCache.hasOwnProperty(branchId)) {
+        //         delete branchDetailsCache[branchId];
+        //         console.log(`Cache cleared for branch ID: ${branchId}`);
+        //     }
+        // }
         function clearBranchCache(branchId) {
-            if (branchDetailsCache.hasOwnProperty(branchId)) {
-                delete branchDetailsCache[branchId];
-                console.log(`Cache cleared for branch ID: ${branchId}`);
+            const stringId = String(branchId); // Force it to match the cache key
+            if (branchDetailsCache.hasOwnProperty(stringId)) {
+                delete branchDetailsCache[stringId];
+                console.log(`✅ Cache cleared for branch ID: ${stringId}`);
+            } else {
+                console.warn(`⚠️ No cache found for branch ID: ${stringId}`);
+                console.log('Current keys:', Object.keys(branchDetailsCache));
             }
         }
         // all cache clear
@@ -806,6 +831,7 @@
                     $("#setting_card").removeAttr('hidden');
                     $(".branch_select").addClass('display_none');
                     $(".branch_type").removeClass('display_none');
+                    
                     // button show
                     $("#save").addClass('display_none');
                     $("#cancel_btn").show();
@@ -1231,7 +1257,7 @@
                                 $('#location').html("");
                             }
                         });
-                    }if(response.status == 403){
+                    }else if(response.status == 403){
                         // display form field
                         $("#formContent").removeClass('display_none');
                         $("#ContentView").addClass('display_none');
@@ -1244,15 +1270,20 @@
                         $('#permission_message').addClass('alert alert-danger');
                         $('#permission_message').text(response.messages);
                         
-                    }else{
+                    }else if(response.status == 200){
+                        branchDetailsCache = response; // Cache it
+                        handleBranchResponse(response);
+
                         $("#loaderBox").removeClass('display_none');
                         $("#ContentView").removeClass('display_none');
-                        
 
                         setTimeout(() => {
                             $("#loaderBox").addClass('display_none');
                             $("#formContent").removeClass('display_none');
                             $("#ContentView").addClass('display_none');
+                            $("#accessconfirmbranch").modal('hide');
+                            $("#dataPullingProgress").attr('hidden', true);
+                            $('#documents').attr('hidden', true);
                             // button
                             $("#save").addClass('display_none');
                             $("#next").removeClass('display_none');
@@ -1298,9 +1329,6 @@
                             
                             clearFields();
                             removeField();
-                            fetch_division();
-                            fetch_district();
-                            fetch_upazila();
                             searchBranch();
                             fetchTableBranch();
                         }, 1500);
@@ -1394,6 +1422,8 @@
                 $("#next").addClass('display_none');
                 $("#select_branch").val("").trigger('change');
             }
+
+            $(".branch_type").addClass('display_none');
 
             $("#inputBranchNameGroup").slideUp("slow", function () {
                 $(this).addClass('display_none');
@@ -1685,6 +1715,32 @@
                 'location' : $(".edit_location").val(),
             }
 
+            // Check if cache exists
+            const cachedData = branchDetailsCache[id]?.messages;
+
+            let isChanged = false;
+
+            if (cachedData) {
+                // Compare each field
+                for (const key in data) {
+                    if (data[key] != cachedData[key]) {
+                        isChanged = true;
+                        break;
+                    }
+                }
+            }else {
+                isChanged = true; // No cached data, assume changed
+            }
+
+            // If not changed, don't send update
+            if (!isChanged) {
+                $("#updateconfirmbranch").modal('hide');
+                setTimeout(() => {
+                    showSuccessToast("No changes detected. Update skipped.")
+                }, 1000);
+                return;
+            }
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN' : $('meta[ name ="csrf-token"]').attr('content')
@@ -1746,14 +1802,18 @@
                         $('#response_message').html("");
                         $('#response_message').addClass('alert alert-danger');
                         $('#response_message').text(response.messages);
-                    }else{
+                    }else if(response.status == 200){
                         $("#updateconfirmbranch").modal('hide');
                         $("#loaderBox").removeClass('display_none');
+                        clearBranchCache(id);
 
                         setTimeout(() => {
                             $("#loaderBox").addClass('display_none');
                             // clear fields
                             removeField();
+                            $(".branch_type").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
                             $("#inputBranchNameGroup").slideUp("slow", function () {
                                 $(this).addClass('display_none');
                             });
@@ -1861,7 +1921,7 @@
             var id = $("#delete_branch_id").val();
 
             $.ajaxSetup({
-                headrs:{
+                headers:{
                     'X-CSRF-TOKEN': $('meta[name ="csrf_token"]').attr('content')
                 }
             });
@@ -1878,8 +1938,13 @@
                         $('#response_message').addClass('alert alert-danger');
                         $('#response_message').text(response.messages);
 
-                    }else{
+                    }else if(response.status == 200){
+                        clearBranchCache(id);
 
+                        // ❗ Invalidate search cache
+                        hasFetchedBranchSearch = false;
+                        cachedBranchSearch = null;
+                        
                         $("#accessconfirmbranch").modal('show');
                         $("#deletebranch").modal('hide').fadeOut();
                         $("#deleteconfirmbranch").modal('hide').fadeOut();
@@ -1889,6 +1954,10 @@
                             $("#accessconfirmbranch").modal('hide');
                             $("#loaderBox").addClass('display_none');
                             clearFields();
+
+                            $(".branch_type").slideUp("slow", function () {
+                                $(this).addClass('display_none');
+                            });
 
                             $("#inputBranchNameGroup").slideUp("slow", function () {
                                 $(this).addClass('display_none');
