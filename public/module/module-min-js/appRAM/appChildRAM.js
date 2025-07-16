@@ -29,7 +29,7 @@ let AppRAM = sessionStorage.getItem("AppRAM")
         permissions: [],
 
         // Misc Flag
-        lastFetchTime: null,
+        lastFetchTime: Date.now(),
         // Misc Data Object
         currentUser: {},
         tempFormData: {},

@@ -1,8 +1,8 @@
 <script type="module">
     import { modernDateFormat } from "/module/module-min-js/helper-function-min.js";
     import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
-    // ✅ Import RAM functions
-    import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/module/module-min-js/appRAM.js";
+    // Import RAM functions
+    import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/module/module-min-js/appRAM/appParentRAM.js";
     buttonLoader();
 
     $(document).ready(function(){
@@ -14,18 +14,9 @@
         } else {
             // console.error("fetch_division is not defined. Check script order.");
         }
+        // Branch Details Data
+        const branchDetailsCache = getAppRAM('branchDetails', {});
 
-        // Fetch data cache used for as RAM
-        // Cache Data Flag Mode
-        let hasFetchedBranchTypes = getAppRAM('branchTypeFlags');
-        let hasFetchedBranchCategories = getAppRAM('branchCategoryFlags');
-        let hasFetchedBranchSearch = getAppRAM('branchSearchFlags');
-        // Cache Array, Object Data Structure and Data Store
-        let cachedBranchTypes = getAppRAM('branchTypes', []);
-        let cachedBranchCategories = getAppRAM('branchCategories', []);
-        let cachedBranchSearch = getAppRAM('branchSearchResults', []);
-        let branchDetailsCache = getAppRAM('branchDetails', {}); 
-        
         fetchTableBranch();
         initSelect2();
         // Initialize the button loader for the login button
@@ -186,7 +177,9 @@
                             $('#response_message').addClass('alert alert-danger');
                             $('#response_message').text(response.messages);
                         }else if(response.status == 200){
-                            branchDetailsCache[select] = response; // Cache it
+                            // Save to Parent RAM
+                            branchDetailsCache[select] = response;
+                            updateAppRAM('branchDetails', branchDetailsCache);
                             handleBranchResponse(response, select);
 
                         }else{
@@ -460,9 +453,9 @@
         // fetch branch for dropdown
         function searchBranch(){
 
-            if (hasFetchedBranchSearch) {
-                // Use cached data instead
-                populate_branch_searches(cachedBranchSearch);
+            if (getAppRAM('branchSearchFlags')) {
+                // Use cached data
+                populate_branch_searches(getAppRAM('branchSearchResults'));
                 return;
             }
 
@@ -479,8 +472,11 @@
                 url: currentUrl,
                 dataType: 'json',
                 success: function(response) {
-                    cachedBranchSearch = response; // Save to cache
-                    hasFetchedBranchSearch = true;
+                    // Save to Parent RAM
+                    updateAppRAMBulk({
+                        branchSearchFlags: true,
+                        branchSearchResults: response
+                    });
                     populate_branch_searches(response);
                 },
                 error: function() {
@@ -493,7 +489,7 @@
         // Populate dropdown from response
         function populate_branch_searches(response) {
             $('#select_branch').empty().removeClass('alert alert-danger');
-
+            // Data get from backend
             const all_branchs = response.allBranch || [];
 
             $("#select_branch").empty().append(
@@ -819,9 +815,8 @@
 
             if($(this).attr('id') === 'enableNewBranch'){
                 setTimeout(() => {
-                    if (!hasFetchedBranchTypes) {
+                    if (getAppRAM('branchTypeFlags')) {
                         fetch_branch_types();
-                        hasFetchedBranchTypes = true;
                     }
                     $("#loaderSpinner").attr('hidden', true);
                     $("#enableNewBranch").removeAttr('hidden');
@@ -843,9 +838,8 @@
                 }, 1000);
             }else if($(this).attr('id') === 'enableUpdateBranch'){
                 setTimeout(() => {
-                    if (!hasFetchedBranchSearch) {
+                    if (getAppRAM('branchSearchFlags')) {
                         searchBranch();
-                        hasFetchedBranchSearch = true;
                     }
 
                     $("#loaderSpinner").attr('hidden', true);
@@ -867,9 +861,8 @@
                 }, 1000);
             }else if($(this).attr('id') === 'enableDeleteBranch'){
                 setTimeout(() => {
-                    if (!hasFetchedBranchSearch) {
+                    if (getAppRAM('branchSearchFlags')) {
                         searchBranch();
-                        hasFetchedBranchSearch = true;
                     }
 
                     $("#loaderSpinner").attr('hidden', true);
@@ -1133,9 +1126,9 @@
         // fetch branch type/category for dropdown
         function fetch_branch_types(){
 
-            if (hasFetchedBranchTypes) {
-                // Use cached data instead
-                populate_branch_types(cachedBranchTypes);
+            if (getAppRAM('branchTypeFlags')) {
+                // Use cached data
+                populate_branch_types(getAppRAM('branchTypes'));
                 return;
             }
 
@@ -1152,8 +1145,11 @@
                 url: currentUrl,
                 dataType: 'json',
                 success: function(response) {
-                    cachedBranchTypes = response; // Save to cache
-                    hasFetchedBranchTypes = true;
+                    // Save to Parent RAM
+                    updateAppRAMBulk({
+                        branchTypeFlags: true,
+                        branchTypes: response
+                    });
                     populate_branch_types(response);
                 },
                 error: function() {
@@ -1166,7 +1162,7 @@
         // Populate dropdown from response
         function populate_branch_types(response) {
             $('#permission_message').empty().removeClass('alert alert-danger');
-
+            // Get data from backend
             const branch_categories = response.branch_categories || [];
 
             $("#branch_type").empty().append(
@@ -1270,8 +1266,12 @@
                         $('#permission_message').text(response.messages);
                         
                     }else if(response.status == 200){
-                        branchDetailsCache = response; // Cache it
-                        handleBranchResponse(response);
+                        // Save to Parent RAM
+                        updateAppRAMBulk({
+                            branchSearchFlags: true,
+                            branchSearchResults: response
+                        });
+                        populate_branch_searches(response);
 
                         $("#loaderBox").removeClass('display_none');
                         $("#ContentView").removeClass('display_none');
@@ -1939,10 +1939,11 @@
 
                     }else if(response.status == 200){
                         clearBranchCache(id);
-
                         // ❗ Invalidate search cache
-                        hasFetchedBranchSearch = false;
-                        cachedBranchSearch = null;
+                        updateAppRAMBulk({
+                            branchSearchFlags: false,
+                            branchSearchResults: null
+                        });
                         
                         $("#accessconfirmbranch").modal('show');
                         $("#deletebranch").modal('hide').fadeOut();
@@ -2157,10 +2158,10 @@
                 }, 1000);
             }else if($(this).attr('id') === 'enableUpdateCategory'){
                 setTimeout(() => {
-                    if (!hasFetchedBranchCategories) {
-                        fetch_branch_categories(); // ✅ Only call it; let the fetch function control the flag
+                    if (!getAppRAM('branchCategoryFlags')) {
+                        fetch_branch_categories();
                     } else {
-                        populate_branch_categories(cachedBranchCategories); // ✅ Use cached version
+                        populate_branch_categories(getAppRAM('branchCategories'));
                     }
                     
                     $("#loadingSpinner").attr('hidden', true);
@@ -2187,10 +2188,10 @@
                 }, 1000);
             }else if($(this).attr('id') === 'enableDeleteCategory'){
                 setTimeout(() => {
-                    if (!hasFetchedBranchCategories) {
-                        fetch_branch_categories(); // ✅ Only call it; let the fetch function control the flag
+                    if (!getAppRAM('branchCategoryFlags')) {
+                        fetch_branch_categories();
                     } else {
-                        populate_branch_categories(cachedBranchCategories); // ✅ Use cached version
+                        populate_branch_categories(getAppRAM('branchCategories'));
                     }
                     $("#loadingSpinner").attr('hidden', true);
                     $("#enableDeleteCategory").removeAttr('hidden');
@@ -2325,9 +2326,9 @@
         // Fetch Branch Category
         function fetch_branch_categories(){
 
-            if (hasFetchedBranchCategories) {
+            if (getAppRAM('branchCategoryFlags')) {
                 // Use cached data instead
-                populate_branch_categories(cachedBranchCategories);
+                populate_branch_categories(getAppRAM('branchCategories'));
                 return;
             }
 
@@ -2344,8 +2345,11 @@
                 url: currentUrl,
                 dataType: 'json',
                 success: function(response) {
-                    cachedBranchCategories = response; // Save to cache
-                    hasFetchedBranchCategories = true;
+                    // Save to Parent RAM
+                    updateAppRAMBulk({
+                        branchCategoryFlags: true,
+                        branchCategories: response
+                    });
                     populate_branch_categories(response);
                 },
                 error: function() {
@@ -2441,10 +2445,10 @@
             $("#categorySettingDisplay").empty();
             $("#Heading").empty();
             $("#confrmHead, #confrmUpdateName, #deleteLab").empty();
-            var selectID = $(this).val();
+            var select = $(this).val();
 
             // Button Show Or Hide
-            if(selectID == ''){
+            if(select == ''){
                 $("#branch_type_create").removeAttr('hidden');
                 $("#branch_type_cancel").removeAttr('hidden');
                 $("#branch_type_update").attr('hidden', true);
@@ -2453,94 +2457,113 @@
                 $("#updateForm_error_branch").attr('hidden', true);
                 $("#savForm_error_branch").attr('hidden', true);
                 $('#branchTypeName').removeClass('is-invalid');
-            }else if(selectID !== ''){
-                var id = selectID;
+
+                return select;
+
+            }else if(select !== ''){
+                var id = select;
             }
-            $.ajax({
-                type: "GET",
-                url: "/company/branch-type-edit/" + id,
-                success: function(response){
-                    if(response.status == 404){
-                        $('#success_message').html("");
-                        // $('#success_message').addClass('alert alert-danger');
-                        // $('#success_message').text(response.messages);
-                    }else if(response.status == 200){
-                        $("#branchTypeCreateModal").modal('hide');
-                        $("#accessconfirmbranch").modal('show');
-                        $("#dataPullingProgress").removeAttr('hidden');
-                        $("#access_modal_box").addClass('progress_body');
-                        $("#processModal_body").addClass('loading_body_area');
-                        $("#savForm_error_branch").attr('hidden', true);
-                        $('#branchTypeName').removeClass('is-invalid');
 
-                        setTimeout(() => {
-                            $("#branchTypeCreateModal").modal('show');
-                            $("#accessconfirmbranch").modal('hide');
-                            $("#dataPullingProgress").attr('hidden', true);
-                            $("#access_modal_box").removeClass('progress_body');
-                            $("#processModal_body").removeClass('loading_body_area');
-                            $("#categorySettingDisplayCard").removeAttr('hidden');
-                            // check if update mode is active
-                            if ($("#enableUpdateCategory").is(":visible")) {
-                                $("#branch_type_create").addClass('display_none');
-                                $("#branch_type_delete").attr('hidden', true);
-                                $("#branch_type_delete").addClass('display_none');
-                                $("#branch_type_cancel").show();
-                                $("#branch_type_update").removeAttr('hidden');
-                                $("#branch_type_update").removeClass('display_none');
-                            }
+            // Check if data is cached
+            const branchCategoryCache = getAppRAM('branchCategoryDetails', {});
 
-                            // check if delete mode is active
-                            if ($("#enableDeleteCategory").is(":visible")) {
-                                $("#branch_type_create").addClass('display_none');
-                                $("#branch_type_update").attr('hidden', true);
-                                $("#branch_type_update").addClass('display_none');
-                                $("#branch_type_cancel").show();
-                                $("#branch_type_delete").removeAttr('hidden');
-                                $("#branch_type_delete").removeClass('display_none');
-                            }
-                            
-                            const messages = response.messages;
-    
-                            $('#branch_category_id').val(id);
-                            $('#branch_delete_category_id').val(id);
-                            $('#inputBranchCategory').removeClass('display_none');
-                            $('.edit_branch_category_name').removeClass('display_none');
-                            $('.edit_branch_category_name').val(response.messages.branch_category_name);
-                            const branchCategory = $("#delete_label");
-                            const branchCategoryHeading = $("#Heading");
-                            const confirmUpdateHeading = $("#confrmHead, #confrmUpdateName, #deleteLab");
-                            branchCategory.append(`<span class="">${response.messages.branch_category_name}</span>`);
-                            branchCategoryHeading.append(`<span class="">${response.messages.branch_category_name}</span>`);
-                            confirmUpdateHeading.append(`<span class="">${response.messages.branch_category_name}</span>`);
+            if (branchCategoryCache[select]) {
+                $('#response_message').empty();
+                $('#response_message').removeClass('alert alert-danger');
+                populateBranchCategoryFromCache(branchCategoryCache[select], select);
+            }else{
+                $.ajax({
+                    type: "GET",
+                    url: "/company/branch-type-edit/" + id,
+                    success: function(response){
+                        if(response.status == 404){
+                            $('#response_message').removeClass('alert alert-danger');
+                            //$('#success_message').html("");
+                            // $('#success_message').addClass('alert alert-danger');
+                            // $('#success_message').text(response.messages);
+                        }else if(response.status == 200){
+                            const branchCategoryCache = getAppRAM('branchCategoryDetails', {});
+                            branchCategoryCache[select] = response;
+                            updateAppRAM('branchCategoryDetails', branchCategoryCache);
 
-                            let inputValue = response.messages.branch_category_name;
-                            let settingDisplay = $("#categorySettingDisplay");
-
-                            if(inputValue !== ''){
-                                $("#savForm_error_branch").attr('hidden', true);
-                                $('#branchTypeName').removeClass('is-invalid');
-                                settingDisplay.find('#clearBranchCategory').remove();
-                                // Setting Display
-                                settingDisplay.append(`
-                                    <li id="clearBranchCategory">
-                                        <label class="form-check-label line-label" for="branch-type">
-                                            Branch-Category : ${inputValue}
-                                        </label>
-                                    </li>
-                                `);
-                            }else if(inputValue == ''){
-                                // Display Component Settings Empty
-                                settingDisplay.find('#clearBranchCategory').remove();
-                            }
-                        }, 1500);
+                            populateBranchCategoryFromCache(response, select);
+                        }
                         
                     }
-                    
-                }
-            });
+                });
+            }
         });
+        function populateBranchCategoryFromCache(response, id){
+            $("#branchTypeCreateModal").modal('hide');
+            $("#accessconfirmbranch").modal('show');
+            $("#dataPullingProgress").removeAttr('hidden');
+            $("#access_modal_box").addClass('progress_body');
+            $("#processModal_body").addClass('loading_body_area');
+            $("#savForm_error_branch").attr('hidden', true);
+            $('#branchTypeName').removeClass('is-invalid');
 
+            setTimeout(() => {
+                $("#branchTypeCreateModal").modal('show');
+                $("#accessconfirmbranch").modal('hide');
+                $("#dataPullingProgress").attr('hidden', true);
+                $("#access_modal_box").removeClass('progress_body');
+                $("#processModal_body").removeClass('loading_body_area');
+                $("#categorySettingDisplayCard").removeAttr('hidden');
+                // check if update mode is active
+                if ($("#enableUpdateCategory").is(":visible")) {
+                    $("#branch_type_create").addClass('display_none');
+                    $("#branch_type_delete").attr('hidden', true);
+                    $("#branch_type_delete").addClass('display_none');
+                    $("#branch_type_cancel").show();
+                    $("#branch_type_update").removeAttr('hidden');
+                    $("#branch_type_update").removeClass('display_none');
+                }
+
+                // check if delete mode is active
+                if ($("#enableDeleteCategory").is(":visible")) {
+                    $("#branch_type_create").addClass('display_none');
+                    $("#branch_type_update").attr('hidden', true);
+                    $("#branch_type_update").addClass('display_none');
+                    $("#branch_type_cancel").show();
+                    $("#branch_type_delete").removeAttr('hidden');
+                    $("#branch_type_delete").removeClass('display_none');
+                }
+                
+                const messages = response.messages;
+
+                $('#branch_category_id').val(id);
+                $('#branch_delete_category_id').val(id);
+                $('#inputBranchCategory').removeClass('display_none');
+                $('.edit_branch_category_name').removeClass('display_none');
+                $('.edit_branch_category_name').val(response.messages.branch_category_name);
+                const branchCategory = $("#delete_label");
+                const branchCategoryHeading = $("#Heading");
+                const confirmUpdateHeading = $("#confrmHead, #confrmUpdateName, #deleteLab");
+                branchCategory.append(`<span class="">${response.messages.branch_category_name}</span>`);
+                branchCategoryHeading.append(`<span class="">${response.messages.branch_category_name}</span>`);
+                confirmUpdateHeading.append(`<span class="">${response.messages.branch_category_name}</span>`);
+
+                let inputValue = response.messages.branch_category_name;
+                let settingDisplay = $("#categorySettingDisplay");
+
+                if(inputValue !== ''){
+                    $("#savForm_error_branch").attr('hidden', true);
+                    $('#branchTypeName').removeClass('is-invalid');
+                    settingDisplay.find('#clearBranchCategory').remove();
+                    // Setting Display
+                    settingDisplay.append(`
+                        <li id="clearBranchCategory">
+                            <label class="form-check-label line-label" for="branch-type">
+                                Branch-Category : ${inputValue}
+                            </label>
+                        </li>
+                    `);
+                }else if(inputValue == ''){
+                    // Display Component Settings Empty
+                    settingDisplay.find('#clearBranchCategory').remove();
+                }
+            }, 1500);
+        }
         // Create Branch Type
         $(document).on('click', '#branch_type_create', function(e){
             e.preventDefault();
