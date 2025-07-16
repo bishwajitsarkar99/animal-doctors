@@ -838,8 +838,10 @@
                 }, 1000);
             }else if($(this).attr('id') === 'enableUpdateBranch'){
                 setTimeout(() => {
-                    if (getAppRAM('branchSearchFlags')) {
+                    if (!getAppRAM('branchSearchFlags')) {
                         searchBranch();
+                    }else{
+                        populate_branch_searches(getAppRAM('branchSearchResults'));
                     }
 
                     $("#loaderSpinner").attr('hidden', true);
@@ -863,6 +865,8 @@
                 setTimeout(() => {
                     if (getAppRAM('branchSearchFlags')) {
                         searchBranch();
+                    }else{
+                        populate_branch_searches(getAppRAM('branchSearchResults'));
                     }
 
                     $("#loaderSpinner").attr('hidden', true);
@@ -1266,12 +1270,11 @@
                         $('#permission_message').text(response.messages);
                         
                     }else if(response.status == 200){
-                        // Save to Parent RAM
+                        // save new cache in AppRAM
                         updateAppRAMBulk({
-                            branchSearchFlags: true,
-                            branchSearchResults: response
+                            branchSearchFlags: false,
+                            branchSearchResults: []
                         });
-                        populate_branch_searches(response);
 
                         $("#loaderBox").removeClass('display_none');
                         $("#ContentView").removeClass('display_none');
@@ -1848,10 +1851,18 @@
                             settingDisplay.find('#clearCity').remove();
                             settingDisplay.find('#clearLocation').remove();
                             
+                            // Invalidate and re-fetch updated search list
+                            updateAppRAMBulk({
+                                branchSearchFlags: false,
+                                branchSearchResults: []
+                            });
+                            searchBranch();
+                            fetchTableBranch();
+
                             setTimeout(() => {
                                 showSuccessToast(response.messages)
                             }, 1000);
-                            searchBranch();
+                           
                         }, 1500);
                     }
                 }
@@ -1938,17 +1949,23 @@
                         $('#response_message').text(response.messages);
 
                     }else if(response.status == 200){
-                        clearBranchCache(id);
-                        // ❗ Invalidate search cache
-                        updateAppRAMBulk({
-                            branchSearchFlags: false,
-                            branchSearchResults: null
-                        });
-                        
                         $("#accessconfirmbranch").modal('show');
                         $("#deletebranch").modal('hide').fadeOut();
                         $("#deleteconfirmbranch").modal('hide').fadeOut();
                         $("#loaderBox").removeClass('display_none');
+                        // update branch details
+                        clearBranchCache(id);
+
+                        // Remove deleted branch from RAM
+                        let branchSearchResults = getAppRAM('branchSearchResults');
+                        if (branchSearchResults && branchSearchResults.allBranch) {
+                            branchSearchResults.allBranch = branchSearchResults.allBranch.filter(
+                                branch => branch.id != id
+                            );
+                            updateAppRAMBulk({
+                                branchSearchResults: branchSearchResults
+                            });
+                        }
     
                         setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
@@ -1993,14 +2010,15 @@
                             settingDisplay.find('#clearUpazila').remove();
                             settingDisplay.find('#clearCity').remove();
                             settingDisplay.find('#clearLocation').remove();
-    
+
                             setTimeout(() => {
                                 showSuccessToast(response.messages)
                             }, 1000);
-                            
-                            searchBranch();
+
+                            // Refresh dropdown from updated RAM (no need to call server again)
+                            populate_branch_searches(branchSearchResults);
                             fetchTableBranch();
-                            
+
                         }, 1500);
                     }
                 }
