@@ -349,10 +349,16 @@
             handleInputValidation, 
             removeSkeletonClass 
         } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
+        // Import RAM functions
+        import { clearAppRAM } from "/module/module-min-js/appRAM/appParentRAM.js";
         buttonLoader();
         pageLoader();
         toolTip();
         //browserInpect();
+        // Clear Current User Cache
+        if (window.location.pathname === '/login') {
+            clearAppRAM();
+        }
 
         $(document).ready(function () {
             // Initialize the message

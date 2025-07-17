@@ -37,9 +37,8 @@
     <!-- =========== Tap Panel Top Bar =========== -->
     <x-CustomTabPanels.TabPanelTopBars.TabPanelTopBar topBarClass="tab-panel" topBarRowClass="row tab-panel-topbar" topBarId="branchListPage" :hiddenAttr="$hiddenAttr">
       <div class="col-xl-8 group-btn">
-        <x-Buttons.FormMediumButton label="Branch List" buttonParentClass="btn btn-sm branch-tab-btn active-button" buttonChildClass="skeleton-button" buttonId="branchList" iconClass="icon" labelClass="btn-text" />
-        <x-Buttons.FormMediumButton label="Create Branch Category" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchTypeModalView" iconClass="icon" labelClass="btn-text" />
-        <x-Buttons.FormMediumButton label="Branch Settings" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchSettingPageView" iconClass="icon" labelClass="btn-text" />
+        <x-Buttons.FormMediumButton label="Branch" buttonParentClass="btn btn-sm branch-tab-btn active-button" buttonChildClass="skeleton-button" buttonId="branchList" iconClass="icon" labelClass="btn-text" />
+        <x-Buttons.FormMediumButton label="Settings" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchSettingPageView" iconClass="icon" labelClass="btn-text" />
         <x-Buttons.CommonRefreshPageBtn label="Refresh" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchTypeRefresh" iconClass="type-icon" labelClass="type-btn-text" />
       </div>
       <div class="col-xl-4"></div>
@@ -351,7 +350,7 @@
               lableName="Cancel"
             />  
             <x-Modals.SmallModals.Buttons.ConfirmBtn 
-              className="btn btn-sm purple-btn purple-btn-focus delete_branch branch-skeleton" 
+              className="btn btn-sm purple-btn purple-btn-focus branch-skeleton" 
               btnId="branch_type_delete_confirm" 
               lableName="Confirm" 
               lableClass="delete-confrm-btn-text" 

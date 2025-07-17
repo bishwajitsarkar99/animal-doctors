@@ -34,9 +34,19 @@ class BranchServiceProvicer
         }
         $role_id = $auth->role;
         $email = $auth->login_email;
-
-        if($email && $role_id){
+        $user_branch_id = $auth->branch_id;
+        // $permission = false; // default
+        if($email && $role_id && $user_branch_id){
             $branch_create_page_authorize = 1; // branch create page authorize
+
+            // $permission = DB::table('permissions')
+            // ->where(function ($query) use ($role_id, $email, $user_branch_id) {
+            //     $query->where('role', $role_id)
+            //         ->orWhere('email', $email)
+            //         ->orWhere('user_branch_id', $user_branch_id);
+            // })
+            // ->where('permission', 1)
+            // ->exists();
         }
 
         $storedRandom = session('valid_branch_random');
@@ -300,9 +310,17 @@ class BranchServiceProvicer
         $role_id = $auth->role;
         $email = $auth->login_email;
         $user_branch_id = $auth->branch_id;
-
-        if($role_id && $email){
+        //$permission = false; // default
+        if($role_id && $email && $user_branch_id){
             $data_table_permission = 1; // Branch data table permission
+            // $permission = DB::table('permissions')
+            // ->where(function ($query) use ($role_id, $email, $user_branch_id) {
+            //     $query->where('role', $role_id)
+            //         ->orWhere('email', $email)
+            //         ->orWhere('user_branch_id', $user_branch_id);
+            // })
+            // ->where('permission', 1)
+            // ->exists();
         }
 
         if($data_table_permission === 1){

@@ -9,6 +9,7 @@ return[
     'do you want to logout'=>'do you want to logout',
     'Cancel'=>'Cancel',
     'Yes'=>'Yes',
+    'No'=>'No',
     // Sidebar============
     'Dashboard'=>'Dashboard',
     'Plat-Form'=>'Plat-Form',

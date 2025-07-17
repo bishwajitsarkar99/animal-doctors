@@ -3,6 +3,7 @@
     import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/module/module-min-js/appRAM/appParentRAM.js";
+
     buttonLoader();
 
     $(document).ready(function(){
@@ -14,8 +15,10 @@
         } else {
             // console.error("fetch_division is not defined. Check script order.");
         }
-        // Branch Details Data
+        // Search Branch Details Data Get From RAM
         const branchDetailsCache = getAppRAM('branchDetails', {});
+        // Search Branch Types Data Get From RAM
+        const branchCategoryDetailsCache = getAppRAM('branchCategoryDetails', {});
 
         fetchTableBranch();
         initSelect2();
@@ -439,9 +442,12 @@
             if (branchDetailsCache.hasOwnProperty(stringId)) {
                 delete branchDetailsCache[stringId];
                 console.log(`✅ Cache cleared for branch ID: ${stringId}`);
+            }else if (branchCategoryDetailsCache.hasOwnProperty(stringId)) {
+                delete branchCategoryDetailsCache[stringId];
+                console.log(`✅ Cache cleared for branch ID: ${stringId}`);
             } else {
                 console.warn(`⚠️ No cache found for branch ID: ${stringId}`);
-                console.log('Current keys:', Object.keys(branchDetailsCache));
+                console.log('Current keys:', Object.keys(branchCategoryDetailsCache));
             }
         }
         // all cache clear
@@ -815,8 +821,10 @@
 
             if($(this).attr('id') === 'enableNewBranch'){
                 setTimeout(() => {
-                    if (getAppRAM('branchTypeFlags')) {
+                    if (!getAppRAM('branchTypeFlags')) {
                         fetch_branch_types();
+                    }else{
+                        populate_branch_types(getAppRAM('branchTypes'));
                     }
                     $("#loaderSpinner").attr('hidden', true);
                     $("#enableNewBranch").removeAttr('hidden');
@@ -2611,9 +2619,17 @@
                             $('#branchTypeName').addClass('is-invalid');
                             $('#branchTypeName').html("");
                         });
-                    }else{
+                    }else if(response.status == 200){
                         $("#branchTypeCreateModal").modal('hide');
                         $("#loadingBox").removeClass('display_none');
+
+                        // save new cache in AppRAM
+                        updateAppRAMBulk({
+                            branchCategoryFlags: false,
+                            branchCategories: [],
+                            branchTypeFlags: false,
+                            branchTypes: []
+                        });
 
                         setTimeout(() => {
                             $("#loadingBox").addClass('display_none');
@@ -2668,6 +2684,32 @@
                 'branch_category_name' : $(".edit_branch_category_name").val(),
             }
 
+            // Check if cache exists
+            const cachedData = branchCategoryDetailsCache[id]?.messages;
+
+            let isChanged = false;
+
+            if (cachedData) {
+                // Compare each field
+                for (const key in data) {
+                    if (data[key] != cachedData[key]) {
+                        isChanged = true;
+                        break;
+                    }
+                }
+            }else {
+                isChanged = true; // No cached data, assume changed
+            }
+
+            // If not changed, don't send update
+            if (!isChanged) {
+                $("#updatecategoryconfirmbranch").modal('hide');
+                setTimeout(() => {
+                    showSuccessToast("No changes detected. Update skipped.")
+                }, 1000);
+                return;
+            }
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN' : $('meta[ name ="csrf-token"]').attr('content')
@@ -2689,9 +2731,11 @@
                             $('#branchTypeName').addClass('is-invalid');
                             $('#branchTypeName').html("");
                         });
-                    }else{
+                    }else if(response.status == 200){
                         $("#updatecategoryconfirmbranch").modal('hide');
                         $("#loadingBox").removeClass('display_none');
+
+                        clearBranchCache(id);
 
                         setTimeout(() => {
                             $("#loadingBox").addClass('display_none');
@@ -2708,12 +2752,20 @@
                                 $("#branch_type_update").removeAttr('hidden');
                                 $("#branch_type_update").removeClass('display_none');
                             }
-                            
+                            // Invalidate and re-fetch updated search list
+                            updateAppRAMBulk({
+                                branchCategoryFlags: false,
+                                branchCategories: [],
+                                branchTypeFlags: false,
+                                branchTypes: []
+                            });
+                            fetch_branch_categories();
+                            fetch_branch_types();
+
                             setTimeout(() => {
                                 showSuccessToast(response.messages)
                             }, 1000);
-                            fetch_branch_categories();
-                            fetch_branch_types();
+
                         }, 1500);
                     }
                 }
@@ -2789,6 +2841,25 @@
                     $("#deletecategorybranch").modal('hide');
                     $("#loadingBox").removeClass('display_none');
 
+                    // update branch categories details
+                    clearBranchCache(id);
+
+                    // Get current categories from AppRAM
+                    const branchCategories = getAppRAM('branchCategories');
+
+                    const filteredCategories = branchCategories.branch_categories.filter(
+                        branch => branch.id != id
+                    );
+
+                    updateAppRAMBulk({
+                        branchCategoryFlags: false,
+                        branchCategories: {
+                            branch_categories: filteredCategories
+                        },
+                        branchTypeFlags: false,
+                        branchTypes: []
+                    });
+
                     setTimeout(() => {
                         $("#loadingBox").addClass('display_none');
                         $("#branch_category_name").val("").trigger('change');
@@ -2808,6 +2879,7 @@
                             showSuccessToast(response.messages)
                         }, 1000);
                         
+                        // Re-fetch fresh data
                         fetch_branch_categories();
                         fetch_branch_types();
                     }, 1500);

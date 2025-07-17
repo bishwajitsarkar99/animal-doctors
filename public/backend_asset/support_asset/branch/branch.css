@@ -54,7 +54,7 @@ ul.setting-display {
 }
 .tab-content-panel-bg,.setting-page-container{
     background-image: linear-gradient(to bottom, white 50%, white 100%);
-    box-shadow: rgba(0,0,0,.067) 0 1px 20px,rgba(0,123,255,.2) 0 2px 6px;
+    box-shadow: rgba(0,0,0,.067) 0 1px 1px,rgba(0,123,255,.2) 0 2px 6px;
 }
 .tab-panel-topbar {
     background-image: linear-gradient(to bottom, white 50%, white 100%);
@@ -62,8 +62,8 @@ ul.setting-display {
     margin: 0;
     padding: 15px 15px;
     box-shadow: rgba(0,0,0,.067) 0 1px 20px,rgba(0,123,255,.2) 0 2px 6px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     border-bottom: 1px ridge #f1f1f5;
 }
 .custom-card{
@@ -147,6 +147,8 @@ table.setting-table {
     margin: 0;
     padding: 0 20px;
     padding-bottom: 20px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 .setting-top-area{
     display: flex;
@@ -520,9 +522,9 @@ select#SettingDisplay {
     top: 0;
     left: 0;
     /* transform: translate(-30%, -10%) rotate(-45deg); */
-    font-size: 50px;
+    font-size: 40px;
     /* color: rgba(0, 0, 0, 0.08);  very light gray */
-    color: #2900cf1a;
+    color: #2900cf00;
     font-weight: bold;
     z-index: 0;
     white-space: nowrap;

@@ -9,6 +9,7 @@ return[
     'do you want to logout'=>'আপনি কি লগআউট করতে চান',
     'Cancel'=>'বাতিল করুন',
     'Yes'=>'হ্যাঁ',
+    'No'=>'না',
     // Sidebar============
     'Dashboard'=>'ড্যাশবোর্ড',
     'Plat-Form'=>'প্ল্যাট-ফর্ম',
