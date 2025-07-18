@@ -1,15 +1,15 @@
 <?php 
   // Table-Head-th
   $headThRows = [
-    ['label'=>'SN.', 'className'=>'th-head skeleton', 'styleShow'=>'width:5%;text-align:center;'],
-    ['label'=>'Branch-Type', 'className'=>'th-head skeleton', 'styleShow'=>''],
-    ['label'=>'Branch-ID', 'className'=>'th-head skeleton', 'styleShow'=>''],
-    ['label'=>'Branch-Name', 'className'=>'th-head skeleton', 'styleShow'=>''],
-    ['label'=>'Division', 'className'=>'th-head skeleton', 'styleShow'=>''],
-    ['label'=>'District', 'className'=>'th-head skeleton', 'styleShow'=>''],
-    ['label'=>'Upazila', 'className'=>'th-head skeleton', 'styleShow'=>''],
-    ['label'=>'City', 'className'=>'th-head skeleton', 'styleShow'=>''],
-    ['label'=>'Location', 'className'=>'th-head skeleton', 'styleShow'=>''],
+    ['label'=>'SN.', 'className'=>'th-head skeleton', 'styleShow'=>'width:5%;text-align:center;', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
+    ['label'=>'Branch-Type', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
+    ['label'=>'Branch-ID', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
+    ['label'=>'Branch-Name', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
+    ['label'=>'Division', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
+    ['label'=>'District', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
+    ['label'=>'Upazila', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
+    ['label'=>'City', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
+    ['label'=>'Location', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
   ];
   $hiddenAttr = 'hidden';
   // Custom Left Side Tab Panel Button
@@ -48,21 +48,35 @@
       <!-- =========== Home Tab Content Panel Header =========== -->
       <x-CustomTabPanels.TabPanelContents.TabContentPanelHeader contentTabHeaderClass="table-heading component-focus">
         <span>
-          <span class="skeleton">
-            <x-Tables.Icon.TableIcon iconWidth="26" iconHeight="24" fillColor="#413571a6" />
+          <span class="table-icon-skeleton">
+            <x-Tables.Icon.TableIcon iconWidth="26" iconHeight="24" fillColor="#413571a6" svgId="tableIcon" />
+            <!-- Table-Menu-Card -->
+            <x-MenuCards.MenuCard menuParentClass="dropdown dashboard_menubar" menuChildClass="dropdown-content" menuId="dropbtn">
+              <div class="row">
+                <div class="col-12">
+                  <ul class="menu-btn-group">
+                    <li id="lineRow"><a type="button" class="menu-btn" id="columnWidth">Remove Column Width</a></li>
+                    <li id="lineRow"><a type="button" class="menu-btn" id="rowHeight">Remove Row Height</a></li>
+                  </ul>
+                </div>
+              </div>
+            </x-MenuCard.MenuCard>
           </span>
-          <span class="skeleton"><strong>Branch List Table</strong></span>
+          <span class="table-icon-skeleton"><strong>Branch Table</strong></span>
         </span>
       </x-CustomTabPanels.TabPanelContents.TabContentPanelHeader>
       <!-- =========== Home Tab Content =========== -->
       <x-Tables.ViewDataTables.DataTableWrappers.DataTableWrapper wrapperClass="table-wrapper component-focus">
         <x-Tables.ViewDataTables.DataTableResponsives.DataTableResponsive tableResponsiveClass="table-responsive">
           <!-- ========== Branch-List Table =============== table-striped-->
-          <x-Tables.ViewDataTables.ViewDataTable tableClass="table">
+          <x-Tables.ViewDataTables.ViewDataTable tableClass="table" resizeTableId="resizableTable">
             <x-Tables.ViewDataTables.DataTableHeads.DataTableHead className="table-head" >
-              <x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow rowClass="table-head-row">
+              <x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow rowClass="table-head-row skeleton">
                 @foreach($headThRows as $data)
                   <x-Tables.ViewDataTables.DataTableHeads.DataTableHeadTh 
+                    theadId="{{ $data['thId'] }}"
+                    thRowResizeClass="{{ $data['resizeRowClass'] }}"
+                    thColResizeClass="{{ $data['resizeColClass'] }}"
                     thClassName="{{ $data['className'] }}" 
                     thStyle="{{ $data['styleShow'] }}" 
                     lableName="{{ $data['label'] }}"
@@ -70,7 +84,7 @@
                 @endforeach
               </x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow>
             </x-Tables.ViewDataTables.DataTableHeads.DataTableHead>
-            <x-Tables.ViewDataTables.DataTableBody.TableBody bodyClassName="table-body table-light" tableId="BranchListTableBody">
+            <x-Tables.ViewDataTables.DataTableBody.TableBody bodyClassName="table-body table-light skeleton" tableId="BranchListTableBody">
               <!-- Loader Overlay -->
               <x-Tables.Icon.LoaderOverlay 
                 tableOverlayClass="table-loader-overlay display_none" 
@@ -101,7 +115,7 @@
           </div>
           <div class="col-3">
             <x-Tables.TableEntries
-              labelClass="per_item_class table-footer-label"
+              labelClass="per_item_class table-footer-label table-footer-lable-skeleton"
               entryId="total_per_branch_items"
               showId="per_branch_items_num"
               totalIems="total_branch_items" 
@@ -109,7 +123,7 @@
           </div>
           <div class="col-8">
             <x-Tables.TablePagination
-              paginationClass="pagination mt-1 skeleton"
+              paginationClass="pagination mt-1"
               paginationId="branch_data_table_paginate" 
               paginationStyle="float: right;padding-top:0px;"
             />
@@ -413,7 +427,7 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category-min.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/branch/branch.css">
-<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/table/zebra-table/zebra-table-min.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/table/zebra-table/zebra-table.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 @endsection

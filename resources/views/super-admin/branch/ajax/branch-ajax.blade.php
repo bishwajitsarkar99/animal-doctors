@@ -1,12 +1,26 @@
 <script type="module">
     import { modernDateFormat } from "/module/module-min-js/helper-function-min.js";
     import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
+    import { resize } from "/module/table-module/table-module.js";
+    resize('resizableTable', 'col-resizer', 'row-resizer');
+
     // Import RAM functions
-    import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/module/module-min-js/appRAM/appParentRAM.js";
+    import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/module/module-min-js/appRAM/appParentRAM/appRAMCapcity/appBranchSetting.js";
 
     buttonLoader();
 
     $(document).ready(function(){
+        // Remove Row and Column width or height space
+        $(document).on('click', '#columnWidth', function(){
+            localStorage.removeItem('resizableTable_columnWidths');
+            localStorage.removeItem('resizableTable_rowHeights');
+            location.reload();
+        });
+        // $(document).on('click', '#columnWidth', function(){
+            
+        //     location.reload();
+        // });
+
         // Ensure function exists before calling
         if (typeof fetch_division === "function") {
             fetch_division();
@@ -531,16 +545,46 @@
             return [...rows].map((row, key) => {
                 return `
                     <tr class="branch-table-row" key="${key}" id="BranchRow">
-                        <td class="td-cell" style="text-align:center;">${(key)+1}</td>
-                        <td class="td-cell" style="text-align:center;" hidden>${row.id}</td>
-                        <td class="td-cell-second">${row.branch_type}</td>
-                        <td class="td-cell-second">${row.branch_id}</td>
-                        <td class="td-cell-second">${row.branch_name}</td>
-                        <td class="td-cell-second">${row.divisions.division_name}</td>
-                        <td class="td-cell-second">${row.districts.district_name}</td>
-                        <td class="td-cell-second">${row.thana_or_upazilas.thana_or_upazila_name}</td>
-                        <td class="td-cell-second">${row.town_name}</td>
-                        <td class="td-cell-second">${row.location}</td>
+                        <td id="cellId" class="td-cell" style="text-align:center;">
+                            ${(key)+1}
+                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                        </td>
+                        <td id="cellId" class="td-cell" style="text-align:center;" hidden>
+                            ${row.id}
+                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                        </td>
+                        <td id="cellId" class="td-cell-second">
+                            ${row.branch_type}
+                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                        </td>
+                        <td id="cellId" class="td-cell-second">
+                            ${row.branch_id}
+                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                        </td>
+                        <td id="cellId" class="td-cell-second">
+                            ${row.branch_name}
+                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                        </td>
+                        <td id="cellId" class="td-cell-second">
+                            ${row.divisions.division_name}
+                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                        </td>
+                        <td id="cellId" class="td-cell-second">
+                            ${row.districts.district_name}
+                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                        </td>
+                        <td class="td-cell-second">
+                            ${row.thana_or_upazilas.thana_or_upazila_name}
+                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                        </td>
+                        <td id="cellId" class="td-cell-second">
+                            ${row.town_name}
+                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                        </td>
+                        <td id="cellId" class="td-cell-second">
+                            ${row.location}
+                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                        </td>
                     </tr>
                 `;
             }).join("\n");
@@ -588,9 +632,7 @@
                 },
                 complete: function() {
                     hideTableLoader();
-                    fetchData();
-                    focuButton();
-                    focuTableFooterLabel();
+                    tableSkeleton();
                 },
                 error: function(xhr) {
                     if (xhr.status === 422) {
@@ -631,25 +673,11 @@
             $(this).removeClass('deactive').addClass('active-button');
         });
         // skeleton
-        function fetchData() {
-            const allSkeleton = document.querySelectorAll('.skeleton')
+        function tableSkeleton() {
+            const allSkeleton = document.querySelectorAll('.table-footer-lable-skeleton, .skeleton, .table-icon-skeleton')
 
             allSkeleton.forEach(item => {
-                item.classList.remove('skeleton')
-            });
-        }
-        function focuButton() {
-            const allSkeleton = document.querySelectorAll('.skeleton-button')
-
-            allSkeleton.forEach(item => {
-            item.classList.remove('skeleton-button')
-            });
-        }
-        function focuTableFooterLabel() {
-            const allSkeleton = document.querySelectorAll('.table-footer-label')
-
-            allSkeleton.forEach(item => {
-            item.classList.remove('table-footer-label')
+            item.classList.remove('table-footer-lable-skeleton', 'skeleton', 'table-icon-skeleton')
             });
         }
         const paginate_html = ({ links, total }) => {
@@ -659,7 +687,7 @@
 
             return `
                 <nav class="paginate_link" aria-label="Page navigation example">
-                    <ul class="pagination">
+                    <ul class="pagination skeleton">
                         ${links.map((link, key) => {
                             // Handle Previous and Next buttons separately
                             if (link.label.toLowerCase().includes("previous")) {

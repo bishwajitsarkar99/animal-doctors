@@ -106,33 +106,6 @@
                 </div>
             </x-Tables.TableFooter>
         </div>
-
-        <!-- <table id="resizableTable">
-            <tr>
-                <th id="headId">S.L<div class="col-resizer"></div><div class="row-resizer"></div></th>
-                <th id="headId">Account Title<div class="col-resizer"></sdivpdivan><div class="row-resizer"></div></th>
-                <th id="headId">Post Ref<div class="col-resizer"></div><div class="row-resizer"></div></th>
-                <th id="headId">Debit<div class="col-resizer"></div><div class="row-resizer"></div></th>
-                <th id="headId">Credit<div class="col-resizer"></div><div class="row-resizer"></div></th>
-                <th id="headId">Blance<div class="col-resizer"></div><div class="row-resizer"></div></th>
-            </tr>
-            <tr>
-                <td id="cellId">Cell 1<div class="col-resizer"></div><div class="row-resizer"></div></td>
-                <td id="cellId">Cell 2<div class="col-resizer"></div><div class="row-resizer"></div></td>
-                <td id="cellId">Cell 1<div class="col-resizer"></div><div class="row-resizer"></div></td>
-                <td id="cellId">Cell 2<div class="col-resizer"></div><div class="row-resizer"></div></td>
-                <td id="cellId">Cell 1<div class="col-resizer"></div><div class="row-resizer"></div></td>
-                <td id="cellId">Cell 2<div class="col-resizer"></div><div class="row-resizer"></div></td>
-            </tr>
-            <tr>
-                <td id="cellId">Cell 1<div class="col-resizer"></div><div class="row-resizer"></div></td>
-                <td id="cellId">Cell 2<div class="col-resizer"></div><div class="row-resizer"></div></td>
-                <td id="cellId">Cell 1<div class="col-resizer"></div><div class="row-resizer"></div></td>
-                <td id="cellId">Cell 2<div class="col-resizer"></div><div class="row-resizer"></div></td>
-                <td id="cellId">Cell 1<div class="col-resizer"></div><div class="row-resizer"></div></td>
-                <td id="cellId">Cell 2<div class="col-resizer"></div><div class="row-resizer"></div></td>
-            </tr>
-        </table> -->
     @else
         @include('super-admin.user-details.error.data-table-permission')
     @endif

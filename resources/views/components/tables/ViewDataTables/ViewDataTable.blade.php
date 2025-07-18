@@ -1,1 +1,1 @@
-<table class="{{ $tableClass }}"> {{$slot}} </table>
+<table class="{{ $tableClass }}" id="{{ $resizeTableId }}"> {{$slot}} </table>

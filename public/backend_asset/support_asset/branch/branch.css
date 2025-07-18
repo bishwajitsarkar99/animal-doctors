@@ -176,11 +176,6 @@ table.setting-table {
     margin: 0;
     padding: 0;
 }
-label.per_item_class {
-    padding-top: 29px;
-    font-size: 12px;
-    font-weight: 800;
-}
 .custom-tab-btn{
     background-image: linear-gradient(1deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
     background-color: white;
@@ -300,21 +295,7 @@ select#SelectBranchID{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-.table-footer-label{
-    position: relative;
-}
-.table-footer-label::before {
-    content: "";
-    position: absolute;
-    left: 0px;
-    top: 25px;
-    width: 100%;
-    height: 23px;
-    z-index: 10;
-    background: linear-gradient(90deg, rgb(179, 179, 179), rgb(249, 249, 249), rgb(179, 179, 179)) 0% 0% / 200%;
-    animation: 1s ease 0s infinite reverse none running focus_skeleton;
-    border-radius: 2px;
-}
+
 @keyframes focus_skeleton{
     0% {
         background-position: -100% 0px;

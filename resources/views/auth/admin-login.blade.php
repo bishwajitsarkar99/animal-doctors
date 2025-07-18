@@ -367,7 +367,7 @@
             removeSkeletonClass 
         } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
         // Import RAM functions
-        import { clearAppRAM } from "/module/module-min-js/appRAM/appParentRAM.js"; 
+        import { clearAppRAM } from "/module/module-min-js/appRAM/appParentRAM/appRAMCapcity/appBranchSetting.js"; 
         buttonLoader();
         pageLoader();
         toolTip();
