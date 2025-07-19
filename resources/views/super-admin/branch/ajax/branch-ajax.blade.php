@@ -1,7 +1,7 @@
 <script type="module">
     import { modernDateFormat } from "/module/module-min-js/helper-function-min.js";
     import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
-    import { resize, enableColumnDragAndDrop, applySavedColumnOrder } from "/module/table-module/table-module.js";
+    import { resize, enableColumnDragAndDrop, applySavedColumnOrder, borderRotated } from "/module/table-module/table-module.js";
     resize('resizableTable', 'col-resizer', 'row-resizer');
     enableColumnDragAndDrop('resizableTable');
     applySavedColumnOrder('resizableTable');
@@ -671,6 +671,8 @@
         $(document).on('click', '.branch-tab-btn', function () {
             $('.branch-tab-btn').removeClass('active-button').addClass('deactive');
             $(this).removeClass('deactive').addClass('active-button');
+
+            borderRotated('.connectorPath', '.branch-tab-btn', 'active-button');
         });
         // skeleton
         function tableSkeleton() {

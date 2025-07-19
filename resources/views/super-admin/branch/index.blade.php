@@ -1,15 +1,15 @@
 <?php 
   // Table-Head-th
   $headThRows = [
-    ['label'=>'SN.', 'className'=>'th-head skeleton', 'styleShow'=>'width:5%;text-align:center;', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
-    ['label'=>'Branch-Type', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
-    ['label'=>'Branch-ID', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
-    ['label'=>'Branch-Name', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
-    ['label'=>'Division', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
-    ['label'=>'District', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
-    ['label'=>'Upazila', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
-    ['label'=>'City', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
-    ['label'=>'Location', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer'],
+    ['label'=>'SN.', 'className'=>'th-head skeleton', 'styleShow'=>'width:5%;text-align:center;', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Branch-Type', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Branch-ID', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Branch-Name', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Division', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'District', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Upazila', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'City', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Location', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
   ];
   $hiddenAttr = 'hidden';
   // Custom Left Side Tab Panel Button
@@ -37,9 +37,27 @@
     <!-- =========== Tap Panel Top Bar =========== -->
     <x-CustomTabPanels.TabPanelTopBars.TabPanelTopBar topBarClass="tab-panel" topBarRowClass="row tab-panel-topbar" topBarId="branchListPage" :hiddenAttr="$hiddenAttr">
       <div class="col-xl-8 group-btn">
-        <x-Buttons.FormMediumButton label="Branch" buttonParentClass="btn btn-sm branch-tab-btn active-button" buttonChildClass="skeleton-button" buttonId="branchList" iconClass="icon" labelClass="btn-text" />
-        <x-Buttons.FormMediumButton label="Settings" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchSettingPageView" iconClass="icon" labelClass="btn-text" />
-        <x-Buttons.CommonRefreshPageBtn label="Refresh" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchTypeRefresh" iconClass="type-icon" labelClass="type-btn-text" />
+        <div class="button-container">
+          <x-Buttons.FormMediumButton label="Branch" buttonParentClass="btn btn-sm branch-tab-btn active-button" buttonChildClass="skeleton-button" buttonId="branchList" iconClass="icon" labelClass="btn-text">
+            <svg class="connectorSVG" width="100%" height="100%">
+              <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
+            </svg>
+          </x-Buttons.FormMediumButton>
+        </div>
+        <div class="button-container">
+          <x-Buttons.FormMediumButton label="Settings" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchSettingPageView" iconClass="icon" labelClass="btn-text">
+            <svg class="connectorSVG" width="100%" height="100%">
+              <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
+            </svg>
+          </x-Buttons.FormMediumButton>
+        </div>
+        <div class="button-container">
+          <x-Buttons.CommonRefreshPageBtn label="Refresh" buttonParentClass="btn btn-sm branch-tab-btn deactive" buttonChildClass="skeleton-button" buttonId="branchTypeRefresh" iconClass="type-icon" labelClass="type-btn-text">
+            <svg class="connectorSVG" width="100%" height="100%">
+              <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
+            </svg>
+          </x-Buttons.CommonRefreshPageBtn>
+        </div>
       </div>
       <div class="col-xl-4"></div>
     </x-CustomTabPanels.TabPanelTopBars.TabPanelTopBar>
@@ -73,14 +91,15 @@
             <x-Tables.ViewDataTables.DataTableHeads.DataTableHead className="table-head" >
               <x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow rowClass="table-head-row skeleton">
                 @foreach($headThRows as $data)
-                  <x-Tables.ViewDataTables.DataTableHeads.DataTableHeadTh 
-                    theadId="{{ $data['thId'] }}"
-                    thRowResizeClass="{{ $data['resizeRowClass'] }}"
-                    thColResizeClass="{{ $data['resizeColClass'] }}"
-                    thClassName="{{ $data['className'] }}" 
-                    thStyle="{{ $data['styleShow'] }}" 
-                    lableName="{{ $data['label'] }}"
-                  />
+                  <th class="{{ $data['className'] }}" style="{{ $data['styleShow'] }}" id="{{ $data['thId'] }}">
+                    <i class="fa-solid fa-up-down-left-right {{ $data['moveIconDisplayClass'] }}" style="{{ $data['styles'] }}" id="{{ $data['headIconId'] }}"></i>
+                    <span class="{{ $data['svgLable'] }}">
+                      {{$data['label']}}
+                      <x-Tables.TableHeadSvg svgWidth="12px" svgHeight="12px" svgFillColor="#333333a1" />
+                    </span>
+                    <div class="{{ $data['resizeRowClass'] }}"></div>
+                    <div class="{{ $data['resizeColClass'] }}"></div>
+                  </th>
                 @endforeach
               </x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow>
             </x-Tables.ViewDataTables.DataTableHeads.DataTableHead>

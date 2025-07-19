@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+.label-svg {
+    cursor: pointer;
+}
 .table-wrapper {
     padding: 20px 20px;
 }
@@ -42,13 +45,13 @@ tr.zebra-table-row:hover{
     color: #111;
     transition: border-color 0.3s, background-color 0.3s, color 0.3s;
 }
-th, td {
+th,td {
     text-align: left;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     vertical-align: middle; 
-    font-weight: 500;
+    font-weight: 600;
 }
 tbody tr:nth-child(even) td {
     background-color: #bcaee930;

@@ -301,12 +301,14 @@ select#SelectBranchID{
         background-position: 100% 0px;
     }
 }
+.button-container {
+    position: relative;
+    display: inline-block;
+}
 .active-button {
     height: 24px;
     background: linear-gradient(5deg, #808080e0, transparent 3%, #d3d3d33d, #c0c0c0a6);
     background-color: snow;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
     color: #004a99e0;
     font-family: var(--nav-font-family);
     font-size: 12px;
@@ -315,15 +317,36 @@ select#SelectBranchID{
     text-align: center;
     font-weight: 700;
     letter-spacing: 1px;
-    margin-left: -4px;
-    outline: none;
     border-radius: 3px;
-    border-width: initial;
-    border: 1px ridge rgba(0,123,255,0.5);
-    border-color: initial;
-    border-image: initial;
+    outline: none;
     transition: border-color 0.3s, background-color 0.3s;
+    z-index: 1;
+    overflow: hidden;
     
+}
+.connectorSVG {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+}
+.connectorPath {
+    fill: none;
+    stroke: dodgerblue;
+    stroke-width: 2;
+    stroke-dasharray: 5, 5;
+    animation: dashmove 1s linear infinite;
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes dashmove {
+    to {
+        stroke-dashoffset: -10;
+    }
 }
 .active-button:hover{
     height: 24px;
@@ -335,14 +358,12 @@ select#SelectBranchID{
     text-align: center;
     font-weight: 700;
     letter-spacing: 1px;
-    margin-left: -4px;
-    outline: none;
     border-radius: 3px;
-    border-width: initial;
-    border: 1px ridge rgba(0,123,255,0.5);
-    border-color: initial;
-    border-image: initial;
-    transition: border-color 0.3s, background-color 0.3s;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    border: 1px dashed dodgerblue;
+    outline: none;
+    transition: border-color 0.3s, background-color 0.3s color 0.3s;
 }
 .deactive{
     background-image: linear-gradient(1deg, #dbd8d8db, transparent 3%, #d3d3d38a, snow);
@@ -350,7 +371,7 @@ select#SelectBranchID{
     margin-right: 15px;
     line-height: 1.2;
     font-weight: 700;
-    border: 1px ridge lightblue;
+    outline: none;
     font-size: 12px;
     color: #222;
     letter-spacing: 1px;
@@ -366,14 +387,10 @@ select#SelectBranchID{
     text-align: center;
     font-weight: 700;
     letter-spacing: 1px;
-    margin-left: -4px;
-    outline: none;
     border-radius: 3px;
-    border-width: initial;
-    border: 1px ridge rgba(0,123,255,0.5);
-    border-color: initial;
-    border-image: initial;
-    transition: border-color 0.3s, background-color 0.3s;
+    border: 1px dashed dodgerblue;
+    outline: none;
+    transition: border-color 0.3s, background-color 0.3s color 0.3s;
 }
 @keyframes textFontColor{
     100% {
