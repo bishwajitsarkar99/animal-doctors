@@ -49,20 +49,20 @@
       <x-CustomTabPanels.TabPanelContents.TabContentPanelHeader contentTabHeaderClass="table-heading component-focus">
         <span>
           <span class="table-icon-skeleton">
-            <x-Tables.Icon.TableIcon iconWidth="26" iconHeight="24" fillColor="#413571a6" svgId="tableIcon" />
+            <x-Tables.Icon.TableIcon iconWidth="20" iconHeight="20" fillColor="#413571a6" svgId="tableIcon" />
             <!-- Table-Menu-Card -->
             <x-MenuCards.MenuCard menuParentClass="dropdown dashboard_menubar" menuChildClass="dropdown-content" menuId="dropbtn">
               <div class="row">
                 <div class="col-12">
                   <ul class="menu-btn-group">
-                    <li id="lineRow"><a type="button" class="menu-btn" id="columnWidth">Remove Column Width</a></li>
-                    <li id="lineRow"><a type="button" class="menu-btn" id="rowHeight">Remove Row Height</a></li>
+                    <li id="lineRow"><a type="button" class="menu-btn" id="tableResize">Reset Resize</a></li>
+                    <li id="lineRow"><a type="button" class="menu-btn" id="searSetting">Search</a></li>
                   </ul>
                 </div>
               </div>
             </x-MenuCard.MenuCard>
           </span>
-          <span class="table-icon-skeleton"><strong>Branch Table</strong></span>
+          <span class="table-icon-skeleton"><strong>Menu</strong></span>
         </span>
       </x-CustomTabPanels.TabPanelContents.TabContentPanelHeader>
       <!-- =========== Home Tab Content =========== -->
@@ -429,7 +429,7 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/branch/branch.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/table/zebra-table/zebra-table.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
-<link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" />
 @endsection
 
 @push('scripts')

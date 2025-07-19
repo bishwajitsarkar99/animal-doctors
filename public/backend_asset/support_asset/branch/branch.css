@@ -200,9 +200,6 @@ button.active{
     border-radius: 3px;
     transition: border-color 0.3s, background-color 0.3s;
 }
-li.page-item.active {
-    border-bottom: 1px solid #111;
-}
 #table_card_body{
     position: relative;
 }

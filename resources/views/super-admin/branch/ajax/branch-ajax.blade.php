@@ -1,8 +1,10 @@
 <script type="module">
     import { modernDateFormat } from "/module/module-min-js/helper-function-min.js";
     import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
-    import { resize } from "/module/table-module/table-module.js";
+    import { resize, enableColumnDragAndDrop, applySavedColumnOrder } from "/module/table-module/table-module.js";
     resize('resizableTable', 'col-resizer', 'row-resizer');
+    enableColumnDragAndDrop('resizableTable');
+    applySavedColumnOrder('resizableTable');
 
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/module/module-min-js/appRAM/appParentRAM/appRAMCapcity/appBranchSetting.js";
@@ -11,15 +13,15 @@
 
     $(document).ready(function(){
         // Remove Row and Column width or height space
-        $(document).on('click', '#columnWidth', function(){
+        $(document).on('click', '#tableResize', function(){
             localStorage.removeItem('resizableTable_columnWidths');
             localStorage.removeItem('resizableTable_rowHeights');
             location.reload();
         });
-        // $(document).on('click', '#columnWidth', function(){
-            
-        //     location.reload();
-        // });
+        // ACtive table row background
+        $(document).on('click', 'tr.zebra-table-row', function(){
+            $(this).addClass("clicked td").siblings().removeClass("clicked td");
+        });
 
         // Ensure function exists before calling
         if (typeof fetch_division === "function") {
@@ -544,44 +546,40 @@
 
             return [...rows].map((row, key) => {
                 return `
-                    <tr class="branch-table-row" key="${key}" id="BranchRow">
-                        <td id="cellId" class="td-cell" style="text-align:center;">
+                    <tr class="zebra-table-row" key="${key}" id="BranchRow">
+                        <td id="cellId" class="td-cell-first" data-id="${row.id}" style="text-align:center;">
                             ${(key)+1}
                             <div class="col-resizer"></div><div class="row-resizer"></div>
                         </td>
-                        <td id="cellId" class="td-cell" style="text-align:center;" hidden>
-                            ${row.id}
-                            <div class="col-resizer"></div><div class="row-resizer"></div>
-                        </td>
-                        <td id="cellId" class="td-cell-second">
+                        <td id="cellId" class="td-cell-middle">
                             ${row.branch_type}
                             <div class="col-resizer"></div><div class="row-resizer"></div>
                         </td>
-                        <td id="cellId" class="td-cell-second">
+                        <td id="cellId" class="td-cell-middle">
                             ${row.branch_id}
                             <div class="col-resizer"></div><div class="row-resizer"></div>
                         </td>
-                        <td id="cellId" class="td-cell-second">
+                        <td id="cellId" class="td-cell-middle">
                             ${row.branch_name}
                             <div class="col-resizer"></div><div class="row-resizer"></div>
                         </td>
-                        <td id="cellId" class="td-cell-second">
+                        <td id="cellId" class="td-cell-middle">
                             ${row.divisions.division_name}
                             <div class="col-resizer"></div><div class="row-resizer"></div>
                         </td>
-                        <td id="cellId" class="td-cell-second">
+                        <td id="cellId" class="td-cell-middle">
                             ${row.districts.district_name}
                             <div class="col-resizer"></div><div class="row-resizer"></div>
                         </td>
-                        <td class="td-cell-second">
+                        <td class="td-cell-middle">
                             ${row.thana_or_upazilas.thana_or_upazila_name}
                             <div class="col-resizer"></div><div class="row-resizer"></div>
                         </td>
-                        <td id="cellId" class="td-cell-second">
+                        <td id="cellId" class="td-cell-middle">
                             ${row.town_name}
                             <div class="col-resizer"></div><div class="row-resizer"></div>
                         </td>
-                        <td id="cellId" class="td-cell-second">
+                        <td id="cellId" class="td-cell-last">
                             ${row.location}
                             <div class="col-resizer"></div><div class="row-resizer"></div>
                         </td>
@@ -623,6 +621,8 @@
                     $("#total_branch_items").text(total);
                     $("#total_per_branch_items").text(per_page);
                     $("#per_branch_items_num").text(per_item_num);
+
+                    applySavedColumnOrder();
 
                     // Tooltip (Bootstrap 5)
                     document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
