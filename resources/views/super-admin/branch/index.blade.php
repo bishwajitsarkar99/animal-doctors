@@ -1,15 +1,15 @@
 <?php 
   // Table-Head-th
   $headThRows = [
-    ['label'=>'SN.', 'className'=>'th-head skeleton', 'styleShow'=>'width:5%;text-align:center;', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'Branch-Type', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'Branch-ID', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'Branch-Name', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'Division', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'District', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'Upazila', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'City', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'Location', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'SN.', 'className'=>'th-head skeleton', 'styleShow'=>'width:5%;text-align:center;', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Branch-Type', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Branch-ID', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Branch-Name', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Division', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'District', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Upazila', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'City', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Location', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
   ];
   $hiddenAttr = 'hidden';
   // Custom Left Side Tab Panel Button
@@ -65,29 +65,35 @@
     <x-CustomTabPanels.TabPanelContents.TabContentPanel contentTabClass="tab-content-panel-bg" contentTabId="branchListTab" :hiddenAttr="$hiddenAttr">
       <!-- =========== Home Tab Content Panel Header =========== -->
       <x-CustomTabPanels.TabPanelContents.TabContentPanelHeader contentTabHeaderClass="table-heading component-focus">
-        <span>
-          <span class="table-icon-skeleton">
-            <x-Tables.Icon.TableIcon iconWidth="20" iconHeight="20" fillColor="#413571a6" svgId="tableIcon" />
-            <!-- Table-Menu-Card -->
-            <x-MenuCards.MenuCard menuParentClass="dropdown dashboard_menubar" menuChildClass="dropdown-content" menuId="dropbtn">
-              <div class="row">
-                <div class="col-12">
-                  <ul class="menu-btn-group">
-                    <li id="lineRow"><a type="button" class="menu-btn" id="tableResize">Reset Resize</a></li>
-                    <li id="lineRow"><a type="button" class="menu-btn" id="searSetting">Search</a></li>
-                  </ul>
-                </div>
-              </div>
-            </x-MenuCard.MenuCard>
-          </span>
-          <span class="table-icon-skeleton"><strong>Menu</strong></span>
-        </span>
+        <div class="row">
+          <div class="col-sm-2">
+            <span>
+              <span class="table-icon-skeleton">
+                <x-Tables.Icon.TableIcon iconWidth="20" iconHeight="20" fillColor="#413571a6" svgId="tableIcon" />
+                <!-- Table-Menu-Card -->
+                <x-MenuCards.MenuCard menuParentClass="dropdown dashboard_menubar" menuChildClass="dropdown-content" menuId="dropbtn">
+                  <div class="row">
+                    <div class="col-12">
+                      <ul class="menu-btn-group">
+                        <li id="lineRow"><a type="button" class="menu-btn" id="tableResize">Reset Table Resize</a></li>
+                        <li id="lineRow"><a type="button" class="menu-btn" id="searSetting">Search</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </x-MenuCard.MenuCard>
+              </span>
+              <span class="table-icon-skeleton"><strong>Menu</strong></span>
+            </span>
+          </div>
+          <div class="col-sm-5"></div>
+          <div class="col-sm-5"></div>
+        </div>
       </x-CustomTabPanels.TabPanelContents.TabContentPanelHeader>
       <!-- =========== Home Tab Content =========== -->
       <x-Tables.ViewDataTables.DataTableWrappers.DataTableWrapper wrapperClass="table-wrapper component-focus">
         <x-Tables.ViewDataTables.DataTableResponsives.DataTableResponsive tableResponsiveClass="table-responsive">
           <!-- ========== Branch-List Table =============== table-striped-->
-          <x-Tables.ViewDataTables.ViewDataTable tableClass="table" resizeTableId="resizableTable">
+          <x-Tables.ViewDataTables.ViewDataTable tableClass="table" resizeTableId="resizableBranchTable">
             <x-Tables.ViewDataTables.DataTableHeads.DataTableHead className="table-head" >
               <x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow rowClass="table-head-row skeleton">
                 @foreach($headThRows as $data)

@@ -1,10 +1,10 @@
 <script type="module">
     import { modernDateFormat } from "/module/module-min-js/helper-function-min.js";
     import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
-    import { resize, enableColumnDragAndDrop, applySavedColumnOrder, borderRotated } from "/module/table-module/table-module.js";
-    resize('resizableTable', 'col-resizer', 'row-resizer');
-    enableColumnDragAndDrop('resizableTable');
-    applySavedColumnOrder('resizableTable');
+    import { resize, removeResizeStorage, enableColumnDragAndDrop, applySavedColumnOrder, borderRotated } from "/module/table-module/table-module.js";
+    resize('resizableBranchTable', 'col-resizer', 'row-resizer');
+    enableColumnDragAndDrop('resizableBranchTable', '.move-icon');
+    applySavedColumnOrder('resizableBranchTable');
 
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/module/module-min-js/appRAM/appParentRAM/appRAMCapcity/appBranchSetting.js";
@@ -12,10 +12,10 @@
     buttonLoader();
 
     $(document).ready(function(){
-        // Remove Row and Column width or height space
+        // Remove Row and Column width or height space;
         $(document).on('click', '#tableResize', function(){
-            localStorage.removeItem('resizableTable_columnWidths');
-            localStorage.removeItem('resizableTable_rowHeights');
+            localStorage.removeItem('columnOrder_resizableBranchTable');
+            removeResizeStorage('resizableBranchTable')
             location.reload();
         });
         // ACtive table row background
@@ -549,39 +549,39 @@
                     <tr class="zebra-table-row" key="${key}" id="BranchRow">
                         <td id="cellId" class="td-cell-first" data-id="${row.id}" style="text-align:center;">
                             ${(key)+1}
-                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                            <div class="row-resizer"></div>
                         </td>
                         <td id="cellId" class="td-cell-middle">
                             ${row.branch_type}
-                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                            <div class="row-resizer"></div>
                         </td>
                         <td id="cellId" class="td-cell-middle">
                             ${row.branch_id}
-                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                            <div class="row-resizer"></div>
                         </td>
                         <td id="cellId" class="td-cell-middle">
                             ${row.branch_name}
-                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                            <div class="row-resizer"></div>
                         </td>
                         <td id="cellId" class="td-cell-middle">
                             ${row.divisions.division_name}
-                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                            <div class="row-resizer"></div>
                         </td>
                         <td id="cellId" class="td-cell-middle">
                             ${row.districts.district_name}
-                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                            <div class="row-resizer"></div>
                         </td>
                         <td class="td-cell-middle">
                             ${row.thana_or_upazilas.thana_or_upazila_name}
-                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                            <div class="row-resizer"></div>
                         </td>
                         <td id="cellId" class="td-cell-middle">
                             ${row.town_name}
-                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                            <div class="row-resizer"></div>
                         </td>
                         <td id="cellId" class="td-cell-last">
                             ${row.location}
-                            <div class="col-resizer"></div><div class="row-resizer"></div>
+                            <div class="row-resizer"></div>
                         </td>
                     </tr>
                 `;

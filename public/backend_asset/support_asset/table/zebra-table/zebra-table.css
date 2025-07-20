@@ -26,7 +26,7 @@
 }
 .table{
     width: 100%;
-    table-layout: auto;  /* if table-layout auto then will not work text-overflow: ellipsis; 
+    table-layout: fixed;  /* if table-layout auto then will not work text-overflow: ellipsis; 
     but when table-layout fixed then ellipsis will be work text-ellipsis like word simple like wor...*/
     font-size: 13px;
     margin-bottom: 0;
@@ -115,11 +115,19 @@ ul>li#lineRow{
 }
 .col-resizing {
     border: 1px dashed #007bff !important;
+    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
     cursor: col-resize;
 }
-
 .row-resizing {
-    border: 1px dashed #28a745 !important;
+    border: 1px dashed #007bff !important;
+    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+    cursor: row-resize;
+}
+td.row-resizing,
+th.row-resizing {
+    border-top: 1px dashed #007bff !important;
+    border-bottom: 1px dashed #007bff !important;
+    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
     cursor: row-resize;
 }
 th.dragging {

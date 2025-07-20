@@ -1,18 +1,29 @@
+// Helper to generate a unique localStorage key based on tableId, suffix, user role, and email
+function getUserRAMKey(tableId) {
+    const role = document.querySelector('meta[name="user-role"]')?.content || 'guest';
+    const branch_id = document.querySelector('meta[name="branch-id"]')?.content || 'identifyer';
+    const email = document.querySelector('meta[name="user-email"]')?.content || 'unknown';
+    const safeEmail = email.replace(/[^a-zA-Z0-9]/g, '_');
+    return `App_${tableId}_${branch_id}_${role}_${safeEmail}`;
+}
+// --- Global flags to prevent drag-resize conflicts ---
+let isDraggingColumn = false;
+let isResizingColumn = false;
+// Main resize function
 export function resize(tableId, colClass, rowClass) {
     const table = document.getElementById(tableId);
     if (!table) return;
 
-    let startX, startY, startWidth, startHeight;
-    let isResizingCol = false;
-    let isResizingRow = false;
-
-    const columnWidths = JSON.parse(localStorage.getItem(`${tableId}_columnWidths`) || '{}');
-    const rowHeights = JSON.parse(localStorage.getItem(`${tableId}_rowHeights`) || '{}');
+    const key = getUserRAMKey(tableId);
+    const saved = JSON.parse(localStorage.getItem(key) || '{}');
+    const columnWidths = saved.columnWidths || {};
+    const rowHeights = saved.rowHeights || {};
 
     const headers = table.querySelectorAll('thead th');
+    const theadRow = table.querySelector('thead tr');
     const bodyRows = table.querySelectorAll('tbody tr');
 
-    // Apply saved column widths
+    // === Apply saved column widths ===
     headers.forEach((th, colIndex) => {
         const width = columnWidths[colIndex];
         if (width) {
@@ -24,70 +35,69 @@ export function resize(tableId, colClass, rowClass) {
         }
     });
 
-    // Apply saved row heights
-    headers.forEach((th, index) => {
-        const height = rowHeights[`th_${index}`];
-        if (height) th.style.height = height + 'px';
-    });
+    // === Apply saved row heights ===
+    if (rowHeights['thead']) theadRow.style.height = rowHeights['thead'] + 'px';
+
     bodyRows.forEach((tr, rowIndex) => {
-        Array.from(tr.children).forEach((td, colIndex) => {
-            const key = `td_${rowIndex}_${colIndex}`;
-            const height = rowHeights[key];
-            if (height) td.style.height = height + 'px';
-        });
+        const height = rowHeights[`tr_${rowIndex}`];
+        if (height) tr.style.height = height + 'px';
     });
 
-    // Helper: Add visual border
-    function showResizeBorder(el, direction) {
-        if (!el) return;
-        el.classList.add(direction === 'col' ? 'col-resizing' : 'row-resizing');
-    }
-
-    // Helper: Remove visual border
-    function removeResizeBorders() {
-        document.querySelectorAll('.col-resizing, .row-resizing')
-            .forEach(el => el.classList.remove('col-resizing', 'row-resizing'));
-    }
-
-    // MouseDown event
+    // === Resize handler ===
     table.addEventListener('mousedown', function (e) {
-        const isCol = e.target.classList.contains(colClass);
-        const isRow = e.target.classList.contains(rowClass);
-
-        if (!isCol && !isRow) return;
+        const isColResize = e.target.classList.contains(colClass);
+        const isRowResize = e.target.classList.contains(rowClass);
+        if (!isColResize && !isRowResize) return;
 
         const cell = e.target.closest('th, td');
         if (!cell) return;
 
         const colIndex = Array.from(cell.parentNode.children).indexOf(cell);
-        const row = cell.parentElement;
-        const rowIndex = Array.from(table.querySelectorAll('tbody tr')).indexOf(row);
-        const isTH = cell.tagName === 'TH';
+        const rowElement = cell.closest('tr');
+        const rowIndex = Array.from(table.querySelectorAll('tbody tr')).indexOf(rowElement);
+        const isThead = rowElement.parentElement.tagName === 'THEAD';
 
-        if (isCol) {
-            isResizingCol = true;
-            startX = e.pageX;
-            startWidth = cell.offsetWidth;
+        let startX = e.pageX;
+        let startY = e.pageY;
+        let startWidth = cell.offsetWidth;
+        let startHeight = rowElement.offsetHeight;
 
-            showResizeBorder(cell, 'col');
+        function save() {
+            localStorage.setItem(key, JSON.stringify({ columnWidths, rowHeights, columnOrder: saved.columnOrder || [] }));
+        }
+
+        // === Column resizing (width by <th>) ===
+        if (isColResize && cell.tagName === 'TH') {
+            if (isDraggingColumn) return; // Prevent conflict
+            isResizingColumn = true;
+            cell.classList.add('col-resizing');
 
             function colMouseMove(ev) {
                 const newWidth = startWidth + (ev.pageX - startX);
                 cell.style.width = newWidth + 'px';
 
-                // Resize all corresponding <td>
-                table.querySelectorAll('tbody tr').forEach(tr => {
-                    const td = tr.children[colIndex];
-                    if (td) td.style.width = newWidth + 'px';
+                bodyRows.forEach(row => {
+                    
+                    const td = row.children[colIndex];
+                    if (td){
+                        td.style.width = newWidth + 'px'; 
+                        td.classList.add('col-resizing');
+                    }
                 });
 
                 columnWidths[colIndex] = newWidth;
-                localStorage.setItem(`${tableId}_columnWidths`, JSON.stringify(columnWidths));
+                save();
             }
 
             function stopColResize() {
-                isResizingCol = false;
-                removeResizeBorders();
+                cell.classList.remove('col-resizing');
+                isResizingColumn = false;
+                bodyRows.forEach(row => {
+                    const td = row.children[colIndex];
+                    if (td) {
+                        td.classList.remove('col-resizing');
+                    }
+                });
                 document.removeEventListener('mousemove', colMouseMove);
                 document.removeEventListener('mouseup', stopColResize);
             }
@@ -96,29 +106,33 @@ export function resize(tableId, colClass, rowClass) {
             document.addEventListener('mouseup', stopColResize);
         }
 
-        if (isRow) {
-            isResizingRow = true;
-            startY = e.pageY;
-            startHeight = cell.offsetHeight;
+        // === Row resizing (height by <tr>) ===
+        if (isRowResize) {
+            rowElement.classList.add('row-resizing');
 
-            showResizeBorder(cell, 'row');
+            // Apply class to each cell (td or th) in the row for visual effect
+            [...rowElement.children].forEach(cell => {
+                cell.classList.add('row-resizing');
+            });
 
             function rowMouseMove(ev) {
                 const newHeight = startHeight + (ev.pageY - startY);
-                cell.style.height = newHeight + 'px';
+                rowElement.style.height = newHeight + 'px';
 
-                if (isTH) {
-                    rowHeights[`th_${colIndex}`] = newHeight;
+                if (isThead) {
+                    rowHeights['thead'] = newHeight;
                 } else {
-                    rowHeights[`td_${rowIndex}_${colIndex}`] = newHeight;
+                    rowHeights[`tr_${rowIndex}`] = newHeight;
                 }
 
-                localStorage.setItem(`${tableId}_rowHeights`, JSON.stringify(rowHeights));
+                save();
             }
 
             function stopRowResize() {
-                isResizingRow = false;
-                removeResizeBorders();
+                rowElement.classList.remove('row-resizing');
+                [...rowElement.children].forEach(cell => {
+                    cell.classList.remove('row-resizing');
+                });
                 document.removeEventListener('mousemove', rowMouseMove);
                 document.removeEventListener('mouseup', stopRowResize);
             }
@@ -128,100 +142,115 @@ export function resize(tableId, colClass, rowClass) {
         }
     });
 }
-
-export function enableColumnDragAndDrop(tableId, storageKey = 'columnOrder_' + tableId) {
+// Function to remove resize data
+export function removeResizeStorage(tableId) {
+    const key = getUserRAMKey(tableId);
+    localStorage.removeItem(key);
+}
+export function enableColumnDragAndDrop(tableId,iconClass) {
     const table = document.getElementById(tableId);
     if (!table) return;
 
-    const thead = table.querySelector("thead");
-    const tbody = table.querySelector("tbody");
-    let dragSrcIndex = null;
+    const key = getUserRAMKey(tableId);
+    const saved = JSON.parse(localStorage.getItem(key) || '{}');
 
-    const getIndex = (el) => Array.from(el.parentNode.children).indexOf(el);
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
 
-    // 1. Load saved column order
-    function loadSavedColumnOrder() {
-        const savedOrder = JSON.parse(localStorage.getItem(storageKey));
-        if (!savedOrder) return;
+    const getHeaderIndex = el => [...el.parentNode.children].indexOf(el);
 
-        const currentHeaders = Array.from(thead.rows[0].children);
-        const newHeaderOrder = [];
-        savedOrder.forEach((name) => {
-            const match = currentHeaders.find((th) => th.textContent.trim() === name);
-            if (match) newHeaderOrder.push(match);
-        });
+    // === Load saved column order from localStorage ===
+    function loadColumnOrder() {
+        if (!saved.columnOrder) return;
 
-        newHeaderOrder.forEach((th) => thead.rows[0].appendChild(th));
+        const headers = [...thead.rows[0].children];
+        const headerMap = Object.fromEntries(headers.map((th, i) => [th.textContent.trim(), i]));
 
-        // Reorder each row's <td>
-        Array.from(tbody.rows).forEach((row) => {
-            const currentCells = Array.from(row.children);
-            const newRowOrder = [];
-            savedOrder.forEach((name, i) => {
-                const headerIndex = currentHeaders.findIndex((th) => th.textContent.trim() === name);
-                if (headerIndex > -1) newRowOrder.push(currentCells[headerIndex]);
-            });
-            newRowOrder.forEach((td) => row.appendChild(td));
+        const newOrder = saved.columnOrder.map(name => headers[headerMap[name]]).filter(Boolean);
+
+        // Apply to THEAD
+        newOrder.forEach(th => thead.rows[0].appendChild(th));
+
+        // Apply to TBODY
+        [...tbody.rows].forEach(row => {
+            const cells = [...row.children];
+            const newCells = saved.columnOrder.map(name => {
+                const index = headerMap[name];
+                return index !== undefined ? cells[index] : null;
+            }).filter(Boolean);
+            newCells.forEach(td => row.appendChild(td));
         });
     }
 
-    // 2. Save current column order
+    // === Save column order to localStorage ===
     function saveColumnOrder() {
-        const currentOrder = Array.from(thead.rows[0].children).map((th) => th.textContent.trim());
-        localStorage.setItem(storageKey, JSON.stringify(currentOrder));
+        const order = [...thead.rows[0].children].map(th => th.textContent.trim());
+        saved.columnOrder = order;
+        localStorage.setItem(key, JSON.stringify(saved));
     }
 
-    // 3. Move <th> and all matching <td>
+    // === Move column across all rows ===
     function moveColumn(fromIndex, toIndex) {
-        const allRows = table.querySelectorAll("tr");
+        const rows = table.querySelectorAll('tr');
+        rows.forEach(row => {
+            const cells = [...row.children];
+            if (fromIndex >= cells.length || toIndex >= cells.length) return;
 
-        allRows.forEach((row) => {
-            const cells = Array.from(row.children);
-            const cellToMove = cells[fromIndex];
-            const referenceCell = cells[toIndex];
-
-            if (!cellToMove || !referenceCell) return;
-
-            if (fromIndex < toIndex) {
-                referenceCell.after(cellToMove);
-            } else {
-                referenceCell.before(cellToMove);
-            }
+            const cell = cells[fromIndex];
+            const ref = cells[toIndex];
+            if (fromIndex < toIndex) ref.after(cell);
+            else ref.before(cell);
         });
-
         saveColumnOrder();
     }
 
-    // 4. Attach drag events
-    thead.querySelectorAll("th").forEach((th) => {
-        th.setAttribute("draggable", true);
+    // === Set up drag listeners ===
+    let dragSrcIndex = null;
 
-        th.addEventListener("dragstart", (e) => {
-            dragSrcIndex = getIndex(th);
-            e.dataTransfer.setData("text/plain", "");
-            th.classList.add("dragging");
+    // Loop through each TH and target the drag handle (`#moveIconId`) within it
+    thead.querySelectorAll('th').forEach(th => {
+        const moveIcon = th.querySelector(iconClass);
+        if (!moveIcon) return;
+
+        th.setAttribute('draggable', true);
+
+        // Make sure the icon handles the drag
+        moveIcon.addEventListener('mousedown', e => {
+            e.stopPropagation(); // Prevent TH dragging from interfering
+            dragSrcIndex = getHeaderIndex(th);
         });
 
-        th.addEventListener("dragover", (e) => {
-            e.preventDefault();
+        th.addEventListener('dragstart', e => {
+            if (isResizingColumn) {
+                e.preventDefault();
+                return;
+            }
+            isDraggingColumn = true;
+
+            e.dataTransfer.effectAllowed = 'move';
+            dragSrcIndex = getHeaderIndex(th);
+            th.classList.add('dragging');
         });
 
-        th.addEventListener("drop", (e) => {
+        th.addEventListener('dragover', e => e.preventDefault());
+
+        th.addEventListener('drop', e => {
             e.preventDefault();
-            const dropIndex = getIndex(th);
-            if (dragSrcIndex !== null && dragSrcIndex !== dropIndex) {
+            const dropIndex = getHeaderIndex(th);
+            if (dragSrcIndex !== null && dropIndex !== dragSrcIndex) {
                 moveColumn(dragSrcIndex, dropIndex);
                 dragSrcIndex = null;
             }
         });
-
-        th.addEventListener("dragend", () => {
-            th.classList.remove("dragging");
+        th.addEventListener('dragend', () => {
+            isDraggingColumn = false;
+            th.classList.remove('dragging');
         });
     });
 
-    loadSavedColumnOrder();
+    loadColumnOrder();
 }
+// Column Drag and Drop Store
 export function applySavedColumnOrder(tableId) {
     const savedOrder = JSON.parse(localStorage.getItem("columnOrder_" + tableId));
     if (!savedOrder) return;

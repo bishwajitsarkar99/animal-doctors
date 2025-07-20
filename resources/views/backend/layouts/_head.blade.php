@@ -2,6 +2,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="user-role" content="{{ Auth::user()->role }}">
 <meta name="user-email" content="{{ Auth::user()->login_email }}">
+<meta name="branch-id" content="{{ Auth::user()->branch_id }}">
 <meta name="csrf-token" content="{{csrf_token()}}">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
