@@ -9,6 +9,10 @@ function getUserRAMKey(tableId) {
 // --- Global flags to prevent drag-resize conflicts ---
 let isDraggingColumn = false;
 let isResizingColumn = false;
+let isResizingRow = false;
+function isRowResizeActive() {
+    return isResizingRow;
+}
 // Main resize function
 export function resize(tableId, colClass, rowClass) {
     const table = document.getElementById(tableId);
@@ -63,7 +67,14 @@ export function resize(tableId, colClass, rowClass) {
         let startHeight = rowElement.offsetHeight;
 
         function save() {
-            localStorage.setItem(key, JSON.stringify({ columnWidths, rowHeights, columnOrder: saved.columnOrder || [] }));
+            const currentData = JSON.parse(localStorage.getItem(key) || '{}');
+            const columnOrder = currentData.columnOrder || [];
+            const newData = {
+                columnWidths,
+                rowHeights,
+                columnOrder // Preserve previously saved column order
+            };
+            localStorage.setItem(key, JSON.stringify(newData));
         }
 
         // === Column resizing (width by <th>) ===
@@ -108,6 +119,7 @@ export function resize(tableId, colClass, rowClass) {
 
         // === Row resizing (height by <tr>) ===
         if (isRowResize) {
+            isResizingRow = true;
             rowElement.classList.add('row-resizing');
 
             // Apply class to each cell (td or th) in the row for visual effect
@@ -129,6 +141,7 @@ export function resize(tableId, colClass, rowClass) {
             }
 
             function stopRowResize() {
+                isResizingRow = false;
                 rowElement.classList.remove('row-resizing');
                 [...rowElement.children].forEach(cell => {
                     cell.classList.remove('row-resizing');
@@ -185,8 +198,15 @@ export function enableColumnDragAndDrop(tableId,iconClass) {
     // === Save column order to localStorage ===
     function saveColumnOrder() {
         const order = [...thead.rows[0].children].map(th => th.textContent.trim());
-        saved.columnOrder = order;
-        localStorage.setItem(key, JSON.stringify(saved));
+        const currentData = JSON.parse(localStorage.getItem(key) || '{}');
+
+        const newData = {
+            columnOrder: order,
+            columnWidths: currentData.columnWidths || {},
+            rowHeights: currentData.rowHeights || {}
+        };
+
+        localStorage.setItem(key, JSON.stringify(newData));
     }
 
     // === Move column across all rows ===
@@ -221,12 +241,13 @@ export function enableColumnDragAndDrop(tableId,iconClass) {
         });
 
         th.addEventListener('dragstart', e => {
-            if (isResizingColumn) {
+            // Prevent drag if resizing is active
+            if (isResizingColumn || isRowResizeActive()) {
                 e.preventDefault();
                 return;
             }
-            isDraggingColumn = true;
 
+            isDraggingColumn = true;
             e.dataTransfer.effectAllowed = 'move';
             dragSrcIndex = getHeaderIndex(th);
             th.classList.add('dragging');

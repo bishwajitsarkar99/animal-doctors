@@ -17,6 +17,77 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/* Main dropdown container */
+.custom-dropdown-content {
+    display: none;
+    position: absolute;
+    background: #fff;
+    padding: 0;
+    margin-top: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    z-index: 999;
+    min-width: 180px;
+}
+
+.list_menubar:hover .custom-dropdown-content {
+    display: block;
+}
+
+.menu-btn-group {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-btn-group li {
+    position: relative;
+}
+
+.menu-btn {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
+}
+
+.menu-btn:hover {
+    background-color: #eee;
+}
+
+/* Submenu styles */
+.custom-submenu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: #fff;
+    min-width: 180px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.custom-submenu li a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+}
+
+.custom-submenu li a:hover {
+    background-color: #eee;
+}
+
+/* Show submenu on hover */
+.custom-submenu-wrapper:hover .custom-submenu {
+    display: block;
+}
+
 .alert{
     --bs-alert-padding-x: 0.5rem;
     --bs-alert-padding-y: 0.0rem;

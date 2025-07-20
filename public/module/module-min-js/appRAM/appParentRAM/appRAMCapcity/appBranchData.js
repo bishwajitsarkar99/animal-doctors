@@ -11,29 +11,14 @@ function getUserRAMKey() {
 let AppRAM = localStorage.getItem(getUserRAMKey())
     ? JSON.parse(localStorage.getItem(getUserRAMKey()))
     : {
-        branchTypeFlags: false,
-        branchCategoryFlags: false,
-        branchSearchFlags: false,
-        branchDetails: {},
-        branchCategoryDetails: {},
-        branchTypes: [],
-        branchCategories: [],
-        branchSearchResults: [],
+        // Store Branch List Data
+        branchListData: {},
 
-        hasFetchedSuppliers: false,
-        supplierList: [],
-        supplierDetails: {},
-
-        hasFetchedUsers: false,
-        userList: [],
-        userDetails: {},
-
-        roles: [],
-        permissions: [],
+        // Current Fetch Time
         lastFetchTime: Date.now(),
         currentUser: {},
-        tempFormData: {},
     };
+
 // data get
 function getAppRAM(key, fallback = null) {
     return AppRAM.hasOwnProperty(key) ? AppRAM[key] : fallback;

@@ -76,7 +76,7 @@
                     <div class="col-12">
                       <ul class="menu-btn-group">
                         <li id="lineRow"><a type="button" class="menu-btn" id="tableResize">Reset Table Resize</a></li>
-                        <li id="lineRow"><a type="button" class="menu-btn" id="searSetting">Search</a></li>
+                        <li id="lineRow"><a type="button" class="menu-btn" id="searSetting">Search ▸</a></li>
                       </ul>
                     </div>
                   </div>
@@ -237,6 +237,28 @@
         </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.LeftSideTabContent>
       </x-CustomLeftSideTabPanels.LeftSideTabPanel>
     </x-CustomTabPanels.TabPanelContents.TabContentPanel>
+  </div>
+  <div class="dropdown list_menubar">
+    <a id="dropListBtn">☰</a>
+    <div class="dropdown-content custom-dropdown-content">
+        <div class="row">
+            <div class="col-12">
+                <ul class="menu-btn-group">
+                    <li>
+                        <a type="button" class="menu-btn" id="tableResize">Reset Table Resize</a>
+                    </li>
+                    <li class="custom-submenu-wrapper">
+                        <a type="button" class="menu-btn" id="searSetting">Search ▸</a>
+                        <ul class="custom-submenu">
+                            <li><a href="#">Search by Name</a></li>
+                            <li><a href="#">Search by Date</a></li>
+                            <li><a href="#">Search by ID</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
   </div>
   @include('loader.action-loader')
   

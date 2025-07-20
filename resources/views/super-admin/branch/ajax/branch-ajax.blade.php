@@ -2,19 +2,20 @@
     import { modernDateFormat } from "/module/module-min-js/helper-function-min.js";
     import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
     import { resize, removeResizeStorage, enableColumnDragAndDrop, applySavedColumnOrder, borderRotated } from "/module/table-module/table-module.js";
+    // Import RAM functions
+    import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/module/module-min-js/appRAM/appParentRAM/appRAMCapcity/appBranchSetting.js";
+    //import { getAppRAM } from "/module/module-min-js/appRAM/appParentRAM/appRAMCapcity/appBranchData.js";
+    // table column width and row height resize with column drag and drop
     resize('resizableBranchTable', 'col-resizer', 'row-resizer');
     enableColumnDragAndDrop('resizableBranchTable', '.move-icon');
     applySavedColumnOrder('resizableBranchTable');
 
-    // Import RAM functions
-    import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/module/module-min-js/appRAM/appParentRAM/appRAMCapcity/appBranchSetting.js";
 
     buttonLoader();
 
     $(document).ready(function(){
         // Remove Row and Column width or height space;
         $(document).on('click', '#tableResize', function(){
-            localStorage.removeItem('columnOrder_resizableBranchTable');
             removeResizeStorage('resizableBranchTable')
             location.reload();
         });
@@ -621,8 +622,9 @@
                     $("#total_branch_items").text(total);
                     $("#total_per_branch_items").text(per_page);
                     $("#per_branch_items_num").text(per_item_num);
-
-                    applySavedColumnOrder();
+                    // column and row height width resize
+                    resize('resizableBranchTable', 'col-resizer', 'row-resizer');
+                    enableColumnDragAndDrop('resizableBranchTable', '.move-icon');
 
                     // Tooltip (Bootstrap 5)
                     document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
