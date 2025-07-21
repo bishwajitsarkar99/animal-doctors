@@ -275,14 +275,18 @@
     </thead>
     <tbody id="ramTableBody"></tbody>
   </table>
-
-  <div class="d-flex justify-content-center mt-2" id="paginationControls"></div>
-
-  <select id="perItems">
-    <option value="10" selected>10</option>
-    <option value="20">20</option>
-    <option value="30">30</option>
-  </select>
+  <div class="col-sm-1">
+    <select class="form-control form-contol-sm" id="perItems">
+      <option value="10" selected>10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="500">500</option>
+    </select>
+  </div>
+  <div class="col-sm-11">
+    <div class="d-flex justify-content-center mt-2" id="paginationControls"></div>
+  </div>
   @include('loader.action-loader')
   
   {{-- start modal --}}

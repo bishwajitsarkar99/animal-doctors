@@ -358,25 +358,24 @@ export function renderGlobalRAMTable(containerId) {
     document.getElementById(containerId).innerHTML = html;
 }
 
+// =========== Report Show RAM Usage Per Table =================
 // Global variables for storing full report and pagination config
 let fullRAMReport = [];
 let currentPage = 1;
 let perPage = 10;
 
-// Auto-run analyzeAllRAMKeys when #ramTableBody exists
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initRAMAnalyzer);
-} else {
-    initRAMAnalyzer();
-}
-
 function initRAMAnalyzer() {
+    const perPageSelect = document.getElementById("perItems");
+    if (perPageSelect) {
+        perPage = parseInt(perPageSelect.value, 10); // set perPage based on current dropdown value
+    }
+
     if (document.getElementById("ramTableBody")) {
-        analyzeAllRAMKeys();
+        analyzeAllRAMKeys(); // fetch and render
     }
 }
 
-export function analyzeAllRAMKeys() {
+function analyzeAllRAMKeys() {
     const keys = Object.keys(localStorage);
     const ramKeys = keys.filter(key => key.startsWith("ApplicationRAM_"));
     const result = [];
@@ -413,19 +412,17 @@ export function analyzeAllRAMKeys() {
 }
 
 function renderRAMTable() {
-    const start = (currentPage - 1) * perPage;
-    const end = start + perPage;
-    const currentItems = fullRAMReport.slice(start, end);
-
     const tableBody = document.querySelector("#ramTableBody");
     tableBody.innerHTML = "";
 
-    if (currentItems.length === 0) {
-        tableBody.innerHTML = `
-            <tr><td colspan="4" class="text-danger text-center">No RAM data found.</td></tr>
-        `;
+    if (fullRAMReport.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="4" class="text-danger text-center">No RAM data found.</td></tr>`;
         return;
     }
+
+    const start = (currentPage - 1) * perPage;
+    const end = start + perPage;
+    const currentItems = fullRAMReport.slice(start, end);
 
     currentItems.forEach((item, index) => {
         const sl = start + index + 1;
@@ -442,10 +439,10 @@ function renderRAMTable() {
 }
 
 function renderPaginationControls() {
-    const totalPages = Math.ceil(fullRAMReport.length / perPage);
     const paginationContainer = document.querySelector("#paginationControls");
     paginationContainer.innerHTML = "";
 
+    const totalPages = Math.ceil(fullRAMReport.length / perPage);
     if (totalPages <= 1) return;
 
     for (let page = 1; page <= totalPages; page++) {
@@ -461,12 +458,30 @@ function renderPaginationControls() {
     }
 }
 
-export function changePerPage(newPerPage) {
+function changePerPage(newPerPage) {
     perPage = parseInt(newPerPage, 10);
     currentPage = 1;
     renderRAMTable();
     renderPaginationControls();
 }
+
+function setCurrentPage(page) {
+    currentPage = page;
+    renderRAMTable();
+    renderPaginationControls();
+}
+
+function localStorageHasRAM() {
+    return Object.keys(localStorage).some(k => k.startsWith("ApplicationRAM_"));
+}
+
+export const RAMAnalyzer = {
+    initRAMAnalyzer,
+    analyzeAllRAMKeys,
+    changePerPage,
+    setCurrentPage,
+    localStorageHasRAM
+};
 
 // =========== Border Animation ===================
 export function borderRotated(connectionPath, selector, activeClass) {

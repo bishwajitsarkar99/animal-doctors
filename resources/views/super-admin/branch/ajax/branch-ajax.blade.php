@@ -12,7 +12,7 @@
         // applySavedColumnOrder, 
         // borderRotated 
     } from "/module/backend-module/backend-module-min.js";
-    import { resize, removeDataTableStorage, enableColumnDragAndDrop,  applySavedColumnOrder, borderRotated , restoreRowHeights, renderGlobalRAMTable ,analyzeAllRAMKeys, changePerPage} from "/module/table-module/table-module.js";
+    import { resize, removeDataTableStorage, enableColumnDragAndDrop,  applySavedColumnOrder, borderRotated , restoreRowHeights, renderGlobalRAMTable , RAMAnalyzer } from "/module/table-module/table-module.js";
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/appRAM/backendRAMCapacity/appSettingData.js";
     //import { getAppRAM } from "/appRAM/backendRAMCapacity/appBranchData.js";
@@ -22,34 +22,24 @@
     enableColumnDragAndDrop('BranchSettingTable', '.move-icon');
     applySavedColumnOrder('BranchSettingTable');
 
-    // Render global usage
+    // Render global usage as user key
     renderGlobalRAMTable("ram-report-container");
-    // Auto-trigger analyze if table exists on page load
+    // per table data show ram
     document.addEventListener("DOMContentLoaded", () => {
-        if (document.getElementById("ramTableBody")) {
-            analyzeAllRAMKeys();
-        }
+        RAMAnalyzer.initRAMAnalyzer();
     });
-
     buttonLoader();
 
     $(document).ready(function(){
         // Dropdown listener
-        $(document).on('change', '#perItems', function () {
-            const selectedValue = $(this).val();
-            const fullRAMReport = [];
-            if (fullRAMReport.length > 0) {
-                changePerPage(selectedValue);
-            } else {
-                const hasRAM = Object.keys(localStorage).some(k => k.startsWith("ApplicationRAM_"));
-                if (hasRAM) {
-                    analyzeAllRAMKeys();
-                    changePerPage(selectedValue);
-                } else {
-                    $("#ramTableBody").html(`<tr><td colspan="4" class="text-center text-danger">No RAM data found.</td></tr>`);
-                    $("#paginationControls").empty();
-                }
-            }
+        $('#perItems').on('change', function () {
+            const newPerPage = $(this).val();
+            RAMAnalyzer.changePerPage(newPerPage);
+        });
+        // Pagination
+        $(document).on('click', '#paginationControls button', function () {
+            const page = parseInt($(this).text(), 10);
+            RAMAnalyzer.setCurrentPage(page);
         });
         // Remove Row and Column width or height space;
         $(document).on('click', '#tableResize', function(){
