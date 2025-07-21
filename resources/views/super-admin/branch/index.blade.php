@@ -93,7 +93,7 @@
       <x-Tables.ViewDataTables.DataTableWrappers.DataTableWrapper wrapperClass="table-wrapper component-focus">
         <x-Tables.ViewDataTables.DataTableResponsives.DataTableResponsive tableResponsiveClass="table-responsive">
           <!-- ========== Branch-List Table =============== table-striped-->
-          <x-Tables.ViewDataTables.ViewDataTable tableClass="table" resizeTableId="resizableBranchTable">
+          <x-Tables.ViewDataTables.ViewDataTable tableClass="table" resizeTableId="BranchSettingTable">
             <x-Tables.ViewDataTables.DataTableHeads.DataTableHead className="table-head" >
               <x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow rowClass="table-head-row skeleton">
                 @foreach($headThRows as $data)
@@ -260,6 +260,29 @@
         </div>
     </div>
   </div>
+  <div id="ram-report-container"></div>
+  <div id="ramTableContainer" class="mb-3"></div>
+
+  <!-- RAM key detail view -->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>SL</th>
+        <th>RAM Key</th>
+        <th>Table</th>
+        <th>Size (KB)</th>
+      </tr>
+    </thead>
+    <tbody id="ramTableBody"></tbody>
+  </table>
+
+  <div class="d-flex justify-content-center mt-2" id="paginationControls"></div>
+
+  <select id="perItems">
+    <option value="10" selected>10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+  </select>
   @include('loader.action-loader')
   
   {{-- start modal --}}

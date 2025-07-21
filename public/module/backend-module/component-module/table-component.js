@@ -1,55 +1,35 @@
-// ========== Global RAM Storage System ==========
-function getUserRAMKey() {
+// ============================= Table Component ======================================
+// Helper to generate a unique localStorage key based on tableId, suffix, user role, and email
+function getUserRAMKey(tableId) {
     const role = document.querySelector('meta[name="user-role"]')?.content || 'guest';
     const branch_id = document.querySelector('meta[name="branch-id"]')?.content || 'identifyer';
     const email = document.querySelector('meta[name="user-email"]')?.content || 'unknown';
     const safeEmail = email.replace(/[^a-zA-Z0-9]/g, '_');
-    const moduleName = 'BackendModule';
-    return `ApplicationRAM_${moduleName}_${branch_id}_${role}_${safeEmail}`;
+    const moduleName = 'backendModule';
+    return `App_${moduleName}_${tableId}_${branch_id}_${role}_${safeEmail}`;
 }
-// Array Store RAM Path
-export function getRAM(DataTable, key = null) {
-    const fullData = JSON.parse(localStorage.getItem(getUserRAMKey()) || '{}');
-    const tableData = fullData[DataTable] || {};
-    return key ? tableData[key] : tableData;
-}
-// Array Store Table Data
-export function setRAM(DataTable, key, value) {
-    const storageKey = getUserRAMKey();
-    const fullData = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    fullData[DataTable] = fullData[DataTable] || {};
-    fullData[DataTable][key] = value;
-    localStorage.setItem(storageKey, JSON.stringify(fullData));
-}
-// Remove Array Table Data
-export function removeRAM(DataTable) {
-    const storageKey = getUserRAMKey();
-    const fullData = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    delete fullData[DataTable];
-    localStorage.setItem(storageKey, JSON.stringify(fullData));
-}
-
-// ========== Table Component Resize ==========
+// --- Global flags to prevent drag-resize conflicts ---
 let isDraggingColumn = false;
 let isResizingColumn = false;
 let isResizingRow = false;
-
 function isRowResizeActive() {
     return isResizingRow;
 }
-
-// ========== Rsize Table Head th and tbody tr width and height ==========
-export function resize(DataTable, colClass, rowClass) {
-    const table = document.getElementById(DataTable);
+// Main resize function
+export function resize(tableId, colClass, rowClass) {
+    const table = document.getElementById(tableId);
     if (!table) return;
 
-    const columnWidths = getRAM(DataTable, 'columnWidths') || {};
-    const rowHeights = getRAM(DataTable, 'rowHeights') || {};
+    const key = getUserRAMKey(tableId);
+    const saved = JSON.parse(localStorage.getItem(key) || '{}');
+    const columnWidths = saved.columnWidths || {};
+    const rowHeights = saved.rowHeights || {};
 
     const headers = table.querySelectorAll('thead th');
     const theadRow = table.querySelector('thead tr');
     const bodyRows = table.querySelectorAll('tbody tr');
 
+    // === Apply saved column widths ===
     headers.forEach((th, colIndex) => {
         const width = columnWidths[colIndex];
         if (width) {
@@ -61,6 +41,7 @@ export function resize(DataTable, colClass, rowClass) {
         }
     });
 
+    // === Apply saved row heights ===
     if (rowHeights['thead']) theadRow.style.height = rowHeights['thead'] + 'px';
 
     bodyRows.forEach((tr, rowIndex) => {
@@ -68,6 +49,7 @@ export function resize(DataTable, colClass, rowClass) {
         if (height) tr.style.height = height + 'px';
     });
 
+    // === Resize handler ===
     table.addEventListener('mousedown', function (e) {
         const isColResize = e.target.classList.contains(colClass);
         const isRowResize = e.target.classList.contains(rowClass);
@@ -87,12 +69,19 @@ export function resize(DataTable, colClass, rowClass) {
         let startHeight = rowElement.offsetHeight;
 
         function save() {
-            setRAM(DataTable, 'columnWidths', columnWidths);
-            setRAM(DataTable, 'rowHeights', rowHeights);
+            const currentData = JSON.parse(localStorage.getItem(key) || '{}');
+            const columnOrder = currentData.columnOrder || [];
+            const newData = {
+                columnWidths,
+                rowHeights,
+                columnOrder // Preserve previously saved column order
+            };
+            localStorage.setItem(key, JSON.stringify(newData));
         }
 
+        // === Column resizing (width by <th>) ===
         if (isColResize && cell.tagName === 'TH') {
-            if (isDraggingColumn) return;
+            if (isDraggingColumn) return; // Prevent conflict
             isResizingColumn = true;
             cell.classList.add('col-resizing');
 
@@ -101,9 +90,10 @@ export function resize(DataTable, colClass, rowClass) {
                 cell.style.width = newWidth + 'px';
 
                 bodyRows.forEach(row => {
+                    
                     const td = row.children[colIndex];
-                    if (td) {
-                        td.style.width = newWidth + 'px';
+                    if (td){
+                        td.style.width = newWidth + 'px'; 
                         td.classList.add('col-resizing');
                     }
                 });
@@ -117,7 +107,9 @@ export function resize(DataTable, colClass, rowClass) {
                 isResizingColumn = false;
                 bodyRows.forEach(row => {
                     const td = row.children[colIndex];
-                    if (td) td.classList.remove('col-resizing');
+                    if (td) {
+                        td.classList.remove('col-resizing');
+                    }
                 });
                 document.removeEventListener('mousemove', colMouseMove);
                 document.removeEventListener('mouseup', stopColResize);
@@ -127,10 +119,15 @@ export function resize(DataTable, colClass, rowClass) {
             document.addEventListener('mouseup', stopColResize);
         }
 
+        // === Row resizing (height by <tr>) ===
         if (isRowResize) {
             isResizingRow = true;
             rowElement.classList.add('row-resizing');
-            [...rowElement.children].forEach(cell => cell.classList.add('row-resizing'));
+
+            // Apply class to each cell (td or th) in the row for visual effect
+            [...rowElement.children].forEach(cell => {
+                cell.classList.add('row-resizing');
+            });
 
             function rowMouseMove(ev) {
                 const newHeight = startHeight + (ev.pageY - startY);
@@ -141,13 +138,16 @@ export function resize(DataTable, colClass, rowClass) {
                 } else {
                     rowHeights[`tr_${rowIndex}`] = newHeight;
                 }
+
                 save();
             }
 
             function stopRowResize() {
                 isResizingRow = false;
                 rowElement.classList.remove('row-resizing');
-                [...rowElement.children].forEach(cell => cell.classList.remove('row-resizing'));
+                [...rowElement.children].forEach(cell => {
+                    cell.classList.remove('row-resizing');
+                });
                 document.removeEventListener('mousemove', rowMouseMove);
                 document.removeEventListener('mouseup', stopRowResize);
             }
@@ -157,39 +157,24 @@ export function resize(DataTable, colClass, rowClass) {
         }
     });
 }
-
-// ========== Restore Saved Row Heights After Data Fetching ==========
-export function restoreRowHeights(DataTable) {
-    const rowHeights = getRAM(DataTable, 'rowHeights') || {};
-    const table = document.getElementById(DataTable);
-
-    if (!table) return;
-
-    const bodyRows = table.querySelectorAll('tbody tr');
-    bodyRows.forEach((row, index) => {
-        const height = rowHeights[`tr_${index}`];
-        if (height) {
-            row.style.height = `${height}px`;
-        }
-    });
-
-    if (rowHeights['thead']) {
-        const theadRow = table.querySelector('thead tr');
-        if (theadRow) theadRow.style.height = `${rowHeights['thead']}px`;
-    }
+// Function to remove resize data
+export function removeResizeStorage(tableId) {
+    const key = getUserRAMKey(tableId);
+    localStorage.removeItem(key);
 }
-
-// ========== Table Column Drag and Drop ===============
-export function enableColumnDragAndDrop(DataTable, iconClass) {
-    const table = document.getElementById(DataTable);
+export function enableColumnDragAndDrop(tableId,iconClass) {
+    const table = document.getElementById(tableId);
     if (!table) return;
+
+    const key = getUserRAMKey(tableId);
+    const saved = JSON.parse(localStorage.getItem(key) || '{}');
 
     const thead = table.querySelector('thead');
     const tbody = table.querySelector('tbody');
 
-    const saved = getRAM(DataTable);
     const getHeaderIndex = el => [...el.parentNode.children].indexOf(el);
 
+    // === Load saved column order from localStorage ===
     function loadColumnOrder() {
         if (!saved.columnOrder) return;
 
@@ -197,8 +182,11 @@ export function enableColumnDragAndDrop(DataTable, iconClass) {
         const headerMap = Object.fromEntries(headers.map((th, i) => [th.textContent.trim(), i]));
 
         const newOrder = saved.columnOrder.map(name => headers[headerMap[name]]).filter(Boolean);
+
+        // Apply to THEAD
         newOrder.forEach(th => thead.rows[0].appendChild(th));
 
+        // Apply to TBODY
         [...tbody.rows].forEach(row => {
             const cells = [...row.children];
             const newCells = saved.columnOrder.map(name => {
@@ -209,11 +197,21 @@ export function enableColumnDragAndDrop(DataTable, iconClass) {
         });
     }
 
+    // === Save column order to localStorage ===
     function saveColumnOrder() {
         const order = [...thead.rows[0].children].map(th => th.textContent.trim());
-        setRAM(DataTable, 'columnOrder', order);
+        const currentData = JSON.parse(localStorage.getItem(key) || '{}');
+
+        const newData = {
+            columnOrder: order,
+            columnWidths: currentData.columnWidths || {},
+            rowHeights: currentData.rowHeights || {}
+        };
+
+        localStorage.setItem(key, JSON.stringify(newData));
     }
 
+    // === Move column across all rows ===
     function moveColumn(fromIndex, toIndex) {
         const rows = table.querySelectorAll('tr');
         rows.forEach(row => {
@@ -228,24 +226,29 @@ export function enableColumnDragAndDrop(DataTable, iconClass) {
         saveColumnOrder();
     }
 
+    // === Set up drag listeners ===
     let dragSrcIndex = null;
 
+    // Loop through each TH and target the drag handle (`#moveIconId`) within it
     thead.querySelectorAll('th').forEach(th => {
         const moveIcon = th.querySelector(iconClass);
         if (!moveIcon) return;
 
         th.setAttribute('draggable', true);
 
+        // Make sure the icon handles the drag
         moveIcon.addEventListener('mousedown', e => {
-            e.stopPropagation();
+            e.stopPropagation(); // Prevent TH dragging from interfering
             dragSrcIndex = getHeaderIndex(th);
         });
 
         th.addEventListener('dragstart', e => {
+            // Prevent drag if resizing is active
             if (isResizingColumn || isRowResizeActive()) {
                 e.preventDefault();
                 return;
             }
+
             isDraggingColumn = true;
             e.dataTransfer.effectAllowed = 'move';
             dragSrcIndex = getHeaderIndex(th);
@@ -262,7 +265,6 @@ export function enableColumnDragAndDrop(DataTable, iconClass) {
                 dragSrcIndex = null;
             }
         });
-
         th.addEventListener('dragend', () => {
             isDraggingColumn = false;
             th.classList.remove('dragging');
@@ -271,20 +273,22 @@ export function enableColumnDragAndDrop(DataTable, iconClass) {
 
     loadColumnOrder();
 }
-// ========== Table Column Drag and Drop Save ==========
-export function applySavedColumnOrder(DataTable) {
-    const savedOrder = getRAM(DataTable, 'columnOrder');
+// Column Drag and Drop Store
+export function applySavedColumnOrder(tableId) {
+    const savedOrder = JSON.parse(localStorage.getItem("columnOrder_" + tableId));
     if (!savedOrder) return;
 
-    const table = document.getElementById(DataTable);
+    const table = document.getElementById(tableId);
     const theadRow = table.querySelector("thead tr");
     const ths = Array.from(theadRow.children);
 
+    // Reorder <th> to match saved
     const newThOrder = savedOrder.map(label =>
         ths.find(th => th.textContent.trim() === label)
     ).filter(Boolean);
     newThOrder.forEach(th => theadRow.appendChild(th));
 
+    // Reorder <td> in each <tr>
     const tbodyRows = table.querySelectorAll("tbody tr");
     tbodyRows.forEach(row => {
         const tds = Array.from(row.children);
@@ -295,180 +299,6 @@ export function applySavedColumnOrder(DataTable) {
         newTdOrder.forEach(td => row.appendChild(td));
     });
 }
-
-// =========== Remove Data Table Store ============
-export function removeDataTableStorage(DataTable) {
-    removeRAM(DataTable);
-}
-
-// =========== Measurement RAM Usage Per User Key ==============
-export function getLocalStorageUsageForRAM() {
-    const keys = Object.keys(localStorage);
-    const storageReport = [];
-
-    keys.forEach(key => {
-        if (key.startsWith("ApplicationRAM_")) {
-            const value = localStorage.getItem(key);
-            const bytes = new Blob([value]).size;
-            storageReport.push({
-                key,
-                bytes,
-                kb: (bytes / 1024).toFixed(2),
-                mb: (bytes / (1024 * 1024)).toFixed(4)
-            });
-        }
-    });
-
-    const totalBytes = storageReport.reduce((sum, item) => sum + item.bytes, 0);
-
-    return {
-        storageReport,
-        totalKB: (totalBytes / 1024).toFixed(2),
-        totalMB: (totalBytes / (1024 * 1024)).toFixed(3)
-    };
-}
-
-// =========== Report Show RAM Usage Per User Key ==============
-export function renderGlobalRAMTable(containerId) {
-    const { storageReport, totalKB, totalMB } = getLocalStorageUsageForRAM();
-
-    let html = `
-        <h5>Global RAM Usage Report</h5>
-        <table class="table table-bordered table-sm">
-            <thead>
-                <tr><th>Key</th><th>Size (KB)</th><th>Size (MB)</th></tr>
-            </thead>
-            <tbody>
-    `;
-
-    storageReport.forEach(item => {
-        html += `<tr>
-            <td>${item.key}</td>
-            <td>${item.kb}KB</td>
-            <td>${item.mb}MB</td>
-        </tr>`;
-    });
-
-    html += `
-            </tbody>
-        </table>
-        <p><strong>Total:</strong> ${totalKB} KB (~${totalMB} MB)</p>
-    `;
-
-    document.getElementById(containerId).innerHTML = html;
-}
-
-// Global variables for storing full report and pagination config
-let fullRAMReport = [];
-let currentPage = 1;
-let perPage = 10;
-
-// Auto-run analyzeAllRAMKeys when #ramTableBody exists
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initRAMAnalyzer);
-} else {
-    initRAMAnalyzer();
-}
-
-function initRAMAnalyzer() {
-    if (document.getElementById("ramTableBody")) {
-        analyzeAllRAMKeys();
-    }
-}
-
-export function analyzeAllRAMKeys() {
-    const keys = Object.keys(localStorage);
-    const ramKeys = keys.filter(key => key.startsWith("ApplicationRAM_"));
-    const result = [];
-
-    ramKeys.forEach(ramKey => {
-        const rawData = localStorage.getItem(ramKey);
-        let parsed;
-
-        try {
-            parsed = JSON.parse(rawData);
-        } catch (e) {
-            console.warn(`Failed to parse ${ramKey}`, e);
-            return;
-        }
-
-        if (typeof parsed !== "object" || parsed === null) return;
-
-        for (const table in parsed) {
-            const sizeBytes = new Blob([JSON.stringify(parsed[table])]).size;
-            const sizeKB = (sizeBytes / 1024).toFixed(2);
-
-            result.push({
-                ramKey,
-                table,
-                size: sizeKB
-            });
-        }
-    });
-
-    fullRAMReport = result;
-    currentPage = 1;
-    renderRAMTable();
-    renderPaginationControls();
-}
-
-function renderRAMTable() {
-    const start = (currentPage - 1) * perPage;
-    const end = start + perPage;
-    const currentItems = fullRAMReport.slice(start, end);
-
-    const tableBody = document.querySelector("#ramTableBody");
-    tableBody.innerHTML = "";
-
-    if (currentItems.length === 0) {
-        tableBody.innerHTML = `
-            <tr><td colspan="4" class="text-danger text-center">No RAM data found.</td></tr>
-        `;
-        return;
-    }
-
-    currentItems.forEach((item, index) => {
-        const sl = start + index + 1;
-        const row = `
-            <tr>
-                <td>${sl}</td>
-                <td>${item.ramKey}</td>
-                <td>${item.table}</td>
-                <td>${item.size}KB</td>
-            </tr>
-        `;
-        tableBody.insertAdjacentHTML("beforeend", row);
-    });
-}
-
-function renderPaginationControls() {
-    const totalPages = Math.ceil(fullRAMReport.length / perPage);
-    const paginationContainer = document.querySelector("#paginationControls");
-    paginationContainer.innerHTML = "";
-
-    if (totalPages <= 1) return;
-
-    for (let page = 1; page <= totalPages; page++) {
-        const btn = document.createElement("button");
-        btn.textContent = page;
-        btn.className = `btn btn-sm mx-1 ${page === currentPage ? 'btn-primary' : 'btn-outline-primary'}`;
-        btn.addEventListener("click", () => {
-            currentPage = page;
-            renderRAMTable();
-            renderPaginationControls();
-        });
-        paginationContainer.appendChild(btn);
-    }
-}
-
-export function changePerPage(newPerPage) {
-    perPage = parseInt(newPerPage, 10);
-    currentPage = 1;
-    renderRAMTable();
-    renderPaginationControls();
-}
-
-// =========== Border Animation ===================
 export function borderRotated(connectionPath, selector, activeClass) {
     document.querySelectorAll('.button-container').forEach(container => {
         const border = container.querySelector(selector);

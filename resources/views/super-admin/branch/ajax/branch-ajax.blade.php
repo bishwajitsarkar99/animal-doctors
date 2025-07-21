@@ -1,22 +1,59 @@
 <script type="module">
-    import { modernDateFormat } from "/module/module-min-js/helper-function-min.js";
-    import { buttonLoader , removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
-    import { resize, removeResizeStorage, enableColumnDragAndDrop, applySavedColumnOrder, borderRotated } from "/module/table-module/table-module.js";
+    import { 
+        // Helper Funtion
+        modernDateFormat,
+        removeAttributeOrClass,
+        // Button Component
+        buttonLoader,
+        // Table Component
+        // resize, 
+        // removeDataTableStorage, 
+        // enableColumnDragAndDrop, 
+        // applySavedColumnOrder, 
+        // borderRotated 
+    } from "/module/backend-module/backend-module-min.js";
+    import { resize, removeDataTableStorage, enableColumnDragAndDrop,  applySavedColumnOrder, borderRotated , restoreRowHeights, renderGlobalRAMTable ,analyzeAllRAMKeys, changePerPage} from "/module/table-module/table-module.js";
     // Import RAM functions
-    import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/module/module-min-js/appRAM/appParentRAM/appRAMCapcity/appBranchSetting.js";
-    //import { getAppRAM } from "/module/module-min-js/appRAM/appParentRAM/appRAMCapcity/appBranchData.js";
-    // table column width and row height resize with column drag and drop
-    resize('resizableBranchTable', 'col-resizer', 'row-resizer');
-    enableColumnDragAndDrop('resizableBranchTable', '.move-icon');
-    applySavedColumnOrder('resizableBranchTable');
+    import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/appRAM/backendRAMCapacity/appSettingData.js";
+    //import { getAppRAM } from "/appRAM/backendRAMCapacity/appBranchData.js";
 
+    // table column width and row height resize with column drag and drop
+    resize('BranchSettingTable', 'col-resizer', 'row-resizer');
+    enableColumnDragAndDrop('BranchSettingTable', '.move-icon');
+    applySavedColumnOrder('BranchSettingTable');
+
+    // Render global usage
+    renderGlobalRAMTable("ram-report-container");
+    // Auto-trigger analyze if table exists on page load
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.getElementById("ramTableBody")) {
+            analyzeAllRAMKeys();
+        }
+    });
 
     buttonLoader();
 
     $(document).ready(function(){
+        // Dropdown listener
+        $(document).on('change', '#perItems', function () {
+            const selectedValue = $(this).val();
+            const fullRAMReport = [];
+            if (fullRAMReport.length > 0) {
+                changePerPage(selectedValue);
+            } else {
+                const hasRAM = Object.keys(localStorage).some(k => k.startsWith("ApplicationRAM_"));
+                if (hasRAM) {
+                    analyzeAllRAMKeys();
+                    changePerPage(selectedValue);
+                } else {
+                    $("#ramTableBody").html(`<tr><td colspan="4" class="text-center text-danger">No RAM data found.</td></tr>`);
+                    $("#paginationControls").empty();
+                }
+            }
+        });
         // Remove Row and Column width or height space;
         $(document).on('click', '#tableResize', function(){
-            removeResizeStorage('resizableBranchTable')
+            removeDataTableStorage('BranchSettingTable')
             location.reload();
         });
         // ACtive table row background
@@ -622,9 +659,11 @@
                     $("#total_branch_items").text(total);
                     $("#total_per_branch_items").text(per_page);
                     $("#per_branch_items_num").text(per_item_num);
+                    // Restore row heights
+                    restoreRowHeights('BranchSettingTable');
                     // column and row height width resize
-                    resize('resizableBranchTable', 'col-resizer', 'row-resizer');
-                    enableColumnDragAndDrop('resizableBranchTable', '.move-icon');
+                    resize('BranchSettingTable', 'col-resizer', 'row-resizer');
+                    enableColumnDragAndDrop('BranchSettingTable', '.move-icon');
 
                     // Tooltip (Bootstrap 5)
                     document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
