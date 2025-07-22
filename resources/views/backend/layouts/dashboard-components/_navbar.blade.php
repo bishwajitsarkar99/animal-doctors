@@ -327,8 +327,8 @@
                                         <input class="search_message ms-1 mb-3" type="text" placeholder="{{__('translate.Search..')}}" id="myInput" onkeyup="filterFunction()">
                                     </div>
                                 </div>
-                                <div class="table" style="padding-left:5px;padding-right:5px;">
-                                    <table class="table table-sm" style="width:100%;">
+                                <div class="order-table" style="padding-left:5px;padding-right:5px;">
+                                    <table class="order-table table-sm" style="width:100%;">
                                         <thead>
                                             <tr class="table-row order_body acc_setting_table">
                                                 <th id="th_sort" style="background-color: white;" class="table_th_color tot_pending_ ps-1">S.N</th>

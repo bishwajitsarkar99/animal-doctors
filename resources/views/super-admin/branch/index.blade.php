@@ -260,33 +260,46 @@
         </div>
     </div>
   </div>
-  <div id="ram-report-container"></div>
-  <div id="ramTableContainer" class="mb-3"></div>
 
+  <!-- RAM key Total Result -->
+  <!-- <div id="ram-report-container"></div> -->
   <!-- RAM key detail view -->
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>SL</th>
-        <th>RAM Key</th>
-        <th>Table</th>
-        <th>Size (KB)</th>
-      </tr>
-    </thead>
-    <tbody id="ramTableBody"></tbody>
-  </table>
-  <div class="col-sm-1">
-    <select class="form-control form-contol-sm" id="perItems">
-      <option value="10" selected>10</option>
-      <option value="20">20</option>
-      <option value="50">50</option>
-      <option value="100">100</option>
-      <option value="500">500</option>
-    </select>
+  <!-- <div class="row mb-2">
+    <div class="col-md-4">
+      <input type="text" id="searchInput" class="form-control" placeholder="Search RAM Key / Table / Size">
+    </div>
+    <div class="col-md-2">
+      <select class="form-control" id="tablePrefixFilter">
+        <option value="">All Tables</option>
+        <option value="BranchSettingTable">Branch Setting</option>
+        <option value="product">product</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select class="form-control" id="perItems">
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="200">200</option>
+        <option value="500">500</option>
+      </select>
+    </div>
   </div>
-  <div class="col-sm-11">
+  <div class="mb-5">
+    <table class="table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th>SL</th>
+          <th><a href="#" class="sort-link sort-button" data-field="ramKey">RAM Key</a></th>
+          <th><a href="#" class="sort-link sort-button" data-field="table">Table</a></th>
+          <th><a href="#" class="sort-link sort-button" data-field="size">Size (KB)</a></th>
+        </tr>
+      </thead>
+      <tbody id="ramTableBody"></tbody>
+    </table>
     <div class="d-flex justify-content-center mt-2" id="paginationControls"></div>
-  </div>
+  </div> -->
   @include('loader.action-loader')
   
   {{-- start modal --}}

@@ -65,9 +65,6 @@ tbody tr:nth-child(odd) td{
     z-index: 1;
     white-space: nowrap !important;
 }
-/* td#cellId, th#headId {
-    position: relative;
-} */
 #dropbtn{
     cursor: pointer;
 }

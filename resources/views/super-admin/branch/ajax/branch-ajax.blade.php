@@ -6,13 +6,17 @@
         // Button Component
         buttonLoader,
         // Table Component
-        // resize, 
-        // removeDataTableStorage, 
-        // enableColumnDragAndDrop, 
-        // applySavedColumnOrder, 
-        // borderRotated 
+        resize, 
+        removeDataTableStorage, 
+        enableColumnDragAndDrop, 
+        applySavedColumnOrder,
+        restoreRowHeights,
+        // Border Component
+        borderRotated,
+        // Global RAM Storage System
+        // renderGlobalRAMTable,
+        // RAMAnalyzer 
     } from "/module/backend-module/backend-module-min.js";
-    import { resize, removeDataTableStorage, enableColumnDragAndDrop,  applySavedColumnOrder, borderRotated , restoreRowHeights, renderGlobalRAMTable , RAMAnalyzer } from "/module/table-module/table-module.js";
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/appRAM/backendRAMCapacity/appSettingData.js";
     //import { getAppRAM } from "/appRAM/backendRAMCapacity/appBranchData.js";
@@ -21,26 +25,43 @@
     resize('BranchSettingTable', 'col-resizer', 'row-resizer');
     enableColumnDragAndDrop('BranchSettingTable', '.move-icon');
     applySavedColumnOrder('BranchSettingTable');
+    
+    // Render global usage RAM as user key
+    // renderGlobalRAMTable("ram-report-container");
+    // per table data show RAM
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     RAMAnalyzer.initRAMAnalyzer();
+    //     const perItemsSelect = document.getElementById("perItems");
+    //     if (perItemsSelect) {
+    //         perItemsSelect.addEventListener("change", function () {
+    //             RAMAnalyzer.changePerPage(this.value);
+    //         });
+    //     }
 
-    // Render global usage as user key
-    renderGlobalRAMTable("ram-report-container");
-    // per table data show ram
-    document.addEventListener("DOMContentLoaded", () => {
-        RAMAnalyzer.initRAMAnalyzer();
-    });
+    //     const searchInput = document.getElementById("searchInput");
+    //     if (searchInput) {
+    //         searchInput.addEventListener("input", function () {
+    //             RAMAnalyzer.setSearchQuery(this.value);
+    //         });
+    //     }
+
+    //     document.querySelectorAll(".sort-button").forEach(btn => {
+    //         btn.addEventListener("click", () => {
+    //             RAMAnalyzer.setSort(btn.dataset.sort);
+    //         });
+    //     });
+
+    //     const tablePrefixFilter = document.getElementById("tablePrefixFilter");
+    //     if (tablePrefixFilter) {
+    //         tablePrefixFilter.addEventListener("change", e => {
+    //             RAMAnalyzer.setTablePrefix(e.target.value);
+    //         });
+    //     }
+    // });
+
     buttonLoader();
 
     $(document).ready(function(){
-        // Dropdown listener
-        $('#perItems').on('change', function () {
-            const newPerPage = $(this).val();
-            RAMAnalyzer.changePerPage(newPerPage);
-        });
-        // Pagination
-        $(document).on('click', '#paginationControls button', function () {
-            const page = parseInt($(this).text(), 10);
-            RAMAnalyzer.setCurrentPage(page);
-        });
         // Remove Row and Column width or height space;
         $(document).on('click', '#tableResize', function(){
             removeDataTableStorage('BranchSettingTable')
