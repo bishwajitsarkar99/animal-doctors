@@ -71,16 +71,18 @@
               <span class="table-icon-skeleton">
                 <x-Tables.Icon.TableIcon iconWidth="20" iconHeight="20" fillColor="#413571a6" svgId="tableIcon" />
                 <!-- Table-Menu-Card -->
-                <x-MenuCards.MenuCard menuParentClass="dropdown dashboard_menubar" menuChildClass="dropdown-content" menuId="dropbtn">
-                  <div class="row">
-                    <div class="col-12">
-                      <ul class="menu-btn-group">
-                        <li id="lineRow"><a type="button" class="menu-btn" id="tableResize">Reset Table Resize</a></li>
-                        <li id="lineRow"><a type="button" class="menu-btn" id="searSetting">Search ▸</a></li>
-                      </ul>
+                <div class="menu-card">
+                  <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component" menuChildClass="dropdown-content dropdown-menu-component" menuId="dropbtn">
+                    <div class="row">
+                      <div class="col-12">
+                        <ul class="menu-btn-group">
+                          <li id="lineRow" class="line-row"><a type="button" class="menu-btn" id="tableResize">Reset Table Resize</a></li>
+                          <li id="lineRow" class="line-row"><a type="button" class="menu-btn" id="searSetting">Search ▸</a></li>
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                </x-MenuCard.MenuCard>
+                  </x-MenuCard.MenuCard>
+                </div>
               </span>
               <span class="table-icon-skeleton"><strong>Menu</strong></span>
             </span>
@@ -515,6 +517,7 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category-min.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/branch/branch.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/table/zebra-table/zebra-table.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/backend_component_asset/dropDownMenuCardCss/dropDownMenuCardAsset.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 <link rel="stylesheet" href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" />
 @endsection
