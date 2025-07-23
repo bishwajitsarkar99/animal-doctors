@@ -69,20 +69,54 @@
           <div class="col-sm-2">
             <span>
               <span class="table-icon-skeleton">
-                <x-Tables.Icon.TableIcon iconWidth="20" iconHeight="20" fillColor="#413571a6" svgId="tableIcon" />
+                
                 <!-- Table-Menu-Card -->
-                <div class="menu-card">
-                  <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component" menuChildClass="dropdown-content dropdown-menu-component" menuId="dropbtn">
-                    <div class="row">
-                      <div class="col-12">
-                        <ul class="menu-btn-group">
-                          <li id="lineRow" class="line-row"><a type="button" class="menu-btn" id="tableResize">Reset Table Resize</a></li>
-                          <li id="lineRow" class="line-row"><a type="button" class="menu-btn" id="searSetting">Search ▸</a></li>
-                        </ul>
-                      </div>
+                <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component" menuChildClass="dropdown-content dropdown-menu-component menu-card" wrapperId="tableMenuCard" menuId="dropbtn">
+                  <div class="menu-card-header">
+                    <x-Tables.Icon.TableIcon iconWidth="20" iconHeight="20" fillColor="#413571a6" svgId="tableIcon" />
+                    <span class="ms-2">Branch Table</span>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <ul class="menu-btn-group">
+                        <li id="lineRow" class="line-row dropdown-menu-component-submenu-wrapper">
+                          <a type="button" class="menu-btn" id="searchMenu">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="white" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                              <circle cx="11" cy="11" r="8"/>
+                              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                            Search ▸
+                          </a>
+                          <ul class="dropdown-menu-component-submenu">
+                            <li id="lineRow" class="line-row"><a type="button" class="menu-btn">Search by Name</a></li>
+                            <li id="lineRow" class="line-row"><a type="button" class="menu-btn">Search by Date</a></li>
+                            <li id="lineRow" class="line-row"><a type="button" class="menu-btn">Search by ID</a></li>
+                          </ul>
+                        </li>
+                        <li id="lineRow" class="line-row">
+                          <a type="button" class="menu-btn" id="filterMenu">
+                            <svg width="15" height="15" fill="dodgerblue" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 490 511.751">
+                              <path fill-rule="nonzero" d="M40.867 0h408.265c11.248 0 21.467 4.596 28.87 11.999C485.404 19.401 490 29.621 490 40.869v52.689c0 .464-.034.92-.099 1.367a9.488 9.488 0 01-2.204 7.552L340.325 273.686l-.02-.018-.389.427c-4.812 4.951-8.835 10.857-11.587 17.468a51.297 51.297 0 00-3.352 11.907 10.97 10.97 0 01-.083.557 51.381 51.381 0 00-.518 7.282v43.728a9.483 9.483 0 01.668 3.508 9.483 9.483 0 01-.668 3.508v49.197a9.479 9.479 0 01.668 3.508 9.483 9.483 0 01-.668 3.508v63.998h-.038c-.024 7.863-1.851 14.526-4.876 19.403-1.893 3.053-4.257 5.484-6.977 7.192-3.031 1.902-6.418 2.904-10.039 2.891-3.637-.013-7.354-1.038-10.981-3.196a9.598 9.598 0 01-.939-.589L170.12 422.473a9.504 9.504 0 01-4.612-8.152v-102.71c-.762-6.35-2.854-12.586-6.005-18.963-3.464-7.011-8.192-14.184-13.84-21.825L2.303 102.403a9.434 9.434 0 01-2.179-7.312A9.571 9.571 0 010 93.558V40.869c0-11.248 4.595-21.468 11.997-28.87C19.4 4.596 29.62 0 40.867 0zm264.494 424.265h-28.953c-5.25 0-9.507-4.257-9.507-9.507 0-5.251 4.257-9.508 9.507-9.508h28.953v-37.197h-46.948c-5.25 0-9.507-4.258-9.507-9.508 0-5.25 4.257-9.508 9.507-9.508h46.948V311.84h-46.948c-5.25 0-9.507-4.257-9.507-9.508 0-5.25 4.257-9.507 9.507-9.507h49.444a71.603 71.603 0 012.943-8.541c3.615-8.681 8.858-16.45 15.123-22.995l-.008-.007 136.188-158.216H27.71l132.752 155.958.393.494.015-.011c6.307 8.53 11.634 16.635 15.642 24.747 4.217 8.534 6.988 17.077 7.936 26.089.033.325.049.647.05.966h.025v98.136l116.785 82.921c.486.279.847.423 1.085.443.298-.192.622-.563.951-1.094 1.272-2.05 2.042-5.269 2.054-9.451h-.037v-57.999zM449.132 19.016H40.867c-6 0-11.462 2.461-15.427 6.426-3.963 3.962-6.425 9.426-6.425 15.427v43.182h451.969V40.869c0-6.001-2.462-11.465-6.424-15.427-3.966-3.965-9.427-6.426-15.428-6.426z"/>
+                            </svg>
+                            Filter ▸
+                          </a>
+                        </li>
+                        <li id="lineRow" class="line-row">
+                          <a type="button" class="menu-btn" id="tableResize">
+                            <svg width="15" height="15" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 122.88">
+                              <defs><style>.cls-1{fill:#ef4136;}.cls-1,.cls-2{fill-rule:evenodd;}.cls-2{fill:#ff7c73;}.cls-3{fill:#fff;}</style></defs>
+                              <title>turn-off</title>
+                              <path class="cls-1" d="M61.44,0A61.44,61.44,0,1,1,0,61.44,61.44,61.44,0,0,1,61.44,0Z"/>
+                              <path class="cls-2" d="M61.44,2.25A59.15,59.15,0,0,1,120.59,61.4c0,.77,0,1.54,0,2.3a59.14,59.14,0,0,0-118.2,0c0-.76,0-1.53,0-2.3A59.15,59.15,0,0,1,61.44,2.25Z"/>
+                              <path class="cls-3" d="M81,44.75a7.08,7.08,0,0,1,10.71-9.27,40,40,0,1,1-60.87.39A7.07,7.07,0,0,1,41.67,45,25.85,25.85,0,1,0,81,44.75ZM68.54,47.92a7.1,7.1,0,1,1-14.2,0V26.74a7.1,7.1,0,1,1,14.2,0V47.92Z"/>
+                            </svg>
+                            Reset Table Resize
+                          </a>
+                        </li>
+                      </ul>
                     </div>
-                  </x-MenuCard.MenuCard>
-                </div>
+                  </div>
+                </x-MenuCard.MenuCard>
               </span>
               <span class="table-icon-skeleton"><strong>Menu</strong></span>
             </span>
@@ -239,28 +273,6 @@
         </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.LeftSideTabContent>
       </x-CustomLeftSideTabPanels.LeftSideTabPanel>
     </x-CustomTabPanels.TabPanelContents.TabContentPanel>
-  </div>
-  <div class="dropdown list_menubar">
-    <a id="dropListBtn">☰</a>
-    <div class="dropdown-content custom-dropdown-content">
-        <div class="row">
-            <div class="col-12">
-                <ul class="menu-btn-group">
-                    <li>
-                        <a type="button" class="menu-btn" id="tableResize">Reset Table Resize</a>
-                    </li>
-                    <li class="custom-submenu-wrapper">
-                        <a type="button" class="menu-btn" id="searSetting">Search ▸</a>
-                        <ul class="custom-submenu">
-                            <li><a href="#">Search by Name</a></li>
-                            <li><a href="#">Search by Date</a></li>
-                            <li><a href="#">Search by ID</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
   </div>
 
   <!-- RAM key Total Result -->

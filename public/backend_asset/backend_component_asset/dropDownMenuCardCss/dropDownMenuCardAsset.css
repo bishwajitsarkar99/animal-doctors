@@ -2,6 +2,12 @@
     --menu-card-bg: radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
     --menu-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     --component-menu-background-image: rgba(0, 0, 0, 0.067) 0px 1px 20px, rgba(0, 123, 255, 0.2) 0px 2px 6px;
+    --component-font-family:Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
+    --component-tab-active-btn-bg:linear-gradient(5deg, #808080e0, transparent 3%, #d3d3d33d, #c0c0c0a6);
+    --component-tab-active-btn-bg-color:snow;
+    --component-tab-deactive-btn-bg:linear-gradient(1deg, #dbd8d8db, transparent 3%, #d3d3d38a, snow);
+    --component-tab-deactive-btn-bg-color:snow;
+    --component-tab-deactive-btn-bg-hover:linear-gradient(5deg, gray, transparent 3%, #d3d3d33d, #c0c0c0a6);
 }
 * {
     margin: 0;
@@ -19,12 +25,18 @@
     position: relative;
     display: inline-block;
 }
+.dropdown-content{
+    min-width: 0px;
+}
+.dropdown-menu-component.menu-card {
+  position: relative;
+  overflow: visible;
+}
 .dropdown-content.dropdown-menu-component {
     display: none;
     position: absolute;
     background-image: var(--menu-card-bg);
     opacity: 1;
-    min-width: 160px;
     box-shadow: var(--menu-shadow);
     z-index: 10;
     border-radius: 5px;
@@ -32,9 +44,34 @@
 }
 .dropdown:hover .dropdown-content.dropdown-menu-component {
     display: block;
+    animation: cardDown 0.3s ease-out;
+}
+@keyframes cardDown{
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: 0.3s ease-in-out;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        transition: 0.3s ease-in-out;
+    }
 }
 .dropdown-content.dropdown-menu-component:hover {
     text-decoration: none;
+}
+.menu-card-header{
+    display: flex;
+    justify-content: left;
+    color: #222;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--component-font-family);
+    vertical-align: middle;
+    margin-bottom: 5px;
+    line-height: 2;
+    border-bottom: 1px groove #41357152;
 }
 #dropbtn{
     cursor: pointer;
@@ -46,22 +83,235 @@ ul.menu-btn-group {
     list-style: none;
     padding-left: 0px;
 }
+.menu-btn-group li {
+    position: relative;
+}
 ul>li .line-row{
     margin-top: 5px;
     margin-bottom: 5px;
 }
+.dropdown-content.dropdown-menu-component a {
+    color: black;
+    text-decoration: none;
+    display: block;
+    font-family: var(--component-font-family);
+    font-size: 11px;
+    padding: 1px 3px;
+    line-height: 1.55;
+    width: 100%;
+}
+#searchMenu, #filterMenu{
+    cursor: alias;
+}
 .menu-btn{
-   background-color: white;
+    background-color: white;
     color: #413571;
     text-decoration: none;
     line-height: 1.2;
     padding-top: 1px;
     border: 1px dashed white; 
+    white-space: nowrap;
 }
 .menu-btn:hover{
-    background-color: white;
+    background-color: rgba(0,123,255,0.2);
     text-decoration: none !important;
     border: 1px dashed dodgerblue;
-    color: dodgerblue;
+    color: black !important;
     transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+}
+.dropdown-menu-component-submenu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  min-width: 150px;
+  list-style: none;
+  background: var(--menu-card-bg);
+  padding: 0.6rem;
+  border-radius: 5px;
+  box-shadow: var(--menu-shadow);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: block;
+  pointer-events: none;
+}
+
+.dropdown-menu-component-submenu-wrapper:hover .dropdown-menu-component-submenu {
+  opacity: 1;
+  transform: translateX(10);
+  pointer-events: auto;
+  animation: slideLeft 0.3s ease-out;
+}
+.dropdown-menu-component-submenu-wrapper {
+  position: relative;
+}
+.dropdown-menu-component-submenu {
+  display: none;
+  left: 100%;
+  top: 0;
+  position: absolute;
+  background-image: var(--menu-card-bg);
+  box-shadow: var(--menu-shadow);
+  z-index: 1000;
+  border-radius: 5px;
+  padding: 0.6rem;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+.dropdown-menu-component-submenu-wrapper:hover > .dropdown-menu-component-submenu {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+.dropdown-menu-component-submenu li a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  font-family: var(--component-font-family);
+  font-size: 11px;
+  padding: 1px 3px;
+  line-height: 1.55;
+  width: 100%;
+}
+.dropdown-menu-component-submenu-wrapper:hover .dropdown-menu-component-submenu li a {
+  display: block;
+  animation: slideLeft 0.3s ease-out;
+}
+@keyframes slideLeft {
+  0% {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.card-width-resizer,
+.card-height-resizer {
+    position: absolute;
+    background: transparent;
+    z-index: 10;
+}
+.card-width-resizer {
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 100%;
+    cursor: ew-resize;
+}
+.card-height-resizer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    cursor: ns-resize;
+}
+.card-height-resizer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    cursor: ns-resize;
+}
+.menu-card {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.connector {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9;
+}
+.connectorPath {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 2px;
+    stroke-dasharray: 5, 5;
+    box-sizing: border-box;
+}
+@keyframes dashmove {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 10;
+  }
+}
+
+/* ================ Tab Button Component Css ======================== */
+.button-container {
+    position: relative;
+    display: inline-block;
+}
+.active-button {
+    height: 24px;
+    background: var(--component-tab-active-btn-bg);
+    background-color: var(--component-tab-active-btn-bg-color);
+    color: #004a99e0;
+    font-family: var(--component-font-family);
+    font-size: 12px;
+    line-height: 1.2;
+    opacity: 1;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    border: 1px dashed lightgray;
+    transition: border-color 0.3s, background-color 0.3s;
+    z-index: 1;
+    overflow: hidden;
+}
+.active-button:hover{
+    height: 24px;
+    color: #004a99e0;
+    font-family: var(--component-font-family);
+    font-size: 12px;
+    line-height: 1.2;
+    opacity: 1;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    --mdb-box-shadow-color-rgb: 0, 0, 0;
+    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+    border: 1px dashed dodgerblue;
+    outline: none;
+    transition: border-color 0.3s, background-color 0.3s color 0.3s;
+}
+.deactive {
+    background-image: var(--component-tab-deactive-btn-bg);
+    background-color: var(--component-tab-deactive-btn-bg-color);
+    font-family: var(--component-font-family);
+    margin-right: 15px;
+    line-height: 1.2;
+    font-weight: 700;
+    outline: none;
+    font-size: 12px;
+    color: #222;
+    letter-spacing: 1px;
+    border: 1px dashed lightgray;
+}
+.deactive:hover{
+    height: 24px;
+    background: var(--component-tab-deactive-btn-bg-hover);
+    color: #004a99e0;
+    font-family: var(--component-font-family);
+    font-size: 12px;
+    line-height: 1.2;
+    opacity: 1;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    border: 1px dashed dodgerblue;
+    outline: none;
+    transition: border-color 0.3s, background-color 0.3s color 0.3s;
 }

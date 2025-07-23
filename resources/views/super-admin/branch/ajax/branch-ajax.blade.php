@@ -17,6 +17,7 @@
         // renderGlobalRAMTable,
         // RAMAnalyzer 
     } from "/module/backend-module/backend-module-min.js";
+    import { initMenuCardResize } from "/module/backend-module/component-module/menu-item-card-component.js";
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/appRAM/backendRAMCapacity/appSettingData.js";
     //import { getAppRAM } from "/appRAM/backendRAMCapacity/appBranchData.js";
@@ -25,6 +26,8 @@
     resize('BranchSettingTable', 'col-resizer', 'row-resizer');
     enableColumnDragAndDrop('BranchSettingTable', '.move-icon');
     applySavedColumnOrder('BranchSettingTable');
+    // Card Menu Resize
+    initMenuCardResize('tableMenuCard', 'card-width-resizer', 'card-height-resizer');
     
     // Render global usage RAM as user key
     // renderGlobalRAMTable("ram-report-container");

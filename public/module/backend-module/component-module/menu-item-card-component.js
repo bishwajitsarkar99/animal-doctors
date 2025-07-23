@@ -1,129 +1,156 @@
-import { getUserRAMKey, getRAM, setRAM, removeRAM } from "/module/backend-module/component-module/component-storeRAM.js";
-// Initialize the RAM Data Store
-getUserRAMKey();
-getRAM(DataTable, key = null);
-setRAM(DataTable, key, value);
-removeRAM(DataTable);
+// ========== Global RAM Storage System ==============================================
+// ===================================================================================
+function getUserRAMKey() {
+    const role = document.querySelector('meta[name="user-role"]')?.content || 'guest';
+    const branch_id = document.querySelector('meta[name="branch-id"]')?.content || 'identifyer';
+    const email = document.querySelector('meta[name="user-email"]')?.content || 'unknown';
+    const safeEmail = email.replace(/[^a-zA-Z0-9]/g, '_');
+    const moduleName = 'BackendModule';
+    return `ApplicationRAM_${moduleName}_${branch_id}_${role}_${safeEmail}`;
+}
+// Array Store RAM Path
+export function getRAM(DataTable, key = null) {
+    const fullData = JSON.parse(localStorage.getItem(getUserRAMKey()) || '{}');
+    const tableData = fullData[DataTable] || {};
+    return key ? tableData[key] : tableData;
+}
+// Array Store Table Data
+export function setRAM(DataTable, key, value) {
+    const storageKey = getUserRAMKey();
+    const fullData = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    fullData[DataTable] = fullData[DataTable] || {};
+    fullData[DataTable][key] = value;
+    localStorage.setItem(storageKey, JSON.stringify(fullData));
+}
+// Remove Array Table Data
+export function removeRAM(DataTable) {
+    const storageKey = getUserRAMKey();
+    const fullData = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    delete fullData[DataTable];
+    localStorage.setItem(storageKey, JSON.stringify(fullData));
+}
 
 // ========================= Menu-Card Component Resize =================================
 
 let isResizingColumn = false;
 let isResizingHeight = false;
-export function initMenuCardResize(DataTable, MenuCardWidth, MenuCardHeight, menuHeader, menuFooter, buttonClass, inputClass){
-    // ============= Card Initialize ====================
+export function initMenuCardResize(DataTable) {
     const card = document.getElementById(DataTable);
-    if(!card) return;
+    if (!card) return;
 
-    // Drop Down Menu Card Data Store
-    const dropDownMenuCardWidth = getRAM(DataTable, 'dropDownMenuCardWidth') || {};
-    const dropDownMenuCardHeight = getRAM(DataTable, 'dropDownMenuCardHeight') || {};
+    const widthResizer = card.querySelector('.card-width-resizer');
+    const heightResizer = card.querySelector('.card-height-resizer');
+    const svgRect = card.querySelector('.connectorPath');
 
-    const dropDownMenuCardHeaderWidth = getRAM(DataTable, 'dropDownMenuCardHeaderWidth') || {};
-    const dropDownMenuCardHeaderHeight = getRAM(DataTable, 'dropDownMenuCardHeaderHeight') || {};
-
-    const dropDownMenuCardBodyWidth = getRAM(DataTable, 'dropDownMenuCardBodyWidth') || {};
-    const dropDownMenuCardBodyHeight = getRAM(DataTable, 'dropDownMenuCardBodyHeight') || {};
-
-    const dropDownMenuCardFooterWidth = getRAM(DataTable, 'dropDownMenuCardFooterWidth') || {};
-    const dropDownMenuCardFooterHeight = getRAM(DataTable, 'dropDownMenuCardFooterHeight') || {};
-
-    const dropDownMenuLineWidth = getRAM(DataTable, 'dropDownMenuLineWidth') || {};
-    const dropDownMenuLineHeight = getRAM(DataTable, 'dropDownMenuLineHeight') || {};
-
-    const dropDownMenuButtonWidth = getRAM(DataTable, 'dropDownMenuButtonWidth') || {};
-    const dropDownMenuButtonHeight = getRAM(DataTable, 'dropDownMenuButtonHeight') || {};
-
-    const dropDownMenuInputWidth = getRAM(DataTable, 'dropDownMenuInputWidth') || {};
-    const dropDownMenuInputHeight = getRAM(DataTable, 'dropDownMenuInputHeight') || {};
-    
-    
-    // DropDown Menu Card Selector
-    const dropDownMenuCard = card.querySelector('.dropdown');
-    const dropDownMenuCardHeader = card.querySelector(menuHeader);
-    const dropDownMenuCardBody = card.querySelector('ul');
-    const dropDownMenuCardFooter = card.querySelector(menuFooter);
-    // DropDown Menu Line Selector
-    const dropDownMenuLine = card.querySelectorAll('ul li');
-    // DropDown Menu Button Selector
-    const dropDownMenuButton = card.querySelector(buttonClass);
-    // DropDown Menu Input Selector
-    const dropDownMenuInput = card.querySelector(inputClass);
-
-
-    // DropDown Menu Card
-    const width = dropDownMenuCardWidth[dropDownMenuCard];
-    const height = dropDownMenuCardHeight[dropDownMenuCard];
-    if(width){
-        dropDownMenuCard.style.width = width + 'px';
-    }
-    if(height){
-        dropDownMenuCard.style.height = height + 'px';
+    // ========== Animate Border ==========
+    function animateBorder() {
+        const cardRect = card.getBoundingClientRect();
+        svgRect.setAttribute("width", cardRect.width);
+        svgRect.setAttribute("height", cardRect.height);
+        svgRect.setAttribute("x", 0);
+        svgRect.setAttribute("y", 0);
+        svgRect.setAttribute("rx", 3);
+        svgRect.setAttribute("ry", 3);
+        svgRect.style.display = 'block';
+        svgRect.style.stroke = "dodgerblue";
+        svgRect.style.strokeWidth = '3';
+        svgRect.style.strokeDasharray = "5,5";
+        svgRect.style.animation = "none";
+        // Restart animation
+        void svgRect.offsetWidth; // Trick to force reflow
+        svgRect.style.animation = "dashmove 1s linear infinite";
     }
 
-    card.addEventListener('mousedown', function(e){
+    // ========== Stop Animation ==========
+    function stopBorderAnimation() {
+        svgRect.style.animation = "none";
+        svgRect.style.stroke = "transparent";
+        svgRect.style.display = 'none';
+    }
 
-        const isCardWidhth = e.target.classList.contains(MenuCardWidth);
-        const isCardHeight = e.target.classList.contains(MenuCardHeight);
-
-        if(!isCardWidhth || !isCardHeight) return;
-
-        const menuCard = e.target.closest(dropDownMenuCard);
-
-        let startY = e.pageY;
+    // ========== Width Resize ==========
+    widthResizer.addEventListener('mousedown', function (e) {
         let startX = e.pageX;
-        let startWidth = menuCard.offsetWidth;
-        let startHeight = menuCard.offsetHeight;
+        let startWidth = card.offsetWidth;
 
-        function save(){
-            setRAM(DataTable, 'dropDownMenuCardWidth', startWidth);
-            setRAM(DataTable, 'dropDownMenuCardHeight', startHeight);
+        document.body.style.cursor = 'ew-resize';
+        card.classList.add('card-width-resizing');
+        animateBorder();
+
+        function colMouseMove(ev) {
+            const newWidth = startWidth + (ev.pageX - startX);
+            card.style.width = newWidth + 'px';
+            animateBorder();
         }
 
-        if(isCardWidhth){
-            isResizingColumn = true;
-            menuCard.classList.add('card-width-resizing');
+        function stopColResize() {
+            card.classList.remove('card-width-resizing');
+            document.body.style.cursor = '';
+            stopBorderAnimation();
 
-            function colMouseMove(ev){
-                const newWidth = startX + (ev.pageX - startX);
-                menuCard.style.width = newWidth + 'px';
+            const finalWidth = card.offsetWidth;
+            setRAM(DataTable, 'dropDownMenuCardWidth', finalWidth);
 
-                save();
-            }
-
-            function stopColResize(){
-                menuCard.classList.remove('card-width-resizing');
-                isResizingColumn = false;
-
-                document.addEventListener('mousemove', colMouseMove);
-                document.addEventListener('mouseup', stopColResize);
-            }
-
-            document.addEventListener('mousemove', colMouseMove);
-            document.addEventListener('mouseup', stopColResize);
+            document.removeEventListener('mousemove', colMouseMove);
+            document.removeEventListener('mouseup', stopColResize);
         }
 
-        if(isCardHeight){
-            isResizingHeight = true;
-            menuCard.classList.add('card-height-resizing');
+        document.addEventListener('mousemove', colMouseMove);
+        document.addEventListener('mouseup', stopColResize);
+    });
 
-            function rowMouseMove(ev){
-                newHeight = startY + (ev.pageY - startY);
-                menuCard.style.height = newHeight + 'px';
+    // ========== Height Resize ==========
+    heightResizer.addEventListener('mousedown', function (e) {
+        let startY = e.pageY;
+        let startHeight = card.offsetHeight;
 
-                save();
-            }
+        document.body.style.cursor = 'ns-resize';
+        card.classList.add('card-height-resizing');
+        animateBorder();
 
-            function stopRowResize(){
-                isResizingHeight = false;
-                menuCard.classList.remove('card-height-resizing');
+        function rowMouseMove(ev) {
+            const newHeight = startHeight + (ev.pageY - startY);
+            card.style.height = newHeight + 'px';
+            animateBorder();
+        }
 
-                document.removeEventListener('mousemove', rowMouseMove);
-                document.removeEventListener('mouseup', stopRowResize);
-            }
+        function stopRowResize() {
+            card.classList.remove('card-height-resizing');
+            document.body.style.cursor = '';
+            stopBorderAnimation();
+
+            const finalHeight = card.offsetHeight;
+            setRAM(DataTable, 'dropDownMenuCardHeight', finalHeight);
 
             document.removeEventListener('mousemove', rowMouseMove);
             document.removeEventListener('mouseup', stopRowResize);
         }
+
+        document.addEventListener('mousemove', rowMouseMove);
+        document.addEventListener('mouseup', stopRowResize);
     });
 
+    // ========== Load Saved Dimensions ==========
+    const savedWidth = getRAM(DataTable, 'dropDownMenuCardWidth');
+    const savedHeight = getRAM(DataTable, 'dropDownMenuCardHeight');
+
+    if (savedWidth) card.style.width = savedWidth + 'px';
+    if (savedHeight) card.style.height = savedHeight + 'px';
 }
+// const dropDownMenuCardHeaderWidth = getRAM(DataTable, 'dropDownMenuCardHeaderWidth') || {};
+// const dropDownMenuCardHeaderHeight = getRAM(DataTable, 'dropDownMenuCardHeaderHeight') || {};
+
+// const dropDownMenuCardBodyWidth = getRAM(DataTable, 'dropDownMenuCardBodyWidth') || {};
+// const dropDownMenuCardBodyHeight = getRAM(DataTable, 'dropDownMenuCardBodyHeight') || {};
+
+// const dropDownMenuCardFooterWidth = getRAM(DataTable, 'dropDownMenuCardFooterWidth') || {};
+// const dropDownMenuCardFooterHeight = getRAM(DataTable, 'dropDownMenuCardFooterHeight') || {};
+
+// const dropDownMenuLineWidth = getRAM(DataTable, 'dropDownMenuLineWidth') || {};
+// const dropDownMenuLineHeight = getRAM(DataTable, 'dropDownMenuLineHeight') || {};
+
+// const dropDownMenuButtonWidth = getRAM(DataTable, 'dropDownMenuButtonWidth') || {};
+// const dropDownMenuButtonHeight = getRAM(DataTable, 'dropDownMenuButtonHeight') || {};
+
+// const dropDownMenuInputWidth = getRAM(DataTable, 'dropDownMenuInputWidth') || {};
+// const dropDownMenuInputHeight = getRAM(DataTable, 'dropDownMenuInputHeight') || {};
