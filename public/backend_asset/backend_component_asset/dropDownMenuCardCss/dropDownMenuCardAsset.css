@@ -119,7 +119,7 @@ ul>li .line-row{
     color: black !important;
     transition: border-color 0.3s, background-color 0.3s, color 0.3s;
 }
-.dropdown-menu-component-submenu {
+.dropdown-search-sunmenu-component {
   position: absolute;
   top: 0;
   left: 100%;
@@ -137,35 +137,21 @@ ul>li .line-row{
   pointer-events: none;
 }
 
-.dropdown-menu-component-submenu-wrapper:hover .dropdown-menu-component-submenu {
+.dropdown-search-submenu-component-wrapper:hover .dropdown-search-sunmenu-component {
   opacity: 1;
   transform: translateX(10);
   pointer-events: auto;
   animation: slideLeft 0.3s ease-out;
 }
-.dropdown-menu-component-submenu-wrapper {
+.dropdown-search-submenu-component-wrapper {
   position: relative;
 }
-.dropdown-menu-component-submenu {
-  display: none;
-  left: 100%;
-  top: 0;
-  position: absolute;
-  background-image: var(--menu-card-bg);
-  box-shadow: var(--menu-shadow);
-  z-index: 1000;
-  border-radius: 5px;
-  padding: 0.6rem;
-  opacity: 0;
-  transform: translateX(10px);
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-}
-.dropdown-menu-component-submenu-wrapper:hover > .dropdown-menu-component-submenu {
+.dropdown-search-submenu-component-wrapper:hover > .dropdown-search-sunmenu-component {
   display: block;
   opacity: 1;
   transform: translateX(0);
 }
-.dropdown-menu-component-submenu li a {
+.dropdown-search-sunmenu-component li a {
   color: black;
   text-decoration: none;
   display: block;
@@ -175,7 +161,7 @@ ul>li .line-row{
   line-height: 1.55;
   width: 100%;
 }
-.dropdown-menu-component-submenu-wrapper:hover .dropdown-menu-component-submenu li a {
+.dropdown-search-submenu-component-wrapper:hover .dropdown-search-sunmenu-component li a {
   display: block;
   animation: slideLeft 0.3s ease-out;
 }
@@ -188,6 +174,96 @@ ul>li .line-row{
     transform: translateX(0);
     opacity: 1;
   }
+}
+.dropdown-filter-submenu-component{
+    position: absolute;
+    top: 0;
+    left: 100%;
+    min-width: 150px;
+    list-style: none;
+    background: var(--menu-card-bg);
+    padding: 0.6rem;
+    border-radius: 5px;
+    box-shadow: var(--menu-shadow);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: block;
+    pointer-events: none;
+}
+.dropdown-filter-submenu-component-wrapper:hover .dropdown-filter-submenu-component {
+  opacity: 1;
+  transform: translateX(10);
+  pointer-events: auto;
+  animation: slideLeft 0.3s ease-out;
+}
+.dropdown-filter-submenu-component-wrapper {
+  position: relative;
+}
+.dropdown-filter-submenu-component-wrapper:hover > .dropdown-filter-submenu-component {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+.dropdown-filter-submenu-component li a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  font-family: var(--component-font-family);
+  font-size: 11px;
+  padding: 1px 3px;
+  line-height: 1.55;
+  width: 100%;
+}
+.dropdown-filter-submenu-component-wrapper:hover .dropdown-filter-submenu-component li a {
+  display: block;
+  animation: slideLeft 0.3s ease-out;
+}
+.dropdown-download-submenu-component{
+    position: absolute;
+    top: 0;
+    left: 100%;
+    min-width: 150px;
+    list-style: none;
+    background: var(--menu-card-bg);
+    padding: 0.6rem;
+    border-radius: 5px;
+    box-shadow: var(--menu-shadow);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: block;
+    pointer-events: none;
+}
+.dropdown-download-submenu-component-wrapper:hover .dropdown-download-submenu-component {
+  opacity: 1;
+  transform: translateX(10);
+  pointer-events: auto;
+  animation: slideLeft 0.3s ease-out;
+}
+.dropdown-download-submenu-component-wrapper {
+  position: relative;
+}
+.dropdown-download-submenu-component-wrapper:hover > .dropdown-download-submenu-component {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+.dropdown-download-submenu-component li a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  font-family: var(--component-font-family);
+  font-size: 11px;
+  padding: 1px 3px;
+  line-height: 1.55;
+  width: 100%;
+}
+.dropdown-download-submenu-component-wrapper:hover .dropdown-download-submenu-component li a {
+  display: block;
+  animation: slideLeft 0.3s ease-out;
 }
 .card-width-resizer,
 .card-height-resizer {
