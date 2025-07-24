@@ -22,23 +22,24 @@
     import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/appRAM/backendRAMCapacity/appSettingData.js";
     //import { getAppRAM } from "/appRAM/backendRAMCapacity/appBranchData.js";
 
-    // table column width and row height resize with column drag and drop
-    resize('BranchSettingTable', 'col-resizer', 'row-resizer');
-    enableColumnDragAndDrop('BranchSettingTable', '.move-icon');
-    applySavedColumnOrder('BranchSettingTable');
-    // initMenuCardResize('tableMenuCard', 'card-width-resizer', 'card-height-resizer');
+    // Branch Table Setting
+    resize('BranchTableSetting', 'col-resizer', 'row-resizer');
+    enableColumnDragAndDrop('BranchTableSetting', '.move-icon');
+    applySavedColumnOrder('BranchTableSetting');
+
+    // Branch Table Menu Card Setting
     document.addEventListener('DOMContentLoaded', () => {
         initAllMenuCardResizers('.menu-card', '.submenu-card');
-        // Card Menu Resize
-        const tableCard = document.getElementById('tableMenuCard');
+
+        const tableCard = document.getElementById('BranchTableMenuCard');
         if (tableCard) {
-            initMenuCardResize(tableCard, 'tableMenuCard');
+            initMenuCardResize(tableCard, 'BranchTableMenuCard');
         }
     });
     
-    // Render global usage RAM as user key
+    // // Render global usage RAM as user key
     // renderGlobalRAMTable("ram-report-container");
-    // per table data show RAM
+    // //per table data show RAM
     // document.addEventListener("DOMContentLoaded", () => {
     //     RAMAnalyzer.initRAMAnalyzer();
     //     const perItemsSelect = document.getElementById("perItems");
@@ -74,7 +75,8 @@
     $(document).ready(function(){
         // Remove Row and Column width or height space;
         $(document).on('click', '#tableResize', function(){
-            removeDataTableStorage('BranchSettingTable')
+            //localStorage.removeItem('ApplicationRAM_BackendModule_M-BRN-2025-02-10-423_1_superadmingstmedicinecenter4215_gmail_com');
+            removeDataTableStorage('BranchTableSetting')
             location.reload();
         });
         // ACtive table row background
@@ -681,10 +683,10 @@
                     $("#total_per_branch_items").text(per_page);
                     $("#per_branch_items_num").text(per_item_num);
                     // Restore row heights
-                    restoreRowHeights('BranchSettingTable');
+                    restoreRowHeights('BranchTableSetting');
                     // column and row height width resize
-                    resize('BranchSettingTable', 'col-resizer', 'row-resizer');
-                    enableColumnDragAndDrop('BranchSettingTable', '.move-icon');
+                    resize('BranchTableSetting', 'col-resizer', 'row-resizer');
+                    enableColumnDragAndDrop('BranchTableSetting', '.move-icon');
 
                     // Tooltip (Bootstrap 5)
                     document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {

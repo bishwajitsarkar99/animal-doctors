@@ -9,25 +9,37 @@ function getUserRAMKey() {
     const moduleName = 'BackendModule';
     return `ApplicationRAM_${moduleName}_${branch_id}_${role}_${safeEmail}`;
 }
-// Array Store RAM Path
+// Get RAM value
 export function getRAM(DataTable, key = null) {
-    const fullData = JSON.parse(localStorage.getItem(getUserRAMKey()) || '{}');
-    const tableData = fullData[DataTable] || {};
+    const storageKey = getUserRAMKey();
+    const fullData = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    const appSetting = fullData.AppSetting || {};
+    const tableData = appSetting[DataTable] || {};
     return key ? tableData[key] : tableData;
 }
-// Array Store Table Data
+// Set RAM value
 export function setRAM(DataTable, key, value) {
     const storageKey = getUserRAMKey();
     const fullData = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    fullData[DataTable] = fullData[DataTable] || {};
-    fullData[DataTable][key] = value;
+    fullData.AppSetting = fullData.AppSetting || {};
+    fullData.AppSetting[DataTable] = fullData.AppSetting[DataTable] || {};
+    fullData.AppSetting[DataTable][key] = value;
     localStorage.setItem(storageKey, JSON.stringify(fullData));
 }
-// Remove Array Table Data
+// Remove specific table from RAM
 export function removeRAM(DataTable) {
     const storageKey = getUserRAMKey();
     const fullData = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    delete fullData[DataTable];
+    if (fullData.AppSetting && fullData.AppSetting[DataTable]) {
+        delete fullData.AppSetting[DataTable];
+    }
+    localStorage.setItem(storageKey, JSON.stringify(fullData));
+}
+// Remove AppSetting Data From RAM
+export function clearAllRAM() {
+    const storageKey = getUserRAMKey();
+    const fullData = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    delete fullData.AppSetting;
     localStorage.setItem(storageKey, JSON.stringify(fullData));
 }
 
@@ -380,7 +392,7 @@ function initRAMAnalyzer() {
         analyzeAllRAMKeys();
     }
 }
-
+// =============================== Analyze LocalStorage RAM ===============================
 function analyzeAllRAMKeys() {
     const keys = Object.keys(localStorage);
     const ramKeys = keys.filter(key => key.startsWith("ApplicationRAM_"));
@@ -398,10 +410,22 @@ function analyzeAllRAMKeys() {
 
         if (typeof parsed !== "object" || parsed === null) return;
 
-        for (const table in parsed) {
-            const sizeBytes = new Blob([JSON.stringify(parsed[table])]).size;
+        const appSetting = parsed.AppSetting || {};
+
+        // Scan nested keys inside AppSetting
+        for (const table in appSetting) {
+            const sizeBytes = new Blob([JSON.stringify(appSetting[table])]).size;
             const sizeKB = (sizeBytes / 1024).toFixed(2);
             result.push({ ramKey, table, size: parseFloat(sizeKB) });
+        }
+
+        // Fallback: also check top-level keys not under AppSetting
+        for (const topLevelKey in parsed) {
+            if (topLevelKey !== "AppSetting" && typeof parsed[topLevelKey] === "object") {
+                const sizeBytes = new Blob([JSON.stringify(parsed[topLevelKey])]).size;
+                const sizeKB = (sizeBytes / 1024).toFixed(2);
+                result.push({ ramKey, table: topLevelKey, size: parseFloat(sizeKB) });
+            }
         }
     });
 

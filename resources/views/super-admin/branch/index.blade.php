@@ -69,9 +69,8 @@
           <div class="col-sm-2">
             <span>
               <span class="table-icon-skeleton">
-                
                 <!-- Table-Menu-Card -->
-                <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component" menuChildClass="dropdown-content dropdown-menu-component menu-card" wrapperId="tableMenuCard" menuId="dropbtn">
+                <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component" menuChildClass="dropdown-content dropdown-menu-component menu-card" wrapperId="BranchTableMenuCard" menuId="dropbtn">
                   <div class="menu-card-header">
                     <x-Tables.Icon.TableIcon iconWidth="20" iconHeight="20" fillColor="#413571a6" svgId="tableIcon" />
                     <span class="ms-2">Branch Table</span>
@@ -79,47 +78,146 @@
                   <div class="row">
                     <div class="col-12">
                       <ul class="menu-btn-group">
-                        <li id="lineRow" class="line-row dropdown-search-submenu-component-wrapper">
+                        <li class="line-row dropdown-search-submenu-component-wrapper">
                           <a type="button" class="menu-btn" id="searchMenu">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="white" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
                               <circle cx="11" cy="11" r="8"/>
                               <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                             </svg>
-                            Search ▸
+                            <span class="ms-2">Search ▸</span>
                           </a>
                           <ul class="dropdown-search-sunmenu-component submenu-card">
-                            <li id="lineRow" class="line-row"><a type="button" class="menu-btn">Search by Name</a></li>
-                            <li id="lineRow" class="line-row"><a type="button" class="menu-btn">Search by Date</a></li>
-                            <li id="lineRow" class="line-row"><a type="button" class="menu-btn">Search by ID</a></li>
+                            <li class="child-line-row">
+                              <a type="button" class="menu-btn">
+                                <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
+                                  <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
+                                  <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                Search by Name
+                              </a>
+                            </li>
+                            <li class="child-line-row">
+                              <a type="button" class="menu-btn">
+                                <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
+                                  <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
+                                  <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                Search by Date
+                              </a>
+                            </li>
+                            <li class="child-line-row">
+                              <a type="button" class="menu-btn">
+                                <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
+                                  <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
+                                  <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                Search by ID
+                              </a>
+                            </li>
+                            <div class="card-width-resizer"></div>
+                            <div class="card-height-resizer"></div>
+                            <svg class="connector" width="100%" height="100%">
+                              <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
+                            </svg>
                           </ul>
                         </li>
-                        <li id="lineRow" class="line-row dropdown-filter-submenu-component-wrapper">
+                        <li class="line-row dropdown-filter-submenu-component-wrapper">
                           <a type="button" class="menu-btn" id="filterMenu">
                             <svg width="15" height="15" fill="dodgerblue" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 490 511.751">
                               <path fill-rule="nonzero" d="M40.867 0h408.265c11.248 0 21.467 4.596 28.87 11.999C485.404 19.401 490 29.621 490 40.869v52.689c0 .464-.034.92-.099 1.367a9.488 9.488 0 01-2.204 7.552L340.325 273.686l-.02-.018-.389.427c-4.812 4.951-8.835 10.857-11.587 17.468a51.297 51.297 0 00-3.352 11.907 10.97 10.97 0 01-.083.557 51.381 51.381 0 00-.518 7.282v43.728a9.483 9.483 0 01.668 3.508 9.483 9.483 0 01-.668 3.508v49.197a9.479 9.479 0 01.668 3.508 9.483 9.483 0 01-.668 3.508v63.998h-.038c-.024 7.863-1.851 14.526-4.876 19.403-1.893 3.053-4.257 5.484-6.977 7.192-3.031 1.902-6.418 2.904-10.039 2.891-3.637-.013-7.354-1.038-10.981-3.196a9.598 9.598 0 01-.939-.589L170.12 422.473a9.504 9.504 0 01-4.612-8.152v-102.71c-.762-6.35-2.854-12.586-6.005-18.963-3.464-7.011-8.192-14.184-13.84-21.825L2.303 102.403a9.434 9.434 0 01-2.179-7.312A9.571 9.571 0 010 93.558V40.869c0-11.248 4.595-21.468 11.997-28.87C19.4 4.596 29.62 0 40.867 0zm264.494 424.265h-28.953c-5.25 0-9.507-4.257-9.507-9.507 0-5.251 4.257-9.508 9.507-9.508h28.953v-37.197h-46.948c-5.25 0-9.507-4.258-9.507-9.508 0-5.25 4.257-9.508 9.507-9.508h46.948V311.84h-46.948c-5.25 0-9.507-4.257-9.507-9.508 0-5.25 4.257-9.507 9.507-9.507h49.444a71.603 71.603 0 012.943-8.541c3.615-8.681 8.858-16.45 15.123-22.995l-.008-.007 136.188-158.216H27.71l132.752 155.958.393.494.015-.011c6.307 8.53 11.634 16.635 15.642 24.747 4.217 8.534 6.988 17.077 7.936 26.089.033.325.049.647.05.966h.025v98.136l116.785 82.921c.486.279.847.423 1.085.443.298-.192.622-.563.951-1.094 1.272-2.05 2.042-5.269 2.054-9.451h-.037v-57.999zM449.132 19.016H40.867c-6 0-11.462 2.461-15.427 6.426-3.963 3.962-6.425 9.426-6.425 15.427v43.182h451.969V40.869c0-6.001-2.462-11.465-6.424-15.427-3.966-3.965-9.427-6.426-15.428-6.426z"/>
                             </svg>
-                            Filter ▸
+                            <span class="ms-2">Filter ▸</span>
                           </a>
-                          <ul class="dropdown-filter-submenu-component">
-                            <li id="lineRow" class="line-row"><a type="button" class="menu-btn">Search by Name</a></li>
-                            <li id="lineRow" class="line-row"><a type="button" class="menu-btn">Search by Date</a></li>
-                            <li id="lineRow" class="line-row"><a type="button" class="menu-btn">Search by ID</a></li>
-                          </ul>
-                        </li>
-                        <li id="lineRow" class="line-row dropdown-download-submenu-component-wrapper">
-                          <a type="button" class="menu-btn" id="filterMenu">
-                            <svg width="15" height="15" fill="dodgerblue" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 490 511.751">
-                              <path fill-rule="nonzero" d="M40.867 0h408.265c11.248 0 21.467 4.596 28.87 11.999C485.404 19.401 490 29.621 490 40.869v52.689c0 .464-.034.92-.099 1.367a9.488 9.488 0 01-2.204 7.552L340.325 273.686l-.02-.018-.389.427c-4.812 4.951-8.835 10.857-11.587 17.468a51.297 51.297 0 00-3.352 11.907 10.97 10.97 0 01-.083.557 51.381 51.381 0 00-.518 7.282v43.728a9.483 9.483 0 01.668 3.508 9.483 9.483 0 01-.668 3.508v49.197a9.479 9.479 0 01.668 3.508 9.483 9.483 0 01-.668 3.508v63.998h-.038c-.024 7.863-1.851 14.526-4.876 19.403-1.893 3.053-4.257 5.484-6.977 7.192-3.031 1.902-6.418 2.904-10.039 2.891-3.637-.013-7.354-1.038-10.981-3.196a9.598 9.598 0 01-.939-.589L170.12 422.473a9.504 9.504 0 01-4.612-8.152v-102.71c-.762-6.35-2.854-12.586-6.005-18.963-3.464-7.011-8.192-14.184-13.84-21.825L2.303 102.403a9.434 9.434 0 01-2.179-7.312A9.571 9.571 0 010 93.558V40.869c0-11.248 4.595-21.468 11.997-28.87C19.4 4.596 29.62 0 40.867 0zm264.494 424.265h-28.953c-5.25 0-9.507-4.257-9.507-9.507 0-5.251 4.257-9.508 9.507-9.508h28.953v-37.197h-46.948c-5.25 0-9.507-4.258-9.507-9.508 0-5.25 4.257-9.508 9.507-9.508h46.948V311.84h-46.948c-5.25 0-9.507-4.257-9.507-9.508 0-5.25 4.257-9.507 9.507-9.507h49.444a71.603 71.603 0 012.943-8.541c3.615-8.681 8.858-16.45 15.123-22.995l-.008-.007 136.188-158.216H27.71l132.752 155.958.393.494.015-.011c6.307 8.53 11.634 16.635 15.642 24.747 4.217 8.534 6.988 17.077 7.936 26.089.033.325.049.647.05.966h.025v98.136l116.785 82.921c.486.279.847.423 1.085.443.298-.192.622-.563.951-1.094 1.272-2.05 2.042-5.269 2.054-9.451h-.037v-57.999zM449.132 19.016H40.867c-6 0-11.462 2.461-15.427 6.426-3.963 3.962-6.425 9.426-6.425 15.427v43.182h451.969V40.869c0-6.001-2.462-11.465-6.424-15.427-3.966-3.965-9.427-6.426-15.428-6.426z"/>
+                          <ul class="dropdown-filter-submenu-component submenu-card">
+                            <li class="child-line-row">
+                              <a type="button" class="menu-btn">
+                                <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
+                                  <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
+                                  <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                Branch ID
+                              </a>
+                            </li>
+                            <li class="child-line-row">
+                              <a type="button" class="menu-btn">
+                                <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
+                                  <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
+                                  <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                Branch Type
+                              </a>
+                            </li>
+                            <li class="child-line-row">
+                              <a type="button" class="menu-btn">
+                                <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
+                                  <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
+                                  <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                Branch Name
+                              </a>
+                            </li>
+                            <div class="card-width-resizer"></div>
+                            <div class="card-height-resizer"></div>
+                            <svg class="connector" width="100%" height="100%">
+                              <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
                             </svg>
-                            Download ▸
-                          </a>
-                          <ul class="dropdown-download-submenu-component">
-                            <li id="lineRow" class="line-row"><a type="button" class="menu-btn">Search by Name</a></li>
-                            <li id="lineRow" class="line-row"><a type="button" class="menu-btn">Search by Date</a></li>
-                            <li id="lineRow" class="line-row"><a type="button" class="menu-btn">Search by ID</a></li>
                           </ul>
                         </li>
-                        <li id="lineRow" class="line-row">
+                        <li class="line-row dropdown-download-submenu-component-wrapper">
+                          <a type="button" class="menu-btn" id="filterMenu">
+                            <svg width="18" height="15" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 433.6">
+                              <path fill="dodgerblue" fill-rule="nonzero" d="M359.785 124.707a172.966 172.966 0 00-9.415 5.044c-9.373 5.498-18.625 12.21-28.081 19.915l-20.169-23.081a166.847 166.847 0 0122.501-17.54 154.74 154.74 0 0119.918-11.042 148.086 148.086 0 018.33-3.876c-13.29-23.542-32.416-40.415-54.082-50.832-43.064-20.618-96.686-16.131-134.618 13.331-21.792 16.873-38.336 42.127-44.71 75.583l-2.002 10.456-10.415 1.835c-10.209 1.791-19.331 4.252-27.332 7.376-7.75 2.999-14.666 6.708-20.707 11.083-4.835 3.5-9.002 7.418-12.543 11.668-10.958 13.123-16.043 29.579-15.918 46.248.124 16.914 5.628 33.996 15.792 48.037 3.792 5.21 8.169 10.004 13.166 14.171a66.257 66.257 0 0017.211 10.333c6.374 2.623 13.415 4.496 21.207 5.581h11.335a148.445 148.445 0 00.763 30.668H97.417l-1.918-.167c-11.121-1.419-21.207-4.042-30.372-7.834-9.462-3.917-17.832-8.961-25.208-15.126-7-5.831-13.128-12.46-18.333-19.668C7.671 267.707.171 244.289.003 220.959c-.166-23.586 7.167-47.041 23.001-66.041 5.123-6.166 11.163-11.835 18.078-16.833 8.043-5.835 17.254-10.749 27.67-14.791 7.166-2.795 14.834-5.127 22.913-6.999 9.169-36.417 28.712-64.461 53.837-83.917C192.57-4.098 258.606-9.919 312.039 15.751c29.204 14.045 54.703 37.418 71.248 70.293 6.666-1.044 13.332-1.586 19.955-1.503 69.259.514 109.454 59.525 108.748 124.041-.292 26.293-7.374 52.46-21.874 71.706-9.457 12.544-21.583 22.792-36.124 30.918-13.999 7.834-30.331 13.79-48.664 18.042l-3.341.407a148.641 148.641 0 001.219-19.008c0-4.132-.179-8.221-.512-12.267 13.688-3.476 25.846-8.068 36.256-13.883 10.958-6.124 19.919-13.583 26.626-22.542 10.415-13.874 15.542-33.496 15.751-53.624.561-47.211-26.496-92.875-78.292-93.204-14.292-.126-29.167 3.332-43.25 9.58z"/>
+                              <path fill="#3B95F6" d="M255.999 187.698c67.902 0 122.952 55.049 122.952 122.95 0 67.902-55.05 122.952-122.952 122.952-67.901 0-122.95-55.05-122.95-122.952 0-67.901 55.049-122.95 122.95-122.95z"/>
+                              <path fill="#fff" fill-rule="nonzero" d="M206.424 299.319c-3.8.162-6.501 1.423-8.057 3.793-4.23 6.339 1.542 12.603 5.548 17.017 11.364 12.471 39.216 42.448 44.824 49.045 4.25 4.7 10.302 4.7 14.552 0 5.793-6.768 35.047-38.109 45.85-50.241 3.748-4.22 8.383-9.977 4.479-15.821-1.594-2.37-4.266-3.631-8.065-3.793h-23.069v-39.633c0-6.09-4.996-11.087-11.088-11.087H240.59c-6.095 0-11.088 4.99-11.088 11.087v39.633h-23.078z"/>
+                            </svg>
+                            <span class="ms-1">Download ▸</span>
+                          </a>
+                          <ul class="dropdown-download-submenu-component submenu-card">
+                            <li class="child-line-row">
+                              <a type="button" class="menu-btn">
+                                <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
+                                  <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
+                                  <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                PDF File
+                              </a>
+                            </li>
+                            <li class="child-line-row">
+                              <a type="button" class="menu-btn">
+                                <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
+                                  <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
+                                  <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                Excel File
+                              </a>
+                            </li>
+                            <li class="child-line-row">
+                              <a type="button" class="menu-btn">
+                                <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
+                                  <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
+                                  <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                SVG File
+                              </a>
+                            </li>
+                            <div class="card-width-resizer"></div>
+                            <div class="card-height-resizer"></div>
+                            <svg class="connector" width="100%" height="100%">
+                              <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
+                            </svg>
+                          </ul>
+                        </li>
+                        <li class="line-row">
+                          <a type="button" class="menu-btn">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer">
+                              <polyline points="6 9 6 2 18 2 18 9"/>
+                              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                              <rect x="6" y="14" width="12" height="8"/>
+                            </svg>
+                            <span class="ms-2">Print</span>
+                          </a>
+                        </li>
+                        <li class="line-row">
                           <a type="button" class="menu-btn" id="tableResize">
                             <svg width="15" height="15" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 122.88">
                               <defs><style>.cls-1{fill:#ef4136;}.cls-1,.cls-2{fill-rule:evenodd;}.cls-2{fill:#ff7c73;}.cls-3{fill:#fff;}</style></defs>
@@ -128,7 +226,7 @@
                               <path class="cls-2" d="M61.44,2.25A59.15,59.15,0,0,1,120.59,61.4c0,.77,0,1.54,0,2.3a59.14,59.14,0,0,0-118.2,0c0-.76,0-1.53,0-2.3A59.15,59.15,0,0,1,61.44,2.25Z"/>
                               <path class="cls-3" d="M81,44.75a7.08,7.08,0,0,1,10.71-9.27,40,40,0,1,1-60.87.39A7.07,7.07,0,0,1,41.67,45,25.85,25.85,0,1,0,81,44.75ZM68.54,47.92a7.1,7.1,0,1,1-14.2,0V26.74a7.1,7.1,0,1,1,14.2,0V47.92Z"/>
                             </svg>
-                            Reset Table Resize
+                            <span class="ms-2">Reset Table Resize</span>
                           </a>
                         </li>
                       </ul>
@@ -147,7 +245,7 @@
       <x-Tables.ViewDataTables.DataTableWrappers.DataTableWrapper wrapperClass="table-wrapper component-focus">
         <x-Tables.ViewDataTables.DataTableResponsives.DataTableResponsive tableResponsiveClass="table-responsive">
           <!-- ========== Branch-List Table =============== table-striped-->
-          <x-Tables.ViewDataTables.ViewDataTable tableClass="table" resizeTableId="BranchSettingTable">
+          <x-Tables.ViewDataTables.ViewDataTable tableClass="table" resizeTableId="BranchTableSetting">
             <x-Tables.ViewDataTables.DataTableHeads.DataTableHead className="table-head" >
               <x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow rowClass="table-head-row skeleton">
                 @foreach($headThRows as $data)
@@ -303,8 +401,8 @@
     <div class="col-md-2">
       <select class="form-control" id="tablePrefixFilter">
         <option value="">All Tables</option>
-        <option value="BranchSettingTable">Branch Setting</option>
-        <option value="product">product</option>
+        <option value="BranchTableSetting">Branch Table Setting</option>
+        <option value="BranchTableMenuCard">Branch Table Menu Card</option>
       </select>
     </div>
     <div class="col-md-2">

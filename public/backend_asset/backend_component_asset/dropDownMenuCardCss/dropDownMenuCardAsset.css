@@ -90,6 +90,10 @@ ul>li .line-row{
     margin-top: 5px;
     margin-bottom: 5px;
 }
+ul>li .child-line-row{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
 .dropdown-content.dropdown-menu-component a {
     color: black;
     text-decoration: none;
@@ -104,11 +108,12 @@ ul>li .line-row{
     cursor: alias;
 }
 .menu-btn{
-    background-color: white;
+    background-color: rgba(0,123,255,0.2);
     color: #413571;
     text-decoration: none;
     line-height: 1.2;
     padding-top: 1px;
+    margin-bottom: 1px;
     border: 1px dashed white; 
     white-space: nowrap;
 }
@@ -123,7 +128,6 @@ ul>li .line-row{
   position: absolute;
   top: 0;
   left: 100%;
-  min-width: 150px;
   list-style: none;
   background: var(--menu-card-bg);
   padding: 0.6rem;
@@ -179,7 +183,6 @@ ul>li .line-row{
     position: absolute;
     top: 0;
     left: 100%;
-    min-width: 150px;
     list-style: none;
     background: var(--menu-card-bg);
     padding: 0.6rem;
@@ -224,7 +227,6 @@ ul>li .line-row{
     position: absolute;
     top: 0;
     left: 100%;
-    min-width: 150px;
     list-style: none;
     background: var(--menu-card-bg);
     padding: 0.6rem;
