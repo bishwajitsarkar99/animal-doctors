@@ -84,11 +84,11 @@
                               <circle cx="11" cy="11" r="8"/>
                               <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                             </svg>
-                            <span class="ms-2">Search ▸</span>
+                            <span class="ms-2">Search</span>
                           </a>
                           <ul class="dropdown-search-sunmenu-component submenu-card">
                             <li class="child-line-row">
-                              <a type="button" class="menu-btn">
+                              <a type="button" class="sub-menu-btn">
                                 <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
                                   <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
                                   <line x1="8" y1="12" x2="16" y2="12"/>
@@ -97,7 +97,7 @@
                               </a>
                             </li>
                             <li class="child-line-row">
-                              <a type="button" class="menu-btn">
+                              <a type="button" class="sub-menu-btn">
                                 <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
                                   <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
                                   <line x1="8" y1="12" x2="16" y2="12"/>
@@ -106,7 +106,7 @@
                               </a>
                             </li>
                             <li class="child-line-row">
-                              <a type="button" class="menu-btn">
+                              <a type="button" class="sub-menu-btn">
                                 <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
                                   <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
                                   <line x1="8" y1="12" x2="16" y2="12"/>
@@ -119,6 +119,7 @@
                             <svg class="connector" width="100%" height="100%">
                               <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
                             </svg>
+                            <span class="sub-menu-card-arrow"></span>
                           </ul>
                         </li>
                         <li class="line-row dropdown-filter-submenu-component-wrapper">
@@ -126,11 +127,11 @@
                             <svg width="15" height="15" fill="dodgerblue" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 490 511.751">
                               <path fill-rule="nonzero" d="M40.867 0h408.265c11.248 0 21.467 4.596 28.87 11.999C485.404 19.401 490 29.621 490 40.869v52.689c0 .464-.034.92-.099 1.367a9.488 9.488 0 01-2.204 7.552L340.325 273.686l-.02-.018-.389.427c-4.812 4.951-8.835 10.857-11.587 17.468a51.297 51.297 0 00-3.352 11.907 10.97 10.97 0 01-.083.557 51.381 51.381 0 00-.518 7.282v43.728a9.483 9.483 0 01.668 3.508 9.483 9.483 0 01-.668 3.508v49.197a9.479 9.479 0 01.668 3.508 9.483 9.483 0 01-.668 3.508v63.998h-.038c-.024 7.863-1.851 14.526-4.876 19.403-1.893 3.053-4.257 5.484-6.977 7.192-3.031 1.902-6.418 2.904-10.039 2.891-3.637-.013-7.354-1.038-10.981-3.196a9.598 9.598 0 01-.939-.589L170.12 422.473a9.504 9.504 0 01-4.612-8.152v-102.71c-.762-6.35-2.854-12.586-6.005-18.963-3.464-7.011-8.192-14.184-13.84-21.825L2.303 102.403a9.434 9.434 0 01-2.179-7.312A9.571 9.571 0 010 93.558V40.869c0-11.248 4.595-21.468 11.997-28.87C19.4 4.596 29.62 0 40.867 0zm264.494 424.265h-28.953c-5.25 0-9.507-4.257-9.507-9.507 0-5.251 4.257-9.508 9.507-9.508h28.953v-37.197h-46.948c-5.25 0-9.507-4.258-9.507-9.508 0-5.25 4.257-9.508 9.507-9.508h46.948V311.84h-46.948c-5.25 0-9.507-4.257-9.507-9.508 0-5.25 4.257-9.507 9.507-9.507h49.444a71.603 71.603 0 012.943-8.541c3.615-8.681 8.858-16.45 15.123-22.995l-.008-.007 136.188-158.216H27.71l132.752 155.958.393.494.015-.011c6.307 8.53 11.634 16.635 15.642 24.747 4.217 8.534 6.988 17.077 7.936 26.089.033.325.049.647.05.966h.025v98.136l116.785 82.921c.486.279.847.423 1.085.443.298-.192.622-.563.951-1.094 1.272-2.05 2.042-5.269 2.054-9.451h-.037v-57.999zM449.132 19.016H40.867c-6 0-11.462 2.461-15.427 6.426-3.963 3.962-6.425 9.426-6.425 15.427v43.182h451.969V40.869c0-6.001-2.462-11.465-6.424-15.427-3.966-3.965-9.427-6.426-15.428-6.426z"/>
                             </svg>
-                            <span class="ms-2">Filter ▸</span>
+                            <span class="ms-2">Filter</span>
                           </a>
                           <ul class="dropdown-filter-submenu-component submenu-card">
                             <li class="child-line-row">
-                              <a type="button" class="menu-btn">
+                              <a type="button" class="sub-menu-btn">
                                 <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
                                   <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
                                   <line x1="8" y1="12" x2="16" y2="12"/>
@@ -139,7 +140,7 @@
                               </a>
                             </li>
                             <li class="child-line-row">
-                              <a type="button" class="menu-btn">
+                              <a type="button" class="sub-menu-btn">
                                 <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
                                   <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
                                   <line x1="8" y1="12" x2="16" y2="12"/>
@@ -148,7 +149,7 @@
                               </a>
                             </li>
                             <li class="child-line-row">
-                              <a type="button" class="menu-btn">
+                              <a type="button" class="sub-menu-btn">
                                 <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
                                   <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
                                   <line x1="8" y1="12" x2="16" y2="12"/>
@@ -161,6 +162,7 @@
                             <svg class="connector" width="100%" height="100%">
                               <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
                             </svg>
+                            <span class="sub-menu-card-arrow"></span>
                           </ul>
                         </li>
                         <li class="line-row dropdown-download-submenu-component-wrapper">
@@ -170,11 +172,11 @@
                               <path fill="#3B95F6" d="M255.999 187.698c67.902 0 122.952 55.049 122.952 122.95 0 67.902-55.05 122.952-122.952 122.952-67.901 0-122.95-55.05-122.95-122.952 0-67.901 55.049-122.95 122.95-122.95z"/>
                               <path fill="#fff" fill-rule="nonzero" d="M206.424 299.319c-3.8.162-6.501 1.423-8.057 3.793-4.23 6.339 1.542 12.603 5.548 17.017 11.364 12.471 39.216 42.448 44.824 49.045 4.25 4.7 10.302 4.7 14.552 0 5.793-6.768 35.047-38.109 45.85-50.241 3.748-4.22 8.383-9.977 4.479-15.821-1.594-2.37-4.266-3.631-8.065-3.793h-23.069v-39.633c0-6.09-4.996-11.087-11.088-11.087H240.59c-6.095 0-11.088 4.99-11.088 11.087v39.633h-23.078z"/>
                             </svg>
-                            <span class="ms-1">Download ▸</span>
+                            <span class="ms-1">Download</span>
                           </a>
                           <ul class="dropdown-download-submenu-component submenu-card">
                             <li class="child-line-row">
-                              <a type="button" class="menu-btn">
+                              <a type="button" class="sub-menu-btn">
                                 <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
                                   <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
                                   <line x1="8" y1="12" x2="16" y2="12"/>
@@ -183,7 +185,7 @@
                               </a>
                             </li>
                             <li class="child-line-row">
-                              <a type="button" class="menu-btn">
+                              <a type="button" class="sub-menu-btn">
                                 <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
                                   <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
                                   <line x1="8" y1="12" x2="16" y2="12"/>
@@ -192,7 +194,7 @@
                               </a>
                             </li>
                             <li class="child-line-row">
-                              <a type="button" class="menu-btn">
+                              <a type="button" class="sub-menu-btn">
                                 <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
                                   <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
                                   <line x1="8" y1="12" x2="16" y2="12"/>
@@ -205,6 +207,7 @@
                             <svg class="connector" width="100%" height="100%">
                               <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
                             </svg>
+                            <span class="sub-menu-card-arrow"></span>
                           </ul>
                         </li>
                         <li class="line-row">
@@ -232,6 +235,7 @@
                       </ul>
                     </div>
                   </div>
+                  <span class="menu-card-arrow"></span>
                 </x-MenuCard.MenuCard>
               </span>
               <span class="table-icon-skeleton"><strong>Menu</strong></span>
