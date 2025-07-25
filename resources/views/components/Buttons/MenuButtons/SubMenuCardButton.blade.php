@@ -1,0 +1,1 @@
+<a type="button" class="sub-menu-btn" id="{{ $subMenuBtnId }}">{{ $slot }}</a>

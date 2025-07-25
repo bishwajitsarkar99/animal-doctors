@@ -1,5 +1,10 @@
 <div class="{{ $menuParentClass }}">
-    <a id="{{ $menuId }}">☰</a>
+    <a id="{{ $menuId }}">
+        <span class="table-icon-skeleton">
+            <strong>{{ $menuName }}</strong>
+        </span>
+        ☰
+    </a>
     <div class="{{ $menuChildClass}}" id="{{ $wrapperId }}">
         <div class="card-width-resizer"></div>
         <div class="card-height-resizer"></div>

@@ -1,0 +1,1 @@
+<a type="button" class="{{ $className }}" id="{{ $menuBtnId }}">{{ $slot }}</a>
