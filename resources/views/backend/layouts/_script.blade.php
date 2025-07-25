@@ -4,6 +4,15 @@
 <script type="module" src="/module/module-min-js/application-helper-function-min.js"></script>
 <script type="module">
     import { browserInpect, pageLoader, toolTip } from "/module/module-min-js/application-helper-function-min.js";
+    import { initAllMenuCardResizers, initMenuCardResize } from "/module/backend-module/component-module/menu-item-card-component.js";
+    document.addEventListener('DOMContentLoaded', () => {
+        initAllMenuCardResizers('.menu-card', '.submenu-card');
+
+        const tableCard = document.getElementById('NavBarStockMenuCard');
+        if (tableCard) {
+            initMenuCardResize(tableCard, 'NavBarStockMenuCard');
+        }
+    });
     pageLoader();
     toolTip();
     //browserInpect();

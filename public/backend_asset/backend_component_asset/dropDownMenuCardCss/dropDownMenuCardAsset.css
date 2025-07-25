@@ -286,30 +286,37 @@ ul>li .child-line-row{
 }
 .card-width-resizer,
 .card-height-resizer {
-    position: absolute;
-    background: transparent;
-    z-index: 10;
+  position: absolute;
+  background: transparent;
+  z-index: 10;
 }
-.card-width-resizer {
-    top: 0;
-    right: 0;
-    width: 5px;
-    height: 100%;
-    cursor: ew-resize;
+.card-width-resizer.left-resizer {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: ew-resize;
 }
-.card-height-resizer {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    cursor: ns-resize;
+.card-width-resizer.right-resizer {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: ew-resize;
 }
-.card-height-resizer {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    cursor: ns-resize;
+.card-height-resizer.top-resizer {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  cursor: ns-resize;
+}
+.card-height-resizer.bottom-resizer {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  cursor: ns-resize;
 }
 .menu-card {
     position: relative;
@@ -402,6 +409,31 @@ ul>li .child-line-row{
   border-bottom: var(--size) solid transparent;
   border-right: var(--size) solid #fff;
 }
+.connectorSVG {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+}
+.connectorPath {
+    fill: none;
+    width: 100%;
+    height: 100%;
+    /*
+      stroke: dodgerblue;
+      stroke-width: 2;
+      stroke-dasharray: 5, 5;
+      animation: dashmove 1s linear infinite;
+    */
+}
+@keyframes dashmove {
+to {
+    stroke-dashoffset: -10;
+}
+} 
 /* ================ Tab Button Component Css ======================== */
 .button-container {
     position: relative;

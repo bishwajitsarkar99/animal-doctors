@@ -47,11 +47,15 @@ export function clearAllRAM() {
 export function initMenuCardResize(card, cardId) {
     if (!card || !cardId) return;
 
-    const widthResizer = card.querySelector('.card-width-resizer');
-    const heightResizer = card.querySelector('.card-height-resizer');
-    const svgRect = card.querySelector('.connectorPath');
+    const resizers = {
+        left: card.querySelector('.card-width-resizer.left-resizer'),
+        right: card.querySelector('.card-width-resizer.right-resizer'),
+        top: card.querySelector('.card-height-resizer.top-resizer'),
+        bottom: card.querySelector('.card-height-resizer.bottom-resizer')
+    };
 
-    if (!widthResizer || !heightResizer) return;
+    const svgRect = card.querySelector('.connectorPath');
+    card.style.position = 'absolute'; // Required for left/top manipulation
 
     // Animate Border
     function animateBorder() {
@@ -79,69 +83,89 @@ export function initMenuCardResize(card, cardId) {
         svgRect.style.display = 'none';
     }
 
-    // Width Resize
-    widthResizer.addEventListener('mousedown', function (e) {
-        e.preventDefault();
-        const startX = e.pageX;
-        const startWidth = card.offsetWidth;
+    // ========== Directional Resizing ==========
+    function setupResizer(resizer, direction) {
+        if (!resizer) return;
 
-        animateBorder();
-        document.body.style.cursor = 'ew-resize';
+        resizer.addEventListener('mousedown', function (e) {
+            e.preventDefault();
 
-        function onMouseMove(ev) {
-            const newWidth = startWidth + (ev.pageX - startX);
-            card.style.width = `${newWidth}px`;
+            const startX = e.pageX;
+            const startY = e.pageY;
+            const startWidth = card.offsetWidth;
+            const startHeight = card.offsetHeight;
+            const startLeft = card.offsetLeft;
+            const startTop = card.offsetTop;
+
             animateBorder();
-        }
 
-        function onMouseUp() {
-            document.removeEventListener('mousemove', onMouseMove);
-            document.removeEventListener('mouseup', onMouseUp);
-            document.body.style.cursor = '';
-            stopBorderAnimation();
+            switch (direction) {
+                case 'left':
+                    document.body.style.cursor = 'ew-resize';
+                    break;
+                case 'right':
+                    document.body.style.cursor = 'ew-resize';
+                    break;
+                case 'top':
+                    document.body.style.cursor = 'ns-resize';
+                    break;
+                case 'bottom':
+                    document.body.style.cursor = 'ns-resize';
+                    break;
+            }
 
-            const finalWidth = card.offsetWidth;
-            setRAM(cardId, 'Width', finalWidth);
-        }
+            function onMouseMove(ev) {
+                let dx = ev.pageX - startX;
+                let dy = ev.pageY - startY;
 
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseup', onMouseUp);
-    });
+                if (direction === 'right') {
+                    card.style.width = `${startWidth + dx}px`;
+                } else if (direction === 'left') {
+                    card.style.width = `${startWidth - dx}px`;
+                    card.style.left = `${startLeft + dx}px`;
+                } else if (direction === 'bottom') {
+                    card.style.height = `${startHeight + dy}px`;
+                } else if (direction === 'top') {
+                    card.style.height = `${startHeight - dy}px`;
+                    card.style.top = `${startTop + dy}px`;
+                }
 
-    // Height Resize
-    heightResizer.addEventListener('mousedown', function (e) {
-        e.preventDefault();
-        const startY = e.pageY;
-        const startHeight = card.offsetHeight;
+                animateBorder();
+            }
 
-        animateBorder();
-        document.body.style.cursor = 'ns-resize';
+            function onMouseUp() {
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+                document.body.style.cursor = '';
+                stopBorderAnimation();
 
-        function onMouseMove(ev) {
-            const newHeight = startHeight + (ev.pageY - startY);
-            card.style.height = `${newHeight}px`;
-            animateBorder();
-        }
+                setRAM(cardId, 'Width', card.offsetWidth);
+                setRAM(cardId, 'Height', card.offsetHeight);
+                setRAM(cardId, 'Left', card.offsetLeft);
+                setRAM(cardId, 'Top', card.offsetTop);
+            }
 
-        function onMouseUp() {
-            document.removeEventListener('mousemove', onMouseMove);
-            document.removeEventListener('mouseup', onMouseUp);
-            document.body.style.cursor = '';
-            stopBorderAnimation();
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+    }
 
-            const finalHeight = card.offsetHeight;
-            setRAM(cardId, 'Height', finalHeight);
-        }
+    // Apply to all sides
+    setupResizer(resizers.left, 'left');
+    setupResizer(resizers.right, 'right');
+    setupResizer(resizers.top, 'top');
+    setupResizer(resizers.bottom, 'bottom');
 
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseup', onMouseUp);
-    });
-
-    // Load Previous Values
+    // Restore Previous Size and Position
     const savedWidth = getRAM(cardId, 'Width');
     const savedHeight = getRAM(cardId, 'Height');
+    const savedLeft = getRAM(cardId, 'Left');
+    const savedTop = getRAM(cardId, 'Top');
+
     if (savedWidth) card.style.width = `${savedWidth}px`;
     if (savedHeight) card.style.height = `${savedHeight}px`;
+    if (savedLeft) card.style.left = `${savedLeft}px`;
+    if (savedTop) card.style.top = `${savedTop}px`;
 
     // Ensure border updates on resize
     if (svgRect) {
@@ -156,15 +180,15 @@ export function initMenuCardResize(card, cardId) {
 
 // ========================= Init All Menu Cards on Page ==============================
 export function initAllMenuCardResizers(...selectors) {
-  selectors.forEach(selector => {
-    document.querySelectorAll(selector).forEach((card, index) => {
-      let cardId = card.id || `${selector.replace('.', '')}-${index}`;
-      const parent = card.closest('.menu-card');
-      if (parent && card.classList.contains('submenu-card')) {
-        const parentId = parent.id || 'unknown';
-        cardId = `${parentId}-submenu-${index}`;
-      }
-      initMenuCardResize(card, cardId);
+    selectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach((card, index) => {
+            let cardId = card.id || `${selector.replace('.', '')}-${index}`;
+            const parent = card.closest('.menu-card');
+            if (parent && card.classList.contains('submenu-card')) {
+                const parentId = parent.id || 'unknown';
+                cardId = `${parentId}-submenu-${index}`;
+            }
+            initMenuCardResize(card, cardId);
+        });
     });
-  });
 }

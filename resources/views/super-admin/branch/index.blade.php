@@ -84,7 +84,7 @@
           <div class="col-sm-2">
             <span class="table-icon-skeleton">
               <!-- Table-Menu-Card -->
-              <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component" menuChildClass="dropdown-content dropdown-menu-component menu-card" wrapperId="BranchTableMenuCard" menuName="Menu" menuId="dropbtn">
+              <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component" menuChildClass="dropdown-content dropdown-menu-component menu-card" wrapperId="BranchTableMenuCard" menuName="Menu" menuId="dropbtn" showIdClassName="table-icon-skeleton" menuIcon="☰">
                 <div class="menu-card-header">
                   <x-Tables.Icon.TableIcon iconWidth="20" iconHeight="20" fillColor="#413571a6" svgId="tableIcon" />
                   <span class="ms-2">Branch Table</span>
@@ -615,7 +615,6 @@
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category-min.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/branch/branch.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/table/zebra-table/zebra-table.css">
-<link rel="stylesheet" href="{{asset('backend_asset')}}/backend_component_asset/dropDownMenuCardCss/dropDownMenuCardAsset.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
 <link rel="stylesheet" href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" />
 @endsection

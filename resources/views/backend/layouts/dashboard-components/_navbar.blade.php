@@ -42,7 +42,7 @@
                     </li>
                     @if(auth()->user()->role ==1)
                     <li>
-                        <div class="dropdown dashboard_menubar {{setting('navbar_stock_moduel_display')}}">
+                        <!-- <div class="dropdown dashboard_menubar {{setting('navbar_stock_moduel_display')}}">
                             <a class="dropbtn">{{__('translate.Stock')}}</a>
                             <div class="dropdown-content">
                                 <div class="row mt-1">
@@ -79,7 +79,29 @@
                                 </div>
                                 <span class="custom-stock-arrow"></span>
                             </div>
-                        </div>
+                        </div> -->
+                        <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component {{setting('navbar_stock_moduel_display')}}" menuChildClass="dropdown-content dropdown-menu-component menu-card" wrapperId="NavBarStockMenuCard" menuName="{{__('translate.Stock')}}" menuId="dropbtn" showIdClassName="" menuIcon="">
+                            <div class="menu-card-header">
+                                <svg id="Layer_1" data-name="Layer 1" width="20px" height="20px" fill="rgba(0,123,255,0.4)" viewBox="0 0 135.42 122.88"><title>bar-chart</title><path d="M65.62,14.08H85.85a2,2,0,0,1,2,2V95.56a2,2,0,0,1-2,2H65.62a2,2,0,0,1-2-2V16a2,2,0,0,1,2-2Zm69.8,108.8H9.93v0A9.89,9.89,0,0,1,0,113H0V0H12.69V110.19H135.42v12.69ZM103.05,53.8h20.23a2,2,0,0,1,2,2V95.56a2,2,0,0,1-2,2H103.05a2,2,0,0,1-2-2V55.75a2,2,0,0,1,2-2ZM28.19,29.44H48.42a2,2,0,0,1,1.95,1.95V95.56a2,2,0,0,1-1.95,2H28.19a2,2,0,0,1-2-2V31.39a2,2,0,0,1,2-1.95Z"/></svg>
+                                <span class="ms-1">Stock Book</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <ul class="menu-btn-group">
+                                        <li class="child-line-row">
+                                            <x-Buttons.MenuButtons.SubMenuCardButton subMenuBtnId="">
+                                                <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
+                                                    <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
+                                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                                </svg>
+                                                <span class="ms-2">{{__('translate.Stock Summary')}}</span>
+                                            </x-Buttons.MenuButtons.SubMenuCardButton>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <span class="menu-card-arrow"></span>
+                        </x-MenuCard.MenuCard>
                     </li>
                     <li>
                         <div class="dropdown dashboard_menubar {{setting('navbar_supplier_moduel_display')}}">

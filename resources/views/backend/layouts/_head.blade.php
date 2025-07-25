@@ -64,6 +64,9 @@
 <link rel="stylesheet" href="{{ asset('backend_asset/main_asset/custom-css/themes-css/footer-css/' . $themes[$role]['footer'] . '.css') }}" id="footerGreenlink">
 <link rel="stylesheet" href="{{ asset('backend_asset/main_asset/custom-css/themes-css/trapezoid-css/' . $themes[$role]['trapezoid'] . '.css') }}" id="sidebarTrapezoidlink">
 
+<!-- Component-css -->
+<link rel="stylesheet" href="{{asset('backend_asset')}}/backend_component_asset/dropDownMenuCardCss/dropDownMenuCardAsset.css">
+
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/scss/background-color/dist/main-background-color.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/scss/background-animation-scss/dist/background-color-animation.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/custom-css/components-css/all-components-min.css">
