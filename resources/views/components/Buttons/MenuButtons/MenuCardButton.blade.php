@@ -1,1 +1,1 @@
-<a type="button" class="{{ $className }}" id="{{ $menuBtnId }}">{{ $slot }}</a>
+<a type="button" class="{{ $className }}" data-url="{{ $dataURL }}" id="{{ $menuBtnId }}">{{ $slot }}</a>

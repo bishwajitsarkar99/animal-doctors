@@ -1,6 +1,6 @@
 <div class="{{ $menuParentClass }}">
     <a id="{{ $menuId }}">
-        <span class="{{ $showIdClassName }}">
+        <span class="{{ $showIdClassName }} {{ $activeMenu }}">
             <strong>{{ $menuName }}</strong>
         </span>
         {{ $menuIcon }}

@@ -8,9 +8,9 @@
     document.addEventListener('DOMContentLoaded', () => {
         initAllMenuCardResizers('.menu-card', '.submenu-card');
 
-        const tableCard = document.getElementById('NavBarStockMenuCard');
+        const tableCard = document.getElementById('NavBarStockMenuCard', 'NavBarSupplierMenuCard', 'NavBarPivotTableMenuCard', 'NavBarItemsMenuCard', 'NavBarOrderMenuCard', 'NavBarLanguageMenuCard');
         if (tableCard) {
-            initMenuCardResize(tableCard, 'NavBarStockMenuCard');
+            initMenuCardResize(tableCard, 'NavBarStockMenuCard', 'NavBarSupplierMenuCard', 'NavBarPivotTableMenuCard', 'NavBarItemsMenuCard', 'NavBarOrderMenuCard', 'NavBarLanguageMenuCard');
         }
     });
     pageLoader();
