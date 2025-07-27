@@ -197,7 +197,7 @@ input#searchBranch, input#searchRole, input#searchEmail{
 #user_activites_data_table_wrapper {
     position: relative;
 }
-#svgOverlay {
+/* #svgOverlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -206,7 +206,7 @@ input#searchBranch, input#searchRole, input#searchEmail{
     pointer-events: none;
     z-index: 10;
 }
-#connectorPath {
+#connectorLine {
     stroke-dasharray: 5, 5;
     animation: dashmove 1s linear infinite;
 }
@@ -214,7 +214,7 @@ input#searchBranch, input#searchRole, input#searchEmail{
     to {
         stroke-dashoffset: -10;
     }
-}
+} */
 .table-heading{
     font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
     font-size: 12px;

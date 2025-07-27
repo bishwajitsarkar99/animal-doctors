@@ -1,20 +1,3 @@
-// chart scrolling plugin
-// Only works if your x-axis is numeric or time (not category)
-// You'll need to set min and max on the x-axis in options to allow scrolling
-// const myChart = new Chart(ctx, {
-//     type: 'line',
-//     data: {...},
-//     options: {
-//         scales: {
-//             x: {
-//                 type: 'linear', // or 'time'
-//                 min: 0,
-//                 max: 10
-//             }
-//         }
-//     },
-//     plugins: [ChartScrollPlugin]
-// });
 export function ChartScrollPlugin (){
     return {
         id: 'ChartScrollPlugin',

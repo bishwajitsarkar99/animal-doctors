@@ -503,6 +503,46 @@ ul>li .child-line-row{
   overflow: hidden;
   box-sizing: border-box;
 }
+/* =========== Panel Resizer ============== */
+.panel-width-resizer,
+.panel-height-resizer {
+  position: absolute;
+  background: transparent;
+  z-index: 10;
+}
+.panel-width-resizer.left-resizer {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: ew-resize;
+}
+.panel-width-resizer.right-resizer {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: ew-resize;
+}
+.panel-height-resizer.top-resizer {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  cursor: ns-resize;
+}
+.panel-height-resizer.bottom-resizer {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  cursor: ns-resize;
+}
+.parent,
+.child{
+  position: absolute;
+  box-sizing: border-box;
+}
 .connector {
   position: absolute;
   top: 0;
@@ -608,6 +648,24 @@ ul>li .child-line-row{
     stroke-dasharray: 5, 5;
     animation: dashmove 1s linear infinite;
   */
+}
+#svgOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+#connectorLine {
+  stroke-dasharray: 5, 5;
+  animation: dashmove 1s linear infinite;
+}
+@keyframes dashmove {
+  to {
+    stroke-dashoffset: -10;
+  }
 }
 /* ================ Nav-bar Component Css ======================== */
 .dropbtn {

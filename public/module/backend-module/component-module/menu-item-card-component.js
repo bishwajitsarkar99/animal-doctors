@@ -1,46 +1,4 @@
-// ========== Global RAM Storage System ==============================================
-// ===================================================================================
-function getUserRAMKey() {
-    const role = document.querySelector('meta[name="user-role"]')?.content || 'guest';
-    const branch_id = document.querySelector('meta[name="branch-id"]')?.content || 'identifyer';
-    const email = document.querySelector('meta[name="user-email"]')?.content || 'unknown';
-    const safeEmail = email.replace(/[^a-zA-Z0-9]/g, '_');
-    const moduleName = 'BackendModule';
-    return `ApplicationRAM_${moduleName}_${branch_id}_${role}_${safeEmail}`;
-}
-// Get RAM value
-export function getRAM(DataTable, key = null) {
-    const storageKey = getUserRAMKey();
-    const fullData = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    const appSetting = fullData.AppSetting || {};
-    const tableData = appSetting[DataTable] || {};
-    return key ? tableData[key] : tableData;
-}
-// Set RAM value
-export function setRAM(DataTable, key, value) {
-    const storageKey = getUserRAMKey();
-    const fullData = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    fullData.AppSetting = fullData.AppSetting || {};
-    fullData.AppSetting[DataTable] = fullData.AppSetting[DataTable] || {};
-    fullData.AppSetting[DataTable][key] = value;
-    localStorage.setItem(storageKey, JSON.stringify(fullData));
-}
-// Remove specific table from RAM
-export function removeRAM(DataTable) {
-    const storageKey = getUserRAMKey();
-    const fullData = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    if (fullData.AppSetting && fullData.AppSetting[DataTable]) {
-        delete fullData.AppSetting[DataTable];
-    }
-    localStorage.setItem(storageKey, JSON.stringify(fullData));
-}
-// Remove AppSetting Data From RAM
-export function clearAllRAM() {
-    const storageKey = getUserRAMKey();
-    const fullData = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    delete fullData.AppSetting;
-    localStorage.setItem(storageKey, JSON.stringify(fullData));
-}
+import { setRAM, getRAM } from "/module/backend-module/component-module/table-component.js";
 
 // ========================= Menu-Card Component Resize ===============================
 
@@ -191,4 +149,49 @@ export function initAllMenuCardResizers(...selectors) {
             initMenuCardResize(card, cardId);
         });
     });
+    ///disableResizeOnSmallScreens(card);
 }
+
+
+// function isTouchDevice() {
+//     return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+// }
+
+// function disableResizeOnSmallScreens(card) {
+//     if (window.innerWidth < 1024 || isTouchDevice()) {
+//         const resizers = card.querySelectorAll('.card-width-resizer, .card-height-resizer');
+//         resizers.forEach(resizer => resizer.style.display = 'none');
+//         card.classList.add('card-fixed-size'); // optional class to lock size
+//     }
+// }
+
+// @media screen and (max-width: 1024px) {
+//     .resizable-card {
+//         width: 100% !important;
+//         height: auto !important;
+//     }
+
+//     .card-width-resizer,
+//     .card-height-resizer {
+//         display: none;
+//     }
+// }
+// .resizable-card {
+//     min-width: 250px;
+//     max-width: 100%;
+//     min-height: 200px;
+//     max-height: 90vh;
+//     width: 100%;
+// }
+
+//  4. Optional: Use Resizable Only on Hover with Mouse
+// Prevent accidental resizes on touch devices.
+
+// function allowResizeOnlyWithMouse(card) {
+//     const isMouse = matchMedia('(pointer: fine)').matches;
+//     if (!isMouse) {
+//         // hide resizer elements
+//         card.querySelectorAll('.card-width-resizer, .card-height-resizer')
+//             .forEach(resizer => resizer.style.display = 'none');
+//     }
+// }

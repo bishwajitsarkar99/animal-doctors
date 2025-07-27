@@ -214,7 +214,7 @@
     <div class="col-xl-12">
         <div class="--page-head">
             <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="80px" height="80px" viewBox="0 0 24 24"><defs>
+                <svg width="80px" height="80px" viewBox="0 0 24 24"><defs>
                     <style>.cls-1{fill:#aecbfa;}.cls-1,.cls-2,.cls-3{fill-rule:evenodd;}.cls-2{fill:#669df6;}.cls-3{fill:#4285f4;}</style></defs>
                     <title>Icon_24px_SQL_Color</title>
                     <g data-name="Product Icons">
@@ -239,7 +239,7 @@
     <svg id="svg" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; pointer-events: none;">
         <!-- Connection 1: server -->
         <g class="connection" id="connectorServer">
-            <path class="connectorPath" fill="none" stroke="#4e73df" stroke-width="3" stroke-linecap="round"/>
+            <path class="connectorLine" fill="none" stroke="#4e73df" stroke-width="3" stroke-linecap="round"/>
             <circle class="startSocket" r="5" fill="#4e73df" />
             <g class="endSocket" fill="#4e73df">
                 <g transform="scale(1) translate(-12, -12)">
@@ -250,14 +250,14 @@
 
         <!-- Connection 2: database -->
         <g class="connection" id="connectorDatabseGroup">
-            <path class="connectorPath" fill="none" stroke="#4e73df" stroke-width="3" stroke-linecap="round"/>
+            <path class="connectorLine" fill="none" stroke="#4e73df" stroke-width="3" stroke-linecap="round"/>
             <circle class="startSocket" r="5" fill="#4e73df" />
             <circle class="endSocket" r="5" fill="#4e73df" />
         </g>
 
         <!-- Connection 2: database to user table -->
         <g class="connection" id="connectorUserGroup">
-            <path class="connectorPath" fill="none" stroke="#4e73df" stroke-width="3" stroke-linecap="round"/>
+            <path class="connectorLine" fill="none" stroke="#4e73df" stroke-width="3" stroke-linecap="round"/>
             <circle class="startSocket" r="5" fill="#4e73df" />
             <g class="endSocket" fill="#4e73df">
                 <g transform="scale(1) translate(-12, -12)">
@@ -268,7 +268,7 @@
 
         <!-- Connection 3: user to email -->
         <g class="connection" id="connectorEmailGroup">
-            <path class="connectorPath" fill="none" stroke="rgb(238, 155, 53)" stroke-width="3" stroke-linecap="round"/>
+            <path class="connectorLine" fill="none" stroke="rgb(238, 155, 53)" stroke-width="3" stroke-linecap="round"/>
             <circle class="startSocket" r="5" fill="rgb(238, 155, 53)" />
             <g class="endSocket" fill="rgb(238, 155, 53)">
                 <g transform="scale(1) translate(-12, -12)">
@@ -279,7 +279,7 @@
 
         <!-- Connection 4: user to login -->
         <g class="connection" id="connectorLoginGroup">
-            <path class="connectorPath" fill="none" stroke="#4e73df" stroke-width="3" stroke-linecap="round"/>
+            <path class="connectorLine" fill="none" stroke="#4e73df" stroke-width="3" stroke-linecap="round"/>
             <circle class="startSocket" r="5" fill="#4e73df" />
             <g class="endSocket" fill="#4e73df">
                 <g transform="scale(1) translate(-12, -12)">
@@ -816,9 +816,7 @@
 <!-- Total User Activity Multi-Chart -->
 <script type="module">
     // hover plugins
-    import { hoverGridPlugin, dottedGridPlugin, axisTooltipDateFormatePlugin, axisCursorPlugin } from "/plugins/plugins-min.js";
-    // scroll plugins
-    import { ChartScrollPlugin } from "/plugins/chartScrollPlugin.js";
+    import { hoverGridPlugin, dottedGridPlugin, axisTooltipDateFormatePlugin, axisCursorPlugin, ChartScrollPlugin } from "/plugins/plugins-min.js";
     // debounce for ajax request too data loading maintain            
     function debounce(func, wait) {
         let timeout;
@@ -1320,18 +1318,23 @@
 </script>
 <!-- Date Range Scroll chart module-min-js /module-min-js-->
 <script type="module">
-    import { initializeCurveLineChart, initDragAndDrop } from "/module/module-min-js/design-helper-function-min.js";
+    import { initializeCurveLineChart ,initDragAndDrop } from "/module/backend-module/backend-module-min.js";
     const dateRangeId = "cruveChart";
-
-    // drag and drop default card
-    const row = '.drag-row';
-    const column = '.drag-column';
-    const cardKey = '.group-card';
-    const lineConnectionId = 'connectionLines';
 
     // DOM ready
     document.addEventListener('DOMContentLoaded', () => {
-        initDragAndDrop(column, cardKey, row, lineConnectionId)
+        // drag and drop default card
+        const row = '.drag-row';
+        const column = '.drag-column';
+        const cardKey = '.group-card';
+        //initDragAndDrop(column, cardKey, row, lineConnectionId)
+        document.querySelectorAll(cardKey).forEach(card => {
+            const cardId = card.id; // e.g., 'card-1', 'card-2', etc.
+            const lineConnectionId = `lineConnectorId_${cardId}`;
+            const DataTable = 'CardBoard';
+            // Call with dynamic IDs
+            initDragAndDrop(column, cardKey, row, lineConnectionId, DataTable);
+        });
     });
 
     initializeCurveLineChart(dateRangeId);
@@ -2562,7 +2565,7 @@
                 ${endX} ${endY}
             `;
 
-            const path = group.querySelector(".connectorPath");
+            const path = group.querySelector(".connectorLine");
             if (path) {
                 path.setAttribute("d", pathD.trim());
                 path.setAttribute("stroke", conn.color || "#999");

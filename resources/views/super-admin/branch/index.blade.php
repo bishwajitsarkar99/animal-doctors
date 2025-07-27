@@ -626,7 +626,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- jQuery UI Auto-Complete or Date Picker -->
 <script src="{{asset('backend_asset')}}/support_asset/date-picker/jquery/jquery-ui.min.js"></script>
-<script>
+<script type="module">
+  import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
+  import { initPanelResize, initAllPanelResizers } from "/module/backend-module/component-module/panel-component.js";
+  // Panel Resize
+  // document.addEventListener('DOMContentLoaded', () => {
+  //   initAllPanelResizers('.parent', '.child');
+
+  //   const homePanel = document.getElementById('branchListTab', 'branchListPage');
+  //   if (homePanel) {
+  //     initPanelResize(homePanel, 'branchListTab', 'branchListPage');
+  //   }
+  // });
   $(document).ready(function () {
     $("#branchListPage").removeAttr('hidden');
     $("#branchListTab").removeAttr('hidden');

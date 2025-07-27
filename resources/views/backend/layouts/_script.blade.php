@@ -1,10 +1,8 @@
 <!-- App Cached Js -->
 <script src="{{ asset('cache/app.js') }}?v={{ filemtime(public_path('cache/app.js')) }}"></script>
 <!--========== Module - Helper Function Links ==========-->
-<script type="module" src="/module/module-min-js/application-helper-function-min.js"></script>
 <script type="module">
-    import { browserInpect, pageLoader, toolTip } from "/module/module-min-js/application-helper-function-min.js";
-    import { initAllMenuCardResizers, initMenuCardResize } from "/module/backend-module/component-module/menu-item-card-component.js";
+    import { browserInspect, pageLoader, toolTip, initAllMenuCardResizers, initMenuCardResize } from "/module/backend-module/backend-module-min.js";
     document.addEventListener('DOMContentLoaded', () => {
         initAllMenuCardResizers('.menu-card', '.submenu-card');
 
@@ -15,7 +13,7 @@
     });
     pageLoader();
     toolTip();
-    //browserInpect();
+    //browserInspect();
 </script>
 
 <!-- Language -->
