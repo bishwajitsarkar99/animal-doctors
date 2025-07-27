@@ -120,11 +120,11 @@ export function initPanelResize(panel, panelId) {
     const savedLeft = getRAM(panelId, 'Left');
     const savedTop = getRAM(panelId, 'Top');
 
-    if (savedWidth) panel.style.width = `${savedWidth}px`;
-    if (savedHeight) panel.style.height = `${savedHeight}px`;
-    if (savedLeft) panel.style.left = `${savedLeft}px`;
-    if (savedTop) panel.style.top = `${savedTop}px`;
-
+    // Apply saved or default values
+    panel.style.width = savedWidth ? `${savedWidth}px` : '100%';
+    panel.style.height = savedHeight ? `${savedHeight}px` : 'auto';
+    if (savedLeft !== undefined) panel.style.left = `${savedLeft}px`;
+    if (savedTop !== undefined) panel.style.top = `${savedTop}px`;
     // Ensure border updates on resize
     if (svgRect) {
         const updateConnector = () => {
@@ -141,12 +141,76 @@ export function initAllPanelResizers(...selectors) {
     selectors.forEach(selector => {
         document.querySelectorAll(selector).forEach((panel, index) => {
             let panelId = panel.id || `${selector.replace('.', '')}-${index}`;
-            const parent = panel.closest('.parent');
-            if (parent && panel.classList.contains('child')) {
+            const parent = panel.closest('');
+            if (parent && panel.classList.contains('')) {
                 const parentId = parent.id || 'unknown';
                 panelId = `${parentId}-childPanel-${index}`;
             }
             initPanelResize(panel, panelId);
         });
     });
+}
+
+// =============== Initialize Draggable Panel Movement =======================
+export function initPanelMove(tabHeaderId, tabPanelContentId) {
+
+    function makeDraggable(wrapperId) {
+        const wrapper = document.getElementById(wrapperId);
+        if (!wrapper) return;
+
+        let offsetX = 0, offsetY = 0, isDragging = false;
+
+        // Restore saved position
+        const rawData = getRAM(wrapperId);
+        try {
+            const savedPosition = typeof rawData === 'string' ? JSON.parse(rawData) : rawData;
+            if (savedPosition?.left && savedPosition?.top) {
+                wrapper.style.position = 'absolute';
+                wrapper.style.left = savedPosition.left;
+                wrapper.style.top = savedPosition.top;
+            }
+        } catch (err) {
+            console.warn('Invalid position data for:', wrapperId, err);
+        }
+
+        wrapper.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            offsetX = e.clientX - wrapper.offsetLeft;
+            offsetY = e.clientY - wrapper.offsetTop;
+
+            wrapper.style.zIndex = 1;
+
+            // ✅ Fix width & height to prevent resizing on drag
+            wrapper.style.width = wrapper.offsetWidth + "px";
+            wrapper.style.height = wrapper.offsetHeight + "px";
+            wrapper.style.maxWidth = wrapper.offsetWidth + "px";
+            wrapper.style.maxHeight = wrapper.offsetHeight + "px";
+        });
+
+        document.addEventListener("mousemove", (e) => {
+            if (!isDragging) return;
+
+            const left = e.clientX - offsetX;
+            const top = e.clientY - offsetY;
+
+            wrapper.style.position = 'absolute';
+            wrapper.style.left = left + "px";
+            wrapper.style.top = top + "px";
+
+            setRAM(wrapperId, JSON.stringify({ left: wrapper.style.left, top: wrapper.style.top }));
+
+            if (typeof drawConnection === 'function') {
+                drawConnection();
+            }
+        });
+
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+            wrapper.style.zIndex = 0;
+        });
+    }
+
+    // Apply to both header and content
+    makeDraggable(tabHeaderId);
+    makeDraggable(tabPanelContentId);
 }

@@ -292,7 +292,7 @@
       <!-- =========== Left Side Tab Panel =========== -->
       <x-CustomLeftSideTabPanels.LeftSideTabPanel className="d-flex align-items-start">
         <!------------- Navbar ------------->
-        <x-CustomLeftSideTabPanels.LeftSideTabPanelNavBars.LeftSideTabPanelNavBar className="nav flex-column nav-pills component-focus me-3" navBarId="v-pills-tab" navBarRole="tablist" ariaOrientation="vertical">
+        <x-CustomLeftSideTabPanels.LeftSideTabPanelNavBars.LeftSideTabPanelNavBar className="nav flex-column nav-pills component-focus me-1" navBarId="v-pills-tab" navBarRole="tablist" ariaOrientation="vertical">
           @foreach($customLeftSideTabPanelGroupBtns as $data)
           <x-CustomLeftSideTabPanels.LeftSideTabPanelBtn 
             labe="{{ $data['labelName'] }}" 
@@ -359,6 +359,13 @@
         </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.LeftSideTabContent>
       </x-CustomLeftSideTabPanels.LeftSideTabPanel>
     </x-CustomTabPanels.TabPanelContents.TabContentPanel>
+    <!-- <div class="panel-width-resizer right-resizer"></div>
+    <div class="panel-width-resizer left-resizer"></div>
+    <div class="panel-height-resizer bottom-resizer"></div>
+    <div class="panel-height-resizer top-resizer"></div>
+    <svg class="connector" width="100%" height="100%">
+    <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
+    </svg> -->
   </div>
 
   <!-- RAM key Total Result -->
@@ -626,18 +633,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- jQuery UI Auto-Complete or Date Picker -->
 <script src="{{asset('backend_asset')}}/support_asset/date-picker/jquery/jquery-ui.min.js"></script>
-<script type="module">
-  import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
-  import { initPanelResize, initAllPanelResizers } from "/module/backend-module/component-module/panel-component.js";
-  // Panel Resize
-  // document.addEventListener('DOMContentLoaded', () => {
-  //   initAllPanelResizers('.parent', '.child');
-
-  //   const homePanel = document.getElementById('branchListTab', 'branchListPage');
-  //   if (homePanel) {
-  //     initPanelResize(homePanel, 'branchListTab', 'branchListPage');
-  //   }
-  // });
+<script>
   $(document).ready(function () {
     $("#branchListPage").removeAttr('hidden');
     $("#branchListTab").removeAttr('hidden');

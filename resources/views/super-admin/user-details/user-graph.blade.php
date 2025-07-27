@@ -619,7 +619,7 @@
 </script>
 <!-- number cricle bar and number rolling animation with scrol animation and drag and drop -->
 <script type="module">
-    import { cricleNumberPlate, numberRolling , triggerIfInView, initializeBarCharts, initScrollProgressBar} from "/module/module-min-js/design-helper-function-min.js";
+    import { cricleNumberPlate, numberRolling , triggerIfInView, initializeBarCharts, initScrollProgressBar} from "/module/backend-module/backend-module-min.js";
 
     // number cricle bar
     const numberClass = '.total-number';

@@ -543,6 +543,11 @@ ul>li .child-line-row{
   position: absolute;
   box-sizing: border-box;
 }
+#firstItem, #secondItem {
+  box-sizing: border-box;
+  resize: none; /* Prevent any default resize handles */
+  cursor: move;
+}
 .connector {
   position: absolute;
   top: 0;

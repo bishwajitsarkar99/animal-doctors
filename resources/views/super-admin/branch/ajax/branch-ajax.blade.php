@@ -23,11 +23,22 @@
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/appRAM/backendRAMCapacity/appSettingData.js";
     //import { getAppRAM } from "/appRAM/backendRAMCapacity/appBranchData.js";
+    import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
+    import { initPanelResize, initAllPanelResizers, initPanelMove } from "/module/backend-module/component-module/panel-component.js";
 
     // Branch Table Setting
     resize('BranchTableSetting', 'col-resizer', 'row-resizer');
     enableColumnDragAndDrop('BranchTableSetting', '.move-icon');
     applySavedColumnOrder('BranchTableSetting');
+
+    // const panelHeadMove = document.getElementById('branchListPage');
+    // if (panelHeadMove) {
+    //     initPanelMove(panelHeadMove, 'branchListPage');
+    // }
+    // const panelContentMove = document.getElementById('branchListTab');
+    // if (panelContentMove) {
+    //     initPanelMove(panelContentMove, 'branchListTab');
+    // }
 
     // Branch Table Menu Card Setting
     document.addEventListener('DOMContentLoaded', () => {
