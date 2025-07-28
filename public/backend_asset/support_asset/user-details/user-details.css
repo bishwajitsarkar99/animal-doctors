@@ -126,6 +126,10 @@ ul#userAgentParentTree {
     animation: spin 1s linear infinite;
     transform-origin: center center;
 }
+
+
+
+
 .menu-loader-overlay {
     position: absolute;
     top: 30px;
@@ -151,13 +155,6 @@ ul#userAgentParentTree {
     animation: spin 1s linear infinite;
     transform-origin: center center;
 }
-/* .modal.fade .modal-dialog.modal-xl {
-    transform: none !important;
-    position: relative !important;
-    top: 0 !important;
-    left: 0 !important;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-} */
 #largeModalContent{
     box-shadow: rgba(0, 0, 0, 0.067) 0px 1px 20px, rgba(0, 123, 255, 0.2) 0px 2px 6px;
 }
@@ -197,24 +194,6 @@ input#searchBranch, input#searchRole, input#searchEmail{
 #user_activites_data_table_wrapper {
     position: relative;
 }
-/* #svgOverlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 10;
-}
-#connectorLine {
-    stroke-dasharray: 5, 5;
-    animation: dashmove 1s linear infinite;
-}
-@keyframes dashmove {
-    to {
-        stroke-dashoffset: -10;
-    }
-} */
 .table-heading{
     font-family: Roboto,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
     font-size: 12px;
@@ -954,6 +933,7 @@ thead,th,td{
     vertical-align: middle;
     align-items: center;
 }
+
 .activity-table-responsive{
     overflow-y: auto !important;
     overflow-x: auto !important;
@@ -1265,10 +1245,13 @@ ul#branchLabel>li, ul#roleLabel>li, ul#brancChart>li, ul#branchChart{
 #cardWidth{
     width: 100% !important;
 }
+
+
 th{
     --mdb-box-shadow-color-rgb: 0, 0, 0;
     box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
+
 .refrsh-hidden{
     display: none;
 }
@@ -1509,9 +1492,7 @@ input#rangeLeftSlider {
     font-size: 14px;
     background-image: repeating-linear-gradient(55deg, #e39a3b, transparent 1px);
 }
-/* .mini-card-title{
-    background-image: repeating-linear-gradient(55deg, #e39a3b, transparent 1px);
-} */
+
 .storage-card-body {
     padding: 7px 10px;
 }
@@ -1961,6 +1942,8 @@ label.item_class {
 select#perItemControl {
     font-size: 12px;
 }
+
+
 tr.table-row {
     background-image: linear-gradient(90deg, #ffffffff 100%, transparent 100%, #ffffffff 100%);
     color: black;
@@ -2071,6 +2054,7 @@ label.per_item_class {
     padding-top: 21px;
     margin-top: 10px;
 }
+
 .card.log-content-card {
     border: none;
     border-radius: 0px;
@@ -2119,6 +2103,7 @@ button#viewBtnClose:hover{
     border-radius: 3px;
     padding: 6px 6px; 
 }
+
 img.company_logo {
     width: 65px;
     height: 55px;
@@ -2686,6 +2671,7 @@ select::placeholder{
     color: rgb(179, 179, 179);
     font-weight: 800;
 }
+
 th#th_sort {
     /* background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%); */
     background-image: var(--table-row-select-background);
@@ -2698,6 +2684,7 @@ th#th_sort {
 .table-td-align{
     text-align: center;
 }
+
 /* ======Reponsive-page======== */
 @media (min-width: 1200px) {
     .container {

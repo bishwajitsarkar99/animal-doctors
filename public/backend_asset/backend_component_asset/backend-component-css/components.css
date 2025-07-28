@@ -3,11 +3,20 @@
   --menu-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   --component-menu-background-image: rgba(0, 0, 0, 0.067) 0px 1px 20px, rgba(0, 123, 255, 0.2) 0px 2px 6px;
   --component-font-family:Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif;
-  --component-tab-active-btn-bg:linear-gradient(5deg, #808080e0, transparent 3%, #d3d3d33d, #c0c0c0a6);
-  --component-tab-active-btn-bg-color:snow;
-  --component-tab-deactive-btn-bg:linear-gradient(1deg, #dbd8d8db, transparent 3%, #d3d3d38a, snow);
+  --component-tab-active-btn-bg:linear-gradient(-0deg, #3b71cad1, rgb(31 138 255 / 83%), #3b71cae8, #3b71caf5, rgb(0 123 255 / 54%));
+  --component-tab-active-btn-bg-color:#3b71cad1;
+  --component-tab-deactive-btn-bg:linear-gradient(1deg, #dbd8d8db, #d3d3d38a, snow);
   --component-tab-deactive-btn-bg-color:snow;
-  --component-tab-deactive-btn-bg-hover:linear-gradient(5deg, gray, transparent 3%, #d3d3d33d, #c0c0c0a6);
+  --component-tab-deactive-btn-bg-hover:linear-gradient(-0deg, #3b71cad1, rgb(31 138 255 / 83%), #3b71cae8, #3b71caf5, rgb(0 123 255 / 54%));
+  --component-form-button-background: linear-gradient(to top, #0056b3, #1985f9e0, #1985f9e0);
+  --component-form-button-background-hover: linear-gradient(rgba(14, 14, 14, 0.05) 0%, rgba(171, 165, 165, 0.05) 100%);
+  --component-form-button-red-background: linear-gradient(to top, #ff4500, #ff713d, #ff713d);
+}
+htm,body{
+  box-sizing: border-box;
+  font-family: var(--component-font-family);
+  padding: 0;
+  margin: 0;
 }
 * {
   margin: 0;
@@ -696,11 +705,6 @@ ul>li .child-line-row{
   border: 1px dashed dodgerblue;
   color: dodgerblue !important;
   transition: border-color 0.3s, background-color 0.3s, color 0.3s;
-}
-@keyframes dashmove {
-to {
-  stroke-dashoffset: -10;
-}
 } 
 /* ================ Tab Button Component Css ======================== */
 .button-container {
@@ -711,7 +715,7 @@ to {
   height: 24px;
   background: var(--component-tab-active-btn-bg);
   background-color: var(--component-tab-active-btn-bg-color);
-  color: #004a99e0;
+  color: #fff;
   font-family: var(--component-font-family);
   font-size: 12px;
   line-height: 1.2;
@@ -720,14 +724,14 @@ to {
   font-weight: 700;
   letter-spacing: 1px;
   border-radius: 3px;
-  border: 1px dashed lightgray;
+  border: 1px dashed rgb(31 138 255 / 83%);
   transition: border-color 0.3s, background-color 0.3s;
   z-index: 1;
   overflow: hidden;
 }
 .active-button:hover{
   height: 24px;
-  color: #004a99e0;
+  color: #fff;
   font-family: var(--component-font-family);
   font-size: 12px;
   line-height: 1.2;
@@ -751,14 +755,14 @@ to {
   font-weight: 700;
   outline: none;
   font-size: 12px;
-  color: #222;
+  color: #001840;
   letter-spacing: 1px;
-  border: 1px dashed lightgray;
+  border: none;
 }
 .deactive:hover{
   height: 24px;
   background: var(--component-tab-deactive-btn-bg-hover);
-  color: #004a99e0;
+  color: #fff;
   font-family: var(--component-font-family);
   font-size: 12px;
   line-height: 1.2;
@@ -767,7 +771,202 @@ to {
   font-weight: 700;
   letter-spacing: 1px;
   border-radius: 3px;
-  border: 1px dashed dodgerblue;
+  border: none;
   outline: none;
   transition: border-color 0.3s, background-color 0.3s color 0.3s;
+}
+
+/* ================ Form Button Component Css ======================== */
+button.btn.btn-sm.success-shadow-btn {
+  height: 24px;
+  background-color: #0056b3;
+  color: #fff;
+  border-color: #0056b3;
+  --mdb-box-shadow-color-rgb: 0, 0, 0;
+  box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+  font-family: var(--category-font-family);
+  background-image: var(--component-form-button-background);
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  letter-spacing: 1px;
+  transition: border-color 0.3s, background-color 0.3s;
+  font-size: 12px;
+  opacity: 1;
+  text-align: center;
+  font-weight: 700;
+  outline: 0;
+  margin-left: -4px;
+  border-radius: 3px;
+  border: none;
+}
+button.btn.btn-sm.success-shadow-btn:hover {
+  background-color: #1985f9e0;
+  background-image: var(--component-form-button-background-hover);
+  border: none;
+  color: #fff;
+  opacity: 1;
+  transition: opacity 0.15s linear;
+}
+button.btn.btn-sm.danger-repl-btn  {
+  height: 24px !important;
+  background-color: #ff4500;
+  background-image: var(--component-form-button-red-background);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 3px;
+  font-size: 12px;
+  text-transform: capitalize;
+  border: none;
+  --mdb-box-shadow-color-rgb: 0, 0, 0;
+  box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), .35);
+}
+button.btn.btn-sm.danger-repl-btn:hover{
+  background-color: #ff946d;
+  background-image: var(--component-form-button-background-hover);
+  border: none;
+  color: #fff;
+  opacity: 1;
+  transition: opacity 0.15s linear;
+  --mdb-box-shadow-color-rgb: 0, 0, 0;
+  box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), .35);
+  animation: none;
+}
+.btn.btn-sm.success-shadow-btn {
+  height: 25px;
+  background-color: #0056b3;
+  color: #fff;
+  border-color: #0056b3;
+  --mdb-box-shadow-color-rgb: 0, 0, 0;
+  box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+  font-family: var(--category-font-family);
+  background-image: var(--component-form-button-background);
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  letter-spacing: 1px;
+  transition: border-color 0.3s, background-color 0.3s;
+  font-size: 12px;
+  opacity: 1;
+  text-align: center;
+  font-weight: 800;
+  outline: 0;
+  margin-left: -4px;
+  border-radius: 3px;
+  border: none;
+}
+.btn.btn-sm.success-shadow-btn:hover {
+  background-color: #1985f9e0;
+  background-image: var(--component-form-button-background-hover);
+  border: none;
+  color: #fff;
+  opacity: 1;
+  transition: opacity 0.15s linear;
+}
+.btn.btn-sm.danger-repl-btn  {
+  height: 25px !important;
+  background-color: #ff4500;
+  background-image: var(--component-form-button-red-background);
+  color: #fff;
+  font-weight: 800;
+  border-radius: 3px;
+  font-size: 12px;
+  text-transform: capitalize;
+  border: none;
+  --mdb-box-shadow-color-rgb: 0, 0, 0;
+  box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), .35);
+}
+.btn.btn-sm.danger-repl-btn:hover{
+  background-color: #ff946d;
+  background-image: var(--component-form-button-background-hover);
+  border: none;
+  color: #fff;
+  opacity: 1;
+  transition: opacity 0.15s linear;
+  --mdb-box-shadow-color-rgb: 0, 0, 0;
+  box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), .35);
+  animation: none;
+}
+
+/* ================ Card Component Css ======================== */
+.custom-card{
+  border: none;
+  transition: 0.5ms;
+  box-shadow: rgba(0,0,0,.067) 0 1px 20px,rgba(0,123,255,.2) 0 2px 6px;
+}
+.custom-header {
+  --bs-card-cap-padding-y: 0.2rem;
+  --bs-card-cap-padding-x: 1rem;
+  color: #0d6efd;
+  font-size: 13px;
+  font-weight: 700;
+  background-image: linear-gradient(1deg, #d3d3d3d4, #cdcdcd00, snow);
+  background-color: snow;
+  padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
+}
+.component-focus {
+  animation: pulse 1s;
+}
+@keyframes pulse{
+  0% {
+    transform: scale(0.1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.responsive-card {
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+.display_none {
+  display: none;
+}
+.card-message-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  pointer-events: all;
+}
+.box-animation-size {
+  width: 50px;
+  height: 50px;
+}
+
+/* ================ Custom Tab Btn Component Css ======================== */
+.custom-tab-btn {
+  background-image: linear-gradient(1deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white);
+  background-color: white;
+  margin-right: 15px;
+  line-height: 1.2;
+  font-weight: 700;
+  border: 1px ridge rgba(0, 123, 255, 0.5);
+  font-size: 12px;
+  color: #222;
+  letter-spacing: 1px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+button.active {
+  color: #004a99e0 !important;
+  font-family: var(--component-font-family);
+  opacity: 1;
+  text-align: left;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+  outline: none;
+  border-radius: 3px;
+  transition: border-color 0.3s, background-color 0.3s;
 }

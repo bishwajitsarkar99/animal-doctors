@@ -12,13 +12,14 @@
         applySavedColumnOrder,
         restoreRowHeights,
         // Border Component
-        borderRotated,
+        buttonBorderAnimation,
         // Global RAM Storage System
         // renderGlobalRAMTable,
         // RAMAnalyzer 
         // Menu Item
         initAllMenuCardResizers,
-        initMenuCardResize
+        initMenuCardResize,
+        initDragAndDrop
     } from "/module/backend-module/backend-module-min.js";
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/appRAM/backendRAMCapacity/appSettingData.js";
@@ -48,6 +49,19 @@
         if (tableCard) {
             initMenuCardResize(tableCard, 'BranchTableMenuCard');
         }
+
+        // drag and drop default card
+        const row = '.drag-row';
+        const column = '.drag-column';
+        const cardKey = '.group-card';
+        //initDragAndDrop(column, cardKey, row, lineConnectionId)
+        document.querySelectorAll(cardKey).forEach(card => {
+            const cardId = card.id; // e.g., 'card-1', 'card-2', etc.
+            const lineConnectionId = `lineConnectorId_${cardId}`;
+            const DataTable = 'BranchSettingDrag';
+            // Call with dynamic IDs
+            initDragAndDrop(column, cardKey, row, lineConnectionId, DataTable);
+        });
     });
     
     // // Render global usage RAM as user key
@@ -749,7 +763,7 @@
             $('.branch-tab-btn').removeClass('active-button').addClass('deactive');
             $(this).removeClass('deactive').addClass('active-button');
 
-            borderRotated('.connectorPath', '.branch-tab-btn', 'active-button');
+            buttonBorderAnimation('.connectorPath', '.branch-tab-btn', 'active-button');
         });
         // skeleton
         function tableSkeleton() {

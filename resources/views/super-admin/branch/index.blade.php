@@ -323,13 +323,13 @@
           <!-- Branch Setting -->
           <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade" homePanelId="v-pills-branch" homeRole="tabpanel" ariaLabel="v-pills-branch-tab" >
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-sm-4 drag-column" id="BranchSettingOptationCardMove">
                 @include('super-admin.branch._branch-setting-operation')
               </div>
-              <div class="col-sm-5">
+              <div class="col-sm-4 drag-column" id="SettingCardMove">
                 @include('super-admin.branch._branch-setting-implement')
               </div>
-              <div class="col-sm-4">
+              <div class="col-sm-4 drag-column" id="SettingDisplayCardMove">
                 @include('super-admin.branch._branch-setting-display')
               </div>
             </div>
@@ -337,13 +337,13 @@
           <!-- Category Setting -->
           <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade" homePanelId="v-pills-category" homeRole="tabpanel" ariaLabel="v-pills-category-tab" >
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-sm-4 drag-column" id="CategorySettingOptationCardMove">
                 @include('super-admin.branch._branch-category-setting-operation')
               </div>
-              <div class="col-sm-5">
+              <div class="col-sm-4 drag-column" id="CategorySettingCardMove">
                 @include('super-admin.branch._branch-category-setting-implement')
               </div>
-              <div class="col-sm-4">
+              <div class="col-sm-4 drag-column" id="CategoryDisplayCardMove">
                 @include('super-admin.branch._branch-category-setting-display')
               </div>
             </div>
@@ -458,7 +458,6 @@
             <div class="row profile-heading pb-3">
               <div class="col-xl-12">
                 <div class="form-group delete_content branch-skeleton" id="load_id">
-                  <span><div id="active_loader" class="loader_chart mt-1"></div></span>
                   <label class="label_user_edit" id="cate_delete" for="id">Branch-ID : </label>
                   <label class="label_user_edit" id="cat_id"> <span id="delete_branch_id"></span><br></label>
                   <label class="label_user_edit" id="cate_delete2">Are you sure, Would you like to delete <span id="delete_branch_body"></span>, permanently?</label>
@@ -507,22 +506,22 @@
         <x-Modals.SmallModals.Footers.Footer className="modal-footer action_group" footerId="logoutModal_footer">
           @if($data['modal_id'] === 'deletebranch')
             <p id="btn_group">
-              <a type="button" class="btn btn-danger modal_button logout_button branch-delete-skeleton" data-bs-dismiss="modal" id="noButton">No</a>
+              <a type="button" class="btn btn-sm danger-repl-btn branch-delete-skeleton" data-bs-dismiss="modal" id="noButton">No</a>
             </p>
             <p id="btn_group2">
-              <a type="button" class="btn btn-success modal_button logout_button yes_button branch-delete-skeleton" id="yesButton">
+              <a type="button" class="btn btn-sm success-shadow-btn yes_button branch-delete-skeleton" id="yesButton">
                 <span class="loading-yes-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                 <span class="yes-btn-text">{{__('translate.Yes')}}</span>
               </a>
             </p>  
           @elseif($data['modal_id'] === 'deleteconfirmbranch')
             <x-Modals.SmallModals.Buttons.CancelBtn 
-              className="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" 
+              className="btn btn-sm danger-repl-btn branch-skeleton" 
               btnId="cancel_delete" 
               lableName="Cancel"
             />  
             <x-Modals.SmallModals.Buttons.ConfirmBtn 
-              className="btn btn-sm purple-btn purple-btn-focus delete_branch branch-skeleton" 
+              className="btn btn-sm success-shadow-btn delete_branch branch-skeleton" 
               btnId="delete_branch" 
               lableName="Confirm" 
               lableClass="delete-confrm-btn-text" 
@@ -530,12 +529,12 @@
             />
           @elseif($data['modal_id'] === 'updateconfirmbranch')
             <x-Modals.SmallModals.Buttons.CancelBtn 
-              className="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" 
+              className="btn btn-sm danger-repl-btn branch-skeleton" 
               btnId="cate_delete5" 
               lableName="Cancel"
             />  
             <x-Modals.SmallModals.Buttons.ConfirmBtn 
-              className="btn btn-sm purple-btn purple-btn-focus update_confirm branch-skeleton" 
+              className="btn btn-sm success-shadow-btn update_confirm branch-skeleton" 
               btnId="update_confirm" 
               lableName="Confirm" 
               lableClass="confirm-btn-text" 
@@ -543,22 +542,22 @@
             />
           @elseif($data['modal_id'] === 'deletecategorybranch')
             <p id="btn_group">
-              <a type="button" class="btn btn-danger modal_button logout_button branch-delete-skeleton" data-bs-dismiss="modal" id="noButton">No</a>
+              <a type="button" class="btn btn-sm danger-repl-btn branch-delete-skeleton" data-bs-dismiss="modal" id="noButton">No</a>
             </p>
             <p id="btn_group2">
-              <a type="button" class="btn btn-success modal_button logout_button yes_button branch-delete-skeleton" id="yesBtn">
+              <a type="button" class="btn btn-sm success-shadow-btn yes_button branch-delete-skeleton" id="yesBtn">
                 <span class="loading-yes-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
                 <span class="yes-btn-text">{{__('translate.Yes')}}</span>
               </a>
             </p> 
           @elseif($data['modal_id'] === 'deletecategoryconfirmbranch')
             <x-Modals.SmallModals.Buttons.CancelBtn 
-              className="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" 
+              className="btn btn-sm danger-repl-btn branch-skeleton" 
               btnId="branch_type_delete_cancel" 
               lableName="Cancel"
             />  
             <x-Modals.SmallModals.Buttons.ConfirmBtn 
-              className="btn btn-sm purple-btn purple-btn-focus branch-skeleton" 
+              className="btn btn-sm success-shadow-btn branch-skeleton" 
               btnId="branch_type_delete_confirm" 
               lableName="Confirm" 
               lableClass="delete-confrm-btn-text" 
@@ -566,12 +565,12 @@
             />
           @elseif($data['modal_id'] === 'updatecategoryconfirmbranch')
             <x-Modals.SmallModals.Buttons.CancelBtn 
-              className="btn btn-sm cgt_cancel_btn btn_focus branch-skeleton" 
+              className="btn btn-sm danger-repl-btn branch-skeleton" 
               btnId="branch_type_delete_cancel" 
               lableName="Cancel"
             />  
             <x-Modals.SmallModals.Buttons.ConfirmBtn 
-              className="btn btn-sm purple-btn purple-btn-focus update_confirm branch-skeleton" 
+              className="btn btn-sm success-shadow-btn update_confirm branch-skeleton" 
               btnId="category_update_confirm" 
               lableName="Confirm" 
               lableClass="confirm-btn-text" 

@@ -627,6 +627,33 @@ export function borderRotated(connectionPath, selector, activeClass) {
     });
 }
 
+// =========== Button Border Animation White Color ===================
+export function buttonBorderAnimation(connectionPath, selector, activeClass) {
+    document.querySelectorAll('.button-container').forEach(container => {
+        const border = container.querySelector(selector);
+        const path = container.querySelector(connectionPath);
 
+        if (!path || !border) return;
 
+        const rect = border.getBoundingClientRect();
+        path.setAttribute("width", rect.width);
+        path.setAttribute("height", rect.height);
+        path.setAttribute("x", 0);
+        path.setAttribute("y", 0);
+        path.setAttribute("rx", 3);
+        path.setAttribute("ry", 3);
+
+        if (border.classList.contains(activeClass)) {
+            path.style.stroke = "white";
+            path.style.strokeDasharray = "5,5";
+            path.style.animation = "none";
+            void path.offsetWidth; // force reflow
+            path.style.animation = "dashmove 1s linear infinite";
+        } else {
+            path.style.stroke = "none";
+            path.style.strokeDasharray = "none";
+            path.style.animation = "none"; // stop animation
+        }
+    });
+}
 

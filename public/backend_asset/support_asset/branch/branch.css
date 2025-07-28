@@ -1186,10 +1186,14 @@ button.btn-close.cols_btn {
 }
 td.branch_font {
     text-align: center;
+    background-color: white !important;
 }
 td#creatorContent,td#updatorContent,td#approverContent{
     text-align: left;
     padding-left: 5px;
+}
+input#firstCreatedAt{
+    padding-bottom: 10px;
 }
 input#firstUserEmail,input#firstCreatedBy,input#firstCreatedAt,input#firstApprover,input#secondUserEmail,input#secondCreatedBy,
 input#secondUpdateBy,input#secondUpdateAt,input#secondApprover,input#thirdUserEmail,input#thirdUpdateAt,input#thirdUpdateBy,input#thirdApprover{
@@ -1205,6 +1209,11 @@ input#secondUpdateBy,input#secondUpdateAt,input#secondApprover,input#thirdUserEm
     letter-spacing: .5px;
     font-family: var(--nav-font-family);
     text-align: left;
+    padding-left: 10px;
+    white-space: nowrap;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    vertical-align: middle;
 }
 input#creatorUserImage,input#creatorUserEmail,input#creatorCreatedBy,input#creatorCreatedAt,input#approverUserImage,input#approverUserEmail,
 input#approverApprover,input#approverUpdateAt,input#updatorUserImage,input#updatorUserEmail,input#updatorUpdateBy,input#updatorUpdateAt,
@@ -1221,6 +1230,11 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     letter-spacing: .5px;
     font-family: var(--nav-font-family);
     text-align: left;
+    padding-left: 10px;
+    white-space: nowrap;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    vertical-align: middle;
 }
 .branch-skeleton,.branch-delete-skeleton,.img-branch-skeleton,.head-branch-skeleton,.modal-head-skeleton,.branch-content-skeleton,
 .branch-content-footer-skeleton,.hd-branch-skeleton{
@@ -1524,6 +1538,8 @@ button.btn_focus{
 }
 table.info_table {
     background: white;
+    transition: 0.5ms;
+    box-shadow: rgba(0,0,0,.067) 0 1px 3px,rgba(0,123,255,.2) 0 2px 3px;
 }
 span.tb_lb {
     margin-left: 2px;

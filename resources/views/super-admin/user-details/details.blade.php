@@ -75,7 +75,7 @@
             <div class="col-xl-3">
               <div class="download-tab">
                 <span class="download-group-btn">
-                  <x-Downloads.DataPrint dataPrintClassName="download-link-btn" dataPrintId="exportExcelCsv" svgWidth="30" svgHeight="30" />
+                  <x-Downloads.DataPrint dataPrintClassName="download-link-btn" dataPrintId="dataPrint" svgWidth="30" svgHeight="30" />
                 </span>
               </div>
             </div>
