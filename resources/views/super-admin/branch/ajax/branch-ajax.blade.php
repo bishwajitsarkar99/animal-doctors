@@ -19,27 +19,19 @@
         // Menu Item
         initAllMenuCardResizers,
         initMenuCardResize,
-        initDragAndDrop
     } from "/module/backend-module/backend-module-min.js";
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/appRAM/backendRAMCapacity/appSettingData.js";
     //import { getAppRAM } from "/appRAM/backendRAMCapacity/appBranchData.js";
     import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
     import { initPanelResize, initAllPanelResizers, initPanelMove } from "/module/backend-module/component-module/panel-component.js";
+    import { initDragAndDrop } from "/module/backend-module/component-module/card-component.js";
 
     // Branch Table Setting
     resize('BranchTableSetting', 'col-resizer', 'row-resizer');
     enableColumnDragAndDrop('BranchTableSetting', '.move-icon');
     applySavedColumnOrder('BranchTableSetting');
-
-    // const panelHeadMove = document.getElementById('branchListPage');
-    // if (panelHeadMove) {
-    //     initPanelMove(panelHeadMove, 'branchListPage');
-    // }
-    // const panelContentMove = document.getElementById('branchListTab');
-    // if (panelContentMove) {
-    //     initPanelMove(panelContentMove, 'branchListTab');
-    // }
+    buttonLoader();
 
     // Branch Table Menu Card Setting
     document.addEventListener('DOMContentLoaded', () => {
@@ -62,6 +54,18 @@
             // Call with dynamic IDs
             initDragAndDrop(column, cardKey, row, lineConnectionId, DataTable);
         });
+
+        const iconBar = document.querySelector('.icon-bar');
+        const sidebarPlate = document.querySelector('.sidebar-plate');
+
+        if (iconBar && sidebarPlate) {
+            iconBar.addEventListener('mouseenter', () => {
+            sidebarPlate.classList.add('hover-align-left');
+            });
+            iconBar.addEventListener('mouseleave', () => {
+            sidebarPlate.classList.remove('hover-align-left');
+            });
+        }
     });
     
     // // Render global usage RAM as user key
@@ -97,9 +101,17 @@
     //     }
     // });
 
-    buttonLoader();
-
     $(document).ready(function(){
+        // mini Side-bar Checking
+        $(document).on('click', '.checkSideBar', function (e) {
+            if ($(this).prop('checked')) {
+                $('.custom-side-bar-panel').addClass('force-show');
+                $('.sidebar-plate').addClass('force-show');
+            } else {
+                $('.custom-side-bar-panel').removeClass('force-show');
+                $('.sidebar-plate').removeClass('force-show');
+            }
+        });
         // Remove Row and Column width or height space;
         $(document).on('click', '#tableResize', function(){
             sessionStorage.removeItem('Application_Session_RAM_BackendModule_M-BRN-2025-02-10-423_1_superadmingstmedicinecenter4215_gmail_com');
@@ -862,8 +874,7 @@
 
             $(".disabledChecking").attr('hidden', true);
             $(".enableChecking").attr('hidden', true);
-            $("#boxLoading").removeAttr('hidden');
-            $("#loaderSpin").removeAttr('hidden');
+            // $("#loaderSpin").removeAttr('hidden');
             $("#loaderSpinner").removeAttr('hidden');
 
             // Show button step by step according to condition
@@ -871,44 +882,40 @@
                 setTimeout(() => {
                     $("#settingImplementCard").removeAttr('hidden');
                     $("#enableNewBranch").removeAttr('hidden');
-                    $("#boxLoading").attr('hidden', true);
                     $("#loaderSpin").attr('hidden', true);
                     $("#loaderSpinner").attr('hidden', true);
                     // Display Component Settings Empty
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
                     $("#documents").attr('hidden', true);
-                }, 1000);
+                }, 10);
             }else if($(this).attr('id') === 'flexRadioDefault2'){
                 setTimeout(() => {
                     $("#settingImplementCard").removeAttr('hidden');
                     $("#enableUpdateBranch").removeAttr('hidden');
-                    $("#boxLoading").attr('hidden', true);
                     $("#loaderSpin").attr('hidden', true);
                     $("#loaderSpinner").attr('hidden', true);
                     // Display Component Settings Empty
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
                     $("#documents").attr('hidden', true);
-                }, 1000);
+                }, 10);
             }else if($(this).attr('id') === 'flexRadioDefault3'){
                 setTimeout(() => {
                     $("#settingImplementCard").removeAttr('hidden');
                     $("#enableDeleteBranch").removeAttr('hidden');
-                    $("#boxLoading").attr('hidden', true);
                     $("#loaderSpin").attr('hidden', true);
                     $("#loaderSpinner").attr('hidden', true);
                     // Display Component Settings Empty
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
                     $("#documents").attr('hidden', true);
-                }, 1000);
+                }, 10);
             }else if($(this).attr('id') === 'flexRadioDefault4'){
                 $("#settingImplementCard").attr('hidden', true);
                 $("#enableNewBranch").attr('hidden', true);
                 $("#enableUpdateBranch").attr('hidden', true);
                 $("#enableDeleteBranch").attr('hidden', true);
-                $("#boxLoading").attr('hidden', true);
                 $("#loaderSpin").attr('hidden', true);
                 $("#loaderSpinner").attr('hidden', true);
                 $("#disabledNewBranch").attr('hidden', true);
@@ -1205,15 +1212,11 @@
             let settingDisplay = $("#SettingDisplay");
 
             // setting dispalay part
-            $("#displayLoading").removeAttr('hidden');
-            $("#displayLoader").removeAttr('hidden');
             $("#settingDisplayCard").attr('hidden', true);
 
             setTimeout(() => {
-                $("#displayLoader").attr('hidden', true);
-                $("#displayLoading").attr('hidden', true);
                 $("#settingDisplayCard").removeAttr('hidden'); 
-            }, 1000);
+            }, 10);
 
             if(branchType !== ''){
                 settingDisplay.find('#clearBranchType').remove();
@@ -2192,12 +2195,10 @@
 
             $(".disabledChecking").attr('hidden', true);
             $(".enableChecking").attr('hidden', true);
-            $("#loading").removeAttr('hidden');
             $("#loadingSpin").removeAttr('hidden');
             $("#loadingSpinner").attr('hidden', true);
 
             // setting dispalay part
-            $("#startLoading").attr('hidden', true);
             $("#continueousLoading").attr('hidden', true);
             $("#categorySettingDisplayCard").attr('hidden', true);
 
@@ -2206,41 +2207,37 @@
                 setTimeout(() => {
                     $("#settingCard").removeAttr('hidden');
                     $("#enableCategoryBranch").removeAttr('hidden');
-                    $("#loading").attr('hidden', true);
                     $("#loadingSpin").attr('hidden', true);
                     $("#loadingSpinner").attr('hidden', true);
                     // Display Component Settings Empty
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
-                }, 1000);
+                }, 10);
             }else if($(this).attr('id') === 'flexRadioDefault6'){
                 setTimeout(() => {
                     $("#settingCard").removeAttr('hidden');
                     $("#enableUpdateCategory").removeAttr('hidden');
-                    $("#loading").attr('hidden', true);
                     $("#loadingSpin").attr('hidden', true);
                     $("#loadingSpinner").attr('hidden', true);
                     // Display Component Settings Empty
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
-                }, 1000);
+                }, 10);
             }else if($(this).attr('id') === 'flexRadioDefault7'){
                 setTimeout(() => {
                     $("#settingCard").removeAttr('hidden');
                     $("#enableDeleteCategory").removeAttr('hidden');
-                    $("#loading").attr('hidden', true);
                     $("#loadingSpin").attr('hidden', true);
                     $("#loadingSpinner").attr('hidden', true);
                     // Display Component Settings Empty
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
-                }, 1000);
+                }, 10);
             }else if($(this).attr('id') === 'flexRadioDefault8'){
                 $("#settingCard").attr('hidden', true);
                 $("#enableCategoryBranch").attr('hidden', true);
                 $("#enableUpdateCategory").attr('hidden', true);
                 $("#enableDeleteCategory").attr('hidden', true);
-                $("#loading").attr('hidden', true);
                 $("#loadingSpin").attr('hidden', true);
                 $("#loadingSpinner").attr('hidden', true);
                 $("#disabledCategoryBranch").attr('hidden', true);
@@ -2253,7 +2250,6 @@
                 $("#SettingDisplay").empty();
                 $("#settingDisplayCard").attr('hidden', true);
                 // setting dispalay part
-                $("#startLoading").attr('hidden', true);
                 $("#continueousLoading").attr('hidden', true);
                 $("#categorySettingDisplayCard").attr('hidden', true);
             }

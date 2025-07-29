@@ -17,7 +17,6 @@
     ['labelName'=>'Home', 'btnClass'=>'btn btn-sm custom-tab-btn active','btnType'=>'button', 'btnId'=>'v-pills-home-tab', 'toggle'=>'pill', 'target'=>'#v-pills-home', 'btnRole'=>'tab', 'controls'=>'v-pills-home', 'selected'=>'true'],
     ['labelName'=>'Branch', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-branch-tab', 'toggle'=>'pill', 'target'=>'#v-pills-branch', 'btnRole'=>'tab', 'controls'=>'v-pills-branch', 'selected'=>'true'],
     ['labelName'=>'Category', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-category-tab', 'toggle'=>'pill', 'target'=>'#v-pills-category', 'btnRole'=>'tab', 'controls'=>'v-pills-category', 'selected'=>'false'],
-    ['labelName'=>'Search', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-search-tab', 'toggle'=>'pill', 'target'=>'#v-pills-search', 'btnRole'=>'tab', 'controls'=>'v-pills-search', 'selected'=>'false'],
     ['labelName'=>'Replace', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-replace-tab', 'toggle'=>'pill', 'target'=>'#v-pills-replace', 'btnRole'=>'tab', 'controls'=>'v-pills-replace', 'selected'=>'false'],
   ];
   // Modals
@@ -292,20 +291,33 @@
       <!-- =========== Left Side Tab Panel =========== -->
       <x-CustomLeftSideTabPanels.LeftSideTabPanel className="d-flex align-items-start">
         <!------------- Navbar ------------->
-        <x-CustomLeftSideTabPanels.LeftSideTabPanelNavBars.LeftSideTabPanelNavBar className="nav flex-column nav-pills component-focus me-1" navBarId="v-pills-tab" navBarRole="tablist" ariaOrientation="vertical">
-          @foreach($customLeftSideTabPanelGroupBtns as $data)
-          <x-CustomLeftSideTabPanels.LeftSideTabPanelBtn 
-            labe="{{ $data['labelName'] }}" 
-            buttonType="{{ $data['btnType'] }}" 
-            className="{{ $data['btnClass'] }}" 
-            buttonID="{{ $data['btnId'] }}" 
-            dataBsToggle="{{ $data['toggle'] }}" 
-            dataBsTarget="{{ $data['target'] }}" 
-            buttonRole="{{ $data['btnRole'] }}" 
-            ariaControl="{{ $data['controls'] }}" 
-            ariaSelect="{{ $data['selected'] }}" 
-          />
-          @endforeach
+        <x-CustomLeftSideTabPanels.LeftSideTabPanelNavBars.LeftSideTabPanelNavBar className="nav flex-column nav-pills sidebar-plate" navBarId="v-pills-tab" navBarRole="tablist" ariaOrientation="vertical">
+          <div class="icon-bar">
+            <span class="list-icon">
+              <span class="side-bar-text">
+                <strong>Settings-Menu</strong>
+                <input class="checkSideBar" type="checkbox" name="checking">
+              </span>
+            </span>
+            <span class="icon-box">
+              <div class="custom-side-bar-panel">
+                @foreach($customLeftSideTabPanelGroupBtns as $data)
+                <x-CustomLeftSideTabPanels.LeftSideTabPanelBtn 
+                  labe="{{ $data['labelName'] }}" 
+                  buttonType="{{ $data['btnType'] }}" 
+                  className="{{ $data['btnClass'] }}" 
+                  buttonID="{{ $data['btnId'] }}" 
+                  dataBsToggle="{{ $data['toggle'] }}" 
+                  dataBsTarget="{{ $data['target'] }}" 
+                  buttonRole="{{ $data['btnRole'] }}" 
+                  ariaControl="{{ $data['controls'] }}" 
+                  ariaSelect="{{ $data['selected'] }}" 
+                />
+                @endforeach
+                <span class="side-bar-left-arrow"></span>
+              </div>
+            </span>
+          </div>
         </x-CustomLeftSideTabPanels.LeftSideTabPanel>
         <!------------ Content ------------->
         <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.LeftSideTabContent className="tab-content" contentPanelId="v-pills-tabContent" >
@@ -322,14 +334,14 @@
           </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel>
           <!-- Branch Setting -->
           <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade" homePanelId="v-pills-branch" homeRole="tabpanel" ariaLabel="v-pills-branch-tab" >
-            <div class="row">
-              <div class="col-sm-4 drag-column" id="BranchSettingOptationCardMove">
+            <div class="row drag-row">
+              <div class="col-sm-4 drag-column">
                 @include('super-admin.branch._branch-setting-operation')
               </div>
-              <div class="col-sm-4 drag-column" id="SettingCardMove">
+              <div class="col-sm-4 drag-column">
                 @include('super-admin.branch._branch-setting-implement')
               </div>
-              <div class="col-sm-4 drag-column" id="SettingDisplayCardMove">
+              <div class="col-sm-4 drag-column">
                 @include('super-admin.branch._branch-setting-display')
               </div>
             </div>
