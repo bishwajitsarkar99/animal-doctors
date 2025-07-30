@@ -147,7 +147,7 @@
                 <span class="show-prof ms-2" id="emailSkel"></span>
             </li>
             <li>
-                <a class="dropdown-item pro_link btn-bottom-margin" id="setting_click">
+                <a type="button" class="dropdown-item pro_link btn-bottom-margin" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" id="setting_click">
                     <span class="show-setting badge rounded-pill bg-doragblue list-sm-btn pt-1" hidden>
                         <svg id="Layer_1" width="20px" height="15px" fill="" data-name="Layer 1" viewBox="0 0 122.88 122.88">
                             <defs><style>.cls-5{fill:#297cf8ff;}</style></defs><title>panel-setting</title>
@@ -169,5 +169,4 @@
             </li>
         </ul>
     </li>
-
 </ul>

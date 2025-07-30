@@ -43,6 +43,7 @@
     @include('backend.layouts.handler-js.them-setting-js._them-setup')
     @include('backend.layouts.layouts-components._themesetting-modal')
     @include('backend.layouts.layouts-components._logout-modal')
+    @include('backend.layouts.layouts-components._setting_offcanvas')
     @include('backend.layouts.layouts-components._profile')
     @include('loader.action-loader')
     @include('backend.layouts.layouts-components._account-holders')

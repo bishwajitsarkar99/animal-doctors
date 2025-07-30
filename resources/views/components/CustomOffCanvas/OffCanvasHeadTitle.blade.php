@@ -1,0 +1,1 @@
+<h6 class="{{ $headClass }}" id="{{ $headId }}">{{ $headLable }}</h6>
