@@ -30,9 +30,7 @@
   ];
   // SubMenuButtons
   $subMenuFilterBtns = [
-    ['filterBtnId'=> '', 'filterBtnLable'=> 'Branch ID'],
-    ['filterBtnId'=> '', 'filterBtnLable'=> 'Branch Type'],
-    ['filterBtnId'=> '', 'filterBtnLable'=> 'Branch Name']
+    ['filterBtnId'=> 'showFilterField', 'filterBtnLable'=> 'Click']
   ];
   $subMenuDownloadBtns = [
     ['downloadBtnId'=> '', 'downloadBtnLable'=> 'PDF File'],
@@ -80,7 +78,7 @@
       <!-- =========== Home Tab Content Panel Header =========== -->
       <x-CustomTabPanels.TabPanelContents.TabContentPanelHeader contentTabHeaderClass="table-heading component-focus">
         <div class="row">
-          <div class="col-sm-2">
+          <div class="col-sm-1">
             <span class="table-icon-skeleton">
               <!-- Table-Menu-Card -->
               <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component" menuChildClass="dropdown-content dropdown-menu-component menu-card" activeMenu="" wrapperId="BranchTableMenuCard" menuName="Menu" menuId="dropbtn" showIdClassName="table-icon-skeleton" menuIcon="☰">
@@ -102,30 +100,12 @@
                         </x-Buttons.MenuButtons.MenuCardButton>
                         <x-MenuCards.SubMenuCards.SubMenuCard subMenuCardClass="dropdown-search-submenu-component submenu-card">
                           <li class="child-line-row">
-                            <x-Buttons.MenuButtons.SubMenuCardButton className="sub-menu-btn" dataURL="#" subMenuBtnId="">
+                            <x-Buttons.MenuButtons.SubMenuCardButton className="sub-menu-btn" dataURL="#" subMenuBtnId="showSearchField">
                               <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
                                 <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
                                 <line x1="8" y1="12" x2="16" y2="12"/>
                               </svg>
-                              Search by Name
-                            </x-Buttons.MenuButtons.SubMenuCardButton>
-                          </li>
-                          <li class="child-line-row">
-                            <x-Buttons.MenuButtons.SubMenuCardButton className="sub-menu-btn" dataURL="#" subMenuBtnId="">
-                              <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
-                                <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
-                                <line x1="8" y1="12" x2="16" y2="12"/>
-                              </svg>
-                              Search by Date
-                            </x-Buttons.MenuButtons.SubMenuCardButton>
-                          </li>
-                          <li class="child-line-row">
-                            <x-Buttons.MenuButtons.SubMenuCardButton className="sub-menu-btn" dataURL="#" subMenuBtnId="">
-                              <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
-                                <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
-                                <line x1="8" y1="12" x2="16" y2="12"/>
-                              </svg>
-                              Search by ID
+                              Click
                             </x-Buttons.MenuButtons.SubMenuCardButton>
                           </li>
                         </x-MenuCards.SubMenuCards.SubMenuCard>
@@ -206,8 +186,29 @@
               </x-MenuCard.MenuCard>
             </span>
           </div>
-          <div class="col-sm-5"></div>
-          <div class="col-sm-5"></div>
+          <div class="col-sm-3">
+            <div class="search-column display_none">
+              <x-Inputs.SearchInput.Search parentClass="input-search-box" childClass="icon-box" searchSvgWidth="20" searchSvgHeight="20" searchSvgFill="white" searchSvgStroke="rgb(170, 170, 170)" searchSvgStrokeWidth="2" 
+                searchClass="form-control form-control-sm font-weight" searchType="search" searchName="search" searchPlaceHolder="Branch Search" searchId="search" searchValue=""
+              />
+              <button type="button" class="btn-close-toast"
+                data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="cancelSearchToast">
+              </button>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="filter-column display_none">
+              <x-Dropdown.DropdownMenu menuType="text" menuClass="form-control form-control-sm select2" menuName="branch_type" menuId="selectBranchCategories" menuSelectLabel="Select Branch Type">
+                <option value="sdf">sdf</option>
+              </x-Dropdown.DropdownMenu>
+              <button type="button" class="btn-close-toast"
+               data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="cancelFilterToast">
+              </button>
+            </div>
+          </div>
+          <div class="col-sm-5">
+            
+          </div>
         </div>
       </x-CustomTabPanels.TabPanelContents.TabContentPanelHeader>
       <!-- =========== Home Tab Content =========== -->
@@ -348,14 +349,14 @@
           </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel>
           <!-- Category Setting -->
           <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade" homePanelId="v-pills-category" homeRole="tabpanel" ariaLabel="v-pills-category-tab" >
-            <div class="row">
-              <div class="col-sm-4 drag-column" id="CategorySettingOptationCardMove">
+            <div class="row drag-row">
+              <div class="col-sm-4 drag-column">
                 @include('super-admin.branch._branch-category-setting-operation')
               </div>
-              <div class="col-sm-4 drag-column" id="CategorySettingCardMove">
+              <div class="col-sm-4 drag-column">
                 @include('super-admin.branch._branch-category-setting-implement')
               </div>
-              <div class="col-sm-4 drag-column" id="CategoryDisplayCardMove">
+              <div class="col-sm-4 drag-column">
                 @include('super-admin.branch._branch-category-setting-display')
               </div>
             </div>

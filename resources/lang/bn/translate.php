@@ -671,6 +671,7 @@ return[
     'Total Post-Categories'=>'মোট পোস্ট-ক্যাটাগরি',
     'Delete Category'=>'ক্যাটাগরি মুছুন',
     // Post Setting
+    'Setting'=>'সেটিং',
     'Post Setting'=>'পোস্ট সেটিং',
     'Total Post'=>'মোট পোস্ট',
     'Delete Post'=>'পোস্ট মুছুন',

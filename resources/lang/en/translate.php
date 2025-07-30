@@ -325,6 +325,7 @@ return[
     // Setting
     'SETTING'=>'SETTING',
     'Setting'=>'Setting',
+    'Settings'=>'Settings',
     'Post-Setting'=>'Post-Setting',
     'App-Setting'=>'App-Setting',
     // Navbar==========

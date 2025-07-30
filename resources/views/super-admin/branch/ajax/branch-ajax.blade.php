@@ -112,6 +112,30 @@
                 $('.sidebar-plate').removeClass('force-show');
             }
         });
+        // show Search Field
+        $(document).on('click', '#showSearchField', function(){
+            if($(this)){
+                $(".search-column").removeClass("display_none");
+            }else{
+                $(".search-column").addClass("display_none");
+            }
+        });
+        // show Search Field Cancel
+        $(document).on('click', '#cancelSearchToast', function(){
+            $(".search-column").addClass("display_none");
+        });
+        // show Filter Field
+        $(document).on('click', '#showFilterField', function(){
+            if($(this)){
+                $(".filter-column").removeClass("display_none");
+            }else{
+                $(".filter-column").addClass("display_none");
+            }
+        });
+        // show Filter Field Cancel
+        $(document).on('click', '#cancelFilterToast', function(){
+            $(".filter-column").addClass("display_none");
+        });
         // Remove Row and Column width or height space;
         $(document).on('click', '#tableResize', function(){
             sessionStorage.removeItem('Application_Session_RAM_BackendModule_M-BRN-2025-02-10-423_1_superadmingstmedicinecenter4215_gmail_com');
@@ -179,6 +203,8 @@
                     placeholderText = 'Select Upazila/Thana';
                 }else if (id === 'branch_category_name') {
                     placeholderText = 'Select Branch Category Name';
+                }else if (id === 'selectBranchCategories') {
+                    placeholderText = 'Select Branch Type';
                 }else if (id === '...') {
                     placeholderText = '...';
                     dropdownParent = $('#');
@@ -200,6 +226,9 @@
                 }
             });
         }
+        $('#selectBranchCategories').on('select2:open', function() {
+            $('.select2-search__field').attr('placeholder', 'Search Branch Type...');
+        });
         // Reinitialize Select2 for modals
         $('#branchTypeCreateModal').on('shown.bs.modal', function() {
             initSelect2('#branchTypeCreateModal');

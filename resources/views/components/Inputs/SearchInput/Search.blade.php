@@ -5,5 +5,5 @@
             <line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
     </span>
-    <input class="{{ $searchClass }}" type="{{ $searchType }}" name="{{ $searchName }}" value="{{ $searchValue }}" placeholder="{{ $searchPlaceHolder }}" id="{{ $searchId }}" />
+    <input class="{{ $searchClass }}" type="{{ $searchType }}" name="{{ $searchName }}" value="{{ $searchValue }}" placeholder="{{ $searchPlaceHolder }}" id="{{ $searchId }}" autocomplete="off"/>
 </span>

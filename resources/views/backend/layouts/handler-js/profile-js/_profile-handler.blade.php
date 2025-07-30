@@ -55,8 +55,10 @@
             $("#profileSkel").addClass('profile-skeletone');
             $("#emailSkel").addClass('profile-skeletone');
             $("#logoutSkel").addClass('log-skeletone');
+            $("#settingSkel").addClass('log-skeletone');
             $(".show-profile").attr('hidden', true);
             $(".show-email").attr('hidden', true);
+            $(".show-setting").attr('hidden', true);
             $(".show-prof").removeClass('display-skeletone');
             $(".show-logout").attr('hidden', true);
             $(".show-log").removeClass('display-skeletone');
@@ -65,9 +67,11 @@
                     $("#profileSkel").removeClass('profile-skeletone');
                     $("#emailSkel").removeClass('profile-skeletone');
                     $("#logoutSkel").removeClass('log-skeletone');
+                    $("#settingSkel").removeClass('log-skeletone');
                     $(".show-profile").removeAttr('hidden');
                     $(".show-logout").removeAttr('hidden');
                     $(".show-email").removeAttr('hidden');
+                    $(".show-setting").removeAttr('hidden');
                     $(".show-log").addClass('display-skeletone');
                     $(".show-prof").addClass('display-skeletone');
                 });
