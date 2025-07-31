@@ -1,1 +1,1 @@
-<h6 class="{{ $headClass }}" id="{{ $headId }}">{{ $headLable }}</h6>
+<h6 class="{{ $headClass }}" id="{{ $headId }}"><strong>{{ $headLable }}</strong></h6>

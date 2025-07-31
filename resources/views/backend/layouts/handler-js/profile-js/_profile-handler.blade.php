@@ -4,10 +4,6 @@
         $(document).on('click', '#profile_urllinks', function(e){
 
             e.preventDefault();
-            $("#accessconfirmbranch").modal('show');
-            $("#pageLoader").removeAttr('hidden');
-            $("#access_modal_box").addClass('loader_area');
-            $("#processModal_body").removeClass('loading_body_area');
             $(".text-fade-animation").addClass('profl_heading');
             $("#pro_image").addClass('profl_imag');
             $(".first_box").addClass('first_content');
@@ -15,38 +11,34 @@
             $(".third_box").addClass('third_content');
             $(".fourth_box").addClass('third_content');
             
+            requestAnimationFrame(() => {
+                addAttributeOrClass([
+                    {selector: '#pro_com_name, #info, #info2, .btn-close, .head', type: 'class', name: 'image-skeleton'},
+                    {selector: '#com_address', type: 'class', name: 'address-skeleton'},
+                    {selector: '.image-box', type: 'class', name: 'profile-img-skeleton'},
+                    {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
+                    {selector: '#company_info, #personal_info, #branch_information, #role_info', type: 'class', name: 'profile-head-skeleton'},
+                ]);
+            });
             setTimeout(() => {
-                requestAnimationFrame(() => {
-                    $("#accessconfirmbranch").modal('hide');
-                    $("#pageLoader").attr('hidden', true);
-                    $("#access_modal_box").removeClass('loader_area');
-                    $("#processModal_body").addClass('loading_body_area');
-                    
-                    $("#profile_form").modal('show').fadeIn(300).delay(300);
-                    addAttributeOrClass([
-                        {selector: '.image-box, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
-                        {selector: '#com_address', type: 'class', name: 'address-skeleton'},
-                        {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
-                        {selector: '#company_info, #personal_info, #branch_information, #role_info', type: 'class', name: 'profile-head-skeleton'},
-                    ]);
-                });
     
                 var time = null;
                 time = setTimeout(() => {
                     requestAnimationFrame(() => {
                         removeAttributeOrClass([
-                            {selector: '.image-box, #pro_com_name, #info, #info2, .btn-close', type: 'class', name: 'image-skeleton'},
+                            {selector: '#pro_com_name, #info, #info2, .btn-close, .head', type: 'class', name: 'image-skeleton'},
                             {selector: '#com_address', type: 'class', name: 'address-skeleton'},
+                            {selector: '.image-box', type: 'class', name: 'profile-img-skeleton'},
                             {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
                             {selector: '#company_info, #personal_info, #branch_information, #role_info', type: 'class', name: 'profile-head-skeleton'},
                         ]);
                     });
-                }, 3000);
+                }, 1500);
     
                 return ()=>{
                     clearTimeout(time);
                 }
-            }, 1500);
+            }, 1000);
             
         });
 
@@ -82,6 +74,9 @@
                 clearTimeout(time);
             }
         });
+
+        // Resize the Canvas
+        
     });
 
 </script>

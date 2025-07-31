@@ -1150,10 +1150,100 @@ button#cancelSearchToast, button#cancelFilterToast {
 .custom-offcanvas{
   box-shadow: rgba(0, 0, 0, 0.01) 0px 1px 20px, rgba(0, 123, 255, 0.2) 0px 2px 6px;
 }
+.offcanvas.offcanvas-end.custom-offcanvas{
+  width: 300px;
+}
 .custom-offcanvas-header{
-  background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #dde6e99c), color-stop(1, #5b90a1d1));
-  border-bottom: 1px dashed dodgerblue;
+  background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #dde6e99c), color-stop(1, #bcc9cd));
+  border-bottom: 1px dashed lightblue;
   font-family: var(--component-font-family);
+}
+.head{
+  display: flex;
+}
+.logo_size {
+  display: flex;
+  justify-content: center;
+  width: 30px;
+  height: 35px;
+}
+.panel-img-box {
+  display: flex;
+}
+.panel-img-size{
+  width: 240px;
+  height: 150px;
+}
+li.child-line-row {
+  list-style: none;
+}
+.canvas-link-btn {
+  background-color: white;
+  color: #222;
+  text-decoration: none;
+  line-height: 1.2;
+  padding-top: 1px;
+  margin-bottom: 1px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.canvas-link-btn:hover {
+  text-decoration: underline;
+  text-decoration-color: dodgerblue;
+  background-color: white;
+  color: dodgerblue !important;
+  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+}
+.block-space{
+  display: flex;
+  justify-content: space-between;
+}
+span.lable-name {
+  font-size: 14px;
+  font-weight: bolder;
+}
+ul.box-container{
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 5px;
+}
+li.box-row{
+  list-style: none;
+}
+.box-card{
+  border: 1px dashed white;
+  transition: 0.5ms;
+  background-image: radial-gradient(farthest-corner at 100px 100px, #fff, #fff);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+.box-card:hover{
+  border-radius: 5px;
+  border: 1px dashed dodgerblue;
+}
+.box-card-body{
+  background-color: white;
+}
+input.form-check-input.panel-checked:checked {
+  background-color: dodgerblue !important;
+  border-color: dodgerblue !important;
+}
+input#bluePanelChecked{
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+}
+.rl-lable-class{
+  font-family: var(--component-font-family);
+  color: #333;
+  font-size: 13px;
+  font-weight: bolder;
+  cursor: pointer;
+}
+.rl-lable-class:hover,input#bluePanelChecked:hover{
+  color: dodgerblue;
+  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
 }
 button.btn-close.offcanvas-btn-close {
   box-shadow: none;
