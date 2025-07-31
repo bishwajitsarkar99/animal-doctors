@@ -1147,8 +1147,24 @@ button#cancelSearchToast, button#cancelFilterToast {
   transition: opacity .2s ease-in-out;
 }
 /* =========== OffCanvas Setting =========== */
+.offcanvas-hidden {
+  display: none !important;
+}
 .custom-offcanvas{
   box-shadow: rgba(0, 0, 0, 0.01) 0px 1px 20px, rgba(0, 123, 255, 0.2) 0px 2px 6px;
+  animation: cardSlideLeft 1s linear;
+}
+@keyframes cardSlideLeft {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+    transition: 0.3ms;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+    transition: 0.3ms;
+  }
 }
 .offcanvas.offcanvas-end.custom-offcanvas{
   width: 300px;

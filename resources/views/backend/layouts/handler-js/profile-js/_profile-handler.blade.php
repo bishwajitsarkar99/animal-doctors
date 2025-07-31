@@ -1,15 +1,48 @@
 <script type="module">
-    import { addAttributeOrClass, removeAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
+    import { addAttributeOrClass, removeAttributeOrClass } from "/module/backend-module/backend-module-min.js";
+    import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
+    import { initOffCanvasResize, initAllOffcanvasResizers } from "/module/backend-module/component-module/offcanvas-component.js";
+
+    // Branch Table Menu Card Setting
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        window.addEventListener('resize', () => {
+            const offcanvas = document.querySelector('.offcanvas.show');
+            if (offcanvas && !offcanvas.classList.contains('showing')) {
+                offcanvas.classList.add('show');
+                offcanvas.style.visibility = 'visible';
+                offcanvas.style.transform = 'none';
+            }
+        });
+
+        initAllOffcanvasResizers('.offcanvas-card', '.offcanvas-setting-card');
+
+        const offCanvas = document.getElementById('SettingOffcanvas');
+
+        if (offCanvas) {
+
+            initOffCanvasResize(offCanvas, 'SettingOffcanvas');
+
+            const bsOffcanvas = new bootstrap.Offcanvas(offCanvas, {
+                backdrop: false,
+                keyboard: false,
+                scroll: true
+            });
+    
+            // Optional: Reopen on resize (DevTools open triggers this)
+            window.addEventListener('resize', () => {
+                if (!offCanvas.classList.contains('show')) {
+                    bsOffcanvas.show();
+                }
+            });
+        }
+    });
+    
     $(document).ready(function(){
         $(document).on('click', '#profile_urllinks', function(e){
 
             e.preventDefault();
-            $(".text-fade-animation").addClass('profl_heading');
-            $("#pro_image").addClass('profl_imag');
-            $(".first_box").addClass('first_content');
-            $(".second_box").addClass('second_content');
-            $(".third_box").addClass('third_content');
-            $(".fourth_box").addClass('third_content');
+            $("#offcanvasRightProfile").removeClass('offcanvas-hidden');
             
             requestAnimationFrame(() => {
                 addAttributeOrClass([
@@ -40,6 +73,10 @@
                 }
             }, 1000);
             
+        });
+
+        $(document).on('click', '.offcanvas-btn-close', function(){
+            $("#offcanvasRightProfile").addClass('offcanvas-hidden');
         });
 
         $(document).on('click', '.dropdown-toggle', ()=>{
@@ -75,7 +112,15 @@
             }
         });
 
-        // Resize the Canvas
+        // Setting Canvas
+        $(document).on('click', '#setting_click', function(e){
+            e.preventDefault();
+            $("#offcanvasRightSettings").removeClass('offcanvas-hidden');
+        });
+
+        $(document).on('click', '.setting-btn-close', function(){
+            $("#offcanvasRightSettings").addClass('offcanvas-hidden');
+        });
         
     });
 

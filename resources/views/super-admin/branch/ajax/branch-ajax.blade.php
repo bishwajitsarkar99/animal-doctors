@@ -55,6 +55,7 @@
             initDragAndDrop(column, cardKey, row, lineConnectionId, DataTable);
         });
 
+        // Hover Branch Setting Menu
         const iconBar = document.querySelector('.icon-bar');
         const sidebarPlate = document.querySelector('.sidebar-plate');
 

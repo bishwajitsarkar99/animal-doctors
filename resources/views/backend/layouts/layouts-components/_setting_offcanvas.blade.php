@@ -1,4 +1,8 @@
-<x-CustomOffCanvas.OffCanvas className="offcanvas offcanvas-end custom-offcanvas" offCanvasId="offcanvasRightSettings">
+<x-CustomOffCanvas.OffCanvas className="offcanvas offcanvas-end custom-offcanvas offcanvas-hidden offcanvas-setting-card" offCanvasId="offcanvasRightSettings">
+    <div class="panel-width-resizer left-resizer"></div>
+    <svg class="connector" width="100%" height="100%">
+        <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
+    </svg>
     <x-CustomOffCanvas.OffCanvasHeader className="offcanvas-header custom-offcanvas-header">
         <div class="head">
             <div class="logo_size">
@@ -6,7 +10,7 @@
             </div>
             <x-CustomOffCanvas.OffCanvasHeadTitle headClass="head_auth mt-2" headId="offcanvasRightLabel" headLable="Settings" />
         </div>
-        <x-CustomOffCanvas.OffCanvasCloseBtn closeBtnClass="btn-close text-reset offcanvas-btn-close" />
+        <x-CustomOffCanvas.OffCanvasCloseBtn closeBtnClass="btn-close text-reset offcanvas-btn-close setting-btn-close" />
     </x-CustomOffCanvas.OffCanvasHeader>
     <x-CustomOffCanvas.OffCanvasBody bodyClassName="offcanvas-body">
         <li class="child-line-row block-space">
