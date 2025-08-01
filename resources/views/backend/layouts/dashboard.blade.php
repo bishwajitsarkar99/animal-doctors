@@ -44,7 +44,7 @@
     @include('backend.layouts.layouts-components._themesetting-modal')
     @include('backend.layouts.layouts-components._logout-modal')
     @include('backend.layouts.layouts-components._setting_offcanvas')
-    @include('backend.layouts.layouts-components._profile')
+    @include('backend.layouts.layouts-components._profile_offcanvas')
     @include('loader.action-loader')
     @include('backend.layouts.layouts-components._account-holders')
     @include('backend.layouts.layouts-components._activity-log')
@@ -56,7 +56,7 @@
     @include('backend.layouts.handler-js.dropdown-menu-js._message-menu-js')
 
     @include('backend.layouts.handler-js.modal._modal-js')
-    @include('backend.layouts.handler-js.profile-js._profile-handler')
+    @include('backend.layouts.handler-js.top-bar-menu-js._top-bar-menu-handler')
     @include('backend.layouts.handler-js.account-setting-js._account-setting-ajax')
     @include('backend.layouts.handler-js.activity-log-js._activity-log-ajax')
     @include('backend.layouts.handler-js.footer-js._footer-menu-js')

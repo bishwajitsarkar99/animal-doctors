@@ -1,10 +1,8 @@
 <script type="module">
-    import { addAttributeOrClass, removeAttributeOrClass , removeDataTableStorage} from "/module/backend-module/backend-module-min.js";
-    import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
-    import { initOffCanvasResize, initAllOffcanvasResizers } from "/module/backend-module/component-module/offcanvas-component.js";
-    import { initDragAndDrop } from "/module/backend-module/component-module/card-component.js";
+    import { addAttributeOrClass, removeAttributeOrClass } from "/module/backend-module/backend-module-min.js";
+    import { initOffCanvasResize, initAllOffcanvasResizers,  initDragAndDrop } from "/module/backend-module/backend-moduleRAM-min.js";
 
-    // Branch Table Menu Card Setting
+    // Top Bar Menu : Profile Canvas and Setting Canvas Left Width Resize
     document.addEventListener('DOMContentLoaded', () => {
         // Resize OffCanvas
         window.addEventListener('resize', () => {
@@ -39,7 +37,6 @@
         }
 
         // Drag and Drop Setting Canvas
-        // drag and drop default card
         const row = '.drag-canvas-row';
         const column = '.drag-canvas-column';
         const cardKey = '.group-canvas';
@@ -54,35 +51,33 @@
     });
     
     $(document).ready(function(){
+        // Profile Canvas
         $(document).on('click', '#profile_urllinks', function(e){
 
             e.preventDefault();
             $("#offcanvasRightProfile").removeClass('offcanvas-hidden');
             
-            setTimeout(() => {
-    
-                var time = null;
-                time = setTimeout(() => {
-                    requestAnimationFrame(() => {
-                        removeAttributeOrClass([
-                            {selector: '#pro_com_name, #info, #info2, .profile-btn-close, .profile-head', type: 'class', name: 'image-skeleton'},
-                            {selector: '#com_address', type: 'class', name: 'address-skeleton'},
-                            {selector: '.image-box', type: 'class', name: 'profile-img-skeleton'},
-                            {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
-                            {selector: '#company_info, #personal_info, #branch_information, #role_info', type: 'class', name: 'profile-head-skeleton'},
-                        ]);
-                    });
-                    requestAnimationFrame(()=>{
-                        addAttributeOrClass([
-                            {selector: '.child-box', type: 'class', name: 'child-box-horizontal-line'}
-                        ]);
-                    });
-                }, 1500);
-    
-                return ()=>{
-                    clearTimeout(time);
-                }
-            }, 1000);
+            var time = null;
+            time = setTimeout(() => {
+                requestAnimationFrame(() => {
+                    removeAttributeOrClass([
+                        {selector: '#pro_com_name, #info, #info2, .profile-btn-close, .profile-head', type: 'class', name: 'image-skeleton'},
+                        {selector: '#com_address', type: 'class', name: 'address-skeleton'},
+                        {selector: '.image-box', type: 'class', name: 'profile-img-skeleton'},
+                        {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
+                        {selector: '#company_info, #personal_info, #branch_information, #role_info', type: 'class', name: 'profile-head-skeleton'},
+                    ]);
+                });
+                requestAnimationFrame(()=>{
+                    addAttributeOrClass([
+                        {selector: '.child-box', type: 'class', name: 'child-box-horizontal-line'}
+                    ]);
+                });
+            }, 1500);
+
+            return ()=>{
+                clearTimeout(time);
+            }
             
         });
 
@@ -124,7 +119,6 @@
         });
 
         // Setting Canvas
-
         $(document).on('click', '#setting_click', function(e){
             e.preventDefault();
 
@@ -133,25 +127,33 @@
             // removeDataTableStorage('offCanvasSettingDrag')
             // location.reload();
             
-            setTimeout(() => {
-    
-                var time = null;
-                time = setTimeout(() => {
-                    requestAnimationFrame(() => {
-                        removeAttributeOrClass([
-                            {selector: '.box-row, .lable-name, .card-lable-name, .canvas-link-btn, .setting-btn-close, .setting-head', type: 'class', name: 'image-skeleton'}
-                        ]);
-                    });
-                }, 1500);
-    
-                return ()=>{
-                    clearTimeout(time);
-                }
-            }, 1000);
+            var time = null;
+            time = setTimeout(() => {
+                requestAnimationFrame(() => {
+                    removeAttributeOrClass([
+                        {selector: '.box-row, .lable-name, .card-lable-name, .canvas-link-btn, .setting-btn-close, .setting-head', type: 'class', name: 'image-skeleton'}
+                    ]);
+                });
+            }, 1500);
+
+            return ()=>{
+                clearTimeout(time);
+            }
         });
 
         $(document).on('click', '.setting-btn-close', function(){
             $("#offcanvasRightSettings").addClass('offcanvas-hidden');
+        });
+
+        // Logout URL Mange
+        document.querySelectorAll('.logout').forEach(link => {
+            link.addEventListener('click', function(e){
+                e.preventDefault();
+                const url = this.getAttribute('data-url');
+                if(url){
+                    window.location.href = url;
+                }
+            });
         });
         
     });

@@ -27,11 +27,26 @@
         </div>
         <div class="company-information" style="background: white;">
           <div class="child-box">
-            <label id="pro_com_name" class="image-skeleton mt-1" for="company_name">Company : {{setting('company_name')}}</label><br>
-            <label id="com_address" class="address address-skeleton mt-1" for="address">Address : {{setting('company_address')}}</label><br>
-            <label id="com_address" class="address address-skeleton mt-1" for="address">Email : .............</label><br>
-            <label id="com_address" class="address address-skeleton mt-1" for="address">Web : .............</label><br>
-            <label id="com_address" class="address address-skeleton mt-1" for="address">Contract : .............</label><br>
+            <span id="pro_com_name" class="image-skeleton">
+              <label class="mt-1" for="company_name">Company :</label>
+              <span class="mt-1"> {{setting('company_name')}}</span><br>
+            </span>
+            <span id="com_address" class="address-skeleton">
+              <label class="address mt-1" for="address">Address : </label>
+              <span class="mt-1">{{setting('company_address')}}</span><br>
+            </span>
+            <span id="com_address" class="address-skeleton">
+              <label class="address mt-1" for="address">Email : </label>
+              <span class="mt-1">.............</span><br>
+            </span>
+            <span id="com_address" class="address-skeleton">
+              <label class="address mt-1" for="address">Web : </label>
+              <span class="mt-1">.............</span><br>
+            </span>
+            <span id="com_address" class="address-skeleton">
+              <label class="address mt-1" for="address">Contract : </label>
+              <span class="mt-1">.............</span><br>
+            </span>
           </div>
         </div>
       </div>

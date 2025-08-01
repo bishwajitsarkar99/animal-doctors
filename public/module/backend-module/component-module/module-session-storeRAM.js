@@ -42,3 +42,7 @@ window.addEventListener('beforeunload', () => {
 window.addEventListener('beforeunload', () => {
   sessionStorage.removeItem(getUserRAMKey());
 });
+// =========== Remove Data Table Store ============
+export function removeDataTableStorage(DataTable) {
+    removeRAM(DataTable);
+}

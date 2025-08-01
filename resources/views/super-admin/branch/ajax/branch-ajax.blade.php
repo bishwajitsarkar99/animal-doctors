@@ -16,16 +16,15 @@
         // Global RAM Storage System
         // renderGlobalRAMTable,
         // RAMAnalyzer 
-        // Menu Item
+        // Menu Item Resizeer
         initAllMenuCardResizers,
         initMenuCardResize,
+        // Branch Setting Card Drag and Drop
+        initDragAndDrop
     } from "/module/backend-module/backend-module-min.js";
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/appRAM/backendRAMCapacity/appSettingData.js";
     //import { getAppRAM } from "/appRAM/backendRAMCapacity/appBranchData.js";
-    // import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
-    // import { initPanelResize, initAllPanelResizers, initPanelMove } from "/module/backend-module/component-module/panel-component.js";
-    import { initDragAndDrop } from "/module/backend-module/component-module/card-component.js";
 
     // Branch Table Setting
     resize('BranchTableSetting', 'col-resizer', 'row-resizer');
@@ -33,8 +32,9 @@
     applySavedColumnOrder('BranchTableSetting');
     buttonLoader();
 
-    // Branch Table Menu Card Setting
+    // Branch Settings DOM Loaded
     document.addEventListener('DOMContentLoaded', () => {
+        // Branch Table Menu Card Resizer
         initAllMenuCardResizers('.menu-card', '.submenu-card');
 
         const tableCard = document.getElementById('BranchTableMenuCard');
@@ -42,11 +42,11 @@
             initMenuCardResize(tableCard, 'BranchTableMenuCard');
         }
 
-        // drag and drop default card
+        // Branch Setting Card Drag and Drop
         const row = '.drag-row';
         const column = '.drag-column';
         const cardKey = '.group-card';
-        //initDragAndDrop(column, cardKey, row, lineConnectionId)
+
         document.querySelectorAll(cardKey).forEach(card => {
             const cardId = card.id; // e.g., 'card-1', 'card-2', etc.
             const lineConnectionId = `lineConnectorId_${cardId}`;
@@ -55,7 +55,7 @@
             initDragAndDrop(column, cardKey, row, lineConnectionId, DataTable);
         });
 
-        // Hover Branch Setting Menu
+        // Hover Branch Settings Menu
         const iconBar = document.querySelector('.icon-bar');
         const sidebarPlate = document.querySelector('.sidebar-plate');
 
@@ -71,7 +71,7 @@
     
     // // Render global usage RAM as user key
     // renderGlobalRAMTable("ram-report-container");
-    // //per table data show RAM
+    // // DOM Loaded...per table data show RAM
     // document.addEventListener("DOMContentLoaded", () => {
     //     RAMAnalyzer.initRAMAnalyzer();
     //     const perItemsSelect = document.getElementById("perItems");
@@ -113,7 +113,7 @@
                 $('.sidebar-plate').removeClass('force-show');
             }
         });
-        // show Search Field
+        // Table Menu Card :show Search Field
         $(document).on('click', '#showSearchField', function(){
             if($(this)){
                 $(".search-column").removeClass("display_none");
@@ -121,11 +121,11 @@
                 $(".search-column").addClass("display_none");
             }
         });
-        // show Search Field Cancel
+        // Table Menu Card :show Search Field Cancel
         $(document).on('click', '#cancelSearchToast', function(){
             $(".search-column").addClass("display_none");
         });
-        // show Filter Field
+        // Table Menu Card :show Filter Field
         $(document).on('click', '#showFilterField', function(){
             if($(this)){
                 $(".filter-column").removeClass("display_none");
@@ -133,13 +133,12 @@
                 $(".filter-column").addClass("display_none");
             }
         });
-        // show Filter Field Cancel
+        // Table Menu Card :show Filter Field Cancel
         $(document).on('click', '#cancelFilterToast', function(){
             $(".filter-column").addClass("display_none");
         });
-        // Remove Row and Column width or height space;
+        // Remove Row and Column width or height space, BranchTableSetting;
         $(document).on('click', '#tableResize', function(){
-            //sessionStorage.removeItem('Application_Session_RAM_BackendModule_M-BRN-2025-02-10-423_1_superadmingstmedicinecenter4215_gmail_com');
             removeDataTableStorage('BranchTableSetting')
             location.reload();
         });
@@ -245,7 +244,6 @@
         $('#branch_category_name').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search branch type...');
         });
-
 
         // =================== Start Branch Setting Section ===================================
         // =============== Home Page Branch List =====================

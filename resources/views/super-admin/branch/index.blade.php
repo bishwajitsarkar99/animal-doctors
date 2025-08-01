@@ -207,7 +207,8 @@
             </div>
           </div>
           <div class="col-sm-5">
-            
+            <!-- =========== Branch Record =========== -->
+             
           </div>
         </div>
       </x-CustomTabPanels.TabPanelContents.TabContentPanelHeader>

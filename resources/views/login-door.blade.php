@@ -49,7 +49,7 @@
                 outline: none;
                 width: 100%;
                 padding: 2px 8px;
-                border: 1px solid #ccc;
+                border: 1px solid rgba(0,123,255,0.3);
                 border-radius: 3px;
                 font-size: 11px;
                 font-weight: 700;
@@ -148,7 +148,7 @@
                 font-family: "Poppins", Sans-serif;
                 padding-left: 13px;
                 margin-top:27px;
-                background-color: #e7e7d763;
+                background-color: #fff;
                 padding-bottom:10px;
                 padding-right:13px;
                 animation: fadeInFromTop 3s ease-out forwards, slideInLeftToRight 3s ease-out forwards;
@@ -169,6 +169,8 @@
             }
             .animation-box-one{
                 animation: fadeInFromTop 5s ease-out forwards, slideInLeftToRight 5s ease-out forwards; 
+                border-radius: 5px;
+                box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.1);
             }
             .animation-box-two{
                 animation: fadeInFromTop 5s ease-out forwards, slideInRightToLeft 5s ease-out forwards;  
@@ -185,11 +187,11 @@
             td.user-login-td {
                 font-family: "Poppins", Sans-serif;
                 width: 100%;
-                background-color: #dfdfde63;
+                background-color: #fff;
             }
             td.user_login_form_label {
                 font-family: "Poppins", Sans-serif;
-                background-color: #dfdfde63;
+                background-color: #fff;
                 width: 14%;
                 font-weight: 700;
                 font-size: 12px;
@@ -663,7 +665,7 @@
             <span class="media_text2 text_size text-light-black ms-3 mt-1">{{setting('company_name')}}</span>
         </div>
         <div class="relative flex items-top justify-center py-1 sm:pt-0 mt-5">
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 sm:items-center form-box animation-box-one">
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 bg-white dark:bg-white sm:items-center form-box animation-box-one">
                 <form id="loginDoorForm" action="#" method="POST" autocomplete="off">
                     <table>
                         <thead>
