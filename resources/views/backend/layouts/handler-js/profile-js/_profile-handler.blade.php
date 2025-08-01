@@ -1,11 +1,12 @@
 <script type="module">
-    import { addAttributeOrClass, removeAttributeOrClass } from "/module/backend-module/backend-module-min.js";
+    import { addAttributeOrClass, removeAttributeOrClass , removeDataTableStorage} from "/module/backend-module/backend-module-min.js";
     import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
     import { initOffCanvasResize, initAllOffcanvasResizers } from "/module/backend-module/component-module/offcanvas-component.js";
+    import { initDragAndDrop } from "/module/backend-module/component-module/card-component.js";
 
     // Branch Table Menu Card Setting
     document.addEventListener('DOMContentLoaded', () => {
-        
+        // Resize OffCanvas
         window.addEventListener('resize', () => {
             const offcanvas = document.querySelector('.offcanvas.show');
             if (offcanvas && !offcanvas.classList.contains('showing')) {
@@ -36,6 +37,20 @@
                 }
             });
         }
+
+        // Drag and Drop Setting Canvas
+        // drag and drop default card
+        const row = '.drag-canvas-row';
+        const column = '.drag-canvas-column';
+        const cardKey = '.group-canvas';
+        //initDragAndDrop(column, cardKey, row, lineConnectionId)
+        document.querySelectorAll(cardKey).forEach(card => {
+            const canvasId = card.id; // e.g., 'card-1', 'card-2', etc.
+            const lineConnectionId = `lineConnectorId_${canvasId}`;
+            const DataTable = 'OffCanvasSettingDrag';
+            // Call with dynamic IDs
+            initDragAndDrop(column, cardKey, row, lineConnectionId, DataTable);
+        });
     });
     
     $(document).ready(function(){
@@ -44,26 +59,22 @@
             e.preventDefault();
             $("#offcanvasRightProfile").removeClass('offcanvas-hidden');
             
-            requestAnimationFrame(() => {
-                addAttributeOrClass([
-                    {selector: '#pro_com_name, #info, #info2, .btn-close, .head', type: 'class', name: 'image-skeleton'},
-                    {selector: '#com_address', type: 'class', name: 'address-skeleton'},
-                    {selector: '.image-box', type: 'class', name: 'profile-img-skeleton'},
-                    {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
-                    {selector: '#company_info, #personal_info, #branch_information, #role_info', type: 'class', name: 'profile-head-skeleton'},
-                ]);
-            });
             setTimeout(() => {
     
                 var time = null;
                 time = setTimeout(() => {
                     requestAnimationFrame(() => {
                         removeAttributeOrClass([
-                            {selector: '#pro_com_name, #info, #info2, .btn-close, .head', type: 'class', name: 'image-skeleton'},
+                            {selector: '#pro_com_name, #info, #info2, .profile-btn-close, .profile-head', type: 'class', name: 'image-skeleton'},
                             {selector: '#com_address', type: 'class', name: 'address-skeleton'},
                             {selector: '.image-box', type: 'class', name: 'profile-img-skeleton'},
                             {selector: '.admin_title', type: 'class', name: 'heding-skeleton'},
                             {selector: '#company_info, #personal_info, #branch_information, #role_info', type: 'class', name: 'profile-head-skeleton'},
+                        ]);
+                    });
+                    requestAnimationFrame(()=>{
+                        addAttributeOrClass([
+                            {selector: '.child-box', type: 'class', name: 'child-box-horizontal-line'}
                         ]);
                     });
                 }, 1500);
@@ -113,9 +124,30 @@
         });
 
         // Setting Canvas
+
         $(document).on('click', '#setting_click', function(e){
             e.preventDefault();
+
             $("#offcanvasRightSettings").removeClass('offcanvas-hidden');
+
+            // removeDataTableStorage('offCanvasSettingDrag')
+            // location.reload();
+            
+            setTimeout(() => {
+    
+                var time = null;
+                time = setTimeout(() => {
+                    requestAnimationFrame(() => {
+                        removeAttributeOrClass([
+                            {selector: '.box-row, .lable-name, .card-lable-name, .canvas-link-btn, .setting-btn-close, .setting-head', type: 'class', name: 'image-skeleton'}
+                        ]);
+                    });
+                }, 1500);
+    
+                return ()=>{
+                    clearTimeout(time);
+                }
+            }, 1000);
         });
 
         $(document).on('click', '.setting-btn-close', function(){

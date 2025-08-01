@@ -947,7 +947,7 @@ button.btn.btn-sm.danger-repl-btn:hover{
 }
 /* ================ Custom Tab Btn Component Css ======================== */
 .sidebar-plate {
-  background: linear-gradient(90deg, rgba(0,123,255,0.1), #f9f9f9, rgba(0,123,255,0.2));
+  background:linear-gradient(90deg, #ebebeb, #ffffff6b, white);
   background-color: white;
   border-radius: 3px;
   min-width: 140px;
@@ -1150,6 +1150,11 @@ button#cancelSearchToast, button#cancelFilterToast {
 .offcanvas-hidden {
   display: none !important;
 }
+span.profile-heading {
+  font-size: 14px;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+}
 .custom-offcanvas{
   box-shadow: rgba(0, 0, 0, 0.01) 0px 1px 20px, rgba(0, 123, 255, 0.2) 0px 2px 6px;
   animation: cardSlideLeft 1s linear;
@@ -1173,6 +1178,7 @@ button#cancelSearchToast, button#cancelFilterToast {
   background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #dde6e99c), color-stop(1, #bcc9cd));
   border-bottom: 1px dashed lightblue;
   font-family: var(--component-font-family);
+  padding: 0rem 1rem;
 }
 .head{
   display: flex;
@@ -1187,7 +1193,7 @@ button#cancelSearchToast, button#cancelFilterToast {
   display: flex;
 }
 .panel-img-size{
-  width: 240px;
+  width: 100%;
   height: 150px;
 }
 li.child-line-row {
@@ -1215,8 +1221,27 @@ li.child-line-row {
   justify-content: space-between;
 }
 span.lable-name {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bolder;
+  font-family: var(--component-font-family);
+}
+span.card-lable-name {
+  font-family: var(--component-font-family);
+  font-size: 12px;
+  font-weight: bolder;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  background-color: #b775ff;
+  color: white;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 5px;
+  letter-spacing: 0.5px;
+  opacity: 1;
+  font-style: oblique;
+}
+.text-space{
+  text-align: end;
 }
 ul.box-container{
   padding: 0;
@@ -1226,6 +1251,10 @@ ul.box-container{
 }
 li.box-row{
   list-style: none;
+  cursor: move;
+}
+.form-check-input.panel-checked[type=checkbox] {
+  border-radius: 2em !important;
 }
 .box-card{
   border: 1px dashed white;
@@ -1245,17 +1274,19 @@ input.form-check-input.panel-checked:checked {
   background-color: dodgerblue !important;
   border-color: dodgerblue !important;
 }
-input#bluePanelChecked{
+input#bluePanelChecked, input#darkPanelChecked, input#whitePanelChecked{
   cursor: pointer;
   outline: none;
   box-shadow: none;
+  margin-top: 0.3rem;
 }
 .rl-lable-class{
   font-family: var(--component-font-family);
-  color: #333;
-  font-size: 13px;
-  font-weight: bolder;
+  color: #111;
+  font-size: 12px;
+  font-weight: 500;
   cursor: pointer;
+  letter-spacing: 0.3px;
 }
 .rl-lable-class:hover,input#bluePanelChecked:hover{
   color: dodgerblue;

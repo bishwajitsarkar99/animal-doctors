@@ -23,8 +23,8 @@
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/appRAM/backendRAMCapacity/appSettingData.js";
     //import { getAppRAM } from "/appRAM/backendRAMCapacity/appBranchData.js";
-    import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
-    import { initPanelResize, initAllPanelResizers, initPanelMove } from "/module/backend-module/component-module/panel-component.js";
+    // import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
+    // import { initPanelResize, initAllPanelResizers, initPanelMove } from "/module/backend-module/component-module/panel-component.js";
     import { initDragAndDrop } from "/module/backend-module/component-module/card-component.js";
 
     // Branch Table Setting
@@ -139,8 +139,8 @@
         });
         // Remove Row and Column width or height space;
         $(document).on('click', '#tableResize', function(){
-            sessionStorage.removeItem('Application_Session_RAM_BackendModule_M-BRN-2025-02-10-423_1_superadmingstmedicinecenter4215_gmail_com');
-            //removeDataTableStorage('BranchTableSetting')
+            //sessionStorage.removeItem('Application_Session_RAM_BackendModule_M-BRN-2025-02-10-423_1_superadmingstmedicinecenter4215_gmail_com');
+            removeDataTableStorage('BranchTableSetting')
             location.reload();
         });
         // ACtive table row background
