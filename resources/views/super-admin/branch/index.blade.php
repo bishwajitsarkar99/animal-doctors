@@ -216,77 +216,80 @@
             <!-- =========== Branch Record =========== -->
             <div class="card score-card">
               <div class="score-table-warpper">
-                <table class="table" id="scoreTable">
-                  <tbody class="barnch-score-table-body" id="branch_score">
+                <table class="table" id="branchScoreTable">
+                  <thead>
+                    <div class="score-row-resizer"></div>
+                    <!-- Row 1 -->
                     <tr class="score-row">
                       <th class="score-column">
-                        Total Branch Category
-                        <div class="progress-line-wrapper">
-                          <svg width="100%" height="20px" preserveAspectRatio="none">
-                            <!-- Background smooth path line -->
-                            <path d="M 0 10 H 1000" stroke="#d0f0fa" stroke-width="8" opacity="0.2" fill="none" />
-
+                        Total Category
+                        <div class="progress-line-wrapper ms-2">
+                          <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
                             <!-- Overlay path -->
-                            <path d="M 0 10 H 100%" stroke="purple" stroke-height="10" stroke-width="8" opacity="0.5" />
-
+                            <path d="M 0 10 H 100" stroke="purple" stroke-width="4" opacity="0.5" />
                             <!-- Dashed progress line with animation -->
-                            <line x1="0" y1="10" x2="1000" y2="10"
-                              stroke="#79cde9c9"
+                            <line x1="0" y1="10" x2="100" y2="10"
+                              stroke="#0026fc2d"
                               stroke-width="20"
-                              stroke-dasharray="10,5" marker-end="url(#arrow)">
+                              stroke-dasharray="10,5"
+                              marker-end="url(#arrow1)">
                               <animate attributeName="stroke-dashoffset"
-                              from="0" to="-30"
-                              dur="1s"
-                              repeatCount="indefinite" />
+                                from="0" to="-30"
+                                dur="2s"
+                                repeatCount="indefinite" />
                             </line>
-
+  
                             <!-- Arrow marker definition -->
                             <defs>
-                              <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5"
+                              <marker id="arrow1" viewBox="0 0 10 10" refX="10" refY="5"
                                 markerWidth="10" markerHeight="20" orient="auto">
-                                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(128, 0, 107, 0.53)" opacity="0.5" />
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(9, 0, 128, 0.3)" opacity="0.5" />
                               </marker>
                             </defs>
                           </svg>
                         </div>
+                        <div class="score-col-resizer"></div>
                       </th>
-                      <th class="score-column">50</th>
-                    </tr>
-                    <tr class="score-row">
+                      <th class="score-column">
+                        50
+                        <div class="score-col-resizer"></div>
+                      </th>
                       <th class="score-column">
                         Total Branch
-                        <div class="progress-line-wrapper">
-                          <svg width="100%" height="20px">
-                            <!-- Background bar -->
-                            <rect width="100%" height="20" fill="#fff" />
+                        <div class="progress-line-wrapper ms-2">
+                          <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
                             <!-- Overlay path -->
-                            <path d="M 0 10 H 100%" stroke="purple" stroke-width="8" opacity="0.5" />
+                            <path d="M 0 10 H 100" stroke="purple" stroke-width="4" opacity="0.5" />
                             <!-- Dashed progress line with arrow -->
-                            <line x1="0" y1="10" x2="100%" y2="10"
-                              stroke="#79cde9c9"
+                            <line x1="0" y1="10" x2="100" y2="10"
+                              stroke="#0026fc2d"
                               stroke-width="20"
                               stroke-dasharray="10,5"
                               marker-end="url(#arrow2)">
                               <animate attributeName="stroke-dashoffset"
-                              from="0" to="-30"
-                              dur="1s"
-                              repeatCount="indefinite" />
+                                from="0" to="-30"
+                                dur="2s"
+                                repeatCount="indefinite" />
                             </line>
                             <!-- Arrow marker definition -->
                             <defs>
                               <marker id="arrow2" viewBox="0 0 10 10" refX="10" refY="5"
                                 markerWidth="10" markerHeight="20" orient="auto">
-                                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(128, 0, 128, 0.53)" opacity="0.5" />
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(9, 0, 128, 0.3)" opacity="0.5" />
                               </marker>
                             </defs>
                           </svg>
                         </div>
+                        <div class="score-col-resizer"></div>
                       </th>
-                      <th class="score-column">50</th>
+                      <th class="score-column">
+                        50
+                        <div class="score-col-resizer"></div>
+                      </th>
                     </tr>
-                  </tbody>
+                  </thead>
                 </table>
-              </div> 
+              </div>
             </div>
           </div>
         </div>

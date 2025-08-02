@@ -30,6 +30,9 @@
     resize('BranchTableSetting', 'col-resizer', 'row-resizer');
     enableColumnDragAndDrop('BranchTableSetting', '.move-icon');
     applySavedColumnOrder('BranchTableSetting');
+    // Branch Score Table Resize
+    resize('branchScoreTable', 'score-col-resizer', 'score-row-resizer');
+    applySavedColumnOrder('branchScoreTable');
     buttonLoader();
 
     // Branch Settings DOM Loaded
