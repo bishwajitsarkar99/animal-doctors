@@ -101,11 +101,13 @@
                         <x-MenuCards.SubMenuCards.SubMenuCard subMenuCardClass="dropdown-search-submenu-component submenu-card">
                           <li class="child-line-row">
                             <x-Buttons.MenuButtons.SubMenuCardButton className="sub-menu-btn" dataURL="#" subMenuBtnId="showSearchField">
-                              <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
-                                <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
-                                <line x1="8" y1="12" x2="16" y2="12"/>
-                              </svg>
-                              Click
+                              <span class="btn-vertical-align">
+                                <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
+                                  <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
+                                  <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <span class="pt-1">Click</span>
+                              </span>
                             </x-Buttons.MenuButtons.SubMenuCardButton>
                           </li>
                         </x-MenuCards.SubMenuCards.SubMenuCard>
@@ -122,11 +124,13 @@
                           @foreach($subMenuFilterBtns as $data)
                           <li class="child-line-row">
                             <x-Buttons.MenuButtons.SubMenuCardButton className="sub-menu-btn" dataURL="#" subMenuBtnId="{{ $data['filterBtnId'] }}">
-                              <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
-                                <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
-                                <line x1="8" y1="12" x2="16" y2="12"/>
-                              </svg>
-                              {{ $data['filterBtnLable'] }}
+                              <span class="btn-vertical-align">
+                                <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
+                                  <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
+                                  <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <span class="pt-1">{{ $data['filterBtnLable'] }}</span>
+                              </span>
                             </x-Buttons.MenuButtons.SubMenuCardButton>
                           </li>
                           @endforeach
@@ -146,11 +150,13 @@
                           @foreach($subMenuDownloadBtns as $data)
                           <li class="child-line-row">
                             <x-Buttons.MenuButtons.SubMenuCardButton className="sub-menu-btn" dataURL="#" subMenuBtnId="{{ $data['downloadBtnId'] }}">
-                              <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
-                                <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
-                                <line x1="8" y1="12" x2="16" y2="12"/>
-                              </svg>
-                              {{ $data['downloadBtnLable'] }}
+                              <span class="btn-vertical-align">
+                                <svg width="18" height="17" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link-2">
+                                  <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/>
+                                  <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <span class="pt-1">{{ $data['downloadBtnLable'] }}</span>
+                              </span>
                             </x-Buttons.MenuButtons.SubMenuCardButton>
                           </li>
                           @endforeach
@@ -208,7 +214,80 @@
           </div>
           <div class="col-sm-5">
             <!-- =========== Branch Record =========== -->
-             
+            <div class="card score-card">
+              <div class="score-table-warpper">
+                <table class="table" id="scoreTable">
+                  <tbody class="barnch-score-table-body" id="branch_score">
+                    <tr class="score-row">
+                      <th class="score-column">
+                        Total Branch Category
+                        <div class="progress-line-wrapper">
+                          <svg width="100%" height="20px" preserveAspectRatio="none">
+                            <!-- Background smooth path line -->
+                            <path d="M 0 10 H 1000" stroke="#d0f0fa" stroke-width="8" opacity="0.2" fill="none" />
+
+                            <!-- Overlay path -->
+                            <path d="M 0 10 H 100%" stroke="purple" stroke-height="10" stroke-width="8" opacity="0.5" />
+
+                            <!-- Dashed progress line with animation -->
+                            <line x1="0" y1="10" x2="1000" y2="10"
+                              stroke="#79cde9c9"
+                              stroke-width="20"
+                              stroke-dasharray="10,5" marker-end="url(#arrow)">
+                              <animate attributeName="stroke-dashoffset"
+                              from="0" to="-30"
+                              dur="1s"
+                              repeatCount="indefinite" />
+                            </line>
+
+                            <!-- Arrow marker definition -->
+                            <defs>
+                              <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5"
+                                markerWidth="10" markerHeight="20" orient="auto">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(128, 0, 107, 0.53)" opacity="0.5" />
+                              </marker>
+                            </defs>
+                          </svg>
+                        </div>
+                      </th>
+                      <th class="score-column">50</th>
+                    </tr>
+                    <tr class="score-row">
+                      <th class="score-column">
+                        Total Branch
+                        <div class="progress-line-wrapper">
+                          <svg width="100%" height="20px">
+                            <!-- Background bar -->
+                            <rect width="100%" height="20" fill="#fff" />
+                            <!-- Overlay path -->
+                            <path d="M 0 10 H 100%" stroke="purple" stroke-width="8" opacity="0.5" />
+                            <!-- Dashed progress line with arrow -->
+                            <line x1="0" y1="10" x2="100%" y2="10"
+                              stroke="#79cde9c9"
+                              stroke-width="20"
+                              stroke-dasharray="10,5"
+                              marker-end="url(#arrow2)">
+                              <animate attributeName="stroke-dashoffset"
+                              from="0" to="-30"
+                              dur="1s"
+                              repeatCount="indefinite" />
+                            </line>
+                            <!-- Arrow marker definition -->
+                            <defs>
+                              <marker id="arrow2" viewBox="0 0 10 10" refX="10" refY="5"
+                                markerWidth="10" markerHeight="20" orient="auto">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(128, 0, 128, 0.53)" opacity="0.5" />
+                              </marker>
+                            </defs>
+                          </svg>
+                        </div>
+                      </th>
+                      <th class="score-column">50</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div> 
+            </div>
           </div>
         </div>
       </x-CustomTabPanels.TabPanelContents.TabContentPanelHeader>
