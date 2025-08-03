@@ -11,9 +11,10 @@ class AccountsServiceProvider
     */
     public function viewDashboard()
     {
+        $page_name = 'Dashboard';
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        return view('accounts.accounts-home-page',compact('company_profiles'));
+        return view('accounts.accounts-home-page',compact('company_profiles', 'page_name'));
     }
 }

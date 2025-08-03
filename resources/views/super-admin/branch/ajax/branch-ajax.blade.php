@@ -70,6 +70,8 @@
             sidebarPlate.classList.remove('hover-align-left');
             });
         }
+
+        document.getElementById('progressPercentage').textContent = "75%";
     });
     
     // // Render global usage RAM as user key
@@ -142,7 +144,7 @@
         });
         // Remove Row and Column width or height space, BranchTableSetting;
         $(document).on('click', '#tableResize', function(){
-            removeDataTableStorage('BranchTableSetting')
+            removeDataTableStorage('branchScoreTable')
             location.reload();
         });
         // ACtive table row background

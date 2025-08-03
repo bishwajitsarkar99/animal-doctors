@@ -11,9 +11,10 @@ class AdminService
     */
     public function viewDashboard()
     {
+        $page_name = 'Dashboard';
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        return view('admin.dashboard',compact('company_profiles'));
+        return view('admin.dashboard',compact('company_profiles', 'page_name'));
     }
 }

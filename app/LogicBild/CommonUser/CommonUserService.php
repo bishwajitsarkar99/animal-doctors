@@ -13,10 +13,11 @@ class CommonUserService
     */
     public function viewDashboard()
     {
+        $page_name = 'Dashboard';
         $company_profiles = Cache::rememberForever('company_profiles', function () {
             return companyProfile::find(1);
         });
-        return view('user.dashboard',compact('company_profiles'));
+        return view('user.dashboard',compact('company_profiles', 'page_name'));
     }
     /**
      * Handle user auth account.

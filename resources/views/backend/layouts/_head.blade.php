@@ -7,30 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
-<title>
-    @if(auth()->user()->role == 1)
-    Super-Admin
-    @endif
-    @if(auth()->user()->role == 2)
-    Sub-Admin
-    @endif
-    @if(auth()->user()->role == 3)
-    Admin
-    @endif
-    @if(auth()->user()->role == 5)
-    Accounts
-    @endif
-    @if(auth()->user()->role == 6)
-    Marketing
-    @endif
-    @if(auth()->user()->role == 7)
-    Delivery Team
-    @endif
-    @if(auth()->user()->role == 0)
-    Doctors-Center
-    @endif
-</title>
+<title>{{setting('company_name')}} || {{$page_name}}</title>
+<link rel="icon" type="shortcut icon" href="{{asset('backend_asset')}}/main_asset/img/com-black-favicon.png">
 <!-- ======== fontawesome ======== -->
 <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" />
 <link rel="stylesheet"  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />

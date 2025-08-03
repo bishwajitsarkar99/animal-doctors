@@ -44,7 +44,7 @@ class SuperAdminService
         ];
 
         $user = Auth::user();
-
+        $page_name = 'Dashboard';
         // Category
         $categories = Category::orderBy('id', 'desc')->where('status', '=', 1)->get();
         $category_counts = $categories->count();
@@ -62,7 +62,7 @@ class SuperAdminService
         $vendor_counts = Supplier::where('type','Vendor')->where('supplier_status',1)->count();
 
         return view('super-admin.dashboard', compact('users', 'user', 'usersCount', 'userCountCurentYear','category_counts','subCategory_counts','brand_counts','product_counts',
-        'supplier_counts','vendor_counts'));
+        'supplier_counts','vendor_counts', 'page_name'));
     }
     /**
      * Handle year count private function.

@@ -1304,24 +1304,22 @@ button.btn-close.offcanvas-btn-close:hover{
 /* =========== Golobal Score Card  =========== */
 .score-card{
   background-color: color-mix(in hsl increasing hue, #fff 100%, lightgray 10%);
-  border: 1px ridge rgba(0,123,255,0.1);
+  border: none;
 }
 .barnch-score-table-body{
   background-color: color-mix(in hsl increasing hue, #fff 100%, lightgray 10%);
 }
 tr.score-row{
-  display: flex;
   background-color: color-mix(in hsl increasing hue, #fff 100%, lightgray 10%) !important;
+  border: 1px ridge rgba(0, 123, 255, 0.1);
+  text-align: center;
 }
 th.score-column{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   font-family: var(--component-font-family);
   background-image: -webkit-gradient(linear, 0 100%, 0 0, from(#bde1edc9), to(#dcf6ffbf));
   background-color: color-mix(in hsl increasing hue, #d7ffff 30%, #fff 10%) !important;
-  border: 1px ridge #fff !important;
-  padding-left: 5px;
+  border: 1px ridge rgba(0, 123, 255, 0.2) !important;
   font-size: 12px;
   letter-spacing: 0.3px;
   color: #222;
@@ -1339,8 +1337,8 @@ th.score-column{
 table#branchScoreTable{
   width: 100%;
 }
-.score-table-warpper{
-  min-width: 420px;
+.score-table-responsive{
+  min-width: 400px;
   overflow-y: auto;
   overflow-x: auto;
   min-height: 10px;
@@ -1379,9 +1377,13 @@ table#branchScoreTable{
   transition: border-color 0.3s, background-color 0.3s, color 0.3s;
   cursor: row-resize;
 }
-th.row-resizing {
-  border-top: 1px dashed #007bff !important;
-  border-bottom: 1px dashed #007bff !important;
+th.col-resizing{
+  border: 1px dashed #007bff !important;
+  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+  cursor: row-resize;
+}
+th.row-resizing{
+  border: 1px dashed #007bff !important;
   transition: border-color 0.3s, background-color 0.3s, color 0.3s;
   cursor: row-resize;
 }

@@ -216,79 +216,113 @@
             <!-- =========== Branch Record =========== -->
             <div class="card score-card">
               <div class="score-table-warpper">
-                <table class="table" id="branchScoreTable">
-                  <thead>
-                    <div class="score-row-resizer"></div>
-                    <!-- Row 1 -->
-                    <tr class="score-row">
-                      <th class="score-column">
-                        Total Category
-                        <div class="progress-line-wrapper ms-2">
-                          <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
-                            <!-- Overlay path -->
-                            <path d="M 0 10 H 100" stroke="purple" stroke-width="4" opacity="0.5" />
-                            <!-- Dashed progress line with animation -->
-                            <line x1="0" y1="10" x2="100" y2="10"
-                              stroke="#0026fc2d"
-                              stroke-width="20"
-                              stroke-dasharray="10,5"
-                              marker-end="url(#arrow1)">
-                              <animate attributeName="stroke-dashoffset"
-                                from="0" to="-30"
-                                dur="2s"
-                                repeatCount="indefinite" />
-                            </line>
-  
-                            <!-- Arrow marker definition -->
-                            <defs>
-                              <marker id="arrow1" viewBox="0 0 10 10" refX="10" refY="5"
-                                markerWidth="10" markerHeight="20" orient="auto">
-                                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(9, 0, 128, 0.3)" opacity="0.5" />
-                              </marker>
-                            </defs>
-                          </svg>
-                        </div>
-                        <div class="score-col-resizer"></div>
-                      </th>
-                      <th class="score-column">
-                        50
-                        <div class="score-col-resizer"></div>
-                      </th>
-                      <th class="score-column">
-                        Total Branch
-                        <div class="progress-line-wrapper ms-2">
-                          <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
-                            <!-- Overlay path -->
-                            <path d="M 0 10 H 100" stroke="purple" stroke-width="4" opacity="0.5" />
-                            <!-- Dashed progress line with arrow -->
-                            <line x1="0" y1="10" x2="100" y2="10"
-                              stroke="#0026fc2d"
-                              stroke-width="20"
-                              stroke-dasharray="10,5"
-                              marker-end="url(#arrow2)">
-                              <animate attributeName="stroke-dashoffset"
-                                from="0" to="-30"
-                                dur="2s"
-                                repeatCount="indefinite" />
-                            </line>
-                            <!-- Arrow marker definition -->
-                            <defs>
-                              <marker id="arrow2" viewBox="0 0 10 10" refX="10" refY="5"
-                                markerWidth="10" markerHeight="20" orient="auto">
-                                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(9, 0, 128, 0.3)" opacity="0.5" />
-                              </marker>
-                            </defs>
-                          </svg>
-                        </div>
-                        <div class="score-col-resizer"></div>
-                      </th>
-                      <th class="score-column">
-                        50
-                        <div class="score-col-resizer"></div>
-                      </th>
-                    </tr>
-                  </thead>
-                </table>
+                <div class="score-table-responsive">
+                  <table class="table" id="branchScoreTable">
+                    <thead>
+                      <!-- Row 1 -->
+                      <tr class="score-row">
+                        <th class="score-column">
+                          Total Category
+                          <div class="score-row-resizer"></div>
+                          <div class="score-col-resizer"></div>
+                        </th>
+                        <th class="score-column">
+                          <div class="progress-line-wrapper">
+                            <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
+                              <!-- Overlay path -->
+                              <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.3" />
+
+                              <!-- Dashed progress line with animation -->
+                              <line x1="0" y1="10" x2="100" y2="10"
+                                stroke="#0026fc2d"
+                                stroke-width="20"
+                                stroke-dasharray="10,5"
+                                marker-end="url(#arrow1)">
+                                <animate attributeName="stroke-dashoffset"
+                                  from="0" to="-30"
+                                  dur="2s"
+                                  repeatCount="indefinite" />
+                              </line>
+
+                              <!-- Text background box -->
+                              <rect x="43" y="8" rx="3" ry="3" width="14" height="10" fill="#fff" filter="url(#shadow)" />
+
+                              <!-- Percentage Text -->
+                              <text x="50" y="13" text-anchor="middle" fill="#000" font-size="8" font-weight="bold">
+                                50%
+                              </text>
+
+                              <!-- Arrow marker definition -->
+                              <defs>
+                                <marker id="arrow1" viewBox="0 0 10 10" refX="10" refY="5"
+                                  markerWidth="10" markerHeight="20" orient="auto">
+                                  <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(9, 0, 128, 0.3)" opacity="0.5" />
+                                </marker>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div class="score-row-resizer"></div>
+                          <div class="score-col-resizer"></div>
+                        </th>
+                        <th class="score-column">
+                          50
+                          <div class="score-row-resizer"></div>
+                          <div class="score-col-resizer"></div>
+                        </th>
+                        <th class="score-column">
+                          Total Branch
+                          <div class="score-row-resizer"></div>
+                          <div class="score-col-resizer"></div>
+                        </th>
+                        <th class="score-column">
+                          <div class="progress-line-wrapper">
+                            <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
+                              <!-- Progress path -->
+                              <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.3" />
+
+                              <!-- Animated dashed line -->
+                              <line x1="0" y1="10" x2="100" y2="10"
+                                stroke="#0026fc2d"
+                                stroke-width="20"
+                                stroke-dasharray="10,5"
+                                marker-end="url(#arrow1)">
+                                <animate attributeName="stroke-dashoffset" from="0" to="-30" dur="2s" repeatCount="indefinite" />
+                              </line>
+
+                              <!-- Text background box -->
+                              <rect x="43" y="6" rx="2" ry="2" width="14" height="10" fill="#fff" filter="url(#shadow)" />
+
+                              <!-- Percentage Text -->
+                              <text x="50" y="13" text-anchor="middle" fill="#000" font-size="8" font-weight="bold">
+                                50%
+                              </text>
+
+                              <!-- Arrow marker and shadow filter -->
+                              <defs>
+                                <marker id="arrow1" viewBox="0 0 10 10" refX="10" refY="5"
+                                  markerWidth="10" markerHeight="20" orient="auto">
+                                  <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(9, 0, 128, 0.3)" opacity="0.5" />
+                                </marker>
+
+                                <!-- Shadow Filter -->
+                                <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                                  <feDropShadow dx="0" dy="0.5" stdDeviation="0.5" flood-color="rgba(0,0,0,0.3)" />
+                                </filter>
+                              </defs>
+                            </svg>
+                          </div>
+                          <div class="score-row-resizer"></div>
+                          <div class="score-col-resizer"></div>
+                        </th>
+                        <th class="score-column">
+                          50
+                          <div class="score-row-resizer"></div>
+                          <div class="score-col-resizer"></div>
+                        </th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
