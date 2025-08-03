@@ -222,15 +222,10 @@
                       <!-- Row 1 -->
                       <tr class="score-row">
                         <th class="score-column">
-                          Total Category
-                          <div class="score-row-resizer"></div>
-                          <div class="score-col-resizer"></div>
-                        </th>
-                        <th class="score-column">
                           <div class="progress-line-wrapper">
                             <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
                               <!-- Overlay path -->
-                              <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.3" />
+                              <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.5" />
 
                               <!-- Dashed progress line with animation -->
                               <line x1="0" y1="10" x2="100" y2="10"
@@ -243,13 +238,20 @@
                                   dur="2s"
                                   repeatCount="indefinite" />
                               </line>
+                              <!-- KB Text background box -->
+                              <rect x="8" y="3" rx="3" ry="3" width="30" height="15" fill="springgreen" filter="url(#shadow)" opacity="0.8" />
 
-                              <!-- Text background box -->
-                              <rect x="43" y="8" rx="3" ry="3" width="14" height="10" fill="#fff" filter="url(#shadow)" />
+                              <!-- KB Text -->
+                              <text x="23" y="13" text-anchor="middle" fill="#000" font-size="7" font-weight="600">
+                                1.17 KB
+                              </text>
 
-                              <!-- Percentage Text -->
-                              <text x="50" y="13" text-anchor="middle" fill="#000" font-size="8" font-weight="bold">
-                                50%
+                              <!-- Mili Second Text background box -->
+                              <rect x="50" y="3" rx="3" ry="3" width="35" height="15" fill="blue" filter="url(#shadow)" opacity="0.5" />
+
+                              <!-- Mili Second Text -->
+                              <text x="67" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="300">
+                                300 ms
                               </text>
 
                               <!-- Arrow marker definition -->
@@ -265,12 +267,12 @@
                           <div class="score-col-resizer"></div>
                         </th>
                         <th class="score-column">
-                          50
+                          Total Category
                           <div class="score-row-resizer"></div>
                           <div class="score-col-resizer"></div>
                         </th>
                         <th class="score-column">
-                          Total Branch
+                          50
                           <div class="score-row-resizer"></div>
                           <div class="score-col-resizer"></div>
                         </th>
@@ -289,12 +291,20 @@
                                 <animate attributeName="stroke-dashoffset" from="0" to="-30" dur="2s" repeatCount="indefinite" />
                               </line>
 
-                              <!-- Text background box -->
-                              <rect x="43" y="6" rx="2" ry="2" width="14" height="10" fill="#fff" filter="url(#shadow)" />
+                              <!-- KB Text background box -->
+                              <rect x="8" y="3" rx="3" ry="3" width="30" height="15" fill="springgreen" filter="url(#shadow)" opacity="0.8" />
 
-                              <!-- Percentage Text -->
-                              <text x="50" y="13" text-anchor="middle" fill="#000" font-size="8" font-weight="bold">
-                                50%
+                              <!-- KB Text -->
+                              <text x="23" y="13" text-anchor="middle" fill="#000" font-size="7" font-weight="600">
+                                1.1 KB
+                              </text>
+
+                              <!-- Mili Second Text background box -->
+                              <rect x="50" y="3" rx="3" ry="3" width="35" height="15" fill="blue" filter="url(#shadow)" opacity="0.5" />
+
+                              <!-- Mili Second Text -->
+                              <text x="67" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="300">
+                                250 ms
                               </text>
 
                               <!-- Arrow marker and shadow filter -->
@@ -311,6 +321,11 @@
                               </defs>
                             </svg>
                           </div>
+                          <div class="score-row-resizer"></div>
+                          <div class="score-col-resizer"></div>
+                        </th>
+                        <th class="score-column">
+                          Total Branch
                           <div class="score-row-resizer"></div>
                           <div class="score-col-resizer"></div>
                         </th>
