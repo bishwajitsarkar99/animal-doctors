@@ -342,7 +342,8 @@ class BranchServiceProvicer
                 // Filter
                 $branchType = $request->input('branch_type');
 
-                $getBranches = Branches::whereIn('branch_id', $branch_id)->with(['divisions', 'districts', 'thana_or_upazilas']);
+                $getBranches = Branches::select('id', 'branch_type', 'branch_id', 'branch_name', 'division_id', 'district_id', 'upazila_id', 'town_name', 'location',  'created_by',  'updated_by', 'created_at', 'updated_at')
+                ->whereIn('branch_id', $branch_id)->with(['divisions', 'districts', 'thana_or_upazilas']);
 
                 // Apply Searching
                 $getBranches->when($query, function($q) use($query){

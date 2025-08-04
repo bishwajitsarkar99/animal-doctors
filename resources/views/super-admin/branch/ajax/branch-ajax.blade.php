@@ -24,8 +24,8 @@
         initDragAndDrop
     } from "/module/backend-module/backend-module-min.js";
     // Import RAM functions
-    import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/appRAM/backendRAMCapacity/appSettingData.js";
-    //import { getAppRAM } from "/appRAM/backendRAMCapacity/appBranchData.js";
+    import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/appRAM/backendRAMCapacity/appBranchData.js";
+    //localStorage.removeItem('AppBackendRAM_Branch-Section_M-BRN-2025-02-10-423_1_superadmingstmedicinecenter4215_gmail_com');
 
     // Branch Table Setting
     resize('BranchTableSetting', 'col-resizer', 'row-resizer');
@@ -725,6 +725,13 @@
         }
         // fetch branch for table
         function fetchTableBranch( query = '', url = null, perItem = null, sortField = 'id', sortDirection = 'desc'){
+
+            // if (getAppRAM('branchSearchFlags')) {
+            //     // Use cached data
+            //     populate_branch_searches(getAppRAM('branchSearchResults'));
+            //     return;
+            // }
+
             perItem = perItem ?? $("#perItemControl").val();
 
             let current_url = url ?? `{{ route('search-branch.action') }}`;
@@ -750,6 +757,13 @@
                     sort_direction: sortDirection
                 },
                 success: function(response) {
+                    // Save to Parent RAM
+                    // updateAppRAMBulk({
+                    //     branchSearchFlags: true,
+                    //     branchSearchResults: response
+                    // });
+                    // populate_branch_searches(response);
+
                     const { data, links, total, per_page, per_item_num, totalBranch, totalBranchCategories, message } = response;
 
                     if (message) {
@@ -838,8 +852,9 @@
             fetchTableBranch();
         });
         // Sort Data For Branch List Table Data
-        $(document).on('click', '#headId', function(){
-            var button = $(this);
+        $(document).on('click', '.label-svg', function(){
+            var btnIcon = $(this);
+            var button = $("#headId");
             var column = button.data('coloumn');
             var order = button.data('order');
 
@@ -854,7 +869,7 @@
             );
 
             // Remove only the icon from the clicked column (Keep other column icons)
-            button.find("#Layer_1").remove();
+            btnIcon.find("#Layer_1").remove();
 
             // Define sorting icons 
             var iconHTML = order === 'desc'
@@ -862,7 +877,7 @@
                 : `<svg id="Layer_1" width="12px" height="12px" fill="#333333a1" version="1.1" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,122.88 0,59.207 39.403,59.207 39.403,0 83.033,0 83.033,59.207 122.433,59.207 61.216,122.88"/></g></svg>`; // Up arrow
 
             // Append sorting icon only for the clicked column
-            button.append(iconHTML);
+            btnIcon.append(iconHTML);
 
         });
         // tab button

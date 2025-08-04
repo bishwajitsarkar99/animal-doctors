@@ -4,46 +4,54 @@ function getUserRAMKey() {
     const branch_id = document.querySelector('meta[name="branch-id"]')?.content || 'identifyer';
     const email = document.querySelector('meta[name="user-email"]')?.content || 'unknown';
     const safeEmail = email.replace(/[^a-zA-Z0-9]/g, '_');
-    return `AppRAM_${branch_id}_${role}_${safeEmail}`;
+    const moduleName = '{Branch-Section}';
+    return `AppBackendRAM_${moduleName}_${branch_id}_${role}_${safeEmail}`;
 }
 
 // Load RAM from localStorage or init new
-let AppRAM = localStorage.getItem(getUserRAMKey())
+let AppBackendRAM = localStorage.getItem(getUserRAMKey())
     ? JSON.parse(localStorage.getItem(getUserRAMKey()))
     : {
-        // Store Branch List Data
-        branchListData: {},
+        // Branch Setting Data
+        branchTypeFlags: false,
+        branchTypes: [],
+        branchCategoryFlags: false,
+        branchCategories: [],
+        branchSearchFlags: false,
+        branchSearchResults: [],
+        branchDetails: {},
+        branchCategoryDetails: {},
 
-        // Current Fetch Time
+        // Last Update Fetch Data Time 
         lastFetchTime: Date.now(),
         currentUser: {},
+        tempFormData: {},
     };
-
 // data get
 function getAppRAM(key, fallback = null) {
-    return AppRAM.hasOwnProperty(key) ? AppRAM[key] : fallback;
+    return AppBackendRAM.hasOwnProperty(key) ? AppBackendRAM[key] : fallback;
 }
 // single data update
 function updateAppRAM(key, value) {
-    AppRAM[key] = value;
-    localStorage.setItem(getUserRAMKey(), JSON.stringify(AppRAM));
+    AppBackendRAM[key] = value;
+    localStorage.setItem(getUserRAMKey(), JSON.stringify(AppBackendRAM));
 }
 // multi data update
 function updateAppRAMBulk(obj = {}) {
     Object.entries(obj).forEach(([key, value]) => {
-        AppRAM[key] = value;
+        AppBackendRAM[key] = value;
     });
-    localStorage.setItem(getUserRAMKey(), JSON.stringify(AppRAM));
+    localStorage.setItem(getUserRAMKey(), JSON.stringify(AppBackendRAM));
 }
 // current user cache clear
 function clearAppRAM() {
     localStorage.removeItem(getUserRAMKey());
-    AppRAM = {};
+    AppBackendRAM = {};
 }
 // all user cache clear
 function clearAllAppRAM() {
     Object.keys(localStorage).forEach(key => {
-        if (key.startsWith('AppRAM_')) {
+        if (key.startsWith('AppBackendRAM_')) {
             localStorage.removeItem(key);
         }
     });
