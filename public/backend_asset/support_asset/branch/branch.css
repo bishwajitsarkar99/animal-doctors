@@ -21,6 +21,9 @@
     margin-right: 12px;
     padding-right: 10px;
 }
+#headId{
+    cursor: pointer;
+}
 .alert{
     --bs-alert-padding-x: 0.5rem;
     --bs-alert-padding-y: 0.0rem;
@@ -127,7 +130,7 @@ td.td-error-cell{
     border-right: 1px ridge #dfdede;
     border-left: 1px ridge #dfdede;
     border-bottom: none;
-    background-color: #fff;
+    background-color: #fff !important;
 }
 .setting-table-wrapper{
     max-height: 400px;

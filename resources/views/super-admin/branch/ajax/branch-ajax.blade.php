@@ -11,6 +11,7 @@
         enableColumnDragAndDrop, 
         applySavedColumnOrder,
         restoreRowHeights,
+        numberAnimation,
         // Border Component
         buttonBorderAnimation,
         // Global RAM Storage System
@@ -33,6 +34,9 @@
     // Branch Score Table Resize
     resize('branchScoreTable', 'score-col-resizer', 'score-row-resizer');
     applySavedColumnOrder('branchScoreTable');
+    // Branch Score Table Number Animation , #totalBranchCategories
+    const numberClass = '.total-number';
+
     buttonLoader();
 
     // Branch Settings DOM Loaded
@@ -70,8 +74,7 @@
             sidebarPlate.classList.remove('hover-align-left');
             });
         }
-
-        document.getElementById('progressPercentage').textContent = "75%";
+        //document.getElementById('progressPercentage').textContent = "75%";
     });
     
     // // Render global usage RAM as user key
@@ -144,7 +147,7 @@
         });
         // Remove Row and Column width or height space, BranchTableSetting;
         $(document).on('click', '#tableResize', function(){
-            removeDataTableStorage('branchScoreTable')
+            removeDataTableStorage('BranchTableSetting')
             location.reload();
         });
         // ACtive table row background
@@ -665,12 +668,12 @@
             if (rows.length === 0) {
                 return `
                     <tr>
-                        <td class="td-error-cell" align="center" text-danger colspan="9">
+                        <td class="td-error-cell text-center" colspan="9">
                             <div class="table-svg-container pt-1">
                                 <svg width="20" height="30" viewBox="0 0 61 81" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="#A" x=".5" y=".5"/><symbol id="A" overflow="visible"><g stroke="none"><path d="M0 10.929V69.07C0 75.106 13.432 80 30 80V10.929H0z" fill="#3999c6"/><path d="M29.589 79.999h.412c16.568 0 30-4.891 30-10.929v-58.14H29.589v69.07z" fill="#59b4d9"/><path d="M60 10.929c0 6.036-13.432 10.929-30 10.929S0 16.965 0 10.929 13.432 0 30 0s30 4.893 30 10.929"/><path d="M53.867 10.299c0 3.985-10.686 7.211-23.867 7.211S6.132 14.284 6.132 10.299 16.819 3.088 30 3.088s23.867 3.228 23.867 7.211" fill="#7fba00"/><path d="M48.867 14.707c3.124-1.219 5.002-2.745 5.002-4.403 0-3.985-10.686-7.213-23.868-7.213S6.134 6.318 6.134 10.303c0 1.658 1.877 3.185 5.002 4.403 4.363-1.703 11.182-2.803 18.865-2.803s14.5 1.1 18.866 2.803" fill="#b8d432"/><path d="M49.389 58.071c-1.605 1.346-3.78 2.022-6.607 2.022h-9.428V35.358h8.943c2.816 0 4.973.517 6.457 1.588 1.389 1.005 2.086 2.41 2.086 4.205 0 1.431-.507 2.648-1.543 3.719-.882.885-1.942 1.497-3.248 1.856v.058c1.753.217 3.184.889 4.25 2.017.997 1.071 1.511 2.384 1.511 3.903.007 2.262-.813 4.033-2.42 5.366m-22.977-1.457c-2.359 2.322-5.544 3.479-9.519 3.479H8.19V35.358h8.704c8.731 0 13.098 3.998 13.098 12.043 0 3.846-1.181 6.925-3.579 9.213"/><path d="M16.439 39.873h-2.727v15.704h2.759c2.425 0 4.304-.763 5.695-2.227 1.332-1.463 2.006-3.415 2.006-5.883 0-2.317-.674-4.143-1.975-5.495-1.365-1.397-3.275-2.099-5.757-2.099" fill="#3999c6"/><path d="M43.993 44.483c.666-.583.999-1.346.999-2.293 0-1.834-1.332-2.747-4.033-2.747h-2.084v5.86h2.454c1.122 0 2.031-.282 2.665-.821m.909 5.817c-.73-.546-1.722-.853-3.004-.853h-3.03v6.524h3.001c1.276 0 2.303-.304 3.062-.914.696-.612 1.058-1.399 1.058-2.439.006-.977-.357-1.769-1.087-2.317" fill="#59b4d9"/></g></symbol></svg>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="rgb(205, 247, 0)" stroke="#3999c6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-git-commit"><circle cx="12" cy="12" r="4"/><line x1="1.05" y1="12" x2="7" y2="12"/><line x1="17.01" y1="12" x2="22.96" y2="12"/></svg>
                                 <span><svg width="20" height="20" fill="#3999c6" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 445.38"><path d="M6.95 0h498.1c3.82 0 6.95 3.16 6.95 6.92v96.5l-.02.46v341.5H0V88.11h.01L0 6.92C0 3.11 3.12 0 6.95 0zm11.57 315.78h104.12V219.6H18.52v96.18zm122.64 0h105.8V219.6h-105.8v96.18zm124.32 0h105.35V219.6H265.48v96.18zm123.87 0h104.12V219.6H389.35v96.18zm104.12 18.52H389.35v92.56h104.12V334.3zm-122.64 0H265.48v92.56h105.35V334.3zm-123.87 0h-105.8v92.56h105.8V334.3zm-124.32 0H18.52v92.56h104.12V334.3zM18.52 201.09h104.12v-94.46H18.52v94.46zm122.64 0h105.8v-94.46h-105.8v94.46zm124.32 0h105.35v-94.46H265.48v94.46zm123.87 0h104.12v-94.46H389.35v94.46z"/></svg></span>
-                                <span> User Log Data Not Exists On Server <span style="color:rgb(220, 53, 69)">!</span></span>
+                                <span> Branch Data Not Exists On Server <span style="color:rgb(220, 53, 69)">!</span></span>
                             </div>
                         </td>
                     </tr>
@@ -721,11 +724,12 @@
             }).join("\n");
         }
         // fetch branch for table
-        function fetchTableBranch(url = null, perItem = null){
+        function fetchTableBranch( query = '', url = null, perItem = null, sortField = 'id', sortDirection = 'desc'){
             perItem = perItem ?? $("#perItemControl").val();
 
             let current_url = url ?? `{{ route('search-branch.action') }}`;
             current_url += current_url.includes('?') ? `&per_item=${perItem}` : `?per_item=${perItem}`;
+            let branch_type = $("#selectBranchCategories").val();
 
             showTableLoader();
 
@@ -739,8 +743,14 @@
                 type: "GET",
                 url: current_url,
                 dataType: 'json',
+                data: {
+                    query, 
+                    branch_type, 
+                    sort_field: sortField,
+                    sort_direction: sortDirection
+                },
                 success: function(response) {
-                    const { data, links, total, per_page, per_item_num, message } = response;
+                    const { data, links, total, per_page, per_item_num, totalBranch, totalBranchCategories, message } = response;
 
                     if (message) {
                         showMessageInTable(message);
@@ -754,6 +764,16 @@
                     $("#total_branch_items").text(total);
                     $("#total_per_branch_items").text(per_page);
                     $("#per_branch_items_num").text(per_item_num);
+                    // Branch Record
+                    $("#totalBranch").text(parseFloat(totalBranch).toFixed(2));
+                    const element = document.getElementById("totalBranch");
+                    const value = parseFloat(totalBranch); // from backend
+                    numberAnimation(element, value, 2000, 2); // animate to 2 decimal places
+                    $("#totalBranchCategories").text(parseFloat(totalBranchCategories).toFixed(2));
+                    const elementCategory = document.getElementById("totalBranchCategories");
+                    const valueCategory = parseFloat(totalBranchCategories); // from backend
+                    numberAnimation(elementCategory, valueCategory, 2000, 2); // animate to 2 decimal places
+                    
                     // Restore row heights
                     restoreRowHeights('BranchTableSetting');
                     // column and row height width resize
@@ -803,6 +823,48 @@
         function hideTableLoader() {
             $('#tableOverlayLoader').addClass('display_none');
         }
+        // Search For Branch List Table
+        $(document).on('keyup', '#search', function(){
+            const query = $(this).val();
+            fetchTableBranch(query);
+        });
+        // Filter Dropdown Start
+        $(document).on('click', '#showFilterField', function(){
+            fetch_branch_categories();
+        });
+        // Filter For Branch List Table Data
+        $(document).on('change', '#selectBranchCategories', function(){
+
+            fetchTableBranch();
+        });
+        // Sort Data For Branch List Table Data
+        $(document).on('click', '#headId', function(){
+            var button = $(this);
+            var column = button.data('coloumn');
+            var order = button.data('order');
+
+            // Toggle the order (asc/desc)
+            order = order === 'desc' ? 'asc' : 'desc';
+            button.data('order', order);
+
+            fetchTableBranch(
+                '', null, null, 
+                column === 'id' ? column : 'id',
+                order
+            );
+
+            // Remove only the icon from the clicked column (Keep other column icons)
+            button.find("#Layer_1").remove();
+
+            // Define sorting icons 
+            var iconHTML = order === 'desc'
+                ?  `<svg id="Layer_1" width="12px" height="12px" fill="#333333a1" version="1.1" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>`// Down arrow
+                : `<svg id="Layer_1" width="12px" height="12px" fill="#333333a1" version="1.1" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,122.88 0,59.207 39.403,59.207 39.403,0 83.033,0 83.033,59.207 122.433,59.207 61.216,122.88"/></g></svg>`; // Up arrow
+
+            // Append sorting icon only for the clicked column
+            button.append(iconHTML);
+
+        });
         // tab button
         $(document).on('click', '.branch-tab-btn', function () {
             $('.branch-tab-btn').removeClass('active-button').addClass('deactive');
@@ -867,7 +929,7 @@
                 value
             } = e.target;
 
-            fetchTableBranch(null, value);
+            fetchTableBranch('', null, value);
         });
         // change paginate page------------------------
         $("#branch_data_table_paginate").delegate("a", "click", function(e) {
@@ -878,7 +940,7 @@
             $(this).tooltip('hide'); // Hide tooltip if you are using Bootstrap tooltips
 
             if (url !== '#') {
-                fetchTableBranch(url);
+                fetchTableBranch('', url);
             }
 
         });
@@ -2537,21 +2599,25 @@
         }
         // Populate dropdown from response
         function populate_branch_categories(response) {
-            $('#branch_category_name').empty().removeClass('alert alert-danger');
+            $('#permission_message').empty().removeClass('alert alert-danger');
+            const branch_categories = response.branch_categories || [];
 
-            const branchCategories = response.branch_categories || [];
+            const $branchType = $('#branch_type');
+            const $branchCategory = $('#selectBranchCategories');
 
-            $("#branch_category_name").empty().append(
-                '<option value="">Select Branch Category Name</option>'
-            );
+            $branchType.empty().append('<option value="">Select Branch Category Name</option>');
+            $branchCategory.empty().append('<option value="">Select Branch Category Name</option>');
 
-            $.each(branchCategories, function(_, item) {
-                $("#branch_category_name").append(`
-                    <option style="color:white;font-weight:600;" value="${item.branch_category_name}">
-                        ${item.branch_category_name}
-                    </option>
-                `);
+            $.each(branch_categories, function (_, item) {
+                const option = `<option style="color:white;font-weight:600;" value="${item.branch_category_name}">
+                                    ${item.branch_category_name}
+                                </option>`;
+                $branchType.append(option);
+                $branchCategory.append(option);
             });
+
+            // Refresh Select2 after updating options
+            $branchCategory.trigger('change.select2');
         }
 
         // Validation Clear and display input text value

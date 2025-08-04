@@ -1237,10 +1237,10 @@ span.card-lable-name {
   border-radius: 5px;
   letter-spacing: 0.5px;
   opacity: 1;
-  font-style: oblique;
+  font-style: normal;
 }
 .text-space{
-  text-align: end;
+  text-align: start;
 }
 ul.box-container{
   padding: 0;

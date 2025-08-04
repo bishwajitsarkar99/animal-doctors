@@ -100,3 +100,34 @@ export function initScrollProgressBar(scrollKey, progressClass) {
         }
     });
 }
+
+// Table Number Animation
+/**
+ * Animate a number inside an HTML element
+ * @param {HTMLElement} element - DOM element to update
+ * @param {number} target - Final number to animate to
+ * @param {number} duration - Animation duration in ms (default: 2000)
+ * @param {number} decimals - Number of decimal places (default: 0)
+ */
+export function numberAnimation(element, target, duration = 2000, decimals = 0) {
+    const startTime = performance.now();
+    const startValue = 0;
+
+    function step(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const currentValue = startValue + (target - startValue) * progress;
+
+        // Format with commas and decimals
+        element.textContent = currentValue.toLocaleString(undefined, {
+            minimumFractionDigits: decimals,
+            maximumFractionDigits: decimals
+        });
+
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        }
+    }
+
+    requestAnimationFrame(step);
+}

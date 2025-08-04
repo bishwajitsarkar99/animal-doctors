@@ -1,15 +1,15 @@
 <?php 
   // Table-Head-th
   $headThRows = [
-    ['label'=>'SN.', 'className'=>'th-head skeleton', 'styleShow'=>'width:5%;text-align:center;', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'Branch-Type', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'Branch-ID', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'Branch-Name', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'Division', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'District', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'Upazila', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'City', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
-    ['label'=>'Location', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'SN.', 'dataColumn'=>'id', 'dataOrder'=>'desc', 'className'=>'th-head skeleton', 'styleShow'=>'width:5%;text-align:center;', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Branch-Type', 'dataColumn'=>'branch_type', 'dataOrder'=>'desc', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Branch-ID', 'dataColumn'=>'branch_id', 'dataOrder'=>'desc', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Branch-Name', 'dataColumn'=>'branch_name', 'dataOrder'=>'desc', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Division', 'dataColumn'=>'division_id', 'dataOrder'=>'desc', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'District', 'dataColumn'=>'district_id', 'dataOrder'=>'desc', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Upazila', 'dataColumn'=>'upazila_id', 'dataOrder'=>'desc', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'City', 'dataColumn'=>'town_name', 'dataOrder'=>'desc', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
+    ['label'=>'Location', 'dataColumn'=>'location', 'dataOrder'=>'desc', 'className'=>'th-head skeleton', 'styleShow'=>'', 'thId'=>'headId', 'resizeRowClass'=>'row-resizer', 'resizeColClass'=>'col-resizer','moveIconDisplayClass'=>'move-icon', 'styles'=>'color:gray;cursor:move;','headIconId'=>'moveIconId','svgLable'=>'label-svg'],
   ];
   $hiddenAttr = 'hidden';
   // Custom Left Side Tab Panel Button
@@ -204,9 +204,7 @@
           </div>
           <div class="col-sm-3">
             <div class="filter-column display_none">
-              <x-Dropdown.DropdownMenu menuType="text" menuClass="form-control form-control-sm select2" menuName="branch_type" menuId="selectBranchCategories" menuSelectLabel="Select Branch Type">
-                <option value="sdf">sdf</option>
-              </x-Dropdown.DropdownMenu>
+              <x-Dropdown.DropdownMenu menuType="text" menuClass="form-control form-control-sm select2" menuName="branch_type" menuId="selectBranchCategories" menuSelectLabel="Select Branch Type"></x-Dropdown.DropdownMenu>
               <button type="button" class="btn-close-toast"
                data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="cancelFilterToast">
               </button>
@@ -272,7 +270,7 @@
                           <div class="score-col-resizer"></div>
                         </th>
                         <th class="score-column">
-                          50
+                          <span class="total-number" id="totalBranchCategories"></span>
                           <div class="score-row-resizer"></div>
                           <div class="score-col-resizer"></div>
                         </th>
@@ -330,7 +328,7 @@
                           <div class="score-col-resizer"></div>
                         </th>
                         <th class="score-column">
-                          50
+                          <span class="total-number" id="totalBranch"></span>
                           <div class="score-row-resizer"></div>
                           <div class="score-col-resizer"></div>
                         </th>
@@ -351,7 +349,7 @@
             <x-Tables.ViewDataTables.DataTableHeads.DataTableHead className="table-head" >
               <x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow rowClass="table-head-row skeleton">
                 @foreach($headThRows as $data)
-                  <th class="{{ $data['className'] }}" style="{{ $data['styleShow'] }}" id="{{ $data['thId'] }}">
+                  <th class="{{ $data['className'] }}" style="{{ $data['styleShow'] }}" data-coloumn="{{ $data['dataColumn'] }}" data-order="{{ $data['dataOrder'] }}" id="{{ $data['thId'] }}">
                     <i class="fa-solid fa-up-down-left-right {{ $data['moveIconDisplayClass'] }}" style="{{ $data['styles'] }}" id="{{ $data['headIconId'] }}"></i>
                     <span class="{{ $data['svgLable'] }}">
                       {{$data['label']}}

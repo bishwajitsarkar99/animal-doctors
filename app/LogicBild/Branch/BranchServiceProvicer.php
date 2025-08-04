@@ -333,8 +333,32 @@ class BranchServiceProvicer
                     $branch_id = [$user_branch_id];
                 }
                 
-                
-                $getBranches = Branches::with(['divisions', 'districts', 'thana_or_upazilas'])->orderBy('id', 'asc');
+                // Sorting Data
+                $sort_field = $request->input('sort_field', 'id');
+                $sort_direction = $request->input('sort_direction', 'desc');
+
+                // Search
+                $query = $request->get('query');
+                // Filter
+                $branchType = $request->input('branch_type');
+
+                $getBranches = Branches::whereIn('branch_id', $branch_id)->with(['divisions', 'districts', 'thana_or_upazilas']);
+
+                // Apply Searching
+                $getBranches->when($query, function($q) use($query){
+                    $q->where(function($subQuery) use($query){
+                        $subQuery->where('branch_name', 'LIKE', $query. '%')
+                                ->orWhere('branch_id', 'LIKE', $query. '%');
+                    });
+                });
+
+                // Apply Filtering
+                if($branchType){
+                    $getBranches->where('branch_type', $branchType);
+                }
+
+                // Apply Sorting
+                $getBranches = $getBranches->orderBy($sort_field, $sort_direction);
 
                 // Paginate branch table data using query, not collection
                 $perItem = max((int) $request->input('per_item', 10), 1);
@@ -343,7 +367,10 @@ class BranchServiceProvicer
 
                 // Dropdown Search Menu
                 $allBranch = Branches::whereIn('branch_id', $branch_id)->orderBy('id', 'desc')->get();
-                //dd($allBranch);
+                $totalBranch = $allBranch->count();
+                // Branch Category Data
+                $totalBranchCategories = BranchCategory::count();
+                //dd($totalBranch);
         
                 return response()->json([
                     'data' => $paginateData->items(),
@@ -352,6 +379,8 @@ class BranchServiceProvicer
                     'per_page' => $perItem,
                     'per_item_num' => $paginateData->count(),
                     'allBranch' => $allBranch,
+                    'totalBranch' => $totalBranch,
+                    'totalBranchCategories' => $totalBranchCategories
                 ], 200);
             }
 

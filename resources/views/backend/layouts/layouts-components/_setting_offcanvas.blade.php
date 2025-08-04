@@ -31,7 +31,7 @@
         </li>
         <ul class="box-container drag-canvas-row">
             <li class="child-line-row text-space">
-                <span class="card-lable-name image-skeleton">Panel Background</span>
+                <span class="card-lable-name image-skeleton">Theme Background Color</span>
             </li>
             @foreach($groupCards as $data)
             <li class="{{ $data['lineClass'] }}">
