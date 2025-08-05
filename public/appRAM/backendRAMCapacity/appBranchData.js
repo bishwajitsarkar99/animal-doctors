@@ -21,6 +21,7 @@ let AppBackendRAM = localStorage.getItem(getUserRAMKey())
         branchSearchResults: [],
         branchDetails: {},
         branchCategoryDetails: {},
+        branchListData: {},
 
         // Last Update Fetch Data Time 
         lastFetchTime: Date.now(),

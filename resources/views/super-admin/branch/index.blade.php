@@ -345,38 +345,40 @@
       <x-Tables.ViewDataTables.DataTableWrappers.DataTableWrapper wrapperClass="table-wrapper component-focus">
         <x-Tables.ViewDataTables.DataTableResponsives.DataTableResponsive tableResponsiveClass="table-responsive">
           <!-- ========== Branch-List Table =============== table-striped-->
-          <x-Tables.ViewDataTables.ViewDataTable tableClass="table" resizeTableId="BranchTableSetting">
-            <x-Tables.ViewDataTables.DataTableHeads.DataTableHead className="table-head" >
-              <x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow rowClass="table-head-row skeleton">
-                @foreach($headThRows as $data)
-                  <th class="{{ $data['className'] }}" style="{{ $data['styleShow'] }}" data-coloumn="{{ $data['dataColumn'] }}" data-order="{{ $data['dataOrder'] }}" id="{{ $data['thId'] }}">
-                    <i class="fa-solid fa-up-down-left-right {{ $data['moveIconDisplayClass'] }}" style="{{ $data['styles'] }}" id="{{ $data['headIconId'] }}"></i>
-                    <span class="{{ $data['svgLable'] }}">
-                      {{$data['label']}}
-                      <x-Tables.TableHeadSvg svgWidth="12px" svgHeight="12px" svgFillColor="#333333a1" />
-                    </span>
-                    <div class="{{ $data['resizeRowClass'] }}"></div>
-                    <div class="{{ $data['resizeColClass'] }}"></div>
-                  </th>
-                @endforeach
-              </x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow>
-            </x-Tables.ViewDataTables.DataTableHeads.DataTableHead>
-            <x-Tables.ViewDataTables.DataTableBody.TableBody bodyClassName="table-body table-light skeleton" tableId="BranchListTableBody">
-              <!-- Loader Overlay -->
-              <x-Tables.Icon.LoaderOverlay 
-                tableOverlayClass="table-loader-overlay display_none" 
-                loaderId="tableOverlayLoader" 
-                loaderClass="data-table-loader" 
-                loaderWidth="24" 
-                loaderHeight="24" 
-                loaderStroke="currentColor" 
-                loaderStrokeWidth="2" 
-                loaderText="Loading...." 
-                loaderTextClass="loader-text ms-1" 
-                loaderFill="none"
-              />
-            </x-Tables.ViewDataTables.DataTableBody.TableBody>
-          </x-Tables.ViewDataTables.ViewDataTable>
+          <div class="table-container" style="position: relative;">
+            <!-- Loader Overlay -->
+            <x-Tables.Icon.LoaderOverlay 
+              tableOverlayClass="table-loader-overlay display_none" 
+              loaderId="tableOverlayLoader" 
+              loaderClass="data-table-loader" 
+              loaderWidth="24" 
+              loaderHeight="24" 
+              loaderStroke="currentColor" 
+              loaderStrokeWidth="3" 
+              loaderText="Loading...." 
+              loaderTextClass="loader-text ms-1" 
+              loaderFill="none"
+            />
+            <x-Tables.ViewDataTables.ViewDataTable tableClass="table" resizeTableId="BranchTableSetting">
+              <x-Tables.ViewDataTables.DataTableHeads.DataTableHead className="table-head" >
+                <x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow rowClass="table-head-row skeleton">
+                  @foreach($headThRows as $data)
+                    <th class="{{ $data['className'] }}" style="{{ $data['styleShow'] }}" data-coloumn="{{ $data['dataColumn'] }}" data-order="{{ $data['dataOrder'] }}" id="{{ $data['thId'] }}">
+                      <i class="fa-solid fa-up-down-left-right {{ $data['moveIconDisplayClass'] }}" style="{{ $data['styles'] }}" id="{{ $data['headIconId'] }}"></i>
+                      <span class="{{ $data['svgLable'] }}">
+                        {{$data['label']}}
+                        <x-Tables.TableHeadSvg svgWidth="12px" svgHeight="12px" svgFillColor="#333333a1" />
+                      </span>
+                      <div class="{{ $data['resizeRowClass'] }}"></div>
+                      <div class="{{ $data['resizeColClass'] }}"></div>
+                    </th>
+                  @endforeach
+                </x-Tables.ViewDataTables.DataTableHeads.DataTableHeadRow>
+              </x-Tables.ViewDataTables.DataTableHeads.DataTableHead>
+              <x-Tables.ViewDataTables.DataTableBody.TableBody bodyClassName="table-body table-light skeleton" tableId="BranchListTableBody">
+              </x-Tables.ViewDataTables.DataTableBody.TableBody>
+            </x-Tables.ViewDataTables.ViewDataTable>
+          </div>
         </x-Tables.ViewDataTables.DataTableResponsives.DataTableResponsive>
         <x-Tables.TableFooter footerClass="row table_last_row mb-1">
           <div class="col-1">
