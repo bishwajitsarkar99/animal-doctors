@@ -24,7 +24,7 @@
         initDragAndDrop
     } from "/module/backend-module/backend-module-min.js";
     // Import RAM functions
-    import { getAppRAM, updateAppRAM, updateAppRAMBulk } from "/appRAM/backendRAMCapacity/appBranchData.js";
+    import { getAppRAM, updateAppRAM, updateAppRAMBulk, clearBranchListCache, clearAppRAM } from "/appRAM/backendRAMCapacity/appBranchData.js";
     //localStorage.removeItem('AppBackendRAM_{Branch-Section}_M-BRN-2025-02-10-423_1_superadmingstmedicinecenter4215_gmail_com');
 
     // Branch Table Setting
@@ -132,6 +132,7 @@
         // Table Menu Card :show Search Field Cancel
         $(document).on('click', '#cancelSearchToast', function(){
             $(".search-column").addClass("display_none");
+            clearBranchListCache();
         });
         // Table Menu Card :show Filter Field
         $(document).on('click', '#showFilterField', function(){
@@ -144,6 +145,7 @@
         // Table Menu Card :show Filter Field Cancel
         $(document).on('click', '#cancelFilterToast', function(){
             $(".filter-column").addClass("display_none");
+            clearBranchListCache();
         });
         // Remove Row and Column width or height space, BranchTableSetting;
         $(document).on('click', '#tableResize', function(){
@@ -818,10 +820,93 @@
         //         `);
         //     }
         // }
+        // function fetchTableBranch(query = '', url = null, perItem = null, sortField = 'id', sortDirection = 'desc') {
+        //     // cached data if exit
+        //     // if (!forceRefresh) {
+        //     //     const cached = getAppRAM('branchListData');
+        //     //     if (cached && Array.isArray(cached.data)) {
+        //     //         populate_branch_list_table(cached);
+        //     //         tableSkeleton();
+        //     //         return;
+        //     //     }
+        //     // }
+
+        //     showTableLoader();
+        //     // Not cached — fetch from server
+        //     perItem = perItem ?? $("#perItemControl").val();
+        //     let current_url = url ?? `{{ route('search-branch.action') }}`;
+        //     current_url += current_url.includes('?') ? `&per_item=${perItem}` : `?per_item=${perItem}`;
+        //     const branch_type = $("#selectBranchCategories").val();
+
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         }
+        //     });
+
+        //     $.ajax({
+        //         type: "GET",
+        //         url: current_url,
+        //         dataType: 'json',
+        //         data: {
+        //             query,
+        //             branch_type,
+        //             sort_field: sortField,
+        //             sort_direction: sortDirection
+        //         },
+        //         success: function(response) {
+        //             updateAppRAM('branchListData', response); // Save to RAM/localStorage
+        //             populate_branch_list_table(response); // Reuse UI population logic
+        //         },
+        //         complete: function() {
+        //             hideTableLoader();
+        //             tableSkeleton();
+        //         },
+        //         error: function(xhr) {
+        //             if (xhr.status === 422) {
+        //                 let res = xhr.responseJSON;
+        //                 if (res && res.message) {
+        //                     showMessageInTable(res.message);
+        //                 }
+        //                 console.clear(); // Clears the console (optional)
+        //             } else {
+        //                 showMessageInTable('Server error. Please try again later');
+        //             }
+        //         }
+        //     });
+
+        //     function showMessageInTable(message) {
+        //         $('#BranchListTableBody').html(`
+        //             <tr>
+        //                 <td class="td-error-cell text-center" colspan="9">
+        //                     <div class="table-svg-container pt-1">
+        //                         <svg width="20" height="30" viewBox="0 0 61 81" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="#A" x=".5" y=".5"/><symbol id="A" overflow="visible"><g stroke="none"><path d="M0 10.929V69.07C0 75.106 13.432 80 30 80V10.929H0z" fill="#3999c6"/><path d="M29.589 79.999h.412c16.568 0 30-4.891 30-10.929v-58.14H29.589v69.07z" fill="#59b4d9"/><path d="M60 10.929c0 6.036-13.432 10.929-30 10.929S0 16.965 0 10.929 13.432 0 30 0s30 4.893 30 10.929"/><path d="M53.867 10.299c0 3.985-10.686 7.211-23.867 7.211S6.132 14.284 6.132 10.299 16.819 3.088 30 3.088s23.867 3.228 23.867 7.211" fill="#7fba00"/><path d="M48.867 14.707c3.124-1.219 5.002-2.745 5.002-4.403 0-3.985-10.686-7.213-23.868-7.213S6.134 6.318 6.134 10.303c0 1.658 1.877 3.185 5.002 4.403 4.363-1.703 11.182-2.803 18.865-2.803s14.5 1.1 18.866 2.803" fill="#b8d432"/><path d="M49.389 58.071c-1.605 1.346-3.78 2.022-6.607 2.022h-9.428V35.358h8.943c2.816 0 4.973.517 6.457 1.588 1.389 1.005 2.086 2.41 2.086 4.205 0 1.431-.507 2.648-1.543 3.719-.882.885-1.942 1.497-3.248 1.856v.058c1.753.217 3.184.889 4.25 2.017.997 1.071 1.511 2.384 1.511 3.903.007 2.262-.813 4.033-2.42 5.366m-22.977-1.457c-2.359 2.322-5.544 3.479-9.519 3.479H8.19V35.358h8.704c8.731 0 13.098 3.998 13.098 12.043 0 3.846-1.181 6.925-3.579 9.213"/><path d="M16.439 39.873h-2.727v15.704h2.759c2.425 0 4.304-.763 5.695-2.227 1.332-1.463 2.006-3.415 2.006-5.883 0-2.317-.674-4.143-1.975-5.495-1.365-1.397-3.275-2.099-5.757-2.099" fill="#3999c6"/><path d="M43.993 44.483c.666-.583.999-1.346.999-2.293 0-1.834-1.332-2.747-4.033-2.747h-2.084v5.86h2.454c1.122 0 2.031-.282 2.665-.821m.909 5.817c-.73-.546-1.722-.853-3.004-.853h-3.03v6.524h3.001c1.276 0 2.303-.304 3.062-.914.696-.612 1.058-1.399 1.058-2.439.006-.977-.357-1.769-1.087-2.317" fill="#59b4d9"/></g></symbol></svg>
+        //                         <svg width="24" height="24" viewBox="0 0 24 24" fill="rgb(205, 247, 0)" stroke="#3999c6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-git-commit"><circle cx="12" cy="12" r="4"/><line x1="1.05" y1="12" x2="7" y2="12"/><line x1="17.01" y1="12" x2="22.96" y2="12"/></svg>
+        //                         <span><svg width="20" height="20" fill="#3999c6" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 445.38"><path d="M6.95 0h498.1c3.82 0 6.95 3.16 6.95 6.92v96.5l-.02.46v341.5H0V88.11h.01L0 6.92C0 3.11 3.12 0 6.95 0zm11.57 315.78h104.12V219.6H18.52v96.18zm122.64 0h105.8V219.6h-105.8v96.18zm124.32 0h105.35V219.6H265.48v96.18zm123.87 0h104.12V219.6H389.35v96.18zm104.12 18.52H389.35v92.56h104.12V334.3zm-122.64 0H265.48v92.56h105.35V334.3zm-123.87 0h-105.8v92.56h105.8V334.3zm-124.32 0H18.52v92.56h104.12V334.3zM18.52 201.09h104.12v-94.46H18.52v94.46zm122.64 0h105.8v-94.46h-105.8v94.46zm124.32 0h105.35v-94.46H265.48v94.46zm123.87 0h104.12v-94.46H389.35v94.46z"/></svg></span>
+        //                         <span>${message} <span style="color:rgb(220, 53, 69)">!</span></span>
+        //                     </div>
+        //                 </td>
+        //             </tr>
+        //         `);
+        //     }
+        // }
+        // Generate Cache Key For RAM Data
+        function generateBranchCacheKey(query = '', url = null, perItem = null, sortField = 'id', sortDirection = 'desc') {
+            const branch_type = $("#selectBranchCategories").val();
+            perItem = perItem ?? $("#perItemControl").val();
+
+            return `branchListData_${btoa(`${query}|${branch_type}|${url}|${perItem}|${sortField}|${sortDirection}`)}`;
+        }
         function fetchTableBranch(query = '', url = null, perItem = null, sortField = 'id', sortDirection = 'desc', forceRefresh = false) {
-            // cached data if exit
+            const branch_type = $("#selectBranchCategories").val();
+            perItem = perItem ?? $("#perItemControl").val();
+
+            // 1 Generate a unique cache key for this combination
+            const cacheKey = `branchListData_${btoa(`${query}|${branch_type}|${url}|${perItem}|${sortField}|${sortDirection}`)}`;
+
+            // 2 If cache exists and not forceRefresh — use it
             if (!forceRefresh) {
-                const cached = getAppRAM('branchListData');
+                const cached = getAppRAM(cacheKey);
                 if (cached && Array.isArray(cached.data)) {
                     populate_branch_list_table(cached);
                     tableSkeleton();
@@ -830,11 +915,9 @@
             }
 
             showTableLoader();
-            // Not cached — fetch from server
-            perItem = perItem ?? $("#perItemControl").val();
+
             let current_url = url ?? `{{ route('search-branch.action') }}`;
             current_url += current_url.includes('?') ? `&per_item=${perItem}` : `?per_item=${perItem}`;
-            const branch_type = $("#selectBranchCategories").val();
 
             $.ajaxSetup({
                 headers: {
@@ -853,8 +936,8 @@
                     sort_direction: sortDirection
                 },
                 success: function(response) {
-                    updateAppRAM('branchListData', response); // Save to RAM/localStorage
-                    populate_branch_list_table(response); // Reuse UI population logic
+                    updateAppRAM(cacheKey, response);           // Save to RAM with dynamic key
+                    populate_branch_list_table(response);        // Show data in table
                 },
                 complete: function() {
                     hideTableLoader();
@@ -862,11 +945,11 @@
                 },
                 error: function(xhr) {
                     if (xhr.status === 422) {
-                        let res = xhr.responseJSON;
+                        const res = xhr.responseJSON;
                         if (res && res.message) {
                             showMessageInTable(res.message);
                         }
-                        console.clear(); // Clears the console (optional)
+                        console.clear();
                     } else {
                         showMessageInTable('Server error. Please try again later');
                     }
@@ -878,9 +961,7 @@
                     <tr>
                         <td class="td-error-cell text-center" colspan="9">
                             <div class="table-svg-container pt-1">
-                                <svg width="20" height="30" viewBox="0 0 61 81" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="#A" x=".5" y=".5"/><symbol id="A" overflow="visible"><g stroke="none"><path d="M0 10.929V69.07C0 75.106 13.432 80 30 80V10.929H0z" fill="#3999c6"/><path d="M29.589 79.999h.412c16.568 0 30-4.891 30-10.929v-58.14H29.589v69.07z" fill="#59b4d9"/><path d="M60 10.929c0 6.036-13.432 10.929-30 10.929S0 16.965 0 10.929 13.432 0 30 0s30 4.893 30 10.929"/><path d="M53.867 10.299c0 3.985-10.686 7.211-23.867 7.211S6.132 14.284 6.132 10.299 16.819 3.088 30 3.088s23.867 3.228 23.867 7.211" fill="#7fba00"/><path d="M48.867 14.707c3.124-1.219 5.002-2.745 5.002-4.403 0-3.985-10.686-7.213-23.868-7.213S6.134 6.318 6.134 10.303c0 1.658 1.877 3.185 5.002 4.403 4.363-1.703 11.182-2.803 18.865-2.803s14.5 1.1 18.866 2.803" fill="#b8d432"/><path d="M49.389 58.071c-1.605 1.346-3.78 2.022-6.607 2.022h-9.428V35.358h8.943c2.816 0 4.973.517 6.457 1.588 1.389 1.005 2.086 2.41 2.086 4.205 0 1.431-.507 2.648-1.543 3.719-.882.885-1.942 1.497-3.248 1.856v.058c1.753.217 3.184.889 4.25 2.017.997 1.071 1.511 2.384 1.511 3.903.007 2.262-.813 4.033-2.42 5.366m-22.977-1.457c-2.359 2.322-5.544 3.479-9.519 3.479H8.19V35.358h8.704c8.731 0 13.098 3.998 13.098 12.043 0 3.846-1.181 6.925-3.579 9.213"/><path d="M16.439 39.873h-2.727v15.704h2.759c2.425 0 4.304-.763 5.695-2.227 1.332-1.463 2.006-3.415 2.006-5.883 0-2.317-.674-4.143-1.975-5.495-1.365-1.397-3.275-2.099-5.757-2.099" fill="#3999c6"/><path d="M43.993 44.483c.666-.583.999-1.346.999-2.293 0-1.834-1.332-2.747-4.033-2.747h-2.084v5.86h2.454c1.122 0 2.031-.282 2.665-.821m.909 5.817c-.73-.546-1.722-.853-3.004-.853h-3.03v6.524h3.001c1.276 0 2.303-.304 3.062-.914.696-.612 1.058-1.399 1.058-2.439.006-.977-.357-1.769-1.087-2.317" fill="#59b4d9"/></g></symbol></svg>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="rgb(205, 247, 0)" stroke="#3999c6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-git-commit"><circle cx="12" cy="12" r="4"/><line x1="1.05" y1="12" x2="7" y2="12"/><line x1="17.01" y1="12" x2="22.96" y2="12"/></svg>
-                                <span><svg width="20" height="20" fill="#3999c6" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 445.38"><path d="M6.95 0h498.1c3.82 0 6.95 3.16 6.95 6.92v96.5l-.02.46v341.5H0V88.11h.01L0 6.92C0 3.11 3.12 0 6.95 0zm11.57 315.78h104.12V219.6H18.52v96.18zm122.64 0h105.8V219.6h-105.8v96.18zm124.32 0h105.35V219.6H265.48v96.18zm123.87 0h104.12V219.6H389.35v96.18zm104.12 18.52H389.35v92.56h104.12V334.3zm-122.64 0H265.48v92.56h105.35V334.3zm-123.87 0h-105.8v92.56h105.8V334.3zm-124.32 0H18.52v92.56h104.12V334.3zM18.52 201.09h104.12v-94.46H18.52v94.46zm122.64 0h105.8v-94.46h-105.8v94.46zm124.32 0h105.35v-94.46H265.48v94.46zm123.87 0h104.12v-94.46H389.35v94.46z"/></svg></span>
+                                <!-- svg omitted for brevity -->
                                 <span>${message} <span style="color:rgb(220, 53, 69)">!</span></span>
                             </div>
                         </td>
@@ -915,6 +996,35 @@
                 new bootstrap.Tooltip(el);
             });
         }
+        function buildPaginationLinks(currentPage, perPage, totalItems) {
+            const totalPages = Math.ceil(totalItems / perPage);
+            const links = [];
+
+            // Previous link
+            links.push({
+                label: "Previous",
+                url: currentPage > 1 ? `?page=${currentPage - 1}` : null,
+                active: false
+            });
+
+            // Numbered links
+            for (let i = 1; i <= totalPages; i++) {
+                links.push({
+                    label: i.toString(),
+                    url: `?page=${i}`,
+                    active: i === currentPage
+                });
+            }
+
+            // Next link
+            links.push({
+                label: "Next",
+                url: currentPage < totalPages ? `?page=${currentPage + 1}` : null,
+                active: false
+            });
+
+            return links;
+        }
         function showTableLoader() {
             $('#tableOverlayLoader').removeClass('display_none');
         }
@@ -922,34 +1032,90 @@
             $('#tableOverlayLoader').addClass('display_none');
         }
         // Search For Branch List Table
-        $(document).on('keyup', '#search', function(){
-            // const query = $(this).val();
-            // fetchTableBranch(query);
+        // $(document).on('keyup', '#search', function(){
+        //     // const query = $(this).val();
+        //     // fetchTableBranch(query);
+        //     const query = $(this).val().toLowerCase().trim();
+        //     const cachedData = getAppRAM('branchListData');
+
+        //     if (cachedData && Array.isArray(cachedData.data)) {
+                
+        //         // Filter cached data based on query
+        //         const filteredData = {
+        //             ...cachedData,
+        //             data: cachedData.data.filter(item => {
+        //                 // Adjust these fields based on your data structure
+        //                 return item.branch_name?.toLowerCase().includes(query) ||
+        //                     item.branch_id?.toLowerCase().includes(query);
+        //             })
+        //         };
+        //         populate_branch_list_table(filteredData);
+        //         showTableLoader();
+        //         // Always hide loader & run skeleton, even for cached
+        //         setTimeout(() => {
+        //             hideTableLoader();
+        //             tableSkeleton();
+        //         }, 1000);
+        //         return; // Stop here – no server fetch
+        //     }
+
+        //     // No cache – fetch from server
+        //     fetchTableBranch(query);
+        // });
+        // $(document).on('keyup', '#search', function () {
+        //     const query = $(this).val().toLowerCase().trim();
+        //     const cachedData = getAppRAM('branchListData');
+
+        //     if (cachedData && Array.isArray(cachedData.data)) {
+        //         const matchedData = cachedData.data.filter(item =>
+        //             item.branch_name?.toLowerCase().includes(query) ||
+        //             item.branch_id?.toLowerCase().includes(query)
+        //         );
+
+        //         // Use cache only if matches are found
+        //         if (matchedData.length > 0) {
+        //             const filteredData = {
+        //                 ...cachedData,
+        //                 data: matchedData
+        //             };
+
+        //             populate_branch_list_table(filteredData);
+        //             showTableLoader();
+
+        //             setTimeout(() => {
+        //                 hideTableLoader();
+        //                 tableSkeleton();
+        //             }, 1000);
+
+        //             return; // Stop – don't fetch from server
+        //         }
+        //     }
+
+        //     // No matches in cache or no cache – fetch from server
+        //     fetchTableBranch(query);
+        // });
+        $(document).on('keyup', '#search', function() {
             const query = $(this).val().toLowerCase().trim();
-            const cachedData = getAppRAM('branchListData');
+            const cacheKey = generateBranchCacheKey(query);
+            const cachedData = getAppRAM(cacheKey);
 
             if (cachedData && Array.isArray(cachedData.data)) {
-                
-                // Filter cached data based on query
                 const filteredData = {
                     ...cachedData,
-                    data: cachedData.data.filter(item => {
-                        // Adjust these fields based on your data structure
-                        return item.branch_name?.toLowerCase().includes(query) ||
-                            item.branch_id?.toLowerCase().includes(query);
-                    })
+                    data: cachedData.data.filter(item =>
+                        item.branch_name?.toLowerCase().includes(query) ||
+                        item.branch_id?.toLowerCase().includes(query)
+                    )
                 };
                 populate_branch_list_table(filteredData);
                 showTableLoader();
-                // Always hide loader & run skeleton, even for cached
                 setTimeout(() => {
                     hideTableLoader();
                     tableSkeleton();
                 }, 1000);
-                return; // Stop here – no server fetch
+                return;
             }
 
-            // No cache – fetch from server
             fetchTableBranch(query);
         });
         // Filter Dropdown Start
@@ -957,56 +1123,126 @@
             fetch_branch_categories();
         });
         // Filter For Branch List Table Data
-        $(document).on('change', '#selectBranchCategories', function(){
-            const cachedData = getAppRAM('branchListData');
-            const selectedCategory = $(this).val(); // Get selected filter value
+        // $(document).on('change', '#selectBranchCategories', function(){
+        //     const cachedData = getAppRAM('branchListData');
+        //     const selectedCategory = $(this).val(); // Get selected filter value
+
+        //     if (cachedData && Array.isArray(cachedData.data)) {
+        //         //console.log('Using cached data');
+
+        //         // Filter the cached data based on selectedCategory
+        //         const filteredData = {
+        //             ...cachedData,
+        //             data: cachedData.data.filter(item => {
+        //                 // Adjust this according to your item structure and filter field
+        //                 return selectedCategory === "" || item.branch_type === selectedCategory;
+        //             })
+        //         };
+
+        //         populate_branch_list_table(filteredData);
+        //         showTableLoader();
+        //         // Always hide loader & run skeleton, even for cached
+        //         setTimeout(() => {
+        //             hideTableLoader();
+        //             tableSkeleton();
+        //         }, 1000);
+        //         return; // Don't fetch from server
+        //     }
+
+        //     // No cached data – fallback to server
+        //     fetchTableBranch('', null, null, 'id', 'desc');
+        // });
+        $(document).on('change', '#selectBranchCategories', function() {
+            const cacheKey = generateBranchCacheKey();
+            const cachedData = getAppRAM(cacheKey);
+            const selectedCategory = $(this).val();
 
             if (cachedData && Array.isArray(cachedData.data)) {
-                //console.log('Using cached data');
-
-                // Filter the cached data based on selectedCategory
                 const filteredData = {
                     ...cachedData,
-                    data: cachedData.data.filter(item => {
-                        // Adjust this according to your item structure and filter field
-                        return selectedCategory === "" || item.branch_type === selectedCategory;
-                    })
+                    data: cachedData.data.filter(item =>
+                        selectedCategory === "" || item.branch_type === selectedCategory
+                    )
                 };
-
                 populate_branch_list_table(filteredData);
                 showTableLoader();
-                // Always hide loader & run skeleton, even for cached
                 setTimeout(() => {
                     hideTableLoader();
                     tableSkeleton();
                 }, 1000);
-                return; // Don't fetch from server
+                return;
             }
 
-            // No cached data – fallback to server
-            fetchTableBranch('', null, null, 'id', 'desc');
+            fetchTableBranch();
         });
         // Sort Data For Branch List Table Data
-        $(document).on('click', '.label-svg', function(){
+        // $(document).on('click', '.label-svg', function(){
+        //     var btnIcon = $(this);
+        //     var button = $("#headId");
+        //     var column = button.data('coloumn');
+        //     var order = button.data('order');
+
+        //     // Toggle the order (asc/desc)
+        //     order = order === 'desc' ? 'asc' : 'desc';
+        //     button.data('order', order);
+
+        //     const cachedData = getAppRAM('branchListData');
+        //     const forceRefresh = null;
+
+        //     if (!forceRefresh && cachedData && Array.isArray(cachedData.data)) {
+        //         // Sort locally if cached data is available
+        //         const sortedData = [...cachedData.data].sort((a, b) => {
+        //             const valA = a[column] ?? '';
+        //             const valB = b[column] ?? '';
+        //             if (order === 'asc') return valA > valB ? 1 : -1;
+        //             return valA < valB ? 1 : -1;
+        //         });
+
+        //         const sortedResponse = {
+        //             ...cachedData,
+        //             data: sortedData
+        //         };
+
+        //         populate_branch_list_table(sortedResponse);
+        //         showTableLoader();
+        //         // Always hide loader & run skeleton, even for cached
+        //         setTimeout(() => {
+        //             hideTableLoader();
+        //             tableSkeleton();
+        //         }, 1000);
+        //     } else {
+        //         // Fallback to server request
+        //         fetchTableBranch('', null, null, column === 'id' ? column : 'id', order);
+        //     }
+
+        //     // Remove only the icon from the clicked column (Keep other column icons)
+        //     btnIcon.find("#Layer_1").remove();
+
+        //     // Define sorting icons 
+        //     var iconHTML = order === 'desc'
+        //         ?  `<svg id="Layer_1" width="12px" height="12px" fill="#333333a1" version="1.1" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>`// Down arrow
+        //         : `<svg id="Layer_1" width="12px" height="12px" fill="#333333a1" version="1.1" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,122.88 0,59.207 39.403,59.207 39.403,0 83.033,0 83.033,59.207 122.433,59.207 61.216,122.88"/></g></svg>`; // Up arrow
+
+        //     // Append sorting icon only for the clicked column
+        //     btnIcon.append(iconHTML);
+
+        // });
+        $(document).on('click', '.label-svg', function() {
             var btnIcon = $(this);
             var button = $("#headId");
             var column = button.data('coloumn');
             var order = button.data('order');
-
-            // Toggle the order (asc/desc)
             order = order === 'desc' ? 'asc' : 'desc';
             button.data('order', order);
 
-            const cachedData = getAppRAM('branchListData');
-            const forceRefresh = null;
+            const cacheKey = generateBranchCacheKey('', null, null, column, order);
+            const cachedData = getAppRAM(cacheKey);
 
-            if (!forceRefresh && cachedData && Array.isArray(cachedData.data)) {
-                // Sort locally if cached data is available
+            if (cachedData && Array.isArray(cachedData.data)) {
                 const sortedData = [...cachedData.data].sort((a, b) => {
                     const valA = a[column] ?? '';
                     const valB = b[column] ?? '';
-                    if (order === 'asc') return valA > valB ? 1 : -1;
-                    return valA < valB ? 1 : -1;
+                    return order === 'asc' ? (valA > valB ? 1 : -1) : (valA < valB ? 1 : -1);
                 });
 
                 const sortedResponse = {
@@ -1016,27 +1252,23 @@
 
                 populate_branch_list_table(sortedResponse);
                 showTableLoader();
-                // Always hide loader & run skeleton, even for cached
                 setTimeout(() => {
                     hideTableLoader();
                     tableSkeleton();
                 }, 1000);
             } else {
-                // Fallback to server request
-                fetchTableBranch('', null, null, column === 'id' ? column : 'id', order);
+                fetchTableBranch('', null, null, column, order);
             }
 
-            // Remove only the icon from the clicked column (Keep other column icons)
             btnIcon.find("#Layer_1").remove();
-
-            // Define sorting icons 
+                // Define sorting icons 
             var iconHTML = order === 'desc'
                 ?  `<svg id="Layer_1" width="12px" height="12px" fill="#333333a1" version="1.1" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>`// Down arrow
                 : `<svg id="Layer_1" width="12px" height="12px" fill="#333333a1" version="1.1" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,122.88 0,59.207 39.403,59.207 39.403,0 83.033,0 83.033,59.207 122.433,59.207 61.216,122.88"/></g></svg>`; // Up arrow
 
             // Append sorting icon only for the clicked column
             btnIcon.append(iconHTML);
-
+            //btnIcon.append(order === 'desc' ? descendingIconHTML : ascendingIconHTML);
         });
         // tab button
         $(document).on('click', '.branch-tab-btn', function () {
@@ -1097,22 +1329,81 @@
         };
 
         // peritem change
+        // $("#perItemControl").on('change', (e) => {
+        //     const perItem = e.target.value;
+        //     // Use Cache
+        //     const cachedData = getAppRAM('branchListData');
+
+        //     if (cachedData && Array.isArray(cachedData.data)) {
+        //         const slicedData = {
+        //             ...cachedData,
+        //             data: cachedData.data.slice(0, parseInt(perItem)),
+        //             per_page: parseInt(perItem),
+        //             per_item_num: parseInt(perItem)
+        //         };
+
+        //         populate_branch_list_table(slicedData);
+        //         showTableLoader();
+        //         // Always hide loader & run skeleton, even for cached
+        //         setTimeout(() => {
+        //             hideTableLoader();
+        //             tableSkeleton();
+        //         }, 1000);
+        //         return;
+        //     }
+
+        //     // Fallback to server
+        //     fetchTableBranch('', null, perItem);
+        // });
+        // $("#perItemControl").on('change', (e) => {
+        //     const perItem = parseInt(e.target.value);
+        //     const cachedData = getAppRAM('branchListData');
+
+        //     if (cachedData && Array.isArray(cachedData.data)) {
+        //         const page = 1;
+        //         const start = 0;
+        //         const slicedData = cachedData.data.slice(start, perItem);
+
+        //         const updatedData = {
+        //             ...cachedData,
+        //             data: slicedData,
+        //             current_page: page,
+        //             per_page: perItem,
+        //             total: cachedData.data.length,
+        //             links: buildPaginationLinks(page, perItem, cachedData.data.length)
+        //         };
+
+        //         populate_branch_list_table(updatedData);
+
+        //         showTableLoader();
+        //         setTimeout(() => {
+        //             hideTableLoader();
+        //             tableSkeleton();
+        //         }, 1000);
+        //         return;
+        //     }
+
+        //     // Fallback to server
+        //     fetchTableBranch('', null, perItem);
+        // });
         $("#perItemControl").on('change', (e) => {
-            const perItem = e.target.value;
-            // Use Cache
-            const cachedData = getAppRAM('branchListData');
+            const perItem = parseInt(e.target.value);
+            const cacheKey = generateBranchCacheKey('', null, perItem);
+            const cachedData = getAppRAM(cacheKey);
 
             if (cachedData && Array.isArray(cachedData.data)) {
-                const slicedData = {
+                const page = 1;
+                const slicedData = cachedData.data.slice(0, perItem);
+                const updatedData = {
                     ...cachedData,
-                    data: cachedData.data.slice(0, parseInt(perItem)),
-                    per_page: parseInt(perItem),
-                    per_item_num: parseInt(perItem)
+                    data: slicedData,
+                    current_page: page,
+                    per_page: perItem,
+                    total: cachedData.data.length,
+                    links: buildPaginationLinks(page, perItem, cachedData.data.length)
                 };
-
-                populate_branch_list_table(slicedData);
+                populate_branch_list_table(updatedData);
                 showTableLoader();
-                // Always hide loader & run skeleton, even for cached
                 setTimeout(() => {
                     hideTableLoader();
                     tableSkeleton();
@@ -1120,35 +1411,129 @@
                 return;
             }
 
-            // Fallback to server
             fetchTableBranch('', null, perItem);
         });
         // change paginate page------------------------
+        // $("#branch_data_table_paginate").delegate("a", "click", function(e) {
+        //     e.stopImmediatePropagation();
+        //     e.preventDefault();
+
+        //     const url = $(this).attr('data-url');
+        //     $(this).tooltip('hide'); // Hide tooltip if Bootstrap tooltips used
+
+        //     // Use Cache
+        //     const cachedData = getAppRAM('branchListData');
+
+        //     if (url !== '#' && cachedData && Array.isArray(cachedData.data)) {
+        //         const pageParam = new URL(url).searchParams.get('page');
+        //         const perItem = parseInt($("#perItemControl").val()) || 10;
+        //         const page = parseInt(pageParam) || 1;
+        //         const start = (page - 1) * perItem;
+        //         const paginatedData = {
+        //             ...cachedData,
+        //             data: cachedData.data.slice(start, start + perItem),
+        //             per_page: perItem,
+        //             per_item_num: perItem
+        //         };
+
+        //         populate_branch_list_table(paginatedData);
+        //         showTableLoader();
+        //         // Always hide loader & run skeleton, even for cached
+        //         setTimeout(() => {
+        //             hideTableLoader();
+        //             tableSkeleton();
+        //         }, 1000);
+        //         return;
+        //     }
+
+        //     // Fallback to server
+        //     if (url !== '#') {
+        //         fetchTableBranch('', url);
+        //     }
+
+        // });
+        // $("#branch_data_table_paginate").delegate("a", "click", function(e) {
+        //     e.stopImmediatePropagation();
+        //     e.preventDefault();
+
+        //     const url = $(this).attr('data-url');
+        //     $(this).tooltip('hide'); // Hide tooltip if Bootstrap tooltips used
+
+        //     if (!url || url === '#') return; // Skip empty or inactive links
+
+        //     const cachedData = getAppRAM('branchListData');
+
+        //     if (cachedData && Array.isArray(cachedData.data)) {
+        //         let pageParam = 1;
+        //         try {
+        //             const parsedURL = new URL(url, window.location.origin);
+        //             pageParam = parseInt(parsedURL.searchParams.get('page')) || 1;
+        //         } catch (e) {
+        //             const match = url.match(/page=(\d+)/);
+        //             pageParam = match ? parseInt(match[1]) : 1;
+        //         }
+
+        //         const perItem = parseInt($("#perItemControl").val()) || 10;
+        //         const page = pageParam;
+        //         const start = (page - 1) * perItem;
+        //         const slicedData = cachedData.data.slice(start, start + perItem);
+
+        //         const updatedData = {
+        //             ...cachedData,
+        //             data: slicedData,
+        //             current_page: page,
+        //             per_page: perItem,
+        //             total: cachedData.data.length,
+        //             links: buildPaginationLinks(page, perItem, cachedData.data.length)
+        //         };
+
+        //         populate_branch_list_table(updatedData);
+        //         showTableLoader();
+
+        //         setTimeout(() => {
+        //             hideTableLoader();
+        //             tableSkeleton();
+        //         }, 1000);
+
+        //         return;
+        //     }
+
+        //     // Fallback to server
+        //     fetchTableBranch('', url);
+        // });
         $("#branch_data_table_paginate").delegate("a", "click", function(e) {
-            e.stopImmediatePropagation();
             e.preventDefault();
-
             const url = $(this).attr('data-url');
-            $(this).tooltip('hide'); // Hide tooltip if Bootstrap tooltips used
+            if (!url || url === '#') return;
 
-            // Use Cache
-            const cachedData = getAppRAM('branchListData');
+            const perItem = parseInt($("#perItemControl").val()) || 10;
+            const cacheKey = generateBranchCacheKey('', url, perItem);
+            const cachedData = getAppRAM(cacheKey);
 
-            if (url !== '#' && cachedData && Array.isArray(cachedData.data)) {
-                const pageParam = new URL(url).searchParams.get('page');
-                const perItem = parseInt($("#perItemControl").val()) || 10;
-                const page = parseInt(pageParam) || 1;
+            if (cachedData && Array.isArray(cachedData.data)) {
+                let page = 1;
+                try {
+                    const parsed = new URL(url, window.location.origin);
+                    page = parseInt(parsed.searchParams.get('page')) || 1;
+                } catch (e) {
+                    const match = url.match(/page=(\d+)/);
+                    page = match ? parseInt(match[1]) : 1;
+                }
+
                 const start = (page - 1) * perItem;
-                const paginatedData = {
+                const slicedData = cachedData.data.slice(start, start + perItem);
+
+                const updatedData = {
                     ...cachedData,
-                    data: cachedData.data.slice(start, start + perItem),
+                    data: slicedData,
+                    current_page: page,
                     per_page: perItem,
-                    per_item_num: perItem
+                    total: cachedData.data.length,
+                    links: buildPaginationLinks(page, perItem, cachedData.data.length)
                 };
 
-                populate_branch_list_table(paginatedData);
+                populate_branch_list_table(updatedData);
                 showTableLoader();
-                // Always hide loader & run skeleton, even for cached
                 setTimeout(() => {
                     hideTableLoader();
                     tableSkeleton();
@@ -1156,11 +1541,7 @@
                 return;
             }
 
-            // Fallback to server
-            if (url !== '#') {
-                fetchTableBranch('', url);
-            }
-
+            fetchTableBranch('', url);
         });
 
         // =============== Second Page Branch Setting =====================
@@ -2479,6 +2860,8 @@
             fetch_branch_types();
             fetchTableBranch();
             fetch_branch_categories();
+            clearBranchListCache();
+            clearAppRAM();
         });
 
         // =================== End Branch Setting Section ===================================

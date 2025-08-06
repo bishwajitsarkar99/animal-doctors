@@ -38,7 +38,17 @@ function updateAppRAM(key, value) {
     localStorage.setItem(getUserRAMKey(), JSON.stringify(AppBackendRAM));
 }
 // multi data update
+// function updateAppRAMBulk(obj = {}) {
+//     Object.entries(obj).forEach(([key, value]) => {
+//         AppBackendRAM[key] = value;
+//     });
+//     localStorage.setItem(getUserRAMKey(), JSON.stringify(AppBackendRAM));
+// }
 function updateAppRAMBulk(obj = {}) {
+    if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) {
+        console.error("updateAppRAMBulk expects a plain object. Received:", obj);
+        return;
+    }
     Object.entries(obj).forEach(([key, value]) => {
         AppBackendRAM[key] = value;
     });
@@ -57,11 +67,21 @@ function clearAllAppRAM() {
         }
     });
 }
+// Only Branch List Data Clear
+function clearBranchListCache() {
+    for (const key in AppBackendRAM) {
+        if (key.startsWith('branchListData_')) {
+            delete AppBackendRAM[key];
+        }
+    }
+    localStorage.setItem(getUserRAMKey(), JSON.stringify(AppBackendRAM));
+}
 
 export {
     getAppRAM,
     updateAppRAM,
     updateAppRAMBulk,
     clearAppRAM,
-    clearAllAppRAM
+    clearAllAppRAM,
+    clearBranchListCache
 };

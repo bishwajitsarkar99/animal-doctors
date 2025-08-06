@@ -353,7 +353,7 @@
               loaderClass="data-table-loader" 
               loaderWidth="24" 
               loaderHeight="24" 
-              loaderStroke="currentColor" 
+              loaderStroke="white" 
               loaderStrokeWidth="3" 
               loaderText="Loading...." 
               loaderTextClass="loader-text ms-1" 
@@ -389,7 +389,7 @@
               selectClass="ps-1"
               selectId="perItemControl"
               selectStyle="background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);border:1px ridge rgba(135, 206, 250, 0.74);"
-              selectedValue="10"
+              selectedValue="2"
             />
           </div>
           <div class="col-3">

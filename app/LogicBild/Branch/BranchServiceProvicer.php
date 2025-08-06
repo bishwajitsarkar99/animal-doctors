@@ -362,7 +362,7 @@ class BranchServiceProvicer
                 $getBranches = $getBranches->orderBy($sort_field, $sort_direction);
 
                 // Paginate branch table data using query, not collection
-                $perItem = max((int) $request->input('per_item', 10), 1);
+                $perItem = max((int) $request->input('per_item', 2), 1);
 
                 $paginateData = $getBranches->paginate($perItem);
 

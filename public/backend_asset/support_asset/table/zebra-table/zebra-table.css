@@ -265,8 +265,20 @@ a.page-link.btn_page:hover{
     pointer-events: all; /* block clicks */
 }
 span.loader-text{
-    color: lightgoldenrodyellow;
+    color: #fff;
     font-weight: bolder;
+    text-shadow: 0px 0px 1px black;
+    box-shadow: 0px 0px 2px #0001;
+    animation: focusColor 1s infinite;
+}
+@keyframes focusColor{
+    0%{
+        color: aqua;
+    }
+    100%{
+        color: #fff;
+        transition: opacity 0.2s ease color 0.2s ease-in-out;
+    }
 }
 .display_none{
     display: none;
