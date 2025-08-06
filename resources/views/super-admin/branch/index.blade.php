@@ -197,6 +197,14 @@
               <x-Inputs.SearchInput.Search parentClass="input-search-box" childClass="icon-box" searchSvgWidth="20" searchSvgHeight="20" searchSvgFill="white" searchSvgStroke="rgb(170, 170, 170)" searchSvgStrokeWidth="2" 
                 searchClass="form-control form-control-sm font-weight" searchType="search" searchName="search" searchPlaceHolder="Branch Search" searchId="search" searchValue=""
               />
+              <button type="button" class="search-icon-btn search-layer"
+                data-bs-toggle="tooltip"  data-bs-placement="right" title="Search" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' id="searchToast">
+                <svg version="1.1" fill="dodgerblue" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 122.88 122.88" enable-background="new 0 0 122.88 122.88" xml:space="preserve">
+                  <g>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M61.438,0c33.938,0,61.442,27.509,61.442,61.442S95.375,122.88,61.438,122.88 C27.509,122.88,0,95.376,0,61.442S27.509,0,61.438,0L61.438,0z M61.442,43.027c10.17,0,18.413,8.245,18.413,18.416 c0,10.17-8.243,18.413-18.413,18.413c-10.171,0-18.416-8.243-18.416-18.413C43.026,51.272,51.271,43.027,61.442,43.027 L61.442,43.027z M61.438,18.389c23.778,0,43.054,19.279,43.054,43.054s-19.275,43.049-43.054,43.049 c-23.77,0-43.049-19.274-43.049-43.049S37.668,18.389,61.438,18.389L61.438,18.389z"/>
+                  </g>
+                </svg>
+              </button>
               <button type="button" class="btn-close-toast"
                 data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="cancelSearchToast">
               </button>

@@ -1125,7 +1125,12 @@ button.active {
   display: none;
   animation: none;
 }
-button#cancelSearchToast, button#cancelFilterToast {
+button#cancelSearchToast {
+  margin-top: 3px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+button#cancelFilterToast {
   margin-top: 2px;
   margin-left: 5px;
   margin-right: 5px;
