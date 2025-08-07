@@ -248,17 +248,13 @@
                               <rect x="8" y="3" rx="3" ry="3" width="30" height="15" fill="springgreen" filter="url(#shadow)" opacity="0.8" />
 
                               <!-- KB Text -->
-                              <text x="23" y="13" text-anchor="middle" fill="#000" font-size="7" font-weight="600">
-                                1.17 KB
-                              </text>
+                              <text x="23" y="13" text-anchor="middle" fill="#000" font-size="7" font-weight="600" id="branchCategorySizeText"></text>
 
                               <!-- Mili Second Text background box -->
                               <rect x="50" y="3" rx="3" ry="3" width="35" height="15" fill="blue" filter="url(#shadow)" opacity="0.5" />
 
                               <!-- Mili Second Text -->
-                              <text x="67" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="300">
-                                300 ms
-                              </text>
+                              <text x="67" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="300" id="branchCategoryTimeText"></text>
 
                               <!-- Arrow marker definition -->
                               <defs>
@@ -301,17 +297,13 @@
                               <rect x="8" y="3" rx="3" ry="3" width="30" height="15" fill="springgreen" filter="url(#shadow)" opacity="0.8" />
 
                               <!-- KB Text -->
-                              <text x="23" y="13" text-anchor="middle" fill="#000" font-size="7" font-weight="600">
-                                1.1 KB
-                              </text>
+                              <text x="23" y="13" text-anchor="middle" fill="#000" font-size="7" font-weight="600" id="branchListSizeText"></text>
 
                               <!-- Mili Second Text background box -->
                               <rect x="50" y="3" rx="3" ry="3" width="35" height="15" fill="blue" filter="url(#shadow)" opacity="0.5" />
 
                               <!-- Mili Second Text -->
-                              <text x="67" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="300">
-                                250 ms
-                              </text>
+                              <text x="67" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="300" id="branchListTimeText"></text>
 
                               <!-- Arrow marker and shadow filter -->
                               <defs>
