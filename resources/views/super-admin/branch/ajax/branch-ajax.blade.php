@@ -38,6 +38,9 @@
     // Branch Score Table Resize
     resize('branchScoreTable', 'score-col-resizer', 'score-row-resizer');
     applySavedColumnOrder('branchScoreTable');
+    // RAM Table Resize
+    resize('ramUsageTable', 'col-resizer', 'row-resizer');
+    applySavedColumnOrder('ramUsageTable');
     // Branch Score Table Number Animation
     const numberClass = '.total-number';
 

@@ -350,38 +350,38 @@
             </div>
           </div>
           <div class="ram-usage-section">
-            <div class="table-box">
-              <table id="ramUsageTable" border="1" cellpadding="6" style="margin-top:10px; width:100%; border-collapse:collapse;">
+            <div class="table-box ram-table-responsive">
+              <table class="table" id="ramUsageTable" cellpadding="6">
                 <thead class="tableHead">
-                  <tr>
-                    <th class="thHead">
+                  <tr class="ram-row">
+                    <th class="ram-column">
                       Index
-                      <div class="score-row-resizer"></div>
-                      <div class="score-col-resizer"></div>
+                      <div class="row-resizer"></div>
+                      <div class="col-resizer"></div>
                     </th>
-                    <th class="thHead">
+                    <th class="ram-column">
                       RAM Key
-                      <div class="score-row-resizer"></div>
-                      <div class="score-col-resizer"></div>
+                      <div class="row-resizer"></div>
+                      <div class="col-resizer"></div>
                     </th>
-                    <th class="thHead">
+                    <th class="ram-column">
                       Perfomance
-                      <div class="score-row-resizer"></div>
-                      <div class="score-col-resizer"></div>
+                      <div class="row-resizer"></div>
+                      <div class="col-resizer"></div>
                     </th>
-                    <th class="thHead">
+                    <th class="ram-column">
                       Size
-                      <div class="score-row-resizer"></div>
-                      <div class="score-col-resizer"></div>
+                      <div class="row-resizer"></div>
+                      <div class="col-resizer"></div>
                     </th>
-                    <th class="thHead">
+                    <th class="ram-column">
                       Time
-                      <div class="score-row-resizer"></div>
-                      <div class="score-col-resizer"></div>
+                      <div class="row-resizer"></div>
+                      <div class="col-resizer"></div>
                     </th>
                   </tr>
                 </thead>
-                <tbody class="tableBody">
+                <tbody class="tableBody" id="RAMTable">
                   <!-- Rows will be injected here -->
                 </tbody>
               </table>

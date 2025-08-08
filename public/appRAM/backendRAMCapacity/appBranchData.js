@@ -102,7 +102,7 @@ function getAllRAMUsageStats(sortBy = null) {
         const fetchTimeKey = `${RAM_key}_lastFetchTime`;
         const timestamp = AppBackendRAM[fetchTimeKey] || 0;
         const diffMs = Date.now() - timestamp;
-        const Time = timestamp ? formatFetchTimeMs(diffMs) : 'N/A';
+        const Time = timestamp ? formatFetchTimeMs(diffMs) : 'Null';
 
         results.push({
             RAM_key,
@@ -129,59 +129,66 @@ function renderRAMUsage(sortBy = null) {
     const tableBody = document.querySelector("#ramUsageTable tbody");
 
     if (!tableBody) return;
-
-    // Clear existing rows
     tableBody.innerHTML = "";
 
-    // Inject rows
-    data.forEach(({ RAM_key, Size, Time }) => {
+    data.forEach(({ RAM_key, Size, Time }, index) => {
+        const timeMatch = Time.match(/([\d.]+)\s*ms/);
+        const timeValue = timeMatch ? parseFloat(timeMatch[1]) : null;
+
+        // Determine speed category and color
+        let speedColor = '';
+        let performanceMode = '';
+        if (timeValue !== null) {
+            if (timeValue >= 10000) {
+                speedColor = 'purple';
+                performanceMode = 'Slower';
+            } else if (timeValue >= 5000) {
+                speedColor = 'blue';
+                performanceMode = 'Medium';
+            } else {
+                speedColor = 'green';
+                performanceMode = 'Faster';
+            }
+        }else {
+            speedColor = '#db5e34';
+        }
+
         const row = document.createElement("tr");
 
         row.innerHTML = `
-            <td class="semi-small-td" <div class="score-row-resizer"></div></td>
-            <td class="semi-small-td" style="word-break: break-all;">${RAM_key}<div class="score-row-resizer"></div></td>
-            <td class="semi-small-td">
-                <div class="progress-line-wrapper">
-                    <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
-                        <!-- Overlay path -->
-                        <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.5" />
-
-                        <!-- Dashed progress line with animation -->
-                        <line x1="0" y1="10" x2="100" y2="10"
+            <td class="semi-small-td">${index + 1}<div class="row-resizer"></div></td>
+            <td class="semi-small-td" style="word-break: break-all;">${RAM_key}<div class="row-resizer"></div></td>
+            <td class="semi-small-performance-td">
+                <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
+                    <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.5" />
+                    <line x1="0" y1="10" x2="100" y2="10"
                         stroke="#0026fc2d"
                         stroke-width="20"
                         stroke-dasharray="10,5"
                         marker-end="url(#arrow1)">
                         <animate attributeName="stroke-dashoffset"
-                            from="0" to="-30"
-                            dur="2s"
-                            repeatCount="indefinite" />
-                        </line>
-                        <!-- KB Text background box -->
-                        <rect x="8" y="3" rx="3" ry="3" width="30" height="15" fill="springgreen" filter="url(#shadow)" opacity="0.8" />
+                        from="0" to="-30"
+                        dur="2s"
+                        repeatCount="indefinite" />
+                    </line>
 
-                        <!-- KB Text -->
-                        <text x="23" y="13" text-anchor="middle" fill="#000" font-size="7" font-weight="600" id="branchCategorySizeText"></text>
+                    <rect x="8" y="3" rx="3" ry="3" width="30" height="15" fill="${speedColor}" filter="url(#shadow)" opacity="0.8" />
+                    <text x="23" y="13" text-anchor="middle" fill="#fff" font-size="7" font-weight="600">${performanceMode ? performanceMode: 'Null'}</text>
 
-                        <!-- Mili Second Text background box -->
-                        <rect x="50" y="3" rx="3" ry="3" width="35" height="15" fill="blue" filter="url(#shadow)" opacity="0.5" />
+                    <rect x="50" y="3" rx="3" ry="3" width="35" height="15" fill="${speedColor}" filter="url(#shadow)" opacity="0.8" />
+                    <text x="67" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="300">${Time}</text>
 
-                        <!-- Mili Second Text -->
-                        <text x="67" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="300" id="branchCategoryTimeText"></text>
-
-                        <!-- Arrow marker definition -->
-                        <defs>
+                    <defs>
                         <marker id="arrow1" viewBox="0 0 10 10" refX="10" refY="5"
                             markerWidth="10" markerHeight="20" orient="auto">
                             <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(9, 0, 128, 0.3)" opacity="0.5" />
                         </marker>
-                        </defs>
-                    </svg>
-                </div>
-                <div class="score-row-resizer"></div>
+                    </defs>
+                </svg>
+                <div class="row-resizer"></div>
             </td>
-            <td class="semi-small-td">${Size}<div class="score-row-resizer"></div></td>
-            <td class="semi-small-td">${Time}<div class="score-row-resizer"></div></td>
+            <td class="semi-small-td">${Size}<div class="row-resizer"></div></td>
+            <td class="semi-small-td" style="color:${speedColor}">${Time}<div class="row-resizer"></div></td>
         `;
 
         tableBody.appendChild(row);
