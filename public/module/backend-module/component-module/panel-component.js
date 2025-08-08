@@ -151,6 +151,100 @@ export function initAllPanelResizers(...selectors) {
     });
 }
 
+// ========================= Menu-Card Component Resize (Bottom Only) ===============================
+export function initTableBoxResize(panel, panelId) {
+    if (!panel || !panelId) return;
+
+    const bottomResizer = panel.querySelector('.panel-height-resizer.bottom-resizer');
+    const svgRect = panel.querySelector('.connectorPath');
+    panel.style.position = 'relative'; // Required for top manipulation
+
+    // Animate Border
+    function animateBorder() {
+        if (!svgRect) return;
+        const rect = panel.getBoundingClientRect();
+        svgRect.setAttribute("width", rect.width);
+        svgRect.setAttribute("height", rect.height);
+        svgRect.setAttribute("x", 0);
+        svgRect.setAttribute("y", 0);
+        svgRect.setAttribute("rx", 3);
+        svgRect.setAttribute("ry", 3);
+        svgRect.style.display = 'block';
+        svgRect.style.stroke = "dodgerblue";
+        svgRect.style.strokeWidth = '3';
+        svgRect.style.strokeDasharray = "5,5";
+        svgRect.style.animation = "none";
+        void svgRect.offsetWidth;
+        svgRect.style.animation = "dashmove 1s linear infinite";
+    }
+
+    function stopBorderAnimation() {
+        if (!svgRect) return;
+        svgRect.style.animation = "none";
+        svgRect.style.stroke = "transparent";
+        svgRect.style.display = 'none';
+    }
+
+    // Setup only bottom resizer
+    if (bottomResizer) {
+        bottomResizer.addEventListener('mousedown', function (e) {
+            e.preventDefault();
+
+            const startY = e.pageY;
+            const startHeight = panel.offsetHeight;
+            const startTop = panel.offsetTop;
+
+            document.body.style.cursor = 'ns-resize';
+            animateBorder();
+
+            function onMouseMove(ev) {
+                const dy = ev.pageY - startY;
+                panel.style.height = `${startHeight + dy}px`;
+                animateBorder();
+            }
+
+            function onMouseUp() {
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+                document.body.style.cursor = '';
+                stopBorderAnimation();
+
+                setRAM(panelId, 'Height', panel.offsetHeight);
+                setRAM(panelId, 'Top', panel.offsetTop);
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+    }
+
+    // Restore Previous Size and Position
+    const savedHeight = getRAM(panelId, 'Height');
+    const savedTop = getRAM(panelId, 'Top');
+
+    panel.style.height = savedHeight ? `${savedHeight}px` : 'auto';
+    if (savedTop !== undefined) panel.style.top = `${savedTop}px`;
+
+    // Observe for updates (for connectorPath animation)
+    if (svgRect) {
+        const updateConnector = () => {
+            svgRect.setAttribute('width', panel.offsetWidth);
+            svgRect.setAttribute('height', panel.offsetHeight);
+        };
+        new ResizeObserver(updateConnector).observe(panel);
+    }
+}
+
+// ========================= Init Bottom Resizable Panels ==============================
+export function initTableBoxResizers(...selectors) {
+    selectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach((panel, index) => {
+            const panelId = panel.id || `${selector.replace('.', '')}-${index}`;
+            initTableBoxResize(panel, panelId);
+        });
+    });
+}
+
 // =============== Initialize Draggable Panel Movement =======================
 export function initPanelMove(tabHeaderId, tabPanelContentId) {
 

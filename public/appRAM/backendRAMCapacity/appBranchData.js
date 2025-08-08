@@ -22,11 +22,6 @@ let AppBackendRAM = localStorage.getItem(getUserRAMKey())
         branchDetails: {},
         branchCategoryDetails: {},
         branchListData: {},
-
-        // Last Update Fetch Data Time 
-        lastFetchTime: Date.now(),
-        currentUser: {},
-        tempFormData: {},
     };
 // data get
 function getAppRAM(key, fallback = null) {
@@ -35,12 +30,14 @@ function getAppRAM(key, fallback = null) {
 // single data update
 function updateAppRAM(key, value) {
     AppBackendRAM[key] = value;
+    AppBackendRAM[`${key}_lastFetchTime`] = Date.now();
     localStorage.setItem(getUserRAMKey(), JSON.stringify(AppBackendRAM));
 }
 // multi data update
 function updateAppRAMTable(obj = {}) {
     Object.entries(obj).forEach(([key, value]) => {
         AppBackendRAM[key] = value;
+        AppBackendRAM[`${key}_lastFetchTime`] = Date.now();
     });
     localStorage.setItem(getUserRAMKey(), JSON.stringify(AppBackendRAM));
 }
@@ -52,6 +49,7 @@ function updateAppRAMBulk(obj = {}) {
     }
     Object.entries(obj).forEach(([key, value]) => {
         AppBackendRAM[key] = value;
+        AppBackendRAM[`${key}_lastFetchTime`] = Date.now();
     });
     localStorage.setItem(getUserRAMKey(), JSON.stringify(AppBackendRAM));
 }
@@ -90,52 +88,107 @@ function formatFetchTimeMs(ms) {
   if (ms < 1_000_000_000) return `${(ms / 1000).toFixed(1)} ms`;
   return `${(ms / 1_000_000_000_000).toFixed(1)} ms`;
 }
-// Generic: Get table size from RAM
-function getTableSize(ramKey) {
-    const data = AppBackendRAM[ramKey] || [];
-    const sizeBytes = new Blob([JSON.stringify(data)]).size;
+// RAM DATA GET
+function getAllRAMUsageStats(sortBy = null) {
+    const results = [];
 
-    return {
-        ramKey,
-        size: formatSize(sizeBytes)
-    };
+    for (const RAM_key in AppBackendRAM) {
+        if (RAM_key.endsWith('_lastFetchTime')) continue;
+
+        const data = AppBackendRAM[RAM_key];
+        const sizeBytes = new Blob([JSON.stringify(data)]).size;
+        const Size = formatSize(sizeBytes);
+
+        const fetchTimeKey = `${RAM_key}_lastFetchTime`;
+        const timestamp = AppBackendRAM[fetchTimeKey] || 0;
+        const diffMs = Date.now() - timestamp;
+        const Time = timestamp ? formatFetchTimeMs(diffMs) : 'N/A';
+
+        results.push({
+            RAM_key,
+            Size,
+            Time,
+            _rawSize: sizeBytes,
+            _timestamp: timestamp
+        });
+    }
+
+    // Optional sorting
+    if (sortBy === 'size') {
+        results.sort((a, b) => b._rawSize - a._rawSize);
+    } else if (sortBy === 'time') {
+        results.sort((a, b) => b._timestamp - a._timestamp);
+    }
+
+    // Clean internal fields before returning
+    return results.map(({ RAM_key, Size, Time }) => ({ RAM_key, Size, Time }));
 }
+// RAM DATA SORT
+function renderRAMUsage(sortBy = null) {
+    const data = getAllRAMUsageStats(sortBy);
+    const tableBody = document.querySelector("#ramUsageTable tbody");
 
-// Generic: Get last fetch time from RAM
-function getLastFetchTime(ramKey) {
-  const fetchTimeKey = `${ramKey}_lastFetchTime`;
-  const timestamp = AppBackendRAM[fetchTimeKey] || 0;
-  const diffMs = Date.now() - timestamp;
+    if (!tableBody) return;
 
-  return {
-    ramKey,
-    fetchTime: formatFetchTimeMs(diffMs)
-  };
+    // Clear existing rows
+    tableBody.innerHTML = "";
+
+    // Inject rows
+    data.forEach(({ RAM_key, Size, Time }) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td class="semi-small-td" <div class="score-row-resizer"></div></td>
+            <td class="semi-small-td" style="word-break: break-all;">${RAM_key}<div class="score-row-resizer"></div></td>
+            <td class="semi-small-td">
+                <div class="progress-line-wrapper">
+                    <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
+                        <!-- Overlay path -->
+                        <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.5" />
+
+                        <!-- Dashed progress line with animation -->
+                        <line x1="0" y1="10" x2="100" y2="10"
+                        stroke="#0026fc2d"
+                        stroke-width="20"
+                        stroke-dasharray="10,5"
+                        marker-end="url(#arrow1)">
+                        <animate attributeName="stroke-dashoffset"
+                            from="0" to="-30"
+                            dur="2s"
+                            repeatCount="indefinite" />
+                        </line>
+                        <!-- KB Text background box -->
+                        <rect x="8" y="3" rx="3" ry="3" width="30" height="15" fill="springgreen" filter="url(#shadow)" opacity="0.8" />
+
+                        <!-- KB Text -->
+                        <text x="23" y="13" text-anchor="middle" fill="#000" font-size="7" font-weight="600" id="branchCategorySizeText"></text>
+
+                        <!-- Mili Second Text background box -->
+                        <rect x="50" y="3" rx="3" ry="3" width="35" height="15" fill="blue" filter="url(#shadow)" opacity="0.5" />
+
+                        <!-- Mili Second Text -->
+                        <text x="67" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="300" id="branchCategoryTimeText"></text>
+
+                        <!-- Arrow marker definition -->
+                        <defs>
+                        <marker id="arrow1" viewBox="0 0 10 10" refX="10" refY="5"
+                            markerWidth="10" markerHeight="20" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(9, 0, 128, 0.3)" opacity="0.5" />
+                        </marker>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="score-row-resizer"></div>
+            </td>
+            <td class="semi-small-td">${Size}<div class="score-row-resizer"></div></td>
+            <td class="semi-small-td">${Time}<div class="score-row-resizer"></div></td>
+        `;
+
+        tableBody.appendChild(row);
+    });
 }
-
-// ========================================
-// Branch List Data and Branch Category
-// ========================================
-// Branch List Table Data Size
-function getBranchListTableSize() {
-    return getTableSize('branchListData');
-}
-
-// Last Branch List Fetch Time
-function getBranchListLastFetchTime() {
-    return getLastFetchTime('branchListData');
-}
-
-// Branch Category Table Data Size
-function getBranchCategoryTableSize() {
-    return getTableSize('branchCategories');
-}
-
-// Last Branch Category Fetch Time
-function getBranchCategoryLastFetchTime() {
-    return getLastFetchTime('branchCategories');
-}
-
+// Expose to global scope
+window.renderRAMUsage = renderRAMUsage;
 export {
     getAppRAM,
     updateAppRAM,
@@ -144,8 +197,5 @@ export {
     clearAppRAM,
     clearAllAppRAM,
     clearBranchListCache,
-    getBranchListTableSize,
-    getBranchCategoryTableSize,
-    getBranchListLastFetchTime,
-    getBranchCategoryLastFetchTime
+    renderRAMUsage
 };

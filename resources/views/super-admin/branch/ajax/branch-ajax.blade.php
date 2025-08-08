@@ -14,17 +14,19 @@
         numberAnimation,
         // Border Component
         buttonBorderAnimation,
-        // Global RAM Storage System
-        // renderGlobalRAMTable,
-        // RAMAnalyzer 
         // Menu Item Resizeer
         initAllMenuCardResizers,
         initMenuCardResize,
         // Branch Setting Card Drag and Drop
-        initDragAndDrop
+        initDragAndDrop,
+        // Global RAM Storage System
+        // renderGlobalRAMTable,
+        // RAMAnalyzer 
     } from "/module/backend-module/backend-module-min.js";
+    import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
+    import { initTableBoxResize, initTableBoxResizers } from "/module/backend-module/component-module/panel-component.js";
     // Import RAM functions
-    import { getAppRAM, updateAppRAM, updateAppRAMTable, updateAppRAMBulk, clearBranchListCache, clearAppRAM , getBranchListTableSize, getBranchCategoryTableSize , getBranchListLastFetchTime, getBranchCategoryLastFetchTime} from "/appRAM/backendRAMCapacity/appBranchData.js";
+    import { getAppRAM, updateAppRAM, updateAppRAMTable, updateAppRAMBulk, clearBranchListCache, clearAppRAM, renderRAMUsage } from "/appRAM/backendRAMCapacity/appBranchData.js";
 
     // =================================================================
     // --------- Branch List && Branch Score Table Resize --------------
@@ -76,32 +78,63 @@
             sidebarPlate.classList.remove('hover-align-left');
             });
         }
-
+        renderRAMUsage();
         // Table size Last Fetch Data Time
-        function updateBranchListSVG() {
-            const sizeData = getBranchListTableSize();
-            const timeData = getBranchListLastFetchTime();
+        // function updateBranchListSVG() {
+        //     const sizeData = getBranchListTableSize();
+        //     const timeData = getBranchListLastFetchTime();
 
-            const sizeEl = document.getElementById('branchListSizeText');
-            const timeEl = document.getElementById('branchListTimeText');
+        //     const sizeEl = document.getElementById('branchListSizeText');
+        //     const timeEl = document.getElementById('branchListTimeText');
 
-            if (sizeEl) sizeEl.textContent = sizeData.size;
-            if (timeEl) timeEl.textContent = timeData.fetchTime;
-            }
+        //     if (sizeEl) sizeEl.textContent = sizeData.size;
+        //     if (timeEl) timeEl.textContent = timeData.fetchTime;
+        //     }
 
-            function updateBranchCategorySVG() {
-            const sizeData = getBranchCategoryTableSize();
-            const timeData = getBranchCategoryLastFetchTime();
+        //     function updateBranchCategorySVG() {
+        //     const sizeData = getBranchCategoryTableSize();
+        //     const timeData = getBranchCategoryLastFetchTime();
 
-            const sizeEl = document.getElementById('branchCategorySizeText');
-            const timeEl = document.getElementById('branchCategoryTimeText');
+        //     const sizeEl = document.getElementById('branchCategorySizeText');
+        //     const timeEl = document.getElementById('branchCategoryTimeText');
 
-            if (sizeEl) sizeEl.textContent = sizeData.size;
-            if (timeEl) timeEl.textContent = timeData.fetchTime;
-        }
-        updateBranchListSVG();
-        updateBranchCategorySVG();
+        //     if (sizeEl) sizeEl.textContent = sizeData.size;
+        //     if (timeEl) timeEl.textContent = timeData.fetchTime;
+        // }
+        // updateBranchListSVG();
+        // updateBranchCategorySVG();
     });
+
+    // renderGlobalRAMTable("ram-report-container");
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     RAMAnalyzer.initRAMAnalyzer();
+    //     const perItemsSelect = document.getElementById("perItems");
+    //     if (perItemsSelect) {
+    //         perItemsSelect.addEventListener("change", function () {
+    //             RAMAnalyzer.changePerPage(this.value);
+    //         });
+    //     }
+
+    //     const searchInput = document.getElementById("searchInput");
+    //     if (searchInput) {
+    //         searchInput.addEventListener("input", function () {
+    //             RAMAnalyzer.setSearchQuery(this.value);
+    //         });
+    //     }
+
+    //     document.querySelectorAll(".sort-button").forEach(btn => {
+    //         btn.addEventListener("click", () => {
+    //             RAMAnalyzer.setSort(btn.dataset.sort);
+    //         });
+    //     });
+
+    //     const tablePrefixFilter = document.getElementById("tablePrefixFilter");
+    //     if (tablePrefixFilter) {
+    //         tablePrefixFilter.addEventListener("change", e => {
+    //             RAMAnalyzer.setTablePrefix(e.target.value);
+    //         });
+    //     }
+    // });
 
     $(document).ready(function(){
         // =================================================================
@@ -112,6 +145,35 @@
         const branchListCache = getAppRAM('branchListData', {});
         // Search Branch Types Data Get From RAM
         const branchCategoryDetailsCache = getAppRAM('branchCategoryDetails', {});
+
+        // ============ RAM Table Box Resize ===============================
+        // -----------------------------------------------------------------
+        const panel = document.getElementById('tableBox');
+        initTableBoxResize(panel,'tableBox');
+        // Or apply to multiple panels using a selector:
+        //initTableBoxResizers('.resizable-panel');
+
+        // ===========---- RAM Table Btton Section -------==================
+        // -----------------------------------------------------------------
+        $(document).on('click', '.sortBtn', function () {
+            const $btn = $(this);
+            // Remove existing
+            $('.sortBtn #Layer_1').remove();
+
+            const hadDownArrow = $btn.data('sort') === 'desc';
+
+            // Toggle sort icon based on previous state
+            const iconHTML = hadDownArrow
+                ? `<svg id="Layer_1" width="12px" height="12px" fill="#ffffffa1" version="1.1" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,122.88 0,59.207 39.403,59.207 39.403,0 83.033,0 83.033,59.207 122.433,59.207 61.216,122.88"/></g></svg>` // Up arrow
+                : `<svg id="Layer_1" width="12px" height="12px" fill="#ffffffa1" version="1.1" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>`; // Down arrow
+
+            // Toggle and store new state
+            $btn.data('sort', hadDownArrow ? 'asc' : 'desc');
+
+            // Append new icon to the button
+            $btn.append(iconHTML);
+        });
+
 
         // Define Fetch Function
         fetchTableBranch();
@@ -785,10 +847,6 @@
                 success: function(response) {
                     // Save to RAM with dynamic key
                     updateAppRAM(cacheKey, response); 
-                    // Table Size and render timeStamp
-                    updateAppRAMTable({
-                        branchListData: response
-                    });
                     populate_branch_list_table(response); 
                 },
                 complete: function() {

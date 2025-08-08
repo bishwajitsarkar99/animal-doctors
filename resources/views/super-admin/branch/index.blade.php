@@ -74,7 +74,7 @@
       <div class="col-xl-4"></div>
     </x-CustomTabPanels.TabPanelTopBars.TabPanelTopBar>
     <!-- =========== Tap Content Panel Home Page =========== -->
-    <x-CustomTabPanels.TabPanelContents.TabContentPanel contentTabClass="tab-content-panel-bg" contentTabId="branchListTab" :hiddenAttr="$hiddenAttr">
+    <x-CustomTabPanels.TabPanelContents.TabContentPanel contentTabClass="tab-content-panel-bg mb-4" contentTabId="branchListTab" :hiddenAttr="$hiddenAttr">
       <!-- =========== Home Tab Content Panel Header =========== -->
       <x-CustomTabPanels.TabPanelContents.TabContentPanelHeader contentTabHeaderClass="table-heading component-focus">
         <div class="row">
@@ -228,47 +228,6 @@
                       <!-- Row 1 -->
                       <tr class="score-row">
                         <th class="score-column">
-                          <div class="progress-line-wrapper">
-                            <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
-                              <!-- Overlay path -->
-                              <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.5" />
-
-                              <!-- Dashed progress line with animation -->
-                              <line x1="0" y1="10" x2="100" y2="10"
-                                stroke="#0026fc2d"
-                                stroke-width="20"
-                                stroke-dasharray="10,5"
-                                marker-end="url(#arrow1)">
-                                <animate attributeName="stroke-dashoffset"
-                                  from="0" to="-30"
-                                  dur="2s"
-                                  repeatCount="indefinite" />
-                              </line>
-                              <!-- KB Text background box -->
-                              <rect x="8" y="3" rx="3" ry="3" width="30" height="15" fill="springgreen" filter="url(#shadow)" opacity="0.8" />
-
-                              <!-- KB Text -->
-                              <text x="23" y="13" text-anchor="middle" fill="#000" font-size="7" font-weight="600" id="branchCategorySizeText"></text>
-
-                              <!-- Mili Second Text background box -->
-                              <rect x="50" y="3" rx="3" ry="3" width="35" height="15" fill="blue" filter="url(#shadow)" opacity="0.5" />
-
-                              <!-- Mili Second Text -->
-                              <text x="67" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="300" id="branchCategoryTimeText"></text>
-
-                              <!-- Arrow marker definition -->
-                              <defs>
-                                <marker id="arrow1" viewBox="0 0 10 10" refX="10" refY="5"
-                                  markerWidth="10" markerHeight="20" orient="auto">
-                                  <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(9, 0, 128, 0.3)" opacity="0.5" />
-                                </marker>
-                              </defs>
-                            </svg>
-                          </div>
-                          <div class="score-row-resizer"></div>
-                          <div class="score-col-resizer"></div>
-                        </th>
-                        <th class="score-column">
                           Total Category
                           <div class="score-row-resizer"></div>
                           <div class="score-col-resizer"></div>
@@ -278,50 +237,13 @@
                           <div class="score-row-resizer"></div>
                           <div class="score-col-resizer"></div>
                         </th>
-                        <th class="score-column">
+                        <!-- <th class="score-column">
                           <div class="progress-line-wrapper">
-                            <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
-                              <!-- Progress path -->
-                              <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.3" />
-
-                              <!-- Animated dashed line -->
-                              <line x1="0" y1="10" x2="100" y2="10"
-                                stroke="#0026fc2d"
-                                stroke-width="20"
-                                stroke-dasharray="10,5"
-                                marker-end="url(#arrow1)">
-                                <animate attributeName="stroke-dashoffset" from="0" to="-30" dur="2s" repeatCount="indefinite" />
-                              </line>
-
-                              <!-- KB Text background box -->
-                              <rect x="8" y="3" rx="3" ry="3" width="30" height="15" fill="springgreen" filter="url(#shadow)" opacity="0.8" />
-
-                              <!-- KB Text -->
-                              <text x="23" y="13" text-anchor="middle" fill="#000" font-size="7" font-weight="600" id="branchListSizeText"></text>
-
-                              <!-- Mili Second Text background box -->
-                              <rect x="50" y="3" rx="3" ry="3" width="35" height="15" fill="blue" filter="url(#shadow)" opacity="0.5" />
-
-                              <!-- Mili Second Text -->
-                              <text x="67" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="300" id="branchListTimeText"></text>
-
-                              <!-- Arrow marker and shadow filter -->
-                              <defs>
-                                <marker id="arrow1" viewBox="0 0 10 10" refX="10" refY="5"
-                                  markerWidth="10" markerHeight="20" orient="auto">
-                                  <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(9, 0, 128, 0.3)" opacity="0.5" />
-                                </marker>
-
-                                <!-- Shadow Filter -->
-                                <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-                                  <feDropShadow dx="0" dy="0.5" stdDeviation="0.5" flood-color="rgba(0,0,0,0.3)" />
-                                </filter>
-                              </defs>
-                            </svg>
+                            
                           </div>
                           <div class="score-row-resizer"></div>
                           <div class="score-col-resizer"></div>
-                        </th>
+                        </th> -->
                         <th class="score-column">
                           Total Branch
                           <div class="score-row-resizer"></div>
@@ -408,6 +330,68 @@
             />
           </div>
         </x-Tables.TableFooter>
+        <div class="card panel mt-4" id="tableBox">
+          <div class="row">
+            <div class="col-sm-8">
+              <span class="body-heading">📊 RAM Usage Status</span>
+            </div>
+            <div class="col-sm-4">
+              <div class="button-set">
+                <button class="btn btn-sm success-shadow-btn sortBtn" onclick="renderRAMUsage('time')">
+                  Sort by Time
+                </button>
+                <button class="btn btn-sm success-shadow-btn sortBtn" onclick="renderRAMUsage('size')">
+                  Sort by Size
+                </button>
+                <button class="btn btn-sm success-shadow-btn sortBtn" onclick="renderRAMUsage()">
+                  Reset Sort
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="ram-usage-section">
+            <div class="table-box">
+              <table id="ramUsageTable" border="1" cellpadding="6" style="margin-top:10px; width:100%; border-collapse:collapse;">
+                <thead class="tableHead">
+                  <tr>
+                    <th class="thHead">
+                      Index
+                      <div class="score-row-resizer"></div>
+                      <div class="score-col-resizer"></div>
+                    </th>
+                    <th class="thHead">
+                      RAM Key
+                      <div class="score-row-resizer"></div>
+                      <div class="score-col-resizer"></div>
+                    </th>
+                    <th class="thHead">
+                      Perfomance
+                      <div class="score-row-resizer"></div>
+                      <div class="score-col-resizer"></div>
+                    </th>
+                    <th class="thHead">
+                      Size
+                      <div class="score-row-resizer"></div>
+                      <div class="score-col-resizer"></div>
+                    </th>
+                    <th class="thHead">
+                      Time
+                      <div class="score-row-resizer"></div>
+                      <div class="score-col-resizer"></div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="tableBody">
+                  <!-- Rows will be injected here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="panel-height-resizer bottom-resizer"></div>
+          <svg class="connector" width="100%" height="100%">
+            <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
+          </svg>
+        </div>
       </x-Tables.ViewDataTables.DataTableWrappers.DataTableWrapper>
     </x-CustomTabPanels.TabPanelContents.TabContentPanel>
     <!-- =========== Tap Panel Branch Setting =========== -->
@@ -504,13 +488,6 @@
         </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.LeftSideTabContent>
       </x-CustomLeftSideTabPanels.LeftSideTabPanel>
     </x-CustomTabPanels.TabPanelContents.TabContentPanel>
-    <!-- <div class="panel-width-resizer right-resizer"></div>
-    <div class="panel-width-resizer left-resizer"></div>
-    <div class="panel-height-resizer bottom-resizer"></div>
-    <div class="panel-height-resizer top-resizer"></div>
-    <svg class="connector" width="100%" height="100%">
-    <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
-    </svg> -->
   </div>
 
   <!-- RAM key Total Result -->

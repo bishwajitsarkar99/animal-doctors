@@ -20,8 +20,8 @@
     overflow-y: auto !important;
     overflow-x: auto !important;
     max-height: 400px;
-    border: 1px ridge #cfcfcf;
-    /* border-bottom: 1px ridge #dfdede;*/
+    /* border: 1px ridge #cfcfcf; */
+    border: 1px ridge rgba(0,123,255,0.2);
     border-radius: 5px;
 }
 .table{
