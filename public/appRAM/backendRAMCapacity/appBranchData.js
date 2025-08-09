@@ -134,7 +134,6 @@ function renderRAMUsage(sortBy = null) {
 
     if (!tableBody) return;
     tableBody.innerHTML = "";
-    timeColor = "";
 
     data.forEach(({ RAM_key, Size, Time }) => {
         const timeMatch = Time.match(/([\d.]+)\s*ms/);
@@ -143,28 +142,33 @@ function renderRAMUsage(sortBy = null) {
         let speedColor = '';
         let ramColor = '';
         let performanceMode = '';
+        let speedMarkupColor = '';
         if (timeValue !== null) {
             if (timeValue >= 10000) {
                 speedColor = 'purple';
                 performanceMode = 'Slower';
-                ramColor = 'darkblue';
+                ramColor = 'rgba(0, 110, 228, 1)';
+                speedMarkupColor = 'violet';
             } else if (timeValue >= 5000) {
                 speedColor = 'darkblue';
                 performanceMode = 'Medium';
-                ramColor = 'darkblue';
+                ramColor = 'rgba(0, 110, 228, 1)';
+                speedMarkupColor = 'violet';
             } else {
                 speedColor = 'green';
                 performanceMode = 'Faster';
-                ramColor = 'darkblue';
+                ramColor = 'rgba(0, 110, 228, 1)';
+                speedMarkupColor = 'violet';
             }
         } else {
-            speedColor = 'dodgerblue';
-            ramColor = 'darkblue';
+            speedColor = 'gray';
+            speedMarkupColor = 'violet';
+            ramColor = 'rgba(0, 110, 228, 1)';
         }
 
         const row = document.createElement("tr");
         row.innerHTML = `
-            <td class="semi-small-middle-cell" style="word-break: break-all;">${RAM_key}<div class="row-resizer"></div></td>
+            <td class="semi-small-first-cell" style="word-break: break-all;">${RAM_key}<div class="row-resizer"></div></td>
             <td class="semi-small-middle-cell">
                 <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
                     <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.5" />
@@ -179,6 +183,13 @@ function renderRAMUsage(sortBy = null) {
                         repeatCount="indefinite" />
                     </line>
 
+                    <!-- Rect + Text elements -->
+                    <rect x="20" y="3" rx="0" ry="0" width="50" height="15" fill="${ramColor}" opacity="0.8" />
+                    <text x="22" y="13" text-anchor="left" fill="#fff" font-size="7" font-weight="500"
+                        vector-effect="non-scaling-stroke">
+                        ${Size}
+                    </text>
+
                     <defs>
                         <marker id="arrow1" viewBox="0 0 10 10" refX="10" refY="5"
                             markerWidth="10" markerHeight="20" orient="auto">
@@ -186,21 +197,71 @@ function renderRAMUsage(sortBy = null) {
                         </marker>
                     </defs>
                 </svg>
-                <!-- Fixed-size text overlay -->
-                <svg width="100%" height="20" style="position: absolute; top: 0; left: 0; pointer-events: none;">
-                    <rect x="50" y="3" rx="3" ry="3" width="30" height="15" fill="${speedColor}" filter="url(#shadow)" opacity="0.8" />
-                    <text x="65" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="500" vector-effect="non-scaling-stroke">${performanceMode ? performanceMode: 'Null'}</text>
-
-                    <rect x="100" y="3" rx="3" ry="3" width="35" height="15" fill="${speedColor}" filter="url(#shadow)" opacity="0.8" />
-                    <text x="118" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="500" vector-effect="non-scaling-stroke">${Time}</text>
-
-                    <rect x="200" y="3" rx="3" ry="3" width="35" height="15" fill="${ramColor}" filter="url(#shadow)" opacity="0.8" />
-                    <text x="218" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="500" vector-effect="non-scaling-stroke">${Size}</text>
+                <div class="row-resizer"></div>
+            </td>
+            <td class="semi-small-middle-cell">
+                <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
+                    <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.4" />
+                    <line x1="0" y1="10" x2="100" y2="10"
+                        stroke="rgba(0, 110, 228, 1)"
+                        stroke-width="3"
+                        stroke-dasharray="50,5"
+                        marker-end="url(#arrow2)">
+                        <animate attributeName="stroke-dashoffset"
+                        from="0" to="-50"
+                        dur="5s"
+                        repeatCount="indefinite" />
+                    </line>
+                    <rect x="20" y="3" rx="0" ry="0" width="50" height="15" fill="${speedColor}" opacity="0.8" />
+                    <text x="22" y="13" text-anchor="left" fill="#fff" font-size="7" font-weight="500"
+                        vector-effect="non-scaling-stroke">
+                        ${performanceMode ? performanceMode : 'Null'}
+                    </text>
+                    <defs>
+                        <marker id="arrow2" viewBox="0 0 10 10" refX="10" refY="5"
+                            markerWidth="10" markerHeight="20" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="orange" opacity="0.5" />
+                        </marker>
+                    </defs>
                 </svg>
                 <div class="row-resizer"></div>
             </td>
-            <td class="semi-small-middle-cell">${Size}<div class="row-resizer"></div></td>
-            <td class="semi-small-last-cell" style="color:${timeColor}">${Time}<div class="row-resizer"></div></td>
+            <td class="semi-small-last-cell">
+                <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
+                    <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.5" />
+                    <path d="M 0 10 
+                        L 10 10 
+                        L 15 5 
+                        L 20 15 
+                        L 25 10 
+                        L 40 10
+                        L 45 3 
+                        L 50 17
+                        L 55 10
+                        L 100 10"
+                        stroke="rgba(0, 110, 228, 1)"
+                        stroke-width="2"
+                        fill="none"
+                        stroke-dasharray="100, 200"
+                        stroke-dashoffset="0" marker-end="url(#arrow3)">
+                        <animate attributeName="stroke-dashoffset"
+                        from="0" to="-100"
+                        dur="5s"
+                        repeatCount="indefinite" />
+                    </path>
+                    <rect x="0" y="3" rx="0" ry="0" width="70" height="15" fill="${speedMarkupColor}" opacity="0.5" />
+                    <text x="2" y="13" text-anchor="left" fill="#000" font-size="7" font-weight="500" vector-effect="non-scaling-stroke">
+                        ${Time}
+                    </text>
+                    <defs>
+                        <marker id="arrow3" viewBox="0 0 10 10" refX="10" refY="5"
+                            markerWidth="15" markerHeight="20" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="violet" opacity="0.5" />
+                        </marker>
+                    </defs>
+                </svg>
+                <div class="row-resizer"></div>
+            </td>
         `;
         tableBody.appendChild(row);
     });

@@ -364,7 +364,12 @@
                   <thead class="table-head" id="headId">
                     <tr class="table-head-row">
                       <th class="th-column">
-                        Key
+                        RAM File
+                        <div class="row-resizer"></div>
+                        <div class="col-resizer"></div>
+                      </th>
+                      <th class="th-column">
+                        RAM Store Size
                         <div class="row-resizer"></div>
                         <div class="col-resizer"></div>
                       </th>
@@ -374,12 +379,7 @@
                         <div class="col-resizer"></div>
                       </th>
                       <th class="th-column">
-                        Size
-                        <div class="row-resizer"></div>
-                        <div class="col-resizer"></div>
-                      </th>
-                      <th class="th-column">
-                        Time
+                        RAM Execution Time
                         <div class="row-resizer"></div>
                         <div class="col-resizer"></div>
                       </th>

@@ -1536,7 +1536,7 @@ td.semi-small-first-cell{
 }
 td.semi-small-middle-cell {
   background-color: white ! important;
-  padding: 0px 5px;
+  padding: 0;
   border-left: 1px ridge #fff;
   border-right: 1px ridge #d3d3d3d4;
   border-top: 1px ridge #fff;
@@ -1546,7 +1546,7 @@ td.semi-small-middle-cell {
 }
 td.semi-small-last-cell {
   background-color:white ! important;
-  padding: 0px 5px;
+  padding: 0;
   border-left: 1px ridge #fff;
   border-right: 1px ridge #fff;
   border-top: 1px ridge #fff;
