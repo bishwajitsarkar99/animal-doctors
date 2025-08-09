@@ -81,22 +81,24 @@ function formatSize(bytes) {
     else if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(2)} KB`;
     else return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
 }
-
 // Convert timestamp to "time ago" string
 function formatFetchTimeMs(ms) {
-  if (ms < 1000) return `${ms} ms`;
-  if (ms < 1_000_000_000) return `${(ms / 1000).toFixed(1)} ms`;
-  return `${(ms / 1_000_000_000_000).toFixed(1)} ms`;
+  if (ms < 1000000) return `${ms} ms`;
+  if (ms < 1_000_000_000_000) return `${(ms / 1000000).toFixed(1)} ms`;
+  return `${(ms / 1_000_000_000_000_000).toFixed(1)} ms`;
 }
 // RAM DATA GET
 function getAllRAMUsageStats(sortBy = null) {
     const results = [];
+    let totalSizeBytes = 0;
 
     for (const RAM_key in AppBackendRAM) {
         if (RAM_key.endsWith('_lastFetchTime')) continue;
 
         const data = AppBackendRAM[RAM_key];
         const sizeBytes = new Blob([JSON.stringify(data)]).size;
+        totalSizeBytes += sizeBytes;
+
         const Size = formatSize(sizeBytes);
 
         const fetchTimeKey = `${RAM_key}_lastFetchTime`;
@@ -113,52 +115,57 @@ function getAllRAMUsageStats(sortBy = null) {
         });
     }
 
-    // Optional sorting
     if (sortBy === 'size') {
         results.sort((a, b) => b._rawSize - a._rawSize);
     } else if (sortBy === 'time') {
         results.sort((a, b) => b._timestamp - a._timestamp);
     }
 
-    // Clean internal fields before returning
-    return results.map(({ RAM_key, Size, Time }) => ({ RAM_key, Size, Time }));
+    return {
+        data: results.map(({ RAM_key, Size, Time }) => ({ RAM_key, Size, Time })),
+        totalSize: formatSize(totalSizeBytes)
+    };
 }
-// RAM DATA SORT
+// RAM DATA SORT && Table Render
 function renderRAMUsage(sortBy = null) {
-    const data = getAllRAMUsageStats(sortBy);
+    const { data, totalSize } = getAllRAMUsageStats(sortBy);
     const tableBody = document.querySelector("#ramUsageTable tbody");
+    const totalSizeElement = document.getElementById("totalRAMSize");
 
     if (!tableBody) return;
     tableBody.innerHTML = "";
+    timeColor = "";
 
-    data.forEach(({ RAM_key, Size, Time }, index) => {
+    data.forEach(({ RAM_key, Size, Time }) => {
         const timeMatch = Time.match(/([\d.]+)\s*ms/);
         const timeValue = timeMatch ? parseFloat(timeMatch[1]) : null;
 
-        // Determine speed category and color
         let speedColor = '';
+        let ramColor = '';
         let performanceMode = '';
         if (timeValue !== null) {
             if (timeValue >= 10000) {
                 speedColor = 'purple';
                 performanceMode = 'Slower';
+                ramColor = 'darkblue';
             } else if (timeValue >= 5000) {
-                speedColor = 'blue';
+                speedColor = 'darkblue';
                 performanceMode = 'Medium';
+                ramColor = 'darkblue';
             } else {
                 speedColor = 'green';
                 performanceMode = 'Faster';
+                ramColor = 'darkblue';
             }
-        }else {
-            speedColor = '#db5e34';
+        } else {
+            speedColor = 'dodgerblue';
+            ramColor = 'darkblue';
         }
 
         const row = document.createElement("tr");
-
         row.innerHTML = `
-            <td class="semi-small-td">${index + 1}<div class="row-resizer"></div></td>
-            <td class="semi-small-td" style="word-break: break-all;">${RAM_key}<div class="row-resizer"></div></td>
-            <td class="semi-small-performance-td">
+            <td class="semi-small-middle-cell" style="word-break: break-all;">${RAM_key}<div class="row-resizer"></div></td>
+            <td class="semi-small-middle-cell">
                 <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
                     <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.5" />
                     <line x1="0" y1="10" x2="100" y2="10"
@@ -172,12 +179,6 @@ function renderRAMUsage(sortBy = null) {
                         repeatCount="indefinite" />
                     </line>
 
-                    <rect x="8" y="3" rx="3" ry="3" width="30" height="15" fill="${speedColor}" filter="url(#shadow)" opacity="0.8" />
-                    <text x="23" y="13" text-anchor="middle" fill="#fff" font-size="7" font-weight="600">${performanceMode ? performanceMode: 'Null'}</text>
-
-                    <rect x="50" y="3" rx="3" ry="3" width="35" height="15" fill="${speedColor}" filter="url(#shadow)" opacity="0.8" />
-                    <text x="67" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="300">${Time}</text>
-
                     <defs>
                         <marker id="arrow1" viewBox="0 0 10 10" refX="10" refY="5"
                             markerWidth="10" markerHeight="20" orient="auto">
@@ -185,14 +186,29 @@ function renderRAMUsage(sortBy = null) {
                         </marker>
                     </defs>
                 </svg>
+                <!-- Fixed-size text overlay -->
+                <svg width="100%" height="20" style="position: absolute; top: 0; left: 0; pointer-events: none;">
+                    <rect x="50" y="3" rx="3" ry="3" width="30" height="15" fill="${speedColor}" filter="url(#shadow)" opacity="0.8" />
+                    <text x="65" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="500" vector-effect="non-scaling-stroke">${performanceMode ? performanceMode: 'Null'}</text>
+
+                    <rect x="100" y="3" rx="3" ry="3" width="35" height="15" fill="${speedColor}" filter="url(#shadow)" opacity="0.8" />
+                    <text x="118" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="500" vector-effect="non-scaling-stroke">${Time}</text>
+
+                    <rect x="200" y="3" rx="3" ry="3" width="35" height="15" fill="${ramColor}" filter="url(#shadow)" opacity="0.8" />
+                    <text x="218" y="13" text-anchor="middle" fill="#fff" font-size="8" font-weight="500" vector-effect="non-scaling-stroke">${Size}</text>
+                </svg>
                 <div class="row-resizer"></div>
             </td>
-            <td class="semi-small-td">${Size}<div class="row-resizer"></div></td>
-            <td class="semi-small-td" style="color:${speedColor}">${Time}<div class="row-resizer"></div></td>
+            <td class="semi-small-middle-cell">${Size}<div class="row-resizer"></div></td>
+            <td class="semi-small-last-cell" style="color:${timeColor}">${Time}<div class="row-resizer"></div></td>
         `;
-
         tableBody.appendChild(row);
     });
+
+    // Show total size outside the table
+    if (totalSizeElement) {
+        totalSizeElement.textContent = `Branch Module (RAM Size) : ${totalSize}`;
+    }
 }
 // Expose to global scope
 window.renderRAMUsage = renderRAMUsage;

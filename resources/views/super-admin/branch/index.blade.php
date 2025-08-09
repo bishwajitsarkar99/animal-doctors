@@ -332,8 +332,16 @@
         </x-Tables.TableFooter>
         <div class="card panel mt-4" id="tableBox">
           <div class="row">
-            <div class="col-sm-8">
-              <span class="body-heading">📊 RAM Usage Status</span>
+            <div class="col-sm-8 element-space">
+              <span class="body-heading">
+                <span>
+                  <svg width="40px" height="25px" fill="rgba(0,123,255,0.8)" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 375.4">
+                    <path fill-rule="nonzero" d="M25.13 39.95h34.22V0H85.2v39.95h47.65V0h25.84v39.95h47.64V0h25.84v39.95h47.65V0h25.84v39.95h47.65V0h25.84v39.95h47.65V0h25.84v39.95h34.23c6.88 0 13.15 2.82 17.71 7.37l.05.05c4.54 4.55 7.37 10.82 7.37 17.71v247.73c0 6.88-2.83 13.15-7.37 17.71l-.05.05c-4.56 4.54-10.83 7.37-17.71 7.37h-34.23v37.46H426.8v-37.46h-47.65v37.46h-25.84v-37.46h-47.65v37.46h-25.84v-37.46h-47.65v37.46h-25.84v-37.46h-47.64v37.46h-25.84v-37.46H85.2v37.46H59.35v-37.46H25.13c-6.89 0-13.15-2.83-17.71-7.37l-.05-.05C2.83 325.96 0 319.69 0 312.81V65.08c0-6.89 2.83-13.16 7.37-17.71l.05-.05c4.56-4.55 10.82-7.37 17.71-7.37zm154.83 200.1h-35.98l-13.41-30.42h-8.56v30.42H90.83V137.84h51.52c23.44 0 35.16 11.94 35.16 35.81 0 16.36-5.07 27.15-15.21 32.38l17.66 34.02zm-57.95-77.57v23.5h9.05c3.93 0 6.79-.41 8.59-1.23 1.8-.82 2.7-2.7 2.7-5.64v-9.76c0-2.95-.91-4.83-2.7-5.64-1.8-.82-4.67-1.23-8.59-1.23h-9.05zm98.67 77.57h-34.5l26.49-102.21h50.53l26.49 102.21h-34.5l-3.76-16.19h-26.99l-3.76 16.19zm13.29-70.81-3.64 28.62h15.04l-3.48-28.62h-7.92zm96.93 70.81h-34.18l6.21-102.21h42.69l12.76 52h1.14l12.75-52h42.68l6.22 102.21h-34.18l-1.96-49.55h-1.15l-12.43 49.55h-25.01l-12.59-49.55h-.99l-1.96 49.55zM486.16 65.79H25.84V312.1h460.32V65.79z"/>
+                  </svg>
+                </span>
+                RAM Usage Status
+              </span>
+              <span class="body-heading" id="totalRAMSize"></span>
             </div>
             <div class="col-sm-4">
               <div class="button-set">
@@ -350,41 +358,36 @@
             </div>
           </div>
           <div class="ram-usage-section">
-            <div class="table-box ram-table-responsive">
-              <table class="table" id="ramUsageTable" cellpadding="6">
-                <thead class="tableHead">
-                  <tr class="ram-row">
-                    <th class="ram-column">
-                      Index
-                      <div class="row-resizer"></div>
-                      <div class="col-resizer"></div>
-                    </th>
-                    <th class="ram-column">
-                      RAM Key
-                      <div class="row-resizer"></div>
-                      <div class="col-resizer"></div>
-                    </th>
-                    <th class="ram-column">
-                      Perfomance
-                      <div class="row-resizer"></div>
-                      <div class="col-resizer"></div>
-                    </th>
-                    <th class="ram-column">
-                      Size
-                      <div class="row-resizer"></div>
-                      <div class="col-resizer"></div>
-                    </th>
-                    <th class="ram-column">
-                      Time
-                      <div class="row-resizer"></div>
-                      <div class="col-resizer"></div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody class="tableBody" id="RAMTable">
-                  <!-- Rows will be injected here -->
-                </tbody>
-              </table>
+            <div class="table-container">
+              <div class="table-responsive">
+                <table class="table" id="ramUsageTable">
+                  <thead class="table-head" id="headId">
+                    <tr class="table-head-row">
+                      <th class="th-column">
+                        Key
+                        <div class="row-resizer"></div>
+                        <div class="col-resizer"></div>
+                      </th>
+                      <th class="th-column">
+                        RAM Perfomance
+                        <div class="row-resizer"></div>
+                        <div class="col-resizer"></div>
+                      </th>
+                      <th class="th-column">
+                        Size
+                        <div class="row-resizer"></div>
+                        <div class="col-resizer"></div>
+                      </th>
+                      <th class="th-column">
+                        Time
+                        <div class="row-resizer"></div>
+                        <div class="col-resizer"></div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-body" id="RAMTable"></tbody>
+                </table>
+              </div>
             </div>
           </div>
           <div class="panel-height-resizer bottom-resizer"></div>
@@ -489,7 +492,7 @@
       </x-CustomLeftSideTabPanels.LeftSideTabPanel>
     </x-CustomTabPanels.TabPanelContents.TabContentPanel>
   </div>
-
+  
   <!-- RAM key Total Result -->
   <!-- <div id="ram-report-container"></div> -->
   <!-- RAM key detail view -->

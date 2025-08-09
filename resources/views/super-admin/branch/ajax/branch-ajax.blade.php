@@ -82,30 +82,6 @@
             });
         }
         renderRAMUsage();
-        // Table size Last Fetch Data Time
-        // function updateBranchListSVG() {
-        //     const sizeData = getBranchListTableSize();
-        //     const timeData = getBranchListLastFetchTime();
-
-        //     const sizeEl = document.getElementById('branchListSizeText');
-        //     const timeEl = document.getElementById('branchListTimeText');
-
-        //     if (sizeEl) sizeEl.textContent = sizeData.size;
-        //     if (timeEl) timeEl.textContent = timeData.fetchTime;
-        //     }
-
-        //     function updateBranchCategorySVG() {
-        //     const sizeData = getBranchCategoryTableSize();
-        //     const timeData = getBranchCategoryLastFetchTime();
-
-        //     const sizeEl = document.getElementById('branchCategorySizeText');
-        //     const timeEl = document.getElementById('branchCategoryTimeText');
-
-        //     if (sizeEl) sizeEl.textContent = sizeData.size;
-        //     if (timeEl) timeEl.textContent = timeData.fetchTime;
-        // }
-        // updateBranchListSVG();
-        // updateBranchCategorySVG();
     });
 
     // renderGlobalRAMTable("ram-report-container");
@@ -158,26 +134,6 @@
 
         // ===========---- RAM Table Btton Section -------==================
         // -----------------------------------------------------------------
-        $(document).on('click', '.sortBtn', function () {
-            const $btn = $(this);
-            // Remove existing
-            $('.sortBtn #Layer_1').remove();
-
-            const hadDownArrow = $btn.data('sort') === 'desc';
-
-            // Toggle sort icon based on previous state
-            const iconHTML = hadDownArrow
-                ? `<svg id="Layer_1" width="12px" height="12px" fill="#ffffffa1" version="1.1" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,122.88 0,59.207 39.403,59.207 39.403,0 83.033,0 83.033,59.207 122.433,59.207 61.216,122.88"/></g></svg>` // Up arrow
-                : `<svg id="Layer_1" width="12px" height="12px" fill="#ffffffa1" version="1.1" viewBox="0 0 122.433 122.88"><g><polygon fill-rule="evenodd" clip-rule="evenodd" points="61.216,0 0,63.673 39.403,63.673 39.403,122.88 83.033,122.88 83.033,63.673 122.433,63.673 61.216,0"/></g></svg>`; // Down arrow
-
-            // Toggle and store new state
-            $btn.data('sort', hadDownArrow ? 'asc' : 'desc');
-
-            // Append new icon to the button
-            $btn.append(iconHTML);
-        });
-
-
         // Define Fetch Function
         fetchTableBranch();
         let debounceTimer;
