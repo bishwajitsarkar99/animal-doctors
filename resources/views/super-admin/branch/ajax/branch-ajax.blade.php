@@ -27,7 +27,8 @@
     import { initTableBoxResize, initTableBoxResizers } from "/module/backend-module/component-module/panel-component.js";
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMTable, updateAppRAMBulk, clearBranchListCache, clearAppRAM, renderRAMUsage } from "/appRAM/backendRAMCapacity/appBranchData.js";
-
+    //localStorage.removeItem('AppBackendRAM_{Branch-Section}_M-BRN-2025-02-10-423_1_superadmingstmedicinecenter4215_gmail_com');
+    //clearBranchListCache();
     // =================================================================
     // --------- Branch List && Branch Score Table Resize --------------
     // =================================================================
