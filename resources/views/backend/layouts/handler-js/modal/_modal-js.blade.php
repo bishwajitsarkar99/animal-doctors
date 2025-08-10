@@ -1,6 +1,6 @@
 <script type="module">
     // Import RAM functions
-    import { clearAppRAM } from "/appRAM/backendRAMCapacity/appBranchData.js";
+    import { clearAppRAMBranchSection } from "/appRAM/backendRAMCapacity/appBranchData.js";
     $(document).ready(function() {
 
         $(document).on('click', '#logout_click', function (e) {

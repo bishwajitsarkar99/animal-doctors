@@ -54,7 +54,7 @@ function updateAppRAMBulk(obj = {}) {
     localStorage.setItem(getUserRAMKey(), JSON.stringify(AppBackendRAM));
 }
 // current user cache clear
-function clearAppRAM() {
+function clearAppRAMBranchSection() {
     localStorage.removeItem(getUserRAMKey());
     AppBackendRAM = {};
 }
@@ -76,6 +76,52 @@ function clearBranchListCache() {
     }
     localStorage.setItem(getUserRAMKey(), JSON.stringify(AppBackendRAM));
 }
+// Only Branch Section Data Clear
+function clearBranchSectionCache() {
+    const now = Date.now();
+    //const twoMinutes = 2 * 60 * 1000; // for 2 minutes
+    const oneHour = 1 * 60 * 60 * 1000; // for 1 hour
+
+    // Reload fresh data from localStorage
+    const storedData = localStorage.getItem(getUserRAMKey());
+    AppBackendRAM = storedData ? JSON.parse(storedData) : {};
+
+    // Delete keys that start with 'branchListData_'
+    for (const key in AppBackendRAM) {
+        if (key.startsWith('branchListData_')) {
+            const fetchTimeKey = `${key}_lastFetchTime`;
+            const lastFetchTime = AppBackendRAM[fetchTimeKey] || 0;
+
+            if (now - lastFetchTime > oneHour) {
+                delete AppBackendRAM[key];
+                delete AppBackendRAM[fetchTimeKey];
+            }
+        }
+    }
+
+    // Also delete these fixed keys
+    const fixedKeysToClear = [
+        'branchTypeFlags',
+        'branchTypes',
+        'branchCategoryFlags',
+        'branchCategories',
+        'branchSearchFlags',
+        'branchSearchResults',
+        'branchDetails',
+        'branchCategoryDetails',
+        'branchListData',
+    ];
+
+    fixedKeysToClear.forEach(key => {
+        delete AppBackendRAM[key];
+        delete AppBackendRAM[`${key}_lastFetchTime`];
+    });
+
+    // Save cleaned data back to localStorage
+    localStorage.setItem(getUserRAMKey(), JSON.stringify(AppBackendRAM));
+}
+// Automatic deletion every 2 minutes
+setInterval(clearBranchSectionCache, 3600000);
 // Convert bytes to KB/MB readable format
 function formatSize(bytes) {
     if (bytes < 1024) return `${bytes} B`;
@@ -318,7 +364,7 @@ export {
     updateAppRAM,
     updateAppRAMBulk,
     updateAppRAMTable,
-    clearAppRAM,
+    clearAppRAMBranchSection,
     clearAllAppRAM,
     clearBranchListCache,
     renderRAMUsage

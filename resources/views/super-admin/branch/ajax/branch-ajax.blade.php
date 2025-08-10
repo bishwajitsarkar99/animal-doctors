@@ -26,9 +26,7 @@
     import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
     import { initTableBoxResize, initTableBoxResizers } from "/module/backend-module/component-module/panel-component.js";
     // Import RAM functions
-    import { getAppRAM, updateAppRAM, updateAppRAMTable, updateAppRAMBulk, clearBranchListCache, clearAppRAM, renderRAMUsage } from "/appRAM/backendRAMCapacity/appBranchData.js";
-    //localStorage.removeItem('AppBackendRAM_{Branch-Section}_M-BRN-2025-02-10-423_1_superadmingstmedicinecenter4215_gmail_com');
-    //clearBranchListCache();
+    import { getAppRAM, updateAppRAM, updateAppRAMTable, updateAppRAMBulk, clearBranchListCache, clearAppRAMBranchSection, renderRAMUsage } from "/appRAM/backendRAMCapacity/appBranchData.js";
     // =================================================================
     // --------- Branch List && Branch Score Table Resize --------------
     // =================================================================
@@ -162,7 +160,6 @@
             $(this).tooltip('hide');
             $(".search-column").addClass("display_none");
             fetchTableBranch();
-            clearBranchListCache();
         });
         // Table Menu Card :show Filter Field
         $(document).on('click', '#showFilterField', function(){
@@ -175,7 +172,6 @@
         // Table Menu Card :show Filter Field Cancel
         $(document).on('click', '#cancelFilterToast', function(){
             $(".filter-column").addClass("display_none");
-            clearBranchListCache();
         });
         // Reset Table Width and Height as well as Drag and Drop
         $(document).on('click', '#tableResize', function(){
@@ -2466,7 +2462,7 @@
             fetchTableBranch();
             fetch_branch_categories();
             clearBranchListCache();
-            clearAppRAM();
+            clearAppRAMBranchSection();
         });
 
         // =============================================================================================

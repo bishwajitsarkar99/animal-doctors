@@ -970,7 +970,7 @@ button.btn.btn-sm.danger-repl-btn:hover{
   animation: none !important;
 }
 .side-bar-text{
-  height: 140px;
+  height: 110px;
   min-width: 24px;
   font-family: var(--component-font-family);
   font-size: 12px;
@@ -1016,7 +1016,7 @@ button.btn.btn-sm.danger-repl-btn:hover{
   background-color: rgba(0, 123, 255, 0.1);
   border: none;
   cursor: pointer;
-  height: 140px;
+  height: 110px;
   box-sizing: border-box;
   border-radius: 3px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);

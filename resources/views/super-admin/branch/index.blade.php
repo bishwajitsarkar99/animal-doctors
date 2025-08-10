@@ -16,8 +16,7 @@
   $customLeftSideTabPanelGroupBtns = [
     ['labelName'=>'Home', 'btnClass'=>'btn btn-sm custom-tab-btn active','btnType'=>'button', 'btnId'=>'v-pills-home-tab', 'toggle'=>'pill', 'target'=>'#v-pills-home', 'btnRole'=>'tab', 'controls'=>'v-pills-home', 'selected'=>'true'],
     ['labelName'=>'Branch', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-branch-tab', 'toggle'=>'pill', 'target'=>'#v-pills-branch', 'btnRole'=>'tab', 'controls'=>'v-pills-branch', 'selected'=>'true'],
-    ['labelName'=>'Category', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-category-tab', 'toggle'=>'pill', 'target'=>'#v-pills-category', 'btnRole'=>'tab', 'controls'=>'v-pills-category', 'selected'=>'false'],
-    ['labelName'=>'Replace', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-replace-tab', 'toggle'=>'pill', 'target'=>'#v-pills-replace', 'btnRole'=>'tab', 'controls'=>'v-pills-replace', 'selected'=>'false'],
+    ['labelName'=>'Category', 'btnClass'=>'btn btn-sm custom-tab-btn','btnType'=>'button', 'btnId'=>'v-pills-category-tab', 'toggle'=>'pill', 'target'=>'#v-pills-category', 'btnRole'=>'tab', 'controls'=>'v-pills-category', 'selected'=>'false']
   ];
   // Modals
   $modals = [
@@ -330,6 +329,7 @@
             />
           </div>
         </x-Tables.TableFooter>
+        <!-- ======= RAM Usage Status =========== -->
         <div class="card panel mt-4" id="tableBox">
           <div class="row">
             <div class="col-sm-8 element-space">
@@ -415,7 +415,7 @@
           <div class="icon-bar">
             <span class="list-icon">
               <span class="side-bar-text">
-                <strong>Settings-Menu</strong>
+                <strong>Menu</strong>
                 <input class="checkSideBar" type="checkbox" name="checking">
               </span>
             </span>
@@ -482,10 +482,6 @@
           </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel>
           <!-- Search Setting -->
           <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade" homePanelId="v-pills-search" homeRole="tabpanel" ariaLabel="v-pills-search-tab" >
-            ...
-          </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel>
-          <!-- Branch Replace -->
-          <x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel className="tab-pane fade" homePanelId="v-pills-replace" homeRole="tabpanel" ariaLabel="v-pills-replace-tab" >
             ...
           </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.ContentPanels.ContentPanel>
         </x-CustomLeftSideTabPanels.LeftSideTabContentPanels.LeftSideTabContent>
