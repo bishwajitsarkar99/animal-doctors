@@ -1,10 +1,10 @@
+<?php
 namespace App\View\components;
-use Illuminate App\view\component;
 
-class tab-content extends Component
+class tabContent extends Component
 {
     public function render()
     {
-        return view('components.buttons.tab-contnet');
+        return view('components.buttons.tabContent');
     }
 }

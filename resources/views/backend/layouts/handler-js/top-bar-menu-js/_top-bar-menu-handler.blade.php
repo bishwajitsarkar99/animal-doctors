@@ -14,7 +14,7 @@
             }
         });
 
-        initAllOffcanvasResizers('.offcanvas-card', '.offcanvas-setting-card');
+        initAllOffcanvasResizers('.offcanvas-card', '.offcanvas-setting-card', '.offcanvas-ram-card');
 
         const offCanvas = document.getElementById('SettingOffcanvas');
 

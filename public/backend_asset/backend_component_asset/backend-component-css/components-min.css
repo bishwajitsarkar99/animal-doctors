@@ -1257,6 +1257,9 @@ li.box-row{
   list-style: none;
   cursor: move;
 }
+li.box-container-row {
+  list-style: none;
+}
 .form-check-input.panel-checked[type=checkbox] {
   border-radius: 2em !important;
 }

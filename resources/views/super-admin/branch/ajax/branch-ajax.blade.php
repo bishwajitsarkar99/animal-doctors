@@ -82,7 +82,6 @@
         }
         renderRAMUsage();
     });
-
     // renderGlobalRAMTable("ram-report-container");
     // document.addEventListener("DOMContentLoaded", () => {
     //     RAMAnalyzer.initRAMAnalyzer();
@@ -129,8 +128,9 @@
         // ====================================================================
         // Show RAM Box Table
         $(document).on('click', '#showRAMStatus',function(){
-            $("#tableBox").removeAttr('hidden');
+            $(".offcanvas-ram-card").removeClass('offcanvas-hidden');
         });
+
         // Close RAM Box Table
         $(document).on('click', '#cancelRAMStatusTable', function(){
             $("#tableBox").attr('hidden', true);
