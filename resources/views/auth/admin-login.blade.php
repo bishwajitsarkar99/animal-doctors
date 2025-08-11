@@ -367,14 +367,14 @@
             removeSkeletonClass 
         } from "{{asset('backend_asset')}}/support_asset/auth/js/auth-helper-min.js";
         // Import RAM functions
-        import { clearAppRAM } from "/appRAM/backendRAMCapacity/appBranchData.js"; 
+        import { clearAppRAMBranchSection } from "/appRAM/backendRAMCapacity/appBranchData.js"; 
         buttonLoader();
         pageLoader();
         toolTip();
         //browserInpect();
         // Clear Current User Cache
         if (window.location.pathname === '/admin-login') {
-            clearAppRAM();
+            clearAppRAMBranchSection();
         }    
         $(document).ready(function () {
             // Initialize the message

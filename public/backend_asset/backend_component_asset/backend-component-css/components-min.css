@@ -1137,7 +1137,7 @@ button#cancelFilterToast {
 }
 .btn-close-toast {
   width: 1.5em;
-  height: 1.5em;
+  height: 1.3em;
   padding: .25em;
   background-color: transparent;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='8' fill='%23dc3545'/%3E%3Cline x1='4.5' y1='4.5' x2='11.5' y2='11.5' stroke='%23fff' stroke-width='1.5'/%3E%3Cline x1='11.5' y1='4.5' x2='4.5' y2='11.5' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E");
@@ -1409,6 +1409,7 @@ th.row-resizing{
   flex: 1;
   overflow: auto;
   min-height: 0;
+  margin-bottom: 5px;
 }
 .body-heading {
   font-size: 13px;
@@ -1517,8 +1518,9 @@ th.th-column{
   padding: 0px 5px;
   border-left: 1px ridge #fff;
   border-top: 1px ridge #fff;
-  border-right: 1px ridge #d3d3d3d4;
+  border-right: 1px ridge #fff;
   border-bottom: 1px ridge #d3d3d3d4;
+  background-image: -webkit-gradient(linear, 0 100%, 0 0, from(#bde1edc9), to(#dcf6ffbf));
   background-color:white;
   color: #222;
   letter-spacing: 0.5px;
@@ -1533,6 +1535,19 @@ td.semi-small-first-cell{
   border-top: 1px ridge #fff;
   border-bottom: 1px ridge #d3d3d3d4;
   background-color: white;
+}
+td.semi-small-first-cell:hover{
+  background-color: rgb(187, 233, 248) !important;
+  cursor: alias;
+}
+#ramUsageTable tbody tr:hover td{
+  background-color: rgb(187, 233, 248) !important;
+  cursor: alias;
+}
+tr.row-line-active td{
+  --table-head-bg:-webkit-gradient(linear, 0% 100%, 0% 0%, from(rgb(187, 233, 248)), to(rgb(187, 233, 248)));
+  background: var(--table-head-bg);
+  opacity: 1;
 }
 td.semi-small-middle-cell {
   background-color: white ! important;

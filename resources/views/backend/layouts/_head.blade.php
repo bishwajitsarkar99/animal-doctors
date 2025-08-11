@@ -44,7 +44,7 @@
 
 <!-- Component-css -->
 <!-- <link rel="stylesheet" href="{{asset('backend_asset')}}/backend_component_asset/components-min.css"> -->
- <link rel="stylesheet" href="{{asset('backend_asset')}}/backend_component_asset/backend-component-css/components.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/backend_component_asset/backend-component-css/components-min.css">
 
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/scss/background-color/dist/main-background-color.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/scss/background-animation-scss/dist/background-color-animation.css">

@@ -50,7 +50,7 @@
         });
         $(document).on('click', '.logout', function(e) {
             // Clear AppRAM Array Key
-            clearAppRAM();
+            clearAppRAMBranchSection();
 
             $('.yes-icon').removeClass('yes-hidden');
 

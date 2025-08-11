@@ -124,16 +124,27 @@
         // Search Branch Types Data Get From RAM
         const branchCategoryDetailsCache = getAppRAM('branchCategoryDetails', {});
 
-        // ============ RAM Table Box Resize ===============================
-        // -----------------------------------------------------------------
-        const panel = document.getElementById('tableBox');
-        initTableBoxResize(panel,'tableBox');
+        // ====================================================================
+        // ------------- RAM Table Box Resize [Session Storage]----------------
+        // ====================================================================
+        // Show RAM Box Table
+        $(document).on('click', '#showRAMStatus',function(){
+            $("#tableBox").removeAttr('hidden');
+        });
+        // Close RAM Box Table
+        $(document).on('click', '#cancelRAMStatusTable', function(){
+            $("#tableBox").attr('hidden', true);
+        });
+        // const mainPanel = document.getElementById('branchListTab');
+        // initTableBoxResize(mainPanel,'branchListTab');
+        const subPanel = document.getElementById('tableBox');
+        initTableBoxResize(subPanel,'tableBox');
         // Or apply to multiple panels using a selector:
         //initTableBoxResizers('.resizable-panel');
 
         // ===========---- RAM Table Btton Section -------==================
         // -----------------------------------------------------------------
-        // Define Fetch Function
+        // Define Branch List Fetch Function
         fetchTableBranch();
         let debounceTimer;
 
@@ -178,9 +189,13 @@
             removeDataTableStorage('BranchTableSetting')
             location.reload();
         });
-        // ACtive table row background
+        // ACtive Branch List table row background
         $(document).on('click', 'tr.zebra-table-row', function(){
             $(this).addClass("clicked td").siblings().removeClass("clicked td");
+        });
+        // ACtive RAM table row background
+        $(document).on('click', 'tr.select-row', function(){
+            $(this).addClass("row-line-active td").siblings().removeClass("row-line-active td");
         });
 
         // Ensure function exists before calling
@@ -2454,15 +2469,27 @@
 
         // Refresh Button
         $(document).on('click', '#branchTypeRefresh', function(){
-            fetch_division();
-            fetch_district();
-            fetch_upazila();
-            searchBranch();
-            fetch_branch_types();
-            fetchTableBranch();
-            fetch_branch_categories();
-            clearBranchListCache();
-            clearAppRAMBranchSection();
+
+            const settingPage = $("#BranchSettingPage");
+
+            if(!settingPage.prop("hidden")){
+                // settings page refresh
+                fetch_division();
+                fetch_district();
+                fetch_upazila();
+                searchBranch();
+                fetch_branch_types();
+                clearBranchListCache();
+                clearAppRAMBranchSection();
+            }else {
+                // home page refresh
+                fetchTableBranch();
+                fetch_branch_categories();
+                clearBranchListCache();
+                clearAppRAMBranchSection();
+                
+            }
+            
         });
 
         // =============================================================================================

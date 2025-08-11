@@ -32,13 +32,14 @@
     ['filterBtnId'=> 'showFilterField', 'filterBtnLable'=> 'Click']
   ];
   $subMenuDownloadBtns = [
-    ['downloadBtnId'=> '', 'downloadBtnLable'=> 'PDF File'],
     ['downloadBtnId'=> '', 'downloadBtnLable'=> 'Excel File'],
-    ['downloadBtnId'=> '', 'downloadBtnLable'=> 'SVG File']
+    ['downloadBtnId'=> '', 'downloadBtnLable'=> 'SVG File'],
+    ['downloadBtnId'=> '', 'downloadBtnLable'=> 'PDF File'],
   ];
   $commonMenuBtns = [
     ['commonBtnId'=> 'dataPrint', 'menuBtnLable'=> 'Print'],
-    ['commonBtnId'=> 'tableResize', 'menuBtnLable'=> 'Reset Table Resize']
+    ['commonBtnId'=> 'showRAMStatus', 'menuBtnLable'=> 'RAM Status'],
+    ['commonBtnId'=> 'tableResize', 'menuBtnLable'=> 'Reset Table'],
   ];
 ?>
 @extends('backend.layouts.dashboard')
@@ -171,6 +172,10 @@
                             <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
                             <rect x="6" y="14" width="12" height="8"/>
                           </svg>
+                          @elseif($data['commonBtnId'] === 'showRAMStatus')
+                          <svg width="15px" height="15px" fill="rgba(0,123,255,0.8)" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 375.4">
+                            <path fill-rule="nonzero" d="M25.13 39.95h34.22V0H85.2v39.95h47.65V0h25.84v39.95h47.64V0h25.84v39.95h47.65V0h25.84v39.95h47.65V0h25.84v39.95h47.65V0h25.84v39.95h34.23c6.88 0 13.15 2.82 17.71 7.37l.05.05c4.54 4.55 7.37 10.82 7.37 17.71v247.73c0 6.88-2.83 13.15-7.37 17.71l-.05.05c-4.56 4.54-10.83 7.37-17.71 7.37h-34.23v37.46H426.8v-37.46h-47.65v37.46h-25.84v-37.46h-47.65v37.46h-25.84v-37.46h-47.65v37.46h-25.84v-37.46h-47.64v37.46h-25.84v-37.46H85.2v37.46H59.35v-37.46H25.13c-6.89 0-13.15-2.83-17.71-7.37l-.05-.05C2.83 325.96 0 319.69 0 312.81V65.08c0-6.89 2.83-13.16 7.37-17.71l.05-.05c4.56-4.55 10.82-7.37 17.71-7.37zm154.83 200.1h-35.98l-13.41-30.42h-8.56v30.42H90.83V137.84h51.52c23.44 0 35.16 11.94 35.16 35.81 0 16.36-5.07 27.15-15.21 32.38l17.66 34.02zm-57.95-77.57v23.5h9.05c3.93 0 6.79-.41 8.59-1.23 1.8-.82 2.7-2.7 2.7-5.64v-9.76c0-2.95-.91-4.83-2.7-5.64-1.8-.82-4.67-1.23-8.59-1.23h-9.05zm98.67 77.57h-34.5l26.49-102.21h50.53l26.49 102.21h-34.5l-3.76-16.19h-26.99l-3.76 16.19zm13.29-70.81-3.64 28.62h15.04l-3.48-28.62h-7.92zm96.93 70.81h-34.18l6.21-102.21h42.69l12.76 52h1.14l12.75-52h42.68l6.22 102.21h-34.18l-1.96-49.55h-1.15l-12.43 49.55h-25.01l-12.59-49.55h-.99l-1.96 49.55zM486.16 65.79H25.84V312.1h460.32V65.79z"/>
+                          </svg>
                           @elseif($data['commonBtnId'] === 'tableResize')
                           <svg width="15" height="15" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 122.88">
                             <defs><style>.cls-1{fill:#ef4136;}.cls-1,.cls-2{fill-rule:evenodd;}.cls-2{fill:#ff7c73;}.cls-3{fill:#fff;}</style></defs>
@@ -236,13 +241,6 @@
                           <div class="score-row-resizer"></div>
                           <div class="score-col-resizer"></div>
                         </th>
-                        <!-- <th class="score-column">
-                          <div class="progress-line-wrapper">
-                            
-                          </div>
-                          <div class="score-row-resizer"></div>
-                          <div class="score-col-resizer"></div>
-                        </th> -->
                         <th class="score-column">
                           Total Branch
                           <div class="score-row-resizer"></div>
@@ -330,7 +328,7 @@
           </div>
         </x-Tables.TableFooter>
         <!-- ======= RAM Usage Status =========== -->
-        <div class="card panel mt-4" id="tableBox">
+        <div class="card panel component-focus mt-4" id="tableBox" hidden>
           <div class="row">
             <div class="col-sm-8 element-space">
               <span class="body-heading">
@@ -353,6 +351,9 @@
                 </button>
                 <button class="btn btn-sm success-shadow-btn sortBtn" onclick="renderRAMUsage()">
                   Reset Sort
+                </button>
+                <button type="button" class="btn-close-toast"
+                  data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="cancelRAMStatusTable">
                 </button>
               </div>
             </div>
@@ -396,6 +397,10 @@
           </svg>
         </div>
       </x-Tables.ViewDataTables.DataTableWrappers.DataTableWrapper>
+      <!-- <div class="panel-height-resizer bottom-resizer"></div>
+      <svg class="connector" width="100%" height="100%">
+        <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
+      </svg> -->
     </x-CustomTabPanels.TabPanelContents.TabContentPanel>
     <!-- =========== Tap Panel Branch Setting =========== -->
     <x-CustomTabPanels.TabPanelContents.TabContentPanel contentTabClass="setting-page-container" contentTabId="BranchSettingPage" :hiddenAttr="$hiddenAttr">

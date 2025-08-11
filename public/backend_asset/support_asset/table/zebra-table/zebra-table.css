@@ -45,6 +45,11 @@ tr.zebra-table-row:hover{
     color: #111;
     transition: border-color 0.3s, background-color 0.3s, color 0.3s;
 }
+tr.clicked td{
+    --table-head-bg:-webkit-gradient(linear, 0% 100%, 0% 0%, from(rgb(224, 254, 255)), to(rgb(195, 235, 255)));
+    background: var(--table-head-bg);
+    opacity: 1;
+}
 th,td {
     text-align: left;
     white-space: nowrap;

@@ -76,10 +76,10 @@ function clearBranchListCache() {
     }
     localStorage.setItem(getUserRAMKey(), JSON.stringify(AppBackendRAM));
 }
-// Only Branch Section Data Clear
+// Branch Section All Data Clear
 function clearBranchSectionCache() {
     const now = Date.now();
-    //const twoMinutes = 2 * 60 * 1000; // for 2 minutes
+    // const twoMinutes = 2 * 60 * 1000; // for 2 minutes
     const oneHour = 1 * 60 * 60 * 1000; // for 1 hour
 
     // Reload fresh data from localStorage
@@ -120,7 +120,7 @@ function clearBranchSectionCache() {
     // Save cleaned data back to localStorage
     localStorage.setItem(getUserRAMKey(), JSON.stringify(AppBackendRAM));
 }
-// Automatic deletion every 2 minutes
+// Automatic deletion every 2 minutes 120000
 setInterval(clearBranchSectionCache, 3600000);
 // Convert bytes to KB/MB readable format
 function formatSize(bytes) {
@@ -253,6 +253,7 @@ function renderRAMUsage(sortBy = null) {
         }
 
         const row = document.createElement("tr");
+        row.classList.add("select-row");
         row.innerHTML = `
             <td class="semi-small-first-cell" style="word-break: break-all;">${RAM_key}<div class="row-resizer"></div></td>
             <td class="semi-small-middle-cell">
@@ -287,18 +288,18 @@ function renderRAMUsage(sortBy = null) {
             </td>
             <td class="semi-small-middle-cell">
                 <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
-                    <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.4" />
+                    <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.3" />
                     <line x1="0" y1="10" x2="100" y2="10"
                         stroke="${speedColor}"
                         stroke-width="2"
-                        stroke-dasharray="50,5"
+                        stroke-dasharray="50,40"
                         marker-end="url(#arrow2)">
                         <animate attributeName="stroke-dashoffset"
                         from="0" to="-50"
                         dur="5s"
                         repeatCount="${animation}" />
                     </line>
-                    <rect x="0" y="3" rx="0" ry="0" width="81" height="15" fill="${performanceBg}" opacity="0.3" />
+                    <rect x="0" y="2" rx="0" ry="0" width="81" height="15" fill="${performanceBg}" opacity="0.3" />
                     <text x="2" y="13" text-anchor="left" fill="${textColor}" font-size="7" font-weight="500"
                         vector-effect="non-scaling-stroke">
                         ${performanceMode ? performanceMode : 'Null'}
@@ -314,7 +315,7 @@ function renderRAMUsage(sortBy = null) {
             </td>
             <td class="semi-small-last-cell">
                 <svg viewBox="0 0 100 20" width="100%" height="20" preserveAspectRatio="none">
-                    <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.5" />
+                    <path d="M 0 10 H 100" stroke="blue" stroke-width="1" opacity="0.3" />
                     <path d="M 0 10 
                         L 10 10 
                         L 15 5 
@@ -335,7 +336,7 @@ function renderRAMUsage(sortBy = null) {
                         dur="5s"
                         repeatCount="${animation}" />
                     </path>
-                    <rect x="0" y="3" rx="0" ry="0" width="80" height="15" fill="${speedMarkupColor}" opacity="0.3" />
+                    <rect x="0" y="2" rx="0" ry="0" width="80" height="15" fill="${speedMarkupColor}" opacity="0.3" />
                     <text x="2" y="13" text-anchor="left" fill="${textColor}" font-size="7" font-weight="500" vector-effect="non-scaling-stroke">
                         ${Time}
                     </text>
