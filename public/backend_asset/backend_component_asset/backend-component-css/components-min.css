@@ -1600,7 +1600,17 @@ button.btn-close.offcanvas-btn-close {
 button.btn-close.offcanvas-btn-close:hover{
   background-color: #b02a37;
 }
-
+.offCanvas-row {
+  padding: 0rem 0.5rem;
+  border: 1px ridge rgba(0, 123, 255, 0.2);
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+}
+a.offCanvas-row-btn {
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+}
 /* =========== Golobal Score Card  =========== */
 .score-card{
   background-color: color-mix(in hsl increasing hue, #fff 100%, lightgray 10%);
@@ -1696,8 +1706,15 @@ th.row-resizing{
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-color: rgba(0, 123, 255, 0.2);
   min-height: 37px !important;
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-left-color: rgba(0, 123, 255, 0.2);
+  border-right-color: rgba(0, 123, 255, 0.2);
+  border-bottom-color: rgba(0, 123, 255, 0.2);
+  border-top-color: white;
 }
 .ram-usage-section {
   padding: 0;
