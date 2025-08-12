@@ -43,7 +43,7 @@
 <link rel="stylesheet" href="{{ asset('backend_asset/main_asset/custom-css/themes-css/trapezoid-css/' . $themes[$role]['trapezoid'] . '.css') }}" id="sidebarTrapezoidlink">
 
 <!-- Component-css -->
-<!-- <link rel="stylesheet" href="{{asset('backend_asset')}}/backend_component_asset/components-min.css"> -->
+<!-- <link rel="stylesheet" href="{{asset('backend_asset')}}/backend_component_asset/components.min.css"> -->
 <link rel="stylesheet" href="{{asset('backend_asset')}}/backend_component_asset/backend-component-css/components-min.css">
 
 <link rel="stylesheet" href="{{asset('backend_asset')}}/main_asset/scss/background-color/dist/main-background-color.css">

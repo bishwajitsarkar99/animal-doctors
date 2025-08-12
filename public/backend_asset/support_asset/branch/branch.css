@@ -280,7 +280,7 @@ select#SelectBranchID{
     font-family: var(--nav-font-family);
     font-size: 13px;
     font-weight: bold;
-    color: purple;
+    color: #555;
 }
 .data-table-loader {
     animation: spin 1s linear infinite;

@@ -126,14 +126,13 @@
         // ====================================================================
         // ------------- RAM Table Box Resize [Session Storage]----------------
         // ====================================================================
-        // Show RAM Box Table
-        $(document).on('click', '#showRAMStatus',function(){
-            $(".offcanvas-ram-card").removeClass('offcanvas-hidden');
+        // Show offCanvas RAM Box Table
+        $(document).on('click', '.show-ram',function(){
+            $("#offcanvasRight").removeClass('offcanvas-hidden');
         });
-
-        // Close RAM Box Table
-        $(document).on('click', '#cancelRAMStatusTable', function(){
-            $("#tableBox").attr('hidden', true);
+        // Close offCanvas RAM Box Table
+        $(document).on('click', '.setting-btn-close', function(){
+            $("#offcanvasRight").addClass('offcanvas-hidden');
         });
         // const mainPanel = document.getElementById('branchListTab');
         // initTableBoxResize(mainPanel,'branchListTab');
@@ -612,6 +611,9 @@
                 `);
 
             }, 1000);
+            return ()=>{
+                clearTimeout(debounceTimer);
+            }
         }
         // call branch type
         function safelySetBranchType(branchTypeName) {
@@ -939,6 +941,9 @@
                     hideTableLoader();
                     tableSkeleton();
                 }, 300);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
 
                 return;
             }
@@ -970,6 +975,9 @@
                     hideTableLoader();
                     tableSkeleton();
                 }, 300);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
 
                 return;
             }
@@ -1007,6 +1015,9 @@
                     hideTableLoader();
                     tableSkeleton();
                 }, 300);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             } else {
                 fetchTableBranch('', null, null, column, order);
             }
@@ -1101,10 +1112,13 @@
 
                 populate_branch_list_table(updatedData);
                 showTableLoader();
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     hideTableLoader();
                     tableSkeleton();
                 }, 300);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
                 return;
             }
 
@@ -1152,6 +1166,9 @@
                     hideTableLoader();
                     tableSkeleton();
                 }, 300);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
                 return;
             }
 
@@ -1189,7 +1206,7 @@
 
             // Show button step by step according to condition
             if($(this).attr('id') === 'flexRadioDefault1' ){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $("#settingImplementCard").removeAttr('hidden');
                     $("#enableNewBranch").removeAttr('hidden');
                     $("#loaderSpin").attr('hidden', true);
@@ -1199,8 +1216,11 @@
                     $("#settingDisplayCard").attr('hidden', true);
                     $("#documents").attr('hidden', true);
                 }, 10);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'flexRadioDefault2'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $("#settingImplementCard").removeAttr('hidden');
                     $("#enableUpdateBranch").removeAttr('hidden');
                     $("#loaderSpin").attr('hidden', true);
@@ -1210,8 +1230,11 @@
                     $("#settingDisplayCard").attr('hidden', true);
                     $("#documents").attr('hidden', true);
                 }, 10);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'flexRadioDefault3'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $("#settingImplementCard").removeAttr('hidden');
                     $("#enableDeleteBranch").removeAttr('hidden');
                     $("#loaderSpin").attr('hidden', true);
@@ -1221,6 +1244,9 @@
                     $("#settingDisplayCard").attr('hidden', true);
                     $("#documents").attr('hidden', true);
                 }, 10);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'flexRadioDefault4'){
                 $("#settingImplementCard").attr('hidden', true);
                 $("#enableNewBranch").attr('hidden', true);
@@ -1258,7 +1284,7 @@
             $("#formContent").removeClass('display_none');
 
             if($(this).attr('id') === 'enableNewBranch'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     if (!getAppRAM('branchTypeFlags')) {
                         fetch_branch_types();
                     }else{
@@ -1282,8 +1308,11 @@
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
                 }, 1000);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'enableUpdateBranch'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     if (!getAppRAM('branchSearchFlags')) {
                         searchBranch();
                     }else{
@@ -1307,8 +1336,11 @@
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
                 }, 1000);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'enableDeleteBranch'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     if (getAppRAM('branchSearchFlags')) {
                         searchBranch();
                     }else{
@@ -1332,6 +1364,9 @@
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
                 }, 1000);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }
         });
         // setting action disabled button
@@ -1353,7 +1388,7 @@
             $("#formContent").addClass('display_none');
 
             if($(this).attr('id') === 'disabledNewBranch'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $("#loaderSpinner").attr('hidden', true);
                     $("#enableNewBranch").removeAttr('hidden');
                     $("#disabledNewBranch").removeAttr('hidden');
@@ -1370,8 +1405,11 @@
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
                 }, 1000);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'disabledUpdatedBranch'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $("#loaderSpinner").attr('hidden', true);
                     $("#enableUpdateBranch").removeAttr('hidden');
                     $("#disabledUpdatedBranch").removeAttr('hidden');
@@ -1388,8 +1426,11 @@
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
                 }, 1000);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'disabledDeleteBranch'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $("#loaderSpinner").attr('hidden', true);
                     $("#enableDeleteBranch").removeAttr('hidden');
                     $("#disabledDeleteBranch").removeAttr('hidden');
@@ -1406,6 +1447,9 @@
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
                 }, 1000);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }
         });
 
@@ -1524,9 +1568,12 @@
             // setting dispalay part
             $("#settingDisplayCard").attr('hidden', true);
 
-            setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 $("#settingDisplayCard").removeAttr('hidden'); 
             }, 10);
+            return ()=>{
+                clearTimeout(debounceTimer);
+            }
 
             if(branchType !== ''){
                 settingDisplay.find('#clearBranchType').remove();
@@ -1548,7 +1595,7 @@
             $("#messgText").text(message);
             $("#formContent").removeClass('display_none').fadeIn("fast");
             if(message == 'All fields completed!'){
-                setTimeout(function () {
+                let debounceTimer = setTimeout(function () {
                     $("#formMessage").fadeOut("fast", function () {
                         $(this).addClass("display_none");
                         $("#messgText").text('');
@@ -1558,16 +1605,22 @@
                         $("#ContentView").removeClass('display_none');
                     });
                 }, duration);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }
 
             $("#formMessage").removeClass("display_none").fadeIn("fast");
 
-            setTimeout(function () {
+            let debounceTimer = setTimeout(function () {
                 $("#formMessage").fadeOut("fast", function () {
                     $(this).addClass("display_none");
                     $("#messgText").text('');
                 });
             }, duration);
+            return ()=>{
+                clearTimeout(debounceTimer);
+            }
         }
         // fetch branch type/category for dropdown
         function fetch_branch_types(){
@@ -1721,7 +1774,7 @@
                         $("#loaderBox").removeClass('display_none');
                         $("#ContentView").removeClass('display_none');
 
-                        setTimeout(() => {
+                        let debounceTimer = setTimeout(() => {
                             $("#loaderBox").addClass('display_none');
                             $("#formContent").removeClass('display_none');
                             $("#ContentView").addClass('display_none');
@@ -1767,15 +1820,21 @@
                             settingDisplay.find('#clearDistrict').remove();
                             settingDisplay.find('#clearUpazila').remove();
 
-                            setTimeout(() => {
+                            let debounceTimer = setTimeout(() => {
                                 showSuccessToast(response.messages)
                             }, 3000);
+                            return ()=>{
+                                clearTimeout(debounceTimer);
+                            }
                             
                             clearFields();
                             removeField();
                             searchBranch();
                             fetchTableBranch();
                         }, 1500);
+                        return ()=>{
+                            clearTimeout(debounceTimer);
+                        }
                     }
                 }
             })
@@ -2122,9 +2181,7 @@
             e.preventDefault();
             $("#updateconfirmbranch").modal('show');
 
-            var time = null;
-
-            var time = setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 // Remove skeleton classes
                 removeAttributeOrClass([
                     { selector: '.update_title, .head_btn3, #text_message', type: 'class', name: 'branch-skeleton' },
@@ -2132,10 +2189,9 @@
                 ]);
             }, 1000);
 
-            // Optional cleanup if this code runs in a specific context
-            return () => {
-                clearTimeout(time);
-            };
+            return ()=>{
+                clearTimeout(debounceTimer);
+            }
 
         });
 
@@ -2179,9 +2235,12 @@
             // If not changed, don't send update
             if (!isChanged) {
                 $("#updateconfirmbranch").modal('hide');
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     showSuccessToast("No changes detected. Update skipped.")
                 }, 1000);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
                 return;
             }
 
@@ -2301,11 +2360,17 @@
                             searchBranch();
                             fetchTableBranch();
 
-                            setTimeout(() => {
+                            let debounceTimer = setTimeout(() => {
                                 showSuccessToast(response.messages)
                             }, 1000);
+                            return ()=>{
+                                clearTimeout(debounceTimer);
+                            }
                            
                         }, 1500);
+                        return ()=>{
+                            clearTimeout(debounceTimer);
+                        }
                     }
                 }
             })
@@ -2319,9 +2384,7 @@
 
             $("#deletebranch").modal('show');
 
-            var time = null;
-
-            var time = setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 // Remove skeleton classes
                 removeAttributeOrClass([
                     { selector: '.head_title, .head_btn, .delete_content', type: 'class', name: 'branch-skeleton' },
@@ -2329,10 +2392,9 @@
                 ]);
             }, 1000);
 
-            // Optional cleanup if this code runs in a specific context
-            return () => {
-                clearTimeout(time);
-            };
+            return ()=>{
+                clearTimeout(debounceTimer);
+            }
 
         });
 
@@ -2342,9 +2404,7 @@
             $("#deletebranch").modal('hide');
             $("#deleteconfirmbranch").modal('show');
 
-            var time = null;
-
-            var time = setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 // Remove skeleton classes
                 removeAttributeOrClass([
                     { selector: '.confirm_title, .head_btn2, #delete_text_message', type: 'class', name: 'branch-skeleton' },
@@ -2352,10 +2412,9 @@
                 ]);
             }, 1000);
 
-            // Optional cleanup if this code runs in a specific context
-            return () => {
-                clearTimeout(time);
-            };
+            return ()=>{
+                clearTimeout(debounceTimer);
+            }
 
         });
 
@@ -2409,7 +2468,7 @@
                             });
                         }
     
-                        setTimeout(() => {
+                        let debounceTimer = setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
                             $("#loaderBox").addClass('display_none');
                             clearFields();
@@ -2453,15 +2512,21 @@
                             settingDisplay.find('#clearCity').remove();
                             settingDisplay.find('#clearLocation').remove();
 
-                            setTimeout(() => {
+                            let debounceTimer = setTimeout(() => {
                                 showSuccessToast(response.messages)
                             }, 1000);
+                            return ()=>{
+                                clearTimeout(debounceTimer);
+                            }
 
                             // Refresh dropdown from updated RAM (no need to call server again)
                             populate_branch_searches(branchSearchResults);
                             fetchTableBranch();
 
                         }, 1500);
+                        return ()=>{
+                            clearTimeout(debounceTimer);
+                        }
                     }
                 }
             });
@@ -2528,7 +2593,7 @@
 
             // Show button step by step according to condition
             if($(this).attr('id') === 'flexRadioDefault5' ){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $("#settingCard").removeAttr('hidden');
                     $("#enableCategoryBranch").removeAttr('hidden');
                     $("#loadingSpin").attr('hidden', true);
@@ -2537,8 +2602,11 @@
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
                 }, 10);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'flexRadioDefault6'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $("#settingCard").removeAttr('hidden');
                     $("#enableUpdateCategory").removeAttr('hidden');
                     $("#loadingSpin").attr('hidden', true);
@@ -2547,8 +2615,11 @@
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
                 }, 10);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'flexRadioDefault7'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $("#settingCard").removeAttr('hidden');
                     $("#enableDeleteCategory").removeAttr('hidden');
                     $("#loadingSpin").attr('hidden', true);
@@ -2557,6 +2628,9 @@
                     $("#SettingDisplay").empty();
                     $("#settingDisplayCard").attr('hidden', true);
                 }, 10);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'flexRadioDefault8'){
                 $("#settingCard").attr('hidden', true);
                 $("#enableCategoryBranch").attr('hidden', true);
@@ -2601,7 +2675,7 @@
             $("#categorySettingDisplayCard").attr('hidden', true);
 
             if($(this).attr('id') === 'enableCategoryBranch'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $("#loadingSpinner").attr('hidden', true);
                     $("#enableCategoryBranch").removeAttr('hidden');
                     $("#disabledCategoryBranch").removeAttr('hidden');
@@ -2623,8 +2697,11 @@
                     $("#continueousLoading").attr('hidden', true);
                     $("#categorySettingDisplayCard").removeAttr('hidden'); 
                 }, 1000);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'enableUpdateCategory'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     if (!getAppRAM('branchCategoryFlags')) {
                         fetch_branch_categories();
                     } else {
@@ -2653,8 +2730,11 @@
                     $("#continueousLoading").attr('hidden', true);
                     $("#categorySettingDisplayCard").removeAttr('hidden'); 
                 }, 1000);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'enableDeleteCategory'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     if (!getAppRAM('branchCategoryFlags')) {
                         fetch_branch_categories();
                     } else {
@@ -2682,6 +2762,9 @@
                     $("#continueousLoading").attr('hidden', true);
                     $("#categorySettingDisplayCard").removeAttr('hidden'); 
                 }, 1000);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }
         });
         // setting action disabled button
@@ -2703,7 +2786,7 @@
             $("#formContent").addClass('display_none');
 
             if($(this).attr('id') === 'disabledCategoryBranch'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $("#loadingSpinner").attr('hidden', true);
                     $("#enableCategoryBranch").removeAttr('hidden');
                     $("#disabledCategoryBranch").removeAttr('hidden');
@@ -2723,8 +2806,11 @@
                     $("#categorySettingDisplay").empty();
                     $("#categorySettingDisplayCard").attr('hidden', true);
                 }, 1000);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'disabledUpdatedCategory'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $("#loadingSpinner").attr('hidden', true);
                     $("#enableUpdateCategory").removeAttr('hidden');
                     $("#disabledUpdatedCategory").removeAttr('hidden');
@@ -2744,8 +2830,11 @@
                     $("#categorySettingDisplay").empty();
                     $("#categorySettingDisplayCard").attr('hidden', true);
                 }, 1000);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }else if($(this).attr('id') === 'disabledDeleteCategory'){
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $("#loadingSpinner").attr('hidden', true);
                     $("#enableDeleteCategory").removeAttr('hidden');
                     $("#disabledDeleteCategory").removeAttr('hidden');
@@ -2765,31 +2854,11 @@
                     $("#categorySettingDisplay").empty();
                     $("#categorySettingDisplayCard").attr('hidden', true);
                 }, 1000);
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                }
             }
         });
-
-        // Create Branch Category Modal Show
-        $(document).on('click', '#branchTypeModalView', function(e){
-            e.preventDefault();
-            $("#branchTypeCreateModal").modal('show');
-            $("#branch_type_create").removeAttr('hidden');
-            $("#branch_type_cancel").removeAttr('hidden');
-            $("#branch_type_update").attr('hidden', true);
-            $("#branch_type_delete").attr('hidden', true);
-            fetch_branch_categories();
-            const time = setTimeout(() => {
-                requestAnimationFrame(() => {
-                    removeAttributeOrClass([
-                        {
-                            selector: '.branch_type_head_title, .branch_type_head_btn, .branch_select_type, .branch_type_name, #branch_type_create, #branch_type_cancel',
-                            type: 'class',
-                            name: 'branch-skeleton'
-                        }
-                    ]);
-                });
-            }, 1000);
-        });
-
         // Fetch Branch Category
         function fetch_branch_categories(){
 
@@ -2833,9 +2902,11 @@
 
             const $branchType = $('#branch_type');
             const $branchCategory = $('#selectBranchCategories');
+            const $branchCategoryName = $('#branch_category_name');
 
             $branchType.empty().append('<option value="">Select Branch Category Name</option>');
             $branchCategory.empty().append('<option value="">Select Branch Category Name</option>');
+            $branchCategoryName.empty().append('<option value="">Select Branch Category Name</option>');
 
             $.each(branch_categories, function (_, item) {
                 const option = `<option style="color:white;font-weight:600;" value="${item.branch_category_name}">
@@ -2843,6 +2914,7 @@
                                 </option>`;
                 $branchType.append(option);
                 $branchCategory.append(option);
+                $branchCategoryName.append(option);
             });
 
             // Refresh Select2 after updating options
@@ -2973,7 +3045,7 @@
             $("#savForm_error_branch").attr('hidden', true);
             $('#branchTypeName').removeClass('is-invalid');
 
-            setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 $("#branchTypeCreateModal").modal('show');
                 $("#accessconfirmbranch").modal('hide');
                 $("#dataPullingProgress").attr('hidden', true);
@@ -3034,6 +3106,9 @@
                     settingDisplay.find('#clearBranchCategory').remove();
                 }
             }, 1500);
+            return ()=>{
+                clearTimeout(debounceTimer);
+            }
         }
         // Create Branch Type
         $(document).on('click', '#branch_type_create', function(e){
@@ -3076,7 +3151,7 @@
                             branchTypes: []
                         });
 
-                        setTimeout(() => {
+                        let debounceTimer = setTimeout(() => {
                             $("#loadingBox").addClass('display_none');
                             $('#savForm_error').html("");
                             $('#branchTypeName').val("");
@@ -3085,13 +3160,19 @@
                             // Display Component Settings Empty
                             settingDisplay.find('#clearBranchCategory').remove();
 
-                            setTimeout(() => {
+                            let debounceTimer = setTimeout(() => {
                                 showSuccessToast(response.messages)
                             }, 1000);
+                            return ()=>{
+                                clearTimeout(debounceTimer);
+                            }
                             
                             fetch_branch_categories();
                             fetch_branch_types();
                         }, 1500);
+                        return ()=>{
+                            clearTimeout(debounceTimer);
+                        }
                     }
                 }
             })
@@ -3102,9 +3183,7 @@
             e.preventDefault();
             $("#updatecategoryconfirmbranch").modal('show');
 
-            var time = null;
-
-            var time = setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 // Remove skeleton classes
                 removeAttributeOrClass([
                     { selector: '.update_title, .head_btn3, #text_message', type: 'class', name: 'branch-skeleton' },
@@ -3112,10 +3191,9 @@
                 ]);
             }, 1000);
 
-            // Optional cleanup if this code runs in a specific context
-            return () => {
-                clearTimeout(time);
-            };
+            return ()=>{
+                clearTimeout(debounceTimer);
+            }
 
         });
 
@@ -3182,7 +3260,7 @@
 
                         clearBranchCache(id);
 
-                        setTimeout(() => {
+                        let debounceTimer = setTimeout(() => {
                             $("#loadingBox").addClass('display_none');
                             $('#updateForm_error_branch').html("");
                             $(".edit_branch_category_name").val("");
@@ -3207,11 +3285,17 @@
                             fetch_branch_categories();
                             fetch_branch_types();
 
-                            setTimeout(() => {
+                            let debounceTimer = setTimeout(() => {
                                 showSuccessToast(response.messages)
                             }, 1000);
+                            return ()=>{
+                                clearTimeout(debounceTimer);
+                            }
 
                         }, 1500);
+                        return ()=>{
+                            clearTimeout(debounceTimer);
+                        }
                     }
                 }
             })
@@ -3223,17 +3307,16 @@
             e.preventDefault();
             $("#deletecategorybranch").modal('show');
 
-            var time = null;
-            var time = setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 removeAttributeOrClass([
                     { selector: '.head_title, .head_btn, .branch_category_name', type: 'class', name: 'branch-skeleton' },
                     { selector: '#noButton, #yesBtn', type: 'class', name: 'branch-delete-skeleton' },
                 ]);
             }, 1000);
 
-            return () => {
-                clearTimeout(time);
-            };
+            return ()=>{
+                clearTimeout(debounceTimer);
+            }
 
         });
 
@@ -3243,8 +3326,7 @@
             $("#deletecategorybranch").modal('hide');
             $("#deletecategoryconfirmbranch").modal('show');
 
-            var time = null;
-            var time = setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 removeAttributeOrClass([
                     { selector: '.confirm_title, .head_btn2, .branch_category_name, .branch__category_name', type: 'class', name: 'branch-skeleton' },
                     { selector: '#noButton, #yesBtn', type: 'class', name: 'branch-delete-skeleton' },
@@ -3252,9 +3334,9 @@
                 ]);
             }, 1000);
 
-            return () => {
-                clearTimeout(time);
-            };
+            return ()=>{
+                clearTimeout(debounceTimer);
+            }
 
         });
 
@@ -3305,7 +3387,7 @@
                         branchTypes: []
                     });
 
-                    setTimeout(() => {
+                    let debounceTimer = setTimeout(() => {
                         $("#loadingBox").addClass('display_none');
                         $("#branch_category_name").val("").trigger('change');
                         $(".edit_branch_category_name").val("");
@@ -3320,14 +3402,20 @@
                             $("#branch_type_delete").removeClass('display_none');
                         }
 
-                        setTimeout(() => {
+                        let debounceTimer = setTimeout(() => {
                             showSuccessToast(response.messages)
                         }, 1000);
+                        return ()=>{
+                            clearTimeout(debounceTimer);
+                        }
                         
                         // Re-fetch fresh data
                         fetch_branch_categories();
                         fetch_branch_types();
                     }, 1500);
+                    return ()=>{
+                        clearTimeout(debounceTimer);
+                    }
                 }
             });
         });
