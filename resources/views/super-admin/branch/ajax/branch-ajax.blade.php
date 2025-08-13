@@ -225,10 +225,10 @@
         // Define Dropdown Select Menu
         initSelect2();
         if (typeof $.fn.select2 !== "undefined") {
-            console.log("Select2 is loaded successfully.");
+            //console.log("Select2 is loaded successfully.");
             initSelect2(); // Initialize Select2 on page load
         } else {
-            console.error("Select2 is not loaded. Check script order.");
+            //console.error("Select2 is not loaded. Check script order.");
         }
         function initSelect2(parent = document) {
             $(parent).find('.select2').each(function() {

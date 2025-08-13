@@ -1,9 +1,8 @@
 <?php
     $colaspeRow = [
-        ['colaspeRowId'=>'branchModuleRam', 'colaspeTargetBtnId'=>'#tableContainer', 'colaspeBtnLabel'=>'Branch Module', 'colaspeIcon'=>''],
-    ];
-    $colpaseContainers = [
-        ['colaspeContainerId'=>'tableContainer', 'tableId'=>'ramUsageTable', 'totalRAM'=>'totalRAMSize', 'sortTimeBtn'=>"renderRAMUsage('time')", 'sortSizeBtn'=>"renderRAMUsage('size')", 'sortResetBtn'=>"renderRAMUsage()"]
+        ['group_id'=>'branch_module', 'dragColumn'=>'drag-ram-column', 'groupClass'=>'group-ram', 'colaspeRowId'=>'branchModuleRam', 'colaspeTargetBtnId'=>'#tableContainer', 'colaspeBtnLabel'=>'Branch Module', 'colaspeIcon'=>'▼', 
+        'colaspeContainerId'=>'tableContainer', 'tableId'=>'ramUsageTable', 'totalRAM'=>'totalRAMSize', 'sortTimeBtn'=>"renderRAMUsage('time')", 'sortSizeBtn'=>"renderRAMUsage('size')", 'sortResetBtn'=>"renderRAMUsage()"
+        ],
     ];
 ?>
 <div class="offcanvas offcanvas-end custom-offcanvas offcanvas-ram-card offcanvas-hidden component-focus" data-bs-backdrop="static" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -23,77 +22,97 @@
         <x-CustomOffCanvas.OffCanvasCloseBtn closeBtnClass="btn-close text-reset offcanvas-btn-close setting-btn-close" />
     </x-CustomOffCanvas.OffCanvasHeader>
     <x-CustomOffCanvas.OffCanvasBody bodyClassName="offcanvas-body">
-        @foreach($colaspeRow as $data)
-        <div class="offCanvas-row component-focus" id="{{ $data['colaspeRowId'] }}">
-            <a class="offCanvas-row-btn" type="button" data-bs-toggle="collapse" data-bs-target="{{ $data['colaspeTargetBtnId'] }}" aria-expanded="false" aria-controls="collapseExample">
-            <span class="labelGroup">
-                <span class="row-btn-label">{{ $data['colaspeBtnLabel'] }}</span>
-                <span class="rotated-icon">{{ $data['colaspeIcon'] }}</span>
-            </span>
-        </a>
+        <div class="total-capacity">
+            <div class="ram-space" id="totalUsage"></div>
         </div>
-        @endforeach
-        @foreach($colpaseContainers as $data)
-        <ul class="box-container collapse" id="{{ $data['colaspeContainerId'] }}">
-            <li class="box-container-row">
-                <!-- ======= RAM Usage Status image-skeleton =========== -->
-                <div class="card panel" id="tableBox">
-                    <div class="row mb-1">
-                        <div class="col-sm-12">
-                            <span class="body-heading" id="{{ $data['totalRAM'] }}"></span>
-                            <span class="flat-box">
-                                <button class="btn btn-sm success-shadow-btn sortBtn" onclick="{{ $data['sortTimeBtn'] }}">
-                                    Sort by Time
-                                </button>
-                                <button class="btn btn-sm success-shadow-btn sortBtn" onclick="{{ $data['sortSizeBtn'] }}">
-                                    Sort by Size
-                                </button>
-                                <button class="btn btn-sm success-shadow-btn sortBtn" onclick="{{ $data['sortResetBtn'] }}">
-                                    Reset Sort
-                                </button>
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <select class="form-select" name="module_id" size="3" aria-label="size 3 select example" id="selectModules">
+                    <option class="custom-select-optation" selected>Open Select Menu</option>
+                    <option class="custom-select-optation" value="0">All Module</option>
+                    <option class="custom-select-optation" value="1">Branch Module</option>
+                    <option class="custom-select-optation" value="2">Product Module</option>
+                </select>
+            </div>
+        </div>
+        @foreach($colaspeRow as $data)
+        <div class="card ram-card drag-ram-row mb-1">
+            <div class="{{ $data['dragColumn'] }}">
+                <div class="{{ $data['groupClass'] }}" id="{{ $data['group_id'] }}">
+                    <a class="offCanvas-row-btn " type="button" data-bs-toggle="collapse" data-bs-target="{{ $data['colaspeTargetBtnId'] }}" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="offCanvas-row component-focus" id="{{ $data['colaspeRowId'] }}">
+                            <span class="labelGroup">
+                                <span class="row-btn-label">
+                                    {{ $data['colaspeBtnLabel'] }}
+                                    <span class="row-btn-labe" id="{{ $data['totalRAM'] }}"></span>
+                                </span>
+                                <div class="rotated-icon ms-auto">{{ $data['colaspeIcon'] }}</div>
                             </span>
                         </div>
-                    </div>
-                    <div class="ram-usage-section">
-                        <div class="table-container">
-                            <div class="table-responsive">
-                                <table class="table" id="{{ $data['tableId'] }}">
-                                    <thead class="table-head" id="headId">
-                                        <tr class="table-head-row">
-                                        <th class="th-column">
-                                            RAM File
-                                            <div class="row-resizer"></div>
-                                            <div class="col-resizer"></div>
-                                        </th>
-                                        <th class="th-column">
-                                            RAM Store Size
-                                            <div class="row-resizer"></div>
-                                            <div class="col-resizer"></div>
-                                        </th>
-                                        <th class="th-column">
-                                            RAM Perfomance
-                                            <div class="row-resizer"></div>
-                                            <div class="col-resizer"></div>
-                                        </th>
-                                        <th class="th-column">
-                                            RAM Execution Time
-                                            <div class="row-resizer"></div>
-                                            <div class="col-resizer"></div>
-                                        </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-body" id="RAMTable"></tbody>
-                                </table>
+                    </a>
+                    <ul class="box-container collapse" id="{{ $data['colaspeContainerId'] }}">
+                        <li class="box-container-row">
+                            <!-- ======= RAM Usage Status image-skeleton =========== -->
+                            <div class="card panel" id="tableBox">
+                                <div class="row mb-1">
+                                    <div class="col-sm-12">
+                                        <span class="flat-box">
+                                            <button class="btn btn-sm success-shadow-btn sortBtn" onclick="{{ $data['sortTimeBtn'] }}">
+                                                Sort by Time
+                                            </button>
+                                            <button class="btn btn-sm success-shadow-btn sortBtn" onclick="{{ $data['sortSizeBtn'] }}">
+                                                Sort by Size
+                                            </button>
+                                            <button class="btn btn-sm success-shadow-btn sortBtn" onclick="{{ $data['sortResetBtn'] }}">
+                                                Reset Sort
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="ram-usage-section">
+                                    <div class="table-container">
+                                        <div class="table-responsive">
+                                            <table class="table" id="{{ $data['tableId'] }}">
+                                                <thead class="table-head" id="headId">
+                                                    <tr class="table-head-row">
+                                                    <th class="th-column">
+                                                        RAM File
+                                                        <div class="row-resizer"></div>
+                                                        <div class="col-resizer"></div>
+                                                    </th>
+                                                    <th class="th-column">
+                                                        RAM Store Size
+                                                        <div class="row-resizer"></div>
+                                                        <div class="col-resizer"></div>
+                                                    </th>
+                                                    <th class="th-column">
+                                                        RAM Perfomance
+                                                        <div class="row-resizer"></div>
+                                                        <div class="col-resizer"></div>
+                                                    </th>
+                                                    <th class="th-column">
+                                                        RAM Execution Time
+                                                        <div class="row-resizer"></div>
+                                                        <div class="col-resizer"></div>
+                                                    </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-body" id="RAMTable"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-height-resizer bottom-resizer"></div>
+                                <svg class="connector" width="100%" height="100%">
+                                    <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
+                                </svg>
                             </div>
-                        </div>
-                    </div>
-                    <div class="panel-height-resizer bottom-resizer"></div>
-                    <svg class="connector" width="100%" height="100%">
-                        <rect class="connectorPath" x="0" y="0" rx="3" ry="3" />
-                    </svg>
+                        </li>
+                    </ul>
                 </div>
-            </li>
-        </ul>
+            </div>
+            <svg id="lineConnectorId_{{ $data['group_id'] }}" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 10;"></svg>
+        </div>
         @endforeach
         <x-CustomOffCanvas.OffCanvasLoader loaderClass="side_canvas_animation" animationClass="sidebar-animation-size" />
     </x-CustomOffCanvas.OffCanvasBody>

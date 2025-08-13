@@ -1,7 +1,9 @@
 <script type="module">
-    import { addAttributeOrClass, removeAttributeOrClass } from "/module/backend-module/backend-module-min.js";
-    import { initOffCanvasResize, initAllOffcanvasResizers,  initDragAndDrop } from "/module/backend-module/backend-moduleRAM-min.js";
-
+    import { addAttributeOrClass, removeAttributeOrClass , initDragAndDrop, removeDataTableStorage} from "/module/backend-module/backend-module-min.js";
+    import { initOffCanvasResize, initAllOffcanvasResizers } from "/module/backend-module/backend-moduleRAM-min.js";
+    import { renderRAM } from "/appRAM/backendRAMCapacity/appRAMUsage.js";
+   // Total RAM
+    renderRAM('totalUsage');
     // Top Bar Menu : Profile Canvas and Setting Canvas Left Width Resize
     document.addEventListener('DOMContentLoaded', () => {
         // Resize OffCanvas
@@ -37,17 +39,18 @@
         }
 
         // Drag and Drop Setting Canvas
-        const row = '.drag-canvas-row';
-        const column = '.drag-canvas-column';
-        const cardKey = '.group-canvas';
+        const row = '.drag-canvas-row, .drag-ram-row';
+        const column = '.drag-canvas-column, .drag-ram-column';
+        const cardKey = '.group-canvas, .group-ram';
         //initDragAndDrop(column, cardKey, row, lineConnectionId)
         document.querySelectorAll(cardKey).forEach(card => {
             const canvasId = card.id; // e.g., 'card-1', 'card-2', etc.
             const lineConnectionId = `lineConnectorId_${canvasId}`;
-            const DataTable = 'OffCanvasSettingDrag';
+            const DataTable = 'OffCanvasSettingDrag, OffCanvasRAMDrag';
             // Call with dynamic IDs
             initDragAndDrop(column, cardKey, row, lineConnectionId, DataTable);
         });
+        
     });
     
     $(document).ready(function(){
@@ -155,7 +158,21 @@
                 }
             });
         });
+
+        // RAM offCanvas Active Btn Row
+        $(document).on('click', '.offCanvas-row-btn', function(){
+            $(this).toggleClass("active-offCanvas-row-btn");
+        });
         
+        // Reset OffCanvas Drag and Drop
+        $(document).on('click', '#resetAllCanvasDragAndDrop', function(){
+            removeDataTableStorage('OffCanvasSettingDrag, OffCanvasRAMDrag')
+            location.reload();
+        });
+        // Select Module Dropdown
+        // $(document).on('change', '#', function(){
+            
+        // });
     });
 
 </script>

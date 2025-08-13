@@ -355,7 +355,7 @@ function renderRAMUsage(sortBy = null) {
 
     // Show total size outside the table
     if (totalSizeElement) {
-        totalSizeElement.textContent = `Branch Module (RAM Size) : ${totalSize}`;
+        totalSizeElement.textContent = `(RAM Size) : ${totalSize}`;
     }
 }
 // Expose to global scope
