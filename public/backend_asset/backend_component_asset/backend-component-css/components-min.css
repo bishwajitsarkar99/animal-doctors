@@ -1624,6 +1624,7 @@ a.offCanvas-row-btn:hover .rotated-icon{
 }
 span.labelGroup {
   display: flex;
+  justify-content: space-between;
 }
 .offCanvas-row-btn[aria-expanded="true"] .rotated-icon {
   transform: rotate(0deg);

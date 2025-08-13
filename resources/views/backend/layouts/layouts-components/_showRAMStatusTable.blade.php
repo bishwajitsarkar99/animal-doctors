@@ -1,7 +1,12 @@
 <?php
     $colaspeRow = [
         ['group_id'=>'branch_module', 'dragColumn'=>'drag-ram-column', 'groupClass'=>'group-ram', 'colaspeRowId'=>'branchModuleRam', 'colaspeTargetBtnId'=>'#tableContainer', 'colaspeBtnLabel'=>'Branch Module', 'colaspeIcon'=>'▼', 
-        'colaspeContainerId'=>'tableContainer', 'tableId'=>'ramUsageTable', 'totalRAM'=>'totalRAMSize', 'sortTimeBtn'=>"renderRAMUsage('time')", 'sortSizeBtn'=>"renderRAMUsage('size')", 'sortResetBtn'=>"renderRAMUsage()"
+        'colaspeContainerId'=>'tableContainer', 'tableId'=>'ramUsageTable', 'totalRAM'=>'totalRAMSize', 'sortTimeBtn'=>"renderRAMUsage('time')", 'sortSizeBtn'=>"renderRAMUsage('size')", 'sortResetBtn'=>"renderRAMUsage()", 'headIconId'=>'moveIconId', 
+        'moveIconDisplayClass'=>'move-icon',  'styles'=>'color:gray;cursor:move;margin-top: 1px;',
+        ],
+        ['group_id'=>'product_module', 'dragColumn'=>'drag-ram-column', 'groupClass'=>'group-ram', 'colaspeRowId'=>'branchModuleRam', 'colaspeTargetBtnId'=>'#tablesContainer', 'colaspeBtnLabel'=>'Product Module', 'colaspeIcon'=>'▼', 
+        'colaspeContainerId'=>'tablesContainer', 'tableId'=>'ramUsageTable', 'totalRAM'=>'totalRAMSize', 'sortTimeBtn'=>"renderRAMUsage('time')", 'sortSizeBtn'=>"renderRAMUsage('size')", 'sortResetBtn'=>"renderRAMUsage()", 'headIconId'=>'moveIconId', 
+        'moveIconDisplayClass'=>'move-icon',  'styles'=>'color:gray;cursor:move;margin-top: 1px;',
         ],
     ];
 ?>
@@ -39,14 +44,15 @@
         <div class="card ram-card drag-ram-row mb-1">
             <div class="{{ $data['dragColumn'] }}">
                 <div class="{{ $data['groupClass'] }}" id="{{ $data['group_id'] }}">
-                    <a class="offCanvas-row-btn " type="button" data-bs-toggle="collapse" data-bs-target="{{ $data['colaspeTargetBtnId'] }}" aria-expanded="false" aria-controls="collapseExample">
+                    <a class="offCanvas-row-btn ms-1" type="button" data-bs-toggle="collapse" data-bs-target="{{ $data['colaspeTargetBtnId'] }}" aria-expanded="false" aria-controls="collapseExample">
                         <div class="offCanvas-row component-focus" id="{{ $data['colaspeRowId'] }}">
                             <span class="labelGroup">
+                                <i class="fa-solid fa-up-down-left-right {{ $data['moveIconDisplayClass'] }}" style="{{ $data['styles'] }}" id="{{ $data['headIconId'] }}"></i>
                                 <span class="row-btn-label">
                                     {{ $data['colaspeBtnLabel'] }}
                                     <span class="row-btn-labe" id="{{ $data['totalRAM'] }}"></span>
                                 </span>
-                                <div class="rotated-icon ms-auto">{{ $data['colaspeIcon'] }}</div>
+                                <div class="rotated-icon">{{ $data['colaspeIcon'] }}</div>
                             </span>
                         </div>
                     </a>
@@ -75,26 +81,26 @@
                                             <table class="table" id="{{ $data['tableId'] }}">
                                                 <thead class="table-head" id="headId">
                                                     <tr class="table-head-row">
-                                                    <th class="th-column">
-                                                        RAM File
-                                                        <div class="row-resizer"></div>
-                                                        <div class="col-resizer"></div>
-                                                    </th>
-                                                    <th class="th-column">
-                                                        RAM Store Size
-                                                        <div class="row-resizer"></div>
-                                                        <div class="col-resizer"></div>
-                                                    </th>
-                                                    <th class="th-column">
-                                                        RAM Perfomance
-                                                        <div class="row-resizer"></div>
-                                                        <div class="col-resizer"></div>
-                                                    </th>
-                                                    <th class="th-column">
-                                                        RAM Execution Time
-                                                        <div class="row-resizer"></div>
-                                                        <div class="col-resizer"></div>
-                                                    </th>
+                                                        <th class="th-column">
+                                                            RAM File
+                                                            <div class="row-resizer"></div>
+                                                            <div class="col-resizer"></div>
+                                                        </th>
+                                                        <th class="th-column">
+                                                            RAM Store Size
+                                                            <div class="row-resizer"></div>
+                                                            <div class="col-resizer"></div>
+                                                        </th>
+                                                        <th class="th-column">
+                                                            RAM Perfomance
+                                                            <div class="row-resizer"></div>
+                                                            <div class="col-resizer"></div>
+                                                        </th>
+                                                        <th class="th-column">
+                                                            RAM Execution Time
+                                                            <div class="row-resizer"></div>
+                                                            <div class="col-resizer"></div>
+                                                        </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="table-body" id="RAMTable"></tbody>
