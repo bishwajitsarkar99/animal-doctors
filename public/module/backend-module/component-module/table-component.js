@@ -347,26 +347,36 @@ export function renderGlobalRAMTable(containerId) {
     const { storageReport, totalKB, totalMB } = getLocalStorageUsageForRAM();
 
     let html = `
-        <h5>Global RAM Usage Report</h5>
+        <span class="tab-heading">ROM Usage</span>
         <table class="table table-bordered table-sm">
-            <thead>
-                <tr><th>Key</th><th>Size (KB)</th><th>Size (MB)</th></tr>
+            <thead class="table-head" id="headRamId">
+                <tr class="table-head-row"><th class="th-column">Key 
+                <div class="row-resizer"></div>
+                <div class="col-resizer"></div></th>
+                <th class="th-column">Size (KB)
+                <div class="row-resizer"></div>
+                <div class="col-resizer"></div>
+                </th>
+                <th class="th-column">Size (MB)
+                <div class="row-resizer"></div>
+                <div class="col-resizer"></div>
+                </th></tr>
             </thead>
-            <tbody>
+            <tbody class="table-body">
     `;
 
     storageReport.forEach(item => {
         html += `<tr>
-            <td>${item.key}</td>
-            <td>${item.kb}KB</td>
-            <td>${item.mb}MB</td>
+            <td class="semi-small-first-cell">${item.key}<div class="row-resizer"></div></td>
+            <td class="semi-small-middle-cell">${item.kb}KB<div class="row-resizer"></div></td>
+            <td class="semi-small-last-cell">${item.mb}MB<div class="row-resizer"></div></td>
         </tr>`;
     });
 
     html += `
             </tbody>
         </table>
-        <p><strong>Total:</strong> ${totalKB} KB (~${totalMB} MB)</p>
+        <span class="tab-footer"><strong>Total:</strong> ${totalKB} KB (~${totalMB} MB)</span>
     `;
 
     document.getElementById(containerId).innerHTML = html;
@@ -473,7 +483,7 @@ function renderRAMTable() {
     const currentItems = data.slice(start, start + perPage);
 
     if (currentItems.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="4" class="text-danger text-center">No RAM data found.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="4" class="text-danger text-center">No RAM data found.</td><div class="row-resizer"></div></tr>`;
         return;
     }
 
@@ -481,10 +491,10 @@ function renderRAMTable() {
         const sl = start + index + 1;
         const row = `
             <tr>
-                <td>${sl}</td>
-                <td>${item.ramKey}</td>
-                <td>${item.table}</td>
-                <td>${item.size.toFixed(2)}KB</td>
+                <td class="semi-small-first-cell">${sl}<div class="row-resizer"></div></td>
+                <td class="semi-small-middle-cell ps-1">${item.ramKey}<div class="row-resizer"></div></td>
+                <td class="semi-small-middle-cell ps-1">${item.table}<div class="row-resizer"></div></td>
+                <td class="semi-small-last-cell ps-1">${item.size.toFixed(2)}KB<div class="row-resizer"></div></td>
             </tr>
         `;
         tableBody.insertAdjacentHTML("beforeend", row);
@@ -502,7 +512,7 @@ function renderPaginationControls() {
     for (let page = 1; page <= totalPages; page++) {
         const btn = document.createElement("button");
         btn.textContent = page;
-        btn.className = `btn btn-sm mx-1 ${page === currentPage ? 'btn-primary' : 'btn-outline-primary'}`;
+        btn.className = `btn btn-sm mx-1 paginted ${page === currentPage ? 'btn-primary' : 'btn-outline-primary'}`;
         btn.addEventListener("click", () => {
             currentPage = page;
             renderRAMTable();

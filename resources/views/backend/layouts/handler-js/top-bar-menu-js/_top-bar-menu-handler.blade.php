@@ -25,11 +25,33 @@
         // initTableBoxResizers('.resizable-panel');
 
         // ===============================
+        // ROM Table Container Resize Init
+        // ===============================
+        const subPanels = document.getElementById('romTableBox');
+        initTableBoxResize(subPanels,'romTableBox');
+        // Or apply to multiple selector
+        // initTableBoxResizers('.resizable-panel');
+        const subSelect = document.getElementById('tablePrefixFilter');
+        initTableBoxResize(subSelect,'tablePrefixFilter');
+        // Or apply to multiple selector
+        // initTableBoxResizers('.resizable-panel');
+
+        // ===============================
         // RAM Table Resize Init
         // ===============================
         resize('ramUsageTable', 'col-resizer', 'row-resizer');
         applySavedColumnOrder('ramUsageTable');
         //enableColumnDragAndDrop('ramUsageTable', '.move-icon');
+
+        // ===============================
+        // ROM Table Resize Init
+        // ===============================
+        resize('romUsageTable', 'col-resizer', 'row-resizer');
+        applySavedColumnOrder('romUsageTable');
+        //enableColumnDragAndDrop('romUsageTable', '.move-icon');
+        resize('ram-report-container', 'col-resizer', 'row-resizer');
+        applySavedColumnOrder('ram-report-container');
+        //enableColumnDragAndDrop('ram-report-container', '.move-icon');
 
         // ===============================
         // Resize OffCanvas Logic

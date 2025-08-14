@@ -18,10 +18,7 @@
         initAllMenuCardResizers,
         initMenuCardResize,
         // Branch Setting Card Drag and Drop
-        initDragAndDrop,
-        // Global RAM Storage System
-        // renderGlobalRAMTable,
-        // RAMAnalyzer 
+        initDragAndDrop
     } from "/module/backend-module/backend-module-min.js";
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMTable, updateAppRAMBulk, clearBranchListCache, clearAppRAMBranchSection, renderRAMUsage } from "/appRAM/backendRAMCapacity/appBranchData.js";
@@ -81,36 +78,6 @@
         // ===============================
         renderRAMUsage();
     });
-    // renderGlobalRAMTable("ram-report-container");
-    // document.addEventListener("DOMContentLoaded", () => {
-    //     RAMAnalyzer.initRAMAnalyzer();
-    //     const perItemsSelect = document.getElementById("perItems");
-    //     if (perItemsSelect) {
-    //         perItemsSelect.addEventListener("change", function () {
-    //             RAMAnalyzer.changePerPage(this.value);
-    //         });
-    //     }
-
-    //     const searchInput = document.getElementById("searchInput");
-    //     if (searchInput) {
-    //         searchInput.addEventListener("input", function () {
-    //             RAMAnalyzer.setSearchQuery(this.value);
-    //         });
-    //     }
-
-    //     document.querySelectorAll(".sort-button").forEach(btn => {
-    //         btn.addEventListener("click", () => {
-    //             RAMAnalyzer.setSort(btn.dataset.sort);
-    //         });
-    //     });
-
-    //     const tablePrefixFilter = document.getElementById("tablePrefixFilter");
-    //     if (tablePrefixFilter) {
-    //         tablePrefixFilter.addEventListener("change", e => {
-    //             RAMAnalyzer.setTablePrefix(e.target.value);
-    //         });
-    //     }
-    // });
 
     $(document).ready(function(){
         // =================================================================
