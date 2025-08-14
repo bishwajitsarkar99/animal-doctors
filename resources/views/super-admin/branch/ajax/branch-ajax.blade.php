@@ -23,25 +23,20 @@
         // renderGlobalRAMTable,
         // RAMAnalyzer 
     } from "/module/backend-module/backend-module-min.js";
-    import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
-    import { initTableBoxResize, initTableBoxResizers } from "/module/backend-module/component-module/panel-component.js";
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMTable, updateAppRAMBulk, clearBranchListCache, clearAppRAMBranchSection, renderRAMUsage } from "/appRAM/backendRAMCapacity/appBranchData.js";
-    // =================================================================
-    // --------- Branch List && Branch Score Table Resize --------------
-    // =================================================================
+    
+    // ===============================
     // Branch List Table Resize
+    // ===============================
     resize('BranchTableSetting', 'col-resizer', 'row-resizer');
     enableColumnDragAndDrop('BranchTableSetting', '.move-icon');
     applySavedColumnOrder('BranchTableSetting');
+    // ===============================
     // Branch Score Table Resize
+    // ===============================
     resize('branchScoreTable', 'score-col-resizer', 'score-row-resizer');
     applySavedColumnOrder('branchScoreTable');
-    // RAM Table Resize
-    resize('ramUsageTable', 'col-resizer', 'row-resizer');
-    applySavedColumnOrder('ramUsageTable');
-    // Branch Score Table Number Animation
-    const numberClass = '.total-number';
 
     // =================================================================
     // --------------- Branch Settings DOM Loaded ----------------------
@@ -74,12 +69,16 @@
 
         if (iconBar && sidebarPlate) {
             iconBar.addEventListener('mouseenter', () => {
-            sidebarPlate.classList.add('hover-align-left');
+                sidebarPlate.classList.add('hover-align-left');
             });
             iconBar.addEventListener('mouseleave', () => {
-            sidebarPlate.classList.remove('hover-align-left');
+                sidebarPlate.classList.remove('hover-align-left');
             });
         }
+
+        // ===============================
+        // Render RAM Table
+        // ===============================
         renderRAMUsage();
     });
     // renderGlobalRAMTable("ram-report-container");
@@ -131,18 +130,9 @@
             $("#offcanvasRight").removeClass('offcanvas-hidden');
         });
         // Close offCanvas RAM Box Table
-        $(document).on('click', '.setting-btn-close', function(){
+        $(document).on('click', '.ram-btn-close', function(){
             $("#offcanvasRight").addClass('offcanvas-hidden');
         });
-        // const mainPanel = document.getElementById('branchListTab');
-        // initTableBoxResize(mainPanel,'branchListTab');
-        const subPanel = document.getElementById('tableBox');
-        initTableBoxResize(subPanel,'tableBox');
-        // Or apply to multiple panels using a selector:
-        //initTableBoxResizers('.resizable-panel');
-
-        // ===========---- RAM Table Btton Section -------==================
-        // -----------------------------------------------------------------
         // Define Branch List Fetch Function
         fetchTableBranch();
         let debounceTimer;
@@ -191,10 +181,6 @@
         // ACtive Branch List table row background
         $(document).on('click', 'tr.zebra-table-row', function(){
             $(this).addClass("clicked td").siblings().removeClass("clicked td");
-        });
-        // ACtive RAM table row background
-        $(document).on('click', 'tr.select-row', function(){
-            $(this).addClass("row-line-active td").siblings().removeClass("row-line-active td");
         });
 
         // Ensure function exists before calling

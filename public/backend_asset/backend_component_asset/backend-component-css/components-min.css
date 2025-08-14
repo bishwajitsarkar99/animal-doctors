@@ -1873,6 +1873,7 @@ th.th-column{
   letter-spacing: 0.5px;
   text-shadow: none;
   opacity: 1;
+  line-height: 1;
 }
 td.semi-small-first-cell{
   font-size: 11px;
@@ -1890,10 +1891,10 @@ td.semi-small-first-cell:hover{
   cursor: alias;
 }
 #ramUsageTable tbody tr:hover td{
-  background-color: rgb(187, 233, 248) !important;
+  border: 1px dashed dodgerblue !important;
   cursor: alias;
 }
-tr.row-line-active td{
+tr.row-line-active .semi-small-first-cell{
   --table-head-bg:-webkit-gradient(linear, 0% 100%, 0% 0%, from(rgb(187, 233, 248)), to(rgb(187, 233, 248)));
   background: var(--table-head-bg);
   opacity: 1;

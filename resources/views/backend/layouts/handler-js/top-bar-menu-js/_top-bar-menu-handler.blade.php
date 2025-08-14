@@ -1,12 +1,33 @@
 <script type="module">
-    import { addAttributeOrClass, removeAttributeOrClass , initDragAndDrop, removeDataTableStorage} from "/module/backend-module/backend-module-min.js";
+    import { addAttributeOrClass, removeAttributeOrClass , initDragAndDrop, removeDataTableStorage, resize, applySavedColumnOrder, enableColumnDragAndDrop} from "/module/backend-module/backend-module-min.js";
     import { initOffCanvasResize, initAllOffcanvasResizers } from "/module/backend-module/backend-moduleRAM-min.js";
     import { renderRAM } from "/appRAM/backendRAMCapacity/appRAMUsage.js";
-   // Total RAM
+    // Session Base RAM Table Card Resize Bottom Line
+    import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
+    import { initTableBoxResize, initTableBoxResizers } from "/module/backend-module/component-module/panel-component.js";
+    // Total RAM
     renderRAM('totalUsage');
-    // Top Bar Menu : Profile Canvas and Setting Canvas Left Width Resize
+    // Top Bar Menu : Canvas Left Width Resize
     document.addEventListener('DOMContentLoaded', () => {
-        // Resize OffCanvas
+
+        // ===============================
+        // RAM Table Container Resize Init
+        // ===============================
+        const subPanel = document.getElementById('tableBox');
+        initTableBoxResize(subPanel,'tableBox');
+        // Or apply to multiple selector
+        // initTableBoxResizers('.resizable-panel');
+
+        // ===============================
+        // RAM Table Resize Init
+        // ===============================
+        resize('ramUsageTable', 'col-resizer', 'row-resizer');
+        applySavedColumnOrder('ramUsageTable');
+        //enableColumnDragAndDrop('ramUsageTable', '.move-icon');
+
+        // ===============================
+        // Resize OffCanvas Logic
+        // ===============================
         window.addEventListener('resize', () => {
             const offcanvas = document.querySelector('.offcanvas.show');
             if (offcanvas && !offcanvas.classList.contains('showing')) {
@@ -38,15 +59,17 @@
             });
         }
 
-        // Drag and Drop Setting Canvas
-        const row = '.drag-canvas-row, .drag-ram-row';
-        const column = '.drag-canvas-column, .drag-ram-column';
-        const cardKey = '.group-canvas, .group-ram';
+        // ===============================
+        // Drag & Drop Setting Canvas
+        // ===============================
+        const row = '.drag-canvas-row';
+        const column = '.drag-canvas-column';
+        const cardKey = '.group-canvas';
         //initDragAndDrop(column, cardKey, row, lineConnectionId)
         document.querySelectorAll(cardKey).forEach(card => {
             const canvasId = card.id; // e.g., 'card-1', 'card-2', etc.
             const lineConnectionId = `lineConnectorId_${canvasId}`;
-            const DataTable = 'OffCanvasSettingDrag, OffCanvasRAMDrag';
+            const DataTable = 'OffCanvasSettingDrag';
             // Call with dynamic IDs
             initDragAndDrop(column, cardKey, row, lineConnectionId, DataTable);
         });
@@ -159,20 +182,33 @@
             });
         });
 
-        // RAM offCanvas Active Btn Row
+        // RAM offCanvas Active Btn Row Label
         $(document).on('click', '.offCanvas-row-btn', function(){
             $(this).toggleClass("active-offCanvas-row-btn");
         });
-        
         // Reset OffCanvas Drag and Drop
         $(document).on('click', '#resetAllCanvasDragAndDrop', function(){
             removeDataTableStorage('OffCanvasSettingDrag, OffCanvasRAMDrag')
             location.reload();
         });
+        // ACtive RAM table row background
+        $(document).on('click', 'tr.select-row', function(){
+            $(this).addClass("row-line-active semi-small-first-cell").siblings().removeClass("row-line-active semi-small-first-cell");
+        });
         // Select Module Dropdown
-        // $(document).on('change', '#', function(){
-            
-        // });
+        $(document).on('change', '#selectModules', function () {
+            const selected = $(this).val();
+
+            $('.ram-card').each(function () {
+                const cardModule = $(this).data('module');
+
+                if (selected === "0" || selected === cardModule.toString()) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
     });
 
 </script>

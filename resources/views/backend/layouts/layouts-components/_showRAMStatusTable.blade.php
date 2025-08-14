@@ -1,10 +1,10 @@
 <?php
     $colaspeRow = [
-        ['group_id'=>'branch_module', 'dragColumn'=>'drag-ram-column', 'groupClass'=>'group-ram', 'colaspeRowId'=>'branchModuleRam', 'colaspeTargetBtnId'=>'#tableContainer', 'colaspeBtnLabel'=>'Branch Module', 'colaspeIcon'=>'▼', 
+        ['module_id'=>'1', 'group_id'=>'branch_module', 'groupClass'=>'group-ram', 'colaspeRowId'=>'branchModuleRam', 'colaspeTargetBtnId'=>'#tableContainer', 'colaspeBtnLabel'=>'Branch Module', 'colaspeIcon'=>'▼', 
         'colaspeContainerId'=>'tableContainer', 'tableId'=>'ramUsageTable', 'totalRAM'=>'totalRAMSize', 'sortTimeBtn'=>"renderRAMUsage('time')", 'sortSizeBtn'=>"renderRAMUsage('size')", 'sortResetBtn'=>"renderRAMUsage()", 'headIconId'=>'moveIconId', 
         'moveIconDisplayClass'=>'move-icon',  'styles'=>'color:gray;cursor:move;margin-top: 1px;',
         ],
-        ['group_id'=>'product_module', 'dragColumn'=>'drag-ram-column', 'groupClass'=>'group-ram', 'colaspeRowId'=>'branchModuleRam', 'colaspeTargetBtnId'=>'#tablesContainer', 'colaspeBtnLabel'=>'Product Module', 'colaspeIcon'=>'▼', 
+        ['module_id'=>'2', 'group_id'=>'product_module', 'groupClass'=>'group-ram', 'colaspeRowId'=>'branchModuleRam', 'colaspeTargetBtnId'=>'#tablesContainer', 'colaspeBtnLabel'=>'Product Module', 'colaspeIcon'=>'▼', 
         'colaspeContainerId'=>'tablesContainer', 'tableId'=>'ramUsageTable', 'totalRAM'=>'totalRAMSize', 'sortTimeBtn'=>"renderRAMUsage('time')", 'sortSizeBtn'=>"renderRAMUsage('size')", 'sortResetBtn'=>"renderRAMUsage()", 'headIconId'=>'moveIconId', 
         'moveIconDisplayClass'=>'move-icon',  'styles'=>'color:gray;cursor:move;margin-top: 1px;',
         ],
@@ -24,7 +24,7 @@
             </span>
             <x-CustomOffCanvas.OffCanvasHeadTitle headClass="head_auth profile-heading mt-2" headId="offcanvasRightLabel" headLable="RAM Usage" />
         </div>
-        <x-CustomOffCanvas.OffCanvasCloseBtn closeBtnClass="btn-close text-reset offcanvas-btn-close setting-btn-close" />
+        <x-CustomOffCanvas.OffCanvasCloseBtn closeBtnClass="btn-close text-reset offcanvas-btn-close ram-btn-close" />
     </x-CustomOffCanvas.OffCanvasHeader>
     <x-CustomOffCanvas.OffCanvasBody bodyClassName="offcanvas-body">
         <div class="total-capacity">
@@ -41,13 +41,12 @@
             </div>
         </div>
         @foreach($colaspeRow as $data)
-        <div class="card ram-card drag-ram-row mb-1">
-            <div class="{{ $data['dragColumn'] }}">
+        <div class="card ram-card drag-ram-row mb-1" data-module="{{ $data['module_id'] }}" id="cardDailouge">
+            <div class="card-content-area">
                 <div class="{{ $data['groupClass'] }}" id="{{ $data['group_id'] }}">
                     <a class="offCanvas-row-btn ms-1" type="button" data-bs-toggle="collapse" data-bs-target="{{ $data['colaspeTargetBtnId'] }}" aria-expanded="false" aria-controls="collapseExample">
                         <div class="offCanvas-row component-focus" id="{{ $data['colaspeRowId'] }}">
                             <span class="labelGroup">
-                                <i class="fa-solid fa-up-down-left-right {{ $data['moveIconDisplayClass'] }}" style="{{ $data['styles'] }}" id="{{ $data['headIconId'] }}"></i>
                                 <span class="row-btn-label">
                                     {{ $data['colaspeBtnLabel'] }}
                                     <span class="row-btn-labe" id="{{ $data['totalRAM'] }}"></span>
@@ -117,7 +116,6 @@
                     </ul>
                 </div>
             </div>
-            <svg id="lineConnectorId_{{ $data['group_id'] }}" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 10;"></svg>
         </div>
         @endforeach
         <x-CustomOffCanvas.OffCanvasLoader loaderClass="side_canvas_animation" animationClass="sidebar-animation-size" />
