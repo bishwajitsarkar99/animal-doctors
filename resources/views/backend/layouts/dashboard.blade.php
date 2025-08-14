@@ -46,6 +46,7 @@
     @include('backend.layouts.layouts-components._setting_offcanvas')
     @include('backend.layouts.layouts-components._profile_offcanvas')
     @include('backend.layouts.layouts-components._showRAMStatusTable')
+    @include('backend.layouts.layouts-components._showROMStatusTable')
     @include('loader.action-loader')
     @include('backend.layouts.layouts-components._account-holders')
     @include('backend.layouts.layouts-components._activity-log')

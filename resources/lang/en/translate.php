@@ -4,6 +4,8 @@ return[
     'Full Screen'=>'Full Screen',
     'Full Screen Exit'=>'Full Screen Exit',
     'Profile'=>'Profile',
+    'RAM Status'=>'RAM Status',
+    'ROM Status'=>'ROM Status',
     'Logout'=>'Logout',
     'Close'=>'Close',
     'do you want to logout'=>'do you want to logout',

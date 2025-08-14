@@ -111,6 +111,28 @@
                 <span class="show-prof ms-2" id="emailSkel"></span>
             </li>
             <li>
+                <a type="button" class="dropdown-item pro_link btn-bottom-margin" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" id="ram_click">
+                    <span class="show-setting badge rounded-pill bg-doragblue list-sm-btn pt-1" hidden>
+                        <svg width="20px" height="15px" fill="rgba(0,123,255,0.8)" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 375.4">
+                            <path fill-rule="nonzero" d="M25.13 39.95h34.22V0H85.2v39.95h47.65V0h25.84v39.95h47.64V0h25.84v39.95h47.65V0h25.84v39.95h47.65V0h25.84v39.95h47.65V0h25.84v39.95h34.23c6.88 0 13.15 2.82 17.71 7.37l.05.05c4.54 4.55 7.37 10.82 7.37 17.71v247.73c0 6.88-2.83 13.15-7.37 17.71l-.05.05c-4.56 4.54-10.83 7.37-17.71 7.37h-34.23v37.46H426.8v-37.46h-47.65v37.46h-25.84v-37.46h-47.65v37.46h-25.84v-37.46h-47.65v37.46h-25.84v-37.46h-47.64v37.46h-25.84v-37.46H85.2v37.46H59.35v-37.46H25.13c-6.89 0-13.15-2.83-17.71-7.37l-.05-.05C2.83 325.96 0 319.69 0 312.81V65.08c0-6.89 2.83-13.16 7.37-17.71l.05-.05c4.56-4.55 10.82-7.37 17.71-7.37zm154.83 200.1h-35.98l-13.41-30.42h-8.56v30.42H90.83V137.84h51.52c23.44 0 35.16 11.94 35.16 35.81 0 16.36-5.07 27.15-15.21 32.38l17.66 34.02zm-57.95-77.57v23.5h9.05c3.93 0 6.79-.41 8.59-1.23 1.8-.82 2.7-2.7 2.7-5.64v-9.76c0-2.95-.91-4.83-2.7-5.64-1.8-.82-4.67-1.23-8.59-1.23h-9.05zm98.67 77.57h-34.5l26.49-102.21h50.53l26.49 102.21h-34.5l-3.76-16.19h-26.99l-3.76 16.19zm13.29-70.81-3.64 28.62h15.04l-3.48-28.62h-7.92zm96.93 70.81h-34.18l6.21-102.21h42.69l12.76 52h1.14l12.75-52h42.68l6.22 102.21h-34.18l-1.96-49.55h-1.15l-12.43 49.55h-25.01l-12.59-49.55h-.99l-1.96 49.55zM486.16 65.79H25.84V312.1h460.32V65.79z"/>
+                        </svg>
+                        {{__('translate.RAM Status')}}
+                    </span>
+                    <span class="show-ram ms-2" id="ramSkel"></span>
+                </a>
+            </li>
+            <li>
+                <a type="button" class="dropdown-item pro_link btn-bottom-margin" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRom" aria-controls="offcanvasRom" id="rom_click">
+                    <span class="show-setting badge rounded-pill bg-doragblue list-sm-btn pt-1" hidden>
+                        <svg width="20px" height="15px" fill="rgba(0,123,255,0.8)" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 375.4">
+                            <path fill-rule="nonzero" d="M25.13 39.95h34.22V0H85.2v39.95h47.65V0h25.84v39.95h47.64V0h25.84v39.95h47.65V0h25.84v39.95h47.65V0h25.84v39.95h47.65V0h25.84v39.95h34.23c6.88 0 13.15 2.82 17.71 7.37l.05.05c4.54 4.55 7.37 10.82 7.37 17.71v247.73c0 6.88-2.83 13.15-7.37 17.71l-.05.05c-4.56 4.54-10.83 7.37-17.71 7.37h-34.23v37.46H426.8v-37.46h-47.65v37.46h-25.84v-37.46h-47.65v37.46h-25.84v-37.46h-47.65v37.46h-25.84v-37.46h-47.64v37.46h-25.84v-37.46H85.2v37.46H59.35v-37.46H25.13c-6.89 0-13.15-2.83-17.71-7.37l-.05-.05C2.83 325.96 0 319.69 0 312.81V65.08c0-6.89 2.83-13.16 7.37-17.71l.05-.05c4.56-4.55 10.82-7.37 17.71-7.37zm153.11 200.1h-35.98l-13.41-30.42h-8.56v30.42H89.12V137.84h51.51c23.44 0 35.16 11.94 35.16 35.81 0 16.36-5.07 27.15-15.21 32.38l17.66 34.02zm-57.95-77.57v23.5h9.05c3.93 0 6.79-.41 8.59-1.23 1.8-.82 2.7-2.7 2.7-5.64v-9.76c0-2.95-.91-4.83-2.7-5.64-1.8-.82-4.67-1.23-8.59-1.23h-9.05zm212.33 77.57h-34.18l6.21-102.21h42.68l12.76 52h1.14l12.76-52h42.68l6.21 102.21h-34.17l-1.96-49.55h-1.15l-12.43 49.55h-25.02l-12.59-49.55h-.98l-1.96 49.55zm-142.93-51.02c0-18.65 3.49-32.25 10.47-40.8 6.97-8.56 19.56-12.84 37.77-12.84 18.21 0 30.8 4.28 37.78 12.84 6.97 8.55 10.46 22.15 10.46 40.8 0 9.26-.73 17.06-2.2 23.38-1.48 6.32-4.01 11.83-7.61 16.52-3.6 4.69-8.56 8.12-14.88 10.3-6.33 2.18-14.17 3.27-23.55 3.27s-17.22-1.09-23.55-3.27c-6.32-2.18-11.28-5.61-14.88-10.3-3.6-4.69-6.13-10.2-7.6-16.52-1.47-6.32-2.21-14.12-2.21-23.38zm35.16-17.01v42.52h13.57c4.47 0 7.71-.52 9.73-1.56 2.02-1.03 3.03-3.4 3.03-7.11v-42.52h-13.74c-4.36 0-7.55.52-9.57 1.56-2.01 1.03-3.02 3.4-3.02 7.11zM486.16 65.79H25.84V312.1h460.32V65.79z"/>
+                        </svg>
+                        {{__('translate.ROM Status')}}
+                    </span>
+                    <span class="show-rom ms-2" id="romSkel"></span>
+                </a>
+            </li>
+            <li>
                 <a type="button" class="dropdown-item pro_link btn-bottom-margin" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightSettings" aria-controls="offcanvasRight" id="setting_click">
                     <span class="show-setting badge rounded-pill bg-doragblue list-sm-btn pt-1" hidden>
                         <svg id="Layer_1" width="20px" height="15px" fill="" data-name="Layer 1" viewBox="0 0 122.88 122.88">

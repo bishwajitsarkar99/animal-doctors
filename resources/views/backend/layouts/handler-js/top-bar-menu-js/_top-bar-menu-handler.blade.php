@@ -1,5 +1,10 @@
 <script type="module">
-    import { addAttributeOrClass, removeAttributeOrClass , initDragAndDrop, removeDataTableStorage, resize, applySavedColumnOrder, enableColumnDragAndDrop} from "/module/backend-module/backend-module-min.js";
+    import { addAttributeOrClass, removeAttributeOrClass , initDragAndDrop, removeDataTableStorage, resize, applySavedColumnOrder, 
+        enableColumnDragAndDrop,
+        // Global RAM Storage System
+        renderGlobalRAMTable,
+        RAMAnalyzer 
+    } from "/module/backend-module/backend-module-min.js";
     import { initOffCanvasResize, initAllOffcanvasResizers } from "/module/backend-module/backend-moduleRAM-min.js";
     import { renderRAM } from "/appRAM/backendRAMCapacity/appRAMUsage.js";
     // Session Base RAM Table Card Resize Bottom Line
@@ -7,6 +12,7 @@
     import { initTableBoxResize, initTableBoxResizers } from "/module/backend-module/component-module/panel-component.js";
     // Total RAM
     renderRAM('totalUsage');
+    renderGlobalRAMTable("ram-report-container");
     // Top Bar Menu : Canvas Left Width Resize
     document.addEventListener('DOMContentLoaded', () => {
 
@@ -37,7 +43,7 @@
             }
         });
 
-        initAllOffcanvasResizers('.offcanvas-card', '.offcanvas-setting-card', '.offcanvas-ram-card');
+        initAllOffcanvasResizers('.offcanvas-card', '.offcanvas-setting-card', '.offcanvas-ram-card', '.offcanvas-rom-card');
 
         const offCanvas = document.getElementById('SettingOffcanvas');
 
@@ -73,6 +79,34 @@
             // Call with dynamic IDs
             initDragAndDrop(column, cardKey, row, lineConnectionId, DataTable);
         });
+
+        RAMAnalyzer.initRAMAnalyzer();
+        const perItemsSelect = document.getElementById("perItems");
+        if (perItemsSelect) {
+            perItemsSelect.addEventListener("change", function () {
+                RAMAnalyzer.changePerPage(this.value);
+            });
+        }
+
+        const searchInput = document.getElementById("searchInput");
+        if (searchInput) {
+            searchInput.addEventListener("input", function () {
+                RAMAnalyzer.setSearchQuery(this.value);
+            });
+        }
+
+        document.querySelectorAll(".sort-button").forEach(btn => {
+            btn.addEventListener("click", () => {
+                RAMAnalyzer.setSort(btn.dataset.sort);
+            });
+        });
+
+        const tablePrefixFilter = document.getElementById("tablePrefixFilter");
+        if (tablePrefixFilter) {
+            tablePrefixFilter.addEventListener("change", e => {
+                RAMAnalyzer.setTablePrefix(e.target.value);
+            });
+        }
         
     });
     
@@ -117,23 +151,31 @@
             $("#emailSkel").addClass('profile-skeletone');
             $("#logoutSkel").addClass('log-skeletone');
             $("#settingSkel").addClass('log-skeletone');
+            $("#ramSkel").addClass('log-skeletone');
+            $("#romSkel").addClass('log-skeletone');
             $(".show-profile").attr('hidden', true);
             $(".show-email").attr('hidden', true);
             $(".show-setting").attr('hidden', true);
             $(".show-prof").removeClass('display-skeletone');
             $(".show-logout").attr('hidden', true);
             $(".show-log").removeClass('display-skeletone');
+            $(".show-ram").removeClass('display-skeletone');
+            $(".show-rom").removeClass('display-skeletone');
             time = setTimeout(() => {
                 requestAnimationFrame(() => {
                     $("#profileSkel").removeClass('profile-skeletone');
                     $("#emailSkel").removeClass('profile-skeletone');
                     $("#logoutSkel").removeClass('log-skeletone');
                     $("#settingSkel").removeClass('log-skeletone');
+                    $("#ramSkel").removeClass('log-skeletone');
+                    $("#romSkel").removeClass('log-skeletone');
                     $(".show-profile").removeAttr('hidden');
                     $(".show-logout").removeAttr('hidden');
                     $(".show-email").removeAttr('hidden');
                     $(".show-setting").removeAttr('hidden');
                     $(".show-log").addClass('display-skeletone');
+                    $(".show-ram").addClass('display-skeletone');
+                    $(".show-rom").addClass('display-skeletone');
                     $(".show-prof").addClass('display-skeletone');
                 });
 
@@ -180,6 +222,23 @@
                     window.location.href = url;
                 }
             });
+        });
+        // Show offCanvas RAM Box Table
+        $(document).on('click', '#ram_click',function(){
+            $("#offcanvasRight").removeClass('offcanvas-hidden');
+        });
+        // Close offCanvas RAM Box Table
+        $(document).on('click', '.ram-btn-close', function(){
+            $("#offcanvasRight").addClass('offcanvas-hidden');
+        });
+
+        // Show offCanvas ROM Box Table
+        $(document).on('click', '#rom_click',function(){
+            $("#offcanvasRom").removeClass('offcanvas-hidden');
+        });
+        // Close offCanvas ROM Box Table
+        $(document).on('click', '.rom-btn-close', function(){
+            $("#offcanvasRom").addClass('offcanvas-hidden');
         });
 
         // RAM offCanvas Active Btn Row Label

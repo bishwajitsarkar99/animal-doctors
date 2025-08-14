@@ -4,6 +4,8 @@ return[
     'Full Screen'=>'ফুল স্ক্রীন',
     'Full Screen Exit'=>'ফুল স্ক্রীন বন্ধ',
     'Profile'=>'প্রোফাইল',
+    'RAM Status'=>'RAM স্থিতি',
+    'ROM Status'=>'ROM স্থিতি',
     'Logout'=>'প্রস্থান',
     'Close'=>'বন্ধ',
     'do you want to logout'=>'আপনি কি লগআউট করতে চান',
