@@ -233,7 +233,7 @@
                 <div class="score-table-responsive">
                   <table class="table" id="branchScoreTable">
                     <thead>
-                      <!-- Row 1 -->
+                      <!-- Record -->
                       <tr class="score-row">
                         <th class="score-column">
                           Total Category
