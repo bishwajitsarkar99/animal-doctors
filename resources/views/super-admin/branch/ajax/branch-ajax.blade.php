@@ -23,9 +23,9 @@
     // Import RAM functions
     import { getAppRAM, updateAppRAM, updateAppRAMTable, updateAppRAMBulk, clearBranchListCache, clearAppRAMBranchSection, renderRAMUsage } from "/appRAM/backendRAMCapacity/appBranchData.js";
     
-    // ===============================
+    // ================================
     // Branch List Table Resize
-    // ===============================
+    // ================================
     resize('BranchTableSetting', 'col-resizer', 'row-resizer');
     enableColumnDragAndDrop('BranchTableSetting', '.move-icon');
     applySavedColumnOrder('BranchTableSetting');
