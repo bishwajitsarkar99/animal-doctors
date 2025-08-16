@@ -49,11 +49,15 @@ class BranchServiceProvicer
             // ->exists();
         }
 
-        $storedRandom = session('valid_branch_random');
+        $storedRandom = session('slug');
+        // slug is stored
+        if (!session()->has('slug')) {
+            session(['slug' => $slug]);
+        }
 
         $page_name = 'Branch Setting';
 
-        if ($storedRandom && $slug === $storedRandom) {
+        if ($slug === session('slug')) {
             $branch_create_page_authorize = (int) $branch_create_page_authorize;
 
             if ($branch_create_page_authorize === 1) {
