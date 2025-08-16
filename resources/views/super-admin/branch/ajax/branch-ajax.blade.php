@@ -1865,6 +1865,7 @@
             $('#response_message').empty();
             $('#permission_message').removeClass('alert alert-danger');
             $('#response_message').removeClass('alert alert-danger');
+            $(".branch_type").val("");
 
             if ($("#save").is(":visible")) {
                 $("#next").removeClass('display_none');
@@ -1872,14 +1873,15 @@
                 $("#ContentView").addClass('display_none');
                 $("#save").addClass('display_none');
                 $("#save").attr('disabled', true);
+                $(".branch_type").addClass('display_none');
             }
 
             if ($("#update_btn").is(":visible") || $("#deleteBranch").is(":visible")) {
                 $("#next").addClass('display_none');
                 $("#select_branch").val("").trigger('change');
+                $(".branch_type").addClass('display_none');
             }
 
-            $(".branch_type").addClass('display_none');
 
             $("#inputBranchNameGroup").slideUp("slow", function () {
                 $(this).addClass('display_none');

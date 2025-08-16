@@ -7,7 +7,7 @@
   ];
   $optationGroupBtns = [
     ['label'=>'Enable Category', 'btnType'=>'button', 'btnClass'=>'btn btn-sm success-shadow-btn', 'enableBtnId'=>'enableCategoryBranch', 'enableCheck'=>'enableChecking', 'loader'=>'newEnableLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
-    ['label'=>'Disabled Category', 'btnType'=>'button', 'btnClass'=>'btn btn-sm success-shadow-btn', 'enableBtnId'=>'disabledCategoryBranch', 'enableCheck'=>'disabledChecking', 'loader'=>'newDisabledLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
+    ['label'=>'Disabled Category', 'btnType'=>'button', 'btnClass'=>'btn btn-sm success-shadow-btn ms-2', 'enableBtnId'=>'disabledCategoryBranch', 'enableCheck'=>'disabledChecking', 'loader'=>'newDisabledLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
     ['label'=>'Enable Update', 'btnType'=>'button', 'btnClass'=>'btn btn-sm success-shadow-btn', 'enableBtnId'=>'enableUpdateCategory', 'enableCheck'=>'enableChecking', 'loader'=>'updateEnableLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
     ['label'=>'Disabled Update', 'btnType'=>'button', 'btnClass'=>'btn btn-sm success-shadow-btn', 'enableBtnId'=>'disabledUpdatedCategory', 'enableCheck'=>'disabledChecking', 'loader'=>'updateDisabledLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
     ['label'=>'Enable Delete', 'btnType'=>'button', 'btnClass'=>'btn btn-sm success-shadow-btn', 'enableBtnId'=>'enableDeleteCategory', 'enableCheck'=>'enableChecking', 'loader'=>'deleteEnableLoader', 'hiddenAttributeBtn'=>'hidden', 'hiddenAttributeLoader'=>'hidden', 'hiddenAttributeCheckMark'=>'hidden'],
@@ -46,7 +46,7 @@
             </div>
             <x-CustomCards.CardBodies.CardBody cardBodyClass="card-body focus-color cd branch_form" cardBodyId="table_card_body" hiddenAttr="">
                 <!-- input-form -->
-                <x-Forms.Form formClass="" formAutoComplete="off" formId="" >
+                <x-Forms.Form formClass="" formAutoComplete="off" formId="">
                     @csrf
                     <div class="row" id="formContent">
                         <div class="col-xl-12">

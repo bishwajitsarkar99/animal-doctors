@@ -1000,7 +1000,6 @@ ul>li .child-line-row{
 .active-button {
   height: 24px;
   background: var(--component-tab-active-btn-bg);
-  background-color: var(--component-tab-active-btn-bg-color);
   color: #fff;
   font-family: var(--component-font-family);
   font-size: 12px;
@@ -1012,6 +1011,8 @@ ul>li .child-line-row{
   border-radius: 3px;
   border: 1px dashed rgb(31 138 255 / 83%);
   transition: border-color 0.3s, background-color 0.3s;
+  --mdb-box-shadow-color-rgb: 0, 0, 0;
+  box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
   z-index: 1;
   overflow: hidden;
 }
@@ -1033,21 +1034,8 @@ ul>li .child-line-row{
   transition: border-color 0.3s, background-color 0.3s color 0.3s;
 }
 .deactive {
-  background-image: var(--component-tab-deactive-btn-bg);
-  background-color: var(--component-tab-deactive-btn-bg-color);
-  font-family: var(--component-font-family);
-  margin-right: 15px;
-  line-height: 1.2;
-  font-weight: 700;
-  outline: none;
-  font-size: 12px;
-  color: #001840;
-  letter-spacing: 1px;
-  border: none;
-}
-.deactive:hover{
   height: 24px;
-  background: var(--component-tab-deactive-btn-bg-hover);
+  background: var(--component-tab-active-btn-bg);
   color: #fff;
   font-family: var(--component-font-family);
   font-size: 12px;
@@ -1057,9 +1045,29 @@ ul>li .child-line-row{
   font-weight: 700;
   letter-spacing: 1px;
   border-radius: 3px;
-  border: none;
+  border: 1px dashed rgb(31 138 255 / 83%);
   outline: none;
   transition: border-color 0.3s, background-color 0.3s color 0.3s;
+  --mdb-box-shadow-color-rgb: 0, 0, 0;
+  box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
+}
+.deactive:hover{
+  height: 24px;
+  background: var(--component-tab-active-btn-bg);
+  color: #fff;
+  font-family: var(--component-font-family);
+  font-size: 12px;
+  line-height: 1.2;
+  opacity: 1;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-radius: 3px;
+  border: 1px dashed rgb(31 138 255 / 83%);
+  outline: none;
+  transition: border-color 0.3s, background-color 0.3s color 0.3s;
+  --mdb-box-shadow-color-rgb: 0, 0, 0;
+  box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 
 /* ================ Form Button Component Css ======================== */
@@ -1233,12 +1241,10 @@ button.btn.btn-sm.danger-repl-btn:hover{
 }
 /* ================ Custom Tab Btn Component Css ======================== */
 .sidebar-plate {
-  background:linear-gradient(90deg, #ebebeb, #ffffff6b, white);
   background-color: white;
   border-radius: 3px;
   min-width: 140px;
   align-items: end;
-  animation: 2s infinite reverse webBackground;
   background-size: 200%;
 }
 @keyframes webBackground{

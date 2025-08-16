@@ -425,7 +425,7 @@ select#SettingDisplay {
     top: 0;
     left: 0;
     /* transform: translate(-30%, -10%) rotate(-45deg); */
-    font-size: 40px;
+    font-size: 20px;
     /* color: rgba(0, 0, 0, 0.08);  very light gray */
     color: #2900cf00;
     font-weight: bold;
@@ -435,9 +435,8 @@ select#SettingDisplay {
     width: 100%;
     text-align: center;
     /* 3D shadow effect */
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.04), 4px 4px 0 rgba(0, 0, 0, 0.03), 6px 6px 0 rgba(0, 0, 0, 0.02);
+    /* text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.04), 4px 4px 0 rgba(0, 0, 0, 0.03), 6px 6px 0 rgba(0, 0, 0, 0.02); */
     /* Optional: give a soft blur for realism */
-    filter: blur(0.2px);
 }
 .component-focus{
     animation: pulse 1s;

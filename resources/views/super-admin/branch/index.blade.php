@@ -674,7 +674,6 @@
 @endsection
 
 @section('css')
-<!-- <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category-min.css"> -->
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/branch/branch.css">
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/table/zebra-table/zebra-table.min.css">
 <link rel="stylesheet" href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" />
