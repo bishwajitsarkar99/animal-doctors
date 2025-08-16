@@ -49,6 +49,8 @@ Route::group(['middleware' => 'auth'], function (){
             Route::put('/branch-user-permission-update/{id}', [BranchController::class, 'permissionUpdate'])->name('permission_update.action');
             Route::delete('/branch-user-permission-delete/{id}', [BranchController::class, 'permissionDelete'])->name('permission_delete.action');
             Route::post('/branch-user-permission', [BranchController::class, 'permissionBranch'])->name('permission_status.action');
+            // Branch PDF Download
+            Route::get('/branch-download/export-pdf', [BranchController::class, 'pdfDownloadBranch'])->name('branch_pdf_download.action');
         });
     });
 });

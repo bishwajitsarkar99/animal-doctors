@@ -34,7 +34,7 @@
   $subMenuDownloadBtns = [
     ['downloadBtnId'=> '', 'downloadBtnLable'=> 'Excel File'],
     ['downloadBtnId'=> '', 'downloadBtnLable'=> 'SVG File'],
-    ['downloadBtnId'=> '', 'downloadBtnLable'=> 'PDF File'],
+    ['downloadBtnId'=> 'exportPDF', 'downloadBtnLable'=> 'PDF File'],
   ];
   $commonMenuBtns = [
     ['commonBtnId'=> 'dataPrint', 'menuBtnLable'=> 'Print'],
@@ -424,46 +424,7 @@
       </x-CustomLeftSideTabPanels.LeftSideTabPanel>
     </x-CustomTabPanels.TabPanelContents.TabContentPanel>
   </div>
-  
-  <!-- RAM key Total Result -->
-  <!-- <div id="ram-report-container"></div> -->
-  <!-- RAM key detail view -->
-  <!-- <div class="row mb-2">
-    <div class="col-md-4">
-      <input type="text" id="searchInput" class="form-control" placeholder="Search RAM Key / Table / Size">
-    </div>
-    <div class="col-md-2">
-      <select class="form-control" id="tablePrefixFilter">
-        <option value="">All Tables</option>
-        <option value="BranchTableSetting">Branch Table Setting</option>
-        <option value="BranchTableMenuCard">Branch Table Menu Card</option>
-      </select>
-    </div>
-    <div class="col-md-2">
-      <select class="form-control" id="perItems">
-        <option value="10" selected>10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-        <option value="200">200</option>
-        <option value="500">500</option>
-      </select>
-    </div>
-  </div>
-  <div class="mb-5">
-    <table class="table table-bordered mt-3">
-      <thead>
-        <tr>
-          <th>SL</th>
-          <th><a href="#" class="sort-link sort-button" data-field="ramKey">RAM Key</a></th>
-          <th><a href="#" class="sort-link sort-button" data-field="table">Table</a></th>
-          <th><a href="#" class="sort-link sort-button" data-field="size">Size (KB)</a></th>
-        </tr>
-      </thead>
-      <tbody id="ramTableBody"></tbody>
-    </table>
-    <div class="d-flex justify-content-center mt-2" id="paginationControls"></div>
-  </div> -->
+
   @include('loader.action-loader')
   {{-- start modal --}}
   @foreach($modals as $data)
@@ -682,6 +643,7 @@
 @push('scripts')
 @include('fetch-api.branch.branch-division-district-upazila.ajax')
 @include('super-admin.branch.ajax.branch-ajax')
+@include('super-admin.branch.ajax.download-ajax')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- jQuery UI Auto-Complete or Date Picker -->

@@ -13,18 +13,21 @@ use App\Models\Branch\AdminBranchAccessPermission;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Email\EmailVerification;
+use App\Models\Forntend\ForntEndFooter;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
+use App\Services\PdfService;
 
 class BranchServiceProvicer
 {
-    // ========================= Company Branch ================================
     /**
+     * ==================================
      * Handle view company branch.
+     * ==================================
     */
     public function viewBranchTemplate(Request $request, $slug)
     {
@@ -49,23 +52,14 @@ class BranchServiceProvicer
             // ->exists();
         }
 
-        $storedRandom = session('slug');
-        // slug is stored
-        if (!session()->has('slug')) {
-            session(['slug' => $slug]);
-        }
-
         $page_name = 'Branch Setting';
 
-        if ($slug === session('slug')) {
+        if ($slug) {
             $branch_create_page_authorize = (int) $branch_create_page_authorize;
 
             if ($branch_create_page_authorize === 1) {
-                $company_profiles = Cache::rememberForever('company_profiles', function () {
-                    return companyProfile::find(1);
-                });
-
-                return view('super-admin.branch.index', compact('company_profiles', 'page_name'));
+                
+                return view('super-admin.branch.index', compact('page_name'));
             }else{
                 return view('unauthorize-page.index', compact('page_name'));
             }
@@ -74,7 +68,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ================================
      * Handle get division name.
+     * ================================
     */
     public function fetchDivision(Request $request)
     {
@@ -86,7 +82,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * =============================
      * Handle get district name.
+     * =============================
     */
     public function fetchDistrict(Request $request, $selectedDivision)
     {
@@ -97,7 +95,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ==============================
      * Handle get upazila name.
+     * ==============================
     */
     public function fetchUpazila(Request $request, $selectedDistrict)
     {
@@ -109,7 +109,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ===============================
      * Handle create branch Type.
+     * ===============================
     */
     public function createBranchType(Request $request)
     {
@@ -143,7 +145,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ==============================
      * Handle search branch Type.
+     * ==============================
     */
     public function searchBranchTypes(Request $request)
     {
@@ -154,7 +158,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ================================
      * Handle edit branch Type.
+     * ================================
     */
     public function editBranchTypes($id)
     {
@@ -174,7 +180,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * =================================
      * Handle update branch Type.
+     * =================================
     */
     public function updateBranchTypes(Request $request, $id)
     {
@@ -214,7 +222,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ====================================
      * Handle delete branch Type.
+     * ====================================
     */
     public function deleteBranchTypes($id)
     {
@@ -227,7 +237,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * =====================================
      * Handle create branch.
+     * =====================================
     */
     public function createBranch(Request $request)
     {
@@ -302,7 +314,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * =================================
      * Handle search branch.
+     * =================================
     */
     public function searchBranchs(Request $request)
     {
@@ -399,7 +413,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * =================================
      * Handle edit branch.
+     * =================================
     */
     public function editBranchs($id)
     {
@@ -458,7 +474,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ==============================
      * Handle update branch.
+     * ==============================
     */
     public function updateBranchs(Request $request , $id)
     {
@@ -551,7 +569,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * =====================================
      * Handle delete branch.
+     * =====================================
     */
     public function deleteBranchs($id)
     {
@@ -596,8 +616,104 @@ class BranchServiceProvicer
 
     }
 
-    /**
-     * Handle Route ID Generate admin branch access.
+    /** =================================
+     *  Handle PDF Download
+     *  =================================
+    */
+    public function pdfDownloadBranchData(Request $request, PdfService $pdfService)
+    {
+        $auth = Auth::user();
+        if (!$auth) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        $role_id = $auth->role;
+        $email = $auth->login_email;
+        $user_branch_id = $auth->branch_id;
+
+        if($role_id && $email && $user_branch_id){
+            $pdf_permission = 1;
+            // $permission = DB::table('permissions')
+            // ->where(function ($query) use ($role_id, $email, $user_branch_id) {
+            //     $query->where('role', $role_id)
+            //         ->orWhere('email', $email)
+            //         ->orWhere('user_branch_id', $user_branch_id);
+            // })
+            // ->where('permission', 1)
+            // ->exists();
+        }
+        if($pdf_permission === 1){
+
+            if($user_branch_id && $role_id){
+    
+                $branch_id = DB::table('branches')->pluck('branch_id')->toArray();
+                
+                // Search
+                $query = $request->get('query');
+                // Filter
+                $branch_type = $request->input('branch_type');
+    
+                $getBranches = Branches::select('id', 'branch_type', 'branch_id', 'branch_name', 'division_id', 'district_id', 'upazila_id', 'town_name', 'location',  'created_by',  'updated_by', 'created_at', 'updated_at')
+                ->whereIn('branch_id', $branch_id)->with(['divisions', 'districts', 'thana_or_upazilas']);
+    
+                // Apply Searching
+                $getBranches->when($query, function($q) use($query){
+                    $q->where(function($subQuery) use($query){
+                        $subQuery->where('branch_name', 'LIKE', $query. '%')
+                                ->orWhere('branch_id', 'LIKE', $query. '%');
+                    });
+                });
+    
+                // Apply Filtering
+                if($branch_type){
+                    $getBranches->where('branch_type', $branch_type);
+                }
+                $branches = $getBranches->get();
+                // Load additional info
+                $companyinformations = ForntEndFooter::get();
+                $imagePath = public_path('image/log/print-page-logo.png');
+                $imageData = base64_encode(file_get_contents($imagePath)); 
+        
+                // Check if there's no branch data — use fallback PDF view
+                if ($branches->isEmpty()) {
+                    $html = view('pdf-download.empty-branch', [
+                        'message' => 'no branch data found.',
+                        'companyinformations' => $companyinformations,
+                        'imageData' => $imageData,
+                    ])->render();
+        
+                    $pdf = $pdfService->generatePdf($html);
+        
+                    return response($pdf, 200)
+                        ->header('Content-Type', 'application/pdf')
+                        ->header('Content-Disposition', 'attachment; filename="Branch-Download-'. date('d-M-Y') .'.pdf"');
+                }
+        
+                // Render the PDF
+                $html = view('pdf-download.branch-pdf', [
+                    'branches' => $branches,
+                    'companyinformations' => $companyinformations,
+                    'imageData' => $imageData,
+                ])->render();
+        
+                $pdf = $pdfService->generatePdf($html);
+        
+                return response($pdf, 200)
+                    ->header('Content-Type', 'application/pdf')
+                    ->header('Content-Disposition', 'attachment; filename="Branch-Download-'. date('d-M-Y') .'.pdf"');
+    
+            }
+        }else{
+            return response()->json([
+                'status' => 422,
+                'message' => 'You have no pdf data permission.'
+            ]); 
+        }
+    }
+
+    /** =============================================
+     *  Handle Route ID Generate admin branch access.
+     *  =============================================
     */
     public function redirectWithRandomAdminBranchAccessId()
     {
@@ -614,7 +730,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * =======================================
      * Handle admin branch access view.
+     * =======================================
     */
     public function branchAdminAccessView(Request $request, $random, $page_authorize)
     {
@@ -635,7 +753,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * =======================================
      * Handle admin branch access view.
+     * =======================================
     */
     public function branchDataFetchs(Request $request)
     {
@@ -653,7 +773,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * =========================================
      * Handle admin branch access view.
+     * =========================================
     */
     public function userBranchDataFetchs(Request $request)
     {
@@ -705,7 +827,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ========================================
      * Handle admin branch fetch view.
+     * ========================================
     */
     public function adminBranchChangesFetch(Request $request)
     {
@@ -750,7 +874,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ==========================================
      * Handle admin branch change view.
+     * ==========================================
     */
     public function adminBranchChanges(Request $request, $id)
     {
@@ -801,7 +927,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ========================================
      * Handle admin branch delete.
+     * ========================================
     */
     public function adminBranchsDelete(Request $request, $id)
     {
@@ -847,7 +975,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ==========================================
      * Handle branch user email fetch.
+     * ==========================================
     */
     public function branchFetchUserEmail(Request $request)
     {
@@ -880,7 +1010,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ============================================================
      * Handle branch name query or search for admin access.
+     * ============================================================
     */
     public function branchSearchNames(Request $request, $id)
     {
@@ -908,7 +1040,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ========================================
      * Handle admin branch access.
+     * ========================================
     */
     public function branchAdminAcessStore(Request $request)
     {
@@ -971,7 +1105,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * =========================================
      * Handle admin branch access.
+     * =========================================
     */
     public function accessBranchAdmin(Request $request)
     {
@@ -1045,7 +1181,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ================================================
      * Handle Route ID Generate user branch access.
+     * ================================================
     */
     public function redirectWithRandomUserBranchAccessId()
     {
@@ -1062,7 +1200,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ========================================
      * Handle user branch permission view.
+     * ========================================
     */
     public function branchAccessUserPermissionView(Request $request, $random, $page_authorize)
     {
@@ -1083,7 +1223,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ======================================================
      * Handle branch data get for user permission create.
+     * ======================================================
     */
     public function getSpecifyBranch(Request $request)
     {
@@ -1107,7 +1249,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ====================================================
      * Handle branch data get for user permission create.
+     * ====================================================
     */
     public function branchGet(Request $request, $id)
     {
@@ -1133,7 +1277,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ===========================================
      * Handle user branch permission create.
+     * ===========================================
     */
     public function userBranchPermissionCreate(Request $request)
     {
@@ -1182,7 +1328,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ====================================================
      * Handle user branch fetch role for permission.
+     * ====================================================
     */
     public function userBranchFetchRole(Request $request, $id)
     {
@@ -1211,7 +1359,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * =====================================================
      * Handle user branch fetch email for permission.
+     * =====================================================
     */
     public function userBranchFetchEmail(Request $request, $id)
     {
@@ -1225,7 +1375,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ============================================
      * Handle user branch permission edit.
+     * ============================================
     */
     public function userBranchPermissionEdit($id)
     {
@@ -1284,7 +1436,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ==================================
      * Handle user branch change.
+     * ==================================
     */
     public function userBranchChangeEdit($id)
     {
@@ -1343,7 +1497,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * ============================================
      * Handle user branch permission update.
+     * ============================================
     */
     public function userBranchPermissionChange(Request $request, $id)
     {
@@ -1401,7 +1557,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * =========================================
      * Handle user branch permission delete.
+     * =========================================
     */
     public function userBranchPermissionDelete(Request $request, $id)
     {
@@ -1447,7 +1605,9 @@ class BranchServiceProvicer
     }
 
     /**
+     * =========================================
      * Handle user branch permission.
+     * =========================================
     */
     public function userBranchAccessPermission(Request $request)
     {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Branch;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\LogicBild\Branch\BranchServiceProvicer;
+use App\Services\PdfService;
 
 class BranchController extends Controller
 {
@@ -97,6 +98,11 @@ class BranchController extends Controller
     public function deleteBranch($id)
     {
         return $this->branchServiceProvider->deleteBranchs($id);
+    }
+    // PDF Download Branch
+    public function pdfDownloadBranch(Request $request, PdfService $pdfService)
+    {
+        return $this->branchServiceProvider->pdfDownloadBranchData($request, $pdfService);
     }
 
     // Branch Create Page Url id generate
