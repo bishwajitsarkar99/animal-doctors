@@ -5,7 +5,8 @@
         // ===========================
         $(document).on('click', '#exportPDF', function(e){
             e.preventDefault();
-            const branch_type = $("#branch_type").data('value') || '';
+            const branch_type = $("#selectBranchCategories").val() || '';
+            
             const query = $("#search").val() || '';
 
             const url = '{{ route("branch_pdf_download.action") }}' + 

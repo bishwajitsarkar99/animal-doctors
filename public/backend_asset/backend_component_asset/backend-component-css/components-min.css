@@ -10,7 +10,7 @@
   --component-tab-deactive-btn-bg-hover:linear-gradient(-0deg, #3b71cad1, rgb(31 138 255 / 83%), #3b71cae8, #3b71caf5, rgb(0 123 255 / 54%));
   --component-form-button-background: linear-gradient(to top, #0056b3, #1985f9e0, #1985f9e0);
   --component-form-button-background-hover: linear-gradient(rgba(14, 14, 14, 0.05) 0%, rgba(171, 165, 165, 0.05) 100%);
-  --component-form-button-red-background: linear-gradient(to top, #ff4500, #ff713d, #ff713d);
+  --component-form-button-red-background: linear-gradient(-0deg, #ff4500, #fd622a, #f74504, #ff6b35, #ff4500);
 }
 htm,body{
   box-sizing: border-box;
@@ -1079,7 +1079,8 @@ button.btn.btn-sm.success-shadow-btn {
   --mdb-box-shadow-color-rgb: 0, 0, 0;
   box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
   font-family: var(--category-font-family);
-  background-image: var(--component-form-button-background);
+  /* background-image: var(--component-form-button-background); */
+  background: var(--component-tab-active-btn-bg);
   border-width: initial;
   border-style: none;
   border-color: initial;
@@ -1089,15 +1090,19 @@ button.btn.btn-sm.success-shadow-btn {
   font-size: 12px;
   opacity: 1;
   text-align: center;
+  line-height: 1.2;
   font-weight: 700;
   outline: 0;
   border-radius: 3px;
-  border: none;
+  border: 1px solid rgb(31 138 255 / 83%);
+  z-index: 1;
+  overflow: hidden;
 }
 button.btn.btn-sm.success-shadow-btn:hover {
   background-color: #1985f9e0;
   background-image: var(--component-form-button-background-hover);
-  border: none;
+  border: 1px solid rgb(31 138 255 / 83%);
+  line-height: 1.2;
   color: #fff;
   opacity: 1;
   transition: opacity 0.15s linear;
@@ -1111,14 +1116,16 @@ button.btn.btn-sm.danger-repl-btn  {
   border-radius: 3px;
   font-size: 12px;
   text-transform: capitalize;
-  border: none;
+  border: 1px solid #eb3f00ee;
+  line-height: 1.2;
   --mdb-box-shadow-color-rgb: 0, 0, 0;
   box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), .35);
 }
 button.btn.btn-sm.danger-repl-btn:hover{
   background-color: #ff946d;
   background-image: var(--component-form-button-background-hover);
-  border: none;
+  border: 1px solid #ff946d;
+  line-height: 1.2;
   color: #fff;
   opacity: 1;
   transition: opacity 0.15s linear;
@@ -1418,12 +1425,12 @@ button.active {
   animation: none;
 }
 button#cancelSearchToast {
-  margin-top: 3px;
+  margin-top: 4px;
   margin-left: 5px;
   margin-right: 5px;
 }
 button#cancelFilterToast {
-  margin-top: 2px;
+  margin-top: 3px;
   margin-left: 5px;
   margin-right: 5px;
 }

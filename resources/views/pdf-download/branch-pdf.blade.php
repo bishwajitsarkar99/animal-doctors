@@ -135,13 +135,13 @@
 
     <div class="content">
         <div class="row">
-            <table style="margin-top:5px;">
+            <table style="margin-top:20px;">
                 <thead>
                     <tr>
                         <th id="theadLeftBorder" style="text-align:center;width:30px;">SN.</th>
-                        <th style="text-align:center;width:50px;">Branch-Type</th>
+                        <th style="text-align:left;">Type</th>
                         <th style="text-align:left;">Branch-ID</th>
-                        <th style="text-align:left;">Branch-Name</th>
+                        <th style="text-align:left;">Name</th>
                         <th style="text-align:left;">Division</th>
                         <th style="text-align:left;">District</th>
                         <th style="text-align:left;">Upazila</th>
@@ -158,14 +158,14 @@
                         @foreach($branches as $item)
                             <tr>
                                 <td style="text-align: center;">{{ $serialNumber++ }}</td>
-                                <td style="text-align: center;">{{ $item->branch_type }}</td>
-                                <td style="text-align: left;">{{ $item->branch_id }}</td>
-                                <td style="text-align: left;">{{ $item->branch_name }}</td>
-                                <td style="text-align: left;width:60px;">{{ $item->divisions->division_name }}</td>
-                                <td style="text-align: left;width:80px;">{{ $item->districts->district_name }}</td>
-                                <td style="text-align: left;width:80px;">{{ $item->thana_or_upazilas->thana_or_upazila_name }}</td>
-                                <td style="text-align: left;width:80px;">{{ $item->town_name }}</td>
-                                <td style="text-align: left;width:80px;">{{ $item->location }}</td>
+                                <td style="text-align: left;width:50px;">{{ $item->branch_type }}</td>
+                                <td style="text-align: left;width:80px;">{{ $item->branch_id }}</td>
+                                <td style="text-align: left;width:80px;">{{ $item->branch_name }}</td>
+                                <td style="text-align: left;width:50px;">{{ $item->divisions->division_name }}</td>
+                                <td style="text-align: left;width:40px;">{{ $item->districts->district_name }}</td>
+                                <td style="text-align: left;width:60px;">{{ $item->thana_or_upazilas->thana_or_upazila_name }}</td>
+                                <td style="text-align: left;width:40px;">{{ $item->town_name }}</td>
+                                <td style="text-align: left;width:130px;">{{ $item->location }}</td>
                             </tr>
                         @endforeach
                         @else

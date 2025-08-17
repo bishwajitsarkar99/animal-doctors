@@ -116,6 +116,8 @@ button#searchToast {
     background: none;
     width: 1.7em;
     height: 1.7em;
+    margin-top: 1px;
+    margin-left: 2px;
 }
 .line-label {
     border-radius: 3px;
