@@ -25,7 +25,6 @@ Route::group(['middleware' => 'auth'], function (){
             Route::put('/branch-update/{id}', [BranchController::class, 'updateBranch'])->name('update_branch.action');
             Route::delete('/branch-delete/{id}', [BranchController::class, 'deleteBranch'])->name('branch.delete');
             // Branch Admin Access
-            Route::get('/branch-activity/branch-admin-access', [BranchController::class, 'redirectWithRandomAdminBranchAccess'])->name('branch_access.redirect');
             Route::get('/branch-activity/branch-{slug}/admin-access/index', [BranchController::class, 'branchAccessView'])->name('branch_access.view');
             Route::post('/branch-admin-permission-store', [BranchController::class, 'branchAcessStore'])->name('branch_access_store.action');
             Route::post('/branch-admin-permission', [BranchController::class, 'accessBranch'])->name('access_status.action');
@@ -33,7 +32,6 @@ Route::group(['middleware' => 'auth'], function (){
             Route::put('/branch-admin-change/{id}', [BranchController::class, 'adminBranchChange'])->name('admin_branch_change.action');
             Route::delete('/branch-admin-change-delete/{id}', [BranchController::class, 'adminBranchDelete'])->name('admin_branch_delete.action');
             // Brach User Access Permission
-            Route::get('/branch-activity/branch-user-access', [BranchController::class, 'redirectWithRandomUserBranchAccess'])->name('branch_access_permission.redirect');
             Route::get('/branch-activity/branch-{slug}/user-access/index', [BranchController::class, 'branchAccessUserPermission'])->name('branch_access_permission.view');
             Route::get('/branch-get-data/{id}', [BranchController::class, 'branchGetData'])->name('branch_get.action');
             Route::get('/branch-data-fetch', [BranchController::class, 'branchDataFetch'])->name('branch_fetch.action');
@@ -51,6 +49,8 @@ Route::group(['middleware' => 'auth'], function (){
             Route::post('/branch-user-permission', [BranchController::class, 'permissionBranch'])->name('permission_status.action');
             // Branch PDF Download
             Route::get('/branch-download/export-pdf', [BranchController::class, 'pdfDownloadBranch'])->name('branch_pdf_download.action');
+            Route::get('/branch-data-download/export-excel', [BranchController::class, 'exportExcelDownloadBranch'])->name('branch-record_excel.action');
+            Route::get('/branch-data-download/export-cvs-format', [BranchController::class, 'exportExcelCsvDownloadBranch'])->name('branch-record_cvs_file.action');
         });
     });
 });

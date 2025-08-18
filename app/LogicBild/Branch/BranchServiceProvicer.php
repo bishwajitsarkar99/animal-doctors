@@ -21,6 +21,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use App\Services\PdfService;
+use Illuminate\Support\Facades\Response;
 
 class BranchServiceProvicer
 {
@@ -64,7 +65,7 @@ class BranchServiceProvicer
                 return view('unauthorize-page.index', compact('page_name'));
             }
         }
-        return view('unauthorize-page.page-session-block', compact('page_name'));
+        // return view('unauthorize-page.page-session-block', compact('page_name'));
     }
 
     /**
@@ -380,7 +381,7 @@ class BranchServiceProvicer
                 $getBranches = $getBranches->orderBy($sort_field, $sort_direction);
 
                 // Paginate branch table data using query, not collection
-                $perItem = max((int) $request->input('per_item', 2), 1);
+                $perItem = max((int) $request->input('per_item', 10), 1);
 
                 $paginateData = $getBranches->paginate($perItem);
 
@@ -711,36 +712,317 @@ class BranchServiceProvicer
         }
     }
 
-    /** =============================================
-     *  Handle Route ID Generate admin branch access.
-     *  =============================================
+    /** =================================
+     *  Handle Excel Download
+     *  =================================
     */
-    public function redirectWithRandomAdminBranchAccessId()
+    public function exportExcelDownloadBranchData(Request $request)
     {
-        $idRange = 30; // Random 30-character string
-        $random = Str::random($idRange);
-        session(['valid_branch_random' => $random]);
+        $auth = Auth::user();
+        if (!$auth) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
 
-        $page_authorize = 1; // or 0 based on logic
+        $role_id = $auth->role;
+        $email = $auth->login_email;
+        $name = $auth->name;
+        $user_branch_id = $auth->branch_id;
 
-        return redirect()->route('branch_access.view', [
-            'random' => $random,
-            'page_authorize' => $page_authorize
-        ]);
+        if($role_id && $email && $user_branch_id){
+            $excel_permission = 1;
+            // $permission = DB::table('permissions')
+            // ->where(function ($query) use ($role_id, $email, $user_branch_id) {
+            //     $query->where('role', $role_id)
+            //         ->orWhere('email', $email)
+            //         ->orWhere('user_branch_id', $user_branch_id);
+            // })
+            // ->where('permission', 1)
+            // ->exists();
+        }
+
+        if($excel_permission === 1){
+
+            if($user_branch_id && $role_id){
+
+                $branch_id = DB::table('branches')->pluck('branch_id')->toArray();
+                
+                // Search
+                $query = $request->get('query');
+                // Filter
+                $branch_type = $request->input('branch_type');
+    
+                $getBranches = Branches::select('id', 'branch_type', 'branch_id', 'branch_name', 'division_id', 'district_id', 'upazila_id', 'town_name', 'location',  'created_by',  'updated_by', 'created_at', 'updated_at')
+                ->whereIn('branch_id', $branch_id)->with(['divisions', 'districts', 'thana_or_upazilas']);
+    
+                // Apply Searching
+                $getBranches->when($query, function($q) use($query){
+                    $q->where(function($subQuery) use($query){
+                        $subQuery->where('branch_name', 'LIKE', $query. '%')
+                                ->orWhere('branch_id', 'LIKE', $query. '%');
+                    });
+                });
+    
+                // Apply Filtering
+                if($branch_type){
+                    $getBranches->where('branch_type', $branch_type);
+                }
+                $branches = $getBranches->get();
+
+                $companyinformations = ForntEndFooter::get();
+                $imagePath = public_path('image/log/comp-logo.png');
+                $imageData = base64_encode(file_get_contents($imagePath));
+                
+                $formattedDate = now('Asia/Dhaka')->format('d-M-Y');
+                $headers = [
+                    'Content-Type' => 'application/vnd.ms-excel; charset=utf-8',
+                    'Content-Disposition' => 'attachment; filename=branch_export-' . $formattedDate . '.xls',
+                ];
+        
+                if ($branches->isEmpty()) {
+                    $errorMessage = '⚠ no branch data found.';
+                    
+                    $content = "\xEF\xBB\xBF"; // UTF-8 BOM
+                    $content .= view('exports-data.empty_branch_excel_message', compact(
+                        'companyinformations', 'imageData', 'email', 'name',
+                        'errorMessage'
+                    ))->render();
+        
+                    return Response::make($content, 200, $headers);
+                }
+        
+                $content = "\xEF\xBB\xBF"; // UTF-8 BOM
+                $content .= view('exports-data.branch_excel_format', compact(
+                    'branches',
+                    'companyinformations', 'imageData', 'email', 'name'
+                ))->render();
+        
+                return Response::make($content, 200, $headers);
+            }
+        }else{
+            return response()->json([
+                'status' => 422,
+                'message' => 'You have no excel data permission.'
+            ]); 
+        }
+
     }
 
+    /** =================================
+     *  Handle Excel CSV Format Download
+     *  =================================
+    */
+    public function exportExcelCsvDownloadBranchData(Request $request)
+    {
+        $auth = Auth::user();
+        if (!$auth) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        $role_id = $auth->role;
+        $email = $auth->login_email;
+        $name = $auth->name;
+        $user_branch_id = $auth->branch_id;
+
+        if($role_id && $email && $user_branch_id){
+            $excel_csv_permission = 1;
+            // $permission = DB::table('permissions')
+            // ->where(function ($query) use ($role_id, $email, $user_branch_id) {
+            //     $query->where('role', $role_id)
+            //         ->orWhere('email', $email)
+            //         ->orWhere('user_branch_id', $user_branch_id);
+            // })
+            // ->where('permission', 1)
+            // ->exists();
+        }
+
+        if($excel_csv_permission === 1){
+
+            if($user_branch_id && $role_id){
+
+                $branch_id = DB::table('branches')->pluck('branch_id')->toArray();
+                
+                // Search
+                $query = $request->get('query');
+                // Filter
+                $branch_type = $request->input('branch_type');
+    
+                $getBranches = Branches::select('id', 'branch_type', 'branch_id', 'branch_name', 'division_id', 'district_id', 'upazila_id', 'town_name', 'location',  'created_by',  'updated_by', 'created_at', 'updated_at')
+                ->whereIn('branch_id', $branch_id)->with(['divisions', 'districts', 'thana_or_upazilas']);
+    
+                // Apply Searching
+                $getBranches->when($query, function($q) use($query){
+                    $q->where(function($subQuery) use($query){
+                        $subQuery->where('branch_name', 'LIKE', $query. '%')
+                                ->orWhere('branch_id', 'LIKE', $query. '%');
+                    });
+                });
+    
+                // Apply Filtering
+                if($branch_type){
+                    $getBranches->where('branch_type', $branch_type);
+                }
+
+                $branches = $getBranches->get();
+
+                $companyinformations = ForntEndFooter::first();
+        
+                // If no data found, return CSV with error message
+                if ($branches->isEmpty()) {
+                    $handle = fopen('php://temp', 'w');
+                    fprintf($handle, chr(0xEF).chr(0xBB).chr(0xBF)); // UTF-8 BOM
+        
+                    date_default_timezone_set('Asia/Dhaka');
+                    $currentDate = date('d-M-Y');
+                    $currentTime = date('h:i:s A');
+        
+                    fputcsv($handle, [$companyinformations->company_name ?? 'N/A']);
+                    fputcsv($handle, ['Address :', $companyinformations->company_address ?? 'N/A']);
+                    fputcsv($handle, ['Branch Data Download :', "$currentDate $currentTime\t[ User : $email ]"]);
+                    fputcsv($handle, []); // Empty line
+        
+                    fputcsv($handle, []); // Empty line
+        
+                    fputcsv($handle, ['', 'Branch Export - No Data Found']);
+                    fputcsv($handle, []);
+        
+                    // Page Footer Part
+                    fputcsv($handle, []); // Empty line
+                    fputcsv($handle, []); // Empty line
+                    fputcsv($handle, []); // Empty line
+        
+                    fputcsv($handle, ['', 'Prepared by ' . ( $name ), '', 'Reference by', '', 'Authorized by', '', '']);
+        
+                    fputcsv($handle, []); // Empty line
+        
+                    fputcsv($handle, [
+                        '', '',
+                        'Email: ' . ($companyinformations->email ?? 'N/A'),
+                        'Facebook: ' . ($companyinformations->facebook_address ?? 'N/A'),
+                        'LinkedIn: ' . ($companyinformations->linkedin ?? 'N/A'),
+                        '', '', '', '', ''
+                    ]);
+        
+                    fputcsv($handle, [
+                        '', '', '',
+                        'Contact: ' . ($companyinformations->contract_number_one ?? 'N/A'),
+                        "\t" . ($companyinformations->contract_number_two ?? 'N/A'),
+                        '', '', '', '', ''
+                    ]);
+        
+                    fputcsv($handle, [
+                        '', '', '',
+                        'Hotline: ' . ($companyinformations->hot_number ?? 'N/A'),
+                        '', '', '', '', '', ''
+                    ]);
+        
+                    rewind($handle);
+                    $csvContent = stream_get_contents($handle);
+                    fclose($handle);
+        
+                    $filename = 'branch_export-' . now('Asia/Dhaka')->format('d-M-Y') . '.csv';
+        
+                    return response($csvContent, 200, [
+                        'Content-Type' => 'text/csv; charset=UTF-8',
+                        'Content-Disposition' => "attachment; filename=\"$filename\"",
+                    ]);
+                }
+        
+                // Create CSV in memory
+                $handle = fopen('php://temp', 'w');
+                fprintf($handle, chr(0xEF).chr(0xBB).chr(0xBF)); // UTF-8 BOM for Excel
+        
+                // 1️⃣ Company Info Section
+                $timezone = date_default_timezone_get();
+                date_default_timezone_set('Asia/Dhaka');
+                $currentDate = date('d l M Y') . " || ";
+                $currentTime = date('h:i:s A');
+                
+                fputcsv($handle, [$companyinformations->company_name ?? 'N/A']);
+                fputcsv($handle, ['Address :', $companyinformations->company_address ?? 'N/A']);
+                fputcsv($handle, ['Branch Data Download :', "$currentDate $currentTime", "[ User : $email ]"]);
+                fputcsv($handle, []); // Empty line
+        
+                // 3️⃣ Branch Data Table Header
+                fputcsv($handle, [
+                    'SN.', 'Branch Type', 'Branch ID', 'Branch Name',
+                    'Division', 'District', 'Upazila', 'City', 'Location'
+                ]);
+        
+                // 4️⃣ Branch Data Rows
+                foreach ($branches as $index => $item) {
+                    fputcsv($handle, [
+                        $index + 1,
+                        $item->branch_type,
+                        $item->branch_id,
+                        $item->branch_name,
+                        optional($item->divisions)->division_name ?? 'N/A',
+                        optional($item->districts)->district_name ?? 'N/A',
+                        optional($item->thana_or_upazilas)->thana_or_upazila_name ?? 'N/A',
+                        $item->town_name,
+                        $item->location,
+                    ]);
+                }
+        
+                // Page Footer Part
+                fputcsv($handle, []); // Empty line
+                fputcsv($handle, []); // Empty line
+                fputcsv($handle, []); // Empty line
+        
+                fputcsv($handle, ['', 'Prepared by ' . ( $name ), '', 'Reference by', '', 'Authorized by', '', '']);
+        
+                fputcsv($handle, []); // Empty line
+        
+                // Finalize file
+                rewind($handle);
+                $csvContent = stream_get_contents($handle);
+                fclose($handle);
+        
+                // Download filename and headers
+                $filename = 'Branch_Export-' . now('Asia/Dhaka')->format('d-M-Y') . '.csv';
+        
+                return response($csvContent, 200, [
+                    'Content-Type' => 'text/csv; charset=UTF-8',
+                    'Content-Disposition' => "attachment; filename=\"$filename\"",
+                ]);
+            }
+        }
+
+    }
+
+
+
+    // ==============================================================================
     /**
      * =======================================
      * Handle admin branch access view.
      * =======================================
     */
-    public function branchAdminAccessView(Request $request, $random, $page_authorize)
+    public function branchAdminAccessView(Request $request, $slug)
     {
-        $storedRandom = session('valid_branch_random');
+        $auth = Auth::User();
+        if (!$auth) {
+            return redirect()->route('login'); // or unauthorized view
+        }
+        $role_id = $auth->role;
+        $email = $auth->login_email;
+        $user_branch_id = $auth->branch_id;
+        // $permission = false; // default
+        if($email && $role_id && $user_branch_id){
+            $page_authorize = 1; // branch create page authorize
+
+            // $permission = DB::table('permissions')
+            // ->where(function ($query) use ($role_id, $email, $user_branch_id) {
+            //     $query->where('role', $role_id)
+            //         ->orWhere('email', $email)
+            //         ->orWhere('user_branch_id', $user_branch_id);
+            // })
+            // ->where('permission', 1)
+            // ->exists();
+        }
 
         $page_name = 'Admin Branch Access';
 
-        if ($storedRandom && $random === $storedRandom) {
+        if ($slug) {
             $page_authorize = (int) $page_authorize;
 
             if ($page_authorize === 1) {
@@ -749,7 +1031,7 @@ class BranchServiceProvicer
                 return view('unauthorize-page.index', compact('page_name'));
             }
         }
-        return view('unauthorize-page.page-session-block', compact('page_name'));
+        // return view('unauthorize-page.page-session-block', compact('page_name'));
     }
 
     /**
@@ -1199,18 +1481,40 @@ class BranchServiceProvicer
         ]);
     }
 
+
+
+    // =====================================================================
     /**
      * ========================================
      * Handle user branch permission view.
      * ========================================
     */
-    public function branchAccessUserPermissionView(Request $request, $random, $page_authorize)
+    public function branchAccessUserPermissionView(Request $request, $slug)
     {
-        $storedRandom = session('valid_branch_random');
+        $auth = Auth::User();
+        if (!$auth) {
+            return redirect()->route('login'); // or unauthorized view
+        }
+        $role_id = $auth->role;
+        $email = $auth->login_email;
+        $user_branch_id = $auth->branch_id;
+        // $permission = false; // default
+        if($email && $role_id && $user_branch_id){
+            $page_authorize = 1; // branch create page authorize
+
+            // $permission = DB::table('permissions')
+            // ->where(function ($query) use ($role_id, $email, $user_branch_id) {
+            //     $query->where('role', $role_id)
+            //         ->orWhere('email', $email)
+            //         ->orWhere('user_branch_id', $user_branch_id);
+            // })
+            // ->where('permission', 1)
+            // ->exists();
+        }
 
         $page_name = 'User Branch Access';
 
-        if ($storedRandom && $random === $storedRandom) {
+        if ($slug) {
             $page_authorize = (int) $page_authorize;
 
             if ($page_authorize === 1) {
@@ -1219,7 +1523,7 @@ class BranchServiceProvicer
                 return view('unauthorize-page.index', compact('page_name'));
             }
         }
-        return view('unauthorize-page.page-session-block', compact('page_name'));
+        /// return view('unauthorize-page.page-session-block', compact('page_name'));
     }
 
     /**

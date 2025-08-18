@@ -69,21 +69,5 @@
             <td colspan="2" style="text-align:center;font-weight:700;">Authorized by</td>
         </tr>
     </table>
-    <br>
-    @foreach($companyinformations as $infos)
-        <table style="width: 100%;border-top: 1px ridge rgb(221, 221, 221);">
-            <tr>
-                <td colspan="11" style="text-align:center;font-weight:700;">
-                    <span>Email: {{ $infos->email }}, Facebook: {{ $infos->facebook_address }}, LinkedIn: {{ $infos->linkedin }}</span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="11" style="text-align:center;font-weight:700;">Contact: {{ $infos->contract_number_one }}, {{ $infos->contract_number_two }}</td>
-            </tr>
-            <tr>
-                <td colspan="11" style="text-align:center;font-weight:700;">Hotline: {{ $infos->hot_number }}</td>
-            </tr>
-        </table>
-    @endforeach
 </body>
 </html>

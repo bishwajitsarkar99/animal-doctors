@@ -313,7 +313,7 @@
               selectClass="ps-1"
               selectId="perItemControl"
               selectStyle="background: linear-gradient(5deg, gray, transparent 3%, lightgray, silver);border:1px ridge rgba(135, 206, 250, 0.74);"
-              selectedValue="2"
+              selectedValue="10"
             />
           </div>
           <div class="col-3">

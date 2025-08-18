@@ -1127,26 +1127,26 @@ tr.fist_row{
 th.branch_font{
     font-size: 12px;
     font-weight: 600;
-    color: black;
+    color: #333;
     font-family: var(--nav-font-family); 
     text-align: center;
 }
 th.branch_search_font{
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
-    color: black;
+    color: #333;
     font-family: var(--nav-font-family); 
     text-align: left; 
-    background: linear-gradient(35deg, #cce7ff, #cce7ff, #cce7ff 100%);
+    background: white;
+    border: 1px solid rgba(0,123,255,0.2);
 }
 th.branch_info_head{
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
-    color: black;
+    color: #333;
     font-family: var(--nav-font-family); 
     text-align: center; 
-    border-bottom: 2px solid lightblue;
-    background: linear-gradient(35deg, #cce7ff, #cce7ff, #cce7ff 100%);
+    background: white;
 }
 th.lab_padding{
     padding-left: 5px;
@@ -1154,22 +1154,27 @@ th.lab_padding{
 td.label_position{
     font-size: 12px;
     font-weight: 600;
-    color: black;
+    color: #333;
     font-family: var(--nav-font-family); 
     text-align: center;
 }
 td.first_column{
     padding-left: 5px;
+    background-color: white;
 }
 td.second_column{
     padding-right: 5px;
+    background-color: white;
 }
 button.btn-close.cols_btn {
     box-shadow: none;
     outline: none;
+    width: 8px;
+    height: 8px;
 }
 .image_position {
-    margin-top: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 .user_img {
     width: 30px;
@@ -1178,7 +1183,7 @@ button.btn-close.cols_btn {
     transition: transform .5s;
 }
 .user_img:hover{
-    transform: scale(3);
+    transform: scale(1.5);
 }
 #updateconfirmbranch,#deletebranch,#deleteconfirmbranch,#accessconfirmbranch{
     transition: transform .5s;
@@ -1190,6 +1195,7 @@ td.branch_font {
 td#creatorContent,td#updatorContent,td#approverContent{
     text-align: left;
     padding-left: 5px;
+    border-right: 1px solid rgba(0,123,255,0.2);
 }
 input#firstCreatedAt{
     padding-bottom: 10px;
@@ -1220,7 +1226,7 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     outline: none;
     box-shadow: none;
     background: white;
-    color: #111;
+    color: #333;
     width: 100%;
     border-collapse: collapse;
     border: none;
@@ -1312,10 +1318,6 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
     animation: 1s infinite reverse skeleton;
-}
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: #111 !important;
-    line-height: 24px;
 }
 #permission_btn{
     margin-top: 0em;
@@ -1425,7 +1427,7 @@ input#delete_branch_id {
     color: darkcyan;
 }
 .brn_info_tb {
-    border: 2px solid lightblue;
+    border: 1px solid rgba(0, 123, 255, 0.2);
 }
 #SM_Modal_body {
     background-color: white;
@@ -1544,7 +1546,6 @@ span.tb_lb {
     margin-left: 2px;
 }
 .branch_info_card{
-    background-image: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
     background-color: white;
     /* box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 16px 0px; */
     border: none;

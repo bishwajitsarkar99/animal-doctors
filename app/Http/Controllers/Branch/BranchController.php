@@ -104,17 +104,21 @@ class BranchController extends Controller
     {
         return $this->branchServiceProvider->pdfDownloadBranchData($request, $pdfService);
     }
-
-    // Branch Create Page Url id generate
-    public function redirectWithRandomAdminBranchAccess()
+    // Export Excel Download Session Data
+    public function exportExcelDownloadBranch(Request $request)
     {
-        return $this->branchServiceProvider->redirectWithRandomAdminBranchAccessId();
+        return $this->branchServiceProvider->exportExcelDownloadBranchData($request);
+    }
+    // Export Excel CVS Format Download Session Data
+    public function exportExcelCsvDownloadBranch(Request $request)
+    {
+        return $this->branchServiceProvider->exportExcelCsvDownloadBranchData($request);
     }
 
     // Branch Admin Access View
-    public function branchAccessView(Request $request, $random, $page_authorize)
+    public function branchAccessView(Request $request, $slug)
     {
-        return $this->branchServiceProvider->branchAdminAccessView($request, $random, $page_authorize);
+        return $this->branchServiceProvider->branchAdminAccessView($request, $slug);
     }
 
     // Branch Data Fetch
@@ -171,16 +175,10 @@ class BranchController extends Controller
         return $this->branchServiceProvider->adminBranchsDelete($request, $id);
     }
 
-    // Branch Create Page Url id generate
-    public function redirectWithRandomUserBranchAccess()
-    {
-        return $this->branchServiceProvider->redirectWithRandomUserBranchAccessId();
-    }
-
     // Branch User Access Permission View
-    public function branchAccessUserPermission(Request $request, $random, $page_authorize)
+    public function branchAccessUserPermission(Request $request, $slug)
     {
-        return $this->branchServiceProvider->branchAccessUserPermissionView($request, $random, $page_authorize);
+        return $this->branchServiceProvider->branchAccessUserPermissionView($request, $slug);
     }
 
     // Branch Search Data For Create

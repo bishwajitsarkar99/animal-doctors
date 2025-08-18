@@ -1190,6 +1190,26 @@ button.btn.btn-sm.danger-repl-btn:hover{
 }
 
 /* ================ Card Component Css ======================== */
+.common-custom-card{
+  border: 1px ridge #cfe7ff;
+  transition: 0.5ms border;
+  box-shadow: rgba(0, 0, 0, .067) 0 1px 5px, rgba(0, 123, 255, .2) 0 0px 2px;
+  opacity: 1;
+  background-color: white;
+}
+.group-field-label{
+  font-family: var(--component-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+  margin-left: 8px;
+}
+.text_label{
+  font-family: var(--component-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
 .custom-card{
   border: none;
   transition: 0.5ms;
