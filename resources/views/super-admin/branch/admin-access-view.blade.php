@@ -51,7 +51,7 @@
               <div class="card card-body branch_info_card" id="documents" hidden>
                 <div class="row">
                   <div class="col-xl-12">
-                    <table class="info_table">
+                    <table class="info_table component-focus">
                       <thead>
                         <tr>
                           <th class="branch_search_font label_position lab_padding">Creator</th>
@@ -62,22 +62,24 @@
                       <tbody>
                         <tr>
                           <td id="creatorContent">
-                            <label class="image_position" for="user_image"><span id="creatorUserImage"></span></label>
-                            <input id="creatorUserEmail" disabled>
-                            <input id="creatorCreatedBy" disabled>
-                            <input id="creatorCreatedAt" disabled>
+                            <label class="image_position" for="user_image">
+                              <span id="creatorUserImage"></span>
+                            </label><br>
+                            <span id="creatorUserEmail" disabled></span><br>
+                            <span id="creatorCreatedBy" disabled></span><br>
+                            <span id="creatorCreatedAt" disabled></span><br>
                           </td>
                           <td id="updatorContent">
-                            <label for="user_image"><span id="updatorUserImage"></span></label>
-                            <input id="updatorUserEmail" disabled>
-                            <input id="updatorUpdateBy" disabled>
-                            <input id="updatorUpdateAt" disabled>
+                            <label for="user_image"><span id="updatorUserImage"></span></label><br>
+                            <span id="updatorUserEmail" disabled></span><br>
+                            <span id="updatorUpdateBy" disabled></span><br>
+                            <span id="updatorUpdateAt" disabled></span><br>
                           </td>
                           <td id="approverContent">
-                            <label for="user_image"><span id="approverUserImage"></span></label>
-                            <input id="approverUserEmail" disabled>
-                            <input id="approverApprover" disabled>
-                            <input id="approverUpdateAt" disabled>
+                            <label for="user_image"><span id="approverUserImage"></span></label><br>
+                            <span id="approverUserEmail" disabled></span><br>
+                            <span id="approverApprover" disabled></span><br>
+                            <span id="approverUpdateAt" disabled></span><br>
                           </td>
                         </tr>
                       </tbody>
@@ -86,7 +88,7 @@
                 </div>
                 <div class="row mt-1">
                   <div class="col-xl-12">
-                    <div class="table-response">
+                    <div class="table-response component-focus">
                       <table class="branch_table brn_info_tb">
                         <thead>
                           <tr>
@@ -95,7 +97,7 @@
                             <th class="branch_search_font label_position"></th>
                             <th class="branch_search_font label_position"></th>
                           </tr>
-                          <tr>
+                          <tr class="heading-row">
                             <th colspan="2" class="branch_info_head"> 
                               Branch Information 
                               <button type="button" class="btn-close cols_btn" data-bs-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
@@ -104,20 +106,36 @@
                         </thead>
                         <tbody class="branch_table_body">
                           <tr class="fist_row">
-                            <td class="first_column"><span class="tb_lb">Branch-ID</span><input type="text" id="brnch_id" disabled></td>
-                            <td class="second_column"><span class="tb_lb">District</span><input type="text" id="district_id" disabled></td>
+                            <td class="first_column">
+                              <span class="tb_lb" id="brnch_id" disabled></span>
+                            </td>
+                            <td class="second_column">
+                              <span class="tb_lb" id="district_id" disabled></span>
+                            </td>
                           </tr>
-                          <tr>
-                            <td class="first_column"><span class="tb_lb">Branch-Name</span><input type="text" id="branch_name" disabled></td>
-                            <td class="second_column"><span class="tb_lb">Upazila</span><input type="text" id="upazila_id" disabled></td>
+                          <tr class="fist_row">
+                            <td class="first_column">
+                              <span class="tb_lb" id="branch_name" disabled></span>
+                            </td>
+                            <td class="second_column">
+                              <span class="tb_lb" id="upazila_id" disabled></span>
+                            </td>
                           </tr>
-                          <tr>
-                            <td class="first_column"><span class="tb_lb">Branch-Type</span><input type="text" id="branch_type" disabled></td>
-                            <td class="second_column"><span class="tb_lb">City-Name</span><input type="text" id="town_name" disabled></td>
+                          <tr class="fist_row">
+                            <td class="first_column">
+                              <span class="tb_lb" id="branch_type" disabled></span>
+                            </td>
+                            <td class="second_column">
+                              <span class="tb_lb" id="town_name" disabled></span>
+                            </td>
                           </tr>
-                          <tr>
-                            <td class="first_column"><span class="tb_lb">Division</span><input type="text" id="division_id" disabled></td>
-                            <td colspan="2" class="second_column"><span class="tb_lb">Loaction</span><input type="text" id="location" disabled></td>
+                          <tr class="fist_row">
+                            <td class="first_column third_column">
+                              <span class="tb_lb" id="division_id" disabled></span>
+                            </td>
+                            <td colspan="2" class="second_column third_column">
+                              <span class="tb_lb" id="location" disabled></span>
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -125,51 +143,51 @@
                   </div>
                 </div>
               </div>
-              <div class="card card-body branch_info_card" id="add_documents" hidden>
+              <div class="card card-body branch_info_card component-focus" id="add_documents" hidden>
                 <div class="row">
-                  <div class="col-xl-5">
-                    <label class="catg_name_label label_position" for="branch-id">Branch-ID</label>
+                  <div class="col-xl-5 component-focus">
+                    <label class="group-field-label label_position" for="branch-id">Branch-ID :</label>
                     <input class="form-control branch_input add_branch_id" type="text" name="branch_id" id="add_branch_id" placeholder="Branch ID" value="" readonly />
                     <span id="savForm_branch_error"></span><span id="updateForm_branch_error" hidden></span>
                   </div>
-                  <div class="col-xl-7">
-                    <label class="catg_name_label label_position" for="district-name">District-Name</label>
+                  <div class="col-xl-7 component-focus">
+                    <label class="group-field-label label_position" for="district-name">District-Name :</label>
                     <input class="form-control branch_input add_district_id" type="text" name="district_name" id="add_district_id" placeholder="District Name" value="" readonly/>
                     <span id="savForm_branch_error2"></span><span id="updateForm_branch_error2" hidden></span>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-xl-5">
-                    <label class="catg_name_label label_position" for="branch-name">Branch-Name</label>
+                  <div class="col-xl-5 component-focus">
+                    <label class="group-field-label label_position" for="branch-name">Branch-Name :</label>
                     <input class="form-control branch_input add_branch_name" type="text" name="branch_name" id="add_branch_name" placeholder="Branch Name" value="" readonly/>
                     <span id="savForm_branch_error3"></span><span id="updateForm_branch_error3" hidden></span>
                   </div>
-                  <div class="col-xl-7">
-                    <label class="catg_name_label label_position" for="upazila-or-thana">Upazila/Thana</label>
+                  <div class="col-xl-7 component-focus">
+                    <label class="group-field-label label_position" for="upazila-or-thana">Upazila/Thana :</label>
                     <input class="form-control branch_input add_upazila_id" type="text" name="upazila_name" id="add_upazila_id" placeholder="Upazila Name" value="" readonly/>
                     <span id="savForm_branch_error4"></span><span id="updateForm_branch_error4" hidden></span>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-xl-5">
-                    <label class="catg_name_label label_position" for="branch-type">Branch-Type</label>
+                  <div class="col-xl-5 component-focus">
+                    <label class="group-field-label label_position" for="branch-type">Branch-Type :</label>
                     <input class="form-control branch_input add_branch_type" type="text" name="branch_type" id="add_branch_type" placeholder="Branch Type" value="" readonly/>
                     <span id="savForm_branch_error5"></span><span id="updateForm_branch_error5" hidden></span>
                   </div>
-                  <div class="col-xl-7">
-                    <label class="catg_name_label label_position" for="city-name">City-Name</label>
+                  <div class="col-xl-7 component-focus">
+                    <label class="group-field-label label_position" for="city-name">City-Name :</label>
                     <input class="form-control branch_input add_town_name" type="text" name="town_name" id="add_town_name" placeholder="City Name" value="" readonly/>
                     <span id="savForm_branch_error6"></span><span id="updateForm_branch_error6" hidden></span>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-xl-5">
-                    <label class="catg_name_label label_position" for="division-name">Division-Name</label>
+                  <div class="col-xl-5 component-focus">
+                    <label class="group-field-label label_position" for="division-name">Division-Name :</label>
                     <input class="form-control branch_input add_division_id" type="text" name="division_name" id="add_division_id" placeholder="Division Name" value="" readonly/>
                     <span id="savForm_branch_error7"></span><span id="updateForm_branch_error7" hidden></span>
                   </div>
-                  <div class="col-xl-7">
-                    <label class="catg_name_label label_position" for="location-name">Location</label>
+                  <div class="col-xl-7 component-focus">
+                    <label class="group-field-label label_position" for="location-name">Location :</label>
                     <input class="form-control branch_input add_location" type="text" name="location" id="add_location" placeholder="Location Name" value="" readonly/>
                     <span id="savForm_branch_error8"></span><span id="updateForm_branch_error8" hidden></span>
                   </div>
@@ -182,7 +200,7 @@
               <p class=""><span id="success_message"></span></p>
             </div>
             <div class="col-xl-6">
-              <p class ="group_action grp_action me-2">
+              <p class ="group_action grp_action component-focus me-2">
                 @foreach($formGroupButtons as $data)
                   <?php
                     $disabledAttr = $data['disabledAttribute'] === 'hidden' ? 'hidden' : '';
@@ -207,7 +225,7 @@
 @include('loader.action-loader')
 
 {{-- start branch change modal --}}
-  <div class="modal fade" id="adminBranchChangeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+  <!-- <div class="modal fade" id="adminBranchChangeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog">
       <div class="modal-content" id="admin_modal_box">
         <div class="modal-header profile_modal_header profilesetting_modal_header">
@@ -252,7 +270,7 @@
                     </select>
                   </div>
                 </div>
-                <!-- Hidden Input Fields for Storing Selected Branch Data -->
+
                 <input type="hidden" id="admin_change_id">
                 <input type="hidden" id="admin_change_branch_id">
                 <input type="hidden" id="admin_change_branch_type">
@@ -275,7 +293,85 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+  <x-Modals.Modal modalParentClass="modal fade" modalChildClass="modal-dialog modal-sm modal-dialog-centered" modalId="adminBranchChangeModal">
+    <x-Modals.SmallModals.SmallModal className="modal-content small_modal" styling="border:none;" smModalId="admin_modal_box">
+      {{-- header --}}
+      <x-Modals.SmallModals.Headers.Header className="modal-header modal-heading" headerId="logoutModal_header">
+        <h5 class="modal-title admin_title head_title font-white branch-skeleton ps-1 pe-1" id="staticBackdropLabel">
+          Admin Branch Change
+        </h5>
+        <button type="button" class="btn-close-modal head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+      </x-Modals.SmallModals.Headers.Header>
+      {{-- body --}}
+      <x-Modals.SmallModals.Bodies.Body className="modal-body center-modal-content">
+        <div class="branch_access">
+          <div class="row profile-heading pb-3">
+            @csrf
+            <div class="action_group first_part branch-content-skeleton">
+              <span class="branch_chang">
+                <label class="catg_name_label" for="mail-transport">Admin-Role</label>
+              </span><br>
+              <div class="chng_brnch">
+                <select type="text" class="form-control form-control-sm role_id select2" name="user_role_id" id="admin_roleID">
+                  <option value="">Select Admin Role</option>
+                </select>
+              </div>
+            </div>
+            <div class="action_group second_part branch-content-skeleton">
+              <span class="branch_chang">
+                <label class="catg_name_label" for="mail-transport">Admin-Email</label>
+              </span><br>
+              <div class="chng_brnch">
+                <select type="text" class="form-control form-control-sm role_id select2" name="user_email_id" id="admin_emailID">
+                  <option value="">Select Admin Email</option>
+                </select>
+              </div>
+            </div>
+            <div class="action_group">
+              <div class="third_part branch-content-footer-skeleton">
+                <span class="branch_chang">
+                  <label class="catg_name_label" for="mail-transport">Branch-Change</label>
+                </span><br>
+                <div class="chng_brnch">
+                  <select type="text" class="form-control form-control-sm role_id select2" name="branch_name" id="admin_branch_name">
+                    <option value="">Select Branch Name</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Hidden Input Fields for Storing Selected Branch Data -->
+              <input type="hidden" id="admin_change_id">
+              <input type="hidden" id="admin_change_branch_id">
+              <input type="hidden" id="admin_change_branch_type">
+              <input type="hidden" id="admin_change_branch_name">
+              <input type="hidden" id="admin_change_division_id">
+              <input type="hidden" id="admin_change_district_id">
+              <input type="hidden" id="admin_change_upazila_id">
+              <input type="hidden" id="admin_change_town_name">
+              <input type="hidden" id="admin_change_location">
+            </div>
+          </div>
+        </div>
+      </x-Modals.SmallModals.Bodies.Body>
+      {{-- footer --}}
+      <x-Modals.SmallModals.Footers.Footer className="modal-footer action_group" footerId="logoutModal_footer">
+        <x-Modals.SmallModals.Buttons.CancelBtn 
+          className="btn btn-sm danger-repl-btn branch-skeleton" 
+          btnId="cancle_change" 
+          lableName="Cancel"
+        />  
+        <x-Modals.SmallModals.Buttons.ConfirmBtn 
+          className="btn btn-sm success-shadow-btn update_confirm branch-skeleton" 
+          btnId="admin_change_btn_confirm" 
+          lableName="Confirm" 
+          lableClass="confirm-btn-text" 
+          spinerClass="confirm-icon"
+        />
+      </x-Modals.SmallModals.Footers.Footer>
+    </x-Modals.SmallModals.SmallModal>
+  </x-Modals.Modal>
 {{-- end branch change modal --}}
 
 {{-- start delete modal --}}

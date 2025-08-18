@@ -309,7 +309,9 @@
             });
         });
 
-        // Search Select User Email
+        // ===============================================
+        // Admin Access Promot (Search Select User Email)
+        // ===============================================
         $('#accessSearch').removeAttr('hidden');
         $(document).on('change', '#select_user_email', function(e){
             e.preventDefault();
@@ -317,6 +319,26 @@
             $('#warning_message').removeClass('warning-message');
             // empty field for admin delete branch
             $("#usrImage, #usrConfrmImage").empty();
+            $("#creatorUserImage").empty();
+            $("#creatorUserEmail").empty();
+            $("#creatorCreatedBy").empty();
+            $("#creatorCreatedAt").empty();
+            $("#updatorUserImage").empty();
+            $("#updatorUserEmail").empty();
+            $("#updatorUpdateBy").empty();
+            $("#updatorUpdateAt").empty();
+            $("#approverUserImage").empty();
+            $("#approverUserEmail").empty();
+            $("#approverApprover").empty();
+            $("#approverUpdateAt").empty();
+            $('#brnch_id').empty();
+            $('#branch_name').empty();
+            $('#branch_type').empty();
+            $('#division_id').empty();
+            $('#district_id').empty();
+            $('#upazila_id').empty();
+            $('#town_name').empty();
+            $('#location').empty();
             $("#usrRole, #usrConfrmRole").empty();
             $("#usrEmail, #usrConfrmEmail").empty();
             $("#admin_branch_id").empty();
@@ -439,12 +461,12 @@
                                     }
                                     $("#creatorUserImage").html(`<img class="user_img rounded-square users_image position" src="${firstUserImage}">`);
         
-                                    $("#creatorUserEmail").val(messages.created_users.email);
-                                    $("#creatorCreatedBy").val(createdByRole);
+                                    $("#creatorUserEmail").append(`<span>${messages.created_users.login_email}</span>`);
+                                    $("#creatorCreatedBy").append(`<span>${createdByRole}</span>`);
                                     if(messages.created_at !== ''){
-                                        $("#creatorCreatedAt").val(formatDate(messages.created_at));
+                                        $("#creatorCreatedAt").append(`<span>${formatDate(messages.created_at)}</span>`);
                                     }else{
-                                        $("#creatorCreatedAt").val('-');
+                                        $("#creatorCreatedAt").append(`<span>${'-'}</span>`);
                                     }
                                 }
                                 if(messages.updated_by !== null){
@@ -479,12 +501,12 @@
                                     }
                                     $("#updatorUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
         
-                                    $("#updatorUserEmail").val((messages.updated_users.email));
-                                    $("#updatorUpdateBy").val(updatedByRole);
+                                    $("#updatorUserEmail").append(`<span>${messages.updated_users.login_email}</span>`);
+                                    $("#updatorUpdateBy").append(`<span>${updatedByRole}</span>`);
                                     if(messages.created_at !== messages.updated_at){
-                                        $("#updatorUpdateAt").val(formatDate(messages.updated_at));
+                                        $("#updatorUpdateAt").append(`<span>${formatDate(messages.updated_at)}</span>`);
                                     }else{
-                                        $("#updatorUpdateAt").val('-');
+                                        $("#updatorUpdateAt").append(`<span>${'-'}</span>`);
                                     }
                                 }else{
                                     $("#updatorContent").attr('hidden', true);
@@ -522,12 +544,12 @@
                                     }
                                     $("#approverUserImage").html(`<img class="user_img rounded-square users_image position" src="${secondUserImage}">`);
         
-                                    $("#approverUserEmail").val(messages.approver_users.email);
-                                    $("#approverApprover").val(approverByRole);
+                                    $("#approverUserEmail").append(`<span>${messages.approver_users.login_email}</span>`);
+                                    $("#approverApprover").append(`<span>${approverByRole}</span>`);
                                     if(messages.approver_date !== null){
-                                        $("#approverUpdateAt").val(formatDate(messages.approver_date));
+                                        $("#approverUpdateAt").append(`<span>${formatDate(messages.approver_date)}</span>`);
                                     }else if(messages.approver_date == null){
-                                        $("#approverUpdateAt").val('-');
+                                        $("#approverUpdateAt").append(`<span>${'-'}</span>`);
                                     }
                                 }else{
                                     $("#approverContent").attr('hidden', true);
@@ -536,14 +558,14 @@
         
                                 $('#branches_id, #admin_delete_id').val(id);
                                 $('#get_branch_id').val(response.messages.branch_id);
-                                $('#brnch_id').val(response.messages.branch_id);
-                                $('#branch_name').val(response.messages.branch_name);
-                                $('#branch_type').val(response.messages.branch_type);
-                                $('#division_id').val(response.messages.division_name);
-                                $('#district_id').val(response.messages.district_name);
-                                $('#upazila_id').val(response.messages.upazila_name);
-                                $('#town_name').val(response.messages.town_name);
-                                $('#location').val(response.messages.location);
+                                $('#brnch_id').append(`<span>Branch-ID : ${response.messages.branch_id}</span>`);
+                                $('#branch_name').append(`<span>Branch-Name : ${response.messages.branch_name}</span>`);
+                                $('#branch_type').append(`<span>Branch-Type : ${response.messages.branch_type}</span>`);
+                                $('#division_id').append(`<span>Division : ${response.messages.division_name}</span>`);
+                                $('#district_id').append(`<span>District : ${response.messages.district_name}</span>`);
+                                $('#upazila_id').append(`<span>Upazila : ${response.messages.upazila_name}</span>`);
+                                $('#town_name').append(`<span>City : ${response.messages.town_name}</span>`);
+                                $('#location').append(`<span>Location : ${response.messages.location}</span>`);
         
                                 $('.user_role_id').val(response.messages.user_role_id).trigger('change.select2');
                                 fetch_user_email_one(response.messages.user_role_id);
@@ -572,7 +594,9 @@
             // fetch_branch_user_email();
         });
 
-        // Add Access
+        // ===============================================
+        // Add Admin Access
+        // ===============================================
         $(document).on('click', '#branch_admin_access_store', function(e){
             e.preventDefault();
 
@@ -728,7 +752,9 @@
             $('#select_email_one').val(null).trigger('change');
         }
 
+        // ===============================================
         // Admin Branch Access
+        // ===============================================
         $(document).on('click', '#access_btn', function(e){
             e.preventDefault();
             $("#savForm_branch_error9").empty();
@@ -885,7 +911,9 @@
             }
         });
 
+        // =========================================
         // Admin Branch Change Modal
+        // =========================================
         $(document).on('click', '#amin_banch_change_btn', function(e){
             e.preventDefault();
             $("#adminBranchChangeModal").modal('hide');
@@ -961,7 +989,9 @@
             });
         }
 
+        // =========================================
         // Branch Change Handle
+        // =========================================
         $(document).on('change', '#admin_branch_name', function(){
             var selectedOption = $(this).find('option:selected');
             // Update hidden inputs with selected option's data attributes
@@ -976,7 +1006,9 @@
 
         });
 
+        // =========================================
         // Confirm Admin Branch Change
+        // =========================================
         $(document).on('click', '#admin_change_btn_confirm', function(e){
             e.preventDefault();
 
