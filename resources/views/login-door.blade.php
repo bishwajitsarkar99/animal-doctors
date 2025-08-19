@@ -182,7 +182,7 @@
             tr.table_head_row {
                 font-family: "Poppins", Sans-serif;
                 color: #333;
-                font-size: 15px;
+                font-size: 12px;
             }
             td.user-login-td {
                 font-family: "Poppins", Sans-serif;
@@ -670,7 +670,7 @@
                     <table>
                         <thead>
                             <tr class="table_head_row form-bottom">
-                                <th class="text-center py-1" colspan="2"><span>Open Door</span></th>
+                                <th class="text-center py-1" colspan="2"><span>Welcome {{setting('company_name')}}</span></th>
                             </tr>
                         </thead>
                         <tbody class="bg-white">

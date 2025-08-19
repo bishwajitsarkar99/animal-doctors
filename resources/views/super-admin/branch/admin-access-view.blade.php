@@ -1,8 +1,7 @@
 <?php
   $formGroupButtons = [
-    ['formGroupButtonLabel'=>'Cancel','formGroupButtonClass'=>'btn btn-sm danger-repl-btn me-5 skeleton-button mt-2', 'formGroupButtonId'=>'cnl_btn', 'formGroupButtonType'=>'reset', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>'hidden'],
+    ['formGroupButtonLabel'=>'Cancel','formGroupButtonClass'=>'btn btn-sm danger-repl-btn skeleton-button mt-2', 'formGroupButtonId'=>'cnl_btn', 'formGroupButtonType'=>'reset', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>'hidden'],
     ['formGroupButtonLabel'=>'Access Promot','formGroupButtonClass'=>'btn btn-sm success-shadow-btn skeleton-button mt-2', 'formGroupButtonId'=>'access_btn', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>'hidden'],
-    ['formGroupButtonLabel'=>'Branch Change','formGroupButtonClass'=>'btn btn-sm success-shadow-btn skeleton-button mt-2', 'formGroupButtonId'=>'amin_banch_change_btn', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>'hidden'],
     ['formGroupButtonLabel'=>'Access Add','formGroupButtonClass'=>'btn btn-sm success-shadow-btn skeleton-button mt-2', 'formGroupButtonId'=>'branch_admin_access_store', 'formGroupButtonType'=>'reset', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>'hidden'],
     ['formGroupButtonLabel'=>'Access Delete','formGroupButtonClass'=>'btn btn-sm success-shadow-btn mt-2', 'formGroupButtonId'=>'access_delete_btn', 'formGroupButtonType'=>'button', 'formGroupButtonSpinerText'=>'', 'groupIconClass'=>'', 'disabledAttribute'=>'hidden'],
   ];
@@ -49,98 +48,107 @@
             </div>
             <div class="col-xl-8">
               <div class="card card-body branch_info_card" id="documents" hidden>
-                <div class="row">
-                  <div class="col-xl-12">
-                    <table class="info_table component-focus">
-                      <thead>
-                        <tr>
-                          <th class="branch_search_font label_position lab_padding">Creator</th>
-                          <th class="branch_search_font label_position lab_padding" id="updatorHead">Updator</th>
-                          <th class="branch_search_font label_position lab_padding" id="approverHead">Approver</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td id="creatorContent">
-                            <label class="image_position" for="user_image">
-                              <span id="creatorUserImage"></span>
-                            </label><br>
-                            <span id="creatorUserEmail" disabled></span><br>
-                            <span id="creatorCreatedBy" disabled></span><br>
-                            <span id="creatorCreatedAt" disabled></span><br>
-                          </td>
-                          <td id="updatorContent">
-                            <label for="user_image"><span id="updatorUserImage"></span></label><br>
-                            <span id="updatorUserEmail" disabled></span><br>
-                            <span id="updatorUpdateBy" disabled></span><br>
-                            <span id="updatorUpdateAt" disabled></span><br>
-                          </td>
-                          <td id="approverContent">
-                            <label for="user_image"><span id="approverUserImage"></span></label><br>
-                            <span id="approverUserEmail" disabled></span><br>
-                            <span id="approverApprover" disabled></span><br>
-                            <span id="approverUpdateAt" disabled></span><br>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                <div class="table-responsive">
+                  <table class="table info_table component-focus" id="branchCreatorTable">
+                    <thead>
+                      <tr>
+                        <th class="branch_search_font label_position head-border lab_padding">
+                          Creator
+                          <div class="col-resizer"></div>
+                          <div class="row-resizer"></div>
+                        </th>
+                        <th class="branch_search_font label_position head-border lab_padding" id="updatorHead">
+                          Updator
+                          <div class="col-resizer"></div>
+                          <div class="row-resizer"></div>
+                        </th>
+                        <th class="branch_search_font label_position head-border lab_padding" id="approverHead">
+                          Approver
+                          <div class="col-resizer"></div>
+                          <div class="row-resizer"></div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td id="creatorContent">
+                          <label class="image_position" for="user_image">
+                            <span id="creatorUserImage"></span>
+                          </label><br>
+                          <span id="creatorUserEmail" disabled></span><br>
+                          <span id="creatorCreatedBy" disabled></span><br>
+                          <span id="creatorCreatedAt" disabled></span><br>
+                          <div class="row-resizer"></div>
+                        </td>
+                        <td id="updatorContent">
+                          <label for="user_image"><span id="updatorUserImage"></span></label><br>
+                          <span id="updatorUserEmail" disabled></span><br>
+                          <span id="updatorUpdateBy" disabled></span><br>
+                          <span id="updatorUpdateAt" disabled></span><br>
+                          <div class="row-resizer"></div>
+                        </td>
+                        <td id="approverContent">
+                          <label for="user_image"><span id="approverUserImage"></span></label><br>
+                          <span id="approverUserEmail" disabled></span><br>
+                          <span id="approverApprover" disabled></span><br>
+                          <span id="approverUpdateAt" disabled></span><br>
+                          <div class="row-resizer"></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-                <div class="row mt-1">
-                  <div class="col-xl-12">
-                    <div class="table-response component-focus">
-                      <table class="branch_table brn_info_tb">
-                        <thead>
-                          <tr>
-                            <th class="branch_search_font label_position"></th>
-                            <th class="branch_search_font label_position"></th>
-                            <th class="branch_search_font label_position"></th>
-                            <th class="branch_search_font label_position"></th>
-                          </tr>
-                          <tr class="heading-row">
-                            <th colspan="2" class="branch_info_head"> 
-                              Branch Information 
-                              <button type="button" class="btn-close cols_btn" data-bs-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody class="branch_table_body">
-                          <tr class="fist_row">
-                            <td class="first_column">
-                              <span class="tb_lb" id="brnch_id" disabled></span>
-                            </td>
-                            <td class="second_column">
-                              <span class="tb_lb" id="district_id" disabled></span>
-                            </td>
-                          </tr>
-                          <tr class="fist_row">
-                            <td class="first_column">
-                              <span class="tb_lb" id="branch_name" disabled></span>
-                            </td>
-                            <td class="second_column">
-                              <span class="tb_lb" id="upazila_id" disabled></span>
-                            </td>
-                          </tr>
-                          <tr class="fist_row">
-                            <td class="first_column">
-                              <span class="tb_lb" id="branch_type" disabled></span>
-                            </td>
-                            <td class="second_column">
-                              <span class="tb_lb" id="town_name" disabled></span>
-                            </td>
-                          </tr>
-                          <tr class="fist_row">
-                            <td class="first_column third_column">
-                              <span class="tb_lb" id="division_id" disabled></span>
-                            </td>
-                            <td colspan="2" class="second_column third_column">
-                              <span class="tb_lb" id="location" disabled></span>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
+                <div class="table-responsive component-focus mt-1">
+                  <table class="branch_table">
+                    <thead>
+                      <tr>
+                        <th class="branch_search_font label_position"></th>
+                        <th class="branch_search_font label_position"></th>
+                        <th class="branch_search_font label_position"></th>
+                        <th class="branch_search_font label_position"></th>
+                      </tr>
+                      <tr>
+                        <th colspan="2" class="branch_info_head"> 
+                          Branch Information 
+                          <button type="button" class="btn-close cols_btn ms-2" data-bs-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="first_column">
+                          <span class="tb_lb" id="brnch_id" disabled></span>
+                        </td>
+                        <td class="second_column">
+                          <span class="tb_lb" id="district_id" disabled></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="first_column">
+                          <span class="tb_lb" id="branch_name" disabled></span>
+                        </td>
+                        <td class="second_column">
+                          <span class="tb_lb" id="upazila_id" disabled></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="first_column">
+                          <span class="tb_lb" id="branch_type" disabled></span>
+                        </td>
+                        <td class="second_column">
+                          <span class="tb_lb" id="town_name" disabled></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="first_column">
+                          <span class="tb_lb" id="division_id" disabled></span>
+                        </td>
+                        <td colspan="2" class="second_column">
+                          <span class="tb_lb" id="location" disabled></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
               <div class="card card-body branch_info_card component-focus" id="add_documents" hidden>
@@ -196,10 +204,16 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-xl-6 action_message mb-2">
-              <p class=""><span id="success_message"></span></p>
+            <div class="col-xl-8 mb-2">
+              <x-Modals.SmallModals.Buttons.ConfirmBtn 
+                className="btn btn-sm success-shadow-btn skeleton-button mt-2 ms-2" 
+                btnId="amin_banch_change_btn" 
+                lableName="Branch Change" 
+                lableClass="confirm-btn-text" 
+                spinerClass="confirm-icon"
+              />
             </div>
-            <div class="col-xl-6">
+            <div class="col-xl-4">
               <p class ="group_action grp_action component-focus me-2">
                 @foreach($formGroupButtons as $data)
                   <?php
@@ -225,120 +239,39 @@
 @include('loader.action-loader')
 
 {{-- start branch change modal --}}
-  <!-- <div class="modal fade" id="adminBranchChangeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog">
-      <div class="modal-content" id="admin_modal_box">
-        <div class="modal-header profile_modal_header profilesetting_modal_header">
-          <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss branch_name_heading hd-branch-skeleton branch_name_hd" id="staticBackdropLabel">
-            Admin Branch Change
-          </h5>
-          <button type="button" class="btn-close btn-btn-sm head_btn branch-skeleton cancel_change_box" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
-        </div>
-
-        <div class="modal-body profile-body pb-1">
-          <div class="branch_access">
-            <div class="row profile-heading pb-3">
-              @csrf
-              <div class="action_group first_part branch-content-skeleton">
-                <span class="branch_chang">
-                  <label class="catg_name_label" for="mail-transport">Admin-Role</label>
-                </span><br>
-                <div class="chng_brnch">
-                  <select type="text" class="form-control form-control-sm role_id select2" name="user_role_id" id="admin_roleID">
-                    <option value="">Select Admin Role</option>
-                  </select>
-                </div>
-              </div>
-              <div class="action_group second_part branch-content-skeleton">
-                <span class="branch_chang">
-                  <label class="catg_name_label" for="mail-transport">Admin-Email</label>
-                </span><br>
-                <div class="chng_brnch">
-                  <select type="text" class="form-control form-control-sm role_id select2" name="user_email_id" id="admin_emailID">
-                    <option value="">Select Admin Email</option>
-                  </select>
-                </div>
-              </div>
-              <div class="action_group">
-                <div class="third_part branch-content-footer-skeleton">
-                  <span class="branch_chang">
-                    <label class="catg_name_label" for="mail-transport">Branch-Change</label>
-                  </span><br>
-                  <div class="chng_brnch">
-                    <select type="text" class="form-control form-control-sm role_id select2" name="branch_name" id="admin_branch_name">
-                      <option value="">Select Branch Name</option>
-                    </select>
-                  </div>
-                </div>
-
-                <input type="hidden" id="admin_change_id">
-                <input type="hidden" id="admin_change_branch_id">
-                <input type="hidden" id="admin_change_branch_type">
-                <input type="hidden" id="admin_change_branch_name">
-                <input type="hidden" id="admin_change_division_id">
-                <input type="hidden" id="admin_change_district_id">
-                <input type="hidden" id="admin_change_upazila_id">
-                <input type="hidden" id="admin_change_town_name">
-                <input type="hidden" id="admin_change_location">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer profile_modal_footer action_group">
-          <button type="button" class="btn btn-sm cgt_cancel_btn delete_cancel mn-branch-skeleton back_change_box" id="cancle_change" data-bs-dismiss="modal">Access Cancel</button>
-          <button id="admin_change_btn_confirm" class="btn btn-sm cgt_btn btn_focus admin_change_btn_confirm mn-branch-skeleton">
-            <span class="confirm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-            <span class="confirm-btn-text">Confirm</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div> -->
   <x-Modals.Modal modalParentClass="modal fade" modalChildClass="modal-dialog modal-sm modal-dialog-centered" modalId="adminBranchChangeModal">
     <x-Modals.SmallModals.SmallModal className="modal-content small_modal" styling="border:none;" smModalId="admin_modal_box">
       {{-- header --}}
       <x-Modals.SmallModals.Headers.Header className="modal-header modal-heading" headerId="logoutModal_header">
-        <h5 class="modal-title admin_title head_title font-white branch-skeleton ps-1 pe-1" id="staticBackdropLabel">
+        <h5 class="modal-title change_title font-white branch-skeleton ps-1 pe-1" id="staticBackdropLabel">
           Admin Branch Change
         </h5>
-        <button type="button" class="btn-close-modal head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
+        <button type="button" class="btn-close-modal head_btn" data-bs-dismiss="modal" aria-label="Close" 
           data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
         </button>
       </x-Modals.SmallModals.Headers.Header>
       {{-- body --}}
       <x-Modals.SmallModals.Bodies.Body className="modal-body center-modal-content">
-        <div class="branch_access">
+        <div class="branch_access branch_change_access branch-content-skeleton">
           <div class="row profile-heading pb-3">
             @csrf
-            <div class="action_group first_part branch-content-skeleton">
-              <span class="branch_chang">
-                <label class="catg_name_label" for="mail-transport">Admin-Role</label>
-              </span><br>
+            <div class="first_part">
               <div class="chng_brnch">
-                <select type="text" class="form-control form-control-sm role_id select2" name="user_role_id" id="admin_roleID">
-                  <option value="">Select Admin Role</option>
-                </select>
+                <label class="group-field-label" for="mail-transport">Admin-Role</label>
+                <x-Dropdown.DropdownMenu menuType="text" menuClass="form-control form-control-sm role_id select2" menuName="user_role_id" menuId="admin_roleID" menuSelectLabel="Select Admin Role"></x-Dropdown.DropdownMenu>
               </div>
             </div>
-            <div class="action_group second_part branch-content-skeleton">
-              <span class="branch_chang">
-                <label class="catg_name_label" for="mail-transport">Admin-Email</label>
-              </span><br>
+            <div class="second_part">
               <div class="chng_brnch">
-                <select type="text" class="form-control form-control-sm role_id select2" name="user_email_id" id="admin_emailID">
-                  <option value="">Select Admin Email</option>
-                </select>
+                <label class="group-field-label" for="mail-transport">Admin-Email</label>
+                <x-Dropdown.DropdownMenu menuType="text" menuClass="form-control form-control-sm role_id select2" menuName="user_email_id" menuId="admin_emailID" menuSelectLabel="Select Admin Email"></x-Dropdown.DropdownMenu>
               </div>
             </div>
-            <div class="action_group">
-              <div class="third_part branch-content-footer-skeleton">
-                <span class="branch_chang">
-                  <label class="catg_name_label" for="mail-transport">Branch-Change</label>
-                </span><br>
+            <div>
+              <div class="third_part">
                 <div class="chng_brnch">
-                  <select type="text" class="form-control form-control-sm role_id select2" name="branch_name" id="admin_branch_name">
-                    <option value="">Select Branch Name</option>
-                  </select>
+                  <label class="group-field-label" for="mail-transport">Branch-Change</label>
+                  <x-Dropdown.DropdownMenu menuType="text" menuClass="form-control form-control-sm role_id select2" menuName="branch_name" menuId="admin_branch_name" menuSelectLabel="Select Branch Name"></x-Dropdown.DropdownMenu>
                 </div>
               </div>
               <!-- Hidden Input Fields for Storing Selected Branch Data -->
@@ -358,12 +291,12 @@
       {{-- footer --}}
       <x-Modals.SmallModals.Footers.Footer className="modal-footer action_group" footerId="logoutModal_footer">
         <x-Modals.SmallModals.Buttons.CancelBtn 
-          className="btn btn-sm danger-repl-btn branch-skeleton" 
+          className="btn btn-sm danger-repl-btn" 
           btnId="cancle_change" 
           lableName="Cancel"
         />  
         <x-Modals.SmallModals.Buttons.ConfirmBtn 
-          className="btn btn-sm success-shadow-btn update_confirm branch-skeleton" 
+          className="btn btn-sm success-shadow-btn update_confirm" 
           btnId="admin_change_btn_confirm" 
           lableName="Confirm" 
           lableClass="confirm-btn-text" 
@@ -375,28 +308,30 @@
 {{-- end branch change modal --}}
 
 {{-- start delete modal --}}
-  <div class="modal fade" id="delete_admin_branch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog">
-      <div class="modal-content" id="admin_modal_box">
-        <div class="modal-header profile_modal_header profilesetting_modal_header">
-          <span><div id="active_loader" class="loader_chart mt-1"></div></span>
-          <h5 class="modal-title admin_title head_title ps-1 pe-1 font-effect-emboss branch_name_head hedng hd-branch-skeleton" id="staticBackdropLabel"></h5>
-          <button type="button" class="btn-close btn-btn-sm hedng_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div></div>'></button>
-        </div>
-
-        <div class="modal-body profile-body pb-1">
+  <x-Modals.Modal modalParentClass="modal fade" modalChildClass="modal-dialog modal-sm modal-dialog-centered" modalId="delete_admin_branch">
+    <x-Modals.SmallModals.SmallModal className="modal-content small_modal" styling="border:none;" smModalId="admin_modal_box">
+      {{-- header --}}
+      <x-Modals.SmallModals.Headers.Header className="modal-header modal-heading" headerId="logoutModal_header">
+        <h5 class="modal-title head_title font-white branch_name_head branch-skeleton ps-1 pe-1" id="staticBackdropLabel"></h5>
+        <button type="button" class="btn-close-modal head_btn" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+      </x-Modals.SmallModals.Headers.Header>
+      {{-- body --}}
+      <x-Modals.SmallModals.Bodies.Body className="modal-body center-modal-content">
+        <div class="branch_access delete-content">
           <div class="row profile-heading pb-3">
             <div class="col-xl-12">
-              <div class="form-group branch-skeleton" id="load_id">
-                <div class="action_group group">
-                  <span id="usrImage"></span>
-                  <span id="usrRole"></span>
-                  <span id="usrEmail"></span>
+              <div class="form-group" id="load_id">
+                <div>
+                  <span class="usrImage mini_cricle_skeletone" id="usrImage"></span><br>
+                  <span class="group-field branch-line-content-skeleton" id="usrRole"></span><br>
+                  <span class="group-field branch-line-content-skeleton" id="usrEmail"></span>
                 </div>
-                <label class="label_user_edit" id="cate_delete" for="id">
+                <label class="group-field branch-line-content-skeleton" id="cate_delete" for="id">
                   Branch-ID : <span id="admin_branch_id"></span>
                 </label><br><br>
-                <label class="label_user_edit" id="cate_delete2">Are you sure, Would you like to delete <span class="highlight_branch">branch-id: <span id="branch_delete_id"></span></span> , permanently?</label>
+                <label class="group-field branch-line-content-skeleton" id="cate_delete2">Are you sure, Would you like to delete branch access (<span class="group-field">branch-id : <span id="branch_delete_id"></span></span>) , permanently?</label>
                 <!-- Hidden Input Fields for Storing Selected Branch Data -->
                 <input type="hidden" id="admin_delete_id">
                 <input type="hidden" id="admin_delete_branch_id">
@@ -404,60 +339,74 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer profile_modal_footer">
-          <p id="btn_group2">
-            <a type="button" class="btn btn-success modal_button logout_button yes_button branch-delete-skeleton" id="yesButton">
-              <span class="loading-yes-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" hidden></span>
-              <span class="btn-text">{{__('translate.Yes')}}</span>
-            </a>
-          </p>
-          <p id="btn_group">
-            <a type="button" class="btn btn-danger modal_button logout_button branch-delete-skeleton" data-bs-dismiss="modal" id="noButton">No</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+      </x-Modals.SmallModals.Bodies.Body>
+      {{-- footer --}}
+      <x-Modals.SmallModals.Footers.Footer className="modal-footer action_group" footerId="logoutModal_footer">
+        <x-Modals.SmallModals.Buttons.CancelBtn 
+          className="btn btn-sm danger-repl-btn" 
+          btnId="noButton" 
+          lableName="No"
+        />  
+        <x-Modals.SmallModals.Buttons.ConfirmBtn 
+          className="btn btn-sm success-shadow-btn update_confirm" 
+          btnId="yesButton" 
+          lableName="Yes" 
+          lableClass="confirm-btn-text" 
+          spinerClass="confirm-icon"
+        />
+      </x-Modals.SmallModals.Footers.Footer>
+    </x-Modals.SmallModals.SmallModal>
+  </x-Modals.Modal>
 {{-- end delete modal --}}
 
 {{-- start delete confirm modal --}}
-  <div class="modal fade" id="delete_admin_confirm_branch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-      <div class="modal-content small_modal" style="border:none;" id="admin_modal_box">
-        <div class="modal-header" id="logoutModal_header">
-          <span class="modal-title admin_title scan confirm_title branch-skeleton pt-1">
-            <span id="usrConfrmImage"></span>
-            <span id="usrConfrmRole"></span>
-            <span id="usrConfrmEmail"></span>
-          </span>
-          <button type="button" class="btn-close btn-btn-sm head_btn2 branch-skeleton back_btn" data-bs-dismiss="modal" aria-label="Close" 
-            data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
-          </button>
-          </div>
-          <div class="modal-body" id="logoutModal_body">
-            <p class="admin_paragraph branch-skeleton" style="text-align:center;" id="delete_text_message">
-              <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, delete or cancel ? </label>
-            </p>
-          </div>
-          <div class="modal-footer" id="logoutModal_footer">
-            <button type="button" class="btn btn-sm modal_button delet_btn_user btn_focus branch-skeleton delete_branch" id="delete_branch">
-              <span class="delete-confrm-icon spinner-border spinner-border-sm text-white" style="color:white;opacity:1;width:1em;height:1em;" role="status" aria-hidden="true" hidden></span>
-              <span class="delete-confrm-btn-text">Confirm Delete</span>
-            </button>
-            <button type="button" class="btn btn-sm modal_button delete_cancel btn_focus branch-skeleton" id="cate_delete3" data-bs-dismiss="modal">Cancel</button>
-          </div>    
+  <x-Modals.Modal modalParentClass="modal fade" modalChildClass="modal-dialog modal-sm modal-dialog-centered" modalId="delete_admin_confirm_branch">
+    <x-Modals.SmallModals.SmallModal className="modal-content small_modal" styling="border:none;" smModalId="admin_modal_box">
+      {{-- header --}}
+      <x-Modals.SmallModals.Headers.Header className="modal-header modal-heading" headerId="logoutModal_header">
+        <h5 class="modal-title font-white confrim__head branch-skeleton ps-1 pe-1" id="staticBackdropLabel">
+          Confirm Delete
+        </h5>
+        <button type="button" class="btn-close-modal head_btn" data-bs-dismiss="modal" aria-label="Close" 
+          data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
+        </button>
+      </x-Modals.SmallModals.Headers.Header>
+      {{-- body --}}
+      <x-Modals.SmallModals.Bodies.Body className="modal-body center-modal-content">
+        <div class="branch_access delete-content">
+          <span class="usrConfrmImage cricle_skeletone" id="usrConfrmImage"></span>
+          <span class="block_title branch-line-content-skeleton" id="usrConfrmRole"></span><br>
+          <span class="block_title branch-line-content-skeleton" id="usrConfrmEmail"></span><br>
+          <p class="admin_paragraph branch-skeleton" id="delete_text_message">
+            <label class="label_user_edit" id="cate_confirm" for="id">Are you confirm, delete or cancel ? </label>
+          </p>
         </div>
-      </div>
-    </div>
-  </div>
+      </x-Modals.SmallModals.Bodies.Body>
+      {{-- footer --}}
+      <x-Modals.SmallModals.Footers.Footer className="modal-footer action_group" footerId="logoutModal_footer">
+        <x-Modals.SmallModals.Buttons.CancelBtn 
+          className="btn btn-sm danger-repl-btn" 
+          btnId="cancle_delete" 
+          lableName="Cancel"
+        />  
+        <x-Modals.SmallModals.Buttons.ConfirmBtn 
+          className="btn btn-sm success-shadow-btn update_confirm" 
+          btnId="delete_branch" 
+          lableName="Confirm" 
+          lableClass="confirm-btn-text" 
+          spinerClass="confirm-icon"
+        />
+      </x-Modals.SmallModals.Footers.Footer>
+    </x-Modals.SmallModals.SmallModal>
+  </x-Modals.Modal>
 {{-- end delete confirm modal --}}
 
+<!-- Tostar Message Show -->
+<x-TostarMessage.Tostar messageId="toast-body-message" tostarId="liveToast" />
 @endsection
 
 @section('css')
-<!-- <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css"> -->
 <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/branch/branch.css">
-<!-- <link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css"> -->
 <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 @endsection
 
@@ -468,8 +417,6 @@
 @include('super-admin.branch.ajax.admin-access-ajax')
 <!-- jQuery UI Auto-Complete or Date Picker -->
 <script src="{{asset('backend_asset')}}/support_asset/date-picker/jquery/jquery-ui.min.js"></script>
-<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
-<script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 
 <script>
   // skeleton

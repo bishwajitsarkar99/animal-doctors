@@ -1204,6 +1204,12 @@ button.btn.btn-sm.danger-repl-btn:hover{
   color: #333;
   margin-left: 8px;
 }
+.group-field{
+  font-family: var(--component-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
 .text_label{
   font-family: var(--component-font-family);
   font-size: 12px;

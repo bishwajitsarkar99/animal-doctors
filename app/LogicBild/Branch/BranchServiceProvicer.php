@@ -1036,7 +1036,7 @@ class BranchServiceProvicer
 
     /**
      * =======================================
-     * Handle admin branch access view.
+     * Handle Branch Data Fetch.
      * =======================================
     */
     public function branchDataFetchs(Request $request)
@@ -1056,7 +1056,7 @@ class BranchServiceProvicer
 
     /**
      * =========================================
-     * Handle admin branch access view.
+     * Handle User Branch Data Fetch.
      * =========================================
     */
     public function userBranchDataFetchs(Request $request)
@@ -1110,7 +1110,7 @@ class BranchServiceProvicer
 
     /**
      * ========================================
-     * Handle admin branch fetch view.
+     * Handle admin branch change Fetch.
      * ========================================
     */
     public function adminBranchChangesFetch(Request $request)
@@ -1157,7 +1157,7 @@ class BranchServiceProvicer
 
     /**
      * ==========================================
-     * Handle admin branch change view.
+     * Handle admin branch change.
      * ==========================================
     */
     public function adminBranchChanges(Request $request, $id)
@@ -1323,7 +1323,7 @@ class BranchServiceProvicer
 
     /**
      * ========================================
-     * Handle admin branch access.
+     * Handle add admin branch access.
      * ========================================
     */
     public function branchAdminAcessStore(Request $request)
@@ -1388,7 +1388,7 @@ class BranchServiceProvicer
 
     /**
      * =========================================
-     * Handle admin branch access.
+     * Handle admin branch access promot.
      * =========================================
     */
     public function accessBranchAdmin(Request $request)
@@ -1458,30 +1458,10 @@ class BranchServiceProvicer
 
         return response()->json([
             'status' => 202,
-            'messages' => 'The branch access has been updated successfully.',
+            'messages' => 'Branch access has been promoted successfully.',
         ], 202);
     }
-
-    /**
-     * ================================================
-     * Handle Route ID Generate user branch access.
-     * ================================================
-    */
-    public function redirectWithRandomUserBranchAccessId()
-    {
-        $idRange = 30; // Random 30-character string
-        $random = Str::random($idRange);
-        session(['valid_branch_random' => $random]);
-
-        $page_authorize = 1; // or 0 based on logic
-
-        return redirect()->route('branch_access_permission.view', [
-            'random' => $random,
-            'page_authorize' => $page_authorize
-        ]);
-    }
-
-
+    
 
     // =====================================================================
     /**
