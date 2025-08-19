@@ -8,7 +8,7 @@
     // ========================================================
     // Branch Access Creator, Updator and Approver Table Resize
     // ========================================================
-    resize('branchCreatorTable', 'row-resizer', 'col-resizer');
+    resize('branchCreatorTable', 'col-resizer', 'row-resizer');
     applySavedColumnOrder('branchCreatorTable');
 
     $(document).ready(function(){

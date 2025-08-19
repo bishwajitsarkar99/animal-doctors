@@ -1143,7 +1143,10 @@ th.branch_search_font{
     background: white;
 }
 th.head-border{
-    border: 1px solid rgba(0,123,255,0.2);
+    border: 1px solid rgba(0, 123, 255, 0.1);
+}
+td.border-cell{
+   border: 1px solid rgba(0, 123, 255, 0.1); 
 }
 th.branch_info_head{
     font-size: 12px;
@@ -1601,10 +1604,7 @@ span.tb_lb {
     /* box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 16px 0px; */
     border: none;
     border-radius: 5px;
-    transform: translate(-50%, -50%);
     position: relative;
-    top: 48%;
-    left: 50%;
     width: 100%;
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     animation: slideIn 0.3s ease-out;

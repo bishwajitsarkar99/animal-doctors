@@ -48,55 +48,63 @@
             </div>
             <div class="col-xl-8">
               <div class="card card-body branch_info_card" id="documents" hidden>
-                <div class="table-responsive">
-                  <table class="table info_table component-focus" id="branchCreatorTable">
-                    <thead>
-                      <tr>
-                        <th class="branch_search_font label_position head-border lab_padding">
-                          Creator
-                          <div class="col-resizer"></div>
-                          <div class="row-resizer"></div>
-                        </th>
-                        <th class="branch_search_font label_position head-border lab_padding" id="updatorHead">
-                          Updator
-                          <div class="col-resizer"></div>
-                          <div class="row-resizer"></div>
-                        </th>
-                        <th class="branch_search_font label_position head-border lab_padding" id="approverHead">
-                          Approver
-                          <div class="col-resizer"></div>
-                          <div class="row-resizer"></div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td id="creatorContent">
-                          <label class="image_position" for="user_image">
-                            <span id="creatorUserImage"></span>
-                          </label><br>
-                          <span id="creatorUserEmail" disabled></span><br>
-                          <span id="creatorCreatedBy" disabled></span><br>
-                          <span id="creatorCreatedAt" disabled></span><br>
-                          <div class="row-resizer"></div>
-                        </td>
-                        <td id="updatorContent">
-                          <label for="user_image"><span id="updatorUserImage"></span></label><br>
-                          <span id="updatorUserEmail" disabled></span><br>
-                          <span id="updatorUpdateBy" disabled></span><br>
-                          <span id="updatorUpdateAt" disabled></span><br>
-                          <div class="row-resizer"></div>
-                        </td>
-                        <td id="approverContent">
-                          <label for="user_image"><span id="approverUserImage"></span></label><br>
-                          <span id="approverUserEmail" disabled></span><br>
-                          <span id="approverApprover" disabled></span><br>
-                          <span id="approverUpdateAt" disabled></span><br>
-                          <div class="row-resizer"></div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="table-container" style="position: relative;">
+                  <div class="table-responsive">
+                    <table class="table info_table component-focus" id="branchCreatorTable">
+                      <thead>
+                        <tr>
+                          <th class="branch_search_font label_position head-border lab_padding">
+                            <span>Creator</span>
+                            <div class="col-resizer"></div>
+                            <div class="row-resizer"></div>
+                          </th>
+                          <th class="branch_search_font label_position head-border lab_padding" id="updatorHead">
+                            <span>Updator</span>
+                            <div class="col-resizer"></div>
+                            <div class="row-resizer"></div>
+                          </th>
+                          <th class="branch_search_font label_position head-border lab_padding" id="approverHead">
+                            <span>Approver</span>
+                            <div class="col-resizer"></div>
+                            <div class="row-resizer"></div>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="border-cell" id="creatorContent">
+                            <span>
+                              <label class="image_position" for="user_image">
+                                <span id="creatorUserImage"></span>
+                              </label><br>
+                              <span id="creatorUserEmail" disabled></span><br>
+                              <span id="creatorCreatedBy" disabled></span><br>
+                              <span id="creatorCreatedAt" disabled></span><br>
+                            </span>
+                            <div class="row-resizer"></div>
+                          </td>
+                          <td class="border-cell" id="updatorContent">
+                            <span>
+                              <label for="user_image"><span id="updatorUserImage"></span></label><br>
+                              <span id="updatorUserEmail" disabled></span><br>
+                              <span id="updatorUpdateBy" disabled></span><br>
+                              <span id="updatorUpdateAt" disabled></span><br>
+                            </span>
+                            <div class="row-resizer"></div>
+                          </td>
+                          <td class="border-cell" id="approverContent">
+                            <span>
+                              <label for="user_image"><span id="approverUserImage"></span></label><br>
+                              <span id="approverUserEmail" disabled></span><br>
+                              <span id="approverApprover" disabled></span><br>
+                              <span id="approverUpdateAt" disabled></span><br>
+                            </span>
+                            <div class="row-resizer"></div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
                 <div class="table-responsive component-focus mt-1">
                   <table class="branch_table">
