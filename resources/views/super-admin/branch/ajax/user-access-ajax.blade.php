@@ -1,7 +1,19 @@
 <script type="module">
-    import { currentDate, formatDate } from "/module/module-min-js/helper-function-min.js";
-    import { buttonLoader , removeAttributeOrClass, addAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
-    import { initializeMenuEvents } from '/module/module-min-js/menuEvents-min.js';
+    import { 
+        currentDate, formatDate ,
+        buttonLoader , removeAttributeOrClass, 
+        addAttributeOrClass, initializeMenuEvents, 
+        resize, applySavedColumnOrder
+    } from "/module/backend-module/backend-module-min.js";
+    // import { buttonLoader , removeAttributeOrClass, addAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
+    // import { initializeMenuEvents } from '/module/module-min-js/menuEvents-min.js';
+
+    // ========================================================
+    // Branch Info Table Resize
+    // ========================================================
+    resize('userBranchInfosTable', 'col-resizer', 'row-resizer');
+    applySavedColumnOrder('userBranchInfosTable');
+
     buttonLoader();
 
     $(document).ready(function(){
@@ -234,7 +246,9 @@
             });
         }
         
+        // ========================================
         // Search Select Dropdown
+        // ========================================
         $(document).on('change', '#search_branch, #search_branch_all', function(e){
             e.preventDefault();
             var select = $(this).val();
@@ -293,16 +307,25 @@
                             $("#add_accss").removeAttr('hidden');
 
                             const messages = response.messages;
-    
+
                             $('#branches_id').val(id);
-                            $('.edit_branch_id').val(response.messages.branch_id);
-                            $('.edit_branch_type').val(response.messages.branch_type);
-                            $('.edit_branch_name').val(response.messages.branch_name);
-                            $('.edit_division_id').val(response.messages.divisions.division_name);
-                            $('.edit_district_id').val(response.messages.districts.district_name);
-                            $('.edit_upazila_id').val(response.messages.thana_or_upazilas.thana_or_upazila_name);
-                            $('.edit_town_name').val(response.messages.town_name);
-                            $('.edit_location').val(response.messages.location);
+                            const branchId = $("#brnch_id");
+                            branchId.append(`Branch-ID : <span>${response.messages.branch_id}</span>`);
+                            const branchType = $("#branch_type");
+                            branchType.append(`Branch-Type : <span>${response.messages.branch_type}</span>`);
+                            const branchName = $("#branch_name");
+                            branchName.append(`Branch-Name : <span>${response.messages.branch_name}</span>`);
+                            const division = $("#division_id");
+                            division.append(`Division : <span>${response.messages.divisions.division_name}</span>`);
+                            const District = $("#district_id");
+                            District.append(`District : <span>${response.messages.districts.district_name}</span>`);
+                            const updazila = $("#upazila_id");
+                            updazila.append(`Upazila/Thana : <span>${response.messages.thana_or_upazilas.thana_or_upazila_name}</span>`);
+                            const city = $("#town_name");
+                            city.append(`City-Name : <span>${response.messages.town_name}</span>`);
+                            const location = $("#location");
+                            location.append(`Location : <span>${response.messages.location}</span>`);
+    
                             // Modal Form
                             $('#add_branches_id').val(id); 
                             $('#add_branch_id').val(response.messages.branch_id);

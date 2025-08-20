@@ -2,22 +2,20 @@
 @section('content')
 @include('backend.layouts.dashboard-components._navbar')
 
-  <div class="container">
-    <ul class="nav nav-tabs tab_bg" role="tablist" style="background:white;">
-      <li class="nav-item tab-skeletone">
-        <a class="nav-link branch active home-text" data-bs-toggle="tab" data-url="#home" id="tabHome"> Create Access</a>
-      </li>
-      <li class="nav-item tab-skeletone">
-        <a class="nav-link branch" data-bs-toggle="tab" data-url="#userBranchPermission" id="tabAccess" hidden>Access Permission</a>
-      </li>
-    </ul>
-    <div class="tab-content" id="showCard" style="background:white;padding-bottom:15px;">
-      <div id="home" class="container tab-pane active">
-        @include('super-admin.branch.create-user-branch-access')
-      </div>
-      <div id="userBranchPermission" class="container tab-pane">
-        @include('super-admin.branch.user-branch-access-permission')
+  <ul class="nav nav-tabs tab_bg" role="tablist" style="background:white;">
+    <li class="nav-item tab-skeletone">
+      <a class="nav-link branch active home-text" data-bs-toggle="tab" data-url="#home" id="tabHome"> Create Access</a>
+    </li>
+    <li class="nav-item tab-skeletone">
+      <a class="nav-link branch ms-1" data-bs-toggle="tab" data-url="#userBranchPermission" id="tabAccess" hidden>Access Permission</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="showCard" style="background:white;padding-bottom:15px;">
+    <div id="home" class="container tab-pane active">
+      @include('super-admin.branch.create-user-branch-access')
     </div>
+    <div id="userBranchPermission" class="container tab-pane">
+      @include('super-admin.branch.user-branch-access-permission')
   </div>
   @include('loader.action-loader')
   {{-- start user access action modal --}}
