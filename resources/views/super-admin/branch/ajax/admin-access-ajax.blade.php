@@ -10,6 +10,11 @@
     // ========================================================
     resize('branchCreatorTable', 'col-resizer', 'row-resizer');
     applySavedColumnOrder('branchCreatorTable');
+    // ========================================================
+    // Branch Info Table Resize
+    // ========================================================
+    resize('branchInfosTable', 'col-resizer', 'row-resizer');
+    applySavedColumnOrder('branchInfosTable');
 
     $(document).ready(function(){
         // Initialize role fetch
@@ -242,6 +247,7 @@
 
         // Sarch branch name for add access
         $('#adminEmail').removeAttr('hidden');
+        $("#amin_banch_change_btn").removeClass('display_none');
         $(document).on('change', '#select_branch_search', function(e){
             e.preventDefault();
             $('#warning_message').html("");
@@ -259,6 +265,7 @@
                 $("#adminStTwo").attr('hidden', true);
                 $("#admin_role").attr('hidden', true);
                 $("#admin_email").attr('hidden', true);
+                $("#amin_banch_change_btn").removeClass('display_none');
                 $('#adminEmail').removeAttr('hidden');
                 $('#admin_approval_status').prop('checked', false);
                 $('.grp_action').addClass('group_action').removeClass('right-side-btn');
@@ -271,6 +278,7 @@
                 $("#access_btn").attr('hidden', true);
                 $('#access_delete_btn').attr('hidden', true);
                 $('.grp_action').removeClass('group_action').addClass('right-side-btn');
+                $("#amin_banch_change_btn").addClass('display_none');
             }
             $.ajax({
                 type: "GET",
@@ -374,6 +382,7 @@
                 $('#admin_email').attr('hidden', true);
                 $('#accessSearch').removeAttr('hidden');
                 $('#adminstatus').attr('hidden', true);
+                $("#amin_banch_change_btn").removeClass('display_none');
 
                 $("#adminSt").attr('hidden', true);
                 $("#adminStTwo").attr('hidden', true);
@@ -387,6 +396,7 @@
                 $('#admin_role').removeAttr('hidden');
                 $('#accessSearch').attr('hidden', true);
                 $("#branch_admin_access_store").attr('hidden', true);
+                $("#amin_banch_change_btn").addClass('display_none');
             }
             
             $.ajax({
@@ -1170,7 +1180,7 @@
                         }
                         ,
                         {
-                            selector: '.group-field',
+                            selector: '.text-field',
                             type: 'class',
                             name: 'branch-line-content-skeleton'
                         }
@@ -1191,9 +1201,9 @@
         $(document).on('click', '#yesButton', function(e){
             e.preventDefault();
             // var id = $("#branch_delete_id").val();
-            $(".usrConfrmRole").removeClass('word_space').addClass('word_title');
-            $(".usrConfrmEmail").removeClass('word_space').addClass('word_title');
-            $(".usrConfrmImage").removeClass('word_space').addClass('word_title');
+            $(".usrConfrmRole").removeClass('word_space');
+            $(".usrConfrmEmail").removeClass('word_space');
+            $(".usrConfrmImage").removeClass('word_space');
             $("#delete_admin_branch").modal('hide');
             $("#accessconfirmbranch").modal('show');
             $("#loadingProgress").removeAttr('hidden');

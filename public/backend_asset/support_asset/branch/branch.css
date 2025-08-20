@@ -135,11 +135,107 @@ button#searchToast {
     font-weight: 700;
     font-family: var(--nav-font-family);
 }
+.label-field {
+    font-family: var(--nav-font-family);
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    margin-left: 8px;
+}
+.th-bg {
+    background-color: azure !important;
+}
+td.first-init-column-border-cell{
+    border-left: 1px solid rgba(0, 123, 255, 0.1);
+    border-right: 1px solid rgba(0, 123, 255, 0.2);
+    border-top: 1px solid rgba(0, 123, 255, 0.1);
+    border-bottom: 1px solid white;
+}
+td.second-init-column-border-cell{
+    border-top: 1px solid rgba(0, 123, 255, 0.1);
+    border-right: 1px solid rgba(0, 123, 255, 0.1);
+    border-left: 1px solid rgba(0, 123, 255, 0.1);
+    border-bottom: 1px solid white;
+}
+td.first-column-border-cell {
+    border-left: 1px solid rgba(0, 123, 255, 0.1);
+    border-right: 1px solid rgba(0, 123, 255, 0.2);
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+td.second-column-border-cell {
+    border-top: 1px solid white;
+    border-right: 1px solid rgba(0, 123, 255, 0.1);
+    border-left: 1px solid rgba(0, 123, 255, 0.1);
+    border-bottom: 1px solid white;
+}
 .responsive-card{
     max-height: 400px;
     overflow-y: auto;
     overflow-x: auto;
 }
+.table-responsive{
+    overflow-y: auto !important;
+    overflow-x: auto !important;
+    max-height: 400px;
+    border: 1px ridge rgba(0,123,255,0.2);
+    border-radius: 5px;
+}
+.table-body{
+    background-color: transparent;
+    position: relative;
+}
+th,td {
+    position: relative;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle; 
+    font-weight: 600;
+}
+.table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    white-space: nowrap !important;
+}
+.col-resizer {
+    right: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    cursor: col-resize;
+    position: absolute;
+    z-index: 1;
+}
+.row-resizer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    cursor: row-resize;
+    position: absolute;
+    z-index: 1;
+}
+.col-resizing {
+    border: 1px dashed #007bff !important;
+    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+    cursor: col-resize;
+}
+.row-resizing {
+    border: 1px dashed #007bff !important;
+    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+    cursor: row-resize;
+}
+td.row-resizing,
+th.row-resizing {
+    border-top: 1px dashed #007bff !important;
+    border-bottom: 1px dashed #007bff !important;
+    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+    cursor: row-resize;
+}
+
 td.td-error-cell{
     padding: 0 5px;
     border-right: 1px ridge #dfdede;
@@ -1278,7 +1374,7 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     content: "";
     position: absolute;
     left: -1px;
-    top: -9px;
+    top: -5px;
     width: 106%;
     height: 31px;
     z-index: 10;
