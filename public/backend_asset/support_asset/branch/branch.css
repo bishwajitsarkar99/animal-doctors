@@ -655,14 +655,20 @@ span.permission-page-btn-text,span.permission-page-btn-text {
     justify-content: space-between !important;
     display: flex !important;
     background-color: white;
-    /* background-image: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white); */
+    background-image: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d37a, white);
     outline: none;
     border: none;
     font-family: var(--nav-font-family);
     font-size: 12px;
     font-weight: 700;
-    border-top: 0.5px solid lightblue;
-    border-bottom: 0.5px solid lightblue;
+}
+.user_img.rounded-circle.user_imgs {
+    width: 15px;
+    height: 15px;
+    transition: transform .5s;
+}
+.user_img.rounded-circle.user_imgs:hover{
+    transform: scale(1);
 }
 .bg-dark-cornflowerblue {
     opacity: 1;
@@ -679,17 +685,11 @@ span.permission-page-btn-text,span.permission-page-btn-text {
 }
 #userImage {
     background: cornflowerblue;
-    height: 19px;
-    width: 19px;
+    height: 17px;
+    width: 17px;
     border-radius: 50%;
     padding-left: 2px;
     line-height: 1.4;
-}
-.menu li:focus, 
-.menu li:focus-visible {
-    background-color: lightcyan;
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 .list_head {
     background: linear-gradient(35deg, lightcyan, lightcyan, lightcyan 100%);
@@ -698,7 +698,6 @@ span.permission-page-btn-text,span.permission-page-btn-text {
     font-size: 12px;
     font-weight: 800;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    padding: 1px;
     padding-left: 8px;
     text-align: center;
     position: relative;
@@ -707,11 +706,10 @@ span.permission-page-btn-text,span.permission-page-btn-text {
     display: flex !important;
     letter-spacing: 0.5px;
     word-spacing: 3px;
-    text-transform: uppercase;
-    border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray;
-    border-top: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
+    border-left: 1px solid rgba(0,123,255,0.2);
+    border-right: 1px solid rgba(0,123,255,0.2);
+    border-top: 1px solid rgba(0,123,255,0.2);
+    border-bottom: 1px solid rgba(0,123,255,0.2);
 }
 .second_list_head{
     background: linear-gradient(35deg, lightcyan, lightcyan, lightcyan 100%);
@@ -720,7 +718,6 @@ span.permission-page-btn-text,span.permission-page-btn-text {
     font-size: 12px;
     font-weight: 800;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    padding: 1px;
     padding-left: 8px;
     text-align: center;
     position: relative;
@@ -729,11 +726,10 @@ span.permission-page-btn-text,span.permission-page-btn-text {
     display: flex !important;
     letter-spacing: 0.5px;
     word-spacing: 3px;
-    text-transform: uppercase;
-    border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray;
-    border-top: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
+    border-left: 1px solid rgba(0,123,255,0.2);
+    border-right: 1px solid rgba(0,123,255,0.2);
+    border-top: 1px solid rgba(0,123,255,0.2);
+    border-bottom: 1px solid rgba(0,123,255,0.2);
 }
 button.cls_btn{
     color: black;
@@ -823,28 +819,28 @@ ul.table-responsive{
 ul#branch_menu{
     /* background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white); */
     /* background: linear-gradient(5deg, white, #e5e5e5c9, white 100%, #d3d3d391); */
-    background: linear-gradient(5deg, white, #e5e5e552, white 100%, #d3d3d378);
-    border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
+    background: linear-gradient(5deg, white, #fff, white 100%, #fff);
+    border-left: 1px solid rgba(0,123,255,0.2);
+    border-right: 1px solid rgba(0,123,255,0.2);
+    border-bottom: 1px solid rgba(0,123,255,0.2);
     opacity: 5;
 }
 ul#role_menu{
     /* background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white); */
     /* background: linear-gradient(5deg, white, #e5e5e5c9, white 100%, #d3d3d391); */
-    background: linear-gradient(5deg, white, #e5e5e552, white 100%, #d3d3d378);
-    border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
+    background: linear-gradient(5deg, white, #fff, white 100%, #fff);
+    border-left: 1px solid rgba(0,123,255,0.2);
+    border-right: 1px solid rgba(0,123,255,0.2);
+    border-bottom: 1px solid rgba(0,123,255,0.2);
     opacity: 5;
 }
 ul#email_menu{
     /* background: linear-gradient(5deg, #dbd8d8db, transparent 3%, #d3d3d3c4, white); */
     /* background: linear-gradient(5deg, white, #e5e5e5c9, white 100%, #d3d3d391); */
-    background: linear-gradient(5deg, white, #e5e5e552, white 100%, #d3d3d378);
-    border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
+    background: linear-gradient(5deg, white, #fff, white 100%, #fff);
+    border-left: 1px solid rgba(0,123,255,0.2);
+    border-right: 1px solid rgba(0,123,255,0.2);
+    border-bottom: 1px solid rgba(0,123,255,0.2);
     opacity: 5;
 }
 ul#branch_menu>li {
@@ -936,7 +932,7 @@ ul#user_branch_menu_change>li, ul#usrMenu>li{
 }
 .group {
     background-color: white;
-    border-bottom: 1px double darkgray;
+    border-bottom: 1px double lightgray;
     padding-bottom: 5px;
     padding-top: 5px;
     padding-right: 5px;
@@ -996,8 +992,6 @@ ul#branch_info>li{
 }
 ul#branch_menu>li:hover,ul#role_menu>li:hover,ul#email_menu>li:hover{
     background: linear-gradient(35deg, lightcyan, lightcyan, lightcyan 100%);
-    --mdb-box-shadow-color-rgb: 0, 0, 0;
-    box-shadow: 0 4px 9px -4px rgba(var(--mdb-box-shadow-color-rgb), 0.35);
 }
 ul>li#firstRow{
     border-top: 1px solid lightgray;
@@ -1032,9 +1026,34 @@ span.highlight_branch {
     outline: none;
     border: none;
     box-shadow: none;
-    color: black;
+    color: white;
     font-weight: 600;
     font-family: var(--nav-font-family);
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1e3d47), color-stop(1, #2e5764));
+}
+.group-field{
+  font-family: var(--nav-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+.table-loader-overlay {
+    background: rgb(0 0 0 / 25%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    pointer-events: all;
+}
+.table-loader-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.display_none{
+    display: none;
 }
 .content_message{
     color: black;
@@ -1043,10 +1062,11 @@ span.highlight_branch {
     font-family: var(--nav-font-family);  
 }
 .branch_name_sub_title{
+    width: 100%;
     outline: none;
     border: none;
     box-shadow: none;
-    color: black;
+    color: #333;
     font-weight: 600;
     font-size: 13px;
     font-family: var(--nav-font-family);  
@@ -1361,7 +1381,8 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     vertical-align: middle;
 }
 .branch-skeleton,.branch-delete-skeleton,.img-branch-skeleton,.head-branch-skeleton,.modal-head-skeleton,.branch-content-skeleton,
-.branch-content-footer-skeleton,.hd-branch-skeleton,.mini_cricle_skeletone,.branch-line-content-skeleton,.cricle_skeletone{
+.branch-content-footer-skeleton,.hd-branch-skeleton,.mini_cricle_skeletone,.branch-line-content-skeleton,.cricle_skeletone,
+.narrow-skeleton{
     position: relative;
 }
 .mini_cricle_skeletone::before{
@@ -1393,10 +1414,10 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
 .img-branch-skeleton::before{
     content: "";
     position: absolute;
-    left: 9px;
+    left: 0px;
     top: -4px;
-    width: 87%;
-    height: 174%;
+    width: 32px;
+    height: 32px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
@@ -1423,6 +1444,18 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     top: 0;
     width: 100%;
     height: 107%;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+}
+.narrow-skeleton::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 15px;
     z-index: 10;
     background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
     background-size: 200%;
@@ -1622,7 +1655,7 @@ button#access_update_btn:hover{
     color: darkcyan;
     transition: all 1s;
 }
-button#access_branch_delete:hover, button#cancle_access:hover{
+button#cancle_access:hover{
     background-image: linear-gradient(to bottom, rgb(14 14 14 / 5%) 0%, rgb(171 165 165 / 5%) 100%);
     color: orangered;
     transition: all 1s;

@@ -1,5 +1,18 @@
 <div class="row">
     <div class="card-body focus-color cd user_access_branch_form skeleton">
+        <!-- Loader Overlay -->
+        <x-Tables.Icon.LoaderOverlay 
+            tableOverlayClass="table-loader-overlay display_none" 
+            loaderId="tableOverlayLoader" 
+            loaderClass="data-table-loader" 
+            loaderWidth="24" 
+            loaderHeight="24" 
+            loaderStroke="white" 
+            loaderStrokeWidth="3" 
+            loaderText="Refresh...." 
+            loaderTextClass="loader-text ms-1" 
+            loaderFill="none"
+        />
         <form autocomplete="off">
             @csrf
             <div class="row">

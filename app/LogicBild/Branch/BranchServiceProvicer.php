@@ -390,6 +390,12 @@ class BranchServiceProvicer
                 $totalBranch = $allBranch->count();
                 // Branch Category Data
                 $totalBranchCategories = BranchCategory::count();
+                // User count according to branch for the branch user access
+                $user_counts = User::select('branch_id', DB::raw('COUNT(*) as total'))
+                ->whereNotNull('branch_id')
+                ->whereNotIn('role', [1, 2, 3])
+                ->groupBy('branch_id')
+                ->pluck('total', 'branch_id');
                 //dd($totalBranch);
         
                 return response()->json([
@@ -399,6 +405,7 @@ class BranchServiceProvicer
                     'per_page' => $perItem,
                     'per_item_num' => $paginateData->count(),
                     'allBranch' => $allBranch,
+                    'user_counts' => $user_counts,
                     'totalBranch' => $totalBranch,
                     'totalBranchCategories' => $totalBranchCategories
                 ], 200);

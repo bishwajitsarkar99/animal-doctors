@@ -17,6 +17,7 @@
     buttonLoader();
 
     $(document).ready(function(){
+        let debounceTimer;
         fetch_branch_roles();
         fetch_initial_role();
         fetch_branch_emails();
@@ -120,8 +121,9 @@
         initializeSelect2('#roleemailbranch');
         initializeSelect2('#branchChange');
         initializeSelect2('#userBranchChangeModal');
-
+        // ========================================
         // fetch branch for dropdown
+        // ========================================
         function allSearchBranch(){
             const currentUrl = "{{ route('search-branch.action') }}";
 
@@ -150,7 +152,9 @@
             });
         }
 
-        // fetch branch for dropdown
+        // ========================================
+        // fetch branch for admin use
+        // ========================================
         function searchBranch(){
             const currentUrl = "{{ route('branch_specify_search.action') }}";
 
@@ -391,7 +395,24 @@
         });
 
         // Refresh
+        function showPageLoader() {
+            $('#tableOverlayLoader').removeClass('display_none');
+        }
+        function hidePageLoader() {
+            $('#tableOverlayLoader').addClass('display_none');
+        }
         $(document).on('click', '#refresh', function(){
+
+            showPageLoader();
+
+            let debounceTimer = setTimeout(() => {
+                hidePageLoader();
+            }, 1500);
+
+            return ()=>{
+                clearTimeout(debounceTimer);
+            };
+
             $('.select2').each(function () {
                 const id = $(this).attr('id');
                 let placeholderText = 'Select an option';
@@ -417,7 +438,9 @@
             });
         });
 
+        // ====================================
         // Add Modal Show
+        // ====================================
         $(document).on('click', '#add', function(e){
             e.preventDefault();
             $("#roleemailbranch").modal('show');
@@ -427,10 +450,8 @@
             var time = setTimeout(() => {
                 // Remove skeleton classes
                 removeAttributeOrClass([
-                    { selector: '.btn-close, .branch-nmT, .branch-rest, .role_nme', type: 'class', name: 'branch-skeleton' },
+                    { selector: '.branch-nmT, .branch-rest, .role_nme', type: 'class', name: 'branch-skeleton' },
                     { selector: '.head_title', type: 'class', name: 'modal-head-skeleton' },
-                    { selector: '#cancle_access', type: 'class', name: 'branch-skeleton' },
-                    { selector: '#save_btn_confirm', type: 'class', name: 'mn-btn-branch-skeleton' },
                 ]);
             }, 1000);
 
@@ -567,7 +588,9 @@
             }, 100);
         });
 
+        // ============================================
         // Branch Fetch For User Permission
+        // ============================================
         function searchBranchFetch() {
             const currentUrl = "{{ route('search-branch.action') }}";
 
@@ -583,10 +606,8 @@
                 dataType: 'json',
                 success: function(response) {
                     const allBranch = response.allBranch;
-                    const userCounts = {};
-                    $.each(response.user_counts, function(key, value) {
-                        userCounts[key.toString()] = value;
-                    });
+                    
+                    const userCounts = response.user_counts;
 
                     const branchMenu = $("#branch_menu");
                     branchMenu.empty();
@@ -958,10 +979,10 @@
                         const usrImg = $("#usrImage, #usrConfrmImage");
 
                         // Append user details
-                        branchName.append(`<span class="word_space">${messages.branch_name}</span>`);
-                        usrRole.append(`<span class="word_space">${messages.user_roles.name}</span>`);
-                        usrEmail.append(`<span class="word_space">${messages.user_emails.login_email}</span>`);
-                        usrImg.append(`<span class="word_space"><img class="user_img rounded-square users_image position" src="${secondUserImage}"></span>`);
+                        branchName.append(`<span class="">${messages.branch_name}</span>`);
+                        usrRole.append(`<span class="">${messages.user_roles.name}</span>`);
+                        usrEmail.append(`<span class="">${messages.user_emails.login_email}</span>`);
+                        usrImg.append(`<span class=""><img class="user_img rounded-square users_image position" src="${secondUserImage}"></span>`);
 
                         branchMenu.append(
                             `<li value="" id="branch_info">
@@ -995,14 +1016,17 @@
                                 <label class="branch_head_label">Creator</label>
                             </li>
                             <li id="creatorCreatedAt">
-                                <label class="enter_press text_label">Created-Date : ${formatDate(messages.created_at)}</label>
+                                <label class="enter_press text_label">Date : ${formatDate(messages.created_at)}</label>
                             </li>
                             <li id="creatorCreatedBy">
                                 <label class="enter_press text_label">Role-Name : ${createdByRole}</label>
                             </li>
                             <li id="creator_email">
-                                <label class="enter_press text_label" id="creatorUserEmail">
-                                    Email : ${creatorUserEmail} <img class="user_img rounded-square users_image position" src="${firstUserImage}">
+                                <label class="enter_press text_label">
+                                    <img class="user_img rounded-square users_image position" src="${firstUserImage}">
+                                </label><br>
+                                <label class="enter_press text_label ms-1" id="creatorUserEmail">
+                                    ${creatorUserEmail}
                                 </label>
                             </li>`
                         );
@@ -1013,15 +1037,17 @@
                                     <label class="branch_head_label">Updator</label>
                                 </li>
                                 <li id="timeSet">
-                                    <label class="enter_press text_label" id="updatordAt">Update-Date : ${formatDate(messages.created_at)}</label>
+                                    <label class="enter_press text_label" id="updatordAt">Date : ${formatDate(messages.created_at)}</label>
                                 </li>
                                 <li id="updatordBy">
                                     <label class="enter_press text_label">Role-Name : ${updatedByRole}</label>
                                 </li>
                                 <li id="updator_email">
-                                    <label class="enter_press text_label" id="creatorUserEmail">
-                                        Email : ${messages.updator_emails.login_email} 
+                                    <label class="enter_press text_label"> 
                                         <img class="user_img rounded-square users_image position" src="${thirdUserImage}">
+                                    </label><br>
+                                    <label class="enter_press text_label ms-1" id="creatorUserEmail">
+                                        ${messages.updator_emails.login_email} 
                                     </label>
                                 </li>
                             `);
@@ -1039,15 +1065,17 @@
                                     <label class="branch_head_label">Approver</label>
                                 </li>
                                 <li id="timeSet">
-                                    <label class="enter_press text_label" id="updatordAt">Approver-Date : ${formatDate(approverDate)}</label>
+                                    <label class="enter_press text_label" id="updatordAt">Date : ${formatDate(approverDate)}</label>
                                 </li>
                                 <li id="updatordBy">
                                     <label class="enter_press text_label">Role-Name : ${aprrovedByRole}</label>
                                 </li>
                                 <li id="updator_email">
-                                    <label class="enter_press text_label" id="creatorUserEmail">
-                                        Email : ${messages.approver_emails.login_email} 
+                                    <label class="enter_press text_label">
                                         <img class="user_img rounded-square users_image position" src="${fourUserImage}">
+                                    </label><br>
+                                    <label class="enter_press text_label ms-1" id="creatorUserEmail">
+                                        ${messages.approver_emails.login_email} 
                                     </label>
                                 </li>
                             `);
@@ -1212,10 +1240,8 @@
             var time = setTimeout(() => {
                 // Remove skeleton classes
                 removeAttributeOrClass([
-                    { selector: '.btn-close, .branch-nmT, .branch-rest, .role_nme', type: 'class', name: 'branch-skeleton' },
+                    { selector: '.change_head', type: 'class', name: 'branch-skeleton' },
                     { selector: '.change_title', type: 'class', name: 'branch-skeleton' },
-                    { selector: '#cancel_change', type: 'class', name: 'branch-skeleton' },
-                    { selector: '#branch_id_btn', type: 'class', name: 'chn-btn-branch-skeleton' },
                 ]);
             }, 1000);
 
@@ -1622,7 +1648,9 @@
             });
         });
 
+        // =======================================
         // User Branch Delete .... Search Data
+        // =======================================
         $(document).on('click', '#access_branch_delete', function(e){
             e.preventDefault();
             $("#user_branch_menu").empty();
@@ -1721,10 +1749,10 @@
 
                         // Append user details
                         branchId.append(`<span class="">${messages.branch_id}</span>`);
-                        branchName.append(`<span class="word_space">${messages.branch_name}</span>`);
-                        usrRole.append(`<span class="usrConfrmRole word_space">${messages.user_roles.name}</span>`);
-                        usrEmail.append(`<span class="usrConfrmEmail word_space">${messages.user_emails.login_email}</span>`);
-                        usrImg.append(`<span class="usrConfrmImage word_space"><img class="user_img rounded-square users_image position" src="${secondUserImage}"></span>`);
+                        branchName.append(`<span class="">${messages.branch_name}</span>`);
+                        usrRole.append(`<span class="usrConfrmRole">${messages.user_roles.name}</span>`);
+                        usrEmail.append(`<span class="usrConfrmEmail">${messages.user_emails.login_email}</span>`);
+                        usrImg.append(`<span class="usrConfrmImage"><img class="user_img rounded-square users_image position" src="${secondUserImage}"></span>`);
 
                         branchMenu.append(
                             `<li value="" id="branch_info">
@@ -1854,65 +1882,24 @@
             });
 
         });
-
+        // =======================================
         // User Branch Delete Modal Show
+        // =======================================
         $(document).on('click', '#access_branch_delete', function(e){
             e.preventDefault();
-            addAttributeOrClass([
-                {
-                    selector: '.hedng, .hedng_btn, #load_id, .confirm-label, #usrConfrmRole, #usrConfrmEmail, .first_part',
-                    type: 'class',
-                    name: 'branch-skeleton'
-                },
-                {
-                    selector: '#usrConfrmImage',
-                    type: 'class',
-                    name: 'img-branch-skeleton'
-                },
-                {
-                    selector: '.access_confirm_head_title',
-                    type: 'class',
-                    name: 'head-branch-skeleton'
-                },
-                {
-                    selector: '#yesButton, #noButton',
-                    type: 'class',
-                    name: 'branch-delete-skeleton'
-                },
-                {
-                    selector: '.hedng',
-                    type: 'class',
-                    name: 'hd-branch-skeleton'
-                },
 
-            ]);
             const time = setTimeout(() => {
                 removeAttributeOrClass([
                     {
-                        selector: '.hedng, .hedng_btn, #load_id, .confirm-label, #usrConfrmRole, #usrConfrmEmail, .first_part',
+                        selector: '.hedng, #usrRole4, #usrEmail4, #cate_delete, #cate_delete2',
                         type: 'class',
                         name: 'branch-skeleton'
                     },
                     {
-                        selector: '#usrConfrmImage',
+                        selector: '#usrImage4',
                         type: 'class',
                         name: 'img-branch-skeleton'
-                    },
-                    {
-                        selector: '.access_confirm_head_title',
-                        type: 'class',
-                        name: 'head-branch-skeleton'
-                    },
-                    {
-                        selector: '#yesButton, #noButton',
-                        type: 'class',
-                        name: 'branch-delete-skeleton'
-                    },
-                    {
-                        selector: '.hedng',
-                        type: 'class',
-                        name: 'hd-branch-skeleton'
-                    },
+                    }
 
                 ]);
             }, 4000);
@@ -1926,7 +1913,7 @@
         });
 
         // User Branch Confirm Delete Modal Back
-        $(document).on('click', '.head_btn2, #cate_delete3', function(e){
+        $(document).on('click', '.head_btn2, #cancel_delete_confrm', function(e){
             e.preventDefault();
             $("#deleteconfirmbranch").modal('hide');
             $("#deletebranch").modal('show');
@@ -1939,9 +1926,9 @@
             $("#usrConfrmImage").empty();
             $("#usrConfrmRole").empty();
             $("#usrConfrmEmail").empty();
-            $(".usrConfrmRole").removeClass('word_space').addClass('word_title');
-            $(".usrConfrmEmail").removeClass('word_space').addClass('word_title');
-            $(".usrConfrmImage").removeClass('word_space').addClass('word_title');
+            $(".usrConfrmRole").removeClass('word_space');
+            $(".usrConfrmEmail").removeClass('word_space');
+            $(".usrConfrmImage").removeClass('word_space');
             $("#deletebranch").modal('hide');
             $("#accessconfirmbranch").modal('show');
             $("#loadingProgress").removeAttr('hidden');
@@ -1955,20 +1942,22 @@
                 $("#deleteconfirmbranch").modal('show');
             }, 1500);
 
-            addAttributeOrClass([
-                {
-                    selector: '.confirm_title, .head_btn2, .admin_paragraph, #delete_branch, #cate_delete3',
-                    type: 'class',
-                    name: 'branch-skeleton'
-                },
-
-            ]);
             const time = setTimeout(() => {
                 removeAttributeOrClass([
                     {
-                        selector: '.confirm_title, .head_btn2, .admin_paragraph, #delete_branch, #cate_delete3',
+                        selector: '.confirm_title, #delete_text_message',
                         type: 'class',
                         name: 'branch-skeleton'
+                    },
+                    {
+                        selector: '#usrConfrmEmail',
+                        type: 'class',
+                        name: 'narrow-skeleton'
+                    },
+                    {
+                        selector: '#usrConfrmImage',
+                        type: 'class',
+                        name: 'img-branch-skeleton'
                     },
 
                 ]);
