@@ -5,8 +5,6 @@
         addAttributeOrClass, initializeMenuEvents, 
         resize, applySavedColumnOrder
     } from "/module/backend-module/backend-module-min.js";
-    // import { buttonLoader , removeAttributeOrClass, addAttributeOrClass } from "/module/module-min-js/design-helper-function-min.js";
-    // import { initializeMenuEvents } from '/module/module-min-js/menuEvents-min.js';
 
     // ========================================================
     // Branch Info Table Resize
@@ -880,11 +878,13 @@
             $("#userAccessPermissionModal").modal('show');
         });
 
+        // ==================================================
         // Access Permission Modal with user email search
+        // ==================================================
         $(document).on('click', '#permission_btn', function(e){
             e.preventDefault();
             $("#user_branch_menu").empty();
-            $(".branch_name_head").empty();
+            $(".branch_namehead").empty();
             $("#usrRole").empty();
             $("#usrEmail").empty();
             $("#usrImage").empty();
@@ -903,6 +903,13 @@
                 $("#access_modal_box").removeClass('progress_body');
                 $("#processModal_body").removeClass('loading_body_area');
                 $("#userAccessPermissionModal").modal('show');
+                setTimeout(() => {
+                    $(".branch_namehead").removeClass('branch-skeleton');
+                    $("#usrImage").removeClass('img-branch-skeleton');
+                    $("#usrRole").removeClass('branch-skeleton');
+                    $("#usrEmail").removeClass('branch-skeleton');
+                    $("#user_branch_menu").removeClass('menu-skeleton');
+                }, 2000);
             }, 1500);
             
             var id = $("#users_email_id").val();
@@ -973,7 +980,7 @@
                         }
 
                         const branchMenu = $("#user_branch_menu");
-                        const branchName = $(".branch_name_head");
+                        const branchName = $(".branch_namehead");
                         const usrRole = $("#usrRole, #usrConfrmRole");
                         const usrEmail = $("#usrEmail, #usrConfrmEmail");
                         const usrImg = $("#usrImage, #usrConfrmImage");
@@ -1120,7 +1127,9 @@
 
         });
 
+        // ================================================
         // Access Permission Confirm Modal Show
+        // ================================================
         $(document).on('click', '#permission_accss_btn', function(e){
             e.preventDefault();
             $("#userAccessPermissionConfirmModal").modal('show');

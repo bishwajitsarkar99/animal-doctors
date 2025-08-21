@@ -64,8 +64,8 @@
               data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
             </button>
           @elseif($data['modal_id'] === 'userAccessPermissionModal')
-            <h5 class="modal-title admin_title head_title ps-1 pe-1 branch-skeleton branch_name_head" style="color: white;" id="staticBackdropLabel"></h5>
-            <button type="button" class="btn-close-modal head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
+            <h5 class="modal-title ps-1 pe-1 branch-skeleton branch_namehead" style="color: white;" id="staticBackdropLabel"></h5>
+            <button type="button" class="btn-close-modal head_btn" data-bs-dismiss="modal" aria-label="Close" 
               data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
             </button>
           @elseif($data['modal_id'] === 'userBranchChangeModal')
@@ -169,15 +169,15 @@
           @elseif($data['modal_id'] === 'userAccessPermissionModal')
             <div class="branch_access">
               <div class="">
-                <span id="usrImage"></span>
-                <span class="group-field" id="usrRole"></span><br>
-                <span class="group-field" id="usrEmail"></span>
+                <span class="img-branch-skeleton" id="usrImage"></span>
+                <span class="group-field branch-skeleton" id="usrRole"></span><br>
+                <span class="group-field branch-skeleton" id="usrEmail"></span>
               </div>
               <div class="row profile-heading pb-3">
                 @csrf
                 <input type="hidden" id="users_email_id">
                 <div class="action_group">
-                  <ul id="user_branch_menu" class="list_group menu table-responsive"></ul>
+                  <ul id="user_branch_menu" class="list_group menu table-responsive menu-skeleton"></ul>
                 </div>
               </div>
             </div>

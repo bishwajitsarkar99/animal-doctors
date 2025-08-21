@@ -222,24 +222,13 @@ div#access_modal_box{
 }
 /* ================ Modal Component Css ======================== */
 .modal.fade .modal-dialog {
-  transform: translate(-50%, -50%);
-  position: absolute;
-  top: 40%;
-  left: 50%;
+  transform: scale(0.8);
+  opacity: 0;
   transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 .modal.show .modal-dialog {
-  animation: slideIn 0.3s ease-out;
-}
-@keyframes slideIn {
-  0% {
-    transform: translate(-50%, -50%) scale(0.8);
-    opacity: 0;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(0.9);
-    opacity: 1;
-  }
+  transform: scale(1);
+  opacity: 1;
 }
 #SM_Modal_body {
   background-color: white;
