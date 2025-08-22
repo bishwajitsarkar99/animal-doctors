@@ -269,6 +269,16 @@
             e.preventDefault();
             var select = $(this).val();
 
+            $('#branches_id').empty();
+            $('#brnch_id').empty();
+            $('#branch_type').empty();
+            $('#branch_name').empty();
+            $('#division_id').empty();
+            $('#district_id').empty();
+            $('#upazila_id').empty();
+            $('#town_name').empty();
+            $('#location').empty();
+
             // Button Show Or Hide
             if(select !== ''){
                 $('.edit_branch_id').attr('disabled', true);
@@ -546,6 +556,7 @@
                             $("#access_modal_box").removeClass('loader_area');
                             $("#processModal_body").addClass('loading_body_area');
                             $("#branchInfo").attr('hidden', true);
+
                             // Clear Select2 fields reliably with delay
                             setTimeout(function() {
                                 $('#search_branch_all').val(null).trigger('change');
@@ -557,16 +568,6 @@
                             $('#savForm_error').html("");
                             $('#savForm_error2').html("");
                             $('#savForm_error3').html("");
-                            $("#add_branch_id").val();
-                            $("#add_branch_type").val();
-                            $("#add_branch_name").val();
-                            $("#add_division_id").val();
-                            $("#add_district_id").val();
-                            $("#add_upazila_id").val();
-                            $("#add_town_name").val();
-                            $("#add_location").val();
-                            $("#role_id").val();
-                            $("#email_id").val();
 
                             let debounceTimer = setTimeout(() => {
                                 showSuccessToast(response.messages)
@@ -1123,10 +1124,10 @@
                             </li>
                             <li id="creator_email">
                                 <label class="enter_press text_label">
-                                    <img class="user_img rounded-square users_image position" src="${firstUserImage}">
-                                </label><br>
-                                <label class="enter_press text_label ms-1" id="creatorUserEmail">
-                                    ${creatorUserEmail}
+                                    <img class="user_img rounded-square users_image position" src="${firstUserImage}"><br>
+                                    <label class="enter_press text_label ms-1" id="creatorUserEmail">
+                                        ${creatorUserEmail}
+                                    </label>
                                 </label>
                             </li>`
                         );
@@ -1144,10 +1145,10 @@
                                 </li>
                                 <li id="updator_email">
                                     <label class="enter_press text_label"> 
-                                        <img class="user_img rounded-square users_image position" src="${thirdUserImage}">
-                                    </label><br>
-                                    <label class="enter_press text_label ms-1" id="creatorUserEmail">
-                                        ${messages.updator_emails.login_email} 
+                                        <img class="user_img rounded-square users_image position" src="${thirdUserImage}"><br>
+                                        <label class="enter_press text_label ms-1" id="creatorUserEmail">
+                                            ${messages.updator_emails.login_email} 
+                                        </label>
                                     </label>
                                 </li>
                             `);
@@ -1172,10 +1173,10 @@
                                 </li>
                                 <li id="updator_email">
                                     <label class="enter_press text_label">
-                                        <img class="user_img rounded-square users_image position" src="${fourUserImage}">
-                                    </label><br>
-                                    <label class="enter_press text_label ms-1" id="creatorUserEmail">
-                                        ${messages.approver_emails.login_email} 
+                                        <img class="user_img rounded-square users_image position" src="${fourUserImage}"><br>
+                                        <label class="enter_press text_label ms-1" id="creatorUserEmail">
+                                            ${messages.approver_emails.login_email} 
+                                        </label>
                                     </label>
                                 </li>
                             `);
@@ -1191,13 +1192,13 @@
                             branchMenu.append(
                                 `<li id="#">
                                     <label class="text_label">Permission-Access :</label>
-                                    <input class="form-switch form-check-input check_permission me-2" type="checkbox" name="super_admin_approval_status" value="1" id="checkingSuperAdminAccess" ${superAdminApprovalStatus == 1 ? 'checked' : ''}>
+                                    <input class="form-switch form-check-input check_permission" type="checkbox" name="super_admin_approval_status" value="1" id="checkingSuperAdminAccess" ${superAdminApprovalStatus == 1 ? 'checked' : ''}>
                                     <span class="badge rounded-pill bg-success ${superAdminApprovalStatus == 1 ? '' : 'display_none'}" id="checkLabelSuperAdmin">Justify</span>
                                     <span class="badge rounded-pill bg-danger ${superAdminApprovalStatus == 0 ? '' : 'display_none'}" id="checkLabelSuperAdmin2">Refuse</span>
                                 </li>
                                 <li id="#">
                                     <label class="text_label">Permission- Blog :</label>
-                                    <input class="form-switch form-check-input check_permission" type="checkbox" name="status" value="1" id="checkingSuperAdminBlog" ${superAdminApprovalBlogStatus ? 'checked' : ''}>
+                                    <input class="form-switch form-check-input check_permission ms-3 me-1" type="checkbox" name="status" value="1" id="checkingSuperAdminBlog" ${superAdminApprovalBlogStatus ? 'checked' : ''}>
                                     <span class="badge rounded-pill bg-success ${superAdminApprovalBlogStatus == 1 ? '' : 'display_none'}" id="checkBlogLabelSuperAdmin">Justify</span>
                                     <span class="badge rounded-pill bg-danger ${superAdminApprovalBlogStatus == 0 ? '' : 'display_none'}" id="checkBlogLabelSuperAdmin2">Refuse</span>
                                 </li>`
@@ -1366,9 +1367,11 @@
         });
 
         // =======================================
-        // Cancel or close Branch Modal
+        // Cancel or close Branch Change Modal
         // =======================================
-        $(document).on('click', '.modal_close , #cancel_change', function(){
+        $(document).on('click', '.modal_close , .btn-close-modal, #cancel_change', function(){
+            $("#success_message").html("");
+            $("#success_message").removeClass("alert alert-danger");
             $('.select2').each(function () {
                 const id = $(this).attr('id');
                 let placeholderText = 'Select an option';
@@ -1395,9 +1398,11 @@
         });
 
         // =======================================
-        // Back Branch Modal
+        // Back Branch Change Confirm Modal
         // =======================================
         $(document).on('click', '.cancel_change_box, #cancle_change', function(e){
+            $("#success_message").html("");
+            $("#success_message").removeClass("alert alert-danger");
             $("#userBranchChangeModal").modal('hide');
             $("#branchChange").modal('show');
         });
@@ -1433,14 +1438,11 @@
             var id = $("#branch_email_id").val();
             var role_id = $("#branch_role_id").val();
 
-            if(id && role_id !== ''){
-                $("#roleError").empty();
-                $("#emailError").empty();
-            }else{
-                $("#roleError").append(`<span style="color:orangered;">[ Select User Role ]</span>`);
-                $("#emailError").append(`<span style="color:orangered;">[ Select User Email ]</span>`);
-            }
+            // clear error messages first
+            $("#roleError").empty();
+            $("#emailError").empty();
 
+            // clear old UI data
             $("#users_branch_email_id").empty();
             $("#user_branch_menu_change").empty();
             $(".branch_name_hd").empty();
@@ -1450,238 +1452,250 @@
             $("#usrConfrmImage").empty();
             $("#usrConfrmRole").empty();
             $("#usrConfrmEmail").empty();
-            
-            const current_url = "/company/branch-user-change/" + id;
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
-                }
-            });
+            if (id && role_id){
 
-            $.ajax({
-                type: "GET",
-                url: current_url,
-                dataType: 'json',
-                data: {
-                    id: id,
-                },
-                success: function(response) {
-                    //console.log(response.messages);
-                    if(response.status === 404){
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert alert-danger');
-                        $('#success_message').text(response.messages);
-                    }else if(response.status === 200){
-                        $("#branchChange").modal('hide');
-                        $("#accessconfirmbranch").modal('show');
-                        $("#dataPullingProgress").removeAttr('hidden');
-                        $("#access_modal_box").addClass('progress_body');
-                        $("#processModal_body").addClass('loading_body_area');
-                        let debounceTimer = setTimeout(() => {
-                            $("#userBranchChangeModal").modal('show');
-                            $("#accessconfirmbranch").modal('hide');
-                            $("#dataPullingProgress").attr('hidden', true);
-                            $("#access_modal_box").removeClass('progress_body');
-                            $("#processModal_body").removeClass('loading_body_area');
-                        }, 1500);
-
-                        var userRole = {{ auth()->user()->role }};
-                        const messages = response.messages;
-                        const created_by = messages.created_by;
-                        const updated_by = messages.updated_by;
-                        const approver_by = messages.approver_by;
-                        const creatorUserEmail = messages.creator_emails.login_email;
-                        const adminApprovalStatus = messages.admin_approval_status;
-                        const superAdminApprovalStatus = messages.super_admin_approval_status;
-                        const superAdminApprovalBlogStatus = messages.status;
-                        
-                        let createdByRole;
-                        let updatedByRole;
-                        let aprrovedByRole;
-                        let approverDate;
-
-                        const firstUserImage = messages.created_users.image.includes('https://') 
-                            ? messages.created_users.image 
-                            : `${window.location.origin}/storage/image/user-image/${messages.created_users.image}`;
-                        const secondUserImage = messages.user_emails.image.includes('https://') 
-                            ? messages.user_emails.image 
-                            : `${window.location.origin}/storage/image/user-image/${messages.user_emails.image}`;
-                        const thirdUserImage = 
-                            messages.updated_users && messages.updated_users.image 
-                            ? (messages.updated_users.image.includes('https://') 
-                                ? messages.updated_users.image 
-                                : `${window.location.origin}/storage/image/user-image/${messages.updated_users.image}`)
-                            : `${window.location.origin}/image/default.png`;
-
-                        const fourUserImage = 
-                            messages.approver_users && messages.approver_users.image 
-                            ? (messages.approver_users.image.includes('https://') 
-                                ? messages.approver_users.image 
-                                : `${window.location.origin}/storage/image/user-image/${messages.approver_users.image}`)
-                            : `${window.location.origin}/image/default.png`;
-
-                        const roles = {
-                            1: 'SuperAdmin',
-                            2: 'Sub-Admin',
-                            3: 'Admin',
-                            0: 'User',
-                            5: 'Accounts',
-                            6: 'Marketing',
-                            7: 'Delivery Team',
-                        };
-
-                        createdByRole = roles[created_by] || 'Unknown';
-                        updatedByRole = roles[updated_by] || '--';
-                        aprrovedByRole = roles[approver_by] || '--';
-                        if(approver_by === 1){
-                            approverDate = messages.super_admin_approver_date;
-                        }else if(approver_by === 3){
-                            approverDate = messages.admin_approver_date;
-                        }
-
-                        const branchMenu = $("#user_branch_menu_change");
-                        const branchName = $(".branch_name_hd");
-                        const usrImg = $("#usrImage3, #usrConfrmImage");
-                        const usrRole = $("#usrRole3, #usrConfrmRole");
-                        const usrEmail = $("#usrEmail3, #usrConfrmEmail");
-
-                        // Append user details
-                        branchName.append(`<span class="word_space">${messages.branch_name}</span>`);
-                        usrRole.append(`<span class="word_space">${messages.user_roles.name}</span>`);
-                        usrEmail.append(`<span class="word_space">${messages.user_emails.login_email}</span>`);
-                        usrImg.append(`<span class="word_space"><img class="user_img rounded-square users_image position" src="${secondUserImage}"></span>`);
-
-                        branchMenu.append(
-                            `<li value="" id="branch_info">
-                                <label class="branch_head_label">Branch information</label>
-                            </li>
-                            <li value="${messages.id}" id="branch_ids" data-branch-id="${messages.branch_id}">
-                                <label class="enter_press text_label">Branch-ID : ${messages.branch_id}</label>
-                            </li>
-                            <li id="branch_types" data-branch-id="${messages.branch_type}">
-                                <label class="enter_press text_label">Branch-Type : ${messages.branch_type}</label>
-                            </li>
-                            <li id="branch_names" data-branch-id="${messages.branch_name}">
-                                <label class="enter_press text_label">Branch-Name : ${messages.branch_name}</label>
-                            </li>
-                            <li id="division_names" data-branch-id="${messages.divisions.division_name}">
-                                <label class="enter_press text_label">Division-Name : ${messages.divisions.division_name}</label>
-                            </li>
-                            <li id="district_names" data-branch-id="${messages.districts.district_name}">
-                                <label class="enter_press text_label">District-Name : ${messages.districts.district_name}</label>
-                            </li>
-                            <li id="upazila_names" data-branch-id="${messages.thana_or_upazilas.thana_or_upazila_name}">
-                                <label class="enter_press text_label">Upazila-Name : ${messages.thana_or_upazilas.thana_or_upazila_name}</label>
-                            </li>
-                            <li id="town_names" data-branch-id="${messages.town_name}">
-                                <label class="enter_press text_label">City-Name : ${messages.town_name}</label>
-                            </li>
-                            <li id="locations" data-branch-id="${messages.location}">
-                                <label class="enter_press text_label">Branch-Location : ${messages.location}</label>
-                            </li>
-                            <li id="Creator">
-                                <label class="branch_head_label">Creator</label>
-                            </li>
-                            <li id="creatorCreatedAt">
-                                <label class="enter_press text_label">Created-Date : ${formatDate(messages.created_at)}</label>
-                            </li>
-                            <li id="creatorCreatedBy">
-                                <label class="enter_press text_label">Role-Name : ${createdByRole}</label>
-                            </li>
-                            <li id="creator_email">
-                                <label class="enter_press text_label" id="creatorUserEmail">
-                                    Email : ${creatorUserEmail} <img class="user_img rounded-square users_image position" src="${firstUserImage}">
-                                </label>
-                            </li>`
-                        );
-                        // Conditionally append updater details
-                        if (updated_by !== null) {
-                            branchMenu.append(`
-                                <li id="updator">
-                                    <label class="branch_head_label">Updator</label>
-                                </li>
-                                <li id="timeSet">
-                                    <label class="enter_press text_label" id="updatordAt">Update-Date : ${formatDate(messages.updated_at)}</label>
-                                </li>
-                                <li id="updatordBy">
-                                    <label class="enter_press text_label">Role-Name : ${updatedByRole}</label>
-                                </li>
-                                <li id="updator_email">
-                                    <label class="enter_press text_label" id="creatorUserEmail">
-                                        Email : ${messages.updator_emails.login_email} 
-                                        <img class="user_img rounded-square users_image position" src="${thirdUserImage}">
-                                    </label>
-                                </li>
-                            `);
-                        }else if(updated_by === null) {
-                            branchMenu.append(`
-                                <li>
-                                    <label class="no_data_label" hidden>No updater details available.</label>
-                                </li>
-                            `);
-                            console.log("No updater details available as updated_by is null");
-                        }
-                        if (approver_by !== null) {
-                            branchMenu.append(`
-                                <li id="updator">
-                                    <label class="branch_head_label">Approver</label>
-                                </li>
-                                <li id="timeSet">
-                                    <label class="enter_press text_label" id="updatordAt">Approver-Date : ${formatDate(approverDate)}</label>
-                                </li>
-                                <li id="updatordBy">
-                                    <label class="enter_press text_label">Role-Name : ${aprrovedByRole}</label>
-                                </li>
-                                <li id="updator_email">
-                                    <label class="enter_press text_label" id="creatorUserEmail">
-                                        Email : ${messages.approver_emails.login_email} 
-                                        <img class="user_img rounded-square users_image position" src="${fourUserImage}">
-                                    </label>
-                                </li>
-                            `);
-                        }else if(approver_by === null) {
-                            branchMenu.append(`
-                                <li>
-                                    <label class="no_data_label" hidden>No updater details available.</label>
-                                </li>
-                            `);
-                            console.log("No updater details available as updated_by is null");
-                        }
-                        if(created_by === 1 && userRole === 1){
+                const current_url = "/company/branch-user-change/" + id;
+    
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+                    }
+                });
+    
+                $.ajax({
+                    type: "GET",
+                    url: current_url,
+                    dataType: 'json',
+                    data: {
+                        id: id,
+                    },
+                    success: function(response) {
+                        //console.log(response.messages);
+                        if(response.status === 404){
+                            $('#success_message').html("");
+                            $('#success_message').addClass('alert alert-danger');
+                            $('#success_message').text(response.messages);
+                        }else if(response.status === 200){
+                            $("#branchChange").modal('hide');
+                            $("#accessconfirmbranch").modal('show');
+                            $("#dataPullingProgress").removeAttr('hidden');
+                            $("#access_modal_box").addClass('progress_body');
+                            $("#processModal_body").addClass('loading_body_area');
+                            let debounceTimer = setTimeout(() => {
+                                $("#userBranchChangeModal").modal('show');
+                                $("#accessconfirmbranch").modal('hide');
+                                $("#dataPullingProgress").attr('hidden', true);
+                                $("#access_modal_box").removeClass('progress_body');
+                                $("#processModal_body").removeClass('loading_body_area');
+                            }, 1500);
+    
+                            var userRole = {{ auth()->user()->role }};
+                            const messages = response.messages;
+                            const created_by = messages.created_by;
+                            const updated_by = messages.updated_by;
+                            const approver_by = messages.approver_by;
+                            const creatorUserEmail = messages.creator_emails.login_email;
+                            const adminApprovalStatus = messages.admin_approval_status;
+                            const superAdminApprovalStatus = messages.super_admin_approval_status;
+                            const superAdminApprovalBlogStatus = messages.status;
+                            
+                            let createdByRole;
+                            let updatedByRole;
+                            let aprrovedByRole;
+                            let approverDate;
+    
+                            const firstUserImage = messages.created_users.image.includes('https://') 
+                                ? messages.created_users.image 
+                                : `${window.location.origin}/storage/image/user-image/${messages.created_users.image}`;
+                            const secondUserImage = messages.user_emails.image.includes('https://') 
+                                ? messages.user_emails.image 
+                                : `${window.location.origin}/storage/image/user-image/${messages.user_emails.image}`;
+                            const thirdUserImage = 
+                                messages.updated_users && messages.updated_users.image 
+                                ? (messages.updated_users.image.includes('https://') 
+                                    ? messages.updated_users.image 
+                                    : `${window.location.origin}/storage/image/user-image/${messages.updated_users.image}`)
+                                : `${window.location.origin}/image/default.png`;
+    
+                            const fourUserImage = 
+                                messages.approver_users && messages.approver_users.image 
+                                ? (messages.approver_users.image.includes('https://') 
+                                    ? messages.approver_users.image 
+                                    : `${window.location.origin}/storage/image/user-image/${messages.approver_users.image}`)
+                                : `${window.location.origin}/image/default.png`;
+    
+                            const roles = {
+                                1: 'SuperAdmin',
+                                2: 'Sub-Admin',
+                                3: 'Admin',
+                                0: 'User',
+                                5: 'Accounts',
+                                6: 'Marketing',
+                                7: 'Delivery Team',
+                            };
+    
+                            createdByRole = roles[created_by] || 'Unknown';
+                            updatedByRole = roles[updated_by] || '--';
+                            aprrovedByRole = roles[approver_by] || '--';
+                            if(approver_by === 1){
+                                approverDate = messages.super_admin_approver_date;
+                            }else if(approver_by === 3){
+                                approverDate = messages.admin_approver_date;
+                            }
+    
+                            const branchMenu = $("#user_branch_menu_change");
+                            const branchName = $(".branch_name_hd");
+                            const usrImg = $("#usrImage3, #usrConfrmImage");
+                            const usrRole = $("#usrRole3, #usrConfrmRole");
+                            const usrEmail = $("#usrEmail3, #usrConfrmEmail");
+    
+                            // Append user details
+                            branchName.append(`<span class="word_space">${messages.branch_name}</span>`);
+                            usrRole.append(`<span class="word_space">${messages.user_roles.name}</span>`);
+                            usrEmail.append(`<span class="word_space">${messages.user_emails.login_email}</span>`);
+                            usrImg.append(`<span class="word_space"><img class="user_img rounded-square users_image position" src="${secondUserImage}"></span>`);
+    
                             branchMenu.append(
-                                `<li id="#">
-                                    <label class="text_label">Permission-Access :
+                                `<li value="" id="branch_info">
+                                    <label class="branch_head_label">Branch information</label>
+                                </li>
+                                <li value="${messages.id}" id="branch_ids" data-branch-id="${messages.branch_id}">
+                                    <label class="enter_press text_label">Branch-ID : ${messages.branch_id}</label>
+                                </li>
+                                <li id="branch_types" data-branch-id="${messages.branch_type}">
+                                    <label class="enter_press text_label">Branch-Type : ${messages.branch_type}</label>
+                                </li>
+                                <li id="branch_names" data-branch-id="${messages.branch_name}">
+                                    <label class="enter_press text_label">Branch-Name : ${messages.branch_name}</label>
+                                </li>
+                                <li id="division_names" data-branch-id="${messages.divisions.division_name}">
+                                    <label class="enter_press text_label">Division-Name : ${messages.divisions.division_name}</label>
+                                </li>
+                                <li id="district_names" data-branch-id="${messages.districts.district_name}">
+                                    <label class="enter_press text_label">District-Name : ${messages.districts.district_name}</label>
+                                </li>
+                                <li id="upazila_names" data-branch-id="${messages.thana_or_upazilas.thana_or_upazila_name}">
+                                    <label class="enter_press text_label">Upazila-Name : ${messages.thana_or_upazilas.thana_or_upazila_name}</label>
+                                </li>
+                                <li id="town_names" data-branch-id="${messages.town_name}">
+                                    <label class="enter_press text_label">City-Name : ${messages.town_name}</label>
+                                </li>
+                                <li id="locations" data-branch-id="${messages.location}">
+                                    <label class="enter_press text_label">Branch-Location : ${messages.location}</label>
+                                </li>
+                                <li id="Creator">
+                                    <label class="branch_head_label">Creator</label>
+                                </li>
+                                <li id="creatorCreatedAt">
+                                    <label class="enter_press text_label">Date : ${formatDate(messages.created_at)}</label>
+                                </li>
+                                <li id="creatorCreatedBy">
+                                    <label class="enter_press text_label">Role-Name : ${createdByRole}</label>
+                                </li>
+                                <li id="creator_email">
+                                    <label class="enter_press text_label" id="creatorUserEmail">
+                                        <img class="user_img rounded-square users_image position" src="${firstUserImage}"><br>
+                                        ${creatorUserEmail} 
+                                    </label>
+                                </li>`
+                            );
+                            // Conditionally append updater details
+                            if (updated_by !== null) {
+                                branchMenu.append(`
+                                    <li id="updator">
+                                        <label class="branch_head_label">Updator</label>
+                                    </li>
+                                    <li id="timeSet">
+                                        <label class="enter_press text_label" id="updatordAt">Date : ${formatDate(messages.updated_at)}</label>
+                                    </li>
+                                    <li id="updatordBy">
+                                        <label class="enter_press text_label">Role-Name : ${updatedByRole}</label>
+                                    </li>
+                                    <li id="updator_email">
+                                        <label class="enter_press text_label" id="creatorUserEmail">
+                                            <img class="user_img rounded-square users_image position" src="${thirdUserImage}"><br>
+                                            ${messages.updator_emails.login_email} 
+                                        </label>
+                                    </li>
+                                `);
+                            }else if(updated_by === null) {
+                                branchMenu.append(`
+                                    <li>
+                                        <label class="no_data_label" hidden>No updater details available.</label>
+                                    </li>
+                                `);
+                                console.log("No updater details available as updated_by is null");
+                            }
+                            if (approver_by !== null) {
+                                branchMenu.append(`
+                                    <li id="updator">
+                                        <label class="branch_head_label">Approver</label>
+                                    </li>
+                                    <li id="timeSet">
+                                        <label class="enter_press text_label" id="updatordAt">Date : ${formatDate(approverDate)}</label>
+                                    </li>
+                                    <li id="updatordBy">
+                                        <label class="enter_press text_label">Role-Name : ${aprrovedByRole}</label>
+                                    </li>
+                                    <li id="updator_email">
+                                        <label class="enter_press text_label" id="creatorUserEmail">
+                                            <img class="user_img rounded-square users_image position" src="${fourUserImage}"><br>
+                                            ${messages.approver_emails.login_email} 
+                                        </label>
+                                    </li>
+                                `);
+                            }else if(approver_by === null) {
+                                branchMenu.append(`
+                                    <li>
+                                        <label class="no_data_label" hidden>No updater details available.</label>
+                                    </li>
+                                `);
+                                console.log("No updater details available as updated_by is null");
+                            }
+                            if(created_by === 1 && userRole === 1){
+                                branchMenu.append(
+                                    `<li id="#">
+                                        <label class="text_label">Permission-Access :</label>
                                         <span class="badge rounded-pill bg-success ${superAdminApprovalStatus == 1 ? '' : 'display_none'}" id="checkLabelSuperAdmin">Justify</span>
                                         <span class="badge rounded-pill bg-danger ${superAdminApprovalStatus == 0 ? '' : 'display_none'}" id="checkLabelSuperAdmin2">Refuse</span>
-                                    </label>
-                                </li>
-                                <li id="#">
-                                    <label class="text_label">Permission- Blog :
+                                    </li>
+                                    <li id="#">
+                                        <label class="text_label">Permission- Blog :</label>
                                         <span class="badge rounded-pill bg-success ${superAdminApprovalBlogStatus == 1 ? '' : 'display_none'}" id="checkBlogLabelSuperAdmin">Justify</span>
                                         <span class="badge rounded-pill bg-danger ${superAdminApprovalBlogStatus == 0 ? '' : 'display_none'}" id="checkBlogLabelSuperAdmin2">Refuse</span>
-                                    </label>
-                                </li>`
-                            );
-                        }else if(created_by === 3 || userRole === 3){
-                            branchMenu.append(
-                                `<li id="#">
-                                    <label class="text_label">Permission-Access :</label>
-                                    <span class="badge rounded-pill bg-success ${adminApprovalStatus == 1 ? '' : 'display_none'}" id="checkLabelAdmin">Justify</span>
-                                    <span class="badge rounded-pill bg-danger ${adminApprovalStatus == 0 ? '' : 'display_none'}" id="checkLabelAdmin2">Refuse</span>
-                                </li>`
-                            );
+                                    </li>`
+                                );
+                            }else if(created_by === 3 || userRole === 3){
+                                branchMenu.append(
+                                    `<li id="#">
+                                        <label class="text_label">Permission-Access :</label>
+                                        <span class="badge rounded-pill bg-success ${adminApprovalStatus == 1 ? '' : 'display_none'}" id="checkLabelAdmin">Justify</span>
+                                        <span class="badge rounded-pill bg-danger ${adminApprovalStatus == 0 ? '' : 'display_none'}" id="checkLabelAdmin2">Refuse</span>
+                                    </li>`
+                                );
+                            }
+                            $('#users_branch_change_id').val(id);
+                            $('#users_branch_email_id').val(id);
+                            $("#branch_change_role_id").val(role_id);
+    
+                            return ()=>{
+                                clearTimeout(debounceTimer);
+                            };
                         }
-                        $('#users_branch_change_id').val(id);
-                        $('#users_branch_email_id').val(id);
-                        $("#branch_change_role_id").val(role_id);
-
-                        return ()=>{
-                            clearTimeout(debounceTimer);
-                        };
                     }
+                });
+
+            }else {
+                // show validation messages only if missing
+                if (!role_id) {
+                    $("#roleError").append(`<span style="color:orangered;">[ Select User Role ]</span>`);
                 }
-            });
+                if (!id) {
+                    $("#emailError").append(`<span style="color:orangered;">[ Select User Email ]</span>`);
+                }
+            }
+            
         });
 
         // =======================================

@@ -428,7 +428,7 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/branch/branch.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/branch/branch-min.css">
 <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 @endsection
 

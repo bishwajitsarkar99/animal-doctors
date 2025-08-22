@@ -43,7 +43,7 @@
       @include('super-admin.branch.user-branch-access-permission')
   </div>
   @include('loader.action-loader')
-    {{-- start modal --}}
+  {{-- start modal --}}
   @foreach($modals as $data)
     <x-Modals.Modal modalParentClass="modal fade" modalChildClass="modal-dialog modal-sm modal-dialog-centered" modalId="{{ $data['modal_id'] }}">
       <x-Modals.SmallModals.SmallModal className="modal-content small_modal" styling="border:none;" smModalId="admin_modal_box">
@@ -188,7 +188,7 @@
                 <span class="group-field branch-skeleton" id="usrRole3"></span><br>
                 <span class="group-field branch-skeleton" id="usrEmail3"></span>
               </div>
-              <div class="row profile-heading pb-3">
+              <div class="row profile-heading">
                 @csrf
                 <input type="hidden" id="users_branch_change_id">
                 <input type="hidden" id="users_branch_email_id">
@@ -264,7 +264,7 @@
             <div class="content_body">
               <div class="row profile-heading">
                 <div class="content_message change_head branch-skeleton">
-                  <label class="group-field ms-2" for="branch-name">User branch change </label>
+                  <label class="group-field ms-2" for="branch-name">User branch change <span id="success_message"></span></label>
                 </div>
                 <div class="form-group content_message change_head branch-skeleton">
                   <label class="group-field ms-2" for="mail-transport">Role <span id="roleError"></span></label><br>
@@ -418,9 +418,7 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/product-item/category/category.css">
-<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/branch/branch.css">
-<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/action-loader/action-loader-min.css">
+<link rel="stylesheet" href="{{asset('backend_asset')}}/support_asset/branch/branch-min.css">
 <link href="{{ asset('backend_asset') }}/main_asset/css/select2.min.css" rel="stylesheet" />
 @endsection
 
@@ -431,8 +429,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- jQuery UI Auto-Complete or Date Picker -->
 <script src="{{asset('backend_asset')}}/support_asset/date-picker/jquery/jquery-ui.min.js"></script>
-<script type="module" src="{{asset('/module/module-min-js/helper-function-min.js')}}"></script>
-<script type="module" src="{{asset('/module/module-min-js/design-helper-function-min.js')}}"></script>
 
 <script>
   // skeleton

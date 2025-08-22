@@ -786,11 +786,13 @@ ul#user_branch_menu {
 }
 .branch_head_label{
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    color: #000000;
+    color: #444;
     font-family: var(--nav-font-family);
     text-transform: uppercase;
     font-size: 11px;
     font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: darkgray;
 }
 #branch_info,.branch_chang{
     padding: 0px 16px !important;
@@ -900,7 +902,7 @@ ul#user_branch_menu>li, ul#usrMenu>li{
     align-items: center !important;
     justify-content: space-between !important;
     display: flex !important;
-    /* background-color: var(--bs-list-group-bg); */
+    background-color: var(--bs-list-group-bg);
     padding: var(--bs-list-group-item-confrm-padding-y) var(--bs-list-group-item-confrm-padding-x);
     color: black;
     text-decoration: none;
@@ -918,7 +920,7 @@ ul#user_branch_menu_change>li, ul#usrMenu>li{
     align-items: center !important;
     justify-content: space-between !important;
     display: flex !important;
-    /* background-color: var(--bs-list-group-bg); */
+    background-color: var(--bs-list-group-bg);
     padding: var(--bs-list-group-items-padding-y) var(--bs-list-group-items-padding-x);
     color: black;
     text-decoration: none;
@@ -1610,6 +1612,28 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     font-size: 11px;
     font-family: var(--nav-font-family);
     padding-left: 2px;
+}
+input.form-switch.form-check-input:checked {
+    background-color: #08a05c;
+}
+input.form-switch.form-check-input {
+    margin-top: 5px;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    background-color: orangered;
+}
+span#checkLabelSuperAdmin {
+    margin-top: 5px;
+}
+span#checkLabelSuperAdmin2 {
+    margin-top: 5px;
+}
+span#checkBlogLabelSuperAdmin {
+    margin-top: 5px;
+}
+span#checkBlogLabelSuperAdmin2 {
+    margin-top: 5px;
 }
 button#branch_type_cancel,button#branch_type_create {
     line-height: 0px;

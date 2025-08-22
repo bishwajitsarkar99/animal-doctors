@@ -1764,7 +1764,7 @@ class BranchServiceProvicer
             } else {
                 return response()->json([
                     'status' => 404,
-                    'messages' => 'No data found for the given email.',
+                    'messages' => 'Please add access.',
                 ]);
             }
         }elseif($auth->role == 3 && $authEmail){
@@ -1778,7 +1778,7 @@ class BranchServiceProvicer
             } else {
                 return response()->json([
                     'status' => 404,
-                    'messages' => 'No data found for the given email.',
+                    'messages' => 'Please add access.',
                 ]);
             }
         }
