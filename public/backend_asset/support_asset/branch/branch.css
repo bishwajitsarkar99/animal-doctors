@@ -792,9 +792,6 @@ ul#user_branch_menu {
     font-size: 11px;
     font-weight: 700;
 }
-.chng_brnch{
-    padding: 0px 8px !important; 
-}
 #branch_info,.branch_chang{
     padding: 0px 16px !important;
     background-color: #e7e7d763;
@@ -1382,7 +1379,7 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
 }
 .branch-skeleton,.branch-delete-skeleton,.img-branch-skeleton,.head-branch-skeleton,.modal-head-skeleton,.branch-content-skeleton,
 .branch-content-footer-skeleton,.hd-branch-skeleton,.mini_cricle_skeletone,.branch-line-content-skeleton,.cricle_skeletone,
-.narrow-skeleton.menu-skeleton.img-menu-skeleton{
+.narrow-skeleton.menu-skeleton.img-menu-skeleton.img-branch-confirm-skeleton.img-branch-change-skeleton{
     position: relative;
 }
 .mini_cricle_skeletone::before{
@@ -1416,6 +1413,32 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     position: absolute;
     left: 0px;
     top: -4px;
+    width: 32px;
+    height: 32px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 50%;
+}
+.img-branch-confirm-skeleton::before{
+    content: "";
+    position: absolute;
+    left: 16px;
+    top: 15px;
+    width: 32px;
+    height: 32px;
+    z-index: 10;
+    background: linear-gradient(90deg, #b3b3b3, #f9f9f9, #b3b3b3);
+    background-size: 200%;
+    animation: 1s infinite reverse skeleton;
+    border-radius: 50%;
+}
+.img-branch-change-skeleton::before{
+    content: "";
+    position: absolute;
+    left: 27px;
+    top: 15px;
     width: 32px;
     height: 32px;
     z-index: 10;
@@ -1581,6 +1604,12 @@ input#brnch_id,input#branch_name,input#branch_type,input#division_id,input#distr
     border: none;
     outline: none;
     margin-top: 15px;
+}
+.error_val {
+    color: orangered !important;
+    font-size: 11px;
+    font-family: var(--nav-font-family);
+    padding-left: 2px;
 }
 button#branch_type_cancel,button#branch_type_create {
     line-height: 0px;

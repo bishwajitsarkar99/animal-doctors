@@ -27,12 +27,16 @@
         searchRoleFetch();
         searchEmailFetch();
         selectBranchFetch();
+        // =====================================================
         // Initialize the button loader for the login button
+        // =====================================================
         buttonLoader('#save_btn_confirm', '.save-icon', '.save-btn-text', 'Confirm...', 'Confirm', 1000);
         buttonLoader('#cancel_btn', '.cancel-icon', '.cancel-btn-text', 'Cancel...', 'Cancel', 1000);
         buttonLoader('#cancel_of_btn', '.cancel-of-icon', '.cancel-of-btn-text', 'Cancel...', 'Cancel', 1000);
         buttonLoader('#pagePermision', '.permission-page-icon', '.permission-page-btn-text', 'Permission...', 'Permission', 1000);
+        // ==================================================================
         // Initialize Select2 for all elements with the 'select2' class
+        // ==================================================================
         $('.select2').each(function () {
             let placeholderText = '';
 
@@ -58,7 +62,9 @@
                 });
             }
         });
+        // =====================================================================
         // Set custom placeholder for the search input inside Select2 dropdowns
+        // =====================================================================
         $('#search_branch').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search branch...');
         });
@@ -80,7 +86,9 @@
         $('#branch_email_id').on('select2:open', function() {
             $('.select2-search__field').attr('placeholder', 'Search email...');
         });
+        // ===========================================
         // Reinitialize Select2 for first modals
+        // ===========================================
         function initializeSelect2(modalSelector) {
             $(modalSelector).on('shown.bs.modal', function () {
                 $(this).find('.select2').each(function () {
@@ -115,7 +123,9 @@
             });
         }
 
+        // ==========================================
         // Initialize Select2 for both modals
+        // ==========================================
         initializeSelect2('#roleemailbranch');
         initializeSelect2('#branchChange');
         initializeSelect2('#userBranchChangeModal');
@@ -181,7 +191,9 @@
             });
         }
 
+        // ===============================================
         // fetch branch for select (change branch)
+        // ===============================================
         function selectBranchFetch(){
             const currentUrl = "{{ route('user_branch_fetch.action') }}";
 
@@ -219,7 +231,9 @@
             });
         }
 
+        // ========================================
         // fetch created user login email
+        // ========================================
         function fetch_initial_role(){
             const currentUrl = "{{ route('fetch_email_three.action') }}";
 
@@ -299,7 +313,8 @@
                         $("#processModal_body").addClass('loading_body_area');
                         $("#branchInfo").attr('hidden', true);
                         $("#add_accss").attr('hidden', true);
-                        setTimeout(() => {
+
+                        let debounceTimer = setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
                             $("#dataPullingProgress").attr('hidden', true);
                             $("#access_modal_box").removeClass('progress_body');
@@ -342,6 +357,10 @@
                             $('#add_location').val(response.messages.location);
 
                         }, 1500);
+
+                        return ()=>{
+                            clearTimeout(debounceTimer)
+                        };
                         
                     }
                     
@@ -349,7 +368,9 @@
             });
         });
 
+        // =========================================
         // Clear input field
+        // =========================================
         function clearFields(){
             $('#brnch_id').val("");
             $('#branch_type').val("");
@@ -366,7 +387,9 @@
             }, 100);
         }
 
+        // ==========================================
         // Cancel Access
+        // ==========================================
         $(document).on('click', '#cancel_of_btn', function(){
             $("#branchInfo").attr('hidden', true);
             $("#add_accss").attr('hidden', true);
@@ -378,7 +401,9 @@
             }, 100);
         });
 
+        // ==========================================
         // Remove Validation Errors
+        // ==========================================
         $(document).on('change', '.email_id, .role_id', function(){
             var selected_val = $(this).val();
 
@@ -391,8 +416,10 @@
                 $("#savForm_error2").removeClass('alert_show_errors');
             }
         });
-
+        
+        // ==========================================
         // Refresh
+        // ==========================================
         function showPageLoader() {
             $('#tableOverlayLoader').removeClass('display_none');
         }
@@ -443,9 +470,8 @@
             e.preventDefault();
             $("#roleemailbranch").modal('show');
 
-            var time = null;
 
-            var time = setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 // Remove skeleton classes
                 removeAttributeOrClass([
                     { selector: '.branch-nmT, .branch-rest, .role_nme', type: 'class', name: 'branch-skeleton' },
@@ -454,7 +480,7 @@
             }, 1000);
 
             return () => {
-                clearTimeout(time);
+                clearTimeout(debounceTimer);
             };
         });
 
@@ -491,18 +517,18 @@
                         $.each(response.errors, function (key, err_value) {
                             if (key === "branch_id") {
                                 $("#savForm_error").fadeIn();
-                                $('#savForm_error').html('<span class="error_val" style="font-size:12px;font-weight:700;">' + err_value + '</span>');
+                                $('#savForm_error').html('<span style="font-size:11px;font-weight:600;">' + err_value + '</span>');
                                 $("#savForm_error").addClass("alert_show_errors");
                                 $('#add_branch_id').addClass('is-invalid');
                                 $('#add_branch_id').html("");
                             } else if (key === "email_id") {
                                 $("#savForm_error3").fadeIn();
-                                $('#savForm_error3').html('<span class="error_val" style="font-size:12px;font-weight:700;">' + err_value + '</span>');
+                                $('#savForm_error3').html('<span style="font-size:11px;font-weight:600;">' + err_value +  '</span>');
                                 $("#savForm_error3").addClass("alert_show_errors");
                                 $('#email_id').next('.select2-container').find('.select2-selection').addClass('is-invalid');
                             } else if (key === "role_id") {
                                 $("#savForm_error2").fadeIn();
-                                $('#savForm_error2').html('<span class="error_val" style="font-size:12px;font-weight:700;">' + err_value + '</span>');
+                                $('#savForm_error2').html('<span style="font-size:11px;font-weight:600;">' + err_value +  '</span>');
                                 $("#savForm_error2").addClass("alert_show_errors");
                                 $('#role_id').next('.select2-container').find('.select2-selection').addClass('is-invalid');
                             }
@@ -514,7 +540,7 @@
                         $("#access_modal_box").addClass('loader_area');
                         $("#processModal_body").removeClass('loading_body_area');
 
-                        setTimeout(() => {
+                        let debounceTimer = setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
                             $("#pageLoader").attr('hidden', true);
                             $("#access_modal_box").removeClass('loader_area');
@@ -531,17 +557,33 @@
                             $('#savForm_error').html("");
                             $('#savForm_error2').html("");
                             $('#savForm_error3').html("");
-                            $('#success_message').html("");
-                            $('#success_message').addClass('alert_show ps-1 pe-1');
-                            $('#success_message').fadeIn();
-                            $('#success_message').text(response.messages);
-                            setTimeout(() => {
-                                $('#success_message').fadeOut(3000);
-                            }, 3000);
+                            $("#add_branch_id").val();
+                            $("#add_branch_type").val();
+                            $("#add_branch_name").val();
+                            $("#add_division_id").val();
+                            $("#add_district_id").val();
+                            $("#add_upazila_id").val();
+                            $("#add_town_name").val();
+                            $("#add_location").val();
+                            $("#role_id").val();
+                            $("#email_id").val();
+
+                            let debounceTimer = setTimeout(() => {
+                                showSuccessToast(response.messages)
+                            }, 2000);
 
                             clearFields();
                             searchBranch();
+                            
+                            return ()=>{
+                                clearTimeout(debounceTimer);
+                            };
+
                         }, 1500);
+
+                        return ()=>{
+                            clearTimeout(debounceTimer);
+                        };
                     }
                 },
                 error: function (xhr, status, error) {
@@ -576,6 +618,15 @@
             });
             
         });
+
+        // ================================
+        // Show Message Tostar
+        // ================================
+        function showSuccessToast(messages) {
+            $('#toast-body-message').text(messages);
+            const toast = new bootstrap.Toast(document.getElementById('liveToast'));
+            toast.show();
+        }
 
         // Add Branch Access For User by Modal --- Cancel or Close
         $(document).on('click', '#cancle_access, .access_cancel', function(){
@@ -632,7 +683,10 @@
                 }
             });
         }
+
+        // ============================================================================
         // Role Fetch For User Permission permission_user_role  permission_user_email 
+        // ============================================================================
         function searchRoleFetch(branchID, callback) {
             if (!branchID) {
                 return;
@@ -683,7 +737,10 @@
                 }
             });
         }
+        
+        // ===================================================
         // Email Fetch For User Permission
+        // ===================================================
         function searchEmailFetch(selectID, callback) {
             if (!selectID) {
                 return;
@@ -729,7 +786,10 @@
                 }
             });
         }
+
+        // ===================================================
         // tab access permission select document
+        // ===================================================
         $(document).on('click Enter', '#pagePermision', function(){
             $("#tabAccess").removeAttr('hidden');
             $("#tabAccess").addClass('active');
@@ -739,7 +799,10 @@
             $("#branchBox").removeAttr('hidden');
             searchBranchFetch();
         });
+
+        // ===================================================
         // Back Home page
+        // ===================================================
         $(document).on('click Enter', '.branch_close, #tabHome', function(){
             $("#tabAccess").attr('hidden', true);
             $("#home").addClass('active show');
@@ -748,7 +811,10 @@
             $("#userBranchPermission").removeClass('active show');
             // $("#branchBox").setAttribute('hidden', false);
         });
+
+        // ===================================================
         // menu close event 
+        // ===================================================
         $(document).on('click', '#branch_close, #role_close, #email_close', function () {
             // Get the IDs of the boxes
             const branchBox = document.getElementById('branchBox');
@@ -764,7 +830,10 @@
                 emailBox.setAttribute('hidden', true);
             }
         });
+
+        // ===================================================
         // show Role Box press enter / click event
+        // ===================================================
         $(document).on('click keydown', '#select_list_item', function(){
             if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
                 const selectedVal = $(this).attr('data-val');
@@ -777,7 +846,10 @@
                 }
             }
         });
+
+        // ===================================================
         // show Role Box press enter / click event
+        // ===================================================
         $(document).on('click keydown Enter', '#role_select_list_item', function(){
             if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
                 const selectedVal = $(this).attr('data-val');
@@ -791,7 +863,9 @@
             }
         });
 
+        // ===================================================
         // Get User Email Data 
+        // ===================================================
         $(document).on('click keydown Enter', '#email_select_list_item', function(){
             if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')){
                 const id = $(this).attr('value');
@@ -801,7 +875,7 @@
                     $('#user_email_id').val(id);
                     $('#users_email_id').val(id);
                     $("#userAccessActionModal").modal('show');
-                    const time = setTimeout(() => {
+                    let debounceTimer = setTimeout(() => {
                         removeAttributeOrClass([
                             {
                                 selector: '.head_title, .head_btn',
@@ -819,7 +893,12 @@
                                 name: 'group-branch-skeleton'
                             },
                         ]);
-                    }, 1000);      
+                    }, 1000); 
+
+                    return ()=>{
+                        clearTimeout(debounceTimer);
+                    };
+                         
                 } else if (selectedVal === '0') {
                     $("#userAccessActionModal").modal('hide');
                 }
@@ -828,7 +907,9 @@
             }
         });
 
+        // ===================================================
         // Handel Checkbox
+        // ===================================================
         $("#checkLabelSuperAdmin").show();
         $("#checkLabelSuperAdmin2").hide();
         $("#checkBlogLabelSuperAdmin").show();
@@ -865,13 +946,19 @@
                 $("#checkLabelAdmin2").show();
             }
         });
+
+        // ==================================================
         // back Acce Permission Modal
+        // ==================================================
         $(document).on('click', '.back_action_box, .cancel_action_box', function(e){
             e.preventDefault();
             $("#userAccessActionModal").modal('show');
             $("#userAccessPermissionModal").modal('hide');
         });
+        
+        // ==================================================
         // back Acce Permission Confirm Modal
+        // ==================================================
         $(document).on('click', '#cancel_btn, .access_confirm_back', function(e){
             e.preventDefault();
             $("#userAccessPermissionConfirmModal").modal('hide');
@@ -897,20 +984,26 @@
             $("#loadingProgress").removeAttr('hidden');
             $("#access_modal_box").addClass('progress_body');
             $("#processModal_body").addClass('loading_body_area');
-            setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 $("#accessconfirmbranch").modal('hide');
                 $("#loadingProgress").attr('hidden', true);
                 $("#access_modal_box").removeClass('progress_body');
                 $("#processModal_body").removeClass('loading_body_area');
                 $("#userAccessPermissionModal").modal('show');
-                setTimeout(() => {
+                let debounceTimer = setTimeout(() => {
                     $(".branch_namehead").removeClass('branch-skeleton');
                     $("#usrImage").removeClass('img-branch-skeleton');
                     $("#usrRole").removeClass('branch-skeleton');
                     $("#usrEmail").removeClass('branch-skeleton');
                     $("#user_branch_menu").removeClass('menu-skeleton');
                 }, 2000);
+
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                };
+
             }, 1500);
+
             
             var id = $("#users_email_id").val();
 
@@ -1134,29 +1227,35 @@
             e.preventDefault();
             $("#userAccessPermissionConfirmModal").modal('show');
             $("#userAccessPermissionModal").modal('hide');
-            const time = setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 removeAttributeOrClass([
                     {
-                        selector: '#access_confirm_button, #cancel_btn, .access_confirm_back, .confirm-label, #usrConfrmRole, #usrConfrmEmail',
+                        selector: '#usrConfrmRole, #usrConfrmEmail',
                         type: 'class',
-                        name: 'branch-skeleton'
+                        name: 'head-branch-skeleton'
                     },
                     {
                         selector: '#usrConfrmImage',
                         type: 'class',
-                        name: 'img-branch-skeleton'
+                        name: 'img-branch-confirm-skeleton'
                     },
                     {
-                        selector: '.access_confirm_head_title',
+                        selector: '.access_confirm_head_title, .confirm-label',
                         type: 'class',
                         name: 'head-branch-skeleton'
                     },
 
                 ]);
             }, 1000);
+
+            return ()=>{
+                clearTimeout(debounceTimer);
+            };
         });
 
+        // =======================================
         // User Access Permission
+        // =======================================
         $(document).on('click', '#access_confirm_button', function(e){
             e.preventDefault();
             var id = $("#users_email_id").val();
@@ -1208,34 +1307,42 @@
                         $("#processingProgress").removeAttr('hidden');
                         $("#access_modal_box").addClass('progress_body');
                         $("#processModal_body").addClass('loading_body_area');
-                        setTimeout(() => {
+                        let debounceTimer = setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
                             $("#processingProgress").attr('hidden', true);
                             $("#access_modal_box").removeClass('progress_body');
                             $("#processModal_body").removeClass('loading_body_area');
                             //$('#updateForm_error').html("");
-                            $('#success_messages').html("");
-                            $('#success_messages').addClass('alert_show ps-1 pe-1');
-                            $('#success_messages').fadeIn();
-                            $("#success_messages").text(response.messages);
 
                             $("#checkingSuperAdminAccess").prop("checked", false);
                             $("#checkingSuperAdminBlog").prop("checked", false);
                             $("#checkingAdminAccess").prop("checked", false);
 
-                            setTimeout(() => {
-                                $("#success_messages").fadeOut();
-                            }, 3000);
-                        }, 3000);
+                            let debounceTimer = setTimeout(() => {
+                                showSuccessToast(response.messages)
+                            }, 2000);
+
+                            return ()=>{
+                                clearTimeout(debounceTimer);
+                            };
+
+                        }, 1500);
+
                         searchBranchFetch();
                         searchRoleFetch();
                         searchEmailFetch();
+
+                        return ()=>{
+                            clearTimeout(debounceTimer);
+                        };
                     } 
                 }
             });
         });
-
+        
+        // =======================================
         // Branch Change Modal
+        // =======================================
         $(document).on('click', '#branch_change_btn', function(e){
             e.preventDefault();
             // Clear Select2 fields reliably with delay
@@ -1244,9 +1351,8 @@
                 $('#branch_email_id').val(null).trigger('change');
             }, 100);
             $("#branchChange").modal('show');
-            var time = null;
 
-            var time = setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 // Remove skeleton classes
                 removeAttributeOrClass([
                     { selector: '.change_head', type: 'class', name: 'branch-skeleton' },
@@ -1255,41 +1361,13 @@
             }, 1000);
 
             return () => {
-                clearTimeout(time);
+                clearTimeout(debounceTimer);
             };
         });
 
-        // Branch Change Modal
-        $(document).on('click', '.branch_id_btn', function(e){
-            e.preventDefault();
-            addAttributeOrClass([
-                { selector: '.first_part', type: 'class', name: 'branch-skeleton' },
-                { selector: '.cancel_change_box', type: 'class', name: 'branch-skeleton' },
-                { selector: '.branch_name_heading', type: 'class', name: 'hd-branch-skeleton' },
-                { selector: '.second_part', type: 'class', name : 'branch-content-skeleton'},
-                { selector: '.third_part', type: 'class', name : 'branch-content-footer-skeleton'},
-                { selector: '#cancle_change', type: 'class', name: 'branch-skeleton' },
-                { selector: '.change_btn_confirm, #cancle_change', type: 'class', name: 'mn-branch-skeleton' },
-            ]);
-            var time = setTimeout(() => {
-                // Remove skeleton classes
-                removeAttributeOrClass([
-                    { selector: '.first_part', type: 'class', name: 'branch-skeleton' },
-                    { selector: '.cancel_change_box', type: 'class', name: 'branch-skeleton' },
-                    { selector: '#cancle_change', type: 'class', name: 'branch-skeleton' },
-                    { selector: '.branch_name_heading', type: 'class', name: 'hd-branch-skeleton' },
-                    { selector: '.second_part', type: 'class', name : 'branch-content-skeleton'},
-                    { selector: '.third_part', type: 'class', name : 'branch-content-footer-skeleton'},
-                    { selector: '.change_btn_confirm, #cancle_change', type: 'class', name: 'mn-branch-skeleton' },
-                ]);
-            }, 3000);
-
-            return () => {
-                clearTimeout(time);
-            };
-        });
-
+        // =======================================
         // Cancel or close Branch Modal
+        // =======================================
         $(document).on('click', '.modal_close , #cancel_change', function(){
             $('.select2').each(function () {
                 const id = $(this).attr('id');
@@ -1316,17 +1394,52 @@
             });
         });
 
+        // =======================================
         // Back Branch Modal
+        // =======================================
         $(document).on('click', '.cancel_change_box, #cancle_change', function(e){
             $("#userBranchChangeModal").modal('hide');
             $("#branchChange").modal('show');
         });
 
+        // =======================================
+        // Branch Change Modal
+        // =======================================
+        $(document).on('click', '.branch_id_btn', function(e){
+            e.preventDefault();
+            let debounceTimer = setTimeout(() => {
+                // Remove skeleton classes
+                removeAttributeOrClass([
+                    { selector: '.first_part', type: 'class', name: 'branch-skeleton' },
+                    { selector: '.cancel_change_box', type: 'class', name: 'branch-skeleton' },
+                    { selector: '.branch_name_heading', type: 'class', name: 'hd-branch-skeleton' },
+                    { selector: '.second_part', type: 'class', name : 'branch-content-skeleton'},
+                    { selector: '.third_part', type: 'class', name : 'branch-content-footer-skeleton'},
+                    { selector: '#usrRole3, #usrEmail3', type: 'class', name : 'branch-skeleton'},
+                    { selector: '#usrImage3', type: 'class', name : 'img-branch-change-skeleton'},
+                ]);
+            }, 3000);
+
+            return () => {
+                clearTimeout(debounceTimer);
+            };
+        });
+        
+        // =======================================
         // Branch Change
+        // =======================================
         $(document).on('click', '#branch_id_btn', function(e){
             e.preventDefault();
             var id = $("#branch_email_id").val();
             var role_id = $("#branch_role_id").val();
+
+            if(id && role_id !== ''){
+                $("#roleError").empty();
+                $("#emailError").empty();
+            }else{
+                $("#roleError").append(`<span style="color:orangered;">[ Select User Role ]</span>`);
+                $("#emailError").append(`<span style="color:orangered;">[ Select User Email ]</span>`);
+            }
 
             $("#users_branch_email_id").empty();
             $("#user_branch_menu_change").empty();
@@ -1365,13 +1478,14 @@
                         $("#dataPullingProgress").removeAttr('hidden');
                         $("#access_modal_box").addClass('progress_body');
                         $("#processModal_body").addClass('loading_body_area');
-                        setTimeout(() => {
+                        let debounceTimer = setTimeout(() => {
                             $("#userBranchChangeModal").modal('show');
                             $("#accessconfirmbranch").modal('hide');
                             $("#dataPullingProgress").attr('hidden', true);
                             $("#access_modal_box").removeClass('progress_body');
                             $("#processModal_body").removeClass('loading_body_area');
                         }, 1500);
+
                         var userRole = {{ auth()->user()->role }};
                         const messages = response.messages;
                         const created_by = messages.created_by;
@@ -1561,12 +1675,18 @@
                         $('#users_branch_change_id').val(id);
                         $('#users_branch_email_id').val(id);
                         $("#branch_change_role_id").val(role_id);
+
+                        return ()=>{
+                            clearTimeout(debounceTimer);
+                        };
                     }
                 }
             });
         });
 
+        // =======================================
         // Branch Change Handle
+        // =======================================
         $(document).on('change', '#branch_name_id', function(){
             var selectedOption = $(this).find('option:selected');
             // Update hidden inputs with selected option's data attributes
@@ -1581,9 +1701,17 @@
 
         });
 
+        // =======================================
         // Confirm Branch Change
+        // =======================================
         $(document).on('click', '#change_btn_confirm', function(e){
             
+            var branchName = $('#branch_name_id').val();
+            if(branchName !== ''){
+                $("#barnchNameError").empty();
+            }else{
+                $("#barnchNameError").append(`<span style="color:orangered;">[ Select Branch Name ]</span>`);
+            }
             // for user_branch_access_permissions table 
             var id = $("#users_branch_email_id").val();
             var branch_id = $("#change_branch_id").val();
@@ -1629,15 +1757,12 @@
                         $("#processingProgress").removeAttr('hidden');
                         $("#access_modal_box").addClass('progress_body');
                         $("#processModal_body").addClass('loading_body_area');
-                        setTimeout(() => {
+                        let debounceTimer = setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
                             $("#processingProgress").attr('hidden', true);
                             $("#access_modal_box").removeClass('progress_body');
                             $("#processModal_body").removeClass('loading_body_area');
-                            $('#success_message').html("");
-                            $('#success_message').addClass('alert_show ps-1 pe-1');
-                            $('#success_message').fadeIn();
-                            $("#success_message").text(response.messages);
+
                             // Clear Select2 fields reliably with delay
                             setTimeout(function() {
                                 $('#branch_role_id').val(null).trigger('change');
@@ -1645,13 +1770,23 @@
                                 $('#branch_name_id').val(null).trigger('change');
                             }, 100);
 
-                            setTimeout(() => {
-                                $("#success_message").fadeOut();
-                            }, 3000);
-                        }, 3000);
+                            let debounceTimer = setTimeout(() => {
+                                showSuccessToast(response.messages)
+                            }, 2000);
+
+                            return ()=>{
+                                clearTimeout(debounceTimer);
+                            };
+
+                        }, 2000);
+
                         searchBranchFetch();
                         searchRoleFetch();
                         searchEmailFetch();
+
+                        return ()=>{
+                            clearTimeout(debounceTimer);
+                        };
                     }
                 }
             });
@@ -1688,13 +1823,15 @@
                         $("#loadingProgress").removeAttr('hidden');
                         $("#access_modal_box").addClass('progress_body');
                         $("#processModal_body").addClass('loading_body_area');
-                        setTimeout(() => {
+                        let debounceTimer = setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
                             $("#loadingProgress").attr('hidden', true);
                             $("#access_modal_box").removeClass('progress_body');
                             $("#processModal_body").removeClass('loading_body_area');
                             $("#deletebranch").modal('show');
                         }, 1500);
+
+
                         var userRole = {{ auth()->user()->role }};
                         const messages = response.messages;
                         const created_by = messages.created_by;
@@ -1886,6 +2023,10 @@
                         }
                         $('#user_email_id').val(id);
                         $('#branch_delete_id').val(id);
+
+                        return ()=>{
+                            clearTimeout(debounceTimer);
+                        };
                     }
                 }
             });
@@ -1897,7 +2038,7 @@
         $(document).on('click', '#access_branch_delete', function(e){
             e.preventDefault();
 
-            const time = setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 removeAttributeOrClass([
                     {
                         selector: '.hedng, #usrRole4, #usrEmail4, #cate_delete, #cate_delete2',
@@ -1912,23 +2053,33 @@
 
                 ]);
             }, 4000);
+
+            return ()=>{
+                clearTimeout(debounceTimer);
+            };
         });
 
+        // ==============================================
         // User Branch Delete Modal Back
+        // ==============================================
         $(document).on('click', '.hedng_btn, #noButton', function(e){
             e.preventDefault();
             $("#deletebranch").modal('hide');
             $("#userAccessActionModal").modal('show');
         });
 
+        // ==============================================
         // User Branch Confirm Delete Modal Back
+        // ==============================================
         $(document).on('click', '.head_btn2, #cancel_delete_confrm', function(e){
             e.preventDefault();
             $("#deleteconfirmbranch").modal('hide');
             $("#deletebranch").modal('show');
         });
 
+        // ==============================================
         // User Branch Confirm Delete Modal
+        // ==============================================
         $(document).on('click', '#yesButton', function(e){
             e.preventDefault();
             var id = $("#branch_delete_id").val();
@@ -1943,37 +2094,47 @@
             $("#loadingProgress").removeAttr('hidden');
             $("#access_modal_box").addClass('progress_body');
             $("#processModal_body").addClass('loading_body_area');
-            setTimeout(() => {
+            let debounceTimer = setTimeout(() => {
                 $("#accessconfirmbranch").modal('hide');
                 $("#loadingProgress").attr('hidden', true);
                 $("#access_modal_box").removeClass('progress_body');
                 $("#processModal_body").removeClass('loading_body_area');
                 $("#deleteconfirmbranch").modal('show');
+                let debounceTimer = setTimeout(() => {
+                    removeAttributeOrClass([
+                        {
+                            selector: '.confirm_title, #delete_text_message',
+                            type: 'class',
+                            name: 'branch-skeleton'
+                        },
+                        {
+                            selector: '#usrConfrmEmail',
+                            type: 'class',
+                            name: 'branch-skeleton'
+                        },
+                        {
+                            selector: '#usrConfrmImage',
+                            type: 'class',
+                            name: 'img-branch-skeleton'
+                        },
+
+                    ]);
+                }, 2000);
+
+                return ()=>{
+                    clearTimeout(debounceTimer);
+                };
+
             }, 1500);
 
-            const time = setTimeout(() => {
-                removeAttributeOrClass([
-                    {
-                        selector: '.confirm_title, #delete_text_message',
-                        type: 'class',
-                        name: 'branch-skeleton'
-                    },
-                    {
-                        selector: '#usrConfrmEmail',
-                        type: 'class',
-                        name: 'narrow-skeleton'
-                    },
-                    {
-                        selector: '#usrConfrmImage',
-                        type: 'class',
-                        name: 'img-branch-skeleton'
-                    },
-
-                ]);
-            }, 3000);
+            return ()=>{
+                clearTimeout(debounceTimer);
+            };
         });
-
+        
+        // ==========================================
         // User Branch Confirm Delete
+        // ==========================================
         $(document).on('click', '#delete_branch', function(e){
             e.preventDefault();
             var id = $("#branch_delete_id").val();
@@ -2018,23 +2179,29 @@
                         $("#processingProgress").removeAttr('hidden');
                         $("#access_modal_box").addClass('progress_body');
                         $("#processModal_body").addClass('loading_body_area');
-                        setTimeout(() => {
+                        let debounceTimer = setTimeout(() => {
                             $("#accessconfirmbranch").modal('hide');
                             $("#processingProgress").attr('hidden', true);
                             $("#access_modal_box").removeClass('progress_body');
                             $("#processModal_body").removeClass('loading_body_area');
-                            $('#success_messages').html("");
-                            $('#success_messages').addClass('alert_show ps-1 pe-1');
-                            $('#success_messages').fadeIn();
-                            $("#success_messages").text(response.messages);
 
-                            setTimeout(() => {
-                                $("#success_messages").fadeOut();
-                            }, 3000);
-                        }, 3000);
+                            let debounceTimer = setTimeout(() => {
+                                showSuccessToast(response.messages)
+                            }, 2000);
+
+                            return ()=>{
+                                clearTimeout(debounceTimer);
+                            };
+
+                        }, 2000);
+
                         searchBranchFetch();
                         searchRoleFetch();
                         searchEmailFetch();
+
+                        return ()=>{
+                            clearTimeout(debounceTimer);
+                        };
                     } 
                 }
             });

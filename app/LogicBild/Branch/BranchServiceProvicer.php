@@ -1579,10 +1579,10 @@ class BranchServiceProvicer
             'role_id' => 'required',
             'branch_id' => 'required',
         ],[
-            'email_id.required' => 'Email is required.',
-            'email_id.unique' => 'The email has already taken.',
-            'role_id.required' => 'Role is required.',
-            'branch_id.required' => 'Branch is is required.',
+            'email_id.required' => ': Email is required.',
+            'email_id.unique' => ': The email has already taken.',
+            'role_id.required' => ': Role is required.',
+            'branch_id.required' => ': Branch is is required.',
         ]);
 
         if($validators->fails()){

@@ -1775,7 +1775,7 @@
 
                             let debounceTimer = setTimeout(() => {
                                 showSuccessToast(response.messages)
-                            }, 3000);
+                            }, 2000);
                             return ()=>{
                                 clearTimeout(debounceTimer);
                             }

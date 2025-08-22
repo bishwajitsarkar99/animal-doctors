@@ -29,7 +29,7 @@
 
   <ul class="nav nav-tabs tab_bg" role="tablist" style="background:white;">
     <li class="nav-item tab-skeletone">
-      <a class="nav-link branch active home-text" data-bs-toggle="tab" data-url="#home" id="tabHome"> Create Access</a>
+      <a class="nav-link branch active home-text" data-bs-toggle="tab" data-url="#home" id="tabHome"> User Access</a>
     </li>
     <li class="nav-item tab-skeletone">
       <a class="nav-link branch ms-1" data-bs-toggle="tab" data-url="#userBranchPermission" id="tabAccess" hidden>Access Permission</a>
@@ -65,19 +65,19 @@
             </button>
           @elseif($data['modal_id'] === 'userAccessPermissionModal')
             <h5 class="modal-title ps-1 pe-1 branch-skeleton branch_namehead" style="color: white;" id="staticBackdropLabel"></h5>
-            <button type="button" class="btn-close-modal head_btn" data-bs-dismiss="modal" aria-label="Close" 
+            <button type="button" class="btn-close-modal head_btn cancel_action_box" data-bs-dismiss="modal" aria-label="Close" 
               data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
             </button>
           @elseif($data['modal_id'] === 'userBranchChangeModal')
-            <h5 class="modal-title admin_title head_title ps-1 pe-1 branch_name_heading hd-branch-skeleton branch_name_hd" id="staticBackdropLabel"></h5>
-            <button type="button" class="btn-close-modal head_btn branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
+            <h5 class="modal-title admin_title head_title ps-1 pe-1 branch_name_heading hd-branch-skeleton branch_name_hd" style="color: white;" id="staticBackdropLabel"></h5>
+            <button type="button" class="btn-close-modal cancel_change_box" data-bs-dismiss="modal" aria-label="Close" 
               data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
             </button>
           @elseif($data['modal_id'] === 'userAccessPermissionConfirmModal')
-            <h5 class="modal-title admin_title access_confirm_head_title ps-1 pe-1 head-branch-skeleton" id="staticBackdropLabel">
+            <h5 class="modal-title admin_title access_confirm_head_title ps-1 pe-1 head-branch-skeleton" style="color: white;" id="staticBackdropLabel">
               Confirm User Branch Access
             </h5>
-            <button type="button" class="btn-close-modal head_btn2 branch-skeleton" data-bs-dismiss="modal" aria-label="Close" 
+            <button type="button" class="btn-close-modal access_confirm_back" data-bs-dismiss="modal" aria-label="Close" 
               data-bs-toggle="tooltip"  data-bs-placement="right" title="{{__('translate.Close')}}" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-danger"></div>' id="canl">
             </button>
           @elseif($data['modal_id'] === 'deletebranch')
@@ -154,13 +154,13 @@
                 <input type="hidden" id="add_town_name">
                 <input type="hidden" id="add_location">
                 <div class="content_message branch-nmT branch-skeleton">
-                  <label class="group-field" for="branch-name">Branch-name </label>
+                  <label class="group-field" for="branch-name">Branch-name <span id="savForm_error"></span></label>
                   <input type="text" class="branch_name_sub_title group-field branch-rest" id="confirm_branch_name" readonly>
                 </div>
                 <div class="form-group content_message role_nme branch-skeleton">
-                  <label class="group-field ms-2" for="mail-transport">Role Name</label><br>
+                  <label class="group-field ms-2" for="mail-transport">Role Name <span id="savForm_error2"></span></label><br>
                   <x-Dropdown.DropdownMenu menuType="text" menuClass="form-control form-control-sm role_id select2" menuName="role_id" menuId="role_id" menuSelectLabel="Select Role Name"></x-Dropdown.DropdownMenu>
-                  <label class="group-field ms-2" for="mail-transport">Email Address</label><br>
+                  <label class="group-field ms-2" for="mail-transport">Email Address <span id="savForm_error3"></span></label><br>
                   <x-Dropdown.DropdownMenu menuType="text" menuClass="form-control form-control-sm email_id select2" menuName="email_id" menuId="email_id" menuSelectLabel="Select Email Address"></x-Dropdown.DropdownMenu>
                   <p class="group-field mt-2 ms-2">Would you like to add branch for access, confirm or cancel ?</p>
                 </div>
@@ -183,10 +183,10 @@
             </div>
           @elseif($data['modal_id'] === 'userBranchChangeModal')
             <div class="branch_access">
-              <div class="action_group group first_part branch-skeleton">
-                <span id="usrImage3"></span>
-                <span id="usrRole3"></span>
-                <span id="usrEmail3"></span>
+              <div class="first_part">
+                <span class="img-branch-change-skeleton" id="usrImage3"></span>
+                <span class="group-field branch-skeleton" id="usrRole3"></span><br>
+                <span class="group-field branch-skeleton" id="usrEmail3"></span>
               </div>
               <div class="row profile-heading pb-3">
                 @csrf
@@ -196,15 +196,13 @@
                 <div class="action_group second_part branch-content-skeleton">
                   <ul id="user_branch_menu_change" class="list_group menu table-responsive"></ul>
                 </div>
-                <div class="action_group">
-                  <div class="third_part branch-content-footer-skeleton">
-                    <div class="branch_chang">
-                      <label class="catg_name_label" style="color:white;">Branch-Change</label>
+                <div class="third_part branch-content-footer-skeleton">
+                  <div class="">
+                    <div class="">
+                      <label class="group-field ms-2">Branch-Change <span id="barnchNameError"></span></label>
                     </div>
-                    <div class="chng_brnch">
-                      <select type="text" class="form-control form-control-sm role_id select2" name="branch_name" id="branch_name_id">
-                        <option value="">Select Branch Name</option>
-                      </select>
+                    <div class="">
+                      <x-Dropdown.DropdownMenu menuType="text" menuClass="form-control form-control-sm role_id select2" menuName="branch_name" menuId="branch_name_id" menuSelectLabel="Select Branch Name"></x-Dropdown.DropdownMenu>
                     </div>
                   </div>
                   <!-- Hidden Input Fields for Storing Selected Branch Data -->
@@ -223,14 +221,12 @@
             <form class="add_access_form" autocomplete="off">
               @csrf
               <input type="hidden" id="users_email_id">
-              <div class="modal-body profile-body pb-1">
-                <div class="action_group group">
-                  <span class="img-branch-skeleton" id="usrConfrmImage"></span>
-                  <span class="branch-skeleton" id="usrConfrmRole"></span>
-                  <span class="branch-skeleton" id="usrConfrmEmail"></span>
-                </div>
-                <span class="confirm-label branch-skeleton">Would you like to access, confirm or cancel ?</span>
+              <div class="">
+                <span class="img-branch-confirm-skeleton" id="usrConfrmImage"></span><br>
+                <span class="group-field head-branch-skeleton" id="usrConfrmRole"></span><br>
+                <span class="group-field head-branch-skeleton" id="usrConfrmEmail"></span>
               </div>
+              <p class="confirm-label group-field head-branch-skeleton">Would you like to access, confirm or cancel ?</p>
             </form>
           @elseif($data['modal_id'] === 'deletebranch')
             <div class="row profile-heading">
@@ -256,7 +252,7 @@
               <div class="col-xl-12">
                 <div class="form-group branch role_nme mb-1 branch__category_name">
                   <span class="img-branch-skeleton" id="usrConfrmImage"></span><br>
-                  <span class="group-field narrow-skeleton" id="usrConfrmEmail"></span>
+                  <span class="group-field branch-skeleton" id="usrConfrmEmail"></span>
                   <p class="admin_paragraph branch-skeleton" id="delete_text_message">
                     <label class="group-field" id="cate_confirm" for="id">Are you confirm, delete or cancel ? </label>
                   </p>
@@ -271,9 +267,9 @@
                   <label class="group-field ms-2" for="branch-name">User branch change </label>
                 </div>
                 <div class="form-group content_message change_head branch-skeleton">
-                  <label class="group-field ms-2" for="mail-transport">Role</label><br>
+                  <label class="group-field ms-2" for="mail-transport">Role <span id="roleError"></span></label><br>
                   <x-Dropdown.DropdownMenu menuType="text" menuClass="form-control form-control-sm role_id select2" menuName="role_id" menuId="branch_role_id" menuSelectLabel="Select Role Name"></x-Dropdown.DropdownMenu>
-                  <label class="group-field ms-2" for="mail-transport">Email Address</label><br>
+                  <label class="group-field ms-2" for="mail-transport">Email Address <span id="emailError"></span></label><br>
                   <x-Dropdown.DropdownMenu menuType="text" menuClass="form-control form-control-sm email_id select2" menuName="email_id" menuId="branch_email_id" menuSelectLabel="Select Email Address"></x-Dropdown.DropdownMenu>
                 </div>
               </div>
@@ -324,12 +320,12 @@
             />
           @elseif($data['modal_id'] === 'userBranchChangeModal')
             <x-Modals.SmallModals.Buttons.CancelBtn 
-              className="btn btn-sm danger-repl-btn branch-skeleton back_change_box" 
+              className="btn btn-sm danger-repl-btn back_change_box" 
               btnId="cancle_change" 
               lableName="Access Cancel"
             />  
             <x-Modals.SmallModals.Buttons.ConfirmBtn 
-              className="btn btn-sm success-shadow-btn change_btn_confirm branch-skeleton" 
+              className="btn btn-sm success-shadow-btn change_btn_confirm" 
               btnId="change_btn_confirm" 
               lableName="Confirm" 
               lableClass="confirm-btn-text" 
@@ -416,6 +412,9 @@
     </x-Modals.Modal>
   @endforeach
   {{-- end modal --}}
+
+  <!-- Tostar Message Show -->
+  <x-TostarMessage.Tostar messageId="toast-body-message" tostarId="liveToast" />
 @endsection
 
 @section('css')
