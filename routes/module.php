@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth'], function (){
             Route::put('/module-update/{id}', [ModuleController::Class, 'update'])->name('module.update');
             Route::delete('/module-delete/{id}', [ModuleController::Class, 'delete'])->name('module.delete');
             Route::get('/module-search/{id}', [ModuleController::Class, 'moduleSearch'])->name('module.search');
+            // Module Installations
+            Route::get('/module/module-installions-{slug}/index', [ModuleController::class, 'moduleInstallions'])->name('module.installions');
             
         });
     });

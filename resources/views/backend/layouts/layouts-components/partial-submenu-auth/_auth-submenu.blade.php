@@ -104,7 +104,7 @@
     </div>
 </div>
 <!-- ================= Module ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_module {{ Request::is('application/modules/module-category-index') || Request::is('application/modules/module-name-index') || Request::is('application/modules/module-index') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#appModule" aria-expanded="false" aria-controls="flush-heading">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_module {{ Request::is('application/modules/module-category-index') || Request::is('application/modules/module-name-index') || Request::is('application/modules/module-index') || Request::is('application/module/module-installions-*/index') || Request::is('application/module/module-installions-*/index') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#appModule" aria-expanded="false" aria-controls="flush-heading">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_module_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_module_link" hidden></i>
@@ -124,7 +124,7 @@
             <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('module.index') ? 'active' : '' }}" data-url="{{ route('module.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.Inject')}}
             </a>
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('module.installions') ? 'active' : '' }}" data-url="/application/module/module-installions-{slug}/index" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.Installations')}}
             </a>
         </div>

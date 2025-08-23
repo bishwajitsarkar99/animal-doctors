@@ -204,26 +204,39 @@
                                                 </span>
                                             </div>
                                         @endif
-                                        <div class="bar-chart">
-                                            <div class="--chartanimation" style="width: 100% !important; height: 90px;">
-                                                <svg id="chart_{{ $branchId }}" width="100%" height="120" fill="none" viewBox="0 0 1000 120"style="border: none;overflow: hidden;path {fill: none;stroke-width: 2;}">
-                                                    <path class="line-0" />
-                                                    <path class="line-1" />
-                                                    <path class="line-2" />
-                                                    <path class="line-3" />
-                                                </svg>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
+                    <div class="bar-chart">
+                        <div class="--chartanimation" style="width: 100% !important; height: 90px;">
+                            <svg id="chart_" width="100%" height="120" fill="none" viewBox="0 0 1000 120"style="border: none;overflow: hidden;path {fill: none;stroke-width: 2;}">
+                                <path class="line-0" />
+                                <path class="line-1" />
+                                <path class="line-2" />
+                                <path class="line-3" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
                 {{-- Navigation buttons --}}
-                <div class="d-flex justify-content-between mt-3">
-                    <button id="prevBranch" class="btn btn-outline-primary">Prev</button>
-                    <button id="nextBranch" class="btn btn-outline-primary">Next</button>
+                <div class="d-flex justify-content-between mt-3 mb-3">
+                    <x-Modals.SmallModals.Buttons.ConfirmBtn 
+                        className="btn btn-sm success-shadow-btn prevBranch ms-3" 
+                        btnId="prevBranch" 
+                        lableName="Prev" 
+                        lableClass="prev-confrm-btn-text" 
+                        spinerClass="prev-confrm-icon"
+                    />
+                    <x-Modals.SmallModals.Buttons.ConfirmBtn 
+                        className="btn btn-sm success-shadow-btn nextBranch me-3" 
+                        btnId="nextBranch" 
+                        lableName="Next" 
+                        lableClass="next-confrm-btn-text" 
+                        spinerClass="next-confrm-icon"
+                    />
                 </div>
             </div>
         </x-BranchCards.BranchCard>
@@ -258,8 +271,7 @@
 @push('scripts')
 <!-- number cricle bar and number rolling animation with scrol animation and drag and drop -->
 <script type="module">
-    import { cricleNumberPlate, numberRolling , triggerIfInView, initScrollProgressBar} from "/module/backend-module/backend-module-min.js";
-    import { initializeBarCharts} from "/module/design-helper-function.js";
+    import { cricleNumberPlate, numberRolling , triggerIfInView, initializeBarCharts, initScrollProgressBar} from "/module/backend-module/backend-module-min.js";
 
     // number cricle bar
     const numberClass = '.total-number';
@@ -281,7 +293,7 @@
         numberRolling(numberSelector, containerSelector);
         //initDragAndDrop(column, cardKey, row);
 
-
+        // pagination of the card
         const cards = document.querySelectorAll(".branch-card-item");
         let currentIndex = 0;
 
@@ -289,15 +301,6 @@
         function showCard(index) {
             cards.forEach((card, i) => {
                 card.style.display = i === index ? "block" : "none";
-
-                if (i === index) {
-                    const svg = card.querySelector("svg[id^='chart_']");
-                    if (svg && !svg.dataset.initialized) {
-                        initChart(svg);
-                        svg.dataset.initialized = "true";
-                        console.log("Init chart for", svg.id);
-                    }
-                }
             });
         }
 
@@ -319,15 +322,6 @@
                 showCard(currentIndex);
             }
         });
-
-        // chart drawing function
-        function initChart(svg) {
-            const paths = svg.querySelectorAll("path");
-            paths.forEach((path, i) => {
-                path.setAttribute("d", `M0 ${20*i+20} L1000 ${20*i+20}`);
-                path.setAttribute("stroke", ["orangered","blue","green","orange"][i % 4]);
-            });
-        }
     });
     // Scroll animation
     document.addEventListener('scroll', ()=>{
@@ -453,7 +447,6 @@
         "Inactive","Authentic","Activity","Total Users"
     ];
     const barColors = ["#6ec6ff", "#6ec6ff", "#6ec6ff", "#6ec6ff", "#6ec6ff", "#6ec6ff", "#6ec6ff","#dc3545","#198754","#00b7ae","#384e8b8c"];
-    // bg-color:royalblue rgba(23, 100, 109, 0.9)
     // Pass the PHP array to JavaScript 
     const userCounts = @json(array_values($usersCount));
     const userCtx2 = new Chart(ctx2, {
@@ -704,6 +697,7 @@
                 axisCursorPlugin(),
                 ChartZoom,
             ]
+
         });
     });
 </script>

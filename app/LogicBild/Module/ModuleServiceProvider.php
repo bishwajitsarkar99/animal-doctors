@@ -11,10 +11,20 @@ use App\Models\Module\ModuleName;
 
 class ModuleServiceProvider
 {
+    // ========================================================================
+    // Module Installions Index
+    // ========================================================================
+    public function moduleInstallionsIndex(Request $request)
+    {
+        $page_name = 'Module Installions';
+        return view('module.module-installions.index', compact('page_name'));
+    }
+
     // ========================= Module Category Service ==========================
     /**
      * Handle Module Category Templete View
     */
+    // ============================================================================
     public function viewModuleCategoryTemplete(Request $request)
     {
         $page_name = 'Module Category';

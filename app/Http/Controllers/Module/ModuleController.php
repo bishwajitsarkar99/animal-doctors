@@ -16,6 +16,14 @@ class ModuleController extends Controller
         return $this->moduleServiceProvider = $moduleServiceProvider;
     }
 
+    // ========================================================================
+    // Module Installions Index
+    // ========================================================================
+    public function moduleInstallions(Request $request)
+    {
+        return $this->moduleServiceProvider->moduleInstallionsIndex($request);
+    }
+    
     // Module Category ========================================================
     // Module Category View Templete
     public function moduleCategoryView(Request $request){
