@@ -141,82 +141,90 @@
                         Branch Information
                     </span>
                 </div>
-                @foreach($branch_log_session_data as $branchId => $rolesGroup)
-                    <?php 
-                        $firstSession = $rolesGroup->first();
-                    ?>
-    
-                    <div class="branch-card-skeletone" id="branchInfo">
-                        <span class="chart-svg-three chart-svg-display svg_chart_body">
-                            <svg version="1.1" id="Layer_1" width="100%" height="95px" fill="#969696" x="0px" y="0px" viewBox="0 0 122.88 101.91" style="enable-background:new 0 0 122.88 101.91" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M3.34,0h116.2c1.84,0,3.34,1.5,3.34,3.34v76.98c0,1.84-1.5,3.34-3.34,3.34H3.34C1.5,83.66,0,82.16,0,80.32 V3.34C0,1.5,1.5,0,3.34,0L3.34,0L3.34,0z M91.58,27.97L102.08,28c-0.01,2.8-1.14,5.48-3.13,7.45c-0.47,0.46-0.99,0.88-1.54,1.25 L91.58,27.97L91.58,27.97L91.58,27.97z M31.13,19.72h3.2c0.17,0,0.31,0.14,0.31,0.31v11.4c0,0.17-0.14,0.31-0.31,0.31h-3.2 c-0.17,0-0.31-0.14-0.31-0.31v-11.4C30.82,19.86,30.96,19.72,31.13,19.72L31.13,19.72z M16.65,15.87h3.2 c0.17,0,0.31,0.14,0.31,0.31v15.26c0,0.17-0.14,0.31-0.31,0.31h-3.2c-0.17,0-0.31-0.14-0.31-0.31V16.18 C16.34,16.01,16.48,15.87,16.65,15.87L16.65,15.87z M23.89,13.7h3.2c0.17,0,0.31,0.14,0.31,0.31v17.43c0,0.17-0.14,0.31-0.31,0.31 h-3.2c-0.17,0-0.31-0.14-0.31-0.31V14.01C23.58,13.84,23.72,13.7,23.89,13.7L23.89,13.7z M16.84,61.37c-0.7,0-1.26-0.57-1.26-1.28 c0-0.7,0.57-1.28,1.26-1.28h89.41c0.7,0,1.26,0.57,1.26,1.28c0,0.7-0.57,1.28-1.26,1.28H16.84L16.84,61.37z M16.63,52.07 c-0.7,0-1.26-0.57-1.26-1.28c0-0.7,0.57-1.28,1.26-1.28h35.85c0.7,0,1.26,0.57,1.26,1.28c0,0.7-0.57,1.28-1.26,1.28H16.63 L16.63,52.07z M57.4,52.07c-0.7,0-1.26-0.57-1.26-1.28c0-0.7,0.57-1.28,1.26-1.28h48.85c0.7,0,1.26,0.57,1.26,1.28 c0,0.7-0.57,1.28-1.26,1.28H57.4L57.4,52.07z M16.63,43.76c-0.7,0-1.26-0.57-1.26-1.28c0-0.7,0.57-1.28,1.26-1.28h54.16 c0.7,0,1.26,0.57,1.26,1.28c0,0.7-0.57,1.28-1.26,1.28H16.63L16.63,43.76z M90.5,25.88l-0.56-11.23c-0.01-0.22,0.16-0.41,0.38-0.42 c0.06,0,0.14-0.01,0.23-0.01c0.07,0,0.15,0,0.23,0c3.08-0.03,5.92,1.13,8.03,3.08c2.12,1.95,3.51,4.67,3.73,7.75 c0.02,0.22-0.15,0.41-0.37,0.43l-11.23,0.8c-0.22,0.02-0.41-0.15-0.43-0.37C90.5,25.9,90.5,25.89,90.5,25.88L90.5,25.88L90.5,25.88 z M90.76,15.02l0.52,10.43l10.42-0.74c-0.29-2.7-1.56-5.09-3.44-6.81c-1.97-1.81-4.61-2.9-7.48-2.87L90.76,15.02L90.76,15.02 L90.76,15.02z M89.24,27.48l5.63,9.75c-1.71,0.99-3.65,1.51-5.63,1.51c-6.22,0-11.26-5.04-11.26-11.26c0-5.59,4.1-10.33,9.63-11.14 L89.24,27.48L89.24,27.48z M46.29,88.27h30.3c0.08,5.24,2.24,9.94,8.09,13.63H38.2C42.88,98.51,46.31,94.39,46.29,88.27 L46.29,88.27L46.29,88.27z M61.44,72.41c2.37,0,4.29,1.92,4.29,4.29c0,2.37-1.92,4.29-4.29,4.29c-2.37,0-4.29-1.92-4.29-4.29 C57.15,74.33,59.07,72.41,61.44,72.41L61.44,72.41z M10.05,6.29h102.79c1.63,0,2.95,1.33,2.95,2.95v57.52 c0,1.62-1.33,2.95-2.95,2.95H10.05c-1.62,0-2.95-1.33-2.95-2.95V9.24C7.09,7.62,8.42,6.29,10.05,6.29L10.05,6.29L10.05,6.29z"/></g></svg>
-                        </span>
-                        <div class="row font-gray-700 data-head">
-                            <div class="col-xl-3"><span>{{ $firstSession->users->branch_name ?? 'N/A' }}</span></div>
-                            <div class="col-xl-3"><span class="ms-4">Role</span></div>
-                            <div class="col-xl-6" style="text-align:center;"><span>Bar Chart</span></div>
-                        </div>
-                        <div class="row font-gray-700">
-                            <div class="col-xl-3">
-                                <ul class="pt-1 mt-3" id="branchLabel">
-                                    <li>ID : {{ $branchId }}</li>
-                                    <li>Category : {{ $firstSession->users->branch_type ?? 'N/A' }}</li>
-                                    <li>Name : {{ $firstSession->users->branch_name ?? 'N/A' }}</li>
-                                </ul>
+                {{-- Wrapper for all cards --}}
+                <div id="branchCardsWrapper">
+                    @foreach($branch_log_session_data as $branchId => $rolesGroup)
+                        <?php 
+                            $firstSession = $rolesGroup->first();
+                        ?>
+        
+                        <div class="branch-card-item branch-card-skeletone" id="branchInfo">
+                            <span class="chart-svg-three chart-svg-display svg_chart_body">
+                                <svg version="1.1" id="Layer_1" width="100%" height="95px" fill="#969696" x="0px" y="0px" viewBox="0 0 122.88 101.91" style="enable-background:new 0 0 122.88 101.91" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M3.34,0h116.2c1.84,0,3.34,1.5,3.34,3.34v76.98c0,1.84-1.5,3.34-3.34,3.34H3.34C1.5,83.66,0,82.16,0,80.32 V3.34C0,1.5,1.5,0,3.34,0L3.34,0L3.34,0z M91.58,27.97L102.08,28c-0.01,2.8-1.14,5.48-3.13,7.45c-0.47,0.46-0.99,0.88-1.54,1.25 L91.58,27.97L91.58,27.97L91.58,27.97z M31.13,19.72h3.2c0.17,0,0.31,0.14,0.31,0.31v11.4c0,0.17-0.14,0.31-0.31,0.31h-3.2 c-0.17,0-0.31-0.14-0.31-0.31v-11.4C30.82,19.86,30.96,19.72,31.13,19.72L31.13,19.72z M16.65,15.87h3.2 c0.17,0,0.31,0.14,0.31,0.31v15.26c0,0.17-0.14,0.31-0.31,0.31h-3.2c-0.17,0-0.31-0.14-0.31-0.31V16.18 C16.34,16.01,16.48,15.87,16.65,15.87L16.65,15.87z M23.89,13.7h3.2c0.17,0,0.31,0.14,0.31,0.31v17.43c0,0.17-0.14,0.31-0.31,0.31 h-3.2c-0.17,0-0.31-0.14-0.31-0.31V14.01C23.58,13.84,23.72,13.7,23.89,13.7L23.89,13.7z M16.84,61.37c-0.7,0-1.26-0.57-1.26-1.28 c0-0.7,0.57-1.28,1.26-1.28h89.41c0.7,0,1.26,0.57,1.26,1.28c0,0.7-0.57,1.28-1.26,1.28H16.84L16.84,61.37z M16.63,52.07 c-0.7,0-1.26-0.57-1.26-1.28c0-0.7,0.57-1.28,1.26-1.28h35.85c0.7,0,1.26,0.57,1.26,1.28c0,0.7-0.57,1.28-1.26,1.28H16.63 L16.63,52.07z M57.4,52.07c-0.7,0-1.26-0.57-1.26-1.28c0-0.7,0.57-1.28,1.26-1.28h48.85c0.7,0,1.26,0.57,1.26,1.28 c0,0.7-0.57,1.28-1.26,1.28H57.4L57.4,52.07z M16.63,43.76c-0.7,0-1.26-0.57-1.26-1.28c0-0.7,0.57-1.28,1.26-1.28h54.16 c0.7,0,1.26,0.57,1.26,1.28c0,0.7-0.57,1.28-1.26,1.28H16.63L16.63,43.76z M90.5,25.88l-0.56-11.23c-0.01-0.22,0.16-0.41,0.38-0.42 c0.06,0,0.14-0.01,0.23-0.01c0.07,0,0.15,0,0.23,0c3.08-0.03,5.92,1.13,8.03,3.08c2.12,1.95,3.51,4.67,3.73,7.75 c0.02,0.22-0.15,0.41-0.37,0.43l-11.23,0.8c-0.22,0.02-0.41-0.15-0.43-0.37C90.5,25.9,90.5,25.89,90.5,25.88L90.5,25.88L90.5,25.88 z M90.76,15.02l0.52,10.43l10.42-0.74c-0.29-2.7-1.56-5.09-3.44-6.81c-1.97-1.81-4.61-2.9-7.48-2.87L90.76,15.02L90.76,15.02 L90.76,15.02z M89.24,27.48l5.63,9.75c-1.71,0.99-3.65,1.51-5.63,1.51c-6.22,0-11.26-5.04-11.26-11.26c0-5.59,4.1-10.33,9.63-11.14 L89.24,27.48L89.24,27.48z M46.29,88.27h30.3c0.08,5.24,2.24,9.94,8.09,13.63H38.2C42.88,98.51,46.31,94.39,46.29,88.27 L46.29,88.27L46.29,88.27z M61.44,72.41c2.37,0,4.29,1.92,4.29,4.29c0,2.37-1.92,4.29-4.29,4.29c-2.37,0-4.29-1.92-4.29-4.29 C57.15,74.33,59.07,72.41,61.44,72.41L61.44,72.41z M10.05,6.29h102.79c1.63,0,2.95,1.33,2.95,2.95v57.52 c0,1.62-1.33,2.95-2.95,2.95H10.05c-1.62,0-2.95-1.33-2.95-2.95V9.24C7.09,7.62,8.42,6.29,10.05,6.29L10.05,6.29L10.05,6.29z"/></g></svg>
+                            </span>
+                            <div class="row font-gray-700 data-head">
+                                <div class="col-xl-3"><span>{{ $firstSession->users->branch_name ?? 'N/A' }}</span></div>
+                                <div class="col-xl-3"><span class="ms-4">Role</span></div>
+                                <div class="col-xl-6" style="text-align:center;"><span>Bar Chart</span></div>
                             </div>
-                            <div class="col-xl-3">
-                                <ul class="branch-card-body pt-1 mt-3" id="roleLabel-{{ $branchId }}">
-                                    @foreach($rolesGroup->unique('role') as $roleItem)
-                                        <li class="ps-2" style="display:flex;justify-content:space-between;">
-                                            {{ $roleItem->roles->name ?? $roleItem->role }}
-                                            <span class="user-amount badge rounded-pill bg-light-blueviolet mb-1" style="color:#000;font-size:11px;font-weight:800;border:1px ridge #87cefabd;" data-target="{{ $roleItem->unique_email_count }}">
-                                                {{ $roleItem->unique_email_count }}
-                                            </span>
+                            <div class="row font-gray-700">
+                                <div class="col-xl-3">
+                                    <ul class="pt-1 mt-3" id="branchLabel">
+                                        <li>ID : {{ $branchId }}</li>
+                                        <li>Category : {{ $firstSession->users->branch_type ?? 'N/A' }}</li>
+                                        <li>Name : {{ $firstSession->users->branch_name ?? 'N/A' }}</li>
+                                    </ul>
+                                </div>
+                                <div class="col-xl-3">
+                                    <ul class="branch-card-body pt-1 mt-3" id="roleLabel-{{ $branchId }}">
+                                        @foreach($rolesGroup->unique('role') as $roleItem)
+                                            <li class="ps-2" style="display:flex;justify-content:space-between;">
+                                                {{ $roleItem->roles->name ?? $roleItem->role }}
+                                                <span class="user-amount badge rounded-pill bg-light-blueviolet mb-1" style="color:#000;font-size:11px;font-weight:800;border:1px ridge #87cefabd;" data-target="{{ $roleItem->unique_email_count }}">
+                                                    {{ $roleItem->unique_email_count }}
+                                                </span>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="col-xl-6">
+                                    <ul class="pt-1 mt-1" id="branchChart">
+                                        <li>
+                                            <div class="card card-body border-style"  style="width: 100% !important; height: 150px;">
+                                                <canvas id="branchInfoChart_{{ $branchId }}" height="80"></canvas>
+                                            </div>
                                         </li>
-                                    @endforeach
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="col-xl-6">
-                                <ul class="pt-1 mt-1" id="branchChart">
-                                    <li>
-                                        <div class="card card-body border-style"  style="width: 100% !important; height: 150px;">
-                                            <canvas id="branchInfoChart_{{ $branchId }}" height="80"></canvas>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="card card-body border-style">
-                                    @php
-                                        $stats = $formattedBranchStats[$branchId] ?? null;
-                                    @endphp
-
-                                    @if ($stats)
-                                        <div class="marque-area">
-                                            <span class="--parent-class-scrol-plate">
-                                                <span class="--child-class-scrol-plate">Total Activity: {{ $stats['total_activity'] }}.00</span>
-                                                <span class="--child-class-scrol-plate">&#x237D;Total Login: {{ $stats['total_login'] }}.00</span>
-                                                <span class="--child-class-scrol-plate">&#x237D;Total Logout: {{ $stats['total_logout'] }}.00</span>
-                                                <span class="--child-class-scrol-plate">&#x237D;Total Current-Login: {{ $stats['total_current_login'] }}.00</span>
-                                            </span>
-                                        </div>
-                                    @endif
-                                    <div class="bar-chart">
-                                        <div class="--chartanimation" style="width: 100% !important; height: 90px;">
-                                            <svg id="chart_{{ $branchId }}" width="100%" height="120" fill="none" viewBox="0 0 1000 120"style="border: none;overflow: hidden;path {fill: none;stroke-width: 2;}">
-                                            <path class="line-0" />
-                                            <path class="line-1" />
-                                            <path class="line-2" />
-                                            <path class="line-3" />
-                                            </svg>
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="card card-body border-style">
+                                        @php
+                                            $stats = $formattedBranchStats[$branchId] ?? null;
+                                        @endphp
+    
+                                        @if ($stats)
+                                            <div class="marque-area">
+                                                <span class="--parent-class-scrol-plate">
+                                                    <span class="--child-class-scrol-plate">Total Activity: {{ $stats['total_activity'] }}.00</span>
+                                                    <span class="--child-class-scrol-plate">&#x237D;Total Login: {{ $stats['total_login'] }}.00</span>
+                                                    <span class="--child-class-scrol-plate">&#x237D;Total Logout: {{ $stats['total_logout'] }}.00</span>
+                                                    <span class="--child-class-scrol-plate">&#x237D;Total Current-Login: {{ $stats['total_current_login'] }}.00</span>
+                                                </span>
+                                            </div>
+                                        @endif
+                                        <div class="bar-chart">
+                                            <div class="--chartanimation" style="width: 100% !important; height: 90px;">
+                                                <svg id="chart_{{ $branchId }}" width="100%" height="120" fill="none" viewBox="0 0 1000 120"style="border: none;overflow: hidden;path {fill: none;stroke-width: 2;}">
+                                                    <path class="line-0" />
+                                                    <path class="line-1" />
+                                                    <path class="line-2" />
+                                                    <path class="line-3" />
+                                                </svg>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+                {{-- Navigation buttons --}}
+                <div class="d-flex justify-content-between mt-3">
+                    <button id="prevBranch" class="btn btn-outline-primary">Prev</button>
+                    <button id="nextBranch" class="btn btn-outline-primary">Next</button>
+                </div>
             </div>
         </x-BranchCards.BranchCard>
     </div>
@@ -248,6 +256,100 @@
   <rect x="0" y="0" width="800" height="50" fill="white" />
 </svg> -->
 @push('scripts')
+<!-- number cricle bar and number rolling animation with scrol animation and drag and drop -->
+<script type="module">
+    import { cricleNumberPlate, numberRolling , triggerIfInView, initScrollProgressBar} from "/module/backend-module/backend-module-min.js";
+    import { initializeBarCharts} from "/module/design-helper-function.js";
+
+    // number cricle bar
+    const numberClass = '.total-number';
+    const cricleBar = '.total-user-cricle-bar, .authentic-cricle-bar, .inactive-cricle-bar, .activity-cricle-bar';
+    const percentage = '--percentage';
+
+    // number rolling animation and with scrol animation
+    const numberSelector = '.number-rolling';
+    const containerSelector = '.card-body, .storage-row, .storage-card-body, .branch-card-body';
+
+    // drag and drop default card
+    const row = '.drag-row';
+    const column = '.drag-column';
+    const cardKey = '.group-card';
+
+    // DOM ready
+    document.addEventListener('DOMContentLoaded', () => {
+        cricleNumberPlate(numberClass, cricleBar, percentage);
+        numberRolling(numberSelector, containerSelector);
+        //initDragAndDrop(column, cardKey, row);
+
+
+        const cards = document.querySelectorAll(".branch-card-item");
+        let currentIndex = 0;
+
+        // function to show the active card
+        function showCard(index) {
+            cards.forEach((card, i) => {
+                card.style.display = i === index ? "block" : "none";
+
+                if (i === index) {
+                    const svg = card.querySelector("svg[id^='chart_']");
+                    if (svg && !svg.dataset.initialized) {
+                        initChart(svg);
+                        svg.dataset.initialized = "true";
+                        console.log("Init chart for", svg.id);
+                    }
+                }
+            });
+        }
+
+        // init first card and chart
+        showCard(currentIndex);
+
+        // next button
+        document.getElementById("nextBranch").addEventListener("click", () => {
+            if (currentIndex < cards.length - 1) {
+                currentIndex++;
+                showCard(currentIndex);
+            }
+        });
+
+        // prev button
+        document.getElementById("prevBranch").addEventListener("click", () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                showCard(currentIndex);
+            }
+        });
+
+        // chart drawing function
+        function initChart(svg) {
+            const paths = svg.querySelectorAll("path");
+            paths.forEach((path, i) => {
+                path.setAttribute("d", `M0 ${20*i+20} L1000 ${20*i+20}`);
+                path.setAttribute("stroke", ["orangered","blue","green","orange"][i % 4]);
+            });
+        }
+    });
+    // Scroll animation
+    document.addEventListener('scroll', ()=>{
+        cricleNumberPlate(numberClass, cricleBar, percentage);
+        triggerIfInView(numberSelector, containerSelector);
+    });
+    // Always re-trigger on fullscreen change
+    document.addEventListener('fullscreenchange', () => {
+        cricleNumberPlate(numberClass, cricleBar, percentage);
+        triggerIfInView(numberSelector, containerSelector);
+    });
+
+    // Use jQuery's correct ready syntax
+    $(document).ready(function () {
+        // scroll progress bar
+        const scrollKey = '.scrolling'; //Add dot for class selector
+        const ProgressClas = 'progressbar-active';
+        initScrollProgressBar(scrollKey, ProgressClas);
+    });
+    
+    initializeBarCharts();
+</script>
 <!-- first Chart Graphp -->
 <script type="module">
     // hover plugins
@@ -286,9 +388,6 @@
                 },
                 tooltip: {
                     enabled: true,
-                    // backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                    // titleColor: '#fff',
-                    // bodyColor: '#fff',
                     backgroundColor: 'rgb(255, 255, 255)',
                     titleColor: '#000000',
                     bodyColor: '#000000',
@@ -382,18 +481,9 @@
                             weight: 'bold',
                         }
                     },
-                    // onHover: function(event, legendItem, legend) {
-                    //     legend.chart.canvas.style.cursor = 'pointer';
-                    // },
-                    // onLeave: function(event, legendItem, legend) {
-                    //     legend.chart.canvas.style.cursor = 'default';
-                    // }
                 },
                 tooltip: {
                     enabled: true,
-                    // backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                    // titleColor: '#fff',
-                    // bodyColor: '#fff',
                     backgroundColor: 'rgb(255, 255, 255)',
                     titleColor: '#000000',
                     bodyColor: '#000000',
@@ -616,51 +706,6 @@
             ]
         });
     });
-</script>
-<!-- number cricle bar and number rolling animation with scrol animation and drag and drop -->
-<script type="module">
-    import { cricleNumberPlate, numberRolling , triggerIfInView, initializeBarCharts, initScrollProgressBar} from "/module/backend-module/backend-module-min.js";
-
-    // number cricle bar
-    const numberClass = '.total-number';
-    const cricleBar = '.total-user-cricle-bar, .authentic-cricle-bar, .inactive-cricle-bar, .activity-cricle-bar';
-    const percentage = '--percentage';
-
-    // number rolling animation and with scrol animation
-    const numberSelector = '.number-rolling';
-    const containerSelector = '.card-body, .storage-row, .storage-card-body, .branch-card-body';
-
-    // drag and drop default card
-    const row = '.drag-row';
-    const column = '.drag-column';
-    const cardKey = '.group-card';
-
-    // DOM ready
-    document.addEventListener('DOMContentLoaded', () => {
-        cricleNumberPlate(numberClass, cricleBar, percentage);
-        numberRolling(numberSelector, containerSelector);
-        //initDragAndDrop(column, cardKey, row);
-    });
-    // Scroll animation
-    document.addEventListener('scroll', ()=>{
-        cricleNumberPlate(numberClass, cricleBar, percentage);
-        triggerIfInView(numberSelector, containerSelector);
-    });
-    // Always re-trigger on fullscreen change
-    document.addEventListener('fullscreenchange', () => {
-        cricleNumberPlate(numberClass, cricleBar, percentage);
-        triggerIfInView(numberSelector, containerSelector);
-    });
-
-    // Use jQuery's correct ready syntax
-    $(document).ready(function () {
-        // scroll progress bar
-        const scrollKey = '.scrolling'; //Add dot for class selector
-        const ProgressClas = 'progressbar-active';
-        initScrollProgressBar(scrollKey, ProgressClas);
-    });
-    
-    initializeBarCharts();
 </script>
 <!-- demo line chart -->
 <!-- <script>

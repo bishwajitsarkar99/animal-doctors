@@ -739,18 +739,9 @@
                                 weight: 'bold',
                             }
                         },
-                        // onHover: function(event, legendItem, legend) {
-                        //     legend.chart.canvas.style.cursor = 'pointer';
-                        // },
-                        // onLeave: function(event, legendItem, legend) {
-                        //     legend.chart.canvas.style.cursor = 'default';
-                        // }
                     },
                     tooltip: {
                         enabled: true,
-                        // backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                        // titleColor: '#fff',
-                        // bodyColor: '#fff',
                         backgroundColor: 'rgb(255, 255, 255)',
                         titleColor: '#000000',
                         bodyColor: '#000000',
@@ -967,12 +958,6 @@
                                                 weight: 'bold'
                                             }
                                         },
-                                        // onHover(event, item, legend) {
-                                        //     legend.chart.canvas.style.cursor = 'pointer'; // ew-resize
-                                        // },
-                                        // onLeave(event, item, legend) {
-                                        //     legend.chart.canvas.style.cursor = 'default';
-                                        // }
                                     },
                                     tooltip: {
                                         enabled: true,
@@ -1018,10 +1003,7 @@
                                                 family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                                                 weight: 'bold'
                                             },
-                                            // x-label rotation change 
-                                            // autoSkip: false,
-                                            // maxRotation: 45,
-                                            // minRotation: 0
+
                                             type: 'time',
                                             time: {
                                                 unit: 'day',
@@ -1155,10 +1137,7 @@
                                                 family: "Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew, Noto Sans Bengali, sans-serif",
                                                 weight: 'bold'
                                             },
-                                            // x-label rotation change 
-                                            // autoSkip: false,
-                                            // maxRotation: 45,
-                                            // minRotation: 0
+
                                             type: 'time',
                                             time: {
                                                 unit: 'day',

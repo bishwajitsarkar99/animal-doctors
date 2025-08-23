@@ -29,7 +29,9 @@ use Illuminate\Support\Facades\Response;
 
 class UserActivityServiceProvider
 {
+    // =========================================================================
     // ========================= User Activity =================================
+    // =========================================================================
     /**
      * Handle User Details Home Page View 
     */
@@ -381,9 +383,11 @@ class UserActivityServiceProvider
         return $kb_storage . ' KB';
     }
 
+    // =====================================================================
     /**
      * Handle User Activity Get
     */
+    // =====================================================================
     public function getActivities(Request $request)
     {
         $auth = Auth::user();
@@ -441,9 +445,11 @@ class UserActivityServiceProvider
         return response()->json(['message' => 'Server does not response data.']);
     }
 
+    // =======================================================================
     /**
      * Handle User Activity Grahp Tab ===> Daily,Weekly and Monthly Chart Data
     */
+    // =======================================================================
     public function activities(Request $request)
     {
         $auth = Auth::User();
@@ -486,8 +492,6 @@ class UserActivityServiceProvider
             [$login_counts_monthly, $logout_counts_monthly, $current_user_counts_monthly] = $this->countMonthlyUsersLogData($branch_id);
             
             // Authentic users
-            //$authentic_users = User::where('status', 0)->whereIn('branch_id', $branch_id)->count();
-            //$authentic_users = SessionModel::whereNotNull('user_id')->whereIn('branch_id', $branch_id)->count();
             $authentic_users = 100;
             // Calculate percentage values for current activities
             [$total_current_users_activities_percentage, $login_current_users_activities_percentage, $logout_current_users_activities_percentage] = 
@@ -561,17 +565,6 @@ class UserActivityServiceProvider
     // Helper function count current users, logins, and logouts
     private function countCurrentUsers($startOfDay, $endOfDay, $branch_id)
     {
-        // First Query
-        // $current_users = DB::table('sessions')->whereBetween('created_at', [$startOfDay, $endOfDay])
-        // ->whereNotNull('user_id')->distinct('user_id')->whereIn('branch_id', $branch_id)->count('user_id');
-
-        // $current_login_users = DB::table('sessions')->where('payload', 'login')
-        //     ->whereBetween('created_at', [$startOfDay, $endOfDay])
-        //     ->whereNotNull('user_id')->whereIn('branch_id', $branch_id)->count();
-
-        // $current_logout_users = DB::table('sessions')->where('payload', 'logout')
-        //     ->whereBetween('created_at', [$startOfDay, $endOfDay])
-        //     ->whereNotNull('user_id')->whereIn('branch_id', $branch_id)->count();
 
         // Alternative Query
         $sessionCounts = DB::table('sessions')->whereBetween('created_at', [$startOfDay, $endOfDay])
@@ -609,31 +602,7 @@ class UserActivityServiceProvider
     }
     // Helper function group by day for login, logout, and current user counts (weekly data)
     private function countWeeklyUsersLogData($startOfWeek, $endOfWeek, $branch_id)
-    {
-        // $login_counts = SessionModel::select(DB::raw('DATE(created_at) as day'), DB::raw('count(*) as count'))
-        //     ->where('payload', 'login')
-        //     ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
-        //     ->whereIn('branch_id', $branch_id)
-        //     ->groupBy('day')
-        //     ->pluck('count', 'day')
-        //     ->toArray();
-
-        // $logout_counts = SessionModel::select(DB::raw('DATE(created_at) as day'), DB::raw('count(*) as count'))
-        //     ->where('payload', 'logout')
-        //     ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
-        //     ->whereIn('branch_id', $branch_id)
-        //     ->groupBy('day')
-        //     ->pluck('count', 'day')
-        //     ->toArray();
-
-        // $current_user_counts = SessionModel::whereNotNull('user_id')
-        //     ->select(DB::raw('DATE(created_at) as day'), DB::raw('COUNT(DISTINCT user_id) as count'))
-        //     ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
-        //     ->whereIn('branch_id', $branch_id)
-        //     ->groupBy('day')
-        //     ->pluck('count', 'day')
-        //     ->toArray();
-        
+    {   
         $weeklyUserLogSession = DB::table('sessions')
         ->selectRaw('
             DATE(created_at) as day,
@@ -663,29 +632,6 @@ class UserActivityServiceProvider
     // Helper function monthly user activity data (group by month)
     private function countMonthlyUsersLogData($branch_id)
     {
-        // $login_counts_monthly = SessionModel::whereNotNull('user_id')
-        //     ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
-        //     ->where('payload', 'login')
-        //     ->whereIn('branch_id', $branch_id)
-        //     ->groupBy('month')
-        //     ->pluck('count', 'month')
-        //     ->toArray();
-        
-        // $logout_counts_monthly = SessionModel::whereNotNull('user_id')
-        //     ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('count(*) as count'))
-        //     ->where('payload', 'logout')
-        //     ->whereIn('branch_id', $branch_id)
-        //     ->groupBy('month')
-        //     ->pluck('count', 'month')
-        //     ->toArray();
-        
-        // $current_user_counts_monthly = SessionModel::whereNotNull('user_id')
-        //     ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('COUNT(DISTINCT user_id) as count'))
-        //     ->whereIn('branch_id', $branch_id)
-        //     ->groupBy('month')
-        //     ->pluck('count', 'month')
-        //     ->toArray();
-
         $monthlyUserLogSession = DB::table('sessions')
         ->selectRaw('
             DATE_FORMAT(created_at, "%Y-%m") as month,
@@ -711,9 +657,11 @@ class UserActivityServiceProvider
         return [$login_counts_monthly, $logout_counts_monthly, $current_user_counts_monthly];
     }
     
+    // ===================================================================
     /**
      * Handle User Activity Log Analytical Chart
     */
+    // ===================================================================
     public function userAnalyticalCharts(Request $request)
     {
         $auth = Auth::User();
@@ -817,32 +765,6 @@ class UserActivityServiceProvider
     // Helper function day base user activity data (group by day)
     private function countDailyUsersLogData($start, $end, $branch_id)
     {
-        // $login_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
-        //     ->whereNotNull('user_id')
-        //     ->where('payload', 'login')
-        //     ->whereIn('branch_id', $branch_id)
-        //     ->select(DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y") as day'), DB::raw('count(*) as count'))
-        //     ->groupBy('day')
-        //     ->pluck('count', 'day')
-        //     ->toArray();
-
-        // $logout_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
-        //     ->whereNotNull('user_id')
-        //     ->where('payload', 'logout')
-        //     ->whereIn('branch_id', $branch_id)
-        //     ->select(DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y") as day'), DB::raw('count(*) as count'))
-        //     ->groupBy('day')
-        //     ->pluck('count', 'day')
-        //     ->toArray();
-
-        // $current_user_counts_date = SessionModel::whereBetween('created_at', [$start, $end])
-        //     ->whereNotNull('user_id')
-        //     ->whereIn('branch_id', $branch_id)
-        //     ->select(DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y") as day'), DB::raw('COUNT(DISTINCT user_id) as count'))
-        //     ->groupBy('day')
-        //     ->pluck('count', 'day')
-        //     ->toArray();
-
         $dateBasisUserLogSessionData = DB::table('sessions')
         ->whereBetween('created_at', [$start, $end])
         ->whereIn('branch_id', $branch_id)
@@ -869,7 +791,9 @@ class UserActivityServiceProvider
         return [$login_counts_date, $logout_counts_date, $current_user_counts_date];
     }
     
+    // ==============================================
     // Get Branch Data 
+    // ==============================================
     public function fetchBranchData(Request $request)
     {
         $auth = Auth::User();
@@ -910,7 +834,9 @@ class UserActivityServiceProvider
         ]);
     }
 
+    // ==============================================
     // Get Role Data
+    // ==============================================
     public function getFetchRoleData(Request $request , $id)
     {
         $query = $request->input('query');
@@ -938,7 +864,9 @@ class UserActivityServiceProvider
         ]);
     }
 
+    // ==============================================
     // Get User Email Data
+    // ==============================================
     public function getFetchUserEmail(Request $request , $id = null)
     {
         $query= $request->input('query', '');
@@ -968,9 +896,11 @@ class UserActivityServiceProvider
         ]);
     }
 
+    // ==============================================
     /**
      * Handle PDF Download
     */
+    // ==============================================
     public function pdfDownloadSessionData(Request $request, PdfService $pdfService)
     {
         $start_date = $request->input('start_date');
@@ -1109,9 +1039,11 @@ class UserActivityServiceProvider
         
     }
 
+    // ===============================================
     /**
      * Handle Export Excel Download
     */
+    // ===============================================
     public function exportExcelDownloadSessionData(Request $request)
     {
         $auth_user = Auth::User();
@@ -1224,9 +1156,11 @@ class UserActivityServiceProvider
         return Response::make($content, 200, $headers);
     }
 
+    // ===============================================
     /**
      * Handle Export Excel CVS Format Download
     */
+    // ===============================================
     public function exportExcelCsvDownloadSessionData(Request $request)
     {
         $auth_user = Auth::User();
@@ -1497,9 +1431,11 @@ class UserActivityServiceProvider
         ]);
     }
 
+    // ===============================================
     /**
      * Handle Print Session Data
     */
+    // ===============================================
     public function printSessionData(Request $request)
     {
         $start_date = $request->input('start_date');
@@ -1620,9 +1556,11 @@ class UserActivityServiceProvider
         ]);
     }
 
+    // ===============================================
     /**
      * Handle PDF Download Single Session Data
     */
+    // ===============================================
     public function pdfDownloadUserLoggedData(Request $request, PdfService $pdfService)
     {
         $last_activity = $request->input('last_activity');
@@ -1684,9 +1622,11 @@ class UserActivityServiceProvider
         
     }
 
+    // ===============================================
     /**
      * Handle Print Single Session Data
     */
+    // ===============================================
     public function printDownloadUserLoggedData(Request $request)
     {
         $last_activity = $request->input('last_activity');
