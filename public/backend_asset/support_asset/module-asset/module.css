@@ -64,12 +64,14 @@ td.first-init-column-border-cell {
     border-right: 1px solid rgba(0, 123, 255, 0.2);
     border-top: 1px solid rgba(0, 123, 255, 0.1);
     border-bottom: 1px solid white;
+    vertical-align: baseline;
 }
 td.second-init-column-border-cell {
     border-top: 1px solid rgba(0, 123, 255, 0.1);
     border-right: 1px solid rgba(0, 123, 255, 0.1);
     border-left: 1px solid rgba(0, 123, 255, 0.1);
     border-bottom: 1px solid white;
+    vertical-align: baseline;
 }
 .display_none {
     display: none !important;
@@ -150,4 +152,7 @@ input.module-checkbox[type=checkbox]:checked::after {
     border: solid #fff;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
+}
+.highlight {
+    color: green;
 }

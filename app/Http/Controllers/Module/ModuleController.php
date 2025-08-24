@@ -23,6 +23,14 @@ class ModuleController extends Controller
     {
         return $this->moduleServiceProvider->moduleInstallionsIndex($request);
     }
+
+    // ========================================================================
+    // Sub Module Search
+    // ========================================================================
+    public function subModuleSearch(Request $request, $id)
+    {
+        return $this->moduleServiceProvider->subModuleSearching($request, $id);
+    }
     
     // Module Category ========================================================
     // Module Category View Templete

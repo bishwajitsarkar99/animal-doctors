@@ -84,8 +84,8 @@
                               @if($moduleCategories)
                                 @foreach($moduleCategories as $item)
                                   <li class="select_list_category_menu" tabindex="0" data-value="{{ $item->id }}" id="select_list_category">
-                                    <input class="module-checkbox" type="checkbox" data-id="{{ $item->id }}" data-value="{{ $item->module_category_name }}" id="categoryCheck">
-                                    <span>{{ $item->module_category_name }}</span>
+                                    <input class="module-checkbox category-module" type="checkbox" data-id="{{ $item->id }}" data-value="{{ $item->module_category_name }}" id="categoryCheck" disabled>
+                                    <span class="label-text">{{ $item->module_category_name }}</span>
                                 </li>
                                 @endforeach
                               @else
@@ -97,32 +97,7 @@
                             <div class="row-resizer"></div>
                           </td>
                           <td class="second-init-column-border-cell sub-module-td-cell" hidden>
-                            <ul class="Grouping" id="subCategory">
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Auth</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Accounts</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Stock</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Marketing</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>HRM</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Inventory</span>
-                              </li>
-                            </ul>
+                            <ul class="Grouping" id="subCategoryModule"></ul>
                             <div class="row-resizer"></div>
                           </td>
                           <td class="second-init-column-border-cell module-name-td-cell" hidden>

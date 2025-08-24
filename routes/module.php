@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function (){
             Route::get('/module-search/{id}', [ModuleController::Class, 'moduleSearch'])->name('module.search');
             // Module Installations
             Route::get('/module/module-installions-{slug}/index', [ModuleController::class, 'moduleInstallions'])->name('module.installions');
+            Route::get('/module/sub-module-search/{id}', [ModuleController::class, 'subModuleSearch'])->name('submodule.search');
             
         });
     });

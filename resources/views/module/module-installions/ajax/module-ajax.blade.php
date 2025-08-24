@@ -103,18 +103,76 @@
             $(".module-name-td-cell").removeAttr('hidden');
         });
 
-
         // ========================================
         // Module Checked
         // ========================================
+        $(".category-module").removeAttr('disabled');
+
         $(document).on('click', '#categoryCheck', function(){
 
-            if($(this).prop('checked')){
+            if($(this).is(":checked")){
+                $(".category-module").not(this).prop("checked", false).attr('checked', true);
+                $(".label-text").removeClass("highlight");
+                $(this).siblings(".label-text").addClass("highlight");
                 $("#categoryNext").removeClass('display_none');
             }else{
-               $("#categoryNext").addClass('display_none'); 
+                $(".category-module").removeAttr('disabled');
+                $(".label-text").removeClass("highlight");
+                $("#categoryNext").addClass('display_none'); 
             }
         });
+
+        // ========================================
+        // Category Module Next Button Click Event
+        // ========================================
+        $(document).on('click', '#categoryNext', function(){
+
+            var id = $(".category-module:checked").data('id');;
+            
+            fetchSubCategoryModule(id);
+        });
+
+        // ========================================
+        // Sub Category Module Fetch
+        // ========================================  category_modules.module_category_name
+        //fetchSubCategoryModule();
+        function fetchSubCategoryModule(id){
+
+            if (!id) return;
+
+            const currentURL = "/application/module/sub-module-search/" +id;
+
+            $.ajaxSetup({
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentURL,
+                dataType: "json",
+                success: function(response){
+                    const subModules = response.messages;
+                    const subModuleMenu = $("#subCategoryModule");
+                    subModuleMenu.empty();
+
+                    $.each(subModules, function(key, item){
+                        subModuleMenu.append(
+                            `<li>
+                                <input class="module-checkbox sub-module" 
+                                    type="checkbox" 
+                                    data-id="${item.id}" 
+                                    data-value="${item.sub_module_name}">
+                                <span class="label-text">${item.sub_module_name}</span>
+                            </li>`
+                        );
+                    });
+                    
+                }
+            });
+
+        }
         
     }); 
 

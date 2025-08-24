@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Carbon\Carbon;
 use App\Models\Module\CategoryModule;
+use App\Models\Module\SubCategoryModule;
 use App\Models\Module\ModuleName;
 
 class ModuleServiceProvider
@@ -29,6 +30,30 @@ class ModuleServiceProvider
 
         $page_name = 'Module Installions';
         return view('module.module-installions.index', compact('page_name', 'moduleCategories'));
+    }
+
+    // ========================================================================
+    // Module Installions Index
+    // ========================================================================
+    public function subModuleSearching(Request $request, $id)
+    {
+        $auth = Auth::user();
+        $role = $auth->role;
+
+        if(!$auth){
+            return redirect()->route('login');
+        }
+
+        if($role === 1){
+            $subModules = DB::table('sub_category_modules')->where('category_module_id', $id)->get();
+            return response()->json([
+                'messages' => $subModules
+            ], 200);
+        }else{
+            return response()->json([
+                'messages' => 'No found sub category module.'
+            ], 404);
+        }
     }
 
     // ========================= Module Category Service ==========================
