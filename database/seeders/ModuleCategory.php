@@ -16,21 +16,21 @@ class ModuleCategory extends Seeder
     public function run()
     {
         $data =[
-            array('module_category_name' => 'Index', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'View', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'Create', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'Edit', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'Update', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'Delete', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'Search', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'Data Get', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'Access', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'Data Table', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'Download', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'File Manager', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'Data Export', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'Print', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
-            array('module_category_name' => 'PDF', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Purchases Management', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Accounts Management', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'HRM Management', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Marketing Management', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Delivery Team', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Authentication', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Layout', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Fornt-End', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Settings', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Pivot-Table', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Order', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Item', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Language', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Memory', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Profile', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
         ];
         CategoryModule::insert($data);
     }

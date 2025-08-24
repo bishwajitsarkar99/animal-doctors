@@ -16,8 +16,19 @@ class ModuleServiceProvider
     // ========================================================================
     public function moduleInstallionsIndex(Request $request)
     {
+        $auth = Auth::user();
+        $role = $auth->role;
+
+        if(!$auth){
+            return redirect()->route('login');
+        }
+
+        if($role === 1){
+            $moduleCategories = DB::table('category_modules')->whereNotNull('id')->get();
+        }
+
         $page_name = 'Module Installions';
-        return view('module.module-installions.index', compact('page_name'));
+        return view('module.module-installions.index', compact('page_name', 'moduleCategories'));
     }
 
     // ========================= Module Category Service ==========================

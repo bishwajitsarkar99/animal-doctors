@@ -4,6 +4,7 @@ namespace App\Models\Module;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Module\SubCategoryModule;
 
 class CategoryModule extends Model
 {
@@ -12,4 +13,8 @@ class CategoryModule extends Model
     protected $fillable = [
         'module_category_name',
     ];
+
+    public function SubCategoryModules(){
+        return $this->hasMany(SubCategoryModule::class);
+    }
 }
