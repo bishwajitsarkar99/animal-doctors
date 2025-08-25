@@ -31,6 +31,7 @@ class ModuleCategory extends Seeder
             array('module_category_name' => 'Language', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
             array('module_category_name' => 'Memory', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
             array('module_category_name' => 'Profile', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
+            array('module_category_name' => 'Email', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()),
         ];
         CategoryModule::insert($data);
     }

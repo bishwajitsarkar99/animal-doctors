@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Response;
 use Carbon\Carbon;
 use App\Models\Module\CategoryModule;
 use App\Models\Module\SubCategoryModule;
+use App\Models\Module\Module;
 use App\Models\Module\ModuleName;
 
 class ModuleServiceProvider
@@ -33,7 +34,7 @@ class ModuleServiceProvider
     }
 
     // ========================================================================
-    // Module Installions Index
+    // Sub Module Searching
     // ========================================================================
     public function subModuleSearching(Request $request, $id)
     {
@@ -56,6 +57,31 @@ class ModuleServiceProvider
         }
     }
 
+    // ========================================================================
+    // Module Name Searching
+    // ========================================================================
+    public function moduleFetchData(Request $request, $id)
+    {
+        $auth = Auth::user();
+        $role = $auth->role;
+
+        if(!$auth){
+            return redirect()->route('login');
+        }
+
+        if($role === 1){
+            $modules = DB::table('modules')->where('sub_module_id', $id)->get();
+            return response()->json([
+                'messages' => $modules
+            ], 200);
+
+        }else{
+
+            return response()->json([
+                'messages' => 'No found module.'
+            ], 404);
+        }
+    }
     // ========================= Module Category Service ==========================
     /**
      * Handle Module Category Templete View

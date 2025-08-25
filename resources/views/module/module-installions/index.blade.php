@@ -2,21 +2,8 @@
 @section('content')
 @include('backend.layouts.dashboard-components._navbar')
 
-  <div class="card panel-card" style="background:white;padding-bottom:15px;">
-    <div class="card-body focus-color cd user_access_branch_form">
-      <!-- Loader Overlay -->
-      <!-- <x-Tables.Icon.LoaderOverlay 
-        tableOverlayClass="table-loader-overlay display_none" 
-        loaderId="tableOverlayLoader" 
-        loaderClass="data-table-loader" 
-        loaderWidth="24" 
-        loaderHeight="24" 
-        loaderStroke="white" 
-        loaderStrokeWidth="3" 
-        loaderText="Refresh...." 
-        loaderTextClass="loader-text ms-1" 
-        loaderFill="none"
-      /> -->
+  <div class="card panel-card" style="background:white;margin-bottom:5px;">
+    <div class="card-body focus-color cd module_installions_card">
       <form autocomplete="off">
         @csrf
         <div class="row">
@@ -38,7 +25,7 @@
           <div class="col-xl-12">
             <div class="form-group branch-info" id="moduleInstllations">
               <div class="table-wrapper">
-                <div class="table-responsive component-focus mt-2">
+                <div class="responsive component-focus mt-2">
                   <div class="table-container" style="position: relative;">
                     <x-Tables.Icon.LoaderOverlay 
                       tableOverlayClass="table-loader-overlay display_none" 
@@ -52,26 +39,30 @@
                       loaderTextClass="loader-text ms-1" 
                       loaderFill="none"
                     />
-                    <table class="table info_table" id="userBranchInfosTable">
+                    <table class="table info_table" id="moduleInfosTable">
                       <thead>
                         <tr class="zebra-table-row">
                           <th class="branch_search_font label_position head-border lab_padding th-background cateogry-module"> 
-                            Category
+                            <i class="fa-solid fa-up-down-left-right move-icon" style="color:gray;cursor:move;" id="moveIconId"></i>
+                            <span>Module</span>
                             <div class="col-resizer"></div>
                             <div class="row-resizer"></div>
                           </th>
-                          <th class="branch_search_font label_position head-border lab_padding th-background sub-module" hidden> 
-                            Sub Category 
+                          <th class="branch_search_font label_position head-border lab_padding th-background submodule"> 
+                            <i class="fa-solid fa-up-down-left-right move-icon" style="color:gray;cursor:move;" id="moveIconId"></i>
+                            <span>Sub Module</span> 
                             <div class="col-resizer"></div>
                             <div class="row-resizer"></div>
                           </th>
-                          <th class="branch_search_font label_position head-border lab_padding th-background module-name" hidden> 
-                            Module Name 
+                          <th class="branch_search_font label_position head-border lab_padding th-background module-name"> 
+                            <i class="fa-solid fa-up-down-left-right move-icon" style="color:gray;cursor:move;" id="moveIconId"></i>
+                            <span>Parts Of Module</span> 
                             <div class="col-resizer"></div>
                             <div class="row-resizer"></div>
                           </th>
-                          <th class="branch_search_font label_position head-border lab_padding th-background module-installions" hidden> 
-                            Module URL
+                          <th class="branch_search_font label_position head-border lab_padding th-background module-installions"> 
+                            <i class="fa-solid fa-up-down-left-right move-icon" style="color:gray;cursor:move;" id="moveIconId"></i>
+                            <span>Link URL</span>
                             <div class="col-resizer"></div>
                             <div class="row-resizer"></div>
                           </th>
@@ -80,7 +71,7 @@
                       <tbody class="table-body" id="moduleTable">
                         <tr class="zebra-table-row">
                           <td class="first-init-column-border-cell">
-                            <ul class="Grouping" id="categoryMenu">
+                            <ul class="Grouping menu-responsive" id="categoryMenu">
                               @if($moduleCategories)
                                 @foreach($moduleCategories as $item)
                                   <li class="select_list_category_menu" tabindex="0" data-value="{{ $item->id }}" id="select_list_category">
@@ -96,41 +87,40 @@
                             </ul>
                             <div class="row-resizer"></div>
                           </td>
-                          <td class="second-init-column-border-cell sub-module-td-cell" hidden>
-                            <ul class="Grouping" id="subCategoryModule"></ul>
+                          <td class="second-init-column-border-cell sub-module-td-cell">
+                            <x-Tables.Icon.LoaderOverlay 
+                              tableOverlayClass="table-loader-overlay display_none" 
+                              loaderId="loaderSecondMenu" 
+                              loaderClass="data-menu-loader" 
+                              loaderWidth="24" 
+                              loaderHeight="24" 
+                              loaderStroke="white" 
+                              loaderStrokeWidth="3" 
+                              loaderText="Loading...." 
+                              loaderTextClass="loader-text ms-1" 
+                              loaderFill="none"
+                            />
+                            <ul class="Grouping menu-responsive" id="subCategoryModule"></ul>
                             <div class="row-resizer"></div>
                           </td>
-                          <td class="second-init-column-border-cell module-name-td-cell" hidden>
-                            <ul class="Grouping" id="moduleName">
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Auth</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Accounts</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Stock</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Marketing</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>HRM</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Inventory</span>
-                              </li>
-                            </ul>
+                          <td class="second-init-column-border-cell module-name-td-cell">
+                            <x-Tables.Icon.LoaderOverlay 
+                              tableOverlayClass="table-loader-overlay display_none" 
+                              loaderId="loaderThirdMenu" 
+                              loaderClass="data-menu-loader" 
+                              loaderWidth="24" 
+                              loaderHeight="24" 
+                              loaderStroke="white" 
+                              loaderStrokeWidth="3" 
+                              loaderText="Loading...." 
+                              loaderTextClass="loader-text ms-1" 
+                              loaderFill="none"
+                            />
+                            <ul class="Grouping menu-responsive" id="moduleName"></ul>
                             <div class="row-resizer"></div>
                           </td>
-                          <td class="second-init-column-border-cell installions-module-td-cell" hidden>
-                            <ul class="Grouping" id="moduleInstall">
+                          <td class="second-init-column-border-cell installions-module-td-cell">
+                            <ul class="Grouping menu-responsive" id="moduleInstall">
                               <li>
                                 <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
                                 <span>Auth</span>
@@ -167,9 +157,10 @@
             </div>
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-1">
+          <div class="col-xl-9"></div>
           <div class="col-xl-3">
-            <div class="form-group alignment skeleton" id="category_module" hidden>
+            <div class="form-group right-align skeleton" id="category_module">
               <x-Buttons.FormMediumButton 
                 label="Next" 
                 buttonParentClass="btn btn-sm success-shadow-btn display_none" 
@@ -179,9 +170,7 @@
                 labelClass="add-btn-text"
               />
             </div>
-          </div>
-          <div class="col-xl-3">
-            <div class="form-group alignment" id="sub_module" hidden>
+            <div class="form-group right-align" id="sub_module" hidden>
               <x-Buttons.FormMediumButton 
                 label="Back" 
                 buttonParentClass="btn btn-sm success-shadow-btn me-4" 
@@ -199,9 +188,7 @@
                 labelClass="add-btn-text"
               />
             </div>
-          </div>
-          <div class="col-xl-3">
-            <div class="form-group alignment" id="module_name" hidden>
+            <div class="form-group right-align" id="module_name" hidden>
               <x-Buttons.FormMediumButton 
                 label="Back" 
                 buttonParentClass="btn btn-sm success-shadow-btn me-4" 
@@ -219,8 +206,6 @@
                 labelClass="add-btn-text"
               />
             </div>
-          </div>
-          <div class="col-xl-3">
             <div class="form-group right-align" id="module_installions" hidden>
               <x-Buttons.FormMediumButton 
                 label="Back" 

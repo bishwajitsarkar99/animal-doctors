@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function (){
             // Module Installations
             Route::get('/module/module-installions-{slug}/index', [ModuleController::class, 'moduleInstallions'])->name('module.installions');
             Route::get('/module/sub-module-search/{id}', [ModuleController::class, 'subModuleSearch'])->name('submodule.search');
+            Route::get('/module/module-fetch/{id}', [ModuleController::class, 'moduleFetch'])->name('module.name');
             
         });
     });

@@ -1,4 +1,18 @@
 <script type="module">
+    import { 
+        resize, 
+        removeDataTableStorage, 
+        enableColumnDragAndDrop, 
+        applySavedColumnOrder, 
+    } from "/module/backend-module/backend-module-min.js";
+
+    // ================================
+    // Module Table Resize
+    // ================================
+    resize('moduleInfosTable', 'col-resizer', 'row-resizer');
+    enableColumnDragAndDrop('moduleInfosTable', '.move-icon');
+    applySavedColumnOrder('moduleInfosTable');
+
 
     $(document).ready(function(){
         // ========================================
@@ -10,14 +24,23 @@
         function hideMenuLoader() {
             $('#loaderPage').addClass('display_none');
         }
-
+        function showSecondMenuLoader(){
+            $('#loaderSecondMenu').removeClass('display_none');
+        }
+        function hideSecondMenuLoader(){
+            $('#loaderSecondMenu').addClass('display_none');
+        }
+        function showThirdMenuLoader(){
+            $('#loaderThirdMenu').removeClass('display_none');
+        }
+        function hideThirdMenuLoader(){
+            $('#loaderThirdMenu').addClass('display_none');
+        }
         showMenuLoader();
         setTimeout(() => {
             hideMenuLoader();
         }, 1000);
 
-
-        let timer;
         $("#category_module").removeAttr('hidden');
         // ========================================
         // Module Category Next Button
@@ -27,9 +50,6 @@
             $("#category_module").attr('hidden', true);
             const subModuleBtnGroups = $("#sub_module");
             subModuleBtnGroups.removeAttr('hidden');
-            // table columns
-            $(".sub-module").removeAttr('hidden');
-            $(".sub-module-td-cell").removeAttr('hidden');
         });
 
         // ========================================
@@ -41,9 +61,6 @@
             $("#category_module").removeAttr('hidden');
             const categoryModuleBtnGroups = $("#category_module");
             categoryModuleBtnGroups.removeAttr('hidden');
-            // table columns
-            $(".sub-module").attr('hidden', true);
-            $(".sub-module-td-cell").attr('hidden', true);
         });
 
         // ========================================
@@ -52,12 +69,9 @@
         $(document).on('click', '#next', function(){
             // buttons
             $("#sub_module").attr('hidden', true);
-            $("#category_module").attr('hidden', true);
+            // $("#category_module").attr('hidden', true);
             const nameModuleBtnGroups = $("#module_name");
             nameModuleBtnGroups.removeAttr('hidden');
-            // table columns
-            $(".module-name").removeAttr('hidden');
-            $(".module-name-td-cell").removeAttr('hidden');
         });
 
         // ========================================
@@ -68,9 +82,6 @@
             $("#module_name").attr('hidden', true);
             const nameModuleBtnGroups = $("#sub_module");
             nameModuleBtnGroups.removeAttr('hidden');
-            // table columns
-            $(".module-name").attr('hidden', true);
-            $(".module-name-td-cell").attr('hidden', true);
         });
 
         // ========================================
@@ -82,9 +93,6 @@
             $("#module_name").attr('hidden', true);
             const installionsModuleBtnGroups = $("#module_installions");
             installionsModuleBtnGroups.removeAttr('hidden');
-            // table columns
-            $(".module-installions").removeAttr('hidden');
-            $(".installions-module-td-cell").removeAttr('hidden');
         });
 
         // ========================================
@@ -93,32 +101,30 @@
         $(document).on('click', '#backSubModule', function(){
             // buttons
             $("#module_installions").attr('hidden', true);
-            $("#category_module").attr('hidden', true);
+            // $("#category_module").attr('hidden', true);
             const installionsModuleBtnGroups = $("#module_name");
             installionsModuleBtnGroups.removeAttr('hidden');
-            // table columns
-            $(".module-installions").attr('hidden', true);
-            $(".installions-module-td-cell").attr('hidden', true);
-            $(".module-name").removeAttr('hidden');
-            $(".module-name-td-cell").removeAttr('hidden');
         });
 
         // ========================================
-        // Module Checked
+        // Category Module Checked
         // ========================================
         $(".category-module").removeAttr('disabled');
 
         $(document).on('click', '#categoryCheck', function(){
 
-            if($(this).is(":checked")){
-                $(".category-module").not(this).prop("checked", false).attr('checked', true);
-                $(".label-text").removeClass("highlight");
+            if ($(this).is(":checked")) {
+                // Disable others
+                $(".category-module").not(this).prop("checked", false).attr('disabled', true).addClass("disableColor");
+                $(".label-text").removeClass("highlight disableColor");
                 $(this).siblings(".label-text").addClass("highlight");
+                $(".category-module").not(this).siblings(".label-text").addClass("disableColor");
                 $("#categoryNext").removeClass('display_none');
-            }else{
-                $(".category-module").removeAttr('disabled');
-                $(".label-text").removeClass("highlight");
-                $("#categoryNext").addClass('display_none'); 
+            } else {
+                // Enable all back
+                $(".category-module").removeAttr('disabled').removeClass("disableColor");
+                $(".label-text").removeClass("highlight disableColor");
+                $("#categoryNext").addClass('display_none');
             }
         });
 
@@ -134,11 +140,12 @@
 
         // ========================================
         // Sub Category Module Fetch
-        // ========================================  category_modules.module_category_name
-        //fetchSubCategoryModule();
+        // ========================================
         function fetchSubCategoryModule(id){
 
             if (!id) return;
+
+            showSecondMenuLoader();
 
             const currentURL = "/application/module/sub-module-search/" +id;
 
@@ -163,15 +170,91 @@
                                 <input class="module-checkbox sub-module" 
                                     type="checkbox" 
                                     data-id="${item.id}" 
-                                    data-value="${item.sub_module_name}">
-                                <span class="label-text">${item.sub_module_name}</span>
+                                    data-value="${item.sub_module_name}" id="subCategoryCheck">
+                                <span class="menu-label-text">${item.sub_module_name}</span>
                             </li>`
                         );
                     });
                     
+                },
+                complete: function(){
+                    hideSecondMenuLoader();
                 }
             });
 
+        }
+
+        // ========================================
+        // Sub Category Module Checked
+        // ========================================
+        $(document).on('click', '#subCategoryCheck', function(){
+
+            if ($(this).is(":checked")) {
+                // Disable others
+                $(".sub-module").not(this).prop("checked", false).attr('disabled', true).addClass("disableColor");
+                $(".menu-label-text").removeClass("highlight disableColor");
+                $(this).siblings(".menu-label-text").addClass("highlight");
+                $(".sub-module").not(this).siblings(".menu-label-text").addClass("disableColor");
+                $("#next").removeClass('display_none');
+            } else {
+                // Enable all back
+                $(".sub-module").removeAttr('disabled').removeClass("disableColor");
+                $(".menu-label-text").removeClass("highlight disableColor");
+                $("#next").addClass('display_none');
+            }
+        });
+
+        // ========================================
+        // Sub Category Module Next Button Click Event
+        // ========================================
+        $(document).on('click', '#next', function(){
+
+            var id = $(".sub-module:checked").data('id');;
+            fetchModuleName(id);
+        });
+
+        // ========================================
+        // Module Name Fetch
+        // ========================================
+        function fetchModuleName(id){
+            if(!id) return;
+
+            showThirdMenuLoader();
+
+            const currentURL = "/application/module/module-fetch/" +id;
+
+            $.ajaxSetup({
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentURL,
+                dataType: "json",
+                success: function(response){
+                    const modules = response.messages;
+                    const moduleMenu = $("#moduleName");
+                    moduleMenu.empty();
+
+                    $.each(modules, function(key, item){
+                        moduleMenu.append(
+                            `<li>
+                                <input class="module-checkbox module-name" 
+                                    type="checkbox" 
+                                    data-id="${item.id}" 
+                                    data-value="${item.module_name}" id="moduleNameCheck">
+                                <span class="name-label-text">${item.module_name}</span>
+                            </li>`
+                        );
+                    });
+                    
+                },
+                complete: function(){
+                    hideThirdMenuLoader();
+                }
+            });
         }
         
     }); 

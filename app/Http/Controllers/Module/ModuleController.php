@@ -31,6 +31,14 @@ class ModuleController extends Controller
     {
         return $this->moduleServiceProvider->subModuleSearching($request, $id);
     }
+
+    // ========================================================================
+    // Module Name Search
+    // ========================================================================
+    public function moduleFetch(Request $request, $id)
+    {
+        return $this->moduleServiceProvider->moduleFetchData($request, $id);
+    }
     
     // Module Category ========================================================
     // Module Category View Templete

@@ -49,6 +49,8 @@ class ModuleSubCategory extends Seeder
             array('sub_module_name'=>'Memories', 'category_module_id'=> 14, 'status'=> 1, 'created_at'=> Carbon::now(), 'updated_at'=> Carbon::now()),
             // Profile(Sub Category Modules)
             array('sub_module_name'=>'Profile', 'category_module_id'=> 15, 'status'=> 1, 'created_at'=> Carbon::now(), 'updated_at'=> Carbon::now()),
+            // Email(Sub Category Modules)
+            array('sub_module_name'=>'Email', 'category_module_id'=> 16, 'status'=> 1, 'created_at'=> Carbon::now(), 'updated_at'=> Carbon::now()),
 
         ];
 
