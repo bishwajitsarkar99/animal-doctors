@@ -71,11 +71,12 @@
                       <tbody class="table-body" id="moduleTable">
                         <tr class="zebra-table-row">
                           <td class="first-init-column-border-cell">
-                            <ul class="Grouping menu-responsive" id="categoryMenu">
+                            <!-- Module-Menu -->
+                            <ul class="Grouping menu-responsive" id="moduleMenu">
                               @if($moduleCategories)
                                 @foreach($moduleCategories as $item)
                                   <li class="select_list_category_menu" tabindex="0" data-value="{{ $item->id }}" id="select_list_category">
-                                    <input class="module-checkbox category-module" type="checkbox" data-id="{{ $item->id }}" data-value="{{ $item->module_category_name }}" id="categoryCheck" disabled>
+                                    <input class="module-checkbox category-module" type="checkbox" data-id="{{ $item->id }}" data-value="{{ $item->module_category_name }}" id="moduleCheck" disabled>
                                     <span class="label-text">{{ $item->module_category_name }}</span>
                                 </li>
                                 @endforeach
@@ -100,7 +101,8 @@
                               loaderTextClass="loader-text ms-1" 
                               loaderFill="none"
                             />
-                            <ul class="Grouping menu-responsive" id="subCategoryModule"></ul>
+                            <!-- Sub Module-Menu -->
+                            <ul class="Grouping menu-responsive" id="subModule"></ul>
                             <div class="row-resizer"></div>
                           </td>
                           <td class="second-init-column-border-cell module-name-td-cell">
@@ -116,10 +118,12 @@
                               loaderTextClass="loader-text ms-1" 
                               loaderFill="none"
                             />
-                            <ul class="Grouping menu-responsive" id="moduleName"></ul>
+                            <!-- Module Parts-Menu -->
+                            <ul class="Grouping menu-responsive" id="moduleParts"></ul>
                             <div class="row-resizer"></div>
                           </td>
                           <td class="second-init-column-border-cell installions-module-td-cell">
+                            <!-- Module Installions-Menu -->
                             <ul class="Grouping menu-responsive" id="moduleInstall">
                               <li>
                                 <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
@@ -160,16 +164,18 @@
         <div class="row mt-1">
           <div class="col-xl-9"></div>
           <div class="col-xl-3">
-            <div class="form-group right-align skeleton" id="category_module">
+            <!-- Module-Button -->
+            <div class="form-group right-align skeleton" id="module">
               <x-Buttons.FormMediumButton 
                 label="Next" 
-                buttonParentClass="btn btn-sm success-shadow-btn display_none" 
+                buttonParentClass="btn btn-sm success-shadow-btn" 
                 buttonChildClass="" 
-                buttonId="categoryNext" 
+                buttonId="moduleNext" 
                 iconClass="add-icon" 
                 labelClass="add-btn-text"
               />
             </div>
+            <!-- Sub Module-Button -->
             <div class="form-group right-align" id="sub_module" hidden>
               <x-Buttons.FormMediumButton 
                 label="Back" 
@@ -188,12 +194,13 @@
                 labelClass="add-btn-text"
               />
             </div>
-            <div class="form-group right-align" id="module_name" hidden>
+            <!-- Module Parts-Button -->
+            <div class="form-group right-align" id="module_parts" hidden>
               <x-Buttons.FormMediumButton 
                 label="Back" 
                 buttonParentClass="btn btn-sm success-shadow-btn me-4" 
                 buttonChildClass="" 
-                buttonId="nameModuleBack" 
+                buttonId="modulePartsBack" 
                 iconClass="add-icon" 
                 labelClass="add-btn-text"
               />
@@ -201,17 +208,18 @@
                 label="Next" 
                 buttonParentClass="btn btn-sm success-shadow-btn" 
                 buttonChildClass="" 
-                buttonId="nameModuleNext" 
+                buttonId="modulePartsNext" 
                 iconClass="add-icon" 
                 labelClass="add-btn-text"
               />
             </div>
+            <!-- Module Installions-Button -->
             <div class="form-group right-align" id="module_installions" hidden>
               <x-Buttons.FormMediumButton 
                 label="Back" 
                 buttonParentClass="btn btn-sm success-shadow-btn me-4" 
                 buttonChildClass="" 
-                buttonId="backSubModule" 
+                buttonId="backLinkUrl" 
                 iconClass="add-icon" 
                 labelClass="add-btn-text"
               />

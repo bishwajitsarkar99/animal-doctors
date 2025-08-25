@@ -7,12 +7,18 @@
     } from "/module/backend-module/backend-module-min.js";
     import { initOffCanvasResize, initAllOffcanvasResizers } from "/module/backend-module/backend-moduleRAM-min.js";
     import { renderRAM } from "/appRAM/backendRAMCapacity/appRAMUsage.js";
+    // Branch RAM Table
+    import { renderRAMUsage } from "/appRAM/backendRAMCapacity/appBranchData.js";
     // Session Base RAM Table Card Resize Bottom Line
     import { setRAM, getRAM } from "/module/backend-module/component-module/module-session-storeRAM.js";
     import { initTableBoxResize, initTableBoxResizers } from "/module/backend-module/component-module/panel-component.js";
     // Total RAM
     renderRAM('totalUsage');
     renderGlobalRAMTable("ram-report-container");
+    // ===============================
+    // Render Branch RAM Table
+    // ===============================
+    renderRAMUsage();
     // Top Bar Menu : Canvas Left Width Resize
     document.addEventListener('DOMContentLoaded', () => {
 

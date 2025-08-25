@@ -21,7 +21,7 @@
         initDragAndDrop
     } from "/module/backend-module/backend-module-min.js";
     // Import RAM functions
-    import { getAppRAM, updateAppRAM, updateAppRAMTable, updateAppRAMBulk, clearBranchListCache, clearAppRAMBranchSection, renderRAMUsage } from "/appRAM/backendRAMCapacity/appBranchData.js";
+    import { getAppRAM, updateAppRAM, updateAppRAMTable, updateAppRAMBulk, clearBranchListCache, clearAppRAMBranchSection } from "/appRAM/backendRAMCapacity/appBranchData.js";
     
     // ================================
     // Branch List Table Resize
@@ -72,11 +72,6 @@
                 sidebarPlate.classList.remove('hover-align-left');
             });
         }
-
-        // ===============================
-        // Render RAM Table
-        // ===============================
-        renderRAMUsage();
     });
 
     $(document).ready(function(){

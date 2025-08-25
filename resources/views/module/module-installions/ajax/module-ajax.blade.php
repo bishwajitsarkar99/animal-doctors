@@ -41,77 +41,26 @@
             hideMenuLoader();
         }, 1000);
 
-        $("#category_module").removeAttr('hidden');
         // ========================================
-        // Module Category Next Button
+        // Module Next Button
         // ========================================
-        $(document).on('click', '#categoryNext', function(){
-            // buttons
-            $("#category_module").attr('hidden', true);
-            const subModuleBtnGroups = $("#sub_module");
-            subModuleBtnGroups.removeAttr('hidden');
+        $("#module").removeAttr('hidden');
+        $(document).on('click', '#moduleNext', function(){
+            if($(".category-module").is(":checked")){
+                // buttons
+                $("#module").attr('hidden', true);
+                const subModuleBtnGroups = $("#sub_module");
+                subModuleBtnGroups.removeAttr('hidden');
+            }else{
+                return;
+            }
         });
 
         // ========================================
-        // Sub Module Category Back Button
-        // ========================================
-        $(document).on('click', '#back', function(){
-            // buttons
-            $("#sub_module").attr('hidden', true);
-            $("#category_module").removeAttr('hidden');
-            const categoryModuleBtnGroups = $("#category_module");
-            categoryModuleBtnGroups.removeAttr('hidden');
-        });
-
-        // ========================================
-        // Module Name Next Button
-        // ========================================
-        $(document).on('click', '#next', function(){
-            // buttons
-            $("#sub_module").attr('hidden', true);
-            // $("#category_module").attr('hidden', true);
-            const nameModuleBtnGroups = $("#module_name");
-            nameModuleBtnGroups.removeAttr('hidden');
-        });
-
-        // ========================================
-        // Module Name Back Button
-        // ========================================
-        $(document).on('click', '#nameModuleBack', function(){
-            // buttons
-            $("#module_name").attr('hidden', true);
-            const nameModuleBtnGroups = $("#sub_module");
-            nameModuleBtnGroups.removeAttr('hidden');
-        });
-
-        // ========================================
-        // Module Installions Button
-        // ========================================
-        $(document).on('click', '#nameModuleNext', function(){
-            // buttons
-            $("#sub_module").attr('hidden', true);
-            $("#module_name").attr('hidden', true);
-            const installionsModuleBtnGroups = $("#module_installions");
-            installionsModuleBtnGroups.removeAttr('hidden');
-        });
-
-        // ========================================
-        // Module Installions Back Button
-        // ========================================
-        $(document).on('click', '#backSubModule', function(){
-            // buttons
-            $("#module_installions").attr('hidden', true);
-            // $("#category_module").attr('hidden', true);
-            const installionsModuleBtnGroups = $("#module_name");
-            installionsModuleBtnGroups.removeAttr('hidden');
-        });
-
-        // ========================================
-        // Category Module Checked
+        // Module Checked
         // ========================================
         $(".category-module").removeAttr('disabled');
-
-        $(document).on('click', '#categoryCheck', function(){
+        $(document).on('click', '#moduleCheck', function(){
 
             if ($(this).is(":checked")) {
                 // Disable others
@@ -119,29 +68,86 @@
                 $(".label-text").removeClass("highlight disableColor");
                 $(this).siblings(".label-text").addClass("highlight");
                 $(".category-module").not(this).siblings(".label-text").addClass("disableColor");
-                $("#categoryNext").removeClass('display_none');
             } else {
                 // Enable all back
                 $(".category-module").removeAttr('disabled').removeClass("disableColor");
                 $(".label-text").removeClass("highlight disableColor");
-                $("#categoryNext").addClass('display_none');
             }
         });
 
         // ========================================
-        // Category Module Next Button Click Event
+        // Module Next Button Click Event
         // ========================================
-        $(document).on('click', '#categoryNext', function(){
+        $(document).on('click', '#moduleNext', function(){
 
             var id = $(".category-module:checked").data('id');;
             
-            fetchSubCategoryModule(id);
+            fetchSubModule(id);
         });
 
         // ========================================
-        // Sub Category Module Fetch
+        // Sub Module Back Button
         // ========================================
-        function fetchSubCategoryModule(id){
+        $(document).on('click', '#back', function(){
+            // buttons
+            $("#sub_module").attr('hidden', true);
+            $("#module").removeAttr('hidden');
+            const categoryModuleBtnGroups = $("#module");
+            categoryModuleBtnGroups.removeAttr('hidden');
+            $("#subModule").empty();
+            $(".category-module").prop("checked", false);
+            $(".category-module").removeAttr('disabled').removeClass("disableColor");
+            $(".label-text").removeClass("highlight disableColor");
+        });
+
+        // ========================================
+        // Sub Module Next Button
+        // ========================================
+        $(document).on('click', '#next', function(){
+            if($(".sub-module").is(":checked")){
+                // buttons
+                $("#sub_module").attr('hidden', true);
+                const nameModuleBtnGroups = $("#module_parts");
+                nameModuleBtnGroups.removeAttr('hidden');
+
+            }else{
+                return;
+            }
+        });
+
+        // ========================================
+        // Sub Module Checked
+        // ========================================
+        $(document).on('click', '#subModuleCheck', function(){
+
+            if ($(this).is(":checked")) {
+                // Disable others
+                $(".sub-module").not(this).prop("checked", false).attr('disabled', true).addClass("disableColor");
+                $(".menu-label-text").removeClass("highlight disableColor");
+                $(this).siblings(".menu-label-text").addClass("highlight");
+                $(".sub-module").not(this).siblings(".menu-label-text").addClass("disableColor");
+                $("#next").removeClass('display_none');
+            } else {
+                // Enable all back
+                $(".sub-module").removeAttr('disabled').removeClass("disableColor");
+                $(".menu-label-text").removeClass("highlight disableColor");
+                $("#next").addClass('display_none');
+            }
+        });
+
+        // ========================================
+        // Sub Module Next Button Click Event
+        // ========================================
+        $(document).on('click', '#next', function(){
+
+            var id = $(".sub-module:checked").data('id');;
+            fetchModuleParts(id);
+        });
+
+        // ========================================
+        // Sub Module Fetch
+        // ========================================
+        function fetchSubModule(id){
 
             if (!id) return;
 
@@ -161,7 +167,7 @@
                 dataType: "json",
                 success: function(response){
                     const subModules = response.messages;
-                    const subModuleMenu = $("#subCategoryModule");
+                    const subModuleMenu = $("#subModule");
                     subModuleMenu.empty();
 
                     $.each(subModules, function(key, item){
@@ -170,7 +176,7 @@
                                 <input class="module-checkbox sub-module" 
                                     type="checkbox" 
                                     data-id="${item.id}" 
-                                    data-value="${item.sub_module_name}" id="subCategoryCheck">
+                                    data-value="${item.sub_module_name}" id="subModuleCheck">
                                 <span class="menu-label-text">${item.sub_module_name}</span>
                             </li>`
                         );
@@ -185,38 +191,39 @@
         }
 
         // ========================================
-        // Sub Category Module Checked
+        // Module Parts Back Button
         // ========================================
-        $(document).on('click', '#subCategoryCheck', function(){
+        $(document).on('click', '#modulePartsBack', function(){
+            // buttons
+            $("#module_parts").attr('hidden', true);
+            const nameModuleBtnGroups = $("#sub_module");
+            nameModuleBtnGroups.removeAttr('hidden');
 
-            if ($(this).is(":checked")) {
-                // Disable others
-                $(".sub-module").not(this).prop("checked", false).attr('disabled', true).addClass("disableColor");
-                $(".menu-label-text").removeClass("highlight disableColor");
-                $(this).siblings(".menu-label-text").addClass("highlight");
-                $(".sub-module").not(this).siblings(".menu-label-text").addClass("disableColor");
-                $("#next").removeClass('display_none');
-            } else {
-                // Enable all back
-                $(".sub-module").removeAttr('disabled').removeClass("disableColor");
-                $(".menu-label-text").removeClass("highlight disableColor");
-                $("#next").addClass('display_none');
+            $("#moduleParts").empty();
+            $(".module-name").prop("checked", false);
+            $(".module-name").removeAttr('disabled').removeClass("disableColor");
+            $(".name-label-text").removeClass("highlight disableColor");
+        });
+
+        // ========================================
+        // Module Parts Next Button
+        // ========================================
+        $(document).on('click', '#modulePartsNext', function(){
+            if($(".module-name").is(":checked")){
+                // buttons
+                $("#sub_module").attr('hidden', true);
+                $("#module_parts").attr('hidden', true);
+                const installionsModuleBtnGroups = $("#module_installions");
+                installionsModuleBtnGroups.removeAttr('hidden');
+            }else{
+                return;
             }
         });
 
         // ========================================
-        // Sub Category Module Next Button Click Event
+        // Module Parts Fetch
         // ========================================
-        $(document).on('click', '#next', function(){
-
-            var id = $(".sub-module:checked").data('id');;
-            fetchModuleName(id);
-        });
-
-        // ========================================
-        // Module Name Fetch
-        // ========================================
-        function fetchModuleName(id){
+        function fetchModuleParts(id){
             if(!id) return;
 
             showThirdMenuLoader();
@@ -235,7 +242,7 @@
                 dataType: "json",
                 success: function(response){
                     const modules = response.messages;
-                    const moduleMenu = $("#moduleName");
+                    const moduleMenu = $("#moduleParts");
                     moduleMenu.empty();
 
                     $.each(modules, function(key, item){
@@ -256,6 +263,22 @@
                 }
             });
         }
+
+        
+        // ========================================
+        // Module Link URL Back Button
+        // ========================================
+        $(document).on('click', '#backLinkUrl', function(){
+            // buttons
+            $("#module_installions").attr('hidden', true);
+            const installionsModuleBtnGroups = $("#module_name");
+            installionsModuleBtnGroups.removeAttr('hidden');
+
+            // $("#moduleInstall").empty();
+            // $(".module-name").prop("checked", false);
+            // $(".module-name").removeAttr('disabled').removeClass("disableColor");
+            // $(".name-label-text").removeClass("highlight disableColor");
+        });
         
     }); 
 

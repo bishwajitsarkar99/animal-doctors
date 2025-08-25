@@ -1830,6 +1830,7 @@ button.btn.btn-sm.success-shadow-btn.sortBtn {
   margin-bottom: 0;
   min-width: max-content;
   border-collapse: separate;
+  border-color: rgba(0, 0, 0, 0.05);
 }
 .table-body{
   background-color: transparent;

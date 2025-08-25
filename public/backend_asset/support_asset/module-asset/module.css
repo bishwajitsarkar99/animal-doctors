@@ -69,6 +69,8 @@ th.lab_padding {
 }
 th.head-border {
     border: 1px solid rgba(0, 123, 255, 0.2);
+    color: #333 !important;
+    text-shadow: none;
 }
 td.first-init-column-border-cell {
     border-left: 1px solid rgba(0, 123, 255, 0.2);
@@ -134,7 +136,7 @@ ul.Grouping li{
     font-size: 12px;
     font-weight: 600;
     font-family: var(--panel-font-family);
-    color: #222;
+    color: #333;
 }
 input.module-checkbox[type=checkbox] {
     cursor: pointer;
