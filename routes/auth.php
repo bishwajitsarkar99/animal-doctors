@@ -61,7 +61,7 @@ Route::middleware('emailVerificationPage')->group(function () {
 
 // Send Email
 Route::middleware(['role:SuperAdmin|Admin|SubAdmin|Accounts|Marketing|DeliveryTeam|User'])->group(function(){
-    Route::get('/email', [EmailController::class, 'index'])->name('email.index');
+    Route::get('/application/email-{slug}/index', [EmailController::class, 'index'])->name('email.index');
     Route::post('/email/send', [EmailController::class, 'sendEmail'])->name('email.send');
     Route::get('/email/send/list', [EmailController::class, 'sendFetchEmail'])->name('email.send_list');
     Route::get('/email/fetch', [EmailController::class, 'inboxFetchEmail'])->name('email.fetch');

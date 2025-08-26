@@ -9,23 +9,23 @@
     ];
     // Supplier Menu
     $supplierMenuButtons = [
-        ['btnId' => '','label' => 'Create','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('supplier.index') ? ' menu_btn_active' : ''),'url' => route('supplier.index')],
+        ['btnId' => '','label' => 'Create','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('supplier.index') ? ' menu_btn_active' : ''),'url' => "/company-supplier/suppliers/index-{slug}/index"],
         ['btnId' => '','label' => 'Record','btnClass' => 'sub-menu-btn side-bar-link','url' => '#'],
         ['btnId' => '','label' => 'Requisition','btnClass' => 'sub-menu-btn side-bar-link','url' => '#'],
-        ['btnId' => '','label' => 'Setting','btnClass' => 'sub-menu-btn side-bar-link','url' => '#']
+        ['btnId' => '','label' => 'Setting','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('access-permission.index') ? ' menu_btn_active' : ''),'url' => "/company-supplier/suppliers/access-permission-{slug}/index"]
     ];
     // Pivot Table Menu
     $pivotTableMenuButtons = [
-        ['btnId' => '','label' => 'Order','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('showOrder_pivot') ? ' menu_btn_active' : ''),'url' => route('showOrder_pivot')],
-        ['btnId' => '','label' => 'Sales','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('showSales_pivot') ? ' menu_btn_active' : ''),'url' => route('showSales_pivot')],
-        ['btnId' => '','label' => 'Expenses','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('expenses_index') ? ' menu_btn_active' : ''),'url' => route('expenses_index')],
-        ['btnId' => '','label' => 'Supplier','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('supplier_index') ? ' menu_btn_active' : ''),'url' => route('supplier_index')]
+        ['btnId' => '','label' => 'Order','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('showOrder_pivot') ? ' menu_btn_active' : ''),'url' => "/business-summary/pivot-tables/order-pivot-table-{slug}/index"],
+        ['btnId' => '','label' => 'Sales','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('showSales_pivot') ? ' menu_btn_active' : ''),'url' => "/business-summary/pivot-tables/sales-pivot-table-{slug}/index"],
+        ['btnId' => '','label' => 'Expenses','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('expenses_index') ? ' menu_btn_active' : ''),'url' => "/business-summary/pivot-tables/expenses-pivot-table-{slug}/index"],
+        ['btnId' => '','label' => 'Supplier','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('supplier_index') ? ' menu_btn_active' : ''),'url' => "/business-summary/pivot-tables/supplier-pivot-table-{slug}/index"]
     ];
     // Item Menu
     $medicineItemMenuButtons = [
-        ['btnId' => '','label' => 'Medicine Group','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('medicine-group.index') ? ' menu_btn_active' : ''),'url' => route('medicine-group.index')],
-        ['btnId' => '','label' => 'Medicine Name','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('medicine-name.index') ? ' menu_btn_active' : ''),'url' => route('medicine-name.index')],
-        ['btnId' => '','label' => 'Medicine Dosage','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('medicine-dogs.index') ? ' menu_btn_active' : ''),'url' => route('medicine-dogs.index')]
+        ['btnId' => '','label' => 'Medicine Group','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('medicine-group.index') ? ' menu_btn_active' : ''),'url' => "/medicine-components/medicine-group-{slug}/index"],
+        ['btnId' => '','label' => 'Medicine Name','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('medicine-name.index') ? ' menu_btn_active' : ''),'url' => "/medicine-components/medicine-name-{slug}/index"],
+        ['btnId' => '','label' => 'Medicine Dosage','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('medicine-dogs.index') ? ' menu_btn_active' : ''),'url' => "/medicine-components/medicine-dosage-{slug}/index"]
     ];
     $productQuotationItemMenuButtons = [
         ['btnId' => '','label' => 'Product Quotation','btnClass' => 'sub-menu-btn side-bar-link','url' => '#']
@@ -37,14 +37,14 @@
         ['btnId' => '','label' => 'Post Setting','btnClass' => 'sub-menu-btn side-bar-link','url' => '#']
     ];
     $productItemMenuButtons = [
-        ['btnId' => '','label' => 'Category','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('category.index') ? ' menu_btn_active' : ''),'url' => route('category.index')],
-        ['btnId' => '','label' => 'Sub-Category','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('sub-category.index') ? ' menu_btn_active' : ''),'url' => route('sub-category.index')],
+        ['btnId' => '','label' => 'Category','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('category.index') ? ' menu_btn_active' : ''),'url' => "/product-components/category-{slug}/index"],
+        ['btnId' => '','label' => 'Sub-Category','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('sub-category.index') ? ' menu_btn_active' : ''),'url' => "/product-components/sub-category-{slug}/index"],
         ['btnId' => '','label' => 'Product-Group','btnClass' => 'sub-menu-btn side-bar-link','url' => '#'],
-        ['btnId' => '','label' => 'Product','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('product.index') ? ' menu_btn_active' : ''),'url' => route('product.index')],
-        ['btnId' => '','label' => 'Units','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('units.index') ? ' menu_btn_active' : ''),'url' => route('units.index')],
-        ['btnId' => '','label' => 'Origin','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('origin.index') ? ' menu_btn_active' : ''),'url' => route('origin.index')],
-        ['btnId' => '','label' => 'Brand','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('brand.index') ? ' menu_btn_active' : ''),'url' => route('brand.index')],
-        ['btnId' => '','label' => 'Model','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('model.index') ? ' menu_btn_active' : ''),'url' => route('model.index')]
+        ['btnId' => '','label' => 'Product','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('product.index') ? ' menu_btn_active' : ''),'url' => "/product-components/product-{slug}/index"],
+        ['btnId' => '','label' => 'Units','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('units.index') ? ' menu_btn_active' : ''),'url' => "/product-components/units-{slug}/index"],
+        ['btnId' => '','label' => 'Origin','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('origin.index') ? ' menu_btn_active' : ''),'url' => "/product-components/origin-{slug}/index"],
+        ['btnId' => '','label' => 'Brand','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('brand.index') ? ' menu_btn_active' : ''),'url' => "/product-components/brand-{slug}/index"],
+        ['btnId' => '','label' => 'Model','btnClass' => 'sub-menu-btn side-bar-link' . (Request::routeIs('model.index') ? ' menu_btn_active' : ''),'url' => "/product-components/model-{slug}/index"]
     ];
 ?>
 <div class="row">
@@ -119,7 +119,7 @@
                     </li>
                     <!-- ======= Supplier-Menu ============ -->
                     <li>
-                        <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component {{setting('navbar_supplier_moduel_display')}}" menuChildClass="dropdown-content dropdown-menu-component menu-card" activeMenu="ms-2 {{ Request::is('company-supplier/suppliers/index') || Request::is('company-supplier/suppliers/access-permission') ? 'nav-active' : '' }}" wrapperId="NavBarSupplierMenuCard" menuName="{{__('translate.Supplier')}}" menuId="dropbtn" showIdClassName="" menuIcon="">
+                        <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component {{setting('navbar_supplier_moduel_display')}}" menuChildClass="dropdown-content dropdown-menu-component menu-card" activeMenu="ms-2 {{ Request::is('company-supplier/suppliers/index-*/index') || Request::is('company-supplier/suppliers/access-permission-*/index') ? 'nav-active' : '' }}" wrapperId="NavBarSupplierMenuCard" menuName="{{__('translate.Supplier')}}" menuId="dropbtn" showIdClassName="" menuIcon="">
                             <div class="menu-card-header">
                                 <svg  width="20px" height="20px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 479.16">
                                     <path fill="rgba(0,123,255,0.4)" d="m0 431.82 366 47.34 139.66-90.53L507.59 44 184.93 0 0 83.91z"/>
@@ -151,7 +151,7 @@
                     </li>
                     <!-- ======= Pivot Table-Menu ============ -->
                     <li>
-                        <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component {{setting('navbar_pivot_moduel_display')}}" menuChildClass="dropdown-content dropdown-menu-component menu-card" activeMenu="ms-2 {{ Request::is('super-admin/pivot-tables/supplier-pivot-table') || Request::is('super-admin/pivot-tables/order-pivot-table') || Request::is('super-admin/pivot-tables/sales-pivot-table') || Request::is('super-admin/pivot-tables/expenses-pivot-table') ? 'nav-active' : '' }}" wrapperId="NavBarPivotTableMenuCard" menuName="{{__('translate.Pivot-Table')}}" menuId="dropbtn" showIdClassName="" menuIcon="">
+                        <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component {{setting('navbar_pivot_moduel_display')}}" menuChildClass="dropdown-content dropdown-menu-component menu-card" activeMenu="ms-2 {{ Request::is('business-summary/pivot-tables/supplier-pivot-table-*/index') || Request::is('business-summary/pivot-tables/order-pivot-table-*/index') || Request::is('business-summary/pivot-tables/sales-pivot-table-*/index') || Request::is('business-summary/pivot-tables/expenses-pivot-table-*/index') ? 'nav-active' : '' }}" wrapperId="NavBarPivotTableMenuCard" menuName="{{__('translate.Pivot-Table')}}" menuId="dropbtn" showIdClassName="" menuIcon="">
                             <div class="menu-card-header">
                                 <svg version="1.1" id="Layer_1" width="25px" height="25px" fill="rgba(0,123,255,0.4)" x="0px" y="0px" viewBox="0 0 122.9 85.6" style="enable-background:new 0 0 122.9 85.6" xml:space="preserve">
                                     <style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style>
@@ -185,10 +185,11 @@
                     <li>
                         <x-MenuCards.MenuCard menuParentClass="dropdown menubar-component {{setting('navbar_item_list_moduel_display')}}" 
                             menuChildClass="dropdown-content dropdown-menu-component menu-card" 
-                            activeMenu="ms-2 {{ Request::is('product-components/category') || Request::is('product-components/sub-category') || 
-                                Request::is('medicine-components/medicine-group') || Request::is('medicine-components/medicine-name') || Request::is('medicine-components/medicine-dosage')
-                                || Request::is('product-components/product') || Request::is('product-components/product') || Request::is('product-components/units') || Request::is('product-components/origin')
-                                || Request::is('product-components/brand') || Request::is('product-components/model') ? 'nav-active' : '' }}" 
+                            activeMenu="ms-2 {{ Request::is('product-components/category-*/index') || Request::is('product-components/sub-category-*/index') || 
+                            Request::is('medicine-components/medicine-group-*/index') || Request::is('medicine-components/medicine-name-*/index') || 
+                            Request::is('medicine-components/medicine-dosage-*/index') || Request::is('product-components/units-*/index') || 
+                            Request::is('product-components/origin-*/index') || Request::is('product-components/brand-*/index') || 
+                            Request::is('product-components/model-*/index') || Request::is('product-components/product-*/index') ? 'nav-active' : '' }}" 
                             wrapperId="NavBarItemsMenuCard" menuName="{{__('translate.Iteam')}}" menuId="dropbtn" showIdClassName="" menuIcon="">
                             <div class="menu-card-header">
                                 <svg id="Layer_1" data-name="Layer 1" width="25px" height="25px" fill="rgba(0,123,255,0.4)" viewBox="0 0 122.88 111.48">

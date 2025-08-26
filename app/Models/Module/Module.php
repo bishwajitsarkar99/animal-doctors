@@ -4,6 +4,7 @@ namespace App\Models\Module;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Module\ModuleLinkUrl;
 
 class Module extends Model
 {
@@ -14,4 +15,8 @@ class Module extends Model
         'sub_module_id',
         'status',
     ];
+
+    public function moduleLinkUrls(){
+        return $this->hasMany(ModuleLinkUrl::class);
+    }
 }

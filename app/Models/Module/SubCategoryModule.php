@@ -5,6 +5,7 @@ namespace App\Models\Module;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Module\CategoryModule;
+use App\Models\Module\ModuleLinkUrl;
 
 class SubCategoryModule extends Model
 {
@@ -19,5 +20,9 @@ class SubCategoryModule extends Model
 
     public function categoryModules(){
         return $this->belongsTo(CategoryModule::class, 'category_module_id', 'id');
+    }
+
+    public function moduleLinkUrls(){
+        return $this->hasMany(ModuleLinkUrl::class);
     }
 }

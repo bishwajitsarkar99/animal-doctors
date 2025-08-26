@@ -36,6 +36,12 @@
         function hideThirdMenuLoader(){
             $('#loaderThirdMenu').addClass('display_none');
         }
+        function showFourthMenuLoader(){
+            $('#loaderFourthMenu').removeClass('display_none');
+        }
+        function hideFourthMenuLoader(){
+            $('#loaderFourthMenu').addClass('display_none');
+        }
         showMenuLoader();
         setTimeout(() => {
             hideMenuLoader();
@@ -209,15 +215,29 @@
         // Module Parts Next Button
         // ========================================
         $(document).on('click', '#modulePartsNext', function(){
-            if($(".module-name").is(":checked")){
+            if($(".module-parts").is(":checked")){
                 // buttons
                 $("#sub_module").attr('hidden', true);
                 $("#module_parts").attr('hidden', true);
-                const installionsModuleBtnGroups = $("#module_installions");
+                const installionsModuleBtnGroups = $("#module_link_url");
                 installionsModuleBtnGroups.removeAttr('hidden');
             }else{
                 return;
             }
+        });
+
+        // ========================================
+        // Module Parts Next Button Click Event
+        // ========================================
+        $(document).on('click', '#modulePartsNext', function(){
+
+            var ids = [];
+
+            $(".module-parts:checked").each(function () {
+                ids.push($(this).data('id'));
+            });
+
+            fetchModuleUrl(ids); 
         });
 
         // ========================================
@@ -248,7 +268,7 @@
                     $.each(modules, function(key, item){
                         moduleMenu.append(
                             `<li>
-                                <input class="module-checkbox module-name" 
+                                <input class="module-checkbox module-parts" 
                                     type="checkbox" 
                                     data-id="${item.id}" 
                                     data-value="${item.module_name}" id="moduleNameCheck">
@@ -264,21 +284,85 @@
             });
         }
 
-        
         // ========================================
         // Module Link URL Back Button
         // ========================================
         $(document).on('click', '#backLinkUrl', function(){
             // buttons
-            $("#module_installions").attr('hidden', true);
-            const installionsModuleBtnGroups = $("#module_name");
+            $("#module_link_url").attr('hidden', true);
+            const installionsModuleBtnGroups = $("#module_parts");
             installionsModuleBtnGroups.removeAttr('hidden');
 
-            // $("#moduleInstall").empty();
-            // $(".module-name").prop("checked", false);
-            // $(".module-name").removeAttr('disabled').removeClass("disableColor");
-            // $(".name-label-text").removeClass("highlight disableColor");
+            $("#moduleUrlMenu").empty();
+            $(".module-link-url").prop("checked", false);
+            $(".module-link-url").removeAttr('disabled').removeClass("disableColor");
+            $(".module-url-label-text").removeClass("highlight disableColor");
         });
+
+        // ========================================
+        // Module Parts Fetch
+        // ========================================
+        function fetchModuleUrl(ids){
+            if(!ids) return;
+
+            const currentURL = "/application/module/module-link-url-fetch/";
+
+            showFourthMenuLoader();
+
+            $.ajaxSetup({
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: currentURL,
+                dataType: "json",
+                data:{ids:ids},
+                success: function(response){
+                    const moduleUrl = response.messages;
+
+                    const moduleUrLMenu = $("#moduleUrlMenu");
+                    moduleUrLMenu.empty();
+
+                    $.each(moduleUrl, function(catKey, category){
+                        // Category title
+                        moduleUrLMenu.append(`<li><strong><em>Module : ${category.module}</strong></em></li>`);
+
+                        $.each(category.sub_modules, function(subKey, subModule){
+                            // Sub Category
+                            moduleUrLMenu.append(`<li style="margin-left:15px;"><em>Sub Module : ${subModule.sub_module}</em></li>`);
+
+                            $.each(subModule.module_parts, function(modKey, modulePart){
+                                // Module Parts
+                                moduleUrLMenu.append(`<li style="margin-left:30px;"><em>Module Part : ${modulePart.module_name}</em></li>`);
+
+                                // Module URLs
+                                $.each(modulePart.module_urls, function(urlKey, urlItem){
+                                    let checkedAttr = urlItem.id ? 'checked' : '';
+                                    moduleUrLMenu.append(`
+                                        <li style="margin-left:45px;">
+                                            <input class="module-checkbox module-link-url" 
+                                                type="checkbox" 
+                                                data-id="${urlItem.id}" 
+                                                data-value="${urlItem.module_url}" 
+                                                ${checkedAttr}>
+                                            <span class="module-url-label-text">Module URL : ${urlItem.module_url}</span>
+                                        </li>
+                                    `);
+                                });
+                            });
+                        });
+                    });
+                },
+                complete: function(){
+                    hideFourthMenuLoader();
+                }
+            });
+
+
+        }
         
     }); 
 

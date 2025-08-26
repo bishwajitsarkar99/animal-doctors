@@ -25,6 +25,7 @@
                         <option class="custom-select-optation" value="BranchTableMenuCard">Branch Table Menu Card</option>
                         <option class="custom-select-optation" value="branchScoreTable">Branch Score Table</option>
                         <option class="custom-select-optation" value="BranchSettingDrag">Branch Setting Drag and Drop</option>
+                        <option class="custom-select-optation" value="moduleInfosTable">Module Table</option>
                         <option class="custom-select-optation" value="NavBarItemsMenuCard">Item Nav Bar Menu Card</option>
                         <option class="custom-select-optation" value="NavBarLanguageMenuCard">Language Nav Bar Menu Card</option>
                         <option class="custom-select-optation" value="NavBarOrderMenuCard">Order Nav Bar Menu Card</option>

@@ -5,17 +5,17 @@
         <line x1="17.01" y1="12" x2="22.96" y2="12" />
     </svg>
     <span class="text-animation">
-        <span class="layout_label {{Request::is('super-admin/post-setting') || Request::is('super-admin/app-setting') ? 'folder-active' : '' }}">{{__('translate.Setting')}}</span>
+        <span class="layout_label {{Request::is('super-admin/post-setting-*/index') || Request::is('super-admin/app-setting-*/index') ? 'folder-active' : '' }}">{{__('translate.Setting')}}</span>
     </span>
     <div class="sb-sidenav-collapse-arrow">▼</div>
 </a>
 <div id="addons" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushExample">
     <div class="accordion-body sub_box">
         <nav class="sb-sidenav-menu-nested nav child-white-tree">
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('post_setting.index') ? 'active' : '' }}" data-url="{{ route('post_setting.index') }}" style="font-family: sans-serif;color:white;font-size:12px;" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('post_setting.index') ? 'active' : '' }}" data-url="/super-admin/post-setting-{slug}/index" style="font-family: sans-serif;color:white;font-size:12px;" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#ffff;"></i> {{__('translate.Post-Setting')}}
             </a>
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('appSetting') ? 'active' : '' }}" data-url="{{route('appSetting')}}" style="font-family: sans-serif;color:white;font-size:12px;" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('appSetting') ? 'active' : '' }}" data-url="/super-admin/app-setting-{slug}/index" style="font-family: sans-serif;color:white;font-size:12px;" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#ffff;"></i> {{__('translate.App-Setting')}}
             </a>
         </nav>

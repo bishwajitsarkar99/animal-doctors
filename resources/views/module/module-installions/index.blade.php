@@ -123,33 +123,20 @@
                             <div class="row-resizer"></div>
                           </td>
                           <td class="second-init-column-border-cell installions-module-td-cell">
+                            <x-Tables.Icon.LoaderOverlay 
+                              tableOverlayClass="table-loader-overlay display_none" 
+                              loaderId="loaderFourthMenu" 
+                              loaderClass="data-menu-loader" 
+                              loaderWidth="24" 
+                              loaderHeight="24" 
+                              loaderStroke="white" 
+                              loaderStrokeWidth="3" 
+                              loaderText="Loading...." 
+                              loaderTextClass="loader-text ms-1" 
+                              loaderFill="none"
+                            />
                             <!-- Module Installions-Menu -->
-                            <ul class="Grouping menu-responsive" id="moduleInstall">
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Auth</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Accounts</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Stock</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Marketing</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>HRM</span>
-                              </li>
-                              <li>
-                                <input class="module-checkbox" type="checkbox" data-id="" data-value="" id="categoryCheck">
-                                <span>Inventory</span>
-                              </li>
-                            </ul>
+                            <ul class="Grouping menu-responsive tree-build" id="moduleUrlMenu"></ul>
                             <div class="row-resizer"></div>
                           </td>
                         </tr>
@@ -213,8 +200,8 @@
                 labelClass="add-btn-text"
               />
             </div>
-            <!-- Module Installions-Button -->
-            <div class="form-group right-align" id="module_installions" hidden>
+            <!-- Module Link Url-Button -->
+            <div class="form-group right-align" id="module_link_url" hidden>
               <x-Buttons.FormMediumButton 
                 label="Back" 
                 buttonParentClass="btn btn-sm success-shadow-btn me-4" 

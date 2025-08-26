@@ -172,3 +172,55 @@ input.module-checkbox[type=checkbox]:checked::after {
 .disableColor{
     color: darkgray;
 }
+.module-url-label-text:hover {
+    text-decoration: underline;
+    text-decoration-color: dodgerblue;
+    color: dodgerblue;
+    transition: 1ms color;
+}
+
+/* Tree container */
+.tree-build {
+  /* font-family: Arial, sans-serif; */
+  position: relative;
+  padding-left: 0px;
+}
+/* Tree ul reset */
+.tree-build ul {
+  margin: 0;
+  padding-left: 30px;
+  position: relative;
+  list-style: none;
+}
+/* Line before each ul (vertical connector) */
+.tree-build ul::before {
+  content: "";
+  border-left: 2px dashed #4cafef;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  bottom: 0;
+  animation: dashMove 4s linear infinite;
+}
+/* Tree li */
+.tree-build li {
+  margin: 0px 0;
+  padding-left: 20px;
+  position: relative;
+}
+/* Horizontal connector */
+.tree-build li::before {
+  content: "";
+  border-top: 2px dashed #4cafef;
+  position: absolute;
+  top: 12px;
+  left: 0;
+  width: 15px;
+  animation: dashMove 2s linear infinite;
+}
+/* Keyframes for moving dash effect */
+@keyframes dashMove {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}

@@ -93,7 +93,7 @@
                 <span class="show-prof ms-2" id="profileSkel"></span>
             </li>
             <li>
-                <a type="button" class="dropdown-item pro_link side-bar-link btn-bottom-margin" data-url="{{route('email.index')}}">
+                <a type="button" class="dropdown-item pro_link side-bar-link btn-bottom-margin" data-url="/application/email-{slug}/index">
                     <span class="show-email badge rounded-pill bg-doragblue list-sm-btn pt-1" hidden>
                         <svg id="Layer_1" data-name="Layer 1" width="20px" height="15px" viewBox="0 0 117.88 122.88">
                             <defs><style>.cls-1{fill:#297cf8ff;}.cls-2{fill:#297cf8ff;}.cls-3,.cls-5{fill:#fff;}.cls-4{fill:#297cf8ff;}.cls-4,.cls-5{fill-rule:evenodd;}</style></defs>

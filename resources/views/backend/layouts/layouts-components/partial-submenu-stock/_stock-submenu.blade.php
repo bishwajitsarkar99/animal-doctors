@@ -64,7 +64,7 @@
     </div>
 </div>
 <!-- ================= Supplier ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}} {{Request::is('company-supplier/suppliers/index') || Request::is('company-supplier/suppliers/access-permission') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#suppliers" aria-expanded="false" aria-controls="flush-heading">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_supplier {{setting('supplier_title_visual')}} {{Request::is('company-supplier/suppliers/index-*/index') || Request::is('company-supplier/suppliers/access-permission-*/index') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#suppliers" aria-expanded="false" aria-controls="flush-heading">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_supplier_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_supplier_link" hidden></i>
@@ -75,7 +75,7 @@
 <div id="suppliers" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushStock">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('supplier.index') ? 'active' : '' }}" data-url="{{route('supplier.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('supplier.index') ? 'active' : '' }}" data-url="/company-supplier/suppliers/index-{slug}/index" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_setup_display')}}">{{__('translate.Create')}}</span>
             </a>
@@ -87,7 +87,7 @@
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_requisition_display')}}">{{__('translate.Requisition')}}</span>
             </a>
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('access-permission.index') ? 'active' : '' }}" data-url="{{route('access-permission.index') }}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('access-permission.index') ? 'active' : '' }}" data-url="/company-supplier/suppliers/access-permission-{slug}/index" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('supplier_requisition_display')}}">{{__('translate.Setting')}}</span>
             </a>

@@ -7,7 +7,7 @@
                 <line x1="17.01" y1="12" x2="22.96" y2="12" />
             </svg>
             <span class="text-animation">
-                <span class="ps-1 {{setting('product_visual')}} {{ Request::is('product-components/category') || Request::is('product-components/sub-category') || Request::is('medicine-components/medicine-group') || Request::is('medicine-components/medicine-name') || Request::is('medicine-components/medicine-dosage') || Request::is('product-components/units') || Request::is('product-components/origin') || Request::is('product-components/brand') || Request::is('product-components/model') || Request::is('product-components/product') ? 'folder-active' : '' }}">
+                <span class="ps-1 {{setting('product_visual')}} {{ Request::is('product-components/category-*/index') || Request::is('product-components/sub-category-*/index') || Request::is('medicine-components/medicine-group-*/index') || Request::is('medicine-components/medicine-name-*/index') || Request::is('medicine-components/medicine-dosage-*/index') || Request::is('product-components/units-*/index') || Request::is('product-components/origin-*/index') || Request::is('product-components/brand-*/index') || Request::is('product-components/model-*/index') || Request::is('product-components/product-*/index') ? 'folder-active' : '' }}">
                     {{__('translate.Product')}}
                 </span>
             </span>

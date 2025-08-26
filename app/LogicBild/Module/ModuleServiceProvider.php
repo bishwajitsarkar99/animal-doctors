@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Models\Module\CategoryModule;
 use App\Models\Module\SubCategoryModule;
 use App\Models\Module\Module;
+use App\Models\Module\ModuleLinkUrl;
 use App\Models\Module\ModuleName;
 
 class ModuleServiceProvider
@@ -34,7 +35,7 @@ class ModuleServiceProvider
     }
 
     // ========================================================================
-    // Sub Module Searching
+    // Sub Module Fetch Data
     // ========================================================================
     public function subModuleSearching(Request $request, $id)
     {
@@ -58,7 +59,7 @@ class ModuleServiceProvider
     }
 
     // ========================================================================
-    // Module Name Searching
+    // Module Parts Fetch Data
     // ========================================================================
     public function moduleFetchData(Request $request, $id)
     {
@@ -82,6 +83,79 @@ class ModuleServiceProvider
             ], 404);
         }
     }
+
+    // ========================================================================
+    // Module Link URL Fetch Data
+    // ========================================================================
+    public function moduleLinkUrlFetchData(Request $request)
+    {
+        $auth = Auth::user();
+        $role = $auth->role;
+
+        if(!$auth){
+            return redirect()->route('login');
+        }
+
+        if($role === 1){
+            $ids = $request->get('ids', []);
+            $moduleLinkUrl = ModuleLinkUrl::with(['categoryModules', 'subCategoryModules', 'modules'])->whereIn('module_id', $ids)->get();
+
+            // Build tree structure
+            $tree = [];
+
+            foreach ($moduleLinkUrl as $url) {
+                $catId = $url->category_module_id;
+                $subCatId = $url->sub_category_module_id;
+                $modId = $url->module_id;
+
+                // Ensure category level exists
+                if (!isset($tree[$catId])) {
+                    $tree[$catId] = [
+                        'module' => optional($url->categoryModules)->module_category_name,
+                        'sub_modules' => []
+                    ];
+                }
+
+                // Ensure sub-category level exists
+                if (!isset($tree[$catId]['sub_modules'][$subCatId])) {
+                    $tree[$catId]['sub_modules'][$subCatId] = [
+                        'sub_module' => optional($url->subCategoryModules)->sub_module_name,
+                        'module_parts' => []
+                    ];
+                }
+
+                // Ensure module level exists
+                if (!isset($tree[$catId]['sub_modules'][$subCatId]['module_parts'][$modId])) {
+                    $tree[$catId]['sub_modules'][$subCatId]['module_parts'][$modId] = [
+                        'module_name' => optional($url->modules)->module_name,
+                        'module_urls' => []
+                    ];
+                }
+
+                // Push URL inside module
+                $tree[$catId]['sub_modules'][$subCatId]['module_parts'][$modId]['module_urls'][] = [
+                    'id' => $url->id,
+                    'module_url' => $url->module_url,
+                    'status' => $url->status
+                ];
+            }
+
+            return response()->json([
+                'messages' => array_values($tree)
+            ]);
+
+        }else{
+
+            return response()->json([
+                'messages' => 'No found module URL.'
+            ]);
+
+        }
+    }
+
+
+
+
     // ========================= Module Category Service ==========================
     /**
      * Handle Module Category Templete View

@@ -10,11 +10,11 @@ Route::group(['middleware' => 'auth'], function (){
     // Fornt-End Page(Footer)
     Route::middleware('isSuperAdmin')->group(function() {
         // Footer
-        Route::get('super-admin/forntend-footer-information', [FooterInformation::class, 'index'])->name('forntend_footer.index');
+        Route::get('super-admin/forntend-footer-information-{slug}/index', [FooterInformation::class, 'index'])->name('forntend_footer.index');
         Route::get('super-admin/forntend-footer-get-information', [FooterInformation::class, 'get_information'])->name('get_information.action');
         Route::post('super-admin/forntend-footer-update-information', [FooterInformation::class, 'update'])->name('update.action');
         // New Letter
-        Route::get('super-admin/forntend-footer-newletter', [NewsletterController::class, 'index'])->name('forntend_footer_newletter.index');
+        Route::get('super-admin/forntend-footer-newletter-{slug}/index', [NewsletterController::class, 'index'])->name('forntend_footer_newletter.index');
         Route::get('super-admin/forntend-footer-get-newletter', [NewsletterController::class, 'get_newsletter'])->name('forntend_footer_get_newsletter.action');
         Route::get('super-admin/forntend-footer-filter-newletter', [NewsletterController::class, 'filter_newsletter'])->name('newsletter_filter.action');
         Route::delete('super-admin/forntend-footer-newletter/{id}', [NewsletterController::class, 'deletenewsletter'])->name('forntend_footer_newletter_delete.action');

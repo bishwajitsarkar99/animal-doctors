@@ -90,8 +90,8 @@ class ModuleSeeder extends Seeder
             array('module_name'=>'Vaoucher Details', 'sub_module_id'=> 7, 'status'=> 0, 'created_at'=> Carbon::now(), 'updated_at'=> Carbon::now()),
             array('module_name'=>'Vaoucher Setting', 'sub_module_id'=> 7, 'status'=> 0, 'created_at'=> Carbon::now(), 'updated_at'=> Carbon::now()),
             // Asset(New Asset)
-            array('module_name'=>'Create Asset', 'sub_module_id'=> 5, 'status'=> 0, 'created_at'=> Carbon::now(), 'updated_at'=> Carbon::now()),
-            array('module_name'=>'Asset List', 'sub_module_id'=> 5, 'status'=> 0, 'created_at'=> Carbon::now(), 'updated_at'=> Carbon::now()),
+            array('module_name'=>'Create Asset', 'sub_module_id'=> 8, 'status'=> 0, 'created_at'=> Carbon::now(), 'updated_at'=> Carbon::now()),
+            array('module_name'=>'Asset List', 'sub_module_id'=> 8, 'status'=> 0, 'created_at'=> Carbon::now(), 'updated_at'=> Carbon::now()),
             // Asset(Details)
             array('module_name'=>'Previous Asset', 'sub_module_id'=> 8, 'status'=> 0, 'created_at'=> Carbon::now(), 'updated_at'=> Carbon::now()),
             array('module_name'=>'Current Asset', 'sub_module_id'=> 8, 'status'=> 0, 'created_at'=> Carbon::now(), 'updated_at'=> Carbon::now()),

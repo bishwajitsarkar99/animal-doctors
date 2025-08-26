@@ -1,5 +1,5 @@
 <!-- ================= Authentication ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_authentication {{ Request::is('super-admin/user-accounts/account-holder/account-history') || Request::is('super-admin/register-emails/email-verification') || Request::is('super-admin/roles/role-index') || Request::is('super-admin/roles/role-permission') || Request::is('super-admin/roles/manage-role') || Request::is('super-admin/users/user-authorization') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#authentication" aria-expanded="false" aria-controls="flush-heading">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_authentication {{ Request::is('super-admin/user-accounts/account-holder/account-history-*/index') || Request::is('super-admin/register-emails/email-verification-*/index') || Request::is('super-admin/roles/role-index-*/index') || Request::is('super-admin/roles/role-permission-*/index') || Request::is('super-admin/roles/manage-role-*/index') || Request::is('super-admin/users/user-authorization-*/index') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#authentication" aria-expanded="false" aria-controls="flush-heading">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_authentication_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_authentication_link" hidden></i>
@@ -10,29 +10,29 @@
 <div id="authentication" class="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushReport">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('get_account-holders.action') ? 'active' : '' }}" data-url="{{ route('get_account-holders.action') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('get_account-holders.action') ? 'active' : '' }}" data-url="/super-admin/user-accounts/account-holder/account-history-{slug}/index" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.Account-History')}}
             </a>
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('emailVerification') ? 'active' : '' }}" data-url="{{ route('emailVerification') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('emailVerification') ? 'active' : '' }}" data-url="/super-admin/register-emails/email-verification-{slug}/index" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.Email-Verification')}}
             </a>
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('role_index') ? 'active' : '' }}" data-url="{{ route('role_index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('role_index') ? 'active' : '' }}" data-url="/super-admin/roles/role-index-{slug}/index" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.Role Promot')}}
             </a>
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('role_permission.index') ? 'active' : '' }}" data-url="{{ route('role_permission.index') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('role_permission.index') ? 'active' : '' }}" data-url="/super-admin/roles/role-permission-{slug}/index" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.Role Permission')}}
             </a>
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('manageRole') ? 'active' : '' }}" data-url="{{ route('manageRole') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('manageRole') ? 'active' : '' }}" data-url="/super-admin/roles/manage-role-{slug}/index" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.Manage Role')}}
             </a>
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('superAdminUsers') ? 'active' : '' }}" data-url="{{ route('superAdminUsers') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('superAdminUsers') ? 'active' : '' }}" data-url="/super-admin/users/user-authorization-{slug}/index" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.Users Authorize')}}
             </a>
         </div>
     </div>
 </div>
 <!-- ================= Permission ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_permission {{ Request::is('super-admin/auth-pages/auth-page-permission') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#permission" aria-expanded="false" aria-controls="flush-heading">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_permission {{ Request::is('super-admin/auth-pages/auth-page-permission-*/index') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#permission" aria-expanded="false" aria-controls="flush-heading">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_permission_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_permission_link" hidden></i>
@@ -46,12 +46,9 @@
             <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" id="showPermission" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.User-Permission')}}
             </a>
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('authPageLoad') ? 'active' : '' }}" data-url="{{route('authPageLoad')}}" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('authPageLoad') ? 'active' : '' }}" data-url="/super-admin/auth-pages/auth-page-permission-{slug}/index" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.Auth Page')}}
             </a>
-            <!-- <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>">
-                <i class="fa-solid fa-minus" style="color:#fff;"></i>Role Setting
-            </a> -->
         </div>
     </div>
 </div>
@@ -70,12 +67,6 @@
             <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>User-All-Details
             </a>
-            <!-- <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
-                <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.404 Page')}}
-            </a>
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
-                <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.500 Page')}}
-            </a> -->
         </div>
     </div>
 </div>
@@ -145,12 +136,6 @@
             <a type="button" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('user.details') ? 'active' : '' }}" data-url="/application/user-log/user-log-activity-{slug}/log-dashboard" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.User Log Activity')}}
             </a>
-            <!-- <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
-                <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.404 Page')}}
-            </a>
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page" data-url="#" data-bs-toggle="tooltip" data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>' >
-                <i class="fa-solid fa-minus" style="color:#fff;"></i>{{__('translate.500 Page')}}
-            </a> -->
         </div>
     </div>
 </div>

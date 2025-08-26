@@ -25,7 +25,7 @@ class ModuleController extends Controller
     }
 
     // ========================================================================
-    // Sub Module Search
+    // Sub Module Fetch
     // ========================================================================
     public function subModuleSearch(Request $request, $id)
     {
@@ -33,13 +33,24 @@ class ModuleController extends Controller
     }
 
     // ========================================================================
-    // Module Name Search
+    // Module Parts Fetch
     // ========================================================================
     public function moduleFetch(Request $request, $id)
     {
         return $this->moduleServiceProvider->moduleFetchData($request, $id);
     }
     
+    // ========================================================================
+    // Module Link URL Fetch
+    // ========================================================================
+    public function moduleLinkUrlFetch(Request $request)
+    {
+        return $this->moduleServiceProvider->moduleLinkUrlFetchData($request);
+    }
+
+
+
+
     // Module Category ========================================================
     // Module Category View Templete
     public function moduleCategoryView(Request $request){

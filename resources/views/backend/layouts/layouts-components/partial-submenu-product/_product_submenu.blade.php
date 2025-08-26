@@ -1,5 +1,5 @@
 <!-- ================== Category ======================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_category collapsed {{setting('categ_title_visual')}} {{ Request::is('product-components/category') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#category" aria-expanded="false" aria-controls="flush-collapseOne">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_category collapsed {{setting('categ_title_visual')}} {{ Request::is('product-components/category-*/index') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#category" aria-expanded="false" aria-controls="flush-collapseOne">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_category_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_category_link" hidden></i>
@@ -12,7 +12,7 @@
 <div id="category" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushProduct">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a type="button" id="myLink" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('category.index') ? 'active' : '' }}" data-url="{{route('category.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" id="myLink" class="nav-link underline nav_space side-bar-link load-page {{ Request::routeIs('category.index') ? 'active' : '' }}" data-url="/product-components/category-{slug}/index" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('categ_title_visual')}}">{{__('translate.Add Category')}}</span>
             </a>
@@ -20,7 +20,7 @@
     </div>
 </div>
 <!-- ================= Sub-Category ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_sub_category {{setting('sub_categ_title_visual')}} {{Request::is('product-components/sub-category') ? 'folder-active' : ''}}" role="button" data-bs-toggle="collapse" data-bs-target="#subCategory" aria-expanded="false" aria-controls="flush-collapseOne">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_sub_category {{setting('sub_categ_title_visual')}} {{Request::is('product-components/sub-category-*/index') ? 'folder-active' : ''}}" role="button" data-bs-toggle="collapse" data-bs-target="#subCategory" aria-expanded="false" aria-controls="flush-collapseOne">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_sub_category_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_sub_category_link" hidden></i>
@@ -33,7 +33,7 @@
 <div id="subCategory" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushProduct">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{setting('sub_categ_title_visual')}} {{Request::routeIs('sub-category.index') ? 'active' : '' }}" data-url="{{route('sub-category.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{setting('sub_categ_title_visual')}} {{Request::routeIs('sub-category.index') ? 'active' : '' }}" data-url="/product-components/sub-category-{slug}/index" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('subcategory_visual')}}">{{__('translate.Add Sub Category')}}</span>
             </a>
@@ -42,7 +42,7 @@
 </div>
 
 <!-- ================= Group ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_group {{setting('group_title_visual')}} {{Request::is('medicine-components/medicine-group') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#group" aria-expanded="false" aria-controls="flush-collapseOne">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_group {{setting('group_title_visual')}} {{Request::is('medicine-components/medicine-group-*/index') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#group" aria-expanded="false" aria-controls="flush-collapseOne">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_group_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_group_link" hidden></i>
@@ -53,7 +53,7 @@
 <div id="group" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushProduct">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('medicine-group.index') ? 'active' : '' }}" data-url="{{route('medicine-group.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('medicine-group.index') ? 'active' : '' }}" data-url="/medicine-components/medicine-group-{slug}/index" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('group_visual')}}">{{__('translate.Add Group')}}</span>
             </a>
@@ -61,7 +61,7 @@
     </div>
 </div>
 <!-- =========================== Product ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_another_product {{setting('product_title_display')}} {{Request::is('product-components/product') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#product" aria-expanded="false" aria-controls="flush-collapseOne">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_another_product {{setting('product_title_display')}} {{Request::is('product-components/product-*/index') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#product" aria-expanded="false" aria-controls="flush-collapseOne">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_another_product_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_another_product_link" hidden></i>
@@ -74,7 +74,7 @@
 <div id="product" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushProduct">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('product.index') ? 'active' : '' }}" data-url="{{route('product.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('product.index') ? 'active' : '' }}" data-url="/product-components/product-{slug}/index" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('product_visual_')}}">{{__('translate.Add Product')}}</span>
             </a>
@@ -82,7 +82,7 @@
     </div>
 </div>
 <!-- ================= Prodcut-Model ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_product_model {{setting('product_model_title_display')}} {{Request::is('product-components/model') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#productModel" aria-expanded="false" aria-controls="flush-collapseOne">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_product_model {{setting('product_model_title_display')}} {{Request::is('product-components/model-*/index') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#productModel" aria-expanded="false" aria-controls="flush-collapseOne">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_product_model_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_product_model_link" hidden></i>
@@ -93,7 +93,7 @@
 <div id="productModel" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushProduct">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('model.index') ? 'active' : '' }}" data-url="{{route('model.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('model.index') ? 'active' : '' }}" data-url="/product-components/model-{slug}/index" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('model_visual')}}">{{__('translate.Add Model')}}</span>
             </a>
@@ -101,7 +101,7 @@
     </div>
 </div>
 <!-- ============================= Units ==================== -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_unit {{setting('unit_title_display')}} {{Request::is('product-components/units') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#units" aria-expanded="false" aria-controls="flush-collapseOne">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_unit {{setting('unit_title_display')}} {{Request::is('product-components/units-*/index') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#units" aria-expanded="false" aria-controls="flush-collapseOne">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_unit_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_unit_link" hidden></i>
@@ -114,7 +114,7 @@
 <div id="units" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushProduct">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('units.index') ? 'active' : '' }}" data-url="{{route('units.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('units.index') ? 'active' : '' }}" data-url="/product-components/units-{slug}/index" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('unit_visual')}}">{{__('translate.Add Unit')}}</span>
             </a>
@@ -122,7 +122,7 @@
     </div>
 </div>
 <!-- =========================== Brand ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_brand {{setting('brand_title_display')}} {{Request::is('product-components/brand') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#brand" aria-expanded="false" aria-controls="flush-collapseOne">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_brand {{setting('brand_title_display')}} {{Request::is('product-components/brand-*/index') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#brand" aria-expanded="false" aria-controls="flush-collapseOne">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_brand_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_brand_link" hidden></i>
@@ -135,7 +135,7 @@
 <div id="brand" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushProduct">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('brand.index') ? 'active' : '' }}" data-url="{{route('brand.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('brand.index') ? 'active' : '' }}" data-url="/product-components/brand-{slug}/index" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{setting('brand_visual')}}">{{__('translate.Add Brand')}}</span>
             </a>
@@ -143,7 +143,7 @@
     </div>
 </div>
 <!-- ================= Medicine ================= -->
-<a class="nav-link_cgrMenu dropdown-toggle ty child_product {{setting('medicine_title_visual')}} {{Request::is('medicine-components/medicine-name') || Request::is('medicine-components/medicine-dosage') || Request::is('product-components/origin') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#medicine" aria-expanded="false" aria-controls="flush-collapseOne">
+<a class="nav-link_cgrMenu dropdown-toggle ty child_product {{setting('medicine_title_visual')}} {{Request::is('medicine-components/medicine-name-*/index') || Request::is('medicine-components/medicine-dosage-*/index') || Request::is('product-components/origin-*/index') ? 'folder-active' : '' }}" role="button" data-bs-toggle="collapse" data-bs-target="#medicine" aria-expanded="false" aria-controls="flush-collapseOne">
     <span class="collapsed">
         <i class="fa-solid fa-plus" style="color:white;" id="plus_product_link"></i>
         <i class="fa-solid fa-minus" style="color:white;" id="minus_product_link" hidden></i>
@@ -154,15 +154,15 @@
 <div id="medicine" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushProduct">
     <div class="child-tree">
         <div class="accordion-body sub_box">
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('medicine-name.index') ? 'active' : '' }}" data-url="{{route('medicine-name.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('medicine-name.index') ? 'active' : '' }}" data-url="/medicine-components/medicine-name-{slug}/index" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{ setting('medicine_visual') }}">{{__('translate.Add Medicine Name')}}</span>
             </a>
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('medicine-dogs.index') ? 'active' : '' }}" data-url="{{route('medicine-dogs.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('medicine-dogs.index') ? 'active' : '' }}" data-url="/medicine-components/medicine-dosage-{slug}/index" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{ setting('medicine_dosage_visual') }}">{{__('translate.Add Dosage')}}</span>
             </a>
-            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('origin.index') ? 'active' : '' }}" data-url="{{route('origin.index')}}" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
+            <a type="button" class="nav-link underline nav_space side-bar-link load-page {{Request::routeIs('origin.index') ? 'active' : '' }}" data-url="/product-components/origin-{slug}/index" data-bs-toggle="tooltip"  data-bs-placement="right" title="<i class='fa-solid fa-plug fa-beat-fade' style='font-size:18px;'>‌</i>" data-bs-delay="100" data-bs-html="true" data-bs-boundary="window" data-bs-template='<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner bg-flora"></div>'>
                 <i class="fa-solid fa-minus" style="color:#fff;"></i>
                 <span class="{{ setting('medicine_origin_visual') }}">{{__('translate.Add Origin')}}</span>
             </a>
